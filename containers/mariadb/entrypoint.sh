@@ -10,10 +10,10 @@ fi
 if [ "$1" = 'mysqld.bin' ]; then
   set -- "$@" --defaults-file=/opt/bitnami/mysql/my.cnf --basedir=/opt/bitnami/mysql --datadir=/opt/bitnami/mysql/data --plugin-dir=/opt/bitnami/mysql/lib/plugin --user=mysql --socket=/opt/bitnami/mysql/tmp/mysql.sock$EXTRA_OPTIONS
 
-  if [ ! -f "/conf/my.cnf" ]; then
+  if [ ! "$(ls -A /conf)" ]; then
     echo "Copying default configuration to /conf/my.cnf..."
     echo ""
-    cp /opt/bitnami/mysql/my.cnf.default /conf/my.cnf
+    cp -r /opt/bitnami/mysql/conf.defaults/* /opt/bitnami/mysql/conf
   fi
 
   if [ ! "$(ls -A /data)" ]; then
