@@ -8,9 +8,11 @@ RUN apt-get update -q && DEBIAN_FRONTEND=noninteractive apt-get install -qy wget
     /opt/bitnami/mysql/scripts/ctl.sh stop mysql > /dev/null && \
     echo "bin/mysql -S /opt/bitnami/mysql/tmp/mysql.sock -u root -p\$2 -e \"GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '\$2' WITH GRANT OPTION;\"" >> /opt/bitnami/mysql/scripts/myscript.sh && \
     rm -rf /tmp/* /opt/bitnami/mysql/data /opt/bitnami/ctlscript.sh && \
-    ln -s /data /opt/bitnami/mysql/data && \
-    mv /opt/bitnami/mysql/my.cnf /opt/bitnami/mysql/my.cnf.default && \
-    ln -s /conf/my.cnf /opt/bitnami/mysql/my.cnf && \
+    mkdir /opt/bitnami/mysql/conf.defaults && \
+    mv /opt/bitnami/mysql/my.cnf /opt/bitnami/mysql/conf.defaults/ && \
+    ln -s /opt/bitnami/mysql/conf/my.cnf /opt/bitnami/mysql/my.cnf && \
+    ln -s /opt/bitnami/mysql/conf /conf && \
+    ln -s /opt/bitnami/mysql/data /data && \
     DEBIAN_FRONTEND=noninteractive apt-get --purge autoremove -qy wget && apt-get clean && rm -rf /var/lib/apt && rm -rf /var/cache/apt/archives/*
 
 ENV PATH /opt/bitnami/mysql/bin:$PATH
