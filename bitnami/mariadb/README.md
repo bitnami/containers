@@ -21,7 +21,8 @@ docker run --link mysql-server:mysql bitnami/mariadb \
 
 Map a volume on your host to `/data` to persist your database when the container is removed.
 
-If the volume is empty, the database will be initialized in your volume.
+If the volume is empty, the database will be initialized in your volume and the root password will
+be printed to stdout.
 
 ## Configuration
 
@@ -50,3 +51,5 @@ The container is set up to log to stdout, which means logs can be obtained as fo
 ```
 docker logs mysql-server
 ```
+
+If you would like to log to a file instead, you can mount a volume at `/logs`.

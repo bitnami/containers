@@ -8,7 +8,7 @@ fi
 
 
 if [ "$1" = 'mysqld.bin' ]; then
-  set -- "$@" --defaults-file=/opt/bitnami/mysql/my.cnf --basedir=/opt/bitnami/mysql --datadir=/opt/bitnami/mysql/data --plugin-dir=/opt/bitnami/mysql/lib/plugin --user=mysql --socket=/opt/bitnami/mysql/tmp/mysql.sock$EXTRA_OPTIONS
+  set -- "$@" --defaults-file=/opt/bitnami/mysql/my.cnf --log-error=/opt/bitnami/mysql/logs/mysqld.log --basedir=/opt/bitnami/mysql --datadir=/opt/bitnami/mysql/data --plugin-dir=/opt/bitnami/mysql/lib/plugin --user=mysql --socket=/opt/bitnami/mysql/tmp/mysql.sock$EXTRA_OPTIONS
 
   if [ ! "$(ls -A /conf)" ]; then
     echo "Copying default configuration to /conf/my.cnf..."
@@ -34,6 +34,8 @@ if [ "$1" = 'mysqld.bin' ]; then
     su mysql -c "sh /opt/bitnami/mysql/scripts/myscript.sh /opt/bitnami/mysql $MYSQL_PASSWORD"
     /opt/bitnami/mysql/scripts/ctl.sh stop mysql > /dev/null
   fi
+
+  chown mysql:mysql -R /opt/bitnami/mysql/logs
 fi
 
 exec "$@"
