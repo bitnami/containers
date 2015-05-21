@@ -6,15 +6,14 @@ if [ "${1:0:1}" = '-' ]; then
   set -- mysqld.bin
 fi
 
+if [ ! "$(ls -A /conf)" ]; then
+  echo "Copying default configuration to /conf/my.cnf..."
+  echo ""
+  cp -r /opt/bitnami/mysql/conf.defaults/* /opt/bitnami/mysql/conf
+fi
 
 if [ "$1" = 'mysqld.bin' ]; then
   set -- "$@" --defaults-file=/opt/bitnami/mysql/my.cnf --log-error=/opt/bitnami/mysql/logs/mysqld.log --basedir=/opt/bitnami/mysql --datadir=/opt/bitnami/mysql/data --plugin-dir=/opt/bitnami/mysql/lib/plugin --user=mysql --socket=/opt/bitnami/mysql/tmp/mysql.sock$EXTRA_OPTIONS
-
-  if [ ! "$(ls -A /conf)" ]; then
-    echo "Copying default configuration to /conf/my.cnf..."
-    echo ""
-    cp -r /opt/bitnami/mysql/conf.defaults/* /opt/bitnami/mysql/conf
-  fi
 
   if [ ! "$(ls -A /data)" ]; then
     if [ -z "$MYSQL_PASSWORD" ]; then

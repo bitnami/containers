@@ -2,7 +2,7 @@
 
 ## Usage
 
-### Running a mysql server
+### Running a MySQL server
 ```
 docker run --name mysql-server \
   -v /my-data:/data \
@@ -10,11 +10,9 @@ docker run --name mysql-server \
   -d bitnami/mariadb
 ```
 
-### Running the mysql client
+### Running the MySQL client
 ```
-docker run --link mysql-server:mysql bitnami/mariadb \
-  sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" \
-  -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
+docker run -it --link mysql-server:mysql bitnami/mariadb mysql -h mysql -P 3306 -u root -p
 ```
 
 ## Persistence
