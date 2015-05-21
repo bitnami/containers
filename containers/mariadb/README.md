@@ -32,6 +32,20 @@ For example, you can run the server on a different port by specifying the port o
 docker run --name mysql-server -d bitnami/mariadb --port=4000
 ```
 
+The following options cannot be overridden:
+```
+--defaults-file=/opt/bitnami/mysql/my.cnf
+--log-error=/opt/bitnami/mysql/logs/mysqld.log
+--basedir=/opt/bitnami/mysql
+--datadir=/opt/bitnami/mysql/data
+--plugin-dir=/opt/bitnami/mysql/lib/plugin
+--user=mysql
+--socket=/opt/bitnami/mysql/tmp/mysql.sock
+```
+
+Anything else is fair game, you can see a full list of options here:
+https://dev.mysql.com/doc/refman/5.1/en/server-options.html
+
 ### my.cnf
 
 Map a volume on your host to `/config` with your custom `my.cnf` inside it, to configure MariaDB.
