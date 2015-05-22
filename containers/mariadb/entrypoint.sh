@@ -2,7 +2,7 @@
 
 # if command starts with an option, prepend mysqld
 if [ "${1:0:1}" = '-' ]; then
-  EXTRA_OPTIONS=" $@"
+  EXTRA_OPTIONS="$@"
   set -- mysqld.bin
 fi
 
@@ -13,7 +13,7 @@ if [ ! "$(ls -A /conf)" ]; then
 fi
 
 if [ "$1" = 'mysqld.bin' ]; then
-  set -- "$@" --defaults-file=/opt/bitnami/mysql/my.cnf --log-error=/opt/bitnami/mysql/logs/mysqld.log --basedir=/opt/bitnami/mysql --datadir=/opt/bitnami/mysql/data --plugin-dir=/opt/bitnami/mysql/lib/plugin --user=mysql --socket=/opt/bitnami/mysql/tmp/mysql.sock$EXTRA_OPTIONS
+  set -- "$@" --defaults-file=/opt/bitnami/mysql/my.cnf --log-error=/opt/bitnami/mysql/logs/mysqld.log --basedir=/opt/bitnami/mysql --datadir=/opt/bitnami/mysql/data --plugin-dir=/opt/bitnami/mysql/lib/plugin --user=mysql --socket=/opt/bitnami/mysql/tmp/mysql.sock "--lower-case-table-names=1" $EXTRA_OPTIONS
 
   if [ ! "$(ls -A /data)" ]; then
     if [ -z "$MYSQL_PASSWORD" ]; then
@@ -37,7 +37,7 @@ if [ "$1" = 'mysqld.bin' ]; then
     echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' WITH GRANT OPTION;" >> /tmp/init_mysql.sql
 
     if [ "$MYSQL_DATABASE" ]; then
-      echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;" >> /tmp/init_mysql.sql
+      echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\`;" >> /tmp/init_mysql.sql
     fi
 
     set -- "$@" --init-file=/tmp/init_mysql.sql
