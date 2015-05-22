@@ -1,21 +1,17 @@
 FROM ubuntu-debootstrap:14.04
 MAINTAINER Bitnami
 
-RUN apt-get update -q && DEBIAN_FRONTEND=noninteractive apt-get install -qy wget && \
-    wget -q --no-check-certificate https://downloads.bitnami.com/files/download/mariadb/bitnami-mariadb-5.5.42-0-linux-x64-installer.run -O /tmp/installer.run && \
-    chmod +x /tmp/installer.run && \
-    /tmp/installer.run --mode unattended --base_password bitnami --mysql_password bitnami --mysql_allow_all_remote_connections 1 --prefix /opt/bitnami --disable-components common && \
-    /opt/bitnami/mysql/scripts/ctl.sh stop mysql > /dev/null && \
-    echo "bin/mysql -S /opt/bitnami/mysql/tmp/mysql.sock -u root -p\$2 -e \"GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '\$2' WITH GRANT OPTION;\"" >> /opt/bitnami/mysql/scripts/myscript.sh && \
-    rm -rf /tmp/* /opt/bitnami/mysql/data /opt/bitnami/ctlscript.sh && \
-    mkdir /opt/bitnami/mysql/logs && ln -s /dev/stdout /opt/bitnami/mysql/logs/mysqld.log && \
-    mkdir /opt/bitnami/mysql/conf.defaults && \
-    mv /opt/bitnami/mysql/my.cnf /opt/bitnami/mysql/conf.defaults/ && \
-    ln -s /opt/bitnami/mysql/conf/my.cnf /opt/bitnami/mysql/my.cnf && \
-    ln -s /opt/bitnami/mysql/conf /conf && \
-    ln -s /opt/bitnami/mysql/data /data && \
-    ln -s /opt/bitnami/mysql/logs /logs && \
-    DEBIAN_FRONTEND=noninteractive apt-get --purge autoremove -qy wget && apt-get clean && rm -rf /var/lib/apt && rm -rf /var/cache/apt/archives/*
+ENV BITNAMI_APP_NAME mariadb
+ENV BITNAMI_APP_VERSION 5.5.42-0
+ENV BITNAMI_APP_DIRNAME mysql
+
+ADD install.sh /tmp/install.sh
+ADD post-install.sh /tmp/post-install.sh
+
+# We need to specify a mysql password since the installer initializes the database, but it is
+# removed in the post install and re-initialized at runtime.
+RUN bash /tmp/install.sh\
+    --base_password bitnami --mysql_password bitnami --mysql_allow_all_remote_connections 1 --disable-components common
 
 ENV PATH /opt/bitnami/mysql/bin:$PATH
 EXPOSE 3306
