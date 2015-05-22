@@ -20,21 +20,30 @@ if [ "$1" = 'mysqld.bin' ]; then
       MYSQL_PASSWORD=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c12)
     fi
 
-    echo "Initializing MySQL database..."
-    echo ""
     echo "#########################################################################"
     echo "#                                                                       #"
     echo "#             Setting MySQL root password to '${MYSQL_PASSWORD}'             #"
     echo "#                                                                       #"
     echo "#########################################################################"
     echo ""
+    echo "Initializing MySQL database..."
+    echo ""
 
-    chown mysql:mysql /data
-    su mysql -c "sh /opt/bitnami/mysql/scripts/myscript.sh /opt/bitnami/mysql $MYSQL_PASSWORD"
-    /opt/bitnami/mysql/scripts/ctl.sh stop mysql > /dev/null
+    /opt/bitnami/mysql/scripts/mysql_install_db --port=3306 --socket=/opt/bitnami/mysql/tmp/mysql.sock --basedir=/opt/bitnami/mysql --datadir=/opt/bitnami/mysql/data > /dev/null
+    chown -R mysql:mysql /opt/bitnami/mysql/data
+
+    echo "UPDATE mysql.user SET Password=PASSWORD('$MYSQL_PASSWORD') WHERE User='root';" >> /tmp/init_mysql.sql
+    echo "FLUSH PRIVILEGES;" >> /tmp/init_mysql.sql
+    echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' WITH GRANT OPTION;" >> /tmp/init_mysql.sql
+
+    if [ "$MYSQL_DATABASE" ]; then
+      echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;" >> /tmp/init_mysql.sql
+    fi
+
+    set -- "$@" --init-file=/tmp/init_mysql.sql
   fi
 
-  chown mysql:mysql -R /opt/bitnami/mysql/logs
+  chown -R mysql:mysql /opt/bitnami/mysql/logs
 fi
 
 exec "$@"
