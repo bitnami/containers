@@ -9,7 +9,10 @@ RUN apt-get update -q && DEBIAN_FRONTEND=noninteractive apt-get install -qy wget
     rm /opt/bitnami/ctlscript.sh /opt/bitnami/use_nginxstandalonestack && \
     DEBIAN_FRONTEND=noninteractive apt-get --purge autoremove -qy wget && apt-get clean && rm -rf /var/lib/apt && rm -rf /var/cache/apt/archives/*
 
-RUN mv /opt/bitnami/nginx/conf /opt/bitnami/nginx/conf.defaults && \
+ADD vhosts/* /opt/bitnami/nginx/conf/vhosts/
+
+RUN echo "include "/opt/bitnami/nginx/conf/vhosts/*.conf";" > /opt/bitnami/nginx/conf/bitnami/bitnami-apps-vhosts.conf && \
+    mv /opt/bitnami/nginx/conf /opt/bitnami/nginx/conf.defaults && \
     mv /opt/bitnami/nginx/html /opt/bitnami/nginx/html.defaults && \
     ln -s /opt/bitnami/nginx/conf/ /conf && \
     ln -s /opt/bitnami/nginx/logs/ /logs && \

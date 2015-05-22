@@ -1,0 +1,15 @@
+server {
+    listen 0.0.0.0:80;
+    server_name yourapp.com;
+    access_log /logs/yourapp_access.log;
+    error_log /logs/yourapp_error.log;
+
+    location / {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header HOST $http_host;
+        proxy_set_header X-NginX-Proxy true;
+
+        proxy_pass http://[your_node_container_link_alias];
+        proxy_redirect off;
+    }
+}
