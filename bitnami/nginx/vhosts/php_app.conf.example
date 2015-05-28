@@ -1,0 +1,16 @@
+server {
+    listen 0.0.0.0:80;
+    server_name local.yourapp.com;
+
+    root /app;
+
+    location / {
+        index index.php;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass [PHP_FPM_LINK_NAME]:9000;
+        fastcgi_index index.php;
+        include fastcgi.conf;
+    }
+}
