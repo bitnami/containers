@@ -10,10 +10,10 @@ ADD https://storage.googleapis.com/bitnami-artifacts/install.sh?GoogleAccessId=4
 RUN sh /tmp/install.sh\
     --php_fpm_allow_all_remote_connections 1 --php_fpm_connection_mode port
 
-ENV PATH /usr/local/bitnami/php/bin:$PATH
+ENV PATH /usr/local/bitnami/php/sbin:/usr/local/bitnami/php/bin:/usr/local/bitnami/common/bin:$PATH
 
-EXPOSE 80
+EXPOSE 9000
 VOLUME ["/app"]
 WORKDIR /app
 
-CMD ["php", "-a"]
+CMD ["php-fpm", "-F"]
