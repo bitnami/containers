@@ -1,8 +1,0 @@
-FROM bitnami/pineapple
-
-RUN apk add --update wget && \
-    wget --no-check-certificate https://downloads.bitnami.com/files/download/mariadb/bitnami-mariadb-5.5.42-0-linux-x64-installer.run -O /tmp/installer.run && \
-    chmod +x /tmp/installer.run && \
-    /tmp/installer.run --mode unattended --base_password bitnami --mysql_password bitnami --prefix /opt/bitnami && \
-    rm -rf /tmp/* /opt/bitnami/common /opt/bitnami/mysql/data && \
-    apk del wget
