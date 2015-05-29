@@ -19,21 +19,29 @@ if [ ! "$(ls -A /conf)" ]; then
 
   rm /usr/local/bitnami/ctlscript.sh
 
-  echo "===> Credentials for redis:"
-  echo "  password: $REDIS_PASSWORD"
-  echo ""
+  echo "#########################################################################"
+  echo "#                                                                       #"
+  echo "# Credentials for redis:                                                #"
+  echo "# password: $REDIS_PASSWORD                                                #"
+  echo "#                                                                       #"
 
   if [ $RANDOM_PASSW ]; then
-    echo "  The password was generated automatically, if you want to use your own password "
-    echo "  please set the REDIS_PASSWORD environment variable when running the container."
+    echo "# The password was generated automatically, if you want to use          #"
+    echo "# your own password please set the REDIS_PASSWORD environment           #"
+    echo "# variable when running the container.                                  #"
+    echo "#                                                                       #"
   fi
-  echo ""
+  echo "#########################################################################"
 
 else
-  echo "===> Credentials for redis:"
-  echo "  The REDIS_PASSWORD was added to /conf/redis.conf during the first boot."
-  echo "  Please check \"requirepass\" option in that file."
-  echo "  If you want to regenerate the password recreate this container."
+  echo "#########################################################################"
+  echo "#                                                                       #"
+  echo "# Credentials for redis:                                                #"
+  echo "# The REDIS_PASSWORD was added to /conf/redis.conf on first boot.       #"
+  echo "# Please check \"requirepass\" option in that file.                     #"
+  echo "# If you want to regenerate the password recreate this container.       #"
+  echo "#                                                                       #"
+  echo "#########################################################################"
 fi
 
 exec "$@"
