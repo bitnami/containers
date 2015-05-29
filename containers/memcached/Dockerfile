@@ -1,4 +1,4 @@
-FROM ubuntu-debootstrap:14.04
+FROM bitnami/krill
 MAINTAINER Bitnami
 
 ENV BITNAMI_APP_NAME memcached
@@ -17,4 +17,4 @@ EXPOSE 11211
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["memcached", "-v"]
+# CMD ["memcached", "-v"]
