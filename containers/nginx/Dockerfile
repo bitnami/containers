@@ -1,9 +1,10 @@
 FROM ubuntu-debootstrap:14.04
+MAINTAINER Bitnami
 
 ENV APP_VERSION 1.8.0-0
 
 RUN apt-get update -q && DEBIAN_FRONTEND=noninteractive apt-get install -qy wget && \
-    wget -q --no-check-certificate https://downloads.bitnami.com/files/download/nginxstandalonestack/bitnami-nginxstandalonestack-${APP_VERSION}-linux-x64-installer.run -O /tmp/installer.run && \
+    wget -q --no-check-certificate https://downloads.bitnami.com/files/download/containers/nginxstandalonestack/bitnami-nginxstandalonestack-${APP_VERSION}-linux-x64-installer.run -O /tmp/installer.run && \
     chmod +x /tmp/installer.run && \
     /tmp/installer.run --mode unattended --prefix /opt/bitnami && \
     rm /opt/bitnami/ctlscript.sh /opt/bitnami/use_nginxstandalonestack && \
