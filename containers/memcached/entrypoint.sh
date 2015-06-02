@@ -12,21 +12,26 @@ fi
 
 if [ -z "$MEMCACHED_PASSWORD" ]; then
   MEMCACHED_PASSWORD=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c10)$(< /dev/urandom tr -dc 0-9 | head -c2)
+  RANDOM_PASSW=1
 fi
+
+echo "Setting password..."
 
 /usr/local/bitnami/memcached/bnconfig --userpassword $MEMCACHED_PASSWORD
 
-echo "===> Credentials for memcached:"
-echo "  username: user"
-echo "  password: $MEMCACHED_PASSWORD"
-echo ""
-echo "  Set the MEMCACHED_PASSWORD environment variable when running the"
-echo "  container to manually set a password."
-echo ""
+echo "#########################################################################"
+echo "#                                                                       #"
+echo "# Credentials for memcached:                                            #"
+echo "# password: $MEMCACHED_PASSWORD                                                #"
+echo "#                                                                       #"
 
-if [ "$(readlink /logs/memcached.log)" != "/dev/stdout" ]; then
-  echo "===> Logging to /logs/memcached.log"
-  echo ""
+if [ $RANDOM_PASSW ]; then
+  echo "# The password was generated automatically, if you want to use          #"
+  echo "# your own password please set the MEMCACHED_PASSWORD environment       #"
+  echo "# variable when running the container.                                  #"
+  echo "#                                                                       #"
 fi
+echo "#########################################################################"
+echo ""
 
 exec "$@" >> /logs/memcached.log 2>&1
