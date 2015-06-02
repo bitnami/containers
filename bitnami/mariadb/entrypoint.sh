@@ -15,17 +15,16 @@ fi
 if [ "$1" = 'mysqld.bin' ]; then
   set -- "$@" --defaults-file=/usr/local/bitnami/mysql/my.cnf --log-error=/usr/local/bitnami/mysql/logs/mysqld.log --basedir=/usr/local/bitnami/mysql --datadir=/usr/local/bitnami/mysql/data --plugin-dir=/usr/local/bitnami/mysql/lib/plugin --user=mysql --socket=/usr/local/bitnami/mysql/tmp/mysql.sock "--lower-case-table-names=1" $EXTRA_OPTIONS
 
+  mkdir -p /usr/local/bitnami/mysql/tmp
+  chown -R mysql:mysql /usr/local/bitnami/mysql/tmp
+
   if [ ! "$(ls -A /data)" ]; then
     if [ -z "$MYSQL_PASSWORD" ]; then
       MYSQL_PASSWORD=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c12)
+      RANDOM_PASSW=1
     fi
 
-    echo "#########################################################################"
-    echo "#                                                                       #"
-    echo "#             Setting MySQL root password to '${MYSQL_PASSWORD}'             #"
-    echo "#                                                                       #"
-    echo "#########################################################################"
-    echo ""
+
     echo "Initializing MySQL database..."
     echo ""
 
@@ -41,6 +40,31 @@ if [ "$1" = 'mysqld.bin' ]; then
     fi
 
     set -- "$@" --init-file=/tmp/init_mysql.sql
+
+    echo "#########################################################################"
+    echo "#                                                                       #"
+    echo "# Credentials for mariadb:                                              #"
+    echo "# username: root                                                        #"
+    echo "# password: $MYSQL_PASSWORD                                                #"
+    echo "#                                                                       #"
+
+    if [ $RANDOM_PASSW ]; then
+      echo "# The password was generated automatically, if you want to use          #"
+      echo "# your own password please set the MYSQL_PASSWORD environment           #"
+      echo "# variable when running the container.                                  #"
+      echo "#                                                                       #"
+    fi
+    echo "#########################################################################"
+    echo ""
+  else
+    echo "#########################################################################"
+    echo "#                                                                       #"
+    echo "# Credentials for mariadb:                                              #"
+    echo "# The MYSQL_PASSWORD was set on first boot.                             #"
+    echo "# If you want to regenerate the password recreate this container.       #"
+    echo "#                                                                       #"
+    echo "#########################################################################"
+    echo ""
   fi
 
   chown -R mysql:mysql /usr/local/bitnami/mysql/logs
