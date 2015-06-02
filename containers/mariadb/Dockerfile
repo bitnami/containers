@@ -11,7 +11,10 @@ COPY post-install.sh /tmp/post-install.sh
 # We need to specify a mysql password since the installer initializes the database, but it is
 # removed in the post install and re-initialized at runtime.
 RUN sh /tmp/install.sh\
-    --base_password bitnami --mysql_password bitnami --mysql_allow_all_remote_connections 1 --disable-components common
+    --base_password bitnami --mysql_password bitnami --mysql_allow_all_remote_connections 1 --disable-components common --mysql_init_data_dir 0
+
+# Temporary, should be removed from installer
+RUN rm -rf /usr/local/bitnami/mysql/data
 
 ENV PATH /usr/local/bitnami/mysql/bin:$PATH
 EXPOSE 3306
