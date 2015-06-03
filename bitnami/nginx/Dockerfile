@@ -1,28 +1,18 @@
 FROM ubuntu-debootstrap:14.04
 MAINTAINER Bitnami
 
-ENV APP_VERSION 1.8.0-0
+ENV BITNAMI_APP_NAME nginxstandalonestack
+ENV BITNAMI_APP_VERSION 1.8.0-0
+ENV BITNAMI_APP_DIRNAME nginx
 
-RUN apt-get update -q && DEBIAN_FRONTEND=noninteractive apt-get install -qy wget && \
-    wget -q --no-check-certificate https://downloads.bitnami.com/files/download/containers/nginxstandalonestack/bitnami-nginxstandalonestack-${APP_VERSION}-linux-x64-installer.run -O /tmp/installer.run && \
-    chmod +x /tmp/installer.run && \
-    /tmp/installer.run --mode unattended --prefix /opt/bitnami && \
-    rm /opt/bitnami/ctlscript.sh /opt/bitnami/use_nginxstandalonestack && \
-    DEBIAN_FRONTEND=noninteractive apt-get --purge autoremove -qy wget && apt-get clean && rm -rf /var/lib/apt && rm -rf /var/cache/apt/archives/*
+ADD https://storage.googleapis.com/bitnami-artifacts/install.sh?GoogleAccessId=432889337695-e1gggo94k5qubupjsb35tajs91bdu0hg@developer.gserviceaccount.com&Expires=1434934078&Signature=QNkAu%2F8E2RlalSQy4n1sxMhsGKF%2FVltr6zu65HU6A9H0HKOgl6u9etqy9w6OwD4DsLMxYuy2uymOK3iDc5RbfkAMncKI1zJpxcwRQ4Mt43Oe8PBXKbQYcZ7mQaYPtpnjYblDs1S2p12Pu5NTDJHK2hJ1MrIUYwBup5n60R6OJRI%3D /tmp/install.sh
+ADD post-install.sh /tmp/post-install.sh
 
-ADD vhosts/* /opt/bitnami/nginx/conf/vhosts/
+RUN sh /tmp/install.sh
 
-RUN echo "include "/opt/bitnami/nginx/conf/vhosts/*.conf";" > /opt/bitnami/nginx/conf/bitnami/bitnami-apps-vhosts.conf && \
-    mv /opt/bitnami/nginx/conf /opt/bitnami/nginx/conf.defaults && \
-    mv /opt/bitnami/nginx/html /opt/bitnami/nginx/html.defaults && \
-    ln -s /opt/bitnami/nginx/conf/ /conf && \
-    ln -s /opt/bitnami/nginx/logs/ /logs && \
-    ln -s /opt/bitnami/nginx/html/ /app && \
-    ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log && \
-    ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
+ADD vhosts/* /usr/local/bitnami/nginx/conf.defaults/vhosts/
 
-
-ENV PATH /opt/bitnami/nginx/sbin:/opt/bitnami/common/bin:$PATH
+ENV PATH /usr/local/bitnami/nginx/sbin:/usr/local/bitnami/common/bin:$PATH
 
 EXPOSE 80 443
 VOLUME ["/logs", "/conf", "/app"]
