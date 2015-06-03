@@ -1,10 +1,10 @@
 #!/bin/bash
 
 if [ ! "$(ls -A /conf)" ]; then
-  cp -r /opt/bitnami/nginx/conf.defaults/* /opt/bitnami/nginx/conf
+  cp -r /usr/local/bitnami/nginx/conf.defaults/* /usr/local/bitnami/nginx/conf
 fi
 
 if [ ! "$(ls -A /app)" ]; then
-  cp -r /opt/bitnami/nginx/html.defaults/* /opt/bitnami/nginx/html
+  cp -r /usr/local/bitnami/nginx/html.defaults/* /usr/local/bitnami/nginx/html
 fi
 exec "$@"
