@@ -2,46 +2,33 @@
 set -e
 
 if [ ! "$(ls -A /conf)" ]; then
-  cp -r /usr/local/bitnami/redis/etc/conf.defaults/* /usr/local/bitnami/redis/etc/conf
+  cp -r $BITNAMI_APP_DIR/etc/conf.defaults/* $BITNAMI_APP_DIR/etc/conf
 
-  if [ -z "$REDIS_PASSWORD" ]; then
-    REDIS_PASSWORD=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c10)$(< /dev/urandom tr -dc 0-9 | head -c2)
-    RANDOM_PASSW=1
-  fi
+  if [ "$REDIS_PASSWORD" ]; then
+    echo "Setting password in /conf/redis.conf ..."
+    # TODO, move to bnconfig once password supported
+    sed -i -e 's:\W*\s*requirepass \S*:requirepass '$REDIS_PASSWORD':' /conf/redis.conf 
 
-  # bnconfig depends on ctlscript file so we create it
-  # and remove it afterwards, TODO, fix
-  touch /usr/local/bitnami/ctlscript.sh
-  chmod a+x /usr/local/bitnami/ctlscript.sh
-
-  echo "Setting password in /conf/redis.conf ..."
-  /usr/local/bitnami/redis/bnconfig --userpassword $REDIS_PASSWORD
-
-  rm /usr/local/bitnami/ctlscript.sh
-
-  echo "#########################################################################"
-  echo "#                                                                       #"
-  echo "# Credentials for redis:                                                #"
-  echo "# password: $REDIS_PASSWORD                                                #"
-  echo "#                                                                       #"
-
-  if [ $RANDOM_PASSW ]; then
-    echo "# The password was generated automatically, if you want to use          #"
-    echo "# your own password please set the REDIS_PASSWORD environment           #"
-    echo "# variable when running the container.                                  #"
+    echo "#########################################################################"
     echo "#                                                                       #"
+    echo "# Credentials for redis:                                                #"
+    echo "# password: $REDIS_PASSWORD                                                #"
+    echo "#                                                                       #"
+    echo "#########################################################################"
   fi
-  echo "#########################################################################"
-
 else
   echo "#########################################################################"
   echo "#                                                                       #"
-  echo "# Credentials for redis:                                                #"
-  echo "# The REDIS_PASSWORD was added to /conf/redis.conf on first boot.       #"
-  echo "# Please check \"requirepass\" option in that file.                     #"
-  echo "# If you want to regenerate the password recreate this container.       #"
+  echo "# Container already initialized, skipping setup.                        #"
   echo "#                                                                       #"
   echo "#########################################################################"
+fi
+
+chown -R redis:redis /data/ /logs/ /conf/
+
+if [ "$1" = 'redis-server' ]; then
+  tail -f /logs/* &
+	exec gosu redis "$@"
 fi
 
 exec "$@"
