@@ -37,8 +37,7 @@ Redis configuration files live in $HOST_REDIS_CONF_DIR on the host and /conf in 
 ### Environment variables
 
 You can specify the `REDIS_PASSWORD` that will be used the first time
-you launch the container to setup your redis server. If you do not set
-this environment variable you will get a **random password**.
+you launch the container to setup your redis server.
 
 ## Linking
 
