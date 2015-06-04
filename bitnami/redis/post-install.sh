@@ -20,7 +20,7 @@ ln -s $INSTALL_DIR/var/data /data
 ln -s $INSTALL_DIR/var/log /logs
 
 # set up logging to stdout
-ln -sf /dev/stdout /logs/redis-server.log
+#ln -sf /dev/stdout /logs/redis-server.log
 
 # Conf modifications
 sed -i -e 's:\(dir '$INSTALL_DIR'/var\):\1/data:' $INSTALL_DIR/etc/conf.defaults/redis.conf
