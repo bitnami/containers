@@ -1,13 +1,15 @@
 #!/bin/bash
 set -e
 
+SERVICE_USER=redis
+
 if [ ! "$(ls -A /conf)" ]; then
   cp -r $BITNAMI_APP_DIR/etc/conf.defaults/* $BITNAMI_APP_DIR/etc/conf
 
   if [ "$REDIS_PASSWORD" ]; then
     echo "Setting password in /conf/redis.conf ..."
     # TODO, move to bnconfig once password supported
-    sed -i -e 's:\W*\s*requirepass \S*:requirepass '$REDIS_PASSWORD':' /conf/redis.conf 
+    sed -i -e 's:\W*\s*requirepass \S*:requirepass '$REDIS_PASSWORD':' /conf/redis.conf
 
     echo "#########################################################################"
     echo "#                                                                       #"
@@ -24,11 +26,11 @@ else
   echo "#########################################################################"
 fi
 
-chown -R redis:redis /data/ /logs/ /conf/
+chown -R $SERVICE_USER:$SERVICE_USER /data/ /logs/ /conf/
 
 if [ "$1" = 'redis-server' ]; then
-  tail -f /logs/* &
-	exec gosu redis "$@"
+  gosu $SERVICE_USER:$SERVICE_USER tail -f /logs/* &
+	exec gosu $SERVICE_USER "$@"
 fi
 
 exec "$@"
