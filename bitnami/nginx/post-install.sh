@@ -8,10 +8,10 @@ mv conf conf.defaults
 mv html html.defaults
 
 # Setup mount point symlinks
-ln -s /usr/local/bitnami/nginx/conf /conf
-ln -s /usr/local/bitnami/nginx/logs /logs
-ln -s /usr/local/bitnami/nginx/html /app
+ln -s $INSTALL_DIR/conf /conf
+ln -s $INSTALL_DIR/logs /logs
+ln -s $INSTALL_DIR/html /app
 
-# Log to stdout
-ln -sf /dev/stdout logs/access.log
-ln -sf /dev/stderr logs/error.log
+# TODO, this will not needed if the installer removes it.
+rm $INSTALL_DIR/logs/NOTEMPTY
+
