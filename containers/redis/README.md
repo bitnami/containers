@@ -39,6 +39,22 @@ Redis configuration files live in $HOST_REDIS_CONF_DIR on the host and /conf in 
 You can specify the `REDIS_PASSWORD` that will be used the first time
 you launch the container to setup your redis server.
 
+### Extra run parameters
+
+You can add extra options to the docker run that will be
+applied to the redis-server command.
+
+```
+docker run --rm -it bitnami/redis ---logfile path_to_your_log
+```
+
+You can also override the default redis-server command just adding your
+own.
+
+```
+docker run --rm -it bitnami/redis redis-cli
+```
+
 ## Linking
 
 You can link redis to a container running your application, e.g., using the Bitnami node container:
