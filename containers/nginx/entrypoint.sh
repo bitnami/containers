@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 SERVICE_USER=daemon
 
 if [ ! "$(ls -A /conf)" ]; then
