@@ -17,6 +17,7 @@ VOLUME ["$BITNAMI_VOL_PREFIX/data", "$BITNAMI_VOL_PREFIX/conf", "$BITNAMI_VOL_PR
 
 ENV PATH $BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/bin:$PATH
 
+ADD https://www.dropbox.com/s/kce54xvd1jmka3h/bitnami-utils.sh?dl=1 /bitnami-utils.sh
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["redis-server"]
