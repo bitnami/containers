@@ -2,6 +2,7 @@
 set -e
 
 SERVICE_USER=redis
+source /bitnami-utils.sh
 
 # We allow the user to pass extra options
 if [ "${1:0:1}" = '-' ]; then
@@ -10,26 +11,17 @@ if [ "${1:0:1}" = '-' ]; then
 fi
 
 if [ ! "$(ls -A $BITNAMI_VOL_PREFIX/conf)" ]; then
-  cp -r $BITNAMI_APP_DIR/etc/conf.defaults/* $BITNAMI_APP_DIR/etc/conf
+  generate_conf_files
 
   if [ "$REDIS_PASSWORD" ]; then
     echo "Setting password in /conf/redis.conf ..."
     echo "# Disabled" > $BITNAMI_APP_DIR/scripts/ctl.sh
     $BITNAMI_APP_DIR/bnconfig --userpassword $REDIS_PASSWORD
 
-    echo "#########################################################################"
-    echo "#                                                                       #"
-    echo "# Credentials for redis:                                                #"
-    echo "# password: $REDIS_PASSWORD                                                #"
-    echo "#                                                                       #"
-    echo "#########################################################################"
+    print_app_credentials $BITNAMI_APP_NAME $REDIS_PASSWORD
   fi
 else
-  echo "#########################################################################"
-  echo "#                                                                       #"
-  echo "# Container already initialized, skipping setup.                        #"
-  echo "#                                                                       #"
-  echo "#########################################################################"
+  print_container_already_initialized
 fi
 
 chown -R $SERVICE_USER:$SERVICE_USER $BITNAMI_VOL_PREFIX/data/ \
@@ -49,4 +41,3 @@ if [[ "$1" = 'redis-server' ]]; then
 else
   exec "$@"
 fi
-
