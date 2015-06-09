@@ -14,6 +14,7 @@ RUN stack=1 sh /tmp/install.sh
 
 ENV PATH $BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/bin:$PATH
 
+VOLUME ["$BITNAMI_VOL_PREFIX/logs"]
 EXPOSE 11211
 
 ADD https://www.dropbox.com/s/kce54xvd1jmka3h/bitnami-utils.sh?dl=1 /bitnami-utils.sh
