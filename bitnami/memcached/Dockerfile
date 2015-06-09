@@ -1,7 +1,9 @@
 FROM ubuntu-debootstrap:14.04
 MAINTAINER Bitnami
 
+ENV BITNAMI_PREFIX=/usr/local/bitnami
 ENV BITNAMI_APP_NAME memcached
+ENV BITNAMI_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME
 ENV BITNAMI_APP_VERSION 1.4.21-1
 ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/$BITNAMI_APP_NAME
 
@@ -10,11 +12,11 @@ ADD post-install.sh /tmp/post-install.sh
 
 RUN stack=1 sh /tmp/install.sh
 
-ENV PATH /usr/local/bitnami/memcached/bin:/usr/local/bitnami/common/bin:$PATH
+ENV PATH $BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/bin:$PATH
 
 EXPOSE 11211
 
+ADD https://www.dropbox.com/s/kce54xvd1jmka3h/bitnami-utils.sh?dl=1 /bitnami-utils.sh
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-
 CMD ["memcached", "-v"]

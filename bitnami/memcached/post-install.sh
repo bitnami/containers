@@ -8,4 +8,4 @@ mkdir logs
 ln -s /dev/stdout logs/memcached.log
 
 # symlink mount points at root to install dir
-ln -s $INSTALL_DIR/logs /logs
+ln -s $INSTALL_DIR/logs $BITNAMI_VOL_PREFIX/logs
