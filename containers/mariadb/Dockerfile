@@ -23,7 +23,10 @@ EXPOSE 3306
 VOLUME ["$BITNAMI_VOL_PREFIX/data", "$BITNAMI_VOL_PREFIX/conf", "$BITNAMI_VOL_PREFIX/logs"]
 
 COPY entrypoint.sh /entrypoint.sh
+# General Utility functions
 ADD https://www.dropbox.com/s/kce54xvd1jmka3h/bitnami-utils.sh?dl=1 /bitnami-utils.sh
+# Specific Utility functions
+COPY bitnami-utils-custom.sh /bitnami-utils-custom.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["mysqld.bin"]
