@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 source /bitnami-utils.sh
+SERVICE_USER=memcached
 
 # if command starts with an option, prepend memcached
 if [ "${1:0:1}" = '-' ]; then
@@ -8,7 +9,7 @@ if [ "${1:0:1}" = '-' ]; then
 fi
 
 if [ "$1" = 'memcached' ]; then
-  set -- "$@" -u memcached -S -l 0.0.0.0
+  set -- "$@" -u $SERVICE_USER -S -l 0.0.0.0
 fi
 
 if [ "$MEMCACHED_PASSWORD" ]; then
