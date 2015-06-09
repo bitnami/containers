@@ -18,7 +18,7 @@ if [ ! "$(ls -A $BITNAMI_VOL_PREFIX/conf)" ]; then
     echo "# Disabled" > $BITNAMI_APP_DIR/scripts/ctl.sh
     $BITNAMI_APP_DIR/bnconfig --userpassword $REDIS_PASSWORD
 
-    print_app_credentials $BITNAMI_APP_NAME $REDIS_PASSWORD
+    print_app_credentials $BITNAMI_APP_NAME **none** $REDIS_PASSWORD
   fi
 else
   print_container_already_initialized
