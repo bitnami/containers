@@ -17,7 +17,7 @@ fi
 if [ "$1" = 'mysqld.bin' ]; then
   set -- $@ $PROGRAM_OPTIONS
   mkdir -p $BITNAMI_APP_DIR/tmp
-  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/tmp
+  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/tmp || true
 
   if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/data)" ]; then
 
@@ -34,7 +34,7 @@ if [ "$1" = 'mysqld.bin' ]; then
     print_container_already_initialized $BITNAMI_APP_NAME
   fi
 
-  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/logs
+  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/logs || true
 fi
 
 exec "$@"

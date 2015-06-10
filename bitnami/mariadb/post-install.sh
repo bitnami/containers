@@ -4,7 +4,6 @@ INSTALL_DIR=$1
 cd $INSTALL_DIR
 
 # set up logging to stdout
-mkdir logs
 ln -s /dev/stdout logs/mysqld.log
 
 # set up default config
