@@ -1,11 +1,11 @@
 # MariaDB Utility functions
-PROGRAM_OPTIONS="--defaults-file=$BITNAMI_APP_DIR/my.cnf --log-error=$BITNAMI_APP_DIR/logs/mysqld.log --basedir=$BITNAMI_APP_DIR --datadir=$BITNAMI_APP_DIR/data --plugin-dir=$BITNAMI_APP_DIR/lib/plugin --user=$SERVICE_USER --socket=$BITNAMI_APP_DIR/tmp/mysql.sock --lower-case-table-names=1 $EXTRA_OPTIONS"
+PROGRAM_OPTIONS="--defaults-file=$BITNAMI_APP_DIR/my.cnf --log-error=$BITNAMI_APP_DIR/logs/mysqld.log --basedir=$BITNAMI_APP_DIR --datadir=$BITNAMI_APP_DIR/data --plugin-dir=$BITNAMI_APP_DIR/lib/plugin --user=$BITNAMI_APP_USER --socket=$BITNAMI_APP_DIR/tmp/mysql.sock --lower-case-table-names=1 $EXTRA_OPTIONS"
 
 initialize_database() {
     echo "==> Initializing MySQL database..."
     echo ""
     $BITNAMI_APP_DIR/scripts/mysql_install_db --port=3306 --socket=$BITNAMI_APP_DIR/tmp/mysql.sock --basedir=$BITNAMI_APP_DIR --datadir=$BITNAMI_APP_DIR/data > /dev/null
-    chown -R $SERVICE_USER:$SERVICE_USER $BITNAMI_APP_DIR/data
+    chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/data
 }
 
 create_custom_database() {
