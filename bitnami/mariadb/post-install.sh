@@ -13,6 +13,6 @@ mv my.cnf conf.defaults/
 ln -s $INSTALL_DIR/conf/my.cnf my.cnf
 
 # symlink mount points at root to install dir
-ln -s $INSTALL_DIR/conf $BITNAMI_VOL_PREFIX/conf
-ln -s $INSTALL_DIR/data $BITNAMI_VOL_PREFIX/data
-ln -s $INSTALL_DIR/logs $BITNAMI_VOL_PREFIX/logs
+ln -s $INSTALL_DIR/conf $BITNAMI_APP_VOL_PREFIX/conf
+ln -s $INSTALL_DIR/data $BITNAMI_APP_VOL_PREFIX/data
+ln -s $INSTALL_DIR/logs $BITNAMI_APP_VOL_PREFIX/logs

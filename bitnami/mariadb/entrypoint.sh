@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 source /bitnami-utils.sh
-SERVICE_USER=mysql
+
+print_welcome_page
 
 # if command starts with an option, prepend mysqld
 if [ "${1:0:1}" = '-' ]; then
@@ -9,16 +10,16 @@ if [ "${1:0:1}" = '-' ]; then
   set -- mysqld.bin
 fi
 
-if [ ! "$(ls -A $BITNAMI_VOL_PREFIX/conf)" ]; then
+if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
   generate_conf_files
 fi
 
 if [ "$1" = 'mysqld.bin' ]; then
   set -- $@ $PROGRAM_OPTIONS
   mkdir -p $BITNAMI_APP_DIR/tmp
-  chown -R $SERVICE_USER:$SERVICE_USER $BITNAMI_APP_DIR/tmp
+  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/tmp
 
-  if [ ! "$(ls -A $BITNAMI_VOL_PREFIX/data)" ]; then
+  if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/data)" ]; then
 
     set -- "$@" --init-file=/tmp/init_mysql.sql
 
@@ -33,7 +34,7 @@ if [ "$1" = 'mysqld.bin' ]; then
     print_container_already_initialized $BITNAMI_APP_NAME
   fi
 
-  chown -R $SERVICE_USER:$SERVICE_USER $BITNAMI_APP_DIR/logs
+  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/logs
 fi
 
 exec "$@"
