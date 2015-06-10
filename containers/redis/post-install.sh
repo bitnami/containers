@@ -8,9 +8,6 @@ mkdir $INSTALL_DIR/etc/conf.defaults
 mv $INSTALL_DIR/etc/redis.conf $INSTALL_DIR/etc/conf.defaults
 ln -s $INSTALL_DIR/etc/conf/redis.conf $INSTALL_DIR/etc/redis.conf
 
-# set up data
-mkdir $INSTALL_DIR/var/data
-
 # symlink mount points at root to install dir
 ln -s $INSTALL_DIR/etc/conf $BITNAMI_APP_VOL_PREFIX/conf
 ln -s $INSTALL_DIR/var/data $BITNAMI_APP_VOL_PREFIX/data

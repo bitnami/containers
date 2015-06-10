@@ -28,7 +28,7 @@ touch $BITNAMI_APP_VOL_PREFIX/logs/redis-server.log
 
 chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/data/ \
   $BITNAMI_APP_VOL_PREFIX/logs/ \
-  $BITNAMI_APP_VOL_PREFIX/conf/
+  $BITNAMI_APP_VOL_PREFIX/conf/ || true
 
 
 # The user can run its own version or redis-server and we still
