@@ -18,7 +18,7 @@ USER $BITNAMI_APP_USER
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-EXPOSE 80
+EXPOSE 3000
 VOLUME ["/app"]
 WORKDIR /app
 
