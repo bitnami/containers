@@ -2,10 +2,10 @@ FROM ubuntu-debootstrap:14.04
 MAINTAINER Bitnami
 
 ENV BITNAMI_PREFIX /usr/local/bitnami
-ENV BITNAMI_APP_DIR $BITNAMI_PREFIX/nginx
-ENV BITNAMI_APP_NAME nginxstandalone
+ENV BITNAMI_APP_NAME nginx
+ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/$BITNAMI_APP_NAME
 ENV BITNAMI_APP_VERSION 1.8.0-0
-ENV BITNAMI_APP_VOL_PREFIX /bitnami/nginx
+ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME
 ENV BITNAMI_APP_USER daemon
 
 ADD https://www.dropbox.com/s/9rffufx3drjisl1/install.sh?dl=1 /tmp/install.sh
