@@ -1,22 +1,19 @@
 #!/bin/bash
 set -e
-SERVICE_USER=daemon
+source /bitnami-utils.sh
 
-cp -nr $BITNAMI_APP_DIR/conf.defaults/* $BITNAMI_APP_DIR/conf
+print_welcome_page
+
+generate_conf_files
 
 if [ ! "$(ls -A /app)" ]; then
   cp -r $BITNAMI_APP_DIR/html.defaults/* $BITNAMI_APP_DIR/html
 fi
 
-chown -R $SERVICE_USER:$SERVICE_USER $BITNAMI_VOL_PREFIX/logs/ $BITNAMI_VOL_PREFIX/conf/ /app/
+chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/logs/ $BITNAMI_APP_VOL_PREFIX/conf/ /app/
 
 if [ "$1" = 'nginx' ]; then
-  gosu $SERVICE_USER:$SERVICE_USER tail -f $BITNAMI_VOL_PREFIX/logs/* &
+  gosu $BITNAMI_APP_USER:$BITNAMI_APP_USER tail -f $BITNAMI_APP_VOL_PREFIX/logs/* &
 fi
 
-echo "#########################################################################"
-echo "#                                                                       #"
-echo "# Bitnami Nginx container running:                                      #"
-echo "#                                                                       #"
-echo "#########################################################################"
 exec "$@"
