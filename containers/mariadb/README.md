@@ -417,7 +417,7 @@ docker rm -v mariadb
 or using Docker Compose:
 
 ```bash
-docker-compose stop mariadb
+docker-compose rm -v mariadb
 ```
 
 ### Step 3: Run the new image
