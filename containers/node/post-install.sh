@@ -1,4 +1,3 @@
 #!/bin/bash
-SERVICE_USER=bitnami
 mkdir /app
-chown -R $SERVICE_USER:$SERVICE_USER /app/
+chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER /app/
