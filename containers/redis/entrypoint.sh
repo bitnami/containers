@@ -24,8 +24,6 @@ else
   print_container_already_initialized $BITNAMI_APP_NAME
 fi
 
-touch $BITNAMI_APP_VOL_PREFIX/logs/redis-server.log
-
 chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/data/ \
   $BITNAMI_APP_VOL_PREFIX/logs/ \
   $BITNAMI_APP_VOL_PREFIX/conf/ || true
@@ -34,7 +32,7 @@ chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/data/ \
 # The user can run its own version or redis-server and we still
 # will want to log it and run it using the BITNAMI_APP_USER
 if [[ "$1" = 'redis-server' ]]; then
-  gosu $BITNAMI_APP_USER:$BITNAMI_APP_USER tail -f $BITNAMI_APP_VOL_PREFIX/logs/* &
+  wait_and_tail_logs
   # Add default configuration
   if [[ "$@" = 'redis-server' ]]; then
     exec gosu $BITNAMI_APP_USER "$@" $BITNAMI_APP_VOL_PREFIX/conf/redis.conf $EXTRA_OPTIONS
