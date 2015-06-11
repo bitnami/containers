@@ -7,8 +7,9 @@ ENV BITNAMI_APP_VERSION 0.12.4-0
 ENV BITNAMI_APP_DIR $BITNAMI_PREFIX/nodejs
 ENV BITNAMI_APP_USER bitnami
 
+COPY installer.run.sha256 /tmp/installer.run.sha256
 ADD https://www.dropbox.com/s/9rffufx3drjisl1/install.sh?dl=1 /tmp/install.sh
-ADD post-install.sh /tmp/post-install.sh
+COPY post-install.sh /tmp/post-install.sh
 RUN sh /tmp/install.sh
 
 ENV PATH $BITNAMI_PREFIX/python/bin:$BITNAMI_PREFIX/nodejs/bin:$BITNAMI_PREFIX/common/bin:$PATH
