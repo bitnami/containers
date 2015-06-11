@@ -9,6 +9,7 @@ ENV BITNAMI_APP_VERSION 5.5.42-0
 ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME
 
 # Specific Utility functions
+COPY installer.run.sha256 /tmp/installer.run.sha256
 COPY bitnami-utils-custom.sh /bitnami-utils-custom.sh
 # General Utility functions
 ADD https://www.dropbox.com/s/9rffufx3drjisl1/install.sh?dl=1 /tmp/install.sh
