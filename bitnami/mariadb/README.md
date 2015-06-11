@@ -17,7 +17,7 @@ mariadb:
 
 # Get this image
 
-The recommended way to get the Bitnami MariaDB Docker Container is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com).
+The recommended way to get the Bitnami MariaDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com).
 
 ```bash
 docker pull bitnami/mariadb:5.5.42-0
@@ -32,25 +32,25 @@ docker pull bitnami/mariadb:latest
 If you wish, you can also build the image yourself.
 
 ```bash
-git clone https://github.com/bitnami/docker-mariadb.git
+git clone https://github.com/Bitnami/bitnami-docker-mariadb.git
 cd docker-mariadb
 docker build -t bitnami/mariadb
 ```
 
 # Persisting your database
 
-If you remove the container all your data will be lost, and the next time you run the container the
-database will be reinitialized. To avoid this loss of data, you should mount a volume that will host
-the data.
+If you remove the container all your data will be lost, and the next time you run the image the
+database will be reinitialized. To avoid this loss of data, you should mount a volume that will
+persist even after the container is removed.
 
 **Note!**
 If you have already started using your database, follow the steps on
-[backing up](#backing-up-your-database) and [restoring](#restoring-a-backup) to pull the data from
+[backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from
 your running container down to your host.
 
-The MariaDB container exposes a volume at `/bitnami/mariadb/data`, mounting a volume at this
-location will replace the container data with your own volume. If your volume is empty, the database
-will be initialized.
+The MariaDB image exposes a volume at `/bitnami/mariadb/data`, you can mount a directory from your
+host to serve as the data store. If the directory you mount is empty, the database will be
+initialized.
 
 ```bash
 docker run -v /path/to/data:/bitnami/mariadb/data bitnami/mariadb
@@ -72,7 +72,7 @@ system provided by Docker.
 
 ## Connecting a MySQL client container to the MariaDB server container
 
-### Step 1: Run the MariaDB container with a specific name
+### Step 1: Run the MariaDB image with a specific name
 
 The first step is to start our MariaDB server.
 
@@ -91,9 +91,9 @@ it to as well as a hostname to use inside the container, separated by a colon. F
 our MariaDB server accessible in another container with `mariadb` as it's hostname we would pass
 `--link mariadb-server:mariadb` to the Docker run command.
 
-The Bitnami MariaDB container also ships with a MySQL client, but by default it will start a server.
-To start the client instead, we can override the default command Docker runs by stating the command
-we want to run after the image name.
+The Bitnami MariaDB Docker Image also ships with a MySQL client, but by default it will start a
+server. To start the client instead, we can override the default command Docker runs by stating a
+different command to run after the image name.
 
 ```bash
 docker run --rm -it --link mariadb-server:mariadb bitnami/mariadb mysql -h mariadb -u root
@@ -140,8 +140,8 @@ Inside `myapp`, use `mariadb` as the hostname for the MariaDB server.
 
 ## Setting the root password on first run
 
-Passing the `MARIADB_PASSWORD` environment variable when starting the container for the first time
-will set the password of the root user to the value of `MARIADB_PASSWORD`.
+Passing the `MARIADB_PASSWORD` environment variable when running the image for the first time will
+set the password of the root user to the value of `MARIADB_PASSWORD`.
 
 ```bash
 docker run --name mariadb -e MARIADB_PASSWORD=my_password bitnami/mariadb
@@ -158,8 +158,8 @@ mariadb:
 
 ## Creating a database on first run
 
-By passing the `MARIADB_DATABASE` environment variable when starting the container for the first time,
-a database will be created. This is useful if your application requires that a database already
+By passing the `MARIADB_DATABASE` environment variable when running the image for the first time, a
+database will be created. This is useful if your application requires that a database already
 exists, saving you from having to manually create the database using the MySQL client.
 
 ```bash
@@ -177,7 +177,7 @@ mariadb:
 
 ## Creating a database user on first run
 
-You can create a restricted database user that only has permissions for the database creating with
+You can create a restricted database user that only has permissions for the database created with
 the [`MARIADB_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this,
 provide the `MARIADB_USER` environment variable.
 
@@ -200,8 +200,8 @@ mariadb:
 
 ## Command-line options
 
-The simplest way to configure the MariaDB server is to pass custom command-line options when
-running the server.
+The simplest way to configure your MariaDB server is to pass custom command-line options when
+running the image.
 
 ```bash
 docker run bitnami/mariadb --open-files-limit=2
@@ -221,12 +221,12 @@ mariadb:
 
 ## Configuration file
 
-This container looks for configuration in `/bitnami/mariadb/conf`. You can mount a volume there with
+This image looks for configuration in `/bitnami/mariadb/conf`. You can mount a volume there with
 your own configuration, or the default configuration will be copied to your volume if it is empty.
 
 ### Step 1: Run the MariaDB image
 
-Run the MariaDB image, mounting a volume from your host.
+Run the MariaDB image, mounting a directory from your host.
 
 ```bash
 docker run --name mariadb -v /path/to/mariadb/conf:/bitnami/mariadb/conf bitnami/mariadb
@@ -251,7 +251,7 @@ vi /path/to/mariadb/conf/my.cnf
 
 ### Step 3: Restart MariaDB
 
-After changing the configuration, restart MariaDB for changes to take effect.
+After changing the configuration, restart your MariaDB container for changes to take effect.
 
 ```bash
 docker restart mariadb
@@ -269,7 +269,7 @@ docker-compose restart mariadb
 
 ## Caveats
 
-The following options cannot be modified, to ensure that the container runs correctly.
+The following options cannot be modified, to ensure that the image runs correctly.
 
 ```bash
 --defaults-file=/usr/local/bitnami/mysql/my.cnf
@@ -283,8 +283,8 @@ The following options cannot be modified, to ensure that the container runs corr
 
 # Logging
 
-The Bitnami MariaDB container supports two different logging modes: logging to stdout, and logging
-to a file.
+The Bitnami MariaDB Docker Image supports two different logging modes: logging to stdout, and
+logging to a file.
 
 ## Logging to stdout
 
@@ -306,7 +306,7 @@ logs, they could grow exponentially and take up large amounts of disk space on y
 
 ## Logging to file
 
-Run the MariaDB image, mounting a volume from your host at `/bitnami/mariadb/logs`. This will
+Run the MariaDB image, mounting a directory from your host at `/bitnami/mariadb/logs`. This will
 instruct the container to send logs to a `mysqld.log` file in the mounted volume.
 
 ```bash
@@ -322,8 +322,8 @@ mariadb:
     - /path/to/mariadb/logs:/bitnami/mariadb/logs
 ```
 
-To perform operations (e.g. logrotate) on the logs, mount the same volume in a container designed to
-operate on log files, such as logstash.
+To perform operations (e.g. logrotate) on the logs, mount the same directory in a container designed
+to operate on log files, such as logstash.
 
 # Maintenance
 
@@ -345,8 +345,8 @@ docker-compose stop mariadb
 
 ### Step 2: Run the backup command
 
-We need to mount two volumes in a container we will use to create the backup: a folder on your host
-to store the backup in, and the volumes from the container we just stopped so we can access the
+We need to mount two volumes in a container we will use to create the backup: a directory on your
+host to store the backup in, and the volumes from the container we just stopped so we can access the
 data.
 
 ```bash
@@ -438,13 +438,13 @@ docker-compose start mariadb
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an
-[issue](https://github.com/bitnami/bitnami-docker-mariadb/issues), or submit a
-[pull request](https://github.com/bitnami/bitnami-docker-mariadb/pulls) with your contribution.
+[issue](https://github.com/Bitnami/bitnami-docker-mariadb/issues), or submit a
+[pull request](https://github.com/Bitnami/bitnami-docker-mariadb/pulls) with your contribution.
 
 # Issues
 
 If you encountered a problem running this container, you can file an
-[issue](https://github.com/bitnami/bitnami-docker-mariadb/issues). For us to provide better support,
+[issue](https://github.com/Bitnami/bitnami-docker-mariadb/issues). For us to provide better support,
 be sure to include the following information in your issue:
 
 - Host OS and version
