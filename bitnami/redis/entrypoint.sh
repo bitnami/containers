@@ -32,7 +32,7 @@ chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/data/ \
 # The user can run its own version or redis-server and we still
 # will want to log it and run it using the BITNAMI_APP_USER
 if [[ "$1" = 'redis-server' ]]; then
-  wait_and_tail_logs
+  wait_and_tail_logs &
   # Add default configuration
   if [[ "$@" = 'redis-server' ]]; then
     exec gosu $BITNAMI_APP_USER "$@" $BITNAMI_APP_VOL_PREFIX/conf/redis.conf $EXTRA_OPTIONS
