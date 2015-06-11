@@ -37,7 +37,7 @@ create_mysql_user() {
     echo "==> Creating root user with unrestricted access..."
     echo "GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;" >> /tmp/init_mysql.sql
   else
-    echo "==> Granting acces to $MARIADB_USER to the database $MARIADB_DATABASE..."
+    echo "==> Granting access to $MARIADB_USER to the database $MARIADB_DATABASE..."
     echo ""
     echo "GRANT ALL ON \`${MARIADB_DATABASE}\`.* TO \`${MARIADB_USER}\`@'%' ;" >> /tmp/init_mysql.sql
   fi
