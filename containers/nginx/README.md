@@ -1,5 +1,6 @@
 # What is nginx?
-nginx (pronounced "engine-x") is an open source reverse proxy server for HTTP, HTTPS, SMTP, POP3, and IMAP protocols, as well as a load balancer, HTTP cache, and a web server (origin server).
+nginx (pronounced "engine-x") is an open source reverse proxy server for HTTP, HTTPS, SMTP, POP3,
+and IMAP protocols, as well as a load balancer, HTTP cache, and a web server (origin server).
 
 # TLDR
 
@@ -16,7 +17,8 @@ nginx:
 
 # Get this image
 
-The recommended way to get the Bitnami nginx Docker Container is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com).
+The recommended way to get the Bitnami nginx Docker Image is to pull the prebuilt image from the
+[Docker Hub Registry](https://hub.docker.com).
 
 ```bash
 docker pull bitnami/nginx:1.8.0-0
@@ -31,15 +33,15 @@ docker pull bitnami/nginx:latest
 If you wish, you can also build the image yourself.
 
 ```bash
-git clone https://github.com/bitnami/docker-nginx.git
+git clone https://github.com/Bitnami/bitnami-docker-nginx.git
 cd docker-nginx
 docker build -t bitnami/nginx
 ```
 
 # Hosting a static website
 
-This nginx container exposes a volume at `/app`. Content mounted here is served by the default
-catch-all virtual host. Mounting an empty volume here will copy some default content to your volume.
+This nginx image exposes a volume at `/app`. Content mounted here is served by the default catch-all
+virtual host. Mounting an empty directory here will copy the default content to your volume.
 
 ```bash
 docker run -v /path/to/app:/app bitnami/nginx
@@ -77,18 +79,16 @@ You can also manually specify the ports you want forwarded from your host to the
 docker run -p 8080:80 8443:443 bitnami/nginx
 ```
 
-Access your webserver in the browser by navigating to
+Access your web server in the browser by navigating to
 [http://localhost:8080](http://localhost:8080/).
-
-**Note!**
-Ensure you have root permissions on your host if you are trying to bind to privileged ports.
 
 # Configuration
 
 ## Adding custom virtual hosts
 
 The default nginx.conf includes virtual hosts placed in `/bitnami/nginx/conf/vhosts/*.conf`. You can
-mount a volume at `/bitnami/nginx/conf/vhosts` from your host containing your custom virtual hosts.
+mount a directory at `/bitnami/nginx/conf/vhosts` from your host containing your custom virtual
+hosts.
 
 ```bash
 docker run -v /path/to/nginx/vhosts:/bitnami/nginx/conf/vhosts bitnami/nginx
@@ -105,12 +105,13 @@ nginx:
 
 ## Full configuration
 
-This container looks for configuration in `/bitnami/nginx/conf`. You can mount a volume there with
-your own configuration, or the default configuration will be copied to your volume if it is empty.
+This container looks for configuration in `/bitnami/nginx/conf`. You can mount a directory there
+with your own configuration, or the default configuration will be copied to your directory if it is
+empty.
 
 ### Step 1: Run the nginx image
 
-Run the nginx image, mounting a volume from your host.
+Run the nginx image, mounting a directory from your host.
 
 ```bash
 docker run --name nginx -v /path/to/nginx/conf:/bitnami/nginx/conf bitnami/nginx
@@ -135,7 +136,7 @@ vi /path/to/nginx/conf/nginx.conf
 
 ### Step 4: Restart nginx
 
-After changing the configuration, restart nginx for changes to take effect.
+After changing the configuration, restart your nginx container for changes to take effect.
 
 ```bash
 docker restart nginx
@@ -150,7 +151,7 @@ docker-compose restart nginx
 # Reverse proxy to other containers
 
 nginx can be used to reverse proxy to other containers using Docker's linking system. This is
-particularly useful if you want to serve dynamic content through an nginx runtime. Bitnami provides
+particularly useful if you want to serve dynamic content through an nginx frontend. Bitnami provides
 example virtual hosts for all of our runtime containers in `/bitnami/nginx/conf/vhosts/`.
 
 **Further Reading:**
@@ -158,8 +159,8 @@ example virtual hosts for all of our runtime containers in `/bitnami/nginx/conf/
 
 # Logging
 
-The Bitnami nginx container supports two different logging modes: logging to stdout, and logging to
-a file.
+The Bitnami nginx Docker Image supports two different logging modes: logging to stdout, and logging
+to a file.
 
 ## Logging to stdout
 
@@ -181,8 +182,8 @@ logs, they could grow exponentially and take up large amounts of disk space on y
 
 ## Logging to file
 
-Run the nginx image, mounting a volume from your host at `/bitnami/nginx/logs`. This will
-instruct the container to send logs to the mounted volume.
+Run the nginx image, mounting a directory from your host at `/bitnami/nginx/logs`. This will
+instruct the container to send logs to your directory.
 
 ```bash
 docker run --name nginx -v /path/to/nginx/logs:/bitnami/nginx/logs bitnami/nginx
@@ -197,8 +198,8 @@ nginx:
     - /path/to/nginx/logs:/bitnami/nginx/logs
 ```
 
-To perform operations (e.g. logrotate) on the logs, mount the same volume in a container designed to
-operate on log files, such as logstash.
+To perform operations (e.g. logrotate) on the logs, mount the same directory in a container designed
+to operate on log files, such as logstash.
 
 # Maintenance
 
@@ -220,8 +221,8 @@ docker-compose stop nginx
 
 ### Step 2: Run the backup command
 
-We need to mount two volumes in a container we will use to create the backup: a folder on your host
-to store the backup in, and the volumes from the container we just stopped so we can access the
+We need to mount two volumes in a container we will use to create the backup: a directory on your
+host to store the backup in, and the volumes from the container we just stopped so we can access the
 data.
 
 ```bash
@@ -262,8 +263,8 @@ nginx:
 
 ## Upgrade this image
 
-Bitnami provides up-to-date versions of nginx, including security patches, soon after they are
-made upstream. We recommended that you follow these steps to upgrade your container.
+Bitnami provides up-to-date versions of nginx, including security patches, soon after they are made
+upstream. We recommend that you follow these steps to upgrade your container.
 
 ### Step 1: Get the updated image
 
@@ -290,7 +291,7 @@ docker rm -v nginx
 or using Docker Compose:
 
 ```bash
-docker-compose stop nginx
+docker-compose rm -v nginx
 ```
 
 ### Step 3: Run the new image
@@ -311,13 +312,13 @@ docker-compose start nginx
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an
-[issue](https://github.com/bitnami/bitnami-docker-nginx/issues), or submit a
-[pull request](https://github.com/bitnami/bitnami-docker-nginx/pulls) with your contribution.
+[issue](https://github.com/Bitnami/bitnami-docker-nginx/issues), or submit a
+[pull request](https://github.com/Bitnami/bitnami-docker-nginx/pulls) with your contribution.
 
 # Issues
 
 If you encountered a problem running this container, you can file an
-[issue](https://github.com/bitnami/bitnami-docker-nginx/issues). For us to provide better support,
+[issue](https://github.com/Bitnami/bitnami-docker-nginx/issues). For us to provide better support,
 be sure to include the following information in your issue:
 
 - Host OS and version
