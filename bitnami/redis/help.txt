@@ -6,7 +6,7 @@
     VOLUMES:
       $BITNAMI_APP_VOL_PREFIX/data: Your redis database backup will be placed here.
       $BITNAMI_APP_VOL_PREFIX/conf: Home of redis.conf
-      $BITNAMI_APP_VOL_PREFIX/logs: Redis logs are placed here
+      $BITNAMI_APP_VOL_PREFIX/logs: redis logs are placed here
   
     PORTS:
       6369: Default redis port
