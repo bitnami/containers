@@ -1,0 +1,19 @@
+environment_variables:
+  MARIADB_USER: "User to be created on initialization (default: root)"
+  MARIADB_PASSWORD: "Password associated to the MARIADB_USER (default: none)"
+  MARIADB_DATABASE: "Create a database and grant access to MARIADB_USER (default: none)"
+volumes:
+  $BITNAMI_APP_VOL_PREFIX/data: $BITNAMI_APP_NAME data files. For backups use this volume
+  $BITNAMI_APP_VOL_PREFIX/conf: my.conf lives here
+  $BITNAMI_APP_VOL_PREFIX/logs:
+ports:
+  3306: $BITNAMI_APP_NAME default port
+misc:
+  note: Please note that the user creation happens only the first time you run the container
+  note#2: MARIADB_USER works in conjunction with MARIADB_DATABASE environment variable
+
+
+
+
+
+
