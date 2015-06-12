@@ -1,0 +1,14 @@
+environment_variables:
+  MEMCACHED_PASSWORD: 'Password for your $BITNAMI_APP_NAME server (default: none)'
+volumes:
+  $BITNAMI_APP_VOL_PREFIX/logs: $BITNAMI_APP_NAME logs are placed here
+ports:
+  11211: Default $BITNAMI_APP_NAME port
+misc:
+  note: Please note that the password setup happens only the first time you run the container
+
+
+
+
+
+
