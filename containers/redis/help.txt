@@ -1,21 +1,22 @@
   $BITNAMI_APP_NAME cheatsheet:
   
     ENVIRONMENT VARIABLES:
-      REDIS_PASSWORD: Password for your redis server.
+      REDIS_PASSWORD: Password for your $BITNAMI_APP_NAME server (default: none)
   
     VOLUMES:
-      $BITNAMI_APP_VOL_PREFIX/data: Your redis database backup will be placed here.
+      $BITNAMI_APP_VOL_PREFIX/data: Your $BITNAMI_APP_NAME database dump is placed here
       $BITNAMI_APP_VOL_PREFIX/conf: Home of redis.conf
-      $BITNAMI_APP_VOL_PREFIX/logs: redis logs are placed here
+      $BITNAMI_APP_VOL_PREFIX/logs: $BITNAMI_APP_NAME logs are placed here
   
     PORTS:
-      6369: Default redis port
+      6369: Default $BITNAMI_APP_NAME port
   
     MISC:
       options: You can add extra options during the docker run using the -- prefix
+      note: Please note that the password setup happens only the first time you run the container
   
     COMMANDS:
-      help: This page
+      bitnami-help: This page
       check_updates: Check if a new version of the $BITNAMI_APP_NAME image is available.
 
   Visit $GITHUB_PAGE for more information.
