@@ -1,0 +1,4 @@
+volumes:
+  /app: Default work directory for your $BITNAMI_APP_NAME application
+ports:
+  9000: Exposed port, please configure your app to use this port

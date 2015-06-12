@@ -7,7 +7,7 @@ ENV BITNAMI_APP_VERSION 5.5.25-0
 ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/php
 ENV BITNAMI_APP_USER bitnami
 
-
+COPY help.txt $BITNAMI_PREFIX/help.txt
 COPY installer.run.sha256 /tmp/installer.run.sha256
 ADD https://www.dropbox.com/s/9rffufx3drjisl1/install.sh?dl=1 /tmp/install.sh
 COPY post-install.sh /tmp/post-install.sh
