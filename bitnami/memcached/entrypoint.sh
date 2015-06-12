@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-source /bitnami-utils.sh
+source $BITNAMI_PREFIX/bitnami-utils.sh
 
 if [ "${1:0:1}" = '-' ]; then
   set -- memcached "$@"
