@@ -1,0 +1,21 @@
+  $BITNAMI_APP_NAME cheatsheet:
+  
+    ENVIRONMENT VARIABLES:
+      MEMCACHED_PASSWORD: Password for your $BITNAMI_APP_NAME server (default: none)
+  
+    VOLUMES:
+      $BITNAMI_APP_VOL_PREFIX/logs: $BITNAMI_APP_NAME logs are placed here
+  
+    PORTS:
+      11211: Default $BITNAMI_APP_NAME port
+  
+    MISC:
+      note: Please note that the password setup happens only the first time you run the container
+  
+    COMMANDS:
+      bitnami-help: This page
+      check_updates: Check if a new version of the $BITNAMI_APP_NAME image is available
+
+  Visit $GITHUB_PAGE for more information
+
+
