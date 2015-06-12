@@ -1,18 +1,12 @@
-FROM ubuntu-debootstrap:latest
+FROM bitnami/base-ubuntu:14.04
 MAINTAINER Bitnami
 
-ENV BITNAMI_PREFIX /usr/local/bitnami
 ENV BITNAMI_APP_NAME phpfpm
 ENV BITNAMI_APP_VERSION 5.5.25-0
 ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/php
 ENV BITNAMI_APP_USER bitnami
 
-COPY help.txt $BITNAMI_PREFIX/help.txt
-COPY installer.run.sha256 /tmp/installer.run.sha256
-ADD https://www.dropbox.com/s/9rffufx3drjisl1/install.sh?dl=1 /tmp/install.sh
-COPY post-install.sh /tmp/post-install.sh
-
-RUN sh /tmp/install.sh\
+RUN sh $BITNAMI_PREFIX/install.sh\
     --php_fpm_allow_all_remote_connections 1 --php_fpm_connection_mode port
 
 ENV PATH $BITNAMI_APP_DIR/sbin:$BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/bin:$PATH
