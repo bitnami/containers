@@ -1,0 +1,16 @@
+environment_variables:
+  REDIS_PASSWORD: Password for your redis server.
+volumes:
+  $BITNAMI_APP_VOL_PREFIX/data: Your redis database backup will be placed here.
+  $BITNAMI_APP_VOL_PREFIX/conf: Home of redis.conf
+  $BITNAMI_APP_VOL_PREFIX/logs: Redis logs are placed here
+ports:
+  6369: Default redis port
+misc:
+  options: You can add extra options during the docker run using the -- prefix
+
+
+
+
+
+

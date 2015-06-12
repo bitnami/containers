@@ -9,6 +9,7 @@ ENV BITNAMI_APP_VERSION 3.0.2-0
 ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/$BITNAMI_APP_NAME
 ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME
 
+COPY help.txt $BITNAMI_PREFIX/help.txt
 COPY installer.run.sha256 /tmp/installer.run.sha256
 ADD https://www.dropbox.com/s/9rffufx3drjisl1/install.sh?dl=1 /tmp/install.sh
 COPY post-install.sh /tmp/post-install.sh
