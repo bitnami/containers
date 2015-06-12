@@ -1,0 +1,15 @@
+volumes:
+  /app: Static files to be served.
+  $BITNAMI_APP_VOL_PREFIX/conf: vhosts and general $BITNAMI_APP_NAME configuration files.
+  $BITNAMI_APP_VOL_PREFIX/logs: access and error logs.
+ports:
+  80: http port
+  443: https port
+misc:
+  tip#1: Mount $BITNAMI_APP_VOL_PREFIX/conf/vhosts with your configuration from the host to override the default configuration.
+
+
+
+
+
+
