@@ -2,6 +2,8 @@
 set -e
 source $BITNAMI_PREFIX/bitnami-utils.sh
 
+print_welcome_page
+
 if [ "${1:0:1}" = '-' ]; then
   set -- memcached "$@"
 fi
@@ -16,5 +18,4 @@ if [ "$MEMCACHED_PASSWORD" ]; then
   print_app_credentials $BITNAMI_APP_NAME **none** $MEMCACHED_PASSWORD
 fi
 
-print_welcome_page
 exec "$@" >> $BITNAMI_APP_VOL_PREFIX/logs/memcached.log 2>&1
