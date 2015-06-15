@@ -1,14 +1,20 @@
 #!/bin/bash
+set -e
+source $BITNAMI_PREFIX/bitnami-utils.sh
 
-if [ ! "$(ls -A /conf)" ]; then
-  cp -r /usr/local/bitnami/apache2/conf.defaults/* /usr/local/bitnami/apache2/conf
-fi
+print_welcome_page
+generate_conf_files
 
 if [ ! "$(ls -A /app)" ]; then
-  cp -r /usr/local/bitnami/apache2/htdocs.defaults/* /usr/local/bitnami/apache2/htdocs
+  cp -r $BITNAMI_APP_DIR/htdocs.defaults/* $BITNAMI_APP_DIR/htdocs
 fi
 
 # Remove zombie pidfile
-rm -f /usr/local/bitnami/apache2/logs/httpd.pid
+rm -f $BITNAMI_APP_DIR/logs/httpd.pid
 
-exec "$@"
+if [[ "$@" = 'httpd' ]]; then
+  exec $@ -DFOREGROUND -f $BITNAMI_APP_DIR/conf/httpd.conf
+else
+  exec "$@"
+fi
+

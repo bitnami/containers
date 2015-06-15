@@ -1,22 +1,21 @@
-FROM ubuntu-debootstrap:14.04
+FROM bitnami/base-ubuntu:14.04
 MAINTAINER Bitnami
 
 ENV BITNAMI_APP_NAME apache
-ENV BITNAMI_APP_VERSION 2.4.12-0
+ENV BITNAMI_APP_VERSION 2.4.12-1
 ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/apache2
+ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME
+ENV BITNAMI_APP_USER daemon
 
-ADD https://storage.googleapis.com/bitnami-artifacts/install.sh?GoogleAccessId=432889337695-e1gggo94k5qubupjsb35tajs91bdu0hg@developer.gserviceaccount.com&Expires=1434934078&Signature=QNkAu%2F8E2RlalSQy4n1sxMhsGKF%2FVltr6zu65HU6A9H0HKOgl6u9etqy9w6OwD4DsLMxYuy2uymOK3iDc5RbfkAMncKI1zJpxcwRQ4Mt43Oe8PBXKbQYcZ7mQaYPtpnjYblDs1S2p12Pu5NTDJHK2hJ1MrIUYwBup5n60R6OJRI%3D /tmp/install.sh
-ADD post-install.sh /post-install.sh
+COPY bitnami-apache-2.4.12-1-container-linux-x64-installer.run /tmp/installer.run
+RUN sh $BITNAMI_PREFIX/install.sh
 
-RUN sh /tmp/install.sh
-RUN sh /post-install.sh /usr/local/bitnami/apache2
-
-ENV PATH /usr/local/bitnami/apache2/bin:$PATH
+ENV PATH $BITNAMI_APP_DIR/bin:$PATH
 
 EXPOSE 80 443
-VOLUME ["/logs", "/conf", "/app"]
+VOLUME ["$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs", "/app"]
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["/usr/local/bitnami/apache2/bin/httpd", "-DFOREGROUND", "-f", "/usr/local/bitnami/apache2/conf/httpd.conf"]
+CMD ["httpd"]
