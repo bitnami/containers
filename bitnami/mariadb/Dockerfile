@@ -1,10 +1,10 @@
-FROM bitnami/base-ubuntu:14.04
+FROM bitnami/base-ubuntu:14.04-onbuild
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/mysql \
     BITNAMI_APP_NAME=mariadb \
     BITNAMI_APP_USER=mysql \
-    BITNAMI_APP_VERSION=5.5.42-1-r01
+    BITNAMI_APP_VERSION=5.5.42-1-r02
 
 ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
     PATH=$BITNAMI_APP_DIR/bin:$PATH
