@@ -1,4 +1,4 @@
-FROM bitnami/base-ubuntu:14.04
+FROM bitnami/base-ubuntu:14.04-onbuild
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=apache \
