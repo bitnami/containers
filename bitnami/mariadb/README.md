@@ -272,13 +272,13 @@ docker-compose restart mariadb
 The following options cannot be modified, to ensure that the image runs correctly.
 
 ```bash
---defaults-file=/usr/local/bitnami/mysql/my.cnf
---log-error=/usr/local/bitnami/mysql/logs/mysqld.log
---basedir=/usr/local/bitnami/mysql
---datadir=/usr/local/bitnami/mysql/data
---plugin-dir=/usr/local/bitnami/mysql/lib/plugin
+--defaults-file=/opt/bitnami/mysql/my.cnf
+--log-error=/opt/bitnami/mysql/logs/mysqld.log
+--basedir=/opt/bitnami/mysql
+--datadir=/opt/bitnami/mysql/data
+--plugin-dir=/opt/bitnami/mysql/lib/plugin
 --user=mysql
---socket=/usr/local/bitnami/mysql/tmp/mysql.sock
+--socket=/opt/bitnami/mysql/tmp/mysql.sock
 ```
 
 # Logging
