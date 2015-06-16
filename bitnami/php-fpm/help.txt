@@ -9,8 +9,8 @@
       9000: Exposed port, please configure your app to use this port
   
     COMMANDS:
-      bitnami-help: This page
-      check_updates: Check if a new version of the $BITNAMI_APP_NAME image is available
+      print-help: This page
+      check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available
 
   Visit $GITHUB_PAGE for more information
 
