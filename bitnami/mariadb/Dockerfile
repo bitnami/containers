@@ -1,11 +1,11 @@
 FROM bitnami/base-ubuntu:14.04
-MAINTAINER The Bitnami Team <containers@bitnami.com>
+MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/mysql
-ENV BITNAMI_APP_NAME mariadb
-ENV BITNAMI_APP_USER mysql
-ENV BITNAMI_APP_VERSION 5.5.42-1
-ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME
+ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/mysql \
+    BITNAMI_APP_NAME=mariadb \
+    BITNAMI_APP_USER=mysql \
+    BITNAMI_APP_VERSION=5.5.42-1 \
+    BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME
 
 COPY bitnami-utils-custom.sh /bitnami-utils-custom.sh
 
