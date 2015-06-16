@@ -1,5 +1,5 @@
 FROM bitnami/base-ubuntu:14.04
-MAINTAINER Bitnami
+MAINTAINER The Bitnami Team <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME phpfpm
 ENV BITNAMI_APP_VERSION 5.5.26-1
