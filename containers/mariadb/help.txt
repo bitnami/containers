@@ -18,8 +18,8 @@
       note#2: MARIADB_USER works in conjunction with MARIADB_DATABASE environment variable
   
     COMMANDS:
-      bitnami-help: This page
-      check_updates: Check if a new version of the $BITNAMI_APP_NAME image is available
+      print-help: This page
+      check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available
 
   Visit $GITHUB_PAGE for more information
 
