@@ -1,5 +1,5 @@
 FROM bitnami/base-ubuntu:14.04
-MAINTAINER Bitnami
+MAINTAINER The Bitnami Team <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME nodejs
 ENV BITNAMI_APP_VERSION 0.12.4-1
