@@ -1,9 +1,9 @@
-FROM bitnami/base-ubuntu:14.04
+FROM bitnami/base-ubuntu:14.04-onbuild
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=nginx \
     BITNAMI_APP_USER=daemon \
-    BITNAMI_APP_VERSION=1.8.0-1
+    BITNAMI_APP_VERSION=1.8.0-1-r01
 
 ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/$BITNAMI_APP_NAME \
     BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME
