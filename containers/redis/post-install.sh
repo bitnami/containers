@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 cd $BITNAMI_APP_DIR
 
