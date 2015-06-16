@@ -22,7 +22,7 @@ docker run -it \
 
 ## Configuration
 
-You can configure PHP in `/usr/local/bitnami/php/conf` inside the container.
+You can configure PHP in `/bitnami/phpfpm/conf` inside the container.
 
 ## Linking
 
