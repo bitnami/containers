@@ -10,7 +10,7 @@ docker run --name mariadb bitnami/mariadb
 
 ## Docker Compose
 
-```less
+```yaml
 mariadb:
   image: bitnami/mariadb
 ```
@@ -20,7 +20,7 @@ mariadb:
 The recommended way to get the Bitnami MariaDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com).
 
 ```bash
-docker pull bitnami/mariadb:5.5.42-0
+docker pull bitnami/mariadb:5.5.42-1-r02
 ```
 
 To always get the latest version, pull the `latest` tag.
@@ -32,7 +32,7 @@ docker pull bitnami/mariadb:latest
 If you wish, you can also build the image yourself.
 
 ```bash
-git clone https://github.com/Bitnami/bitnami-docker-mariadb.git
+git clone https://github.com/bitnami/bitnami-docker-mariadb.git
 cd docker-mariadb
 docker build -t bitnami/mariadb
 ```
@@ -58,11 +58,11 @@ docker run -v /path/to/data:/bitnami/mariadb/data bitnami/mariadb
 
 or using Docker Compose:
 
-```less
+```yaml
 mariadb:
   image: bitnami/mariadb
   volumes:
-    - /path/to/data:/bitnami/mariadb/data
+    - path/to/data:/bitnami/mariadb/data
 ```
 
 # Linking
@@ -117,7 +117,7 @@ docker exec -it mariadb-server mysql -u root
 
 Copy the snippet below into your `docker-compose.yml` to add MariaDB to your application.
 
-```less
+```yaml
 mariadb:
   image: bitnami/mariadb
 ```
@@ -127,7 +127,7 @@ mariadb:
 Update the definitions for containers you want to access your MariaDB server from to include a link
 to the `mariadb` entry you added in Step 1.
 
-```less
+```yaml
 myapp:
   image: myapp
   links:
@@ -149,7 +149,7 @@ docker run --name mariadb -e MARIADB_PASSWORD=my_password bitnami/mariadb
 
 or using Docker Compose:
 
-```less
+```yaml
 mariadb:
   image: bitnami/mariadb
   environment:
@@ -168,7 +168,7 @@ docker run --name mariadb -e MARIADB_DATABASE=my_database bitnami/mariadb
 
 or using Docker Compose:
 
-```less
+```yaml
 mariadb:
   image: bitnami/mariadb
   environment:
@@ -190,7 +190,7 @@ docker run --name mariadb -e MARIADB_USER=my_user -e MARIADB_DATABASE=my_databas
 
 or using Docker Compose:
 
-```less
+```yaml
 mariadb:
   image: bitnami/mariadb
   environment:
@@ -209,7 +209,7 @@ docker run bitnami/mariadb --open-files-limit=2
 
 or using Docker Compose:
 
-```less
+```yaml
 mariadb:
   image: bitnami/mariadb
   command: --open-files-limit=2
@@ -234,11 +234,11 @@ docker run --name mariadb -v /path/to/mariadb/conf:/bitnami/mariadb/conf bitnami
 
 or using Docker Compose:
 
-```less
+```yaml
 mariadb:
   image: bitnami/mariadb
   volumes:
-    - /path/to/mariadb/conf:/bitnami/mariadb/conf
+    - path/to/mariadb/conf:/bitnami/mariadb/conf
 ```
 
 ### Step 2: Edit the configuration
@@ -306,8 +306,9 @@ logs, they could grow exponentially and take up large amounts of disk space on y
 
 ## Logging to file
 
-Run the MariaDB image, mounting a directory from your host at `/bitnami/mariadb/logs`. This will
-instruct the container to send logs to a `mysqld.log` file in the mounted volume.
+To log to file, run the MariaDB image, mounting a directory from your host at
+`/bitnami/mariadb/logs`. This will instruct the container to send logs to a `mysqld.log` file in the
+mounted volume.
 
 ```bash
 docker run --name mariadb -v /path/to/mariadb/logs:/bitnami/mariadb/logs bitnami/mariadb
@@ -315,11 +316,11 @@ docker run --name mariadb -v /path/to/mariadb/logs:/bitnami/mariadb/logs bitnami
 
 or using Docker Compose:
 
-```less
+```yaml
 mariadb:
   image: bitnami/mariadb
   volumes:
-    - /path/to/mariadb/logs:/bitnami/mariadb/logs
+    - path/to/mariadb/logs:/bitnami/mariadb/logs
 ```
 
 To perform operations (e.g. logrotate) on the logs, mount the same directory in a container designed
@@ -378,13 +379,13 @@ docker run -v /path/to/backups/latest/data:/bitnami/mariadb/data \
 
 or using Docker Compose:
 
-```less
+```yaml
 mariadb:
   image: bitnami/mariadb
   volumes:
-    - /path/to/backups/latest/data:/bitnami/mariadb/data
-    - /path/to/backups/latest/conf:/bitnami/mariadb/conf
-    - /path/to/backups/latest/logs:/bitnami/mariadb/logs
+    - path/to/backups/latest/data:/bitnami/mariadb/data
+    - path/to/backups/latest/conf:/bitnami/mariadb/conf
+    - path/to/backups/latest/logs:/bitnami/mariadb/logs
 ```
 
 ## Upgrade this image
@@ -395,11 +396,11 @@ made upstream. We recommend that you follow these steps to upgrade your containe
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/mariadb:5.5.42-0
+docker pull bitnami/mariadb:5.5.42-1-r02
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/mariadb:5.5.42-0`.
+`bitnami/mariadb:5.5.42-1-r02`.
 
 ### Step 2: Stop and backup the currently running container
 
@@ -426,7 +427,7 @@ Re-create your container from the new image, [restoring your backup](#restoring-
 necessary.
 
 ```bash
-docker run --name mariadb bitnami/mariadb:5.5.42-0
+docker run --name mariadb bitnami/mariadb:5.5.42-1-r02
 ```
 
 or using Docker Compose:
@@ -438,13 +439,13 @@ docker-compose start mariadb
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an
-[issue](https://github.com/Bitnami/bitnami-docker-mariadb/issues), or submit a
-[pull request](https://github.com/Bitnami/bitnami-docker-mariadb/pulls) with your contribution.
+[issue](https://github.com/bitnami/bitnami-docker-mariadb/issues), or submit a
+[pull request](https://github.com/bitnami/bitnami-docker-mariadb/pulls) with your contribution.
 
 # Issues
 
 If you encountered a problem running this container, you can file an
-[issue](https://github.com/Bitnami/bitnami-docker-mariadb/issues). For us to provide better support,
+[issue](https://github.com/bitnami/bitnami-docker-mariadb/issues). For us to provide better support,
 be sure to include the following information in your issue:
 
 - Host OS and version
