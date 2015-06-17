@@ -2,7 +2,7 @@ FROM bitnami/base-ubuntu:14.04-buildpack-onbuild
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=ruby \
-    BITNAMI_APP_VERSION=2.2.2-3 \
+    BITNAMI_APP_VERSION=2.2.2-3-r01 \
     BITNAMI_APP_DIR=$BITNAMI_PREFIX/ruby \
     BITNAMI_APP_USER=bitnami
 ENV PATH $BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/bin:$PATH
