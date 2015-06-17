@@ -1,35 +1,336 @@
-# Bitnami Apache Docker Container
+# What is Apache?
 
-## Introduction to Bitnami containers
-Bitnami provides easy-to-use, consistently configured, and always up-to-date container images.  [Click here](https://bitnami.com) for more information on our packaging approach.
+The Apache HTTP Server Project is an effort to develop and maintain an open-source HTTP server for
+modern operating systems including UNIX and Windows NT. The goal of this project is to provide a
+secure, efficient and extensible server that provides HTTP services in sync with the current HTTP
+standards.
 
-## What is Apache?
-The Apache HTTP Server Project is an effort to develop and maintain an open-source HTTP server for modern operating systems including UNIX and Windows NT. The goal of this project is to provide a secure, efficient and extensible server that provides HTTP services in sync with the current HTTP standards.
+# TLDR
 
-## Usage
-You can instantiate a Bitnami Apache container by doing:
-
+```bash
+docker run --name apache bitnami/apache
 ```
-HOST_APACHE_HTTP_PORT=8080
-HOST_APACHE_HTTPS_PORT=8443
-HOST_APACHE_CONF_DIR=`pwd`/apache_conf
-HOST_APACHE_APP_DIR=`pwd`/app
-docker run -it \
-  -p $HOST_APACHE_HTTP_PORT:80 \
-  -p $HOST_APACHE_HTTPS_PORT:443 \
-  -v $HOST_APACHE_CONF_DIR:/conf \
-  -v $HOST_APACHE_APP_DIR:/app \
+
+## Docker Compose
+
+```yaml
+apache:
+  image: bitnami/apache
+```
+
+# Get this image
+
+The recommended way to get the Bitnami Apache Docker Image is to pull the prebuilt image from the
+[Docker Hub Registry](https://hub.docker.com).
+
+```bash
+docker pull bitnami/apache:2.4.12-2-r01
+```
+
+To always get the latest version, pull the `latest` tag.
+
+```bash
+docker pull bitnami/apache:latest
+```
+
+If you wish, you can also build the image yourself.
+
+```bash
+git clone https://github.com/bitnami/bitnami-docker-apache.git
+cd bitnami-docker-apache
+docker build -t bitnami/apache
+```
+
+# Hosting a static website
+
+This Apache image exposes a volume at `/app`. Content mounted here is served by the default
+catch-all virtual host. Mounting an empty directory here will copy the default content to your
+volume.
+
+```bash
+docker run --name apache -v /path/to/app:/app bitnami/apache
+```
+
+or using Docker Compose:
+
+```yaml
+apache:
+  image: bitnami/apache
+  volumes:
+    - path/to/app:/app
+```
+
+# Accessing your server from the host
+
+To access your web server from your host machine you can ask Docker to map a random port on your
+host to ports `80` and `443` exposed in the container.
+
+```bash
+docker run --name apache -P bitnami/apache
+```
+
+Run `docker port` to determine the random ports Docker assigned.
+
+```bash
+$ docker port apache
+443/tcp -> 0.0.0.0:32768
+80/tcp -> 0.0.0.0:32769
+```
+
+You can also manually specify the ports you want forwarded from your host to the container.
+
+```bash
+docker run -p 8080:80 8443:443 bitnami/apache
+```
+
+Access your web server in the browser by navigating to
+[http://localhost:8080](http://localhost:8080/).
+
+# Configuration
+
+## Adding custom virtual hosts
+
+The default Apache.conf includes virtual hosts placed in `/bitnami/apache/conf/vhosts/*.conf`. You can
+mount a directory at `/bitnami/apache/conf/vhosts` from your host containing your custom virtual
+hosts.
+
+```bash
+docker run -v /path/to/apache/vhosts:/bitnami/apache/conf/vhosts bitnami/apache
+```
+
+or using Docker Compose:
+
+```yaml
+apache:
+  image: bitnami/apache
+  volumes:
+    - path/to/apache/vhosts:/bitnami/apache/conf/vhosts
+```
+
+## Full configuration
+
+This container looks for configuration in `/bitnami/apache/conf`. You can mount a directory there
+with your own configuration, or the default configuration will be copied to your directory if it is
+empty.
+
+### Step 1: Run the Apache image
+
+Run the Apache image, mounting a directory from your host.
+
+```bash
+docker run --name apache -v /path/to/apache/conf:/bitnami/apache/conf bitnami/apache
+```
+
+or using Docker Compose:
+
+```yaml
+apache:
+  image: bitnami/apache
+  volumes:
+    - path/to/apache/conf:/bitnami/apache/conf
+```
+
+### Step 2: Edit the configuration
+
+Edit the configuration on your host using your favorite editor.
+
+```bash
+vi /path/to/apache/conf/httpd.conf
+```
+
+### Step 4: Restart Apache
+
+After changing the configuration, restart your Apache container for changes to take effect.
+
+```bash
+docker restart apache
+```
+
+or using Docker Compose:
+
+```bash
+docker-compose restart apache
+```
+
+# Reverse proxy to other containers
+
+Apache can be used to reverse proxy to other containers using Docker's linking system. This is
+particularly useful if you want to serve dynamic content through an Apache frontend. Bitnami provides
+example virtual hosts for all of our runtime containers in `/bitnami/apache/conf/vhosts/`.
+
+**Further Reading:**
+
+  - <a href="http://httpd.apache.org/docs/2.2/mod/mod_proxy.html#forwardreverse" target="_blank">mod_proxy documentation</a>
+
+# Logging
+
+The Bitnami Apache Docker Image supports two different logging modes: logging to stdout, and logging
+to a file.
+
+## Logging to stdout
+
+The default behavior is to log to stdout, as Docker expects. These will be collected by Docker,
+converted to JSON and stored in the host, to be accessible via the `docker logs` command.
+
+```bash
+docker logs apache
+```
+
+or using Docker Compose:
+
+```bash
+docker-compose logs apache
+```
+
+This method of logging has the downside of not being easy to manage. Without an easy way to rotate
+logs, they could grow exponentially and take up large amounts of disk space on your host.
+
+## Logging to file
+
+To log to file, run the Apache image, mounting a directory from your host at `/bitnami/apache/logs`.
+This will instruct the container to send logs to your directory.
+
+```bash
+docker run --name apache -v /path/to/apache/logs:/bitnami/apache/logs bitnami/apache
+```
+
+or using Docker Compose:
+
+```yaml
+apache:
+  image: bitnami/apache
+  volumes:
+    - path/to/apache/logs:/bitnami/apache/logs
+```
+
+To perform operations (e.g. logrotate) on the logs, mount the same directory in a container designed
+to operate on log files, such as logstash.
+
+# Maintenance
+
+## Backing up your container
+
+To backup your configuration and logs, follow these simple steps:
+
+### Step 1: Stop the currently running container
+
+```bash
+docker stop apache
+```
+
+or using Docker Compose:
+
+```bash
+docker-compose stop apache
+```
+
+### Step 2: Run the backup command
+
+We need to mount two volumes in a container we will use to create the backup: a directory on your
+host to store the backup in, and the volumes from the container we just stopped so we can access the
+data.
+
+```bash
+docker run --rm -v /path/to/backups:/backups --volumes-from apache busybox \
+  cp -a /bitnami/apache /backups/latest
+```
+
+or using Docker Compose:
+
+```bash
+docker run --rm -v /path/to/backups:/backups --volumes-from `docker-compose ps -q apache` busybox \
+  cp -a /bitnami/apache /backups/latest
+```
+
+**Note!**
+If you only need to backup configuration, you can change the first argument to `cp` to
+`/bitnami/apache/conf`.
+
+## Restoring a backup
+
+Restoring a backup is as simple as mounting the backup as volumes in the container.
+
+```bash
+docker run -v /path/to/backups/latest/conf:/bitnami/apache/conf \
+  -v /path/to/backups/latest/logs:/bitnami/apache/logs \
   bitnami/apache
 ```
 
-### Ports
-The command above allows you to access Apache via ports 8080 and 8443 (or whatever alternative ports you pick) on the host.  These will map to ports 80 and 443 respectively inside the container.
+or using Docker Compose:
 
-### Configuration
-Apache configuration should live in $HOST_APACHE_CONF_DIR on the host.  You can edit files in that directory to change the behavior of Apache running inside the container.
+```yaml
+apache:
+  image: bitnami/apache
+  volumes:
+    - path/to/backups/latest/conf:/bitnami/apache/conf
+    - path/to/backups/latest/logs:/bitnami/apache/logs
+```
 
-### Application content
-Static content that you wish to be served via Apache should live in $HOST_APACHE_APP_DIR.
+## Upgrade this image
 
-### Logs
-By default, without a mapping for /logs specified, the container will send the access and error logs to stdout and stderr respectively. You can optionally map a directory on the host to /logs inside the container (with another -v option); this will write the access and error logs to that directory instead.
+Bitnami provides up-to-date versions of Apache, including security patches, soon after they are made
+upstream. We recommend that you follow these steps to upgrade your container.
+
+### Step 1: Get the updated image
+
+```bash
+docker pull bitnami/apache:2.4.12-2-r01
+```
+
+or if you're using Docker Compose, update the value of the image property to
+`bitnami/apache:2.4.12-2-r01`.
+
+### Step 2: Stop and backup the currently running container
+
+Before continuing, you should backup your container's configuration and logs, unless you are
+mounting these volumes from your host.
+
+Follow the steps on [creating a backup](#backing-up-your-container).
+
+### Step 2: Remove the currently running container
+
+```bash
+docker rm -v apache
+```
+
+or using Docker Compose:
+
+```bash
+docker-compose rm -v apache
+```
+
+### Step 3: Run the new image
+
+Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if
+necessary.
+
+```bash
+docker run --name apache bitnami/apache:2.4.12-2-r01
+```
+
+or using Docker Compose:
+
+```bash
+docker-compose start apache
+```
+
+# Contributing
+
+We'd love for you to contribute to this container. You can request new features by creating an
+[issue](https://github.com/bitnami/bitnami-docker-apache/issues), or submit a
+[pull request](https://github.com/bitnami/bitnami-docker-apache/pulls) with your contribution.
+
+# Issues
+
+If you encountered a problem running this container, you can file an
+[issue](https://github.com/bitnami/bitnami-docker-apache/issues). For us to provide better support,
+be sure to include the following information in your issue:
+
+- Host OS and version
+- Docker version (`docker version`)
+- Output of `docker info`
+- Version of this container (`echo $BITNAMI_APP_VERSION` inside the container)
+- The command you used to run the container, and any relevant output you saw (masking any sensitive
+information)
+
+# License
