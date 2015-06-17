@@ -10,7 +10,7 @@ docker run --name nginx bitnami/nginx
 
 ## Docker Compose
 
-```less
+```yaml
 nginx:
   image: bitnami/nginx
 ```
@@ -33,7 +33,7 @@ docker pull bitnami/nginx:latest
 If you wish, you can also build the image yourself.
 
 ```bash
-git clone https://github.com/Bitnami/bitnami-docker-nginx.git
+git clone https://github.com/bitnami/bitnami-docker-nginx.git
 cd docker-nginx
 docker build -t bitnami/nginx
 ```
@@ -49,11 +49,11 @@ docker run -v /path/to/app:/app bitnami/nginx
 
 or using Docker Compose:
 
-```less
+```yaml
 nginx:
   image: bitnami/nginx
   volumes:
-    - /path/to/app:/app
+    - path/to/app:/app
 ```
 
 # Accessing your server from the host
@@ -96,11 +96,11 @@ docker run -v /path/to/nginx/vhosts:/bitnami/nginx/conf/vhosts bitnami/nginx
 
 or using Docker Compose:
 
-```less
+```yaml
 nginx:
   image: bitnami/nginx
   volumes:
-    - /path/to/nginx/vhosts:/bitnami/nginx/conf/vhosts
+    - path/to/nginx/vhosts:/bitnami/nginx/conf/vhosts
 ```
 
 ## Full configuration
@@ -119,11 +119,11 @@ docker run --name nginx -v /path/to/nginx/conf:/bitnami/nginx/conf bitnami/nginx
 
 or using Docker Compose:
 
-```less
+```yaml
 nginx:
   image: bitnami/nginx
   volumes:
-    - /path/to/nginx/conf:/bitnami/nginx/conf
+    - path/to/nginx/conf:/bitnami/nginx/conf
 ```
 
 ### Step 2: Edit the configuration
@@ -155,7 +155,8 @@ particularly useful if you want to serve dynamic content through an nginx fronte
 example virtual hosts for all of our runtime containers in `/bitnami/nginx/conf/vhosts/`.
 
 **Further Reading:**
-  - [nginx reverse proxy](http://nginx.com/resources/admin-guide/reverse-proxy/)
+
+  - <a href="http://nginx.com/resources/admin-guide/reverse-proxy/" target="_blank">nginx reverse proxy</a>
 
 # Logging
 
@@ -182,8 +183,8 @@ logs, they could grow exponentially and take up large amounts of disk space on y
 
 ## Logging to file
 
-Run the nginx image, mounting a directory from your host at `/bitnami/nginx/logs`. This will
-instruct the container to send logs to your directory.
+To log to file, run the nginx image, mounting a directory from your host at `/bitnami/nginx/logs`.
+This will instruct the container to send logs to your directory.
 
 ```bash
 docker run --name nginx -v /path/to/nginx/logs:/bitnami/nginx/logs bitnami/nginx
@@ -191,11 +192,11 @@ docker run --name nginx -v /path/to/nginx/logs:/bitnami/nginx/logs bitnami/nginx
 
 or using Docker Compose:
 
-```less
+```yaml
 nginx:
   image: bitnami/nginx
   volumes:
-    - /path/to/nginx/logs:/bitnami/nginx/logs
+    - path/to/nginx/logs:/bitnami/nginx/logs
 ```
 
 To perform operations (e.g. logrotate) on the logs, mount the same directory in a container designed
@@ -253,12 +254,12 @@ docker run -v /path/to/backups/latest/conf:/bitnami/nginx/conf \
 
 or using Docker Compose:
 
-```less
+```yaml
 nginx:
   image: bitnami/nginx
   volumes:
-    - /path/to/backups/latest/conf:/bitnami/nginx/conf
-    - /path/to/backups/latest/logs:/bitnami/nginx/logs
+    - path/to/backups/latest/conf:/bitnami/nginx/conf
+    - path/to/backups/latest/logs:/bitnami/nginx/logs
 ```
 
 ## Upgrade this image
@@ -277,7 +278,7 @@ or if you're using Docker Compose, update the value of the image property to
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's data, configuration and logs, unless you are
+Before continuing, you should backup your container's configuration and logs, unless you are
 mounting these volumes from your host.
 
 Follow the steps on [creating a backup](#backing-up-your-container).
@@ -312,13 +313,13 @@ docker-compose start nginx
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an
-[issue](https://github.com/Bitnami/bitnami-docker-nginx/issues), or submit a
-[pull request](https://github.com/Bitnami/bitnami-docker-nginx/pulls) with your contribution.
+[issue](https://github.com/bitnami/bitnami-docker-nginx/issues), or submit a
+[pull request](https://github.com/bitnami/bitnami-docker-nginx/pulls) with your contribution.
 
 # Issues
 
 If you encountered a problem running this container, you can file an
-[issue](https://github.com/Bitnami/bitnami-docker-nginx/issues). For us to provide better support,
+[issue](https://github.com/bitnami/bitnami-docker-nginx/issues). For us to provide better support,
 be sure to include the following information in your issue:
 
 - Host OS and version
