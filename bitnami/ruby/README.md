@@ -40,8 +40,8 @@ If you wish, you can also build the image yourself.
 
 ```bash
 git clone https://github.com/bitnami/bitnami-docker-ruby.git
-cd docker-ruby
-docker build -t bitnami/ruby
+cd bitnami-docker-ruby
+docker build -t bitnami/ruby .
 ```
 
 # Entering the REPL
