@@ -3,7 +3,7 @@
 > Ruby is a dynamic, open source programming language with a focus on simplicity and productivity.
 > It has an elegant syntax that is natural to read and easy to write.
 
-<a href="https://www.ruby-lang.org/en/" target="_blank">ruby-lang.org</a>
+[ruby-lang.org](https://www.ruby-lang.org/en/)
 
 # TLDR
 
@@ -13,7 +13,7 @@ docker run -it --name ruby bitnami/ruby
 
 ## Docker Compose
 
-```yaml
+```
 ruby:
   image: bitnami/ruby
   command: ruby script.rb
@@ -55,7 +55,7 @@ docker run -it --name ruby bitnami/ruby
 
 **Further Reading:**
 
-- <a href="http://ruby-doc.org/stdlib-2.0.0/libdoc/irb/rdoc/IRB.html" target="_blank">Ruby IRB Documentation</a>
+  - [Ruby IRB Documentation](http://ruby-doc.org/stdlib-2.0.0/libdoc/irb/rdoc/IRB.html)
 
 # Running your Ruby script
 
@@ -79,7 +79,7 @@ docker run -it --name ruby -v /path/to/ruby/app:/app bitnami/ruby \
 
 or using Docker Compose:
 
-```yaml
+```
 ruby:
   image: bitnami/ruby
   command: "sh -c 'bundle install && ruby script.rb'"
@@ -87,18 +87,18 @@ ruby:
 
 **Further Reading:**
 
-- <a href="https://rubygems.org/" target="_blank">rubygems.org</a>
-- <a href="http://bundler.io/" target="_blank">bundler.io</a>
+  - [rubygems.org](https://rubygems.org/)
+  - [bundler.io](http://bundler.io/)
 
 # Accessing a Ruby app running a web server
 
 This image exposes port `3000` in the container, so you should ensure that your web server is
 binding to port `3000`, as well as accepting remote connections.
 
-Below is an example of a <a href="http://www.sinatrarb.com/" target="_blank">Sinatra</a> app
-listening to remote connections on port `3000`:
+Below is an example of a [Sinatra](http://www.sinatrarb.com/) app listening to remote connections on
+port `3000`:
 
-```ruby
+```
 require 'sinatra'
 
 set :bind, '0.0.0.0'
@@ -145,12 +145,12 @@ different Ruby instances, etc.
 
 ### Step 1: Create a virtual host
 
-Let's create an nginx virtual host to reverse proxy to our Ruby container. <a
-href="https://github.com/bitnami/bitnami-docker-nginx" target="_blank">The Bitnami nginx Docker
-Image</a> ships with some example virtual hosts for connecting to Bitnami runtime images. We will
-make use of the Ruby example:
+Let's create an nginx virtual host to reverse proxy to our Ruby container.
+[The Bitnami nginx Docker Image](https://github.com/bitnami/bitnami-docker-nginx) ships with some
+example virtual hosts for connecting to Bitnami runtime images. We will make use of the Ruby
+example:
 
-```nginx
+```
 server {
     listen 0.0.0.0:80;
     server_name yourapp.com;
@@ -186,7 +186,7 @@ docker run -it --name ruby -v /path/to/ruby/app:/app bitnami/ruby ruby script.rb
 
 or using Docker Compose:
 
-```yaml
+```
 ruby:
   image: bitnami/ruby
   command: ruby script.rb
@@ -210,7 +210,7 @@ docker run -it -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf \
 
 or using Docker Compose:
 
-```yaml
+```
 nginx:
   image: bitnami/nginx
   links:
