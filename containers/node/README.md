@@ -38,8 +38,8 @@ If you wish, you can also build the image yourself.
 
 ```bash
 git clone https://github.com/bitnami/bitnami-docker-node.git
-cd docker-node.js
-docker build -t bitnami/node
+cd bitnami-docker-node
+docker build -t bitnami/node .
 ```
 
 # Entering the REPL
