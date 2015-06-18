@@ -62,7 +62,7 @@ or using Docker Compose:
 mariadb:
   image: bitnami/mariadb
   volumes:
-    - path/to/data:/bitnami/mariadb/data
+    - /path/to/data:/bitnami/mariadb/data
 ```
 
 # Linking
@@ -238,7 +238,7 @@ or using Docker Compose:
 mariadb:
   image: bitnami/mariadb
   volumes:
-    - path/to/mariadb/conf:/bitnami/mariadb/conf
+    - /path/to/mariadb/conf:/bitnami/mariadb/conf
 ```
 
 ### Step 2: Edit the configuration
@@ -321,7 +321,7 @@ or using Docker Compose:
 mariadb:
   image: bitnami/mariadb
   volumes:
-    - path/to/mariadb/logs:/bitnami/mariadb/logs
+    - /path/to/mariadb/logs:/bitnami/mariadb/logs
 ```
 
 To perform operations (e.g. logrotate) on the logs, mount the same directory in a container designed
