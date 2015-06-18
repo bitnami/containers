@@ -121,8 +121,8 @@ memcached:
 You can configure your Memcached server by passing command-line options when running the image.
 
 ```bash
-# Setting max connections to 10
-docker run bitnami/memcached -c 10
+# Setting max connections to 100
+docker run --name memcached bitnami/memcached -c 100
 ```
 
 or using Docker Compose:
