@@ -54,6 +54,15 @@ add_vhost() {
   }
 }
 
+@test "Logs to stdout" {
+  create_container
+  docker run --link $CONTAINER_NAME:nginx --rm bitnami/nginx curl -L -i http://nginx:80
+  docker logs $CONTAINER_NAME | {
+    run grep "GET / HTTP/1.1"
+    [ $status = 0 ]
+  }
+}
+
 @test "All the volumes exposed" {
   create_container
   docker inspect $CONTAINER_NAME | {
