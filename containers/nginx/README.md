@@ -1,4 +1,5 @@
 # What is nginx?
+
 nginx (pronounced "engine-x") is an open source reverse proxy server for HTTP, HTTPS, SMTP, POP3,
 and IMAP protocols, as well as a load balancer, HTTP cache, and a web server (origin server).
 
@@ -10,7 +11,7 @@ docker run --name nginx bitnami/nginx
 
 ## Docker Compose
 
-```yaml
+```
 nginx:
   image: bitnami/nginx
 ```
@@ -49,7 +50,7 @@ docker run -v /path/to/app:/app bitnami/nginx
 
 or using Docker Compose:
 
-```yaml
+```
 nginx:
   image: bitnami/nginx
   volumes:
@@ -96,7 +97,7 @@ docker run -v /path/to/nginx/vhosts:/bitnami/nginx/conf/vhosts bitnami/nginx
 
 or using Docker Compose:
 
-```yaml
+```
 nginx:
   image: bitnami/nginx
   volumes:
@@ -119,7 +120,7 @@ docker run --name nginx -v /path/to/nginx/conf:/bitnami/nginx/conf bitnami/nginx
 
 or using Docker Compose:
 
-```yaml
+```
 nginx:
   image: bitnami/nginx
   volumes:
@@ -156,7 +157,7 @@ example virtual hosts for all of our runtime containers in `/bitnami/nginx/conf/
 
 **Further Reading:**
 
-  - <a href="http://nginx.com/resources/admin-guide/reverse-proxy/" target="_blank">nginx reverse proxy</a>
+  - [nginx reverse proxy](http://nginx.com/resources/admin-guide/reverse-proxy/)
 
 # Logging
 
@@ -192,7 +193,7 @@ docker run --name nginx -v /path/to/nginx/logs:/bitnami/nginx/logs bitnami/nginx
 
 or using Docker Compose:
 
-```yaml
+```
 nginx:
   image: bitnami/nginx
   volumes:
@@ -254,7 +255,7 @@ docker run -v /path/to/backups/latest/conf:/bitnami/nginx/conf \
 
 or using Docker Compose:
 
-```yaml
+```
 nginx:
   image: bitnami/nginx
   volumes:
@@ -283,7 +284,7 @@ mounting these volumes from your host.
 
 Follow the steps on [creating a backup](#backing-up-your-container).
 
-### Step 2: Remove the currently running container
+### Step 3: Remove the currently running container
 
 ```bash
 docker rm -v nginx
@@ -295,7 +296,7 @@ or using Docker Compose:
 docker-compose rm -v nginx
 ```
 
-### Step 3: Run the new image
+### Step 4: Run the new image
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if
 necessary.
