@@ -19,14 +19,14 @@ teardown() {
   fi
 }
 
-@test "node and npm in the path" {
+@test "node and npm installed" {
   run docker exec $CONTAINER_NAME npm -v
   [ "$status" = 0 ]
   run docker exec $CONTAINER_NAME node -v
   [ "$status" = 0 ]
 }
 
-@test "python in the path" {
+@test "python installed" {
   skip
   run docker exec $CONTAINER_NAME python -v
   [ "$status" = 0 ]
