@@ -1,11 +1,12 @@
 FROM bitnami/base-ubuntu:14.04-buildpack-onbuild
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_APP_NAME=nodejs \
+ENV BITNAMI_APP_NAME=node \
     BITNAMI_APP_USER=bitnami \
-    BITNAMI_APP_VERSION=0.12.4-2 \
-    BITNAMI_APP_DIR=$BITNAMI_PREFIX/nodejs \
-    PATH=$BITNAMI_PREFIX/python/bin:$BITNAMI_PREFIX/nodejs/bin:$BITNAMI_PREFIX/common/bin:$PATH
+    BITNAMI_APP_VERSION=0.12.4-2-r01 \
+    BITNAMI_APP_DIR=$BITNAMI_PREFIX/nodejs
+
+ENV PATH=$BITNAMI_PREFIX/python/bin:$BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/bin:$PATH
 
 RUN sh $BITNAMI_PREFIX/install.sh
 
