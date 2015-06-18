@@ -36,8 +36,8 @@ If you wish, you can also build the image yourself.
 
 ```bash
 git clone https://github.com/bitnami/bitnami-docker-memcached.git
-cd docker-memcached
-docker build -t bitnami/memcached
+cd bitnami-docker-memcached
+docker build -t bitnami/memcached .
 ```
 
 
