@@ -38,7 +38,7 @@ If you wish, you can also build the image yourself.
 ```bash
 git clone https://github.com/bitnami/bitnami-docker-apache.git
 cd bitnami-docker-apache
-docker build -t bitnami/apache
+docker build -t bitnami/apache .
 ```
 
 # Hosting a static website
