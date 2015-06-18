@@ -13,7 +13,7 @@ docker run --name apache bitnami/apache
 
 ## Docker Compose
 
-```yaml
+```
 apache:
   image: bitnami/apache
 ```
@@ -53,7 +53,7 @@ docker run --name apache -v /path/to/app:/app bitnami/apache
 
 or using Docker Compose:
 
-```yaml
+```
 apache:
   image: bitnami/apache
   volumes:
@@ -100,7 +100,7 @@ docker run -v /path/to/apache/vhosts:/bitnami/apache/conf/vhosts bitnami/apache
 
 or using Docker Compose:
 
-```yaml
+```
 apache:
   image: bitnami/apache
   volumes:
@@ -123,7 +123,7 @@ docker run --name apache -v /path/to/apache/conf:/bitnami/apache/conf bitnami/ap
 
 or using Docker Compose:
 
-```yaml
+```
 apache:
   image: bitnami/apache
   volumes:
@@ -160,7 +160,7 @@ example virtual hosts for all of our runtime containers in `/bitnami/apache/conf
 
 **Further Reading:**
 
-  - <a href="http://httpd.apache.org/docs/2.2/mod/mod_proxy.html#forwardreverse" target="_blank">mod_proxy documentation</a>
+  - [mod_proxy documentation](http://httpd.apache.org/docs/2.2/mod/mod_proxy.html#forwardreverse)
 
 # Logging
 
@@ -196,7 +196,7 @@ docker run --name apache -v /path/to/apache/logs:/bitnami/apache/logs bitnami/ap
 
 or using Docker Compose:
 
-```yaml
+```
 apache:
   image: bitnami/apache
   volumes:
@@ -258,7 +258,7 @@ docker run -v /path/to/backups/latest/conf:/bitnami/apache/conf \
 
 or using Docker Compose:
 
-```yaml
+```
 apache:
   image: bitnami/apache
   volumes:
@@ -287,7 +287,7 @@ mounting these volumes from your host.
 
 Follow the steps on [creating a backup](#backing-up-your-container).
 
-### Step 2: Remove the currently running container
+### Step 3: Remove the currently running container
 
 ```bash
 docker rm -v apache
@@ -299,7 +299,7 @@ or using Docker Compose:
 docker-compose rm -v apache
 ```
 
-### Step 3: Run the new image
+### Step 4: Run the new image
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if
 necessary.
