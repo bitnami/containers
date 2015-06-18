@@ -9,3 +9,7 @@ mv html html.defaults
 ln -s $BITNAMI_APP_DIR/conf $BITNAMI_APP_VOL_PREFIX/conf
 ln -s $BITNAMI_APP_DIR/logs $BITNAMI_APP_VOL_PREFIX/logs
 ln -s $BITNAMI_APP_DIR/html /app
+
+# Log to stdout
+ln -sf /dev/stdout $BITNAMI_APP_VOL_PREFIX/logs/access.log
+ln -sf /dev/stderr $BITNAMI_APP_VOL_PREFIX/logs/error.log
