@@ -11,7 +11,7 @@ docker run -it --name node bitnami/node
 
 ## Docker Compose
 
-```yaml
+```
 node:
   image: bitnami/node
   command: node script.js
@@ -53,7 +53,7 @@ docker run -it --name node bitnami/node
 
 **Further Reading:**
 
-- <a href="https://nodejs.org/api/repl.html" target="_blank">nodejs.org/api/repl.html</a>
+  - [nodejs.org/api/repl.html](https://nodejs.org/api/repl.html)
 
 # Running your node.js script
 
@@ -77,7 +77,7 @@ docker run -it --name node -v /path/to/node/app:/app bitnami/node npm start
 
 or using Docker Compose:
 
-```yaml
+```
 node:
   image: bitnami/node
   command: "sh -c 'npm install && npm start'"
@@ -85,8 +85,8 @@ node:
 
 **Further Reading:**
 
-- <a href="https://docs.npmjs.com/files/package.json" target="_blank">package.json documentation</a>
-- <a href="https://docs.npmjs.com/misc/scripts#default-values" target="_blank">npm start script</a>
+- [package.json documentation](https://docs.npmjs.com/files/package.json)
+- [npm start script](https://docs.npmjs.com/misc/scripts#default-values)
 
 # Accessing a node.js app running a web server
 
@@ -96,7 +96,7 @@ binding to port `3000`, as well as accepting remote connections.
 Below is an example of an [express.js](http://expressjs.com/) app listening to remote connections on
 port `3000`:
 
-```js
+```
 var express = require('express');
 var app = express();
 
@@ -150,12 +150,12 @@ different node.js instances, etc.
 
 ### Step 1: Create a virtual host
 
-Let's create an nginx virtual host to reverse proxy to our node.js container. <a
-href="https://github.com/bitnami/bitnami-docker-nginx" target="_blank">The Bitnami nginx Docker
-Image</a> ships with some example virtual hosts for connecting to Bitnami runtime images. We will
-make use of the node.js example:
+Let's create an nginx virtual host to reverse proxy to our node.js container.
+[The Bitnami nginx Docker Image](https://github.com/bitnami/bitnami-docker-nginx) ships with some
+example virtual hosts for connecting to Bitnami runtime images. We will make use of the node.js
+example:
 
-```nginx
+```
 server {
     listen 0.0.0.0:80;
     server_name yourapp.com;
@@ -191,7 +191,7 @@ docker run -it --name node -v /path/to/node/app:/app bitnami/node npm start
 
 or using Docker Compose:
 
-```yaml
+```
 node:
   image: bitnami/node
   command: npm start
@@ -215,7 +215,7 @@ docker run -it -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf \
 
 or using Docker Compose:
 
-```yaml
+```
 nginx:
   image: bitnami/nginx
   links:
