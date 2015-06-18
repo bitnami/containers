@@ -39,8 +39,8 @@ If you wish, you can also build the image yourself.
 
 ```bash
 git clone https://github.com/bitnami/bitnami-docker-php-fpm.git
-cd docker-php-fpm
-docker build -t bitnami/php-fpm
+cd bitnami-docker-php-fpm
+docker build -t bitnami/php-fpm .
 ```
 
 # Linking
