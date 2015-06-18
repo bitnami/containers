@@ -198,7 +198,7 @@ vi /path/to/phpfpm/conf/php-fpm.conf
 
 ### Step 4: Restart PHP-FPM
 
-After changing the configuration, restart your PHP-FPM container for changes to take effect.
+After changing the configuration, restart your PHP-FPM container for the changes to take effect.
 
 ```bash
 docker restart phpfpm
@@ -208,6 +208,13 @@ or using Docker Compose:
 
 ```bash
 docker-compose restart phpfpm
+```
+
+**Note!**
+You can also reload PHP-FPM by sending the `USR2` signal to the container using the `docker kill` command.
+
+```bash
+docker kill -s USR2 phpfpm
 ```
 
 # Logging
