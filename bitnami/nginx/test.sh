@@ -1,9 +1,9 @@
 #!/usr/bin/env bats
 
-CONTAINER_NAME=nginx
+CONTAINER_NAME=bitnami-nginx-test
 IMAGE_NAME=bitnami/nginx
 SLEEP_TIME=2
-VOL_PREFIX=/bitnami/$CONTAINER_NAME
+VOL_PREFIX=/bitnami/nginx
 HOST_VOL_PREFIX=/tmp/bitnami/$CONTAINER_NAME
 
 # Check config override from host
@@ -19,7 +19,7 @@ teardown() {
 
 create_container(){
   docker run -itd --name $CONTAINER_NAME \
-   -p 1111:80 -p 2222:443 -p 3333:81 $IMAGE_NAME
+   --expose 81 $IMAGE_NAME
   sleep $SLEEP_TIME
 }
 
@@ -30,12 +30,12 @@ add_vhost() {
 
 @test "We can connect to the port 80 and 443" {
   create_container
-  curl -L -i http://127.0.0.1:1111 | {
+  docker run --link $CONTAINER_NAME:nginx --rm bitnami/nginx curl -L -i http://nginx:80 | {
     run grep "200 OK"
     [ $status = 0 ]
   }
 
-  curl -L -i -k https://127.0.0.1:2222 | {
+  docker run --link $CONTAINER_NAME:nginx --rm bitnami/nginx curl -L -i -k https://nginx:443 | {
     run grep "200 OK"
     [ $status = 0 ]
   }
@@ -43,12 +43,12 @@ add_vhost() {
 
 @test "Returns default page" {
   create_container
-  curl -L -i http://127.0.0.1:1111 | {
+  docker run --link $CONTAINER_NAME:nginx --rm bitnami/nginx curl -L -i http://nginx:80 | {
     run grep "It works!"
     [ $status = 0 ]
   }
 
-  curl -L -i -k https://127.0.0.1:2222 | {
+  docker run --link $CONTAINER_NAME:nginx --rm bitnami/nginx curl -L -i -k https://nginx:443 | {
     run grep "It works!"
     [ $status = 0 ]
   }
@@ -69,7 +69,7 @@ add_vhost() {
   add_vhost
   docker restart $CONTAINER_NAME
   sleep $SLEEP_TIME
-  curl -L -i http://127.0.0.1:3333 | {
+  docker run --link $CONTAINER_NAME:nginx --rm bitnami/nginx curl -L -i http://nginx:81 | {
     run grep "405 Not Allowed"
     [ $status = 0 ]
   }
