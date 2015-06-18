@@ -10,7 +10,7 @@ docker run --name mariadb bitnami/mariadb
 
 ## Docker Compose
 
-```yaml
+```
 mariadb:
   image: bitnami/mariadb
 ```
@@ -58,7 +58,7 @@ docker run -v /path/to/data:/bitnami/mariadb/data bitnami/mariadb
 
 or using Docker Compose:
 
-```yaml
+```
 mariadb:
   image: bitnami/mariadb
   volumes:
@@ -104,8 +104,7 @@ server, which we set to the hostname we created in the link.
 
 **Note!**
 You can also run the MySQL client in the same container the server is running in using the Docker
-<a href="https://docs.docker.com/reference/commandline/cli/#exec" target="_blank">exec</a>
-command.
+[exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
 
 ```bash
 docker exec -it mariadb-server mysql -u root
@@ -117,7 +116,7 @@ docker exec -it mariadb-server mysql -u root
 
 Copy the snippet below into your `docker-compose.yml` to add MariaDB to your application.
 
-```yaml
+```
 mariadb:
   image: bitnami/mariadb
 ```
@@ -127,7 +126,7 @@ mariadb:
 Update the definitions for containers you want to access your MariaDB server from to include a link
 to the `mariadb` entry you added in Step 1.
 
-```yaml
+```
 myapp:
   image: myapp
   links:
@@ -149,7 +148,7 @@ docker run --name mariadb -e MARIADB_PASSWORD=my_password bitnami/mariadb
 
 or using Docker Compose:
 
-```yaml
+```
 mariadb:
   image: bitnami/mariadb
   environment:
@@ -168,7 +167,7 @@ docker run --name mariadb -e MARIADB_DATABASE=my_database bitnami/mariadb
 
 or using Docker Compose:
 
-```yaml
+```
 mariadb:
   image: bitnami/mariadb
   environment:
@@ -190,7 +189,7 @@ docker run --name mariadb -e MARIADB_USER=my_user -e MARIADB_DATABASE=my_databas
 
 or using Docker Compose:
 
-```yaml
+```
 mariadb:
   image: bitnami/mariadb
   environment:
@@ -209,14 +208,15 @@ docker run bitnami/mariadb --open-files-limit=2
 
 or using Docker Compose:
 
-```yaml
+```
 mariadb:
   image: bitnami/mariadb
   command: --open-files-limit=2
 ```
 
 **Further Reading:**
-  - <a href="https://dev.mysql.com/doc/refman/5.1/en/server-options.html" target="_blank">MySQL Server Command Options</a>
+
+  - [MySQL Server Command Options](https://dev.mysql.com/doc/refman/5.1/en/server-options.html)
   - [Caveats](#caveats)
 
 ## Configuration file
@@ -234,7 +234,7 @@ docker run --name mariadb -v /path/to/mariadb/conf:/bitnami/mariadb/conf bitnami
 
 or using Docker Compose:
 
-```yaml
+```
 mariadb:
   image: bitnami/mariadb
   volumes:
@@ -264,7 +264,8 @@ docker-compose restart mariadb
 ```
 
 **Further Reading:**
-  - <a href="https://dev.mysql.com/doc/refman/5.1/en/mysqld-option-tables.html" target="_blank">Server Option and Variable Reference</a>
+
+  - [Server Option and Variable Reference](https://dev.mysql.com/doc/refman/5.1/en/mysqld-option-tables.html)
   - [Caveats](#caveats)
 
 ## Caveats
@@ -316,7 +317,7 @@ docker run --name mariadb -v /path/to/mariadb/logs:/bitnami/mariadb/logs bitnami
 
 or using Docker Compose:
 
-```yaml
+```
 mariadb:
   image: bitnami/mariadb
   volumes:
@@ -379,7 +380,7 @@ docker run -v /path/to/backups/latest/data:/bitnami/mariadb/data \
 
 or using Docker Compose:
 
-```yaml
+```
 mariadb:
   image: bitnami/mariadb
   volumes:
@@ -409,7 +410,7 @@ mounting these volumes from your host.
 
 Follow the steps on [creating a backup](#backing-up-your-container).
 
-### Step 2: Remove the currently running container
+### Step 3: Remove the currently running container
 
 ```bash
 docker rm -v mariadb
@@ -421,7 +422,7 @@ or using Docker Compose:
 docker-compose rm -v mariadb
 ```
 
-### Step 3: Run the new image
+### Step 4: Run the new image
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if
 necessary.
