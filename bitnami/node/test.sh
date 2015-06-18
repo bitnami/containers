@@ -1,11 +1,29 @@
 #!/usr/bin/env bats
-CONTAINER_NAME=node-test
+CONTAINER_NAME=bitnami-node-test
 IMAGE_NAME=bitnami/node
-SLEEP_TIME=3
 
 create_container(){
   docker run -itd --name $CONTAINER_NAME $IMAGE_NAME
-  sleep $SLEEP_TIME
+}
+
+add_app() {
+  docker exec $CONTAINER_NAME sh -c "echo \"
+var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+  res.send('The night is dark and full of terrors');
+});
+
+var server = app.listen(3000, '0.0.0.0', function () {
+
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('Example app listening at http://%s:%s', host, port);
+
+});
+\" > /app/server.js"
 }
 
 setup () {
@@ -37,10 +55,17 @@ teardown() {
   [ "$status" = 0 ]
 }
 
-@test "All the volumes exposed" {
+@test "all the volumes exposed" {
   docker inspect $CONTAINER_NAME | {
     run grep "\"Volumes\":" -A 1
     [[ "$output" =~ "/app" ]]
   }
 }
 
+@test "port 3000 exposed" {
+  add_app
+  docker exec -d $CONTAINER_NAME sh -c 'npm install express && node server.js'
+  sleep 10
+  run docker run --rm --link $CONTAINER_NAME:node bitnami/node curl http://node:3000/
+  [[ "$output" =~ "The night is dark and full of terrors" ]]
+}
