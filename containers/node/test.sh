@@ -2,7 +2,6 @@
 CONTAINER_NAME=node-test
 IMAGE_NAME=bitnami/node
 SLEEP_TIME=3
-VOL_PREFIX=/bitnami/$CONTAINER_NAME
 
 create_container(){
   docker run -itd --name $CONTAINER_NAME $IMAGE_NAME
@@ -34,7 +33,6 @@ teardown() {
 
 @test "can install npm modules with system requirements" {
   run docker exec $CONTAINER_NAME\
-  # test npm modules
   npm install imagemagick-native express bower
   [ "$status" = 0 ]
 }
