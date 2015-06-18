@@ -35,8 +35,8 @@ If you wish, you can also build the image yourself.
 
 ```bash
 git clone https://github.com/bitnami/bitnami-docker-nginx.git
-cd docker-nginx
-docker build -t bitnami/nginx
+cd bitnami-docker-nginx
+docker build -t bitnami/nginx .
 ```
 
 # Hosting a static website
