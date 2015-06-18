@@ -243,11 +243,11 @@ logs, they could grow exponentially and take up large amounts of disk space on y
 ## Logging to file
 
 To log to file, run the PHP-FPM image, mounting a directory from your host at
-`/bitnami/phpfpm/logs`. This will instruct the container to send logs to a `mysqld.log` file in the
+`/bitnami/phpfpm/logs`. This will instruct the container to send logs to a `php-fpm.log` file in the
 mounted volume.
 
 ```bash
-docker run --name phpfpm -v /path/to/phpfpm/logs:/bitnami/phpfpm/logs bitnami/phpfpm
+docker run --name phpfpm -v /path/to/phpfpm/logs:/bitnami/phpfpm/logs bitnami/php-fpm
 ```
 
 or using Docker Compose:
