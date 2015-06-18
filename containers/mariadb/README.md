@@ -400,7 +400,7 @@ docker pull bitnami/mariadb:5.5.42-2
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/mariadb:5.5.42-2
+`bitnami/mariadb:5.5.42-2`.
 
 ### Step 2: Stop and backup the currently running container
 
