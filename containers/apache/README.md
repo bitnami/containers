@@ -80,7 +80,7 @@ $ docker port apache
 You can also manually specify the ports you want forwarded from your host to the container.
 
 ```bash
-docker run -p 8080:80 8443:443 bitnami/apache
+docker run -p 8080:80 -p 8443:443 bitnami/apache
 ```
 
 Access your web server in the browser by navigating to
