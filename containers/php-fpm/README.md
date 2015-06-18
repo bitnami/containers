@@ -210,6 +210,13 @@ or using Docker Compose:
 docker-compose restart phpfpm
 ```
 
+**Note!**
+You can also reload PHP-FPM by sending the `USR2` signal to the container using the `docker kill` command.
+
+```bash
+docker kill -s USR2 phpfpm
+```
+
 # Logging
 
 The Bitnami PHP-FPM Docker Image supports two different logging modes: logging to stdout, and
