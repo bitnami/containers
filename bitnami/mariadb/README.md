@@ -20,7 +20,7 @@ mariadb:
 The recommended way to get the Bitnami MariaDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com).
 
 ```bash
-docker pull bitnami/mariadb:5.5.42-1-r02
+docker pull bitnami/mariadb:5.5.42-2
 ```
 
 To always get the latest version, pull the `latest` tag.
@@ -396,11 +396,11 @@ made upstream. We recommend that you follow these steps to upgrade your containe
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/mariadb:5.5.42-1-r02
+docker pull bitnami/mariadb:5.5.42-2
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/mariadb:5.5.42-1-r02`.
+`bitnami/mariadb:5.5.42-2
 
 ### Step 2: Stop and backup the currently running container
 
@@ -427,7 +427,7 @@ Re-create your container from the new image, [restoring your backup](#restoring-
 necessary.
 
 ```bash
-docker run --name mariadb bitnami/mariadb:5.5.42-1-r02
+docker run --name mariadb bitnami/mariadb:5.5.42-2
 ```
 
 or using Docker Compose:
