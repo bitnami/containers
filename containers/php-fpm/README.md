@@ -13,7 +13,7 @@ docker run -it --name phpfpm bitnami/php-fpm
 
 ## Docker Compose
 
-```yaml
+```
 phpfpm:
   image: bitnami/php-fpm
   volumes:
@@ -60,7 +60,7 @@ Let's create an nginx virtual host to reverse proxy to our PHP-FPM container.
 example virtual hosts for connecting to Bitnami runtime images. We will make use of the PHP-FPM
 example:
 
-```nginx
+```
 server {
     listen 0.0.0.0:80;
     server_name yourapp.com;
@@ -101,7 +101,7 @@ docker run -it --name phpfpm -v /path/to/php/app:/app bitnami/php-fpm
 
 or using Docker Compose:
 
-```yaml
+```
 phpfpm:
   image: bitnami/php-fpm
   volumes:
@@ -124,7 +124,7 @@ docker run -it -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf \
 
 or using Docker Compose:
 
-```yaml
+```
 nginx:
   image: bitnami/nginx
   links:
@@ -181,7 +181,7 @@ docker run --name phpfpm -v /path/to/phpfpm/conf:/bitnami/phpfpm/conf bitnami/ph
 
 or using Docker Compose:
 
-```yaml
+```
 phpfpm:
   image: bitnami/php-fpm
   volumes:
@@ -245,7 +245,7 @@ docker run --name phpfpm -v /path/to/phpfpm/logs:/bitnami/phpfpm/logs bitnami/ph
 
 or using Docker Compose:
 
-```yaml
+```
 phpfpm:
   image: bitnami/php-fpm
   volumes:
@@ -307,7 +307,7 @@ docker run -v /path/to/backups/latest/conf:/bitnami/phpfpm/conf \
 
 or using Docker Compose:
 
-```yaml
+```
 phpfpm:
   image: bitnami/php-fpm
   volumes:
