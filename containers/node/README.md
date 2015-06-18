@@ -25,7 +25,7 @@ The recommended way to get the Bitnami node.js Docker Image is to pull the prebu
 [Docker Hub Registry](https://hub.docker.com).
 
 ```bash
-docker pull bitnami/node:0.12.4-1
+docker pull bitnami/node:0.12.4-1-r02
 ```
 
 To always get the latest version, pull the `latest` tag.
@@ -238,11 +238,11 @@ made upstream. We recommend that you follow these steps to upgrade your containe
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/node:0.12.4-1
+docker pull bitnami/node:0.12.4-1-r02
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/node:0.12.4-1`.
+`bitnami/node:0.12.4-1-r02`.
 
 ### Step 2: Remove the currently running container
 
@@ -261,7 +261,7 @@ docker-compose rm -v node
 Re-create your container from the new image.
 
 ```bash
-docker run --name node bitnami/node:0.12.4-1
+docker run --name node bitnami/node:0.12.4-1-r02
 ```
 
 or using Docker Compose:
