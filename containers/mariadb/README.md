@@ -197,6 +197,9 @@ mariadb:
     - MARIADB_DATABASE=my_database
 ```
 
+**Note!**
+When `MARIADB_PASSWORD` is specified along with `MARIADB_USER`, the value specified in `MARIADB_PASSWORD` is set as the password of the newly created user specified in `MARIADB_USER`.
+
 ## Command-line options
 
 The simplest way to configure your MariaDB server is to pass custom command-line options when
