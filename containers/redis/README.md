@@ -36,8 +36,8 @@ If you wish, you can also build the image yourself.
 
 ```bash
 git clone https://github.com/bitnami/bitnami-docker-redis.git
-cd docker-redis
-docker build -t bitnami/redis
+cd bitnami-docker-redis
+docker build -t bitnami/redis .
 ```
 
 # Persisting your database
