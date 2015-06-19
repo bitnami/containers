@@ -1,26 +1,27 @@
   $BITNAMI_APP_NAME cheatsheet:
   
     ENVIRONMENT VARIABLES:
-      MARIADB_USER: User to be created on initialization (default: root)
-      MARIADB_PASSWORD: Password associated to the MARIADB_USER (default: none)
-      MARIADB_DATABASE: Create a database and grant access to MARIADB_USER (default: none)
+      MARIADB_USER: User to be created on first boot (default: root).
+      MARIADB_PASSWORD: Password to be set for MARIADB_USER on first boot (default: none).
+      MARIADB_DATABASE: Database to be created on first boot, accessible by MARIADB_USER (default: none).
   
     VOLUMES:
-      $BITNAMI_APP_VOL_PREFIX/data: $BITNAMI_APP_NAME data files. For backups use this volume
-      $BITNAMI_APP_VOL_PREFIX/conf: my.conf lives here
-      $BITNAMI_APP_VOL_PREFIX/logs: 
+      $BITNAMI_APP_VOL_PREFIX/data: Location of $BITNAMI_APP_NAME data files.
+      $BITNAMI_APP_VOL_PREFIX/conf: Location of my.cnf ($BITNAMI_APP_NAME config file).
+      $BITNAMI_APP_VOL_PREFIX/logs: Location of mysqld.log.
   
     PORTS:
-      3306: $BITNAMI_APP_NAME default port
+      3306: $BITNAMI_APP_NAME default port.
   
     MISC:
-      note: Please note that the user creation happens only the first time you run the container
-      note#2: MARIADB_USER works in conjunction with MARIADB_DATABASE environment variable
+      Options: You can add extra options during the docker run using the -- prefix.
+      Note: MARIADB_USER works in conjunction with MARIADB_DATABASE environment variable.
+      Tip: Back up the $BITNAMI_APP_VOL_PREFIX/data and $BITNAMI_APP_VOL_PREFIX/conf directories regularly.
   
     COMMANDS:
-      print-help: This page
-      check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available
+      print-help: Print this page.
+      check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available.
 
-  Visit $GITHUB_PAGE for more information
+  Visit $GITHUB_PAGE for more information.
 
 
