@@ -1,13 +1,24 @@
 #!/usr/bin/env bats
-CONTAINER_NAME=php-fpm-test
-NGINX_CONTAINER_NAME=nginx-test
+CONTAINER_NAME=bitnami-php-fpm-test
+NGINX_CONTAINER_NAME=bitnami-nginx-test
 IMAGE_NAME=bitnami/php-fpm
 NGINX_IMAGE_NAME=bitnami/nginx
 SLEEP_TIME=3
 VOL_PREFIX=/bitnami/php-fpm
 
+cleanup_running_containers() {
+  if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
+    docker rm -fv $CONTAINER_NAME
+  fi
+
+  if [ "$(docker ps -a | grep $NGINX_CONTAINER_NAME)" ]; then
+    docker rm -fv $NGINX_CONTAINER_NAME
+  fi
+}
+
 create_container(){
-  docker run -itd --name $CONTAINER_NAME $IMAGE_NAME
+  cleanup_running_containers
+  docker run -d --name $CONTAINER_NAME $IMAGE_NAME
 }
 
 add_vhost() {
@@ -15,7 +26,7 @@ add_vhost() {
 }
 
 create_nginx_container(){
-  docker run -itd --name $NGINX_CONTAINER_NAME\
+  docker run -d --name $NGINX_CONTAINER_NAME\
    --link $CONTAINER_NAME:php $NGINX_IMAGE_NAME
   add_vhost
   docker restart $NGINX_CONTAINER_NAME
@@ -27,13 +38,7 @@ setup () {
 }
 
 teardown() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
-    docker rm -fv $CONTAINER_NAME
-  fi
-
-  if [ "$(docker ps -a | grep $NGINX_CONTAINER_NAME)" ]; then
-    docker rm -fv $NGINX_CONTAINER_NAME
-  fi
+  cleanup_running_containers
 }
 
 @test "php and php-fpm installed" {
@@ -51,11 +56,9 @@ teardown() {
 }
 
 @test "required volumes exposed" {
-  docker inspect $CONTAINER_NAME | {
-    run grep "\"Volumes\":" -A 3
-    [[ "$output" =~ "/app" ]]
-    [[ "$output" =~ "$VOL_PREFIX/logs" ]]
-    [[ "$output" =~ "$VOL_PREFIX/conf" ]]
-  }
+  run docker inspect $CONTAINER_NAME
+  [[ "$output" =~ "/app" ]]
+  [[ "$output" =~ "$VOL_PREFIX/logs" ]]
+  [[ "$output" =~ "$VOL_PREFIX/conf" ]]
 }
 
