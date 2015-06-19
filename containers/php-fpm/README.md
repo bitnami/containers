@@ -17,7 +17,7 @@ docker run -it --name phpfpm bitnami/php-fpm
 phpfpm:
   image: bitnami/php-fpm
   volumes:
-    - path/to/php/app:/app
+    - /path/to/php/app:/app
 ```
 
 # Get this image
@@ -26,13 +26,15 @@ The recommended way to get the Bitnami PHP-FPM Docker Image is to pull the prebu
 [Docker Hub Registry](https://hub.docker.com/u/bitnami/php-fpm).
 
 ```bash
-docker pull bitnami/php-fpm:5.5.26-2-r01
+docker pull bitnami/php-fpm:latest
 ```
 
-To always get the latest version, pull the `latest` tag.
+To use a specific version, you can pull a versioned tag. You can view the
+[list of available versions](https://registry.hub.docker.com/u/bitnami/php-fpm/tags/manage/)
+in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/php-fpm:latest
+docker pull bitnami/php-fpm:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
@@ -105,7 +107,7 @@ or using Docker Compose:
 phpfpm:
   image: bitnami/php-fpm
   volumes:
-    - path/to/php/app:/app
+    - /path/to/php/app:/app
 ```
 
 ### Step 3: Run the nginx image and link it to the PHP-FPM server
@@ -130,7 +132,7 @@ nginx:
   links:
     - phpfpm:yourapp
   volumes:
-    - path/to/vhost.conf:/bintami/nginx/conf/yourapp.conf
+    - /path/to/vhost.conf:/bintami/nginx/conf/yourapp.conf
 ```
 
 We started the nginx server, mounting the virtual host we created in
@@ -185,7 +187,7 @@ or using Docker Compose:
 phpfpm:
   image: bitnami/php-fpm
   volumes:
-    - path/to/phpfpm/conf:/bitnami/php-fpm/conf
+    - /path/to/phpfpm/conf:/bitnami/php-fpm/conf
 ```
 
 ### Step 2: Edit the configuration
@@ -256,7 +258,7 @@ or using Docker Compose:
 phpfpm:
   image: bitnami/php-fpm
   volumes:
-    - path/to/phpfpm/logs:/bitnami/php-fpm/logs
+    - /path/to/phpfpm/logs:/bitnami/php-fpm/logs
 ```
 
 To perform operations (e.g. logrotate) on the logs, mount the same directory in a container designed
@@ -318,8 +320,8 @@ or using Docker Compose:
 phpfpm:
   image: bitnami/php-fpm
   volumes:
-    - path/to/backups/latest/conf:/bitnami/php-fpm/conf
-    - path/to/backups/latest/logs:/bitnami/php-fpm/logs
+    - /path/to/backups/latest/conf:/bitnami/php-fpm/conf
+    - /path/to/backups/latest/logs:/bitnami/php-fpm/logs
 ```
 
 ## Upgrade this image
@@ -330,16 +332,15 @@ made upstream. We recommend that you follow these steps to upgrade your containe
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/php-fpm:5.5.26-2-r01
+docker pull bitnami/php-fpm:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/php-fpm:5.5.26-2-r01`.
+`bitnami/php-fpm:latest`.
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's configuration and logs, unless you are
-mounting these volumes from your host.
+Before continuing, you should backup your container's configuration and logs.
 
 Follow the steps on [creating a backup](#backing-up-your-container).
 
@@ -361,7 +362,7 @@ Re-create your container from the new image, [restoring your backup](#restoring-
 necessary.
 
 ```bash
-docker run --name phpfpm bitnami/php-fpm:5.5.26-2-r01
+docker run --name phpfpm bitnami/php-fpm:latest
 ```
 
 or using Docker Compose:
