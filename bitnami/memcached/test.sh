@@ -1,14 +1,14 @@
 #!/usr/bin/env bats
 
-CONTAINER_NAME=memcached
+CONTAINER_NAME=bitnami-memcached-test
 IMAGE_NAME=bitnami/memcached
-RUBY_CONTAINER_NAME=ruby
+RUBY_CONTAINER_NAME=bitnami-ruby-test
 RUBY_IMAGE_NAME=bitnami/ruby
 SLEEP_TIME=3
-VOL_PREFIX=/bitnami/$CONTAINER_NAME
+VOL_PREFIX=/bitnami/memcached
 MEMCACHED_PASSWORD=test_password123
 
-teardown() {
+cleanup_running_containers() {
   if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
     docker rm -fv $CONTAINER_NAME
   fi
@@ -17,20 +17,28 @@ teardown() {
   fi
 }
 
+setup() {
+  cleanup_running_containers
+}
+
+teardown() {
+  cleanup_running_containers
+}
+
 create_container() {
   if [ $1 ]; then
-    docker run -itd --name $CONTAINER_NAME\
+    docker run -d --name $CONTAINER_NAME\
      -e MEMCACHED_PASSWORD=$MEMCACHED_PASSWORD $IMAGE_NAME
   else
-    docker run -itd --name $CONTAINER_NAME $IMAGE_NAME
+    docker run -d --name $CONTAINER_NAME $IMAGE_NAME
   fi
   sleep $SLEEP_TIME
 }
 
 create_ruby_container() {
-  docker run --name $RUBY_CONTAINER_NAME -itd\
+  docker run --name $RUBY_CONTAINER_NAME -id\
    --link $CONTAINER_NAME:memcached $RUBY_IMAGE_NAME
-  docker exec ruby sudo gem install dalli
+  docker exec $RUBY_CONTAINER_NAME sudo gem install dalli
 }
 
 @test "Auth if no password provided" {
@@ -52,9 +60,7 @@ create_ruby_container() {
 
 @test "All the volumes exposed" {
   create_container
-  docker inspect $CONTAINER_NAME | {
-    run grep "\"Volumes\":" -A 1
-    [[ "$output" =~ "$VOL_PREFIX/logs" ]]
-  }
+  run docker inspect $CONTAINER_NAME
+  [[ "$output" =~ "$VOL_PREFIX/logs" ]]
 }
 
