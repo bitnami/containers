@@ -19,10 +19,10 @@ nginx:
 # Get this image
 
 The recommended way to get the Bitnami nginx Docker Image is to pull the prebuilt image from the
-[Docker Hub Registry](https://hub.docker.com).
+[Docker Hub Registry](https://hub.docker.com/u/bitnami/nginx).
 
 ```bash
-docker pull bitnami/nginx:1.8.0-0
+docker pull bitnami/nginx:1.8.0-3
 ```
 
 To always get the latest version, pull the `latest` tag.
@@ -149,6 +149,14 @@ or using Docker Compose:
 docker-compose restart nginx
 ```
 
+**Note!**
+
+You can also reload the nginx configuration by sending the `HUP` signal to the container using the `docker kill` command.
+
+```bash
+docker kill -s HUP nginx
+```
+
 # Reverse proxy to other containers
 
 nginx can be used to reverse proxy to other containers using Docker's linking system. This is
@@ -271,11 +279,11 @@ upstream. We recommend that you follow these steps to upgrade your container.
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/nginx:1.8.0-0
+docker pull bitnami/nginx:1.8.0-3
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/nginx:1.8.0-0`.
+`bitnami/nginx:1.8.0-3`.
 
 ### Step 2: Stop and backup the currently running container
 
@@ -302,7 +310,7 @@ Re-create your container from the new image, [restoring your backup](#restoring-
 necessary.
 
 ```bash
-docker run --name nginx bitnami/nginx:1.8.0-0
+docker run --name nginx bitnami/nginx:1.8.0-3
 ```
 
 or using Docker Compose:
