@@ -162,7 +162,7 @@ here that includes your PHP script, and run it normally using the `php` command.
 
 ```bash
 docker run -it --name php-fpm -v /path/to/php/app:/app bitnami/php-fpm \
-  php-fpm script.php
+  php script.php
 ```
 
 # Configuration
