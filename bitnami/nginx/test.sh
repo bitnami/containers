@@ -7,14 +7,19 @@ VOL_PREFIX=/bitnami/nginx
 HOST_VOL_PREFIX=/tmp/bitnami/$CONTAINER_NAME
 
 # Check config override from host
-setup() {
-  mkdir -p $HOST_VOL_PREFIX
-}
-
-teardown() {
+cleanup_running_containers() {
   if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
     docker rm -fv $CONTAINER_NAME
   fi
+}
+
+setup() {
+  mkdir -p $HOST_VOL_PREFIX
+  cleanup_running_containers
+}
+
+teardown() {
+  cleanup_running_containers
 }
 
 create_container(){
