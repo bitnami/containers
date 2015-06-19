@@ -21,7 +21,7 @@ apache:
 # Get this image
 
 The recommended way to get the Bitnami Apache Docker Image is to pull the prebuilt image from the
-[Docker Hub Registry](https://hub.docker.com).
+[Docker Hub Registry](https://hub.docker.com/u/bitnami/apache).
 
 ```bash
 docker pull bitnami/apache:2.4.12-2-r01
@@ -150,6 +150,14 @@ or using Docker Compose:
 
 ```bash
 docker-compose restart apache
+```
+
+**Note!**
+
+You can also reload the Apache configuration by sending the `HUP` signal to the container using the `docker kill` command.
+
+```bash
+docker kill -s HUP apache
 ```
 
 # Reverse proxy to other containers
