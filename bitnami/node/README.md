@@ -1,7 +1,11 @@
-# What is node.js?
+# What is Node.js?
 
-node.js allows developers to build scalable, real-time web applications with two-way connections
-between the client and server.
+> Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable
+> network applications. Node.js uses an event-driven, non-blocking I/O model that makes it
+> lightweight and efficient, perfect for data-intensive real-time applications that run across
+> distributed devices.
+
+[nodejs.org](https://nodejs.org/)
 
 # TLDR
 
@@ -16,22 +20,24 @@ node:
   image: bitnami/node
   command: node script.js
   volumes:
-    - path/to/node/app:/app
+    - /path/to/node/app:/app
 ```
 
 # Get this image
 
-The recommended way to get the Bitnami node.js Docker Image is to pull the prebuilt image from the
+The recommended way to get the Bitnami Node.js Docker Image is to pull the prebuilt image from the
 [Docker Hub Registry](https://hub.docker.com).
 
 ```bash
-docker pull bitnami/node:0.12.4-1-r02
+docker pull bitnami/node:latest
 ```
 
-To always get the latest version, pull the `latest` tag.
+To use a specific version, you can pull a versioned tag. You can view the
+[list of available versions](https://registry.hub.docker.com/u/bitnami/node/tags/manage/)
+in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/node:latest
+docker pull bitnami/node:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
@@ -44,8 +50,8 @@ docker build -t bitnami/node .
 
 # Entering the REPL
 
-By default, running this image will drop you into the node.js REPL, where you can interactively test
-and try things out in node.js.
+By default, running this image will drop you into the Node.js REPL, where you can interactively test
+and try things out in Node.js.
 
 ```bash
 docker run -it --name node bitnami/node
@@ -55,19 +61,19 @@ docker run -it --name node bitnami/node
 
   - [nodejs.org/api/repl.html](https://nodejs.org/api/repl.html)
 
-# Running your node.js script
+# Running your Node.js script
 
-The default work directory for the node.js image is `/app`. You can mount a folder from your host
-here that includes your node.js script, and run it normally using the `node` command.
+The default work directory for the Node.js image is `/app`. You can mount a folder from your host
+here that includes your Node.js script, and run it normally using the `node` command.
 
 ```bash
 docker run -it --name node -v /path/to/node/app:/app bitnami/node \
   node script.js
 ```
 
-# Running a node.js app with npm dependencies
+# Running a Node.js app with npm dependencies
 
-If your node.js app has a `package.json` defining your app's dependencies and start script, you can
+If your Node.js app has a `package.json` defining your app's dependencies and start script, you can
 install the dependencies before running your app.
 
 ```bash
@@ -88,7 +94,7 @@ node:
 - [package.json documentation](https://docs.npmjs.com/files/package.json)
 - [npm start script](https://docs.npmjs.com/misc/scripts#default-values)
 
-# Accessing a node.js app running a web server
+# Accessing a Node.js app running a web server
 
 This image exposes port `3000` in the container, so you should ensure that your web server is
 binding to port `3000`, as well as accepting remote connections.
@@ -139,20 +145,20 @@ Access your web server in the browser by navigating to
 
 # Linking
 
-If you want to connect to your node.js web server inside another container, you can use the linking
+If you want to connect to your Node.js web server inside another container, you can use the linking
 system provided by Docker.
 
-## Serving your node.js app through an nginx frontend
+## Serving your Node.js app through an nginx frontend
 
-We may want to make our node.js web server only accessible via an nginx web server. Doing so will
+We may want to make our Node.js web server only accessible via an nginx web server. Doing so will
 allow us to setup more complex configuration, serve static assets using nginx, load balance to
-different node.js instances, etc.
+different Node.js instances, etc.
 
 ### Step 1: Create a virtual host
 
-Let's create an nginx virtual host to reverse proxy to our node.js container.
+Let's create an nginx virtual host to reverse proxy to our Node.js container.
 [The Bitnami nginx Docker Image](https://github.com/bitnami/bitnami-docker-nginx) ships with some
-example virtual hosts for connecting to Bitnami runtime images. We will make use of the node.js
+example virtual hosts for connecting to Bitnami runtime images. We will make use of the Node.js
 example:
 
 ```
@@ -180,10 +186,10 @@ link.
 Copy the virtual host above, saving the file somewhere on your host. We will mount it as a volume
 in our nginx container.
 
-### Step 2: Run the node.js image with a specific name
+### Step 2: Run the Node.js image with a specific name
 
 Docker's linking system uses container ids or names to reference containers. We can explicitly
-specify a name for our node.js server to make it easier to connect to other containers.
+specify a name for our Node.js server to make it easier to connect to other containers.
 
 ```
 docker run -it --name node -v /path/to/node/app:/app bitnami/node npm start
@@ -196,15 +202,15 @@ node:
   image: bitnami/node
   command: npm start
   volumes:
-    - path/to/node/app:/app
+    - /path/to/node/app:/app
 ```
 
-### Step 3: Run the nginx image and link it to the node.js server
+### Step 3: Run the nginx image and link it to the Node.js server
 
-Now that we have our node.js server running, we can create another container that links to it by
+Now that we have our Node.js server running, we can create another container that links to it by
 giving Docker the `--link` option. This option takes the id or name of the container we want to link
 it to as well as a hostname to use inside the container, separated by a colon. For example, to have
-our node.js server accessible in another container with `yourapp` as it's hostname we would pass
+our Node.js server accessible in another container with `yourapp` as it's hostname we would pass
 `--link node:yourapp` to the Docker run command.
 
 ```bash
@@ -221,28 +227,28 @@ nginx:
   links:
     - node:yourapp
   volumes:
-    - path/to/vhost.conf:/bintami/nginx/conf/yourapp.conf
+    - /path/to/vhost.conf:/bintami/nginx/conf/yourapp.conf
 ```
 
 We started the nginx server, mounting the virtual host we created in
-[Step 1](#step-1-create-a-virtual-host), and created a link to the node.js server with the alias
+[Step 1](#step-1-create-a-virtual-host), and created a link to the Node.js server with the alias
 `yourapp`.
 
 # Maintenance
 
 ## Upgrade this image
 
-Bitnami provides up-to-date versions of node.js, including security patches, soon after they are
+Bitnami provides up-to-date versions of Node.js, including security patches, soon after they are
 made upstream. We recommend that you follow these steps to upgrade your container.
 
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/node:0.12.4-1-r02
+docker pull bitnami/node:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/node:0.12.4-1-r02`.
+`bitnami/node:latest`.
 
 ### Step 2: Remove the currently running container
 
@@ -261,7 +267,7 @@ docker-compose rm -v node
 Re-create your container from the new image.
 
 ```bash
-docker run --name node bitnami/node:0.12.4-1-r02
+docker run --name node bitnami/node:latest
 ```
 
 or using Docker Compose:
