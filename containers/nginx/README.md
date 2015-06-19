@@ -1,7 +1,9 @@
 # What is nginx?
 
-nginx (pronounced "engine-x") is an open source reverse proxy server for HTTP, HTTPS, SMTP, POP3,
-and IMAP protocols, as well as a load balancer, HTTP cache, and a web server (origin server).
+> nginx (pronounced "engine-x") is an open source reverse proxy server for HTTP, HTTPS, SMTP, POP3,
+> and IMAP protocols, as well as a load balancer, HTTP cache, and a web server (origin server).
+
+[http://nginx.org/](nginx.org)
 
 # TLDR
 
@@ -22,13 +24,15 @@ The recommended way to get the Bitnami nginx Docker Image is to pull the prebuil
 [Docker Hub Registry](https://hub.docker.com/u/bitnami/nginx).
 
 ```bash
-docker pull bitnami/nginx:1.8.0-3
+docker pull bitnami/nginx:latest
 ```
 
-To always get the latest version, pull the `latest` tag.
+To use a specific version, you can pull a versioned tag. You can view the
+[list of available versions](https://registry.hub.docker.com/u/bitnami/nginx/tags/manage/)
+in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/nginx:latest
+docker pull bitnami/nginx:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
@@ -54,7 +58,7 @@ or using Docker Compose:
 nginx:
   image: bitnami/nginx
   volumes:
-    - path/to/app:/app
+    - /path/to/app:/app
 ```
 
 # Accessing your server from the host
@@ -101,7 +105,7 @@ or using Docker Compose:
 nginx:
   image: bitnami/nginx
   volumes:
-    - path/to/nginx/vhosts:/bitnami/nginx/conf/vhosts
+    - /path/to/nginx/vhosts:/bitnami/nginx/conf/vhosts
 ```
 
 ## Full configuration
@@ -124,7 +128,7 @@ or using Docker Compose:
 nginx:
   image: bitnami/nginx
   volumes:
-    - path/to/nginx/conf:/bitnami/nginx/conf
+    - /path/to/nginx/conf:/bitnami/nginx/conf
 ```
 
 ### Step 2: Edit the configuration
@@ -151,7 +155,8 @@ docker-compose restart nginx
 
 **Note!**
 
-You can also reload the nginx configuration by sending the `HUP` signal to the container using the `docker kill` command.
+You can also reload the nginx configuration by sending the `HUP` signal to the container using the
+`docker kill` command.
 
 ```bash
 docker kill -s HUP nginx
@@ -205,7 +210,7 @@ or using Docker Compose:
 nginx:
   image: bitnami/nginx
   volumes:
-    - path/to/nginx/logs:/bitnami/nginx/logs
+    - /path/to/nginx/logs:/bitnami/nginx/logs
 ```
 
 To perform operations (e.g. logrotate) on the logs, mount the same directory in a container designed
@@ -267,8 +272,8 @@ or using Docker Compose:
 nginx:
   image: bitnami/nginx
   volumes:
-    - path/to/backups/latest/conf:/bitnami/nginx/conf
-    - path/to/backups/latest/logs:/bitnami/nginx/logs
+    - /path/to/backups/latest/conf:/bitnami/nginx/conf
+    - /path/to/backups/latest/logs:/bitnami/nginx/logs
 ```
 
 ## Upgrade this image
@@ -279,16 +284,15 @@ upstream. We recommend that you follow these steps to upgrade your container.
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/nginx:1.8.0-3
+docker pull bitnami/nginx:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/nginx:1.8.0-3`.
+`bitnami/nginx:latest`.
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's configuration and logs, unless you are
-mounting these volumes from your host.
+Before continuing, you should backup your container's configuration and logs.
 
 Follow the steps on [creating a backup](#backing-up-your-container).
 
@@ -310,7 +314,7 @@ Re-create your container from the new image, [restoring your backup](#restoring-
 necessary.
 
 ```bash
-docker run --name nginx bitnami/nginx:1.8.0-3
+docker run --name nginx bitnami/nginx:latest
 ```
 
 or using Docker Compose:
