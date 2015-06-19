@@ -1,6 +1,10 @@
 # What is MariaDB?
 
-MariaDB is a fast, reliable, scalable, and easy to use open-source relational database system. MariaDB Server is intended for mission-critical, heavy-load production systems as well as for embedding into mass-deployed software.
+> MariaDB is a fast, reliable, scalable, and easy to use open-source relational database system.
+> MariaDB Server is intended for mission-critical, heavy-load production systems as well as for
+> embedding into mass-deployed software.
+
+[https://mariadb.com/](https://mariadb.com/)
 
 # TLDR
 
@@ -20,13 +24,15 @@ mariadb:
 The recommended way to get the Bitnami MariaDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/u/bitnami/mariadb).
 
 ```bash
-docker pull bitnami/mariadb:5.5.42-2
+docker pull bitnami/mariadb:latest
 ```
 
-To always get the latest version, pull the `latest` tag.
+To use a specific version, you can pull a versioned tag. You can view the
+[list of available versions](https://registry.hub.docker.com/u/bitnami/mariadb/tags/manage/)
+in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/mariadb:latest
+docker pull bitnami/mariadb:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
@@ -62,7 +68,7 @@ or using Docker Compose:
 mariadb:
   image: bitnami/mariadb
   volumes:
-    - path/to/data:/bitnami/mariadb/data
+    - /path/to/data:/bitnami/mariadb/data
 ```
 
 # Linking
@@ -80,7 +86,7 @@ Docker's linking system uses container ids or names to reference containers. We 
 specify a name for our MariaDB server to make it easier to connect to other containers.
 
 ```bash
-docker run --name mariadb-server bitnami/mariadb
+docker run --name mariadb bitnami/mariadb
 ```
 
 ### Step 2: Run MariaDB as a MySQL client and link to our server
@@ -88,15 +94,15 @@ docker run --name mariadb-server bitnami/mariadb
 Now that we have our MariaDB server running, we can create another container that links to it by
 giving Docker the `--link` option. This option takes the id or name of the container we want to link
 it to as well as a hostname to use inside the container, separated by a colon. For example, to have
-our MariaDB server accessible in another container with `mariadb` as it's hostname we would pass
-`--link mariadb-server:mariadb` to the Docker run command.
+our MariaDB server accessible in another container with `server` as it's hostname we would pass
+`--link mariadb:server` to the Docker run command.
 
 The Bitnami MariaDB Docker Image also ships with a MySQL client, but by default it will start a
 server. To start the client instead, we can override the default command Docker runs by stating a
 different command to run after the image name.
 
 ```bash
-docker run --rm -it --link mariadb-server:mariadb bitnami/mariadb mysql -h mariadb -u root
+docker run --rm -it --link mariadb:server bitnami/mariadb mysql -h server -u root
 ```
 
 We started the MySQL client passing in the `-h` option that allows us to specify the hostname of the
@@ -107,7 +113,7 @@ You can also run the MySQL client in the same container the server is running in
 [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
 
 ```bash
-docker exec -it mariadb-server mysql -u root
+docker exec -it mariadb mysql -u root
 ```
 
 ## Linking with Docker Compose
@@ -143,7 +149,7 @@ Passing the `MARIADB_PASSWORD` environment variable when running the image for t
 set the password of the root user to the value of `MARIADB_PASSWORD`.
 
 ```bash
-docker run --name mariadb -e MARIADB_PASSWORD=my_password bitnami/mariadb
+docker run --name mariadb -e MARIADB_PASSWORD=password123 bitnami/mariadb
 ```
 
 or using Docker Compose:
@@ -152,7 +158,7 @@ or using Docker Compose:
 mariadb:
   image: bitnami/mariadb
   environment:
-    - MARIADB_PASSWORD=my_password
+    - MARIADB_PASSWORD=password123
 ```
 
 ## Creating a database on first run
@@ -241,7 +247,7 @@ or using Docker Compose:
 mariadb:
   image: bitnami/mariadb
   volumes:
-    - path/to/mariadb/conf:/bitnami/mariadb/conf
+    - /path/to/mariadb/conf:/bitnami/mariadb/conf
 ```
 
 ### Step 2: Edit the configuration
@@ -324,7 +330,7 @@ or using Docker Compose:
 mariadb:
   image: bitnami/mariadb
   volumes:
-    - path/to/mariadb/logs:/bitnami/mariadb/logs
+    - /path/to/mariadb/logs:/bitnami/mariadb/logs
 ```
 
 To perform operations (e.g. logrotate) on the logs, mount the same directory in a container designed
@@ -387,9 +393,9 @@ or using Docker Compose:
 mariadb:
   image: bitnami/mariadb
   volumes:
-    - path/to/backups/latest/data:/bitnami/mariadb/data
-    - path/to/backups/latest/conf:/bitnami/mariadb/conf
-    - path/to/backups/latest/logs:/bitnami/mariadb/logs
+    - /path/to/backups/latest/data:/bitnami/mariadb/data
+    - /path/to/backups/latest/conf:/bitnami/mariadb/conf
+    - /path/to/backups/latest/logs:/bitnami/mariadb/logs
 ```
 
 ## Upgrade this image
@@ -400,16 +406,15 @@ made upstream. We recommend that you follow these steps to upgrade your containe
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/mariadb:5.5.42-2
+docker pull bitnami/mariadb:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/mariadb:5.5.42-2`.
+`bitnami/mariadb:latest`.
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's data, configuration and logs, unless you are
-mounting these volumes from your host.
+Before continuing, you should backup your container's data, configuration and logs.
 
 Follow the steps on [creating a backup](#backing-up-your-container).
 
@@ -431,7 +436,7 @@ Re-create your container from the new image, [restoring your backup](#restoring-
 necessary.
 
 ```bash
-docker run --name mariadb bitnami/mariadb:5.5.42-2
+docker run --name mariadb bitnami/mariadb:latest
 ```
 
 or using Docker Compose:
