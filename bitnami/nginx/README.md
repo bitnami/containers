@@ -22,7 +22,7 @@ The recommended way to get the Bitnami nginx Docker Image is to pull the prebuil
 [Docker Hub Registry](https://hub.docker.com/u/bitnami/nginx).
 
 ```bash
-docker pull bitnami/nginx:1.8.0-0
+docker pull bitnami/nginx:1.8.0-3
 ```
 
 To always get the latest version, pull the `latest` tag.
@@ -279,11 +279,11 @@ upstream. We recommend that you follow these steps to upgrade your container.
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/nginx:1.8.0-0
+docker pull bitnami/nginx:1.8.0-3
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/nginx:1.8.0-0`.
+`bitnami/nginx:1.8.0-3`.
 
 ### Step 2: Stop and backup the currently running container
 
@@ -310,7 +310,7 @@ Re-create your container from the new image, [restoring your backup](#restoring-
 necessary.
 
 ```bash
-docker run --name nginx bitnami/nginx:1.8.0-0
+docker run --name nginx bitnami/nginx:1.8.0-3
 ```
 
 or using Docker Compose:
