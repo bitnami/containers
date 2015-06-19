@@ -23,7 +23,7 @@ phpfpm:
 # Get this image
 
 The recommended way to get the Bitnami PHP-FPM Docker Image is to pull the prebuilt image from the
-[Docker Hub Registry](https://hub.docker.com).
+[Docker Hub Registry](https://hub.docker.com/u/bitnami/php-fpm).
 
 ```bash
 docker pull bitnami/php-fpm:5.5.26-2-r01
@@ -162,7 +162,7 @@ here that includes your PHP script, and run it normally using the `php` command.
 
 ```bash
 docker run -it --name php-fpm -v /path/to/php/app:/app bitnami/php-fpm \
-  php-fpm script.php
+  php script.php
 ```
 
 # Configuration
