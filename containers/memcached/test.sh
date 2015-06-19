@@ -29,10 +29,11 @@ create_container() {
   if [ $1 ]; then
     docker run -d --name $CONTAINER_NAME\
      -e MEMCACHED_PASSWORD=$MEMCACHED_PASSWORD $IMAGE_NAME
+    sleep 15
   else
     docker run -d --name $CONTAINER_NAME $IMAGE_NAME
+    sleep $SLEEP_TIME
   fi
-  sleep $SLEEP_TIME
 }
 
 create_ruby_container() {
