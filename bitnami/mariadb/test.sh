@@ -8,14 +8,19 @@ MARIADB_PASSWORD=test_password
 VOL_PREFIX=/bitnami/mariadb
 HOST_VOL_PREFIX=/tmp/bitnami/$CONTAINER_NAME
 
+cleanup_running_containers() {
+  if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
+    docker rm -fv $CONTAINER_NAME
+  fi
+}
+
 setup() {
+  cleanup_running_containers
   mkdir -p $HOST_VOL_PREFIX
 }
 
 teardown() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
-    docker rm -fv $CONTAINER_NAME
-  fi
+  cleanup_running_containers
 }
 
 cleanup_volumes_content() {
