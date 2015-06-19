@@ -38,7 +38,7 @@ redis_client(){
 @test "Auth if password provided" {
   create_container -e REDIS_PASSWORD=$REDIS_PASSWORD
   # Longs sleep because of bnconfig password update
-  sleep 10
+  sleep 20
   # Can't connect without passw
   run redis_client ping
   [[ "$output" =~ "NOAUTH Authentication required" ]]
