@@ -24,7 +24,7 @@ ruby:
 # Get this image
 
 The recommended way to get the Bitnami Ruby Docker Image is to pull the prebuilt image from the
-[Docker Hub Registry](https://hub.docker.com).
+[Docker Hub Registry](https://hub.docker.com/u/bitnami/ruby).
 
 ```bash
 docker pull bitnami/ruby:2.2.2-3
