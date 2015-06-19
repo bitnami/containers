@@ -20,16 +20,19 @@ redis:
 
 # Get this image
 
-The recommended way to get the Bitnami Redis Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/u/bitnami/redis).
-
-```bash
-docker pull bitnami/redis:3.0.2-2
-```
-
-To always get the latest version, pull the `latest` tag.
+The recommended way to get the Bitnami Redis Docker Image is to pull the prebuilt image from the
+[Docker Hub Registry](https://hub.docker.com/u/bitnami/redis).
 
 ```bash
 docker pull bitnami/redis:latest
+```
+
+To use a specific version, you can pull a versioned tag. You can view the
+[list of available versions](https://registry.hub.docker.com/u/bitnami/redis/tags/manage/)
+in the Docker Hub Registry.
+
+```bash
+docker pull bitnami/redis:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
@@ -65,7 +68,7 @@ or using Docker Compose:
 redis:
   image: bitnami/redis
   volumes:
-    - path/to/data:/bitnami/redis/data
+    - /path/to/data:/bitnami/redis/data
 ```
 
 # Linking
@@ -83,7 +86,7 @@ Docker's linking system uses container ids or names to reference containers. We 
 specify a name for our Redis server to make it easier to connect to other containers.
 
 ```bash
-docker run --name redis-server bitnami/redis
+docker run --name redis bitnami/redis
 ```
 
 ### Step 2: Run Redis as a client and link to our server
@@ -91,15 +94,15 @@ docker run --name redis-server bitnami/redis
 Now that we have our Redis server running, we can create another container that links to it by
 giving Docker the `--link` option. This option takes the id or name of the container we want to link
 it to as well as a hostname to use inside the container, separated by a colon. For example, to have
-our Redis server accessible in another container with `redis` as it's hostname we would pass
-`--link redis-server:redis` to the Docker run command.
+our Redis server accessible in another container with `server` as it's hostname we would pass
+`--link redis:server` to the Docker run command.
 
 The Bitnami Redis Docker Image also ships with a Redis client, but by default it will start a
 server. To start the client instead, we can override the default command Docker runs by stating a
 different command to run after the image name.
 
 ```bash
-docker run --rm -it --link redis-server:redis bitnami/redis redis-cli -h redis
+docker run --rm -it --link redis:server bitnami/redis redis-cli -h server
 ```
 
 We started the Redis client passing in the `-h` option that allows us to specify the hostname of the
@@ -146,7 +149,7 @@ Passing the `REDIS_PASSWORD` environment variable when running the image for the
 set the Redis server password to the value of `REDIS_PASSWORD`.
 
 ```bash
-docker run --name redis -e REDIS_PASSWORD=my_password bitnami/redis
+docker run --name redis -e REDIS_PASSWORD=password123 bitnami/redis
 ```
 
 or using Docker Compose:
@@ -155,7 +158,7 @@ or using Docker Compose:
 redis:
   image: bitnami/redis
   environment:
-    - REDIS_PASSWORD=my_password
+    - REDIS_PASSWORD=password123
 ```
 
 ## Command-line options
@@ -194,7 +197,7 @@ or using Docker Compose:
 redis:
   image: bitnami/redis
   volumes:
-    - path/to/redis/conf:/bitnami/redis/conf
+    - /path/to/redis/conf:/bitnami/redis/conf
 ```
 
 ### Step 2: Edit the configuration
@@ -261,7 +264,7 @@ or using Docker Compose:
 redis:
   image: bitnami/redis
   volumes:
-    - path/to/redis/logs:/bitnami/redis/logs
+    - /path/to/redis/logs:/bitnami/redis/logs
 ```
 
 To perform operations (e.g. logrotate) on the logs, mount the same directory in a container designed
@@ -324,9 +327,9 @@ or using Docker Compose:
 redis:
   image: bitnami/redis
   volumes:
-    - path/to/backups/latest/data:/bitnami/redis/data
-    - path/to/backups/latest/conf:/bitnami/redis/conf
-    - path/to/backups/latest/logs:/bitnami/redis/logs
+    - /path/to/backups/latest/data:/bitnami/redis/data
+    - /path/to/backups/latest/conf:/bitnami/redis/conf
+    - /path/to/backups/latest/logs:/bitnami/redis/logs
 ```
 
 ## Upgrade this image
@@ -337,16 +340,15 @@ made upstream. We recommend that you follow these steps to upgrade your containe
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/redis:3.0.2-2
+docker pull bitnami/redis:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/redis:3.0.2-2`.
+`bitnami/redis:latest`.
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's data, configuration and logs, unless you are
-mounting these volumes from your host.
+Before continuing, you should backup your container's data, configuration and logs.
 
 Follow the steps on [creating a backup](#backing-up-your-container).
 
@@ -368,7 +370,7 @@ Re-create your container from the new image, [restoring your backup](#restoring-
 necessary.
 
 ```bash
-docker run --name redis bitnami/redis:3.0.2-2
+docker run --name redis bitnami/redis:latest
 ```
 
 or using Docker Compose:
