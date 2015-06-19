@@ -18,7 +18,7 @@ teardown() {
 }
 
 create_container(){
-  docker run -itd --name $CONTAINER_NAME \
+  docker run -d --name $CONTAINER_NAME \
    --expose 81 $IMAGE_NAME
   sleep $SLEEP_TIME
 }
