@@ -149,6 +149,14 @@ or using Docker Compose:
 docker-compose restart nginx
 ```
 
+**Note!**
+
+You can also reload the nginx configuration by sending the `HUP` signal to the container using the `docker kill` command.
+
+```bash
+docker kill -s HUP nginx
+```
+
 # Reverse proxy to other containers
 
 nginx can be used to reverse proxy to other containers using Docker's linking system. This is
