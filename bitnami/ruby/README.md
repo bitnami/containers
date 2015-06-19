@@ -18,7 +18,7 @@ ruby:
   image: bitnami/ruby
   command: ruby script.rb
   volumes:
-    - path/to/ruby/app:/app
+    - /path/to/ruby/app:/app
 ```
 
 # Get this image
@@ -27,13 +27,15 @@ The recommended way to get the Bitnami Ruby Docker Image is to pull the prebuilt
 [Docker Hub Registry](https://hub.docker.com/u/bitnami/ruby).
 
 ```bash
-docker pull bitnami/ruby:2.2.2-3
+docker pull bitnami/ruby:latest
 ```
 
-To always get the latest version, pull the `latest` tag.
+To use a specific version, you can pull a versioned tag. You can view the
+[list of available versions](https://registry.hub.docker.com/u/bitnami/ruby/tags/manage/)
+in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/ruby:latest
+docker pull bitnami/ruby:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
@@ -191,7 +193,7 @@ ruby:
   image: bitnami/ruby
   command: ruby script.rb
   volumes:
-    - path/to/ruby/app:/app
+    - /path/to/ruby/app:/app
 ```
 
 ### Step 3: Run the nginx image and link it to the Ruby server
@@ -216,7 +218,7 @@ nginx:
   links:
     - ruby:yourapp
   volumes:
-    - path/to/vhost.conf:/bintami/nginx/conf/yourapp.conf
+    - /path/to/vhost.conf:/bintami/nginx/conf/yourapp.conf
 ```
 
 We started the nginx server, mounting the virtual host we created in
@@ -233,11 +235,11 @@ made upstream. We recommend that you follow these steps to upgrade your containe
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/ruby:2.2.2-3
+docker pull bitnami/ruby:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/ruby:2.2.2-3`.
+`bitnami/ruby:latest`.
 
 ### Step 2: Remove the currently running container
 
@@ -256,7 +258,7 @@ docker-compose rm -v ruby
 Re-create your container from the new image.
 
 ```bash
-docker run --name ruby bitnami/ruby:2.2.2-3
+docker run --name ruby bitnami/ruby:latest
 ```
 
 or using Docker Compose:
