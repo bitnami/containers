@@ -152,6 +152,14 @@ or using Docker Compose:
 docker-compose restart apache
 ```
 
+**Note!**
+
+You can also reload the Apache configuration by sending the `HUP` signal to the container using the `docker kill` command.
+
+```bash
+docker kill -s HUP apache
+```
+
 # Reverse proxy to other containers
 
 Apache can be used to reverse proxy to other containers using Docker's linking system. This is
