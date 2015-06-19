@@ -1,9 +1,11 @@
 # What is Apache?
 
-The Apache HTTP Server Project is an effort to develop and maintain an open-source HTTP server for
-modern operating systems including UNIX and Windows NT. The goal of this project is to provide a
-secure, efficient and extensible server that provides HTTP services in sync with the current HTTP
-standards.
+> The Apache HTTP Server Project is an effort to develop and maintain an open-source HTTP server for
+> modern operating systems including UNIX and Windows NT. The goal of this project is to provide a
+> secure, efficient and extensible server that provides HTTP services in sync with the current HTTP
+> standards.
+
+[http://httpd.apache.org/](http://httpd.apache.org/)
 
 # TLDR
 
@@ -24,13 +26,15 @@ The recommended way to get the Bitnami Apache Docker Image is to pull the prebui
 [Docker Hub Registry](https://hub.docker.com/u/bitnami/apache).
 
 ```bash
-docker pull bitnami/apache:2.4.12-2-r01
+docker pull bitnami/apache:latest
 ```
 
-To always get the latest version, pull the `latest` tag.
+To use a specific version, you can pull a versioned tag. You can view the
+[list of available versions](https://registry.hub.docker.com/u/bitnami/apache/tags/manage/)
+in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/apache:latest
+docker pull bitnami/apache:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
@@ -57,7 +61,7 @@ or using Docker Compose:
 apache:
   image: bitnami/apache
   volumes:
-    - path/to/app:/app
+    - /path/to/app:/app
 ```
 
 # Accessing your server from the host
@@ -90,8 +94,8 @@ Access your web server in the browser by navigating to
 
 ## Adding custom virtual hosts
 
-The default Apache.conf includes virtual hosts placed in `/bitnami/apache/conf/vhosts/*.conf`. You can
-mount a directory at `/bitnami/apache/conf/vhosts` from your host containing your custom virtual
+The default httpd.conf includes virtual hosts placed in `/bitnami/apache/conf/vhosts/*.conf`. You
+can mount a directory at `/bitnami/apache/conf/vhosts` from your host containing your custom virtual
 hosts.
 
 ```bash
@@ -104,7 +108,7 @@ or using Docker Compose:
 apache:
   image: bitnami/apache
   volumes:
-    - path/to/apache/vhosts:/bitnami/apache/conf/vhosts
+    - /path/to/apache/vhosts:/bitnami/apache/conf/vhosts
 ```
 
 ## Full configuration
@@ -127,7 +131,7 @@ or using Docker Compose:
 apache:
   image: bitnami/apache
   volumes:
-    - path/to/apache/conf:/bitnami/apache/conf
+    - /path/to/apache/conf:/bitnami/apache/conf
 ```
 
 ### Step 2: Edit the configuration
@@ -154,7 +158,8 @@ docker-compose restart apache
 
 **Note!**
 
-You can also reload the Apache configuration by sending the `HUP` signal to the container using the `docker kill` command.
+You can also reload the Apache configuration by sending the `HUP` signal to the container using the
+`docker kill` command.
 
 ```bash
 docker kill -s HUP apache
@@ -208,7 +213,7 @@ or using Docker Compose:
 apache:
   image: bitnami/apache
   volumes:
-    - path/to/apache/logs:/bitnami/apache/logs
+    - /path/to/apache/logs:/bitnami/apache/logs
 ```
 
 To perform operations (e.g. logrotate) on the logs, mount the same directory in a container designed
@@ -270,8 +275,8 @@ or using Docker Compose:
 apache:
   image: bitnami/apache
   volumes:
-    - path/to/backups/latest/conf:/bitnami/apache/conf
-    - path/to/backups/latest/logs:/bitnami/apache/logs
+    - /path/to/backups/latest/conf:/bitnami/apache/conf
+    - /path/to/backups/latest/logs:/bitnami/apache/logs
 ```
 
 ## Upgrade this image
@@ -282,16 +287,15 @@ upstream. We recommend that you follow these steps to upgrade your container.
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/apache:2.4.12-2-r01
+docker pull bitnami/apache:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/apache:2.4.12-2-r01`.
+`bitnami/apache:latest`.
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's configuration and logs, unless you are
-mounting these volumes from your host.
+Before continuing, you should backup your container's configuration and logs.
 
 Follow the steps on [creating a backup](#backing-up-your-container).
 
@@ -313,7 +317,7 @@ Re-create your container from the new image, [restoring your backup](#restoring-
 necessary.
 
 ```bash
-docker run --name apache bitnami/apache:2.4.12-2-r01
+docker run --name apache bitnami/apache:latest
 ```
 
 or using Docker Compose:
