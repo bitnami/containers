@@ -6,10 +6,18 @@ SLEEP_TIME=3
 VOL_PREFIX=/bitnami/redis
 REDIS_PASSWORD=test_password123
 
-teardown() {
+cleanup_running_containers() {
   if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
     docker rm -fv $CONTAINER_NAME
   fi
+}
+
+setup() {
+  cleanup_running_containers
+}
+
+teardown() {
+  cleanup_running_containers
 }
 
 create_container(){
