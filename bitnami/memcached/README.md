@@ -23,13 +23,15 @@ memcached:
 The recommended way to get the Bitnami Memcached Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com).
 
 ```bash
-docker pull bitnami/memcached:1.4.21-2-r01
+docker pull bitnami/memcached:latest
 ```
 
-To always get the latest version, pull the `latest` tag.
+To use a specific version, you can pull a versioned tag. You can view the
+[list of available versions](https://registry.hub.docker.com/u/bitnami/memcached/tags/manage/)
+in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/memcached:latest
+docker pull bitnami/memcached:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
@@ -56,7 +58,7 @@ Docker's linking system uses container ids or names to reference containers. We 
 specify a name for our Memcached server to make it easier to connect to other containers.
 
 ```bash
-docker run --name memcached-server bitnami/memcached
+docker run --name memcached bitnami/memcached
 ```
 
 ### Step 2: Run your app and link to our server
@@ -65,10 +67,10 @@ Now that we have our Memcached server running, we can create another container t
 giving Docker the `--link` option. This option takes the id or name of the container we want to link
 it to as well as a hostname to use inside the container, separated by a colon. For example, to have
 our Memcached server accessible in another container with `memcached` as it's hostname we would pass
-`--link memcached-server:memcached` to the Docker run command.
+`--link memcached:memcached` to the Docker run command.
 
 ```bash
-docker run -it --link memcached-server:memcached myapp
+docker run -it --link memcached:memcached myapp
 ```
 
 Inside `myapp`, use `memcached` as the hostname for the Memcached server.
@@ -104,7 +106,7 @@ Passing the `MEMCACHED_PASSWORD` environment variable when running the image for
 set the Memcached server password to the value of `MEMCACHED_PASSWORD`.
 
 ```bash
-docker run --name memcached -e MEMCACHED_PASSWORD=my_password bitnami/memcached
+docker run --name memcached -e MEMCACHED_PASSWORD=password123 bitnami/memcached
 ```
 
 or using Docker Compose:
@@ -113,7 +115,7 @@ or using Docker Compose:
 memcached:
   image: bitnami/memcached
   environment:
-    - MEMCACHED_PASSWORD=my_password
+    - MEMCACHED_PASSWORD=password123
 ```
 
 ## Command-line options
@@ -175,7 +177,7 @@ or using Docker Compose:
 memcached:
   image: bitnami/memcached
   volumes:
-    - path/to/memcached/logs:/bitnami/memcached/logs
+    - /path/to/memcached/logs:/bitnami/memcached/logs
 ```
 
 To perform operations (e.g. logrotate) on the logs, mount the same directory in a container designed
@@ -191,11 +193,11 @@ made upstream. We recommend that you follow these steps to upgrade your containe
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/memcached:1.4.21-2-r01
+docker pull bitnami/memcached:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/memcached:1.4.21-2-r01`.
+`bitnami/memcached:latest`.
 
 ### Step 2: Remove the currently running container
 
@@ -214,7 +216,7 @@ docker-compose rm -v memcached
 Re-create your container from the new image.
 
 ```bash
-docker run --name memcached bitnami/memcached:1.4.21-2-r01
+docker run --name memcached bitnami/memcached:latest
 ```
 
 or using Docker Compose:
