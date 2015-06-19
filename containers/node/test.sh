@@ -2,8 +2,10 @@
 CONTAINER_NAME=bitnami-node-test
 IMAGE_NAME=bitnami/node
 
-create_container(){
-  docker run -itd --name $CONTAINER_NAME $IMAGE_NAME
+cleanup_running_containers() {
+  if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
+    docker rm -fv $CONTAINER_NAME
+  fi
 }
 
 add_app() {
@@ -16,24 +18,25 @@ app.get('/', function (req, res) {
 });
 
 var server = app.listen(3000, '0.0.0.0', function () {
-
   var host = server.address().address;
   var port = server.address().port;
 
   console.log('Example app listening at http://%s:%s', host, port);
-
 });
 \" > /app/server.js"
 }
 
+create_container() {
+  docker run -id --name $CONTAINER_NAME $IMAGE_NAME
+}
+
 setup () {
+  cleanup_running_containers
   create_container
 }
 
 teardown() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
-    docker rm -fv $CONTAINER_NAME
-  fi
+  cleanup_running_containers
 }
 
 @test "node and npm installed" {
@@ -51,7 +54,7 @@ teardown() {
 
 @test "can install npm modules with system requirements" {
   run docker exec $CONTAINER_NAME\
-  npm install imagemagick-native express bower
+  npm install imagemagick-native bower
   [ "$status" = 0 ]
 }
 
