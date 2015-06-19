@@ -9,3 +9,6 @@ ln -s $BITNAMI_APP_DIR/etc/conf/php-fpm.conf $BITNAMI_APP_DIR/etc/php-fpm.conf
 chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER /app/ $BITNAMI_APP_DIR/etc/conf $BITNAMI_APP_DIR/var/log
 ln -s $BITNAMI_APP_DIR/var/log $BITNAMI_APP_VOL_PREFIX/logs
 ln -s $BITNAMI_APP_DIR/etc/conf $BITNAMI_APP_VOL_PREFIX/conf
+
+# Temp fix for disabling php-fpm caching
+sudo sed -i -e 's/\(opcache\.enable=\)1/\10/g' $BITNAMI_PREFIX/php/etc/php.ini
