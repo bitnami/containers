@@ -1,3 +1,5 @@
+[![Build
+Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-ruby)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-ruby/)
 # What is Ruby?
 
 > Ruby is a dynamic, open source programming language with a focus on simplicity and productivity.
