@@ -1,3 +1,5 @@
+[![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-nginx)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-nginx/)
+
 # What is nginx?
 
 > nginx (pronounced "engine-x") is an open source reverse proxy server for HTTP, HTTPS, SMTP, POP3,
