@@ -1,3 +1,5 @@
+[![Build
+Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-redis)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-redis/)
 # What is Redis?
 
 > Redis is an advanced key-value cache and store. It is often referred to as a data structure server
