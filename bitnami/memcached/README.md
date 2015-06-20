@@ -1,3 +1,5 @@
+[![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-memcached)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-memcached/)
+
 # What is Memcached?
 
 > Memcached is an in-memory key-value store for small chunks of arbitrary data (strings, objects)
