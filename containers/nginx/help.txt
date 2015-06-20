@@ -1,21 +1,21 @@
   $BITNAMI_APP_NAME cheatsheet:
   
     VOLUMES:
-      /app: Static files to be served.
-      $BITNAMI_APP_VOL_PREFIX/conf: vhosts and general $BITNAMI_APP_NAME configuration files.
-      $BITNAMI_APP_VOL_PREFIX/logs: access and error logs.
+      /app: Location of static files to be served.
+      $BITNAMI_APP_VOL_PREFIX/conf: Location of vhosts directory and general $BITNAMI_APP_NAME configuration files.
+      $BITNAMI_APP_VOL_PREFIX/logs: Location of access and error logs.
   
     PORTS:
-      80: http port
-      443: https port
+      80: Default http port.
+      443: Default https port.
   
     MISC:
-      tip#1: Mount $BITNAMI_APP_VOL_PREFIX/conf/vhosts with your configuration from the host to override the default configuration.
+      Tip: By mounting the $BITNAMI_APP_VOL_PREFIX/conf directory from the host, changing virtual host configuration is as easy as adding appropriate files from the host to the vhosts directory.
   
     COMMANDS:
-      print-help: This page
-      check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available
+      print-help: Print this page.
+      check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available.
 
-  Visit $GITHUB_PAGE for more information
+  Visit $GITHUB_PAGE for more information.
 
 
