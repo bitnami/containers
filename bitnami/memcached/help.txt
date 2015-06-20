@@ -1,21 +1,22 @@
   $BITNAMI_APP_NAME cheatsheet:
   
     ENVIRONMENT VARIABLES:
-      MEMCACHED_PASSWORD: Password for your $BITNAMI_APP_NAME server (default: none)
+      MEMCACHED_PASSWORD: Password to be set on first boot for your $BITNAMI_APP_NAME server (default: none).
   
     VOLUMES:
-      $BITNAMI_APP_VOL_PREFIX/logs: $BITNAMI_APP_NAME logs are placed here
+      $BITNAMI_APP_VOL_PREFIX/logs: Location of $BITNAMI_APP_NAME logs.
   
     PORTS:
-      11211: Default $BITNAMI_APP_NAME port
+      11211: Default $BITNAMI_APP_NAME port.
   
     MISC:
-      note: Please note that the password setup happens only the first time you run the container
+      Options: You can add extra options during the docker run using the -- prefix.
+      Note: The password is only set the first time you run the container.
   
     COMMANDS:
-      print-help: This page
-      check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available
+      print-help: Print this page.
+      check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available.
 
-  Visit $GITHUB_PAGE for more information
+  Visit $GITHUB_PAGE for more information.
 
 
