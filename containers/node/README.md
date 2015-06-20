@@ -1,3 +1,5 @@
+[![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-node)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-node/)
+
 # What is Node.js?
 
 > Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable
