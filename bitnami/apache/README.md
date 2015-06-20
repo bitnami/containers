@@ -1,3 +1,5 @@
+[![Build
+Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-apache)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-apache/)
 # What is Apache?
 
 > The Apache HTTP Server Project is an effort to develop and maintain an open-source HTTP server for
