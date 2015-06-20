@@ -1,0 +1,11 @@
+<VirtualHost *:80>
+  ServerName yourapp.com
+  DocumentRoot "/app"
+  ProxyPass / http://[your_node_container_link_alias]:3000
+  ProxyPassReverse / http://[your_node_container_link_alias]:3000
+  <Directory "/app">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+  </Directory>
+</VirtualHost>
