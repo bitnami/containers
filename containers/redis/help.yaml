@@ -1,17 +1,11 @@
 environment_variables:
-  REDIS_PASSWORD: 'Password for your $BITNAMI_APP_NAME server (default: none)'
+  REDIS_PASSWORD: "Password set at first boot for your $BITNAMI_APP_NAME server (default: none)."
 volumes:
-  $BITNAMI_APP_VOL_PREFIX/data: Your $BITNAMI_APP_NAME database dump is placed here
-  $BITNAMI_APP_VOL_PREFIX/conf: Home of redis.conf
-  $BITNAMI_APP_VOL_PREFIX/logs: $BITNAMI_APP_NAME logs are placed here
+  $BITNAMI_APP_VOL_PREFIX/data: "Location of $BITNAMI_APP_NAME database dump."
+  $BITNAMI_APP_VOL_PREFIX/conf: "Location of redis.conf ($BITNAMI_APP_NAME config file)."
+  $BITNAMI_APP_VOL_PREFIX/logs: "Location of $BITNAMI_APP_NAME logs."
 ports:
-  6369: Default $BITNAMI_APP_NAME port
+  6369: "Default $BITNAMI_APP_NAME port."
 misc:
-  options: You can add extra options during the docker run using the -- prefix
-  note: Please note that the password setup happens only the first time you run the container
-
-
-
-
-
-
+  Options: "You can add extra options during the docker run using the -- prefix."
+  Note: "The password is only set the first time you run the container."
