@@ -1,3 +1,5 @@
+[![Build
+Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-php-fpm)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-php-fpm/)
 # What is PHP-FPM?
 
 > PHP-FPM (FastCGI Process Manager) is an alternative PHP FastCGI implementation with some
