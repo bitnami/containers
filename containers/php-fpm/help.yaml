@@ -1,6 +1,6 @@
 volumes:
-  /app: Default work directory for your $BITNAMI_APP_NAME application
-  $BITNAMI_APP_VOL_PREFIX/conf: Home of php-fpm.conf
-  $BITNAMI_APP_VOL_PREFIX/logs: $BITNAMI_APP_NAME logs are placed here
+  /app: "Default work directory for your $BITNAMI_APP_NAME application."
+  $BITNAMI_APP_VOL_PREFIX/conf: "Location of php-fpm.conf ($BITNAMI_APP_NAME config file)."
+  $BITNAMI_APP_VOL_PREFIX/logs: "Location of $BITNAMI_APP_NAME logs."
 ports:
-  9000: Exposed port, please configure your app to use this port
+  9000: "Port exposed by container. Please configure your $BITNAMI_APP_NAME app to use this port."
