@@ -1,3 +1,5 @@
+[![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-mariadb)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-mariadb/)
+
 # What is MariaDB?
 
 > MariaDB is a fast, reliable, scalable, and easy to use open-source relational database system.
