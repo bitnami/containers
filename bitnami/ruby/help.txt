@@ -1,15 +1,15 @@
   $BITNAMI_APP_NAME cheatsheet:
-
+  
     VOLUMES:
-      /app: Default work directory for your $BITNAMI_APP_NAME application
-
+      /app: Default work directory for your $BITNAMI_APP_NAME application.
+  
     PORTS:
-      3000: Exposed port, please configure your app to use this port
-
+      3000: Port exposed by container. Please configure your $BITNAMI_APP_NAME app to use this port.
+  
     COMMANDS:
-      print-help: This page
-      check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available
+      print-help: Print this page.
+      check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available.
 
-  Visit $GITHUB_PAGE for more information
+  Visit $GITHUB_PAGE for more information.
 
 
