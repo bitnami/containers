@@ -5,6 +5,7 @@ IMAGE_NAME=bitnami/php-fpm
 NGINX_IMAGE_NAME=bitnami/nginx
 SLEEP_TIME=3
 VOL_PREFIX=/bitnami/php-fpm
+HOST_VOL_PREFIX=/tmp/bitnami/php-fpm
 
 cleanup_running_containers() {
   if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
@@ -17,8 +18,7 @@ cleanup_running_containers() {
 }
 
 create_container(){
-  cleanup_running_containers
-  docker run -d --name $CONTAINER_NAME $IMAGE_NAME
+  docker run -d --name $CONTAINER_NAME "$@" $IMAGE_NAME
 }
 
 add_vhost() {
@@ -34,7 +34,7 @@ create_nginx_container(){
 }
 
 setup () {
-  create_container
+  cleanup_running_containers
 }
 
 teardown() {
@@ -42,6 +42,7 @@ teardown() {
 }
 
 @test "php and php-fpm installed" {
+  create_container
   run docker exec $CONTAINER_NAME php -v
   [ "$status" = 0 ]
   run docker exec $CONTAINER_NAME php-fpm -v
@@ -49,6 +50,7 @@ teardown() {
 }
 
 @test "winter is coming via nginx" {
+  create_container
   docker exec $CONTAINER_NAME sh -c "echo '<?php echo \"Winter is coming\"; ?>' > index.php"
   create_nginx_container
   run docker exec $NGINX_CONTAINER_NAME curl 127.0.0.1:81/index.php
@@ -56,9 +58,16 @@ teardown() {
 }
 
 @test "required volumes exposed" {
+  create_container
   run docker inspect $CONTAINER_NAME
   [[ "$output" =~ "/app" ]]
   [[ "$output" =~ "$VOL_PREFIX/logs" ]]
   [[ "$output" =~ "$VOL_PREFIX/conf" ]]
 }
 
+@test "Data gets generated in conf if bind mounted in the host" {
+  create_container -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs
+  run docker run --rm -v $HOST_VOL_PREFIX:$HOST_VOL_PREFIX $IMAGE_NAME ls -l $HOST_VOL_PREFIX/conf/php-fpm.conf $HOST_VOL_PREFIX/logs/php-fpm.log
+  [ $status = 0 ]
+  docker run --rm -v $HOST_VOL_PREFIX:$HOST_VOL_PREFIX $IMAGE_NAME sh -c "sudo rm -rf $HOST_VOL_PREFIX/*"
+}
