@@ -3,7 +3,7 @@ MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=memcached \
     BITNAMI_APP_USER=memcached \
-    BITNAMI_APP_VERSION=1.4.24-0-r01
+    BITNAMI_APP_VERSION=1.4.24-0-r02
 
 ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/$BITNAMI_APP_NAME \
     BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME
@@ -17,4 +17,4 @@ EXPOSE 11211
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["memcached", "-vv"]
+CMD ["memcached", "-v"]
