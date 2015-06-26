@@ -1,12 +1,12 @@
 #!/usr/bin/env bats
 CONTAINER_NAME=bitnami-mariadb-test
-IMAGE_NAME=bitnami/mariadb
+IMAGE_NAME=${IMAGE_NAME:-bitnami/mariadb}
 SLEEP_TIME=5
 MARIADB_DATABASE=test_database
 MARIADB_USER=test_user
 MARIADB_PASSWORD=test_password
 VOL_PREFIX=/bitnami/mariadb
-HOST_VOL_PREFIX=/tmp/bitnami/$CONTAINER_NAME
+HOST_VOL_PREFIX=${HOST_VOL_PREFIX:-/tmp/bitnami/$CONTAINER_NAME}
 
 cleanup_running_containers() {
   if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
