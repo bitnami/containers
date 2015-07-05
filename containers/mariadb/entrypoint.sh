@@ -19,7 +19,7 @@ if [ "$1" = 'mysqld.bin' ]; then
   mkdir -p $BITNAMI_APP_DIR/tmp
   chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/tmp || true
 
-  if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/data)" ]; then
+  if [ ! -d $BITNAMI_APP_VOL_PREFIX/data/mysql ]; then
 
     set -- "$@" --init-file=/tmp/init_mysql.sql
 
