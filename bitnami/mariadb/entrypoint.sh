@@ -8,6 +8,9 @@ print_welcome_page
 if [ "${1:0:1}" = '-' ]; then
   EXTRA_OPTIONS="$@"
   set -- mysqld.bin
+elif [ "${1}" == "mysqld.bin" -o "${1}" == "$BITNAMI_APP_DIR/bin/mysqld.bin" ]; then
+  EXTRA_OPTIONS="${@:2}"
+  set -- mysqld.bin
 fi
 
 if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
@@ -15,7 +18,7 @@ if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
 fi
 
 if [ "$1" = 'mysqld.bin' ]; then
-  set -- $@ $PROGRAM_OPTIONS
+  set -- $@ $PROGRAM_OPTIONS $EXTRA_OPTIONS
   mkdir -p $BITNAMI_APP_DIR/tmp
   chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/tmp || true
 
