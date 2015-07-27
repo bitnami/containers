@@ -1,6 +1,14 @@
 # MariaDB Utility functions
 PROGRAM_OPTIONS="--defaults-file=$BITNAMI_APP_DIR/my.cnf --log-error=$BITNAMI_APP_DIR/logs/mysqld.log --basedir=$BITNAMI_APP_DIR --datadir=$BITNAMI_APP_DIR/data --plugin-dir=$BITNAMI_APP_DIR/lib/plugin --user=$BITNAMI_APP_USER --socket=$BITNAMI_APP_DIR/tmp/mysql.sock --lower-case-table-names=1"
 
+if [ "$REPLICATION_MODE" ]; then
+  SERVER_ID=${SERVER_ID:-$RANDOM}
+  PROGRAM_OPTIONS+=" --server-id=$SERVER_ID --log-bin=mysql-bin --binlog-format=ROW"
+  if [ "$REPLICATION_MODE" = "slave" ]; then
+    PROGRAM_OPTIONS+=" --relay-log=mysql-relay-bin ${MARIADB_DATABASE:+--replicate-do-db=$MARIADB_DATABASE}"
+  fi
+fi
+
 initialize_database() {
     echo "==> Initializing MySQL database..."
     echo ""
@@ -44,6 +52,40 @@ create_mysql_user() {
 
   echo "FLUSH PRIVILEGES ;" >> /tmp/init_mysql.sql
   echo "DROP DATABASE IF EXISTS test ; " >> /tmp/init_mysql.sql
+}
+
+configure_replication() {
+  case "$REPLICATION_MODE" in
+    master)
+      if [ "$REPLICATION_USER" ]; then
+        echo "==> Creating replication user $REPLICATION_USER..."
+        echo ""
+
+        echo "GRANT REPLICATION SLAVE ON *.* TO '$REPLICATION_USER'@'%' IDENTIFIED BY '$REPLICATION_PASSWORD';" >> /tmp/init_mysql.sql
+        echo "FLUSH PRIVILEGES ;" >> /tmp/init_mysql.sql
+      fi
+      ;;
+    slave)
+      echo ""
+      echo "==> Setting up MariaDB slave..."
+
+      echo "==> Trying to fetch MariaDB master connection parameters from the mariadb-master link..."
+      MASTER_HOST=${MASTER_HOST:-$MARIADB_MASTER_PORT_3306_TCP_ADDR}
+      MASTER_USER=${MASTER_USER:-$MARIADB_MASTER_ENV_MARIADB_USER}
+      MASTER_PASSWORD=${MASTER_PASSWORD:-$MARIADB_MASTER_ENV_MARIADB_PASSWORD}
+      REPLICATION_USER=${REPLICATION_USER:-$MARIADB_MASTER_ENV_REPLICATION_USER}
+      REPLICATION_PASSWORD=${REPLICATION_PASSWORD:-$MARIADB_MASTER_ENV_REPLICATION_PASSWORD}
+
+      echo "==> Creating a data snapshot..."
+      mysqldump -u$MASTER_USER ${MASTER_PASSWORD:+-p$MASTER_PASSWORD} -h $MASTER_HOST $MARIADB_DATABASE --master-data >> /tmp/init_mysql.sql
+
+      echo "==> Setting the master configuration..."
+      echo "CHANGE MASTER TO MASTER_HOST='$MASTER_HOST', MASTER_USER='$REPLICATION_USER', MASTER_PASSWORD='$REPLICATION_PASSWORD'" >> /tmp/init_mysql.sql
+
+      echo "==> Starting the slave..."
+      echo "START SLAVE ;" >> /tmp/init_mysql.sql
+      ;;
+  esac
 }
 
 print_mysql_password() {
