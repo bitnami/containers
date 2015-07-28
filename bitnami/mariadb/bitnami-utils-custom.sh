@@ -76,11 +76,11 @@ configure_replication() {
       REPLICATION_USER=${REPLICATION_USER:-$MARIADB_MASTER_ENV_REPLICATION_USER}
       REPLICATION_PASSWORD=${REPLICATION_PASSWORD:-$MARIADB_MASTER_ENV_REPLICATION_PASSWORD}
 
+      echo "==> Setting the master configuration..."
+      echo "CHANGE MASTER TO MASTER_HOST='$MASTER_HOST', MASTER_USER='$REPLICATION_USER', MASTER_PASSWORD='$REPLICATION_PASSWORD';" >> /tmp/init_mysql.sql
+
       echo "==> Creating a data snapshot..."
       mysqldump -u$MASTER_USER ${MASTER_PASSWORD:+-p$MASTER_PASSWORD} -h $MASTER_HOST $MARIADB_DATABASE --master-data >> /tmp/init_mysql.sql
-
-      echo "==> Setting the master configuration..."
-      echo "CHANGE MASTER TO MASTER_HOST='$MASTER_HOST', MASTER_USER='$REPLICATION_USER', MASTER_PASSWORD='$REPLICATION_PASSWORD'" >> /tmp/init_mysql.sql
 
       echo "==> Starting the slave..."
       echo "START SLAVE ;" >> /tmp/init_mysql.sql
