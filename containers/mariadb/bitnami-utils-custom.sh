@@ -1,13 +1,14 @@
 # MariaDB Utility functions
 PROGRAM_OPTIONS="--defaults-file=$BITNAMI_APP_DIR/my.cnf --log-error=$BITNAMI_APP_DIR/logs/mysqld.log --basedir=$BITNAMI_APP_DIR --datadir=$BITNAMI_APP_DIR/data --plugin-dir=$BITNAMI_APP_DIR/lib/plugin --user=$BITNAMI_APP_USER --socket=$BITNAMI_APP_DIR/tmp/mysql.sock --lower-case-table-names=1"
 
-if [ "$REPLICATION_MODE" ]; then
-  SERVER_ID=${SERVER_ID:-$RANDOM}
-  PROGRAM_OPTIONS+=" --server-id=$SERVER_ID --log-bin=mysql-bin --binlog-format=ROW"
-  if [ "$REPLICATION_MODE" = "slave" ]; then
-    PROGRAM_OPTIONS+=" --relay-log=mysql-relay-bin ${MARIADB_DATABASE:+--replicate-do-db=$MARIADB_DATABASE}"
-  fi
-fi
+case "$REPLICATION_MODE" in
+  master )
+    PROGRAM_OPTIONS+=" --server-id=${SERVER_ID:-$RANDOM} --binlog-format=ROW --log-bin=mysql-bin"
+    ;;
+  slave)
+    PROGRAM_OPTIONS+=" --server-id=${SERVER_ID:-$RANDOM} --binlog-format=ROW --relay-log=mysql-relay-bin ${MARIADB_DATABASE:+--replicate-do-db=$MARIADB_DATABASE}"
+    ;;
+esac
 
 initialize_database() {
     echo "==> Initializing MySQL database..."
