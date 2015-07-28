@@ -68,7 +68,6 @@ configure_replication() {
       fi
       ;;
     slave)
-      echo ""
       echo "==> Setting up MariaDB slave..."
 
       echo "==> Trying to fetch MariaDB master connection parameters from the mariadb-master link..."
@@ -84,6 +83,7 @@ configure_replication() {
       echo "==> Creating a data snapshot..."
       mysqldump -u$MASTER_USER ${MASTER_PASSWORD:+-p$MASTER_PASSWORD} -h $MASTER_HOST \
         --databases $MARIADB_DATABASE --master-data --apply-slave-statements --comments=false | tr -d '\012' | sed -e 's/;/;\n/g' >> /tmp/init_mysql.sql
+      echo ""
       ;;
   esac
 }
