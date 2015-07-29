@@ -3,10 +3,10 @@ PROGRAM_OPTIONS="--defaults-file=$BITNAMI_APP_DIR/my.cnf --log-error=$BITNAMI_AP
 
 case "$REPLICATION_MODE" in
   master )
-    PROGRAM_OPTIONS+=" --server-id=${SERVER_ID:-$RANDOM} --binlog-format=ROW --log-bin=mysql-bin"
+    PROGRAM_OPTIONS+=" --server-id=${SERVER_ID:-$RANDOM} --binlog-format=ROW --log-bin=mysql-bin --innodb_flush_log_at_trx_commit=1 --sync-binlog=1"
     ;;
   slave)
-    PROGRAM_OPTIONS+=" --server-id=${SERVER_ID:-$RANDOM} --binlog-format=ROW --relay-log=mysql-relay-bin ${MARIADB_DATABASE:+--replicate-do-db=$MARIADB_DATABASE}"
+    PROGRAM_OPTIONS+=" --server-id=${SERVER_ID:-$RANDOM} --binlog-format=ROW --log-bin=mysql-bin --relay-log=mysql-relay-bin --log-slave-updates=1 --read-only=1 ${MARIADB_DATABASE:+--replicate-do-db=$MARIADB_DATABASE}"
     ;;
 esac
 
@@ -82,7 +82,7 @@ configure_replication() {
 
       echo "==> Creating a data snapshot..."
       mysqldump -u$MASTER_USER ${MASTER_PASSWORD:+-p$MASTER_PASSWORD} -h $MASTER_HOST \
-        --databases $MARIADB_DATABASE --master-data --apply-slave-statements --comments=false | tr -d '\012' | sed -e 's/;/;\n/g' >> /tmp/init_mysql.sql
+        --databases $MARIADB_DATABASE --skip-lock-tables --single-transaction --flush-logs --hex-blob --master-data --apply-slave-statements --comments=false | tr -d '\012' | sed -e 's/;/;\n/g' >> /tmp/init_mysql.sql
       echo ""
       ;;
   esac
