@@ -1,6 +1,6 @@
 volumes:
   $BITNAMI_APP_VOL_PREFIX/data: "Location of $BITNAMI_APP_NAME database dump."
-  $BITNAMI_APP_VOL_PREFIX/conf: "Location of redis.conf ($BITNAMI_APP_NAME config file)."
+  $BITNAMI_APP_VOL_PREFIX/conf: "Location of mongodb.conf ($BITNAMI_APP_NAME config file)."
   $BITNAMI_APP_VOL_PREFIX/logs: "Location of $BITNAMI_APP_NAME logs."
 ports:
   27017: "Default $BITNAMI_APP_NAME port."
