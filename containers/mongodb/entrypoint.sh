@@ -16,6 +16,7 @@ else
   print_container_already_initialized $BITNAMI_APP_NAME
 fi
 
+rm -rf $BITNAMI_APP_VOL_PREFIX/data/mongod.lock
 chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/data/ \
   $BITNAMI_APP_VOL_PREFIX/logs/ \
   $BITNAMI_APP_VOL_PREFIX/conf/ || true
