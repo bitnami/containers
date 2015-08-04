@@ -1,5 +1,10 @@
   $BITNAMI_APP_NAME cheatsheet:
   
+    ENVIRONMENT VARIABLES:
+      MONGODB_USER: User to be created on first boot (default: root).
+      MONGODB_PASSWORD: Password to be set for MONGODB_USER on first boot (default: none).
+      MONGODB_DATABASE: Database to be created on first boot, accessible by MONGODB_USER (default: none).
+  
     VOLUMES:
       $BITNAMI_APP_VOL_PREFIX/data: Location of $BITNAMI_APP_NAME data files.
       $BITNAMI_APP_VOL_PREFIX/conf: Location of mongodb.conf ($BITNAMI_APP_NAME config file).
@@ -10,7 +15,8 @@
   
     MISC:
       Options: You can add extra options during the docker run using the -- prefix.
-      Note: The password is only set the first time you run the container.
+      Note: MONGODB_USER works in conjunction with MONGODB_DATABASE environment variable.
+      Tip: Back up the $BITNAMI_APP_VOL_PREFIX/data and $BITNAMI_APP_VOL_PREFIX/conf directories regularly.
   
     COMMANDS:
       print-help: Print this page.
