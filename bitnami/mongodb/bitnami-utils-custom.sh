@@ -22,8 +22,18 @@ create_mongodb_user() {
   echo ""
   echo "==> Creating user $MONGODB_USER..."
 
+  # start mongodb server and wait for it to accept connections
   mongod $PROGRAM_OPTIONS --logpath /dev/null --bind_ip 127.0.0.1 --fork >/dev/null
-  sleep 2
+  timeout=10
+  while ! mongo --eval "db.adminCommand('listDatabases')" >/dev/null 2>&1
+  do
+    timeout=$(($timeout - 1))
+    if [ $timeout -eq 0 ]; then
+      echo "Could not connect to server. Aborting..."
+      exit 1
+    fi
+    sleep 1
+  done
 
   if [ "$MONGODB_USER" == "root" ]; then
     cat >> /tmp/initMongo.js <<EOF
