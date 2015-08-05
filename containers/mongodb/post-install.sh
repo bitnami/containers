@@ -13,6 +13,5 @@ ln -s $BITNAMI_APP_DIR/conf $BITNAMI_APP_VOL_PREFIX/conf
 ln -s $BITNAMI_APP_DIR/data $BITNAMI_APP_VOL_PREFIX/data
 ln -s $BITNAMI_APP_DIR/log $BITNAMI_APP_VOL_PREFIX/logs
 
-# Temp fix for disabling mongod forking and authentication
-sed -i 's/^fork/# fork/' $BITNAMI_APP_DIR/conf.defaults/mongodb.conf
+# Temp fix for disabling authentication
 sed -i 's/^auth/# auth/' $BITNAMI_APP_DIR/conf.defaults/mongodb.conf
