@@ -33,7 +33,7 @@ if [[ "$1" = 'mongod' ]]; then
 
   # Add default configuration
   if [[ "$@" = 'mongod' ]]; then
-    exec gosu $BITNAMI_APP_USER "$@" $PROGRAM_OPTIONS $EXTRA_OPTIONS
+    exec gosu $BITNAMI_APP_USER "$@" $PROGRAM_OPTIONS ${MONGODB_PASSWORD:+--auth} $EXTRA_OPTIONS
   else
     exec gosu $BITNAMI_APP_USER "$@"
   fi
