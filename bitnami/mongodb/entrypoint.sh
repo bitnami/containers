@@ -29,7 +29,7 @@ if [[ "$1" = 'mongod' ]]; then
   # Add default configuration
   if [[ "$@" = 'mongod' ]]; then
     exec gosu $BITNAMI_APP_USER "$@" \
-      --config $BITNAMI_APP_VOL_PREFIX/conf/mongodb.conf --dbpath $BITNAMI_APP_DIR/data $EXTRA_OPTIONS
+      --config $BITNAMI_APP_DIR/conf/mongodb.conf --dbpath $BITNAMI_APP_DIR/data $EXTRA_OPTIONS
   else
     exec gosu $BITNAMI_APP_USER "$@"
   fi
