@@ -139,7 +139,10 @@ mongodb:
     - MONGODB_PASSWORD=password123
 ```
 
-Setting the `MONGODB_PASSWORD` enables authentication on the MongoDB server, where the root user has full administrative access, else the server allows unauthenticated, full administrative access.
+The `root` user is configured to have full administrative access to the MongoDB server. When `MONGODB_PASSWORD` is not specified the server allows unauthenticated and unrestricted access.
+
+**Note!**
+The `MONGODB_PASSWORD` enables authentication on the MongoDB server at runtime. Ensure that this parameter is **always** specified to ensure that authentication is enabled each time the container is started.
 
 ## Creating a user and database on first run
 
