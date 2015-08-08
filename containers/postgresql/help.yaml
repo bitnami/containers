@@ -3,7 +3,8 @@ environment_variables:
   POSTGRESQL_PASSWORD: "Password to be set for POSTGRESQL_USER on first boot (default: none)."
   POSTGRESQL_DATABASE: "Database to be created on first boot, accessible by POSTGRESQL_USER (default: none)."
 volumes:
-  $BITNAMI_APP_VOL_PREFIX/data: "Location of $BITNAMI_APP_NAME data, config and log files."
+  $BITNAMI_APP_VOL_PREFIX/data: "Location of $BITNAMI_APP_NAME data files."
+  $BITNAMI_APP_VOL_PREFIX/logs: "Location of postgresql.log."
 ports:
   5432: "$BITNAMI_APP_NAME default port."
 misc:
