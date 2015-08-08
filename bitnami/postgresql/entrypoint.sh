@@ -29,7 +29,9 @@ if [ "$1" = 'postgres' ]; then
   else
     print_container_already_initialized $BITNAMI_APP_NAME
   fi
-  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/data/ || true
+  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER \
+    $BITNAMI_APP_VOL_PREFIX/data/ \
+    $BITNAMI_APP_VOL_PREFIX/logs/ || true
 
   exec gosu $BITNAMI_APP_USER "$@"
 else

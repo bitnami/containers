@@ -14,7 +14,7 @@ RUN sh $BITNAMI_PREFIX/install.sh\
 
 COPY bitnami-utils-custom.sh /bitnami-utils-custom.sh
 EXPOSE 5432
-VOLUME ["$BITNAMI_APP_VOL_PREFIX/data"]
+VOLUME ["$BITNAMI_APP_VOL_PREFIX/data", "$BITNAMI_APP_VOL_PREFIX/logs"]
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

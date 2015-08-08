@@ -6,8 +6,8 @@
       POSTGRESQL_DATABASE: Database to be created on first boot, accessible by POSTGRESQL_USER (default: none).
   
     VOLUMES:
-      $BITNAMI_APP_VOL_PREFIX/data: Location of $BITNAMI_APP_NAME data, config and log files.
-
+      $BITNAMI_APP_VOL_PREFIX/data: Location of $BITNAMI_APP_NAME data files.
+      $BITNAMI_APP_VOL_PREFIX/logs: Location of postgresql.log.
   
     PORTS:
       5432: $BITNAMI_APP_NAME default port.
@@ -22,5 +22,3 @@
       check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available.
 
   Visit $GITHUB_PAGE for more information.
-
-

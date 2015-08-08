@@ -19,6 +19,12 @@ EOF
 host    all             all             0.0.0.0/0               md5
 EOF
 
+  cat >> $BITNAMI_APP_DIR/data/postgresql.conf <<EOF
+logging_collector = on
+log_directory = '$BITNAMI_APP_DIR/logs'
+log_filename = 'postgresql.log'
+EOF
+
   chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/data
 }
 
