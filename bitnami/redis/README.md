@@ -23,14 +23,14 @@ redis:
 # Get this image
 
 The recommended way to get the Bitnami Redis Docker Image is to pull the prebuilt image from the
-[Docker Hub Registry](https://hub.docker.com/u/bitnami/redis).
+[Docker Hub Registry](https://hub.docker.com/r/bitnami/redis).
 
 ```bash
 docker pull bitnami/redis:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the
-[list of available versions](https://registry.hub.docker.com/u/bitnami/redis/tags/manage/)
+[list of available versions](https://hub.docker.com/r/bitnami/redis/tags/)
 in the Docker Hub Registry.
 
 ```bash
