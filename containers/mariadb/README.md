@@ -23,14 +23,14 @@ mariadb:
 
 # Get this image
 
-The recommended way to get the Bitnami MariaDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/u/bitnami/mariadb).
+The recommended way to get the Bitnami MariaDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mariadb).
 
 ```bash
 docker pull bitnami/mariadb:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the
-[list of available versions](https://registry.hub.docker.com/u/bitnami/mariadb/tags/manage/)
+[list of available versions](https://hub.docker.com/r/bitnami/mariadb/tags/)
 in the Docker Hub Registry.
 
 ```bash
