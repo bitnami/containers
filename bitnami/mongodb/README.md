@@ -19,13 +19,13 @@ mongodb:
 
 # Get this image
 
-The recommended way to get the Bitnami MongoDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/u/bitnami/mongodb).
+The recommended way to get the Bitnami MongoDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mongodb).
 
 ```bash
 docker pull bitnami/mongodb:latest
 ```
 
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://registry.hub.docker.com/u/bitnami/mongodb/tags/manage/) in the Docker Hub Registry.
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/mongodb/tags/) in the Docker Hub Registry.
 
 ```bash
 docker pull bitnami/mongodb:[TAG]
