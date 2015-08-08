@@ -23,14 +23,14 @@ nginx:
 # Get this image
 
 The recommended way to get the Bitnami nginx Docker Image is to pull the prebuilt image from the
-[Docker Hub Registry](https://hub.docker.com/u/bitnami/nginx).
+[Docker Hub Registry](https://hub.docker.com/r/bitnami/nginx).
 
 ```bash
 docker pull bitnami/nginx:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the
-[list of available versions](https://registry.hub.docker.com/u/bitnami/nginx/tags/manage/)
+[list of available versions](https://hub.docker.com/r/bitnami/nginx/tags/)
 in the Docker Hub Registry.
 
 ```bash
