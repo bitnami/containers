@@ -1,0 +1,26 @@
+  $BITNAMI_APP_NAME cheatsheet:
+  
+    ENVIRONMENT VARIABLES:
+      POSTGRESQL_USER: User to be created on first boot (default: postgres).
+      POSTGRESQL_PASSWORD: Password to be set for POSTGRESQL_USER on first boot (default: none).
+      POSTGRESQL_DATABASE: Database to be created on first boot, accessible by POSTGRESQL_USER (default: none).
+  
+    VOLUMES:
+      $BITNAMI_APP_VOL_PREFIX/data: Location of $BITNAMI_APP_NAME data, config and log files.
+
+  
+    PORTS:
+      5432: $BITNAMI_APP_NAME default port.
+  
+    MISC:
+      Options: You can add extra options during the docker run using the -- prefix.
+      Note: POSTGRESQL_USER works in conjunction with POSTGRESQL_DATABASE environment variable.
+      Tip: Back up the $BITNAMI_APP_VOL_PREFIX/data directory regularly.
+  
+    COMMANDS:
+      print-help: Print this page.
+      check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available.
+
+  Visit $GITHUB_PAGE for more information.
+
+
