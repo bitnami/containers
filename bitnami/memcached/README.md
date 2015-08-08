@@ -29,7 +29,7 @@ docker pull bitnami/memcached:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the
-[list of available versions](https://registry.hub.docker.com/u/bitnami/memcached/tags/manage/)
+[list of available versions](https://hub.docker.com/r/bitnami/memcached/tags/)
 in the Docker Hub Registry.
 
 ```bash
