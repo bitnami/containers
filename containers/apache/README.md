@@ -25,14 +25,14 @@ apache:
 # Get this image
 
 The recommended way to get the Bitnami Apache Docker Image is to pull the prebuilt image from the
-[Docker Hub Registry](https://hub.docker.com/u/bitnami/apache).
+[Docker Hub Registry](https://hub.docker.com/r/bitnami/apache).
 
 ```bash
 docker pull bitnami/apache:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the
-[list of available versions](https://registry.hub.docker.com/u/bitnami/apache/tags/manage/)
+[list of available versions](https://hub.docker.com/r/bitnami/apache/tags/)
 in the Docker Hub Registry.
 
 ```bash
