@@ -61,3 +61,8 @@ psql_client(){
   run psql_client -U $POSTGRESQL_ROOT_USER -Axc "\l"
   [[ "$output" =~ "Name|$POSTGRESQL_DATABASE" ]]
 }
+
+@test "Can't create a custom user without database" {
+  run create_container -it -e POSTGRESQL_USER=$POSTGRESQL_USER
+  [[ "$output" =~ "you need to provide the POSTGRESQL_DATABASE" ]]
+}
