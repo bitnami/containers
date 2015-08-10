@@ -6,6 +6,8 @@ POSTGRESQL_DATABASE=test_database
 POSTGRESQL_ROOT_USER=postgres
 POSTGRESQL_USER=test_user
 POSTGRESQL_PASSWORD=test_password
+VOL_PREFIX=/bitnami/postgresql
+HOST_VOL_PREFIX=${HOST_VOL_PREFIX:-/tmp/bitnami/$CONTAINER_NAME}
 
 cleanup_running_containers() {
   if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
@@ -15,10 +17,18 @@ cleanup_running_containers() {
 
 setup() {
   cleanup_running_containers
+  mkdir -p $HOST_VOL_PREFIX
 }
 
 teardown() {
   cleanup_running_containers
+}
+
+cleanup_volumes_content() {
+  docker run --rm\
+    -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data\
+    -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs\
+    $IMAGE_NAME rm -rf $VOL_PREFIX/data/ $VOL_PREFIX/logs/
 }
 
 create_container(){
@@ -36,6 +46,17 @@ create_full_container(){
    -e POSTGRESQL_USER=$POSTGRESQL_USER\
    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE\
    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD $IMAGE_NAME
+  sleep $SLEEP_TIME
+}
+
+create_full_container_mounted(){
+  docker run -d --name $CONTAINER_NAME\
+   -e POSTGRESQL_USER=$POSTGRESQL_USER\
+   -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE\
+   -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD\
+   -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data\
+   -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs\
+   $IMAGE_NAME
   sleep $SLEEP_TIME
 }
 
@@ -98,4 +119,20 @@ create_full_container(){
 
   run psql_client -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c "\dt"
   [ $status = 0 ]
+}
+
+@test "If host mounted, password and settings are preserved after deletion" {
+  cleanup_volumes_content
+  create_full_container_mounted
+
+  docker rm -fv $CONTAINER_NAME
+
+  docker run -d --name $CONTAINER_NAME\
+   -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data\
+   $IMAGE_NAME
+  sleep $SLEEP_TIME
+
+  run psql_client -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c "\dt"
+  [ $status = 0 ]
+  cleanup_volumes_content
 }
