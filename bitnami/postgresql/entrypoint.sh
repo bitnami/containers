@@ -16,9 +16,8 @@ fi
 if [ "$1" = 'postgres' ]; then
   set -- $@ $PROGRAM_OPTIONS $EXTRA_OPTIONS
 
+  export LD_LIBRARY_PATH=$BITNAMI_PREFIX/common/lib
   if [ ! -f $BITNAMI_APP_VOL_PREFIX/data/PG_VERSION ]; then
-    export LD_LIBRARY_PATH=$BITNAMI_PREFIX/common/lib
-
     initialize_database
 
     create_custom_database
