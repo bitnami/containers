@@ -85,3 +85,17 @@ create_full_container(){
   run psql_client -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c "\dt"
   [ $status = 0 ]
 }
+
+@test "User and password settings are preserved after restart" {
+  create_full_container
+
+  docker stop $CONTAINER_NAME
+  docker start $CONTAINER_NAME
+  sleep $SLEEP_TIME
+
+  run docker logs $CONTAINER_NAME
+  [[ "$output" =~ "The credentials were set on first boot." ]]
+
+  run psql_client -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c "\dt"
+  [ $status = 0 ]
+}
