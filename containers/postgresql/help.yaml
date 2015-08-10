@@ -4,6 +4,7 @@ environment_variables:
   POSTGRESQL_DATABASE: "Database to be created on first boot, accessible by POSTGRESQL_USER (default: none)."
 volumes:
   $BITNAMI_APP_VOL_PREFIX/data: "Location of $BITNAMI_APP_NAME data files."
+  $BITNAMI_APP_VOL_PREFIX/conf: "Location of $BITNAMI_APP_NAME config files."
   $BITNAMI_APP_VOL_PREFIX/logs: "Location of postgresql.log."
 ports:
   5432: "$BITNAMI_APP_NAME default port."
@@ -11,4 +12,4 @@ misc:
   Options: "You can add extra options during the docker run using the -- prefix."
   Note: "The user and database creation happens only the first time you run the container."
   Note: "POSTGRESQL_USER works in conjunction with POSTGRESQL_DATABASE environment variable."
-  Tip: "Back up the $BITNAMI_APP_VOL_PREFIX/data directory regularly."
+  Tip: "Back up the $BITNAMI_APP_VOL_PREFIX/data and $BITNAMI_APP_VOL_PREFIX/conf directories regularly."
