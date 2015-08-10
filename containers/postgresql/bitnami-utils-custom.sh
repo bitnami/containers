@@ -9,19 +9,27 @@ initialize_database() {
   gosu $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/initdb -D $BITNAMI_APP_DIR/data \
     -U $BITNAMI_APP_USER -E unicode -A trust >/dev/null
 
+  echo "==> Populating conf files..."
+  echo ""
+  mv $BITNAMI_APP_DIR/data/{pg_hba.conf,pg_ident.conf,postgresql.auto.conf,postgresql.conf} $BITNAMI_APP_DIR/conf/
+  ln -sf $BITNAMI_APP_DIR/conf/pg_hba.conf $BITNAMI_APP_DIR/data/
+  ln -sf $BITNAMI_APP_DIR/conf/pg_ident.conf $BITNAMI_APP_DIR/data/
+  ln -sf $BITNAMI_APP_DIR/conf/postgresql.auto.conf $BITNAMI_APP_DIR/data/
+  ln -sf $BITNAMI_APP_DIR/conf/postgresql.conf $BITNAMI_APP_DIR/data/
+
   echo "==> Configuring PostgreSQL to listen on all interfaces..."
   echo ""
-  cat >> $BITNAMI_APP_DIR/data/postgresql.conf <<EOF
+  cat >> $BITNAMI_APP_DIR/conf/postgresql.conf <<EOF
 listen_addresses='*'
 EOF
 
   echo "==> Enabling remote connections to PostgreSQL server..."
   echo ""
-  cat >> $BITNAMI_APP_DIR/data/pg_hba.conf <<EOF
+  cat >> $BITNAMI_APP_DIR/conf/pg_hba.conf <<EOF
 host    all             all             0.0.0.0/0               md5
 EOF
 
-  cat >> $BITNAMI_APP_DIR/data/postgresql.conf <<EOF
+  cat >> $BITNAMI_APP_DIR/conf/postgresql.conf <<EOF
 logging_collector = on
 log_directory = '$BITNAMI_APP_DIR/logs'
 log_filename = 'postgresql.log'

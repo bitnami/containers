@@ -7,6 +7,7 @@
   
     VOLUMES:
       $BITNAMI_APP_VOL_PREFIX/data: Location of $BITNAMI_APP_NAME data files.
+      $BITNAMI_APP_VOL_PREFIX/conf: Location of $BITNAMI_APP_NAME config files.
       $BITNAMI_APP_VOL_PREFIX/logs: Location of postgresql.log.
   
     PORTS:
@@ -15,7 +16,7 @@
     MISC:
       Options: You can add extra options during the docker run using the -- prefix.
       Note: POSTGRESQL_USER works in conjunction with POSTGRESQL_DATABASE environment variable.
-      Tip: Back up the $BITNAMI_APP_VOL_PREFIX/data directory regularly.
+      Tip: Back up the $BITNAMI_APP_VOL_PREFIX/data and $BITNAMI_APP_VOL_PREFIX/conf directories regularly.
   
     COMMANDS:
       print-help: Print this page.
