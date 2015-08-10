@@ -33,6 +33,7 @@ if [ "$1" = 'postgres' ]; then
     $BITNAMI_APP_VOL_PREFIX/data/ \
     $BITNAMI_APP_VOL_PREFIX/logs/ || true
 
+  wait_and_tail_logs &
   exec gosu $BITNAMI_APP_USER "$@"
 else
   exec "$@"
