@@ -48,3 +48,10 @@ psql_client(){
   run psql_client -U $POSTGRESQL_ROOT_USER -c "\l"
   [ $status = 0 ]
 }
+
+@test "User postgres is superuser" {
+  create_container -d -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD
+  run psql_client -U $POSTGRESQL_ROOT_USER -Axc "SHOW is_superuser;"
+  [[ $output =~ "is_superuser|on" ]]
+  [ $status = 0 ]
+}
