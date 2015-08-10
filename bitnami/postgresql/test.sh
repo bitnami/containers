@@ -143,3 +143,10 @@ create_full_container_mounted(){
   [[ "$output" =~ "$VOL_PREFIX/data" ]]
   [[ "$output" =~ "$VOL_PREFIX/logs" ]]
 }
+
+@test "Data gets generated in data and logs if bind mounted in the host" {
+  create_full_container_mounted
+  run docker run -v $HOST_VOL_PREFIX:$HOST_VOL_PREFIX --rm $IMAGE_NAME ls -l $HOST_VOL_PREFIX/data/postgresql.conf $HOST_VOL_PREFIX/logs/postgresql.log
+  [ $status = 0 ]
+  cleanup_volumes_content
+}
