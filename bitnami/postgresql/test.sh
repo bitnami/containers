@@ -55,3 +55,9 @@ psql_client(){
   [[ $output =~ "is_superuser|on" ]]
   [ $status = 0 ]
 }
+
+@test "Custom database created" {
+  create_container -d -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE
+  run psql_client -U $POSTGRESQL_ROOT_USER -Axc "\l"
+  [[ "$output" =~ "Name|$POSTGRESQL_DATABASE" ]]
+}
