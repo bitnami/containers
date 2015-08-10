@@ -27,8 +27,9 @@ teardown() {
 cleanup_volumes_content() {
   docker run --rm\
     -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data\
+    -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
     -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs\
-    $IMAGE_NAME rm -rf $VOL_PREFIX/data/ $VOL_PREFIX/logs/
+    $IMAGE_NAME rm -rf $VOL_PREFIX/data/ $VOL_PREFIX/logs/ $VOL_PREFIX/conf/
 }
 
 create_container(){
@@ -55,6 +56,7 @@ create_full_container_mounted(){
    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE\
    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD\
    -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data\
+   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
    -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs\
    $IMAGE_NAME
   sleep $SLEEP_TIME
@@ -129,6 +131,7 @@ create_full_container_mounted(){
 
   docker run -d --name $CONTAINER_NAME\
    -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data\
+   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
    $IMAGE_NAME
   sleep $SLEEP_TIME
 
@@ -141,12 +144,13 @@ create_full_container_mounted(){
   create_container -d
   run docker inspect $CONTAINER_NAME
   [[ "$output" =~ "$VOL_PREFIX/data" ]]
+  [[ "$output" =~ "$VOL_PREFIX/conf" ]]
   [[ "$output" =~ "$VOL_PREFIX/logs" ]]
 }
 
-@test "Data gets generated in data and logs if bind mounted in the host" {
+@test "Data gets generated in conf, data and logs if bind mounted in the host" {
   create_full_container_mounted
-  run docker run -v $HOST_VOL_PREFIX:$HOST_VOL_PREFIX --rm $IMAGE_NAME ls -l $HOST_VOL_PREFIX/data/postgresql.conf $HOST_VOL_PREFIX/logs/postgresql.log
+  run docker run -v $HOST_VOL_PREFIX:$HOST_VOL_PREFIX --rm $IMAGE_NAME ls -l $HOST_VOL_PREFIX/conf/postgresql.conf $HOST_VOL_PREFIX/logs/postgresql.log
   [ $status = 0 ]
   cleanup_volumes_content
 }
