@@ -1,4 +1,4 @@
-# #!/usr/bin/env bats
+#!/usr/bin/env bats
 CONTAINER_NAME=bitnami-mongodb-test
 IMAGE_NAME=${IMAGE_NAME:-bitnami/mongodb}
 SLEEP_TIME=5
