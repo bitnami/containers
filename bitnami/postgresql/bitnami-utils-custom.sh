@@ -2,6 +2,8 @@
 PROGRAM_OPTIONS="-D $BITNAMI_APP_DIR/data --config_file=$BITNAMI_APP_DIR/data/postgresql.conf"
 
 initialize_database() {
+  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/data
+
   echo "==> Initializing PostgreSQL database..."
   echo ""
   gosu $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/initdb -D $BITNAMI_APP_DIR/data \
@@ -24,8 +26,6 @@ logging_collector = on
 log_directory = '$BITNAMI_APP_DIR/logs'
 log_filename = 'postgresql.log'
 EOF
-
-  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/data
 }
 
 create_custom_database() {
