@@ -136,3 +136,10 @@ create_full_container_mounted(){
   [ $status = 0 ]
   cleanup_volumes_content
 }
+
+@test "All the volumes exposed" {
+  create_container -d
+  run docker inspect $CONTAINER_NAME
+  [[ "$output" =~ "$VOL_PREFIX/data" ]]
+  [[ "$output" =~ "$VOL_PREFIX/logs" ]]
+}
