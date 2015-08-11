@@ -203,7 +203,7 @@ postgresql:
 
 **Further Reading:**
 
-  - [PostgreSQL Server Command Options](http://www.postgresql.org/docs/9.4/static/app-postgres.html)
+  - [Server Command Options](http://www.postgresql.org/docs/9.4/static/app-postgres.html)
   - [Caveats](#caveats)
 
 ## Configuration file
