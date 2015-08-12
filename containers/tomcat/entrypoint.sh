@@ -23,12 +23,10 @@ else
   print_container_already_initialized $BITNAMI_APP_NAME
 fi
 
+chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/conf/ $BITNAMI_APP_VOL_PREFIX/logs/ || true
+
 if [ "$1" = 'catalina.sh' ]; then
   set -- $@ $EXTRA_OPTIONS
-
-  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER \
-    $BITNAMI_APP_VOL_PREFIX/conf/ \
-    $BITNAMI_APP_VOL_PREFIX/logs/ || true
 fi
 
 exec "$@"
