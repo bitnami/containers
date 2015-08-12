@@ -261,6 +261,8 @@ The following options cannot be modified, to ensure that the image runs correctl
 ```bash
 -D /opt/bitnami/postgresql/data
 --config_file=/opt/bitnami/postgresql/conf/postgresql.conf
+--hba_file=/opt/bitnami/postgresql/conf/pg_hba.conf
+--ident_file=/opt/bitnami/postgresql/conf/pg_ident.conf
 ```
 
 # Logging

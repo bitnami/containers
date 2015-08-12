@@ -1,5 +1,5 @@
 # PostgreSQL Utility functions
-PROGRAM_OPTIONS="-D $BITNAMI_APP_DIR/data --config_file=$BITNAMI_APP_DIR/conf/postgresql.conf"
+PROGRAM_OPTIONS="-D $BITNAMI_APP_DIR/data --config_file=$BITNAMI_APP_DIR/conf/postgresql.conf --hba_file=$BITNAMI_APP_DIR/conf/pg_hba.conf --ident_file=$BITNAMI_APP_DIR/conf/pg_ident.conf"
 
 initialize_database() {
   chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/data
@@ -12,10 +12,6 @@ initialize_database() {
   echo "==> Populating conf files..."
   echo ""
   mv $BITNAMI_APP_DIR/data/{pg_hba.conf,pg_ident.conf,postgresql.auto.conf,postgresql.conf} $BITNAMI_APP_DIR/conf/
-  ln -sf $BITNAMI_APP_DIR/conf/pg_hba.conf $BITNAMI_APP_DIR/data/
-  ln -sf $BITNAMI_APP_DIR/conf/pg_ident.conf $BITNAMI_APP_DIR/data/
-  ln -sf $BITNAMI_APP_DIR/conf/postgresql.auto.conf $BITNAMI_APP_DIR/data/
-  ln -sf $BITNAMI_APP_DIR/conf/postgresql.conf $BITNAMI_APP_DIR/data/
 
   echo "==> Configuring PostgreSQL to listen on all interfaces..."
   echo ""
