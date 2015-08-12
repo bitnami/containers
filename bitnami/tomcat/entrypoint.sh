@@ -27,6 +27,8 @@ chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/conf/ $BITN
 
 if [ "$1" = 'catalina.sh' ]; then
   set -- $@ $EXTRA_OPTIONS
+  exec gosu $BITNAMI_APP_USER "$@"
+else
+  exec "$@"
 fi
 
-exec "$@"
