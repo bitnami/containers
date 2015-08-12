@@ -11,7 +11,7 @@ initialize_database() {
 
   echo "==> Populating conf files..."
   echo ""
-  mv $BITNAMI_APP_DIR/data/{pg_hba.conf,pg_ident.conf,postgresql.auto.conf,postgresql.conf} $BITNAMI_APP_DIR/conf/
+  mv $BITNAMI_APP_DIR/data/{pg_hba.conf,pg_ident.conf,postgresql.conf} $BITNAMI_APP_DIR/conf/
 
   echo "==> Configuring PostgreSQL to listen on all interfaces..."
   echo ""
