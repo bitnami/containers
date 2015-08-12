@@ -2,34 +2,12 @@
 PROGRAM_OPTIONS="-D $BITNAMI_APP_DIR/data --config_file=$BITNAMI_APP_DIR/conf/postgresql.conf --hba_file=$BITNAMI_APP_DIR/conf/pg_hba.conf --ident_file=$BITNAMI_APP_DIR/conf/pg_ident.conf"
 
 initialize_database() {
-  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/data
-
   echo "==> Initializing PostgreSQL database..."
   echo ""
+  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/data $BITNAMI_APP_DIR/conf
   gosu $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/initdb -D $BITNAMI_APP_DIR/data \
     -U $BITNAMI_APP_USER -E unicode -A trust >/dev/null
 
-  echo "==> Populating conf files..."
-  echo ""
-  mv $BITNAMI_APP_DIR/data/{pg_hba.conf,pg_ident.conf,postgresql.conf} $BITNAMI_APP_DIR/conf/
-
-  echo "==> Configuring PostgreSQL to listen on all interfaces..."
-  echo ""
-  cat >> $BITNAMI_APP_DIR/conf/postgresql.conf <<EOF
-listen_addresses='*'
-EOF
-
-  echo "==> Enabling remote connections to PostgreSQL server..."
-  echo ""
-  cat >> $BITNAMI_APP_DIR/conf/pg_hba.conf <<EOF
-host    all             all             0.0.0.0/0               md5
-EOF
-
-  cat >> $BITNAMI_APP_DIR/conf/postgresql.conf <<EOF
-logging_collector = on
-log_directory = '$BITNAMI_APP_DIR/logs'
-log_filename = 'postgresql.log'
-EOF
 }
 
 create_custom_database() {

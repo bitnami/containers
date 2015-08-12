@@ -13,6 +13,10 @@ elif [ "${1}" == "postgres" -o "${1}" == "$BITNAMI_APP_DIR/bin/postgres" ]; then
   set -- postgres
 fi
 
+if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
+  generate_conf_files
+fi
+
 if [ "$1" = 'postgres' ]; then
   set -- $@ $PROGRAM_OPTIONS $EXTRA_OPTIONS
 
