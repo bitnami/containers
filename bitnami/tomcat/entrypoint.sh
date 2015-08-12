@@ -23,12 +23,12 @@ else
   print_container_already_initialized $BITNAMI_APP_NAME
 fi
 
-chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/conf/ $BITNAMI_APP_VOL_PREFIX/logs/ $BITNAMI_APP_VOL_PREFIX/webapps/ || true
+chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/conf/ $BITNAMI_APP_VOL_PREFIX/logs/ /app/ || true
 
 if [ "$1" = 'catalina.sh' ]; then
   set -- $@ $EXTRA_OPTIONS
 
-  if [ ! -d $BITNAMI_APP_VOL_PREFIX/webapps/manager ]; then
+  if [ ! -d /app/manager ]; then
     initialize_tomcat_webapps
   fi
 
