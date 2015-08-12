@@ -1,10 +1,10 @@
 #!/bin/bash
 cd $BITNAMI_APP_DIR
 
-# set up default config
+# move the default conf directory
 mv conf conf.defaults
 
-# set up webapps directory
+# move the default webapps directory
 mv webapps webapps.defaults
 
 # symlink mount points at root to install dir
