@@ -1,4 +1,4 @@
-# #!/bin/bash
+#!/bin/bash
 cd $BITNAMI_APP_DIR
 
 mkdir -p $BITNAMI_APP_DIR/data
