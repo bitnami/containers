@@ -4,7 +4,7 @@
       TOMCAT_PASSWORD: Password set at first boot for your $BITNAMI_APP_NAME server (default: none).
   
     VOLUMES:
-      /app: Location of your $BITNAMI_APP_NAME application to be served.
+      $BITNAMI_APP_VOL_PREFIX/webapps: Location of your $BITNAMI_APP_NAME webapps.
       $BITNAMI_APP_VOL_PREFIX/conf: Location of $BITNAMI_APP_NAME config files.
       $BITNAMI_APP_VOL_PREFIX/logs: Location of $BITNAMI_APP_NAME logs.
   
