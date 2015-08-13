@@ -63,6 +63,29 @@ tomcat:
 
   - [Tomcat Web Application Deployment](https://tomcat.apache.org/tomcat-7.0-doc/deployer-howto.html)
 
+# Accessing your Tomcat server from the host
+
+To access your web server from your host machine you can ask Docker to map a random port on your host to port `8080` of the container.
+
+```bash
+docker run --name tomcat -P bitnami/tomcat
+```
+
+Run `docker port` to determine the random ports Docker assigned.
+
+```bash
+$ docker port tomcat
+8080/tcp -> 0.0.0.0:32768
+```
+
+You can also manually specify the ports you want forwarded from your host to the container.
+
+```bash
+docker run -p 8080:8080 bitnami/tomcat
+```
+
+Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
+
 # Logging
 
 The Bitnami Tomcat Docker Image supports two different logging modes: logging to stdout, and logging to a file.
