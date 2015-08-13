@@ -90,7 +90,7 @@ Access your web server in the browser by navigating to [http://localhost:8080](h
 
 ## Setting the `manager` password on first run
 
-Passing the `TOMCAT_PASSWORD` environment variable when running the image for the first time will set the password of the `manager` user to the value of `TOMCAT_PASSWORD`.
+By default, the `manager` user is not assigned a password. To secure your Tomcat server you should assign a password to this user. Passing the `TOMCAT_PASSWORD` environment variable when running the image for the first time will set the password of the `manager` user to the value of `TOMCAT_PASSWORD`.
 
 ```bash
 docker run --name tomcat -e TOMCAT_PASSWORD=password123 bitnami/tomcat
