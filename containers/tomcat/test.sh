@@ -120,3 +120,20 @@ create_full_container_mounted(){
   [[ "$output" =~ '200 OK' ]]
   cleanup_volumes_content
 }
+
+@test "Deploy sample application" {
+  cleanup_volumes_content
+  create_full_container_mounted
+
+  run docker run --rm \
+    --link $CONTAINER_NAME:tomcat \
+    -v $HOST_VOL_PREFIX/app:/app \
+    $IMAGE_NAME curl http://tomcat:8080/docs/appdev/sample/sample.war -o /app/sample.war
+  [ $status = 0 ]
+  sleep 10
+
+  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl -L -i http://tomcat:8080/sample/hello.jsp
+  [[ "$output" =~ '200 OK' ]]
+
+  cleanup_volumes_content
+}
