@@ -39,6 +39,30 @@ cd bitnami-docker-tomcat
 docker build -t bitnami/tomcat .
 ```
 
+# Deploying web applications on Tomcat
+
+This Tomcat image exposes a volume at `/app`. This path acts as the Tomcat webapps directory. At this location, you either copy a so-called *exploded web application*, i.e non-compressed or a compressed web application resource `.WAR` file and it will automatically be deployed by Tomcat at startup.
+
+**Note!**
+You can also deploy web applications on a running Tomcat instance.
+
+```bash
+docker run -v /path/to/app:/app bitnami/tomcat
+```
+
+or using Docker Compose:
+
+```
+tomcat:
+  image: bitnami/tomcat
+  volumes:
+    - /path/to/app:/app
+```
+
+**Further Reading:**
+
+  - [Tomcat Web Application Deployment](https://tomcat.apache.org/tomcat-7.0-doc/deployer-howto.html)
+
 # Logging
 
 The Bitnami Tomcat Docker Image supports two different logging modes: logging to stdout, and logging to a file.
