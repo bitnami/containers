@@ -67,3 +67,11 @@ create_full_container(){
   run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl -L -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@tomcat:8080/manager/html
   [[ "$output" =~ '200 OK' ]]
 }
+
+@test "All the volumes exposed" {
+  create_container -d
+  run docker inspect $CONTAINER_NAME
+  [[ "$output" =~ "/app" ]]
+  [[ "$output" =~ "$VOL_PREFIX/conf" ]]
+  [[ "$output" =~ "$VOL_PREFIX/logs" ]]
+}
