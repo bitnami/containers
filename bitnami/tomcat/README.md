@@ -105,6 +105,49 @@ tomcat:
     - TOMCAT_PASSWORD=password123
 ```
 
+## Configuration files
+
+This image looks for Tomcat configuration files in `/bitnami/tomcat/conf`. You can mount a volume at this location with your own configuration, or the default configuration will be copied to your volume if it is empty.
+
+### Step 1: Run the Tomcat image
+
+Run the Tomcat image, mounting a directory from your host.
+
+```bash
+docker run --name tomcat -v /path/to/tomcat/conf:/bitnami/tomcat/conf bitnami/tomcat
+```
+
+or using Docker Compose:
+
+```
+tomcat:
+  image: bitnami/tomcat
+  volumes:
+    - /path/to/tomcat/conf:/bitnami/tomcat/conf
+```
+
+### Step 2: Edit the configuration
+
+Edit the configurations on your host using your favorite editor.
+
+### Step 3: Restart Tomcat
+
+After changing the configuration, restart your Tomcat container for the changes to take effect.
+
+```bash
+docker restart tomcat
+```
+
+or using Docker Compose:
+
+```bash
+docker-compose restart tomcat
+```
+
+**Further Reading:**
+
+  - [Tomcat 7 Configuration Reference](https://tomcat.apache.org/tomcat-7.0-doc/config/index.html)
+
 # Logging
 
 The Bitnami Tomcat Docker Image supports two different logging modes: logging to stdout, and logging to a file.
