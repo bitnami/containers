@@ -8,6 +8,6 @@ mv conf conf.defaults
 mv webapps webapps.defaults
 
 # symlink mount points at root to install dir
-ln -s $BITNAMI_APP_DIR/webapps $BITNAMI_APP_VOL_PREFIX/webapps
+ln -s $BITNAMI_APP_DIR/webapps /app
 ln -s $BITNAMI_APP_DIR/conf $BITNAMI_APP_VOL_PREFIX/conf
 ln -s $BITNAMI_APP_DIR/logs $BITNAMI_APP_VOL_PREFIX/logs
