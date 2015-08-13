@@ -41,3 +41,9 @@ create_container(){
   run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl -L -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@tomcat:8080/manager/html
   [[ "$output" =~ '200 OK' ]]
 }
+
+@test "Can't access management area without password" {
+  create_container -d -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
+  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl -L -i http://$TOMCAT_USER@tomcat:8080/manager/html
+  [[ "$output" =~ '401 Unauthorized' ]]
+}
