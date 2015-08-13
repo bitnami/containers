@@ -24,6 +24,12 @@ create_container(){
   sleep $SLEEP_TIME
 }
 
+create_full_container(){
+  docker run -d --name $CONTAINER_NAME\
+   -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD $IMAGE_NAME
+  sleep $SLEEP_TIME
+}
+
 @test "Port 8080 exposed and accepting external connections" {
   create_container -d
   run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl -L -i http://tomcat:8080
@@ -46,4 +52,18 @@ create_container(){
   create_container -d -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
   run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl -L -i http://$TOMCAT_USER@tomcat:8080/manager/html
   [[ "$output" =~ '401 Unauthorized' ]]
+}
+
+@test "Password is preserved after restart" {
+  create_full_container
+
+  docker stop $CONTAINER_NAME
+  docker start $CONTAINER_NAME
+  sleep $SLEEP_TIME
+
+  run docker logs $CONTAINER_NAME
+  [[ "$output" =~ "The credentials were set on first boot." ]]
+
+  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl -L -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@tomcat:8080/manager/html
+  [[ "$output" =~ '200 OK' ]]
 }
