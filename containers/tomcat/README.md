@@ -86,6 +86,25 @@ docker run -p 8080:8080 bitnami/tomcat
 
 Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
 
+# Configuration
+
+## Setting the `manager` password on first run
+
+Passing the `TOMCAT_PASSWORD` environment variable when running the image for the first time will set the password of the `manager` user to the value of `TOMCAT_PASSWORD`.
+
+```bash
+docker run --name tomcat -e TOMCAT_PASSWORD=password123 bitnami/tomcat
+```
+
+or using Docker Compose:
+
+```
+tomcat:
+  image: bitnami/tomcat
+  environment:
+    - TOMCAT_PASSWORD=password123
+```
+
 # Logging
 
 The Bitnami Tomcat Docker Image supports two different logging modes: logging to stdout, and logging to a file.
