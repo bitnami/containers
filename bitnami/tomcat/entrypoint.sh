@@ -16,7 +16,7 @@ if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
   if [ "$TOMCAT_PASSWORD" ]; then
     echo ""
     echo "Setting manager password in tomcat-users.xml ..."
-    sed -i 's/^<user username="manager" password=""/username="manager" password="'"$TOMCAT_PASSWORD"'"/' $BITNAMI_APP_VOL_PREFIX/conf/tomcat-users.xml
+    sed -i 's/^<user username="manager" password=""/<user username="manager" password="'"$TOMCAT_PASSWORD"'"/' $BITNAMI_APP_VOL_PREFIX/conf/tomcat-users.xml
   fi
   print_app_credentials $BITNAMI_APP_NAME manager `print_tomcat_password`
 else
