@@ -4,6 +4,8 @@ IMAGE_NAME=${IMAGE_NAME:-bitnami/tomcat}
 SLEEP_TIME=5
 TOMCAT_USER=manager
 TOMCAT_PASSWORD=test_password
+VOL_PREFIX=/bitnami/tomcat
+HOST_VOL_PREFIX=${HOST_VOL_PREFIX:-/tmp/bitnami/$CONTAINER_NAME}
 
 cleanup_running_containers() {
   if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
@@ -13,10 +15,19 @@ cleanup_running_containers() {
 
 setup() {
   cleanup_running_containers
+  mkdir -p $HOST_VOL_PREFIX
 }
 
 teardown() {
   cleanup_running_containers
+}
+
+cleanup_volumes_content() {
+  docker run --rm\
+    -v $HOST_VOL_PREFIX/app:/app\
+    -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
+    -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs\
+    $IMAGE_NAME rm -rf /app/ $VOL_PREFIX/logs/ $VOL_PREFIX/conf/
 }
 
 create_container(){
@@ -27,6 +38,16 @@ create_container(){
 create_full_container(){
   docker run -d --name $CONTAINER_NAME\
    -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD $IMAGE_NAME
+  sleep $SLEEP_TIME
+}
+
+create_full_container_mounted(){
+  docker run -d --name $CONTAINER_NAME\
+   -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD\
+   -v $HOST_VOL_PREFIX/app:/app\
+   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
+   -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs\
+   $IMAGE_NAME
   sleep $SLEEP_TIME
 }
 
@@ -74,4 +95,11 @@ create_full_container(){
   [[ "$output" =~ "/app" ]]
   [[ "$output" =~ "$VOL_PREFIX/conf" ]]
   [[ "$output" =~ "$VOL_PREFIX/logs" ]]
+}
+
+@test "Data gets generated in conf if bind mounted in the host" {
+  create_full_container_mounted
+  run docker run -v $HOST_VOL_PREFIX:$HOST_VOL_PREFIX --rm $IMAGE_NAME ls -l $HOST_VOL_PREFIX/conf/server.xml
+  [ $status = 0 ]
+  cleanup_volumes_content
 }
