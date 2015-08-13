@@ -8,3 +8,11 @@ initialize_tomcat_webapps() {
     ln -sf $BITNAMI_APP_DIR/webapps.defaults/$f /app/
   done
 }
+
+print_tomcat_password() {
+  if [ -z $TOMCAT_PASSWORD ]; then
+    echo "**none**"
+  else
+    echo $TOMCAT_PASSWORD
+  fi
+}
