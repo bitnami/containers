@@ -19,7 +19,7 @@ tomcat:
 
 # Get this image
 
-The recommended way to get the Bitnami tomcat Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/tomcat).
+The recommended way to get the Bitnami Tomcat Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/tomcat).
 
 ```bash
 docker pull bitnami/tomcat:latest
@@ -41,7 +41,7 @@ docker build -t bitnami/tomcat .
 
 # Deploying web applications on Tomcat
 
-This Tomcat image exposes a volume at `/app`. This path acts as the Tomcat webapps directory. At this location, you either copy a so-called *exploded web application*, i.e non-compressed or a compressed web application resource `.WAR` file and it will automatically be deployed by Tomcat at startup.
+This Tomcat image exposes a volume at `/app`. This path acts as the Tomcat webapps directory. At this location, you either copy a so-called *exploded web application*, i.e. non-compressed, or a compressed web application resource (`.WAR`) file and it will automatically be deployed by Tomcat at startup.
 
 **Note!**
 You can also deploy web applications on a running Tomcat instance.
@@ -65,7 +65,7 @@ tomcat:
 
 # Accessing your Tomcat server from the host
 
-To access your web server from your host machine you can ask Docker to map a random port on your host to port `8080` of the container.
+To access your web server from your host machine you can ask Docker to map a random port on your host to port `8080` exposed in the container.
 
 ```bash
 docker run --name tomcat -P bitnami/tomcat
@@ -128,7 +128,7 @@ tomcat:
 
 ### Step 2: Edit the configuration
 
-Edit the configurations on your host using your favorite editor.
+Edit the configuration on your host using your favorite editor.
 
 ### Step 3: Restart Tomcat
 
