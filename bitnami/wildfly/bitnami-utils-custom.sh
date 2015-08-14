@@ -6,8 +6,5 @@ export JAVA_OPTS
 initialize_wildfly_deployments_directory() {
   echo "==> Initializing Wildfly deployments directory..."
   echo ""
-  for f in $(ls $BITNAMI_APP_DIR/standalone/deployments.defaults/)
-  do
-    ln -sf $BITNAMI_APP_DIR/standalone/deployments.defaults/$f /app/
-  done
+  cp -a $BITNAMI_APP_DIR/standalone/deployments.defaults/* /app/
 }
