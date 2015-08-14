@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 source $BITNAMI_PREFIX/bitnami-utils.sh
-source $BITNAMI_APP_DIR/scripts/setenv.sh
 
 print_welcome_page
 
