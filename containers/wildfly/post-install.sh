@@ -7,4 +7,4 @@ ln -sf $BITNAMI_APP_DIR/standalone/conf $BITNAMI_APP_DIR/standalone/configuratio
 
 # symlink mount points at root to install dir
 ln -s $BITNAMI_APP_DIR/standalone/conf $BITNAMI_APP_VOL_PREFIX/conf
-ln -s $BITNAMI_APP_DIR/standalone/logs $BITNAMI_APP_VOL_PREFIX/logs
+ln -s $BITNAMI_APP_DIR/standalone/log $BITNAMI_APP_VOL_PREFIX/logs
