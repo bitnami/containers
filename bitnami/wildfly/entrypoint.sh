@@ -11,6 +11,8 @@ if [ "${1:0:1}" = '-' ]; then
   set -- standalone.sh
 fi
 
+chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/logs/ || true
+
 if [ "$1" = 'standalone.sh' ]; then
   set -- $@ $PROGRAM_OPTIONS $EXTRA_OPTIONS
   exec gosu $BITNAMI_APP_USER "$@"
