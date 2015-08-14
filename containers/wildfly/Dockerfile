@@ -12,7 +12,7 @@ ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
     PATH=$BITNAMI_APP_DIR/bin:$PATH
 
 RUN sh $BITNAMI_PREFIX/install.sh\
-    --jboss_manager_username manager
+    --jboss_manager_username manager --jboss_manager_password wildfly
 
 COPY bitnami-utils-custom.sh /bitnami-utils-custom.sh
 EXPOSE 8080 8443 8009 9990 9443 9999
