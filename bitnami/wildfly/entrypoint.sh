@@ -16,10 +16,13 @@ else
   print_container_already_initialized $BITNAMI_APP_NAME
 fi
 
-chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/conf/ $BITNAMI_APP_VOL_PREFIX/logs/ || true
+chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/conf/ $BITNAMI_APP_VOL_PREFIX/logs/ /app/ || true
 
 if [ "$1" = 'standalone.sh' ]; then
   set -- $@ $PROGRAM_OPTIONS $EXTRA_OPTIONS
+
+  initialize_wildfly_deployments_directory
+
   exec gosu $BITNAMI_APP_USER "$@"
 else
   exec "$@"
