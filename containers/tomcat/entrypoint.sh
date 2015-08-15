@@ -28,9 +28,7 @@ chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/conf/ $BITN
 if [ "$1" = 'catalina.sh' ]; then
   set -- $@ $EXTRA_OPTIONS
 
-  if [ ! -d /app/manager ]; then
-    initialize_tomcat_webapps_directory
-  fi
+  initialize_tomcat_webapps_directory
 
   exec gosu $BITNAMI_APP_USER "$@"
 else
