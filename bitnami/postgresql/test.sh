@@ -94,7 +94,7 @@ create_full_container_mounted(){
 }
 
 @test "Can't create a custom user without database" {
-  run create_container -it -e POSTGRESQL_USER=$POSTGRESQL_USER
+  run create_container -e POSTGRESQL_USER=$POSTGRESQL_USER
   [[ "$output" =~ "you need to provide the POSTGRESQL_DATABASE" ]]
 }
 
