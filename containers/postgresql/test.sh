@@ -32,17 +32,17 @@ cleanup_volumes_content() {
     $IMAGE_NAME rm -rf $VOL_PREFIX/data/ $VOL_PREFIX/logs/ $VOL_PREFIX/conf/
 }
 
-create_container(){
+create_container() {
   docker run --name $CONTAINER_NAME -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD "$@" $IMAGE_NAME
   sleep $SLEEP_TIME
 }
 
 # $1 is the command
-psql_client(){
+psql_client() {
   docker run --rm --link $CONTAINER_NAME:$CONTAINER_NAME -e PGPASSWORD=$POSTGRESQL_PASSWORD $IMAGE_NAME psql -h $CONTAINER_NAME "$@"
 }
 
-create_full_container(){
+create_full_container() {
   docker run -d --name $CONTAINER_NAME\
    -e POSTGRESQL_USER=$POSTGRESQL_USER\
    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE\
@@ -50,7 +50,7 @@ create_full_container(){
   sleep $SLEEP_TIME
 }
 
-create_full_container_mounted(){
+create_full_container_mounted() {
   docker run -d --name $CONTAINER_NAME\
    -e POSTGRESQL_USER=$POSTGRESQL_USER\
    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE\
