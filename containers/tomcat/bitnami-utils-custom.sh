@@ -1,6 +1,6 @@
 # Tomcat Utility functions
 
-initialize_tomcat_webapps() {
+initialize_tomcat_webapps_directory() {
   echo "==> Initializing Tomcat webapps directory..."
   echo ""
   cp -a $BITNAMI_APP_DIR/webapps.defaults/* /app/
