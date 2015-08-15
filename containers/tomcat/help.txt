@@ -1,7 +1,7 @@
   $BITNAMI_APP_NAME cheatsheet:
   
     ENVIRONMENT VARIABLES:
-      TOMCAT_PASSWORD: Password set at first boot for your $BITNAMI_APP_NAME server (default: none).
+      TOMCAT_PASSWORD: Password set for the manager user at first boot of your $BITNAMI_APP_NAME server (default: none).
   
     VOLUMES:
       /app: Location of your $BITNAMI_APP_NAME webapps.
