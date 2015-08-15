@@ -19,9 +19,9 @@
       Tip: Back up the $BITNAMI_APP_VOL_PREFIX/data and $BITNAMI_APP_VOL_PREFIX/conf directories regularly.
   
     COMMANDS:
-      print-help: This page
-      check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available
+      print-help: Print this page.
+      check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available.
 
-  Visit $GITHUB_PAGE for more information
+  Visit $GITHUB_PAGE for more information.
 
 
