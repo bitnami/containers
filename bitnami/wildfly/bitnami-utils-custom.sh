@@ -4,7 +4,13 @@ JAVA_OPTS="$JAVA_OPTS -XX:MaxPermSize=768m -Xmx768m"
 export JAVA_OPTS
 
 initialize_wildfly_deployments_directory() {
-  echo "==> Initializing Wildfly deployments directory..."
-  echo ""
-  cp -a $BITNAMI_APP_DIR/standalone/deployments.defaults/* /app/
+  if [ ! -f /app/.initialized ]; then
+    echo "==> Initializing Wildfly deployments directory..."
+    echo ""
+    cp -a $BITNAMI_APP_DIR/standalone/deployments.defaults/* /app/
+    touch /app/.initialized
+  else
+    echo "==> Wildfly deployments directory already initialized..."
+    echo ""
+  fi
 }
