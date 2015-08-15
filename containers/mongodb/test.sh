@@ -84,17 +84,17 @@ create_full_container_mounted(){
 }
 
 @test "Can't create root user without password" {
-  run create_container -it -e MONGODB_USER=$MONGODB_ROOT_USER
+  run create_container -e MONGODB_USER=$MONGODB_ROOT_USER
   [[ "$output" =~ "you need to provide the MONGODB_PASSWORD" ]]
 }
 
 @test "Can't create a custom user without password" {
-  run create_container -it -e MONGODB_USER=$MONGODB_USER
+  run create_container -e MONGODB_USER=$MONGODB_USER
   [[ "$output" =~ "you need to provide the MONGODB_PASSWORD" ]]
 }
 
 @test "Can't create a custom user without database" {
-  run create_container -it -e MONGODB_USER=$MONGODB_USER -e MONGODB_PASSWORD=$MONGODB_PASSWORD
+  run create_container -e MONGODB_USER=$MONGODB_USER -e MONGODB_PASSWORD=$MONGODB_PASSWORD
   [[ "$output" =~ "you need to provide the MONGODB_DATABASE" ]]
 }
 
