@@ -29,7 +29,7 @@ if [ "$1" = 'catalina.sh' ]; then
   set -- $@ $EXTRA_OPTIONS
 
   if [ ! -d /app/manager ]; then
-    initialize_tomcat_webapps
+    initialize_tomcat_webapps_directory
   fi
 
   exec gosu $BITNAMI_APP_USER "$@"
