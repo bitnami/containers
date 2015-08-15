@@ -12,6 +12,13 @@ fi
 
 if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
   generate_conf_files $BITNAMI_APP_DIR/standalone/
+
+  if [ "$WILDFLY_PASSWORD" ]; then
+    echo ""
+    echo "Setting manager password..."
+    add-user.sh -u manager -p $WILDFLY_PASSWORD -r ManagementRealm
+  fi
+  print_app_credentials $BITNAMI_APP_NAME manager `print_wildfly_password`
 else
   print_container_already_initialized $BITNAMI_APP_NAME
 fi

@@ -14,3 +14,11 @@ initialize_wildfly_deployments_directory() {
     echo ""
   fi
 }
+
+print_wildfly_password() {
+  if [ -z $WILDFLY_PASSWORD ]; then
+    echo "wildfly"
+  else
+    echo $WILDFLY_PASSWORD
+  fi
+}
