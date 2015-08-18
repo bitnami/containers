@@ -69,8 +69,8 @@ server {
     listen 0.0.0.0:80;
     server_name yourapp.com;
 
-    access_log /logs/yourapp_access.log;
-    error_log /logs/yourapp_error.log;
+    access_log /bitnami/nginx/logs/yourapp_access.log;
+    error_log /bitnami/nginx/logs/yourapp_error.log;
 
     root /app;
 
