@@ -15,6 +15,3 @@ ln -s $BITNAMI_APP_DIR/log $BITNAMI_APP_VOL_PREFIX/logs
 
 # nullify `ctl.sh` script administered by `bnconfig`
 echo "# Disabled" > $BITNAMI_APP_DIR/scripts/ctl.sh
-
-# Temp fix for disabling authentication
-sed -i 's/^auth/# auth/' $BITNAMI_APP_DIR/conf.defaults/mongodb.conf
