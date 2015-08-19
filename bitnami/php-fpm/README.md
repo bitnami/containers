@@ -134,7 +134,7 @@ nginx:
   links:
     - phpfpm:yourapp
   volumes:
-    - /path/to/vhost.conf:/bintami/nginx/conf/yourapp.conf
+    - /path/to/vhost.conf:/bitnami/nginx/conf/yourapp.conf
 ```
 
 We started the nginx server, mounting the virtual host we created in
