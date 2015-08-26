@@ -39,7 +39,7 @@ teardown() {
 }
 
 @test "can install gem modules with system requirements" {
-  run docker exec $CONTAINER_NAME sudo gem install nokogiri --no-ri --no-rdoc
+  run docker exec $CONTAINER_NAME gem install nokogiri --no-ri --no-rdoc
   [ "$status" = 0 ]
 }
 
@@ -52,7 +52,7 @@ teardown() {
 
 @test "port 3000 exposed" {
   add_app
-  docker exec -d $CONTAINER_NAME sh -c 'sudo gem install sinatra --no-ri --no-rdoc && ruby server.rb'
+  docker exec -d $CONTAINER_NAME sh -c 'gem install sinatra --no-ri --no-rdoc && ruby server.rb'
   sleep 10
   run docker run --rm --link $CONTAINER_NAME:ruby bitnami/ruby curl http://ruby:3000/hi
   [[ "$output" =~ "A Lanister always pays his debts" ]]
