@@ -101,7 +101,7 @@ You can also manually specify the ports you want forwarded from your host to the
 docker run -p 8080:8080 -p 9990:9990 bitnami/wildfly
 ```
 
-Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/) to access the application server and [http://localhost:9990](http://localhost:9990/) to access the management console.
+Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/) to access the application server and [http://localhost:9990](http://localhost:9990/console/) to access the management console.
 
 # Accessing the command line interface
 
