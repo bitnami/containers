@@ -1,6 +1,6 @@
 # Wildfly Utility functions
 PROGRAM_OPTIONS="-b 0.0.0.0 -bmanagement 0.0.0.0"
-JAVA_OPTS="$JAVA_OPTS -XX:MaxPermSize=768m -Xmx768m"
+JAVA_OPTS="-XX:MaxPermSize=768m -Xmx768m $JAVA_OPTS"
 export JAVA_OPTS
 
 initialize_wildfly_deployments_directory() {
