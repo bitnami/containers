@@ -55,6 +55,8 @@ wildfly:
   command: -Dwildfly.as.deployment.ondemand=true
 ```
 
+> **Note!**: To configure the JVM parameters specify them in the environment variable `JAVA_OPTS` using `-e JAVA_OPTS=<parameters>` while running the Wildfly image.
+
 **Further Reading:**
 
   - [Wildfly Command line parameters](https://docs.jboss.org/author/display/WFLY9/Command+line+parameters)
