@@ -83,6 +83,42 @@ docker run -p 8080:8080 -p 9990:9990 bitnami/wildfly
 
 Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/) to access the application server and [http://localhost:9990](http://localhost:9990/) to access the management console.
 
+# Accessing the command line interface
+
+The Command Line Interface (CLI) is a management tool for a managed domain or standalone server. It allows a user to connect to the domain controller or a standalone server and execute management operations available through the de-typed management model.
+
+The Bitnami Wildfly Docker Image ships the `jboss-cli.sh` client, but by default it will start the standalone server. To start the client instead, we can override the default command Docker runs by stating a different command to run after the image name.
+
+## Connecting a `jboss-cli.sh` container to the Wildfly server container
+
+### Step 1: Run the Wildfly image with a specific name
+
+The first step is to start our Wildfly server.
+
+Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our Wildfly server to make it easier to connect to other containers.
+
+```bash
+docker run --name wildfly bitnami/wildfly
+```
+
+### Step 2: Run Wildfly as a client and link to our server
+
+Now that we have our Wildfly server running, we can create another container to launch `jboss-cli.sh` that links to the server container by giving Docker the `--link` option. This option takes the id or name of the container we want to link it to as well as a hostname to use inside the container, separated by a colon. For example, to have our Wildfly server accessible in another container with `server` as it's hostname we would pass `--link wildfly:server` to the Docker run command.
+
+```bash
+docker run --rm -it --link wildfly:server bitnami/wildfly \
+  jboss-cli.sh --controller=server:9990 --user=manager --password=wildfly --connect
+```
+
+We started `jboss-cli.sh` passing in the `--controller` option that allows us to specify the hostname and port of the server, which we set to the hostname we created in the link.
+
+**Note!**
+You can also run the client in the same container as the server using the Docker [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
+
+```bash
+docker exec -it wildfly jboss-cli.sh --user=manager --password=wildfly --connect
+```
+
 # Configuration
 
 ## Setting the `manager` password on first run
