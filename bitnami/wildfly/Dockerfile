@@ -21,4 +21,4 @@ VOLUME ["$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs", "/app"]
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["standalone.sh", "-Dwildfly.as.deployment.ondemand=false"]
+CMD ["standalone.sh"]
