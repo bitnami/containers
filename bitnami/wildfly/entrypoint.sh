@@ -4,7 +4,7 @@ source $BITNAMI_PREFIX/bitnami-utils.sh
 
 print_welcome_page
 
-# if command starts with an option, prepend 'standalone.sh run'
+# if command starts with an option, prepend 'standalone.sh'
 if [ "${1:0:1}" = '-' ]; then
   EXTRA_OPTIONS="$@"
   set -- standalone.sh
