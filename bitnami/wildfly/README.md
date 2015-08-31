@@ -39,6 +39,26 @@ cd bitnami-docker-wildfly
 docker build -t bitnami/wildfly .
 ```
 
+## Command-line options
+
+The simplest way to configure your Wildfly server is to pass custom command-line options when running the image.
+
+```bash
+docker run bitnami/wildfly -Dwildfly.as.deployment.ondemand=true
+```
+
+or using Docker Compose:
+
+```
+wildfly:
+  image: bitnami/wildfly
+  command: -Dwildfly.as.deployment.ondemand=true
+```
+
+**Further Reading:**
+
+  - [Wildfly Command line parameters](https://docs.jboss.org/author/display/WFLY9/Command+line+parameters)
+
 # Deploying web applications on Wildfly
 
 This Wildfly image exposes a volume at `/app`. This path acts as the Wildfly deployments directory. At this location, you either copy a so-called *exploded web application*, i.e non-compressed or a compressed web application resource `.WAR` file and it will automatically be deployed by Wildfly at startup.
