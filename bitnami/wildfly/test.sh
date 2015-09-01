@@ -42,12 +42,6 @@ create_container_domain() {
   sleep $SLEEP_TIME
 }
 
-create_full_container() {
-  docker run -d --name $CONTAINER_NAME\
-   -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD $IMAGE_NAME
-  sleep $SLEEP_TIME
-}
-
 create_full_container_mounted() {
   docker run -d --name $CONTAINER_NAME\
    -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD\
@@ -85,7 +79,7 @@ create_full_container_mounted() {
 }
 
 @test "Password is preserved after restart (standalone)" {
-  create_full_container
+  create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
 
   docker stop $CONTAINER_NAME
   docker start $CONTAINER_NAME
