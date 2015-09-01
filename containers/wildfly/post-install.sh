@@ -6,6 +6,10 @@ mkdir -p $BITNAMI_APP_DIR/conf.defaults/standalone
 mv $BITNAMI_APP_DIR/standalone/configuration $BITNAMI_APP_DIR/conf.defaults/standalone/
 ln -sf $BITNAMI_APP_DIR/conf/standalone/configuration $BITNAMI_APP_DIR/standalone/
 
+mkdir -p $BITNAMI_APP_DIR/conf.defaults/domain
+mv $BITNAMI_APP_DIR/domain/configuration $BITNAMI_APP_DIR/conf.defaults/domain/
+ln -sf $BITNAMI_APP_DIR/conf/domain/configuration $BITNAMI_APP_DIR/domain/
+
 # setup the logs
 rm -rf $BITNAMI_APP_DIR/standalone/log
 ln -sf $BITNAMI_APP_DIR/logs $BITNAMI_APP_DIR/standalone/log
