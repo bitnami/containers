@@ -60,6 +60,7 @@ wildfly:
 **Further Reading:**
 
   - [Wildfly Command line parameters](https://docs.jboss.org/author/display/WFLY9/Command+line+parameters)
+  - [Caveats](#caveats)
 
 # Deploying web applications on Wildfly
 
@@ -202,6 +203,19 @@ docker-compose restart wildfly
 **Further Reading:**
 
   - [General configuration concepts](https://docs.jboss.org/author/display/WFLY9/General+configuration+concepts)
+
+## Caveats
+
+The following options cannot be modified, to ensure that the image runs correctly.
+
+```bash
+-b 0.0.0.0
+-bmanagement 0.0.0.0
+-Djboss.server.config.dir=/opt/bitnami/wildfly/conf/standalone/configuration
+-Djboss.server.log.dir=/opt/bitnami/wildfly/logs
+-Djboss.domain.config.dir=/opt/bitnami/wildfly/conf/domain/configuration
+-Djboss.domain.log.dir=/opt/bitnami/wildfly/logs
+```
 
 # Logging
 
