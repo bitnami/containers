@@ -78,6 +78,13 @@ create_full_container_mounted() {
   [[ "$output" =~ '401 Unauthorized' ]]
 }
 
+@test "jboss-cli.sh can connect to Wildfly server (standalone)" {
+  create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME \
+    jboss-cli.sh --controller=wildfly:9990 --user=$WILDFLY_USER --password=$WILDFLY_PASSWORD --connect --command=version
+  [ $status = 0 ]
+}
+
 @test "Password is preserved after restart (standalone)" {
   create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
 
@@ -160,6 +167,13 @@ create_full_container_mounted() {
   create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
   run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER@wildfly:9990/management
   [[ "$output" =~ '401 Unauthorized' ]]
+}
+
+@test "jboss-cli.sh can connect to Wildfly server (domain)" {
+  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME \
+    jboss-cli.sh --controller=wildfly:9990 --user=$WILDFLY_USER --password=$WILDFLY_PASSWORD --connect --command=version
+  [ $status = 0 ]
 }
 
 @test "Password is preserved after restart (domain)" {
