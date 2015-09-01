@@ -102,7 +102,6 @@ create_full_container_mounted() {
 
 @test "Data gets generated in conf and app volumes if bind mounted in the host" {
   create_full_container_mounted
-  sleep 10
   run docker run -v $HOST_VOL_PREFIX:$HOST_VOL_PREFIX --rm $IMAGE_NAME ls -la $HOST_VOL_PREFIX/conf/standalone $HOST_VOL_PREFIX/conf/domain $HOST_VOL_PREFIX/logs/server.log $HOST_VOL_PREFIX/app/.initialized
   [ $status = 0 ]
   cleanup_volumes_content
@@ -113,14 +112,9 @@ create_full_container_mounted() {
   create_full_container_mounted
 
   docker rm -fv $CONTAINER_NAME
+  create_container -d -v $HOST_VOL_PREFIX/app:/app -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf
 
-  run docker run -d --name $CONTAINER_NAME\
-   -v $HOST_VOL_PREFIX/app:/app\
-   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
-   $IMAGE_NAME
-  sleep $SLEEP_TIME
-
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
   [[ "$output" =~ '200 OK' ]]
   cleanup_volumes_content
 }
@@ -134,9 +128,9 @@ create_full_container_mounted() {
     -v $HOST_VOL_PREFIX/app:/app \
     $IMAGE_NAME curl https://raw.githubusercontent.com/goldmann/wildfly-docker-deployment-example/master/node-info.war -o /app/node-info.war
   [ $status = 0 ]
-  sleep 10
+  sleep $SLEEP_TIME
 
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i http://wildfly:8080/node-info/
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i http://wildfly:8080/node-info/
   [[ "$output" =~ '200 OK' ]]
 
   cleanup_volumes_content
