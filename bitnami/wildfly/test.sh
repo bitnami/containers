@@ -5,6 +5,7 @@ IMAGE_NAME=${IMAGE_NAME:-bitnami/wildfly}
 SLEEP_TIME=5
 WILDFLY_USER=manager
 WILDFLY_DEFAULT_PASSWORD=wildfly
+WILDFLY_PASSWORD=test_password
 
 cleanup_running_containers() {
   if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
@@ -36,5 +37,11 @@ create_container() {
 @test "Manager has access to management area" {
   create_container -d
   run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER:$WILDFLY_DEFAULT_PASSWORD@wildfly:9990/management
+  [[ "$output" =~ '200 OK' ]]
+}
+
+@test "User manager created with custom password" {
+  create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
   [[ "$output" =~ '200 OK' ]]
 }
