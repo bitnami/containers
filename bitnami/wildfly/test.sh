@@ -118,6 +118,22 @@ create_full_container_mounted() {
   [ $status = 0 ]
 }
 
+@test "jboss-cli.sh can't access Wildfly server without password (standalone server)" {
+  create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME \
+    jboss-cli.sh --controller=wildfly:9990 --user=$WILDFLY_USER --connect --command=version
+  [[ "$output" =~ "Unable to authenticate against controller" ]]
+  [ $status = 1 ]
+}
+
+@test "jboss-cli.sh can't access Wildfly server without password (managed domain)" {
+  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME \
+    jboss-cli.sh --controller=wildfly:9990 --user=$WILDFLY_USER --connect --command=version
+  [[ "$output" =~ "Unable to authenticate against controller" ]]
+  [ $status = 1 ]
+}
+
 @test "Password is preserved after restart (standalone server)" {
   create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
 
