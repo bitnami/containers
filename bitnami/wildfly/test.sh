@@ -92,46 +92,6 @@ create_full_container_mounted() {
   [[ "$output" =~ '200 OK' ]]
 }
 
-@test "Ports 8080 and 9990 exposed and accepting external connections (domain)" {
-  create_container_domain -d
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i http://wildfly:8080
-  [[ "$output" =~ '200 OK' ]]
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i http://wildfly:9990
-  [[ "$output" =~ '200 OK' ]]
-}
-
-@test "Manager has access to management area (domain)" {
-  create_container_domain -d
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER:$WILDFLY_DEFAULT_PASSWORD@wildfly:9990/management
-  [[ "$output" =~ '200 OK' ]]
-}
-
-@test "User manager created with custom password (domain)" {
-  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
-  [[ "$output" =~ '200 OK' ]]
-}
-
-@test "Can't access management area without password (domain)" {
-  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER@wildfly:9990/management
-  [[ "$output" =~ '401 Unauthorized' ]]
-}
-
-@test "Password is preserved after restart (domain)" {
-  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
-
-  docker stop $CONTAINER_NAME
-  docker start $CONTAINER_NAME
-  sleep $SLEEP_TIME
-
-  run docker logs $CONTAINER_NAME
-  [[ "$output" =~ "The credentials were set on first boot." ]]
-
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
-  [[ "$output" =~ '200 OK' ]]
-}
-
 @test "All the volumes exposed" {
   create_container -d
   run docker inspect $CONTAINER_NAME
@@ -180,4 +140,44 @@ create_full_container_mounted() {
   [[ "$output" =~ '200 OK' ]]
 
   cleanup_volumes_content
+}
+
+@test "Ports 8080 and 9990 exposed and accepting external connections (domain)" {
+  create_container_domain -d
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i http://wildfly:8080
+  [[ "$output" =~ '200 OK' ]]
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i http://wildfly:9990
+  [[ "$output" =~ '200 OK' ]]
+}
+
+@test "Manager has access to management area (domain)" {
+  create_container_domain -d
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER:$WILDFLY_DEFAULT_PASSWORD@wildfly:9990/management
+  [[ "$output" =~ '200 OK' ]]
+}
+
+@test "User manager created with custom password (domain)" {
+  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
+  [[ "$output" =~ '200 OK' ]]
+}
+
+@test "Can't access management area without password (domain)" {
+  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER@wildfly:9990/management
+  [[ "$output" =~ '401 Unauthorized' ]]
+}
+
+@test "Password is preserved after restart (domain)" {
+  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
+
+  docker stop $CONTAINER_NAME
+  docker start $CONTAINER_NAME
+  sleep $SLEEP_TIME
+
+  run docker logs $CONTAINER_NAME
+  [[ "$output" =~ "The credentials were set on first boot." ]]
+
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
+  [[ "$output" =~ '200 OK' ]]
 }
