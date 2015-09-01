@@ -52,7 +52,7 @@ create_full_container_mounted() {
   sleep $SLEEP_TIME
 }
 
-@test "Ports 8080 and 9990 exposed and accepting external connections (standalone)" {
+@test "Ports 8080 and 9990 exposed and accepting external connections (standalone server)" {
   create_container -d
   run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i http://wildfly:8080
   [[ "$output" =~ '200 OK' ]]
@@ -60,33 +60,80 @@ create_full_container_mounted() {
   [[ "$output" =~ '200 OK' ]]
 }
 
-@test "Manager has access to management area (standalone)" {
+@test "Ports 8080 and 9990 exposed and accepting external connections (managed domain)" {
+  create_container_domain -d
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i http://wildfly:8080
+  [[ "$output" =~ '200 OK' ]]
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i http://wildfly:9990
+  [[ "$output" =~ '200 OK' ]]
+}
+
+@test "Manager has access to management area (standalone server)" {
   create_container -d
   run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_DEFAULT_PASSWORD@wildfly:9990/management
   [[ "$output" =~ '200 OK' ]]
 }
 
-@test "User manager created with custom password (standalone)" {
+@test "Manager has access to management area (managed domain)" {
+  create_container_domain -d
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_DEFAULT_PASSWORD@wildfly:9990/management
+  [[ "$output" =~ '200 OK' ]]
+}
+
+@test "User manager created with custom password (standalone server)" {
   create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
   run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
   [[ "$output" =~ '200 OK' ]]
 }
 
-@test "Can't access management area without password (standalone)" {
+@test "User manager created with custom password (managed domain)" {
+  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
+  [[ "$output" =~ '200 OK' ]]
+}
+
+@test "Can't access management area without password (standalone server)" {
   create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
   run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER@wildfly:9990/management
   [[ "$output" =~ '401 Unauthorized' ]]
 }
 
-@test "jboss-cli.sh can connect to Wildfly server (standalone)" {
+@test "Can't access management area without password (managed domain)" {
+  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER@wildfly:9990/management
+  [[ "$output" =~ '401 Unauthorized' ]]
+}
+
+@test "jboss-cli.sh can connect to Wildfly server (standalone server)" {
   create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
   run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME \
     jboss-cli.sh --controller=wildfly:9990 --user=$WILDFLY_USER --password=$WILDFLY_PASSWORD --connect --command=version
   [ $status = 0 ]
 }
 
-@test "Password is preserved after restart (standalone)" {
+@test "jboss-cli.sh can connect to Wildfly server (managed domain)" {
+  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME \
+    jboss-cli.sh --controller=wildfly:9990 --user=$WILDFLY_USER --password=$WILDFLY_PASSWORD --connect --command=version
+  [ $status = 0 ]
+}
+
+@test "Password is preserved after restart (standalone server)" {
   create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
+
+  docker stop $CONTAINER_NAME
+  docker start $CONTAINER_NAME
+  sleep $SLEEP_TIME
+
+  run docker logs $CONTAINER_NAME
+  [[ "$output" =~ "The credentials were set on first boot." ]]
+
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
+  [[ "$output" =~ '200 OK' ]]
+}
+
+@test "Password is preserved after restart (managed domain)" {
+  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
 
   docker stop $CONTAINER_NAME
   docker start $CONTAINER_NAME
@@ -141,51 +188,4 @@ create_full_container_mounted() {
   [[ "$output" =~ '200 OK' ]]
 
   cleanup_volumes_content
-}
-
-@test "Ports 8080 and 9990 exposed and accepting external connections (domain)" {
-  create_container_domain -d
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i http://wildfly:8080
-  [[ "$output" =~ '200 OK' ]]
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i http://wildfly:9990
-  [[ "$output" =~ '200 OK' ]]
-}
-
-@test "Manager has access to management area (domain)" {
-  create_container_domain -d
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_DEFAULT_PASSWORD@wildfly:9990/management
-  [[ "$output" =~ '200 OK' ]]
-}
-
-@test "User manager created with custom password (domain)" {
-  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
-  [[ "$output" =~ '200 OK' ]]
-}
-
-@test "Can't access management area without password (domain)" {
-  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER@wildfly:9990/management
-  [[ "$output" =~ '401 Unauthorized' ]]
-}
-
-@test "jboss-cli.sh can connect to Wildfly server (domain)" {
-  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME \
-    jboss-cli.sh --controller=wildfly:9990 --user=$WILDFLY_USER --password=$WILDFLY_PASSWORD --connect --command=version
-  [ $status = 0 ]
-}
-
-@test "Password is preserved after restart (domain)" {
-  create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
-
-  docker stop $CONTAINER_NAME
-  docker start $CONTAINER_NAME
-  sleep $SLEEP_TIME
-
-  run docker logs $CONTAINER_NAME
-  [[ "$output" =~ "The credentials were set on first boot." ]]
-
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
-  [[ "$output" =~ '200 OK' ]]
 }
