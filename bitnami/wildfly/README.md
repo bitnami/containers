@@ -84,7 +84,7 @@ wildfly:
   - [Wildfly Command line parameters](https://docs.jboss.org/author/display/WFLY9/Command+line+parameters)
   - [Caveats](#caveats)
 
-# Deploying web applications on Wildfly
+# Deploying web applications on Wildfly standalone server
 
 This Wildfly image exposes a volume at `/app`. In the standalone server mode, this path acts as the Wildfly deployments directory. At this location, you either copy a so-called *exploded web application*, i.e non-compressed or a compressed web application resource `.WAR` file and it will automatically be deployed by Wildfly at startup.
 
