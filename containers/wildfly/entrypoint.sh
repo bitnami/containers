@@ -25,7 +25,7 @@ fi
 
 chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/conf/ $BITNAMI_APP_VOL_PREFIX/logs/ /app/ || true
 
-if [ "$1" = 'standalone.sh' ]; then
+if [ "$1" = 'standalone.sh' -o "$1" = 'domain.sh' ]; then
   set -- $@ $PROGRAM_OPTIONS $EXTRA_OPTIONS
 
   initialize_wildfly_deployments_directory
