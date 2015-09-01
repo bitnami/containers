@@ -35,12 +35,6 @@ create_container() {
   sleep $SLEEP_TIME
 }
 
-create_full_container() {
-  docker run -d --name $CONTAINER_NAME\
-   -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD $IMAGE_NAME
-  sleep $SLEEP_TIME
-}
-
 create_full_container_mounted() {
   docker run -d --name $CONTAINER_NAME\
    -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD\
@@ -76,7 +70,7 @@ create_full_container_mounted() {
 }
 
 @test "Password is preserved after restart" {
-  create_full_container
+  create_container -d -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
 
   docker stop $CONTAINER_NAME
   docker start $CONTAINER_NAME
@@ -109,12 +103,7 @@ create_full_container_mounted() {
   create_full_container_mounted
 
   docker rm -fv $CONTAINER_NAME
-
-  run docker run -d --name $CONTAINER_NAME\
-   -v $HOST_VOL_PREFIX/app:/app\
-   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
-   $IMAGE_NAME
-  sleep $SLEEP_TIME
+  create_container -d -v $HOST_VOL_PREFIX/app:/app -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf
 
   run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl --noproxy tomcat -L -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@tomcat:8080/manager/html
   [[ "$output" =~ '200 OK' ]]
