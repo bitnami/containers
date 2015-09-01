@@ -39,6 +39,28 @@ cd bitnami-docker-wildfly
 docker build -t bitnami/wildfly .
 ```
 
+## Operating modes
+
+Wildfly can be booted in two different modes. A *managed domain* allows you to run and manage a multi-server topology. Alternatively, you can run a *standalone server* instance.
+
+By default, the Bitnami Wildfly Docker image boots in the standalone server mode. To boot in the managed domain mode specify `domain.sh` as the first argument while running the image.
+
+```bash
+docker run bitnami/wildfly domain.sh
+```
+
+or using Docker Compose:
+
+```
+wildfly:
+  image: bitnami/wildfly
+  command: domain.sh
+```
+
+**Further Reading:**
+
+  - [Wildfly Operating modes](https://docs.jboss.org/author/display/WFLY9/Operating+modes)
+
 ## Command-line options
 
 The simplest way to configure your Wildfly server is to pass custom command-line options when running the image.
@@ -64,7 +86,7 @@ wildfly:
 
 # Deploying web applications on Wildfly
 
-This Wildfly image exposes a volume at `/app`. This path acts as the Wildfly deployments directory. At this location, you either copy a so-called *exploded web application*, i.e non-compressed or a compressed web application resource `.WAR` file and it will automatically be deployed by Wildfly at startup.
+This Wildfly image exposes a volume at `/app`. In the standalone server mode, this path acts as the Wildfly deployments directory. At this location, you either copy a so-called *exploded web application*, i.e non-compressed or a compressed web application resource `.WAR` file and it will automatically be deployed by Wildfly at startup.
 
 **Note!**
 You can also deploy web applications on a running Wildfly instance.
