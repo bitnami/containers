@@ -26,6 +26,12 @@ create_container() {
   sleep $SLEEP_TIME
 }
 
+create_full_container() {
+  docker run -d --name $CONTAINER_NAME\
+   -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD $IMAGE_NAME
+  sleep $SLEEP_TIME
+}
+
 @test "Ports 8080 and 9990 exposed and accepting external connections" {
   create_container -d
   run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i http://wildfly:8080
@@ -50,4 +56,18 @@ create_container() {
   create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
   run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER@wildfly:9990/management
   [[ "$output" =~ '401 Unauthorized' ]]
+}
+
+@test "Password is preserved after restart" {
+  create_full_container
+
+  docker stop $CONTAINER_NAME
+  docker start $CONTAINER_NAME
+  sleep $SLEEP_TIME
+
+  run docker logs $CONTAINER_NAME
+  [[ "$output" =~ "The credentials were set on first boot." ]]
+
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
+  [[ "$output" =~ '200 OK' ]]
 }
