@@ -71,3 +71,11 @@ create_full_container() {
   run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
   [[ "$output" =~ '200 OK' ]]
 }
+
+@test "All the volumes exposed" {
+  create_container -d
+  run docker inspect $CONTAINER_NAME
+  [[ "$output" =~ "/app" ]]
+  [[ "$output" =~ "$VOL_PREFIX/conf" ]]
+  [[ "$output" =~ "$VOL_PREFIX/logs" ]]
+}
