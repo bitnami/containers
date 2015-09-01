@@ -11,7 +11,7 @@ if [ "${1:0:1}" = '-' ]; then
 fi
 
 if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
-  generate_conf_files $BITNAMI_APP_DIR/standalone/
+  generate_conf_files
 
   if [ "$WILDFLY_PASSWORD" ]; then
     echo ""
