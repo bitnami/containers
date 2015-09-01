@@ -45,3 +45,9 @@ create_container() {
   run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
   [[ "$output" =~ '200 OK' ]]
 }
+
+@test "Can't access management area without password" {
+  create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl -L -i --digest http://$WILDFLY_USER@wildfly:9990/management
+  [[ "$output" =~ '401 Unauthorized' ]]
+}
