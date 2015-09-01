@@ -125,3 +125,20 @@ create_full_container_mounted() {
   [[ "$output" =~ '200 OK' ]]
   cleanup_volumes_content
 }
+
+@test "Deploy sample application" {
+  cleanup_volumes_content
+  create_full_container_mounted
+
+  run docker run --rm \
+    --link $CONTAINER_NAME:wildfly \
+    -v $HOST_VOL_PREFIX/app:/app \
+    $IMAGE_NAME curl https://raw.githubusercontent.com/goldmann/wildfly-docker-deployment-example/master/node-info.war -o /app/node-info.war
+  [ $status = 0 ]
+  sleep 10
+
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i http://wildfly:8080/node-info/
+  [[ "$output" =~ '200 OK' ]]
+
+  cleanup_volumes_content
+}
