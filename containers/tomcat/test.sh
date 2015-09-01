@@ -53,25 +53,25 @@ create_full_container_mounted() {
 
 @test "Port 8080 exposed and accepting external connections" {
   create_container -d
-  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl -L -i http://tomcat:8080
+  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl --noproxy tomcat -L -i http://tomcat:8080
   [[ "$output" =~ '200 OK' ]]
 }
 
 @test "Manager has access to management area" {
   create_container -d
-  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl -L -i http://$TOMCAT_USER@tomcat:8080/manager/html
+  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl --noproxy tomcat -L -i http://$TOMCAT_USER@tomcat:8080/manager/html
   [[ "$output" =~ '200 OK' ]]
 }
 
 @test "User manager created with password" {
   create_container -d -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
-  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl -L -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@tomcat:8080/manager/html
+  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl --noproxy tomcat -L -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@tomcat:8080/manager/html
   [[ "$output" =~ '200 OK' ]]
 }
 
 @test "Can't access management area without password" {
   create_container -d -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
-  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl -L -i http://$TOMCAT_USER@tomcat:8080/manager/html
+  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl --noproxy tomcat -L -i http://$TOMCAT_USER@tomcat:8080/manager/html
   [[ "$output" =~ '401 Unauthorized' ]]
 }
 
@@ -85,7 +85,7 @@ create_full_container_mounted() {
   run docker logs $CONTAINER_NAME
   [[ "$output" =~ "The credentials were set on first boot." ]]
 
-  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl -L -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@tomcat:8080/manager/html
+  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl --noproxy tomcat -L -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@tomcat:8080/manager/html
   [[ "$output" =~ '200 OK' ]]
 }
 
@@ -116,7 +116,7 @@ create_full_container_mounted() {
    $IMAGE_NAME
   sleep $SLEEP_TIME
 
-  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl -L -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@tomcat:8080/manager/html
+  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl --noproxy tomcat -L -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@tomcat:8080/manager/html
   [[ "$output" =~ '200 OK' ]]
   cleanup_volumes_content
 }
@@ -128,11 +128,11 @@ create_full_container_mounted() {
   run docker run --rm \
     --link $CONTAINER_NAME:tomcat \
     -v $HOST_VOL_PREFIX/app:/app \
-    $IMAGE_NAME curl http://tomcat:8080/docs/appdev/sample/sample.war -o /app/sample.war
+    $IMAGE_NAME curl --noproxy tomcat http://tomcat:8080/docs/appdev/sample/sample.war -o /app/sample.war
   [ $status = 0 ]
   sleep 10
 
-  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl -L -i http://tomcat:8080/sample/hello.jsp
+  run docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl --noproxy tomcat -L -i http://tomcat:8080/sample/hello.jsp
   [[ "$output" =~ '200 OK' ]]
 
   cleanup_volumes_content
