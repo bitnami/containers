@@ -6,6 +6,8 @@ SLEEP_TIME=5
 WILDFLY_USER=manager
 WILDFLY_DEFAULT_PASSWORD=wildfly
 WILDFLY_PASSWORD=test_password
+VOL_PREFIX=/bitnami/wildfly
+HOST_VOL_PREFIX=${HOST_VOL_PREFIX:-/tmp/bitnami/$CONTAINER_NAME}
 
 cleanup_running_containers() {
   if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
@@ -15,10 +17,19 @@ cleanup_running_containers() {
 
 setup() {
   cleanup_running_containers
+  mkdir -p $HOST_VOL_PREFIX
 }
 
 teardown() {
   cleanup_running_containers
+}
+
+cleanup_volumes_content() {
+  docker run --rm\
+    -v $HOST_VOL_PREFIX/app:/app\
+    -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
+    -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs\
+    $IMAGE_NAME rm -rf /app/ $VOL_PREFIX/logs/ $VOL_PREFIX/conf/
 }
 
 create_container() {
@@ -29,6 +40,16 @@ create_container() {
 create_full_container() {
   docker run -d --name $CONTAINER_NAME\
    -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD $IMAGE_NAME
+  sleep $SLEEP_TIME
+}
+
+create_full_container_mounted() {
+  docker run -d --name $CONTAINER_NAME\
+   -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD\
+   -v $HOST_VOL_PREFIX/app:/app\
+   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
+   -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs\
+   $IMAGE_NAME
   sleep $SLEEP_TIME
 }
 
@@ -78,4 +99,12 @@ create_full_container() {
   [[ "$output" =~ "/app" ]]
   [[ "$output" =~ "$VOL_PREFIX/conf" ]]
   [[ "$output" =~ "$VOL_PREFIX/logs" ]]
+}
+
+@test "Data gets generated in conf and app volumes if bind mounted in the host" {
+  create_full_container_mounted
+  sleep 10
+  run docker run -v $HOST_VOL_PREFIX:$HOST_VOL_PREFIX --rm $IMAGE_NAME ls -la $HOST_VOL_PREFIX/conf/standalone $HOST_VOL_PREFIX/conf/domain $HOST_VOL_PREFIX/logs/server.log $HOST_VOL_PREFIX/app/.initialized
+  [ $status = 0 ]
+  cleanup_volumes_content
 }
