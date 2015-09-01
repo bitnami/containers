@@ -108,3 +108,20 @@ create_full_container_mounted() {
   [ $status = 0 ]
   cleanup_volumes_content
 }
+
+@test "If host mounted, password and settings are preserved after deletion" {
+  cleanup_volumes_content
+  create_full_container_mounted
+
+  docker rm -fv $CONTAINER_NAME
+
+  run docker run -d --name $CONTAINER_NAME\
+   -v $HOST_VOL_PREFIX/app:/app\
+   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
+   $IMAGE_NAME
+  sleep $SLEEP_TIME
+
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
+  [[ "$output" =~ '200 OK' ]]
+  cleanup_volumes_content
+}
