@@ -165,7 +165,7 @@ create_full_container_mounted(){
 
 @test "Data gets generated in conf and data if bind mounted in the host" {
   create_full_container_mounted
-  run docker run -v $HOST_VOL_PREFIX:$HOST_VOL_PREFIX --rm bitnami/mariadb ls -l $HOST_VOL_PREFIX/conf/my.cnf $HOST_VOL_PREFIX/logs/mysqld.log
+  run docker run -v $HOST_VOL_PREFIX:$HOST_VOL_PREFIX --rm $IMAGE_NAME ls -l $HOST_VOL_PREFIX/conf/my.cnf $HOST_VOL_PREFIX/logs/mysqld.log
   [ $status = 0 ]
   cleanup_volumes_content
 }
