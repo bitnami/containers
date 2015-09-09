@@ -37,7 +37,16 @@ create_container(){
 
 # $1 is the command
 mysql_client(){
-  docker run --rm --link $CONTAINER_NAME:$CONTAINER_NAME $IMAGE_NAME mysql -h $CONTAINER_NAME "$@"
+  case "$1" in
+    master|slave)
+      SERVER_LINK="--link $CONTAINER_NAME-$1:$CONTAINER_NAME"
+      shift
+      ;;
+    *)
+      SERVER_LINK="--link $CONTAINER_NAME:$CONTAINER_NAME"
+      ;;
+  esac
+  docker run --rm $SERVER_LINK $IMAGE_NAME mysql -h $CONTAINER_NAME "$@"
 }
 
 create_full_container(){
