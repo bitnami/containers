@@ -43,6 +43,8 @@ if [ "$1" = 'mysqld.bin' ]; then
     $BITNAMI_APP_VOL_PREFIX/conf/ \
     $BITNAMI_APP_VOL_PREFIX/logs/ \
     $BITNAMI_APP_VOL_PREFIX/data/ || true
+
+  wait_and_tail_logs &
 fi
 
 exec "$@"
