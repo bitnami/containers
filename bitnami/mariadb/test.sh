@@ -203,3 +203,30 @@ create_full_container_mounted(){
   cleanup_running_containers $CONTAINER_NAME-master
   cleanup_running_containers $CONTAINER_NAME-slave
 }
+
+@test "Replication slave can automatically fetch connection parameters from master using docker links" {
+  create_container -d --name $CONTAINER_NAME-master \
+   -e MARIADB_USER=$MARIADB_USER \
+   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
+   -e MARIADB_DATABASE=$MARIADB_DATABASE \
+   -e REPLICATION_MODE=master \
+   -e REPLICATION_USER=$REPLICATION_USER \
+   -e REPLICATION_PASSWORD=$REPLICATION_PASSWORD
+
+  create_container -d --name $CONTAINER_NAME-slave \
+   --link $CONTAINER_NAME-master:mariadb-master \
+   -e MARIADB_USER=$MARIADB_USER \
+   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
+   -e MARIADB_DATABASE=$MARIADB_DATABASE \
+   -e REPLICATION_MODE=slave
+
+  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "CREATE TABLE users (id INT AUTO_INCREMENT, name VARCHAR(30), datum TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(id))"
+  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "INSERT INTO users(name) VALUES ('Marko')"
+
+  run mysql_client slave -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "SELECT * FROM users"
+  [[ "$output" =~ "Marko" ]]
+  [ $status = 0 ]
+
+  cleanup_running_containers $CONTAINER_NAME-master
+  cleanup_running_containers $CONTAINER_NAME-slave
+}
