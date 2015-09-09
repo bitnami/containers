@@ -32,7 +32,7 @@ cleanup_volumes_content() {
 }
 
 create_basic_container(){
-  docker run -d --name $CONTAINER_NAME $IMAGE_NAME; sleep $SLEEP_TIME
+  docker run -d --name $CONTAINER_NAME "$@" $IMAGE_NAME; sleep $SLEEP_TIME
 }
 
 # $1 is the command
