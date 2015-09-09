@@ -1,9 +1,6 @@
 #!/bin/bash
 cd $BITNAMI_APP_DIR
 
-# set up logging to stdout
-ln -s /dev/stdout logs/mysqld.log
-
 # set up default config
 mkdir conf.defaults
 mv my.cnf conf.defaults/
