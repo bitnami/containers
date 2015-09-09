@@ -9,8 +9,8 @@ VOL_PREFIX=/bitnami/mariadb
 HOST_VOL_PREFIX=${HOST_VOL_PREFIX:-/tmp/bitnami/$CONTAINER_NAME}
 
 cleanup_running_containers() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
-    docker rm -fv $CONTAINER_NAME
+  if [ "$(docker ps -a | grep ${1:-$CONTAINER_NAME})" ]; then
+    docker rm -fv ${1:-$CONTAINER_NAME}
   fi
 }
 
