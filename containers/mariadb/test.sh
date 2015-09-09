@@ -18,11 +18,15 @@ cleanup_running_containers() {
 
 setup() {
   cleanup_running_containers
+  cleanup_running_containers $CONTAINER_NAME-master
+  cleanup_running_containers $CONTAINER_NAME-slave
   mkdir -p $HOST_VOL_PREFIX
 }
 
 teardown() {
   cleanup_running_containers
+  cleanup_running_containers $CONTAINER_NAME-master
+  cleanup_running_containers $CONTAINER_NAME-slave
 }
 
 cleanup_volumes_content() {
