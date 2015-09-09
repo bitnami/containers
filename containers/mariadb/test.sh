@@ -31,7 +31,7 @@ cleanup_volumes_content() {
     $IMAGE_NAME rm -rf $VOL_PREFIX/data/ $VOL_PREFIX/logs/ $VOL_PREFIX/conf/
 }
 
-create_basic_container(){
+create_container(){
   docker run "$@" $IMAGE_NAME; sleep $SLEEP_TIME
 }
 
@@ -61,7 +61,7 @@ create_full_container_mounted(){
 }
 
 @test "Root user created without password" {
-  create_basic_container -d --name $CONTAINER_NAME
+  create_container -d --name $CONTAINER_NAME
   run mysql_client -e "select User from mysql.user where User=\"root\"\G"
   [[ "$output" =~ "User: root" ]]
 }
@@ -77,7 +77,7 @@ create_full_container_mounted(){
 }
 
 @test "Root user has access to admin database" {
-  create_basic_container -d --name $CONTAINER_NAME
+  create_container -d --name $CONTAINER_NAME
   run mysql_client -e 'show databases\G'
   [[ "$output" =~ 'Database: mysql' ]]
 }
@@ -148,7 +148,7 @@ create_full_container_mounted(){
 }
 
 @test "Port 3306 exposed and accepting external connections" {
-  create_basic_container -d --name $CONTAINER_NAME
+  create_container -d --name $CONTAINER_NAME
 
   run docker run --rm --name 'linked' --link $CONTAINER_NAME:$CONTAINER_NAME $IMAGE_NAME\
     mysql -h $CONTAINER_NAME -P 3306 -e 'show databases\G'
@@ -156,7 +156,7 @@ create_full_container_mounted(){
 }
 
 @test "All the volumes exposed" {
-  create_basic_container -d --name $CONTAINER_NAME
+  create_container -d --name $CONTAINER_NAME
   run docker inspect $CONTAINER_NAME
   [[ "$output" =~ "$VOL_PREFIX/data" ]]
   [[ "$output" =~ "$VOL_PREFIX/conf" ]]
