@@ -50,23 +50,20 @@ mysql_client(){
 }
 
 create_full_container(){
-  docker run -d --name $CONTAINER_NAME\
+  create_container -d --name $CONTAINER_NAME\
    -e MARIADB_USER=$MARIADB_USER\
    -e MARIADB_DATABASE=$MARIADB_DATABASE\
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD $IMAGE_NAME
-  sleep $SLEEP_TIME
+   -e MARIADB_PASSWORD=$MARIADB_PASSWORD
 }
 
 create_full_container_mounted(){
-  docker run -d --name $CONTAINER_NAME\
+  create_container -d --name $CONTAINER_NAME\
    -e MARIADB_USER=$MARIADB_USER\
    -e MARIADB_DATABASE=$MARIADB_DATABASE\
    -e MARIADB_PASSWORD=$MARIADB_PASSWORD\
    -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data\
    -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
-   -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs\
-   $IMAGE_NAME
-  sleep $SLEEP_TIME
+   -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs
 }
 
 @test "Root user created without password" {
@@ -76,8 +73,7 @@ create_full_container_mounted(){
 }
 
 @test "Root user created with password" {
-  docker run -d --name $CONTAINER_NAME -e MARIADB_PASSWORD=$MARIADB_PASSWORD $IMAGE_NAME
-  sleep $SLEEP_TIME
+  create_container -d --name $CONTAINER_NAME -e MARIADB_PASSWORD=$MARIADB_PASSWORD
   # Can not login as root
   run mysql_client -e 'show databases\G'
   [ $status = 1 ]
@@ -92,23 +88,20 @@ create_full_container_mounted(){
 }
 
 @test "Custom database created" {
-  docker run -d --name $CONTAINER_NAME -e MARIADB_DATABASE=$MARIADB_DATABASE $IMAGE_NAME
-  sleep $SLEEP_TIME
+  create_container -d --name $CONTAINER_NAME -e MARIADB_DATABASE=$MARIADB_DATABASE
   run mysql_client -e 'show databases\G'
   [[ "$output" =~ "Database: $MARIADB_DATABASE" ]]
 }
 
 @test "Can't create a custom user without database" {
-  run docker run --name $CONTAINER_NAME -e MARIADB_USER=$MARIADB_USER $IMAGE_NAME
+  run create_container --name $CONTAINER_NAME -e MARIADB_USER=$MARIADB_USER
   [[ "$output" =~ "you need to provide the MARIADB_DATABASE" ]]
-  [ $status = 255 ]
 }
 
 @test "Create custom user and database without password" {
-  docker run -d --name $CONTAINER_NAME\
+  create_container -d --name $CONTAINER_NAME\
    -e MARIADB_USER=$MARIADB_USER\
-   -e MARIADB_DATABASE=$MARIADB_DATABASE $IMAGE_NAME
-  sleep $SLEEP_TIME
+   -e MARIADB_DATABASE=$MARIADB_DATABASE
   # Can not login as root
   run mysql_client -e 'show databases\G'
   [ $status = 1 ]
@@ -145,11 +138,9 @@ create_full_container_mounted(){
 
   docker rm -fv $CONTAINER_NAME
 
-  docker run -d --name $CONTAINER_NAME\
+  create_container -d --name $CONTAINER_NAME\
    -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data\
-   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
-   $IMAGE_NAME
-  sleep $SLEEP_TIME
+   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf
 
   run mysql_client -u $MARIADB_USER -p$MARIADB_PASSWORD -e 'show databases\G'
   [ $status = 0 ]
