@@ -1,12 +1,12 @@
 # MariaDB Utility functions
 PROGRAM_OPTIONS="--defaults-file=$BITNAMI_APP_DIR/my.cnf --log-error=$BITNAMI_APP_DIR/logs/mysqld.log --basedir=$BITNAMI_APP_DIR --datadir=$BITNAMI_APP_DIR/data --plugin-dir=$BITNAMI_APP_DIR/lib/plugin --user=$BITNAMI_APP_USER --socket=$BITNAMI_APP_DIR/tmp/mysql.sock --lower-case-table-names=1"
 
-case "$REPLICATION_MODE" in
+case "$MARIADB_REPLICATION_MODE" in
   master )
-    PROGRAM_OPTIONS+=" --server-id=${SERVER_ID:-$RANDOM} --binlog-format=ROW --log-bin=mysql-bin --innodb_flush_log_at_trx_commit=1 --sync-binlog=1"
+    PROGRAM_OPTIONS+=" --server-id=${MARIADB_SERVER_ID:-$RANDOM} --binlog-format=ROW --log-bin=mysql-bin --innodb_flush_log_at_trx_commit=1 --sync-binlog=1"
     ;;
   slave)
-    PROGRAM_OPTIONS+=" --server-id=${SERVER_ID:-$RANDOM} --binlog-format=ROW --log-bin=mysql-bin --relay-log=mysql-relay-bin --log-slave-updates=1 --read-only=1 ${MARIADB_DATABASE:+--replicate-do-db=$MARIADB_DATABASE}"
+    PROGRAM_OPTIONS+=" --server-id=${MARIADB_SERVER_ID:-$RANDOM} --binlog-format=ROW --log-bin=mysql-bin --relay-log=mysql-relay-bin --log-slave-updates=1 --read-only=1 ${MARIADB_DATABASE:+--replicate-do-db=$MARIADB_DATABASE}"
     ;;
 esac
 
@@ -57,13 +57,13 @@ create_mysql_user() {
 }
 
 configure_replication() {
-  case "$REPLICATION_MODE" in
+  case "$MARIADB_REPLICATION_MODE" in
     master)
-      if [ "$REPLICATION_USER" ]; then
-        echo "==> Creating replication user $REPLICATION_USER..."
+      if [ "$MARIADB_REPLICATION_USER" ]; then
+        echo "==> Creating replication user $MARIADB_REPLICATION_USER..."
         echo ""
 
-        echo "GRANT REPLICATION SLAVE ON *.* TO '$REPLICATION_USER'@'%' IDENTIFIED BY '$REPLICATION_PASSWORD';" >> /tmp/init_mysql.sql
+        echo "GRANT REPLICATION SLAVE ON *.* TO '$MARIADB_REPLICATION_USER'@'%' IDENTIFIED BY '$MARIADB_REPLICATION_PASSWORD';" >> /tmp/init_mysql.sql
         echo "FLUSH PRIVILEGES ;" >> /tmp/init_mysql.sql
       fi
       ;;
@@ -71,14 +71,14 @@ configure_replication() {
       echo "==> Setting up MariaDB slave..."
 
       echo "==> Trying to fetch MariaDB master connection parameters from the master link..."
-      MASTER_HOST=${MASTER_HOST:-$MASTER_PORT_3306_TCP_ADDR}
-      MASTER_USER=${MASTER_USER:-$MASTER_ENV_MARIADB_USER}
-      MASTER_PASSWORD=${MASTER_PASSWORD:-$MASTER_ENV_MARIADB_PASSWORD}
-      REPLICATION_USER=${REPLICATION_USER:-$MASTER_ENV_REPLICATION_USER}
-      REPLICATION_PASSWORD=${REPLICATION_PASSWORD:-$MASTER_ENV_REPLICATION_PASSWORD}
+      MARIADB_MASTER_HOST=${MARIADB_MASTER_HOST:-$MASTER_PORT_3306_TCP_ADDR}
+      MARIADB_MASTER_USER=${MARIADB_MASTER_USER:-$MASTER_ENV_MARIADB_USER}
+      MARIADB_MASTER_PASSWORD=${MARIADB_MASTER_PASSWORD:-$MASTER_ENV_MARIADB_PASSWORD}
+      MARIADB_REPLICATION_USER=${MARIADB_REPLICATION_USER:-$MASTER_ENV_MARIADB_REPLICATION_USER}
+      MARIADB_REPLICATION_PASSWORD=${MARIADB_REPLICATION_PASSWORD:-$MASTER_ENV_MARIADB_REPLICATION_PASSWORD}
 
-      if [ ! $MASTER_USER ]; then
-        echo "In order to setup a replication slave you need to provide the MASTER_USER as well"
+      if [ ! $MARIADB_MASTER_USER ]; then
+        echo "In order to setup a replication slave you need to provide the MARIADB_MASTER_USER as well"
         echo ""
         exit -1
       fi
@@ -89,18 +89,18 @@ configure_replication() {
         exit -1
       fi
 
-      if [ ! $REPLICATION_USER ]; then
-        echo "In order to setup a replication slave you need to provide the REPLICATION_USER as well"
+      if [ ! $MARIADB_REPLICATION_USER ]; then
+        echo "In order to setup a replication slave you need to provide the MARIADB_REPLICATION_USER as well"
         echo ""
         exit -1
       fi
 
       echo "==> Setting the master configuration..."
-      echo "CHANGE MASTER TO MASTER_HOST='$MASTER_HOST', MASTER_USER='$REPLICATION_USER', MASTER_PASSWORD='$REPLICATION_PASSWORD';" >> /tmp/init_mysql.sql
+      echo "CHANGE MASTER TO MASTER_HOST='$MARIADB_MASTER_HOST', MASTER_USER='$MARIADB_REPLICATION_USER', MASTER_PASSWORD='$MARIADB_REPLICATION_PASSWORD';" >> /tmp/init_mysql.sql
 
       echo "==> Checking if replication master is ready to accept connection (60s timeout)..."
       timeout=60
-      while ! mysqladmin -u$MASTER_USER ${MASTER_PASSWORD:+-p$MASTER_PASSWORD} -h $MASTER_HOST status >/dev/null 2>&1
+      while ! mysqladmin -u$MARIADB_MASTER_USER ${MARIADB_MASTER_PASSWORD:+-p$MARIADB_MASTER_PASSWORD} -h $MARIADB_MASTER_HOST status >/dev/null 2>&1
       do
         timeout=$(expr $timeout - 1)
         if [[ $timeout -eq 0 ]]; then
@@ -113,7 +113,7 @@ configure_replication() {
       echo
 
       echo "==> Creating a data snapshot..."
-      mysqldump -u$MASTER_USER ${MASTER_PASSWORD:+-p$MASTER_PASSWORD} -h $MASTER_HOST \
+      mysqldump -u$MARIADB_MASTER_USER ${MARIADB_MASTER_PASSWORD:+-p$MARIADB_MASTER_PASSWORD} -h $MARIADB_MASTER_HOST \
         --databases $MARIADB_DATABASE --skip-lock-tables --single-transaction --flush-logs --hex-blob --master-data --apply-slave-statements --comments=false | tr -d '\012' | sed -e 's/;/;\n/g' >> /tmp/init_mysql.sql
       echo ""
       ;;
