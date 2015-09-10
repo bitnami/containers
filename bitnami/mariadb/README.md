@@ -208,6 +208,101 @@ mariadb:
 **Note!**
 When `MARIADB_PASSWORD` is specified along with `MARIADB_USER`, the value specified in `MARIADB_PASSWORD` is set as the password of the newly created user specified in `MARIADB_USER`.
 
+## Setting up a replication cluster
+
+A **zero downtime** MariaDB [replication](https://dev.mysql.com/doc/refman/5.0/en/replication-howto.html) cluster can easily be setup with the Bitnami MariaDB Docker Image using the following environment variables:
+
+ - `SERVER_ID`: Unique server identifier (default: random number)
+ - `REPLICATION_MODE`: Replication mode. Possible values `master`/`slave` (default: none).
+ - `REPLICATION_USER`: Replication user. User is created on master on the first boot (default: none).
+ - `REPLICATION_PASSWORD`: Replication users password. Password is set for `REPLICATION_USER` on master on the first boot (default: none).
+ - `MASTER_HOST`: Replication masters hostname/ip (parameter available only on slave).
+ - `MASTER_USER`: User on replication master with access to `MARIADB_DATABASE` (parameter available only on slave).
+ - `MASTER_PASSWORD`: Password of user on replication master with access to `MARIADB_DATABASE` (parameter available only on slave).
+
+In the replication cluster you can have one MariaDB master and one or more slaves. When replication is enabled writes can occur only on the master while reads can take place on both the master or slaves. Ideally in your applications you should limit the reads to the slaves and use the master only for the writes.
+
+### Step 1: Create the MariaDB master
+
+The first step is to start the MariaDB master.
+
+```bash
+docker run --name mariadb-master \
+  -e SERVER_ID=1 \
+  -e MARIADB_USER=my_user -e MARIADB_PASSWORD=my_password -e MARIADB_DATABASE=my_database \
+  -e REPLICATION_MODE=master -e REPLICATION_USER=my_repl_user -e REPLICATION_PASSWORD=my_repl_password \
+  bitnami/mariadb
+```
+
+or using Docker Compose:
+
+In this command we are configuring the container as the master using the `REPLICATION_MODE=master` parameter. Using the `REPLICATION_USER` and `REPLICATION_PASSWORD` parameters we are creating a replication user that will be used by the slaves to connect to the master and perform the replication.
+
+### Step 2: Create the MariaDB slave
+
+Next we start a MariaDB slave container.
+
+```bash
+docker run --name mariadb-slave --link mariadb-master:mariadb-master -e SERVER_ID=2 \
+  -e MARIADB_USER=my_user -e MARIADB_PASSWORD=my_password -e MARIADB_DATABASE=my_database \
+  -e REPLICATION_MODE=slave -e REPLICATION_USER=my_repl_user -e REPLICATION_PASSWORD=my_repl_password \
+  -e MASTER_HOST=mariadb-master -e MASTER_USER=my_user -e MASTER_PASSWORD=my_password \
+  bitnami/mariadb
+```
+
+In this command we are configuring the container as a slave using the `REPLICATION_MODE=slave` parameter. Before the replication slave is started, the `MASTER_HOST`, `MASTER_USER` and `MASTER_PASSWORD` parameters are used by the slave container to connect to the master and take a dump of the existing data in the database identified by the `MARIADB_DATABASE` paramater. The `REPLICATION_USER` and `REPLICATION_PASSWORD` credentials are used to read the binary replication logs from the master.
+
+Using the `mariadb-master` docker link, the Bitnami MariaDB Docker image supports automatic discovery of the replication paramaters from the master container, namely:
+
+ - `REPLICATION_MODE`
+ - `REPLICATION_USER`
+ - `REPLICATION_PASSWORD`
+ - `MASTER_HOST`
+ - `MASTER_USER`
+ - `MASTER_PASSWORD`
+
+As a result you can drop these parameters from the slave. Additionally since `SERVER_ID` is assigned a random identifier we can drop it as well:
+
+```bash
+docker run --name mariadb-slave --link mariadb-master:mariadb-master \
+  -e MARIADB_USER=my_user -e MARIADB_PASSWORD=my_password -e MARIADB_DATABASE=my_database \
+  -e REPLICATION_MODE=slave \
+  bitnami/mariadb
+```
+
+You can also add more slaves to the cluster without any downtime allowing you to scale the cluster horizontally as required.
+
+Using Docker Compose the master-slave replication can be setup with:
+
+```yaml
+master:
+  image: bitnami/mariadb
+  environment:
+    - MARIADB_USER=my_user
+    - MARIADB_PASSWORD=my_password
+    - MARIADB_DATABASE=my_database
+    - REPLICATION_MODE=master
+    - REPLICATION_USER=my_repl_user
+    - REPLICATION_PASSWORD=my_repl_password
+
+slave:
+  image: bitnami/mariadb
+  links:
+    - master:mariadb-master
+  environment:
+    - MARIADB_USER=my_user
+    - MARIADB_PASSWORD=my_password
+    - MARIADB_DATABASE=my_database
+    - REPLICATION_MODE=slave
+    - MASTER_HOST=mariadb-master
+```
+
+In Docker Compose you can scale the number of slaves using:
+
+```bash
+docker-compose scale master=1 slave=3
+```
+
 ## Command-line options
 
 The simplest way to configure your MariaDB server is to pass custom command-line options when
