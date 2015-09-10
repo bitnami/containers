@@ -77,6 +77,12 @@ configure_replication() {
       REPLICATION_USER=${REPLICATION_USER:-$MARIADB_MASTER_ENV_REPLICATION_USER}
       REPLICATION_PASSWORD=${REPLICATION_PASSWORD:-$MARIADB_MASTER_ENV_REPLICATION_PASSWORD}
 
+      if [ ! $MASTER_USER ]; then
+        echo "In order to setup a replication slave you need to provide the MASTER_USER as well"
+        echo ""
+        exit -1
+      fi
+
       if [ ! $MARIADB_DATABASE ]; then
         echo "In order to setup a replication slave you need to provide the MARIADB_DATABASE as well"
         echo ""

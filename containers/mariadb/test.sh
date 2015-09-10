@@ -208,6 +208,30 @@ create_full_container_mounted(){
   cleanup_running_containers $CONTAINER_NAME-slave
 }
 
+@test "Can't setup replication slave without master user" {
+  create_container -d --name $CONTAINER_NAME-master \
+   -e MARIADB_USER=$MARIADB_USER \
+   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
+   -e MARIADB_DATABASE=$MARIADB_DATABASE \
+   -e REPLICATION_MODE=master \
+   -e REPLICATION_USER=$REPLICATION_USER \
+   -e REPLICATION_PASSWORD=$REPLICATION_PASSWORD
+
+  run create_container --name $CONTAINER_NAME-slave \
+   --link $CONTAINER_NAME-master:master \
+   -e MASTER_HOST=master \
+   -e MARIADB_USER=$MARIADB_USER \
+   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
+   -e MARIADB_DATABASE=$MARIADB_DATABASE \
+   -e REPLICATION_MODE=slave \
+   -e REPLICATION_USER=$REPLICATION_USER \
+   -e REPLICATION_PASSWORD=$REPLICATION_PASSWORD
+[[ "$output" =~ "you need to provide the MASTER_USER" ]]
+
+  cleanup_running_containers $CONTAINER_NAME-master
+  cleanup_running_containers $CONTAINER_NAME-slave
+}
+
 @test "Can't setup replication slave without database" {
   create_container -d --name $CONTAINER_NAME-master \
    -e MARIADB_USER=$MARIADB_USER \
@@ -251,7 +275,6 @@ create_full_container_mounted(){
    -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
    -e MARIADB_DATABASE=$MARIADB_DATABASE \
    -e REPLICATION_MODE=slave
-
   [[ "$output" =~ "you need to provide the REPLICATION_USER" ]]
 
   cleanup_running_containers $CONTAINER_NAME-master
