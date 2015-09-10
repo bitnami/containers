@@ -83,6 +83,12 @@ configure_replication() {
         exit -1
       fi
 
+      if [ ! $REPLICATION_USER ]; then
+        echo "In order to setup a replication slave you need to provide the REPLICATION_USER as well"
+        echo ""
+        exit -1
+      fi
+
       echo "==> Setting the master configuration..."
       echo "CHANGE MASTER TO MASTER_HOST='$MASTER_HOST', MASTER_USER='$REPLICATION_USER', MASTER_PASSWORD='$REPLICATION_PASSWORD';" >> /tmp/init_mysql.sql
 
