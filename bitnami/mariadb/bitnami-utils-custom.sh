@@ -80,6 +80,20 @@ configure_replication() {
       echo "==> Setting the master configuration..."
       echo "CHANGE MASTER TO MASTER_HOST='$MASTER_HOST', MASTER_USER='$REPLICATION_USER', MASTER_PASSWORD='$REPLICATION_PASSWORD';" >> /tmp/init_mysql.sql
 
+      echo "==> Checking if replication master is ready to accept connection (60s timeout)..."
+      timeout=60
+      while ! mysqladmin -u$MASTER_USER ${MASTER_PASSWORD:+-p$MASTER_PASSWORD} -h $MASTER_HOST status >/dev/null 2>&1
+      do
+        timeout=$(expr $timeout - 1)
+        if [[ $timeout -eq 0 ]]; then
+          echo "Could not connect to replication master"
+          echo ""
+          exit -1
+        fi
+        sleep 1
+      done
+      echo
+
       echo "==> Creating a data snapshot..."
       mysqldump -u$MASTER_USER ${MASTER_PASSWORD:+-p$MASTER_PASSWORD} -h $MASTER_HOST \
         --databases $MARIADB_DATABASE --skip-lock-tables --single-transaction --flush-logs --hex-blob --master-data --apply-slave-statements --comments=false | tr -d '\012' | sed -e 's/;/;\n/g' >> /tmp/init_mysql.sql
