@@ -70,12 +70,12 @@ configure_replication() {
     slave)
       echo "==> Setting up MariaDB slave..."
 
-      echo "==> Trying to fetch MariaDB master connection parameters from the mariadb-master link..."
-      MASTER_HOST=${MASTER_HOST:-$MARIADB_MASTER_PORT_3306_TCP_ADDR}
-      MASTER_USER=${MASTER_USER:-$MARIADB_MASTER_ENV_MARIADB_USER}
-      MASTER_PASSWORD=${MASTER_PASSWORD:-$MARIADB_MASTER_ENV_MARIADB_PASSWORD}
-      REPLICATION_USER=${REPLICATION_USER:-$MARIADB_MASTER_ENV_REPLICATION_USER}
-      REPLICATION_PASSWORD=${REPLICATION_PASSWORD:-$MARIADB_MASTER_ENV_REPLICATION_PASSWORD}
+      echo "==> Trying to fetch MariaDB master connection parameters from the master link..."
+      MASTER_HOST=${MASTER_HOST:-$MASTER_PORT_3306_TCP_ADDR}
+      MASTER_USER=${MASTER_USER:-$MASTER_ENV_MARIADB_USER}
+      MASTER_PASSWORD=${MASTER_PASSWORD:-$MASTER_ENV_MARIADB_PASSWORD}
+      REPLICATION_USER=${REPLICATION_USER:-$MASTER_ENV_REPLICATION_USER}
+      REPLICATION_PASSWORD=${REPLICATION_PASSWORD:-$MASTER_ENV_REPLICATION_PASSWORD}
 
       if [ ! $MASTER_USER ]; then
         echo "In order to setup a replication slave you need to provide the MASTER_USER as well"
