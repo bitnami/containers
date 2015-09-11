@@ -272,7 +272,7 @@ create_full_container_mounted(){
    -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
 
   run create_container --name $CONTAINER_NAME-slave \
-   --link $CONTAINER_NAME-master:master \
+   --link $CONTAINER_NAME-master:mariadb-master \
    -e MARIADB_MASTER_HOST=$CONTAINER_NAME-master \
    -e MARIADB_MASTER_USER=$MARIADB_USER \
    -e MARIADB_MASTER_PASSWORD=$MARIADB_PASSWORD \
