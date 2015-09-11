@@ -32,6 +32,8 @@ if [ "$1" = 'mysqld.bin' ]; then
 
     create_mysql_user
 
+    configure_replication
+
     print_app_credentials $BITNAMI_APP_NAME $MARIADB_USER `print_mysql_password` `print_mysql_database`
   else
     print_container_already_initialized $BITNAMI_APP_NAME
@@ -41,6 +43,8 @@ if [ "$1" = 'mysqld.bin' ]; then
     $BITNAMI_APP_VOL_PREFIX/conf/ \
     $BITNAMI_APP_VOL_PREFIX/logs/ \
     $BITNAMI_APP_VOL_PREFIX/data/ || true
+
+  wait_and_tail_logs &
 fi
 
 exec "$@"
