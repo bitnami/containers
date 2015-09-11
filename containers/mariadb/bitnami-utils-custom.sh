@@ -26,6 +26,15 @@ create_custom_database() {
 }
 
 create_mysql_user() {
+  if [ "$MARIADB_REPLICATION_MODE" == "slave" ]; then
+    if [ ! "$MARIADB_USER" ] || [ ! "${MARIADB_PASSWORD}" ] || [ ! "$MARIADB_DATABASE" ]; then
+      echo "==> Trying to fetch MariaDB user/password from the master link..."
+      MARIADB_USER=${MARIADB_USER:-$MASTER_ENV_MARIADB_USER}
+      MARIADB_PASSWORD=${MARIADB_PASSWORD:-$MASTER_ENV_MARIADB_PASSWORD}
+      MARIADB_DATABASE=${MARIADB_DATABASE:-$MASTER_ENV_MARIADB_DATABASE}
+    fi
+  fi
+
   if [ ! "$MARIADB_USER" ]; then
     MARIADB_USER=root
   fi
@@ -70,7 +79,7 @@ configure_replication() {
     slave)
       echo "==> Setting up MariaDB slave..."
 
-      echo "==> Trying to fetch MariaDB master connection parameters from the master link..."
+      echo "==> Trying to fetch MariaDB replication parameters from the master link..."
       MARIADB_MASTER_HOST=${MARIADB_MASTER_HOST:-$MASTER_PORT_3306_TCP_ADDR}
       MARIADB_MASTER_USER=${MARIADB_MASTER_USER:-$MASTER_ENV_MARIADB_USER}
       MARIADB_MASTER_PASSWORD=${MARIADB_MASTER_PASSWORD:-$MASTER_ENV_MARIADB_PASSWORD}

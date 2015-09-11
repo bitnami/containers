@@ -252,7 +252,7 @@ docker run --name mariadb-slave --link mariadb-master:master -e MARIADB_SERVER_I
 
 In this command we are configuring the container as a slave using the `MARIADB_REPLICATION_MODE=slave` parameter. Before the replication slave is started, the `MARIADB_MASTER_HOST`, `MARIADB_MASTER_USER` and `MARIADB_MASTER_PASSWORD` parameters are used by the slave container to connect to the master and take a dump of the existing data in the database identified by the `MARIADB_DATABASE` paramater. The `MARIADB_REPLICATION_USER` and `MARIADB_REPLICATION_PASSWORD` credentials are used to read the binary replication logs from the master.
 
-Using the `master` docker link, the Bitnami MariaDB Docker image supports automatic discovery of the replication paramaters from the master container, namely:
+When not specified, using the `master` docker link alias, the Bitnami MariaDB Docker image automatically fetches the replication paramaters from the master container, namely:
 
  - `MARIADB_REPLICATION_MODE`
  - `MARIADB_REPLICATION_USER`
@@ -261,18 +261,27 @@ Using the `master` docker link, the Bitnami MariaDB Docker image supports automa
  - `MARIADB_MASTER_USER`
  - `MARIADB_MASTER_PASSWORD`
 
-As a result you can drop these parameters from the slave. Additionally since `MARIADB_SERVER_ID` is assigned a random identifier we can drop it as well:
+Additionally, the following parameters are also fetched in the slave container:
+
+ - `MARIADB_USER`
+ - `MARIADB_PASSWORD`
+ - `MARIADB_DATABASE`
+
+As a result you can drop all of these parameters from the slave. Since `MARIADB_SERVER_ID` is assigned a random identifier we can drop it as well:
 
 ```bash
 docker run --name mariadb-slave --link mariadb-master:master \
-  -e MARIADB_USER=my_user -e MARIADB_PASSWORD=my_password -e MARIADB_DATABASE=my_database \
   -e MARIADB_REPLICATION_MODE=slave \
   bitnami/mariadb
 ```
 
-You can also add more slaves to the cluster without any downtime allowing you to scale the cluster horizontally as required.
+With these two commands you now have a two node MariaDB master-slave replication cluster up and running. When required you can add more slaves to the cluster without any downtime allowing you to scale the cluster horizontally.
 
-Using Docker Compose the master-slave replication can be setup with:
+> **Note**:
+>
+>  The cluster only replicates the database specified in the `MARIADB_DATABASE` parameter.
+
+With Docker Compose the master-slave replication can be setup using:
 
 ```yaml
 master:
@@ -290,18 +299,19 @@ slave:
   links:
     - master:master
   environment:
-    - MARIADB_USER=my_user
-    - MARIADB_PASSWORD=my_password
-    - MARIADB_DATABASE=my_database
     - MARIADB_REPLICATION_MODE=slave
     - MARIADB_MASTER_HOST=master
 ```
 
-In Docker Compose you can scale the number of slaves using:
+Scale the number of slaves using:
 
 ```bash
 docker-compose scale master=1 slave=3
 ```
+
+The above command scales up the number of slaves to `3`. You can scale down in the same way.
+
+> **Note**: You should not scale the number of master nodes to anything more or less than `1`.
 
 ## Command-line options
 
