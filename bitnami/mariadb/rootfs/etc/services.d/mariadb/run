@@ -4,10 +4,6 @@ source $BITNAMI_PREFIX/bitnami-utils.sh
 
 print_welcome_page
 
-if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
-  generate_conf_files
-fi
-
 mkdir -p $BITNAMI_APP_DIR/tmp
 chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/tmp || true
 
