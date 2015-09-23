@@ -1,6 +1,11 @@
 # Bitnami Docker Image for WordPress
 Docker image for [Bitnami WordPress Stack](https://bitnami.com/stack/wordpress)
 
+# TLDR
+```
+docker run --name=wordpress -d -p 80:80 -p 443:443 bitnami/wordpress
+```
+
 # License
 
 Copyright 2015 Bitnami
