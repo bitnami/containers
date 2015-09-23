@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bash
+set -e
+source $BITNAMI_PREFIX/bitnami-utils.sh
+
+if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
+  generate_conf_files
+fi
