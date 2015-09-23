@@ -1,6 +1,11 @@
 # Bitnami Docker Image for Drupal
 Docker image for [Bitnami Drupal Stack](https://bitnami.com/stack/drupal)
 
+# TLDR
+```
+docker run --name=drupal -d -p 80:80 -p 443:443 bitnami/drupal
+```
+
 # License
 
 Copyright 2015 Bitnami
