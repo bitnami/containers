@@ -1,0 +1,38 @@
+#!/usr/bin/with-contenv bash
+
+if [ -n "$MARIADB_USER" ] && [ "$MARIADB_USER" != "root" ] && [ ! $MARIADB_DATABASE ]; then
+  echo "In order to use a custom MARIADB_USER you need to provide the MARIADB_DATABASE as well"
+  echo ""
+  exit -1
+fi
+
+if [ "$MARIADB_REPLICATION_MODE" == "slave" ]; then
+  MARIADB_MASTER_HOST=${MARIADB_MASTER_HOST:-$MASTER_PORT_3306_TCP_ADDR}
+  MARIADB_MASTER_USER=${MARIADB_MASTER_USER:-$MASTER_ENV_MARIADB_USER}
+  MARIADB_MASTER_PASSWORD=${MARIADB_MASTER_PASSWORD:-$MASTER_ENV_MARIADB_PASSWORD}
+  MARIADB_REPLICATION_USER=${MARIADB_REPLICATION_USER:-$MASTER_ENV_MARIADB_REPLICATION_USER}
+
+  if [ ! $MARIADB_MASTER_HOST ]; then
+    echo "In order to setup a replication slave you need to provide the MARIADB_MASTER_HOST as well"
+    echo ""
+    exit -1
+  fi
+
+  if [ ! $MARIADB_MASTER_USER ]; then
+    echo "In order to setup a replication slave you need to provide the MARIADB_MASTER_USER as well"
+    echo ""
+    exit -1
+  fi
+
+  if [ ! $MARIADB_DATABASE ]; then
+    echo "In order to setup a replication slave you need to provide the MARIADB_DATABASE as well"
+    echo ""
+    exit -1
+  fi
+
+  if [ ! $MARIADB_REPLICATION_USER ]; then
+    echo "In order to setup a replication slave you need to provide the MARIADB_REPLICATION_USER as well"
+    echo ""
+    exit -1
+  fi
+fi
