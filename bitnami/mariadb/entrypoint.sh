@@ -8,4 +8,8 @@ elif [ "${1}" == "mysqld.bin" -o "${1}" == "$(which mysqld.bin)" ]; then
   set --
 fi
 
+if [ -n "${1}" ]; then
+  touch /etc/services.d/$BITNAMI_APP_NAME/down
+fi
+
 exec /init "$@"
