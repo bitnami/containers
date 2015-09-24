@@ -39,12 +39,6 @@ create_mysql_user() {
     MARIADB_USER=root
   fi
 
-  if [ "$MARIADB_USER" != "root" ] && [ ! $MARIADB_DATABASE ]; then
-    echo "In order to use a custom MARIADB_USER you need to provide the MARIADB_DATABASE as well"
-    echo ""
-    exit -1
-  fi
-
   echo "==> Creating user $MARIADB_USER..."
   echo ""
 
@@ -85,24 +79,6 @@ configure_replication() {
       MARIADB_MASTER_PASSWORD=${MARIADB_MASTER_PASSWORD:-$MASTER_ENV_MARIADB_PASSWORD}
       MARIADB_REPLICATION_USER=${MARIADB_REPLICATION_USER:-$MASTER_ENV_MARIADB_REPLICATION_USER}
       MARIADB_REPLICATION_PASSWORD=${MARIADB_REPLICATION_PASSWORD:-$MASTER_ENV_MARIADB_REPLICATION_PASSWORD}
-
-      if [ ! $MARIADB_MASTER_USER ]; then
-        echo "In order to setup a replication slave you need to provide the MARIADB_MASTER_USER as well"
-        echo ""
-        exit -1
-      fi
-
-      if [ ! $MARIADB_DATABASE ]; then
-        echo "In order to setup a replication slave you need to provide the MARIADB_DATABASE as well"
-        echo ""
-        exit -1
-      fi
-
-      if [ ! $MARIADB_REPLICATION_USER ]; then
-        echo "In order to setup a replication slave you need to provide the MARIADB_REPLICATION_USER as well"
-        echo ""
-        exit -1
-      fi
 
       echo "==> Setting the master configuration..."
       echo "CHANGE MASTER TO MASTER_HOST='$MARIADB_MASTER_HOST', MASTER_USER='$MARIADB_REPLICATION_USER', MASTER_PASSWORD='$MARIADB_REPLICATION_PASSWORD';" >> /tmp/init_mysql.sql
