@@ -2,32 +2,12 @@
 set -e
 source $BITNAMI_PREFIX/bitnami-utils.sh
 
-print_welcome_page
-
 mkdir -p $BITNAMI_APP_DIR/tmp
 chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/tmp || true
 
-if [ ! -d $BITNAMI_APP_VOL_PREFIX/data/mysql ]; then
-
+if [ -f /tmp/init_mysql.sql ]; then
   PROGRAM_OPTIONS="$PROGRAM_OPTIONS --init-file=/tmp/init_mysql.sql"
-
-  initialize_database
-
-  create_custom_database
-
-  create_mysql_user
-
-  configure_replication
-
-  print_app_credentials $BITNAMI_APP_NAME $MARIADB_USER `print_mysql_password` `print_mysql_database`
-else
-  print_container_already_initialized $BITNAMI_APP_NAME
 fi
-
-chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER \
-  $BITNAMI_APP_VOL_PREFIX/conf/ \
-  $BITNAMI_APP_VOL_PREFIX/logs/ \
-  $BITNAMI_APP_VOL_PREFIX/data/ || true
 
 wait_and_tail_logs &
 exec mysqld.bin $PROGRAM_OPTIONS $EXTRA_OPTIONS
