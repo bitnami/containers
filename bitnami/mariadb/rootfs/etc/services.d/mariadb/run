@@ -9,4 +9,5 @@ if [ -f /tmp/init_mysql.sql ]; then
   PROGRAM_OPTIONS="$PROGRAM_OPTIONS --init-file=/tmp/init_mysql.sql"
 fi
 
+date '+%d%H%M%S' > $BITNAMI_APP_DIR/tmp/start
 exec mysqld.bin $PROGRAM_OPTIONS $EXTRA_OPTIONS
