@@ -97,7 +97,8 @@ ruby:
 # Accessing a Ruby app running a web server
 
 This image exposes port `3000` in the container, so you should ensure that your web server is
-binding to port `3000`, as well as accepting remote connections.
+binding to port `3000`, as well as listening on `0.0.0.0` to accept remote connections from your
+host.
 
 Below is an example of a [Sinatra](http://www.sinatrarb.com/) app listening to remote connections on
 port `3000`:
