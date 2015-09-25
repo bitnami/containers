@@ -9,5 +9,4 @@ if [ -f /tmp/init_mysql.sql ]; then
   PROGRAM_OPTIONS="$PROGRAM_OPTIONS --init-file=/tmp/init_mysql.sql"
 fi
 
-wait_and_tail_logs &
 exec mysqld.bin $PROGRAM_OPTIONS $EXTRA_OPTIONS

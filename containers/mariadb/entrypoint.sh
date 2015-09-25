@@ -10,6 +10,7 @@ fi
 
 if [ -n "${1}" ]; then
   touch /etc/services.d/$BITNAMI_APP_NAME/down
+  touch /etc/services.d/$BITNAMI_APP_NAME-logs/down
 fi
 
 exec /init "$@"
