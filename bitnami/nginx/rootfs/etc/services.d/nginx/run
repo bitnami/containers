@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+set -e
+source $BITNAMI_PREFIX/bitnami-utils.sh
+
+exec nginx -g "daemon off;"
