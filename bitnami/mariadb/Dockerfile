@@ -12,8 +12,6 @@ ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
 RUN $BITNAMI_PREFIX/install.sh\
     --base_password bitnami --mysql_password bitnami --mysql_allow_all_remote_connections 1 --disable-components common --mysql_init_data_dir 0
 
-COPY bitnami-utils-custom.sh /bitnami-utils-custom.sh
-COPY entrypoint.sh /entrypoint.sh
 COPY rootfs/ /
 
 EXPOSE 3306
