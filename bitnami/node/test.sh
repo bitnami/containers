@@ -53,7 +53,7 @@ teardown() {
 
 @test "can install npm modules with system requirements" {
   run docker exec $CONTAINER_NAME\
-  npm install imagemagick-native bower
+  npm install pg-native bower
   [ "$status" = 0 ]
 }
 
