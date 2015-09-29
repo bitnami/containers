@@ -30,15 +30,6 @@ cd bitnami-docker-wordpress
 docker build -t bitnami/wordpress .
 ```
 
-# Persisting your data
-
-This image supports stopping the containers with the command `docker stop` when running in daemon mode
-or using Ctrl-C keys when running in foreground. Just running with `docker start` will bring all the services up.
-
-# Linking
-
-As this is an all-in-one image it includes all the requeriments to run WordPress inside a container.
-
 # Configuration
 
 ## Application credentials
@@ -47,8 +38,18 @@ Running the container in foreground will show some information about to access y
 container with the flag `-d` you can retrieve it by running `docker logs wordpress`.
 
 In case you want to change the default user and password you would need to build the image by your own following [this steps](#get-this-image)
-and modifying the line `BITNAMI_APPLICATION_PASSWORD=bitnami` in the the Dockerfile before starting the build.
+and modifying the line `BITNAMI_APPLICATION_PASSWORD=bitnami` in the Dockerfile before starting the build.
 
+## Application files
+
+If you want to make the application files accessible for modifying them you could use a volume to share these files with the host. This can be done by adding some extra options to the `docker run` command:
+
+```
+docker run --name=wordpress -v ~/wordpress-files:/opt/bitnami/apps -e USER_UID=`id -u` -p 80:80 -p 443:443 bitnami/wordpress
+```
+This will create a folder `wordpress-files` in your home directory exposing the folder /opt/bitnami/apps in the container. This folder should be empty or non existent when creating the container.
+
+NOTE: Currently is only possible to expose `/opt/bitnami/apps`. Also setting the variable USER_UID will make the files modifiable by your current user.
 
 # Logging
 
