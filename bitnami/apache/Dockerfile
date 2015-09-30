@@ -14,7 +14,4 @@ COPY rootfs/ /
 
 EXPOSE 80 443
 VOLUME ["$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs", "/app"]
-
-ENTRYPOINT ["/entrypoint.sh"]
-
-CMD ["httpd"]
+ENTRYPOINT ["/init"]
