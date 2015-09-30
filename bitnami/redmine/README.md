@@ -1,5 +1,5 @@
 # Bitnami Docker Image for Redmine
-Docker image for [Bitnami Redmine Stack](https://bitnami.com/stack/redmine)
+This is an all-in-one container for [Bitnami Redmine Stack](https://bitnami.com/stack/redmine). It includes all the required dependencies to run Redmine in a container in less than 1 minute. 
 
 # TLDR
 ```
@@ -40,7 +40,7 @@ container with the flag `-d` you can retrieve it by running `docker logs redmine
 In case you want to change the default user and password you would need to build the image by your own following [this steps](#get-this-image)
 and modifying the line `BITNAMI_APPLICATION_PASSWORD=bitnami` in the Dockerfile before starting the build.
 
-## Application files
+## Application files (optional)
 
 If you want to make the application files accessible for modifying them you could use a volume to share these files with the host. This can be done by adding some extra options to the `docker run` command:
 
