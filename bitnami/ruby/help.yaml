@@ -3,4 +3,4 @@ volumes:
 ports:
   3000: "Port exposed by container. Please configure your $BITNAMI_APP_NAME app to use this port."
 misc:
-  Note: "Configure your web server to bind to 0.0.0.0 to access from your host"
+  Accessing: "Configure your web server to bind to 0.0.0.0 to access from your host."
