@@ -280,6 +280,19 @@ using the `bats` command.
 bats test.sh
 ```
 
+# Changelog
+
+## 2.2.3-0-r02 (2015-09-30)
+
+- `/app` directory no longer exported as a volume. This caused problems when building on top of the
+  image, since changes in the volume were not persisted between RUN commands. To keep the previous
+  behavior (so that you can mount the volume in another container), create the container with the
+  `-v /app` option.
+
+## 2.2.3-0-r01 (2015-08-26)
+
+- Permissions fixed so `bitnami` user can install gems without needing `sudo`.
+
 # Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an
