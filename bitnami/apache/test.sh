@@ -36,29 +36,29 @@ add_vhost() {
 
 @test "We can connect to the port 80 and 443" {
   create_container
-  run docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i http://apache:80
+  run docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i --noproxy apache http://apache:80
   [[ "$output" =~  "200 OK" ]]
   [ $status = 0 ]
 
-  run docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i -k https://apache:443
+  run docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i --noproxy apache -k https://apache:443
   [[ "$output" =~  "200 OK" ]]
   [ $status = 0 ]
 }
 
 @test "Returns default page" {
   create_container
-  run docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i http://apache:80
+  run docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i --noproxy apache http://apache:80
   [[ "$output" =~  "It works!" ]]
   [ $status = 0 ]
 
-  run docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i -k https://apache:443
+  run docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i --noproxy apache -k https://apache:443
   [[ "$output" =~  "It works!" ]]
   [ $status = 0 ]
 }
 
 @test "Logs to stdout" {
   create_container
-  docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i http://apache:80
+  docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i --noproxy apache http://apache:80
   run docker logs $CONTAINER_NAME
   [[ "$output" =~  "GET / HTTP/1.1" ]]
   [ $status = 0 ]
@@ -77,7 +77,7 @@ add_vhost() {
   add_vhost
   docker restart $CONTAINER_NAME
   sleep $SLEEP_TIME
-  docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i http://apache:81 | {
+  docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i --noproxy apache http://apache:81 | {
     run grep "405 Method Not Allowed"
     [ $status = 0 ]
   }
