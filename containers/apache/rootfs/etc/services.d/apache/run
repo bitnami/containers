@@ -5,4 +5,4 @@ source $BITNAMI_PREFIX/bitnami-utils.sh
 # Remove zombie pidfile
 rm -f $BITNAMI_APP_DIR/logs/httpd.pid
 
-exec httpd -DFOREGROUND -f $BITNAMI_APP_DIR/conf/httpd.conf
+exec httpd -DFOREGROUND -f $BITNAMI_APP_DIR/conf/httpd.conf ${EXTRA_OPTIONS:+"$EXTRA_OPTIONS"}
