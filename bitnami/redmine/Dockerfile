@@ -8,7 +8,7 @@ ENV BITNAMI_APP_NAME=redmine \
     BITNAMI_APPLICATION_PASSWORD=bitnami \
     IS_BITNAMI_STACK=1
 
-#Download latest WordPress Stack from bitnami.com
+#Download latest Redmine Stack from bitnami.com
 RUN sh $BITNAMI_PREFIX/install.sh \
     --base_user $BITNAMI_APPLICATION_USER --base_password $BITNAMI_APPLICATION_PASSWORD --apache_mpm_mode event --enable_phpfpm 1 --logrotate_install 1 --monit_install 1 --disable-components subversion && \
     rm $BITNAMI_PREFIX/install.sh
