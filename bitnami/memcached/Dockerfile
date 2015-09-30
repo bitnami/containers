@@ -16,4 +16,3 @@ COPY rootfs/ /
 VOLUME ["$BITNAMI_APP_VOL_PREFIX/logs"]
 EXPOSE 11211
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["memcached", "-v"]
