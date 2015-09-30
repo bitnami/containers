@@ -7,12 +7,12 @@
       3000: Port exposed by container. Please configure your $BITNAMI_APP_NAME app to use this port.
   
     MISC:
-      Note: Configure your web server to bind to 0.0.0.0 to access from your host
+      Accessing: Configure your web server to bind to 0.0.0.0 to access from your host.
   
     COMMANDS:
-      print-help: This page
-      check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available
+      print-help: Print this page.
+      check-updates: Check if a new version of the $BITNAMI_APP_NAME image is available.
 
-  Visit $GITHUB_PAGE for more information
+  Visit $GITHUB_PAGE for more information.
 
 
