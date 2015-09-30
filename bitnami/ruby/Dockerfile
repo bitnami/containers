@@ -15,7 +15,6 @@ COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 3000
-VOLUME ["/app"]
 WORKDIR /app
 
 CMD ["irb"]
