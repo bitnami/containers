@@ -2,4 +2,6 @@
 set -e
 source $BITNAMI_PREFIX/bitnami-utils.sh
 
+mkdir -p $BITNAMI_APP_DIR/tmp
+date '+%d%H%M%S' > $BITNAMI_APP_DIR/tmp/start
 exec s6-setuidgid $BITNAMI_APP_USER php-fpm -F ${EXTRA_OPTIONS:+"$EXTRA_OPTIONS"}
