@@ -37,7 +37,7 @@ docker build -t bitnami/drupal .
 Running the container in foreground will show some information about to access your application. If you started the
 container with the flag `-d` you can retrieve it by running `docker logs drupal`.
 
-In case you want to change the default user and password you would need to build the image by your own following [this steps](#get-this-image)
+In case you want to change the default user and password for Drupal you would need to build the image by your own following [this steps](#get-this-image)
 and modifying the line `BITNAMI_APPLICATION_PASSWORD=bitnami` in the Dockerfile before starting the build.
 
 ## Application files (optional)
@@ -47,7 +47,7 @@ If you want to make the application files accessible for modifying them you coul
 ```
 docker run --name=drupal -v ~/drupal-files:/opt/bitnami/apps -e USER_UID=`id -u` -p 80:80 -p 443:443 bitnami/drupal
 ```
-This will create a folder `drupal-files` in your home directory exposing the folder /opt/bitnami/apps in the container. This folder should be empty or non existent when creating the container.
+This will create a folder `drupal-files` in your home directory exposing the folder `/opt/bitnami/apps` into the container. This folder should be empty or non existent when creating the container.
 
 NOTE: Currently is only possible to expose `/opt/bitnami/apps`. Also setting the variable USER_UID will make the files modifiable by your current user.
 
@@ -66,7 +66,7 @@ docker exec -it drupal /opt/bitnami/scripts/logs.sh mysql
 
 ## Backing up your container
 
-In order to backup your containers you could pack the /opt/bitnami directory and copy it to the host by running the following commands:
+In order to backup your containers you could pack the `/opt/bitnami` directory and copy it to the host by running the following commands:
 
 ```
 docker exec -it drupal /opt/bitnami/ctlscript.sh stop
@@ -76,6 +76,17 @@ docker cp drupal:/tmp/drupal-backup.tar.gz /path/to/destination/directory
 ```
 NOTE: this commands assume that your container is named `drupal`.
 
+## Restoring a backup
+
+In order to restore a previously created backup of your container, you woild need to copy the compressed file into the container and uncompress it by following commands:
+
+```
+docker cp /path/to/drupal-backup.tar.gz drupal:/tmp/drupal-backup.tar.gz
+docker exec -it drupal /opt/bitnami/ctlscript.sh stop
+docker exec -it drupal tar -xzvf /tmp/drupal-backup.tar.gz
+docker exec -it drupal /opt/bitnami/ctlscript.sh start
+```
+NOTE: this commands assume that your container is named `drupal`.
 
 ## Upgrade this image
 
