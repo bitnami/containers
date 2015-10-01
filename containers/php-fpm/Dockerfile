@@ -14,11 +14,11 @@ RUN sh $BITNAMI_PREFIX/install.sh\
 
 USER $BITNAMI_APP_USER
 
-COPY entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+COPY rootfs/ /
 
 EXPOSE 9000
 VOLUME ["/app", "$BITNAMI_APP_VOL_PREFIX/logs", "$BITNAMI_APP_VOL_PREFIX/conf"]
 WORKDIR /app
 
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["php-fpm", "-F"]
