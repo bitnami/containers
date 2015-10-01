@@ -8,4 +8,9 @@ elif [ "${1}" == "postgres" -o "${1}" == "$(which postgres)" ]; then
   set --
 fi
 
+if [ -n "${1}" ]; then
+  touch /etc/services.d/$BITNAMI_APP_NAME/down
+  touch /etc/services.d/$BITNAMI_APP_NAME-logs/down
+fi
+
 exec /init "$@"
