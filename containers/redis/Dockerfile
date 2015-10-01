@@ -17,4 +17,3 @@ COPY rootfs/ /
 EXPOSE 6379
 VOLUME ["$BITNAMI_APP_VOL_PREFIX/data", "$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs"]
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["redis-server"]
