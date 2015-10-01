@@ -54,7 +54,7 @@ teardown() {
   create_container
   docker exec $CONTAINER_NAME sh -c "echo '<?php echo \"Winter is coming\"; ?>' > index.php"
   create_nginx_container
-  run docker exec $NGINX_CONTAINER_NAME curl 127.0.0.1:81/index.php
+  run docker exec $NGINX_CONTAINER_NAME curl --noproxy 127.0.0.1 127.0.0.1:81/index.php
   [[ "$output" =~ "Winter is coming" ]]
 }
 
