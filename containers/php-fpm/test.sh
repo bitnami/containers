@@ -28,6 +28,7 @@ add_vhost() {
 create_nginx_container(){
   docker run -d --name $NGINX_CONTAINER_NAME\
    --link $CONTAINER_NAME:php $NGINX_IMAGE_NAME
+  sleep $SLEEP_TIME
   add_vhost
   docker restart $NGINX_CONTAINER_NAME
   sleep $SLEEP_TIME
