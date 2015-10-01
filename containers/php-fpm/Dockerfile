@@ -18,4 +18,4 @@ EXPOSE 9000
 VOLUME ["/app", "$BITNAMI_APP_VOL_PREFIX/logs", "$BITNAMI_APP_VOL_PREFIX/conf"]
 WORKDIR /app
 
-ENTRYPOINT ["/init"]
+ENTRYPOINT ["/entrypoint.sh"]
