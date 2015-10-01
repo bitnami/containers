@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+set -e
+source $BITNAMI_PREFIX/bitnami-utils.sh
+
+exec s6-setuidgid $BITNAMI_APP_USER php-fpm -F
