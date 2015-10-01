@@ -3,7 +3,7 @@ cd $BITNAMI_APP_DIR
 
 # set up default configs
 mkdir conf.defaults
-gosu $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/initdb -D $BITNAMI_APP_DIR/data \
+s6-setuidgid $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/initdb -D $BITNAMI_APP_DIR/data \
   -U $BITNAMI_APP_USER -E unicode -A trust >/dev/null
 mv $BITNAMI_APP_DIR/data/postgresql.conf conf.defaults/
 mv $BITNAMI_APP_DIR/data/pg_hba.conf conf.defaults/
