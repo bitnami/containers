@@ -12,13 +12,10 @@ ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
 RUN sh $BITNAMI_PREFIX/install.sh\
     --php_fpm_allow_all_remote_connections 1 --php_fpm_connection_mode port
 
-USER $BITNAMI_APP_USER
-
 COPY rootfs/ /
 
 EXPOSE 9000
 VOLUME ["/app", "$BITNAMI_APP_VOL_PREFIX/logs", "$BITNAMI_APP_VOL_PREFIX/conf"]
 WORKDIR /app
 
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["php-fpm", "-F"]
+ENTRYPOINT ["/init"]
