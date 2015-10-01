@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+set -e
+source $BITNAMI_PREFIX/bitnami-utils.sh
+export LD_LIBRARY_PATH=$BITNAMI_PREFIX/common/lib
+
+exec s6-setuidgid $BITNAMI_APP_USER postgres $PROGRAM_OPTIONS ${EXTRA_OPTIONS:+"$EXTRA_OPTIONS"}
