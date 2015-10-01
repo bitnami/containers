@@ -12,11 +12,9 @@ ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
 RUN sh $BITNAMI_PREFIX/install.sh\
     --postgres_password bitnami
 
-COPY bitnami-utils-custom.sh /bitnami-utils-custom.sh
+COPY rootfs/ /
+
 EXPOSE 5432
 VOLUME ["$BITNAMI_APP_VOL_PREFIX/data", "$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs"]
-
-COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-
 CMD ["postgres"]
