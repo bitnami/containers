@@ -90,7 +90,7 @@ NOTE: this commands assume that your container is named `drupal`.
 
 ## Upgrade this image
 
-This image is intended for development/testing purposes. For this reason, upgrading the individual components is not supported yet.
+This image is intended for development/testing purposes. For this reason, upgrading the individual components is not supported.
 
 # Testing
 
