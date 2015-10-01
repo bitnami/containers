@@ -1,0 +1,23 @@
+#!/usr/bin/with-contenv bash
+set -e
+source $BITNAMI_PREFIX/bitnami-utils.sh
+
+print_welcome_page
+
+if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
+  generate_conf_files $BITNAMI_APP_DIR/etc
+
+  if [ "$REDIS_PASSWORD" ]; then
+    echo "Setting password in /conf/redis.conf ..."
+    echo "# Disabled" > $BITNAMI_APP_DIR/scripts/ctl.sh
+    $BITNAMI_APP_DIR/bnconfig --userpassword $REDIS_PASSWORD
+
+    print_app_credentials $BITNAMI_APP_NAME **none** $REDIS_PASSWORD
+  fi
+else
+  print_container_already_initialized $BITNAMI_APP_NAME
+fi
+
+chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/data/ \
+  $BITNAMI_APP_VOL_PREFIX/logs/ \
+  $BITNAMI_APP_VOL_PREFIX/conf/ || true

@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+set -e
+source $BITNAMI_PREFIX/bitnami-utils.sh
+
+exec s6-setuidgid $BITNAMI_APP_USER redis-server $BITNAMI_APP_VOL_PREFIX/conf/redis.conf $PROGRAM_OPTIONS ${EXTRA_OPTIONS:+"$EXTRA_OPTIONS"}
