@@ -18,4 +18,3 @@ EXPOSE 8080
 VOLUME ["$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs", "/app"]
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["catalina.sh", "run"]
