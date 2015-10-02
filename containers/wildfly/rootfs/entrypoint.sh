@@ -12,4 +12,8 @@ elif [ "${1}" == "domain.sh" -o "${1}" == "$(which domain.sh)" ]; then
   set --
 fi
 
+if [ -n "${1}" ]; then
+  touch /etc/services.d/$BITNAMI_APP_NAME/down
+fi
+
 exec /init "$@"
