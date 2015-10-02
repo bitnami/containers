@@ -12,11 +12,10 @@ ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
 RUN sh $BITNAMI_PREFIX/install.sh\
     --tomcat_manager_username manager
 
-COPY bitnami-utils-custom.sh /bitnami-utils-custom.sh
+COPY rootfs/ /
+
 EXPOSE 8080
 VOLUME ["$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs", "/app"]
 
-COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-
 CMD ["catalina.sh", "run"]
