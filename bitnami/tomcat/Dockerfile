@@ -4,6 +4,7 @@ MAINTAINER Bitnami <containers@bitnami.com>
 ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/apache-tomcat \
     BITNAMI_APP_NAME=tomcat \
     BITNAMI_APP_USER=tomcat \
+    BITNAMI_APP_DAEMON=catalina.sh \
     BITNAMI_APP_VERSION=7.0.63-0
 
 ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
