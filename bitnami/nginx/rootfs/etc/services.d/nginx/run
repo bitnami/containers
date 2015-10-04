@@ -4,4 +4,4 @@ source $BITNAMI_PREFIX/bitnami-utils.sh
 
 mkdir -p $BITNAMI_APP_DIR/tmp
 date '+%d%H%M%S' > $BITNAMI_APP_DIR/tmp/start
-exec nginx -g "daemon off;" ${EXTRA_OPTIONS:+"$EXTRA_OPTIONS"}
+exec $BITNAMI_APP_DAEMON -g "daemon off;" ${EXTRA_OPTIONS:+"$EXTRA_OPTIONS"}
