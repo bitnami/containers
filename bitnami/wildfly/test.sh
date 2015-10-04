@@ -56,6 +56,10 @@ curl_client() {
   docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L "$@"
 }
 
+jboss_client() {
+  docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME jboss-cli.sh --controller=wildfly:9990  "$@"
+}
+
 @test "Ports 8080 and 9990 exposed and accepting external connections (standalone server)" {
   create_container -d
   run curl_client -i http://wildfly:8080
@@ -112,30 +116,26 @@ curl_client() {
 
 @test "jboss-cli.sh can connect to Wildfly server (standalone server)" {
   create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME \
-    jboss-cli.sh --controller=wildfly:9990 --user=$WILDFLY_USER --password=$WILDFLY_PASSWORD --connect --command=version
+  run jboss_client --connect --user=$WILDFLY_USER --password=$WILDFLY_PASSWORD --command=version
   [ $status = 0 ]
 }
 
 @test "jboss-cli.sh can connect to Wildfly server (managed domain)" {
   create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME \
-    jboss-cli.sh --controller=wildfly:9990 --user=$WILDFLY_USER --password=$WILDFLY_PASSWORD --connect --command=version
+  run jboss_client --connect --user=$WILDFLY_USER --password=$WILDFLY_PASSWORD --command=version
   [ $status = 0 ]
 }
 
 @test "jboss-cli.sh can't access Wildfly server without password (standalone server)" {
   create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME \
-    jboss-cli.sh --controller=wildfly:9990 --user=$WILDFLY_USER --connect --command=version
+  run jboss_client --connect --user=$WILDFLY_USER --command=version
   [[ "$output" =~ "Unable to authenticate against controller" ]]
   [ $status = 1 ]
 }
 
 @test "jboss-cli.sh can't access Wildfly server without password (managed domain)" {
   create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME \
-    jboss-cli.sh --controller=wildfly:9990 --user=$WILDFLY_USER --connect --command=version
+  run jboss_client --connect --user=$WILDFLY_USER --command=version
   [[ "$output" =~ "Unable to authenticate against controller" ]]
   [ $status = 1 ]
 }
