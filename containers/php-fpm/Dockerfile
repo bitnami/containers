@@ -3,6 +3,7 @@ MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=php-fpm \
     BITNAMI_APP_USER=bitnami \
+    BITNAMI_APP_DAEMON=php-fpm \
     BITNAMI_APP_VERSION=5.5.29-0 \
     BITNAMI_APP_DIR=$BITNAMI_PREFIX/php
 
@@ -12,13 +13,10 @@ ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
 RUN sh $BITNAMI_PREFIX/install.sh\
     --php_fpm_allow_all_remote_connections 1 --php_fpm_connection_mode port
 
-USER $BITNAMI_APP_USER
-
-COPY entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+COPY rootfs/ /
 
 EXPOSE 9000
 VOLUME ["/app", "$BITNAMI_APP_VOL_PREFIX/logs", "$BITNAMI_APP_VOL_PREFIX/conf"]
 WORKDIR /app
 
-CMD ["php-fpm", "-F"]
+ENTRYPOINT ["/entrypoint.sh"]
