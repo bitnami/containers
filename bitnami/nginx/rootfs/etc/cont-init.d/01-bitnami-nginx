@@ -1,8 +1,6 @@
-#!/bin/bash
+#!/usr/bin/with-contenv bash
 set -e
 source $BITNAMI_PREFIX/bitnami-utils.sh
-
-print_welcome_page
 
 generate_conf_files
 
@@ -11,5 +9,3 @@ if [ ! "$(ls -A /app)" ]; then
 fi
 
 chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/logs/ $BITNAMI_APP_VOL_PREFIX/conf/ /app/ || true
-
-exec "$@"
