@@ -4,8 +4,8 @@ MAINTAINER Bitnami <containers@bitnami.com>
 ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/wildfly \
     BITNAMI_APP_NAME=wildfly \
     BITNAMI_APP_USER=wildfly \
-    BITNAMI_APP_VERSION=9.0.1-0 \
-    BITNAMI_APP_DAEMON=standalone.sh
+    BITNAMI_APP_DAEMON=standalone.sh|domain.sh \
+    BITNAMI_APP_VERSION=9.0.1-0
 
 ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
     JAVA_HOME=$BITNAMI_PREFIX/java \
