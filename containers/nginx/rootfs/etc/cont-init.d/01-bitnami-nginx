@@ -2,8 +2,6 @@
 set -e
 source $BITNAMI_PREFIX/bitnami-utils.sh
 
-print_welcome_page
-
 generate_conf_files
 
 if [ ! "$(ls -A /app)" ]; then
