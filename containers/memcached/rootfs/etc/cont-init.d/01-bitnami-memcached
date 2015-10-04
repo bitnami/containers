@@ -2,8 +2,6 @@
 set -e
 source $BITNAMI_PREFIX/bitnami-utils.sh
 
-print_welcome_page
-
 if [ "$MEMCACHED_PASSWORD" ]; then
   echo "Setting password..."
   $BITNAMI_APP_DIR/bnconfig --userpassword $MEMCACHED_PASSWORD
