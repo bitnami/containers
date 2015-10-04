@@ -2,7 +2,7 @@
 
 CONTAINER_NAME=bitnami-wildfly-test
 IMAGE_NAME=${IMAGE_NAME:-bitnami/wildfly}
-SLEEP_TIME=10
+SLEEP_TIME=5
 WILDFLY_USER=manager
 WILDFLY_DEFAULT_PASSWORD=wildfly
 WILDFLY_PASSWORD=test_password
@@ -39,7 +39,7 @@ create_container() {
 
 create_container_domain() {
   docker run --name $CONTAINER_NAME "$@" $IMAGE_NAME domain.sh
-  sleep $SLEEP_TIME
+  sleep $(expr $SLEEP_TIME + 5)
 }
 
 create_full_container_mounted() {
@@ -62,6 +62,8 @@ create_full_container_mounted() {
 
 @test "Ports 8080 and 9990 exposed and accepting external connections (managed domain)" {
   create_container_domain -d
+
+  sleep $SLEEP_TIME
   run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i http://wildfly:8080
   [[ "$output" =~ '200 OK' ]]
   run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i http://wildfly:9990
