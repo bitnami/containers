@@ -2,7 +2,7 @@
 
 CONTAINER_NAME=bitnami-wildfly-test
 IMAGE_NAME=${IMAGE_NAME:-bitnami/wildfly}
-SLEEP_TIME=10
+SLEEP_TIME=5
 WILDFLY_USER=manager
 WILDFLY_DEFAULT_PASSWORD=wildfly
 WILDFLY_PASSWORD=test_password
@@ -39,7 +39,7 @@ create_container() {
 
 create_container_domain() {
   docker run --name $CONTAINER_NAME "$@" $IMAGE_NAME domain.sh
-  sleep $SLEEP_TIME
+  sleep $(expr $SLEEP_TIME + 5)
 }
 
 create_full_container_mounted() {
@@ -54,53 +54,55 @@ create_full_container_mounted() {
 
 @test "Ports 8080 and 9990 exposed and accepting external connections (standalone server)" {
   create_container -d
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i http://wildfly:8080
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i http://wildfly:8080
   [[ "$output" =~ '200 OK' ]]
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i http://wildfly:9990
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i http://wildfly:9990
   [[ "$output" =~ '200 OK' ]]
 }
 
 @test "Ports 8080 and 9990 exposed and accepting external connections (managed domain)" {
   create_container_domain -d
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i http://wildfly:8080
+
+  sleep $SLEEP_TIME
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i http://wildfly:8080
   [[ "$output" =~ '200 OK' ]]
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i http://wildfly:9990
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i http://wildfly:9990
   [[ "$output" =~ '200 OK' ]]
 }
 
 @test "Manager has access to management area (standalone server)" {
   create_container -d
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_DEFAULT_PASSWORD@wildfly:9990/management
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i --digest http://$WILDFLY_USER:$WILDFLY_DEFAULT_PASSWORD@wildfly:9990/management
   [[ "$output" =~ '200 OK' ]]
 }
 
 @test "Manager has access to management area (managed domain)" {
   create_container_domain -d
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_DEFAULT_PASSWORD@wildfly:9990/management
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i --digest http://$WILDFLY_USER:$WILDFLY_DEFAULT_PASSWORD@wildfly:9990/management
   [[ "$output" =~ '200 OK' ]]
 }
 
 @test "User manager created with custom password (standalone server)" {
   create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
   [[ "$output" =~ '200 OK' ]]
 }
 
 @test "User manager created with custom password (managed domain)" {
   create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
   [[ "$output" =~ '200 OK' ]]
 }
 
 @test "Can't access management area without password (standalone server)" {
   create_container -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER@wildfly:9990/management
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i --digest http://$WILDFLY_USER@wildfly:9990/management
   [[ "$output" =~ '401 Unauthorized' ]]
 }
 
 @test "Can't access management area without password (managed domain)" {
   create_container_domain -d -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER@wildfly:9990/management
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i --digest http://$WILDFLY_USER@wildfly:9990/management
   [[ "$output" =~ '401 Unauthorized' ]]
 }
 
@@ -144,7 +146,7 @@ create_full_container_mounted() {
   run docker logs $CONTAINER_NAME
   [[ "$output" =~ "The credentials were set on first boot." ]]
 
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
   [[ "$output" =~ '200 OK' ]]
 }
 
@@ -158,7 +160,7 @@ create_full_container_mounted() {
   run docker logs $CONTAINER_NAME
   [[ "$output" =~ "The credentials were set on first boot." ]]
 
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
   [[ "$output" =~ '200 OK' ]]
 }
 
@@ -184,7 +186,7 @@ create_full_container_mounted() {
   docker rm -fv $CONTAINER_NAME
   create_container -d -v $HOST_VOL_PREFIX/app:/app -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf
 
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@wildfly:9990/management
   [[ "$output" =~ '200 OK' ]]
   cleanup_volumes_content
 }
@@ -200,7 +202,7 @@ create_full_container_mounted() {
   [ $status = 0 ]
   sleep $SLEEP_TIME
 
-  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly -L -i http://wildfly:8080/node-info/
+  run docker run --link $CONTAINER_NAME:wildfly --rm $IMAGE_NAME curl --noproxy wildfly --retry 5 -L -i http://wildfly:8080/node-info/
   [[ "$output" =~ '200 OK' ]]
 
   cleanup_volumes_content
