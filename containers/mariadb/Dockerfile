@@ -4,6 +4,7 @@ MAINTAINER Bitnami <containers@bitnami.com>
 ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/mysql \
     BITNAMI_APP_NAME=mariadb \
     BITNAMI_APP_USER=mysql \
+    BITNAMI_APP_DAEMON=mysqld.bin \
     BITNAMI_APP_VERSION=5.5.45-0-r01
 
 ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
@@ -17,4 +18,3 @@ COPY rootfs/ /
 EXPOSE 3306
 VOLUME ["$BITNAMI_APP_VOL_PREFIX/data", "$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs"]
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["mysqld.bin"]

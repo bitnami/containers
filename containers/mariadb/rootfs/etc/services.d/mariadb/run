@@ -10,4 +10,4 @@ if [ -f /tmp/init_mysql.sql ]; then
 fi
 
 date '+%d%H%M%S' > $BITNAMI_APP_DIR/tmp/start
-exec mysqld.bin $PROGRAM_OPTIONS ${EXTRA_OPTIONS:+"$EXTRA_OPTIONS"}
+exec $BITNAMI_APP_DAEMON $PROGRAM_OPTIONS ${EXTRA_OPTIONS:+"$EXTRA_OPTIONS"}
