@@ -1,14 +1,6 @@
-#!/bin/bash
+#!/usr/bin/with-contenv bash
 set -e
 source $BITNAMI_PREFIX/bitnami-utils.sh
-
-print_welcome_page
-
-# if command starts with an option, prepend 'catalina.sh run'
-if [ "${1:0:1}" = '-' ]; then
-  EXTRA_OPTIONS="$@"
-  set -- catalina.sh run
-fi
 
 if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
   generate_conf_files
@@ -23,15 +15,6 @@ else
   print_container_already_initialized $BITNAMI_APP_NAME
 fi
 
+initialize_tomcat_webapps_directory
+
 chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/conf/ $BITNAMI_APP_VOL_PREFIX/logs/ /app/ || true
-
-if [ "$1" = 'catalina.sh' ]; then
-  set -- $@ $EXTRA_OPTIONS
-
-  initialize_tomcat_webapps_directory
-
-  exec gosu $BITNAMI_APP_USER "$@"
-else
-  exec "$@"
-fi
-
