@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bash
+set -e
+source $BITNAMI_PREFIX/bitnami-utils.sh
+
+mkdir -p $BITNAMI_APP_DIR/tmp
+date '+%d%H%M%S' > $BITNAMI_APP_DIR/tmp/start
+exec $BITNAMI_APP_DAEMON -g "daemon off;" ${EXTRA_OPTIONS:+"$EXTRA_OPTIONS"}
