@@ -74,7 +74,6 @@ add_vhost() {
     run grep "\"Volumes\":" -A 3
     [[ "$output" =~ "$VOL_PREFIX/logs" ]]
     [[ "$output" =~ "$VOL_PREFIX/conf" ]]
-    [[ "$output" =~ "/app" ]]
   }
 }
 
