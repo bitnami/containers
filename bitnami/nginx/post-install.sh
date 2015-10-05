@@ -5,6 +5,9 @@ cd $BITNAMI_APP_DIR
 mv conf conf.defaults
 mv html html.defaults
 
+# Create an empty html directory
+mkdir -p html
+
 # Setup mount point symlinks
 ln -s $BITNAMI_APP_DIR/conf $BITNAMI_APP_VOL_PREFIX/conf
 ln -s $BITNAMI_APP_DIR/logs $BITNAMI_APP_VOL_PREFIX/logs
