@@ -6,6 +6,9 @@ cd $BITNAMI_APP_DIR
 mv conf conf.defaults
 mv htdocs htdocs.defaults
 
+# Create an empty htdocs directory
+mkdir $BITNAMI_APP_DIR/htdocs
+
 # Setup mount point symlinks
 ln -s $BITNAMI_APP_DIR/conf $BITNAMI_APP_VOL_PREFIX/conf
 ln -s $BITNAMI_APP_DIR/logs $BITNAMI_APP_VOL_PREFIX/logs

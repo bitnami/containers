@@ -69,7 +69,6 @@ add_vhost() {
   run docker inspect $CONTAINER_NAME
   [[ "$output" =~ "$VOL_PREFIX/logs" ]]
   [[ "$output" =~ "$VOL_PREFIX/conf" ]]
-  [[ "$output" =~ "/app" ]]
 }
 
 @test "Vhosts directory is imported" {
