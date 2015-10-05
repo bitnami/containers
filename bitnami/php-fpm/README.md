@@ -383,6 +383,12 @@ using the `bats` command.
 bats test.sh
 ```
 
+# Changelog
+
+## development (2015-10-05)
+
+- `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
+
 # Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an
