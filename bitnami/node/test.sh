@@ -68,6 +68,6 @@ teardown() {
   add_app
   docker exec -d $CONTAINER_NAME sh -c 'npm install express && node server.js'
   sleep 20
-  run docker run --rm --link $CONTAINER_NAME:node bitnami/node curl http://node:3000/
+  run docker run --rm --link $CONTAINER_NAME:node bitnami/node curl --noproxy node http://node:3000/
   [[ "$output" =~ "The night is dark and full of terrors" ]]
 }
