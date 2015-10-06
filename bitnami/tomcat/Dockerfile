@@ -16,6 +16,6 @@ RUN sh $BITNAMI_PREFIX/install.sh\
 COPY rootfs/ /
 
 EXPOSE 8080
-VOLUME ["$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs", "/app"]
+VOLUME ["$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs"]
 
 ENTRYPOINT ["/entrypoint.sh"]
