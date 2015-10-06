@@ -15,7 +15,6 @@ COPY rootfs/ /
 USER $BITNAMI_APP_USER
 
 EXPOSE 3000
-VOLUME ["/app"]
 WORKDIR /app
 
 ENTRYPOINT ["/entrypoint.sh"]

@@ -57,13 +57,6 @@ teardown() {
   [ "$status" = 0 ]
 }
 
-@test "all the volumes exposed" {
-  docker inspect $CONTAINER_NAME | {
-    run grep "\"Volumes\":" -A 1
-    [[ "$output" =~ "/app" ]]
-  }
-}
-
 @test "port 3000 exposed" {
   add_app
   docker exec -d $CONTAINER_NAME sh -c 'npm install express && node server.js'
