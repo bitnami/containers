@@ -385,7 +385,7 @@ bats test.sh
 
 # Changelog
 
-## development (2015-10-05)
+## 5.5.30-0 (2015-10-06)
 
 - `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
 
