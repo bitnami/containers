@@ -10,13 +10,12 @@ ENV PATH=$BITNAMI_PREFIX/python/bin:$BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/
 
 RUN sh $BITNAMI_PREFIX/install.sh
 
+COPY rootfs/ /
+
 USER $BITNAMI_APP_USER
 
-COPY entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
-
 EXPOSE 3000
-VOLUME ["/app"]
 WORKDIR /app
 
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["node"]
