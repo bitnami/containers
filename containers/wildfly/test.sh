@@ -171,7 +171,6 @@ jboss_client() {
 @test "All the volumes exposed" {
   create_container -d
   run docker inspect $CONTAINER_NAME
-  [[ "$output" =~ "/app" ]]
   [[ "$output" =~ "$VOL_PREFIX/conf" ]]
   [[ "$output" =~ "$VOL_PREFIX/logs" ]]
 }
