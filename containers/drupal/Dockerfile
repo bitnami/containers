@@ -9,7 +9,7 @@ ENV BITNAMI_APP_NAME=drupal \
     IS_BITNAMI_STACK=1
 
 #Download latest Drupal Stack from bitnami.com
-RUN sh $BITNAMI_PREFIX/install.sh \
+RUN $BITNAMI_PREFIX/install.sh \
     --base_user $BITNAMI_APPLICATION_USER --base_password $BITNAMI_APPLICATION_PASSWORD --apache_mpm_mode event --enable_phpfpm 1 --logrotate_install 1 --monit_install 1 && \
     rm $BITNAMI_PREFIX/install.sh
 
