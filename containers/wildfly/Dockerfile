@@ -12,8 +12,7 @@ ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
     JRE_HOME=$BITNAMI_PREFIX/java \
     PATH=$BITNAMI_APP_DIR/bin:$PATH
 
-RUN sh $BITNAMI_PREFIX/install.sh\
-    --jboss_manager_username manager --jboss_manager_password wildfly
+RUN $BITNAMI_PREFIX/install.sh --jboss_manager_username manager --jboss_manager_password wildfly
 
 COPY rootfs/ /
 
