@@ -10,8 +10,7 @@ ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/apache-tomcat \
 ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
     PATH=$BITNAMI_APP_DIR/bin:$PATH
 
-RUN sh $BITNAMI_PREFIX/install.sh\
-    --tomcat_manager_username manager
+RUN $BITNAMI_PREFIX/install.sh --tomcat_manager_username manager
 
 COPY rootfs/ /
 
