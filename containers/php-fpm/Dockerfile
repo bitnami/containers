@@ -10,7 +10,7 @@ ENV BITNAMI_APP_NAME=php-fpm \
 ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
     PATH=$BITNAMI_APP_DIR/sbin:$BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/bin:$PATH
 
-RUN sh $BITNAMI_PREFIX/install.sh\
+RUN $BITNAMI_PREFIX/install.sh\
     --php_fpm_allow_all_remote_connections 1 --php_fpm_connection_mode port
 
 COPY rootfs/ /
