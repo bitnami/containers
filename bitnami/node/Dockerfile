@@ -8,7 +8,7 @@ ENV BITNAMI_APP_NAME=node \
 
 ENV PATH=$BITNAMI_PREFIX/python/bin:$BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/bin:$PATH
 
-RUN sh $BITNAMI_PREFIX/install.sh
+RUN $BITNAMI_PREFIX/install.sh
 
 COPY rootfs/ /
 
