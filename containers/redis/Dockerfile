@@ -11,7 +11,7 @@ ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/$BITNAMI_APP_NAME \
 
 ENV PATH=$BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/bin:$PATH
 
-RUN sh $BITNAMI_PREFIX/install.sh --disable-components common --redis_enable_authentication 0
+RUN $BITNAMI_PREFIX/install.sh --disable-components common --redis_enable_authentication 0
 
 COPY rootfs/ /
 
