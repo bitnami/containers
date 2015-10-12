@@ -57,6 +57,12 @@ teardown() {
   [ "$status" = 0 ]
 }
 
+@test "can install global npm modules" {
+  run docker exec $CONTAINER_NAME\
+  npm install -g node-static
+  [ "$status" = 0 ]
+}
+
 @test "port 3000 exposed" {
   add_app
   docker exec -d $CONTAINER_NAME sh -c 'npm install express && node server.js'
