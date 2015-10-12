@@ -291,6 +291,10 @@ bats test.sh
 
 # Changelog
 
+## 4.1.2-0 (2015-10-12)
+
+- Permissions fixed so `bitnami` user can install global npm modules without needing `sudo`.
+
 ## 4.1.1-0-r01 (2015-10-07)
 
 - `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
