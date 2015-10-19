@@ -15,5 +15,4 @@ RUN $BITNAMI_PREFIX/install.sh \
 
 EXPOSE 80 443 22
 
-ENTRYPOINT ["/usr/bin/ghostbuster"]
 CMD ["/bin/bash", "/start.sh"]
