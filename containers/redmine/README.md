@@ -5,6 +5,7 @@ This is an all-in-one container for [Bitnami Redmine Stack](https://bitnami.com/
 ```
 docker run --name=redmine -p 80:80 -p 443:443 bitnami/redmine
 ```
+The application is configured with default credentials `user` / `bitnami`.
 
 # Get this image
 
