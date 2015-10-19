@@ -5,6 +5,7 @@ This is an all-in-one container for [Bitnami Drupal Stack](https://bitnami.com/s
 ```
 docker run --name=drupal -p 80:80 -p 443:443 bitnami/drupal
 ```
+The application is configured with default credentials `user` / `bitnami`.
 
 # Get this image
 
