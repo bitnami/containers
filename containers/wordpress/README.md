@@ -5,6 +5,7 @@ This is an all-in-one container for [Bitnami WordPress Stack](https://bitnami.co
 ```
 docker run --name=wordpress -p 80:80 -p 443:443 bitnami/wordpress
 ```
+The application is configured with default credentials `user` / `bitnami`.
 
 # Get this image
 
