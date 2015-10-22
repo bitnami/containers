@@ -1,3 +1,5 @@
+[![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-redmine)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-redmine/)
+
 # Bitnami Docker Image for Redmine
 This is an all-in-one container for [Bitnami Redmine Stack](https://bitnami.com/stack/redmine). It includes all the required dependencies to run Redmine in a container in less than 1 minute. 
 
@@ -70,9 +72,9 @@ docker exec -it redmine /opt/bitnami/scripts/logs.sh mysql
 In order to backup your containers you could pack the `/opt/bitnami` directory and copy it to the host by running the following commands:
 
 ```
-docker exec -it redmine /opt/bitnami/ctlscript.sh stop
+docker exec -it redmine /services.sh stop
 docker exec -it redmine tar -pczvf /tmp/redmine-backup.tar.gz /opt/bitnami
-docker exec -it redmine /opt/bitnami/ctlscript.sh start
+docker exec -it redmine /services.sh start
 docker cp redmine:/tmp/redmine-backup.tar.gz /path/to/destination/directory
 ```
 NOTE: this commands assume that your container is named `redmine`.
@@ -83,9 +85,9 @@ In order to restore a previously created backup of your container, you woild nee
 
 ```
 docker cp /path/to/redmine-backup.tar.gz redmine:/tmp/redmine-backup.tar.gz
-docker exec -it redmine /opt/bitnami/ctlscript.sh stop
+docker exec -it redmine /services.sh stop
 docker exec -it redmine tar -xzvf /tmp/redmine-backup.tar.gz
-docker exec -it redmine /opt/bitnami/ctlscript.sh start
+docker exec -it redmine /services.sh start
 ```
 NOTE: this commands assume that your container is named `redmine`.
 
