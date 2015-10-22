@@ -1,3 +1,5 @@
+[![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-drupal)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-drupal/)
+
 # Bitnami Docker Image for Drupal
 This is an all-in-one container for [Bitnami Drupal Stack](https://bitnami.com/stack/drupal). It includes all the required dependencies to run Drupal in a container in less than 1 minute. 
 
@@ -70,9 +72,9 @@ docker exec -it drupal /opt/bitnami/scripts/logs.sh mysql
 In order to backup your containers you could pack the `/opt/bitnami` directory and copy it to the host by running the following commands:
 
 ```
-docker exec -it drupal /opt/bitnami/ctlscript.sh stop
+docker exec -it drupal /services.sh stop
 docker exec -it drupal tar -pczvf /tmp/drupal-backup.tar.gz /opt/bitnami
-docker exec -it drupal /opt/bitnami/ctlscript.sh start
+docker exec -it drupal /services.sh start
 docker cp drupal:/tmp/drupal-backup.tar.gz /path/to/destination/directory
 ```
 NOTE: this commands assume that your container is named `drupal`.
@@ -83,9 +85,9 @@ In order to restore a previously created backup of your container, you woild nee
 
 ```
 docker cp /path/to/drupal-backup.tar.gz drupal:/tmp/drupal-backup.tar.gz
-docker exec -it drupal /opt/bitnami/ctlscript.sh stop
+docker exec -it drupal /services.sh stop
 docker exec -it drupal tar -xzvf /tmp/drupal-backup.tar.gz
-docker exec -it drupal /opt/bitnami/ctlscript.sh start
+docker exec -it drupal /services.sh start
 ```
 NOTE: this commands assume that your container is named `drupal`.
 
