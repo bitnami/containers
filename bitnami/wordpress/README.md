@@ -1,3 +1,5 @@
+[![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-wordpress)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-wordpress/)
+
 # Bitnami Docker Image for WordPress
 This is an all-in-one container for [Bitnami WordPress Stack](https://bitnami.com/stack/wordpress). It includes all the required dependencies to run WordPress in a container in less than 1 minute. 
 
@@ -70,9 +72,9 @@ docker exec -it wordpress /opt/bitnami/scripts/logs.sh mysql
 In order to backup your containers you could pack the `/opt/bitnami` directory and copy it to the host by running the following commands:
 
 ```
-docker exec -it wordpress /opt/bitnami/ctlscript.sh stop
+docker exec -it wordpress /services.sh stop
 docker exec -it wordpress tar -pczvf /tmp/wordpress-backup.tar.gz /opt/bitnami
-docker exec -it wordpress /opt/bitnami/ctlscript.sh start
+docker exec -it wordpress /services.sh start
 docker cp wordpress:/tmp/wordpress-backup.tar.gz /path/to/destination/directory
 ```
 NOTE: this commands assume that your container is named `wordpress`.
@@ -83,9 +85,9 @@ In order to restore a previously created backup of your container, you woild nee
 
 ```
 docker cp /path/to/wordpress-backup.tar.gz wordpress:/tmp/wordpress-backup.tar.gz
-docker exec -it wordpress /opt/bitnami/ctlscript.sh stop
+docker exec -it wordpress /services.sh stop
 docker exec -it wordpress tar -xzvf /tmp/wordpress-backup.tar.gz
-docker exec -it wordpress /opt/bitnami/ctlscript.sh start
+docker exec -it wordpress /services.sh start
 ```
 NOTE: this commands assume that your container is named `wordpress`.
 
