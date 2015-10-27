@@ -2,7 +2,7 @@
 set -e
 source $BITNAMI_PREFIX/bitnami-utils.sh
 
-export LD_LIBRARY_PATH=$BITNAMI_PREFIX/common/lib
+export LD_LIBRARY_PATH=$BITNAMI_PREFIX/common/lib:/opt/bitnami/postgresql/lib
 
 if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
   generate_conf_files
@@ -10,6 +10,8 @@ fi
 
 if [ ! -f $BITNAMI_APP_VOL_PREFIX/data/PG_VERSION ]; then
   initialize_database
+
+  create_replication_user
 
   create_custom_database
 
