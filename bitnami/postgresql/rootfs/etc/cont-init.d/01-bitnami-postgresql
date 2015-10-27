@@ -21,7 +21,9 @@ if [ ! -f $BITNAMI_APP_VOL_PREFIX/data/PG_VERSION ]; then
 
   create_replication_user
 
-  print_app_credentials $BITNAMI_APP_NAME $POSTGRESQL_USER `print_postgresql_password` `print_postgresql_database`
+  if [ "$POSTGRESQL_REPLICATION_MODE" != "slave" ]; then
+    print_app_credentials $BITNAMI_APP_NAME $POSTGRESQL_USER `print_postgresql_password` `print_postgresql_database`
+  fi
 else
   print_container_already_initialized $BITNAMI_APP_NAME
 fi
