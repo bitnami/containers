@@ -1,50 +1,54 @@
 # PostgreSQL Utility functions
 PROGRAM_OPTIONS="-D $BITNAMI_APP_DIR/data --config_file=$BITNAMI_APP_DIR/conf/postgresql.conf --hba_file=$BITNAMI_APP_DIR/conf/pg_hba.conf --ident_file=$BITNAMI_APP_DIR/conf/pg_ident.conf"
 
+initialize_replication_parameters() {
+  if [ "$POSTGRESQL_REPLICATION_MODE" == "slave" ]; then
+    echo "==> Trying to fetch replication parameters from the master link..."
+    echo ""
+    POSTGRESQL_MASTER_HOST=${POSTGRESQL_MASTER_HOST:-$MASTER_PORT_5432_TCP_ADDR}
+    POSTGRESQL_MASTER_PORT=${POSTGRESQL_MASTER_PORT:-$MASTER_PORT_5432_TCP_PORT}
+    POSTGRESQL_MASTER_USER=${POSTGRESQL_MASTER_USER:-$MASTER_ENV_POSTGRESQL_USER}
+    POSTGRESQL_MASTER_PASSWORD=${POSTGRESQL_MASTER_PASSWORD:-$MASTER_ENV_POSTGRESQL_PASSWORD}
+    POSTGRESQL_REPLICATION_USER=${POSTGRESQL_REPLICATION_USER:-$MASTER_ENV_POSTGRESQL_REPLICATION_USER}
+    POSTGRESQL_REPLICATION_PASSWORD=${POSTGRESQL_REPLICATION_PASSWORD:-$MASTER_ENV_POSTGRESQL_REPLICATION_PASSWORD}
+
+    if [ ! $POSTGRESQL_MASTER_HOST ]; then
+      echo "In order to setup a replication slave you need to provide the POSTGRESQL_MASTER_HOST as well"
+      echo ""
+      exit -1
+    fi
+
+    if [ ! $POSTGRESQL_MASTER_PORT ]; then
+      echo "POSTGRESQL_MASTER_PORT not specified. Defaulting to 5432"
+      echo ""
+      POSTGRESQL_MASTER_PORT=${POSTGRESQL_MASTER_PORT:-5432}
+    fi
+
+    if [ ! $POSTGRESQL_MASTER_USER ]; then
+      echo "In order to setup a replication slave you need to provide the POSTGRESQL_MASTER_USER as well"
+      echo ""
+      exit -1
+    fi
+
+    if [ ! $POSTGRESQL_REPLICATION_USER ]; then
+      echo "In order to setup a replication slave you need to provide the POSTGRESQL_REPLICATION_USER as well"
+      echo ""
+      exit -1
+    fi
+
+    if [ ! $POSTGRESQL_REPLICATION_PASSWORD ]; then
+      echo "In order to setup a replication slave you need to provide the POSTGRESQL_REPLICATION_PASSWORD as well"
+      echo ""
+      exit -1
+    fi
+  fi
+}
+
 initialize_database() {
   chmod 0700 $BITNAMI_APP_DIR/data
-  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/data $BITNAMI_APP_DIR/conf
+  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/data
   case "$POSTGRESQL_REPLICATION_MODE" in
     slave)
-      echo "==> Trying to fetch replication parameters from the master link..."
-      echo ""
-      POSTGRESQL_MASTER_HOST=${POSTGRESQL_MASTER_HOST:-$MASTER_PORT_5432_TCP_ADDR}
-      POSTGRESQL_MASTER_PORT=${POSTGRESQL_MASTER_PORT:-$MASTER_PORT_5432_TCP_PORT}
-      POSTGRESQL_MASTER_USER=${POSTGRESQL_MASTER_USER:-$MASTER_ENV_POSTGRESQL_USER}
-      POSTGRESQL_MASTER_PASSWORD=${POSTGRESQL_MASTER_PASSWORD:-$MASTER_ENV_POSTGRESQL_PASSWORD}
-      POSTGRESQL_REPLICATION_USER=${POSTGRESQL_REPLICATION_USER:-$MASTER_ENV_POSTGRESQL_REPLICATION_USER}
-      POSTGRESQL_REPLICATION_PASSWORD=${POSTGRESQL_REPLICATION_PASSWORD:-$MASTER_ENV_POSTGRESQL_REPLICATION_PASSWORD}
-
-      if [ ! $POSTGRESQL_MASTER_HOST ]; then
-        echo "In order to setup a replication slave you need to provide the POSTGRESQL_MASTER_HOST as well"
-        echo ""
-        exit -1
-      fi
-
-      if [ ! $POSTGRESQL_MASTER_PORT ]; then
-        echo "POSTGRESQL_MASTER_PORT not specified. Defaulting to 5432"
-        echo ""
-        POSTGRESQL_MASTER_PORT=${POSTGRESQL_MASTER_PORT:-5432}
-      fi
-
-      if [ ! $POSTGRESQL_MASTER_USER ]; then
-        echo "In order to setup a replication slave you need to provide the POSTGRESQL_MASTER_USER as well"
-        echo ""
-        exit -1
-      fi
-
-      if [ ! $POSTGRESQL_REPLICATION_USER ]; then
-        echo "In order to setup a replication slave you need to provide the POSTGRESQL_REPLICATION_USER as well"
-        echo ""
-        exit -1
-      fi
-
-      if [ ! $POSTGRESQL_REPLICATION_PASSWORD ]; then
-        echo "In order to setup a replication slave you need to provide the POSTGRESQL_REPLICATION_PASSWORD as well"
-        echo ""
-        exit -1
-      fi
-
       echo "==> Waiting for replication master to accept connections (60s timeout)..."
       timeout=60
       while ! $BITNAMI_APP_DIR/bin/pg_isready -h $POSTGRESQL_MASTER_HOST -p $POSTGRESQL_MASTER_PORT -t 1 >/dev/null 2>&1
@@ -64,21 +68,9 @@ initialize_database() {
       sudo -Hu $BITNAMI_APP_USER \
         PGPASSWORD=$POSTGRESQL_REPLICATION_PASSWORD $BITNAMI_APP_DIR/bin/pg_basebackup -D $BITNAMI_APP_DIR/data \
         -h ${POSTGRESQL_MASTER_HOST} -p ${POSTGRESQL_MASTER_PORT} -U ${POSTGRESQL_REPLICATION_USER} -X stream -w -v -P >/dev/null 2>&1
-
-      echo "==> Setting up streaming replication slave..."
-      echo ""
-      s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#hot_standby = .*|hot_standby = on|" $BITNAMI_APP_DIR/conf/postgresql.conf
-      if [ ! -f $BITNAMI_APP_DIR/data/recovery.conf ]; then
-        s6-setuidgid $BITNAMI_APP_USER cp $BITNAMI_APP_DIR/share/recovery.conf.sample $BITNAMI_APP_DIR/data/recovery.conf
-        s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#standby_mode = .*|standby_mode = on|" $BITNAMI_APP_DIR/data/recovery.conf
-        s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#primary_conninfo = .*|primary_conninfo = 'host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD}'|" $BITNAMI_APP_DIR/data/recovery.conf
-      else
-        s6-setuidgid $BITNAMI_APP_USER sed -i "s|^standby_mode = .*|standby_mode = on|" $BITNAMI_APP_DIR/data/recovery.conf
-        s6-setuidgid $BITNAMI_APP_USER sed -i "s|^primary_conninfo = .*|primary_conninfo = 'host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD}'|" $BITNAMI_APP_DIR/data/recovery.conf
-      fi
       ;;
     master|*)
-      echo "==> Initializing PostgreSQL database..."
+      echo "==> Initializing database..."
       echo ""
       s6-setuidgid $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/initdb -D $BITNAMI_APP_DIR/data \
         -U $BITNAMI_APP_USER -E unicode -A trust >/dev/null
@@ -158,6 +150,22 @@ create_replication_user() {
     cat >> $BITNAMI_APP_DIR/conf/pg_hba.conf <<EOF
 host    replication     $POSTGRESQL_REPLICATION_USER       0.0.0.0/0               md5
 EOF
+  fi
+}
+
+configure_replication_slave() {
+  if [ "$POSTGRESQL_REPLICATION_MODE" == "slave" ]; then
+    echo "==> Setting up streaming replication slave..."
+    echo ""
+    s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#hot_standby = .*|hot_standby = on|" $BITNAMI_APP_DIR/conf/postgresql.conf
+    if [ ! -f $BITNAMI_APP_DIR/data/recovery.conf ]; then
+      s6-setuidgid $BITNAMI_APP_USER cp $BITNAMI_APP_DIR/share/recovery.conf.sample $BITNAMI_APP_DIR/data/recovery.conf
+      s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#standby_mode = .*|standby_mode = on|" $BITNAMI_APP_DIR/data/recovery.conf
+      s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#primary_conninfo = .*|primary_conninfo = 'host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD}'|" $BITNAMI_APP_DIR/data/recovery.conf
+    else
+      s6-setuidgid $BITNAMI_APP_USER sed -i "s|^standby_mode = .*|standby_mode = on|" $BITNAMI_APP_DIR/data/recovery.conf
+      s6-setuidgid $BITNAMI_APP_USER sed -i "s|^primary_conninfo = .*|primary_conninfo = 'host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD}'|" $BITNAMI_APP_DIR/data/recovery.conf
+    fi
   fi
 }
 
