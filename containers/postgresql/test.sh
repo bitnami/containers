@@ -237,3 +237,13 @@ create_full_container_mounted() {
 
   cleanup_running_containers $CONTAINER_NAME-slave
 }
+
+@test "Can't setup replication slave without replication password" {
+  run create_container --name $CONTAINER_NAME-slave \
+   -e POSTGRESQL_REPLICATION_MODE=slave \
+   -e POSTGRESQL_MASTER_HOST=master \
+   -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER
+  [[ "$output" =~ "you need to provide the POSTGRESQL_REPLICATION_PASSWORD" ]]
+
+  cleanup_running_containers $CONTAINER_NAME-slave
+}
