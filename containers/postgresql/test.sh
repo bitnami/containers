@@ -295,3 +295,55 @@ create_full_container_mounted() {
   cleanup_running_containers $CONTAINER_NAME-master
   cleanup_running_containers $CONTAINER_NAME-slave
 }
+
+@test "Replication status is preserved after deletion" {
+  cleanup_volumes_content
+
+  create_container -d --name $CONTAINER_NAME-master \
+   -e POSTGRESQL_USER=$POSTGRESQL_USER \
+   -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+   -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE \
+   -e POSTGRESQL_REPLICATION_MODE=master \
+   -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+   -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD \
+   -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data \
+   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf \
+   -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs
+
+  psql_client master -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c "CREATE TABLE users (id serial, name varchar(40) NOT NULL);"
+  psql_client master -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c "INSERT INTO users(name) VALUES ('Marko');"
+
+  create_container -d --name $CONTAINER_NAME-slave \
+   --link $CONTAINER_NAME-master:master \
+   -e POSTGRESQL_REPLICATION_MODE=slave
+
+  run psql_client slave -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c "SELECT * FROM users;"
+  [[ "$output" =~ "Marko" ]]
+  [ $status = 0 ]
+
+  docker rm -fv $CONTAINER_NAME-slave
+  docker rm -fv $CONTAINER_NAME-master
+
+  create_container -d --name $CONTAINER_NAME-master \
+   -e POSTGRESQL_REPLICATION_MODE=master \
+   -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data \
+   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf \
+   -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs
+
+  create_container -d --name $CONTAINER_NAME-slave \
+   --link $CONTAINER_NAME-master:master \
+   -e POSTGRESQL_REPLICATION_MODE=slave \
+   -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+   -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD
+
+  psql_client master -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c "INSERT INTO users(name) VALUES ('Polo');"
+
+  run psql_client slave -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c "SELECT * FROM users;"
+  [[ "$output" =~ "Marko" ]]
+  [[ "$output" =~ "Polo" ]]
+  [ $status = 0 ]
+
+  cleanup_running_containers $CONTAINER_NAME-master
+  cleanup_running_containers $CONTAINER_NAME-slave
+  cleanup_volumes_content
+}
