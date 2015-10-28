@@ -185,6 +185,107 @@ postgresql:
 **Note!**
 When `POSTGRESQL_USER` is is specified, the `postgres` user is not assigned a password and as a result you cannot login remotely to the PostgreSQL server as the `postgres` user.
 
+## Setting up a streaming replication
+
+A [Streaming replication](http://www.postgresql.org/docs/9.4/static/warm-standby.html#STREAMING-REPLICATION) cluster can easily be setup with the Bitnami PostgreSQL Docker Image using the following environment variables:
+
+ - `POSTGRESQL_REPLICATION_MODE`: Replication mode. Possible values `master`/`slave` (default: none).
+ - `POSTGRESQL_REPLICATION_USER`: Replication user. User is created on the master at first boot (default: none).
+ - `POSTGRESQL_REPLICATION_PASSWORD`: Replication users password. Password is set for `POSTGRESQL_REPLICATION_USER` on master on the first boot (default: none).
+ - `POSTGRESQL_MASTER_HOST`: Hostname/IP of replication master (parameter available only on slave).
+ - `POSTGRESQL_MASTER_PORT`: Port of replication master, defaults to `5432` (parameter available only on slave).
+
+In a replication cluster you can have one master and zero or more slaves. Our default configuration allows a maximum of 16 slaves, you can change it in `postgresql.conf` if required.
+
+When replication is enabled writes can occur only on the master while reads can take place on both the master or slaves. For best performance you should limit the reads to the slaves and use the master only for the writes.
+
+### Step 1: Create the replication master
+
+The first step is to start the master.
+
+```bash
+docker run --name postgresql-master \
+  -e POSTGRESQL_USER=my_user \
+  -e POSTGRESQL_PASSWORD=password123 \
+  -e POSTGRESQL_DATABASE=my_database \
+  -e POSTGRESQL_REPLICATION_MODE=master \
+  -e POSTGRESQL_REPLICATION_USER=my_repl_user \
+  -e POSTGRESQL_REPLICATION_PASSWORD=my_repl_password \
+  bitnami/postgresql
+```
+
+In this command we are configuring the container as the master using the `POSTGRESQL_REPLICATION_MODE=master` parameter. Using the `POSTGRESQL_REPLICATION_USER` and `POSTGRESQL_REPLICATION_PASSWORD` parameters we are creating a replication user that will be used by the slaves to connect to the master and perform streaming replication.
+
+### Step 2: Create the replication slave
+
+Next we start a replication slave container.
+
+```bash
+docker run --name postgresql-slave \
+  --link postgresql-master:master \
+  -e POSTGRESQL_MASTER_HOST=master \
+  -e POSTGRESQL_MASTER_PORT=5432 \
+  -e POSTGRESQL_REPLICATION_MODE=slave \
+  -e POSTGRESQL_REPLICATION_USER=my_repl_user \
+  -e POSTGRESQL_REPLICATION_PASSWORD=my_repl_password \
+  bitnami/postgresql
+```
+
+In this command we are configuring the container as a slave using the `POSTGRESQL_REPLICATION_MODE=slave` parameter. Before the replication slave is started, the `POSTGRESQL_MASTER_HOST` and `POSTGRESQL_MASTER_PORT` parameters are used by the slave container to connect to the master and replicate the initial database from the master. The `POSTGRESQL_REPLICATION_USER` and `POSTGRESQL_REPLICATION_PASSWORD` credentials are used to authenticate with the master.
+
+Using the `master` docker link alias, the Bitnami PostgreSQL Docker image automatically fetches the replication paramaters from the master container, namely:
+
+ - `POSTGRESQL_MASTER_HOST`
+ - `POSTGRESQL_MASTER_PORT`
+ - `POSTGRESQL_REPLICATION_USER`
+ - `POSTGRESQL_REPLICATION_PASSWORD`
+
+As a result you can drop all of these parameters from the slave.
+
+```bash
+docker run --name postgresql-slave \
+  --link postgresql-master:master \
+  -e POSTGRESQL_REPLICATION_MODE=slave \
+  bitnami/postgresql
+```
+
+With these two commands you now have a two node PostgreSQL master-slave streaming replication cluster up and running. When required you can add more slaves to the cluster without any downtime allowing you to scale the cluster horizontally.
+
+> **Note**:
+>
+>  The cluster replicates the master in its entirety, which includes all users and databases.
+
+With Docker Compose the master-slave replication can be setup using:
+
+```yaml
+master:
+  image: bitnami/postgresql
+  environment:
+    - POSTGRESQL_USER=my_user
+    - POSTGRESQL_PASSWORD=password123
+    - POSTGRESQL_DATABASE=my_database
+    - POSTGRESQL_REPLICATION_MODE=master
+    - POSTGRESQL_REPLICATION_USER=my_repl_user
+    - POSTGRESQL_REPLICATION_PASSWORD=my_repl_password
+
+slave:
+  image: bitnami/postgresql
+  links:
+    - master:master
+  environment:
+    - POSTGRESQL_REPLICATION_MODE=slave
+```
+
+Scale the number of slaves using:
+
+```bash
+docker-compose scale master=1 slave=3
+```
+
+The above command scales up the number of slaves to `3`. You can scale down in the same way.
+
+> **Note**: You should not scale up/down the number of master nodes. Always have only one master node running.
+
 ## Command-line options
 
 The simplest way to configure your PostgreSQL server is to pass custom command-line options when running the image.
