@@ -247,3 +247,27 @@ create_full_container_mounted() {
 
   cleanup_running_containers $CONTAINER_NAME-slave
 }
+
+@test "Replication slave can fetch replication parameters from link alias \"master\"" {
+  create_container -d --name $CONTAINER_NAME-master \
+   -e POSTGRESQL_USER=$POSTGRESQL_USER \
+   -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+   -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE \
+   -e POSTGRESQL_REPLICATION_MODE=master \
+   -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+   -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD
+
+  create_container -d --name $CONTAINER_NAME-slave \
+   --link $CONTAINER_NAME-master:master \
+   -e POSTGRESQL_REPLICATION_MODE=slave
+
+  psql_client master -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c "CREATE TABLE users (id serial, name varchar(40) NOT NULL);"
+  psql_client master -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c "INSERT INTO users(name) VALUES ('Marko');"
+
+  run psql_client slave -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c "SELECT * FROM users;"
+  [[ "$output" =~ "Marko" ]]
+  [ $status = 0 ]
+
+  cleanup_running_containers $CONTAINER_NAME-master
+  cleanup_running_containers $CONTAINER_NAME-slave
+}
