@@ -220,3 +220,11 @@ create_full_container_mounted() {
 
   cleanup_running_containers $CONTAINER_NAME-master
 }
+
+@test "Can't setup replication slave without master host" {
+  run create_container --name $CONTAINER_NAME-slave \
+   -e POSTGRESQL_REPLICATION_MODE=slave
+  [[ "$output" =~ "you need to provide the POSTGRESQL_MASTER_HOST" ]]
+
+  cleanup_running_containers $CONTAINER_NAME-slave
+}
