@@ -197,3 +197,14 @@ create_full_container_mounted() {
   cleanup_running_containers $CONTAINER_NAME-master
   cleanup_running_containers $CONTAINER_NAME-slave
 }
+
+@test "Can't setup replication master without replication user" {
+  run create_container --name $CONTAINER_NAME-master \
+   -e POSTGRESQL_USER=$POSTGRESQL_USER \
+   -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+   -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE \
+   -e POSTGRESQL_REPLICATION_MODE=master
+  [[ "$output" =~ "you need to provide the POSTGRESQL_REPLICATION_USER" ]]
+
+  cleanup_running_containers $CONTAINER_NAME-master
+}
