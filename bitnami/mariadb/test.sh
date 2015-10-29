@@ -141,8 +141,7 @@ create_full_container_mounted(){
 @test "If host mounted, password and settings are preserved after deletion" {
   cleanup_volumes_content
   create_full_container_mounted
-
-  docker rm -fv $CONTAINER_NAME
+  cleanup_running_containers
 
   create_container -d --name $CONTAINER_NAME\
    -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data\
@@ -387,8 +386,8 @@ create_full_container_mounted(){
   [[ "$output" =~ "Marko" ]]
   [ $status = 0 ]
 
-  docker rm -fv $CONTAINER_NAME-slave
-  docker rm -fv $CONTAINER_NAME-master
+  cleanup_running_containers $CONTAINER_NAME-master
+  cleanup_running_containers $CONTAINER_NAME-slave
 
   create_container -d --name $CONTAINER_NAME-master \
    -e MARIADB_REPLICATION_MODE=master \
