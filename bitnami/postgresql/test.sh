@@ -286,7 +286,9 @@ create_full_container_mounted() {
 
   create_container -d --name $CONTAINER_NAME-slave \
    --link $CONTAINER_NAME-master:master \
-   -e POSTGRESQL_REPLICATION_MODE=slave
+   -e POSTGRESQL_REPLICATION_MODE=slave \
+   -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+   -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD
 
   run psql_client slave -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c "SELECT * FROM users;"
   [[ "$output" =~ "Marko" ]]
@@ -315,7 +317,9 @@ create_full_container_mounted() {
 
   create_container -d --name $CONTAINER_NAME-slave \
    --link $CONTAINER_NAME-master:master \
-   -e POSTGRESQL_REPLICATION_MODE=slave
+   -e POSTGRESQL_REPLICATION_MODE=slave \
+   -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+   -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD
 
   run psql_client slave -U $POSTGRESQL_USER $POSTGRESQL_DATABASE -c "SELECT * FROM users;"
   [[ "$output" =~ "Marko" ]]
