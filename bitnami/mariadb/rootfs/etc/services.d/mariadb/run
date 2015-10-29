@@ -1,0 +1,13 @@
+#!/usr/bin/with-contenv bash
+set -e
+source $BITNAMI_PREFIX/bitnami-utils.sh
+
+mkdir -p $BITNAMI_APP_DIR/tmp
+chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/tmp || true
+
+if [ -f /tmp/init_mysql.sql ]; then
+  PROGRAM_OPTIONS="$PROGRAM_OPTIONS --init-file=/tmp/init_mysql.sql"
+fi
+
+date '+%d%H%M%S' > $BITNAMI_APP_DIR/tmp/start
+exec $BITNAMI_APP_DAEMON $PROGRAM_OPTIONS ${EXTRA_OPTIONS:+"$EXTRA_OPTIONS"}

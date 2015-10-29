@@ -86,6 +86,12 @@ configure_replication() {
       MARIADB_REPLICATION_USER=${MARIADB_REPLICATION_USER:-$MASTER_ENV_MARIADB_REPLICATION_USER}
       MARIADB_REPLICATION_PASSWORD=${MARIADB_REPLICATION_PASSWORD:-$MASTER_ENV_MARIADB_REPLICATION_PASSWORD}
 
+      if [ ! $MARIADB_MASTER_HOST ]; then
+        echo "In order to setup a replication slave you need to provide the MARIADB_MASTER_HOST as well"
+        echo ""
+        exit -1
+      fi
+
       if [ ! $MARIADB_MASTER_USER ]; then
         echo "In order to setup a replication slave you need to provide the MARIADB_MASTER_USER as well"
         echo ""
@@ -103,7 +109,6 @@ configure_replication() {
         echo ""
         exit -1
       fi
-
       echo "==> Setting the master configuration..."
       echo "CHANGE MASTER TO MASTER_HOST='$MARIADB_MASTER_HOST', MASTER_USER='$MARIADB_REPLICATION_USER', MASTER_PASSWORD='$MARIADB_REPLICATION_PASSWORD';" >> /tmp/init_mysql.sql
 
