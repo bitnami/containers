@@ -321,8 +321,8 @@ create_full_container_mounted() {
   [[ "$output" =~ "Marko" ]]
   [ $status = 0 ]
 
-  docker rm -fv $CONTAINER_NAME-slave
-  docker rm -fv $CONTAINER_NAME-master
+  cleanup_running_containers $CONTAINER_NAME-slave
+  cleanup_running_containers $CONTAINER_NAME-master
 
   create_container -d --name $CONTAINER_NAME-master \
    -e POSTGRESQL_REPLICATION_MODE=master \
