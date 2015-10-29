@@ -69,6 +69,18 @@ initialize_database() {
       ;;
   esac
   rm -rf $BITNAMI_APP_DIR/data/{pg_hba.conf,pg_ident.conf,postgresql.conf}
+
+  case "$POSTGRESQL_REPLICATION_MODE" in
+    master|slave)
+      echo "==> Setting up streaming replication..."
+      echo ""
+      s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#wal_level = .*|wal_level = hot_standby|" $BITNAMI_APP_DIR/conf/postgresql.conf
+      s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#max_wal_senders = .*|max_wal_senders = 16|" $BITNAMI_APP_DIR/conf/postgresql.conf
+      s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#checkpoint_segments = .*|checkpoint_segments = 8|" $BITNAMI_APP_DIR/conf/postgresql.conf
+      s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#wal_keep_segments = .*|wal_keep_segments = 32|" $BITNAMI_APP_DIR/conf/postgresql.conf
+      s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#hot_standby = .*|hot_standby = on|" $BITNAMI_APP_DIR/conf/postgresql.conf
+      ;;
+  esac
 }
 
 create_custom_database() {
@@ -113,50 +125,48 @@ create_postgresql_user() {
 }
 
 create_replication_user() {
-  if [ "$POSTGRESQL_REPLICATION_MODE" == "master" ]; then
-    if [ ! $POSTGRESQL_REPLICATION_USER ]; then
-      echo "In order to setup a replication master you need to provide the POSTGRESQL_REPLICATION_USER as well"
-      echo ""
-      exit -1
-    fi
+  case "$POSTGRESQL_REPLICATION_MODE" in
+    master|slave)
+      if [ ! $POSTGRESQL_REPLICATION_USER ]; then
+        echo "In order to setup a replication master you need to provide the POSTGRESQL_REPLICATION_USER as well"
+        echo ""
+        exit -1
+      fi
 
-    if [ ! $POSTGRESQL_REPLICATION_PASSWORD ]; then
-      echo "In order to setup a replication master you need to provide the POSTGRESQL_REPLICATION_PASSWORD as well"
-      echo ""
-      exit -1
-    fi
+      if [ ! $POSTGRESQL_REPLICATION_PASSWORD ]; then
+        echo "In order to setup a replication master you need to provide the POSTGRESQL_REPLICATION_PASSWORD as well"
+        echo ""
+        exit -1
+      fi
 
-    echo "==> Creating replication user $POSTGRESQL_REPLICATION_USER..."
-    echo ""
+      if [ "$POSTGRESQL_REPLICATION_MODE" == "master" ]; then
+        echo "==> Creating replication user $POSTGRESQL_REPLICATION_USER..."
+        echo ""
 
-    echo "CREATE ROLE $POSTGRESQL_REPLICATION_USER REPLICATION LOGIN ENCRYPTED PASSWORD '$POSTGRESQL_REPLICATION_PASSWORD';" | \
-      s6-setuidgid $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/postgres --single $PROGRAM_OPTIONS >/dev/null
+        echo "CREATE ROLE $POSTGRESQL_REPLICATION_USER REPLICATION LOGIN ENCRYPTED PASSWORD '$POSTGRESQL_REPLICATION_PASSWORD';" | \
+          s6-setuidgid $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/postgres --single $PROGRAM_OPTIONS >/dev/null
+      fi
 
-    echo "==> Setting up streaming replication master..."
-    echo ""
-    s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#wal_level = .*|wal_level = hot_standby|" $BITNAMI_APP_DIR/conf/postgresql.conf
-    s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#max_wal_senders = .*|max_wal_senders = 16|" $BITNAMI_APP_DIR/conf/postgresql.conf
-    s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#checkpoint_segments = .*|checkpoint_segments = 8|" $BITNAMI_APP_DIR/conf/postgresql.conf
-    s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#wal_keep_segments = .*|wal_keep_segments = 32|" $BITNAMI_APP_DIR/conf/postgresql.conf
-
-    cat >> $BITNAMI_APP_DIR/conf/pg_hba.conf <<EOF
+      cat >> $BITNAMI_APP_DIR/conf/pg_hba.conf <<EOF
 host    replication     $POSTGRESQL_REPLICATION_USER       0.0.0.0/0               md5
 EOF
-  fi
+      ;;
+  esac
 }
 
 configure_replication_slave() {
   if [ "$POSTGRESQL_REPLICATION_MODE" == "slave" ]; then
     echo "==> Setting up streaming replication slave..."
     echo ""
-    s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#hot_standby = .*|hot_standby = on|" $BITNAMI_APP_DIR/conf/postgresql.conf
     if [ ! -f $BITNAMI_APP_DIR/data/recovery.conf ]; then
       s6-setuidgid $BITNAMI_APP_USER cp $BITNAMI_APP_DIR/share/recovery.conf.sample $BITNAMI_APP_DIR/data/recovery.conf
       s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#standby_mode = .*|standby_mode = on|" $BITNAMI_APP_DIR/data/recovery.conf
       s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#primary_conninfo = .*|primary_conninfo = 'host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD}'|" $BITNAMI_APP_DIR/data/recovery.conf
+      s6-setuidgid $BITNAMI_APP_USER sed -i "s|^#trigger_file = .*|trigger_file = '/tmp/postgresql.trigger.5432'|" $BITNAMI_APP_DIR/data/recovery.conf
     else
       s6-setuidgid $BITNAMI_APP_USER sed -i "s|^standby_mode = .*|standby_mode = on|" $BITNAMI_APP_DIR/data/recovery.conf
       s6-setuidgid $BITNAMI_APP_USER sed -i "s|^primary_conninfo = .*|primary_conninfo = 'host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD}'|" $BITNAMI_APP_DIR/data/recovery.conf
+      s6-setuidgid $BITNAMI_APP_USER sed -i "s|^trigger_file = .*|trigger_file = '/tmp/postgresql.trigger.5432'|" $BITNAMI_APP_DIR/data/recovery.conf
     fi
   fi
 }

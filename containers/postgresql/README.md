@@ -251,9 +251,15 @@ docker run --name postgresql-slave \
 
 With these two commands you now have a two node PostgreSQL master-slave streaming replication cluster up and running. When required you can add more slaves to the cluster without any downtime allowing you to scale the cluster horizontally.
 
-> **Note**:
->
->  The cluster replicates the master in its entirety, which includes all users and databases.
+> **Note**: The cluster replicates the master in its entirety, which includes all users and databases.
+
+If the master goes down you can reconfigure a slave to act as the master and begin accepting writes by creating the trigger file `/tmp/postgresql.trigger.5432`. For example the following command reconfigures `postgresql-slave` to act as the master:
+
+```bash
+docker exec postgresql-slave touch /tmp/postgresql.trigger.5432
+```
+
+> **Note**: The configuration of the other slaves in the cluster needs to be updated so that they are aware of the new master. This would require you to restart the other slaves with `--link postgresql-slave:master` as per our examples.
 
 With Docker Compose the master-slave replication can be setup using:
 
