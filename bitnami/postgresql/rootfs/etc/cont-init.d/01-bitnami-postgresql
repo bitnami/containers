@@ -2,11 +2,15 @@
 set -e
 source $BITNAMI_PREFIX/bitnami-utils.sh
 
-export LD_LIBRARY_PATH=$BITNAMI_PREFIX/common/lib
+export LD_LIBRARY_PATH=$BITNAMI_PREFIX/common/lib:/opt/bitnami/postgresql/lib
 
 if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
   generate_conf_files
 fi
+
+chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/conf
+
+initialize_replication_parameters
 
 if [ ! -f $BITNAMI_APP_VOL_PREFIX/data/PG_VERSION ]; then
   initialize_database
@@ -15,10 +19,16 @@ if [ ! -f $BITNAMI_APP_VOL_PREFIX/data/PG_VERSION ]; then
 
   create_postgresql_user
 
-  print_app_credentials $BITNAMI_APP_NAME $POSTGRESQL_USER `print_postgresql_password` `print_postgresql_database`
+  create_replication_user
+
+  if [ "$POSTGRESQL_REPLICATION_MODE" != "slave" ]; then
+    print_app_credentials $BITNAMI_APP_NAME $POSTGRESQL_USER `print_postgresql_password` `print_postgresql_database`
+  fi
 else
   print_container_already_initialized $BITNAMI_APP_NAME
 fi
+
+configure_replication_slave
 
 chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER \
   $BITNAMI_APP_DIR/data/ \
