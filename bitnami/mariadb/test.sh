@@ -391,6 +391,7 @@ create_full_container_mounted(){
   docker rm -fv $CONTAINER_NAME-master
 
   create_container -d --name $CONTAINER_NAME-master \
+   -e MARIADB_REPLICATION_MODE=master \
    -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data \
    -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf
 
