@@ -20,9 +20,10 @@ load tests/docker_helper
 # $1: name of the container to link to
 # ${@:2}: command to execute
 psql_command() {
-  docker run --rm $(container_link $1 $CONTAINER_NAME) \
+  # launch command as the entrypoint to skip the s6 init sequence (speeds up the tests)
+  docker run --rm $(container_link $1 $CONTAINER_NAME) --entrypoint ${2} \
     -e PGPASSWORD=$POSTGRESQL_PASSWORD $IMAGE_NAME \
-      "${@:2}"
+      "${@:3}"
 }
 
 # Link to container and execute psql client
