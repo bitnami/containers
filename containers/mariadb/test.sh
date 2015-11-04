@@ -2,422 +2,372 @@
 CONTAINER_NAME=bitnami-mariadb-test
 IMAGE_NAME=${IMAGE_NAME:-bitnami/mariadb}
 SLEEP_TIME=5
+VOL_PREFIX=/bitnami/mariadb
+HOST_VOL_PREFIX=${HOST_VOL_PREFIX:-/tmp/bitnami/$CONTAINER_NAME}
+
 MARIADB_DATABASE=test_database
 MARIADB_USER=test_user
 MARIADB_PASSWORD=test_password
 MARIADB_REPLICATION_USER=repl_user
 MARIADB_REPLICATION_PASSWORD=repl_password
-VOL_PREFIX=/bitnami/mariadb
-HOST_VOL_PREFIX=${HOST_VOL_PREFIX:-/tmp/bitnami/$CONTAINER_NAME}
 
-cleanup_running_containers() {
-  if [ "$(docker ps -a | grep ${1:-$CONTAINER_NAME})" ]; then
-    docker rm -fv ${1:-$CONTAINER_NAME}
-  fi
+# source the helper script
+load tests/docker_helper
+
+# Link to container and execute command
+# $1: name of the container to link to
+# ${@:2}: command to execute
+mysql_command() {
+  # launch command as the entrypoint to skip the s6 init sequence (speeds up the tests)
+  docker run --rm $(container_link $1 $CONTAINER_NAME) --entrypoint $2 \
+    $IMAGE_NAME "${@:3}"
 }
 
-setup() {
-  cleanup_running_containers
-  cleanup_running_containers $CONTAINER_NAME-master
-  cleanup_running_containers $CONTAINER_NAME-slave
-  mkdir -p $HOST_VOL_PREFIX
+# Link to container and execute mysql client
+# $1 : name of the container to link to
+# ${@:2} : arguments for the psql command
+mysql_client() {
+  mysql_command $1 mysql --no-defaults -h $CONTAINER_NAME -P 3306 "${@:2}"
+}
+
+cleanup_environment() {
+  container_remove_full slave0
+  container_remove_full master
+  container_remove_full standalone
 }
 
 teardown() {
-  cleanup_running_containers
-  cleanup_running_containers $CONTAINER_NAME-master
-  cleanup_running_containers $CONTAINER_NAME-slave
+  cleanup_environment
 }
 
-cleanup_volumes_content() {
-  docker run --rm\
-    -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data\
-    -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
-    -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs\
-    $IMAGE_NAME rm -rf $VOL_PREFIX/data/ $VOL_PREFIX/logs/ $VOL_PREFIX/conf/
-}
+# cleanup the environment of any leftover containers and volumes before starting the tests
+cleanup_environment
 
-create_container(){
-  docker run "$@" $IMAGE_NAME; sleep $SLEEP_TIME
-}
+@test "Port 3306 exposed and accepting external connections" {
+  create_container standalone -d
 
-# $1 is the command
-mysql_client(){
-  case "$1" in
-    master|slave)
-      SERVER_LINK="--link $CONTAINER_NAME-$1:$CONTAINER_NAME"
-      shift
-      ;;
-    *)
-      SERVER_LINK="--link $CONTAINER_NAME:$CONTAINER_NAME"
-      ;;
-  esac
-  docker run --rm $SERVER_LINK $IMAGE_NAME mysql -h $CONTAINER_NAME "$@"
-}
-
-create_full_container(){
-  create_container -d --name $CONTAINER_NAME\
-   -e MARIADB_USER=$MARIADB_USER\
-   -e MARIADB_DATABASE=$MARIADB_DATABASE\
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD
-}
-
-create_full_container_mounted(){
-  create_container -d --name $CONTAINER_NAME\
-   -e MARIADB_USER=$MARIADB_USER\
-   -e MARIADB_DATABASE=$MARIADB_DATABASE\
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD\
-   -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data\
-   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
-   -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs
+  # check if mysqld is accepting connections
+  run mysql_command standalone mysqladmin --no-defaults -h $CONTAINER_NAME -P 3306 ping
+  [[ "$output" =~ "mysqld is alive" ]]
 }
 
 @test "Root user created without password" {
-  create_container -d --name $CONTAINER_NAME
-  run mysql_client -e "select User from mysql.user where User=\"root\"\G"
-  [[ "$output" =~ "User: root" ]]
+  create_container standalone -d
+
+  # auth as root user and list all databases
+  run mysql_client standalone -uroot -e 'SHOW DATABASES\G;'
+  [[ "$output" =~ "Database: mysql" ]]
 }
 
 @test "Root user created with password" {
-  create_container -d --name $CONTAINER_NAME -e MARIADB_PASSWORD=$MARIADB_PASSWORD
-  # Can not login as root
-  run mysql_client -e 'show databases\G'
-  [ $status = 1 ]
-  run mysql_client -p$MARIADB_PASSWORD -e 'show databases\G'
-  [ $status = 0 ]
+  create_container standalone -d \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD
+
+  # cannot auth as root without password
+  run mysql_client standalone -uroot -e "SHOW DATABASES\G"
+  [[ "$output" =~ "Access denied for user" ]]
+
+  # auth as root with password and list all databases
+  run mysql_client standalone -uroot -p$MARIADB_PASSWORD -e "SHOW DATABASES\G"
+  [[ "$output" =~ "Database: mysql" ]]
 }
 
 @test "Root user has access to admin database" {
-  create_container -d --name $CONTAINER_NAME
-  run mysql_client -e 'show databases\G'
+  create_container standalone -d
+  run mysql_client standalone -uroot -e "SHOW DATABASES\G"
   [[ "$output" =~ 'Database: mysql' ]]
 }
 
 @test "Custom database created" {
-  create_container -d --name $CONTAINER_NAME -e MARIADB_DATABASE=$MARIADB_DATABASE
-  run mysql_client -e 'show databases\G'
+  create_container standalone -d \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE
+
+  # auth as root and check if MARIADB_DATABASE exists
+  run mysql_client standalone -uroot -e "SHOW DATABASES\G"
   [[ "$output" =~ "Database: $MARIADB_DATABASE" ]]
 }
 
 @test "Can't create a custom user without database" {
-  run create_container --name $CONTAINER_NAME -e MARIADB_USER=$MARIADB_USER
+  # create container without specifying MARIADB_DATABASE
+  run create_container standalone \
+    -e MARIADB_USER=$MARIADB_USER
   [[ "$output" =~ "you need to provide the MARIADB_DATABASE" ]]
 }
 
 @test "Create custom user and database without password" {
-  create_container -d --name $CONTAINER_NAME\
-   -e MARIADB_USER=$MARIADB_USER\
-   -e MARIADB_DATABASE=$MARIADB_DATABASE
-  # Can not login as root
-  run mysql_client -e 'show databases\G'
-  [ $status = 1 ]
-  run mysql_client -u $MARIADB_USER -e  'show databases\G'
+  create_container standalone -d \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE
+
+  # cannot auth as root
+  run mysql_client standalone -uroot -e "SHOW DATABASES\G"
+  [[ "$output" =~ "Access denied for user" ]]
+
+  # auth as MARIADB_USER and check of MARIADB_DATABASE exists
+  run mysql_client standalone -u$MARIADB_USER -e "SHOW DATABASES\G"
   [[ "$output" =~ "Database: $MARIADB_DATABASE" ]]
 }
 
 @test "Create custom user and database with password" {
-  create_full_container
-  # Can not login as root
-  run mysql_client -u $MARIADB_USER -e 'show databases\G'
-  [ $status = 1 ]
-  run mysql_client -u $MARIADB_USER -p$MARIADB_PASSWORD -e 'show databases\G'
-  [ $status = 0 ]
+  create_container standalone -d \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD
+
+  # auth as MARIADB_USER with password and check if MARIADB_DATABASE exists
+  run mysql_client standalone -u$MARIADB_USER -p$MARIADB_PASSWORD -e "SHOW DATABASES\G"
+  [[ "$output" =~ "Database: $MARIADB_DATABASE" ]]
 }
 
 @test "User and password settings are preserved after restart" {
-  create_full_container
+  create_container standalone -d \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD
 
-  docker stop $CONTAINER_NAME
-  docker start $CONTAINER_NAME
-  sleep $SLEEP_TIME
+  # restart container
+  container_restart standalone
 
-  run docker logs $CONTAINER_NAME
+  # get container logs
+  run container_logs standalone
   [[ "$output" =~ "The credentials were set on first boot." ]]
 
-  run mysql_client -u $MARIADB_USER -p$MARIADB_PASSWORD -e 'show databases\G'
-  [ $status = 0 ]
-}
-
-@test "If host mounted, password and settings are preserved after deletion" {
-  cleanup_volumes_content
-  create_full_container_mounted
-  cleanup_running_containers
-
-  create_container -d --name $CONTAINER_NAME\
-   -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data\
-   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf
-
-  run mysql_client -u $MARIADB_USER -p$MARIADB_PASSWORD -e 'show databases\G'
-  [ $status = 0 ]
-  cleanup_volumes_content
-}
-
-@test "Port 3306 exposed and accepting external connections" {
-  create_container -d --name $CONTAINER_NAME
-
-  run docker run --rm --name 'linked' --link $CONTAINER_NAME:$CONTAINER_NAME $IMAGE_NAME\
-    mysql -h $CONTAINER_NAME -P 3306 -e 'show databases\G'
-  [ $status = 0 ]
+  # auth as MARIADB_USER and check if MARIADB_DATABASE exists
+  run mysql_client standalone -u$MARIADB_USER -p$MARIADB_PASSWORD -e "SHOW DATABASES\G"
+  [[ "$output" =~ "Database: $MARIADB_DATABASE" ]]
 }
 
 @test "All the volumes exposed" {
-  create_container -d --name $CONTAINER_NAME
-  run docker inspect $CONTAINER_NAME
+  create_container standalone -d
+
+  # get container introspection details and check if volumes are exposed
+  run container_inspect standalone
   [[ "$output" =~ "$VOL_PREFIX/data" ]]
   [[ "$output" =~ "$VOL_PREFIX/conf" ]]
   [[ "$output" =~ "$VOL_PREFIX/logs" ]]
 }
 
-@test "Data gets generated in conf and data if bind mounted in the host" {
-  create_full_container_mounted
-  run docker run -v $HOST_VOL_PREFIX:$HOST_VOL_PREFIX --rm $IMAGE_NAME ls -l $HOST_VOL_PREFIX/conf/my.cnf $HOST_VOL_PREFIX/logs/mysqld.log
-  [ $status = 0 ]
-  cleanup_volumes_content
+@test "Data gets generated in conf, data and logs if bind mounted in the host" {
+  create_container_with_host_volumes standalone -d \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD
+
+  # list files from data, conf and logs volumes
+  run container_exec standalone ls -l $VOL_PREFIX/conf/ $VOL_PREFIX/logs/ $VOL_PREFIX/data/
+
+  # files expected in conf volume
+  [[ "$output" =~ "my.cnf" ]]
+
+  # files expected in data volume (subset)
+  [[ "$output" =~ "mysql" ]]
+  [[ "$output" =~ "ibdata1" ]]
+
+  # files expected in logs volume
+  [[ "$output" =~ "mysqld.log" ]]
 }
 
-@test "Master database is replicated on slave" {
-  create_container -d --name $CONTAINER_NAME-master \
-   -e MARIADB_USER=$MARIADB_USER \
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_DATABASE=$MARIADB_DATABASE \
-   -e MARIADB_REPLICATION_MODE=master \
-   -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
-   -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
+@test "If host mounted, password and settings are preserved after deletion" {
+  create_container_with_host_volumes standalone -d \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD
 
-  create_container -d --name $CONTAINER_NAME-slave \
-   --link $CONTAINER_NAME-master:$CONTAINER_NAME-master \
-   -e MARIADB_MASTER_HOST=$CONTAINER_NAME-master \
-   -e MARIADB_MASTER_USER=$MARIADB_USER \
-   -e MARIADB_MASTER_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_USER=$MARIADB_USER \
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_DATABASE=$MARIADB_DATABASE \
-   -e MARIADB_REPLICATION_MODE=slave \
-   -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
-   -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
+  # stop and remove container
+  container_remove standalone
 
-  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "CREATE TABLE users (id INT AUTO_INCREMENT, name VARCHAR(30), datum TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(id))"
-  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "INSERT INTO users(name) VALUES ('Marko')"
+  # recreate container without specifying any env parameters
+  create_container_with_host_volumes standalone -d
 
-  run mysql_client slave -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "SELECT * FROM users"
-  [[ "$output" =~ "Marko" ]]
-  [ $status = 0 ]
-
-  cleanup_running_containers $CONTAINER_NAME-master
-  cleanup_running_containers $CONTAINER_NAME-slave
-}
-
-@test "Can setup replication without password for replication user" {
-  create_container -d --name $CONTAINER_NAME-master \
-   -e MARIADB_USER=$MARIADB_USER \
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_DATABASE=$MARIADB_DATABASE \
-   -e MARIADB_REPLICATION_MODE=master \
-   -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER
-
-  create_container -d --name $CONTAINER_NAME-slave \
-   --link $CONTAINER_NAME-master:$CONTAINER_NAME-master \
-   -e MARIADB_MASTER_HOST=$CONTAINER_NAME-master \
-   -e MARIADB_MASTER_USER=$MARIADB_USER \
-   -e MARIADB_MASTER_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_USER=$MARIADB_USER \
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_DATABASE=$MARIADB_DATABASE \
-   -e MARIADB_REPLICATION_MODE=slave \
-   -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER
-
-  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "CREATE TABLE users (id INT AUTO_INCREMENT, name VARCHAR(30), datum TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(id))"
-  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "INSERT INTO users(name) VALUES ('Marko')"
-
-  run mysql_client slave -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "SELECT * FROM users"
-  [[ "$output" =~ "Marko" ]]
-  [ $status = 0 ]
-
-  cleanup_running_containers $CONTAINER_NAME-master
-  cleanup_running_containers $CONTAINER_NAME-slave
+  # auth as MARIADB_USER and check of MARIADB_DATABASE exists
+  run mysql_client standalone -u$MARIADB_USER -p$MARIADB_PASSWORD -e "SHOW DATABASES\G"
+  [[ "$output" =~ "Database: $MARIADB_DATABASE" ]]
 }
 
 @test "Can't setup replication slave without master user" {
-  create_container -d --name $CONTAINER_NAME-master \
-   -e MARIADB_USER=$MARIADB_USER \
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_DATABASE=$MARIADB_DATABASE \
-   -e MARIADB_REPLICATION_MODE=master \
-   -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
-   -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
-
-  run create_container --name $CONTAINER_NAME-slave \
-   --link $CONTAINER_NAME-master:$CONTAINER_NAME-master \
-   -e MARIADB_MASTER_HOST=$CONTAINER_NAME-master \
-   -e MARIADB_USER=$MARIADB_USER \
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_DATABASE=$MARIADB_DATABASE \
-   -e MARIADB_REPLICATION_MODE=slave \
-   -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
-   -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
-[[ "$output" =~ "you need to provide the MARIADB_MASTER_USER" ]]
-
-  cleanup_running_containers $CONTAINER_NAME-master
-  cleanup_running_containers $CONTAINER_NAME-slave
+  # create replication slave without specifying MARIADB_MASTER_USER
+  run create_container slave0 \
+    -e MARIADB_REPLICATION_MODE=slave \
+    -e MARIADB_MASTER_HOST=master
+  [[ "$output" =~ "you need to provide the MARIADB_MASTER_USER" ]]
 }
 
 @test "Can't setup replication slave without database" {
-  create_container -d --name $CONTAINER_NAME-master \
-   -e MARIADB_USER=$MARIADB_USER \
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_DATABASE=$MARIADB_DATABASE \
-   -e MARIADB_REPLICATION_MODE=master \
-   -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
-   -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
-
-  run create_container --name $CONTAINER_NAME-slave \
-   --link $CONTAINER_NAME-master:$CONTAINER_NAME-master \
-   -e MARIADB_MASTER_HOST=$CONTAINER_NAME-master \
-   -e MARIADB_MASTER_USER=$MARIADB_USER \
-   -e MARIADB_MASTER_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_USER=$MARIADB_USER \
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_REPLICATION_MODE=slave \
-   -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
-   -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
+  # create replication slave without specifying MARIADB_DATABASE
+  run create_container slave0 \
+    -e MARIADB_REPLICATION_MODE=slave \
+    -e MARIADB_MASTER_HOST=master \
+    -e MARIADB_MASTER_USER=$MARIADB_USER
   [[ "$output" =~ "you need to provide the MARIADB_DATABASE" ]]
-
-  cleanup_running_containers $CONTAINER_NAME-master
-  cleanup_running_containers $CONTAINER_NAME-slave
 }
 
 @test "Can't setup replication slave without replication user" {
-  create_container -d --name $CONTAINER_NAME-master \
-   -e MARIADB_USER=$MARIADB_USER \
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_DATABASE=$MARIADB_DATABASE \
-   -e MARIADB_REPLICATION_MODE=master \
-   -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
-   -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
-
-  run create_container --name $CONTAINER_NAME-slave \
-   --link $CONTAINER_NAME-master:$CONTAINER_NAME-master \
-   -e MARIADB_MASTER_HOST=$CONTAINER_NAME-master \
-   -e MARIADB_MASTER_USER=$MARIADB_USER \
-   -e MARIADB_MASTER_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_USER=$MARIADB_USER \
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_DATABASE=$MARIADB_DATABASE \
-   -e MARIADB_REPLICATION_MODE=slave
+  # create replication slave without specifying MARIADB_REPLICATION_USER
+  run create_container slave0 \
+    -e MARIADB_REPLICATION_MODE=slave \
+    -e MARIADB_MASTER_HOST=master \
+    -e MARIADB_MASTER_USER=$MARIADB_USER \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE
   [[ "$output" =~ "you need to provide the MARIADB_REPLICATION_USER" ]]
-
-  cleanup_running_containers $CONTAINER_NAME-master
-  cleanup_running_containers $CONTAINER_NAME-slave
 }
 
-@test "Replication slave can automatically fetch connection parameters from master using docker links" {
-  create_container -d --name $CONTAINER_NAME-master \
-   -e MARIADB_USER=$MARIADB_USER \
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_DATABASE=$MARIADB_DATABASE \
-   -e MARIADB_REPLICATION_MODE=master \
-   -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
-   -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
+@test "Master database is replicated on slave" {
+  create_container master -d \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE \
+    -e MARIADB_REPLICATION_MODE=master \
+    -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
+    -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
 
-  create_container -d --name $CONTAINER_NAME-slave \
-   --link $CONTAINER_NAME-master:master \
-   -e MARIADB_REPLICATION_MODE=slave
+  create_container slave0 -d \
+    $(container_link master $CONTAINER_NAME) \
+    -e MARIADB_MASTER_HOST=$CONTAINER_NAME \
+    -e MARIADB_MASTER_USER=$MARIADB_USER \
+    -e MARIADB_MASTER_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE \
+    -e MARIADB_REPLICATION_MODE=slave \
+    -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
+    -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
 
-  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "CREATE TABLE users (id INT AUTO_INCREMENT, name VARCHAR(30), datum TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(id))"
-  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "INSERT INTO users(name) VALUES ('Marko')"
+  # create users table on master and insert a record
+  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e \
+    "CREATE TABLE users (id INT AUTO_INCREMENT, name VARCHAR(30), datum TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(id)); \
+     INSERT INTO users(name) VALUES ('Marko');"
 
-  run mysql_client slave -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "SELECT * FROM users"
-  [[ "$output" =~ "Marko" ]]
-  [ $status = 0 ]
+  # verify that record is replicated on slave0
+  run mysql_client slave0 -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "SELECT * FROM users\G"
+  [[ "$output" =~ "name: Marko" ]]
+}
 
-  cleanup_running_containers $CONTAINER_NAME-master
-  cleanup_running_containers $CONTAINER_NAME-slave
+@test "Can setup replication without password for replication user" {
+  create_container master -d \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE \
+    -e MARIADB_REPLICATION_MODE=master \
+    -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER
+
+  create_container slave0 -d \
+    $(container_link master $CONTAINER_NAME) \
+    -e MARIADB_MASTER_HOST=$CONTAINER_NAME \
+    -e MARIADB_MASTER_USER=$MARIADB_USER \
+    -e MARIADB_MASTER_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE \
+    -e MARIADB_REPLICATION_MODE=slave \
+    -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER
+
+  # create users table on master and insert a record
+  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e \
+    "CREATE TABLE users (id INT AUTO_INCREMENT, name VARCHAR(30), datum TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(id)); \
+     INSERT INTO users(name) VALUES ('Marko');"
+
+  # verify that record is replicated on slave0
+  run mysql_client slave0 -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "SELECT * FROM users\G"
+  [[ "$output" =~ "name: Marko" ]]
+}
+
+@test "Replication slave can fetch replication parameters from link alias \"master\"" {
+  create_container master -d \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE \
+    -e MARIADB_REPLICATION_MODE=master \
+    -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
+    -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
+
+  # create replication slave0 linked to master with alias named master
+  create_container slave0 -d \
+    $(container_link master master) \
+    -e MARIADB_REPLICATION_MODE=slave
+
+  # create users table on master and insert a new row
+  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e \
+    "CREATE TABLE users (id INT AUTO_INCREMENT, name VARCHAR(30), datum TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(id)); \
+     INSERT INTO users(name) VALUES ('Marko');"
+
+  # check if row is replicated on slave0
+  run mysql_client slave0 -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "SELECT * FROM users\G"
+  [[ "$output" =~ "name: Marko" ]]
 }
 
 @test "Slave synchronizes with the master (delayed start)" {
-  create_container -d --name $CONTAINER_NAME-master \
-   -e MARIADB_USER=$MARIADB_USER \
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_DATABASE=$MARIADB_DATABASE \
-   -e MARIADB_REPLICATION_MODE=master \
-   -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
-   -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
+  create_container master -d \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE \
+    -e MARIADB_REPLICATION_MODE=master \
+    -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
+    -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
 
-  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "CREATE TABLE users (id INT AUTO_INCREMENT, name VARCHAR(30), datum TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(id))"
-  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "INSERT INTO users(name) VALUES ('Marko')"
+  # create users table on master and insert a new row
+  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e \
+    "CREATE TABLE users (id INT AUTO_INCREMENT, name VARCHAR(30), datum TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(id)) ;
+     INSERT INTO users(name) VALUES ('Marko');"
 
-  create_container -d --name $CONTAINER_NAME-slave \
-   --link $CONTAINER_NAME-master:master \
-   -e MARIADB_REPLICATION_MODE=slave
+  # start slave0 linked to the master
+  create_container slave0 -d \
+    $(container_link master $CONTAINER_NAME) \
+    -e MARIADB_MASTER_HOST=$CONTAINER_NAME \
+    -e MARIADB_MASTER_USER=$MARIADB_USER \
+    -e MARIADB_MASTER_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE \
+    -e MARIADB_REPLICATION_MODE=slave \
+    -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
+    -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
 
-  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "INSERT INTO users(name) VALUES ('Polo')"
-
-  run mysql_client slave -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "SELECT * FROM users"
-  [[ "$output" =~ "Marko" ]]
-  [[ "$output" =~ "Polo" ]]
-  [ $status = 0 ]
-
-  cleanup_running_containers $CONTAINER_NAME-master
-  cleanup_running_containers $CONTAINER_NAME-slave
+  # verify that master data is replicated on slave
+  run mysql_client slave0 -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "SELECT * FROM users\G"
+  [[ "$output" =~ "name: Marko" ]]
 }
 
 @test "Replication status is preserved after deletion" {
-  cleanup_volumes_content
+  # create master container with host mounted volumes
+  create_container_with_host_volumes master -d \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE \
+    -e MARIADB_REPLICATION_MODE=master \
+    -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
+    -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
 
-  create_container -d --name $CONTAINER_NAME-master \
-   -e MARIADB_USER=$MARIADB_USER \
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_DATABASE=$MARIADB_DATABASE \
-   -e MARIADB_REPLICATION_MODE=master \
-   -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
-   -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD \
-   -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data \
-   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf \
-   -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs
+  # create users table on master and insert a new row
+  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e \
+    "CREATE TABLE users (id INT AUTO_INCREMENT, name VARCHAR(30), datum TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(id)) ;
+     INSERT INTO users(name) VALUES ('Marko');"
 
-  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "CREATE TABLE users (id INT AUTO_INCREMENT, name VARCHAR(30), datum TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(id))"
-  mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "INSERT INTO users(name) VALUES ('Marko')"
+  # create slave0 container with host mounted volumes, should replicate the master data
+  create_container_with_host_volumes slave0 -d \
+    $(container_link master $CONTAINER_NAME) \
+    -e MARIADB_MASTER_HOST=$CONTAINER_NAME \
+    -e MARIADB_MASTER_USER=$MARIADB_USER \
+    -e MARIADB_MASTER_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE \
+    -e MARIADB_REPLICATION_MODE=slave \
+    -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
+    -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
 
-  create_container -d --name $CONTAINER_NAME-slave \
-   --link $CONTAINER_NAME-master:master \
-   -e MARIADB_REPLICATION_MODE=slave
+  # stop and remove master and slave0 containers
+  container_remove master
+  container_remove slave0
 
-  run mysql_client slave -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "SELECT * FROM users"
-  [[ "$output" =~ "Marko" ]]
-  [ $status = 0 ]
+  # start master and slave0 containers with existing host volumes and no additional env arguments other than MARIADB_REPLICATION_MODE
+  create_container_with_host_volumes master -d -e MARIADB_REPLICATION_MODE=master
+  create_container_with_host_volumes slave0 -d $(container_link master $CONTAINER_NAME) -e MARIADB_REPLICATION_MODE=slave
 
-  cleanup_running_containers $CONTAINER_NAME-master
-  cleanup_running_containers $CONTAINER_NAME-slave
-
-  create_container -d --name $CONTAINER_NAME-master \
-   -e MARIADB_REPLICATION_MODE=master \
-   -v $HOST_VOL_PREFIX/data:$VOL_PREFIX/data \
-   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf
-
-  run mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "SELECT * FROM users"
-  [[ "$output" =~ "Marko" ]]
-  [ $status = 0 ]
-
+  # insert new row into the master database
   mysql_client master -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "INSERT INTO users(name) VALUES ('Polo')"
 
-  create_container -d --name $CONTAINER_NAME-slave \
-   --link $CONTAINER_NAME-master:master \
-   -e MARIADB_MASTER_HOST=master \
-   -e MARIADB_MASTER_USER=$MARIADB_USER \
-   -e MARIADB_MASTER_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_USER=$MARIADB_USER \
-   -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
-   -e MARIADB_DATABASE=$MARIADB_DATABASE \
-   -e MARIADB_REPLICATION_MODE=slave \
-   -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
-   -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD
-
-  run mysql_client slave -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "SELECT * FROM users"
-  [[ "$output" =~ "Marko" ]]
-  [[ "$output" =~ "Polo" ]]
-  [ $status = 0 ]
-
-  cleanup_running_containers $CONTAINER_NAME-master
-  cleanup_running_containers $CONTAINER_NAME-slave
-  cleanup_volumes_content
+  # verify that all previous and new data is replicated on slave0
+  run mysql_client slave0 -u$MARIADB_USER -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "SELECT * FROM users\G"
+  [[ "$output" =~ "name: Marko" ]]
+  [[ "$output" =~ "name: Polo" ]]
 }
