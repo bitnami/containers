@@ -52,6 +52,13 @@ container_stop() {
   fi
 }
 
+# Restart a running container (stops the container and then starts it)
+# $1: name of the container
+container_restart() {
+  container_stop $1
+  container_start $1
+}
+
 # Remove a running/stopped container
 # $1: name of the container
 container_remove() {
