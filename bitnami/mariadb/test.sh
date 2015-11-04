@@ -184,6 +184,16 @@ cleanup_environment
   [[ "$output" =~ "Database: $MARIADB_DATABASE" ]]
 }
 
+@test "Can't setup replication master without replication user" {
+  # create replication master without specifying MARIADB_REPLICATION_USER
+  run create_container master \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE \
+    -e MARIADB_REPLICATION_MODE=master
+  [[ "$output" =~ "you need to provide the MARIADB_REPLICATION_USER" ]]
+}
+
 @test "Can't setup replication slave without master user" {
   # create replication slave without specifying MARIADB_MASTER_USER
   run create_container slave0 \
