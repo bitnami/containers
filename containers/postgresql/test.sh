@@ -115,8 +115,7 @@ cleanup_environment
     -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD
 
   # restart container
-  container_stop standalone
-  container_start standalone
+  container_restart standalone
 
   # get container logs
   run container_logs standalone
