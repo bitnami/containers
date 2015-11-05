@@ -1,83 +1,86 @@
 #!/usr/bin/env bats
 
-CONTAINER_NAME=bitnami-apache-test
-IMAGE_NAME=bitnami/apache
+# source the helper script
+APP_NAME=apache
+VOL_PREFIX=/bitnami/$APP_NAME
+VOLUMES=/app:$VOL_PREFIX/conf:$VOL_PREFIX/logs
 SLEEP_TIME=2
-VOL_PREFIX=/bitnami/apache
+load tests/docker_helper
 
-cleanup_running_containers() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
-    docker rm -fv $CONTAINER_NAME
-  fi
+# Cleans up all running/stopped containers and host mounted volumes
+cleanup_environment() {
+  container_remove default
 }
 
-setup() {
-  cleanup_running_containers
-}
-
+# Teardown called at the end of each test
 teardown() {
-  cleanup_running_containers
+  cleanup_environment
 }
 
-create_container(){
-  docker run -d --name $CONTAINER_NAME \
-   --expose 81 $IMAGE_NAME
-  sleep $SLEEP_TIME
-}
-
-add_vhost() {
-  docker exec $CONTAINER_NAME sh -c "echo 'Listen 81
-<VirtualHost *:81>
-  ServerName default
-  Redirect 405 /
-</VirtualHost>' > $VOL_PREFIX/conf/vhosts/test.conf"
-}
-
+# cleanup the environment before starting the tests
+cleanup_environment
 
 @test "We can connect to the port 80 and 443" {
-  create_container
-  run docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i --noproxy apache http://apache:80
-  [[ "$output" =~  "200 OK" ]]
-  [ $status = 0 ]
+  container_create default -d
 
-  run docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i --noproxy apache -k https://apache:443
+  # http connection
+  run curl_client default -i http://$APP_NAME:80
   [[ "$output" =~  "200 OK" ]]
-  [ $status = 0 ]
+
+  # https connection
+  run curl_client default -i -k https://$APP_NAME:443
+  [[ "$output" =~  "200 OK" ]]
 }
 
 @test "Returns default page" {
-  create_container
-  run docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i --noproxy apache http://apache:80
-  [[ "$output" =~  "It works!" ]]
-  [ $status = 0 ]
+  container_create default -d
 
-  run docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i --noproxy apache -k https://apache:443
+  # http connection
+  run curl_client default -i http://$APP_NAME:80
   [[ "$output" =~  "It works!" ]]
-  [ $status = 0 ]
+
+  # https connections
+  run curl_client default -i -k https://$APP_NAME:443
+  [[ "$output" =~  "It works!" ]]
 }
 
 @test "Logs to stdout" {
-  create_container
-  docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i --noproxy apache http://apache:80
-  run docker logs $CONTAINER_NAME
+  container_create default -d
+
+  # make sample request
+  curl_client default -i http://$APP_NAME:80
+
+  # check if our request is logged in the container logs
+  run container_logs default
   [[ "$output" =~  "GET / HTTP/1.1" ]]
-  [ $status = 0 ]
 }
 
 @test "All the volumes exposed" {
-  create_container
-  run docker inspect $CONTAINER_NAME
+  container_create default -d
+
+  # inspect container to check if volumes are exposed
+  run container_inspect default --format {{.Mounts}}
   [[ "$output" =~ "$VOL_PREFIX/logs" ]]
   [[ "$output" =~ "$VOL_PREFIX/conf" ]]
 }
 
 @test "Vhosts directory is imported" {
-  create_container
-  add_vhost
-  docker restart $CONTAINER_NAME
-  sleep $SLEEP_TIME
-  docker run --link $CONTAINER_NAME:apache --rm bitnami/apache curl -L -i --noproxy apache http://apache:81 | {
-    run grep "405 Method Not Allowed"
-    [ $status = 0 ]
-  }
+  # create container and exposing TCP port 81
+  container_create default -d --expose 81
+
+  # create a vhost config for accepting connections on TCP port 81
+  container_exec default sh -c "cat > $VOL_PREFIX/conf/vhosts/test.conf <<EOF
+Listen 81
+<VirtualHost *:81>
+  ServerName default
+  Redirect 405 /
+</VirtualHost>
+EOF"
+
+  # restart the container for the vhost config to take effect
+  container_restart default
+
+  # check http connections on port 81
+  run curl_client default -i http://$APP_NAME:81
+  [[ "$output" =~  "405 Method Not Allowed" ]]
 }
