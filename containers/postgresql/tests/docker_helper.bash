@@ -102,7 +102,7 @@ container_inspect() {
 # $1: name of the container
 container_exec() {
   if [ "$(docker ps | grep $CONTAINER_NAME-$1)" ]; then
-    docker exec $CONTAINER_NAME-$1 ${@:2}
+    docker exec $CONTAINER_NAME-$1 "${@:2}"
   else
     return 1
   fi
