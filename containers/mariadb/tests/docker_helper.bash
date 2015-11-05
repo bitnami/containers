@@ -16,7 +16,7 @@
 # Creates a container whose name has the prefix $CONTAINER_NAME
 # $1: name for the new container
 # ${@:2}: additional arguments for docker run while starting the container
-create_container() {
+container_create() {
   docker run --name $CONTAINER_NAME-$1 "${@:2}" $IMAGE_NAME
   sleep $SLEEP_TIME
 }
@@ -24,8 +24,8 @@ create_container() {
 # Creates a container with host volumes mounted at $VOL_PREFIX
 # $1: name for the new container
 # ${@:2}: additional arguments for docker run while starting the container
-create_container_with_host_volumes() {
-  create_container $1 "${@:2}" \
+container_create_with_host_volumes() {
+  container_create $1 "${@:2}" \
     -v $HOST_VOL_PREFIX/$1/data:$VOL_PREFIX/data \
     -v $HOST_VOL_PREFIX/$1/conf:$VOL_PREFIX/conf \
     -v $HOST_VOL_PREFIX/$1/logs:$VOL_PREFIX/logs
@@ -107,6 +107,17 @@ container_exec() {
     return 1
   fi
 }
+
+# Execute a command in a running container using docker exec (detached)
+# $1: name of the container
+container_exec_detached() {
+  if [ "$(docker ps | grep $CONTAINER_NAME-$1)" ]; then
+    docker exec -d $CONTAINER_NAME-$1 "${@:2}"
+  else
+    return 1
+  fi
+}
+
 
 # Generates docker link parameter for linking to a container
 # $1: name of the container to link
