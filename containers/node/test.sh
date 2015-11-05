@@ -1,15 +1,60 @@
 #!/usr/bin/env bats
-CONTAINER_NAME=bitnami-node-test
-IMAGE_NAME=bitnami/node
 
-cleanup_running_containers() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
-    docker rm -fv $CONTAINER_NAME
-  fi
+# source the helper script
+APP_NAME=node
+VOLUMES=/app
+SLEEP_TIME=3
+load tests/docker_helper
+
+# Cleans up all running/stopped containers
+cleanup_environment() {
+  container_remove default
 }
 
-add_app() {
-  docker exec $CONTAINER_NAME sh -c "echo \"
+# Teardown called at the end of each test
+teardown() {
+  cleanup_environment
+}
+
+# cleanup the environment before starting the tests
+cleanup_environment
+
+@test "node and npm installed" {
+  container_create default -id
+
+  run container_exec default npm -v
+  [ "$status" = 0 ]
+
+  run container_exec default node -v
+  [ "$status" = 0 ]
+}
+
+@test "python installed" {
+  container_create default -id
+
+  run container_exec default python -v
+  [ "$status" = 0 ]
+}
+
+@test "can install npm modules with system requirements" {
+  container_create default -id
+
+  run container_exec default npm install pg-native bower
+  [ "$status" = 0 ]
+}
+
+@test "can install global npm modules" {
+  container_create default -id
+
+  run container_exec default npm install -g node-static
+  [ "$status" = 0 ]
+}
+
+@test "port 3000 exposed" {
+  container_create default -id
+
+  # create sample express app
+  container_exec default sh -c "cat > /app/server.js <<EOF
 var express = require('express');
 var app = express();
 
@@ -23,50 +68,16 @@ var server = app.listen(3000, '0.0.0.0', function () {
 
   console.log('Example app listening at http://%s:%s', host, port);
 });
-\" > /app/server.js"
-}
+EOF"
 
-create_container() {
-  docker run -id --name $CONTAINER_NAME $IMAGE_NAME
-}
+  # install express
+  container_exec default npm install express
 
-setup () {
-  cleanup_running_containers
-  create_container
-}
+  # start server
+  container_exec_detached default node server.js
+  sleep 5
 
-teardown() {
-  cleanup_running_containers
-}
-
-@test "node and npm installed" {
-  run docker exec $CONTAINER_NAME npm -v
-  [ "$status" = 0 ]
-  run docker exec $CONTAINER_NAME node -v
-  [ "$status" = 0 ]
-}
-
-@test "python installed" {
-  run docker exec $CONTAINER_NAME python -v
-  [ "$status" = 0 ]
-}
-
-@test "can install npm modules with system requirements" {
-  run docker exec $CONTAINER_NAME\
-  npm install pg-native bower
-  [ "$status" = 0 ]
-}
-
-@test "can install global npm modules" {
-  run docker exec $CONTAINER_NAME\
-  npm install -g node-static
-  [ "$status" = 0 ]
-}
-
-@test "port 3000 exposed" {
-  add_app
-  docker exec -d $CONTAINER_NAME sh -c 'npm install express && node server.js'
-  sleep 20
-  run docker run --rm --link $CONTAINER_NAME:node bitnami/node curl --noproxy node http://node:3000/
+  # test connection on port 3000
+  run curl_client default http://node:3000/
   [[ "$output" =~ "The night is dark and full of terrors" ]]
 }
