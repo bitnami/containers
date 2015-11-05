@@ -1,14 +1,46 @@
 #!/usr/bin/env bats
-CONTAINER_NAME=bitnami-ruby-test
-IMAGE_NAME=bitnami/ruby
-VOL_PREFIX=/bitnami/$CONTAINER_NAME
 
-create_container(){
-  docker run -itd --name $CONTAINER_NAME $IMAGE_NAME
+# source the helper script
+APP_NAME=ruby
+VOLUMES=/app
+SLEEP_TIME=0
+load tests/docker_helper
+
+# Cleans up all running/stopped containers
+cleanup_environment() {
+  container_remove default
 }
 
-add_app() {
-  docker exec $CONTAINER_NAME sh -c "echo \"
+# Teardown called at the end of each test
+teardown() {
+  cleanup_environment
+}
+
+# cleanup the environment before starting the tests
+cleanup_environment
+
+@test "ruby, gem and bundler installed" {
+  container_create default -id
+
+  run container_exec default ruby -v
+  [ "$status" = 0 ]
+  run container_exec default gem -v
+  [ "$status" = 0 ]
+  run container_exec default bundle -v
+  [ "$status" = 0 ]
+}
+
+@test "can install gem modules with system requirements" {
+  container_create default -id
+  run container_exec default gem install nokogiri --no-ri --no-rdoc
+  [ "$status" = 0 ]
+}
+
+@test "port 3000 exposed" {
+  container_create default -id
+
+  # create sample sinatra application
+  container_exec default sh -c "cat > /app/server.rb <<EOF
 require 'sinatra'
 
 set :bind, '0.0.0.0'
@@ -16,37 +48,17 @@ set :port, 3000
 
 get '/hi' do
   'A Lanister always pays his debts'
-end\" > /app/server.rb"
-}
+end
+EOF"
 
-setup () {
-  create_container
-}
+  # install application dependencies
+  container_exec default gem install sinatra --no-ri --no-rdoc
 
-teardown() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
-    docker rm -fv $CONTAINER_NAME
-  fi
-}
+  # start application and wait 5 secs for app to boot up
+  container_exec_detached default ruby server.rb
+  sleep 5
 
-@test "ruby, gem and bundler installed" {
-  run docker exec $CONTAINER_NAME ruby -v
-  [ "$status" = 0 ]
-  run docker exec $CONTAINER_NAME gem -v
-  [ "$status" = 0 ]
-  run docker exec $CONTAINER_NAME bundle -v
-  [ "$status" = 0 ]
-}
-
-@test "can install gem modules with system requirements" {
-  run docker exec $CONTAINER_NAME gem install nokogiri --no-ri --no-rdoc
-  [ "$status" = 0 ]
-}
-
-@test "port 3000 exposed" {
-  add_app
-  docker exec -d $CONTAINER_NAME sh -c 'gem install sinatra --no-ri --no-rdoc && ruby server.rb'
-  sleep 10
-  run docker run --rm --link $CONTAINER_NAME:ruby bitnami/ruby curl http://ruby:3000/hi
+  # test application using curl
+  run curl_client default http://ruby:3000/hi
   [[ "$output" =~ "A Lanister always pays his debts" ]]
 }
