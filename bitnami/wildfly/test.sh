@@ -6,6 +6,7 @@ WILDFLY_PASSWORD=test_password
 
 # source the helper script
 APP_NAME=wildfly
+SLEEP_TIME=5
 VOL_PREFIX=/bitnami/$APP_NAME
 VOLUMES=/app:$VOL_PREFIX/conf:$VOL_PREFIX/logs
 load tests/docker_helper
@@ -31,7 +32,7 @@ teardown() {
 # cleanup the environment before starting the tests
 cleanup_environment
 
-@test "Ports 8080 and 9990 exposed and accepting external connections (standalone)" {
+@test "Ports 8080 and 9990 exposed and accepting external connections" {
   container_create standalone -d
 
   run curl_client standalone -i http://$APP_NAME:8080
@@ -39,9 +40,7 @@ cleanup_environment
 
   run curl_client standalone -i http://$APP_NAME:9990
   [[ "$output" =~ '200 OK' ]]
-}
 
-@test "Ports 8080 and 9990 exposed and accepting external connections (domain)" {
   container_create domain -d \
     -e BITNAMI_APP_DAEMON=domain.sh
 
@@ -52,13 +51,11 @@ cleanup_environment
   [[ "$output" =~ '200 OK' ]]
 }
 
-@test "Manager has access to management area (standalone)" {
+@test "Manager has access to management area" {
   container_create standalone -d
   run curl_client standalone -i --digest http://$WILDFLY_USER:$WILDFLY_DEFAULT_PASSWORD@$APP_NAME:9990/management
   [[ "$output" =~ '200 OK' ]]
-}
 
-@test "Manager has access to management area (domain)" {
   container_create domain -d \
     -e BITNAMI_APP_DAEMON=domain.sh
 
@@ -66,15 +63,13 @@ cleanup_environment
   [[ "$output" =~ '200 OK' ]]
 }
 
-@test "User manager created with custom password (standalone)" {
+@test "User manager created with custom password" {
   container_create standalone -d \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
 
   run curl_client standalone -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@$APP_NAME:9990/management
   [[ "$output" =~ '200 OK' ]]
-}
 
-@test "User manager created with custom password (domain)" {
   container_create domain -d \
     -e BITNAMI_APP_DAEMON=domain.sh \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
@@ -83,14 +78,12 @@ cleanup_environment
   [[ "$output" =~ '200 OK' ]]
 }
 
-@test "Can't access management area without password (standalone)" {
+@test "Can't access management area without password" {
   container_create standalone -d \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
   run curl_client standalone -i --digest http://$WILDFLY_USER@$APP_NAME:9990/management
   [[ "$output" =~ '401 Unauthorized' ]]
-}
 
-@test "Can't access management area without password (domain)" {
   container_create domain -d \
     -e BITNAMI_APP_DAEMON=domain.sh \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
@@ -98,14 +91,12 @@ cleanup_environment
   [[ "$output" =~ '401 Unauthorized' ]]
 }
 
-@test "jboss-cli.sh can connect to Wildfly server (standalone)" {
+@test "jboss-cli.sh can connect to Wildfly server" {
   container_create standalone -d \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
   run jboss_client standalone --connect --user=$WILDFLY_USER --password=$WILDFLY_PASSWORD --command=version
   [ $status = 0 ]
-}
 
-@test "jboss-cli.sh can connect to Wildfly server (domain)" {
   container_create domain -d \
     -e BITNAMI_APP_DAEMON=domain.sh \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
@@ -113,24 +104,20 @@ cleanup_environment
   [ $status = 0 ]
 }
 
-@test "jboss-cli.sh can't access Wildfly server without password (standalone)" {
+@test "jboss-cli.sh can't access Wildfly server without password" {
   container_create standalone -d \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
   run jboss_client standalone --connect --user=$WILDFLY_USER --command=version
   [[ "$output" =~ "Unable to authenticate against controller" ]]
-  [ $status = 1 ]
-}
 
-@test "jboss-cli.sh can't access Wildfly server without password (domain)" {
   container_create domain -d \
     -e BITNAMI_APP_DAEMON=domain.sh \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
   run jboss_client domain --connect --user=$WILDFLY_USER --command=version
   [[ "$output" =~ "Unable to authenticate against controller" ]]
-  [ $status = 1 ]
 }
 
-@test "Password is preserved after restart (standalone)" {
+@test "Password is preserved after restart" {
   container_create standalone -d \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
 
@@ -143,9 +130,7 @@ cleanup_environment
 
   run curl_client standalone -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@$APP_NAME:9990/management
   [[ "$output" =~ '200 OK' ]]
-}
 
-@test "Password is preserved after restart (domain)" {
   container_create domain -d \
     -e BITNAMI_APP_DAEMON=domain.sh \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD

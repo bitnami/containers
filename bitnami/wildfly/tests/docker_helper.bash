@@ -6,7 +6,7 @@
 # The following variables should be defined in you BATS script for this helper
 # script to work correctly.
 #
-# APP_NAME                                    - app name, used as link alias in container_link_and_run_command
+# APP_NAME                                    - app name, also used as the link alias in container_link_and_run_command
 # CONTAINER_NAME                              - prefix for the name of containers that will be created (default: bitnami-$APP_NAME-test)
 # IMAGE_NAME                                  - the docker image name (default: bitnami/$APP_NAME)
 # SLEEP_TIME                                  - time in seconds to wait for containers to start (default: 5)
@@ -125,7 +125,8 @@ container_logs() {
 # $1: name of the container
 container_inspect() {
   if docker ps -a | grep -q $CONTAINER_NAME-$1; then
-    docker inspect "${@:2}" $CONTAINER_NAME-$1
+    # docker inspect "${@:2}" $CONTAINER_NAME-$1 # requires docker >= 1.9.0
+    docker inspect $CONTAINER_NAME-$1
   else
     return 1
   fi
