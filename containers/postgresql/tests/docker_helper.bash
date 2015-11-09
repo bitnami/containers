@@ -55,15 +55,19 @@ container_stop() {
 # Restart a running container (stops the container and then starts it)
 # $1: name of the container
 container_restart() {
-  container_stop $1
-  container_start $1
+  if docker ps | grep -q $CONTAINER_NAME-$1; then
+    docker stop $CONTAINER_NAME-$1
+    docker start $CONTAINER_NAME-$1
+    sleep $SLEEP_TIME
+  fi
 }
 
 # Remove a running/stopped container
 # $1: name of the container
 container_remove() {
   if docker ps -a | grep -q $CONTAINER_NAME-$1; then
-    docker rm -fv $CONTAINER_NAME-$1
+    docker stop $CONTAINER_NAME-$1
+    docker rm -v $CONTAINER_NAME-$1
   fi
 }
 
