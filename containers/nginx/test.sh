@@ -1,89 +1,80 @@
 #!/usr/bin/env bats
 
-CONTAINER_NAME=bitnami-nginx-test
-IMAGE_NAME=bitnami/nginx
+# source the helper script
+APP_NAME=nginx
+VOL_PREFIX=/bitnami/$APP_NAME
+VOLUMES=/app:$VOL_PREFIX/conf:$VOL_PREFIX/logs
 SLEEP_TIME=2
-VOL_PREFIX=/bitnami/nginx
-HOST_VOL_PREFIX=/tmp/bitnami/$CONTAINER_NAME
+load tests/docker_helper
 
-# Check config override from host
-cleanup_running_containers() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
-    docker rm -fv $CONTAINER_NAME
-  fi
+# Cleans up all running/stopped containers and host mounted volumes
+cleanup_environment() {
+  container_remove default
 }
 
-setup() {
-  mkdir -p $HOST_VOL_PREFIX
-  cleanup_running_containers
-}
-
+# Teardown called at the end of each test
 teardown() {
-  cleanup_running_containers
+  cleanup_environment
 }
 
-create_container(){
-  docker run -d --name $CONTAINER_NAME \
-   --expose 81 $IMAGE_NAME
-  sleep $SLEEP_TIME
-}
-
-add_vhost() {
-  docker exec $CONTAINER_NAME sh -c "echo 'server { listen 0.0.0.0:81; location / { return 405; } }' > $VOL_PREFIX/conf/vhosts/test.conf"
-}
-
+# cleanup the environment of any leftover containers and volumes before starting the tests
+cleanup_environment
 
 @test "We can connect to the port 80 and 443" {
-  create_container
-  docker run --link $CONTAINER_NAME:nginx --rm bitnami/nginx curl -L -i --noproxy nginx http://nginx:80 | {
-    run grep "200 OK"
-    [ $status = 0 ]
-  }
+  container_create default -d
 
-  docker run --link $CONTAINER_NAME:nginx --rm bitnami/nginx curl -L -i --noproxy nginx -k https://nginx:443 | {
-    run grep "200 OK"
-    [ $status = 0 ]
-  }
+  # http connection
+  run curl_client default -i http://$APP_NAME:80
+  [[ "$output" =~ "200 OK" ]]
+
+  # https connection
+  run curl_client default -i -k https://$APP_NAME:443
+  [[ "$output" =~ "200 OK" ]]
 }
 
 @test "Returns default page" {
-  create_container
-  docker run --link $CONTAINER_NAME:nginx --rm bitnami/nginx curl -L -i --noproxy nginx http://nginx:80 | {
-    run grep "It works!"
-    [ $status = 0 ]
-  }
+  container_create default -d
 
-  docker run --link $CONTAINER_NAME:nginx --rm bitnami/nginx curl -L -i --noproxy nginx -k https://nginx:443 | {
-    run grep "It works!"
-    [ $status = 0 ]
-  }
+  # http connection
+  run curl_client default -i http://$APP_NAME:80
+  [[ "$output" =~ "It works!" ]]
+
+  # https connection
+  run curl_client default -i -k https://$APP_NAME:443
+  [[ "$output" =~ "It works!" ]]
 }
 
 @test "Logs to stdout" {
-  create_container
-  docker run --link $CONTAINER_NAME:nginx --rm bitnami/nginx curl -L -i --noproxy nginx http://nginx:80
-  docker logs $CONTAINER_NAME | {
-    run grep "GET / HTTP/1.1"
-    [ $status = 0 ]
-  }
+  container_create default -d
+
+  # make sample request
+  curl_client default -i http://$APP_NAME:80
+
+  # check if our request is logged in the container logs
+  run container_logs default
+  [[ "$output" =~ "GET / HTTP/1.1" ]]
 }
 
 @test "All the volumes exposed" {
-  create_container
-  docker inspect $CONTAINER_NAME | {
-    run grep "\"Volumes\":" -A 3
-    [[ "$output" =~ "$VOL_PREFIX/logs" ]]
-    [[ "$output" =~ "$VOL_PREFIX/conf" ]]
-  }
+  container_create default -d
+
+  # inspect container to check if volumes are exposed
+  run container_inspect default --format {{.Mounts}}
+  [[ "$output" =~ "$VOL_PREFIX/conf" ]]
+  [[ "$output" =~ "$VOL_PREFIX/logs" ]]
 }
 
 @test "Vhosts directory is imported" {
-  create_container
-  add_vhost
-  docker restart $CONTAINER_NAME
-  sleep $SLEEP_TIME
-  docker run --link $CONTAINER_NAME:nginx --rm bitnami/nginx curl -L -i --noproxy nginx http://nginx:81 | {
-    run grep "405 Not Allowed"
-    [ $status = 0 ]
-  }
+  # create container and exposing TCP port 81
+  container_create default -d --expose 81
+
+  # create a vhost config for accepting connections on TCP port 81
+  container_exec default sh -c "echo 'server { listen 0.0.0.0:81; location / { return 405; } }' > $VOL_PREFIX/conf/vhosts/test.conf"
+
+  # restart the container for the vhost config to take effect
+  container_restart default
+
+  # check http connections on port 81
+  run curl_client default -i http://$APP_NAME:81
+  [[ "$output" =~ "405 Not Allowed" ]]
 }
