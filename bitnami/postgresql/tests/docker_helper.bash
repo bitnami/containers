@@ -13,6 +13,7 @@
 # VOL_PREFIX                                  - prefix of volumes inside the container (default: /bitnami/$APP_NAME)
 # VOLUMES                                     - colon separated list of container volumes (default: $VOL_PREFIX/data:$VOL_PREFIX/conf:$VOL_PREFIX/logs)
 # HOST_VOL_PREFIX                             - prefix of volumes mounted from the host (default: /tmp/bitnami/$CONTAINER_NAME)
+# container_link_and_run_command_DOCKER_ARGS  - optional arguments passed to docker run in container_link_and_run_command (default: none)
 ##
 
 CONTAINER_NAME=bitnami-$APP_NAME-test
@@ -164,5 +165,5 @@ container_link() {
 # ${@:2}: command to execute
 container_link_and_run_command() {
   # launch command as the entrypoint to skip the s6 init sequence (speeds up the tests)
-  docker run --rm $(container_link $1 $APP_NAME) --entrypoint ${2} $IMAGE_NAME "${@:3}"
+  docker run --rm $(container_link $1 $APP_NAME) $container_link_and_run_command_DOCKER_ARGS --entrypoint ${2} $IMAGE_NAME "${@:3}"
 }

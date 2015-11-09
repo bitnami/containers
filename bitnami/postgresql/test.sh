@@ -9,6 +9,7 @@ POSTGRESQL_REPLICATION_PASSWORD=repl_password
 
 # source the helper script
 APP_NAME=postgresql
+container_link_and_run_command_DOCKER_ARGS="-e PGPASSWORD=$POSTGRESQL_PASSWORD"
 load tests/docker_helper
 
 # Link to container and execute command
