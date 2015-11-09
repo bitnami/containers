@@ -12,21 +12,11 @@ APP_NAME=postgresql
 container_link_and_run_command_DOCKER_ARGS="-e PGPASSWORD=$POSTGRESQL_PASSWORD"
 load tests/docker_helper
 
-# Link to container and execute command
-# $1: name of the container to link to
-# ${@:2}: command to execute
-psql_command() {
-  # launch command as the entrypoint to skip the s6 init sequence (speeds up the tests)
-  docker run --rm $(container_link $1 $CONTAINER_NAME) --entrypoint ${2} \
-    -e PGPASSWORD=$POSTGRESQL_PASSWORD $IMAGE_NAME \
-      "${@:3}"
-}
-
 # Link to container and execute psql client
 # $1 : name of the container to link to
 # ${@:2} : arguments for the psql command
 psql_client() {
-  psql_command $1 psql -h $CONTAINER_NAME -p 5432 "${@:2}"
+  container_link_and_run_command $1 psql -h $APP_NAME -p 5432 "${@:2}"
 }
 
 # Cleans up all running/stopped containers and host mounted volumes
@@ -50,7 +40,7 @@ cleanup_environment
     -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD
 
   # check if postgresql server is accepting connections
-  run psql_command standalone pg_isready -h $CONTAINER_NAME -p 5432 -t 5
+  run container_link_and_run_command standalone pg_isready -h $APP_NAME -p 5432 -t 5
   [[ "$output" =~ "accepting connections" ]]
 }
 
