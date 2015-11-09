@@ -167,3 +167,10 @@ container_link_and_run_command() {
   # launch command as the entrypoint to skip the s6 init sequence (speeds up the tests)
   docker run --rm $(container_link $1 $APP_NAME) $container_link_and_run_command_DOCKER_ARGS --entrypoint ${2} $IMAGE_NAME "${@:3}"
 }
+
+# Link to container and execute curl
+# $1: name of the container to link to
+# ${@:2}: arguments to curl
+curl_client() {
+  container_link_and_run_command $1 curl --noproxy $APP_NAME --retry 5 -L "${@:2}"
+}
