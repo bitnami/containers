@@ -1,11 +1,5 @@
 #!/usr/bin/env bats
 
-CONTAINER_NAME=bitnami-postgresql-test
-IMAGE_NAME=${IMAGE_NAME:-bitnami/postgresql}
-SLEEP_TIME=5
-VOL_PREFIX=/bitnami/postgresql
-HOST_VOL_PREFIX=${HOST_VOL_PREFIX:-/tmp/bitnami/$CONTAINER_NAME}
-
 POSTGRESQL_DATABASE=test_database
 POSTGRESQL_ROOT_USER=postgres
 POSTGRESQL_USER=test_user
@@ -14,23 +8,15 @@ POSTGRESQL_REPLICATION_USER=repl_user
 POSTGRESQL_REPLICATION_PASSWORD=repl_password
 
 # source the helper script
+APP_NAME=postgresql
+container_link_and_run_command_DOCKER_ARGS="-e PGPASSWORD=$POSTGRESQL_PASSWORD"
 load tests/docker_helper
-
-# Link to container and execute command
-# $1: name of the container to link to
-# ${@:2}: command to execute
-psql_command() {
-  # launch command as the entrypoint to skip the s6 init sequence (speeds up the tests)
-  docker run --rm $(container_link $1 $CONTAINER_NAME) --entrypoint ${2} \
-    -e PGPASSWORD=$POSTGRESQL_PASSWORD $IMAGE_NAME \
-      "${@:3}"
-}
 
 # Link to container and execute psql client
 # $1 : name of the container to link to
 # ${@:2} : arguments for the psql command
 psql_client() {
-  psql_command $1 psql -h $CONTAINER_NAME -p 5432 "${@:2}"
+  container_link_and_run_command $1 psql -h $APP_NAME -p 5432 "${@:2}"
 }
 
 # Cleans up all running/stopped containers and host mounted volumes
@@ -54,7 +40,7 @@ cleanup_environment
     -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD
 
   # check if postgresql server is accepting connections
-  run psql_command standalone pg_isready -h $CONTAINER_NAME -p 5432 -t 5
+  run container_link_and_run_command standalone pg_isready -h $APP_NAME -p 5432 -t 5
   [[ "$output" =~ "accepting connections" ]]
 }
 
@@ -130,7 +116,7 @@ cleanup_environment
   container_create standalone -d
 
   # get container introspection details and check if volumes are exposed
-  run container_inspect standalone
+  run container_inspect standalone --format {{.Mounts}}
   [[ "$output" =~ "$VOL_PREFIX/data" ]]
   [[ "$output" =~ "$VOL_PREFIX/conf" ]]
   [[ "$output" =~ "$VOL_PREFIX/logs" ]]
@@ -142,18 +128,18 @@ cleanup_environment
     -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE \
     -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD
 
-  # list files from data, conf and logs volumes
-  run container_exec standalone ls -l $VOL_PREFIX/conf/ $VOL_PREFIX/logs/ $VOL_PREFIX/data/
-
   # files expected in conf volume (subset)
+  run container_exec standalone ls -la $VOL_PREFIX/conf/
   [[ "$output" =~ "postgresql.conf" ]]
   [[ "$output" =~ "pg_hba.conf" ]]
 
   # files expected in data volume (subset)
+  run container_exec standalone ls -la $VOL_PREFIX/data/
   [[ "$output" =~ "PG_VERSION" ]]
   [[ "$output" =~ "base" ]]
 
   # files expected in logs volume
+  run container_exec standalone ls -la $VOL_PREFIX/logs/
   [[ "$output" =~ "postgresql.log" ]]
 }
 
