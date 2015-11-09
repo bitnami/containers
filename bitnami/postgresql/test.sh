@@ -128,18 +128,18 @@ cleanup_environment
     -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE \
     -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD
 
-  # list files from data, conf and logs volumes
-  run container_exec standalone ls -l $VOL_PREFIX/conf/ $VOL_PREFIX/logs/ $VOL_PREFIX/data/
-
   # files expected in conf volume (subset)
+  run container_exec standalone ls -la $VOL_PREFIX/conf/
   [[ "$output" =~ "postgresql.conf" ]]
   [[ "$output" =~ "pg_hba.conf" ]]
 
   # files expected in data volume (subset)
+  run container_exec standalone ls -la $VOL_PREFIX/data/
   [[ "$output" =~ "PG_VERSION" ]]
   [[ "$output" =~ "base" ]]
 
   # files expected in logs volume
+  run container_exec standalone ls -la $VOL_PREFIX/logs/
   [[ "$output" =~ "postgresql.log" ]]
 }
 
