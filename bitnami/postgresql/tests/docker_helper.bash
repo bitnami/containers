@@ -96,7 +96,7 @@ container_logs() {
 # $1: name of the container
 container_inspect() {
   if docker ps -a | grep -q $CONTAINER_NAME-$1; then
-    docker inspect $CONTAINER_NAME-$1
+    docker inspect "${@:2}" $CONTAINER_NAME-$1
   else
     return 1
   fi
