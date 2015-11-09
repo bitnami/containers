@@ -1,9 +1,4 @@
 #!/usr/bin/env bats
-CONTAINER_NAME=bitnami-mariadb-test
-IMAGE_NAME=${IMAGE_NAME:-bitnami/mariadb}
-SLEEP_TIME=5
-VOL_PREFIX=/bitnami/mariadb
-HOST_VOL_PREFIX=${HOST_VOL_PREFIX:-/tmp/bitnami/$CONTAINER_NAME}
 
 MARIADB_DATABASE=test_database
 MARIADB_USER=test_user
@@ -12,22 +7,15 @@ MARIADB_REPLICATION_USER=repl_user
 MARIADB_REPLICATION_PASSWORD=repl_password
 
 # source the helper script
+APP_NAME=mariadb
+SLEEP_TIME=5
 load tests/docker_helper
-
-# Link to container and execute command
-# $1: name of the container to link to
-# ${@:2}: command to execute
-mysql_command() {
-  # launch command as the entrypoint to skip the s6 init sequence (speeds up the tests)
-  docker run --rm $(container_link $1 $CONTAINER_NAME) --entrypoint $2 \
-    $IMAGE_NAME "${@:3}"
-}
 
 # Link to container and execute mysql client
 # $1 : name of the container to link to
-# ${@:2} : arguments for the psql command
+# ${@:2} : arguments for the mysql command
 mysql_client() {
-  mysql_command $1 mysql --no-defaults -h $CONTAINER_NAME -P 3306 "${@:2}"
+  container_link_and_run_command $1 mysql --no-defaults -h $APP_NAME -P 3306 "${@:2}"
 }
 
 cleanup_environment() {
@@ -46,8 +34,8 @@ cleanup_environment
 @test "Port 3306 exposed and accepting external connections" {
   container_create standalone -d
 
-  # check if mysqld is accepting connections
-  run mysql_command standalone mysqladmin --no-defaults -h $CONTAINER_NAME -P 3306 ping
+  # ping mysqld server
+  run container_link_and_run_command standalone mysqladmin --no-defaults -h $APP_NAME -P 3306 ping
   [[ "$output" =~ "mysqld is alive" ]]
 }
 
@@ -141,7 +129,7 @@ cleanup_environment
   container_create standalone -d
 
   # get container introspection details and check if volumes are exposed
-  run container_inspect standalone
+  run container_inspect standalone --format {{.Mounts}}
   [[ "$output" =~ "$VOL_PREFIX/data" ]]
   [[ "$output" =~ "$VOL_PREFIX/conf" ]]
   [[ "$output" =~ "$VOL_PREFIX/logs" ]]
@@ -153,17 +141,17 @@ cleanup_environment
     -e MARIADB_DATABASE=$MARIADB_DATABASE \
     -e MARIADB_PASSWORD=$MARIADB_PASSWORD
 
-  # list files from data, conf and logs volumes
-  run container_exec standalone ls -l $VOL_PREFIX/conf/ $VOL_PREFIX/logs/ $VOL_PREFIX/data/
-
   # files expected in conf volume
+  run container_exec standalone ls -la $VOL_PREFIX/conf/
   [[ "$output" =~ "my.cnf" ]]
 
   # files expected in data volume (subset)
+  run container_exec standalone ls -la $VOL_PREFIX/data/
   [[ "$output" =~ "mysql" ]]
   [[ "$output" =~ "ibdata1" ]]
 
   # files expected in logs volume
+  run container_exec standalone ls -la $VOL_PREFIX/logs/
   [[ "$output" =~ "mysqld.log" ]]
 }
 
