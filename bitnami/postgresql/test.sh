@@ -116,7 +116,7 @@ cleanup_environment
   container_create standalone -d
 
   # get container introspection details and check if volumes are exposed
-  run container_inspect standalone
+  run container_inspect standalone --format {{.Mounts}}
   [[ "$output" =~ "$VOL_PREFIX/data" ]]
   [[ "$output" =~ "$VOL_PREFIX/conf" ]]
   [[ "$output" =~ "$VOL_PREFIX/logs" ]]
