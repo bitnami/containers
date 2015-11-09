@@ -34,7 +34,7 @@ container_create_with_host_volumes() {
 # Start a stopped container
 # $1: name of the container
 container_start() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME-$1)" ]; then
+  if docker ps -a | grep -q $CONTAINER_NAME-$1; then
     docker start $CONTAINER_NAME-$1
     sleep $SLEEP_TIME
   else
@@ -45,7 +45,7 @@ container_start() {
 # Stop a running container
 # $1: name of the container
 container_stop() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME-$1)" ]; then
+  if docker ps | grep -q $CONTAINER_NAME-$1; then
     docker stop $CONTAINER_NAME-$1
   else
     return 1
@@ -62,7 +62,7 @@ container_restart() {
 # Remove a running/stopped container
 # $1: name of the container
 container_remove() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME-$1)" ]; then
+  if docker ps -a | grep -q $CONTAINER_NAME-$1; then
     docker rm -fv $CONTAINER_NAME-$1
   fi
 }
@@ -81,7 +81,7 @@ container_remove_full() {
 # Get the logs of a container
 # $1: name of the container
 container_logs() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME-$1)" ]; then
+  if docker ps -a | grep -q $CONTAINER_NAME-$1; then
     docker logs $CONTAINER_NAME-$1
   else
     return 1
@@ -91,7 +91,7 @@ container_logs() {
 # Docker inspect a container
 # $1: name of the container
 container_inspect() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME-$1)" ]; then
+  if docker ps -a | grep -q $CONTAINER_NAME-$1; then
     docker inspect $CONTAINER_NAME-$1
   else
     return 1
@@ -101,7 +101,7 @@ container_inspect() {
 # Execute a command in a running container using docker exec
 # $1: name of the container
 container_exec() {
-  if [ "$(docker ps | grep $CONTAINER_NAME-$1)" ]; then
+  if docker ps | grep -q $CONTAINER_NAME-$1; then
     docker exec $CONTAINER_NAME-$1 "${@:2}"
   else
     return 1
@@ -111,7 +111,7 @@ container_exec() {
 # Execute a command in a running container using docker exec (detached)
 # $1: name of the container
 container_exec_detached() {
-  if [ "$(docker ps | grep $CONTAINER_NAME-$1)" ]; then
+  if docker ps | grep -q $CONTAINER_NAME-$1; then
     docker exec -d $CONTAINER_NAME-$1 "${@:2}"
   else
     return 1
@@ -123,7 +123,7 @@ container_exec_detached() {
 # $1: name of the container to link
 # $2: alias for the link
 container_link() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME-$1)" ]; then
+  if docker ps -a | grep -q $CONTAINER_NAME-$1; then
     echo "--link $CONTAINER_NAME-$1:$2"
   fi
 }
