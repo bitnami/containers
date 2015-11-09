@@ -1,131 +1,116 @@
 #!/usr/bin/env bats
-CONTAINER_NAME=bitnami-tomcat-test
-IMAGE_NAME=${IMAGE_NAME:-bitnami/tomcat}
-SLEEP_TIME=5
+
 TOMCAT_USER=manager
 TOMCAT_PASSWORD=test_password
-VOL_PREFIX=/bitnami/tomcat
-HOST_VOL_PREFIX=${HOST_VOL_PREFIX:-/tmp/bitnami/$CONTAINER_NAME}
 
-cleanup_running_containers() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
-    docker rm -fv $CONTAINER_NAME
-  fi
+# source the helper script
+APP_NAME=tomcat
+SLEEP_TIME=5
+VOL_PREFIX=/bitnami/$APP_NAME
+VOLUMES=/app:$VOL_PREFIX/conf:$VOL_PREFIX/logs
+load tests/docker_helper
+
+# Cleans up all running/stopped containers and host mounted volumes
+cleanup_environment() {
+  container_remove_full default
 }
 
-setup() {
-  cleanup_running_containers
-  mkdir -p $HOST_VOL_PREFIX
-}
-
+# Teardown called at the end of each test
 teardown() {
-  cleanup_running_containers
+  cleanup_environment
 }
 
-cleanup_volumes_content() {
-  docker run --rm\
-    -v $HOST_VOL_PREFIX/app:/app\
-    -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
-    -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs\
-    $IMAGE_NAME rm -rf /app/ $VOL_PREFIX/logs/ $VOL_PREFIX/conf/
-}
-
-create_container() {
-  docker run --name $CONTAINER_NAME "$@" $IMAGE_NAME
-  sleep $SLEEP_TIME
-}
-
-create_full_container_mounted() {
-  docker run -d --name $CONTAINER_NAME\
-   -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD\
-   -v $HOST_VOL_PREFIX/app:/app\
-   -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf\
-   -v $HOST_VOL_PREFIX/logs:$VOL_PREFIX/logs\
-   $IMAGE_NAME
-  sleep $SLEEP_TIME
-}
-
-curl_client() {
-  docker run --link $CONTAINER_NAME:tomcat --rm $IMAGE_NAME curl --noproxy tomcat --retry 5 -L "$@"
-}
+# cleanup the environment before starting the tests
+cleanup_environment
 
 @test "Port 8080 exposed and accepting external connections" {
-  create_container -d
-  run curl_client -i http://tomcat:8080
+  container_create default -d
+  run curl_client default -i http://$APP_NAME:8080
   [[ "$output" =~ '200 OK' ]]
 }
 
 @test "Manager has access to management area" {
-  create_container -d
-  run curl_client -i http://$TOMCAT_USER@tomcat:8080/manager/html
+  container_create default -d
+  run curl_client default -i http://$TOMCAT_USER@$APP_NAME:8080/manager/html
   [[ "$output" =~ '200 OK' ]]
 }
 
 @test "User manager created with password" {
-  create_container -d -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
-  run curl_client -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@tomcat:8080/manager/html
+  container_create default -d \
+    -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
+
+  run curl_client default -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@$APP_NAME:8080/manager/html
   [[ "$output" =~ '200 OK' ]]
 }
 
 @test "Can't access management area without password" {
-  create_container -d -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
-  run curl_client -i http://$TOMCAT_USER@tomcat:8080/manager/html
+  container_create default -d \
+    -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
+
+  run curl_client default -i http://$TOMCAT_USER@$APP_NAME:8080/manager/html
   [[ "$output" =~ '401 Unauthorized' ]]
 }
 
 @test "Password is preserved after restart" {
-  create_container -d -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
+  container_create default -d \
+    -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
 
-  docker stop $CONTAINER_NAME
-  docker start $CONTAINER_NAME
-  sleep $SLEEP_TIME
+  container_restart default
 
-  run docker logs $CONTAINER_NAME
+  run container_logs default
   [[ "$output" =~ "The credentials were set on first boot." ]]
 
-  run curl_client -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@tomcat:8080/manager/html
+  run curl_client default -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@$APP_NAME:8080/manager/html
   [[ "$output" =~ '200 OK' ]]
 }
 
 @test "All the volumes exposed" {
-  create_container -d
-  run docker inspect $CONTAINER_NAME
+  container_create default -d
+
+  run container_inspect default --format {{.Mounts}}
   [[ "$output" =~ "$VOL_PREFIX/conf" ]]
   [[ "$output" =~ "$VOL_PREFIX/logs" ]]
 }
 
-@test "Data gets generated in conf if bind mounted in the host" {
-  create_full_container_mounted
-  run docker run -v $HOST_VOL_PREFIX:$HOST_VOL_PREFIX --rm $IMAGE_NAME ls -l $HOST_VOL_PREFIX/conf/server.xml
-  [ $status = 0 ]
-  cleanup_volumes_content
+@test "Data gets generated in conf and app if bind mounted in the host" {
+  container_create_with_host_volumes default -d \
+    -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
+
+  # files expected in conf volume (subset)
+  run container_exec default ls -la $VOL_PREFIX/conf/
+  [[ "$output" =~ "server.xml" ]]
+  [[ "$output" =~ "tomcat-users.xml" ]]
+
+  # files expected in app volume (subset)
+  run container_exec default ls -la /app/
+  [[ "$output" =~ "ROOT" ]]
+  [[ "$output" =~ "manager" ]]
+  [[ "$output" =~ "host-manager" ]]
 }
 
 @test "If host mounted, password and settings are preserved after deletion" {
-  cleanup_volumes_content
-  create_full_container_mounted
+  container_create_with_host_volumes default -d \
+    -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
 
-  docker rm -fv $CONTAINER_NAME
-  create_container -d -v $HOST_VOL_PREFIX/app:/app -v $HOST_VOL_PREFIX/conf:$VOL_PREFIX/conf
+  # remove container
+  container_remove default
 
-  run curl_client -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@tomcat:8080/manager/html
+  # recreate container without specifying any environment variables
+  container_create_with_host_volumes default -d
+
+  run curl_client default -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@$APP_NAME:8080/manager/html
   [[ "$output" =~ '200 OK' ]]
-  cleanup_volumes_content
 }
 
 @test "Deploy sample application" {
-  cleanup_volumes_content
-  create_full_container_mounted
+  container_create_with_host_volumes default -d \
+    -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
 
-  run docker run --rm \
-    --link $CONTAINER_NAME:tomcat \
-    -v $HOST_VOL_PREFIX/app:/app \
-    $IMAGE_NAME curl --noproxy tomcat --retry 5 http://tomcat:8080/docs/appdev/sample/sample.war -o /app/sample.war
-  [ $status = 0 ]
+  # download sample app into the app deployment directory, allow 10 secs for the autodeploy to happen
+  container_exec default curl --noproxy localhost --retry 5 http://localhost:8080/docs/appdev/sample/sample.war -o /app/sample.war
   sleep 10
 
-  run curl_client -i http://tomcat:8080/sample/hello.jsp
+  # test app deployment
+  run curl_client default -i http://$APP_NAME:8080/sample/hello.jsp
   [[ "$output" =~ '200 OK' ]]
-
-  cleanup_volumes_content
 }
