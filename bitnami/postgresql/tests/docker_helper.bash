@@ -11,6 +11,7 @@
 # IMAGE_NAME                                  - the docker image name (default: bitnami/$APP_NAME)
 # SLEEP_TIME                                  - time in seconds to wait for containers to start (default: 5)
 # VOL_PREFIX                                  - prefix of volumes inside the container (default: /bitnami/$APP_NAME)
+# VOLUMES                                     - colon separated list of container volumes (default: $VOL_PREFIX/data:$VOL_PREFIX/conf:$VOL_PREFIX/logs)
 # HOST_VOL_PREFIX                             - prefix of volumes mounted from the host (default: /tmp/bitnami/$CONTAINER_NAME)
 ##
 
@@ -18,6 +19,7 @@ CONTAINER_NAME=bitnami-$APP_NAME-test
 IMAGE_NAME=${IMAGE_NAME:-bitnami/$APP_NAME}
 SLEEP_TIME=${SLEEP_TIME:-5}
 VOL_PREFIX=${VOL_PREFIX:-/bitnami/$APP_NAME}
+VOLUMES=${VOLUMES:-$VOL_PREFIX/data:$VOL_PREFIX/conf:$VOL_PREFIX/logs}
 HOST_VOL_PREFIX=${HOST_VOL_PREFIX:-/tmp/bitnami/$CONTAINER_NAME}
 
 # Creates a container whose name has the prefix $CONTAINER_NAME
@@ -28,14 +30,22 @@ container_create() {
   sleep $SLEEP_TIME
 }
 
-# Creates a container with host volumes mounted at $VOL_PREFIX
+# Creates a container with host mounted volumes for volumes listed in VOLUMES
 # $1: name for the new container
 # ${@:2}: additional arguments for docker run while starting the container
 container_create_with_host_volumes() {
-  container_create $1 "${@:2}" \
-    -v $HOST_VOL_PREFIX/$1/data:$VOL_PREFIX/data \
-    -v $HOST_VOL_PREFIX/$1/conf:$VOL_PREFIX/conf \
-    -v $HOST_VOL_PREFIX/$1/logs:$VOL_PREFIX/logs
+  # populate volume mount arguments from VOLUMES variable
+  VOLUME_ARGS=
+  OLD_IFS=${IFS}
+  IFS=":"
+  for VOLUME in $VOLUMES
+  do
+    VOL_NAME=$(basename $VOLUME)
+    VOLUME_ARGS+="-v $HOST_VOL_PREFIX/$1/$VOL_NAME:$VOLUME "
+  done
+  IFS=${OLD_IFS}
+
+  container_create $1 "${@:2}" $VOLUME_ARGS
 }
 
 # Start a stopped container
@@ -82,11 +92,22 @@ container_remove() {
 # $1: name of the container
 container_remove_full() {
   container_remove $1
-  docker run --rm --entrypoint bash \
-    -v $HOST_VOL_PREFIX/$1/data:$VOL_PREFIX/data \
-    -v $HOST_VOL_PREFIX/$1/conf:$VOL_PREFIX/conf \
-    -v $HOST_VOL_PREFIX/$1/logs:$VOL_PREFIX/logs \
-      $IMAGE_NAME -c "rm -rf $VOL_PREFIX/data/ $VOL_PREFIX/logs/ $VOL_PREFIX/conf/"
+
+  # populate volume mount and rm arguments from VOLUMES variable
+  VOLUME_ARGS=
+  RM_ARGS=
+  OLD_IFS=${IFS}
+  IFS=":"
+  for VOLUME in $VOLUMES
+  do
+    VOL_NAME=$(basename $VOLUME)
+    VOLUME_ARGS+="-v $HOST_VOL_PREFIX/$1/$VOL_NAME:$VOLUME "
+    RM_ARGS+="$VOLUME/* $VOLUME/.[^.]* "
+  done
+  IFS=${OLD_IFS}
+
+  docker run --rm --entrypoint bash $VOLUME_ARGS \
+      $IMAGE_NAME -c "rm -rf $RM_ARGS"
 }
 
 # Get the logs of a container
