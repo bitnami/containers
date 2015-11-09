@@ -1,67 +1,66 @@
 #!/usr/bin/env bats
 
-CONTAINER_NAME=bitnami-memcached-test
-IMAGE_NAME=bitnami/memcached
-RUBY_CONTAINER_NAME=bitnami-ruby-test
-RUBY_IMAGE_NAME=bitnami/ruby
-SLEEP_TIME=3
-VOL_PREFIX=/bitnami/memcached
 MEMCACHED_PASSWORD=test_password123
 
-cleanup_running_containers() {
-  if [ "$(docker ps -a | grep $CONTAINER_NAME)" ]; then
-    docker rm -fv $CONTAINER_NAME
-  fi
-  if [ "$(docker ps -a | grep $RUBY_CONTAINER_NAME)" ]; then
+RUBY_CONTAINER_NAME=bitnami-ruby-test
+RUBY_IMAGE_NAME=bitnami/ruby
+
+# source the helper script
+APP_NAME=memcached
+SLEEP_TIME=5
+VOL_PREFIX=/bitnami/$APP_NAME
+VOLUMES=$VOL_PREFIX/logs
+load tests/docker_helper
+
+# Cleans up all running/stopped containers and host mounted volumes
+cleanup_environment() {
+  # remove ruby container
+  if docker ps -a | grep $RUBY_CONTAINER_NAME; then
     docker rm -fv $RUBY_CONTAINER_NAME
   fi
+  container_remove default
 }
 
-setup() {
-  cleanup_running_containers
-}
-
+# Teardown called at the end of each test
 teardown() {
-  cleanup_running_containers
+  cleanup_environment
 }
 
-create_container() {
-  if [ $1 ]; then
-    docker run -d --name $CONTAINER_NAME\
-     -e MEMCACHED_PASSWORD=$MEMCACHED_PASSWORD $IMAGE_NAME
-    sleep 15
-  else
-    docker run -d --name $CONTAINER_NAME $IMAGE_NAME
-    sleep $SLEEP_TIME
-  fi
-}
+# cleanup the environment of any leftover containers and volumes before starting the tests
+cleanup_environment
 
 create_ruby_container() {
-  docker run --name $RUBY_CONTAINER_NAME -id\
-   --link $CONTAINER_NAME:memcached $RUBY_IMAGE_NAME
+  docker run --name $RUBY_CONTAINER_NAME -id \
+    $(container_link default $APP_NAME) $RUBY_IMAGE_NAME
+  sleep $SLEEP_TIME
   docker exec $RUBY_CONTAINER_NAME sudo gem install dalli
 }
 
 @test "Auth if no password provided" {
-  create_container
+  container_create default -d
   create_ruby_container
-  run docker exec $RUBY_CONTAINER_NAME ruby -e "require 'dalli'; Dalli::Client.new('memcached:11211').set('test', 'bitnami')"
+  run docker exec $RUBY_CONTAINER_NAME \
+    ruby -e "require 'dalli'; Dalli::Client.new('$APP_NAME:11211').set('test', 'bitnami')"
   [[ "$status" = 0 ]]
 }
 
 @test "Auth if password provided" {
-  create_container with_password
+  container_create default -d \
+    -e MEMCACHED_PASSWORD=$MEMCACHED_PASSWORD
+
   create_ruby_container
-  run docker exec $RUBY_CONTAINER_NAME ruby -e "require 'dalli'; Dalli::Client.new('memcached:11211').set('test', 'bitnami')"
-  [[ "$status" = 1 ]]
-  run docker exec $RUBY_CONTAINER_NAME\
-    ruby -e "require 'dalli'; Dalli::Client.new('memcached:11211', {username: 'user', password: '$MEMCACHED_PASSWORD'}).set('test', 'bitnami')"
-  [[ "$status" = 0 ]]
+
+  run docker exec $RUBY_CONTAINER_NAME \
+    ruby -e "require 'dalli'; Dalli::Client.new('$APP_NAME:11211').set('test', 'bitnami')"
+  [[ "$output" =~ "Authentication required" ]]
+
+  run docker exec $RUBY_CONTAINER_NAME \
+    ruby -e "require 'dalli'; Dalli::Client.new('$APP_NAME:11211', {username: 'user', password: '$MEMCACHED_PASSWORD'}).set('test', 'bitnami')"
+  [[ "$output" =~ "Authenticated" ]]
 }
 
 @test "All the volumes exposed" {
-  create_container
-  run docker inspect $CONTAINER_NAME
+  container_create default -d
+  run container_inspect default --format {{.Mounts}}
   [[ "$output" =~ "$VOL_PREFIX/logs" ]]
 }
-
