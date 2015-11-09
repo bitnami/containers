@@ -6,7 +6,7 @@
 # The following variables should be defined in you BATS script for this helper
 # script to work correctly.
 #
-# APP_NAME                                    - app name
+# APP_NAME                                    - app name, also used as the link alias in container_link_and_run_command
 # CONTAINER_NAME                              - prefix for the name of containers that will be created (default: bitnami-$APP_NAME-test)
 # IMAGE_NAME                                  - the docker image name (default: bitnami/$APP_NAME)
 # SLEEP_TIME                                  - time in seconds to wait for containers to start (default: 5)
@@ -150,7 +150,6 @@ container_exec_detached() {
   fi
 }
 
-
 # Generates docker link parameter for linking to a container
 # $1: name of the container to link
 # $2: alias for the link
@@ -158,4 +157,12 @@ container_link() {
   if docker ps -a | grep -q $CONTAINER_NAME-$1; then
     echo "--link $CONTAINER_NAME-$1:$2"
   fi
+}
+
+# Link to container and execute command
+# $1: name of the container to link to
+# ${@:2}: command to execute
+container_link_and_run_command() {
+  # launch command as the entrypoint to skip the s6 init sequence (speeds up the tests)
+  docker run --rm $(container_link $1 $APP_NAME) --entrypoint ${2} $IMAGE_NAME "${@:3}"
 }
