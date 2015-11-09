@@ -1,11 +1,5 @@
 #!/usr/bin/env bats
 
-CONTAINER_NAME=bitnami-postgresql-test
-IMAGE_NAME=${IMAGE_NAME:-bitnami/postgresql}
-SLEEP_TIME=5
-VOL_PREFIX=/bitnami/postgresql
-HOST_VOL_PREFIX=${HOST_VOL_PREFIX:-/tmp/bitnami/$CONTAINER_NAME}
-
 POSTGRESQL_DATABASE=test_database
 POSTGRESQL_ROOT_USER=postgres
 POSTGRESQL_USER=test_user
@@ -14,6 +8,7 @@ POSTGRESQL_REPLICATION_USER=repl_user
 POSTGRESQL_REPLICATION_PASSWORD=repl_password
 
 # source the helper script
+APP_NAME=postgresql
 load tests/docker_helper
 
 # Link to container and execute command

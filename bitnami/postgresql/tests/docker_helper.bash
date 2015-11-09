@@ -6,12 +6,19 @@
 # The following variables should be defined in you BATS script for this helper
 # script to work correctly.
 #
-# CONTAINER_NAME   - prefix for the name of containers that will be created
-# IMAGE_NAME       - the docker image name
-# SLEEP_TIME       - time in seconds to wait for containers to start
-# VOL_PREFIX       - prefix of volumes inside the container
-# HOST_VOL_PREFIX  - prefix of volumes mounted from the host
+# APP_NAME                                    - app name
+# CONTAINER_NAME                              - prefix for the name of containers that will be created (default: bitnami-$APP_NAME-test)
+# IMAGE_NAME                                  - the docker image name (default: bitnami/$APP_NAME)
+# SLEEP_TIME                                  - time in seconds to wait for containers to start (default: 5)
+# VOL_PREFIX                                  - prefix of volumes inside the container (default: /bitnami/$APP_NAME)
+# HOST_VOL_PREFIX                             - prefix of volumes mounted from the host (default: /tmp/bitnami/$CONTAINER_NAME)
 ##
+
+CONTAINER_NAME=bitnami-$APP_NAME-test
+IMAGE_NAME=${IMAGE_NAME:-bitnami/$APP_NAME}
+SLEEP_TIME=${SLEEP_TIME:-5}
+VOL_PREFIX=${VOL_PREFIX:-/bitnami/$APP_NAME}
+HOST_VOL_PREFIX=${HOST_VOL_PREFIX:-/tmp/bitnami/$CONTAINER_NAME}
 
 # Creates a container whose name has the prefix $CONTAINER_NAME
 # $1: name for the new container
