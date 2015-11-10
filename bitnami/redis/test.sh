@@ -4,7 +4,7 @@ REDIS_PASSWORD=test_password123
 
 # source the helper script
 APP_NAME=redis
-SLEEP_TIME=15
+SLEEP_TIME=5
 load tests/docker_helper
 
 # Link to container and execute redis client

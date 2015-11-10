@@ -6,10 +6,8 @@ if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
   generate_conf_files $BITNAMI_APP_DIR/etc
 
   if [ "$REDIS_PASSWORD" ]; then
-    echo "Setting password in /conf/redis.conf ..."
-    echo "# Disabled" > $BITNAMI_APP_DIR/scripts/ctl.sh
-    $BITNAMI_APP_DIR/bnconfig --userpassword $REDIS_PASSWORD
-
+    echo "Setting redis password ..."
+    sed -i 's/# requirepass .*/requirepass '"$REDIS_PASSWORD"'/' $BITNAMI_APP_DIR/etc/conf/redis.conf
     print_app_credentials $BITNAMI_APP_NAME **none** $REDIS_PASSWORD
   fi
 else
