@@ -82,6 +82,7 @@ EOF"
   # files expected in conf volume
   run container_exec default ls -la $VOL_PREFIX/conf/
   [[ "$output" =~ "php-fpm.conf" ]]
+  [[ "$output" =~ "php.ini" ]]
 
   # files expected in logs volume
   run container_exec default ls -la $VOL_PREFIX/conf/ $VOL_PREFIX/logs/
