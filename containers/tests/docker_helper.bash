@@ -74,8 +74,7 @@ container_stop() {
 # $1: name of the container
 container_restart() {
   if docker ps | grep -q $CONTAINER_NAME-$1; then
-    docker stop $CONTAINER_NAME-$1
-    docker start $CONTAINER_NAME-$1
+    docker restart $CONTAINER_NAME-$1
     sleep $SLEEP_TIME
   fi
 }
