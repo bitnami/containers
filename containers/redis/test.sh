@@ -156,3 +156,22 @@ cleanup_environment
   run redis_client slave0 -a $REDIS_PASSWORD get winter
   [[ "$output" =~ "is coming" ]]
 }
+
+@test "Replication slave can fetch replication parameters from link alias \"master\"" {
+  container_create master -d \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=master
+
+  container_create slave0 -d \
+    $(container_link master master) \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=slave
+
+  # create record in master
+  run redis_client master -a $REDIS_PASSWORD set winter 'is coming'
+  [[ "$output" =~ "OK" ]]
+
+  # verify that record is replicated on slave0
+  run redis_client slave0 -a $REDIS_PASSWORD get winter
+  [[ "$output" =~ "is coming" ]]
+}
