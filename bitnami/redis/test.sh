@@ -17,6 +17,8 @@ redis_client() {
 # Cleans up all running/stopped containers and host mounted volumes
 cleanup_environment() {
   container_remove_full default
+  container_remove_full master
+  container_remove_full slave0
 }
 
 # Teardown called at the end of each test
@@ -112,4 +114,23 @@ cleanup_environment
   run container_create slave0 \
     -e REDIS_REPLICATION_MODE=slave
   [[ "$output" =~ "you need to provide the REDIS_MASTER_HOST" ]]
+}
+
+@test "Master data is replicated on slave" {
+  container_create master -d \
+    -e REDIS_REPLICATION_MODE=master
+
+  container_create slave0 -d \
+    $(container_link master $CONTAINER_NAME) \
+    -e REDIS_MASTER_HOST=$CONTAINER_NAME \
+    -e REDIS_MASTER_PORT=6379 \
+    -e REDIS_REPLICATION_MODE=slave
+
+  # create record in master
+  run redis_client master set winter 'is coming'
+  [[ "$output" =~ "OK" ]]
+
+  # verify that record is replicated on slave0
+  run redis_client slave0 get winter
+  [[ "$output" =~ "is coming" ]]
 }
