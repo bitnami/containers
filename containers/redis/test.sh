@@ -19,6 +19,7 @@ cleanup_environment() {
   container_remove_full default
   container_remove_full master
   container_remove_full slave0
+  container_remove_full slave1
 }
 
 # Teardown called at the end of each test
@@ -232,5 +233,50 @@ cleanup_environment
   [[ "$output" =~ "is coming" ]]
 
   run redis_client slave0 -a $REDIS_PASSWORD get night
+  [[ "$output" =~ "is dark and full of terrors" ]]
+}
+
+@test "Slave can be triggered to act as the master" {
+  container_create master -d \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=master
+
+  container_create slave0 -d \
+    $(container_link master $CONTAINER_NAME) \
+    -e REDIS_MASTER_HOST=$CONTAINER_NAME \
+    -e REDIS_MASTER_PORT=6379 \
+    -e REDIS_MASTER_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=slave
+
+  # create record in master
+  run redis_client master -a $REDIS_PASSWORD set winter 'is coming'
+  [[ "$output" =~ "OK" ]]
+
+  # stop and remove master
+  container_remove master
+
+  # convert slave to become master
+  run redis_client slave0 -a $REDIS_PASSWORD SLAVEOF NO ONE
+  [[ "$output" =~ "OK" ]]
+
+  # create slave1 that configures slave0 as the master
+  container_create slave1 -d \
+    $(container_link slave0 $CONTAINER_NAME) \
+    -e REDIS_MASTER_HOST=$CONTAINER_NAME \
+    -e REDIS_MASTER_PORT=6379 \
+    -e REDIS_MASTER_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=slave
+
+  # insert new record into slave0, since it is now the master it should allow writes
+  run redis_client slave0 -a $REDIS_PASSWORD set night 'is dark and full of terrors'
+  [[ "$output" =~ "OK" ]]
+
+  # verify that all past and new data is replicated on slave1
+  run redis_client slave1 -a $REDIS_PASSWORD get winter
+  [[ "$output" =~ "is coming" ]]
+
+  run redis_client slave1 -a $REDIS_PASSWORD get night
   [[ "$output" =~ "is dark and full of terrors" ]]
 }
