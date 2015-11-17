@@ -175,3 +175,25 @@ cleanup_environment
   run redis_client slave0 -a $REDIS_PASSWORD get winter
   [[ "$output" =~ "is coming" ]]
 }
+
+@test "Slave synchronizes with the master (delayed start)" {
+  container_create master -d \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=master
+
+  # create record in master
+  run redis_client master -a $REDIS_PASSWORD set winter 'is coming'
+  [[ "$output" =~ "OK" ]]
+
+  container_create slave0 -d \
+    $(container_link master $CONTAINER_NAME) \
+    -e REDIS_MASTER_HOST=$CONTAINER_NAME \
+    -e REDIS_MASTER_PORT=6379 \
+    -e REDIS_MASTER_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=slave
+
+  # verify that record is replicated on slave0
+  run redis_client slave0 -a $REDIS_PASSWORD get winter
+  [[ "$output" =~ "is coming" ]]
+}
