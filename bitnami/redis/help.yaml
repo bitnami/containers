@@ -1,5 +1,9 @@
 environment_variables:
   REDIS_PASSWORD: "Password set at first boot for your $BITNAMI_APP_NAME server (default: none)."
+  REDIS_REPLICATION_MODE: "Replication mode. Possible values master/slave (default: none)."
+  REDIS_MASTER_HOST: "Hostname/IP of replication master (parameter available only on slave)."
+  REDIS_MASTER_PORT: "Port of replication master, defaults to 6369 (parameter available only on slave)."
+  REDIS_MASTER_PASSWORD: "Master auth password used by slave to authenticate with the master (default: none)."
 volumes:
   $BITNAMI_APP_VOL_PREFIX/data: "Location of $BITNAMI_APP_NAME database dump."
   $BITNAMI_APP_VOL_PREFIX/conf: "Location of redis.conf ($BITNAMI_APP_NAME config file)."
