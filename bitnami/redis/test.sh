@@ -197,3 +197,40 @@ cleanup_environment
   run redis_client slave0 -a $REDIS_PASSWORD get winter
   [[ "$output" =~ "is coming" ]]
 }
+
+@test "Replication status is preserved after deletion" {
+  container_create_with_host_volumes master -d \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=master
+
+  # create record in master
+  run redis_client master -a $REDIS_PASSWORD set winter 'is coming'
+  [[ "$output" =~ "OK" ]]
+
+  container_create_with_host_volumes slave0 -d \
+    $(container_link master $CONTAINER_NAME) \
+    -e REDIS_MASTER_HOST=$CONTAINER_NAME \
+    -e REDIS_MASTER_PORT=6379 \
+    -e REDIS_MASTER_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=slave
+
+  # stop and remove master and slave0 containers
+  container_remove slave0
+  container_remove master
+
+  # start master and slave0 containers with existing host volumes and no additional env arguments
+  container_create_with_host_volumes master -d
+  container_create_with_host_volumes slave0 -d $(container_link master $CONTAINER_NAME)
+
+  # insert new record into the master
+  run redis_client master -a $REDIS_PASSWORD set night 'is dark and full of terrors'
+  [[ "$output" =~ "OK" ]]
+
+  # verify that all previous and new data is replicated on slave0
+  run redis_client slave0 -a $REDIS_PASSWORD get winter
+  [[ "$output" =~ "is coming" ]]
+
+  run redis_client slave0 -a $REDIS_PASSWORD get night
+  [[ "$output" =~ "is dark and full of terrors" ]]
+}
