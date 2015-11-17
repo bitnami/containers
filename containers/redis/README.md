@@ -163,6 +163,101 @@ redis:
     - REDIS_PASSWORD=password123
 ```
 
+## Setting up a replication
+
+A [replication](http://redis.io/topics/replication) cluster can easily be setup with the Bitnami Redis Docker Image using the following environment variables:
+
+ - `REDIS_REPLICATION_MODE`: Replication mode. Possible values `master`/`slave` (default: none).
+ - `REDIS_MASTER_HOST`: Hostname/IP of replication master (parameter available only on slave).
+ - `REDIS_MASTER_PORT`: Port of replication master, defaults to `6379` (parameter available only on slave).
+ - `REDIS_MASTER_PASSWORD`: Master auth password used by slave to authenticate with the master (default: none).
+
+In a replication cluster you can have one master and zero or more slaves. When replication is enabled writes can occur only on the master while reads can take place on both the master or slaves. For best performance you should limit the reads to the slaves and use the master only for the writes.
+
+### Step 1: Create the replication master
+
+The first step is to start the master.
+
+```bash
+docker run --name redis-master \
+  -e REDIS_PASSWORD=masterpassword123 \
+  -e REDIS_REPLICATION_MODE=master \
+  bitnami/redis
+```
+
+In this command we are configuring the container as the master using the `REDIS_REPLICATION_MODE=master` parameter. The `REDIS_PASSWORD` parameter enables authentication on the Redis master.
+
+### Step 2: Create the replication slave
+
+Next we start a replication slave container.
+
+```bash
+docker run --name redis-slave \
+  --link redis-master:master \
+  -e REDIS_PASSWORD=password123 \
+  -e REDIS_MASTER_HOST=master \
+  -e REDIS_MASTER_PORT=6379 \
+  -e REDIS_MASTER_PASSWORD=masterpassword123 \
+  -e REDIS_REPLICATION_MODE=slave \
+  bitnami/redis
+```
+
+In this command we are configuring the container as a slave using the `REDIS_REPLICATION_MODE=slave` parameter. The `REDIS_MASTER_HOST` and `REDIS_MASTER_PORT` parameters are used by the slave container to connect to the master. The `REDIS_MASTER_PASSWORD` specifies the master password allowing the slave to authenticate with the master. The `REDIS_PASSWORD` parameter enables authentication on the Redis slave.
+
+Using the `master` docker link alias, the Bitnami Redis Docker image automatically fetches the replication paramaters from the master container, namely:
+
+ - `REDIS_MASTER_HOST`
+ - `REDIS_MASTER_PORT`
+ - `REDIS_MASTER_PASSWORD`
+
+As a result you can drop all of these parameters from the slave.
+
+```bash
+docker run --name redis-slave \
+  --link redis-master:master \
+  -e REDIS_PASSWORD=password123 \
+  -e REDIS_REPLICATION_MODE=slave \
+  bitnami/redis
+```
+
+With these two commands you now have a two node Redis master-slave replication cluster up and running. When required you can add more slaves to the cluster without any downtime allowing you to scale the cluster horizontally.
+
+If the master goes down you can reconfigure a slave to become a master and begin accepting writes using:
+
+```bash
+docker exec redis-slave redis-cli -a password123 SLAVEOF NO ONE
+```
+
+> **Note**: The configuration of the other slaves in the cluster needs to be updated so that they are aware of the new master. This would require you to restart the other slaves with `--link redis-slave:master` as per our examples.
+
+With Docker Compose the master-slave replication can be setup using:
+
+```yaml
+master:
+  image: bitnami/redis
+  environment:
+    - REDIS_PASSWORD=masterpassword123
+    - REDIS_REPLICATION_MODE=master
+
+slave:
+  image: bitnami/redis
+  links:
+    - master:master
+  environment:
+    - REDIS_PASSWORD=password123
+    - REDIS_REPLICATION_MODE=slave
+```
+
+Scale the number of slaves using:
+
+```bash
+docker-compose scale master=1 slave=3
+```
+
+The above command scales up the number of slaves to `3`. You can scale down in the same way.
+
+> **Note**: You should not scale up/down the number of master nodes. Always have only one master node running.
+
 ## Command-line options
 
 The simplest way to configure your Redis server is to pass custom command-line options when
