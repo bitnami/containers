@@ -106,3 +106,10 @@ cleanup_environment
   run redis_client default -a $REDIS_PASSWORD get winter
   [[ "$output" =~ "is coming" ]]
 }
+
+@test "Can't setup replication slave without master host" {
+  # create replication slave without specifying REDIS_MASTER_HOST
+  run container_create slave0 \
+    -e REDIS_REPLICATION_MODE=slave
+  [[ "$output" =~ "you need to provide the REDIS_MASTER_HOST" ]]
+}
