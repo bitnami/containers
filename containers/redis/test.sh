@@ -17,6 +17,9 @@ redis_client() {
 # Cleans up all running/stopped containers and host mounted volumes
 cleanup_environment() {
   container_remove_full default
+  container_remove_full master
+  container_remove_full slave0
+  container_remove_full slave1
 }
 
 # Teardown called at the end of each test
@@ -105,4 +108,175 @@ cleanup_environment
   # check if record exists
   run redis_client default -a $REDIS_PASSWORD get winter
   [[ "$output" =~ "is coming" ]]
+}
+
+@test "Can't setup replication slave without master host" {
+  # create replication slave without specifying REDIS_MASTER_HOST
+  run container_create slave0 \
+    -e REDIS_REPLICATION_MODE=slave
+  [[ "$output" =~ "you need to provide the REDIS_MASTER_HOST" ]]
+}
+
+@test "Master data is replicated on slave" {
+  container_create master -d \
+    -e REDIS_REPLICATION_MODE=master
+
+  container_create slave0 -d \
+    $(container_link master $CONTAINER_NAME) \
+    -e REDIS_MASTER_HOST=$CONTAINER_NAME \
+    -e REDIS_MASTER_PORT=6379 \
+    -e REDIS_REPLICATION_MODE=slave
+
+  # create record in master
+  run redis_client master set winter 'is coming'
+  [[ "$output" =~ "OK" ]]
+
+  # verify that record is replicated on slave0
+  run redis_client slave0 get winter
+  [[ "$output" =~ "is coming" ]]
+}
+
+@test "Master data is replicated on slave with authentication enabled" {
+  container_create master -d \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=master
+
+  container_create slave0 -d \
+    $(container_link master $CONTAINER_NAME) \
+    -e REDIS_MASTER_HOST=$CONTAINER_NAME \
+    -e REDIS_MASTER_PORT=6379 \
+    -e REDIS_MASTER_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=slave
+
+  # create record in master
+  run redis_client master -a $REDIS_PASSWORD set winter 'is coming'
+  [[ "$output" =~ "OK" ]]
+
+  # verify that record is replicated on slave0
+  run redis_client slave0 -a $REDIS_PASSWORD get winter
+  [[ "$output" =~ "is coming" ]]
+}
+
+@test "Replication slave can fetch replication parameters from link alias \"master\"" {
+  container_create master -d \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=master
+
+  container_create slave0 -d \
+    $(container_link master master) \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=slave
+
+  # create record in master
+  run redis_client master -a $REDIS_PASSWORD set winter 'is coming'
+  [[ "$output" =~ "OK" ]]
+
+  # verify that record is replicated on slave0
+  run redis_client slave0 -a $REDIS_PASSWORD get winter
+  [[ "$output" =~ "is coming" ]]
+}
+
+@test "Slave synchronizes with the master (delayed start)" {
+  container_create master -d \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=master
+
+  # create record in master
+  run redis_client master -a $REDIS_PASSWORD set winter 'is coming'
+  [[ "$output" =~ "OK" ]]
+
+  container_create slave0 -d \
+    $(container_link master $CONTAINER_NAME) \
+    -e REDIS_MASTER_HOST=$CONTAINER_NAME \
+    -e REDIS_MASTER_PORT=6379 \
+    -e REDIS_MASTER_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=slave
+
+  # verify that record is replicated on slave0
+  run redis_client slave0 -a $REDIS_PASSWORD get winter
+  [[ "$output" =~ "is coming" ]]
+}
+
+@test "Replication status is preserved after deletion" {
+  container_create_with_host_volumes master -d \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=master
+
+  # create record in master
+  run redis_client master -a $REDIS_PASSWORD set winter 'is coming'
+  [[ "$output" =~ "OK" ]]
+
+  container_create_with_host_volumes slave0 -d \
+    $(container_link master $CONTAINER_NAME) \
+    -e REDIS_MASTER_HOST=$CONTAINER_NAME \
+    -e REDIS_MASTER_PORT=6379 \
+    -e REDIS_MASTER_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=slave
+
+  # stop and remove master and slave0 containers
+  container_remove slave0
+  container_remove master
+
+  # start master and slave0 containers with existing host volumes and no additional env arguments
+  container_create_with_host_volumes master -d
+  container_create_with_host_volumes slave0 -d $(container_link master $CONTAINER_NAME)
+
+  # insert new record into the master
+  run redis_client master -a $REDIS_PASSWORD set night 'is dark and full of terrors'
+  [[ "$output" =~ "OK" ]]
+
+  # verify that all previous and new data is replicated on slave0
+  run redis_client slave0 -a $REDIS_PASSWORD get winter
+  [[ "$output" =~ "is coming" ]]
+
+  run redis_client slave0 -a $REDIS_PASSWORD get night
+  [[ "$output" =~ "is dark and full of terrors" ]]
+}
+
+@test "Slave can be triggered to act as the master" {
+  container_create master -d \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=master
+
+  container_create slave0 -d \
+    $(container_link master $CONTAINER_NAME) \
+    -e REDIS_MASTER_HOST=$CONTAINER_NAME \
+    -e REDIS_MASTER_PORT=6379 \
+    -e REDIS_MASTER_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=slave
+
+  # create record in master
+  run redis_client master -a $REDIS_PASSWORD set winter 'is coming'
+  [[ "$output" =~ "OK" ]]
+
+  # stop and remove master
+  container_remove master
+
+  # convert slave to become master
+  run redis_client slave0 -a $REDIS_PASSWORD SLAVEOF NO ONE
+  [[ "$output" =~ "OK" ]]
+
+  # create slave1 that configures slave0 as the master
+  container_create slave1 -d \
+    $(container_link slave0 $CONTAINER_NAME) \
+    -e REDIS_MASTER_HOST=$CONTAINER_NAME \
+    -e REDIS_MASTER_PORT=6379 \
+    -e REDIS_MASTER_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_REPLICATION_MODE=slave
+
+  # insert new record into slave0, since it is now the master it should allow writes
+  run redis_client slave0 -a $REDIS_PASSWORD set night 'is dark and full of terrors'
+  [[ "$output" =~ "OK" ]]
+
+  # verify that all past and new data is replicated on slave1
+  run redis_client slave1 -a $REDIS_PASSWORD get winter
+  [[ "$output" =~ "is coming" ]]
+
+  run redis_client slave1 -a $REDIS_PASSWORD get night
+  [[ "$output" =~ "is dark and full of terrors" ]]
 }
