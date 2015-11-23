@@ -88,7 +88,7 @@ create_custom_database() {
     if [ "$POSTGRESQL_DATABASE" ]; then
       echo "==> Creating database $POSTGRESQL_DATABASE..."
       echo ""
-      echo "CREATE DATABASE $POSTGRESQL_DATABASE;" | \
+      echo "CREATE DATABASE \"$POSTGRESQL_DATABASE\";" | \
         s6-setuidgid $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/postgres --single $PROGRAM_OPTIONS >/dev/null
     fi
   fi
@@ -113,12 +113,12 @@ create_postgresql_user() {
     else
       echo "==> Creating user $POSTGRESQL_USER..."
       echo ""
-      echo "CREATE ROLE $POSTGRESQL_USER WITH LOGIN CREATEDB PASSWORD '$POSTGRESQL_PASSWORD';" | \
+      echo "CREATE ROLE \"$POSTGRESQL_USER\" WITH LOGIN CREATEDB PASSWORD '$POSTGRESQL_PASSWORD';" | \
         s6-setuidgid $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/postgres --single $PROGRAM_OPTIONS >/dev/null
 
       echo "==> Granting access to $POSTGRESQL_USER to the database $POSTGRESQL_DATABASE..."
       echo ""
-      echo "GRANT ALL PRIVILEGES ON DATABASE $POSTGRESQL_DATABASE to $POSTGRESQL_USER;" | \
+      echo "GRANT ALL PRIVILEGES ON DATABASE \"$POSTGRESQL_DATABASE\" to \"$POSTGRESQL_USER\";" | \
         s6-setuidgid $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/postgres --single $PROGRAM_OPTIONS >/dev/null
     fi
   fi
@@ -143,7 +143,7 @@ create_replication_user() {
         echo "==> Creating replication user $POSTGRESQL_REPLICATION_USER..."
         echo ""
 
-        echo "CREATE ROLE $POSTGRESQL_REPLICATION_USER REPLICATION LOGIN ENCRYPTED PASSWORD '$POSTGRESQL_REPLICATION_PASSWORD';" | \
+        echo "CREATE ROLE \"$POSTGRESQL_REPLICATION_USER\" REPLICATION LOGIN ENCRYPTED PASSWORD '$POSTGRESQL_REPLICATION_PASSWORD';" | \
           s6-setuidgid $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/postgres --single $PROGRAM_OPTIONS >/dev/null
       fi
 
