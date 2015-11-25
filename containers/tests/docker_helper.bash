@@ -27,7 +27,8 @@ HOST_VOL_PREFIX=${HOST_VOL_PREFIX:-/tmp/bitnami/$CONTAINER_NAME}
 # $1: name for the new container
 # ${@:2}: additional arguments for docker run while starting the container
 container_create() {
-  docker run --name $CONTAINER_NAME-$1 "${@:2}" $IMAGE_NAME
+  name=$1; shift
+  docker run --name $CONTAINER_NAME-$name "${@}" $IMAGE_NAME
   sleep $SLEEP_TIME
 }
 
@@ -35,6 +36,7 @@ container_create() {
 # $1: name for the new container
 # ${@:2}: additional arguments for docker run while starting the container
 container_create_with_host_volumes() {
+  name=$1; shift
   # populate volume mount arguments from VOLUMES variable
   VOLUME_ARGS=
   OLD_IFS=${IFS}
@@ -42,11 +44,11 @@ container_create_with_host_volumes() {
   for VOLUME in $VOLUMES
   do
     VOL_NAME=$(basename $VOLUME)
-    VOLUME_ARGS+="-v $HOST_VOL_PREFIX/$1/$VOL_NAME:$VOLUME "
+    VOLUME_ARGS+="-v $HOST_VOL_PREFIX/$name/$VOL_NAME:$VOLUME "
   done
   IFS=${OLD_IFS}
 
-  container_create $1 "${@:2}" $VOLUME_ARGS
+  container_create $name "${@}" $VOLUME_ARGS
 }
 
 # Start a stopped container
@@ -123,9 +125,10 @@ container_logs() {
 # Docker inspect a container
 # $1: name of the container
 container_inspect() {
-  if docker ps -a | grep -q $CONTAINER_NAME-$1; then
-    # docker inspect "${@:2}" $CONTAINER_NAME-$1 # requires docker >= 1.9.0
-    docker inspect $CONTAINER_NAME-$1
+  name=$1; shift
+  if docker ps -a | grep -q $CONTAINER_NAME-$name; then
+    # docker inspect "${@}" $CONTAINER_NAME-$name # requires docker >= 1.9.0
+    docker inspect $CONTAINER_NAME-$name
   else
     return 1
   fi
@@ -133,9 +136,11 @@ container_inspect() {
 
 # Execute a command in a running container using docker exec
 # $1: name of the container
+# ${@:2}: command to execute
 container_exec() {
-  if docker ps | grep -q $CONTAINER_NAME-$1; then
-    docker exec $CONTAINER_NAME-$1 "${@:2}"
+  name=$1; shift
+  if docker ps | grep -q $CONTAINER_NAME-$name; then
+    docker exec $CONTAINER_NAME-$name "${@}"
   else
     return 1
   fi
@@ -143,9 +148,11 @@ container_exec() {
 
 # Execute a command in a running container using docker exec (detached)
 # $1: name of the container
+# ${@:2}: command to execute
 container_exec_detached() {
-  if docker ps | grep -q $CONTAINER_NAME-$1; then
-    docker exec -d $CONTAINER_NAME-$1 "${@:2}"
+  name=$1; shift
+  if docker ps | grep -q $CONTAINER_NAME-$name; then
+    docker exec -d $CONTAINER_NAME-$name "${@}"
   else
     return 1
   fi
@@ -156,7 +163,7 @@ container_exec_detached() {
 # $2: alias for the link
 container_link() {
   if docker ps -a | grep -q $CONTAINER_NAME-$1; then
-    echo "--link $CONTAINER_NAME-$1:$2"
+    echo "--link=$CONTAINER_NAME-$1:$2"
   fi
 }
 
@@ -165,12 +172,15 @@ container_link() {
 # ${@:2}: command to execute
 container_link_and_run_command() {
   # launch command as the entrypoint to skip the s6 init sequence (speeds up the tests)
-  docker run --rm $(container_link $1 $APP_NAME) $container_link_and_run_command_DOCKER_ARGS --entrypoint ${2} $IMAGE_NAME "${@:3}"
+  link=$1; shift
+  cmd=$1; shift
+  docker run --rm $(container_link $link $APP_NAME) $container_link_and_run_command_DOCKER_ARGS --entrypoint $cmd $IMAGE_NAME "$@"
 }
 
 # Link to container and execute curl
 # $1: name of the container to link to
 # ${@:2}: arguments to curl
 curl_client() {
-  container_link_and_run_command $1 curl --noproxy $APP_NAME --retry 5 -L "${@:2}"
+  link=$1; shift
+  container_link_and_run_command $link curl --noproxy "$APP_NAME" --retry 5 -L "$@"
 }
