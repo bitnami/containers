@@ -9,7 +9,7 @@ load tests/docker_helper
 
 # Cleans up all running/stopped containers and host mounted volumes
 cleanup_environment() {
-  container_remove default
+  container_remove_full default
 }
 
 # Teardown called at the end of each test
@@ -77,4 +77,30 @@ cleanup_environment
   # check http connections on port 81
   run curl_client default -i http://$APP_NAME:81
   [[ "$output" =~ "405 Not Allowed" ]]
+}
+
+@test "Configuration changes are preserved after restart" {
+  container_create_with_host_volumes default -d
+
+  # modify nginx.conf
+  container_exec default sed -i 's|worker_processes .*|worker_processes 2;|' $VOL_PREFIX/conf/nginx.conf
+  container_exec default sed -i 's|worker_connections .*|worker_connections 768;|' $VOL_PREFIX/conf/nginx.conf
+  container_exec default sed -i 's|gzip .*|gzip off;|' $VOL_PREFIX/conf/nginx.conf
+
+  # add vhost
+  container_exec default sh -c "echo 'server { listen 0.0.0.0:81; location / { return 405; } }' > $VOL_PREFIX/conf/vhosts/test.conf"
+
+  # stop and remove container
+  container_remove default
+
+  # relaunch container with host volumes
+  container_create_with_host_volumes default -d
+
+  run container_exec default cat $VOL_PREFIX/conf/nginx.conf
+  [[ "$output" =~ "worker_processes 2;" ]]
+  [[ "$output" =~ "worker_connections 768;" ]]
+  [[ "$output" =~ "gzip off;" ]]
+
+  run container_exec default cat $VOL_PREFIX/conf/vhosts/test.conf
+  [[ "$output" =~ "server { listen 0.0.0.0:81; location / { return 405; } }" ]]
 }
