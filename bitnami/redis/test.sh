@@ -110,6 +110,24 @@ cleanup_environment
   [[ "$output" =~ "is coming" ]]
 }
 
+@test "Configuration changes are preserved after deletion" {
+  container_create_with_host_volumes default -d
+
+  # modify redis.conf
+  container_exec default sed -i 's|[#]*[ ]*appendonly[ ]*.*|appendonly yes|' $VOL_PREFIX/conf/redis.conf
+  container_exec default sed -i 's|[#]*[ ]*maxclients[ ]*.*|maxclients 1024|' $VOL_PREFIX/conf/redis.conf
+
+  # stop and remove container
+  container_remove default
+
+  # relaunch container with host volumes
+  container_create_with_host_volumes default -d
+
+  run container_exec default cat $VOL_PREFIX/conf/redis.conf
+  [[ "$output" =~ "appendonly yes" ]]
+  [[ "$output" =~ "maxclients 1024" ]]
+}
+
 @test "Can't setup replication slave without master host" {
   # create replication slave without specifying REDIS_MASTER_HOST
   run container_create slave0 \
