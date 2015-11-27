@@ -102,6 +102,26 @@ cleanup_environment
   [[ "$output" =~ '200 OK' ]]
 }
 
+@test "Configuration changes are preserved after deletion" {
+  container_create_with_host_volumes default -d
+
+  # modify catalina.properties
+  container_exec default sed -i 's|[#]*[ ]*tomcat.util.buf.StringCache.byte.enabled[ ]*=.*|tomcat.util.buf.StringCache.byte.enabled=false|' $VOL_PREFIX/conf/catalina.properties
+  container_exec default sed -i 's|[#]*[ ]*tomcat.util.buf.StringCache.char.enabled[ ]*=.*|tomcat.util.buf.StringCache.char.enabled=false|' $VOL_PREFIX/conf/catalina.properties
+  container_exec default sed -i 's|[#]*[ ]*tomcat.util.buf.StringCache.cacheSize[ ]*=.*|tomcat.util.buf.StringCache.cacheSize=4096|' $VOL_PREFIX/conf/catalina.properties
+
+  # stop and remove container
+  container_remove default
+
+  # relaunch container with host volumes
+  container_create_with_host_volumes default -d
+
+  run container_exec default cat $VOL_PREFIX/conf/catalina.properties
+  [[ "$output" =~ "tomcat.util.buf.StringCache.byte.enabled=false" ]]
+  [[ "$output" =~ "tomcat.util.buf.StringCache.char.enabled=false" ]]
+  [[ "$output" =~ "tomcat.util.buf.StringCache.cacheSize=4096" ]]
+}
+
 @test "Deploy sample application" {
   container_create_with_host_volumes default -d \
     -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
