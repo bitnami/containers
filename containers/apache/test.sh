@@ -9,7 +9,7 @@ load tests/docker_helper
 
 # Cleans up all running/stopped containers and host mounted volumes
 cleanup_environment() {
-  container_remove default
+  container_remove_full default
 }
 
 # Teardown called at the end of each test
@@ -83,4 +83,37 @@ EOF"
   # check http connections on port 81
   run curl_client default -i http://$APP_NAME:81
   [[ "$output" =~  "405 Method Not Allowed" ]]
+}
+
+@test "Configuration changes are preserved after restart" {
+  container_create_with_host_volumes default -d
+
+  # modify httpd.conf
+  container_exec default sed -i 's|[#]*LogLevel .*|LogLevel debug|' $VOL_PREFIX/conf/httpd.conf
+  container_exec default sed -i 's|[#]*ServerSignature .*|ServerSignature On|' $VOL_PREFIX/conf/httpd.conf
+  container_exec default sed -i 's|[#]*EnableSendfile .*|EnableSendfile Off|' $VOL_PREFIX/conf/httpd.conf
+
+  # add vhost
+  container_exec default sh -c "cat > $VOL_PREFIX/conf/vhosts/test.conf <<EOF
+Listen 81
+<VirtualHost *:81>
+  ServerName default
+  Redirect 405 /
+</VirtualHost>
+EOF"
+
+  # stop and remove container
+  container_remove default
+
+  # relaunch container with host volumes
+  container_create_with_host_volumes default -d
+
+  run container_exec default cat $VOL_PREFIX/conf/httpd.conf
+  [[ "$output" =~ "LogLevel debug" ]]
+  [[ "$output" =~ "ServerSignature On" ]]
+  [[ "$output" =~ "EnableSendfile Off" ]]
+
+  run container_exec default cat $VOL_PREFIX/conf/vhosts/test.conf
+  [[ "$output" =~ "ServerName default" ]]
+  [[ "$output" =~ "Redirect 405 /" ]]
 }
