@@ -88,3 +88,31 @@ EOF"
   run container_exec default ls -la $VOL_PREFIX/conf/ $VOL_PREFIX/logs/
   [[ "$output" =~ "php-fpm.log" ]]
 }
+
+@test "Configuration changes are preserved after deletion" {
+  container_create_with_host_volumes default -d
+
+  # modify php-fpm.conf
+  container_exec default sed -i 's|[#]*pm.max_children[ ]*=.*|pm.max_children=10|' $VOL_PREFIX/conf/php-fpm.conf
+  container_exec default sed -i 's|[#]*pm.start_servers[ ]*=.*|pm.start_servers=5|' $VOL_PREFIX/conf/php-fpm.conf
+  container_exec default sed -i 's|[#]*pm.min_spare_servers[ ]*=.*|pm.min_spare_servers=3|' $VOL_PREFIX/conf/php-fpm.conf
+
+  # modify php.ini
+  container_exec default sed -i 's|[;]*soap.wsdl_cache_limit[ ]*=.*|soap.wsdl_cache_limit=10|' $VOL_PREFIX/conf/php.ini
+  container_exec default sed -i 's|[;]*opcache.enable[ ]*=.*|opcache.enable=1|' $VOL_PREFIX/conf/php.ini
+
+  # stop and remove container
+  container_remove default
+
+  # relaunch container with host volumes
+  container_create_with_host_volumes default -d
+
+  run container_exec default cat $VOL_PREFIX/conf/php-fpm.conf
+  [[ "$output" =~ "pm.max_children=10" ]]
+  [[ "$output" =~ "pm.start_servers=5" ]]
+  [[ "$output" =~ "pm.min_spare_servers=3" ]]
+
+  run container_exec default cat $VOL_PREFIX/conf/php.ini
+  [[ "$output" =~ "soap.wsdl_cache_limit=10" ]]
+  [[ "$output" =~ "opcache.enable=1" ]]
+}
