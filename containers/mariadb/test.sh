@@ -172,6 +172,24 @@ cleanup_environment
   [[ "$output" =~ "Database: $MARIADB_DATABASE" ]]
 }
 
+@test "Configuration changes are preserved after deletion" {
+  container_create_with_host_volumes standalone -d
+
+  # modify my.cnf
+  container_exec standalone sed -i 's|[#]*max_allowed_packet=.*|max_allowed_packet=64M|' $VOL_PREFIX/conf/my.cnf
+  container_exec standalone sed -i 's|[#]*bind-address=.*|bind-address=0.0.0.0|' $VOL_PREFIX/conf/my.cnf
+
+  # stop and remove container
+  container_remove standalone
+
+  # relaunch container with host volumes
+  container_create_with_host_volumes standalone -d
+
+  run container_exec standalone cat $VOL_PREFIX/conf/my.cnf
+  [[ "$output" =~ "max_allowed_packet=64M" ]]
+  [[ "$output" =~ "bind-address=0.0.0.0" ]]
+}
+
 @test "Can't setup replication master without replication user" {
   # create replication master without specifying MARIADB_REPLICATION_USER
   run container_create master \
