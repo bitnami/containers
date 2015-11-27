@@ -160,6 +160,24 @@ cleanup_environment
   [[ "$output" =~ "Name|$POSTGRESQL_DATABASE" ]]
 }
 
+@test "Configuration changes are preserved after deletion" {
+  container_create_with_host_volumes standalone -d
+
+  # modify postgresql.conf
+  container_exec standalone sed -i 's|[#]*log_connections[ ]*=.*|log_connections=on|' $VOL_PREFIX/conf/postgresql.conf
+  container_exec standalone sed -i 's|[#]*log_disconnections[ ]*=.*|log_disconnections=on|' $VOL_PREFIX/conf/postgresql.conf
+
+  # stop and remove container
+  container_remove standalone
+
+  # relaunch container with host volumes
+  container_create_with_host_volumes standalone -d
+
+  run container_exec standalone cat $VOL_PREFIX/conf/postgresql.conf
+  [[ "$output" =~ "log_connections=on" ]]
+  [[ "$output" =~ "log_disconnections=on" ]]
+}
+
 @test "Can't setup replication master without replication user" {
   # create replication master without specifying POSTGRESQL_REPLICATION_USER
   run container_create master \
