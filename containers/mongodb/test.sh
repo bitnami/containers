@@ -166,3 +166,23 @@ cleanup_environment
   run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.adminCommand('listCollections'))"
   [[ "$output" =~ '"ok" : 1' ]]
 }
+
+@test "Configuration changes are preserved after deletion" {
+  container_create_with_host_volumes default -d
+
+  # modify mongodb.conf
+  container_exec default sed -i 's|[#]*bind_ip[ ]*=.*|bind_ip=0.0.0.0|' $VOL_PREFIX/conf/mongodb.conf
+  container_exec default sed -i 's|[#]*logappend[ ]*=.*|logappend=false|' $VOL_PREFIX/conf/mongodb.conf
+  container_exec default sed -i 's|[#]*cpu[ ]*=.*|cpu=false|' $VOL_PREFIX/conf/mongodb.conf
+
+  # stop and remove container
+  container_remove default
+
+  # relaunch container with host volumes
+  container_create_with_host_volumes default -d
+
+  run container_exec default cat $VOL_PREFIX/conf/mongodb.conf
+  [[ "$output" =~ "bind_ip=0.0.0.0" ]]
+  [[ "$output" =~ "logappend=false" ]]
+  [[ "$output" =~ "cpu=false" ]]
+}
