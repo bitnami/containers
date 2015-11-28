@@ -106,9 +106,9 @@ cleanup_environment
   container_create_with_host_volumes default -d
 
   # modify catalina.properties
-  container_exec default sed -i 's|[#]*[ ]*tomcat.util.buf.StringCache.byte.enabled[ ]*=.*|tomcat.util.buf.StringCache.byte.enabled=false|' $VOL_PREFIX/conf/catalina.properties
-  container_exec default sed -i 's|[#]*[ ]*tomcat.util.buf.StringCache.char.enabled[ ]*=.*|tomcat.util.buf.StringCache.char.enabled=false|' $VOL_PREFIX/conf/catalina.properties
-  container_exec default sed -i 's|[#]*[ ]*tomcat.util.buf.StringCache.cacheSize[ ]*=.*|tomcat.util.buf.StringCache.cacheSize=4096|' $VOL_PREFIX/conf/catalina.properties
+  container_exec default sed -i 's|^[#]*[ ]*tomcat.util.buf.StringCache.byte.enabled[ ]*=.*|tomcat.util.buf.StringCache.byte.enabled=false|' $VOL_PREFIX/conf/catalina.properties
+  container_exec default sed -i 's|^[#]*[ ]*tomcat.util.buf.StringCache.char.enabled[ ]*=.*|tomcat.util.buf.StringCache.char.enabled=false|' $VOL_PREFIX/conf/catalina.properties
+  container_exec default sed -i 's|^[#]*[ ]*tomcat.util.buf.StringCache.cacheSize[ ]*=.*|tomcat.util.buf.StringCache.cacheSize=4096|' $VOL_PREFIX/conf/catalina.properties
 
   # stop and remove container
   container_remove default
