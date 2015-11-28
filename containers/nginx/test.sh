@@ -79,13 +79,13 @@ cleanup_environment
   [[ "$output" =~ "405 Not Allowed" ]]
 }
 
-@test "Configuration changes are preserved after restart" {
+@test "Configuration changes are preserved after deletion" {
   container_create_with_host_volumes default -d
 
   # modify nginx.conf
-  container_exec default sed -i 's|worker_processes .*|worker_processes 2;|' $VOL_PREFIX/conf/nginx.conf
-  container_exec default sed -i 's|worker_connections .*|worker_connections 768;|' $VOL_PREFIX/conf/nginx.conf
-  container_exec default sed -i 's|gzip .*|gzip off;|' $VOL_PREFIX/conf/nginx.conf
+  container_exec default sed -i 's|worker_processes \+.*|worker_processes 2;|' $VOL_PREFIX/conf/nginx.conf
+  container_exec default sed -i 's|worker_connections \+.*|worker_connections 768;|' $VOL_PREFIX/conf/nginx.conf
+  container_exec default sed -i 's|gzip \+.*|gzip off;|' $VOL_PREFIX/conf/nginx.conf
 
   # add vhost
   container_exec default sh -c "echo 'server { listen 0.0.0.0:81; location / { return 405; } }' > $VOL_PREFIX/conf/vhosts/test.conf"
