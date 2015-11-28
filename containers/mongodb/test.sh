@@ -171,9 +171,9 @@ cleanup_environment
   container_create_with_host_volumes default -d
 
   # modify mongodb.conf
-  container_exec default sed -i 's|[#]*bind_ip[ ]*=.*|bind_ip=0.0.0.0|' $VOL_PREFIX/conf/mongodb.conf
-  container_exec default sed -i 's|[#]*logappend[ ]*=.*|logappend=false|' $VOL_PREFIX/conf/mongodb.conf
-  container_exec default sed -i 's|[#]*cpu[ ]*=.*|cpu=false|' $VOL_PREFIX/conf/mongodb.conf
+  container_exec default sed -i 's|^[#]*[ ]*bind_ip[ ]*=.*|bind_ip=0.0.0.0|' $VOL_PREFIX/conf/mongodb.conf
+  container_exec default sed -i 's|^[#]*[ ]*logappend[ ]*=.*|logappend=false|' $VOL_PREFIX/conf/mongodb.conf
+  container_exec default sed -i 's|^[#]*[ ]*cpu[ ]*=.*|cpu=false|' $VOL_PREFIX/conf/mongodb.conf
 
   # stop and remove container
   container_remove default
