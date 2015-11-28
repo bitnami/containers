@@ -176,8 +176,8 @@ cleanup_environment
   container_create_with_host_volumes standalone -d
 
   # modify my.cnf
-  container_exec standalone sed -i 's|[#]*max_allowed_packet=.*|max_allowed_packet=64M|' $VOL_PREFIX/conf/my.cnf
-  container_exec standalone sed -i 's|[#]*bind-address=.*|bind-address=0.0.0.0|' $VOL_PREFIX/conf/my.cnf
+  container_exec standalone sed -i 's|^[#]*[ ]*max_allowed_packet[ ]*=.*|max_allowed_packet=64M|' $VOL_PREFIX/conf/my.cnf
+  container_exec standalone sed -i 's|^[#]*[ ]*bind-address[ ]*=.*|bind-address=0.0.0.0|' $VOL_PREFIX/conf/my.cnf
 
   # stop and remove container
   container_remove standalone
