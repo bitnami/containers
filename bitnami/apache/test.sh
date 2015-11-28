@@ -85,13 +85,13 @@ EOF"
   [[ "$output" =~  "405 Method Not Allowed" ]]
 }
 
-@test "Configuration changes are preserved after restart" {
+@test "Configuration changes are preserved after deletion" {
   container_create_with_host_volumes default -d
 
-  # modify httpd.conf
-  container_exec default sed -i 's|[#]*LogLevel .*|LogLevel debug|' $VOL_PREFIX/conf/httpd.conf
-  container_exec default sed -i 's|[#]*ServerSignature .*|ServerSignature On|' $VOL_PREFIX/conf/httpd.conf
-  container_exec default sed -i 's|[#]*EnableSendfile .*|EnableSendfile Off|' $VOL_PREFIX/conf/httpd.conf
+  # edit httpd.conf
+  container_exec default sed -i 's|^[#]*[ ]*LogLevel \+.*|LogLevel debug|' $VOL_PREFIX/conf/httpd.conf
+  container_exec default sed -i 's|^[#]*[ ]*ServerSignature \+.*|ServerSignature On|' $VOL_PREFIX/conf/httpd.conf
+  container_exec default sed -i 's|^[#]*[ ]*EnableSendfile \+.*|EnableSendfile Off|' $VOL_PREFIX/conf/httpd.conf
 
   # add vhost
   container_exec default sh -c "cat > $VOL_PREFIX/conf/vhosts/test.conf <<EOF
