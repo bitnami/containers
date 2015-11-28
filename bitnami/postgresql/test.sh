@@ -164,8 +164,8 @@ cleanup_environment
   container_create_with_host_volumes standalone -d
 
   # modify postgresql.conf
-  container_exec standalone sed -i 's|[#]*log_connections[ ]*=.*|log_connections=on|' $VOL_PREFIX/conf/postgresql.conf
-  container_exec standalone sed -i 's|[#]*log_disconnections[ ]*=.*|log_disconnections=on|' $VOL_PREFIX/conf/postgresql.conf
+  container_exec standalone sed -i 's|^[#]*[ ]*log_connections[ ]*=.*|log_connections=on|' $VOL_PREFIX/conf/postgresql.conf
+  container_exec standalone sed -i 's|^[#]*[ ]*log_disconnections[ ]*=.*|log_disconnections=on|' $VOL_PREFIX/conf/postgresql.conf
 
   # stop and remove container
   container_remove standalone
