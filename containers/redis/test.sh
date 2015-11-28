@@ -114,8 +114,8 @@ cleanup_environment
   container_create_with_host_volumes default -d
 
   # modify redis.conf
-  container_exec default sed -i 's|[#]*[ ]*appendonly[ ]*.*|appendonly yes|' $VOL_PREFIX/conf/redis.conf
-  container_exec default sed -i 's|[#]*[ ]*maxclients[ ]*.*|maxclients 1024|' $VOL_PREFIX/conf/redis.conf
+  container_exec default sed -i 's|^[#]*[ ]*appendonly \+.*|appendonly yes|' $VOL_PREFIX/conf/redis.conf
+  container_exec default sed -i 's|^[#]*[ ]*maxclients \+.*|maxclients 1024|' $VOL_PREFIX/conf/redis.conf
 
   # stop and remove container
   container_remove default
