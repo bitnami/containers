@@ -186,6 +186,28 @@ cleanup_environment
   [[ "$output" =~ '200 OK' ]]
 }
 
+@test "Configuration changes are preserved after deletion" {
+  container_create_with_host_volumes standalone -d
+
+  # edit standalone/configuration/standalone.xml
+  container_exec standalone sh -c "echo '\n<!-- WINTER IS COMING! -->' >> $VOL_PREFIX/conf/standalone/configuration/standalone.xml"
+
+  # edit domain/configuration/domain.xml
+  container_exec standalone sh -c "echo '\n<!-- THE NIGHT IS DARK AND FULL OF TERRORS! -->' >> $VOL_PREFIX/conf/domain/configuration/domain.xml"
+
+  # stop and remove container
+  container_remove standalone
+
+  # relaunch container with host volumes
+  container_create_with_host_volumes standalone -d
+
+  run container_exec standalone cat $VOL_PREFIX/conf/standalone/configuration/standalone.xml
+  [[ "$output" =~ "WINTER IS COMING!" ]]
+
+  run container_exec standalone cat $VOL_PREFIX/conf/domain/configuration/domain.xml
+  [[ "$output" =~ "THE NIGHT IS DARK AND FULL OF TERRORS!" ]]
+}
+
 @test "Deploy sample application on standalone" {
   container_create_with_host_volumes standalone -d \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
