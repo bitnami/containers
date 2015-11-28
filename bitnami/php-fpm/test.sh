@@ -93,13 +93,13 @@ EOF"
   container_create_with_host_volumes default -d
 
   # modify php-fpm.conf
-  container_exec default sed -i 's|[#]*pm.max_children[ ]*=.*|pm.max_children=10|' $VOL_PREFIX/conf/php-fpm.conf
-  container_exec default sed -i 's|[#]*pm.start_servers[ ]*=.*|pm.start_servers=5|' $VOL_PREFIX/conf/php-fpm.conf
-  container_exec default sed -i 's|[#]*pm.min_spare_servers[ ]*=.*|pm.min_spare_servers=3|' $VOL_PREFIX/conf/php-fpm.conf
+  container_exec default sed -i 's|^[#]*[ ]*pm.max_children[ ]*=.*|pm.max_children=10|' $VOL_PREFIX/conf/php-fpm.conf
+  container_exec default sed -i 's|^[#]*[ ]*pm.start_servers[ ]*=.*|pm.start_servers=5|' $VOL_PREFIX/conf/php-fpm.conf
+  container_exec default sed -i 's|^[#]*[ ]*pm.min_spare_servers[ ]*=.*|pm.min_spare_servers=3|' $VOL_PREFIX/conf/php-fpm.conf
 
   # modify php.ini
-  container_exec default sed -i 's|[;]*soap.wsdl_cache_limit[ ]*=.*|soap.wsdl_cache_limit=10|' $VOL_PREFIX/conf/php.ini
-  container_exec default sed -i 's|[;]*opcache.enable[ ]*=.*|opcache.enable=1|' $VOL_PREFIX/conf/php.ini
+  container_exec default sed -i 's|^[;]*[ ]*soap.wsdl_cache_limit[ ]*=.*|soap.wsdl_cache_limit=10|' $VOL_PREFIX/conf/php.ini
+  container_exec default sed -i 's|^[;]*[ ]*opcache.enable[ ]*=.*|opcache.enable=1|' $VOL_PREFIX/conf/php.ini
 
   # stop and remove container
   container_remove default
