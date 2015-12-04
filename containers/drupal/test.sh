@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 BITNAMI_APP_NAME=drupal
-WELCOME_PAGE_TEXT="User login"
+WELCOME_PAGE_TEXT="Welcome to"
 CONTAINER_NAME=bitnami-$BITNAMI_APP_NAME-test
 IMAGE_NAME=bitnami/$BITNAMI_APP_NAME
 SLEEP_TIME=90
