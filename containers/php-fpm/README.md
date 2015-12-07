@@ -385,7 +385,11 @@ bats test.sh
 
 # Changelog
 
-## 5.5.30-0-r01
+## 5.5.30-2 (2015-12-07)
+
+- Enables support for imagick extension
+
+## 5.5.30-0-r01 (2015-11-10)
 
 - `php.ini` is now exposed in the volume mounted at `/bitnami/php-fpm/conf/` allowing users to change the defaults as per their requirements.
 
