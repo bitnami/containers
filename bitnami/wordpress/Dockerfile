@@ -2,7 +2,7 @@ FROM bitnami/base-apps-ubuntu:14.04
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=wordpress \
-    BITNAMI_APP_VERSION=4.4-0 \
+    BITNAMI_APP_VERSION=4.4.1-0 \
     BITNAMI_APP_USER=bitnami \
     BITNAMI_APPLICATION_USER=user \
     BITNAMI_APPLICATION_PASSWORD=bitnami \
