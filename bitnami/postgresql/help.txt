@@ -4,7 +4,7 @@
       POSTGRESQL_USER: User to be created on first boot (default: postgres).
       POSTGRESQL_PASSWORD: Password to be set for POSTGRESQL_USER on first boot (default: none).
       POSTGRESQL_DATABASE: Database to be created on first boot, accessible by POSTGRESQL_USER (default: none).
-      POSTGRESQL_REPLICATION_MODE: Replication mode. Possible values master/slave (default: none).
+      POSTGRESQL_REPLICATION_MODE: Replication mode. Possible values master/slave (default: master).
       POSTGRESQL_REPLICATION_USER: Replication user. User is created on the master at first boot (default: none).
       POSTGRESQL_REPLICATION_PASSWORD: Replication users password. Password is set for POSTGRESQL_REPLICATION_USER on master on the first boot (default: none).
       POSTGRESQL_MASTER_HOST: Hostname/IP of replication master (parameter available only on slave).

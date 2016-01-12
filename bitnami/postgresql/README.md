@@ -189,7 +189,7 @@ When `POSTGRESQL_USER` is is specified, the `postgres` user is not assigned a pa
 
 A [Streaming replication](http://www.postgresql.org/docs/9.4/static/warm-standby.html#STREAMING-REPLICATION) cluster can easily be setup with the Bitnami PostgreSQL Docker Image using the following environment variables:
 
- - `POSTGRESQL_REPLICATION_MODE`: Replication mode. Possible values `master`/`slave` (default: none).
+ - `POSTGRESQL_REPLICATION_MODE`: Replication mode. Possible values `master`/`slave` (default: master).
  - `POSTGRESQL_REPLICATION_USER`: Replication user. User is created on the master at first boot (default: none).
  - `POSTGRESQL_REPLICATION_PASSWORD`: Replication users password. Password is set for `POSTGRESQL_REPLICATION_USER` on master on the first boot (default: none).
  - `POSTGRESQL_MASTER_HOST`: Hostname/IP of replication master (parameter available only on slave).
@@ -215,6 +215,8 @@ docker run --name postgresql-master \
 ```
 
 In this command we are configuring the container as the master using the `POSTGRESQL_REPLICATION_MODE=master` parameter. Using the `POSTGRESQL_REPLICATION_USER` and `POSTGRESQL_REPLICATION_PASSWORD` parameters we are creating a replication user that will be used by the slaves to connect to the master and perform streaming replication.
+
+By default a container is configured as a `master`. As a result you can drop the `POSTGRESQL_REPLICATION_MODE=master` from the above command.
 
 ### Step 2: Create the replication slave
 
