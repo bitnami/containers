@@ -101,10 +101,7 @@ create_custom_database() {
 
 create_postgresql_user() {
   if [ "$POSTGRESQL_REPLICATION_MODE" == "master" ]; then
-    if [ ! "$POSTGRESQL_USER" ]; then
-      POSTGRESQL_USER=postgres
-    fi
-
+    POSTGRESQL_USER=${POSTGRESQL_USER:-postgres}
     if [ "$POSTGRESQL_USER" != "postgres" ]; then
       if [ ! $POSTGRESQL_PASSWORD ]; then
         echo "In order to use a custom POSTGRESQL_USER you need to provide the POSTGRESQL_PASSWORD as well"
