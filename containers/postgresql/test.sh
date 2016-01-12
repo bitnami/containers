@@ -102,6 +102,23 @@ cleanup_environment
   [[ "$output" =~ "Name|$POSTGRESQL_DATABASE" ]]
 }
 
+@test "Can't create a replication user without a password" {
+  # create replication user without specifying POSTGRESQL_REPLICATION_PASSWORD
+  run container_create standalone \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER
+  [[ "$output" =~ "you need to provide the POSTGRESQL_REPLICATION_PASSWORD" ]]
+}
+
+@test "Can create a replication user with password" {
+  container_create standalone -d \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD
+
+  run psql_client standalone -U $POSTGRESQL_ROOT_USER -Axc "SELECT usename FROM pg_catalog.pg_user WHERE usename = '$POSTGRESQL_REPLICATION_USER' AND userepl = 'true';"
+  [[ "$output" =~ "usename|$POSTGRESQL_REPLICATION_USER" ]]
+}
+
 @test "User and password settings are preserved after restart" {
   container_create standalone -d \
     -e POSTGRESQL_USER=$POSTGRESQL_USER \
@@ -184,27 +201,6 @@ cleanup_environment
   run container_exec standalone cat $VOL_PREFIX/conf/postgresql.conf
   [[ "$output" =~ "log_connections=on" ]]
   [[ "$output" =~ "log_disconnections=on" ]]
-}
-
-@test "Can't setup replication master without replication user" {
-  # create replication master without specifying POSTGRESQL_REPLICATION_USER
-  run container_create master \
-    -e POSTGRESQL_USER=$POSTGRESQL_USER \
-    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
-    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE \
-    -e POSTGRESQL_REPLICATION_MODE=master
-  [[ "$output" =~ "you need to provide the POSTGRESQL_REPLICATION_USER" ]]
-}
-
-@test "Can't setup replication master without replication user password" {
-  # create replication master without specifying POSTGRESQL_REPLICATION_PASSWORD
-  run container_create master \
-    -e POSTGRESQL_USER=$POSTGRESQL_USER \
-    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
-    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE \
-    -e POSTGRESQL_REPLICATION_MODE=master \
-    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER
-  [[ "$output" =~ "you need to provide the POSTGRESQL_REPLICATION_PASSWORD" ]]
 }
 
 @test "Can't setup replication slave without master host" {
