@@ -72,10 +72,18 @@ cleanup_environment
   [[ "$output" =~ "Name|$POSTGRESQL_DATABASE" ]]
 }
 
+@test "Can't create a custom user without a password" {
+  # create container without specifying POSTGRESQL_PASSWORD
+  run container_create standalone \
+    -e POSTGRESQL_USER=$POSTGRESQL_USER
+  [[ "$output" =~ "you need to provide the POSTGRESQL_PASSWORD" ]]
+}
+
 @test "Can't create a custom user without database" {
   # create container without specifying POSTGRESQL_DATABASE
   run container_create standalone \
-    -e POSTGRESQL_USER=$POSTGRESQL_USER
+    -e POSTGRESQL_USER=$POSTGRESQL_USER \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD
   [[ "$output" =~ "you need to provide the POSTGRESQL_DATABASE" ]]
 }
 
