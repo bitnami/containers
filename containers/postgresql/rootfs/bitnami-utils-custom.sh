@@ -37,8 +37,6 @@ initialize_replication_parameters() {
 }
 
 initialize_database() {
-  chmod 0700 $BITNAMI_APP_DIR/data
-  chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/data
   case "$POSTGRESQL_REPLICATION_MODE" in
     slave)
       echo "==> Waiting for replication master to accept connections (60s timeout)..."
