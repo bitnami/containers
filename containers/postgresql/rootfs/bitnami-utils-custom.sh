@@ -98,10 +98,18 @@ create_postgresql_user() {
       POSTGRESQL_USER=postgres
     fi
 
-    if [ "$POSTGRESQL_USER" != "postgres" ] && [ ! $POSTGRESQL_DATABASE ]; then
-      echo "In order to use a custom POSTGRESQL_USER you need to provide the POSTGRESQL_DATABASE as well"
-      echo ""
-      exit -1
+    if [ "$POSTGRESQL_USER" != "postgres" ]; then
+      if [ ! $POSTGRESQL_PASSWORD ]; then
+        echo "In order to use a custom POSTGRESQL_USER you need to provide the POSTGRESQL_PASSWORD as well"
+        echo ""
+        exit -1
+      fi
+
+      if [ ! $POSTGRESQL_DATABASE ]; then
+        echo "In order to use a custom POSTGRESQL_USER you need to provide the POSTGRESQL_DATABASE as well"
+        echo ""
+        exit -1
+      fi
     fi
 
     if [ "$POSTGRESQL_USER" = postgres ]; then
