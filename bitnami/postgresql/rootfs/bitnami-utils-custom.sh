@@ -90,6 +90,7 @@ initialize_database() {
       ;;
     slave)
       echo "==> Waiting for replication master to accept connections (60s timeout)..."
+      echo ""
       timeout=60
       while ! $BITNAMI_APP_DIR/bin/pg_isready -h $POSTGRESQL_MASTER_HOST -p $POSTGRESQL_MASTER_PORT -t 1 >/dev/null 2>&1
       do
@@ -111,6 +112,14 @@ initialize_database() {
       ;;
   esac
   rm -rf $BITNAMI_APP_DIR/data/{pg_hba.conf,pg_ident.conf,postgresql.conf}
+
+  echo "==> Applying default configurations..."
+  echo ""
+  set_pg_param "listen_addresses" "*"
+  set_pg_param "logging_collector" "on"
+  set_pg_param "log_directory" "$BITNAMI_APP_DIR/logs"
+  set_pg_param "log_filename" "postgresql.log"
+  set_hba_param "host all all 0.0.0.0/0 md5"
 
   echo "==> Setting up hot_standby..."
   echo ""
