@@ -3,10 +3,36 @@ PROGRAM_OPTIONS="-D $BITNAMI_APP_DIR/data --config_file=$BITNAMI_APP_DIR/conf/po
 
 POSTGRESQL_REPLICATION_MODE=${POSTGRESQL_REPLICATION_MODE:-master}
 
+set_pg_param() {
+  local key=${1}
+  local value=${2}
+
+  if [[ -n ${value} ]]; then
+    local current=$(sed -n -e "s/^\(${key} = '\)\([^ ']*\)\(.*\)$/\2/p" $BITNAMI_APP_DIR/conf/postgresql.conf)
+    if [[ "${current}" != "${value}" ]]; then
+      value="$(echo "${value}" | sed 's|[&]|\\&|g')"
+      s6-setuidgid $BITNAMI_APP_USER sed -i "s|^[#]*[ ]*${key} = .*|${key} = '${value}'|" $BITNAMI_APP_DIR/conf/postgresql.conf
+    fi
+  fi
+}
+
 set_hba_param() {
   local value=${1}
   if ! grep -q "$(sed "s| | \\\+|g" <<< ${value})" $BITNAMI_APP_DIR/conf/pg_hba.conf; then
     echo "${value}" >> $BITNAMI_APP_DIR/conf/pg_hba.conf
+  fi
+}
+
+set_recovery_param() {
+  local key=${1}
+  local value=${2}
+
+  if [[ -n ${value} ]]; then
+    local current=$(sed -n -e "s/^\(${key} = '\)\([^ ']*\)\(.*\)$/\2/p" $BITNAMI_APP_DIR/data/recovery.conf)
+    if [[ "${current}" != "${value}" ]]; then
+      value="$(echo "${value}" | sed 's|[&]|\\&|g')"
+      s6-setuidgid $BITNAMI_APP_USER sed -i "s|^[#]*[ ]*${key} = .*|${key} = '${value}'|" $BITNAMI_APP_DIR/data/recovery.conf
+    fi
   fi
 }
 
@@ -88,11 +114,11 @@ initialize_database() {
 
   echo "==> Setting up hot_standby..."
   echo ""
-  s6-setuidgid $BITNAMI_APP_USER sed -i "s|^[#]*[ ]*wal_level = .*|wal_level = hot_standby|" $BITNAMI_APP_DIR/conf/postgresql.conf
-  s6-setuidgid $BITNAMI_APP_USER sed -i "s|^[#]*[ ]*max_wal_senders = .*|max_wal_senders = 16|" $BITNAMI_APP_DIR/conf/postgresql.conf
-  s6-setuidgid $BITNAMI_APP_USER sed -i "s|^[#]*[ ]*checkpoint_segments = .*|checkpoint_segments = 8|" $BITNAMI_APP_DIR/conf/postgresql.conf
-  s6-setuidgid $BITNAMI_APP_USER sed -i "s|^[#]*[ ]*wal_keep_segments = .*|wal_keep_segments = 32|" $BITNAMI_APP_DIR/conf/postgresql.conf
-  s6-setuidgid $BITNAMI_APP_USER sed -i "s|^[#]*[ ]*hot_standby = .*|hot_standby = on|" $BITNAMI_APP_DIR/conf/postgresql.conf
+  set_pg_param "wal_level" "hot_standby"
+  set_pg_param "max_wal_senders" "16"
+  set_pg_param "checkpoint_segments" "8"
+  set_pg_param "wal_keep_segments" "32"
+  set_pg_param "hot_standby" "on"
 }
 
 create_custom_database() {
@@ -166,9 +192,9 @@ configure_recovery() {
     echo ""
 
     s6-setuidgid $BITNAMI_APP_USER cp -a $BITNAMI_APP_DIR/share/recovery.conf.sample $BITNAMI_APP_DIR/data/recovery.conf
-    s6-setuidgid $BITNAMI_APP_USER sed -i "s|^[#]*[ ]*standby_mode = .*|standby_mode = on|" $BITNAMI_APP_DIR/data/recovery.conf
-    s6-setuidgid $BITNAMI_APP_USER sed -i "s|^[#]*[ ]*primary_conninfo = .*|primary_conninfo = 'host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD}'|" $BITNAMI_APP_DIR/data/recovery.conf
-    s6-setuidgid $BITNAMI_APP_USER sed -i "s|^[#]*[ ]*trigger_file = .*|trigger_file = '/tmp/postgresql.trigger.5432'|" $BITNAMI_APP_DIR/data/recovery.conf
+    set_recovery_param "standby_mode" "on"
+    set_recovery_param "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD}"
+    set_recovery_param "trigger_file" "/tmp/postgresql.trigger.5432"
   fi
 }
 
