@@ -36,11 +36,11 @@ set_recovery_param() {
   fi
 }
 
-initialize_replication_parameters() {
+discover_replication_parameters() {
   case $POSTGRESQL_REPLICATION_MODE in
     master) ;;
     slave)
-      echo "==> Trying to fetch replication parameters from the master link..."
+      echo "==> Trying to fetch replication parameters exposed by docker links..."
       echo ""
 
       POSTGRESQL_MASTER_HOST=${POSTGRESQL_MASTER_HOST:-$MASTER_PORT_5432_TCP_ADDR}
