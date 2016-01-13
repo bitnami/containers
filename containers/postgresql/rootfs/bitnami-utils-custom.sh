@@ -3,6 +3,13 @@ PROGRAM_OPTIONS="-D $BITNAMI_APP_DIR/data --config_file=$BITNAMI_APP_DIR/conf/po
 
 POSTGRESQL_REPLICATION_MODE=${POSTGRESQL_REPLICATION_MODE:-master}
 
+set_hba_param() {
+  local value=${1}
+  if ! grep -q "$(sed "s| | \\\+|g" <<< ${value})" $BITNAMI_APP_DIR/conf/pg_hba.conf; then
+    echo "${value}" >> $BITNAMI_APP_DIR/conf/pg_hba.conf
+  fi
+}
+
 initialize_replication_parameters() {
   case $POSTGRESQL_REPLICATION_MODE in
     master) ;;
@@ -145,14 +152,11 @@ create_replication_user() {
     if [ "$POSTGRESQL_REPLICATION_MODE" == "master" ]; then
       echo ""
       echo "==> Creating replication user $POSTGRESQL_REPLICATION_USER..."
-
       echo "CREATE ROLE \"$POSTGRESQL_REPLICATION_USER\" REPLICATION LOGIN ENCRYPTED PASSWORD '$POSTGRESQL_REPLICATION_PASSWORD';" | \
         s6-setuidgid $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/postgres --single $PROGRAM_OPTIONS >/dev/null
     fi
 
-    cat >> $BITNAMI_APP_DIR/conf/pg_hba.conf <<EOF
-host    replication     $POSTGRESQL_REPLICATION_USER       0.0.0.0/0               md5
-EOF
+    set_hba_param "host replication $POSTGRESQL_REPLICATION_USER 0.0.0.0/0 md5"
   fi
 }
 
