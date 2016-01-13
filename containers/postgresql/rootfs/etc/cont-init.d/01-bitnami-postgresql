@@ -32,4 +32,4 @@ else
   print_container_already_initialized $BITNAMI_APP_NAME
 fi
 
-configure_replication_slave
+configure_recovery
