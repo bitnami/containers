@@ -1,7 +1,7 @@
 # PostgreSQL Utility functions
 PROGRAM_OPTIONS="-D $BITNAMI_APP_DIR/data --config_file=$BITNAMI_APP_DIR/conf/postgresql.conf --hba_file=$BITNAMI_APP_DIR/conf/pg_hba.conf --ident_file=$BITNAMI_APP_DIR/conf/pg_ident.conf"
 
-POSTGRES_REPLICATION_MODE=${POSTGRES_REPLICATION_MODE:-master}
+POSTGRES_MODE=${POSTGRES_MODE:-master}
 
 set_pg_param() {
   local key=${1}
@@ -37,7 +37,7 @@ set_recovery_param() {
 }
 
 discover_replication_parameters() {
-  case $POSTGRES_REPLICATION_MODE in
+  case $POSTGRES_MODE in
     master) ;;
     slave)
       echo "==> Trying to fetch replication parameters exposed by docker links..."
@@ -73,7 +73,7 @@ discover_replication_parameters() {
       fi
       ;;
     *)
-      echo "Replication mode \"$POSTGRES_REPLICATION_MODE\" not supported!"
+      echo "Replication mode \"$POSTGRES_MODE\" not supported!"
       echo ""
       exit -1
       ;;
@@ -81,7 +81,7 @@ discover_replication_parameters() {
 }
 
 initialize_database() {
-  case "$POSTGRES_REPLICATION_MODE" in
+  case "$POSTGRES_MODE" in
     master)
       echo "==> Initializing database..."
       echo ""
@@ -131,7 +131,7 @@ initialize_database() {
 }
 
 create_custom_database() {
-  if [ "$POSTGRES_REPLICATION_MODE" == "master" ]; then
+  if [ "$POSTGRES_MODE" == "master" ]; then
     if [ "$POSTGRES_DB" ]; then
       echo "==> Creating database $POSTGRES_DB..."
       echo ""
@@ -142,7 +142,7 @@ create_custom_database() {
 }
 
 create_postgresql_user() {
-  if [ "$POSTGRES_REPLICATION_MODE" == "master" ]; then
+  if [ "$POSTGRES_MODE" == "master" ]; then
     POSTGRES_USER=${POSTGRES_USER:-postgres}
     if [ "$POSTGRES_USER" != "postgres" ]; then
       if [ ! $POSTGRES_PASSWORD ]; then
@@ -184,7 +184,7 @@ create_replication_user() {
       exit -1
     fi
 
-    if [ "$POSTGRES_REPLICATION_MODE" == "master" ]; then
+    if [ "$POSTGRES_MODE" == "master" ]; then
       echo "==> Creating replication user $POSTGRES_REPLICATION_USER..."
       echo ""
       echo "CREATE ROLE \"$POSTGRES_REPLICATION_USER\" REPLICATION LOGIN ENCRYPTED PASSWORD '$POSTGRES_REPLICATION_PASSWORD';" | \
@@ -196,7 +196,7 @@ create_replication_user() {
 }
 
 configure_recovery() {
-  if [ "$POSTGRES_REPLICATION_MODE" == "slave" ]; then
+  if [ "$POSTGRES_MODE" == "slave" ]; then
     echo "==> Setting up streaming replication slave..."
     echo ""
 
@@ -208,7 +208,7 @@ configure_recovery() {
 }
 
 print_postgresql_password() {
-  case "$POSTGRES_REPLICATION_MODE" in
+  case "$POSTGRES_MODE" in
     master)
       if [ -z $POSTGRES_PASSWORD ]; then
         echo "**none**"
@@ -223,7 +223,7 @@ print_postgresql_password() {
 }
 
 print_postgresql_database() {
-  case "$POSTGRES_REPLICATION_MODE" in
+  case "$POSTGRES_MODE" in
     master)
       if [ $POSTGRES_DB ]; then
         echo "Database: $POSTGRES_DB"

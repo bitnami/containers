@@ -204,14 +204,14 @@ cleanup_environment
 @test "Can't setup replication slave without master host" {
   # create replication slave without specifying POSTGRES_MASTER_HOST
   run container_create slave0 \
-    -e POSTGRES_REPLICATION_MODE=slave
+    -e POSTGRES_MODE=slave
   [[ "$output" =~ "you need to provide the POSTGRES_MASTER_HOST" ]]
 }
 
 @test "Can't setup replication slave without replication user" {
   # create replication slave without specifying POSTGRES_REPLICATION_USER
   run container_create slave0 \
-    -e POSTGRES_REPLICATION_MODE=slave \
+    -e POSTGRES_MODE=slave \
     -e POSTGRES_MASTER_HOST=master
   [[ "$output" =~ "you need to provide the POSTGRES_REPLICATION_USER" ]]
 }
@@ -219,7 +219,7 @@ cleanup_environment
 @test "Can't setup replication slave without replication password" {
   # create replication slave without specifying POSTGRES_REPLICATION_PASSWORD
   run container_create slave0 \
-    -e POSTGRES_REPLICATION_MODE=slave \
+    -e POSTGRES_MODE=slave \
     -e POSTGRES_MASTER_HOST=master \
     -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER
   [[ "$output" =~ "you need to provide the POSTGRES_REPLICATION_PASSWORD" ]]
@@ -230,7 +230,7 @@ cleanup_environment
     -e POSTGRES_USER=$POSTGRES_USER \
     -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
     -e POSTGRES_DB=$POSTGRES_DB \
-    -e POSTGRES_REPLICATION_MODE=master \
+    -e POSTGRES_MODE=master \
     -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
     -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
 
@@ -238,7 +238,7 @@ cleanup_environment
     $(container_link default $CONTAINER_NAME) \
     -e POSTGRES_MASTER_HOST=$CONTAINER_NAME \
     -e POSTGRES_MASTER_PORT=5432 \
-    -e POSTGRES_REPLICATION_MODE=slave \
+    -e POSTGRES_MODE=slave \
     -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
     -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
 
@@ -257,14 +257,14 @@ cleanup_environment
     -e POSTGRES_USER=$POSTGRES_USER \
     -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
     -e POSTGRES_DB=$POSTGRES_DB \
-    -e POSTGRES_REPLICATION_MODE=master \
+    -e POSTGRES_MODE=master \
     -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
     -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
 
   # create replication slave0 linked to master with alias named master
   container_create slave0 -d \
     $(container_link default master) \
-    -e POSTGRES_REPLICATION_MODE=slave
+    -e POSTGRES_MODE=slave
 
   # create users table on master and insert a new row
   psql_client default -U $POSTGRES_USER $POSTGRES_DB -c \
@@ -281,7 +281,7 @@ cleanup_environment
     -e POSTGRES_USER=$POSTGRES_USER \
     -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
     -e POSTGRES_DB=$POSTGRES_DB \
-    -e POSTGRES_REPLICATION_MODE=master \
+    -e POSTGRES_MODE=master \
     -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
     -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
 
@@ -295,7 +295,7 @@ cleanup_environment
     $(container_link default $CONTAINER_NAME) \
     -e POSTGRES_MASTER_HOST=$CONTAINER_NAME \
     -e POSTGRES_MASTER_PORT=5432 \
-    -e POSTGRES_REPLICATION_MODE=slave \
+    -e POSTGRES_MODE=slave \
     -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
     -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
 
@@ -310,7 +310,7 @@ cleanup_environment
     -e POSTGRES_USER=$POSTGRES_USER \
     -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
     -e POSTGRES_DB=$POSTGRES_DB \
-    -e POSTGRES_REPLICATION_MODE=master \
+    -e POSTGRES_MODE=master \
     -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
     -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
 
@@ -324,7 +324,7 @@ cleanup_environment
     $(container_link default $CONTAINER_NAME) \
     -e POSTGRES_MASTER_HOST=$CONTAINER_NAME \
     -e POSTGRES_MASTER_PORT=5432 \
-    -e POSTGRES_REPLICATION_MODE=slave \
+    -e POSTGRES_MODE=slave \
     -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
     -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
 
@@ -350,7 +350,7 @@ cleanup_environment
     -e POSTGRES_USER=$POSTGRES_USER \
     -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
     -e POSTGRES_DB=$POSTGRES_DB \
-    -e POSTGRES_REPLICATION_MODE=master \
+    -e POSTGRES_MODE=master \
     -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
     -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
 
@@ -358,7 +358,7 @@ cleanup_environment
     $(container_link default $CONTAINER_NAME) \
     -e POSTGRES_MASTER_HOST=$CONTAINER_NAME \
     -e POSTGRES_MASTER_PORT=5432 \
-    -e POSTGRES_REPLICATION_MODE=slave \
+    -e POSTGRES_MODE=slave \
     -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
     -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
 
@@ -379,7 +379,7 @@ cleanup_environment
     $(container_link slave0 $CONTAINER_NAME) \
     -e POSTGRES_MASTER_HOST=$CONTAINER_NAME \
     -e POSTGRES_MASTER_PORT=5432 \
-    -e POSTGRES_REPLICATION_MODE=slave \
+    -e POSTGRES_MODE=slave \
     -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
     -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
 
