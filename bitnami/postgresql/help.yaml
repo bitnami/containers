@@ -2,7 +2,7 @@ environment_variables:
   POSTGRES_USER: "User to be created on first boot (default: postgres)."
   POSTGRES_PASSWORD: "Password to be set for POSTGRES_USER on first boot (default: none)."
   POSTGRES_DB: "Database to be created on first boot, accessible by POSTGRES_USER (default: none)."
-  POSTGRES_REPLICATION_MODE: "Replication mode. Possible values master/slave (default: master)."
+  POSTGRES_MODE: "Replication mode. Possible values master/slave (default: master)."
   POSTGRES_REPLICATION_USER: "Replication user. User is created on the master at first boot (default: none)."
   POSTGRES_REPLICATION_PASSWORD: "Replication users password. Password is set for POSTGRES_REPLICATION_USER on master on the first boot (default: none)."
   POSTGRES_MASTER_HOST: "Hostname/IP of replication master (parameter available only on slave)."

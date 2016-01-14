@@ -189,7 +189,7 @@ When `POSTGRES_USER` is is specified, the `postgres` user is not assigned a pass
 
 A [Streaming replication](http://www.postgresql.org/docs/9.4/static/warm-standby.html#STREAMING-REPLICATION) cluster can easily be setup with the Bitnami PostgreSQL Docker Image using the following environment variables:
 
- - `POSTGRES_REPLICATION_MODE`: Replication mode. Possible values `master`/`slave` (default: master).
+ - `POSTGRES_MODE`: Replication mode. Possible values `master`/`slave` (default: master).
  - `POSTGRES_REPLICATION_USER`: Replication user. User is created on the master at first boot (default: none).
  - `POSTGRES_REPLICATION_PASSWORD`: Replication users password. Password is set for `POSTGRES_REPLICATION_USER` on master on the first boot (default: none).
  - `POSTGRES_MASTER_HOST`: Hostname/IP of replication master (parameter available only on slave).
@@ -208,15 +208,15 @@ docker run --name postgresql-master \
   -e POSTGRES_USER=my_user \
   -e POSTGRES_PASSWORD=password123 \
   -e POSTGRES_DB=my_database \
-  -e POSTGRES_REPLICATION_MODE=master \
+  -e POSTGRES_MODE=master \
   -e POSTGRES_REPLICATION_USER=my_repl_user \
   -e POSTGRES_REPLICATION_PASSWORD=my_repl_password \
   bitnami/postgresql
 ```
 
-In this command we are configuring the container as the master using the `POSTGRES_REPLICATION_MODE=master` parameter. Using the `POSTGRES_REPLICATION_USER` and `POSTGRES_REPLICATION_PASSWORD` parameters we are creating a replication user that will be used by the slaves to connect to the master and perform streaming replication.
+In this command we are configuring the container as the master using the `POSTGRES_MODE=master` parameter. Using the `POSTGRES_REPLICATION_USER` and `POSTGRES_REPLICATION_PASSWORD` parameters we are creating a replication user that will be used by the slaves to connect to the master and perform streaming replication.
 
-By default a container is configured as a `master`. As a result you can drop the `POSTGRES_REPLICATION_MODE=master` from the above command.
+By default a container is configured as a `master`. As a result you can drop the `POSTGRES_MODE=master` from the above command.
 
 ### Step 2: Create the replication slave
 
@@ -227,13 +227,13 @@ docker run --name postgresql-slave \
   --link postgresql-master:master \
   -e POSTGRES_MASTER_HOST=master \
   -e POSTGRES_MASTER_PORT=5432 \
-  -e POSTGRES_REPLICATION_MODE=slave \
+  -e POSTGRES_MODE=slave \
   -e POSTGRES_REPLICATION_USER=my_repl_user \
   -e POSTGRES_REPLICATION_PASSWORD=my_repl_password \
   bitnami/postgresql
 ```
 
-In this command we are configuring the container as a slave using the `POSTGRES_REPLICATION_MODE=slave` parameter. Before the replication slave is started, the `POSTGRES_MASTER_HOST` and `POSTGRES_MASTER_PORT` parameters are used by the slave container to connect to the master and replicate the initial database from the master. The `POSTGRES_REPLICATION_USER` and `POSTGRES_REPLICATION_PASSWORD` credentials are used to authenticate with the master.
+In this command we are configuring the container as a slave using the `POSTGRES_MODE=slave` parameter. Before the replication slave is started, the `POSTGRES_MASTER_HOST` and `POSTGRES_MASTER_PORT` parameters are used by the slave container to connect to the master and replicate the initial database from the master. The `POSTGRES_REPLICATION_USER` and `POSTGRES_REPLICATION_PASSWORD` credentials are used to authenticate with the master.
 
 Using the `master` docker link alias, the Bitnami PostgreSQL Docker image automatically fetches the replication paramaters from the master container, namely:
 
@@ -247,7 +247,7 @@ As a result you can drop all of these parameters from the slave.
 ```bash
 docker run --name postgresql-slave \
   --link postgresql-master:master \
-  -e POSTGRES_REPLICATION_MODE=slave \
+  -e POSTGRES_MODE=slave \
   bitnami/postgresql
 ```
 
@@ -272,7 +272,7 @@ master:
     - POSTGRES_USER=my_user
     - POSTGRES_PASSWORD=password123
     - POSTGRES_DB=my_database
-    - POSTGRES_REPLICATION_MODE=master
+    - POSTGRES_MODE=master
     - POSTGRES_REPLICATION_USER=my_repl_user
     - POSTGRES_REPLICATION_PASSWORD=my_repl_password
 
@@ -281,7 +281,7 @@ slave:
   links:
     - master:master
   environment:
-    - POSTGRES_REPLICATION_MODE=slave
+    - POSTGRES_MODE=slave
 ```
 
 Scale the number of slaves using:
