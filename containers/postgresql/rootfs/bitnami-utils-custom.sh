@@ -102,7 +102,6 @@ initialize_database() {
         fi
         sleep 1
       done
-      echo ""
 
       echo "==> Replicating the initial database..."
       echo ""
@@ -112,22 +111,6 @@ initialize_database() {
       ;;
   esac
   rm -rf $BITNAMI_APP_DIR/data/{pg_hba.conf,pg_ident.conf,postgresql.conf}
-
-  echo "==> Applying default configurations..."
-  echo ""
-  set_pg_param "listen_addresses" "*"
-  set_pg_param "logging_collector" "on"
-  set_pg_param "log_directory" "$BITNAMI_APP_DIR/logs"
-  set_pg_param "log_filename" "postgresql.log"
-  set_hba_param "host all all 0.0.0.0/0 md5"
-
-  echo "==> Setting up hot_standby..."
-  echo ""
-  set_pg_param "wal_level" "hot_standby"
-  set_pg_param "max_wal_senders" "16"
-  set_pg_param "checkpoint_segments" "8"
-  set_pg_param "wal_keep_segments" "32"
-  set_pg_param "hot_standby" "on"
 }
 
 create_custom_database() {
@@ -190,8 +173,6 @@ create_replication_user() {
       echo "CREATE ROLE \"$POSTGRES_REPLICATION_USER\" REPLICATION LOGIN ENCRYPTED PASSWORD '$POSTGRES_REPLICATION_PASSWORD';" | \
         s6-setuidgid $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/postgres --single $PROGRAM_OPTIONS >/dev/null
     fi
-
-    set_hba_param "host replication $POSTGRES_REPLICATION_USER 0.0.0.0/0 md5"
   fi
 }
 
