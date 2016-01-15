@@ -126,8 +126,8 @@ create_custom_database() {
 
 create_postgresql_user() {
   if [ "$POSTGRES_MODE" == "master" ]; then
-    POSTGRES_USER=${POSTGRES_USER:-postgres}
-    if [ "$POSTGRES_USER" != "postgres" ]; then
+    POSTGRES_USER=${POSTGRES_USER:-$BITNAMI_APP_USER}
+    if [ "$POSTGRES_USER" != "$BITNAMI_APP_USER" ]; then
       if [ ! $POSTGRES_PASSWORD ]; then
         echo "In order to use a custom POSTGRES_USER you need to provide the POSTGRES_PASSWORD as well"
         echo ""
@@ -141,8 +141,8 @@ create_postgresql_user() {
       fi
     fi
 
-    if [ "$POSTGRES_USER" = postgres ]; then
-      echo "==> Creating postgres user with unrestricted access..."
+    if [ "$POSTGRES_USER" = $BITNAMI_APP_USER ]; then
+      echo "==> Creating $BITNAMI_APP_USER user with unrestricted access..."
       echo "ALTER ROLE $POSTGRES_USER WITH PASSWORD '$POSTGRES_PASSWORD';" | \
         s6-setuidgid $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/postgres --single $PROGRAM_OPTIONS >/dev/null
     else
