@@ -183,7 +183,7 @@ postgresql:
 ```
 
 **Note!**
-When `POSTGRES_USER` is is specified, the `postgres` user is not assigned a password and as a result you cannot login remotely to the PostgreSQL server as the `postgres` user.
+When `POSTGRES_USER` is specified, the `postgres` user is not assigned a password and as a result you cannot login remotely to the PostgreSQL server as the `postgres` user.
 
 ## Setting up a streaming replication
 
@@ -205,10 +205,10 @@ The first step is to start the master.
 
 ```bash
 docker run --name postgresql-master \
+  -e POSTGRES_MODE=master \
   -e POSTGRES_USER=my_user \
   -e POSTGRES_PASSWORD=password123 \
   -e POSTGRES_DB=my_database \
-  -e POSTGRES_MODE=master \
   -e POSTGRES_REPLICATION_USER=my_repl_user \
   -e POSTGRES_REPLICATION_PASSWORD=my_repl_password \
   bitnami/postgresql
@@ -225,9 +225,9 @@ Next we start a replication slave container.
 ```bash
 docker run --name postgresql-slave \
   --link postgresql-master:master \
+  -e POSTGRES_MODE=slave \
   -e POSTGRES_MASTER_HOST=master \
   -e POSTGRES_MASTER_PORT=5432 \
-  -e POSTGRES_MODE=slave \
   -e POSTGRES_REPLICATION_USER=my_repl_user \
   -e POSTGRES_REPLICATION_PASSWORD=my_repl_password \
   bitnami/postgresql
@@ -269,10 +269,10 @@ With Docker Compose the master-slave replication can be setup using:
 master:
   image: bitnami/postgresql
   environment:
+    - POSTGRES_MODE=master
     - POSTGRES_USER=my_user
     - POSTGRES_PASSWORD=password123
     - POSTGRES_DB=my_database
-    - POSTGRES_MODE=master
     - POSTGRES_REPLICATION_USER=my_repl_user
     - POSTGRES_REPLICATION_PASSWORD=my_repl_password
 
@@ -520,7 +520,7 @@ docker-compose start postgresql
 
 This image is tested for expected runtime behavior, using the [BATS](https://github.com/sstephenson/bats) testing framework. You can run the tests on your machine using the `bats` command.
 
-```
+```bash
 bats test.sh
 ```
 
