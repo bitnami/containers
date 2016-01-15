@@ -2,6 +2,14 @@
 PROGRAM_OPTIONS="-D $BITNAMI_APP_DIR/data --config_file=$BITNAMI_APP_DIR/conf/postgresql.conf --hba_file=$BITNAMI_APP_DIR/conf/pg_hba.conf --ident_file=$BITNAMI_APP_DIR/conf/pg_ident.conf"
 
 POSTGRES_MODE=${POSTGRES_MODE:-master}
+case $POSTGRES_MODE in
+  master|slave) ;;
+  *)
+    echo "Replication mode \"$POSTGRES_MODE\" not supported!"
+    echo ""
+    exit -1
+    ;;
+esac
 
 set_pg_param() {
   local key=${1}
@@ -37,47 +45,39 @@ set_recovery_param() {
 }
 
 discover_replication_parameters() {
-  case $POSTGRES_MODE in
-    master) ;;
-    slave)
-      echo "==> Trying to fetch replication parameters exposed by docker links..."
-      echo ""
+  if [ "$POSTGRES_MODE" == "slave" ]; then
+    echo "==> Trying to fetch replication parameters exposed by docker links..."
+    echo ""
 
-      POSTGRES_MASTER_HOST=${POSTGRES_MASTER_HOST:-$MASTER_PORT_5432_TCP_ADDR}
-      POSTGRES_MASTER_PORT=${POSTGRES_MASTER_PORT:-$MASTER_PORT_5432_TCP_PORT}
-      POSTGRES_REPLICATION_USER=${POSTGRES_REPLICATION_USER:-$MASTER_ENV_POSTGRES_REPLICATION_USER}
-      POSTGRES_REPLICATION_PASSWORD=${POSTGRES_REPLICATION_PASSWORD:-$MASTER_ENV_POSTGRES_REPLICATION_PASSWORD}
+    POSTGRES_MASTER_HOST=${POSTGRES_MASTER_HOST:-$MASTER_PORT_5432_TCP_ADDR}
+    POSTGRES_MASTER_PORT=${POSTGRES_MASTER_PORT:-$MASTER_PORT_5432_TCP_PORT}
+    POSTGRES_REPLICATION_USER=${POSTGRES_REPLICATION_USER:-$MASTER_ENV_POSTGRES_REPLICATION_USER}
+    POSTGRES_REPLICATION_PASSWORD=${POSTGRES_REPLICATION_PASSWORD:-$MASTER_ENV_POSTGRES_REPLICATION_PASSWORD}
 
-      if [ ! $POSTGRES_MASTER_HOST ]; then
-        echo "In order to setup a replication slave you need to provide the POSTGRES_MASTER_HOST as well"
-        echo ""
-        exit -1
-      fi
-
-      if [ ! $POSTGRES_MASTER_PORT ]; then
-        echo "POSTGRES_MASTER_PORT not specified. Defaulting to 5432"
-        echo ""
-        POSTGRES_MASTER_PORT=${POSTGRES_MASTER_PORT:-5432}
-      fi
-
-      if [ ! $POSTGRES_REPLICATION_USER ]; then
-        echo "In order to setup a replication slave you need to provide the POSTGRES_REPLICATION_USER as well"
-        echo ""
-        exit -1
-      fi
-
-      if [ ! $POSTGRES_REPLICATION_PASSWORD ]; then
-        echo "In order to setup a replication slave you need to provide the POSTGRES_REPLICATION_PASSWORD as well"
-        echo ""
-        exit -1
-      fi
-      ;;
-    *)
-      echo "Replication mode \"$POSTGRES_MODE\" not supported!"
+    if [ ! $POSTGRES_MASTER_HOST ]; then
+      echo "In order to setup a replication slave you need to provide the POSTGRES_MASTER_HOST as well"
       echo ""
       exit -1
-      ;;
-  esac
+    fi
+
+    if [ ! $POSTGRES_MASTER_PORT ]; then
+      echo "POSTGRES_MASTER_PORT not specified. Defaulting to 5432"
+      echo ""
+      POSTGRES_MASTER_PORT=${POSTGRES_MASTER_PORT:-5432}
+    fi
+
+    if [ ! $POSTGRES_REPLICATION_USER ]; then
+      echo "In order to setup a replication slave you need to provide the POSTGRES_REPLICATION_USER as well"
+      echo ""
+      exit -1
+    fi
+
+    if [ ! $POSTGRES_REPLICATION_PASSWORD ]; then
+      echo "In order to setup a replication slave you need to provide the POSTGRES_REPLICATION_PASSWORD as well"
+      echo ""
+      exit -1
+    fi
+  fi
 }
 
 initialize_database() {
