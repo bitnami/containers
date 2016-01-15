@@ -160,14 +160,14 @@ create_postgresql_user() {
 }
 
 create_replication_user() {
-  if [ "$POSTGRES_REPLICATION_USER" ]; then
-    if [ ! $POSTGRES_REPLICATION_PASSWORD ]; then
-      echo "In order to create a replication user you need to provide the POSTGRES_REPLICATION_PASSWORD as well"
-      echo ""
-      exit -1
-    fi
+  if [ "$POSTGRES_MODE" == "master" ]; then
+    if [ "$POSTGRES_REPLICATION_USER" ]; then
+      if [ ! $POSTGRES_REPLICATION_PASSWORD ]; then
+        echo "In order to create a replication user you need to provide the POSTGRES_REPLICATION_PASSWORD as well"
+        echo ""
+        exit -1
+      fi
 
-    if [ "$POSTGRES_MODE" == "master" ]; then
       echo "==> Creating replication user $POSTGRES_REPLICATION_USER..."
       echo ""
       echo "CREATE ROLE \"$POSTGRES_REPLICATION_USER\" REPLICATION LOGIN ENCRYPTED PASSWORD '$POSTGRES_REPLICATION_PASSWORD';" | \
