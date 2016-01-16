@@ -10,7 +10,7 @@ ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/postgresql \
 ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
     PATH=$BITNAMI_APP_DIR/bin:$PATH
 
-RUN sh $BITNAMI_PREFIX/install.sh\
+RUN $BITNAMI_PREFIX/install.sh\
     --postgres_password bitnami
 
 COPY rootfs/ /
