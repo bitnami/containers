@@ -11,26 +11,6 @@ case $POSTGRES_MODE in
     ;;
 esac
 
-set_pg_param() {
-  local key=${1}
-  local value=${2}
-
-  if [[ -n ${value} ]]; then
-    local current=$(sed -n -e "s/^\(${key} = '\)\([^ ']*\)\(.*\)$/\2/p" $BITNAMI_APP_DIR/conf/postgresql.conf)
-    if [[ "${current}" != "${value}" ]]; then
-      value="$(echo "${value}" | sed 's|[&]|\\&|g')"
-      s6-setuidgid $BITNAMI_APP_USER sed -i "s|^[#]*[ ]*${key} = .*|${key} = '${value}'|" $BITNAMI_APP_DIR/conf/postgresql.conf
-    fi
-  fi
-}
-
-set_hba_param() {
-  local value=${1}
-  if ! grep -q "$(sed "s| | \\\+|g" <<< ${value})" $BITNAMI_APP_DIR/conf/pg_hba.conf; then
-    echo "${value}" >> $BITNAMI_APP_DIR/conf/pg_hba.conf
-  fi
-}
-
 set_recovery_param() {
   local key=${1}
   local value=${2}

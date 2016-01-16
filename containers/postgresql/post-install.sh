@@ -1,6 +1,26 @@
 #!/bin/bash
 cd $BITNAMI_APP_DIR
 
+set_pg_param() {
+  local key=${1}
+  local value=${2}
+
+  if [[ -n ${value} ]]; then
+    local current=$(sed -n -e "s/^\(${key} = '\)\([^ ']*\)\(.*\)$/\2/p" $BITNAMI_APP_DIR/conf.defaults/postgresql.conf)
+    if [[ "${current}" != "${value}" ]]; then
+      value="$(echo "${value}" | sed 's|[&]|\\&|g')"
+      sed -i "s|^[#]*[ ]*${key} = .*|${key} = '${value}'|" $BITNAMI_APP_DIR/conf.defaults/postgresql.conf
+    fi
+  fi
+}
+
+set_hba_param() {
+  local value=${1}
+  if ! grep -q "$(sed "s| | \\\+|g" <<< ${value})" $BITNAMI_APP_DIR/conf.defaults/pg_hba.conf; then
+    echo "${value}" >> $BITNAMI_APP_DIR/conf.defaults/pg_hba.conf
+  fi
+}
+
 # set up default configs
 mkdir conf.defaults
 s6-setuidgid $BITNAMI_APP_USER $BITNAMI_APP_DIR/bin/initdb -D $BITNAMI_APP_DIR/data \
@@ -11,22 +31,20 @@ mv $BITNAMI_APP_DIR/data/pg_ident.conf conf.defaults/
 rm -rf $BITNAMI_APP_DIR/data
 
 # default
-sed -i "s|^[#]*[ ]*listen_addresses = .*|listen_addresses = '*'|" $BITNAMI_APP_DIR/conf.defaults/postgresql.conf
-sed -i "s|^[#]*[ ]*logging_collector = .*|logging_collector = 'on'|" $BITNAMI_APP_DIR/conf.defaults/postgresql.conf
-sed -i "s|^[#]*[ ]*log_directory = .*|log_directory = '$BITNAMI_APP_DIR/logs'|" $BITNAMI_APP_DIR/conf.defaults/postgresql.conf
-sed -i "s|^[#]*[ ]*log_filename = .*|log_filename = 'postgresql.log'|" $BITNAMI_APP_DIR/conf.defaults/postgresql.conf
+set_pg_param "listen_addresses" "*"
+set_pg_param "logging_collector" "on"
+set_pg_param "log_directory" "$BITNAMI_APP_DIR/logs"
+set_pg_param "log_filename" "postgresql.log"
 
 # hot standby
-sed -i "s|^[#]*[ ]*wal_level = .*|wal_level = 'hot_standby'|" $BITNAMI_APP_DIR/conf.defaults/postgresql.conf
-sed -i "s|^[#]*[ ]*max_wal_senders = .*|max_wal_senders = '16'|" $BITNAMI_APP_DIR/conf.defaults/postgresql.conf
-sed -i "s|^[#]*[ ]*checkpoint_segments = .*|checkpoint_segments = '8'|" $BITNAMI_APP_DIR/conf.defaults/postgresql.conf
-sed -i "s|^[#]*[ ]*wal_keep_segments = .*|wal_keep_segments = '32'|" $BITNAMI_APP_DIR/conf.defaults/postgresql.conf
-sed -i "s|^[#]*[ ]*hot_standby = .*|hot_standby = 'on'|" $BITNAMI_APP_DIR/conf.defaults/postgresql.conf
+set_pg_param "wal_level" "hot_standby"
+set_pg_param "max_wal_senders" "16"
+set_pg_param "checkpoint_segments" "8"
+set_pg_param "wal_keep_segments" "32"
+set_pg_param "hot_standby" "on"
 
-cat >> $BITNAMI_APP_DIR/conf.defaults/pg_hba.conf <<EOF
-host all all 0.0.0.0/0 md5
-host replication all 0.0.0.0/0 md5
-EOF
+set_hba_param "host all all 0.0.0.0/0 md5"
+set_hba_param "host replication all 0.0.0.0/0 md5"
 
 # symlink mount points at root to install dir
 ln -s $BITNAMI_APP_DIR/data $BITNAMI_APP_VOL_PREFIX/data
