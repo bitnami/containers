@@ -12,6 +12,14 @@ initialize_deployments_directory() {
   touch /app/.initialized
 }
 
+set_manager_password() {
+  if [ "$WILDFLY_PASSWORD" ]; then
+    echo "Setting manager password..."
+    echo ""
+    add-user.sh -u manager -p $WILDFLY_PASSWORD -r ManagementRealm
+  fi
+}
+
 print_wildfly_password() {
   if [ -z $WILDFLY_PASSWORD ]; then
     echo "wildfly"
