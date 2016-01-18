@@ -5,16 +5,15 @@ source $BITNAMI_PREFIX/bitnami-utils.sh
 if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
   generate_conf_files
 
-  if [ "$WILDFLY_PASSWORD" ]; then
-    echo ""
-    echo "Setting manager password..."
-    add-user.sh -u manager -p $WILDFLY_PASSWORD -r ManagementRealm
-  fi
+  set_manager_password
+
   print_app_credentials $BITNAMI_APP_NAME manager `print_wildfly_password`
 else
   print_container_already_initialized $BITNAMI_APP_NAME
 fi
 
-initialize_wildfly_deployments_directory
+if [ ! -f /app/.initialized ]; then
+  initialize_deployments_directory
+fi
 
 chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_VOL_PREFIX/conf/ $BITNAMI_APP_VOL_PREFIX/logs/ /app/ || true
