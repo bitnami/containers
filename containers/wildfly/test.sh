@@ -7,8 +7,6 @@ WILDFLY_PASSWORD=test_password
 # source the helper script
 APP_NAME=wildfly
 SLEEP_TIME=5
-VOL_PREFIX=/bitnami/$APP_NAME
-VOLUMES=/app:$VOL_PREFIX/conf:$VOL_PREFIX/logs
 load tests/docker_helper
 
 # Link to container and execute jboss-cli
@@ -162,10 +160,10 @@ cleanup_environment
   [[ "$output" =~ "standalone" ]]
 
   # files expected in app volume (subset)
-  run container_exec standalone ls -la /app/
+  run container_exec standalone ls -la $VOL_PREFIX/data/
   [[ "$output" =~ ".initialized" ]]
-  [[ "$output" =~ "mysql-connector-java" ]]
-  [[ "$output" =~ "postgresql" ]]
+  [[ "$output" =~ "domain" ]]
+  [[ "$output" =~ "standalone" ]]
 
   # files expected in logs volume
   run container_exec standalone ls -la $VOL_PREFIX/logs/
@@ -189,11 +187,11 @@ cleanup_environment
 @test "Configuration changes are preserved after deletion" {
   container_create_with_host_volumes standalone -d
 
-  # edit standalone/configuration/standalone.xml
-  container_exec standalone sh -c "echo '\n<!-- WINTER IS COMING! -->' >> $VOL_PREFIX/conf/standalone/configuration/standalone.xml"
+  # edit conf/standalone/standalone.xml
+  container_exec standalone sh -c "echo '\n<!-- WINTER IS COMING! -->' >> $VOL_PREFIX/conf/standalone/standalone.xml"
 
-  # edit domain/configuration/domain.xml
-  container_exec standalone sh -c "echo '\n<!-- THE NIGHT IS DARK AND FULL OF TERRORS! -->' >> $VOL_PREFIX/conf/domain/configuration/domain.xml"
+  # edit conf/domain/domain.xml
+  container_exec standalone sh -c "echo '\n<!-- THE NIGHT IS DARK AND FULL OF TERRORS! -->' >> $VOL_PREFIX/conf/domain/domain.xml"
 
   # stop and remove container
   container_remove standalone
@@ -201,10 +199,10 @@ cleanup_environment
   # relaunch container with host volumes
   container_create_with_host_volumes standalone -d
 
-  run container_exec standalone cat $VOL_PREFIX/conf/standalone/configuration/standalone.xml
+  run container_exec standalone cat $VOL_PREFIX/conf/standalone/standalone.xml
   [[ "$output" =~ "WINTER IS COMING!" ]]
 
-  run container_exec standalone cat $VOL_PREFIX/conf/domain/configuration/domain.xml
+  run container_exec standalone cat $VOL_PREFIX/conf/domain/domain.xml
   [[ "$output" =~ "THE NIGHT IS DARK AND FULL OF TERRORS!" ]]
 }
 
@@ -213,7 +211,7 @@ cleanup_environment
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
 
   # download sample app into the deployments directory and allow it some time to come up
-  container_exec standalone curl --noproxy localhost --retry 5 https://raw.githubusercontent.com/goldmann/wildfly-docker-deployment-example/master/node-info.war -o /app/node-info.war
+  container_exec standalone curl --noproxy localhost --retry 5 https://raw.githubusercontent.com/goldmann/wildfly-docker-deployment-example/master/node-info.war -o $VOL_PREFIX/data/standalone/deployments/node-info.war
   sleep $SLEEP_TIME
 
   # test the deployment

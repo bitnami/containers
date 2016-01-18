@@ -17,6 +17,6 @@ RUN $BITNAMI_PREFIX/install.sh --jboss_manager_username manager --jboss_manager_
 COPY rootfs/ /
 
 EXPOSE 8080 9990
-VOLUME ["$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs"]
+VOLUME ["$BITNAMI_APP_VOL_PREFIX/data", "$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs"]
 
 ENTRYPOINT ["/entrypoint.sh"]
