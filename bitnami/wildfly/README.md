@@ -77,32 +77,37 @@ wildfly:
   command: -Dwildfly.as.deployment.ondemand=true
 ```
 
-> **Note!**: To configure the JVM parameters specify them in the environment variable `JAVA_OPTS` using `-e JAVA_OPTS=<parameters>` while running the Wildfly image.
+> **Note!**: To configure the JVM parameters specify them in the environment variable `JAVA_OPTS` using `-e JAVA_OPTS=<parameters>` while running the image.
 
 **Further Reading:**
 
   - [Wildfly Command line parameters](https://docs.jboss.org/author/display/WFLY9/Command+line+parameters)
   - [Caveats](#caveats)
 
-# Deploying web applications on Wildfly standalone server
+# Persisting the data
 
-This Wildfly image exposes a volume at `/app`. In the standalone server mode, this path acts as the Wildfly deployments directory. At this location, you either copy a so-called *exploded web application*, i.e non-compressed or a compressed web application resource `.WAR` file and it will automatically be deployed by Wildfly at startup.
+If you remove the container all your data will be lost, and the next time you run the image the data will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-**Note!**
-You can also deploy web applications on a running Wildfly instance.
+The Wildfly image exposes a volume at `/bitnami/wildfly/data`, you can mount a directory from your host to serve as the data store. If the directory you mount is empty, the data will be initialized.
 
 ```bash
-docker run -v /path/to/app:/app bitnami/wildfly
+docker run -v /path/to/data:/bitnami/wildfly/data bitnami/wildfly
 ```
 
 or using Docker Compose:
 
 ```
-wildfly:
+postgresql:
   image: bitnami/wildfly
   volumes:
-    - /path/to/app:/app
+    - /path/to/data:/bitnami/wildfly/data
 ```
+
+# Deploying web applications on Wildfly standalone server
+
+In the standalone server mode (default), you either copy a so-called *exploded web application*, i.e non-compressed or a compressed web application resource `.WAR` file in the `standalone/deployments/` directory of the [persistent](#persisting-your-data) volume and it will automatically be deployed by Wildfly.
+
+Applications can also be deployed from the web management console.
 
 # Accessing your Wildfly server from the host
 
@@ -233,9 +238,11 @@ The following options cannot be modified, to ensure that the image runs correctl
 ```bash
 -b 0.0.0.0
 -bmanagement 0.0.0.0
--Djboss.server.config.dir=/opt/bitnami/wildfly/conf/standalone/configuration
+-Djboss.server.base.dir=/opt/bitnami/wildfly/data/standalone
+-Djboss.server.config.dir=/opt/bitnami/wildfly/conf/standalone
 -Djboss.server.log.dir=/opt/bitnami/wildfly/logs
--Djboss.domain.config.dir=/opt/bitnami/wildfly/conf/domain/configuration
+-Djboss.domain.base.dir=/opt/bitnami/wildfly/data/domain
+-Djboss.domain.config.dir=/opt/bitnami/wildfly/conf/domain
 -Djboss.domain.log.dir=/opt/bitnami/wildfly/logs
 ```
 
