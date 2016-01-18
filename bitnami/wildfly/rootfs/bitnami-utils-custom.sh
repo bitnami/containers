@@ -1,15 +1,20 @@
 # Wildfly Utility functions
 PROGRAM_OPTIONS="-b 0.0.0.0 -bmanagement 0.0.0.0 \
-  -Djboss.server.config.dir=$BITNAMI_APP_DIR/conf/standalone/configuration -Djboss.server.log.dir=$BITNAMI_APP_DIR/logs \
-  -Djboss.domain.config.dir=$BITNAMI_APP_DIR/conf/domain/configuration -Djboss.domain.log.dir=$BITNAMI_APP_DIR/logs"
+  -Djboss.server.base.dir=$BITNAMI_APP_DIR/data/standalone \
+  -Djboss.server.config.dir=$BITNAMI_APP_DIR/conf/standalone \
+  -Djboss.server.log.dir=$BITNAMI_APP_DIR/logs \
+  -Djboss.domain.base.dir=$BITNAMI_APP_DIR/data/domain \
+  -Djboss.domain.config.dir=$BITNAMI_APP_DIR/conf/domain \
+  -Djboss.domain.log.dir=$BITNAMI_APP_DIR/logs"
+
 JAVA_OPTS="-XX:MaxPermSize=768m -Xmx768m $JAVA_OPTS"
 export JAVA_OPTS
 
-initialize_deployments_directory() {
+initialize_data_directory() {
   echo "==> Initializing deployments directory..."
   echo ""
-  cp -a $BITNAMI_APP_DIR/standalone/deployments.defaults/* /app/
-  touch /app/.initialized
+  cp -a $BITNAMI_APP_DIR/data.defaults/* $BITNAMI_APP_DIR/data/
+  touch $BITNAMI_APP_DIR/data/.initialized
 }
 
 set_manager_password() {
