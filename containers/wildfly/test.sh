@@ -6,7 +6,7 @@ WILDFLY_PASSWORD=test_password
 
 # source the helper script
 APP_NAME=wildfly
-SLEEP_TIME=5
+SLEEP_TIME=20
 load tests/docker_helper
 
 # Link to container and execute jboss-cli
