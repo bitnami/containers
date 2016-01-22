@@ -9,7 +9,7 @@ POSTGRES_REPLICATION_PASSWORD=repl_password
 
 # source the helper script
 APP_NAME=postgresql
-SLEEP_TIME=10
+SLEEP_TIME=15
 container_link_and_run_command_DOCKER_ARGS="-e PGPASSWORD=$POSTGRES_PASSWORD"
 load tests/docker_helper
 
