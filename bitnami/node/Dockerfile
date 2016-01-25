@@ -3,7 +3,7 @@ MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=node \
     BITNAMI_APP_USER=bitnami \
-    BITNAMI_APP_VERSION=5.4.0-0 \
+    BITNAMI_APP_VERSION=5.5.0-0 \
     BITNAMI_APP_DIR=$BITNAMI_PREFIX/nodejs
 
 ENV PATH=$BITNAMI_PREFIX/python/bin:$BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/bin:$PATH
