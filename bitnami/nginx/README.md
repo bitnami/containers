@@ -187,7 +187,7 @@ In order to activate it, mount the configuration volume following the steps in [
     location /ngx_pagespeed_message { allow 127.0.0.1; deny all; }
 ```
 
-Then, restart Nginx or reload its configuration following the steps in the [Restart Nginx](#restart-nginx) section.
+Then, restart Nginx or reload its configuration following the steps in the [Restart Nginx](#step-4-restart-nginx) section.
 
 # Reverse proxy to other containers
 
