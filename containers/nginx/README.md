@@ -164,11 +164,17 @@ You can also reload the nginx configuration by sending the `HUP` signal to the c
 docker kill -s HUP nginx
 ```
 
+or telling Nginx to reload its configuration using the following command:
+
+```bash
+docker exec nginx nginx -s reload
+```
+
 ## Enabling Pagespeed module
 
-This image include Pagespeed module for Nginx.
+This image includes the Pagespeed module for Nginx.
 
-In order to activate it, mount the configuration volume following the steps in "Full Configuration" section above and edit the file located at `/path/to/nginx/conf/bitnami/bitnami.conf` adding the following snippet inside the `server` directive:
+In order to activate it, mount the configuration volume following the steps in [Full Configuration](#full-configuration) section above and edit the file located at `/path/to/nginx/conf/bitnami/bitnami.conf` adding the following snippet inside the `server` directive:
 
 ```
     pagespeed on;
@@ -181,21 +187,7 @@ In order to activate it, mount the configuration volume following the steps in "
     location /ngx_pagespeed_message { allow 127.0.0.1; deny all; }
 ```
 
-Then reload nginx configuration executing the following command
-```bash
-docker exec nginx nginx -s reload
-```
-
-or restart nginx using
-```bash
-docker restart nginx
-```
-
-or using Docker Compose:
-
-```bash
-docker-compose restart nginx
-```
+Then, restart Nginx or reload its configuration following the steps in the [Restart Nginx](#restart-nginx) section.
 
 # Reverse proxy to other containers
 
