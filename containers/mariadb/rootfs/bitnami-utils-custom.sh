@@ -97,9 +97,8 @@ configure_replication() {
       fi
 
       if [ ! $MARIADB_MASTER_USER ]; then
-        echo "In order to setup a replication slave you need to provide the MARIADB_MASTER_USER as well"
-        echo ""
-        exit -1
+        echo "MARIADB_MASTER_USER not specified. Defaulting to root"
+        MARIADB_MASTER_USER=${MARIADB_MASTER_USER:-root}
       fi
 
       if [ ! $MARIADB_DATABASE ]; then
