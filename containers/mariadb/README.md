@@ -56,9 +56,11 @@ If you have already started using your database, follow the steps on
 [backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from
 your running container down to your host.
 
-The MariaDB image exposes a volume at `/bitnami/mariadb/data`, you can mount a directory from your
-host to serve as the data store. If the directory you mount is empty, the database will be
-initialized.
+The MariaDB image exposes a volume at `/bitnami/mariadb/data`, you can mount a directory from your host to serve as the data store. If the directory you mount is empty, the database will be initialized.
+
+> **Note**
+>
+> Persistent volumes cannot be shared across container instances.
 
 ```bash
 docker run -v /path/to/data:/bitnami/mariadb/data bitnami/mariadb
