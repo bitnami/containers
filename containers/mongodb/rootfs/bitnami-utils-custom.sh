@@ -65,7 +65,7 @@ EOF
   mongod $PROGRAM_OPTIONS --shutdown >/dev/null
 
   # enable authentication in mongo configuration
-  echo "auth = true" >> $BITNAMI_APP_DIR/conf/mongodb.conf
+  sed -i -e "s|^[#]*[ ]*auth = .*|auth = true|" $BITNAMI_APP_DIR/conf/mongodb.conf
 }
 
 print_mongo_user() {

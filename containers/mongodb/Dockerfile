@@ -2,16 +2,18 @@ FROM bitnami/base-ubuntu:14.04-onbuild
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=mongodb \
-    BITNAMI_APP_USER=mongodb \
+    BITNAMI_APP_USER=mongo \
     BITNAMI_APP_DAEMON=mongod \
-    BITNAMI_APP_VERSION=3.0.7-1-r01
+    BITNAMI_APP_VERSION=3.2.1-0 \
+    BITNAMI_APP_OPTIONS="--username root --password bitnami" \
+    MONGODB_PACKAGE_SHA256="cf0e248f090d4aa59520f7d2704c5813a57279f3b650c09e25281dcc1e986550"
 
 ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/$BITNAMI_APP_NAME \
     BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME
 
 ENV PATH=$BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/bin:$PATH
 
-RUN $BITNAMI_PREFIX/install.sh --mongodb_password bitnami --disable-components common
+RUN $BITNAMI_PREFIX/install.sh
 
 COPY rootfs/ /
 
