@@ -8,7 +8,7 @@ MARIADB_REPLICATION_PASSWORD=repl_password
 
 # source the helper script
 APP_NAME=mariadb
-SLEEP_TIME=5
+SLEEP_TIME=10
 load tests/docker_helper
 
 # Link to container and execute mysql client
