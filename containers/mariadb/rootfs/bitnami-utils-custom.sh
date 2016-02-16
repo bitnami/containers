@@ -1,5 +1,5 @@
 # MariaDB Utility functions
-PROGRAM_OPTIONS="--defaults-file=$BITNAMI_APP_DIR/my.cnf --log-error=$BITNAMI_APP_DIR/logs/mysqld.log --basedir=$BITNAMI_APP_DIR --datadir=$BITNAMI_APP_DIR/data --plugin-dir=$BITNAMI_APP_DIR/lib/plugin --user=$BITNAMI_APP_USER --socket=$BITNAMI_APP_DIR/tmp/mysql.sock --lower-case-table-names=1"
+PROGRAM_OPTIONS="--defaults-file=$BITNAMI_APP_DIR/conf/my.cnf --log-error=$BITNAMI_APP_DIR/logs/mysqld.log --basedir=$BITNAMI_APP_DIR --datadir=$BITNAMI_APP_DIR/data --plugin-dir=$BITNAMI_APP_DIR/lib/plugin --user=$BITNAMI_APP_USER --socket=$BITNAMI_APP_DIR/tmp/mysql.sock --lower-case-table-names=1"
 
 case "$MARIADB_REPLICATION_MODE" in
   master )
@@ -13,7 +13,7 @@ esac
 initialize_database() {
     echo "==> Initializing MySQL database..."
     echo ""
-    $BITNAMI_APP_DIR/scripts/mysql_install_db --port=3306 --socket=$BITNAMI_APP_DIR/tmp/mysql.sock --basedir=$BITNAMI_APP_DIR --datadir=$BITNAMI_APP_DIR/data > /dev/null
+    mysql_install_db --port=3306 --socket=$BITNAMI_APP_DIR/tmp/mysql.sock --basedir=$BITNAMI_APP_DIR --datadir=$BITNAMI_APP_DIR/data > /dev/null 2>&1
     chown -R $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_APP_DIR/data
 }
 
@@ -72,7 +72,8 @@ configure_replication() {
         echo "==> Creating replication user $MARIADB_REPLICATION_USER..."
         echo ""
 
-        echo "GRANT REPLICATION SLAVE ON *.* TO '$MARIADB_REPLICATION_USER'@'%' IDENTIFIED BY '$MARIADB_REPLICATION_PASSWORD';" >> /tmp/init_mysql.sql
+        echo "CREATE USER '$MARIADB_REPLICATION_USER'@'%' IDENTIFIED BY '$MARIADB_REPLICATION_PASSWORD' ;" >> /tmp/init_mysql.sql
+        echo "GRANT REPLICATION SLAVE ON *.* TO '$MARIADB_REPLICATION_USER'@'%' ;" >> /tmp/init_mysql.sql
         echo "FLUSH PRIVILEGES ;" >> /tmp/init_mysql.sql
       else
         echo "In order to setup a replication master you need to provide the MARIADB_REPLICATION_USER as well"
