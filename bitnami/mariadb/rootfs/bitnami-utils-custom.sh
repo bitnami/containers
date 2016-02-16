@@ -72,7 +72,8 @@ configure_replication() {
         echo "==> Creating replication user $MARIADB_REPLICATION_USER..."
         echo ""
 
-        echo "GRANT REPLICATION SLAVE ON *.* TO '$MARIADB_REPLICATION_USER'@'%' IDENTIFIED BY '$MARIADB_REPLICATION_PASSWORD';" >> /tmp/init_mysql.sql
+        echo "CREATE USER '$MARIADB_REPLICATION_USER'@'%' IDENTIFIED BY '$MARIADB_REPLICATION_PASSWORD' ;" >> /tmp/init_mysql.sql
+        echo "GRANT REPLICATION SLAVE ON *.* TO '$MARIADB_REPLICATION_USER'@'%' ;" >> /tmp/init_mysql.sql
         echo "FLUSH PRIVILEGES ;" >> /tmp/init_mysql.sql
       else
         echo "In order to setup a replication master you need to provide the MARIADB_REPLICATION_USER as well"
