@@ -120,7 +120,7 @@ cleanup_environment
   container_create default -d \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
 
-  run jboss_client default --connect --user=$WILDFLY_USER --command=version
+  run jboss_client default --connect --user=$WILDFLY_USER --password= --command=version
   [[ "$output" =~ "Unable to authenticate against controller" ]]
 }
 
@@ -129,7 +129,7 @@ cleanup_environment
     -e BITNAMI_APP_DAEMON=domain.sh \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
 
-  run jboss_client default --connect --user=$WILDFLY_USER --command=version
+  run jboss_client default --connect --user=$WILDFLY_USER --password= --command=version
   [[ "$output" =~ "Unable to authenticate against controller" ]]
 }
 
