@@ -5,6 +5,6 @@ source $BITNAMI_PREFIX/bitnami-utils.sh
 if [ "$MEMCACHED_PASSWORD" ]; then
   echo "Setting password..."
   echo $MEMCACHED_PASSWORD | $BITNAMI_PREFIX/common/sbin/saslpasswd2 -a $BITNAMI_APP_NAME -c user -p
-  chown memcached:memcached $BITNAMI_PREFIX/common/etc/sasldb2
+  chown $BITNAMI_APP_USER:$BITNAMI_APP_USER $BITNAMI_PREFIX/common/etc/sasldb2
   print_app_credentials $BITNAMI_APP_NAME user $MEMCACHED_PASSWORD
 fi
