@@ -111,6 +111,7 @@ cleanup_environment
   container_create default -d \
     -e BITNAMI_APP_DAEMON=domain.sh \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
+  sleep $SLEEP_TIME
 
   run jboss_client default --connect --user=$WILDFLY_USER --password=$WILDFLY_PASSWORD --command=version
   [ $status = 0 ]
