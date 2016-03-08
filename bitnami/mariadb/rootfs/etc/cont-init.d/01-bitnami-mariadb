@@ -2,6 +2,9 @@
 set -e
 source $BITNAMI_PREFIX/bitnami-utils.sh
 
+# remove initialization commands from last run
+rm -rf /tmp/init_mysql.sql
+
 if [ ! "$(ls -A $BITNAMI_APP_VOL_PREFIX/conf)" ]; then
   generate_conf_files
 fi

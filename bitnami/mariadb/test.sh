@@ -155,6 +155,22 @@ cleanup_environment
   [[ "$output" =~ "mysqld.log" ]]
 }
 
+# https://github.com/bitnami/bitnami-docker-mariadb/issues/39
+@test "If host mounted, password and settings are preserved upon restart" {
+  container_create_with_host_volumes standalone -d \
+    -e MARIADB_USER=$MARIADB_USER \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE \
+    -e MARIADB_PASSWORD=$MARIADB_PASSWORD
+
+  # restart container multiple times
+  container_restart standalone
+  container_restart standalone
+
+  # auth as MARIADB_USER and check of MARIADB_DATABASE exists
+  run mysql_client standalone -u$MARIADB_USER -p$MARIADB_PASSWORD -e "SHOW DATABASES\G"
+  [[ "$output" =~ "Database: $MARIADB_DATABASE" ]]
+}
+
 @test "If host mounted, password and settings are preserved after deletion" {
   container_create_with_host_volumes standalone -d \
     -e MARIADB_USER=$MARIADB_USER \
