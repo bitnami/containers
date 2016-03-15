@@ -19,7 +19,7 @@ Running Redmine with a database server is the recommended way. You can either us
 
 This is the recommended way to run Redmine. You can use the following docker compose template:
 
-```
+```yaml
 version: '2'
 
 services:
@@ -81,7 +81,7 @@ If you remove every container all your data will be lost, and the next time you 
 ### Mount persistent folders in the host using docker-compose
 
 This requires a sightly modification from the template previously shown:
-```
+```yaml
 version: '2'
 
 services:
@@ -107,10 +107,9 @@ services:
   application_data:
     image: bitnami/redmine:latest
     volumes:
-      - /bitnami/redmine
-    entrypoint: 'true'
-    mounts:
       - /your/local/path/bitnami/redmine:/bitnami/redmine
+    entrypoint: 'true'
+
 ```
 
 ### Mount persistent folders manually
@@ -169,7 +168,7 @@ $ docker pull bitnami/redmine:latest
  When you start the redmine image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
-```
+```yaml
 application:
   image: bitnami/redmine:latest
   ports:
@@ -207,9 +206,9 @@ To configure Redmine to send email using SMTP you can set the following environm
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose: 
+ * docker-compose:
 
-```
+```yaml
   application:
     image: bitnami/redmine:latest
     ports:
@@ -223,7 +222,7 @@ This would be an example of SMTP configuration using a GMail account:
       - application_data
 ```
 
- * For manual execution: 
+ * For manual execution:
 
 ```
  $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --network=redmine_network bitnami/redmine$ docker rm -v redmine
