@@ -208,7 +208,7 @@ This would be an example of SMTP configuration using a GMail account:
 
  * docker-compose:
 
-```
+```yaml
   application:
     image: bitnami/redmine:latest
     ports:
