@@ -1,0 +1,15 @@
+{
+  "username": "{{$global.env.REDMINE_USERNAME}}",
+  "password": "{{$global.env.REDMINE_PASSWORD}}",
+  "email": "{{$global.env.REDMINE_EMAIL}}",
+  "language": "{{$global.env.REDMINE_LANG}}",
+  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
+  "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpTls": "{{$global.env.SMTP_TLS}}"
+}
