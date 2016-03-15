@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  mariadb:
+    image: bitnami/mariadb:latest
+    volumes_from:
+      - mariadb_data
+
+  mariadb_data:
+    image: bitnami/mariadb:latest
+    entrypoint: true
+
+  application:
+    image: bitnami/redmine:latest
+    ports:
+      - 80:3000
+    volumes_from:
+      - application_data
+    depends_on:
+      - mariadb
+
+  application_data:
+    image: bitnami/redmine:latest
+    volumes:
+      - /bitnami/redmine
+    entrypoint: true
