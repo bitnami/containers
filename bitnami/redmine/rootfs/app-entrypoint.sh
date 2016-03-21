@@ -14,10 +14,7 @@ export MARIADB_PORT=${MARIADB_PORT:-"3306"}
 status=`harpoon inspect redmine`
 if [[ "$status" == *'"lifecycle": "unpacked"'* && "$1" == "harpoon" && "$2" == "start" ]]; then
     harpoon initialize redmine --inputs-file=/inputs.json
-    /entrypoint.sh
     echo "Starting application..."
-else
-    /entrypoint.sh
 fi
 
-exec tini -- "$@"
+exec /entrypoint.sh "$@"
