@@ -1,5 +1,0 @@
-#!/usr/bin/with-contenv bash
-set -e
-source $BITNAMI_PREFIX/bitnami-utils.sh
-
-exec s6-setuidgid $BITNAMI_APP_USER tail -f -n 1000 $BITNAMI_APP_VOL_PREFIX/logs/*.log 2>/dev/null
