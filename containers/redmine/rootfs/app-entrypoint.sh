@@ -10,11 +10,14 @@ export MARIADB_USER=${MARIADB_USER:-"root"}
 export MARIADB_HOST=${MARIADB_HOST:-"mariadb"}
 export MARIADB_PORT=${MARIADB_PORT:-"3306"}
 
-# Package can be "installed" or "unpacked"
-status=`harpoon inspect redmine`
-if [[ "$status" == *'"lifecycle": "unpacked"'* && "$1" == "harpoon" && "$2" == "start" ]]; then
-    harpoon initialize redmine --inputs-file=/inputs.json
-    echo "Starting application..."
+
+if [[ "$1" == "harpoon" && "$2" == "start" ]]; then
+  # Package can be "installed" or "unpacked"
+  status=`harpoon inspect $BITNAMI_APP_NAME`
+  if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
+      harpoon initialize $BITNAMI_APP_NAME --inputs-file=/inputs.json
+      echo "Starting application..."
+  fi
 fi
 
 exec /entrypoint.sh "$@"
