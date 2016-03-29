@@ -91,7 +91,7 @@ cleanup_environment
   container_create_with_host_volumes default -d
 
   # files expected in data volume (subset)
-  run container_exec default ls -la $VOL_PREFIX/data/db/
+  run container_exec default ls -la $VOL_PREFIX/data/
   [[ "$output" =~ "storage.bson" ]]
 }
 
