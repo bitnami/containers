@@ -15,7 +15,7 @@ RUN bitnami-pkg unpack $BITNAMI_APP_NAME-$BITNAMI_APP_VERSION
 
 # these symlinks should be setup by harpoon at unpack
 RUN mkdir -p $BITNAMI_APP_VOL_PREFIX && \
-    ln -s $BITNAMI_APP_DIR/data $BITNAMI_APP_VOL_PREFIX/data && \
+    ln -s $BITNAMI_APP_DIR/data/db $BITNAMI_APP_VOL_PREFIX/data && \
     ln -s $BITNAMI_APP_DIR/conf $BITNAMI_APP_VOL_PREFIX/conf && \
     ln -s $BITNAMI_APP_DIR/logs $BITNAMI_APP_VOL_PREFIX/logs
 

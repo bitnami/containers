@@ -4,8 +4,7 @@ set -e
 if [[ "$1" == "harpoon" && "$2" == "start" ]]; then
   status=`harpoon inspect $BITNAMI_APP_NAME`
   if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-    # HACK: harpoon initialize should create the db directory
-    mkdir -p $BITNAMI_APP_DIR/data/db
+    # fix ownership of `data/db` volume mount point
     chown -R $BITNAMI_APP_USER:root $BITNAMI_APP_DIR/data/db
 
     harpoon initialize $BITNAMI_APP_NAME \
