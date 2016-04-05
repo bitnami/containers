@@ -1,7 +1,6 @@
 #!/usr/bin/env bats
 
-MONGODB_ROOT_USER=root
-MONGODB_DEFAULT_PASSWORD=password
+MONGODB_DATABASE=test_database
 MONGODB_USER=test_user
 MONGODB_PASSWORD=test_password
 
@@ -36,30 +35,28 @@ cleanup_environment
   container_create default -d
 
   # ping the mongod server
-  run mongo_client default -u $MONGODB_ROOT_USER -p $MONGODB_DEFAULT_PASSWORD admin --eval "printjson(db.adminCommand('ping'))"
+  run mongo_client default admin --eval "printjson(db.adminCommand('ping'))"
   [[ "$output" =~ '"ok" : 1' ]]
 }
 
-@test "Root user created with default password" {
-  container_create default -d
-
-  # auth as root and list all databases
-  run mongo_client default -u $MONGODB_ROOT_USER -p $MONGODB_DEFAULT_PASSWORD admin --eval "printjson(db.adminCommand('listDatabases'))"
-  [[ "$output" =~ '"ok" : 1' ]]
-  [[ "$output" =~ '"name" : "local"' ]]
-}
-
-@test "Root user created with custom password" {
+@test "Authentication is enabled if password is specified" {
   container_create default -d \
     -e MONGODB_PASSWORD=$MONGODB_PASSWORD
 
-  # auth as root and list all databases
-  run mongo_client default -u $MONGODB_ROOT_USER -p $MONGODB_PASSWORD admin --eval "printjson(db.adminCommand('listDatabases'))"
+  run mongo_client default admin --eval "printjson(db.adminCommand('listDatabases'))"
+  [[ "$output" =~ "not authorized on admin to execute command" ]]
+}
+
+@test "Root user created with password" {
+  container_create default -d \
+    -e MONGODB_PASSWORD=$MONGODB_PASSWORD
+
+  run mongo_client default -u root -p $MONGODB_PASSWORD admin --eval "printjson(db.adminCommand('listDatabases'))"
   [[ "$output" =~ '"ok" : 1' ]]
   [[ "$output" =~ '"name" : "local"' ]]
 }
 
-@test "Custom user created with custom password" {
+@test "Custom user created with password" {
   container_create default -d \
     -e MONGODB_USER=$MONGODB_USER \
     -e MONGODB_PASSWORD=$MONGODB_PASSWORD
@@ -74,9 +71,9 @@ cleanup_environment
     -e MONGODB_USER=$MONGODB_USER \
     -e MONGODB_PASSWORD=$MONGODB_PASSWORD
 
-  # auth as MONGODB_USER and list all databases
   run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD admin --eval "printjson(db.adminCommand('listDatabases'))"
   [[ "$output" =~ '"ok" : 1' ]]
+  [[ "$output" =~ '"name" : "local"' ]]
 }
 
 @test "All the volumes exposed" {
@@ -87,10 +84,14 @@ cleanup_environment
   [[ "$output" =~ "$VOL_PREFIX" ]]
 }
 
-@test "Data gets generated in the data volume if bind mounted in the host" {
-  container_create_with_host_volumes default -d
+@test "Data gets generated in volume if bind mounted" {
+  container_create_with_host_volumes default -d \
+    -e MONGODB_USER=$MONGODB_USER \
+    -e MONGODB_PASSWORD=$MONGODB_PASSWORD
 
-  # files expected in data volume (subset)
+  run container_exec default ls -la $VOL_PREFIX/conf/
+  [[ "$output" =~ "mongodb.conf" ]]
+
   run container_exec default ls -la $VOL_PREFIX/data/db/
   [[ "$output" =~ "storage.bson" ]]
 }
@@ -100,7 +101,6 @@ cleanup_environment
     -e MONGODB_USER=$MONGODB_USER \
     -e MONGODB_PASSWORD=$MONGODB_PASSWORD
 
-  # restart container
   container_restart default
 
   run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD admin --eval "printjson(db.adminCommand('listDatabases'))"
@@ -109,18 +109,31 @@ cleanup_environment
 }
 
 @test "If host mounted, password and settings are preserved after deletion" {
-  skip
   container_create_with_host_volumes default -d \
     -e MONGODB_USER=$MONGODB_USER \
     -e MONGODB_PASSWORD=$MONGODB_PASSWORD
 
-  # stop and remove container
   container_remove default
-
-  # recreate container without specifying any env parameters
   container_create_with_host_volumes default -d
 
   run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD admin --eval "printjson(db.adminCommand('listDatabases'))"
+  [[ "$output" =~ '"ok" : 1' ]]
+  [[ "$output" =~ '"name" : "local"' ]]
+}
+
+@test "Configuration changes are preserved after deletion" {
+  container_create_with_host_volumes default -d \
+    -e MONGODB_USER=$MONGODB_USER \
+    -e MONGODB_PASSWORD=$MONGODB_PASSWORD
+
+  # modify mongodb.conf to disable auth
+  container_exec default sed -i 's|[#]*auth[ ]*=.*|auth = false|' $VOL_PREFIX/conf/mongodb.conf
+
+  container_remove default
+  container_create_with_host_volumes default -d
+
+  # list database without authentication
+  run mongo_client default admin --eval "printjson(db.adminCommand('listDatabases'))"
   [[ "$output" =~ '"ok" : 1' ]]
   [[ "$output" =~ '"name" : "local"' ]]
 }
