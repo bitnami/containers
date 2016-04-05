@@ -8,7 +8,7 @@ MONGODB_PASSWORD=test_password
 # source the helper script
 APP_NAME=mongodb
 VOL_PREFIX=/bitnami/$APP_NAME
-VOLUMES=$VOL_PREFIX/data
+VOLUMES=$VOL_PREFIX
 SLEEP_TIME=10
 load tests/docker_helper
 
@@ -84,14 +84,14 @@ cleanup_environment
 
   # get container introspection details and check if volumes are exposed
   run container_inspect default --format {{.Mounts}}
-  [[ "$output" =~ "$VOL_PREFIX/data" ]]
+  [[ "$output" =~ "$VOL_PREFIX" ]]
 }
 
 @test "Data gets generated in the data volume if bind mounted in the host" {
   container_create_with_host_volumes default -d
 
   # files expected in data volume (subset)
-  run container_exec default ls -la $VOL_PREFIX/data/
+  run container_exec default ls -la $VOL_PREFIX/data/db/
   [[ "$output" =~ "storage.bson" ]]
 }
 
