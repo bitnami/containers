@@ -13,7 +13,7 @@ services:
   application:
     image: bitnami/redmine:latest
     ports:
-      - 80:3000
+      - "80:3000"
     volumes_from:
       - application_data
     depends_on:
