@@ -124,8 +124,6 @@ cleanup_environment
   # files expected in data volume (subset)
   run container_exec default ls -la $VOL_PREFIX/data/
   [[ "$output" =~ "storage.bson" ]]
-  [[ "$output" =~ "local.0" ]]
-  [[ "$output" =~ "local.ns" ]]
 
   # files expected in logs volume
   run container_exec default ls -la $VOL_PREFIX/logs/
