@@ -6,8 +6,6 @@ ENV BITNAMI_APP_NAME=mongodb \
     BITNAMI_APP_CHECKSUM=e44c4f6f1cd2142cf67190e69e92ad76167b7d371e0a9dcc00b148965da394cd \
     BITNAMI_APP_USER=mongo
 
-COPY pkg-cache/ /tmp/bitnami/pkg/cache/
-
 # Install supporting modules
 RUN bitnami-pkg install base-functions-1.0.0-2 --checksum 9789082a1e01a4411198136477723288736d5ad5990403a208423b39369c8aac
 
