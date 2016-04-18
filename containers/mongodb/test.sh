@@ -8,7 +8,7 @@ MONGODB_PASSWORD=test_password
 APP_NAME=mongodb
 VOL_PREFIX=/bitnami/$APP_NAME
 VOLUMES=$VOL_PREFIX
-SLEEP_TIME=10
+SLEEP_TIME=15
 load tests/docker_helper
 
 # Link to container and execute mongo client
