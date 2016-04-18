@@ -3,7 +3,7 @@ MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=mongodb \
     BITNAMI_APP_VERSION=3.2.1-1 \
-    BITNAMI_APP_CHECKSUM=5ce07680ee85d6c61e690d760a7e3eced923d74b52963a7c01b0157f40d66314 \
+    BITNAMI_APP_CHECKSUM=e44c4f6f1cd2142cf67190e69e92ad76167b7d371e0a9dcc00b148965da394cd \
     BITNAMI_APP_USER=mongo
 
 COPY pkg-cache/ /tmp/bitnami/pkg/cache/
