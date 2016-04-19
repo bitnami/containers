@@ -144,7 +144,7 @@ mariadb:
 
 ## Configuration file
 
-The image looks for configuration in the `conf/` directory of `/bitnami/mariadb`. You can mount a volume at this location, as mentioned in [Persisting your database](#persisting-your-data), with your own configurations in the `conf/` directory. The default configuration will be copied to the `conf/` directory of the volume if it's empty.
+The image looks for configuration in the `conf/` directory of `/bitnami/mariadb`. As as mentioned in [Persisting your database](#persisting-your-data) you can mount a volume at this location and copy your own configurations in the `conf/` directory. The default configuration will be copied to the `conf/` directory if it's empty.
 
 ### Step 1: Run the MariaDB image
 
