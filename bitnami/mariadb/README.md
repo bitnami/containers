@@ -385,7 +385,7 @@ docker run --rm -v /path/to/backups:/backups --volumes-from `docker-compose ps -
 Restoring a backup is as simple as mounting the backup as volumes in the container.
 
 ```bash
-docker run -v /path/to/backups/latest:/bitnami/mariadb bitnami/mariadb
+docker run -v /path/to/backups/latest:/bitnami/mariadb bitnami/mariadb:latest
 ```
 
 or using Docker Compose:
