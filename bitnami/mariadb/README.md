@@ -9,14 +9,14 @@
 # TLDR
 
 ```bash
-docker run --name mariadb bitnami/mariadb
+docker run --name mariadb bitnami/mariadb:latest
 ```
 
 ## Docker Compose
 
 ```
 mariadb:
-  image: bitnami/mariadb
+  image: bitnami/mariadb:latest
 ```
 
 # Get this image
@@ -38,7 +38,7 @@ docker pull bitnami/mariadb:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-docker build -t bitnami/mariadb https://github.com/bitnami/bitnami-docker-mariadb.git
+docker build -t bitnami/mariadb:latest https://github.com/bitnami/bitnami-docker-mariadb.git
 ```
 
 # Persisting your database
@@ -52,16 +52,16 @@ If you have already started using your database, follow the steps on
 The image exposes a volume at `/bitnami/mariadb` for the MariaDB data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
-docker run -v /path/to/persistent/storage:/bitnami/mariadb bitnami/mariadb
+docker run -v /path/to/mariadb:/bitnami/mariadb bitnami/mariadb:latest
 ```
 
 or using Docker Compose:
 
 ```
 mariadb:
-  image: bitnami/mariadb
+  image: bitnami/mariadb:latest
   volumes:
-    - /path/to/persistent/storage:/bitnami/mariadb
+    - /path/to/mariadb:/bitnami/mariadb
 ```
 
 # Linking
@@ -77,7 +77,7 @@ The first step is to start our MariaDB server.
 Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our MariaDB server to make it easier to connect to other containers.
 
 ```bash
-docker run --name mariadb bitnami/mariadb
+docker run --name mariadb bitnami/mariadb:latest
 ```
 
 ### Step 2: Run MariaDB as a MySQL client and link to our server
@@ -87,7 +87,7 @@ Now that we have our MariaDB server running, we can create another container tha
 The Bitnami MariaDB Docker Image also ships with a MySQL client. To start the client, we can override the default command Docker runs by stating a different command to run after the image name.
 
 ```bash
-docker run --rm -it --link mariadb:server bitnami/mariadb mysql -h server -u root
+docker run --rm -it --link mariadb:server bitnami/mariadb:latest mysql -h server -u root
 ```
 
 We started the MySQL client passing in the `-h` option that allows us to specify the hostname of the server, which we set to the hostname we created in the link.
@@ -107,7 +107,7 @@ Copy the snippet below into your `docker-compose.yml` to add MariaDB to your app
 
 ```
 mariadb:
-  image: bitnami/mariadb
+  image: bitnami/mariadb:latest
 ```
 
 ### Step 2: Link it to another container in your application
@@ -127,20 +127,161 @@ Inside `myapp`, use `mariadb` as the hostname for the MariaDB server.
 
 ## Setting the root password on first run
 
-Passing the `MARIADB_PASSWORD` environment variable when running the image for the first time will set the password of the root user to the value of `MARIADB_PASSWORD`.
+Passing the `MARIADB_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the root user to the value of `MARIADB_ROOT_PASSWORD`.
 
 ```bash
-docker run --name mariadb -e MARIADB_PASSWORD=password123 bitnami/mariadb
+docker run --name mariadb -e MARIADB_ROOT_PASSWORD=password123 bitnami/mariadb:latest
 ```
 
 or using Docker Compose:
 
 ```
 mariadb:
-  image: bitnami/mariadb
+  image: bitnami/mariadb:latest
   environment:
-    - MARIADB_PASSWORD=password123
+    - MARIADB_ROOT_PASSWORD=password123
 ```
+
+**Warning** The `root` user is always created with remote access. It's suggested that the `MARIADB_ROOT_PASSWORD` env variable is always specified to set a password for the `root` user.
+
+## Creating a database on first run
+
+By passing the `MARIADB_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the MySQL client.
+
+```bash
+docker run --name mariadb -e MARIADB_DATABASE=my_database bitnami/mariadb:latest
+```
+
+or using Docker Compose:
+
+```
+mariadb:
+  image: bitnami/mariadb:latest
+  environment:
+    - MARIADB_DATABASE=my_database
+```
+
+## Creating a database user on first run
+
+You can create a restricted database user that only has permissions for the database created with the [`MARIADB_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `MARIADB_USER` environment variable and to set a password for the database user provide the `MARIADB_PASSWORD` variable.
+
+```bash
+docker run --name mariadb \
+  -e MARIADB_USER=my_user -e MARIADB_PASSWORD=my_password \
+  -e MARIADB_DATABASE=my_database \
+  bitnami/mariadb:latest
+```
+
+or using Docker Compose:
+
+```
+mariadb:
+  image: bitnami/mariadb:latest
+  environment:
+    - MARIADB_USER=my_user
+    - MARIADB_PASSWORD=my_password
+    - MARIADB_DATABASE=my_database
+```
+
+**Note!** The `root` user will still be created with remote access. Please ensure that you have specified a password for the `root` user using the `MARIADB_ROOT_PASSWORD` env variable.
+
+## Setting up a replication cluster
+
+A **zero downtime** MariaDB master-slave [replication](https://dev.mysql.com/doc/refman/5.0/en/replication-howto.html) cluster can easily be setup with the Bitnami MariaDB Docker image using the following environment variables:
+
+ - `MARIADB_REPLICATION_MODE`: The replication mode. Possible values `master`/`slave`. No defaults.
+ - `MARIADB_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
+ - `MARIADB_REPLICATION_PASSWORD`: The replication users password. No defaults.
+ - `MARIADB_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
+ - `MARIABD_MASTER_PORT`: Server port of the replication master (slave parameter). Defaults to `3306`.
+ - `MARIADB_MASTER_USER`: User on replication master with access to `MARIADB_DATABASE` (slave parameter). Defaults to `root`
+ - `MARIADB_MASTER_PASSWORD`: Password of user on replication master with access to `MARIADB_DATABASE` (slave parameter). No defaults.
+
+In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
+
+### Step 1: Create the replication master
+
+The first step is to start the MariaDB master.
+
+```bash
+docker run --name mariadb-master \
+  -e MARIADB_ROOT_PASSWORD=root_password \
+  -e MARIADB_REPLICATION_MODE=master \
+  -e MARIADB_REPLICATION_USER=my_repl_user \
+  -e MARIADB_REPLICATION_PASSWORD=my_repl_password \
+  -e MARIADB_USER=my_user \
+  -e MARIADB_PASSWORD=my_password \
+  -e MARIADB_DATABASE=my_database \
+  bitnami/mariadb:latest
+```
+
+In the above command the container is configured as the `master` using the `MARIADB_REPLICATION_MODE` parameter. A replication user is specified using the `MARIADB_REPLICATION_USER` and `MARIADB_REPLICATION_PASSWORD` parameters.
+
+### Step 2: Create the replication slave
+
+Next we start a MariaDB slave container.
+
+```bash
+docker run --name mariadb-slave --link mariadb-master:master \
+  -e MARIADB_ROOT_PASSWORD=root_password \
+  -e MARIADB_REPLICATION_MODE=slave \
+  -e MARIADB_REPLICATION_USER=my_repl_user \
+  -e MARIADB_REPLICATION_PASSWORD=my_repl_password \
+  -e MARIADB_MASTER_HOST=master \
+  -e MARIADB_MASTER_USER=my_user \
+  -e MARIADB_MASTER_PASSWORD=my_password \
+  -e MARIADB_USER=my_user \
+  -e MARIADB_PASSWORD=my_password \
+  -e MARIADB_DATABASE=my_database \
+  bitnami/mariadb:latest
+```
+
+In the above command the container is configured as a `slave` using the `MARIADB_REPLICATION_MODE` parameter. The `MARIADB_MASTER_HOST`, `MARIADB_MASTER_USER` and `MARIADB_MASTER_PASSWORD` parameters are used by the slave to connect to the master and take a dump of the existing data in the database identified by `MARIADB_DATABASE`. The replication user credentials are specified using the `MARIADB_REPLICATION_USER` and `MARIADB_REPLICATION_PASSWORD` parameters and should be the same as the one specified on the master.
+
+> **Note**! The cluster only replicates the database specified in the `MARIADB_DATABASE` parameter.
+
+You now have a two node MariaDB master/slave replication cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
+
+With Docker Compose the master/slave replication can be setup using:
+
+```yaml
+master:
+  image: bitnami/mariadb:latest
+  environment:
+    - MARIADB_ROOT_PASSWORD=root_password
+    - MARIADB_REPLICATION_MODE=master
+    - MARIADB_REPLICATION_USER=my_repl_user
+    - MARIADB_REPLICATION_PASSWORD=my_repl_password
+    - MARIADB_USER=my_user
+    - MARIADB_PASSWORD=my_password
+    - MARIADB_DATABASE=my_database
+
+slave:
+  image: bitnami/mariadb:latest
+  links:
+    - master:master
+  environment:
+    - MARIADB_ROOT_PASSWORD=root_password
+    - MARIADB_REPLICATION_MODE=slave
+    - MARIADB_REPLICATION_USER=my_repl_user
+    - MARIADB_REPLICATION_PASSWORD=my_repl_password
+    - MARIADB_MASTER_HOST=master
+    - MARIADB_MASTER_USER=my_user
+    - MARIADB_MASTER_PASSWORD=my_password
+    - MARIADB_USER=my_user
+    - MARIADB_PASSWORD=my_password
+    - MARIADB_DATABASE=my_database
+```
+
+Scale the number of slaves using:
+
+```bash
+docker-compose scale master=1 slave=3
+```
+
+The above command scales up the number of slaves to `3`. You can scale down in the same manner.
+
+> **Note**: You should not scale up/down the number of master nodes. Always have only one master node running.
 
 ## Configuration file
 
@@ -151,14 +292,14 @@ The image looks for configuration in the `conf/` directory of `/bitnami/mariadb`
 Run the MariaDB image, mounting a directory from your host.
 
 ```bash
-docker run --name mariadb -v /path/to/mariadb:/bitnami/mariadb bitnami/mariadb
+docker run --name mariadb -v /path/to/mariadb:/bitnami/mariadb bitnami/mariadb:latest
 ```
 
 or using Docker Compose:
 
 ```
 mariadb:
-  image: bitnami/mariadb
+  image: bitnami/mariadb:latest
   volumes:
     - /path/to/mariadb:/bitnami/mariadb
 ```
@@ -191,9 +332,7 @@ docker-compose restart mariadb
 
 # Logging
 
-The Bitnami MariaDB Docker Image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/reference/run/#logging-drivers-log-driver) using the `--log-driver` option. In the default configuration docker uses the `json-file` driver.
-
-To view the logs:
+The Bitnami MariaDB Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
 docker logs mariadb
@@ -205,7 +344,7 @@ or using Docker Compose:
 docker-compose logs mariadb
 ```
 
-*The `docker logs` command is only available if the `json-file` or `journald` logging driver is in use.*
+You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 # Maintenance
 
@@ -231,14 +370,14 @@ We need to mount two volumes in a container we will use to create the backup: a 
 
 ```bash
 docker run --rm -v /path/to/backups:/backups --volumes-from mariadb busybox \
-  cp -a /bitnami/mariadb /backups/latest
+  cp -a /bitnami/mariadb:latest /backups/latest
 ```
 
 or using Docker Compose:
 
 ```bash
 docker run --rm -v /path/to/backups:/backups --volumes-from `docker-compose ps -q mariadb` busybox \
-  cp -a /bitnami/mariadb /backups/latest
+  cp -a /bitnami/mariadb:latest /backups/latest
 ```
 
 ## Restoring a backup
@@ -253,7 +392,7 @@ or using Docker Compose:
 
 ```
 mariadb:
-  image: bitnami/mariadb
+  image: bitnami/mariadb:latest
   volumes:
     - /path/to/backups/latest:/bitnami/mariadb
 ```
@@ -310,6 +449,13 @@ This image is tested for expected runtime behavior, using the [Bats](https://git
 ```
 bats test.sh
 ```
+
+# Notable Changes
+
+## 10.1.13-r1
+
+- All volumes have been merged at `/bitnami/mariadb`. Now you only need to mount a single volume at `/bitnami/mariadb` for persistence.
+- The logs are always sent to the `stdout` and are no longer collected in the volume.
 
 # Contributing
 
