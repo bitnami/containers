@@ -1,20 +1,17 @@
-FROM bitnami/base-ubuntu:14.04-onbuild
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r06
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/mysql \
+ENV BITNAMI_IMAGE_VERSION=10.1.13-r1 \
     BITNAMI_APP_NAME=mariadb \
-    BITNAMI_APP_USER=mysql \
-    BITNAMI_APP_DAEMON=mysqld.bin \
-    BITNAMI_APP_VERSION=5.5.48-0-r01
+    BITNAMI_APP_USER=mysql
 
-ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
-    PATH=$BITNAMI_APP_DIR/bin:$PATH
-
-RUN $BITNAMI_PREFIX/install.sh\
-    --base_password bitnami --mysql_password bitnami --mysql_allow_all_remote_connections 1 --disable-components common --mysql_init_data_dir 0
+RUN bitnami-pkg unpack mariadb-10.1.13-5 --checksum 480f6cbf1372eafcbff912731033bb948ac2ee6608a927a02581a6fc8394ba67
+ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:$PATH
 
 COPY rootfs/ /
+ENTRYPOINT ["/app-entrypoint.sh"]
+CMD ["harpoon", "start", "--foreground", "mariadb"]
+
+VOLUME ["/bitnami/$BITNAMI_APP_NAME"]
 
 EXPOSE 3306
-VOLUME ["$BITNAMI_APP_VOL_PREFIX/data", "$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs"]
-ENTRYPOINT ["/entrypoint.sh"]
