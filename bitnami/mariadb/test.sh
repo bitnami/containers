@@ -8,7 +8,7 @@ MARIADB_REPLICATION_PASSWORD=repl_password
 
 # source the helper script
 APP_NAME=mariadb
-SLEEP_TIME=30
+SLEEP_TIME=45
 VOL_PREFIX=/bitnami/$APP_NAME
 VOLUMES=$VOL_PREFIX
 load tests/docker_helper
