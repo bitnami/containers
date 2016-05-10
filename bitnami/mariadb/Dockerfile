@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/ubuntu:14.04-r06
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=10.1.13-r1 \
+ENV BITNAMI_IMAGE_VERSION=10.1.13-r0 \
     BITNAMI_APP_NAME=mariadb \
     BITNAMI_APP_USER=mysql
 
