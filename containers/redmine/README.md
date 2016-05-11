@@ -125,7 +125,7 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Start a MariaDB database in the previous network:
 
   ```
-  $ docker run -d --name mariadb -v /your/local/path/bitnami/mariadb/data:/bitnami/mariadb/data -v /your/local/path/bitnami/mariadb/conf:/bitnami/mariadb/conf --network=redmine_network bitnami/mariadb
+  $ docker run -d --name mariadb -v /your/local/path/bitnami/mariadb/data:/bitnami/mariadb/data -v /your/local/path/bitnami/mariadb/conf:/bitnami/mariadb/conf --net=redmine_network bitnami/mariadb
   ```
 
   *Note:* You need to give the container a name in order to Redmine to resolve the host
@@ -133,7 +133,7 @@ In this case you need to specify the directories to mount on the run command. Th
 3. Run the Redmine container:
 
   ```
-  $ docker run -d -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --network=redmine_network bitnami/redmine
+  $ docker run -d -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --net=redmine_network bitnami/redmine
   ```
 
 # Upgrade this application
@@ -182,7 +182,7 @@ application:
  * For manual execution add a `-e` option with each variable and value:
 
 ```
- $ docker run -d -e REDMINE_PASSWORD=my_password -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --network=redmine_network bitnami/redmine
+ $ docker run -d -e REDMINE_PASSWORD=my_password -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --net=redmine_network bitnami/redmine
 ```
 
 Available variables:
@@ -225,7 +225,7 @@ This would be an example of SMTP configuration using a GMail account:
  * For manual execution:
 
 ```
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --network=redmine_network bitnami/redmine$ docker rm -v redmine
+ $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --net=redmine_network bitnami/redmine$ docker rm -v redmine
 ```
 
 # Backing up your application
