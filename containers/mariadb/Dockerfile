@@ -9,10 +9,10 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-LABEL com.bitnami.stacksmith.id="etellmc" \
+LABEL com.bitnami.stacksmith.id="wgp5xzg" \
       com.bitnami.stacksmith.name="bitnami/bitnami-docker-mariadb"
 
-ENV STACKSMITH_STACK_ID="etellmc" \
+ENV STACKSMITH_STACK_ID="wgp5xzg" \
     STACKSMITH_STACK_NAME="bitnami/bitnami-docker-mariadb" \
     STACKSMITH_STACK_PRIVATE="1"
 
