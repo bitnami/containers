@@ -24,26 +24,22 @@ version: '2'
 
 services:
   mariadb:
-    image: bitnami/mariadb:latest
-    volumes_from:
-      - mariadb_data
-
-  mariadb_data:
-    image: bitnami/mariadb:latest
-    entrypoint: 'true'
-
-  application:
-    image: bitnami/redmine:latest
-    ports:
-      - 80:3000
-    volumes_from:
-      - application_data
-
-  application_data:
-    image: bitnami/redmine:latest
+    image: 'bitnami/mariadb:latest'
     volumes:
-      - /bitnami/redmine
-    entrypoint: 'true'
+      - 'mariadb_data:/bitnami/mariadb'
+  application:
+    image: 'bitnami/redmine:latest'
+    ports:
+      - '80:3000'
+    volumes:
+      - 'redmine_data:/bitnami/redmine'
+    depends_on:
+      - mariadb
+volumes:
+  mariadb_data:
+    driver: local
+  redmine_data:
+    driver: local
 ```
 
 ### Run the application manually
@@ -74,42 +70,28 @@ Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data` and `application_data` containers. Those are data volume containers (See https://docs.docker.com/engine/userguide/containers/dockervolumes/ for more information). If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data` and `application_data` data volumes. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
 ### Mount persistent folders in the host using docker-compose
 
 This requires a sightly modification from the template previously shown:
-```yaml
+```
 version: '2'
 
-services:
   mariadb:
-    image: bitnami/mariadb:latest
-    volumes_from:
-      - mariadb_data
-
-  mariadb_data:
-    image: bitnami/mariadb:latest
-    entrypoint: 'true'
+    image: 'bitnami/mariadb:latest'
     volumes:
-      - /your/local/path/bitnami/mariadb/data:/bitnami/mariadb/data
-      - /your/local/path/bitnami/mariadb/conf:/bitnami/mariadb/conf
-
+      - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
   application:
     image: bitnami/redmine:latest
     ports:
       - 80:3000
-    volumes_from:
-      - application_data
-
-  application_data:
-    image: bitnami/redmine:latest
     volumes:
-      - /your/local/path/bitnami/redmine:/bitnami/redmine
-    entrypoint: 'true'
-
+      - '/path/to/your/local/redmine_data:/bitnami/redmine'
+    depends_on:
+      - mariadb
 ```
 
 ### Mount persistent folders manually
@@ -125,7 +107,7 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Start a MariaDB database in the previous network:
 
   ```
-  $ docker run -d --name mariadb -v /your/local/path/bitnami/mariadb/data:/bitnami/mariadb/data -v /your/local/path/bitnami/mariadb/conf:/bitnami/mariadb/conf --net=redmine_network bitnami/mariadb
+  $ docker run -d --name mariadb -v /your/local/path/bitnami/mariadb:/bitnami/mariadb --network=redmine_network bitnami/mariadb
   ```
 
   *Note:* You need to give the container a name in order to Redmine to resolve the host
@@ -133,7 +115,7 @@ In this case you need to specify the directories to mount on the run command. Th
 3. Run the Redmine container:
 
   ```
-  $ docker run -d -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --net=redmine_network bitnami/redmine
+  $ docker run -d -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --network=redmine_network bitnami/redmine
   ```
 
 # Upgrade this application
@@ -155,8 +137,8 @@ $ docker pull bitnami/redmine:latest
 
 4. Remove the currently running container
 
- * For docker-compose: `$ docker-compose rm -v redmine`
- * For manual execution: `$ docker rm -v redmine`
+ * For docker-compose: `$ docker-compose rm redmine`
+ * For manual execution: `$ docker rm redmine`
 
 5. Run the new image
 
@@ -175,14 +157,16 @@ application:
     - 80:3000
   environment:
     - REDMINE_PASSWORD=my_password
-  volumes_from:
-    - application_data
+  volumes:
+    - 'redmine_data:/bitnami/redmine'
+  depends_on:
+    - mariadb
 ```
 
  * For manual execution add a `-e` option with each variable and value:
 
 ```
- $ docker run -d -e REDMINE_PASSWORD=my_password -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --net=redmine_network bitnami/redmine
+ $ docker run -d -e REDMINE_PASSWORD=my_password -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --network=redmine_network bitnami/redmine
 ```
 
 Available variables:
@@ -206,9 +190,9 @@ To configure Redmine to send email using SMTP you can set the following environm
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose:
+ * docker-compose: 
 
-```yaml
+```
   application:
     image: bitnami/redmine:latest
     ports:
@@ -218,14 +202,12 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
-    volumes_from:
-      - application_data
 ```
 
- * For manual execution:
+ * For manual execution: 
 
 ```
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --net=redmine_network bitnami/redmine$ docker rm -v redmine
+ $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --network=redmine_network bitnami/redmine$ docker rm -v redmine
 ```
 
 # Backing up your application
