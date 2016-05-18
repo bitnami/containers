@@ -452,7 +452,7 @@ bats test.sh
 
 # Notable Changes
 
-## 10.1.13-r1
+## 10.1.13-r0
 
 - All volumes have been merged at `/bitnami/mariadb`. Now you only need to mount a single volume at `/bitnami/mariadb` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.

@@ -83,6 +83,14 @@ cleanup_environment
   [[ "$output" =~ "Database: $MARIADB_DATABASE" ]]
 }
 
+@test "Can create custom database with '-' character in the name" {
+  container_create default -d \
+    -e MARIADB_DATABASE=my-db
+
+  run mysql_client default -uroot -e "SHOW DATABASES\G"
+  [[ "$output" =~ "Database: my-db" ]]
+}
+
 @test "Can create custom database with password for root" {
   container_create default -d \
     -e MARIADB_ROOT_PASSWORD=$MARIADB_PASSWORD \
