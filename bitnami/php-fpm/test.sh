@@ -4,10 +4,11 @@ NGINX_IMAGE_NAME=bitnami/nginx
 NGINX_CONTAINER_NAME=bitnami-nginx-test
 
 # source the helper script
-APP_NAME=php-fpm
-SLEEP_TIME=3
+APP_NAME=php
+IMAGE_NAME=bitnami/php-fpm
+SLEEP_TIME=10
 VOL_PREFIX=/bitnami/$APP_NAME
-VOLUMES=/app:$VOL_PREFIX/logs:$VOL_PREFIX/conf
+VOLUMES=$VOL_PREFIX
 load tests/docker_helper
 
 # Cleans up all running/stopped containers and host mounted volumes
@@ -25,15 +26,6 @@ teardown() {
 
 # cleanup the environment of any leftover containers and volumes before starting the tests
 cleanup_environment
-
-@test "php and php-fpm installed" {
-  container_create default -d
-
-  run container_exec default php -v
-  [ "$status" = 0 ]
-  run container_exec default php-fpm -v
-  [ "$status" = 0 ]
-}
 
 create_nginx_container() {
   docker run --name $NGINX_CONTAINER_NAME -d \
@@ -55,6 +47,15 @@ EOF"
   sleep $SLEEP_TIME
 }
 
+@test "php and php-fpm installed" {
+  container_create default -d
+
+  run container_exec default php -v
+  [ "$status" = 0 ]
+  run container_exec default php-fpm -v
+  [ "$status" = 0 ]
+}
+
 @test "winter is coming via nginx" {
   container_create default -d
 
@@ -69,11 +70,12 @@ EOF"
   [[ "$output" =~ "Winter is coming" ]]
 }
 
-@test "required volumes exposed" {
+@test "All the volumes exposed" {
   container_create default -d
+
+  # get container introspection details and check if volumes are exposed
   run container_inspect default --format {{.Mounts}}
-  [[ "$output" =~ "$VOL_PREFIX/logs" ]]
-  [[ "$output" =~ "$VOL_PREFIX/conf" ]]
+  [[ "$output" =~ "$VOL_PREFIX" ]]
 }
 
 @test "Data gets generated in conf if bind mounted in the host" {
@@ -83,19 +85,39 @@ EOF"
   run container_exec default ls -la $VOL_PREFIX/conf/
   [[ "$output" =~ "php-fpm.conf" ]]
   [[ "$output" =~ "php.ini" ]]
+}
 
-  # files expected in logs volume
-  run container_exec default ls -la $VOL_PREFIX/conf/ $VOL_PREFIX/logs/
-  [[ "$output" =~ "php-fpm.log" ]]
+@test "Configuration changes are preserved after restart" {
+  container_create default -d
+
+  # modify php-fpm.conf
+  container_exec default sed -i 's|^[#]*[ ]*pm.max_children[ ]*=.*|pm.max_children=10|' $VOL_PREFIX/conf/php-fpm.d/www.conf
+  container_exec default sed -i 's|^[#]*[ ]*pm.start_servers[ ]*=.*|pm.start_servers=5|' $VOL_PREFIX/conf/php-fpm.d/www.conf
+  container_exec default sed -i 's|^[#]*[ ]*pm.min_spare_servers[ ]*=.*|pm.min_spare_servers=3|' $VOL_PREFIX/conf/php-fpm.d/www.conf
+
+  # modify php.ini
+  container_exec default sed -i 's|^[;]*[ ]*soap.wsdl_cache_limit[ ]*=.*|soap.wsdl_cache_limit=10|' $VOL_PREFIX/conf/php.ini
+  container_exec default sed -i 's|^[;]*[ ]*opcache.enable[ ]*=.*|opcache.enable=1|' $VOL_PREFIX/conf/php.ini
+
+  container_restart default
+
+  run container_exec default cat $VOL_PREFIX/conf/php-fpm.d/www.conf
+  [[ "$output" =~ "pm.max_children=10" ]]
+  [[ "$output" =~ "pm.start_servers=5" ]]
+  [[ "$output" =~ "pm.min_spare_servers=3" ]]
+
+  run container_exec default cat $VOL_PREFIX/conf/php.ini
+  [[ "$output" =~ "soap.wsdl_cache_limit=10" ]]
+  [[ "$output" =~ "opcache.enable=1" ]]
 }
 
 @test "Configuration changes are preserved after deletion" {
   container_create_with_host_volumes default -d
 
   # modify php-fpm.conf
-  container_exec default sed -i 's|^[#]*[ ]*pm.max_children[ ]*=.*|pm.max_children=10|' $VOL_PREFIX/conf/php-fpm.conf
-  container_exec default sed -i 's|^[#]*[ ]*pm.start_servers[ ]*=.*|pm.start_servers=5|' $VOL_PREFIX/conf/php-fpm.conf
-  container_exec default sed -i 's|^[#]*[ ]*pm.min_spare_servers[ ]*=.*|pm.min_spare_servers=3|' $VOL_PREFIX/conf/php-fpm.conf
+  container_exec default sed -i 's|^[#]*[ ]*pm.max_children[ ]*=.*|pm.max_children=10|' $VOL_PREFIX/conf/php-fpm.d/www.conf
+  container_exec default sed -i 's|^[#]*[ ]*pm.start_servers[ ]*=.*|pm.start_servers=5|' $VOL_PREFIX/conf/php-fpm.d/www.conf
+  container_exec default sed -i 's|^[#]*[ ]*pm.min_spare_servers[ ]*=.*|pm.min_spare_servers=3|' $VOL_PREFIX/conf/php-fpm.d/www.conf
 
   # modify php.ini
   container_exec default sed -i 's|^[;]*[ ]*soap.wsdl_cache_limit[ ]*=.*|soap.wsdl_cache_limit=10|' $VOL_PREFIX/conf/php.ini
@@ -107,7 +129,7 @@ EOF"
   # relaunch container with host volumes
   container_create_with_host_volumes default -d
 
-  run container_exec default cat $VOL_PREFIX/conf/php-fpm.conf
+  run container_exec default cat $VOL_PREFIX/conf/php-fpm.d/www.conf
   [[ "$output" =~ "pm.max_children=10" ]]
   [[ "$output" =~ "pm.start_servers=5" ]]
   [[ "$output" =~ "pm.min_spare_servers=3" ]]
