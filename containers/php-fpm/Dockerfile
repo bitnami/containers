@@ -1,22 +1,19 @@
-FROM bitnami/base-ubuntu:14.04-onbuild
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_APP_NAME=php-fpm \
-    BITNAMI_APP_USER=bitnami \
-    BITNAMI_APP_DAEMON=php-fpm \
-    BITNAMI_APP_VERSION=5.6.18-1 \
-    BITNAMI_APP_DIR=$BITNAMI_PREFIX/php
+ENV BITNAMI_IMAGE_VERSION=7.0.6-r0 \
+    BITNAMI_APP_NAME=php \
+    BITNAMI_APP_USER=daemon
 
-ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
-    PATH=$BITNAMI_APP_DIR/sbin:$BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/bin:$PATH
-
-RUN $BITNAMI_PREFIX/install.sh\
-    --php_fpm_allow_all_remote_connections 1 --php_fpm_connection_mode port
+RUN bitnami-pkg unpack php-7.0.6-0 --checksum 8ca32e21642fbe2fd23cdf7459d6cb4b65bb1b89b0e230333c8da553135d79a6
+ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:/opt/bitnami/common/bin:$PATH
 
 COPY rootfs/ /
+ENTRYPOINT ["/app-entrypoint.sh"]
+CMD ["harpoon", "start", "--foreground", "php"]
 
-EXPOSE 9000
-VOLUME ["$BITNAMI_APP_VOL_PREFIX/logs", "$BITNAMI_APP_VOL_PREFIX/conf"]
+VOLUME ["/bitnami/$BITNAMI_APP_NAME"]
+
 WORKDIR /app
 
-ENTRYPOINT ["/entrypoint.sh"]
+EXPOSE 9000
