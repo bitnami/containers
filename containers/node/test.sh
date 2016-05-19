@@ -2,7 +2,6 @@
 
 # source the helper script
 APP_NAME=node
-VOLUMES=/app
 SLEEP_TIME=3
 load tests/docker_helper
 
@@ -32,14 +31,14 @@ cleanup_environment
 @test "python installed" {
   container_create default -id
 
-  run container_exec default python -v
+  run container_exec default python3 --version
   [ "$status" = 0 ]
 }
 
 @test "can install npm modules with system requirements" {
   container_create default -id
 
-  run container_exec default npm install pg-native bower
+  run container_exec default npm install bower
   [ "$status" = 0 ]
 }
 
