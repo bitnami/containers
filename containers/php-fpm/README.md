@@ -146,14 +146,14 @@ docker run -it --name php-fpm -v /path/to/app:/app bitnami/php-fpm \
 
 # Configuration
 
-This container looks for configurations in `/bitnami/php/conf`. You can mount a directory at `/bitnami/php` with your own configurations in `conf/`, or the default configuration will be copied at `conf/` if it is empty.
+This container looks for configurations in `/bitnami/php-fpm/conf`. You can mount a directory at `/bitnami/php-fpm` with your own configurations in `conf/`, or the default configuration will be copied at `conf/` if it is empty.
 
 ### Step 1: Run the PHP-FPM image
 
 Run the PHP-FPM image, mounting a directory from your host.
 
 ```bash
-docker run --name phpfpm -v /path/to/php:/bitnami/php bitnami/php-fpm
+docker run --name phpfpm -v /path/to/php-fpm:/bitnami/php-fpm bitnami/php-fpm
 ```
 
 or using Docker Compose:
@@ -162,7 +162,7 @@ or using Docker Compose:
 phpfpm:
   image: bitnami/php-fpm
   volumes:
-    - /path/to/php:/bitnami/php/conf
+    - /path/to/php-fpm:/bitnami/php-fpm
 ```
 
 ### Step 2: Edit the configuration
@@ -170,7 +170,7 @@ phpfpm:
 Edit the configuration on your host using your favorite editor.
 
 ```bash
-vi /path/to/php/conf/php-fpm.conf
+vi /path/to/php-fpm/conf/php-fpm.conf
 ```
 
 ### Step 4: Restart PHP-FPM
@@ -229,14 +229,14 @@ We need to mount two volumes in a container we will use to create the backup: a 
 
 ```bash
 docker run --rm -v /path/to/backups:/backups --volumes-from phpfpm busybox \
-  cp -a /bitnami/php /backups/latest
+  cp -a /bitnami/php-fpm /backups/latest
 ```
 
 or using Docker Compose:
 
 ```bash
 docker run --rm -v /path/to/backups:/backups --volumes-from `docker-compose ps -q phpfpm` busybox \
-  cp -a /bitnami/php /backups/latest
+  cp -a /bitnami/php-fpm /backups/latest
 ```
 
 ## Restoring a backup
@@ -244,7 +244,7 @@ docker run --rm -v /path/to/backups:/backups --volumes-from `docker-compose ps -
 Restoring a backup is as simple as mounting the backup as volumes in the container.
 
 ```bash
-docker run -v /path/to/backups/latest:/bitnami/php \
+docker run -v /path/to/backups/latest:/bitnami/php-fpm \
   bitnami/php-fpm
 ```
 
@@ -254,7 +254,7 @@ or using Docker Compose:
 phpfpm:
   image: bitnami/php-fpm
   volumes:
-    - /path/to/backups/latest:/bitnami/php
+    - /path/to/backups/latest:/bitnami/php-fpm
 ```
 
 ## Upgrade this image
@@ -314,7 +314,7 @@ bats test.sh
 
 ## 7.0.6-r0 (2016-05-17)
 
-- All volumes have been merged at `/bitnami/php`. Now you only need to mount a single volume at `/bitnami/php` for persistence.
+- All volumes have been merged at `/bitnami/php-fpm`. Now you only need to mount a single volume at `/bitnami/php-fpm` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
 
 ## 5.5.30-2 (2015-12-07)
@@ -323,7 +323,7 @@ bats test.sh
 
 ## 5.5.30-0-r01 (2015-11-10)
 
-- `php.ini` is now exposed in the volume mounted at `/bitnami/php/conf/` allowing users to change the defaults as per their requirements.
+- `php.ini` is now exposed in the volume mounted at `/bitnami/php-fpm/conf/` allowing users to change the defaults as per their requirements.
 
 ## 5.5.30-0 (2015-10-06)
 

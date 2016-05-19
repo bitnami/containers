@@ -2,9 +2,9 @@
 set -e
 
 if [[ "$1" == "harpoon" && "$2" == "start" ]]; then
-  status=`harpoon inspect $BITNAMI_APP_NAME`
+  status=`harpoon inspect php`
   if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-    harpoon initialize $BITNAMI_APP_NAME
+    harpoon initialize php
   fi
 fi
 
