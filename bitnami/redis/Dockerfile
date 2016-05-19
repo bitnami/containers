@@ -1,20 +1,17 @@
-FROM bitnami/base-ubuntu:14.04-onbuild
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_APP_NAME=redis \
-    BITNAMI_APP_USER=redis \
-    BITNAMI_APP_DAEMON=redis-server \
-    BITNAMI_APP_VERSION=3.0.7-1
+ENV BITNAMI_IMAGE_VERSION=3.2.0-r0 \
+    BITNAMI_APP_NAME=redis \
+    BITNAMI_APP_USER=redis
 
-ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/$BITNAMI_APP_NAME \
-    BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME
-
-ENV PATH=$BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/bin:$PATH
-
-RUN $BITNAMI_PREFIX/install.sh --disable-components common --redis_enable_authentication 0
+RUN bitnami-pkg unpack redis-3.2.0-0 --checksum 4b462cc8ad13553c6aa78249ff344d44f9800ee9909de59599a0de3d66078f20
+ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:$PATH
 
 COPY rootfs/ /
+ENTRYPOINT ["/app-entrypoint.sh"]
+CMD ["harpoon", "start", "--foreground", "redis"]
+
+VOLUME ["/bitnami/$BITNAMI_APP_NAME"]
 
 EXPOSE 6379
-VOLUME ["$BITNAMI_APP_VOL_PREFIX/data", "$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs"]
-ENTRYPOINT ["/entrypoint.sh"]
