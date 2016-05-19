@@ -4,8 +4,7 @@ NGINX_IMAGE_NAME=bitnami/nginx
 NGINX_CONTAINER_NAME=bitnami-nginx-test
 
 # source the helper script
-APP_NAME=php
-IMAGE_NAME=bitnami/php-fpm
+APP_NAME=php-fpm
 SLEEP_TIME=10
 VOL_PREFIX=/bitnami/$APP_NAME
 VOLUMES=$VOL_PREFIX
