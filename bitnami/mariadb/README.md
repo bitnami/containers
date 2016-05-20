@@ -52,7 +52,7 @@ If you have already started using your database, follow the steps on
 The image exposes a volume at `/bitnami/mariadb` for the MariaDB data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
-docker run -v /path/to/mariadb:/bitnami/mariadb bitnami/mariadb:latest
+docker run -v /path/to/mariadb-persistence:/bitnami/mariadb bitnami/mariadb:latest
 ```
 
 or using Docker Compose:
@@ -61,7 +61,7 @@ or using Docker Compose:
 mariadb:
   image: bitnami/mariadb:latest
   volumes:
-    - /path/to/mariadb:/bitnami/mariadb
+    - /path/to/mariadb-persistence:/bitnami/mariadb
 ```
 
 # Linking
@@ -292,7 +292,7 @@ The image looks for configuration in the `conf/` directory of `/bitnami/mariadb`
 Run the MariaDB image, mounting a directory from your host.
 
 ```bash
-docker run --name mariadb -v /path/to/mariadb:/bitnami/mariadb bitnami/mariadb:latest
+docker run --name mariadb -v /path/to/mariadb-persistence:/bitnami/mariadb bitnami/mariadb:latest
 ```
 
 or using Docker Compose:
@@ -301,7 +301,7 @@ or using Docker Compose:
 mariadb:
   image: bitnami/mariadb:latest
   volumes:
-    - /path/to/mariadb:/bitnami/mariadb
+    - /path/to/mariadb-persistence:/bitnami/mariadb
 ```
 
 ### Step 2: Edit the configuration
@@ -309,7 +309,7 @@ mariadb:
 Edit the configuration on your host using your favorite editor.
 
 ```bash
-vi /path/to/mariadb/conf/my.cnf
+vi /path/to/mariadb-persistence/conf/my.cnf
 ```
 
 ### Step 3: Restart MariaDB
@@ -369,14 +369,14 @@ docker-compose stop mariadb
 We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
 ```bash
-docker run --rm -v /path/to/backups:/backups --volumes-from mariadb busybox \
+docker run --rm -v /path/to/mariadb-backups:/backups --volumes-from mariadb busybox \
   cp -a /bitnami/mariadb:latest /backups/latest
 ```
 
 or using Docker Compose:
 
 ```bash
-docker run --rm -v /path/to/backups:/backups --volumes-from `docker-compose ps -q mariadb` busybox \
+docker run --rm -v /path/to/mariadb-backups:/backups --volumes-from `docker-compose ps -q mariadb` busybox \
   cp -a /bitnami/mariadb:latest /backups/latest
 ```
 
@@ -385,7 +385,7 @@ docker run --rm -v /path/to/backups:/backups --volumes-from `docker-compose ps -
 Restoring a backup is as simple as mounting the backup as volumes in the container.
 
 ```bash
-docker run -v /path/to/backups/latest:/bitnami/mariadb bitnami/mariadb:latest
+docker run -v /path/to/mariadb-backups/latest:/bitnami/mariadb bitnami/mariadb:latest
 ```
 
 or using Docker Compose:
@@ -394,7 +394,7 @@ or using Docker Compose:
 mariadb:
   image: bitnami/mariadb:latest
   volumes:
-    - /path/to/backups/latest:/bitnami/mariadb
+    - /path/to/mariadb-backups/latest:/bitnami/mariadb
 ```
 
 ## Upgrade this image
