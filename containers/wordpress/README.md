@@ -41,12 +41,13 @@ services:
     depends_on:
       - mariadb
 
-  application_data:
-    image: bitnami/wordpress:latest
-    volumes:
-      - /bitnami/wordpress
-      - /bitnami/apache
-    entrypoint: 'true'
+  volumes:
+    mariadb_data:
+      driver: local
+    wordpress_data:
+      driver: local
+    apache_data:
+      driver: local
 ```
 
 ### Run the application manually
