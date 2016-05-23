@@ -53,7 +53,7 @@ create_mariadb_container() {
     --env MARIADB_HOST=mariadb \
     --env MARIADB_PORT=3306
 
-  container_exec default curl --noproxy 127.0.0.1 http://127.0.0.1:80
+  run container_exec default curl --noproxy 127.0.0.1 http://127.0.0.1:80
   [[ "$output" =~ "$WELCOME_PAGE_TEXT" ]]
 
   run container_logs default
