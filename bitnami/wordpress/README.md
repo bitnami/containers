@@ -1,3 +1,5 @@
+[![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-wordpress)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-wordpress/)
+
 # What is WordPress?
 
 > WordPress is one of the most versatile open source content management systems on the market. WordPress is built for high performance and is scalable to many servers, has easy integration via REST, JSON, SOAP and other formats, and features a whopping 15,000 plugins to extend and customize the application for just about any type of website.
