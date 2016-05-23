@@ -7,7 +7,7 @@ MARIADB_CONTAINER_NAME=bitnami-mariadb-test
 
 # source the helper script
 APP_NAME=wordpress
-SLEEP_TIME=20
+SLEEP_TIME=30
 VOLUMES=/bitnami/$APP_NAME:/bitnami/apache
 load tests/docker_helper
 
