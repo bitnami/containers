@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=redmine \
-    BITNAMI_IMAGE_VERSION=3.2.1-r3 \
+    BITNAMI_IMAGE_VERSION=3.2.2-r0 \
     PATH=/opt/bitnami/ruby/bin:$PATH
 
 # Additional modules required
@@ -13,7 +13,7 @@ RUN bitnami-pkg install mysql-libraries-10.1.13-0 --checksum 71ca428b61990112349
 RUN bitnami-pkg install mysql-client-10.1.13-1 --checksum e16c0ace5cb779b486e52af83a56367f26af16a25b4ab92d8f4293f1bf307107
 
 # Install redmine
-RUN bitnami-pkg unpack redmine-3.2.1-3 --checksum bbb8e84f40132d30351155d4ba1be191fa1decb00f8ba25d7d6d5496dee81ddc
+RUN bitnami-pkg unpack redmine-3.2.2-0 --checksum a66e76b1e2138051e4a28351ed7b9d83b21646f556eadbdd2bbf530ff88683ce
 
 COPY rootfs /
 
