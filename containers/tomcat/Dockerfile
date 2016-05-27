@@ -1,20 +1,22 @@
-FROM bitnami/base-ubuntu:14.04-onbuild
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/apache-tomcat \
+ENV BITNAMI_IMAGE_VERSION=8.0.35-r0 \
     BITNAMI_APP_NAME=tomcat \
-    BITNAMI_APP_USER=tomcat \
-    BITNAMI_APP_DAEMON=catalina.sh \
-    BITNAMI_APP_VERSION=7.0.68-0
+    BITNAMI_APP_USER=tomcat
 
-ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
-    PATH=$BITNAMI_APP_DIR/bin:$PATH
+RUN bitnami-pkg install java-1.8.0_91-0 --checksum 64cf20b77dc7cce3a28e9fe1daa149785c9c8c13ad1249071bc778fa40ae8773
+ENV PATH=/opt/bitnami/java/bin:$PATH
 
-RUN $BITNAMI_PREFIX/install.sh --tomcat_manager_username manager
+RUN bitnami-pkg unpack tomcat-8.0.35-0 --checksum d86af6bade1325215d4dd1b63aefbd4a57abb05a71672e5f58e27ff2fd49325b
+RUN ln -sf /opt/bitnami/$BITNAMI_APP_NAME/data /app
+
+ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/bin:$PATH
 
 COPY rootfs/ /
+ENTRYPOINT ["/app-entrypoint.sh"]
+CMD ["harpoon", "start", "--foreground", "tomcat"]
+
+VOLUME ["/bitnami/$BITNAMI_APP_NAME"]
 
 EXPOSE 8080
-VOLUME ["$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs"]
-
-ENTRYPOINT ["/entrypoint.sh"]

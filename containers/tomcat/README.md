@@ -7,14 +7,14 @@
 # TLDR
 
 ```bash
-docker run --name tomcat bitnami/tomcat
+docker run --name tomcat bitnami/tomcat:latest
 ```
 
 ## Docker Compose
 
-```
+```yaml
 tomcat:
-  image: bitnami/tomcat
+  image: bitnami/tomcat:latest
 ```
 
 # Get this image
@@ -34,30 +34,44 @@ docker pull bitnami/tomcat:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-git clone https://github.com/bitnami/bitnami-docker-tomcat.git
-cd bitnami-docker-tomcat
-docker build -t bitnami/tomcat .
+docker build -t bitnami/tomcat:latest https://github.com/bitnami/bitnami-docker-tomcat.git
 ```
 
-# Deploying web applications on Tomcat
+# Persisting your Tomcat configurations and deployments
 
-This Tomcat image exposes a volume at `/app`. This path acts as the Tomcat webapps directory. At this location, you either copy a so-called *exploded web application*, i.e. non-compressed, or a compressed web application resource (`.WAR`) file and it will automatically be deployed by Tomcat at startup.
+If you remove the container all your Tomcat configurations and deployments will be lost. To avoid this you should mount a volume that will persist even after the container is removed.
 
 **Note!**
-You can also deploy web applications on a running Tomcat instance.
+If you have already started using your Tomcat deployment, follow the steps on
+[backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
+
+The image exposes a volume at `/bitnami/tomcat` for the Tomcat configurations and application deployments. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
-docker run -v /path/to/app:/app bitnami/tomcat
+docker run -v /path/to/tomcat-persistence:/bitnami/tomcat bitnami/tomcat:latest
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 tomcat:
-  image: bitnami/tomcat
+  image: bitnami/tomcat:latest
   volumes:
-    - /path/to/app:/app
+    - /path/to/tomcat-persistence:/bitnami/tomcat
 ```
+
+# Deploying web applications on Tomcat
+
+The `/bitnami/tomcat/data` directory is configured as the Tomcat webapps deployment directory. At this location, you either copy a so-called *exploded web application*, i.e. non-compressed, or a compressed web application resource (`.WAR`) file and it will automatically be deployed by Tomcat.
+
+Additionally a helper symlink `/app` is present that points to the webapps deployment directory which enables us to deploy applications on a running Tomcat instance by simply doing:
+
+```bash
+docker cp /path/to/app.war tomcat:/app
+```
+
+**Note!**
+You can also deploy web applications on a running Tomcat instance using the Tomcat management interface.
 
 **Further Reading:**
 
@@ -68,7 +82,7 @@ tomcat:
 To access your web server from your host machine you can ask Docker to map a random port on your host to port `8080` exposed in the container.
 
 ```bash
-docker run --name tomcat -P bitnami/tomcat
+docker run --name tomcat -P bitnami/tomcat:latest
 ```
 
 Run `docker port` to determine the random ports Docker assigned.
@@ -81,54 +95,68 @@ $ docker port tomcat
 You can also manually specify the ports you want forwarded from your host to the container.
 
 ```bash
-docker run -p 8080:8080 bitnami/tomcat
+docker run -p 8080:8080 bitnami/tomcat:latest
 ```
 
 Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
 
 # Configuration
 
-## Setting the `manager` password on first run
+## Creating a custom user
 
-By default, the `manager` user is not assigned a password. To secure your Tomcat server you should assign a password to this user. Passing the `TOMCAT_PASSWORD` environment variable when running the image for the first time will set the password of the `manager` user to the value of `TOMCAT_PASSWORD`.
+By default, a management user named `user` is created and is not assigned a password. Passing the `TOMCAT_PASSWORD` environment variable when running the image for the first time will set the password of this user to the value of `TOMCAT_PASSWORD`.
+
+Additionally you can specify a user name for the management user using the `TOMCAT_USER` environment variable. When not specified, the `TOMCAT_PASSWORD` configuration is applied on the default user (`user`).
 
 ```bash
-docker run --name tomcat -e TOMCAT_PASSWORD=password123 bitnami/tomcat
+docker run --name tomcat \
+  -e TOMCAT_USER=my_user \
+  -e TOMCAT_PASSWORD=my_password \
+  bitnami/tomcat:latest
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 tomcat:
-  image: bitnami/tomcat
+  image: bitnami/tomcat:latest
   environment:
-    - TOMCAT_PASSWORD=password123
+    - TOMCAT_USER=my_user
+    - TOMCAT_PASSWORD=my_password
 ```
 
 ## Configuration files
 
-This image looks for Tomcat configuration files in `/bitnami/tomcat/conf`. You can mount a volume at this location with your own configuration, or the default configuration will be copied to your volume if it is empty.
+This image looks for Tomcat configuration files in `/bitnami/tomcat/conf`. You may recall from the [persisting your tomcat configurations and deployments](#persisting-your-tomcat-configurations-and-deployments) section, `/bitnami/tomcat` is the path to the persistence volume.
+
+Create a directory named `conf/` at this location with your own configuration, or the default configuration will be copied on the first run which can be customized later.
 
 ### Step 1: Run the Tomcat image
 
 Run the Tomcat image, mounting a directory from your host.
 
 ```bash
-docker run --name tomcat -v /path/to/tomcat/conf:/bitnami/tomcat/conf bitnami/tomcat
+docker run --name tomcat -v /path/to/tomcat-persistence:/bitnami/tomcat bitnami/tomcat:latest
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 tomcat:
-  image: bitnami/tomcat
+  image: bitnami/tomcat:latest
   volumes:
-    - /path/to/tomcat/conf:/bitnami/tomcat/conf
+    - /path/to/tomcat-persistence:/bitnami/tomcat
 ```
 
 ### Step 2: Edit the configuration
 
 Edit the configuration on your host using your favorite editor.
+
+eg.
+
+```bash
+vim /path/to/tomcat-persistence/conf/server.xml
+```
 
 ### Step 3: Restart Tomcat
 
@@ -150,11 +178,7 @@ docker-compose restart tomcat
 
 # Logging
 
-The Bitnami Tomcat Docker Image supports two different logging modes: logging to stdout, and logging to a file.
-
-## Logging to stdout
-
-The default behavior is to log to stdout, as Docker expects. These will be collected by Docker, converted to JSON and stored in the host, to be accessible via the `docker logs` command.
+The Bitnami Tomcat Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
 docker logs tomcat
@@ -166,26 +190,7 @@ or using Docker Compose:
 docker-compose logs tomcat
 ```
 
-This method of logging has the downside of not being easy to manage. Without an easy way to rotate logs, they could grow exponentially and take up large amounts of disk space on your host.
-
-## Logging to file
-
-To log to file, run the Tomcat image, mounting a directory from your host at `/bitnami/tomcat/logs`. This will instruct the container to send logs to your directory.
-
-```bash
-docker run --name tomcat -v /path/to/tomcat/logs:/bitnami/tomcat/logs bitnami/tomcat
-```
-
-or using Docker Compose:
-
-```
-tomcat:
-  image: bitnami/tomcat
-  volumes:
-    - /path/to/tomcat/logs:/bitnami/tomcat/logs
-```
-
-To perform operations (e.g. logrotate) on the logs, mount the same directory in a container designed to operate on log files, such as logstash.
+You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 # Maintenance
 
@@ -210,38 +215,32 @@ docker-compose stop tomcat
 We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
 ```bash
-docker run --rm -v /path/to/backups:/backups --volumes-from tomcat busybox \
+docker run --rm -v /path/to/tomcat-backups:/backups --volumes-from tomcat busybox \
   cp -a /bitnami/tomcat /backups/latest
 ```
 
 or using Docker Compose:
 
 ```bash
-docker run --rm -v /path/to/backups:/backups --volumes-from `docker-compose ps -q tomcat` busybox \
+docker run --rm -v /path/to/tomcat-backups:/backups --volumes-from `docker-compose ps -q tomcat` busybox \
   cp -a /bitnami/tomcat /backups/latest
 ```
-
-**Note!**
-If you only need to backup configuration, you can change the first argument to `cp` to `/bitnami/tomcat/conf`.
 
 ## Restoring a backup
 
 Restoring a backup is as simple as mounting the backup as volumes in the container.
 
 ```bash
-docker run -v /path/to/backups/latest/conf:/bitnami/tomcat/conf \
-  -v /path/to/backups/latest/logs:/bitnami/tomcat/logs \
-  bitnami/tomcat
+docker run -v /path/to/tomcat-backups/latest:/bitnami/tomcat bitnami/tomcat:latest
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 tomcat:
-  image: bitnami/tomcat
+  image: bitnami/tomcat:latest
   volumes:
-    - /path/to/backups/latest/conf:/bitnami/tomcat/conf
-    - /path/to/backups/latest/logs:/bitnami/tomcat/logs
+    - /path/to/tomcat-backups/latest:/bitnami/tomcat
 ```
 
 ## Upgrade this image
@@ -277,8 +276,7 @@ docker-compose rm -v tomcat
 
 ### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if
-necessary.
+Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
 ```bash
 docker run --name tomcat bitnami/tomcat:latest
@@ -298,6 +296,13 @@ This image is tested for expected runtime behavior, using the [Bats](https://git
 bats test.sh
 ```
 
+# Notable Changes
+
+## 8.0.35-r0
+
+- All volumes have been merged at `/bitnami/tomcat`. Now you only need to mount a single volume at `/bitnami/tomcat` for persistence.
+- The logs are always sent to the `stdout` and are no longer collected in the volume.
+
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-tomcat/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-tomcat/pulls) with your contribution.
@@ -310,8 +315,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Docker version (`docker version`)
 - Output of `docker info`
 - Version of this container (`echo $BITNAMI_APP_VERSION` inside the container)
-- The command you used to run the container, and any relevant output you saw (masking any sensitive
-information)
+- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
 
