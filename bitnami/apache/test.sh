@@ -2,14 +2,13 @@
 
 # source the helper script
 APP_NAME=apache
-VOL_PREFIX=/bitnami/$APP_NAME
-VOLUMES=/app:$VOL_PREFIX/conf:$VOL_PREFIX/logs
-SLEEP_TIME=2
+VOLUMES=/bitnami/$APP_NAME
+SLEEP_TIME=20
 load tests/docker_helper
 
 # Cleans up all running/stopped containers and host mounted volumes
 cleanup_environment() {
-  container_remove_full default
+  container_remove default
 }
 
 # Teardown called at the end of each test
@@ -55,15 +54,6 @@ cleanup_environment
   [[ "$output" =~  "GET / HTTP/1.1" ]]
 }
 
-@test "All the volumes exposed" {
-  container_create default -d
-
-  # inspect container to check if volumes are exposed
-  run container_inspect default --format {{.Mounts}}
-  [[ "$output" =~ "$VOL_PREFIX/logs" ]]
-  [[ "$output" =~ "$VOL_PREFIX/conf" ]]
-}
-
 @test "Vhosts directory is imported" {
   # create container and exposing TCP port 81
   container_create default -d --expose 81
@@ -74,8 +64,7 @@ Listen 81
 <VirtualHost *:81>
   ServerName default
   Redirect 405 /
-</VirtualHost>
-EOF"
+</VirtualHost>"
 
   # restart the container for the vhost config to take effect
   container_restart default
@@ -83,37 +72,4 @@ EOF"
   # check http connections on port 81
   run curl_client default -i http://$APP_NAME:81
   [[ "$output" =~  "405 Method Not Allowed" ]]
-}
-
-@test "Configuration changes are preserved after deletion" {
-  container_create_with_host_volumes default -d
-
-  # edit httpd.conf
-  container_exec default sed -i 's|^[#]*[ ]*LogLevel \+.*|LogLevel debug|' $VOL_PREFIX/conf/httpd.conf
-  container_exec default sed -i 's|^[#]*[ ]*ServerSignature \+.*|ServerSignature On|' $VOL_PREFIX/conf/httpd.conf
-  container_exec default sed -i 's|^[#]*[ ]*EnableSendfile \+.*|EnableSendfile Off|' $VOL_PREFIX/conf/httpd.conf
-
-  # add vhost
-  container_exec default sh -c "cat > $VOL_PREFIX/conf/vhosts/test.conf <<EOF
-Listen 81
-<VirtualHost *:81>
-  ServerName default
-  Redirect 405 /
-</VirtualHost>
-EOF"
-
-  # stop and remove container
-  container_remove default
-
-  # relaunch container with host volumes
-  container_create_with_host_volumes default -d
-
-  run container_exec default cat $VOL_PREFIX/conf/httpd.conf
-  [[ "$output" =~ "LogLevel debug" ]]
-  [[ "$output" =~ "ServerSignature On" ]]
-  [[ "$output" =~ "EnableSendfile Off" ]]
-
-  run container_exec default cat $VOL_PREFIX/conf/vhosts/test.conf
-  [[ "$output" =~ "ServerName default" ]]
-  [[ "$output" =~ "Redirect 405 /" ]]
 }

@@ -1,9 +1,0 @@
-volumes:
-  /app: "Location of static files to be served."
-  $BITNAMI_APP_VOL_PREFIX/conf: "Location of vhosts directory and general $BITNAMI_APP_NAME configuration files."
-  $BITNAMI_APP_VOL_PREFIX/logs: "Location of access and error logs."
-ports:
-  80: "Default http port."
-  443: "Default https port."
-misc:
-  Tip: "By mounting the $BITNAMI_APP_VOL_PREFIX/conf directory from the host, changing virtual host configuration is as easy as adding appropriate files from the host to the vhosts directory."

@@ -1,18 +1,21 @@
-FROM bitnami/base-ubuntu:14.04-onbuild
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_APP_NAME=apache \
-    BITNAMI_APP_USER=daemon \
-    BITNAMI_APP_DAEMON=httpd \
-    BITNAMI_APP_VERSION=2.4.18-0 \
-    BITNAMI_APP_DIR=$BITNAMI_PREFIX/apache2
+ENV BITNAMI_IMAGE_VERSION=2.4.20-r0 \
+    BITNAMI_APP_NAME=apache \
+    BITNAMI_APP_USER=daemon
 
-ENV BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME \
-    PATH=$BITNAMI_APP_DIR/bin:$PATH
+RUN bitnami-pkg unpack apache-2.4.20-0 --checksum ec415b0938e6df70327055c5be50f80b1307b785fa5bbd04c94a4077519e5dba
+RUN ln -sf /opt/bitnami/$BITNAMI_APP_NAME/htdocs /app
 
-RUN $BITNAMI_PREFIX/install.sh
+ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:/opt/bitnami/common/bin:$PATH
+
 COPY rootfs/ /
+ENTRYPOINT ["/app-entrypoint.sh"]
+CMD ["harpoon", "start", "--foreground", "apache"]
+
+VOLUME ["/bitnami/$BITNAMI_APP_NAME"]
+
+WORKDIR /app
 
 EXPOSE 80 443
-VOLUME ["$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs"]
-ENTRYPOINT ["/entrypoint.sh"]
