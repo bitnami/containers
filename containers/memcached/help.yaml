@@ -1,9 +1,0 @@
-environment_variables:
-  MEMCACHED_PASSWORD: "Password to be set on first boot for your $BITNAMI_APP_NAME server (default: none)."
-volumes:
-  $BITNAMI_APP_VOL_PREFIX/logs: "Location of $BITNAMI_APP_NAME logs."
-ports:
-  11211: "Default $BITNAMI_APP_NAME port."
-misc:
-  Options: "You can add extra options during the docker run using the -- prefix."
-  Note: "The password is only set the first time you run the container."
