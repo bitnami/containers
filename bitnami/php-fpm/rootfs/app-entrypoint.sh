@@ -6,8 +6,7 @@ if [[ "$1" == "harpoon" && "$2" == "start" ]]; then
   if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
     harpoon initialize php
   fi
+  chown -R :$BITNAMI_APP_USER /bitnami/$BITNAMI_APP_NAME || true
 fi
-
-chown -R :$BITNAMI_APP_USER /bitnami/$BITNAMI_APP_NAME || true
 
 exec /entrypoint.sh "$@"
