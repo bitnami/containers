@@ -1,7 +1,0 @@
-#!/usr/bin/with-contenv bash
-set -e
-source $BITNAMI_PREFIX/bitnami-utils.sh
-
-mkdir -p $BITNAMI_APP_DIR/tmp
-date '+%d%H%M%S' > $BITNAMI_APP_DIR/tmp/start
-exec $BITNAMI_APP_DAEMON -v -u $BITNAMI_APP_USER -l 0.0.0.0 ${MEMCACHED_PASSWORD:+-S} ${EXTRA_OPTIONS:+"$EXTRA_OPTIONS"} >> $BITNAMI_APP_VOL_PREFIX/logs/memcached.log 2>&1

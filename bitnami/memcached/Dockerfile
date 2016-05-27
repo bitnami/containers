@@ -1,19 +1,15 @@
-FROM bitnami/base-ubuntu:14.04-onbuild
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_APP_NAME=memcached \
-    BITNAMI_APP_USER=memcached \
-    BITNAMI_APP_DAEMON=memcached \
-    BITNAMI_APP_VERSION=1.4.25-1
+ENV BITNAMI_IMAGE_VERSION=1.4.25-r0 \
+    BITNAMI_APP_NAME=memcached \
+    BITNAMI_APP_USER=memcached
 
-ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/$BITNAMI_APP_NAME \
-    BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME
+RUN bitnami-pkg unpack memcached-1.4.25-1 --checksum 6e9fbb0997e960fb870f8b4861658d5c057646c511d7d9ea88eb872f3546581f
+ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:$PATH
 
-ENV PATH=$BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/bin:$PATH
-
-RUN $BITNAMI_PREFIX/install.sh
 COPY rootfs/ /
+ENTRYPOINT ["/app-entrypoint.sh"]
+CMD ["harpoon", "start", "--foreground", "memcached"]
 
-VOLUME ["$BITNAMI_APP_VOL_PREFIX/logs"]
 EXPOSE 11211
-ENTRYPOINT ["/entrypoint.sh"]
