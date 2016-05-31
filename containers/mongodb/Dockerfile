@@ -1,20 +1,17 @@
-FROM bitnami/base-ubuntu:14.04-onbuild
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_APP_NAME=mongodb \
-    BITNAMI_APP_USER=mongodb \
-    BITNAMI_APP_DAEMON=mongod \
-    BITNAMI_APP_VERSION=3.2.5-0
+ENV BITNAMI_IMAGE_VERSION=3.2.6-r0 \
+    BITNAMI_APP_NAME=mongodb \
+    BITNAMI_APP_USER=mongo
 
-ENV BITNAMI_APP_DIR=$BITNAMI_PREFIX/$BITNAMI_APP_NAME \
-    BITNAMI_APP_VOL_PREFIX=/bitnami/$BITNAMI_APP_NAME
-
-ENV PATH=$BITNAMI_APP_DIR/bin:$BITNAMI_PREFIX/common/bin:$PATH
-
-RUN $BITNAMI_PREFIX/install.sh --mongodb_password bitnami --disable-components common
+RUN bitnami-pkg unpack mongodb-3.2.6-1 --checksum 4154860dd1fece22f99f859466b6d0c3f5384cce84d51343953d3ebb9fa2dabd
+ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:$PATH
 
 COPY rootfs/ /
+ENTRYPOINT ["/app-entrypoint.sh"]
+CMD ["harpoon", "start", "--foreground", "mongodb"]
+
+VOLUME ["/bitnami/$BITNAMI_APP_NAME"]
 
 EXPOSE 27017
-VOLUME ["$BITNAMI_APP_VOL_PREFIX/data", "$BITNAMI_APP_VOL_PREFIX/conf", "$BITNAMI_APP_VOL_PREFIX/logs"]
-ENTRYPOINT ["/entrypoint.sh"]
