@@ -7,19 +7,19 @@
 # TLDR
 
 ```bash
-docker run --name wildfly bitnami/wildfly
+docker run --name wildfly bitnami/wildfly:latest
 ```
 
 ## Docker Compose
 
-```
+```yaml
 wildfly:
-  image: bitnami/wildfly
+  image: bitnami/wildfly:latest
 ```
 
 # Get this image
 
-The recommended way to get the Bitnami wildfly Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/wildfly).
+The recommended way to get the Bitnami Wildfly Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/wildfly).
 
 ```bash
 docker pull bitnami/wildfly:latest
@@ -34,87 +34,51 @@ docker pull bitnami/wildfly:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-git clone https://github.com/bitnami/bitnami-docker-wildfly.git
-cd bitnami-docker-wildfly
-docker build -t bitnami/wildfly .
+docker build -t bitnami/wildfly:latest https://github.com/bitnami/bitnami-docker-wildfly.git
 ```
 
-## Operating modes
+# Persisting Wildfly configurations and deployments
 
-Wildfly can be booted in two different modes. A *managed domain* allows you to run and manage a multi-server topology. Alternatively, you can run a *standalone server* instance.
+If you remove the container all your Wildfly configurations and application deployments will be lost. To avoid this you should mount a volume that will persist even after the container is removed.
 
-By default, the Bitnami Wildfly Docker image boots in the standalone server mode. To boot in the managed domain mode specify `domain.sh` as the first argument while running the image.
+**Note!**
+If you have already started using your Wildfly deployment, follow the steps on
+[backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
+
+The image exposes a volume at `/bitnami/wildfly` for the Wildfly configurations and application deployments. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
-docker run bitnami/wildfly domain.sh
+docker run -v /path/to/wildfly-persistence:/bitnami/wildfly bitnami/wildfly:latest
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 wildfly:
-  image: bitnami/wildfly
-  command: domain.sh
-```
-
-**Further Reading:**
-
-  - [Wildfly Operating modes](https://docs.jboss.org/author/display/WFLY9/Operating+modes)
-
-## Command-line options
-
-The simplest way to configure your Wildfly server is to pass custom command-line options when running the image.
-
-```bash
-docker run bitnami/wildfly -Dwildfly.as.deployment.ondemand=true
-```
-
-or using Docker Compose:
-
-```
-wildfly:
-  image: bitnami/wildfly
-  command: -Dwildfly.as.deployment.ondemand=true
-```
-
-> **Note!**: To configure the JVM parameters specify them in the environment variable `JAVA_OPTS` using `-e JAVA_OPTS=<parameters>` while running the image.
-
-**Further Reading:**
-
-  - [Wildfly Command line parameters](https://docs.jboss.org/author/display/WFLY9/Command+line+parameters)
-  - [Caveats](#caveats)
-
-# Persisting the data
-
-If you remove the container all your data will be lost, and the next time you run the image the data will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
-
-The Wildfly image exposes a volume at `/bitnami/wildfly/data`, you can mount a directory from your host to serve as the data store. If the directory you mount is empty, the data will be initialized.
-
-```bash
-docker run -v /path/to/data:/bitnami/wildfly/data bitnami/wildfly
-```
-
-or using Docker Compose:
-
-```
-postgresql:
-  image: bitnami/wildfly
+  image: bitnami/wildfly:latest
   volumes:
-    - /path/to/data:/bitnami/wildfly/data
+    - /path/to/wildfly-persistence:/bitnami/wildfly
 ```
 
-# Deploying web applications on Wildfly standalone server
+# Deploying web applications on Wildfly
 
-In the standalone server mode (default), you either copy a so-called *exploded web application*, i.e non-compressed or a compressed web application resource `.WAR` file in the `standalone/deployments/` directory of the [persistent](#persisting-your-data) volume and it will automatically be deployed by Wildfly.
+The `/bitnami/wildfly/data` directory is configured as the Wildfly webapps deployment directory. At this location, you either copy a so-called *exploded web application*, i.e. non-compressed, or a compressed web application resource (`.WAR`) file and it will automatically be deployed by Wildfly.
 
-Applications can also be deployed from the web management console.
+Additionally a helper symlink `/app` is present that points to the webapps deployment directory which enables us to deploy applications on a running Wildfly instance by simply doing:
+
+```bash
+docker cp /path/to/app.war wildfly:/app
+```
+
+**Note!**
+You can also deploy web applications on a running Wildfly instance using the Wildfly management interface.
 
 # Accessing your Wildfly server from the host
 
 The image exposes the application server on port `8080` and the management console on port `9990`. To access your web server from your host machine you can ask Docker to map random ports on your host to the ports `8080` and `9990` of the container.
 
 ```bash
-docker run --name wildfly -P bitnami/wildfly
+docker run --name wildfly -P bitnami/wildfly:latest
 ```
 
 Run `docker port` to determine the random ports Docker assigned.
@@ -128,18 +92,18 @@ $ docker port wildfly
 You can also manually specify the ports you want forwarded from your host to the container.
 
 ```bash
-docker run -p 8080:8080 -p 9990:9990 bitnami/wildfly
+docker run -p 8080:8080 -p 9990:9990 bitnami/wildfly:latest
 ```
 
 Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/) to access the application server and [http://localhost:9990/console](http://localhost:9990/console/) to access the management console.
 
 # Accessing the command line interface
 
-The Command Line Interface (CLI) is a management tool for a managed domain or standalone server. It allows a user to connect to the domain controller or a standalone server and execute management operations available through the de-typed management model.
+The command line management tool `jboss-cli.sh` allows a user to connect to the Wildfly server and execute management operations available through the de-typed management model.
 
-The Bitnami Wildfly Docker Image ships the `jboss-cli.sh` client, but by default it will start the standalone server. To start the client instead, we can override the default command Docker runs by stating a different command to run after the image name.
+The Bitnami Wildfly Docker Image ships the `jboss-cli.sh` client and can be launched by specifying the command while launching the container.
 
-## Connecting a `jboss-cli.sh` container to the Wildfly server container
+## Connecting a client container to the Wildfly server container
 
 ### Step 1: Run the Wildfly image with a specific name
 
@@ -148,7 +112,7 @@ The first step is to start our Wildfly server.
 Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our Wildfly server to make it easier to connect to other containers.
 
 ```bash
-docker run --name wildfly bitnami/wildfly
+docker run --name wildfly bitnami/wildfly:latest
 ```
 
 ### Step 2: Run Wildfly as a client and link to our server
@@ -157,7 +121,7 @@ Now that we have our Wildfly server running, we can create another container to 
 
 ```bash
 docker run --rm -it --link wildfly:server bitnami/wildfly \
-  jboss-cli.sh --controller=server:9990 --user=manager --password=wildfly --connect
+  jboss-cli.sh --controller=server:9990 --user=test --password=password --connect
 ```
 
 We started `jboss-cli.sh` passing in the `--controller` option that allows us to specify the hostname and port of the server, which we set to the hostname we created in the link.
@@ -166,52 +130,66 @@ We started `jboss-cli.sh` passing in the `--controller` option that allows us to
 You can also run the client in the same container as the server using the Docker [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
 
 ```bash
-docker exec -it wildfly jboss-cli.sh --user=manager --password=wildfly --connect
+docker exec -it wildfly jboss-cli.sh --user=user --password=password --connect
 ```
 
 # Configuration
 
-## Setting the `manager` password on first run
+## Creating a custom user
 
-By default, the `manager` user is assigned the password `wildfly`. To secure your Wildfly server you should specify a different password for this user. Passing the `WILDFLY_PASSWORD` environment variable when running the image for the first time will set the password of the `manager` user to the value of `WILDFLY_PASSWORD`.
+By default, a management user named `user` is created with the default password `password`. Passing the `WILDFLY_PASSWORD` environment variable when running the image for the first time will set the password of this user to the value of `WILDFLY_PASSWORD`.
+
+Additionally you can specify a user name for the management user using the `WILDFLY_USER` environment variable. When not specified, the `WILDFLY_PASSWORD` configuration is applied on the default user (`user`).
 
 ```bash
-docker run --name wildfly -e WILDFLY_PASSWORD=password123 bitnami/wildfly
+docker run --name wildfly \
+  -e WILDFLY_USER=my_user \
+  -e WILDFLY_PASSWORD=my_password \
+  bitnami/wildfly:latest
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 wildfly:
-  image: bitnami/wildfly
+  image: bitnami/wildfly:latest
   environment:
-    - WILDFLY_PASSWORD=password123
+    - WILDFLY_USER=my_user
+    - WILDFLY_PASSWORD=my_password
 ```
 
 ## Configuration files
 
-This image looks for Wildfly configuration files in `/bitnami/wildfly/conf`. You can mount a volume at this location with your own configurations, or the default configurations will be copied to your volume if it is empty.
+This image looks for Wildfly configuration files in `/bitnami/wildfly/conf`. You may recall from the [persisting wildfly configurations and deployments](#persisting-wildfly-configurations-and-deployments) section, `/bitnami/wildfly` is the path to the persistence volume.
+
+Create a directory named `conf/` at this location with your own configuration, or the default configuration will be copied on the first run which can be customized later.
 
 ### Step 1: Run the Wildfly image
 
 Run the Wildfly image, mounting a directory from your host.
 
 ```bash
-docker run --name wildfly -v /path/to/wildfly/conf:/bitnami/wildfly/conf bitnami/wildfly
+docker run --name wildfly -v /path/to/wildfly-persistence:/bitnami/wildfly bitnami/wildfly:latest
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 wildfly:
-  image: bitnami/wildfly
+  image: bitnami/wildfly:latest
   volumes:
-    - /path/to/wildfly/conf:/bitnami/wildfly/conf
+    - /path/to/wildfly-persistence:/bitnami/wildfly
 ```
 
 ### Step 2: Edit the configuration
 
-Edit the configurations on your host using your favorite editor.
+Edit the configuration on your host using your favorite editor.
+
+eg.
+
+```bash
+vim /path/to/wildfly-persistence/conf/standalone.xml
+```
 
 ### Step 3: Restart Wildfly
 
@@ -231,28 +209,9 @@ docker-compose restart wildfly
 
   - [General configuration concepts](https://docs.jboss.org/author/display/WFLY9/General+configuration+concepts)
 
-## Caveats
-
-The following options cannot be modified, to ensure that the image runs correctly.
-
-```bash
--b 0.0.0.0
--bmanagement 0.0.0.0
--Djboss.server.base.dir=/opt/bitnami/wildfly/data/standalone
--Djboss.server.config.dir=/opt/bitnami/wildfly/conf/standalone
--Djboss.server.log.dir=/opt/bitnami/wildfly/logs
--Djboss.domain.base.dir=/opt/bitnami/wildfly/data/domain
--Djboss.domain.config.dir=/opt/bitnami/wildfly/conf/domain
--Djboss.domain.log.dir=/opt/bitnami/wildfly/logs
-```
-
 # Logging
 
-The Bitnami Wildfly Docker Image supports two different logging modes: logging to stdout, and logging to a file.
-
-## Logging to stdout
-
-The default behavior is to log to stdout, as Docker expects. These will be collected by Docker, converted to JSON and stored in the host, to be accessible via the `docker logs` command.
+The Bitnami Wildfly Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
 docker logs wildfly
@@ -264,26 +223,7 @@ or using Docker Compose:
 docker-compose logs wildfly
 ```
 
-This method of logging has the downside of not being easy to manage. Without an easy way to rotate logs, they could grow exponentially and take up large amounts of disk space on your host.
-
-## Logging to file
-
-To log to file, run the Wildfly image, mounting a directory from your host at `/bitnami/wildfly/logs`. This will instruct the container to send logs to your directory.
-
-```bash
-docker run --name wildfly -v /path/to/wildfly/logs:/bitnami/wildfly/logs bitnami/wildfly
-```
-
-or using Docker Compose:
-
-```
-wildfly:
-  image: bitnami/wildfly
-  volumes:
-    - /path/to/wildfly/logs:/bitnami/wildfly/logs
-```
-
-To perform operations (e.g. logrotate) on the logs, mount the same directory in a container designed to operate on log files, such as logstash.
+You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 # Maintenance
 
@@ -308,38 +248,38 @@ docker-compose stop wildfly
 We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
 ```bash
-docker run --rm -v /path/to/backups:/backups --volumes-from wildfly busybox \
-  cp -a /bitnami/wildfly /backups/latest
+docker run --rm \
+  -v /path/to/wildfly-backups:/backups \
+  --volumes-from wildfly \
+  busybox cp -a /bitnami/wildfly /backups/latest
 ```
 
 or using Docker Compose:
 
 ```bash
-docker run --rm -v /path/to/backups:/backups --volumes-from `docker-compose ps -q wildfly` busybox \
-  cp -a /bitnami/wildfly /backups/latest
+docker run --rm \
+  -v /path/to/wildfly-backups:/backups \
+  --volumes-from `docker-compose ps -q wildfly` \
+  busybox cp -a /bitnami/wildfly /backups/latest
 ```
-
-**Note!**
-If you only need to backup configuration, you can change the first argument to `cp` to `/bitnami/wildfly/conf`.
 
 ## Restoring a backup
 
 Restoring a backup is as simple as mounting the backup as volumes in the container.
 
 ```bash
-docker run -v /path/to/backups/latest/conf:/bitnami/wildfly/conf \
-  -v /path/to/backups/latest/logs:/bitnami/wildfly/logs \
-  bitnami/wildfly
+docker run \
+  -v /path/to/wildfly-backups/latest:/bitnami/wildfly \
+  bitnami/wildfly:latest
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 wildfly:
-  image: bitnami/wildfly
+  image: bitnami/wildfly:latest
   volumes:
-    - /path/to/backups/latest/conf:/bitnami/wildfly/conf
-    - /path/to/backups/latest/logs:/bitnami/wildfly/logs
+    - /path/to/wildfly-backups/latest:/bitnami/wildfly
 ```
 
 ## Upgrade this image
@@ -395,6 +335,13 @@ This image is tested for expected runtime behavior, using the [Bats](https://git
 bats test.sh
 ```
 
+# Notable Changes
+
+## 10.0.0-r0
+
+- All volumes have been merged at `/bitnami/tomcat`. Now you only need to mount a single volume at `/bitnami/tomcat` for persistence.
+- The logs are always sent to the `stdout` and are no longer collected in the volume.
+
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-wildfly/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-wildfly/pulls) with your contribution.
@@ -407,8 +354,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Docker version (`docker version`)
 - Output of `docker info`
 - Version of this container (`echo $BITNAMI_APP_VERSION` inside the container)
-- The command you used to run the container, and any relevant output you saw (masking any sensitive
-information)
+- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
 
