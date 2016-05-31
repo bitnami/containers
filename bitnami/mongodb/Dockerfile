@@ -5,7 +5,7 @@ ENV BITNAMI_IMAGE_VERSION=3.2.6-r0 \
     BITNAMI_APP_NAME=mongodb \
     BITNAMI_APP_USER=mongo
 
-RUN bitnami-pkg unpack mongodb-3.2.6-1 --checksum 4154860dd1fece22f99f859466b6d0c3f5384cce84d51343953d3ebb9fa2dabd
+RUN bitnami-pkg unpack mongodb-3.2.6-3 --checksum 9a019ffae6e3f69779512d39e95bb7256672999bb1eb96e3572550eb2bdd9738
 ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:$PATH
 
 COPY rootfs/ /
