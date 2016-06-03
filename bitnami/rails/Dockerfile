@@ -11,7 +11,7 @@
 ##   Connect to the container at DOCKER_IP:3000
 ##     replacing DOCKER_IP for the IP of your active docker host
 
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
+FROM gcr.io/stacksmith-images/ubuntu-buildpack:14.04-r07
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -28,12 +28,9 @@ ENV PATH=/opt/bitnami/ruby/bin:$PATH
 # Ruby on Rails template
 ENV RAILS_ENV=development
 
-COPY Gemfile* /app/
 WORKDIR /app
 
-RUN bundle install --without production
-
-COPY . /app
+RUN gem install rails -v 4.2.6 --no-document
 
 EXPOSE 3000
 
