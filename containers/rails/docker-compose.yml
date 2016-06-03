@@ -18,18 +18,12 @@ services:
 
   myapp:
     tty: true
-    image: bitnami/ruby:latest
+    build: .
+    environment:
+      - DATABASE_URL=mysql2://mariadb/my_app_development
     depends_on:
       - mariadb
     ports:
       - 3000:3000
     volumes:
-      - .:/app
-    environment:
-      - RAILS_ENV=development
-    command: >
-      sh -c 'sleep 10 \
-          && bundle install --path vendor/bundle \
-          && bundle exec rake db:create \
-          && bundle exec rake db:migrate \
-          && bundle exec rails server -b 0.0.0.0 -p 3000'
+      - ./app:/app
