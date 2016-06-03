@@ -8,17 +8,13 @@ services:
   mariadb:
     tty: true
     image: bitnami/mariadb:latest
-    environment:
-      - MARIADB_ROOT_PASSWORD=
-      - MARIADB_USER=
-      - MARIADB_PASSWORD=
-      - MARIADB_DATABASE=
     volumes:
       - mariadb-data:/bitnami/mariadb
 
   myapp:
     tty: true
-    build: .
+    # build: .
+    image: gcr.io/bitnami-containers/rails:4.2.6-r1
     environment:
       - DATABASE_URL=mysql2://mariadb/my_app_development
     depends_on:
@@ -26,4 +22,4 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./app:/app
+      - .:/app

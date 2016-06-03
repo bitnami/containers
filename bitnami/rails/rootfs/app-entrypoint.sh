@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
+
 INIT_SEM=/tmp/initialized.sem
-GEMFILE=/app/Gemfile
+
 fresh_container() {
   [ ! -f $INIT_SEM ]
 }
@@ -24,8 +25,8 @@ wait_for_db() {
 			log "Error: Couldn't connect to mariadb."
 			exit 1
 		fi
-		log "Still trying to connect to mariadb at $mariadb_address. Attempt $counter."
-		sleep 2
+		log "Trying to connect to mariadb at $mariadb_address. Attempt $counter."
+		sleep 5
 	done
 }
 
@@ -42,7 +43,7 @@ log () {
 
 if ! app_present; then
   log "Creating rails application"
-  rails new . --skip-bundle --database mysql --quiet
+  rails new . --skip-bundle --database mysql
 fi
 
 if ! gems_up_to_date; then
