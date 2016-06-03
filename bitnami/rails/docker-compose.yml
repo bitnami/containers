@@ -1,0 +1,35 @@
+version: '2'
+
+volumes:
+  mariadb-data:
+    driver: local
+
+services:
+  mariadb:
+    tty: true
+    image: bitnami/mariadb:latest
+    environment:
+      - MARIADB_ROOT_PASSWORD=
+      - MARIADB_USER=
+      - MARIADB_PASSWORD=
+      - MARIADB_DATABASE=
+    volumes:
+      - mariadb-data:/bitnami/mariadb
+
+  myapp:
+    tty: true
+    image: bitnami/ruby:latest
+    depends_on:
+      - mariadb
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    environment:
+      - RAILS_ENV=development
+    command: >
+      sh -c 'sleep 10 \
+          && bundle install --path vendor/bundle \
+          && bundle exec rake db:create \
+          && bundle exec rake db:migrate \
+          && bundle exec rails server -b 0.0.0.0 -p 3000'
