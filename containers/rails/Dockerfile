@@ -11,11 +11,11 @@
 ##   Connect to the container at DOCKER_IP:3000
 ##     replacing DOCKER_IP for the IP of your active docker host
 
-FROM gcr.io/stacksmith-images/debian:wheezy-r07
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV STACKSMITH_STACK_ID="5pem3ni" \
+ENV STACKSMITH_STACK_ID="2v2yvmx" \
     STACKSMITH_STACK_NAME="bitnami/bitnami-docker-rails" \
     STACKSMITH_STACK_PRIVATE="1"
 
