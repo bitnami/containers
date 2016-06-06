@@ -1,13 +1,14 @@
 #!/usr/bin/env bats
 
-MONGODB_ROOT_USER=root
 MONGODB_DATABASE=test_database
 MONGODB_USER=test_user
 MONGODB_PASSWORD=test_password
 
 # source the helper script
 APP_NAME=mongodb
-SLEEP_TIME=5
+VOL_PREFIX=/bitnami/$APP_NAME
+VOLUMES=$VOL_PREFIX
+SLEEP_TIME=30
 load tests/docker_helper
 
 # Link to container and execute mongo client
@@ -33,154 +34,137 @@ cleanup_environment
 @test "Port 27017 exposed and accepting external connections" {
   container_create default -d
 
-  # ping the mongod server
-  run mongo_client default ping
-  [[ "$output" =~ "bye" ]]
+  run mongo_client default admin --eval "printjson(db.adminCommand('ping'))"
+  [[ "$output" =~ '"ok" : 1' ]]
 }
 
-@test "Can't create root user without password" {
-  # create container without specifying MONGODB_PASSWORD for root user
-  run container_create default \
-    -e MONGODB_USER=$MONGODB_ROOT_USER
-  [[ "$output" =~ "you need to provide the MONGODB_PASSWORD" ]]
-}
-
-@test "Root user created with password" {
-  container_create default -d \
-    -e MONGODB_USER=$MONGODB_ROOT_USER \
-    -e MONGODB_PASSWORD=$MONGODB_PASSWORD
-
-  # auth as root without specifying password
-  run mongo_client default -u $MONGODB_ROOT_USER admin --eval "printjson(db.adminCommand('listDatabases'))"
-  [[ "$output" =~ "login failed" ]]
-
-  # auth as root and list all databases
-  run mongo_client default -u $MONGODB_ROOT_USER -p $MONGODB_PASSWORD admin --eval "printjson(db.adminCommand('listDatabases'))"
+@test "Can login without a password" {
+  container_create default -d
+  run mongo_client default admin --eval "printjson(db.adminCommand('listDatabases'))"
   [[ "$output" =~ '"ok" : 1' ]]
   [[ "$output" =~ '"name" : "local"' ]]
 }
 
-@test "Can't create a custom user without password" {
-  # create custom user without specifying MONGODB_PASSWORD
+@test "Authentication is enabled if root password is specified" {
+  container_create default -d \
+    -e MONGODB_ROOT_PASSWORD=$MONGODB_PASSWORD
+
+  run mongo_client default admin --eval "printjson(db.adminCommand('listDatabases'))"
+  [[ "$output" =~ "not authorized on admin to execute command" ]]
+}
+
+@test "Root user created with custom password" {
+  container_create default -d \
+    -e MONGODB_ROOT_PASSWORD=$MONGODB_PASSWORD
+
+  run mongo_client default -u root -p $MONGODB_PASSWORD admin --eval "printjson(db.adminCommand('listDatabases'))"
+  [[ "$output" =~ '"ok" : 1' ]]
+  [[ "$output" =~ '"name" : "admin"' ]]
+}
+
+@test "Can't set root user password with MONGODB_PASSWORD" {
+  run container_create default \
+    -e MONGODB_PASSWORD=$MONGODB_PASSWORD
+  [[ "$output" =~ "If you defined a password or a database you should define an username too" ]]
+}
+
+@test "Can't create custom user without a password" {
   run container_create default \
     -e MONGODB_USER=$MONGODB_USER
-  [[ "$output" =~ "you need to provide the MONGODB_PASSWORD" ]]
+  [[ "$output" =~ "If you defined an username you must define a password and a database too" ]]
 }
 
-@test "Can't create a custom user without database" {
-  # create custom user without specifying MONGODB_DATABASE
+@test "Can't create custom user without database" {
   run container_create default \
     -e MONGODB_USER=$MONGODB_USER \
-    -e MONGODB_PASSWORD=$MONGODB_PASSWORD
-  [[ "$output" =~ "you need to provide the MONGODB_DATABASE" ]]
+    -e MONGODB_PASSWORD=$MONGODB_PASSWORD \
+  [[ "$output" =~ "If you defined an username you must define a password and a database too" ]]
 }
 
-@test "Create custom user and database with password" {
+@test "Custom user created with password" {
   container_create default -d \
     -e MONGODB_USER=$MONGODB_USER \
-    -e MONGODB_DATABASE=$MONGODB_DATABASE \
-    -e MONGODB_PASSWORD=$MONGODB_PASSWORD
+    -e MONGODB_PASSWORD=$MONGODB_PASSWORD \
+    -e MONGODB_DATABASE=$MONGODB_DATABASE
 
-  # auth as MONGODB_USER without specifying MONGODB_PASSWORD
-  run mongo_client default -u $MONGODB_USER $MONGODB_DATABASE --eval "printjson(db.adminCommand('listCollections'))"
-  [[ "$output" =~ "login failed" ]]
-
-  # auth as MONGODB_USER and list all Collections from MONGODB_DATABASE
-  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.adminCommand('listCollections'))"
+  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
   [[ "$output" =~ '"ok" : 1' ]]
+
+  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.getCollectionNames())"
+  [[ "$output" =~ '"users"' ]]
 }
 
 @test "Custom user can't access admin database" {
   container_create default -d \
     -e MONGODB_USER=$MONGODB_USER \
-    -e MONGODB_DATABASE=$MONGODB_DATABASE \
-    -e MONGODB_PASSWORD=$MONGODB_PASSWORD
+    -e MONGODB_PASSWORD=$MONGODB_PASSWORD \
+    -e MONGODB_DATABASE=$MONGODB_DATABASE
 
-  # auth as MONGODB_USER and list all databases
   run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD admin --eval "printjson(db.adminCommand('listDatabases'))"
-  [[ "$output" =~ 'login failed' ]]
+  [[ "$output" =~ "login failed" ]]
+}
+
+@test "Can set root password and create custom user" {
+  container_create default -d \
+    -e MONGODB_ROOT_PASSWORD=$MONGODB_PASSWORD \
+    -e MONGODB_USER=$MONGODB_USER \
+    -e MONGODB_PASSWORD=$MONGODB_PASSWORD \
+    -e MONGODB_DATABASE=$MONGODB_DATABASE
+
+  run mongo_client default -u root -p $MONGODB_PASSWORD admin --eval "printjson(db.adminCommand('listDatabases'))"
+  [[ "$output" =~ '"ok" : 1' ]]
+  [[ "$output" =~ '"name" : "admin"' ]]
+
+  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
+  [[ "$output" =~ '"ok" : 1' ]]
+
+  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.getCollectionNames())"
+  [[ "$output" =~ '"users"' ]]
+}
+
+@test "Settings and data are preserved on container restart" {
+  container_create default -d \
+    -e MONGODB_USER=$MONGODB_USER \
+    -e MONGODB_PASSWORD=$MONGODB_PASSWORD \
+    -e MONGODB_DATABASE=$MONGODB_DATABASE
+
+  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
+  [[ "$output" =~ '"ok" : 1' ]]
+
+  container_restart default
+
+  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.getCollectionNames())"
+  [[ "$output" =~ '"users"' ]]
 }
 
 @test "All the volumes exposed" {
   container_create default -d
-
-  # get container introspection details and check if volumes are exposed
   run container_inspect default --format {{.Mounts}}
-  [[ "$output" =~ "$VOL_PREFIX/data" ]]
-  [[ "$output" =~ "$VOL_PREFIX/conf" ]]
-  [[ "$output" =~ "$VOL_PREFIX/logs" ]]
+  [[ "$output" =~ "$VOL_PREFIX" ]]
 }
 
-@test "Data gets generated in conf, data and logs if bind mounted in the host" {
-  container_create_with_host_volumes default -d \
-    -e MONGODB_USER=$MONGODB_USER \
-    -e MONGODB_DATABASE=$MONGODB_DATABASE \
-    -e MONGODB_PASSWORD=$MONGODB_PASSWORD
+@test "Data gets generated in volume if bind mounted" {
+  container_create_with_host_volumes default -d
 
-  # files expected in conf volume
   run container_exec default ls -la $VOL_PREFIX/conf/
   [[ "$output" =~ "mongodb.conf" ]]
 
-  # files expected in data volume (subset)
-  run container_exec default ls -la $VOL_PREFIX/data/
+  run container_exec default ls -la $VOL_PREFIX/data/db/
   [[ "$output" =~ "storage.bson" ]]
-
-  # files expected in logs volume
-  run container_exec default ls -la $VOL_PREFIX/logs/
-  [[ "$output" =~ "mongodb.log" ]]
 }
 
-@test "User and password settings are preserved after restart" {
-  container_create default -d \
-    -e MONGODB_USER=$MONGODB_USER \
-    -e MONGODB_DATABASE=$MONGODB_DATABASE \
-    -e MONGODB_PASSWORD=$MONGODB_PASSWORD
-
-  # restart container
-  container_restart default
-
-  # get container logs
-  run container_logs default
-  [[ "$output" =~ "The credentials were set on first boot." ]]
-
-  # auth as MONGODB_USER and list all Collections from MONGODB_DATABASE
-  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.adminCommand('listCollections'))"
-  [[ "$output" =~ '"ok" : 1' ]]
-}
-
-@test "If host mounted, password and settings are preserved after deletion" {
+@test "If host mounted, setting and data are preserved after deletion" {
   container_create_with_host_volumes default -d \
     -e MONGODB_USER=$MONGODB_USER \
-    -e MONGODB_DATABASE=$MONGODB_DATABASE \
-    -e MONGODB_PASSWORD=$MONGODB_PASSWORD
+    -e MONGODB_PASSWORD=$MONGODB_PASSWORD \
+    -e MONGODB_DATABASE=$MONGODB_DATABASE
 
-  # stop and remove container
-  container_remove default
-
-  # recreate container without specifying any env parameters
-  container_create_with_host_volumes default -d
-
-  # auth as MONGODB_USER and list all Collections from MONGODB_DATABASE
-  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.adminCommand('listCollections'))"
+  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
   [[ "$output" =~ '"ok" : 1' ]]
-}
 
-@test "Configuration changes are preserved after deletion" {
-  container_create_with_host_volumes default -d
-
-  # modify mongodb.conf
-  container_exec default sed -i 's|^[#]*[ ]*bind_ip[ ]*=.*|bind_ip=0.0.0.0|' $VOL_PREFIX/conf/mongodb.conf
-  container_exec default sed -i 's|^[#]*[ ]*logappend[ ]*=.*|logappend=false|' $VOL_PREFIX/conf/mongodb.conf
-  container_exec default sed -i 's|^[#]*[ ]*cpu[ ]*=.*|cpu=false|' $VOL_PREFIX/conf/mongodb.conf
-
-  # stop and remove container
   container_remove default
-
-  # relaunch container with host volumes
   container_create_with_host_volumes default -d
 
-  run container_exec default cat $VOL_PREFIX/conf/mongodb.conf
-  [[ "$output" =~ "bind_ip=0.0.0.0" ]]
-  [[ "$output" =~ "logappend=false" ]]
-  [[ "$output" =~ "cpu=false" ]]
+  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.getCollectionNames())"
+  [[ "$output" =~ '"users"' ]]
 }
