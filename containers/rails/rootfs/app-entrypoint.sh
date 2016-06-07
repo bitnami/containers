@@ -8,7 +8,7 @@ fresh_container() {
 }
 
 app_present() {
- [ -f /app/config/database.yml ]
+  [ -f /app/config/database.yml ]
 }
 
 gems_up_to_date() {
@@ -16,18 +16,18 @@ gems_up_to_date() {
 }
 
 wait_for_db() {
-	mariadb_address=$(getent hosts mariadb | awk '{ print $1 }')
-	counter=0
-	log "Connecting to mariadb at $mariadb_address"
-	while ! curl --silent mariadb:3306 >/dev/null; do
-		counter=$((counter+1))
-		if [ $counter == 30 ]; then
-			log "Error: Couldn't connect to mariadb."
-			exit 1
-		fi
-		log "Trying to connect to mariadb at $mariadb_address. Attempt $counter."
-		sleep 5
-	done
+  mariadb_address=$(getent hosts mariadb | awk '{ print $1 }')
+  counter=0
+  log "Connecting to mariadb at $mariadb_address"
+  while ! curl --silent mariadb:3306 >/dev/null; do
+    counter=$((counter+1))
+    if [ $counter == 30 ]; then
+      log "Error: Couldn't connect to mariadb."
+      exit 1
+    fi
+    log "Trying to connect to mariadb at $mariadb_address. Attempt $counter."
+    sleep 5
+  done
 }
 
 setup_db() {
@@ -62,9 +62,9 @@ if ! fresh_container; then
   echo "                                                                       "
   echo "#########################################################################"
 else
-	setup_db
-	log "Initialization finished"
-	touch $INIT_SEM
+  setup_db
+  log "Initialization finished"
+  touch $INIT_SEM
 fi
 
 exec /entrypoint.sh "$@"
