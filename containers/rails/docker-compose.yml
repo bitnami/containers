@@ -7,7 +7,6 @@ services:
   myapp:
     tty: true # Enables debugging capabilities when attached to this container.
     image: gcr.io/bitnami-containers/rails:4.2.6-r1
-    # build: . # Uncomment this line if you want to build the rails container yourself.
     environment:
       - DATABASE_URL=mysql2://mariadb/my_app_development
     depends_on:
