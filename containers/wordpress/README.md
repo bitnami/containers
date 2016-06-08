@@ -16,7 +16,7 @@ WordPress requires access to a MySQL database or MariaDB database to store infor
 
 ## Using Docker Compose
 
-The recommended way to run Wordpress is using Docker Compose using the following `docker-compose.yml` template:
+The recommended way to run WordPress is using Docker Compose using the following `docker-compose.yml` template:
 
 ```yaml
 version: '2'
@@ -72,7 +72,7 @@ $ docker run -d --name mariadb \
   bitnami/mariadb:latest
 ```
 
-3. Create volumes for Wordpress persistence and launch the container
+3. Create volumes for WordPress persistence and launch the container
 
 ```bash
 $ docker volume create --name wordpress_data
@@ -88,7 +88,7 @@ Access your application at http://your-ip/
 
 ## Persisting your application
 
-For persistence of the Wordpress deployment, the above examples define docker volumes namely `mariadb_data`, `wordpress_data` and `apache_data`. The Wordpress application state will persist as long as these volumes are not removed.
+For persistence of the WordPress deployment, the above examples define docker volumes namely `mariadb_data`, `wordpress_data` and `apache_data`. The WordPress application state will persist as long as these volumes are not removed.
 
 If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -133,7 +133,7 @@ $ docker run -d --name mariadb \
   bitnami/mariadb:latest
 ```
 
-3. Create the Wordpress the container with host volumes
+3. Create the WordPress the container with host volumes
 
 ```bash
 $ docker run -d --name wordpress -p 80:80 -p 443:443 \
@@ -143,7 +143,7 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   bitnami/wordpress:latest
 ```
 
-# Upgrading Wordpress
+# Upgrading WordPress
 
 Bitnami provides up-to-date versions of MariaDB and WordPress, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the WordPress container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
 
@@ -157,7 +157,7 @@ $ docker pull bitnami/wordpress:latest
 
 ## Using Docker Compose
 
-1. Stop the running Wordpress container
+1. Stop the running WordPress container
 
 ```bash
 $ docker-compose stop wordpress
@@ -169,7 +169,7 @@ $ docker-compose stop wordpress
 $ docker-compose rm wordpress
 ```
 
-3. Launch the updated Wordpress image
+3. Launch the updated WordPress image
 
 ```bash
 $ docker-compose start wordpress
@@ -177,7 +177,7 @@ $ docker-compose start wordpress
 
 ## Using Docker command line
 
-1. Stop the running Wordpress container
+1. Stop the running WordPress container
 
 ```bash
 $ docker stop wordpress
@@ -189,7 +189,7 @@ $ docker stop wordpress
 $ docker rm wordpress
 ```
 
-3. Launch the updated Wordpress image
+3. Launch the updated WordPress image
 
 ```bash
 $ docker run -d --name wordpress -p 80:80 -p 443:443 \
@@ -207,7 +207,7 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
 
 ## Environment variables
 
-The Wordpress instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom Wordpress:
+The WordPress instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom WordPress:
 
 - `WORDPRESS_USERNAME`: WordPress application username. Default: **user**
 - `WORDPRESS_PASSWORD`: WordPress application password. Default: **bitnami**
@@ -266,20 +266,20 @@ To backup your application data follow these steps:
 
 ## Backing up using Docker Compose
 
-1. Stop the Wordpress container:
+1. Stop the WordPress container:
 
 ```bash
 $ docker-compose stop wordpress
 ```
 
-2. Copy the Wordpress and Apache data
+2. Copy the WordPress and Apache data
 
 ```bash
 $ docker cp $(docker-compose ps -q wordpress):/bitnami/wordpress/ /path/to/backups/wordpress/latest/
 $ docker cp $(docker-compose ps -q wordpress):/bitnami/apache/ /path/to/backups/apache/latest/
 ```
 
-3. Start the Wordpress container
+3. Start the WordPress container
 
 ```bash
 $ docker-compose start wordpress
@@ -287,20 +287,20 @@ $ docker-compose start wordpress
 
 ## Backing up using the Docker command line
 
-1. Stop the Wordpress container:
+1. Stop the WordPress container:
 
 ```bash
 $ docker stop wordpress
 ```
 
-2. Copy the Wordpress and Apache data
+2. Copy the WordPress and Apache data
 
 ```bash
 $ docker cp wordpress:/bitnami/wordpress/ /path/to/backups/wordpress/latest/
 $ docker cp wordpress:/bitnami/apache/ /path/to/backups/apache/latest/
 ```
 
-3. Start the Wordpress container
+3. Start the WordPress container
 
 ```bash
 $ docker start wordpress
