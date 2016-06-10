@@ -31,9 +31,12 @@ wait_for_db() {
 }
 
 setup_db() {
-  wait_for_db
   log "Configuring the database"
   bundle exec rake db:create
+}
+
+migrate_db() {
+  log "Applying database migrations (db:migrate)"
   bundle exec rake db:migrate
 }
 
@@ -52,10 +55,12 @@ if ! gems_up_to_date; then
   log "Gems updated"
 fi
 
+wait_for_db
+
 if ! fresh_container; then
   echo "#########################################################################"
   echo "                                                                       "
-  echo " App initialization (migrations, etc) skipped:"
+  echo " App initialization skipped:"
   echo " Delete the file $INIT_SEM and restart the container to reinitialize"
   echo " You can alternatively run specific commands using docker-compose exec"
   echo " e.g docker-compose exec rails bundle exec rake db:migrate"
@@ -66,5 +71,7 @@ else
   log "Initialization finished"
   touch $INIT_SEM
 fi
+
+migrate_db
 
 exec /entrypoint.sh "$@"
