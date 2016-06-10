@@ -32,7 +32,7 @@ cleanup_environment
 
 @test "can install gem modules with system requirements" {
   container_create default -id
-  run container_exec default gem install nokogiri --no-ri --no-rdoc
+  run container_exec default gem install nokogiri mysql2 pg --no-document
   [ "$status" = 0 ]
 }
 
