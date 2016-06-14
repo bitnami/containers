@@ -84,7 +84,7 @@ $ cd ~/myapp
 Next, download the orchestration file in this directory
 
 ```bash
-$ curl -L https://git.io/voOI0 > docker-compose.yml
+$ curl -L "https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master/docker-compose.yml?token=AAZCIzmGTr9nnm9R6amZUXhQUO5MvGXEks5XaVAYwA%3D%3D" > docker-compose.yml
 ```
 
 The orchestration file creates a Rails service named `myapp`. The service volume mounts the current working directory at the path `/app` of the Rails container. If the mounted directory doesn't contain application source, a new Rails application will be bootstraped in this directory, following which the gem installation and database setup tasks will be executed before starting the WEBrick server on port `3000`.
