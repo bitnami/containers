@@ -42,10 +42,8 @@ wait_for_db() {
 
 setup_db() {
   npm install mongodb@2.1.18 --save
-  # log "Configuring the database"
-  # TODO
-  # bundle exec rake db:create
-  # bundle exec rake db:migrate
+  log "Adding MongoDB example files under /config/mongodb.js"
+  cp -rn /tmp/app/config .
 }
 
 log () {
