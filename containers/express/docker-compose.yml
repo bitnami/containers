@@ -6,10 +6,9 @@ services:
 
   myapp:
     tty: true # Enables debugging capabilities when attached to this container.
-    # image: gcr.io/bitnami-containers/rails:4.2.6-r1
-    build: .
-    # environment:
-    #   - DATABASE_URL=mysql2://mariadb/my_app_development
+    image: gcr.io/bitnami-containers/express:4.13.4-r0
+    environment:
+      - DATABASE_URL=mongodb://mongodb:27017/my_app_development
     depends_on:
       - mongodb
     ports:

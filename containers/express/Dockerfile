@@ -33,10 +33,15 @@ ENV BITNAMI_IMAGE_VERSION=4.13.4-r0
 RUN npm install express@4.13.4
 RUN npm install -g express-generator@4
 
+COPY rootfs/ /
+
+# The extra files that we bundle should use the Bitnami User
+# so the entrypoint does not have any permission issues
+RUN chown -R bitnami:bitnami /tmp/app
+
 USER bitnami
 WORKDIR /app
 EXPOSE 3000
 
-COPY rootfs/ /
 ENTRYPOINT ["/app-entrypoint.sh"]
 CMD ["npm", "start"]
