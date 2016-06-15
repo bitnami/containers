@@ -18,23 +18,30 @@ dependencies_up_to_date() {
   [ ! $PACKAGE_FILE -nt $INIT_SEM ]
 }
 
+database_tier_exists() {
+  [ ! -z $(getent hosts mongodb) ]
+}
+
 wait_for_db() {
-  mariadb_address=$(getent hosts mariadb | awk '{ print $1 }')
+  mongodb_address=$(getent hosts mongodb | awk '{ print $1 }')
   counter=0
-  log "Connecting to mariadb at $mariadb_address"
-  while ! curl --silent mariadb:3306 >/dev/null; do
+
+  log "Connecting to MongoDB at $mongodb_address"
+
+  until nc -z $mongodb_address 27017; do
     counter=$((counter+1))
-    if [ $counter == 30 ]; then
-      log "Error: Couldn't connect to mariadb."
+    if [ $counter == 10 ]; then
+      log "Error: Couldn't connect to MongoDB."
       exit 1
     fi
-    log "Trying to connect to mariadb at $mariadb_address. Attempt $counter."
+    log "Trying to connect to MongoDB at $mongodb_address. Attempt $counter."
     sleep 5
   done
+  log "Connected to MongoDB database"
 }
 
 setup_db() {
-  wait_for_db
+  npm install mongodb@2.1.18 --save
   # log "Configuring the database"
   # TODO
   # bundle exec rake db:create
@@ -56,6 +63,10 @@ if ! dependencies_up_to_date; then
   log "Dependencies updated"
 fi
 
+if database_tier_exists; then
+  wait_for_db
+fi
+
 if ! fresh_container; then
   echo "#########################################################################"
   echo "                                                                       "
@@ -66,7 +77,9 @@ if ! fresh_container; then
   echo "                                                                       "
   echo "#########################################################################"
 else
-  setup_db
+  if database_tier_exists; then
+    setup_db
+  fi
   log "Initialization finished"
 fi
 
