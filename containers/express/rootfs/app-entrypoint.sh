@@ -19,7 +19,7 @@ dependencies_up_to_date() {
 }
 
 database_tier_exists() {
-  [ ! -z $(getent hosts mongodb) ]
+  [ ! -z "$(getent hosts mongodb)" ]
 }
 
 wait_for_db() {
