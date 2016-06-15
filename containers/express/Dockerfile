@@ -27,10 +27,16 @@ ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
 ## STACKSMITH-END: Modifications below this line will be unchanged when regenerating
 
 # ExpressJS template
-COPY . /app
+ENV BITNAMI_APP_NAME=express
+ENV BITNAMI_IMAGE_VERSION=4.13.4-r0
+
+RUN npm install express@4.13.4
+RUN npm install -g express-generator@4
+
+USER bitnami
 WORKDIR /app
-
-RUN npm install
-
 EXPOSE 3000
+
+COPY rootfs/ /
+ENTRYPOINT ["/app-entrypoint.sh"]
 CMD ["npm", "start"]
