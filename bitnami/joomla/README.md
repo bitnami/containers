@@ -98,6 +98,7 @@ services:
     volumes:
       - '/path/to/your/local/joomla_data:/bitnami/joomla'
       - '/path/to/your/local/apache_data:/bitnami/apache'
+      - '/path/to/your/local/php_data:/bitnami/php'
     depends_on:
       - mariadb
 ```
@@ -211,14 +212,12 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
-    volumes_from:
-      - application_data
 ```
 
  * For manual execution:
 
 ```
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:80 --name joomla -v /your/local/path/bitnami/joomla:/bitnami/joomla --net=joomla_network bitnami/joomla$ docker rm -v joomlay
+ $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:80 --name joomla -v /your/local/path/bitnami/joomla:/bitnami/joomla --net=joomla_network bitnami/joomla
 ```
 
 # Backing up your application
