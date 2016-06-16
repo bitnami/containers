@@ -23,10 +23,13 @@ RUN bitnami-pkg install php-5.6.22-0 --checksum 2439cf0adfc7cc21f15a6136059883e7
 
 ENV PATH=/opt/bitnami/php/sbin:/opt/bitnami/php/bin:/opt/bitnami/common/bin:~/.composer/vendor/bin:$PATH
 
-ENV BITNAMI_APP_NAME=laravel
-ENV BITNAMI_IMAGE_VERSION=5.1.11-r0
-
 USER bitnami
+
+RUN composer global require "laravel/laravel=5.2.31"
+
+ENV BITNAMI_APP_NAME=laravel
+ENV BITNAMI_IMAGE_VERSION=5.2.31-r0
+
 WORKDIR /app
 EXPOSE 3000
 
