@@ -7,10 +7,6 @@ fresh_container() {
   [ ! -f $INIT_SEM ]
 }
 
-installer_present() {
-  [ -f ~/.composer/vendor/bin/laravel ]
-}
-
 app_present() {
   [ -f /app/config/database.php ]
 }
@@ -39,16 +35,9 @@ log () {
   echo -e "\033[0;33m$(date "+%H:%M:%S")\033[0;37m ==> $1."
 }
 
-if ! installer_present; then
-  log "Making composer faster"
-  composer global require "hirak/prestissimo:^0.3"
-  log "Getting laravel installer"
-  composer global require "laravel/installer=~1.1"
-fi
-
 if ! app_present; then
   log "Creating laravel application"
-  laravel new
+  composer create-project laravel/laravel /app "5.2.31" --prefer-dist
 fi
 
 wait_for_db
