@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  mariadb:
+    image: bitnami/mariadb:10.1.14-r0
+    environment:
+      - MARIADB_USER=my_user
+      - MARIADB_DATABASE=my_database
+      - MARIADB_PASSWORD=my_password
+
+  myapp:
+    tty: true
+    build: .
+    environment:
+      - DB_HOST=mariadb
+      - DB_USERNAME=my_user
+      - DB_DATABASE=my_database
+      - DB_PASSWORD=my_password
+    depends_on:
+      - mariadb
+    ports:
+      - 3000:3000
+    volumes:
+      - ./app:/app
