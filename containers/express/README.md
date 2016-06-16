@@ -78,7 +78,7 @@ If everything has been setup correctly, the command will query and print status 
 
 ## Download a Bitnami Orchestration File
 
-We have a collection of Docker Compose orchestration files for various development stacks available at https://bitnami.com/somepage. For this tutorial we'll be using the orchestration file for Express development.
+We have a collection of Docker Compose orchestration files for various development stacks available at https://bitnami.com/somepage. For this tutorial we'll be using the orchestration file for Node + Express.
 
 Begin my creating directory for our Express application source.
 
