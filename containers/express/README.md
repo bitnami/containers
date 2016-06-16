@@ -78,7 +78,7 @@ If everything has been setup correctly, the command will query and print status 
 
 ## Download a Bitnami Orchestration File
 
-We have a collection of Docker Compose orchestration files for various development stacks available at https://bitnami.com/somepage. For this tutorial we'll be using the orchestration file for Node + Express.
+We have a collection of Docker Compose orchestration files for various development stacks available at https://bitnami.com/somepage. For this tutorial we'll be using the orchestration file for Node + Express .
 
 Begin my creating directory for our Express application source.
 
@@ -200,3 +200,9 @@ $ docker-compose logs -f myapp
 ```bash
 $ docker-compose restart myapp
 ```
+
+## Connect to a Database
+
+Express by default does not require a database connection to work but we provide a running and configured MongoDB service and an example file `config/mongodb.js` with some insights for how to connect to it.
+
+From this base, you can attach your favorite ODM, i.e [Mongoose](http://mongoosejs.com/) :)
