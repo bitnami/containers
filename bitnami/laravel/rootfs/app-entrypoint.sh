@@ -37,7 +37,7 @@ log () {
 
 if ! app_present; then
   log "Creating laravel application"
-  composer create-project laravel/laravel /app "5.2.31" --prefer-dist
+  \cp -r /tmp/app/ /
 fi
 
 wait_for_db
