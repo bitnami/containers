@@ -38,7 +38,7 @@ Further, we also assume that your application will be using a database. In fact,
 
 ## Download a Bitnami Orchestration File
 
-We have a collection of Docker Compose orchestration files for various development stacks available at https://bitnami.com/somepage. We'll be using the orchestration file for [Ruby on Rails](http://rubyonrails.org/) development.
+We'll be using the orchestration file for [Ruby on Rails](http://rubyonrails.org/) development.
 
 We assume that your starting the development of the Rails application from scratch. So lets begin by creating a directory for the application source where we'll be bootstrapping a Rails application:
 
