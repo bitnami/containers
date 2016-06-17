@@ -19,7 +19,7 @@ wait_for_db() {
   mariadb_address=$(getent hosts mariadb | awk '{ print $1 }')
   counter=0
   log "Connecting to mariadb at $mariadb_address"
-  while ! curl --silent mariadb:3306 >/dev/null; do
+  while ! nc -z mariadb 3306; do
     counter=$((counter+1))
     if [ $counter == 30 ]; then
       log "Error: Couldn't connect to mariadb."
