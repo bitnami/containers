@@ -50,7 +50,7 @@ $ cd ~/workdir/myapp
 Next, download our Docker Compose orchestration file for Rails development:
 
 ```bash
-$ curl -L "https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master/docker-compose.yml?token=AAZCIzmGTr9nnm9R6amZUXhQUO5MvGXEks5XaVAYwA%3D%3D" > docker-compose.yml
+$ curl -L "https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master/docker-compose.yml" > docker-compose.yml
 ```
 
 > We encourage you to take a look at the contents of the orchestration file to get an idea of the services that will be started for Rails development.
