@@ -36,7 +36,7 @@ COPY rootfs/ /
 
 # The extra files that we bundle should use the Bitnami User
 # so the entrypoint does not have any permission issues
-RUN chown -R bitnami:bitnami /tmp/app
+RUN chown -R bitnami:bitnami /app_template
 
 USER bitnami
 # This will add an specific version of Express that will validate the package.json requirement

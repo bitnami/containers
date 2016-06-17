@@ -43,7 +43,7 @@ wait_for_db() {
 setup_db() {
   npm install mongodb@2.1.18 --save
   log "Adding MongoDB example files under /config/mongodb.js"
-  cp -rn /tmp/app/config .
+  cp -rn /app_template/config .
 }
 
 log () {
