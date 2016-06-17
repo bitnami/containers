@@ -78,7 +78,7 @@ If everything has been setup correctly, the command will query and print status 
 
 ## Download a Bitnami Orchestration File
 
-We have a collection of Docker Compose orchestration files for various development stacks available at https://bitnami.com/somepage. For this tutorial we'll be using the orchestration file for Node + Express .
+For this tutorial we'll be using the orchestration file for Node + Express.
 
 Begin my creating directory for our Express application source.
 
@@ -90,7 +90,7 @@ $ cd ~/myapp
 Next, download the orchestration file in this directory.
 
 ```bash
-$ curl -L "https://raw.githubusercontent.com/bitnami/bitnami-docker-express/master/docker-compose.yml?token=AABfy-uhEHrdywZuXeYx1f6X_hqYW052ks5XbFIIwA%3D%3D" > docker-compose.yml
+$ curl -L "https://raw.githubusercontent.com/bitnami/bitnami-docker-express/master/docker-compose.yml" > docker-compose.yml
 ```
 
 The orchestration file creates a Node + Express service named `myapp`. The service volume mounts the current working directory at the path `/app` of the Express container. If the mounted directory doesn't contain application source, a new Express application will be bootstrapped in this directory, following with the NPM dependencies installation and database setup tasks will be executed before starting the Node server on port `3000`.
