@@ -10,13 +10,13 @@ In this tutorial we walk you through using the Bitnami docker images during the 
 
 We think developers are adopting containers for development because they offer many of the same advantages as developing in VMs, but with lower overhead in terms of developer effort and development machine resources. With Docker, you can create a development environment for your code, and teammates can pull the whole development environment, install it, and quickly get started writing code or fixing bugs.
 
-Docker development environments are more likely to be reproducible than VMs because the definition of each container and how to build it is captured in a dockerfile.
+Docker development environments are more likely to be reproducible than VMs because the definition of each container and how to build it is captured in a Dockerfile.
 
 Docker also has a well known and standard API so tools and cloud services are readily available for docker containers.
 
 # The Bitnami Approach
 
-When we designed and built our development containers, we kept a the following guiding principles in mind:
+When we designed and built our development containers, we kept the following guiding principles in mind:
 
 1. Infrastructure should be effort free. By this, we mean, there are certain services in an application that are merely configured. For example, databases and web servers are essential parts of an application, but developers should depend on them like plumbing. They should be there ready to use, but developers should not be forced to waste time and effort creating the plumbing.
 
@@ -24,147 +24,146 @@ When we designed and built our development containers, we kept a the following g
 
 # Assumptions
 
-Before you start, we are assuming that you have [Docker Engine](https://www.docker.com/products/docker-engine), [Docker Compose](https://www.docker.com/products/docker-compose) and [Docker Machine](https://www.docker.com/products/docker-machine) properly set up.
+First, we assume that you have the following components properly setup:
 
-> Docker Machine also requires a [driver](https://docs.docker.com/machine/drivers/) to create a Docker Machine VM. We'll be using the [virtualbox](https://docs.docker.com/machine/drivers/virtualbox/) driver. Please download and install the latest version of [Oracle VirtualBox](https://www.virtualbox.org).
+- [Docker Engine](https://www.docker.com/products/docker-engine)
+- [Docker Compose](https://www.docker.com/products/docker-compose)
+- [Docker Machine](https://www.docker.com/products/docker-machine)
 
-Open a terminal and try these commands:
+> The [Docker documentation](https://docs.docker.com/) walks you through installing each of these components.
 
-```bash
-$ docker version
-$ docker-compose version
-$ docker-machine version
-```
+We also assume that you have some beginner-level experience using these tools.
 
-The above commands will display the version string for each of the docker components. Additionally since we'll be using VirtualBox to create the Docker Machine VM, you can use the following command to print the version string of VirtualBox:
-
-```bash
-$ VBoxManage --version
-```
-
-Further, we also assume that your application will be using a database. In fact, we assume that it will be using MariaDB. Of course, for a real project you may be using a different database, or, in fact, no database. But, this is a common set up and will help you learn the development approach.
-
-## Create a Docker Machine
-
-We'll begin by creating a new Docker Machine named `rails-dev` provisioned using VirtualBox and is where our MariaDB and Rail containers will be deployed.
-
-```bash
-$ docker-machine create --driver virtualbox rails-dev
-```
-
-Next, import the Docker Machine environment into your terminal using:
-
-```bash
-$ eval $(docker-machine env rails-dev)
-```
-
-> **Note**
->
-> The above command should be executed whenever you create a new terminal to import the Docker Machine environment.
-
-To verify that the Docker Machine up and running, use the following command:
-
-```bash
-$ docker info
-```
-
-If everything has been setup correctly, the command will query and print status information of the Docker daemon running in the `rails-dev` Docker Machine.
+Further, we also assume that your application will be using a database. In fact, we assume that it will be using [MariaDB](http://mariadb.org/). Of course, for a real project you may be using a different database, or, in fact, no database. But, this is a common set up and will help you learn the development approach.
 
 ## Download a Bitnami Orchestration File
 
-We have a collection of Docker Compose orchestration files for various development stacks available at https://bitnami.com/somepage. For this tutorial we'll be using the orchestration file for Rails development.
+We have a collection of Docker Compose orchestration files for various development stacks available at https://bitnami.com/somepage. We'll be using the orchestration file for [Ruby on Rails](http://rubyonrails.org/) development.
 
-Begin my creating directory for our Rails application source.
+We assume that your starting the development of the Rails application from scratch. So lets begin by creating a directory for the application source where we'll be bootstrapping a Rails application:
 
 ```bash
-$ mkdir ~/myapp
-$ cd ~/myapp
+$ mkdir ~/workdir/myapp
+$ cd ~/workdir/myapp
 ```
 
-Next, download the orchestration file in this directory
+Next, download our Docker Compose orchestration file for Rails development:
 
 ```bash
 $ curl -L "https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master/docker-compose.yml?token=AAZCIzmGTr9nnm9R6amZUXhQUO5MvGXEks5XaVAYwA%3D%3D" > docker-compose.yml
 ```
 
-The orchestration file creates a Rails service named `myapp`. The service volume mounts the current working directory at the path `/app` of the Rails container. If the mounted directory doesn't contain application source, a new Rails application will be bootstraped in this directory, following which the gem installation and database setup tasks will be executed before starting the WEBrick server on port `3000`.
-
-Additionally, the orchestration file also creates a service named `mariadb` and is setup as the database backend of our bootstrapped Rails application.
+> We encourage you to take a look at the contents of the orchestration file to get an idea of the services that will be started for Rails development.
 
 ## Run
 
 Lets put the orchestration file to the test:
 
 ```bash
-$ docker-compose up -d
+$ docker-compose up
 ```
 
-This command will begin download the Bitnami Docker images and start the services defined in the orchestration file. This process can take a couple of minutes to complete.
+This command reads the contents of the orchestration file and begins downloading the Docker images required to launch each of the services listed therein. Depending on the network speeds this can take anywhere from a few seconds to a couple minutes.
 
-> **TIP**
->
-> View the container logs using:
->
-> ```bash
-> docker-compose -f logs
-> ```
+After the images have been downloaded, each of the services listed in the orchestration file is started, which in this case are the `mariadb` and `myapp` services.
 
-Get the IP address of the Docker Machine VM using:
+As mentioned earlier, the `mariadb` service provides a database backend which can be used for the development of a data-driven Rails application. The service is setup using the [bitnami/mariadb](https://github.com/bitnami/bitnami-docker-mariadb) docker image and is configured with the [default credentials](https://github.com/bitnami/bitnami-docker-mariadb#setting-the-root-password-on-first-run).
 
-```bash
-$ docker-machine ip rails-dev
-```
+The second service thats started is named `myapp` and uses the Bitnami Rails development image. The service mounts the current working directory (`~/workdir/myapp`) at the `/app` location in the container and provides all the necessary infrastucture to get you started developing a data-driven Rails application.
 
-Point your web browser to http://{DOCKER_MACHINE_IP}:3000 to access the rails application.
+Once the WEBrick application server has been started, visit port `3000` of the Docker Machine in your favourite web browser and you'll be greeted by Rails welcome page.
 
-That’s actually all there is to it. Bitnami has done all the work behind the scenes so that the Docker Compose file “just works” to get you developing your code in a few minutes.
-
-## Code and Test
-
-Let's check the contents of the `~/myapp` directory.
+Lets inspect the contents of the `~/workdir/myapp` directory:
 
 ```bash
-~/myapp # ls
+~/workdir/myapp # ls
 Gemfile             app/                db/                 public/
 Gemfile.lock        bin/                docker-compose.yml  test/
 README.rdoc         config/             lib/                tmp/
 Rakefile            config.ru           log/                vendor/
 ```
 
-Yay! As you can see, the Rails container bootstrapped a new Rails application for us in the current working directory and we can now kickstart our application development.
+You can see that we have a new Rails application bootstrapped in the `~/workdir/myapp` directory of the host and is being served by the WEBrick application server running inside the Bitnami Rails development container.
 
-Lets go ahead and add a new controller named `User` to our application. We'll use the scaffold method to create it.
+Since the application source resides on the host, you can use your favourite IDE for developing the application. Only the execution of the application occurs inside the isolated container environment.
 
-```bash
-$ docker-compose exec myapp rails generate scaffold User name:string email:string
-```
+That’s all there is to it. Without actually installing a single Rails component on the host you have a completely isolated and highly reproducible Rails development environment which can be shared with the rest of the team to get them started building the next big feature without worrying about the plumbing involved in setting up the development environment. Let Bitnami do that for you.
 
-Next, lets apply the database migrations for our new `User` model by executing the `db:migrate` rake task:
+In the next sections we take a look at some of the common tasks that are involved during the development of a Rails application and how we go about executing those tasks.
 
-```bash
-$ docker-compose exec myapp bundle exec rake db:migrate
-```
+## Executing commands
 
-And thats it, just like that we have a new `User` controller generated. Point your browser to http://{DOCKER_MACHINE_IP}:3000/users to access it.
+You may recall that we've not installed a single Rails component on the host and that the entire Rails development environment is running inside the `myapp` service container. This means that if we wanted to execute [rake](http://guides.rubyonrails.org/command_line.html#rake) or any other Rails command, we'd have to execute it inside the container.
 
-From the last couple commands, you must have already figured out that commands can be executed inside the `myapp` service container by prefixing the command with `docker-compose exec myapp`.
-
-Similarly,
-
-**To launch the Rails console**
+This may sound like a complex task to achieve. But don't worry, Docker Compose makes it very simple to execute tasks inside a service container using the `exec` command. The general form of the command looks something like the following:
 
 ```bash
-$ docker-compose exec myapp rails console
+$ docker-compose exec myapp <command>
 ```
 
-**List all available Rake Tasks**
+This instructs Docker Compose to execute the command specified by `<command>` inside the `myapp` service container. The return value of the `docker-compose` command will reflect that of the specified command.
+
+With this information lets try listing the available rake tasks:
 
 ```bash
 $ docker-compose exec myapp bundle exec rake -T
 ```
 
-**Execute a Rake Task**
+Next, lets try to get some information about our development environement by executing the `about` task:
 
 ```bash
-$ docker-compose exec myapp bundle exec rake <task>
+$ docker-compose exec myapp bundle exec rake about
 ```
+
+How about loading the Rails `console`?
+
+```bash
+$ docker-compose exec myapp rails console
+```
+
+You get the idea..
+
+Before we wrap up this subject, lets take a look at one of the most common tasks that's performed during the development lifecycle of a Rails application. Yes, we're going to use `rails generate` to generate a scaffold.
+
+```bash
+$ docker-compose exec myapp rails generate scaffold User name:string email:string
+```
+
+The above command will create the `User` model with `name` and `email` properties. Before we can start using this new scaffold we need to apply the migrations, to the `app_developmemt` database, that implement the `User` model.
+
+```bash
+$ docker-compose exec myapp bundle exec rake db:migrate
+```
+
+Sure enough, we're executing the `db:migrate` rake task
+
+> **Note**
+>
+> Database migrations are automatically applied during the start up of the `myapp` service container. This means that the `myapp` service could also be restarted to apply the database migrations.
+> ```bash
+> $ docker-compose restart myapp
+> ```
+
+Thats it! Visit the `/users` resource of the Rails application and you should be able to interact with the newly created `User` model.
+
+**Installing Gems**
+
+The functionality of a Rails application can be augmented using Ruby gems. Thousands of gems developed by the Rails development community are available on [Rubygems.org](https://rubygems.org/) and can be used to quickly add functionality to our Rails applications. In this section, we look at adding new gems for our application.
+
+As a Rails developer you must already be aware that additional gems required by a Rails application should be specified in the `Gemfile` of the Rails application.
+
+For demonstration purposes we'll add the latest version of the `httparty` gem to our `Gemfile` using:
+
+```bash
+$ echo "gem 'httparty'" >> Gemfile
+```
+
+After making changes to the `Gemfile`, all we need to do is restart the `myapp` service using:
+
+```bash
+$ docker-compose restart myapp
+```
+
+When the `myapp` service is restarted, it checks to see if any new gems need to be installed using `bundle check`. If this is found to be the case, then `bundle install` command is invoked to install the missing gems.
+
+That all there is to it. We hope that you find our Rails development image useful in your quest to world domination. Happy hacking!
