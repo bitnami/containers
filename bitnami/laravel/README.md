@@ -136,7 +136,7 @@ Yay! As you can see, the Laravel container bootstrapped a new Laravel applicatio
 Lets go ahead and add a new controller named `User` to our application. We'll use the scaffold method to create it.
 
 ```bash
-$ docker exec myapp php artisan make:controller --resource UserResourceController
+$ docker-compose exec myapp php artisan make:controller --resource UserResourceController
 ```
 
-From the last command, you must have already figured out that commands can be executed inside the `myapp` service container by prefixing the command with `docker exec myapp`.
+From the last command, you must have already figured out that commands can be executed inside the `myapp` service container by prefixing the command with `docker-compose exec myapp`.
