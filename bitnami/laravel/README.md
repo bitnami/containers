@@ -84,7 +84,7 @@ $ cd ~/myapp
 Next, download the orchestration file in this directory
 
 ```bash
-$ curl -L "https://raw.githubusercontent.com/bitnami/bitnami-docker-laravel/master/docker-compose.yml?token=AAFefzxPqDYSVkLVUGvoX_SWjIDf8yzqks5XbSFJwA%3D%3D" > docker-compose.yml
+$ curl -L "https://raw.githubusercontent.com/bitnami/bitnami-docker-laravel/master/docker-compose.yml" > docker-compose.yml
 ```
 
 The orchestration file creates a Laravel service named `myapp`. The service volume mounts the current working directory at the path `/app` of the Laravel container. If the mounted directory doesn't contain application source, a new Laravel application will be bootstraped in this directory, following which the artisan installation and database setup tasks will be executed before starting the artisan server on port `3000`.
