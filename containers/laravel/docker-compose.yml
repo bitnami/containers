@@ -10,7 +10,7 @@ services:
 
   myapp:
     tty: true
-    image: gcr.io/bitnami-containers/laravel:5.2.31-r0
+    image: gcr.io/bitnami-containers/laravel:5.2.31-r1
     environment:
       - DB_HOST=mariadb
       - DB_USERNAME=my_user
@@ -21,4 +21,4 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./app:/app
+      - ./:/app

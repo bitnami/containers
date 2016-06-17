@@ -25,10 +25,10 @@ ENV PATH=/opt/bitnami/php/sbin:/opt/bitnami/php/bin:/opt/bitnami/common/bin:~/.c
 
 USER bitnami
 
-RUN composer global require "laravel/laravel=5.2.31"
+RUN mkdir /tmp/app && cd /tmp/app && composer create-project "laravel/laravel=5.2.31" /tmp/app --prefer-dist
 
 ENV BITNAMI_APP_NAME=laravel
-ENV BITNAMI_IMAGE_VERSION=5.2.31-r0
+ENV BITNAMI_IMAGE_VERSION=5.2.31-r1
 
 WORKDIR /app
 EXPOSE 3000
