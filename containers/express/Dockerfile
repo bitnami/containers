@@ -28,9 +28,8 @@ ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
 
 # ExpressJS template
 ENV BITNAMI_APP_NAME=express
-ENV BITNAMI_IMAGE_VERSION=4.13.4-r0
+ENV BITNAMI_IMAGE_VERSION=4.13.4-r2
 
-RUN npm install express@4.13.4
 RUN npm install -g express-generator@4
 
 COPY rootfs/ /
@@ -40,6 +39,13 @@ COPY rootfs/ /
 RUN chown -R bitnami:bitnami /tmp/app
 
 USER bitnami
+# This will add an specific version of Express that will validate the package.json requirement
+# so we will not download any other version
+# It also generates the cache in ~/.npm
+RUN mkdir /tmp/test_app && cd /tmp/test_app &&\
+ npm install express@4.13.4 &&\
+ express -f . && npm install && sudo rm -rf /tmp/npm* /tmp/test_app
+
 WORKDIR /app
 EXPOSE 3000
 
