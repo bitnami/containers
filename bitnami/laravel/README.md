@@ -133,10 +133,28 @@ artisan            config             package.json       rootfs             vend
 
 Yay! As you can see, the Laravel container bootstrapped a new Laravel application for us in the current working directory and we can now kickstart our application development.
 
-Lets go ahead and add a new controller named `User` to our application. We'll use the scaffold method to create it.
+Lets go ahead and add a new controller named `User` to our application.
 
 ```bash
 $ docker-compose exec myapp php artisan make:controller --resource UserResourceController
 ```
 
-From the last command, you must have already figured out that commands can be executed inside the `myapp` service container by prefixing the command with `docker-compose exec myapp`.
+Lets also add a new dependency to the project.
+
+```bash
+$ docker-compose exec myapp composer require phpmailer/phpmailer:5.2.*
+```
+
+From the last commands, you must have already figured out that commands can be executed inside the `myapp` service container by prefixing the command with `docker-compose exec myapp`.
+
+**To see the application logs**
+
+```bash
+$ docker-compose logs -f myapp
+```
+
+**To restart the application**
+
+```bash
+$ docker-compose restart myapp
+```
