@@ -180,6 +180,7 @@ Available variables:
  - `MEDIAWIKI_USERNAME`: Mediawiki application username. Default: **user**
  - `MEDIAWIKI_PASSWORD`: Mediawiki application password. Default: **bitnami**
  - `MEDIAWIKI_EMAIL`: Mediawiki application email. Default: **user@example.com**
+ - `MEDIAWIKI_WIKI_NAME`: Mediawiki wiki name. Default: **Bitnami MediaWiki**
  - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
  - `MARIADB_PASSWORD`: Root password for the MariaDB.
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
