@@ -5,5 +5,11 @@
   "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
   "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
   "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
-  "databaseServerPort": "{{$global.env.MARIADB_PORT}}"
+  "databaseServerPort": "{{$global.env.MARIADB_PORT}}",
+  "wikiName": "{{$global.env.MEDIAWIKI_WIKI_NAME}}",
+  "smtpHostID": "{{$global.env.SMTP_HOST_ID}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}"
 }
