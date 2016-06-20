@@ -1,8 +1,6 @@
 # What is Mediawiki?
 
-> MediaWiki is free server-based software which is licensed under the GNU General Public License (GPL). It's designed to be run on a large server farm for a website that gets millions of hits per day.
-
-MediaWiki is an extremely powerful, scalable software and a feature-rich wiki implementation that uses PHP to process and display data stored in a database, such as MySQL.
+> MediaWiki is an extremely powerful, scalable software and a feature-rich wiki implementation that uses PHP to process and display data stored in a database, such as MySQL.
 
 Pages use MediaWiki's wikitext format, so that users without knowledge of XHTML or CSS can edit them easily.
 
