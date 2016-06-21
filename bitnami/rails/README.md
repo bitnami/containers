@@ -1,5 +1,5 @@
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/rails)](https://hub.docker.com/r/bitnami/rails/)
-# Rails Application Development using Bitnami Docker Images
+# Rails Development with Bitnami Development Containers
 
 ## TL;DR;
 
