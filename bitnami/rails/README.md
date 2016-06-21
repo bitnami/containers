@@ -1,6 +1,30 @@
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/rails)](https://hub.docker.com/r/bitnami/rails/)
 # Rails Application Development using Bitnami Docker Images
 
+## TL;DR;
+
+**Step 1. Download the `docker-compose.yml` spec**
+
+```bash
+$ curl -L "https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master/docker-compose.yml" > docker-compose.yml
+```
+
+**Step 2. Deploy the service containers**
+
+```bash
+$ docker-compose up
+```
+
+**Step 3. Start hacking!**
+
+```bash
+$ open http://{{ip-address-of-docker-host}}:3000
+```
+
+> *Linux users should replace `open` with `xdg-open`*.
+
+## Introduction
+
 We increasingly see developers adopting two strategies for development. Using a so called “micro services” architecture and using containers for development. At Bitnami, we have developed tools and assets that dramatically lowers the overhead for developing with this approach.
 
 If you’ve never tried to start a project with containers before, or you have tried it and found the advice, tools, and documentation to be chaotic, out of date, or wrong, then this tutorial may be for you.
