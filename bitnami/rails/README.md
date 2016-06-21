@@ -25,7 +25,7 @@ Docker development environments are more likely to be reproducible than VMs beca
 
 Docker also has a well known and standard API so tools and cloud services are readily available for docker containers.
 
-# The Bitnami Approach
+## The Bitnami Approach
 
 When we designed and built our development containers, we kept the following guiding principles in mind:
 
@@ -33,7 +33,7 @@ When we designed and built our development containers, we kept the following gui
 
 2. Production deployment is a late bound decision. Containers are great for development. Sometimes they are great for production, sometimes they are not. If you choose to get started with Bitnami containers for development, it is an easy matter to decide later between monolithic and services architectures, between VMs and Containers, between Cloud and bare metal deployment. This is because Bitnami builds containers specifically with flexibility of production deployment in mind. We ensure that a service running in an immutable and well tested container will behave precisely the same as the same service running in a VM or bare metal.
 
-# Assumptions
+## Assumptions
 
 First, we assume that you have the following components properly setup:
 
