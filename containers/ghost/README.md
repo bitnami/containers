@@ -1,6 +1,6 @@
 # What is Ghost?
 
-> Ghost is a simple, powerful publishing platform that allows you to share you to share your stories with the world.
+> Ghost is a simple, powerful publishing platform that allows you to share your stories with the world.
 
 https://ghost.org/
 
