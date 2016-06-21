@@ -1,0 +1,12 @@
+{
+  "username": "{{$global.env.GHOST_USERNAME}}",
+  "password": "{{$global.env.GHOST_PASSWORD}}",
+  "email": "{{$global.env.GHOST_EMAIL}}",
+  "blogTitle": "{{$global.env.BLOG_TITLE}}",
+  "host": "{{$global.env.GHOST_HOST}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpService": "{{$global.env.SMTP_SERVICE}}"
+}
