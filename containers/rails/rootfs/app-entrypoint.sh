@@ -44,34 +44,36 @@ log () {
   echo -e "\033[0;33m$(date "+%H:%M:%S")\033[0;37m ==> $1."
 }
 
-if ! app_present; then
-  log "Creating rails application"
-  rails new . --skip-bundle --database mysql
+if [ "$1" == "bundle" -a "$2" == "exec" ]; then
+  if ! app_present; then
+    log "Creating rails application"
+    rails new . --skip-bundle --database mysql
+  fi
+
+  if ! gems_up_to_date; then
+    log "Installing/Updating Rails dependencies (gems)"
+    bundle install
+    log "Gems updated"
+  fi
+
+  wait_for_db
+
+  if ! fresh_container; then
+    echo "#########################################################################"
+    echo "                                                                       "
+    echo " App initialization skipped:"
+    echo " Delete the file $INIT_SEM and restart the container to reinitialize"
+    echo " You can alternatively run specific commands using docker-compose exec"
+    echo " e.g docker-compose exec rails bundle exec rake db:migrate"
+    echo "                                                                       "
+    echo "#########################################################################"
+  else
+    setup_db
+    log "Initialization finished"
+    touch $INIT_SEM
+  fi
+
+  migrate_db
 fi
-
-if ! gems_up_to_date; then
-  log "Installing/Updating Rails dependencies (gems)"
-  bundle install
-  log "Gems updated"
-fi
-
-wait_for_db
-
-if ! fresh_container; then
-  echo "#########################################################################"
-  echo "                                                                       "
-  echo " App initialization skipped:"
-  echo " Delete the file $INIT_SEM and restart the container to reinitialize"
-  echo " You can alternatively run specific commands using docker-compose exec"
-  echo " e.g docker-compose exec rails bundle exec rake db:migrate"
-  echo "                                                                       "
-  echo "#########################################################################"
-else
-  setup_db
-  log "Initialization finished"
-  touch $INIT_SEM
-fi
-
-migrate_db
 
 exec /entrypoint.sh "$@"
