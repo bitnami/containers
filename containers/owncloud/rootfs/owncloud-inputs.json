@@ -1,0 +1,10 @@
+{
+  "username": "{{$global.env.OWNCLOUD_USERNAME}}",
+  "password": "{{$global.env.OWNCLOUD_PASSWORD}}",
+  "email": "{{$global.env.OWNCLOUD_EMAIL}}",
+  "host": "{{$global.env.OWNCLOUD_HOST}}",
+  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
+  "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT}}"
+}
