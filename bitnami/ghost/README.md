@@ -53,7 +53,7 @@ version: '2'
 
 services:
   application:
-    image: 'bitnami/drupal:latest'
+    image: 'bitnami/ghost:latest'
     ports:
       - '80:2368'
     volumes:
