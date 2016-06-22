@@ -1,0 +1,12 @@
+version: '2'
+services:
+  application:
+    image: 'bitnami/elasticsearch:latest'
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    volumes:
+      - 'elasticsearch_data:/bitnami/elasticsearch'
+volumes:
+  elasticsearch_data:
+    driver: local
