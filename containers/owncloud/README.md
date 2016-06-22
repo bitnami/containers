@@ -14,7 +14,7 @@ Running ownCloud with a database server is the recommended way. You can either u
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run OwnCloud. You can use the following docker compose template:
+This is the recommended way to run ownCloud. You can use the following docker compose template:
 
 ```
 version: '2'
@@ -70,6 +70,8 @@ If you want to run the application manually instead of using docker-compose, the
   ```
 
 Then you can access your application at http://your-ip/
+
+  *Note:* If you want to access your application from a public IP or hostname you need to configure as a Trusted Domain. You can handle it adjusting the configuration of the instance by setting the environment variable "OWNCLOUD_HOST" to your public IP or hostname.
 
 ## Persisting your application
 
@@ -164,7 +166,7 @@ application:
     - 80:80
     - 443:443
   environment:
-    - OWNCLOUD_PASSWORD=my_password
+    - OWNCLOUD_HOST=your_host
   volumes:
       - owncloud_data:/bitnami/owncloud
       - apache_data:/bitnami/apache

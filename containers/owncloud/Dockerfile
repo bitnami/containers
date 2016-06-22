@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=owncloud \
-    BITNAMI_IMAGE_VERSION=9.0.2-r0 \
+    BITNAMI_IMAGE_VERSION=9.0.2-r1 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
@@ -13,7 +13,7 @@ RUN bitnami-pkg install libphp-5.6.21-0 --checksum 8c1f994108eb17c69b00ac3861799
 RUN bitnami-pkg unpack php-5.6.22-0 --checksum 2439cf0adfc7cc21f15a6136059883e749958af83a082108e63a80ff3c5290c0
 
 # Install owncloud
-RUN bitnami-pkg unpack owncloud-9.0.2-0 --checksum 7e8f84ccc08792a06cdb643d308c89483c242f1cff57606d4ecee6f74c2e233b
+RUN bitnami-pkg unpack owncloud-9.0.2-1 --checksum 717ef9bf5646bc2a3162148f6f2695a4a22b787b464f4afe67f35c247be92826
 
 COPY rootfs /
 
