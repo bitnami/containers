@@ -1,0 +1,9 @@
+{
+  "port": "{{$global.env.ELASTICSEARCH_PORT}}",
+  "nodePort": "{{$global.env.ELASTICSEARCH_NODE_PORT}}",
+  "isClientNode": "{{$global.env.ELASTICSEARCH_CLIENT_NODE}}",
+  "clusterName": "{{$global.env.ELASTICSEARCH_CLUSTER_NAME}}",
+  "clusterHosts": "{{$global.env.ELASTICSEARCH_CLUSTER_HOSTS}}",
+  "nodeName": "{{$global.env.ELASTICSEARCH_NODE_NAME}}",
+  "enableRemoteConnection": "{{$global.env.ELASTICSEARCH_REMOTE_CONNECTION}}"
+}
