@@ -1,0 +1,11 @@
+version: '2'
+services:
+  application:
+    image: 'bitnami/rabbitmq:latest'
+    ports:
+      - '15672:15672'
+    volumes:
+      - 'rabbitmq_data:/bitnami/rabbitmq'
+volumes:
+  rabbitmq_data:
+    driver: local
