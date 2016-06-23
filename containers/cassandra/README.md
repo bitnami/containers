@@ -236,7 +236,7 @@ services:
 
 ## Configuration file
 
-The image looks for configuration in the `conf/` directory of `/bitnami/cassandra`. As as mentioned in [Persisting your database](#persisting-your-data) you can mount a volume at this location and copy your own configurations in the `conf/` directory. The default configuration will be copied to the `conf/` directory if it's empty.
+The image looks for configuration in the `conf/` directory of `/bitnami/cassandra`. As as mentioned in [Persisting your application](#persisting-your-application) you can mount a volume at this location and copy your own configurations in the `conf/` directory. The default configuration will be copied to the `conf/` directory if it's empty.
 
 ### Step 1: Run the Cassandra image
 
