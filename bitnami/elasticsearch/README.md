@@ -164,7 +164,7 @@ In the above command the container is added to a cluster named `elasticsearch-cl
 
 ```bash
 docker run --name elasticsearch-node2 \
-  --link elasticsearch-node1:latest \
+  --link elasticsearch-node1:elasticsearch-node1 \
   --net=elasticsearch_network \
   -e ELASTICSEARCH_CLUSTER_NAME=elasticsearch-cluster \
   -e ELASTICSEARCH_CLUSTER_HOSTS=elasticsearch-node1,elasticsearch-node2 \
