@@ -67,7 +67,7 @@ If you want to connect to your RabbitMQ server inside another container, you can
 
 ## Connecting a RabbitMQ node to a stats node
 
-### Step 1: Create a new network for the application and the database:
+### Step 1: Create a new network for the application:
 
 ```
 $ docker network create rabbitmq_network
