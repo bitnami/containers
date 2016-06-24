@@ -36,7 +36,7 @@ RUN rails new /tmp/temp_app --database mysql --quiet && rm -r /tmp/temp_app
 
 ENV RAILS_ENV=development
 ENV BITNAMI_APP_NAME=rails
-ENV BITNAMI_IMAGE_VERSION=4.2.6-r0
+ENV BITNAMI_IMAGE_VERSION=4.2.6-r3
 
 USER bitnami
 WORKDIR /app
