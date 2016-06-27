@@ -10,7 +10,7 @@ services:
 
   myapp:
     tty: true
-    image: bitnami/laravel:5.2.31-r2
+    image: bitnami/laravel:5.2.31-r3
     environment:
       - DB_HOST=mariadb
       - DB_USERNAME=my_user
