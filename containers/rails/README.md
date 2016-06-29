@@ -34,13 +34,15 @@ First, we assume that you have the following components properly setup:
 
 We also assume that you have some beginner-level experience using these tools.
 
+> **Note**:
+>
+> If your host OS is Linux you may skip setting up Docker Machine since you'll be able to launch the containers directly in the host OS environment.
+
 Further, we also assume that your application will be using a database. In fact, we assume that it will be using [MariaDB](http://mariadb.org/). Of course, for a real project you may be using a different database, or, in fact, no database. But, this is a common set up and will help you learn the development approach.
 
-## Download a Bitnami Orchestration File
+## Download the Bitnami Orchestration File for Rails development
 
-We'll be using the orchestration file for [Ruby on Rails](http://rubyonrails.org/) development.
-
-We assume that you're starting the development of the Rails application from scratch. So lets begin by creating a directory for the application source where we'll be bootstrapping a Rails application:
+We assume that you're starting the development of the [Ruby on Rails](http://rubyonrails.org/) application from scratch. So lets begin by creating a directory for the application source where we'll be bootstrapping a Rails application:
 
 ```bash
 $ mkdir ~/workdir/myapp
@@ -98,10 +100,10 @@ You may recall that we've not installed a single Rails component on the host and
 This may sound like a complex task to achieve. But don't worry, Docker Compose makes it very simple to execute tasks inside a service container using the `exec` command. The general form of the command looks something like the following:
 
 ```bash
-$ docker-compose exec myapp <command>
+$ docker-compose exec <service> <command>
 ```
 
-This instructs Docker Compose to execute the command specified by `<command>` inside the `myapp` service container. The return value of the `docker-compose` command will reflect that of the specified command.
+This instructs Docker Compose to execute the command specified by `<command>` inside the service container specified by `<service>`. The return value of the `docker-compose` command will reflect that of the specified command.
 
 With this information lets try listing the available rake tasks:
 
@@ -109,7 +111,7 @@ With this information lets try listing the available rake tasks:
 $ docker-compose exec myapp bundle exec rake -T
 ```
 
-Next, lets try to get some information about our development environement by executing the `about` task:
+Next, lets try to get some information about our development environment by executing the `about` task:
 
 ```bash
 $ docker-compose exec myapp bundle exec rake about
