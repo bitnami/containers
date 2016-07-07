@@ -1,0 +1,13 @@
+{
+  "password": "{{$global.env.ODOO_PASSWORD}}",
+  "email": "{{$global.env.ODOO_EMAIL}}",
+  "databaseAdminUser": "{{$global.env.POSTGRESQL_USER}}",
+  "databaseAdminPassword": "{{$global.env.POSTGRESQL_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.POSTGRESQL_HOST}}",
+  "databaseServerPort": "{{$global.env.POSTGRESQL_PORT}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpProtocol": "{{$global.env.SMTP_PROTOCOL}}"
+}
