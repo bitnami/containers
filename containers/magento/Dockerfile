@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=magento \
-    BITNAMI_APP_VERSION=2.0.5-r1 \
+    BITNAMI_IMAGE_VERSION=2.0.5-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/apache/bin:/opt/bitnami/magento/bin/:$PATH
 
 # Additional modules required
