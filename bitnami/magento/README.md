@@ -1,6 +1,6 @@
 # What is Magento?
 
-> Magento is one of the most versatile open source content management systems on the market. Magento is built for high performance and is scalable to many servers, has easy integration via REST, JSON, SOAP and other formats, and features a whopping 15,000 plugins to extend and customize the application for just about any type of website.
+> Magento is a feature-rich flexible e-commerce solution. It includes transaction options, multi-store functionality, loyalty programs, product categorization and shopper filtering, promotion rules, and more.
 
 https://www.magento.org/
 
