@@ -8,7 +8,7 @@ MONGODB_PASSWORD=test_password
 APP_NAME=mongodb
 VOL_PREFIX=/bitnami/$APP_NAME
 VOLUMES=$VOL_PREFIX
-SLEEP_TIME=30
+SLEEP_TIME=60
 load tests/docker_helper
 
 # Link to container and execute mongo client
@@ -21,6 +21,7 @@ mongo_client() {
 # Cleans up all running/stopped containers and host mounted volumes
 cleanup_environment() {
   container_remove_full default
+  container_remove_full secondary
 }
 
 # Teardown called at the end of each test
@@ -167,4 +168,124 @@ cleanup_environment
 
   run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.getCollectionNames())"
   [[ "$output" =~ '"users"' ]]
+}
+
+@test "Can't create replicaSet with authentication" {
+  run container_create default \
+    -e MONGODB_REPLICASET_MODE=primary \
+    -e MONGODB_PASSWORD=$MONGODB_PASSWORD
+  [[ "$output" =~ "Not possible to configure replica set scenario using authentication" ]]
+}
+
+@test "Can't create secondary replicaSet node without specifying MONGODB_PRIMARY_HOST" {
+  run container_create secondary \
+    -e MONGODB_REPLICASET_MODE=secondary
+  [[ "$output" =~ "provide the --primaryHost property" ]]
+}
+
+@test "Can create replicaSet without authentication" {
+  container_create default -d \
+    -e MONGODB_REPLICASET_MODE=primary
+
+  container_create secondary -d \
+    $(container_link default $CONTAINER_NAME) \
+    -e MONGODB_REPLICASET_MODE=secondary \
+    -e MONGODB_PRIMARY_HOST=$CONTAINER_NAME
+
+  run mongo_client default $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
+  [[ "$output" =~ '"ok" : 1' ]]
+
+  sleep 3
+  run mongo_client secondary $MONGODB_DATABASE --eval "rs.slaveOk(); printjson(db.getCollectionNames())"
+  [[ "$output" =~ '"users"' ]]
+}
+
+@test "Secondary node in replicaSet synchronizes with the primary (delayed start)" {
+  container_create default -d \
+    -e MONGODB_REPLICASET_MODE=primary
+
+  run mongo_client default $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
+  [[ "$output" =~ '"ok" : 1' ]]
+
+  container_create secondary -d \
+    $(container_link default $CONTAINER_NAME) \
+    -e MONGODB_REPLICASET_MODE=secondary \
+    -e MONGODB_PRIMARY_HOST=$CONTAINER_NAME
+
+  run mongo_client secondary $MONGODB_DATABASE --eval "rs.slaveOk(); printjson(db.getCollectionNames())"
+  [[ "$output" =~ '"users"' ]]
+}
+
+@test "replicaSet setup and state is preserved after restart" {
+  container_create default -d \
+    -e MONGODB_REPLICASET_MODE=primary
+
+  run mongo_client default $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
+  [[ "$output" =~ '"ok" : 1' ]]
+
+  container_create secondary -d \
+    $(container_link default $CONTAINER_NAME) \
+    -e MONGODB_REPLICASET_MODE=secondary \
+    -e MONGODB_PRIMARY_HOST=$CONTAINER_NAME
+
+  container_restart secondary
+  container_restart default
+
+  run mongo_client default $MONGODB_DATABASE --eval "printjson(db.createCollection('networks'))"
+  [[ "$output" =~ '"ok" : 1' ]]
+
+  sleep 3
+  run mongo_client secondary $MONGODB_DATABASE --eval "rs.slaveOk(); printjson(db.getCollectionNames())"
+  [[ "$output" =~ '"users"' ]]
+  [[ "$output" =~ '"networks"' ]]
+}
+
+@test "replicaSet setup and state is preserved after deletion" {
+  container_create_with_host_volumes default -d \
+    -e MONGODB_REPLICASET_MODE=primary
+
+  run mongo_client default $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
+  [[ "$output" =~ '"ok" : 1' ]]
+
+  container_create_with_host_volumes secondary -d \
+    $(container_link default $CONTAINER_NAME) \
+    -e MONGODB_REPLICASET_MODE=secondary \
+    -e MONGODB_PRIMARY_HOST=$CONTAINER_NAME
+
+  container_remove secondary
+  container_remove default
+
+  container_create_with_host_volumes default -d
+  container_create_with_host_volumes secondary -d $(container_link default $CONTAINER_NAME)
+
+  run mongo_client default $MONGODB_DATABASE --eval "printjson(db.createCollection('networks'))"
+  [[ "$output" =~ '"ok" : 1' ]]
+
+  sleep 3
+  run mongo_client secondary $MONGODB_DATABASE --eval "rs.slaveOk(); printjson(db.getCollectionNames())"
+  [[ "$output" =~ '"users"' ]]
+  [[ "$output" =~ '"networks"' ]]
+}
+
+@test "Slave recovers if master is temporarily offine" {
+  container_create_with_host_volumes default -d \
+    -e MONGODB_REPLICASET_MODE=primary
+
+  run mongo_client default $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
+  [[ "$output" =~ '"ok" : 1' ]]
+
+  container_create_with_host_volumes secondary -d \
+    $(container_link default $CONTAINER_NAME) \
+    -e MONGODB_REPLICASET_MODE=secondary \
+    -e MONGODB_PRIMARY_HOST=$CONTAINER_NAME
+
+  container_restart default
+
+  run mongo_client default $MONGODB_DATABASE --eval "printjson(db.createCollection('networks'))"
+  [[ "$output" =~ '"ok" : 1' ]]
+
+  sleep 3
+  run mongo_client secondary $MONGODB_DATABASE --eval "rs.slaveOk(); printjson(db.getCollectionNames())"
+  [[ "$output" =~ '"users"' ]]
+  [[ "$output" =~ '"networks"' ]]
 }
