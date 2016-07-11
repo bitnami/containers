@@ -50,11 +50,11 @@ cleanup_environment
   [[ "$output" =~ "Name|postgres" ]]
 }
 
-@test "Can't login remotely as postgres user without a password" {
+@test "postgres user can login remotely without a password" {
   container_create default -d
 
   run psql_client default -U postgres -w -Axc "\l"
-  [[ "$output" =~ "password authentication failed" ]]
+  [[ "$output" =~ "Name|postgres" ]]
 }
 
 @test "Can create postgres user with custom password" {
