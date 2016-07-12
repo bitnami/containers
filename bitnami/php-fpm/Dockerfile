@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_IMAGE_VERSION=7.0.6-r0 \
