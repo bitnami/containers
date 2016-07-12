@@ -19,7 +19,7 @@ ENV STACKSMITH_STACK_ID="top24h8" \
     STACKSMITH_STACK_NAME="bitnami/bitnami-docker-laravel" \
     STACKSMITH_STACK_PRIVATE="1"
 
-RUN bitnami-pkg install node-6.2.1-0 --checksum f38ccc063ccc74ab095ddcb5bd227c0722e348f53e31652fd2840779be9e581f
+RUN bitnami-pkg install node-6.3.0-0 --checksum f2997c421e45beb752673a531bf475231d183c30f7f8d5ec1a5fb68d39744d5f
 RUN bitnami-pkg install php-5.6.22-0 --checksum 2439cf0adfc7cc21f15a6136059883e749958af83a082108e63a80ff3c5290c0
 
 ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH
