@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/ubuntu-buildpack:14.04-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=6.2.0-r0 \
+ENV BITNAMI_IMAGE_VERSION=6.3.0-r0 \
     BITNAMI_APP_NAME=node
 
 RUN bitnami-pkg install node-6.3.0-0 --checksum f2997c421e45beb752673a531bf475231d183c30f7f8d5ec1a5fb68d39744d5f
