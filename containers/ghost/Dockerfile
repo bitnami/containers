@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=ghost \
-    BITNAMI_IMAGE_VERSION=0.7.9-r0 \
+    BITNAMI_IMAGE_VERSION=0.7.9-r1 \
     PATH=/opt/bitnami/node/bin:$PATH
 
 # Additional modules required
