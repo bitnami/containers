@@ -31,7 +31,7 @@ create_nginx_container() {
     $(container_link default $APP_NAME) $NGINX_IMAGE_NAME
   sleep $SLEEP_TIME
 
-  docker exec $NGINX_CONTAINER_NAME sh -c "cat > /bitnami/nginx/conf/vhosts/test.conf <<EOF
+  docker exec $NGINX_CONTAINER_NAME sh -c "mkdir -p /bitnami/nginx/conf/vhosts && cat > /bitnami/nginx/conf/vhosts/test.conf <<EOF
 server {
   listen 0.0.0.0:81;
   root /app;
