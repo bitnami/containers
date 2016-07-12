@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_APP_VERSION=10.0.0-r0 \
+ENV BITNAMI_APP_VERSION=10.0.0-r1 \
     BITNAMI_APP_NAME=wildfly \
     BITNAMI_APP_USER=wildfly
 
