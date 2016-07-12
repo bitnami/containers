@@ -1,9 +1,9 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=redmine \
-    BITNAMI_IMAGE_VERSION=3.2.3-r0 \
+    BITNAMI_IMAGE_VERSION=3.2.3-r1 \
     PATH=/opt/bitnami/ruby/bin:$PATH
 
 # Additional modules required
