@@ -32,7 +32,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - 'testlink_data:/bitnami/testlink
+      - 'testlink_data:/bitnami/testlink'
       - 'apache_data:/bitnami/apache'
     depends_on:
       - mariadb
