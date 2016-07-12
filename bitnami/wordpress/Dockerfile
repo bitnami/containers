@@ -1,9 +1,9 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=wordpress \
-    BITNAMI_IMAGE_VERSION=4.5.2-r0 \
+    BITNAMI_IMAGE_VERSION=4.5.2-r1 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/drush:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
