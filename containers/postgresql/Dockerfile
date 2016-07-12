@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=9.5.3-r1 \
+ENV BITNAMI_IMAGE_VERSION=9.5.3-r2 \
     BITNAMI_APP_NAME=postgresql \
     BITNAMI_APP_USER=postgres
 
