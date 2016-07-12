@@ -11,7 +11,7 @@
 ##   Connect to the container at DOCKER_IP:9000
 ##     replacing DOCKER_IP for the IP of your active docker host
 
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -33,7 +33,7 @@ USER bitnami
 RUN mkdir /tmp/app && cd /tmp/app && composer create-project "laravel/laravel=5.2.31" /tmp/app --prefer-dist
 
 ENV BITNAMI_APP_NAME=laravel
-ENV BITNAMI_IMAGE_VERSION=5.2.31-r4
+ENV BITNAMI_IMAGE_VERSION=5.2.31-r5
 
 WORKDIR /app
 EXPOSE 3000
