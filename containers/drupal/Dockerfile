@@ -1,9 +1,9 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=drupal \
-    BITNAMI_IMAGE_VERSION=8.1.3-r0 \
+    BITNAMI_IMAGE_VERSION=8.1.3-r1 \
     IS_BITNAMI_STACK=1 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/drush:/opt/bitnami/mysql/bin/:$PATH
 
