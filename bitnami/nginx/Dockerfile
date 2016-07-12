@@ -1,7 +1,7 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r07
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=1.10.1-r0 \
+ENV BITNAMI_IMAGE_VERSION=1.10.1-r1 \
     BITNAMI_APP_NAME=nginx \
     BITNAMI_APP_USER=daemon
 
