@@ -26,10 +26,13 @@ ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
 
 ## STACKSMITH-END: Modifications below this line will be unchanged when regenerating
 
-# Node base template
-COPY . /app
-WORKDIR /app
+RUN bitnami-pkg install imagemagick-6.7.5-10-3 --checksum 617e85a42c80f58c568f9bc7337e24c03e35cf4c7c22640407a7e1e16880cf88
+RUN bitnami-pkg install mysql-libraries-10.1.13-0 --checksum 71ca428b619901123493503f8a99ccfa588e5afddd26e0d503a32cca1bc2a389
 
-RUN npm install
+ENV BITNAMI_APP_NAME=node \
+    BITNAMI_IMAGE_VERSION=6.3.0-r0
+
+EXPOSE 3000
+WORKDIR /app
 
 CMD ["node"]
