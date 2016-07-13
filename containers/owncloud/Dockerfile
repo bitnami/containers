@@ -13,7 +13,8 @@ RUN bitnami-pkg install libphp-5.6.21-0 --checksum 8c1f994108eb17c69b00ac3861799
 RUN bitnami-pkg unpack php-5.6.22-0 --checksum 2439cf0adfc7cc21f15a6136059883e749958af83a082108e63a80ff3c5290c0
 
 # Install owncloud
-RUN bitnami-pkg unpack owncloud-9.0.2-1 --checksum 717ef9bf5646bc2a3162148f6f2695a4a22b787b464f4afe67f35c247be92826
+RUN bitnami-pkg unpack owncloud-9.0.3-0 --checksum f278b03bc9c581285c01e0ba493a2316a4a565d785c52b06f32d38b869c68649
+
 
 COPY rootfs /
 
