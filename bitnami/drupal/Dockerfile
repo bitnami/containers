@@ -14,8 +14,7 @@ RUN bitnami-pkg install libphp-5.6.21-0 --checksum 8c1f994108eb17c69b00ac3861799
 RUN bitnami-pkg install mysql-client-10.1.13-1 --checksum e16c0ace5cb779b486e52af83a56367f26af16a25b4ab92d8f4293f1bf307107
 
 # Install drupal
-RUN bitnami-pkg unpack drupal-8.1.5-0 --checksum 26db022b9b492bf8ba3a615529016523c8b648ce1a1dfbd423e275387a70812c
-
+RUN bitnami-pkg unpack drupal-8.1.6-0 --checksum 865a064de785f79cd226ed23fe75caa50a7a728ab7f6b385585bb825907b3b4f
 
 COPY rootfs /
 
