@@ -23,30 +23,28 @@ version: '2'
 
 services:
   mariadb:
-    image: bitnami/mariadb:latest
-    volumes_from:
-      - mariadb_data
-
-  mariadb_data:
-    image: bitnami/mariadb:latest
-    entrypoint: 'true'
-
+    image: 'bitnami/mariadb:latest'
+    volumes:
+      - 'mariadb_data:/bitnami/mariadb'
   application:
-    build: bitnami/moodle:latest
+    image: 'bitnami/moodle:latest'
     ports:
-      - 80:80
-      - 443:443
-    volumes_from:
-      - application_data
+      - '80:80'
+      - '443:443'
+    volumes:
+      - 'moodle_data:/bitnami/moodle'
+      - 'apache_data:/bitnami/apache'
+      - 'php_data:/bitnami/php'
     depends_on:
       - mariadb
 
-  application_data:
-    image: bitnami/moodle:latest
-    volumes:
-      - /bitnami/moodle
-      - /bitnami/apache
-    entrypoint: 'true'
+volumes:
+  mariadb_data:
+    driver: local
+  moodle_data:
+    driver: local
+  apache_data:
+    driver: local
 ```
 
 ### Run the application manually
@@ -89,33 +87,19 @@ version: '2'
 
 services:
   mariadb:
-    image: bitnami/mariadb:latest
-    volumes_from:
-      - mariadb_data
-
-  mariadb_data:
-    image: bitnami/mariadb:latest
-    entrypoint: 'true'
+    image: 'bitnami/mariadb:latest'
     volumes:
-      - /your/local/path/bitnami/mariadb/data:/bitnami/mariadb/data
-      - /your/local/path/bitnami/mariadb/conf:/bitnami/mariadb/conf
-
+      - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
   application:
-    image: bitnami/moodle:latest
+    image: 'bitnami/moodle:latest'
     ports:
-      - 80:80
-    volumes_from:
-      - application_data
-
-  application_data:
-    image: bitnami/moodle:latest
+      - '80:80'
+      - '443:443'
     volumes:
-      - /bitnami/moodle
-      - /bitnami/apache
-    entrypoint: 'true'
-    mounts:
-      - /your/local/path/bitnami/moodle:/bitnami/moodle
-      - /your/local/path/bitnami/apache:/bitnami/apache
+      - '/path/to/your/local/moodle_data:/bitnami/moodle'
+      - '/path/to/your/local/apache_data:/bitnami/apache'
+    depends_on:
+      - mariadb
 ```
 
 ### Mount persistent folders manually
@@ -203,6 +187,40 @@ Available variables:
  - `MARIADB_PASSWORD`: Root password for the MariaDB.
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
  - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
+
+
+### SMTP Configuration
+
+To configure Moodle to send email using SMTP you can set the following environment variables:
+ - `SMTP_HOST`: SMTP host.
+ - `SMTP_PORT`: SMTP port.
+ - `SMTP_USER`: SMTP account user.
+ - `SMTP_PASSWORD`: SMTP account password.
+ - `SMTP_PROTOCOL`: SMTP protocol.
+
+This would be an example of SMTP configuration using a GMail account:
+
+ * docker-compose:
+
+```
+  application:
+    image: bitnami/moodle:latest
+    ports:
+      - 80:80
+    environment:
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USER=your_email@gmail.com
+      - SMTP_PASSWORD=your_password
+    volumes_from:
+      - application_data
+```
+
+* For manual execution:
+
+```
+ $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:80 --name moodle -v /your/local/path/bitnami/moodle:/bitnami/moodle --net=moodle_network bitnami/moodle
+```
 
 # Backing up your application
 
