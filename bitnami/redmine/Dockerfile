@@ -13,7 +13,7 @@ RUN bitnami-pkg install mysql-libraries-10.1.13-0 --checksum 71ca428b61990112349
 RUN bitnami-pkg install mysql-client-10.1.13-1 --checksum e16c0ace5cb779b486e52af83a56367f26af16a25b4ab92d8f4293f1bf307107
 
 # Install redmine
-RUN bitnami-pkg unpack redmine-3.2.3-0 --checksum f0002c70bfc687434a121e8d14452da72d17721a9989eb6bc3c2e3e334fdc722
+RUN bitnami-pkg unpack redmine-3.3.0-0 --checksum 7635b0f9585ad8a950c632eff9220ef84a1c455e07c02418265cbada8a73f9ff
 
 COPY rootfs /
 
