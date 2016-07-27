@@ -103,7 +103,7 @@ nginx:
 
 ## Full configuration
 
-This container looks for configuration in `/bitnami/nginx/conf`. You can mount a directory there with your own configuration, or the default configuration will be copied to your directory if it is empty.
+This container looks for configuration in `/bitnami/nginx/conf`. You can mount a directory at `/bitnami/nginx/` with your own configuration, or the default configuration will be copied to your directory at `conf/` if it's empty.
 
 ### Step 1: Run the nginx image
 
