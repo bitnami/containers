@@ -410,7 +410,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
-Copyright 2015 Bitnami
+Copyright (c) 2015-2016 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
