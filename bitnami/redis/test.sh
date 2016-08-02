@@ -182,7 +182,7 @@ cleanup_environment
     -e REDIS_REPLICATION_MODE=slave \
     -e REDIS_MASTER_HOST=$CONTAINER_NAME \
     -e REDIS_MASTER_PASSWORD=$REDIS_PASSWORD \
-    -e REDIS_PASSWORD=$REDIS_PASSWORD \
+    -e REDIS_PASSWORD=$REDIS_PASSWORD
 
   run redis_client slave0 -a $REDIS_PASSWORD get winter
   [[ "$output" =~ "is coming" ]]
