@@ -20,7 +20,7 @@ ENV BITNAMI_IMAGE_VERSION=10.1.14-r2 \
     BITNAMI_APP_NAME=mariadb \
     BITNAMI_APP_USER=mysql
 
-RUN bitnami-pkg unpack mariadb-10.1.14-2 --checksum 2d70b08d8289b71695f3bb5a9517129dd1449e465896ff7e2441b9027e66009a
+RUN bitnami-pkg unpack mariadb-10.1.14-3 --checksum 261d55ed7759cc6708750ff3baa84365f9b00473b7673868d12ac03875ae9823
 ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:$PATH
 
 COPY rootfs/ /
