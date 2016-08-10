@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=moodle \
-    BITNAMI_IMAGE_VERSION=3.1.0-r0 \
+    BITNAMI_IMAGE_VERSION=3.1.0-r1 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
@@ -13,7 +13,7 @@ RUN bitnami-pkg install php-5.6.23-0 --checksum 21f1d65e6f0721cbbad452ace681c5b1
 RUN bitnami-pkg install libphp-5.6.21-0 --checksum 8c1f994108eb17c69b00ac38617997b8ffad7a145a83848f38361b9571aeb73e
 
 # Install moodle
-RUN bitnami-pkg unpack moodle-3.1.0-0 --checksum 083af170464f7c8637319a34fba8254d7805d8179f7c9b391ca33a2a5be23a43
+RUN bitnami-pkg unpack moodle-3.1.0-1 --checksum b397661d41a2970ef4f8e520486b8351beef6c1dc0e4493760a44f5f930ba99d
 
 COPY rootfs /
 
