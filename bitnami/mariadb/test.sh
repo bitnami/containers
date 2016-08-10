@@ -279,6 +279,34 @@ cleanup_environment
   [[ "$output" =~ "name: Marko" ]]
 }
 
+@test "Can setup master/slave replication using a custom master port" {
+  container_create default -d -p 3306 \
+    -e MARIADB_REPLICATION_MODE=master \
+    -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
+    -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD \
+    -e MARIADB_ROOT_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE
+
+  MASTER_HOST=$(container_exec default ip route list | grep ^default | awk '{print $3}')
+  MASTER_PORT=$(docker port $CONTAINER_NAME-default 3306/tcp | cut -d':' -f2)
+  container_create slave0 -d \
+    -e MARIADB_REPLICATION_MODE=slave \
+    -e MARIADB_REPLICATION_USER=$MARIADB_REPLICATION_USER \
+    -e MARIADB_REPLICATION_PASSWORD=$MARIADB_REPLICATION_PASSWORD \
+    -e MARIADB_MASTER_HOST=$MASTER_HOST \
+    -e MARIADB_MASTER_PORT=$MASTER_PORT \
+    -e MARIADB_MASTER_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_ROOT_PASSWORD=$MARIADB_PASSWORD \
+    -e MARIADB_DATABASE=$MARIADB_DATABASE
+
+  mysql_client default -uroot -p$MARIADB_PASSWORD $MARIADB_DATABASE -e \
+    "CREATE TABLE users (id INT AUTO_INCREMENT, name VARCHAR(30), datum TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(id)); \
+     INSERT INTO users(name) VALUES ('Marko');"
+
+  run mysql_client slave0 -uroot -p$MARIADB_PASSWORD $MARIADB_DATABASE -e "SELECT * FROM users\G"
+  [[ "$output" =~ "name: Marko" ]]
+}
+
 @test "Can setup master/slave replication with password for replication user" {
   container_create default -d \
     -e MARIADB_REPLICATION_MODE=master \
