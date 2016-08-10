@@ -3,15 +3,15 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=drupal \
-    BITNAMI_IMAGE_VERSION=8.1.8-r0 \
+    BITNAMI_IMAGE_VERSION=8.1.8-r1 \
     IS_BITNAMI_STACK=1 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/drush:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
-RUN bitnami-pkg install php-5.6.21-0 --checksum 1e0ebe2f26edea96b583d8b7ba2bf895b3c03ea40d67dfb1df3bf331c9caad6c
-RUN bitnami-pkg unpack apache-2.4.18-2 --checksum 9722f4f470e036b4ed4f0fe98509e24f7182177b54a268a458af5eb8e7e6370a
-RUN bitnami-pkg install libphp-5.6.21-0 --checksum 8c1f994108eb17c69b00ac38617997b8ffad7a145a83848f38361b9571aeb73e
-RUN bitnami-pkg install mysql-client-10.1.13-1 --checksum e16c0ace5cb779b486e52af83a56367f26af16a25b4ab92d8f4293f1bf307107
+RUN bitnami-pkg install php-5.6.24-1 --checksum 6cdb5736757bfe0a950034d0dc85a48c3e4ab02bec64c90f0c44454069362e65
+RUN bitnami-pkg unpack apache-2.4.23-1 --checksum c8d14a79313c5e47dbf617e9a55e88ff91d8361357386bab520aabccd35c59d8
+RUN bitnami-pkg install libphp-5.6.21-2 --checksum 83d19b750b627fa70ed9613504089732897a48e1a7d304d8d73dec61a727b222
+RUN bitnami-pkg install mysql-client-10.1.13-4 --checksum 14b45c91dd78b37f0f2366712cbe9bfdf2cb674769435611955191a65dbf4976
 
 # Install drupal
 RUN bitnami-pkg unpack drupal-8.1.8-0 --checksum 9f9b48d08865779bc3ba785432f823e6736db9dcc2ca841ca3337de1cee52fbb
