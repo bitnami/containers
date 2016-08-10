@@ -16,7 +16,7 @@ ENV STACKSMITH_STACK_ID="n7alzzq" \
 ## STACKSMITH-END: Modifications below this line will be unchanged when regenerating
 
 
-ENV BITNAMI_IMAGE_VERSION=10.1.14-r2 \
+ENV BITNAMI_IMAGE_VERSION=10.1.14-r3 \
     BITNAMI_APP_NAME=mariadb \
     BITNAMI_APP_USER=mysql
 
