@@ -6,193 +6,267 @@ https://jenkins.io
 
 # Prerequisites
 
-To run this application you need Docker Engine 1.10.0. Docker Compose is recomended with a version 1.6.0 or later.
+To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://www.docker.com/products/docker-compose) is recommended with a version `1.6.0` or later.
 
 # How to use this image
 
-## Run the application using Docker Compose
+## Using Docker Compose
 
-This is the recommended way to run Jenkins. You can use the following docker compose template:
+The recommended way to run Jenkins is using Docker Compose using the following `docker-compose.yml` template:
 
-```
+```yaml
 version: '2'
-
 services:
   application:
-    build: bitnami/jenkins:latest
+    image: 'bitnami/jenkins:latest'
     ports:
-      - 80:8080
-    volumes_from:
-      - application_data
-
-  application_data:
-    image: bitnami/jenkins:latest
+      - '80:8080'
+      - '443:8443'
     volumes:
-      - /bitnami/jenkins
-      - /bitnami/tomcat
-    entrypoint: 'true'
+      - 'jenkins_data:/bitnami/jenkins'
+volumes:
+  jenkins_data:
+    driver: local
 ```
 
-### Run the application manually
+Launch the containers using:
 
-If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
+```bash
+$ docker-compose up -d
+```
 
-1. Create a new network for the application:
+## Using the Docker Command Line
 
-  ```
-  $ docker network create jenkins_network
-  ```
+If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
-2. Run the Jenkins container:
+1. Create a network
 
-  ```
-  $ docker run -d -p 80:8080 --name jenkins --net=jenkins_network bitnami/jenkins
-  ```
+```bash
+$ docker network create jenkins-tier
+```
 
-Then you can access your application at http://your-ip/
+2. Create volumes for Jenkins persistence and launch the container
+
+```bash
+$ docker volume create --name jenkins_data
+$ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
+  --net jenkins-tier \
+  --volume jenkins_data:/bitnami/jenkins \
+  bitnami/jenkins:latest
+```
+
+Access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `application_data` data volume. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+For persistence of the Jenkins deployment, the above examples define a docker volume namely jenkins_data`. The Jenkins application state will persist as long as this volume is not removed.
 
-> **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
+If avoid inadvertent removal of this volume you can [mount a host directory as data volume](https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume). Alternatively you can make use of volume plugins to host the volume data.
 
-### Mount persistent folders in the host using docker-compose
+### Mount host directories as data volumes with Docker Compose
 
-This requires a sightly modification from the template previously shown:
-```
+The following `docker-compose.yml` template demonstrates the use of host directories as data volumes.
+
+```yaml
 version: '2'
 
 services:
-  application:
+  jenkins:
     image: bitnami/jenkins:latest
     ports:
-      - 80:8080
-    volumes_from:
-      - application_data
-
-  application_data:
-    image: bitnami/jenkins:latest
+      - '80:8080'
+      - '443:8443'
     volumes:
-      - /bitnami/jenkins
-      - /bitnami/tomcat
-    entrypoint: 'true'
-    mounts:
-      - /your/local/path/bitnami/jenkins:/bitnami/jenkins
-      - /your/local/path/bitnami/tomcat:/bitnami/tomcat
+      - /path/to/jenkins-persistence:/bitnami/jenkins
 ```
 
-### Mount persistent folders manually
+### Mount host directories as data volumes using the Docker command line
 
-In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
+1. Create a network (if it does not exist)
 
-1. If you haven't done this before, create a new network for the application:
+```bash
+$ docker network create jenkins-tier
+```
 
-  ```
-  $ docker network create jenkins_network
-  ```
+2. Create the Jenkins the container with host volumes
 
-2. Run the Jenkins container:
+```bash
+$ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
+  --net jenkins-tier \
+  --volume /path/to/jenkins-persistence:/bitnami/jenkins \
+  bitnami/jenkins:latest
+```
 
-  ```
-  $ docker run -d -p 80:8080 --name jenkins -v /your/local/path/bitnami/jenkins:/bitnami/jenkins --network=jenkins_network bitnami/jenkins
-  ```
+# Upgrading Jenkins
 
-# Upgrade this application
+We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Jenkins container.
 
-Bitnami provides up-to-date versions of Jenkins, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Jenkins container.
+The `bitnami/jenkins:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/jenkins:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/jenkins/tags/).
 
-1. Get the updated images:
+Get the updated image:
 
 ```
 $ docker pull bitnami/jenkins:latest
 ```
 
-2. Stop your container
+## Using Docker Compose
 
- * For docker-compose: `$ docker-compose stop jenkins`
- * For manual execution: `$ docker stop jenkins`
+1. Stop the running Jenkins container
 
-3. (For non-compose execution only) Create a [backup](#backing-up-your-application) if you have not mounted the jenkins folder in the host.
+```bash
+$ docker-compose stop jenkins
+```
 
-4. Remove the currently running container
+2. Remove the stopped container
 
- * For docker-compose: `$ docker-compose rm -v jenkins`
- * For manual execution: `$ docker rm -v jenkins`
+```bash
+$ docker-compose rm jenkins
+```
 
-5. Run the new image
+3. Launch the updated Jenkins image
 
- * For docker-compose: `$ docker-compose start jenkins`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name jenkins bitnami/jenkins:latest`
+```bash
+$ docker-compose start jenkins
+```
+
+## Using Docker command line
+
+1. Stop the running Jenkins container
+
+```bash
+$ docker stop jenkins
+```
+
+2. Remove the stopped container
+
+```bash
+$ docker rm jenkins
+```
+
+3. Launch the updated Jenkins image
+
+```bash
+$ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
+  --net jenkins-tier \
+  --volume jenkins_data:/bitnami/jenkins \
+  bitnami/jenkins:latest
+```
+
+> **NOTE**:
+>
+> The above command assumes that local docker volumes are in use. Edit the command according to your usage.
 
 # Configuration
+
 ## Environment variables
- When you start the jenkins image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+The Jenkins instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom Jenkins:
+
+- `JENKINS_USERNAME`: Jenkins admin username. Default: **user**
+- `JENKINS_PASSWORD`: Jenkins admin password. Default: **bitnami**
+
+### Specifying Environment variables using Docker Compose
+
+```yaml
+version: '2'
+
+services:
+  jenkins:
+    image: bitnami/jenkins:latest
+    ports:
+      - '80:8080'
+      - '443:8443'
+    environment:
+      - JENKINS_PASSWORD=my_password
+    volumes:
+      - jenkins_data:/bitnami/jenkins
+
+volumes:
+  jenkins_data:
+    driver: local
 ```
-application:
-  image: bitnami/jenkins:latest
-  ports:
-    - 80:8080
-  environment:
-    - JENKINS_PASSWORD=my_password
-  volumes_from:
-    - application_data
+
+### Specifying Environment variables on the Docker command line
+
+```bash
+$ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
+  --net jenkins-tier \
+  --env JENKINS_PASSWORD=my_password \
+  --volume jenkins_data:/bitnami/jenkins \
+  bitnami/jenkins:latest
 ```
-
- * For manual execution add a `-e` option with each variable and value:
-
-```
- $ docker run -d -e JENKINS_PASSWORD=my_password -p 80:8080 --name jenkins -v /your/local/path/bitnami/jenkins:/bitnami/jenkins --network=jenkins_network bitnami/jenkins
-```
-
-Available variables:
-
- - `JENKINS_USERNAME`: Jenkins admin username. Default: **user**
- - `JENKINS_PASSWORD`: Jenkins admin password. Default: **bitnami**
 
 # Backing up your application
 
 To backup your application data follow these steps:
 
-1. Stop the running container:
+## Backing up using Docker Compose
 
-* For docker-compose: `$ docker-compose stop jenkins`
-* For manual execution: `$ docker stop jenkins`
+1. Stop the Jenkins container:
 
-2. Copy the Jenkins data folder in the host:
-
+```bash
+$ docker-compose stop jenkins
 ```
-$ docker cp /your/local/path/bitnami:/bitnami/jenkins
+
+2. Copy the Jenkins data
+
+```bash
+$ docker cp $(docker-compose ps -q jenkins):/bitnami/jenkins/ /path/to/backups/jenkins/latest/
+```
+
+3. Start the Jenkins container
+
+```bash
+$ docker-compose start jenkins
+```
+
+## Backing up using the Docker command line
+
+1. Stop the Jenkins container:
+
+```bash
+$ docker stop jenkins
+```
+
+2. Copy the Jenkins data
+
+```bash
+$ docker cp jenkins:/bitnami/jenkins/ /path/to/backups/jenkins/latest/
+```
+
+3. Start the Jenkins container
+
+```bash
+$ docker start jenkins
 ```
 
 # Restoring a backup
 
-To restore your application using backed up data simply mount the folder with Jenkins data in the container. See [persisting your application](#persisting-your-application) section for more info.
+To restore your application using backed up data simply mount the folder with Jenkins in the container. See [persisting your application](#persisting-your-application) section for more info.
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an
-[issue](https://github.com/bitnami/jenkins/issues), or submit a
-[pull request](https://github.com/bitnami/jenkins/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/jenkins/issues), or submit a [pull request](https://github.com/bitnami/jenkins/pulls) with your contribution.
 
 # Issues
 
-If you encountered a problem running this container, you can file an
-[issue](https://github.com/bitnami/jenkins/issues). For us to provide better support,
-be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/jenkins/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
 - Output of `docker info`
-- Version of this container (`echo $BITNAMI_APP_VERSION` inside the container)
-- The command you used to run the container, and any relevant output you saw (masking any sensitive
-information)
+- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
 
-Copyright 2016 Bitnami
+Copyright 2015-2016 Bitnami
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
