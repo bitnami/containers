@@ -16,7 +16,8 @@ COPY rootfs /
 
 VOLUME ["/bitnami/rabbitmq"]
 
-EXPOSE 15672
+
+EXPOSE 4369 5672 25672 15672
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
