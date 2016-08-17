@@ -1,6 +1,6 @@
 # What is Ghost?
 
-> Ghost is a simple, powerful publishing platform that allows you to share your stories with the world.
+> Ghost is a simple, powerful publishing platform that allows you to share your stories with the world
 
 https://ghost.org/
 
@@ -16,14 +16,23 @@ This is the recommended way to run Ghost. You can use the following docker compo
 
 ```
 version: '2'
+
 services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    volumes:
+       - 'mariadb_data:/bitnami/mariadb'
   application:
-    image: bitnami/ghost:latest
+    image: 'bitnami/ghost:latest'
     ports:
       - '80:2368'
     volumes:
       - 'ghost_data:/bitnami/ghost'
+    depends_on:
+      - mariadb
 volumes:
+  mariadb_data:
+    driver: local
   ghost_data:
     driver: local
 ```
@@ -32,10 +41,24 @@ volumes:
 
 If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
 
-1. Run the Ghost container:
+1. Create a new network for the application and the database:
 
   ```
-  $ docker run -d -p 80:2368 --name ghost bitnami/ghost
+  $ docker network create ghost_network
+  ```
+
+2. Start a MariaDB database in the network generated:
+
+   ```
+   $ docker run -d --name mariadb --net=ghost_network bitnami/mariadb
+   ```
+
+   *Note:* You need to give the container a name in order to Ghost to resolve the host
+
+3. Run the Ghost container:
+
+  ```
+  $ docker run -d -p 80:2368 --name ghost --net=ghost_network bitnami/ghost
   ```
 
 Then you can access your application at http://your-ip/
@@ -52,28 +75,47 @@ This requires a sightly modification from the template previously shown:
 version: '2'
 
 services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    volumes:
+      - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
   application:
-    image: 'bitnami/ghost:latest'
+    image: bitnami/ghost:latest
     ports:
       - '80:2368'
     volumes:
       - '/path/to/your/local/ghost_data:/bitnami/ghost'
-
+    depends_on:
+      - mariadb
 ```
 
 ### Mount persistent folders manually
 
 In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
 
-1. Run the Ghost container:
+1. If you haven't done this before, create a new network for the application and the database:
 
   ```
-  $ docker run -d -p 80:2368 --name ghost -v /your/local/path/bitnami/ghost:/bitnami/ghost bitnami/ghost
+  $ docker network create ghost_network
+  ```
+
+2. Start a MariaDB database in the previous network:
+
+  ```
+  $ docker run -d --name mariadb -v /your/local/path/bitnami/mariadb/data:/bitnami/mariadb/data -v /your/local/path/bitnami/mariadb/conf:/bitnami/mariadb/conf --network=ghost_network bitnami/mariadb
+  ```
+
+  *Note:* You need to give the container a name in order to Ghost to resolve the host
+
+3. Run the Ghost container:
+
+  ```
+  $ docker run -d -p 80:2368 --name ghost -v /your/local/path/bitnami/ghost:/bitnami/ghost --network=ghost_network bitnami/ghost
   ```
 
 # Upgrade this application
 
-Bitnami provides up-to-date versions of Ghost, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Ghost container.
+Bitnami provides up-to-date versions of MariaDB and Ghost, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Ghost container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
 
 1. Get the updated images:
 
@@ -115,7 +157,7 @@ application:
  * For manual execution add a `-e` option with each variable and value:
 
 ```
- $ docker run -d -e GHOST_PASSWORD=my_password -p 80:2368 --name ghost -v /your/local/path/bitnami/ghost:/bitnami/ghost bitnami/ghost
+ $ docker run -d -e GHOST_PASSWORD=my_password -p 80:2368 --name ghost -v /your/local/path/bitnami/ghost:/bitnami/ghost --network=ghost_network bitnami/ghost
 ```
 
 Available variables:
@@ -123,7 +165,10 @@ Available variables:
  - `GHOST_PASSWORD`: Ghost application password. Default: **bitnami1**
  - `GHOST_EMAIL`: Ghost application email. Default: **user@example.com**
  - `BLOG_TITLE`: Ghost blog title. Default: **User's Blog**
-
+ - `GHOST_HOSTPORT`: Ghost application port. Default: **80**
+ - `MARIADB_USER`: Root password for the MariaDB.
+ - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+ - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
 ### SMTP Configuration
 
 To configure Ghost to send email using SMTP you can set the following environment variables:
@@ -152,7 +197,7 @@ This would be an example of SMTP configuration using a GMail account:
  * For manual execution:
 
 ```
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_SERVICE=GMail -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:2368 --name ghost -v /your/local/path/bitnami/ghost:/bitnami/ghost bitnami/ghost
+ $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_SERVICE=GMail -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:2368 --name ghost -v /your/local/path/bitnami/ghost:/bitnami/ghost --network=ghost_network bitnami/ghost
 ```
 
 # Backing up your application
@@ -195,7 +240,7 @@ information)
 
 # License
 
-Copyright (c) 2016 Bitnami
+Copyright 2016 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
