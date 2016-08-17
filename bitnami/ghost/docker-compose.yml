@@ -1,11 +1,19 @@
 version: '2'
 services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    volumes:
+      - 'mariadb_data:/bitnami/mariadb'
   application:
     image: 'bitnami/ghost:latest'
     ports:
       - '80:2368'
     volumes:
       - 'ghost_data:/bitnami/ghost'
+    depends_on:
+      - mariadb
 volumes:
+  mariadb_data:
+    driver: local
   ghost_data:
     driver: local
