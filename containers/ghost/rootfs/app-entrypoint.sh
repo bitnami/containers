@@ -17,6 +17,11 @@ export GHOST_USERNAME=${GHOST_USERNAME:-"user"}
 export GHOST_PASSWORD=${GHOST_PASSWORD:-"bitnami1"}
 export GHOST_EMAIL=${GHOST_EMAIL:-"user@example.com"}
 export BLOG_TITLE=${BLOG_TITLE:-"User's Blog"}
+export GHOST_HOSTPORT=${GHOST_HOSTPORT:-"80"}
+export MARIADB_USER=${MARIADB_USER:-"root"}
+export MARIADB_HOST=${MARIADB_HOST:-"mariadb"}
+export MARIADB_PORT=${MARIADB_PORT:-"3306"}
+
 
 if [[ "$1" == "harpoon" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
    initialize ghost
