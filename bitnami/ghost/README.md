@@ -63,6 +63,8 @@ If you want to run the application manually instead of using docker-compose, the
 
 Then you can access your application at http://your-ip/
 
+> **Note!** If you want to access your application from a public IP or hostname you need to properly configured Ghost . You can handle it adjusting the configuration of the instance by setting the environment variable "GHOST_HOST" to your public IP or hostname.
+
 ## Persisting your application
 If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `application_data` data volume. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
 
@@ -151,7 +153,7 @@ application:
   ports:
     - 80:2368
   environment:
-    - GHOST_PASSWORD=my_password
+    - GHOST_HOST=my_host
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -161,11 +163,12 @@ application:
 ```
 
 Available variables:
+ - `GHOST_HOST`: Hostname for Ghost.
+ - `GHOST_PORT`: Ghost application port. Default: **80**
  - `GHOST_USERNAME`: Ghost application username. Default: **user**
  - `GHOST_PASSWORD`: Ghost application password. Default: **bitnami1**
  - `GHOST_EMAIL`: Ghost application email. Default: **user@example.com**
  - `BLOG_TITLE`: Ghost blog title. Default: **User's Blog**
- - `GHOST_HOSTPORT`: Ghost application port. Default: **80**
  - `MARIADB_USER`: Root password for the MariaDB.
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
  - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
