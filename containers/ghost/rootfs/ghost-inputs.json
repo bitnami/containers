@@ -4,7 +4,7 @@
   "email": "{{$global.env.GHOST_EMAIL}}",
   "blogTitle": "{{$global.env.BLOG_TITLE}}",
   "host": "{{$global.env.GHOST_HOST}}",
-  "hostPort": "{{$global.env.GHOST_HOSTPORT}}",
+  "port": "{{$global.env.GHOST_PORT}}",
   "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
   "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
   "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
