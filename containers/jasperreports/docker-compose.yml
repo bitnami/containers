@@ -1,0 +1,20 @@
+version: '2'
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    volumes:
+      - 'mariadb_data:/bitnami/mariadb'
+  application:
+    image: 'bitnami/jasperserver:latest'
+    ports:
+      - '80:8080'
+      - '443:8443'
+    volumes:
+      - 'jasperserver_data:/bitnami/jasperserver'
+    depends_on:
+      - mariadb
+volumes:
+  mariadb_data:
+    driver: local
+  jasperserver_data:
+    driver: local
