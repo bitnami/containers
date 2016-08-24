@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=joomla \
-    BITNAMI_IMAGE_VERSION=3.6.0-r1 \
+    BITNAMI_IMAGE_VERSION=3.6.2-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
@@ -13,7 +13,7 @@ RUN bitnami-pkg install libphp-5.6.21-0 --checksum 8c1f994108eb17c69b00ac3861799
 RUN bitnami-pkg install mysql-client-10.1.13-1 --checksum e16c0ace5cb779b486e52af83a56367f26af16a25b4ab92d8f4293f1bf307107
 
 # Install joomla
-RUN bitnami-pkg unpack joomla-3.6.0-0 --checksum dc7ed4fbd9df94ee59587072fe4a44bd2c253a1982b3b8c48ea2e781469f4a67
+RUN bitnami-pkg unpack joomla-3.6.2-0 --checksum 90187115652ad8a8a500cd67fe43d2cd197075d55dd5cbb3ac06f6e6a62dd5d7
 
 COPY rootfs /
 
