@@ -2,7 +2,7 @@
 
 > Magento is a feature-rich flexible e-commerce solution. It includes transaction options, multi-store functionality, loyalty programs, product categorization and shopper filtering, promotion rules, and more.
 
-https://www.magento.org/
+https://magento.com/
 
 # Prerequisites
 
