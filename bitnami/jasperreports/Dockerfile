@@ -12,7 +12,7 @@ RUN bitnami-pkg install tomcat-8.0.36-0 --checksum e4402f645bc95011066d602503470
 RUN bitnami-pkg install mysql-client-10.1.13-4 --checksum 14b45c91dd78b37f0f2366712cbe9bfdf2cb674769435611955191a65dbf4976
 
 # Install jasperserver
-RUN bitnami-pkg unpack jasperserver-6.3.0-0 --checksum 7206e3119e5aace4c116eff062bdf8b2c8a0aa503e2078af1999c85bf7148982
+RUN bitnami-pkg unpack jasperserver-6.3.0-0 --checksum ebd464b9df23ef0924917d5989b6c9b1b9b470aa38a3928aba83e5bb079fed55
 
 COPY rootfs /
 
