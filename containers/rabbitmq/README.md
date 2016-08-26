@@ -178,7 +178,7 @@ services:
 Update the definitions for nodes you want your RabbitMQ stats node cluster with.
 
 ```
-    queue-disc1:
+  queue-disc1:
     image: bitnami/rabbitmq
     environment:
       - RABBITMQ_NODETYPE=queue-disc
@@ -201,8 +201,8 @@ We are going to add a ram node too:
       - RABBITMQ_NODENAME=rabbit@queue-ram1
       - RABBITMQ_CLUSTERNODENAME=rabbit@stats
       - RABBITMQ_ERLANGCOOKIE=s3cr3tc00ki3
-  volumes:
-    - 'rabbitmqram1_data:/bitnami/rabbitmq'
+    volumes:
+      - 'rabbitmqram1_data:/bitnami/rabbitmq'
 ```
 
 #### Step 3: Add the volume description
@@ -240,8 +240,8 @@ services:
       - RABBITMQ_NODENAME=rabbit@queue-disc1
       - RABBITMQ_CLUSTERNODENAME=rabbit@stats
       - RABBITMQ_ERLANGCOOKIE=s3cr3tc00ki3
-  volumes:
-    - 'rabbitmqdisc1_data:/bitnami/rabbitmq'
+    volumes:
+      - 'rabbitmqdisc1_data:/bitnami/rabbitmq'
   queue-ram1:
     image: bitnami/rabbitmq
     environment:
@@ -249,8 +249,8 @@ services:
       - RABBITMQ_NODENAME=rabbit@queue-ram1
       - RABBITMQ_CLUSTERNODENAME=rabbit@stats
       - RABBITMQ_ERLANGCOOKIE=s3cr3tc00ki3
-  volumes:
-    - 'rabbitmqram1_data:/bitnami/rabbitmq'
+    volumes:
+      - 'rabbitmqram1_data:/bitnami/rabbitmq'
 
 volumes:
   rabbitmqstats_data:
