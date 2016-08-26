@@ -1,4 +1,5 @@
 [![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-node)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-node/)
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/node)](https://hub.docker.com/r/bitnami/node/)
 
 # What is Node.js?
 
