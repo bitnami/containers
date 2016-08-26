@@ -4,7 +4,7 @@ We increasingly see developers adopting two strategies for development. Using a 
 
 If you’ve never tried to start a project with containers before, or you have tried it and found the advice, tools, and documentation to be chaotic, out of date, or wrong, then this tutorial may be for you.
 
-In this tutorial we walk you through using the Bitnami docker images during the development lifecycle of a Express application.
+In this tutorial we walk you through using the Bitnami docker images during the development lifecycle of an Express application.
 
 ### Eclipse Che Developer Workspace
 
@@ -52,7 +52,7 @@ Further, we also assume that your application will be using a database. In fact,
 
 ## Download the Bitnami Orchestration File for Express development
 
-We assume that you're starting the development of the [Express](http://expressjs.com/) application from scratch. So lets begin by creating a directory for the application source where we'll be bootstrapping a Express application:
+We assume that you're starting the development of the [Express](http://expressjs.com/) application from scratch. So lets begin by creating a directory for the application source where we'll be bootstrapping an Express application:
 
 ```bash
 $ mkdir ~/workdir/myapp
@@ -99,7 +99,7 @@ Since the application source resides on the host, you can use your favourite IDE
 
 That’s all there is to it. Without actually installing a single Express component on the host you have a completely isolated and highly reproducible Express development environment which can be shared with the rest of the team to get them started building the next big feature without worrying about the plumbing involved in setting up the development environment. Let Bitnami do that for you.
 
-In the next sections we take a look at some of the common tasks that are involved during the development of a Express application and how we go about executing those tasks.
+In the next sections we take a look at some of the common tasks that are involved during the development of an Express application and how we go about executing those tasks.
 
 ## Executing commands
 
