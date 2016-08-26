@@ -228,7 +228,7 @@ docker run --name postgresql-slave \
   bitnami/postgresql:latest
 ```
 
-In the above command the container is configured as a `slave` using the `POSTGRES_REPLICATION_MODE` parameter. Before the replication slave is started, the `POSTGRES_MASTER_HOST` and `POSTGRES_MASTER_PORT` parameters are used by the slave container to connect to the master and replicate the initial database from the master. The `POSTGRES_REPLICATION_USER` and `POSTGRES_REPLICATION_PASSWORD` credentials are used to authenticate with the master.
+In the above command the container is configured as a `slave` using the `POSTGRES_MODE` parameter. Before the replication slave is started, the `POSTGRES_MASTER_HOST` and `POSTGRES_MASTER_PORT` parameters are used by the slave container to connect to the master and replicate the initial database from the master. The `POSTGRES_REPLICATION_USER` and `POSTGRES_REPLICATION_PASSWORD` credentials are used to authenticate with the master.
 
 With these two commands you now have a two node PostgreSQL master-slave streaming replication cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
 
