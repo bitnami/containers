@@ -1,4 +1,6 @@
 [![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-apache)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-apache/)
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/apache)](https://hub.docker.com/r/bitnami/apache/)
+
 
 # What is Apache?
 
