@@ -1,4 +1,6 @@
 [![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-postgresql)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-postgresql/)
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/postgresql)](https://hub.docker.com/r/bitnami/postgresql/)
+
 
 # What is PostgreSQL?
 
