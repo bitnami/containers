@@ -1,3 +1,5 @@
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/rabbitmq)](https://hub.docker.com/r/bitnami/rabbitmq/)
+
 # What is RabbitMQ?
 
 > RabbitMQ is an open source message broker software that implements the Advanced Message Queuing Protocol (AMQP).
