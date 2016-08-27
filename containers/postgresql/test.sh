@@ -115,12 +115,6 @@ cleanup_environment
   [[ "$output" =~ "is_superuser|off" ]]
 }
 
-@test "Can't create replication user without password" {
-  run container_create default \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER
-  [[ "$output" =~ "provide the --replicationPassword property as well" ]]
-}
-
 @test "Data is preserved on container restart" {
   container_create default -d \
     -e POSTGRES_USER=$POSTGRES_USER \
@@ -162,6 +156,12 @@ cleanup_environment
 
   run psql_client default -U $POSTGRES_USER $POSTGRES_DB -Axc "\l"
   [[ "$output" =~ "Name|$POSTGRES_DB" ]]
+}
+
+@test "Can't create replication user without password" {
+  run container_create default \
+    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER
+  [[ "$output" =~ "provide the --replicationPassword property as well" ]]
 }
 
 @test "Can't setup replication slave without specifying the master host" {
@@ -221,6 +221,33 @@ cleanup_environment
     $(container_link default $CONTAINER_NAME) \
     -e POSTGRES_MODE=slave \
     -e POSTGRES_MASTER_HOST=$CONTAINER_NAME \
+    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
+    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
+
+  psql_client default -U $POSTGRES_USER $POSTGRES_DB -c \
+    "CREATE TABLE users (id serial, name varchar(40) NOT NULL); \
+     INSERT INTO users(name) VALUES ('Marko');"
+
+  run psql_client slave0 -U $POSTGRES_USER $POSTGRES_DB -Axc "SELECT * FROM users;"
+  [[ "$output" =~ "name|Marko" ]]
+}
+
+@test "Can setup master/slave replication using a custom master port" {
+  container_create default -d -p 5432 \
+    -e POSTGRES_MODE=master \
+    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
+    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD \
+    -e POSTGRES_USER=$POSTGRES_USER \
+    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
+    -e POSTGRES_DB=$POSTGRES_DB
+
+  MASTER_HOST=$(container_exec default ip route list | grep ^default | awk '{print $3}')
+  MASTER_PORT=$(docker port $CONTAINER_NAME-default 5432/tcp | cut -d':' -f2)
+  container_create slave0 -d \
+    $(container_link default $CONTAINER_NAME) \
+    -e POSTGRES_MODE=slave \
+    -e POSTGRES_MASTER_HOST=$MASTER_HOST \
+    -e POSTGRES_MASTER_PORT=$MASTER_PORT \
     -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
     -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
 
