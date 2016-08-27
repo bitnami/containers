@@ -1,4 +1,5 @@
 [![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-nginx)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-nginx/)
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/nginx)](https://hub.docker.com/r/bitnami/nginx/)
 
 # What is nginx?
 
