@@ -1,3 +1,4 @@
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/redmine)](https://hub.docker.com/r/bitnami/redmine/)
 
 # What is Redmine?
 
