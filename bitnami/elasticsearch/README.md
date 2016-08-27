@@ -1,3 +1,4 @@
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/elasticsearch)](https://hub.docker.com/r/bitnami/elasticsearch/)
 # What is Elasticsearch?
 
 > Elasticsearch is a highly scalable open-source full-text search and analytics engine. It allows you to store, search, and analyze big volumes of data quickly and in near real time
