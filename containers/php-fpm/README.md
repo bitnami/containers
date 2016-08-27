@@ -1,5 +1,7 @@
 [![Build
 Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-php-fpm)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-php-fpm/)
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/php-fpm)](https://hub.docker.com/r/bitnami/php-fpm/)
+
 
 # What is PHP-FPM?
 
