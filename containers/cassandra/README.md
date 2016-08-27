@@ -1,3 +1,4 @@
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/cassandra)](https://hub.docker.com/r/bitnami/cassandra/)
 # What is Cassandra?
 
 > [Apache Cassandra](http://cassandra.apache.org) is a free and open-source distributed database management system designed to handle large amounts of data across many commodity servers, providing high availability with no single point of failure. Cassandra offers robust support for clusters spanning multiple datacenters, with asynchronous masterless replication allowing low latency operations for all clients.
