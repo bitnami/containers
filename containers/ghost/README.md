@@ -1,3 +1,4 @@
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/ghost)](https://hub.docker.com/r/bitnami/ghost/)
 # What is Ghost?
 
 > Ghost is a simple, powerful publishing platform that allows you to share your stories with the world
