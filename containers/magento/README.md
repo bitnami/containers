@@ -1,3 +1,5 @@
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/magento)](https://hub.docker.com/r/bitnami/magento/)
+
 # What is Magento?
 
 > Magento is a feature-rich flexible e-commerce solution. It includes transaction options, multi-store functionality, loyalty programs, product categorization and shopper filtering, promotion rules, and more.
