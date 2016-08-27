@@ -1,3 +1,5 @@
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/drupal)](https://hub.docker.com/r/bitnami/drupal/)
+
 # What is Drupal?
 
 > Drupal is one of the most versatile open source content management systems on the market. Drupal is built for high performance and is scalable to many servers, has easy integration via REST, JSON, SOAP and other formats, and features a whopping 15,000 plugins to extend and customize the application for just about any type of website.
