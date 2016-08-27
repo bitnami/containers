@@ -1,3 +1,5 @@
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/testlink)](https://hub.docker.com/r/bitnami/testlink/)
+
 # What is TestLink?
 
 > TestLink is a web-based test management system that facilitates software quality assurance. It is developed and maintained by Teamtest. The platform offers support for test cases, test suites, test plans, test projects and user management, as well as various reports and statistics.
