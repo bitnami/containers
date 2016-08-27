@@ -1,4 +1,5 @@
 [![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-mongodb)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-mongodb/)
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/mongodb)](https://hub.docker.com/r/bitnami/mongodb/)
 
 # What is MongoDB?
 
