@@ -3,14 +3,14 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=joomla \
-    BITNAMI_IMAGE_VERSION=3.6.2-r0 \
+    BITNAMI_IMAGE_VERSION=3.6.2-r1 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
-RUN bitnami-pkg unpack apache-2.4.23-0 --checksum 90b395bdb707cdbfc7786d79c4c064cade1135f94ff7f973d359c28c5ee8cebf
-RUN bitnami-pkg unpack php-5.6.24-0 --checksum bd4d033027f86efe21d743e66273dea113efb5d9d6eb778bf12a004719736928
-RUN bitnami-pkg install libphp-5.6.21-0 --checksum 8c1f994108eb17c69b00ac38617997b8ffad7a145a83848f38361b9571aeb73e
-RUN bitnami-pkg install mysql-client-10.1.13-1 --checksum e16c0ace5cb779b486e52af83a56367f26af16a25b4ab92d8f4293f1bf307107
+RUN bitnami-pkg unpack apache-2.4.23-1 --checksum c8d14a79313c5e47dbf617e9a55e88ff91d8361357386bab520aabccd35c59d8
+RUN bitnami-pkg unpack php-5.6.25-0 --checksum f0e8d07d155abdb5d6843931d3ffbf9b4208fff248c409444fdd5a8e3a3da01d
+RUN bitnami-pkg install libphp-5.6.21-2 --checksum 83d19b750b627fa70ed9613504089732897a48e1a7d304d8d73dec61a727b222
+RUN bitnami-pkg install mysql-client-10.1.13-4 --checksum 14b45c91dd78b37f0f2366712cbe9bfdf2cb674769435611955191a65dbf4976
 
 # Install joomla
 RUN bitnami-pkg unpack joomla-3.6.2-0 --checksum cda5e3e10e47876127375861e4c8e29f9bc919bbaa2a889f2d4c2ba947401299
