@@ -1,4 +1,4 @@
-B0;95;0c## BUILDING
+## BUILDING
 ##   (from project root directory)
 ##   $ docker build -t bitnami-bitnami-docker-mariadb .
 ##
