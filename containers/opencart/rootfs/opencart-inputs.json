@@ -1,0 +1,15 @@
+{
+  "username": "{{$global.env.OPENCART_USER_NAME}}",
+  "password": "{{$global.env.OPENCART_PASSWORD}}",
+  "email": "{{$global.env.OPENCART_EMAIL}}",
+  "host": "{{$global.env.OPENCART_HOST}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpProtocol": "{{$global.env.SMTP_PROTOCOL}}",
+  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
+  "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT}}"
+}
