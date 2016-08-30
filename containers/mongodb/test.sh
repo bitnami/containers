@@ -172,24 +172,24 @@ cleanup_environment
 
 @test "Can't create replicaSet with authentication" {
   run container_create default \
-    -e MONGODB_REPLICASET_MODE=primary \
+    -e MONGODB_REPLICA_SET_MODE=primary \
     -e MONGODB_PASSWORD=$MONGODB_PASSWORD
   [[ "$output" =~ "Not possible to configure replica set scenario using authentication" ]]
 }
 
 @test "Can't create secondary replicaSet node without specifying MONGODB_PRIMARY_HOST" {
   run container_create secondary \
-    -e MONGODB_REPLICASET_MODE=secondary
+    -e MONGODB_REPLICA_SET_MODE=secondary
   [[ "$output" =~ "provide the --primaryHost property" ]]
 }
 
 @test "Can create replicaSet without authentication" {
   container_create default -d \
-    -e MONGODB_REPLICASET_MODE=primary
+    -e MONGODB_REPLICA_SET_MODE=primary
 
   container_create secondary -d \
     $(container_link default $CONTAINER_NAME) \
-    -e MONGODB_REPLICASET_MODE=secondary \
+    -e MONGODB_REPLICA_SET_MODE=secondary \
     -e MONGODB_PRIMARY_HOST=$CONTAINER_NAME
 
   run mongo_client default $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
@@ -202,14 +202,14 @@ cleanup_environment
 
 @test "Secondary node in replicaSet synchronizes with the primary (delayed start)" {
   container_create default -d \
-    -e MONGODB_REPLICASET_MODE=primary
+    -e MONGODB_REPLICA_SET_MODE=primary
 
   run mongo_client default $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
   [[ "$output" =~ '"ok" : 1' ]]
 
   container_create secondary -d \
     $(container_link default $CONTAINER_NAME) \
-    -e MONGODB_REPLICASET_MODE=secondary \
+    -e MONGODB_REPLICA_SET_MODE=secondary \
     -e MONGODB_PRIMARY_HOST=$CONTAINER_NAME
 
   run mongo_client secondary $MONGODB_DATABASE --eval "rs.slaveOk(); printjson(db.getCollectionNames())"
@@ -218,14 +218,14 @@ cleanup_environment
 
 @test "replicaSet setup and state is preserved after restart" {
   container_create default -d \
-    -e MONGODB_REPLICASET_MODE=primary
+    -e MONGODB_REPLICA_SET_MODE=primary
 
   run mongo_client default $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
   [[ "$output" =~ '"ok" : 1' ]]
 
   container_create secondary -d \
     $(container_link default $CONTAINER_NAME) \
-    -e MONGODB_REPLICASET_MODE=secondary \
+    -e MONGODB_REPLICA_SET_MODE=secondary \
     -e MONGODB_PRIMARY_HOST=$CONTAINER_NAME
 
   container_restart secondary
@@ -242,14 +242,14 @@ cleanup_environment
 
 @test "replicaSet setup and state is preserved after deletion" {
   container_create_with_host_volumes default -d \
-    -e MONGODB_REPLICASET_MODE=primary
+    -e MONGODB_REPLICA_SET_MODE=primary
 
   run mongo_client default $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
   [[ "$output" =~ '"ok" : 1' ]]
 
   container_create_with_host_volumes secondary -d \
     $(container_link default $CONTAINER_NAME) \
-    -e MONGODB_REPLICASET_MODE=secondary \
+    -e MONGODB_REPLICA_SET_MODE=secondary \
     -e MONGODB_PRIMARY_HOST=$CONTAINER_NAME
 
   container_remove secondary
@@ -269,14 +269,14 @@ cleanup_environment
 
 @test "Slave recovers if master is temporarily offine" {
   container_create_with_host_volumes default -d \
-    -e MONGODB_REPLICASET_MODE=primary
+    -e MONGODB_REPLICA_SET_MODE=primary
 
   run mongo_client default $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
   [[ "$output" =~ '"ok" : 1' ]]
 
   container_create_with_host_volumes secondary -d \
     $(container_link default $CONTAINER_NAME) \
-    -e MONGODB_REPLICASET_MODE=secondary \
+    -e MONGODB_REPLICA_SET_MODE=secondary \
     -e MONGODB_PRIMARY_HOST=$CONTAINER_NAME
 
   container_restart default

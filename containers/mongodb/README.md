@@ -170,8 +170,8 @@ Creation of a user enables authentication on the MongoDB server and as a result 
 
 A [replication](https://docs.mongodb.com/manual/replication/) cluster can easily be setup with the Bitnami MongoDB Docker Image using the following environment variables:
 
- - `MONGODB_REPLICASET_MODE`: The replication mode. Possible values `primary`/`secondary`/`arbiter`. No defaults.
- - `MONGODB_REPLICASET_NAME`: MongoDB replica set name. Default: **replicaset**
+ - `MONGODB_REPLICA_SET_MODE`: The replication mode. Possible values `primary`/`secondary`/`arbiter`. No defaults.
+ - `MONGODB_REPLICA_SET_NAME`: MongoDB replica set name. Default: **replicaset**
  - `MONGODB_PRIMARY_HOST`: MongoDB primary host. No defaults.
  - `MONGODB_PRIMARY_PORT`: MongoDB primary port. No defaults.
 
@@ -185,11 +185,11 @@ The first step is to start the MongoDB primary.
 
 ```bash
 docker run --name mongodb-primary \
-  -e MONGODB_REPLICASET_MODE=primary \
+  -e MONGODB_REPLICA_SET_MODE=primary \
    bitnami/mongodb:latest
 ```
 
-In the above command the container is configured as the `primary` using the `MONGODB_REPLICASET_MODE` parameter.
+In the above command the container is configured as the `primary` using the `MONGODB_REPLICA_SET_MODE` parameter.
 
 ### Step 2: Create the replication secondary node
 
@@ -198,13 +198,13 @@ Next we start a MongoDB secondary container.
 ```bash
 docker run --name mongodb-secondary \
   --link mongodb-primary:primary \
-  -e MONGODB_REPLICASET_MODE=secondary \
+  -e MONGODB_REPLICA_SET_MODE=secondary \
   -e MONGODB_PRIMARY_HOST=primary \
   -e MONGODB_PRIMARY_PORT=27017 \
   bitnami/mongodb:latest
 ```
 
-In the above command the container is configured as a `secondary` using the `MONGODB_REPLICASET_MODE` parameter. The `MONGODB_PRIMARY_HOST` and `MONGODB_PRIMARY_PORT` parameters are used connect and with the MongoDB primary.
+In the above command the container is configured as a `secondary` using the `MONGODB_REPLICA_SET_MODE` parameter. The `MONGODB_PRIMARY_HOST` and `MONGODB_PRIMARY_PORT` parameters are used connect and with the MongoDB primary.
 
 ### Step 3: Create a replication arbiter node
 
@@ -213,13 +213,13 @@ Finally we start a MongoDB arbiter container.
 ```bash
 docker run --name mongodb-arbiter \
   --link mongodb-primary:primary \
-  -e MONGODB_REPLICASET_MODE=arbiter \
+  -e MONGODB_REPLICA_SET_MODE=arbiter \
   -e MONGODB_PRIMARY_HOST=primary \
   -e MONGODB_PRIMARY_PORT=27017 \
   bitnami/mongodb:latest
 ```
 
-In the above command the container is configured as a `arbiter` using the `MONGODB_REPLICASET_MODE` parameter. The `MONGODB_PRIMARY_HOST` and `MONGODB_PRIMARY_PORT` parameters are used connect and with the MongoDB primary.
+In the above command the container is configured as a `arbiter` using the `MONGODB_REPLICA_SET_MODE` parameter. The `MONGODB_PRIMARY_HOST` and `MONGODB_PRIMARY_PORT` parameters are used connect and with the MongoDB primary.
 
 You now have a three node MongoDB replication cluster up and running which can be scaled by adding/removing secondarys.
 
@@ -229,14 +229,14 @@ With Docker Compose the primary/secondary/arbiter replication can be setup using
 primary:
   image: bitnami/mongodb:latest
   environment:
-    - MONGODB_REPLICASET_MODE=primary
+    - MONGODB_REPLICA_SET_MODE=primary
 
 secondary:
   image: bitnami/mongodb:latest
   links:
     - primary:primary
   environment:
-    - MONGODB_REPLICASET_MODE=secondary
+    - MONGODB_REPLICA_SET_MODE=secondary
     - MONGODB_PRIMARY_HOST=primary
     - MONGODB_PRIMARY_PORT=27017
 
@@ -245,7 +245,7 @@ arbiter:
   links:
     - primary:primary
   environment:
-    - MONGODB_REPLICASET_MODE=arbiter
+    - MONGODB_REPLICA_SET_MODE=arbiter
     - MONGODB_PRIMARY_HOST=primary
     - MONGODB_PRIMARY_PORT=27017
 ```
