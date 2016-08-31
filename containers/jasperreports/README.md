@@ -1,4 +1,5 @@
-# What is JasperServer?
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/jasperserver)](https://hub.docker.com/r/bitnami/jasperserver/)
+# What is JasperReports?
 
 > The JasperReports server can be used as a stand-alone or embedded reporting and BI server that offers web-based reporting, analytic tools and visualization, and a dashboard feature for compiling multiple custom views. JasperReports supports multiple data sources including Hadoop Hive, JSON data sources, Excel, XML/A, Hibernate and more. You can create reports with their WYSIWYG tool and build beautiful visualizations, charts and graphs.
 
@@ -12,7 +13,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 ## Run the application using Docker Compose
 
-This is the recommended way to run JasperServer. You can use the following docker compose template:
+This is the recommended way to run JasperReports. You can use the following docker compose template:
 
 ```
 version: '2'
@@ -49,7 +50,7 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker network create jasperserver_network
   ```
 
-2. Run the JasperServer container:
+2. Run the JasperReports container:
 
   ```
   $ docker run -d -p 80:8080 --name jasperserver --net=jasperserver_network bitnami/jasperserver
@@ -98,7 +99,7 @@ In this case you need to specify the directories to mount on the run command. Th
   $ docker network create jasperserver_network
   ```
 
-2. Run the JasperServer container:
+2. Run the JasperReports container:
 
   ```
   $ docker run -d -p 80:8080 --name jasperserver -v /your/local/path/bitnami/jasperserver:/bitnami/jasperserver --network=jasperserver_network bitnami/jasperserver
@@ -106,7 +107,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 # Upgrade this application
 
-Bitnami provides up-to-date versions of JasperServer, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the JasperServer container.
+Bitnami provides up-to-date versions of JasperReports, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the JasperReports container.
 
 1. Get the updated images:
 
@@ -155,12 +156,12 @@ application:
 
 Available variables:
 
- - `JASPERSERVER_USERNAME`: JasperServer admin username. Default: **user**
- - `JASPERSERVER_PASSWORD`: JasperServer admin password. Default: **bitnami**
+ - `JASPERSERVER_USERNAME`: JasperReports admin username. Default: **user**
+ - `JASPERSERVER_PASSWORD`: JasperReports admin password. Default: **bitnami**
 
 ### SMTP Configuration
 
-To configure JasperServer to send email using SMTP you can set the following environment variables:
+To configure JasperReports to send email using SMTP you can set the following environment variables:
  - `SMTP_HOST`: SMTP host.
  - `SMTP_PORT`: SMTP port.
  - `SMTP_USER`: SMTP account user.
@@ -199,7 +200,7 @@ To backup your application data follow these steps:
 * For docker-compose: `$ docker-compose stop jasperserver`
 * For manual execution: `$ docker stop jasperserver`
 
-2. Copy the JasperServer data folder in the host:
+2. Copy the JasperReports data folder in the host:
 
 ```
 $ docker cp /your/local/path/bitnami:/bitnami/jasperserver
@@ -207,7 +208,7 @@ $ docker cp /your/local/path/bitnami:/bitnami/jasperserver
 
 # Restoring a backup
 
-To restore your application using backed up data simply mount the folder with JasperServer data in the container. See [persisting your application](#persisting-your-application) section for more info.
+To restore your application using backed up data simply mount the folder with JasperReports data in the container. See [persisting your application](#persisting-your-application) section for more info.
 
 # Contributing
 
