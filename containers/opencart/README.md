@@ -130,9 +130,9 @@ Bitnami provides up-to-date versions of MariaDB and OpenCart, including security
 
 1. Get the updated images:
 
-```
-$ docker pull bitnami/opencart:latest
-```
+  ```
+  $ docker pull bitnami/opencart:latest
+  ```
 
 2. Stop your container
 
