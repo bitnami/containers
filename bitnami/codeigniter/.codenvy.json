@@ -1,0 +1,82 @@
+{
+  "v": "4.0",
+  "workspace": {
+    "name": "codeigniter",
+    "defaultEnv": "codeigniter",
+    "environments": [
+      {
+        "name": "codeigniter",
+        "recipe": null,
+        "machineConfigs": [
+          {
+            "name": "ws-machine",
+            "limits": {
+              "ram": 1024
+            },
+            "source": {
+              "type": "dockerfile",
+              "location": "https://raw.githubusercontent.com/dgonzalezruiz/bitnami-docker-codeigniter/che/.codenvy.dockerfile"
+            },
+            "type": "docker",
+            "dev": true
+          }
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "name": "codeigniter-sample",
+        "type": "blank",
+        "path": "/codeigniter-sample",
+        "source": {
+          "type": "git",
+          "location": "https://github.com/dgonzalezruiz/bitnami-docker-codeigniter",
+          "parameters": {
+            "branch": "che",
+            "keepVcs": "true"
+          }
+        },
+        "mixins": [
+          "git",
+          "pullrequest"
+        ],
+        "attributes": {
+          "local_branch": [ "contrib" ],
+          "contribute_to_branch" : [ "master" ]
+        },
+        "modules": [],
+        "problems": []
+      }
+    ],
+    "commands": [
+      {
+        "name": "run",
+        "type": "custom",
+        "commandLine": "source /opt/bitnami/stacksmith-utils.sh && print_welcome_page && cd ${current.project.path}/app_template && php -S 0.0.0.0:8000 -t $PWD",
+        "attributes": {
+           "previewUrl": "http://${server.port.8000}/"
+        }
+      },
+      {
+        "name": "create project - run first",
+        "type": "custom",
+        "commandLine": "source /opt/bitnami/stacksmith-utils.sh && print_welcome_page && if [ -d ${current.project.path} ] ; then cd ${current.project.path} ; fi && nami execute codeigniter createProject app_template && php -S 0.0.0.0:8000 -t $PWD/app_template",
+        "attributes": {
+           "previewUrl": "http://${server.port.8000}/"
+        }
+      }
+    ]
+  },
+  "ide": {
+    "onProjectsLoaded": {
+      "actions": [
+        {
+          "properties": {
+            "name": "create project - run first"
+          },
+          "id": "runCommand"
+        }
+      ]
+    }
+  }
+}
