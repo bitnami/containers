@@ -19,7 +19,7 @@ RUN bitnami-pkg install mysql-client-10.1.13-4 --checksum 14b45c91dd78b37f0f2366
 RUN bitnami-pkg install mariadb-10.1.14-4 --checksum 4a75f4f52587853d69860662626c64a4540126962cd9ee9722af58a3e7cfa01b
 
 # Install symfony
-RUN bitnami-pkg unpack symfony-2.8.9-0 --checksum 10de26781562de9ac73c010fce5f36d9e84b2c793d880b5f8df4831ae722ecf7
+RUN bitnami-pkg unpack symfony-2.8.9-0 --checksum d06f9b630c1cbcaeb5d275cfaca9cbff7b7459011c8a34ee174188e7206e923f
 
 COPY rootfs /
 
