@@ -130,7 +130,7 @@ If you wanted to specify a version, then follow this format!
 
 
 ```bash
-$ docker-compose run myapp harpoon execute codeigniter createProject "bitnamiRocks 2.5.0"
+$ docker-compose run myapp harpoon execute codeigniter createProject "bitnamiRocks"
 ```
 
 You get the idea..
