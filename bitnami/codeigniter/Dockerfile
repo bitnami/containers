@@ -19,16 +19,16 @@ RUN bitnami-pkg install mysql-client-10.1.13-4 --checksum 14b45c91dd78b37f0f2366
 RUN bitnami-pkg install mariadb-10.1.14-4 --checksum 4a75f4f52587853d69860662626c64a4540126962cd9ee9722af58a3e7cfa01b
 
 # Install Codeigniter module
-#RUN bitnami-pkg install codeigniter-3.1.0-0 --checksum 058d6a29ae1d4e612ad061575c166df16a641a5414b4404c33bf46125355e21a
+RUN bitnami-pkg install codeigniter-3.1.0-0 --checksum ca2783a271a66b4dcda5d797a3cb4237cc7c6bc31e9c503e31d3d4c184e0a863
 
-EXPOSE 8000
+COPY rootfs /
 
 WORKDIR /app
 
-COPY rootfs /
+EXPOSE 8000
 
 ENV TERM=xterm
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "/app"]
+CMD ["php", "-S", "0.0.0.0:8000"]
