@@ -10,9 +10,9 @@ In this tutorial we walk you through using the Bitnami docker images during the 
 
 You can download this repository locally to your computer to start working with the tutorial or just click the link below to automatically create and launch a Codeigniter on-demand Eclipse Che developer workspace on Codenvy:
 
-[![Contribute](http://beta.codenvy.com/factory/resources/codenvy-contribute.svg)](https://beta.codenvy.com/f/?url=https%3A%2F%2Fgithub.com%2Fdgonzalezruiz%2Fbitnami-docker-codeigniter%2Ftree%2Fche)
+[![Contribute](http://beta.codenvy.com/factory/resources/codenvy-contribute.svg)](https://beta.codenvy.com/f/?url=https%3A%2F%2Fgithub.com%2Fbitnami%2Fbitnami-docker-codeigniter%2Ftree%2Fche)
 
-You can find the configuation files used on the previous link in the [Che branch](https://github.com/dgonzalezruiz/bitnami-docker-codeigniter/tree/che). For more information about Eclipse Che workspaces check  the [official documentation](https://eclipse-che.readme.io/docs/introduction)
+You can find the configuation files used on the previous link in the [Che branch](https://github.com/bitnami/bitnami-docker-codeigniter/tree/che). For more information about Eclipse Che workspaces check  the [official documentation](https://eclipse-che.readme.io/docs/introduction)
 
 If you want to start developing locally skip this step and follow the documentation below.
 
@@ -62,7 +62,7 @@ $ cd ~/workdir/my-app
 Next, download our Docker Compose orchestration file for Codeigniter development:
 
 ```bash
-$ curl -L "https://raw.githubusercontent.com/dgonzalezruiz/bitnami-docker-codeigniter/master/docker-compose.yml" > docker-compose.yml
+$ curl -L "https://raw.githubusercontent.com/bitnami/bitnami-docker-codeigniter/master/docker-compose.yml" > docker-compose.yml
 ```
 
 > We encourage you to take a look at the contents of the orchestration file to get an idea of the services that will be started for Codeigniter framework development.
