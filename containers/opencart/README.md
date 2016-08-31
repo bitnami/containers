@@ -1,3 +1,4 @@
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/opencart)](https://hub.docker.com/r/bitnami/opencart/)
 # What is OpenCart?
 
 > OpenCart is a free and open source e-commerce platform for online merchants. It provides a professional and reliable foundation for a successful online store.
