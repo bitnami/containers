@@ -213,6 +213,9 @@ The WordPress instance can be customized by specifying environment variables on 
 - `WORDPRESS_USERNAME`: WordPress application username. Default: **user**
 - `WORDPRESS_PASSWORD`: WordPress application password. Default: **bitnami**
 - `WORDPRESS_EMAIL`: WordPress application email. Default: **user@example.com**
+- `WORDPRESS_FIRST_NAME`: WordPress user first name. Default: **FirstName**
+- `WORDPRESS_LAST_NAME`: WordPress user last name. Default: **LastName**
+- `WORDPRESS_BLOG_NAME`: WordPress blog name. Default: **User's blog**
 - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
 - `MARIADB_PASSWORD`: Root password for the MariaDB.
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
@@ -259,6 +262,41 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --volume wordpress_data:/bitnami/wordpress \
   --volume apache_data:/bitnami/apache \
   bitnami/wordpress:latest
+```
+
+### SMTP Configuration
+
+To configure WordPress to send email using SMTP you can set the following environment variables:
+- `SMTP_HOST`: Host for outgoing SMTP email.
+- `SMTP_PORT`: Port for outgoing SMTP email.
+- `SMTP_USER`: User of SMTP used for authentication (likely email).
+- `SMTP_PASSWORD`: Password for SMTP.
+- `SMTP_USERNAME`: User name for SMTP emails.
+- `SMTP_PROTOCOL`: Secure connection protocol to use for SMTP [tls, ssl, none].
+
+This would be an example of SMTP configuration using a GMail account:
+
+ * docker-compose (application part):
+
+```
+  application:
+    image: bitnami/wordpress:latest
+    ports:
+      - 80:80
+    environment:
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USER=your_email@gmail.com
+      - SMTP_PASSWORD=your_password
+      - SMTP_PROTOCOL=tls
+    volumes_from:
+      - application_data
+```
+
+* For manual execution:
+
+```
+ $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:80 --name wordpress -v /your/local/path/bitnami/wordpress:/bitnami/wordpress --net=wordpress_network bitnami/wordpress
 ```
 
 # Backing up your application
