@@ -32,12 +32,12 @@ wait_for_db() {
 
 setup_db() {
   log "Configuring the database"
-  bundle exec rake db:create
+  bundle exec rails db:create
 }
 
 migrate_db() {
   log "Applying database migrations (db:migrate)"
-  bundle exec rake db:migrate
+  bundle exec rails db:migrate
 }
 
 log () {
@@ -48,6 +48,8 @@ if [ "$1" == "bundle" -a "$2" == "exec" ]; then
   if ! app_present; then
     log "Creating rails application"
     rails new . --skip-bundle --database mysql
+    # Add rubyracer
+    sed -i "s/# gem 'therubyracer'/gem 'therubyracer'/" Gemfile
   fi
 
   if ! gems_up_to_date; then
@@ -64,7 +66,7 @@ if [ "$1" == "bundle" -a "$2" == "exec" ]; then
     echo " App initialization skipped:"
     echo " Delete the file $INIT_SEM and restart the container to reinitialize"
     echo " You can alternatively run specific commands using docker-compose exec"
-    echo " e.g docker-compose exec rails bundle exec rake db:migrate"
+    echo " e.g docker-compose exec rails bundle exec rails db:migrate"
     echo "                                                                       "
     echo "#########################################################################"
   else

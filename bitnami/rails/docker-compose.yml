@@ -6,7 +6,7 @@ services:
 
   myapp:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: bitnami/rails:4.2.6-r3
+    image: bitnami/rails:5.0.0.1-r0
     environment:
       - DATABASE_URL=mysql2://mariadb/my_app_development
     depends_on:
