@@ -33,7 +33,7 @@ ln -fs /opt/bitnami/magento/conf/cron /etc/cron.d/magento
 
 
 if [[ "$1" == "harpoon" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
-   for module in apache magento; do
+   for module in php apache magento; do
     initialize $module
    done
    echo "Starting application ..."
