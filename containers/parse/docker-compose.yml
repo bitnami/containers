@@ -1,0 +1,19 @@
+version: '2'
+services:
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    volumes:
+      - 'mongodb_data:/bitnami/mongodb'
+  application:
+    image: 'bitnami/parse:latest'
+    ports:
+      - '1337:1337'
+    volumes:
+      - 'parse_data:/bitnami/parse'
+    depends_on:
+      - mongodb
+volumes:
+  mongodb_data:
+    driver: local
+  parse_data:
+    driver: local
