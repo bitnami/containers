@@ -8,6 +8,16 @@ If you’ve never tried to start a project with containers before, or you have t
 
 In this tutorial we walk you through using the Bitnami docker images during the development lifecycle of a Laravel application.
 
+### Eclipse Che Developer Workspace
+
+You can download this repository locally to your computer to start working with the tutorial or just click the link below to automatically create and launch a Laravel on-demand Eclipse Che developer workspace on Codenvy:
+
+[![Contribute](http://beta.codenvy.com/factory/resources/codenvy-contribute.svg)](https://beta.codenvy.com/f/?url=https%3A%2F%2Fgithub.com%2Fbitnami%2Fbitnami-docker-laravel%2Ftree%2Fche)
+
+You can find the configuation files used on the previous link in the [Che branch](https://github.com/bitnami/bitnami-docker-laravel/tree/che). For more information about Eclipse Che workspaces check  the [official documentation](https://eclipse-che.readme.io/docs/introduction)
+
+If you want to start developing locally skip this step and follow the documentation below.
+
 # Why Docker?
 
 We think developers are adopting containers for development because they offer many of the same advantages as developing in VMs, but with lower overhead in terms of developer effort and development machine resources. With Docker, you can create a development environment for your code, and teammates can pull the whole development environment, install it, and quickly get started writing code or fixing bugs.
