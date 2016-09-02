@@ -1,0 +1,11 @@
+{
+  "applicationPort": "{{$global.env.PARSE_SERVER_PORT}}",
+  "host": "{{$global.env.PARSE_SERVER_HOST}}",
+  "mountPath": "{{$global.env.PARSE_SERVER_MOUNT_PATH}}",
+  "appId": "{{$global.env.PARSE_SERVER_APP_ID}}",
+  "masterKey": "{{$global.env.PARSE_SERVER_MASTER_KEY}}",
+  "databaseAdminUser": "{{$global.env.MONGODB_USER}}",
+  "databaseAdminPassword": "{{$global.env.MONGODB_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.MONGODB_HOST}}",
+  "databaseServerPort": "{{$global.env.MONGODB_PORT}}"
+}
