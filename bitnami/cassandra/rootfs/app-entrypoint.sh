@@ -3,14 +3,14 @@ set -e
 
 function initialize {
     # Package can be "installed" or "unpacked"
-    status=`harpoon inspect $1`
+    status=`nami inspect $1`
     if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
         # Clean up inputs
         inputs=""
         if [[ -f /$1-inputs.json ]]; then
             inputs=--inputs-file=/$1-inputs.json
         fi
-        harpoon initialize $1 $inputs
+        nami initialize $1 $inputs
     fi
 }
 
@@ -25,7 +25,7 @@ export CASSANDRA_USER=${CASSANDRA_USER:-"cassandra"}
 export CASSANDRA_PASSWORD=${CASSANDRA_PASSWORD:-"cassandra"}
 export CASSANDRA_ENDPOINT_SNITCH=${CASSANDRA_ENDPOINT_SNITCH:-"SimpleSnitch"}
 
-if [[ "$1" == "harpoon" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
+if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
    initialize cassandra
    echo "Starting application ..."
 fi
