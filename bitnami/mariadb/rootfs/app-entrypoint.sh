@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-if [[ "$1" == "harpoon" && "$2" == "start" ]]; then
-  status=`harpoon inspect $BITNAMI_APP_NAME`
+if [[ "$1" == "nami" && "$2" == "start" ]]; then
+  status=`nami inspect $BITNAMI_APP_NAME`
   if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-    harpoon initialize $BITNAMI_APP_NAME \
+    nami initialize $BITNAMI_APP_NAME \
       ${MARIADB_ROOT_PASSWORD:+--rootPassword $MARIADB_ROOT_PASSWORD} \
       ${MARIADB_USER:+--username $MARIADB_USER} \
       ${MARIADB_PASSWORD:+--password $MARIADB_PASSWORD} \
