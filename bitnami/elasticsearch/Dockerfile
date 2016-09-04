@@ -7,7 +7,7 @@ ENV BITNAMI_APP_NAME=elasticsearch \
     PATH=/opt/bitnami/java/bin:/opt/bitnami/elasticsearch/bin:$PATH
 
 # Additional modules required
-RUN bitnami-pkg install java-1.8.0_91-1 --checksum 7a43bd08c9a1fef1d98cdfb39bdb9c2023b9fc95734c910475b6e43d85aee957
+RUN bitnami-pkg install java-1.8.0_101-0 --checksum 66b64f987634e1348141e0feac5581b14e63064ed7abbaf7ba5646e1908219f9
 
 # Install elasticsearch
 RUN bitnami-pkg unpack elasticsearch-2.3.5-0 --checksum b3e38b5dee7662a31abd02f23259a093d2bbe497e2809ca19d4bffa9b74705a9
