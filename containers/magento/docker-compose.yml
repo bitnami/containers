@@ -13,6 +13,8 @@ services:
       - 'magento_data:/bitnami/magento'
       - 'apache_data:/bitnami/apache'
       - 'php_data:/bitnami/php'
+    environment:
+      - MAGENTO_HOST=magento.example.com
     depends_on:
       - mariadb
 volumes:
