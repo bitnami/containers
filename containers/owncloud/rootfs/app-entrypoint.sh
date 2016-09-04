@@ -5,6 +5,7 @@ function initialize {
     # Package can be "installed" or "unpacked"
     status=`nami inspect $1`
     if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
+        inputs=""
         if [[ -f /$1-inputs.json ]]; then
             inputs=--inputs-file=/$1-inputs.json
         fi
@@ -25,7 +26,7 @@ export MARIADB_PORT=${MARIADB_PORT:-"3306"}
 
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
-   for module in apache owncloud; do
+   for module in apache php owncloud; do
     initialize $module
    done
    echo "Starting application ..."
