@@ -23,4 +23,4 @@ EXPOSE 80 443
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["harpoon", "start", "--foreground", "apache"]
+CMD ["nami", "start", "--foreground", "apache"]
