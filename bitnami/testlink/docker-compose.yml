@@ -12,6 +12,7 @@ services:
     volumes:
       - 'apache_data:/bitnami/apache'
       - 'testlink_data:/bitnami/testlink'
+      - 'php_data:/bitnami/php'
     depends_on:
       - mariadb
 volumes:
@@ -20,4 +21,6 @@ volumes:
   apache_data:
     driver: local
   testlink_data:
+    driver: local
+  php_data:
     driver: local
