@@ -27,7 +27,7 @@ export MOODLE_SITENAME=${MOODLE_SITENAME:-"New Site"}
 
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
-   for module in apache moodle; do
+   for module in apache php moodle; do
     initialize $module
    done
    echo "Starting application ..."
