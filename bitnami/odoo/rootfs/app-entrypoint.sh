@@ -3,14 +3,14 @@ set -e
 
 function initialize {
     # Package can be "installed" or "unpacked"
-    status=`harpoon inspect $1`
+    status=`nami inspect $1`
     if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
         # Clean up inputs
         inputs=""
         if [[ -f /$1-inputs.json ]]; then
             inputs=--inputs-file=/$1-inputs.json
         fi
-        harpoon initialize $1 $inputs
+        nami initialize $1 $inputs
     fi
 }
 
@@ -23,7 +23,7 @@ export POSTGRESQL_PORT=${POSTGRESQL_PORT:-"5432"}
 
 
 
-if [[ "$1" == "harpoon" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
+if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
    initialize odoo
    echo "Starting application ..."
 fi
