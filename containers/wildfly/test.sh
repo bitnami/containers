@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 WILDFLY_DEFAULT_USER=user
-WILDFLY_DEFAULT_PASSWORD=password
+WILDFLY_DEFAULT_PASSWORD=bitnami
 WILDFLY_USER=test_user
 WILDFLY_PASSWORD=test_password
 
