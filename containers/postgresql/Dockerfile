@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_IMAGE_VERSION=9.5.3-r3 \
@@ -10,7 +10,7 @@ ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:
 
 COPY rootfs/ /
 ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["harpoon", "start", "--foreground", "postgresql"]
+CMD ["nami", "start", "--foreground", "postgresql"]
 
 VOLUME ["/bitnami/$BITNAMI_APP_NAME"]
 
