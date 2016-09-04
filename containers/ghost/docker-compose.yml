@@ -12,6 +12,8 @@ services:
       - 'ghost_data:/bitnami/ghost'
     depends_on:
       - mariadb
+    environment:
+      - GHOST_HOST=ghost.example.com
 volumes:
   mariadb_data:
     driver: local
