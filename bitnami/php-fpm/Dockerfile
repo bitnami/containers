@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_IMAGE_VERSION=7.0.6-r1 \
@@ -11,7 +11,7 @@ ENV PATH=/opt/bitnami/php/sbin:/opt/bitnami/php/bin:/opt/bitnami/common/bin:$PAT
 
 COPY rootfs/ /
 ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["harpoon", "start", "--foreground", "php"]
+CMD ["nami", "start", "--foreground", "php"]
 
 VOLUME ["/bitnami/$BITNAMI_APP_NAME"]
 
