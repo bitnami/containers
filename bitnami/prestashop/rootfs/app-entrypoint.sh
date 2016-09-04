@@ -28,7 +28,7 @@ export MARIADB_PORT=${MARIADB_PORT:-"3306"}
 
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
-   for module in apache prestashop; do
+   for module in apache php prestashop; do
     initialize $module
    done
    echo "Starting application ..."
