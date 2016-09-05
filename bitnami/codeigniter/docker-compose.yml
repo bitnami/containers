@@ -1,7 +1,7 @@
 version: '2'
 services:
   myapp:
-    build: .
+    image: bitnami/codeigniter:latest
     ports:
       - '8000:8000'
     volumes:
