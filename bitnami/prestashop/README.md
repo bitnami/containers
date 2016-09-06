@@ -67,7 +67,7 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker run -d -p 80:80 --name prestashop --net=prestashop_network bitnami/prestashop
   ```
 
-Then you can access your application at http://your-ip/
+Then you can access the PrestaStop storefront at http://your-ip/. To access the administration area, logon to http://your-ip/administration
 
   *Note:* If you want to access your application from a public IP or hostname you need to configure PrestaShop for it. You can handle it adjusting the configuration of the instance by setting the environment variable "PRESTASHOP_HOST" to your public IP or hostname.
 
