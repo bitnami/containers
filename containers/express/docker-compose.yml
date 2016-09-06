@@ -2,11 +2,11 @@ version: '2'
 
 services:
   mongodb:
-    image: bitnami/mongodb:3.2.7-r0
+    image: bitnami/mongodb:3.2.7-r2
 
   myapp:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: bitnami/express:4.13.4-r3
+    image: bitnami/express:4.14.0-r1
     environment:
       - DATABASE_URL=mongodb://mongodb:27017/my_app_development
     depends_on:
