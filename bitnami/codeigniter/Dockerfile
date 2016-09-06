@@ -19,7 +19,7 @@ RUN bitnami-pkg install mysql-client-10.1.13-4 --checksum 14b45c91dd78b37f0f2366
 RUN bitnami-pkg install mariadb-10.1.14-4 --checksum 4a75f4f52587853d69860662626c64a4540126962cd9ee9722af58a3e7cfa01b
 
 # Install Codeigniter module
-RUN bitnami-pkg install codeigniter-3.1.0-0 --checksum 5843e48205bce08d648b9b021e9fc183b1190f9a3ffa87d1413ee671f3da56e9
+RUN bitnami-pkg install codeigniter-3.1.0-1 --checksum 4afbd68a36b6b0b2806ee98275f44075fb48317a3b0cd1c75ca514a60f597a21
 
 COPY rootfs /
 
