@@ -12,6 +12,7 @@ services:
     volumes:
       - 'drupal_data:/bitnami/drupal'
       - 'apache_data:/bitnami/apache'
+      - 'php_data:/bitnami/php'
     depends_on:
       - mariadb
 volumes:
@@ -20,4 +21,6 @@ volumes:
   drupal_data:
     driver: local
   apache_data:
+    driver: local
+  php_data:
     driver: local
