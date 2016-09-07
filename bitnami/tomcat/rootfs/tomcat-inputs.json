@@ -1,0 +1,4 @@
+{
+  "username": "{{$global.env.TOMCAT_USER}}",
+  "password": "{{$global.env.TOMCAT_PASSWORD}}"
+}
