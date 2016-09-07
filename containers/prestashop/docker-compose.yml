@@ -12,12 +12,17 @@ services:
     volumes:
       - 'prestashop_data:/bitnami/prestashop'
       - 'apache_data:/bitnami/apache'
+      - 'php_data:/bitnami/php'
     depends_on:
       - mariadb
+    environment:
+      - PRESTASHOP_HOST=prestashop.example.com
 volumes:
   mariadb_data:
     driver: local
   prestashop_data:
     driver: local
   apache_data:
+    driver: local
+  php_data:
     driver: local
