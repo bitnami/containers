@@ -1,0 +1,12 @@
+{
+  "rootPassword": "{{$global.env.MONGODB_ROOT_PASSWORD}}",
+  "username": "{{$global.env.MONGODB_USER}}",
+  "password": "{{$global.env.MONGODB_PASSWORD}}",
+  "database": "{{$global.env.MONGODB_DATABASE}}",
+  "replicaSetMode": "{{$global.env.MONGODB_REPLICA_SET_MODE}}",
+  "replicaSetName": "{{$global.env.MONGODB_REPLICA_SET_NAME}}",
+  "primaryHost": "{{$global.env.MONGODB_PRIMARY_HOST}}",
+  "primaryPort": "{{$global.env.MONGODB_PRIMARY_PORT}}",
+  "primaryUser": "{{$global.env.MONGODB_PRIMARY_USER}}",
+  "primaryPassword": "{{$global.env.MONGODB_PRIMARY_PASSWORD}}"
+}
