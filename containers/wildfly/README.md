@@ -122,7 +122,7 @@ Now that we have our Wildfly server running, we can create another container to 
 
 ```bash
 docker run --rm -it --link wildfly:server bitnami/wildfly \
-  jboss-cli.sh --controller=server:9990 --user=test --password=password --connect
+  jboss-cli.sh --controller=server:9990 --user=test --password=bitnami --connect
 ```
 
 We started `jboss-cli.sh` passing in the `--controller` option that allows us to specify the hostname and port of the server, which we set to the hostname we created in the link.
@@ -131,14 +131,14 @@ We started `jboss-cli.sh` passing in the `--controller` option that allows us to
 You can also run the client in the same container as the server using the Docker [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
 
 ```bash
-docker exec -it wildfly jboss-cli.sh --user=user --password=password --connect
+docker exec -it wildfly jboss-cli.sh --user=user --password=bitnami --connect
 ```
 
 # Configuration
 
 ## Creating a custom user
 
-By default, a management user named `user` is created with the default password `password`. Passing the `WILDFLY_PASSWORD` environment variable when running the image for the first time will set the password of this user to the value of `WILDFLY_PASSWORD`.
+By default, a management user named `user` is created with the default password `bitnami`. Passing the `WILDFLY_PASSWORD` environment variable when running the image for the first time will set the password of this user to the value of `WILDFLY_PASSWORD`.
 
 Additionally you can specify a user name for the management user using the `WILDFLY_USER` environment variable. When not specified, the `WILDFLY_PASSWORD` configuration is applied on the default user (`user`).
 
