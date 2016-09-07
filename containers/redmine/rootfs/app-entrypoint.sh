@@ -1,5 +1,16 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
+
+function initialize {
+    # Package can be "installed" or "unpacked"
+    status=`nami inspect $1`
+    if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
+        inputs=""
+        if [[ -f /$1-inputs.json ]]; then
+            inputs=--inputs-file=/$1-inputs.json
+        fi
+        nami initialize $1 $inputs
+    fi
+}
 
 # Set default values
 export REDMINE_USERNAME=${REDMINE_USERNAME:-"user"}
@@ -10,14 +21,11 @@ export MARIADB_USER=${MARIADB_USER:-"root"}
 export MARIADB_HOST=${MARIADB_HOST:-"mariadb"}
 export MARIADB_PORT=${MARIADB_PORT:-"3306"}
 
-
-if [[ "$1" == "harpoon" && "$2" == "start" ]]; then
-  # Package can be "installed" or "unpacked"
-  status=`harpoon inspect $BITNAMI_APP_NAME`
-  if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-      harpoon initialize $BITNAMI_APP_NAME --inputs-file=/inputs.json
-      echo "Starting application..."
-  fi
+if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
+   for module in redmine; do
+    initialize $module
+   done
+   echo "Starting application ..."
 fi
 
 exec /entrypoint.sh "$@"
