@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=owncloud \
-    BITNAMI_IMAGE_VERSION=9.1.0-r0 \
+    BITNAMI_IMAGE_VERSION=9.1.0-r1 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
