@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=redmine \
-    BITNAMI_IMAGE_VERSION=3.3.0-r1 \
+    BITNAMI_IMAGE_VERSION=3.3.0-r2 \
     PATH=/opt/bitnami/ruby/bin:$PATH
 
 # Additional modules required
