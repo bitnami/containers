@@ -1,22 +1,32 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
 
-if [[ "$1" == "harpoon" && "$2" == "start" ]]; then
-  status=`harpoon inspect $BITNAMI_APP_NAME`
-  if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-    harpoon initialize $BITNAMI_APP_NAME \
-      ${POSTGRES_USER:+--username $POSTGRES_USER} \
-      ${POSTGRES_PASSWORD:+--password $POSTGRES_PASSWORD} \
-      ${POSTGRES_DB:+--database $POSTGRES_DB} \
-      ${POSTGRES_MODE:+--replicationMode $POSTGRES_MODE} \
-      ${POSTGRES_REPLICATION_USER:+--replicationUser $POSTGRES_REPLICATION_USER} \
-      ${POSTGRES_REPLICATION_PASSWORD:+--replicationPassword $POSTGRES_REPLICATION_PASSWORD} \
-      ${POSTGRES_MASTER_HOST:+--masterHost $POSTGRES_MASTER_HOST} \
-      ${POSTGRES_MASTER_PORT:+--masterPort $POSTGRES_MASTER_PORT} \
-      ${POSTGRES_MASTER_USER:+--masterUser $POSTGRES_MASTER_USER} \
-      ${POSTGRES_MASTER_PASSWORD:+--masterPassword $POSTGRES_MASTER_PASSWORD}
-  fi
-  chown $BITNAMI_APP_USER: /bitnami/$BITNAMI_APP_NAME || true
+function initialize {
+    # Package can be "installed" or "unpacked"
+    status=`nami inspect $1`
+    if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
+        # Clean up inputs
+        inputs=""
+        if [[ -f /$1-inputs.json ]]; then
+            inputs=--inputs-file=/$1-inputs.json
+        fi
+        nami initialize $1 $inputs
+    fi
+}
+
+# Set default values
+export POSTGRES_USER=${POSTGRES_USER:-postgres}
+export POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-}
+export POSTGRES_DB=${POSTGRES_DB:-}
+export POSTGRES_MODE=${POSTGRES_MODE:-master}
+export POSTGRES_REPLICATION_USER=${POSTGRES_REPLICATION_USER:-}
+export POSTGRES_REPLICATION_PASSWORD=${POSTGRES_REPLICATION_PASSWORD:-}
+export POSTGRES_MASTER_HOST=${POSTGRES_MASTER_HOST:-}
+export POSTGRES_MASTER_PORT=${POSTGRES_MASTER_PORT:-5432}
+
+if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
+    initialize postgresql
+    chown -R :$BITNAMI_APP_USER /bitnami/postgresql || true
+    echo "Starting application ..."
 fi
 
 exec /entrypoint.sh "$@"
