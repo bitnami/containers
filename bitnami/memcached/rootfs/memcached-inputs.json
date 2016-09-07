@@ -1,0 +1,4 @@
+{
+  "username": "{{$global.env.MEMCACHED_USER}}",
+  "password": "{{$global.env.MEMCACHED_PASSWORD}}"
+}
