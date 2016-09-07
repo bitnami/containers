@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -20,4 +20,4 @@ EXPOSE 15672
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["harpoon", "start", "--foreground", "rabbitmq"]
+CMD ["nami", "start", "--foreground", "rabbitmq"]
