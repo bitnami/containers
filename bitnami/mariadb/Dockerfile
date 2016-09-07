@@ -25,7 +25,7 @@ ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:
 
 COPY rootfs/ /
 ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["harpoon", "start", "--foreground", "mariadb"]
+CMD ["nami", "start", "--foreground", "mariadb"]
 
 VOLUME ["/bitnami/$BITNAMI_APP_NAME"]
 
