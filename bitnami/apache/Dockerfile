@@ -12,7 +12,7 @@ ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:
 
 COPY rootfs/ /
 ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["harpoon", "start", "--foreground", "apache"]
+CMD ["nami", "start", "--foreground", "apache"]
 
 VOLUME ["/bitnami/$BITNAMI_APP_NAME"]
 
