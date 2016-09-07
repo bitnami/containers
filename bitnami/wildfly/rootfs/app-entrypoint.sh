@@ -1,16 +1,26 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
 
-WILDFLY_PASSWORD=${WILDFLY_PASSWORD:-password}
+function initialize {
+    # Package can be "installed" or "unpacked"
+    status=`nami inspect $1`
+    if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
+        inputs=""
+        if [[ -f /$1-inputs.json ]]; then
+            inputs=--inputs-file=/$1-inputs.json
+        fi
+        nami initialize $1 $inputs
+    fi
+}
 
-if [[ "$1" == "harpoon" && "$2" == "start" ]]; then
-  status=`harpoon inspect $BITNAMI_APP_NAME`
-  if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-    harpoon initialize $BITNAMI_APP_NAME \
-      ${WILDFLY_USER:+--username $WILDFLY_USER} \
-      ${WILDFLY_PASSWORD:+--password $WILDFLY_PASSWORD}
-  fi
-  chown $BITNAMI_APP_USER: /bitnami/$BITNAMI_APP_NAME || true
+# Set default values
+export WILDFLY_USER=${WILDFLY_USER:-user}
+export WILDFLY_PASSWORD=${WILDFLY_PASSWORD:-bitnami}
+
+if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
+   for module in wildfly; do
+    initialize $module
+   done
+   echo "Starting application ..."
 fi
 
 exec /entrypoint.sh "$@"
