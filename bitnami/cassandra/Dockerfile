@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=cassandra \
-    BITNAMI_IMAGE_VERSION=3.7-r1 \
+    BITNAMI_IMAGE_VERSION=3.7-r2 \
     PATH=/opt/bitnami/cassandra/bin:$PATH
 
 # Additional modules required
