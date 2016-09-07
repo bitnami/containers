@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=jenkins \
-    BITNAMI_IMAGE_VERSION=2.21-r0 \
+    BITNAMI_IMAGE_VERSION=2.21-r1 \
     PATH=/opt/bitnami/tomcat/bin:$PATH
 
 # Additional modules required
