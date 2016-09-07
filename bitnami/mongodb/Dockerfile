@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=3.2.7-r3 \
+ENV BITNAMI_IMAGE_VERSION=3.2.7-r4 \
     BITNAMI_APP_NAME=mongodb \
     BITNAMI_APP_USER=mongo
 
