@@ -1,14 +1,26 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
 
-if [[ "$1" == "harpoon" && "$2" == "start" ]]; then
-  status=`harpoon inspect $BITNAMI_APP_NAME`
-  if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-    harpoon initialize $BITNAMI_APP_NAME \
-      ${TOMCAT_USER:+--username $TOMCAT_USER} \
-      ${TOMCAT_PASSWORD:+--password $TOMCAT_PASSWORD}
-  fi
-  chown $BITNAMI_APP_USER: /bitnami/$BITNAMI_APP_NAME || true
+function initialize {
+    # Package can be "installed" or "unpacked"
+    status=`nami inspect $1`
+    if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
+        inputs=""
+        if [[ -f /$1-inputs.json ]]; then
+            inputs=--inputs-file=/$1-inputs.json
+        fi
+        nami initialize $1 $inputs
+    fi
+}
+
+# Set default values
+export TOMCAT_USER=${TOMCAT_USER:-user}
+export TOMCAT_PASSWORD=${TOMCAT_PASSWORD:-}
+
+if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
+   for module in tomcat; do
+    initialize $module
+   done
+   echo "Starting application ..."
 fi
 
 exec /entrypoint.sh "$@"
