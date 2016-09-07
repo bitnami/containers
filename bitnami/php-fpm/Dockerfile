@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=7.0.6-r1 \
+ENV BITNAMI_IMAGE_VERSION=7.0.6-r2 \
     BITNAMI_APP_NAME=php-fpm \
     BITNAMI_APP_USER=daemon
 
