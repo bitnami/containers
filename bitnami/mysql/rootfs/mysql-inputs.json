@@ -1,0 +1,13 @@
+{
+  "rootPassword": "{{$global.env.MYSQL_ROOT_PASSWORD}}",
+  "username": "{{$global.env.MYSQL_USER}}",
+  "password": "{{$global.env.MYSQL_PASSWORD}}",
+  "database": "{{$global.env.MYSQL_DATABASE}}",
+  "replicationMode": "{{$global.env.MYSQL_REPLICATION_MODE}}",
+  "replicationUser": "{{$global.env.MYSQL_REPLICATION_USER}}",
+  "replicationPassword": "{{$global.env.MYSQL_REPLICATION_PASSWORD}}",
+  "masterHost": "{{$global.env.MYSQL_MASTER_HOST}}",
+  "masterPort": "{{$global.env.MYSQL_MASTER_PORT}}",
+  "masterUser": "{{$global.env.MYSQL_MASTER_USER}}",
+  "masterPassword": "{{$global.env.MYSQL_MASTER_PASSWORD}}"
+}
