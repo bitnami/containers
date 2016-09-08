@@ -83,16 +83,16 @@ After the images have been downloaded, each of the services listed in the orches
 
 The service starts `myapp` and uses the Bitnami Codeigniter framework development image. The service mounts the current working directory (`~/workdir/myapp`) at the `/app` location in the container and provides all the necessary infrastucture to get you started developing a data-driven Codeigniter framework based application.
 
-This Docker Image assumes that in case you decide to deploy a web application written in Codeigniter framework, the web server will be listening in the port `9000`. If you want to use any other port, you will need to modify both the Dockerfile and the docker-compose.yml files as described below:
+This Docker Image assumes that in case you decide to deploy a web application written in Codeigniter framework, the web server will be listening in the port `8000`. If you want to use any other port, you will need to modify both the Dockerfile and the docker-compose.yml files as described below:
 
 Dockefile:
 
-~~EXPOSE 9000~~
+~~EXPOSE 8000~~
 EXPOSE NEWPORT
 
 docker-compose.yml:
 
-~~9000:9000~~
+~~8000:8000~~
 NEWPORT:NEWPORT
 
 Lets inspect the contents of the `~/workdir/myapp` directory:
@@ -140,7 +140,7 @@ You get the idea..
 Then you may want to serve this new project you created. Then, just stop the container, override the default start command in the docker-compose file with the following line and restart it!
 
 ```bash
-    command: php -S 0.0.0.0:9000 -t app/bitnamiRocks
+    command: php -S 0.0.0.0:8000 -t app/bitnamiRocks
 ```
 
 That's it!
