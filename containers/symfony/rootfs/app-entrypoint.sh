@@ -14,18 +14,16 @@ log () {
     echo -e "\033[0;33m$(date "+%H:%M:%S")\033[0;37m ==> $1."
 }
 
-harpoon restart mariadb
+nami restart mariadb
 echo "Starting application ..."
 
 if [ "$1" == "php" -a "$2" == "-S" ] ; then
     if [ ! -d $PROJECT_DIRECTORY ] ; then
       log "Creating example Symfony application"
-      harpoon execute symfony createProject $SYMFONY_PROJECT_NAME
+      nami execute symfony createProject $SYMFONY_PROJECT_NAME | grep -v undefined
       log "Symfony app created"
-      cd $SYMFONY_PROJECT_NAME
     else
       log "App already created"
-      cd $PROJECT_DIRECTORY
     fi
   if [ ! -f $PROJECT_DIRECTORY/web/index.php ] ; then
     sudo ln -s $PROJECT_DIRECTORY/web/app.php $PROJECT_DIRECTORY/web/index.php
