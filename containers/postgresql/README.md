@@ -9,7 +9,7 @@
 # TLDR
 
 ```bash
-docker run --name postgresql -e POSTGRES_PASSWORD=password123 bitnami/postgresql:latest
+docker run --name postgresql -e POSTGRESQL_PASSWORD=password123 bitnami/postgresql:latest
 ```
 
 ## Docker Compose
@@ -18,7 +18,7 @@ docker run --name postgresql -e POSTGRES_PASSWORD=password123 bitnami/postgresql
 postgresql:
   image: bitnami/postgresql:latest
   environment:
-    - POSTGRES_PASSWORD=password123
+    - POSTGRESQL_PASSWORD=password123
 ```
 
 # Get this image
@@ -77,7 +77,7 @@ The first step is to start our PostgreSQL server.
 Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our PostgreSQL server to make it easier to connect to other containers.
 
 ```bash
-docker run --name postgresql -e POSTGRES_PASSWORD=password123 bitnami/postgresql:latest
+docker run --name postgresql -e POSTGRESQL_PASSWORD=password123 bitnami/postgresql:latest
 ```
 
 ### Step 2: Run PostgreSQL image as a client and link to our server
@@ -109,7 +109,7 @@ Copy the snippet below into your `docker-compose.yml` to add PostgreSQL to your 
 postgresql:
   image: bitnami/postgresql:latest
   environment:
-    - POSTGRES_PASSWORD=password123
+    - POSTGRESQL_PASSWORD=password123
 ```
 
 ### Step 2: Link it to another container in your application
@@ -129,10 +129,10 @@ Inside `myapp`, use `postgresql` as the hostname for the PostgreSQL server.
 
 ## Setting the root password on first run
 
-In the above commands you may have noticed the use of the `POSTGRES_PASSWORD` environment variable. Passing the `POSTGRES_PASSWORD` environment variable when running the image for the first time will set the password of the `postgres` user to the value of `POSTGRES_PASSWORD`.
+In the above commands you may have noticed the use of the `POSTGRESQL_PASSWORD` environment variable. Passing the `POSTGRESQL_PASSWORD` environment variable when running the image for the first time will set the password of the `postgres` user to the value of `POSTGRESQL_PASSWORD`.
 
 ```bash
-docker run --name postgresql -e POSTGRES_PASSWORD=password123 bitnami/postgresql:latest
+docker run --name postgresql -e POSTGRESQL_PASSWORD=password123 bitnami/postgresql:latest
 ```
 
 or using Docker Compose:
@@ -141,7 +141,7 @@ or using Docker Compose:
 postgresql:
   image: bitnami/postgresql:latest
   environment:
-    - POSTGRES_PASSWORD=password123
+    - POSTGRESQL_PASSWORD=password123
 ```
 
 **Note!**
@@ -149,10 +149,10 @@ The `postgres` user is a superuser and has full administrative access to the Pos
 
 ## Creating a database on first run
 
-By passing the `POSTGRES_DB` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the PostgreSQL client.
+By passing the `POSTGRESQL_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the PostgreSQL client.
 
 ```bash
-docker run --name postgresql -e POSTGRES_DB=my_database bitnami/postgresql:latest
+docker run --name postgresql -e POSTGRESQL_DATABASE=my_database bitnami/postgresql:latest
 ```
 
 or using Docker Compose:
@@ -161,15 +161,15 @@ or using Docker Compose:
 postgresql:
   image: bitnami/postgresql:latest
   environment:
-    - POSTGRES_DB=my_database
+    - POSTGRESQL_DATABASE=my_database
 ```
 
 ## Creating a database user on first run
 
-You can also create a restricted database user that only has permissions for the database created with the [`POSTGRES_DB`](#creating-a-database-on-first-run) environment variable. To do this, provide the `POSTGRES_USER` environment variable.
+You can also create a restricted database user that only has permissions for the database created with the [`POSTGRESQL_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `POSTGRESQL_USERNAME` environment variable.
 
 ```bash
-docker run --name postgresql -e POSTGRES_USER=my_user -e POSTGRES_PASSWORD=password123 -e POSTGRES_DB=my_database bitnami/postgresql:latest
+docker run --name postgresql -e POSTGRESQL_USERNAME=my_user -e POSTGRESQL_PASSWORD=password123 -e POSTGRESQL_DATABASE=my_database bitnami/postgresql:latest
 ```
 
 or using Docker Compose:
@@ -178,23 +178,23 @@ or using Docker Compose:
 postgresql:
   image: bitnami/postgresql:latest
   environment:
-    - POSTGRES_USER=my_user
-    - POSTGRES_PASSWORD=password123
-    - POSTGRES_DB=my_database
+    - POSTGRESQL_USERNAME=my_user
+    - POSTGRESQL_PASSWORD=password123
+    - POSTGRESQL_DATABASE=my_database
 ```
 
 **Note!**
-When `POSTGRES_USER` is specified, the `postgres` user is not assigned a password and as a result you cannot login remotely to the PostgreSQL server as the `postgres` user.
+When `POSTGRESQL_USERNAME` is specified, the `postgres` user is not assigned a password and as a result you cannot login remotely to the PostgreSQL server as the `postgres` user.
 
 ## Setting up a streaming replication
 
 A [Streaming replication](http://www.postgresql.org/docs/9.4/static/warm-standby.html#STREAMING-REPLICATION) cluster can easily be setup with the Bitnami PostgreSQL Docker Image using the following environment variables:
 
- - `POSTGRES_MODE`: Replication mode. Possible values `master`/`slave`. No defaults.
- - `POSTGRES_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
- - `POSTGRES_REPLICATION_PASSWORD`: The replication users password. No defaults.
- - `POSTGRES_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
- - `POSTGRES_MASTER_PORT`: Server port of the replication master (slave parameter). Defaults to `5432`.
+ - `POSTGRESQL_REPLICATION_MODE`: Replication mode. Possible values `master`/`slave`. No defaults.
+ - `POSTGRESQL_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
+ - `POSTGRESQL_REPLICATION_PASSWORD`: The replication users password. No defaults.
+ - `POSTGRESQL_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
+ - `POSTGRESQL_MASTER_PORT`: Server port of the replication master (slave parameter). Defaults to `5432`.
 
 In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
 
@@ -204,16 +204,16 @@ The first step is to start the master.
 
 ```bash
 docker run --name postgresql-master \
-  -e POSTGRES_MODE=master \
-  -e POSTGRES_USER=my_user \
-  -e POSTGRES_PASSWORD=password123 \
-  -e POSTGRES_DB=my_database \
-  -e POSTGRES_REPLICATION_USER=my_repl_user \
-  -e POSTGRES_REPLICATION_PASSWORD=my_repl_password \
+  -e POSTGRESQL_REPLICATION_MODE=master \
+  -e POSTGRESQL_USERNAME=my_user \
+  -e POSTGRESQL_PASSWORD=password123 \
+  -e POSTGRESQL_DATABASE=my_database \
+  -e POSTGRESQL_REPLICATION_USER=my_repl_user \
+  -e POSTGRESQL_REPLICATION_PASSWORD=my_repl_password \
   bitnami/postgresql:latest
 ```
 
-In this command we are configuring the container as the master using the `POSTGRES_MODE=master` parameter. A replication user is specified using the `POSTGRES_REPLICATION_USER` and `POSTGRES_REPLICATION_PASSWORD` parameters.
+In this command we are configuring the container as the master using the `POSTGRESQL_REPLICATION_MODE=master` parameter. A replication user is specified using the `POSTGRESQL_REPLICATION_USER` and `POSTGRESQL_REPLICATION_PASSWORD` parameters.
 
 ### Step 2: Create the replication slave
 
@@ -222,15 +222,15 @@ Next we start a replication slave container.
 ```bash
 docker run --name postgresql-slave \
   --link postgresql-master:master \
-  -e POSTGRES_MODE=slave \
-  -e POSTGRES_MASTER_HOST=master \
-  -e POSTGRES_MASTER_PORT=5432 \
-  -e POSTGRES_REPLICATION_USER=my_repl_user \
-  -e POSTGRES_REPLICATION_PASSWORD=my_repl_password \
+  -e POSTGRESQL_REPLICATION_MODE=slave \
+  -e POSTGRESQL_MASTER_HOST=master \
+  -e POSTGRESQL_MASTER_PORT=5432 \
+  -e POSTGRESQL_REPLICATION_USER=my_repl_user \
+  -e POSTGRESQL_REPLICATION_PASSWORD=my_repl_password \
   bitnami/postgresql:latest
 ```
 
-In the above command the container is configured as a `slave` using the `POSTGRES_MODE` parameter. Before the replication slave is started, the `POSTGRES_MASTER_HOST` and `POSTGRES_MASTER_PORT` parameters are used by the slave container to connect to the master and replicate the initial database from the master. The `POSTGRES_REPLICATION_USER` and `POSTGRES_REPLICATION_PASSWORD` credentials are used to authenticate with the master.
+In the above command the container is configured as a `slave` using the `POSTGRESQL_REPLICATION_MODE` parameter. Before the replication slave is started, the `POSTGRESQL_MASTER_HOST` and `POSTGRESQL_MASTER_PORT` parameters are used by the slave container to connect to the master and replicate the initial database from the master. The `POSTGRESQL_REPLICATION_USER` and `POSTGRESQL_REPLICATION_PASSWORD` credentials are used to authenticate with the master.
 
 With these two commands you now have a two node PostgreSQL master-slave streaming replication cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
 
@@ -250,23 +250,23 @@ With Docker Compose the master-slave replication can be setup using:
 master:
   image: bitnami/postgresql:latest
   environment:
-    - POSTGRES_MODE=master
-    - POSTGRES_USER=my_user
-    - POSTGRES_PASSWORD=password123
-    - POSTGRES_DB=my_database
-    - POSTGRES_REPLICATION_USER=my_repl_user
-    - POSTGRES_REPLICATION_PASSWORD=my_repl_password
+    - POSTGRESQL_REPLICATION_MODE=master
+    - POSTGRESQL_USERNAME=my_user
+    - POSTGRESQL_PASSWORD=password123
+    - POSTGRESQL_DATABASE=my_database
+    - POSTGRESQL_REPLICATION_USER=my_repl_user
+    - POSTGRESQL_REPLICATION_PASSWORD=my_repl_password
 
 slave:
   image: bitnami/postgresql:latest
   links:
     - master:master
   environment:
-    - POSTGRES_MODE=slave
-    - POSTGRES_MASTER_HOST=master
-    - POSTGRES_MASTER_PORT=5432
-    - POSTGRES_REPLICATION_USER=my_repl_user
-    - POSTGRES_REPLICATION_PASSWORD=my_repl_password
+    - POSTGRESQL_REPLICATION_MODE=slave
+    - POSTGRESQL_MASTER_HOST=master
+    - POSTGRESQL_MASTER_PORT=5432
+    - POSTGRESQL_REPLICATION_USER=my_repl_user
+    - POSTGRESQL_REPLICATION_PASSWORD=my_repl_password
 ```
 
 Scale the number of slaves using:
