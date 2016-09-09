@@ -69,7 +69,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 Then you can access the PrestaStop storefront at http://your-ip/. To access the administration area, logon to http://your-ip/administration
 
-  *Note:* If you want to access your application from a public IP or hostname you need to configure PrestaShop for it. You can handle it adjusting the configuration of the instance by setting the environment variable "PRESTASHOP_HOST" to your public IP or hostname.
+  *Note:* If you want to access your application from a public IP or hostname you need to configure PrestaShop for it. You can handle it adjusting the configuration of the instance by setting the environment variable "PRESTASHOP_HOST" to your public IP or hostname. In case you already started your containers, you can reconfigure your prestashop host via executing `docker-compose exec application nami execute prestashop configureHost new.host.name.com`
 
 ## Persisting your application
 
