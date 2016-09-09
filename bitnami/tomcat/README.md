@@ -107,11 +107,11 @@ Access your web server in the browser by navigating to [http://localhost:8080](h
 
 By default, a management user named `user` is created and is not assigned a password. Passing the `TOMCAT_PASSWORD` environment variable when running the image for the first time will set the password of this user to the value of `TOMCAT_PASSWORD`.
 
-Additionally you can specify a user name for the management user using the `TOMCAT_USER` environment variable. When not specified, the `TOMCAT_PASSWORD` configuration is applied on the default user (`user`).
+Additionally you can specify a user name for the management user using the `TOMCAT_USERNAME` environment variable. When not specified, the `TOMCAT_PASSWORD` configuration is applied on the default user (`user`).
 
 ```bash
 docker run --name tomcat \
-  -e TOMCAT_USER=my_user \
+  -e TOMCAT_USERNAME=my_user \
   -e TOMCAT_PASSWORD=my_password \
   bitnami/tomcat:latest
 ```
@@ -122,7 +122,7 @@ or using Docker Compose:
 tomcat:
   image: bitnami/tomcat:latest
   environment:
-    - TOMCAT_USER=my_user
+    - TOMCAT_USERNAME=my_user
     - TOMCAT_PASSWORD=my_password
 ```
 

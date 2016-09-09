@@ -13,7 +13,7 @@ function initialize {
 }
 
 # Set default values
-export TOMCAT_USER=${TOMCAT_USER:-user}
+export TOMCAT_USERNAME=${TOMCAT_USERNAME:-user}
 export TOMCAT_PASSWORD=${TOMCAT_PASSWORD:-}
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
