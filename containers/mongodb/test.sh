@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 MONGODB_DATABASE=test_database
-MONGODB_USER=test_user
+MONGODB_USERNAME=test_user
 MONGODB_PASSWORD=test_password
 
 # source the helper script
@@ -71,44 +71,44 @@ cleanup_environment
 
 @test "Can't create custom user without a password" {
   run container_create default \
-    -e MONGODB_USER=$MONGODB_USER
+    -e MONGODB_USERNAME=$MONGODB_USERNAME
   [[ "$output" =~ "If you defined an username you must define a password and a database too" ]]
 }
 
 @test "Can't create custom user without database" {
   run container_create default \
-    -e MONGODB_USER=$MONGODB_USER \
+    -e MONGODB_USERNAME=$MONGODB_USERNAME \
     -e MONGODB_PASSWORD=$MONGODB_PASSWORD \
   [[ "$output" =~ "If you defined an username you must define a password and a database too" ]]
 }
 
 @test "Custom user created with password" {
   container_create default -d \
-    -e MONGODB_USER=$MONGODB_USER \
+    -e MONGODB_USERNAME=$MONGODB_USERNAME \
     -e MONGODB_PASSWORD=$MONGODB_PASSWORD \
     -e MONGODB_DATABASE=$MONGODB_DATABASE
 
-  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
+  run mongo_client default -u $MONGODB_USERNAME -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
   [[ "$output" =~ '"ok" : 1' ]]
 
-  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.getCollectionNames())"
+  run mongo_client default -u $MONGODB_USERNAME -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.getCollectionNames())"
   [[ "$output" =~ '"users"' ]]
 }
 
 @test "Custom user can't access admin database" {
   container_create default -d \
-    -e MONGODB_USER=$MONGODB_USER \
+    -e MONGODB_USERNAME=$MONGODB_USERNAME \
     -e MONGODB_PASSWORD=$MONGODB_PASSWORD \
     -e MONGODB_DATABASE=$MONGODB_DATABASE
 
-  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD admin --eval "printjson(db.adminCommand('listDatabases'))"
+  run mongo_client default -u $MONGODB_USERNAME -p $MONGODB_PASSWORD admin --eval "printjson(db.adminCommand('listDatabases'))"
   [[ "$output" =~ "login failed" ]]
 }
 
 @test "Can set root password and create custom user" {
   container_create default -d \
     -e MONGODB_ROOT_PASSWORD=$MONGODB_PASSWORD \
-    -e MONGODB_USER=$MONGODB_USER \
+    -e MONGODB_USERNAME=$MONGODB_USERNAME \
     -e MONGODB_PASSWORD=$MONGODB_PASSWORD \
     -e MONGODB_DATABASE=$MONGODB_DATABASE
 
@@ -116,25 +116,25 @@ cleanup_environment
   [[ "$output" =~ '"ok" : 1' ]]
   [[ "$output" =~ '"name" : "admin"' ]]
 
-  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
+  run mongo_client default -u $MONGODB_USERNAME -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
   [[ "$output" =~ '"ok" : 1' ]]
 
-  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.getCollectionNames())"
+  run mongo_client default -u $MONGODB_USERNAME -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.getCollectionNames())"
   [[ "$output" =~ '"users"' ]]
 }
 
 @test "Settings and data are preserved on container restart" {
   container_create default -d \
-    -e MONGODB_USER=$MONGODB_USER \
+    -e MONGODB_USERNAME=$MONGODB_USERNAME \
     -e MONGODB_PASSWORD=$MONGODB_PASSWORD \
     -e MONGODB_DATABASE=$MONGODB_DATABASE
 
-  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
+  run mongo_client default -u $MONGODB_USERNAME -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
   [[ "$output" =~ '"ok" : 1' ]]
 
   container_restart default
 
-  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.getCollectionNames())"
+  run mongo_client default -u $MONGODB_USERNAME -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.getCollectionNames())"
   [[ "$output" =~ '"users"' ]]
 }
 
@@ -156,17 +156,17 @@ cleanup_environment
 
 @test "If host mounted, setting and data are preserved after deletion" {
   container_create_with_host_volumes default -d \
-    -e MONGODB_USER=$MONGODB_USER \
+    -e MONGODB_USERNAME=$MONGODB_USERNAME \
     -e MONGODB_PASSWORD=$MONGODB_PASSWORD \
     -e MONGODB_DATABASE=$MONGODB_DATABASE
 
-  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
+  run mongo_client default -u $MONGODB_USERNAME -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.createCollection('users'))"
   [[ "$output" =~ '"ok" : 1' ]]
 
   container_remove default
   container_create_with_host_volumes default -d
 
-  run mongo_client default -u $MONGODB_USER -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.getCollectionNames())"
+  run mongo_client default -u $MONGODB_USERNAME -p $MONGODB_PASSWORD $MONGODB_DATABASE --eval "printjson(db.getCollectionNames())"
   [[ "$output" =~ '"users"' ]]
 }
 

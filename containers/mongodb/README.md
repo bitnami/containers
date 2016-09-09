@@ -144,11 +144,11 @@ The `root` user is configured to have full administrative access to the MongoDB 
 
 ## Creating a user and database on first run
 
-You can create a user with restricted access to a database while starting the container for the first time. To do this, provide the `MONGODB_USER`, `MONGO_PASSWORD` and `MONGODB_DATABASE` environment variables.
+You can create a user with restricted access to a database while starting the container for the first time. To do this, provide the `MONGODB_USERNAME`, `MONGO_PASSWORD` and `MONGODB_DATABASE` environment variables.
 
 ```bash
 docker run --name mongodb \
-  -e MONGODB_USER=my_user -e MONGODB_PASSWORD=password123 \
+  -e MONGODB_USERNAME=my_user -e MONGODB_PASSWORD=password123 \
   -e MONGODB_DATABASE=my_database bitnami/mongodb:latest
 ```
 
@@ -158,7 +158,7 @@ or using Docker Compose:
 mongodb:
   image: bitnami/mongodb:latest
   environment:
-    - MONGODB_USER=my_user
+    - MONGODB_USERNAME=my_user
     - MONGODB_PASSWORD=password123
     - MONGODB_DATABASE=my_database
 ```

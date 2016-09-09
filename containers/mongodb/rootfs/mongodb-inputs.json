@@ -1,6 +1,6 @@
 {
   "rootPassword": "{{$global.env.MONGODB_ROOT_PASSWORD}}",
-  "username": "{{$global.env.MONGODB_USER}}",
+  "username": "{{$global.env.MONGODB_USERNAME}}",
   "password": "{{$global.env.MONGODB_PASSWORD}}",
   "database": "{{$global.env.MONGODB_DATABASE}}",
   "replicaSetMode": "{{$global.env.MONGODB_REPLICA_SET_MODE}}",
