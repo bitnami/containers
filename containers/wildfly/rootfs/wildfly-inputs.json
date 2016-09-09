@@ -1,4 +1,4 @@
 {
-  "username": "{{$global.env.WILDFLY_USER}}",
+  "username": "{{$global.env.WILDFLY_USERNAME}}",
   "password": "{{$global.env.WILDFLY_PASSWORD}}"
 }

@@ -2,7 +2,7 @@
 
 WILDFLY_DEFAULT_USER=user
 WILDFLY_DEFAULT_PASSWORD=bitnami
-WILDFLY_USER=test_user
+WILDFLY_USERNAME=test_user
 WILDFLY_PASSWORD=test_password
 
 # source the helper script
@@ -66,10 +66,10 @@ cleanup_environment
 
 @test "Can create custom user with manager role" {
   container_create default -d \
-    -e WILDFLY_USER=$WILDFLY_USER \
+    -e WILDFLY_USERNAME=$WILDFLY_USERNAME \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
 
-  run curl_client default -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@$APP_NAME:9990/management
+  run curl_client default -i --digest http://$WILDFLY_USERNAME:$WILDFLY_PASSWORD@$APP_NAME:9990/management
   [[ "$output" =~ '200 OK' ]]
 }
 
@@ -91,12 +91,12 @@ cleanup_environment
 
 @test "Password and settings are preserved after restart" {
   container_create default -d \
-    -e WILDFLY_USER=$WILDFLY_USER \
+    -e WILDFLY_USERNAME=$WILDFLY_USERNAME \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
 
   container_restart default
 
-  run curl_client default -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@$APP_NAME:9990/management
+  run curl_client default -i --digest http://$WILDFLY_USERNAME:$WILDFLY_PASSWORD@$APP_NAME:9990/management
   [[ "$output" =~ '200 OK' ]]
 }
 
@@ -109,13 +109,13 @@ cleanup_environment
 
 @test "If host mounted, password and settings are preserved after deletion" {
   container_create_with_host_volumes default -d \
-    -e WILDFLY_USER=$WILDFLY_USER \
+    -e WILDFLY_USERNAME=$WILDFLY_USERNAME \
     -e WILDFLY_PASSWORD=$WILDFLY_PASSWORD
 
   container_remove default
   container_create_with_host_volumes default -d
 
-  run curl_client default -i --digest http://$WILDFLY_USER:$WILDFLY_PASSWORD@$APP_NAME:9990/management
+  run curl_client default -i --digest http://$WILDFLY_USERNAME:$WILDFLY_PASSWORD@$APP_NAME:9990/management
   [[ "$output" =~ '200 OK' ]]
 }
 
