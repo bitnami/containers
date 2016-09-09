@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=prestashop \
-    BITNAMI_IMAGE_VERSION=1.6.1.6-r2 \
+    BITNAMI_IMAGE_VERSION=1.6.1.6-r3 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
@@ -13,7 +13,7 @@ RUN bitnami-pkg install libphp-5.6.21-2 --checksum 83d19b750b627fa70ed9613504089
 RUN bitnami-pkg install mysql-client-10.1.13-4 --checksum 14b45c91dd78b37f0f2366712cbe9bfdf2cb674769435611955191a65dbf4976
 
 # Install prestashop
-RUN bitnami-pkg unpack prestashop-1.6.1.6-0 --checksum b15c600d32a9f2538450e081fbe95520ead31b9711097e7c193dd7357b915248
+RUN bitnami-pkg unpack prestashop-1.6.1.6-1 --checksum 9076e05c581760c53820083c990533ed25bb804f8542e623fc3c45ae1909c21a
 
 COPY rootfs /
 
