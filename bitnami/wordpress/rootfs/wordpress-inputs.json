@@ -6,7 +6,7 @@
   "lastName": "{{$global.env.WORDPRESS_LAST_NAME}}",
   "blogName": "{{$global.env.WORDPRESS_BLOG_NAME}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
-  "smtpPort": "{{$global.env.STMP_PORT}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
   "smtpUser": "{{$global.env.SMTP_USER}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
   "smtpUsername": "{{$global.env.SMTP_USERNAME}}",

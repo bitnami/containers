@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=wordpress \
-    BITNAMI_IMAGE_VERSION=4.6-r2 \
+    BITNAMI_IMAGE_VERSION=4.6.1-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
@@ -13,7 +13,7 @@ RUN bitnami-pkg install libphp-5.6.21-2 --checksum 83d19b750b627fa70ed9613504089
 RUN bitnami-pkg install mysql-client-10.1.13-4 --checksum 14b45c91dd78b37f0f2366712cbe9bfdf2cb674769435611955191a65dbf4976
 
 # Install wordpress
-RUN bitnami-pkg unpack wordpress-4.6-1 --checksum 8e809d1719bbef52b89dd909350702f463d2e0c8afc2bb46642f4b0552dc51a2
+RUN bitnami-pkg unpack wordpress-4.6.1-0 --checksum acb0d0620e105fc615156797e359247bc7bec90fa72b4fdad4b2a5cd9ef11576
 
 COPY rootfs /
 
