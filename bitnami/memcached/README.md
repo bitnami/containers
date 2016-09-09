@@ -93,11 +93,11 @@ myapp:
 
 ## Creating the Memcached admin user
 
-Authentication on the Memcached server is disabled by default. To enable authentication, specify a username and password for the Memcached admin user using the `MEMCACHED_USER` and `MEMCACHED_PASSWORD` environment variables.
+Authentication on the Memcached server is disabled by default. To enable authentication, specify a username and password for the Memcached admin user using the `MEMCACHED_USERNAME` and `MEMCACHED_PASSWORD` environment variables.
 
 ```bash
 docker run --name memcached \
-  -e MEMCACHED_USER=my_user \
+  -e MEMCACHED_USERNAME=my_user \
   -e MEMCACHED_PASSWORD=my_password \
   bitnami/memcached:latest
 ```
@@ -108,11 +108,11 @@ or using Docker Compose:
 memcached:
   image: bitnami/memcached:latest
   environment:
-    - MEMCACHED_USER=my_user
+    - MEMCACHED_USERNAME=my_user
     - MEMCACHED_PASSWORD=my_password
 ```
 
-> The default value of the `MEMCACHED_USER` is `root`.
+> The default value of the `MEMCACHED_USERNAME` is `root`.
 
 # Logging
 
