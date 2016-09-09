@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 TOMCAT_DEFAULT_USER=user
-TOMCAT_USER=tomcat_user
+TOMCAT_USERNAME=tomcat_user
 TOMCAT_PASSWORD=test_password
 
 # source the helper script
@@ -45,20 +45,20 @@ cleanup_environment
 
 @test "Can create custom user with manager role" {
   container_create default -d \
-    -e TOMCAT_USER=$TOMCAT_USER \
+    -e TOMCAT_USERNAME=$TOMCAT_USERNAME \
     -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
-  run curl_client default -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@$APP_NAME:8080/manager/html
+  run curl_client default -i http://$TOMCAT_USERNAME:$TOMCAT_PASSWORD@$APP_NAME:8080/manager/html
   [[ "$output" =~ '200 OK' ]]
 }
 
 @test "Password and settings are preserved after restart" {
   container_create default -d \
-    -e TOMCAT_USER=$TOMCAT_USER \
+    -e TOMCAT_USERNAME=$TOMCAT_USERNAME \
     -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
 
   container_restart default
 
-  run curl_client default -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@$APP_NAME:8080/manager/html
+  run curl_client default -i http://$TOMCAT_USERNAME:$TOMCAT_PASSWORD@$APP_NAME:8080/manager/html
   [[ "$output" =~ '200 OK' ]]
 }
 
@@ -70,7 +70,7 @@ cleanup_environment
 
 @test "Data gets generated in volume if bind mounted in the host" {
   container_create_with_host_volumes default -d \
-    -e TOMCAT_USER=$TOMCAT_USER \
+    -e TOMCAT_USERNAME=$TOMCAT_USERNAME \
     -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
 
   run container_exec default ls -la $VOL_PREFIX/conf/
@@ -84,19 +84,19 @@ cleanup_environment
 
 @test "If host mounted, password and settings are preserved after deletion" {
   container_create_with_host_volumes default -d \
-    -e TOMCAT_USER=$TOMCAT_USER \
+    -e TOMCAT_USERNAME=$TOMCAT_USERNAME \
     -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
 
   container_remove default
   container_create_with_host_volumes default -d
 
-  run curl_client default -i http://$TOMCAT_USER:$TOMCAT_PASSWORD@$APP_NAME:8080/manager/html
+  run curl_client default -i http://$TOMCAT_USERNAME:$TOMCAT_PASSWORD@$APP_NAME:8080/manager/html
   [[ "$output" =~ '200 OK' ]]
 }
 
 @test "Deploy sample application" {
   container_create_with_host_volumes default -d \
-    -e TOMCAT_USER=$TOMCAT_USER \
+    -e TOMCAT_USERNAME=$TOMCAT_USERNAME \
     -e TOMCAT_PASSWORD=$TOMCAT_PASSWORD
 
   container_exec default curl --noproxy localhost --retry 5 \
