@@ -52,7 +52,7 @@ services:
     ports:
       - 5601:5601
     environment:
-      - ELASTICSEARCH_URL=elasticsearch
+      - KIBANA_ELASTICSEARCH_URL=elasticsearch
     volumes:
       - 'kibana_data:/bitnami/kibana'
   elasticsearch:
@@ -87,7 +87,7 @@ If you want to run the application manually instead of using docker-compose, the
 3. Run the Kibana container:
 
   ```
-  $ docker run -d -p 5601:5601 -e ELASTICSEARCH_URL=elasticsearch --name kibana --net=kibana_network bitnami/kibana
+  $ docker run -d -p 5601:5601 -e KIBANA_ELASTICSEARCH_URL=elasticsearch --name kibana --net=kibana_network bitnami/kibana
   ```
 
 Then you can access your application at http://your-ip:5601/
