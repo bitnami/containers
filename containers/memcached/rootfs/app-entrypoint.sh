@@ -14,7 +14,7 @@ function initialize {
 }
 
 # Set default values
-export MEMCACHED_USER=${MEMCACHED_USER:-root}
+export MEMCACHED_USERNAME=${MEMCACHED_USERNAME:-root}
 export MEMCACHED_PASSWORD=${MEMCACHED_PASSWORD:-}
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
