@@ -16,7 +16,7 @@ services:
     depends_on:
       - mariadb
     environment:
-      - OWNCLOUD_HOST=owncloud.example.com
+      - OWNCLOUD_HOST=localhost
 volumes:
   mariadb_data:
     driver: local
