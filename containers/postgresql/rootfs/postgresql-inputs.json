@@ -1,10 +1,10 @@
 {
-  "username": "{{$global.env.POSTGRES_USER}}",
-  "password": "{{$global.env.POSTGRES_PASSWORD}}",
-  "database": "{{$global.env.POSTGRES_DB}}",
-  "replicationMode": "{{$global.env.POSTGRES_MODE}}",
-  "replicationUser": "{{$global.env.POSTGRES_REPLICATION_USER}}",
-  "replicationPassword": "{{$global.env.POSTGRES_REPLICATION_PASSWORD}}",
-  "masterHost": "{{$global.env.POSTGRES_MASTER_HOST}}",
-  "masterPort": "{{$global.env.POSTGRES_MASTER_PORT}}"
+  "username": "{{$global.env.POSTGRESQL_USERNAME}}",
+  "password": "{{$global.env.POSTGRESQL_PASSWORD}}",
+  "database": "{{$global.env.POSTGRESQL_DATABASE}}",
+  "replicationMode": "{{$global.env.POSTGRESQL_REPLICATION_MODE}}",
+  "replicationUser": "{{$global.env.POSTGRESQL_REPLICATION_USER}}",
+  "replicationPassword": "{{$global.env.POSTGRESQL_REPLICATION_PASSWORD}}",
+  "masterHost": "{{$global.env.POSTGRESQL_MASTER_HOST}}",
+  "masterPort": "{{$global.env.POSTGRESQL_MASTER_PORT}}"
 }

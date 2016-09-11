@@ -1,17 +1,17 @@
 #!/usr/bin/env bats
 
-POSTGRES_DB=test_database
-POSTGRES_USER=test_user
-POSTGRES_PASSWORD=test_password
-POSTGRES_REPLICATION_USER=repl_user
-POSTGRES_REPLICATION_PASSWORD=repl_password
+POSTGRESQL_DATABASE=test_database
+POSTGRESQL_USERNAME=test_user
+POSTGRESQL_PASSWORD=test_password
+POSTGRESQL_REPLICATION_USER=repl_user
+POSTGRESQL_REPLICATION_PASSWORD=repl_password
 
 # source the helper script
 APP_NAME=postgresql
 VOL_PREFIX=/bitnami/$APP_NAME
 VOLUMES=$VOL_PREFIX
 SLEEP_TIME=30
-container_link_and_run_command_DOCKER_ARGS="-e PGPASSWORD=$POSTGRES_PASSWORD"
+container_link_and_run_command_DOCKER_ARGS="-e PGPASSWORD=$POSTGRESQL_PASSWORD"
 load tests/docker_helper
 
 # Link to container and execute psql client
@@ -44,7 +44,7 @@ cleanup_environment
 
 @test "Can create postgres user without password" {
   container_create default -d \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD
 
   run container_exec default psql -U postgres -Axc "\l"
   [[ "$output" =~ "Name|postgres" ]]
@@ -59,7 +59,7 @@ cleanup_environment
 
 @test "Can create postgres user with custom password" {
   container_create default -d \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD
 
   run psql_client default -U postgres -Axc "\l"
   [[ "$output" =~ "Name|postgres" ]]
@@ -67,7 +67,7 @@ cleanup_environment
 
 @test "Default postgres user is superuser" {
   container_create default -d \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD
 
   run psql_client default -U postgres -Axc "SHOW is_superuser;"
   [[ $output =~ "is_superuser|on" ]]
@@ -75,56 +75,56 @@ cleanup_environment
 
 @test "Can create custom database" {
   container_create default -d \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-    -e POSTGRES_DB=$POSTGRES_DB
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE
 
   run psql_client default -U postgres -Axc "\l"
-  [[ "$output" =~ "Name|$POSTGRES_DB" ]]
+  [[ "$output" =~ "Name|$POSTGRESQL_DATABASE" ]]
 }
 
 @test "Can't create custom user without password" {
   run container_create default \
-    -e POSTGRES_USER=$POSTGRES_USER
+    -e POSTGRESQL_USERNAME=$POSTGRESQL_USERNAME
   [[ "$output" =~ "provide the --password property as well" ]]
 }
 
 @test "Can't create custom user without database" {
   run container_create default \
-    -e POSTGRES_USER=$POSTGRES_USER \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    -e POSTGRESQL_USERNAME=$POSTGRESQL_USERNAME \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD
   [[ "$output" =~ "provide the --database property as well" ]]
 }
 
 @test "Can create custom user with password and database" {
   container_create default -d \
-    -e POSTGRES_USER=$POSTGRES_USER \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-    -e POSTGRES_DB=$POSTGRES_DB
+    -e POSTGRESQL_USERNAME=$POSTGRESQL_USERNAME \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE
 
-  run psql_client default -U $POSTGRES_USER $POSTGRES_DB -Axc "\l"
-  [[ "$output" =~ "Name|$POSTGRES_DB" ]]
+  run psql_client default -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -Axc "\l"
+  [[ "$output" =~ "Name|$POSTGRESQL_DATABASE" ]]
 }
 
 @test "Custom user is not superuser" {
   container_create default -d \
-    -e POSTGRES_USER=$POSTGRES_USER \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-    -e POSTGRES_DB=$POSTGRES_DB
+    -e POSTGRESQL_USERNAME=$POSTGRESQL_USERNAME \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE
 
-  run psql_client default -U $POSTGRES_USER $POSTGRES_DB -Axc "SHOW is_superuser;"
+  run psql_client default -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -Axc "SHOW is_superuser;"
   [[ "$output" =~ "is_superuser|off" ]]
 }
 
 @test "Data is preserved on container restart" {
   container_create default -d \
-    -e POSTGRES_USER=$POSTGRES_USER \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-    -e POSTGRES_DB=$POSTGRES_DB
+    -e POSTGRESQL_USERNAME=$POSTGRESQL_USERNAME \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE
 
   container_restart default
 
-  run psql_client default -U $POSTGRES_USER $POSTGRES_DB -Axc "\l"
-  [[ "$output" =~ "Name|$POSTGRES_DB" ]]
+  run psql_client default -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -Axc "\l"
+  [[ "$output" =~ "Name|$POSTGRESQL_DATABASE" ]]
 }
 
 @test "All the volumes exposed" {
@@ -147,159 +147,159 @@ cleanup_environment
 
 @test "If host mounted, password and settings are preserved after deletion" {
   container_create_with_host_volumes default -d \
-    -e POSTGRES_USER=$POSTGRES_USER \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-    -e POSTGRES_DB=$POSTGRES_DB
+    -e POSTGRESQL_USERNAME=$POSTGRESQL_USERNAME \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE
 
   container_remove default
   container_create_with_host_volumes default -d
 
-  run psql_client default -U $POSTGRES_USER $POSTGRES_DB -Axc "\l"
-  [[ "$output" =~ "Name|$POSTGRES_DB" ]]
+  run psql_client default -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -Axc "\l"
+  [[ "$output" =~ "Name|$POSTGRESQL_DATABASE" ]]
 }
 
 @test "Can't create replication user without password" {
   run container_create default \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER
   [[ "$output" =~ "provide the --replicationPassword property as well" ]]
 }
 
 @test "Can't setup replication slave without specifying the master host" {
   run container_create slave0 \
-    -e POSTGRES_MODE=slave
+    -e POSTGRESQL_REPLICATION_MODE=slave
   [[ "$output" =~ "provide the --masterHost property as well" ]]
 }
 
 @test "Can't setup replication slave without replication user" {
   run container_create slave0 \
-    -e POSTGRES_MODE=slave \
-    -e POSTGRES_MASTER_HOST=master
+    -e POSTGRESQL_REPLICATION_MODE=slave \
+    -e POSTGRESQL_MASTER_HOST=master
   [[ "$output" =~ "provide the --replicationUser property as well" ]]
 }
 
 @test "Can't setup replication slave without password for replication user" {
   run container_create slave0 \
-    -e POSTGRES_MODE=slave \
-    -e POSTGRES_MASTER_HOST=master \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER
+    -e POSTGRESQL_REPLICATION_MODE=slave \
+    -e POSTGRESQL_MASTER_HOST=master \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER
   [[ "$output" =~ "provide the --replicationPassword property as well" ]]
 }
 
 @test "Can setup master/slave replication with minimal configuration" {
   container_create default -d \
-    -e POSTGRES_MODE=master \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-    -e POSTGRES_DB=$POSTGRES_DB
+    -e POSTGRESQL_REPLICATION_MODE=master \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE
 
   container_create slave0 -d \
     $(container_link default $CONTAINER_NAME) \
-    -e POSTGRES_MODE=slave \
-    -e POSTGRES_MASTER_HOST=$CONTAINER_NAME \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
+    -e POSTGRESQL_REPLICATION_MODE=slave \
+    -e POSTGRESQL_MASTER_HOST=$CONTAINER_NAME \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD
 
-  psql_client default -U postgres $POSTGRES_DB -c \
+  psql_client default -U postgres $POSTGRESQL_DATABASE -c \
     "CREATE TABLE users (id serial, name varchar(40) NOT NULL); \
      INSERT INTO users(name) VALUES ('Marko');"
 
-  run psql_client slave0 -U postgres $POSTGRES_DB -Axc "SELECT * FROM users;"
+  run psql_client slave0 -U postgres $POSTGRESQL_DATABASE -Axc "SELECT * FROM users;"
   [[ "$output" =~ "name|Marko" ]]
 }
 
 @test "Can setup master/slave replication with custom user" {
   container_create default -d \
-    -e POSTGRES_MODE=master \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD \
-    -e POSTGRES_USER=$POSTGRES_USER \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-    -e POSTGRES_DB=$POSTGRES_DB
+    -e POSTGRESQL_REPLICATION_MODE=master \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD \
+    -e POSTGRESQL_USERNAME=$POSTGRESQL_USERNAME \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE
 
   container_create slave0 -d \
     $(container_link default $CONTAINER_NAME) \
-    -e POSTGRES_MODE=slave \
-    -e POSTGRES_MASTER_HOST=$CONTAINER_NAME \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
+    -e POSTGRESQL_REPLICATION_MODE=slave \
+    -e POSTGRESQL_MASTER_HOST=$CONTAINER_NAME \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD
 
-  psql_client default -U $POSTGRES_USER $POSTGRES_DB -c \
+  psql_client default -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -c \
     "CREATE TABLE users (id serial, name varchar(40) NOT NULL); \
      INSERT INTO users(name) VALUES ('Marko');"
 
-  run psql_client slave0 -U $POSTGRES_USER $POSTGRES_DB -Axc "SELECT * FROM users;"
+  run psql_client slave0 -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -Axc "SELECT * FROM users;"
   [[ "$output" =~ "name|Marko" ]]
 }
 
 @test "Can setup master/slave replication using a custom master port" {
   container_create default -d -p 5432 \
-    -e POSTGRES_MODE=master \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD \
-    -e POSTGRES_USER=$POSTGRES_USER \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-    -e POSTGRES_DB=$POSTGRES_DB
+    -e POSTGRESQL_REPLICATION_MODE=master \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD \
+    -e POSTGRESQL_USERNAME=$POSTGRESQL_USERNAME \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE
 
   MASTER_HOST=$(container_exec default ip route list | grep ^default | awk '{print $3}')
   MASTER_PORT=$(docker port $CONTAINER_NAME-default 5432/tcp | cut -d':' -f2)
   container_create slave0 -d \
     $(container_link default $CONTAINER_NAME) \
-    -e POSTGRES_MODE=slave \
-    -e POSTGRES_MASTER_HOST=$MASTER_HOST \
-    -e POSTGRES_MASTER_PORT=$MASTER_PORT \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
+    -e POSTGRESQL_REPLICATION_MODE=slave \
+    -e POSTGRESQL_MASTER_HOST=$MASTER_HOST \
+    -e POSTGRESQL_MASTER_PORT=$MASTER_PORT \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD
 
-  psql_client default -U $POSTGRES_USER $POSTGRES_DB -c \
+  psql_client default -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -c \
     "CREATE TABLE users (id serial, name varchar(40) NOT NULL); \
      INSERT INTO users(name) VALUES ('Marko');"
 
-  run psql_client slave0 -U $POSTGRES_USER $POSTGRES_DB -Axc "SELECT * FROM users;"
+  run psql_client slave0 -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -Axc "SELECT * FROM users;"
   [[ "$output" =~ "name|Marko" ]]
 }
 
 @test "Slave synchronizes with the master (delayed start)" {
   container_create default -d \
-    -e POSTGRES_MODE=master \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD \
-    -e POSTGRES_USER=$POSTGRES_USER \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-    -e POSTGRES_DB=$POSTGRES_DB
+    -e POSTGRESQL_REPLICATION_MODE=master \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD \
+    -e POSTGRESQL_USERNAME=$POSTGRESQL_USERNAME \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE
 
-  psql_client default -U $POSTGRES_USER $POSTGRES_DB -c \
+  psql_client default -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -c \
     "CREATE TABLE users (id serial, name varchar(40) NOT NULL); \
      INSERT INTO users(name) VALUES ('Marko');"
 
   container_create slave0 -d \
     $(container_link default $CONTAINER_NAME) \
-    -e POSTGRES_MODE=slave \
-    -e POSTGRES_MASTER_HOST=$CONTAINER_NAME \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
+    -e POSTGRESQL_REPLICATION_MODE=slave \
+    -e POSTGRESQL_MASTER_HOST=$CONTAINER_NAME \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD
 
-  run psql_client slave0 -U $POSTGRES_USER $POSTGRES_DB -Axc "SELECT * FROM users;"
+  run psql_client slave0 -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -Axc "SELECT * FROM users;"
   [[ "$output" =~ "name|Marko" ]]
 }
 
 @test "Replication slave can be triggered to act as the master" {
   container_create default -d \
-    -e POSTGRES_MODE=master \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD \
-    -e POSTGRES_USER=$POSTGRES_USER \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-    -e POSTGRES_DB=$POSTGRES_DB
+    -e POSTGRESQL_REPLICATION_MODE=master \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD \
+    -e POSTGRESQL_USERNAME=$POSTGRESQL_USERNAME \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE
 
   container_create slave0 -d \
     $(container_link default $CONTAINER_NAME) \
-    -e POSTGRES_MODE=slave \
-    -e POSTGRES_MASTER_HOST=$CONTAINER_NAME \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
+    -e POSTGRESQL_REPLICATION_MODE=slave \
+    -e POSTGRESQL_MASTER_HOST=$CONTAINER_NAME \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD
 
-  psql_client default -U $POSTGRES_USER $POSTGRES_DB -c \
+  psql_client default -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -c \
     "CREATE TABLE users (id serial, name varchar(40) NOT NULL); \
      INSERT INTO users(name) VALUES ('Marko');"
 
@@ -313,68 +313,68 @@ cleanup_environment
   # create new slave that configures slave0 as the master
   container_create default -d \
     $(container_link slave0 $CONTAINER_NAME) \
-    -e POSTGRES_MODE=slave \
-    -e POSTGRES_MASTER_HOST=$CONTAINER_NAME \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
+    -e POSTGRESQL_REPLICATION_MODE=slave \
+    -e POSTGRESQL_MASTER_HOST=$CONTAINER_NAME \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD
 
-  psql_client slave0 -U $POSTGRES_USER $POSTGRES_DB -c "INSERT INTO users(name) VALUES ('Polo');"
+  psql_client slave0 -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -c "INSERT INTO users(name) VALUES ('Polo');"
 
   # verify that all past and new data is replicated on new slave
-  run psql_client default -U $POSTGRES_USER $POSTGRES_DB -Axc "SELECT * FROM users;"
+  run psql_client default -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -Axc "SELECT * FROM users;"
   [[ "$output" =~ "name|Marko" ]]
   [[ "$output" =~ "name|Polo" ]]
 }
 
 @test "Replication setup and state is preserved after restart" {
   container_create default -d \
-    -e POSTGRES_MODE=master \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD \
-    -e POSTGRES_USER=$POSTGRES_USER \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-    -e POSTGRES_DB=$POSTGRES_DB
+    -e POSTGRESQL_REPLICATION_MODE=master \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD \
+    -e POSTGRESQL_USERNAME=$POSTGRESQL_USERNAME \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE
 
-  psql_client default -U $POSTGRES_USER $POSTGRES_DB -c \
+  psql_client default -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -c \
     "CREATE TABLE users (id serial, name varchar(40) NOT NULL); \
      INSERT INTO users(name) VALUES ('Marko');"
 
   container_create slave0 -d \
     $(container_link default $CONTAINER_NAME) \
-    -e POSTGRES_MODE=slave \
-    -e POSTGRES_MASTER_HOST=$CONTAINER_NAME \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
+    -e POSTGRESQL_REPLICATION_MODE=slave \
+    -e POSTGRESQL_MASTER_HOST=$CONTAINER_NAME \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD
 
   container_restart default
   container_restart slave0
 
-  psql_client default -U $POSTGRES_USER $POSTGRES_DB -c "INSERT INTO users(name) VALUES ('Polo');"
+  psql_client default -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -c "INSERT INTO users(name) VALUES ('Polo');"
 
-  run psql_client slave0 -U $POSTGRES_USER $POSTGRES_DB -Axc "SELECT * FROM users;"
+  run psql_client slave0 -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -Axc "SELECT * FROM users;"
   [[ "$output" =~ "name|Marko" ]]
   [[ "$output" =~ "name|Polo" ]]
 }
 
 @test "Replication setup and state is preserved after deletion" {
   container_create_with_host_volumes default -d \
-    -e POSTGRES_MODE=master \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD \
-    -e POSTGRES_USER=$POSTGRES_USER \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-    -e POSTGRES_DB=$POSTGRES_DB
+    -e POSTGRESQL_REPLICATION_MODE=master \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD \
+    -e POSTGRESQL_USERNAME=$POSTGRESQL_USERNAME \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE
 
-  psql_client default -U $POSTGRES_USER $POSTGRES_DB -c \
+  psql_client default -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -c \
     "CREATE TABLE users (id serial, name varchar(40) NOT NULL); \
      INSERT INTO users(name) VALUES ('Marko');"
 
   container_create_with_host_volumes slave0 -d \
     $(container_link default $CONTAINER_NAME) \
-    -e POSTGRES_MODE=slave \
-    -e POSTGRES_MASTER_HOST=$CONTAINER_NAME \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
+    -e POSTGRESQL_REPLICATION_MODE=slave \
+    -e POSTGRESQL_MASTER_HOST=$CONTAINER_NAME \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD
 
   container_remove default
   container_remove slave0
@@ -382,38 +382,38 @@ cleanup_environment
   container_create_with_host_volumes default -d
   container_create_with_host_volumes slave0 -d $(container_link default $CONTAINER_NAME)
 
-  psql_client default -U $POSTGRES_USER $POSTGRES_DB -c "INSERT INTO users(name) VALUES ('Polo');"
+  psql_client default -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -c "INSERT INTO users(name) VALUES ('Polo');"
 
-  run psql_client slave0 -U $POSTGRES_USER $POSTGRES_DB -Axc "SELECT * FROM users;"
+  run psql_client slave0 -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -Axc "SELECT * FROM users;"
   [[ "$output" =~ "name|Marko" ]]
   [[ "$output" =~ "name|Polo" ]]
 }
 
 @test "Slave recovers if master is temporarily offine" {
   container_create_with_host_volumes default -d \
-    -e POSTGRES_MODE=master \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD \
-    -e POSTGRES_USER=$POSTGRES_USER \
-    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
-    -e POSTGRES_DB=$POSTGRES_DB
+    -e POSTGRESQL_REPLICATION_MODE=master \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD \
+    -e POSTGRESQL_USERNAME=$POSTGRESQL_USERNAME \
+    -e POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD \
+    -e POSTGRESQL_DATABASE=$POSTGRESQL_DATABASE
 
-  psql_client default -U $POSTGRES_USER $POSTGRES_DB -c \
+  psql_client default -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -c \
     "CREATE TABLE users (id serial, name varchar(40) NOT NULL); \
      INSERT INTO users(name) VALUES ('Marko');"
 
   container_create_with_host_volumes slave0 -d \
     $(container_link default $CONTAINER_NAME) \
-    -e POSTGRES_MODE=slave \
-    -e POSTGRES_MASTER_HOST=$CONTAINER_NAME \
-    -e POSTGRES_REPLICATION_USER=$POSTGRES_REPLICATION_USER \
-    -e POSTGRES_REPLICATION_PASSWORD=$POSTGRES_REPLICATION_PASSWORD
+    -e POSTGRESQL_REPLICATION_MODE=slave \
+    -e POSTGRESQL_MASTER_HOST=$CONTAINER_NAME \
+    -e POSTGRESQL_REPLICATION_USER=$POSTGRESQL_REPLICATION_USER \
+    -e POSTGRESQL_REPLICATION_PASSWORD=$POSTGRESQL_REPLICATION_PASSWORD
 
   container_restart default
 
-  psql_client default -U $POSTGRES_USER $POSTGRES_DB -c "INSERT INTO users(name) VALUES ('Polo');"
+  psql_client default -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -c "INSERT INTO users(name) VALUES ('Polo');"
 
-  run psql_client slave0 -U $POSTGRES_USER $POSTGRES_DB -Axc "SELECT * FROM users;"
+  run psql_client slave0 -U $POSTGRESQL_USERNAME $POSTGRESQL_DATABASE -Axc "SELECT * FROM users;"
   [[ "$output" =~ "name|Marko" ]]
   [[ "$output" =~ "name|Polo" ]]
 }
