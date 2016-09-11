@@ -21,4 +21,4 @@ EXPOSE 1337
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["harpoon", "start", "--foreground", "parse"]
+CMD ["nami", "start", "--foreground", "parse"]
