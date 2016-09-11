@@ -140,11 +140,11 @@ docker exec -it wildfly jboss-cli.sh --user=user --password=bitnami --connect
 
 By default, a management user named `user` is created with the default password `bitnami`. Passing the `WILDFLY_PASSWORD` environment variable when running the image for the first time will set the password of this user to the value of `WILDFLY_PASSWORD`.
 
-Additionally you can specify a user name for the management user using the `WILDFLY_USER` environment variable. When not specified, the `WILDFLY_PASSWORD` configuration is applied on the default user (`user`).
+Additionally you can specify a user name for the management user using the `WILDFLY_USERNAME` environment variable. When not specified, the `WILDFLY_PASSWORD` configuration is applied on the default user (`user`).
 
 ```bash
 docker run --name wildfly \
-  -e WILDFLY_USER=my_user \
+  -e WILDFLY_USERNAME=my_user \
   -e WILDFLY_PASSWORD=my_password \
   bitnami/wildfly:latest
 ```
@@ -155,7 +155,7 @@ or using Docker Compose:
 wildfly:
   image: bitnami/wildfly:latest
   environment:
-    - WILDFLY_USER=my_user
+    - WILDFLY_USERNAME=my_user
     - WILDFLY_PASSWORD=my_password
 ```
 
