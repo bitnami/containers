@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=kibana \
-    BITNAMI_APP_VERSION=4.5.4 \
+    BITNAMI_IMAGE_VERSION=4.5.4 \
     PATH=/opt/bitnami/kibana/bin:$PATH
 
 # Install kibana
@@ -17,4 +17,4 @@ EXPOSE 5601
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["harpoon", "start", "--foreground", "kibana"]
+CMD ["nami", "start", "--foreground", "kibana"]
