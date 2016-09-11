@@ -14,6 +14,8 @@ services:
       - 'apache_data:/bitnami/apache'
     depends_on:
       - mariadb
+    environment:
+      - OPENCART_HOST=localhost
 volumes:
   mariadb_data:
     driver: local
