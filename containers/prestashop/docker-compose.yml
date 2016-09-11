@@ -16,7 +16,7 @@ services:
     depends_on:
       - mariadb
     environment:
-      - PRESTASHOP_HOST=prestashop.example.com
+      - PRESTASHOP_HOST=localhost
 volumes:
   mariadb_data:
     driver: local
