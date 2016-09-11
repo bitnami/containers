@@ -181,6 +181,10 @@ bats test.sh
 
 # Notable Changes
 
+## 1.4.25-r4
+
+- `MEMCACHED_USER` parameter has been renamed to `MEMCACHED_USERNAME`.
+
 ## 1.4.25-r0
 
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
