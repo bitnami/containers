@@ -145,7 +145,6 @@ Available variables:
  - `RABBITMQ_NODEPORT`: Node port. Default: **5672**
  - `RABBITMQ_CLUSTERNODENAME`: Node name to cluster with. E.g.: **clusternode@hostname**
  - `RABBITMQ_MANAGERPORT`: Manager port. Default: **15672**
- - `RABBITMQ_MANAGERBINDIP`: Manager bind ip. Default: **0.0.0.0**
 
 ## Setting up a cluster
 
