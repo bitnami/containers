@@ -473,6 +473,13 @@ bats test.sh
 
 # Notable Changes
 
+## 9.5.3-r5
+
+- The `POSTGRES_` prefix on environment variables is now replaced by `POSTGRESQL_`
+- `POSTGRES_USER` parameter has been renamed to `POSTGRESQL_USERNAME`.
+- `POSTGRES_DB` parameter has been renamed to `POSTGRESQL_DATABASE`.
+- `POSTGRES_MODE` parameter has been renamed to `POSTGRESQL_REPLICATION_MODE`.
+
 ## 9.5.3-r0
 
 - All volumes have been merged at `/bitnami/postgresql`. Now you only need to mount a single volume at `/bitnami/postgresql` for persistence.
