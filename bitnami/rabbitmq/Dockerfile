@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=rabbitmq \
-    BITNAMI_IMAGE_VERSION=3.6.5-r1 \
+    BITNAMI_IMAGE_VERSION=3.6.5-r2 \
     PATH=/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:$PATH
 
 # Additional modules required
