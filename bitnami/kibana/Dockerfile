@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=kibana \
-    BITNAMI_IMAGE_VERSION=4.5.4 \
+    BITNAMI_IMAGE_VERSION=4.5.4-r1 \
     PATH=/opt/bitnami/kibana/bin:$PATH
 
 # Install kibana
