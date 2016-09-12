@@ -338,6 +338,10 @@ bats test.sh
 
 # Notable Changes
 
+## 10.0.0-r3
+
+- `WILDFLY_USER` parameter has been renamed to `WILDFLY_USERNAME`.
+
 ## 10.0.0-r0
 
 - All volumes have been merged at `/bitnami/tomcat`. Now you only need to mount a single volume at `/bitnami/tomcat` for persistence.
