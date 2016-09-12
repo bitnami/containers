@@ -433,6 +433,10 @@ bats test.sh
 
 # Notable Changes
 
+## 3.2.7-r5
+
+- `MONGODB_USER` parameter has been renamed to `MONGODB_USERNAME`.
+
 ## 3.2.6-r0
 
 - All volumes have been merged at `/bitnami/mongodb`. Now you only need to mount a single volume at `/bitnami/mongodb` for persistence.
