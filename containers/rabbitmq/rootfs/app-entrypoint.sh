@@ -22,7 +22,6 @@ export RABBITMQ_NODETYPE=${RABBITMQ_NODETYPE:-"stats"}
 export RABBITMQ_NODEPORT=${RABBITMQ_NODEPORT:-"5672"}
 export RABBITMQ_NODENAME=${RABBITMQ_NODENAME:-"rabbit"}
 export RABBITMQ_MANAGERPORT=${RABBITMQ_MANAGERPORT:-"15672"}
-export RABBITMQ_MANAGERBINDIP=${RABBITMQ_MANAGERBINDIP:-"0.0.0.0"}
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
    initialize rabbitmq
