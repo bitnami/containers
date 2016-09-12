@@ -299,6 +299,10 @@ bats test.sh
 
 # Notable Changes
 
+## 8.0.35-r3
+
+- `TOMCAT_USER` parameter has been renamed to `TOMCAT_USERNAME`.
+
 ## 8.0.35-r0
 
 - All volumes have been merged at `/bitnami/tomcat`. Now you only need to mount a single volume at `/bitnami/tomcat` for persistence.
