@@ -378,6 +378,21 @@ or using Docker Compose:
 docker-compose start rabbitmq
 ```
 
+# Notable changes
+
+## 3.6.5-r2
+
+The following parameters have been renamed:
+
+|            From            |              To              |
+|----------------------------|------------------------------|
+| `RABBITMQ_ERLANGCOOKIE`    | `RABBITMQ_ERLANG_COOKIE`     |
+| `RABBITMQ_NODETYPE`        | `RABBITMQ_NODE_TYPE`         |
+| `RABBITMQ_NODEPORT`        | `RABBITMQ_NODE_PORT`         |
+| `RABBITMQ_NODENAME`        | `RABBITMQ_NODE_NAME`         |
+| `RABBITMQ_CLUSTERNODENAME` | `RABBITMQ_CLUSTER_NODE_NAME` |
+| `RABBITMQ_MANAGERPORT`     | `RABBITMQ_MANAGER_PORT`      |
+
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an
