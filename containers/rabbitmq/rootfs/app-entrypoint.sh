@@ -18,10 +18,10 @@ function initialize {
 export RABBITMQ_VHOST=${RABBITMQ_VHOST:-"/"}
 export RABBITMQ_USERNAME=${RABBITMQ_USERNAME:-"user"}
 export RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-"bitnami"}
-export RABBITMQ_NODETYPE=${RABBITMQ_NODETYPE:-"stats"}
-export RABBITMQ_NODEPORT=${RABBITMQ_NODEPORT:-"5672"}
-export RABBITMQ_NODENAME=${RABBITMQ_NODENAME:-"rabbit"}
-export RABBITMQ_MANAGERPORT=${RABBITMQ_MANAGERPORT:-"15672"}
+export RABBITMQ_NODE_TYPE=${RABBITMQ_NODE_TYPE:-"stats"}
+export RABBITMQ_NODE_PORT=${RABBITMQ_NODE_PORT:-"5672"}
+export RABBITMQ_NODE_NAME=${RABBITMQ_NODE_NAME:-"rabbit"}
+export RABBITMQ_MANAGER_PORT=${RABBITMQ_MANAGER_PORT:-"15672"}
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
    initialize rabbitmq

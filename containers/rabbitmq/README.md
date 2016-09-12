@@ -78,7 +78,7 @@ $ docker network create rabbitmq_network
 ### Step 2: Run the RabbitMQ stats node:
 
 ```
-$ docker run -d -p 15672:15672 --name rabbitmq-stats --net=rabbitmq_network -e RABBITMQ_NODENAME=rabbit@rabbitmq-stats -e RABBITMQ_ERLANGCOOKIE=s3cr3tc00ki3 bitnami/rabbitmq
+$ docker run -d -p 15672:15672 --name rabbitmq-stats --net=rabbitmq_network -e RABBITMQ_NODE_NAME=rabbit@rabbitmq-stats -e RABBITMQ_ERLANG_COOKIE=s3cr3tc00ki3 bitnami/rabbitmq
 ```
 
 *Note:* You need to give the container a name in order to RabbitMQ nodes to resolve the host
@@ -86,10 +86,10 @@ $ docker run -d -p 15672:15672 --name rabbitmq-stats --net=rabbitmq_network -e R
 ### Step 3: Run the RabbitMQ queue nodes:
 
 ```
-$ docker run -d --name rabbitmq-queue-disc1 --link rabbitmq-stats --net=rabbitmq_network -e RABBITMQ_NODETYPE=queue-disc -e RABBITMQ_NODENAME=rabbit@rabibitmq-queue-disc1 -e RABBITMQ_CLUSTERNODENAME=rabbit@rabbitmq-stats -e RABBITMQ_ERLANGCOOKIE=s3cr3tc00ki3 bitnami/rabbitmq
+$ docker run -d --name rabbitmq-queue-disc1 --link rabbitmq-stats --net=rabbitmq_network -e RABBITMQ_NODE_TYPE=queue-disc -e RABBITMQ_NODE_NAME=rabbit@rabibitmq-queue-disc1 -e RABBITMQ_CLUSTER_NODE_NAME=rabbit@rabbitmq-stats -e RABBITMQ_ERLANG_COOKIE=s3cr3tc00ki3 bitnami/rabbitmq
 ```
 
-*Note:* You can use a **ram** node by setting `RABBITMQ_NODETYPE=queue-ram` and `--name rabbitmq-queue-ramX`
+*Note:* You can use a **ram** node by setting `RABBITMQ_NODE_TYPE=queue-ram` and `--name rabbitmq-queue-ramX`
 
 ## Linking with Docker Compose
 
@@ -139,12 +139,12 @@ Available variables:
  - `RABBITMQ_USERNAME`: RabbitMQ application username. Default: **user**
  - `RABBITMQ_PASSWORD`: RabbitMQ application password. Default: **bitnami**
  - `RABBITMQ_VHOST`: RabbitMQ application vhost. Default: **/**
- - `RABBITMQ_ERLANGCOOKIE`: Erlang cookie to determine whether different nodes are allowed to communicate with each other.
- - `RABBITMQ_NODETYPE`: Node Type. Valid values: *stats*, **queue-ram* or *queue-disc*. Default: **stats**
- - `RABBITMQ_NODENAME`: Node name. E.g.: *node@hostname* or *node* (If you don't specify the hostname, the env variables will be used.). Default **rabbit**
- - `RABBITMQ_NODEPORT`: Node port. Default: **5672**
- - `RABBITMQ_CLUSTERNODENAME`: Node name to cluster with. E.g.: **clusternode@hostname**
- - `RABBITMQ_MANAGERPORT`: Manager port. Default: **15672**
+ - `RABBITMQ_ERLANG_COOKIE`: Erlang cookie to determine whether different nodes are allowed to communicate with each other.
+ - `RABBITMQ_NODE_TYPE`: Node Type. Valid values: *stats*, **queue-ram* or *queue-disc*. Default: **stats**
+ - `RABBITMQ_NODE_NAME`: Node name. E.g.: *node@hostname* or *node* (If you don't specify the hostname, the env variables will be used.). Default **rabbit**
+ - `RABBITMQ_NODE_PORT`: Node port. Default: **5672**
+ - `RABBITMQ_CLUSTER_NODE_NAME`: Node name to cluster with. E.g.: **clusternode@hostname**
+ - `RABBITMQ_MANAGER_PORT`: Manager port. Default: **15672**
 
 ## Setting up a cluster
 
@@ -163,9 +163,9 @@ services:
   stats:
     image: bitnami/rabbitmq
     environment:
-      - RABBITMQ_NODETYPE=stats
-      - RABBITMQ_NODENAME=rabbit@stats
-      - RABBITMQ_ERLANGCOOKIE=s3cr3tc00ki3
+      - RABBITMQ_NODE_TYPE=stats
+      - RABBITMQ_NODE_NAME=rabbit@stats
+      - RABBITMQ_ERLANG_COOKIE=s3cr3tc00ki3
     ports:
       - '15672:15672'
     volumes:
@@ -182,10 +182,10 @@ Update the definitions for nodes you want your RabbitMQ stats node cluster with.
   queue-disc1:
     image: bitnami/rabbitmq
     environment:
-      - RABBITMQ_NODETYPE=queue-disc
-      - RABBITMQ_NODENAME=rabbit@queue-disc1
-      - RABBITMQ_CLUSTERNODENAME=rabbit@stats
-      - RABBITMQ_ERLANGCOOKIE=s3cr3tc00ki3
+      - RABBITMQ_NODE_TYPE=queue-disc
+      - RABBITMQ_NODE_NAME=rabbit@queue-disc1
+      - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
+      - RABBITMQ_ERLANG_COOKIE=s3cr3tc00ki3
     volumes:
       - 'rabbitmqdisc1_data:/bitnami/rabbitmq'
 ```
@@ -198,10 +198,10 @@ We are going to add a ram node too:
   queue-ram1:
     image: bitnami/rabbitmq
     environment:
-      - RABBITMQ_NODETYPE=queue-ram
-      - RABBITMQ_NODENAME=rabbit@queue-ram1
-      - RABBITMQ_CLUSTERNODENAME=rabbit@stats
-      - RABBITMQ_ERLANGCOOKIE=s3cr3tc00ki3
+      - RABBITMQ_NODE_TYPE=queue-ram
+      - RABBITMQ_NODE_NAME=rabbit@queue-ram1
+      - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
+      - RABBITMQ_ERLANG_COOKIE=s3cr3tc00ki3
     volumes:
       - 'rabbitmqram1_data:/bitnami/rabbitmq'
 ```
@@ -227,9 +227,9 @@ services:
   stats:
     image: bitnami/rabbitmq
     environment:
-      - RABBITMQ_NODETYPE=stats
-      - RABBITMQ_NODENAME=rabbit@stats
-      - RABBITMQ_ERLANGCOOKIE=s3cr3tc00ki3
+      - RABBITMQ_NODE_TYPE=stats
+      - RABBITMQ_NODE_NAME=rabbit@stats
+      - RABBITMQ_ERLANG_COOKIE=s3cr3tc00ki3
     ports:
       - '15672:15672'
     volumes:
@@ -237,19 +237,19 @@ services:
   queue-disc1:
     image: bitnami/rabbitmq
     environment:
-      - RABBITMQ_NODETYPE=queue-disc
-      - RABBITMQ_NODENAME=rabbit@queue-disc1
-      - RABBITMQ_CLUSTERNODENAME=rabbit@stats
-      - RABBITMQ_ERLANGCOOKIE=s3cr3tc00ki3
+      - RABBITMQ_NODE_TYPE=queue-disc
+      - RABBITMQ_NODE_NAME=rabbit@queue-disc1
+      - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
+      - RABBITMQ_ERLANG_COOKIE=s3cr3tc00ki3
     volumes:
       - 'rabbitmqdisc1_data:/bitnami/rabbitmq'
   queue-ram1:
     image: bitnami/rabbitmq
     environment:
-      - RABBITMQ_NODETYPE=queue-ram
-      - RABBITMQ_NODENAME=rabbit@queue-ram1
-      - RABBITMQ_CLUSTERNODENAME=rabbit@stats
-      - RABBITMQ_ERLANGCOOKIE=s3cr3tc00ki3
+      - RABBITMQ_NODE_TYPE=queue-ram
+      - RABBITMQ_NODE_NAME=rabbit@queue-ram1
+      - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
+      - RABBITMQ_ERLANG_COOKIE=s3cr3tc00ki3
     volumes:
       - 'rabbitmqram1_data:/bitnami/rabbitmq'
 
