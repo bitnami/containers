@@ -12,6 +12,7 @@ services:
     volumes:
       - 'opencart_data:/bitnami/opencart'
       - 'apache_data:/bitnami/apache'
+      - 'php_data:/bitnami/php'
     depends_on:
       - mariadb
     environment:
@@ -22,4 +23,6 @@ volumes:
   opencart_data:
     driver: local
   apache_data:
+    driver: local
+  php_data:
     driver: local
