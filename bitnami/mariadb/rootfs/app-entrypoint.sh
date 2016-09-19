@@ -1,23 +1,35 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
 
-if [[ "$1" == "harpoon" && "$2" == "start" ]]; then
-  status=`harpoon inspect $BITNAMI_APP_NAME`
-  if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-    harpoon initialize $BITNAMI_APP_NAME \
-      ${MARIADB_ROOT_PASSWORD:+--rootPassword $MARIADB_ROOT_PASSWORD} \
-      ${MARIADB_USER:+--username $MARIADB_USER} \
-      ${MARIADB_PASSWORD:+--password $MARIADB_PASSWORD} \
-      ${MARIADB_DATABASE:+--database $MARIADB_DATABASE} \
-      ${MARIADB_REPLICATION_MODE:+--replicationMode $MARIADB_REPLICATION_MODE} \
-      ${MARIADB_REPLICATION_USER:+--replicationUser $MARIADB_REPLICATION_USER} \
-      ${MARIADB_REPLICATION_PASSWORD:+--replicationPassword $MARIADB_REPLICATION_PASSWORD} \
-      ${MARIADB_MASTER_HOST:+--masterHost $MARIADB_MASTER_HOST} \
-      ${MARIADB_MASTER_PORT:+--masterPort $MARIADB_MASTER_PORT} \
-      ${MARIADB_MASTER_USER:+--masterUser $MARIADB_MASTER_USER} \
-      ${MARIADB_MASTER_PASSWORD:+--masterPassword $MARIADB_MASTER_PASSWORD}
-  fi
-  chown $BITNAMI_APP_USER: /bitnami/$BITNAMI_APP_NAME || true
+function initialize {
+    # Package can be "installed" or "unpacked"
+    status=`nami inspect $1`
+    if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
+        # Clean up inputs
+        inputs=""
+        if [[ -f /$1-inputs.json ]]; then
+            inputs=--inputs-file=/$1-inputs.json
+        fi
+        nami initialize $1 $inputs
+    fi
+}
+
+# Set default values
+export MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-}
+export MARIADB_USER=${MARIADB_USER:-}
+export MARIADB_PASSWORD=${MARIADB_PASSWORD:-}
+export MARIADB_DATABASE=${MARIADB_DATABASE:-}
+export MARIADB_REPLICATION_MODE=${MARIADB_REPLICATION_MODE:-}
+export MARIADB_REPLICATION_USER=${MARIADB_REPLICATION_USER:-}
+export MARIADB_REPLICATION_PASSWORD=${MARIADB_REPLICATION_PASSWORD:-}
+export MARIADB_MASTER_HOST=${MARIADB_MASTER_HOST:-}
+export MARIADB_MASTER_PORT=${MARIADB_MASTER_PORT:-3306}
+export MARIADB_MASTER_USER=${MARIADB_MASTER_USER:-root}
+export MARIADB_MASTER_PASSWORD=${MARIADB_MASTER_PASSWORD:-}
+
+if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
+    initialize mariadb
+    chown -R :$BITNAMI_APP_USER /bitnami/mariadb || true
+    echo "Starting application ..."
 fi
 
 exec /entrypoint.sh "$@"
