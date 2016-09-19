@@ -8,7 +8,7 @@ ENV BITNAMI_APP_NAME=magento \
 
 # Additional modules required
 RUN bitnami-pkg unpack apache-2.4.23-3 --checksum b75ced97d6b6f9dd8d0114ee0ca3943250af6edc91a20857f68165e4bf7d35fa
-RUN bitnami-pkg install php-7.0.11-0 --checksum 7c8203e315d4adba00d7b80ec8b527e572a47e7739a1d0d23ca348eef3d4093a
+RUN bitnami-pkg unpack php-7.0.11-0 --checksum 7c8203e315d4adba00d7b80ec8b527e572a47e7739a1d0d23ca348eef3d4093a
 RUN bitnami-pkg install libphp-7.0.11-0 --checksum 5607228fc09750339e75df85807592f5c24d1844d924d2a5acb2bc2b138e4984
 RUN bitnami-pkg install mysql-client-10.1.13-4 --checksum 14b45c91dd78b37f0f2366712cbe9bfdf2cb674769435611955191a65dbf4976
 
