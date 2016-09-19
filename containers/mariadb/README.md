@@ -286,7 +286,7 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 ## Configuration file
 
-The image looks for configuration in the `conf/` directory of `/bitnami/mariadb`. As as mentioned in [Persisting your database](#persisting-your-data) you can mount a volume at this location and copy your own configurations in the `conf/` directory. The default configuration will be copied to the `conf/` directory if it's empty.
+The image looks for configuration in the `conf/` directory of `/bitnami/mariadb`, and also in the `extra/` directory of the same folder for extra configuration files.. If you want to overwrite the default my.cnf configuration files with one of your creation, you should mount a volume at `/bitnami/mariadb/extra` and add any `.cnf` file with directives you want to include in your `my.cnf` file.
 
 ### Step 1: Run the MariaDB image
 
