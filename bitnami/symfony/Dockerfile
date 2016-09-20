@@ -10,7 +10,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=symfony \
-    BITNAMI_APP_VERSION=2.8.9 \
+    BITNAMI_APP_VERSION=3.1.3-r0 \
     PATH=/opt/bitnami/symfony:/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
