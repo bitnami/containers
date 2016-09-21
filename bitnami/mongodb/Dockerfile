@@ -1,11 +1,12 @@
 FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=3.2.7-r5 \
+ENV BITNAMI_IMAGE_VERSION=3.2.9-r0 \
     BITNAMI_APP_NAME=mongodb \
     BITNAMI_APP_USER=mongo
 
-RUN bitnami-pkg unpack mongodb-3.2.7-3 --checksum f599dbc1adf9b949834fe121ed356ecbe1fea4dec695b46b6bc618fd28acb79e
+# Install mongodb
+RUN bitnami-pkg unpack mongodb-3.2.9-0 --checksum 367db26aa2b687e8a389073809602412bde95d5800f655f4221ab39dc251cd1f
 ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:$PATH
 
 COPY rootfs/ /
