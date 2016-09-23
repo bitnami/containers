@@ -5,11 +5,11 @@
 ## RUNNING
 ##   $ docker run ubuntu-for-bitnami-bitnami-docker-mariadb
 
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV STACKSMITH_STACK_ID="3ziu7db" \
+ENV STACKSMITH_STACK_ID="nd6ziiq" \
     STACKSMITH_STACK_NAME="Ubuntu for bitnami/bitnami-docker-mariadb" \
     STACKSMITH_STACK_PRIVATE="1"
 
