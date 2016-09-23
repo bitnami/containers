@@ -5,7 +5,7 @@
 ## RUNNING
 ##   $ docker run -p 8000:8000 bitnami/bitnami-docker-symfony
 
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
