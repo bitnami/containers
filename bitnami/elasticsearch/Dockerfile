@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=elasticsearch \
-    BITNAMI_IMAGE_VERSION=2.4.0-r0 \
+    BITNAMI_IMAGE_VERSION=2.4.0-r1 \
     PATH=/opt/bitnami/java/bin:/opt/bitnami/elasticsearch/bin:$PATH
 
 # Additional modules required
