@@ -38,7 +38,7 @@ RUN gem install therubyracer
 
 ENV RAILS_ENV=development
 ENV BITNAMI_APP_NAME=rails
-ENV BITNAMI_IMAGE_VERSION=5.0.0.1-r0
+ENV BITNAMI_IMAGE_VERSION=5.0.0.1-r1
 
 USER bitnami
 WORKDIR /app
