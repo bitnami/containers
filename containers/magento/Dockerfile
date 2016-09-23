@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r9
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
