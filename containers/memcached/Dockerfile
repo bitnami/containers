@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=1.4.25-r4 \
+ENV BITNAMI_IMAGE_VERSION=1.4.25-r5 \
     BITNAMI_APP_NAME=memcached \
     BITNAMI_APP_USER=memcached
 
