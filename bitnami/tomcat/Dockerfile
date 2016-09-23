@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=8.0.35-r3 \
+ENV BITNAMI_IMAGE_VERSION=8.0.35-r4 \
     BITNAMI_APP_NAME=tomcat \
     BITNAMI_APP_USER=tomcat
 
