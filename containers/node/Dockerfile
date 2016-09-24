@@ -11,15 +11,15 @@
 ##   Connect to the container at DOCKER_IP:3000
 ##     replacing DOCKER_IP for the IP of your active docker host
 
-FROM gcr.io/stacksmith-images/ubuntu-buildpack:14.04-r9
+FROM gcr.io/stacksmith-images/ubuntu-buildpack:14.04-r10
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV STACKSMITH_STACK_ID="zo0pgh3" \
+ENV STACKSMITH_STACK_ID="4pxigp5" \
     STACKSMITH_STACK_NAME="Node.js for bitnami/bitnami-docker-node" \
     STACKSMITH_STACK_PRIVATE="1"
 
-RUN bitnami-pkg install node-6.5.0-0 --checksum 52cb7f26dff5661fadb0d3ca50ff4e267b746604a935b3299c3a9383104d0055
+RUN bitnami-pkg install node-6.6.0-1 --checksum 36f42bb71b35f95db3bb21d088fbd9438132fb2a7fb4d73b5951732db9a6771e
 
 ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
     NODE_PATH=/opt/bitnami/node/lib/node_modules
