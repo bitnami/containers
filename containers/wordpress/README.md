@@ -37,6 +37,7 @@ services:
     volumes:
       - wordpress_data:/bitnami/wordpress
       - apache_data:/bitnami/apache
+      - php_data:/bitnami/php
 
 volumes:
   mariadb_data:
@@ -44,6 +45,8 @@ volumes:
   wordpress_data:
     driver: local
   apache_data:
+    driver: local
+  php_data:
     driver: local
 ```
 
@@ -82,6 +85,7 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --net wordpress-tier \
   --volume wordpress_data:/bitnami/wordpress \
   --volume apache_data:/bitnami/apache \
+  --volume php_data:/bitnami/php \
   bitnami/wordpress:latest
 ```
 
@@ -115,6 +119,7 @@ services:
     volumes:
       - /path/to/wordpress-persistence:/bitnami/wordpress
       - /path/to/apache-persistence:/bitnami/apache
+      - /path/to/php-persistence:/bitnami/php
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -141,6 +146,7 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --net wordpress-tier \
   --volume /path/to/wordpress-persistence:/bitnami/wordpress \
   --volume /path/to/apache-persistence:/bitnami/apache \
+  --volume /path/to/php-persistence:/bitnami/php \
   bitnami/wordpress:latest
 ```
 
@@ -197,6 +203,7 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --net wordpress-tier \
   --volume wordpress_data:/bitnami/wordpress \
   --volume apache_data:/bitnami/apache \
+  --volume php_data:/bitnami/php \
   bitnami/wordpress:latest
 ```
 
@@ -243,6 +250,7 @@ services:
     volumes:
       - wordpress_data:/bitnami/wordpress
       - apache_data:/bitnami/apache
+      - php_data:/bitnami/php
 
 volumes:
   mariadb_data:
@@ -250,6 +258,8 @@ volumes:
   wordpress_data:
     driver: local
   apache_data:
+    driver: local
+  php_data:
     driver: local
 ```
 
@@ -261,6 +271,7 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --env WORDPRESS_PASSWORD=my_password \
   --volume wordpress_data:/bitnami/wordpress \
   --volume apache_data:/bitnami/apache \
+  --volume php_data:/bitnami/php \
   bitnami/wordpress:latest
 ```
 
@@ -311,11 +322,12 @@ To backup your application data follow these steps:
 $ docker-compose stop wordpress
 ```
 
-2. Copy the WordPress and Apache data
+2. Copy the WordPress, PHP and Apache data
 
 ```bash
 $ docker cp $(docker-compose ps -q wordpress):/bitnami/wordpress/ /path/to/backups/wordpress/latest/
 $ docker cp $(docker-compose ps -q wordpress):/bitnami/apache/ /path/to/backups/apache/latest/
+$ docker cp $(docker-compose ps -q wordpress):/bitnami/php/ /path/to/backups/php/latest/
 ```
 
 3. Start the WordPress container
@@ -332,11 +344,12 @@ $ docker-compose start wordpress
 $ docker stop wordpress
 ```
 
-2. Copy the WordPress and Apache data
+2. Copy the WordPress, PHP and Apache data
 
 ```bash
 $ docker cp wordpress:/bitnami/wordpress/ /path/to/backups/wordpress/latest/
 $ docker cp wordpress:/bitnami/apache/ /path/to/backups/apache/latest/
+$ docker cp wordpress:/bitnami/php/ /path/to/backups/php/latest/
 ```
 
 3. Start the WordPress container
