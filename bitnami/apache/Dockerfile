@@ -1,11 +1,11 @@
 FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=2.4.23-r5 \
+ENV BITNAMI_IMAGE_VERSION=2.4.23-r6 \
     BITNAMI_APP_NAME=apache \
     BITNAMI_APP_USER=daemon
 
-RUN bitnami-pkg unpack apache-2.4.23-4 --checksum 031ccfca981a152b4daadf3b78843e24c01136c0db458f6fd816fc8428c76bbe
+RUN bitnami-pkg unpack apache-2.4.23-5 --checksum ce7996de3c2173a72ad742e7ad0b4d48a1947454d4e0001497be74f19f9aa74c
 RUN ln -sf /opt/bitnami/$BITNAMI_APP_NAME/htdocs /app
 
 ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:/opt/bitnami/common/bin:$PATH
