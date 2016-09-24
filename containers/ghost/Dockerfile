@@ -3,11 +3,11 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=ghost \
-    BITNAMI_IMAGE_VERSION=0.11.0-r0 \
+    BITNAMI_IMAGE_VERSION=0.11.0-r1 \
     PATH=/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:$PATH
 
 # Additional modules required
-RUN bitnami-pkg install node-4.5.0-0 --checksum af047acbfe0c0f918536de0dfa690178808d2e5fc07dfa7acc34c77f0a60fd55
+RUN bitnami-pkg install node-4.5.0-1 --checksum 4ea3d270ea4b44f53d628357a062066438248a49331a0b9e4eb5e6b3671d076f
 RUN bitnami-pkg install mysql-client-10.1.13-4 --checksum 14b45c91dd78b37f0f2366712cbe9bfdf2cb674769435611955191a65dbf4976
 
 # Install ghost
