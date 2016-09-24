@@ -3,14 +3,14 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=odoo \
-    BITNAMI_IMAGE_VERSION=9.0.20160620-r2 \
+    BITNAMI_IMAGE_VERSION=9.0.20160620-r3 \
     PATH=/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/postgresql/bin:$PATH
 
 # Additional modules required
-RUN bitnami-pkg install python-2.7.12-0 --checksum 1a55e9c5af791fd9a5744919d71e1442a11c413bab5cff0be44c8dbeb0145959
-RUN bitnami-pkg install postgresql-client-9.5.3-0 --checksum f37cd1644594f5acf08dff89dbdbf156982ffbf14d73786c2e47154c77ac658a
-RUN bitnami-pkg install postgresql-libraries-9.5.3-0 --checksum d6499811161e9e97acfc3e0132a016bc2edcfd85374c9b5002359429bd8ab698
-RUN bitnami-pkg install node-6.4.0-0 --checksum 41d5a7b17ac1f175c02faef28d44eae0d158890d4fa9893ab24b5cc5f551486f
+RUN bitnami-pkg install python-2.7.12-1 --checksum 1ab49b32453c509cf6ff3abb9dbe8a411053e3b811753a10c7a77b4bc19606df
+RUN bitnami-pkg install postgresql-client-9.5.3-4 --checksum 1f6f436e65b6e8405011e86f63775f7db1b5c1c51a3afa41637ee43c282f4951
+RUN bitnami-pkg install postgresql-libraries-9.5.3-1 --checksum 7064c8752797ec2d92f2a0ef57d5bbe5a1607e1938a352d9ecf4f455384d90b7
+RUN bitnami-pkg install node-6.6.0-1 --checksum 36f42bb71b35f95db3bb21d088fbd9438132fb2a7fb4d73b5951732db9a6771e
 
 # Install odoo
 RUN bitnami-pkg unpack odoo-9.0.20160620-0 --checksum 4c71a5261d916880f89139bb4f469966a69c7505786bf8eb3eca770f200865fc
