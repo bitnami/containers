@@ -19,8 +19,8 @@ ENV STACKSMITH_STACK_ID="top24h8" \
     STACKSMITH_STACK_NAME="bitnami/bitnami-docker-laravel" \
     STACKSMITH_STACK_PRIVATE="1"
 
-RUN bitnami-pkg install node-6.3.0-0 --checksum f2997c421e45beb752673a531bf475231d183c30f7f8d5ec1a5fb68d39744d5f
-RUN bitnami-pkg install php-5.6.22-0 --checksum 2439cf0adfc7cc21f15a6136059883e749958af83a082108e63a80ff3c5290c0
+RUN bitnami-pkg install node-6.6.0-1 --checksum 36f42bb71b35f95db3bb21d088fbd9438132fb2a7fb4d73b5951732db9a6771e
+RUN bitnami-pkg install php-5.6.26-1 --checksum b7a72ae78f9b19352bd400dfe027465c88a8643c0e5d9753f8d12f4ebae542a2
 
 ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH
 ENV PATH=/opt/bitnami/php/sbin:/opt/bitnami/php/bin:/opt/bitnami/common/bin:~/.composer/vendor/bin:$PATH
@@ -33,7 +33,7 @@ USER bitnami
 RUN mkdir /tmp/app && cd /tmp/app && composer create-project "laravel/laravel=5.2.31" /tmp/app --prefer-dist
 
 ENV BITNAMI_APP_NAME=laravel
-ENV BITNAMI_IMAGE_VERSION=5.2.31-r5
+ENV BITNAMI_IMAGE_VERSION=5.2.31-r6
 
 WORKDIR /app
 EXPOSE 3000
