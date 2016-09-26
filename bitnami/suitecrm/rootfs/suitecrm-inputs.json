@@ -1,0 +1,16 @@
+{
+  "username": "{{$global.env.SUITECRM_USERNAME}}",
+  "lastName": "{{$global.env.SUITECRM_LAST_NAME}}",
+  "password": "{{$global.env.SUITECRM_PASSWORD}}",
+  "email": "{{$global.env.SUITECRM_EMAIL}}",
+  "host": "{{$global.env.SUITECRM_HOST}}",
+  "smtpHost": "{{$global.env.SUITECRM_SMTP_HOST}}",
+  "smtpPort": "{{$global.env.SUITECRM_SMTP_PORT}}",
+  "smtpUser": "{{$global.env.SUITECRM_SMTP_USER}}",
+  "smtpPassword": "{{$global.env.SUITECRM_SMTP_PASSWORD}}",
+  "smtpProtocol": "{{$global.env.SUITECRM_SMTP_PROTOCOL}}",
+  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
+  "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT}}"
+}
