@@ -240,13 +240,13 @@ To restore your application using backed up data simply mount the folder with Op
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an
-[issue](https://github.com/bitnami/opencart/issues), or submit a
-[pull request](https://github.com/bitnami/opencart/pulls) with your contribution.
+[issue](https://github.com/bitnami/bitnami-docker-opencart/issues), or submit a
+[pull request](https://github.com/bitnami/bitnami-docker-opencart/pulls) with your contribution.
 
 # Issues
 
 If you encountered a problem running this container, you can file an
-[issue](https://github.com/bitnami/opencart/issues). For us to provide better support,
+[issue](https://github.com/bitnami/bitnami-docker-opencart/issues). For us to provide better support,
 be sure to include the following information in your issue:
 
 - Host OS and version
