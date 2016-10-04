@@ -180,7 +180,7 @@ application:
 Available variables:
 
  - `OPENCART_USER_NAME`: OpenCart application User's First Name. Default: **user**
- - `OPENCART_PASSWORD`: OpenCart application password. Default: **bitnami**
+ - `OPENCART_PASSWORD`: OpenCart application password. Default: **bitnami1**
  - `OPENCART_EMAIL`: OpenCart application email. Default: **user@example.com**
  - `OPENCART_HOST`: OpenCart Host Server.
  - `MARIADB_PASSWORD`: Root password for the MariaDB.
