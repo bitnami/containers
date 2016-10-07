@@ -1,3 +1,5 @@
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/owncloud)](https://hub.docker.com/r/bitnami/owncloud/)
+
 # What is ownCloud?
 
 ownCloud is a file sharing server that puts the control and security of your own data back into your hands.
