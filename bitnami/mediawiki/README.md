@@ -1,4 +1,3 @@
-[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/mediawiki)](https://hub.docker.com/r/bitnami/mediawiki/)
 # What is Mediawiki?
 
 > MediaWiki is an extremely powerful, scalable software and a feature-rich wiki implementation that uses PHP to process and display data stored in a database, such as MySQL.
@@ -258,7 +257,7 @@ information)
 
 # License
 
-Copyright (c) 2016 Bitnami
+Copyright 2016 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
