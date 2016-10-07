@@ -33,7 +33,7 @@ services:
     volumes:
       - 'owncloud_data:/bitnami/owncloud'
       - 'apache_data:/bitnami/apache'
-      - 'php_data:/bitnami/php'
+      - 'php-data:/bitnami/php'
     depends_on:
       - mariadb
 volumes:
@@ -63,9 +63,9 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker run -d --name mariadb --net=owncloud_network bitnami/mariadb
   ```
 
-  *Note:* You need to give the container a name in order to ownCloud to resolve the host
+  *Note:* You need to give the container a name in order to OwnCloud to resolve the host
 
-3. Run the ownCloud container:
+3. Run the OwnCloud container:
 
   ```
   $ docker run -d -p 80:80 --name owncloud --net=owncloud_network bitnami/owncloud
@@ -77,7 +77,7 @@ Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data` and `application_data` containers. Those are data volume containers (See https://docs.docker.com/engine/userguide/containers/dockervolumes/ for more information). If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `apache_data`, `php_data`, `mariadb_data` and `application_data` volumes.
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
@@ -121,9 +121,9 @@ In this case you need to specify the directories to mount on the run command. Th
   $ docker run -d --name mariadb -v /your/local/path/bitnami/mariadb/data:/bitnami/mariadb/data -v /your/local/path/bitnami/mariadb/conf:/bitnami/mariadb/conf --network=owncloud_network bitnami/mariadb
   ```
 
-  *Note:* You need to give the container a name in order to ownCloud to resolve the host
+  *Note:* You need to give the container a name in order to OwnCloud to resolve the host
 
-3. Run the ownCloud container:
+3. Run the OwnCloud container:
 
   ```
   $ docker run -d -p 80:80 --name owncloud -v /your/local/path/bitnami/owncloud:/bitnami/owncloud --network=owncloud_network bitnami/owncloud
@@ -131,7 +131,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 # Upgrade this application
 
-Bitnami provides up-to-date versions of MariaDB and ownCloud, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the ownCloud container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of MariaDB and OwnCloud, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the OwnCloud container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
 
 1. Get the updated images:
 
@@ -183,10 +183,12 @@ application:
 
 Available variables:
 
- - `OWNCLOUD_USERNAME`: ownCloud application username. Default: **user**
- - `OWNCLOUD_PASSWORD`: ownCloud application password. Default: **bitnami**
- - `OWNCLOUD_EMAIL`: ownCloud application email. Default: **user@example.com**
- - `OWNCLOUD_HOST`: ownCloud host to create application URLs. It can be either an IP or a domain. If left empty, it will be resolved to the machine IP.
+ - `APACHE_HTTP_PORT`: Port used by Apache for HTTP. Default: **80**
+ - `APACHE_HTTPS_PORT`: Port used by Apache for HTTPS. Default: **443**
+ - `OWNCLOUD_USERNAME`: Owncloud application username. Default: **user**
+ - `OWNCLOUD_PASSWORD`: Owncloud application password. Default: **bitnami**
+ - `OWNCLOUD_EMAIL`: Owncloud application email. Default: **user@example.com**
+ - `OWNCLOUD_WEB_SERVER_HOST`: Owncloud Host Server.
  - `MARIADB_PASSWORD`: Root password for the MariaDB.
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
  - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
@@ -200,7 +202,7 @@ To backup your application data follow these steps:
 * For docker-compose: `$ docker-compose stop owncloud`
 * For manual execution: `$ docker stop owncloud`
 
-2. Copy the ownCloud data folder in the host:
+2. Copy the Owncloud data folder in the host:
 
 ```
 $ docker cp /your/local/path/bitnami:/bitnami/owncloud
@@ -208,7 +210,7 @@ $ docker cp /your/local/path/bitnami:/bitnami/owncloud
 
 # Restoring a backup
 
-To restore your application using backed up data simply mount the folder with ownCloud data in the container. See [persisting your application](#persisting-your-application) section for more info.
+To restore your application using backed up data simply mount the folder with Owncloud data in the container. See [persisting your application](#persisting-your-application) section for more info.
 
 # Contributing
 
@@ -231,7 +233,7 @@ information)
 
 # License
 
-Copyright (c) 2016 Bitnami
+Copyright 2016 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
