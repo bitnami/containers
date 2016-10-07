@@ -1,20 +1,19 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r8
+FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=owncloud \
-    BITNAMI_IMAGE_VERSION=9.1.0-r0 \
+    BITNAMI_IMAGE_VERSION=9.1.1-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
-RUN bitnami-pkg unpack apache-2.4.20-0 --checksum ec415b0938e6df70327055c5be50f80b1307b785fa5bbd04c94a4077519e5dba
-RUN bitnami-pkg install mysql-client-10.1.13-1 --checksum e16c0ace5cb779b486e52af83a56367f26af16a25b4ab92d8f4293f1bf307107
-RUN bitnami-pkg install libphp-5.6.21-0 --checksum 8c1f994108eb17c69b00ac38617997b8ffad7a145a83848f38361b9571aeb73e
-RUN bitnami-pkg unpack php-5.6.22-0 --checksum 2439cf0adfc7cc21f15a6136059883e749958af83a082108e63a80ff3c5290c0
+RUN bitnami-pkg unpack php-5.6.26-1 --checksum b7a72ae78f9b19352bd400dfe027465c88a8643c0e5d9753f8d12f4ebae542a2
+RUN bitnami-pkg unpack apache-2.4.23-7 --checksum bcbe93875f4017ed762caf73774a35b449e22c441e6b3f619f386294ba0a5958
+RUN bitnami-pkg install mysql-client-10.1.13-4 --checksum 14b45c91dd78b37f0f2366712cbe9bfdf2cb674769435611955191a65dbf4976
+RUN bitnami-pkg install libphp-5.6.26-1 --checksum 327d070f57727f2ed4f0246d0e3f61c5a94f6366d21a7e7e4572fe6c9c8e8c2d
 
 # Install owncloud
-RUN bitnami-pkg unpack owncloud-9.1.0-0 --checksum 4326501b26b8f438fb9486ac2dd32490945df5367813329e8af5de7239e9f3fe
-
+RUN bitnami-pkg unpack owncloud-9.1.1-0 --checksum abf26188608e3dae5b809130ae4ccec66c6c804a4c67ad131f652de156bda1e1
 
 COPY rootfs /
 
