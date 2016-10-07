@@ -1,7 +1,6 @@
-[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/prestashop)](https://hub.docker.com/r/bitnami/prestashop/)
 # What is PrestaShop?
 
-> PrestaShop is a popular open source ecommerce solution. Professional tools are easily accessible to increase online sales including instant guest checkout, abandoned cart reminders and automated Email marketing.
+PrestaShop is a popular open source ecommerce solution. Professional tools are easily accessible to increase online sales including instant guest checkout, abandoned cart reminders and automated Email marketing.
 
 http://www.prestashop.com
 
@@ -67,13 +66,13 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker run -d -p 80:80 --name prestashop --net=prestashop_network bitnami/prestashop
   ```
 
-Then you can access the PrestaStop storefront at http://your-ip/. To access the administration area, logon to http://your-ip/administration
+Then you can access your application at http://your-ip/
 
-  *Note:* If you want to access your application from a public IP or hostname you need to configure PrestaShop for it. You can handle it adjusting the configuration of the instance by setting the environment variable "PRESTASHOP_HOST" to your public IP or hostname. In case you already started your containers, you can reconfigure your prestashop host via executing the next commmand: `docker-compose exec application nami execute prestashop configureHost new.host.name.com`
+  *Note:* If you want to access your application from a public IP or hostname you need to configure PrestaShop for it. You can handle it adjusting the configuration of the instance by setting the environment variable "PRESTASHOP_HOST" to your public IP or hostname.
 
 ## Persisting your application
 
-If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data` and `prestashop_data` and `apache_data` volumes. 
+If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data` and `prestashop_data` and `apache_data` volumes.
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
@@ -229,7 +228,7 @@ information)
 
 # License
 
-Copyright (c) 2016 Bitnami
+Copyright 2016 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
