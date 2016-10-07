@@ -28,8 +28,8 @@ services:
     depends_on:
       - mariadb
     ports:
-      - '80:80'
-      - '443:443'
+      - '80:8080'
+      - '443:8443'
     volumes:
       - jasperserver_data:/bitnami/jasperserver
 
@@ -176,7 +176,7 @@ This would be an example of SMTP configuration using a GMail account:
   application:
     image: bitnami/jasperserver:latest
     ports:
-      - 80:80
+      - 80:8080
     environment:
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
@@ -189,7 +189,7 @@ This would be an example of SMTP configuration using a GMail account:
  * For manual execution:
 
 ```
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:80 --name jasperserver -v /your/local/path/bitnami/jasperserver:/bitnami/jasperserver --net=jasperserver_network bitnami/jasperserver
+ $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:8080 --name jasperserver -v /your/local/path/bitnami/jasperserver:/bitnami/jasperserver --net=jasperserver_network bitnami/jasperserver
 ```
 
 # Backing up your application
