@@ -39,8 +39,10 @@ volumes:
   jasperserver_data:
     driver: local
 ```
+Then you can access your application at http://your-ip/. Enter bitnami default username and password: 
+`user/ bitnami` 
 
-### Run the application manually
+## Run the application manually
 
 If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
 
@@ -56,7 +58,14 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker run -d -p 80:8080 --name jasperserver --net=jasperserver_network bitnami/jasperserver
   ```
 
-Then you can access your application at http://your-ip/
+Then you can access your application at http://your-ip/. Enter bitnami default username and password: 
+`user/ bitnami` 
+ 
+>**Note!** If you are using Docker for Windows (regardless of running the application using Docker compose or manually) you must check the Docker virtual machine IP executing this command: 
+
+`docker-machine ip`
+
+This IP address allowing you to access to your application.
 
 ## Persisting your application
 
