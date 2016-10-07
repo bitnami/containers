@@ -15,6 +15,8 @@ services:
       - 'php_data:/bitnami/php'
     depends_on:
       - mariadb
+    environment:
+      - OWNCLOUD_HOST=localhost
 volumes:
   mariadb_data:
     driver: local
