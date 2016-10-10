@@ -1,3 +1,5 @@
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/prestashop)](https://hub.docker.com/r/bitnami/prestashop/)
+
 # What is PrestaShop?
 
 PrestaShop is a popular open source ecommerce solution. Professional tools are easily accessible to increase online sales including instant guest checkout, abandoned cart reminders and automated Email marketing.
