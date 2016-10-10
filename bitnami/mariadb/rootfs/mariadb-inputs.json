@@ -3,6 +3,7 @@
   "username": "{{$global.env.MARIADB_USER}}",
   "password": "{{$global.env.MARIADB_PASSWORD}}",
   "database": "{{$global.env.MARIADB_DATABASE}}",
+  "port": "{{$global.env.MARIADB_PORT}}",
   "replicationMode": "{{$global.env.MARIADB_REPLICATION_MODE}}",
   "replicationUser": "{{$global.env.MARIADB_REPLICATION_USER}}",
   "replicationPassword": "{{$global.env.MARIADB_REPLICATION_PASSWORD}}",
