@@ -61,7 +61,7 @@ If you want to run the application manually instead of using docker-compose, the
 Then you can access your application at http://your-ip/. Enter bitnami default username and password: 
 `user/ bitnami` 
  
->**Note!** If you are using Docker for Windows (regardless of running the application using Docker compose or manually) you must check the Docker virtual machine IP executing this command: 
+>**Note!** If you are using **Docker for Windows** (regardless of running the application using Docker compose or manually) you must check the Docker virtual machine IP executing this command: 
 
 `docker-machine ip`
 
