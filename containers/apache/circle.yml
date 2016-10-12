@@ -4,7 +4,7 @@ machine:
   environment:
     IMAGE_NAME: apache
     DOCKER_PROJECT: bitnami
-    GCLOUD_PROJECT: bitnami-images
+    GCLOUD_PROJECT: bitnami-containers
 
 dependencies:
   override:
