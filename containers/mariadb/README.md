@@ -1,4 +1,4 @@
-[![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-mariadb)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-mariadb/)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-mariadb/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-mariadb/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/mariadb)](https://hub.docker.com/r/bitnami/mariadb/)
 
 # What is MariaDB?
