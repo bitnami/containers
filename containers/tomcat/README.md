@@ -1,4 +1,4 @@
-[![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-tomcat)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-tomcat/)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-tomcat/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-tomcat/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/tomcat)](https://hub.docker.com/r/bitnami/tomcat/)
 
 # What is Tomcat?
