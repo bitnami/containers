@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-opencart/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-opencart/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/opencart)](https://hub.docker.com/r/bitnami/opencart/)
 # What is OpenCart?
 
