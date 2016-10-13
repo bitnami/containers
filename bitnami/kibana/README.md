@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-kibana/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-kibana/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/kibana)](https://hub.docker.com/r/bitnami/kibana/)
 # What is Kibana?
 
