@@ -1,5 +1,5 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-php-fpm/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-php-fpm/tree/master)
 [![Build
-Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-php-fpm)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-php-fpm/)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/php-fpm)](https://hub.docker.com/r/bitnami/php-fpm/)
 
 
