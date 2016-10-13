@@ -1,4 +1,5 @@
-[![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-mysql)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-mysql/)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-mysql/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-mysql/tree/master)
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/mysql)](https://hub.docker.com/r/bitnami/mysql/)
 
 # What is MySQL?
 
