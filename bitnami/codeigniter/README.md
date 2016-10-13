@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-codeigniter/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-codeigniter/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/codeigniter)](https://hub.docker.com/r/bitnami/codeigniter/)
 
 # Codeigniter framework Application Development using Bitnami Docker Images
