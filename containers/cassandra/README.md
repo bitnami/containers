@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-cassandra/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-cassandra/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/cassandra)](https://hub.docker.com/r/bitnami/cassandra/)
 # What is Cassandra?
 
