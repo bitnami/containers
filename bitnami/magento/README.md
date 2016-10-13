@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-magento/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-magento/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/magento)](https://hub.docker.com/r/bitnami/magento/)
 
 # What is Magento?
