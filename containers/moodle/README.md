@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-moodle/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-moodle/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/moodle)](https://hub.docker.com/r/bitnami/moodle/)
 # What is Moodle?
 
