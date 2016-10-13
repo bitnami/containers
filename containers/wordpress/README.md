@@ -1,4 +1,4 @@
-[![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-wordpress)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-wordpress/)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-wordpress/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-wordpress/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/wordpress)](https://hub.docker.com/r/bitnami/wordpress/)
 
 # What is WordPress?
