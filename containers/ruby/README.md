@@ -1,4 +1,4 @@
-[![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-ruby)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-ruby/)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-ruby/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-ruby/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/ruby)](https://hub.docker.com/r/bitnami/ruby/)
 
 # What is Ruby?
