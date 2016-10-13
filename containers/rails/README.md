@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-rails/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-rails/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/rails)](https://hub.docker.com/r/bitnami/rails/)
 # Rails Application Development using Bitnami Docker Images
 
