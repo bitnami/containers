@@ -6,8 +6,6 @@ ENV BITNAMI_IMAGE_VERSION=5.7.14-r0 \
     BITNAMI_APP_NAME=mysql \
     BITNAMI_APP_USER=mysql
 
-COPY pkg-cache/ /tmp/bitnami/pkg/cache/
-
 RUN bitnami-pkg unpack mysql-5.7.14-0 --checksum 9bf34ea35852b0459c57d1a37cead66c9417e02a3eae8c3f77f70b800592d825
 ENV PATH=/opt/bitnami/mysql/sbin:/opt/bitnami/mysql/bin:$PATH
 
