@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-parse/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-parse/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/parse)](https://hub.docker.com/r/bitnami/parse/)
 # What is Parse?
 
