@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-ghost/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-ghost/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/ghost)](https://hub.docker.com/r/bitnami/ghost/)
 # What is Ghost?
 
