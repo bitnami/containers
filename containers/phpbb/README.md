@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-phpbb/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-phpbb/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/phpbb)](https://hub.docker.com/r/bitnami/phpbb/)
 # What is phpBB?
 
