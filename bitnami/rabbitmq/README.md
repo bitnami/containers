@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-rabbitmq/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-rabbitmq/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/rabbitmq)](https://hub.docker.com/r/bitnami/rabbitmq/)
 
 # What is RabbitMQ?
