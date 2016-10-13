@@ -1,4 +1,4 @@
-[![BuildStatus](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-redis)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-redis/)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-redis/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-redis/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/redis)](https://hub.docker.com/r/bitnami/redis/)
 
 # What is Redis?
