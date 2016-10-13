@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-odoo/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-odoo/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/odoo)](https://hub.docker.com/r/bitnami/odoo/)
 # What is Odoo?
 
