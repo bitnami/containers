@@ -1,4 +1,4 @@
-[![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-memcached)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-memcached/)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-memcached/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-memcached/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/memcached)](https://hub.docker.com/r/bitnami/memcached/)
 
 # What is Memcached?
