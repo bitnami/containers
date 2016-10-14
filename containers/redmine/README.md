@@ -192,7 +192,7 @@ To configure Redmine to send email using SMTP you can set the following environm
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose: 
+ * docker-compose:
 
 ```
   application:
@@ -206,7 +206,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PASSWORD=your_password
 ```
 
- * For manual execution: 
+ * For manual execution:
 
 ```
  $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --network=redmine_network bitnami/redmine$ docker rm -v redmine
