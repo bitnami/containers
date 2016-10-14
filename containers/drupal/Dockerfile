@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=drupal \
-    BITNAMI_IMAGE_VERSION=8.1.10-r0 \
+    BITNAMI_IMAGE_VERSION=8.2.1-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/drush:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
@@ -13,7 +13,7 @@ RUN bitnami-pkg install libphp-5.6.26-1 --checksum 327d070f57727f2ed4f0246d0e3f6
 RUN bitnami-pkg install mysql-client-10.1.13-4 --checksum 14b45c91dd78b37f0f2366712cbe9bfdf2cb674769435611955191a65dbf4976
 
 # Install drupal
-RUN bitnami-pkg unpack drupal-8.1.10-0 --checksum c6bb4729d078998e7358bf098036a4baa415c777b34e1e08cca4ccdcac6edb9a
+RUN bitnami-pkg unpack drupal-8.2.1-0 --checksum b495de65e67da7e27240c7b04c271be3ed83bccac605593b51d30ef843aed335
 
 COPY rootfs /
 
