@@ -27,7 +27,7 @@ deployment:
         docker push $DOCKER_PROJECT/$IMAGE_NAME:_
       fi
   release:
-    tag: /^[0-9]+(\.[0-9]+)*([^\n])*/
+    tag: /^[0-9.]+/
     commands:
     - >
       if [ -n $DOCKER_PASS ]; then
