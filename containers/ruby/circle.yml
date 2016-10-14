@@ -10,7 +10,7 @@ dependencies:
   override:
   - docker info
   - gcloud version
-  - docker pull $DOCKER_PROJECT/$IMAGE_NAME:cache-reload || true
+  - docker pull $DOCKER_PROJECT/$IMAGE_NAME:_ || true
 
 test:
   override:
@@ -23,8 +23,8 @@ deployment:
     - >
       if [ -n $DOCKER_PASS ]; then
         docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-        docker build --rm=false -t $DOCKER_PROJECT/$IMAGE_NAME:cache-reload .
-        docker push $DOCKER_PROJECT/$IMAGE_NAME:cache-reload
+        docker build --rm=false -t $DOCKER_PROJECT/$IMAGE_NAME:_ .
+        docker push $DOCKER_PROJECT/$IMAGE_NAME:_
       fi
   release:
     tag: /^[0-9]+(\.[0-9]+)*([^\n])*/
