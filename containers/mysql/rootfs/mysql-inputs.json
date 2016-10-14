@@ -3,6 +3,7 @@
   "username": "{{$global.env.MYSQL_USER}}",
   "password": "{{$global.env.MYSQL_PASSWORD}}",
   "database": "{{$global.env.MYSQL_DATABASE}}",
+  "port": "{{$global.env.MYSQL_PORT}}",
   "replicationMode": "{{$global.env.MYSQL_REPLICATION_MODE}}",
   "replicationUser": "{{$global.env.MYSQL_REPLICATION_USER}}",
   "replicationPassword": "{{$global.env.MYSQL_REPLICATION_PASSWORD}}",
