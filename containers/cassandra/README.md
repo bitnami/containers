@@ -228,7 +228,7 @@ services:
     environment:
       - CASSANDRA_CLUSTER_NAME=cassandra-cluster
       - CASSANDRA_SEEDS=cassandra-node1,cassandra-node2
- 
+
   cassandra-node2:
     image: bitnami/cassandra:latest
     environment:
