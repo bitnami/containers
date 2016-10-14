@@ -41,8 +41,9 @@ deployment:
       if [ -n $GCLOUD_SERVICE_KEY ]; then
         echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
         gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-        docker tag $DOCKER_PROJECT/$IMAGE_NAME:$CIRCLE_TAG gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:$CIRCLE_TAG
-        docker tag $DOCKER_PROJECT/$IMAGE_NAME:$CIRCLE_TAG gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:latest
+        echo 'ENV BITNAMI_CONTAINER_ORIGIN=GCR' >> Dockerfile
+        docker build --rm=false -t gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:$CIRCLE_TAG .
+        docker tag gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:$CIRCLE_TAG gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:latest
         gcloud docker -- push gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:$CIRCLE_TAG
         gcloud docker -- push gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:latest
       fi
