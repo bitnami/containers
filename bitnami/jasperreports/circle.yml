@@ -21,7 +21,7 @@ deployment:
     branch: master
     commands:
     - >
-      if [ -n $DOCKER_PASS ]; then
+      if [ -n "$DOCKER_PASS" ]; then
         docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
         docker build --rm=false -t $DOCKER_PROJECT/$IMAGE_NAME:_ .
         docker push $DOCKER_PROJECT/$IMAGE_NAME:_
@@ -30,7 +30,7 @@ deployment:
     tag: /^[0-9].*/
     commands:
     - >
-      if [ -n $DOCKER_PASS ]; then
+      if [ -n "$DOCKER_PASS" ]; then
         docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
         docker build --rm=false -t $DOCKER_PROJECT/$IMAGE_NAME:$CIRCLE_TAG .
         docker tag $DOCKER_PROJECT/$IMAGE_NAME:$CIRCLE_TAG $DOCKER_PROJECT/$IMAGE_NAME:latest
@@ -38,7 +38,7 @@ deployment:
         docker push $DOCKER_PROJECT/$IMAGE_NAME:latest
       fi
     - >
-      if [ -n $GCLOUD_SERVICE_KEY ]; then
+      if [ -n "$GCLOUD_SERVICE_KEY" ]; then
         echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
         gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
         echo 'ENV BITNAMI_CONTAINER_ORIGIN=GCR' >> Dockerfile
