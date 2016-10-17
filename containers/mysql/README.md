@@ -128,10 +128,10 @@ Inside `myapp`, use `mysql` as the hostname for the MySQL server.
 
 ## Setting the root password on first run
 
-Passing the `MARIADB_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the root user to the value of `MARIADB_ROOT_PASSWORD`.
+Passing the `MYSQL_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the root user to the value of `MYSQL_ROOT_PASSWORD`.
 
 ```bash
-docker run --name mysql -e MARIADB_ROOT_PASSWORD=password123 bitnami/mysql:latest
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=password123 bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -140,17 +140,17 @@ or using Docker Compose:
 mysql:
   image: bitnami/mysql:latest
   environment:
-    - MARIADB_ROOT_PASSWORD=password123
+    - MYSQL_ROOT_PASSWORD=password123
 ```
 
-**Warning** The `root` user is always created with remote access. It's suggested that the `MARIADB_ROOT_PASSWORD` env variable is always specified to set a password for the `root` user.
+**Warning** The `root` user is always created with remote access. It's suggested that the `MYSQL_ROOT_PASSWORD` env variable is always specified to set a password for the `root` user.
 
 ## Creating a database on first run
 
-By passing the `MARIADB_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the MySQL client.
+By passing the `MYSQL_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the MySQL client.
 
 ```bash
-docker run --name mysql -e MARIADB_DATABASE=my_database bitnami/mysql:latest
+docker run --name mysql -e MYSQL_DATABASE=my_database bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -159,17 +159,17 @@ or using Docker Compose:
 mysql:
   image: bitnami/mysql:latest
   environment:
-    - MARIADB_DATABASE=my_database
+    - MYSQL_DATABASE=my_database
 ```
 
 ## Creating a database user on first run
 
-You can create a restricted database user that only has permissions for the database created with the [`MARIADB_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `MARIADB_USER` environment variable and to set a password for the database user provide the `MARIADB_PASSWORD` variable.
+You can create a restricted database user that only has permissions for the database created with the [`MYSQL_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `MYSQL_USER` environment variable and to set a password for the database user provide the `MYSQL_PASSWORD` variable.
 
 ```bash
 docker run --name mysql \
-  -e MARIADB_USER=my_user -e MARIADB_PASSWORD=my_password \
-  -e MARIADB_DATABASE=my_database \
+  -e MYSQL_USER=my_user -e MYSQL_PASSWORD=my_password \
+  -e MYSQL_DATABASE=my_database \
   bitnami/mysql:latest
 ```
 
@@ -179,24 +179,24 @@ or using Docker Compose:
 mysql:
   image: bitnami/mysql:latest
   environment:
-    - MARIADB_USER=my_user
-    - MARIADB_PASSWORD=my_password
-    - MARIADB_DATABASE=my_database
+    - MYSQL_USER=my_user
+    - MYSQL_PASSWORD=my_password
+    - MYSQL_DATABASE=my_database
 ```
 
-**Note!** The `root` user will still be created with remote access. Please ensure that you have specified a password for the `root` user using the `MARIADB_ROOT_PASSWORD` env variable.
+**Note!** The `root` user will still be created with remote access. Please ensure that you have specified a password for the `root` user using the `MYSQL_ROOT_PASSWORD` env variable.
 
 ## Setting up a replication cluster
 
 A **zero downtime** MySQL master-slave [replication](https://dev.mysql.com/doc/refman/5.0/en/replication-howto.html) cluster can easily be setup with the Bitnami MySQL Docker image using the following environment variables:
 
- - `MARIADB_REPLICATION_MODE`: The replication mode. Possible values `master`/`slave`. No defaults.
- - `MARIADB_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
- - `MARIADB_REPLICATION_PASSWORD`: The replication users password. No defaults.
- - `MARIADB_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
+ - `MYSQL_REPLICATION_MODE`: The replication mode. Possible values `master`/`slave`. No defaults.
+ - `MYSQL_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
+ - `MYSQL_REPLICATION_PASSWORD`: The replication users password. No defaults.
+ - `MYSQL_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
  - `MARIABD_MASTER_PORT`: Server port of the replication master (slave parameter). Defaults to `3306`.
- - `MARIADB_MASTER_USER`: User on replication master with access to `MARIADB_DATABASE` (slave parameter). Defaults to `root`
- - `MARIADB_MASTER_PASSWORD`: Password of user on replication master with access to `MARIADB_DATABASE` (slave parameter). No defaults.
+ - `MYSQL_MASTER_USER`: User on replication master with access to `MYSQL_DATABASE` (slave parameter). Defaults to `root`
+ - `MYSQL_MASTER_PASSWORD`: Password of user on replication master with access to `MYSQL_DATABASE` (slave parameter). No defaults.
 
 In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
 
@@ -206,17 +206,17 @@ The first step is to start the MySQL master.
 
 ```bash
 docker run --name mysql-master \
-  -e MARIADB_ROOT_PASSWORD=root_password \
-  -e MARIADB_REPLICATION_MODE=master \
-  -e MARIADB_REPLICATION_USER=my_repl_user \
-  -e MARIADB_REPLICATION_PASSWORD=my_repl_password \
-  -e MARIADB_USER=my_user \
-  -e MARIADB_PASSWORD=my_password \
-  -e MARIADB_DATABASE=my_database \
+  -e MYSQL_ROOT_PASSWORD=root_password \
+  -e MYSQL_REPLICATION_MODE=master \
+  -e MYSQL_REPLICATION_USER=my_repl_user \
+  -e MYSQL_REPLICATION_PASSWORD=my_repl_password \
+  -e MYSQL_USER=my_user \
+  -e MYSQL_PASSWORD=my_password \
+  -e MYSQL_DATABASE=my_database \
   bitnami/mysql:latest
 ```
 
-In the above command the container is configured as the `master` using the `MARIADB_REPLICATION_MODE` parameter. A replication user is specified using the `MARIADB_REPLICATION_USER` and `MARIADB_REPLICATION_PASSWORD` parameters.
+In the above command the container is configured as the `master` using the `MYSQL_REPLICATION_MODE` parameter. A replication user is specified using the `MYSQL_REPLICATION_USER` and `MYSQL_REPLICATION_PASSWORD` parameters.
 
 ### Step 2: Create the replication slave
 
@@ -224,22 +224,22 @@ Next we start a MySQL slave container.
 
 ```bash
 docker run --name mysql-slave --link mysql-master:master \
-  -e MARIADB_ROOT_PASSWORD=root_password \
-  -e MARIADB_REPLICATION_MODE=slave \
-  -e MARIADB_REPLICATION_USER=my_repl_user \
-  -e MARIADB_REPLICATION_PASSWORD=my_repl_password \
-  -e MARIADB_MASTER_HOST=master \
-  -e MARIADB_MASTER_USER=my_user \
-  -e MARIADB_MASTER_PASSWORD=my_password \
-  -e MARIADB_USER=my_user \
-  -e MARIADB_PASSWORD=my_password \
-  -e MARIADB_DATABASE=my_database \
+  -e MYSQL_ROOT_PASSWORD=root_password \
+  -e MYSQL_REPLICATION_MODE=slave \
+  -e MYSQL_REPLICATION_USER=my_repl_user \
+  -e MYSQL_REPLICATION_PASSWORD=my_repl_password \
+  -e MYSQL_MASTER_HOST=master \
+  -e MYSQL_MASTER_USER=my_user \
+  -e MYSQL_MASTER_PASSWORD=my_password \
+  -e MYSQL_USER=my_user \
+  -e MYSQL_PASSWORD=my_password \
+  -e MYSQL_DATABASE=my_database \
   bitnami/mysql:latest
 ```
 
-In the above command the container is configured as a `slave` using the `MARIADB_REPLICATION_MODE` parameter. The `MARIADB_MASTER_HOST`, `MARIADB_MASTER_USER` and `MARIADB_MASTER_PASSWORD` parameters are used by the slave to connect to the master and take a dump of the existing data in the database identified by `MARIADB_DATABASE`. The replication user credentials are specified using the `MARIADB_REPLICATION_USER` and `MARIADB_REPLICATION_PASSWORD` parameters and should be the same as the one specified on the master.
+In the above command the container is configured as a `slave` using the `MYSQL_REPLICATION_MODE` parameter. The `MYSQL_MASTER_HOST`, `MYSQL_MASTER_USER` and `MYSQL_MASTER_PASSWORD` parameters are used by the slave to connect to the master and take a dump of the existing data in the database identified by `MYSQL_DATABASE`. The replication user credentials are specified using the `MYSQL_REPLICATION_USER` and `MYSQL_REPLICATION_PASSWORD` parameters and should be the same as the one specified on the master.
 
-> **Note**! The cluster only replicates the database specified in the `MARIADB_DATABASE` parameter.
+> **Note**! The cluster only replicates the database specified in the `MYSQL_DATABASE` parameter.
 
 You now have a two node MySQL master/slave replication cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
 
@@ -249,29 +249,29 @@ With Docker Compose the master/slave replication can be setup using:
 master:
   image: bitnami/mysql:latest
   environment:
-    - MARIADB_ROOT_PASSWORD=root_password
-    - MARIADB_REPLICATION_MODE=master
-    - MARIADB_REPLICATION_USER=my_repl_user
-    - MARIADB_REPLICATION_PASSWORD=my_repl_password
-    - MARIADB_USER=my_user
-    - MARIADB_PASSWORD=my_password
-    - MARIADB_DATABASE=my_database
+    - MYSQL_ROOT_PASSWORD=root_password
+    - MYSQL_REPLICATION_MODE=master
+    - MYSQL_REPLICATION_USER=my_repl_user
+    - MYSQL_REPLICATION_PASSWORD=my_repl_password
+    - MYSQL_USER=my_user
+    - MYSQL_PASSWORD=my_password
+    - MYSQL_DATABASE=my_database
 
 slave:
   image: bitnami/mysql:latest
   links:
     - master:master
   environment:
-    - MARIADB_ROOT_PASSWORD=root_password
-    - MARIADB_REPLICATION_MODE=slave
-    - MARIADB_REPLICATION_USER=my_repl_user
-    - MARIADB_REPLICATION_PASSWORD=my_repl_password
-    - MARIADB_MASTER_HOST=master
-    - MARIADB_MASTER_USER=my_user
-    - MARIADB_MASTER_PASSWORD=my_password
-    - MARIADB_USER=my_user
-    - MARIADB_PASSWORD=my_password
-    - MARIADB_DATABASE=my_database
+    - MYSQL_ROOT_PASSWORD=root_password
+    - MYSQL_REPLICATION_MODE=slave
+    - MYSQL_REPLICATION_USER=my_repl_user
+    - MYSQL_REPLICATION_PASSWORD=my_repl_password
+    - MYSQL_MASTER_HOST=master
+    - MYSQL_MASTER_USER=my_user
+    - MYSQL_MASTER_PASSWORD=my_password
+    - MYSQL_USER=my_user
+    - MYSQL_PASSWORD=my_password
+    - MYSQL_DATABASE=my_database
 ```
 
 Scale the number of slaves using:
