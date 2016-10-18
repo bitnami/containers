@@ -126,14 +126,14 @@ This instructs Docker Compose to execute the command specified by `<command>` in
 To create a new project with the latest symfony version and an attached database that is already configured:
 
 ```bash
-$ docker-compose run myapp harpoon execute symfony createProject bitnamiRocks
+$ docker-compose run myapp nami execute symfony createProject bitnamiRocks
 ```
 
 If you wanted to specify a version, then follow this format!
 
 
 ```bash
-$ docker-compose run myapp harpoon execute symfony createProject "bitnamiRocks 2.5.0"
+$ docker-compose run myapp nami execute symfony createProject "bitnamiRocks 2.5.0"
 ```
 
 You get the idea..
