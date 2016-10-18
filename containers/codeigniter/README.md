@@ -126,14 +126,14 @@ This instructs Docker Compose to execute the command specified by `<command>` in
 To create a new project with the latest codeigniter version and an attached database that is already configured:
 
 ```bash
-$ docker-compose run myapp harpoon execute codeigniter createProject bitnamiRocks
+$ docker-compose run myapp nami execute codeigniter createProject bitnamiRocks
 ```
 
 If you wanted to specify a version, then follow this format!
 
 
 ```bash
-$ docker-compose run myapp harpoon execute codeigniter createProject "bitnamiRocks"
+$ docker-compose run myapp nami execute codeigniter createProject "bitnamiRocks"
 ```
 
 You get the idea..
