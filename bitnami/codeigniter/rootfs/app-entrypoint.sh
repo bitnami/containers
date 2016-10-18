@@ -14,13 +14,13 @@ log () {
     echo -e "\033[0;33m$(date "+%H:%M:%S")\033[0;37m ==> $1."
 }
 
-harpoon restart mariadb
+nami restart mariadb
 echo "Starting application ..."
 
 if [ "$1" == "php" -a "$2" == "-S" ] ; then
     if [ ! -d $PROJECT_DIRECTORY ] ; then
       log "Creating example Codeigniter application"
-      harpoon execute codeigniter createProject $CODEIGNITER_PROJECT_NAME
+      nami execute codeigniter createProject $CODEIGNITER_PROJECT_NAME
       log "Codeigniter app created"
     else
       log "App already created"
