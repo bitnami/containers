@@ -11,5 +11,5 @@ _forwardTerm () {
 trap _forwardTerm TERM
 
 /usr/sbin/cron &
-harpoon start --foreground apache &
+nami start --foreground apache &
 wait
