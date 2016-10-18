@@ -9,7 +9,7 @@ https://www.drupal.org/
 
 # Prerequisites
 
-To run this application you need Docker Engine 1.10.0. Docker Compose is recomended with a version 1.6.0 or later.
+To run this application you need Docker Engine 1.10.0. Docker Compose is recommended with a version 1.6.0 or later.
 
 # How to use this image
 
