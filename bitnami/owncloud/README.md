@@ -34,7 +34,7 @@ services:
     volumes:
       - 'owncloud_data:/bitnami/owncloud'
       - 'apache_data:/bitnami/apache'
-      - 'php-data:/bitnami/php'
+      - 'php_data:/bitnami/php'
     depends_on:
       - mariadb
 volumes:
