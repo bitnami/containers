@@ -112,9 +112,9 @@ Bitnami provides up-to-date versions of JasperReports, including security patche
 
 1. Get the updated images:
 
-```
-$ docker pull bitnami/jasperserver:latest
-```
+  ```
+  $ docker pull bitnami/jasperserver:latest
+  ```
 
 2. Stop your container
 
@@ -198,14 +198,14 @@ This would be an example of SMTP configuration using a GMail account:
 To backup your application data follow these steps:
 
 1. Stop the running container:
-* For docker-compose: `$ docker-compose stop jasperserver`
-* For manual execution: `$ docker stop jasperserver`
+  * For docker-compose: `$ docker-compose stop jasperserver`
+  * For manual execution: `$ docker stop jasperserver`
 
 2. Copy the JasperReports data folder in the host:
 
-```
-$ docker cp /your/local/path/bitnami:/bitnami/jasperserver
-```
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/jasperserver
+  ```
 
 # Restoring a backup
 
