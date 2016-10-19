@@ -15,11 +15,11 @@ FROM gcr.io/stacksmith-images/ubuntu-buildpack:14.04-r10
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV STACKSMITH_STACK_ID="zxapqx8" \
+ENV STACKSMITH_STACK_ID="qxorsjk" \
     STACKSMITH_STACK_NAME="Node.js for bitnami/bitnami-docker-express" \
     STACKSMITH_STACK_PRIVATE="1"
 
-RUN bitnami-pkg install node-6.8.1-0 --checksum 75317cb103f6a50aee67e492aa80af443f9919cf1bd33959fcd9e4ddda634221
+RUN bitnami-pkg install node-6.9.0-0 --checksum 1397c7962464101200ac947c111df5f9c472db0ce512db68435c602d07b87e82
 
 ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
     NODE_PATH=/opt/bitnami/node/lib/node_modules
@@ -28,7 +28,7 @@ ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
 
 # ExpressJS template
 ENV BITNAMI_APP_NAME=express
-ENV BITNAMI_IMAGE_VERSION=4.14.0-r5
+ENV BITNAMI_IMAGE_VERSION=4.14.0-r6
 
 RUN npm install -g express-generator@4
 
