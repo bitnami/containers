@@ -7,11 +7,11 @@ ENV BITNAMI_APP_NAME=ghost \
     PATH=/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:$PATH
 
 # Additional modules required
-RUN bitnami-pkg install node-4.5.0-1 --checksum 4ea3d270ea4b44f53d628357a062066438248a49331a0b9e4eb5e6b3671d076f
 RUN bitnami-pkg install mysql-client-10.1.13-4 --checksum 14b45c91dd78b37f0f2366712cbe9bfdf2cb674769435611955191a65dbf4976
+RUN bitnami-pkg install node-4.6.0-0 --checksum 92c3e691acb92cefb619d7ca501e50cf3c5148ba4121aaed3bc21951a386fb4f
 
 # Install ghost
-RUN bitnami-pkg unpack ghost-0.11.0-0 --checksum 7b5a150692d187a34abd303a115588f078aea9b9c5b519b46955d6dba60275a4
+RUN bitnami-pkg unpack ghost-0.11.2-0 --checksum a5d054f0774694a8f2ff697f8d9b9b36ae29f1c4ef3f1f9709db50a3a817126c
 
 COPY rootfs /
 
