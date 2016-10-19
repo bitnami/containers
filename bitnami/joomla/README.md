@@ -136,9 +136,9 @@ Bitnami provides up-to-date versions of MariaDB and Joomla, including security p
 
 1. Get the updated images:
 
-```
-$ docker pull bitnami/joomla:latest
-```
+  ```
+  $ docker pull bitnami/joomla:latest
+  ```
 
 2. Stop your container
 
@@ -229,14 +229,14 @@ To backup your application data follow these steps:
 
 1. Stop the running container:
 
-* For docker-compose: `$ docker-compose stop joomla`
-* For manual execution: `$ docker stop joomla`
+  * For docker-compose: `$ docker-compose stop joomla`
+  * For manual execution: `$ docker stop joomla`
 
 2. Copy the Joomla data folder in the host:
 
-```
-$ docker cp /your/local/path/bitnami:/bitnami/joomla
-```
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/joomla
+  ```
 
 # Restoring a backup
 
