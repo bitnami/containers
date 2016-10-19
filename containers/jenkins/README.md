@@ -43,19 +43,19 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 1. Create a network
 
-```bash
-$ docker network create jenkins-tier
-```
+  ```bash
+  $ docker network create jenkins-tier
+  ```
 
 2. Create volumes for Jenkins persistence and launch the container
 
-```bash
-$ docker volume create --name jenkins_data
-$ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
-  --net jenkins-tier \
-  --volume jenkins_data:/bitnami/jenkins \
-  bitnami/jenkins:latest
-```
+  ```bash
+  $ docker volume create --name jenkins_data
+  $ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
+    --net jenkins-tier \
+    --volume jenkins_data:/bitnami/jenkins \
+    bitnami/jenkins:latest
+  ```
 
 Access your application at http://your-ip/
 
@@ -86,18 +86,18 @@ services:
 
 1. Create a network (if it does not exist)
 
-```bash
-$ docker network create jenkins-tier
-```
+  ```bash
+  $ docker network create jenkins-tier
+  ```
 
 2. Create the Jenkins the container with host volumes
 
-```bash
-$ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
-  --net jenkins-tier \
-  --volume /path/to/jenkins-persistence:/bitnami/jenkins \
-  bitnami/jenkins:latest
-```
+  ```bash
+  $ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
+    --net jenkins-tier \
+    --volume /path/to/jenkins-persistence:/bitnami/jenkins \
+    bitnami/jenkins:latest
+  ```
 
 # Upgrading Jenkins
 
@@ -115,44 +115,44 @@ $ docker pull bitnami/jenkins:latest
 
 1. Stop the running Jenkins container
 
-```bash
-$ docker-compose stop jenkins
-```
+  ```bash
+  $ docker-compose stop jenkins
+  ```
 
 2. Remove the stopped container
 
-```bash
-$ docker-compose rm jenkins
-```
+  ```bash
+  $ docker-compose rm jenkins
+  ```
 
 3. Launch the updated Jenkins image
 
-```bash
-$ docker-compose start jenkins
-```
+  ```bash
+  $ docker-compose start jenkins
+  ```
 
 ## Using Docker command line
 
 1. Stop the running Jenkins container
 
-```bash
-$ docker stop jenkins
-```
+  ```bash
+  $ docker stop jenkins
+  ```
 
 2. Remove the stopped container
 
-```bash
-$ docker rm jenkins
-```
+  ```bash
+  $ docker rm jenkins
+  ```
 
 3. Launch the updated Jenkins image
 
-```bash
-$ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
-  --net jenkins-tier \
-  --volume jenkins_data:/bitnami/jenkins \
-  bitnami/jenkins:latest
-```
+  ```bash
+  $ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
+    --net jenkins-tier \
+    --volume jenkins_data:/bitnami/jenkins \
+   bitnami/jenkins:latest
+  ```
 
 > **NOTE**:
 >
@@ -206,41 +206,41 @@ To backup your application data follow these steps:
 
 1. Stop the Jenkins container:
 
-```bash
-$ docker-compose stop jenkins
-```
+  ```bash
+  $ docker-compose stop jenkins
+  ```
 
 2. Copy the Jenkins data
 
-```bash
-$ docker cp $(docker-compose ps -q jenkins):/bitnami/jenkins/ /path/to/backups/jenkins/latest/
-```
+  ```bash
+  $ docker cp $(docker-compose ps -q jenkins):/bitnami/jenkins/ /path/to/backups/jenkins/latest/
+  ```
 
 3. Start the Jenkins container
 
-```bash
-$ docker-compose start jenkins
-```
+  ```bash
+  $ docker-compose start jenkins
+  ```
 
 ## Backing up using the Docker command line
 
 1. Stop the Jenkins container:
 
-```bash
-$ docker stop jenkins
-```
+  ```bash
+  $ docker stop jenkins
+  ```
 
 2. Copy the Jenkins data
 
-```bash
-$ docker cp jenkins:/bitnami/jenkins/ /path/to/backups/jenkins/latest/
-```
+  ```bash
+  $ docker cp jenkins:/bitnami/jenkins/ /path/to/backups/jenkins/latest/
+  ```
 
 3. Start the Jenkins container
 
-```bash
-$ docker start jenkins
-```
+  ```bash
+  $ docker start jenkins
+  ```
 
 # Restoring a backup
 
