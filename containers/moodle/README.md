@@ -134,9 +134,9 @@ Bitnami provides up-to-date versions of MariaDB and Moodle, including security p
 
 1. Get the updated images:
 
-```
-$ docker pull bitnami/moodle:latest
-```
+  ```
+  $ docker pull bitnami/moodle:latest
+  ```
 
 2. Stop your container
 
@@ -230,14 +230,14 @@ To backup your application data follow these steps:
 
 1. Stop the running container:
 
-* For docker-compose: `$ docker-compose stop moodle`
-* For manual execution: `$ docker stop moodle`
+  * For docker-compose: `$ docker-compose stop moodle`
+  * For manual execution: `$ docker stop moodle`
 
 2. Copy the Moodle data folder in the host:
 
-```
-$ docker cp /your/local/path/bitnami:/bitnami/moodle
-```
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/moodle
+  ```
 
 # Restoring a backup
 
