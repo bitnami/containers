@@ -134,9 +134,9 @@ Bitnami provides up-to-date versions of MariaDB and Drupal, including security p
 
 1. Get the updated images:
 
-```
-$ docker pull bitnami/drupal:latest
-```
+  ```
+  $ docker pull bitnami/drupal:latest
+  ```
 
 2. Stop your container
 
@@ -193,14 +193,14 @@ To backup your application data follow these steps:
 
 1. Stop the running container:
 
-* For docker-compose: `$ docker-compose stop drupal`
-* For manual execution: `$ docker stop drupal`
+  * For docker-compose: `$ docker-compose stop drupal`
+  * For manual execution: `$ docker stop drupal`
 
 2. Copy the Drupal data folder in the host:
 
-```
-$ docker cp /your/local/path/bitnami:/bitnami/drupal
-```
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/drupal
+  ```
 
 # Restoring a backup
 
