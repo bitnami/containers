@@ -1,6 +1,30 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-rails/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-rails/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/rails)](https://hub.docker.com/r/bitnami/rails/)
-# Rails Application Development using Bitnami Docker Images
+# Rails Development with Bitnami Development Containers
+
+## TL;DR;
+
+**Step 1. Download the `docker-compose.yml` spec**
+
+```bash
+$ curl -L "https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master/docker-compose.yml" > docker-compose.yml
+```
+
+**Step 2. Deploy the service containers**
+
+```bash
+$ docker-compose up
+```
+
+**Step 3. Start hacking!**
+
+```bash
+$ open http://{{ip-address-of-docker-host}}:3000
+```
+
+> *Linux users should replace `open` with `xdg-open`*.
+
+## Introduction
 
 We increasingly see developers adopting two strategies for development. Using a so called “micro services” architecture and using containers for development. At Bitnami, we have developed tools and assets that dramatically lowers the overhead for developing with this approach.
 
@@ -26,7 +50,7 @@ Docker development environments are more likely to be reproducible than VMs beca
 
 Docker also has a well known and standard API so tools and cloud services are readily available for docker containers.
 
-# The Bitnami Approach
+## The Bitnami Approach
 
 When we designed and built our development containers, we kept the following guiding principles in mind:
 
@@ -34,7 +58,7 @@ When we designed and built our development containers, we kept the following gui
 
 2. Production deployment is a late bound decision. Containers are great for development. Sometimes they are great for production, sometimes they are not. If you choose to get started with Bitnami containers for development, it is an easy matter to decide later between monolithic and services architectures, between VMs and Containers, between Cloud and bare metal deployment. This is because Bitnami builds containers specifically with flexibility of production deployment in mind. We ensure that a service running in an immutable and well tested container will behave precisely the same as the same service running in a VM or bare metal.
 
-# Assumptions
+## Assumptions
 
 First, we assume that you have the following components properly setup:
 
