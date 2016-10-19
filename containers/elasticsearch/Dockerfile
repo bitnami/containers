@@ -10,7 +10,7 @@ ENV BITNAMI_APP_NAME=elasticsearch \
 RUN bitnami-pkg install java-1.8.0_101-0 --checksum 66b64f987634e1348141e0feac5581b14e63064ed7abbaf7ba5646e1908219f9
 
 # Install elasticsearch
-RUN bitnami-pkg unpack elasticsearch-2.4.0-0 --checksum 5db186f161976202dc655e1514f1c4c1565b234a0ebad91776495380732d0266
+RUN bitnami-pkg unpack elasticsearch-2.4.1-0 --checksum 5341f48077ba251362f9f8d99467d75922d6272312ab06986a3a46191bc12bd2
 
 COPY rootfs /
 
