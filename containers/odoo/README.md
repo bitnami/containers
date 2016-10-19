@@ -126,9 +126,9 @@ Bitnami provides up-to-date versions of PostgreSQL and Odoo, including security 
 
 1. Get the updated images:
 
-```
-$ docker pull bitnami/odoo:latest
-```
+  ```
+  $ docker pull bitnami/odoo:latest
+  ```
 
 2. Stop your container
 
@@ -215,14 +215,14 @@ To backup your application data follow these steps:
 
 1. Stop the running container:
 
-* For docker-compose: `$ docker-compose stop odoo`
-* For manual execution: `$ docker stop odoo`
+  * For docker-compose: `$ docker-compose stop odoo`
+  * For manual execution: `$ docker stop odoo`
 
 2. Copy the Odoo data folder in the host:
 
-```
-$ docker cp /your/local/path/bitnami:/bitnami/odoo
-```
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/odoo
+  ```
 
 # Restoring a backup
 
