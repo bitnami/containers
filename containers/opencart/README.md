@@ -218,6 +218,7 @@ This would be an example of SMTP configuration using a GMail account:
 
 ```
  $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:80 --name opencart -v /your/local/path/bitnami/opencart:/bitnami/opencart --net=opencart_network bitnami/opencart
+```
 
 # Backing up your application
 
@@ -225,14 +226,14 @@ To backup your application data follow these steps:
 
 1. Stop the running container:
 
-* For docker-compose: `$ docker-compose stop opencart`
-* For manual execution: `$ docker stop opencart`
+  * For docker-compose: `$ docker-compose stop opencart`
+  * For manual execution: `$ docker stop opencart`
 
 2. Copy the OpenCart data folder in the host:
 
-```
-$ docker cp /your/local/path/bitnami:/bitnami/opencart
-```
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/opencart
+  ```
 
 # Restoring a backup
 
