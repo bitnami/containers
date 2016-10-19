@@ -138,9 +138,9 @@ Bitnami provides up-to-date versions of MariaDB and TestLink, including security
 
 1. Get the updated images:
 
-```
-$ docker pull bitnami/testlink:latest
-```
+  ```
+  $ docker pull bitnami/testlink:latest
+  ```
 
 2. Stop your container
 
@@ -196,14 +196,14 @@ To backup your application data follow these steps:
 
 1. Stop the running container:
 
-* For docker-compose: `$ docker-compose stop testlink`
-* For manual execution: `$ docker stop testlink`
+  * For docker-compose: `$ docker-compose stop testlink`
+  * For manual execution: `$ docker stop testlink`
 
 2. Copy the TestLink data folder in the host:
 
-```
-$ docker cp /your/local/path/bitnami:/bitnami/testlink
-```
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/testlink
+  ```
 
 # Restoring a backup
 
