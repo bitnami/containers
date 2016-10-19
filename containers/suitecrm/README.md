@@ -138,9 +138,9 @@ Bitnami provides up-to-date versions of MariaDB and SuiteCRM, including security
 
 1. Get the updated images:
 
-```
-$ docker pull bitnami/suitecrm:latest
-```
+  ```
+  $ docker pull bitnami/suitecrm:latest
+  ```
 
 2. Stop your container
 
@@ -235,14 +235,14 @@ To backup your application data follow these steps:
 
 1. Stop the running container:
 
-* For docker-compose: `$ docker-compose stop suitecrm`
-* For manual execution: `$ docker stop suitecrm`
+  * For docker-compose: `$ docker-compose stop suitecrm`
+  * For manual execution: `$ docker stop suitecrm`
 
 2. Copy the SuiteCRM data folder in the host:
 
-```
-$ docker cp /your/local/path/bitnami:/bitnami/suitecrm
-```
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/suitecrm
+  ```
 
 # Restoring a backup
 
