@@ -137,9 +137,9 @@ Bitnami provides up-to-date versions of MariaDB and phpBB, including security pa
 
 1. Get the updated images:
 
-```
-$ docker pull bitnami/phpbb:latest
-```
+  ```
+  $ docker pull bitnami/phpbb:latest
+  ```
 
 2. Stop your container
 
@@ -226,14 +226,14 @@ To backup your application data follow these steps:
 
 1. Stop the running container:
 
-* For docker-compose: `$ docker-compose stop phpbb`
-* For manual execution: `$ docker stop phpbb`
+  * For docker-compose: `$ docker-compose stop phpbb`
+  * For manual execution: `$ docker stop phpbb`
 
 2. Copy the phpBB data folder in the host:
 
-```
-$ docker cp /your/local/path/bitnami:/bitnami/phpbb
-```
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/phpbb
+  ```
 
 # Restoring a backup
 
