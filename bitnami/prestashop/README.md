@@ -132,9 +132,9 @@ Bitnami provides up-to-date versions of MariaDB and PrestaShop, including securi
 
 1. Get the updated images:
 
-```
-$ docker pull bitnami/prestashop:latest
-```
+  ```
+  $ docker pull bitnami/prestashop:latest
+  ```
 
 2. Stop your container
 
@@ -197,14 +197,14 @@ To backup your application data follow these steps:
 
 1. Stop the running container:
 
-* For docker-compose: `$ docker-compose stop prestashop`
-* For manual execution: `$ docker stop prestashop`
+  * For docker-compose: `$ docker-compose stop prestashop`
+  * For manual execution: `$ docker stop prestashop`
 
 2. Copy the PrestaShop data folder in the host:
 
-```
-$ docker cp /your/local/path/bitnami:/bitnami/prestashop
-```
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/prestashop
+  ```
 
 # Restoring a backup
 
