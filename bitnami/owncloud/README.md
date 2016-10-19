@@ -136,9 +136,9 @@ Bitnami provides up-to-date versions of MariaDB and OwnCloud, including security
 
 1. Get the updated images:
 
-```
-$ docker pull bitnami/owncloud:latest
-```
+  ```
+  $ docker pull bitnami/owncloud:latest
+  ```
 
 2. Stop your container
 
@@ -200,14 +200,14 @@ To backup your application data follow these steps:
 
 1. Stop the running container:
 
-* For docker-compose: `$ docker-compose stop owncloud`
-* For manual execution: `$ docker stop owncloud`
+  * For docker-compose: `$ docker-compose stop owncloud`
+  * For manual execution: `$ docker stop owncloud`
 
 2. Copy the Owncloud data folder in the host:
 
-```
-$ docker cp /your/local/path/bitnami:/bitnami/owncloud
-```
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/owncloud
+  ```
 
 # Restoring a backup
 
