@@ -123,9 +123,9 @@ Bitnami provides up-to-date versions of MariaDB and Ghost, including security pa
 
 1. Get the updated images:
 
-```
-$ docker pull bitnami/ghost:latest
-```
+  ```
+  $ docker pull bitnami/ghost:latest
+  ```
 
 2. Stop your container
 
@@ -211,14 +211,14 @@ To backup your application data follow these steps:
 
 1. Stop the running container:
 
-* For docker-compose: `$ docker-compose stop ghost`
-* For manual execution: `$ docker stop ghost`
+  * For docker-compose: `$ docker-compose stop ghost`
+  * For manual execution: `$ docker stop ghost`
 
 2. Copy the Ghost data folder in the host:
 
-```
-$ docker cp /your/local/path/bitnami:/bitnami/ghost
-```
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/ghost
+  ```
 
 # Restoring a backup
 
