@@ -62,32 +62,32 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 1. Create a network
 
-```bash
-$ docker network create wordpress-tier
-```
+  ```bash
+  $ docker network create wordpress-tier
+  ```
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-```bash
-$ docker volume create --name mariadb_data
-$ docker run -d --name mariadb \
-  --net wordpress-tier \
-  --volume mariadb_data:/bitnami/mariadb \
-  bitnami/mariadb:latest
-```
+  ````bash
+  `$ docker volume create --name mariadb_data
+  `$ docker run -d --name mariadb \
+  `  --net wordpress-tier \
+  `  --volume mariadb_data:/bitnami/mariadb \
+  `  bitnami/mariadb:latest
+  ````
 
 3. Create volumes for WordPress persistence and launch the container
 
-```bash
-$ docker volume create --name wordpress_data
-$ docker volume create --name apache_data
-$ docker run -d --name wordpress -p 80:80 -p 443:443 \
-  --net wordpress-tier \
-  --volume wordpress_data:/bitnami/wordpress \
-  --volume apache_data:/bitnami/apache \
-  --volume php_data:/bitnami/php \
-  bitnami/wordpress:latest
-```
+  ```bash
+  $ docker volume create --name wordpress_data
+  $ docker volume create --name apache_data
+  $ docker run -d --name wordpress -p 80:80 -p 443:443 \
+    --net wordpress-tier \
+    --volume wordpress_data:/bitnami/wordpress \
+    --volume apache_data:/bitnami/apache \
+    --volume php_data:/bitnami/php \
+    bitnami/wordpress:latest
+    ```
 
 Access your application at http://your-ip/
 
@@ -125,30 +125,27 @@ services:
 ### Mount host directories as data volumes using the Docker command line
 
 1. Create a network (if it does not exist)
-
-```bash
-$ docker network create wordpress-tier
-```
+  ```bash
+  $ docker network create wordpress-tier
+  ```
 
 2. Create a MariaDB container with host volume
-
-```bash
-$ docker run -d --name mariadb \
-  --net wordpress-tier \
-  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
-  bitnami/mariadb:latest
-```
+  ```bash
+  $ docker run -d --name mariadb \
+    --net wordpress-tier \
+    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+    bitnami/mariadb:latest
+  ```
 
 3. Create the WordPress the container with host volumes
-
-```bash
-$ docker run -d --name wordpress -p 80:80 -p 443:443 \
-  --net wordpress-tier \
-  --volume /path/to/wordpress-persistence:/bitnami/wordpress \
-  --volume /path/to/apache-persistence:/bitnami/apache \
-  --volume /path/to/php-persistence:/bitnami/php \
-  bitnami/wordpress:latest
-```
+  ```bash
+  $ docker run -d --name wordpress -p 80:80 -p 443:443 \
+    --net wordpress-tier \
+    --volume /path/to/wordpress-persistence:/bitnami/wordpress \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/wordpress:latest
+  ```
 
 # Upgrading WordPress
 
@@ -165,47 +162,41 @@ $ docker pull bitnami/wordpress:latest
 ## Using Docker Compose
 
 1. Stop the running WordPress container
-
-```bash
-$ docker-compose stop wordpress
-```
+  ```bash
+  $ docker-compose stop wordpress
+  ```
 
 2. Remove the stopped container
-
-```bash
-$ docker-compose rm wordpress
-```
+  ```bash
+  $ docker-compose rm wordpress
+  ```
 
 3. Launch the updated WordPress image
-
-```bash
-$ docker-compose start wordpress
-```
+  ```bash
+  $ docker-compose start wordpress
+  ```
 
 ## Using Docker command line
 
 1. Stop the running WordPress container
-
-```bash
-$ docker stop wordpress
-```
+  ```bash
+  $ docker stop wordpress
+  ```
 
 2. Remove the stopped container
-
-```bash
-$ docker rm wordpress
-```
+  ```bash
+  $ docker rm wordpress
+  ```
 
 3. Launch the updated WordPress image
-
-```bash
-$ docker run -d --name wordpress -p 80:80 -p 443:443 \
-  --net wordpress-tier \
-  --volume wordpress_data:/bitnami/wordpress \
-  --volume apache_data:/bitnami/apache \
-  --volume php_data:/bitnami/php \
-  bitnami/wordpress:latest
-```
+  ```bash
+  $ docker run -d --name wordpress -p 80:80 -p 443:443 \
+    --net wordpress-tier \
+    --volume wordpress_data:/bitnami/wordpress \
+    --volume apache_data:/bitnami/apache \
+    --volume php_data:/bitnami/php \
+    bitnami/wordpress:latest
+  ```
 
 > **NOTE**:
 >
@@ -317,46 +308,40 @@ To backup your application data follow these steps:
 ## Backing up using Docker Compose
 
 1. Stop the WordPress container:
-
-```bash
-$ docker-compose stop wordpress
-```
+  ```bash
+  $ docker-compose stop wordpress
+  ```
 
 2. Copy the WordPress, PHP and Apache data
-
-```bash
-$ docker cp $(docker-compose ps -q wordpress):/bitnami/wordpress/ /path/to/backups/wordpress/latest/
-$ docker cp $(docker-compose ps -q wordpress):/bitnami/apache/ /path/to/backups/apache/latest/
-$ docker cp $(docker-compose ps -q wordpress):/bitnami/php/ /path/to/backups/php/latest/
-```
+  ```bash
+  $ docker cp $(docker-compose ps -q wordpress):/bitnami/wordpress/ /path/to/backups/wordpress/latest/
+  $ docker cp $(docker-compose ps -q wordpress):/bitnami/apache/ /path/to/backups/apache/latest/
+  $ docker cp $(docker-compose ps -q wordpress):/bitnami/php/ /path/to/backups/php/latest/
+  ```
 
 3. Start the WordPress container
-
-```bash
-$ docker-compose start wordpress
-```
+  ```bash
+  $ docker-compose start wordpress
+  ```
 
 ## Backing up using the Docker command line
 
 1. Stop the WordPress container:
-
-```bash
-$ docker stop wordpress
-```
+  ```bash
+  $ docker stop wordpress
+  ```
 
 2. Copy the WordPress, PHP and Apache data
-
-```bash
-$ docker cp wordpress:/bitnami/wordpress/ /path/to/backups/wordpress/latest/
-$ docker cp wordpress:/bitnami/apache/ /path/to/backups/apache/latest/
-$ docker cp wordpress:/bitnami/php/ /path/to/backups/php/latest/
-```
+  ```bash
+  $ docker cp wordpress:/bitnami/wordpress/ /path/to/backups/wordpress/latest/
+  $ docker cp wordpress:/bitnami/apache/ /path/to/backups/apache/latest/
+  $ docker cp wordpress:/bitnami/php/ /path/to/backups/php/latest/
+  ```
 
 3. Start the WordPress container
-
-```bash
-$ docker start wordpress
-```
+  ```bash
+  $ docker start wordpress
+  ```
 
 # Restoring a backup
 
