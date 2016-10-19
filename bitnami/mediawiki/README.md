@@ -135,9 +135,9 @@ Bitnami provides up-to-date versions of MariaDB and Mediawiki, including securit
 
 1. Get the updated images:
 
-```
-$ docker pull bitnami/mediawiki:latest
-```
+  ```
+  $ docker pull bitnami/mediawiki:latest
+  ```
 
 2. Stop your container
 
@@ -226,14 +226,14 @@ To backup your application data follow these steps:
 
 1. Stop the running container:
 
-* For docker-compose: `$ docker-compose stop mediawiki`
-* For manual execution: `$ docker stop mediawiki`
+  * For docker-compose: `$ docker-compose stop mediawiki`
+  * For manual execution: `$ docker stop mediawiki`
 
 2. Copy the Mediawiki data folder in the host:
 
-```
-$ docker cp /your/local/path/bitnami:/bitnami/mediawiki
-```
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/mediawiki
+  ```
 
 # Restoring a backup
 
