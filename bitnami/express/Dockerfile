@@ -15,11 +15,11 @@ FROM gcr.io/stacksmith-images/ubuntu-buildpack:14.04-r10
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV STACKSMITH_STACK_ID="q71kpya" \
+ENV STACKSMITH_STACK_ID="zxapqx8" \
     STACKSMITH_STACK_NAME="Node.js for bitnami/bitnami-docker-express" \
     STACKSMITH_STACK_PRIVATE="1"
 
-RUN bitnami-pkg install node-6.8.0-0 --checksum 4f7b240da766618428e8d878a63a2f554d0a6e1777b917ff45b54cf66f9a196d
+RUN bitnami-pkg install node-6.8.1-0 --checksum 75317cb103f6a50aee67e492aa80af443f9919cf1bd33959fcd9e4ddda634221
 
 ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
     NODE_PATH=/opt/bitnami/node/lib/node_modules
