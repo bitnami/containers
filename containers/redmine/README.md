@@ -126,9 +126,9 @@ Bitnami provides up-to-date versions of MariaDB and Redmine, including security 
 
 1. Get the updated images:
 
-```
-$ docker pull bitnami/redmine:latest
-```
+  ```
+  $ docker pull bitnami/redmine:latest
+  ```
 
 2. Stop your container
 
@@ -218,14 +218,14 @@ To backup your application data follow these steps:
 
 1. Stop the running container:
 
-* For docker-compose: `$ docker-compose stop redmine`
-* For manual execution: `$ docker stop redmine`
+  * For docker-compose: `$ docker-compose stop redmine`
+  * For manual execution: `$ docker stop redmine`
 
 2. Copy the Redmine data folder in the host:
 
-```
-$ docker cp /your/local/path/bitnami:/bitnami/redmine
-```
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/redmine
+  ```
 
 # Restoring a backup
 
