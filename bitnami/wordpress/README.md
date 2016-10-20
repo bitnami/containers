@@ -298,7 +298,7 @@ This would be an example of SMTP configuration using a GMail account:
 * For manual execution:
 
 ```
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:80 --name wordpress -v /your/local/path/bitnami/wordpress:/bitnami/wordpress --net=wordpress_network bitnami/wordpress
+ $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:80 --name wordpress -v /your/local/path/bitnami/wordpress:/bitnami/wordpress --net=wordpress-tier bitnami/wordpress
 ```
 
 # Backing up your application
