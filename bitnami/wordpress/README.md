@@ -68,13 +68,13 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-  ````bash
-  `$ docker volume create --name mariadb_data
-  `$ docker run -d --name mariadb \
-  `  --net wordpress-tier \
-  `  --volume mariadb_data:/bitnami/mariadb \
-  `  bitnami/mariadb:latest
-  ````
+  ```bash
+  $ docker volume create --name mariadb_data
+  $ docker run -d --name mariadb \
+    --net wordpress-tier \
+    --volume mariadb_data:/bitnami/mariadb \
+    bitnami/mariadb:latest
+  ```
 
 3. Create volumes for WordPress persistence and launch the container
 
