@@ -38,6 +38,8 @@ COPY rootfs/ /
 # so the entrypoint does not have any permission issues
 RUN chown -R bitnami:bitnami /app_template
 
+RUN mkdir /app && chown bitnami: /app
+
 USER bitnami
 # This will add an specific version of Express that will validate the package.json requirement
 # so we will not download any other version
