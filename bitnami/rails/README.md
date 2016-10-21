@@ -19,7 +19,7 @@ Launch a on-demand Rails development workspace in Eclipse Che by clicking the li
 
 [![Rails Development Workspace](http://beta.codenvy.com/factory/resources/codenvy-contribute.svg)](https://beta.codenvy.com/f/?url=https%3A%2F%2Fgithub.com%2Fbitnami%2Fbitnami-docker-rails%2Ftree%2Fche)
 
-You can find the configuation files used on the previous link in the [Che branch](https://github.com/bitnami/bitnami-docker-rails/tree/che). For more information about Eclipse Che workspaces check the [official documentation](https://eclipse-che.readme.io/docs/introduction).
+You can find the configuration files used on the previous link in the [Che branch](https://github.com/bitnami/bitnami-docker-rails/tree/che). For more information about Eclipse Che workspaces check the [official documentation](https://eclipse-che.readme.io/docs/introduction).
 
 ## Introduction
 
@@ -80,31 +80,31 @@ $ docker-compose exec <service> <command>
 
 Following are a few examples of launching some commonly used Rails development commands inside the `myapp` service container.
 
-1. List all available rake tasks:
+- List all available rake tasks:
 
   ```bash
   $ docker-compose exec myapp bundle exec rake -T
   ```
 
-2. Get information about the Rails environment:
+- Get information about the Rails environment:
 
   ```bash
   $ docker-compose exec myapp bundle exec rake about
   ```
 
-3. Launch the Rails console:
+- Launch the Rails console:
 
   ```bash
   $ docker-compose exec myapp rails console
   ```
 
-4. Generate a scaffold:
+- Generate a scaffold:
 
   ```bash
   $ docker-compose exec myapp rails generate scaffold User name:string email:string
   ```
 
-5. Run database migrations:
+- Run database migrations:
 
   ```bash
   $ docker-compose exec myapp bundle exec rake db:migrate
