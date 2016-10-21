@@ -80,19 +80,19 @@ $ docker-compose exec <service> <command>
 
 Following are a few examples of launching some commonly used Express development commands inside the `myapp` service container.
 
-1. Load the Node.js REPL:
+- Load the Node.js REPL:
 
   ```bash
   $ docker-compose exec myapp node
   ```
 
-2. List installed NPM modules:
+- List installed NPM modules:
 
   ```bash
   $ docker-compose exec myapp npm ls
   ```
 
-3. Install a NPM module:
+- Install a NPM module:
 
   ```bash
   $ docker-compose exec myapp npm install bootstrap --save
