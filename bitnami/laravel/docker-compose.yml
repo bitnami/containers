@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mariadb:
-    image: bitnami/mariadb:10.1.14-r0
+    image: bitnami/mariadb:latest
     environment:
       - MARIADB_USER=my_user
       - MARIADB_DATABASE=my_database
@@ -10,7 +10,7 @@ services:
 
   myapp:
     tty: true
-    image: bitnami/laravel:5.2.31-r4
+    image: bitnami/laravel:latest
     environment:
       - DB_HOST=mariadb
       - DB_USERNAME=my_user
