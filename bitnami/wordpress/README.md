@@ -81,6 +81,7 @@ If you want to run the application manually instead of using `docker-compose`, t
   ```bash
   $ docker volume create --name wordpress_data
   $ docker volume create --name apache_data
+  $ docker volume create --name php_data
   $ docker run -d --name wordpress -p 80:80 -p 443:443 \
     --net wordpress-tier \
     --volume wordpress_data:/bitnami/wordpress \
@@ -93,7 +94,7 @@ Access your application at http://your-ip/
 
 ## Persisting your application
 
-For persistence of the WordPress deployment, the above examples define docker volumes namely `mariadb_data`, `wordpress_data` and `apache_data`. The WordPress application state will persist as long as these volumes are not removed.
+For persistence of the WordPress deployment, the above examples define docker volumes namely `mariadb_data`, `wordpress_data`, `apache_data` and `php_data`. The WordPress application state will persist as long as these volumes are not removed.
 
 If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -103,7 +104,6 @@ The following `docker-compose.yml` template demonstrates the use of host directo
 
 ```yaml
 version: '2'
-
 services:
   mariadb:
     image: bitnami/mariadb:latest
@@ -273,32 +273,37 @@ To configure WordPress to send email using SMTP you can set the following enviro
 - `SMTP_PORT`: Port for outgoing SMTP email.
 - `SMTP_USER`: User of SMTP used for authentication (likely email).
 - `SMTP_PASSWORD`: Password for SMTP.
-- `SMTP_USERNAME`: User name for SMTP emails.
 - `SMTP_PROTOCOL`: Secure connection protocol to use for SMTP [tls, ssl, none].
 
 This would be an example of SMTP configuration using a GMail account:
 
  * docker-compose (application part):
 
-```
-  application:
+```yaml
+  wordpress:
     image: bitnami/wordpress:latest
     ports:
       - 80:80
+      - 443:443
     environment:
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
       - SMTP_PROTOCOL=tls
-    volumes_from:
-      - application_data
+    volumes:
+      - wordpress_data:/bitnami/wordpress
 ```
 
 * For manual execution:
 
 ```
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:80 --name wordpress -v /your/local/path/bitnami/wordpress:/bitnami/wordpress --net=wordpress-tier bitnami/wordpress
+$ docker run -d --name wordpress -p 80:80 -p 443:443 \
+  --net wordpress-tier \
+  --env SMTP_HOST=smtp.gmail.com --env SMTP_PORT=587 \
+  --env SMTP_USER=your_email@gmail.com --env SMTP_PASSWORD=your_password \
+  --volume wordpress_data:/bitnami/wordpress \
+  bitnami/wordpress:latest
 ```
 
 # Backing up your application
