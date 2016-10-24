@@ -1,11 +1,11 @@
 FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=1.10.1-r3 \
+ENV BITNAMI_IMAGE_VERSION=1.10.2-r0 \
     BITNAMI_APP_NAME=nginx \
     BITNAMI_APP_USER=daemon
 
-RUN bitnami-pkg unpack nginx-1.10.1-1 --checksum 2b670035d7ead2c88932ef1a8290afddfd1c149838c4dd629fdd506346c1051b
+RUN bitnami-pkg unpack nginx-1.10.2-0 --checksum 65c0fb94839fc624a078b89424f992d9da46912c59f39a54161484354133ec37
 RUN ln -sf /opt/bitnami/$BITNAMI_APP_NAME/html /app
 
 ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:/opt/bitnami/common/bin:$PATH
