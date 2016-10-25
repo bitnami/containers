@@ -6,6 +6,12 @@
 
 http://parse.com/
 
+# Looking for Parse + Parse Dashboard?
+
+We also provide a Docker Image for Parse Dashboard. Parse Dashboard is a standalone dashboard for managing your Parse apps. You can find it at:
+
+[Bitnami Parse Dashboard](https://github.com/bitnami/bitnami-docker-parse-dashboard)
+
 # Prerequisites
 
 To run this application you need Docker Engine 1.10.0. Docker Compose is recomended with a version 1.6.0 or later.
