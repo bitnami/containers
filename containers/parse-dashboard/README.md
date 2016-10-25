@@ -1,5 +1,5 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-parse-dashboard/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-parse-dashboard/tree/master)
-[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/parse-dashboard)](https://hub.docker.com/r/bitnami/parse-dashboard/)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-parsedashboard/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-parsedashboard/tree/master)
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/parsedashboard)](https://hub.docker.com/r/bitnami/parsedashboard/)
 # What is Parse Dashboard?
 
 > Parse Dashboard is a standalone dashboard for managing your Parse apps. You can use it to manage your Parse Server apps and your apps that are running on Parse.com.
