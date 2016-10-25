@@ -1,4 +1,4 @@
-[![Build Status](http://bitnami-container-builds.bitnamiapp.com/jenkins/buildStatus/icon?job=docker-mariadb)](http://bitnami-container-builds.bitnamiapp.com/jenkins/job/docker-mariadb/)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-mariadb/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-mariadb/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/mariadb)](https://hub.docker.com/r/bitnami/mariadb/)
 
 # What is MariaDB?
@@ -286,7 +286,7 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 ## Configuration file
 
-The image looks for configuration in the `conf/` directory of `/bitnami/mariadb`. As as mentioned in [Persisting your database](#persisting-your-data) you can mount a volume at this location and copy your own configuration file in the `conf/` directory as my-custom.cnf. That file will be included in the main configuration file and will overwrite any configuration you want to modify.
+The image looks for configuration in the `conf/` directory of `/bitnami/mariadb`. As as mentioned in [Persisting your database](#persisting-your-data) you can mount a volume at this location and copy your own configuration file in the `conf/` directory as my_custom.cnf. That file will be included in the main configuration file and will overwrite any configuration you want to modify.
 
 ### Step 1: Run the MariaDB image
 
@@ -469,7 +469,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Host OS and version
 - Docker version (`docker version`)
 - Output of `docker info`
-- Version of this container (`echo $BITNAMI_APP_VERSION` inside the container)
+- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
