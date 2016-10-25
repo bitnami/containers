@@ -6,7 +6,7 @@
 
 http://parse.com/
 
-# Look for Parse + Parse Dashboard?
+# Looking for Parse + Parse Dashboard?
 
 We also provide a Docker Image for Parse Dashboard. Parse Dashboard is a standalone dashboard for managing your Parse apps. You can find it at:
 
@@ -133,9 +133,9 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 
 1. Get the updated images:
 
-```
-$ docker pull bitnami/parse:latest
-```
+  ```
+  $ docker pull bitnami/parse:latest
+  ```
 
 2. Stop your container
 
@@ -193,14 +193,14 @@ To backup your application data follow these steps:
 
 1. Stop the running container:
 
-* For docker-compose: `$ docker-compose stop parse`
-* For manual execution: `$ docker stop parse`
+  * For docker-compose: `$ docker-compose stop parse`
+  * For manual execution: `$ docker stop parse`
 
 2. Copy the Parse data folder in the host:
 
-```
-$ docker cp /your/local/path/bitnami:/bitnami/parse
-```
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/parse
+  ```
 
 # Restoring a backup
 
