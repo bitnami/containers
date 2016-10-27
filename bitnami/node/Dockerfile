@@ -15,11 +15,11 @@ FROM gcr.io/stacksmith-images/ubuntu-buildpack:14.04-r10
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV STACKSMITH_STACK_ID="hhz5xs0" \
+ENV STACKSMITH_STACK_ID="npx76xt" \
     STACKSMITH_STACK_NAME="Node.js for bitnami/bitnami-docker-node" \
     STACKSMITH_STACK_PRIVATE="1"
 
-RUN bitnami-pkg install node-6.9.1-0 --checksum a16ddf7062d09d932b46bf95763d9e3e473f278cebc64161f44fed0e04b6463d
+RUN bitnami-pkg install node-7.0.0-0 --checksum 8049e447c9ac3cbf74b2ea7602e7126b6e5610b2f2c7b0e5f3ad18710eca4108
 
 ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
     NODE_PATH=/opt/bitnami/node/lib/node_modules
@@ -30,7 +30,7 @@ RUN bitnami-pkg install imagemagick-6.7.5-10-3 --checksum 617e85a42c80f58c568f9b
 RUN bitnami-pkg install mysql-libraries-10.1.13-0 --checksum 71ca428b619901123493503f8a99ccfa588e5afddd26e0d503a32cca1bc2a389
 
 ENV BITNAMI_APP_NAME=node \
-    BITNAMI_IMAGE_VERSION=6.9.1-r0
+    BITNAMI_IMAGE_VERSION=7.0.0-r0
 
 EXPOSE 3000
 WORKDIR /app
