@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=jenkins \
-    BITNAMI_IMAGE_VERSION=2.25-r0 \
+    BITNAMI_IMAGE_VERSION=2.26-r0 \
     PATH=/opt/bitnami/tomcat/bin:/opt/bitnami/git/bin:/opt/bitnami/java/bin:$PATH
 
 # Additional modules required
@@ -12,7 +12,7 @@ RUN bitnami-pkg install tomcat-8.5.5-0 --checksum ba4f84698bca14250149482339d266
 RUN bitnami-pkg install git-2.6.1-2 --checksum edc04dc263211f3ffdc953cb96e5e3e76293dbf7a97a075b0a6f04e048b773dd
 
 # Install jenkins
-RUN bitnami-pkg unpack jenkins-2.25-0 --checksum 55b0bf60a4a5eec681311c9509ca784405c2708f92e8427c994704f33e6b0974
+RUN bitnami-pkg unpack jenkins-2.26-1 --checksum f8c47bf7d76873872770ccc0b83aa7aa93b1dd814901dd055495843bb41cff0d
 
 COPY rootfs /
 
