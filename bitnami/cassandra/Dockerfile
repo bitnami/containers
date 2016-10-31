@@ -3,15 +3,15 @@ FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=cassandra \
-    BITNAMI_IMAGE_VERSION=3.9-r0 \
+    BITNAMI_IMAGE_VERSION=3.9-r1 \
     PATH=/opt/bitnami/cassandra/bin:/opt/bitnami/java/bin:/opt/bitnami/python/bin:$PATH
 
 # Additional modules required
 RUN bitnami-pkg install python-2.7.12-1 --checksum 1ab49b32453c509cf6ff3abb9dbe8a411053e3b811753a10c7a77b4bc19606df
-RUN bitnami-pkg install java-1.8.0_101-0 --checksum 66b64f987634e1348141e0feac5581b14e63064ed7abbaf7ba5646e1908219f9
+RUN bitnami-pkg install java-1.8.0_111-0 --checksum a40aa0c9553e13bd8ddcc3d2ba966492b79d4f73d47cb1499c9ec54f441201eb
 
 # Install cassandra
-RUN bitnami-pkg unpack cassandra-3.9-0 --checksum bb0ff4d2e03e06e2141572c0068ce2fbfa6ec10bdbe4308a3a7a571b9cbde87f
+RUN bitnami-pkg unpack cassandra-3.9-1 --checksum b80d0f763ffa48af5652577c3194f2ea0f0fc09fbf7a745ec39b6c7b73fe265d
 
 COPY rootfs /
 
