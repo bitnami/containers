@@ -18,7 +18,7 @@ COPY rootfs /
 
 VOLUME ["/bitnami/$BITNAMI_APP_NAME"]
 
-EXPOSE 808
+EXPOSE 8080
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
