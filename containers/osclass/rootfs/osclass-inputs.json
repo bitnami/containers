@@ -1,0 +1,18 @@
+{
+  "pingEngines": "{{$global.env.OSCLASS_PING_ENGINES}}",
+  "saveStats": "{{$global.env.OSCLASS_SAVE_STATS}}",
+  "username": "{{$global.env.OSCLASS_USERNAME}}",
+  "password": "{{$global.env.OSCLASS_PASSWORD}}",
+  "webTitle": "{{$global.env.OSCLASS_WEB_TITLE}}",
+  "email": "{{$global.env.OSCLASS_EMAIL}}",
+  "host": "{{$global.env.OSCLASS_HOST}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpProtocol": "{{$global.env.SMTP_PROTOCOL}}",
+  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
+  "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT}}"
+}
