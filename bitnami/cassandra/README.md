@@ -91,8 +91,8 @@ different command to run after the image name.
 docker run --rm -it --link cassandra:server bitnami/cassandra cqlsh server
 ```
 
-We started the Cassandra client passing in the `-h` option that allows us to specify the hostname of the
-server, which we set to the hostname we created in the link.
+We started the Cassandra client passing the hostname of the server, which we set to the hostname we
+created in the link.
 
 **Note!**
 You can also run the Cassandra client in the same container the server is running in using the Docker
