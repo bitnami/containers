@@ -1,7 +1,7 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
+FROM gcr.io/stacksmith-images/minideb:jessie-r2
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=7.0.12-r0 \
+ENV BITNAMI_IMAGE_VERSION=7.0.12-r1 \
     BITNAMI_APP_NAME=php-fpm \
     BITNAMI_APP_USER=daemon
 
