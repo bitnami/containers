@@ -15,6 +15,8 @@ function initialize {
 }
 
 # Set default values
+export APACHE_HTTP_PORT=${APACHE_HTTP_PORT:-"80"}
+export APACHE_HTTPS_PORT=${APACHE_HTTPS_PORT:-"443"}
 export PHPBB_FIRST_NAME=${PHPBB_FIRST_NAME:-"User"}
 export PHPBB_LAST_NAME=${PHPBB_LAST_NAME:-"Name"}
 export PHPBB_USERNAME=${PHPBB_USERNAME:-"user"}
