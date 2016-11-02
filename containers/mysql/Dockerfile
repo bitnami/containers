@@ -1,8 +1,8 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
+FROM gcr.io/stacksmith-images/minideb:jessie-r2
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=5.7.16-r1 \
+ENV BITNAMI_IMAGE_VERSION=5.7.16-r2 \
     BITNAMI_APP_NAME=mysql \
     BITNAMI_APP_USER=mysql
 
