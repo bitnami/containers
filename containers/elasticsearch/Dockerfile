@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r2
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=elasticsearch \
-    BITNAMI_IMAGE_VERSION=2.4.0-r1 \
+    BITNAMI_IMAGE_VERSION=2.4.0-r2 \
     PATH=/opt/bitnami/java/bin:/opt/bitnami/elasticsearch/bin:$PATH
 
 # Additional modules required
