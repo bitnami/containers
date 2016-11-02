@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r2
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=parse \
-    BITNAMI_IMAGE_VERSION=2.2.23-r0 \
+    BITNAMI_IMAGE_VERSION=2.2.23-r1 \
     PATH=/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:$PATH
 
 # Additional modules required
