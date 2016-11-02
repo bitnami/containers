@@ -11,7 +11,7 @@
 ##   Connect to the container at DOCKER_IP:3000
 ##     replacing DOCKER_IP for the IP of your active docker host
 
-FROM gcr.io/stacksmith-images/ubuntu-buildpack:14.04-r10
+FROM gcr.io/stacksmith-images/minideb-buildpack:jessie-r2
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -38,7 +38,7 @@ RUN gem install therubyracer
 
 ENV RAILS_ENV=development
 ENV BITNAMI_APP_NAME=rails
-ENV BITNAMI_IMAGE_VERSION=5.0.0.1-r1
+ENV BITNAMI_IMAGE_VERSION=5.0.0.1-r2
 
 USER bitnami
 WORKDIR /app
