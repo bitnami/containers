@@ -79,14 +79,14 @@ If you remove every container and volume all your data will be lost, and the nex
 ### Mount persistent folders in the host using docker-compose
 
 This requires a sightly modification from the template previously shown:
-```
+```yaml
 version: '2'
 
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
       - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
-  application:
+  redmine:
     image: bitnami/redmine:latest
     ports:
       - 80:3000
@@ -194,8 +194,8 @@ This would be an example of SMTP configuration using a GMail account:
 
  * docker-compose:
 
-```
-  application:
+```yaml
+  redmine:
     image: bitnami/redmine:latest
     ports:
       - 80:3000
