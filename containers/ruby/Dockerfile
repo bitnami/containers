@@ -11,7 +11,7 @@
 ##   Connect to the container at DOCKER_IP:3000
 ##     replacing DOCKER_IP for the IP of your active docker host
 
-FROM gcr.io/stacksmith-images/ubuntu-buildpack:14.04-r10
+FROM gcr.io/stacksmith-images/minideb-buildpack:jessie-r2
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -30,7 +30,7 @@ RUN bitnami-pkg install mysql-libraries-10.1.13-0 --checksum 71ca428b61990112349
 RUN bitnami-pkg install postgresql-libraries-9.5.3-0 --checksum d6499811161e9e97acfc3e0132a016bc2edcfd85374c9b5002359429bd8ab698
 
 ENV BITNAMI_APP_NAME=ruby \
-    BITNAMI_IMAGE_VERSION=2.3.1-r3
+    BITNAMI_IMAGE_VERSION=2.3.1-r4
 
 EXPOSE 3000
 WORKDIR /app
