@@ -1,9 +1,9 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
+FROM gcr.io/stacksmith-images/minideb:jessie-r2
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=kibana \
-    BITNAMI_IMAGE_VERSION=4.6.1-r0 \
+    BITNAMI_IMAGE_VERSION=4.6.1-r1 \
     PATH=/opt/bitnami/kibana/bin:$PATH
 
 # Install kibana
