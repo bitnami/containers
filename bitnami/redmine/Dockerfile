@@ -1,9 +1,9 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
+FROM gcr.io/stacksmith-images/minideb:jessie-r2
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=redmine \
-    BITNAMI_IMAGE_VERSION=3.3.1-r0 \
+    BITNAMI_IMAGE_VERSION=3.3.1-r1 \
     PATH=/opt/bitnami/ruby/bin:$PATH
 
 # Additional modules required
