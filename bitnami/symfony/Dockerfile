@@ -5,12 +5,12 @@
 ## RUNNING
 ##   $ docker run -p 8000:8000 bitnami/bitnami-docker-symfony
 
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
+FROM gcr.io/stacksmith-images/minideb:jessie-r2
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=symfony \
-    BITNAMI_IMAGE_VERSION=3.1.3-r1 \
+    BITNAMI_IMAGE_VERSION=3.1.3-r2 \
     PATH=/opt/bitnami/symfony:/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
