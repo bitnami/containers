@@ -1,10 +1,11 @@
 version: '2'
+
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
-  application:
+  drupal:
     image: 'bitnami/drupal:latest'
     ports:
       - '80:80'
@@ -15,6 +16,7 @@ services:
       - 'php_data:/bitnami/php'
     depends_on:
       - mariadb
+
 volumes:
   mariadb_data:
     driver: local

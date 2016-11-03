@@ -29,7 +29,7 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
-  application:
+  drupal:
     image: 'bitnami/drupal:latest'
     ports:
       - '80:80'
@@ -92,7 +92,7 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
-  application:
+  drupal:
     image: 'bitnami/drupal:latest'
     ports:
       - '80:80'
@@ -161,7 +161,7 @@ Bitnami provides up-to-date versions of MariaDB and Drupal, including security p
 
  * For docker-compose add the variable name and value under the application section:
 ```yaml
-application:
+drupal:
   image: bitnami/drupal:latest
   ports:
     - 80:80
