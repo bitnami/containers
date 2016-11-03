@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r2
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=drupal \
-    BITNAMI_IMAGE_VERSION=8.2.1-r2 \
+    BITNAMI_IMAGE_VERSION=8.2.2-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/drush:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
@@ -14,7 +14,7 @@ RUN bitnami-pkg install mysql-client-10.1.18-0 --checksum f2f20e0512e7463996a6ad
 RUN bitnami-pkg install drush-8.0.5-0 --checksum 51ec7d920b7931b8a65e26a7a45fe1b56ca482b566e45799a921587e59596b4b
 
 # Install drupal
-RUN bitnami-pkg unpack drupal-8.2.1-1 --checksum 6e5ba385c3361e9eacbdb49cf0a7dd505673edc5608d849ee7f618ac51b621f2
+RUN bitnami-pkg unpack drupal-8.2.2-0 --checksum 49071a196298b94d0adeb827951f7c4f393fed96d8cd80ffb02900b936add1cb
 
 COPY rootfs /
 
