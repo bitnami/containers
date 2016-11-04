@@ -2,7 +2,7 @@ machine:
   services:
   - docker
   environment:
-    IMAGE_NAME: parsedashboard
+    IMAGE_NAME: parse-dashboard
     DOCKER_PROJECT: bitnami
     GCLOUD_PROJECT: bitnami-containers
 
