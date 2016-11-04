@@ -27,7 +27,7 @@ export PARSE_DASHBOARD_PASSWORD=${PARSE_DASHBOARD_PASSWORD:-"bitnami"}
 
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
-   initialize parsedashboard
+   initialize parse-dashboard
    echo "Starting application ..."
 fi
 
