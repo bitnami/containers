@@ -13,11 +13,11 @@ services:
     depends_on:
       - mongodb
   application:
-    image: 'bitnami/parsedashboard:latest'
+    image: 'bitnami/parse-dashboard:latest'
     ports:
       - '80:4040'
     volumes:
-      - 'parsedashboard_data:/bitnami/parsedashboard'
+      - 'parse_dashboard_data:/bitnami/parse-dashboard'
     depends_on:
       - parse
 volumes:
@@ -25,5 +25,5 @@ volumes:
     driver: local
   parse_data:
     driver: local
-  parsedashboard_data:
+  parse_dashboard_data:
     driver: local
