@@ -3,16 +3,16 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r2
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=jenkins \
-    BITNAMI_IMAGE_VERSION=2.26-r1 \
+    BITNAMI_IMAGE_VERSION=2.28-r0 \
     PATH=/opt/bitnami/tomcat/bin:/opt/bitnami/git/bin:/opt/bitnami/java/bin:$PATH
 
 # Additional modules required
-RUN bitnami-pkg install java-1.8.0_101-0 --checksum 66b64f987634e1348141e0feac5581b14e63064ed7abbaf7ba5646e1908219f9
-RUN bitnami-pkg install tomcat-8.5.5-0 --checksum ba4f84698bca14250149482339d26618c92de0662da9d1b39ee34ceaf71cf670
+RUN bitnami-pkg install java-1.8.0_111-0 --checksum a40aa0c9553e13bd8ddcc3d2ba966492b79d4f73d47cb1499c9ec54f441201eb
+RUN bitnami-pkg install tomcat-8.5.6-1 --checksum 74006991ca72f4097b18c6ca905ac5f4b20cb667d2358f64bb49e0b04c85e413
 RUN bitnami-pkg install git-2.6.1-2 --checksum edc04dc263211f3ffdc953cb96e5e3e76293dbf7a97a075b0a6f04e048b773dd
 
 # Install jenkins
-RUN bitnami-pkg unpack jenkins-2.26-1 --checksum f8c47bf7d76873872770ccc0b83aa7aa93b1dd814901dd055495843bb41cff0d
+RUN bitnami-pkg unpack jenkins-2.28-0 --checksum 46b2316f3d562f63d489883fac5bf6fa81460622c8a1af703939000c93c70b39
 
 COPY rootfs /
 
