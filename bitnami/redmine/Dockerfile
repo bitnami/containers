@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r2
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=redmine \
-    BITNAMI_IMAGE_VERSION=3.3.1-r2 \
+    BITNAMI_IMAGE_VERSION=3.3.1-r3 \
     PATH=/opt/bitnami/ruby/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH
 
 # Additional modules required
@@ -14,7 +14,7 @@ RUN bitnami-pkg install mysql-client-10.1.18-0 --checksum f2f20e0512e7463996a6ad
 RUN bitnami-pkg install git-2.6.1-2 --checksum edc04dc263211f3ffdc953cb96e5e3e76293dbf7a97a075b0a6f04e048b773dd
 
 # Install redmine
-RUN bitnami-pkg unpack redmine-3.3.1-1 --checksum 1ced77e01679040db485bcbadca3e826e7e9284b2156f0be974fafdd887b7744
+RUN bitnami-pkg unpack redmine-3.3.1-2 --checksum c4f2e8c91d0a4ac1e8b2708e2ce3c877821d70fef96f1f005597a1f984ea9dc3
 
 COPY rootfs /
 
