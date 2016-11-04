@@ -16,7 +16,7 @@ function initialize {
 export REDMINE_USERNAME=${REDMINE_USERNAME:-"user"}
 export REDMINE_PASSWORD=${REDMINE_PASSWORD:-"bitnami"}
 export REDMINE_EMAIL=${REDMINE_EMAIL:-"user@example.com"}
-export REDMINE_LANG=${REDMINE_LANG:-"en"}
+export REDMINE_LANGUAGE=${REDMINE_LANGUAGE:-"en"}
 export MARIADB_USER=${MARIADB_USER:-"root"}
 export MARIADB_HOST=${MARIADB_HOST:-"mariadb"}
 export MARIADB_PORT=${MARIADB_PORT:-"3306"}
