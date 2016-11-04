@@ -1,5 +1,5 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-parsedashboard/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-parsedashboard/tree/master)
-[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/parsedashboard)](https://hub.docker.com/r/bitnami/parsedashboard/)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-parse-dashboard/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-parse-dashboard/tree/master)
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/parse-dashboard)](https://hub.docker.com/r/bitnami/parse-dashboard/)
 # What is Parse Dashboard?
 
 > Parse Dashboard is a standalone dashboard for managing your Parse apps. You can use it to manage your Parse Server apps and your apps that are running on Parse.com.
@@ -32,11 +32,11 @@ services:
     depends_on:
       - mongodb
   application:
-    image: 'bitnami/parsedashboard:latest'
+    image: 'bitnami/parse-dashboard:latest'
     ports:
       - '80:4040'
     volumes:
-      - 'parsedashboard_data:/bitnami/parsedashboard'
+      - 'parse_dashboard_data:/bitnami/parse-dashboard'
     depends_on:
       - mongodb
 volumes:
@@ -44,7 +44,7 @@ volumes:
     driver: local
   parse_data:
     driver: local
-  parsedashboard_data:
+  parse_dashboard_data:
     driver: local
 ```
 
@@ -55,13 +55,13 @@ If you want to run the application manually instead of using docker-compose, the
 1. Create a network for the application, Parse Server and the database:
 
   ```
-  $ docker network create parsedashboard_network
+  $ docker network create parse_dashboard_network
   ```
 
 2. Start a MongoDB database in the network generated:
 
   ```
-  $ docker run -d --name mongodb --net=parsedashboard_network bitnami/mongodb
+  $ docker run -d --name mongodb --net=parse_dashboard_network bitnami/mongodb
   ```
 
   *Note:* You need to give the container a name in order to Parse to resolve the host.
@@ -69,19 +69,19 @@ If you want to run the application manually instead of using docker-compose, the
 3. Start a Parse Server container:
 
   ```
-  $ docker run -d -p 1337:1337 --name parse --net=parsedashboard_network bitnami/parse
+  $ docker run -d -p 1337:1337 --name parse --net=parse_dashboard_network bitnami/parse
   ```
 
 4. Run the Parse Dashboard container:
 
   ```
-  $ docker run -d -p 80:4040 --name parsedashboard --net=parsedashboard_network bitnami/parsedashboard
+  $ docker run -d -p 80:4040 --name parse-dashboard --net=parse_dashboard_network bitnami/parse-dashboard
   ```
 
 Then you can access your application at http://your-ip/
 
 ## Persisting your application
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `mongodb_data`, `parse_data` and `parsedashboard_data` data volumes. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `mongodb_data`, `parse_data` and `parse_dashboard_data` data volumes. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
@@ -104,11 +104,11 @@ services:
     volumes:
       - '/path/to/your/local/parse_data:/bitnami/parse'
   application:
-    image: 'bitnami/parsedashboard:latest'
+    image: 'bitnami/parse-dashboard:latest'
     ports:
       - '80:4040'
     volumes:
-      - '/path/to/your/local/parsedashboard_data:/bitnami/parsedashboard'
+      - '/path/to/your/local/parse_dashboard_data:/bitnami/parse-dashboard'
 
 ```
 
@@ -119,13 +119,13 @@ In this case you need to specify the directories to mount on the run command. Th
 1. If you haven't done this before, create a new network for the application, Parse Server and the database:
 
   ```
-  $ docker network create parsedashboard_network
+  $ docker network create parse_dashboard_network
   ```
 
 2. Start a MongoDB database in the previous network:
 
   ```
-  $ docker run -d --name mongodb -v /your/local/path/bitnami/mongodb:/bitnami/mongodb --network=parsedashboard_network bitnami/mongodb
+  $ docker run -d --name mongodb -v /your/local/path/bitnami/mongodb:/bitnami/mongodb --network=parse_dashboard_network bitnami/mongodb
   ```
 
   *Note:* You need to give the container a name in order to Parse to resolve the host.
@@ -133,13 +133,13 @@ In this case you need to specify the directories to mount on the run command. Th
 3. Start a Parse Server container:
 
   ```
-  $ docker run -d -p 1337:1337 --name parse -v /your/local/path/bitnami/parse:/bitnami/parse --network=parsedashboard_network bitnami/parse
+  $ docker run -d -p 1337:1337 --name parse -v /your/local/path/bitnami/parse:/bitnami/parse --network=parse_dashboard_network bitnami/parse
   ```
 
 4. Run the Parse Dashboard container:
 
   ```
-  $ docker run -d -p 80:4040 --name parsedashboard -v /your/local/path/bitnami/parsedashboard:/bitnami/parsedashboard --network=parsedashboard_network bitnami/parsedashboard
+  $ docker run -d -p 80:4040 --name parse-dashboard -v /your/local/path/bitnami/parse_dashboard:/bitnami/parse-dashboard --network=parse_dashboard_network bitnami/parse-dashboard
   ```
 
 # Upgrade this application
@@ -149,40 +149,40 @@ Bitnami provides up-to-date versions of Parse Dashboard, including security patc
 1. Get the updated images:
 
 ```
-$ docker pull bitnami/parsedashboard:latest
+$ docker pull bitnami/parse-dashboard:latest
 ```
 
 2. Stop your container
 
- * For docker-compose: `$ docker-compose stop parsedashboard`
- * For manual execution: `$ docker stop parsedashboard`
+ * For docker-compose: `$ docker-compose stop parse-dashboard`
+ * For manual execution: `$ docker stop parse-dashboard`
 
-3. (For non-compose execution only) Create a [backup](#backing-up-your-application) if you have not mounted the parsedashboard folder in the host.
+3. (For non-compose execution only) Create a [backup](#backing-up-your-application) if you have not mounted the parse_dashboard folder in the host.
 
 4. Remove the currently running container
 
- * For docker-compose: `$ docker-compose rm parsedashboard`
- * For manual execution: `$ docker rm parsedashboard`
+ * For docker-compose: `$ docker-compose rm parse-dashboard`
+ * For manual execution: `$ docker rm parse-dashboard`
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start parsedashboard`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name parsedashboard bitnami/parsedashboard:latest`
+ * For docker-compose: `$ docker-compose start parse-dashboard`
+ * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name parse-dashboard bitnami/parse-dashboard:latest`
 
 # Configuration
 ## Environment variables
- When you start the parsedashboard image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+ When you start the parse-dashboard image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
 ```
 application:
-  image: bitnami/parsedashboard:latest
+  image: bitnami/parse-dashboard:latest
   ports:
     - 80:4040
   environment:
-    - PARSEDASHBOARD_PASSWORD=my_password
+    - PARSE_DASHBOARD_PASSWORD=my_password
   volumes:
-    - 'parsedashboard_data:/bitnami/parsedasboard'
+    - 'parse_dashboard_data:/bitnami/parse-dashboard'
   depends_on:
     - parse
 ```
@@ -190,7 +190,7 @@ application:
  * For manual execution add a `-e` option with each variable and value:
 
 ```
- $ docker run -d -e PARSEDASHBOARD_PASSWORD=my_password -p 80:4040 --name parsedashboard -v /your/local/path/bitnami/parsedashboard:/bitnami/parsedashboard --network=parsedashboard_network bitnami/parsedashboard
+ $ docker run -d -e PARSE_DASHBOARD_PASSWORD=my_password -p 80:4040 --name parse-dashboard -v /your/local/path/bitnami/parse_dashboard:/bitnami/parse-dashboard --network=parse_dashboard_network bitnami/parse-dashboard
 ```
 
 Available variables:
@@ -208,13 +208,13 @@ To backup your application data follow these steps:
 
 1. Stop the running container:
 
-* For docker-compose: `$ docker-compose stop parsedashboard`
-* For manual execution: `$ docker stop parsedashboard`
+* For docker-compose: `$ docker-compose stop parse-dashboard`
+* For manual execution: `$ docker stop parse-dashboard`
 
 2. Copy the Parse Dashboard data folder in the host:
 
 ```
-$ docker cp /your/local/path/bitnami:/bitnami/parsedashboard
+$ docker cp /your/local/path/bitnami:/bitnami/parse-dashboard
 ```
 
 # Restoring a backup
@@ -224,13 +224,13 @@ To restore your application using backed up data simply mount the folder with Pa
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an
-[issue](https://github.com/bitnami/bitnami-docker-parsedashboard/issues), or submit a
-[pull request](https://github.com/bitnami/bitnami-docker-parsedashboard/pulls) with your contribution.
+[issue](https://github.com/bitnami/bitnami-docker-parse-dashboard/issues), or submit a
+[pull request](https://github.com/bitnami/bitnami-docker-parse-dashboard/pulls) with your contribution.
 
 # Issues
 
 If you encountered a problem running this container, you can file an
-[issue](https://github.com/bitnami/bitnami-docker-parsedashboard/issues). For us to provide better support,
+[issue](https://github.com/bitnami/bitnami-docker-parse-dashboard/issues). For us to provide better support,
 be sure to include the following information in your issue:
 
 - Host OS and version
