@@ -2,7 +2,7 @@
   "username": "{{$global.env.REDMINE_USERNAME}}",
   "password": "{{$global.env.REDMINE_PASSWORD}}",
   "email": "{{$global.env.REDMINE_EMAIL}}",
-  "language": "{{$global.env.REDMINE_LANG}}",
+  "language": "{{$global.env.REDMINE_LANGUAGE}}",
   "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
   "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
   "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
