@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  redis:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis_data:/bitnami/redis'
+
+volumes:
+  redis_data:
+    driver: local
