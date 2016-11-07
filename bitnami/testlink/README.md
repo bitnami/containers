@@ -190,6 +190,41 @@ Available variables:
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
  - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
 
+### SMTP Configuration
+
+To configure TestLink to send email using SMTP you can set the following environment variables:
+
+ - `SMTP_ENABLE`: Enable SMTP mail delivery.
+ - `SMTP_HOST`: SMTP host.
+ - `SMTP_PORT`: SMTP port.
+ - `SMTP_USER`: SMTP account user.
+ - `SMTP_PASSWORD`: SMTP account password.
+ - `SMTP_CONNECTION_MODE`: SMTP connection mode, `ssl` or `tls`.
+
+This would be an example of SMTP configuration using a GMail account:
+
+ * docker-compose:
+
+```yaml
+  application:
+    image: bitnami/testlink:latest
+    ports:
+      - '80:80'
+    environment:
+      - SMTP_ENABLE=true
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USER=your_email@gmail.com
+      - SMTP_PASSWORD=your_password
+      - SMTP_CONNECTION_MODE=tls
+```
+
+ * For manual execution:
+
+```
+ $ docker run -d -e SMTP_ENABLE=true -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -e SMTP_CONNECTION_MODE=tls -p 80:80 --name testlink -v /your/local/path/bitnami/testlink:/bitnami/testlink --network=testlink_network bitnami/testlink$ docker rm -v testlink
+```
+
 # Backing up your application
 
 To backup your application data follow these steps:
