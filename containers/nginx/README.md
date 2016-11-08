@@ -16,8 +16,14 @@ docker run --name nginx bitnami/nginx:latest
 ## Docker Compose
 
 ```yaml
-nginx:
-  image: bitnami/nginx:latest
+version: '2'
+
+services:
+  nginx:
+    image: 'bitnami/nginx:latest'
+    ports:
+      - '80:80'
+      - '443:443'
 ```
 
 # Get this image
@@ -53,10 +59,16 @@ docker run -v /path/to/app:/app bitnami/nginx:latest
 or using Docker Compose:
 
 ```yaml
-nginx:
-  image: bitnami/nginx:latest
-  volumes:
-    - /path/to/app:/app
+version: '2'
+
+services:
+  nginx:
+    image: 'bitnami/nginx:latest'
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /path/to/app:/app
 ```
 
 # Accessing your server from the host
@@ -96,10 +108,16 @@ docker run -v /path/to/nginx-persistence/vhosts:/bitnami/nginx/conf/vhosts bitna
 or using Docker Compose:
 
 ```yaml
-nginx:
-  image: bitnami/nginx:latest
-  volumes:
-    - /path/to/nginx-persistence/vhosts:/bitnami/nginx/conf/vhosts
+version: '2'
+
+services:
+  nginx:
+    image: 'bitnami/nginx:latest'
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /path/to/nginx-persistence/vhosts:/bitnami/nginx/conf/vhosts
 ```
 
 ## Full configuration
@@ -117,10 +135,16 @@ docker run --name nginx -v /path/to/nginx-persistence:/bitnami/nginx bitnami/ngi
 or using Docker Compose:
 
 ```yaml
-nginx:
-  image: bitnami/nginx:latest
-  volumes:
-    - /path/to/nginx-persistence:/bitnami/nginx
+version: '2'
+
+services:
+  nginx:
+    image: 'bitnami/nginx:latest'
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /path/to/nginx-persistence:/bitnami/nginx
 ```
 
 ### Step 2: Edit the configuration
@@ -151,7 +175,7 @@ This image includes the Pagespeed module for nginx.
 
 In order to activate it, mount the configuration volume following the steps in [Full Configuration](#full-configuration) section above and edit the file located at `/path/to/nginx-persistence/conf/bitnami/bitnami.conf` adding the following snippet inside the `server` directive:
 
-```
+```nginx
     pagespeed on;
     # needs to exist and be writable by nginx
     pagespeed FileCachePath /installdir/nginx/var/ngx_pagespeed_cache;
@@ -235,10 +259,17 @@ docker run -v /path/to/nginx-backups/latest:/bitnami/nginx bitnami/nginx:latest
 or using Docker Compose:
 
 ```yaml
-nginx:
-  image: bitnami/nginx:latest
-  volumes:
-    - /path/to/nginx-backups/latest:/bitnami/nginx
+version: '2'
+
+services:
+  nginx:
+    image: 'bitnami/nginx:latest'
+    ports:
+      - '80:80'
+      - '443:443'
+
+    volumes:
+      - /path/to/nginx-backups/latest:/bitnami/nginx
 ```
 
 ## Upgrade this image
