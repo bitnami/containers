@@ -14,8 +14,13 @@ docker run --name tomcat bitnami/tomcat:latest
 ## Docker Compose
 
 ```yaml
-tomcat:
-  image: bitnami/tomcat:latest
+version: '2'
+
+services:
+  tomcat:
+    image: 'bitnami/tomcat:latest'
+    ports:
+      - '8080:8080'
 ```
 
 # Get this image
@@ -55,10 +60,15 @@ docker run -v /path/to/tomcat-persistence:/bitnami/tomcat bitnami/tomcat:latest
 or using Docker Compose:
 
 ```yaml
-tomcat:
-  image: bitnami/tomcat:latest
-  volumes:
-    - /path/to/tomcat-persistence:/bitnami/tomcat
+version: '2'
+
+services:
+  tomcat:
+    image: 'bitnami/tomcat:latest'
+    ports:
+      - '8080:8080'
+    volumes:
+      - /path/to/tomcat-persistence:/bitnami/tomcat
 ```
 
 # Deploying web applications on Tomcat
@@ -119,11 +129,16 @@ docker run --name tomcat \
 or using Docker Compose:
 
 ```yaml
-tomcat:
-  image: bitnami/tomcat:latest
-  environment:
-    - TOMCAT_USERNAME=my_user
-    - TOMCAT_PASSWORD=my_password
+version: '2'
+
+services:
+  tomcat:
+    image: 'bitnami/tomcat:latest'
+    ports:
+      - '8080:8080'
+    environment:
+      - TOMCAT_USERNAME=my_user
+      - TOMCAT_PASSWORD=my_password
 ```
 
 ## Configuration files
@@ -143,10 +158,15 @@ docker run --name tomcat -v /path/to/tomcat-persistence:/bitnami/tomcat bitnami/
 or using Docker Compose:
 
 ```yaml
-tomcat:
-  image: bitnami/tomcat:latest
-  volumes:
-    - /path/to/tomcat-persistence:/bitnami/tomcat
+version: '2'
+
+services:
+  tomcat:
+    image: 'bitnami/tomcat:latest'
+    ports:
+      - '8080:8080'
+    volumes:
+      - /path/to/tomcat-persistence:/bitnami/tomcat
 ```
 
 ### Step 2: Edit the configuration
@@ -238,10 +258,15 @@ docker run -v /path/to/tomcat-backups/latest:/bitnami/tomcat bitnami/tomcat:late
 or using Docker Compose:
 
 ```yaml
-tomcat:
-  image: bitnami/tomcat:latest
-  volumes:
-    - /path/to/tomcat-backups/latest:/bitnami/tomcat
+version: '2'
+
+services:
+  tomcat:
+    image: 'bitnami/tomcat:latest'
+    ports:
+      - '8080:8080'
+    volumes:
+      - /path/to/tomcat-backups/latest:/bitnami/tomcat
 ```
 
 ## Upgrade this image
