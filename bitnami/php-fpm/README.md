@@ -16,11 +16,16 @@ docker run -it --name phpfpm -v /path/to/app:/app bitnami/php-fpm
 
 ## Docker Compose
 
-```
-phpfpm:
-  image: bitnami/php-fpm
-  volumes:
-    - /path/to/app:/app
+```yaml
+version: '2'
+
+services:
+  phpfpm:
+    image: 'bitnami/php-fpm:latest'
+    ports:
+      - '9000:9000'
+    volumes:
+      - /path/to/app:/app
 ```
 
 # Get this image
@@ -55,7 +60,7 @@ We will use PHP-FPM with nginx to serve our PHP app. Doing so will allow us to s
 
 Let's create an nginx virtual host to reverse proxy to our PHP-FPM container.
 
-```
+```nginx
 server {
     listen 0.0.0.0:80;
     server_name yourapp.com;
@@ -73,7 +78,6 @@ server {
         include fastcgi.conf;
     }
 }
-
 ```
 
 Notice we've substituted the link alias name `yourapp`, we will use the same name when creating the link.
@@ -90,11 +94,12 @@ docker run -it --name phpfpm -v /path/to/app:/app bitnami/php-fpm
 
 or using Docker Compose:
 
-```
-phpfpm:
-  image: bitnami/php-fpm
-  volumes:
-    - /path/to/app:/app
+```yaml
+services:
+  phpfpm:
+    image: 'bitnami/php-fpm:latest'
+    volumes:
+      - /path/to/app:/app
 ```
 
 ### Step 3: Run the nginx image and link it to the PHP-FPM server
@@ -109,13 +114,19 @@ docker run -it -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf \
 
 or using Docker Compose:
 
-```
-nginx:
-  image: bitnami/nginx
-  links:
-    - phpfpm:yourapp
-  volumes:
-    - /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf
+```yaml
+services:
+  nginx:
+    image: 'bitnami/nginx:latest'
+    depends_on:
+      - phpfpm
+    links:
+      - phpfpm:yourapp
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf
 ```
 
 We started the nginx server, mounting the virtual host we created in [Step 1](#step-1-create-a-virtual-host), and created a link to the PHP-FPM server with the alias `yourapp`.
@@ -159,11 +170,16 @@ docker run --name phpfpm -v /path/to/php-fpm:/bitnami/php-fpm bitnami/php-fpm
 
 or using Docker Compose:
 
-```
-phpfpm:
-  image: bitnami/php-fpm
-  volumes:
-    - /path/to/php-fpm:/bitnami/php-fpm
+```yaml
+version: '2'
+
+services:
+  phpfpm:
+    image: 'bitnami/php-fpm:latest'
+    ports:
+      - '9000:9000'
+    volumes:
+      - /path/to/php-fpm:/bitnami/php-fpm
 ```
 
 ### Step 2: Edit the configuration
@@ -251,11 +267,16 @@ docker run -v /path/to/backups/latest:/bitnami/php-fpm \
 
 or using Docker Compose:
 
-```
-phpfpm:
-  image: bitnami/php-fpm
-  volumes:
-    - /path/to/backups/latest:/bitnami/php-fpm
+```yaml
+version: '2'
+
+services:
+  phpfpm:
+    image: 'bitnami/php-fpm:latest'
+    ports:
+      - '9000:9000'
+    volumes:
+      - /path/to/backups/latest:/bitnami/php-fpm
 ```
 
 ## Upgrade this image
