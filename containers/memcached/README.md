@@ -16,8 +16,13 @@ docker run --name memcached bitnami/memcached:latest
 ## Docker Compose
 
 ```yaml
-memcached:
-  image: bitnami/memcached:latest
+version: '2'
+
+services:
+  memcached:
+    image: 'bitnami/memcached:latest'
+    ports:
+      - '11211:11211'
 ```
 
 # Get this image
@@ -74,8 +79,9 @@ Inside `myapp`, use `memcached` as the hostname for the Memcached server.
 Copy the snippet below into your `docker-compose.yml` to add Memcached to your application.
 
 ```yaml
-memcached:
-  image: bitnami/memcached
+services:
+  memcached:
+    image: 'bitnami/memcached:latest'
 ```
 
 ### Step 2: Link it to another container in your application
@@ -83,10 +89,11 @@ memcached:
 Update the definitions for containers you want to access your Memcached server from to include a link to the `memcached` entry you added in Step 1.
 
 ```yaml
-myapp:
-  image: myapp
-  links:
-    - memcached:memcached
+services:
+  myapp:
+    image: myapp
+    depends_on:
+      - memcached
 ```
 
 # Configuration
@@ -105,11 +112,16 @@ docker run --name memcached \
 or using Docker Compose:
 
 ```yaml
-memcached:
-  image: bitnami/memcached:latest
-  environment:
-    - MEMCACHED_USERNAME=my_user
-    - MEMCACHED_PASSWORD=my_password
+version: '2'
+
+services:
+  memcached:
+    image: 'bitnami/memcached:latest'
+    ports:
+      - '11211:11211'
+    environment:
+      - MEMCACHED_USERNAME=my_user
+      - MEMCACHED_PASSWORD=my_password
 ```
 
 > The default value of the `MEMCACHED_USERNAME` is `root`.
