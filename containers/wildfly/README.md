@@ -14,8 +14,14 @@ docker run --name wildfly bitnami/wildfly:latest
 ## Docker Compose
 
 ```yaml
-wildfly:
-  image: bitnami/wildfly:latest
+version: '2'
+
+services:
+  wildfly:
+    image: 'bitnami/wildfly:latest'
+    ports:
+      - '8080:8080'
+      - '9990:9990'
 ```
 
 # Get this image
@@ -55,10 +61,16 @@ docker run -v /path/to/wildfly-persistence:/bitnami/wildfly bitnami/wildfly:late
 or using Docker Compose:
 
 ```yaml
-wildfly:
-  image: bitnami/wildfly:latest
-  volumes:
-    - /path/to/wildfly-persistence:/bitnami/wildfly
+version: '2'
+
+services:
+  wildfly:
+    image: 'bitnami/wildfly:latest'
+    ports:
+      - '8080:8080'
+      - '9990:9990'
+    volumes:
+      - /path/to/wildfly-persistence:/bitnami/wildfly
 ```
 
 # Deploying web applications on Wildfly
@@ -152,11 +164,17 @@ docker run --name wildfly \
 or using Docker Compose:
 
 ```yaml
-wildfly:
-  image: bitnami/wildfly:latest
-  environment:
-    - WILDFLY_USERNAME=my_user
-    - WILDFLY_PASSWORD=my_password
+version: '2'
+
+services:
+  wildfly:
+    image: 'bitnami/wildfly:latest'
+    ports:
+      - '8080:8080'
+      - '9990:9990'
+    environment:
+      - WILDFLY_USERNAME=my_user
+      - WILDFLY_PASSWORD=my_password
 ```
 
 ## Configuration files
@@ -176,10 +194,16 @@ docker run --name wildfly -v /path/to/wildfly-persistence:/bitnami/wildfly bitna
 or using Docker Compose:
 
 ```yaml
-wildfly:
-  image: bitnami/wildfly:latest
-  volumes:
-    - /path/to/wildfly-persistence:/bitnami/wildfly
+version: '2'
+
+services:
+  wildfly:
+    image: 'bitnami/wildfly:latest'
+    ports:
+      - '8080:8080'
+      - '9990:9990'
+    volumes:
+      - /path/to/wildfly-persistence:/bitnami/wildfly
 ```
 
 ### Step 2: Edit the configuration
@@ -277,10 +301,16 @@ docker run \
 or using Docker Compose:
 
 ```yaml
-wildfly:
-  image: bitnami/wildfly:latest
-  volumes:
-    - /path/to/wildfly-backups/latest:/bitnami/wildfly
+version: '2'
+
+services:
+  wildfly:
+    image: 'bitnami/wildfly:latest'
+    ports:
+      - '8080:8080'
+      - '9990:9990'
+    volumes:
+      - /path/to/wildfly-backups/latest:/bitnami/wildfly
 ```
 
 ## Upgrade this image
