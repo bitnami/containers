@@ -15,9 +15,14 @@ docker run --name redis bitnami/redis:latest
 
 ## Docker Compose
 
-```
-redis:
-  image: bitnami/redis:latest
+```yaml
+version: '2'
+
+services:
+  redis:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379:6379'
 ```
 
 # Get this image
@@ -55,11 +60,16 @@ docker run -v /path/to/redis-persistence:/bitnami/redis bitnami/redis:latest
 
 or using Docker Compose:
 
-```
-redis:
-  image: bitnami/redis:latest
-  volumes:
-    - /path/to/redis-persistence:/bitnami/redis
+```yaml
+version: '2'
+
+services:
+  redis:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379:6379'
+    volumes:
+      - /path/to/redis-persistence:/bitnami/redis
 ```
 
 # Linking
@@ -103,20 +113,24 @@ docker exec -it redis redis-cli
 
 Copy the snippet below into your `docker-compose.yml` to add Redis to your application.
 
-```
-redis:
-  image: bitnami/redis:latest
+```yaml
+services:
+  redis:
+    image: 'bitnami/redis:latest'
 ```
 
 ### Step 2: Link it to another container in your application
 
 Update the definitions for containers you want to access your Redis server from to include a link to the `redis` entry you added in Step 1.
 
-```
-myapp:
-  image: myapp
-  links:
-    - redis:redis
+```yaml
+version: '2'
+
+services:
+  myapp:
+    image: myapp
+    depends_on:
+      - redis
 ```
 
 Inside `myapp`, use `redis` as the hostname for the Redis server.
@@ -133,11 +147,16 @@ docker run --name redis -e REDIS_PASSWORD=password123 bitnami/redis:latest
 
 or using Docker Compose:
 
-```
-redis:
-  image: bitnami/redis:latest
-  environment:
-    - REDIS_PASSWORD=password123
+```yaml
+version: '2'
+
+services:
+  redis:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379:6379'
+    environment:
+      - REDIS_PASSWORD=password123
 ```
 
 ## Setting up a replication
@@ -194,28 +213,37 @@ docker exec redis-slave redis-cli -a password123 SLAVEOF NO ONE
 With Docker Compose the master/slave replication can be setup using:
 
 ```yaml
-master:
-  image: bitnami/redis:latest
-  environment:
-    - REDIS_REPLICATION_MODE=master
-    - REDIS_PASSWORD=masterpassword123
+version: '2'
 
-slave:
-  image: bitnami/redis:latest
-  links:
-    - master:master
-  environment:
-    - REDIS_REPLICATION_MODE=slave
-    - REDIS_MASTER_HOST=master
-    - REDIS_MASTER_PORT=6379
-    - REDIS_MASTER_PASSWORD=masterpassword123
-    - REDIS_PASSWORD=password123
+services:
+  redis-primary:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379'
+    environment:
+      - REDIS_REPLICATION_MODE=master
+      - REDIS_PASSWORD=my_password
+    volumes:
+      - '/path/to/redis-persistence:/bitnami/redis'
+
+  redis-secondary:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379'
+    depends_on:
+      - redis-primary
+    environment:
+      - REDIS_REPLICATION_MODE=slave
+      - REDIS_MASTER_HOST=redis-primary
+      - REDIS_MASTER_PORT=6379
+      - REDIS_MASTER_PASSWORD=my_password
+      - REDIS_PASSWORD=my_password
 ```
 
 Scale the number of slaves using:
 
 ```bash
-docker-compose scale master=1 slave=3
+docker-compose scale redis-primary=1 redis-secondary=3
 ```
 
 The above command scales up the number of slaves to `3`. You can scale down in the same way.
@@ -236,11 +264,16 @@ docker run --name redis -v /path/to/redis-persistence:/bitnami/redis bitnami/red
 
 or using Docker Compose:
 
-```
-redis:
-  image: bitnami/redis:latest
-  volumes:
-    - /path/to/redis-persistence:/bitnami/redis
+```yaml
+version: '2'
+
+services:
+  redis:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379:6379'
+    volumes:
+      - /path/to/redis-persistence:/bitnami/redis
 ```
 
 ### Step 2: Edit the configuration
@@ -329,11 +362,16 @@ docker run -v /path/to/redis-backups/latest:/bitnami/redis bitnami/redis:latest
 
 or using Docker Compose:
 
-```
-redis:
-  image: bitnami/redis:latest
-  volumes:
-    - /path/to/redis-backups/latest:/bitnami/redis
+```yaml
+version: '2'
+
+services:
+  redis:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379:6379'
+    volumes:
+      - /path/to/redis-backups/latest:/bitnami/redis
 ```
 
 ## Upgrade this image
