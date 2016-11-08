@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  mongodb-primary:
+    image: 'bitnami/mongodb:latest'
+    environment:
+      - MONGODB_REPLICASET_MODE=primary
+    volumes:
+      - 'mongodb_master_data:/bitnami/mongodb'
+
+  mongodb-secondary:
+    image: 'bitnami/mongodb:latest'
+    depends_on:
+      - mongodb-primary
+    environment:
+      - MONGODB_REPLICASET_MODE=secondary
+      - MONGODB_PRIMARY_HOST=primary
+
+    mongodb-arbiter:
+    image: 'bitnami/mongodb:latest'
+    depends_on:
+      - mongodb-primary
+    environment:
+      - MONGODB_REPLICASET_MODE=arbiter
+      - MONGODB_PRIMARY_HOST=primary
+
+volumes:
+  mongodb_master_data:
+    driver: local
