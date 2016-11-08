@@ -15,9 +15,14 @@ docker run --name mysql bitnami/mysql:latest
 
 ## Docker Compose
 
-```
-mysql:
-  image: bitnami/mysql:latest
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mysql:latest'
+    ports:
+      - '3306:3306'
 ```
 
 # Get this image
@@ -58,11 +63,16 @@ docker run -v /path/to/mysql-persistence:/bitnami/mysql bitnami/mysql:latest
 
 or using Docker Compose:
 
-```
-mysql:
-  image: bitnami/mysql:latest
-  volumes:
-    - /path/to/mysql-persistence:/bitnami/mysql
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mysql:latest'
+    ports:
+      - '3306:3306'
+    volumes:
+      - /path/to/mysql-persistence:/bitnami/mysql
 ```
 
 # Linking
@@ -106,20 +116,22 @@ docker exec -it mysql mysql -u root
 
 Copy the snippet below into your `docker-compose.yml` to add MySQL to your application.
 
-```
-mysql:
-  image: bitnami/mysql:latest
+```yaml
+services:
+  mariadb:
+    image: 'bitnami/mysql:latest'
 ```
 
 ### Step 2: Link it to another container in your application
 
 Update the definitions for containers you want to access your MySQL server from to include a link to the `mysql` entry you added in Step 1.
 
-```
-myapp:
-  image: myapp
-  links:
-    - mysql:mysql
+```yaml
+services:
+  myapp:
+    image: myapp
+    depends_on:
+      - mysql
 ```
 
 Inside `myapp`, use `mysql` as the hostname for the MySQL server.
@@ -136,11 +148,16 @@ docker run --name mysql -e MYSQL_ROOT_PASSWORD=password123 bitnami/mysql:latest
 
 or using Docker Compose:
 
-```
-mysql:
-  image: bitnami/mysql:latest
-  environment:
-    - MYSQL_ROOT_PASSWORD=password123
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mysql:latest'
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=password123
 ```
 
 **Warning** The `root` user is always created with remote access. It's suggested that the `MYSQL_ROOT_PASSWORD` env variable is always specified to set a password for the `root` user.
@@ -155,11 +172,16 @@ docker run --name mysql -e MYSQL_DATABASE=my_database bitnami/mysql:latest
 
 or using Docker Compose:
 
-```
-mysql:
-  image: bitnami/mysql:latest
-  environment:
-    - MYSQL_DATABASE=my_database
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mysql:latest'
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_DATABASE=my_database
 ```
 
 ## Creating a database user on first run
@@ -175,13 +197,18 @@ docker run --name mysql \
 
 or using Docker Compose:
 
-```
-mysql:
-  image: bitnami/mysql:latest
-  environment:
-    - MYSQL_USER=my_user
-    - MYSQL_PASSWORD=my_password
-    - MYSQL_DATABASE=my_database
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mysql:latest'
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_USER=my_user
+      - MYSQL_PASSWORD=my_password
+      - MYSQL_DATABASE=my_database
 ```
 
 **Note!** The `root` user will still be created with remote access. Please ensure that you have specified a password for the `root` user using the `MYSQL_ROOT_PASSWORD` env variable.
@@ -246,32 +273,43 @@ You now have a two node MySQL master/slave replication cluster up and running. Y
 With Docker Compose the master/slave replication can be setup using:
 
 ```yaml
-master:
-  image: bitnami/mysql:latest
-  environment:
-    - MYSQL_ROOT_PASSWORD=root_password
-    - MYSQL_REPLICATION_MODE=master
-    - MYSQL_REPLICATION_USER=my_repl_user
-    - MYSQL_REPLICATION_PASSWORD=my_repl_password
-    - MYSQL_USER=my_user
-    - MYSQL_PASSWORD=my_password
-    - MYSQL_DATABASE=my_database
+version: '2'
 
-slave:
-  image: bitnami/mysql:latest
-  links:
-    - master:master
-  environment:
-    - MYSQL_ROOT_PASSWORD=root_password
-    - MYSQL_REPLICATION_MODE=slave
-    - MYSQL_REPLICATION_USER=my_repl_user
-    - MYSQL_REPLICATION_PASSWORD=my_repl_password
-    - MYSQL_MASTER_HOST=master
-    - MYSQL_MASTER_USER=my_user
-    - MYSQL_MASTER_PASSWORD=my_password
-    - MYSQL_USER=my_user
-    - MYSQL_PASSWORD=my_password
-    - MYSQL_DATABASE=my_database
+services:
+  mysql-master:
+    image: 'bitnami/mysql:latest'
+    ports:
+      - '3306'
+    volumes:
+      - 'mysql_master_data:/bitnami/mysql'
+    environment:
+      - MYSQL_REPLICATION_MODE=master
+      - MYSQL_REPLICATION_USER=repl_user
+      - MYSQL_REPLICATION_PASSWORD=repl_password
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_USER=my_user
+      - MYSQL_PASSWORD=my_password
+      - MYSQL_DATABASE=my_database
+    volumes:
+      - '/path/to/mysql-persistence:/bitnami/mysql'
+  mysql-slave:
+    image: 'bitnami/mysql:latest'
+    ports:
+      - '3306'
+    depends_on:
+      - mysql-master
+    environment:
+      - MYSQL_REPLICATION_MODE=slave
+      - MYSQL_REPLICATION_USER=repl_user
+      - MYSQL_REPLICATION_PASSWORD=repl_password
+      - MYSQL_MASTER_HOST=mysql-master
+      - MYSQL_MASTER_PORT=3306
+      - MYSQL_MASTER_USER=my_user
+      - MYSQL_MASTER_PASSWORD=my_password
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_USER=my_user
+      - MYSQL_PASSWORD=my_password
+      - MYSQL_DATABASE=my_database
 ```
 
 Scale the number of slaves using:
@@ -298,11 +336,16 @@ docker run --name mysql -v /path/to/mysql-persistence:/bitnami/mysql bitnami/mys
 
 or using Docker Compose:
 
-```
-mysql:
-  image: bitnami/mysql:latest
-  volumes:
-    - /path/to/mysql-persistence:/bitnami/mysql
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mysql:latest'
+    ports:
+      - '3306:3306'
+    volumes:
+      - /path/to/mysql-persistence:/bitnami/mysql
 ```
 
 ### Step 2: Edit the configuration
@@ -391,11 +434,16 @@ docker run -v /path/to/mysql-backups/latest:/bitnami/mysql bitnami/mysql:latest
 
 or using Docker Compose:
 
-```
-mysql:
-  image: bitnami/mysql:latest
-  volumes:
-    - /path/to/mysql-backups/latest:/bitnami/mysql
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mysql:latest'
+    ports:
+      - '3306:3306'
+    volumes:
+      - /path/to/mysql-backups/latest:/bitnami/mysql
 ```
 
 ## Upgrade this image

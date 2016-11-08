@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mysql:latest'
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'mysql_data:/bitnami/mysql'
+
+volumes:
+  mysql_data:
+    driver: local
