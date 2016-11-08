@@ -9,16 +9,19 @@
 # TLDR
 
 ```bash
-docker run --name postgresql -e POSTGRESQL_PASSWORD=password123 bitnami/postgresql:latest
+docker run --name postgresql bitnami/postgresql:latest
 ```
 
 ## Docker Compose
 
 ```yaml
-postgresql:
-  image: bitnami/postgresql:latest
-  environment:
-    - POSTGRESQL_PASSWORD=password123
+version: '2'
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    ports:
+      - '5432:5432'
 ```
 
 # Get this image
@@ -58,10 +61,15 @@ docker run -v /path/to/postgresql-persistence:/bitnami/postgresql bitnami/postgr
 or using Docker Compose:
 
 ```yaml
-postgresql:
-  image: bitnami/postgresql:latest
-  volumes:
-    - /path/to/postgresql-persistence:/bitnami/postgresql
+version: '2'
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    ports:
+      - '5432:5432'
+    volumes:
+      - /path/to/postgresql-persistence:/bitnami/postgresql
 ```
 
 # Linking
@@ -106,10 +114,9 @@ docker exec -it postgresql psql -U postgres
 Copy the snippet below into your `docker-compose.yml` to add PostgreSQL to your application.
 
 ```yaml
-postgresql:
-  image: bitnami/postgresql:latest
-  environment:
-    - POSTGRESQL_PASSWORD=password123
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
 ```
 
 ### Step 2: Link it to another container in your application
@@ -117,10 +124,11 @@ postgresql:
 Update the definitions for containers you want to access your PostgreSQL server from to include a link to the `postgresql` entry you added in Step 1.
 
 ```yaml
-myapp:
-  image: myapp
-  links:
-    - postgresql:postgresql
+services:
+  myapp:
+    image: myapp
+    depends_on:
+      - postgresql
 ```
 
 Inside `myapp`, use `postgresql` as the hostname for the PostgreSQL server.
@@ -138,10 +146,15 @@ docker run --name postgresql -e POSTGRESQL_PASSWORD=password123 bitnami/postgres
 or using Docker Compose:
 
 ```yaml
-postgresql:
-  image: bitnami/postgresql:latest
-  environment:
-    - POSTGRESQL_PASSWORD=password123
+version: '2'
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRESQL_PASSWORD=password123
 ```
 
 **Note!**
@@ -158,10 +171,15 @@ docker run --name postgresql -e POSTGRESQL_DATABASE=my_database bitnami/postgres
 or using Docker Compose:
 
 ```yaml
-postgresql:
-  image: bitnami/postgresql:latest
-  environment:
-    - POSTGRESQL_DATABASE=my_database
+version: '2'
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRESQL_DATABASE=my_database
 ```
 
 ## Creating a database user on first run
@@ -175,12 +193,17 @@ docker run --name postgresql -e POSTGRESQL_USERNAME=my_user -e POSTGRESQL_PASSWO
 or using Docker Compose:
 
 ```yaml
-postgresql:
-  image: bitnami/postgresql:latest
-  environment:
-    - POSTGRESQL_USERNAME=my_user
-    - POSTGRESQL_PASSWORD=password123
-    - POSTGRESQL_DATABASE=my_database
+version: '2'
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRESQL_USERNAME=my_user
+      - POSTGRESQL_PASSWORD=password123
+      - POSTGRESQL_DATABASE=my_database
 ```
 
 **Note!**
@@ -247,32 +270,42 @@ docker exec postgresql-slave touch /tmp/postgresql.trigger.5432
 With Docker Compose the master-slave replication can be setup using:
 
 ```yaml
-master:
-  image: bitnami/postgresql:latest
-  environment:
-    - POSTGRESQL_REPLICATION_MODE=master
-    - POSTGRESQL_USERNAME=my_user
-    - POSTGRESQL_PASSWORD=password123
-    - POSTGRESQL_DATABASE=my_database
-    - POSTGRESQL_REPLICATION_USER=my_repl_user
-    - POSTGRESQL_REPLICATION_PASSWORD=my_repl_password
+version: '2'
 
-slave:
-  image: bitnami/postgresql:latest
-  links:
-    - master:master
-  environment:
-    - POSTGRESQL_REPLICATION_MODE=slave
-    - POSTGRESQL_MASTER_HOST=master
-    - POSTGRESQL_MASTER_PORT=5432
-    - POSTGRESQL_REPLICATION_USER=my_repl_user
-    - POSTGRESQL_REPLICATION_PASSWORD=my_repl_password
+services:
+  postgresql-master:
+    image: 'bitnami/postgresql:latest'
+    ports:
+      - '5432'
+    volumes:
+      - 'postgresql_master_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_REPLICATION_MODE=master
+      - POSTGRESQL_REPLICATION_USER=repl_user
+      - POSTGRESQL_REPLICATION_PASSWORD=repl_password
+      - POSTGRESQL_USERNAME=my_user
+      - POSTGRESQL_PASSWORD=my_password
+      - POSTGRESQL_DATABASE=my_database
+    volumes:
+      - '/path/to/postgresql-persistence:/bitnami/postgresql'
+  postgresql-slave:
+    image: 'bitnami/postgresql:latest'
+    ports:
+      - '5432'
+    depends_on:
+      - postgresql-master
+    environment:
+      - POSTGRESQL_REPLICATION_MODE=slave
+      - POSTGRESQL_REPLICATION_USER=repl_user
+      - POSTGRESQL_REPLICATION_PASSWORD=repl_password
+      - POSTGRESQL_MASTER_HOST=postgresql-master
+      - POSTGRESQL_MASTER_PORT=5432
 ```
 
 Scale the number of slaves using:
 
 ```bash
-docker-compose scale master=1 slave=3
+docker-compose scale postgresql-master=1 postgresql-slave=3
 ```
 
 The above command scales up the number of slaves to `3`. You can scale down in the same way.
@@ -294,10 +327,15 @@ docker run --name postgresql -v /path/to/postgresql-persistence:/bitnami/postgre
 or using Docker Compose:
 
 ```yaml
-postgresql:
-  image: bitnami/postgresql:latest
-  volumes:
-    - /path/to/postgresql-persistence:/bitnami/postgresql
+version: '2'
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    ports:
+      - '5432:5432'
+    volumes:
+      - /path/to/postgresql-persistence:/bitnami/postgresql
 ```
 
 ### Step 2: Edit the configuration
@@ -412,11 +450,16 @@ docker run \
 
 or using Docker Compose:
 
-```
-postgresql:
-  image: bitnami/postgresql:latest
-  volumes:
-    - /path/to/postgresql-backups/latest:/bitnami/postgresql
+```yaml
+version: '2'
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    ports:
+      - '5432:5432'
+    volumes:
+      - /path/to/postgresql-backups/latest:/bitnami/postgresql
 ```
 
 ## Upgrade this image
