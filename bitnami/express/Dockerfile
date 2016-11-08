@@ -11,7 +11,7 @@
 ##   Connect to the container at DOCKER_IP:3000
 ##     replacing DOCKER_IP for the IP of your active docker host
 
-FROM gcr.io/stacksmith-images/minideb-buildpack:jessie-r2
+FROM gcr.io/stacksmith-images/minideb-buildpack:jessie-r3
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -28,7 +28,7 @@ ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
 
 # ExpressJS template
 ENV BITNAMI_APP_NAME=express
-ENV BITNAMI_IMAGE_VERSION=4.14.0-r10
+ENV BITNAMI_IMAGE_VERSION=4.14.0-r11
 
 RUN npm install -g express-generator@4 &&\
     npm install -g bower@1.7.9
