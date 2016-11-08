@@ -14,8 +14,13 @@ docker run --name mongodb bitnami/mongodb:latest
 ## Docker Compose
 
 ```yaml
-mongodb:
-  image: bitnami/mongodb:latest
+version: '2'
+
+services:
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    ports:
+      - "27017:27017"
 ```
 
 # Get this image
@@ -55,10 +60,15 @@ docker run -v /path/to/mongodb-persistence:/bitnami/mongodb bitnami/mongodb:late
 or using Docker Compose:
 
 ```yaml
-mongodb:
-  image: bitnami/mongodb:latest
-  volumes:
-    - /path/to/mongodb-persistence:/bitnami/mongodb
+version: '2'
+
+services:
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    ports:
+      - "27017:27017"
+    volumes:
+      - /path/to/mongodb-persistence:/bitnami/mongodb
 ```
 
 # Linking
@@ -103,8 +113,9 @@ docker exec -it mongodb mongo
 Copy the snippet below into your `docker-compose.yml` to add MongoDB to your application.
 
 ```yaml
-mongodb:
-  image: bitnami/mongodb:latest
+services:
+  mongodb:
+    image: 'bitnami/mongodb:latest'
 ```
 
 ### Step 2: Link it to another container in your application
@@ -112,10 +123,11 @@ mongodb:
 Update the definitions for containers you want to access your MongoDB server from to include a link to the `mongodb` entry you added in Step 1.
 
 ```yaml
-myapp:
-  image: myapp
-  links:
-    - mongodb:mongodb
+services:
+  myapp:
+    image: myapp
+    depends_on:
+      - mongodb
 ```
 
 Inside `myapp`, use `mongodb` as the hostname for the MongoDB server.
@@ -134,10 +146,15 @@ docker run --name mongodb \
 or using Docker Compose:
 
 ```yaml
-mongodb:
-  image: bitnami/mongodb:latest
-  environment:
-    - MONGODB_ROOT_PASSWORD=password123
+version: '2'
+
+services:
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGODB_ROOT_PASSWORD=password123
 ```
 
 The `root` user is configured to have full administrative access to the MongoDB server. When `MONGODB_ROOT_PASSWORD` is not specified the server allows unauthenticated and unrestricted access.
@@ -155,12 +172,17 @@ docker run --name mongodb \
 or using Docker Compose:
 
 ```yaml
-mongodb:
-  image: bitnami/mongodb:latest
-  environment:
-    - MONGODB_USERNAME=my_user
-    - MONGODB_PASSWORD=password123
-    - MONGODB_DATABASE=my_database
+version: '2'
+
+services:
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGODB_USERNAME=my_user
+      - MONGODB_PASSWORD=password123
+      - MONGODB_DATABASE=my_database
 ```
 
 **Note!**
@@ -226,34 +248,39 @@ You now have a three node MongoDB replication cluster up and running which can b
 With Docker Compose the primary/secondary/arbiter replication can be setup using:
 
 ```yaml
-primary:
-  image: bitnami/mongodb:latest
-  environment:
-    - MONGODB_REPLICA_SET_MODE=primary
+version: '2'
 
-secondary:
-  image: bitnami/mongodb:latest
-  links:
-    - primary:primary
-  environment:
-    - MONGODB_REPLICA_SET_MODE=secondary
-    - MONGODB_PRIMARY_HOST=primary
-    - MONGODB_PRIMARY_PORT=27017
+services:
+  mongodb-primary:
+    image: 'bitnami/mongodb:latest'
+    environment:
+      - MONGODB_REPLICASET_MODE=primary
+    volumes:
+      - 'mongodb_master_data:/bitnami/mongodb'
 
-arbiter:
-  image: bitnami/mongodb:latest
-  links:
-    - primary:primary
-  environment:
-    - MONGODB_REPLICA_SET_MODE=arbiter
-    - MONGODB_PRIMARY_HOST=primary
-    - MONGODB_PRIMARY_PORT=27017
+  mongodb-secondary:
+    image: 'bitnami/mongodb:latest'
+    depends_on:
+      - mongodb-primary
+    environment:
+      - MONGODB_REPLICASET_MODE=secondary
+      - MONGODB_PRIMARY_HOST=primary
+      - MONGODB_PRIMARY_PORT=27017
+
+  mongodb-arbiter:
+    image: 'bitnami/mongodb:latest'
+    depends_on:
+      - mongodb-primary
+    environment:
+      - MONGODB_REPLICA_SET_MODE=arbiter
+      - MONGODB_PRIMARY_HOST=primary
+      - MONGODB_PRIMARY_PORT=27017
 ```
 
 Scale the number of secondary nodes using:
 
 ```bash
-docker-compose scale primary=1 secondary=3 arbiter=1
+docker-compose scale mongodb-primary=1 mongodb-secondary=3 mongodb-arbiter=1
 ```
 
 The above command scales up the number of secondary nodes to `3`. You can scale down in the same way.
@@ -275,10 +302,15 @@ docker run --name mongodb -v /path/to/mongodb-persistence:/bitnami/mongodb bitna
 or using Docker Compose:
 
 ```yaml
-mongodb:
-  image: bitnami/mongodb:latest
-  volumes:
-    - /path/to/mongodb-persistence:/bitnami/mongodb
+version: '2'
+
+services:
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    ports:
+      - "27017:27017"
+    volumes:
+      - /path/to/mongodb-persistence:/bitnami/mongodb
 ```
 
 ### Step 2: Edit the configuration
@@ -373,10 +405,15 @@ docker run \
 or using Docker Compose:
 
 ```yaml
-mongodb:
-  image: bitnami/mongodb:latest
-  volumes:
-    - /path/to/mongodb-backups/latest:/bitnami/mongodb
+version: '2'
+
+services:
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    ports:
+      - "27017:27017"
+    volumes:
+      - /path/to/mongodb-backups/latest:/bitnami/mongodb
 ```
 
 ## Upgrade this image
