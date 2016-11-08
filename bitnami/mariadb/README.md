@@ -15,9 +15,14 @@ docker run --name mariadb bitnami/mariadb:latest
 
 ## Docker Compose
 
-```
-mariadb:
-  image: bitnami/mariadb:latest
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    ports:
+      - '3306:3306'
 ```
 
 # Get this image
@@ -58,11 +63,16 @@ docker run -v /path/to/mariadb-persistence:/bitnami/mariadb bitnami/mariadb:late
 
 or using Docker Compose:
 
-```
-mariadb:
-  image: bitnami/mariadb:latest
-  volumes:
-    - /path/to/mariadb-persistence:/bitnami/mariadb
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    ports:
+      - '3306:3306'
+    volumes:
+      - /path/to/mariadb-persistence:/bitnami/mariadb
 ```
 
 # Linking
@@ -106,20 +116,22 @@ docker exec -it mariadb mysql -u root
 
 Copy the snippet below into your `docker-compose.yml` to add MariaDB to your application.
 
-```
-mariadb:
-  image: bitnami/mariadb:latest
+```yaml
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
 ```
 
 ### Step 2: Link it to another container in your application
 
 Update the definitions for containers you want to access your MariaDB server from to include a link to the `mariadb` entry you added in Step 1.
 
-```
-myapp:
-  image: myapp
-  links:
-    - mariadb:mariadb
+```yaml
+services:
+  myapp:
+    image: 'myapp'
+    depends_on:
+      - mariadb
 ```
 
 Inside `myapp`, use `mariadb` as the hostname for the MariaDB server.
@@ -136,11 +148,16 @@ docker run --name mariadb -e MARIADB_ROOT_PASSWORD=password123 bitnami/mariadb:l
 
 or using Docker Compose:
 
-```
-mariadb:
-  image: bitnami/mariadb:latest
-  environment:
-    - MARIADB_ROOT_PASSWORD=password123
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    ports:
+      - '3306:3306'
+    environment:
+      - MARIADB_ROOT_PASSWORD=password123
 ```
 
 **Warning** The `root` user is always created with remote access. It's suggested that the `MARIADB_ROOT_PASSWORD` env variable is always specified to set a password for the `root` user.
@@ -155,11 +172,16 @@ docker run --name mariadb -e MARIADB_DATABASE=my_database bitnami/mariadb:latest
 
 or using Docker Compose:
 
-```
-mariadb:
-  image: bitnami/mariadb:latest
-  environment:
-    - MARIADB_DATABASE=my_database
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    ports:
+      - '3306:3306'
+    environment:
+      - MARIADB_DATABASE=my_database
 ```
 
 ## Creating a database user on first run
@@ -175,13 +197,18 @@ docker run --name mariadb \
 
 or using Docker Compose:
 
-```
-mariadb:
-  image: bitnami/mariadb:latest
-  environment:
-    - MARIADB_USER=my_user
-    - MARIADB_PASSWORD=my_password
-    - MARIADB_DATABASE=my_database
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    ports:
+      - '3306:3306'
+    environment:
+      - MARIADB_USER=my_user
+      - MARIADB_PASSWORD=my_password
+      - MARIADB_DATABASE=my_database
 ```
 
 **Note!** The `root` user will still be created with remote access. Please ensure that you have specified a password for the `root` user using the `MARIADB_ROOT_PASSWORD` env variable.
@@ -246,38 +273,47 @@ You now have a two node MariaDB master/slave replication cluster up and running.
 With Docker Compose the master/slave replication can be setup using:
 
 ```yaml
-master:
-  image: bitnami/mariadb:latest
-  environment:
-    - MARIADB_ROOT_PASSWORD=root_password
-    - MARIADB_REPLICATION_MODE=master
-    - MARIADB_REPLICATION_USER=my_repl_user
-    - MARIADB_REPLICATION_PASSWORD=my_repl_password
-    - MARIADB_USER=my_user
-    - MARIADB_PASSWORD=my_password
-    - MARIADB_DATABASE=my_database
+version: '2'
 
-slave:
-  image: bitnami/mariadb:latest
-  links:
-    - master:master
-  environment:
-    - MARIADB_ROOT_PASSWORD=root_password
-    - MARIADB_REPLICATION_MODE=slave
-    - MARIADB_REPLICATION_USER=my_repl_user
-    - MARIADB_REPLICATION_PASSWORD=my_repl_password
-    - MARIADB_MASTER_HOST=master
-    - MARIADB_MASTER_USER=my_user
-    - MARIADB_MASTER_PASSWORD=my_password
-    - MARIADB_USER=my_user
-    - MARIADB_PASSWORD=my_password
-    - MARIADB_DATABASE=my_database
+services:
+  mariadb-master:
+    image: 'bitnami/mariadb:latest'
+    ports:
+      - '3306'
+    volumes:
+      - /path/to/mariadb-persistence:/bitnami/mariadb
+    environment:
+      - MARIADB_REPLICATION_MODE=master
+      - MARIADB_REPLICATION_USER=repl_user
+      - MARIADB_REPLICATION_PASSWORD=repl_password
+      - MARIADB_ROOT_PASSWORD=root_password
+      - MARIADB_USER=my_user
+      - MARIADB_PASSWORD=my_password
+      - MARIADB_DATABASE=my_database
+  mariadb-slave:
+    image: 'bitnami/mariadb:latest'
+    ports:
+      - '3306'
+    depends_on:
+      - mariadb-master
+    environment:
+      - MARIADB_REPLICATION_MODE=slave
+      - MARIADB_REPLICATION_USER=repl_user
+      - MARIADB_REPLICATION_PASSWORD=repl_password
+      - MARIADB_MASTER_HOST=mariadb-master
+      - MARIADB_MASTER_PORT=3306
+      - MARIADB_MASTER_USER=my_user
+      - MARIADB_MASTER_PASSWORD=my_password
+      - MARIADB_ROOT_PASSWORD=root_password
+      - MARIADB_USER=my_user
+      - MARIADB_PASSWORD=my_password
+      - MARIADB_DATABASE=my_database
 ```
 
 Scale the number of slaves using:
 
 ```bash
-docker-compose scale master=1 slave=3
+docker-compose scale mariadb-master=1 mariadb-slave=3
 ```
 
 The above command scales up the number of slaves to `3`. You can scale down in the same manner.
@@ -298,11 +334,16 @@ docker run --name mariadb -v /path/to/mariadb-persistence:/bitnami/mariadb bitna
 
 or using Docker Compose:
 
-```
-mariadb:
-  image: bitnami/mariadb:latest
-  volumes:
-    - /path/to/mariadb-persistence:/bitnami/mariadb
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    ports:
+      - '3306:3306'
+    volumes:
+      - /path/to/mariadb-persistence:/bitnami/mariadb
 ```
 
 ### Step 2: Edit the configuration
@@ -391,11 +432,16 @@ docker run -v /path/to/mariadb-backups/latest:/bitnami/mariadb bitnami/mariadb:l
 
 or using Docker Compose:
 
-```
-mariadb:
-  image: bitnami/mariadb:latest
-  volumes:
-    - /path/to/mariadb-backups/latest:/bitnami/mariadb
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    ports:
+      - '3306:3306'
+    volumes:
+      - /path/to/mariadb-backups/latest:/bitnami/mariadb
 ```
 
 ## Upgrade this image
