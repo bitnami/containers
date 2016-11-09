@@ -207,7 +207,6 @@ The OrangeHRM instance can be customized by specifying environment variables on 
 
 - `ORANGEHRM_USERNAME`: OrangeHRM application username. Default: **admin**
 - `ORANGEHRM_PASSWORD`: OrangeHRM application password. Default: **bitnami**
-- `ORANGEHRM_HOST`: OrangeHRM host
 - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
 - `MARIADB_PASSWORD`: Root password for the MariaDB.
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
