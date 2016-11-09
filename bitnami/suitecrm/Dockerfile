@@ -1,19 +1,19 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
+FROM gcr.io/stacksmith-images/minideb:jessie-r2
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=suitecrm \
-    BITNAMI_IMAGE_VERSION=7.7.4-r0 \
+    BITNAMI_IMAGE_VERSION=7.7.7-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/apache/bin:/opt/bitnami/mariadb/bin/:$PATH
 
 # Additional modules required
-RUN bitnami-pkg unpack apache-2.4.23-5 --checksum ce7996de3c2173a72ad742e7ad0b4d48a1947454d4e0001497be74f19f9aa74c
-RUN bitnami-pkg install php-7.0.11-1 --checksum cc9129523269e86728eb81ac489c65996214f22c6447bbff4c2306ec4be3c871
-RUN bitnami-pkg install libphp-7.0.11-2 --checksum e91e9763027b68d9adc69dc30cef791bd826ce492a22ad0c66914a03f3e1bf57
-RUN bitnami-pkg install mysql-client-10.1.13-4 --checksum 14b45c91dd78b37f0f2366712cbe9bfdf2cb674769435611955191a65dbf4976
+RUN bitnami-pkg unpack apache-2.4.23-9 --checksum 25bf5b82662874c21b0c0614c057d06b4a8ec14d8a76181053b691a9dfbf7f94
+RUN bitnami-pkg install php-7.0.12-1 --checksum d6e73b25677e4beae79c6536b1f7e6d9f23c153d62b586f16e334782a6868eb2
+RUN bitnami-pkg install libphp-7.0.12-0 --checksum cf1a090ef79c2d1a7c9598a91e8dc7a485a5c3967aaee55cb08b23496fdbf1ee
+RUN bitnami-pkg install mysql-client-10.1.19-0 --checksum fdbc292bedabeaf0148d66770b8aa0ab88012ce67b459d6ba2b46446c91bb79c
 
 # Install suitecrm
-RUN bitnami-pkg unpack suitecrm-7.7.4-0 --checksum 504c2f95289ea25146e895d9f96cea34fbc5e486514d146d98e03317efcef180
+RUN bitnami-pkg unpack suitecrm-7.7.7-0 --checksum 2bcb00def5c9fd045bcd4f12a30b4a52463fabef49f94ab11fbc4b12fa362a6e
 
 COPY rootfs /
 
