@@ -10,7 +10,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r2
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=symfony \
-    BITNAMI_IMAGE_VERSION=3.1.3-r4 \
+    BITNAMI_IMAGE_VERSION=3.1.3-r5 \
     PATH=/opt/bitnami/symfony:/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
