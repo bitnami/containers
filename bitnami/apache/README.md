@@ -121,6 +121,47 @@ services:
       - /path/to/apache-persistence/vhosts:/bitnami/apache/conf/vhosts
 ```
 
+## Using custom SSL certificates
+
+*NOTE:* The steps below assume that you are using a custom domain name and that you have already configured the custom domain name to point to your server.
+
+This container comes with SSL support already pre-configured and with a dummy certificate in place (`server.crt` and `server.key` files in `/bitnami/apache/conf/bitnami/certs`). If you want to use your own certificate (`.crt`) and certificate key (`.key`) files, follow the steps below:
+
+### Step 1: Prepare your certificate files
+
+In your local computer, create a folder called `certs` and put your certificates files. Make sure you rename both files to `server.crt` and `server.key` respectively:
+
+```bash
+mkdir /path/to/apache-persistence/conf/bitnami/certs -p
+cp /path/to/certfile.crt /path/to/apache-persistence/conf/bitnami/certs/server.crt
+cp /path/to/keyfile.key  /path/to/apache-persistence/conf/bitnami/certs/server.key
+```
+
+### Step 2: Run the Apache image
+
+Run the Apache image, mounting the certificates directory from your host.
+
+```bash
+docker run --name apache \
+  -v /path/to/apache-persistence/conf/bitnami/certs:/bitnami/apache/conf/bitnami/certs \
+  bitnami/apache:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  apache:
+    image: 'bitnami/apache:latest'
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /path/to/apache-persistence/conf/bitnami/certs:/bitnami/apache/conf/bitnami/certs
+```
+
 ## Full configuration
 
 This container looks for configuration in `/bitnami/apache/conf`. You can mount a directory at `/bitnami/apache/` with your own configuration, or the default configuration will be copied to your directory at `conf/` if it is empty.
