@@ -3,17 +3,17 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r2
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=opencart \
-    BITNAMI_IMAGE_VERSION=2.3.0.2-r4 \
+    BITNAMI_IMAGE_VERSION=2.3.0.2-r5 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required
-RUN bitnami-pkg unpack apache-2.4.23-5 --checksum ce7996de3c2173a72ad742e7ad0b4d48a1947454d4e0001497be74f19f9aa74c
-RUN bitnami-pkg unpack php-5.6.26-1 --checksum b7a72ae78f9b19352bd400dfe027465c88a8643c0e5d9753f8d12f4ebae542a2
-RUN bitnami-pkg install libphp-5.6.26-1 --checksum 327d070f57727f2ed4f0246d0e3f61c5a94f6366d21a7e7e4572fe6c9c8e8c2d
-RUN bitnami-pkg install mysql-client-10.1.13-4 --checksum 14b45c91dd78b37f0f2366712cbe9bfdf2cb674769435611955191a65dbf4976
+RUN bitnami-pkg unpack apache-2.4.23-9 --checksum 25bf5b82662874c21b0c0614c057d06b4a8ec14d8a76181053b691a9dfbf7f94
+RUN bitnami-pkg install php-5.6.27-2 --checksum 84d7fe4036a4218afd79b006c9fad55eab3cfec7a47d3a86183805f863813001
+RUN bitnami-pkg install libphp-5.6.27-0 --checksum f9039cc69834334187c9b55fc20bf3be818cd87a2088ced2732fead1d1bfb2d6
+RUN bitnami-pkg install mysql-client-10.1.19-0 --checksum fdbc292bedabeaf0148d66770b8aa0ab88012ce67b459d6ba2b46446c91bb79c
 
 # Install opencart
-RUN bitnami-pkg unpack opencart-2.3.0.2-1 --checksum 430187949b1e6a09594084e01ea2a900d06d2e640192b02570d18b7015c27dc4
+RUN bitnami-pkg unpack opencart-2.3.0.2-2 --checksum 00c350c4ca1ef2132d6abfd3fa483b8d2754e0fc04fbe26317741c28b42a1452
 
 COPY rootfs /
 
