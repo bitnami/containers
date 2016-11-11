@@ -16,11 +16,11 @@ ENV STACKSMITH_STACK_ID="nd6ziiq" \
 ## STACKSMITH-END: Modifications below this line will be unchanged when regenerating
 
 
-ENV BITNAMI_IMAGE_VERSION=10.1.19-r0 \
+ENV BITNAMI_IMAGE_VERSION=10.1.19-r1 \
     BITNAMI_APP_NAME=mariadb \
     BITNAMI_APP_USER=mysql
 
-RUN bitnami-pkg unpack mariadb-10.1.19-0 --checksum c54e3fdc689cdd2f2119914e4f255722f96f1d7fef37a064fd46fb84b013da7b
+RUN bitnami-pkg unpack mariadb-10.1.19-1 --checksum e64204db931c7f53b2d9e677d98d41300cbe378e6c1bf9fb43834608924de32e
 ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:$PATH
 
 COPY rootfs/ /
