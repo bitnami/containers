@@ -48,6 +48,8 @@ volumes:
     driver: local
   apache_data:
     driver: local
+  php_data:
+    driver: local
 ```
 
 ### Run the application manually
