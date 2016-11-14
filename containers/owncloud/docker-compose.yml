@@ -16,7 +16,7 @@ services:
     depends_on:
       - mariadb
     environment:
-      - OWNCLOUD_HOST=localhost
+      - OWNCLOUD_HOST=localhost # Only works the first time you run your container. See https://github.com/bitnami/bitnami-docker-owncloud/blob/master/README.md
 volumes:
   mariadb_data:
     driver: local

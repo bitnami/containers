@@ -74,7 +74,12 @@ If you want to run the application manually instead of using docker-compose, the
 
 Then you can access your application at http://your-ip/
 
-  *Note:* If you want to access your application from a public IP or hostname you need to configure as a Trusted Domain. You can handle it adjusting the configuration of the instance by setting the environment variable "OWNCLOUD_HOST" to your public IP or hostname.
+> *Note:* If you want to access your application from a public IP or hostname you need to configure as a Trusted Domain. You can handle it adjusting the configuration of the instance by setting the environment variable "OWNCLOUD_HOST" to your public IP or hostname.
+> *Note:* If you persisted your application and you already run your container, you won't be able to configure the Trusted Domains using the previous environment variable. Trusted Domains will be set using the configuration that had been previously persisted. Therefore, you will need to connect you container and execute the command below:
+
+  ````
+  $ sudo -u daemon /opt/bitnami/php/bin/php /opt/bitnami/owncloud/occ config:system:set trusted_domains 2 --value=YOUR_HOSTNAME
+  ````
 
 ## Persisting your application
 
