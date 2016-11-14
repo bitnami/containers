@@ -322,7 +322,21 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 ## Configuration file
 
-The image looks for configuration in the `conf/` directory of `/bitnami/mariadb`. As as mentioned in [Persisting your database](#persisting-your-data) you can mount a volume at this location and copy your own configuration file in the `conf/` directory as my_custom.cnf. That file will be included in the main configuration file and will overwrite any configuration you want to modify.
+The image looks for configuration in the `conf/` directory of `/bitnami/mariadb`. As mentioned in [Persisting your database](#persisting-your-data) you can mount a volume at this location and copy your own custom `my_custom.cnf` file in the `conf/` directory. That file will be included in the main configuration file and will overwrite any configuration you want to modify.
+
+For example, in order to override the max_allowed_packet directive:
+
+# Step 1: Write your my_custom.cnf file with the following content.
+```
+[mysqld]
+max_allowed_packet=32M
+```
+
+# Step 2: Run the mariaDB image with the designed volume attached.
+```
+docker run --name mariadb -v /path/to/my_custom_cnf_directory:/bitnami/mariadb bitnami/mariadb:latest
+```
+After that, your changes will be taken into account in the server's behaviour.
 
 ### Step 1: Run the MariaDB image
 
