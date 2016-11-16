@@ -19,14 +19,14 @@ Running PrestaShop with a database server is the recommended way. You can either
 
 This is the recommended way to run PrestaShop. You can use the following docker compose template:
 
-```
+```yaml
 version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
-  application:
+  prestashop:
     image: 'bitnami/prestashop:latest'
     ports:
       - '80:80'
@@ -82,7 +82,7 @@ If you remove every container all your data will be lost, and the next time you 
 ### Mount persistent folders in the host using docker-compose
 
 This requires a sightly modification from the template previously shown:
-```
+```yaml
 version: '2'
 
 services:
@@ -90,7 +90,7 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
-  application:
+  prestashop:
     image: 'bitnami/prestashop:latest'
     ports:
       - '80:80'
@@ -158,8 +158,8 @@ Bitnami provides up-to-date versions of MariaDB and PrestaShop, including securi
  When you start the prestashop image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
-```
-application:
+```yaml
+prestashop:
   image: bitnami/prestashop:latest
   ports:
     - 80:80
@@ -182,8 +182,8 @@ Available variables:
 
  - `APACHE_HTTP_PORT`: Port used by Apache for HTTP. Default: **80**
  - `APACHE_HTTPS_PORT`: Port used by Apache for HTTPS. Default: **443**
- - `PRESTASHOP_FIRST_NAME`: PrestaShop application User's First Name. Default: **User**
- - `PRESTASHOP_LAST_NAME`: PrestaShop application User's Last Name. Default: **Name**
+ - `PRESTASHOP_FIRST_NAME`: PrestaShop application User's First Name. Default: **Bitnami**
+ - `PRESTASHOP_LAST_NAME`: PrestaShop application User's Last Name. Default: **User**
  - `PRESTASHOP_PASSWORD`: PrestaShop application password. Default: **bitnami**
  - `PRESTASHOP_EMAIL`: PrestaShop application email. Default: **user@example.com**
  - `PRESTASHOP_HOST`: PrestaShop Host Server.
