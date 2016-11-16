@@ -5,7 +5,7 @@
 ## RUNNING
 ##   $ docker run ubuntu-for-bitnami-bitnami-docker-mariadb
 
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
+FROM gcr.io/stacksmith-images/minideb:jessie-r2
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -16,7 +16,7 @@ ENV STACKSMITH_STACK_ID="nd6ziiq" \
 ## STACKSMITH-END: Modifications below this line will be unchanged when regenerating
 
 
-ENV BITNAMI_IMAGE_VERSION=10.1.19-r1 \
+ENV BITNAMI_IMAGE_VERSION=10.1.19-r2 \
     BITNAMI_APP_NAME=mariadb \
     BITNAMI_APP_USER=mysql
 
