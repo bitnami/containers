@@ -192,7 +192,7 @@ Available variables:
  - `MAGENTO_FIRSTNAME`: Magento application first name. Default: **FirstName**
  - `MAGENTO_LASTNAME`: Magento application last name. Default: **LastName**
  - `MAGENTO_HOST`: Host domain or IP.
- - `MAGENTO_MODE`: Magento mode. Default: **developer**
+ - `MAGENTO_MODE`: Magento mode. Valid values: **default**, **production**, **developer**. Default: **default**
  - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
  - `MARIADB_PASSWORD`: Root password for the MariaDB.
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
