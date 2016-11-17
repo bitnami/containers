@@ -115,6 +115,8 @@ services:
 
 ### Mount host directories as data volumes using the Docker command line
 
+In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
+
 1. Create a network (if it does not exist):
 
   ```
