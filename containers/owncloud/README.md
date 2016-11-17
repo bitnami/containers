@@ -83,13 +83,15 @@ Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `apache_data`, `php_data`, `mariadb_data` and `application_data` volumes.
+If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
+
+If you are using docker-compose your data will be persistent as long as you don't remove `apache_data`, `php_data`, `mariadb_data` and `application_data` volumes.
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
 ### Mount persistent folders in the host using docker-compose
 
-This requires a sightly modification from the template previously shown:
+This requires a sightly modification from the from the `docker-compose.yml` template previously shown:
 ```yaml
 version: '2'
 
@@ -98,41 +100,49 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
-  owncloud:
+  application:
     image: 'bitnami/owncloud:latest'
+    depends_on:
+      - mariadb
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - '/path/to/your/local/owncloud_data:/bitnami/owncloud'
-      - '/path/to/your/local/apache_data:/bitnami/apache'
-      - '/path/to/your/local/php_data:/bitnami/php'
-    depends_on:
-      - mariadb
+      - '/path/to/owncloud-persistence:/bitnami/owncloud'
+      - '/path/to/apache-persistence:/bitnami/apache'
+      - '/path/to/php-persistence:/bitnami/php'
 ```
 
-### Mount persistent folders manually
+### Mount host directories as data volumes using the Docker command line
 
 In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
 
-1. If you haven't done this before, create a new network for the application and the database:
+1. Create a network (if it does not exist):
 
   ```
-  $ docker network create owncloud_network
+  $ docker network create owncloud
   ```
 
-2. Start a MariaDB database in the previous network:
+2. Create a MariaDB container with host volume:
 
   ```
-  $ docker run -d --name mariadb -v /your/local/path/bitnami/mariadb/data:/bitnami/mariadb/data -v /your/local/path/bitnami/mariadb/conf:/bitnami/mariadb/conf --network=owncloud_network bitnami/mariadb
+  $ docker run -d --name mariadb \
+    --net owncloud \
+    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+    bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to OwnCloud to resolve the host
 
-3. Run the OwnCloud container:
+3. Create the ownCloud container with host volumes:
 
   ```
-  $ docker run -d -p 80:80 --name owncloud -v /your/local/path/bitnami/owncloud:/bitnami/owncloud --network=owncloud_network bitnami/owncloud
+  $ docker run -d --name owncloud -p 80:80 -p 443:443 \
+    --net owncloud \
+    --volume /path/to/owncloud-persistence:/bitnami/owncloud \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/owncloud:latest
   ```
 
 # Upgrade this application
