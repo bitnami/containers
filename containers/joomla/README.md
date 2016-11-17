@@ -19,7 +19,7 @@ Running Joomla with a database server is the recommended way. You can either use
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run Joomla. You can use the following docker compose template:
+This is the recommended way to run Joomla. You can use the following `docker-compose.yml` template:
 
 ```
 version: '2'
@@ -82,7 +82,7 @@ Then you can access your application at http://your-ip/
 
 If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence of the Joomla deployment, the above examples define docker volumes namely mariadb_data, joomla_data, apache_data and php_data. The Joomla application state will persist as long as these volumes are not removed.
+For persistence of the Joomla deployment, the above examples define docker volumes namely `mariadb_data`, `joomla_data`, `apache_data` and `php_data`. The Joomla application state will persist as long as these volumes are not removed.
 
 If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
