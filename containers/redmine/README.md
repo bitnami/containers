@@ -72,11 +72,15 @@ Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data` and `application_data` data volumes. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
+
+For persistence of the Redmine deployment, the above examples define docker volumes namely mariadb_data and redmine_data. The Redmine application state will persist as long as these volumes are not removed.
+
+If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
-### Mount persistent folders in the host using docker-compose
+### Mount host directories as data volumes with Docker Compose
 
 This requires a sightly modification from the template previously shown:
 ```yaml
@@ -85,31 +89,31 @@ version: '2'
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
-      - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
+      - '/path/to/mariadb-persistence:/bitnami/mariadb'
   redmine:
     image: bitnami/redmine:latest
     ports:
       - 80:3000
     volumes:
-      - '/path/to/your/local/redmine_data:/bitnami/redmine'
-    depends_on:
-      - mariadb
+      - '/path/to/redmine-persistence:/bitnami/redmine'
+    
 ```
 
-### Mount persistent folders manually
+### Mount host directories as data volumes using the Docker command line
 
-In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
-
-1. If you haven't done this before, create a new network for the application and the database:
+1. Create a network (if it does not exist):
 
   ```
   $ docker network create redmine_network
   ```
 
-2. Start a MariaDB database in the previous network:
+2. Create a MariaDB container with host volume:
 
   ```
-  $ docker run -d --name mariadb -v /your/local/path/bitnami/mariadb:/bitnami/mariadb --network=redmine_network bitnami/mariadb
+  $ docker run -d --name mariadb \
+    --net redmine \
+    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+    bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to Redmine to resolve the host
@@ -117,7 +121,9 @@ In this case you need to specify the directories to mount on the run command. Th
 3. Run the Redmine container:
 
   ```
-  $ docker run -d -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --network=redmine_network bitnami/redmine
+  $ docker run -d -p 80:3000 --name redmine -v /path/to/bitnami/redmine:/bitnami/redmine \
+    --network=redmine_network bitnami/redmine \
+  bitnami/redmine:latest
   ```
 
 # Upgrade this application
