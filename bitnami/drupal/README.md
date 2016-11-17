@@ -19,7 +19,7 @@ Running Drupal with a database server is the recommended way. You can either use
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run Drupal. You can use the following docker compose template:
+This is the recommended way to run Drupal. You can use the following `docker-compose.yml` template:
 
 ```yaml
 version: '2'
