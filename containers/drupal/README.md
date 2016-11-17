@@ -77,7 +77,9 @@ Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. For persistence of the Drupal deployment, the above examples define docker volumes namely mariadb_data, drupal_data and apache_data. The Drupal application state will persist as long as these volumes are not removed.
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
+
+For persistence of the Drupal deployment, the above examples define docker volumes namely mariadb_data, drupal_data and apache_data. The Drupal application state will persist as long as these volumes are not removed.
 
 If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -109,15 +111,13 @@ services:
 
 ### Mount host directories as data volumes using the Docker command line
 
-In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
-
-1. If you haven't done this before, create a new network for the application and the database:
+1. Create a network (if it does not exist):
 
   ```
   $ docker network create drupal_network
   ```
 
-2. Start a MariaDB database in the previous network:
+2. Create a MariaDB container with host volume:
 
   ```
   $ docker run -d --name mariadb \
@@ -128,7 +128,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
   *Note:* You need to give the container a name in order to Drupal to resolve the host
 
-3. Run the Drupal container:
+3. Create the Drupal container with host volumes:
 
   ```
   $ docker run -d -p 80:80 --name drupal -v /path/to/bitnami/drupal:/bitnami/drupal \
