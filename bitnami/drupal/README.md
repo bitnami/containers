@@ -70,7 +70,7 @@ If you want to run the application manually instead of using docker-compose, the
 3. Run the Drupal container:
 
   ```
-  $ docker run -d -p 80:80 --name drupal --net=drupal_network bitnami/drupal
+  $ docker run -d -p 80:80 -p 443:443 --name drupal --net=drupal_network bitnami/drupal
   ```
 
 Then you can access your application at http://your-ip/
@@ -114,7 +114,7 @@ services:
 1. Create a network (if it does not exist):
 
   ```
-  $ docker network create drupal_network
+  $ docker network create drupal
   ```
 
 2. Create a MariaDB container with host volume:
@@ -131,8 +131,8 @@ services:
 3. Create the Drupal container with host volumes:
 
   ```
-  $ docker run -d -p 80:80 --name drupal -v /path/to/bitnami/drupal:/bitnami/drupal \
-    --network=drupal_network bitnami/drupal \
+  $ docker run -d --name drupal -p 80:80 -p 443:443 \
+    --net drupal \
     --volume /path/to/drupal-persistence:/bitnami/drupal \
     --volume /path/to/apache-persistence:/bitnami/apache \
     bitnami/drupal:latest
