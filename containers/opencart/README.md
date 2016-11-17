@@ -75,13 +75,16 @@ Then you can access the OpenCart storefront at http://your-ip/. To access the ad
 
 ## Persisting your application
 
-If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data` and `opencart_data` and `apache_data` volumes.
+If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
+ 
+ If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data` and `opencart_data` and `apache_data` volumes.
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
 ### Mount persistent folders in the host using docker-compose
 
-This requires a sightly modification from the template previously shown:
+
+This requires a sightly modification from the from the `docker-compose.yml` template previously shown:
 ```
 version: '2'
 
@@ -90,40 +93,47 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
-  application:
+  opencart:
     image: 'bitnami/opencart:latest'
+    depends_on:
+      - mariadb
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - '/path/to/your/local/opencart_data:/bitnami/opencart'
-      - '/path/to/your/local/apache_data:/bitnami/apache'
-    depends_on:
-      - mariadb
+      - '/path/to/opencart-persistence:/bitnami/opencart'
+      - '/path/to/apache-persistence:/bitnami/apache'
 ```
 
-### Mount persistent folders manually
+### Mount host directories as data volumes using the Docker command line
 
 In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
 
-1. If you haven't done this before, create a new network for the application and the database:
+1. Create a network (if it does not exist):
 
   ```
-  $ docker network create opencart_network
+  $ docker network create opencart-tier
   ```
 
-2. Start a MariaDB database in the previous network:
+2. Create a MariaDB container with host volume:
 
   ```
-  $ docker run -d --name mariadb -v /your/local/path/bitnami/mariadb/data:/bitnami/mariadb/data -v /your/local/path/bitnami/mariadb/conf:/bitnami/mariadb/conf --network=opencart_network bitnami/mariadb
+  $ docker run -d --name mariadb \
+    --net opencart-tier \
+    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+    bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to OpenCart to resolve the host
 
-3. Run the OpenCart container:
+3. Create the OpenCart container with host volumes:
 
   ```
-  $ docker run -d -p 80:80 --name opencart -v /your/local/path/bitnami/opencart:/bitnami/opencart --network=opencart_network bitnami/opencart
+  $ docker run -d --name opencart -p 80:80 -p 443:443 \
+    --net opencart-tier \
+    --volume /path/to/opencart-persistence:/bitnami/opencart \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    bitnami/opencart:latest
   ```
 
 # Upgrade this application
