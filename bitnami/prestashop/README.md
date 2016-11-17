@@ -112,14 +112,14 @@ In this case you need to specify the directories to mount on the run command. Th
 1. Create a network (if it does not exist):
 
   ```
-  $ docker network create prestashop
+  $ docker network create prestashop-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
   ```
   $ docker run -d --name mariadb \
-    --net prestashop \
+    --net prestashop-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
     bitnami/mariadb:latest
   ```
@@ -130,7 +130,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
   ```
   $ docker run -d --name prestashop -p 80:80 -p 443:443 \
-    --net prestashop \
+    --net prestashop-tier \
     --volume /path/to/prestashop-persistence:/bitnami/prestashop \
     --volume /path/to/apache-persistence:/bitnami/apache \
     --volume /path/to/php-persistence:/bitnami/php \
