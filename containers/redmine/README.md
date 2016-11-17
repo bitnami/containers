@@ -105,14 +105,14 @@ version: '2'
 1. Create a network (if it does not exist):
 
   ```
-  $ docker network create redmine
+  $ docker network create redmine-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
   ```
   $ docker run -d --name mariadb \
-    --net redmine \
+    --net redmine-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
     bitnami/mariadb:latest
   ```
@@ -123,7 +123,7 @@ version: '2'
 
   ```
   $ docker run -d --name redmine -p 80:3000 \
-    --net redmine \
+    --net redmine-tier \
     --volume /path/to/redmine-persistence:/bitnami/redmine \
   bitnami/redmine:latest
   ```
