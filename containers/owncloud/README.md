@@ -100,7 +100,7 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
-  application:
+  owncloud:
     image: 'bitnami/owncloud:latest'
     depends_on:
       - mariadb
@@ -120,14 +120,14 @@ In this case you need to specify the directories to mount on the run command. Th
 1. Create a network (if it does not exist):
 
   ```
-  $ docker network create owncloud
+  $ docker network create owncloud-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
   ```
   $ docker run -d --name mariadb \
-    --net owncloud \
+    --net owncloud-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
     bitnami/mariadb:latest
   ```
@@ -138,7 +138,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
   ```
   $ docker run -d --name owncloud -p 80:80 -p 443:443 \
-    --net owncloud \
+    --net owncloud-tier \
     --volume /path/to/owncloud-persistence:/bitnami/owncloud \
     --volume /path/to/apache-persistence:/bitnami/apache \
     --volume /path/to/php-persistence:/bitnami/php \
