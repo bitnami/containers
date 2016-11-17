@@ -114,14 +114,14 @@ services:
 1. Create a network (if it does not exist):
 
   ```
-  $ docker network create drupal
+  $ docker network create drupal-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
   ```
   $ docker run -d --name mariadb \
-    --net drupal \
+    --net drupal-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
     bitnami/mariadb:latest
   ```
@@ -132,7 +132,7 @@ services:
 
   ```
   $ docker run -d --name drupal -p 80:80 -p 443:443 \
-    --net drupal \
+    --net drupal-tier \
     --volume /path/to/drupal-persistence:/bitnami/drupal \
     --volume /path/to/apache-persistence:/bitnami/apache \
     bitnami/drupal:latest
