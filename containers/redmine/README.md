@@ -105,7 +105,7 @@ version: '2'
 1. Create a network (if it does not exist):
 
   ```
-  $ docker network create redmine_network
+  $ docker network create redmine
   ```
 
 2. Create a MariaDB container with host volume:
@@ -122,8 +122,9 @@ version: '2'
 3. Run the Redmine container:
 
   ```
-  $ docker run -d -p 80:3000 --name redmine -v /path/to/bitnami/redmine:/bitnami/redmine \
-    --network=redmine_network bitnami/redmine \
+  $ docker run -d --name redmine -p 80:3000 \
+    --net redmine \
+    --volume /path/to/redmine-persistence:/bitnami/redmine \
   bitnami/redmine:latest
   ```
 
