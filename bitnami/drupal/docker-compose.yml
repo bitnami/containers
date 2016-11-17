@@ -16,7 +16,6 @@ services:
       - 'php_data:/bitnami/php'
     depends_on:
       - mariadb
-
 volumes:
   mariadb_data:
     driver: local
