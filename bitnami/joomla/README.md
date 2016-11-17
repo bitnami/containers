@@ -48,6 +48,8 @@ volumes:
     driver: local
   apache_data:
     driver: local
+   php_data:
+    driver: local 
 ```
 
 ### Run the application manually
@@ -78,13 +80,17 @@ Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data` and `application_data` data volumes. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+
+For persistence of the Joomla deployment, the above examples define docker volumes namely mariadb_data, joomla_data, apache_data and php_data. The Joomla application state will persist as long as these volumes are not removed.
+
+If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
-### Mount persistent folders in the host using docker-compose
+### Mount host directories as data volumes with Docker Compose
 
-This requires a sightly modification from the template previously shown:
+This requires a sightly modification from the `docker-compose.yml` template previously shown:
 ```
 version: '2'
 
@@ -95,39 +101,46 @@ services:
       - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
   application:
     image: 'bitnami/joomla:latest'
+    depends_on:
+      - mariadb
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - '/path/to/your/local/joomla_data:/bitnami/joomla'
-      - '/path/to/your/local/apache_data:/bitnami/apache'
-      - '/path/to/your/local/php_data:/bitnami/php'
-    depends_on:
-      - mariadb
+      - '/path/to/joomla-persistence:/bitnami/joomla'
+      - '/path/to/apache-persistence:/bitnami/apache'
+      - '/path/to/php-persistence:/bitnami/php'
+  
 ```
 
-### Mount persistent folders manually
+### Mount host directories as data volumes using the Docker command line
 
-In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
-
-1. If you haven't done this before, create a new network for the application and the database:
+1. Create a network (if it does not exist):
 
   ```
   $ docker network create joomla_network
   ```
 
-2. Start a MariaDB database in the previous network:
+2. Create a MariaDB container with host volume:
 
   ```
-  $ docker run -d --name mariadb -v /your/local/path/bitnami/mariadb/data:/bitnami/mariadb/data -v /your/local/path/bitnami/mariadb/conf:/bitnami/mariadb/conf --net=joomla_network bitnami/mariadb
+  $ docker run -d --name mariadb \
+    --net joomla \
+    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+    bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to Joomla to resolve the host
 
-3. Run the Joomla container:
+3. Create the Joomla container with host volumes:
 
   ```
-  $ docker run -d -p 80:80 --name joomla -v /your/local/path/bitnami/joomla:/bitnami/joomla --net=joomla_network bitnami/joomla
+  $ docker run -d -p 80:80 --name joomla -v /path/to/bitnami/joomla:/bitnami/joomla \
+    --network=joomla_network bitnami/joomla \
+    --volume /path/to/joomla-persistence:/bitnami/joomla \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/joomla:latest
   ```
 
 # Upgrade this application
