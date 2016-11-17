@@ -133,7 +133,6 @@ In this case you need to specify the directories to mount on the run command. Th
     --net prestashop-tier \
     --volume /path/to/prestashop-persistence:/bitnami/prestashop \
     --volume /path/to/apache-persistence:/bitnami/apache \
-    --volume /path/to/php-persistence:/bitnami/php \
     bitnami/prestashop:latest
   ```
 
