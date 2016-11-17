@@ -118,7 +118,7 @@ services:
 1. Create a network (if it does not exist):
 
   ```
-  $ docker network create joomla_network
+  $ docker network create joomla
   ```
 
 2. Create a MariaDB container with host volume:
@@ -135,8 +135,8 @@ services:
 3. Create the Joomla container with host volumes:
 
   ```
-  $ docker run -d -p 80:80 --name joomla -v /path/to/bitnami/joomla:/bitnami/joomla \
-    --network=joomla_network bitnami/joomla \
+  $ docker run -d --name joomla -p 80:80 -p 443:443 \
+    --net joomla \
     --volume /path/to/joomla-persistence:/bitnami/joomla \
     --volume /path/to/apache-persistence:/bitnami/apache \
     --volume /path/to/php-persistence:/bitnami/php \
