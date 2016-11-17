@@ -19,14 +19,14 @@ Running ownCloud with a database server is the recommended way. You can either u
 
 This is the recommended way to run ownCloud. You can use the following docker compose template:
 
-```
+```yaml
 version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
-  application:
+  owncloud:
     image: 'bitnami/owncloud:latest'
     ports:
       - '80:80'
@@ -90,7 +90,7 @@ If you remove every container all your data will be lost, and the next time you 
 ### Mount persistent folders in the host using docker-compose
 
 This requires a sightly modification from the template previously shown:
-```
+```yaml
 version: '2'
 
 services:
@@ -98,7 +98,7 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
-  application:
+  owncloud:
     image: 'bitnami/owncloud:latest'
     ports:
       - '80:80'
@@ -147,28 +147,28 @@ Bitnami provides up-to-date versions of MariaDB and OwnCloud, including security
 
 2. Stop your container
 
- * For docker-compose: `$ docker-compose stop owncloud`
- * For manual execution: `$ docker stop owncloud`
+  * For docker-compose: `$ docker-compose stop owncloud`
+  * For manual execution: `$ docker stop owncloud`
 
 3. (For non-compose execution only) Create a [backup](#backing-up-your-application) if you have not mounted the owncloud folder in the host.
 
 4. Remove the currently running container
 
- * For docker-compose: `$ docker-compose rm -v owncloud`
- * For manual execution: `$ docker rm -v owncloud`
+  * For docker-compose: `$ docker-compose rm -v owncloud`
+  * For manual execution: `$ docker rm -v owncloud`
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start owncloud`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name owncloud bitnami/owncloud:latest`
+  * For docker-compose: `$ docker-compose start owncloud`
+  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name owncloud bitnami/owncloud:latest`
 
 # Configuration
 ## Environment variables
  When you start the owncloud image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
-```
-application:
+```yaml
+owncloud:
   image: bitnami/owncloud:latest
   ports:
     - 80:80
