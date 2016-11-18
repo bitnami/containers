@@ -27,7 +27,6 @@ export MONGODB_PRIMARY_PASSWORD=${MONGODB_PRIMARY_PASSWORD:-}
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
     initialize mongodb
-    chown -R :$BITNAMI_APP_USER /bitnami/mongodb || true
     echo "Starting application ..."
 fi
 
