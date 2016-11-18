@@ -81,13 +81,13 @@ If you remove every container and volume all your data will be lost, and the nex
 
 For persistence of the Drupal deployment, the above examples define docker volumes namely `mariadb_data`, `drupal_data` and `apache_data`. The Drupal application state will persist as long as these volumes are not removed.
 
-If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
+To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a sightly modification from the `docker-compose.yml` template previously shown:
+This requires a minor change to the `docker-compose.yml` template previously shown:
 ```yaml
 version: '2'
 
