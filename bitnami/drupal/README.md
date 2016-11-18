@@ -19,7 +19,7 @@ Running Drupal with a database server is the recommended way. You can either use
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run Drupal. You can use the following docker compose template:
+This is the recommended way to run Drupal. You can use the following `docker-compose.yml` template:
 
 ```yaml
 version: '2'
@@ -70,22 +70,24 @@ If you want to run the application manually instead of using docker-compose, the
 3. Run the Drupal container:
 
   ```
-  $ docker run -d -p 80:80 --name drupal --net=drupal_network bitnami/drupal
+  $ docker run -d -p 80:80 -p 443:443 --name drupal --net=drupal_network bitnami/drupal
   ```
 
 Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. For persistence of the Drupal deployment, the above examples define docker volumes namely mariadb_data, drupal_data and apache_data. The Drupal application state will persist as long as these volumes are not removed.
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
 
-If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
+For persistence of the Drupal deployment, the above examples define docker volumes namely `mariadb_data`, `drupal_data` and `apache_data`. The Drupal application state will persist as long as these volumes are not removed.
+
+To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a sightly modification from the `docker-compose.yml` template previously shown:
+This requires a minor change to the `docker-compose.yml` template previously shown:
 ```yaml
 version: '2'
 
@@ -109,30 +111,28 @@ services:
 
 ### Mount host directories as data volumes using the Docker command line
 
-In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
-
-1. If you haven't done this before, create a new network for the application and the database:
+1. Create a network (if it does not exist):
 
   ```
-  $ docker network create drupal_network
+  $ docker network create drupal-tier
   ```
 
-2. Start a MariaDB database in the previous network:
+2. Create a MariaDB container with host volume:
 
   ```
   $ docker run -d --name mariadb \
-    --net drupal \
+    --net drupal-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
     bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to Drupal to resolve the host
 
-3. Run the Drupal container:
+3. Create the Drupal container with host volumes:
 
   ```
-  $ docker run -d -p 80:80 --name drupal -v /path/to/bitnami/drupal:/bitnami/drupal \
-    --network=drupal_network bitnami/drupal \
+  $ docker run -d --name drupal -p 80:80 -p 443:443 \
+    --net drupal-tier \
     --volume /path/to/drupal-persistence:/bitnami/drupal \
     --volume /path/to/apache-persistence:/bitnami/apache \
     bitnami/drupal:latest
