@@ -81,13 +81,15 @@ Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove the `mariadb_data` and `testlink_data` data volumes. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
+
+For persistence of the TestLink deployment, the above examples define docker volumes namely `mariadb_data`, `testlink_data` and `apache_data`. The TestLink application state will persist as long as these volumes are not removed.
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
-### Mount persistent folders in the host using docker-compose
+### Mount host directories as data volumes with Docker Compose
 
-This requires a sightly modification from the template previously shown:
+This requires a minor change to the `docker-compose.yml` template previously shown:
 ```
 version: '2'
 
@@ -96,40 +98,48 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
-  application:
+  testlink:
     image: 'bitnami/testlink:latest'
+    depends_on:
+      - mariadb
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - '/path/to/your/local/testlink_data:/bitnami/testlink'
-      - '/path/to/your/local/apache_data:/bitnami/apache'
-    depends_on:
-      - mariadb
+      - '/path/to/testlink-persistence:/bitnami/testlink'
+      - '/path/to/apache-persistence:/bitnami/apache'
 ```
 
-### Mount persistent folders manually
+### Mount host directories as data volumes using the Docker command line
 
 In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
 
-1. If you haven't done this before, create a new network for the application and the database:
+1.  Create a network (if it does not exist):
 
   ```
-  $ docker network create testlink_network
+  $ docker network create testlink-tier
   ```
 
-2. Start a MariaDB database in the previous network:
+2. Create a MariaDB container with host volume:
 
   ```
-  $ docker run -d --name mariadb -v /your/local/path/bitnami/mariadb_data:/bitnami/mariadb  --net=testlink_network bitnami/mariadb
+  $ docker run -d --name mariadb \
+    --net testlink-tier \
+    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+    bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order for TestLink to resolve the host
 
-3. Run the TestLink container:
+3. Create the TestLink container with host volumes:
 
   ```
-  $ docker run -d -p 80:80 --name testlink -v /your/local/path/bitnami/testlink:/bitnami/testlink --net=testlink_network bitnami/testlink
+  $ docker run -d --name testlink -p 80:80 -p 443:443 \
+    --net testlink-tier \
+    --volume /path/to/testlink-persistence:/bitnami/testlink \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/testlink:latest
   ```
 
 # Upgrade this application
