@@ -134,7 +134,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
   *Note:* You need to give the container a name in order to Magento to resolve the host
 
-3. Create the Joomla container with host volumes:
+3. Create the Magento container with host volumes:
 
   ```
   $ docker run -d --name magento -p 80:80 -p 443:443 \
