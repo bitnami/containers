@@ -22,7 +22,6 @@ export REDIS_MASTER_PASSWORD=${REDIS_MASTER_PASSWORD:-}
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
     initialize redis
-    chown -R :$BITNAMI_APP_USER /bitnami/redis || true
     echo "Starting application ..."
 fi
 
