@@ -8,7 +8,7 @@ fresh_container() {
 }
 
 app_present() {
-  [ -f /app/config/database.yml ]
+  [ -f /app/config.ru ]
 }
 
 gems_up_to_date() {
