@@ -19,7 +19,6 @@ export MEMCACHED_PASSWORD=${MEMCACHED_PASSWORD:-}
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
     initialize memcached
-    chown -R :$BITNAMI_APP_USER /bitnami/memcached || true
     echo "Starting application ..."
 fi
 
