@@ -25,7 +25,6 @@ export POSTGRESQL_MASTER_PORT=${POSTGRESQL_MASTER_PORT:-5432}
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
     initialize postgresql
-    chown -R :$BITNAMI_APP_USER /bitnami/postgresql || true
     echo "Starting application ..."
 fi
 
