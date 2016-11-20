@@ -29,7 +29,6 @@ export MARIADB_MASTER_PASSWORD=${MARIADB_MASTER_PASSWORD:-}
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
     initialize mariadb
-    chown -R :$BITNAMI_APP_USER /bitnami/mariadb || true
     echo "Starting application ..."
 fi
 
