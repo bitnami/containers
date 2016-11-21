@@ -104,7 +104,7 @@ version: '2'
     ports:
       - 1337:1337
     volumes:
-      - '/path/to/parse_data:/bitnami/parse'
+      - '/path/to/parse-persistence:/bitnami/parse'
     
 ```
 
