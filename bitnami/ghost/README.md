@@ -96,7 +96,7 @@ services:
     ports:
       - '80:2368'
     volumes:
-      - '/path/to/ghost_data:/bitnami/ghost'
+      - '/path/to/ghost-persistence:/bitnami/ghost'
 ```
 
 ### MMount host directories as data volumes using the Docker command line
