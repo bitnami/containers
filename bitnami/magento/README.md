@@ -92,7 +92,7 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-TThis requires a minor change to the `docker-compose.yml` template previously shown:
+This requires a minor change to the `docker-compose.yml` template previously shown:
 ```
 version: '2'
 
