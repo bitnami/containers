@@ -69,13 +69,17 @@ This IP address allowing you to access to your application.
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `application_data` data volume. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
+
+For persistence of the JasperReports deployment, the above examples define docker volumes namely `tomcat_data` and `jasperserver_data`. The JasperReports application state will persist as long as these volumes are not removed.
+
+To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
-### Mount persistent folders in the host using docker-compose
+### Mount host directories as data volumes with Docker Compose
 
-This requires a sightly modification from the template previously shown:
+This requires a minor change to the `docker-compose.yml` template previously shown:
 ```
 version: '2'
 
@@ -90,29 +94,32 @@ services:
   application_data:
     image: bitnami/jasperserver:latest
     volumes:
-      - /bitnami/jasperserver
-      - /bitnami/tomcat
+      - /path/to/jasperserver-persistence:/bitnami/jasperserver
+      - /path/to/tomcat-persistence:/bitnami/tomcat
     entrypoint: 'true'
     mounts:
-      - /your/local/path/bitnami/jasperserver:/bitnami/jasperserver
-      - /your/local/path/bitnami/tomcat:/bitnami/tomcat
+      - /path/to/bitnami/jasperserver:/bitnami/jasperserver
+      - /path/to/bitnami/tomcat:/bitnami/tomcat
 ```
 
 ### Mount persistent folders manually
 
 In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
 
-1. If you haven't done this before, create a new network for the application:
+1. Create a network (if it does not exist):
 
   ```
-  $ docker network create jasperserver_network
+  $ docker network create jasperserver-tier
   ```
 
-2. Run the JasperReports container:
+2. Create the JasperReports container with host volume:
 
   ```
-  $ docker run -d -p 80:8080 --name jasperserver -v /your/local/path/bitnami/jasperserver:/bitnami/jasperserver --network=jasperserver_network bitnami/jasperserver
-  ```
+  $  docker run -d --name jasperserver -p 80:8080 \
+    --net jasperserver-tier \
+    --volume /path/to/jasperserver-persistence:/bitnami/jasperserver \
+    --volume /path/to/tomcat-persistence:/bitnami/tomcat \
+    bitnami/jasperserver:latest
 
 # Upgrade this application
 
