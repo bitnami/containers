@@ -68,14 +68,20 @@ Then you can access your application at http://your-ip/
 > **Note!** If you want to access your application from a public IP or hostname you need to properly configured Ghost . You can handle it adjusting the configuration of the instance by setting the environment variable "GHOST_HOST" to your public IP or hostname.
 
 ## Persisting your application
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `application_data` data volume. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+
+For persistence of the Ghost deployment, the above examples define docker volumes namely `mariadb_data` and `ghost_data`. The Ghost application state will persist as long as these volumes are not removed.
+
+To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
+
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
-### Mount persistent folders in the host using docker-compose
+### Mount host directories as data volumes with Docker Compose
 
-This requires a sightly modification from the template previously shown:
-```
+This requires a minor change to the `docker-compose.yml` template previously shown:
+```yaml
 version: '2'
 
 services:
@@ -83,38 +89,44 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
-  application:
+  ghost:
     image: bitnami/ghost:latest
+    depends_on:
+      - mariadb
     ports:
       - '80:2368'
     volumes:
-      - '/path/to/your/local/ghost_data:/bitnami/ghost'
-    depends_on:
-      - mariadb
+      - '/path/to/ghost_data:/bitnami/ghost'
 ```
 
-### Mount persistent folders manually
+### MMount host directories as data volumes using the Docker command line
 
 In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
 
-1. If you haven't done this before, create a new network for the application and the database:
+1. Create a network (if it does not exist):
 
   ```
-  $ docker network create ghost_network
+  $ docker network create ghost-tier
   ```
 
-2. Start a MariaDB database in the previous network:
+2. Create a MariaDB container with host volume:
 
   ```
-  $ docker run -d --name mariadb -v /your/local/path/bitnami/mariadb/data:/bitnami/mariadb/data -v /your/local/path/bitnami/mariadb/conf:/bitnami/mariadb/conf --network=ghost_network bitnami/mariadb
+  $ docker run -d --name mariadb \
+    --net ghost-tier \
+    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+    bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to Ghost to resolve the host
 
-3. Run the Ghost container:
+3. Create the Ghost container with host volumes:
 
   ```
-  $ docker run -d -p 80:2368 --name ghost -v /your/local/path/bitnami/ghost:/bitnami/ghost --network=ghost_network bitnami/ghost
+  $ docker run -d --name ghost -p 80:2368 \
+    --net ghost-tier \
+    --volume /path/to/ghost-persistence:/bitnami/ghost \
+    bitnami/ghost:latest
   ```
 
 # Upgrade this application
