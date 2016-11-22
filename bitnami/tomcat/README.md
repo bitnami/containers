@@ -113,20 +113,26 @@ Access your web server in the browser by navigating to [http://localhost:8080](h
 
 # Configuration
 
-## Creating a custom user
+## Environment variables
+
+The Tomcat instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom Tomcat:
+
+- `TOMCAT_SHUTDOWN_PORT`: Tomcat shutdown port. Default: **8005**
+- `TOMCAT_HTTP_PORT`: Tomcat HTTP port. Default: **8080**
+- `TOMCAT_AJP_PORT`: Tomcat AJP port. Default: **8009**
+- `JAVA_HOME`: Java home directory.
+- `JAVA_OPTS`: Tomcat java settings. Default: `-Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8 `
+- `TOMCAT_HOME`: Tomcat user's home directory. Default: **/home/tomcat**
+- `TOMCAT_USERNAME`: Tomcat user. Default: **user**
+- `TOMCAT_PASSWORD`: Tomcat password.
+
+### Creating a custom user
 
 By default, a management user named `user` is created and is not assigned a password. Passing the `TOMCAT_PASSWORD` environment variable when running the image for the first time will set the password of this user to the value of `TOMCAT_PASSWORD`.
 
 Additionally you can specify a user name for the management user using the `TOMCAT_USERNAME` environment variable. When not specified, the `TOMCAT_PASSWORD` configuration is applied on the default user (`user`).
 
-```bash
-docker run --name tomcat \
-  -e TOMCAT_USERNAME=my_user \
-  -e TOMCAT_PASSWORD=my_password \
-  bitnami/tomcat:latest
-```
-
-or using Docker Compose:
+### Specifying Environment variables using Docker Compose
 
 ```yaml
 version: '2'
@@ -139,6 +145,15 @@ services:
     environment:
       - TOMCAT_USERNAME=my_user
       - TOMCAT_PASSWORD=my_password
+```
+
+### Specifying Environment variables on the Docker command line
+
+```bash
+docker run --name tomcat \
+  -e TOMCAT_USERNAME=my_user \
+  -e TOMCAT_PASSWORD=my_password \
+  bitnami/tomcat:latest
 ```
 
 ## Configuration files
