@@ -4,7 +4,6 @@
   "ajpPort": "{{$global.env.TOMCAT_AJP_PORT}}",
   "javaHome": "{{$global.env.JAVA_HOME}}",
   "javaOpts": "{{$global.env.JAVA_OPTS}}",
-  "javaMemOpts": "{{$global.env.JAVA_MEMORY_OPTS}}",
   "tomcatHome": "{{$global.env.TOMCAT_HOME}}",
   "username": "{{$global.env.TOMCAT_USERNAME}}",
   "password": "{{$global.env.TOMCAT_PASSWORD}}"
