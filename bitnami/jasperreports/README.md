@@ -15,7 +15,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 This is the recommended way to run JasperReports. You can use the following docker compose template:
 
-```
+```yaml
 version: '2'
 
 services:
@@ -48,13 +48,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application:
 
-  ```
+  ```bash
   $ docker network create jasperserver_network
   ```
 
 2. Run the JasperReports container:
 
-  ```
+  ```bash
   $ docker run -d -p 80:8080 --name jasperserver --net=jasperserver_network bitnami/jasperserver
   ```
 
@@ -102,23 +102,26 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```
+  ```bash
   $ docker network create jasperserver-tier
   ```
 2. Create a MariaDB container with host volume:
 
+```bash
   $ docker run -d --name mariadb \
     --net jasperserver-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
    bitnami/mariadb:latest
+```
 
 3. Create the JasperReports container with host volume:
 
-  ```
+  ```bash
   $  docker run -d --name jasperserver -p 80:8080 \
     --net jasperserver-tier \
     --volume /path/to/jasperserver-persistence:/bitnami/jasperserver \
     bitnami/jasperserver:latest
+  ```
 
 # Upgrade this application
 
@@ -126,7 +129,7 @@ Bitnami provides up-to-date versions of JasperReports, including security patche
 
 1. Get the updated images:
 
-```
+```bash
 $ docker pull bitnami/jasperserver:latest
 ```
 
@@ -152,7 +155,7 @@ $ docker pull bitnami/jasperserver:latest
  When you start the jasperserver image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
-```
+```yaml
 application:
   image: bitnami/jasperserver:latest
   ports:
@@ -165,7 +168,7 @@ application:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
+```bash
  $ docker run -d -e JASPERSERVER_PASSWORD=my_password -p 80:8080 --name jasperserver -v /your/local/path/bitnami/jasperserver:/bitnami/jasperserver --network=jasperserver_network bitnami/jasperserver
 ```
 
@@ -187,7 +190,7 @@ This would be an example of SMTP configuration using a GMail account:
 
  * docker-compose:
 
-```
+```yaml
   application:
     image: bitnami/jasperserver:latest
     ports:
@@ -203,7 +206,7 @@ This would be an example of SMTP configuration using a GMail account:
 
  * For manual execution:
 
-```
+```bash
  $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:8080 --name jasperserver -v /your/local/path/bitnami/jasperserver:/bitnami/jasperserver --net=jasperserver_network bitnami/jasperserver
 ```
 
@@ -217,7 +220,7 @@ To backup your application data follow these steps:
 
 2. Copy the JasperReports data folder in the host:
 
-```
+```bash
 $ docker cp /your/local/path/bitnami:/bitnami/jasperserver
 ```
 
