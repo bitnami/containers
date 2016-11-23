@@ -59,13 +59,13 @@ If you want to run the application manually instead of using docker-compose, the
 1. Create a new network for the application and the database:
 
   ```bash
-  $ docker network create magento_network
+  $ docker network create magento-tier
   ```
 
 2. Start a MariaDB database in the network generated:
 
   ```bash
-  $ docker run -d --name mariadb --net=magento_network bitnami/mariadb
+  $ docker run -d --name mariadb --net=magento-tier bitnami/mariadb
   ```
 
   *Note:* You need to give the container a name in order to Magento to resolve the host
@@ -73,7 +73,7 @@ If you want to run the application manually instead of using docker-compose, the
 3. Run the Magento container:
 
   ```bash
-  $ docker run -d -p 80:80 --name magento --net=magento_network bitnami/magento
+  $ docker run -d -p 80:80 --name magento --net=magento-tier bitnami/magento
   ```
 
 Then you can access your application at http://your-ip/
@@ -82,7 +82,7 @@ Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence of the Magento deployment, the above examples define docker volumes namely `mariadb_data`, `magento_data`, `apache_data` and `php_data`. The Magento application state will persist as long as these volumes are not removed.
 
@@ -101,7 +101,7 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
-      - '/path/to/mariadb_data:/bitnami/mariadb'
+      - /path/to/mariadb-persistence:/bitnami/mariadb
   magento:
     image: 'bitnami/magento:latest'
     depends_on:
@@ -113,7 +113,7 @@ services:
       - '/path/to/magento-persistence:/bitnami/magento'
       - '/path/to/php-persistence:/bitnami/php'
       - '/path/to/apache-persistence:/bitnami/apache'
-    
+
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -194,7 +194,7 @@ application:
  * For manual execution add a `-e` option with each variable and value:
 
 ```bash
- $ docker run -d -e MAGENTO_PASSWORD=my_password1234 -p 80:80 --name magento -v /your/local/path/bitnami/magento:/bitnami/magento --net=magento_network bitnami/magento
+ $ docker run -d -e MAGENTO_PASSWORD=my_password1234 -p 80:80 --name magento -v /your/local/path/bitnami/magento:/bitnami/magento --net=magento-tier bitnami/magento
 ```
 
 Available variables:
