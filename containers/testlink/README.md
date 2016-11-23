@@ -21,7 +21,7 @@ Running TestLink with a database server is the recommended way. You can either u
 
 This is the recommended way to run TestLink. You can use the following docker compose template:
 
-```
+```yaml
 version: '2'
 
 services:
@@ -59,13 +59,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
+  ```bash
   $ docker network create testlink_network
   ```
 
 2. Start a MariaDB database in the network generated:
 
-  ```
+  ```bash
   $ docker run -d --name mariadb --net=testlink_network bitnami/mariadb
   ```
 
@@ -73,7 +73,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Run the TestLink container:
 
-  ```
+  ```bash
   $ docker run -d -p 80:80 --name testlink --net=testlink_network bitnami/testlink
   ```
 
@@ -90,7 +90,8 @@ For persistence of the TestLink deployment, the above examples define docker vol
 ### Mount host directories as data volumes with Docker Compose
 
 This requires a minor change to the `docker-compose.yml` template previously shown:
-```
+
+```yaml
 version: '2'
 
 services:
@@ -116,13 +117,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1.  Create a network (if it does not exist):
 
-  ```
+  ```bash
   $ docker network create testlink-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```
+  ```bash
   $ docker run -d --name mariadb \
     --net testlink-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
@@ -133,7 +134,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Create the TestLink container with host volumes:
 
-  ```
+  ```bash
   $ docker run -d --name testlink -p 80:80 -p 443:443 \
     --net testlink-tier \
     --volume /path/to/testlink-persistence:/bitnami/testlink \
@@ -148,7 +149,7 @@ Bitnami provides up-to-date versions of MariaDB and TestLink, including security
 
 1. Get the updated images:
 
-  ```
+  ```bash
   $ docker pull bitnami/testlink:latest
   ```
 
@@ -174,7 +175,7 @@ Bitnami provides up-to-date versions of MariaDB and TestLink, including security
  When you start the testlink image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
-```
+```yaml
 application:
   image: bitnami/testlink:latest
   ports:
@@ -185,7 +186,7 @@ application:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
+```bash
  $ docker run -d -e TESTLINK_PASSWORD=my_password -p 80:80 --name testlink -v /your/local/path/bitnami/testlink:/bitnami/testlink --net=testlink_network bitnami/testlink
 ```
 
@@ -231,7 +232,7 @@ This would be an example of SMTP configuration using a GMail account:
 
  * For manual execution:
 
-```
+```bash
  $ docker run -d -e SMTP_ENABLE=true -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -e SMTP_CONNECTION_MODE=tls -p 80:80 --name testlink -v /your/local/path/bitnami/testlink:/bitnami/testlink --network=testlink_network bitnami/testlink$ docker rm -v testlink
 ```
 
@@ -246,7 +247,7 @@ To backup your application data follow these steps:
 
 2. Copy the TestLink data folder in the host:
 
-  ```
+  ```bash
   $ docker cp /your/local/path/bitnami:/bitnami/testlink
   ```
 
