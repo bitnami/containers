@@ -130,16 +130,12 @@ Bitnami provides up-to-date versions of JasperReports, including security patche
 
 1. Get the updated images:
 
-<<<<<<< HEAD
 ```bash
 $ docker pull bitnami/jasperserver:latest
 ```
-=======
-  ```
+```bash
   $ docker pull bitnami/jasperserver:latest
-  ```
->>>>>>> bitnami/master
-
+```
 2. Stop your container
 
  * For docker-compose: `$ docker-compose stop jasperserver`
@@ -227,7 +223,6 @@ To backup your application data follow these steps:
 
 2. Copy the JasperReports data folder in the host:
 
-<<<<<<< HEAD
 ```bash
 $ docker cp /your/local/path/bitnami:/bitnami/jasperserver
 ```
@@ -235,8 +230,6 @@ $ docker cp /your/local/path/bitnami:/bitnami/jasperserver
   ```
   $ docker cp /your/local/path/bitnami:/bitnami/jasperserver
   ```
->>>>>>> bitnami/master
-
 # Restoring a backup
 
 To restore your application using backed up data simply mount the folder with JasperReports data in the container. See [persisting your application](#persisting-your-application) section for more info.
