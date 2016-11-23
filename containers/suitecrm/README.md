@@ -59,13 +59,13 @@ If you want to run the application manually instead of using docker-compose, the
 1. Create a new network for the application and the database:
 
   ```bash
-  $ docker network create suitecrm_network
+  $ docker network create suitecrm-tier
   ```
 
 2. Start a MariaDB database in the network generated:
 
   ```bash
-   $ docker run -d --name mariadb --net=suitecrm_network bitnami/mariadb
+   $ docker run -d --name mariadb --net=suitecrm-tier bitnami/mariadb
   ```
 
   *Note:* You need to give the container a name in order to SuiteCRM to resolve the host
@@ -73,7 +73,7 @@ If you want to run the application manually instead of using docker-compose, the
 3. Run the SuiteCRM container:
 
   ```bash
-  $ docker run -d -p 80:80 --name suitecrm --net=suitecrm_network bitnami/suitecrm
+  $ docker run -d -p 80:80 --name suitecrm --net=suitecrm-tier bitnami/suitecrm
   ```
 
 Then you can access your application at http://your-ip/
@@ -99,7 +99,7 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
-      - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
+      - '/path/to/mariadb-persistence:/bitnami/mariadb'
   application:
     image: 'bitnami/suitecrm:latest'
     depends_on:
@@ -191,7 +191,7 @@ application:
  * For manual execution add a `-e` option with each variable and value:
 
 ```bash
- $ docker run -d -e SUITECRM_PASSWORD=my_password -p 80:80 --name suitecrm -v /your/local/path/bitnami/suitecrm:/bitnami/suitecrm --net=suitecrm_network bitnami/suitecrm
+ $ docker run -d -e SUITECRM_PASSWORD=my_password -p 80:80 --name suitecrm -v /your/local/path/bitnami/suitecrm:/bitnami/suitecrm --net=suitecrm-tier bitnami/suitecrm
 ```
 
 Available variables:
