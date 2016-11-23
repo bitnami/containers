@@ -97,26 +97,26 @@ This requires a minor change to the `docker-compose.yml` template previously sho
 version: '2'
 
 services:
-
   mongodb:
     image: 'bitnami/mongodb:latest'
     volumes:
       - '/path/to/mongodb-persistence:/bitnami/mongodb'
   parse:
     image: 'bitnami/parse:latest'
-    depends_on:
-      - mongodb
     ports:
       - '1337:1337'
+    depends_on:
+        - mongodb
     volumes:
-      - '/path/to/parse_data:/bitnami/parse'
-  application:
+      - '/path/to/parse-persistence:/bitnami/parse'
+  parse-dashboard:
     image: 'bitnami/parse-dashboard:latest'
     ports:
       - '80:4040'
+    depends_on:
+      - mongodb
     volumes:
-      - '/path/to/parse_data-persistence:/bitnami/parse-data'
-      - '/path/to/parse_dashboard_data-persistence:/bitnami/parse-dashboard'
+      - '/path/to/parse_dashboard-persistence:/bitnami/parse-dashboard'
 
 ```
 
@@ -146,14 +146,16 @@ In this case you need to specify the directories to mount on the run command. Th
   ```bash
   $ docker run -d -name parse -p 1337:1337 \
     --net parse-dashboard-tier
-     --volume /path/to/parse-persistence:/bitnami/parse \
-    --volume /path/to/parse-dashboard-persistence:/bitnami/parse-dashboard \
+    --volume /path/to/parse-persistence:/bitnami/parse \
+    bitnami/parse:latest
   ```
 
 4. Run the Parse Dashboard container:
 
   ```bash
-  $ docker run -d -p 80:4040 --name parse-dashboard -v /your/local/path/bitnami/parse_dashboard:/bitnami/parse-dashboard --network=parse_dashboard-tier bitnami/parse-dashboard
+  $ docker run -d --name parse-dashboard -p 80:4040 \
+  --volume /path/to/parse_dashboard-persistence:/bitnami/parse-dashboard \
+  bitnami/parse-dashboard:latest
   ```
 
 # Upgrade this application
