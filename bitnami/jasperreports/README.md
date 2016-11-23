@@ -108,12 +108,12 @@ In this case you need to specify the directories to mount on the run command. Th
   ```
 2. Create a MariaDB container with host volume:
 
-```bash
+  ```bash
   $ docker run -d --name mariadb \
     --net jasperserver-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
    bitnami/mariadb:latest
-```
+  ```
 
 3. Create the JasperReports container with host volume:
 
@@ -130,28 +130,26 @@ Bitnami provides up-to-date versions of JasperReports, including security patche
 
 1. Get the updated images:
 
-```bash
-$ docker pull bitnami/jasperserver:latest
-```
-```bash
+  ```bash
   $ docker pull bitnami/jasperserver:latest
-```
+  ```
+
 2. Stop your container
 
- * For docker-compose: `$ docker-compose stop jasperserver`
- * For manual execution: `$ docker stop jasperserver`
+  * For docker-compose: `$ docker-compose stop jasperserver`
+  * For manual execution: `$ docker stop jasperserver`
 
 3. (For non-compose execution only) Create a [backup](#backing-up-your-application) if you have not mounted the jasperserver folder in the host.
 
 4. Remove the currently running container
 
- * For docker-compose: `$ docker-compose rm -v jasperserver`
- * For manual execution: `$ docker rm -v jasperserver`
+  * For docker-compose: `$ docker-compose rm -v jasperserver`
+  * For manual execution: `$ docker rm -v jasperserver`
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start jasperserver`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name jasperserver bitnami/jasperserver:latest`
+  * For docker-compose: `$ docker-compose start jasperserver`
+  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name jasperserver bitnami/jasperserver:latest`
 
 # Configuration
 ## Environment variables
@@ -172,7 +170,7 @@ application:
  * For manual execution add a `-e` option with each variable and value:
 
 ```bash
- $ docker run -d -e JASPERSERVER_PASSWORD=my_password -p 80:8080 --name jasperserver -v /your/local/path/bitnami/jasperserver:/bitnami/jasperserver --network=jasperserver_network bitnami/jasperserver
+  $ docker run -d -e JASPERSERVER_PASSWORD=my_password -p 80:8080 --name jasperserver -v /your/local/path/bitnami/jasperserver:/bitnami/jasperserver --network=jasperserver_network bitnami/jasperserver
 ```
 
 Available variables:
@@ -223,11 +221,7 @@ To backup your application data follow these steps:
 
 2. Copy the JasperReports data folder in the host:
 
-```bash
-$ docker cp /your/local/path/bitnami:/bitnami/jasperserver
-```
-=======
-  ```
+  ```bash
   $ docker cp /your/local/path/bitnami:/bitnami/jasperserver
   ```
 # Restoring a backup
