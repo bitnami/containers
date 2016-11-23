@@ -7,6 +7,13 @@
 
 https://www.drupal.org/
 
+# TL;DR;
+
+```bash
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-drupal/master/docker-compose.yml
+$ docker-compose up
+```
+
 # Prerequisites
 
 To run this application you need Docker Engine 1.10.0. Docker Compose is recommended with a version 1.6.0 or later.
