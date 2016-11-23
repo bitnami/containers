@@ -55,13 +55,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
+  ```bash
   $ docker network create drupal_network
   ```
 
 2. Start a MariaDB database in the network generated:
 
-  ```
+  ```bash
   $ docker run -d --name mariadb --net=drupal_network bitnami/mariadb
   ```
 
@@ -69,7 +69,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Run the Drupal container:
 
-  ```
+  ```bash
   $ docker run -d -p 80:80 -p 443:443 --name drupal --net=drupal_network bitnami/drupal
   ```
 
@@ -113,13 +113,13 @@ services:
 
 1. Create a network (if it does not exist):
 
-  ```
+  ```bash
   $ docker network create drupal-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```
+  ```bash
   $ docker run -d --name mariadb \
     --net drupal-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
@@ -130,7 +130,7 @@ services:
 
 3. Create the Drupal container with host volumes:
 
-  ```
+  ```bash
   $ docker run -d --name drupal -p 80:80 -p 443:443 \
     --net drupal-tier \
     --volume /path/to/drupal-persistence:/bitnami/drupal \
