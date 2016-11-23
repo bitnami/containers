@@ -1,7 +1,9 @@
 version: '2'
 services:
   myapp:
-    image: bitnami/symfony
+    image: bitnami/symfony:latest
+    environment:
+      - SYMFONY_PROJECT_NAME=
     ports:
       - '8000:8000'
     volumes:
