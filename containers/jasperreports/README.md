@@ -40,8 +40,8 @@ volumes:
   jasperserver_data:
     driver: local
 ```
-Then you can access your application at http://your-ip/. Enter bitnami default username and password: 
-`user/ bitnami` 
+Then you can access your application at http://your-ip/. Enter bitnami default username and password:
+`user/ bitnami`
 
 ## Run the application manually
 
@@ -50,19 +50,19 @@ If you want to run the application manually instead of using docker-compose, the
 1. Create a new network for the application:
 
   ```bash
-  $ docker network create jasperserver_network
+  $ docker network create jasperserver-tier
   ```
 
 2. Run the JasperReports container:
 
   ```bash
-  $ docker run -d -p 80:8080 --name jasperserver --net=jasperserver_network bitnami/jasperserver
+  $ docker run -d -p 80:8080 --name jasperserver --net=jasperserver-tier bitnami/jasperserver
   ```
 
-Then you can access your application at http://your-ip/. Enter bitnami default username and password: 
-`user/ bitnami` 
- 
->**Note!** If you are using **Docker for Windows** (regardless of running the application using Docker compose or manually) you must check the Docker virtual machine IP executing this command: 
+Then you can access your application at http://your-ip/. Enter bitnami default username and password:
+`user/ bitnami`
+
+>**Note!** If you are using **Docker for Windows** (regardless of running the application using Docker compose or manually) you must check the Docker virtual machine IP executing this command:
 
 `docker-machine ip`
 
@@ -70,7 +70,7 @@ This IP address allowing you to access to your application.
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence of the JasperReports deployment, the above examples define docker volumes namely `tomcat_data` and `jasperserver_data`. The JasperReports application state will persist as long as these volumes are not removed.
 
@@ -86,7 +86,7 @@ version: '2'
 services:
   mariadb: bitnami/mariadb:latest
   volumes:
-    - mariadb_data:/bitnami/mariadb
+    - /path/to/mariadb-persistence:/bitnami/mariadb
 jasperserver:
   image: bitnami/jasperserver:latest
   depends_on:
@@ -170,7 +170,7 @@ application:
  * For manual execution add a `-e` option with each variable and value:
 
 ```bash
-  $ docker run -d -e JASPERSERVER_PASSWORD=my_password -p 80:8080 --name jasperserver -v /your/local/path/bitnami/jasperserver:/bitnami/jasperserver --network=jasperserver_network bitnami/jasperserver
+  $ docker run -d -e JASPERSERVER_PASSWORD=my_password -p 80:8080 --name jasperserver -v /your/local/path/bitnami/jasperserver:/bitnami/jasperserver --network=jasperserver-tier bitnami/jasperserver
 ```
 
 Available variables:
@@ -208,7 +208,7 @@ This would be an example of SMTP configuration using a GMail account:
  * For manual execution:
 
 ```bash
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:8080 --name jasperserver -v /your/local/path/bitnami/jasperserver:/bitnami/jasperserver --net=jasperserver_network bitnami/jasperserver
+ $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:8080 --name jasperserver -v /your/local/path/bitnami/jasperserver:/bitnami/jasperserver --net=jasperserver-tier bitnami/jasperserver
 ```
 
 # Backing up your application
