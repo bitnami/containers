@@ -7,10 +7,11 @@
 
 <https://www.orangehrm.com/>
 
-# TL;DR
+# TL;DR;
 
 ```bash
-docker-compose up -d
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-orangehrm/master/docker-compose.yml
+$ docker-compose up
 ```
 
 # Prerequisites
