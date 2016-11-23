@@ -1,9 +1,9 @@
-FROM gcr.io/stacksmith-images/ubuntu:14.04-r10
+FROM gcr.io/stacksmith-images/minideb:jessie-r2
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=jasperserver \
-    BITNAMI_APP_VERSION=6.3.0-r2 \
+    BITNAMI_IMAGE_VERSION=6.3.0-r3 \
     PATH=/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # Additional modules required

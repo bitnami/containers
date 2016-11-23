@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-jasperserver/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-jasperserver/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/jasperserver)](https://hub.docker.com/r/bitnami/jasperserver/)
 # What is JasperReports?
 
@@ -129,9 +130,15 @@ Bitnami provides up-to-date versions of JasperReports, including security patche
 
 1. Get the updated images:
 
+<<<<<<< HEAD
 ```bash
 $ docker pull bitnami/jasperserver:latest
 ```
+=======
+  ```
+  $ docker pull bitnami/jasperserver:latest
+  ```
+>>>>>>> bitnami/master
 
 2. Stop your container
 
@@ -215,14 +222,20 @@ This would be an example of SMTP configuration using a GMail account:
 To backup your application data follow these steps:
 
 1. Stop the running container:
-* For docker-compose: `$ docker-compose stop jasperserver`
-* For manual execution: `$ docker stop jasperserver`
+  * For docker-compose: `$ docker-compose stop jasperserver`
+  * For manual execution: `$ docker stop jasperserver`
 
 2. Copy the JasperReports data folder in the host:
 
+<<<<<<< HEAD
 ```bash
 $ docker cp /your/local/path/bitnami:/bitnami/jasperserver
 ```
+=======
+  ```
+  $ docker cp /your/local/path/bitnami:/bitnami/jasperserver
+  ```
+>>>>>>> bitnami/master
 
 # Restoring a backup
 
@@ -243,7 +256,7 @@ be sure to include the following information in your issue:
 - Host OS and version
 - Docker version (`docker version`)
 - Output of `docker info`
-- Version of this container (`echo $BITNAMI_APP_VERSION` inside the container)
+- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
