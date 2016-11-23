@@ -12,6 +12,13 @@ We also provide a Docker Image for Parse Dashboard. Parse Dashboard is a standal
 
 [Bitnami Parse Dashboard](https://github.com/bitnami/bitnami-docker-parse-dashboard)
 
+# TL;DR;
+
+```bash
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-parse/master/docker-compose.yml
+$ docker-compose up
+```
+
 # Prerequisites
 
 To run this application you need Docker Engine 1.10.0. Docker Compose is recomended with a version 1.6.0 or later.
@@ -79,7 +86,7 @@ Then you can access your application at http://your-ip/parse
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence of the Parse deployment, the above examples define docker volumes namely `mongodb_data` and `parse_data`. The Parse application state will persist as long as these volumes are not removed.
 
@@ -105,7 +112,6 @@ version: '2'
       - 1337:1337
     volumes:
       - '/path/to/parse-persistence:/bitnami/parse'
-    
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -132,7 +138,7 @@ In this case you need to specify the directories to mount on the run command. Th
 3. Run the Parse container:
 
   ```
-  $ docker run -d --name parse -p 1337:1337 \ 
+  $ docker run -d --name parse -p 1337:1337 \
     --net parse-tier \
     --volume /path/to/parse-persistence:/bitnami/parse \
      bitnami/parse:latest
