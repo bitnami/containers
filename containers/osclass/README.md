@@ -7,10 +7,11 @@
 
 https://osclass.org/
 
-# TLDR
+# TL;DR;
 
 ```bash
-$ docker-compose up -d
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-osclass/master/docker-compose.yml
+$ docker-compose up
 ```
 
 # Prerequisites
