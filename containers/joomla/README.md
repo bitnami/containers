@@ -7,6 +7,13 @@
 
 https://www.joomla.org/
 
+# TL;DR;
+
+```bash
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-joomla/master/docker-compose.yml
+$ docker-compose up
+```
+
 # Prerequisites
 
 To run this application you need Docker Engine 1.10.0. Docker Compose is recomended with a version 1.6.0 or later.
@@ -49,7 +56,7 @@ volumes:
   apache_data:
     driver: local
    php_data:
-    driver: local 
+    driver: local
 ```
 
 ### Run the application manually
@@ -110,7 +117,6 @@ services:
       - '/path/to/joomla-persistence:/bitnami/joomla'
       - '/path/to/apache-persistence:/bitnami/apache'
       - '/path/to/php-persistence:/bitnami/php'
-  
 ```
 
 ### Mount host directories as data volumes using the Docker command line
