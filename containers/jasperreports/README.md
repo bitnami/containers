@@ -80,26 +80,20 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 ### Mount host directories as data volumes with Docker Compose
 
 This requires a minor change to the `docker-compose.yml` template previously shown:
-```
+```yaml
 version: '2'
-
 services:
-  application:
-    image: bitnami/jasperserver:latest
-    ports:
-      - 80:8080
-    volumes_from:
-      - application_data
-
-  application_data:
-    image: bitnami/jasperserver:latest
-    volumes:
-      - /path/to/jasperserver-persistence:/bitnami/jasperserver
-      - /path/to/tomcat-persistence:/bitnami/tomcat
-    entrypoint: 'true'
-    mounts:
-      - /path/to/bitnami/jasperserver:/bitnami/jasperserver
-      - /path/to/bitnami/tomcat:/bitnami/tomcat
+  mariadb: bitnami/mariadb:latest
+  volumes:
+    - mariadb_data:/bitnami/mariadb
+jasperserver:
+  image: bitnami/jasperserver:latest
+  depends_on:
+    - mariadb
+  ports:
+    - 80:8080
+  volumes:
+    - /path/to/jasperserver-persistence:/bitnami/jasperserver
 ```
 
 ### Mount persistent folders manually
@@ -111,14 +105,19 @@ In this case you need to specify the directories to mount on the run command. Th
   ```
   $ docker network create jasperserver-tier
   ```
+2. Create a MariaDB container with host volume:
 
-2. Create the JasperReports container with host volume:
+  $ docker run -d --name mariadb \
+    --net jasperserver-tier \
+    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+   bitnami/mariadb:latest
+
+3. Create the JasperReports container with host volume:
 
   ```
   $  docker run -d --name jasperserver -p 80:8080 \
     --net jasperserver-tier \
     --volume /path/to/jasperserver-persistence:/bitnami/jasperserver \
-    --volume /path/to/tomcat-persistence:/bitnami/tomcat \
     bitnami/jasperserver:latest
 
 # Upgrade this application
