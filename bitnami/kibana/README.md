@@ -6,17 +6,11 @@
 
 [elastic.co/products/kibana](https://www.elastic.co/products/kibana)
 
-# TLDR
+# TL;DR;
 
 ```bash
-docker run --name kibana bitnami/kibana:latest
-```
-
-## Docker Compose
-
-```
-kibana:
-  image: bitnami/kibana:latest
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-kibana/master/docker-compose.yml
+$ docker-compose up
 ```
 
 # Get this image
