@@ -4,8 +4,14 @@
 
 > OpenCart is a free and open source e-commerce platform for online merchants. It provides a professional and reliable foundation for a successful online store.
 
-
 http://www.opencart.com/
+
+# TL;DR;
+
+```bash
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-opencart/master/docker-compose.yml
+$ docker-compose up
+```
 
 # Prerequisites
 
@@ -75,8 +81,8 @@ Then you can access the OpenCart storefront at http://your-ip/. To access the ad
 
 ## Persisting your application
 
-If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
- 
+If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+
  If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data` and `opencart_data` and `apache_data` volumes.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
