@@ -46,13 +46,13 @@ If you want to run the application manually instead of using docker-compose, the
 1. Create a new network for the application and the database:
 
   ```bash
-  $ docker network create ghost_network
+  $ docker network create ghost-tier
   ```
 
 2. Start a MariaDB database in the network generated:
 
    ```bash
-   $ docker run -d --name mariadb --net=ghost_network bitnami/mariadb
+   $ docker run -d --name mariadb --net=ghost-tier bitnami/mariadb
    ```
 
    *Note:* You need to give the container a name in order to Ghost to resolve the host
@@ -60,7 +60,7 @@ If you want to run the application manually instead of using docker-compose, the
 3. Run the Ghost container:
 
   ```bash
-  $ docker run -d -p 80:2368 --name ghost --net=ghost_network bitnami/ghost
+  $ docker run -d -p 80:2368 --name ghost --net=ghost-tier bitnami/ghost
   ```
 
 Then you can access your application at http://your-ip/
@@ -88,7 +88,7 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
-      - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
+      - /path/to/mariadb-persistence:/bitnami/mariadb
   ghost:
     image: bitnami/ghost:latest
     depends_on:
@@ -99,7 +99,7 @@ services:
       - '/path/to/ghost-persistence:/bitnami/ghost'
 ```
 
-### MMount host directories as data volumes using the Docker command line
+### Mount host directories as data volumes using the Docker command line
 
 In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
 
@@ -173,7 +173,7 @@ application:
  * For manual execution add a `-e` option with each variable and value:
 
 ```bash
- $ docker run -d -e GHOST_PASSWORD=my_password -p 80:2368 --name ghost -v /your/local/path/bitnami/ghost:/bitnami/ghost --network=ghost_network bitnami/ghost
+ $ docker run -d -e GHOST_PASSWORD=my_password -p 80:2368 --name ghost -v /your/local/path/bitnami/ghost:/bitnami/ghost --network=ghost-tier bitnami/ghost
 ```
 
 Available variables:
@@ -214,7 +214,7 @@ This would be an example of SMTP configuration using a GMail account:
  * For manual execution:
 
 ```bash
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_SERVICE=GMail -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:2368 --name ghost -v /your/local/path/bitnami/ghost:/bitnami/ghost --network=ghost_network bitnami/ghost
+ $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_SERVICE=GMail -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:2368 --name ghost -v /your/local/path/bitnami/ghost:/bitnami/ghost --network=ghost-tier bitnami/ghost
 ```
 
 # Backing up your application
