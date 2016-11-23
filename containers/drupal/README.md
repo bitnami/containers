@@ -56,13 +56,13 @@ If you want to run the application manually instead of using docker-compose, the
 1. Create a new network for the application and the database:
 
   ```bash
-  $ docker network create drupal_network
+  $ docker network create
   ```
 
 2. Start a MariaDB database in the network generated:
 
   ```bash
-  $ docker run -d --name mariadb --net=drupal_network bitnami/mariadb
+  $ docker run -d --name mariadb --net= bitnami/mariadb
   ```
 
   *Note:* You need to give the container a name in order to Drupal to resolve the host
@@ -70,14 +70,14 @@ If you want to run the application manually instead of using docker-compose, the
 3. Run the Drupal container:
 
   ```bash
-  $ docker run -d -p 80:80 -p 443:443 --name drupal --net=drupal_network bitnami/drupal
+  $ docker run -d -p 80:80 -p 443:443 --name drupal --net= bitnami/drupal
   ```
 
 Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence of the Drupal deployment, the above examples define docker volumes namely `mariadb_data`, `drupal_data` and `apache_data`. The Drupal application state will persist as long as these volumes are not removed.
 
@@ -106,7 +106,7 @@ services:
     volumes:
       - '/path/to/drupal-persistence:/bitnami/drupal'
       - '/path/to/apache-persistence:/bitnami/apache'
-    
+
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -184,7 +184,7 @@ drupal:
  * For manual execution add a `-e` option with each variable and value:
 
 ```
- $ docker run -d -e DRUPAL_PASSWORD=my_password -p 80:80 --name drupal -v /your/local/path/bitnami/drupal:/bitnami/drupal --network=drupal_network bitnami/drupal
+ $ docker run -d -e DRUPAL_PASSWORD=my_password -p 80:80 --name drupal -v /your/local/path/bitnami/drupal:/bitnami/drupal --network= bitnami/drupal
 ```
 
 Available variables:
