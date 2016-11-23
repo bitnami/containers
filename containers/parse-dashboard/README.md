@@ -55,13 +55,13 @@ If you want to run the application manually instead of using docker-compose, the
 1. Create a network for the application, Parse Server and the database:
 
   ```bash
-  $ docker network create parse_dashboard_network
+  $ docker network create parse_dashboard-tier
   ```
 
 2. Start a MongoDB database in the network generated:
 
   ```bash
-  $ docker run -d --name mongodb --net=parse_dashboard_network bitnami/mongodb
+  $ docker run -d --name mongodb --net=parse_dashboard-tier bitnami/mongodb
   ```
 
   *Note:* You need to give the container a name in order to Parse to resolve the host.
@@ -69,20 +69,20 @@ If you want to run the application manually instead of using docker-compose, the
 3. Start a Parse Server container:
 
   ```bash
-  $ docker run -d -p 1337:1337 --name parse --net=parse_dashboard_network bitnami/parse
+  $ docker run -d -p 1337:1337 --name parse --net=parse_dashboard-tier bitnami/parse
   ```
 
 4. Run the Parse Dashboard container:
 
   ```bash
-  $ docker run -d -p 80:4040 --name parse-dashboard --net=parse_dashboard_network bitnami/parse-dashboard
+  $ docker run -d -p 80:4040 --name parse-dashboard --net=parse_dashboard-tier bitnami/parse-dashboard
   ```
 
 Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence of the Parse deployment, the above examples define docker volumes namely `mongodb_data`, `parse_data` and `parse_dashboard_data`. The Parse application state will persist as long as these volumes are not removed.
 
@@ -101,7 +101,7 @@ services:
   mongodb:
     image: 'bitnami/mongodb:latest'
     volumes:
-      - '/path/to/mongodb_data:/bitnami/mongodb'
+      - '/path/to/mongodb-persistence:/bitnami/mongodb'
   parse:
     image: 'bitnami/parse:latest'
     depends_on:
@@ -145,7 +145,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
   ```bash
   $ docker run -d -name parse -p 1337:1337 \
-    --net parse-dashboard-tier 
+    --net parse-dashboard-tier
      --volume /path/to/parse-persistence:/bitnami/parse \
     --volume /path/to/parse-dashboard-persistence:/bitnami/parse-dashboard \
   ```
@@ -153,7 +153,7 @@ In this case you need to specify the directories to mount on the run command. Th
 4. Run the Parse Dashboard container:
 
   ```bash
-  $ docker run -d -p 80:4040 --name parse-dashboard -v /your/local/path/bitnami/parse_dashboard:/bitnami/parse-dashboard --network=parse_dashboard_network bitnami/parse-dashboard
+  $ docker run -d -p 80:4040 --name parse-dashboard -v /your/local/path/bitnami/parse_dashboard:/bitnami/parse-dashboard --network=parse_dashboard-tier bitnami/parse-dashboard
   ```
 
 # Upgrade this application
@@ -204,7 +204,7 @@ application:
  * For manual execution add a `-e` option with each variable and value:
 
 ```bash
- $ docker run -d -e PARSE_DASHBOARD_PASSWORD=my_password -p 80:4040 --name parse-dashboard -v /your/local/path/bitnami/parse_dashboard:/bitnami/parse-dashboard --network=parse_dashboard_network bitnami/parse-dashboard
+ $ docker run -d -e PARSE_DASHBOARD_PASSWORD=my_password -p 80:4040 --name parse-dashboard -v /your/local/path/bitnami/parse_dashboard:/bitnami/parse-dashboard --network=parse_dashboard-tier bitnami/parse-dashboard
 ```
 
 Available variables:
