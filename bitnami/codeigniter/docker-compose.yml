@@ -2,6 +2,8 @@ version: '2'
 services:
   myapp:
     image: bitnami/codeigniter:latest
+    environment:
+      - CODEIGNITER_PROJECT_NAME=
     ports:
       - '8000:8000'
     volumes:
