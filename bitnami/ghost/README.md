@@ -1,10 +1,18 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-ghost/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-ghost/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/ghost)](https://hub.docker.com/r/bitnami/ghost/)
+
 # What is Ghost?
 
 > Ghost is a simple, powerful publishing platform that allows you to share your stories with the world
 
 https://ghost.org/
+
+# TL;DR;
+
+```bash
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-ghost/master/docker-compose.yml
+$ docker-compose up
+```
 
 # Prerequisites
 
