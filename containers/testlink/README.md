@@ -60,13 +60,13 @@ If you want to run the application manually instead of using docker-compose, the
 1. Create a new network for the application and the database:
 
   ```bash
-  $ docker network create testlink_network
+  $ docker network create testlink-tier
   ```
 
 2. Start a MariaDB database in the network generated:
 
   ```bash
-  $ docker run -d --name mariadb --net=testlink_network bitnami/mariadb
+  $ docker run -d --name mariadb --net=testlink-tier bitnami/mariadb
   ```
 
   *Note:* You need to give the container a name in order for TestLink to resolve the host
@@ -74,14 +74,14 @@ If you want to run the application manually instead of using docker-compose, the
 3. Run the TestLink container:
 
   ```bash
-  $ docker run -d -p 80:80 --name testlink --net=testlink_network bitnami/testlink
+  $ docker run -d -p 80:80 --name testlink --net=testlink-tier bitnami/testlink
   ```
 
 Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence of the TestLink deployment, the above examples define docker volumes namely `mariadb_data`, `testlink_data` and `apache_data`. The TestLink application state will persist as long as these volumes are not removed.
 
@@ -98,7 +98,7 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
-      - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
+      - '/path/to/mariadb-persistence:/bitnami/mariadb'
   testlink:
     image: 'bitnami/testlink:latest'
     depends_on:
@@ -187,7 +187,7 @@ application:
  * For manual execution add a `-e` option with each variable and value:
 
 ```bash
- $ docker run -d -e TESTLINK_PASSWORD=my_password -p 80:80 --name testlink -v /your/local/path/bitnami/testlink:/bitnami/testlink --net=testlink_network bitnami/testlink
+ $ docker run -d -e TESTLINK_PASSWORD=my_password -p 80:80 --name testlink -v /your/local/path/bitnami/testlink:/bitnami/testlink --net=testlink-tier bitnami/testlink
 ```
 
 Available variables:
@@ -233,7 +233,7 @@ This would be an example of SMTP configuration using a GMail account:
  * For manual execution:
 
 ```bash
- $ docker run -d -e SMTP_ENABLE=true -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -e SMTP_CONNECTION_MODE=tls -p 80:80 --name testlink -v /your/local/path/bitnami/testlink:/bitnami/testlink --network=testlink_network bitnami/testlink$ docker rm -v testlink
+ $ docker run -d -e SMTP_ENABLE=true -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -e SMTP_CONNECTION_MODE=tls -p 80:80 --name testlink -v /your/local/path/bitnami/testlink:/bitnami/testlink --network=testlink-tier bitnami/testlink$ docker rm -v testlink
 ```
 
 # Backing up your application
