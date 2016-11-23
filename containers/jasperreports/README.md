@@ -1,10 +1,18 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-jasperserver/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-jasperserver/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/jasperserver)](https://hub.docker.com/r/bitnami/jasperserver/)
+
 # What is JasperReports?
 
 > The JasperReports server can be used as a stand-alone or embedded reporting and BI server that offers web-based reporting, analytic tools and visualization, and a dashboard feature for compiling multiple custom views. JasperReports supports multiple data sources including Hadoop Hive, JSON data sources, Excel, XML/A, Hibernate and more. You can create reports with their WYSIWYG tool and build beautiful visualizations, charts and graphs.
 
 http://community.jaspersoft.com/project/jasperreports-server
+
+# TL;DR;
+
+```bash
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-jasperserver/master/docker-compose.yml
+$ docker-compose up
+```
 
 # Prerequisites
 
