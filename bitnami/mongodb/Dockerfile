@@ -1,12 +1,12 @@
 FROM gcr.io/stacksmith-images/minideb:jessie-r2
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=3.2.10-r1 \
+ENV BITNAMI_IMAGE_VERSION=3.2.11-r0 \
     BITNAMI_APP_NAME=mongodb \
     BITNAMI_APP_USER=mongo
 
 # Install mongodb
-RUN bitnami-pkg unpack mongodb-3.2.10-0 --checksum 002f9adfc7c005a368eedede50ed94066987068dfddd001997e31a88488ca2e5
+RUN bitnami-pkg unpack mongodb-3.2.11-0 --checksum 7c95672538244eedf24e88cf335c8b02951717bdcdacb7c98f3feb5f02a6fedb
 ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:$PATH
 
 COPY rootfs/ /
