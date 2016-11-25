@@ -12,7 +12,7 @@ RUN bitnami-pkg install tomcat-8.5.8-0 --checksum c5beffc52e886af561df06239ceaf8
 RUN bitnami-pkg install git-2.6.1-2 --checksum edc04dc263211f3ffdc953cb96e5e3e76293dbf7a97a075b0a6f04e048b773dd
 
 # Install jenkins
-RUN bitnami-pkg unpack jenkins-2.32-0 --checksum e08aa08701ee71fc321d9d0b7f94568581a3a0cc084d734c1dfa18b98b38698a
+RUN bitnami-pkg unpack jenkins-2.33-0 --checksum c5b366e2b45435cb1b896d7d733b071ebf5915e6d10344e006a06781f58327a1
 
 COPY rootfs /
 
