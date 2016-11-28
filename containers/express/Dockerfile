@@ -31,7 +31,7 @@ ENV BITNAMI_APP_NAME=express
 ENV BITNAMI_IMAGE_VERSION=4.14.0-r11
 
 RUN npm install -g express-generator@4 &&\
-    npm install -g bower@1.7.9
+    npm install -g bower@1.8.0
 
 COPY rootfs/ /
 
