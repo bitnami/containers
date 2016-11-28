@@ -20,7 +20,7 @@ export RABBITMQ_USERNAME=${RABBITMQ_USERNAME:-"user"}
 export RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-"bitnami"}
 export RABBITMQ_NODE_TYPE=${RABBITMQ_NODE_TYPE:-"stats"}
 export RABBITMQ_NODE_PORT=${RABBITMQ_NODE_PORT:-"5672"}
-export RABBITMQ_NODE_NAME=${RABBITMQ_NODE_NAME:-"rabbit"}
+export RABBITMQ_NODE_NAME=${RABBITMQ_NODE_NAME:-"rabbit@localhost"}
 export RABBITMQ_MANAGER_PORT=${RABBITMQ_MANAGER_PORT:-"15672"}
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
