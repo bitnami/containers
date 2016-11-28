@@ -141,8 +141,8 @@ Available variables:
  - `RABBITMQ_PASSWORD`: RabbitMQ application password. Default: **bitnami**
  - `RABBITMQ_VHOST`: RabbitMQ application vhost. Default: **/**
  - `RABBITMQ_ERLANG_COOKIE`: Erlang cookie to determine whether different nodes are allowed to communicate with each other.
- - `RABBITMQ_NODE_TYPE`: Node Type. Valid values: *stats*, **queue-ram* or *queue-disc*. Default: **stats**
- - `RABBITMQ_NODE_NAME`: Node name. E.g.: *node@hostname* or *node* (If you don't specify the hostname, the env variables will be used.). Default **rabbit**
+ - `RABBITMQ_NODE_TYPE`: Node Type. Valid values: *stats*, *queue-ram* or *queue-disc*. Default: **stats**
+ - `RABBITMQ_NODE_NAME`: Node name and host. E.g.: *node@hostname* or *node* (localhost won't work in cluster topology). Default **rabbit@localhost**
  - `RABBITMQ_NODE_PORT`: Node port. Default: **5672**
  - `RABBITMQ_CLUSTER_NODE_NAME`: Node name to cluster with. E.g.: **clusternode@hostname**
  - `RABBITMQ_MANAGER_PORT`: Manager port. Default: **15672**
