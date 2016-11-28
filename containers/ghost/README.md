@@ -183,7 +183,8 @@ Available variables:
  - `GHOST_PASSWORD`: Ghost application password. Default: **bitnami1**
  - `GHOST_EMAIL`: Ghost application email. Default: **user@example.com**
  - `BLOG_TITLE`: Ghost blog title. Default: **User's Blog**
- - `MARIADB_USER`: Root password for the MariaDB.
+ - `MARIADB_USER`: Root user for the MariaDB database. By default: root.
+ - `MARIADB_PASSWORD`: Root password for the MariaDB database.
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
  - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
 ### SMTP Configuration
