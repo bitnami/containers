@@ -129,7 +129,7 @@ This container comes with SSL support already pre-configured and with a dummy ce
 
 In your local computer, create a folder called `certs` and put your certificates files. Make sure you rename both files to `server.crt` and `server.key` respectively:
 
-```
+```bash
 mkdir /path/to/nginx-persistence/conf/bitnami/certs -p
 cp /path/to/certfile.crt /path/to/nginx-persistence/conf/bitnami/certs/server.crt
 cp /path/to/keyfile.key  /path/to/nginx-persistence/conf/bitnami/certs/server.key
@@ -139,7 +139,7 @@ cp /path/to/keyfile.key  /path/to/nginx-persistence/conf/bitnami/certs/server.ke
 
 Run the Nginx image, mounting the certificates directory from your host.
 
-```
+```bash
 docker run --name nginx \
 -v /path/to/nginx-persistence/conf/bitnami/certs:/bitnami/nginx/conf/bitnami/certs \
 bitnami/nginx:latest
@@ -147,7 +147,7 @@ bitnami/nginx:latest
 
 or using Docker Compose:
 
-```
+```yaml
 version: '2'
 
 services:
