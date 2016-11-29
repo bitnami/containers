@@ -1,6 +1,6 @@
 version: '2'
 services:
-  application:
+  rabbitmq:
     image: 'bitnami/rabbitmq:latest'
     ports:
       - '4369:4369'
