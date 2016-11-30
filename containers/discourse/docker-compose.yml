@@ -1,0 +1,26 @@
+version: '2'
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    volumes:
+      - 'postgresql_data:/bitnami/postgresql'
+  redis:
+    image: 'bitnami/redis:latest'
+    volumes:
+      - 'redis_data:/bitnami/redis'
+  discourse:
+    image: 'bitnami/discourse:latest'
+    ports:
+      - '80:3000'
+    depends_on:
+      - postgresql
+      - redis
+    volumes:
+      - 'discourse_data:/bitnami/discourse'
+volumes:
+  postgresql_data:
+    driver: local
+  redis_data:
+    driver: local
+  discourse_data:
+    driver: local

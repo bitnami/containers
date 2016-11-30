@@ -1,0 +1,18 @@
+{
+  "username": "{{$global.env.DISCOURSE_USERNAME}}",
+  "password": "{{$global.env.DISCOURSE_PASSWORD}}",
+  "email": "{{$global.env.DISCOURSE_EMAIL}}",
+  "siteName": "{{$global.env.DISCOURSE_SITENAME}}",
+  "databaseAdminUser": "{{$global.env.POSTGRES_USER}}",
+  "databaseAdminPassword": "{{$global.env.POSTGRES_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.POSTGRES_MASTER_HOST}}",
+  "databaseServerPort": "{{$global.env.POSTGRES_MASTER_PORT}}",
+  "redisPort": "{{$global.env.REDIS_MASTER_PORT}}",
+  "redisHost": "{{$global.env.REDIS_MASTER_HOST}}",
+  "redisPassword": "{{$global.env.REDIS_PASSWORD}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpTls": "{{$global.env.SMTP_TLS}}"
+}
