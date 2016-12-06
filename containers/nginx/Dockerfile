@@ -1,11 +1,15 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r2
+FROM gcr.io/stacksmith-images/minideb:jessie-r4
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=1.10.2-r1 \
+ENV BITNAMI_IMAGE_VERSION=1.10.2-r2 \
     BITNAMI_APP_NAME=nginx \
     BITNAMI_APP_USER=daemon
 
-RUN bitnami-pkg unpack nginx-1.10.2-0 --checksum 65c0fb94839fc624a078b89424f992d9da46912c59f39a54161484354133ec37
+# System packages required
+RUN install_packages --no-install-recommends libc6 libpcre3 libssl1.0.0 zlib1g
+
+# Install nginx
+RUN bitnami-pkg unpack nginx-1.10.2-1 --checksum 366b92b7629a7a19090256f6097563e241aa743b42f1f0ce902709acf4e4e491
 RUN ln -sf /opt/bitnami/$BITNAMI_APP_NAME/html /app
 
 ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:/opt/bitnami/common/bin:$PATH
