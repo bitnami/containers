@@ -125,6 +125,7 @@ The Tomcat instance can be customized by specifying environment variables on the
 - `TOMCAT_HOME`: Tomcat user's home directory. Default: **/home/tomcat**
 - `TOMCAT_USERNAME`: Tomcat user. Default: **user**
 - `TOMCAT_PASSWORD`: Tomcat password.
+- `TOMCAT_ALLOW_REMOTE_MANAGEMENT`: Allow to connect to manager applications from remote addresses. Valid values are *0* and *1*. Default: **0**
 
 ### Creating a custom user
 
