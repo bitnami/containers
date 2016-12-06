@@ -1,13 +1,16 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r2
+FROM gcr.io/stacksmith-images/minideb:jessie-r4
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=kibana \
-    BITNAMI_IMAGE_VERSION=4.6.1-r1 \
+    BITNAMI_IMAGE_VERSION=4.6.1-r2 \
     PATH=/opt/bitnami/kibana/bin:$PATH
 
+# System packages required
+RUN install_packages --no-install-recommends libc6 libstdc++6 libgcc1
+
 # Install kibana
-RUN bitnami-pkg unpack kibana-4.6.1-0 --checksum 665e7c0b55eea86af15d51d8eb2b9f06fd4eef5c2f1c63b74107b3853cb4765d
+RUN bitnami-pkg unpack kibana-4.6.1-1 --checksum 85490bde3f99b8fddf51a70bc028bf966780723e90a093d5c46911510e32b26c
 
 COPY rootfs /
 
