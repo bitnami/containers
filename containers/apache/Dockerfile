@@ -1,11 +1,15 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r2
+FROM gcr.io/stacksmith-images/minideb:jessie-r4
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=2.4.23-r10 \
+ENV BITNAMI_IMAGE_VERSION=2.4.23-r11 \
     BITNAMI_APP_NAME=apache \
     BITNAMI_APP_USER=daemon
 
-RUN bitnami-pkg unpack apache-2.4.23-10 --checksum 29195ce6cd437c2880fb7c627880932c7c13df6032fc7b25c1ae3bccd27b20e2
+# System packages required
+RUN install_packages --no-install-recommends libssl1.0.0 libaprutil1 libapr1 libc6 libuuid1 libexpat1 libpcre3 libldap-2.4-2 libsasl2-2 libgnutls-deb0-28 zlib1g libp11-kit0 libtasn1-6 libnettle4 libhogweed2 libgmp10 libffi6
+
+# Install apache
+RUN bitnami-pkg unpack apache-2.4.23-11 --checksum e4876fc1514082af221105319ddc8f069e7e2305dded70633bbf9a5973f2d9be
 RUN ln -sf /opt/bitnami/$BITNAMI_APP_NAME/htdocs /app
 
 ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:/opt/bitnami/common/bin:$PATH
