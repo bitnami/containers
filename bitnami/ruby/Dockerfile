@@ -22,7 +22,7 @@ ENV STACKSMITH_STACK_ID="aq2un49" \
 # System packages required
 RUN install_packages --no-install-recommends libc6 libssl1.0.0 zlib1g libreadline6 libncurses5 libtinfo5 libffi6 libxml2-dev zlib1g-dev libxslt1-dev libgmp-dev ghostscript imagemagick libmysqlclient18 libpq5
 
-RUN bitnami-pkg unpack ruby-2.3.3-1 --checksum 107c8f5e76b77a351cfb7e3e544f9b86b8633eae563f179349137cab70b8d841
+RUN bitnami-pkg install ruby-2.3.3-1 --checksum 107c8f5e76b77a351cfb7e3e544f9b86b8633eae563f179349137cab70b8d841
 
 ENV PATH=/opt/bitnami/ruby/bin:$PATH
 
