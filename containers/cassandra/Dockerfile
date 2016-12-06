@@ -1,17 +1,20 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r2
+FROM gcr.io/stacksmith-images/minideb:jessie-r4
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=cassandra \
-    BITNAMI_IMAGE_VERSION=3.9-r3 \
+    BITNAMI_IMAGE_VERSION=3.9-r4 \
     PATH=/opt/bitnami/cassandra/bin:/opt/bitnami/java/bin:/opt/bitnami/python/bin:$PATH
 
+# System packages required
+RUN install_packages --no-install-recommends libc6 libssl1.0.0 libncurses5 libtinfo5 zlib1g libsqlite3-0 libreadline6 libxext6 libx11-6 libxcb1 libxau6 libxdmcp6 libglib2.0-0 libfreetype6 libfontconfig1 libstdc++6 libgcc1 libselinux1 libpng12-0 libexpat1 libffi6 libpcre3 libxml2 liblzma5 libjemalloc1
+
 # Additional modules required
-RUN bitnami-pkg install python-2.7.12-1 --checksum 1ab49b32453c509cf6ff3abb9dbe8a411053e3b811753a10c7a77b4bc19606df
-RUN bitnami-pkg install java-1.8.0_111-0 --checksum a40aa0c9553e13bd8ddcc3d2ba966492b79d4f73d47cb1499c9ec54f441201eb
+RUN bitnami-pkg install python-2.7.12-3 --checksum 9a64785f30415bbd464ecfe3dabad9a6a3c2b897a0c32fd3ead7c227cffcc39c
+RUN bitnami-pkg install java-1.8.0_111-1 --checksum f7705a3955f006eb59a6e4240a01d8273b17ba38428d30ffe7d10c9cc525d7be
 
 # Install cassandra
-RUN bitnami-pkg unpack cassandra-3.9-2 --checksum f09c7c0427da9cf85910f9e856659e68bd65f691d4ee7b81c30a72e75d2210a4
+RUN bitnami-pkg unpack cassandra-3.9-4 --checksum 47eb8a3b8b4b34d44af09fbd292369d3dbc6064249c3a55f3581eef714f58c58
 
 COPY rootfs /
 
