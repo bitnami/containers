@@ -11,7 +11,7 @@
 ##   Connect to the container at DOCKER_IP:3000
 ##     replacing DOCKER_IP for the IP of your active docker host
 
-FROM gcr.io/stacksmith-images/minideb-buildpack:jessie-r2
+FROM gcr.io/stacksmith-images/minideb-buildpack:jessie-r4
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -19,18 +19,18 @@ ENV STACKSMITH_STACK_ID="npx76xt" \
     STACKSMITH_STACK_NAME="Node.js for bitnami/bitnami-docker-node" \
     STACKSMITH_STACK_PRIVATE="1"
 
-RUN bitnami-pkg install node-7.0.0-0 --checksum 8049e447c9ac3cbf74b2ea7602e7126b6e5610b2f2c7b0e5f3ad18710eca4108
+# System packages required
+RUN install_packages --no-install-recommends libc6 libssl1.0.0 libncurses5 libtinfo5 zlib1g libbz2-1.0 libreadline6 libstdc++6 libgcc1 ghostscript imagemagick libmysqlclient18
+
+RUN bitnami-pkg install node-7.2.0-1 --checksum 5db6e968fc6613fc9c04b8933aff9b1699d23f4755b63570ff644420fe0960ff
 
 ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
     NODE_PATH=/opt/bitnami/node/lib/node_modules
 
 ## STACKSMITH-END: Modifications below this line will be unchanged when regenerating
 
-RUN bitnami-pkg install imagemagick-6.7.5-10-3 --checksum 617e85a42c80f58c568f9bc7337e24c03e35cf4c7c22640407a7e1e16880cf88
-RUN bitnami-pkg install mysql-libraries-10.1.13-0 --checksum 71ca428b619901123493503f8a99ccfa588e5afddd26e0d503a32cca1bc2a389
-
 ENV BITNAMI_APP_NAME=node \
-    BITNAMI_IMAGE_VERSION=7.0.0-r1
+    BITNAMI_IMAGE_VERSION=7.2.0-r0
 
 EXPOSE 3000
 WORKDIR /app
