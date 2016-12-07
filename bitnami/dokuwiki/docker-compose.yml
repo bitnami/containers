@@ -1,0 +1,16 @@
+version: '2'
+services:
+  dokuwiki:
+      #    image: 'bitnami/dokuwiki:latest'
+    build: .
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - 'dokuwiki_data:/bitnami/dokuwiki'
+      - 'apache_data:/bitnami/apache'
+volumes:
+  dokuwiki_data:
+    driver: local
+  apache_data:
+    driver: local
