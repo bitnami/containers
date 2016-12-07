@@ -7,7 +7,7 @@ ENV BITNAMI_APP_NAME=parse \
     PATH=/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:$PATH
 
 # System packages required
-RUN install_packages --no-install-recommends libc6 libssl1.0.0 libncurses5 libtinfo5 zlib1g libbz2-1.0 libreadline6 libstdc++6 libgcc1 ghostscript imagemagick libmysqlclient18
+RUN install_packages libc6 libssl1.0.0 libncurses5 libtinfo5 zlib1g libbz2-1.0 libreadline6 libstdc++6 libgcc1 ghostscript imagemagick libmysqlclient18
 
 # Additional modules required
 RUN bitnami-pkg install node-4.6.1-1 --checksum 9deada9ba8f67e81843e874947176cead26dca7e5ae2c7f7007f4479588aa11b
