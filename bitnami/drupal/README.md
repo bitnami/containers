@@ -62,22 +62,22 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
-  $ docker network create drupal_network
+  ```bash
+  $ docker network create drupal-tier
   ```
 
 2. Start a MariaDB database in the network generated:
 
-  ```
-  $ docker run -d --name mariadb --net=drupal_network bitnami/mariadb
+  ```bash
+  $ docker run -d --name mariadb --net=drupal-tier bitnami/mariadb
   ```
 
   *Note:* You need to give the container a name in order to Drupal to resolve the host
 
 3. Run the Drupal container:
 
-  ```
-  $ docker run -d -p 80:80 -p 443:443 --name drupal --net=drupal_network bitnami/drupal
+  ```bash
+  $ docker run -d -p 80:80 -p 443:443 --name drupal --net=drupal-tier bitnami/drupal
   ```
 
 Then you can access your application at http://your-ip/
@@ -119,13 +119,13 @@ services:
 
 1. Create a network (if it does not exist):
 
-  ```
+  ```bash
   $ docker network create drupal-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```
+  ```bash
   $ docker run -d --name mariadb \
     --net drupal-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
@@ -136,7 +136,7 @@ services:
 
 3. Create the Drupal container with host volumes:
 
-  ```
+  ```bash
   $ docker run -d --name drupal -p 80:80 -p 443:443 \
     --net drupal-tier \
     --volume /path/to/drupal-persistence:/bitnami/drupal \
@@ -190,7 +190,7 @@ drupal:
  * For manual execution add a `-e` option with each variable and value:
 
 ```
- $ docker run -d -e DRUPAL_PASSWORD=my_password -p 80:80 --name drupal -v /your/local/path/bitnami/drupal:/bitnami/drupal --network=drupal_network bitnami/drupal
+ $ docker run -d -e DRUPAL_PASSWORD=my_password -p 80:80 --name drupal -v /your/local/path/bitnami/drupal:/bitnami/drupal --network=drupal-tier bitnami/drupal
 ```
 
 Available variables:
