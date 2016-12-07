@@ -23,7 +23,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 This is the recommended way to run Parse Dashboard. You can use the following docker compose template:
 
-```
+```yaml
 version: '2'
 services:
   mongodb:
@@ -61,92 +61,108 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a network for the application, Parse Server and the database:
 
-  ```
-  $ docker network create parse_dashboard_network
+  ```bash
+  $ docker network create parse_dashboard-tier
   ```
 
 2. Start a MongoDB database in the network generated:
 
-  ```
-  $ docker run -d --name mongodb --net=parse_dashboard_network bitnami/mongodb
+  ```bash
+  $ docker run -d --name mongodb --net=parse_dashboard-tier bitnami/mongodb
   ```
 
   *Note:* You need to give the container a name in order to Parse to resolve the host.
 
 3. Start a Parse Server container:
 
-  ```
-  $ docker run -d -p 1337:1337 --name parse --net=parse_dashboard_network bitnami/parse
+  ```bash
+  $ docker run -d -p 1337:1337 --name parse --net=parse_dashboard-tier bitnami/parse
   ```
 
 4. Run the Parse Dashboard container:
 
-  ```
-  $ docker run -d -p 80:4040 --name parse-dashboard --net=parse_dashboard_network bitnami/parse-dashboard
+  ```bash
+  $ docker run -d -p 80:4040 --name parse-dashboard --net=parse_dashboard-tier bitnami/parse-dashboard
   ```
 
 Then you can access your application at http://your-ip/
 
 ## Persisting your application
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `mongodb_data`, `parse_data` and `parse_dashboard_data` data volumes. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+
+For persistence of the Parse deployment, the above examples define docker volumes namely `mongodb_data`, `parse_data` and `parse_dashboard_data`. The Parse application state will persist as long as these volumes are not removed.
+
+To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
-### Mount persistent folders in the host using docker-compose
+### Mount host directories as data volumes with Docker Compose
 
-This requires a sightly modification from the template previously shown:
-```
+This requires a minor change to the `docker-compose.yml` template previously shown:
+```yaml
 version: '2'
 
 services:
-
   mongodb:
     image: 'bitnami/mongodb:latest'
     volumes:
-      - '/path/to/your/local/mongodb_data:/bitnami/mongodb'
+      - '/path/to/mongodb-persistence:/bitnami/mongodb'
   parse:
     image: 'bitnami/parse:latest'
     ports:
       - '1337:1337'
+    depends_on:
+        - mongodb
     volumes:
-      - '/path/to/your/local/parse_data:/bitnami/parse'
-  application:
+      - '/path/to/parse-persistence:/bitnami/parse'
+  parse-dashboard:
     image: 'bitnami/parse-dashboard:latest'
     ports:
       - '80:4040'
+    depends_on:
+      - mongodb
     volumes:
-      - '/path/to/your/local/parse_dashboard_data:/bitnami/parse-dashboard'
+      - '/path/to/parse_dashboard-persistence:/bitnami/parse-dashboard'
 
 ```
 
-### Mount persistent folders manually
+### Mount host directories as data volumes using the Docker command line
 
 In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
 
-1. If you haven't done this before, create a new network for the application, Parse Server and the database:
+1. Create a network (if it does not exist):
 
-  ```
-  $ docker network create parse_dashboard_network
+  ```bash
+  $ docker network create parse_dashboard-tier
   ```
 
-2. Start a MongoDB database in the previous network:
+2. Create a MongoDB container with host volume:
 
-  ```
-  $ docker run -d --name mongodb -v /your/local/path/bitnami/mongodb:/bitnami/mongodb --network=parse_dashboard_network bitnami/mongodb
+  ```bash
+  $ docker run -d --name mongodb \
+    --net parse-dashboard-tier \
+    --volume /path/to/mongodb-persistence:/bitnami/mongodb \
+    bitnami/mongodb:latest
   ```
 
   *Note:* You need to give the container a name in order to Parse to resolve the host.
 
 3. Start a Parse Server container:
 
-  ```
-  $ docker run -d -p 1337:1337 --name parse -v /your/local/path/bitnami/parse:/bitnami/parse --network=parse_dashboard_network bitnami/parse
+  ```bash
+  $ docker run -d -name parse -p 1337:1337 \
+    --net parse-dashboard-tier
+    --volume /path/to/parse-persistence:/bitnami/parse \
+    bitnami/parse:latest
   ```
 
 4. Run the Parse Dashboard container:
 
-  ```
-  $ docker run -d -p 80:4040 --name parse-dashboard -v /your/local/path/bitnami/parse_dashboard:/bitnami/parse-dashboard --network=parse_dashboard_network bitnami/parse-dashboard
+  ```bash
+  $ docker run -d --name parse-dashboard -p 80:4040 \
+  --volume /path/to/parse_dashboard-persistence:/bitnami/parse-dashboard \
+  bitnami/parse-dashboard:latest
   ```
 
 # Upgrade this application
@@ -155,7 +171,7 @@ Bitnami provides up-to-date versions of Parse Dashboard, including security patc
 
 1. Get the updated images:
 
-```
+```bash
 $ docker pull bitnami/parse-dashboard:latest
 ```
 
@@ -181,7 +197,7 @@ $ docker pull bitnami/parse-dashboard:latest
  When you start the parse-dashboard image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
-```
+```yaml
 application:
   image: bitnami/parse-dashboard:latest
   ports:
@@ -196,8 +212,8 @@ application:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
- $ docker run -d -e PARSE_DASHBOARD_PASSWORD=my_password -p 80:4040 --name parse-dashboard -v /your/local/path/bitnami/parse_dashboard:/bitnami/parse-dashboard --network=parse_dashboard_network bitnami/parse-dashboard
+```bash
+ $ docker run -d -e PARSE_DASHBOARD_PASSWORD=my_password -p 80:4040 --name parse-dashboard -v /your/local/path/bitnami/parse_dashboard:/bitnami/parse-dashboard --network=parse_dashboard-tier bitnami/parse-dashboard
 ```
 
 Available variables:
@@ -220,7 +236,7 @@ To backup your application data follow these steps:
 
 2. Copy the Parse Dashboard data folder in the host:
 
-```
+```bash
 $ docker cp /your/local/path/bitnami:/bitnami/parse-dashboard
 ```
 
