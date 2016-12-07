@@ -2,7 +2,7 @@ machine:
   services:
   - docker
   environment:
-    IMAGE_NAME: jasperserver
+    IMAGE_NAME: jasperreports
     DOCKER_PROJECT: bitnami
     GCLOUD_PROJECT: bitnami-containers
 
@@ -46,4 +46,8 @@ deployment:
         docker tag gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:$CIRCLE_TAG gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:latest
         gcloud docker -- push gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:$CIRCLE_TAG
         gcloud docker -- push gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:latest
+      fi
+    - >
+      if [ -n "$STACKSMITH_API_KEY" ]; then
+        curl "https://stacksmith.bitnami.com/api/v1/components/$IMAGE_NAME/versions?api_key=$STACKSMITH_API_KEY" -H 'Content-Type: application/json' --data '{"version": "'"${CIRCLE_TAG%-r*}"'", "revision": "'"${CIRCLE_TAG#*-r}"'", "published": true}'
       fi
