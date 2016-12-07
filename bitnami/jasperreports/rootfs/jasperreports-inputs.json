@@ -1,7 +1,7 @@
 {
-  "username": "{{$global.env.JASPERSERVER_USERNAME}}",
-  "password": "{{$global.env.JASPERSERVER_PASSWORD}}",
-  "email": "{{$global.env.JASPERSERVER_EMAIL}}",
+  "username": "{{$global.env.JASPERREPORTS_USERNAME}}",
+  "password": "{{$global.env.JASPERREPORTS_PASSWORD}}",
+  "email": "{{$global.env.JASPERREPORTS_EMAIL}}",
   "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
   "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
   "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
