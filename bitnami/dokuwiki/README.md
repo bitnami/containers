@@ -1,3 +1,7 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-dokuwiki/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-dokuwiki/tree/master)
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/dokuwiki)](https://hub.docker.com/r/bitnami/dokuwiki/)
+
+
 # What is DokuWiki?
 
 > DokuWiki is a simple to use and highly versatile Open Source wiki software that doesn't require a database. It is loved by users for its clean and readable syntax. The ease of maintenance, backup and integration makes it an administrator's favorite
