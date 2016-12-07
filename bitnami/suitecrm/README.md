@@ -28,7 +28,7 @@ Running SuiteCRM with a database server is the recommended way. You can either u
 
 This is the recommended way to run SuiteCRM. You can use the following docker compose template:
 
-```
+```yaml
 version: '2'
 
 services:
@@ -65,22 +65,22 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
-  $ docker network create suitecrm_network
+  ```bash
+  $ docker network create suitecrm-tier
   ```
 
 2. Start a MariaDB database in the network generated:
 
-  ```
-   $ docker run -d --name mariadb --net=suitecrm_network bitnami/mariadb
+  ```bash
+   $ docker run -d --name mariadb --net=suitecrm-tier bitnami/mariadb
   ```
 
   *Note:* You need to give the container a name in order to SuiteCRM to resolve the host
 
 3. Run the SuiteCRM container:
 
-  ```
-  $ docker run -d -p 80:80 --name suitecrm --net=suitecrm_network bitnami/suitecrm
+  ```bash
+  $ docker run -d -p 80:80 --name suitecrm --net=suitecrm-tier bitnami/suitecrm
   ```
 
 Then you can access your application at http://your-ip/
@@ -91,22 +91,22 @@ If you remove every container and volume all your data will be lost, and the nex
 
 For persistence of the SuiteCRM deployment, the above examples define docker volumes namely `mariadb_data`, `suitecrm_data`, `apache_data` and `php_data`. The SuiteCRM application state will persist as long as these volumes are not removed.
 
-If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
+To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a sightly modification from the `docker-compose.yml` template previously shown:
+This requires a minor change to the `docker-compose.yml` template previously shown:
 
-```
+```yaml
 version: '2'
 
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
-      - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
+      - '/path/to/mariadb-persistence:/bitnami/mariadb'
   application:
     image: 'bitnami/suitecrm:latest'
     depends_on:
@@ -126,13 +126,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```
+  ```bash
   $ docker network create suitecrm-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```
+  ```bash
   $ docker run -d --name mariadb \
     --net suitecrm-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
@@ -142,7 +142,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Create the SuiteCRM container with host volumes:
 
-  ```
+  ```bash
   $ docker run -d --name suitecrm -p 80:80 -p 443:443 \
     --net suitecrm-tier \
     --volume /path/to/suitecrm-persistence:/bitnami/suitecrm \
@@ -157,7 +157,7 @@ Bitnami provides up-to-date versions of MariaDB and SuiteCRM, including security
 
 1. Get the updated images:
 
-  ```
+  ```bash
   $ docker pull bitnami/suitecrm:latest
   ```
 
@@ -184,7 +184,7 @@ Bitnami provides up-to-date versions of MariaDB and SuiteCRM, including security
 
  * For docker-compose add the variable name and value under the application section:
 
-```
+```yaml
 application:
   image: bitnami/suitecrm:latest
   ports:
@@ -197,8 +197,8 @@ application:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
- $ docker run -d -e SUITECRM_PASSWORD=my_password -p 80:80 --name suitecrm -v /your/local/path/bitnami/suitecrm:/bitnami/suitecrm --net=suitecrm_network bitnami/suitecrm
+```bash
+ $ docker run -d -e SUITECRM_PASSWORD=my_password -p 80:80 --name suitecrm -v /your/local/path/bitnami/suitecrm:/bitnami/suitecrm --net=suitecrm-tier bitnami/suitecrm
 ```
 
 Available variables:
@@ -227,7 +227,7 @@ This would be an example of SMTP configuration using a Gmail account:
 
  * docker-compose:
 
-```
+```yaml
   application:
     image: bitnami/suitecrm:latest
     ports:
@@ -242,7 +242,7 @@ This would be an example of SMTP configuration using a Gmail account:
 
  * For manual execution:
 
-```
+```bash
  $ docker run -d -e SUITECRM_SMTP_HOST=smtp.gmail.com -e SUITECRM_SMTP_PROTOCOL=TLS -e SUITECRM_SMTP_PORT=587 -e SUITECRM_S\
 MTP_USER=your_email@gmail.com -e SUITECRM_SMTP_PASSWORD=your_password -p 80:80 --name suitecrm -v /your/local/path/bitnami/\
 suitecrm:/bitnami/suitecrm bitnami/suitecrm
@@ -259,7 +259,7 @@ To backup your application data follow these steps:
 
 2. Copy the SuiteCRM data folder in the host:
 
-  ```
+  ```bash
   $ docker cp /your/local/path/bitnami:/bitnami/suitecrm
   ```
 
