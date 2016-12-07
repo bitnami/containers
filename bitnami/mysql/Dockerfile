@@ -1,18 +1,24 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r2
+FROM gcr.io/stacksmith-images/minideb:jessie-r4
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=5.7.16-r2 \
+ENV BITNAMI_IMAGE_VERSION=5.7.16-r3 \
     BITNAMI_APP_NAME=mysql \
-    BITNAMI_APP_USER=mysql
+    BITNAMI_APP_USER=mysql \
+    PATH=/opt/bitnami/mysql/sbin:/opt/bitnami/mysql/bin:$PATH
 
-RUN bitnami-pkg unpack mysql-5.7.16-1 --checksum 21040736cae8196643260ecbae8552a9079fae888f6d956bb4ed1cddc4679d88
-ENV PATH=/opt/bitnami/mysql/sbin:/opt/bitnami/mysql/bin:$PATH
+# System packages required
+RUN install_packages --no-install-recommends libc6 libstdc++6 libgcc1 libncurses5 libtinfo5 zlib1g libssl1.0.0 libaio1
 
-COPY rootfs/ /
-ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["nami", "start", "--foreground", "mysql"]
+# Install mysql
+RUN bitnami-pkg unpack mysql-5.7.16-3 --checksum d87883515b0198fddf3adbc9b295beedf2802fa2fa5ec51eae1f972e736f20b8
+
+COPY rootfs /
 
 VOLUME ["/bitnami/mysql"]
 
 EXPOSE 3306
+
+ENTRYPOINT ["/app-entrypoint.sh"]
+
+CMD ["nami", "start", "--foreground", "mysql"]
