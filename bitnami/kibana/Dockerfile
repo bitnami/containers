@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r5
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=kibana \
-    BITNAMI_IMAGE_VERSION=4.6.1-r2 \
+    BITNAMI_IMAGE_VERSION=4.6.1-r3 \
     PATH=/opt/bitnami/kibana/bin:$PATH
 
 # System packages required
