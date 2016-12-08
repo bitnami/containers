@@ -30,7 +30,7 @@ ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
 ## STACKSMITH-END: Modifications below this line will be unchanged when regenerating
 
 ENV BITNAMI_APP_NAME=node \
-    BITNAMI_IMAGE_VERSION=7.2.0-r0
+    BITNAMI_IMAGE_VERSION=7.2.0-r1
 
 EXPOSE 3000
 WORKDIR /app
