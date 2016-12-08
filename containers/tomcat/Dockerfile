@@ -2,7 +2,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r5
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=8.0.39-r2 \
+ENV BITNAMI_IMAGE_VERSION=8.0.39-r3 \
     BITNAMI_APP_NAME=tomcat \
     BITNAMI_APP_USER=tomcat \
     PATH=/opt/bitnami/$BITNAMI_APP_NAME/bin:/opt/bitnami/java/bin:$PATH
