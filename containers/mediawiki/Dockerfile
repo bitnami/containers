@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r5
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=mediawiki \
-    BITNAMI_IMAGE_VERSION=1.27.1-r3 \
+    BITNAMI_IMAGE_VERSION=1.27.1-r4 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
