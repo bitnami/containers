@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r5
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=owncloud \
-    BITNAMI_IMAGE_VERSION=9.1.2-r2 \
+    BITNAMI_IMAGE_VERSION=9.1.2-r3 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # Required system packages
