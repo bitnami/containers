@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r5
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=discourse \
-    BITNAMI_IMAGE_VERSION=1.6.7-r1 \
+    BITNAMI_IMAGE_VERSION=1.6.7-r2 \
     PATH=/opt/bitnami/ruby/bin:/opt/bitnami/postgresql-client/bin:/opt/bitnami/git/bin:$PATH
 
 # System packages required
