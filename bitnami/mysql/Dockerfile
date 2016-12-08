@@ -2,7 +2,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r5
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=5.7.16-r3 \
+ENV BITNAMI_IMAGE_VERSION=5.7.16-r4 \
     BITNAMI_APP_NAME=mysql \
     BITNAMI_APP_USER=mysql \
     PATH=/opt/bitnami/mysql/sbin:/opt/bitnami/mysql/bin:$PATH
