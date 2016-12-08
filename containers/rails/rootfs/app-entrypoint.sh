@@ -58,7 +58,7 @@ if [ "$1" == "bundle" -a "$2" == "exec" ]; then
     log "Gems updated"
   fi
 
-  wait_for_db
+  [[ -z $SKIP_DB_WAIT ]] && wait_for_db
 
   if ! fresh_container; then
     echo "#########################################################################"
@@ -70,12 +70,14 @@ if [ "$1" == "bundle" -a "$2" == "exec" ]; then
     echo "                                                                       "
     echo "#########################################################################"
   else
-    setup_db
+
+    [[ -z $SKIP_DB_SETUP ]] && setup_db
+
     log "Initialization finished"
     touch $INIT_SEM
   fi
 
-  migrate_db
+  [[ -z $SKIP_DB_SETUP ]] && migrate_db
 fi
 
 exec /entrypoint.sh "$@"

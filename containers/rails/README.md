@@ -117,6 +117,34 @@ Following are a few examples of launching some commonly used Rails development c
   > $ docker-compose restart myapp
   > ```
 
+## Running additional services:
+
+  Sometimes, your application will require extra pieces, such as background processing tools like Resque
+or Sidekiq.
+
+  For these cases, it is possible to re-use this container to be run as an additional
+service in your docker-compose file by modifying the command
+executed.
+
+For example, you could run a Sidekiq container by adding the following to your
+`docker-compose.yml` file:
+
+```yaml
+services:
+  ...
+  sidekiq:
+    image: bitnami/rails:latest
+    environment:
+      # This skips the execution of rake db:create and db:migrate
+      # since it is being executed by the rails service.
+      - SKIP_DB_SETUP=true
+    command: bundle exec sidekiq
+```
+
+> **Note**
+>
+> You can skip database wait period and creation/migration by setting the SKIP_DB_WAIT and SKIP_DB_SETUP environment variables.
+
 ## Installing Rubygems
 
 To add a Rubygem to your application, update the `Gemfile` in the application directory as you would normally do and restart the `myapp` service container.
