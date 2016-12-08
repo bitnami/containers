@@ -22,7 +22,8 @@ ENV STACKSMITH_STACK_ID="npx76xt" \
 # System packages required
 RUN install_packages --no-install-recommends libc6 libssl1.0.0 libncurses5 libtinfo5 zlib1g libbz2-1.0 libreadline6 libstdc++6 libgcc1 ghostscript imagemagick libmysqlclient18
 
-RUN bitnami-pkg install node-7.2.0-1 --checksum 5db6e968fc6613fc9c04b8933aff9b1699d23f4755b63570ff644420fe0960ff
+# Install node
+RUN bitnami-pkg unpack node-7.2.1-0 --checksum f0f26459f51168fa0b062d32fe9a46a5cc6d8a290e8a6091716eb81a9900293d
 
 ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
     NODE_PATH=/opt/bitnami/node/lib/node_modules
@@ -30,7 +31,7 @@ ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
 ## STACKSMITH-END: Modifications below this line will be unchanged when regenerating
 
 ENV BITNAMI_APP_NAME=node \
-    BITNAMI_IMAGE_VERSION=7.2.0-r1
+    BITNAMI_IMAGE_VERSION=7.2.1-r0
 
 EXPOSE 3000
 WORKDIR /app
