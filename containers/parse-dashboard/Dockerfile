@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r5
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=parse-dashboard \
-    BITNAMI_IMAGE_VERSION=1.0.19-r3 \
+    BITNAMI_IMAGE_VERSION=1.0.19-r4 \
     PATH=/opt/bitnami/node/bin:$PATH
 
 # System packages required
