@@ -229,7 +229,7 @@ A **zero downtime** MariaDB master-slave [replication](https://dev.mysql.com/doc
  - `MARIADB_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
  - `MARIADB_REPLICATION_PASSWORD`: The replication users password. No defaults.
  - `MARIADB_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
- - `MARIABD_MASTER_PORT`: Server port of the replication master (slave parameter). Defaults to `3306`.
+ - `MARIADB_MASTER_PORT`: Server port of the replication master (slave parameter). Defaults to `3306`.
  - `MARIADB_MASTER_USER`: User on replication master with access to `MARIADB_DATABASE` (slave parameter). Defaults to `root`
  - `MARIADB_MASTER_PASSWORD`: Password of user on replication master with access to `MARIADB_DATABASE` (slave parameter). No defaults.
 
