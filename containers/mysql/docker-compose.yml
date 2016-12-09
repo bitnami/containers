@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
     ports:
       - '3306:3306'
