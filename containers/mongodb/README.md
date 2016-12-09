@@ -71,66 +71,74 @@ services:
       - /path/to/mongodb-persistence:/bitnami/mongodb
 ```
 
-# Linking
+# Connecting to other containers
 
-If you want to connect to your MongoDB server inside another container, you can use the linking system provided by Docker.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a MongoDB server running inside a container can easily be accessed by your application containers.
 
-## Connecting a Mongo client container to the MongoDB server container
+Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-### Step 1: Run the MongoDB image with a specific name
+## Using the Command Line
 
-The first step is to start our MongoDB server.
+In this example, we will create a MongoDB client instance that will connect to the server instance that is running on the same docker network as the client.
 
-Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our MongoDB server to make it easier to connect to other containers.
-
-```bash
-docker run --name mongodb bitnami/mongodb:latest
-```
-
-### Step 2: Run MongoDB as a Mongo client and link to our server
-
-Now that we have our MongoDB server running, we can create another container that links to it by giving Docker the `--link` option. This option takes the id or name of the container we want to link it to as well as a hostname to use inside the container, separated by a colon. For example, to have our MongoDB server accessible in another container with `server` as it's hostname we would pass `--link mongodb:server` to the Docker run command.
-
-The Bitnami MongoDB Docker Image also ships with a Mongo client, but by default it will start a server. To start the client instead, we can override the default command Docker runs by stating a different command to run after the image name.
+### Step 1: Create a network
 
 ```bash
-docker run --rm -it --link mongodb:server bitnami/mongodb:latest mongo --host server
+$ docker network create app-tier --driver bridge
 ```
 
-We started the Mongo client passing in the `--host` option that allows us to specify the hostname of the server, which we set to the hostname we created in the link.
+### Step 2: Launch the MongoDB server instance
 
-**Note!**
-You can also run the Mongo client in the same container the server is running in using the Docker [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
+Use the `--network app-tier` argument to the `docker run` command to attach the MongoDB container to the `app-tier` network.
 
 ```bash
-docker exec -it mongodb mongo
+$ docker run -d --name mongodb-server \
+    --network app-tier \
+    bitnami/mongodb:latest
 ```
 
-## Linking with Docker Compose
+### Step 3: Launch your MongoDB client instance
 
-### Step 1: Add a MongoDB entry in your `docker-compose.yml`
+Finally we create a new container instance to launch the MongoDB client and connect to the server created in the previous step:
 
-Copy the snippet below into your `docker-compose.yml` to add MongoDB to your application.
+```bash
+$ docker run -it --rm \
+    --network app-tier \
+    bitnami/mongodb:latest mongo --host mongodb-server
+```
+
+## Using Docker Compose
+
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the MongoDB server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
 ```yaml
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
 services:
   mongodb:
     image: 'bitnami/mongodb:latest'
-```
-
-### Step 2: Link it to another container in your application
-
-Update the definitions for containers you want to access your MongoDB server from to include a link to the `mongodb` entry you added in Step 1.
-
-```yaml
-services:
+    networks:
+      - app-tier
   myapp:
-    image: myapp
-    depends_on:
-      - mongodb
+    image: 'YOUR_APPLICATION_IMAGE'
+    networks:
+      - app-tier
 ```
 
-Inside `myapp`, use `mongodb` as the hostname for the MongoDB server.
+> **IMPORTANT**:
+>
+> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 2. In your application container, use the hostname `mongodb` to connect to the MongoDB server
+
+Launch the containers using:
+
+```bash
+$ docker-compose up -d
+```
 
 # Configuration
 
