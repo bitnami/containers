@@ -72,66 +72,74 @@ services:
       - /path/to/postgresql-persistence:/bitnami/postgresql
 ```
 
-# Linking
+# Connecting to other containers
 
-If you want to connect to your PostgreSQL server inside another container, you can use the linking system provided by Docker.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a PostgreSQL server running inside a container can easily be accessed by your application containers.
 
-## Connecting a PostgreSQL client container to the PostgreSQL server container
+Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-### Step 1: Run the PostgreSQL image with a specific name
+## Using the Command Line
 
-The first step is to start our PostgreSQL server.
+In this example, we will create a PostgreSQL client instance that will connect to the server instance that is running on the same docker network as the client.
 
-Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our PostgreSQL server to make it easier to connect to other containers.
-
-```bash
-docker run --name postgresql -e POSTGRESQL_PASSWORD=password123 bitnami/postgresql:latest
-```
-
-### Step 2: Run PostgreSQL image as a client and link to our server
-
-Now that we have our PostgreSQL server running, we can create another container that links to it by giving Docker the `--link` option. This option takes the id or name of the container we want to link it to as well as a hostname to use inside the container, separated by a colon. For example, to have our PostgreSQL server accessible in another container with `server` as it's hostname we would pass `--link postgresql:server` to the Docker run command.
-
-The Bitnami PostgreSQL Docker Image also ships with a PostgreSQL client, but by default it will start a server. To start the client instead, we can override the default command Docker runs by stating a different command to run after the image name.
+### Step 1: Create a network
 
 ```bash
-docker run --rm -it --link postgresql:server bitnami/postgresql psql -h server -U postgres
+$ docker network create app-tier --driver bridge
 ```
 
-We started the PostgreSQL client passing in the `-h` option that allows us to specify the hostname of the server, which we set to the hostname we created in the link.
+### Step 2: Launch the PostgreSQL server instance
 
-**Note!**
-You can also run the PostgreSQL client in the same container the server is running in using the Docker [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
+Use the `--network app-tier` argument to the `docker run` command to attach the PostgreSQL container to the `app-tier` network.
 
 ```bash
-docker exec -it postgresql psql -U postgres
+$ docker run -d --name postgresql-server \
+    --network app-tier \
+    bitnami/postgresql:latest
 ```
 
-## Linking with Docker Compose
+### Step 3: Launch your PostgreSQL client instance
 
-### Step 1: Add a PostgreSQL entry in your `docker-compose.yml`
+Finally we create a new container instance to launch the PostgreSQL client and connect to the server created in the previous step:
 
-Copy the snippet below into your `docker-compose.yml` to add PostgreSQL to your application.
+```bash
+$ docker run -it --rm \
+    --network app-tier \
+    bitnami/postgresql:latest psql -h postgresql-server -U postgres
+```
+
+## Using Docker Compose
+
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the PostgreSQL server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
 ```yaml
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
 services:
   postgresql:
     image: 'bitnami/postgresql:latest'
-```
-
-### Step 2: Link it to another container in your application
-
-Update the definitions for containers you want to access your PostgreSQL server from to include a link to the `postgresql` entry you added in Step 1.
-
-```yaml
-services:
+    networks:
+      - app-tier
   myapp:
-    image: myapp
-    depends_on:
-      - postgresql
+    image: 'YOUR_APPLICATION_IMAGE'
+    networks:
+      - app-tier
 ```
 
-Inside `myapp`, use `postgresql` as the hostname for the PostgreSQL server.
+> **IMPORTANT**:
+>
+> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 2. In your application container, use the hostname `postgresql` to connect to the PostgreSQL server
+
+Launch the containers using:
+
+```bash
+$ docker-compose up -d
+```
 
 # Configuration
 
