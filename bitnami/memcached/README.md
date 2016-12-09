@@ -45,55 +45,74 @@ If you wish, you can also build the image yourself.
 docker build -t bitnami/memcached:latest https://github.com/bitnami/bitnami-docker-memcached.git
 ```
 
+# Connecting to other containers
 
-# Linking
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Memcached server running inside a container can easily be accessed by your application containers.
 
-If you want to connect to your Memcached server inside another container, you can use the linking system provided by Docker.
+Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Connecting your app container to the Memcached server container
+## Using the Command Line
 
-### Step 1: Run the Memcached image with a specific name
-
-The first step is to start our Memcached server.
-
-Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our Memcached server to make it easier to connect to other containers.
+### Step 1: Create a network
 
 ```bash
-docker run --name memcached bitnami/memcached:latest
+$ docker network create app-tier --driver bridge
 ```
 
-### Step 2: Run your app and link to our server
+### Step 2: Launch the Memcached server instance
 
-Now that we have our Memcached server running, we can create another container that links to it by giving Docker the `--link` option. This option takes the id or name of the container we want to link it to as well as a hostname to use inside the container, separated by a colon. For example, to have our Memcached server accessible in another container with `memcached` as it's hostname we would pass `--link memcached:memcached` to the Docker run command.
+Use the `--network app-tier` argument to the `docker run` command to attach the Memcached container to the `app-tier` network.
 
 ```bash
-docker run -it --link memcached:memcached myapp
+$ docker run -d --name memcached-server \
+    --network app-tier \
+    bitnami/memcached:latest
 ```
 
-Inside `myapp`, use `memcached` as the hostname for the Memcached server.
+### Step 3: Launch your application container
 
-## Linking with Docker Compose
+```bash
+$ docker run -d --name myapp \
+    --network app-tier \
+    YOUR_APPLICATION_IMAGE
+```
 
-### Step 1: Add a Memcached entry in your `docker-compose.yml`
+> **IMPORTANT**:
+>
+> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 2. In your application container, use the hostname `memcached-server` to connect to the Memcached server
 
-Copy the snippet below into your `docker-compose.yml` to add Memcached to your application.
+## Using Docker Compose
+
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Memcached server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
 ```yaml
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
 services:
   memcached:
     image: 'bitnami/memcached:latest'
+    networks:
+      - app-tier
+  myapp:
+    image: 'YOUR_APPLICATION_IMAGE'
+    networks:
+      - app-tier
 ```
 
-### Step 2: Link it to another container in your application
+> **IMPORTANT**:
+>
+> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 2. In your application container, use the hostname `memcached` to connect to the Memcached server
 
-Update the definitions for containers you want to access your Memcached server from to include a link to the `memcached` entry you added in Step 1.
+Launch the containers using:
 
-```yaml
-services:
-  myapp:
-    image: myapp
-    depends_on:
-      - memcached
+```bash
+$ docker-compose up -d
 ```
 
 # Configuration
