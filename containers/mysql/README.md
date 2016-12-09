@@ -58,7 +58,9 @@ If you have already started using your database, follow the steps on
 The image exposes a volume at `/bitnami/mysql` for the MySQL data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
-docker run -v /path/to/mysql-persistence:/bitnami/mysql bitnami/mysql:latest
+docker run \
+  -v /path/to/mysql-persistence:/bitnami/mysql \
+  bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -175,7 +177,9 @@ services:
 By passing the `MYSQL_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the MySQL client.
 
 ```bash
-docker run --name mysql -e MYSQL_DATABASE=my_database bitnami/mysql:latest
+docker run --name mysql \
+  -e MYSQL_DATABASE=my_database \
+  bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -323,7 +327,7 @@ services:
 Scale the number of slaves using:
 
 ```bash
-docker-compose scale master=1 slave=3
+docker-compose scale mysql-master=1 mysql-slave=3
 ```
 
 The above command scales up the number of slaves to `3`. You can scale down in the same manner.
@@ -339,7 +343,9 @@ The image looks for configuration in the `conf/` directory of `/bitnami/mysql`. 
 Run the MySQL image, mounting a directory from your host.
 
 ```bash
-docker run --name mysql -v /path/to/mysql-persistence:/bitnami/mysql bitnami/mysql:latest
+docker run --name mysql \
+  -v /path/to/mysql-persistence:/bitnami/mysql \
+  bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -421,15 +427,19 @@ docker-compose stop mysql
 We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
 ```bash
-docker run --rm -v /path/to/mysql-backups:/backups --volumes-from mysql busybox \
-  cp -a /bitnami/mysql:latest /backups/latest
+docker run --rm \
+  -v /path/to/mysql-backups:/backups \
+  --volumes-from mysql busybox \
+    cp -a /bitnami/mysql /backups/latest
 ```
 
 or using Docker Compose:
 
 ```bash
-docker run --rm -v /path/to/mysql-backups:/backups --volumes-from `docker-compose ps -q mysql` busybox \
-  cp -a /bitnami/mysql:latest /backups/latest
+docker run --rm \
+  -v /path/to/mysql-backups:/backups \
+  --volumes-from `docker-compose ps -q mysql` busybox \
+    cp -a /bitnami/mysql /backups/latest
 ```
 
 ## Restoring a backup
@@ -437,7 +447,9 @@ docker run --rm -v /path/to/mysql-backups:/backups --volumes-from `docker-compos
 Restoring a backup is as simple as mounting the backup as volumes in the container.
 
 ```bash
-docker run -v /path/to/mysql-backups/latest:/bitnami/mysql bitnami/mysql:latest
+docker run \
+  -v /path/to/mysql-backups/latest:/bitnami/mysql \
+  bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -506,13 +518,6 @@ This image is tested for expected runtime behavior, using the [Bats](https://git
 ```
 bats test.sh
 ```
-
-# Notable Changes
-
-## 10.1.13-r0
-
-- All volumes have been merged at `/bitnami/mysql`. Now you only need to mount a single volume at `/bitnami/mysql` for persistence.
-- The logs are always sent to the `stdout` and are no longer collected in the volume.
 
 # Contributing
 
