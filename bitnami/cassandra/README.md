@@ -58,73 +58,74 @@ cassandra:
     - /path/to/cassandra-persistence:/bitnami/cassandra
 ```
 
-# Linking
+# Connecting to other containers
 
-If you want to connect to your Cassandra server inside another container, you can use the linking system provided by Docker.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Cassandra server running inside a container can easily be accessed by your application containers.
 
-## Connecting a Cassandra client container to the Cassandra server container
+Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-### Step 1: Run the Cassandra image with a specific name
+## Using the Command Line
 
-The first step is to start our Cassandra server.
+In this example, we will create a Cassandra client instance that will connect to the server instance that is running on the same docker network as the client.
 
-Docker's linking system uses container ids or names to reference containers. We can explicitly
-specify a name for our Cassandra server to make it easier to connect to other containers.
-
-```bash
-docker run --name cassandra bitnami/cassandra:latest
-```
-
-### Step 2: Run Cassandra as a client and link to our server
-
-Now that we have our Cassandra server running, we can create another container that links to it by
-giving Docker the `--link` option. This option takes the id or name of the container we want to link
-it to as well as a hostname to use inside the container, separated by a colon. For example, to have
-our Cassandra server accessible in another container with `server` as it's hostname we would pass
-`--link cassandra:server` to the Docker run command.
-
-The Bitnami Cassandra Docker Image also ships with a Cassandra client, but by default it will start a
-server. To start the client instead, we can override the default command Docker runs by stating a
-different command to run after the image name.
+### Step 1: Create a network
 
 ```bash
-docker run --rm -it --link cassandra:server bitnami/cassandra cqlsh server
+$ docker network create app-tier --driver bridge
 ```
 
-We started the Cassandra client passing the hostname of the server, which we set to the hostname we
-created in the link.
+### Step 2: Launch the Cassandra server instance
 
-**Note!**
-You can also run the Cassandra client in the same container the server is running in using the Docker
-[exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
+Use the `--network app-tier` argument to the `docker run` command to attach the Cassandra container to the `app-tier` network.
 
 ```bash
-docker exec -it cassandra-server cqlsh
+$ docker run -d --name cassandra-server \
+    --network app-tier \
+    bitnami/cassandra:latest
 ```
 
-## Linking with Docker Compose
+### Step 3: Launch your Cassandra client instance
 
-### Step 1: Add a Cassandra entry in your `docker-compose.yml`
+Finally we create a new container instance to launch the Cassandra client and connect to the server created in the previous step:
 
-Copy the snippet below into your `docker-compose.yml` to add Cassandra to your application.
-
-```
-cassandra:
-  image: bitnami/cassandra:latest
-```
-
-### Step 2: Link it to another container in your application
-
-Update the definitions for containers you want to access your Cassandra server from to include a link to the `cassandra` entry you added in Step 1.
-
-```
-myapp:
-  image: myapp
-  links:
-    - cassandra:cassandra
+```bash
+$ docker run -it --rm \
+    --network app-tier \
+    bitnami/cassandra:latest cqlsh --username cassandra --password cassandra-server cassandra
 ```
 
-Inside `myapp`, use `cassandra` as the hostname for the Cassandra server.
+## Using Docker Compose
+
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Cassandra server from your own custom application image which is identified in the following snippet by the service name `myapp`.
+
+```yaml
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  cassandra:
+    image: 'bitnami/cassandra:latest'
+    networks:
+      - app-tier
+  myapp:
+    image: 'YOUR_APPLICATION_IMAGE'
+    networks:
+      - app-tier
+```
+
+> **IMPORTANT**:
+>
+> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 2. In your application container, use the hostname `cassandra` to connect to the Cassandra server
+
+Launch the containers using:
+
+```bash
+$ docker-compose up -d
+```
 
 # Configuration
 
