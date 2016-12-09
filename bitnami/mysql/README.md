@@ -19,7 +19,7 @@ docker run --name mysql bitnami/mysql:latest
 version: '2'
 
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
     ports:
       - '3306:3306'
@@ -67,7 +67,7 @@ or using Docker Compose:
 version: '2'
 
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
     ports:
       - '3306:3306'
@@ -118,7 +118,7 @@ Copy the snippet below into your `docker-compose.yml` to add MySQL to your appli
 
 ```yaml
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
 ```
 
@@ -152,7 +152,7 @@ or using Docker Compose:
 version: '2'
 
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
     ports:
       - '3306:3306'
@@ -176,7 +176,7 @@ or using Docker Compose:
 version: '2'
 
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
     ports:
       - '3306:3306'
@@ -201,7 +201,7 @@ or using Docker Compose:
 version: '2'
 
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
     ports:
       - '3306:3306'
@@ -340,7 +340,7 @@ or using Docker Compose:
 version: '2'
 
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
     ports:
       - '3306:3306'
@@ -438,7 +438,7 @@ or using Docker Compose:
 version: '2'
 
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
     ports:
       - '3306:3306'
