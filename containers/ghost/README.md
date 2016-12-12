@@ -195,6 +195,7 @@ Available variables:
  - `MARIADB_PASSWORD`: Root password for the MariaDB database.
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
  - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
+ 
 ### SMTP Configuration
 
 To configure Ghost to send email using SMTP you can set the following environment variables:
