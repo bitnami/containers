@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r5
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=elasticsearch \
-    BITNAMI_IMAGE_VERSION=2.4.1-r2 \
+    BITNAMI_IMAGE_VERSION=2.4.1-r3 \
     PATH=/opt/bitnami/java/bin:/opt/bitnami/elasticsearch/bin:$PATH
 
 # System packages required
@@ -13,7 +13,7 @@ RUN install_packages --no-install-recommends libc6 libxext6 libx11-6 libxcb1 lib
 RUN bitnami-pkg install java-1.8.0_111-1 --checksum f7705a3955f006eb59a6e4240a01d8273b17ba38428d30ffe7d10c9cc525d7be
 
 # Install elasticsearch
-RUN bitnami-pkg unpack elasticsearch-2.4.1-1 --checksum c7be1a4ee64c329922a9a7800379b855a699e685eb1ecd874eee8ba8d414b2a2
+RUN bitnami-pkg unpack elasticsearch-2.4.1-2 --checksum 781852c0d7ad56a2c775748f18f202edced29cd26fa564d903efb3c4450203ce
 
 COPY rootfs /
 
