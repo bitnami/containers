@@ -1,6 +1,6 @@
 {
   "username": "{{$global.env.DOKUWIKI_USERNAME}}",
-  "fullName": "{{$global.env.DOKUWIKI_FULLNAME}}",
+  "fullName": "{{$global.env.DOKUWIKI_FULL_NAME}}",
   "password": "{{$global.env.DOKUWIKI_PASSWORD}}",
   "email": "{{$global.env.DOKUWIKI_EMAIL}}",
   "wikiName": "{{$global.env.DOKUWIKI_WIKINAME}}"
