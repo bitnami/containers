@@ -185,6 +185,7 @@ Available variables:
 
  - `JASPERREPORTS_USERNAME`: JasperReports admin username. Default: **user**
  - `JASPERREPORTS_PASSWORD`: JasperReports admin password. Default: **bitnami**
+ - `JASPERREPORTS_EMAIL`: JasperReports admin email. Default: **user@example.com**
 
 ### SMTP Configuration
 
