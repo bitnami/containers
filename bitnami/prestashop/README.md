@@ -3,7 +3,7 @@
 
 # What is PrestaShop?
 
-PrestaShop is a popular open source ecommerce solution. Professional tools are easily accessible to increase online sales including instant guest checkout, abandoned cart reminders and automated Email marketing.
+PrestaShop is a popular open source e-commerce solution. Professional tools are easily accessible to increase online sales including instant guest checkout, abandoned cart reminders and automated Email marketing.
 
 http://www.prestashop.com
 
@@ -16,7 +16,7 @@ $ docker-compose up
 
 # Prerequisites
 
-To run this application you need Docker Engine 1.10.0. Docker Compose is recomended with a version 1.6.0 or later.
+To run this application you need Docker Engine 1.10.0. Docker Compose is recommended with a version 1.6.0 or later.
 
 ## Run PrestaShop with a Database Container
 
@@ -58,25 +58,25 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
-  $ docker network create prestashop_network
+  ```bash
+  $ docker network create prestashop-tier
   ```
 
 2. Start a MariaDB database in the network generated:
 
-  ```
-  $ docker run -d --name mariadb --net=prestashop_network bitnami/mariadb
+  ```bash
+  $ docker run -d --name mariadb --network prestashop-tier bitnami/mariadb
   ```
 
   *Note:* You need to give the container a name in order to PrestaShop to resolve the host
 
 3. Run the PrestaShop container:
 
-  ```
-  $ docker run -d -p 80:80 --name prestashop --net=prestashop_network bitnami/prestashop
+  ```bash
+  $ docker run -d -p 80:80 -p 443:443 --name prestashop --network prestashop-tier bitnami/prestashop
   ```
 
-Then you can access your application at http://your-ip/
+Then you can access your application at <http://your-ip/>
 
   *Note:* If you want to access your application from a public IP or hostname you need to configure PrestaShop for it. You can handle it adjusting the configuration of the instance by setting the environment variable "PRESTASHOP_HOST" to your public IP or hostname.
 
@@ -100,7 +100,7 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
-      - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
+      - '/path/to/mariadb-persistence:/bitnami/mariadb'
   prestashop:
     image: 'bitnami/prestashop:latest'
     depends_on:
@@ -119,15 +119,15 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```
+  ```bash
   $ docker network create prestashop-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```
+  ```bash
   $ docker run -d --name mariadb \
-    --net prestashop-tier \
+    --network prestashop-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
     bitnami/mariadb:latest
   ```
@@ -136,9 +136,9 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Run the PrestaShop container:
 
-  ```
+  ```bash
   $ docker run -d --name prestashop -p 80:80 -p 443:443 \
-    --net prestashop-tier \
+    --network prestashop-tier \
     --volume /path/to/prestashop-persistence:/bitnami/prestashop \
     --volume /path/to/apache-persistence:/bitnami/apache \
     bitnami/prestashop:latest
@@ -150,7 +150,7 @@ Bitnami provides up-to-date versions of MariaDB and PrestaShop, including securi
 
 1. Get the updated images:
 
-  ```
+  ```bash
   $ docker pull bitnami/prestashop:latest
   ```
 
@@ -169,11 +169,11 @@ Bitnami provides up-to-date versions of MariaDB and PrestaShop, including securi
 5. Run the new image
 
  * For docker-compose: `$ docker-compose start prestashop`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name prestashop bitnami/prestashop:latest`
+ * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `$ docker run --name prestashop bitnami/prestashop:latest`
 
 # Configuration
 ## Environment variables
- When you start the prestashop image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+ When you start the PrestaShop image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
 ```yaml
@@ -185,15 +185,19 @@ prestashop:
   environment:
     - PRESTASHOP_HOST=your_host
   volumes:
-      - prestashop_data:/bitnami/prestashop
-      - apache_data:/bitnami/apache
-      - php_data:/bitnami/php
+    - prestashop_data:/bitnami/prestashop
+    - apache_data:/bitnami/apache
+    - php_data:/bitnami/php
 ```
 
- * For manual execution add a `-e` option with each variable and value:
+ * For manual execution add a `--env` option with each variable and value:
 
-```
- $ docker run -d -e PRESTASHOP_PASSWORD=my_password -p 80:80 --name prestashop -v /your/local/path/bitnami/prestashop:/bitnami/prestashop --network=prestashop_network bitnami/prestashop
+```bash
+$ docker run -d --name prestashop -p 80:80 -p 443:443 \
+  --network prestashop-tier \
+  --env PRESTASHOP_PASSWORD=my_password \
+  --volume /path/to/prestashop-persistence:/bitnami/prestashop \
+  bitnami/prestashop:latest
 ```
 
 Available variables:
@@ -209,6 +213,42 @@ Available variables:
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
  - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
 
+## SMTP Configuration
+
+To configure PrestaShop to send email using SMTP you can set the following environment variables:
+- `SMTP_HOST`: SMTP host.
+- `SMTP_PORT`: SMTP port.
+- `SMTP_PROTOCOL`: SMTP protocol [ssl, tls, ""].
+- `SMTP_USER`: SMTP account user.
+- `SMTP_PASSWORD`: SMTP account password.
+
+This would be an example of SMTP configuration using a GMail account:
+
+* docker-compose:
+```yaml
+prestashop:
+  image: bitnami/prestashop:latest
+  ports:
+    - 80:80
+    - 443:443
+  environment:
+    - SMTP_HOST=smtp.gmail.com
+    - SMTP_PORT=587
+    - SMTP_PROTOCOL=tls
+    - SMTP_USER=your_email@gmail.com
+    - SMTP_PASSWORD=your_password
+```
+
+* For manual execution:
+```bash
+$ docker run -d --name prestashop -p 80:80 -p 443:443 \
+  --network prestashop-tier \
+  --volume /path/to/prestashop-persistence:/bitnami/prestashop \
+  --env SMTP_HOST=smtp.gmail.com --env SMTP_PORT=587 --env SMTP_PROTOCOL=tls \
+  --env SMTP_USER=your_email@gmail.com --env SMTP_PASSWORD=your_password \
+  bitnami/prestashop:latest
+```
+
 # Backing up your application
 
 To backup your application data follow these steps:
@@ -220,7 +260,7 @@ To backup your application data follow these steps:
 
 2. Copy the PrestaShop data folder in the host:
 
-  ```
+  ```bash
   $ docker cp /your/local/path/bitnami:/bitnami/prestashop
   ```
 
@@ -241,9 +281,9 @@ If you encountered a problem running this container, you can file an
 be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Docker version (`$ docker version`)
+- Output of `$ docker info`
+- Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
@@ -255,7 +295,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
