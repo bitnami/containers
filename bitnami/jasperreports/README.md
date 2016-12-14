@@ -185,12 +185,14 @@ Available variables:
 
  - `JASPERREPORTS_USERNAME`: JasperReports admin username. Default: **user**
  - `JASPERREPORTS_PASSWORD`: JasperReports admin password. Default: **bitnami**
+ - `JASPERREPORTS_EMAIL`: JasperReports admin email. Default: **user@example.com**
 
 ### SMTP Configuration
 
 To configure JasperReports to send email using SMTP you can set the following environment variables:
  - `SMTP_HOST`: SMTP host.
  - `SMTP_PORT`: SMTP port.
+ - `SMTP_EMAIL`: SMTP email.
  - `SMTP_USER`: SMTP account user.
  - `SMTP_PASSWORD`: SMTP account password.
  - `SMTP_PROTOCOL`: SMTP protocol.
@@ -207,6 +209,7 @@ This would be an example of SMTP configuration using a GMail account:
     environment:
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
+      - SMTP_EMAIL=your_email@gmail.com
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
     volumes_from:
