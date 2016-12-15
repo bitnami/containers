@@ -132,15 +132,31 @@ docker run -it --name node -p 8080:3000 -v /path/to/app:/app bitnami/node node i
 
 Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
 
-# Linking
+# Connecting to other containers
 
-If you want to connect to your Node.js web server inside another container, you can use the linking system provided by Docker.
+If you want to connect to your Node.js web server inside another container, you can use docker networking to create a network and attach all the containers to that network.
 
 ## Serving your Node.js app through an nginx frontend
 
 We may want to make our Node.js web server only accessible via an nginx web server. Doing so will allow us to setup more complex configuration, serve static assets using nginx, load balance to different Node.js instances, etc.
 
-### Step 1: Create a virtual host
+### Step 1: Create a network
+
+```bash
+docker network create app-tier --driver bridge
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+```
+
+### Step 2: Create a virtual host
 
 Let's create an nginx virtual host to reverse proxy to our Node.js container.
 
@@ -155,56 +171,57 @@ server {
         proxy_set_header X-NginX-Proxy true;
 
         # proxy_pass http://[your_node_container_link_alias]:3000;
-        proxy_pass http://yourapp:3000;
+        proxy_pass http://myapp:3000;
         proxy_redirect off;
     }
 }
 ```
 
-Notice we've substituted the link alias name `yourapp`, we will use the same name when creating the link.
+Notice we've substituted the link alias name `myapp`, we will use the same name when creating the container.
 
 Copy the virtual host above, saving the file somewhere on your host. We will mount it as a volume in our nginx container.
 
-### Step 2: Run the Node.js image with a specific name
-
-Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our Node.js server to make it easier to connect to other containers.
+### Step 3: Run the Node.js image with a specific name
 
 ```bash
-docker run -it --name node -v /path/to/app:/app bitnami/node node index.js
+docker run -it --name myapp --network app-tier \
+  -v /path/to/app:/app \
+  bitnami/node node index.js
 ```
 
 or using Docker Compose:
 
 ```yaml
-node:
+version: '2'
+myapp:
   image: bitnami/node
   command: node index.js
+  networks:
+    - app-tier
   volumes:
     - .:/app
 ```
 
-### Step 3: Run the nginx image and link it to the Node.js server
-
-Now that we have our Node.js server running, we can create another container that links to it by giving Docker the `--link` option. This option takes the id or name of the container we want to link it to as well as a hostname to use inside the container, separated by a colon. For example, to have our Node.js server accessible in another container with `yourapp` as it's hostname we would pass `--link node:yourapp` to the Docker run command.
+### Step 4: Run the nginx image
 
 ```bash
-docker run -it -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf:ro \
-  --link node:yourapp \
+docker run -it \
+  -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf:ro \
+  --network app-tier \
   bitnami/nginx
 ```
 
 or using Docker Compose:
 
 ```yaml
+version: '2'
 nginx:
   image: bitnami/nginx
-  links:
-    - node:yourapp
+  networks:
+    - app-tier
   volumes:
     - /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf:ro
 ```
-
-We started the nginx server, mounting the virtual host we created in [Step 1](#step-1-create-a-virtual-host), and created a link to the Node.js server with the alias `yourapp`.
 
 # Maintenance
 
