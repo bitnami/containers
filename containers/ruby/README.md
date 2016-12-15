@@ -126,15 +126,32 @@ docker run -it --name ruby -p 8080:3000 bitnami/ruby:latest
 
 Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
 
-# Linking
 
-If you want to connect to your Ruby web server inside another container, you can use the linking system provided by Docker.
+# Connecting to other containers
+
+If you want to connect to your Ruby web server inside another container, you can use docker networking to create a network and attach all the containers to that network.
 
 ## Serving your Ruby app through an nginx frontend
 
 We may want to make our Ruby web server only accessible via an nginx web server. Doing so will allow us to setup more complex configuration, serve static assets using nginx, load balance to different Ruby instances, etc.
 
-### Step 1: Create a virtual host
+### Step 1: Create a network
+
+```bash
+docker network create app-tier --driver bridge
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+```
+
+### Step 2: Create a virtual host
 
 Let's create an nginx virtual host to reverse proxy to our Ruby container.
 
@@ -149,56 +166,58 @@ server {
         proxy_set_header X-NginX-Proxy true;
 
         # proxy_pass http://[your_ruby_container_link_alias]:3000;
-        proxy_pass http://yourapp:3000;
+        proxy_pass http://myapp:3000;
         proxy_redirect off;
     }
 }
 ```
 
-Notice we've substituted the link alias name `yourapp`, we will use the same name when creating the link.
+Notice we've substituted the link alias name `myapp`, we will use the same name when creating the container.
 
 Copy the virtual host above, saving the file somewhere on your host. We will mount it as a volume in our nginx container.
 
-### Step 2: Run the Ruby image with a specific name
-
-Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our Ruby server to make it easier to connect to other containers.
+### Step 3: Run the Ruby image with a specific name
 
 ```
-docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest ruby script.rb
+docker run -it --name myapp \
+  --network app-tier \
+  -v /path/to/app:/app \
+  bitnami/ruby:latest ruby script.rb
 ```
 
 or using Docker Compose:
 
-```
-ruby:
+```yaml
+version: '2'
+myapp:
   image: bitnami/ruby:latest
   command: ruby script.rb
+  networks:
+    - app-tier
   volumes:
     - .:/app
 ```
 
-### Step 3: Run the nginx image and link it to the Ruby server
-
-Now that we have our Ruby server running, we can create another container that links to it by giving Docker the `--link` option. This option takes the id or name of the container we want to link it to as well as a hostname to use inside the container, separated by a colon. For example, to have our Ruby server accessible in another container with `yourapp` as it's hostname we would pass `--link ruby:yourapp` to the Docker run command.
+### Step 4: Run the nginx image
 
 ```bash
-docker run -it -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf \
-  --link ruby:yourapp \
+docker run -it \
+  -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf \
+  --network app-tier \
   bitnami/nginx:latest
 ```
 
 or using Docker Compose:
 
-```
+```yaml
+version: '2'
 nginx:
   image: bitnami/nginx:latest
-  links:
-    - ruby:yourapp
+  networks:
+    - app-tier
   volumes:
     - /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf
 ```
-
-We started the nginx server, mounting the virtual host we created in [Step 1](#step-1-create-a-virtual-host), and created a link to the Ruby server with the alias `yourapp`.
 
 # Maintenance
 
