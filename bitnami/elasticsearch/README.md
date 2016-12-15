@@ -60,50 +60,75 @@ elasticsearch:
     - /path/to/elasticsearch-persistence:/bitnami/elasticsearch
 ```
 
-# Linking
+# Connecting to other containers
 
-If you want to connect to your Elasticsearch server inside another container, you can use the linking system provided by Docker.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Elasticsearch server running inside a container can easily be accessed by your application containers.
 
-## Connecting a Elasticsearch container to other Elasticsearch container
+Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-### Step 1: Run the Elasticsearch image with a specific name
+## Using the Command Line
 
-The first step is to start our Elasticsearch server.
-
-Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our Elasticsearch server to make it easier to connect to other containers.
+### Step 1: Create a network
 
 ```bash
-docker run --name elasticsearch-node1 bitnami/elasticsearch:latest
-```
-### Step 2: Run another Elasticsearch container and link to the other one
-
-Now that we have our Elasticsearch server running, we can create another container that links to it by giving Docker the `--link` option. This option takes the id or name of the container we want to link it to as well as a hostname to use inside the container, separated by a colon. For example, to have one Elasticsearch node accessible in another container with `node1` as it's hostname we would pass `--link elasticsearch-node1:node1` to the Docker run command.
-
-
-
-## Linking with Docker Compose
-
-### Step 1: Add a Elasticsearch entry in your `docker-compose.yml`
-
-Copy the snippet below into your `docker-compose.yml` to add Elasticsearch to your application.
-
-```
-elasticsearch:
-  image: bitnami/elasticsearch:latest
+$ docker network create app-tier --driver bridge
 ```
 
-### Step 2: Link it to another container in your application
+### Step 2: Launch the Elasticsearch server instance
 
-Update the definitions for containers you want to access your Elasticsearch server from to include a link to the `elasticsearch` entry you added in Step 1.
+Use the `--network app-tier` argument to the `docker run` command to attach the Elasticsearch container to the `app-tier` network.
 
+```bash
+$ docker run -d --name elasticsearch-server \
+    --network app-tier \
+    bitnami/elasticsearch:latest
 ```
-myapp:
-  image: myapp
-  links:
-    - elasticsearch:elasticsearch
+
+### Step 3: Launch your application container
+
+```bash
+$ docker run -d --name myapp \
+    --network app-tier \
+    YOUR_APPLICATION_IMAGE
 ```
 
-Inside `myapp`, use `elasticsearch` as the hostname for the Elasticsearch server.
+> **IMPORTANT**:
+>
+> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 2. In your application container, use the hostname `elasticsearch-server` to connect to the Elasticsearch server
+
+## Using Docker Compose
+
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Elasticsearch server from your own custom application image which is identified in the following snippet by the service name `myapp`.
+
+```yaml
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  elasticsearch:
+    image: 'bitnami/elasticsearch:latest'
+    networks:
+      - app-tier
+  myapp:
+    image: 'YOUR_APPLICATION_IMAGE'
+    networks:
+      - app-tier
+```
+
+> **IMPORTANT**:
+>
+> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 2. In your application container, use the hostname `elasticsearch` to connect to the Elasticsearch server
+
+Launch the containers using:
+
+```bash
+$ docker-compose up -d
+```
 
 # Configuration
 
