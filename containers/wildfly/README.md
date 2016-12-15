@@ -118,32 +118,38 @@ The Bitnami Wildfly Docker Image ships the `jboss-cli.sh` client and can be laun
 
 ## Connecting a client container to the Wildfly server container
 
-### Step 1: Run the Wildfly image with a specific name
-
-The first step is to start our Wildfly server.
-
-Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our Wildfly server to make it easier to connect to other containers.
+### Step 1: Create a network
 
 ```bash
-docker run --name wildfly bitnami/wildfly:latest
+$ docker network create wildfly-tier --driver bridge
 ```
 
-### Step 2: Run Wildfly as a client and link to our server
+### Step 2: Launch the Wildfly server instance
 
-Now that we have our Wildfly server running, we can create another container to launch `jboss-cli.sh` that links to the server container by giving Docker the `--link` option. This option takes the id or name of the container we want to link it to as well as a hostname to use inside the container, separated by a colon. For example, to have our Wildfly server accessible in another container with `server` as it's hostname we would pass `--link wildfly:server` to the Docker run command.
+Use the `--network wildfly-tier` argument to the `docker run` command to attach the Wildfly container to the `wildfly-tier` network.
 
 ```bash
-docker run --rm -it --link wildfly:server bitnami/wildfly \
-  jboss-cli.sh --controller=server:9990 --user=test --password=bitnami --connect
+$ docker run -d --name wildfly-server \
+    --network wildfly-tier \
+    bitnami/wildfly:latest
 ```
 
-We started `jboss-cli.sh` passing in the `--controller` option that allows us to specify the hostname and port of the server, which we set to the hostname we created in the link.
+### Step 3: Launch your Wildfly client instance
+
+Finally we create a new container instance to launch the Wildfly client and connect to the server created in the previous step:
+
+```bash
+$ docker run -it --rm \
+    --network wildfly-tier \
+    bitnami/wildfly:latest jboss-cli.sh --controller=wildfly-server:9990  --connect
+```
 
 **Note!**
 You can also run the client in the same container as the server using the Docker [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
 
 ```bash
-docker exec -it wildfly jboss-cli.sh --user=user --password=bitnami --connect
+docker exec -it wildfly-server \
+  jboss-cli.sh --controller=wildfly-server:9990 --connect
 ```
 
 # Configuration
