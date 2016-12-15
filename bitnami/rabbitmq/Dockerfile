@@ -4,7 +4,7 @@ MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=rabbitmq \
     BITNAMI_IMAGE_VERSION=3.6.6-r4 \
-    PATH=/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:$PATH
+    PATH=/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/sbin:/opt/bitnami/rabbitmq/bin:$PATH
 
 # System packages required
 RUN install_packages --no-install-recommends libc6 libssl1.0.0 libtinfo5 zlib1g

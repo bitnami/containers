@@ -64,57 +64,74 @@ rabbitmq:
     - /path/to/rabbitmq-persistence:/bitnami/rabbitmq
 ```
 
-# Linking
+# Connecting to other containers
 
-If you want to connect to your RabbitMQ server inside another container, you can use the linking system provided by Docker.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a RabbitMQ server running inside a container can easily be accessed by your application containers.
 
-## Connecting a RabbitMQ node to a stats node
+Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-### Step 1: Create a new network for the application:
+## Using the Command Line
 
-```
-$ docker network create rabbitmq_network
-```
+In this example, we will create a RabbitMQ client instance that will connect to the server instance that is running on the same docker network as the client.
 
-### Step 2: Run the RabbitMQ stats node:
+### Step 1: Create a network
 
-```
-$ docker run -d -p 15672:15672 --name rabbitmq-stats --net=rabbitmq_network -e RABBITMQ_NODE_NAME=rabbit@rabbitmq-stats -e RABBITMQ_ERLANG_COOKIE=s3cr3tc00ki3 bitnami/rabbitmq
+```bash
+$ docker network create app-tier --driver bridge
 ```
 
-*Note:* You need to give the container a name in order to RabbitMQ nodes to resolve the host
+### Step 2: Launch the RabbitMQ server instance
 
-### Step 3: Run the RabbitMQ queue nodes:
+Use the `--network app-tier` argument to the `docker run` command to attach the RabbitMQ container to the `app-tier` network.
 
-```
-$ docker run -d --name rabbitmq-queue-disc1 --link rabbitmq-stats --net=rabbitmq_network -e RABBITMQ_NODE_TYPE=queue-disc -e RABBITMQ_NODE_NAME=rabbit@rabibitmq-queue-disc1 -e RABBITMQ_CLUSTER_NODE_NAME=rabbit@rabbitmq-stats -e RABBITMQ_ERLANG_COOKIE=s3cr3tc00ki3 bitnami/rabbitmq
-```
-
-*Note:* You can use a **ram** node by setting `RABBITMQ_NODE_TYPE=queue-ram` and `--name rabbitmq-queue-ramX`
-
-## Linking with Docker Compose
-
-### Step 1: Add a RabbitMQ entry in your `docker-compose.yml`
-
-Copy the snippet below into your `docker-compose.yml` to add RabbitMQ to your application.
-
-```
-rabbitmq:
-  image: bitnami/rabbitmq:latest
+```bash
+$ docker run -d --name rabbitmq-server \
+    --network app-tier \
+    bitnami/rabbitmq:latest
 ```
 
-### Step 2: Link it to another container in your application
+### Step 3: Launch your RabbitMQ client instance
 
-Update the definitions for containers you want to access your RabbitMQ server from to include a link to the `rabbitmq` entry you added in Step 1.
+Finally we create a new container instance to launch the RabbitMQ client and connect to the server created in the previous step:
 
+```bash
+$ docker run -it --rm \
+    --network app-tier \
+    bitnami/rabbitmq:latest rabbitmqctl -n rabbit@rabbitmq-server status
 ```
-myapp:
-  image: myapp
-  links:
-    - rabbitmq:rabbitmq
+
+## Using Docker Compose
+
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the RabbitMQ server from your own custom application image which is identified in the following snippet by the service name `myapp`.
+
+```yaml
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  rabbitmq:
+    image: 'bitnami/rabbitmq:latest'
+    networks:
+      - app-tier
+  myapp:
+    image: 'YOUR_APPLICATION_IMAGE'
+    networks:
+      - app-tier
 ```
 
-Inside `myapp`, use `rabbitmq` as the hostname for the RabbitMQ server.
+> **IMPORTANT**:
+>
+> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 2. In your application container, use the hostname `rabbitmq` to connect to the RabbitMQ server
+
+Launch the containers using:
+
+```bash
+$ docker-compose up -d
+```
 
 # Configuration
 
