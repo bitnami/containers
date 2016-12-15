@@ -110,64 +110,75 @@ kibana:
     - /path/to/kibana-persistence:/bitnami/kibana
 ```
 
-# Linking
+# Connecting to other containers
 
-If you want to connect to your Kibana server inside another container, you can use the linking system provided by Docker.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Kibana server running inside a container can easily be accessed by your application containers.
 
-## Connecting a Kibana client container to the Kibana server container
+Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-### Step 1: Run the Kibana image with a specific name
+## Using the Command Line
 
-The first step is to start our Kibana server.
-
-Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our Kibana server to make it easier to connect to other containers.
+### Step 1: Create a network
 
 ```bash
-docker run --name kibana bitnami/kibana:latest
+$ docker network create app-tier --driver bridge
 ```
 
-### Step 2: Run Kibana as a client and link to our server
+### Step 2: Launch the Kibana server instance
 
-Now that we have our Kibana server running, we can create another container that links to it by giving Docker the `--link` option. This option takes the id or name of the container we want to link it to as well as a hostname to use inside the container, separated by a colon. For example, to have our Kibana server accessible in another container with `server` as it's hostname we would pass `--link kibana:server` to the Docker run command.
-
-The Bitnami Kibana Docker Image also ships with a Kibana client, but by default it will start a server. To start the client instead, we can override the default command Docker runs by stating a different command to run after the image name.
+Use the `--network app-tier` argument to the `docker run` command to attach the Kibana container to the `app-tier` network.
 
 ```bash
-docker run --rm -it --link kibana:server bitnami/kibana:latest kibana-cli -h server
+$ docker run -d --name kibana-server \
+    --network app-tier \
+    bitnami/kibana:latest
 ```
 
-We started the Kibana client passing in the `-h` option that allows us to specify the hostname of the server, which we set to the hostname we created in the link.
-
-**Note!**
-You can also run the Kibana client in the same container the server is running in using the Docker [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
+### Step 3: Launch your application container
 
 ```bash
-docker exec -it kibana kibana-cli
+$ docker run -d --name myapp \
+    --network app-tier \
+    YOUR_APPLICATION_IMAGE
 ```
 
-## Linking with Docker Compose
+> **IMPORTANT**:
+>
+> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 2. In your application container, use the hostname `kibana-server` to connect to the Kibana server
 
-### Step 1: Add a Kibana entry in your `docker-compose.yml`
+## Using Docker Compose
 
-Copy the snippet below into your `docker-compose.yml` to add Kibana to your application.
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Kibana server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
+```yaml
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  kibana:
+    image: 'bitnami/kibana:latest'
+    networks:
+      - app-tier
+  myapp:
+    image: 'YOUR_APPLICATION_IMAGE'
+    networks:
+      - app-tier
 ```
-kibana:
-  image: bitnami/kibana:latest
+
+> **IMPORTANT**:
+>
+> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 2. In your application container, use the hostname `kibana` to connect to the Kibana server
+
+Launch the containers using:
+
+```bash
+$ docker-compose up -d
 ```
-
-### Step 2: Link it to another container in your application
-
-Update the definitions for containers you want to access your Kibana server from to include a link to the `kibana` entry you added in Step 1.
-
-```
-myapp:
-  image: myapp
-  links:
-    - kibana:kibana
-```
-
-Inside `myapp`, use `kibana` as the hostname for the Kibana server.
 
 # Configuration
 
