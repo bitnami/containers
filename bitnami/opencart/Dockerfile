@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r5
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=opencart \
-    BITNAMI_IMAGE_VERSION=2.3.0.2-r8 \
+    BITNAMI_IMAGE_VERSION=2.3.0.2-r9 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
