@@ -1,5 +1,5 @@
 {
-  "username": "{{$global.env.OPENCART_USER_NAME}}",
+  "username": "{{$global.env.OPENCART_USERNAME}}",
   "password": "{{$global.env.OPENCART_PASSWORD}}",
   "email": "{{$global.env.OPENCART_EMAIL}}",
   "host": "{{$global.env.OPENCART_HOST}}",
