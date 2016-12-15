@@ -1,9 +1,9 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r5
+FROM gcr.io/stacksmith-images/minideb:jessie-r7
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=joomla \
-    BITNAMI_IMAGE_VERSION=3.6.4-r4 \
+    BITNAMI_IMAGE_VERSION=3.6.5-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin:$PATH
 
 # System packages required
@@ -16,7 +16,7 @@ RUN bitnami-pkg install libphp-5.6.28-1 --checksum c7a1df270fad99fbcff23506574ec
 RUN bitnami-pkg install mysql-client-10.1.19-1 --checksum 2d946c8ee3e2e845f68a5cf3751d6477d88af194d263842797fe50a44414a173
 
 # Install joomla
-RUN bitnami-pkg unpack joomla-3.6.4-1 --checksum c1b287c8c4492ef0bf37643320863d10029881f09eec1dc09fda01d05d3017d4
+RUN bitnami-pkg unpack joomla-3.6.5-0 --checksum a2bc98181e837606497fda3e8e37840270fe3d67dedd8353ddea03345dcf7b8d
 
 COPY rootfs /
 
