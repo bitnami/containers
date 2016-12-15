@@ -19,7 +19,7 @@ docker run --name mysql bitnami/mysql:latest
 version: '2'
 
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
     ports:
       - '3306:3306'
@@ -58,7 +58,9 @@ If you have already started using your database, follow the steps on
 The image exposes a volume at `/bitnami/mysql` for the MySQL data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
-docker run -v /path/to/mysql-persistence:/bitnami/mysql bitnami/mysql:latest
+docker run \
+  -v /path/to/mysql-persistence:/bitnami/mysql \
+  bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -67,7 +69,7 @@ or using Docker Compose:
 version: '2'
 
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
     ports:
       - '3306:3306'
@@ -75,66 +77,74 @@ services:
       - /path/to/mysql-persistence:/bitnami/mysql
 ```
 
-# Linking
+# Connecting to other containers
 
-If you want to connect to your MySQL server inside another container, you can use the linking system provided by Docker.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a MySQL server running inside a container can easily be accessed by your application containers.
 
-## Connecting a MySQL client container to the MySQL server container
+Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-### Step 1: Run the MySQL image with a specific name
+## Using the Command Line
 
-The first step is to start our MySQL server.
+In this example, we will create a MySQL client instance that will connect to the server instance that is running on the same docker network as the client.
 
-Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our MySQL server to make it easier to connect to other containers.
-
-```bash
-docker run --name mysql bitnami/mysql:latest
-```
-
-### Step 2: Run MySQL as a MySQL client and link to our server
-
-Now that we have our MySQL server running, we can create another container that links to it by giving Docker the `--link` option. This option takes the id or name of the container we want to link it to as well as a hostname to use inside the container, separated by a colon. For example, to have our MySQL server accessible in another container with `server` as it's hostname we would pass `--link mysql:server` to the Docker run command.
-
-The Bitnami MySQL Docker Image also ships with a MySQL client. To start the client, we can override the default command Docker runs by stating a different command to run after the image name.
+### Step 1: Create a network
 
 ```bash
-docker run --rm -it --link mysql:server bitnami/mysql:latest mysql -h server -u root
+$ docker network create app-tier --driver bridge
 ```
 
-We started the MySQL client passing in the `-h` option that allows us to specify the hostname of the server, which we set to the hostname we created in the link.
+### Step 2: Launch the MySQL server instance
 
-**Note!**
-You can also run the MySQL client in the same container the server is running in using the Docker [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
+Use the `--network app-tier` argument to the `docker run` command to attach the MySQL container to the `app-tier` network.
 
 ```bash
-docker exec -it mysql mysql -u root
+$ docker run -d --name mysql-server \
+    --network app-tier \
+    bitnami/mysql:latest
 ```
 
-## Linking with Docker Compose
+### Step 3: Launch your MySQL client instance
 
-### Step 1: Add a MySQL entry in your `docker-compose.yml`
+Finally we create a new container instance to launch the MySQL client and connect to the server created in the previous step:
 
-Copy the snippet below into your `docker-compose.yml` to add MySQL to your application.
+```bash
+$ docker run -it --rm \
+    --network app-tier \
+    bitnami/mysql:latest mysql -h mysql-server -u root
+```
+
+## Using Docker Compose
+
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the MySQL server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
 ```yaml
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
-```
-
-### Step 2: Link it to another container in your application
-
-Update the definitions for containers you want to access your MySQL server from to include a link to the `mysql` entry you added in Step 1.
-
-```yaml
-services:
+    networks:
+      - app-tier
   myapp:
-    image: myapp
-    depends_on:
-      - mysql
+    image: 'YOUR_APPLICATION_IMAGE'
+    networks:
+      - app-tier
 ```
 
-Inside `myapp`, use `mysql` as the hostname for the MySQL server.
+> **IMPORTANT**:
+>
+> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 2. In your application container, use the hostname `mysql` to connect to the MySQL server
+
+Launch the containers using:
+
+```bash
+$ docker-compose up -d
+```
 
 # Configuration
 
@@ -152,7 +162,7 @@ or using Docker Compose:
 version: '2'
 
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
     ports:
       - '3306:3306'
@@ -167,7 +177,9 @@ services:
 By passing the `MYSQL_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the MySQL client.
 
 ```bash
-docker run --name mysql -e MYSQL_DATABASE=my_database bitnami/mysql:latest
+docker run --name mysql \
+  -e MYSQL_DATABASE=my_database \
+  bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -176,7 +188,7 @@ or using Docker Compose:
 version: '2'
 
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
     ports:
       - '3306:3306'
@@ -201,7 +213,7 @@ or using Docker Compose:
 version: '2'
 
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
     ports:
       - '3306:3306'
@@ -221,7 +233,7 @@ A **zero downtime** MySQL master-slave [replication](https://dev.mysql.com/doc/r
  - `MYSQL_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
  - `MYSQL_REPLICATION_PASSWORD`: The replication users password. No defaults.
  - `MYSQL_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
- - `MARIABD_MASTER_PORT`: Server port of the replication master (slave parameter). Defaults to `3306`.
+ - `MYSQL_MASTER_PORT`: Server port of the replication master (slave parameter). Defaults to `3306`.
  - `MYSQL_MASTER_USER`: User on replication master with access to `MYSQL_DATABASE` (slave parameter). Defaults to `root`
  - `MYSQL_MASTER_PASSWORD`: Password of user on replication master with access to `MYSQL_DATABASE` (slave parameter). No defaults.
 
@@ -315,7 +327,7 @@ services:
 Scale the number of slaves using:
 
 ```bash
-docker-compose scale master=1 slave=3
+docker-compose scale mysql-master=1 mysql-slave=3
 ```
 
 The above command scales up the number of slaves to `3`. You can scale down in the same manner.
@@ -331,7 +343,9 @@ The image looks for configuration in the `conf/` directory of `/bitnami/mysql`. 
 Run the MySQL image, mounting a directory from your host.
 
 ```bash
-docker run --name mysql -v /path/to/mysql-persistence:/bitnami/mysql bitnami/mysql:latest
+docker run --name mysql \
+  -v /path/to/mysql-persistence:/bitnami/mysql \
+  bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -340,7 +354,7 @@ or using Docker Compose:
 version: '2'
 
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
     ports:
       - '3306:3306'
@@ -413,15 +427,19 @@ docker-compose stop mysql
 We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
 ```bash
-docker run --rm -v /path/to/mysql-backups:/backups --volumes-from mysql busybox \
-  cp -a /bitnami/mysql:latest /backups/latest
+docker run --rm \
+  -v /path/to/mysql-backups:/backups \
+  --volumes-from mysql busybox \
+    cp -a /bitnami/mysql /backups/latest
 ```
 
 or using Docker Compose:
 
 ```bash
-docker run --rm -v /path/to/mysql-backups:/backups --volumes-from `docker-compose ps -q mysql` busybox \
-  cp -a /bitnami/mysql:latest /backups/latest
+docker run --rm \
+  -v /path/to/mysql-backups:/backups \
+  --volumes-from `docker-compose ps -q mysql` busybox \
+    cp -a /bitnami/mysql /backups/latest
 ```
 
 ## Restoring a backup
@@ -429,7 +447,9 @@ docker run --rm -v /path/to/mysql-backups:/backups --volumes-from `docker-compos
 Restoring a backup is as simple as mounting the backup as volumes in the container.
 
 ```bash
-docker run -v /path/to/mysql-backups/latest:/bitnami/mysql bitnami/mysql:latest
+docker run \
+  -v /path/to/mysql-backups/latest:/bitnami/mysql \
+  bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -438,7 +458,7 @@ or using Docker Compose:
 version: '2'
 
 services:
-  mariadb:
+  mysql:
     image: 'bitnami/mysql:latest'
     ports:
       - '3306:3306'
@@ -498,13 +518,6 @@ This image is tested for expected runtime behavior, using the [Bats](https://git
 ```
 bats test.sh
 ```
-
-# Notable Changes
-
-## 10.1.13-r0
-
-- All volumes have been merged at `/bitnami/mysql`. Now you only need to mount a single volume at `/bitnami/mysql` for persistence.
-- The logs are always sent to the `stdout` and are no longer collected in the volume.
 
 # Contributing
 
