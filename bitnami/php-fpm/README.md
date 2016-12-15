@@ -48,22 +48,38 @@ If you wish, you can also build the image yourself.
 docker build -t bitnami/php-fpm https://github.com/bitnami/bitnami-docker-php-fpm.git
 ```
 
-# Linking
+# Connecting to other containers
 
-This image is designed to be used with a web server to serve your PHP app, you can use the linking system provided by Docker to do this.
+This image is designed to be used with a web server to serve your PHP app, you can use docker networking to create a network and attach all the containers to that network.
 
 ## Serving your PHP app through an nginx frontend
 
 We will use PHP-FPM with nginx to serve our PHP app. Doing so will allow us to setup more complex configuration, serve static assets using nginx, load balance to different PHP-FPM instances, etc.
 
-### Step 1: Create a virtual host
+### Step 1: Create a network
+
+```bash
+docker network create app-tier --driver bridge
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+```
+
+### Step 2: Create a virtual host
 
 Let's create an nginx virtual host to reverse proxy to our PHP-FPM container.
 
 ```nginx
 server {
     listen 0.0.0.0:80;
-    server_name yourapp.com;
+    server_name myapp.com;
 
     root /app;
 
@@ -73,23 +89,26 @@ server {
 
     location ~ \.php$ {
         # fastcgi_pass [PHP_FPM_LINK_NAME]:9000;
-        fastcgi_pass yourapp:9000;
+        fastcgi_pass myapp:9000;
         fastcgi_index index.php;
         include fastcgi.conf;
     }
 }
 ```
 
-Notice we've substituted the link alias name `yourapp`, we will use the same name when creating the link.
+Notice we've substituted the link alias name `myapp`, we will use the same name when creating the container.
 
 Copy the virtual host above, saving the file somewhere on your host. We will mount it as a volume in our nginx container.
 
-### Step 2: Run the PHP-FPM image with a specific name
+### Step 3: Run the PHP-FPM image with a specific name
 
 Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our PHP-FPM server to make it easier to connect to other containers.
 
-```
-docker run -it --name phpfpm -v /path/to/app:/app bitnami/php-fpm
+```bash
+docker run -it --name phpfpm \
+  --network app-tier
+  -v /path/to/app:/app \
+  bitnami/php-fpm
 ```
 
 or using Docker Compose:
@@ -98,17 +117,18 @@ or using Docker Compose:
 services:
   phpfpm:
     image: 'bitnami/php-fpm:latest'
+    networks:
+      - app-tier
     volumes:
       - /path/to/app:/app
 ```
 
-### Step 3: Run the nginx image and link it to the PHP-FPM server
-
-Now that we have our PHP-FPM server running, we can create another container that links to it by giving Docker the `--link` option. This option takes the id or name of the container we want to link it to as well as a hostname to use inside the container, separated by a colon. For example, to have our PHP-FPM server accessible in another container with `yourapp` as it's hostname we would pass `--link phpfpm:yourapp` to the Docker run command.
+### Step 3: Run the nginx image
 
 ```bash
-docker run -it -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf \
-  --link phpfpm:yourapp \
+docker run -it \
+  -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf \
+  --network app-tier \
   bitnami/nginx
 ```
 
@@ -120,16 +140,14 @@ services:
     image: 'bitnami/nginx:latest'
     depends_on:
       - phpfpm
-    links:
-      - phpfpm:yourapp
+    networks:
+      - app-tier
     ports:
       - '80:80'
       - '443:443'
     volumes:
       - /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf
 ```
-
-We started the nginx server, mounting the virtual host we created in [Step 1](#step-1-create-a-virtual-host), and created a link to the PHP-FPM server with the alias `yourapp`.
 
 # PHP runtime
 
