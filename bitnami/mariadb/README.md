@@ -75,66 +75,74 @@ services:
       - /path/to/mariadb-persistence:/bitnami/mariadb
 ```
 
-# Linking
+# Connecting to other containers
 
-If you want to connect to your MariaDB server inside another container, you can use the linking system provided by Docker.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a MariaDB server running inside a container can easily be accessed by your application containers.
 
-## Connecting a MySQL client container to the MariaDB server container
+Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-### Step 1: Run the MariaDB image with a specific name
+## Using the Command Line
 
-The first step is to start our MariaDB server.
+In this example, we will create a MariaDB client instance that will connect to the server instance that is running on the same docker network as the client.
 
-Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our MariaDB server to make it easier to connect to other containers.
-
-```bash
-docker run --name mariadb bitnami/mariadb:latest
-```
-
-### Step 2: Run MariaDB as a MySQL client and link to our server
-
-Now that we have our MariaDB server running, we can create another container that links to it by giving Docker the `--link` option. This option takes the id or name of the container we want to link it to as well as a hostname to use inside the container, separated by a colon. For example, to have our MariaDB server accessible in another container with `server` as it's hostname we would pass `--link mariadb:server` to the Docker run command.
-
-The Bitnami MariaDB Docker Image also ships with a MySQL client. To start the client, we can override the default command Docker runs by stating a different command to run after the image name.
+### Step 1: Create a network
 
 ```bash
-docker run --rm -it --link mariadb:server bitnami/mariadb:latest mysql -h server -u root
+$ docker network create app-tier --driver bridge
 ```
 
-We started the MySQL client passing in the `-h` option that allows us to specify the hostname of the server, which we set to the hostname we created in the link.
+### Step 2: Launch the MariaDB server instance
 
-**Note!**
-You can also run the MySQL client in the same container the server is running in using the Docker [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
+Use the `--network app-tier` argument to the `docker run` command to attach the MariaDB container to the `app-tier` network.
 
 ```bash
-docker exec -it mariadb mysql -u root
+$ docker run -d --name mariadb-server \
+    --network app-tier \
+    bitnami/mariadb:latest
 ```
 
-## Linking with Docker Compose
+### Step 3: Launch your MariaDB client instance
 
-### Step 1: Add a MariaDB entry in your `docker-compose.yml`
+Finally we create a new container instance to launch the MariaDB client and connect to the server created in the previous step:
 
-Copy the snippet below into your `docker-compose.yml` to add MariaDB to your application.
+```bash
+$ docker run -it --rm \
+    --network app-tier \
+    bitnami/mariadb:latest mysql -h mariadb-server -u root
+```
+
+## Using Docker Compose
+
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the MariaDB server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
 ```yaml
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
-```
-
-### Step 2: Link it to another container in your application
-
-Update the definitions for containers you want to access your MariaDB server from to include a link to the `mariadb` entry you added in Step 1.
-
-```yaml
-services:
+    networks:
+      - app-tier
   myapp:
-    image: 'myapp'
-    depends_on:
-      - mariadb
+    image: 'YOUR_APPLICATION_IMAGE'
+    networks:
+      - app-tier
 ```
 
-Inside `myapp`, use `mariadb` as the hostname for the MariaDB server.
+> **IMPORTANT**:
+>
+> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 2. In your application container, use the hostname `mariadb` to connect to the MariaDB server
+
+Launch the containers using:
+
+```bash
+$ docker-compose up -d
+```
 
 # Configuration
 
@@ -221,7 +229,7 @@ A **zero downtime** MariaDB master-slave [replication](https://dev.mysql.com/doc
  - `MARIADB_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
  - `MARIADB_REPLICATION_PASSWORD`: The replication users password. No defaults.
  - `MARIADB_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
- - `MARIABD_MASTER_PORT`: Server port of the replication master (slave parameter). Defaults to `3306`.
+ - `MARIADB_MASTER_PORT`: Server port of the replication master (slave parameter). Defaults to `3306`.
  - `MARIADB_MASTER_USER`: User on replication master with access to `MARIADB_DATABASE` (slave parameter). Defaults to `root`
  - `MARIADB_MASTER_PASSWORD`: Password of user on replication master with access to `MARIADB_DATABASE` (slave parameter). No defaults.
 
