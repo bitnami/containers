@@ -5,7 +5,7 @@
 ## RUNNING
 ##   $ docker run ubuntu-for-bitnami-bitnami-docker-mariadb
 
-FROM gcr.io/stacksmith-images/minideb:jessie-r5
+FROM gcr.io/stacksmith-images/minideb:jessie-r7
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -16,7 +16,7 @@ ENV STACKSMITH_STACK_ID="nd6ziiq" \
 ## STACKSMITH-END: Modifications below this line will be unchanged when regenerating
 
 
-ENV BITNAMI_IMAGE_VERSION=10.1.19-r4 \
+ENV BITNAMI_IMAGE_VERSION=10.1.20-r0 \
     BITNAMI_APP_NAME=mariadb \
     BITNAMI_APP_USER=mysql
 
@@ -24,11 +24,11 @@ ENV BITNAMI_IMAGE_VERSION=10.1.19-r4 \
 RUN install_packages libc6 libaio1 zlib1g libjemalloc1 libssl1.0.0 libstdc++6 libgcc1 libncurses5 libtinfo5
 
 # Install mariadb
-RUN bitnami-pkg unpack mariadb-10.1.19-2 --checksum c557e87fc43e1f729837d86ebc04499b335292b1e5a516880ced27814cc9eb49
+RUN bitnami-pkg unpack mariadb-10.1.20-0 --checksum 7409ba139885bc4f463233a250806f557ee41472e2c88213e82c21f4d97a77d7
 
 ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:$PATH
 
-COPY rootfs/ /
+COPY rootfs /
 
 VOLUME ["/bitnami/$BITNAMI_APP_NAME"]
 
