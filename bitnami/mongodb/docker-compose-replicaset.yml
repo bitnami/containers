@@ -14,7 +14,7 @@ services:
       - mongodb-primary
     environment:
       - MONGODB_REPLICA_SET_MODE=secondary
-      - MONGODB_PRIMARY_HOST=primary
+      - MONGODB_PRIMARY_HOST=mongodb-primary
 
     mongodb-arbiter:
     image: 'bitnami/mongodb:latest'
@@ -22,7 +22,7 @@ services:
       - mongodb-primary
     environment:
       - MONGODB_REPLICA_SET_MODE=arbiter
-      - MONGODB_PRIMARY_HOST=primary
+      - MONGODB_PRIMARY_HOST=mongodb-primary
 
 volumes:
   mongodb_master_data:
