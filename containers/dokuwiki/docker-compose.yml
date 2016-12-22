@@ -1,8 +1,7 @@
 version: '2'
 services:
   dokuwiki:
-      #    image: 'bitnami/dokuwiki:latest'
-    build: .
+    image: 'bitnami/dokuwiki:latest'
     ports:
       - '80:80'
       - '443:443'
