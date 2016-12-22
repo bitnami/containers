@@ -203,7 +203,12 @@ A [replication](https://docs.mongodb.com/manual/replication/) cluster can easily
  - `MONGODB_REPLICA_SET_MODE`: The replication mode. Possible values `primary`/`secondary`/`arbiter`. No defaults.
  - `MONGODB_REPLICA_SET_NAME`: MongoDB replica set name. Default: **replicaset**
  - `MONGODB_PRIMARY_HOST`: MongoDB primary host. No defaults.
- - `MONGODB_PRIMARY_PORT`: MongoDB primary port. No defaults.
+ - `MONGODB_PRIMARY_PORT`: MongoDB primary port. Default: **27017**
+
+Only for authentication:
+ - `MONGODB_REPLICA_SET_KEY`: MongoDB replica set key. No default. Required for all nodes.
+ - `MONGODB_ROOT_PASSWORD`: MongoDB root password. No defaults. Only for primary node.
+ - `MONGODB_PRIMARY_ROOT_PASSWORD`: MongoDB primary root password. No defaults. Only for secondaries and aribters nodes.
 
 In a replication cluster you can have one primary node, zero or more secondary nodes and zero or one arbiter node.
 
@@ -262,7 +267,7 @@ services:
   mongodb-primary:
     image: 'bitnami/mongodb:latest'
     environment:
-      - MONGODB_REPLICASET_MODE=primary
+      - MONGODB_REPLICA_SET_MODE=primary
     volumes:
       - 'mongodb_master_data:/bitnami/mongodb'
 
@@ -271,8 +276,8 @@ services:
     depends_on:
       - mongodb-primary
     environment:
-      - MONGODB_REPLICASET_MODE=secondary
-      - MONGODB_PRIMARY_HOST=primary
+      - MONGODB_REPLICA_SET_MODE=secondary
+      - MONGODB_PRIMARY_HOST=mongodb-primary
       - MONGODB_PRIMARY_PORT=27017
 
   mongodb-arbiter:
@@ -281,9 +286,56 @@ services:
       - mongodb-primary
     environment:
       - MONGODB_REPLICA_SET_MODE=arbiter
-      - MONGODB_PRIMARY_HOST=primary
+      - MONGODB_PRIMARY_HOST=mongodb-primary
       - MONGODB_PRIMARY_PORT=27017
+
+volumes:
+  mongodb_master_data:
+    driver: local
 ```
+
+Or in case you want to set up the replica set with authentication you can use the following file:
+
+```yaml
+version: '2'
+
+services:
+  mongodb-primary:
+    image: 'bitnami/mongodb:latest'
+    environment:
+      - MONGODB_REPLICA_SET_MODE=primary
+      - MONGODB_ROOT_PASSWORD=password123
+      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+    volumes:
+      - 'mongodb_master_data:/bitnami/mongodb'
+
+  mongodb-secondary:
+    image: 'bitnami/mongodb:latest'
+    depends_on:
+      - mongodb-primary
+    environment:
+      - MONGODB_REPLICA_SET_MODE=secondary
+      - MONGODB_PRIMARY_HOST=mongodb-primary
+      - MONGODB_PRIMARY_PORT=27017
+      - MONGODB_PRIMARY_ROOT_PASSWORD=password123
+      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+
+  mongodb-arbiter:
+    image: 'bitnami/mongodb:latest'
+    depends_on:
+      - mongodb-primary
+    environment:
+      - MONGODB_REPLICA_SET_MODE=arbiter
+      - MONGODB_PRIMARY_HOST=mongodb-primary
+      - MONGODB_PRIMARY_PORT=27017
+      - MONGODB_PRIMARY_ROOT_PASSWORD=password123
+      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+
+volumes:
+  mongodb_master_data:
+    driver: local
+```
+
 
 Scale the number of secondary nodes using:
 
