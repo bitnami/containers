@@ -3,6 +3,8 @@ machine:
   - docker
   environment:
     IMAGE_NAME: mariadb
+    CHART_NAME: mariadb
+    CHART_REPO: https://github.com/kubernetes/charts
     DOCKER_PROJECT: bitnami
     GCLOUD_PROJECT: bitnami-containers
 
@@ -20,34 +22,8 @@ deployment:
   cache:
     branch: master
     commands:
-    - >
-      if [ -n "$DOCKER_PASS" ]; then
-        docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-        docker build --rm=false -t $DOCKER_PROJECT/$IMAGE_NAME:_ .
-        docker push $DOCKER_PROJECT/$IMAGE_NAME:_
-      fi
+    - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-update-cache.sh | bash -
   release:
     tag: /^[0-9].*-r[0-9]+$/
     commands:
-    - >
-      if [ -n "$DOCKER_PASS" ]; then
-        docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-        docker build --rm=false -t $DOCKER_PROJECT/$IMAGE_NAME:$CIRCLE_TAG .
-        docker tag $DOCKER_PROJECT/$IMAGE_NAME:$CIRCLE_TAG $DOCKER_PROJECT/$IMAGE_NAME:latest
-        docker push $DOCKER_PROJECT/$IMAGE_NAME:$CIRCLE_TAG
-        docker push $DOCKER_PROJECT/$IMAGE_NAME:latest
-      fi
-    - >
-      if [ -n "$GCLOUD_SERVICE_KEY" ]; then
-        echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
-        gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-        echo 'ENV BITNAMI_CONTAINER_ORIGIN=GCR' >> Dockerfile
-        docker build --rm=false -t gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:$CIRCLE_TAG .
-        docker tag gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:$CIRCLE_TAG gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:latest
-        gcloud docker -- push gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:$CIRCLE_TAG
-        gcloud docker -- push gcr.io/$GCLOUD_PROJECT/$IMAGE_NAME:latest
-      fi
-    - >
-      if [ -n "$STACKSMITH_API_KEY" ]; then
-        curl "https://stacksmith.bitnami.com/api/v1/components/$IMAGE_NAME/versions?api_key=$STACKSMITH_API_KEY" -H 'Content-Type: application/json' --data '{"version": "'"${CIRCLE_TAG%-r*}"'", "revision": "'"${CIRCLE_TAG#*-r}"'", "published": true}'
-      fi
+    - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-release-image.sh | bash -
