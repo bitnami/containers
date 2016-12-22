@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r2
+FROM gcr.io/stacksmith-images/minideb:jessie-r7
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
