@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r7
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=suitecrm \
-    BITNAMI_IMAGE_VERSION=7.7.8-r0 \
+    BITNAMI_IMAGE_VERSION=7.7.8-r1 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/apache/bin:/opt/bitnami/mariadb/bin/:$PATH
 
 # Additional modules required
