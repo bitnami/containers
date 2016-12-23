@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r7
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=ghost \
-    BITNAMI_IMAGE_VERSION=0.11.3-r2 \
+    BITNAMI_IMAGE_VERSION=0.11.3-r3 \
     PATH=/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:$PATH
 
 # System packages required
