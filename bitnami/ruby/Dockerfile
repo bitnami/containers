@@ -29,7 +29,7 @@ ENV PATH=/opt/bitnami/ruby/bin:$PATH
 ## STACKSMITH-END: Modifications below this line will be unchanged when regenerating
 
 ENV BITNAMI_APP_NAME=ruby \
-    BITNAMI_IMAGE_VERSION=2.3.3-r1
+    BITNAMI_IMAGE_VERSION=2.3.3-r2
 
 EXPOSE 3000
 WORKDIR /app
