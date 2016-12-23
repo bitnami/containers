@@ -33,7 +33,7 @@ USER bitnami
 RUN mkdir /tmp/app && cd /tmp/app && composer create-project "laravel/laravel=5.2.31" /tmp/app --prefer-dist
 
 ENV BITNAMI_APP_NAME=laravel
-ENV BITNAMI_IMAGE_VERSION=5.2.31-r7
+ENV BITNAMI_IMAGE_VERSION=5.2.31-r8
 
 WORKDIR /app
 EXPOSE 3000
