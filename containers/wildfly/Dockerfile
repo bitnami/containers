@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/minideb:jessie-r7
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=10.1.0-r3 \
+ENV BITNAMI_IMAGE_VERSION=10.1.0-r4 \
     BITNAMI_APP_NAME=wildfly \
     BITNAMI_APP_USER=wildfly
 
