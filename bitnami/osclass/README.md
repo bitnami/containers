@@ -92,7 +92,11 @@ If you want to run the application manually instead of using `docker-compose`, t
     bitnami/osclass:latest
   ```
 
-Access your application at http://your-ip/
+Access your application at [http://your-ip/](http://your-ip/)
+
+> **NOTE**:
+>
+> To login to your Osclass Administration panel, go to [http://your-ip/oc-admin/](http://your-ip/oc-admin/).
 
 ## Persisting your application
 
