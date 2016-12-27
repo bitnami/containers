@@ -15,7 +15,7 @@ $ docker-compose up
 
 ### Eclipse Che workspace
 
-Launch a on-demand Symfony development workspace in Eclipse Che by clicking the link below:
+Launch an on-demand Symfony development workspace in Eclipse Che by clicking the link below:
 
 [![Symfony Development Workspace](http://beta.codenvy.com/factory/resources/codenvy-contribute.svg)](https://beta.codenvy.com/f/?url=https%3A%2F%2Fgithub.com%2Fbitnami%2Fbitnami-docker-symfony%2Ftree%2Fche)
 
@@ -36,8 +36,8 @@ The quickest way to get started with the Bitnami Symfony Development Container i
 Begin by creating a directory for your Symfony application:
 
 ```bash
-mkdir ~/myapp
-cd ~/myapp
+$ mkdir ~/myapp
+$ cd ~/myapp
 ```
 
 Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-symfony/master/docker-compose.yml) file in the application directory:
@@ -69,8 +69,7 @@ The general structure of the `exec` command is:
 ```bash
 $ docker-compose exec <service> <command>
 ```
-
-, where `<service>` is the name of the container service as described in the `docker-compose.yml` file and `<command>` is the command you want to launch inside the service.
+where `<service>` is the name of the container service as described in the `docker-compose.yml` file and `<command>` is the command you want to launch inside the service.
 
 Following are a few examples:
 
@@ -92,10 +91,10 @@ Following are a few examples:
 
 If you encountered a problem running this container, you can file an [issue](../../issues/new). For us to provide better support, be sure to include the following information in your issue:
 
-- Host OS and version (`uname -a`)
-- Docker version (`docker version`)
-- Docker info (`docker info`)
-- Docker image version (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Host OS and version (`$ uname -a`)
+- Docker version (`$ docker version`)
+- Docker info (`$ docker info`)
+- Docker image version (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - Steps to reproduce the issue.
 
 ## License
@@ -106,7 +105,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
