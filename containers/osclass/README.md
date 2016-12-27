@@ -94,7 +94,9 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 Access your application at http://your-ip/
 
-**NOTE:** To login to your Osclass Administration panel, go to http://your-ip/oc-admin/.
+> **NOTE**:
+>
+> To login to your Osclass Administration panel, go to http://your-ip/oc-admin/.
 
 ## Persisting your application
 
