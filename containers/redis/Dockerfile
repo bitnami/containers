@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/minideb:jessie-r7
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=3.2.5-r4 \
+ENV BITNAMI_IMAGE_VERSION=3.2.6-r0 \
     BITNAMI_APP_NAME=redis \
     BITNAMI_APP_USER=redis
 
@@ -9,7 +9,7 @@ ENV BITNAMI_IMAGE_VERSION=3.2.5-r4 \
 RUN install_packages --no-install-recommends libc6
 
 # Install redis
-RUN bitnami-pkg unpack redis-3.2.5-1 --checksum 725fc7c3d80da24d72d01a01ebc94dad74167d7f342040c8767eac83ad3e7c85
+RUN bitnami-pkg install redis-3.2.6-0 --checksum 9f49ddb833750511a406e3a735bbb2a6969091ae395a6ddf35adcb1aef133098
 ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:$PATH
 
 COPY rootfs /
