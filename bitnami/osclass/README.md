@@ -94,6 +94,8 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 Access your application at http://your-ip/
 
+**NOTE:** To login to your Osclass Administration panel, go to http://your-ip/oc-admin/.
+
 ## Persisting your application
 
 For persistence of the Osclass deployment, the above examples define docker volumes namely `mariadb_data`, `osclass_data` and `apache_data`. The Osclass application state will persist as long as these volumes are not removed.
