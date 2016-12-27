@@ -15,7 +15,7 @@ $ docker-compose up
 
 ### Eclipse Che workspace
 
-Launch a on-demand CodeIgniter development workspace in Eclipse Che by clicking the link below:
+Launch an on-demand CodeIgniter development workspace in Eclipse Che by clicking the link below:
 
 [![Codeigniter Development Workspace](http://beta.codenvy.com/factory/resources/codenvy-contribute.svg)](https://beta.codenvy.com/f/?url=https%3A%2F%2Fgithub.com%2Fbitnami%2Fbitnami-docker-codeigniter%2Ftree%2Fche)
 
