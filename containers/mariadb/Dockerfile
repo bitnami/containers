@@ -5,7 +5,7 @@
 ## RUNNING
 ##   $ docker run ubuntu-for-bitnami-bitnami-docker-mariadb
 
-FROM gcr.io/stacksmith-images/minideb:jessie-r7
+FROM gcr.io/stacksmith-images/minideb:jessie-r8
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
