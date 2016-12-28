@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=9.6.1-r4 \
+ENV BITNAMI_IMAGE_VERSION=9.6.1-r5 \
     BITNAMI_APP_NAME=postgresql \
     BITNAMI_APP_USER=postgres
 
