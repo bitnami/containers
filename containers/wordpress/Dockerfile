@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=wordpress \
-    BITNAMI_IMAGE_VERSION=4.7-r1 \
+    BITNAMI_IMAGE_VERSION=4.7-r2 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
