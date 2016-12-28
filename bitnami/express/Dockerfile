@@ -28,7 +28,7 @@ ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
 
 # ExpressJS template
 ENV BITNAMI_APP_NAME=express
-ENV BITNAMI_IMAGE_VERSION=4.14.0-r13
+ENV BITNAMI_IMAGE_VERSION=4.14.0-r14
 
 RUN npm install -g express-generator@4 &&\
     npm install -g bower@1.8.0
