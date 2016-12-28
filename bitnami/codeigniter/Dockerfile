@@ -5,7 +5,7 @@
 ## RUNNING
 ##   $ docker run -p 8000:8000 bitnami/bitnami-docker-codeigniter
 
-FROM gcr.io/stacksmith-images/minideb:jessie-r7
+FROM gcr.io/stacksmith-images/minideb:jessie-r8
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
