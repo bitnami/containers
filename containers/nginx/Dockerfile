@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=1.10.2-r3 \
+ENV BITNAMI_IMAGE_VERSION=1.10.2-r4 \
     BITNAMI_APP_NAME=nginx \
     BITNAMI_APP_USER=daemon
 
