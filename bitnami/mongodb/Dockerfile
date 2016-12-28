@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=3.4.1-r0 \
+ENV BITNAMI_IMAGE_VERSION=3.4.1-r1 \
     BITNAMI_APP_NAME=mongodb \
     BITNAMI_APP_USER=mongo
 
