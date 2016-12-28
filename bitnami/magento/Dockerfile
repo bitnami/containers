@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=magento \
-    BITNAMI_IMAGE_VERSION=2.1.2-r7 \
+    BITNAMI_IMAGE_VERSION=2.1.2-r8 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/apache/bin:/opt/bitnami/magento/bin/:$PATH
 
 # System packages required
