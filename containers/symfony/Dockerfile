@@ -10,7 +10,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=symfony \
-    BITNAMI_IMAGE_VERSION=3.2.1-r1 \
+    BITNAMI_IMAGE_VERSION=3.2.1-r2 \
     PATH=/opt/bitnami/symfony/bin:/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
@@ -22,7 +22,7 @@ RUN bitnami-pkg install mysql-client-10.1.20-0 --checksum 14d20929072b157b5e819d
 RUN bitnami-pkg install mariadb-10.1.20-0 --checksum 7409ba139885bc4f463233a250806f557ee41472e2c88213e82c21f4d97a77d7
 
 # Install symfony
-RUN bitnami-pkg unpack symfony-3.2.1-0 --checksum 9b619d616f09f76b16bbbd115d53ca2ead9ea22118ba7db45ac0b202325962e1
+RUN bitnami-pkg install symfony-3.2.1-0 --checksum 9b619d616f09f76b16bbbd115d53ca2ead9ea22118ba7db45ac0b202325962e1
 
 COPY rootfs /
 
