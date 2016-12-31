@@ -10,7 +10,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=codeigniter \
-    BITNAMI_IMAGE_VERSION=3.1.2-r1 \
+    BITNAMI_IMAGE_VERSION=3.1.2-r2 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
