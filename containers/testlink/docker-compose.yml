@@ -1,10 +1,11 @@
 version: '2'
+
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
-  application:
+  testlink:
     image: 'bitnami/testlink:latest'
     ports:
       - '80:80'
@@ -12,15 +13,13 @@ services:
     volumes:
       - 'apache_data:/bitnami/apache'
       - 'testlink_data:/bitnami/testlink'
-      - 'php_data:/bitnami/php'
     depends_on:
       - mariadb
+
 volumes:
   mariadb_data:
     driver: local
   apache_data:
     driver: local
   testlink_data:
-    driver: local
-  php_data:
     driver: local

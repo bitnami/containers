@@ -16,7 +16,7 @@ $ docker-compose up
 
 # Prerequisites
 
-To run this application you need Docker Engine 1.10.0. Docker Compose is recomended with a version 1.6.0 or later.
+To run this application you need Docker Engine 1.10.0. Docker Compose is recommended with a version 1.6.0 or later.
 
 # How to use this image
 
@@ -36,7 +36,7 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
-  application:
+  testlink:
     image: 'bitnami/testlink:latest'
     ports:
       - '80:80'
@@ -183,7 +183,7 @@ Bitnami provides up-to-date versions of MariaDB and TestLink, including security
 
  * For docker-compose add the variable name and value under the application section:
 ```yaml
-application:
+testlink:
   image: bitnami/testlink:latest
   ports:
     - 80:80
@@ -199,9 +199,9 @@ application:
 
 Available variables:
 
- - `TESTLINK_USERNAME`: TestLink admin username.
- - `TESTLINK_PASSWORD`: TestLink admin password.
- - `TESTLINK_EMAIL`: TestLink admin email.
+ - `TESTLINK_USERNAME`: TestLink admin username. Default: **user**
+ - `TESTLINK_PASSWORD`: TestLink admin password. Default: **bitnami**
+ - `TESTLINK_EMAIL`: TestLink admin email. Default: **user@example.com**
  - `TESTLINK_LANGUAGE`: TestLink default language. Default: **en_US**
  - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
  - `MARIADB_PASSWORD`: Root password for the MariaDB.
@@ -224,7 +224,7 @@ This would be an example of SMTP configuration using a GMail account:
  * docker-compose:
 
 ```yaml
-  application:
+  testlink:
     image: bitnami/testlink:latest
     ports:
       - '80:80'
@@ -275,9 +275,9 @@ If you encountered a problem running this container, you can file an
 be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Docker version (`$ docker version`)
+- Output of `$ docker info`
+- Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
@@ -289,7 +289,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
