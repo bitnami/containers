@@ -16,7 +16,7 @@ services:
       - MONGODB_REPLICA_SET_MODE=secondary
       - MONGODB_PRIMARY_HOST=mongodb-primary
 
-    mongodb-arbiter:
+  mongodb-arbiter:
     image: 'bitnami/mongodb:latest'
     depends_on:
       - mongodb-primary
