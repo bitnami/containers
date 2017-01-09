@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=owncloud \
-    BITNAMI_IMAGE_VERSION=9.1.3-r0 \
+    BITNAMI_IMAGE_VERSION=9.1.3-r1 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # Required system packages
@@ -16,8 +16,7 @@ RUN bitnami-pkg install mysql-client-10.1.20-0 --checksum 14d20929072b157b5e819d
 RUN bitnami-pkg install libphp-5.6.29-0 --checksum 29fc0f3a08ad7bc23423a1de714c4c598059b3d10e7e33e9f3dff9371e547c33
 
 # Install owncloud
-RUN bitnami-pkg unpack owncloud-9.1.3-0 --checksum 62b3b41242ffaca4b063ba7aa52dd4ae2dc040c4039c50b61f5481befd7f7881
-
+RUN bitnami-pkg unpack owncloud-9.1.3-1 --checksum 08d8cbcbc12b227e20c22bd1fc534558249d63f337f35c82d768bcc6a3f190a0
 
 COPY rootfs /
 
