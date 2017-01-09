@@ -187,7 +187,7 @@ application:
 
 Available variables:
  - `REDMINE_USERNAME`: Redmine application username. Default: **user**
- - `REDMINE_PASSWORD`: Redmine application password. Default: **bitnami**
+ - `REDMINE_PASSWORD`: Redmine application password. Default: **bitnami1**
  - `REDMINE_EMAIL`: Redmine application email. Default: **user@example.com**
  - `REDMINE_LANG`: Redmine application default language. Default: **en**
  - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
