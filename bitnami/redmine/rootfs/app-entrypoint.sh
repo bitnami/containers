@@ -14,7 +14,7 @@ function initialize {
 
 # Set default values
 export REDMINE_USERNAME=${REDMINE_USERNAME:-"user"}
-export REDMINE_PASSWORD=${REDMINE_PASSWORD:-"bitnami"}
+export REDMINE_PASSWORD=${REDMINE_PASSWORD:-"bitnami1"}
 export REDMINE_EMAIL=${REDMINE_EMAIL:-"user@example.com"}
 export REDMINE_LANGUAGE=${REDMINE_LANGUAGE:-"en"}
 export MARIADB_USER=${MARIADB_USER:-"root"}
