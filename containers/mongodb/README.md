@@ -206,7 +206,7 @@ A [replication](https://docs.mongodb.com/manual/replication/) cluster can easily
  - `MONGODB_PRIMARY_PORT`: MongoDB primary port. Default: **27017**
 
 Only for authentication:
- - `MONGODB_REPLICA_SET_KEY`: MongoDB replica set key. No default. Required for all nodes.
+ - `MONGODB_REPLICA_SET_KEY`: MongoDB replica set key. Length should be greater than 5 characters and should not contain any special characters. Required for all nodes. No default.
  - `MONGODB_ROOT_PASSWORD`: MongoDB root password. No defaults. Only for primary node.
  - `MONGODB_PRIMARY_ROOT_PASSWORD`: MongoDB primary root password. No defaults. Only for secondaries and aribters nodes.
 
