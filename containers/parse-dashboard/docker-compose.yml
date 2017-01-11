@@ -12,7 +12,7 @@ services:
       - 'parse_data:/bitnami/parse'
     depends_on:
       - mongodb
-  application:
+  parse-dashboard:
     image: 'bitnami/parse-dashboard:latest'
     ports:
       - '80:4040'
