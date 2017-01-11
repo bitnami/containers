@@ -4,7 +4,7 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
-  application:
+  mediawiki:
     image: 'bitnami/mediawiki:latest'
     ports:
       - '80:80'
