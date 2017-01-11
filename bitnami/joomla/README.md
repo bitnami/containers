@@ -36,7 +36,7 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
-  application:
+  joomla:
     image: 'bitnami/joomla:latest'
     ports:
       - '80:80'
@@ -186,7 +186,7 @@ Bitnami provides up-to-date versions of MariaDB and Joomla, including security p
 
  * For docker-compose add the variable name and value under the application section:
 ```
-application:
+joomla:
   image: bitnami/joomla:latest
   ports:
     - 80:80
@@ -227,7 +227,7 @@ This would be an example of SMTP configuration using a GMail account:
  * docker-compose:
 
 ```
-  application:
+  joomla:
     image: bitnami/joomla:latest
     ports:
       - 80:80
