@@ -1,13 +1,10 @@
 version: '2'
 
 services:
-  phpfpm:
-    image: 'bitnami/php-fpm:latest'
+  php:
+    tty: true # Enables debugging capabilities when attached to this container.
+    image: bitnami/php-fpm:latest
     ports:
-      - '9000:9000'
+      - 9000:9000
     volumes:
-      - 'phpfpm_data:/bitnami/php-fpm'
-
-volumes:
-  phpfpm_data:
-    driver: local
+      - .:/app
