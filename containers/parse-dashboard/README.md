@@ -38,7 +38,7 @@ services:
       - '1337:1337'
     depends_on:
       - mongodb
-  application:
+  parse-dashboard:
     image: 'bitnami/parse-dashboard:latest'
     ports:
       - '80:4040'
@@ -198,7 +198,7 @@ $ docker pull bitnami/parse-dashboard:latest
 
  * For docker-compose add the variable name and value under the application section:
 ```yaml
-application:
+parse-dashboard:
   image: bitnami/parse-dashboard:latest
   ports:
     - 80:4040
