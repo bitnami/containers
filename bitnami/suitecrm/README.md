@@ -36,7 +36,7 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
-  application:
+  suitecrm:
     image: 'bitnami/suitecrm:latest'
     ports:
       - '80:80'
@@ -107,7 +107,7 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - '/path/to/mariadb-persistence:/bitnami/mariadb'
-  application:
+  suitecrm:
     image: 'bitnami/suitecrm:latest'
     depends_on:
       - mariadb
@@ -185,7 +185,7 @@ Bitnami provides up-to-date versions of MariaDB and SuiteCRM, including security
  * For docker-compose add the variable name and value under the application section:
 
 ```yaml
-application:
+suitecrm:
   image: bitnami/suitecrm:latest
   ports:
     - 80:80
@@ -228,7 +228,7 @@ This would be an example of SMTP configuration using a Gmail account:
  * docker-compose:
 
 ```yaml
-  application:
+  suitecrm:
     image: bitnami/suitecrm:latest
     ports:
       - 80:80
