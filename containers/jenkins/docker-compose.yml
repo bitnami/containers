@@ -1,6 +1,6 @@
 version: '2'
 services:
-  application:
+  jenkins:
     image: 'bitnami/jenkins:latest'
     ports:
       - '80:8080'
