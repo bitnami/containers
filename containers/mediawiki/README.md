@@ -37,7 +37,7 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
-  application:
+  mediawiki:
     image: 'bitnami/mediawiki:latest'
     ports:
       - '80:80'
@@ -180,7 +180,7 @@ Bitnami provides up-to-date versions of MariaDB and Mediawiki, including securit
 
  * For docker-compose add the variable name and value under the application section:
 ```
-application:
+mediawiki:
   image: bitnami/mediawiki:latest
   ports:
     - 80:80
@@ -221,7 +221,7 @@ This would be an example of SMTP configuration using a GMail account:
  * docker-compose:
 
 ```
-  application:
+  mediawiki:
     image: bitnami/mediawiki:latest
     ports:
       - 80:80
