@@ -165,7 +165,7 @@ Bitnami provides up-to-date versions of JasperReports, including security patche
 
  * For docker-compose add the variable name and value under the application section:
 ```yaml
-application:
+jasperreports:
   image: bitnami/jasperreports:latest
   ports:
     - 80:8080
@@ -202,7 +202,7 @@ This would be an example of SMTP configuration using a GMail account:
  * docker-compose:
 
 ```yaml
-  application:
+  jasperreports:
     image: bitnami/jasperreports:latest
     ports:
       - 80:8080
