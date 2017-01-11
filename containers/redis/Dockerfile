@@ -9,7 +9,7 @@ ENV BITNAMI_IMAGE_VERSION=3.2.6-r1 \
 RUN install_packages --no-install-recommends libc6
 
 # Install redis
-RUN bitnami-pkg install redis-3.2.6-0 --checksum 9f49ddb833750511a406e3a735bbb2a6969091ae395a6ddf35adcb1aef133098
+RUN bitnami-pkg unpack redis-3.2.6-0 --checksum 9f49ddb833750511a406e3a735bbb2a6969091ae395a6ddf35adcb1aef133098
 ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:$PATH
 
 COPY rootfs /
