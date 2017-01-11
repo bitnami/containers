@@ -27,7 +27,7 @@ The recommended way to run Jenkins is using Docker Compose using the following `
 ```yaml
 version: '2'
 services:
-  application:
+  jenkins:
     image: 'bitnami/jenkins:latest'
     ports:
       - '80:8080'
