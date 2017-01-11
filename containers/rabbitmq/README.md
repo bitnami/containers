@@ -142,7 +142,7 @@ $ docker-compose up -d
 * For docker-compose add the variable name and value under the application section:
 
 ```
-application:
+rabbitmq:
   image: bitnami/rabbitmq:latest
   ports:
     - 15672:15672
