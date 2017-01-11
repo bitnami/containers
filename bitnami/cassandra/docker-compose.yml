@@ -1,6 +1,6 @@
 version: '2'
 services:
-  application:
+  cassandra:
     image: 'bitnami/cassandra:latest'
     ports:
       - '7000:7000'
