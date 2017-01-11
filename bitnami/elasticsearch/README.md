@@ -137,7 +137,7 @@ $ docker-compose up -d
 
  * For docker-compose add the variable name and value under the application section:
 ```yaml
-application:
+elasticsearch:
   image: bitnami/elasticsearch:latest
   environment:
     - ELASTICSEARCH_PORT=9201
