@@ -35,7 +35,7 @@ services:
     image: 'bitnami/postgresql:latest'
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
-  application:
+  odoo:
     image: 'bitnami/odoo:latest'
     ports:
       - '80:8069'
@@ -170,7 +170,7 @@ Bitnami provides up-to-date versions of PostgreSQL and Odoo, including security 
 
  * For docker-compose add the variable name and value under the application section:
 ```yaml
-application:
+odoo:
   image: bitnami/odoo:latest
   ports:
     - 80:8069
@@ -209,7 +209,7 @@ This would be an example of SMTP configuration using a GMail account:
 
  * docker-compose:
 ```
-  application:
+  odoo:
     image: bitnami/odoo:latest
     ports:
       - 80:8069
