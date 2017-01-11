@@ -41,7 +41,7 @@ services:
     image: 'bitnami/mongodb:latest'
     volumes:
       - 'mongodb_data:/bitnami/mongodb'
-  application:
+  parse:
     image: 'bitnami/parse:latest'
     environment:
       PARSE_SERVER_HOST: your_host
@@ -177,7 +177,7 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 
  * For docker-compose add the variable name and value under the application section:
 ```yaml
-application:
+parse:
   image: bitnami/parse:latest
   ports:
     - 1337:1337
