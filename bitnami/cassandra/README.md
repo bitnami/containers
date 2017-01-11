@@ -134,7 +134,7 @@ $ docker-compose up -d
 
  * For docker-compose add the variable name and value under the application section:
 ```yaml
-application:
+cassandra:
   image: bitnami/cassandra:latest
   environment:
     - CASSANDRA_TRANSPORT_PORT=7000
