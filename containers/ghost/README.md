@@ -32,7 +32,7 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
        - 'mariadb_data:/bitnami/mariadb'
-  application:
+  ghost:
     image: 'bitnami/ghost:latest'
     ports:
       - '80:2368'
@@ -170,7 +170,7 @@ Bitnami provides up-to-date versions of MariaDB and Ghost, including security pa
 
  * For docker-compose add the variable name and value under the application section:
 ```yaml
-application:
+ghost:
   image: bitnami/ghost:latest
   ports:
     - 80:2368
@@ -210,7 +210,7 @@ This would be an example of SMTP configuration using a GMail account:
  * docker-compose:
 
 ```yaml
-  application:
+  ghost:
     image: bitnami/ghost:latest
     ports:
       - 80:2368
