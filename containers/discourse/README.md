@@ -30,7 +30,7 @@ services:
     image: 'bitnami/redis:latest'
     volumes:
       - 'redis_data:/bitnami/redis'
-  application:
+  discourse:
     image: 'bitnami/discourse:latest'
     ports:
       - '80:3000'
@@ -108,7 +108,7 @@ services:
     image: 'bitnami/redis:latest'
     volumes:
       - '/path/to/your/local/redis_data:/bitnami/redis'
-  application:
+  discourse:
     image: 'bitnami/discourse:latest'
     ports:
       - '80:3000'
@@ -191,7 +191,7 @@ Bitnami provides up-to-date versions of Postgresql and Discourse, including secu
 
  * For docker-compose add the variable name and value under the application section:
 ```yaml
-application:
+discourse:
   image: bitnami/discourse:latest
   ports:
     - 80:80
