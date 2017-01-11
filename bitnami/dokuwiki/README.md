@@ -22,7 +22,7 @@ This is the recommended way to run Dokuwiki. You can use the following docker co
 ```
 version: '2'
 services:
-  application:
+  dokuwiki:
     image: 'bitnami/dokuwiki:latest'
     ports:
       - '80:80'
@@ -70,7 +70,7 @@ This requires a sightly modification from the template previously shown:
 version: '2'
 
 services:
-  application:
+  dokuwiki:
     image: 'bitnami/dokuwiki:latest'
     ports:
       - '80:80'
@@ -129,7 +129,7 @@ $ docker pull bitnami/dokuwiki:latest
 
  * For docker-compose add the variable name and value under the application section:
 ```
-application:
+dokuwiki:
   image: bitnami/dokuwiki:latest
   ports:
     - 80:80
