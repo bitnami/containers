@@ -32,7 +32,7 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
-  application:
+  opencart:
     image: 'bitnami/opencart:latest'
     ports:
       - '80:80'
@@ -177,7 +177,7 @@ Bitnami provides up-to-date versions of MariaDB and OpenCart, including security
 
  * For docker-compose add the variable name and value under the application section:
 ```
-application:
+opencart:
   image: bitnami/opencart:latest
   ports:
     - 80:80
@@ -221,7 +221,7 @@ This would be an example of SMTP configuration using a GMail account:
  * docker-compose:
 
 ```
-  application:
+  opencart:
     image: bitnami/opencart:latest
     ports:
       - 80:80
