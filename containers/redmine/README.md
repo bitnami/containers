@@ -36,7 +36,7 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
-  application:
+  redmine:
     image: 'bitnami/redmine:latest'
     ports:
       - '80:3000'
@@ -167,7 +167,7 @@ Bitnami provides up-to-date versions of MariaDB and Redmine, including security 
 
  * For docker-compose add the variable name and value under the application section:
 ```yaml
-application:
+redmine:
   image: bitnami/redmine:latest
   ports:
     - 80:3000
