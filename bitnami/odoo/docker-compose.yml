@@ -4,7 +4,7 @@ services:
     image: 'bitnami/postgresql:latest'
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
-  application:
+  odoo:
     image: 'bitnami/odoo:latest'
     ports:
       - '80:8069'
