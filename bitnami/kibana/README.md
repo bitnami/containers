@@ -42,7 +42,7 @@ This is the recommended way to run Kibana. You can use the following docker comp
 version: '2'
 
 services:
-  application:
+  kibana:
     image: 'bitnami/kibana:latest'
     ports:
       - 5601:5601
