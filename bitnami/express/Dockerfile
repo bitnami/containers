@@ -18,7 +18,7 @@ RUN bitnami-pkg install express-4.14.0-1 --checksum f98a7f8e85d038bb895d1105f6a0
 
 # ExpressJS template
 ENV BITNAMI_APP_NAME=express
-ENV BITNAMI_IMAGE_VERSION=4.14.0-r14
+ENV BITNAMI_IMAGE_VERSION=4.14.0-r15
 
 COPY rootfs/ /
 
