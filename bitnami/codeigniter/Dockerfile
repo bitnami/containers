@@ -10,7 +10,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=codeigniter \
-    BITNAMI_IMAGE_VERSION=3.1.2-r2 \
+    BITNAMI_IMAGE_VERSION=3.1.3-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
@@ -22,7 +22,7 @@ RUN bitnami-pkg install mysql-client-10.1.20-0 --checksum 14d20929072b157b5e819d
 RUN bitnami-pkg install mariadb-10.1.20-0 --checksum 7409ba139885bc4f463233a250806f557ee41472e2c88213e82c21f4d97a77d7
 
 # Install codeigniter
-RUN bitnami-pkg install codeigniter-3.1.2-0 --checksum 7dbc6395c8e41ff89a0067c834fbba1d258e9db53aca7b6677300461e4b961f3
+RUN bitnami-pkg install codeigniter-3.1.3-0 --checksum 5d653ed41a2bf4f78818f5cb2c249fba83b9f041ca72a8d7a5f7c9c6d9d51131
 
 COPY rootfs /
 
