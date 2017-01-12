@@ -29,7 +29,6 @@ export MYSQL_MASTER_PASSWORD=${MYSQL_MASTER_PASSWORD:-}
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
     initialize mysql
-    chown -R :$BITNAMI_APP_USER /bitnami/mysql || true
     echo "Starting application ..."
 fi
 
