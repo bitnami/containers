@@ -19,31 +19,57 @@ dependencies_up_to_date() {
 }
 
 database_tier_exists() {
-  [ ! -z "$(getent hosts mongodb)" ]
+  [ -n "$(getent hosts mongodb mariadb)" ]
+}
+
+__wait_for_db() {
+  local host=$1
+  local port=$2
+  local ip_address=$(getent hosts $1 | awk '{ print $1 }')
+
+  log "Connecting to at $host server at $ip_address"
+
+  counter=0
+  until nc -z $ip_address $port; do
+    counter=$((counter+1))
+    if [ $counter == 10 ]; then
+      log "Error: Couldn't connect to $host server."
+      return 1
+    fi
+    log "Trying to connect to $host server at $ip_address. Attempt $counter."
+    sleep 5
+  done
+  log "Connected to $host server"
 }
 
 wait_for_db() {
-  mongodb_address=$(getent hosts mongodb | awk '{ print $1 }')
-  counter=0
+  if getent hosts mongodb >/dev/null; then
+    __wait_for_db mongodb 27017
+  fi
 
-  log "Connecting to MongoDB at $mongodb_address"
+  if getent hosts mariadb >/dev/null; then
+    __wait_for_db mariadb 3306
+  fi
+}
 
-  until nc -z $mongodb_address 27017; do
-    counter=$((counter+1))
-    if [ $counter == 10 ]; then
-      log "Error: Couldn't connect to MongoDB."
-      exit 1
-    fi
-    log "Trying to connect to MongoDB at $mongodb_address. Attempt $counter."
-    sleep 5
-  done
-  log "Connected to MongoDB database"
+__setup_db() {
+  local server=$1
+  local module=$2
+  npm install $module --save
+
+  log "Adding $server example files under config/$server.js"
+  mkdir -p config/
+  cp -rn /app_template/config/$server.js config/$server.js
 }
 
 setup_db() {
-  npm install mongodb@2.1.18 --save
-  log "Adding MongoDB example files under /config/mongodb.js"
-  cp -rn /app_template/config .
+  if getent hosts mongodb >/dev/null; then
+    __setup_db mongodb mongodb@2.1.18
+  fi
+
+  if getent hosts mariadb >/dev/null; then
+    __setup_db mariadb mysql@2.12.0
+  fi
 }
 
 log () {
