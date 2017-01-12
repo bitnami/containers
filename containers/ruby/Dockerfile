@@ -20,9 +20,9 @@ ENV STACKSMITH_STACK_ID="aq2un49" \
     STACKSMITH_STACK_PRIVATE="1"
 
 # System packages required
-RUN install_packages --no-install-recommends libc6 libssl1.0.0 zlib1g libreadline6 libncurses5 libtinfo5 libffi6 libxml2-dev zlib1g-dev libxslt1-dev libgmp-dev ghostscript imagemagick libmysqlclient18 libpq5
+RUN install_packages libc6 libssl1.0.0 zlib1g libreadline6 libncurses5 libtinfo5 libffi6 libxml2-dev zlib1g-dev libxslt1-dev libgmp-dev ghostscript imagemagick libmysqlclient18 libpq5
 
-RUN bitnami-pkg unpack ruby-2.3.3-1 --checksum 107c8f5e76b77a351cfb7e3e544f9b86b8633eae563f179349137cab70b8d841
+RUN bitnami-pkg unpack ruby-2.4.0-0 --checksum 189d7da38f702086231ddf371b41ddc8b29382147522d7dad399bbdb7944d958
 
 COPY rootfs /
 
@@ -31,7 +31,7 @@ ENV PATH=/opt/bitnami/ruby/bin:$PATH
 ## STACKSMITH-END: Modifications below this line will be unchanged when regenerating
 
 ENV BITNAMI_APP_NAME=ruby \
-    BITNAMI_IMAGE_VERSION=2.3.3-r3
+    BITNAMI_IMAGE_VERSION=2.4.0-r0
 
 EXPOSE 3000
 WORKDIR /app
