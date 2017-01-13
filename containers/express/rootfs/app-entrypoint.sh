@@ -9,7 +9,7 @@ fresh_container() {
 }
 
 app_present() {
-  [ -f /app/app.js ]
+  [ -f package.json ]
 }
 
 dependencies_up_to_date() {
