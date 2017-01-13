@@ -54,11 +54,11 @@ wait_for_db() {
 
 setup_db() {
   if getent hosts mongodb >/dev/null && ! npm ls mongodb >/dev/null; then
-    npm install --save mongodb@2.2.19
+    npm install --save mongodb
   fi
 
   if getent hosts mariadb >/dev/null && ! npm ls mysql >/dev/null; then
-    npm install --save mysql@2.12.0
+    npm install --save mysql
   fi
 }
 
