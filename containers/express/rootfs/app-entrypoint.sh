@@ -52,7 +52,7 @@ wait_for_db() {
   fi
 }
 
-setup_db() {
+add_database_support() {
   if getent hosts mongodb >/dev/null && ! npm ls mongodb >/dev/null; then
     npm install --save mongodb
   fi
@@ -67,9 +67,17 @@ log () {
 }
 
 if [ "$1" == npm -a "$2" == "start" ]; then
+  if database_tier_exists; then
+    wait_for_db
+  fi
+
   if ! app_present; then
     log "Creating express application"
     express . -f
+
+    if database_tier_exists; then
+      add_database_support
+    fi
 
     log "Adding dist samples"
     cp -r /dist/samples .
@@ -79,10 +87,6 @@ if [ "$1" == npm -a "$2" == "start" ]; then
     log "Installing/Updating Express dependencies (npm)"
     npm install
     log "Dependencies updated"
-  fi
-
-  if database_tier_exists; then
-    wait_for_db
   fi
 
   if ! fresh_container; then
@@ -95,9 +99,7 @@ if [ "$1" == npm -a "$2" == "start" ]; then
     echo "                                                                       "
     echo "#########################################################################"
   else
-    if database_tier_exists; then
-      setup_db
-    fi
+    # Perform any app initialization tasks here.
     log "Initialization finished"
   fi
 
