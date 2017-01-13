@@ -52,23 +52,13 @@ wait_for_db() {
   fi
 }
 
-__setup_db() {
-  local server=$1
-  local module=$2
-  npm install $module --save
-
-  log "Adding $server example files under config/$server.js"
-  mkdir -p config/
-  cp -rn /app_template/config/$server.js config/$server.js
-}
-
 setup_db() {
   if getent hosts mongodb >/dev/null; then
-    __setup_db mongodb mongodb@2.1.18
+    npm install --save mongodb@2.1.18
   fi
 
   if getent hosts mariadb >/dev/null; then
-    __setup_db mariadb mysql@2.12.0
+    npm install --save mysql@2.12.0
   fi
 }
 
@@ -80,6 +70,9 @@ if [ "$1" == npm -a "$2" == "start" ]; then
   if ! app_present; then
     log "Creating express application"
     express . -f
+
+    log "Adding dist samples"
+    cp -r /dist/samples .
   fi
 
   if ! dependencies_up_to_date; then
