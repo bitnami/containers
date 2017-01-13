@@ -8,6 +8,7 @@ services:
     tty: true # Enables debugging capabilities when attached to this container.
     image: bitnami/express:latest
     environment:
+      - PORT=3000
       - DATABASE_URL=mongodb://mongodb:27017/my_app_development
     depends_on:
       - mongodb
