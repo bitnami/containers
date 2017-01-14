@@ -24,7 +24,7 @@ COPY rootfs/ /
 
 # The extra files that we bundle should use the Bitnami User
 # so the entrypoint does not have any permission issues
-RUN chown -R bitnami: /app /app_template
+RUN chown -R bitnami: /app /dist
 
 USER bitnami
 

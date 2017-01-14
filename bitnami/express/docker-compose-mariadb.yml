@@ -1,17 +1,19 @@
 version: '2'
 
 services:
-  mongodb:
-    image: bitnami/mongodb:latest
+  mariadb:
+    image: bitnami/mariadb:latest
+    environment:
+      - MARIADB_DATABASE=my_app_development
 
   myapp:
     tty: true # Enables debugging capabilities when attached to this container.
     image: bitnami/express:latest
     environment:
       - PORT=3000
-      - DATABASE_URL=mongodb://mongodb:27017/my_app_development
+      - DATABASE_URL=mysql://root@mariadb/my_app_development
     depends_on:
-      - mongodb
+      - mariadb
     ports:
       - 3000:3000
     volumes:
