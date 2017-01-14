@@ -9,7 +9,7 @@ fresh_container() {
 }
 
 app_present() {
-  [ -f /app/app.js ]
+  [ -f package.json ]
 }
 
 dependencies_up_to_date() {
@@ -19,31 +19,47 @@ dependencies_up_to_date() {
 }
 
 database_tier_exists() {
-  [ ! -z "$(getent hosts mongodb)" ]
+  [ -n "$(getent hosts mongodb mariadb)" ]
+}
+
+__wait_for_db() {
+  local host=$1
+  local port=$2
+  local ip_address=$(getent hosts $1 | awk '{ print $1 }')
+
+  log "Connecting to at $host server at $ip_address"
+
+  counter=0
+  until nc -z $ip_address $port; do
+    counter=$((counter+1))
+    if [ $counter == 10 ]; then
+      log "Error: Couldn't connect to $host server."
+      return 1
+    fi
+    log "Trying to connect to $host server at $ip_address. Attempt $counter."
+    sleep 5
+  done
+  log "Connected to $host server"
 }
 
 wait_for_db() {
-  mongodb_address=$(getent hosts mongodb | awk '{ print $1 }')
-  counter=0
+  if getent hosts mongodb >/dev/null; then
+    __wait_for_db mongodb 27017
+  fi
 
-  log "Connecting to MongoDB at $mongodb_address"
-
-  until nc -z $mongodb_address 27017; do
-    counter=$((counter+1))
-    if [ $counter == 10 ]; then
-      log "Error: Couldn't connect to MongoDB."
-      exit 1
-    fi
-    log "Trying to connect to MongoDB at $mongodb_address. Attempt $counter."
-    sleep 5
-  done
-  log "Connected to MongoDB database"
+  if getent hosts mariadb >/dev/null; then
+    __wait_for_db mariadb 3306
+  fi
 }
 
-setup_db() {
-  npm install mongodb@2.1.18 --save
-  log "Adding MongoDB example files under /config/mongodb.js"
-  cp -rn /app_template/config .
+add_database_support() {
+  if getent hosts mongodb >/dev/null && ! npm ls mongodb >/dev/null; then
+    npm install --save mongodb
+  fi
+
+  if getent hosts mariadb >/dev/null && ! npm ls mysql >/dev/null; then
+    npm install --save mysql
+  fi
 }
 
 log () {
@@ -51,19 +67,26 @@ log () {
 }
 
 if [ "$1" == npm -a "$2" == "start" ]; then
+  if database_tier_exists; then
+    wait_for_db
+  fi
+
   if ! app_present; then
     log "Creating express application"
     express . -f
+
+    if database_tier_exists; then
+      add_database_support
+    fi
+
+    log "Adding dist samples"
+    cp -r /dist/samples .
   fi
 
   if ! dependencies_up_to_date; then
     log "Installing/Updating Express dependencies (npm)"
     npm install
     log "Dependencies updated"
-  fi
-
-  if database_tier_exists; then
-    wait_for_db
   fi
 
   if ! fresh_container; then
@@ -76,9 +99,7 @@ if [ "$1" == npm -a "$2" == "start" ]; then
     echo "                                                                       "
     echo "#########################################################################"
   else
-    if database_tier_exists; then
-      setup_db
-    fi
+    # Perform any app initialization tasks here.
     log "Initialization finished"
   fi
 
