@@ -14,5 +14,6 @@ var connection = mysql.createConnection(url);
 connection.connect(function(err) {
   assert.equal(null, err);
   console.log("Connected correctly to MySQL server");
+  connectiom.query('SHOW TABLES;');
   connection.end();
 });
