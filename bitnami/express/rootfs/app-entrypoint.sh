@@ -70,6 +70,13 @@ add_database_support() {
   fi
 }
 
+migrate_db() {
+  if [ -f .sequelizerc ]; then
+    log "Applying database migrations (sequelize db:migrate)"
+    sequelize db:migrate
+  fi
+}
+
 log () {
   echo -e "\033[0;33m$(date "+%H:%M:%S")\033[0;37m ==> $1."
 }
@@ -110,6 +117,8 @@ if [ "$1" == npm -a "$2" == "start" ]; then
     # Perform any app initialization tasks here.
     log "Initialization finished"
   fi
+
+  migrate_db
 
   touch $INIT_SEM
 fi
