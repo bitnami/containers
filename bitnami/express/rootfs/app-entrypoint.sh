@@ -27,7 +27,7 @@ __wait_for_db() {
   local port=$2
   local ip_address=$(getent hosts $1 | awk '{ print $1 }')
 
-  log "Connecting to at $host server at $ip_address"
+  log "Connecting to at $host server at $ip_address:$port"
 
   counter=0
   until nc -z $ip_address $port; do
@@ -36,7 +36,7 @@ __wait_for_db() {
       log "Error: Couldn't connect to $host server."
       return 1
     fi
-    log "Trying to connect to $host server at $ip_address. Attempt $counter."
+    log "Trying to connect to $host server at $ip_address:$port. Attempt $counter."
     sleep 5
   done
   log "Connected to $host server"
