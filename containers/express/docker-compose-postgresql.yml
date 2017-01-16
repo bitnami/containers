@@ -9,6 +9,7 @@ services:
   myapp:
     tty: true # Enables debugging capabilities when attached to this container.
     image: bitnami/express:latest
+    command: npm start
     environment:
       - PORT=3000
       - DATABASE_URL=postgres://postgres@postgresql/my_app_development
