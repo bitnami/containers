@@ -11,7 +11,7 @@ ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
     NODE_PATH=/opt/bitnami/node/lib/node_modules
 
 RUN bitnami-pkg install express-generator-4.13.4-1 --checksum 937c865650282fa55c0e543166b95b0aab9e4cf891782cee056037697b2b64e3
-RUN npm install -g bower@1.8.0
+RUN npm install -g bower@1.8.0 sequelize-cli
 
 # Install express
 RUN bitnami-pkg install express-4.14.0-1 --checksum f98a7f8e85d038bb895d1105f6a0d995810b004f78b4fc0a0299237dc5070795
