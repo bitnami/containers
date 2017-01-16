@@ -12,6 +12,7 @@ services:
     command: npm start
     environment:
       - PORT=3000
+      - NODE_ENV=development
       - DATABASE_URL=postgres://postgres@postgresql/my_app_development
     depends_on:
       - postgresql
