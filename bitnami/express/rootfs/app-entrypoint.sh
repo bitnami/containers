@@ -19,7 +19,7 @@ dependencies_up_to_date() {
 }
 
 database_tier_exists() {
-  [ -n "$(getent hosts mongodb mariadb)" ]
+  [ -n "$(getent hosts mongodb mariadb postgresql)" ]
 }
 
 __wait_for_db() {
@@ -27,7 +27,7 @@ __wait_for_db() {
   local port=$2
   local ip_address=$(getent hosts $1 | awk '{ print $1 }')
 
-  log "Connecting to at $host server at $ip_address"
+  log "Connecting to at $host server at $ip_address:$port"
 
   counter=0
   until nc -z $ip_address $port; do
@@ -36,7 +36,7 @@ __wait_for_db() {
       log "Error: Couldn't connect to $host server."
       return 1
     fi
-    log "Trying to connect to $host server at $ip_address. Attempt $counter."
+    log "Trying to connect to $host server at $ip_address:$port. Attempt $counter."
     sleep 5
   done
   log "Connected to $host server"
@@ -50,6 +50,10 @@ wait_for_db() {
   if getent hosts mariadb >/dev/null; then
     __wait_for_db mariadb 3306
   fi
+
+  if getent hosts postgresql >/dev/null; then
+    __wait_for_db postgresql 5432
+  fi
 }
 
 add_database_support() {
@@ -59,6 +63,10 @@ add_database_support() {
 
   if getent hosts mariadb >/dev/null && ! npm ls mysql >/dev/null; then
     npm install --save mysql
+  fi
+
+  if getent hosts postgresql >/dev/null && ! npm ls pg pg-hstore >/dev/null; then
+    npm install --save pg pg-hstore
   fi
 }
 
