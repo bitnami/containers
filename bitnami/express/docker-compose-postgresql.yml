@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  postgresql:
+    image: bitnami/postgresql:latest
+    environment:
+      - POSTGRESQL_DATABASE=my_app_development
+
+  myapp:
+    tty: true # Enables debugging capabilities when attached to this container.
+    image: bitnami/express:latest
+    environment:
+      - PORT=3000
+      - DATABASE_URL=postgres://postgres@postgresql/my_app_development
+    depends_on:
+      - postgresql
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
