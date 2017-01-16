@@ -81,7 +81,7 @@ log () {
   echo -e "\033[0;33m$(date "+%H:%M:%S")\033[0;37m ==> $1."
 }
 
-if [ "$1" == npm -a "$2" == "start" ]; then
+if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
   if database_tier_exists; then
     wait_for_db
   fi
