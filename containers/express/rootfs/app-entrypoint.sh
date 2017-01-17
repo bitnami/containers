@@ -73,8 +73,10 @@ add_database_support() {
 }
 
 add_sample_code() {
-  log "Adding dist samples"
-  cp -r /dist/samples .
+  if ! [[ -n $SKIP_SAMPLE_CODE && $SKIP_SAMPLE_CODE -gt 0 ]]; then
+    log "Adding dist samples"
+    cp -r /dist/samples .
+  fi
 }
 
 npm_install() {
