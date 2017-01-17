@@ -81,6 +81,17 @@ add_sample_code() {
   fi
 }
 
+add_dockerfile() {
+  if [[ ! -f Dockerfile ]]; then
+    cp -r /dist/Dockerfile.tpl Dockerfile
+    sed -i 's/{{BITNAMI_IMAGE_VERSION}}/'"$BITNAMI_IMAGE_VERSION"'/g' Dockerfile
+  fi
+
+  if [[ ! -f .dockerignore ]]; then
+    cp -r /dist/.dockerignore .
+  fi
+}
+
 npm_install() {
   if ! [[ -n $SKIP_NPM_INSTALL && $SKIP_NPM_INSTALL -gt 0 ]] && [[ -f package.json ]] && ! dependencies_up_to_date; then
     log "Installing/Updating Express dependencies (npm)"
@@ -108,6 +119,8 @@ if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
     add_database_support
     add_sample_code
   fi
+
+  add_dockerfile
 
   npm_install
 
