@@ -4,7 +4,7 @@ services:
   mariadb:
     image: bitnami/mariadb:latest
     environment:
-      - MARIADB_DATABASE=my_app
+      - MARIADB_DATABASE=myapp
 
   myapp:
     tty: true # Enables debugging capabilities when attached to this container.
@@ -13,7 +13,7 @@ services:
     environment:
       - PORT=3000
       - NODE_ENV=development
-      - DATABASE_URL=mysql://root@mariadb/my_app
+      - DATABASE_URL=mysql://root@mariadb/myapp
     depends_on:
       - mariadb
     ports:
