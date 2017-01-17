@@ -43,16 +43,18 @@ __wait_for_db() {
 }
 
 wait_for_db() {
-  if getent hosts mongodb >/dev/null; then
-    __wait_for_db mongodb 27017
-  fi
+  if ! [[ -n $SKIP_DB_WAIT && $SKIP_DB_WAIT -gt 0 ]] && database_tier_exists ; then
+    if getent hosts mongodb >/dev/null; then
+      __wait_for_db mongodb 27017
+    fi
 
-  if getent hosts mariadb >/dev/null; then
-    __wait_for_db mariadb 3306
-  fi
+    if getent hosts mariadb >/dev/null; then
+      __wait_for_db mariadb 3306
+    fi
 
-  if getent hosts postgresql >/dev/null; then
-    __wait_for_db postgresql 5432
+    if getent hosts postgresql >/dev/null; then
+      __wait_for_db postgresql 5432
+    fi
   fi
 }
 
@@ -94,9 +96,7 @@ log () {
 }
 
 if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
-  if database_tier_exists; then
-    wait_for_db
-  fi
+  wait_for_db
 
   if ! app_present; then
     log "Creating express application"
