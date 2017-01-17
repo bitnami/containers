@@ -11,7 +11,7 @@ services:
     environment:
       - PORT=3000
       - NODE_ENV=development
-      - DATABASE_URL=mongodb://mongodb:27017/my_app
+      - DATABASE_URL=mongodb://mongodb:27017/myapp
     depends_on:
       - mongodb
     ports:
