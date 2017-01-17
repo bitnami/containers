@@ -70,6 +70,13 @@ add_database_support() {
   fi
 }
 
+npm_install() {
+  if ! dependencies_up_to_date; then
+    log "Installing/Updating Express dependencies (npm)"
+    npm install
+  fi
+}
+
 migrate_db() {
   if [ -f .sequelizerc ]; then
     log "Applying database migrations (sequelize db:migrate)"
@@ -98,11 +105,7 @@ if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
     cp -r /dist/samples .
   fi
 
-  if ! dependencies_up_to_date; then
-    log "Installing/Updating Express dependencies (npm)"
-    npm install
-    log "Dependencies updated"
-  fi
+  npm_install
 
   if ! fresh_container; then
     echo "#########################################################################"
