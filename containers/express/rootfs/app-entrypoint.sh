@@ -87,7 +87,7 @@ npm_install() {
 }
 
 migrate_db() {
-  if [ -f .sequelizerc ]; then
+  if ! [[ -n $SKIP_DB_MIGRATE && $SKIP_DB_MIGRATE -gt 0 ]] && [[ -f .sequelizerc ]]; then
     log "Applying database migrations (sequelize db:migrate)"
     sequelize db:migrate
   fi
