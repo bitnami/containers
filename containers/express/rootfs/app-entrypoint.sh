@@ -80,7 +80,7 @@ add_sample_code() {
 }
 
 npm_install() {
-  if ! dependencies_up_to_date; then
+  if ! [[ -n $SKIP_NPM_INSTALL && $SKIP_NPM_INSTALL -gt 0 ]] && [[ -f package.json ]] && ! dependencies_up_to_date; then
     log "Installing/Updating Express dependencies (npm)"
     npm install
   fi
