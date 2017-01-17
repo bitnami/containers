@@ -59,16 +59,18 @@ wait_for_db() {
 }
 
 add_database_support() {
-  if getent hosts mongodb >/dev/null && ! npm ls mongodb >/dev/null; then
-    npm install --save mongodb
-  fi
+  if database_tier_exists; then
+    if getent hosts mongodb >/dev/null && ! npm ls mongodb >/dev/null; then
+      npm install --save mongodb
+    fi
 
-  if getent hosts mariadb >/dev/null && ! npm ls mysql >/dev/null; then
-    npm install --save mysql
-  fi
+    if getent hosts mariadb >/dev/null && ! npm ls mysql >/dev/null; then
+      npm install --save mysql
+    fi
 
-  if getent hosts postgresql >/dev/null && ! npm ls pg pg-hstore >/dev/null; then
-    npm install --save pg pg-hstore
+    if getent hosts postgresql >/dev/null && ! npm ls pg pg-hstore >/dev/null; then
+      npm install --save pg pg-hstore
+    fi
   fi
 }
 
@@ -103,11 +105,7 @@ if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
   if ! app_present; then
     log "Creating express application"
     express . -f
-
-    if database_tier_exists; then
-      add_database_support
-    fi
-
+    add_database_support
     add_sample_code
   fi
 
