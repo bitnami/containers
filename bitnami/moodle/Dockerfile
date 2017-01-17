@@ -26,4 +26,4 @@ EXPOSE 80 443
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["nami", "start", "--foreground", "apache"]
+CMD ["/init.sh"]

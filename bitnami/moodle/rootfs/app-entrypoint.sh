@@ -25,8 +25,6 @@ export MARIADB_PORT=${MARIADB_PORT:-"3306"}
 export MOODLE_SITENAME=${MOODLE_SITENAME:-"New Site"}
 
 
-# Adding cron entries
-test -f /opt/bitnami/moodle/conf/cron && ln -fs /opt/bitnami/moodle/conf/cron /etc/cron.d/moodle
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
    for module in apache php moodle; do
@@ -34,5 +32,8 @@ if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
    done
    echo "Starting application ..."
 fi
+
+# Adding cron entries
+test -f /opt/bitnami/moodle/conf/cron && ln -fs /opt/bitnami/moodle/conf/cron /etc/cron.d/moodle
 
 exec /entrypoint.sh "$@"
