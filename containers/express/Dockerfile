@@ -15,6 +15,7 @@ RUN npm install -g bower@1.8.0 sequelize-cli
 
 # Install express
 RUN bitnami-pkg install express-4.14.0-1 --checksum f98a7f8e85d038bb895d1105f6a0d995810b004f78b4fc0a0299237dc5070795
+RUN rm -rf /app
 
 # ExpressJS template
 ENV BITNAMI_APP_NAME=express
@@ -24,7 +25,7 @@ COPY rootfs/ /
 
 # The extra files that we bundle should use the Bitnami User
 # so the entrypoint does not have any permission issues
-RUN chown -R bitnami: /app /dist
+RUN mkdir /app && chown bitnami: /app /dist
 
 USER bitnami
 
