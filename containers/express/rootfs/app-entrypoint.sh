@@ -70,6 +70,11 @@ add_database_support() {
   fi
 }
 
+add_sample_code() {
+  log "Adding dist samples"
+  cp -r /dist/samples .
+}
+
 npm_install() {
   if ! dependencies_up_to_date; then
     log "Installing/Updating Express dependencies (npm)"
@@ -101,8 +106,7 @@ if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
       add_database_support
     fi
 
-    log "Adding dist samples"
-    cp -r /dist/samples .
+    add_sample_code
   fi
 
   npm_install
