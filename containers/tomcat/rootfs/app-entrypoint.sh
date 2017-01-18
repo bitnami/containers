@@ -20,6 +20,7 @@ export TOMCAT_HTTP_PORT=${TOMCAT_HTTP_PORT:-"8080"}
 export TOMCAT_AJP_PORT=${TOMCAT_AJP_PORT:-"8009"}
 export JAVA_OPTS=${JAVA_OPTS:-"-Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8"}
 export TOMCAT_USERNAME=${TOMCAT_USERNAME:-"user"}
+export TOMCAT_ALLOW_REMOTE_MANAGEMENT=${TOMCAT_ALLOW_REMOTE_MANAGEMENT:-"0"}
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
    initialize tomcat
