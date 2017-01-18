@@ -44,7 +44,7 @@ services:
   parse:
     image: 'bitnami/parse:latest'
     environment:
-      PARSE_SERVER_HOST: your_host
+      PARSE_HOST: your_host
     ports:
       - '1337:1337'
     volumes:
@@ -182,7 +182,7 @@ parse:
   ports:
     - 1337:1337
   environment:
-    - PARSE_SERVER_HOST=my_host
+    - PARSE_HOST=my_host
   volumes:
     - 'parse_data:/bitnami/parse'
   depends_on:
@@ -192,15 +192,15 @@ parse:
  * For manual execution add a `-e` option with each variable and value:
 
 ```
- $ docker run -d -e PARSE_SERVER_HOST=my_host -p 1337:1337 --name parse -v /your/local/path/bitnami/parse:/bitnami/parse --network=parse_network bitnami/parse
+ $ docker run -d -e PARSE_HOST=my_host -p 1337:1337 --name parse -v /your/local/path/bitnami/parse:/bitnami/parse --network=parse_network bitnami/parse
 ```
 
 Available variables:
- - `PARSE_SERVER_HOST`: Parse server host. Default: **127.0.0.1**
- - `PARSE_SERVER_PORT`: Parse server port. Default: **1337**
- - `PARSE_SERVER_MOUNT_PATH`: Parse server mount path. Default: **/parse**
- - `PARSE_SERVER_APP_ID`: Parse server App ID. Default: **myappID**
- - `PARSE_SERVER_MASTER_KEY`: Parse server Master Key: **mymasterKey**
+ - `PARSE_HOST`: Parse server host. Default: **127.0.0.1**
+ - `PARSE_PORT`: Parse server port. Default: **1337**
+ - `PARSE_MOUNT_PATH`: Parse server mount path. Default: **/parse**
+ - `PARSE_APP_ID`: Parse server App ID. Default: **myappID**
+ - `PARSE_MASTER_KEY`: Parse server Master Key: **mymasterKey**
  - `MONGODB_HOST`: Hostname for Mongodb server. Default: **mongodb**
  - `MONGODB_PORT`: Port used by Mongodb server. Default: **27017**
 
