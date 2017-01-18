@@ -6,5 +6,6 @@
   "javaOpts": "{{$global.env.JAVA_OPTS}}",
   "tomcatHome": "{{$global.env.TOMCAT_HOME}}",
   "username": "{{$global.env.TOMCAT_USERNAME}}",
-  "password": "{{$global.env.TOMCAT_PASSWORD}}"
+  "password": "{{$global.env.TOMCAT_PASSWORD}}",
+  "allowRemoteManagement": "{{$global.env.TOMCAT_ALLOW_REMOTE_MANAGEMENT}}"
 }
