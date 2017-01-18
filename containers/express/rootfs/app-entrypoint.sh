@@ -85,6 +85,7 @@ add_dockerfile() {
   if [[ ! -f Dockerfile ]]; then
     cp -r /dist/Dockerfile.tpl Dockerfile
     sed -i 's/{{BITNAMI_IMAGE_VERSION}}/'"$BITNAMI_IMAGE_VERSION"'/g' Dockerfile
+    [[ ! -f bower.json ]] && sed -i '/^RUN bower install/d' Dockerfile
   fi
 
   if [[ ! -f .dockerignore ]]; then
@@ -92,10 +93,17 @@ add_dockerfile() {
   fi
 }
 
-npm_install() {
-  if ! [[ -n $SKIP_NPM_INSTALL && $SKIP_NPM_INSTALL -gt 0 ]] && [[ -f package.json ]] && ! dependencies_up_to_date; then
-    log "Installing/Updating Express dependencies (npm)"
-    npm install
+install_packages() {
+  if ! dependencies_up_to_date; then
+    if ! [[ -n $SKIP_NPM_INSTALL && $SKIP_NPM_INSTALL -gt 0 ]] && [[ -f package.json ]]; then
+      log "Installing npm packages"
+      npm install
+    fi
+
+    if ! [[ -n $SKIP_BOWER_INSTALL && $SKIP_BOWER_INSTALL -gt 0 ]] && [[ -f bower.json ]]; then
+      log "Installing bower packages"
+      bower install
+    fi
   fi
 }
 
@@ -122,7 +130,7 @@ if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
 
   add_dockerfile
 
-  npm_install
+  install_packages
 
   if ! fresh_container; then
     echo "#########################################################################"
