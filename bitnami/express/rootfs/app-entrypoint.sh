@@ -43,35 +43,64 @@ __wait_for_db() {
 }
 
 wait_for_db() {
-  if getent hosts mongodb >/dev/null; then
-    __wait_for_db mongodb 27017
-  fi
+  if ! [[ -n $SKIP_DB_WAIT && $SKIP_DB_WAIT -gt 0 ]] && database_tier_exists ; then
+    if getent hosts mongodb >/dev/null; then
+      __wait_for_db mongodb 27017
+    fi
 
-  if getent hosts mariadb >/dev/null; then
-    __wait_for_db mariadb 3306
-  fi
+    if getent hosts mariadb >/dev/null; then
+      __wait_for_db mariadb 3306
+    fi
 
-  if getent hosts postgresql >/dev/null; then
-    __wait_for_db postgresql 5432
+    if getent hosts postgresql >/dev/null; then
+      __wait_for_db postgresql 5432
+    fi
   fi
 }
 
 add_database_support() {
-  if getent hosts mongodb >/dev/null && ! npm ls mongodb >/dev/null; then
-    npm install --save mongodb
+  if database_tier_exists; then
+    if getent hosts mongodb >/dev/null && ! npm ls mongodb >/dev/null; then
+      npm install --save mongodb
+    fi
+
+    if getent hosts mariadb >/dev/null && ! npm ls mysql >/dev/null; then
+      npm install --save mysql
+    fi
+
+    if getent hosts postgresql >/dev/null && ! npm ls pg pg-hstore >/dev/null; then
+      npm install --save pg pg-hstore
+    fi
+  fi
+}
+
+add_sample_code() {
+  if ! [[ -n $SKIP_SAMPLE_CODE && $SKIP_SAMPLE_CODE -gt 0 ]]; then
+    log "Adding dist samples"
+    cp -r /dist/samples .
+  fi
+}
+
+add_dockerfile() {
+  if [[ ! -f Dockerfile ]]; then
+    cp -r /dist/Dockerfile.tpl Dockerfile
+    sed -i 's/{{BITNAMI_IMAGE_VERSION}}/'"$BITNAMI_IMAGE_VERSION"'/g' Dockerfile
   fi
 
-  if getent hosts mariadb >/dev/null && ! npm ls mysql >/dev/null; then
-    npm install --save mysql
+  if [[ ! -f .dockerignore ]]; then
+    cp -r /dist/.dockerignore .
   fi
+}
 
-  if getent hosts postgresql >/dev/null && ! npm ls pg pg-hstore >/dev/null; then
-    npm install --save pg pg-hstore
+npm_install() {
+  if ! [[ -n $SKIP_NPM_INSTALL && $SKIP_NPM_INSTALL -gt 0 ]] && [[ -f package.json ]] && ! dependencies_up_to_date; then
+    log "Installing/Updating Express dependencies (npm)"
+    npm install
   fi
 }
 
 migrate_db() {
-  if [ -f .sequelizerc ]; then
+  if ! [[ -n $SKIP_DB_MIGRATE && $SKIP_DB_MIGRATE -gt 0 ]] && [[ -f .sequelizerc ]]; then
     log "Applying database migrations (sequelize db:migrate)"
     sequelize db:migrate
   fi
@@ -82,27 +111,18 @@ log () {
 }
 
 if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
-  if database_tier_exists; then
-    wait_for_db
-  fi
+  wait_for_db
 
   if ! app_present; then
     log "Creating express application"
     express . -f
-
-    if database_tier_exists; then
-      add_database_support
-    fi
-
-    log "Adding dist samples"
-    cp -r /dist/samples .
+    add_database_support
+    add_sample_code
   fi
 
-  if ! dependencies_up_to_date; then
-    log "Installing/Updating Express dependencies (npm)"
-    npm install
-    log "Dependencies updated"
-  fi
+  add_dockerfile
+
+  npm_install
 
   if ! fresh_container; then
     echo "#########################################################################"

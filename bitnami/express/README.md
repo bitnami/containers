@@ -105,6 +105,24 @@ Express by default does not require a database connection to work but we provide
 
 You can use [Mongoose](http://mongoosejs.com/) ODM in your application to model your application data.
 
+## Going to Production
+
+The Express Development Container generates a Dockerfile in your working directory. This can be used to create a production-ready container image consisting of your application code and its dependencies.
+
+1. Build your Docker image
+
+  ```bash
+  $ docker build -t myregistry/myapp:1.0.0
+  ```
+
+2. Push to an image registry
+
+  ```bash
+  $ docker push myregistry/myapp:1.0.0
+  ```
+
+3. Update orchestration files to reference the pushed image
+
 ## Issues
 
 If you encountered a problem running this container, you can file an [issue](../../issues/new). For us to provide better support, be sure to include the following information in your issue:
@@ -130,4 +148,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
