@@ -18,6 +18,7 @@ services:
       - SKIP_DB_WAIT=0
       - SKIP_DB_MIGRATION=0
       - SKIP_NPM_INSTALL=0
+      - SKIP_BOWER_INSTALL=0
     depends_on:
       - mariadb
     ports:
