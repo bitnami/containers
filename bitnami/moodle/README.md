@@ -221,6 +221,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
+      - SMTP_PROTOCOL=tls
     volumes_from:
       - application_data
 ```
