@@ -1,9 +1,9 @@
 {
-  "parseHost": "{{$global.env.PARSE_SERVER_HOST}}",
-  "parsePort": "{{$global.env.PARSE_SERVER_PORT}}",
-  "parseMountPath": "{{$global.env.PARSE_SERVER_MOUNT_PATH}}",
-  "parseMasterKey": "{{$global.env.PARSE_SERVER_MASTER_KEY}}",
-  "parseAppId": "{{$global.env.PARSE_SERVER_APP_ID}}",
+  "parseHost": "{{$global.env.PARSE_HOST}}",
+  "parsePort": "{{$global.env.PARSE_PORT}}",
+  "parseMountPath": "{{$global.env.PARSE_MOUNT_PATH}}",
+  "parseMasterKey": "{{$global.env.PARSE_MASTER_KEY}}",
+  "parseAppId": "{{$global.env.PARSE_APP_ID}}",
   "dashboardName": "{{$global.env.PARSE_DASHBOARD_APP_NAME}}",
   "username": "{{$global.env.PARSE_DASHBOARD_USER}}",
   "password": "{{$global.env.PARSE_DASHBOARD_PASSWORD}}"
