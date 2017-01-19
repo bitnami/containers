@@ -19,7 +19,7 @@ dependencies_up_to_date() {
 }
 
 database_tier_exists() {
-  [ -n "$(getent hosts mongodb mariadb postgresql)" ]
+  [ -n "$(getent hosts mongodb mysql mariadb postgresql)" ]
 }
 
 __wait_for_db() {
@@ -52,6 +52,10 @@ wait_for_db() {
       __wait_for_db mariadb 3306
     fi
 
+    if getent hosts mysql >/dev/null; then
+      __wait_for_db mysql 3306
+    fi
+
     if getent hosts postgresql >/dev/null; then
       __wait_for_db postgresql 5432
     fi
@@ -64,7 +68,7 @@ add_database_support() {
       npm install --save mongodb
     fi
 
-    if getent hosts mariadb >/dev/null && ! npm ls mysql >/dev/null; then
+    if getent hosts mariadb >/dev/null && ! npm ls mysql >/dev/null || getent hosts mysql >/dev/null && ! npm ls mysql >/dev/null; then
       npm install --save mysql
     fi
 
