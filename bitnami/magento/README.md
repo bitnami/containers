@@ -195,7 +195,7 @@ magento:
   environment:
     - MAGENTO_PASSWORD=my_password1234
   volumes_from:
-    - application_data
+    - magento_data
 ```
 
  * For manual execution add a `-e` option with each variable and value:
