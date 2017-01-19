@@ -192,7 +192,7 @@ suitecrm:
   environment:
     - SUITECRM_PASSWORD=my_password
   volumes_from:
-    - application_data
+    - suitecrm_data
 ```
 
  * For manual execution add a `-e` option with each variable and value:
