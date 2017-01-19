@@ -172,7 +172,7 @@ jasperreports:
   environment:
     - JASPERREPORTS_PASSWORD=my_password
   volumes_from:
-    - application_data
+    - jasperreports_data
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -213,7 +213,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
     volumes_from:
-      - application_data
+      - jasperreports_data
 ```
 
  * For manual execution:
