@@ -193,7 +193,7 @@ joomla:
   environment:
     - JOOMLA_PASSWORD=my_password
   volumes_from:
-    - application_data
+    - joomla_data
 ```
 
  * For manual execution add a `-e` option with each variable and value:
