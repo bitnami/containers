@@ -92,7 +92,7 @@ Then you can access your application at http://your-ip/
 
 If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
 
-If you are using docker-compose your data will be persistent as long as you don't remove `apache_data`, `php_data`, `mariadb_data` and `application_data` volumes.
+If you are using docker-compose your data will be persistent as long as you don't remove `apache_data`, `php_data`, `mariadb_data` and `owncloud_data` volumes.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
