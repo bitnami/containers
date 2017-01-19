@@ -11,7 +11,7 @@ RUN install_packages libssl1.0.0 libaprutil1 libapr1 libc6 libuuid1 libexpat1 li
 
 # Additional modules required
 RUN bitnami-pkg unpack apache-2.4.23-11 --checksum e4876fc1514082af221105319ddc8f069e7e2305dded70633bbf9a5973f2d9be
-RUN bitnami-pkg install php-5.6.28-1 --checksum e6a6a80ccd36d3e6c4edd4c6dd97d6247534584f023bf89dda6d13728138ca37
+RUN bitnami-pkg unpack php-5.6.28-1 --checksum e6a6a80ccd36d3e6c4edd4c6dd97d6247534584f023bf89dda6d13728138ca37
 RUN bitnami-pkg install libphp-5.6.28-1 --checksum c7a1df270fad99fbcff23506574ec1467bac4e0f0f6d0bd34bf310446ec5d7f5
 
 # Install dokuwiki
