@@ -65,6 +65,10 @@ wait_for_db() {
 bootstrap_express_app() {
   log "Creating express application"
   express . -f
+
+  log "Adding nodemon npm module (dev)"
+  npm install nodemon --save-dev
+  sed -i 's,node ./bin/www,nodemon ./bin/www,' package.json
 }
 
 add_database_support() {
