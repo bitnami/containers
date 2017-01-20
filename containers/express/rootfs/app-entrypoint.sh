@@ -62,6 +62,11 @@ wait_for_db() {
   fi
 }
 
+bootstrap_express_app() {
+  log "Creating express application"
+  express . -f
+}
+
 add_database_support() {
   if database_tier_exists; then
     if getent hosts mongodb >/dev/null && ! npm ls mongodb >/dev/null; then
@@ -126,8 +131,7 @@ if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
   wait_for_db
 
   if ! app_present; then
-    log "Creating express application"
-    express . -f
+    bootstrap_express_app
     add_database_support
     add_sample_code
   fi
