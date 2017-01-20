@@ -62,17 +62,29 @@ wait_for_db() {
   fi
 }
 
+bootstrap_express_app() {
+  log "Creating express application"
+  express . -f
+
+  log "Adding nodemon npm module (dev)"
+  npm install nodemon --save-dev
+  sed -i 's,node ./bin/www,nodemon ./bin/www,' package.json
+}
+
 add_database_support() {
   if database_tier_exists; then
     if getent hosts mongodb >/dev/null && ! npm ls mongodb >/dev/null; then
+      log "Adding mongodb npm module"
       npm install --save mongodb
     fi
 
     if getent hosts mariadb >/dev/null && ! npm ls mysql >/dev/null || getent hosts mysql >/dev/null && ! npm ls mysql >/dev/null; then
+      log "Adding mysql npm module"
       npm install --save mysql
     fi
 
     if getent hosts postgresql >/dev/null && ! npm ls pg pg-hstore >/dev/null; then
+      log "Adding pg pg-hstore npm modules"
       npm install --save pg pg-hstore
     fi
   fi
@@ -126,8 +138,7 @@ if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
   wait_for_db
 
   if ! app_present; then
-    log "Creating express application"
-    express . -f
+    bootstrap_express_app
     add_database_support
     add_sample_code
   fi
