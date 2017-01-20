@@ -3,20 +3,20 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=phpbb \
-    BITNAMI_IMAGE_VERSION=3.1.10-r6 \
+    BITNAMI_IMAGE_VERSION=3.2.0-r0 \
     PATH=/opt/bitnami/mysql/bin/:/opt/bitnami/php/bin/:$PATH
 
 # System packages required
 RUN install_packages libssl1.0.0 libaprutil1 libapr1 libc6 libuuid1 libexpat1 libpcre3 libldap-2.4-2 libsasl2-2 libgnutls-deb0-28 zlib1g libp11-kit0 libtasn1-6 libnettle4 libhogweed2 libgmp10 libffi6 libxslt1.1 libtidy-0.99-0 libreadline6 libncurses5 libtinfo5 libsybdb5 libmcrypt4 libstdc++6 libpng12-0 libjpeg62-turbo libbz2-1.0 libxml2 libcurl3 libfreetype6 libicu52 libgcc1 libgcrypt20 libgssapi-krb5-2 liblzma5 libidn11 librtmp1 libssh2-1 libkrb5-3 libk5crypto3 libcomerr2 libgpg-error0 libkrb5support0 libkeyutils1
 
 # Additional modules required
-RUN bitnami-pkg unpack apache-2.4.23-11 --checksum e4876fc1514082af221105319ddc8f069e7e2305dded70633bbf9a5973f2d9be
-RUN bitnami-pkg unpack php-5.6.28-1 --checksum e6a6a80ccd36d3e6c4edd4c6dd97d6247534584f023bf89dda6d13728138ca37
-RUN bitnami-pkg install libphp-5.6.28-1 --checksum c7a1df270fad99fbcff23506574ec1467bac4e0f0f6d0bd34bf310446ec5d7f5
-RUN bitnami-pkg install mysql-client-10.1.19-1 --checksum 2d946c8ee3e2e845f68a5cf3751d6477d88af194d263842797fe50a44414a173
+RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a2770b7e549674e33b8a5b07480f53c39f5c3f
+RUN bitnami-pkg unpack php-5.6.30-0 --checksum 93b852188bd8d111d7c2d2f2706df0b3f9de7fd37b48f1ef197c08fa07a9e118
+RUN bitnami-pkg install libphp-5.6.30-0 --checksum b9689caaab61862444c97756b1a9bf575731c4d0e71aa962d58518a231b33155
+RUN bitnami-pkg install mysql-client-10.1.21-0 --checksum 8e868a3e46bfa59f3fb4e1aae22fd9a95fd656c020614a64706106ba2eba224e
 
 # Install phpbb
-RUN bitnami-pkg unpack phpbb-3.1.10-2 --checksum 553de139b63933cbff9d211efb29f9172c734e0a4eeec9abb05872c00f20d927
+RUN bitnami-pkg unpack phpbb-3.2.0-0 --checksum 6c85b636641492946e310f59a547a5095d724a11a1b434b7a25ae9da30e8aab6
 
 COPY rootfs /
 
