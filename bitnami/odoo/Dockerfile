@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=odoo \
-    BITNAMI_IMAGE_VERSION=9.0.20160620-r7 \
+    BITNAMI_IMAGE_VERSION=9.0.20170115-r0 \
     PATH=/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/postgresql/bin:$PATH
 
 # System packages required
@@ -15,7 +15,7 @@ RUN bitnami-pkg install postgresql-client-9.6.1-1 --checksum 9a793e2413490cdf5f9
 RUN bitnami-pkg install node-6.9.4-0 --checksum aa0fe4923ece714285ed4ed63877e769b2bcf80c16d274d50db4d601541b64f4
 
 # Install odoo
-RUN bitnami-pkg unpack odoo-9.0.20160620-1 --checksum 32276addc873e3bd4499c7dcb0c3e14e3655679b3bbfc691916bf2a4b81cecc7
+RUN bitnami-pkg unpack odoo-9.0.20170115-0 --checksum ec51a1f361d47cc1cc4588f0c18682a3e844a3f7a3148b3f695262fefefd0179
 
 COPY rootfs /
 
