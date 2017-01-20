@@ -74,14 +74,17 @@ bootstrap_express_app() {
 add_database_support() {
   if database_tier_exists; then
     if getent hosts mongodb >/dev/null && ! npm ls mongodb >/dev/null; then
+      log "Adding mongodb npm module"
       npm install --save mongodb
     fi
 
     if getent hosts mariadb >/dev/null && ! npm ls mysql >/dev/null || getent hosts mysql >/dev/null && ! npm ls mysql >/dev/null; then
+      log "Adding mysql npm module"
       npm install --save mysql
     fi
 
     if getent hosts postgresql >/dev/null && ! npm ls pg pg-hstore >/dev/null; then
+      log "Adding pg pg-hstore npm modules"
       npm install --save pg pg-hstore
     fi
   fi
