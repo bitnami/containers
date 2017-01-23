@@ -30,7 +30,7 @@ ln -fs /opt/bitnami/suitecrm/conf/cron /etc/cron.d/suitecrm
 
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
-   for module in apache suitecrm; do
+   for module in apache php suitecrm; do
     initialize $module
    done
    echo "Starting application ..."
