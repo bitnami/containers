@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=testlink \
-    BITNAMI_IMAGE_VERSION=1.9.15-r6 \
+    BITNAMI_IMAGE_VERSION=1.9.16-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
@@ -16,7 +16,7 @@ RUN bitnami-pkg install libphp-5.6.30-0 --checksum b9689caaab61862444c97756b1a9b
 RUN bitnami-pkg install mysql-client-10.1.21-0 --checksum 8e868a3e46bfa59f3fb4e1aae22fd9a95fd656c020614a64706106ba2eba224e
 
 # Install testlink
-RUN bitnami-pkg unpack testlink-1.9.15-2 --checksum c200c5aa582f943059608aedefe690bc77706d65358e6d1ce032096038a88b94
+RUN bitnami-pkg unpack testlink-1.9.16-0 --checksum e4c5668210efd907f2a1d490dcf437a0066b0e1ae27ffad4a21d5264aa42718b
 
 COPY rootfs /
 
