@@ -26,7 +26,7 @@ export DOKUWIKI_WIKI_NAME=${DOKUWIKI_WIKI_NAME:-"Bitnami DokuWiki"}
 
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
-   for module in apache dokuwiki; do
+   for module in apache php dokuwiki; do
     initialize $module
    done
    echo "Starting application ..."
