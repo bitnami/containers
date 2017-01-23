@@ -11,7 +11,7 @@ RUN install_packages --no-install-recommends libssl1.0.0 libaprutil1 libapr1 lib
 
 # Additional modules required
 RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a2770b7e549674e33b8a5b07480f53c39f5c3f
-RUN bitnami-pkg install php-7.0.15-1 --checksum 8eb4ba4ca866a9459fe7bf9b4f4beede76f5b434da8991c4c98d482a0202f0a7
+RUN bitnami-pkg unpack php-7.0.15-1 --checksum 8eb4ba4ca866a9459fe7bf9b4f4beede76f5b434da8991c4c98d482a0202f0a7
 RUN bitnami-pkg install libphp-7.0.15-0 --checksum 11031c3b94ac04847aa12a65a3ac3afdd8ad88d409cf7a11086602fba041ce5f
 RUN bitnami-pkg install mysql-client-10.1.21-0 --checksum 8e868a3e46bfa59f3fb4e1aae22fd9a95fd656c020614a64706106ba2eba224e
 
