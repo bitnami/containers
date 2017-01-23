@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=orangehrm \
-    BITNAMI_IMAGE_VERSION=3.3.3-r6 \
+    BITNAMI_IMAGE_VERSION=3.3.3-r7 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
