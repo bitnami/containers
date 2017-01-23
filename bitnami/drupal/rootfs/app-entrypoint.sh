@@ -24,7 +24,7 @@ export MARIADB_HOST=${MARIADB_HOST:-"mariadb"}
 export MARIADB_PORT=${MARIADB_PORT:-"3306"}
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
-   for module in apache drupal; do
+   for module in apache php drupal; do
     initialize $module
    done
    echo "Starting application ..."
