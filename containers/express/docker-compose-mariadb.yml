@@ -9,7 +9,7 @@ services:
   myapp:
     tty: true # Enables debugging capabilities when attached to this container.
     image: bitnami/express:latest
-    command: npm start
+    command: npm run development
     environment:
       - PORT=3000
       - NODE_ENV=development

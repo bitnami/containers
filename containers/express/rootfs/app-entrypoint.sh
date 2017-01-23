@@ -68,7 +68,7 @@ bootstrap_express_app() {
 
   log "Adding nodemon npm module (dev)"
   npm install nodemon --save-dev
-  sed -i 's,node ./bin/www,nodemon ./bin/www,' package.json
+  sed -i 's;"start".*;"start": "node ./bin/www", "development": "nodemon ./bin/www";' package.json
 }
 
 add_database_support() {
