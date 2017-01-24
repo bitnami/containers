@@ -19,7 +19,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 This is the recommended way to run Dokuwiki. You can use the following docker compose template:
 
-```
+```yaml
 version: '2'
 services:
   dokuwiki:
@@ -30,10 +30,13 @@ services:
     volumes:
       - 'dokuwiki_data:/bitnami/dokuwiki'
       - 'apache_data:/bitnami/apache'
+      - 'php_data:/bitnami/php'
 volumes:
   dokuwiki_data:
     driver: local
   apache_data:
+    driver: local
+  php_data:
     driver: local
 ```
 
@@ -43,15 +46,15 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application :
 
-  ```
-  $ docker network create dokuwiki_network
+  ```bash
+  $ docker network create dokuwiki-tier
   ```
 
 
 2. Run the Dokuwiki container:
 
-  ```
-  $ docker run -d -p 80:80 --name dokuwiki --net=dokuwiki_network bitnami/dokuwiki
+  ```bash
+  $ docker run -d -p 80:80 -p 443:443 --name dokuwiki --net dokuwiki-tier bitnami/dokuwiki:latest
   ```
 
 Then you can access your application at http://your-ip/
@@ -59,14 +62,14 @@ Then you can access your application at http://your-ip/
 ## Persisting your application
 
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data` and `dokuwiki_data` data volumes. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data`, `apache_data`, `php_data` and `dokuwiki_data` data volumes. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
 ### Mount persistent folders in the host using docker-compose
 
 This requires a sightly modification from the template previously shown:
-```
+```yaml
 version: '2'
 
 services:
@@ -76,8 +79,9 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - '/path/to/your/local/dokuwiki_data:/bitnami/dokuwiki'
-      - '/path/to/your/local/apache_data:/bitnami/apache'
+      - '/path/to/dokuwiki-persistence:/bitnami/dokuwiki'
+      - '/path/to/apache-persistence:/bitnami/apache'
+      - '/path/to/php-persistence:/bitnami/php'
 ```
 
 ### Mount persistent folders manually
@@ -86,14 +90,19 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. If you haven't done this before, create a new network for the application :
 
-  ```
-  $ docker network create dokuwiki_network
+  ```bash
+  $ docker network create dokuwiki-tier
   ```
 
 2. Run the Dokuwiki container:
 
-  ```
-  $ docker run -d -p 80:80 --name dokuwiki -v /your/local/path/bitnami/dokuwiki:/bitnami/dokuwiki --network=dokuwiki_network bitnami/dokuwiki
+  ```bash
+  $ docker run -d -p 80:80 -p 443:443 --name dokuwiki \
+    --net dokuwiki-tier \
+    --volume /path/to/dokuwiki-persistence:/bitnami/dokuwiki \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/dokuwiki:latest
   ```
 
 # Upgrade this application
@@ -102,7 +111,7 @@ Bitnami provides up-to-date versions of MariaDB and Dokuwiki, including security
 
 1. Get the updated images:
 
-```
+```bash
 $ docker pull bitnami/dokuwiki:latest
 ```
 
@@ -128,22 +137,31 @@ $ docker pull bitnami/dokuwiki:latest
  When you start the dokuwiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
-```
+```yaml
 dokuwiki:
   image: bitnami/dokuwiki:latest
   ports:
     - 80:80
+    - 443:443
   environment:
     - DOKUWIKI_PASSWORD=my_password
   volumes_from:
     - dokuwiki_data
+    - apache_data
+    - php_data
 ```
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
- $ docker run -d -e DOKUWIKI_PASSWORD=my_password -p 80:80 --name dokuwiki -v /your/local/path/bitnami/dokuwiki:/bitnami/dokuwiki --network=dokuwiki_network bitnami/dokuwiki
-```
+```bash
+  $ docker run -d -p 80:80 -p 443:443 --name dokuwiki \
+    -e DOKUWIKI_PASSWORD=my_password \
+    --net dokuwiki-tier \
+    --volume /path/to/dokuwiki-persistence:/bitnami/dokuwiki \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/dokuwiki:latest
+  ```
 
 Available variables:
 
@@ -167,7 +185,9 @@ To backup your application data follow these steps:
 2. Copy the Dokuwiki data folder in the host:
 
 ```
-$ docker cp /your/local/path/bitnami:/bitnami/dokuwiki
+$ docker cp /path/to/dokuwiki-persitence:/bitnami/dokuwiki
+$ docker cp /path/to/apache-persitence:/bitnami/apache
+$ docker cp /path/to/php-persitence:/bitnami/php
 ```
 
 # Restoring a backup
@@ -187,21 +207,21 @@ If you encountered a problem running this container, you can file an
 be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container (`echo $BITNAMI_APP_VERSION` inside the container)
+- Docker version (`$ docker version`)
+- Output of `$ docker info`
+- Version of this container (`$ echo $BITNAMI_APP_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
 # License
 
-Copyright 2016 Bitnami
+Copyright 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
