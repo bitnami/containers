@@ -44,13 +44,15 @@ services:
     volumes:
       - osclass_data:/bitnami/osclass
       - apache_data:/bitnami/apache
-
+      - php_data:/bitnami/php
 volumes:
   mariadb_data:
     driver: local
   osclass_data:
     driver: local
   apache_data:
+    driver: local
+  php_data:
     driver: local
 ```
 
@@ -85,10 +87,12 @@ If you want to run the application manually instead of using `docker-compose`, t
   ```bash
   $ docker volume create --name osclass_data
   $ docker volume create --name apache_data
+  $ docker volume create --name php_data
   $ docker run -d --name osclass -p 80:80 -p 443:443 \
     --net osclass-tier \
     --volume osclass_data:/bitnami/osclass \
     --volume apache_data:/bitnami/apache \
+    --volume php_data:/bitnami/php \
     bitnami/osclass:latest
   ```
 
@@ -126,6 +130,7 @@ services:
     volumes:
       - /path/to/osclass-persistence:/bitnami/osclass
       - /path/to/apache-persistence:/bitnami/apache
+      - /path/to/php-persistence:/bitnami/php
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -149,6 +154,7 @@ services:
     --net osclass-tier \
     --volume /path/to/osclass-persistence:/bitnami/osclass \
     --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
     bitnami/osclass:latest
   ```
 
@@ -199,6 +205,7 @@ $ docker pull bitnami/osclass:latest
     --net osclass-tier \
     --volume osclass_data:/bitnami/osclass \
     --volume apache_data:/bitnami/apache \
+    --volume php_data:/bitnami/php \
     bitnami/osclass:latest
   ```
 
@@ -246,13 +253,15 @@ services:
     volumes:
       - osclass_data:/bitnami/osclass
       - apache_data:/bitnami/apache
-
+      - php_data:/bitnami/php
 volumes:
   mariadb_data:
     driver: local
   osclass_data:
     driver: local
   apache_data:
+    driver: local
+  php_data:
     driver: local
 ```
 
@@ -264,6 +273,7 @@ $ docker run -d --name osclass -p 80:80 -p 443:443 \
   --env OSCLASS_PASSWORD=my_password \
   --volume osclass_data:/bitnami/osclass \
   --volume apache_data:/bitnami/apache \
+  --volume php_data:/bitnami/php \
   bitnami/osclass:latest
 ```
 
@@ -280,7 +290,7 @@ This would be an example of SMTP configuration using a GMail account:
 
  * docker-compose (application part):
 
-```
+```yaml
   osclass:
     image: bitnami/osclass:latest
     ports:
@@ -293,18 +303,25 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PROTOCOL=tls
     volumes:
       - osclass_data:/bitnami/osclass
+      - apache_data:/bitnami/apache
+      - php_data:/bitnami/php
 ```
 
 * For manual execution:
 
-```
-$ docker run -d --name osclass -p 80:80 -p 443:443 \
-  --net osclass-tier \
-  --env SMTP_HOST=smtp.gmail.com --env SMTP_PORT=587 --env SMTP_PROTOCOL=tls \
-  --env SMTP_USER=your_email@gmail.com --env SMTP_PASSWORD=your_password \
-  --volume osclass_data:/bitnami/osclass \
-  bitnami/osclass:latest
-```
+  ```bash
+  $ docker run -d --name osclass -p 80:80 -p 443:443 \
+    --net osclass-tier \
+    -e SMTP_HOST=smtp.gmail.com \
+    -e SMTP_PORT=587 \
+    -e SMTP_PROTOCOL=tls \
+    -e SMTP_USER=your_email@gmail.com \
+    -e SMTP_PASSWORD=your_password \
+    --volume osclass_data:/bitnami/osclass \
+    --volume apache_data:/bitnami/apache \
+    --volume php_data:/bitnami/php \
+    bitnami/osclass:latest
+  ```
 
 
 # Backing up your application
@@ -318,10 +335,11 @@ To backup your application data follow these steps:
   $ docker-compose stop osclass
   ```
 
-2. Copy the Osclass and Apache data
+2. Copy the Osclass, php and Apache data
   ```bash
   $ docker cp $(docker-compose ps -q osclass):/bitnami/osclass/ /path/to/backups/osclass/latest/
   $ docker cp $(docker-compose ps -q osclass):/bitnami/apache/ /path/to/backups/apache/latest/
+  $ docker cp $(docker-compose ps -q osclass):/bitnami/php/ /path/to/backups/php/latest/
   ```
 
 3. Start the Osclass container
@@ -336,10 +354,11 @@ To backup your application data follow these steps:
   $ docker stop osclass
   ```
 
-2. Copy the Osclass and Apache data
+2. Copy the Osclass, php and Apache data
   ```bash
   $ docker cp osclass:/bitnami/osclass/ /path/to/backups/osclass/latest/
   $ docker cp osclass:/bitnami/apache/ /path/to/backups/apache/latest/
+  $ docker cp osclass:/bitnami/php/ /path/to/backups/php/latest/
   ```
 
 3. Start the Osclass container
@@ -360,20 +379,20 @@ We'd love for you to contribute to this container. You can request new features 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-osclass/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Docker version (`$ docker version`)
+- Output of `$ docker info`
+- Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
 
-Copyright (c) 2015-2016 Bitnami
+Copyright (c) 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+ <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
