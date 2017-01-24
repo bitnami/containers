@@ -33,4 +33,7 @@ if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
    echo "Starting application ..."
 fi
 
+# Adding cron entries
+test -f /opt/bitnami/moodle/conf/cron && ln -fs /opt/bitnami/moodle/conf/cron /etc/cron.d/moodle
+
 exec /entrypoint.sh "$@"
