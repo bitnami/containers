@@ -41,6 +41,7 @@ services:
     volumes:
       - 'prestashop_data:/bitnami/prestashop'
       - 'apache_data:/bitnami/apache'
+      - 'php_data':/bitnami/php'
     depends_on:
       - mariadb
 volumes:
@@ -49,6 +50,8 @@ volumes:
   prestashop_data:
     driver: local
   apache_data:
+    driver: local
+  php_data:
     driver: local
 ```
 
@@ -103,14 +106,15 @@ services:
       - '/path/to/mariadb-persistence:/bitnami/mariadb'
   prestashop:
     image: 'bitnami/prestashop:latest'
-    depends_on:
-      - mariadb
     ports:
       - '80:80'
       - '443:443'
     volumes:
       - '/path/to/prestashop-persistence:/bitnami/prestashop'
       - '/path/to/apache-persistence/bitnami/apache'
+      - '/path/to/php-persistence/bitnami/apache'
+   depends_on:
+      - mariadb
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -141,6 +145,7 @@ In this case you need to specify the directories to mount on the run command. Th
     --network prestashop-tier \
     --volume /path/to/prestashop-persistence:/bitnami/prestashop \
     --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
     bitnami/prestashop:latest
   ```
 
@@ -190,13 +195,15 @@ prestashop:
     - php_data:/bitnami/php
 ```
 
- * For manual execution add a `--env` option with each variable and value:
+ * For manual execution add a `-e` option with each variable and value:
 
 ```bash
 $ docker run -d --name prestashop -p 80:80 -p 443:443 \
   --network prestashop-tier \
-  --env PRESTASHOP_PASSWORD=my_password \
+  --e PRESTASHOP_PASSWORD=my_password \
   --volume /path/to/prestashop-persistence:/bitnami/prestashop \
+  --volume /path/to/apache-persistence:/bitnami/apache \
+  --volume /path/to/php-persistence:/bitnami/php \
   bitnami/prestashop:latest
 ```
 
@@ -242,10 +249,15 @@ prestashop:
 * For manual execution:
 ```bash
 $ docker run -d --name prestashop -p 80:80 -p 443:443 \
+  -e SMTP_HOST=smtp.gmail.com \
+  -e SMTP_PORT=587 \
+  -e SMTP_PROTOCOL=tls \
+  -e SMTP_USER=your_email@gmail.com \
+  -e SMTP_PASSWORD=your_password \
   --network prestashop-tier \
   --volume /path/to/prestashop-persistence:/bitnami/prestashop \
-  --env SMTP_HOST=smtp.gmail.com --env SMTP_PORT=587 --env SMTP_PROTOCOL=tls \
-  --env SMTP_USER=your_email@gmail.com --env SMTP_PASSWORD=your_password \
+  --volume /path/to/apache-persistence:/bitnami/apache \
+  --volume /path/to/php-persistence:/bitnami/php \
   bitnami/prestashop:latest
 ```
 
@@ -261,7 +273,7 @@ To backup your application data follow these steps:
 2. Copy the PrestaShop data folder in the host:
 
   ```bash
-  $ docker cp /your/local/path/bitnami:/bitnami/prestashop
+  $ docker cp /path/to/prestashop-persistence:/bitnami/prestashop
   ```
 
 # Restoring a backup
@@ -289,13 +301,13 @@ information)
 
 # License
 
-Copyright 2016 Bitnami
+Copyright 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-  http://www.apache.org/licenses/LICENSE-2.0
+ <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
