@@ -42,6 +42,7 @@ services:
     volumes:
       - 'orangehrm_data:/bitnami/orangehrm'
       - 'apache_data:/bitnami/apache'
+      - 'php_data:/bitnami/php'
     depends_on:
       - mariadb
 volumes:
@@ -50,6 +51,8 @@ volumes:
   orangehrm_data:
     driver: local
   apache_data:
+    driver: local
+  php_data:
     driver: local
 ```
 
@@ -84,10 +87,12 @@ If you want to run the application manually instead of using `docker-compose`, t
   ```bash
   $ docker volume create --name orangehrm_data
   $ docker volume create --name apache_data
+  $ docker volume create --name php_data
   $ docker run -d --name orangehrm -p 80:80 -p 443:443 \
     --net orangehrm-tier \
     --volume orangehrm_data:/bitnami/orangehrm \
     --volume apache_data:/bitnami/apache \
+    --volume php_data:/bitnami/php \
     bitnami/orangehrm:latest
   ```
 
@@ -95,7 +100,7 @@ Access your application at <http://your-ip/>
 
 ## Persisting your application
 
-For persistence of the OrangeHRM deployment, the above examples define docker volumes namely `mariadb_data`, `orangehrm_data` and `apache_data`. The OrangeHRM application state will persist as long as these volumes are not removed.
+For persistence of the OrangeHRM deployment, the above examples define docker volumes namely `mariadb_data`, `orangehrm_data`, `php_data` and `apache_data`. The OrangeHRM application state will persist as long as these volumes are not removed.
 
 If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -120,6 +125,7 @@ services:
     volumes:
       - /path/to/orangehrm-persistence:/bitnami/orangehrm
       - /path/to/apache-persistence:/bitnami/apache
+      - /path/to/php-persistence:/bitnami/php
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -143,6 +149,7 @@ services:
     --net orangehrm-tier \
     --volume /path/to/orangehrm-persistence:/bitnami/orangehrm \
     --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
     bitnami/orangehrm:latest
   ```
 
@@ -193,6 +200,7 @@ $ docker pull bitnami/orangehrm:latest
     --net orangehrm-tier \
     --volume orangehrm_data:/bitnami/orangehrm \
     --volume apache_data:/bitnami/apache \
+    --volume php_data:/bitnami/php \
     bitnami/orangehrm:latest
   ```
 
@@ -234,12 +242,15 @@ services:
     volumes:
       - orangehrm_data:/bitnami/orangehrm
       - apache_data:/bitnami/apache
+      - php_data:/bitnami/php
 volumes:
   mariadb_data:
     driver: local
   orangehrm_data:
     driver: local
   apache_data:
+    driver: local
+  php_data:
     driver: local
 ```
 
@@ -251,6 +262,7 @@ $ docker run -d --name orangehrm -p 80:80 -p 443:443 \
   --env ORANGEHRM_PASSWORD=my_password \
   --volume orangehrm_data:/bitnami/orangehrm \
   --volume apache_data:/bitnami/apache \
+  --volume php_data:/bitnami/php \
   bitnami/orangehrm:latest
 ```
 
@@ -284,6 +296,7 @@ This would be an example of SMTP configuration using a GMail account:
     volumes:
       - orangehrm_data:/bitnami/orangehrm
       - apache_data:/bitnami/apache
+      - php_data:/bitnami/php
 ```
 
 * For manual execution:
@@ -291,10 +304,13 @@ This would be an example of SMTP configuration using a GMail account:
 ```bash
  $ docker run -d --name orangehrm -p 80:80 -p 443:443 \
    --net orangehrm-tier \
-   --env SMTP_HOST=smtp.gmail.com --env SMTP_PORT=465 --env SMTP_PROTOCOL=ssl \
-   --env SMTP_USER=your_email@gmail.com --env SMTP_PASSWORD=your_password \
+   --env SMTP_HOST=smtp.gmail.com \
+   --env SMTP_PORT=465 --env SMTP_PROTOCOL=ssl \
+   --env SMTP_USER=your_email@gmail.com \
+   --env SMTP_PASSWORD=your_password \
    --volume orangehrm_data:/bitnami/orangehrm \
    --volume apache_data:/bitnami/apache \
+   --volume php_data:/bitnami/php \
    bitnami/orangehrm:latest
 ```
 
@@ -309,10 +325,11 @@ To backup your application data follow these steps:
   $ docker-compose stop orangehrm
   ```
 
-2. Copy the OrangeHRM and Apache data
+2. Copy the OrangeHRM, php and Apache data
   ```bash
   $ docker cp $(docker-compose ps -q orangehrm):/bitnami/orangehrm/ /path/to/backups/orangehrm/latest/
   $ docker cp $(docker-compose ps -q orangehrm):/bitnami/apache/ /path/to/backups/apache/latest/
+  $ docker cp $(docker-compose ps -q orangehrm):/bitnami/php/ /path/to/backups/php/latest/
   ```
 
 3. Start the OrangeHRM container
@@ -327,10 +344,11 @@ To backup your application data follow these steps:
   $ docker stop orangehrm
   ```
 
-2. Copy the OrangeHRM and Apache data
+2. Copy the OrangeHRM, php and Apache data
   ```bash
   $ docker cp orangehrm:/bitnami/orangehrm/ /path/to/backups/orangehrm/latest/
   $ docker cp orangehrm:/bitnami/apache/ /path/to/backups/apache/latest/
+  $ docker cp orangehrm:/bitnami/php/ /path/to/backups/php/latest/
   ```
 
 3. Start the OrangeHRM container
@@ -351,20 +369,20 @@ We'd love for you to contribute to this container. You can request new features 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-orangehrm/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Docker version (`$ docker version`)
+- Output of `$ docker info`
+- Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
 
-Copyright (c) 2015-2016 Bitnami
+Copyright (c) 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
