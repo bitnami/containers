@@ -72,7 +72,7 @@ If you want to run the application manually instead of using docker-compose, the
 2. Start a MariaDB database in the network generated:
 
   ```bash
-  $ docker run -d --name mariadb --net=magento-tier bitnami/mariadb
+  $ docker run -d --name mariadb --net magento-tier bitnami/mariadb
   ```
 
   *Note:* You need to give the container a name in order to Magento to resolve the host
@@ -80,7 +80,7 @@ If you want to run the application manually instead of using docker-compose, the
 3. Run the Magento container:
 
   ```bash
-  $ docker run -d -p 80:80 --name magento --net=magento-tier bitnami/magento
+  $ docker run -d -p 80:80 --name magento --net magento-tier bitnami/magento
   ```
 
 Then you can access your application at http://your-ip/
@@ -192,17 +192,26 @@ magento:
   image: bitnami/magento:latest
   ports:
     - 80:80
+    - 443:443
   environment:
     - MAGENTO_PASSWORD=my_password1234
   volumes_from:
     - magento_data
+    - apache_data
+    - php_data
 ```
 
  * For manual execution add a `-e` option with each variable and value:
 
-```bash
- $ docker run -d -e MAGENTO_PASSWORD=my_password1234 -p 80:80 --name magento -v /your/local/path/bitnami/magento:/bitnami/magento --net=magento-tier bitnami/magento
-```
+  ```bash
+  $ docker run -d --name magento -p 80:80 -p 443:443 \
+    -e MAGENTO_PASSWORD=my_password1234 \
+    --net magento-tier \
+    --volume /path/to/magento-persistence:/bitnami/magento \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/magento:latest
+  ```
 
 Available variables:
 
@@ -231,7 +240,9 @@ To backup your application data follow these steps:
 2. Copy the Magento data folder in the host:
 
   ```bash
-  $ docker cp /your/local/path/bitnami:/bitnami/magento
+  $ docker cp /path/to/magento-persistence:/bitnami/magento
+  $ docker cp /path/to/apache-persistence:/bitnami/apache
+  $ docker cp /path/to/php-persistence:/bitnami/php
   ```
 
 # Restoring a backup
@@ -251,21 +262,21 @@ If you encountered a problem running this container, you can file an
 be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Docker version (`$ docker version`)
+- Output of `$ docker info`
+- Version of this container (`# echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
 # License
 
-Copyright (c) 2016 Bitnami
+Copyright (c) 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
