@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=phpbb \
-    BITNAMI_IMAGE_VERSION=3.2.0-r0 \
+    BITNAMI_IMAGE_VERSION=3.2.0-r1 \
     PATH=/opt/bitnami/mysql/bin/:/opt/bitnami/php/bin/:$PATH
 
 # System packages required
@@ -11,7 +11,7 @@ RUN install_packages libssl1.0.0 libaprutil1 libapr1 libc6 libuuid1 libexpat1 li
 
 # Additional modules required
 RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a2770b7e549674e33b8a5b07480f53c39f5c3f
-RUN bitnami-pkg unpack php-5.6.30-0 --checksum 93b852188bd8d111d7c2d2f2706df0b3f9de7fd37b48f1ef197c08fa07a9e118
+RUN bitnami-pkg unpack php-5.6.30-1 --checksum 96835743d668832c0b8464711587e5339969a96cafa1b319ca058697efd2857c
 RUN bitnami-pkg install libphp-5.6.30-0 --checksum b9689caaab61862444c97756b1a9bf575731c4d0e71aa962d58518a231b33155
 RUN bitnami-pkg install mysql-client-10.1.21-0 --checksum 8e868a3e46bfa59f3fb4e1aae22fd9a95fd656c020614a64706106ba2eba224e
 
