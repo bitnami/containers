@@ -30,7 +30,7 @@ Running Mediawiki with a database server is the recommended way. You can either 
 
 This is the recommended way to run Mediawiki. You can use the following docker compose template:
 
-```
+```yaml
 version: '2'
 services:
   mariadb:
@@ -45,6 +45,7 @@ services:
     volumes:
       - 'mediawiki_data:/bitnami/mediawiki'
       - 'apache_data:/bitnami/apache'
+      - 'php_data':/bitnami/php"
     depends_on:
       - mariadb
 volumes:
@@ -54,6 +55,8 @@ volumes:
     driver: local
   apache_data:
     driver: local
+  php_data:
+    driver: local
 ```
 
 ### Run the application manually
@@ -62,22 +65,22 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
-  $ docker network create mediawiki_network
+  ```bash
+  $ docker network create mediawiki-tier
   ```
 
 2. Start a MariaDB database in the network generated:
 
-  ```
-  $ docker run -d --name mariadb --net=mediawiki_network bitnami/mariadb
+  ```bash
+  $ docker run -d --name mariadb --net mediawiki-tier bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to Mediawiki to resolve the host
 
 3. Run the Mediawiki container:
 
-  ```
-  $ docker run -d -p 80:80 --name mediawiki --net=mediawiki_network bitnami/mediawiki
+  ```bash
+  $ docker run -d -p 80:80 -p 443:443 --name mediawiki --net mediawiki-tier bitnami/mediawiki:latest
   ```
 
 Then you can access your application at http://your-ip/
@@ -87,7 +90,7 @@ Then you can access your application at http://your-ip/
 
 If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence of the MediaWiki deployment, the above examples define docker volumes namely `mariadb_data` and `mediawiki_data`. The MediaWiki application state will persist as long as these volumes are not removed.
+For persistence of the MediaWiki deployment, the above examples define docker volumes namely `mariadb_data`, `php_data`, `apache_data` and `mediawiki_data`. The MediaWiki application state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -103,7 +106,7 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
-      - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
+      - '/path/to/mariadb-persistence:/bitnami/mariadb'
   mediawiki:
     image: 'bitnami/mediawiki:latest'
     depends_on:
@@ -114,6 +117,7 @@ services:
     volumes:
       - '/path/to/mediawiki-persistence:/bitnami/mediawiki'
       - '/path/to/apache-persistence:/bitnami/apache'
+      - '/path/to/php-persistence:/bitnami/php'
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -122,13 +126,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```
+  ```bash
   $ docker network create mediawiki-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```
+  ```bash
   $ docker run -d --name mariadb \
     --net mediawiki-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
@@ -139,11 +143,12 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Run the Mediawiki container:
 
-  ```
+  ```bash
   $ docker run -d --name mediawiki -p 80:80 -p 443:443 \
     --net mediawiki-tier \
     --volume /path/to/mediawiki-persistence:/bitnami/mediawiki \
     --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
     bitnami/mediawiki:latest
   ```
 
@@ -153,7 +158,7 @@ Bitnami provides up-to-date versions of MariaDB and Mediawiki, including securit
 
 1. Get the updated images:
 
-  ```
+  ```bash
   $ docker pull bitnami/mediawiki:latest
   ```
 
@@ -179,22 +184,31 @@ Bitnami provides up-to-date versions of MariaDB and Mediawiki, including securit
  When you start the mediawiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
-```
+```yaml
 mediawiki:
   image: bitnami/mediawiki:latest
   ports:
     - 80:80
+    - 443:443
   environment:
     - MEDIAWIKI_PASSWORD=my_password
   volumes_from:
     - mediawiki_data
+    - apache_data
+    - php_data
 ```
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
- $ docker run -d -e MEDIAWIKI_PASSWORD=my_password -p 80:80 --name mediawiki -v /your/local/path/bitnami/mediawiki:/bitnami/mediawiki --network=mediawiki_network bitnami/mediawiki
-```
+  ```bash
+  $ docker run -d --name mediawiki -p 80:80 -p 443:443 \
+    -e MEDIAWIKI_PASSWORD=my_password \
+    --net mediawiki-tier \
+    --volume /path/to/mediawiki-persistence:/bitnami/mediawiki \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/mediawiki:latest
+  ```
 
 Available variables:
 
@@ -220,23 +234,38 @@ This would be an example of SMTP configuration using a GMail account:
 
  * docker-compose:
 
-```
+```yaml
   mediawiki:
     image: bitnami/mediawiki:latest
     ports:
       - 80:80
+      - 443:443
     environment:
       - SMTP_HOST=ssl://smtp.gmail.com
       - SMTP_HOST_ID=mydomain.com
       - SMTP_PORT=465
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
+    volumes_from:
+      - mediawiki_data
+      - apache_data
+      - php_data
 ```
  * For manual execution:
 
-```
- $ docker run -d -e SMTP_HOST=ssl://smtp.gmail.com -e SMTP_HOST_ID=mydomain.com -e SMTP_PORT=465 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:80 --name mediawiki --net=mediawiki_network bitnami/mediawiki
-```
+  ```bash
+  $ docker run -d --name mediawiki -p 80:80 -p 443:443 \
+    -e SMTP_HOST=ssl://smtp.gmail.com \
+    -e SMTP_HOST_ID=mydomain.com \
+    -e SMTP_PORT=465 \
+    -e SMTP_USER=your_email@gmail.com \
+    -e SMTP_PASSWORD=your_password \
+    --net mediawiki-tier \
+    --volume /path/to/mediawiki-persistence:/bitnami/mediawiki \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/mediawiki:latest
+  ```
 
 # Backing up your application
 
@@ -250,7 +279,9 @@ To backup your application data follow these steps:
 2. Copy the Mediawiki data folder in the host:
 
   ```
-  $ docker cp /your/local/path/bitnami:/bitnami/mediawiki
+  $ docker cp /path/to/mediawiki-persistence:/bitnami/mediawiki
+  $ docker cp /path/to/apache-persistence:/bitnami/apache
+  $ docker cp /path/to/php-persistence:/bitnami/php
   ```
 
 # Restoring a backup
@@ -270,21 +301,21 @@ If you encountered a problem running this container, you can file an
 be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Docker version (`$ docker version`)
+- Output of `$ docker info`
+- Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
 # License
 
-Copyright 2016 Bitnami
+Copyright 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+ <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
