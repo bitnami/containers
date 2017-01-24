@@ -116,8 +116,8 @@ services:
       - '443:443'
     volumes:
       - '/path/to/suitecrm-persistence:/bitnami/suitecrm'
-      - '/path/to/your/local/php-persistence:/bitnami/php'
-      - '/path/to/your/local/apache-persistence:/bitnami/apache'
+      - '/path/to/php-persistence:/bitnami/php'
+      - '/path/to/apache-persistence:/bitnami/apache'
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -197,9 +197,15 @@ suitecrm:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```bash
- $ docker run -d -e SUITECRM_PASSWORD=my_password -p 80:80 --name suitecrm -v /your/local/path/bitnami/suitecrm:/bitnami/suitecrm --net=suitecrm-tier bitnami/suitecrm
-```
+  ```bash
+  $ docker run -d -p 80:80 -p 443:443 --name suitecrm  \
+    -e SUITECRM_PASSWORD=my_password \
+    --net suitecrm-tier \
+    --volume /path/to/suitecrm-persistence:/bitnami/suitecrm \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/suitecrm:latest
+  ```
 
 Available variables:
 
@@ -242,12 +248,19 @@ This would be an example of SMTP configuration using a Gmail account:
 
  * For manual execution:
 
-```bash
- $ docker run -d -e SUITECRM_SMTP_HOST=smtp.gmail.com -e SUITECRM_SMTP_PROTOCOL=TLS -e SUITECRM_SMTP_PORT=587 -e SUITECRM_S\
-MTP_USER=your_email@gmail.com -e SUITECRM_SMTP_PASSWORD=your_password -p 80:80 --name suitecrm -v /your/local/path/bitnami/\
-suitecrm:/bitnami/suitecrm bitnami/suitecrm
-```
-
+  ```bash
+  $ docker run -d -p 80:80 -p 443:443 --name suitecrm  \
+    -e SUITECRM_SMTP_HOST=smtp.gmail.com \
+    -e SUITECRM_SMTP_PROTOCOL=TLS \
+    -e SUITECRM_SMTP_PORT=587 \
+    -e SUITECRM_SMTP_USER=your_email@gmail.com \
+    -e SUITECRM_SMTP_PASSWORD=your_password
+    --net suitecrm-tier \
+    --volume /path/to/suitecrm-persistence:/bitnami/suitecrm \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/suitecrm:latest
+  ```
 # Backing up your application
 
 To backup your application data follow these steps:
@@ -260,7 +273,7 @@ To backup your application data follow these steps:
 2. Copy the SuiteCRM data folder in the host:
 
   ```bash
-  $ docker cp /your/local/path/bitnami:/bitnami/suitecrm
+  $ docker cp /path/to/suitecrm-persistence:/bitnami/suitecrm
   ```
 
 # Restoring a backup
@@ -279,9 +292,9 @@ If you encountered a problem running this container, you can file an
 be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Docker version (`$ docker version`)
+- Output of `$ docker info`
+- Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
@@ -293,7 +306,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+ <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
