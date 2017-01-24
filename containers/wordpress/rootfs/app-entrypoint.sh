@@ -33,11 +33,6 @@ if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
    for module in apache php wordpress; do
     initialize $module
    done
-
-   # temporary workaround for https://github.com/bitnami/bitnami-docker-wordpress/issues/66
-   if [ ! -h /opt/bitnami/php/lib/php ]; then
-    ln -sf /opt/bitnami/php/conf/php.ini /opt/bitnami/php/lib/php.ini
-   fi
    echo "Starting application ..."
 fi
 
