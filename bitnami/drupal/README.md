@@ -44,6 +44,7 @@ services:
     volumes:
       - 'drupal_data:/bitnami/drupal'
       - 'apache_data:/bitnami/apache'
+      - 'php_data:/bitnami/php'
     depends_on:
       - mariadb
 
@@ -53,6 +54,8 @@ volumes:
   drupal_data:
     driver: local
   apache_data:
+    driver: local
+  php_data:
     driver: local
 ```
 
@@ -69,7 +72,7 @@ If you want to run the application manually instead of using docker-compose, the
 2. Start a MariaDB database in the network generated:
 
   ```bash
-  $ docker run -d --name mariadb --net=drupal-tier bitnami/mariadb
+  $ docker run -d --name mariadb --net drupal-tier bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to Drupal to resolve the host
@@ -77,7 +80,7 @@ If you want to run the application manually instead of using docker-compose, the
 3. Run the Drupal container:
 
   ```bash
-  $ docker run -d -p 80:80 -p 443:443 --name drupal --net=drupal-tier bitnami/drupal
+  $ docker run -d -p 80:80 -p 443:443 --name drupal --net drupal-tier bitnami/drupal:latest
   ```
 
 Then you can access your application at http://your-ip/
@@ -86,7 +89,7 @@ Then you can access your application at http://your-ip/
 
 If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence of the Drupal deployment, the above examples define docker volumes namely `mariadb_data`, `drupal_data` and `apache_data`. The Drupal application state will persist as long as these volumes are not removed.
+For persistence of the Drupal deployment, the above examples define docker volumes namely `mariadb_data`, `drupal_data`, `php_data` and `apache_data`. The Drupal application state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -113,6 +116,7 @@ services:
     volumes:
       - '/path/to/drupal-persistence:/bitnami/drupal'
       - '/path/to/apache-persistence:/bitnami/apache'
+      - '/path/to/php-persistence:/bitnami/php'
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -141,6 +145,7 @@ services:
     --net drupal-tier \
     --volume /path/to/drupal-persistence:/bitnami/drupal \
     --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
     bitnami/drupal:latest
   ```
 
@@ -181,17 +186,26 @@ drupal:
   image: bitnami/drupal:latest
   ports:
     - 80:80
+    - 443:443
   environment:
     - DRUPAL_PASSWORD=my_password
   volumes_from:
     - drupal_data
+    - apache_data
+    - php_data
 ```
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
- $ docker run -d -e DRUPAL_PASSWORD=my_password -p 80:80 --name drupal -v /your/local/path/bitnami/drupal:/bitnami/drupal --network=drupal-tier bitnami/drupal
-```
+  ```bash
+  $ docker run -d --name drupal -p 80:80 -p 443:443 \
+    -e DRUPAL_PASSWORD=my_password \
+    --net drupal-tier \
+    --volume /path/to/drupal-persistence:/bitnami/drupal \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/drupal:latest
+  ```
 
 Available variables:
 
@@ -215,7 +229,9 @@ To backup your application data follow these steps:
 2. Copy the Drupal data folder in the host:
 
   ```
-  $ docker cp /your/local/path/bitnami:/bitnami/drupal
+  $ docker cp /path/to/drupal-persistence:/bitnami/drupal
+  $ docker cp /path/to/apache-persistence:/bitnami/apache
+  $ docker cp /path/to/php-persistence:/bitnami/php
   ```
 
 # Restoring a backup
@@ -235,21 +251,21 @@ If you encountered a problem running this container, you can file an
 be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Docker version (`$ docker version`)
+- Output of `$ docker info`
+- Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
 # License
 
-Copyright (c) 2015-2016 Bitnami
+Copyright (c) 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
