@@ -25,7 +25,7 @@ Running OpenCart with a database server is the recommended way. You can either u
 
 This is the recommended way to run OpenCart. You can use the following docker compose template:
 
-```
+```yaml
 version: '2'
 services:
   mariadb:
@@ -40,6 +40,7 @@ services:
     volumes:
       - 'opencart_data:/bitnami/opencart'
       - 'apache_data:/bitnami/apache'
+      - 'php_data:/bitnami/php'
     depends_on:
       - mariadb
 volumes:
@@ -49,6 +50,8 @@ volumes:
     driver: local
   apache_data:
     driver: local
+  php_data:
+    driver: local
 ```
 
 ### Run the application manually
@@ -57,22 +60,22 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
-  $ docker network create opencart_network
+  ```bash
+  $ docker network create opencart-tier
   ```
 
 2. Start a MariaDB database in the network generated:
 
-  ```
-  $ docker run -d --name mariadb --net=opencart_network bitnami/mariadb
+  ```bash
+  $ docker run -d --name mariadb --net=opencart_network bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to OpenCart to resolve the host
 
 3. Run the OpenCart container:
 
-  ```
-  $ docker run -d -p 80:80 --name opencart --net=opencart_network bitnami/opencart
+  ```bash
+  $ docker run -d -p 80:80 -p 443:443 --name opencart --net opencart-tier bitnami/opencart:latest
   ```
 
 Then you can access the OpenCart storefront at http://your-ip/. To access the administration area, logon to http://your-ip/admin
@@ -83,7 +86,7 @@ Then you can access the OpenCart storefront at http://your-ip/. To access the ad
 
 If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
- If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data` and `opencart_data` and `apache_data` volumes.
+ If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data`, `opencart_data`, `php_data` and `apache_data` volumes.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -93,14 +96,14 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 
 This requires a minor change to the `docker-compose.yml` template previously shown:
-```
+```yaml
 version: '2'
 
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
-      - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
+      - '/path/to/mariadb-persitence:/bitnami/mariadb'
   opencart:
     image: 'bitnami/opencart:latest'
     depends_on:
@@ -111,6 +114,7 @@ services:
     volumes:
       - '/path/to/opencart-persistence:/bitnami/opencart'
       - '/path/to/apache-persistence:/bitnami/apache'
+      - '/path/to/php-persistence:/bitnami/php'
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -119,13 +123,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```
+  ```bash
   $ docker network create opencart-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```
+  ```bash
   $ docker run -d --name mariadb \
     --net opencart-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
@@ -136,11 +140,12 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Create the OpenCart container with host volumes:
 
-  ```
+  ```bash
   $ docker run -d --name opencart -p 80:80 -p 443:443 \
     --net opencart-tier \
     --volume /path/to/opencart-persistence:/bitnami/opencart \
     --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
     bitnami/opencart:latest
   ```
 
@@ -176,7 +181,7 @@ Bitnami provides up-to-date versions of MariaDB and OpenCart, including security
  When you start the opencart image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
-```
+```yaml
 opencart:
   image: bitnami/opencart:latest
   ports:
@@ -192,9 +197,15 @@ opencart:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
- $ docker run -d -e OPENCART_PASSWORD=my_password -p 80:80 --name opencart -v /your/local/path/bitnami/opencart:/bitnami/opencart --network=opencart_network bitnami/opencart
-```
+   ```bash
+   $ docker run -d --name opencart -p 80:80 -p 443:443 \
+     -e OPENCART_PASSWORD=my_password \
+     --net opencart-tier \
+     --volume /path/to/opencart-persistence:/bitnami/opencart \
+     --volume /path/to/apache-persistence:/bitnami/apache \
+     --volume /path/to/php-persistence:/bitnami/php \
+     bitnami/opencart:latest
+   ```
 
 Available variables:
 
@@ -220,23 +231,37 @@ This would be an example of SMTP configuration using a GMail account:
 
  * docker-compose:
 
-```
+```yaml
   opencart:
     image: bitnami/opencart:latest
     ports:
       - 80:80
+      - 443:443
     environment:
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
+    volumes:
+      - opencart_data:/bitnami/opencart
+      - apache_data:/bitnami/apache
+      - php_data:/bitnami/php
 ```
 
  * For manual execution:
 
-```
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:80 --name opencart -v /your/local/path/bitnami/opencart:/bitnami/opencart --net=opencart_network bitnami/opencart
-```
+   ```bash
+   $ docker run -d --name opencart -p 80:80 -p 443:443 \
+     -e SMTP_HOST=smtp.gmail.com \
+     -e SMTP_PORT=587 \
+     -e SMTP_USER=your_email@gmail.com \
+     -e SMTP_PASSWORD=your_password \
+     --net opencart-tier \
+     --volume /path/to/opencart-persistence:/bitnami/opencart \
+     --volume /path/to/apache-persistence:/bitnami/apache \
+     --volume /path/to/php-persistence:/bitnami/php \
+     bitnami/opencart:latest
+   ```
 
 # Backing up your application
 
@@ -249,8 +274,10 @@ To backup your application data follow these steps:
 
 2. Copy the OpenCart data folder in the host:
 
-  ```
-  $ docker cp /your/local/path/bitnami:/bitnami/opencart
+  ```bash
+  $ docker cp /path/to/opencart-persistence:/bitnami/opencart
+  $ docker cp /path/to/apache-persistence:/bitnami/apache
+  $ docker cp /path/to/php-persistence:/bitnami/php
   ```
 
 # Restoring a backup
@@ -270,21 +297,21 @@ If you encountered a problem running this container, you can file an
 be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Docker version (`$ docker version`)
+- Output of `$ docker info`
+- Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
 # License
 
-Copyright 2016 Bitnami
+Copyright 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
