@@ -61,22 +61,22 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
-  $ docker network create owncloud_network
+  ```bash
+  $ docker network create owncloud-tier
   ```
 
 2. Start a MariaDB database in the network generated:
 
-  ```
-  $ docker run -d --name mariadb --net=owncloud_network bitnami/mariadb
+  ```bash
+  $ docker run -d --name mariadb --net=owncloud-tier bitnami/mariadb
   ```
 
   *Note:* You need to give the container a name in order to OwnCloud to resolve the host
 
 3. Run the OwnCloud container:
 
-  ```
-  $ docker run -d -p 80:80 --name owncloud --net=owncloud_network bitnami/owncloud
+  ```bash
+  $ docker run -d -p 80:80 --name owncloud --net=owncloud-tier bitnami/owncloud
   ```
 
 Then you can access your application at http://your-ip/
@@ -84,13 +84,13 @@ Then you can access your application at http://your-ip/
 > *Note:* If you want to access your application from a public IP or hostname you need to configure as a Trusted Domain. You can handle it adjusting the configuration of the instance by setting the environment variable "OWNCLOUD_HOST" to your public IP or hostname.
 > *Note:* If you persisted your application and you already run your container, you won't be able to configure the Trusted Domains using the previous environment variable. Trusted Domains will be set using the configuration that had been previously persisted. Therefore, you will need to connect you container and execute the command below:
 
-  ````
+  ````bash
   $ sudo -u daemon /opt/bitnami/php/bin/php /opt/bitnami/owncloud/occ config:system:set trusted_domains 2 --value=YOUR_HOSTNAME
   ````
 
 ## Persisting your application
 
-If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. 
+If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 If you are using docker-compose your data will be persistent as long as you don't remove `apache_data`, `php_data`, `mariadb_data` and `owncloud_data` volumes.
 
@@ -108,7 +108,7 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
-      - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
+      - '/path/to/mariadb-persistence:/bitnami/mariadb'
   owncloud:
     image: 'bitnami/owncloud:latest'
     depends_on:
@@ -128,13 +128,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```
+  ```bash
   $ docker network create owncloud-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```
+  ```bash
   $ docker run -d --name mariadb \
     --net owncloud-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
@@ -145,7 +145,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Create the ownCloud container with host volumes:
 
-  ```
+  ```bash
   $ docker run -d --name owncloud -p 80:80 -p 443:443 \
     --net owncloud-tier \
     --volume /path/to/owncloud-persistence:/bitnami/owncloud \
@@ -160,7 +160,7 @@ Bitnami provides up-to-date versions of MariaDB and OwnCloud, including security
 
 1. Get the updated images:
 
-  ```
+  ```bash
   $ docker pull bitnami/owncloud:latest
   ```
 
@@ -202,9 +202,15 @@ owncloud:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
- $ docker run -d -e OWNCLOUD_PASSWORD=my_password -p 80:80 --name owncloud -v /your/local/path/bitnami/owncloud:/bitnami/owncloud --network=owncloud_network bitnami/owncloud
-```
+```bash
+  $ docker run -d --name owncloud -p 80:80 -p 443:443 \
+    -e OWNCLOUD_PASSWORD=my_password \
+    --net owncloud-tier \
+    --volume /path/to/owncloud-persistence:/bitnami/owncloud \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/owncloud:latest
+  ```
 
 Available variables:
 
@@ -229,7 +235,7 @@ To backup your application data follow these steps:
 
 2. Copy the Owncloud data folder in the host:
 
-  ```
+  ```bash
   $ docker cp /your/local/path/bitnami:/bitnami/owncloud
   ```
 
@@ -264,7 +270,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
