@@ -44,6 +44,7 @@ services:
     volumes:
       - 'testlink_data:/bitnami/testlink'
       - 'apache_data:/bitnami/apache'
+      - 'php_data':/bitnami-php'
     depends_on:
       - mariadb
     environment:
@@ -57,6 +58,8 @@ volumes:
   testlink_data:
     driver: local
   apache_data:
+    driver: local
+  php_data:
     driver: local
 ```
 
@@ -90,14 +93,13 @@ Then you can access your application at http://your-ip/
 
 If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence of the TestLink deployment, the above examples define docker volumes namely `mariadb_data`, `testlink_data` and `apache_data`. The TestLink application state will persist as long as these volumes are not removed.
+For persistence of the Testlink deployment, the above examples define docker volumes namely `mariadb_data`, `php_data` `apache_data` and `testlink_data`. The TestLink application state will persist as long as these volumes are not removed.
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
 ### Mount host directories as data volumes with Docker Compose
 
 This requires a minor change to the `docker-compose.yml` template previously shown:
-
 ```yaml
 version: '2'
 
@@ -108,21 +110,22 @@ services:
       - '/path/to/mariadb-persistence:/bitnami/mariadb'
   testlink:
     image: 'bitnami/testlink:latest'
-    depends_on:
-      - mariadb
     ports:
       - '80:80'
       - '443:443'
     volumes:
       - '/path/to/testlink-persistence:/bitnami/testlink'
       - '/path/to/apache-persistence:/bitnami/apache'
+     -  '/path/to/php-persistence:/bitnami/php'
+    depends_on:
+      - mariadb
 ```
 
 ### Mount host directories as data volumes using the Docker command line
 
 In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
 
-1.  Create a network (if it does not exist):
+1. Create a network (if it does not exists):
 
   ```bash
   $ docker network create testlink-tier
@@ -139,10 +142,10 @@ In this case you need to specify the directories to mount on the run command. Th
 
   *Note:* You need to give the container a name in order for TestLink to resolve the host
 
-3. Create the TestLink container with host volumes:
+3. Run the TestLink container:
 
   ```bash
-  $ docker run -d --name testlink -p 80:80 -p 443:443 \
+  $ docker run -d -p 80:80 -p 443:443 --name testlink \
     --net testlink-tier \
     --volume /path/to/testlink-persistence:/bitnami/testlink \
     --volume /path/to/apache-persistence:/bitnami/apache \
@@ -186,16 +189,23 @@ Bitnami provides up-to-date versions of MariaDB and TestLink, including security
 testlink:
   image: bitnami/testlink:latest
   ports:
-    - 80:80
+    - '80:80'
+    - '443:443'
   environment:
     - TESTLINK_PASSWORD=my_password
 ```
 
  * For manual execution add a `-e` option with each variable and value:
 
-```bash
- $ docker run -d -e TESTLINK_PASSWORD=my_password -p 80:80 --name testlink -v /your/local/path/bitnami/testlink:/bitnami/testlink --net=testlink-tier bitnami/testlink
-```
+  ```bash
+  $ docker run -d -p 80:80 -p 443:443 --name testlink
+    -e TESTLINK_PASSWORD=my_password \
+    --net testlink-tier \
+    --volume /path/to/testlink-persistence:/bitnami/testlink \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/testlink:latest
+  ```
 
 Available variables:
 
@@ -223,11 +233,12 @@ This would be an example of SMTP configuration using a GMail account:
 
  * docker-compose:
 
-```yaml
+  ```yaml
   testlink:
     image: bitnami/testlink:latest
     ports:
       - '80:80'
+      - '443:443'
     environment:
       - SMTP_ENABLE=true
       - SMTP_HOST=smtp.gmail.com
@@ -235,13 +246,23 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
       - SMTP_CONNECTION_MODE=tls
-```
+  ```
 
  * For manual execution:
 
-```bash
- $ docker run -d -e SMTP_ENABLE=true -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -e SMTP_CONNECTION_MODE=tls -p 80:80 --name testlink -v /your/local/path/bitnami/testlink:/bitnami/testlink --network=testlink-tier bitnami/testlink$ docker rm -v testlink
-```
+  ```bash
+  $ docker run -d -p 80:80 -p 443:443 --name testlink \
+    -e SMTP_ENABLE=true \
+    -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 \
+    -e SMTP_USER=your_email@gmail.com \
+    -e SMTP_PASSWORD=your_password \
+    -e SMTP_CONNECTION_MODE=tls \
+    --net testlink-tier \
+    --volume /path/to/testlink-persistence:/bitnami/testlink \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/testlink:latest
+  ```
 
 # Backing up your application
 
@@ -255,7 +276,7 @@ To backup your application data follow these steps:
 2. Copy the TestLink data folder in the host:
 
   ```bash
-  $ docker cp /your/local/path/bitnami:/bitnami/testlink
+  $ docker cp /path/to/testlink-persistence:/bitnami/testlink
   ```
 
 # Restoring a backup
