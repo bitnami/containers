@@ -20,7 +20,7 @@ Running Moodle with a database server is the recommended way. You can either use
 
 This is the recommended way to run Moodle. You can use the following docker compose template:
 
-```
+```yaml
 version: '2'
 
 services:
@@ -28,7 +28,7 @@ services:
     image: 'bitnami/mariadb:latest'
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
-  application:
+  moodle:
     image: 'bitnami/moodle:latest'
     ports:
       - '80:80'
@@ -55,51 +55,52 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
-  $ docker network create moodle_network
+  ```bash
+  $ docker network create moodle-tier
   ```
 
 2. Start a MariaDB database in the network generated:
 
-  ```
-  $ docker run -d --name mariadb --net=moodle_network bitnami/mariadb
+  ```bash
+  $ docker run -d --name mariadb --net moodle-tier bitnami/mariadb
   ```
 
   *Note:* You need to give the container a name in order to Moodle to resolve the host
 
 3. Run the Moodle container:
 
-  ```
-  $ docker run -d -p 80:80 --name moodle --net=moodle_network bitnami/moodle
+  ```bash
+  $ docker run -d -p 80:80 -p 443:443 --name moodle --net moodle-tier bitnami/moodle
   ```
 
 Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data` and `application_data` containers. Those are data volume containers (See https://docs.docker.com/engine/userguide/containers/dockervolumes/ for more information). If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data`, `apache_data`, `php_data` and `moodle_data` containers. Those are data volume containers (See https://docs.docker.com/engine/userguide/containers/dockervolumes/ for more information). If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
 
 > **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
 ### Mount persistent folders in the host using docker-compose
 
 This requires a sightly modification from the template previously shown:
-```
+```yaml
 version: '2'
 
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
-      - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
-  application:
+      - '/path/to/mariadb-persistence:/bitnami/mariadb'
+  moodle:
     image: 'bitnami/moodle:latest'
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - '/path/to/your/local/moodle_data:/bitnami/moodle'
-      - '/path/to/your/local/apache_data:/bitnami/apache'
+      - '/path/to/moodle-persistence:/bitnami/moodle'
+      - '/path/to/apache-persistence:/bitnami/apache'
+      - '/path/to/php-persistence:/bitnami/php'
     depends_on:
       - mariadb
 ```
@@ -110,22 +111,27 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. If you haven't done this before, create a new network for the application and the database:
 
-  ```
-  $ docker network create moodle_network
+  ```bash
+  $ docker network create moodle-tier
   ```
 
 2. Start a MariaDB database in the previous network:
 
-  ```
-  $ docker run -d --name mariadb -v /your/local/path/bitnami/mariadb/data:/bitnami/mariadb/data -v /your/local/path/bitnami/mariadb/conf:/bitnami/mariadb/conf --network=moodle_network bitnami/mariadb
+  ```bash
+  $ docker run -d --name mariadb -v /path/to/mariadb-persistence:/bitnami/mariadb --net moodle-tier bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to Moodle to resolve the host
 
 3. Run the Moodle container:
 
-  ```
-  $ docker run -d -p 80:80 --name moodle -v /your/local/path/bitnami/moodle:/bitnami/moodle --network=moodle_network bitnami/moodle
+  ```bash
+  $ docker run -d -p 80:80 -p 443:443 --name moodle \
+    --net moodle-tier \
+    --volume /path/to/moodle-persistence:/bitnami/moodle \
+    --volume /path/to/apache-persistence:/bitnami/moodle \
+    --volume /path/to/php-persistence:/bitnami/moodle \
+    bitnami/moodle:latest
   ```
 
 # Upgrade this application
@@ -134,7 +140,7 @@ Bitnami provides up-to-date versions of MariaDB and Moodle, including security p
 
 1. Get the updated images:
 
-  ```
+  ```bash
   $ docker pull bitnami/moodle:latest
   ```
 
@@ -163,22 +169,31 @@ Bitnami provides up-to-date versions of MariaDB and Moodle, including security p
  When you start the moodle image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
-```
-application:
+```yaml
+moodle:
   image: bitnami/moodle:latest
   ports:
     - 80:80
+    - 443:443
   environment:
     - MOODLE_PASSWORD=my_password
   volumes_from:
-    - application_data
+    - moodle_data
+    - apache_data
+    - php_data
 ```
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
- $ docker run -d -e MOODLE_PASSWORD=my_password -p 80:80 --name moodle -v /your/local/path/bitnami/moodle:/bitnami/moodle --network=moodle_network bitnami/moodle
-```
+   ```bash
+   $ docker run -d  -p 80:80 -p 443:443 --name moodle
+     -e MOODLE_PASSWORD=my_password \
+     --net moodle-tier \
+     --volume /path/to/moodle-persistence:/bitnami/moodle \
+     --volume /path/to/apache-persistence:/bitnami/moodle \
+     --volume /path/to/php-persistence:/bitnami/moodle \
+     bitnami/moodle:latest
+   ```
 
 Available variables:
 
@@ -204,25 +219,37 @@ This would be an example of SMTP configuration using a GMail account:
 
  * docker-compose:
 
-```
-  application:
+```yaml
+  moodle:
     image: bitnami/moodle:latest
     ports:
       - 80:80
+      - 443:443
     environment:
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
     volumes_from:
-      - application_data
+      - moodle_data
+      - apache_data
+      - php_data
 ```
 
 * For manual execution:
 
-```
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:80 --name moodle -v /your/local/path/bitnami/moodle:/bitnami/moodle --net=moodle_network bitnami/moodle
-```
+  ```bash
+   $ docker run -d  -p 80:80 -p 443:443 --name moodle
+     -e SMTP_HOST=smtp.gmail.com \
+     -e SMTP_PORT=587 \
+     -e SMTP_USER=your_email@gmail.com \
+     -e SMTP_PASSWORD=your_password \
+     --net moodle-tier \
+     --volume /path/to/moodle-persistence:/bitnami/moodle \
+     --volume /path/to/apache-persistence:/bitnami/moodle \
+     --volume /path/to/php-persistence:/bitnami/moodle \
+     bitnami/moodle:latest
+   ```
 
 # Backing up your application
 
@@ -235,8 +262,10 @@ To backup your application data follow these steps:
 
 2. Copy the Moodle data folder in the host:
 
-  ```
-  $ docker cp /your/local/path/bitnami:/bitnami/moodle
+  ```bash
+  $ docker cp /path/to/moodle-persistence:/bitnami/moodle
+  $ docker cp /path/to/apache-persistence:/bitnami/apache
+  $ docker cp /path/to/php-persistence:/bitnami/php
   ```
 
 # Restoring a backup
@@ -256,21 +285,21 @@ If you encountered a problem running this container, you can file an
 be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Docker version (`$ docker version`)
+- Output of `$ docker info`
+- Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
 # License
 
-Copyright (c) 2016 Bitnami
+Copyright (c) 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
