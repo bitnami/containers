@@ -57,22 +57,22 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
-  $ docker network create odoo_network
+  ```bash
+  $ docker network create odoo-tier
   ```
 
 2. Start a PostgreSQL database in the network generated:
 
-  ```
-  $ docker run -d --name postgresql --net=odoo_network bitnami/postgresql
+  ```bash
+  $ docker run -d --name postgresql --net odoo-tier bitnami/postgresql:latest
   ```
 
   *Note:* You need to give the container a name in order to Odoo to resolve the host
 
 3. Run the Odoo container:
 
-  ```
-  $ docker run -d -p 80:8069 --name odoo --net=odoo_network bitnami/odoo
+  ```bash
+  $ docker run -d -p 80:8069 -p 443:8071 --name odoo --net odoo-tier bitnami/odoo:latest
   ```
 
 Then you can access your application at http://your-ip/
@@ -96,13 +96,14 @@ version: '2'
   postgresql:
     image: 'bitnami/postgresql:latest'
     volumes:
-      - '/path/to/your/local/postgresql_data:/bitnami/postgresql'
+      - '/path/to/postgresql_persistence:/bitnami/postgresql'
   odoo:
     image: bitnami/odoo:latest
     depends_on:
       - postgresql
     ports:
       - 80:8069
+      - 443:8071
     volumes:
       - '/path/to/odoo-persistence:/bitnami/odoo'
 ```
@@ -113,13 +114,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```
+  ```bash
   $ docker network create odoo-tier
   ```
 
 2. Create a PostgreSQL container with host volume:
 
-  ```
+  ```bash
   $ docker run -d --name postgresql \
     --net odoo-tier \
     --volume /path/to/postgresql-persistence:/bitnami/postgresql \
@@ -130,8 +131,8 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Create the Odoo container with hist volumes:
 
-  ```
-  $ docker run -d --name odoo -p 80:8069 \
+  ```bash
+  $ docker run -d --name odoo -p 80:8069 -p 443:8071 \
     --net odoo-tier \
     --volume /path/to/odoo-persistence:/bitnami/odoo \
     bitnami/odoo:latest
@@ -143,7 +144,7 @@ Bitnami provides up-to-date versions of PostgreSQL and Odoo, including security 
 
 1. Get the updated images:
 
-  ```
+  ```bash
   $ docker pull bitnami/odoo:latest
   ```
 
@@ -162,7 +163,7 @@ Bitnami provides up-to-date versions of PostgreSQL and Odoo, including security 
 5. Run the new image
 
  * For docker-compose: `$ docker-compose start odoo`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name odoo bitnami/odoo:latest`
+ * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `$ docker run --name odoo bitnami/odoo:latest`
 
 # Configuration
 ## Environment variables
@@ -174,6 +175,7 @@ odoo:
   image: bitnami/odoo:latest
   ports:
     - 80:8069
+    - 443:8071
   environment:
     - ODOO_PASSWORD=my_password
   volumes:
@@ -184,9 +186,13 @@ odoo:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
- $ docker run -d -e ODOO_PASSWORD=my_password -p 80:8069 --name odoo -v /your/local/path/bitnami/odoo:/bitnami/odoo --network=odoo_network bitnami/odoo
-```
+  ```bash
+  $ docker run -d -p 80:8069 -p 443:8071 --name odoo \
+    --env ODOO_PASSWORD=my_password  \
+    --net odoo-tier \
+    --volume /path/to/odoo-persistence:/bitnami/odoo \
+    bitnami/odoo:latest
+  ```
 
 Available variables:
  - `ODOO_EMAIL`: Odoo application email. Default: **user@example.com**
@@ -213,6 +219,7 @@ This would be an example of SMTP configuration using a GMail account:
     image: bitnami/odoo:latest
     ports:
       - 80:8069
+      - 443:8071
     environment:
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
@@ -222,9 +229,16 @@ This would be an example of SMTP configuration using a GMail account:
 
  * For manual execution:
 
-```
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:8069 --name odoo -v /your/local/path/bitnami/odoo:/bitnami/odoo --network=odoo_network bitnami/odoo
-```
+  ```bash
+  $ docker run -d -p 80:8069 -p 443:8071 --name odoo \
+    --env SMTP_HOST=smtp.gmail.com \
+    --env SMTP_PORT=587 \
+    --env SMTP_USER=your_email@gmail.com \
+    --env SMTP_PASSWORD=your_password \
+    --net odoo-tier \
+    --volume /path/to/odoo-persistence:/bitnami/odoo \
+    bitnami/odoo:latest
+  ```
 
 # Backing up your application
 
@@ -238,7 +252,7 @@ To backup your application data follow these steps:
 2. Copy the Odoo data folder in the host:
 
   ```
-  $ docker cp /your/local/path/bitnami:/bitnami/odoo
+  $ docker cp /path/to/odoo-peristence:/bitnami/odoo
   ```
 
 # Restoring a backup
@@ -258,21 +272,21 @@ If you encountered a problem running this container, you can file an
 be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Docker version (`$ docker version`)
+- Output of `$ docker info`
+- Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
 # License
 
-Copyright (c) 2016 Bitnami
+Copyright (c) 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
