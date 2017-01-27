@@ -2,8 +2,6 @@
 . /opt/bitnami/express/functions
 
 if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
-  wait_for_db
-
   if ! app_present; then
     bootstrap_express_app
   fi
@@ -11,6 +9,8 @@ if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
   add_dockerfile
 
   install_packages
+
+  wait_for_db
 
   if ! fresh_container; then
     echo "#########################################################################"
