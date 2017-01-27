@@ -98,12 +98,16 @@ add_nodemon_support() {
 }
 
 bootstrap_express_app() {
-  log "Creating express application"
-  express . -f
+  if ! app_present; then
+    log "Creating express application."
+    express . -f
 
-  add_database_support
-  add_nodemon_support
-  add_sample_code
+    add_database_support
+    add_nodemon_support
+    add_sample_code
+  else
+    log "Skipping creation of new application. Already exists!"
+  fi
 }
 
 add_dockerfile() {

@@ -2,9 +2,7 @@
 . /opt/bitnami/express/functions
 
 if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
-  if ! app_present; then
-    bootstrap_express_app
-  fi
+  bootstrap_express_app
 
   add_dockerfile
 
