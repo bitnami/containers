@@ -85,13 +85,9 @@ Then you can access your application at <http://your-ip/>
 
 ## Persisting your application
 
-If you remove every container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
-
-For persistence of the Prestashop deployment, the above examples define docker volumes namely `mariadb_data` and `prestashop_data` and `apache_data`. The Prestashop application state will persist as long as these volumes are not removed.
+For persistence of the Prestashop deployment, the above examples define docker volumes namely `mariadb_data`, `prestashop_data`, `php_data` and `apache_data`. The Prestashop application state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
-
-> **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
 ### Mount host directories as data volumes with Docker Compose
 
@@ -149,32 +145,55 @@ In this case you need to specify the directories to mount on the run command. Th
     bitnami/prestashop:latest
   ```
 
-# Upgrade this application
+# Upgrading PrestasShop
 
 Bitnami provides up-to-date versions of MariaDB and PrestaShop, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the PrestaShop container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
 
-1. Get the updated images:
+> **NOTE**:
+>
+> This method only upgrades the components (PHP and Apache) included in the PrestaShop Docker Image. PrestaShop will not be upgrade to the newest version. For PrestaShop upgrade see http://doc.prestashop.com/display/PS15/Updating+PrestaShop
 
+## Using Docker Compose
+
+1. Stop the running PrestaShop container
   ```bash
-  $ docker pull bitnami/prestashop:latest
+  $ docker-compose stop prestashop
   ```
 
-2. Stop your container
+2. Remove the stopped container
+  ```bash
+  $ docker-compose rm prestashop
+  ```
 
- * For docker-compose: `$ docker-compose stop prestashop`
- * For manual execution: `$ docker stop prestashop`
+3. Launch the updated Prestashop image
+  ```bash
+  $ docker-compose start prestashop
+  ```
 
-3. (For non-compose execution only) Create a [backup](#backing-up-your-application) if you have not mounted the prestashop folder in the host.
+## Using Docker command line
 
-4. Remove the currently running container
+1. Stop the running PrestaShop container
+  ```bash
+  $ docker stop prestashop
+  ```
 
- * For docker-compose: `$ docker-compose rm -v prestashop`
- * For manual execution: `$ docker rm -v prestashop`
+2. Remove the stopped container
+  ```bash
+  $ docker rm prestashop
+  ```
 
-5. Run the new image
+3. Launch the updated PrestaShop image
+  ```bash
+  $ docker run -d --name presstashop -p 80:80 -p 443:443 \
+    --volume prestashop_data:/bitnami/prestashop \
+    --volume apache_data:/bitnami/apache \
+    --volume php_data:/bitnami/php \
+    bitnami/prestashop:latest
+  ```
 
- * For docker-compose: `$ docker-compose start prestashop`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `$ docker run --name prestashop bitnami/prestashop:latest`
+> **NOTE**:
+>
+> The above command assumes that local docker volumes are in use. Edit the command according to your usage.
 
 # Configuration
 ## Environment variables
@@ -278,7 +297,7 @@ To backup your application data follow these steps:
 
 # Restoring a backup
 
-To restore your application using backed up data simply mount the folder with PrestaShop data in the container. See [persisting your application](#persisting-your-application) section for more info.
+To restore your application using backed up data simply mount the folder with PrestaShop, PHP and Apache data in the container. See [persisting your application](#persisting-your-application) section for more info.
 
 # Contributing
 
