@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=prestashop \
-    BITNAMI_IMAGE_VERSION=1.6.1.9-r5 \
+    BITNAMI_IMAGE_VERSION=1.7.0.4-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
@@ -16,7 +16,7 @@ RUN bitnami-pkg install libphp-5.6.30-0 --checksum b9689caaab61862444c97756b1a9b
 RUN bitnami-pkg install mysql-client-10.1.21-0 --checksum 8e868a3e46bfa59f3fb4e1aae22fd9a95fd656c020614a64706106ba2eba224e
 
 # Install prestashop
-RUN bitnami-pkg unpack prestashop-1.6.1.9-1 --checksum 5e63a4b94965d547e1b6c6fa44f179b6a0600d839fe5b0876c9c1f81502cd6b9
+RUN bitnami-pkg unpack prestashop-1.7.0.4-0 --checksum 037e8d534599eb28571ce467ce09c1bcd8c0cdb2db310ff897f5a015002cc433
 
 COPY rootfs /
 
