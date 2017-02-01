@@ -369,7 +369,7 @@ bats test.sh
 
 ## 1.10.0-r0
 
-- All volumes have been merged at `/bitnami/nginx`. Now you only need to mount a single volume at `/bitnami/nginx` for persistence.
+- The configuration volume has been moved to `/bitnami/nginx`. Now you only need to mount a single volume at `/bitnami/nginx` for persisting configuration. `/app` is still used for serving content by the default virtual host.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
 
 ## 1.8.0-4-r01 (2015-10-05)
