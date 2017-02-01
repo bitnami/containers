@@ -23,7 +23,7 @@ echo "Starting application ..."
 if [ "$1" == "php" -a "$2" == "-S" ] ; then
   if [ ! -d $PROJECT_DIRECTORY ] ; then
     log "Creating example Symfony application"
-    nami execute symfony createProject $SYMFONY_PROJECT_NAME | grep -v undefined
+    nami execute symfony createProject --databaseServerHost $MARIADB_HOST --databaseServerPort $MARIADB_PORT --databaseAdminUser $MARIADB_USER $SYMFONY_PROJECT_NAME | grep -v undefined
     log "Symfony app created"
   else
     log "App already created"
