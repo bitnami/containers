@@ -19,7 +19,7 @@ RUN install_packages libc6 zlib1g libxslt1.1 libtidy-0.99-0 libreadline6 libncur
 # Additional modules required
 RUN bitnami-pkg install php-7.0.14-0 --checksum 9144f590d0cbbf751288c27467128b5f95507729c22144008c453c94cd8ef8b9
 RUN bitnami-pkg install mysql-client-10.1.20-0 --checksum 14d20929072b157b5e819deb440504ad0f33f583493b5adeb283c329ea58d513
-RUN bitnami-pkg install mariadb-10.1.20-0 --checksum 7409ba139885bc4f463233a250806f557ee41472e2c88213e82c21f4d97a77d7
+RUN if [ "$BITNAMI_IMAGE_VERSION" = "3.2.1-r2" ] ; then bitnami-pkg install mariadb-10.1.20-0 --checksum 7409ba139885bc4f463233a250806f557ee41472e2c88213e82c21f4d97a77d7; fi
 
 # Install symfony
 RUN bitnami-pkg install symfony-3.2.1-0 --checksum 9b619d616f09f76b16bbbd115d53ca2ead9ea22118ba7db45ac0b202325962e1
