@@ -14,10 +14,6 @@ log () {
   echo -e "\033[0;33m$(date "+%H:%M:%S")\033[0;37m ==> $1."
 }
 
-if [ "$BITNAMI_IMAGE_VERSION" = "3.2.1-r2" ] ; then
-    nami restart mariadb
-fi
-
 echo "Starting application ..."
 
 if [ "$1" == "php" -a "$2" == "-S" ] ; then
