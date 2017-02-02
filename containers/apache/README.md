@@ -355,7 +355,7 @@ bats test.sh
 
 ## 2.4.18-r0
 
-- All volumes have been merged at `/bitnami/apache`. Now you only need to mount a single volume at `/bitnami/apache` for persistence.
+- The configuration volume has been moved to `/bitnami/apache`. Now you only need to mount a single volume at `/bitnami/apache` for persisting configuration. `/app` is still used for serving content by the default virtual host.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
 
 ## 2.4.12-4-r01
