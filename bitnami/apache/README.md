@@ -343,14 +343,6 @@ or using Docker Compose:
 docker-compose start apache
 ```
 
-# Testing
-
-This image is tested for expected runtime behavior, using the [Bats](https://github.com/sstephenson/bats) testing framework. You can run the tests on your machine using the `bats` command.
-
-```
-bats test.sh
-```
-
 # Notable Changes
 
 ## 2.4.18-r0
