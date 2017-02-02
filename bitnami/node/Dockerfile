@@ -26,7 +26,7 @@ ENV STACKSMITH_STACK_ID="npx76xt" \
 RUN install_packages libc6 libssl1.0.0 libncurses5 libtinfo5 zlib1g libbz2-1.0 libreadline6 libstdc++6 libgcc1 ghostscript imagemagick libmysqlclient18
 
 # Install node
-RUN bitnami-pkg unpack node-7.4.0-0 --checksum 25efb29dd2c4e4f459197401843e91185fb2e1d9a60d0b58ad350bf1254f8b15
+RUN bitnami-pkg unpack node-7.5.0-0 --checksum 349c41abb63045755df76ce84cc60dac1d98278f9508e4b476bc65130942ab1d
 
 COPY rootfs /
 
@@ -35,7 +35,7 @@ ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
 
 
 ENV BITNAMI_APP_NAME=node \
-    BITNAMI_IMAGE_VERSION=7.4.0-r0
+    BITNAMI_IMAGE_VERSION=7.5.0-r0
 
 EXPOSE 3000
 WORKDIR /app
