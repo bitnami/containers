@@ -34,6 +34,6 @@ if [ "$1" == "php" -a "$2" == "-S" ] ; then
   DEPLOY="$@ -t $PROJECT_DIRECTORY/web/"
 fi
 
-echo "Starting application ..."
+echo "symfony successfully initialized"
 
 exec /entrypoint.sh $DEPLOY
