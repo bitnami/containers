@@ -34,4 +34,6 @@ if [ "$1" == "php" -a "$2" == "-S" ] ; then
   DEPLOY="$@ -t $PROJECT_DIRECTORY/web/"
 fi
 
+echo "Starting application ..."
+
 exec /entrypoint.sh $DEPLOY
