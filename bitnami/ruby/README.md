@@ -259,14 +259,6 @@ or using Docker Compose:
 docker-compose start ruby
 ```
 
-# Testing
-
-This image is tested for expected runtime behavior, using the [Bats](https://github.com/sstephenson/bats) testing framework. You can run the tests on your machine using the `bats` command.
-
-```
-bats test.sh
-```
-
 # Notable Changes
 
 ## 2.3.1-r0 (2016-05-11)
