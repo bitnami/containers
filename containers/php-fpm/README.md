@@ -342,14 +342,6 @@ or using Docker Compose:
 docker-compose start phpfpm
 ```
 
-# Testing
-
-This image is tested for expected runtime behavior, using the [Bats](https://github.com/sstephenson/bats) testing framework. You can run the tests on your machine using the `bats` command.
-
-```
-bats test.sh
-```
-
 # Notable Changes
 
 ## 7.0.6-r0 (2016-05-17)
