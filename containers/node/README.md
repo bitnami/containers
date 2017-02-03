@@ -263,14 +263,6 @@ or using Docker Compose:
 docker-compose start node
 ```
 
-# Testing
-
-This image is tested for expected runtime behavior, using the [Bats](https://github.com/sstephenson/bats) testing framework. You can run the tests on your machine using the `bats` command.
-
-```bash
-bats test.sh
-```
-
 # Notable Changes
 
 ## 6.2.0-r0 (2016-05-11)
