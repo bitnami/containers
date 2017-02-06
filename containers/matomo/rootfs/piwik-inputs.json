@@ -1,0 +1,17 @@
+{
+  "username": "{{$global.env.PIWIK_USERNAME}}",
+  "password": "{{$global.env.PIWIK_PASSWORD}}",
+  "email": "{{$global.env.PIWIK_EMAIL}}",
+  "websiteName": "{{$global.env.PIWIK_WEBSITE_NAME}}",
+  "websiteHost": "{{$global.env.PIWIK_WEBSITE_HOST}}",
+  "host": "{{$global.env.PIWIK_HOST}}",
+  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT}}",
+  "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpProtocol": "{{$global.env.SMTP_PROTOCOL}}"
+}
