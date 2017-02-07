@@ -4,17 +4,34 @@
 
 https://www.piwik.org/
 
+# TL;DR;
+```bash
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-piwik/master/docker-compose.yml
+$ docker-compose up
+```
+
 # Prerequisites
 
 To run this application you need Docker Engine 1.10.0. Docker Compose is recommended with a version 1.6.0 or later.
 
+
+# How to get this image
+The recommended way to get the Bitnami Piwik Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/piwik/).
+To use a specific version, you can pull a versioned tag. Find the [list of available versions] (https://hub.docker.com/r/bitnami/piwik/tags/) in the Docker Hub Registry.
+
+```bash
+docker pull bitnami/kibana:[TAG]
+```
+If you wish, you can also build the image youself.
+
+```bash
+docker build -t bitnami/piwik:latest https://github.com/bitnami/bitnami-docker-piwik.git
+```
+
 # How to use this image
+Piwik requires access to a MySQL database or MariaDB database to store information. It uses our [MariaDB image] (https://github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
 
-## Run Piwik with a Database Container
-
-Running Piwik with a database server is the recommended way. You can either use docker-compose or run the container manually.
-
-### Run the application using Docker Compose
+## Run the Piwik image using Docker Compose
 
 This is the recommended way to run Piwik. You can use the following docker compose template:
 
@@ -47,7 +64,7 @@ volumes:
     driver: local
 ```
 
-### Run the application manually
+## Run the Piwik image using the Docker Command Line
 
 If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
 
@@ -139,7 +156,7 @@ In this case you need to specify the directories to mount on the run command. Th
     bitnami/piwik:latest
   ```
 
-# Upgrade this application
+# Upgrading Piwik
 
 Bitnami provides up-to-date versions of MariaDB and Piwik, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Piwik container. For the MariaDB upgrade you can take a look at https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
 
@@ -236,20 +253,44 @@ This would be an example of SMTP configuration using a Gmail account:
  SMTP_PASSWORD=your_password -p 80:80 --name piwik -v /your/local/path/bitnami/piwik:/bitnami/piwik bitnami/piwik
 ```
 
-# Backing up your application
-
+# Backing up your container
 To backup your application data follow these steps:
+## Back up Piwik using Docker Compose
 
-1. Stop the running container:
+1. Stop the Piwik container:
 
   * For docker-compose: `$ docker-compose stop piwik`
-  * For manual execution: `$ docker stop piwik`
 
-2. Copy the Piwik data folder in the host:
+2. Copy the Piwik, PHP and Apache data to your backup path:
 
+  ```bash
+$ docker cp $(docker-compose ps -q piwik):/bitnami/piwik/ /path/to/backups/piwik/latest/
+$ docker cp $(docker-compose ps -q piwik):/bitnami/apache/ /path/to/backups/apache/latest/
+$ docker cp $(docker-compose ps -q piwik):/bitnami/php/ /path/to/backups/php/latest/
   ```
-  $ docker cp /your/local/path/bitnami:/bitnami/piwik
-  ```
+3. Start the Piwik container:
+```bash
+$ docker-compose start piwik
+```
+
+## Back up Piwik using the Docker Command Line
+
+1. Stop the Piwik container:
+2. Copy the Piwik,PHP and Apache data to your backup path:
+
+```bash
+$ docker cp wordpress:/bitnami/piwik/ /path/to/backups/piwik/latest/
+$ docker cp wordpress:/bitnami/apache/ /path/to/backups/apache/latest/
+$ docker cp wordpress:/bitnami/php/ /path/to/backups/php/latest/
+
+```
+
+3. Start the Piwik container:
+```bash
+$ docker-compose start piwik
+```
+
+
 
 # Restoring a backup
 
@@ -275,7 +316,7 @@ information)
 
 # License
 
-Copyright 2016 Bitnami
+Copyright (c) 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
