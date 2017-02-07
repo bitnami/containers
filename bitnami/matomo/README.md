@@ -279,9 +279,9 @@ $ docker-compose start piwik
 2. Copy the Piwik,PHP and Apache data to your backup path:
 
 ```bash
-$ docker cp wordpress:/bitnami/piwik/ /path/to/backups/piwik/latest/
-$ docker cp wordpress:/bitnami/apache/ /path/to/backups/apache/latest/
-$ docker cp wordpress:/bitnami/php/ /path/to/backups/php/latest/
+$ docker cp piwik:/bitnami/piwik/ /path/to/backups/piwik/latest/
+$ docker cp piwik:/bitnami/apache/ /path/to/backups/apache/latest/
+$ docker cp piwik:/bitnami/php/ /path/to/backups/php/latest/
 
 ```
 
