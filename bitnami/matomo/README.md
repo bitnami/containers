@@ -20,7 +20,7 @@ The recommended way to get the Bitnami Piwik Docker Image is to pull the prebuil
 To use a specific version, you can pull a versioned tag. Find the [list of available versions] (https://hub.docker.com/r/bitnami/piwik/tags/) in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/kibana:[TAG]
+docker pull bitnami/piwik:[TAG]
 ```
 If you wish, you can also build the image youself.
 
