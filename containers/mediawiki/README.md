@@ -18,7 +18,7 @@ $ docker-compose up
 
 # Prerequisites
 
-To run this application you need Docker Engine 1.10.0. Docker Compose is recomended with a version 1.6.0 or later.
+To run this application you need Docker Engine 1.10.0. It is recommended that you use Docker Compose version 1.6.0 or later.
 
 # How to use this image
 
@@ -75,7 +75,7 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker run -d --name mariadb --net mediawiki-tier bitnami/mariadb:latest
   ```
 
-  *Note:* You need to give the container a name in order to Mediawiki to resolve the host
+  *Note:* You need to give the container a name in order for Mediawiki to resolve the host
 
 3. Run the Mediawiki container:
 
@@ -90,11 +90,11 @@ Then you can access your application at http://your-ip/
 
 If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence of the MediaWiki deployment, the above examples define docker volumes namely `mariadb_data`, `php_data`, `apache_data` and `mediawiki_data`. The MediaWiki application state will persist as long as these volumes are not removed.
+For persistence of the MediaWiki deployment, the above examples define the docker volumes `mariadb_data`, `php_data`, `apache_data` and `mediawiki_data`. The MediaWiki application state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-> **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
+> **Note!** If you have already started using your application, follow the steps on [backing up](#backing-up-your-application) to pull the data from your running container down to your host.
 
 ### Mount host directories as data volumes with Docker Compose
 
