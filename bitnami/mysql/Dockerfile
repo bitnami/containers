@@ -1,10 +1,9 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_IMAGE_VERSION=5.7.17-r2 \
     BITNAMI_APP_NAME=mysql \
-    BITNAMI_APP_USER=mysql \
     PATH=/opt/bitnami/mysql/sbin:/opt/bitnami/mysql/bin:$PATH
 
 # System packages required
