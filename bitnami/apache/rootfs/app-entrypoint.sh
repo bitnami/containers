@@ -13,10 +13,6 @@ function initialize {
     fi
 }
 
-# Set default values
-export APACHE_HTTP_PORT=${APACHE_HTTP_PORT:-80}
-export APACHE_HTTPS_PORT=${APACHE_HTTPS_PORT:-443}
-
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
     initialize apache
     chown -R :$BITNAMI_APP_USER /bitnami/apache || true
