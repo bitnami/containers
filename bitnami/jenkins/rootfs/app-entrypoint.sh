@@ -14,10 +14,6 @@ function initialize {
     fi
 }
 
-# Set default values
-export JENKINS_USERNAME=${JENKINS_USERNAME:-"user"}
-export JENKINS_PASSWORD=${JENKINS_PASSWORD:-"bitnami"}
-
 
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
