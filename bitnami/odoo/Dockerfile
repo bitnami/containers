@@ -19,6 +19,12 @@ RUN bitnami-pkg unpack odoo-10.0.20170115-0 --checksum d96cf72a3f1bbf43e92569eb7
 
 COPY rootfs /
 
+ENV ODOO_PASSWORD="bitnami" \
+    ODOO_EMAIL="user@example.com" \
+    POSTGRESQL_USER="postgres" \
+    POSTGRESQL_HOST="postgresql" \
+    POSTGRESQL_PORT="5432"
+
 VOLUME ["/bitnami/odoo"]
 
 EXPOSE 8069 8071
