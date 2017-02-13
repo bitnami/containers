@@ -14,16 +14,6 @@ function initialize {
     fi
 }
 
-# Set default values
-export MOODLE_USERNAME=${MOODLE_USERNAME:-"user"}
-export MOODLE_PASSWORD=${MOODLE_PASSWORD:-"bitnami"}
-export MOODLE_EMAIL=${MOODLE_EMAIL:-"user@example.com"}
-export MOODLE_LANGUAGE=${MOODLE_LANGUAGE:-"en"}
-export MARIADB_USER=${MARIADB_USER:-"root"}
-export MARIADB_HOST=${MARIADB_HOST:-"mariadb"}
-export MARIADB_PORT=${MARIADB_PORT:-"3306"}
-export MOODLE_SITENAME=${MOODLE_SITENAME:-"New Site"}
-
 
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then

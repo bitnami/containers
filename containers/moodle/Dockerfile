@@ -20,6 +20,15 @@ RUN bitnami-pkg unpack moodle-3.2.1-0 --checksum eebfb4df5bf66921373405a606f95d5
 
 COPY rootfs /
 
+ENV MOODLE_USERNAME="user" \
+    MOODLE_PASSWORD="bitnami" \
+    MOODLE_EMAIL="user@example.com" \
+    MOODLE_LANGUAGE="en" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306" \
+    MOODLE_SITENAME="New Site"
+
 VOLUME ["/bitnami/moodle", "/bitnami/apache", "/bitnami/php"]
 
 EXPOSE 80 443
