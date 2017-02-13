@@ -17,6 +17,15 @@ RUN bitnami-pkg unpack parse-dashboard-1.0.19-2 --checksum f0bc6bb74120325606f02
 
 COPY rootfs /
 
+ENV PARSE_HOST="parse" \
+    PARSE_PORT="1337" \
+    PARSE_MOUNT_PATH="/parse" \
+    PARSE_MASTER_KEY="mymasterKey" \
+    PARSE_APP_ID="myappID" \
+    PARSE_DASHBOARD_APP_NAME="MyDashboard" \
+    PARSE_DASHBOARD_USER="user" \
+    PARSE_DASHBOARD_PASSWORD="bitnami"
+
 VOLUME ["/bitnami/parse-dashboard"]
 
 EXPOSE 4040
