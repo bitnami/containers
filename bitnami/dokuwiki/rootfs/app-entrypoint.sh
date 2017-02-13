@@ -14,15 +14,6 @@ function initialize {
     fi
 }
 
-# Set default values
-export APACHE_HTTP_PORT=${APACHE_HTTP_PORT:-"80"}
-export APACHE_HTTPS_PORT=${APACHE_HTTPS_PORT:-"443"}
-export DOKUWIKI_USERNAME=${DOKUWIKI_USERNAME:-"superuser"}
-export DOKUWIKI_FULL_NAME=${DOKUWIKI_FULL_NAME:-"Full Name"}
-export DOKUWIKI_PASSWORD=${DOKUWIKI_PASSWORD:-"bitnami1"}
-export DOKUWIKI_EMAIL=${DOKUWIKI_EMAIL:-"user@example.com"}
-export DOKUWIKI_WIKI_NAME=${DOKUWIKI_WIKI_NAME:-"Bitnami DokuWiki"}
-
 
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then

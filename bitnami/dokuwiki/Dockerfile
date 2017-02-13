@@ -19,6 +19,14 @@ RUN bitnami-pkg unpack dokuwiki-20160626a-0 --checksum dc458acf5ca9c4ab188938fcb
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    DOKUWIKI_USERNAME="superuser" \
+    DOKUWIKI_FULL_NAME="Full Name" \
+    DOKUWIKI_PASSWORD="bitnami1" \
+    DOKUWIKI_EMAIL="user@example.com" \
+    DOKUWIKI_WIKI_NAME="Bitnami DokuWiki"
+
 VOLUME ["/bitnami/dokuwiki", "/bitnami/apache"]
 
 EXPOSE 80 443
