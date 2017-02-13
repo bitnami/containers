@@ -19,6 +19,14 @@ RUN bitnami-pkg unpack redmine-3.3.2-0 --checksum 7488ba7ec4b015add6ac0293de8267
 
 COPY rootfs /
 
+ENV REDMINE_USERNAME=user \
+    REDMINE_PASSWORD=bitnami1 \
+    REDMINE_EMAIL=user@example.com \
+    REDMINE_LANGUAGE=en \
+    MARIADB_USER=root \
+    MARIADB_HOST=mariadb \
+    MARIADB_PORT=3306
+
 VOLUME ["/bitnami/redmine"]
 
 EXPOSE 3000
