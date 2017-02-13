@@ -18,6 +18,16 @@ RUN bitnami-pkg unpack cassandra-3.10-0 --checksum 548dd6e6ccdc22e6c479a0f914b50
 
 COPY rootfs /
 
+ENV CASSANDRA_CLUSTER_NAME="My Cluster" \
+    CASSANDRA_TRANSPORT_PORT="7000" \
+    CASSANDRA_SSL_TRANSPORT_PORT="7001" \
+    CASSANDRA_JMX_PORT="7199" \
+    CASSANDRA_CQL_PORT="9042" \
+    CASSANDRA_RPC_PORT="9160" \
+    CASSANDRA_USER="cassandra" \
+    CASSANDRA_PASSWORD="cassandra" \
+    CASSANDRA_ENDPOINT_SNITCH="SimpleSnitch"
+
 VOLUME ["/bitnami/cassandra"]
 
 EXPOSE 7000 7001 9042 9160
