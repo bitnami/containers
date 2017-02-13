@@ -14,11 +14,6 @@ function initialize {
     fi
 }
 
-# Set default values
-export ELASTICSEARCH_PORT=${ELASTICSEARCH_PORT:-"9200"}
-export ELASTICSEARCH_NODE_PORT=${ELASTICSEARCH_NODE_PORT:-"9300"}
-export ELASTICSEARCH_CLUSTER_NAME=${ELASTICSEARCH_CLUSTER_NAME:-"elasticsearch-cluster"}
-
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
    initialize elasticsearch
    echo "Starting application ..."
