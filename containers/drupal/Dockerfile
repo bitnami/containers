@@ -21,6 +21,15 @@ RUN bitnami-pkg unpack drupal-8.2.6-0 --checksum a8f874db6aef1e4dae22b2fd88e700b
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    DRUPAL_USERNAME="user" \
+    DRUPAL_PASSWORD="bitnami" \
+    DRUPAL_EMAIL="user@example.com" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
+
 VOLUME ["/bitnami/drupal", "/bitnami/apache", "/bitnami/php"]
 
 EXPOSE 80 443
