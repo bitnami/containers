@@ -107,8 +107,8 @@ services:
       - '443:443'
     volumes:
       - '/path/to/prestashop-persistence:/bitnami/prestashop'
-      - '/path/to/apache-persistence/bitnami/apache'
-      - '/path/to/php-persistence/bitnami/apache'
+      - '/path/to/apache-persistence:/bitnami/apache'
+      - '/path/to/php-persistence:/bitnami/apache'
    depends_on:
       - mariadb
 ```
