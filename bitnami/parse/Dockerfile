@@ -18,6 +18,14 @@ RUN bitnami-pkg unpack parse-2.3.2-0 --checksum b9e547f7ecf8cf3ece7ff96616e2983b
 
 COPY rootfs /
 
+ENV PARSE_PORT="1337" \
+    PARSE_HOST="127.0.0.1" \
+    PARSE_MOUNT_PATH="/parse" \
+    PARSE_APP_ID="myappID" \
+    PARSE_MASTER_KEY="mymasterKey" \
+    MONGODB_HOST="mongodb" \
+    MONGODB_PORT="27017"
+
 VOLUME ["/bitnami/parse"]
 
 EXPOSE 1337
