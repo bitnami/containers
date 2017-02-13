@@ -20,6 +20,17 @@ RUN bitnami-pkg unpack joomla-3.6.5-0 --checksum a2bc98181e837606497fda3e8e37840
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    JOOMLA_FIRST_NAME="User" \
+    JOOMLA_LAST_NAME="Name" \
+    JOOMLA_USERNAME="user" \
+    JOOMLA_PASSWORD="bitnami" \
+    JOOMLA_EMAIL="user@example.com" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
+
 VOLUME ["/bitnami/joomla", "/bitnami/apache", "/bitnami/php"]
 
 EXPOSE 80 443
