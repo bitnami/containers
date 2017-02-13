@@ -20,6 +20,15 @@ RUN bitnami-pkg unpack orangehrm-3.3.3-1 --checksum 76324ed1ac4c01ea56d5917b6a3f
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    ORANGEHRM_USERNAME="admin" \
+    ORANGEHRM_PASSWORD="bitnami" \
+    SMTP_PROTOCOL="none" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
+
 VOLUME ["/bitnami/orangehrm", "/bitnami/apache"]
 
 EXPOSE 80 443
