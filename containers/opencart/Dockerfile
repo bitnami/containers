@@ -20,6 +20,15 @@ RUN bitnami-pkg unpack opencart-2.3.0.2-3 --checksum 92e9d059beff6cea9df091cc197
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    OPENCART_USERNAME="user" \
+    OPENCART_PASSWORD="bitnami1" \
+    OPENCART_EMAIL="user@example.com" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
+
 VOLUME ["/bitnami/opencart", "/bitnami/apache", "/bitnami/php"]
 
 EXPOSE 80 443
