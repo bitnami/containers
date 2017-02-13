@@ -20,6 +20,16 @@ RUN bitnami-pkg unpack mediawiki-1.28.0-0 --checksum e4a861826983aea2abfd659bd8f
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    MEDIAWIKI_USERNAME="user" \
+    MEDIAWIKI_PASSWORD="bitnami1" \
+    MEDIAWIKI_EMAIL="user@example.com" \
+    MEDIAWIKI_WIKI_NAME="Bitnami MediaWiki" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
+
 VOLUME ["/bitnami/mediawiki", "/bitnami/apache", "/bitnami/php"]
 
 EXPOSE 80 443
