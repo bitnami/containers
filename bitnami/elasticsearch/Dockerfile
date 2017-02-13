@@ -17,6 +17,10 @@ RUN bitnami-pkg unpack elasticsearch-2.4.4-0 --checksum 3c05a4da328a904cf3a694e3
 
 COPY rootfs /
 
+ENV ELASTICSEARCH_PORT="9200" \
+    ELASTICSEARCH_NODE_PORT="9300" \
+    ELASTICSEARCH_CLUSTER_NAME="elasticsearch-cluster"
+
 VOLUME ["/bitnami/elasticsearch"]
 
 EXPOSE 9200 9300
