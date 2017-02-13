@@ -20,6 +20,18 @@ RUN bitnami-pkg unpack osclass-3.7.0-0 --checksum dd52e917849b17e0e665d29c5912ed
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    OSCLASS_PING_ENGINES="1" \
+    OSCLASS_SAVE_STATS="1" \
+    OSCLASS_USERNAME="user" \
+    OSCLASS_PASSWORD="bitnami1" \
+    OSCLASS_WEB_TITLE="Sample Web Page" \
+    OSCLASS_EMAIL="user@example.com" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
+
 VOLUME ["/bitnami/osclass", "/bitnami/apache"]
 
 EXPOSE 80 443
