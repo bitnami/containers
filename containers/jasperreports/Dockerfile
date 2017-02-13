@@ -19,6 +19,13 @@ RUN bitnami-pkg unpack jasperreports-6.3.0-1 --checksum bfb22b415e4b0d33a6306f9a
 
 COPY rootfs /
 
+ENV JASPERREPORTS_USERNAME="user" \
+    JASPERREPORTS_PASSWORD="bitnami" \
+    JASPERREPORTS_EMAIL="user@example.com" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
+
 VOLUME ["/bitnami/jasperreports"]
 
 EXPOSE 8080 8443
