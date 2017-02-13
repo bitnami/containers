@@ -19,6 +19,13 @@ RUN bitnami-pkg unpack discourse-1.6.7-1 --checksum 72f55b76cc4c3e591d7309c18e83
 
 COPY rootfs /
 
+ENV DISCOURSE_USERNAME="user" \
+    DISCOURSE_PASSWORD="bitnami" \
+    DISCOURSE_EMAIL="user@example.com" \
+    POSTGRES_USER="postgres" \
+    POSTGRES_MASTER_HOST="postgresql" \
+    REDIS_MASTER_HOST="redis"
+
 VOLUME ["/bitnami/discourse"]
 
 EXPOSE 3000
