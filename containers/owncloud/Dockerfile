@@ -20,6 +20,15 @@ RUN bitnami-pkg unpack owncloud-9.1.4-0 --checksum c1a546e4d154c89d1f8e963383681
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    OWNCLOUD_USERNAME="user" \
+    OWNCLOUD_PASSWORD="bitnami" \
+    OWNCLOUD_EMAIL="user@example.com" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
+
 VOLUME ["/bitnami/owncloud", "/bitnami/apache", "/bitnami/php"]
 
 EXPOSE 80 443
