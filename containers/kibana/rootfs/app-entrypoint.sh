@@ -14,11 +14,6 @@ function initialize {
     fi
 }
 
-# Set default values
-export KIBANA_PORT=${KIBANA_PORT:-"5601"}
-export KIBANA_ELASTICSEARCH_URL=${KIBANA_ELASTICSEARCH_URL:-"elasticsearch"}
-export KIBANA_ELASTICSEARCH_PORT=${KIBANA_ELASTICSEARCH_PORT:-"9200"}
-
 
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then

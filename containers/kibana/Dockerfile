@@ -14,6 +14,10 @@ RUN bitnami-pkg unpack kibana-4.6.4-1 --checksum ed091cd7153a36c5e786c3c5ce09c10
 
 COPY rootfs /
 
+ENV KIBANA_PORT="5601" \
+    KIBANA_ELASTICSEARCH_URL="elasticsearch" \
+    KIBANA_ELASTICSEARCH_PORT="9200"
+
 VOLUME ["/bitnami/kibana"]
 
 EXPOSE 5601
