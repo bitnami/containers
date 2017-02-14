@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -18,6 +18,13 @@ RUN bitnami-pkg install ruby-2.3.3-1 --checksum 107c8f5e76b77a351cfb7e3e544f9b86
 RUN bitnami-pkg unpack discourse-1.6.7-1 --checksum 72f55b76cc4c3e591d7309c18e837efaaae5a3620321541d8b8322bdc534191c
 
 COPY rootfs /
+
+ENV DISCOURSE_USERNAME="user" \
+    DISCOURSE_PASSWORD="bitnami" \
+    DISCOURSE_EMAIL="user@example.com" \
+    POSTGRES_USER="postgres" \
+    POSTGRES_MASTER_HOST="postgresql" \
+    REDIS_MASTER_HOST="redis"
 
 VOLUME ["/bitnami/discourse"]
 
