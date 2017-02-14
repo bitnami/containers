@@ -20,6 +20,16 @@ RUN bitnami-pkg unpack prestashop-1.7.0.4-0 --checksum 037e8d534599eb28571ce467c
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    PRESTASHOP_FIRST_NAME="Bitnami" \
+    PRESTASHOP_LAST_NAME="User" \
+    PRESTASHOP_PASSWORD="bitnami" \
+    PRESTASHOP_EMAIL="user@example.com" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
+
 VOLUME ["/bitnami/prestashop", "/bitnami/apache", "/bitnami/php"]
 
 EXPOSE 80 443
