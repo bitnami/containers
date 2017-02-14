@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -20,6 +20,15 @@ RUN bitnami-pkg install drush-8.0.5-1 --checksum cdea2d5067ef67bcda7e5cfe96798c2
 RUN bitnami-pkg unpack drupal-8.2.6-0 --checksum a8f874db6aef1e4dae22b2fd88e700b37f405f916ef0e8ad4906f3744e60eec7
 
 COPY rootfs /
+
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    DRUPAL_USERNAME="user" \
+    DRUPAL_PASSWORD="bitnami" \
+    DRUPAL_EMAIL="user@example.com" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
 
 VOLUME ["/bitnami/drupal", "/bitnami/apache", "/bitnami/php"]
 
