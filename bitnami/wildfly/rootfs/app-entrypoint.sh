@@ -12,10 +12,6 @@ function initialize {
     fi
 }
 
-# Set default values
-export WILDFLY_USERNAME=${WILDFLY_USERNAME:-user}
-export WILDFLY_PASSWORD=${WILDFLY_PASSWORD:-bitnami}
-
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
    for module in wildfly; do
     initialize $module
