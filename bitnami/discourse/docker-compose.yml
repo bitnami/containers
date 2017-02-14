@@ -17,10 +17,19 @@ services:
       - redis
     volumes:
       - 'discourse_data:/bitnami/discourse'
+  discourse-sidekiq:
+    image: 'bitnami/discourse:latest'
+    depends_on:
+      - discourse
+    volumes:
+      - 'sidekiq_data:/bitnami/discourse-sidekiq'
+    command: 'nami start --foreground discourse-sidekiq'
 volumes:
   postgresql_data:
     driver: local
   redis_data:
     driver: local
   discourse_data:
+    driver: local
+  sidekiq_data:
     driver: local
