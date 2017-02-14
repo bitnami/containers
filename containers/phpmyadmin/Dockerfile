@@ -19,6 +19,12 @@ RUN bitnami-pkg unpack phpmyadmin-4.6.6-0 --checksum 66fa6e4367448b7256b8f869002
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    REQUIRE_LOCAL="0" \
+    DATABASE_HOST="mariadb" \
+    DATABASE_PORT="3306"
+
 VOLUME ["/bitnami/apache", "/bitnami/php", "/bitnami/phpmyadmin"]
 
 EXPOSE 80 443
