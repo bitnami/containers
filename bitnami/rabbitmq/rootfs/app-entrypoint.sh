@@ -1,31 +1,13 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
+. /opt/bitnami/base/functions
+. /opt/bitnami/base/helpers
 
-function initialize {
-    # Package can be "installed" or "unpacked"
-    status=`nami inspect $1`
-    if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-        # Clean up inputs
-        inputs=""
-        if [[ -f /$1-inputs.json ]]; then
-            inputs=--inputs-file=/$1-inputs.json
-        fi
-        nami initialize $1 $inputs
-    fi
-}
+print_welcome_page
+check_for_updates &
 
-# Set default values
-export RABBITMQ_VHOST=${RABBITMQ_VHOST:-"/"}
-export RABBITMQ_USERNAME=${RABBITMQ_USERNAME:-"user"}
-export RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-"bitnami"}
-export RABBITMQ_NODE_TYPE=${RABBITMQ_NODE_TYPE:-"stats"}
-export RABBITMQ_NODE_PORT=${RABBITMQ_NODE_PORT:-"5672"}
-export RABBITMQ_NODE_NAME=${RABBITMQ_NODE_NAME:-"rabbit@localhost"}
-export RABBITMQ_MANAGER_PORT=${RABBITMQ_MANAGER_PORT:-"15672"}
-
-if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
-   initialize rabbitmq
-   echo "Starting application ..."
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
+  nami_initialize rabbitmq
+  info "Starting rabbitmq..."
 fi
 
-exec /entrypoint.sh "$@"
+exec tini -- "$@"
