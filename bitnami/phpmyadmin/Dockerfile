@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -18,6 +18,12 @@ RUN bitnami-pkg unpack php-5.6.30-1 --checksum 96835743d668832c0b8464711587e5339
 RUN bitnami-pkg unpack phpmyadmin-4.6.6-0 --checksum 66fa6e4367448b7256b8f86900217c914116d42cd6fd5452a3a60aa66c978fc1
 
 COPY rootfs /
+
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    REQUIRE_LOCAL="0" \
+    DATABASE_HOST="mariadb" \
+    DATABASE_PORT="3306"
 
 VOLUME ["/bitnami/apache", "/bitnami/php", "/bitnami/phpmyadmin"]
 
