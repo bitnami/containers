@@ -1,26 +1,13 @@
 #!/bin/bash -e
+. /opt/bitnami/base/functions
+. /opt/bitnami/base/helpers
 
-function initialize {
-    # Package can be "installed" or "unpacked"
-    status=`nami inspect $1`
-    if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-        inputs=""
-        if [[ -f /$1-inputs.json ]]; then
-            inputs=--inputs-file=/$1-inputs.json
-        fi
-        nami initialize $1 $inputs
-    fi
-}
+print_welcome_page
+check_for_updates &
 
-# Set default values
-export WILDFLY_USERNAME=${WILDFLY_USERNAME:-user}
-export WILDFLY_PASSWORD=${WILDFLY_PASSWORD:-bitnami}
-
-if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
-   for module in wildfly; do
-    initialize $module
-   done
-   echo "Starting application ..."
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
+  nami_initialize wildfly
+  info "Starting wildfly..."
 fi
 
-exec /entrypoint.sh "$@"
+exec tini -- "$@"
