@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -19,6 +19,15 @@ RUN bitnami-pkg install libphp-5.6.30-0 --checksum b9689caaab61862444c97756b1a9b
 RUN bitnami-pkg unpack orangehrm-3.3.3-1 --checksum 76324ed1ac4c01ea56d5917b6a3f5610edd69632069f9bb9f156d70f2a143bdc
 
 COPY rootfs /
+
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    ORANGEHRM_USERNAME="admin" \
+    ORANGEHRM_PASSWORD="bitnami" \
+    SMTP_PROTOCOL="none" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
 
 VOLUME ["/bitnami/orangehrm", "/bitnami/apache"]
 
