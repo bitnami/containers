@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -16,6 +16,15 @@ RUN bitnami-pkg install node-4.6.1-1 --checksum 9deada9ba8f67e81843e874947176cea
 RUN bitnami-pkg unpack parse-dashboard-1.0.19-2 --checksum f0bc6bb74120325606f02f84db8213a979318e20ebccfe6e5f6898a553db9f0f
 
 COPY rootfs /
+
+ENV PARSE_HOST="parse" \
+    PARSE_PORT="1337" \
+    PARSE_MOUNT_PATH="/parse" \
+    PARSE_MASTER_KEY="mymasterKey" \
+    PARSE_APP_ID="myappID" \
+    PARSE_DASHBOARD_APP_NAME="MyDashboard" \
+    PARSE_DASHBOARD_USER="user" \
+    PARSE_DASHBOARD_PASSWORD="bitnami"
 
 VOLUME ["/bitnami/parse-dashboard"]
 
