@@ -20,6 +20,16 @@ RUN bitnami-pkg unpack suitecrm-7.8.1-1 --checksum d0f0d2955a6131096ed94eb8e60e1
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    SUITECRM_USERNAME="user" \
+    SUITECRM_LAST_NAME="Name" \
+    SUITECRM_PASSWORD="bitnami" \
+    SUITECRM_EMAIL="user@example.com" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
+
 VOLUME ["/bitnami/suitecrm", "/bitnami/apache", "/bitnami/php"]
 
 EXPOSE 80 443
