@@ -11,11 +11,20 @@ RUN install_packages libc6 libssl1.0.0 zlib1g libxml2 liblzma5 libedit2 libbsd0 
 
 # Install postgresql
 RUN bitnami-pkg unpack postgresql-9.6.2-0 --checksum b706396cc1a435741e4db319f8028d716047cc4d40e6b3418c16944f6661f90f
-ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/sbin:/opt/bitnami/$BITNAMI_APP_NAME/bin:$PATH
+ENV PATH=/opt/bitnami/postgresql/sbin:/opt/bitnami/postgresql/bin:$PATH
 
 COPY rootfs /
 
-VOLUME ["/bitnami/$BITNAMI_APP_NAME"]
+ENV POSTGRESQL_USERNAME=postgres \
+    POSTGRESQL_PASSWORD= \
+    POSTGRESQL_DATABASE= \
+    POSTGRESQL_REPLICATION_MODE=master \
+    POSTGRESQL_REPLICATION_USER= \
+    POSTGRESQL_REPLICATION_PASSWORD= \
+    POSTGRESQL_MASTER_HOST= \
+    POSTGRESQL_MASTER_PORT=5432
+
+VOLUME ["/bitnami/postgresql"]
 
 EXPOSE 5432
 
