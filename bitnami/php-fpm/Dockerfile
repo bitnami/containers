@@ -17,7 +17,7 @@ WORKDIR /app
 
 COPY rootfs/ /
 
-VOLUME ["/bitnami/$BITNAMI_APP_NAME"]
+VOLUME ["/bitnami/php-fpm"]
 
 EXPOSE 9000
 
