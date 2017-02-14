@@ -39,13 +39,21 @@ services:
     depends_on:
       - postgresql
       - redis
-
+  sidekiq:
+    image: 'bitnami/discourse:latest'
+    depends_on:
+      - discourse
+    volumes:
+      - 'sidekiq_data:/bitnami/discourse-sidekiq'
+    command: 'nami start --foreground discourse-sidekiq'
 volumes:
   postgresql_data:
     driver: local
   redis_data:
     driver: local
   discourse_data:
+    driver: local
+  sidekiq_data:
     driver: local
 ```
 
@@ -117,7 +125,14 @@ services:
     depends_on:
       - postgresql
       - redis
-```
+  sidekiq:
+    image: 'bitnami/discourse:latest'
+    depends_on:
+      - discourse
+    volumes:
+      - '/path/to/sidekiq-persistence:/bitnami/discourse-sidekiq'
+    command: 'nami start --foreground discourse-sidekiq'
+    ```
 
 ### Mount persistent folders manually
 
@@ -149,7 +164,16 @@ In this case you need to specify the directories to mount on the run command. Th
 
   *Note:* You need to give the container a name in order to Discourse to resolve the host
 
-4. Run the Discourse container:
+4. Start Sidekiq in the previous network as well:
+
+```
+ $ docker run -d \
+  --net=discourse-tier \
+  --volume /path/to/sidekiq-persistence:/bitnami/discourse-sidekiq \
+  bitnami/discourse nami start --foreground discourse-sidekiq
+```
+
+5. Run the Discourse container:
 
   ```
   $ docker run -d --name discourse -p 80:80 \
@@ -221,6 +245,9 @@ Available variables:
  - `POSTGRES_PASSWORD`: Root password for Postgresql.
  - `POSTGRES_MASTER_HOST`: Hostname for Postgresql server. Default: **postgresql**
  - `POSTGRES_MASTER_PORT`: Port used by Postgresql server. Default: **5432**
+ - `POSTGRESQL_USERNAME`: Discourse application database user. **bn_discourse**
+ - `POSTGRESQL_USERPASSWORD`: Discourse application database password. **bitnami1**
+ - `POSTGRESQL_DATABASE`: Discourse application database name. **bitnami_application**
  - `REDIS_MASTER_HOST`: Hostname for Redis. Default: **redis**
  - `REDIS_MASTER_PORT`: Port used by Redis. Default: **6379**
  - `REDIS_PASSWORD`: Password for Redis.
@@ -268,7 +295,7 @@ information)
 
 # License
 
-Copyright 2016 Bitnami
+Copyright 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
