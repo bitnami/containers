@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -19,6 +19,13 @@ RUN bitnami-pkg install mysql-client-10.1.21-0 --checksum 8e868a3e46bfa59f3fb4e1
 RUN bitnami-pkg unpack testlink-1.9.16-0 --checksum e4c5668210efd907f2a1d490dcf437a0066b0e1ae27ffad4a21d5264aa42718b
 
 COPY rootfs /
+
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    TESTLINK_LANGUAGE="en_US" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
 
 VOLUME ["/bitnami/apache", "/bitnami/testlink", "/bitnami/php"]
 
