@@ -1,28 +1,13 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
+. /opt/bitnami/base/functions
+. /opt/bitnami/base/helpers
 
-function initialize {
-    # Package can be "installed" or "unpacked"
-    status=`nami inspect $1`
-    if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-        # Clean up inputs
-        inputs=""
-        if [[ -f /$1-inputs.json ]]; then
-            inputs=--inputs-file=/$1-inputs.json
-        fi
-        nami initialize $1 $inputs
-    fi
-}
+print_welcome_page
+check_for_updates &
 
-# Set default values
-export JENKINS_USERNAME=${JENKINS_USERNAME:-"user"}
-export JENKINS_PASSWORD=${JENKINS_PASSWORD:-"bitnami"}
-
-
-
-if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
-   initialize jenkins
-   echo "Starting application ..."
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
+  nami_initialize jenkins
+  info "Starting jenkins..."
 fi
 
-exec /entrypoint.sh "$@"
+exec tini -- "$@"

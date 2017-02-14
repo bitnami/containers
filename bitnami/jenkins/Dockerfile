@@ -16,6 +16,9 @@ RUN bitnami-pkg unpack jenkins-2.45-1 --checksum d1621d623f9876661afc24ca16eac15
 
 COPY rootfs /
 
+ENV JENKINS_USERNAME="user" \
+    JENKINS_PASSWORD="bitnami"
+
 VOLUME ["/bitnami/jenkins"]
 
 EXPOSE 8080 8443 50000
