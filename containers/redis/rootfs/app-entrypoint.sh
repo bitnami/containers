@@ -1,28 +1,13 @@
 #!/bin/bash -e
+. /opt/bitnami/base/functions
+. /opt/bitnami/base/helpers
 
-function initialize {
-    # Package can be "installed" or "unpacked"
-    status=`nami inspect $1`
-    if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-        # Clean up inputs
-        inputs=""
-        if [[ -f /$1-inputs.json ]]; then
-            inputs=--inputs-file=/$1-inputs.json
-        fi
-        nami initialize $1 $inputs
-    fi
-}
+print_welcome_page
+check_for_updates &
 
-# Set default values
-export REDIS_PASSWORD=${REDIS_PASSWORD:-}
-export REDIS_REPLICATION_MODE=${REDIS_REPLICATION_MODE:-}
-export REDIS_MASTER_HOST=${REDIS_MASTER_HOST:-}
-export REDIS_MASTER_PORT=${REDIS_MASTER_PORT:-6379}
-export REDIS_MASTER_PASSWORD=${REDIS_MASTER_PASSWORD:-}
-
-if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
-    initialize redis
-    echo "Starting application ..."
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
+  nami_initialize redis
+  info "Starting redis..."
 fi
 
-exec /entrypoint.sh "$@"
+exec tini -- "$@"
