@@ -20,6 +20,17 @@ RUN bitnami-pkg unpack phpbb-3.2.0-0 --checksum 6c85b636641492946e310f59a547a509
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    PHPBB_FIRST_NAME="User" \
+    PHPBB_LAST_NAME="Name" \
+    PHPBB_USERNAME="user" \
+    PHPBB_PASSWORD="bitnami" \
+    PHPBB_EMAIL="user@example.com" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
+
 VOLUME ["/bitnami/phpbb", "/bitnami/apache", "/bitnami/php"]
 
 EXPOSE 80 443
