@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -19,6 +19,17 @@ RUN bitnami-pkg install mysql-client-10.1.21-0 --checksum 8e868a3e46bfa59f3fb4e1
 RUN bitnami-pkg unpack joomla-3.6.5-0 --checksum a2bc98181e837606497fda3e8e37840270fe3d67dedd8353ddea03345dcf7b8d
 
 COPY rootfs /
+
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    JOOMLA_FIRST_NAME="User" \
+    JOOMLA_LAST_NAME="Name" \
+    JOOMLA_USERNAME="user" \
+    JOOMLA_PASSWORD="bitnami" \
+    JOOMLA_EMAIL="user@example.com" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
 
 VOLUME ["/bitnami/joomla", "/bitnami/apache", "/bitnami/php"]
 
