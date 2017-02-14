@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb-buildpack:jessie-r8
+FROM gcr.io/stacksmith-images/minideb-buildpack:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -30,7 +30,9 @@ RUN mkdir /app && chown bitnami: /app /dist
 USER bitnami
 
 WORKDIR /app
+
 EXPOSE 3000
 
 ENTRYPOINT ["/app-entrypoint.sh"]
+
 CMD ["npm", "start"]
