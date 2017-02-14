@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -18,6 +18,13 @@ RUN bitnami-pkg install mysql-client-10.1.19-1 --checksum 2d946c8ee3e2e845f68a5c
 RUN bitnami-pkg unpack jasperreports-6.3.0-1 --checksum bfb22b415e4b0d33a6306f9a6971bc4f69802a46606e0a2cbfc746f09d9831cd
 
 COPY rootfs /
+
+ENV JASPERREPORTS_USERNAME="user" \
+    JASPERREPORTS_PASSWORD="bitnami" \
+    JASPERREPORTS_EMAIL="user@example.com" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
 
 VOLUME ["/bitnami/jasperreports"]
 
