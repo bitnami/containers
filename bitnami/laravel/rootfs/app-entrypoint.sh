@@ -1,5 +1,5 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
+. /opt/bitnami/base/functions
 
 INIT_SEM=/tmp/initialized.sem
 PACKAGE_FILE=/app/composer.json
@@ -38,14 +38,10 @@ setup_db() {
   php artisan migrate
 }
 
-log () {
-  echo -e "\033[0;33m$(date "+%H:%M:%S")\033[0;37m ==> $1."
-}
-
 if [ "${1}" == "php" -a "$2" == "artisan" -a "$3" == "serve" ]; then
   if ! app_present; then
     log "Creating laravel application"
-    \cp -r /tmp/app/ /
+    cp -r /tmp/app/ /
   fi
 
   if ! dependencies_up_to_date; then
@@ -72,4 +68,4 @@ if [ "${1}" == "php" -a "$2" == "artisan" -a "$3" == "serve" ]; then
   fi
 fi
 
-exec /entrypoint.sh "$@"
+exec tini -- "$@"
