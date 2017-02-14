@@ -1,5 +1,9 @@
 #!/bin/bash -e
+. /opt/bitnami/base/functions
 . /opt/bitnami/express/functions
+
+print_welcome_page
+check_for_updates &
 
 if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
   bootstrap_express_app
@@ -29,4 +33,4 @@ if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
   touch $INIT_SEM
 fi
 
-exec /entrypoint.sh "$@"
+exec tini -- "$@"
