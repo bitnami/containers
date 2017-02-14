@@ -1,36 +1,13 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
+. /opt/bitnami/base/functions
+. /opt/bitnami/base/helpers
 
-function initialize {
-    # Package can be "installed" or "unpacked"
-    status=`nami inspect $1`
-    if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-        # Clean up inputs
-        inputs=""
-        if [[ -f /$1-inputs.json ]]; then
-            inputs=--inputs-file=/$1-inputs.json
-        fi
-        nami initialize $1 $inputs
-    fi
-}
+print_welcome_page
+check_for_updates &
 
-# Set default values
-export APACHE_HTTP_PORT=${APACHE_HTTP_PORT:-"80"}
-export APACHE_HTTPS_PORT=${APACHE_HTTPS_PORT:-"443"}
-export PHPBB_FIRST_NAME=${PHPBB_FIRST_NAME:-"User"}
-export PHPBB_LAST_NAME=${PHPBB_LAST_NAME:-"Name"}
-export PHPBB_USERNAME=${PHPBB_USERNAME:-"user"}
-export PHPBB_PASSWORD=${PHPBB_PASSWORD:-"bitnami"}
-export PHPBB_EMAIL=${PHPBB_EMAIL:-"user@example.com"}
-export MARIADB_USER=${MARIADB_USER:-"root"}
-export MARIADB_HOST=${MARIADB_HOST:-"mariadb"}
-export MARIADB_PORT=${MARIADB_PORT:-"3306"}
-
-if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
-   for module in apache php phpbb; do
-    initialize $module
-   done
-   echo "Starting application ..."
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
+  nami_initialize apache php phpbb
+  info "Starting phpbb..."
 fi
 
-exec /entrypoint.sh "$@"
+exec tini -- "$@"
