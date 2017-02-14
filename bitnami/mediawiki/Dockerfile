@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -19,6 +19,16 @@ RUN bitnami-pkg install libphp-5.6.30-0 --checksum b9689caaab61862444c97756b1a9b
 RUN bitnami-pkg unpack mediawiki-1.28.0-0 --checksum e4a861826983aea2abfd659bd8f4f7c648bf2d05da1df2d3be0f900ed5d99be1
 
 COPY rootfs /
+
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    MEDIAWIKI_USERNAME="user" \
+    MEDIAWIKI_PASSWORD="bitnami1" \
+    MEDIAWIKI_EMAIL="user@example.com" \
+    MEDIAWIKI_WIKI_NAME="Bitnami MediaWiki" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
 
 VOLUME ["/bitnami/mediawiki", "/bitnami/apache", "/bitnami/php"]
 
