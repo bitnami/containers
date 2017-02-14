@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -13,6 +13,10 @@ RUN install_packages libc6 libstdc++6 libgcc1
 RUN bitnami-pkg unpack kibana-4.6.4-1 --checksum ed091cd7153a36c5e786c3c5ce09c10d8a68a027458ad1811da5a2a8275158a1
 
 COPY rootfs /
+
+ENV KIBANA_PORT="5601" \
+    KIBANA_ELASTICSEARCH_URL="elasticsearch" \
+    KIBANA_ELASTICSEARCH_PORT="9200"
 
 VOLUME ["/bitnami/kibana"]
 
