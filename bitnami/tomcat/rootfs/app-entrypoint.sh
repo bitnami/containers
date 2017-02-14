@@ -1,30 +1,13 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
+. /opt/bitnami/base/functions
+. /opt/bitnami/base/helpers
 
-function initialize {
-    # Package can be "installed" or "unpacked"
-    status=`nami inspect $1`
-    if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-        # Clean up inputs
-        inputs=""
-        if [[ -f /$1-inputs.json ]]; then
-            inputs=--inputs-file=/$1-inputs.json
-        fi
-        nami initialize $1 $inputs
-    fi
-}
+print_welcome_page
+check_for_updates &
 
-# Set default values
-export TOMCAT_SHUTDOWN_PORT=${TOMCAT_SHUTDOWN_PORT:-"8005"}
-export TOMCAT_HTTP_PORT=${TOMCAT_HTTP_PORT:-"8080"}
-export TOMCAT_AJP_PORT=${TOMCAT_AJP_PORT:-"8009"}
-export JAVA_OPTS=${JAVA_OPTS:-"-Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8"}
-export TOMCAT_USERNAME=${TOMCAT_USERNAME:-"user"}
-export TOMCAT_ALLOW_REMOTE_MANAGEMENT=${TOMCAT_ALLOW_REMOTE_MANAGEMENT:-"0"}
-
-if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
-   initialize tomcat
-   echo "Starting application ..."
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
+  nami_initialize tomcat
+  info "Starting tomcat..."
 fi
 
-exec /entrypoint.sh "$@"
+exec tini -- "$@"
