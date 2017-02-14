@@ -1,19 +1,13 @@
 #!/bin/bash -e
+. /opt/bitnami/base/functions
+. /opt/bitnami/base/helpers
 
-function initialize {
-    # Package can be "installed" or "unpacked"
-    status=`nami inspect $1`
-    if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-        inputs=""
-        if [[ -f /$1-inputs.json ]]; then
-            inputs=--inputs-file=/$1-inputs.json
-        fi
-        nami initialize $1 $inputs
-    fi
-}
+print_welcome_page
+check_for_updates &
 
-for module in node; do
-  initialize $module
-done
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
+  nami_initialize node
+  info "Starting node..."
+fi
 
-exec /entrypoint.sh "$@"
+exec tini -- "$@"
