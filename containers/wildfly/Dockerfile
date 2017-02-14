@@ -14,14 +14,19 @@ ENV PATH=/opt/bitnami/java/bin:$PATH
 
 # Install wildfly
 RUN bitnami-pkg unpack wildfly-10.1.0-1 --checksum dc2f3143f6704cc1b9e285b4475f0aea1adf89ce819e8231702235dba2a7f9ba
-RUN ln -sf /opt/bitnami/$BITNAMI_APP_NAME/data /app
+RUN ln -sf /opt/bitnami/wildfly/data /app
 
-ENV PATH=/opt/bitnami/$BITNAMI_APP_NAME/bin:$PATH
+ENV PATH=/opt/bitnami/wildfly/bin:$PATH
 
 COPY rootfs/ /
+
+ENV WILDFLY_USERNAME=user \
+    WILDFLY_PASSWORD=bitnami
+
 ENTRYPOINT ["/app-entrypoint.sh"]
+
 CMD ["nami", "start", "--foreground", "wildfly"]
 
-VOLUME ["/bitnami/$BITNAMI_APP_NAME"]
+VOLUME ["/bitnami/wildfly"]
 
 EXPOSE 8080 9990
