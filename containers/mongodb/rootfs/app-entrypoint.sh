@@ -1,34 +1,13 @@
 #!/bin/bash -e
+. /opt/bitnami/base/functions
+. /opt/bitnami/base/helpers
 
-function initialize {
-    # Package can be "installed" or "unpacked"
-    status=`nami inspect $1`
-    if [[ "$status" == *'"lifecycle": "unpacked"'* ]]; then
-        # Clean up inputs
-        inputs=""
-        if [[ -f /$1-inputs.json ]]; then
-            inputs=--inputs-file=/$1-inputs.json
-        fi
-        nami initialize $1 $inputs
-    fi
-}
+print_welcome_page
+check_for_updates &
 
-# Set default values
-export MONGODB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD:-}
-export MONGODB_USERNAME=${MONGODB_USERNAME:-}
-export MONGODB_PASSWORD=${MONGODB_PASSWORD:-}
-export MONGODB_DATABASE=${MONGODB_DATABASE:-}
-export MONGODB_REPLICA_SET_MODE=${MONGODB_REPLICA_SET_MODE:-}
-export MONGODB_REPLICA_SET_NAME=${MONGODB_REPLICA_SET_NAME:-}
-export MONGODB_REPLICA_SET_KEY=${MONGODB_REPLICA_SET_KEY:-}
-export MONGODB_PRIMARY_HOST=${MONGODB_PRIMARY_HOST:-}
-export MONGODB_PRIMARY_PORT=${MONGODB_PRIMARY_PORT:-27017}
-export MONGODB_PRIMARY_ROOT_USER=${MONGODB_PRIMARY_ROOT_USER:-root}
-export MONGODB_PRIMARY_ROOT_PASSWORD=${MONGODB_PRIMARY_ROOT_PASSWORD:-}
-
-if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
-    initialize mongodb
-    echo "Starting application ..."
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
+  nami_initialize mongodb
+  info "Starting mongodb..."
 fi
 
-exec /entrypoint.sh "$@"
+exec tini -- "$@"
