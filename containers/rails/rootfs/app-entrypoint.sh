@@ -1,5 +1,5 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
+. /opt/bitnami/base/functions
 
 INIT_SEM=/tmp/initialized.sem
 
@@ -40,10 +40,6 @@ migrate_db() {
   bundle exec rails db:migrate
 }
 
-log () {
-  echo -e "\033[0;33m$(date "+%H:%M:%S")\033[0;37m ==> $1."
-}
-
 if [ "$1" == "bundle" -a "$2" == "exec" ]; then
   if ! app_present; then
     log "Creating rails application"
@@ -80,4 +76,4 @@ if [ "$1" == "bundle" -a "$2" == "exec" ]; then
   [[ -z $SKIP_DB_SETUP ]] && migrate_db
 fi
 
-exec /entrypoint.sh "$@"
+exec tini -- "$@"
