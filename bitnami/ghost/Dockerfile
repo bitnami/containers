@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -17,6 +17,15 @@ RUN bitnami-pkg install node-4.7.2-0 --checksum b814eaeeee872c8629432d3e950570eb
 RUN bitnami-pkg unpack ghost-0.11.4-0 --checksum 0094a80415a6a58d31fdbf2e8698099e7a4d813fa4070d474e3c30113ffbad9d
 
 COPY rootfs /
+
+ENV GHOST_PORT="80" \
+    GHOST_USERNAME="user" \
+    GHOST_PASSWORD="bitnami1" \
+    GHOST_EMAIL="user@example.com" \
+    BLOG_TITLE="User's Blog" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
 
 VOLUME ["/bitnami/ghost"]
 
