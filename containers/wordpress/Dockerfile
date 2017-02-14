@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -19,6 +19,18 @@ RUN bitnami-pkg install mysql-client-10.1.21-0 --checksum 8e868a3e46bfa59f3fb4e1
 RUN bitnami-pkg unpack wordpress-4.7.2-0 --checksum 6e45638290a08c81abe0fd67f53581bb6adaf98df441c35cc6643180bf6241da
 
 COPY rootfs /
+
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    WORDPRESS_USERNAME="user" \
+    WORDPRESS_PASSWORD="bitnami" \
+    WORDPRESS_EMAIL="user@example.com" \
+    WORDPRESS_FIRST_NAME="FirstName" \
+    WORDPRESS_LAST_NAME="LastName" \
+    WORDPRESS_BLOG_NAME="User's Blog!" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
 
 VOLUME ["/bitnami/wordpress", "/bitnami/apache", "/bitnami/php"]
 
