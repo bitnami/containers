@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -17,6 +17,16 @@ RUN bitnami-pkg install java-1.8.0_121-0 --checksum 2743f753fd1ea88bf90352d95694
 RUN bitnami-pkg unpack cassandra-3.10-0 --checksum 548dd6e6ccdc22e6c479a0f914b50d44fce948383536a1e6d6abe3dd82a39fa0
 
 COPY rootfs /
+
+ENV CASSANDRA_CLUSTER_NAME="My Cluster" \
+    CASSANDRA_TRANSPORT_PORT="7000" \
+    CASSANDRA_SSL_TRANSPORT_PORT="7001" \
+    CASSANDRA_JMX_PORT="7199" \
+    CASSANDRA_CQL_PORT="9042" \
+    CASSANDRA_RPC_PORT="9160" \
+    CASSANDRA_USER="cassandra" \
+    CASSANDRA_PASSWORD="cassandra" \
+    CASSANDRA_ENDPOINT_SNITCH="SimpleSnitch"
 
 VOLUME ["/bitnami/cassandra"]
 
