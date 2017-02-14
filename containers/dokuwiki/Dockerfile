@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -18,6 +18,14 @@ RUN bitnami-pkg install libphp-5.6.30-0 --checksum b9689caaab61862444c97756b1a9b
 RUN bitnami-pkg unpack dokuwiki-20160626a-0 --checksum dc458acf5ca9c4ab188938fcb7598547ad8ce9fef54e0d7515e6690e355f3d11
 
 COPY rootfs /
+
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    DOKUWIKI_USERNAME="superuser" \
+    DOKUWIKI_FULL_NAME="Full Name" \
+    DOKUWIKI_PASSWORD="bitnami1" \
+    DOKUWIKI_EMAIL="user@example.com" \
+    DOKUWIKI_WIKI_NAME="Bitnami DokuWiki"
 
 VOLUME ["/bitnami/dokuwiki", "/bitnami/apache"]
 
