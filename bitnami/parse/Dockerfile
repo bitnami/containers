@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -17,6 +17,14 @@ RUN bitnami-pkg install mongodb-client-3.4.1-0 --checksum fcf8ccf8982420a91190ca
 RUN bitnami-pkg unpack parse-2.3.2-0 --checksum b9e547f7ecf8cf3ece7ff96616e2983ba7ef2d18393150bddadc23ab030f454e
 
 COPY rootfs /
+
+ENV PARSE_PORT="1337" \
+    PARSE_HOST="127.0.0.1" \
+    PARSE_MOUNT_PATH="/parse" \
+    PARSE_APP_ID="myappID" \
+    PARSE_MASTER_KEY="mymasterKey" \
+    MONGODB_HOST="mongodb" \
+    MONGODB_PORT="27017"
 
 VOLUME ["/bitnami/parse"]
 
