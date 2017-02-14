@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -18,6 +18,12 @@ RUN bitnami-pkg install node-6.9.4-0 --checksum aa0fe4923ece714285ed4ed63877e769
 RUN bitnami-pkg unpack odoo-10.0.20170115-0 --checksum d96cf72a3f1bbf43e92569eb70a5cd0cf9a22aea2a46ddb29f5ae94b82bf3114
 
 COPY rootfs /
+
+ENV ODOO_PASSWORD="bitnami" \
+    ODOO_EMAIL="user@example.com" \
+    POSTGRESQL_USER="postgres" \
+    POSTGRESQL_HOST="postgresql" \
+    POSTGRESQL_PORT="5432"
 
 VOLUME ["/bitnami/odoo"]
 
