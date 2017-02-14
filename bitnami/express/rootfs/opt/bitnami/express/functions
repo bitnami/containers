@@ -1,11 +1,8 @@
 #!/bin/bash
+. /opt/bitnami/base/functions
 
 INIT_SEM=/tmp/initialized.sem
 PACKAGE_FILE=/app/package.json
-
-log() {
-  echo -e "\033[0;33m$(date "+%H:%M:%S")\033[0;37m ==> $1"
-}
 
 fresh_container() {
   [ ! -f $INIT_SEM ]
@@ -30,19 +27,19 @@ __wait_for_db() {
   local port=$2
   local ip_address=$(getent hosts $1 | awk '{ print $1 }')
 
-  log "Connecting to at $host server at $ip_address:$port."
+  info "Connecting to at $host server at $ip_address:$port."
 
   counter=0
   until nc -z $ip_address $port; do
     counter=$((counter+1))
     if [ $counter == 10 ]; then
-      log "Error: Couldn't connect to $host server."
+      error "Couldn't connect to $host server."
       return 1
     fi
-    log "Trying to connect to $host server at $ip_address:$port. Attempt $counter."
+    info "Trying to connect to $host server at $ip_address:$port. Attempt $counter."
     sleep 5
   done
-  log "Connected to $host server."
+  info "Connected to $host server."
 }
 
 wait_for_db() {
@@ -67,7 +64,7 @@ wait_for_db() {
 
 add_sample_code() {
   if ! [[ -n $SKIP_SAMPLE_CODE && $SKIP_SAMPLE_CODE -gt 0 ]]; then
-    log "Adding dist samples."
+    info "Adding dist samples."
     cp -r /dist/samples .
   fi
 }
@@ -75,38 +72,38 @@ add_sample_code() {
 add_database_support() {
   if database_tier_exists; then
     if getent hosts mongodb >/dev/null && ! npm ls mongodb >/dev/null; then
-      log "Adding mongodb npm module."
+      info "Adding mongodb npm module."
       npm install --save mongodb
     fi
 
     if getent hosts mariadb >/dev/null && ! npm ls mysql >/dev/null || getent hosts mysql >/dev/null && ! npm ls mysql >/dev/null; then
-      log "Adding mysql npm module."
+      info "Adding mysql npm module."
       npm install --save mysql
     fi
 
     if getent hosts postgresql >/dev/null && ! npm ls pg pg-hstore >/dev/null; then
-      log "Adding pg pg-hstore npm modules."
+      info "Adding pg pg-hstore npm modules."
       npm install --save pg pg-hstore
     fi
   fi
 }
 
 add_nodemon_support() {
-  log "Adding nodemon npm module (dev)."
+  info "Adding nodemon npm module (dev)."
   npm install nodemon --save-dev
   sed -i 's;"start".*;"start": "node ./bin/www", "development": "nodemon ./bin/www";' package.json
 }
 
 bootstrap_express_app() {
   if ! app_present; then
-    log "Creating express application."
+    info "Creating express application."
     express . -f
 
     add_database_support
     add_nodemon_support
     add_sample_code
   else
-    log "Skipping creation of new application. Already exists!"
+    info "Skipping creation of new application. Already exists!"
   fi
 }
 
@@ -125,12 +122,12 @@ add_dockerfile() {
 install_packages() {
   if ! dependencies_up_to_date; then
     if ! [[ -n $SKIP_NPM_INSTALL && $SKIP_NPM_INSTALL -gt 0 ]] && [[ -f package.json ]]; then
-      log "Installing npm packages."
+      info "Installing npm packages."
       npm install
     fi
 
     if ! [[ -n $SKIP_BOWER_INSTALL && $SKIP_BOWER_INSTALL -gt 0 ]] && [[ -f bower.json ]]; then
-      log "Installing bower packages."
+      info "Installing bower packages."
       bower install
     fi
   fi
@@ -138,7 +135,7 @@ install_packages() {
 
 migrate_db() {
   if ! [[ -n $SKIP_DB_MIGRATE && $SKIP_DB_MIGRATE -gt 0 ]] && [[ -f .sequelizerc ]]; then
-    log "Applying database migrations (sequelize db:migrate)."
+    info "Applying database migrations (sequelize db:migrate)."
     sequelize db:migrate
   fi
 }
