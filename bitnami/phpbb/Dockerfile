@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -19,6 +19,17 @@ RUN bitnami-pkg install mysql-client-10.1.21-0 --checksum 8e868a3e46bfa59f3fb4e1
 RUN bitnami-pkg unpack phpbb-3.2.0-0 --checksum 6c85b636641492946e310f59a547a5095d724a11a1b434b7a25ae9da30e8aab6
 
 COPY rootfs /
+
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    PHPBB_FIRST_NAME="User" \
+    PHPBB_LAST_NAME="Name" \
+    PHPBB_USERNAME="user" \
+    PHPBB_PASSWORD="bitnami" \
+    PHPBB_EMAIL="user@example.com" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
 
 VOLUME ["/bitnami/phpbb", "/bitnami/apache", "/bitnami/php"]
 
