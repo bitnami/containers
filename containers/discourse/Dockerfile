@@ -11,8 +11,8 @@ RUN install_packages zlib1g libssl1.0.0 libc6 libcurl3 libidn11 librtmp1 libssh2
 
 # Additional modules required
 RUN bitnami-pkg install git-2.10.1-1 --checksum 454e9eb6fb781c8d492f9937439dcdfc1a931959d948d4c70e79716d2ea51a2b
-RUN bitnami-pkg install postgresql-client-9.6.1-1 --checksum 9a793e2413490cdf5f9fdd1e9923f7a30ee196b5348a11583c1a4136893f39f8
-RUN bitnami-pkg install discourse-sidekiq-1.7.2-0 --checksum 1f79a5eab328d444b14f598f686d9548b57865737949853e77d20e1190604a7f
+RUN bitnami-pkg unpack postgresql-client-9.6.2-1 --checksum 363d32e555bb33e1e13c744d6921a91d933d7e54a5c990b2e66f4e12ec91e442
+RUN bitnami-pkg unpack discourse-sidekiq-1.7.2-0 --checksum 1f79a5eab328d444b14f598f686d9548b57865737949853e77d20e1190604a7f
 RUN bitnami-pkg install ruby-2.3.3-1 --checksum 107c8f5e76b77a351cfb7e3e544f9b86b8633eae563f179349137cab70b8d841
 
 # Install discourse
@@ -25,9 +25,14 @@ ENV DISCOURSE_USERNAME="user" \
     DISCOURSE_EMAIL="user@example.com" \
     POSTGRES_USER="postgres" \
     POSTGRES_MASTER_HOST="postgresql" \
-    REDIS_MASTER_HOST="redis"
+    REDIS_MASTER_HOST="redis" \
+    POSTGRESQL_USERNAME="bn_discourse" \
+    POSTGRESQL_USERPASSWORD="bitnami1" \
+    POSTGRESQL_DATABASE="bitnami_application"
 
 VOLUME ["/bitnami/discourse"]
+
+VOLUME ["/bitnami/discourse-sidekiq"]
 
 EXPOSE 3000
 
