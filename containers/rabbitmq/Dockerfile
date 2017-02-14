@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -17,8 +17,15 @@ RUN bitnami-pkg unpack rabbitmq-3.6.6-2 --checksum a45b57ff8ba832ef005721f120270
 
 COPY rootfs /
 
-VOLUME ["/bitnami/rabbitmq"]
+ENV RABBITMQ_VHOST="/" \
+    RABBITMQ_USERNAME="user" \
+    RABBITMQ_PASSWORD="bitnami" \
+    RABBITMQ_NODE_TYPE="stats" \
+    RABBITMQ_NODE_PORT="5672" \
+    RABBITMQ_NODE_NAME="rabbit@localhost" \
+    RABBITMQ_MANAGER_PORT="15672"
 
+VOLUME ["/bitnami/rabbitmq"]
 
 EXPOSE 4369 5672 25672 15672
 
