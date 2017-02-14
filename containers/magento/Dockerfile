@@ -20,6 +20,19 @@ RUN bitnami-pkg unpack magento-2.1.4-0 --checksum 6a21ef346ed6e1958d9d76e6def814
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    MAGENTO_USERNAME="user" \
+    MAGENTO_PASSWORD="bitnami1" \
+    MAGENTO_EMAIL="user@example.com" \
+    MAGENTO_ADMINURI="admin" \
+    MAGENTO_FIRSTNAME="FirstName" \
+    MAGENTO_LASTNAME="LastName" \
+    MAGENTO_MODE="developer" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
+
 VOLUME ["/bitnami/magento", "/bitnami/apache", "/bitnami/php"]
 
 EXPOSE 80 443
