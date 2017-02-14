@@ -20,6 +20,17 @@ RUN bitnami-pkg unpack piwik-3.0.1-1 --checksum 3aa07439de1be1190b4ecbbc8b76d968
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    PIWIK_USERNAME="User" \
+    PIWIK_PASSWORD="bitnami" \
+    PIWIK_EMAIL="user@example.com" \
+    PIWIK_WEBSITE_NAME="example" \
+    PIWIK_WEBSITE_HOST="https://example.org" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
+
 VOLUME ["/bitnami/piwik", "/bitnami/apache", "/bitnami/php"]
 
 EXPOSE 80 443
