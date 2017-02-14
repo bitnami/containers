@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-discourse/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-discourse/tree/master)
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/discourse)](https://hub.docker.com/r/bitnami/discourse/)
 # What is Discourse?
 
 > Discourse is the next-next-generation community forum platform. Discourse has a thoroughly modern design and is written in JavaScript. Page loads are very fast and new content is loaded as the user scrolls down the page. Discourse allows you to create categories, tag posts, manage notifications, create user profiles, and includes features to let communities govern themselves by voting out trolls and spammers. Discourse is built for mobile from the ground up and support high-res devices.
