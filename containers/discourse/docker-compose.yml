@@ -9,7 +9,7 @@ services:
     volumes:
       - 'redis_data:/bitnami/redis'
   discourse:
-    image: 'bitnami/discourse:latest'
+    build: .
     ports:
       - '80:3000'
     depends_on:
@@ -17,10 +17,19 @@ services:
       - redis
     volumes:
       - 'discourse_data:/bitnami/discourse'
+  sidekiq:
+    build: .
+    depends_on:
+      - discourse
+    volumes:
+      - 'sidekiq_data:/bitnami/discourse-sidekiq'
+    command: 'nami start --foreground discourse-sidekiq'
 volumes:
   postgresql_data:
     driver: local
   redis_data:
     driver: local
   discourse_data:
+    driver: local
+  sidekiq_data:
     driver: local
