@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -19,6 +19,15 @@ RUN bitnami-pkg install mysql-client-10.1.21-0 --checksum 8e868a3e46bfa59f3fb4e1
 RUN bitnami-pkg unpack owncloud-9.1.4-0 --checksum c1a546e4d154c89d1f8e96338368124c8e5b3dc63f05da079bec91b1ec7ef7e5
 
 COPY rootfs /
+
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    OWNCLOUD_USERNAME="user" \
+    OWNCLOUD_PASSWORD="bitnami" \
+    OWNCLOUD_EMAIL="user@example.com" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
 
 VOLUME ["/bitnami/owncloud", "/bitnami/apache", "/bitnami/php"]
 
