@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -19,6 +19,15 @@ RUN bitnami-pkg install libphp-7.1.1-0 --checksum 44dcbd3692c4de97638bb8830619f3
 RUN bitnami-pkg unpack moodle-3.2.1-0 --checksum eebfb4df5bf66921373405a606f95d51eff911fea2f4b55440256b6c5624f448
 
 COPY rootfs /
+
+ENV MOODLE_USERNAME="user" \
+    MOODLE_PASSWORD="bitnami" \
+    MOODLE_EMAIL="user@example.com" \
+    MOODLE_LANGUAGE="en" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306" \
+    MOODLE_SITENAME="New Site"
 
 VOLUME ["/bitnami/moodle", "/bitnami/apache", "/bitnami/php"]
 
