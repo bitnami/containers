@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -19,6 +19,15 @@ RUN bitnami-pkg install mysql-client-10.1.21-0 --checksum 8e868a3e46bfa59f3fb4e1
 RUN bitnami-pkg unpack opencart-2.3.0.2-3 --checksum 92e9d059beff6cea9df091cc197bcd093642f2e630d331bd33a0fb141f7cf969
 
 COPY rootfs /
+
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    OPENCART_USERNAME="user" \
+    OPENCART_PASSWORD="bitnami1" \
+    OPENCART_EMAIL="user@example.com" \
+    MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306"
 
 VOLUME ["/bitnami/opencart", "/bitnami/apache", "/bitnami/php"]
 
