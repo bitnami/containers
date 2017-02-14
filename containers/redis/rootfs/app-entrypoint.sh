@@ -13,13 +13,6 @@ function initialize {
     fi
 }
 
-# Set default values
-export REDIS_PASSWORD=${REDIS_PASSWORD:-}
-export REDIS_REPLICATION_MODE=${REDIS_REPLICATION_MODE:-}
-export REDIS_MASTER_HOST=${REDIS_MASTER_HOST:-}
-export REDIS_MASTER_PORT=${REDIS_MASTER_PORT:-6379}
-export REDIS_MASTER_PASSWORD=${REDIS_MASTER_PASSWORD:-}
-
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then
     initialize redis
     echo "Starting application ..."
