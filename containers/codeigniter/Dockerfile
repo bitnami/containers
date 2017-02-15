@@ -26,6 +26,11 @@ RUN bitnami-pkg install codeigniter-3.1.3-0 --checksum 5d653ed41a2bf4f78818f5cb2
 
 COPY rootfs /
 
+ENV MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306" \
+    CODEIGNITER_PROJECT_NAME="myapp"
+
 WORKDIR /app
 
 EXPOSE 8000
