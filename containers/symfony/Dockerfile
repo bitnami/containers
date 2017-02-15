@@ -25,11 +25,15 @@ RUN bitnami-pkg install symfony-3.2.4-0 --checksum 5717ecd1f05745befa8ca0a746a5f
 
 COPY rootfs /
 
-EXPOSE 8000
+ENV MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306" \
+    SYMFONY_PROJECT_NAME="myapp" \
+    TERM=xterm
 
 WORKDIR /app
 
-ENV TERM=xterm
+EXPOSE 8000
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
