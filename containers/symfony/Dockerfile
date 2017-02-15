@@ -1,10 +1,3 @@
-## BUILDING
-##   (from project root directory)
-##   $ docker build -t bitnami/bitnami-docker-symfony .
-##
-## RUNNING
-##   $ docker run -p 8000:8000 bitnami/bitnami-docker-symfony
-
 FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
