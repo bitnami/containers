@@ -1,12 +1,6 @@
 #!/bin/bash
 set -e
 
-# Set default values
-export MARIADB_USER=${MARIADB_USER:-"root"}
-export MARIADB_HOST=${MARIADB_HOST:-"mariadb"}
-export MARIADB_PORT=${MARIADB_PORT:-"3306"}
-export CODEIGNITER_PROJECT_NAME=${CODEIGNITER_PROJECT_NAME:-"myapp"}
-
 PROJECT_DIRECTORY=/app/$CODEIGNITER_PROJECT_NAME
 DEPLOY="$@"
 
