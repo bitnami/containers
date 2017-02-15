@@ -9,7 +9,7 @@ services:
     volumes:
       - 'redis_data:/bitnami/redis'
   discourse:
-    build: .
+    image: 'bitnami/discourse:latest'
     ports:
       - '80:3000'
     depends_on:
@@ -18,7 +18,7 @@ services:
     volumes:
       - 'discourse_data:/bitnami/discourse'
   sidekiq:
-    build: .
+    image: 'bitnami/discourse:latest'
     depends_on:
       - discourse
     volumes:
