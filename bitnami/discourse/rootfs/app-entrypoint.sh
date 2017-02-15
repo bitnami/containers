@@ -7,8 +7,7 @@ check_for_updates &
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
     if [[ "x$4" == "xdiscourse" ]]; then
-        nami --log-level trace8 initialize postgresql-client --inputs-file=/postgresql-client-inputs.json
-        nami_initialize  discourse
+        nami_initialize postgresql-client discourse
     elif [[ "x$4" == "xdiscourse-sidekiq" ]] ; then
         nami_initialize discourse-sidekiq
     else
