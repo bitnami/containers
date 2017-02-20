@@ -1,11 +1,4 @@
-## BUILDING
-##   (from project root directory)
-##   $ docker build -t bitnami/bitnami-docker-codeigniter .
-##
-## RUNNING
-##   $ docker run -p 8000:8000 bitnami/bitnami-docker-codeigniter
-
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r9
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -25,6 +18,11 @@ RUN bitnami-pkg install mariadb-10.1.20-0 --checksum 7409ba139885bc4f463233a2508
 RUN bitnami-pkg install codeigniter-3.1.3-0 --checksum 5d653ed41a2bf4f78818f5cb2c249fba83b9f041ca72a8d7a5f7c9c6d9d51131
 
 COPY rootfs /
+
+ENV MARIADB_USER="root" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PORT="3306" \
+    CODEIGNITER_PROJECT_NAME="myapp"
 
 WORKDIR /app
 
