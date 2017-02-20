@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r9
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=parse \
-    BITNAMI_IMAGE_VERSION=2.3.3-r0 \
+    BITNAMI_IMAGE_VERSION=2.3.5-r0 \
     PATH=/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:$PATH
 
 # System packages required
@@ -14,7 +14,7 @@ RUN bitnami-pkg install node-4.7.3-0 --checksum dc501d2f9e59fdfe757a879177e0a19f
 RUN bitnami-pkg install mongodb-client-3.4.2-0 --checksum 00ebd7cd04b9471d0c2a07ab2e707aa34fe4958299937c97bd088a10c7376e99
 
 # Install parse
-RUN bitnami-pkg unpack parse-2.3.3-0 --checksum 66fa03dbb1417099148c13ad0f61bd15241096791a67229a6f098ad3341a5bf4
+RUN bitnami-pkg unpack parse-2.3.5-0 --checksum f573e53cc7fc8464930f32baa3478facebd9ffff8db8fa3527c29b49d48fc06c
 
 COPY rootfs /
 
