@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    volumes:
+      - 'mariadb_data:/bitnami/mariadb'
+  drupal:
+    image: 'bitnami/drupal:8'
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - 'drupal_data:/bitnami/drupal'
+      - 'apache_data:/bitnami/apache'
+      - 'php_data:/bitnami/php'
+    depends_on:
+      - mariadb
+volumes:
+  mariadb_data:
+    driver: local
+  drupal_data:
+    driver: local
+  apache_data:
+    driver: local
+  php_data:
+    driver: local
