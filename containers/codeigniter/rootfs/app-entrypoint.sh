@@ -1,18 +1,11 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
+. /opt/bitnami/base/functions
 
-# Set default values
-export MARIADB_USER=${MARIADB_USER:-"root"}
-export MARIADB_HOST=${MARIADB_HOST:-"mariadb"}
-export MARIADB_PORT=${MARIADB_PORT:-"3306"}
-export CODEIGNITER_PROJECT_NAME=${CODEIGNITER_PROJECT_NAME:-"myapp"}
+print_welcome_page
+check_for_updates &
 
 PROJECT_DIRECTORY=/app/$CODEIGNITER_PROJECT_NAME
 DEPLOY="$@"
-
-log () {
-    echo -e "\033[0;33m$(date "+%H:%M:%S")\033[0;37m ==> $1."
-}
 
 nami restart mariadb
 echo "Starting application ..."
@@ -29,4 +22,4 @@ if [ "$1" == "php" -a "$2" == "-S" ] ; then
   DEPLOY="$@ -t $PROJECT_DIRECTORY"
 fi
 
-exec /entrypoint.sh $DEPLOY
+exec tini -- $DEPLOY
