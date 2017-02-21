@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/minideb:jessie-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=1.4.34-r0 \
+ENV BITNAMI_IMAGE_VERSION=1.4.34-r1 \
     BITNAMI_APP_NAME=memcached \
     PATH=/opt/bitnami/memcached/bin:$PATH
 
