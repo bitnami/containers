@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=piwik \
-    BITNAMI_IMAGE_VERSION=3.0.1-r1 \
+    BITNAMI_IMAGE_VERSION=3.0.1-r2 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
