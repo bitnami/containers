@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=dokuwiki \
-    BITNAMI_IMAGE_VERSION=20160626a-r7 \
+    BITNAMI_IMAGE_VERSION=20160626a-r8 \
     PATH=/opt/bitnami/php/bin:$PATH
 
 # System packages required
