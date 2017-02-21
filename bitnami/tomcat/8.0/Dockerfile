@@ -2,7 +2,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r10
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=8.0.41-r0 \
+ENV BITNAMI_IMAGE_VERSION=8.0.41-r1 \
     BITNAMI_APP_NAME=tomcat \
     PATH=/opt/bitnami/tomcat/bin:/opt/bitnami/java/bin:$PATH
 
@@ -13,7 +13,7 @@ RUN install_packages libc6 libxext6 libx11-6 libxcb1 libxau6 libxdmcp6 libglib2.
 RUN bitnami-pkg install java-1.8.0_121-0 --checksum 2743f753fd1ea88bf90352d95694f89ab0a0fb855cf0d1c7b2a6d92835f9ad27
 
 # Install tomcat
-RUN bitnami-pkg unpack tomcat-8.0.41-0 --checksum 47b6afb2f4f32ea573264f7b9947d855a2df837e4dae99d22db811de7ee57194
+RUN bitnami-pkg unpack tomcat-8.0.41-1 --checksum 3bbbdae242e8dc35ac2f7725fee1169950c4cc55a7c488a49fb21ba060dbeb88
 RUN ln -sf /opt/bitnami/tomcat/data /app
 
 COPY rootfs /
