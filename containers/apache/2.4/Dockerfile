@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/minideb:jessie-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=2.4.25-r1 \
+ENV BITNAMI_IMAGE_VERSION=2.4.25-r2 \
     BITNAMI_APP_NAME=apache \
     PATH=/opt/bitnami/apache/bin:$PATH
 
