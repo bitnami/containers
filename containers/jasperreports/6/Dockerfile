@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=jasperreports \
-    BITNAMI_IMAGE_VERSION=6.3.0-r7 \
+    BITNAMI_IMAGE_VERSION=6.3.0-r8 \
     PATH=/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
