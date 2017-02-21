@@ -2,7 +2,7 @@ machine:
   services:
   - docker
   environment:
-    RELEASE_SERIES_LIST: 7.0,7.1
+    RELEASE_SERIES_LIST: 5.6,7.0,7.1
     LATEST_STABLE: 7.1
     IMAGE_NAME: php-fpm
     CHART_NAME: php-fpm
