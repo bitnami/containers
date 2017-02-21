@@ -2,6 +2,8 @@ machine:
   services:
   - docker
   environment:
+    RELEASE_SERIES_LIST: 10
+    LATEST_STABLE: 10
     IMAGE_NAME: mariadb
     CHART_NAME: mariadb
     CHART_REPO: https://github.com/kubernetes/charts
@@ -12,11 +14,11 @@ dependencies:
   override:
   - docker info
   - gcloud version
-  - docker pull $DOCKER_PROJECT/$IMAGE_NAME:_ || true
+  - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-pull-cache.sh | bash -
 
 test:
   override:
-  - docker build --rm=false -t $DOCKER_PROJECT/$IMAGE_NAME:$CIRCLE_BUILD_NUM .
+  - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-image-test.sh | bash -
 
 deployment:
   cache:
