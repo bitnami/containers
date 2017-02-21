@@ -1,18 +1,11 @@
-#!/bin/bash
-set -e
+#!/bin/bash -e
+. /opt/bitnami/base/functions
 
-# Set default values
-export MARIADB_USER=${MARIADB_USER:-"root"}
-export MARIADB_HOST=${MARIADB_HOST:-"mariadb"}
-export MARIADB_PORT=${MARIADB_PORT:-"3306"}
-export SYMFONY_PROJECT_NAME=${SYMFONY_PROJECT_NAME:-"myapp"}
+print_welcome_page
+check_for_updates &
 
 PROJECT_DIRECTORY=/app/$SYMFONY_PROJECT_NAME
 DEPLOY="$@"
-
-log () {
-  echo -e "\033[0;33m$(date "+%H:%M:%S")\033[0;37m ==> $1."
-}
 
 echo "Starting application ..."
 
@@ -32,4 +25,4 @@ fi
 
 echo "symfony successfully initialized"
 
-exec /entrypoint.sh $DEPLOY
+exec tini -- $DEPLOY
