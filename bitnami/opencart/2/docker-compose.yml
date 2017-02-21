@@ -1,0 +1,28 @@
+version: '2'
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    volumes:
+      - 'mariadb_data:/bitnami/mariadb'
+  opencart:
+    image: 'bitnami/opencart:2'
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - 'opencart_data:/bitnami/opencart'
+      - 'apache_data:/bitnami/apache'
+      - 'php_data:/bitnami/php'
+    depends_on:
+      - mariadb
+    environment:
+      - OPENCART_HOST=localhost
+volumes:
+  mariadb_data:
+    driver: local
+  opencart_data:
+    driver: local
+  apache_data:
+    driver: local
+  php_data:
+    driver: local
