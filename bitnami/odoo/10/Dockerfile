@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=odoo \
-    BITNAMI_IMAGE_VERSION=10.0.20170215-r0 \
+    BITNAMI_IMAGE_VERSION=10.0.20170215-r1 \
     PATH=/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/postgresql/bin:$PATH
 
 # System packages required
