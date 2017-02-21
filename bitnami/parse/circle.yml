@@ -2,6 +2,8 @@ machine:
   services:
   - docker
   environment:
+    RELEASE_SERIES_LIST: 2
+    LATEST_STABLE: 2
     IMAGE_NAME: parse
     CHART_NAME: parse
     CHART_REPO: https://github.com/bitnami/charts
@@ -12,11 +14,11 @@ dependencies:
   override:
   - docker info
   - gcloud version
-  - docker pull $DOCKER_PROJECT/$IMAGE_NAME:_ || true
+  - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-pull-cache.sh | bash -
 
 test:
   override:
-  - docker build --rm=false -t $DOCKER_PROJECT/$IMAGE_NAME:$CIRCLE_BUILD_NUM .
+  - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-image-test.sh | bash -
 
 deployment:
   cache:
