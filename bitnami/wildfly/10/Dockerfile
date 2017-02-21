@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/minideb:jessie-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=10.1.0-r5 \
+ENV BITNAMI_IMAGE_VERSION=10.1.0-r6 \
     BITNAMI_APP_NAME=wildfly \
     PATH=/opt/bitnami/wildfly/bin:/opt/bitnami/java/bin:$PATH
 
