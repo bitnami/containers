@@ -1,0 +1,14 @@
+version: '2'
+services:
+  cassandra:
+    image: 'bitnami/cassandra:3'
+    ports:
+      - '7000:7000'
+      - '7001:7001'
+      - '9042:9042'
+      - '9160:9160'
+    volumes:
+      - 'cassandra_data:/bitnami/cassandra'
+volumes:
+  cassandra_data:
+    driver: local
