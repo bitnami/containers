@@ -1,6 +1,14 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-node/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-node/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/node)](https://hub.docker.com/r/bitnami/node/)
 
+# Supported tags and respective `Dockerfile` links
+
+- [`7`](https://github.com/bitnami/bitnami-docker-node/blob/de1e926176d1f04f7b844fe5f6be506946082813/7/Dockerfile) [`7.5.0-r1`](https://github.com/bitnami/bitnami-docker-node/blob/de1e926176d1f04f7b844fe5f6be506946082813/7/Dockerfile) [`latest`](https://github.com/bitnami/bitnami-docker-node/blob/de1e926176d1f04f7b844fe5f6be506946082813/7/Dockerfile)
+- [`6`](https://github.com/bitnami/bitnami-docker-node/blob/e2527995d3c5276bdd9c7ffe5e12c192e24ee52c/6/Dockerfile) [`6.9.5-r0`](https://github.com/bitnami/bitnami-docker-node/blob/e2527995d3c5276bdd9c7ffe5e12c192e24ee52c/6/Dockerfile)
+- [`4`](https://github.com/bitnami/bitnami-docker-node/blob/f0589dcee28de0f4607c85720e4cd2bb2382028f/4/Dockerfile) [`4.7.3-r0`](https://github.com/bitnami/bitnami-docker-node/blob/f0589dcee28de0f4607c85720e4cd2bb2382028f/4/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
+
 # What is Node.js?
 
 > Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
