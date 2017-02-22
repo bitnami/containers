@@ -21,10 +21,10 @@ test:
   - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-image-test.sh | bash -
 
 deployment:
-  cache:
+  development:
     branch: master
     commands:
-    - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-update-cache.sh | bash -
+    - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-development-image.sh | bash -
   release:
     tag: /^[0-9].*-r[0-9]+$/
     commands:
