@@ -1,6 +1,14 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-tomcat/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-tomcat/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/tomcat)](https://hub.docker.com/r/bitnami/tomcat/)
 
+# Supported tags and respective `Dockerfile` links
+
+ - [`9.0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/1093c754e53c1b666b2ca60a4fd569b859541c62/9.0/Dockerfile) [`9.0.0.M17-r2`](https://github.com/bitnami/bitnami-docker-tomcat/blob/1093c754e53c1b666b2ca60a4fd569b859541c62/9.0/Dockerfile)
+ - [`8.0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/dc8a9d32aaa517540272ccc2bc87b2fe1171f3fc/8.0/Dockerfile) [`8.0.41-r1`](https://github.com/bitnami/bitnami-docker-tomcat/blob/dc8a9d32aaa517540272ccc2bc87b2fe1171f3fc/8.0/Dockerfile)
+ [`latest`](https://github.com/bitnami/bitnami-docker-tomcat/blob/dc8a9d32aaa517540272ccc2bc87b2fe1171f3fc/8.0/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
+
 # What is Tomcat?
 
 > [Apache Tomcat](http://tomcat.apache.org), often referred to as Tomcat, is an open-source web server and servlet container developed by the [Apache Software Foundation (ASF)](https://www.apache.org). Tomcat implements several Java EE specifications including Java Servlet, JavaServer Pages (JSP), Java EL, and WebSocket, and provides a "pure Java" HTTP web server environment for Java code to run in.
