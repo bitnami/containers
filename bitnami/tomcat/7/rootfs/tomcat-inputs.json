@@ -1,0 +1,11 @@
+{
+  "shutdownPort": "{{$global.env.TOMCAT_SHUTDOWN_PORT}}",
+  "httpPort": "{{$global.env.TOMCAT_HTTP_PORT}}",
+  "ajpPort": "{{$global.env.TOMCAT_AJP_PORT}}",
+  "javaHome": "{{$global.env.JAVA_HOME}}",
+  "javaOpts": "{{$global.env.JAVA_OPTS}}",
+  "tomcatHome": "{{$global.env.TOMCAT_HOME}}",
+  "username": "{{$global.env.TOMCAT_USERNAME}}",
+  "password": "{{$global.env.TOMCAT_PASSWORD}}",
+  "allowRemoteManagement": "{{$global.env.TOMCAT_ALLOW_REMOTE_MANAGEMENT}}"
+}
