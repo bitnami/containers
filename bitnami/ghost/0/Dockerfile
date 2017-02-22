@@ -3,18 +3,18 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=ghost \
-    BITNAMI_IMAGE_VERSION=0.11.4-r1 \
+    BITNAMI_IMAGE_VERSION=0.11.5-r0 \
     PATH=/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:$PATH
 
 # System packages required
 RUN install_packages libc6 zlib1g libssl1.0.0 libncurses5 libtinfo5 libstdc++6 libgcc1 libbz2-1.0 libreadline6 ghostscript imagemagick libmysqlclient18
 
 # Additional modules required
-RUN bitnami-pkg install mysql-client-10.1.20-0 --checksum 14d20929072b157b5e819deb440504ad0f33f583493b5adeb283c329ea58d513
-RUN bitnami-pkg install node-4.7.2-0 --checksum b814eaeeee872c8629432d3e950570ebc2d3dfcdd0db5b4cf8f763652b1981f1
+RUN bitnami-pkg install mysql-client-10.1.21-1 --checksum 63155b08efa834316c47f29200a667f6d52506063dae861eb1edfba4266a9d62
+RUN bitnami-pkg install node-4.8.0-0 --checksum 800e972fbdf1b0a5afc845990bb981359dee4f9ad31ae4115a18ababa6c66508
 
 # Install ghost
-RUN bitnami-pkg unpack ghost-0.11.4-0 --checksum 0094a80415a6a58d31fdbf2e8698099e7a4d813fa4070d474e3c30113ffbad9d
+RUN bitnami-pkg unpack ghost-0.11.5-0 --checksum 8e70e4762aa464af8abf3c255c398f8cff5c9703645d48fe4f00cacad2d7a10a
 
 COPY rootfs /
 
