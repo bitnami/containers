@@ -1,0 +1,11 @@
+version: '2'
+services:
+  solr:
+    image: 'bitnami/solr:6'
+    ports:
+      - '8983:8983'
+    volumes:
+      - 'solr_data:/bitnami/solr'
+volumes:
+  solr_data:
+    driver: local
