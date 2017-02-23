@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r5
+FROM gcr.io/stacksmith-images/minideb:jessie-r10
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -16,6 +16,15 @@ RUN bitnami-pkg install java-1.8.0_111-1 --checksum f7705a3955f006eb59a6e4240a01
 RUN bitnami-pkg unpack solr-6.3.0-0 --checksum 380f620eb733b8609cbf7767d8ec61dd70b1da3bdc4698dc54d2aa52c3ff0f9e
 
 COPY rootfs /
+
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    CODIAD_USERNAME="user" \
+    CODIAD_PASSWORD="bitnami" \
+    CODIAD_PROJECT_NAME="Sample Project" \
+    CODIAD_PROJECT_PATH="sampleProject" \
+    CODIAD_THEME="default" \
+    CODIAD_HOST="127.0.0.1"
 
 VOLUME ["/bitnami/solr"]
 
