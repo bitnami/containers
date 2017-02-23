@@ -14,11 +14,6 @@ function initialize {
     fi
 }
 
-# Set default values
-export SOLR_PORT=${SOLR_PORT:-"8983"}
-export SOLR_SERVER_DIRECTORY=${SOLR_SERVER_DIRECTORY:-"server"}
-export SOLR_CORE_CONF_DIR=${SOLR_CORE_CONF_DIR:-"data_driven_schema_configs"}
-
 
 
 if [[ "$1" == "nami" && "$2" == "start" ]] ||  [[ "$1" == "/init.sh" ]]; then

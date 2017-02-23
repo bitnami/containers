@@ -17,6 +17,15 @@ RUN bitnami-pkg unpack solr-6.3.0-0 --checksum 380f620eb733b8609cbf7767d8ec61dd7
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    CODIAD_USERNAME="user" \
+    CODIAD_PASSWORD="bitnami" \
+    CODIAD_PROJECT_NAME="Sample Project" \
+    CODIAD_PROJECT_PATH="sampleProject" \
+    CODIAD_THEME="default" \
+    CODIAD_HOST="127.0.0.1"
+
 VOLUME ["/bitnami/solr"]
 
 EXPOSE 8983
