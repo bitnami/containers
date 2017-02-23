@@ -103,7 +103,7 @@ Access your application at http://your-ip/
 
 For persistence of the WordPress deployment, the above examples define docker volumes namely `mariadb_data`, `wordpress_data`, `apache_data` and `php_data`. The WordPress application state will persist as long as these volumes are not removed.
 
-If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume). Alternatively you can make use of volume plugins to host the volume data.
+To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume). Alternatively you can make use of volume plugins to host the volume data.
 
 ### Mount host directories as data volumes with Docker Compose
 
