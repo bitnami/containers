@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=magento \
-    BITNAMI_IMAGE_VERSION=2.1.4-r1 \
+    BITNAMI_IMAGE_VERSION=2.1.5-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/apache/bin:/opt/bitnami/magento/bin/:$PATH
 
 # System packages required
@@ -11,12 +11,12 @@ RUN install_packages libssl1.0.0 libaprutil1 libapr1 libc6 libuuid1 libexpat1 li
 
 # Additional modules required
 RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a2770b7e549674e33b8a5b07480f53c39f5c3f
-RUN bitnami-pkg unpack php-7.0.15-4 --checksum 855e77fc7b87d1b263b08fdc96518c6fc301531923974917335f1cb8539d2a68
-RUN bitnami-pkg install libphp-7.0.15-1 --checksum b65f40603838865d1974f071119cda9d63c80d9c14f146707dcd88940e215077
-RUN bitnami-pkg install mysql-client-10.1.21-0 --checksum 8e868a3e46bfa59f3fb4e1aae22fd9a95fd656c020614a64706106ba2eba224e
+RUN bitnami-pkg unpack php-7.0.16-1 --checksum 870b6b92ef762fc3a49eeaa71dfa78bacabf50a5fa41f811cdd99a49844d9d9b
+RUN bitnami-pkg install libphp-7.0.16-0 --checksum 91548c756818a24b9d5477d2cb09d4eff689a2c6ad51d2ef7cd99370020b6494
+RUN bitnami-pkg install mysql-client-10.1.21-1 --checksum 63155b08efa834316c47f29200a667f6d52506063dae861eb1edfba4266a9d62
 
 # Install magento
-RUN bitnami-pkg unpack magento-2.1.4-0 --checksum 6a21ef346ed6e1958d9d76e6def8142002a03a3d44bf641ff213a3635a5fe14f
+RUN bitnami-pkg unpack magento-2.1.5-0 --checksum 1724aebfe22e075c8eeffe91c41602a98be40e9b382dcd72399a638ca1e47d3b
 
 COPY rootfs /
 
