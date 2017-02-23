@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=solr \
-    BITNAMI_IMAGE_VERSION=6.3.0-r0 \
+    BITNAMI_IMAGE_VERSION=6.3.0-r1 \
     PATH=/opt/bitnami/java/bin:/opt/bitnami/solr/bin:$PATH
 
 # System packages required
