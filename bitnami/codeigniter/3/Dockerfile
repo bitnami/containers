@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=codeigniter \
-    BITNAMI_IMAGE_VERSION=3.1.3-r1 \
+    BITNAMI_IMAGE_VERSION=3.1.3-r2 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
@@ -12,23 +12,21 @@ RUN install_packages libc6 zlib1g libxslt1.1 libtidy-0.99-0 libreadline6 libncur
 # Additional modules required
 RUN bitnami-pkg install php-7.0.14-0 --checksum 9144f590d0cbbf751288c27467128b5f95507729c22144008c453c94cd8ef8b9
 RUN bitnami-pkg install mysql-client-10.1.20-0 --checksum 14d20929072b157b5e819deb440504ad0f33f583493b5adeb283c329ea58d513
-RUN bitnami-pkg install mariadb-10.1.20-0 --checksum 7409ba139885bc4f463233a250806f557ee41472e2c88213e82c21f4d97a77d7
 
 # Install codeigniter
-RUN bitnami-pkg install codeigniter-3.1.3-0 --checksum 5d653ed41a2bf4f78818f5cb2c249fba83b9f041ca72a8d7a5f7c9c6d9d51131
+RUN bitnami-pkg install codeigniter-3.1.3-2 --checksum 223632dc30c8176e7a81f38ab23f06e69efa8ed7cb91b50a47723f494062bc9c
 
 COPY rootfs /
 
 ENV MARIADB_USER="root" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT="3306" \
-    CODEIGNITER_PROJECT_NAME="myapp"
+    CODEIGNITER_PROJECT_NAME="myapp" \
+    TERM=xterm
 
 WORKDIR /app
 
 EXPOSE 8000
-
-ENV TERM=xterm
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
