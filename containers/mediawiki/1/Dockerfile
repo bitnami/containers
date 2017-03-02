@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=mediawiki \
-    BITNAMI_IMAGE_VERSION=1.28.0-r6 \
+    BITNAMI_IMAGE_VERSION=1.28.0-r7 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
@@ -16,7 +16,7 @@ RUN bitnami-pkg install php-5.6.30-3 --checksum af6c238825d4394fc6352c5ad48c1e64
 RUN bitnami-pkg install libphp-5.6.30-1 --checksum a62cad2320fa2d141309e75663aed3d1bd82626d51b784678d18ec3f985d83bf
 
 # Install mediawiki
-RUN bitnami-pkg unpack mediawiki-1.28.0-1 --checksum 47cf69b6303df772fe5e772ed25cfd33684deb8f7c13700514d2df305990eb4f
+RUN bitnami-pkg unpack mediawiki-1.28.0-2 --checksum 8e31154050b01d4ae1bd33f6f5adb5be4fdd4e81384a34cbf4dcea5e5c0a83c6
 
 COPY rootfs /
 
