@@ -2,7 +2,9 @@ version: '2'
 
 services:
   mariadb:
-    image: bitnami/mariadb:latest
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     environment:
       - MARIADB_USER=my_user
       - MARIADB_DATABASE=my_database
