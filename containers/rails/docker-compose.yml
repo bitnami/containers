@@ -2,7 +2,9 @@ version: '2'
 
 services:
   mariadb:
-    image: bitnami/mariadb:latest
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
 
   myapp:
     tty: true # Enables debugging capabilities when attached to this container.
