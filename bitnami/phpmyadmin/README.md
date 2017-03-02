@@ -27,8 +27,6 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - mariadb_data:/bitnami/mariadb
   phpmyadmin:
@@ -112,8 +110,6 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
