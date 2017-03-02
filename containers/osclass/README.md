@@ -34,8 +34,6 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - mariadb_data:/bitnami/mariadb
   osclass:
@@ -122,8 +120,6 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
@@ -247,8 +243,6 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
