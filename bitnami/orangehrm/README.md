@@ -115,8 +115,6 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - /path/to/mariadb-persistence:/bitnami/mariadb
   orangehrm:
@@ -232,8 +230,6 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
