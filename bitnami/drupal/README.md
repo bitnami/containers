@@ -36,6 +36,8 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
   drupal:
@@ -74,7 +76,7 @@ If you want to run the application manually instead of using docker-compose, the
 2. Start a MariaDB database in the network generated:
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net drupal-tier bitnami/mariadb:latest
+  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes -e ALLOW_EMPTY_PASSWORD=yes --net drupal-tier bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to Drupal to resolve the host
@@ -108,6 +110,8 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '/path/to/mariadb-persistence:/bitnami/mariadb'
   drupal:
@@ -134,7 +138,7 @@ services:
 2. Create a MariaDB container with host volume:
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes -e ALLOW_EMPTY_PASSWORD=yes \
     --net drupal-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
     bitnami/mariadb:latest
