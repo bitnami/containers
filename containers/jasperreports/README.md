@@ -29,7 +29,11 @@ version: '2'
 
 services:
   mariadb:
-    image: bitnami/mariadb:latest
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - mariadb_data:/bitnami/mariadb
   jasperreports:
@@ -117,7 +121,7 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Create a MariaDB container with host volume:
 
   ```bash
-  $ docker run -d --name mariadb \
+  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
     --net jasperreports-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
    bitnami/mariadb:latest
