@@ -3,6 +3,8 @@ version: '2'
 services:
   mysql:
     image: 'bitnami/mysql:5'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306:3306'
     volumes:
