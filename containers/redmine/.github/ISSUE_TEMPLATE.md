@@ -8,43 +8,38 @@ If you suspect your issue is a bug, please edit your issue description to
 include the BUG REPORT INFORMATION shown below. If you fail to provide this
 information within 7 days, we cannot debug your issue and we'll close it. We
 will, however, reopen it if you later provide the information.
----------------------------------------------------
-BUG REPORT INFORMATION
----------------------------------------------------
+-------------------------------
+    BUG REPORT INFORMATION
+-------------------------------
 Use the commands below to provide key information from your environment:
 You do NOT have to include this information if this is a FEATURE REQUEST
 -->
 
-**Description**
+##### Description
+<!-- Briefly describe the problem you are having in a few paragraphs. -->
 
-<!--
-Briefly describe the problem you are having in a few paragraphs.
--->
+##### Steps to reproduce the issue:
+1. [First Step]
+2. [Second Step]
+3. [and so on...]
 
-**Steps to reproduce the issue:**
-1.
-2.
-3.
+##### Describe the results you received:
+<!-- What actually happens -->
 
-**Describe the results you received:**
+##### Describe the results you expected:
+<!-- What you expect to happen -->
 
+##### Additional information you deem important (e.g. issue happens only occasionally):
+<!-- Any additional information, configuration or data that might be necessary to reproduce the issue. -->
 
-**Describe the results you expected:**
+##### Version
+###### Output of `docker version`:
+`(paste your output here)`
 
+###### Output of `docker info`:
+`(paste your output here)`
 
-**Additional information you deem important (e.g. issue happens only occasionally):**
+###### Output of `docker-compose version` (if applicable):
+`(paste your output here)`
 
-**Output of `docker version`:**
-
-```
-(paste your output here)
-```
-
-**Output of `docker info`:**
-
-```
-(paste your output here)
-```
-
-**Additional environment details (AWS, VirtualBox, Docker for MAC, physical, etc.):**
-
+##### Additional environment details (AWS, VirtualBox, Docker for MAC, physical, etc.):
