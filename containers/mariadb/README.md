@@ -302,7 +302,6 @@ docker run --name mariadb-slave --link mariadb-master:master \
   -e MARIADB_REPLICATION_USER=my_repl_user \
   -e MARIADB_REPLICATION_PASSWORD=my_repl_password \
   -e MARIADB_MASTER_HOST=master \
-  -e MARIADB_MASTER_ROOT_USER=root \
   -e MARIADB_MASTER_ROOT_PASSWORD=master_root_password \
   -e MARIADB_USER=my_user \
   -e MARIADB_PASSWORD=my_password \
@@ -349,7 +348,6 @@ services:
       - MARIADB_ROOT_PASSWORD=slave_root_password
       - MARIADB_MASTER_HOST=mariadb-master
       - MARIADB_MASTER_PORT=3306
-      - MARIADB_MASTER_ROOT_USER=root
       - MARIADB_MASTER_ROOT_PASSWORD=master_root_password
       - MARIADB_USER=my_user
       - MARIADB_PASSWORD=my_password
