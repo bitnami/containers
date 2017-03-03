@@ -3,8 +3,6 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306:3306'
     volumes:
