@@ -302,6 +302,7 @@ Next we start a MySQL slave container.
 
 ```bash
 docker run --name mysql-slave --link mysql-master:master \
+  -e MYSQL_ROOT_PASSWORD=slave_root_password \
   -e MYSQL_REPLICATION_MODE=slave \
   -e MYSQL_REPLICATION_USER=my_repl_user \
   -e MYSQL_REPLICATION_PASSWORD=my_repl_password \
@@ -356,6 +357,7 @@ services:
       - MYSQL_REPLICATION_MODE=slave
       - MYSQL_REPLICATION_USER=repl_user
       - MYSQL_REPLICATION_PASSWORD=repl_password
+      - MYSQL_ROOT_PASSWORD=slave_root_password
       - MYSQL_MASTER_HOST=mysql-master
       - MYSQL_MASTER_PORT=3306
       - MYSQL_MASTER_ROOT_USER=root
