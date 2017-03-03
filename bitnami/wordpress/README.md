@@ -219,16 +219,30 @@ $ docker pull bitnami/wordpress:latest
 
 The WordPress instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom WordPress:
 
+##### User and Site configuration
 - `WORDPRESS_USERNAME`: WordPress application username. Default: **user**
 - `WORDPRESS_PASSWORD`: WordPress application password. Default: **bitnami**
 - `WORDPRESS_EMAIL`: WordPress application email. Default: **user@example.com**
 - `WORDPRESS_FIRST_NAME`: WordPress user first name. Default: **FirstName**
 - `WORDPRESS_LAST_NAME`: WordPress user last name. Default: **LastName**
 - `WORDPRESS_BLOG_NAME`: WordPress blog name. Default: **User's blog**
-- `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
-- `MARIADB_PASSWORD`: Root password for the MariaDB.
+
+##### Use existing database
+- `WORDPRESS_DATABASE_USER`: Database user that WordPress will use to connect with the database.
+- `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database.
+- `WORDPRESS_DATABASE_NAME`: Database name that WordPress will use to connect with the database.
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
 - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
+
+##### Create new database using mysql-client
+- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
+- `MARIADB_ROOT_USER`: Database admin user. Default: **root**
+- `MARIADB_ROOT_PASSWORD`: Database password for the `MARIADB_ROOT_USER` user.
+- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module.
+- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module.
+- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords for MySQL.
 
 ### Specifying Environment variables using Docker Compose
 
@@ -316,6 +330,51 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --env SMTP_HOST=smtp.gmail.com --env SMTP_PORT=587 \
   --env SMTP_USER=your_email@gmail.com --env SMTP_PASSWORD=your_password \
   --volume wordpress_data:/bitnami/wordpress \
+  bitnami/wordpress:latest
+```
+
+### Connect WordPress docker container to an existing database
+
+The Bitnami WordPress container supports connecting the WordPress application to an external database. In order to configure it, you should set the following environment variables:
+- `WORDPRESS_DATABASE_USER`: Database user that WordPress will use to connect with the database.
+- `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database.
+- `WORDPRESS_DATABASE_NAME`: Database name that WordPress will use to connect with the database.
+
+This would be an example of using an external database for WordPress.
+
+ * docker-compose:
+
+```yaml
+  wordpress:
+    image: bitnami/wordpress:latest
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - MARIADB_HOST=mariadb_host
+      - MARIADB_PORT=3306
+      - WORDPRESS_DATABASE_NAME=wordpress_db
+      - WORDPRESS_DATABASE_USER=wordpress_user
+      - WORDPRESS_DATABASE_PASSWORD=wordpress_password
+    volumes:
+      - wordpress_data:/bitnami/wordpress
+      - apache_data:/bitnami/apache
+      - php_data:/bitnami/php
+```
+
+* For manual execution:
+
+```
+$ docker run -d --name wordpress -p 80:80 -p 443:443 \
+  --net wordpress-tier \
+  --env MARIADB_HOST=mariadb_host \
+  --env MARIADB_PORT=3306 \
+  --env WORDPRESS_DATABASE_NAME=wordpress_db \
+  --env WORDPRESS_DATABASE_USER=wordpress_user \
+  --env WORDPRESS_DATABASE_PASSWORD=wordpress_password \
+  --volume wordpress_data:/bitnami/wordpress \
+  --volume apache_data:/bitnami/apache \
+  --volume php_data:/bitnami/php \
   bitnami/wordpress:latest
 ```
 
