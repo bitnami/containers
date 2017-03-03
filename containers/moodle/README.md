@@ -33,6 +33,8 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
   moodle:
@@ -69,7 +71,7 @@ If you want to run the application manually instead of using docker-compose, the
 2. Start a MariaDB database in the network generated:
 
   ```bash
-  $ docker run -d --name mariadb --net moodle-tier bitnami/mariadb
+  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net moodle-tier bitnami/mariadb
   ```
 
   *Note:* You need to give the container a name in order to Moodle to resolve the host
@@ -97,6 +99,8 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '/path/to/mariadb-persistence:/bitnami/mariadb'
   moodle:
@@ -125,7 +129,7 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Start a MariaDB database in the previous network:
 
   ```bash
-  $ docker run -d --name mariadb -v /path/to/mariadb-persistence:/bitnami/mariadb --net moodle-tier bitnami/mariadb:latest
+  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes -v /path/to/mariadb-persistence:/bitnami/mariadb --net moodle-tier bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to Moodle to resolve the host
