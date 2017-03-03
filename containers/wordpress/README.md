@@ -232,16 +232,16 @@ The WordPress instance can be customized by specifying environment variables on 
 - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
 - `WORDPRESS_DATABASE_NAME`: Database name that WordPress will use to connect with the database. Default: **bitnami_wordpress**
 - `WORDPRESS_DATABASE_USER`: Database user that WordPress will use to connect with the database. Default: **bn_wordpress**
-- `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database.
+- `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database. No defaults.
 
 ##### Create a database for WordPress using mysql-client
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
 - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
 - `MARIADB_ROOT_USER`: Database admin user. Default: **root**
-- `MARIADB_ROOT_PASSWORD`: Database password for the `MARIADB_ROOT_USER` user.
-- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module.
-- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module.
-- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user.
+- `MARIADB_ROOT_PASSWORD`: Database password for the `MARIADB_ROOT_USER` user. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ### Specifying Environment variables using Docker Compose
@@ -296,11 +296,11 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
 ### SMTP Configuration
 
 To configure WordPress to send email using SMTP you can set the following environment variables:
-- `SMTP_HOST`: Host for outgoing SMTP email.
-- `SMTP_PORT`: Port for outgoing SMTP email.
-- `SMTP_USER`: User of SMTP used for authentication (likely email).
-- `SMTP_PASSWORD`: Password for SMTP.
-- `SMTP_PROTOCOL`: Secure connection protocol to use for SMTP [tls, ssl, none].
+- `SMTP_HOST`: Host for outgoing SMTP email. No defaults.
+- `SMTP_PORT`: Port for outgoing SMTP email. No defaults.
+- `SMTP_USER`: User of SMTP used for authentication (likely email). No defaults.
+- `SMTP_PASSWORD`: Password for SMTP. No defaults.
+- `SMTP_PROTOCOL`: Secure connection protocol to use for SMTP [tls, ssl, none]. No defaults.
 
 This would be an example of SMTP configuration using a GMail account:
 
@@ -340,7 +340,7 @@ The Bitnami WordPress container supports connecting the WordPress application to
 - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
 - `WORDPRESS_DATABASE_NAME`: Database name that WordPress will use to connect with the database. Default: **bitnami_wordpress**
 - `WORDPRESS_DATABASE_USER`: Database user that WordPress will use to connect with the database. Default: **bn_wordpress**
-- `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database.
+- `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database. No defaults.
 
 This would be an example of using an external database for WordPress.
 
