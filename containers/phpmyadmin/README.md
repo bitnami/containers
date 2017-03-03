@@ -24,7 +24,9 @@ version: '2'
 
 services:
   mariadb:
-    image: bitnami/mariadb:latest
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - mariadb_data:/bitnami/mariadb
   phpmyadmin:
@@ -70,7 +72,7 @@ $ docker network create phpmyadmin-tier
 
 ```bash
 $ docker volume create --name mariadb_data
-$ docker run -d --name mariadb \
+$ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
   --net phpmyadmin-tier \
   --volume mariadb_data:/bitnami/mariadb \
   bitnami/mariadb:latest
@@ -107,7 +109,9 @@ version: '2'
 
 services:
   mariadb:
-    image: bitnami/mariadb:latest
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - /path/to/mariadb-persistence:/bitnami/mariadb
   phpmyadmin:
@@ -134,7 +138,7 @@ $ docker network create phpmyadmin-tier
 2. Create a MariaDB container with host volume
 
 ```bash
-$ docker run -d --name mariadb \
+$ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
   --net phpmyadmin-tier \
   --volume /path/to/mariadb-persistence:/bitnami/mariadb \
   bitnami/mariadb:latest
@@ -231,7 +235,9 @@ version: '2'
 
 services:
   mariadb:
-    image: bitnami/mariadb:latest
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - mariadb_data:/bitnami/mariadb
   phpmyadmin:
