@@ -41,6 +41,8 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
   application:
@@ -77,7 +79,7 @@ If you want to run the application manually instead of using docker-compose, the
 2. Start a MariaDB database in the network generated:
 
   ```
-   $ docker run -d --name mariadb --net=piwik_network bitnami/mariadb
+   $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net=piwik_network bitnami/mariadb
   ```
 
   *Note:* You need to give the container a name in order to Piwik to resolve the host
@@ -110,6 +112,8 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
   piwik:
@@ -138,7 +142,7 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Create a MariaDB container with host volume:
 
   ```
-  $$ docker run -d --name mariadb \
+  $$ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
     --net piwik-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
     bitnami/mariadb:latest
