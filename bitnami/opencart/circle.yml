@@ -8,6 +8,7 @@ machine:
     CHART_NAME: opencart
     CHART_REPO: https://github.com/kubernetes/charts
     DOCKER_PROJECT: bitnami
+    QUAY_PROJECT: bitnami
     GCLOUD_PROJECT: bitnami-containers
 
 dependencies:
