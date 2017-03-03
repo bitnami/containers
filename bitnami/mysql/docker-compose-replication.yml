@@ -8,6 +8,7 @@ services:
     volumes:
       - 'mysql_master_data:/bitnami/mysql'
     environment:
+      - ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_REPLICATION_MODE=master
       - MYSQL_REPLICATION_USER=repl_user
       - MYSQL_REPLICATION_PASSWORD=repl_password
@@ -21,6 +22,7 @@ services:
     depends_on:
       - mysql-master
     environment:
+      - ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_REPLICATION_MODE=slave
       - MYSQL_REPLICATION_USER=repl_user
       - MYSQL_REPLICATION_PASSWORD=repl_password
