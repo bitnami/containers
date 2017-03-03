@@ -185,7 +185,7 @@ services:
 
 ## Allowing empty passwords
 
-By default the MySQL image expects that all the available password to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD` env variable. This env variable is only recommended for testing or development purpose. We strongly recommend to specify the `MYSQL_ROOT_PASSWORD` for any other scenario.
+By default the MySQL image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `MYSQL_ROOT_PASSWORD` for any other scenario.
 
 ```bash
 docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
@@ -262,7 +262,7 @@ services:
       - MYSQL_PASSWORD=my_password
       - MYSQL_DATABASE=my_database
 ```
-**Note!** The `root` user will still be created with remote access if you set the `ALLOW_EMPTY_PASSWORD` env variable. Please provide the `MYSQL_ROOT_PASSWORD` env variable instead if you want to set a password for the `root` user.
+**Note!** The `root` user will be created with remote access and without a password if `ALLOW_EMPTY_PASSWORD` is enabled. Please provide the `MYSQL_ROOT_PASSWORD` env variable instead if you want to set a password for the `root` user.
 
 ## Setting up a replication cluster
 
@@ -284,7 +284,7 @@ The first step is to start the MySQL master.
 
 ```bash
 docker run --name mysql-master \
-  -e MYSQL_ROOT_PASSWORD=root_password \
+  -e MYSQL_ROOT_PASSWORD=master_root_password \
   -e MYSQL_REPLICATION_MODE=master \
   -e MYSQL_REPLICATION_USER=my_repl_user \
   -e MYSQL_REPLICATION_PASSWORD=my_repl_password \
@@ -302,13 +302,12 @@ Next we start a MySQL slave container.
 
 ```bash
 docker run --name mysql-slave --link mysql-master:master \
-  -e MYSQL_ROOT_PASSWORD=root_password \
   -e MYSQL_REPLICATION_MODE=slave \
   -e MYSQL_REPLICATION_USER=my_repl_user \
   -e MYSQL_REPLICATION_PASSWORD=my_repl_password \
   -e MYSQL_MASTER_HOST=master \
-  -e MYSQL_MASTER_ROOT_USER=my_user \
-  -e MYSQL_MASTER_ROOT_PASSWORD=my_password \
+  -e MYSQL_MASTER_ROOT_USER=root \
+  -e MYSQL_MASTER_ROOT_PASSWORD=master_root_password \
   -e MYSQL_USER=my_user \
   -e MYSQL_PASSWORD=my_password \
   -e MYSQL_DATABASE=my_database \
@@ -339,7 +338,7 @@ services:
       - MYSQL_REPLICATION_MODE=master
       - MYSQL_REPLICATION_USER=repl_user
       - MYSQL_REPLICATION_PASSWORD=repl_password
-      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_ROOT_PASSWORD=master_root_password
       - MYSQL_USER=my_user
       - MYSQL_PASSWORD=my_password
       - MYSQL_DATABASE=my_database
@@ -359,9 +358,8 @@ services:
       - MYSQL_REPLICATION_PASSWORD=repl_password
       - MYSQL_MASTER_HOST=mysql-master
       - MYSQL_MASTER_PORT=3306
-      - MYSQL_MASTER_ROOT_USER=my_user
-      - MYSQL_MASTER_ROOT_PASSWORD=my_password
-      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_MASTER_ROOT_USER=root
+      - MYSQL_MASTER_ROOT_PASSWORD=master_root_password
       - MYSQL_USER=my_user
       - MYSQL_PASSWORD=my_password
       - MYSQL_DATABASE=my_database
