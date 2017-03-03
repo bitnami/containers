@@ -1,5 +1,6 @@
 {
   "rootPassword": "{{$global.env.MARIADB_ROOT_PASSWORD}}",
+  "rootUser": "{{$global.env.MARIADB_ROOT_USER}}",
   "username": "{{$global.env.MARIADB_USER}}",
   "password": "{{$global.env.MARIADB_PASSWORD}}",
   "database": "{{$global.env.MARIADB_DATABASE}}",
@@ -9,6 +10,7 @@
   "replicationPassword": "{{$global.env.MARIADB_REPLICATION_PASSWORD}}",
   "masterHost": "{{$global.env.MARIADB_MASTER_HOST}}",
   "masterPort": "{{$global.env.MARIADB_MASTER_PORT}}",
-  "masterUser": "{{$global.env.MARIADB_MASTER_USER}}",
-  "masterPassword": "{{$global.env.MARIADB_MASTER_PASSWORD}}"
+  "masterRootUser": "{{$global.env.MARIADB_MASTER_ROOT_USER}}",
+  "masterRootPassword": "{{$global.env.MARIADB_MASTER_ROOT_PASSWORD}}",
+  "allowEmptyPassword": "{{$global.env.ALLOW_EMPTY_PASSWORD}}"
 }
