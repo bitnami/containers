@@ -10,7 +10,7 @@
 # TLDR
 
 ```bash
-docker run --name mysql bitnami/mysql:latest
+docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
 ```
 
 ## Docker Compose
@@ -21,6 +21,8 @@ version: '2'
 services:
   mysql:
     image: 'bitnami/mysql:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306:3306'
 ```
@@ -71,6 +73,8 @@ version: '2'
 services:
   mysql:
     image: 'bitnami/mysql:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306:3306'
     volumes:
@@ -127,6 +131,8 @@ networks:
 services:
   mysql:
     image: 'bitnami/mysql:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - app-tier
   myapp:
@@ -137,7 +143,7 @@ services:
 
 > **IMPORTANT**:
 >
-> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 1. Please update the `YOUR_APPLICATION_IMAGE` placeholder in the above snippet with your application image
 > 2. In your application container, use the hostname `mysql` to connect to the MySQL server
 
 Launch the containers using:
@@ -150,7 +156,12 @@ $ docker-compose up -d
 
 ## Setting the root password on first run
 
-Passing the `MYSQL_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the root user to the value of `MYSQL_ROOT_PASSWORD`.
+The root user and password can easily be setup with the Bitnami MySQL Docker image using the following environment variables:
+
+ - `MYSQL_ROOT_USER`: The database admin user. Defaults to `root`.
+ - `MYSQL_ROOT_PASSWORD`: The database admin user password. No defaults.
+
+Passing the `MYSQL_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the `MYSQL_ROOT_USER` user to the value of `MYSQL_ROOT_PASSWORD`.
 
 ```bash
 docker run --name mysql -e MYSQL_ROOT_PASSWORD=password123 bitnami/mysql:latest
@@ -170,14 +181,38 @@ services:
       - MYSQL_ROOT_PASSWORD=password123
 ```
 
-**Warning** The `root` user is always created with remote access. It's suggested that the `MYSQL_ROOT_PASSWORD` env variable is always specified to set a password for the `root` user.
+**Warning** The `MYSQL_ROOT_USER` user is always created with remote access. It's suggested that the `MYSQL_ROOT_PASSWORD` env variable is always specified to set a password for the `MYSQL_ROOT_USER` user. In case you want to allow the `MYSQL_ROOT_USER` user to access the database without a password set the environment variable `ALLOW_EMPTY_PASSWORD=yes`. **This is recommended only for development**.
+
+## Allowing empty passwords
+
+By default the MySQL image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `MYSQL_ROOT_PASSWORD` for any other scenario.
+
+```bash
+docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  mysql:
+    image: 'bitnami/mysql:latest'
+    ports:
+      - '3306:3306'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+```
+
+
 
 ## Creating a database on first run
 
 By passing the `MYSQL_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the MySQL client.
 
 ```bash
-docker run --name mysql \
+docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes \
   -e MYSQL_DATABASE=my_database \
   bitnami/mysql:latest
 ```
@@ -190,6 +225,8 @@ version: '2'
 services:
   mysql:
     image: 'bitnami/mysql:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306:3306'
     environment:
@@ -202,7 +239,9 @@ You can create a restricted database user that only has permissions for the data
 
 ```bash
 docker run --name mysql \
-  -e MYSQL_USER=my_user -e MYSQL_PASSWORD=my_password \
+  -e ALLOW_EMPTY_PASSWORD=yes \
+  -e MYSQL_USER=my_user \
+  -e MYSQL_PASSWORD=my_password \
   -e MYSQL_DATABASE=my_database \
   bitnami/mysql:latest
 ```
@@ -218,12 +257,12 @@ services:
     ports:
       - '3306:3306'
     environment:
+      - ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_USER=my_user
       - MYSQL_PASSWORD=my_password
       - MYSQL_DATABASE=my_database
 ```
-
-**Note!** The `root` user will still be created with remote access. Please ensure that you have specified a password for the `root` user using the `MYSQL_ROOT_PASSWORD` env variable.
+**Note!** The `root` user will be created with remote access and without a password if `ALLOW_EMPTY_PASSWORD` is enabled. Please provide the `MYSQL_ROOT_PASSWORD` env variable instead if you want to set a password for the `root` user.
 
 ## Setting up a replication cluster
 
@@ -234,8 +273,8 @@ A **zero downtime** MySQL master-slave [replication](https://dev.mysql.com/doc/r
  - `MYSQL_REPLICATION_PASSWORD`: The replication users password. No defaults.
  - `MYSQL_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
  - `MYSQL_MASTER_PORT`: Server port of the replication master (slave parameter). Defaults to `3306`.
- - `MYSQL_MASTER_USER`: User on replication master with access to `MYSQL_DATABASE` (slave parameter). Defaults to `root`
- - `MYSQL_MASTER_PASSWORD`: Password of user on replication master with access to `MYSQL_DATABASE` (slave parameter). No defaults.
+ - `MYSQL_MASTER_ROOT_USER`: User on replication master with access to `MYSQL_DATABASE` (slave parameter). Defaults to `root`
+ - `MYSQL_MASTER_ROOT_PASSWORD`: Password of user on replication master with access to `MYSQL_DATABASE` (slave parameter). No defaults.
 
 In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
 
@@ -245,7 +284,7 @@ The first step is to start the MySQL master.
 
 ```bash
 docker run --name mysql-master \
-  -e MYSQL_ROOT_PASSWORD=root_password \
+  -e MYSQL_ROOT_PASSWORD=master_root_password \
   -e MYSQL_REPLICATION_MODE=master \
   -e MYSQL_REPLICATION_USER=my_repl_user \
   -e MYSQL_REPLICATION_PASSWORD=my_repl_password \
@@ -263,20 +302,19 @@ Next we start a MySQL slave container.
 
 ```bash
 docker run --name mysql-slave --link mysql-master:master \
-  -e MYSQL_ROOT_PASSWORD=root_password \
+  -e MYSQL_ROOT_PASSWORD=slave_root_password \
   -e MYSQL_REPLICATION_MODE=slave \
   -e MYSQL_REPLICATION_USER=my_repl_user \
   -e MYSQL_REPLICATION_PASSWORD=my_repl_password \
   -e MYSQL_MASTER_HOST=master \
-  -e MYSQL_MASTER_USER=my_user \
-  -e MYSQL_MASTER_PASSWORD=my_password \
+  -e MYSQL_MASTER_ROOT_PASSWORD=master_root_password \
   -e MYSQL_USER=my_user \
   -e MYSQL_PASSWORD=my_password \
   -e MYSQL_DATABASE=my_database \
   bitnami/mysql:latest
 ```
 
-In the above command the container is configured as a `slave` using the `MYSQL_REPLICATION_MODE` parameter. The `MYSQL_MASTER_HOST`, `MYSQL_MASTER_USER` and `MYSQL_MASTER_PASSWORD` parameters are used by the slave to connect to the master and take a dump of the existing data in the database identified by `MYSQL_DATABASE`. The replication user credentials are specified using the `MYSQL_REPLICATION_USER` and `MYSQL_REPLICATION_PASSWORD` parameters and should be the same as the one specified on the master.
+In the above command the container is configured as a `slave` using the `MYSQL_REPLICATION_MODE` parameter. The `MYSQL_MASTER_HOST`, `MYSQL_MASTER_ROOT_USER` and `MYSQL_MASTER_ROOT_PASSWORD` parameters are used by the slave to connect to the master and take a dump of the existing data in the database identified by `MYSQL_DATABASE`. The replication user credentials are specified using the `MYSQL_REPLICATION_USER` and `MYSQL_REPLICATION_PASSWORD` parameters and should be the same as the one specified on the master.
 
 > **Note**! The cluster only replicates the database specified in the `MYSQL_DATABASE` parameter.
 
@@ -290,6 +328,8 @@ version: '2'
 services:
   mysql-master:
     image: 'bitnami/mysql:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306'
     volumes:
@@ -298,7 +338,7 @@ services:
       - MYSQL_REPLICATION_MODE=master
       - MYSQL_REPLICATION_USER=repl_user
       - MYSQL_REPLICATION_PASSWORD=repl_password
-      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_ROOT_PASSWORD=master_root_password
       - MYSQL_USER=my_user
       - MYSQL_PASSWORD=my_password
       - MYSQL_DATABASE=my_database
@@ -306,6 +346,8 @@ services:
       - '/path/to/mysql-persistence:/bitnami/mysql'
   mysql-slave:
     image: 'bitnami/mysql:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306'
     depends_on:
@@ -314,11 +356,10 @@ services:
       - MYSQL_REPLICATION_MODE=slave
       - MYSQL_REPLICATION_USER=repl_user
       - MYSQL_REPLICATION_PASSWORD=repl_password
+      - MYSQL_ROOT_PASSWORD=slave_root_password
       - MYSQL_MASTER_HOST=mysql-master
       - MYSQL_MASTER_PORT=3306
-      - MYSQL_MASTER_USER=my_user
-      - MYSQL_MASTER_PASSWORD=my_password
-      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_MASTER_ROOT_PASSWORD=master_root_password
       - MYSQL_USER=my_user
       - MYSQL_PASSWORD=my_password
       - MYSQL_DATABASE=my_database
@@ -343,7 +384,7 @@ The image looks for configuration in the `conf/` directory of `/bitnami/mysql`. 
 Run the MySQL image, mounting a directory from your host.
 
 ```bash
-docker run --name mysql \
+docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes \
   -v /path/to/mysql-persistence:/bitnami/mysql \
   bitnami/mysql:latest
 ```
@@ -356,6 +397,8 @@ version: '2'
 services:
   mysql:
     image: 'bitnami/mysql:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306:3306'
     volumes:
@@ -460,6 +503,8 @@ version: '2'
 services:
   mysql:
     image: 'bitnami/mysql:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306:3306'
     volumes:
@@ -502,7 +547,7 @@ docker-compose rm -v mysql
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
 ```bash
-docker run --name mysql bitnami/mysql:latest
+docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -510,6 +555,17 @@ or using Docker Compose:
 ```bash
 docker-compose start mysql
 ```
+
+# Notable Changes
+
+## 5.7.17-r4
+
+- `MYSQL_MASTER_USER` has been renamed to `MYSQL_MASTER_ROOT_USER`
+- `MYSQL_MASTER_PASSWORD` has been renamed to `MYSQL_MASTER_ROOT_PASSWORD`
+- `MYSQl_ROOT_USER` has been added to the available env variables. It can be used to specify the admin user.
+- `ALLOW_EMPTY_PASSWORD` has been added to the available env variables. It can be used to allow blank passwords for MySQL.
+- By default the MySQL image requires a root password to start. You can specify it using the `MYSQL_ROOT_PASSWORD` env variable or disable this requirement by setting the `ALLOW_EMPTY_PASSWORD`  env variable to `yes` (testing or development scenarios).
+
 
 # Contributing
 
