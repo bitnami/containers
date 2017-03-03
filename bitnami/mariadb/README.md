@@ -297,6 +297,7 @@ Next we start a MariaDB slave container.
 
 ```bash
 docker run --name mariadb-slave --link mariadb-master:master \
+  -e MARIADB_ROOT_PASSWORD=slave_root_password \
   -e MARIADB_REPLICATION_MODE=slave \
   -e MARIADB_REPLICATION_USER=my_repl_user \
   -e MARIADB_REPLICATION_PASSWORD=my_repl_password \
@@ -345,6 +346,7 @@ services:
       - MARIADB_REPLICATION_MODE=slave
       - MARIADB_REPLICATION_USER=repl_user
       - MARIADB_REPLICATION_PASSWORD=repl_password
+      - MARIADB_ROOT_PASSWORD=slave_root_password
       - MARIADB_MASTER_HOST=mariadb-master
       - MARIADB_MASTER_PORT=3306
       - MARIADB_MASTER_ROOT_USER=root
