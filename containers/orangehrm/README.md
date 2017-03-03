@@ -76,7 +76,7 @@ If you want to run the application manually instead of using `docker-compose`, t
 
   ```bash
   $ docker volume create --name mariadb_data
-  $ docker run -d --name mariadb \
+  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
     --net orangehrm-tier \
     --volume mariadb_data:/bitnami/mariadb \
     bitnami/mariadb:latest
@@ -112,7 +112,9 @@ The following `docker-compose.yml` template demonstrates the use of host directo
 version: '2'
 services:
   mariadb:
-    image: bitnami/mariadb:latest
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - /path/to/mariadb-persistence:/bitnami/mariadb
   orangehrm:
@@ -137,7 +139,7 @@ services:
 
 2. Create a MariaDB container with host volume
   ```bash
-  $ docker run -d --name mariadb \
+  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
     --net orangehrm-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
     bitnami/mariadb:latest
@@ -227,7 +229,9 @@ The OrangeHRM instance can be customized by specifying environment variables on 
 version: '2'
 services:
   mariadb:
-    image: bitnami/mariadb:latest
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - mariadb_data:/bitnami/mariadb
   orangehrm:
