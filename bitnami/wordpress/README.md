@@ -228,11 +228,11 @@ The WordPress instance can be customized by specifying environment variables on 
 - `WORDPRESS_BLOG_NAME`: WordPress blog name. Default: **User's blog**
 
 ##### Use existing database
-- `WORDPRESS_DATABASE_USER`: Database user that WordPress will use to connect with the database.
-- `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database.
-- `WORDPRESS_DATABASE_NAME`: Database name that WordPress will use to connect with the database.
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
 - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
+- `WORDPRESS_DATABASE_USER`: Database user that WordPress will use to connect with the database. Default: **bn_wordpress**
+- `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database. Default: **bitnami_wordpress**
+- `WORDPRESS_DATABASE_NAME`: Database name that WordPress will use to connect with the database.
 
 ##### Create new database using mysql-client
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
@@ -336,8 +336,10 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
 ### Connect WordPress docker container to an existing database
 
 The Bitnami WordPress container supports connecting the WordPress application to an external database. In order to configure it, you should set the following environment variables:
-- `WORDPRESS_DATABASE_USER`: Database user that WordPress will use to connect with the database.
-- `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database.
+- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
+- `WORDPRESS_DATABASE_USER`: Database user that WordPress will use to connect with the database. Default: **bn_wordpress**
+- `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database. Default: **bitnami_wordpress**
 - `WORDPRESS_DATABASE_NAME`: Database name that WordPress will use to connect with the database.
 
 This would be an example of using an external database for WordPress.
