@@ -1,5 +1,6 @@
 {
   "rootPassword": "{{$global.env.MYSQL_ROOT_PASSWORD}}",
+  "rootUser": "{{$global.env.MYSQL_ROOT_USER}}",
   "username": "{{$global.env.MYSQL_USER}}",
   "password": "{{$global.env.MYSQL_PASSWORD}}",
   "database": "{{$global.env.MYSQL_DATABASE}}",
@@ -9,6 +10,7 @@
   "replicationPassword": "{{$global.env.MYSQL_REPLICATION_PASSWORD}}",
   "masterHost": "{{$global.env.MYSQL_MASTER_HOST}}",
   "masterPort": "{{$global.env.MYSQL_MASTER_PORT}}",
-  "masterUser": "{{$global.env.MYSQL_MASTER_USER}}",
-  "masterPassword": "{{$global.env.MYSQL_MASTER_PASSWORD}}"
+  "masterRootUser": "{{$global.env.MYSQL_MASTER_ROOT_USER}}",
+  "masterRootPassword": "{{$global.env.MYSQL_MASTER_ROOT_PASSWORD}}",
+  "allowEmptyPassword": "{{$global.env.ALLOW_EMPTY_PASSWORD}}"
 }
