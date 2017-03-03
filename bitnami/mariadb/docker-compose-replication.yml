@@ -8,6 +8,7 @@ services:
     volumes:
       - 'mariadb_master_data:/bitnami/mariadb'
     environment:
+      - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_REPLICATION_MODE=master
       - MARIADB_REPLICATION_USER=repl_user
       - MARIADB_USER=my_user
@@ -21,6 +22,7 @@ services:
     depends_on:
       - mariadb-master
     environment:
+      - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_REPLICATION_MODE=slave
       - MARIADB_REPLICATION_USER=repl_user
       - MARIADB_USER=my_user
