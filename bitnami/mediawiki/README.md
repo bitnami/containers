@@ -35,6 +35,8 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
   mediawiki:
@@ -72,7 +74,7 @@ If you want to run the application manually instead of using docker-compose, the
 2. Start a MariaDB database in the network generated:
 
   ```bash
-  $ docker run -d --name mariadb --net mediawiki-tier bitnami/mariadb:latest
+  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net mediawiki-tier bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order for Mediawiki to resolve the host
@@ -105,6 +107,8 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '/path/to/mariadb-persistence:/bitnami/mariadb'
   mediawiki:
@@ -133,7 +137,7 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Create a MariaDB container with host volume:
 
   ```bash
-  $ docker run -d --name mariadb \
+  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
     --net mediawiki-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
     bitnami/mariadb:latest
