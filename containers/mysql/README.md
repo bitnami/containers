@@ -307,7 +307,6 @@ docker run --name mysql-slave --link mysql-master:master \
   -e MYSQL_REPLICATION_USER=my_repl_user \
   -e MYSQL_REPLICATION_PASSWORD=my_repl_password \
   -e MYSQL_MASTER_HOST=master \
-  -e MYSQL_MASTER_ROOT_USER=root \
   -e MYSQL_MASTER_ROOT_PASSWORD=master_root_password \
   -e MYSQL_USER=my_user \
   -e MYSQL_PASSWORD=my_password \
@@ -360,7 +359,6 @@ services:
       - MYSQL_ROOT_PASSWORD=slave_root_password
       - MYSQL_MASTER_HOST=mysql-master
       - MYSQL_MASTER_PORT=3306
-      - MYSQL_MASTER_ROOT_USER=root
       - MYSQL_MASTER_ROOT_PASSWORD=master_root_password
       - MYSQL_USER=my_user
       - MYSQL_PASSWORD=my_password
