@@ -184,7 +184,7 @@ services:
 
 ## Allowing empty passwords
 
-By default the MariaDB image expects that all the available password to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD` env variable. This env variable is only recommended for testing or development purpose. We strongly recommend to specify the `MARIADB_ROOT_PASSWORD` for any other scenario.
+By default the MariaDB image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `MARIADB_ROOT_PASSWORD` for any other scenario.
 
 ```bash
 docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes bitnami/mariadb:latest
@@ -257,7 +257,7 @@ services:
       - MARIADB_DATABASE=my_database
 ```
 
-**Note!** The `root` user will still be created with remote access if you set the `ALLOW_EMPTY_PASSWORD` env variable. Please provide the `MARIADB_ROOT_PASSWORD` env variable instead if you want to set a password for the `root` user.
+**Note!** The `root` user will be created with remote access and without a password if `ALLOW_EMPTY_PASSWORD` is enabled. Please provide the `MARIADB_ROOT_PASSWORD` env variable instead if you want to set a password for the `root` user.
 
 ## Setting up a replication cluster
 
@@ -279,7 +279,7 @@ The first step is to start the MariaDB master.
 
 ```bash
 docker run --name mariadb-master \
-  -e MARIADB_ROOT_PASSWORD=root_password \
+  -e MARIADB_ROOT_PASSWORD=master_root_password \
   -e MARIADB_REPLICATION_MODE=master \
   -e MARIADB_REPLICATION_USER=my_repl_user \
   -e MARIADB_REPLICATION_PASSWORD=my_repl_password \
@@ -297,13 +297,12 @@ Next we start a MariaDB slave container.
 
 ```bash
 docker run --name mariadb-slave --link mariadb-master:master \
-  -e MARIADB_ROOT_PASSWORD=root_password \
   -e MARIADB_REPLICATION_MODE=slave \
   -e MARIADB_REPLICATION_USER=my_repl_user \
   -e MARIADB_REPLICATION_PASSWORD=my_repl_password \
   -e MARIADB_MASTER_HOST=master \
-  -e MARIADB_MASTER_ROOT_USER=my_user \
-  -e MARIADB_MASTER_ROOT_PASSWORD=my_password \
+  -e MARIADB_MASTER_ROOT_USER=root \
+  -e MARIADB_MASTER_ROOT_PASSWORD=master_root_password \
   -e MARIADB_USER=my_user \
   -e MARIADB_PASSWORD=my_password \
   -e MARIADB_DATABASE=my_database \
@@ -332,7 +331,7 @@ services:
       - MARIADB_REPLICATION_MODE=master
       - MARIADB_REPLICATION_USER=repl_user
       - MARIADB_REPLICATION_PASSWORD=repl_password
-      - MARIADB_ROOT_PASSWORD=root_password
+      - MARIADB_ROOT_PASSWORD=master_root_password
       - MARIADB_USER=my_user
       - MARIADB_PASSWORD=my_password
       - MARIADB_DATABASE=my_database
@@ -348,9 +347,8 @@ services:
       - MARIADB_REPLICATION_PASSWORD=repl_password
       - MARIADB_MASTER_HOST=mariadb-master
       - MARIADB_MASTER_PORT=3306
-      - MARIADB_MASTER_ROOT_USER=my_user
-      - MARIADB_MASTER_ROOT_PASSWORD=my_password
-      - MARIADB_ROOT_PASSWORD=root_password
+      - MARIADB_MASTER_ROOT_USER=root
+      - MARIADB_MASTER_ROOT_PASSWORD=master_root_password
       - MARIADB_USER=my_user
       - MARIADB_PASSWORD=my_password
       - MARIADB_DATABASE=my_database
