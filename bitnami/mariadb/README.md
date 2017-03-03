@@ -10,7 +10,7 @@
 # TLDR
 
 ```bash
-docker run --name mariadb bitnami/mariadb:latest
+docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes bitnami/mariadb:latest
 ```
 
 ## Docker Compose
@@ -21,6 +21,8 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306:3306'
 ```
@@ -69,6 +71,8 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306:3306'
     volumes:
@@ -97,6 +101,7 @@ Use the `--network app-tier` argument to the `docker run` command to attach the 
 
 ```bash
 $ docker run -d --name mariadb-server \
+    -e ALLOW_EMPTY_PASSWORD=yes \
     --network app-tier \
     bitnami/mariadb:latest
 ```
@@ -125,6 +130,8 @@ networks:
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - app-tier
   myapp:
@@ -135,7 +142,7 @@ services:
 
 > **IMPORTANT**:
 >
-> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 1. Please update the `YOUR_APPLICATION_IMAGE` placeholder in the above snippet with your application image
 > 2. In your application container, use the hostname `mariadb` to connect to the MariaDB server
 
 Launch the containers using:
@@ -148,7 +155,12 @@ $ docker-compose up -d
 
 ## Setting the root password on first run
 
-Passing the `MARIADB_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the root user to the value of `MARIADB_ROOT_PASSWORD`.
+The root user and password can easily be setup with the Bitnami MariaDB Docker image using the following environment variables:
+
+ - `MARIADB_ROOT_USER`: The database admin user. Defaults to `root`.
+ - `MARIADB_ROOT_PASSWORD`: The database admin user password. No defaults.
+
+Passing the `MARIADB_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the `MARIADB_ROOT_USER` user to the value of `MARIADB_ROOT_PASSWORD`.
 
 ```bash
 docker run --name mariadb -e MARIADB_ROOT_PASSWORD=password123 bitnami/mariadb:latest
@@ -168,7 +180,29 @@ services:
       - MARIADB_ROOT_PASSWORD=password123
 ```
 
-**Warning** The `root` user is always created with remote access. It's suggested that the `MARIADB_ROOT_PASSWORD` env variable is always specified to set a password for the `root` user.
+**Warning** The `MARIADB_ROOT_USER` user is always created with remote access. It's suggested that the `MARIADB_ROOT_PASSWORD` env variable is always specified to set a password for the `MARIADB_ROOT_USER` user. In case you want to allow the `MARIADB_ROOT_USER` user to access the database without a password set the environment variable `ALLOW_EMPTY_PASSWORD=yes`. **This is recommended only for development**.
+
+## Allowing empty passwords
+
+By default the MariaDB image expects that all the available password to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD` env variable. This env variable is only recommended for testing or development purpose. We strongly recommend to specify the `MARIADB_ROOT_PASSWORD` for any other scenario.
+
+```bash
+docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes bitnami/mariadb:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    ports:
+      - '3306:3306'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+```
 
 ## Creating a database on first run
 
@@ -189,6 +223,7 @@ services:
     ports:
       - '3306:3306'
     environment:
+      - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_DATABASE=my_database
 ```
 
@@ -198,7 +233,9 @@ You can create a restricted database user that only has permissions for the data
 
 ```bash
 docker run --name mariadb \
-  -e MARIADB_USER=my_user -e MARIADB_PASSWORD=my_password \
+  -e ALLOW_EMPTY_PASSWORD=yes \
+  -e MARIADB_USER=my_user \
+  -e MARIADB_PASSWORD=my_password \
   -e MARIADB_DATABASE=my_database \
   bitnami/mariadb:latest
 ```
@@ -214,12 +251,13 @@ services:
     ports:
       - '3306:3306'
     environment:
+      - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=my_user
       - MARIADB_PASSWORD=my_password
       - MARIADB_DATABASE=my_database
 ```
 
-**Note!** The `root` user will still be created with remote access. Please ensure that you have specified a password for the `root` user using the `MARIADB_ROOT_PASSWORD` env variable.
+**Note!** The `root` user will still be created with remote access if you set the `ALLOW_EMPTY_PASSWORD` env variable. Please provide the `MARIADB_ROOT_PASSWORD` env variable instead if you want to set a password for the `root` user.
 
 ## Setting up a replication cluster
 
@@ -230,8 +268,8 @@ A **zero downtime** MariaDB master-slave [replication](https://dev.mysql.com/doc
  - `MARIADB_REPLICATION_PASSWORD`: The replication users password. No defaults.
  - `MARIADB_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
  - `MARIADB_MASTER_PORT`: Server port of the replication master (slave parameter). Defaults to `3306`.
- - `MARIADB_MASTER_USER`: User on replication master with access to `MARIADB_DATABASE` (slave parameter). Defaults to `root`
- - `MARIADB_MASTER_PASSWORD`: Password of user on replication master with access to `MARIADB_DATABASE` (slave parameter). No defaults.
+ - `MARIADB_MASTER_ROOT_USER`: User on replication master with access to `MARIADB_DATABASE` (slave parameter). Defaults to `root`
+ - `MARIADB_MASTER_ROOT_PASSWORD`: Password of user on replication master with access to `MARIADB_DATABASE` (slave parameter). No defaults.
 
 In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
 
@@ -264,15 +302,15 @@ docker run --name mariadb-slave --link mariadb-master:master \
   -e MARIADB_REPLICATION_USER=my_repl_user \
   -e MARIADB_REPLICATION_PASSWORD=my_repl_password \
   -e MARIADB_MASTER_HOST=master \
-  -e MARIADB_MASTER_USER=my_user \
-  -e MARIADB_MASTER_PASSWORD=my_password \
+  -e MARIADB_MASTER_ROOT_USER=my_user \
+  -e MARIADB_MASTER_ROOT_PASSWORD=my_password \
   -e MARIADB_USER=my_user \
   -e MARIADB_PASSWORD=my_password \
   -e MARIADB_DATABASE=my_database \
   bitnami/mariadb:latest
 ```
 
-In the above command the container is configured as a `slave` using the `MARIADB_REPLICATION_MODE` parameter. The `MARIADB_MASTER_HOST`, `MARIADB_MASTER_USER` and `MARIADB_MASTER_PASSWORD` parameters are used by the slave to connect to the master and take a dump of the existing data in the database identified by `MARIADB_DATABASE`. The replication user credentials are specified using the `MARIADB_REPLICATION_USER` and `MARIADB_REPLICATION_PASSWORD` parameters and should be the same as the one specified on the master.
+In the above command the container is configured as a `slave` using the `MARIADB_REPLICATION_MODE` parameter. The `MARIADB_MASTER_HOST`, `MARIADB_MASTER_ROOT_USER` and `MARIADB_MASTER_ROOT_PASSWORD` parameters are used by the slave to connect to the master and take a dump of the existing data in the database identified by `MARIADB_DATABASE`. The replication user credentials are specified using the `MARIADB_REPLICATION_USER` and `MARIADB_REPLICATION_PASSWORD` parameters and should be the same as the one specified on the master.
 
 > **Note**! The cluster only replicates the database specified in the `MARIADB_DATABASE` parameter.
 
@@ -310,8 +348,8 @@ services:
       - MARIADB_REPLICATION_PASSWORD=repl_password
       - MARIADB_MASTER_HOST=mariadb-master
       - MARIADB_MASTER_PORT=3306
-      - MARIADB_MASTER_USER=my_user
-      - MARIADB_MASTER_PASSWORD=my_password
+      - MARIADB_MASTER_ROOT_USER=my_user
+      - MARIADB_MASTER_ROOT_PASSWORD=my_password
       - MARIADB_ROOT_PASSWORD=root_password
       - MARIADB_USER=my_user
       - MARIADB_PASSWORD=my_password
@@ -362,6 +400,8 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306:3306'
     volumes:
@@ -460,6 +500,8 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306:3306'
     volumes:
@@ -493,6 +535,7 @@ docker rm -v mariadb
 
 or using Docker Compose:
 
+
 ```bash
 docker-compose rm -v mariadb
 ```
@@ -512,6 +555,13 @@ docker-compose start mariadb
 ```
 
 # Notable Changes
+## 10.1.21-r2
+
+- `MARIADB_MASTER_USER` has been renamed to `MARIADB_MASTER_ROOT_USER`
+- `MARIADB_MASTER_PASSWORD` has been renamed to `MARIADB_MASTER_ROOT_PASSWORD`
+- `MARIADB_ROOT_USER` has been added to the available env variables. It can be used to specify the admin user.
+- `ALLOW_EMPTY_PASSWORD` has been added to the available env variables. It can be used to allow blank passwords for MariaDB.
+- By default the MariaDB image requires a root password to start. You can specify it using the `MARIADB_ROOT_PASSWORD` env variable or disable this requirement by setting the `ALLOW_EMPTY_PASSWORD`  env variable to `yes` (testing or development scenarios).
 
 ## 10.1.13-r0
 
