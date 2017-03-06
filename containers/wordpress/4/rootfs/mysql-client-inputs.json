@@ -1,0 +1,10 @@
+{
+  "host": "{{$global.env.MARIADB_HOST}}",
+  "port": "{{$global.env.MARIADB_PORT}}",
+  "rootUser": "{{$global.env.MARIADB_ROOT_USER}}",
+  "rootPassword": "{{$global.env.MARIADB_ROOT_PASSWORD}}",
+  "createDatabaseName": "{{$global.env.MYSQL_CLIENT_CREATE_DATABASE_NAME}}",
+  "createDatabaseUser": "{{$global.env.MYSQL_CLIENT_CREATE_DATABASE_USER}}",
+  "createDatabasePassword": "{{$global.env.MYSQL_CLIENT_CREATE_DATABASE_PASSWORD}}",
+  "allowEmptyPassword": "{{$global.env.ALLOW_EMPTY_PASSWORD}}"
+}
