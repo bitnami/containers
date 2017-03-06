@@ -11,8 +11,9 @@
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
   "smtpUsername": "{{$global.env.SMTP_USERNAME}}",
   "smtpProtocol": "{{$global.env.SMTP_PROTOCOL}}",
-  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
-  "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
   "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
-  "databaseServerPort": "{{$global.env.MARIADB_PORT}}"
+  "databaseServerPort": "{{$global.env.MARIADB_PORT}}",
+  "databaseName": "{{$global.env.WORDPRESS_DATABASE_NAME}}",
+  "databaseUser": "{{$global.env.WORDPRESS_DATABASE_USER}}",
+  "databasePassword": "{{$global.env.WORDPRESS_DATABASE_PASSWORD}}"
 }
