@@ -428,17 +428,19 @@ To restore your application using backed up data simply mount the folder with Wo
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-wordpress/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-wordpress/pulls) with your contribution.
+We'd love for you to contribute to this container. You can do it by creating an [issue](https://github.com/bitnami/bitnami-docker-wordpress/issues) or submitting a [pull request](https://github.com/bitnami/bitnami-docker-wordpress/pulls) with your contribution.
 
-# Issues
+## Issues
+If you encountered a problem running this container or you want request new features, you can file an [issue](https://github.com/bitnami/bitnami-docker-wordpress/issues).
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-wordpress/issues). For us to provide better support, be sure to include the following information in your issue:
+If you suspect your issue is a bug, please edit your issue description to include the BUG REPORT INFORMATION in the template that will appear creating the issue.
 
-- Host OS and version
-- Docker version (`$ docker version`)
-- Output of `$ docker info`
-- Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+## Pull request
+You can submit a [pull request](https://github.com/bitnami/bitnami-docker-wordpress/pulls) with your contribution. Be sure to include the required information in the template that will appear submitting the pull request.
+
+We will try to test and integrate the change as soon as we can, but be aware we have many GitHub repositories to manage and we can't immediately respond to every request.
+
+Also don't be worried if the request is closed or not integrated sometimes the priorities of Bitnami might not match the priorities of the pull request. Don't fret, the open source community thrives on forks and GitHub makes it easy to keep your changes in a forked repo.
 
 # License
 
