@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r11
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=wordpress \
-    BITNAMI_IMAGE_VERSION=4.7.2-r2 \
+    BITNAMI_IMAGE_VERSION=4.7.3-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
@@ -16,7 +16,7 @@ RUN bitnami-pkg install libphp-5.6.30-1 --checksum a62cad2320fa2d141309e75663aed
 RUN bitnami-pkg unpack mysql-client-10.1.21-2 --checksum f5d875d00ff198eea981ffa6d02d3135659baf48cbfc418604f1b75fb5a31e63
 
 # Install wordpress
-RUN bitnami-pkg unpack wordpress-4.7.2-1 --checksum 330a4cb810c66256d4b276f2559225f4c77fcadb183c23cc834c4aefe1565dc1
+RUN bitnami-pkg unpack wordpress-4.7.3-0 --checksum f6349b51b4d961de60239ba25179cf41135789710e01ddae7d804743777c8601
 
 COPY rootfs /
 
