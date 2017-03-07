@@ -25,4 +25,4 @@ EXPOSE 6379
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["nami", "start", "--foreground", "redis"]
+CMD ["/opt/bitnami/redis/bin/redis-server"]
