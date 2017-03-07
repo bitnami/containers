@@ -32,7 +32,7 @@ check_for_deprecated_env() {
   fi
 }
 
-if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$(basename $1)" == "mysqld_safe" ]] || [[ "$1" == "/init.sh" ]]; then
   # Check env vars to deprecate
   check_for_deprecated_env "MARIADB_MASTER_USER" "MARIADB_MASTER_ROOT_USER"
   export MARIADB_MASTER_ROOT_USER=${MARIADB_MASTER_USER:-${MARIADB_MASTER_ROOT_USER}}
@@ -58,7 +58,10 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
   fi
 
   nami_initialize mariadb
-  info "Starting mariadb..."
+
+  if [[ "$(basename $1)" == "mysqld_safe" ]]; then
+    set -- "$@" --defaults-file=/opt/bitnami/mariadb/conf/my.cnf
+  fi
 fi
 
 exec tini -- "$@"
