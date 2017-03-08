@@ -33,4 +33,6 @@ EXPOSE 2368
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["nami", "start", "--foreground", "ghost"]
+WORKDIR /opt/bitnami/ghost
+
+CMD ["/opt/bitnami/node/bin/node", "/opt/bitnami/ghost/index.js"]
