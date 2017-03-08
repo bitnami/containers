@@ -10,7 +10,7 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$(basename $1)" == "redis-serv
 
   # ensure redis-server is running in the foreground
   if [[ "$(basename $1)" == "redis-server" ]]; then
-    set -- "$@" /opt/bitnami/redis/conf/redis.conf --daemonize no
+    set -- gosu redis "$@" /opt/bitnami/redis/conf/redis.conf --daemonize no
   fi
 fi
 
