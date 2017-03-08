@@ -16,7 +16,7 @@ RUN bitnami-pkg install libphp-7.0.16-0 --checksum 91548c756818a24b9d5477d2cb09d
 RUN bitnami-pkg install mysql-client-10.1.21-2 --checksum f5d875d00ff198eea981ffa6d02d3135659baf48cbfc418604f1b75fb5a31e63
 
 # Install piwik
-RUN bitnami-pkg unpack piwik-3.0.2-0 --checksum a9836fe0b0696186c152a1a3414cf31b11cbba8e57bd19a91ae69084d1f710ef
+RUN bitnami-pkg unpack piwik-3.0.2-0 --checksum df51e9755e55a2851406214025917c3187a2b8b5119f8d814d5e64cc7a26f4be
 
 COPY rootfs /
 
