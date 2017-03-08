@@ -35,4 +35,4 @@ ENTRYPOINT ["/app-entrypoint.sh"]
 
 WORKDIR /opt/bitnami/ghost
 
-CMD ["/opt/bitnami/node/bin/node", "/opt/bitnami/ghost/index.js"]
+CMD ["/opt/bitnami/ghost/node_modules/pm2/bin/pm2", "start", "--no-daemon", "index.js"]
