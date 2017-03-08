@@ -57,10 +57,20 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$(basename $1)" == "mysqld_saf
     fi
   fi
 
+  # initialize mariadb module
   nami_initialize mariadb
 
   if [[ "$(basename $1)" == "mysqld_safe" ]]; then
     set -- "$@" --defaults-file=/opt/bitnami/mariadb/conf/my.cnf
+
+    # configure command line flags for replication
+    if [[ -n $MARIADB_REPLICATION_MODE ]]; then
+      set -- "$@" --server-id=$RANDOM --binlog-format=ROW --log-bin=mysql-bin
+      case $MARIADB_REPLICATION_MODE in
+        master) set -- "$@" --innodb_flush_log_at_trx_commit=1 --sync-binlog=1 ;;
+        slave)  set -- "$@" --relay-log=mysql-relay-bin --log-slave-updates=1 --read-only=1 --replicate-do-db=$MARIADB_DATABASE ;;
+      esac
+    fi
   fi
 fi
 
