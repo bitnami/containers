@@ -27,7 +27,7 @@ empty_password_enabled_warn() {
 ## param $2   Suggested environment variable to use
 ##
 check_for_deprecated_env() {
-  if [[ -n "$$1" ]]; then
+  if [[ -n "${!1}" ]]; then
     warn "The environment variable $1 is deprecated and will be removed in a future. Please use $2 instead"
   fi
 }
