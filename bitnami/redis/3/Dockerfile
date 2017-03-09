@@ -38,4 +38,4 @@ EXPOSE 6379
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["/opt/bitnami/redis/bin/redis-server"]
+CMD ["/run-redis.sh"]
