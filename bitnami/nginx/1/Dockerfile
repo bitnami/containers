@@ -25,4 +25,4 @@ EXPOSE 80 443
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["/opt/bitnami/nginx/sbin/nginx"]
+CMD ["/run-nginx.sh"]
