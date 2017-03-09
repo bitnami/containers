@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r11
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=jenkins \
-    BITNAMI_IMAGE_VERSION=2.49-r0 \
+    BITNAMI_IMAGE_VERSION=2.49-r1 \
     PATH=/opt/bitnami/tomcat/bin:/opt/bitnami/git/bin:/opt/bitnami/java/bin:$PATH
 
 # System packages required
@@ -15,7 +15,7 @@ RUN bitnami-pkg install tomcat-8.0.41-1 --checksum 3bbbdae242e8dc35ac2f7725fee11
 RUN bitnami-pkg install git-2.10.1-2 --checksum 6f9fd8b0591f268f965930db0c091598e5c4f9dccbb6853010e1ac9e5035cd6f
 
 # Install jenkins
-RUN bitnami-pkg unpack jenkins-2.49-0 --checksum 0ed29894c9a1c3edece8ba3bb61c11917ad434bdc2c8eda29a0d8bad3420bb7d
+RUN bitnami-pkg unpack jenkins-2.49-1 --checksum 9569ab5e937742f77fe22a2b3cef3a74720a65618355192ad0762998ab494b52
 
 COPY rootfs /
 
