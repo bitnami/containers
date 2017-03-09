@@ -36,4 +36,4 @@ EXPOSE 80 443
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["/opt/bitnami/apache/bin/httpd"]
+CMD ["/run-drupal.sh"]
