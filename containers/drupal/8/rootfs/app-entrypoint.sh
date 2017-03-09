@@ -5,9 +5,15 @@
 print_welcome_page
 check_for_updates &
 
-if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$(basename $1)" == "httpd" ]] || [[ "$1" == "/init.sh" ]]; then
   nami_initialize apache php drupal
-  info "Starting drupal..."
+
+  if [[ "$(basename $1)" == "httpd" ]]; then
+    # drupal initialization leaves a running httpd instance
+    apachectl stop
+
+    set -- "$@" -f /opt/bitnami/apache/conf/httpd.conf -D FOREGROUND
+  fi
 fi
 
 exec tini -- "$@"
