@@ -44,4 +44,4 @@ EXPOSE 27017
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["/opt/bitnami/mongodb/bin/mongod"]
+CMD ["/run-mongodb.sh"]
