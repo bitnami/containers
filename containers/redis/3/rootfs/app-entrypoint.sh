@@ -5,16 +5,8 @@
 print_welcome_page
 check_for_updates &
 
-if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$(basename $1)" == "redis-server" ]] || [[ "$1" == "/init.sh" ]]; then
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run-redis.sh" ]]; then
   nami_initialize redis
-
-  # log output to stdout
-  sed -i 's/^logfile /# logfile /g' /opt/bitnami/redis/conf/redis.conf
-
-  # ensure redis-server is running in the foreground
-  if [[ "$(basename $1)" == "redis-server" ]]; then
-    set -- gosu redis "$@" /opt/bitnami/redis/conf/redis.conf --daemonize no
-  fi
 fi
 
 exec tini -- "$@"
