@@ -9,7 +9,7 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$(basename $1)" == "mongod" ]]
   nami_initialize mongodb
 
   if [[ "$(basename $1)" == "mongod" ]]; then
-    set -- "$@" --config /opt/bitnami/mongodb/conf/mongodb.conf
+    set -- gosu mongo "$@" --config /opt/bitnami/mongodb/conf/mongodb.conf
   fi
 fi
 
