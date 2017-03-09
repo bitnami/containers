@@ -35,4 +35,4 @@ EXPOSE 3306
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["/opt/bitnami/mariadb/bin/mysqld_safe"]
+CMD ["/run-mariadb.sh"]
