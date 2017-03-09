@@ -33,6 +33,4 @@ EXPOSE 3000
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-WORKDIR /opt/bitnami/redmine
-
-CMD ["/opt/bitnami/ruby/bin/bundle", "exec", "passenger", "start", "-e", "production", "--log-file", "/opt/bitnami/redmine/logs/production.log", "-p", "3000"]
+CMD ["/run-redmine.sh"]
