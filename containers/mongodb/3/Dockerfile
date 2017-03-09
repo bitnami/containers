@@ -31,4 +31,4 @@ EXPOSE 27017
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["nami", "start", "--foreground", "mongodb"]
+CMD ["/opt/bitnami/mongodb/bin/mongod"]
