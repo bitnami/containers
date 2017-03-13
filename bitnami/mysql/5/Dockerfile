@@ -2,7 +2,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r11
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=5.7.17-r5 \
+ENV BITNAMI_IMAGE_VERSION=5.7.17-r6 \
     BITNAMI_APP_NAME=mysql \
     PATH=/opt/bitnami/mysql/sbin:/opt/bitnami/mysql/bin:$PATH
 
@@ -10,7 +10,7 @@ ENV BITNAMI_IMAGE_VERSION=5.7.17-r5 \
 RUN install_packages libc6 libstdc++6 libgcc1 libncurses5 libtinfo5 zlib1g libssl1.0.0 libaio1
 
 # Install mysql
-RUN bitnami-pkg unpack mysql-5.7.17-2 --checksum f46b8c266d4abfe20c91ba345cc26926db93376a34c585e1d9d3a6e10bc84bc0
+RUN bitnami-pkg unpack mysql-5.7.17-3 --checksum 99243d5458afca50fef3ca6126d6e2df3e53e016f49dd4447304834d4868f8fb
 
 COPY rootfs /
 
