@@ -1,8 +1,8 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r10
+FROM gcr.io/stacksmith-images/minideb:jessie-r11
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=10.1.21-r2 \
+ENV BITNAMI_IMAGE_VERSION=10.1.21-r3 \
     BITNAMI_APP_NAME=mariadb \
     PATH=/opt/bitnami/mariadb/sbin:/opt/bitnami/mariadb/bin:$PATH
 
@@ -10,7 +10,7 @@ ENV BITNAMI_IMAGE_VERSION=10.1.21-r2 \
 RUN install_packages libc6 libaio1 zlib1g libjemalloc1 libssl1.0.0 libstdc++6 libgcc1 libncurses5 libtinfo5
 
 # Install mariadb
-RUN bitnami-pkg unpack mariadb-10.1.21-1 --checksum d94d35f9ef9ee85ad98107b60a170df0ae9733055eca5142537a9f11ceacd1c4
+RUN bitnami-pkg unpack mariadb-10.1.21-2 --checksum f16e13c1dfd77528a006faeae41226697e52f1c9e99467771afae1ca3f5709c0
 
 COPY rootfs /
 
