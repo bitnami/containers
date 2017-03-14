@@ -12,7 +12,7 @@ COPY rootfs /
 ENV PATH=/opt/bitnami/ruby/bin:$PATH
 
 ENV BITNAMI_APP_NAME=ruby \
-    BITNAMI_IMAGE_VERSION=2.2.6-r0
+    BITNAMI_IMAGE_VERSION=2.2.6-r1
 
 WORKDIR /app
 
