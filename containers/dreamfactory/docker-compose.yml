@@ -1,0 +1,38 @@
+version: '2'
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - 'mariadb_data:/bitnami/mariadb'
+  redis:
+    image: 'bitnami/redis:latest'
+    volumes:
+      - 'redis_data:/bitnami/redis'
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+  dreamfactory:
+    image: 'bitnami/dreamfactory:latest'
+    ports:
+      - '80:80'
+      - '443:443'
+    depends_on:
+      - mariadb
+      - redis
+      - mongodb
+    volumes:
+      - 'dreamfactory_data:/bitnami/dreamfactory'
+      - 'apache_data:/bitnami/apache'
+      - 'php_data:/bitnami/php'
+volumes:
+  mariadb_data:
+    driver: local
+  redis_data:
+    driver: local
+  dreamfactory_data:
+    driver: local
+  apache_data:
+    driver: local
+  php_data:
+    driver: local

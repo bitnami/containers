@@ -1,0 +1,32 @@
+machine:
+  services:
+  - docker
+  environment:
+    RELEASE_SERIES_LIST: 2
+    LATEST_STABLE: 2
+    IMAGE_NAME: dreamfactory
+    CHART_NAME: dreamfactory
+    CHART_REPO: https://github.com/kubernetes/charts
+    DOCKER_PROJECT: bitnami
+    QUAY_PROJECT: bitnami
+    GCLOUD_PROJECT: bitnami-containers
+
+dependencies:
+  override:
+  - docker info
+  - gcloud version
+  - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-pull-cache.sh | bash -
+
+test:
+  override:
+  - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-image-test.sh | bash -
+
+deployment:
+  development:
+    branch: master
+    commands:
+    - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-development-image.sh | bash -
+  release:
+    tag: /^[0-9].*-r[0-9]+$/
+    commands:
+    - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-release-image.sh | bash -
