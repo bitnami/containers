@@ -1,0 +1,17 @@
+{
+  "mariadbUser": "{{$global.env.MARIADB_USER}}",
+  "mariadbPassword": "{{$global.env.MARIADB_PASSWORD}}",
+  "mariadbHost": "{{$global.env.MARIADB_HOST}}",
+  "mariadbPort": "{{$global.env.MARIADB_PORT}}",
+  "mongodbUser": "{{$global.env.MONGODB_USER}}",
+  "mongodbPassword": "{{$global.env.MONGODB_PASSWORD}}",
+  "mongodbHost": "{{$global.env.MONGODB_HOST}}",
+  "mongodbPort": "{{$global.env.MONGODB_PORT}}",
+  "redisHost": "{{$global.env.REDIS_HOST}}",
+  "redisPort": "{{$global.env.REDIS_PORT}}",
+  "redisPassword": "{{$global.env.REDIS_PASSWORD}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}"
+}
