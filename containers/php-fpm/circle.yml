@@ -5,7 +5,7 @@ machine:
     RELEASE_SERIES_LIST: 5.6,7.0,7.1
     LATEST_STABLE: 7.1
     IMAGE_NAME: php-fpm
-    CHART_NAME: php-fpm
+    CHART_NAME:
     CHART_REPO: https://github.com/bitnami/charts
     DOCKER_PROJECT: bitnami
     QUAY_PROJECT: bitnami
