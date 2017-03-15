@@ -3,7 +3,7 @@
 
 # What is DreamFactory?
 
-> DreamFactory is an open source REST API for mobile enterprise application developers. Add a REST API to any backend system. Services include SQL, NoSQL, BLOB, email, users, roles, security, and integration. Whether you’re building a native or web-based app, DreamFactory developers can focus on creating great front-ends to their apps, then leaving all the backend work to DreamFactory.
+> DreamFactory is an open source REST API for mobile enterprise application developers. Add a REST API to any backend system. Services include SQL, NoSQL, BLOB, email, users, roles, security, and integration. Whether you’re building a native or web-based app, DreamFactory developers can focus on creating great front-ends to their apps, while leaving all the backend work to DreamFactory.
 
 https://www.dreamfactory.com/
 
@@ -139,7 +139,7 @@ Access your application at http://your-ip/
 
 For persistence of the DreamFactory deployment, the above examples define docker volumes namely `mariadb_data`, `mongodb_data`, `redis_data`, `dreamfactory_data`, `apache_data` and `php_data`. The DreamFactory application state will persist as long as these volumes are not removed.
 
-If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume). Alternatively you can make use of volume plugins to host the volume data.
+To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume). Alternatively you can make use of volume plugins to host the volume data.
 
 ### Mount host directories as data volumes with Docker Compose
 
@@ -357,7 +357,7 @@ volumes:
     driver: local
 ```
 
-### Specifying Environment variables on the Docker command line
+### Specifying environment variables on the Docker command line
 
 ```bash
 $ docker run -d --name dreamfactory -p 80:80 -p 443:443 \
