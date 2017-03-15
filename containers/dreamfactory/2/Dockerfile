@@ -28,8 +28,7 @@ ENV APACHE_HTTP_PORT="80" \
     MARIADB_ROOT_PASSWORD="" \
     MONGODB_HOST="mongodb" \
     MONGODB_PORT="27017" \
-    REDIS_HOST="redis" \
-
+    REDIS_HOST="redis"
 
 COPY rootfs /
 
