@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r11
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=dreamfactory \
-    BITNAMI_IMAGE_VERSION=2.5.0 \
+    BITNAMI_IMAGE_VERSION=2.5.0-r0 \
     PATH=/opt/bitnami/mysql/bin/:/opt/bitnami/php/bin/:$PATH
 
 # System packages required
@@ -28,8 +28,7 @@ ENV APACHE_HTTP_PORT="80" \
     MARIADB_ROOT_PASSWORD="" \
     MONGODB_HOST="mongodb" \
     MONGODB_PORT="27017" \
-    REDIS_HOST="redis" \
-
+    REDIS_HOST="redis"
 
 COPY rootfs /
 
