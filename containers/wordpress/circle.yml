@@ -5,7 +5,7 @@ machine:
     RELEASE_SERIES_LIST: 4
     LATEST_STABLE: 4
     IMAGE_NAME: wordpress
-    CHART_NAME:
+    CHART_NAME: wordpress
     CHART_REPO: https://github.com/kubernetes/charts
     DOCKER_PROJECT: bitnami
     QUAY_PROJECT: bitnami
