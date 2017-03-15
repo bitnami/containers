@@ -5,8 +5,8 @@ machine:
     RELEASE_SERIES_LIST: 2
     LATEST_STABLE: 2
     IMAGE_NAME: dreamfactory
-    CHART_NAME: dreamfactory
-    CHART_REPO: https://github.com/kubernetes/charts
+    CHART_NAME:
+    CHART_REPO: https://github.com/bitnami/charts
     DOCKER_PROJECT: bitnami
     QUAY_PROJECT: bitnami
     GCLOUD_PROJECT: bitnami-containers
