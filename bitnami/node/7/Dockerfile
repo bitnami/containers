@@ -6,7 +6,7 @@ MAINTAINER Bitnami <containers@bitnami.com>
 RUN install_packages libc6 libssl1.0.0 libncurses5 libtinfo5 zlib1g libbz2-1.0 libreadline6 libstdc++6 libgcc1 ghostscript imagemagick libmysqlclient18
 
 # Install node
-RUN bitnami-pkg unpack node-7.7.3-0 --checksum 73e444ad2294854d46ce4de07a7e0a43647f34288683e73ba58cfc50532578c4
+RUN bitnami-pkg install node-7.7.3-0 --checksum 73e444ad2294854d46ce4de07a7e0a43647f34288683e73ba58cfc50532578c4
 
 COPY rootfs /
 
