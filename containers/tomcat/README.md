@@ -3,7 +3,7 @@
 
 # Supported tags and respective `Dockerfile` links
 
- - [`9.0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/1093c754e53c1b666b2ca60a4fd569b859541c62/9.0/Dockerfile) [`9.0.0.M17-r2`](https://github.com/bitnami/bitnami-docker-tomcat/blob/1093c754e53c1b666b2ca60a4fd569b859541c62/9.0/Dockerfile)
+ - [`9.0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/e3298aab2eb154cdce8029ef0271e7590d931281/9.0/Dockerfile) [`9.0.0.M18-r0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/e3298aab2eb154cdce8029ef0271e7590d931281/9.0/Dockerfile)
  - [`8.0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/a1e6342b7a87ad7be4e1d8a42e6493d1fe8d6ee7/8.0/Dockerfile) [`8.0.42-r0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/a1e6342b7a87ad7be4e1d8a42e6493d1fe8d6ee7/8.0/Dockerfile) [`latest`](https://github.com/bitnami/bitnami-docker-tomcat/blob/a1e6342b7a87ad7be4e1d8a42e6493d1fe8d6ee7/8.0/Dockerfile)
  - [`7`](https://github.com/bitnami/bitnami-docker-tomcat/blob/1a8c4d76b8a309919404fe286dae464c2305e138/7/Dockerfile) [`7.0.75-r0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/1a8c4d76b8a309919404fe286dae464c2305e138/7/Dockerfile)
 
