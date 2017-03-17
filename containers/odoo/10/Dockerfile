@@ -1,9 +1,9 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r10
+FROM gcr.io/stacksmith-images/minideb:jessie-r11
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=odoo \
-    BITNAMI_IMAGE_VERSION=10.0.20170215-r1 \
+    BITNAMI_IMAGE_VERSION=10.0.20170317-r0 \
     PATH=/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/postgresql/bin:$PATH
 
 # System packages required
@@ -11,11 +11,11 @@ RUN install_packages libc6 libssl1.0.0 libncurses5 libtinfo5 zlib1g libsqlite3-0
 
 # Additional modules required
 RUN bitnami-pkg install python-2.7.13-0 --checksum 7f5aac196054c7eb04c981243b4ddf37020cc3eb8a7cdc69d72da57212b21573
-RUN bitnami-pkg install postgresql-client-9.6.2-1 --checksum 363d32e555bb33e1e13c744d6921a91d933d7e54a5c990b2e66f4e12ec91e442
-RUN bitnami-pkg install node-6.9.5-0 --checksum a0ea55e9a34d38099a310500f708ebb3712f7fae41a83deaffb9c4b655684531
+RUN bitnami-pkg install postgresql-client-9.6.2-2 --checksum 1cb6a386042968d222f6f2dc6ba44ec973c4926e941aee14862e6cfed4bb9834
+RUN bitnami-pkg install node-6.10.0-0 --checksum 7e2d0e2375b49c63f86a9f5fae4e2d3f3404f8a059af91db7467d8663d956742
 
 # Install odoo
-RUN bitnami-pkg unpack odoo-10.0.20170215-0 --checksum 5385e2c23f1f9f97170cc736c9f6842bab8ebf0b7cb7a59c1300af7999f59310
+RUN bitnami-pkg unpack odoo-10.0.20170317-0 --checksum be683e353656c571e3f819830accfaf51f6e1eb6f8d698a34e080f2781a94490
 
 COPY rootfs /
 
