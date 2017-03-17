@@ -5,7 +5,7 @@
 # Supported tags and respective `Dockerfile` links
 
  - [`7.1`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/1178f044aa5104bcc65c8c6889f808870dce3065/7.1/Dockerfile) [`7.1.3-r0`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/1178f044aa5104bcc65c8c6889f808870dce3065/7.1/Dockerfile) [`latest`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/1178f044aa5104bcc65c8c6889f808870dce3065/7.1/Dockerfile)
- - [`7.0`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.16-r1/7.0/Dockerfile) [`7.0.16-r1`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.16-r1/7.0/Dockerfile)
+ - [`7.0`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/f5a6dd3e2851bf5526d717c55d8d1a7a6d2f35fa/7.0/Dockerfile) [`7.0.17-r0`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/f5a6dd3e2851bf5526d717c55d8d1a7a6d2f35fa/7.0/Dockerfile)
  - [`5.6`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.30-r1/5.6/Dockerfile) [`5.6.30-r1`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.30-r1/5.6/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
