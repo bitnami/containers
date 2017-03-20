@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r11
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=rabbitmq \
-    BITNAMI_IMAGE_VERSION=3.6.7-r0 \
+    BITNAMI_IMAGE_VERSION=3.6.8-r0 \
     PATH=/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/sbin:/opt/bitnami/rabbitmq/bin:$PATH
 
 # System packages required
@@ -13,7 +13,7 @@ RUN install_packages libc6 libssl1.0.0 libtinfo5 zlib1g
 RUN bitnami-pkg install erlang-17.4-3 --checksum 7465a1ac11bf98cc1e2a549758dd4fccb2812d60ede33d1f68e0c7ec312b0b88
 
 # Install rabbitmq
-RUN bitnami-pkg unpack rabbitmq-3.6.7-0 --checksum f8fe8bad387d05bd75b2b836b3ef840f813f4f5400e9ee72f208c7622333809b
+RUN bitnami-pkg unpack rabbitmq-3.6.8-0 --checksum a325af79e7efda8570353564b3589710c4f09da12109fbc9c353cb67ef47fc11
 
 COPY rootfs /
 
