@@ -38,4 +38,4 @@ EXPOSE 6379
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["/run-redis.sh"]
+CMD ["/run.sh"]
