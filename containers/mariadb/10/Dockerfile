@@ -35,4 +35,4 @@ EXPOSE 3306
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["/run-mariadb.sh"]
+CMD ["/run.sh"]

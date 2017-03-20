@@ -32,7 +32,7 @@ check_for_deprecated_env() {
   fi
 }
 
-if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run-mariadb.sh" ]]; then
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
   # Check env vars to deprecate
   check_for_deprecated_env "MARIADB_MASTER_USER" "MARIADB_MASTER_ROOT_USER"
   export MARIADB_MASTER_ROOT_USER=${MARIADB_MASTER_USER:-${MARIADB_MASTER_ROOT_USER}}
