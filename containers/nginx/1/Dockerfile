@@ -25,4 +25,4 @@ EXPOSE 80 443
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["/run-nginx.sh"]
+CMD ["/run.sh"]
