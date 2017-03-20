@@ -5,6 +5,6 @@
 print_welcome_page
 check_for_updates &
 
-nami_initialize ruby
+log "ruby successfully initialized"
 
 exec tini -- "$@"
