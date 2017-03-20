@@ -46,4 +46,4 @@ EXPOSE 3000
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["/run-redmine.sh"]
+CMD ["/run.sh"]
