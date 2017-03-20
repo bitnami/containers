@@ -22,4 +22,4 @@ EXPOSE 9000
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["/run-php-fpm.sh"]
+CMD ["/run.sh"]
