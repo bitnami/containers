@@ -48,4 +48,4 @@ ENTRYPOINT ["/app-entrypoint.sh"]
 
 WORKDIR /opt/bitnami/ghost
 
-CMD ["/run-ghost.sh"]
+CMD ["/run.sh"]
