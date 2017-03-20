@@ -44,4 +44,4 @@ EXPOSE 27017
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["/run-mongodb.sh"]
+CMD ["/run.sh"]
