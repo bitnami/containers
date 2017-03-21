@@ -5,7 +5,7 @@ services:
     volumes:
       - 'elasticsearch_data:/bitnami/elasticsearch'
   kibana:
-    image: 'bitnami/kibana:4'
+    image: 'bitnami/kibana:5'
     ports:
       - '5601:5601'
     volumes:
