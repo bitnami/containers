@@ -3,9 +3,9 @@
 
 # Supported tags and respective `Dockerfile` links
 
- - [`9.0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/e3298aab2eb154cdce8029ef0271e7590d931281/9.0/Dockerfile) [`9.0.0.M18-r0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/e3298aab2eb154cdce8029ef0271e7590d931281/9.0/Dockerfile)
- - [`8.0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/a1e6342b7a87ad7be4e1d8a42e6493d1fe8d6ee7/8.0/Dockerfile) [`8.0.42-r0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/a1e6342b7a87ad7be4e1d8a42e6493d1fe8d6ee7/8.0/Dockerfile) [`latest`](https://github.com/bitnami/bitnami-docker-tomcat/blob/a1e6342b7a87ad7be4e1d8a42e6493d1fe8d6ee7/8.0/Dockerfile)
- - [`7`](https://github.com/bitnami/bitnami-docker-tomcat/blob/a532b7f6669ed39ac008fd44bdf80f9ad0a201d2/7/Dockerfile) [`7.0.76-r0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/a532b7f6669ed39ac008fd44bdf80f9ad0a201d2/7/Dockerfile)
+ - [`9.0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/d357ceb46e7f55cb933f59f310432bd96416000f/9.0/Dockerfile) [`9.0.0.M18-r0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/d357ceb46e7f55cb933f59f310432bd96416000f/9.0/Dockerfile)
+ - [`8.0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/56292d43502857984cc6e60f612b6fc7a380f0e0/8.0/Dockerfile) [`8.0.42-r0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/56292d43502857984cc6e60f612b6fc7a380f0e0/8.0/Dockerfile) [`latest`](https://github.com/bitnami/bitnami-docker-tomcat/blob/56292d43502857984cc6e60f612b6fc7a380f0e0/8.0/Dockerfile)
+ - [`7`](https://github.com/bitnami/bitnami-docker-tomcat/blob/44e40533511b32ea2bc9810d6c47725d98798891/7/Dockerfile) [`7.0.76-r0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/44e40533511b32ea2bc9810d6c47725d98798891/7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
 
