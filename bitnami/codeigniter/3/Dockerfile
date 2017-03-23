@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=codeigniter \
-    BITNAMI_IMAGE_VERSION=3.1.3-r3 \
+    BITNAMI_IMAGE_VERSION=3.1.3-r4 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
