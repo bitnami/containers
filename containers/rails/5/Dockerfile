@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb-buildpack:jessie-r10
+FROM bitnami/minideb-extras:jessie-r13-buildpack
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -19,7 +19,7 @@ RUN gem install therubyracer
 
 ENV RAILS_ENV=development
 ENV BITNAMI_APP_NAME=rails
-ENV BITNAMI_IMAGE_VERSION=5.0.2-r0
+ENV BITNAMI_IMAGE_VERSION=5.0.2-r1
 
 COPY rootfs/ /
 
