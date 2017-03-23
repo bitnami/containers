@@ -1,9 +1,9 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r11
+FROM bitnami/minideb-extras:jessie-r13
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=dreamfactory \
-    BITNAMI_IMAGE_VERSION=2.5.0-r0 \
+    BITNAMI_IMAGE_VERSION=2.5.0-r1 \
     PATH=/opt/bitnami/mysql/bin/:/opt/bitnami/php/bin/:$PATH
 
 # System packages required
