@@ -14,7 +14,7 @@ ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
     NODE_PATH=/opt/bitnami/node/lib/node_modules
 
 ENV BITNAMI_APP_NAME=node \
-    BITNAMI_IMAGE_VERSION=7.7.4-r0
+    BITNAMI_IMAGE_VERSION=7.7.4-r1
 
 WORKDIR /app
 
