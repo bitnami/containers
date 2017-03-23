@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=elasticsearch \
-    BITNAMI_IMAGE_VERSION=5.2.2-r1 \
+    BITNAMI_IMAGE_VERSION=5.2.2-r2 \
     PATH=/opt/bitnami/java/bin:/opt/bitnami/elasticsearch/bin:$PATH
 
 # System packages required
