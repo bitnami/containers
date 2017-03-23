@@ -1,7 +1,7 @@
 FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=3.4.2-r1 \
+ENV BITNAMI_IMAGE_VERSION=3.4.2-r2 \
     BITNAMI_APP_NAME=mongodb \
     PATH=/opt/bitnami/mongodb/bin:$PATH
 
