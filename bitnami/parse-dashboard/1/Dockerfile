@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=parse-dashboard \
-    BITNAMI_IMAGE_VERSION=1.0.19-r7 \
+    BITNAMI_IMAGE_VERSION=1.0.19-r8 \
     PATH=/opt/bitnami/node/bin:$PATH
 
 # System packages required
