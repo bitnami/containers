@@ -9,10 +9,9 @@ if [ -f composer.json  ]; then
   composer install
 fi
 
-if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
   nami_initialize php
   chown -R :daemon /bitnami/php || true
-  info "Starting php-fpm..."
 fi
 
 exec tini -- "$@"
