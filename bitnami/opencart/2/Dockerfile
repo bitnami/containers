@@ -1,9 +1,9 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r10
+FROM bitnami/minideb-extras:jessie-r13
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=opencart \
-    BITNAMI_IMAGE_VERSION=2.3.0.2-r14 \
+    BITNAMI_IMAGE_VERSION=2.3.0.2-r15 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
