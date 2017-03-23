@@ -2,7 +2,7 @@ FROM bitnami/minideb-extras:jessie-r13
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=7.0.76-r0 \
+ENV BITNAMI_IMAGE_VERSION=7.0.76-r1 \
     BITNAMI_APP_NAME=tomcat \
     PATH=/opt/bitnami/tomcat/bin:/opt/bitnami/java/bin:$PATH
 
