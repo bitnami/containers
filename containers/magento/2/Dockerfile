@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=magento \
-    BITNAMI_IMAGE_VERSION=2.1.5-r1 \
+    BITNAMI_IMAGE_VERSION=2.1.5-r2 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/apache/bin:/opt/bitnami/magento/bin/:$PATH
 
 # System packages required
