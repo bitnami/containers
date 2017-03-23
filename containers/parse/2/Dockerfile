@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=parse \
-    BITNAMI_IMAGE_VERSION=2.3.7-r0 \
+    BITNAMI_IMAGE_VERSION=2.3.7-r1 \
     PATH=/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:$PATH
 
 # System packages required
