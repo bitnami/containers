@@ -1,7 +1,7 @@
 FROM gcr.io/stacksmith-images/minideb:jessie-r11
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=7.0.17-r0 \
+ENV BITNAMI_IMAGE_VERSION=7.0.17-r1 \
     BITNAMI_APP_NAME=php-fpm \
     PATH=/opt/bitnami/php/sbin:/opt/bitnami/php/bin:$PATH
 
