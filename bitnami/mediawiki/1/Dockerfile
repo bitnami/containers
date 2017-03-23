@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=mediawiki \
-    BITNAMI_IMAGE_VERSION=1.28.0-r7 \
+    BITNAMI_IMAGE_VERSION=1.28.0-r8 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
