@@ -25,4 +25,4 @@ EXPOSE 80 443
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["nami", "start", "--foreground", "nginx"]
+CMD ["/run.sh"]
