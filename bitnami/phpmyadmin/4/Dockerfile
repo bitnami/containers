@@ -1,9 +1,9 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r10
+FROM bitnami/minideb-extras:jessie-r13
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=phpmyadmin \
-    BITNAMI_IMAGE_VERSION=4.6.6-r1 \
+    BITNAMI_IMAGE_VERSION=4.6.6-r2 \
     PATH=/opt/bitnami/php/bin:$PATH
 
 # System packages required
