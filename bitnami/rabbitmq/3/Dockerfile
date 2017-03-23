@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=rabbitmq \
-    BITNAMI_IMAGE_VERSION=3.6.8-r0 \
+    BITNAMI_IMAGE_VERSION=3.6.8-r1 \
     PATH=/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/sbin:/opt/bitnami/rabbitmq/bin:$PATH
 
 # System packages required
