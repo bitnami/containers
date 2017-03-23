@@ -3,10 +3,10 @@
 
 # Supported tags and respective `Dockerfile` links
 
- - [`2.4`](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.0-r2/2.4/Dockerfile) [`2.4.0-r2`](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.0-r2/2.4/Dockerfile) [`latest`](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.0-r2/2.4/Dockerfile)
- - [`2.3`](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.3-r1/2.3/Dockerfile) [`2.3.3-r1`](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.3-r1/2.3/Dockerfile)
- - [`2.2`](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.6-r1/2.2/Dockerfile) [`2.2.6-r1`](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.6-r1/2.2/Dockerfile)
- - [`2.1`](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-r1/2.1/Dockerfile) [`2.1.10-r1`](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-r1/2.1/Dockerfile)
+ - [`2.4`](https://github.com/bitnami/bitnami-docker-ruby/blob/24e47e3c3e1ea94c30da1900ec596bca97c28afb/2.4/Dockerfile) [`2.4.0-r2`](https://github.com/bitnami/bitnami-docker-ruby/blob/24e47e3c3e1ea94c30da1900ec596bca97c28afb/2.4/Dockerfile) [`latest`](https://github.com/bitnami/bitnami-docker-ruby/blob/24e47e3c3e1ea94c30da1900ec596bca97c28afb/2.4/Dockerfile)
+ - [`2.3`](https://github.com/bitnami/bitnami-docker-ruby/blob/5b6adb339daf6d52788e0ceeeb207c6308d50463/2.3/Dockerfile) [`2.3.3-r1`](https://github.com/bitnami/bitnami-docker-ruby/blob/5b6adb339daf6d52788e0ceeeb207c6308d50463/2.3/Dockerfile)
+ - [`2.2`](https://github.com/bitnami/bitnami-docker-ruby/blob/b019a21cc4cabd79e6dace65b9935c3d6e5358b7/2.2/Dockerfile) [`2.2.6-r1`](https://github.com/bitnami/bitnami-docker-ruby/blob/b019a21cc4cabd79e6dace65b9935c3d6e5358b7/2.2/Dockerfile)
+ - [`2.1`](https://github.com/bitnami/bitnami-docker-ruby/blob/24e47e3c3e1ea94c30da1900ec596bca97c28afb/2.1/Dockerfile) [`2.1.10-r1`](https://github.com/bitnami/bitnami-docker-ruby/blob/24e47e3c3e1ea94c30da1900ec596bca97c28afb/2.1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://github.com/bitnami/bitnami-docker-ruby).
 
