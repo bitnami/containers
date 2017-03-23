@@ -19,7 +19,7 @@ RUN gem install therubyracer
 
 ENV RAILS_ENV=development
 ENV BITNAMI_APP_NAME=rails
-ENV BITNAMI_IMAGE_VERSION=5.0.2-r0
+ENV BITNAMI_IMAGE_VERSION=5.0.2-r1
 
 COPY rootfs/ /
 
