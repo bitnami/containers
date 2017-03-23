@@ -1,9 +1,9 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r10
+FROM bitnami/minideb-extras:jessie-r13
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=cassandra \
-    BITNAMI_IMAGE_VERSION=3.10-r2 \
+    BITNAMI_IMAGE_VERSION=3.10-r3 \
     PATH=/opt/bitnami/cassandra/bin:/opt/bitnami/java/bin:/opt/bitnami/python/bin:$PATH
 
 # System packages required
