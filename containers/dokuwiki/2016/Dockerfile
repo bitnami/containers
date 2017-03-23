@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=dokuwiki \
-    BITNAMI_IMAGE_VERSION=20160626a-r8 \
+    BITNAMI_IMAGE_VERSION=20160626a-r9 \
     PATH=/opt/bitnami/php/bin:$PATH
 
 # System packages required
