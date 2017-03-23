@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=piwik \
-    BITNAMI_IMAGE_VERSION=3.0.2-r0 \
+    BITNAMI_IMAGE_VERSION=3.0.2-r1 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
