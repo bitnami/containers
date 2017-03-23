@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb-buildpack:jessie-r10
+FROM bitnami/minideb-extras:jessie-r13-buildpack
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -14,7 +14,7 @@ ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
     NODE_PATH=/opt/bitnami/node/lib/node_modules
 
 ENV BITNAMI_APP_NAME=node \
-    BITNAMI_IMAGE_VERSION=4.8.0-r0
+    BITNAMI_IMAGE_VERSION=4.8.0-r1
 
 WORKDIR /app
 
