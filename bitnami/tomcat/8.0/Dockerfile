@@ -1,8 +1,8 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r11
+FROM bitnami/minideb-extras:jessie-r13
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=8.0.42-r0 \
+ENV BITNAMI_IMAGE_VERSION=8.0.42-r1 \
     BITNAMI_APP_NAME=tomcat \
     PATH=/opt/bitnami/tomcat/bin:/opt/bitnami/java/bin:$PATH
 
