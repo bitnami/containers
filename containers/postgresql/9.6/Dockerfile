@@ -1,7 +1,7 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r10
+FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=9.6.2-r1 \
+ENV BITNAMI_IMAGE_VERSION=9.6.2-r2 \
     BITNAMI_APP_NAME=postgresql \
     PATH=/opt/bitnami/postgresql/bin:$PATH
 
