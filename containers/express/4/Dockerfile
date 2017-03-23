@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb-buildpack:jessie-r10
+FROM bitnami/minideb-extras:jessie-r13-buildpack
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -19,7 +19,7 @@ RUN rm -rf /app
 
 # ExpressJS template
 ENV BITNAMI_APP_NAME=express
-ENV BITNAMI_IMAGE_VERSION=4.14.0-r21
+ENV BITNAMI_IMAGE_VERSION=4.14.0-r22
 
 COPY rootfs/ /
 
