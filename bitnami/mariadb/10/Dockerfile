@@ -1,8 +1,8 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r11
+FROM bitnami/minideb-extras:jessie-r13
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=10.1.22-r0 \
+ENV BITNAMI_IMAGE_VERSION=10.1.22-r1 \
     BITNAMI_APP_NAME=mariadb \
     PATH=/opt/bitnami/mariadb/sbin:/opt/bitnami/mariadb/bin:$PATH
 
@@ -35,4 +35,4 @@ EXPOSE 3306
 
 ENTRYPOINT ["/app-entrypoint.sh"]
 
-CMD ["nami", "start", "--foreground", "mariadb"]
+CMD ["/run.sh"]
