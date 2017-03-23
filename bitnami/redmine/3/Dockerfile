@@ -1,9 +1,9 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r10
+FROM bitnami/minideb-extras:jessie-r13
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=redmine \
-    BITNAMI_IMAGE_VERSION=3.3.2-r1 \
+    BITNAMI_IMAGE_VERSION=3.3.2-r2 \
     PATH=/opt/bitnami/ruby/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH
 
 # System packages required
