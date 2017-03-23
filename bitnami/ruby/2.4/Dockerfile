@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb-buildpack:jessie-r11
+FROM bitnami/minideb-extras:jessie-r13-buildpack
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -12,7 +12,7 @@ COPY rootfs /
 ENV PATH=/opt/bitnami/ruby/bin:$PATH
 
 ENV BITNAMI_APP_NAME=ruby \
-    BITNAMI_IMAGE_VERSION=2.4.0-r2
+    BITNAMI_IMAGE_VERSION=2.4.0-r3
 
 WORKDIR /app
 
