@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=jenkins \
-    BITNAMI_IMAGE_VERSION=2.49-r2 \
+    BITNAMI_IMAGE_VERSION=2.52-r0 \
     PATH=/opt/bitnami/tomcat/bin:/opt/bitnami/git/bin:/opt/bitnami/java/bin:$PATH
 
 # System packages required
@@ -11,11 +11,11 @@ RUN install_packages libc6 libxext6 libx11-6 libxcb1 libxau6 libxdmcp6 libglib2.
 
 # Additional modules required
 RUN bitnami-pkg install java-1.8.0_121-0 --checksum 2743f753fd1ea88bf90352d95694f89ab0a0fb855cf0d1c7b2a6d92835f9ad27
-RUN bitnami-pkg install tomcat-8.0.41-1 --checksum 3bbbdae242e8dc35ac2f7725fee1169950c4cc55a7c488a49fb21ba060dbeb88
+RUN bitnami-pkg install tomcat-8.0.42-0 --checksum da6869296de3f34cd7d332062d748dd9ae040d89f993b9226d8bdfa335626913
 RUN bitnami-pkg install git-2.10.1-2 --checksum 6f9fd8b0591f268f965930db0c091598e5c4f9dccbb6853010e1ac9e5035cd6f
 
 # Install jenkins
-RUN bitnami-pkg unpack jenkins-2.49-1 --checksum 9569ab5e937742f77fe22a2b3cef3a74720a65618355192ad0762998ab494b52
+RUN bitnami-pkg unpack jenkins-2.52-0 --checksum f270f92e85ef4c8aef89904a293707c2f1a5322bdb64435481edfaff15720234
 
 COPY rootfs /
 
