@@ -1,15 +1,6 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-php-fpm/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-php-fpm/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/php-fpm)](https://hub.docker.com/r/bitnami/php-fpm/)
 
-
-# Supported tags and respective `Dockerfile` links
-
- - [`7.1`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/fc7c3cf5612184ed27667947d7e6f57a209a58a3/7.1/Dockerfile) [`7.1.3-r0`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/fc7c3cf5612184ed27667947d7e6f57a209a58a3/7.1/Dockerfile) [`latest`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/fc7c3cf5612184ed27667947d7e6f57a209a58a3/7.1/Dockerfile)
- - [`7.0`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/fc7c3cf5612184ed27667947d7e6f57a209a58a3/7.0/Dockerfile) [`7.0.17-r0`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/fc7c3cf5612184ed27667947d7e6f57a209a58a3/7.0/Dockerfile)
- - [`5.6`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/d2325dba1a5a07d6536836d17497884f264857fc/5.6/Dockerfile) [`5.6.30-r1`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/d2325dba1a5a07d6536836d17497884f264857fc/5.6/Dockerfile)
-
-Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
-
 # What is PHP-FPM?
 
 > PHP-FPM (FastCGI Process Manager) is an alternative PHP FastCGI implementation with some additional features useful for sites of any size, especially busier sites.
@@ -35,6 +26,14 @@ services:
     volumes:
       - /path/to/app:/app
 ```
+
+# Supported tags and respective `Dockerfile` links
+
+ - [`7.1`, `7.1.3-r0`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/fc7c3cf5612184ed27667947d7e6f57a209a58a3/7.1/Dockerfile)
+ - [`7.0`, `7.0.17-r0` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/fc7c3cf5612184ed27667947d7e6f57a209a58a3/7.0/Dockerfile)
+ - [`5.6`, `5.6.30-r1` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/d2325dba1a5a07d6536836d17497884f264857fc/5.6/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
 
 # Get this image
 
