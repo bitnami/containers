@@ -1,14 +1,6 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-tomcat/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-tomcat/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/tomcat)](https://hub.docker.com/r/bitnami/tomcat/)
 
-# Supported tags and respective `Dockerfile` links
-
- - [`9.0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/d357ceb46e7f55cb933f59f310432bd96416000f/9.0/Dockerfile) [`9.0.0.M18-r0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/d357ceb46e7f55cb933f59f310432bd96416000f/9.0/Dockerfile)
- - [`8.0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/56292d43502857984cc6e60f612b6fc7a380f0e0/8.0/Dockerfile) [`8.0.42-r0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/56292d43502857984cc6e60f612b6fc7a380f0e0/8.0/Dockerfile) [`latest`](https://github.com/bitnami/bitnami-docker-tomcat/blob/56292d43502857984cc6e60f612b6fc7a380f0e0/8.0/Dockerfile)
- - [`7`](https://github.com/bitnami/bitnami-docker-tomcat/blob/44e40533511b32ea2bc9810d6c47725d98798891/7/Dockerfile) [`7.0.76-r0`](https://github.com/bitnami/bitnami-docker-tomcat/blob/44e40533511b32ea2bc9810d6c47725d98798891/7/Dockerfile)
-
-Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
-
 # What is Tomcat?
 
 > [Apache Tomcat](http://tomcat.apache.org), often referred to as Tomcat, is an open-source web server and servlet container developed by the [Apache Software Foundation (ASF)](https://www.apache.org). Tomcat implements several Java EE specifications including Java Servlet, JavaServer Pages (JSP), Java EL, and WebSocket, and provides a "pure Java" HTTP web server environment for Java code to run in.
@@ -30,6 +22,14 @@ services:
     ports:
       - '8080:8080'
 ```
+
+# Supported tags and respective `Dockerfile` links
+
+ - [`9.0`, `9.0.0.M18-r0` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/d357ceb46e7f55cb933f59f310432bd96416000f/9.0/Dockerfile)
+ - [`8.0`, `8.0.42-r0`, `latest` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/56292d43502857984cc6e60f612b6fc7a380f0e0/8.0/Dockerfile)
+ - [`7`, `7.0.76-r0` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/44e40533511b32ea2bc9810d6c47725d98798891/7/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
 
 # Get this image
 
