@@ -1,7 +1,7 @@
 FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=5.6.30-r2 \
+ENV BITNAMI_IMAGE_VERSION=5.6.30-r3 \
     BITNAMI_APP_NAME=php-fpm \
     PATH=/opt/bitnami/php/sbin:/opt/bitnami/php/bin:$PATH
 
