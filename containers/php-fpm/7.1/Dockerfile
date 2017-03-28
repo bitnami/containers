@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r11
+FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_IMAGE_VERSION=7.1.3-r1 \
