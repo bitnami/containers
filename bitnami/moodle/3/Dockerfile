@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=moodle \
-    BITNAMI_IMAGE_VERSION=3.2.2-r0 \
+    BITNAMI_IMAGE_VERSION=3.2.2-r1 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
@@ -16,7 +16,7 @@ RUN bitnami-pkg unpack php-7.1.3-0 --checksum 0b1270ac702523a9f2f448a71f953c5212
 RUN bitnami-pkg install libphp-7.1.3-0 --checksum 851c928d90c086ea48152fb3947379025cba36a497c3c57bb87ad0f2ff012b51
 
 # Install moodle
-RUN bitnami-pkg unpack moodle-3.2.2-0 --checksum 9e56bfd65b8bc46af4ce35297b595a9e7092d4efbe09eaf7d4a8bccf04165bf7
+RUN bitnami-pkg unpack moodle-3.2.2-1 --checksum a67b047fd078e9b879db22370add76dca9ac3747b6de8141eb872a8fc582f6dc
 
 COPY rootfs /
 
