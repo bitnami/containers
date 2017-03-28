@@ -1,14 +1,6 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-node/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-node/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/node)](https://hub.docker.com/r/bitnami/node/)
 
-# Supported tags and respective `Dockerfile` links
-
- - [`7`](https://github.com/bitnami/bitnami-docker-node/blob/5be1ae1174e55254114cc4fb36c6377d7373e5a5/7/Dockerfile) [`7.7.4-r0`](https://github.com/bitnami/bitnami-docker-node/blob/5be1ae1174e55254114cc4fb36c6377d7373e5a5/7/Dockerfile) [`latest`](https://github.com/bitnami/bitnami-docker-node/blob/5be1ae1174e55254114cc4fb36c6377d7373e5a5/7/Dockerfile)
- - [`6`](https://github.com/bitnami/bitnami-docker-node/blob/ed8f081a18ffa23e211661d2a0f8d1c859691994/6/Dockerfile) [`6.10.1-r0`](https://github.com/bitnami/bitnami-docker-node/blob/ed8f081a18ffa23e211661d2a0f8d1c859691994/6/Dockerfile)
- - [`4`](https://github.com/bitnami/bitnami-docker-node/blob/106a54410ea5166a80a07a5809bd846cd842f5d2/4/Dockerfile) [`4.8.0-r0`](https://github.com/bitnami/bitnami-docker-node/blob/106a54410ea5166a80a07a5809bd846cd842f5d2/4/Dockerfile)
-
-Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
-
 # What is Node.js?
 
 > Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
@@ -30,6 +22,14 @@ node:
   volumes:
     - .:/app
 ```
+
+# Supported tags and respective `Dockerfile` links
+
+ - [`7`, `7.7.4-r0`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/5be1ae1174e55254114cc4fb36c6377d7373e5a5/7/Dockerfile)
+ - [`6`, `6.10.1-r0` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/ed8f081a18ffa23e211661d2a0f8d1c859691994/6/Dockerfile)
+ - [`4`, `4.8.0-r0` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/106a54410ea5166a80a07a5809bd846cd842f5d2/4/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
 # Get this image
 
