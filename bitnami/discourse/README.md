@@ -134,7 +134,7 @@ services:
     volumes:
       - '/path/to/sidekiq-persistence:/bitnami/discourse-sidekiq'
     command: 'nami start --foreground discourse-sidekiq'
-    ```
+```
 
 ### Mount persistent folders manually
 
@@ -253,9 +253,44 @@ Available variables:
  - `REDIS_MASTER_HOST`: Hostname for Redis. Default: **redis**
  - `REDIS_MASTER_PORT`: Port used by Redis. Default: **6379**
  - `REDIS_PASSWORD`: Password for Redis.
- - `SMTP_HOST`: Hostname for the SMTP server (necessary for sending e-mails from the application).
- - `SMTP_PORT`: Port for the SMTP server.
- - `SMTP_USER`: Username for the SMTP server.
+
+### SMTP Configuration
+
+To configure Discourse to send email using SMTP you can set the following environment variables:
+- `SMTP_HOST`: Host for outgoing SMTP email. No defaults.
+- `SMTP_PORT`: Port for outgoing SMTP email. No defaults.
+- `SMTP_USER`: User of SMTP used for authentication (likely email). No defaults.
+- `SMTP_PASSWORD`: Password for SMTP. No defaults.
+- `SMTP_TLS`: Whether use TLS protocol for SMTP or not. Default: **true**.
+
+This would be an example of SMTP configuration using a GMail account:
+
+ * docker-compose (application part):
+
+```yaml
+  discourse:
+    image: 'bitnami/discourse:latest'
+    ports:
+      - '80:3000'
+    environment:
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USER=your_email@gmail.com
+      - SMTP_PASSWORD=your_password
+    volumes:
+      - 'discourse_data:/bitnami/discourse'
+```
+
+* For manual execution:
+
+```
+$ docker run -d --name discourse -p 80:3000 \
+  --net discourse-tier \
+  --env SMTP_HOST=smtp.gmail.com --env SMTP_PORT=587 \
+  --env SMTP_USER=your_email@gmail.com --env SMTP_PASSWORD=your_password \
+  --volume discourse_data:/bitnami/discourse \
+  bitnami/discourse:latest
+```
 
 # Backing up your application
 
