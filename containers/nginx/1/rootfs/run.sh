@@ -6,6 +6,8 @@ DAEMON=nginx
 EXEC=$(which $DAEMON)
 ARGS=
 
+chown -R :daemon /bitnami/nginx || true
+
 # redirect nginx logs to stdout/stderr
 ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
