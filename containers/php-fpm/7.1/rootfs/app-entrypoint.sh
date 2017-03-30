@@ -11,7 +11,6 @@ fi
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
   nami_initialize php
-  chown -R :daemon /bitnami/php || true
 fi
 
 exec tini -- "$@"
