@@ -27,7 +27,7 @@ ruby:
 
  - [`2.4`, `2.4.0-r2`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/24e47e3c3e1ea94c30da1900ec596bca97c28afb/2.4/Dockerfile)
  - [`2.3`, `2.3.3-r1` (2.3/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/5b6adb339daf6d52788e0ceeeb207c6308d50463/2.3/Dockerfile)
- - [`2.2`, `2.2.6-r1` (2.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/b019a21cc4cabd79e6dace65b9935c3d6e5358b7/2.2/Dockerfile)
+ - [`2.2`, `2.2.7-r0` (2.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/72810a3c920c5d7ed5d7f47fb68435f67610ca72/2.2/Dockerfile)
  - [`2.1`, `2.1.10-r1` (2.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/24e47e3c3e1ea94c30da1900ec596bca97c28afb/2.1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://github.com/bitnami/bitnami-docker-ruby).
