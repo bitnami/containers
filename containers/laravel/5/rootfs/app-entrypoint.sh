@@ -38,6 +38,7 @@ wait_for_db() {
 
 setup_db() {
   log "Configuring the database"
+  sed -i "s/utf8mb4/utf8/g" /app/config/database.php
   php artisan migrate
 }
 
