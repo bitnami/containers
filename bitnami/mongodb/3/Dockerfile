@@ -1,7 +1,7 @@
 FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=3.4.2-r2 \
+ENV BITNAMI_IMAGE_VERSION=3.4.3-r0 \
     BITNAMI_APP_NAME=mongodb \
     PATH=/opt/bitnami/mongodb/bin:$PATH
 
@@ -9,7 +9,7 @@ ENV BITNAMI_IMAGE_VERSION=3.4.2-r2 \
 RUN install_packages libssl1.0.0 libc6 libgcc1 libpcap0.8
 
 # Install mongodb
-RUN bitnami-pkg unpack mongodb-3.4.2-0 --checksum 0a8221d11312a3dc909010b0c4aa171adc2dd3b3d0ed50b240f629c3deb127c9
+RUN bitnami-pkg unpack mongodb-3.4.3-0 --checksum fff6b5aa7485a84ca8e0ed9533334e684cd519c7feb0ddb1fa154052f2f7cade
 
 COPY rootfs/ /
 
