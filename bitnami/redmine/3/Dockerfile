@@ -6,9 +6,6 @@ ENV BITNAMI_APP_NAME=redmine \
     BITNAMI_IMAGE_VERSION=3.3.2-r2 \
     PATH=/opt/bitnami/ruby/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH
 
-ENV GOSU_VERSION=1.10 \
-    GOSU_GPG_KEY=B42F6819007F00F88E364FD4036A9C25BF357DD4
-
 # System packages required
 RUN install_packages libc6 libssl1.0.0 zlib1g libreadline6 libncurses5 libtinfo5 libffi6 libxml2-dev zlib1g-dev libxslt1-dev libgmp-dev ghostscript imagemagick libmysqlclient18 libpq5 libstdc++6 libgcc1 libcurl3 libidn11 librtmp1 libssh2-1 libgssapi-krb5-2 libkrb5-3 libk5crypto3 libcomerr2 libldap-2.4-2 libgnutls-deb0-28 libhogweed2 libnettle4 libgmp10 libgcrypt20 libkrb5support0 libkeyutils1 libsasl2-2 libp11-kit0 libtasn1-6 libgpg-error0 libxml2 libxslt1.1 liblzma5 libmagickcore-6.q16-2 liblcms2-2 liblqr-1-0 libfftw3-double3 libfontconfig1 libfreetype6 libxext6 libx11-6 libbz2-1.0 libltdl7 libgomp1 libglib2.0-0 libexpat1 libpng12-0 libxcb1 libpcre3 libxau6 libxdmcp6
 
@@ -19,16 +16,6 @@ RUN bitnami-pkg install git-2.10.1-1 --checksum 454e9eb6fb781c8d492f9937439dcdfc
 
 # Install redmine
 RUN bitnami-pkg unpack redmine-3.3.2-0 --checksum 7488ba7ec4b015add6ac0293de8267ff02fc1a4070c6774a934800794ff8ee16
-
-# Install gosu
-RUN cd /tmp && \
-  gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys $GOSU_GPG_KEY && \
-  gpg --fingerprint $GOSU_GPG_KEY | grep -q "Key fingerprint = B42F 6819 007F 00F8 8E36  4FD4 036A 9C25 BF35 7DD4" && \
-  curl -sSL https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64.asc -o gosu.asc && \
-  curl -sSL https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64 -o /usr/local/bin/gosu && \
-  gpg --verify gosu.asc /usr/local/bin/gosu && \
-  chmod +x /usr/local/bin/gosu && \
-  rm gosu.asc
 
 COPY rootfs /
 
