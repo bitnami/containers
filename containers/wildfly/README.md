@@ -24,6 +24,13 @@ services:
       - '9990:9990'
 ```
 
+# Supported tags and respective `Dockerfile` links
+
+ - [`11`, `11.0.0-r0`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/master/11/Dockerfile)
+ - [`10`, `10.1.0-r7` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/master/10/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
+
 # Get this image
 
 The recommended way to get the Bitnami Wildfly Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/wildfly).
