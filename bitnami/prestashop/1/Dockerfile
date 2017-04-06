@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=prestashop \
-    BITNAMI_IMAGE_VERSION=1.7.0.6-r1 \
+    BITNAMI_IMAGE_VERSION=1.7.1.0-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
@@ -13,10 +13,10 @@ RUN install_packages libaprutil1 libapr1 libc6 libuuid1 libexpat1 libssl1.0.0 li
 RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a2770b7e549674e33b8a5b07480f53c39f5c3f
 RUN bitnami-pkg unpack php-5.6.30-3 --checksum af6c238825d4394fc6352c5ad48c1e6423e21520df927097dab592f0d4ad4662
 RUN bitnami-pkg install libphp-5.6.30-1 --checksum a62cad2320fa2d141309e75663aed3d1bd82626d51b784678d18ec3f985d83bf
-RUN bitnami-pkg install mysql-client-10.1.21-2 --checksum f5d875d00ff198eea981ffa6d02d3135659baf48cbfc418604f1b75fb5a31e63
+RUN bitnami-pkg install mysql-client-10.1.22-2 --checksum 39dc3cfbb33831faef044698eec54ae9da93720828ba54b3d96775db680d81d1
 
 # Install prestashop
-RUN bitnami-pkg unpack prestashop-1.7.0.6-0 --checksum 88b16e1db8b04ea7b5d290924b63127cce9ff07c41c87b1124063256b6cf4337
+RUN bitnami-pkg unpack prestashop-1.7.1.0-0 --checksum a1d742a194f3cce7b3f83a989cc2862ef6fbd067b550e9460a20db5978aa614b
 
 COPY rootfs /
 
