@@ -292,6 +292,89 @@ To backup your application data follow these steps:
 
 To restore your application using backed up data simply mount the folder with Mediawiki data in the container. See [persisting your application](#persisting-your-application) section for more info.
 
+# How to migrate from a Bitnami Mediawiki Stack
+
+You can follow these steps in order to migrate it to this container:
+
+*Note:* You only need to backup/restore the directories *files* and *plugins* if they existed in the previous version.
+
+1. Export the data from your SOURCE installation: (assuming an installation in `/opt/bitnami` directory)
+
+  ```bash
+  $ mysqldump -u root -p bitnami_mediawiki > backup-mediawiki-database.sql
+  $ gzip -c ~/backup-mediawiki-database.sql > ~/backup-mediawiki-database.sql.gz
+  $ cd /opt/bitnami/apps/mediawiki/htdocs/
+  $ tar cfz ~/backup-mediawiki-files.tar.gz files
+  $ cd /opt/bitnami/apps/mediawiki/htdocs/vendor/
+  $ tar cfz ~/backup-mediawiki-plugins.tar.gz plugins
+  ```
+
+2. Copy the backup files to your TARGET installation:
+
+  ```bash
+  $ scp ~/backup-mediawiki-* YOUR_USERNAME@TARGET_HOST:~
+  ```
+
+3. Create the Mediawiki Container as described in the section #How to use this Image (Using Docker Compose)
+
+4. Wait for the initial setup to finish. You can follow it with
+
+  ```bash
+  $ docker-compose logs -f mediawiki
+  ```
+
+  and press `Ctrl-C` when you see this:
+
+  ```
+  nami    INFO  mediawiki successfully initialized
+  Starting mediawiki ...
+  ```
+
+5. Stop Apache:
+
+  ```bash
+  $ docker-compose exec mediawiki nami stop apache
+  ```
+
+6. Obtain the password used by Mediawiki to access the database in order avoid reconfiguring it:
+
+  ```bash
+  $ docker-compose exec mediawiki bash -c 'cat /opt/bitnami/mediawiki/LocalSettings.php | grep wgDBpassword'  
+  ```
+  
+7. Restore the database backup: (replace ROOT_PASSWORD below with your MariaDB root password)
+
+  ```bash
+  $ cd ~
+  $ docker-compose exec mariadb mysql -u root
+  $ MariaDB [(none)]> drop database bitnami_mediawiki;
+  $ MariaDB [(none)]> create database bitnami_mediawiki;
+  $ MariaDB [(none)]> grant all privileges on bitnami_mediawiki.* to 'bn_mediawiki'@'%' identified by 'PASSWORD_OBTAINED_IN_STEP_6';
+  $ MariaDB [(none)]> exit
+  $ gunzip -c ./backup-mediawiki-database.sql.gz | docker exec -i $(docker-compose ps -q mariadb) mysql -u root bitnami_mediawiki
+  ```
+
+8. Restore files/plugins from backup (optional):
+
+  ```bash
+  $ cat ./backup-mediawiki-files.tar.gz | docker-compose exec mediawiki bash -c 'cd /bitnami/mediawiki/ ; tar -xzvf -'
+  $ cat ./backup-mediawiki-plugins.tar.gz | docker-compose exec mediawiki bash -c 'cd /bitnami/mediawiki/vendor ; tar -xzvf -'
+  $ docker-compose exec mediawiki ln -s /bitnami/mediawiki/vendor/plugins /opt/bitnami/mediawiki/vendor/plugins 
+  $ docker-compose exec mediawiki ln -s /bitnami/mediawiki/files  /opt/bitnami/mediawiki/files
+  ```
+
+9. Fix mediawiki directory permissions (optional):
+
+  ```bash
+  $ docker-compose exec mediawiki chown -R daemon:daemon /bitnami/mediawiki
+  ```
+
+10. Restart Apache:
+
+  ```bash
+  $ docker-compose exec mediawiki nami start apache
+  ```
+
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an
