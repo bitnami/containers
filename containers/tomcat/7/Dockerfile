@@ -2,7 +2,7 @@ FROM bitnami/minideb-extras:jessie-r13
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=7.0.76-r1 \
+ENV BITNAMI_IMAGE_VERSION=7.0.77-r0 \
     BITNAMI_APP_NAME=tomcat \
     PATH=/opt/bitnami/tomcat/bin:/opt/bitnami/java/bin:$PATH
 
@@ -13,7 +13,7 @@ RUN install_packages libc6 libxext6 libx11-6 libxcb1 libxau6 libxdmcp6 libglib2.
 RUN bitnami-pkg install java-1.8.0_121-0 --checksum 2743f753fd1ea88bf90352d95694f89ab0a0fb855cf0d1c7b2a6d92835f9ad27
 
 # Install tomcat
-RUN bitnami-pkg unpack tomcat-7.0.76-0 --checksum b8989efcdba7318b89370fcd2069af023a9eaaa4b6bc9341e9ed54ca92d64573
+RUN bitnami-pkg unpack tomcat-7.0.77-0 --checksum 52be63a350328d4d1c04169fa1ce8d37ab06bca08e23f55bcbf22dc3b4e837ad
 RUN ln -sf /opt/bitnami/tomcat/data /app
 
 COPY rootfs /
