@@ -301,7 +301,7 @@ You can follow these steps in order to migrate it to this container:
 1. Export the data from your SOURCE installation: (assuming an installation in `/opt/bitnami` directory)
 
   ```bash
-  $ mysqldump -u root -p bitnami_mediawiki > backup-mediawiki-database.sql
+  $ mysqldump -u root -p bitnami_mediawiki > ~/backup-mediawiki-database.sql
   $ gzip -c ~/backup-mediawiki-database.sql > ~/backup-mediawiki-database.sql.gz
   $ cd /opt/bitnami/apps/mediawiki/htdocs/
   $ tar cfz ~/backup-mediawiki-files.tar.gz files
@@ -315,7 +315,7 @@ You can follow these steps in order to migrate it to this container:
   $ scp ~/backup-mediawiki-* YOUR_USERNAME@TARGET_HOST:~
   ```
 
-3. Create the Mediawiki Container as described in the section #How to use this Image (Using Docker Compose)
+3. Create the Mediawiki Container as described in the section [How to use this Image (Using Docker Compose)](https://github.com/bitnami/bitnami-docker-mediawiki#using-docker-compose)
 
 4. Wait for the initial setup to finish. You can follow it with
 
@@ -346,12 +346,12 @@ You can follow these steps in order to migrate it to this container:
 
   ```bash
   $ cd ~
-  $ docker-compose exec mariadb mysql -u root
+  $ docker-compose exec mariadb mysql -u root -pROOT_PASSWORD
   $ MariaDB [(none)]> drop database bitnami_mediawiki;
   $ MariaDB [(none)]> create database bitnami_mediawiki;
   $ MariaDB [(none)]> grant all privileges on bitnami_mediawiki.* to 'bn_mediawiki'@'%' identified by 'PASSWORD_OBTAINED_IN_STEP_6';
   $ MariaDB [(none)]> exit
-  $ gunzip -c ./backup-mediawiki-database.sql.gz | docker exec -i $(docker-compose ps -q mariadb) mysql -u root bitnami_mediawiki
+  $ gunzip -c ./backup-mediawiki-database.sql.gz | docker exec -i $(docker-compose ps -q mariadb) mysql -u root bitnami_mediawiki -pROOT_PASSWORD
   ```
 
 8. Restore files/plugins from backup (optional):
@@ -363,7 +363,7 @@ You can follow these steps in order to migrate it to this container:
   $ docker-compose exec mediawiki ln -s /bitnami/mediawiki/files  /opt/bitnami/mediawiki/files
   ```
 
-9. Fix mediawiki directory permissions (optional):
+9. Fix Mediawiki directory permissions (optional):
 
   ```bash
   $ docker-compose exec mediawiki chown -R daemon:daemon /bitnami/mediawiki
