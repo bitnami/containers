@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=drupal \
-    BITNAMI_IMAGE_VERSION=8.2.7-r1 \
+    BITNAMI_IMAGE_VERSION=8.3.0-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/drush:/opt/bitnami/mysql/bin/:/opt/bitnami/apache/bin/:$PATH
 
 # System packages required
@@ -11,13 +11,13 @@ RUN install_packages libaprutil1 libapr1 libc6 libuuid1 libexpat1 libssl1.0.0 li
 
 # Additional modules require
 RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a2770b7e549674e33b8a5b07480f53c39f5c3f
-RUN bitnami-pkg unpack php-7.0.16-1 --checksum 870b6b92ef762fc3a49eeaa71dfa78bacabf50a5fa41f811cdd99a49844d9d9b
-RUN bitnami-pkg install libphp-7.0.16-0 --checksum 91548c756818a24b9d5477d2cb09d4eff689a2c6ad51d2ef7cd99370020b6494
-RUN bitnami-pkg install mysql-client-10.1.21-3 --checksum 9f636d5c4f0c734290ecbb93b51dd71bb81674fee14c3e517ec4f9440bb26bcb
+RUN bitnami-pkg unpack php-7.0.17-0 --checksum 70fb42218e5b75b81683e6b13034211dfe31a6488d90aa5c79e5edb52ed08ddf
+RUN bitnami-pkg install libphp-7.0.17-0 --checksum 9b0e8729e6f812e84e43e1aa07c01557690c8fef49ba84a6107c2e7d6636996a
+RUN bitnami-pkg install mysql-client-10.1.22-3 --checksum 9e881a7c404f658c93abd665ecd1372f61a591d784e6456c64c0129358a7ff1a
 RUN bitnami-pkg install drush-8.0.5-1 --checksum cdea2d5067ef67bcda7e5cfe96798c2d6e0167578395fac2d7a5f92a814ecc69
 
 # Install drupal
-RUN bitnami-pkg unpack drupal-8.2.7-0 --checksum 58c31129b87a121a5895ce2c0cda4d1975cfec376c4b3eb26b9df77669eadb54
+RUN bitnami-pkg unpack drupal-8.3.0-0 --checksum 6b0f43540671e93292d1c9bb41ec530d379d76f9acb248453637772a9e6fea0f
 
 COPY rootfs /
 
