@@ -7,4 +7,7 @@ USER=ghost
 export NODE_ENV=production
 
 info "Starting ghost..."
-exec gosu ${USER} /opt/bitnami/ghost/node_modules/pm2/bin/pm2 start --no-daemon --merge-logs -p /opt/bitnami/ghost/tmp/pids/ghost.pid /opt/bitnami/ghost/index.js
+exec gosu ${USER} /opt/bitnami/ghost/node_modules/pm2/bin/pm2 start --merge-logs --no-daemon \
+  -p /opt/bitnami/ghost/tmp/pids/ghost.pid \
+  -l /opt/bitnami/ghost/logs/ghost.log \
+  /opt/bitnami/ghost/index.js
