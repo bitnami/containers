@@ -6,6 +6,9 @@ USER=ghost
 
 export NODE_ENV=production
 
+# drupal initialization leaves a running pm2 instance
+gosu ${USER} /opt/bitnami/ghost/node_modules/pm2/bin/pm2 kill
+
 info "Starting ghost..."
 exec gosu ${USER} /opt/bitnami/ghost/node_modules/pm2/bin/pm2 start --merge-logs --no-daemon \
   -p /opt/bitnami/ghost/tmp/pids/ghost.pid \
