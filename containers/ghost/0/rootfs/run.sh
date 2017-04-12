@@ -6,7 +6,7 @@ USER=ghost
 
 export NODE_ENV=production
 
-# drupal initialization leaves a running pm2 instance
+# ghost initialization leaves a running pm2 instance
 gosu ${USER} /opt/bitnami/ghost/node_modules/pm2/bin/pm2 kill
 
 info "Starting ghost..."
