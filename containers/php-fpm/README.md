@@ -130,7 +130,7 @@ services:
       - /path/to/app:/app
 ```
 
-### Step 3: Run the nginx image
+### Step 4: Run the nginx image
 
 ```bash
 docker run -it \
@@ -215,7 +215,7 @@ Edit the configuration on your host using your favorite editor.
 vi /path/to/php-fpm/conf/php-fpm.conf
 ```
 
-### Step 4: Restart PHP-FPM
+### Step 3: Restart PHP-FPM
 
 After changing the configuration, restart your PHP-FPM container for the changes to take effect.
 
