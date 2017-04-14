@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=suitecrm \
-    BITNAMI_IMAGE_VERSION=7.8.3-r0 \
+    BITNAMI_IMAGE_VERSION=7.8.3-r1 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/apache/bin:/opt/bitnami/mariadb/bin/:$PATH
 
 # System packages required
@@ -16,7 +16,7 @@ RUN bitnami-pkg install libphp-7.0.17-0 --checksum 9b0e8729e6f812e84e43e1aa07c01
 RUN bitnami-pkg install mysql-client-10.1.22-3 --checksum 9e881a7c404f658c93abd665ecd1372f61a591d784e6456c64c0129358a7ff1a
 
 # Install suitecrm
-RUN bitnami-pkg unpack suitecrm-7.8.3-0 --checksum 4e09f9c6cf9ab4cd27552ca3119a7b4b3cb89b467001a4adf9bbc5de2fec3f8b
+RUN bitnami-pkg unpack suitecrm-7.8.3-1 --checksum 03702aedb1b7e940a4872141eb236524d9f35cc727f1523e200709c879227831
 
 COPY rootfs /
 
