@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=symfony \
-    BITNAMI_IMAGE_VERSION=3.2.6-r1 \
+    BITNAMI_IMAGE_VERSION=3.2.7-r0 \
     PATH=/opt/bitnami/symfony/bin:/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
@@ -11,10 +11,10 @@ RUN install_packages libc6 zlib1g libxslt1.1 libtidy-0.99-0 libreadline6 libncur
 
 # Additional modules required
 RUN bitnami-pkg install php-7.0.17-0 --checksum 70fb42218e5b75b81683e6b13034211dfe31a6488d90aa5c79e5edb52ed08ddf
-RUN bitnami-pkg install mysql-client-10.1.22-1 --checksum d9c3d9a5c986ae17eaa5089d85dcd19f314f057102ab40121714e6e3b8c33af5
+RUN bitnami-pkg install mysql-client-10.1.22-3 --checksum 9e881a7c404f658c93abd665ecd1372f61a591d784e6456c64c0129358a7ff1a
 
 # Install symfony
-RUN bitnami-pkg install symfony-3.2.6-0 --checksum 4b24caac0d6b83a84afe544cb7fe9f657a9b11951f4a09c24c3cfbedf61ef953
+RUN bitnami-pkg install symfony-3.2.7-0 --checksum 94467cad103f89b215771a85ede024d53782d8d262d965e41d430b1bc0c76d68
 
 COPY rootfs /
 
