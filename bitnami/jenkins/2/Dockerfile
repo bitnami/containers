@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=jenkins \
-    BITNAMI_IMAGE_VERSION=2.54-r0 \
+    BITNAMI_IMAGE_VERSION=2.55-r0 \
     PATH=/opt/bitnami/tomcat/bin:/opt/bitnami/git/bin:/opt/bitnami/java/bin:$PATH
 
 # System packages required
@@ -15,7 +15,7 @@ RUN bitnami-pkg install tomcat-8.0.43-0 --checksum c645aef1669738222df7c2f9a0350
 RUN bitnami-pkg install git-2.10.1-2 --checksum 6f9fd8b0591f268f965930db0c091598e5c4f9dccbb6853010e1ac9e5035cd6f
 
 # Install jenkins
-RUN bitnami-pkg unpack jenkins-2.54-0 --checksum 6f186b0fffc3bf7d542eddad92d5e93db34c8afe6ffc738d4e8eaef5cf7ab6ba
+RUN bitnami-pkg unpack jenkins-2.55-0 --checksum f1d4942198f79642ebaa5980e631612ab7413eaa3aeb568b39521fb290281bcb
 
 COPY rootfs /
 
