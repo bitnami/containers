@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=moodle \
-    BITNAMI_IMAGE_VERSION=3.2.2-r1 \
+    BITNAMI_IMAGE_VERSION=3.2.2-r2 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
@@ -11,12 +11,12 @@ RUN install_packages libaprutil1 libapr1 libc6 libuuid1 libexpat1 libssl1.0.0 li
 
 # Additional modules required
 RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a2770b7e549674e33b8a5b07480f53c39f5c3f
-RUN bitnami-pkg install mysql-client-10.1.22-1 --checksum d9c3d9a5c986ae17eaa5089d85dcd19f314f057102ab40121714e6e3b8c33af5
+RUN bitnami-pkg install mysql-client-10.1.22-3 --checksum 9e881a7c404f658c93abd665ecd1372f61a591d784e6456c64c0129358a7ff1a
 RUN bitnami-pkg unpack php-7.1.3-0 --checksum 0b1270ac702523a9f2f448a71f953c5212db41e59a586b86c1b9422b28b6d5b8
 RUN bitnami-pkg install libphp-7.1.3-0 --checksum 851c928d90c086ea48152fb3947379025cba36a497c3c57bb87ad0f2ff012b51
 
 # Install moodle
-RUN bitnami-pkg unpack moodle-3.2.2-1 --checksum a67b047fd078e9b879db22370add76dca9ac3747b6de8141eb872a8fc582f6dc
+RUN bitnami-pkg unpack moodle-3.2.2-2 --checksum 70d396ea01ddc81a4120523582abb0bf0c98c34772cc10dcbf74643dc7dec2bd
 
 COPY rootfs /
 
