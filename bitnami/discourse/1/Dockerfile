@@ -1,9 +1,9 @@
-FROM gcr.io/bitnami-containers/minideb-extras:jessie-r12
+FROM bitnami/minideb-extras:jessie-r13
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=discourse \
-    BITNAMI_IMAGE_VERSION=1.7.5-r1 \
+    BITNAMI_IMAGE_VERSION=1.7.8-r0 \
     PATH=/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/git/bin:$PATH
 
 # System packages required
@@ -12,11 +12,11 @@ RUN install_packages zlib1g libssl1.0.0 libc6 libcurl3 libidn11 librtmp1 libssh2
 # Additional modules required
 RUN bitnami-pkg install git-2.10.1-2 --checksum 6f9fd8b0591f268f965930db0c091598e5c4f9dccbb6853010e1ac9e5035cd6f
 RUN bitnami-pkg unpack postgresql-client-9.6.2-2 --checksum 1cb6a386042968d222f6f2dc6ba44ec973c4926e941aee14862e6cfed4bb9834
-RUN bitnami-pkg unpack discourse-sidekiq-1.7.4-0 --checksum a3b2ed324f1f60988ebbf1dd982b741a637c9941585459e81c262c7918618d73
-RUN bitnami-pkg install ruby-2.3.3-2 --checksum 8c1533927a9cfb3b1dfb6cbd3e24c33d1f670f104e6d4c1942776525db9e4729
+RUN bitnami-pkg unpack discourse-sidekiq-1.7.7-0 --checksum c4469999f8a9c9665f26c5e9b23b696c0bf217b0911f588d1cf1cbbaf1dcf854
+RUN bitnami-pkg install ruby-2.3.4-0 --checksum 92d6db7a6ba0893334e9d1d46a66a7459df08e151762f87942d6b0f29db0171a
 
 # Install discourse
-RUN bitnami-pkg unpack discourse-1.7.5-0 --checksum 0f2329f1383e45c05704fb0e2125de0269e179faf45b3b92c90b20ad59640d6d
+RUN bitnami-pkg unpack discourse-1.7.8-0 --checksum b3b45aad94a54749c9e05f50e99384c3842bc2d3c3f362eddf9f3ef8274af067
 
 COPY rootfs /
 
