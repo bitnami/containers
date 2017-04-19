@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=drupal \
-    BITNAMI_IMAGE_VERSION=8.3.0-r0 \
+    BITNAMI_IMAGE_VERSION=8.3.1-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/drush:/opt/bitnami/mysql/bin/:/opt/bitnami/apache/bin/:$PATH
 
 # System packages required
@@ -17,7 +17,7 @@ RUN bitnami-pkg install mysql-client-10.1.22-3 --checksum 9e881a7c404f658c93abd6
 RUN bitnami-pkg install drush-8.0.5-1 --checksum cdea2d5067ef67bcda7e5cfe96798c2d6e0167578395fac2d7a5f92a814ecc69
 
 # Install drupal
-RUN bitnami-pkg unpack drupal-8.3.0-0 --checksum 6b0f43540671e93292d1c9bb41ec530d379d76f9acb248453637772a9e6fea0f
+RUN bitnami-pkg unpack drupal-8.3.1-0 --checksum 4e355cfc1d1a456628bb28a8b2ed8b2c4ad84fd3740d75f275469c3a1ad468fa
 
 COPY rootfs /
 
