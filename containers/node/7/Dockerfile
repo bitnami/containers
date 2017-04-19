@@ -6,7 +6,7 @@ MAINTAINER Bitnami <containers@bitnami.com>
 RUN install_packages libc6 libssl1.0.0 libncurses5 libtinfo5 zlib1g libbz2-1.0 libreadline6 libstdc++6 libgcc1 ghostscript imagemagick libmysqlclient18
 
 # Install node
-RUN bitnami-pkg install node-7.8.0-0 --checksum c5bf5614f092b79ff2d2279c0a5936d69ac0d93b32c740a19fd9b94512019b6f
+RUN bitnami-pkg install node-7.9.0-0 --checksum 8cad1e94040693d46027c401d1ed5bd64f5d4583ff68197483ef3b4512691bf3
 
 COPY rootfs /
 
@@ -14,7 +14,7 @@ ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
     NODE_PATH=/opt/bitnami/node/lib/node_modules
 
 ENV BITNAMI_APP_NAME=node \
-    BITNAMI_IMAGE_VERSION=7.8.0-r0
+    BITNAMI_IMAGE_VERSION=7.9.0-r0
 
 WORKDIR /app
 
