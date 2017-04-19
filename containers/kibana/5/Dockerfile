@@ -1,16 +1,16 @@
-FROM gcr.io/bitnami-containers/minideb-extras:jessie-r12
+FROM bitnami/minideb-extras:jessie-r13
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=kibana \
-    BITNAMI_IMAGE_VERSION=5.2.2-r3 \
+    BITNAMI_IMAGE_VERSION=5.3.0-r0 \
     PATH=/opt/bitnami/kibana/bin:$PATH
 
 # System packages required
 RUN install_packages libc6 libstdc++6 libgcc1
 
 # Install kibana
-RUN bitnami-pkg unpack kibana-5.2.2-0 --checksum 56681f7c24890e82bbc580fcf24c8eac2c64d0efddd4fd01c21c4113cb87fd45
+RUN bitnami-pkg unpack kibana-5.3.0-0 --checksum 4bbeccf6e8c13f66c91f6d80c19a3fa566f2604d5cd11093f8fba413f96bb1c9
 
 COPY rootfs /
 
