@@ -2,7 +2,7 @@ FROM bitnami/minideb-extras:jessie-r13
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=5.7.17-r7 \
+ENV BITNAMI_IMAGE_VERSION=5.7.18-r0 \
     BITNAMI_APP_NAME=mysql \
     PATH=/opt/bitnami/mysql/sbin:/opt/bitnami/mysql/bin:$PATH
 
@@ -10,7 +10,7 @@ ENV BITNAMI_IMAGE_VERSION=5.7.17-r7 \
 RUN install_packages libc6 libstdc++6 libgcc1 libncurses5 libtinfo5 zlib1g libssl1.0.0 libaio1
 
 # Install mysql
-RUN bitnami-pkg unpack mysql-5.7.17-3 --checksum 99243d5458afca50fef3ca6126d6e2df3e53e016f49dd4447304834d4868f8fb
+RUN bitnami-pkg unpack mysql-5.7.18-0 --checksum b2937c5409ef168b3c655387c17b0b3e8e899ff5f1e617de85a2087890490437
 
 COPY rootfs /
 
