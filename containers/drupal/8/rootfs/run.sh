@@ -7,7 +7,7 @@ EXEC=$(which $DAEMON)
 ARGS="-f /opt/bitnami/apache/conf/httpd.conf -D FOREGROUND"
 
 # drupal initialization leaves a running httpd instance
-apachectl stop
+apachectl -k graceful-stop
 
 # redirect apache logs to stdout/stderr
 ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
