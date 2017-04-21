@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=wordpress \
-    BITNAMI_IMAGE_VERSION=4.7.3-r2 \
+    BITNAMI_IMAGE_VERSION=4.7.4-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
@@ -13,10 +13,10 @@ RUN install_packages libaprutil1 libapr1 libc6 libuuid1 libexpat1 libssl1.0.0 li
 RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a2770b7e549674e33b8a5b07480f53c39f5c3f
 RUN bitnami-pkg unpack php-5.6.30-3 --checksum af6c238825d4394fc6352c5ad48c1e6423e21520df927097dab592f0d4ad4662
 RUN bitnami-pkg install libphp-5.6.30-1 --checksum a62cad2320fa2d141309e75663aed3d1bd82626d51b784678d18ec3f985d83bf
-RUN bitnami-pkg unpack mysql-client-10.1.21-3 --checksum 9f636d5c4f0c734290ecbb93b51dd71bb81674fee14c3e517ec4f9440bb26bcb
+RUN bitnami-pkg unpack mysql-client-10.1.22-3 --checksum 9e881a7c404f658c93abd665ecd1372f61a591d784e6456c64c0129358a7ff1a
 
 # Install wordpress
-RUN bitnami-pkg unpack wordpress-4.7.3-1 --checksum 6b977841bf1f22c6e83fbf631719b0f6cb333e03727a9c08fec4b24c8a3de2d5
+RUN bitnami-pkg unpack wordpress-4.7.4-0 --checksum e02f94989b4b839b818e99f11b58135702b74d94f864f3066214aecc613498da
 
 COPY rootfs /
 
