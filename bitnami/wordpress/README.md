@@ -28,6 +28,7 @@ The recommended way to run WordPress is using Docker Compose using the following
 
 ```yaml
 version: '2'
+
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
@@ -54,6 +55,7 @@ services:
       - WORDPRESS_DATABASE_USER=bn_wordpress
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
       - ALLOW_EMPTY_PASSWORD=yes
+
 volumes:
   mariadb_data:
     driver: local
@@ -125,6 +127,7 @@ The following `docker-compose.yml` template demonstrates the use of host directo
 
 ```yaml
 version: '2'
+
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
