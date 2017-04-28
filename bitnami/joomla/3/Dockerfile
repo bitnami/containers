@@ -1,9 +1,9 @@
-FROM bitnami/minideb-extras:jessie-r13
+FROM bitnami/minideb-extras:jessie-r14
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=joomla \
-    BITNAMI_IMAGE_VERSION=3.6.5-r5 \
+    BITNAMI_IMAGE_VERSION=3.7.0-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin:$PATH
 
 # System packages required
@@ -13,10 +13,10 @@ RUN install_packages libaprutil1 libapr1 libc6 libuuid1 libexpat1 libssl1.0.0 li
 RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a2770b7e549674e33b8a5b07480f53c39f5c3f
 RUN bitnami-pkg unpack php-5.6.30-3 --checksum af6c238825d4394fc6352c5ad48c1e6423e21520df927097dab592f0d4ad4662
 RUN bitnami-pkg install libphp-5.6.30-1 --checksum a62cad2320fa2d141309e75663aed3d1bd82626d51b784678d18ec3f985d83bf
-RUN bitnami-pkg install mysql-client-10.1.22-1 --checksum d9c3d9a5c986ae17eaa5089d85dcd19f314f057102ab40121714e6e3b8c33af5
+RUN bitnami-pkg install mysql-client-10.1.22-3 --checksum 9e881a7c404f658c93abd665ecd1372f61a591d784e6456c64c0129358a7ff1a
 
 # Install joomla
-RUN bitnami-pkg unpack joomla-3.6.5-0 --checksum a2bc98181e837606497fda3e8e37840270fe3d67dedd8353ddea03345dcf7b8d
+RUN bitnami-pkg unpack joomla-3.7.0-0 --checksum bfe3e609c3932a268ef714cbf81a8bea4619cb85cd69086f7d2454ef688fb5e7
 
 COPY rootfs /
 
