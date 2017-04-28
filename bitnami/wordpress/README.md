@@ -97,7 +97,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     --volume apache_data:/bitnami/apache \
     --volume php_data:/bitnami/php \
     bitnami/wordpress:latest
-    ```
+  ```
 
 Access your application at http://your-ip/
 
