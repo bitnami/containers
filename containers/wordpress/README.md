@@ -32,21 +32,29 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - mariadb_data:/bitnami/mariadb
+      - 'mariadb_data:/bitnami/mariadb'
+    environment:
+      - MARIADB_USER=bn_wordpress
+      - MARIADB_DATABASE=bitnami_wordpress
+      - ALLOW_EMPTY_PASSWORD=yes
   wordpress:
-    image: bitnami/wordpress:latest
-    depends_on:
-      - mariadb
+    image: 'bitnami/wordpress:latest'
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - wordpress_data:/bitnami/wordpress
-      - apache_data:/bitnami/apache
-      - php_data:/bitnami/php
+      - 'wordpress_data:/bitnami/wordpress'
+      - 'apache_data:/bitnami/apache'
+      - 'php_data:/bitnami/php'
+    depends_on:
+      - mariadb
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT=3306
+      - WORDPRESS_DATABASE_USER=bn_wordpress
+      - WORDPRESS_DATABASE_NAME=bitnami_wordpress
+      - ALLOW_EMPTY_PASSWORD=yes
 
 volumes:
   mariadb_data:
@@ -79,7 +87,10 @@ If you want to run the application manually instead of using `docker-compose`, t
 
   ```bash
   $ docker volume create --name mariadb_data
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_wordpress \
+    -e MARIADB_DATABASE=bitnami_wordpress \
     --net wordpress-tier \
     --volume mariadb_data:/bitnami/mariadb \
     bitnami/mariadb:latest
@@ -92,6 +103,9 @@ If you want to run the application manually instead of using `docker-compose`, t
   $ docker volume create --name apache_data
   $ docker volume create --name php_data
   $ docker run -d --name wordpress -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e WORDPRESS_DATABASE_USER=bn_wordpress \
+    -e WORDPRESS_DATABASE_NAME=bitnami_wordpress \
     --net wordpress-tier \
     --volume wordpress_data:/bitnami/wordpress \
     --volume apache_data:/bitnami/apache \
@@ -113,11 +127,14 @@ The following `docker-compose.yml` template demonstrates the use of host directo
 
 ```yaml
 version: '2'
+
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_wordpress
+      - MARIADB_DATABASE=bitnami_wordpress
     volumes:
       - /path/to/mariadb-persistence:/bitnami/mariadb
   wordpress:
@@ -127,6 +144,10 @@ services:
     ports:
       - '80:80'
       - '443:443'
+    environment:
+      - WORDPRESS_DATABASE_USER=bn_wordpress
+      - WORDPRESS_DATABASE_NAME=bitnami_wordpress
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - /path/to/wordpress-persistence:/bitnami/wordpress
       - /path/to/apache-persistence:/bitnami/apache
@@ -142,7 +163,10 @@ services:
 
 2. Create a MariaDB container with host volume
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_wordpress \
+    -e MARIADB_DATABASE=bitnami_wordpress \
     --net wordpress-tier \
     --volume /path/to/mariadb-persistence:/bitnami/mariadb \
     bitnami/mariadb:latest
@@ -151,6 +175,9 @@ services:
 3. Create the WordPress the container with host volumes
   ```bash
   $ docker run -d --name wordpress -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e WORDPRESS_DATABASE_USER=bn_wordpress \
+    -e WORDPRESS_DATABASE_NAME=bitnami_wordpress \
     --net wordpress-tier \
     --volume /path/to/wordpress-persistence:/bitnami/wordpress \
     --volume /path/to/apache-persistence:/bitnami/apache \
@@ -202,6 +229,9 @@ $ docker pull bitnami/wordpress:latest
 3. Launch the updated WordPress image
   ```bash
   $ docker run -d --name wordpress -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e WORDPRESS_DATABASE_USER=bn_wordpress \
+    -e WORDPRESS_DATABASE_NAME=bitnami_wordpress \
     --net wordpress-tier \
     --volume wordpress_data:/bitnami/wordpress \
     --volume apache_data:/bitnami/apache \
@@ -233,6 +263,7 @@ The WordPress instance can be customized by specifying environment variables on 
 - `WORDPRESS_DATABASE_NAME`: Database name that WordPress will use to connect with the database. Default: **bitnami_wordpress**
 - `WORDPRESS_DATABASE_USER`: Database user that WordPress will use to connect with the database. Default: **bn_wordpress**
 - `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ##### Create a database for WordPress using mysql-client
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
@@ -253,6 +284,8 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     environment:
+      - MARIADB_USER=bn_wordpress
+      - MARIADB_DATABASE=bitnami_wordpress
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - mariadb_data:/bitnami/mariadb
@@ -264,7 +297,11 @@ services:
       - '80:80'
       - '443:443'
     environment:
-      - WORDPRESS_PASSWORD=my_password
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT=3306
+      - WORDPRESS_DATABASE_USER=bn_wordpress
+      - WORDPRESS_DATABASE_NAME=bitnami_wordpress
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - wordpress_data:/bitnami/wordpress
       - apache_data:/bitnami/apache
@@ -286,7 +323,10 @@ volumes:
 ```bash
 $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --net wordpress-tier \
-  --env WORDPRESS_PASSWORD=my_password \
+  -e ALLOW_EMPTY_PASSWORD=yes \
+  -e WORDPRESS_DATABASE_USER=bn_wordpress \
+  -e WORDPRESS_DATABASE_NAME=bitnami_wordpress \
+  -e WORDPRESS_PASSWORD=my_password \
   --volume wordpress_data:/bitnami/wordpress \
   --volume apache_data:/bitnami/apache \
   --volume php_data:/bitnami/php \
@@ -313,6 +353,10 @@ This would be an example of SMTP configuration using a GMail account:
       - 80:80
       - 443:443
     environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT=3306
+      - WORDPRESS_DATABASE_USER=bn_wordpress
+      - WORDPRESS_DATABASE_NAME=bitnami_wordpress
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
@@ -329,6 +373,8 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --net wordpress-tier \
   --env SMTP_HOST=smtp.gmail.com --env SMTP_PORT=587 \
   --env SMTP_USER=your_email@gmail.com --env SMTP_PASSWORD=your_password \
+  --env ALLOW_EMPTY_PASSWORD=yes --env WORDPRESS_DATABASE_USER=bn_wordpress \
+  --env WORDPRESS_DATABASE_NAME=bitnami_wordpress \
   --volume wordpress_data:/bitnami/wordpress \
   bitnami/wordpress:latest
 ```
