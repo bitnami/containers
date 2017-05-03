@@ -25,9 +25,11 @@ services:
 
 # Supported tags and respective `Dockerfile` links
 
- - [`9.0`, `9.0.0.M19-r0` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/741d94f99012ea1c79873bf9fd981a2b098f5b0a/9.0/Dockerfile)
- - [`8.0`, `8.0.43-r0`, `latest` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/125f72bf032214b7c3d5746c16f743045d4926ba/8.0/Dockerfile)
- - [`7`, `7.0.77-r0` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/3f7b6573885ca4ca9117bf88e7e0ba2ccc8487e8/7/Dockerfile)
+ - [`9.0`, `9.0.0.M19-r1` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.0.0.M19-r1/9.0/Dockerfile)
+ - [`8.0`, `8.0.43-r0`, `latest` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.0.43-r0/8.0/Dockerfile)
+ - [`7`, `7.0.77-r0` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.0.77-r0/7/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
 
