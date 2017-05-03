@@ -1,28 +1,24 @@
-FROM bitnami/minideb-extras:jessie-r13
+FROM bitnami/minideb-extras:jessie-r14
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=3.2.8-r2 \
-    BITNAMI_APP_NAME=redis \
-    PATH=/opt/bitnami/redis/bin:$PATH
+ENV BITNAMI_APP_NAME="redis" \
+    BITNAMI_IMAGE_VERSION="3.2.8-r3" \
+    PATH="/opt/bitnami/redis/bin:$PATH" \
+    REDIS_MASTER_HOST="" \
+    REDIS_MASTER_PASSWORD="" \
+    REDIS_MASTER_PORT="6379" \
+    REDIS_PASSWORD="" \
+    REDIS_REPLICATION_MODE=""
 
-# System packages required
+# Install required system packages and dependencies
 RUN install_packages libc6
-
-# Install redis
 RUN bitnami-pkg unpack redis-3.2.8-0 --checksum 2dcd69c0bbcb6e2ab82975d39ee32c2795c612e85012d599d36553c4f5ab8f3d
 
 COPY rootfs /
-
-ENV REDIS_PASSWORD= \
-    REDIS_REPLICATION_MODE= \
-    REDIS_MASTER_HOST= \
-    REDIS_MASTER_PORT=6379 \
-    REDIS_MASTER_PASSWORD=
 
 VOLUME ["/bitnami/redis"]
 
 EXPOSE 6379
 
 ENTRYPOINT ["/app-entrypoint.sh"]
-
 CMD ["/run.sh"]
