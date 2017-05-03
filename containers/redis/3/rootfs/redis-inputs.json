@@ -1,7 +1,7 @@
 {
-  "password": "{{$global.env.REDIS_PASSWORD}}",
-  "replicationMode": "{{$global.env.REDIS_REPLICATION_MODE}}",
   "masterHost": "{{$global.env.REDIS_MASTER_HOST}}",
+  "masterPassword": "{{$global.env.REDIS_MASTER_PASSWORD}}",
   "masterPort": "{{$global.env.REDIS_MASTER_PORT}}",
-  "masterPassword": "{{$global.env.REDIS_MASTER_PASSWORD}}"
+  "password": "{{$global.env.REDIS_PASSWORD}}",
+  "replicationMode": "{{$global.env.REDIS_REPLICATION_MODE}}"
 }
