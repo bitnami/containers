@@ -2,7 +2,7 @@ machine:
   services:
   - docker
   environment:
-    RELEASE_SERIES_LIST: 7,8.0,9.0
+    RELEASE_SERIES_LIST: 9.0,8.0,7
     LATEST_STABLE: 8.0
     IMAGE_NAME: tomcat
     CHART_NAME: tomcat
