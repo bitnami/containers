@@ -240,6 +240,7 @@ Available variables:
  - `PRESTASHOP_PASSWORD`: PrestaShop application password. Default: **bitnami**
  - `PRESTASHOP_EMAIL`: PrestaShop application email. Default: **user@example.com**
  - `PRESTASHOP_HOST`: PrestaShop Host Server.
+ - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
  - `MARIADB_PASSWORD`: Root password for the MariaDB.
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
  - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
