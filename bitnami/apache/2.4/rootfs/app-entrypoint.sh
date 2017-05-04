@@ -1,4 +1,5 @@
 #!/bin/bash -e
+
 . /opt/bitnami/base/functions
 . /opt/bitnami/base/helpers
 
@@ -7,8 +8,7 @@ check_for_updates &
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
   nami_initialize apache
-  chown -R :daemon /opt/bitnami/apache/htdocs || true
-  info "Starting apache..."
+  info "Starting apache... "
 fi
 
 exec tini -- "$@"
