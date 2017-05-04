@@ -1,5 +1,6 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-laravel/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-laravel/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/laravel)](https://hub.docker.com/r/bitnami/laravel/)
+[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
 
 # Bitnami Laravel Development Container
 
@@ -107,6 +108,12 @@ If you encountered a problem running this container, you can file an [issue](../
 - Docker info (`docker info`)
 - Docker image version (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - Steps to reproduce the issue.
+
+## Community
+
+Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
+
+Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 ## License
 
