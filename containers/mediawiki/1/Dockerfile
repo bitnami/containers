@@ -4,7 +4,7 @@ MAINTAINER Bitnami <containers@bitnami.com>
 ENV APACHE_HTTPS_PORT="443" \
     APACHE_HTTP_PORT="80" \
     BITNAMI_APP_NAME="mediawiki" \
-    BITNAMI_IMAGE_VERSION="1.28.1-r1" \
+    BITNAMI_IMAGE_VERSION="1.28.2-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
     MARIADB_PORT="3306" \
@@ -25,7 +25,7 @@ RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a277
 RUN bitnami-pkg unpack php-5.6.30-3 --checksum af6c238825d4394fc6352c5ad48c1e6423e21520df927097dab592f0d4ad4662
 RUN bitnami-pkg install mysql-client-10.1.22-3 --checksum 9e881a7c404f658c93abd665ecd1372f61a591d784e6456c64c0129358a7ff1a
 RUN bitnami-pkg install libphp-5.6.30-1 --checksum a62cad2320fa2d141309e75663aed3d1bd82626d51b784678d18ec3f985d83bf
-RUN bitnami-pkg unpack mediawiki-1.28.1-0 --checksum 8153779f2f4e8fa02e8ee776035cca4a498be31ecba9e39c81db99e9ee97d5ca
+RUN bitnami-pkg unpack mediawiki-1.28.2-0 --checksum 9321fcfff63d3d6dc7e8afd923a270de1ea03789e9ec3616c0da81f1b0977f4d
 
 COPY rootfs /
 
