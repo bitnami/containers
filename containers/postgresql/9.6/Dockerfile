@@ -1,31 +1,28 @@
-FROM bitnami/minideb-extras:jessie-r13
+FROM bitnami/minideb-extras:jessie-r14
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=9.6.2-r2 \
-    BITNAMI_APP_NAME=postgresql \
-    PATH=/opt/bitnami/postgresql/bin:$PATH
+ENV BITNAMI_APP_NAME="postgresql" \
+    BITNAMI_IMAGE_VERSION="9.6.2-r3" \
+    PATH="/opt/bitnami/postgresql/bin:$PATH" \
+    POSTGRESQL_DATABASE="" \
+    POSTGRESQL_MASTER_HOST="" \
+    POSTGRESQL_MASTER_PORT="5432" \
+    POSTGRESQL_PASSWORD="" \
+    POSTGRESQL_PORT="5432" \
+    POSTGRESQL_REPLICATION_MODE="master" \
+    POSTGRESQL_REPLICATION_PASSWORD="" \
+    POSTGRESQL_REPLICATION_USER="" \
+    POSTGRESQL_USERNAME="postgres"
 
-# System packages required
-RUN install_packages libc6 libssl1.0.0 zlib1g libxml2 liblzma5 libedit2 libbsd0 libtinfo5 libxslt1.1
-
-# Install postgresql
+# Install required system packages and dependencies
+RUN install_packages libbsd0 libc6 libedit2 liblzma5 libssl1.0.0 libtinfo5 libxml2 libxslt1.1 zlib1g
 RUN bitnami-pkg unpack postgresql-9.6.2-0 --checksum b706396cc1a435741e4db319f8028d716047cc4d40e6b3418c16944f6661f90f
 
 COPY rootfs /
-
-ENV POSTGRESQL_USERNAME=postgres \
-    POSTGRESQL_PASSWORD= \
-    POSTGRESQL_DATABASE= \
-    POSTGRESQL_REPLICATION_MODE=master \
-    POSTGRESQL_REPLICATION_USER= \
-    POSTGRESQL_REPLICATION_PASSWORD= \
-    POSTGRESQL_MASTER_HOST= \
-    POSTGRESQL_MASTER_PORT=5432
 
 VOLUME ["/bitnami/postgresql"]
 
 EXPOSE 5432
 
 ENTRYPOINT ["/app-entrypoint.sh"]
-
-CMD ["nami", "start", "--foreground", "postgresql"]
+CMD ["nami","start","--foreground","postgresql"]
