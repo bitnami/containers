@@ -26,7 +26,7 @@ node:
 
 # Supported tags and respective `Dockerfile` links
 
- - [`7`, `7.10.0-r0`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.0-r0/7/Dockerfile)
+ - [`7`, `7.10.0-r1`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.0-r1/7/Dockerfile)
  - [`6`, `6.10.3-r1` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.10.3-r1/6/Dockerfile)
  - [`4`, `4.8.3-r1` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/4.8.3-r1/4/Dockerfile)
 
