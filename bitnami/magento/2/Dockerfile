@@ -1,42 +1,37 @@
-FROM bitnami/minideb-extras:jessie-r13
-
+FROM bitnami/minideb-extras:jessie-r14
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_APP_NAME=magento \
-    BITNAMI_IMAGE_VERSION=2.1.6-r0 \
-    PATH=/opt/bitnami/php/bin:/opt/bitnami/apache/bin:/opt/bitnami/magento/bin/:$PATH
+ENV APACHE_HTTPS_PORT="443" \
+    APACHE_HTTP_PORT="80" \
+    BITNAMI_APP_NAME="magento" \
+    BITNAMI_IMAGE_VERSION="2.1.6-r1" \
+    MAGENTO_ADMINURI="admin" \
+    MAGENTO_EMAIL="user@example.com" \
+    MAGENTO_FIRSTNAME="FirstName" \
+    MAGENTO_HOST="127.0.0.1" \
+    MAGENTO_LASTNAME="LastName" \
+    MAGENTO_MODE="developer" \
+    MAGENTO_PASSWORD="bitnami1" \
+    MAGENTO_USERNAME="user" \
+    MARIADB_HOST="mariadb" \
+    MARIADB_PASSWORD="" \
+    MARIADB_PORT="3306" \
+    MARIADB_USER="root" \
+    PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/mysql/bin:/opt/bitnami/magento/bin:$PATH"
 
-# System packages required
-RUN install_packages libaprutil1 libapr1 libc6 libuuid1 libexpat1 libssl1.0.0 libpcre3 libldap-2.4-2 libsasl2-2 libgnutls-deb0-28 zlib1g libp11-kit0 libtasn1-6 libnettle4 libhogweed2 libgmp10 libffi6 libxslt1.1 libtidy-0.99-0 libreadline6 libncurses5 libtinfo5 libmcrypt4 libstdc++6 libpng12-0 libjpeg62-turbo libbz2-1.0 libxml2 libcurl3 libfreetype6 libicu52 libgcc1 libgcrypt20 liblzma5 libidn11 librtmp1 libssh2-1 libgssapi-krb5-2 libkrb5-3 libk5crypto3 libcomerr2 libgpg-error0 libkrb5support0 libkeyutils1 libsybdb5 libpq5
-
-# Additional modules required
+# Install required system packages and dependencies
+RUN install_packages libapr1 libaprutil1 libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls-deb0-28 libgpg-error0 libgssapi-krb5-2 libhogweed2 libicu52 libidn11 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmcrypt4 libncurses5 libnettle4 libp11-kit0 libpcre3 libpng12-0 libpq5 libreadline6 librtmp1 libsasl2-2 libssh2-1 libssl1.0.0 libstdc++6 libsybdb5 libtasn1-6 libtidy-0.99-0 libtinfo5 libuuid1 libxml2 libxslt1.1 zlib1g
 RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a2770b7e549674e33b8a5b07480f53c39f5c3f
-RUN bitnami-pkg unpack php-7.0.17-0 --checksum 70fb42218e5b75b81683e6b13034211dfe31a6488d90aa5c79e5edb52ed08ddf
-RUN bitnami-pkg install libphp-7.0.17-0 --checksum 9b0e8729e6f812e84e43e1aa07c01557690c8fef49ba84a6107c2e7d6636996a
-RUN bitnami-pkg install mysql-client-10.1.22-3 --checksum 9e881a7c404f658c93abd665ecd1372f61a591d784e6456c64c0129358a7ff1a
-
-# Install magento
+RUN bitnami-pkg unpack php-7.0.18-0 --checksum 71c77e2a448543126606f054ae6dc85d893dc39e36d2bc55eb496f6910561a80
+RUN bitnami-pkg install mysql-client-10.1.23-0 --checksum 9c38e41f237a4b9ce1aca7b9ecad86be5c55b924880cef45b87d635a4aea9d3d
+RUN bitnami-pkg install libphp-7.0.18-0 --checksum 315fafc5c3942d854971ddc660cc35586e79d867af41c516c23a02871d22a5f6
 RUN bitnami-pkg unpack magento-2.1.6-0 --checksum 4dfbad94aec89100c6a3471c7caa14ff00cbd92a0d15a41bbd828f7d0a4757b6
 
 COPY rootfs /
 
-ENV APACHE_HTTP_PORT="80" \
-    APACHE_HTTPS_PORT="443" \
-    MAGENTO_USERNAME="user" \
-    MAGENTO_PASSWORD="bitnami1" \
-    MAGENTO_EMAIL="user@example.com" \
-    MAGENTO_ADMINURI="admin" \
-    MAGENTO_FIRSTNAME="FirstName" \
-    MAGENTO_LASTNAME="LastName" \
-    MAGENTO_MODE="developer" \
-    MARIADB_USER="root" \
-    MARIADB_HOST="mariadb" \
-    MARIADB_PORT="3306"
-
-VOLUME ["/bitnami/magento", "/bitnami/apache", "/bitnami/php"]
+VOLUME ["/bitnami/apache","/bitnami/magento","/bitnami/php"]
 
 EXPOSE 80 443
 
 ENTRYPOINT ["/app-entrypoint.sh"]
-
-CMD ["/init.sh"]
+CMD ["/run.sh"]
