@@ -2,8 +2,8 @@ machine:
   services:
   - docker
   environment:
-    RELEASE_SERIES_LIST: 1
-    LATEST_STABLE: 1
+    RELEASE_SERIES_LIST: 1.7
+    LATEST_STABLE: 1.7
     IMAGE_NAME: prestashop
     CHART_NAME: prestashop
     CHART_REPO: https://github.com/kubernetes/charts
