@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-apache/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-apache/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/apache)](https://hub.docker.com/r/bitnami/apache/)
-
+[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
 
 # What is Apache?
 
@@ -8,7 +8,7 @@
 
 [http://httpd.apache.org/](http://httpd.apache.org/)
 
-# TLDR
+# TL;DR
 
 ```bash
 docker run --name apache bitnami/apache:latest
@@ -367,6 +367,12 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `docker info`
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+
+# Community
+
+Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
+
+Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 
