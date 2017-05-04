@@ -340,7 +340,7 @@ You can follow these steps in order to migrate it to this container:
   ```bash
   $ docker-compose exec mediawiki bash -c 'cat /opt/bitnami/mediawiki/LocalSettings.php | grep wgDBpassword'  
   ```
-  
+
 7. Restore the database backup: (replace ROOT_PASSWORD below with your MariaDB root password)
 
   ```bash
@@ -394,9 +394,12 @@ information)
 
 # Community
 
-Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
+Most real time communication happens in the `#containers` channel at
+[bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up
+at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
 
-Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
+Discussions are archived at
+[bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 
