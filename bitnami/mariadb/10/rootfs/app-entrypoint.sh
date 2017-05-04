@@ -11,4 +11,5 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
   nami_initialize mariadb
   info "Starting mariadb... "
 fi
+
 exec tini -- "$@"
