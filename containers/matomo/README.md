@@ -318,6 +318,12 @@ be sure to include the following information in your issue:
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
+# Community
+
+Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
+
+Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
+
 # License
 
 Copyright (c) 2017 Bitnami
