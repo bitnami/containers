@@ -28,7 +28,7 @@ node:
 
  - [`7`, `7.9.0-r0`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/ffa8edd666cd0520dce20b5c303398ae0208c53b/7/Dockerfile)
  - [`6`, `6.10.2-r0` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/fc3d00c692042e1936aeb1790732a51356991bbd/6/Dockerfile)
- - [`4`, `4.8.2-r0` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/09fc188c3e247f73ea090fb7aa249ce53a302fe8/4/Dockerfile)
+ - [`4`, `4.8.3-r0` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/07a75a45c82db3eb5edbde5f08de8f49b4f84730/4/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
