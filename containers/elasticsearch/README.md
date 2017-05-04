@@ -1,5 +1,6 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-elasticsearch/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-elasticsearch/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/elasticsearch)](https://hub.docker.com/r/bitnami/elasticsearch/)
+[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
 # What is Elasticsearch?
 
 > Elasticsearch is a highly scalable open-source full-text search and analytics engine. It allows you to store, search, and analyze big volumes of data quickly and in near real time
@@ -351,6 +352,12 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `docker info`
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+
+# Community
+
+Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
+
+Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 Copyright (c) 2016 Bitnami
