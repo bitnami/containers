@@ -1,9 +1,9 @@
-FROM bitnami/minideb-extras:jessie-r13
+FROM bitnami/minideb-extras:jessie-r14
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=elasticsearch \
-    BITNAMI_IMAGE_VERSION=5.3.1-r0 \
+    BITNAMI_IMAGE_VERSION=5.3.2-r0 \
     PATH=/opt/bitnami/java/bin:/opt/bitnami/elasticsearch/bin:$PATH
 
 # System packages required
@@ -13,7 +13,7 @@ RUN install_packages libc6 libxext6 libx11-6 libxcb1 libxau6 libxdmcp6 libglib2.
 RUN bitnami-pkg install java-1.8.0_121-0 --checksum 2743f753fd1ea88bf90352d95694f89ab0a0fb855cf0d1c7b2a6d92835f9ad27
 
 # Install elasticsearch
-RUN bitnami-pkg unpack elasticsearch-5.3.1-0 --checksum cc998c5a2ce5a39fc346b4cbad5189f2ca115dcff4de8d8eba6e08cd987cbcbd
+RUN bitnami-pkg unpack elasticsearch-5.3.2-0 --checksum 58088620931131aed1b93851adbfd32e83e633f474f3077bd029babca55af2ec
 
 COPY rootfs /
 
