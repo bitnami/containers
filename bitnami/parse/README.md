@@ -1,5 +1,6 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-parse/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-parse/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/parse)](https://hub.docker.com/r/bitnami/parse/)
+[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
 # What is Parse?
 
 > Parse Server is an open source version of the Parse backend that can be deployed to any infrastructure that can run Node.js.
@@ -241,6 +242,12 @@ be sure to include the following information in your issue:
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
+
+# Community
+
+Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
+
+Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 
