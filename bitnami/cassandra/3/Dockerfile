@@ -1,9 +1,9 @@
-FROM bitnami/minideb-extras:jessie-r13
+FROM bitnami/minideb-extras:jessie-r15
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=cassandra \
-    BITNAMI_IMAGE_VERSION=3.10-r3 \
+    BITNAMI_IMAGE_VERSION=3.10-r4 \
     PATH=/opt/bitnami/cassandra/bin:/opt/bitnami/java/bin:/opt/bitnami/python/bin:$PATH
 
 # System packages required
