@@ -1,7 +1,7 @@
-FROM bitnami/minideb-extras:jessie-r13
+FROM bitnami/minideb-extras:jessie-r15
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=11.0.0-r0 \
+ENV BITNAMI_IMAGE_VERSION=11.0.0-r1 \
     BITNAMI_APP_NAME=wildfly \
     PATH=/opt/bitnami/wildfly/bin:/opt/bitnami/java/bin:$PATH
 
