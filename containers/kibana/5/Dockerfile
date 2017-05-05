@@ -1,9 +1,9 @@
-FROM bitnami/minideb-extras:jessie-r13
+FROM bitnami/minideb-extras:jessie-r15
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=kibana \
-    BITNAMI_IMAGE_VERSION=5.3.1-r0 \
+    BITNAMI_IMAGE_VERSION=5.3.1-r1 \
     PATH=/opt/bitnami/kibana/bin:$PATH
 
 # System packages required
