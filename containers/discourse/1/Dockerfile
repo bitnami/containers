@@ -1,9 +1,9 @@
-FROM bitnami/minideb-extras:jessie-r13
+FROM bitnami/minideb-extras:jessie-r15
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=discourse \
-    BITNAMI_IMAGE_VERSION=1.7.8-r1 \
+    BITNAMI_IMAGE_VERSION=1.7.8-r2 \
     PATH=/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/git/bin:$PATH
 
 # System packages required
