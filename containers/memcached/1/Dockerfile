@@ -1,7 +1,7 @@
-FROM bitnami/minideb-extras:jessie-r13
+FROM bitnami/minideb-extras:jessie-r15
 MAINTAINER Bitnami <containers@bitnami.com>
 
-ENV BITNAMI_IMAGE_VERSION=1.4.36-r1 \
+ENV BITNAMI_IMAGE_VERSION=1.4.36-r2 \
     BITNAMI_APP_NAME=memcached \
     PATH=/opt/bitnami/memcached/bin:$PATH
 
