@@ -27,7 +27,7 @@ services:
 
 # Supported tags and respective `Dockerfile` links
 
- - [`11`, `11.0.0-r0` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/0e0e99edc3b7238d5602b74a59f5fb20fe35782d/11/Dockerfile)
+ - [`11`, `11.0.0-r1` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/7b5c7f69bab2a16b0f0f7a88ad00fa8368c006f0/11/Dockerfile)
  - [`10`, `10.1.0-r7` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/master/10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
