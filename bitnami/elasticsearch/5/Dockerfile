@@ -1,9 +1,9 @@
-FROM bitnami/minideb-extras:jessie-r14
+FROM bitnami/minideb-extras:jessie-r15
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=elasticsearch \
-    BITNAMI_IMAGE_VERSION=5.3.2-r0 \
+    BITNAMI_IMAGE_VERSION=5.3.2-r1 \
     PATH=/opt/bitnami/java/bin:/opt/bitnami/elasticsearch/bin:$PATH
 
 # System packages required
