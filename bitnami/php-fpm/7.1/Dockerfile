@@ -1,25 +1,21 @@
-FROM bitnami/minideb-extras:jessie-r13
-MAINTAINER Bitnami <containers@bitnami.com>
+FROM bitnami/minideb-extras:jessie-r15
+LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV BITNAMI_IMAGE_VERSION=7.1.4-r0 \
-    BITNAMI_APP_NAME=php-fpm \
-    PATH=/opt/bitnami/php/sbin:/opt/bitnami/php/bin:$PATH
-
-# System packages required
-RUN install_packages libc6 zlib1g libxslt1.1 libtidy-0.99-0 libreadline6 libncurses5 libtinfo5 libmcrypt4 libldap-2.4-2 libstdc++6 libgmp10 libpng12-0 libjpeg62-turbo libbz2-1.0 libxml2 libssl1.0.0 libcurl3 libfreetype6 libicu52 libgcc1 libgcrypt20 libsasl2-2 libgnutls-deb0-28 liblzma5 libidn11 librtmp1 libssh2-1 libgssapi-krb5-2 libkrb5-3 libk5crypto3 libcomerr2 libgpg-error0 libp11-kit0 libtasn1-6 libnettle4 libhogweed2 libkrb5support0 libkeyutils1 libffi6 libsybdb5 libpq5
-
-# Install php
+# Install required system packages and dependencies
+RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls-deb0-28 libgpg-error0 libgssapi-krb5-2 libhogweed2 libicu52 libidn11 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmcrypt4 libncurses5 libnettle4 libp11-kit0 libpng12-0 libpq5 libreadline6 librtmp1 libsasl2-2 libssh2-1 libssl1.0.0 libstdc++6 libsybdb5 libtasn1-6 libtidy-0.99-0 libtinfo5 libxml2 libxslt1.1 zlib1g
 RUN bitnami-pkg unpack php-7.1.4-0 --checksum 84cce4741cc5823c33a3996872eb226025ca2257320b4f9fed4b2be41aef45c6
 RUN mkdir -p /bitnami && ln -sf /bitnami/php /bitnami/php-fpm
 
-COPY rootfs/ /
+COPY rootfs /
+
+ENV BITNAMI_APP_NAME="php-fpm" \
+    BITNAMI_IMAGE_VERSION="7.1.4-r1" \
+    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH"
 
 VOLUME ["/bitnami/php-fpm"]
 
-WORKDIR /app
-
 EXPOSE 9000
 
+WORKDIR /app
 ENTRYPOINT ["/app-entrypoint.sh"]
-
 CMD ["/run.sh"]
