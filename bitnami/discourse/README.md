@@ -1,11 +1,18 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-discourse/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-discourse/tree/master)
-[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/discourse)](https://hub.docker.com/r/bitnami/discourse/)
 [![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
 # What is Discourse?
 
 > Discourse is the next-next-generation community forum platform. Discourse has a thoroughly modern design and is written in JavaScript. Page loads are very fast and new content is loaded as the user scrolls down the page. Discourse allows you to create categories, tag posts, manage notifications, create user profiles, and includes features to let communities govern themselves by voting out trolls and spammers. Discourse is built for mobile from the ground up and support high-res devices.
 
 https://www.discourse.org/
+
+# Why use Bitnami Images ?
+
+* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+* With Bitnami images the latest bug fixes and features are available as soon as possible.
+* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
 # Prerequisites
 
