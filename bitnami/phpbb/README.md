@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-phpbb/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-phpbb/tree/master)
-[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/phpbb)](https://hub.docker.com/r/bitnami/phpbb/)
 [![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
 # What is phpBB?
 
@@ -13,6 +12,14 @@ https://www.phpbb.com/
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-phpbb/master/docker-compose.yml
 $ docker-compose up
 ```
+
+# Why use Bitnami Images ?
+
+* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+* With Bitnami images the latest bug fixes and features are available as soon as possible.
+* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
 # Prerequisites
 
