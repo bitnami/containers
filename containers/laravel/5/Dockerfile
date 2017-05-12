@@ -16,10 +16,10 @@ RUN npm install -g gulp
 
 USER bitnami
 
-RUN mkdir /tmp/app && cd /tmp/app && composer create-project "laravel/laravel=5.4.19" /tmp/app --prefer-dist
+RUN mkdir /tmp/app && cd /tmp/app && composer create-project "laravel/laravel=5.4.23" /tmp/app --prefer-dist
 
 ENV BITNAMI_APP_NAME=laravel
-ENV BITNAMI_IMAGE_VERSION=5.4.19-r0
+ENV BITNAMI_IMAGE_VERSION=5.4.23-r0
 
 COPY rootfs/ /
 
