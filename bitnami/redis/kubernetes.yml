@@ -1,0 +1,65 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: redis
+    name: redis
+  spec:
+    ports:
+    - name: "6379"
+      port: 6379
+      targetPort: 6379
+    selector:
+      io.kompose.service: redis
+  status:
+    loadBalancer: {}
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    creationTimestamp: null
+    name: redis
+  spec:
+    replicas: 1
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          io.kompose.service: redis
+      spec:
+        containers:
+        - image: bitnami/redis:latest
+          name: redis
+          ports:
+          - containerPort: 6379
+          resources: {}
+          volumeMounts:
+          - mountPath: /bitnami/redis
+            name: redis-redis-data
+        restartPolicy: Always
+        volumes:
+        - name: redis-redis-data
+          persistentVolumeClaim:
+            claimName: redis-redis-data
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: redis-redis-data
+    name: redis-redis-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+kind: List
+metadata: {}
+
