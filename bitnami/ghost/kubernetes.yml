@@ -1,0 +1,130 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: ghost
+    name: ghost
+  spec:
+    ports:
+    - name: "80"
+      port: 80
+      targetPort: 2368
+    selector:
+      io.kompose.service: ghost
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: mariadb
+    name: mariadb
+  spec:
+    clusterIP: None
+    ports:
+    - name: headless
+      port: 55555
+      targetPort: 0
+    selector:
+      io.kompose.service: mariadb
+  status:
+    loadBalancer: {}
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    creationTimestamp: null
+    name: ghost
+  spec:
+    replicas: 1
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          io.kompose.service: ghost
+      spec:
+        containers:
+        - env:
+          - name: GHOST_HOST
+            value: localhost
+          image: bitnami/ghost:latest
+          name: ghost
+          ports:
+          - containerPort: 2368
+          resources: {}
+          volumeMounts:
+          - mountPath: /bitnami/ghost
+            name: ghost-ghost-data
+        restartPolicy: Always
+        volumes:
+        - name: ghost-ghost-data
+          persistentVolumeClaim:
+            claimName: ghost-ghost-data
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: ghost-ghost-data
+    name: ghost-ghost-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    creationTimestamp: null
+    name: mariadb
+  spec:
+    replicas: 1
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          io.kompose.service: mariadb
+      spec:
+        containers:
+        - env:
+          - name: ALLOW_EMPTY_PASSWORD
+            value: "yes"
+          image: bitnami/mariadb:latest
+          name: mariadb
+          resources: {}
+          volumeMounts:
+          - mountPath: /bitnami/mariadb
+            name: ghost-mariadb-data
+        restartPolicy: Always
+        volumes:
+        - name: ghost-mariadb-data
+          persistentVolumeClaim:
+            claimName: ghost-mariadb-data
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: ghost-mariadb-data
+    name: ghost-mariadb-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+kind: List
+metadata: {}
+
