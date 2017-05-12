@@ -1,0 +1,169 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: magento
+    name: magento
+  spec:
+    ports:
+    - name: "80"
+      port: 80
+      targetPort: 80
+    - name: "443"
+      port: 443
+      targetPort: 443
+    selector:
+      io.kompose.service: magento
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: mariadb
+    name: mariadb
+  spec:
+    clusterIP: None
+    ports:
+    - name: headless
+      port: 55555
+      targetPort: 0
+    selector:
+      io.kompose.service: mariadb
+  status:
+    loadBalancer: {}
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    creationTimestamp: null
+    name: magento
+  spec:
+    replicas: 1
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          io.kompose.service: magento
+      spec:
+        containers:
+        - image: bitnami/magento:latest
+          name: magento
+          ports:
+          - containerPort: 80
+          - containerPort: 443
+          resources: {}
+          volumeMounts:
+          - mountPath: /bitnami/magento
+            name: magento-magento-data
+          - mountPath: /bitnami/apache
+            name: magento-apache-data
+          - mountPath: /bitnami/php
+            name: magento-php-data
+        restartPolicy: Always
+        volumes:
+        - name: magento-magento-data
+          persistentVolumeClaim:
+            claimName: magento-magento-data
+        - name: magento-apache-data
+          persistentVolumeClaim:
+            claimName: magento-apache-data
+        - name: magento-php-data
+          persistentVolumeClaim:
+            claimName: magento-php-data
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: magento-magento-data
+    name: magento-magento-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: magento-apache-data
+    name: magento-apache-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: magento-php-data
+    name: magento-php-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    creationTimestamp: null
+    name: mariadb
+  spec:
+    replicas: 1
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          io.kompose.service: mariadb
+      spec:
+        containers:
+        - env:
+          - name: ALLOW_EMPTY_PASSWORD
+            value: "yes"
+          image: bitnami/mariadb:latest
+          name: mariadb
+          resources: {}
+          volumeMounts:
+          - mountPath: /bitnami/mariadb
+            name: magento-mariadb-data
+        restartPolicy: Always
+        volumes:
+        - name: magento-mariadb-data
+          persistentVolumeClaim:
+            claimName: magento-mariadb-data
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: magento-mariadb-data
+    name: magento-mariadb-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+kind: List
+metadata: {}
+
