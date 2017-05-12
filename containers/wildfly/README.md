@@ -30,7 +30,7 @@ services:
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
-* All our images are based on minideb a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
 # Supported tags and respective `Dockerfile` links
 
