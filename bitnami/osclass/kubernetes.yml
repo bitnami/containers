@@ -1,0 +1,150 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: mariadb
+    name: mariadb
+  spec:
+    clusterIP: None
+    ports:
+    - name: headless
+      port: 55555
+      targetPort: 0
+    selector:
+      io.kompose.service: mariadb
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: osclass
+    name: osclass
+  spec:
+    ports:
+    - name: "80"
+      port: 80
+      targetPort: 80
+    - name: "443"
+      port: 443
+      targetPort: 443
+    selector:
+      io.kompose.service: osclass
+  status:
+    loadBalancer: {}
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    creationTimestamp: null
+    name: mariadb
+  spec:
+    replicas: 1
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          io.kompose.service: mariadb
+      spec:
+        containers:
+        - env:
+          - name: ALLOW_EMPTY_PASSWORD
+            value: "yes"
+          image: bitnami/mariadb:latest
+          name: mariadb
+          resources: {}
+          volumeMounts:
+          - mountPath: /bitnami/mariadb
+            name: osclass-mariadb-data
+        restartPolicy: Always
+        volumes:
+        - name: osclass-mariadb-data
+          persistentVolumeClaim:
+            claimName: osclass-mariadb-data
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: osclass-mariadb-data
+    name: osclass-mariadb-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    creationTimestamp: null
+    name: osclass
+  spec:
+    replicas: 1
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          io.kompose.service: osclass
+      spec:
+        containers:
+        - image: bitnami/osclass:latest
+          name: osclass
+          ports:
+          - containerPort: 80
+          - containerPort: 443
+          resources: {}
+          volumeMounts:
+          - mountPath: /bitnami/osclass
+            name: osclass-osclass-data
+          - mountPath: /bitnami/apache
+            name: osclass-apache-data
+        restartPolicy: Always
+        volumes:
+        - name: osclass-osclass-data
+          persistentVolumeClaim:
+            claimName: osclass-osclass-data
+        - name: osclass-apache-data
+          persistentVolumeClaim:
+            claimName: osclass-apache-data
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: osclass-osclass-data
+    name: osclass-osclass-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: osclass-apache-data
+    name: osclass-apache-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+kind: List
+metadata: {}
+
