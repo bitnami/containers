@@ -1,0 +1,43 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: memcached
+    name: memcached
+  spec:
+    ports:
+    - name: "11211"
+      port: 11211
+      targetPort: 11211
+    selector:
+      io.kompose.service: memcached
+  status:
+    loadBalancer: {}
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    creationTimestamp: null
+    name: memcached
+  spec:
+    replicas: 1
+    strategy: {}
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          io.kompose.service: memcached
+      spec:
+        containers:
+        - image: bitnami/memcached:latest
+          name: memcached
+          ports:
+          - containerPort: 11211
+          resources: {}
+        restartPolicy: Always
+  status: {}
+kind: List
+metadata: {}
+
