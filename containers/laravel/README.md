@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-laravel/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-laravel/tree/master)
-[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/laravel)](https://hub.docker.com/r/bitnami/laravel/)
 [![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
 
 # Bitnami Laravel Development Container
@@ -21,6 +20,14 @@ Launch a on-demand Laravel development workspace in Eclipse Che by clicking the 
 [![Laravel Development Workspace](http://beta.codenvy.com/factory/resources/codenvy-contribute.svg)](https://beta.codenvy.com/f/?url=https%3A%2F%2Fgithub.com%2Fbitnami%2Fbitnami-docker-laravel%2Ftree%2Fche)
 
 You can find the configuration files used on the previous link in the [Che branch](https://github.com/bitnami/bitnami-docker-laravel/tree/che). For more information about Eclipse Che workspaces check the [official documentation](https://eclipse-che.readme.io/docs/introduction).
+
+## Why use Bitnami Images ?
+
+* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+* With Bitnami images the latest bug fixes and features are available as soon as possible.
+* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
 ## Introduction
 
