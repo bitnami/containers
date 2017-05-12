@@ -2,7 +2,7 @@ machine:
   services:
   - docker
   environment:
-    IMAGE_NAME: cassandra
+    IMAGE_NAME: zookeeper
     DOCKER_PROJECT: bitnami
     GCLOUD_PROJECT: bitnami-containers
 
