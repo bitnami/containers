@@ -1,12 +1,11 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-tomcat/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-tomcat/tree/master)
-[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/tomcat)](https://hub.docker.com/r/bitnami/tomcat/)
 [![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
 
 # What is Tomcat?
 
 > [Apache Tomcat](http://tomcat.apache.org), often referred to as Tomcat, is an open-source web server and servlet container developed by the [Apache Software Foundation (ASF)](https://www.apache.org). Tomcat implements several Java EE specifications including Java Servlet, JavaServer Pages (JSP), Java EL, and WebSocket, and provides a "pure Java" HTTP web server environment for Java code to run in.
 
-# TLDR
+# TL;DR;
 
 ```bash
 docker run --name tomcat bitnami/tomcat:latest
@@ -23,6 +22,14 @@ services:
     ports:
       - '8080:8080'
 ```
+
+# Why use Bitnami Images ?
+
+* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+* With Bitnami images the latest bug fixes and features are available as soon as possible.
+* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
 # Supported tags and respective `Dockerfile` links
 
