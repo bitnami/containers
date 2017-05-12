@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-parse/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-parse/tree/master)
-[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/parse)](https://hub.docker.com/r/bitnami/parse/)
 [![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
 # What is Parse?
 
@@ -19,6 +18,14 @@ We also provide a Docker Image for Parse Dashboard. Parse Dashboard is a standal
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-parse/master/docker-compose.yml
 $ docker-compose up
 ```
+
+# Why use Bitnami Images ?
+
+* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+* With Bitnami images the latest bug fixes and features are available as soon as possible.
+* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
 # Prerequisites
 
