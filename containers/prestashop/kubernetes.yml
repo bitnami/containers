@@ -1,0 +1,172 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: mariadb
+    name: mariadb
+  spec:
+    clusterIP: None
+    ports:
+    - name: headless
+      port: 55555
+      targetPort: 0
+    selector:
+      io.kompose.service: mariadb
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: prestashop
+    name: prestashop
+  spec:
+    ports:
+    - name: "80"
+      port: 80
+      targetPort: 80
+    - name: "443"
+      port: 443
+      targetPort: 443
+    selector:
+      io.kompose.service: prestashop
+  status:
+    loadBalancer: {}
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    creationTimestamp: null
+    name: mariadb
+  spec:
+    replicas: 1
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          io.kompose.service: mariadb
+      spec:
+        containers:
+        - env:
+          - name: ALLOW_EMPTY_PASSWORD
+            value: "yes"
+          image: bitnami/mariadb:latest
+          name: mariadb
+          resources: {}
+          volumeMounts:
+          - mountPath: /bitnami/mariadb
+            name: prestashop-mariadb-data
+        restartPolicy: Always
+        volumes:
+        - name: prestashop-mariadb-data
+          persistentVolumeClaim:
+            claimName: prestashop-mariadb-data
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: prestashop-mariadb-data
+    name: prestashop-mariadb-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    creationTimestamp: null
+    name: prestashop
+  spec:
+    replicas: 1
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          io.kompose.service: prestashop
+      spec:
+        containers:
+        - env:
+          - name: PRESTASHOP_HOST
+            value: localhost
+          image: bitnami/prestashop:latest
+          name: prestashop
+          ports:
+          - containerPort: 80
+          - containerPort: 443
+          resources: {}
+          volumeMounts:
+          - mountPath: /bitnami/prestashop
+            name: prestashop-prestashop-data
+          - mountPath: /bitnami/apache
+            name: prestashop-apache-data
+          - mountPath: /bitnami/php
+            name: prestashop-php-data
+        restartPolicy: Always
+        volumes:
+        - name: prestashop-prestashop-data
+          persistentVolumeClaim:
+            claimName: prestashop-prestashop-data
+        - name: prestashop-apache-data
+          persistentVolumeClaim:
+            claimName: prestashop-apache-data
+        - name: prestashop-php-data
+          persistentVolumeClaim:
+            claimName: prestashop-php-data
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: prestashop-prestashop-data
+    name: prestashop-prestashop-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: prestashop-apache-data
+    name: prestashop-apache-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: prestashop-php-data
+    name: prestashop-php-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+kind: List
+metadata: {}
+
