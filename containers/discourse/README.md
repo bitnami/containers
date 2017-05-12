@@ -6,6 +6,13 @@
 
 https://www.discourse.org/
 
+# TL;DR;
+
+```bash
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-discourse/master/docker-compose.yml
+$ docker-compose up
+```
+
 # Why use Bitnami Images ?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
