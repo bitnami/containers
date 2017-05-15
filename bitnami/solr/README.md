@@ -1,5 +1,6 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-solr/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-solr/tree/master)
 [![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-solr/master/kubernetes.yml)
 # What is Apache Solr?
 
 > Solr is the popular, blazing-fast, open source enterprise search platform built on Apache Lucene.
