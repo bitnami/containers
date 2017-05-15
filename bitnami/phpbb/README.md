@@ -1,5 +1,6 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-phpbb/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-phpbb/tree/master)
 [![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-phpbb/master/kubernetes.yml)
 # What is phpBB?
 
 > If you need to build a community forum, try phpBB. First released in 2000, phpBB is a bulletin board solution that allows you to create forums and subforums. phpBB supports the notion of users and groups, file attachments, full-text search, notifications and more. Hundreds of modifications are available including themes, communications add-ons, spam management and more.
