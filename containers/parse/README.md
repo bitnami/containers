@@ -1,5 +1,6 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-parse/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-parse/tree/master)
 [![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-parse/master/kubernetes.yml)
 # What is Parse?
 
 > Parse Server is an open source version of the Parse backend that can be deployed to any infrastructure that can run Node.js.
