@@ -1,7 +1,8 @@
 version: '2'
+
 services:
   elasticsearch:
-    image: 'bitnami/elasticsearch:2'
+    image: 'bitnami/elasticsearch:5'
     ports:
       - '9200:9200'
       - '9300:9300'
