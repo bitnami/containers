@@ -1,14 +1,16 @@
 {
   "clusterName": "{{$global.env.CASSANDRA_CLUSTER_NAME}}",
-  "transportPort": "{{$global.env.CASSANDRA_TRANSPORT_PORT}}",
-  "sslTransportPort": "{{$global.env.CASSANDRA_SSL_TRANSPORT_PORT}}",
-  "jmxPort": "{{$global.env.CASSANDRA_JMX_PORT}}",
   "cqlClientPort": "{{$global.env.CASSANDRA_CQL_PORT}}",
-  "rpcPort": "{{$global.env.CASSANDRA_RPC_PORT}}",
+  "enableRemoteConnections": "{{$global.env.CASSANDRA_ENABLE_REMOTE_CONNECTIONS}}",
+  "endpointSnitch": "{{$global.env.CASSANDRA_ENDPOINT_SNITCH}}",
   "host": "{{$global.env.CASSANDRA_HOST}}",
-  "username": "{{$global.env.CASSANDRA_USER}}",
+  "jmxPort": "{{$global.env.CASSANDRA_JMX_PORT}}",
+  "numTokens": "{{$global.env.CASSANDRA_NUM_TOKENS}}",
   "password": "{{$global.env.CASSANDRA_PASSWORD}}",
-  "enableRemoteConnections": "{{$global.env.CASSANDRA_REMOTE_CONNECTIONS}}",
+  "rpcPort": "{{$global.env.CASSANDRA_RPC_PORT}}",
   "seeds": "{{$global.env.CASSANDRA_SEEDS}}",
-  "endpointSnitch": "{{$global.env.CASSANDRA_ENDPOINT_SNITCH}}"
+  "setCredentials": "{{$global.env.CASSANDRA_SET_CREDENTIALS}}",
+  "sslTransportPort": "{{$global.env.CASSANDRA_SSL_TRANSPORT_PORT}}",
+  "transportPort": "{{$global.env.CASSANDRA_TRANSPORT_PORT}}",
+  "username": "{{$global.env.CASSANDRA_USER}}"
 }
