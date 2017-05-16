@@ -91,7 +91,7 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 docker run --name solr-node1 --network solr-network bitnami/solr:latest
 ```
 
-### Step 3: Run another containes
+### Step 3: Run another containers
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
