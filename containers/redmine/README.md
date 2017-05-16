@@ -88,6 +88,42 @@ If you want to run the application manually instead of using docker-compose, the
 
 Then you can access your application at http://your-ip/
 
+### Run the application using PostgreSQL database
+
+The Bitnami Redmine Docker Image supports both MariaDB and PostgreSQL databases. In order to use a PostgreSQL database you can run the following command:
+
+
+  ```
+  $ docker-compose -f docker-compose-postgresql.yml up
+  ```
+
+or use the next docker-compose template:
+
+```yaml
+version: '2'
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    volumes:
+      - 'postgresql_data:/bitnami/postgresql'
+  redmine:
+    image: 'bitnami/redmine:latest'
+    ports:
+      - '80:3000'
+    environment:
+      - REDMINE_DB_POSTGRES=postgresql
+    volumes:
+      - 'redmine_data:/bitnami/redmine'
+    depends_on:
+      - postgresql
+volumes:
+  postgresql_data:
+    driver: local
+  redmine_data:
+    driver: local
+```
+
 ## Persisting your application
 
 If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
@@ -203,10 +239,11 @@ Available variables:
  - `REDMINE_PASSWORD`: Redmine application password. Default: **bitnami1**
  - `REDMINE_EMAIL`: Redmine application email. Default: **user@example.com**
  - `REDMINE_LANG`: Redmine application default language. Default: **en**
- - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
- - `MARIADB_PASSWORD`: Root password for the MariaDB.
- - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
- - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
+ - `REDMINE_DB_USERNAME`: Root user for the application database. Default: **root**
+ - `REDMINE_DB_PASSWORD`: Root password for the database.
+ - `REDMINE_DB_MYSQL`: Hostname for MySQL server. Default: **mariadb**
+ - `REDMINE_DB_POSTGRES`: Hostname for PostgreSQL server. No defaults
+ - `REDMINE_DB_PORT_NUMBER`: Port used by database server. Default: **3306**
 
 ### SMTP Configuration
 
