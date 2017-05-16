@@ -2,8 +2,8 @@ machine:
   services:
   - docker
   environment:
-    RELEASE_SERIES_LIST: 9
-    LATEST_STABLE: 9
+    RELEASE_SERIES_LIST: 10
+    LATEST_STABLE: 10
     IMAGE_NAME: owncloud
     CHART_NAME: owncloud
     CHART_REPO: https://github.com/kubernetes/charts
