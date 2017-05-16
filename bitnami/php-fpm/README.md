@@ -38,9 +38,9 @@ services:
 
 # Supported tags and respective `Dockerfile` links
 
- - [`7.1`, `7.0.19-r0`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.19-r0/7.1/Dockerfile)
- - [`7.0`, `7.0.19-r0` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.19-r0/7.0/Dockerfile)
- - [`5.6`, `7.0.19-r0` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.19-r0/5.6/Dockerfile)
+ - [`7.1`, `7.1.5-r0`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.5-r0/7.1/Dockerfile)
+ - [`7.0`, `7.1.5-r0` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.5-r0/7.0/Dockerfile)
+ - [`5.6`, `7.1.5-r0` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.5-r0/5.6/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
 
