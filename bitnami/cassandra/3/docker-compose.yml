@@ -1,4 +1,5 @@
 version: '2'
+
 services:
   cassandra:
     image: 'bitnami/cassandra:3'
