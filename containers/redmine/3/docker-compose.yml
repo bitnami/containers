@@ -8,6 +8,8 @@ services:
       - 'mariadb_data:/bitnami/mariadb'
   redmine:
     image: 'bitnami/redmine:3'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - '80:3000'
     volumes:
