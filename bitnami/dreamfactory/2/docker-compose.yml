@@ -14,6 +14,8 @@ services:
     image: 'bitnami/mongodb:latest'
   dreamfactory:
     image: 'bitnami/dreamfactory:2'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - '80:80'
       - '443:443'
