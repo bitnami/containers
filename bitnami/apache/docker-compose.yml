@@ -3,6 +3,8 @@ version: '2'
 services:
   apache:
     image: 'bitnami/apache:latest'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - '80:80'
       - '443:443'
