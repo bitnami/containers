@@ -3,6 +3,8 @@ version: '2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - '3306:3306'
     volumes:

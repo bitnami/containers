@@ -3,6 +3,8 @@ items:
 - apiVersion: v1
   kind: Service
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     labels:
       io.kompose.service: mariadb
@@ -14,11 +16,14 @@ items:
       targetPort: 3306
     selector:
       io.kompose.service: mariadb
+    type: NodePort
   status:
     loadBalancer: {}
 - apiVersion: extensions/v1beta1
   kind: Deployment
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     name: mariadb
   spec:
