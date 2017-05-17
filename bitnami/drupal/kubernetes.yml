@@ -3,6 +3,8 @@ items:
 - apiVersion: v1
   kind: Service
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     labels:
       io.kompose.service: drupal
@@ -17,6 +19,7 @@ items:
       targetPort: 443
     selector:
       io.kompose.service: drupal
+    type: NodePort
   status:
     loadBalancer: {}
 - apiVersion: v1
@@ -39,6 +42,8 @@ items:
 - apiVersion: extensions/v1beta1
   kind: Deployment
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     name: drupal
   spec:
