@@ -3,6 +3,8 @@ version: '2'
 services:
   cassandra:
     image: 'bitnami/cassandra:3'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - '7000:7000'
       - '7001:7001'
