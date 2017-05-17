@@ -3,6 +3,8 @@ version: '2'
 services:
   elasticsearch:
     image: 'bitnami/elasticsearch:5'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - '9200:9200'
       - '9300:9300'
