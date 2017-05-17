@@ -34,7 +34,7 @@ export MARIADB_MASTER_ROOT_PASSWORD=${MARIADB_MASTER_PASSWORD:-${MARIADB_MASTER_
 # Validate passwords
 if [[ "$ALLOW_EMPTY_PASSWORD" =~ ^(yes|Yes|YES)$ ]]; then
   empty_password_enabled_warn
-else
+elif [[ "$MARIADB_REPLICATION_MODE" != "slave" ]]; then
   # Root user
   if [[ -z "$MARIADB_ROOT_PASSWORD" ]]; then
     empty_password_error MARIADB_ROOT_PASSWORD
