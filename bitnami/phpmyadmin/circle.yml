@@ -5,6 +5,8 @@ machine:
     RELEASE_SERIES_LIST: 4
     LATEST_STABLE: 4
     IMAGE_NAME: phpmyadmin
+    CHART_NAME:
+    CHART_REPO:
     DOCKER_PROJECT: bitnami
     QUAY_PROJECT: bitnami
     GCLOUD_PROJECT: bitnami-containers
