@@ -3,6 +3,8 @@ items:
 - apiVersion: v1
   kind: Service
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     labels:
       io.kompose.service: ghost
@@ -14,6 +16,7 @@ items:
       targetPort: 2368
     selector:
       io.kompose.service: ghost
+    type: NodePort
   status:
     loadBalancer: {}
 - apiVersion: v1
@@ -36,6 +39,8 @@ items:
 - apiVersion: extensions/v1beta1
   kind: Deployment
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     name: ghost
   spec:
