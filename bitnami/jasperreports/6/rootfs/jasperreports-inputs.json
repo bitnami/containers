@@ -1,15 +1,15 @@
 {
-  "username": "{{$global.env.JASPERREPORTS_USERNAME}}",
-  "password": "{{$global.env.JASPERREPORTS_PASSWORD}}",
-  "email": "{{$global.env.JASPERREPORTS_EMAIL}}",
-  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
   "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
+  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
   "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
   "databaseServerPort": "{{$global.env.MARIADB_PORT}}",
-  "smtpHost": "{{$global.env.SMTP_HOST}}",
-  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "email": "{{$global.env.JASPERREPORTS_EMAIL}}",
+  "password": "{{$global.env.JASPERREPORTS_PASSWORD}}",
   "smtpEmail": "{{$global.env.SMTP_EMAIL}}",
-  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
-  "smtpProtocol": "{{$global.env.SMTP_PROTOCOL}}"
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpProtocol": "{{$global.env.SMTP_PROTOCOL}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "username": "{{$global.env.JASPERREPORTS_USERNAME}}"
 }
