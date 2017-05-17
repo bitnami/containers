@@ -17,11 +17,14 @@ services:
     volumes:
       - 'orangehrm_data:/bitnami/orangehrm'
       - 'apache_data:/bitnami/apache'
-      
+      - 'php_data:/bitnami/php'
+
 volumes:
   mariadb_data:
     driver: local
   orangehrm_data:
     driver: local
   apache_data:
+    driver: local
+  php_data:
     driver: local
