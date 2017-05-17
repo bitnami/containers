@@ -3,6 +3,8 @@ items:
 - apiVersion: v1
   kind: Service
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     labels:
       io.kompose.service: discourse
@@ -14,6 +16,7 @@ items:
       targetPort: 3000
     selector:
       io.kompose.service: discourse
+    type: NodePort
   status:
     loadBalancer: {}
 - apiVersion: v1
@@ -53,6 +56,8 @@ items:
 - apiVersion: v1
   kind: Service
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     labels:
       io.kompose.service: sidekiq
@@ -70,6 +75,8 @@ items:
 - apiVersion: extensions/v1beta1
   kind: Deployment
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     name: discourse
   spec:
@@ -198,6 +205,8 @@ items:
 - apiVersion: extensions/v1beta1
   kind: Deployment
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     name: sidekiq
   spec:

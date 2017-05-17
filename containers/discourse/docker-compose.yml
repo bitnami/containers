@@ -10,6 +10,8 @@ services:
       - 'redis_data:/bitnami/redis'
   discourse:
     image: 'bitnami/discourse:latest'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - '80:3000'
     depends_on:
@@ -19,6 +21,8 @@ services:
       - 'discourse_data:/bitnami/discourse'
   sidekiq:
     image: 'bitnami/discourse:latest'
+    labels:
+      kompose.service.type: nodeport
     depends_on:
       - discourse
     volumes:
