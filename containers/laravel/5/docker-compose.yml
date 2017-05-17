@@ -11,7 +11,9 @@ services:
 
   myapp:
     tty: true
-    image: bitnami/laravel:5
+    image: 'bitnami/laravel:5'
+    labels:
+      kompose.service.type: nodeport
     environment:
       - DB_HOST=mariadb
       - DB_USERNAME=my_user
