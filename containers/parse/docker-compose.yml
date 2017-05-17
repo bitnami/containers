@@ -6,6 +6,8 @@ services:
       - 'mongodb_data:/bitnami/mongodb'
   parse:
     image: 'bitnami/parse:latest'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - '1337:1337'
     volumes:
