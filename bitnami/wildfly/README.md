@@ -35,8 +35,8 @@ services:
 
 # Supported tags and respective `Dockerfile` links
 
- - [`11`, `11.0.0-r1` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/7b5c7f69bab2a16b0f0f7a88ad00fa8368c006f0/11/Dockerfile)
- - [`10`, `10.1.0-r7` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/master/10/Dockerfile)
+ - [`11`, `11.0.0-r2`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/11.0.0-r2/11/Dockerfile)
+ - [`10`, `10.1.0-r8` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/10.1.0-r8/10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
@@ -388,7 +388,7 @@ docker-compose start wildfly
 
 ## 10.0.0-r0
 
-- All volumes have been merged at `/bitnami/tomcat`. Now you only need to mount a single volume at `/bitnami/tomcat` for persistence.
+- All volumes have been merged at `/bitnami/wildfly`. Now you only need to mount a single volume at `/bitnami/wildfly` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
 
 # Contributing
