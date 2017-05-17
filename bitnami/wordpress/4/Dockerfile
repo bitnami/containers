@@ -1,46 +1,50 @@
 FROM bitnami/minideb-extras:jessie-r15
+LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-MAINTAINER Bitnami <containers@bitnami.com>
-
-ENV BITNAMI_APP_NAME=wordpress \
-    BITNAMI_IMAGE_VERSION=4.7.5-r0 \
-    PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
-
-# System packages required
-RUN install_packages libaprutil1 libapr1 libc6 libuuid1 libexpat1 libssl1.0.0 libpcre3 libldap-2.4-2 libsasl2-2 libgnutls-deb0-28 zlib1g libp11-kit0 libtasn1-6 libnettle4 libhogweed2 libgmp10 libffi6 libxslt1.1 libtidy-0.99-0 libreadline6 libncurses5 libtinfo5 libmcrypt4 libstdc++6 libpng12-0 libjpeg62-turbo libbz2-1.0 libxml2 libcurl3 libfreetype6 libicu52 libgcc1 libgcrypt20 liblzma5 libidn11 librtmp1 libssh2-1 libgssapi-krb5-2 libkrb5-3 libk5crypto3 libcomerr2 libgpg-error0 libkrb5support0 libkeyutils1 libsybdb5 libpq5
-
-# Additional modules required
+# Install required system packages and dependencies
+RUN install_packages libapr1 libaprutil1 libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls-deb0-28 libgpg-error0 libgssapi-krb5-2 libhogweed2 libicu52 libidn11 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmcrypt4 libncurses5 libnettle4 libp11-kit0 libpcre3 libpng12-0 libpq5 libreadline6 librtmp1 libsasl2-2 libssh2-1 libssl1.0.0 libstdc++6 libsybdb5 libtasn1-6 libtidy-0.99-0 libtinfo5 libuuid1 libxml2 libxslt1.1 zlib1g
 RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a2770b7e549674e33b8a5b07480f53c39f5c3f
 RUN bitnami-pkg unpack php-5.6.30-3 --checksum af6c238825d4394fc6352c5ad48c1e6423e21520df927097dab592f0d4ad4662
+RUN bitnami-pkg unpack mysql-client-10.1.23-1 --checksum 0be92fcc4f7fec93edfa7f788e2bbb87b5b3aac92dfdec159a10590345362512
 RUN bitnami-pkg install libphp-5.6.30-1 --checksum a62cad2320fa2d141309e75663aed3d1bd82626d51b784678d18ec3f985d83bf
-RUN bitnami-pkg unpack mysql-client-10.1.23-0 --checksum 9c38e41f237a4b9ce1aca7b9ecad86be5c55b924880cef45b87d635a4aea9d3d
-
-# Install wordpress
 RUN bitnami-pkg unpack wordpress-4.7.5-0 --checksum 50972b5ffd17b87dac45294ea282f7195880cd54a2e53628fa4b175421133e93
 
 COPY rootfs /
 
-ENV APACHE_HTTP_PORT="80" \
+ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT="443" \
-    WORDPRESS_USERNAME="user" \
-    WORDPRESS_PASSWORD="bitnami" \
-    WORDPRESS_EMAIL="user@example.com" \
-    WORDPRESS_FIRST_NAME="FirstName" \
-    WORDPRESS_LAST_NAME="LastName" \
-    WORDPRESS_BLOG_NAME="User's Blog!" \
-    WORDPRESS_DATABASE_NAME="bitnami_wordpress" \
-    WORDPRESS_DATABASE_USER="bn_wordpress" \
-    WORDPRESS_DATABASE_PASSWORD="" \
+    APACHE_HTTP_PORT="80" \
+    BITNAMI_APP_NAME="wordpress" \
+    BITNAMI_IMAGE_VERSION="4.7.5-r1" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT="3306" \
-    MARIADB_ROOT_USER="root" \
     MARIADB_ROOT_PASSWORD="" \
-    ALLOW_EMPTY_PASSWORD="no"
+    MARIADB_ROOT_USER="root" \
+    MYSQL_CLIENT_CREATE_DATABASE_NAME="" \
+    MYSQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
+    MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES="ALL" \
+    MYSQL_CLIENT_CREATE_DATABASE_USER="" \
+    PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/mysql/bin:$PATH" \
+    SMTP_HOST="" \
+    SMTP_PASSWORD="" \
+    SMTP_PORT="" \
+    SMTP_PROTOCOL="" \
+    SMTP_USER="" \
+    SMTP_USERNAME="" \
+    WORDPRESS_BLOG_NAME="User's Blog!" \
+    WORDPRESS_DATABASE_NAME="bitnami_wordpress" \
+    WORDPRESS_DATABASE_PASSWORD="" \
+    WORDPRESS_DATABASE_USER="bn_wordpress" \
+    WORDPRESS_EMAIL="user@example.com" \
+    WORDPRESS_FIRST_NAME="FirstName" \
+    WORDPRESS_HOST="" \
+    WORDPRESS_LAST_NAME="LastName" \
+    WORDPRESS_PASSWORD="bitnami" \
+    WORDPRESS_USERNAME="user"
 
-VOLUME ["/bitnami/wordpress", "/bitnami/apache", "/bitnami/php"]
+VOLUME ["/bitnami/apache","/bitnami/php","/bitnami/wordpress"]
 
 EXPOSE 80 443
 
 ENTRYPOINT ["/app-entrypoint.sh"]
-
-CMD ["nami", "start", "--foreground", "apache"]
+CMD ["nami","start","--foreground","apache"]
