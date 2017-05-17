@@ -3,7 +3,7 @@ machine:
   - docker
   environment:
     RELEASE_SERIES_LIST: 9.0,8.0,7
-    LATEST_STABLE: 8.0
+    LATEST_STABLE: 9.0
     IMAGE_NAME: tomcat
     CHART_NAME: tomcat
     CHART_REPO: https://github.com/bitnami/charts
