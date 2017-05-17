@@ -1,13 +1,13 @@
 {
-  "username": "{{$global.env.ORANGEHRM_USERNAME}}",
+  "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
+  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT}}",
   "password": "{{$global.env.ORANGEHRM_PASSWORD}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
-  "smtpPort": "{{$global.env.SMTP_PORT}}",
-  "smtpUser": "{{$global.env.SMTP_USER}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
   "smtpProtocol": "{{$global.env.SMTP_PROTOCOL}}",
-  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
-  "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
-  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
-  "databaseServerPort": "{{$global.env.MARIADB_PORT}}"
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "username": "{{$global.env.ORANGEHRM_USERNAME}}"
 }
