@@ -306,21 +306,15 @@ Next we start a MariaDB slave container.
 
 ```bash
 docker run --name mariadb-slave --link mariadb-master:master \
-  -e MARIADB_ROOT_PASSWORD=slave_root_password \
   -e MARIADB_REPLICATION_MODE=slave \
   -e MARIADB_REPLICATION_USER=my_repl_user \
   -e MARIADB_REPLICATION_PASSWORD=my_repl_password \
   -e MARIADB_MASTER_HOST=master \
   -e MARIADB_MASTER_ROOT_PASSWORD=master_root_password \
-  -e MARIADB_USER=my_user \
-  -e MARIADB_PASSWORD=my_password \
-  -e MARIADB_DATABASE=my_database \
   bitnami/mariadb:latest
 ```
 
-In the above command the container is configured as a `slave` using the `MARIADB_REPLICATION_MODE` parameter. The `MARIADB_MASTER_HOST`, `MARIADB_MASTER_ROOT_USER` and `MARIADB_MASTER_ROOT_PASSWORD` parameters are used by the slave to connect to the master and take a dump of the existing data in the database identified by `MARIADB_DATABASE`. The replication user credentials are specified using the `MARIADB_REPLICATION_USER` and `MARIADB_REPLICATION_PASSWORD` parameters and should be the same as the one specified on the master.
-
-> **Note**! The cluster only replicates the database specified in the `MARIADB_DATABASE` parameter.
+In the above command the container is configured as a `slave` using the `MARIADB_REPLICATION_MODE` parameter. The `MARIADB_MASTER_HOST`, `MARIADB_MASTER_ROOT_USER` and `MARIADB_MASTER_ROOT_PASSWORD` parameters are used by the slave to connect to the master. It also takes a dump of the existing data in the master server. The replication user credentials are specified using the `MARIADB_REPLICATION_USER` and `MARIADB_REPLICATION_PASSWORD` parameters and should be the same as the one specified on the master.
 
 You now have a two node MariaDB master/slave replication cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
 
@@ -354,13 +348,9 @@ services:
       - MARIADB_REPLICATION_MODE=slave
       - MARIADB_REPLICATION_USER=repl_user
       - MARIADB_REPLICATION_PASSWORD=repl_password
-      - MARIADB_ROOT_PASSWORD=slave_root_password
       - MARIADB_MASTER_HOST=mariadb-master
       - MARIADB_MASTER_PORT=3306
       - MARIADB_MASTER_ROOT_PASSWORD=master_root_password
-      - MARIADB_USER=my_user
-      - MARIADB_PASSWORD=my_password
-      - MARIADB_DATABASE=my_database
 ```
 
 Scale the number of slaves using:
