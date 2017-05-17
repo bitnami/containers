@@ -1,7 +1,9 @@
 version: '2'
 services:
   myapp:
-    image: bitnami/symfony:3
+    image: 'bitnami/symfony:3'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - '8000:8000'
     volumes:
