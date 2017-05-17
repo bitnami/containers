@@ -10,6 +10,8 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
   wordpress:
     image: 'bitnami/wordpress:4'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - '80:80'
       - '443:443'
