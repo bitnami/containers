@@ -6,7 +6,9 @@ services:
 
   myapp:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: bitnami/express:4
+    image: 'bitnami/express:4'
+    labels:
+      kompose.service.type: nodeport
     command: npm run development
     environment:
       - PORT=3000
