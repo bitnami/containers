@@ -3,6 +3,8 @@ version: '2'
 services:
   redis:
     image: 'bitnami/redis:latest'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - '6379:6379'
     volumes:
