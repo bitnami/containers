@@ -1,4 +1,13 @@
 {
+  "javaHome": "{{$global.env.WILDFLY_JAVA_HOME}}",
+  "javaOpts": "{{$global.env.WILDFLY_JAVA_OPTS}}",
+  "managementHttpPort": "{{$global.env.WILDFLY_MANAGEMENT_HTTP_PORT}}",
+  "password": "{{$global.env.WILDFLY_PASSWORD}}",
+  "publicConsole": "{{$global.env.WILDFLY_PUBLIC_CONSOLE}}",
+  "serverAjpPort": "{{$global.env.WILDFLY_SERVER_AJP_PORT}}",
+  "serverHttpPort": "{{$global.env.WILDFLY_SERVER_HTTP_PORT}}",
+  "serverInterface": "{{$global.env.WILDFLY_SERVER_INTERFACE}}",
   "username": "{{$global.env.WILDFLY_USERNAME}}",
-  "password": "{{$global.env.WILDFLY_PASSWORD}}"
+  "wildflyHome": "{{$global.env.WILDFLY_WILDFLY_HOME}}",
+  "wildflyOpts": "{{$global.env.WILDFLY_WILDFLY_OPTS}}"
 }
