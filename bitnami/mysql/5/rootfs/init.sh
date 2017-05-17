@@ -34,7 +34,7 @@ export MYSQL_MASTER_ROOT_PASSWORD=${MYSQL_MASTER_PASSWORD:-${MYSQL_MASTER_ROOT_P
 # Validate passwords
 if [[ "$ALLOW_EMPTY_PASSWORD" =~ ^(yes|Yes|YES)$ ]]; then
     empty_password_enabled_warn
-else
+elif [[ "$MYSQL_REPLICATION_MODE" != "slave" ]]; then
     # Root user
     if [[ -z "$MYSQL_ROOT_PASSWORD" ]]; then
         empty_password_error MYSQL_ROOT_PASSWORD
