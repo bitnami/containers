@@ -2,11 +2,13 @@ version: '2'
 
 services:
   mongodb:
-    image: bitnami/mongodb:latest
+    image: 'bitnami/mongodb:latest'
 
   myapp:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: bitnami/express:latest
+    image: 'bitnami/express:latest'
+    labels:
+      kompose.service.type: nodeport
     command: npm run development
     environment:
       - PORT=3000
