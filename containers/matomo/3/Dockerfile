@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r15
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=piwik \
-    BITNAMI_IMAGE_VERSION=3.0.3-r1 \
+    BITNAMI_IMAGE_VERSION=3.0.4-r0 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
@@ -11,12 +11,12 @@ RUN install_packages libaprutil1 libapr1 libc6 libuuid1 libexpat1 libssl1.0.0 li
 
 # Additional modules required
 RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a2770b7e549674e33b8a5b07480f53c39f5c3f
-RUN bitnami-pkg unpack php-7.0.18-0 --checksum 71c77e2a448543126606f054ae6dc85d893dc39e36d2bc55eb496f6910561a80
-RUN bitnami-pkg install libphp-7.0.18-0 --checksum 315fafc5c3942d854971ddc660cc35586e79d867af41c516c23a02871d22a5f6
-RUN bitnami-pkg install mysql-client-10.1.23-0 --checksum 9c38e41f237a4b9ce1aca7b9ecad86be5c55b924880cef45b87d635a4aea9d3d
+RUN bitnami-pkg unpack php-7.0.19-0 --checksum dcd5e4a19792dbfde5157d33f09e3c030ac11da92606ade08576bea795d6ac53
+RUN bitnami-pkg install libphp-7.0.19-0 --checksum c8c6f4e5fd15551802e3902261488f06175d64980de59bf72600bc256d828ba4
+RUN bitnami-pkg install mysql-client-10.1.23-1 --checksum 0be92fcc4f7fec93edfa7f788e2bbb87b5b3aac92dfdec159a10590345362512
 
 # Install piwik
-RUN bitnami-pkg unpack piwik-3.0.3-0 --checksum fcbbc3c1bfeeee310662da225e92085042585d7bdf2b17526595d78965810fbe
+RUN bitnami-pkg unpack piwik-3.0.4-0 --checksum 037a9a4b84bf8d920321a2623f38efb39b21fdef4469c02eb8742060e832fdad
 
 COPY rootfs /
 
