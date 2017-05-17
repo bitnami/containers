@@ -6,6 +6,8 @@ services:
       - 'elasticsearch_data:/bitnami/elasticsearch'
   kibana:
     image: 'bitnami/kibana:latest'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - '5601:5601'
     volumes:
