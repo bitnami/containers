@@ -2,6 +2,8 @@ version: '2'
 services:
   dokuwiki:
     image: 'bitnami/dokuwiki:2017'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - '80:80'
       - '443:443'
