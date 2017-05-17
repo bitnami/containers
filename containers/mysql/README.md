@@ -311,21 +311,15 @@ Next we start a MySQL slave container.
 
 ```bash
 docker run --name mysql-slave --link mysql-master:master \
-  -e MYSQL_ROOT_PASSWORD=slave_root_password \
   -e MYSQL_REPLICATION_MODE=slave \
   -e MYSQL_REPLICATION_USER=my_repl_user \
   -e MYSQL_REPLICATION_PASSWORD=my_repl_password \
   -e MYSQL_MASTER_HOST=master \
   -e MYSQL_MASTER_ROOT_PASSWORD=master_root_password \
-  -e MYSQL_USER=my_user \
-  -e MYSQL_PASSWORD=my_password \
-  -e MYSQL_DATABASE=my_database \
   bitnami/mysql:latest
 ```
 
-In the above command the container is configured as a `slave` using the `MYSQL_REPLICATION_MODE` parameter. The `MYSQL_MASTER_HOST`, `MYSQL_MASTER_ROOT_USER` and `MYSQL_MASTER_ROOT_PASSWORD` parameters are used by the slave to connect to the master and take a dump of the existing data in the database identified by `MYSQL_DATABASE`. The replication user credentials are specified using the `MYSQL_REPLICATION_USER` and `MYSQL_REPLICATION_PASSWORD` parameters and should be the same as the one specified on the master.
-
-> **Note**! The cluster only replicates the database specified in the `MYSQL_DATABASE` parameter.
+In the above command the container is configured as a `slave` using the `MYSQL_REPLICATION_MODE` parameter. The `MYSQL_MASTER_HOST`, `MYSQL_MASTER_ROOT_USER` and `MYSQL_MASTER_ROOT_PASSWORD` parameters are used by the slave to connect to the master. It also takes a dump of the existing data in the master server. The replication user credentials are specified using the `MYSQL_REPLICATION_USER` and `MYSQL_REPLICATION_PASSWORD` parameters and should be the same as the one specified on the master.
 
 You now have a two node MySQL master/slave replication cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
 
@@ -365,13 +359,9 @@ services:
       - MYSQL_REPLICATION_MODE=slave
       - MYSQL_REPLICATION_USER=repl_user
       - MYSQL_REPLICATION_PASSWORD=repl_password
-      - MYSQL_ROOT_PASSWORD=slave_root_password
       - MYSQL_MASTER_HOST=mysql-master
       - MYSQL_MASTER_PORT=3306
       - MYSQL_MASTER_ROOT_PASSWORD=master_root_password
-      - MYSQL_USER=my_user
-      - MYSQL_PASSWORD=my_password
-      - MYSQL_DATABASE=my_database
 ```
 
 Scale the number of slaves using:
