@@ -9,6 +9,8 @@ services:
       - 'mariadb_data:/bitnami/mariadb'
   orangehrm:
     image: 'bitnami/orangehrm:3'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - '80:80'
       - '443:443'

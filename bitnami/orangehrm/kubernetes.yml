@@ -20,6 +20,8 @@ items:
 - apiVersion: v1
   kind: Service
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     labels:
       io.kompose.service: orangehrm
@@ -34,6 +36,7 @@ items:
       targetPort: 443
     selector:
       io.kompose.service: orangehrm
+    type: NodePort
   status:
     loadBalancer: {}
 - apiVersion: extensions/v1beta1
@@ -84,6 +87,8 @@ items:
 - apiVersion: extensions/v1beta1
   kind: Deployment
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     name: orangehrm
   spec:
