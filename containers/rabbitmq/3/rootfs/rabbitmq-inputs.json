@@ -1,11 +1,11 @@
 {
-  "vhost": "{{$global.env.RABBITMQ_VHOST}}",
-  "username": "{{$global.env.RABBITMQ_USERNAME}}",
-  "password": "{{$global.env.RABBITMQ_PASSWORD}}",
-  "erlangCookie": "{{$global.env.RABBITMQ_ERLANG_COOKIE}}",
-  "nodeType": "{{$global.env.RABBITMQ_NODE_TYPE}}",
-  "nodePort": "{{$global.env.RABBITMQ_NODE_PORT}}",
-  "nodeName": "{{$global.env.RABBITMQ_NODE_NAME}}",
   "clusterNodeName": "{{$global.env.RABBITMQ_CLUSTER_NODE_NAME}}",
-  "managerPort": "{{$global.env.RABBITMQ_MANAGER_PORT}}"
+  "erlangCookie": "{{$global.env.RABBITMQ_ERLANG_COOKIE}}",
+  "managerPort": "{{$global.env.RABBITMQ_MANAGER_PORT}}",
+  "nodeName": "{{$global.env.RABBITMQ_NODE_NAME}}",
+  "nodePort": "{{$global.env.RABBITMQ_NODE_PORT}}",
+  "nodeType": "{{$global.env.RABBITMQ_NODE_TYPE}}",
+  "password": "{{$global.env.RABBITMQ_PASSWORD}}",
+  "username": "{{$global.env.RABBITMQ_USERNAME}}",
+  "vhost": "{{$global.env.RABBITMQ_VHOST}}"
 }
