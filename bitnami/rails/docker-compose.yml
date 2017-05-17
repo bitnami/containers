@@ -8,7 +8,9 @@ services:
 
   myapp:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: bitnami/rails:latest
+    image: 'bitnami/rails:latest'
+    labels:
+      kompose.service.type: nodeport
     environment:
       - DATABASE_URL=mysql2://mariadb/my_app_development
     depends_on:

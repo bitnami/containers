@@ -20,6 +20,8 @@ items:
 - apiVersion: v1
   kind: Service
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     labels:
       io.kompose.service: myapp
@@ -31,6 +33,7 @@ items:
       targetPort: 3000
     selector:
       io.kompose.service: myapp
+    type: NodePort
   status:
     loadBalancer: {}
 - apiVersion: extensions/v1beta1
@@ -59,6 +62,8 @@ items:
 - apiVersion: extensions/v1beta1
   kind: Deployment
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     name: myapp
   spec:
