@@ -3,7 +3,9 @@ version: '2'
 services:
   php:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: bitnami/php-fpm:7.0
+    image: 'bitnami/php-fpm:7.0'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - 9000:9000
     volumes:

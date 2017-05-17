@@ -3,6 +3,8 @@ items:
 - apiVersion: v1
   kind: Service
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     labels:
       io.kompose.service: php
@@ -14,11 +16,14 @@ items:
       targetPort: 9000
     selector:
       io.kompose.service: php
+    type: NodePort
   status:
     loadBalancer: {}
 - apiVersion: extensions/v1beta1
   kind: Deployment
   metadata:
+    annotations:
+      kompose.service.type: nodeport
     creationTimestamp: null
     name: php
   spec:
