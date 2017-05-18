@@ -3,14 +3,14 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libexpat1 libffi6 libfontconfig1 libfreetype6 libgcc1 libglib2.0-0 libjemalloc1 liblzma5 libncurses5 libpcre3 libpng12-0 libreadline6 libselinux1 libsqlite3-0 libssl1.0.0 libstdc++6 libtinfo5 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 zlib1g
-RUN bitnami-pkg install python-2.7.13rc1-0 --checksum 16e74d2dc5d6bd42c360b71498d3107fda7b690b5bd22df57f0ae3e02fc475ce
+RUN bitnami-pkg install python-2.7.13-0 --checksum 7f5aac196054c7eb04c981243b4ddf37020cc3eb8a7cdc69d72da57212b21573
 RUN bitnami-pkg install java-1.8.0_121-0 --checksum 2743f753fd1ea88bf90352d95694f89ab0a0fb855cf0d1c7b2a6d92835f9ad27
 RUN bitnami-pkg unpack cassandra-3.10-0 --checksum 548dd6e6ccdc22e6c479a0f914b50d44fce948383536a1e6d6abe3dd82a39fa0
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.10-r5" \
+    BITNAMI_IMAGE_VERSION="3.10-r6" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT="9042" \
     CASSANDRA_ENABLE_REMOTE_CONNECTIONS="true" \
