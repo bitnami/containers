@@ -28,7 +28,7 @@ services:
       - /path/to/app:/app
 ```
 
-# Why use Bitnami Images ?
+# Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
