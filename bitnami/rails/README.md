@@ -22,7 +22,7 @@ Launch a on-demand Rails development workspace in Eclipse Che by clicking the li
 
 You can find the configuration files used on the previous link in the [Che branch](https://github.com/bitnami/bitnami-docker-rails/tree/che). For more information about Eclipse Che workspaces check the [official documentation](https://eclipse-che.readme.io/docs/introduction).
 
-## Why use Bitnami Images ?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
