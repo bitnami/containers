@@ -2,8 +2,8 @@ machine:
   services:
   - docker
   environment:
-    RELEASE_SERIES_LIST: 10
-    LATEST_STABLE: 10
+    RELEASE_SERIES_LIST: 10.1
+    LATEST_STABLE: 10.1
     IMAGE_NAME: mariadb
     CHART_NAME: mariadb
     CHART_REPO: https://github.com/kubernetes/charts
