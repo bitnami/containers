@@ -1,13 +1,13 @@
 version: '2'
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:latest'
+    image: 'bitnami/zookeeper@sha256:0bbf6503e45fc7d5236513987702b0533d2c777144dfd5022feed9ad89dc6318'
     ports:
       - '2181:2181'
   kafka:
     depends_on:
       - zookeeper
-    image: 'bitnami/kafka:latest'
+    image: 'bitnami/kafka@sha256:9ef14a3a2348ae24072c73caa4d4db06c77a8c0383a726d02244ea0e43723355'
     ports:
       - '9092:9092'
     environment:
