@@ -195,7 +195,7 @@ Available variables:
 
  - `DOKUWIKI_USERNAME`: Dokuwiki application SuperUser name. Default: **superuser**
  - `DOKUWIKI_FULL_NAME`: Dokuwiki SuperUser Full Name. Default: **Full Name**
- - `DOKUWIKI_PASSWORD`: Dokuwiki application password. Default: **bitnami**
+ - `DOKUWIKI_PASSWORD`: Dokuwiki application password. Default: **bitnami1**
  - `DOKUWIKI_EMAIL`: Dokuwiki application email. Default: **user@example.com**
  - `DOKUWIKI_WIKI_NAME`: Dokuwiki wiki name. Default: **Bitnami DokuWiki**
 
