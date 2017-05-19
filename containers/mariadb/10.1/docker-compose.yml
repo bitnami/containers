@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mariadb:
-    image: 'bitnami/mariadb:10'
+    image: 'bitnami/mariadb:10.1'
     labels:
       kompose.service.type: nodeport
     ports:
