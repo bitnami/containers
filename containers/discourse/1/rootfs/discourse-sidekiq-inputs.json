@@ -1,10 +1,10 @@
 {
-  "databaseServerHost": "{{$global.env.POSTGRES_MASTER_HOST}}",
-  "databaseServerPort": "{{$global.env.POSTGRES_MASTER_PORT}}",
-  "redisPort": "{{$global.env.REDIS_MASTER_PORT}}",
-  "redisHost": "{{$global.env.REDIS_MASTER_HOST}}",
-  "databaseUser": "{{$global.env.POSTGRESQL_USERNAME}}",
-  "databaseName": "{{$global.env.POSTGRESQL_DATABASE}}",
-  "databaseUserPassword": "{{$global.env.POSTGRESQL_USERPASSWORD}}",
-  "redisPassword": "{{$global.env.REDIS_PASSWORD}}"
+  "databaseName": "{{$global.env.DISCOURSE_POSTGRESQL_NAME}}",
+  "databaseServerHost": "{{$global.env.POSTGRESQL_HOST}}",
+  "databaseServerPort": "{{$global.env.POSTGRESQL_PORT}}",
+  "databaseUser": "{{$global.env.DISCOURSE_POSTGRESQL_USERNAME}}",
+  "databaseUserPassword": "{{$global.env.DISCOURSE_POSTGRESQL_PASSWORD}}",
+  "redisHost": "{{$global.env.REDIS_HOST}}",
+  "redisPassword": "{{$global.env.REDIS_PASSWORD}}",
+  "redisPort": "{{$global.env.REDIS_PORT}}"
 }
