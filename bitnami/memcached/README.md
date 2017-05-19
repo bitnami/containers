@@ -26,6 +26,16 @@ services:
       - '11211:11211'
 ```
 
+## Kubernetes
+
+> **WARNING**: This is a beta configuration, currently unsupported.
+
+Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+
+```bash
+$ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-memcached/master/kubernetes.yml
+```
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
