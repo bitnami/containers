@@ -19,15 +19,26 @@ services:
       - redis
     volumes:
       - 'discourse_data:/bitnami/discourse'
+    environment:
+      - POSTGRESQL_HOST=postgresql
+      - POSTGRESQL_ROOT_USER=postgres
+      - POSTGRESQL_CLIENT_CREATE_DATABASE_NAME=bitnami_application
+      - POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME=bn_discourse
+      - POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD=bitnami1
+      - DISCOURSE_POSTGRESQL_NAME=bitnami_application
+      - DISCOURSE_POSTGRESQL_USERNAME=bn_discourse
+      - DISCOURSE_POSTGRESQL_PASSWORD=bitnami1
   sidekiq:
     image: 'bitnami/discourse:1'
-    labels:
-      kompose.service.type: nodeport
     depends_on:
       - discourse
     volumes:
       - 'sidekiq_data:/bitnami/discourse-sidekiq'
     command: 'nami start --foreground discourse-sidekiq'
+    environment:
+      - DISCOURSE_POSTGRESQL_NAME=bitnami_application
+      - DISCOURSE_POSTGRESQL_USERNAME=bn_discourse
+      - DISCOURSE_POSTGRESQL_PASSWORD=bitnami1
 volumes:
   postgresql_data:
     driver: local
