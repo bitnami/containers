@@ -9,9 +9,21 @@ https://www.phpbb.com/
 
 # TL;DR;
 
+## Docker Compose
+
 ```bash
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-phpbb/master/docker-compose.yml
 $ docker-compose up
+```
+
+## Kubernetes
+
+> **WARNING**: This is a beta configuration, currently unsupported.
+
+Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+
+```bash
+$ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-phpbb/master/kubernetes.yml
 ```
 
 # Why use Bitnami Images?
