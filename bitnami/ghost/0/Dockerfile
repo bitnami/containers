@@ -10,12 +10,12 @@ RUN bitnami-pkg unpack ghost-0.11.9-0 --checksum 83c6dcb7091ed110ecb1aec2bfda0cc
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="0.11.9-r0" \
+    BITNAMI_IMAGE_VERSION="0.11.9-r1" \
     BLOG_TITLE="User's Blog" \
     GHOST_EMAIL="user@example.com" \
     GHOST_HOST="" \
     GHOST_PASSWORD="bitnami1" \
-    GHOST_PORT="80" \
+    GHOST_PORT_NUMBER="80" \
     GHOST_USERNAME="user" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
@@ -27,6 +27,8 @@ ENV BITNAMI_APP_NAME="ghost" \
     SMTP_PORT="" \
     SMTP_SERVICE="" \
     SMTP_USER=""
+
+
 
 VOLUME ["/bitnami/ghost"]
 
