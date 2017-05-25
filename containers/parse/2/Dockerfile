@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack parse-2.4.1-0 --checksum c2babddfeca49bb393ecb9795f43b998
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="2.4.1-r0" \
+    BITNAMI_IMAGE_VERSION="2.4.1-r1" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT="27017" \
@@ -19,8 +19,10 @@ ENV BITNAMI_APP_NAME="parse" \
     PARSE_HOST="127.0.0.1" \
     PARSE_MASTER_KEY="mymasterKey" \
     PARSE_MOUNT_PATH="/parse" \
-    PARSE_PORT="1337" \
+    PARSE_PORT_NUMBER="1337" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:$PATH"
+
+
 
 VOLUME ["/bitnami/parse"]
 
