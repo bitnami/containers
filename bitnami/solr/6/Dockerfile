@@ -9,12 +9,14 @@ RUN bitnami-pkg unpack solr-6.3.0-0 --checksum 380f620eb733b8609cbf7767d8ec61dd7
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="6.3.0-r5" \
+    BITNAMI_IMAGE_VERSION="6.3.0-r6" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:$PATH" \
     SOLR_CORE="" \
     SOLR_CORE_CONF_DIR="data_driven_schema_configs" \
-    SOLR_PORT="8983" \
+    SOLR_PORT_NUMBER="8983" \
     SOLR_SERVER_DIRECTORY="server"
+
+
 
 VOLUME ["/bitnami/solr"]
 
