@@ -10,6 +10,9 @@ _forwardTerm () {
 
 trap _forwardTerm TERM
 
+# Adding cron entries
+ln -fs /opt/bitnami/suitecrm/conf/cron /etc/cron.d/suitecrm
+
 /usr/sbin/cron &
 nami start --foreground apache &
 wait
