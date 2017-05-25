@@ -4,6 +4,6 @@
   "enableRemoteConnection": "{{$global.env.ELASTICSEARCH_REMOTE_CONNECTION}}",
   "isClientNode": "{{$global.env.ELASTICSEARCH_CLIENT_NODE}}",
   "nodeName": "{{$global.env.ELASTICSEARCH_NODE_NAME}}",
-  "nodePort": "{{$global.env.ELASTICSEARCH_NODE_PORT}}",
-  "port": "{{$global.env.ELASTICSEARCH_PORT}}"
+  "nodePort": "{{$global.env.ELASTICSEARCH_NODE_PORT_NUMBER}}",
+  "port": "{{$global.env.ELASTICSEARCH_PORT_NUMBER}}"
 }

@@ -22,7 +22,7 @@ elasticsearch:
 
 ## Kubernetes
 
-> **WARNING**: This is a beta configuration, currently unsupported.
+> **WARNING:** This is a beta configuration, currently unsupported.
 
 Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
 
@@ -159,19 +159,19 @@ $ docker-compose up -d
 elasticsearch:
   image: bitnami/elasticsearch:latest
   environment:
-    - ELASTICSEARCH_PORT=9201
+    - ELASTICSEARCH_PORT_NUMBER=9201
 ```
 
  * For manual execution add a `-e` option with each variable and value:
 
 ```
- $ docker run -d -e ELASTICSEARCH_PORT=9201 -p 9201:9201 --name elasticsearch -v /your/local/path/bitnami/elasticsearch:/bitnami/elasticsearch --network=elasticsearch_network bitnami/elasticsearch
+ $ docker run -d -e ELASTICSEARCH_PORT_NUMBER=9201 -p 9201:9201 --name elasticsearch -v /your/local/path/bitnami/elasticsearch:/bitnami/elasticsearch --network=elasticsearch_network bitnami/elasticsearch
 ```
 
 Available variables:
 
- - `ELASTICSEARCH_PORT`: Elasticsearch port. Default: **9200**
- - `ELASTICSEARCH_NODEPORT`: Elasticsearch Node to Node port. Default: **9300**
+ - `ELASTICSEARCH_PORT_NUMBER`: Elasticsearch port. Default: **9200**
+ - `ELASTICSEARCH_NODE_PORT_NUMBER`: Elasticsearch Node to Node port. Default: **9300**
  - `ELASTICSEARCH_CLUSTER_NAME`: The Elasticsearch Cluster Name. Default: **elasticsearch-cluster**
  - `ELASTICSEARCH_CLUSTER_HOSTS`: List of elasticsearch hosts to set the cluster. Available separatos are ' ', ',' and ';' .No defaults.
  - `ELASTICSEARCH_CLIENT_NODE`: Elasticsearch node to behave as a 'smart router' for Kibana app. Default: **false**
