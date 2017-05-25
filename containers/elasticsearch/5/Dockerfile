@@ -9,15 +9,17 @@ RUN bitnami-pkg unpack elasticsearch-5.4.0-0 --checksum 24b26b5e863bf6dbe418417f
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="5.4.0-r0" \
+    BITNAMI_IMAGE_VERSION="5.4.0-r1" \
     ELASTICSEARCH_CLIENT_NODE="" \
     ELASTICSEARCH_CLUSTER_HOSTS="" \
     ELASTICSEARCH_CLUSTER_NAME="elasticsearch-cluster" \
     ELASTICSEARCH_NODE_NAME="" \
-    ELASTICSEARCH_NODE_PORT="9300" \
-    ELASTICSEARCH_PORT="9200" \
+    ELASTICSEARCH_NODE_PORT_NUMBER="9300" \
+    ELASTICSEARCH_PORT_NUMBER="9200" \
     ELASTICSEARCH_REMOTE_CONNECTION="true" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/elasticsearch/bin:$PATH"
+
+
 
 VOLUME ["/bitnami/elasticsearch"]
 
