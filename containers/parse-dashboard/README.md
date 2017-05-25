@@ -241,7 +241,7 @@ Available variables:
  - `PARSE_DASHBOARD_USER`: Parse Dashboard application username. Default: **user**
  - `PARSE_DASHBOARD_PASSWORD`: Parse Dashboard application password. Default: **bitnami**
  - `PARSE_HOST`: This host is for Parse Dashboard knows how to form the urls to Parse Server.
- - `PARSE_PORT`: Parse Server Port. Default: **1337**
+ - `PARSE_PORT_NUMBER`: Parse Server Port. Default: **1337**
  - `PARSE_APP_ID`: Parse Server App Id. Default: **myappID**
  - `PARSE_MASTER_KEY`: Parse Server Master Key. Default: **mymasterKey**
  - `PARSE_DASHBOARD_APP_NAME`: Parse Dashboard application name. Default: **MyDashboard**

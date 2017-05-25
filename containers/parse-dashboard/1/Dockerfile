@@ -9,7 +9,7 @@ RUN bitnami-pkg unpack parse-dashboard-1.0.26-0 --checksum 7fce879a5d46d64103a74
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.0.26-r0" \
+    BITNAMI_IMAGE_VERSION="1.0.26-r1" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
     PARSE_DASHBOARD_PASSWORD="bitnami" \
@@ -17,8 +17,10 @@ ENV BITNAMI_APP_NAME="parse-dashboard" \
     PARSE_HOST="parse" \
     PARSE_MASTER_KEY="mymasterKey" \
     PARSE_MOUNT_PATH="/parse" \
-    PARSE_PORT="1337" \
+    PARSE_PORT_NUMBER="1337" \
     PATH="/opt/bitnami/node/bin:$PATH"
+
+
 
 VOLUME ["/bitnami/parse-dashboard"]
 
