@@ -19,7 +19,7 @@ $ docker-compose up
 
 ## Kubernetes
 
-> **WARNING**: This is a beta configuration, currently unsupported.
+> **WARNING:** This is a beta configuration, currently unsupported.
 
 Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
 
@@ -211,7 +211,7 @@ ghost:
 
 Available variables:
  - `GHOST_HOST`: Hostname for Ghost.
- - `GHOST_PORT`: Ghost application port. Default: **80**
+ - `GHOST_PORT_NUMBER`: Ghost application port. Default: **80**
  - `GHOST_USERNAME`: Ghost application username. Default: **user**
  - `GHOST_PASSWORD`: Ghost application password. Default: **bitnami1**
  - `GHOST_EMAIL`: Ghost application email. Default: **user@example.com**
@@ -220,7 +220,7 @@ Available variables:
  - `MARIADB_PASSWORD`: Root password for the MariaDB database.
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
  - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
- 
+
 ### SMTP Configuration
 
 To configure Ghost to send email using SMTP you can set the following environment variables:
