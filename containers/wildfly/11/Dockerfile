@@ -1,5 +1,7 @@
-FROM bitnami/minideb-extras:jessie-r15
+FROM bitnami/minideb-extras:jessie-r16
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libexpat1 libffi6 libfontconfig1 libfreetype6 libgcc1 libglib2.0-0 liblzma5 libpcre3 libpng12-0 libselinux1 libstdc++6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 zlib1g
@@ -10,19 +12,21 @@ RUN ln -sf /opt/bitnami/wildfly/data /app
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="11.0.0-r2" \
+    BITNAMI_IMAGE_VERSION="11.0.0-r3" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_JAVA_HOME="" \
     WILDFLY_JAVA_OPTS="" \
-    WILDFLY_MANAGEMENT_HTTP_PORT="9990" \
+    WILDFLY_MANAGEMENT_HTTP_PORT_NUMBER="9990" \
     WILDFLY_PASSWORD="bitnami" \
     WILDFLY_PUBLIC_CONSOLE="true" \
-    WILDFLY_SERVER_AJP_PORT="8009" \
-    WILDFLY_SERVER_HTTP_PORT="8080" \
+    WILDFLY_SERVER_AJP_PORT_NUMBER="8009" \
+    WILDFLY_SERVER_HTTP_PORT_NUMBER="8080" \
     WILDFLY_SERVER_INTERFACE="0.0.0.0" \
     WILDFLY_USERNAME="user" \
     WILDFLY_WILDFLY_HOME="/home/wildfly" \
     WILDFLY_WILDFLY_OPTS="-Dwildfly.as.deployment.ondemand=false"
+
+
 
 VOLUME ["/bitnami/wildfly"]
 
