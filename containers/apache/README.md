@@ -8,7 +8,7 @@
 
 [http://httpd.apache.org/](http://httpd.apache.org/)
 
-# TL;DR
+# TL;DR;
 
 ```bash
 docker run --name apache bitnami/apache:latest
@@ -29,7 +29,7 @@ services:
 
 ## Kubernetes
 
-> **WARNING**: This is a beta configuration, currently unsupported.
+> **WARNING:** This is a beta configuration, currently unsupported.
 
 Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
 
