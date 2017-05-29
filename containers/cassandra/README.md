@@ -21,7 +21,7 @@ cassandra:
 
 ## Kubernetes
 
-> **WARNING**: This is a beta configuration, currently unsupported.
+> **WARNING:** This is a beta configuration, currently unsupported.
 
 Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
 
@@ -157,22 +157,22 @@ $ docker-compose up -d
 cassandra:
   image: bitnami/cassandra:latest
   environment:
-    - CASSANDRA_TRANSPORT_PORT=7000
+    - CASSANDRA_TRANSPORT_PORT_NUMBER=7000
 ```
 
  * For manual execution add a `-e` option with each variable and value:
 
 ```
- $ docker run -d -e CASSANDRA_PORT=7000 -p 7000:7000 --name cassandra -v /your/local/path/bitnami/cassandra:/bitnami/cassandra --network=cassandra_network bitnami/cassandra
+ $ docker run -d -e CASSANDRA_PORT_NUMBER=7000 -p 7000:7000 --name cassandra -v /your/local/path/bitnami/cassandra:/bitnami/cassandra --network=cassandra_network bitnami/cassandra
 ```
 
 Available variables:
 
- - `CASSANDRA_TRANSPORT_PORT`: Inter-node cluster communication port. Default: **7000**
- - `CASSANDRA_SSL_TRANSPORT_PORT`: SSL inter-node cluster communication port. Default: **7001**
- - `CASSANDRA_JMX_PORT`: JMX connections port. Default: **7199**
- - `CASSANDRA_CQL_PORT`: Client port. Default: **9042**.
- - `CASSANDRA_RPC_PORT`: Thrift RPC service connection port. Default: **9160**
+ - `CASSANDRA_TRANSPORT_PORT_NUMBER`: Inter-node cluster communication port. Default: **7000**
+ - `CASSANDRA_SSL_TRANSPORT_PORT_NUMBER`: SSL inter-node cluster communication port. Default: **7001**
+ - `CASSANDRA_JMX_PORT_NUMBER`: JMX connections port. Default: **7199**
+ - `CASSANDRA_CQL_PORT_NUMBER`: Client port. Default: **9042**.
+ - `CASSANDRA_RPC_PORT_NUMBER`: Thrift RPC service connection port. Default: **9160**
  - `CASSANDRA_USER`: Cassandra user name. Defaults: **cassandra**
  - `CASSANDRA_PASSWORD`: Cassandra user password. Default: **cassandra**
  - `CASSANDRA_HOST`: Hostname used to configure Cassandra. It can be either an IP or a domain. If left empty, it will be resolved to the machine IP.
