@@ -2,7 +2,7 @@
   "databaseAdminPassword": "{{$global.env.POSTGRESQL_PASSWORD}}",
   "databaseAdminUser": "{{$global.env.POSTGRESQL_USER}}",
   "databaseServerHost": "{{$global.env.POSTGRESQL_HOST}}",
-  "databaseServerPort": "{{$global.env.POSTGRESQL_PORT}}",
+  "databaseServerPort": "{{$global.env.POSTGRESQL_PORT_NUMBER}}",
   "email": "{{$global.env.ODOO_EMAIL}}",
   "password": "{{$global.env.ODOO_PASSWORD}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",

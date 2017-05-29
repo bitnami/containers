@@ -18,7 +18,7 @@ $ docker-compose up
 
 ## Kubernetes
 
-> **WARNING**: This is a beta configuration, currently unsupported.
+> **WARNING:** This is a beta configuration, currently unsupported.
 
 Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
 
@@ -221,7 +221,7 @@ Available variables:
  - `POSTGRESQL_USER`: Root user for the PostgreSQL database. Default: **postgres**
  - `POSTGRESQL_PASSWORD`: Root password for the PostgreSQL.
  - `POSTGRESQL_HOST`: Hostname for PostgreSQL server. Default: **postgresql**
- - `POSTGRESQL_PORT`: Port used by PostgreSQL server. Default: **5432**
+ - `POSTGRESQL_PORT_NUMBER`: Port used by PostgreSQL server. Default: **5432**
 
 ### SMTP Configuration
 
