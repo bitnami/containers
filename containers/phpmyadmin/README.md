@@ -19,7 +19,7 @@ $ docker-compose up
 
 ## Kubernetes
 
-> **WARNING**: This is a beta configuration, currently unsupported.
+> **WARNING:** This is a beta configuration, currently unsupported.
 
 Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
 
@@ -253,7 +253,7 @@ The phpMyAdmin instance can be customized by specifying environment variables on
 - `PHPMYADMIN_ALLOW_ARBITRARY_SERVER`: Allows you to enter database server hostname on login form. Default: **false**
 - `PHPMYADMIN_ALLOW_NO_PASSWORD`: Whether to allow logins without a password. Default: **true**
 - `DATABASE_HOST`: Database server host. Default: **mariadb**
-- `DATABASE_PORT`: Database server port. Default: **3306**
+- `DATABASE_PORT_NUMBER`: Database server port. Default: **3306**
 - `WEBSERVER_REQUIRE`: Tests whether an authenticated user is authorized by an authorization provider. Default: **all granted**
 
 ### Specifying Environment variables using Docker Compose
