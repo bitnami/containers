@@ -1,9 +1,9 @@
 {
   "clusterNodeName": "{{$global.env.RABBITMQ_CLUSTER_NODE_NAME}}",
   "erlangCookie": "{{$global.env.RABBITMQ_ERLANG_COOKIE}}",
-  "managerPort": "{{$global.env.RABBITMQ_MANAGER_PORT}}",
+  "managerPort": "{{$global.env.RABBITMQ_MANAGER_PORT_NUMBER}}",
   "nodeName": "{{$global.env.RABBITMQ_NODE_NAME}}",
-  "nodePort": "{{$global.env.RABBITMQ_NODE_PORT}}",
+  "nodePort": "{{$global.env.RABBITMQ_NODE_PORT_NUMBER}}",
   "nodeType": "{{$global.env.RABBITMQ_NODE_TYPE}}",
   "password": "{{$global.env.RABBITMQ_PASSWORD}}",
   "username": "{{$global.env.RABBITMQ_USERNAME}}",

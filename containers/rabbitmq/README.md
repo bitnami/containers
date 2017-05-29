@@ -179,9 +179,9 @@ Available variables:
  - `RABBITMQ_ERLANG_COOKIE`: Erlang cookie to determine whether different nodes are allowed to communicate with each other.
  - `RABBITMQ_NODE_TYPE`: Node Type. Valid values: *stats*, *queue-ram* or *queue-disc*. Default: **stats**
  - `RABBITMQ_NODE_NAME`: Node name and host. E.g.: *node@hostname* or *node* (localhost won't work in cluster topology). Default **rabbit@localhost**
- - `RABBITMQ_NODE_PORT`: Node port. Default: **5672**
+ - `RABBITMQ_NODE_PORT_NUMBER`: Node port. Default: **5672**
  - `RABBITMQ_CLUSTER_NODE_NAME`: Node name to cluster with. E.g.: **clusternode@hostname**
- - `RABBITMQ_MANAGER_PORT`: Manager port. Default: **15672**
+ - `RABBITMQ_MANAGER_PORT_NUMBER`: Manager port. Default: **15672**
 
 ## Setting up a cluster
 
