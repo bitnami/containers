@@ -1,5 +1,7 @@
-FROM bitnami/minideb-extras:jessie-r15
+FROM bitnami/minideb-extras:jessie-r16
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libexpat1 libffi6 libfontconfig1 libfreetype6 libgcc1 libglib2.0-0 libjemalloc1 liblzma5 libncurses5 libpcre3 libpng12-0 libreadline6 libselinux1 libsqlite3-0 libssl1.0.0 libstdc++6 libtinfo5 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 zlib1g
@@ -10,22 +12,24 @@ RUN bitnami-pkg unpack cassandra-3.10-0 --checksum 548dd6e6ccdc22e6c479a0f914b50
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.10-r6" \
+    BITNAMI_IMAGE_VERSION="3.10-r7" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
-    CASSANDRA_CQL_PORT="9042" \
+    CASSANDRA_CQL_PORT_NUMBER="9042" \
     CASSANDRA_ENABLE_REMOTE_CONNECTIONS="true" \
     CASSANDRA_ENDPOINT_SNITCH="SimpleSnitch" \
     CASSANDRA_HOST="" \
-    CASSANDRA_JMX_PORT="7199" \
+    CASSANDRA_JMX_PORT_NUMBER="7199" \
     CASSANDRA_NUM_TOKENS="256" \
     CASSANDRA_PASSWORD="cassandra" \
-    CASSANDRA_RPC_PORT="9160" \
+    CASSANDRA_RPC_PORT_NUMBER="9160" \
     CASSANDRA_SEEDS="" \
     CASSANDRA_SET_CREDENTIALS="1" \
-    CASSANDRA_SSL_TRANSPORT_PORT="7001" \
-    CASSANDRA_TRANSPORT_PORT="7000" \
+    CASSANDRA_SSL_TRANSPORT_PORT_NUMBER="7001" \
+    CASSANDRA_TRANSPORT_PORT_NUMBER="7000" \
     CASSANDRA_USER="cassandra" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/cassandra/bin:$PATH"
+
+
 
 VOLUME ["/bitnami/cassandra"]
 
