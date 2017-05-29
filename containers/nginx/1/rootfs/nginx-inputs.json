@@ -1,4 +1,4 @@
 {
-  "httpPort": "{{$global.env.NGINX_HTTP_PORT}}",
-  "httpsPort": "{{$global.env.NGINX_HTTPS_PORT}}"
+  "httpPort": "{{$global.env.NGINX_HTTP_PORT_NUMBER}}",
+  "httpsPort": "{{$global.env.NGINX_HTTPS_PORT_NUMBER}}"
 }
