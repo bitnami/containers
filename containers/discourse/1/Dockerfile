@@ -1,5 +1,7 @@
-FROM bitnami/minideb-extras:jessie-r15
+FROM bitnami/minideb-extras:jessie-r16
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+
 
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbsd0 libc6 libcomerr2 libcurl3 libedit2 libffi6 libgcc1 libgcrypt20 libgmp-dev libgmp10 libgnutls-deb0-28 libgpg-error0 libgssapi-krb5-2 libhogweed2 libidn11 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmysqlclient18 libncurses5 libnettle4 libp11-kit0 libpq5 libreadline6 librtmp1 libsasl2-2 libssh2-1 libssl1.0.0 libstdc++6 libtasn1-6 libtinfo5 libxml2 libxml2-dev libxslt1-dev libxslt1.1 sendmail zlib1g zlib1g-dev
@@ -12,7 +14,7 @@ RUN bitnami-pkg unpack discourse-1.7.10-0 --checksum ad4cbfcba617284e5bb2a68c585
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="1.7.10-r0" \
+    BITNAMI_IMAGE_VERSION="1.7.10-r1" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_PASSWORD="bitnami" \
     DISCOURSE_POSTGRESQL_NAME="bitnami_application" \
@@ -25,17 +27,19 @@ ENV BITNAMI_APP_NAME="discourse" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME="" \
     POSTGRESQL_HOST="postgresql" \
-    POSTGRESQL_PORT="5432" \
+    POSTGRESQL_PORT_NUMBER="5432" \
     POSTGRESQL_ROOT_PASSWORD="" \
     POSTGRESQL_ROOT_USER="postgres" \
     REDIS_HOST="redis" \
     REDIS_PASSWORD="" \
-    REDIS_PORT="6379" \
+    REDIS_PORT_NUMBER="6379" \
     SMTP_HOST="" \
     SMTP_PASSWORD="" \
     SMTP_PORT="" \
     SMTP_TLS="true" \
     SMTP_USER=""
+
+
 
 VOLUME ["/bitnami/discourse","/bitnami/discourse-sidekiq"]
 

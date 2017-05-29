@@ -271,15 +271,15 @@ Available variables:
  - `DISCOURSE_PASSWORD`: Discourse application password. Default: **bitnami1**
  - `DISCOURSE_EMAIL`: Discourse application email. Default: **user@example.com**
  - `DISCOURSE_SITENAME`: Discourse site name. Default: **User's site**
- - `POSTGRES_USER`: Root user for the Postgresql database. Default: **postgres**
- - `POSTGRES_PASSWORD`: Root password for Postgresql.
- - `POSTGRES_MASTER_HOST`: Hostname for Postgresql server. Default: **postgresql**
- - `POSTGRES_MASTER_PORT`: Port used by Postgresql server. Default: **5432**
- - `POSTGRESQL_USERNAME`: Discourse application database user. **bn_discourse**
- - `POSTGRESQL_USERPASSWORD`: Discourse application database password. **bitnami1**
- - `POSTGRESQL_DATABASE`: Discourse application database name. **bitnami_application**
- - `REDIS_MASTER_HOST`: Hostname for Redis. Default: **redis**
- - `REDIS_MASTER_PORT`: Port used by Redis. Default: **6379**
+ - `POSTGRESQL_ROOT_USER`: Root user for the Postgresql database. Default: **postgres**
+ - `POSTGRESQL_ROOT_PASSWORD`: Root password for Postgresql.
+ - `POSTGRESQL_HOST`: Hostname for Postgresql server. Default: **postgresql**
+ - `POSTGRESQL_PORT_NUMBER`: Port used by Postgresql server. Default: **5432**
+ - `DISCOURSE_POSTGRESQL_USERNAME`: Discourse application database user. **bn_discourse**
+ - `DISCOURSE_POSTGRESQL_PASSWORD`: Discourse application database password. **bitnami1**
+ - `DISCOURSE_POSTGRESQL_NAME`: Discourse application database name. **bitnami_application**
+ - `REDIS_HOST`: Hostname for Redis. Default: **redis**
+ - `REDIS_PORT_NUMBER`: Port used by Redis. Default: **6379**
  - `REDIS_PASSWORD`: Password for Redis.
 
 ### SMTP Configuration
