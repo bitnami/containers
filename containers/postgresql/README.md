@@ -244,7 +244,7 @@ A [Streaming replication](http://www.postgresql.org/docs/9.4/static/warm-standby
  - `POSTGRESQL_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
  - `POSTGRESQL_REPLICATION_PASSWORD`: The replication users password. No defaults.
  - `POSTGRESQL_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
- - `POSTGRESQL_MASTER_PORT`: Server port of the replication master (slave parameter). Defaults to `5432`.
+ - `POSTGRESQL_MASTER_PORT_NUMBER`: Server port of the replication master (slave parameter). Defaults to `5432`.
 
 In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
 
@@ -274,13 +274,13 @@ docker run --name postgresql-slave \
   --link postgresql-master:master \
   -e POSTGRESQL_REPLICATION_MODE=slave \
   -e POSTGRESQL_MASTER_HOST=master \
-  -e POSTGRESQL_MASTER_PORT=5432 \
+  -e POSTGRESQL_MASTER_PORT_NUMBER=5432 \
   -e POSTGRESQL_REPLICATION_USER=my_repl_user \
   -e POSTGRESQL_REPLICATION_PASSWORD=my_repl_password \
   bitnami/postgresql:latest
 ```
 
-In the above command the container is configured as a `slave` using the `POSTGRESQL_REPLICATION_MODE` parameter. Before the replication slave is started, the `POSTGRESQL_MASTER_HOST` and `POSTGRESQL_MASTER_PORT` parameters are used by the slave container to connect to the master and replicate the initial database from the master. The `POSTGRESQL_REPLICATION_USER` and `POSTGRESQL_REPLICATION_PASSWORD` credentials are used to authenticate with the master.
+In the above command the container is configured as a `slave` using the `POSTGRESQL_REPLICATION_MODE` parameter. Before the replication slave is started, the `POSTGRESQL_MASTER_HOST` and `POSTGRESQL_MASTER_PORT_NUMBER` parameters are used by the slave container to connect to the master and replicate the initial database from the master. The `POSTGRESQL_REPLICATION_USER` and `POSTGRESQL_REPLICATION_PASSWORD` credentials are used to authenticate with the master.
 
 With these two commands you now have a two node PostgreSQL master-slave streaming replication cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
 
@@ -326,7 +326,7 @@ services:
       - POSTGRESQL_REPLICATION_USER=repl_user
       - POSTGRESQL_REPLICATION_PASSWORD=repl_password
       - POSTGRESQL_MASTER_HOST=postgresql-master
-      - POSTGRESQL_MASTER_PORT=5432
+      - POSTGRESQL_MASTER_PORT_NUMBER=5432
 ```
 
 Scale the number of slaves using:
