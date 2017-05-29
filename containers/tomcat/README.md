@@ -46,7 +46,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-tom
 
  - [`9.0`, `9.0.0.M21-r0`, `latest` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.0.M21-r0/9.0/Dockerfile)
  - [`8.5`, `8.5.15-r0` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.15-r0/8.5/Dockerfile)
- - [`8.0`, `8.0.44-r0` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.44-r0/8.0/Dockerfile)
+ - [`8.0`, `8.0.44-r1` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.44-r1/8.0/Dockerfile)
  - [`7`, `7.0.78-r0` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.78-r0/7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
@@ -145,9 +145,9 @@ Access your web server in the browser by navigating to [http://localhost:8080](h
 
 The Tomcat instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom Tomcat:
 
-- `TOMCAT_SHUTDOWN_PORT`: Tomcat shutdown port. Default: **8005**
-- `TOMCAT_HTTP_PORT`: Tomcat HTTP port. Default: **8080**
-- `TOMCAT_AJP_PORT`: Tomcat AJP port. Default: **8009**
+- `TOMCAT_SHUTDOWN_PORT_NUMBER`: Tomcat shutdown port. Default: **8005**
+- `TOMCAT_HTTP_PORT_NUMBER`: Tomcat HTTP port. Default: **8080**
+- `TOMCAT_AJP_PORT_NUMBER`: Tomcat AJP port. Default: **8009**
 - `JAVA_HOME`: Java home directory.
 - `JAVA_OPTS`: Tomcat java settings. Default: `-Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8 `
 - `TOMCAT_HOME`: Tomcat user's home directory. Default: **/home/tomcat**
