@@ -1,12 +1,20 @@
-FROM bitnami/minideb-extras:jessie-r14
-MAINTAINER Bitnami <containers@bitnami.com>
+FROM bitnami/minideb-extras:jessie-r16
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+
+
+# Install required system packages and dependencies
+RUN install_packages libc6 libgcc1 libpcap0.8 libssl1.0.0
+RUN bitnami-pkg unpack mongodb-3.4.4-0 --checksum ffe98a214092fbe214739a51c75b0be267c9bc994d3e561de3941fdc33411e49
+
+COPY rootfs /
 
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.4.4-r1" \
+    BITNAMI_IMAGE_VERSION="3.4.4-r2" \
     MONGODB_DATABASE="" \
     MONGODB_PASSWORD="" \
     MONGODB_PRIMARY_HOST="" \
-    MONGODB_PRIMARY_PORT="27017" \
+    MONGODB_PRIMARY_PORT_NUMBER="27017" \
     MONGODB_PRIMARY_ROOT_PASSWORD="" \
     MONGODB_PRIMARY_ROOT_USER="root" \
     MONGODB_REPLICA_SET_KEY="" \
@@ -16,11 +24,7 @@ ENV BITNAMI_APP_NAME="mongodb" \
     MONGODB_USERNAME="" \
     PATH="/opt/bitnami/mongodb/bin:$PATH"
 
-# Install required system packages and dependencies
-RUN install_packages libc6 libgcc1 libpcap0.8 libssl1.0.0
-RUN bitnami-pkg unpack mongodb-3.4.4-0 --checksum ffe98a214092fbe214739a51c75b0be267c9bc994d3e561de3941fdc33411e49
 
-COPY rootfs /
 
 VOLUME ["/bitnami/mongodb"]
 
