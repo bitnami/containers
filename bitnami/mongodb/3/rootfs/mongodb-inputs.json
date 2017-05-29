@@ -2,7 +2,7 @@
   "database": "{{$global.env.MONGODB_DATABASE}}",
   "password": "{{$global.env.MONGODB_PASSWORD}}",
   "primaryHost": "{{$global.env.MONGODB_PRIMARY_HOST}}",
-  "primaryPort": "{{$global.env.MONGODB_PRIMARY_PORT}}",
+  "primaryPort": "{{$global.env.MONGODB_PRIMARY_PORT_NUMBER}}",
   "primaryRootPassword": "{{$global.env.MONGODB_PRIMARY_ROOT_PASSWORD}}",
   "primaryRootUser": "{{$global.env.MONGODB_PRIMARY_ROOT_USER}}",
   "replicaSetKey": "{{$global.env.MONGODB_REPLICA_SET_KEY}}",
