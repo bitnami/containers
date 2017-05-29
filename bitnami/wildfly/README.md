@@ -27,7 +27,7 @@ services:
 
 ## Kubernetes
 
-> **WARNING**: This is a beta configuration, currently unsupported.
+> **WARNING:** This is a beta configuration, currently unsupported.
 
 Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
 
@@ -46,7 +46,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-wil
 # Supported tags and respective `Dockerfile` links
 
  - [`11`, `11.0.0-r2`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/11.0.0-r2/11/Dockerfile)
- - [`10`, `10.1.0-r8` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/10.1.0-r8/10/Dockerfile)
+ - [`10`, `10.1.0-r9` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/10.1.0-r9/10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
