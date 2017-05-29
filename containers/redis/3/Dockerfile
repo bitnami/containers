@@ -1,5 +1,7 @@
-FROM bitnami/minideb-extras:jessie-r15
+FROM bitnami/minideb-extras:jessie-r16
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+
 
 # Install required system packages and dependencies
 RUN install_packages libc6
@@ -8,13 +10,15 @@ RUN bitnami-pkg unpack redis-3.2.9-0 --checksum 80dea4e656a77683a5cf953b3a7c59c3
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="3.2.9-r0" \
+    BITNAMI_IMAGE_VERSION="3.2.9-r1" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_MASTER_HOST="" \
     REDIS_MASTER_PASSWORD="" \
-    REDIS_MASTER_PORT="6379" \
+    REDIS_MASTER_PORT_NUMBER="6379" \
     REDIS_PASSWORD="" \
     REDIS_REPLICATION_MODE=""
+
+
 
 VOLUME ["/bitnami/redis"]
 
