@@ -28,7 +28,7 @@ services:
 
 ## Kubernetes
 
-> **WARNING**: This is a beta configuration, currently unsupported.
+> **WARNING:** This is a beta configuration, currently unsupported.
 
 Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
 
@@ -190,7 +190,7 @@ A [replication](http://redis.io/topics/replication) cluster can easily be setup 
 
  - `REDIS_REPLICATION_MODE`: The replication mode. Possible values `master`/`slave`. No defaults.
  - `REDIS_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
- - `REDIS_MASTER_PORT`: Server port of the replication master (slave parameter). Defaults to `6379`.
+ - `REDIS_MASTER_PORT_NUMBER`: Server port of the replication master (slave parameter). Defaults to `6379`.
  - `REDIS_MASTER_PASSWORD`: Password to authenticate with the master (slave parameter). No defaults.
 
 In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
@@ -217,13 +217,13 @@ docker run --name redis-slave \
   --link redis-master:master \
   -e REDIS_REPLICATION_MODE=slave \
   -e REDIS_MASTER_HOST=master \
-  -e REDIS_MASTER_PORT=6379 \
+  -e REDIS_MASTER_PORT_NUMBER=6379 \
   -e REDIS_MASTER_PASSWORD=masterpassword123 \
   -e REDIS_PASSWORD=password123 \
   bitnami/redis:latest
 ```
 
-In the above command the container is configured as a `slave` using the `REDIS_REPLICATION_MODE` parameter. The `REDIS_MASTER_HOST`, `REDIS_MASTER_PORT` and `REDIS_MASTER_PASSWORD ` parameters are used connect and authenticate with the Redis master. The `REDIS_PASSWORD` parameter enables authentication on the Redis slave.
+In the above command the container is configured as a `slave` using the `REDIS_REPLICATION_MODE` parameter. The `REDIS_MASTER_HOST`, `REDIS_MASTER_PORT_NUMBER` and `REDIS_MASTER_PASSWORD ` parameters are used connect and authenticate with the Redis master. The `REDIS_PASSWORD` parameter enables authentication on the Redis slave.
 
 You now have a two node Redis master/slave replication cluster up and running which can be scaled by adding/removing slaves.
 
@@ -260,7 +260,7 @@ services:
     environment:
       - REDIS_REPLICATION_MODE=slave
       - REDIS_MASTER_HOST=redis-primary
-      - REDIS_MASTER_PORT=6379
+      - REDIS_MASTER_PORT_NUMBER=6379
       - REDIS_MASTER_PASSWORD=my_password
       - REDIS_PASSWORD=my_password
 ```
