@@ -18,6 +18,6 @@ services:
     environment:
       - REDIS_REPLICATION_MODE=slave
       - REDIS_MASTER_HOST=redis-primary
-      - REDIS_MASTER_PORT=6379
+      - REDIS_MASTER_PORT_NUMBER=6379
       - REDIS_MASTER_PASSWORD=my_password
       - REDIS_PASSWORD=my_password
