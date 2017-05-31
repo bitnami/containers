@@ -218,12 +218,12 @@ parse:
 
 Available variables:
  - `PARSE_HOST`: Parse server host. Default: **127.0.0.1**
- - `PARSE_PORT_NUMBER`: Parse server port. Default: **1337**
+ - `PARSE_PORT_NUMBER_NUMBER`: Parse server port. Default: **1337**
  - `PARSE_MOUNT_PATH`: Parse server mount path. Default: **/parse**
  - `PARSE_APP_ID`: Parse server App ID. Default: **myappID**
  - `PARSE_MASTER_KEY`: Parse server Master Key: **mymasterKey**
  - `MONGODB_HOST`: Hostname for Mongodb server. Default: **mongodb**
- - `MONGODB_PORT`: Port used by Mongodb server. Default: **27017**
+ - `MONGODB_PORT_NUMBER`: Port used by Mongodb server. Default: **27017**
 
 # Backing up your application
 
