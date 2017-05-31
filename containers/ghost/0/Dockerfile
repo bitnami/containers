@@ -1,5 +1,7 @@
-FROM bitnami/minideb-extras:jessie-r15
+FROM bitnami/minideb-extras:jessie-r16
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+
 
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libmysqlclient18 libncurses5 libreadline6 libsqlite3-0 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
@@ -10,7 +12,7 @@ RUN bitnami-pkg unpack ghost-0.11.9-0 --checksum 83c6dcb7091ed110ecb1aec2bfda0cc
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="0.11.9-r1" \
+    BITNAMI_IMAGE_VERSION="0.11.9-r2" \
     BLOG_TITLE="User's Blog" \
     GHOST_EMAIL="user@example.com" \
     GHOST_HOST="" \
@@ -19,7 +21,7 @@ ENV BITNAMI_APP_NAME="ghost" \
     GHOST_USERNAME="user" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
-    MARIADB_PORT="3306" \
+    MARIADB_PORT_NUMBER="3306" \
     MARIADB_USER="root" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:$PATH" \
     SMTP_HOST="" \
