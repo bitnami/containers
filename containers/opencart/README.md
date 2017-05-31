@@ -18,7 +18,7 @@ $ docker-compose up
 
 ## Kubernetes
 
-> **WARNING**: This is a beta configuration, currently unsupported.
+> **WARNING:** This is a beta configuration, currently unsupported.
 
 Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
 
@@ -240,7 +240,7 @@ Available variables:
  - `OPENCART_HOST`: OpenCart Host Server.
  - `MARIADB_PASSWORD`: Root password for the MariaDB.
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
- - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
+ - `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 
 
 ## SMTP Configuration
