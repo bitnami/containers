@@ -19,7 +19,7 @@ $ docker-compose up
 
 ## Kubernetes
 
-> **WARNING**: This is a beta configuration, currently unsupported.
+> **WARNING:** This is a beta configuration, currently unsupported.
 
 Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
 
@@ -253,8 +253,8 @@ $ docker run -d --name prestashop -p 80:80 -p 443:443 \
 
 Available variables:
 
- - `APACHE_HTTP_PORT`: Port used by Apache for HTTP. Default: **80**
- - `APACHE_HTTPS_PORT`: Port used by Apache for HTTPS. Default: **443**
+ - `APACHE_HTTP_PORT_NUMBER`: Port used by Apache for HTTP. Default: **80**
+ - `APACHE_HTTPS_PORT_NUMBER`: Port used by Apache for HTTPS. Default: **443**
  - `PRESTASHOP_FIRST_NAME`: PrestaShop application User's First Name. Default: **Bitnami**
  - `PRESTASHOP_LAST_NAME`: PrestaShop application User's Last Name. Default: **User**
  - `PRESTASHOP_PASSWORD`: PrestaShop application password. Default: **bitnami**
@@ -263,7 +263,7 @@ Available variables:
  - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
  - `MARIADB_PASSWORD`: Root password for the MariaDB.
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
- - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
+ - `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 
 ## SMTP Configuration
 
