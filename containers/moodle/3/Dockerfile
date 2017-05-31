@@ -13,13 +13,13 @@ RUN bitnami-pkg unpack moodle-3.3.0-2 --checksum 28980c0dc7747f3d4acf5e3fdc914c9
 
 COPY rootfs /
 
-ENV APACHE_HTTPS_PORT="443" \
-    APACHE_HTTP_PORT="80" \
+ENV APACHE_HTTPS_PORT_NUMBER="443" \
+    APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.3.0-r2" \
+    BITNAMI_IMAGE_VERSION="3.3.0-r3" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
-    MARIADB_PORT="3306" \
+    MARIADB_PORT_NUMBER="3306" \
     MARIADB_USER="root" \
     MOODLE_EMAIL="user@example.com" \
     MOODLE_LANGUAGE="en" \
