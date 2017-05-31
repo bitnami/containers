@@ -14,7 +14,7 @@ if [ "$1" == "/run.sh" ]; then
   # Create a Symfony app if not found
   if [ ! -d $PROJECT_DIRECTORY ] ; then
     log "Creating example Symfony application"
-    nami execute symfony createProject --databaseServerHost $MARIADB_HOST --databaseServerPort $MARIADB_PORT --databaseAdminUser $MARIADB_USER $SYMFONY_PROJECT_NAME | grep -v undefined
+    nami execute symfony createProject --databaseServerHost $MARIADB_HOST --databaseServerPort $MARIADB_PORT_NUMBER --databaseAdminUser $MARIADB_USER $SYMFONY_PROJECT_NAME | grep -v undefined
     log "Symfony app created"
   else
     log "App already created"
