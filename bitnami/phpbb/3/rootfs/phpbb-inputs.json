@@ -2,7 +2,7 @@
   "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
   "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
   "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
-  "databaseServerPort": "{{$global.env.MARIADB_PORT}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
   "email": "{{$global.env.PHPBB_EMAIL}}",
   "firstName": "{{$global.env.PHPBB_FIRST_NAME}}",
   "forumDescription": "{{$global.env.PHPBB_FORUM_DESCRIPTION}}",
