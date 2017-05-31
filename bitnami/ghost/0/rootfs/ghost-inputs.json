@@ -3,7 +3,7 @@
   "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
   "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
   "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
-  "databaseServerPort": "{{$global.env.MARIADB_PORT}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
   "email": "{{$global.env.GHOST_EMAIL}}",
   "host": "{{$global.env.GHOST_HOST}}",
   "password": "{{$global.env.GHOST_PASSWORD}}",
