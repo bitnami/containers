@@ -26,7 +26,7 @@ services:
       - MARIADB_USER=my_user
       - MARIADB_DATABASE=my_database
       - MARIADB_MASTER_HOST=mariadb-master
-      - MARIADB_MASTER_PORT=3306
+      - MARIADB_MASTER_PORT_NUMBER=3306
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
 
