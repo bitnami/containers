@@ -72,7 +72,7 @@ services:
       - mariadb
     environment:
       - MARIADB_HOST=mariadb
-      - MARIADB_PORT=3306
+      - MARIADB_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_USER=bn_wordpress
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
       - ALLOW_EMPTY_PASSWORD=yes
@@ -280,7 +280,7 @@ The WordPress instance can be customized by specifying environment variables on 
 
 ##### Use an existing database
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
-- `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 - `WORDPRESS_DATABASE_NAME`: Database name that WordPress will use to connect with the database. Default: **bitnami_wordpress**
 - `WORDPRESS_DATABASE_USER`: Database user that WordPress will use to connect with the database. Default: **bn_wordpress**
 - `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database. No defaults.
@@ -288,7 +288,7 @@ The WordPress instance can be customized by specifying environment variables on 
 
 ##### Create a database for WordPress using mysql-client
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
-- `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 - `MARIADB_ROOT_USER`: Database admin user. Default: **root**
 - `MARIADB_ROOT_PASSWORD`: Database password for the `MARIADB_ROOT_USER` user. No defaults.
 - `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
@@ -319,7 +319,7 @@ services:
       - '443:443'
     environment:
       - MARIADB_HOST=mariadb
-      - MARIADB_PORT=3306
+      - MARIADB_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_USER=bn_wordpress
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
       - ALLOW_EMPTY_PASSWORD=yes
@@ -375,7 +375,7 @@ This would be an example of SMTP configuration using a GMail account:
       - 443:443
     environment:
       - MARIADB_HOST=mariadb
-      - MARIADB_PORT=3306
+      - MARIADB_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_USER=bn_wordpress
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
       - SMTP_HOST=smtp.gmail.com
@@ -404,7 +404,7 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
 
 The Bitnami WordPress container supports connecting the WordPress application to an external database. In order to configure it, you should set the following environment variables:
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
-- `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 - `WORDPRESS_DATABASE_NAME`: Database name that WordPress will use to connect with the database. Default: **bitnami_wordpress**
 - `WORDPRESS_DATABASE_USER`: Database user that WordPress will use to connect with the database. Default: **bn_wordpress**
 - `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database. No defaults.
@@ -421,7 +421,7 @@ This would be an example of using an external database for WordPress.
       - 443:443
     environment:
       - MARIADB_HOST=mariadb_host
-      - MARIADB_PORT=3306
+      - MARIADB_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_NAME=wordpress_db
       - WORDPRESS_DATABASE_USER=wordpress_user
       - WORDPRESS_DATABASE_PASSWORD=wordpress_password
@@ -437,7 +437,7 @@ This would be an example of using an external database for WordPress.
 $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --net wordpress-tier \
   --env MARIADB_HOST=mariadb_host \
-  --env MARIADB_PORT=3306 \
+  --env MARIADB_PORT_NUMBER=3306 \
   --env WORDPRESS_DATABASE_NAME=wordpress_db \
   --env WORDPRESS_DATABASE_USER=wordpress_user \
   --env WORDPRESS_DATABASE_PASSWORD=wordpress_password \

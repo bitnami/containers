@@ -9,17 +9,17 @@ RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a277
 RUN bitnami-pkg unpack php-5.6.30-3 --checksum af6c238825d4394fc6352c5ad48c1e6423e21520df927097dab592f0d4ad4662
 RUN bitnami-pkg unpack mysql-client-10.1.23-1 --checksum 0be92fcc4f7fec93edfa7f788e2bbb87b5b3aac92dfdec159a10590345362512
 RUN bitnami-pkg install libphp-5.6.30-1 --checksum a62cad2320fa2d141309e75663aed3d1bd82626d51b784678d18ec3f985d83bf
-RUN bitnami-pkg unpack wordpress-4.7.5-1 --checksum 262f468ce2d84fb660d90ccf480c7de99ddd9f0abed590c24673276f4e18fe57
+RUN bitnami-pkg unpack wordpress-4.7.5-2 --checksum a066abadcb5fb82cf4ece1983d7cf44c24df2aff267b55ed7ccb5fbbb31dbb81
 
 COPY rootfs /
 
 ENV ALLOW_EMPTY_PASSWORD="no" \
-    APACHE_HTTPS_PORT="443" \
-    APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT_NUMBER="443" \
+    APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="4.7.5-r3" \
+    BITNAMI_IMAGE_VERSION="4.7.5-r4" \
     MARIADB_HOST="mariadb" \
-    MARIADB_PORT="3306" \
+    MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
     MARIADB_ROOT_USER="root" \
     MYSQL_CLIENT_CREATE_DATABASE_NAME="" \
