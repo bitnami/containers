@@ -239,15 +239,15 @@ owncloud:
 
 Available variables:
 
- - `APACHE_HTTP_PORT`: Port used by Apache for HTTP. Default: **80**
- - `APACHE_HTTPS_PORT`: Port used by Apache for HTTPS. Default: **443**
+ - `APACHE_HTTP_PORT_NUMBER`: Port used by Apache for HTTP. Default: **80**
+ - `APACHE_HTTPS_PORT_NUMBER`: Port used by Apache for HTTPS. Default: **443**
  - `OWNCLOUD_USERNAME`: Owncloud application username. Default: **user**
  - `OWNCLOUD_PASSWORD`: Owncloud application password. Default: **bitnami**
  - `OWNCLOUD_EMAIL`: Owncloud application email. Default: **user@example.com**
  - `OWNCLOUD_WEB_SERVER_HOST`: Owncloud Host Server.
  - `MARIADB_PASSWORD`: Root password for the MariaDB.
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
- - `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
+ - `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 
 # Backing up your application
 
