@@ -5,7 +5,7 @@ machine:
     RELEASE_SERIES_LIST: 5
     LATEST_STABLE: 5
     IMAGE_NAME: mysql
-    CHART_NAME: mysql
+    CHART_NAME:
     CHART_REPO: https://github.com/bitnami/charts
     DOCKER_PROJECT: bitnami
     QUAY_PROJECT: bitnami

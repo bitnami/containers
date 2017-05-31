@@ -30,7 +30,7 @@ services:
 
 ## Kubernetes
 
-> **WARNING**: This is a beta configuration, currently unsupported.
+> **WARNING:** This is a beta configuration, currently unsupported.
 
 Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
 
@@ -291,7 +291,7 @@ A **zero downtime** MySQL master-slave [replication](https://dev.mysql.com/doc/r
  - `MYSQL_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
  - `MYSQL_REPLICATION_PASSWORD`: The replication users password. No defaults.
  - `MYSQL_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
- - `MYSQL_MASTER_PORT`: Server port of the replication master (slave parameter). Defaults to `3306`.
+ - `MYSQL_MASTER_PORT_NUMBER`: Server port of the replication master (slave parameter). Defaults to `3306`.
  - `MYSQL_MASTER_ROOT_USER`: User on replication master with access to `MYSQL_DATABASE` (slave parameter). Defaults to `root`
  - `MYSQL_MASTER_ROOT_PASSWORD`: Password of user on replication master with access to `MYSQL_DATABASE` (slave parameter). No defaults.
 
@@ -370,7 +370,7 @@ services:
       - MYSQL_REPLICATION_USER=repl_user
       - MYSQL_REPLICATION_PASSWORD=repl_password
       - MYSQL_MASTER_HOST=mysql-master
-      - MYSQL_MASTER_PORT=3306
+      - MYSQL_MASTER_PORT_NUMBER=3306
       - MYSQL_MASTER_ROOT_PASSWORD=master_root_password
 ```
 
