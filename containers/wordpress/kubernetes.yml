@@ -109,7 +109,7 @@ items:
         - env:
           - name: MARIADB_HOST
             value: mariadb
-          - name: MARIADB_PORT
+          - name: MARIADB_PORT_NUMBER
             value: "3306"
           - name: WORDPRESS_DATABASE_USER
             value: bn_wordpress
