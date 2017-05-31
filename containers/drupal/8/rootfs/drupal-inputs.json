@@ -2,7 +2,7 @@
   "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
   "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
   "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
-  "databaseServerPort": "{{$global.env.MARIADB_PORT}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
   "email": "{{$global.env.DRUPAL_EMAIL}}",
   "password": "{{$global.env.DRUPAL_PASSWORD}}",
   "username": "{{$global.env.DRUPAL_USERNAME}}"
