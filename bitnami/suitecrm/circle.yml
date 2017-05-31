@@ -6,7 +6,7 @@ machine:
     LATEST_STABLE: 7
     IMAGE_NAME: suitecrm
     CHART_NAME:
-    CHART_REPO:
+    CHART_REPO: https://github.com/bitnami/charts
     DOCKER_PROJECT: bitnami
     QUAY_PROJECT: bitnami
     GCLOUD_PROJECT: bitnami-containers
