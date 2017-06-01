@@ -316,7 +316,7 @@ The DreamFactory instance can be customized by specifying environment variables 
 - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
 - `MARIADB_PASSWORD`: Root password for the MariaDB.
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
-- `MARIADB_PORT`: Port used by MariaDB server. Default: **3306**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 - `MONGODB_HOST`: Hostname for Mongodb server. Default: **mongodb**
 - `MONGODB_PORT`: Port used by Mongodb server. Default: **27017**
 - `REDIS_HOST`: Hostname for Redis. Default: **redis**
