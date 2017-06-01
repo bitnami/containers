@@ -25,7 +25,7 @@ services:
       - POSTGRESQL_REPLICATION_USER=repl_user
       - POSTGRESQL_REPLICATION_PASSWORD=repl_password
       - POSTGRESQL_MASTER_HOST=postgresql-master
-      - POSTGRESQL_MASTER_PORT=5432
+      - POSTGRESQL_MASTER_PORT_NUMBER=5432
 
 volumes:
   postgresql_master_data:
