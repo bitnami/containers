@@ -318,9 +318,9 @@ The DreamFactory instance can be customized by specifying environment variables 
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
 - `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 - `MONGODB_HOST`: Hostname for Mongodb server. Default: **mongodb**
-- `MONGODB_PORT`: Port used by Mongodb server. Default: **27017**
+- `MONGODB_PORT_NUMBER`: Port used by Mongodb server. Default: **27017**
 - `REDIS_HOST`: Hostname for Redis. Default: **redis**
-- `REDIS_PORT`: Port used by Redis. Default: **6379**
+- `REDIS_PORT_NUMBER`: Port used by Redis. Default: **6379**
 - `REDIS_PASSWORD`: Password for Redis.
 - `SMTP_HOST`: Hostname for the SMTP server (necessary for sending e-mails from the application).
 - `SMTP_PORT`: Port for the SMTP server.
