@@ -9,14 +9,14 @@ RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a277
 RUN bitnami-pkg unpack php-7.0.19-0 --checksum dcd5e4a19792dbfde5157d33f09e3c030ac11da92606ade08576bea795d6ac53
 RUN bitnami-pkg install mysql-client-10.1.23-1 --checksum 0be92fcc4f7fec93edfa7f788e2bbb87b5b3aac92dfdec159a10590345362512
 RUN bitnami-pkg install libphp-7.0.19-1 --checksum a72cb1bc3513549b5e94052549e78921a127617c38a4bd4586ae26976cac0af6
-RUN bitnami-pkg unpack magento-2.1.6-0 --checksum 4dfbad94aec89100c6a3471c7caa14ff00cbd92a0d15a41bbd828f7d0a4757b6
+RUN bitnami-pkg unpack magento-2.1.7-0 --checksum b72c6dd94d101eede46ef2b07dd882ab02efc1f37be8b5ade56c054e24b79206
 
 COPY rootfs /
 
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.1.6-r2" \
+    BITNAMI_IMAGE_VERSION="2.1.7-r0" \
     MAGENTO_ADMINURI="admin" \
     MAGENTO_EMAIL="user@example.com" \
     MAGENTO_FIRSTNAME="FirstName" \
