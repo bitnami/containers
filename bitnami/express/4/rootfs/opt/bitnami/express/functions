@@ -62,6 +62,11 @@ wait_for_db() {
   fi
 }
 
+add_gitignore_sample() {
+  info "Installing git ignore rules."
+  cp /dist/.gitignore .gitignore
+}
+
 add_sample_code() {
   if ! [[ -n $SKIP_SAMPLE_CODE && $SKIP_SAMPLE_CODE -gt 0 ]]; then
     info "Adding dist samples."
@@ -99,6 +104,7 @@ bootstrap_express_app() {
     info "Creating express application."
     express . -f
 
+    add_gitignore_sample
     add_database_support
     add_nodemon_support
     add_sample_code
