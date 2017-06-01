@@ -2,13 +2,11 @@
 [![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-dokuwiki/master/kubernetes.yml)
 
-
 # What is DokuWiki?
 
 > DokuWiki is a simple to use and highly versatile Open Source wiki software that doesn't require a database. It is loved by users for its clean and readable syntax. The ease of maintenance, backup and integration makes it an administrator's favorite
 
 https://www.dokuwiki.org/
-
 
 # TL;DR;
 
@@ -21,7 +19,7 @@ $ docker-compose up
 
 ## Kubernetes
 
-> **WARNING**: This is a beta configuration, currently unsupported.
+> **WARNING:** This is a beta configuration, currently unsupported.
 
 Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
 
@@ -42,6 +40,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-dok
 To run this application you need Docker Engine 1.10.0. Docker Compose is recomended with a version 1.6.0 or later.
 
 # How to use this image
+
 
 ### Run the application using Docker Compose
 
@@ -195,7 +194,7 @@ Available variables:
 
  - `DOKUWIKI_USERNAME`: Dokuwiki application SuperUser name. Default: **superuser**
  - `DOKUWIKI_FULL_NAME`: Dokuwiki SuperUser Full Name. Default: **Full Name**
- - `DOKUWIKI_PASSWORD`: Dokuwiki application password. Default: **bitnami1**
+ - `DOKUWIKI_PASSWORD`: Dokuwiki application password. Default: **bitnami**
  - `DOKUWIKI_EMAIL`: Dokuwiki application email. Default: **user@example.com**
  - `DOKUWIKI_WIKI_NAME`: Dokuwiki wiki name. Default: **Bitnami DokuWiki**
 
