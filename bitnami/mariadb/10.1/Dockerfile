@@ -5,13 +5,13 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libaio1 libc6 libgcc1 libjemalloc1 libncurses5 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg unpack mariadb-10.1.23-1 --checksum a61817affb224c1a428c012acf1e3356570a00efb4128353e7f9d4a5253f1fbf
+RUN bitnami-pkg unpack mariadb-10.1.24-0 --checksum 67a92982a422d8d45d6ccf75a87b3f3ac1b7a1637e77196dd9759230c6789dfe
 
 COPY rootfs /
 
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.1.23-r3" \
+    BITNAMI_IMAGE_VERSION="10.1.24-r0" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
