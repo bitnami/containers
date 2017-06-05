@@ -63,6 +63,8 @@ services:
       - 'mongodb_data:/bitnami/mongodb'
   redis:
     image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'redis_data:/bitnami/redis'
   dreamfactory:
@@ -134,7 +136,7 @@ $ docker run -d --name mongodb \
 
 ```bash
 $ docker volume create --name redis_data
-$ docker run -d --name redis \
+$ docker run -d --name redis -e ALLOW_EMPTY_PASSWORD=yes \
   --net dreamfactory-tier \
   --volume redis_data:/bitnami/redis \
   bitnami/redis:latest
@@ -182,6 +184,8 @@ services:
       - '/path/to/your/local/mongodb_data:/bitnami/mongodb'
   redis:
     image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '/path/to/your/local/redis_data:/bitnami/redis'
   dreamfactory:
@@ -229,7 +233,7 @@ $ docker run -d --name mongodb \
 4. Create a Redis container with host volume
 
 ```bash
-$ docker run -d --name redis \
+$ docker run -d --name redis -e ALLOW_EMPTY_PASSWORD=yes\\
   --net dreamfactory-tier \
   --volume /path/to/redis-persistence:/bitnami/redis \
   bitnami/redis:latest
@@ -345,6 +349,8 @@ services:
       - mongodb_data:/bitnami/mongodb
   redis:
     image: bitnami/redis:latest
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - redis_data:/bitnami/mariadb
   dreamfactory:
