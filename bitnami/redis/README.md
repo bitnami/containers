@@ -11,7 +11,7 @@
 # TL;DR;
 
 ```bash
-docker run --name redis bitnami/redis:latest
+docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
 ```
 
 ## Docker Compose
@@ -22,6 +22,8 @@ version: '2'
 services:
   redis:
     image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '6379:6379'
 ```
@@ -74,7 +76,8 @@ If you have already started using your database, follow the steps on [backing up
 The image exposes a volume at `/bitnami/redis` for the Redis data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
-docker run -v /path/to/redis-persistence:/bitnami/redis bitnami/redis:latest
+docker run -v /path/to/redis-persistence:/bitnami/redis \
+      -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
 ```
 
 or using Docker Compose:
@@ -85,6 +88,8 @@ version: '2'
 services:
   redis:
     image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '6379:6379'
     volumes:
@@ -113,6 +118,7 @@ Use the `--network app-tier` argument to the `docker run` command to attach the 
 
 ```bash
 $ docker run -d --name redis-server \
+    -e ALLOW_EMPTY_PASSWORD=yes \
     --network app-tier \
     bitnami/redis:latest
 ```
@@ -141,6 +147,8 @@ networks:
 services:
   redis:
     image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - app-tier
   myapp:
@@ -183,6 +191,29 @@ services:
     environment:
       - REDIS_PASSWORD=password123
 ```
+
+**Warning** The Redis database is always configured with remote access enabled. It's suggested that the `REDIS_PASSWORD` env variable is always specified to set a password. In case you want to access the database without a password set the environment variable `ALLOW_EMPTY_PASSWORD=yes`. **This is recommended only for development**.
+
+## Allowing empty passwords
+
+By default the Redis image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD=yes` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `REDIS_PASSWORD` for any other scenario.
+
+```bash
+docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  redis:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379:6379'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
 
 ## Setting up a replication
 
@@ -241,28 +272,28 @@ With Docker Compose the master/slave replication can be setup using:
 version: '2'
 
 services:
-  redis-primary:
+  redis-master:
     image: 'bitnami/redis:latest'
     ports:
       - '6379'
     environment:
       - REDIS_REPLICATION_MODE=master
-      - REDIS_PASSWORD=my_password
+      - REDIS_PASSWORD=my_master_password
     volumes:
       - '/path/to/redis-persistence:/bitnami/redis'
 
-  redis-secondary:
+  redis-slave:
     image: 'bitnami/redis:latest'
     ports:
       - '6379'
     depends_on:
-      - redis-primary
+      - redis-master
     environment:
       - REDIS_REPLICATION_MODE=slave
       - REDIS_MASTER_HOST=redis-primary
       - REDIS_MASTER_PORT_NUMBER=6379
-      - REDIS_MASTER_PASSWORD=my_password
-      - REDIS_PASSWORD=my_password
+      - REDIS_MASTER_PASSWORD=my_master_password
+      - REDIS_PASSWORD=my_slave_password
 ```
 
 Scale the number of slaves using:
@@ -295,6 +326,8 @@ version: '2'
 services:
   redis:
     image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '6379:6379'
     volumes:
@@ -393,6 +426,8 @@ version: '2'
 services:
   redis:
     image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '6379:6379'
     volumes:

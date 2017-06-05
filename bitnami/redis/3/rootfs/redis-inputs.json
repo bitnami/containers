@@ -1,4 +1,5 @@
 {
+  "allowEmptyPassword": "{{$global.env.ALLOW_EMPTY_PASSWORD}}",
   "masterHost": "{{$global.env.REDIS_MASTER_HOST}}",
   "masterPassword": "{{$global.env.REDIS_MASTER_PASSWORD}}",
   "masterPort": "{{$global.env.REDIS_MASTER_PORT_NUMBER}}",
