@@ -58,6 +58,8 @@ services:
       - 'postgresql_data:/bitnami/postgresql'
   redis:
     image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'redis_data:/bitnami/redis'
   discourse:
@@ -114,7 +116,7 @@ If you want to run the application manually instead of using docker-compose, the
 3. Start Redis in the network generated:
 
   ```
-  $ docker run -d --name redis --net=discourse-tier bitnami/redis
+  $ docker run -d --name redis -e ALLOW_EMPTY_PASSWORD=yes --net=discourse-tier bitnami/redis
   ```
 
 4. Run the Discourse container:
@@ -144,6 +146,8 @@ services:
       - '/path/to/your/local/postgresql_data:/bitnami/postgresql'
   redis:
     image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '/path/to/your/local/redis_data:/bitnami/redis'
   discourse:
@@ -188,6 +192,7 @@ In this case you need to specify the directories to mount on the run command. Th
   ```
   $ docker run -d --name redis \
   --net=discourse-tier \
+   -e ALLOW_EMPTY_PASSWORD=yes \
   --volume /path/to/redis-persistence:/bitnami/redis \
   bitnami/redis
   ```
