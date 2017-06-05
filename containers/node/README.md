@@ -116,6 +116,50 @@ node:
 - [package.json documentation](https://docs.npmjs.com/files/package.json)
 - [npm start script](https://docs.npmjs.com/misc/scripts#default-values)
 
+# Working with private npm modules
+
+To work with npm private modules, it is necessary to be logged into npm. npm CLI uses *auth tokens* for authentication. Check the official [npm documentation](https://www.npmjs.com/package/get-npm-token) for further information about how to obtain the token.
+
+If you are working in a Docker environment, you can inject the token at build time in your Dockerfile by using the ARG parameter as follows:
+
+* Create a `npmrc` file within the project. It contains the instructions for the `npm` command to authenticate against npmjs.org registry. The `NPM_TOKEN` will be taken at build time. The file should look like this:
+
+```bash
+//registry.npmjs.org/:_authToken=${NPM_TOKEN}
+```
+
+* Add some new lines to the Dockerfile in order to copy the `npmrc` file, add the expected `NPM_TOKEN` by using the ARG parameter, and remove the `npmrc` file once the npm install is completed.
+
+You can find the Dockerfile below:
+
+```yaml
+FROM bitnami/node
+
+ARG NPM_TOKEN
+COPY npmrc /root/.npmrc
+
+COPY . /app
+
+WORKDIR /app
+RUN npm install
+
+CMD node app.js
+```
+
+* Now you can build the image using the above Dockerfile and the token. Run the `docker build` command as follows:
+
+```bash
+$ docker build --build-arg NPM_TOKEN=${NPM_TOKEN} .
+```
+
+| NOTE: The "." at the end gives `docker build` the current directory as an argument.
+
+Congratulations! You are now logged into the npm repo.
+
+**Further reading**
+
+- [npm official documentation](https://docs.npmjs.com/private-modules/docker-and-private-modules).
+
 # Accessing a Node.js app running a web server
 
 By default the image exposes the port `3000` of the container. You can use this port for your Node.js application server.
