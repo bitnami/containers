@@ -1,4 +1,5 @@
 version: '2'
+
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
@@ -8,6 +9,8 @@ services:
       - 'mariadb_data:/bitnami/mariadb'
   redis:
     image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'redis_data:/bitnami/redis'
   mongodb:
