@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r16
+FROM bitnami/minideb-extras:jessie-r17
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 
@@ -8,12 +8,12 @@ RUN install_packages libc6 libcomerr2 libcurl3 libexpat1 libffi6 libfontconfig1 
 RUN bitnami-pkg install java-1.8.0_121-0 --checksum 2743f753fd1ea88bf90352d95694f89ab0a0fb855cf0d1c7b2a6d92835f9ad27
 RUN bitnami-pkg install tomcat-8.0.44-0 --checksum eb24b14dd7061bad4ab9a311838c911419b4b61c8c5c13aedf06a7a29305b426
 RUN bitnami-pkg install git-2.10.1-2 --checksum 6f9fd8b0591f268f965930db0c091598e5c4f9dccbb6853010e1ac9e5035cd6f
-RUN bitnami-pkg unpack jenkins-2.63-0 --checksum 3a70d0e6f05a0fa041dcf0d5a894042892ac7a0956e98f19d5c800e7d83e38d7
+RUN bitnami-pkg unpack jenkins-2.64-0 --checksum bee992d90dbbe08874d2710281a16494656906aa601e69657b51d5eb8c5fcbd8
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.63-r0" \
+    BITNAMI_IMAGE_VERSION="2.64-r0" \
     JENKINS_PASSWORD="bitnami" \
     JENKINS_USERNAME="user" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/git/bin:$PATH"
