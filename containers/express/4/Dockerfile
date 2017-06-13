@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r15-buildpack
 MAINTAINER Bitnami <containers@bitnami.com>
 
 # System packages required
-RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libmysqlclient18 libncurses5 libreadline6 libsqlite3-0 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
+RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libmysqlclient18 libncurses5 libreadline6 libsqlite3-0 libssl1.0.0 libstdc++6 libtinfo5 zlib1g netcat-traditional
 
 # Additional modules required
 RUN bitnami-pkg install node-7.10.0-0 --checksum 7209e62e60335308287cba38bc18fb34245d41b86bc7ffd3ad26413f186c529b
@@ -19,7 +19,7 @@ RUN rm -rf /app
 
 # ExpressJS template
 ENV BITNAMI_APP_NAME=express
-ENV BITNAMI_IMAGE_VERSION=4.15.3-r1
+ENV BITNAMI_IMAGE_VERSION=4.15.3-r2
 
 COPY rootfs/ /
 
