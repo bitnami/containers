@@ -1,0 +1,8 @@
+{
+  "zookeeperId": "{{$global.env.ZOO_SERVER_ID}}",
+  "zookeeperInitLimit": "{{$global.env.ZOO_INIT_LIMIT}}",
+  "zookeeperPort": "{{$global.env.ZOO_PORT_NUMBER}}",
+  "zookeeperServers": "{{$global.env.ZOO_SERVERS}}",
+  "zookeeperSyncLimit": "{{$global.env.ZOO_SYNC_LIMIT}}",
+  "zookeeperTickTime": "{{$global.env.ZOO_TICK_TIME}}"
+}
