@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+      - '2181:2181'
+    volumes:
+      - 'zookeeper_data:/bitnami/zookeeper'
+  kafka:
+    image: 'bitnami/kafka:0'
+    ports:
+      - '9092:9092'
+    volumes:
+      - 'kafka_data:/bitnami/kafka'
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+
+volumes:
+  zookeeper_data:
+    driver: local
+  kafka_data:
+    driver: local
