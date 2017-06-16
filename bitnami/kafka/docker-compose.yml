@@ -1,17 +1,23 @@
 version: '2'
+
 services:
   zookeeper:
-    image: 'bitnami/zookeeper@sha256:0bbf6503e45fc7d5236513987702b0533d2c777144dfd5022feed9ad89dc6318'
+    image: 'bitnami/zookeeper:latest'
     ports:
       - '2181:2181'
+    volumes:
+      - 'zookeeper_data:/bitnami/zookeeper'
   kafka:
-    depends_on:
-      - zookeeper
-    image: 'bitnami/kafka@sha256:9ef14a3a2348ae24072c73caa4d4db06c77a8c0383a726d02244ea0e43723355'
+    image: 'bitnami/kafka:latest'
     ports:
       - '9092:9092'
+    volumes:
+      - 'kafka_data:/bitnami/kafka'
     environment:
-      - KAFKA_PORT=9092
-      - KAFKA_ADVERTISED_PORT=9092
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
 
+volumes:
+  zookeeper_data:
+    driver: local
+  kafka_data:
+    driver: local

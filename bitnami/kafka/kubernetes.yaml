@@ -39,7 +39,8 @@ items:
     name: kafka
   spec:
     replicas: 1
-    strategy: {}
+    strategy:
+      type: Recreate
     template:
       metadata:
         creationTimestamp: null
@@ -48,18 +49,35 @@ items:
       spec:
         containers:
         - env:
-          - name: KAFKA_PORT
-            value: "9092"
-          - name: KAFKA_ADVERTISED_PORT
-            value: "9092"
           - name: KAFKA_ZOOKEEPER_CONNECT
-            value: zookeeper
-          image: bitnami/kafka@sha256:9ef14a3a2348ae24072c73caa4d4db06c77a8c0383a726d02244ea0e43723355
+            value: zookeeper:2181
+          image: bitnami/kafka:latest
           name: kafka
           ports:
           - containerPort: 9092
           resources: {}
+          volumeMounts:
+          - mountPath: /bitnami/kafka
+            name: bitnamidockerkafka-kafka-data
         restartPolicy: Always
+        volumes:
+        - name: bitnamidockerkafka-kafka-data
+          persistentVolumeClaim:
+            claimName: bitnamidockerkafka-kafka-data
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: bitnamidockerkafka-kafka-data
+    name: bitnamidockerkafka-kafka-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
   status: {}
 - apiVersion: extensions/v1beta1
   kind: Deployment
@@ -68,7 +86,8 @@ items:
     name: zookeeper
   spec:
     replicas: 1
-    strategy: {}
+    strategy:
+      type: Recreate
     template:
       metadata:
         creationTimestamp: null
@@ -76,12 +95,33 @@ items:
           io.kompose.service: zookeeper
       spec:
         containers:
-        - image: bitnami/zookeeper@sha256:0bbf6503e45fc7d5236513987702b0533d2c777144dfd5022feed9ad89dc6318
+        - image: bitnami/zookeeper:latest
           name: zookeeper
           ports:
           - containerPort: 2181
           resources: {}
+          volumeMounts:
+          - mountPath: /bitnami/zookeeper
+            name: bitnamidockerkafka-zookeeper-data
         restartPolicy: Always
+        volumes:
+        - name: bitnamidockerkafka-zookeeper-data
+          persistentVolumeClaim:
+            claimName: bitnamidockerkafka-zookeeper-data
+  status: {}
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: bitnamidockerkafka-zookeeper-data
+    name: bitnamidockerkafka-zookeeper-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
   status: {}
 kind: List
 metadata: {}
