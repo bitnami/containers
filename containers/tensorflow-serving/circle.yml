@@ -2,8 +2,8 @@ machine:
   services:
   - docker
   environment:
-    RELEASE_SERIES_LIST: {{ range $index, $_ := .Branches }}{{ if ne $index 0 }},{{ end }}{{ .Branch }}{{ end }}
-    LATEST_STABLE: {{ .LatestStableBranch.Branch }}
+    RELEASE_SERIES_LIST: 0
+    LATEST_STABLE: 0
     IMAGE_NAME: tensorflow-serving
     CHART_NAME:
     CHART_REPO:
