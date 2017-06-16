@@ -13,10 +13,6 @@ thousands of companies. Kafka requires a connection to a Zookeeper service.
 
 # TL;DR;
 
-```bash
-docker run --name kafka bitnami/kafka:latest
-```
-
 ## Docker Compose
 
 ```yaml
@@ -95,11 +91,7 @@ If you have already started using your database, follow the steps on
 
 The image exposes a volume at `/bitnami/kafka` for the Kafka data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
-docker run -v /path/to/kafka-persistence:/bitnami/kafka bitnami/kafka:latest
-```
-
-or using Docker Compose:
+Using Docker Compose:
 
 ```yaml
 version: '2'
@@ -363,11 +355,7 @@ After that, your changes will be taken into account in the server's behaviour.
 
 Run the Kafka image, mounting a directory from your host.
 
-```bash
-docker run --name kafka -v /path/to/kafka-persistence:/bitnami/kafka bitnami/kafka:latest
-```
-
-or using Docker Compose:
+Using Docker Compose:
 
 ```yaml
 version: '2'
