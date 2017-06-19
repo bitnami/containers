@@ -6,7 +6,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 # Install required system packages and dependencies
 RUN install_packages libc6 libexpat1 libffi6 libfontconfig1 libfreetype6 libgcc1 libglib2.0-0 liblzma5 libpcre3 libpng12-0 libselinux1 libstdc++6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 zlib1g
 RUN bitnami-pkg install java-1.8.0_121-0 --checksum 2743f753fd1ea88bf90352d95694f89ab0a0fb855cf0d1c7b2a6d92835f9ad27
-RUN bitnami-pkg unpack zookeeper-3.4.10
+RUN bitnami-pkg unpack zookeeper-3.4.10-0 --checksum 713e1f838e47148f9d8a3944a5c58c20a7e4ea84d9cfc8cdcbe9ce0d511a9d73
 
 COPY rootfs /
 

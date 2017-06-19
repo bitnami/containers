@@ -3,13 +3,10 @@ version: '2'
 services:
   zookeeper:
     image: 'bitnami/zookeeper:3'
-    labels:
-      kompose.service.type: nodeport
     ports:
       - '2181:2181'
     volumes:
       - 'zookeeper_data:/bitnami/zookeeper'
-
 volumes:
   zookeeper_data:
     driver: local
