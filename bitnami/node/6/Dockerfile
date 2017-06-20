@@ -1,16 +1,20 @@
-FROM bitnami/minideb-extras:jessie-r14-buildpack
-MAINTAINER Bitnami <containers@bitnami.com>
+FROM bitnami/minideb-extras:jessie-r17-buildpack
+LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="6.10.3-r1" \
-    NODE_PATH="/opt/bitnami/node/lib/node_modules" \
-    PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
+
 
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libmysqlclient18 libncurses5 libreadline6 libsqlite3-0 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg install node-6.10.3-0 --checksum 07bb05274dd2cf71ebdd92ff00925bf1ff16588664e24f59a3b5ecfce7dce238
+RUN bitnami-pkg install node-6.11.0-0 --checksum 203d22e3357eb5e8573c8d95691f01e1a2a3badcfc2baee0bf83b3ad91dfeb86
 
 COPY rootfs /
+
+ENV BITNAMI_APP_NAME="node" \
+    BITNAMI_IMAGE_VERSION="6.11.0-r0" \
+    NODE_PATH="/opt/bitnami/node/lib/node_modules" \
+    PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
+
+
 
 
 EXPOSE 3000
