@@ -375,7 +375,7 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 ## Configuration file
 
-The image looks for configuration in the `conf/` directory of `/bitnami/mariadb`. As mentioned in [Persisting your database](#persisting-your-data) you can mount a volume at this location and copy your own custom `my_custom.cnf` file in the `conf/` directory. That file will be included in the main configuration file and will overwrite any configuration you want to modify.
+The image looks for configuration in the `conf/` directory of `/bitnami/mariadb`. As mentioned in [Persisting your database](#persisting-your-database) you can mount a volume at this location and copy your own custom `my_custom.cnf` file in the `conf/` directory. That file will be included in the main configuration file and will overwrite any configuration you want to modify.
 
 For example, in order to override the max_allowed_packet directive:
 
