@@ -8,6 +8,13 @@ streaming apps. It is horizontally scalable, fault-tolerant, wicked fast, and ru
 thousands of companies. Kafka requires a connection to a Zookeeper service.
 
 
+IMPORTANT NOTES:
+===============
+- Cluster mode is not fully supported at this moment.
+- Auth is not fully supported at this moment.
+
+
+
 [https://kafka.apache.org/](https://kafka.apache.org/)
 
 
@@ -256,92 +263,6 @@ volumes:
     driver: local
 ```
 
-## Setting up a Kafka Cluster
-
-A Kafka cluster can easily be setup with the Bitnami Kafka Docker image using the following environment variables:
-
- - `KAFKA_ZOOKEEPER_CONNECT`: Comma separated host:port pairs, each corresponding to a Zookeeper Server.
-
-
-### Step 1: Create the first node for Zookeeper
-
-The first step is to create one Zookeeper instance.
-
-```bash
-docker run --name zookeeper --link kafka1:kafka1  --link kafka2:kafka2 --link kafka3:kafka3 \
-  -p 2181:2181 \
-  bitnami/zookeeper:latest
-```
-
-### Step 2: Create the first node for Kafka
-
-The first step is to create one Kafka instance.
-
-```bash
-docker run --name kafka1 --link kafka2:kafka2 --link kafka3:kafka3 \
-  -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
-  -p 9092:9092 \
-  bitnami/kafka:latest
-```
-
-### Step 2: Create the second node
-
-Next we start a new Kafka container.
-
-```bash
-docker run --name kafka2 --link kafka1:kafka1 --link kafka3:kafka3 \
-  -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
-  -p 9092:9092 \
-  bitnami/kafka:latest
-```
-
-### Step 3: Create the third node
-
-Next we start another new Kafka container.
-
-```bash
-docker run --name kafka3 --link kafka1:kafka1 --link kafka2:kafka2 \
-  -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
-  -p 9092:9092 \
-  bitnami/kafka:latest
-```
-You now have a Kafka cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
-
-With Docker Compose the e replication can be setup using:
-
-```yaml
-version: '2'
-
-services:
-  zookeeper:
-    image: 'bitnami/zookeeper:latest'
-    ports:
-     - '2181:2181'
-  kafka1:
-    image: 'bitnami/kafka:latest'
-    ports:
-      - '9092'
-    volumes:
-      - /path/to/kafka-persistence:/bitnami/kafka
-    environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-  kafka2:
-    image: 'bitnami/kafka:latest'
-    ports:
-      - '9092'
-    volumes:
-      - /path/to/kafka-persistence:/bitnami/kafka
-    environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-  kafka3:
-    image: 'bitnami/kafka:latest'
-    ports:
-      - '9092'
-    volumes:
-      - /path/to/kafka-persistence:/bitnami/kafka
-    environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-```
 
 ## Configuration
 The image looks for configuration in the `config/` directory of `/bitnami/kafka`.
