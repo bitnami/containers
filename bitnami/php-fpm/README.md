@@ -30,7 +30,7 @@ services:
 
 ## Kubernetes
 
-> **WARNING**: This is a beta configuration, currently unsupported.
+> **WARNING:** This is a beta configuration, currently unsupported.
 
 Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
 
@@ -49,8 +49,8 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-php
 # Supported tags and respective `Dockerfile` links
 
  - [`7.1`, `7.1.5-r0`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.5-r0/7.1/Dockerfile)
- - [`7.0`, `7.1.5-r0` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.5-r0/7.0/Dockerfile)
- - [`5.6`, `7.1.5-r0` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.5-r0/5.6/Dockerfile)
+ - [`7.0`, `7.0.20-r0` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.20-r0/7.0/Dockerfile)
+ - [`5.6`, `5.6.30-r4` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.30-r4/5.6/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
 
