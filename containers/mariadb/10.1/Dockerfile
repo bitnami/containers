@@ -1,17 +1,17 @@
-FROM bitnami/minideb-extras:jessie-r16
+FROM bitnami/minideb-extras:jessie-r17
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 
 
 # Install required system packages and dependencies
 RUN install_packages libaio1 libc6 libgcc1 libjemalloc1 libncurses5 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg unpack mariadb-10.1.24-0 --checksum 67a92982a422d8d45d6ccf75a87b3f3ac1b7a1637e77196dd9759230c6789dfe
+RUN bitnami-pkg unpack mariadb-10.1.24-1 --checksum 0ad8567f9d3d8371f085b56854b5288be38c85a5cb3cd4e36d8355eb6bbbd4cd
 
 COPY rootfs /
 
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.1.24-r0" \
+    BITNAMI_IMAGE_VERSION="10.1.24-r1" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
