@@ -2,8 +2,8 @@ machine:
   services:
   - docker
   environment:
-    RELEASE_SERIES_LIST: 0.10
-    LATEST_STABLE: 0.10
+    RELEASE_SERIES_LIST: "0.10"
+    LATEST_STABLE: "0.10"
     IMAGE_NAME: kafka
     CHART_NAME:
     CHART_REPO:
