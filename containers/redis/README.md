@@ -214,6 +214,7 @@ services:
       - '6379:6379'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+```
 
 ## Setting up a replication
 
