@@ -5,12 +5,12 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libevent-2.0-5 libsasl2-2 sasl2-bin
-RUN bitnami-pkg unpack memcached-1.4.37-0 --checksum 6d13115bed8cfde2b8dd1713290df3ea9dc4528ed0bbac6c93382689938a4ee4
+RUN bitnami-pkg unpack memcached-1.4.38-0 --checksum f4f9c4daac62e4b170f62ecf10076d8145736407b5c98bfc9262a176506bae50
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.4.37-r0" \
+    BITNAMI_IMAGE_VERSION="1.4.38-r0" \
     MEMCACHED_PASSWORD="" \
     MEMCACHED_USERNAME="root" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
