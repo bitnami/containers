@@ -10,6 +10,8 @@
 
 [tensorflow.github.io/serving/](https://tensorflow.github.io/serving/)
 
+> NOTE: This image needs access to trained data to actually works. Please check [bitnami-docker-tensorflow-inception](https://github.com/bitnami/bitnami-docker-tensorflow-inception) repository or follow the steps provided [here](#using-the-command-line)
+
 # TL;DR;
 
 ```bash
@@ -134,7 +136,7 @@ Finally we create a new container instance to launch the TensorFlow Serving clie
 $ docker run -it --rm \
     --volume /tmp/model-data:/bitnami/model-data
     --network app-tier \
-    bitnami/tensorflow-inception:latest inception_client --server:tensorflow-serving --image=path/to/image.jpg
+    bitnami/tensorflow-inception:latest inception_client --server=tensorflow-serving:9000 --image=path/to/image.jpg
 ```
 
 ## Using Docker Compose
