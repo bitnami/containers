@@ -486,6 +486,10 @@ $ docker-compose start mariadb
 
 # Notable Changes
 
+## 10.1.24-r2
+
+- `VOLUME` instruction has been removed from the `Dockerfile`.
+
 ## 10.1.21-r2
 
 - `MARIADB_MASTER_USER` has been renamed to `MARIADB_MASTER_ROOT_USER`
