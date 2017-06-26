@@ -6,7 +6,7 @@ services:
     ports:
       - '3306'
     volumes:
-      - 'mariadb_master_data:/bitnami/mariadb'
+      - 'mariadb_master_data:/bitnami'
     environment:
       - MARIADB_REPLICATION_MODE=master
       - MARIADB_REPLICATION_USER=repl_user
