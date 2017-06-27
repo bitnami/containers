@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r13
+FROM bitnami/minideb-extras:jessie-r19
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
