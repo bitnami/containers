@@ -8,24 +8,24 @@
 
 # TL;DR;
 
-```bash
-docker run --name cassandra bitnami/cassandra:latest
+```console
+$ docker run --name cassandra bitnami/cassandra:latest
 ```
 
 ## Docker Compose
 
-```
-cassandra:
-  image: bitnami/cassandra:latest
+```console
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-cassandra/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
-```bash
+```console
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-cassandra/master/kubernetes.yml
 ```
 
@@ -41,41 +41,41 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-cas
 
 The recommended way to get the Bitnami Cassandra Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/cassandra).
 
-```bash
-docker pull bitnami/cassandra:latest
+```console
+$ docker pull bitnami/cassandra:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/cassandra/tags/) in the Docker Hub Registry.
 
-```bash
-docker pull bitnami/cassandra:[TAG]
+```console
+$ docker pull bitnami/cassandra:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
-docker build -t bitnami/cassandra:latest https://github.com/bitnami/bitnami-docker-cassandra.git
+```console
+$ docker build -t bitnami/cassandra:latest https://github.com/bitnami/bitnami-docker-cassandra.git
 ```
 
 # Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `cassandra_data` data volumes. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-> **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
+For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-The image exposes a volume at `/bitnami/cassandra` for the Cassandra data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
-
-```bash
-docker run -v /path/to/cassandra-persistence:/bitnami/cassandra bitnami/cassandra:latest
+```console
+$ docker run \
+    -v /path/to/cassandra-persistence:/bitnami \
+    bitnami/cassandra:latest
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 cassandra:
   image: bitnami/cassandra:latest
   volumes:
-    - /path/to/cassandra-persistence:/bitnami/cassandra
+    - /path/to/cassandra-persistence:/bitnami
 ```
 
 # Connecting to other containers
@@ -90,7 +90,7 @@ In this example, we will create a Cassandra client instance that will connect to
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -98,7 +98,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the Cassandra container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name cassandra-server \
     --network app-tier \
     bitnami/cassandra:latest
@@ -108,7 +108,7 @@ $ docker run -d --name cassandra-server \
 
 Finally we create a new container instance to launch the Cassandra client and connect to the server created in the previous step:
 
-```bash
+```console
 $ docker run -it --rm \
     --network app-tier \
     bitnami/cassandra:latest cqlsh --username cassandra --password cassandra-server cassandra
@@ -143,13 +143,14 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
 # Configuration
 
 ## Environment variables
+
  When you start the cassandra image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
@@ -162,8 +163,11 @@ cassandra:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
- $ docker run -d -e CASSANDRA_PORT_NUMBER=7000 -p 7000:7000 --name cassandra -v /your/local/path/bitnami/cassandra:/bitnami/cassandra --network=cassandra_network bitnami/cassandra
+```console
+ $ docker run --name cassandra -d -p 7000:7000 --network=cassandra_network \
+    -e CASSANDRA_PORT_NUMBER=7000 \
+    -v /your/local/path/bitnami/cassandra:/bitnami \
+    bitnami/cassandra
 ```
 
 Available variables:
@@ -184,13 +188,15 @@ Available variables:
 
 Passing the `CASSANDRA_PASSWORD` environment variable when running the image for the first time will set the Cassandra server password to the value of `CASSANDRA_PASSWORD`.
 
-```bash
-docker run --name cassandra -e CASSANDRA_PASSWORD=password123 bitnami/cassandra:latest
+```console
+$ docker run --name cassandra \
+    -e CASSANDRA_PASSWORD=password123 \
+    bitnami/cassandra:latest
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 cassandra:
   image: bitnami/cassandra:latest
   environment:
@@ -208,14 +214,14 @@ A cluster can easily be setup with the Bitnami Cassandra Docker Image using the 
 
 ### Step 1: Create a new network.
 
-```bash
-docker network create cassandra_network
+```console
+$ docker network create cassandra_network
 ```
 
 ### Step 2: Create a first node.
 
-```bash
-docker run --name cassandra-node1 \
+```console
+$ docker run --name cassandra-node1 \
   --net=cassandra_network \
   -p 9042:9042 \
   -e CASSANDRA_CLUSTER_NAME=cassandra-cluster \
@@ -224,11 +230,10 @@ docker run --name cassandra-node1 \
 ```
 In the above command the container is added to a cluster named `cassandra-cluster` using the `CASSANDRA_CLUSTER_NAME`. The `CASSANDRA_CLUSTER_HOSTS` parameter set the name of the nodes that set the cluster so we will need to launch other container for the second node. Finally the `CASSANDRA_NODE_NAME` parameter allows to indicate a known name for the node, otherwise cassandra will generate a randon one.
 
-
 ### Step 3: Create a second node
 
-```bash
-docker run --name cassandra-node2 \
+```console
+$ docker run --name cassandra-node2 \
   --net=cassandra_network \
   -e CASSANDRA_CLUSTER_NAME=cassandra-cluster \
   -e CASSANDRA_SEEDS=cassandra-node1,cassandra-node2 \
@@ -259,117 +264,68 @@ services:
 
 ## Configuration file
 
-The image looks for configuration in the `conf/` directory of `/bitnami/cassandra`. As as mentioned in [Persisting your application](#persisting-your-application) you can mount a volume at this location and copy your own configurations in the `conf/` directory. The default configuration will be copied to the `conf/` directory if it's empty.
+The image looks for configurations in `/bitnami/cassandra/conf/`. As mentioned in [Persisting your application](#persisting-your-application) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/cassandra-persistence/cassandra/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
 ### Step 1: Run the Cassandra image
 
 Run the Cassandra image, mounting a directory from your host.
 
-```bash
-docker run --name cassandra -v /path/to/cassandra-persistence:/bitnami/cassandra bitnami/cassandra:latest
+```console
+$ docker run --name cassandra \
+    -v /path/to/cassandra-persistence:/bitnami \
+    bitnami/cassandra:latest
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 cassandra:
   image: bitnami/cassandra:latest
   volumes:
-    - /path/to/cassandra-persistence:/bitnami/cassandra
+    - /path/to/cassandra-persistence:/bitnami
 ```
 
 ### Step 2: Edit the configuration
 
 Edit the configuration on your host using your favorite editor.
 
-```bash
-vi /path/to/cassandra-persistence/conf/cassandra.yaml
+```console
+vi /path/to/cassandra-persistence/cassandra/conf/cassandra.yaml
 ```
 
 ### Step 3: Restart Cassandra
 
 After changing the configuration, restart your Cassandra container for changes to take effect.
 
-```bash
-docker restart cassandra
+```console
+$ docker restart cassandra
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose restart cassandra
+```console
+$ docker-compose restart cassandra
 ```
 
-**Further Reading:**
-
-  - [Cassandra Configuration Documentation](http://docs.datastax.com/en/cassandra/3.x/cassandra/configuration/configTOC.html)
+Refer to the [configuration](http://docs.datastax.com/en/cassandra/3.x/cassandra/configuration/configTOC.html) manual for the complete list of configuration options.
 
 # Logging
 
 The Bitnami Cassandra Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
-docker logs cassandra
+```console
+$ docker logs cassandra
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose logs cassandra
+```console
+$ docker-compose logs cassandra
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 # Maintenance
-
-## Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-### Step 1: Stop the currently running container
-
-```bash
-docker stop cassandra
-```
-
-or using Docker Compose:
-
-```bash
-docker-compose stop cassandra
-```
-
-### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```bash
-docker run --rm -v /path/to/cassandra-backups:/backups --volumes-from cassandra busybox \
-  cp -a /bitnami/cassandra:latest /backups/latest
-```
-
-or using Docker Compose:
-
-```bash
-docker run --rm -v /path/to/cassandra-backups:/backups --volumes-from `docker-compose ps -q cassandra` busybox \
-  cp -a /bitnami/cassandra:latest /backups/latest
-```
-
-## Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the container.
-
-```bash
-docker run -v /path/to/cassandra-backups/latest:/bitnami/cassandra bitnami/cassandra:latest
-```
-
-or using Docker Compose:
-
-```
-cassandra:
-  image: bitnami/cassandra:latest
-  volumes:
-    - /path/to/cassandra-backups/latest:/bitnami/cassandra
-```
 
 ## Upgrade this image
 
@@ -377,8 +333,8 @@ Bitnami provides up-to-date versions of Cassandra, including security patches, s
 
 ### Step 1: Get the updated image
 
-```bash
-docker pull bitnami/cassandra:latest
+```console
+$ docker pull bitnami/cassandra:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -386,34 +342,48 @@ or if you're using Docker Compose, update the value of the image property to
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's data, configuration and logs.
+Stop the currently running container using the command
 
-Follow the steps on [creating a backup](#backing-up-your-container).
-
-### Step 3: Remove the currently running container
-
-```bash
-docker rm -v cassandra
+```console
+$ docker stop cassandra
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose rm -v cassandra
+```console
+$ docker-compose stop cassandra
+```
+
+Next, take a snapshot of the persistent volume `/path/to/cassandra-persistence` using:
+
+```console
+$ rsync -a /path/to/cassandra-persistence /path/to/cassandra-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+### Step 3: Remove the currently running container
+
+```console
+$ docker rm -v cassandra
+```
+
+or using Docker Compose:
+
+```console
+$ docker-compose rm -v cassandra
 ```
 
 ### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image.
 
-```bash
-docker run --name cassandra bitnami/cassandra:latest
+```console
+$ docker run --name cassandra bitnami/cassandra:latest
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose start cassandra
+```console
+$ docker-compose start cassandra
 ```
 
 # Contributing
@@ -437,7 +407,7 @@ Most real time communication happens in the `#containers` channel at [bitnami-os
 Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
-Copyright (c) 2016 Bitnami
+Copyright (c) 2016-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
