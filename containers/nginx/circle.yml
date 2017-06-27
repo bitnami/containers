@@ -2,8 +2,8 @@ machine:
   services:
   - docker
   environment:
-    RELEASE_SERIES_LIST: 1
-    LATEST_STABLE: 1
+    RELEASE_SERIES_LIST: 1.12
+    LATEST_STABLE: 1.12
     IMAGE_NAME: nginx
     CHART_NAME: nginx
     CHART_REPO: https://github.com/bitnami/charts
