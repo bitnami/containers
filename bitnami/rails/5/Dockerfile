@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r15-buildpack
+FROM bitnami/minideb-extras:jessie-r19-buildpack
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -11,7 +11,7 @@ RUN bitnami-pkg install mysql-client-10.1.23-1 --checksum 0be92fcc4f7fec93edfa7f
 ENV PATH=/opt/bitnami/ruby/bin:/opt/bitnami/mysql/bin:$PATH
 
 # Ruby on Rails template
-RUN gem install rails -v 5.1.1 --no-document
+RUN gem install rails -v 5.1.2 --no-document
 
 # Bundle the gems required for a new application
 RUN rails new /tmp/temp_app --database mysql --quiet && rm -r /tmp/temp_app
@@ -19,7 +19,7 @@ RUN gem install therubyracer
 
 ENV RAILS_ENV=development
 ENV BITNAMI_APP_NAME=rails
-ENV BITNAMI_IMAGE_VERSION=5.1.1-r1
+ENV BITNAMI_IMAGE_VERSION=5.1.2-r0
 
 COPY rootfs/ /
 
