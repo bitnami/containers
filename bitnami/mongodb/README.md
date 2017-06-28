@@ -8,29 +8,24 @@
 
 # TL;DR;
 
-```bash
-docker run --name mongodb bitnami/mongodb:latest
+```console
+$ docker run --name mongodb bitnami/mongodb:latest
 ```
 
 ## Docker Compose
 
-```yaml
-version: '2'
-
-services:
-  mongodb:
-    image: 'bitnami/mongodb:latest'
-    ports:
-      - "27017:27017"
+```console
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mongodb/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
-```bash
+```console
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-mongodb/master/kubernetes.yml
 ```
 
@@ -46,34 +41,32 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-mon
 
 The recommended way to get the Bitnami MongoDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mongodb).
 
-```bash
-docker pull bitnami/mongodb:latest
+```console
+$ docker pull bitnami/mongodb:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/mongodb/tags/) in the Docker Hub Registry.
 
-```bash
-docker pull bitnami/mongodb:[TAG]
+```console
+$ docker pull bitnami/mongodb:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
-docker build -t bitnami/mongodb:latest https://github.com/bitnami/bitnami-docker-mongodb.git
+```console
+$ docker build -t bitnami/mongodb:latest https://github.com/bitnami/bitnami-docker-mongodb.git
 ```
 
 # Persisting your database
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-**Note!**
-If you have already started using your database, follow the steps on
-[backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
+For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-The image exposes a volume at `/bitnami/mongodb` for the MongoDB data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
-
-```bash
-docker run -v /path/to/mongodb-persistence:/bitnami/mongodb bitnami/mongodb:latest
+```console
+$ docker run \
+    -v /path/to/mongodb-persistence:/bitnami \
+    bitnami/mongodb:latest
 ```
 
 or using Docker Compose:
@@ -87,7 +80,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - /path/to/mongodb-persistence:/bitnami/mongodb
+      - /path/to/mongodb-persistence:/bitnami
 ```
 
 # Connecting to other containers
@@ -102,7 +95,7 @@ In this example, we will create a MongoDB client instance that will connect to t
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -110,7 +103,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the MongoDB container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name mongodb-server \
     --network app-tier \
     bitnami/mongodb:latest
@@ -120,7 +113,7 @@ $ docker run -d --name mongodb-server \
 
 Finally we create a new container instance to launch the MongoDB client and connect to the server created in the previous step:
 
-```bash
+```console
 $ docker run -it --rm \
     --network app-tier \
     bitnami/mongodb:latest mongo --host mongodb-server
@@ -155,7 +148,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -163,10 +156,10 @@ $ docker-compose up -d
 
 ## Setting the root password on first run
 
-Passing the `MONGODB_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the root user to the value of `MONGODB_ROOT_PASSWORD` and enabled authentication on the MongoDB server.
+Passing the `MONGODB_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the `root` user to the value of `MONGODB_ROOT_PASSWORD` and enabled authentication on the MongoDB server.
 
-```bash
-docker run --name mongodb \
+```console
+$ docker run --name mongodb \
   -e MONGODB_ROOT_PASSWORD=password123 bitnami/mongodb:latest
 ```
 
@@ -190,8 +183,8 @@ The `root` user is configured to have full administrative access to the MongoDB 
 
 You can create a user with restricted access to a database while starting the container for the first time. To do this, provide the `MONGODB_USERNAME`, `MONGO_PASSWORD` and `MONGODB_DATABASE` environment variables.
 
-```bash
-docker run --name mongodb \
+```console
+$ docker run --name mongodb \
   -e MONGODB_USERNAME=my_user -e MONGODB_PASSWORD=password123 \
   -e MONGODB_DATABASE=my_database bitnami/mongodb:latest
 ```
@@ -237,8 +230,8 @@ In a replication cluster you can have one primary node, zero or more secondary n
 
 The first step is to start the MongoDB primary.
 
-```bash
-docker run --name mongodb-primary \
+```console
+$ docker run --name mongodb-primary \
   -e MONGODB_REPLICA_SET_MODE=primary \
    bitnami/mongodb:latest
 ```
@@ -249,8 +242,8 @@ In the above command the container is configured as the `primary` using the `MON
 
 Next we start a MongoDB secondary container.
 
-```bash
-docker run --name mongodb-secondary \
+```console
+$ docker run --name mongodb-secondary \
   --link mongodb-primary:primary \
   -e MONGODB_REPLICA_SET_MODE=secondary \
   -e MONGODB_PRIMARY_HOST=primary \
@@ -264,8 +257,8 @@ In the above command the container is configured as a `secondary` using the `MON
 
 Finally we start a MongoDB arbiter container.
 
-```bash
-docker run --name mongodb-arbiter \
+```console
+$ docker run --name mongodb-arbiter \
   --link mongodb-primary:primary \
   -e MONGODB_REPLICA_SET_MODE=arbiter \
   -e MONGODB_PRIMARY_HOST=primary \
@@ -277,7 +270,7 @@ In the above command the container is configured as a `arbiter` using the `MONGO
 
 You now have a three node MongoDB replication cluster up and running which can be scaled by adding/removing secondarys.
 
-With Docker Compose the primary/secondary/arbiter replication can be setup using:
+With Docker Compose the replicaset can be setup using:
 
 ```yaml
 version: '2'
@@ -288,7 +281,7 @@ services:
     environment:
       - MONGODB_REPLICA_SET_MODE=primary
     volumes:
-      - 'mongodb_master_data:/bitnami/mongodb'
+      - 'mongodb_master_data:/bitnami'
 
   mongodb-secondary:
     image: 'bitnami/mongodb:latest'
@@ -313,7 +306,7 @@ volumes:
     driver: local
 ```
 
-Or in case you want to set up the replica set with authentication you can use the following file:
+Or in case you want to set up the replicaset with authentication you can use the following file:
 
 ```yaml
 version: '2'
@@ -326,7 +319,7 @@ services:
       - MONGODB_ROOT_PASSWORD=password123
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
     volumes:
-      - 'mongodb_master_data:/bitnami/mongodb'
+      - 'mongodb_master_data:/bitnami'
 
   mongodb-secondary:
     image: 'bitnami/mongodb:latest'
@@ -355,11 +348,10 @@ volumes:
     driver: local
 ```
 
-
 Scale the number of secondary nodes using:
 
-```bash
-docker-compose scale mongodb-primary=1 mongodb-secondary=3 mongodb-arbiter=1
+```console
+$ docker-compose scale mongodb-primary=1 mongodb-secondary=3 mongodb-arbiter=1
 ```
 
 The above command scales up the number of secondary nodes to `3`. You can scale down in the same way.
@@ -368,14 +360,14 @@ The above command scales up the number of secondary nodes to `3`. You can scale 
 
 ## Configuration file
 
-The image looks for configuration in the `conf/` directory of `/bitnami/mongodb`. As as mentioned in [Persisting your database](#persisting-your-data) you can mount a volume at this location and copy your own configurations in the `conf/` directory. The default configuration will be copied to the `conf/` directory if it's empty.
+The image looks for configurations in `/bitnami/mongodb/conf/`. As mentioned in [Persisting your database](#persisting-your-database) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/mongodb-persistence/mongodb/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
 ### Step 1: Run the MongoDB image
 
 Run the MongoDB image, mounting a directory from your host.
 
-```bash
-docker run --name mongodb -v /path/to/mongodb-persistence:/bitnami/mongodb bitnami/mongodb:latest
+```console
+$ docker run --name mongodb -v /path/to/mongodb-persistence:/bitnami bitnami/mongodb:latest
 ```
 
 or using Docker Compose:
@@ -389,111 +381,50 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - /path/to/mongodb-persistence:/bitnami/mongodb
+      - /path/to/mongodb-persistence:/bitnami
 ```
 
 ### Step 2: Edit the configuration
 
 Edit the configuration on your host using your favorite editor.
 
-```bash
-vi /path/to/mongodb-persistence/conf/mongodb.conf
+```console
+$ vi /path/to/mongodb-persistence/mongodb/conf/mongodb.conf
 ```
 
 ### Step 3: Restart MongoDB
 
 After changing the configuration, restart your MongoDB container for changes to take effect.
 
-```bash
-docker restart mongodb
+```console
+$ docker restart mongodb
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose restart mongodb
+```console
+$ docker-compose restart mongodb
 ```
 
-**Further Reading:**
-
-  - [Configuration File Options](http://docs.mongodb.org/v2.4/reference/configuration-options/)
+Refer to the [configuration file options](http://docs.mongodb.org/v2.4/reference/configuration-options/) manual for the complete list of MongoDB configuration options.
 
 # Logging
 
 The Bitnami MongoDB Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
-docker logs mongodb
+```console
+$ docker logs mongodb
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose logs mongodb
+```console
+$ docker-compose logs mongodb
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 # Maintenance
-
-## Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-### Step 1: Stop the currently running container
-
-```bash
-docker stop mongodb
-```
-
-or using Docker Compose:
-
-```bash
-docker-compose stop mongodb
-```
-
-### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```bash
-docker run --rm \
-  -v /path/to/mongodb-backups:/backups \
-  --volumes-from mongodb busybox \
-    cp -a /bitnami/mongodb:latest /backups/latest
-```
-
-or using Docker Compose:
-
-```bash
-docker run --rm \
-  -v /path/to/mongodb-backups:/backups \
-  --volumes-from `docker-compose ps -q mongodb` busybox \
-    cp -a /bitnami/mongodb:latest /backups/latest
-```
-
-## Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the container.
-
-```bash
-docker run \
-  -v /path/to/mongodb-backups/latest:/bitnami/mongodb bitnami/mongodb:latest
-```
-
-or using Docker Compose:
-
-```yaml
-version: '2'
-
-services:
-  mongodb:
-    image: 'bitnami/mongodb:latest'
-    ports:
-      - "27017:27017"
-    volumes:
-      - /path/to/mongodb-backups/latest:/bitnami/mongodb
-```
 
 ## Upgrade this image
 
@@ -501,42 +432,56 @@ Bitnami provides up-to-date versions of MongoDB, including security patches, soo
 
 ### Step 1: Get the updated image
 
-```bash
-docker pull bitnami/mongodb:latest
+```console
+$ docker pull bitnami/mongodb:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/mongodb:latest`.
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's data, configuration and logs.
+Stop the currently running container using the command
 
-Follow the steps on [creating a backup](#backing-up-your-container).
-
-### Step 3: Remove the currently running container
-
-```bash
-docker rm -v mongodb
+```console
+$ docker stop mongodb
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose rm -v mongodb
+```console
+$ docker-compose stop mongodb
+```
+
+Next, take a snapshot of the persistent volume `/path/to/mongodb-persistence` using:
+
+```console
+$ rsync -a /path/to/mongodb-persistence /path/to/mongodb-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+### Step 3: Remove the currently running container
+
+```console
+$ docker rm -v mongodb
+```
+
+or using Docker Compose:
+
+```console
+$ docker-compose rm -v mongodb
 ```
 
 ### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image.
 
-```bash
-docker run --name mongodb bitnami/mongodb:latest
+```console
+$ docker run --name mongodb bitnami/mongodb:latest
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose start mongodb
+```console
+$ docker-compose start mongodb
 ```
 
 # Notable Changes
@@ -572,7 +517,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2015-2016 Bitnami
+Copyright (c) 2015-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
