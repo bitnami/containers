@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r17
+FROM bitnami/minideb-extras:jessie-r19
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack postgresql-9.6.3-2 --checksum a60abef33117c892881011ece1b
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="9.6.3-r3" \
+    BITNAMI_IMAGE_VERSION="9.6.3-r4" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
     POSTGRESQL_MASTER_HOST="" \
@@ -24,7 +24,6 @@ ENV BITNAMI_APP_NAME="postgresql" \
 
 
 
-VOLUME ["/bitnami/postgresql"]
 
 EXPOSE 5432
 
