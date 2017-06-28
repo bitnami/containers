@@ -4,13 +4,14 @@ services:
   redis:
     image: 'bitnami/redis:3'
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
     labels:
       kompose.service.type: nodeport
     ports:
       - '6379:6379'
     volumes:
-      - 'redis_data:/bitnami/redis'
+      - 'redis_data:/bitnami'
 
 volumes:
   redis_data:
