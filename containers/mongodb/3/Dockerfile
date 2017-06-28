@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r17
+FROM bitnami/minideb-extras:jessie-r19
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack mongodb-3.4.5-0 --checksum 6a9833ca2e46f89f7c05ebfae64025
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.4.5-r0" \
+    BITNAMI_IMAGE_VERSION="3.4.5-r1" \
     MONGODB_DATABASE="" \
     MONGODB_PASSWORD="" \
     MONGODB_PRIMARY_HOST="" \
@@ -26,7 +26,6 @@ ENV BITNAMI_APP_NAME="mongodb" \
 
 
 
-VOLUME ["/bitnami/mongodb"]
 
 EXPOSE 27017
 
