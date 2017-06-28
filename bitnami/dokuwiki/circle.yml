@@ -2,8 +2,8 @@ machine:
   services:
   - docker
   environment:
-    RELEASE_SERIES_LIST: 2017
-    LATEST_STABLE: 2017
+    RELEASE_SERIES_LIST: 0
+    LATEST_STABLE: 0
     IMAGE_NAME: dokuwiki
     CHART_NAME: dokuwiki
     CHART_REPO: https://github.com/kubernetes/charts
