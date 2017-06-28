@@ -10,31 +10,24 @@
 
 # TL;DR;
 
-```bash
-docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
+```console
+$ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
 ```
 
 ## Docker Compose
 
-```yaml
-version: '2'
-
-services:
-  redis:
-    image: 'bitnami/redis:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '6379:6379'
+```console
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-redis/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
-```bash
+```console
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-redis/master/kubernetes.yml
 ```
 
@@ -50,34 +43,34 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-red
 
 The recommended way to get the Bitnami Redis Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/redis).
 
-```bash
-docker pull bitnami/redis:latest
+```console
+$ docker pull bitnami/redis:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/redis/tags/) in the Docker Hub Registry.
 
-```bash
-docker pull bitnami/redis:[TAG]
+```console
+$ docker pull bitnami/redis:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
-docker build -t bitnami/redis:latest https://github.com/bitnami/bitnami-docker-redis.git
+```console
+$ docker build -t bitnami/redis:latest https://github.com/bitnami/bitnami-docker-redis.git
 ```
 
 # Persisting your database
 
-If you remove the container all your data and configurations will be lost, and the next time you run the image the data and configurations will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-**Note!**
-If you have already started using your database, follow the steps on [backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
+For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-The image exposes a volume at `/bitnami/redis` for the Redis data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
-docker run -v /path/to/redis-persistence:/bitnami/redis \
-      -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
+```console
+$ docker run \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -v /path/to/redis-persistence:/bitnami \
+    bitnami/redis:latest
 ```
 
 or using Docker Compose:
@@ -93,7 +86,7 @@ services:
     ports:
       - '6379:6379'
     volumes:
-      - /path/to/redis-persistence:/bitnami/redis
+      - /path/to/redis-persistence:/bitnami
 ```
 
 # Connecting to other containers
@@ -108,7 +101,7 @@ In this example, we will create a Redis client instance that will connect to the
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -116,7 +109,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the Redis container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name redis-server \
     -e ALLOW_EMPTY_PASSWORD=yes \
     --network app-tier \
@@ -127,7 +120,7 @@ $ docker run -d --name redis-server \
 
 Finally we create a new container instance to launch the Redis client and connect to the server created in the previous step:
 
-```bash
+```console
 $ docker run -it --rm \
     --network app-tier \
     bitnami/redis:latest redis-cli -h redis-server
@@ -164,7 +157,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -174,8 +167,8 @@ $ docker-compose up -d
 
 Passing the `REDIS_PASSWORD` environment variable when running the image for the first time will set the Redis server password to the value of `REDIS_PASSWORD`.
 
-```bash
-docker run --name redis -e REDIS_PASSWORD=password123 bitnami/redis:latest
+```console
+$ docker run --name redis -e REDIS_PASSWORD=password123 bitnami/redis:latest
 ```
 
 or using Docker Compose:
@@ -198,8 +191,8 @@ services:
 
 By default the Redis image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD=yes` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `REDIS_PASSWORD` for any other scenario.
 
-```bash
-docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
+```console
+$ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
 ```
 
 or using Docker Compose:
@@ -231,8 +224,8 @@ In a replication cluster you can have one master and zero or more slaves. When r
 
 The first step is to start the Redis master.
 
-```bash
-docker run --name redis-master \
+```console
+$ docker run --name redis-master \
   -e REDIS_REPLICATION_MODE=master \
   -e REDIS_PASSWORD=masterpassword123 \
   bitnami/redis:latest
@@ -244,8 +237,8 @@ In the above command the container is configured as the `master` using the `REDI
 
 Next we start a Redis slave container.
 
-```bash
-docker run --name redis-slave \
+```console
+$ docker run --name redis-slave \
   --link redis-master:master \
   -e REDIS_REPLICATION_MODE=slave \
   -e REDIS_MASTER_HOST=master \
@@ -261,8 +254,8 @@ You now have a two node Redis master/slave replication cluster up and running wh
 
 If the Redis master goes down you can reconfigure a slave to become a master using:
 
-```bash
-docker exec redis-slave redis-cli -a password123 SLAVEOF NO ONE
+```console
+$ docker exec redis-slave redis-cli -a password123 SLAVEOF NO ONE
 ```
 
 > **Note**: The configuration of the other slaves in the cluster needs to be updated so that they are aware of the new master. In our example, this would involve restarting the other slaves with `--link redis-slave:master`.
@@ -281,7 +274,7 @@ services:
       - REDIS_REPLICATION_MODE=master
       - REDIS_PASSWORD=my_master_password
     volumes:
-      - '/path/to/redis-persistence:/bitnami/redis'
+      - '/path/to/redis-persistence:/bitnami'
 
   redis-slave:
     image: 'bitnami/redis:latest'
@@ -299,8 +292,8 @@ services:
 
 Scale the number of slaves using:
 
-```bash
-docker-compose scale redis-primary=1 redis-secondary=3
+```console
+$ docker-compose scale redis-primary=1 redis-secondary=3
 ```
 
 The above command scales up the number of slaves to `3`. You can scale down in the same way.
@@ -309,14 +302,17 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 ## Configuration file
 
-The image looks for configuration in the `conf/` directory of `/bitnami/redis`. As as mentioned in [Persisting your database](#persisting-your-data) you can mount a volume at this location and copy your own configurations in the `conf/` directory. The default configuration will be copied to the `conf/` directory if it's empty.
+The image looks for configurations in `/bitnami/redis/conf/`. As mentioned in [Persisting your database](#persisting-your-database) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/redis-persistence/redis/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
 ### Step 1: Run the Redis image
 
 Run the Redis image, mounting a directory from your host.
 
-```bash
-docker run --name redis -v /path/to/redis-persistence:/bitnami/redis bitnami/redis:latest
+```console
+$ docker run --name redis \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -v /path/to/redis-persistence:/bitnami \
+    bitnami/redis:latest
 ```
 
 or using Docker Compose:
@@ -332,108 +328,50 @@ services:
     ports:
       - '6379:6379'
     volumes:
-      - /path/to/redis-persistence:/bitnami/redis
+      - /path/to/redis-persistence:/bitnami
 ```
 
 ### Step 2: Edit the configuration
 
 Edit the configuration on your host using your favorite editor.
 
-```bash
-vi /path/to/redis-persistence/conf/redis.conf
+```console
+$ vi /path/to/redis-persistence/redis/conf/redis.conf
 ```
 
 ### Step 3: Restart Redis
 
 After changing the configuration, restart your Redis container for changes to take effect.
 
-```bash
-docker restart redis
+```console
+$ docker restart redis
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose restart redis
+```console
+$ docker-compose restart redis
 ```
 
-**Further Reading:**
-
-  - [Redis Configuration Documentation](http://redis.io/topics/config)
+Refer to the [Redis configuration](http://redis.io/topics/config) manual for the complete list of configuration options.
 
 # Logging
 
 The Bitnami Redis Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
-docker logs redis
+```console
+$ docker logs redis
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose logs redis
+```console
+$ docker-compose logs redis
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 # Maintenance
-
-## Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-### Step 1: Stop the currently running container
-
-```bash
-docker stop redis
-```
-
-or using Docker Compose:
-
-```bash
-docker-compose stop redis
-```
-
-### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```bash
-docker run --rm -v /path/to/redis-backups:/backups --volumes-from redis busybox \
-  cp -a /bitnami/redis:latest /backups/latest
-```
-
-or using Docker Compose:
-
-```bash
-docker run --rm -v /path/to/redis-backups:/backups --volumes-from `docker-compose ps -q redis` busybox \
-  cp -a /bitnami/redis:latest /backups/latest
-```
-
-## Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the container.
-
-```bash
-docker run -v /path/to/redis-backups/latest:/bitnami/redis bitnami/redis:latest
-```
-
-or using Docker Compose:
-
-```yaml
-version: '2'
-
-services:
-  redis:
-    image: 'bitnami/redis:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '6379:6379'
-    volumes:
-      - /path/to/redis-backups/latest:/bitnami/redis
-```
 
 ## Upgrade this image
 
@@ -441,8 +379,8 @@ Bitnami provides up-to-date versions of Redis, including security patches, soon 
 
 ### Step 1: Get the updated image
 
-```bash
-docker pull bitnami/redis:latest
+```console
+$ docker pull bitnami/redis:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -450,34 +388,48 @@ or if you're using Docker Compose, update the value of the image property to
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's data, configuration and logs.
+Stop the currently running container using the command
 
-Follow the steps on [creating a backup](#backing-up-your-container).
-
-### Step 3: Remove the currently running container
-
-```bash
-docker rm -v redis
+```console
+$ docker stop redis
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose rm -v redis
+```console
+$ docker-compose stop redis
+```
+
+Next, take a snapshot of the persistent volume `/path/to/redis-persistence` using:
+
+```console
+$ rsync -a /path/to/redis-persistence /path/to/redis-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+### Step 3: Remove the currently running container
+
+```console
+$ docker rm -v redis
+```
+
+or using Docker Compose:
+
+```console
+$ docker-compose rm -v redis
 ```
 
 ### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image.
 
-```bash
-docker run --name redis bitnami/redis:latest
+```console
+$ docker run --name redis bitnami/redis:latest
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose start redis
+```console
+$ docker-compose start redis
 ```
 
 # Notable Changes
@@ -508,7 +460,7 @@ Most real time communication happens in the `#containers` channel at [bitnami-os
 Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
-Copyright (c) 2015-2016 Bitnami
+Copyright (c) 2015-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
