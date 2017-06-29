@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r17
+FROM bitnami/minideb-extras:jessie-r19
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 
@@ -6,12 +6,12 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 # Install required system packages and dependencies
 RUN install_packages libc6 libexpat1 libffi6 libfontconfig1 libfreetype6 libgcc1 libglib2.0-0 liblzma5 libpcre3 libpng12-0 libselinux1 libstdc++6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 zlib1g
 RUN bitnami-pkg install java-1.8.0_121-0 --checksum 2743f753fd1ea88bf90352d95694f89ab0a0fb855cf0d1c7b2a6d92835f9ad27
-RUN bitnami-pkg unpack kafka-0.10.2.1-0 --checksum 532b8b5d7e3e450cd943d556e08732c9238aeac00351bed1e3e8489bfde65d78
+RUN bitnami-pkg unpack kafka-0.10.2-1-0 --checksum c7588059a280534fa70d8b8831ad282b3eb5ce68e32906de72e36f9934162c52
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="0.10.2.1-r1" \
+    BITNAMI_IMAGE_VERSION="0.10.2-1-r0" \
     KAFKA_ADVERTISED_HOST_NAME="" \
     KAFKA_ADVERTISED_LISTENERS="" \
     KAFKA_ADVERTISED_PORT="9092" \
