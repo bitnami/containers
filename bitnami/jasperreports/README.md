@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-jasperreports/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-jasperreports/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-jasperreports/master/kubernetes.yml)
 
 # What is JasperReports?
@@ -13,8 +13,8 @@ http://community.jaspersoft.com/project/jasperreports-server
 ## Docker Compose
 
 ```bash
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-jasperreports/master/docker-compose.yml
-$ docker-compose up
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-jasperreports/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
@@ -54,7 +54,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - mariadb_data:/bitnami/mariadb
+      - mariadb_data:/bitnami
   jasperreports:
     image: bitnami/jasperreports:latest
     depends_on:
@@ -63,7 +63,7 @@ services:
       - '80:8080'
       - '443:8443'
     volumes:
-      - jasperreports_data:/bitnami/jasperreports
+      - jasperreports_data:/bitnami
 
 volumes:
   mariadb_data:
@@ -71,8 +71,8 @@ volumes:
   jasperreports_data:
     driver: local
 ```
-Then you can access your application at http://your-ip/. Enter bitnami default username and password:
-`user/ bitnami`
+
+Then you can access your application at http://your-ip/. Enter bitnami default username and password `user/ bitnami`
 
 ## Run the application manually
 
@@ -101,13 +101,13 @@ This IP address allowing you to access to your application.
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence of the JasperReports deployment, the above examples define docker volumes namely `tomcat_data` and `jasperreports_data`. The JasperReports application state will persist as long as these volumes are not removed.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
+
+The above examples define docker volumes namely `mariadb_data` and `jasperreports_data`. The JasperReports application state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
-
-> **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
 ### Mount host directories as data volumes with Docker Compose
 
@@ -117,7 +117,7 @@ version: '2'
 services:
   mariadb: bitnami/mariadb:latest
   volumes:
-    - /path/to/mariadb-persistence:/bitnami/mariadb
+    - /path/to/mariadb-persistence:/bitnami
 jasperreports:
   image: bitnami/jasperreports:latest
   depends_on:
@@ -125,7 +125,7 @@ jasperreports:
   ports:
     - 80:8080
   volumes:
-    - /path/to/jasperreports-persistence:/bitnami/jasperreports
+    - /path/to/jasperreports-persistence:/bitnami
 ```
 
 ### Mount persistent folders manually
@@ -137,12 +137,13 @@ In this case you need to specify the directories to mount on the run command. Th
   ```bash
   $ docker network create jasperreports-tier
   ```
+
 2. Create a MariaDB container with host volume:
 
   ```bash
   $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
     --net jasperreports-tier \
-    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+    --volume /path/to/mariadb-persistence:/bitnami \
    bitnami/mariadb:latest
   ```
 
@@ -151,7 +152,7 @@ In this case you need to specify the directories to mount on the run command. Th
   ```bash
   $  docker run -d --name jasperreports -p 80:8080 \
     --net jasperreports-tier \
-    --volume /path/to/jasperreports-persistence:/bitnami/jasperreports \
+    --volume /path/to/jasperreports-persistence:/bitnami \
     bitnami/jasperreports:latest
   ```
 
@@ -170,7 +171,15 @@ Bitnami provides up-to-date versions of JasperReports, including security patche
   * For docker-compose: `$ docker-compose stop jasperreports`
   * For manual execution: `$ docker stop jasperreports`
 
-3. (For non-compose execution only) Create a [backup](#backing-up-your-application) if you have not mounted the jasperreports folder in the host.
+3. Take a snapshot of the application state
+
+```bash
+$ rsync -a /path/to/jasperreports-persistence /path/to/jasperreports-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+Additionally, [snapshot the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
+
+You can use these snapshots to restore the application state should the upgrade fail.
 
 4. Remove the currently running container
 
@@ -183,26 +192,27 @@ Bitnami provides up-to-date versions of JasperReports, including security patche
   * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name jasperreports bitnami/jasperreports:latest`
 
 # Configuration
+
 ## Environment variables
- When you start the jasperreports image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+
+When you start the jasperreports image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
-```yaml
-jasperreports:
-  image: bitnami/jasperreports:latest
-  ports:
-    - 80:8080
-  environment:
-    - JASPERREPORTS_PASSWORD=my_password
-  volumes_from:
-    - jasperreports_data
-```
+
+  ```yaml
+  jasperreports:
+    image: bitnami/jasperreports:latest
+    ports:
+      - 80:8080
+    environment:
+      - JASPERREPORTS_PASSWORD=my_password
+  ```
 
  * For manual execution add a `-e` option with each variable and value:
 
-```bash
-  $ docker run -d -e JASPERREPORTS_PASSWORD=my_password -p 80:8080 --name jasperreports -v /your/local/path/bitnami/jasperreports:/bitnami/jasperreports --network=jasperreports-tier bitnami/jasperreports
-```
+  ```bash
+  $ docker run -d -e JASPERREPORTS_PASSWORD=my_password -p 80:8080 --name jasperreports -v /your/local/path/bitnami/jasperreports:/bitnami --network=jasperreports-tier bitnami/jasperreports
+  ```
 
 Available variables:
 
@@ -235,51 +245,33 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_EMAIL=your_email@gmail.com
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
-    volumes_from:
-      - jasperreports_data
 ```
 
  * For manual execution:
 
 ```bash
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:8080 --name jasperreports -v /your/local/path/bitnami/jasperreports:/bitnami/jasperreports --net=jasperreports-tier bitnami/jasperreports
+ $ docker run -d -p 80:8080 --name jasperreports --net=jasperreports-tier \
+    -e SMTP_HOST=smtp.gmail.com \
+    -e SMTP_PORT=587 \
+    -e SMTP_USER=your_email@gmail.com \
+    -e SMTP_PASSWORD=your_password \
+    -v /your/local/path/bitnami/jasperreports:/bitnami \
+    bitnami/jasperreports
 ```
-
-# Backing up your application
-
-To backup your application data follow these steps:
-
-1. Stop the running container:
-  * For docker-compose: `$ docker-compose stop jasperreports`
-  * For manual execution: `$ docker stop jasperreports`
-
-2. Copy the JasperReports data folder in the host:
-
-  ```bash
-  $ docker cp /your/local/path/bitnami:/bitnami/jasperreports
-  ```
-# Restoring a backup
-
-To restore your application using backed up data simply mount the folder with JasperReports data in the container. See [persisting your application](#persisting-your-application) section for more info.
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an
-[issue](https://github.com/bitnami/bitnami-docker-jasperreports/issues), or submit a
-[pull request](https://github.com/bitnami/bitnami-docker-jasperreports/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-jasperreports/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-jasperreports/pulls) with your contribution.
 
 # Issues
 
-If you encountered a problem running this container, you can file an
-[issue](https://github.com/bitnami/bitnami-docker-jasperreports/issues). For us to provide better support,
-be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-jasperreports/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
 - Output of `docker info`
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
-- The command you used to run the container, and any relevant output you saw (masking any sensitive
-information)
+- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # Community
 
@@ -289,7 +281,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright 2016 Bitnami
+Copyright 2016-2017 Bitnami
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
