@@ -35,6 +35,7 @@ wait_for_db() {
 
 setup_db() {
   log "Configuring the database"
+  sed -i 's/host: localhost/host: mariadb/g' /app/config/database.yml
   bundle exec rails db:create
 }
 
