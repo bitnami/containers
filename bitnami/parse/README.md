@@ -1,6 +1,7 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-parse/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-parse/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-parse/master/kubernetes.yml)
+
 # What is Parse?
 
 > Parse Server is an open source version of the Parse backend that can be deployed to any infrastructure that can run Node.js.
@@ -18,15 +19,15 @@ We also provide a Docker Image for Parse Dashboard. Parse Dashboard is a standal
 ## Docker Compose
 
 ```bash
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-parse/master/docker-compose.yml
-$ docker-compose up
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-parse/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-parse/master/kubernetes.yml
@@ -61,7 +62,7 @@ services:
   mongodb:
     image: 'bitnami/mongodb:latest'
     volumes:
-      - 'mongodb_data:/bitnami/mongodb'
+      - 'mongodb_data:/bitnami'
   parse:
     image: 'bitnami/parse:latest'
     environment:
@@ -69,7 +70,7 @@ services:
     ports:
       - '1337:1337'
     volumes:
-      - 'parse_data:/bitnami/parse'
+      - 'parse_data:/bitnami'
     depends_on:
       - mongodb
 volumes:
@@ -85,13 +86,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
+  ```bash
   $ docker network create parse_network
   ```
 
 2. Start a MongoDB database in the network generated:
 
-  ```
+  ```bash
   $ docker run -d --name mongodb --net=parse_network bitnami/mongodb
   ```
 
@@ -99,7 +100,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Run the Parse container:
 
-  ```
+  ```bash
   $ docker run -d -p 1337:1337 --name parse --net=parse_network bitnami/parse
   ```
 
@@ -107,24 +108,25 @@ Then you can access your application at http://your-ip/parse
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence of the Parse deployment, the above examples define docker volumes namely `mongodb_data` and `parse_data`. The Parse application state will persist as long as these volumes are not removed.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MongoDB data](https://github.com/bitnami/bitnami-docker-mongodb#persisting-your-database).
+
+The above examples define docker volumes namely `mongodb_data` and `parse_data`. The Parse application state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
-
-> **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
 ### Mount host directories as data volumes with Docker Compose
 
 This requires a minor change to the `docker-compose.yml` template previously shown:
+
 ```yaml
 version: '2'
 
   mongodb:
     image: 'bitnami/mongodb:latest'
     volumes:
-      - '/path/to/your/local/mongodb_data:/bitnami/mongodb'
+      - '/path/to/your/local/mongodb_data:/bitnami'
   parse:
     image: bitnami/parse:latest
     depends_on:
@@ -132,7 +134,7 @@ version: '2'
     ports:
       - 1337:1337
     volumes:
-      - '/path/to/parse-persistence:/bitnami/parse'
+      - '/path/to/parse-persistence:/bitnami'
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -141,16 +143,16 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```
+  ```bash
   $ docker network create parse-tier
   ```
 
 2. Create a MongoDB container with host volume:
 
-  ```
+  ```bash
   $ docker run -d --name mongodb \
     --net parse-tier \
-    --volume /path/to/mongodb-persistence:/bitnami/mongodb \
+    --volume /path/to/mongodb-persistence:/bitnami \
     bitnami/mongodb:latest
   ```
 
@@ -158,10 +160,10 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Run the Parse container:
 
-  ```
+  ```bash
   $ docker run -d --name parse -p 1337:1337 \
     --net parse-tier \
-    --volume /path/to/parse-persistence:/bitnami/parse \
+    --volume /path/to/parse-persistence:/bitnami \
      bitnami/parse:latest
   ```
 
@@ -171,7 +173,7 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 
 1. Get the updated images:
 
-  ```
+  ```bash
   $ docker pull bitnami/parse:latest
   ```
 
@@ -180,7 +182,15 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
  * For docker-compose: `$ docker-compose stop parse`
  * For manual execution: `$ docker stop parse`
 
-3. (For non-compose execution only) Create a [backup](#backing-up-your-application) if you have not mounted the parse folder in the host.
+3. Take a snapshot of the application state
+
+```bash
+$ rsync -a /path/to/parse-persistence /path/to/parse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+Additionally, [snapshot the MongoDB data](https://github.com/bitnami/bitnami-docker-mongodb#step-2-stop-and-backup-the-currently-running-container)
+
+You can use these snapshots to restore the application state should the upgrade fail.
 
 4. Remove the currently running container
 
@@ -193,10 +203,13 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name parse bitnami/parse:latest`
 
 # Configuration
+
 ## Environment variables
- When you start the parse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+
+When you start the parse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
+
 ```yaml
 parse:
   image: bitnami/parse:latest
@@ -205,15 +218,15 @@ parse:
   environment:
     - PARSE_HOST=my_host
   volumes:
-    - 'parse_data:/bitnami/parse'
+    - 'parse_data:/bitnami'
   depends_on:
     - mongodb
 ```
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
- $ docker run -d -e PARSE_HOST=my_host -p 1337:1337 --name parse -v /your/local/path/bitnami/parse:/bitnami/parse --network=parse_network bitnami/parse
+```bash
+ $ docker run -d -e PARSE_HOST=my_host -p 1337:1337 --name parse -v /your/local/path/bitnami/parse:/bitnami --network=parse_network bitnami/parse
 ```
 
 Available variables:
@@ -225,43 +238,19 @@ Available variables:
  - `MONGODB_HOST`: Hostname for Mongodb server. Default: **mongodb**
  - `MONGODB_PORT_NUMBER`: Port used by Mongodb server. Default: **27017**
 
-# Backing up your application
-
-To backup your application data follow these steps:
-
-1. Stop the running container:
-
-  * For docker-compose: `$ docker-compose stop parse`
-  * For manual execution: `$ docker stop parse`
-
-2. Copy the Parse data folder in the host:
-
-  ```
-  $ docker cp /your/local/path/bitnami:/bitnami/parse
-  ```
-
-# Restoring a backup
-
-To restore your application using backed up data simply mount the folder with Parse data in the container. See [persisting your application](#persisting-your-application) section for more info.
-
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an
-[issue](https://github.com/bitnami/bitnami-docker-parse/issues), or submit a
-[pull request](https://github.com/bitnami/bitnami-docker-parse/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-parse/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-parse/pulls) with your contribution.
 
 # Issues
 
-If you encountered a problem running this container, you can file an
-[issue](https://github.com/bitnami/bitnami-docker-parse/issues). For us to provide better support,
-be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-parse/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
 - Output of `docker info`
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
-- The command you used to run the container, and any relevant output you saw (masking any sensitive
-information)
+- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # Community
 
@@ -271,7 +260,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright 2016 Bitnami
+Copyright 2016-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

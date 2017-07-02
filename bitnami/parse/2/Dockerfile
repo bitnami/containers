@@ -7,12 +7,12 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libmysqlclient18 libncurses5 libpcap0.8 libreadline6 libsqlite3-0 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
 RUN bitnami-pkg install node-6.11.0-0 --checksum 203d22e3357eb5e8573c8d95691f01e1a2a3badcfc2baee0bf83b3ad91dfeb86
 RUN bitnami-pkg install mongodb-client-3.4.4-0 --checksum fc5f6aa0882a5bef86a45493efd04dbaf3947777bc955f7f9a0b035b77d18c94
-RUN bitnami-pkg unpack parse-2.5.0-0 --checksum e00453e430699f9232e3a3654e07128a5f79859ea2994cf3993ec72fd85eeff6
+RUN bitnami-pkg unpack parse-2.5.1-0 --checksum b177e7183b7ce211b01e51b93d3b64d2d5847bb666fbcd2f9952410a2e007268
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="2.5.0-r0" \
+    BITNAMI_IMAGE_VERSION="2.5.1-r0" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
@@ -26,7 +26,6 @@ ENV BITNAMI_APP_NAME="parse" \
 
 
 
-VOLUME ["/bitnami/parse"]
 
 EXPOSE 1337
 
