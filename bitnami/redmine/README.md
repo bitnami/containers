@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-redmine/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-redmine/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-redmine/master/kubernetes.yml)
 
 # What is Redmine?
@@ -13,15 +13,15 @@ https://redmine.org/
 ## Docker Compose
 
 ```bash
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-redmine/master/docker-compose.yml
-$ docker-compose up
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-redmine/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
-> **WARNING**: This is a beta configuration, currently unsupported.
+> **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-redmine/master/kubernetes.yml
@@ -58,13 +58,13 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'mariadb_data:/bitnami/mariadb'
+      - 'mariadb_data:/bitnami'
   redmine:
     image: 'bitnami/redmine:latest'
     ports:
       - '80:3000'
     volumes:
-      - 'redmine_data:/bitnami/redmine'
+      - 'redmine_data:/bitnami'
     depends_on:
       - mariadb
 volumes:
@@ -80,22 +80,25 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
+  ```bash
   $ docker network create redmine_network
   ```
 
 2. Start a MariaDB database in the network generated:
 
-  ```
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net=redmine_network bitnami/mariadb
+  ```bash
+  $ docker run -d --name mariadb --net=redmine_network \
+      -e ALLOW_EMPTY_PASSWORD=yes \
+      bitnami/mariadb
   ```
 
   *Note:* You need to give the container a name in order to Redmine to resolve the host
 
 3. Run the Redmine container:
 
-  ```
-  $ docker run -d -p 80:3000 --name redmine --net=redmine_network bitnami/redmine
+  ```bash
+  $ docker run -d --name redmine --net=redmine_network -p 80:3000 \
+      bitnami/redmine
   ```
 
 Then you can access your application at http://your-ip/
@@ -104,8 +107,7 @@ Then you can access your application at http://your-ip/
 
 The Bitnami Redmine Docker Image supports both MariaDB and PostgreSQL databases. In order to use a PostgreSQL database you can run the following command:
 
-
-  ```
+  ```bash
   $ docker-compose -f docker-compose-postgresql.yml up
   ```
 
@@ -118,7 +120,7 @@ services:
   postgresql:
     image: 'bitnami/postgresql:latest'
     volumes:
-      - 'postgresql_data:/bitnami/postgresql'
+      - 'postgresql_data:/bitnami'
   redmine:
     image: 'bitnami/redmine:latest'
     ports:
@@ -126,7 +128,7 @@ services:
     environment:
       - REDMINE_DB_POSTGRES=postgresql
     volumes:
-      - 'redmine_data:/bitnami/redmine'
+      - 'redmine_data:/bitnami'
     depends_on:
       - postgresql
 volumes:
@@ -138,13 +140,13 @@ volumes:
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence of the Redmine deployment, the above examples define docker volumes namely `mariadb_data` and `redmine_data`. The Redmine application state will persist as long as these volumes are not removed.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
+
+The above examples define docker volumes namely `mariadb_data` and `redmine_data`. The Redmine application state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
-
-> **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
 ### Mount host directories as data volumes with Docker Compose
 
@@ -158,29 +160,29 @@ version: '2'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - '/path/to/mariadb-persistence:/bitnami/mariadb'
+      - '/path/to/mariadb-persistence:/bitnami'
   redmine:
     image: bitnami/redmine:latest
     ports:
       - 80:3000
     volumes:
-      - '/path/to/redmine-persistence:/bitnami/redmine'
+      - '/path/to/redmine-persistence:/bitnami'
 ```
 
 ### Mount host directories as data volumes using the Docker command line
 
 1. Create a network (if it does not exist):
 
-  ```
+  ```bash
   $ docker network create redmine-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
-    --net redmine-tier \
-    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+  ```bash
+  $ docker run -d --name mariadb --net redmine-tier \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
   ```
 
@@ -188,11 +190,10 @@ version: '2'
 
 3. Run the Redmine container:
 
-  ```
-  $ docker run -d --name redmine -p 80:3000 \
-    --net redmine-tier \
-    --volume /path/to/redmine-persistence:/bitnami/redmine \
-  bitnami/redmine:latest
+  ```bash
+  $ docker run -d --name redmine -p 80:3000 --net redmine-tier \
+    --volume /path/to/redmine-persistence:/bitnami \
+    bitnami/redmine:latest
   ```
 
 # Upgrade this application
@@ -201,7 +202,7 @@ Bitnami provides up-to-date versions of MariaDB and Redmine, including security 
 
 1. Get the updated images:
 
-  ```
+  ```bash
   $ docker pull bitnami/redmine:latest
   ```
 
@@ -210,7 +211,15 @@ Bitnami provides up-to-date versions of MariaDB and Redmine, including security 
  * For docker-compose: `$ docker-compose stop redmine`
  * For manual execution: `$ docker stop redmine`
 
-3. (For non-compose execution only) Create a [backup](#backing-up-your-application) if you have not mounted the redmine folder in the host.
+3. Take a snapshot of the application state
+
+```bash
+$ rsync -a /path/to/redmine-persistence /path/to/redmine-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+Additionally, [snapshot the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
+
+You can use these snapshots to restore the application state should the upgrade fail.
 
 4. Remove the currently running container
 
@@ -223,10 +232,13 @@ Bitnami provides up-to-date versions of MariaDB and Redmine, including security 
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name redmine bitnami/redmine:latest`
 
 # Configuration
+
 ## Environment variables
- When you start the redmine image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+
+When you start the redmine image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
+
 ```yaml
 redmine:
   image: bitnami/redmine:latest
@@ -235,15 +247,18 @@ redmine:
   environment:
     - REDMINE_PASSWORD=my_password
   volumes:
-    - 'redmine_data:/bitnami/redmine'
+    - 'redmine_data:/bitnami'
   depends_on:
     - mariadb
 ```
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
- $ docker run -d -e REDMINE_PASSWORD=my_password -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --network=redmine_network bitnami/redmine
+```bash
+ $ docker run -d --name redmine --network=redmine_network -p 80:3000 \
+     -e REDMINE_PASSWORD=my_password \
+     -v /your/local/path/bitnami/redmine:/bitnami \
+     bitnami/redmine
 ```
 
 Available variables:
@@ -284,47 +299,29 @@ This would be an example of SMTP configuration using a GMail account:
 
  * For manual execution:
 
+```bash
+ $ docker run -d -p 80:3000 --name redmine --network=redmine_network \
+    -e SMTP_HOST=smtp.gmail.com \
+    -e SMTP_PORT=587 \
+    -e SMTP_USER=your_email@gmail.com \
+    -e SMTP_PASSWORD=your_password \
+    -v /your/local/path/bitnami/redmine:/bitnami \
+    bitnami/redmine
 ```
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:3000 --name redmine -v /your/local/path/bitnami/redmine:/bitnami/redmine --network=redmine_network bitnami/redmine$ docker rm -v redmine
-```
-
-# Backing up your application
-
-To backup your application data follow these steps:
-
-1. Stop the running container:
-
-  * For docker-compose: `$ docker-compose stop redmine`
-  * For manual execution: `$ docker stop redmine`
-
-2. Copy the Redmine data folder in the host:
-
-  ```
-  $ docker cp /your/local/path/bitnami:/bitnami/redmine
-  ```
-
-# Restoring a backup
-
-To restore your application using backed up data simply mount the folder with Redmine data in the container. See [persisting your application](#persisting-your-application) section for more info.
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an
-[issue](https://github.com/bitnami/bitnami-docker-redmine/issues), or submit a
-[pull request](https://github.com/bitnami/bitnami-docker-redmine/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-redmine/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-redmine/pulls) with your contribution.
 
 # Issues
 
-If you encountered a problem running this container, you can file an
-[issue](https://github.com/bitnami/bitnami-docker-redmine/issues). For us to provide better support,
-be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-redmine/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
 - Output of `docker info`
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
-- The command you used to run the container, and any relevant output you saw (masking any sensitive
-information)
+- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # Community
 
