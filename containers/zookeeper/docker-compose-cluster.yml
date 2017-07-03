@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+  zookeeper1:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+      - '2181'
+      - '2888'
+      - '3888'
+    volumes:
+      - /path/to/zookeeper-persistence:/bitnami/zookeeper
+    environment:
+      - ZOO_SERVER_ID=1
+      - ZOO_SERVERS=server.1=0.0.0.0:2888:3888,server.2=zookeeper2:2888:3888,server.3=zookeeper3:2888:3888
+  zookeeper2:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+      - '2181'
+      - '2888'
+      - '3888'
+    volumes:
+      - /path/to/zookeeper-persistence:/bitnami/zookeeper
+    environment:
+      - ZOO_SERVER_ID=2
+      - ZOO_SERVERS=server.1=zookeeper1:2888:3888,server.2=0.0.0.0:2888:3888,server.3=zookeeper3:2888:3888
+  zookeeper3:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+      - '2181'
+      - '2888'
+      - '3888'
+    volumes:
+      - /path/to/zookeeper-persistence:/bitnami/zookeeper
+    environment:
+      - ZOO_SERVER_ID=3
+      - ZOO_SERVERS=server.1=zookeeper1:2888:3888,server.2=zookeeper2:2888:3888,server.3=0.0.0.0:2888:3888
