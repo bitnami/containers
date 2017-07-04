@@ -2,8 +2,8 @@ machine:
   services:
   - docker
   environment:
-    RELEASE_SERIES_LIST: 2
-    LATEST_STABLE: 2
+    RELEASE_SERIES_LIST: 3
+    LATEST_STABLE: 3
     IMAGE_NAME: opencart
     CHART_NAME: opencart
     CHART_REPO: https://github.com/kubernetes/charts
