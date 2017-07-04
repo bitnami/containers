@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-wildfly/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-wildfly/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-wildfly/master/kubernetes.yml)
 
 # What is Wildfly?
@@ -9,27 +9,21 @@
 # TLDR
 
 ```bash
-docker run --name wildfly bitnami/wildfly:latest
+$ docker run --name wildfly bitnami/wildfly:latest
 ```
 
 ## Docker Compose
 
-```yaml
-version: '2'
-
-services:
-  wildfly:
-    image: 'bitnami/wildfly:latest'
-    ports:
-      - '8080:8080'
-      - '9990:9990'
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-wildfly/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-wildfly/master/kubernetes.yml
@@ -46,7 +40,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-wil
 # Supported tags and respective `Dockerfile` links
 
  - [`11`, `11.0.0-r3`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/11.0.0-r3/11/Dockerfile)
- - [`10`, `10.1.0-r8` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/10.1.0-r8/10/Dockerfile)
+ - [`10`, `10.1.0-r10` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/10.1.0-r10/10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
@@ -55,33 +49,31 @@ Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https
 The recommended way to get the Bitnami Wildfly Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/wildfly).
 
 ```bash
-docker pull bitnami/wildfly:latest
+$ docker pull bitnami/wildfly:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/wildfly/tags/) in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/wildfly:[TAG]
+$ docker pull bitnami/wildfly:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
 ```bash
-docker build -t bitnami/wildfly:latest https://github.com/bitnami/bitnami-docker-wildfly.git
+$ docker build -t bitnami/wildfly:latest https://github.com/bitnami/bitnami-docker-wildfly.git
 ```
 
-# Persisting Wildfly configurations and deployments
+# Persisting your application
 
-If you remove the container all your Wildfly configurations and application deployments will be lost. To avoid this you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-**Note!**
-If you have already started using your Wildfly deployment, follow the steps on
-[backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
-
-The image exposes a volume at `/bitnami/wildfly` for the Wildfly configurations and application deployments. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
+For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
-docker run -v /path/to/wildfly-persistence:/bitnami/wildfly bitnami/wildfly:latest
+$ docker run -p 8080:8080 -p 9990:9990 \
+    -v /path/to/wildfly-persistence:/bitnami \
+    bitnami/wildfly:latest
 ```
 
 or using Docker Compose:
@@ -96,7 +88,7 @@ services:
       - '8080:8080'
       - '9990:9990'
     volumes:
-      - /path/to/wildfly-persistence:/bitnami/wildfly
+      - /path/to/wildfly-persistence:/bitnami
 ```
 
 # Deploying web applications on Wildfly
@@ -106,7 +98,7 @@ The `/bitnami/wildfly/data` directory is configured as the Wildfly webapps deplo
 Additionally a helper symlink `/app` is present that points to the webapps deployment directory which enables us to deploy applications on a running Wildfly instance by simply doing:
 
 ```bash
-docker cp /path/to/app.war wildfly:/app
+$ docker cp /path/to/app.war wildfly:/app
 ```
 
 **Note!**
@@ -117,7 +109,7 @@ You can also deploy web applications on a running Wildfly instance using the Wil
 The image exposes the application server on port `8080` and the management console on port `9990`. To access your web server from your host machine you can ask Docker to map random ports on your host to the ports `8080` and `9990` of the container.
 
 ```bash
-docker run --name wildfly -P bitnami/wildfly:latest
+$ docker run --name wildfly -P bitnami/wildfly:latest
 ```
 
 Run `docker port` to determine the random ports Docker assigned.
@@ -131,7 +123,7 @@ $ docker port wildfly
 You can also manually specify the ports you want forwarded from your host to the container.
 
 ```bash
-docker run -p 8080:8080 -p 9990:9990 bitnami/wildfly:latest
+$ docker run -p 8080:8080 -p 9990:9990 bitnami/wildfly:latest
 ```
 
 Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/) to access the application server and [http://localhost:9990/console](http://localhost:9990/console/) to access the management console.
@@ -167,14 +159,15 @@ Finally we create a new container instance to launch the Wildfly client and conn
 ```bash
 $ docker run -it --rm \
     --network wildfly-tier \
-    bitnami/wildfly:latest jboss-cli.sh --controller=wildfly-server:9990  --connect
+    bitnami/wildfly:latest \
+      jboss-cli.sh --controller=wildfly-server:9990  --connect
 ```
 
 **Note!**
 You can also run the client in the same container as the server using the Docker [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
 
 ```bash
-docker exec -it wildfly-server \
+$ docker exec -it wildfly-server \
   jboss-cli.sh --controller=wildfly-server:9990 --connect
 ```
 
@@ -187,7 +180,7 @@ By default, a management user named `user` is created with the default password 
 Additionally you can specify a user name for the management user using the `WILDFLY_USERNAME` environment variable. When not specified, the `WILDFLY_PASSWORD` configuration is applied on the default user (`user`).
 
 ```bash
-docker run --name wildfly \
+$ docker run --name wildfly \
   -e WILDFLY_USERNAME=my_user \
   -e WILDFLY_PASSWORD=my_password \
   bitnami/wildfly:latest
@@ -211,16 +204,14 @@ services:
 
 ## Configuration files
 
-This image looks for Wildfly configuration files in `/bitnami/wildfly/conf`. You may recall from the [persisting wildfly configurations and deployments](#persisting-wildfly-configurations-and-deployments) section, `/bitnami/wildfly` is the path to the persistence volume.
-
-Create a directory named `conf/` at this location with your own configuration, or the default configuration will be copied on the first run which can be customized later.
+The image looks for configurations in `/bitnami/wildfly/conf/`. As mentioned in [Persisting your application](#persisting-your-application) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/wildfly-persistence/wildfly/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
 ### Step 1: Run the Wildfly image
 
 Run the Wildfly image, mounting a directory from your host.
 
 ```bash
-docker run --name wildfly -v /path/to/wildfly-persistence:/bitnami/wildfly bitnami/wildfly:latest
+$ docker run --name wildfly -v /path/to/wildfly-persistence:/bitnami bitnami/wildfly:latest
 ```
 
 or using Docker Compose:
@@ -235,7 +226,7 @@ services:
       - '8080:8080'
       - '9990:9990'
     volumes:
-      - /path/to/wildfly-persistence:/bitnami/wildfly
+      - /path/to/wildfly-persistence:/bitnami
 ```
 
 ### Step 2: Edit the configuration
@@ -245,7 +236,7 @@ Edit the configuration on your host using your favorite editor.
 eg.
 
 ```bash
-vim /path/to/wildfly-persistence/conf/standalone.xml
+$ vim /path/to/wildfly-persistence/wildfly/conf/standalone.xml
 ```
 
 ### Step 3: Restart Wildfly
@@ -253,97 +244,34 @@ vim /path/to/wildfly-persistence/conf/standalone.xml
 After changing the configuration, restart your Wildfly container for the changes to take effect.
 
 ```bash
-docker restart wildfly
+$ docker restart wildfly
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose restart wildfly
+$ docker-compose restart wildfly
 ```
 
-**Further Reading:**
-
-  - [General configuration concepts](https://docs.jboss.org/author/display/WFLY9/General+configuration+concepts)
+Refer to the [configuration](https://docs.jboss.org/author/display/WFLY9/General+configuration+concepts) manual for the complete list of configuration options.
 
 # Logging
 
 The Bitnami Wildfly Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
-docker logs wildfly
+$ docker logs wildfly
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose logs wildfly
+$ docker-compose logs wildfly
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 # Maintenance
-
-## Backing up your container
-
-To backup your configuration and logs, follow these simple steps:
-
-### Step 1: Stop the currently running container
-
-```bash
-docker stop wildfly
-```
-
-or using Docker Compose:
-
-```bash
-docker-compose stop wildfly
-```
-
-### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```bash
-docker run --rm \
-  -v /path/to/wildfly-backups:/backups \
-  --volumes-from wildfly \
-  busybox cp -a /bitnami/wildfly /backups/latest
-```
-
-or using Docker Compose:
-
-```bash
-docker run --rm \
-  -v /path/to/wildfly-backups:/backups \
-  --volumes-from `docker-compose ps -q wildfly` \
-  busybox cp -a /bitnami/wildfly /backups/latest
-```
-
-## Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the container.
-
-```bash
-docker run \
-  -v /path/to/wildfly-backups/latest:/bitnami/wildfly \
-  bitnami/wildfly:latest
-```
-
-or using Docker Compose:
-
-```yaml
-version: '2'
-
-services:
-  wildfly:
-    image: 'bitnami/wildfly:latest'
-    ports:
-      - '8080:8080'
-      - '9990:9990'
-    volumes:
-      - /path/to/wildfly-backups/latest:/bitnami/wildfly
-```
 
 ## Upgrade this image
 
@@ -352,7 +280,7 @@ Bitnami provides up-to-date versions of Wildfly, including security patches, soo
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/wildfly:latest
+$ docker pull bitnami/wildfly:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -360,34 +288,48 @@ or if you're using Docker Compose, update the value of the image property to
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's configuration and logs.
+Stop the currently running container using the command
 
-Follow the steps on [creating a backup](#backing-up-your-container).
+```bash
+$ docker stop wildfly
+```
+
+or using Docker Compose:
+
+```bash
+$ docker-compose stop wildfly
+```
+
+Next, take a snapshot of the persistent volume `/path/to/wildfly-persistence` using:
+
+```bash
+$ rsync -a /path/to/wildfly-persistence /path/to/wildfly-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
 
 ### Step 3: Remove the currently running container
 
 ```bash
-docker rm -v wildfly
+$ docker rm -v wildfly
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose rm -v wildfly
+$ docker-compose rm -v wildfly
 ```
 
 ### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image.
 
 ```bash
-docker run --name wildfly bitnami/wildfly:latest
+$ docker run --name wildfly bitnami/wildfly:latest
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose start wildfly
+$ docker-compose start wildfly
 ```
 
 # Notable Changes
@@ -423,7 +365,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2015-2016 Bitnami
+Copyright (c) 2015-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
