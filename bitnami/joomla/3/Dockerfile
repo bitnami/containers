@@ -16,7 +16,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.7.3-r0" \
+    BITNAMI_IMAGE_VERSION="3.7.3-r1" \
     JOOMLA_EMAIL="user@example.com" \
     JOOMLA_FIRST_NAME="User" \
     JOOMLA_LAST_NAME="Name" \
@@ -35,7 +35,6 @@ ENV APACHE_HTTPS_PORT_NUMBER="443" \
 
 
 
-VOLUME ["/bitnami/apache","/bitnami/joomla","/bitnami/php"]
 
 EXPOSE 80 443
 
