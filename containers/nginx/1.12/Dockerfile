@@ -11,7 +11,7 @@ RUN ln -sf /opt/bitnami/nginx/html /app
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.12.0-r4" \
+    BITNAMI_IMAGE_VERSION="1.12.0-r5" \
     NGINX_DAEMON_GROUP="nginx" \
     NGINX_DAEMON_USER="nginx" \
     NGINX_HTTPS_PORT_NUMBER="443" \
@@ -20,7 +20,6 @@ ENV BITNAMI_APP_NAME="nginx" \
 
 
 
-VOLUME ["/bitnami/nginx"]
 
 EXPOSE 80 443
 
