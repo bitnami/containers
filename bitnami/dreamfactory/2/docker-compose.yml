@@ -6,15 +6,17 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'mariadb_data:/bitnami/mariadb'
+      - 'mariadb_data:/bitnami'
   redis:
     image: 'bitnami/redis:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'redis_data:/bitnami/redis'
+      - 'redis_data:/bitnami'
   mongodb:
     image: 'bitnami/mongodb:latest'
+    volumes:
+      - 'mongodb_data:/bitnami'
   dreamfactory:
     image: 'bitnami/dreamfactory:2'
     labels:
@@ -27,17 +29,13 @@ services:
       - redis
       - mongodb
     volumes:
-      - 'dreamfactory_data:/bitnami/dreamfactory'
-      - 'apache_data:/bitnami/apache'
-      - 'php_data:/bitnami/php'
+      - 'dreamfactory_data:/bitnami'
 volumes:
   mariadb_data:
     driver: local
   redis_data:
     driver: local
+  mongodb_data:
+    driver: local
   dreamfactory_data:
-    driver: local
-  apache_data:
-    driver: local
-  php_data:
     driver: local
