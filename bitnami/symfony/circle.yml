@@ -2,8 +2,8 @@ machine:
   services:
   - docker
   environment:
-    RELEASE_SERIES_LIST: 3
-    LATEST_STABLE: 3
+    RELEASE_SERIES_LIST: 1
+    LATEST_STABLE: 1
     IMAGE_NAME: symfony
     CHART_NAME:
     CHART_REPO: https://github.com/bitnami/charts
