@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-piwik/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-piwik/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-piwik/master/kubernetes.yml)
 
 # What is Piwik?
@@ -11,16 +11,17 @@ https://www.piwik.org/
 # TL;DR;
 
 ## Docker Compose
+
 ```bash
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-piwik/master/docker-compose.yml
-$ docker-compose up
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-piwik/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-piwik/master/kubernetes.yml
@@ -36,16 +37,17 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-piw
 
 # Prerequisites
 
-To run this application you need Docker Engine 1.10.0. Docker Compose is recommended with a version 1.6.0 or later.
-
+To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://www.docker.com/products/docker-compose) is recommended with a version `1.6.0` or later.
 
 # How to get this image
+
 The recommended way to get the Bitnami Piwik Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/piwik/).
 To use a specific version, you can pull a versioned tag. Find the [list of available versions] (https://hub.docker.com/r/bitnami/piwik/tags/) in the Docker Hub Registry.
 
 ```bash
 docker pull bitnami/piwik:[TAG]
 ```
+
 If you wish, you can also build the image youself.
 
 ```bash
@@ -53,13 +55,14 @@ docker build -t bitnami/piwik:latest https://github.com/bitnami/bitnami-docker-p
 ```
 
 # How to use this image
+
 Piwik requires access to a MySQL database or MariaDB database to store information. It uses our [MariaDB image] (https://github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
 
 ## Run the Piwik image using Docker Compose
 
 This is the recommended way to run Piwik. You can use the following docker compose template:
 
-```
+```yaml
 version: '2'
 
 services:
@@ -68,16 +71,14 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'mariadb_data:/bitnami/mariadb'
+      - 'mariadb_data:/bitnami'
   application:
     image: 'bitnami/piwik:latest'
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - 'piwik_data:/bitnami/piwik'
-      - 'php_data:/bitnami/php'
-      - 'apache_data:/bitnami/apache'
+      - 'piwik_data:/bitnami'
     depends_on:
       - mariadb
 
@@ -85,8 +86,6 @@ volumes:
   mariadb_data:
     driver: local
   piwik_data:
-    driver: local
-  apache_data:
     driver: local
 ```
 
@@ -96,7 +95,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
+  ```bash
   $ docker network create piwik_network
   ```
 
@@ -110,7 +109,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Run the Piwik container:
 
-  ```
+  ```bash
   $ docker run -d -p 80:80 --name piwik --net=piwik_network bitnami/piwik
   ```
 
@@ -118,19 +117,19 @@ Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-If you are using docker-compose your data will be persistent as long as you don't remove `mariadb_data`, `piwik_data` and `apache_data` volumes.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
+
+The above examples define docker volumes namely `mariadb_data` and `piwik_data`. The Piwik application state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
-
-> **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
 ### Mount host directories as data volumes with Docker Compose
 
 This requires a minor change to the `docker-compose.yml` template previously shown:
 
-```
+```yaml
 version: '2'
 
 services:
@@ -139,7 +138,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - '/path/to/your/local/mariadb_data:/bitnami/mariadb'
+      - '/path/to/mariadb-persistence:/bitnami'
   piwik:
     image: 'bitnami/piwik:latest'
     depends_on:
@@ -148,9 +147,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - '/path/to/piwik-persistence:/bitnami/piwik'
-      - '/path/to/php-persistence:/bitnami/php'
-      - '/path/to/apache-persistence:/bitnami/apache'
+      - '/path/to/piwik-persistence:/bitnami'
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -159,28 +156,26 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```
+  ```bash
   $ docker network create piwik-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```
-  $$ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  ```bash
+  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
     --net piwik-tier \
-    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+    --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
   ```
    *Note:* You need to give the container a name in order to Piwik to resolve the host
 
 3. Create the Piwik container with host volumes:
 
-  ```
+  ```bash
   $ docker run -d --name piwik -p 80:80 -p 443:443 \
     --net piwik-tier \
-    --volume /path/to/piwik-persistence:/bitnami/piwik \
-    --volume /path/to/apache-persistence:/bitnami/apache \
-    --volume /path/to/php-persistence:/bitnami/php \
+    --volume /path/to/piwik-persistence:/bitnami \
     bitnami/piwik:latest
   ```
 
@@ -190,7 +185,7 @@ Bitnami provides up-to-date versions of MariaDB and Piwik, including security pa
 
 1. Get the updated images:
 
-  ```
+  ```bash
   $ docker pull bitnami/piwik:latest
   ```
 
@@ -199,7 +194,15 @@ Bitnami provides up-to-date versions of MariaDB and Piwik, including security pa
  * For docker-compose: `$ docker-compose stop piwik`
  * For manual execution: `$ docker stop piwik`
 
-3. (For non-compose execution only) Create a [backup](#backing-up-your-application) if you have not mounted the piwik folder in the host.
+3. Take a snapshot of the application state
+
+```bash
+$ rsync -a /path/to/piwik-persistence /path/to/piwik-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+Additionally, [snapshot the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
+
+You can use these snapshots to restore the application state should the upgrade fail.
 
 4. Remove the currently running container
 
@@ -212,26 +215,26 @@ Bitnami provides up-to-date versions of MariaDB and Piwik, including security pa
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name piwik bitnami/piwik:latest`
 
 # Configuration
+
 ## Environment variables
- When you start the Piwik image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+
+When you start the Piwik image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
 
-```
+```yaml
 application:
   image: bitnami/piwik:latest
   ports:
     - 80:80
   environment:
     - PIWIK_PASSWORD=my_password
-  volumes_from:
-    - application_data
 ```
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
- $ docker run -d -e PIWIK_PASSWORD=my_password -p 80:80 --name piwik -v /your/local/path/bitnami/piwik:/bitnami/piwik --net=piwik_network bitnami/piwik
+```bash
+ $ docker run -d -e PIWIK_PASSWORD=my_password -p 80:80 --name piwik -v /your/local/path/bitnami/piwik:/bitnami --net=piwik_network bitnami/piwik
 ```
 
 Available variables:
@@ -261,7 +264,7 @@ This would be an example of SMTP configuration using a Gmail account:
 
  * docker-compose:
 
-```
+```yaml
   application:
     image: bitnami/piwik:latest
     ports:
@@ -276,71 +279,24 @@ This would be an example of SMTP configuration using a Gmail account:
 
  * For manual execution:
 
-```
+```bash
  $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PROTOCOL=TLS -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e \
- SMTP_PASSWORD=your_password -p 80:80 --name piwik -v /your/local/path/bitnami/piwik:/bitnami/piwik bitnami/piwik
+ SMTP_PASSWORD=your_password -p 80:80 --name piwik -v /your/local/path/bitnami/piwik:/bitnami bitnami/piwik
 ```
-
-# Backing up your container
-To backup your application data follow these steps:
-## Back up Piwik using Docker Compose
-
-1. Stop the Piwik container:
-
-  * For docker-compose: `$ docker-compose stop piwik`
-
-2. Copy the Piwik, PHP and Apache data to your backup path:
-
-  ```bash
-$ docker cp $(docker-compose ps -q piwik):/bitnami/piwik/ /path/to/backups/piwik/latest/
-$ docker cp $(docker-compose ps -q piwik):/bitnami/apache/ /path/to/backups/apache/latest/
-$ docker cp $(docker-compose ps -q piwik):/bitnami/php/ /path/to/backups/php/latest/
-  ```
-3. Start the Piwik container:
-```bash
-$ docker-compose start piwik
-```
-
-## Back up Piwik using the Docker Command Line
-
-1. Stop the Piwik container:
-2. Copy the Piwik,PHP and Apache data to your backup path:
-
-```bash
-$ docker cp piwik:/bitnami/piwik/ /path/to/backups/piwik/latest/
-$ docker cp piwik:/bitnami/apache/ /path/to/backups/apache/latest/
-$ docker cp piwik:/bitnami/php/ /path/to/backups/php/latest/
-
-```
-
-3. Start the Piwik container:
-```bash
-$ docker-compose start piwik
-```
-
-
-
-# Restoring a backup
-
-To restore your application using backed up data simply mount the folder with Piwik data in the container. See [persisting your application](#persisting-your-application) section for more info.
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an
-[issue](https://github.com/bitnami/bitnami-docker-piwik/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-piwik/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-piwik/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-piwik/pulls) with your contribution.
 
 # Issues
 
-If you encountered a problem running this container, you can file an
-[issue](https://github.com/bitnami/bitnami-docker-piwik/issues). For us to provide better support,
-be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-piwik/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
 - Output of `docker info`
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
-- The command you used to run the container, and any relevant output you saw (masking any sensitive
-information)
+- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # Community
 
@@ -350,7 +306,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2017 Bitnami
+Copyright 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
