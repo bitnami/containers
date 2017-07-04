@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r17
+FROM bitnami/minideb-extras:jessie-r19
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 
@@ -13,12 +13,11 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.26-r0" \
+    BITNAMI_IMAGE_VERSION="2.4.26-r1" \
     PATH="/opt/bitnami/apache/bin:$PATH"
 
 
 
-VOLUME ["/bitnami/apache"]
 
 EXPOSE 80 443
 
