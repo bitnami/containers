@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-apache/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-apache/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-apache/master/kubernetes.yml)
 
 # What is Apache?
@@ -11,27 +11,21 @@
 # TL;DR;
 
 ```bash
-docker run --name apache bitnami/apache:latest
+$ docker run --name apache bitnami/apache:latest
 ```
 
 ## Docker Compose
 
-```yaml
-version: '2'
-
-services:
-  apache:
-    image: 'bitnami/apache:latest'
-    ports:
-      - '80:80'
-      - '443:443'
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-apache/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-apache/master/kubernetes.yml
@@ -50,19 +44,19 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-apa
 The recommended way to get the Bitnami Apache Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/apache).
 
 ```bash
-docker pull bitnami/apache:latest
+$ docker pull bitnami/apache:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/apache/tags/) in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/apache:[TAG]
+$ docker pull bitnami/apache:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
 ```bash
-docker build -t bitnami/apache:latest https://github.com/bitnami/bitnami-docker-apache.git
+$ docker build -t bitnami/apache:latest https://github.com/bitnami/bitnami-docker-apache.git
 ```
 
 # Hosting a static website
@@ -70,7 +64,7 @@ docker build -t bitnami/apache:latest https://github.com/bitnami/bitnami-docker-
 The `/app` path is configured as the Apache [DocumentRoot](https://httpd.apache.org/docs/2.4/urlmapping.html#documentroot). Content mounted here is served by the default catch-all virtual host.
 
 ```bash
-docker run --name apache -v /path/to/app:/app bitnami/apache:latest
+$ docker run --name apache -v /path/to/app:/app bitnami/apache:latest
 ```
 
 or using Docker Compose:
@@ -93,7 +87,7 @@ services:
 To access your web server from your host machine you can ask Docker to map a random port on your host to ports `80` and `443` exposed in the container.
 
 ```bash
-docker run --name apache -P bitnami/apache:latest
+$ docker run --name apache -P bitnami/apache:latest
 ```
 
 Run `docker port` to determine the random ports Docker assigned.
@@ -107,7 +101,7 @@ $ docker port apache
 You can also manually specify the ports you want forwarded from your host to the container.
 
 ```bash
-docker run -p 8080:80 -p 8443:443 bitnami/apache:latest
+$ docker run -p 8080:80 -p 8443:443 bitnami/apache:latest
 ```
 
 Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
@@ -116,11 +110,29 @@ Access your web server in the browser by navigating to [http://localhost:8080](h
 
 ## Adding custom virtual hosts
 
-The default `httpd.conf` includes virtual hosts placed in `/bitnami/apache/conf/vhosts/*.conf`. You can mount a directory at `/bitnami/apache/conf/vhosts` from your host containing your custom virtual hosts.
+The default `httpd.conf` includes virtual hosts placed in `/bitnami/apache/conf/vhosts/`. You can mount a `my_vhost.conf` file containing your custom virtual hosts at this location.
+
+For example, in order add a vhost for `www.example.com`:
+
+# Step 1: Write your `my_vhost.conf` file with the following content.
+
+```apache
+<VirtualHost *:80>
+  ServerName www.example.com
+  DocumentRoot "/app"
+  <Directory "/app">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+  </Directory>
+</VirtualHost>
+```
+
+# Step 2: Mount the configuration as a volume.
 
 ```bash
-docker run \
-  -v /path/to/apache-persistence/vhosts:/bitnami/apache/conf/vhosts \
+$ docker run --name apache \
+  -v /path/to/my_vhost.conf:/bitnami/apache/conf/vhost/my_vhost.conf:ro \
   bitnami/apache:latest
 ```
 
@@ -130,13 +142,13 @@ or using Docker Compose:
 version: '2'
 
 services:
-  apache:
-    image: 'bitnami/apache:latest'
+  mariadb:
+    image: 'bitnami/nginx:latest'
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - /path/to/apache-persistence/vhosts:/bitnami/apache/conf/vhosts
+      - /path/to/my_vhost.conf:/bitnami/apache/conf/vhost/my_vhost.conf:ro
 ```
 
 ## Using custom SSL certificates
@@ -150,9 +162,9 @@ This container comes with SSL support already pre-configured and with a dummy ce
 In your local computer, create a folder called `certs` and put your certificates files. Make sure you rename both files to `server.crt` and `server.key` respectively:
 
 ```bash
-mkdir /path/to/apache-persistence/conf/bitnami/certs -p
-cp /path/to/certfile.crt /path/to/apache-persistence/conf/bitnami/certs/server.crt
-cp /path/to/keyfile.key  /path/to/apache-persistence/conf/bitnami/certs/server.key
+$ mkdir /path/to/apache-persistence/apache/conf/bitnami/certs -p
+$ cp /path/to/certfile.crt /path/to/apache-persistence/apache/conf/bitnami/certs/server.crt
+$ cp /path/to/keyfile.key  /path/to/apache-persistence/apache/conf/bitnami/certs/server.key
 ```
 
 ### Step 2: Run the Apache image
@@ -160,8 +172,8 @@ cp /path/to/keyfile.key  /path/to/apache-persistence/conf/bitnami/certs/server.k
 Run the Apache image, mounting the certificates directory from your host.
 
 ```bash
-docker run --name apache \
-  -v /path/to/apache-persistence/conf/bitnami/certs:/bitnami/apache/conf/bitnami/certs \
+$ docker run --name apache \
+  -v /path/to/apache-persistence/apache/conf/bitnami/certs:/bitnami/apache/conf/bitnami/certs \
   bitnami/apache:latest
 ```
 
@@ -177,20 +189,20 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - /path/to/apache-persistence/conf/bitnami/certs:/bitnami/apache/conf/bitnami/certs
+      - /path/to/apache-persistence/apache/conf/bitnami/certs:/bitnami/apache/conf/bitnami/certs
 ```
 
 ## Full configuration
 
-This container looks for configuration in `/bitnami/apache/conf`. You can mount a directory at `/bitnami/apache/` with your own configuration, or the default configuration will be copied to your directory at `conf/` if it is empty.
+The image looks for configurations in `/bitnami/apache/conf/`. You can mount a volume at `/bitnami` and copy/edit the configurations in the `/bitnami/apache/conf/`. The default configurations will be populated in the `conf/` directory if it's empty.
 
 ### Step 1: Run the Apache image
 
 Run the Apache image, mounting a directory from your host.
 
 ```bash
-docker run --name apache \
-  -v /path/to/apache-persistence:/bitnami/apache \
+$ docker run --name apache \
+  -v /path/to/apache-persistence:/bitnami \
   bitnami/apache:latest
 ```
 
@@ -206,7 +218,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - /path/to/apache-persistence:/bitnami/apache
+      - /path/to/apache-persistence:/bitnami
 ```
 
 ### Step 2: Edit the configuration
@@ -214,7 +226,7 @@ services:
 Edit the configuration on your host using your favorite editor.
 
 ```bash
-vi /path/to/apache-persistence/conf/httpd.conf
+$ vi /path/to/apache-persistence/apache/conf/httpd.conf
 ```
 
 ### Step 4: Restart Apache
@@ -222,13 +234,13 @@ vi /path/to/apache-persistence/conf/httpd.conf
 After changing the configuration, restart your Apache container for the changes to take effect.
 
 ```bash
-docker restart apache
+$ docker restart apache
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose restart apache
+$ docker-compose restart apache
 ```
 
 # Reverse proxy to other containers
@@ -244,77 +256,18 @@ Apache can be used to reverse proxy to other containers using Docker's linking s
 The Bitnami Apache Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
-docker logs apache
+$ docker logs apache
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose logs apache
+$ docker-compose logs apache
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 # Maintenance
-
-## Backing up your container
-
-To backup your configuration, follow these simple steps:
-
-### Step 1: Stop the currently running container
-
-```bash
-docker stop apache
-```
-
-or using Docker Compose:
-
-```bash
-docker-compose stop apache
-```
-
-### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```bash
-docker run --rm -v /path/to/apache-backups:/backups \
-  --volumes-from apache busybox \
-    cp -a /bitnami/apache /backups/latest
-```
-
-or using Docker Compose:
-
-```bash
-docker run --rm -v /path/to/apache-backups:/backups \
-  --volumes-from `docker-compose ps -q apache` busybox \
-    cp -a /bitnami/apache /backups/latest
-```
-
-## Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the container.
-
-```bash
-docker run \
-  -v /path/to/apache-backups/latest:/bitnami/apache \
-  bitnami/apache:latest
-```
-
-or using Docker Compose:
-
-```yaml
-version: '2'
-
-services:
-  apache:
-    image: 'bitnami/apache:latest'
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - /path/to/apache-backups/latest:/bitnami/apache
-```
 
 ## Upgrade this image
 
@@ -323,7 +276,7 @@ Bitnami provides up-to-date versions of Apache, including security patches, soon
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/apache:latest
+$ docker pull bitnami/apache:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -331,34 +284,50 @@ or if you're using Docker Compose, update the value of the image property to
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's configuration and logs.
+Stop the currently running container using the command
 
-Follow the steps on [creating a backup](#backing-up-your-container).
+```bash
+$ docker stop apache
+```
+
+or using Docker Compose:
+
+```bash
+$ docker-compose stop apache
+```
+
+Next, take a snapshot of the persistent volume `/path/to/apache-persistence` using:
+
+```bash
+$ rsync -a /path/to/apache-persistence /path/to/apache-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
 ```bash
-docker rm -v apache
+$ docker rm -v apache
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose rm -v apache
+$ docker-compose rm -v apache
 ```
 
 ### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image.
 
 ```bash
-docker run --name apache bitnami/apache:latest
+$ docker run --name apache bitnami/apache:latest
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose start apache
+$ docker-compose start apache
 ```
 
 # Notable Changes
