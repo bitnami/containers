@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r17
+FROM bitnami/minideb-extras:jessie-r19
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 
@@ -11,12 +11,11 @@ RUN mkdir -p /bitnami && ln -sf /bitnami/php /bitnami/php-fpm
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="7.0.20-r0" \
+    BITNAMI_IMAGE_VERSION="7.0.20-r1" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH"
 
 
 
-VOLUME ["/bitnami/php-fpm"]
 
 EXPOSE 9000
 
