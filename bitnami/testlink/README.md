@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-testlink/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-testlink/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-testlink/master/kubernetes.yml)
 
 # What is TestLink?
@@ -13,15 +13,15 @@ https://testlink.org/
 ## Docker Compose
 
 ```bash
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-testlink/master/docker-compose.yml
-$ docker-compose up
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-testlink/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-testlink/master/kubernetes.yml
@@ -58,16 +58,14 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'mariadb_data:/bitnami/mariadb'
+      - 'mariadb_data:/bitnami'
   testlink:
     image: 'bitnami/testlink:latest'
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - 'testlink_data:/bitnami/testlink'
-      - 'apache_data:/bitnami/apache'
-      - 'php_data':/bitnami-php'
+      - 'testlink_data:/bitnami'
     depends_on:
       - mariadb
     environment:
@@ -79,10 +77,6 @@ volumes:
   mariadb_data:
     driver: local
   testlink_data:
-    driver: local
-  apache_data:
-    driver: local
-  php_data:
     driver: local
 ```
 
@@ -114,15 +108,18 @@ Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence of the Testlink deployment, the above examples define docker volumes namely `mariadb_data`, `php_data` `apache_data` and `testlink_data`. The TestLink application state will persist as long as these volumes are not removed.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
 
-> **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
+The above examples define docker volumes namely `mariadb_data` and `testlink_data`. The TestLink application state will persist as long as these volumes are not removed.
+
+To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ### Mount host directories as data volumes with Docker Compose
 
 This requires a minor change to the `docker-compose.yml` template previously shown:
+
 ```yaml
 version: '2'
 
@@ -132,16 +129,14 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - '/path/to/mariadb-persistence:/bitnami/mariadb'
+      - '/path/to/mariadb-persistence:/bitnami'
   testlink:
     image: 'bitnami/testlink:latest'
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - '/path/to/testlink-persistence:/bitnami/testlink'
-      - '/path/to/apache-persistence:/bitnami/apache'
-     -  '/path/to/php-persistence:/bitnami/php'
+      - '/path/to/testlink-persistence:/bitnami'
     depends_on:
       - mariadb
 ```
@@ -161,7 +156,7 @@ In this case you need to specify the directories to mount on the run command. Th
   ```bash
   $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
     --net testlink-tier \
-    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+    --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
   ```
 
@@ -172,9 +167,7 @@ In this case you need to specify the directories to mount on the run command. Th
   ```bash
   $ docker run -d -p 80:80 -p 443:443 --name testlink \
     --net testlink-tier \
-    --volume /path/to/testlink-persistence:/bitnami/testlink \
-    --volume /path/to/apache-persistence:/bitnami/apache \
-    --volume /path/to/php-persistence:/bitnami/php \
+    --volume /path/to/testlink-persistence:/bitnami \
     bitnami/testlink:latest
   ```
 
@@ -193,12 +186,20 @@ Bitnami provides up-to-date versions of MariaDB and TestLink, including security
  * For docker-compose: `$ docker-compose stop testlink`
  * For manual execution: `$ docker stop testlink`
 
-3. (For non-compose execution only) Create a [backup](#backing-up-your-application) if you have not mounted the testlink folder in the host.
+3. Take a snapshot of the application state
 
-4. Remove the currently running container
+```bash
+$ rsync -a /path/to/testlink-persistence /path/to/testlink-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
 
- * For docker-compose: `$ docker-compose rm -v testlink`
- * For manual execution: `$ docker rm -v testlink`
+Additionally, [snapshot the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
+
+You can use these snapshots to restore the application state should the upgrade fail.
+
+4. Remove the stopped container
+
+ * For docker-compose: `$ docker-compose rm testlink`
+ * For manual execution: `$ docker rm testlink`
 
 5. Run the new image
 
@@ -206,10 +207,13 @@ Bitnami provides up-to-date versions of MariaDB and TestLink, including security
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name testlink bitnami/testlink:latest`
 
 # Configuration
+
 ## Environment variables
- When you start the testlink image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+
+When you start the testlink image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
+
 ```yaml
 testlink:
   image: bitnami/testlink:latest
@@ -283,49 +287,23 @@ This would be an example of SMTP configuration using a GMail account:
     -e SMTP_PASSWORD=your_password \
     -e SMTP_CONNECTION_MODE=tls \
     --net testlink-tier \
-    --volume /path/to/testlink-persistence:/bitnami/testlink \
-    --volume /path/to/apache-persistence:/bitnami/apache \
-    --volume /path/to/php-persistence:/bitnami/php \
+    --volume /path/to/testlink-persistence:/bitnami \
     bitnami/testlink:latest
   ```
 
-# Backing up your application
-
-To backup your application data follow these steps:
-
-1. Stop the running container:
-
-  * For docker-compose: `$ docker-compose stop testlink`
-  * For manual execution: `$ docker stop testlink`
-
-2. Copy the TestLink data folder in the host:
-
-  ```bash
-  $ docker cp /path/to/testlink-persistence:/bitnami/testlink
-  ```
-
-# Restoring a backup
-
-To restore your application using backed up data simply mount the folder with TestLink data in the container. See [persisting your application](#persisting-your-application) section for more info.
-
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an
-[issue](https://github.com/bitnami/bitnami-docker-testlink/issues), or submit a
-[pull request](https://github.com/bitnami/bitnami-docker-testlink/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-testlink/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-testlink/pulls) with your contribution.
 
 # Issues
 
-If you encountered a problem running this container, you can file an
-[issue](https://github.com/bitnami/bitnami-docker-testlink/issues). For us to provide better support,
-be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-testlink/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`$ docker version`)
 - Output of `$ docker info`
 - Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
-- The command you used to run the container, and any relevant output you saw (masking any sensitive
-information)
+- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # Community
 
@@ -335,7 +313,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright 2016 Bitnami
+Copyright 2016-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
