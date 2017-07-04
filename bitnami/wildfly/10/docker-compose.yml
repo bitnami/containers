@@ -9,7 +9,7 @@ services:
       - '8080:8080'
       - '9990:9990'
     volumes:
-      - 'wildfly_data:/bitnami/wildfly'
+      - 'wildfly_data:/bitnami'
     environment:
       - WILDFLY_PASSWORD=password
 
