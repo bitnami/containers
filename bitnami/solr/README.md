@@ -1,6 +1,7 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-solr/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-solr/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-solr/master/kubernetes.yml)
+
 # What is Apache Solr?
 
 > Solr is the popular, blazing-fast, open source enterprise search platform built on Apache Lucene.
@@ -10,21 +11,21 @@
 # TL;DR;
 
 ```bash
-docker run --name solr bitnami/solr:latest
+$ docker run --name solr bitnami/solr:latest
 ```
 
 ## Docker Compose
 
-```
-solr:
-  image: bitnami/solr:latest
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-solr/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-solr/master/kubernetes.yml
@@ -43,40 +44,40 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-sol
 The recommended way to get the Bitnami solr Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/solr).
 
 ```bash
-docker pull bitnami/solr:latest
+$ docker pull bitnami/solr:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/solr/tags/) in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/solr:[TAG]
+$ docker pull bitnami/solr:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
 ```bash
-docker build -t bitnami/solr:latest https://github.com/bitnami/bitnami-docker-solr.git
+$ docker build -t bitnami/solr:latest https://github.com/bitnami/bitnami-docker-solr.git
 ```
 
 # Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `application_data` data volumes. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-> **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-container) up to pull the data from your running container down to your host.
+For persistence you should mount a volume at the `/bitnami` path. The above examples define a docker volume namely `solr_data`. The Solr application state will persist as long as this volume is not removed.
 
-The image exposes a volume at `/bitnami/solr` for the solr data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
+To avoid inadvertent removal of this volume you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ```bash
-docker run -v /path/to/solr-persistence:/bitnami/solr bitnami/solr:latest
+$ docker run -v /path/to/solr-persistence:/bitnami bitnami/solr:latest
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 solr:
   image: bitnami/solr:latest
   volumes:
-    - /path/to/solr-persistence:/bitnami/solr
+    - /path/to/solr-persistence:/bitnami
 ```
 
 # Connecting to other containers
@@ -98,13 +99,12 @@ $ docker network create solr-network --driver bridge
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `solr-network` network.
 
 ```bash
-docker run --name solr-node1 --network solr-network bitnami/solr:latest
+$ docker run --name solr-node1 --network solr-network bitnami/solr:latest
 ```
 
 ### Step 3: Run another containers
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
-
 
 ## Using Docker Compose
 
@@ -137,7 +137,6 @@ Then, launch the containers using:
 ```bash
 $ docker-compose up -d
 ```
-
 
 # Configuration
 
@@ -185,67 +184,18 @@ solr:
 The Bitnami solr Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
-docker logs solr
+$ docker logs solr
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose logs solr
+$ docker-compose logs solr
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 # Maintenance
-
-## Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-### Step 1: Stop the currently running container
-
-```bash
-docker stop solr
-```
-
-or using Docker Compose:
-
-```bash
-docker-compose stop solr
-```
-
-### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```bash
-docker run --rm -v /path/to/solr-backups:/backups --volumes-from solr busybox \
-  cp -a /bitnami/solr:latest /backups/latest
-```
-
-or using Docker Compose:
-
-```bash
-docker run --rm -v /path/to/solr-backups:/backups --volumes-from `docker-compose ps -q solr` busybox \
-  cp -a /bitnami/solr:latest /backups/latest
-```
-
-## Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the container.
-
-```bash
-docker run -v /path/to/solr-backups/latest:/bitnami/solr bitnami/solr:latest
-```
-
-or using Docker Compose:
-
-```
-solr:
-  image: bitnami/solr:latest
-  volumes:
-    - /path/to/solr-backups/latest:/bitnami/solr
-```
 
 ## Upgrade this image
 
@@ -254,7 +204,7 @@ Bitnami provides up-to-date versions of solr, including security patches, soon a
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/solr:latest
+$ docker pull bitnami/solr:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -262,20 +212,36 @@ or if you're using Docker Compose, update the value of the image property to
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's data, configuration and logs.
-
-Follow the steps on [creating a backup](#backing-up-your-container).
-
-### Step 3: Remove the currently running container
+Stop the currently running container using the command
 
 ```bash
-docker rm -v solr
+$ docker stop solr
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose rm -v solr
+$ docker-compose stop solr
+```
+
+Next, take a snapshot of the persistent volume `/path/to/solr-persistence` using:
+
+```bash
+$ rsync -a /path/to/solr-persistence /path/to/solr-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+You can use this snapshot to restore the database state should the upgrade fail.
+
+### Step 3: Remove the currently running container
+
+```bash
+$ docker rm -v solr
+```
+
+or using Docker Compose:
+
+```bash
+$ docker-compose rm -v solr
 ```
 
 ### Step 4: Run the new image
@@ -283,14 +249,15 @@ docker-compose rm -v solr
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
 ```bash
-docker run --name solr bitnami/solr:latest
+$ docker run --name solr bitnami/solr:latest
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose start solr
+$ docker-compose start solr
 ```
+
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-solr/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-solr/pulls) with your contribution.
@@ -312,7 +279,7 @@ Most real time communication happens in the `#containers` channel at [bitnami-os
 Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
-Copyright (c) 2016 Bitnami
+Copyright 2016-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
