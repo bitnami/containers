@@ -5,7 +5,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'mariadb_data:/bitnami/mariadb'
+      - 'mariadb_data:/bitnami'
   opencart:
     image: 'bitnami/opencart:3'
     labels:
@@ -14,9 +14,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - 'opencart_data:/bitnami/opencart'
-      - 'apache_data:/bitnami/apache'
-      - 'php_data:/bitnami/php'
+      - 'opencart_data:/bitnami'
     depends_on:
       - mariadb
     environment:
@@ -25,8 +23,4 @@ volumes:
   mariadb_data:
     driver: local
   opencart_data:
-    driver: local
-  apache_data:
-    driver: local
-  php_data:
     driver: local
