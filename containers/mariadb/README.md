@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-mariadb/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-mariadb/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-mariadb/master/kubernetes.yml)
 
 # What is MariaDB?
@@ -10,13 +10,13 @@
 
 # TL;DR;
 
-```console
+```bash
 $ docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes bitnami/mariadb:latest
 ```
 
 ## Docker Compose
 
-```console
+```bash
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mariadb/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -27,7 +27,7 @@ $ docker-compose up -d
 
 Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
-```console
+```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-mariadb/master/kubernetes.yml
 ```
 
@@ -43,7 +43,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-mar
 
 The recommended way to get the Bitnami MariaDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mariadb).
 
-```console
+```bash
 $ docker pull bitnami/mariadb:latest
 ```
 
@@ -51,13 +51,13 @@ To use a specific version, you can pull a versioned tag. You can view the
 [list of available versions](https://hub.docker.com/r/bitnami/mariadb/tags/)
 in the Docker Hub Registry.
 
-```console
+```bash
 $ docker pull bitnami/mariadb:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```console
+```bash
 $ docker build -t bitnami/mariadb:latest https://github.com/bitnami/bitnami-docker-mariadb.git
 ```
 
@@ -65,9 +65,9 @@ $ docker build -t bitnami/mariadb:latest https://github.com/bitnami/bitnami-dock
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence of the MariaDB server data you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
+For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```console
+```bash
 $ docker run \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -v /path/to/mariadb-persistence:/bitnami \
@@ -102,7 +102,7 @@ In this example, we will create a MariaDB client instance that will connect to t
 
 ### Step 1: Create a network
 
-```console
+```bash
 $ docker network create app-tier --driver bridge
 ```
 
@@ -110,7 +110,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the MariaDB container to the `app-tier` network.
 
-```console
+```bash
 $ docker run -d --name mariadb-server \
     -e ALLOW_EMPTY_PASSWORD=yes \
     --network app-tier \
@@ -121,7 +121,7 @@ $ docker run -d --name mariadb-server \
 
 Finally we create a new container instance to launch the MariaDB client and connect to the server created in the previous step:
 
-```console
+```bash
 $ docker run -it --rm \
     --network app-tier \
     bitnami/mariadb:latest mysql -h mariadb-server -u root
@@ -158,7 +158,7 @@ services:
 
 Launch the containers using:
 
-```console
+```bash
 $ docker-compose up -d
 ```
 
@@ -173,7 +173,7 @@ The root user and password can easily be setup with the Bitnami MariaDB Docker i
 
 Passing the `MARIADB_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the `MARIADB_ROOT_USER` user to the value of `MARIADB_ROOT_PASSWORD`.
 
-```console
+```bash
 $ docker run --name mariadb -e MARIADB_ROOT_PASSWORD=password123 bitnami/mariadb:latest
 ```
 
@@ -197,7 +197,7 @@ services:
 
 By default the MariaDB image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD=yes` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `MARIADB_ROOT_PASSWORD` for any other scenario.
 
-```console
+```bash
 $ docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes bitnami/mariadb:latest
 ```
 
@@ -219,8 +219,11 @@ services:
 
 By passing the `MARIADB_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the MySQL client.
 
-```console
-$ docker run --name mariadb -e MARIADB_DATABASE=my_database bitnami/mariadb:latest
+```bash
+$ docker run --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_DATABASE=my_database \
+    bitnami/mariadb:latest
 ```
 
 or using Docker Compose:
@@ -242,7 +245,7 @@ services:
 
 You can create a restricted database user that only has permissions for the database created with the [`MARIADB_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `MARIADB_USER` environment variable and to set a password for the database user provide the `MARIADB_PASSWORD` variable.
 
-```console
+```bash
 $ docker run --name mariadb \
   -e ALLOW_EMPTY_PASSWORD=yes \
   -e MARIADB_USER=my_user \
@@ -288,7 +291,7 @@ In a replication cluster you can have one master and zero or more slaves. When r
 
 The first step is to start the MariaDB master.
 
-```console
+```bash
 $ docker run --name mariadb-master \
   -e MARIADB_ROOT_PASSWORD=master_root_password \
   -e MARIADB_REPLICATION_MODE=master \
@@ -306,7 +309,7 @@ In the above command the container is configured as the `master` using the `MARI
 
 Next we start a MariaDB slave container.
 
-```console
+```bash
 $ docker run --name mariadb-slave --link mariadb-master:master \
   -e MARIADB_REPLICATION_MODE=slave \
   -e MARIADB_REPLICATION_USER=my_repl_user \
@@ -357,7 +360,7 @@ services:
 
 Scale the number of slaves using:
 
-```console
+```bash
 $ docker-compose scale mariadb-master=1 mariadb-slave=3
 ```
 
@@ -380,7 +383,7 @@ max_allowed_packet=32M
 
 # Step 2: Run the mariaDB image with the designed volume attached.
 
-```console
+```bash
 $ docker run --name mariadb -v /path/to/my_custom.cnf:/bitnami/mariadb/conf/my_custom.cnf:ro bitnami/mariadb:latest
 ```
 
@@ -410,13 +413,13 @@ Refer to the [MySQL server option and variable reference guide](https://dev.mysq
 
 The Bitnami MariaDB Docker image sends the container logs to the `stdout`. To view the logs:
 
-```console
+```bash
 $ docker logs mariadb
 ```
 
 or using Docker Compose:
 
-```console
+```bash
 $ docker-compose logs mariadb
 ```
 
@@ -430,7 +433,7 @@ Bitnami provides up-to-date versions of MariaDB, including security patches, soo
 
 ### Step 1: Get the updated image
 
-```console
+```bash
 $ docker pull bitnami/mariadb:latest
 ```
 
@@ -441,32 +444,33 @@ or if you're using Docker Compose, update the value of the image property to
 
 Stop the currently running container using the command
 
-```console
+```bash
 $ docker stop mariadb
 ```
 
 or using Docker Compose:
 
-```console
+```bash
 $ docker-compose stop mariadb
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/mariadb-persistence` using:
 
-```console
+```bash
 $ rsync -a /path/to/mariadb-persistence /path/to/mariadb-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
+You can use this snapshot to restore the database state should the upgrade fail.
+
 ### Step 3: Remove the currently running container
 
-```console
+```bash
 $ docker rm -v mariadb
 ```
 
 or using Docker Compose:
 
-
-```console
+```bash
 $ docker-compose rm -v mariadb
 ```
 
@@ -474,13 +478,13 @@ $ docker-compose rm -v mariadb
 
 Re-create your container from the new image.
 
-```console
+```bash
 $ docker run --name mariadb bitnami/mariadb:latest
 ```
 
 or using Docker Compose:
 
-```console
+```bash
 $ docker-compose start mariadb
 ```
 
