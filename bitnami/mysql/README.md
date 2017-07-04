@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-mysql/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-mysql/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-mysql/master/kubernetes.yml)
 
 # What is MySQL?
@@ -11,28 +11,21 @@
 # TL;DR;
 
 ```bash
-docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
+$ docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
 ```
 
 ## Docker Compose
 
-```yaml
-version: '2'
-
-services:
-  mysql:
-    image: 'bitnami/mysql:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '3306:3306'
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mysql/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-mysql/master/kubernetes.yml
@@ -51,7 +44,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-mys
 The recommended way to get the Bitnami MySQL Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mysql).
 
 ```bash
-docker pull bitnami/mysql:latest
+$ docker pull bitnami/mysql:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the
@@ -59,29 +52,26 @@ To use a specific version, you can pull a versioned tag. You can view the
 in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/mysql:[TAG]
+$ docker pull bitnami/mysql:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
 ```bash
-docker build -t bitnami/mysql:latest https://github.com/bitnami/bitnami-docker-mysql.git
+$ docker build -t bitnami/mysql:latest https://github.com/bitnami/bitnami-docker-mysql.git
 ```
 
 # Persisting your database
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-**Note!**
-If you have already started using your database, follow the steps on
-[backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
-
-The image exposes a volume at `/bitnami/mysql` for the MySQL data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
+For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
-docker run \
-  -v /path/to/mysql-persistence:/bitnami/mysql \
-  bitnami/mysql:latest
+$ docker run \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -v /path/to/mysql-persistence:/bitnami \
+    bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -97,7 +87,7 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - /path/to/mysql-persistence:/bitnami/mysql
+      - /path/to/mysql-persistence:/bitnami
 ```
 
 # Connecting to other containers
@@ -122,6 +112,7 @@ Use the `--network app-tier` argument to the `docker run` command to attach the 
 
 ```bash
 $ docker run -d --name mysql-server \
+    -e ALLOW_EMPTY_PASSWORD=yes \
     --network app-tier \
     bitnami/mysql:latest
 ```
@@ -183,7 +174,7 @@ The root user and password can easily be setup with the Bitnami MySQL Docker ima
 Passing the `MYSQL_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the `MYSQL_ROOT_USER` user to the value of `MYSQL_ROOT_PASSWORD`.
 
 ```bash
-docker run --name mysql -e MYSQL_ROOT_PASSWORD=password123 bitnami/mysql:latest
+$ docker run --name mysql -e MYSQL_ROOT_PASSWORD=password123 bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -204,10 +195,10 @@ services:
 
 ## Allowing empty passwords
 
-By default the MySQL image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `MYSQL_ROOT_PASSWORD` for any other scenario.
+By default the MySQL image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD=yes` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `MYSQL_ROOT_PASSWORD` for any other scenario.
 
 ```bash
-docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
+$ docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -223,17 +214,16 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
 ```
-
-
 
 ## Creating a database on first run
 
 By passing the `MYSQL_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the MySQL client.
 
 ```bash
-docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes \
-  -e MYSQL_DATABASE=my_database \
-  bitnami/mysql:latest
+$ docker run --name mysql \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MYSQL_DATABASE=my_database \
+    bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -244,11 +234,10 @@ version: '2'
 services:
   mysql:
     image: 'bitnami/mysql:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306:3306'
     environment:
+      - ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=my_database
 ```
 
@@ -257,7 +246,7 @@ services:
 You can create a restricted database user that only has permissions for the database created with the [`MYSQL_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `MYSQL_USER` environment variable and to set a password for the database user provide the `MYSQL_PASSWORD` variable.
 
 ```bash
-docker run --name mysql \
+$ docker run --name mysql \
   -e ALLOW_EMPTY_PASSWORD=yes \
   -e MYSQL_USER=my_user \
   -e MYSQL_PASSWORD=my_password \
@@ -281,6 +270,7 @@ services:
       - MYSQL_PASSWORD=my_password
       - MYSQL_DATABASE=my_database
 ```
+
 **Note!** The `root` user will be created with remote access and without a password if `ALLOW_EMPTY_PASSWORD` is enabled. Please provide the `MYSQL_ROOT_PASSWORD` env variable instead if you want to set a password for the `root` user.
 
 ## Setting up a replication cluster
@@ -302,7 +292,7 @@ In a replication cluster you can have one master and zero or more slaves. When r
 The first step is to start the MySQL master.
 
 ```bash
-docker run --name mysql-master \
+$ docker run --name mysql-master \
   -e MYSQL_ROOT_PASSWORD=master_root_password \
   -e MYSQL_REPLICATION_MODE=master \
   -e MYSQL_REPLICATION_USER=my_repl_user \
@@ -320,7 +310,7 @@ In the above command the container is configured as the `master` using the `MYSQ
 Next we start a MySQL slave container.
 
 ```bash
-docker run --name mysql-slave --link mysql-master:master \
+$ docker run --name mysql-slave --link mysql-master:master \
   -e MYSQL_REPLICATION_MODE=slave \
   -e MYSQL_REPLICATION_USER=my_repl_user \
   -e MYSQL_REPLICATION_PASSWORD=my_repl_password \
@@ -341,12 +331,10 @@ version: '2'
 services:
   mysql-master:
     image: 'bitnami/mysql:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306'
     volumes:
-      - 'mysql_master_data:/bitnami/mysql'
+      - /path/to/mysql-persistence:/bitnami
     environment:
       - MYSQL_REPLICATION_MODE=master
       - MYSQL_REPLICATION_USER=repl_user
@@ -355,12 +343,8 @@ services:
       - MYSQL_USER=my_user
       - MYSQL_PASSWORD=my_password
       - MYSQL_DATABASE=my_database
-    volumes:
-      - '/path/to/mysql-persistence:/bitnami/mysql'
   mysql-slave:
     image: 'bitnami/mysql:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '3306'
     depends_on:
@@ -377,7 +361,7 @@ services:
 Scale the number of slaves using:
 
 ```bash
-docker-compose scale mysql-master=1 mysql-slave=3
+$ docker-compose scale mysql-master=1 mysql-slave=3
 ```
 
 The above command scales up the number of slaves to `3`. You can scale down in the same manner.
@@ -386,16 +370,21 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 ## Configuration file
 
-The image looks for configuration in the `conf/` directory of `/bitnami/mysql`. As as mentioned in [Persisting your database](#persisting-your-data) you can mount a volume at this location and copy your own configurations in the `conf/` directory. The default configuration will be copied to the `conf/` directory if it's empty.
+The image looks for user-defined configurations in `/bitnami/mysql/conf/my_custom.cnf`. Create a file named `my_custom.cnf` and mount it at `/bitnami/mysql/conf/my_custom.cnf`.
 
-### Step 1: Run the MySQL image
+For example, in order to override the `max_allowed_packet` directive:
 
-Run the MySQL image, mounting a directory from your host.
+# Step 1: Write your `my_custom.cnf` file with the following content.
+
+```config
+[mysqld]
+max_allowed_packet=32M
+```
+
+# Step 2: Run the mariaDB image with the designed volume attached.
 
 ```bash
-docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes \
-  -v /path/to/mysql-persistence:/bitnami/mysql \
-  bitnami/mysql:latest
+$ docker run --name mysql -v /path/to/my_custom.cnf:/bitnami/mysql/conf/my_custom.cnf:ro bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -411,114 +400,32 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - /path/to/mysql-persistence:/bitnami/mysql
+      - /path/to/my_custom.cnf:/bitnami/mysql/conf/my_custom.cnf:ro
 ```
 
-### Step 2: Edit the configuration
+After that, your changes will be taken into account in the server's behaviour.
 
-Edit the configuration on your host using your favorite editor.
+As mentioned in [Persisting your database](#persisting-your-database) if you mount a volume at `/bitnami`, you could copy `my_custom.cnf` at `/path/to/mysql-persistence/mysql/conf/my_custom.cnf` or even edit the `/path/to/mysql-persistence/mysql/conf/my.cnf` file.
 
-```bash
-vi /path/to/mysql-persistence/conf/my.cnf
-```
-
-### Step 3: Restart MySQL
-
-After changing the configuration, restart your MySQL container for changes to take effect.
-
-```bash
-docker restart mysql
-```
-
-or using Docker Compose:
-
-```bash
-docker-compose restart mysql
-```
-
-**Further Reading:**
-
-  - [Server Option and Variable Reference](https://dev.mysql.com/doc/refman/5.1/en/mysqld-option-tables.html)
+Refer to the [MySQL server option and variable reference guide](https://dev.mysql.com/doc/refman/5.1/en/mysqld-option-tables.html) for the complete list of configuration options.
 
 # Logging
 
 The Bitnami MySQL Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
-docker logs mysql
+$ docker logs mysql
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose logs mysql
+$ docker-compose logs mysql
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 # Maintenance
-
-## Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-### Step 1: Stop the currently running container
-
-```bash
-docker stop mysql
-```
-
-or using Docker Compose:
-
-```bash
-docker-compose stop mysql
-```
-
-### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```bash
-docker run --rm \
-  -v /path/to/mysql-backups:/backups \
-  --volumes-from mysql busybox \
-    cp -a /bitnami/mysql /backups/latest
-```
-
-or using Docker Compose:
-
-```bash
-docker run --rm \
-  -v /path/to/mysql-backups:/backups \
-  --volumes-from `docker-compose ps -q mysql` busybox \
-    cp -a /bitnami/mysql /backups/latest
-```
-
-## Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the container.
-
-```bash
-docker run \
-  -v /path/to/mysql-backups/latest:/bitnami/mysql \
-  bitnami/mysql:latest
-```
-
-or using Docker Compose:
-
-```yaml
-version: '2'
-
-services:
-  mysql:
-    image: 'bitnami/mysql:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '3306:3306'
-    volumes:
-      - /path/to/mysql-backups/latest:/bitnami/mysql
-```
 
 ## Upgrade this image
 
@@ -527,7 +434,7 @@ Bitnami provides up-to-date versions of MySQL, including security patches, soon 
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/mysql:latest
+$ docker pull bitnami/mysql:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -535,34 +442,48 @@ or if you're using Docker Compose, update the value of the image property to
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's data, configuration and logs.
+Stop the currently running container using the command
 
-Follow the steps on [creating a backup](#backing-up-your-container).
+```bash
+$ docker stop mysql
+```
+
+or using Docker Compose:
+
+```bash
+$ docker-compose stop mysql
+```
+
+Next, take a snapshot of the persistent volume `/path/to/mysql-persistence` using:
+
+```bash
+$ rsync -a /path/to/mysql-persistence /path/to/mysql-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
 
 ### Step 3: Remove the currently running container
 
 ```bash
-docker rm -v mysql
+$ docker rm -v mysql
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose rm -v mysql
+$ docker-compose rm -v mysql
 ```
 
 ### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image.
 
 ```bash
-docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
+$ docker run --name mysql bitnami/mysql:latest
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose start mysql
+$ docker-compose start mysql
 ```
 
 # Notable Changes
@@ -571,10 +492,9 @@ docker-compose start mysql
 
 - `MYSQL_MASTER_USER` has been renamed to `MYSQL_MASTER_ROOT_USER`
 - `MYSQL_MASTER_PASSWORD` has been renamed to `MYSQL_MASTER_ROOT_PASSWORD`
-- `MYSQl_ROOT_USER` has been added to the available env variables. It can be used to specify the admin user.
+- `MYSQL_ROOT_USER` has been added to the available env variables. It can be used to specify the admin user.
 - `ALLOW_EMPTY_PASSWORD` has been added to the available env variables. It can be used to allow blank passwords for MySQL.
 - By default the MySQL image requires a root password to start. You can specify it using the `MYSQL_ROOT_PASSWORD` env variable or disable this requirement by setting the `ALLOW_EMPTY_PASSWORD`  env variable to `yes` (testing or development scenarios).
-
 
 # Contributing
 
@@ -598,7 +518,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2015-2016 Bitnami
+Copyright (c) 2015-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

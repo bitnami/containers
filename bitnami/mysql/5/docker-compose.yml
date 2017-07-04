@@ -8,7 +8,7 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - 'mysql_data:/bitnami/mysql'
+      - 'mysql_data:/bitnami'
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
