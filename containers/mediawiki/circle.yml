@@ -5,7 +5,7 @@ machine:
     RELEASE_SERIES_LIST: 1
     LATEST_STABLE: 1
     IMAGE_NAME: mediawiki
-    CHART_NAME:
+    CHART_NAME: mediawiki
     CHART_REPO: https://github.com/kubernetes/charts
     DOCKER_PROJECT: bitnami
     QUAY_PROJECT: bitnami

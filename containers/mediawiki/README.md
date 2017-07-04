@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-mediawiki/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-mediawiki/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-mediawiki/master/kubernetes.yml)
 
 # What is Mediawiki?
@@ -15,15 +15,15 @@ https://www.mediawiki.org/
 ## Docker Compose
 
 ```bash
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-mediawiki/master/docker-compose.yml
-$ docker-compose up
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mediawiki/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-mediawiki/master/kubernetes.yml
@@ -59,26 +59,20 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'mariadb_data:/bitnami/mariadb'
+      - 'mariadb_data:/bitnami'
   mediawiki:
     image: 'bitnami/mediawiki:latest'
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - 'mediawiki_data:/bitnami/mediawiki'
-      - 'apache_data:/bitnami/apache'
-      - 'php_data':/bitnami/php"
+      - 'mediawiki_data:/bitnami'
     depends_on:
       - mariadb
 volumes:
   mariadb_data:
     driver: local
   mediawiki_data:
-    driver: local
-  apache_data:
-    driver: local
-  php_data:
     driver: local
 ```
 
@@ -110,18 +104,18 @@ Then you can access your application at http://your-ip/
 
 ## Persisting your application
 
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
 
-For persistence of the MediaWiki deployment, the above examples define the docker volumes `mariadb_data`, `php_data`, `apache_data` and `mediawiki_data`. The MediaWiki application state will persist as long as these volumes are not removed.
+The above examples define docker volumes namely `mariadb_data` and `mediawiki_data`. The MediaWiki application state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
-
-> **Note!** If you have already started using your application, follow the steps on [backing up](#backing-up-your-application) to pull the data from your running container down to your host.
 
 ### Mount host directories as data volumes with Docker Compose
 
 This requires a minor change to the `docker-compose.yml` template previously shown:
+
 ```yaml
 version: '2'
 
@@ -131,7 +125,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - '/path/to/mariadb-persistence:/bitnami/mariadb'
+      - '/path/to/mariadb-persistence:/bitnami'
   mediawiki:
     image: 'bitnami/mediawiki:latest'
     depends_on:
@@ -140,9 +134,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - '/path/to/mediawiki-persistence:/bitnami/mediawiki'
-      - '/path/to/apache-persistence:/bitnami/apache'
-      - '/path/to/php-persistence:/bitnami/php'
+      - '/path/to/mediawiki-persistence:/bitnami'
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -160,7 +152,7 @@ In this case you need to specify the directories to mount on the run command. Th
   ```bash
   $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
     --net mediawiki-tier \
-    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+    --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
   ```
 
@@ -171,9 +163,7 @@ In this case you need to specify the directories to mount on the run command. Th
   ```bash
   $ docker run -d --name mediawiki -p 80:80 -p 443:443 \
     --net mediawiki-tier \
-    --volume /path/to/mediawiki-persistence:/bitnami/mediawiki \
-    --volume /path/to/apache-persistence:/bitnami/apache \
-    --volume /path/to/php-persistence:/bitnami/php \
+    --volume /path/to/mediawiki-persistence:/bitnami \
     bitnami/mediawiki:latest
   ```
 
@@ -192,7 +182,15 @@ Bitnami provides up-to-date versions of MariaDB and Mediawiki, including securit
  * For docker-compose: `$ docker-compose stop mediawiki`
  * For manual execution: `$ docker stop mediawiki`
 
-3. (For non-compose execution only) Create a [backup](#backing-up-your-application) if you have not mounted the mediawiki folder in the host.
+3. Take a snapshot of the application state
+
+```bash
+$ rsync -a /path/to/mediawiki-persistence /path/to/mediawiki-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+Additionally, [snapshot the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
+
+You can use these snapshots to restore the application state should the upgrade fail.
 
 4. Remove the currently running container
 
@@ -205,10 +203,13 @@ Bitnami provides up-to-date versions of MariaDB and Mediawiki, including securit
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name mediawiki bitnami/mediawiki:latest`
 
 # Configuration
+
 ## Environment variables
- When you start the mediawiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+
+When you start the mediawiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
+
 ```yaml
 mediawiki:
   image: bitnami/mediawiki:latest
@@ -217,10 +218,6 @@ mediawiki:
     - 443:443
   environment:
     - MEDIAWIKI_PASSWORD=my_password
-  volumes_from:
-    - mediawiki_data
-    - apache_data
-    - php_data
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -229,9 +226,7 @@ mediawiki:
   $ docker run -d --name mediawiki -p 80:80 -p 443:443 \
     -e MEDIAWIKI_PASSWORD=my_password \
     --net mediawiki-tier \
-    --volume /path/to/mediawiki-persistence:/bitnami/mediawiki \
-    --volume /path/to/apache-persistence:/bitnami/apache \
-    --volume /path/to/php-persistence:/bitnami/php \
+    --volume /path/to/mediawiki-persistence:/bitnami \
     bitnami/mediawiki:latest
   ```
 
@@ -249,6 +244,7 @@ Available variables:
 ### SMTP Configuration
 
 To configure Mediawiki to send email using SMTP you can set the following environment variables:
+
  - `SMTP_HOST`: SMTP host.
  - `SMTP_HOST_ID`: SMTP host ID.
  - `SMTP_PORT`: SMTP port.
@@ -271,10 +267,6 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PORT=465
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
-    volumes_from:
-      - mediawiki_data
-      - apache_data
-      - php_data
 ```
  * For manual execution:
 
@@ -286,32 +278,9 @@ This would be an example of SMTP configuration using a GMail account:
     -e SMTP_USER=your_email@gmail.com \
     -e SMTP_PASSWORD=your_password \
     --net mediawiki-tier \
-    --volume /path/to/mediawiki-persistence:/bitnami/mediawiki \
-    --volume /path/to/apache-persistence:/bitnami/apache \
-    --volume /path/to/php-persistence:/bitnami/php \
+    --volume /path/to/mediawiki-persistence:/bitnami \
     bitnami/mediawiki:latest
   ```
-
-# Backing up your application
-
-To backup your application data follow these steps:
-
-1. Stop the running container:
-
-  * For docker-compose: `$ docker-compose stop mediawiki`
-  * For manual execution: `$ docker stop mediawiki`
-
-2. Copy the Mediawiki data folder in the host:
-
-  ```
-  $ docker cp /path/to/mediawiki-persistence:/bitnami/mediawiki
-  $ docker cp /path/to/apache-persistence:/bitnami/apache
-  $ docker cp /path/to/php-persistence:/bitnami/php
-  ```
-
-# Restoring a backup
-
-To restore your application using backed up data simply mount the folder with Mediawiki data in the container. See [persisting your application](#persisting-your-application) section for more info.
 
 # How to migrate from a Bitnami Mediawiki Stack
 
@@ -358,7 +327,7 @@ You can follow these steps in order to migrate it to this container:
 6. Obtain the password used by Mediawiki to access the database in order avoid reconfiguring it:
 
   ```bash
-  $ docker-compose exec mediawiki bash -c 'cat /opt/bitnami/mediawiki/LocalSettings.php | grep wgDBpassword'  
+  $ docker-compose exec mediawiki bash -c 'cat /opt/bitnami/mediawiki/LocalSettings.php | grep wgDBpassword'
   ```
 
 7. Restore the database backup: (replace ROOT_PASSWORD below with your MariaDB root password)
@@ -395,22 +364,17 @@ You can follow these steps in order to migrate it to this container:
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an
-[issue](https://github.com/bitnami/bitnami-docker-mediawiki/issues), or submit a
-[pull request](https://github.com/bitnami/bitnami-docker-mediawiki/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-mediawiki/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-mediawiki/pulls) with your contribution.
 
 # Issues
 
-If you encountered a problem running this container, you can file an
-[issue](https://github.com/bitnami/bitnami-docker-mediawiki/issues). For us to provide better support,
-be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-mediawiki/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`$ docker version`)
 - Output of `$ docker info`
 - Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
-- The command you used to run the container, and any relevant output you saw (masking any sensitive
-information)
+- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # Community
 
@@ -423,7 +387,7 @@ Discussions are archived at
 
 # License
 
-Copyright 2017 Bitnami
+Copyright 2016-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
