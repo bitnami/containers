@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r17
+FROM bitnami/minideb-extras:jessie-r19
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 
@@ -11,7 +11,7 @@ COPY rootfs /
 
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.18-r6" \
+    BITNAMI_IMAGE_VERSION="5.7.18-r7" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
@@ -29,7 +29,6 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
 
 
 
-VOLUME ["/bitnami/mysql"]
 
 EXPOSE 3306
 
