@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-dreamfactory/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-dreamfactory/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-dreamfactory/master/kubernetes.yml)
 
 # What is DreamFactory?
@@ -13,15 +13,15 @@ https://www.dreamfactory.com/
 ## Docker Compose
 
 ```bash
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-dreamfactory/master/docker-compose.yml
-$ docker-compose up
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-dreamfactory/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING**: This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-dreamfactory/master/kubernetes.yml
@@ -54,19 +54,19 @@ services:
   mariadb:
     image: bitnami/mariadb:latest
     volumes:
-      - mariadb_data:/bitnami/mariadb
+      - mariadb_data:/bitnami
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
   mongodb:
     image: 'bitnami/mongodb:latest'
     volumes:
-      - 'mongodb_data:/bitnami/mongodb'
+      - 'mongodb_data:/bitnami'
   redis:
     image: 'bitnami/redis:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'redis_data:/bitnami/redis'
+      - 'redis_data:/bitnami'
   dreamfactory:
     image: bitnami/dreamfactory:latest
     depends_on:
@@ -77,9 +77,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - dreamfactory_data:/bitnami/dreamfactory
-      - apache_data:/bitnami/apache
-      - php_data:/bitnami/php
+      - dreamfactory_data:/bitnami
 
 volumes:
   mariadb_data:
@@ -89,10 +87,6 @@ volumes:
   redis_data:
     driver: local
   dreamfactory_data:
-    driver: local
-  apache_data:
-    driver: local
-  php_data:
     driver: local
 ```
 
@@ -118,7 +112,7 @@ $ docker network create dreamfactory-tier
 $ docker volume create --name mariadb_data
 $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes\
   --net dreamfactory-tier \
-  --volume mariadb_data:/bitnami/mariadb \
+  --volume mariadb_data:/bitnami \
   bitnami/mariadb:latest
 ```
 
@@ -128,7 +122,7 @@ $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes\
 $ docker volume create --name mongodb_data
 $ docker run -d --name mongodb \
   --net dreamfactory-tier \
-  --volume mongodb_data:/bitnami/mongodb \
+  --volume mongodb_data:/bitnami \
   bitnami/mongodb:latest
 ```
 
@@ -138,7 +132,7 @@ $ docker run -d --name mongodb \
 $ docker volume create --name redis_data
 $ docker run -d --name redis -e ALLOW_EMPTY_PASSWORD=yes \
   --net dreamfactory-tier \
-  --volume redis_data:/bitnami/redis \
+  --volume redis_data:/bitnami \
   bitnami/redis:latest
 ```
 
@@ -146,13 +140,9 @@ $ docker run -d --name redis -e ALLOW_EMPTY_PASSWORD=yes \
 
 ```bash
 $ docker volume create --name dreamfactory_data
-$ docker volume create --name apache_data
-$ docker volume create --name php_data
 $ docker run -d --name dreamfactory -p 80:80 -p 443:443 \
   --net dreamfactory-tier \
-  --volume dreamfactory_data:/bitnami/dreamfactory \
-  --volume apache_data:/bitnami/apache \
-  --volume php_data:/bitnami/php \
+  --volume dreamfactory_data:/bitnami \
   bitnami/dreamfactory:latest
 ```
 
@@ -160,9 +150,13 @@ Access your application at http://your-ip/
 
 ## Persisting your application
 
-For persistence of the DreamFactory deployment, the above examples define docker volumes namely `mariadb_data`, `mongodb_data`, `redis_data`, `dreamfactory_data`, `apache_data` and `php_data`. The DreamFactory application state will persist as long as these volumes are not removed.
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume). Alternatively you can make use of volume plugins to host the volume data.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for persistence of the [MariaDB](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database), [MongoDB](https://github.com/bitnami/bitnami-docker-mongodb#persisting-your-database) and [Redis](https://github.com/bitnami/bitnami-docker-redis#persisting-your-database) data.
+
+The above examples define docker volumes namely `mariadb_data`, `mongodb_data`, `redis_data` and `dreamfactory_data`. The DreamFactory application state will persist as long as these volumes are not removed.
+
+To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ### Mount host directories as data volumes with Docker Compose
 
@@ -177,17 +171,17 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - /path/to/mariadb-persistence:/bitnami/mariadb
+      - /path/to/mariadb-persistence:/bitnami
   mongodb:
     image: 'bitnami/mongodb:latest'
     volumes:
-      - '/path/to/your/local/mongodb_data:/bitnami/mongodb'
+      - '/path/to/mongodb-persistence:/bitnami'
   redis:
     image: 'bitnami/redis:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - '/path/to/your/local/redis_data:/bitnami/redis'
+      - '/path/to/redis-persistence:/bitnami'
   dreamfactory:
     image: bitnami/dreamfactory:latest
     depends_on:
@@ -198,9 +192,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - /path/to/dreamfactory-persistence:/bitnami/dreamfactory
-      - /path/to/apache-persistence:/bitnami/apache
-      - /path/to/php-persistence:/bitnami/php
+      - /path/to/dreamfactory-persistence:/bitnami
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -216,7 +208,7 @@ $ docker network create dreamfactory-tier
 ```bash
 $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
   --net dreamfactory-tier \
-  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+  --volume /path/to/mariadb-persistence:/bitnami \
   bitnami/mariadb:latest
 ```
 
@@ -225,7 +217,7 @@ $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
 ```bash
 $ docker run -d --name mongodb \
   --net dreamfactory-tier \
-  --volume /path/to/mongodb-persistence:/bitnami/mongodb \
+  --volume /path/to/mongodb-persistence:/bitnami \
   bitnami/mongodb:latest
 ```
 
@@ -233,9 +225,9 @@ $ docker run -d --name mongodb \
 4. Create a Redis container with host volume
 
 ```bash
-$ docker run -d --name redis -e ALLOW_EMPTY_PASSWORD=yes\\
+$ docker run -d --name redis -e ALLOW_EMPTY_PASSWORD=yes \
   --net dreamfactory-tier \
-  --volume /path/to/redis-persistence:/bitnami/redis \
+  --volume /path/to/redis-persistence:/bitnami \
   bitnami/redis:latest
 ```
 
@@ -244,9 +236,7 @@ $ docker run -d --name redis -e ALLOW_EMPTY_PASSWORD=yes\\
 ```bash
 $ docker run -d --name dreamfactory -p 80:80 -p 443:443 \
   --net dreamfactory-tier \
-  --volume /path/to/dreamfactory-persistence:/bitnami/dreamfactory \
-  --volume /path/to/apache-persistence:/bitnami/apache \
-  --volume /path/to/php-persistence:/bitnami/php \
+  --volume /path/to/dreamfactory-persistence:/bitnami \
   bitnami/dreamfactory:latest
 ```
 
@@ -256,60 +246,36 @@ Bitnami provides up-to-date versions of MariaDB, MongoDB, Redis and DreamFactory
 
 The `bitnami/dreamfactory:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/dreamfactory:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/dreamfactory/tags/).
 
-Get the updated image:
+1. Get the updated images:
 
-```
-$ docker pull bitnami/dreamfactory:latest
-```
+  ```bash
+  $ docker pull bitnami/dreamfactory:latest
+  ```
 
-## Using Docker Compose
+2. Stop your container
 
-1. Stop the running DreamFactory container
+ * For docker-compose: `$ docker-compose stop dreamfactory`
+ * For manual execution: `$ docker stop dreamfactory`
 
-```bash
-$ docker-compose stop dreamfactory
-```
-
-2. Remove the stopped container
+3. Take a snapshot of the application state
 
 ```bash
-$ docker-compose rm dreamfactory
+$ rsync -a /path/to/dreamfactory-persistence /path/to/dreamfactory-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
-3. Launch the updated DreamFactory image
+Additionally, snapshot the [MariaDB](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container), [MongoDB](https://github.com/bitnami/bitnami-docker-mongodb#step-2-stop-and-backup-the-currently-running-container) and [Redis](https://github.com/bitnami/bitnami-docker-redis#step-2-stop-and-backup-the-currently-running-container) data.
 
-```bash
-$ docker-compose start dreamfactory
-```
+You can use these snapshots to restore the application state should the upgrade fail.
 
-## Using Docker command line
+4. Remove the currently running container
 
-1. Stop the running DreamFactory container
+ * For docker-compose: `$ docker-compose rm -v dreamfactory`
+ * For manual execution: `$ docker rm -v dreamfactory`
 
-```bash
-$ docker stop dreamfactory
-```
+5. Run the new image
 
-2. Remove the stopped container
-
-```bash
-$ docker rm dreamfactory
-```
-
-3. Launch the updated DreamFactory image
-
-```bash
-$ docker run -d --name dreamfactory -p 80:80 -p 443:443 \
-  --net dreamfactory-tier \
-  --volume dreamfactory_data:/bitnami/dreamfactory \
-  --volume apache_data:/bitnami/apache \
-  --volume php_data:/bitnami/php \
-  bitnami/dreamfactory:latest
-```
-
-> **NOTE**:
->
-> The above command assumes that local docker volumes are in use. Edit the command according to your usage.
+ * For docker-compose: `$ docker-compose start dreamfactory`
+ * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name dreamfactory bitnami/dreamfactory:latest`
 
 # Configuration
 
@@ -342,17 +308,17 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - mariadb_data:/bitnami/mariadb
+      - mariadb_data:/bitnami
   mongodb:
     image: bitnami/mongodb:latest
     volumes:
-      - mongodb_data:/bitnami/mongodb
+      - mongodb_data:/bitnami
   redis:
     image: bitnami/redis:latest
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - redis_data:/bitnami/mariadb
+      - redis_data:/bitnami
   dreamfactory:
     image: bitnami/dreamfactory:latest
     depends_on:
@@ -365,9 +331,7 @@ services:
     environment:
       - DREAMFACTORY_PASSWORD=my_password
     volumes:
-      - dreamfactory_data:/bitnami/dreamfactory
-      - apache_data:/bitnami/apache
-      - php_data:/bitnami/php
+      - dreamfactory_data:/bitnami
 
 volumes:
   mariadb_data:
@@ -378,10 +342,6 @@ volumes:
     driver: local
   dreamfactory_data:
     driver: local
-  apache_data:
-    driver: local
-  php_data:
-    driver: local
 ```
 
 ### Specifying environment variables on the Docker command line
@@ -390,63 +350,9 @@ volumes:
 $ docker run -d --name dreamfactory -p 80:80 -p 443:443 \
   --net dreamfactory-tier \
   --env DREAMFACTORY_PASSWORD=my_password \
-  --volume dreamfactory_data:/bitnami/dreamfactory \
-  --volume apache_data:/bitnami/apache \
-  --volume php_data:/bitnami/php \
+  --volume dreamfactory_data:/bitnami \
   bitnami/dreamfactory:latest
 ```
-
-# Backing up your application
-
-To backup your application data follow these steps:
-
-## Backing up using Docker Compose
-
-1. Stop the DreamFactory container:
-
-```bash
-$ docker-compose stop dreamfactory
-```
-
-2. Copy the DreamFactory, Apache and PHP data
-
-```bash
-$ docker cp $(docker-compose ps -q dreamfactory):/bitnami/dreamfactory/ /path/to/backups/dreamfactory/latest/
-$ docker cp $(docker-compose ps -q dreamfactory):/bitnami/apache/ /path/to/backups/apache/latest/
-$ docker cp $(docker-compose ps -q dreamfactory):/bitnami/php/ /path/to/backups/php/latest/
-```
-
-3. Start the DreamFactory container
-
-```bash
-$ docker-compose start dreamfactory
-```
-
-## Backing up using the Docker command line
-
-1. Stop the DreamFactory container:
-
-```bash
-$ docker stop dreamfactory
-```
-
-2. Copy the DreamFactory, Apache and PHP data
-
-```bash
-$ docker cp dreamfactory:/bitnami/dreamfactory/ /path/to/backups/dreamfactory/latest/
-$ docker cp dreamfactory:/bitnami/apache/ /path/to/backups/apache/latest/
-$ docker cp dreamfactory:/bitnami/php/ /path/to/backups/php/latest/
-```
-
-3. Start the DreamFactory container
-
-```bash
-$ docker start dreamfactory
-```
-
-# Restoring a backup
-
-To restore your application using backed up data simply mount the folder with DreamFactory, Apache and PHP data in the container. See [persisting your application](#persisting-your-application) section for more info.
 
 # Contributing
 
@@ -470,7 +376,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2017 Bitnami
+Copyright 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
