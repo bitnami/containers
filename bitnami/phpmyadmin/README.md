@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-phpmyadmin/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-phpmyadmin/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-phpmyadmin/master/kubernetes.yml)
 
 # What is phpMyAdmin?
@@ -13,15 +13,15 @@ https://www.phpmyadmin.net/
 ## Docker Compose
 
 ```bash
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-phpmyadmin/master/docker-compose.yml
-$ docker-compose up
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-phpmyadmin/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-phpmyadmin/master/kubernetes.yml
@@ -56,7 +56,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - mariadb_data:/bitnami/mariadb
+      - mariadb_data:/bitnami
   phpmyadmin:
     image: bitnami/phpmyadmin:latest
     depends_on:
@@ -65,18 +65,12 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - phpmyadmin_data:/bitnami/phpmyadmin
-      - apache_data:/bitnami/apache
-      - php_data:/bitnami/php
+      - phpmyadmin_data:/bitnami
 
 volumes:
   mariadb_data:
     driver: local
   phpmyadmin_data:
-    driver: local
-  apache_data:
-    driver: local
-  php_data:
     driver: local
 ```
 
@@ -102,7 +96,7 @@ $ docker network create phpmyadmin-tier
 $ docker volume create --name mariadb_data
 $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
   --net phpmyadmin-tier \
-  --volume mariadb_data:/bitnami/mariadb \
+  --volume mariadb_data:/bitnami \
   bitnami/mariadb:latest
 ```
 
@@ -110,13 +104,9 @@ $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
 
 ```bash
 $ docker volume create --name phpmyadmin_data
-$ docker volume create --name php_data
-$ docker volume create --name apache_data
 $ docker run -d --name phpmyadmin -p 80:80 -p 443:443 \
   --net phpmyadmin-tier \
-  --volume phpmyadmin_data:/bitnami/phpmyadmin \
-  --volume php_data:/bitnami/php \
-  --volume apache_data:/bitnami/apache \
+  --volume phpmyadmin_data:/bitnami \
   bitnami/phpmyadmin:latest
 ```
 
@@ -124,9 +114,13 @@ Access your application at http://your-ip/
 
 ## Persisting your application
 
-For persistence of the phpMyAdmin deployment, the above examples define docker volumes namely `mariadb_data`, `phpmyadmin_data`, `php_data` and `apache_data`. The phpMyAdmin application state will persist as long as these volumes are not removed.
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume). Alternatively you can make use of volume plugins to host the volume data.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
+
+The above examples define docker volumes namely `mariadb_data` and `phpmyadmin_data`. The phpMyAdmin application state will persist as long as these volumes are not removed.
+
+To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ### Mount host directories as data volumes with Docker Compose
 
@@ -141,7 +135,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - /path/to/mariadb-persistence:/bitnami/mariadb
+      - /path/to/mariadb-persistence:/bitnami
   phpmyadmin:
     image: bitnami/phpmyadmin:latest
     depends_on:
@@ -150,9 +144,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - /path/to/phpmyadmin-persistence:/bitnami/phpmyadmin
-      - /path/to/php-persistence:/bitnami/php
-      - /path/to/apache-persistence:/bitnami/apache
+      - /path/to/phpmyadmin-persistence:/bitnami
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -168,7 +160,7 @@ $ docker network create phpmyadmin-tier
 ```bash
 $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
   --net phpmyadmin-tier \
-  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+  --volume /path/to/mariadb-persistence:/bitnami \
   bitnami/mariadb:latest
 ```
 
@@ -177,9 +169,7 @@ $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
 ```bash
 $ docker run -d --name phpmyadmin -p 80:80 -p 443:443 \
   --net phpmyadmin-tier \
-  --volume /path/to/phpmyadmin-persistence:/bitnami/phpmyadmin \
-  --volume /path/to/php-persistence:/bitnami/php \
-  --volume /path/to/apache-persistence:/bitnami/apache \
+  --volume /path/to/phpmyadmin-persistence:/bitnami \
   bitnami/phpmyadmin:latest
 ```
 
@@ -189,60 +179,36 @@ Bitnami provides up-to-date versions of MariaDB and phpMyAdmin, including securi
 
 The `bitnami/phpmyadmin:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/phpmyadmin:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/phpmyadmin/tags/).
 
-Get the updated image:
+1. Get the updated images:
 
-```
-$ docker pull bitnami/phpmyadmin:latest
-```
+  ```bash
+  $ docker pull bitnami/phpmyadmin:latest
+  ```
 
-## Using Docker Compose
+2. Stop your container
 
-1. Stop the running phpMyAdmin container
+ * For docker-compose: `$ docker-compose stop phpmyadmin`
+ * For manual execution: `$ docker stop phpmyadmin`
 
-```bash
-$ docker-compose stop phpmyadmin
-```
-
-2. Remove the stopped container
+3. Take a snapshot of the application state
 
 ```bash
-$ docker-compose rm phpmyadmin
+$ rsync -a /path/to/phpmyadmin-persistence /path/to/phpmyadmin-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
-3. Launch the updated phpMyAdmin image
+Additionally, [snapshot the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
 
-```bash
-$ docker-compose start phpmyadmin
-```
+You can use these snapshots to restore the application state should the upgrade fail.
 
-## Using Docker command line
+4. Remove the currently running container
 
-1. Stop the running phpMyAdmin container
+ * For docker-compose: `$ docker-compose rm -v phpmyadmin`
+ * For manual execution: `$ docker rm -v phpmyadmin`
 
-```bash
-$ docker stop phpmyadmin
-```
+5. Run the new image
 
-2. Remove the stopped container
-
-```bash
-$ docker rm phpmyadmin
-```
-
-3. Launch the updated phpMyAdmin image
-
-```bash
-$ docker run -d --name phpmyadmin -p 80:80 -p 443:443 \
-  --net phpmyadmin-tier \
-  --volume phpmyadmin_data:/bitnami/phpmyadmin \
-  --volume php_data:/bitnami/php \
-  --volume apache_data:/bitnami/apache \
-  bitnami/phpmyadmin:latest
-```
-
-> **NOTE**:
->
-> The above command assumes that local docker volumes are in use. Edit the command according to your usage.
+ * For docker-compose: `$ docker-compose start phpmyadmin`
+ * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name phpmyadmin bitnami/phpmyadmin:latest`
 
 # Configuration
 
@@ -267,7 +233,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - mariadb_data:/bitnami/mariadb
+      - mariadb_data:/bitnami
   phpmyadmin:
     image: bitnami/phpmyadmin:latest
     depends_on:
@@ -279,18 +245,12 @@ services:
       - PHPMYADMIN_ALLOW_NO_PASSWORD=false
       - PHPMYADMIN_ALLOW_ARBITRARY_SERVER=true
     volumes:
-      - phpmyadmin_data:/bitnami/phpmyadmin
-      - php_data:/bitnami/php
-      - apache_data:/bitnami/apache
+      - phpmyadmin_data:/bitnami
 
 volumes:
   mariadb_data:
     driver: local
   phpmyadmin_data:
-    driver: local
-  php_data:
-    driver: local
-  apache_data:
     driver: local
 ```
 
@@ -300,63 +260,9 @@ volumes:
 $ docker run -d --name phpmyadmin -p 80:80 -p 443:443 \
   --net phpmyadmin-tier \
   --env PHPMYADMIN_PASSWORD=my_password \
-  --volume phpmyadmin_data:/bitnami/phpmyadmin \
-  --volume php_data:/bitnami/php \
-  --volume apache_data:/bitnami/apache \
+  --volume phpmyadmin_data:/bitnami \
   bitnami/phpmyadmin:latest
 ```
-
-# Backing up your application
-
-To backup your application data follow these steps:
-
-## Backing up using Docker Compose
-
-1. Stop the phpMyAdmin container:
-
-```bash
-$ docker-compose stop phpmyadmin
-```
-
-2. Copy the phpMyAdmin, PHP and Apache data
-
-```bash
-$ docker cp $(docker-compose ps -q phpmyadmin):/bitnami/phpmyadmin/ /path/to/backups/phpmyadmin/latest/
-$ docker cp $(docker-compose ps -q php):/bitnami/php/ /path/to/backups/php/latest/
-$ docker cp $(docker-compose ps -q phpmyadmin):/bitnami/apache/ /path/to/backups/apache/latest/
-```
-
-3. Start the phpMyAdmin container
-
-```bash
-$ docker-compose start phpmyadmin
-```
-
-## Backing up using the Docker command line
-
-1. Stop the phpMyAdmin container:
-
-```bash
-$ docker stop phpmyadmin
-```
-
-2. Copy the phpMyAdmin, PHP and Apache data
-
-```bash
-$ docker cp phpmyadmin:/bitnami/phpmyadmin/ /path/to/backups/phpmyadmin/latest/
-$ docker cp phpmyadmin:/bitnami/php/ /path/to/backups/php/latest/
-$ docker cp phpmyadmin:/bitnami/apache/ /path/to/backups/apache/latest/
-```
-
-3. Start the phpMyAdmin container
-
-```bash
-$ docker start phpmyadmin
-```
-
-# Restoring a backup
-
-To restore your application using backed up data simply mount the folder with phpMyAdmin and Apache data in the container. See [persisting your application](#persisting-your-application) section for more info.
 
 # Contributing
 
@@ -380,7 +286,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2015-2016 Bitnami
+Copyright 2016-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

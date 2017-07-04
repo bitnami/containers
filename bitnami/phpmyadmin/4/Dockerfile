@@ -15,7 +15,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="4.7.2-r0" \
+    BITNAMI_IMAGE_VERSION="4.7.2-r1" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
     PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:$PATH" \
@@ -25,7 +25,6 @@ ENV APACHE_HTTPS_PORT_NUMBER="443" \
 
 
 
-VOLUME ["/bitnami/apache","/bitnami/php","/bitnami/phpmyadmin"]
 
 EXPOSE 80 443
 
