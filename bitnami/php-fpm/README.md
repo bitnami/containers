@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-php-fpm/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-php-fpm/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-php-fpm/master/kubernetes.yml)
 
 # What is PHP-FPM?
@@ -11,28 +11,21 @@
 # TL;DR;
 
 ```bash
-docker run -it --name phpfpm -v /path/to/app:/app bitnami/php-fpm
+$ docker run -it --name phpfpm -v /path/to/app:/app bitnami/php-fpm
 ```
 
 ## Docker Compose
 
-```yaml
-version: '2'
-
-services:
-  phpfpm:
-    image: 'bitnami/php-fpm:latest'
-    ports:
-      - '9000:9000'
-    volumes:
-      - /path/to/app:/app
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-php-fpm/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-php-fpm/master/kubernetes.yml
@@ -50,7 +43,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-php
 
  - [`7.1`, `7.1.6-r0`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.6-r0/7.1/Dockerfile)
  - [`7.0`, `7.0.20-r0` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.20-r0/7.0/Dockerfile)
- - [`5.6`, `5.6.30-r4` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.30-r4/5.6/Dockerfile)
+ - [`5.6`, `5.6.30-r5` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.30-r5/5.6/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
 
@@ -59,19 +52,19 @@ Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https
 The recommended way to get the Bitnami PHP-FPM Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/php-fpm).
 
 ```bash
-docker pull bitnami/php-fpm:latest
+$ docker pull bitnami/php-fpm:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/php-fpm/tags/) in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/php-fpm:[TAG]
+$ docker pull bitnami/php-fpm:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
 ```bash
-docker build -t bitnami/php-fpm https://github.com/bitnami/bitnami-docker-php-fpm.git
+$ docker build -t bitnami/php-fpm https://github.com/bitnami/bitnami-docker-php-fpm.git
 ```
 
 # Connecting to other containers
@@ -85,7 +78,7 @@ We will use PHP-FPM with nginx to serve our PHP app. Doing so will allow us to s
 ### Step 1: Create a network
 
 ```bash
-docker network create app-tier --driver bridge
+$ docker network create app-tier --driver bridge
 ```
 
 or using Docker Compose:
@@ -104,21 +97,21 @@ Let's create an nginx virtual host to reverse proxy to our PHP-FPM container.
 
 ```nginx
 server {
-    listen 0.0.0.0:80;
-    server_name myapp.com;
+  listen 0.0.0.0:80;
+  server_name myapp.com;
 
-    root /app;
+  root /app;
 
-    location / {
-        index index.php;
-    }
+  location / {
+    index index.php;
+  }
 
-    location ~ \.php$ {
-        # fastcgi_pass [PHP_FPM_LINK_NAME]:9000;
-        fastcgi_pass myapp:9000;
-        fastcgi_index index.php;
-        include fastcgi.conf;
-    }
+  location ~ \.php$ {
+    # fastcgi_pass [PHP_FPM_LINK_NAME]:9000;
+    fastcgi_pass myapp:9000;
+    fastcgi_index index.php;
+    include fastcgi.conf;
+  }
 }
 ```
 
@@ -131,7 +124,7 @@ Copy the virtual host above, saving the file somewhere on your host. We will mou
 Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our PHP-FPM server to make it easier to connect to other containers.
 
 ```bash
-docker run -it --name phpfpm \
+$ docker run -it --name phpfpm \
   --network app-tier
   -v /path/to/app:/app \
   bitnami/php-fpm
@@ -152,7 +145,7 @@ services:
 ### Step 4: Run the nginx image
 
 ```bash
-docker run -it \
+$ docker run -it \
   -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf \
   --network app-tier \
   bitnami/nginx
@@ -184,7 +177,7 @@ Since this image bundles a PHP runtime, you may want to make use of PHP outside 
 PHP provides a REPL where you can interactively test and try things out in PHP.
 
 ```bash
-docker run -it --name phpfpm bitnami/php-fpm php -a
+$ docker run -it --name phpfpm bitnami/php-fpm php -a
 ```
 
 **Further Reading:**
@@ -196,20 +189,20 @@ docker run -it --name phpfpm bitnami/php-fpm php -a
 The default work directory for the PHP-FPM image is `/app`. You can mount a folder from your host here that includes your PHP script, and run it normally using the `php` command.
 
 ```bash
-docker run -it --name php-fpm -v /path/to/app:/app bitnami/php-fpm \
+$ docker run -it --name php-fpm -v /path/to/app:/app bitnami/php-fpm \
   php script.php
 ```
 
 # Configuration
 
-This container looks for configurations in `/bitnami/php-fpm/conf`. You can mount a directory at `/bitnami/php-fpm` with your own configurations in `conf/`, or the default configuration will be copied at `conf/` if it is empty.
+The image looks for configurations in `/bitnami/php-fpm/conf/`. You can mount a volume at `/bitnami` and copy/edit the configurations in `/bitnami/php-fpm/php-fpm/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
 ### Step 1: Run the PHP-FPM image
 
 Run the PHP-FPM image, mounting a directory from your host.
 
 ```bash
-docker run --name phpfpm -v /path/to/php-fpm:/bitnami/php-fpm bitnami/php-fpm
+$ docker run --name phpfpm -v /path/to/php-fpm:/bitnami bitnami/php-fpm
 ```
 
 or using Docker Compose:
@@ -223,7 +216,7 @@ services:
     ports:
       - '9000:9000'
     volumes:
-      - /path/to/php-fpm:/bitnami/php-fpm
+      - /path/to/php-fpm:/bitnami
 ```
 
 ### Step 2: Edit the configuration
@@ -231,7 +224,7 @@ services:
 Edit the configuration on your host using your favorite editor.
 
 ```bash
-vi /path/to/php-fpm/conf/php-fpm.conf
+$ vi /path/to/php-fpm/php-fpm/conf/php-fpm.conf
 ```
 
 ### Step 3: Restart PHP-FPM
@@ -239,13 +232,13 @@ vi /path/to/php-fpm/conf/php-fpm.conf
 After changing the configuration, restart your PHP-FPM container for the changes to take effect.
 
 ```bash
-docker restart phpfpm
+$ docker restart phpfpm
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose restart phpfpm
+$ docker-compose restart phpfpm
 ```
 
 # Logging
@@ -255,73 +248,18 @@ The Bitnami PHP-FPM Docker Image sends the container logs to the `stdout`. You c
 To view the logs:
 
 ```bash
-docker logs phpfpm
+$ docker logs phpfpm
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose logs phpfpm
+$ docker-compose logs phpfpm
 ```
 
 *The `docker logs` command is only available when the `json-file` or `journald` logging driver is in use.*
 
 # Maintenance
-
-## Backing up your container
-
-To backup your configurations, follow these simple steps:
-
-### Step 1: Stop the currently running container
-
-```bash
-docker stop phpfpm
-```
-
-or using Docker Compose:
-
-```bash
-docker-compose stop phpfpm
-```
-
-### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```bash
-docker run --rm -v /path/to/backups:/backups --volumes-from phpfpm busybox \
-  cp -a /bitnami/php-fpm /backups/latest
-```
-
-or using Docker Compose:
-
-```bash
-docker run --rm -v /path/to/backups:/backups --volumes-from `docker-compose ps -q phpfpm` busybox \
-  cp -a /bitnami/php-fpm /backups/latest
-```
-
-## Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the container.
-
-```bash
-docker run -v /path/to/backups/latest:/bitnami/php-fpm \
-  bitnami/php-fpm
-```
-
-or using Docker Compose:
-
-```yaml
-version: '2'
-
-services:
-  phpfpm:
-    image: 'bitnami/php-fpm:latest'
-    ports:
-      - '9000:9000'
-    volumes:
-      - /path/to/backups/latest:/bitnami/php-fpm
-```
 
 ## Upgrade this image
 
@@ -330,7 +268,7 @@ Bitnami provides up-to-date versions of PHP-FPM, including security patches, soo
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/php-fpm:latest
+$ docker pull bitnami/php-fpm:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -338,34 +276,50 @@ or if you're using Docker Compose, update the value of the image property to
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's configuration and logs.
+Stop the currently running container using the command
 
-Follow the steps on [creating a backup](#backing-up-your-container).
+```bash
+$ docker stop php-fpm
+```
+
+or using Docker Compose:
+
+```bash
+$ docker-compose stop php-fpm
+```
+
+Next, take a snapshot of the persistent volume `/path/to/php-fpm-persistence` using:
+
+```bash
+$ rsync -a /path/to/php-fpm-persistence /path/to/php-fpm-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
 ```bash
-docker rm -v phpfpm
+$ docker rm -v phpfpm
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose rm -v phpfpm
+$ docker-compose rm -v phpfpm
 ```
 
 ### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image.
 
 ```bash
-docker run --name phpfpm bitnami/php-fpm:latest
+$ docker run --name phpfpm bitnami/php-fpm:latest
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose start phpfpm
+$ docker-compose start phpfpm
 ```
 
 # Notable Changes
@@ -409,7 +363,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2015-2016 Bitnami
+Copyright (c) 2015-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
