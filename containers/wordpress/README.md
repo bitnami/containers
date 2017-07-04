@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-wordpress/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-wordpress/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-wordpress/master/kubernetes.yml)
 
 # What is WordPress?
@@ -21,7 +21,7 @@ $ docker-compose up
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-wordpress/master/kubernetes.yml
@@ -41,7 +41,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 
 # How to use this image
 
-WordPress requires access to a MySQL database or MariaDB database to store information. We'll use our very own [MariaDB image](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
+WordPress requires access to a MySQL or MariaDB database to store information. We'll use our very own [MariaDB image](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
 
 ## Using Docker Compose
 
@@ -54,7 +54,7 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     volumes:
-      - 'mariadb_data:/bitnami/mariadb'
+      - 'mariadb_data:/bitnami'
     environment:
       - MARIADB_USER=bn_wordpress
       - MARIADB_DATABASE=bitnami_wordpress
@@ -65,9 +65,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - 'wordpress_data:/bitnami/wordpress'
-      - 'apache_data:/bitnami/apache'
-      - 'php_data:/bitnami/php'
+      - 'wordpress_data:/bitnami'
     depends_on:
       - mariadb
     environment:
@@ -81,10 +79,6 @@ volumes:
   mariadb_data:
     driver: local
   wordpress_data:
-    driver: local
-  apache_data:
-    driver: local
-  php_data:
     driver: local
 ```
 
@@ -113,7 +107,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e MARIADB_USER=bn_wordpress \
     -e MARIADB_DATABASE=bitnami_wordpress \
     --net wordpress-tier \
-    --volume mariadb_data:/bitnami/mariadb \
+    --volume mariadb_data:/bitnami \
     bitnami/mariadb:latest
   ```
 
@@ -121,16 +115,12 @@ If you want to run the application manually instead of using `docker-compose`, t
 
   ```bash
   $ docker volume create --name wordpress_data
-  $ docker volume create --name apache_data
-  $ docker volume create --name php_data
   $ docker run -d --name wordpress -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e WORDPRESS_DATABASE_USER=bn_wordpress \
     -e WORDPRESS_DATABASE_NAME=bitnami_wordpress \
     --net wordpress-tier \
-    --volume wordpress_data:/bitnami/wordpress \
-    --volume apache_data:/bitnami/apache \
-    --volume php_data:/bitnami/php \
+    --volume wordpress_data:/bitnami \
     bitnami/wordpress:latest
   ```
 
@@ -138,9 +128,13 @@ Access your application at http://your-ip/
 
 ## Persisting your application
 
-For persistence of the WordPress deployment, the above examples define docker volumes namely `mariadb_data`, `wordpress_data`, `apache_data` and `php_data`. The WordPress application state will persist as long as these volumes are not removed.
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume). Alternatively you can make use of volume plugins to host the volume data.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
+
+The above examples define docker volumes namely `mariadb_data` and `wordpress_data`. The Wordpress application state will persist as long as these volumes are not removed.
+
+To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ### Mount host directories as data volumes with Docker Compose
 
@@ -157,7 +151,7 @@ services:
       - MARIADB_USER=bn_wordpress
       - MARIADB_DATABASE=bitnami_wordpress
     volumes:
-      - /path/to/mariadb-persistence:/bitnami/mariadb
+      - /path/to/mariadb-persistence:/bitnami
   wordpress:
     image: bitnami/wordpress:latest
     depends_on:
@@ -170,39 +164,38 @@ services:
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - /path/to/wordpress-persistence:/bitnami/wordpress
-      - /path/to/apache-persistence:/bitnami/apache
-      - /path/to/php-persistence:/bitnami/php
+      - /path/to/wordpress-persistence:/bitnami
 ```
 
 ### Mount host directories as data volumes using the Docker command line
 
 1. Create a network (if it does not exist)
+
   ```bash
   $ docker network create wordpress-tier
   ```
 
 2. Create a MariaDB container with host volume
+
   ```bash
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_wordpress \
     -e MARIADB_DATABASE=bitnami_wordpress \
     --net wordpress-tier \
-    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+    --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
   ```
 
 3. Create the WordPress the container with host volumes
+
   ```bash
   $ docker run -d --name wordpress -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e WORDPRESS_DATABASE_USER=bn_wordpress \
     -e WORDPRESS_DATABASE_NAME=bitnami_wordpress \
     --net wordpress-tier \
-    --volume /path/to/wordpress-persistence:/bitnami/wordpress \
-    --volume /path/to/apache-persistence:/bitnami/apache \
-    --volume /path/to/php-persistence:/bitnami/php \
+    --volume /path/to/wordpress-persistence:/bitnami \
     bitnami/wordpress:latest
   ```
 
@@ -212,57 +205,36 @@ Bitnami provides up-to-date versions of MariaDB and WordPress, including securit
 
 The `bitnami/wordpress:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/wordpress:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/wordpress/tags/).
 
-Get the updated image:
+1. Get the updated images:
 
+  ```bash
+  $ docker pull bitnami/wordpress:latest
+  ```
+
+2. Stop your container
+
+ * For docker-compose: `$ docker-compose stop wordpress`
+ * For manual execution: `$ docker stop wordpress`
+
+3. Take a snapshot of the application state
+
+```bash
+$ rsync -a /path/to/wordpress-persistence /path/to/wordpress-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
-$ docker pull bitnami/wordpress:latest
-```
 
-## Using Docker Compose
+Additionally, [snapshot the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
 
-1. Stop the running WordPress container
-  ```bash
-  $ docker-compose stop wordpress
-  ```
+You can use these snapshots to restore the application state should the upgrade fail.
 
-2. Remove the stopped container
-  ```bash
-  $ docker-compose rm wordpress
-  ```
+4. Remove the stopped container
 
-3. Launch the updated WordPress image
-  ```bash
-  $ docker-compose start wordpress
-  ```
+ * For docker-compose: `$ docker-compose rm wordpress`
+ * For manual execution: `$ docker rm wordpress`
 
-## Using Docker command line
+5. Run the new image
 
-1. Stop the running WordPress container
-  ```bash
-  $ docker stop wordpress
-  ```
-
-2. Remove the stopped container
-  ```bash
-  $ docker rm wordpress
-  ```
-
-3. Launch the updated WordPress image
-  ```bash
-  $ docker run -d --name wordpress -p 80:80 -p 443:443 \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -e WORDPRESS_DATABASE_USER=bn_wordpress \
-    -e WORDPRESS_DATABASE_NAME=bitnami_wordpress \
-    --net wordpress-tier \
-    --volume wordpress_data:/bitnami/wordpress \
-    --volume apache_data:/bitnami/apache \
-    --volume php_data:/bitnami/php \
-    bitnami/wordpress:latest
-  ```
-
-> **NOTE**:
->
-> The above command assumes that local docker volumes are in use. Edit the command according to your usage.
+ * For docker-compose: `$ docker-compose start wordpress`
+ * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name wordpress bitnami/wordpress:latest`
 
 # Configuration
 
@@ -271,6 +243,7 @@ $ docker pull bitnami/wordpress:latest
 The WordPress instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom WordPress:
 
 ##### User and Site configuration
+
 - `WORDPRESS_USERNAME`: WordPress application username. Default: **user**
 - `WORDPRESS_PASSWORD`: WordPress application password. Default: **bitnami**
 - `WORDPRESS_EMAIL`: WordPress application email. Default: **user@example.com**
@@ -279,6 +252,7 @@ The WordPress instance can be customized by specifying environment variables on 
 - `WORDPRESS_BLOG_NAME`: WordPress blog name. Default: **User's blog**
 
 ##### Use an existing database
+
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
 - `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 - `WORDPRESS_DATABASE_NAME`: Database name that WordPress will use to connect with the database. Default: **bitnami_wordpress**
@@ -287,6 +261,7 @@ The WordPress instance can be customized by specifying environment variables on 
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ##### Create a database for WordPress using mysql-client
+
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
 - `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 - `MARIADB_ROOT_USER`: Database admin user. Default: **root**
@@ -309,7 +284,7 @@ services:
       - MARIADB_DATABASE=bitnami_wordpress
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - mariadb_data:/bitnami/mariadb
+      - mariadb_data:/bitnami
   wordpress:
     image: bitnami/wordpress:latest
     depends_on:
@@ -324,18 +299,12 @@ services:
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - wordpress_data:/bitnami/wordpress
-      - apache_data:/bitnami/apache
-      - php_data:/bitnami/php
+      - wordpress_data:/bitnami
 
 volumes:
   mariadb_data:
     driver: local
   wordpress_data:
-    driver: local
-  apache_data:
-    driver: local
-  php_data:
     driver: local
 ```
 
@@ -348,9 +317,7 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   -e WORDPRESS_DATABASE_USER=bn_wordpress \
   -e WORDPRESS_DATABASE_NAME=bitnami_wordpress \
   -e WORDPRESS_PASSWORD=my_password \
-  --volume wordpress_data:/bitnami/wordpress \
-  --volume apache_data:/bitnami/apache \
-  --volume php_data:/bitnami/php \
+  --volume wordpress_data:/bitnami \
   bitnami/wordpress:latest
 ```
 
@@ -426,9 +393,7 @@ This would be an example of using an external database for WordPress.
       - WORDPRESS_DATABASE_USER=wordpress_user
       - WORDPRESS_DATABASE_PASSWORD=wordpress_password
     volumes:
-      - wordpress_data:/bitnami/wordpress
-      - apache_data:/bitnami/apache
-      - php_data:/bitnami/php
+      - wordpress_data:/bitnami
 ```
 
 * For manual execution:
@@ -441,57 +406,9 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --env WORDPRESS_DATABASE_NAME=wordpress_db \
   --env WORDPRESS_DATABASE_USER=wordpress_user \
   --env WORDPRESS_DATABASE_PASSWORD=wordpress_password \
-  --volume wordpress_data:/bitnami/wordpress \
-  --volume apache_data:/bitnami/apache \
-  --volume php_data:/bitnami/php \
+  --volume wordpress_data:/bitnami \
   bitnami/wordpress:latest
 ```
-
-# Backing up your application
-
-To backup your application data follow these steps:
-
-## Backing up using Docker Compose
-
-1. Stop the WordPress container:
-  ```bash
-  $ docker-compose stop wordpress
-  ```
-
-2. Copy the WordPress, PHP and Apache data
-  ```bash
-  $ docker cp $(docker-compose ps -q wordpress):/bitnami/wordpress/ /path/to/backups/wordpress/latest/
-  $ docker cp $(docker-compose ps -q wordpress):/bitnami/apache/ /path/to/backups/apache/latest/
-  $ docker cp $(docker-compose ps -q wordpress):/bitnami/php/ /path/to/backups/php/latest/
-  ```
-
-3. Start the WordPress container
-  ```bash
-  $ docker-compose start wordpress
-  ```
-
-## Backing up using the Docker command line
-
-1. Stop the WordPress container:
-  ```bash
-  $ docker stop wordpress
-  ```
-
-2. Copy the WordPress, PHP and Apache data
-  ```bash
-  $ docker cp wordpress:/bitnami/wordpress/ /path/to/backups/wordpress/latest/
-  $ docker cp wordpress:/bitnami/apache/ /path/to/backups/apache/latest/
-  $ docker cp wordpress:/bitnami/php/ /path/to/backups/php/latest/
-  ```
-
-3. Start the WordPress container
-  ```bash
-  $ docker start wordpress
-  ```
-
-# Restoring a backup
-
-To restore your application using backed up data simply mount the folder with WordPress and Apache data in the container. See [persisting your application](#persisting-your-application) section for more info.
 
 # Contributing
 
@@ -515,7 +432,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2017 Bitnami
+Copyright 2015-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
