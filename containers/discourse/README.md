@@ -1,9 +1,10 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-discourse/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-discourse/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-discourse/master/kubernetes.yml)
+
 # What is Discourse?
 
-> Discourse is the next-next-generation community forum platform. Discourse has a thoroughly modern design and is written in JavaScript. Page loads are very fast and new content is loaded as the user scrolls down the page. Discourse allows you to create categories, tag posts, manage notifications, create user profiles, and includes features to let communities govern themselves by voting out trolls and spammers. Discourse is built for mobile from the ground up and support high-res devices.
+> Discourse is the next-generation community forum platform. Discourse has a thoroughly modern design and is written in JavaScript. Page loads are very fast and new content is loaded as the user scrolls down the page. Discourse allows you to create categories, tag posts, manage notifications, create user profiles, and includes features to let communities govern themselves by voting out trolls and spammers. Discourse is built for mobile from the ground up and support high-res devices.
 
 https://www.discourse.org/
 
@@ -12,15 +13,15 @@ https://www.discourse.org/
 ## Docker Compose
 
 ```bash
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-discourse/master/docker-compose.yml
-$ docker-compose up
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-discourse/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING**: This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-discourse/master/kubernetes.yml
@@ -55,19 +56,19 @@ services:
   postgresql:
     image: 'bitnami/postgresql:latest'
     volumes:
-      - 'postgresql_data:/bitnami/postgresql'
+      - 'postgresql_data:/bitnami'
   redis:
     image: 'bitnami/redis:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'redis_data:/bitnami/redis'
+      - 'redis_data:/bitnami'
   discourse:
     image: 'bitnami/discourse:latest'
     ports:
       - '80:3000'
     volumes:
-      - 'discourse_data:/bitnami/discourse'
+      - 'discourse_data:/bitnami'
     depends_on:
       - postgresql
       - redis
@@ -76,7 +77,7 @@ services:
     depends_on:
       - discourse
     volumes:
-      - 'sidekiq_data:/bitnami/discourse-sidekiq'
+      - 'sidekiq_data:/bitnami'
     command: 'nami start --foreground discourse-sidekiq'
 volumes:
   postgresql_data:
@@ -101,13 +102,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
+  ```bash
   $ docker network create discourse-tier
   ```
 
 2. Start a Postgresql database in the network generated:
 
-  ```
+  ```bash
   $ docker run -d --name postgresql --net=discourse-tier bitnami/postgresql
   ```
 
@@ -115,13 +116,22 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Start Redis in the network generated:
 
-  ```
-  $ docker run -d --name redis -e ALLOW_EMPTY_PASSWORD=yes --net=discourse-tier bitnami/redis
+  ```bash
+  $ docker run -d --name redis --net=discourse-tier \
+      -e ALLOW_EMPTY_PASSWORD=yes \
+      bitnami/redis
   ```
 
-4. Run the Discourse container:
+4. Run the Discourse Sidekiq container:
 
+  ```bash
+  $ docker run -d -p 80:3000 --name sidekiq --net=discourse-tier \
+      bitnami/discourse nami start --foreground discourse-sidekiq
   ```
+
+5. Run the Discourse container:
+
+  ```bash
   $ docker run -d -p 80:3000 --name discourse --net=discourse-tier bitnami/discourse
   ```
 
@@ -129,13 +139,18 @@ Then you can access your application at <http://your-ip/>
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `postgresql_data`, `redis_data` and `discourse_data` data volumes. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-> **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for persistence of the [PostgreSQL](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database), [Redis](https://github.com/bitnami/bitnami-docker-redis#persisting-your-database) data.
+
+The above examples define docker volumes namely `postgresql_data`, `redis_data`, `sidekiq_data` and `discourse_data`. The Discourse application state will persist as long as these volumes are not removed.
+
+To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ### Mount persistent folders in the host using docker-compose
 
-This requires a sightly modification from the template previously shown:
+This requires a sight modification from the template previously shown:
+
 ```yaml
 version: '2'
 
@@ -143,19 +158,19 @@ services:
   postgresql:
     image: 'bitnami/postgresql:latest'
     volumes:
-      - '/path/to/your/local/postgresql_data:/bitnami/postgresql'
+      - '/path/to/your/local/postgresql_data:/bitnami'
   redis:
     image: 'bitnami/redis:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - '/path/to/your/local/redis_data:/bitnami/redis'
+      - '/path/to/your/local/redis_data:/bitnami'
   discourse:
     image: 'bitnami/discourse:latest'
     ports:
       - '80:3000'
     volumes:
-      - '/path/to/discourse-persistence:/bitnami/discourse'
+      - '/path/to/discourse-persistence:/bitnami'
     depends_on:
       - postgresql
       - redis
@@ -164,7 +179,7 @@ services:
     depends_on:
       - discourse
     volumes:
-      - '/path/to/sidekiq-persistence:/bitnami/discourse-sidekiq'
+      - '/path/to/sidekiq-persistence:/bitnami'
     command: 'nami start --foreground discourse-sidekiq'
 ```
 
@@ -174,46 +189,46 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. If you haven't done this before, create a new network for the application and the database:
 
-  ```
+  ```bash
   $ docker network create discourse-tier
   ```
 
 2. Start a Postgresql database in the previous network:
 
-  ```
+  ```bash
   $ docker run -d --name postgresql \
   --net=discourse-tier \
-  --volume /path/to/postgresql-persistence:/bitnami/postgresql \
+  --volume /path/to/postgresql-persistence:/bitnami \
   bitnami/postgresql
   ```
 
 3. Start Redis in the previous network as well:
 
-  ```
+  ```bash
   $ docker run -d --name redis \
   --net=discourse-tier \
    -e ALLOW_EMPTY_PASSWORD=yes \
-  --volume /path/to/redis-persistence:/bitnami/redis \
+  --volume /path/to/redis-persistence:/bitnami \
   bitnami/redis
   ```
 
-  *Note:* You need to give the container a name in order to Discourse to resolve the host
+  *Note:* You need to give the container a name in order for Discourse to resolve the host
 
 4. Start Sidekiq in the previous network as well:
 
-```
- $ docker run -d \
+```bash
+ $ docker run -d --name sidekiq \
   --net=discourse-tier \
-  --volume /path/to/sidekiq-persistence:/bitnami/discourse-sidekiq \
+  --volume /path/to/sidekiq-persistence:/bitnami \
   bitnami/discourse nami start --foreground discourse-sidekiq
 ```
 
 5. Run the Discourse container:
 
-  ```
+  ```bash
   $ docker run -d --name discourse -p 80:80 \
   --net=discourse-tier \
-  --volume /path/to/discourse-persistence:/bitnami/discourse \
+  --volume /path/to/discourse-persistence:/bitnami \
   bitnami/discourse
   ```
 
@@ -223,32 +238,44 @@ Bitnami provides up-to-date versions of Postgresql and Discourse, including secu
 
 1. Get the updated images:
 
-  ```
+  ```bash
   $ docker pull bitnami/discourse:latest
   ```
 
 2. Stop your container
 
- * For docker-compose: `$ docker-compose stop discourse`
- * For manual execution: `$ docker stop discourse`
+ * For docker-compose: `$ docker-compose stop discourse sidekiq`
+ * For manual execution: `$ docker stop discourse sidekiq`
 
-3. (For non-compose execution only) Create a [backup](#backing-up-your-application) if you have not mounted the discourse folder in the host.
+3. Take a snapshot of the application state
+
+```bash
+$ rsync -a /path/to/discourse-persistence /path/to/discourse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+$ rsync -a /path/to/sidekiq-persistence /path/to/sidekiq-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+Additionally, [snapshot the PostgreSQL](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container) and [Redis](https://github.com/bitnami/bitnami-docker-redis#step-2-stop-and-backup-the-currently-running-container) data.
+
+You can use these snapshots to restore the application state should the upgrade fail.
 
 4. Remove the currently running container
 
- * For docker-compose: `$ docker-compose rm -v discourse`
- * For manual execution: `$ docker rm -v discourse`
+ * For docker-compose: `$ docker-compose rm -v discourse sidekiq`
+ * For manual execution: `$ docker rm -v discourse sidekiq`
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start discourse`
+ * For docker-compose: `$ docker-compose start discourse sidekiq`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name discourse bitnami/discourse:latest`
 
 # Configuration
+
 ## Environment variables
- When you start the discourse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+
+When you start the discourse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
+
 ```yaml
 discourse:
   image: bitnami/discourse:latest
@@ -257,16 +284,16 @@ discourse:
   environment:
     - DISCOURSE_PASSWORD=bitnami
   volumes_from:
-    - discourse_data:/bitnami/discourse
+    - discourse_data:/bitnami
 ```
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
+```bash
  $ docker run -d --name discourse -p 80:80 \
  --net=discourse-tier \
  --env DISCOURSE_PASSWORD=bitnami \
- --volume discourse_data:/bitnami/discourse \
+ --volume discourse_data:/bitnami \
  bitnami/discourse
 ```
 
@@ -311,57 +338,33 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
     volumes:
-      - 'discourse_data:/bitnami/discourse'
+      - 'discourse_data:/bitnami'
 ```
 
 * For manual execution:
 
-```
+```bash
 $ docker run -d --name discourse -p 80:3000 \
   --net discourse-tier \
   --env SMTP_HOST=smtp.gmail.com --env SMTP_PORT=587 \
   --env SMTP_USER=your_email@gmail.com --env SMTP_PASSWORD=your_password \
-  --volume discourse_data:/bitnami/discourse \
+  --volume discourse_data:/bitnami \
   bitnami/discourse:latest
 ```
 
-# Backing up your application
-
-To backup your application data follow these steps:
-
-1. Stop the running container:
-
-  * For docker-compose: `$ docker-compose stop discourse`
-  * For manual execution: `$ docker stop discourse`
-
-2. Copy the Discourse data folder in the host:
-
-  ```
-  $ docker cp /your/local/path/bitnami:/bitnami/discourse
-  ```
-
-# Restoring a backup
-
-To restore your application using backed up data simply mount the folder with Discourse data in the container. See [persisting your application](#persisting-your-application) section for more info.
-
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an
-[issue](https://github.com/bitnami/bitnami-docker-discourse/issues), or submit a
-[pull request](https://github.com/bitnami/bitnami-docker-discourse/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-discourse/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-discourse/pulls) with your contribution.
 
 # Issues
 
-If you encountered a problem running this container, you can file an
-[issue](https://github.com/bitnami/bitnami-docker-discourse/issues). For us to provide better support,
-be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-discourse/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
 - Output of `docker info`
 - Version of this container (`echo $BITNAMI_APP_VERSION` inside the container)
-- The command you used to run the container, and any relevant output you saw (masking any sensitive
-information)
+- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # Community
 
@@ -371,7 +374,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright 2017 Bitnami
+Copyright 2016-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
