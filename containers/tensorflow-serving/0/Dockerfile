@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r17
+FROM bitnami/minideb-extras:jessie-r19
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 
@@ -10,14 +10,13 @@ RUN bitnami-pkg unpack tensorflow-serving-0.6.0-0 --checksum 0b55d1bf8e0ee73ed74
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="0.6.0-r0" \
+    BITNAMI_IMAGE_VERSION="0.6.0-r1" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_MODEL_NAME="inception" \
     TENSORFLOW_SERVING_PORT_NUMBER="9000"
 
 
 
-VOLUME ["/bitnami/model-data","/bitnami/tensorflow-serving"]
 
 EXPOSE 9000
 

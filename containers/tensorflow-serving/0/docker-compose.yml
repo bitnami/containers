@@ -8,7 +8,7 @@ services:
     ports:
       - '9000:9000'
     volumes:
-      - 'tensorflow_serving_data:/bitnami/tensorflow-serving'
+      - 'tensorflow_serving_data:/bitnami'
       - '/tmp/model-data:/bitnami/model-data'
 volumes:
   tensorflow_serving_data:
