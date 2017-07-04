@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-orangehrm/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-orangehrm/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-orangehrm/master/kubernetes.yml)
 
 # What is OrangeHRM?
@@ -13,15 +13,15 @@
 ## Docker Compose
 
 ```bash
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-orangehrm/master/docker-compose.yml
-$ docker-compose up
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-orangehrm/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-orangehrm/master/kubernetes.yml
@@ -42,6 +42,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 OrangeHRM requires access to a MySQL database or MariaDB database to store information.
 
 # How to use this image
+
 Running OrangeHRM with a database server is the recommended way. You can either use docker-compose or run the containers manually. We'll use our very own [MariaDB image](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
 
 ## Using Docker Compose
@@ -52,28 +53,22 @@ The recommended way to run OrangeHRM is using Docker Compose using the following
 version: '2'
 services:
   mariadb:
-    build: mariadb
+    image: bitnami/mariadb:latest
     volumes:
-      - 'mariadb_data:/bitnami/mariadb'
+      - 'mariadb_data:/bitnami'
   orangehrm:
-    build: .
+    image: bitnami/orangehrm:latest
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - 'orangehrm_data:/bitnami/orangehrm'
-      - 'apache_data:/bitnami/apache'
-      - 'php_data:/bitnami/php'
+      - 'orangehrm_data:/bitnami'
     depends_on:
       - mariadb
 volumes:
   mariadb_data:
     driver: local
   orangehrm_data:
-    driver: local
-  apache_data:
-    driver: local
-  php_data:
     driver: local
 ```
 
@@ -99,7 +94,7 @@ If you want to run the application manually instead of using `docker-compose`, t
   $ docker volume create --name mariadb_data
   $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
     --net orangehrm-tier \
-    --volume mariadb_data:/bitnami/mariadb \
+    --volume mariadb_data:/bitnami \
     bitnami/mariadb:latest
   ```
 
@@ -107,13 +102,9 @@ If you want to run the application manually instead of using `docker-compose`, t
 
   ```bash
   $ docker volume create --name orangehrm_data
-  $ docker volume create --name apache_data
-  $ docker volume create --name php_data
   $ docker run -d --name orangehrm -p 80:80 -p 443:443 \
     --net orangehrm-tier \
-    --volume orangehrm_data:/bitnami/orangehrm \
-    --volume apache_data:/bitnami/apache \
-    --volume php_data:/bitnami/php \
+    --volume orangehrm_data:/bitnami \
     bitnami/orangehrm:latest
   ```
 
@@ -121,9 +112,13 @@ Access your application at <http://your-ip/>
 
 ## Persisting your application
 
-For persistence of the OrangeHRM deployment, the above examples define docker volumes namely `mariadb_data`, `orangehrm_data`, `php_data` and `apache_data`. The OrangeHRM application state will persist as long as these volumes are not removed.
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume). Alternatively you can make use of volume plugins to host the volume data.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
+
+The above examples define docker volumes namely `mariadb_data` and `orangehrm_data`. The OrangeHRM application state will persist as long as these volumes are not removed.
+
+To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ### Mount host directories as data volumes with Docker Compose
 
@@ -137,7 +132,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - /path/to/mariadb-persistence:/bitnami/mariadb
+      - /path/to/mariadb-persistence:/bitnami
   orangehrm:
     image: bitnami/orangehrm:latest
     depends_on:
@@ -146,33 +141,32 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - /path/to/orangehrm-persistence:/bitnami/orangehrm
-      - /path/to/apache-persistence:/bitnami/apache
-      - /path/to/php-persistence:/bitnami/php
+      - /path/to/orangehrm-persistence:/bitnami
 ```
 
 ### Mount host directories as data volumes using the Docker command line
 
 1. Create a network (if it does not exist)
+
   ```bash
   $ docker network create orangehrm-tier
   ```
 
 2. Create a MariaDB container with host volume
+
   ```bash
   $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
     --net orangehrm-tier \
-    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+    --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
   ```
 
 3. Create the OrangeHRM the container with host volumes
+
   ```bash
   $ docker run -d --name orangehrm -p 80:80 -p 443:443 \
     --net orangehrm-tier \
-    --volume /path/to/orangehrm-persistence:/bitnami/orangehrm \
-    --volume /path/to/apache-persistence:/bitnami/apache \
-    --volume /path/to/php-persistence:/bitnami/php \
+    --volume /path/to/orangehrm-persistence:/bitnami \
     bitnami/orangehrm:latest
   ```
 
@@ -182,54 +176,36 @@ Bitnami provides up-to-date versions of MariaDB and OrangeHRM, including securit
 
 The `bitnami/orangehrm:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/orangehrm:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/orangehrm/tags/).
 
-Get the updated image:
+1. Get the updated images:
 
+  ```
+  $ docker pull bitnami/orangehrm:latest
+  ```
+
+2. Stop your container
+
+ * For docker-compose: `$ docker-compose stop orangehrm`
+ * For manual execution: `$ docker stop orangehrm`
+
+3. Take a snapshot of the application state
+
+```bash
+$ rsync -a /path/to/orangehrm-persistence /path/to/orangehrm-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
-$ docker pull bitnami/orangehrm:latest
-```
 
-## Using Docker Compose
+Additionally, [snapshot the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
 
-1. Stop the running OrangeHRM container
-  ```bash
-  $ docker-compose stop orangehrm
-  ```
+You can use these snapshots to restore the application state should the upgrade fail.
 
-2. Remove the stopped container
-  ```bash
-  $ docker-compose rm orangehrm
-  ```
+4. Remove the currently running container
 
-3. Launch the updated OrangeHRM image
-  ```bash
-  $ docker-compose start orangehrm
-  ```
+ * For docker-compose: `$ docker-compose rm -v orangehrm`
+ * For manual execution: `$ docker rm -v orangehrm`
 
-## Using Docker command line
+5. Run the new image
 
-1. Stop the running OrangeHRM container
-  ```bash
-  $ docker stop orangehrm
-  ```
-
-2. Remove the stopped container
-  ```bash
-  $ docker rm orangehrm
-  ```
-
-3. Launch the updated OrangeHRM image
-  ```bash
-  $ docker run -d --name orangehrm -p 80:80 -p 443:443 \
-    --net orangehrm-tier \
-    --volume orangehrm_data:/bitnami/orangehrm \
-    --volume apache_data:/bitnami/apache \
-    --volume php_data:/bitnami/php \
-    bitnami/orangehrm:latest
-  ```
-
-> **NOTE**:
->
-> The above command assumes that local docker volumes are in use. Edit the command according to your usage.
+ * For docker-compose: `$ docker-compose start orangehrm`
+ * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name orangehrm bitnami/orangehrm:latest`
 
 # Configuration
 
@@ -254,7 +230,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - mariadb_data:/bitnami/mariadb
+      - mariadb_data:/bitnami
   orangehrm:
     image: bitnami/orangehrm:latest
     depends_on:
@@ -265,17 +241,11 @@ services:
     environment:
       - ORANGEHRM_PASSWORD=my_password
     volumes:
-      - orangehrm_data:/bitnami/orangehrm
-      - apache_data:/bitnami/apache
-      - php_data:/bitnami/php
+      - orangehrm_data:/bitnami
 volumes:
   mariadb_data:
     driver: local
   orangehrm_data:
-    driver: local
-  apache_data:
-    driver: local
-  php_data:
     driver: local
 ```
 
@@ -285,15 +255,14 @@ volumes:
 $ docker run -d --name orangehrm -p 80:80 -p 443:443 \
   --net orangehrm-tier \
   --env ORANGEHRM_PASSWORD=my_password \
-  --volume orangehrm_data:/bitnami/orangehrm \
-  --volume apache_data:/bitnami/apache \
-  --volume php_data:/bitnami/php \
+  --volume orangehrm_data:/bitnami \
   bitnami/orangehrm:latest
 ```
 
 ### SMTP Configuration
 
 To configure OrangeHRM to send email using SMTP you can set the following environment variables:
+
 - `SMTP_HOST`: Host for outgoing SMTP email.
 - `SMTP_PORT`: Port for outgoing SMTP email.
 - `SMTP_USER`: User of SMTP used for authentication.
@@ -319,9 +288,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PASSWORD=your_password
       - SMTP_PROTOCOL=ssl
     volumes:
-      - orangehrm_data:/bitnami/orangehrm
-      - apache_data:/bitnami/apache
-      - php_data:/bitnami/php
+      - orangehrm_data:/bitnami
 ```
 
 * For manual execution:
@@ -333,57 +300,9 @@ This would be an example of SMTP configuration using a GMail account:
    --env SMTP_PORT=465 --env SMTP_PROTOCOL=ssl \
    --env SMTP_USER=your_email@gmail.com \
    --env SMTP_PASSWORD=your_password \
-   --volume orangehrm_data:/bitnami/orangehrm \
-   --volume apache_data:/bitnami/apache \
-   --volume php_data:/bitnami/php \
+   --volume orangehrm_data:/bitnami \
    bitnami/orangehrm:latest
 ```
-
-# Backing up your application
-
-To backup your application data follow these steps:
-
-## Backing up using Docker Compose
-
-1. Stop the OrangeHRM container:
-  ```bash
-  $ docker-compose stop orangehrm
-  ```
-
-2. Copy the OrangeHRM, php and Apache data
-  ```bash
-  $ docker cp $(docker-compose ps -q orangehrm):/bitnami/orangehrm/ /path/to/backups/orangehrm/latest/
-  $ docker cp $(docker-compose ps -q orangehrm):/bitnami/apache/ /path/to/backups/apache/latest/
-  $ docker cp $(docker-compose ps -q orangehrm):/bitnami/php/ /path/to/backups/php/latest/
-  ```
-
-3. Start the OrangeHRM container
-  ```bash
-  $ docker-compose start orangehrm
-  ```
-
-## Backing up using the Docker command line
-
-1. Stop the OrangeHRM container:
-  ```bash
-  $ docker stop orangehrm
-  ```
-
-2. Copy the OrangeHRM, php and Apache data
-  ```bash
-  $ docker cp orangehrm:/bitnami/orangehrm/ /path/to/backups/orangehrm/latest/
-  $ docker cp orangehrm:/bitnami/apache/ /path/to/backups/apache/latest/
-  $ docker cp orangehrm:/bitnami/php/ /path/to/backups/php/latest/
-  ```
-
-3. Start the OrangeHRM container
-  ```bash
-  $ docker start orangehrm
-  ```
-
-# Restoring a backup
-
-To restore your application using backed up data simply mount the folder with OrangeHRM and Apache data in the container. See [persisting your application](#persisting-your-application) section for more info.
 
 # Contributing
 
@@ -407,7 +326,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2017 Bitnami
+Copyright 2016-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
