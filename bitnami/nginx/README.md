@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-nginx/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-nginx/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-nginx/master/kubernetes.yml)
 
 # What is nginx?
@@ -11,27 +11,21 @@
 # TL;DR;
 
 ```bash
-docker run --name nginx bitnami/nginx:latest
+$ docker run --name nginx bitnami/nginx:latest
 ```
 
 ## Docker Compose
 
-```yaml
-version: '2'
-
-services:
-  nginx:
-    image: 'bitnami/nginx:latest'
-    ports:
-      - '80:80'
-      - '443:443'
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-nginx/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-nginx/master/kubernetes.yml
@@ -50,7 +44,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-ngi
 The recommended way to get the Bitnami nginx Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/nginx).
 
 ```bash
-docker pull bitnami/nginx:latest
+$ docker pull bitnami/nginx:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the
@@ -58,13 +52,13 @@ To use a specific version, you can pull a versioned tag. You can view the
 in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/nginx:[TAG]
+$ docker pull bitnami/nginx:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
 ```bash
-docker build -t bitnami/nginx:latest https://github.com/bitnami/bitnami-docker-nginx.git
+$ docker build -t bitnami/nginx:latest https://github.com/bitnami/bitnami-docker-nginx.git
 ```
 
 # Hosting a static website
@@ -72,7 +66,7 @@ docker build -t bitnami/nginx:latest https://github.com/bitnami/bitnami-docker-n
 This nginx image exposes a volume at `/app`. Content mounted here is served by the default catch-all virtual host.
 
 ```bash
-docker run -v /path/to/app:/app bitnami/nginx:latest
+$ docker run -v /path/to/app:/app bitnami/nginx:latest
 ```
 
 or using Docker Compose:
@@ -95,7 +89,7 @@ services:
 To access your web server from your host machine you can ask Docker to map a random port on your host to ports `80` and `443` exposed in the container.
 
 ```bash
-docker run --name nginx -P bitnami/nginx:latest
+$ docker run --name nginx -P bitnami/nginx:latest
 ```
 
 Run `docker port` to determine the random ports Docker assigned.
@@ -109,7 +103,7 @@ $ docker port nginx
 You can also manually specify the ports you want forwarded from your host to the container.
 
 ```bash
-docker run -p 8080:80 -p 8443:443 bitnami/nginx:latest
+$ docker run -p 8080:80 -p 8443:443 bitnami/nginx:latest
 ```
 
 Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
@@ -118,10 +112,27 @@ Access your web server in the browser by navigating to [http://localhost:8080](h
 
 ## Adding custom virtual hosts
 
-The default nginx.conf includes virtual hosts placed in `/bitnami/nginx/conf/vhosts/*.conf`. You can mount a directory at `/bitnami/nginx/conf/vhosts` from your host containing your custom virtual hosts.
+The default `nginx.conf` includes virtual hosts placed in `/bitnami/nginx/conf/vhosts/`. You can mount a `my_vhost.conf` file containing your custom virtual hosts at this location.
+
+For example, in order add a vhost for `www.example.com`:
+
+# Step 1: Write your `my_vhost.conf` file with the following content.
+
+```nginx
+server {
+  listen 0.0.0.0:80;
+  server_name www.example.com;
+  root /app
+  index index.htm index.html
+}
+```
+
+# Step 2: Mount the configuration as a volume.
 
 ```bash
-docker run -v /path/to/nginx-persistence/vhosts:/bitnami/nginx/conf/vhosts bitnami/nginx:latest
+$ docker run --name nginx \
+  -v /path/to/my_vhost.conf:/bitnami/nginx/conf/vhosts/my_vhost.conf:ro \
+  bitnami/nginx:latest
 ```
 
 or using Docker Compose:
@@ -130,14 +141,15 @@ or using Docker Compose:
 version: '2'
 
 services:
-  nginx:
+  mariadb:
     image: 'bitnami/nginx:latest'
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - /path/to/nginx-persistence/vhosts:/bitnami/nginx/conf/vhosts
+      - /path/to/my_vhost.conf:/bitnami/nginx/conf/vhosts/my_vhost.conf:ro
 ```
+
 ## Using custom SSL certificates
 
 *NOTE:* The steps below assume that you are using a custom domain name and that you have already configured the custom domain name to point to your server.
@@ -149,9 +161,9 @@ This container comes with SSL support already pre-configured and with a dummy ce
 In your local computer, create a folder called `certs` and put your certificates files. Make sure you rename both files to `server.crt` and `server.key` respectively:
 
 ```bash
-mkdir /path/to/nginx-persistence/conf/bitnami/certs -p
-cp /path/to/certfile.crt /path/to/nginx-persistence/conf/bitnami/certs/server.crt
-cp /path/to/keyfile.key  /path/to/nginx-persistence/conf/bitnami/certs/server.key
+$ mkdir /path/to/nginx-persistence/nginx/conf/bitnami/certs -p
+$ cp /path/to/certfile.crt /path/to/nginx-persistence/nginx/conf/bitnami/certs/server.crt
+$ cp /path/to/keyfile.key  /path/to/nginx-persistence/nginx/conf/bitnami/certs/server.key
 ```
 
 ### Step 2: Run the Nginx image
@@ -159,9 +171,9 @@ cp /path/to/keyfile.key  /path/to/nginx-persistence/conf/bitnami/certs/server.ke
 Run the Nginx image, mounting the certificates directory from your host.
 
 ```bash
-docker run --name nginx \
--v /path/to/nginx-persistence/conf/bitnami/certs:/bitnami/nginx/conf/bitnami/certs \
-bitnami/nginx:latest
+$ docker run --name nginx \
+  -v /path/to/nginx-persistence/nginx/conf/bitnami/certs:/bitnami/nginx/conf/bitnami/certs \
+  bitnami/nginx:latest
 ```
 
 or using Docker Compose:
@@ -170,25 +182,27 @@ or using Docker Compose:
 version: '2'
 
 services:
-nginx:
-image: 'bitnami/nginx:latest'
-ports:
-- '80:80'
-- '443:443'
-volumes:
-- /path/to/nginx-persistence/conf/bitnami/certs:/bitnami/nginx/conf/bitnami/certs
+  nginx:
+    image: 'bitnami/nginx:latest'
+    ports:
+    - '80:80'
+    - '443:443'
+    volumes:
+    - /path/to/nginx-persistence/nginx/conf/bitnami/certs:/bitnami/nginx/conf/bitnami/certs
 ```
 
 ## Full configuration
 
-This container looks for configuration in `/bitnami/nginx/conf`. You can mount a directory at `/bitnami/nginx/` with your own configuration, or the default configuration will be copied to your directory at `conf/` if it's empty.
+The image looks for configurations in `/bitnami/nginx/conf/`. You can mount a volume at `/bitnami` and copy/edit the configurations in the `/bitnami/nginx/conf/`. The default configurations will be populated in the `conf/` directory if it's empty.
 
 ### Step 1: Run the nginx image
 
 Run the nginx image, mounting a directory from your host.
 
 ```bash
-docker run --name nginx -v /path/to/nginx-persistence:/bitnami/nginx bitnami/nginx:latest
+$ docker run --name nginx \
+  -v /path/to/nginx-persistence:/bitnami \
+  bitnami/nginx:latest
 ```
 
 or using Docker Compose:
@@ -203,7 +217,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - /path/to/nginx-persistence:/bitnami/nginx
+      - /path/to/nginx-persistence:/bitnami
 ```
 
 ### Step 2: Edit the configuration
@@ -211,7 +225,7 @@ services:
 Edit the configuration on your host using your favorite editor.
 
 ```bash
-vi /path/to/nginx-persistence/conf/nginx.conf
+$ vi /path/to/nginx-persistence/nginx/conf/nginx.conf
 ```
 
 ### Step 4: Restart nginx
@@ -219,30 +233,30 @@ vi /path/to/nginx-persistence/conf/nginx.conf
 After changing the configuration, restart your nginx container for changes to take effect.
 
 ```bash
-docker restart nginx
+$ docker restart nginx
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose restart nginx
+$ docker-compose restart nginx
 ```
 
 ## Enabling Pagespeed module
 
 This image includes the Pagespeed module for nginx.
 
-In order to activate it, mount the configuration volume following the steps in [Full Configuration](#full-configuration) section above and edit the file located at `/path/to/nginx-persistence/conf/bitnami/bitnami.conf` adding the following snippet inside the `server` directive:
+In order to activate it, mount the configuration volume following the steps in [Full Configuration](#full-configuration) section above and edit the file located at `/path/to/nginx-persistence/nginx/conf/bitnami/bitnami.conf` adding the following snippet inside the `server` directive:
 
 ```nginx
-    pagespeed on;
-    # needs to exist and be writable by nginx
-    pagespeed FileCachePath /installdir/nginx/var/ngx_pagespeed_cache;
-    location ~ "\.pagespeed\.([a-z]\.)?[a-z]{2}\.[^.]{10}\.[^.]+" { add_header "" ""; }
-    location ~ "^/ngx_pagespeed_static/" { }
-    location ~ "^/ngx_pagespeed_beacon$" { }
-    location /ngx_pagespeed_statistics { allow 127.0.0.1; deny all; }
-    location /ngx_pagespeed_message { allow 127.0.0.1; deny all; }
+  pagespeed on;
+  # needs to exist and be writable by nginx
+  pagespeed FileCachePath /installdir/nginx/var/ngx_pagespeed_cache;
+  location ~ "\.pagespeed\.([a-z]\.)?[a-z]{2}\.[^.]{10}\.[^.]+" { add_header "" ""; }
+  location ~ "^/ngx_pagespeed_static/" { }
+  location ~ "^/ngx_pagespeed_beacon$" { }
+  location /ngx_pagespeed_statistics { allow 127.0.0.1; deny all; }
+  location /ngx_pagespeed_message { allow 127.0.0.1; deny all; }
 ```
 
 Then, restart nginx or reload its configuration following the steps in the [Restart nginx](#step-4-restart-nginx) section.
@@ -260,76 +274,18 @@ nginx can be used to reverse proxy to other containers using Docker's linking sy
 The Bitnami nginx Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
-docker logs nginx
+$ docker logs nginx
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose logs nginx
+$ docker-compose logs nginx
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 # Maintenance
-
-## Backing up your container
-
-To backup your nginx configurations, follow these simple steps:
-
-### Step 1: Stop the currently running container
-
-```bash
-docker stop nginx
-```
-
-or using Docker Compose:
-
-```bash
-docker-compose stop nginx
-```
-
-### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```bash
-docker run --rm -v /path/to/nginx-backups:/backups \
-  --volumes-from nginx busybox:latest \
-    cp -a /bitnami/nginx /backups/latest
-```
-
-or using Docker Compose:
-
-```bash
-docker run --rm -v /path/to/nginx-backups:/backups \
-  --volumes-from `docker-compose ps -q nginx` busybox:latest \
-    cp -a /bitnami/nginx /backups/latest
-```
-
-## Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the container.
-
-```bash
-docker run -v /path/to/nginx-backups/latest:/bitnami/nginx bitnami/nginx:latest
-```
-
-or using Docker Compose:
-
-```yaml
-version: '2'
-
-services:
-  nginx:
-    image: 'bitnami/nginx:latest'
-    ports:
-      - '80:80'
-      - '443:443'
-
-    volumes:
-      - /path/to/nginx-backups/latest:/bitnami/nginx
-```
 
 ## Upgrade this image
 
@@ -338,7 +294,7 @@ Bitnami provides up-to-date versions of nginx, including security patches, soon 
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/nginx:latest
+$ docker pull bitnami/nginx:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -346,34 +302,50 @@ or if you're using Docker Compose, update the value of the image property to
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's configuration and logs.
+Stop the currently running container using the command
 
-Follow the steps on [creating a backup](#backing-up-your-container).
+```bash
+$ docker stop nginx
+```
+
+or using Docker Compose:
+
+```bash
+$ docker-compose stop nginx
+```
+
+Next, take a snapshot of the persistent volume `/path/to/nginx-persistence` using:
+
+```bash
+$ rsync -a /path/to/nginx-persistence /path/to/nginx-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
 ```bash
-docker rm -v nginx
+$ docker rm -v nginx
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose rm -v nginx
+$ docker-compose rm -v nginx
 ```
 
 ### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image.
 
 ```bash
-docker run --name nginx bitnami/nginx:latest
+$ docker run --name nginx bitnami/nginx:latest
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose start nginx
+$ docker-compose start nginx
 ```
 
 # Notable Changes
@@ -409,7 +381,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2015-2016 Bitnami
+Copyright (c) 2015-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

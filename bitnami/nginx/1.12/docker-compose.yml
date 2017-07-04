@@ -9,7 +9,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - 'nginx_data:/bitnami/nginx'
+      - 'nginx_data:/bitnami'
 
 volumes:
   nginx_data:
