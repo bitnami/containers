@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-ghost/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-ghost/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-ghost/master/kubernetes.yml)
 
 # What is Ghost?
@@ -13,15 +13,15 @@ https://ghost.org/
 ## Docker Compose
 
 ```bash
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-ghost/master/docker-compose.yml
-$ docker-compose up
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-ghost/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-ghost/master/kubernetes.yml
@@ -54,13 +54,13 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-       - 'mariadb_data:/bitnami/mariadb'
+       - 'mariadb_data:/bitnami'
   ghost:
     image: 'bitnami/ghost:latest'
     ports:
       - '80:2368'
     volumes:
-      - 'ghost_data:/bitnami/ghost'
+      - 'ghost_data:/bitnami'
     depends_on:
       - mariadb
 volumes:
@@ -83,7 +83,9 @@ If you want to run the application manually instead of using docker-compose, the
 2. Start a MariaDB database in the network generated:
 
    ```bash
-   $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net=ghost-tier bitnami/mariadb
+   $ docker run -d --name mariadb --net=ghost-tier \
+      -e ALLOW_EMPTY_PASSWORD=yes \
+      bitnami/mariadb
    ```
 
    *Note:* You need to give the container a name in order to Ghost to resolve the host
@@ -96,22 +98,22 @@ If you want to run the application manually instead of using docker-compose, the
 
 Then you can access your application at http://your-ip/
 
-> **Note!** If you want to access your application from a public IP or hostname you need to properly configured Ghost . You can handle it adjusting the configuration of the instance by setting the environment variable "GHOST_HOST" to your public IP or hostname.
+> **Note!** If you want to access your application from a public IP or hostname you need to properly configured Ghost . You can handle it adjusting the configuration of the instance by setting the environment variable `GHOST_HOST` to your public IP or hostname.
 
 ## Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence of the Ghost deployment, the above examples define docker volumes namely `mariadb_data` and `ghost_data`. The Ghost application state will persist as long as these volumes are not removed.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
+
+The above examples define docker volumes namely `mariadb_data` and `ghost_data`. The Ghost application state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
-
-
-> **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-application) up to pull the data from your running container down to your host.
 
 ### Mount host directories as data volumes with Docker Compose
 
 This requires a minor change to the `docker-compose.yml` template previously shown:
+
 ```yaml
 version: '2'
 
@@ -121,7 +123,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - /path/to/mariadb-persistence:/bitnami/mariadb
+      - /path/to/mariadb-persistence:/bitnami
   ghost:
     image: bitnami/ghost:latest
     depends_on:
@@ -129,7 +131,7 @@ services:
     ports:
       - '80:2368'
     volumes:
-      - '/path/to/ghost-persistence:/bitnami/ghost'
+      - '/path/to/ghost-persistence:/bitnami'
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -145,9 +147,9 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Create a MariaDB container with host volume:
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
-    --net ghost-tier \
-    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+  $ docker run -d --name mariadb --net ghost-tier \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
   ```
 
@@ -156,9 +158,8 @@ In this case you need to specify the directories to mount on the run command. Th
 3. Create the Ghost container with host volumes:
 
   ```bash
-  $ docker run -d --name ghost -p 80:2368 \
-    --net ghost-tier \
-    --volume /path/to/ghost-persistence:/bitnami/ghost \
+  $ docker run -d --name ghost -p 80:2368 --net ghost-tier \
+    --volume /path/to/ghost-persistence:/bitnami \
     bitnami/ghost:latest
   ```
 
@@ -177,7 +178,15 @@ Bitnami provides up-to-date versions of MariaDB and Ghost, including security pa
  * For docker-compose: `$ docker-compose stop ghost`
  * For manual execution: `$ docker stop ghost`
 
-3. (For non-compose execution only) Create a [backup](#backing-up-your-application) if you have not mounted the ghost folder in the host.
+3. Take a snapshot of the application state
+
+```bash
+$ rsync -a /path/to/ghost-persistence /path/to/ghost-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+Additionally, [snapshot the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
+
+You can use these snapshots to restore the application state should the upgrade fail.
 
 4. Remove the currently running container
 
@@ -190,10 +199,13 @@ Bitnami provides up-to-date versions of MariaDB and Ghost, including security pa
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name ghost bitnami/ghost:latest`
 
 # Configuration
+
 ## Environment variables
- When you start the ghost image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+
+When you start the ghost image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
+
 ```yaml
 ghost:
   image: bitnami/ghost:latest
@@ -206,7 +218,10 @@ ghost:
  * For manual execution add a `-e` option with each variable and value:
 
 ```bash
- $ docker run -d -e GHOST_PASSWORD=my_password -p 80:2368 --name ghost -v /your/local/path/bitnami/ghost:/bitnami/ghost --network=ghost-tier bitnami/ghost
+ $ docker run -d -p 80:2368 --name ghost --network=ghost-tier \
+    -e GHOST_PASSWORD=my_password \
+    -v /your/local/path/bitnami/ghost:/bitnami \
+    bitnami/ghost
 ```
 
 Available variables:
@@ -249,46 +264,28 @@ This would be an example of SMTP configuration using a GMail account:
  * For manual execution:
 
 ```bash
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_SERVICE=GMail -e SMTP_USER=your_email@gmail.com -e SMTP_PASSWORD=your_password -p 80:2368 --name ghost -v /your/local/path/bitnami/ghost:/bitnami/ghost --network=ghost-tier bitnami/ghost
+ $ docker run -d -p 80:2368 --name ghost --network=ghost-tier \
+    -e SMTP_HOST=smtp.gmail.com \
+    -e SMTP_SERVICE=GMail \
+    -e SMTP_USER=your_email@gmail.com \
+    -e SMTP_PASSWORD=your_password \
+    -v /your/local/path/bitnami/ghost:/bitnami \
+    bitnami/ghost
 ```
-
-# Backing up your application
-
-To backup your application data follow these steps:
-
-1. Stop the running container:
-
-  * For docker-compose: `$ docker-compose stop ghost`
-  * For manual execution: `$ docker stop ghost`
-
-2. Copy the Ghost data folder in the host:
-
-  ```bash
-  $ docker cp /your/local/path/bitnami:/bitnami/ghost
-  ```
-
-# Restoring a backup
-
-To restore your application using backed up data simply mount the folder with Ghost data in the container. See [persisting your application](#persisting-your-application) section for more info.
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an
-[issue](https://github.com/bitnami/bitnami-docker-ghost/issues), or submit a
-[pull request](https://github.com/bitnami/bitnami-docker-ghost/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-ghost/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-ghost/pulls) with your contribution.
 
 # Issues
 
-If you encountered a problem running this container, you can file an
-[issue](https://github.com/bitnami/bitnami-docker-ghost/issues). For us to provide better support,
-be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-ghost/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
 - Output of `docker info`
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
-- The command you used to run the container, and any relevant output you saw (masking any sensitive
-information)
+- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # Community
 
@@ -298,7 +295,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright 2016 Bitnami
+Copyright 2016-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
