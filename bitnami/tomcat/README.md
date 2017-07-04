@@ -42,7 +42,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-tom
  - [`9.0`, `9.0.0-M22-r0`, `latest` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.0-M22-r0/9.0/Dockerfile)
  - [`8.5`, `8.5.15-r1` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.15-r1/8.5/Dockerfile)
  - [`8.0`, `8.0.45-r0` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.45-r0/8.0/Dockerfile)
- - [`7`, `7.0.78-r1` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.78-r1/7/Dockerfile)
+ - [`7`, `7.0.79-r0` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.79-r0/7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
 
