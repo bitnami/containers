@@ -6,13 +6,13 @@ services:
     ports:
       - '2181:2181'
     volumes:
-      - 'zookeeper_data:/bitnami/zookeeper'
+      - 'zookeeper_data:/bitnami'
   kafka:
     image: 'bitnami/kafka:0'
     ports:
       - '9092:9092'
     volumes:
-      - 'kafka_data:/bitnami/kafka'
+      - 'kafka_data:/bitnami'
     environment:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
 
