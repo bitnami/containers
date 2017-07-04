@@ -1,58 +1,31 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-kafka/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-kafka/tree/master)
-[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/kafka)](https://hub.docker.com/r/bitnami/kafka/)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
 # What is kafka?
-Apache Kafka is a distributed streaming platform used for building real-time data pipelines and
-streaming apps. It is horizontally scalable, fault-tolerant, wicked fast, and runs in production in
-thousands of companies. Kafka requires a connection to a Zookeeper service.
 
+> Apache Kafka is a distributed streaming platform used for building real-time data pipelines and streaming apps. It is horizontally scalable,  fault-tolerant, wicked fast, and runs in production in thousands of companies. Kafka requires a connection to a Zookeeper service.
 
 IMPORTANT NOTES:
 ===============
 - Cluster mode is not fully supported at this moment.
 - Auth is not fully supported at this moment.
 
-
-
 [https://kafka.apache.org/](https://kafka.apache.org/)
-
 
 # TL;DR;
 
 ## Docker Compose
 
-```yaml
-version: '2'
-
-services:
-  zookeeper:
-    image: 'bitnami/zookeeper:latest'
-    ports:
-      - '2181:2181'
-    volumes:
-      - 'zookeeper_data:/bitnami/zookeeper'
-  kafka:
-    image: 'bitnami/kafka:0'
-    ports:
-      - '9092:9092'
-    volumes:
-      - 'kafka_data:/bitnami/kafka'
-    environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-
-volumes:
-  zookeeper_data:
-    driver: local
-  kafka_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kafka/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-kafka/master/kubernetes.yml
@@ -71,7 +44,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-kaf
 The recommended way to get the Bitnami Kafka Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kafka).
 
 ```bash
-docker pull bitnami/kafka:latest
+$ docker pull bitnami/kafka:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the
@@ -79,24 +52,20 @@ To use a specific version, you can pull a versioned tag. You can view the
 in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/kafka:[TAG]
+$ docker pull bitnami/kafka:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
 ```bash
-docker build -t bitnami/kafka:latest https://github.com/bitnami/bitnami-docker-kafka.git
+$ docker build -t bitnami/kafka:latest https://github.com/bitnami/bitnami-docker-kafka.git
 ```
 
 # Persisting your data
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-**Note!**
-If you have already started using your database, follow the steps on
-[backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
-
-The image exposes a volume at `/bitnami/kafka` for the Kafka data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
+For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
 Using Docker Compose:
 
@@ -113,7 +82,7 @@ services:
     ports:
       - '9092:9092'
     volumes:
-      - /path/to/kafka-persistence:/bitnami/kafka
+      - /path/to/kafka-persistence:/bitnami
 ```
 
 # Connecting to other containers
@@ -203,7 +172,6 @@ $ docker-compose up -d
 
 # Configuration
 
-
 The configuration can easily be setup with the Bitnami Kafka Docker image using the following environment variables:
 
 - `KAFKA_PORT_NUMBER`: Kafka port.
@@ -230,9 +198,8 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 - `KAFKA_ZOOKEEPER_CONNECT`: Comma separated host:port pairs, each corresponding to a Zookeeper Server.
 - `KAFKA_ZOOKEEPER_CONNECT_TIMEOUT_MS`: Timeout in ms for connecting to zookeeper.
 
-
 ```bash
-docker run --name kafka -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 bitnami/kafka:latest
+$ docker run --name kafka -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 bitnami/kafka:latest
 ```
 
 or using Docker Compose:
@@ -246,13 +213,13 @@ services:
     ports:
       - '2181:2181'
     volumes:
-      - 'zookeeper_data:/bitnami/zookeeper'
+      - 'zookeeper_data:/bitnami'
   kafka:
     image: 'bitnami/kafka:0'
     ports:
       - '9092:9092'
     volumes:
-      - 'kafka_data:/bitnami/kafka'
+      - 'kafka_data:/bitnami'
     environment:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
 
@@ -263,13 +230,16 @@ volumes:
     driver: local
 ```
 
+## Configuration file
 
-## Configuration
-The image looks for configuration in the `config/` directory of `/bitnami/kafka`.
+The image looks for configurations in `/bitnami/kafka/conf/`. As mentioned in [Persisting your data](#persisting-your-data) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/kafka-persistence/kafka/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
+```bash
+$ docker run --name kafka \
+  -v /path/to/my_custom_conf_directory:/bitnami \
+  bitnami/kafka:latest
 ```
-docker run --name kafka -v /path/to/my_custom_conf_directory:/bitnami/kafka bitnami/kafka:latest
-```
+
 After that, your changes will be taken into account in the server's behaviour.
 
 ### Step 1: Run the Kafka image
@@ -287,7 +257,7 @@ services:
     ports:
       - '9092:9092'
     volumes:
-      - /path/to/kafka-persistence:/bitnami/kafka
+      - /path/to/kafka-persistence:/bitnami
 ```
 
 ### Step 2: Edit the configuration
@@ -303,87 +273,32 @@ vi /path/to/kafka-persistence/config/server.properties
 After changing the configuration, restart your Kafka container for changes to take effect.
 
 ```bash
-docker restart kafka
+$ docker restart kafka
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose restart kafka
+$ docker-compose restart kafka
 ```
-
 
 # Logging
 
 The Bitnami Kafka Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
-docker logs kafka
+$ docker logs kafka
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose logs kafka
+$ docker-compose logs kafka
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 # Maintenance
-
-## Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-### Step 1: Stop the currently running container
-
-```bash
-docker stop kafka
-```
-
-or using Docker Compose:
-
-```bash
-docker-compose stop kafka
-```
-
-### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```bash
-docker run --rm -v /path/to/kafka-backups:/backups --volumes-from kafka busybox \
-  cp -a /bitnami/kafka:latest /backups/latest
-```
-
-or using Docker Compose:
-
-```bash
-docker run --rm -v /path/to/kafka-backups:/backups --volumes-from `docker-compose ps -q kafka` busybox \
-  cp -a /bitnami/kafka:latest /backups/latest
-```
-
-## Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the container.
-
-```bash
-docker run -v /path/to/kafka-backups/latest:/bitnami/kafka bitnami/kafka:latest
-```
-
-or using Docker Compose:
-
-```yaml
-version: '2'
-
-services:
-  kafka:
-    image: 'bitnami/kafka:latest'
-    ports:
-      - '9092:9092'
-    volumes:
-      - /path/to/kafka-backups/latest:/bitnami/kafka
-```
 
 ## Upgrade this image
 
@@ -392,7 +307,7 @@ Bitnami provides up-to-date versions of Kafka, including security patches, soon 
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/kafka:latest
+$ docker pull bitnami/kafka:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -400,42 +315,51 @@ or if you're using Docker Compose, update the value of the image property to
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's data, configuration and logs.
+Stop the currently running container using the command
 
-Follow the steps on [creating a backup](#backing-up-your-container).
+```bash
+$ docker stop kafka
+```
+
+or using Docker Compose:
+
+```bash
+$ docker-compose stop kafka
+```
+
+Next, take a snapshot of the persistent volume `/path/to/kafka-persistence` using:
+
+```bash
+$ rsync -a /path/to/kafka-persistence /path/to/kafka-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
 ```bash
-docker rm -v kafka
+$ docker rm -v kafka
 ```
 
 or using Docker Compose:
 
-
 ```bash
-docker-compose rm -v kafka
+$ docker-compose rm -v kafka
 ```
 
 ### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image.
 
 ```bash
-docker run --name kafka bitnami/kafka:latest
+$ docker run --name kafka bitnami/kafka:latest
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose start kafka
+$ docker-compose start kafka
 ```
-
-# Notable Changes
-## 0.10.2.1
-
-- New Bitnami release
-
 
 # Contributing
 
@@ -459,7 +383,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2015-2016 Bitnami
+Copyright (c) 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
