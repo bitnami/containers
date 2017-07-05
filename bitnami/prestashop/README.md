@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-prestashop/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-prestashop/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-prestashop/master/kubernetes.yml)
 
 # What is PrestaShop?
@@ -13,15 +13,15 @@ http://www.prestashop.com
 ## Docker Compose
 
 ```bash
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-prestashop/master/docker-compose.yml
-$ docker-compose up
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-prestashop/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-prestashop/master/kubernetes.yml
@@ -37,7 +37,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-pre
 
 # Prerequisites
 
-To run this application you need Docker Engine 1.10.0. Docker Compose is recommended with a version 1.6.0 or later.
+To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://www.docker.com/products/docker-compose) is recommended with a version `1.6.0` or later.
 
 ## Run PrestaShop with a Database Container
 
@@ -55,26 +55,20 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'mariadb_data:/bitnami/mariadb'
+      - 'mariadb_data:/bitnami'
   prestashop:
     image: 'bitnami/prestashop:latest'
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - 'prestashop_data:/bitnami/prestashop'
-      - 'apache_data:/bitnami/apache'
-      - 'php_data':/bitnami/php'
+      - 'prestashop_data:/bitnami'
     depends_on:
       - mariadb
 volumes:
   mariadb_data:
     driver: local
   prestashop_data:
-    driver: local
-  apache_data:
-    driver: local
-  php_data:
     driver: local
 ```
 
@@ -108,13 +102,18 @@ Then you can access your application at <http://your-ip/>
 
 ## Persisting your application
 
-For persistence of the Prestashop deployment, the above examples define docker volumes namely `mariadb_data`, `prestashop_data`, `php_data` and `apache_data`. The Prestashop application state will persist as long as these volumes are not removed.
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
+
+The above examples define docker volumes namely `mariadb_data` and `prestashop_data`. The PrestaShop application state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ### Mount host directories as data volumes with Docker Compose
 
 This requires a minor change to the `docker-compose.yml` template previously shown:
+
 ```yaml
 version: '2'
 
@@ -124,16 +123,14 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - '/path/to/mariadb-persistence:/bitnami/mariadb'
+      - '/path/to/mariadb-persistence:/bitnami'
   prestashop:
     image: 'bitnami/prestashop:latest'
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - '/path/to/prestashop-persistence:/bitnami/prestashop'
-      - '/path/to/apache-persistence:/bitnami/apache'
-      - '/path/to/php-persistence:/bitnami/apache'
+      - '/path/to/prestashop-persistence:/bitnami'
    depends_on:
       - mariadb
 ```
@@ -153,7 +150,7 @@ In this case you need to specify the directories to mount on the run command. Th
   ```bash
   $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
     --network prestashop-tier \
-    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+    --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
   ```
 
@@ -164,9 +161,7 @@ In this case you need to specify the directories to mount on the run command. Th
   ```bash
   $ docker run -d --name prestashop -p 80:80 -p 443:443 \
     --network prestashop-tier \
-    --volume /path/to/prestashop-persistence:/bitnami/prestashop \
-    --volume /path/to/apache-persistence:/bitnami/apache \
-    --volume /path/to/php-persistence:/bitnami/php \
+    --volume /path/to/prestashop-persistence:/bitnami \
     bitnami/prestashop:latest
   ```
 
@@ -174,57 +169,45 @@ In this case you need to specify the directories to mount on the run command. Th
 
 Bitnami provides up-to-date versions of MariaDB and PrestaShop, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the PrestaShop container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
 
-> **NOTE**:
->
-> This method only upgrades the components (PHP and Apache) included in the PrestaShop Docker Image. PrestaShop will not be upgrade to the newest version. For PrestaShop upgrade see http://doc.prestashop.com/display/PS15/Updating+PrestaShop
+1. Get the updated images:
 
-## Using Docker Compose
-
-1. Stop the running PrestaShop container
   ```bash
-  $ docker-compose stop prestashop
+  $ docker pull bitnami/prestashop:latest
   ```
 
-2. Remove the stopped container
-  ```bash
-  $ docker-compose rm prestashop
-  ```
+2. Stop your container
 
-3. Launch the updated Prestashop image
-  ```bash
-  $ docker-compose start prestashop
-  ```
+ * For docker-compose: `$ docker-compose stop prestashop`
+ * For manual execution: `$ docker stop prestashop`
 
-## Using Docker command line
+3. Take a snapshot of the application state
 
-1. Stop the running PrestaShop container
-  ```bash
-  $ docker stop prestashop
-  ```
+```bash
+$ rsync -a /path/to/prestashop-persistence /path/to/prestashop-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
 
-2. Remove the stopped container
-  ```bash
-  $ docker rm prestashop
-  ```
+Additionally, [snapshot the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
 
-3. Launch the updated PrestaShop image
-  ```bash
-  $ docker run -d --name presstashop -p 80:80 -p 443:443 \
-    --volume prestashop_data:/bitnami/prestashop \
-    --volume apache_data:/bitnami/apache \
-    --volume php_data:/bitnami/php \
-    bitnami/prestashop:latest
-  ```
+You can use these snapshots to restore the application state should the upgrade fail.
 
-> **NOTE**:
->
-> The above command assumes that local docker volumes are in use. Edit the command according to your usage.
+4. Remove the currently running container
+
+ * For docker-compose: `$ docker-compose rm -v prestashop`
+ * For manual execution: `$ docker rm -v prestashop`
+
+5. Run the new image
+
+ * For docker-compose: `$ docker-compose start prestashop`
+ * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name prestashop bitnami/prestashop:latest`
 
 # Configuration
+
 ## Environment variables
- When you start the PrestaShop image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+
+When you start the PrestaShop image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
+
 ```yaml
 prestashop:
   image: bitnami/prestashop:latest
@@ -234,9 +217,7 @@ prestashop:
   environment:
     - PRESTASHOP_HOST=your_host
   volumes:
-    - prestashop_data:/bitnami/prestashop
-    - apache_data:/bitnami/apache
-    - php_data:/bitnami/php
+    - prestashop_data:/bitnami
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -245,9 +226,7 @@ prestashop:
 $ docker run -d --name prestashop -p 80:80 -p 443:443 \
   --network prestashop-tier \
   --e PRESTASHOP_PASSWORD=my_password \
-  --volume /path/to/prestashop-persistence:/bitnami/prestashop \
-  --volume /path/to/apache-persistence:/bitnami/apache \
-  --volume /path/to/php-persistence:/bitnami/php \
+  --volume /path/to/prestashop-persistence:/bitnami \
   bitnami/prestashop:latest
 ```
 
@@ -268,6 +247,7 @@ Available variables:
 ## SMTP Configuration
 
 To configure PrestaShop to send email using SMTP you can set the following environment variables:
+
 - `SMTP_HOST`: SMTP host.
 - `SMTP_PORT`: SMTP port.
 - `SMTP_PROTOCOL`: SMTP protocol [ssl, tls, ""].
@@ -277,6 +257,7 @@ To configure PrestaShop to send email using SMTP you can set the following envir
 This would be an example of SMTP configuration using a GMail account:
 
 * docker-compose:
+
 ```yaml
 prestashop:
   image: bitnami/prestashop:latest
@@ -292,6 +273,7 @@ prestashop:
 ```
 
 * For manual execution:
+
 ```bash
 $ docker run -d --name prestashop -p 80:80 -p 443:443 \
   -e SMTP_HOST=smtp.gmail.com \
@@ -300,30 +282,9 @@ $ docker run -d --name prestashop -p 80:80 -p 443:443 \
   -e SMTP_USER=your_email@gmail.com \
   -e SMTP_PASSWORD=your_password \
   --network prestashop-tier \
-  --volume /path/to/prestashop-persistence:/bitnami/prestashop \
-  --volume /path/to/apache-persistence:/bitnami/apache \
-  --volume /path/to/php-persistence:/bitnami/php \
+  --volume /path/to/prestashop-persistence:/bitnami \
   bitnami/prestashop:latest
 ```
-
-# Backing up your application
-
-To backup your application data follow these steps:
-
-1. Stop the running container:
-
-  * For docker-compose: `$ docker-compose stop prestashop`
-  * For manual execution: `$ docker stop prestashop`
-
-2. Copy the PrestaShop data folder in the host:
-
-  ```bash
-  $ docker cp /path/to/prestashop-persistence:/bitnami/prestashop
-  ```
-
-# Restoring a backup
-
-To restore your application using backed up data simply mount the folder with PrestaShop, PHP and Apache data in the container. See [persisting your application](#persisting-your-application) section for more info.
 
 # Contributing
 
@@ -333,16 +294,13 @@ We'd love for you to contribute to this container. You can request new features 
 
 # Issues
 
-If you encountered a problem running this container, you can file an
-[issue](https://github.com/bitnami/bitnami-docker-prestashop/issues). For us to provide better support,
-be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-prestashop/issues). For us  to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`$ docker version`)
 - Output of `$ docker info`
 - Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
-- The command you used to run the container, and any relevant output you saw (masking any sensitive
-information)
+- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # Community
 
@@ -352,7 +310,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright 2017 Bitnami
+Copyright 2016-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
