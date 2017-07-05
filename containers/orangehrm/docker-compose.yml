@@ -6,7 +6,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'mariadb_data:/bitnami/mariadb'
+      - 'mariadb_data:/bitnami'
   orangehrm:
     image: 'bitnami/orangehrm:latest'
     labels:
@@ -17,13 +17,10 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - 'orangehrm_data:/bitnami/orangehrm'
-      - 'apache_data:/bitnami/apache'
-      
+      - 'orangehrm_data:/bitnami'
+
 volumes:
   mariadb_data:
     driver: local
   orangehrm_data:
-    driver: local
-  apache_data:
     driver: local
