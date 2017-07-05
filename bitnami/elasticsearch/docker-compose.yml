@@ -1,4 +1,5 @@
 version: '2'
+
 services:
   elasticsearch:
     image: 'bitnami/elasticsearch:latest'
@@ -8,7 +9,7 @@ services:
       - '9200:9200'
       - '9300:9300'
     volumes:
-      - 'elasticsearch_data:/bitnami/elasticsearch'
+      - 'elasticsearch_data:/bitnami'
 volumes:
   elasticsearch_data:
     driver: local
