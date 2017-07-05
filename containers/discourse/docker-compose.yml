@@ -3,13 +3,13 @@ services:
   postgresql:
     image: 'bitnami/postgresql:latest'
     volumes:
-      - 'postgresql_data:/bitnami/postgresql'
+      - 'postgresql_data:/bitnami'
   redis:
     image: 'bitnami/redis:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'redis_data:/bitnami/redis'
+      - 'redis_data:/bitnami'
   discourse:
     image: 'bitnami/discourse:latest'
     labels:
@@ -20,7 +20,7 @@ services:
       - postgresql
       - redis
     volumes:
-      - 'discourse_data:/bitnami/discourse'
+      - 'discourse_data:/bitnami'
     environment:
       - POSTGRESQL_HOST=postgresql
       - POSTGRESQL_ROOT_USER=postgres
@@ -35,7 +35,7 @@ services:
     depends_on:
       - discourse
     volumes:
-      - 'sidekiq_data:/bitnami/discourse-sidekiq'
+      - 'sidekiq_data:/bitnami'
     command: 'nami start --foreground discourse-sidekiq'
     environment:
       - DISCOURSE_POSTGRESQL_NAME=bitnami_application
