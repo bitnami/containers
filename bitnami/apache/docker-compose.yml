@@ -9,7 +9,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - 'apache_data:/bitnami/apache'
+      - 'apache_data:/bitnami'
 volumes:
   apache_data:
     driver: local
