@@ -1,4 +1,5 @@
 version: '2'
+
 services:
   rabbitmq:
     image: 'bitnami/rabbitmq:latest'
@@ -10,7 +11,7 @@ services:
       - '25672:25672'
       - '15672:15672'
     volumes:
-      - 'rabbitmq_data:/bitnami/rabbitmq'
+      - 'rabbitmq_data:/bitnami'
 volumes:
   rabbitmq_data:
     driver: local
