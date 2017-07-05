@@ -7,7 +7,7 @@ services:
     ports:
       - '8983:8983'
     volumes:
-      - 'solr_data:/bitnami/solr'
+      - 'solr_data:/bitnami'
 volumes:
   solr_data:
     driver: local
