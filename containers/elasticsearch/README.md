@@ -1,6 +1,7 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-elasticsearch/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-elasticsearch/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-elasticsearch/master/kubernetes.yml)
+
 # What is Elasticsearch?
 
 > Elasticsearch is a highly scalable open-source full-text search and analytics engine. It allows you to store, search, and analyze big volumes of data quickly and in near real time
@@ -10,21 +11,21 @@
 # TL;DR;
 
 ```bash
-docker run --name elasticsearch bitnami/elasticsearch:latest
+$ docker run --name elasticsearch bitnami/elasticsearch:latest
 ```
 
 ## Docker Compose
 
-```
-elasticsearch:
-  image: bitnami/elasticsearch:latest
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-elasticsearch/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-elasticsearch/master/kubernetes.yml
@@ -43,40 +44,43 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-ela
 The recommended way to get the Bitnami Elasticsearch Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/elasticsearch).
 
 ```bash
-docker pull bitnami/elasticsearch:latest
+$ docker pull bitnami/elasticsearch:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/elasticsearch/tags/) in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/elasticsearch:[TAG]
+$ docker pull bitnami/elasticsearch:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
 ```bash
-docker build -t bitnami/elasticsearch:latest https://github.com/bitnami/bitnami-docker-elasticsearch.git
+$ docker build -t bitnami/elasticsearch:latest https://github.com/bitnami/bitnami-docker-elasticsearch.git
 ```
 
 # Persisting your application
 
-If you remove every container and volume all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed. If you are using docker-compose your data will be persistent as long as you don't remove `elasticsearch_data` data volumes. If you have run the containers manually or you want to mount the folders with persistent data in your host follow the next steps:
+If you remove the container all your data and configurations will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-> **Note!** If you have already started using your application, follow the steps on [backing](#backing-up-your-container) up to pull the data from your running container down to your host.
-
-The image exposes a volume at `/bitnami/elasticsearch` for the Elasticsearch data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
+For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
-docker run -v /path/to/elasticsearch-persistence:/bitnami/elasticsearch bitnami/elasticsearch:latest
+$ docker run \
+    -v /path/to/elasticsearch-persistence:/bitnami/elasticsearch \
+    bitnami/elasticsearch:latest
 ```
 
 or using Docker Compose:
 
-```
-elasticsearch:
-  image: bitnami/elasticsearch:latest
-  volumes:
-    - /path/to/elasticsearch-persistence:/bitnami/elasticsearch
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: bitnami/elasticsearch:latest
+    volumes:
+      - /path/to/mariadb-persistence:/bitnami
 ```
 
 # Connecting to other containers
@@ -152,9 +156,11 @@ $ docker-compose up -d
 # Configuration
 
 ## Environment variables
- When you start the elasticsearch image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+
+When you start the elasticsearch image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
+
 ```yaml
 elasticsearch:
   image: bitnami/elasticsearch:latest
@@ -164,8 +170,12 @@ elasticsearch:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```
- $ docker run -d -e ELASTICSEARCH_PORT_NUMBER=9201 -p 9201:9201 --name elasticsearch -v /your/local/path/bitnami/elasticsearch:/bitnami/elasticsearch --network=elasticsearch_network bitnami/elasticsearch
+```bash
+ $ docker run -d --name elasticsearch \
+    -p 9201:9201 --network=elasticsearch_network \
+    -e ELASTICSEARCH_PORT_NUMBER=9201 \
+    -v /your/local/path/bitnami/elasticsearch:/bitnami/elasticsearch \
+    bitnami/elasticsearch
 ```
 
 Available variables:
@@ -189,13 +199,13 @@ A cluster can easily be setup with the Bitnami Elasticsearch Docker Image using 
 ### Step 1: Create a new network.
 
 ```bash
-docker network create elasticsearch_network
+$ docker network create elasticsearch_network
 ```
 
 ### Step 2: Create a first node.
 
 ```bash
-docker run --name elasticsearch-node1 \
+$ docker run --name elasticsearch-node1 \
   --net=elasticsearch_network \
   -p 9200:9200 \
   -e ELASTICSEARCH_CLUSTER_NAME=elasticsearch-cluster \
@@ -203,13 +213,13 @@ docker run --name elasticsearch-node1 \
   -e ELASTICSEARCH_NODE_NAME=elastic-node1 \
   bitnami/elasticsearch:latest
 ```
-In the above command the container is added to a cluster named `elasticsearch-cluster` using the `ELASTICSEARCH_CLUSTER_NAME`. The `ELASTICSEARCH_CLUSTER_HOSTS` parameter set the name of the nodes that set the cluster so we will need to launch other container for the second node. Finally the `ELASTICSEARCH_NODE_NAME` parameter allows to indicate a known name for the node, otherwise elasticsearch will generate a randon one.
 
+In the above command the container is added to a cluster named `elasticsearch-cluster` using the `ELASTICSEARCH_CLUSTER_NAME`. The `ELASTICSEARCH_CLUSTER_HOSTS` parameter set the name of the nodes that set the cluster so we will need to launch other container for the second node. Finally the `ELASTICSEARCH_NODE_NAME` parameter allows to indicate a known name for the node, otherwise elasticsearch will generate a randon one.
 
 ### Step 3: Create a second node
 
 ```bash
-docker run --name elasticsearch-node2 \
+$ docker run --name elasticsearch-node2 \
   --link elasticsearch-node1:elasticsearch-node1 \
   --net=elasticsearch_network \
   -e ELASTICSEARCH_CLUSTER_NAME=elasticsearch-cluster \
@@ -241,77 +251,28 @@ services:
       - ELASTICSEARCH_CLUSTER_HOSTS=elasticsearch-node1,elasticsearch-node2
       - ELASTICSEARCH_NODE_NAME=elastic-node2
 ```
+
 ## Configuration file
 
-The image looks for configuration in the `conf/` directory of `/bitnami/elasticsearch`. As mentioned in [Persisting your database](#persisting-your-data) you can mount a volume at this location and copy your own configurations in the `conf/` directory. The default configuration will be copied to the `conf/` directory if it's empty.
-
+The image looks for configurations in `/bitnami/elasticsearch/conf/`. As mentioned in [Persisting your application](#persisting-your-application) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/elasticsearch-persistence/elasticsearch/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
 # Logging
 
 The Bitnami Elasticsearch Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
-docker logs elasticsearch
+$ docker logs elasticsearch
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose logs elasticsearch
+$ docker-compose logs elasticsearch
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 # Maintenance
-
-## Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-### Step 1: Stop the currently running container
-
-```bash
-docker stop elasticsearch
-```
-
-or using Docker Compose:
-
-```bash
-docker-compose stop elasticsearch
-```
-
-### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```bash
-docker run --rm -v /path/to/elasticsearch-backups:/backups --volumes-from elasticsearch busybox \
-  cp -a /bitnami/elasticsearch:latest /backups/latest
-```
-
-or using Docker Compose:
-
-```bash
-docker run --rm -v /path/to/elasticsearch-backups:/backups --volumes-from `docker-compose ps -q elasticsearch` busybox \
-  cp -a /bitnami/elasticsearch:latest /backups/latest
-```
-
-## Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the container.
-
-```bash
-docker run -v /path/to/elasticsearch-backups/latest:/bitnami/elasticsearch bitnami/elasticsearch:latest
-```
-
-or using Docker Compose:
-
-```
-elasticsearch:
-  image: bitnami/elasticsearch:latest
-  volumes:
-    - /path/to/elasticsearch-backups/latest:/bitnami/elasticsearch
-```
 
 ## Upgrade this image
 
@@ -320,7 +281,7 @@ Bitnami provides up-to-date versions of Elasticsearch, including security patche
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/elasticsearch:latest
+$ docker pull bitnami/elasticsearch:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -328,20 +289,36 @@ or if you're using Docker Compose, update the value of the image property to
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's data, configuration and logs.
-
-Follow the steps on [creating a backup](#backing-up-your-container).
-
-### Step 3: Remove the currently running container
+Stop the currently running container using the command
 
 ```bash
-docker rm -v elasticsearch
+$ docker stop elasticsearch
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose rm -v elasticsearch
+$ docker-compose stop elasticsearch
+```
+
+Next, take a snapshot of the persistent volume `/path/to/elasticsearch-persistence` using:
+
+```bash
+$ rsync -a /path/to/elasticsearch-persistence /path/to/elasticsearch-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+You can use this snapshot to restore the application state should the upgrade fail.
+
+### Step 3: Remove the currently running container
+
+```bash
+$ docker rm -v elasticsearch
+```
+
+or using Docker Compose:
+
+```bash
+$ docker-compose rm -v elasticsearch
 ```
 
 ### Step 4: Run the new image
@@ -349,14 +326,15 @@ docker-compose rm -v elasticsearch
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
 ```bash
-docker run --name elasticsearch bitnami/elasticsearch:latest
+$ docker run --name elasticsearch bitnami/elasticsearch:latest
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose start elasticsearch
+$ docker-compose start elasticsearch
 ```
+
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-elasticsearch/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-elasticsearch/pulls) with your contribution.
@@ -378,7 +356,7 @@ Most real time communication happens in the `#containers` channel at [bitnami-os
 Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
-Copyright (c) 2016 Bitnami
+Copyright 2016-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
