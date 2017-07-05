@@ -3,13 +3,13 @@ services:
   mongodb:
     image: 'bitnami/mongodb:latest'
     volumes:
-      - 'mongodb_data:/bitnami/mongodb'
+      - 'mongodb_data:/bitnami'
   parse:
     image: 'bitnami/parse:latest'
     ports:
       - '1337:1337'
     volumes:
-      - 'parse_data:/bitnami/parse'
+      - 'parse_data:/bitnami'
     depends_on:
       - mongodb
   parse-dashboard:
@@ -19,7 +19,7 @@ services:
     ports:
       - '80:4040'
     volumes:
-      - 'parse_dashboard_data:/bitnami/parse-dashboard'
+      - 'parse_dashboard_data:/bitnami'
     depends_on:
       - parse
 volumes:
