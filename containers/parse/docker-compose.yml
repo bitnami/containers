@@ -3,7 +3,7 @@ services:
   mongodb:
     image: 'bitnami/mongodb:latest'
     volumes:
-      - 'mongodb_data:/bitnami/mongodb'
+      - 'mongodb_data:/bitnami'
   parse:
     image: 'bitnami/parse:latest'
     labels:
@@ -11,7 +11,7 @@ services:
     ports:
       - '1337:1337'
     volumes:
-      - 'parse_data:/bitnami/parse'
+      - 'parse_data:/bitnami'
     depends_on:
       - mongodb
 volumes:
