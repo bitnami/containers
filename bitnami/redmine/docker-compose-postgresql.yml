@@ -3,7 +3,7 @@ services:
   postgresql:
     image: 'bitnami/postgresql:latest'
     volumes:
-      - 'postgresql_data:/bitnami/postgresql'
+      - 'postgresql_data:/bitnami'
   redmine:
     image: 'bitnami/redmine:latest'
     ports:
@@ -11,7 +11,7 @@ services:
     environment:
       - REDMINE_DB_POSTGRES=postgresql
     volumes:
-      - 'redmine_data:/bitnami/redmine'
+      - 'redmine_data:/bitnami'
     depends_on:
       - postgresql
 volumes:
