@@ -6,7 +6,7 @@ services:
     environment:
       - MONGODB_REPLICA_SET_MODE=primary
     volumes:
-      - 'mongodb_master_data:/bitnami/mongodb'
+      - 'mongodb_master_data:/bitnami'
 
   mongodb-secondary:
     image: 'bitnami/mongodb:latest'
