@@ -12,7 +12,7 @@ services:
     environment:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
     volumes:
-      - 'kafka_data:/bitnami/kafka'
+      - 'kafka_data:/bitnami'
   kafka2:
     image: 'bitnami/kafka:latest'
     ports:
@@ -20,7 +20,7 @@ services:
     environment:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
     volumes:
-      - 'kafka_data:/bitnami/kafka'
+      - 'kafka_data:/bitnami'
   kafka3:
     image: 'bitnami/kafka:latest'
     ports:
@@ -28,10 +28,8 @@ services:
     environment:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
     volumes:
-      - 'kafka_data:/bitnami/kafka'
+      - 'kafka_data:/bitnami'
 
 volumes:
-  zookeeper_data:
-    driver: local
   kafka_data:
     driver: local
