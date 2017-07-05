@@ -1,4 +1,5 @@
 version: '2'
+
 services:
   cassandra:
     image: 'bitnami/cassandra:latest'
@@ -10,7 +11,7 @@ services:
       - '9042:9042'
       - '9160:9160'
     volumes:
-      - 'cassandra_data:/bitnami/cassandra'
+      - 'cassandra_data:/bitnami'
 volumes:
   cassandra_data:
     driver: local
