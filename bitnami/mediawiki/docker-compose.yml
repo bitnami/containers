@@ -5,7 +5,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'mariadb_data:/bitnami/mariadb'
+      - 'mariadb_data:/bitnami'
   mediawiki:
     image: 'bitnami/mediawiki:latest'
     labels:
@@ -14,17 +14,11 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - 'mediawiki_data:/bitnami/mediawiki'
-      - 'apache_data:/bitnami/apache'
-      - 'php_data:/bitnami/php'
+      - 'mediawiki_data:/bitnami'
     depends_on:
       - mariadb
 volumes:
   mariadb_data:
     driver: local
   mediawiki_data:
-    driver: local
-  apache_data:
-    driver: local
-  php_data:
     driver: local
