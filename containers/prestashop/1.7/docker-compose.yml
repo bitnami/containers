@@ -6,7 +6,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'mariadb_data:/bitnami/mariadb'
+      - 'mariadb_data:/bitnami'
   prestashop:
     image: 'bitnami/prestashop:1.7'
     labels:
@@ -15,9 +15,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - 'prestashop_data:/bitnami/prestashop'
-      - 'apache_data:/bitnami/apache'
-      - 'php_data:/bitnami/php'
+      - 'prestashop_data:/bitnami'
     depends_on:
       - mariadb
     environment:
@@ -27,8 +25,4 @@ volumes:
   mariadb_data:
     driver: local
   prestashop_data:
-    driver: local
-  apache_data:
-    driver: local
-  php_data:
     driver: local
