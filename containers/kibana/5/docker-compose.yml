@@ -3,7 +3,7 @@ services:
   elasticsearch:
     image: 'bitnami/elasticsearch:latest'
     volumes:
-      - 'elasticsearch_data:/bitnami/elasticsearch'
+      - 'elasticsearch_data:/bitnami'
   kibana:
     image: 'bitnami/kibana:5'
     labels:
@@ -11,7 +11,7 @@ services:
     ports:
       - '5601:5601'
     volumes:
-      - 'kibana_data:/bitnami/kibana'
+      - 'kibana_data:/bitnami'
     depends_on:
       - elasticsearch
 volumes:
