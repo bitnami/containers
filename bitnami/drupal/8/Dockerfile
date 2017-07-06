@@ -9,15 +9,15 @@ RUN bitnami-pkg unpack apache-2.4.26-0 --checksum 2d01547a273e715388bae110707a41
 RUN bitnami-pkg unpack php-7.0.20-0 --checksum 78181d1320567be07448e75e4783ce0269b433fc9e7ed8eff67abcff7f7327e9
 RUN bitnami-pkg install mysql-client-10.1.25-0 --checksum 513ef36ab1efa5570332547c2027ae29886fe4bb56472de11ca083423a3fe366
 RUN bitnami-pkg install libphp-7.0.20-0 --checksum 9ec5ab2093723889e8c90e9e34f7434939c0c8d2ea054b4fc5af68e21f6ebaa5
-RUN bitnami-pkg install drush-8.0.5-1 --checksum cdea2d5067ef67bcda7e5cfe96798c2d6e0167578395fac2d7a5f92a814ecc69
-RUN bitnami-pkg unpack drupal-8.3.4-0 --checksum c63f80d04c8575b95f852d357a1019a2fe60623ff1d3056c2811eff1acf68950
+RUN bitnami-pkg install drush-8.1.12-0 --checksum f38554d1f7a7fad55457d82f7cb233e72ad0f8b102d06d97eadee52a83215296
+RUN bitnami-pkg unpack drupal-8.3.5-0 --checksum 2c4208fe0ae5333540e60e5b5ea4889e7617a19ba95a514fe3d54abc97b92fe4
 
 COPY rootfs /
 
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.3.4-r1" \
+    BITNAMI_IMAGE_VERSION="8.3.5-r0" \
     DRUPAL_EMAIL="user@example.com" \
     DRUPAL_PASSWORD="bitnami" \
     DRUPAL_USERNAME="user" \
