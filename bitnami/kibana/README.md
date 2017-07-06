@@ -1,6 +1,7 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-kibana/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-kibana/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-kibana/master/kubernetes.yml)
+
 # What is Kibana?
 
 > Kibana is an open source, browser based analytics and search dashboard for Elasticsearch. Kibana is a snap to setup and start using. Kibana strives to be easy to get started with, while also being flexible and powerful, just like Elasticsearch
@@ -12,15 +13,15 @@
 ## Docker Compose
 
 ```bash
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-kibana/master/docker-compose.yml
-$ docker-compose up
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kibaba/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-kibana/master/kubernetes.yml
@@ -39,27 +40,28 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-kib
 The recommended way to get the Bitnami Kibana Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kibana).
 
 ```bash
-docker pull bitnami/kibana:latest
+$ docker pull bitnami/kibana:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/kibana/tags/) in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/kibana:[TAG]
+$ docker pull bitnami/kibana:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
 ```bash
-docker build -t bitnami/kibana:latest https://github.com/bitnami/bitnami-docker-kibana.git
+$ docker build -t bitnami/kibana:latest https://github.com/bitnami/bitnami-docker-kibana.git
 ```
+
 # How to use this image
 
 ## Run the application using Docker Compose
 
 This is the recommended way to run Kibana. You can use the following docker compose template:
 
-```
+```yaml
 version: '2'
 
 services:
@@ -70,13 +72,13 @@ services:
     environment:
       - KIBANA_ELASTICSEARCH_URL=elasticsearch
     volumes:
-      - 'kibana_data:/bitnami/kibana'
+      - 'kibana_data:/bitnami'
   elasticsearch:
     image: 'bitnami/elasticsearc:latest'
     ports:
       - 9200:9200
     volumes:
-      - 'elasticsearch_data:/bitnami/elasticsearch'
+      - 'elasticsearch_data:/bitnami'
 volumes:
   kibana_data:
     driver:local
@@ -103,32 +105,34 @@ If you want to run the application manually instead of using docker-compose, the
 3. Run the Kibana container:
 
   ```
-  $ docker run -d -p 5601:5601 -e KIBANA_ELASTICSEARCH_URL=elasticsearch --name kibana --net=kibana_network bitnami/kibana
+  $ docker run -d -p 5601:5601 --name kibana --net=kibana_network \
+    -e KIBANA_ELASTICSEARCH_URL=elasticsearch \
+    bitnami/kibana
   ```
 
 Then you can access your application at http://your-ip:5601/
 
+# Persisting your application
 
-# Persisting your database
+If you remove the container all your data and configurations will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-If you remove the container all your data and configurations will be lost, and the next time you run the image the data and configurations will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the Elasticsearch data](https://github.com/bitnami/bitnami-docker-elasticsearch#persisting-your-application).
 
-**Note!**
-If you have already started using your database, follow the steps on [backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
+The above examples define docker volumes namely `elasticsearch_data` and `kibana_data`. The Kibana application state will persist as long as these volumes are not removed.
 
-The image exposes a volume at `/bitnami/kibana` for the Kibana data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
+To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ```bash
-docker run -v /path/to/kibana-persistence:/bitnami/kibana bitnami/kibana:latest
+$ docker run -v /path/to/kibana-persistence:/bitnami bitnami/kibana:latest
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 kibana:
   image: bitnami/kibana:latest
   volumes:
-    - /path/to/kibana-persistence:/bitnami/kibana
+    - /path/to/kibana-persistence:/bitnami
 ```
 
 # Connecting to other containers
@@ -205,23 +209,23 @@ $ docker-compose up -d
 
 ## Configuration file
 
-The image looks for configuration in the `conf/` directory of `/bitnami/kibana`. As as mentioned in [Persisting your database](#persisting-your-data) you can mount a volume at this location and copy your own configurations in the `conf/` directory. The default configuration will be copied to the `conf/` directory if it's empty.
+The image looks for configurations in `/bitnami/kibana/conf/`. As mentioned in [Persisting your application](#persisting-your-application) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/kibana-persistence/kibana/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
 ### Step 1: Run the Kibana image
 
 Run the Kibana image, mounting a directory from your host.
 
 ```bash
-docker run --name kibana -v /path/to/kibana-persistence:/bitnami/kibana bitnami/kibana:latest
+$ docker run --name kibana -v /path/to/kibana-persistence:/bitnami bitnami/kibana:latest
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 kibana:
   image: bitnami/kibana:latest
   volumes:
-    - /path/to/kibana-persistence:/bitnami/kibana
+    - /path/to/kibana-persistence:/bitnami
 ```
 
 ### Step 2: Edit the configuration
@@ -229,7 +233,7 @@ kibana:
 Edit the configuration on your host using your favorite editor.
 
 ```bash
-vi /path/to/kibana-persistence/conf/kibana.conf
+$ vi /path/to/kibana-persistence/kibana/conf/kibana.conf
 ```
 
 ### Step 3: Restart Kibana
@@ -237,85 +241,34 @@ vi /path/to/kibana-persistence/conf/kibana.conf
 After changing the configuration, restart your Kibana container for changes to take effect.
 
 ```bash
-docker restart kibana
+$ docker restart kibana
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose restart kibana
+$ docker-compose restart kibana
 ```
 
-**Further Reading:**
-
-  - [Kibana Configuration Documentation](http://kibana.io/topics/config)
+Refer to the [configuration](http://kibana.io/topics/config) manual for the complete list of configuration options.
 
 # Logging
 
 The Bitnami Kibana Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
-docker logs kibana
+$ docker logs kibana
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose logs kibana
+$ docker-compose logs kibana
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 # Maintenance
-
-## Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-### Step 1: Stop the currently running container
-
-```bash
-docker stop kibana
-```
-
-or using Docker Compose:
-
-```bash
-docker-compose stop kibana
-```
-
-### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```bash
-docker run --rm -v /path/to/kibana-backups:/backups --volumes-from kibana busybox \
-  cp -a /bitnami/kibana:latest /backups/latest
-```
-
-or using Docker Compose:
-
-```bash
-docker run --rm -v /path/to/kibana-backups:/backups --volumes-from `docker-compose ps -q kibana` busybox \
-  cp -a /bitnami/kibana:latest /backups/latest
-```
-
-## Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the container.
-
-```bash
-docker run -v /path/to/kibana-backups/latest:/bitnami/kibana bitnami/kibana:latest
-```
-
-or using Docker Compose:
-
-```
-kibana:
-  image: bitnami/kibana:latest
-  volumes:
-    - /path/to/kibana-backups/latest:/bitnami/kibana
-```
 
 ## Upgrade this image
 
@@ -324,7 +277,7 @@ Bitnami provides up-to-date versions of Kibana, including security patches, soon
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/kibana:latest
+$ docker pull bitnami/kibana:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -332,20 +285,38 @@ or if you're using Docker Compose, update the value of the image property to
 
 ### Step 2: Stop and backup the currently running container
 
-Before continuing, you should backup your container's data, configuration and logs.
-
-Follow the steps on [creating a backup](#backing-up-your-container).
-
-### Step 3: Remove the currently running container
+Stop the currently running container using the command
 
 ```bash
-docker rm -v kibana
+$ docker stop kibana
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose rm -v kibana
+$ docker-compose stop kibana
+```
+
+Next, take a snapshot of the persistent volume `/path/to/kibana-persistence` using:
+
+```bash
+$ rsync -a /path/to/kibana-persistence /path/to/kibana-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
+
+Additionally, [snapshot the Elasticsearch data](https://github.com/bitnami/bitnami-docker-elasticsearch#step-2-stop-and-backup-the-currently-running-container)
+
+You can use these snapshots to restore the application state should the upgrade fail.
+
+### Step 3: Remove the currently running container
+
+```bash
+$ docker rm -v kibana
+```
+
+or using Docker Compose:
+
+```bash
+$ docker-compose rm -v kibana
 ```
 
 ### Step 4: Run the new image
@@ -353,13 +324,13 @@ docker-compose rm -v kibana
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
 ```bash
-docker run --name kibana bitnami/kibana:latest
+$ docker run --name kibana bitnami/kibana:latest
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose start kibana
+$ docker-compose start kibana
 ```
 
 # Notable Changes
@@ -390,7 +361,8 @@ Most real time communication happens in the `#containers` channel at [bitnami-os
 Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
-Copyright 2016 Bitnami
+
+Copyright 2016-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
