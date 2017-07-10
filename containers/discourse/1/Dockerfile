@@ -1,20 +1,18 @@
 FROM bitnami/minideb-extras:jessie-r19
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-
-
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbsd0 libc6 libcomerr2 libcurl3 libedit2 libffi6 libgcc1 libgcrypt20 libgmp-dev libgmp10 libgnutls-deb0-28 libgpg-error0 libgssapi-krb5-2 libhogweed2 libidn11 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmysqlclient18 libncurses5 libnettle4 libp11-kit0 libpq5 libreadline6 librtmp1 libsasl2-2 libssh2-1 libssl1.0.0 libstdc++6 libtasn1-6 libtinfo5 libxml2 libxml2-dev libxslt1-dev libxslt1.1 sendmail zlib1g zlib1g-dev
 RUN bitnami-pkg install ruby-2.3.4-0 --checksum 92d6db7a6ba0893334e9d1d46a66a7459df08e151762f87942d6b0f29db0171a
 RUN bitnami-pkg unpack postgresql-client-9.6.3-0 --checksum fec96be76c0ba5f66a56fbc002b45092abc0100a6d9409d26ddc7391610236de
 RUN bitnami-pkg install git-2.13.2-0 --checksum 0c8267b16408cd9cb0f7b9041e30b9207dc51076735bca471574bb995556d588
-RUN bitnami-pkg unpack discourse-sidekiq-1.7.8-1 --checksum 970584c2d3c8de27734b9beb4899c4c814968f44971bfd010ef7761092dfdec5
-RUN bitnami-pkg unpack discourse-1.7.10-0 --checksum ad4cbfcba617284e5bb2a68c585fbc81625f13d58e4caa1ba4b611cfb366f59b
+RUN bitnami-pkg unpack discourse-sidekiq-1.8.2-3 --checksum f446655be6f2ad131bd723c89aeb65fb3e949ed42174cb62f16c531fe2648a15
+RUN bitnami-pkg unpack discourse-1.8.2-0 --checksum c8b8f4b25d3971fa51a1076b6c0518eaa30f5d456e1fe4e263dba814965e70a5
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="1.7.10-r2" \
+    BITNAMI_IMAGE_VERSION="1.8.2-r0" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_PASSWORD="bitnami" \
     DISCOURSE_POSTGRESQL_NAME="bitnami_application" \
@@ -38,9 +36,6 @@ ENV BITNAMI_APP_NAME="discourse" \
     SMTP_PORT="" \
     SMTP_TLS="true" \
     SMTP_USER=""
-
-
-
 
 EXPOSE 3000
 
