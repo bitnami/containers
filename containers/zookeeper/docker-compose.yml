@@ -5,6 +5,8 @@ services:
     image: 'bitnami/zookeeper:latest'
     labels:
       kompose.service.type: nodeport
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
     ports:
       - '2181:2181'
     volumes:
