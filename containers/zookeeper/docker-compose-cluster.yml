@@ -1,16 +1,17 @@
 version: '2'
 
 services:
-  zookeeper1:
+  zookeeper:
     image: 'bitnami/zookeeper:latest'
     ports:
       - '2181'
       - '2888'
       - '3888'
     volumes:
-      - /path/to/zookeeper-persistence:/bitnami
+      - zookeeper_data:/bitnami
     environment:
       - ZOO_SERVER_ID=1
+      - ALLOW_ANONYMOUS_LOGIN=yes
       - ZOO_SERVERS=server.1=0.0.0.0:2888:3888,server.2=zookeeper2:2888:3888,server.3=zookeeper3:2888:3888
   zookeeper2:
     image: 'bitnami/zookeeper:latest'
@@ -19,10 +20,11 @@ services:
       - '2888'
       - '3888'
     volumes:
-      - /path/to/zookeeper-persistence:/bitnami
+      - zookeeper2_data:/bitnami
     environment:
       - ZOO_SERVER_ID=2
-      - ZOO_SERVERS=server.1=zookeeper1:2888:3888,server.2=0.0.0.0:2888:3888,server.3=zookeeper3:2888:3888
+      - ALLOW_ANONYMOUS_LOGIN=yes
+      - ZOO_SERVERS=server.1=zookeeper:2888:3888,server.2=0.0.0.0:2888:3888,server.3=zookeeper3:2888:3888
   zookeeper3:
     image: 'bitnami/zookeeper:latest'
     ports:
@@ -30,7 +32,16 @@ services:
       - '2888'
       - '3888'
     volumes:
-      - /path/to/zookeeper-persistence:/bitnami
+      - zookeeper3_data:/bitnami
     environment:
       - ZOO_SERVER_ID=3
-      - ZOO_SERVERS=server.1=zookeeper1:2888:3888,server.2=zookeeper2:2888:3888,server.3=0.0.0.0:2888:3888
+      - ALLOW_ANONYMOUS_LOGIN=yes
+      - ZOO_SERVERS=server.1=zookeeper:2888:3888,server.2=zookeeper2:2888:3888,server.3=0.0.0.0:2888:3888
+
+volumes:
+  zookeeper_data:
+    driver: local
+  zookeeper2_data:
+    driver: local
+  zookeeper3_data:
+    driver: local
