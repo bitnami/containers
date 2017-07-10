@@ -15,10 +15,10 @@ if [[ -z "$KAFKA_BROKER_ID" ]]; then
         export KAFKA_BROKER_ID=-1
     fi
 fi
-if [[ -n "$KAFKA_HEAP_OPTS" ]]; then
-    sed -r -i "s/(export KAFKA_HEAP_OPTS)=\"(.*)\"/\1=\"$KAFKA_HEAP_OPTS\"/g" $KAFKA_HOME/bin/kafka-server-start.sh
-    unset KAFKA_HEAP_OPTS
-fi                         
+
+if [[ "$KAFKA_LISTENERS" =~ SASL_SSL ]]; then
+    export KAFKA_OPTS="-Djava.security.auth.login.config=${KAFKA_HOME}/conf/kafka_jaas.conf"
+fi
 
 su -  ${USER} bash -c "touch ${KAFKA_HOME}/logs/server.log"
 

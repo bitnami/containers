@@ -1,9 +1,15 @@
 {
+  "allowPlaintextListener": "{{$global.env.ALLOW_PLAINTEXT_LISTENER}}",
   "kafkaAdvertisedHostName": "{{$global.env.KAFKA_ADVERTISED_HOST_NAME}}",
   "kafkaAdvertisedListeners": "{{$global.env.KAFKA_ADVERTISED_LISTENERS}}",
   "kafkaAdvertisedPort": "{{$global.env.KAFKA_ADVERTISED_PORT}}",
   "kafkaBrokerId": "{{$global.env.KAFKA_BROKER_ID}}",
+  "kafkaBrokerPassword": "{{$global.env.KAFKA_BROKER_PASSWORD}}",
+  "kafkaBrokerUser": "{{$global.env.KAFKA_BROKER_USER}}",
   "kafkaDeleteTopicEnable": "{{$global.env.KAFKA_DELETE_TOPIC_ENABLE}}",
+  "kafkaHeapOpts": "{{$global.env.KAFKA_HEAP_OPTS}}",
+  "kafkaInterBrokerPassword": "{{$global.env.KAFKA_INTER_BROKER_PASSWORD}}",
+  "kafkaInterBrokerUser": "{{$global.env.KAFKA_INTER_BROKER_USER}}",
   "kafkaListeners": "{{$global.env.KAFKA_LISTENERS}}",
   "kafkaLogFlushIntervalMessages": "{{$global.env.KAFKA_LOG_FLUSH_INTERVAL_MESSAGES}}",
   "kafkaLogFlushIntervalMs": "{{$global.env.KAFKA_LOG_FLUSH_INTERVAL_MS}}",
@@ -21,5 +27,7 @@
   "kafkaSocketRequestMaxBytes": "{{$global.env.KAFKA_SOCKET_REQUEST_MAX_BYTES}}",
   "kafkaSocketSendBufferBytes": "{{$global.env.KAFKA_SOCKET_SEND_BUFFER_BYTES}}",
   "kafkaZookeeperConnect": "{{$global.env.KAFKA_ZOOKEEPER_CONNECT}}",
-  "kafkaZookeeperConnectionTimeoutMs": "{{$global.env.KAFKA_ZOOKEEPER_CONNECT_TIMEOUT_MS}}"
+  "kafkaZookeeperConnectionTimeoutMs": "{{$global.env.KAFKA_ZOOKEEPER_CONNECT_TIMEOUT_MS}}",
+  "kafkaZookeeperPassword": "{{$global.env.KAFKA_ZOOKEEPER_PASSWORD}}",
+  "kafkaZookeeperUser": "{{$global.env.KAFKA_ZOOKEEPER_USER}}"
 }

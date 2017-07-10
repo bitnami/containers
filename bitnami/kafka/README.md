@@ -1,31 +1,41 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-kafka/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-kafka/tree/master)
-[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
+[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/kafka)](https://hub.docker.com/r/bitnami/kafka/)
+[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
 
 # What is kafka?
-
-> Apache Kafka is a distributed streaming platform used for building real-time data pipelines and streaming apps. It is horizontally scalable,  fault-tolerant, wicked fast, and runs in production in thousands of companies. Kafka requires a connection to a Zookeeper service.
-
-IMPORTANT NOTES:
-===============
-- Cluster mode is not fully supported at this moment.
-- Auth is not fully supported at this moment.
+Apache Kafka is a distributed streaming platform used for building real-time data pipelines and
+streaming apps. It is horizontally scalable, fault-tolerant, wicked fast, and runs in production in
+thousands of companies. Kafka requires a connection to a Zookeeper service.
 
 [https://kafka.apache.org/](https://kafka.apache.org/)
+
 
 # TL;DR;
 
 ## Docker Compose
 
-```bash
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kafka/master/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+```yaml
+version: '2'
+
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+      - '2181:2181'
+  kafka:
+    image: 'bitnami/kafka:0'
+    ports:
+      - '9092:9092'
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-kafka/master/kubernetes.yml
@@ -44,7 +54,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-kaf
 The recommended way to get the Bitnami Kafka Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kafka).
 
 ```bash
-$ docker pull bitnami/kafka:latest
+docker pull bitnami/kafka:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the
@@ -52,20 +62,24 @@ To use a specific version, you can pull a versioned tag. You can view the
 in the Docker Hub Registry.
 
 ```bash
-$ docker pull bitnami/kafka:[TAG]
+docker pull bitnami/kafka:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/kafka:latest https://github.com/bitnami/bitnami-docker-kafka.git
+docker build -t bitnami/kafka:latest https://github.com/bitnami/bitnami-docker-kafka.git
 ```
 
 # Persisting your data
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
+**Note!**
+If you have already started using your database, follow the steps on
+[backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
+
+The image exposes a volume at `/bitnami/kafka` for the Kafka data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
 Using Docker Compose:
 
@@ -82,7 +96,7 @@ services:
     ports:
       - '9092:9092'
     volumes:
-      - /path/to/kafka-persistence:/bitnami
+      - /path/to/kafka-persistence:/bitnami/kafka
 ```
 
 # Connecting to other containers
@@ -172,34 +186,46 @@ $ docker-compose up -d
 
 # Configuration
 
+
 The configuration can easily be setup with the Bitnami Kafka Docker image using the following environment variables:
 
-- `KAFKA_PORT_NUMBER`: Kafka port.
-- `KAFKA_BROKER_ID`: ID of the Kafka node.
+- `ALLOW_PLAINTEXT_LISTENER`: Allow to use the PLAINTEXT listener. Default: **no**
+- `KAFKA_PORT_NUMBER`: Kafka port. Default: **9092**
+- `KAFKA_BROKER_ID`: ID of the Kafka node. Default: **-1**
 - `KAFKA_NUM_NETWORK_THREADS`: The number of threads handling network requests.
-- `KAFKA_NUM_IO_THREADS`: The number of threads doing disk I/O.
-- `KAFKA_SOCKET_SEND_BUFFER_BYTES`: The send buffer (SO_SNDBUF) used by the socket server.
-- `KAFKA_SOCKET_RECEIVE_BUFFER_BYTES`: The receive buffer (SO_RCVBUF) used by the socket server.
-- `KAFKA_SOCKET_REQUEST_MAX_BYTES`: The maximum size of a request that the socket server will accept (protection against OOM).
-- `KAFKA_LOGS_DIRS`: A comma separated list of directories under which to store log files.
-- `KAFKA_DELETE_TOPIC_ENABLE`: Switch to enable topic deletion or not, default value is false.
-- `KAFKA_LISTENERS`: The address the socket server listens on.
-- `KAFKA_ADVERTISED_LISTENERS`: Hostname and port the broker will advertise to producers and consumers.
-- `KAFKA_ADVERTISED_PORT`: Kafka port for advertising.
-- `KAFKA_ADVERTISED_HOST_NAME`: Kafka hostname for advertising.
-- `KAFKA_NUM_PARTITIONS`: The default number of log partitions per topic..
-- `KAFKA_NUM_RECOVERY_THREADS_PER_DATA_DIR` The number of threads per data directory to be used for log recovery at startup and flushing at shutdown.
-- `KAFKA_LOG_FLUSH_INTERVAL_MESSAGES`: The number of messages to accept before forcing a flush of data to disk..
-- `KAFKA_LOG_FLUSH_INTERVAL_MS`: The maximum amount of time a message can sit in a log before we force a flush.
-- `KAFKA_LOG_RETENTION_HOURS`: The minimum age of a log file to be eligible for deletion due to age.
-- `KAFKA_LOG_RETENTION_BYTES`: A size-based retention policy for logs.
-- `KAFKA_SEGMENT_BYTES`: The maximum size of a log segment file. When this size is reached a new log segment will be created.
-- `KAFKA_LOG_RETENTION_CHECK_INTERVALS_MS`: The interval at which log segments are checked to see if they can be deleted.
-- `KAFKA_ZOOKEEPER_CONNECT`: Comma separated host:port pairs, each corresponding to a Zookeeper Server.
-- `KAFKA_ZOOKEEPER_CONNECT_TIMEOUT_MS`: Timeout in ms for connecting to zookeeper.
+- `KAFKA_NUM_IO_THREADS`: The number of threads doing disk I/O. Default: **3**
+- `KAFKA_SOCKET_SEND_BUFFER_BYTES`: The send buffer (SO_SNDBUF) used by the socket server. Default: **102400**
+- `KAFKA_SOCKET_RECEIVE_BUFFER_BYTES`: The receive buffer (SO_RCVBUF) used by the socket server. Default: **102400**
+- `KAFKA_SOCKET_REQUEST_MAX_BYTES`: The maximum size of a request that the socket server will accept (protection against OOM). Default: **104857600**
+- `KAFKA_LOGS_DIRS`: A comma separated list of directories under which to store log files. Default: **/opt/bitnami/kafka/logs**
+- `KAFKA_DELETE_TOPIC_ENABLE`: Switch to enable topic deletion or not, default value is false. Default: **false**
+- `KAFKA_LISTENERS`: The address the socket server listens on. Default: **PLAINTEXT://:9092**
+- `KAFKA_ADVERTISED_LISTENERS`: Hostname and port the broker will advertise to producers and consumers. Default: **PLAINTEXT://:9092**
+- `KAFKA_ADVERTISED_PORT`: Kafka port for advertising. Default: **9092**
+- `KAFKA_ADVERTISED_HOST_NAME`: Kafka hostname for advertising. No default
+- `KAFKA_NUM_PARTITIONS`: The default number of log partitions per topic. Default: **1**
+- `KAFKA_NUM_RECOVERY_THREADS_PER_DATA_DIR` The number of threads per data directory to be used for log recovery at startup and flushing at shutdown. Default: **1**
+- `KAFKA_LOG_FLUSH_INTERVAL_MESSAGES`: The number of messages to accept before forcing a flush of data to disk. Default: **10000**
+- `KAFKA_LOG_FLUSH_INTERVAL_MS`: The maximum amount of time a message can sit in a log before we force a flush. Default: **1000**
+- `KAFKA_LOG_RETENTION_HOURS`: The minimum age of a log file to be eligible for deletion due to age. Default: **168**
+- `KAFKA_LOG_RETENTION_BYTES`: A size-based retention policy for logs. Default: **1073741824**
+- `KAFKA_SEGMENT_BYTES`: The maximum size of a log segment file. When this size is reached a new log segment will be created. Default: **1073741824**
+- `KAFKA_LOG_RETENTION_CHECK_INTERVALS_MS`: The interval at which log segments are checked to see if they can be deleted. Default: **300000**
+- `KAFKA_ZOOKEEPER_CONNECT`: Comma separated host:port pairs, each corresponding to a Zookeeper Server. Default: **localhost:2181**
+- `KAFKA_ZOOKEEPER_CONNECT_TIMEOUT_MS`: Timeout in ms for connecting to zookeeper. Default: **6000**
+- `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Default: admin. Default: **admin**
+- `KAFKA_INTER_BROKER_PASSWORD`: Kafka inter broker communication password. Default: **bitnami**
+- `KAFKA_BROKER_USER`: Kafka client user. Default: **user**
+- `KAFKA_BROKER_PASSWORD`: Kafka client user password. Default: **bitnami**
+- `KAFKA_ZOOKEEPER_USER`: Kafka Zookeeper user. No defaults
+- `KAFKA_ZOOKEEPER_PASSWORD`: Kafka Zookeeper user password. No defaults
+- `KAFKA_CERTIFICATE_PASSWORD`: Password for certificates. Default: **bitnami1**
+- `KAFKA_HEAP_OPTS`: Kafka's Java Heap size. Default: **-Xmx1024m -Xms1024m**
+
+
 
 ```bash
-$ docker run --name kafka -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 bitnami/kafka:latest
+docker run --name kafka -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 bitnami/kafka:latest
 ```
 
 or using Docker Compose:
@@ -213,13 +239,13 @@ services:
     ports:
       - '2181:2181'
     volumes:
-      - 'zookeeper_data:/bitnami'
+      - 'zookeeper_data:/bitnami/zookeeper'
   kafka:
     image: 'bitnami/kafka:0'
     ports:
       - '9092:9092'
     volumes:
-      - 'kafka_data:/bitnami'
+      - 'kafka_data:/bitnami/kafka'
     environment:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
 
@@ -230,16 +256,188 @@ volumes:
     driver: local
 ```
 
-## Configuration file
+## Security
 
-The image looks for configurations in `/bitnami/kafka/conf/`. As mentioned in [Persisting your data](#persisting-your-data) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/kafka-persistence/kafka/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
+The Bitnami Kafka docker image disables the PLAINTEXT listener for security reasons. Instead, it
+makes use of the SASL/PLAIN over SSL listener that allow authenticate users and machines.
+
+Ypu can use your own certificates for SSL. You can drop your Java Key Stores files into
+`/bitnami/kafka/conf/certs`.
+If the JKS is password protected (recommended), you will need to provide it to get access to the keystores:
+
+`KAFKA_CERTITICATE_PASSWORD=myCertificatePassword`
+
+This script will help you with the creation of the JKS and certificates. Use the same password for
+all them:
+
+https://raw.githubusercontent.com/confluentinc/confluent-platform-security-tools/master/kafka-generate-ssl.sh
+
+You can enable the PLAINTEXT listener by adding this environment variable, but remember that this
+configuration is not recommended for production.
+
+`ALLOW_PLAINTEXT_LISTENER="yes"`
+
+### InterBroker communications
+
+By default, communications that happens between brokers are authenticated.
+You can provide your own credentials using this environment variables:
+
+
+- `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Default: **admin**
+- `KAFKA_INTER_BROKER_PASSWORD`: Kafka inter broker communication password. Default: **bitnami**
+
+### Kafka client configuration
+
+By default, any Kafka client needs to authenticate before can connect to a broker.
+You can provide your own credentials using this environment variables:
+
+- `KAFKA_BROKER_USER`: Kafka client user. Default: **user**
+- `KAFKA_BROKER_PASSWORD`: Kafka client user password. Default: **bitnami**
+
+
+### Kafka ZooKeeper client configuration
+
+In order to authenticate Kafka against a Zookeeper server with SASL authentication you should provide
+the next environment variables:
+
+- `KAFKA_ZOOKEEPER_USER`: Kafka Zookeeper user. No defaults.
+- `KAFKA_ZOOKEEPER_PASSWORD`: Kafka Zookeeper user password. No defaults.
+
+
+### Connecting services with security enabled
+
+In order to get the required credentials to consume and  produce messages you need to provide the
+credentials in the client. If your Kafka client allows it, use the credentials you've provided.
+
+While producing and consuming messages using the `bitnami/kafka` image, you'll need to point to the
+`consumer.properties` and/or `producer.properties` file, which contains the needed configuration
+to work. You can find this files in the `/bitnami/kafka/config` directory
+
+Use this to generate messages using a secure setup
 
 ```bash
-$ docker run --name kafka \
-  -v /path/to/my_custom_conf_directory:/bitnami \
+cd /opt/bitnami/kafka/
+bin/kafka-console-producer.sh --broker-list broker:9092 --topic test --producer.config conf/producer.properties
+```
+Use this to consume messages using a secure setup
+
+```bash
+cd /opt/bitnami/kafka/
+bin/kafka-console-consumer.sh --bootstrap-server broker:9092 --topic test --consumer.config conf/consumer.properties
+```
+If you use other tools to use your Kafka cluster, you'll need to provide the required information.
+You can find the required information in the files located at `/bitnami/kafka/conf` directory.
+
+## Setting up a Kafka Cluster
+
+A Kafka cluster can easily be setup with the Bitnami Kafka Docker image using the following environment variables:
+
+ - `KAFKA_ZOOKEEPER_CONNECT`: Comma separated host:port pairs, each corresponding to a Zookeeper Server.
+
+
+Create a Docker network to enable visibility to each other via the docker container name
+
+```bash
+docker network create app-tier --driver bridge
+```
+
+### Step 1: Create the first node for Zookeeper
+
+The first step is to create one Zookeeper instance.
+
+```bash
+docker run --name zookeeper \
+  --network app-tier \
+  -p 2181:2181 \
+  bitnami/zookeeper:latest
+```
+
+### Step 2: Create the first node for Kafka
+
+The first step is to create one Kafka instance.
+
+```bash
+docker run --name kafka1 \
+  --network app-tier \
+  -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
+  -p 9092:9092 \
   bitnami/kafka:latest
 ```
 
+### Step 2: Create the second node
+
+Next we start a new Kafka container.
+
+```bash
+docker run --name kafka2 \
+  --network app-tier \
+  -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
+  -p 9092:9092 \
+  bitnami/kafka:latest
+```
+
+### Step 3: Create the third node
+
+Next we start another new Kafka container.
+
+```bash
+docker run --name kafka3 \
+  --network app-tier \
+  -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
+  -p 9092:9092 \
+  bitnami/kafka:latest
+```
+You now have a Kafka cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
+
+With Docker Compose, topic replication can be setup using:
+
+```yaml
+version: '2'
+
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+     - '2181:2181'
+  kafka1:
+    image: 'bitnami/kafka:latest'
+    ports:
+      - '9092'
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+  kafka2:
+    image: 'bitnami/kafka:latest'
+    ports:
+      - '9092'
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+  kafka3:
+    image: 'bitnami/kafka:latest'
+    ports:
+      - '9092'
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+```
+
+Then, you can create a replicated topic with:
+
+```bash
+root@kafka1:/# /opt/bitnami/kafka/bin/kafka-topics.sh --create --zookeeper zookeeper:2181 --topic mytopic --partitions 3 --replication-factor 3
+Created topic "mytopic".
+
+root@kafka1:/# /opt/bitnami/kafka/bin/kafka-topics.sh --describe --zookeeper zookeeper:2181 --topic mytopic
+Topic:mytopic   PartitionCount:3        ReplicationFactor:3     Configs:
+        Topic: mytopic  Partition: 0    Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
+        Topic: mytopic  Partition: 1    Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
+        Topic: mytopic  Partition: 2    Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
+```
+
+## Configuration
+The image looks for configuration in the `config/` directory of `/bitnami/kafka`.
+
+```
+docker run --name kafka -v /path/to/my_custom_conf_directory:/bitnami/kafka bitnami/kafka:latest
+```
 After that, your changes will be taken into account in the server's behaviour.
 
 ### Step 1: Run the Kafka image
@@ -257,7 +455,7 @@ services:
     ports:
       - '9092:9092'
     volumes:
-      - /path/to/kafka-persistence:/bitnami
+      - /path/to/kafka-persistence:/bitnami/kafka
 ```
 
 ### Step 2: Edit the configuration
@@ -273,32 +471,87 @@ vi /path/to/kafka-persistence/config/server.properties
 After changing the configuration, restart your Kafka container for changes to take effect.
 
 ```bash
-$ docker restart kafka
+docker restart kafka
 ```
 
 or using Docker Compose:
 
 ```bash
-$ docker-compose restart kafka
+docker-compose restart kafka
 ```
+
 
 # Logging
 
 The Bitnami Kafka Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
-$ docker logs kafka
+docker logs kafka
 ```
 
 or using Docker Compose:
 
 ```bash
-$ docker-compose logs kafka
+docker-compose logs kafka
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 # Maintenance
+
+## Backing up your container
+
+To backup your data, configuration and logs, follow these simple steps:
+
+### Step 1: Stop the currently running container
+
+```bash
+docker stop kafka
+```
+
+or using Docker Compose:
+
+```bash
+docker-compose stop kafka
+```
+
+### Step 2: Run the backup command
+
+We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
+
+```bash
+docker run --rm -v /path/to/kafka-backups:/backups --volumes-from kafka busybox \
+  cp -a /bitnami/kafka:latest /backups/latest
+```
+
+or using Docker Compose:
+
+```bash
+docker run --rm -v /path/to/kafka-backups:/backups --volumes-from `docker-compose ps -q kafka` busybox \
+  cp -a /bitnami/kafka:latest /backups/latest
+```
+
+## Restoring a backup
+
+Restoring a backup is as simple as mounting the backup as volumes in the container.
+
+```bash
+docker run -v /path/to/kafka-backups/latest:/bitnami/kafka bitnami/kafka:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  kafka:
+    image: 'bitnami/kafka:latest'
+    ports:
+      - '9092:9092'
+    volumes:
+      - /path/to/kafka-backups/latest:/bitnami/kafka
+```
 
 ## Upgrade this image
 
@@ -307,7 +560,7 @@ Bitnami provides up-to-date versions of Kafka, including security patches, soon 
 ### Step 1: Get the updated image
 
 ```bash
-$ docker pull bitnami/kafka:latest
+docker pull bitnami/kafka:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -315,51 +568,42 @@ or if you're using Docker Compose, update the value of the image property to
 
 ### Step 2: Stop and backup the currently running container
 
-Stop the currently running container using the command
+Before continuing, you should backup your container's data, configuration and logs.
 
-```bash
-$ docker stop kafka
-```
-
-or using Docker Compose:
-
-```bash
-$ docker-compose stop kafka
-```
-
-Next, take a snapshot of the persistent volume `/path/to/kafka-persistence` using:
-
-```bash
-$ rsync -a /path/to/kafka-persistence /path/to/kafka-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-You can use this snapshot to restore the database state should the upgrade fail.
+Follow the steps on [creating a backup](#backing-up-your-container).
 
 ### Step 3: Remove the currently running container
 
 ```bash
-$ docker rm -v kafka
+docker rm -v kafka
 ```
 
 or using Docker Compose:
 
+
 ```bash
-$ docker-compose rm -v kafka
+docker-compose rm -v kafka
 ```
 
 ### Step 4: Run the new image
 
-Re-create your container from the new image.
+Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
 ```bash
-$ docker run --name kafka bitnami/kafka:latest
+docker run --name kafka bitnami/kafka:latest
 ```
 
 or using Docker Compose:
 
 ```bash
-$ docker-compose start kafka
+docker-compose start kafka
 ```
+
+# Notable Changes
+## 0.10.2.1
+
+- New Bitnami release
+
 
 # Contributing
 
@@ -383,7 +627,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2017 Bitnami
+Copyright (c) 2015-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -396,4 +640,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
