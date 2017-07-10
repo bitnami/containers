@@ -5,20 +5,24 @@ services:
     image: 'bitnami/zookeeper:latest'
     ports:
      - '2181:2181'
-  kafka1:
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
     image: 'bitnami/kafka:latest'
     ports:
       - '9092'
     environment:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
-      - 'kafka_data:/bitnami'
+      - 'kafka2_data:/bitnami'
   kafka2:
     image: 'bitnami/kafka:latest'
     ports:
       - '9092'
     environment:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
       - 'kafka_data:/bitnami'
   kafka3:
@@ -27,9 +31,15 @@ services:
       - '9092'
     environment:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
-      - 'kafka_data:/bitnami'
+      - 'kafka3_data:/bitnami'
 
 volumes:
   kafka_data:
     driver: local
+  kafka2_data:
+    driver: local
+  kafka3_data:
+    driver: local
+
