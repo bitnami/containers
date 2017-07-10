@@ -258,10 +258,23 @@ volumes:
 
 ## Security
 
-The Bitnami Kafka docker image disables the PLAINTEXT listener for security reasons. Instead, it
-makes use of the SASL/PLAIN over SSL listener that allow authenticate users and machines.
+The Bitnami Kafka docker image disables the PLAINTEXT listener for security reasons.
+You can enable the PLAINTEXT listener by adding this environment variable, but remember that this
+configuration is not recommended for production.
 
-Ypu can use your own certificates for SSL. You can drop your Java Key Stores files into
+```
+ALLOW_PLAINTEXT_LISTENER=yes
+```
+
+In order to configure SASL authentication over SSL, you should just define the proper listener by
+passing the following env vars:
+
+```
+KAFKA_LISTENERS=SASL_SSL://:9092
+KAFKA_ADVERTISED_LISTENERS=SASL_SSL://:9092
+```
+
+You can use your own certificates for SSL. You can drop your Java Key Stores files into
 `/bitnami/kafka/conf/certs`.
 If the JKS is password protected (recommended), you will need to provide it to get access to the keystores:
 
@@ -272,10 +285,7 @@ all them:
 
 https://raw.githubusercontent.com/confluentinc/confluent-platform-security-tools/master/kafka-generate-ssl.sh
 
-You can enable the PLAINTEXT listener by adding this environment variable, but remember that this
-configuration is not recommended for production.
 
-`ALLOW_PLAINTEXT_LISTENER="yes"`
 
 ### InterBroker communications
 
@@ -303,6 +313,32 @@ the next environment variables:
 - `KAFKA_ZOOKEEPER_USER`: Kafka Zookeeper user. No defaults.
 - `KAFKA_ZOOKEEPER_PASSWORD`: Kafka Zookeeper user password. No defaults.
 
+Below you can see a complete Docker Compose example:
+
+
+```yaml
+version: '2'
+
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+     - '2181:2181'
+    environment:
+      - ZOO_ENABLE_AUTH=yes
+      - ZOO_SERVER_USERS=kafka
+      - ZOO_SERVER_PASSWORDS=kafka_password
+  kafka:
+    image: 'bitnami/kafka:latest'
+    ports:
+      - '9092'
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_LISTENERS=SASL_SSL://:9092
+      - KAFKA_ADVERTISED_LISTENERS=SASL_SSL://:9092
+      - KAFKA_ZOOKEEPER_USER=kafka
+      - KAFKA_ZOOKEEPER_PASSWORD=kafka_password
+```
 
 ### Connecting services with security enabled
 
@@ -627,7 +663,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2015-2017 Bitnami
+Copyright (c) 2015-{{ .CurrentYear }} Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
