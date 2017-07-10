@@ -7,12 +7,12 @@ RUN bitnami-pkg install ruby-2.3.4-0 --checksum 92d6db7a6ba0893334e9d1d46a66a745
 RUN bitnami-pkg unpack postgresql-client-9.6.3-0 --checksum fec96be76c0ba5f66a56fbc002b45092abc0100a6d9409d26ddc7391610236de
 RUN bitnami-pkg install git-2.13.2-0 --checksum 0c8267b16408cd9cb0f7b9041e30b9207dc51076735bca471574bb995556d588
 RUN bitnami-pkg unpack discourse-sidekiq-1.8.2-3 --checksum f446655be6f2ad131bd723c89aeb65fb3e949ed42174cb62f16c531fe2648a15
-RUN bitnami-pkg unpack discourse-1.8.2-0 --checksum c8b8f4b25d3971fa51a1076b6c0518eaa30f5d456e1fe4e263dba814965e70a5
+RUN bitnami-pkg unpack discourse-1.8.3-0 --checksum c4ee86b4924e0e849bb05f58dc73b5a260129cc10d0c7f3a4c77206af1551eca
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="1.8.2-r0" \
+    BITNAMI_IMAGE_VERSION="1.8.3-r0" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_PASSWORD="bitnami" \
     DISCOURSE_POSTGRESQL_NAME="bitnami_application" \
