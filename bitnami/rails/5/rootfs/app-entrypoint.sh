@@ -49,6 +49,8 @@ if [ "$1" == "bundle" -a "$2" == "exec" ]; then
     rails new . --skip-bundle --database mysql
     # Add rubyracer
     sed -i "s/# gem 'therubyracer'/gem 'therubyracer'/" Gemfile
+    log "Setting default host to \`mariadb\`"
+    sed -i 's/host:.*$/host: mariadb/g' /app/config/database.yml
   fi
 
   if ! gems_up_to_date; then
