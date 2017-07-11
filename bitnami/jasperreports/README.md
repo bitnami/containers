@@ -2,9 +2,9 @@
 [![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-jasperreports/master/kubernetes.yml)
 
-# What is JasperReports?
+# What is JasperReports Server?
 
-> The JasperReports server can be used as a stand-alone or embedded reporting and BI server that offers web-based reporting, analytic tools and visualization, and a dashboard feature for compiling multiple custom views. JasperReports supports multiple data sources including Hadoop Hive, JSON data sources, Excel, XML/A, Hibernate and more. You can create reports with their WYSIWYG tool and build beautiful visualizations, charts and graphs.
+> The JasperReports Server can be used as a stand-alone or embedded reporting and BI server that offers web-based reporting, analytic tools and visualization, and a dashboard feature for compiling multiple custom views. JasperReports Server supports multiple data sources including Hadoop Hive, JSON data sources, Excel, XML/A, Hibernate and more. You can create reports with their WYSIWYG tool and build beautiful visualizations, charts and graphs.
 
 http://community.jaspersoft.com/project/jasperreports-server
 
@@ -43,7 +43,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 ## Run the application using Docker Compose
 
-This is the recommended way to run JasperReports. You can use the following docker compose template:
+This is the recommended way to run JasperReports Server. You can use the following docker compose template:
 
 ```yaml
 version: '2'
@@ -84,7 +84,7 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker network create jasperreports-tier
   ```
 
-2. Run the JasperReports container:
+2. Run the JasperReports Server container:
 
   ```bash
   $ docker run -d -p 80:8080 --name jasperreports --net=jasperreports-tier bitnami/jasperreports
@@ -105,7 +105,7 @@ If you remove the container all your data and configurations will be lost, and t
 
 For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
 
-The above examples define docker volumes namely `mariadb_data` and `jasperreports_data`. The JasperReports application state will persist as long as these volumes are not removed.
+The above examples define docker volumes namely `mariadb_data` and `jasperreports_data`. The JasperReports Server state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -147,7 +147,7 @@ In this case you need to specify the directories to mount on the run command. Th
    bitnami/mariadb:latest
   ```
 
-3. Create the JasperReports container with host volume:
+3. Create the JasperReports Server container with host volume:
 
   ```bash
   $  docker run -d --name jasperreports -p 80:8080 \
@@ -158,7 +158,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 # Upgrade this application
 
-Bitnami provides up-to-date versions of JasperReports, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the JasperReports container.
+Bitnami provides up-to-date versions of JasperReports Server, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the JasperReports Server container.
 
 1. Get the updated images:
 
@@ -216,16 +216,14 @@ When you start the jasperreports image, you can adjust the configuration of the 
 
 Available variables:
 
- - `JASPERREPORTS_USERNAME`: JasperReports admin username. Default: **user**
- - `JASPERREPORTS_PASSWORD`: JasperReports admin password. Default: **bitnami**
- - `JASPERREPORTS_EMAIL`: JasperReports admin email. Default: **user@example.com**
- - `JAVA_HOME`: Java home directory.
- - `JAVA_OPTS`: Java settings.
- - `CATALINA_OPTS`: Java settings applied to catalina `start` and `run` only.
+ - `JASPERREPORTS_USERNAME`: JasperReports Server admin username. Default: **user**
+ - `JASPERREPORTS_PASSWORD`: JasperReports Server admin password. Default: **bitnami**
+ - `JASPERREPORTS_EMAIL`: JasperReports Server admin email. Default: **user@example.com**
 
 ### SMTP Configuration
 
-To configure JasperReports to send email using SMTP you can set the following environment variables:
+To configure JasperReports Server to send email using SMTP you can set the following environment variables:
+
  - `SMTP_HOST`: SMTP host.
  - `SMTP_PORT`: SMTP port.
  - `SMTP_EMAIL`: SMTP email.
