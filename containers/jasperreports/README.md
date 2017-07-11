@@ -219,6 +219,9 @@ Available variables:
  - `JASPERREPORTS_USERNAME`: JasperReports admin username. Default: **user**
  - `JASPERREPORTS_PASSWORD`: JasperReports admin password. Default: **bitnami**
  - `JASPERREPORTS_EMAIL`: JasperReports admin email. Default: **user@example.com**
+ - `JAVA_HOME`: Java home directory.
+ - `JAVA_OPTS`: Java settings.
+ - `CATALINA_OPTS`: Java settings applied to catalina `start` and `run` only.
 
 ### SMTP Configuration
 
