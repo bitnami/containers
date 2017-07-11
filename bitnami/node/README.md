@@ -41,10 +41,10 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-nod
 
 # Supported tags and respective `Dockerfile` links
 
- - [`8`, `8.1.3-r0` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.1.3-r0/8/Dockerfile)
+ - [`8`, `8.1.4-r0` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.1.4-r0/8/Dockerfile)
  - [`7`, `7.10.0-r1` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.0-r1/7/Dockerfile)
  - [`6`, `6.11.0-r0`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.11.0-r0/6/Dockerfile)
- - [`4`, `4.8.4-r0` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/4.8.4-r0/4/Dockerfile)
+ - [`4`, `4.8.3-r1` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/4.8.3-r1/4/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
