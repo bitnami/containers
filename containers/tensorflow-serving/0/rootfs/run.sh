@@ -2,10 +2,8 @@
 . /opt/bitnami/base/functions
 . /opt/bitnami/base/helpers
 
-DAEMON=tensorflow-serving.sh
+TENSORFLOW_SERVING_HOME="/opt/bitnami/tensorflow-serving"
 USER=tensorflow
-EXEC=$(which $DAEMON)
-ARGS="start-foreground"
 
 info "Starting ${DAEMON}..."
-exec gosu ${USER} ${EXEC} ${ARGS}
+exec gosu ${USER} bash -c "${TENSORFLOW_SERVING_HOME}/bin/tensorflow-serving.sh start && tail -f ${TENSORFLOW_SERVING_HOME}/logs/tensorflow-serving.log"
