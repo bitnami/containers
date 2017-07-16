@@ -6,13 +6,13 @@ RUN install_packages ghostscript imagemagick libbsd0 libbz2-1.0 libc6 libcomerr2
 RUN bitnami-pkg install ruby-2.3.4-0 --checksum 92d6db7a6ba0893334e9d1d46a66a7459df08e151762f87942d6b0f29db0171a
 RUN bitnami-pkg install postgresql-client-9.6.3-0 --checksum fec96be76c0ba5f66a56fbc002b45092abc0100a6d9409d26ddc7391610236de
 RUN bitnami-pkg install mysql-client-10.1.25-0 --checksum 513ef36ab1efa5570332547c2027ae29886fe4bb56472de11ca083423a3fe366
-RUN bitnami-pkg install git-2.13.3-0 --checksum 4368a02999de8ce0b3b8c897fbe2534d472ac9ccbffb8abcd08dd26fb0da9847
-RUN bitnami-pkg unpack redmine-3.4.1-2 --checksum 4eb3a849153a18564590d7667fb8ad4aa5adb3376d007e2315efe10b052f66ef
+RUN bitnami-pkg install git-2.14.0-rc0-0 --checksum 9a880f27ee8a6eafbc8f30fc14386b3f51622bf058b7335506e45caa1b8c44f2
+RUN bitnami-pkg unpack redmine-3.4.2-0 --checksum 67b88def8db033a8c7c861194e8652f89e5e73b232c0130c23daba0a1649a3c7
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="3.4.1-r2" \
+    BITNAMI_IMAGE_VERSION="3.4.2-r0" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH" \
     REDMINE_DB_MYSQL="mariadb" \
     REDMINE_DB_PASSWORD="" \
