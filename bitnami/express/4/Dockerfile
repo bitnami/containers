@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r15-buildpack
+FROM bitnami/minideb-extras:jessie-r19-buildpack
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
