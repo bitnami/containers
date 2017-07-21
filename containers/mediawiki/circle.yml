@@ -1,32 +1,56 @@
-machine:
-  services:
-  - docker
-  environment:
-    RELEASE_SERIES_LIST: 1
-    LATEST_STABLE: 1
-    IMAGE_NAME: mediawiki
-    CHART_NAME: mediawiki
-    CHART_REPO: https://github.com/kubernetes/charts
-    DOCKER_PROJECT: bitnami
-    QUAY_PROJECT: bitnami
-    GCLOUD_PROJECT: bitnami-containers
+version: 2
+jobs:
+  build:
+    working_directory: /workdir
+    docker:
+      - image: docker:17.06.0-ce-git
+        environment:
+          RELEASE_SERIES_LIST: "1"
+          LATEST_STABLE: "1"
+          IMAGE_NAME: mediawiki
+          CHART_NAME: mediawiki
+          CHART_REPO: https://github.com/kubernetes/charts
+          DOCKER_PROJECT: bitnami
+          QUAY_PROJECT: bitnami
+          GCLOUD_PROJECT: bitnami-containers
 
-dependencies:
-  override:
-  - docker info
-  - gcloud version
-  - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-pull-cache.sh | bash -
-
-test:
-  override:
-  - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-image-test.sh | bash -
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 17.06.0-ce
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --no-cache curl bash coreutils
+      - run:
+          name: Docker info
+          command: |
+            docker version
+            docker info
+      - restore_cache:
+          keys:
+            - cache-{{ .Branch }}
+          paths:
+            - /cache/layers.tar
+      - run:
+          name: Build docker image
+          command: |
+            curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-image-test.sh | bash -
+      - save_cache:
+          key: cache-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /cache/layers.tar
+      - deploy:
+          name: Publish docker image
+          command: |
+            if [ -n "${CIRCLE_TAG}" ]; then
+              curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-release-image.sh | bash -
+            elif [ "${CIRCLE_BRANCH}" == "master" ]; then
+              curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-development-image.sh | bash -
+            fi
 
 deployment:
-  development:
-    branch: master
-    commands:
-    - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-development-image.sh | bash -
   release:
     tag: /^[0-9].*-r[0-9]+$/
     commands:
-    - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-release-image.sh | bash -
+      - echo "workaround make tags run in 2.0 - https://discuss.circleci.com/t/git-tag-deploys-in-2-0/9493/8"
