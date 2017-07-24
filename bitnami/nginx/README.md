@@ -350,6 +350,11 @@ $ docker-compose start nginx
 
 # Notable Changes
 
+## 1.12.1-r2
+
+- The nginx container has been migrated to a non-root container approach. Previously the container run as `root` user and the nginx daemon was started as `nginx` user. From now own, both the container and the nginx daemon run as user `1001`.
+  As a consequence, the configuration files are writable by the user running the nginx process.
+
 ## 1.10.0-r0
 
 - The configuration volume has been moved to `/bitnami/nginx`. Now you only need to mount a single volume at `/bitnami/nginx` for persisting configuration. `/app` is still used for serving content by the default virtual host.
