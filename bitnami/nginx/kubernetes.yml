@@ -51,9 +51,6 @@ items:
         containers:
         - image: bitnami/nginx:latest
           name: nginx
-          env:
-          - name: NAMI_LOG_LEVEL
-            value: trace8
           ports:
           - containerPort: 8080
           - containerPort: 8443
