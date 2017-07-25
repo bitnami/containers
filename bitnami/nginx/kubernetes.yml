@@ -13,10 +13,10 @@ items:
     ports:
     - name: "80"
       port: 80
-      targetPort: 80
+      targetPort: 8080
     - name: "443"
       port: 443
-      targetPort: 443
+      targetPort: 8443
     selector:
       io.kompose.service: nginx
     type: NodePort
@@ -28,6 +28,8 @@ items:
     annotations:
       kompose.service.type: nodeport
     creationTimestamp: null
+    labels:
+      io.kompose.service: nginx
     name: nginx
   spec:
     replicas: 1
@@ -39,15 +41,25 @@ items:
         labels:
           io.kompose.service: nginx
       spec:
+        initContainers:
+        - name: volume-permissions
+          image: busybox
+          command: ['sh', '-c', 'chmod -R g+rwX /bitnami']
+          volumeMounts:
+          - mountPath: /bitnami
+            name: nginx-nginx-data
         containers:
         - image: bitnami/nginx:latest
           name: nginx
+          env:
+          - name: NAMI_LOG_LEVEL
+            value: trace8
           ports:
-          - containerPort: 80
-          - containerPort: 443
+          - containerPort: 8080
+          - containerPort: 8443
           resources: {}
           volumeMounts:
-          - mountPath: /bitnami/nginx
+          - mountPath: /bitnami
             name: nginx-nginx-data
         restartPolicy: Always
         volumes:
@@ -71,4 +83,3 @@ items:
   status: {}
 kind: List
 metadata: {}
-
