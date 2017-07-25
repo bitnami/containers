@@ -3,7 +3,7 @@ services:
   postgresql:
     image: 'bitnami/postgresql:latest'
     volumes:
-      - 'postgresql_data:/bitnami/postgresql'
+      - 'postgresql_data:/bitnami'
   odoo:
     image: 'bitnami/odoo:10'
     labels:
@@ -12,7 +12,7 @@ services:
       - '80:8069'
       - '443:8071'
     volumes:
-      - 'odoo_data:/bitnami/odoo'
+      - 'odoo_data:/bitnami'
     depends_on:
       - postgresql
 volumes:
