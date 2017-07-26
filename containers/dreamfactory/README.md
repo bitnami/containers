@@ -294,6 +294,7 @@ The DreamFactory instance can be customized by specifying environment variables 
 - `REDIS_PASSWORD`: Password for Redis.
 - `SMTP_HOST`: Hostname for the SMTP server (necessary for sending e-mails from the application).
 - `SMTP_PORT`: Port for the SMTP server.
+- `SMTP_PROTOCOL`: Secure connection protocol to use for SMTP [tls, ssl, none].
 - `SMTP_USER`: Username for the SMTP server.
 - `SMTP_PASSWORD`: SMTP account password.
 
@@ -329,7 +330,11 @@ services:
       - '80:80'
       - '443:443'
     environment:
-      - DREAMFACTORY_PASSWORD=my_password
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USER=your_email@gmail.com
+      - SMTP_PASSWORD=your_password
+      - SMTP_PROTOCOL=tls
     volumes:
       - dreamfactory_data:/bitnami
 
@@ -349,7 +354,8 @@ volumes:
 ```bash
 $ docker run -d --name dreamfactory -p 80:80 -p 443:443 \
   --net dreamfactory-tier \
-  --env DREAMFACTORY_PASSWORD=my_password \
+  --env SMTP_HOST=smtp.gmail.com --env SMTP_PORT=587 \
+  --env SMTP_USER=your_email@gmail.com --env SMTP_PASSWORD=your_password \
   --volume dreamfactory_data:/bitnami \
   bitnami/dreamfactory:latest
 ```
