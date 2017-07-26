@@ -505,7 +505,13 @@ docker-compose start zookeeper
 ```
 
 # Notable Changes
-## 3.4.10
+
+## 3.4.10-r4
+
+- The zookeeper container has been migrated to a non-root container approach. Previously the container run as `root` user and the zookeeper daemon was started as `zookeeper` user. From now own, both the container and the zookeeper daemon run as user `1001`.
+  As a consequence, the configuration files are writable by the user running the zookeeper process.
+
+## 3.4.10-r0
 
 - New release
 
