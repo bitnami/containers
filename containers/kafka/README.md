@@ -636,7 +636,13 @@ docker-compose start kafka
 ```
 
 # Notable Changes
-## 0.10.2.1
+
+## 0.10.2.1-r3
+
+- The kafka container has been migrated to a non-root container approach. Previously the container run as `root` user and the kafka daemon was started as `kafka` user. From now own, both the container and the kafka daemon run as user `1001`.
+  As a consequence, the configuration files are writable by the user running the kafka process.
+
+## 0.10.2.1-r0
 
 - New Bitnami release
 
@@ -663,7 +669,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2015-{{ .CurrentYear }} Bitnami
+Copyright (c) 2015-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

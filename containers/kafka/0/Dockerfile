@@ -1,16 +1,19 @@
-FROM bitnami/minideb-extras:jessie-r19
+FROM bitnami/minideb-extras:jessie-r20
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    HOME="/"
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libffi6 libgcc1 libglib2.0-0 liblzma5 libpcre3 libselinux1 libstdc++6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 zlib1g
-RUN bitnami-pkg install java-1.8.131-0 --checksum 5b122a36c8ba44e2f9eb8cbb9b62dd87963742c46f85a04019115d2d43c69e33
-RUN bitnami-pkg unpack kafka-0.10.2-1-1 --checksum 1f80663ac8852d9a16d7e86482a3e38869df780027221a0debb8fba9fcd3fb64
+RUN bitnami-pkg install java-1.8.141-0 --checksum 5e3e833f2899154285a7feb3d1511f26493f6091774ea90698c71866629991ff
+RUN bitnami-pkg unpack kafka-0.10.2-1-2 --checksum 805c44e38a78e0ec7ac213edf1c3e73dec1669fddee23b665839616ea4affbcb
 
 COPY rootfs /
 
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="0.10.2-1-r2" \
+    BITNAMI_IMAGE_VERSION="0.10.2-1-r3" \
     KAFKA_ADVERTISED_HOST_NAME="" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_ADVERTISED_PORT="9092" \
@@ -45,5 +48,6 @@ ENV ALLOW_PLAINTEXT_LISTENER="no" \
 
 EXPOSE 9092
 
+USER 1001
 ENTRYPOINT ["/app-entrypoint.sh"]
 CMD ["/run.sh"]
