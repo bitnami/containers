@@ -1,22 +1,17 @@
-FROM bitnami/minideb-extras:jessie-r19
+FROM bitnami/minideb-extras:jessie-r20
 LABEL maintainer "Bitnami <containers@bitnami.com>"
-
-
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libevent-2.0-5 libsasl2-2 sasl2-bin
-RUN bitnami-pkg unpack memcached-1.4.39-0 --checksum 2248f1a4deeb504da17d8be98c003b82036b6723a1ef19790dd59ba9ac2da33c
+RUN bitnami-pkg unpack memcached-1.5.0-0 --checksum 4a7989c938673f3c3bfc2ee73f9df6ec81c20e30eb162679df06b286fad313f7
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.4.39-r0" \
+    BITNAMI_IMAGE_VERSION="1.5.0-r0" \
     MEMCACHED_PASSWORD="" \
     MEMCACHED_USERNAME="root" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
-
-
-
 
 EXPOSE 11211
 
