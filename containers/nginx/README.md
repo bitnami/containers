@@ -78,15 +78,15 @@ services:
   nginx:
     image: 'bitnami/nginx:latest'
     ports:
-      - '80:80'
-      - '443:443'
+      - '80:8080'
+      - '443:8443'
     volumes:
       - /path/to/app:/app
 ```
 
 # Accessing your server from the host
 
-To access your web server from your host machine you can ask Docker to map a random port on your host to ports `80` and `443` exposed in the container.
+To access your web server from your host machine you can ask Docker to map a random port on your host to ports `8080` and `8443` exposed in the container.
 
 ```bash
 $ docker run --name nginx -P bitnami/nginx:latest
@@ -96,17 +96,17 @@ Run `docker port` to determine the random ports Docker assigned.
 
 ```bash
 $ docker port nginx
-443/tcp -> 0.0.0.0:32768
-80/tcp -> 0.0.0.0:32769
+8443/tcp -> 0.0.0.0:32768
+8080/tcp -> 0.0.0.0:32769
 ```
 
 You can also manually specify the ports you want forwarded from your host to the container.
 
 ```bash
-$ docker run -p 8080:80 -p 8443:443 bitnami/nginx:latest
+$ docker run -p 9000:8080 -p 9443:8443 bitnami/nginx:latest
 ```
 
-Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
+Access your web server in the browser by navigating to [http://localhost:9000](http://localhost:9000/).
 
 # Configuration
 
@@ -120,7 +120,7 @@ For example, in order add a vhost for `www.example.com`:
 
 ```nginx
 server {
-  listen 0.0.0.0:80;
+  listen 0.0.0.0:8080;
   server_name www.example.com;
   root /app
   index index.htm index.html
@@ -144,8 +144,8 @@ services:
   mariadb:
     image: 'bitnami/nginx:latest'
     ports:
-      - '80:80'
-      - '443:443'
+      - '80:8080'
+      - '443:8443'
     volumes:
       - /path/to/my_vhost.conf:/bitnami/nginx/conf/vhosts/my_vhost.conf:ro
 ```
@@ -185,8 +185,8 @@ services:
   nginx:
     image: 'bitnami/nginx:latest'
     ports:
-    - '80:80'
-    - '443:443'
+    - '80:8080'
+    - '443:8443'
     volumes:
     - /path/to/nginx-persistence/nginx/conf/bitnami/certs:/bitnami/nginx/conf/bitnami/certs
 ```
@@ -214,8 +214,8 @@ services:
   nginx:
     image: 'bitnami/nginx:latest'
     ports:
-      - '80:80'
-      - '443:443'
+      - '80:8080'
+      - '443:8443'
     volumes:
       - /path/to/nginx-persistence:/bitnami
 ```
