@@ -1,6 +1,6 @@
 FROM bitnami/minideb-extras:jessie-r20
 
-MAINTAINER Bitnami <containers@bitnami.com>
+LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_APP_NAME=codeigniter \
     BITNAMI_IMAGE_VERSION=3.1.3-r7 \
