@@ -1,6 +1,6 @@
 FROM bitnami/minideb-extras:jessie-r19-buildpack
 
-MAINTAINER Bitnami <containers@bitnami.com>
+LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # System packages required
 RUN install_packages ghostscript imagemagick libc6 libffi6 libgcc1 libgmp-dev libmysqlclient18 libmysqlclient-dev libncurses5 libpq5 libreadline6 libssl1.0.0 libssl1.0.0 libstdc++6 libtinfo5 libxml2-dev libxslt1-dev zlib1g zlib1g-dev netcat-traditional
