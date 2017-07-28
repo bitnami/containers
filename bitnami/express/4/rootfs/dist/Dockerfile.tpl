@@ -1,6 +1,6 @@
 ## Dockerfile for building production image
 FROM bitnami/express:{{BITNAMI_IMAGE_VERSION}}
-MAINTAINER john.smith@acme.com
+LABEL maintainer "John Smith <john.smith@acme.com>"
 
 ENV DISABLE_WELCOME_MESSAGE=1
 
