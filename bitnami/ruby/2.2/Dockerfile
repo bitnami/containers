@@ -1,5 +1,5 @@
 FROM bitnami/minideb-extras:jessie-r14-buildpack
-MAINTAINER Bitnami <containers@bitnami.com>
+LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_APP_NAME="ruby" \
     BITNAMI_IMAGE_VERSION="2.2.7-r1" \
