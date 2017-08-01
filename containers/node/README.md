@@ -43,7 +43,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-nod
 
  - [`8`, `8.2.1-r0` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.2.1-r0/8/Dockerfile)
  - [`7`, `7.10.1-r0` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-r0/7/Dockerfile)
- - [`6`, `6.11.1-r0`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.11.1-r0/6/Dockerfile)
+ - [`6`, `6.11.2-r0`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.11.2-r0/6/Dockerfile)
  - [`4`, `4.8.4-r0` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/4.8.4-r0/4/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
