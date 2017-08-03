@@ -41,7 +41,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-php
 
 # Supported tags and respective `Dockerfile` links
 
- - [`7.1`, `7.1.7-r0`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.7-r0/7.1/Dockerfile)
+ - [`7.1`, `7.1.8-r0`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.8-r0/7.1/Dockerfile)
  - [`7.0`, `7.0.22-r0` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.22-r0/7.0/Dockerfile)
  - [`5.6`, `5.6.31-r0` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.31-r0/5.6/Dockerfile)
 
