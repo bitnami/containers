@@ -488,6 +488,13 @@ or using Docker Compose:
 $ docker-compose start mariadb
 ```
 
+# Useful Links
+
+- [Create An AMP Development Environment With Bitnami Containers
+](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
+- [Create An EMP Development Environment With Bitnami Containers
+](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
+
 # Notable Changes
 
 ## 10.1.24-r2
