@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-postgresql/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-postgresql/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-postgresql/master/kubernetes.yml)
 
 
@@ -9,13 +9,13 @@
 
 # TL;DR;
 
-```console
+```bash
 $ docker run --name postgresql bitnami/postgresql:latest
 ```
 
 ## Docker Compose
 
-```console
+```bash
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-postgresql/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -26,7 +26,7 @@ $ docker-compose up -d
 
 Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
-```console
+```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-postgresql/master/kubernetes.yml
 ```
 
@@ -42,19 +42,19 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-pos
 
 The recommended way to get the Bitnami PostgreSQL Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/postgresql).
 
-```console
+```bash
 $ docker pull bitnami/postgresql:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/postgresql/tags/) in the Docker Hub Registry.
 
-```console
+```bash
 $ docker pull bitnami/postgresql:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```console
+```bash
 $ docker build -t bitnami/postgresql:latest https://github.com/bitnami/bitnami-docker-postgresql.git
 ```
 
@@ -64,7 +64,7 @@ If you remove the container all your data and configurations will be lost, and t
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```console
+```bash
 $ docker run \
     -v /path/to/postgresql-persistence:/bitnami \
     bitnami/postgresql:latest
@@ -96,7 +96,7 @@ In this example, we will create a PostgreSQL client instance that will connect t
 
 ### Step 1: Create a network
 
-```console
+```bash
 $ docker network create app-tier --driver bridge
 ```
 
@@ -104,7 +104,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the PostgreSQL container to the `app-tier` network.
 
-```console
+```bash
 $ docker run -d --name postgresql-server \
     --network app-tier \
     bitnami/postgresql:latest
@@ -114,7 +114,7 @@ $ docker run -d --name postgresql-server \
 
 Finally we create a new container instance to launch the PostgreSQL client and connect to the server created in the previous step:
 
-```console
+```bash
 $ docker run -it --rm \
     --network app-tier \
     bitnami/postgresql:latest psql -h postgresql-server -U postgres
@@ -149,7 +149,7 @@ services:
 
 Launch the containers using:
 
-```console
+```bash
 $ docker-compose up -d
 ```
 
@@ -159,7 +159,7 @@ $ docker-compose up -d
 
 In the above commands you may have noticed the use of the `POSTGRESQL_PASSWORD` environment variable. Passing the `POSTGRESQL_PASSWORD` environment variable when running the image for the first time will set the password of the `postgres` user to the value of `POSTGRESQL_PASSWORD`.
 
-```console
+```bash
 $ docker run --name postgresql -e POSTGRESQL_PASSWORD=password123 bitnami/postgresql:latest
 ```
 
@@ -184,7 +184,7 @@ The `postgres` user is a superuser and has full administrative access to the Pos
 
 By passing the `POSTGRESQL_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the PostgreSQL client.
 
-```console
+```bash
 $ docker run --name postgresql -e POSTGRESQL_DATABASE=my_database bitnami/postgresql:latest
 ```
 
@@ -206,7 +206,7 @@ services:
 
 You can also create a restricted database user that only has permissions for the database created with the [`POSTGRESQL_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `POSTGRESQL_USERNAME` environment variable.
 
-```console
+```bash
 $ docker run --name postgresql -e POSTGRESQL_USERNAME=my_user -e POSTGRESQL_PASSWORD=password123 -e POSTGRESQL_DATABASE=my_database bitnami/postgresql:latest
 ```
 
@@ -245,7 +245,7 @@ In a replication cluster you can have one master and zero or more slaves. When r
 
 The first step is to start the master.
 
-```console
+```bash
 $ docker run --name postgresql-master \
   -e POSTGRESQL_REPLICATION_MODE=master \
   -e POSTGRESQL_USERNAME=my_user \
@@ -262,7 +262,7 @@ In this command we are configuring the container as the master using the `POSTGR
 
 Next we start a replication slave container.
 
-```console
+```bash
 $ docker run --name postgresql-slave \
   --link postgresql-master:master \
   -e POSTGRESQL_REPLICATION_MODE=slave \
@@ -281,7 +281,7 @@ With these two commands you now have a two node PostgreSQL master-slave streamin
 
 If the master goes down you can reconfigure a slave to act as the master and begin accepting writes by creating the trigger file `/tmp/postgresql.trigger.5432`. For example the following command reconfigures `postgresql-slave` to act as the master:
 
-```console
+```bash
 $ docker exec postgresql-slave touch /tmp/postgresql.trigger.5432
 ```
 
@@ -324,7 +324,7 @@ services:
 
 Scale the number of slaves using:
 
-```console
+```bash
 $ docker-compose scale postgresql-master=1 postgresql-slave=3
 ```
 
@@ -340,7 +340,7 @@ The image looks for configurations in `/bitnami/postgresql/conf/`. As mentioned 
 
 Run the PostgreSQL image, mounting a directory from your host.
 
-```console
+```bash
 $ docker run --name postgresql \
     -v /path/to/postgresql-persistence:/bitnami \
     bitnami/postgresql:latest
@@ -364,7 +364,7 @@ services:
 
 Edit the configuration on your host using your favorite editor.
 
-```console
+```bash
 vi /path/to/postgresql-persistence/postgresql/conf/postgresql.conf
 ```
 
@@ -372,13 +372,13 @@ vi /path/to/postgresql-persistence/postgresql/conf/postgresql.conf
 
 After changing the configuration, restart your PostgreSQL container for changes to take effect.
 
-```console
+```bash
 $ docker restart postgresql
 ```
 
 or using Docker Compose:
 
-```console
+```bash
 $ docker-compose restart postgresql
 ```
 
@@ -388,13 +388,13 @@ Refer to the [server configuration](http://www.postgresql.org/docs/9.4/static/ru
 
 The Bitnami PostgreSQL Docker image sends the container logs to the `stdout`. To view the logs:
 
-```console
+```bash
 $ docker logs postgresql
 ```
 
 or using Docker Compose:
 
-```console
+```bash
 $ docker-compose logs postgresql
 ```
 
@@ -408,7 +408,7 @@ Bitnami provides up-to-date versions of PostgreSQL, including security patches, 
 
 ### Step 1: Get the updated image
 
-```console
+```bash
 $ docker pull bitnami/postgresql:latest
 ```
 
@@ -418,31 +418,31 @@ or if you're using Docker Compose, update the value of the image property to `bi
 
 Stop the currently running container using the command
 
-```console
+```bash
 $ docker stop postgresql
 ```
 
 or using Docker Compose:
 
-```console
+```bash
 $ docker-compose stop postgresql
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/postgresql-persistence` using:
 
-```console
+```bash
 $ rsync -a /path/to/postgresql-persistence /path/to/postgresql-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 ### Step 3: Remove the currently running container
 
-```console
+```bash
 $ docker rm -v postgresql
 ```
 
 or using Docker Compose:
 
-```console
+```bash
 $ docker-compose rm -v postgresql
 ```
 
@@ -450,13 +450,13 @@ $ docker-compose rm -v postgresql
 
 Re-create your container from the new image.
 
-```console
+```bash
 $ docker run --name postgresql bitnami/postgresql:latest
 ```
 
 or using Docker Compose:
 
-```console
+```bash
 $ docker-compose start postgresql
 ```
 
