@@ -1,15 +1,18 @@
-FROM bitnami/minideb-extras:jessie-r20
+FROM bitnami/minideb-extras:jessie-r21
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    HOME="/"
 
 # Install required system packages and dependencies
 RUN install_packages libc6
-RUN bitnami-pkg unpack redis-4.0.1-0 --checksum 1f1aeb4208b204e299a9ce1c845cfcfb6e24eb0b41726888bcc2432145f88448
+RUN bitnami-pkg unpack redis-4.0.1-1 --checksum 6390f40aef17049fd6e761aa7395d35c39e0332d9b42c41c4d56df13d299f367
 
 COPY rootfs /
 
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.1-r0" \
+    BITNAMI_IMAGE_VERSION="4.0.1-r1" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_MASTER_HOST="" \
     REDIS_MASTER_PASSWORD="" \
@@ -19,5 +22,6 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
 
 EXPOSE 6379
 
+USER 1001
 ENTRYPOINT ["/app-entrypoint.sh"]
 CMD ["/run.sh"]

@@ -434,6 +434,11 @@ $ docker-compose start redis
 
 # Notable Changes
 
+## 4.0.1-r1
+
+- The redis container has been migrated to a non-root container approach. Previously the container run as `root` user and the redis daemon was started as `redis` user. From now own, both the container and the redis daemon run as user `1001`.
+  As a consequence, the configuration files are writable by the user running the redis process.
+
 ## 3.2.0-r0
 
 - All volumes have been merged at `/bitnami/redis`. Now you only need to mount a single volume at `/bitnami/redis` for persistence.
