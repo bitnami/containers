@@ -7,7 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "0"
           LATEST_STABLE: "0"
-          IMAGE_NAME:
+          IMAGE_NAME: ghost
           CHART_NAME:
           CHART_REPO: https://github.com/kubernetes/charts
           DOCKER_PROJECT: bitnami
