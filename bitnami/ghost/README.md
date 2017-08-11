@@ -226,7 +226,7 @@ ghost:
 
 Available variables:
  - `GHOST_HOST`: Hostname for Ghost.
- - `GHOST_PORT_NUMBER`: Ghost application port. Default: **80**
+ - `GHOST_PORT_NUMBER`: Port number used in the generated application URLs. Default: **80**
  - `GHOST_USERNAME`: Ghost application username. Default: **user**
  - `GHOST_PASSWORD`: Ghost application password. Default: **bitnami1**
  - `GHOST_EMAIL`: Ghost application email. Default: **user@example.com**
@@ -272,6 +272,13 @@ This would be an example of SMTP configuration using a GMail account:
     -v /your/local/path/bitnami/ghost:/bitnami \
     bitnami/ghost
 ```
+
+# Notable Changes
+
+## 0.11.10-r2
+
+- The ghost container has been migrated to a non-root container approach. Previously the container run as `root` user and the ghost daemon was started as `ghost` user. From now own, both the container and the ghost daemon run as user `1001`.
+  As a consequence, the configuration files are writable by the user running the ghost process.
 
 # Contributing
 
