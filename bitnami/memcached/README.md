@@ -218,6 +218,11 @@ docker-compose start memcached
 
 # Notable Changes
 
+## 1.5.0-r1
+
+- The memcached container has been migrated to a non-root container approach. Previously the container run as `root` user and the memcached daemon was started as `memcached` user. From now own, both the container and the memcached daemon run as user `1001`.
+  As a consequence, the configuration files are writable by the user running the memcached process.
+
 ## 1.4.25-r4
 
 - `MEMCACHED_USER` parameter has been renamed to `MEMCACHED_USERNAME`.
