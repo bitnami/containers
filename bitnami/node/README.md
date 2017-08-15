@@ -41,7 +41,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-nod
 
 # Supported tags and respective `Dockerfile` links
 
- - [`8`, `8.3.0-r0` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.3.0-r0/8/Dockerfile)
+ - [`8`, `8.4.0-r0` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.4.0-r0/8/Dockerfile)
  - [`7`, `7.10.1-r0` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-r0/7/Dockerfile)
  - [`6`, `6.11.2-r0`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.11.2-r0/6/Dockerfile)
  - [`4`, `4.8.4-r0` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/4.8.4-r0/4/Dockerfile)
@@ -333,6 +333,10 @@ $ docker-compose start node
 ```
 
 # Notable Changes
+
+## 4.8.4-r1, 6.11.2-r1, 7.10.1-r1 and 8.3.0-r1
+
+- The node container has been migrated to a non-root container approach. Previously the container run as `root`. From now own the container run as user `1001`.
 
 ## 6.2.0-r0 (2016-05-11)
 
