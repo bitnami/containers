@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-rabbitmq/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-rabbitmq/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-rabbitmq/master/kubernetes.yml)
 
 # What is RabbitMQ?
@@ -13,13 +13,13 @@
 
 # TL;DR;
 
-```console
+```bash
 $ docker run --name rabbitmq bitnami/rabbitmq:latest
 ```
 
 ## Docker Compose
 
-```console
+```bash
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-rabbitmq/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -30,7 +30,7 @@ $ docker-compose up -d
 
 Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
-```console
+```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-rabbitmq/master/kubernetes.yml
 ```
 
@@ -46,19 +46,19 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-rab
 
 The recommended way to get the Bitnami RabbitMQ Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/rabbitmq).
 
-```console
+```bash
 $ docker pull bitnami/rabbitmq:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/rabbitmq/tags/) in the Docker Hub Registry.
 
-```console
+```bash
 $ docker pull bitnami/rabbitmq:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```console
+```bash
 $ docker build -t bitnami/rabbitmq:latest https://github.com/bitnami/bitnami-docker-rabbitmq.git
 ```
 
@@ -68,7 +68,7 @@ If you remove the container all your data and configurations will be lost, and t
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```console
+```bash
 $ docker run \
     -v /path/to/rabbitmq-persistence:/bitnami \
     bitnami/rabbitmq:latest
@@ -95,7 +95,7 @@ In this example, we will create a RabbitMQ client instance that will connect to 
 
 ### Step 1: Create a network
 
-```console
+```bash
 $ docker network create app-tier --driver bridge
 ```
 
@@ -103,7 +103,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the RabbitMQ container to the `app-tier` network.
 
-```console
+```bash
 $ docker run -d --name rabbitmq-server \
     --network app-tier \
     bitnami/rabbitmq:latest
@@ -113,7 +113,7 @@ $ docker run -d --name rabbitmq-server \
 
 Finally we create a new container instance to launch the RabbitMQ client and connect to the server created in the previous step:
 
-```console
+```bash
 $ docker run -it --rm \
     --network app-tier \
     bitnami/rabbitmq:latest rabbitmqctl -n rabbit@rabbitmq-server status
@@ -148,7 +148,7 @@ services:
 
 Launch the containers using:
 
-```console
+```bash
 $ docker-compose up -d
 ```
 
@@ -307,7 +307,7 @@ The image looks for configurations in `/bitnami/rabbitmq/conf/`. As mentioned in
 
 Run the RabbitMQ image, mounting a directory from your host.
 
-```console
+```bash
 $ docker run --name rabbitmq -v /path/to/rabbitmq-persistence:/bitnami bitnami/rabbitmq:latest
 ```
 
@@ -329,7 +329,7 @@ services:
 
 Edit the configuration on your host using your favorite editor.
 
-```console
+```bash
 $ vi /path/to/rabbitmq-persistence/rabbitmq/conf/rabbitmq.config
 ```
 
@@ -337,13 +337,13 @@ $ vi /path/to/rabbitmq-persistence/rabbitmq/conf/rabbitmq.config
 
 After changing the configuration, restart your RabbitMQ container for changes to take effect.
 
-```console
+```bash
 $ docker restart rabbitmq
 ```
 
 or using Docker Compose:
 
-```console
+```bash
 $ docker-compose restart rabbitmq
 ```
 
@@ -351,13 +351,13 @@ $ docker-compose restart rabbitmq
 
 The Bitnami RabbitMQ Docker image sends the container logs to the `stdout`. To view the logs:
 
-```console
+```bash
 $ docker logs rabbitmq
 ```
 
 or using Docker Compose:
 
-```console
+```bash
 $ docker-compose logs rabbitmq
 ```
 
@@ -371,7 +371,7 @@ Bitnami provides up-to-date versions of RabbitMQ, including security patches, so
 
 ### Step 1: Get the updated image
 
-```console
+```bash
 $ docker pull bitnami/rabbitmq:latest
 ```
 
@@ -382,31 +382,31 @@ or if you're using Docker Compose, update the value of the image property to
 
 Stop the currently running container using the command
 
-```console
+```bash
 $ docker stop rabbitmq
 ```
 
 or using Docker Compose:
 
-```console
+```bash
 $ docker-compose stop rabbitmq
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/rabbitmq-persistence` using:
 
-```console
+```bash
 $ rsync -a /path/to/rabbitmq-persistence /path/to/rabbitmq-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 ### Step 3: Remove the currently running container
 
-```console
+```bash
 $ docker rm -v rabbitmq
 ```
 
 or using Docker Compose:
 
-```console
+```bash
 $ docker-compose rm -v rabbitmq
 ```
 
@@ -414,13 +414,13 @@ $ docker-compose rm -v rabbitmq
 
 Re-create your container from the new image.
 
-```console
+```bash
 $ docker run --name rabbitmq bitnami/rabbitmq:latest
 ```
 
 or using Docker Compose:
 
-```console
+```bash
 $ docker-compose start rabbitmq
 ```
 
