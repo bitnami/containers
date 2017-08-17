@@ -8,7 +8,7 @@ RUN bitnami-pkg install node-8.4.0-0 --checksum b451a69499cac15466b467aafb00c552
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="8.4.0-r0" \
+    BITNAMI_IMAGE_VERSION="8.4.0-r1" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
