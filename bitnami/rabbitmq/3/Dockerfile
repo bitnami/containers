@@ -9,7 +9,7 @@ RUN bitnami-pkg unpack rabbitmq-3.6.11-0 --checksum 708e8db0f75a205268121fe5c514
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.6.11-r0" \
+    BITNAMI_IMAGE_VERSION="3.6.11-r1" \
     PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:/opt/bitnami/rabbitmq/sbin:$PATH" \
     RABBITMQ_CLUSTER_NODE_NAME="" \
     RABBITMQ_ERLANG_COOKIE="" \
