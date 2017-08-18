@@ -180,6 +180,7 @@ elasticsearch:
 
 Available variables:
 
+ - `ELASTICSEARCH_PLUGINS`: Comma, semi-colon or space separated list of plugins to install at initialization. No defaults
  - `ELASTICSEARCH_PORT_NUMBER`: Elasticsearch port. Default: **9200**
  - `ELASTICSEARCH_NODE_PORT_NUMBER`: Elasticsearch Node to Node port. Default: **9300**
  - `ELASTICSEARCH_CLUSTER_NAME`: The Elasticsearch Cluster Name. Default: **elasticsearch-cluster**
