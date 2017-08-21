@@ -14,14 +14,6 @@ $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master
 $ docker-compose up
 ```
 
-### Eclipse Che workspace
-
-Launch a on-demand Rails development workspace in Eclipse Che by clicking the link below:
-
-[![Rails Development Workspace](http://beta.codenvy.com/factory/resources/codenvy-contribute.svg)](https://beta.codenvy.com/f/?url=https%3A%2F%2Fgithub.com%2Fbitnami%2Fbitnami-docker-rails%2Ftree%2Fche)
-
-You can find the configuration files used on the previous link in the [Che branch](https://github.com/bitnami/bitnami-docker-rails/tree/che). For more information about Eclipse Che workspaces check the [official documentation](https://eclipse-che.readme.io/docs/introduction).
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
