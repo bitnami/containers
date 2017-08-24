@@ -6,14 +6,14 @@ RUN install_packages libapr1 libaprutil1 libbz2-1.0 libc6 libcomerr2 libcurl3 li
 RUN bitnami-pkg unpack apache-2.4.27-0 --checksum 27b8591b6564856428e2a3480949d549316e2f7e5bd207faa7b8c6e3a9bb9cc0
 RUN bitnami-pkg unpack php-7.0.22-0 --checksum 205c9587157116d8842e50a3e23d147fb06f495e61e22c8a96974eb3d7deae51
 RUN bitnami-pkg install libphp-7.0.22-0 --checksum 3fcf344e454baf0c0e7c94798f22aa823033891224a10d59883756ebd12bdf79
-RUN bitnami-pkg unpack phpmyadmin-4.7.3-1 --checksum 96d3a249a8b4055b71957ff9bef9af41207232387e2ede64dd52db3e7164732c
+RUN bitnami-pkg unpack phpmyadmin-4.7.4-0 --checksum 886c799ad72358e92fd5b0270d2c3ac403d76e7544a204b7a7799088dd8aafb5
 
 COPY rootfs /
 
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="4.7.3-r2" \
+    BITNAMI_IMAGE_VERSION="4.7.4-r0" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
     PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:$PATH" \
