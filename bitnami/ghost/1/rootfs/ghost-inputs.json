@@ -1,0 +1,17 @@
+{
+  "blogTitle": "{{$global.env.BLOG_TITLE}}",
+  "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
+  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
+  "email": "{{$global.env.GHOST_EMAIL}}",
+  "host": "{{$global.env.GHOST_HOST}}",
+  "password": "{{$global.env.GHOST_PASSWORD}}",
+  "port": "{{$global.env.GHOST_PORT_NUMBER}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpService": "{{$global.env.SMTP_SERVICE}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "username": "{{$global.env.GHOST_USERNAME}}"
+}
