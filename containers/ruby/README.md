@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-ruby/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-ruby/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-ruby/master/kubernetes.yml)
 
 # What is Ruby?
@@ -11,24 +11,21 @@
 # TL;DR;
 
 ```bash
-docker run -it --name ruby bitnami/ruby:latest
+$ docker run -it --name ruby bitnami/ruby:latest
 ```
 
 ## Docker Compose
 
-```
-ruby:
-  image: bitnami/ruby:latest
-  command: ruby script.rb
-  volumes:
-    - .:/app
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-ruby/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
-> **WARNING**: This is a beta configuration, currently unsupported.
+> **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-ruby/master/kubernetes.yml
@@ -45,7 +42,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-rub
 # Supported tags and respective `Dockerfile` links
 
 
- - [`2.4`, `2.4.1-r1`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.1-r1/2.4/Dockerfile)
+ - [`2.4`, `2.4.1-r2`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.1-r2/2.4/Dockerfile)
  - [`2.3`, `2.3.4-r1` (2.3/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.4-r1/2.3/Dockerfile)
  - [`2.2`, `2.2.7-r1` (2.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.7-r1/2.2/Dockerfile)
  - [`2.1`, `2.1.10-r3` (2.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-r3/2.1/Dockerfile)
@@ -57,19 +54,19 @@ Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://
 The recommended way to get the Bitnami Ruby Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/ruby).
 
 ```bash
-docker pull bitnami/ruby:latest
+$ docker pull bitnami/ruby:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/ruby/tags/) in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/ruby:[TAG]
+$ docker pull bitnami/ruby:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
 ```bash
-docker build -t bitnami/ruby:latest https://github.com/bitnami/bitnami-docker-ruby.git
+$ docker build -t bitnami/ruby:latest https://github.com/bitnami/bitnami-docker-ruby.git
 ```
 
 # Entering the REPL
@@ -77,7 +74,7 @@ docker build -t bitnami/ruby:latest https://github.com/bitnami/bitnami-docker-ru
 By default, running this image will drop you into the Ruby REPL (`irb`), where you can interactively test and try things out in Ruby.
 
 ```bash
-docker run -it --name ruby bitnami/ruby:latest
+$ docker run -it --name ruby bitnami/ruby:latest
 ```
 
 **Further Reading:**
@@ -89,7 +86,7 @@ docker run -it --name ruby bitnami/ruby:latest
 The default work directory for the Ruby image is `/app`. You can mount a folder from your host here that includes your Ruby script, and run it normally using the `ruby` command.
 
 ```bash
-docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
+$ docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
   ruby script.rb
 ```
 
@@ -98,7 +95,7 @@ docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
 If your Ruby app has a `Gemfile` defining your app's dependencies and start script, you can install the dependencies before running your app.
 
 ```bash
-docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
+$ docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
   sh -c "bundle install && ruby script.rb"
 ```
 
@@ -123,7 +120,7 @@ This image exposes port `3000` in the container, so you should ensure that your 
 
 Below is an example of a [Sinatra](http://www.sinatrarb.com/) app listening to remote connections on port `3000`:
 
-```
+```erb
 require 'sinatra'
 
 set :bind, '0.0.0.0'
@@ -137,7 +134,7 @@ end
 To access your web server from your host machine you can ask Docker to map a random port on your host to port `3000` inside the container.
 
 ```bash
-docker run -it --name ruby -P bitnami/ruby:latest
+$ docker run -it --name ruby -P bitnami/ruby:latest
 ```
 
 Run `docker port` to determine the random port Docker assigned.
@@ -150,7 +147,7 @@ $ docker port ruby
 You can also manually specify the port you want forwarded from your host to the container.
 
 ```bash
-docker run -it --name ruby -p 8080:3000 bitnami/ruby:latest
+$ docker run -it --name ruby -p 8080:3000 bitnami/ruby:latest
 ```
 
 Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
@@ -167,7 +164,7 @@ We may want to make our Ruby web server only accessible via an nginx web server.
 ### Step 1: Create a network
 
 ```bash
-docker network create app-tier --driver bridge
+$ docker network create app-tier --driver bridge
 ```
 
 or using Docker Compose:
@@ -184,7 +181,7 @@ networks:
 
 Let's create an nginx virtual host to reverse proxy to our Ruby container.
 
-```
+```nginx
 server {
     listen 0.0.0.0:80;
     server_name yourapp.com;
@@ -207,8 +204,8 @@ Copy the virtual host above, saving the file somewhere on your host. We will mou
 
 ### Step 3: Run the Ruby image with a specific name
 
-```
-docker run -it --name myapp \
+```bash
+$ docker run -it --name myapp \
   --network app-tier \
   -v /path/to/app:/app \
   bitnami/ruby:latest ruby script.rb
@@ -230,7 +227,7 @@ myapp:
 ### Step 4: Run the nginx image
 
 ```bash
-docker run -it \
+$ docker run -it \
   -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf \
   --network app-tier \
   bitnami/nginx:latest
@@ -257,7 +254,7 @@ Bitnami provides up-to-date versions of Ruby, including security patches, soon a
 ### Step 1: Get the updated image
 
 ```bash
-docker pull bitnami/ruby:latest
+$ docker pull bitnami/ruby:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/ruby:latest`.
@@ -265,13 +262,13 @@ or if you're using Docker Compose, update the value of the image property to `bi
 ### Step 2: Remove the currently running container
 
 ```bash
-docker rm -v ruby
+$ docker rm -v ruby
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose rm -v ruby
+$ docker-compose rm -v ruby
 ```
 
 ### Step 3: Run the new image
@@ -279,13 +276,13 @@ docker-compose rm -v ruby
 Re-create your container from the new image.
 
 ```bash
-docker run --name ruby bitnami/ruby:latest
+$ docker run --name ruby bitnami/ruby:latest
 ```
 
 or using Docker Compose:
 
 ```bash
-docker-compose start ruby
+$ docker-compose start ruby
 ```
 
 # Notable Changes
@@ -322,7 +319,7 @@ Most real time communication happens in the `#containers` channel at [bitnami-os
 Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
-Copyright (c) 2015-2016 Bitnami
+Copyright (c) 2015-2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
