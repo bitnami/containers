@@ -47,22 +47,25 @@ This is the recommended way to run Ghost. You can use the following docker compo
 
 ```yaml
 version: '2'
-
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-       - 'mariadb_data:/bitnami'
+      - 'mariadb_data:/bitnami'
   ghost:
     image: 'bitnami/ghost:latest'
+    labels:
+      kompose.service.type: nodeport
     ports:
       - '80:2368'
     volumes:
       - 'ghost_data:/bitnami'
     depends_on:
       - mariadb
+    environment:
+      - GHOST_HOST=localhost
 volumes:
   mariadb_data:
     driver: local
