@@ -4,7 +4,6 @@
 . /opt/bitnami/base/helpers
 
 print_welcome_page
-check_for_updates &
 
 log "ruby successfully initialized"
 
