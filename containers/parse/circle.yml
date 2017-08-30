@@ -1,32 +1,65 @@
-machine:
-  services:
-  - docker
-  environment:
-    RELEASE_SERIES_LIST: 2
-    LATEST_STABLE: 2
-    IMAGE_NAME: parse
-    CHART_NAME: parse
-    CHART_REPO: https://github.com/bitnami/charts
-    DOCKER_PROJECT: bitnami
-    QUAY_PROJECT: bitnami
-    GCLOUD_PROJECT: bitnami-containers
+version: 2
+jobs:
+  build:
+    working_directory: /workdir
+    docker:
+      - image: docker:17.06.0-ce-git
+        environment:
+          RELEASE_SERIES_LIST: "2"
+          LATEST_STABLE: "2"
+          IMAGE_NAME: parse
+          CHART_NAME: parse
+          CHART_REPO: https://github.com/kubernetes/charts
+          DOCKER_PROJECT: bitnami
+          QUAY_PROJECT: bitnami
+          GCLOUD_PROJECT: bitnami-containers
 
-dependencies:
-  override:
-  - docker info
-  - gcloud version
-  - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-pull-cache.sh | bash -
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 17.06.0-ce
+      - run:
+          name: Upgrade system packages (workaround - https://github.com/docker-library/docker/issues/72)
+          command: |
+            apk upgrade --no-cache
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --no-cache curl bash coreutils
+      - run:
+          name: Docker info
+          command: |
+            docker version
+            docker info
+      - restore_cache:
+          keys:
+            - cache-{{ .Branch }}
+          paths:
+            - /cache/layers.tar
+      - run:
+          name: Build docker image
+          command: |
+            curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-image-test.sh | bash -
+      - save_cache:
+          key: cache-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /cache/layers.tar
+      - deploy:
+          name: Publish docker image
+          command: |
+            if [ -n "${CIRCLE_TAG}" ]; then
+              curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-release-image.sh | bash -
+            elif [ "${CIRCLE_BRANCH}" == "master" ]; then
+              curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-development-image.sh | bash -
+            fi
 
-test:
-  override:
-  - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-image-test.sh | bash -
-
-deployment:
-  development:
-    branch: master
-    commands:
-    - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-development-image.sh | bash -
-  release:
-    tag: /^[0-9].*-r[0-9]+$/
-    commands:
-    - curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-release-image.sh | bash -
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /^[0-9].*-r[0-9]+$/
