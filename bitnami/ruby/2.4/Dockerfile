@@ -1,16 +1,15 @@
-FROM bitnami/minideb-extras:jessie-r14-buildpack
+FROM bitnami/minideb-extras:jessie-r21-buildpack
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.4.1-r1" \
-    PATH="/opt/bitnami/ruby/bin:$PATH"
-
 # Install required system packages and dependencies
-RUN install_packages ghostscript imagemagick libc6 libffi6 libgmp-dev libmysqlclient18 libncurses5 libpq5 libreadline6 libssl1.0.0 libtinfo5 libxml2-dev libxslt1-dev zlib1g zlib1g-dev
-RUN bitnami-pkg install ruby-2.4.1-0 --checksum eaf2341624588774f61e4aac4f53c437e98b1e97f6915ba6327d3ecdc6c2c3a2
+RUN install_packages ghostscript imagemagick libc6 libgmp-dev libmysqlclient18 libncurses5 libpq5 libreadline6 libssl1.0.0 libtinfo5 libxml2-dev libxslt1-dev zlib1g zlib1g-dev
+RUN bitnami-pkg install ruby-2.4.1-1 --checksum 0b82f1457328b3c45daaa1adb89970087acac75f4d015a7e173906268877da02
 
 COPY rootfs /
 
+ENV BITNAMI_APP_NAME="ruby" \
+    BITNAMI_IMAGE_VERSION="2.4.1-r2" \
+    PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
 
