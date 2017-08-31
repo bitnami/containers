@@ -1,0 +1,13 @@
+{
+  "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
+  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
+  "password": "{{$global.env.ORANGEHRM_PASSWORD}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpProtocol": "{{$global.env.SMTP_PROTOCOL}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "username": "{{$global.env.ORANGEHRM_USERNAME}}"
+}
