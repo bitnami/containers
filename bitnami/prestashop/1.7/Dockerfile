@@ -7,14 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.27-0 --checksum 27b8591b6564856428e2a3480949d5
 RUN bitnami-pkg unpack php-7.0.22-0 --checksum 205c9587157116d8842e50a3e23d147fb06f495e61e22c8a96974eb3d7deae51
 RUN bitnami-pkg install mysql-client-10.1.26-0 --checksum 731e07b76a06c8b7f2a0b79d528f2f1f37e49142f682ab27ab8f4edfc9176d83
 RUN bitnami-pkg install libphp-7.0.22-0 --checksum 3fcf344e454baf0c0e7c94798f22aa823033891224a10d59883756ebd12bdf79
-RUN bitnami-pkg unpack prestashop-1.7.2-1-0 --checksum 6f9c4f398b3878c56f57daf2b9549292765cf84c97c8d5c922a781bbcd8fe577
+RUN bitnami-pkg unpack prestashop-1.7.2-2-0 --checksum 9f3a604c648e665730b95cf5763904547ff43eabc109543ca52ea0c351257f7f
 
 COPY rootfs /
 
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.2-1-r0" \
+    BITNAMI_IMAGE_VERSION="1.7.2-2-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
     MARIADB_PORT_NUMBER="3306" \
