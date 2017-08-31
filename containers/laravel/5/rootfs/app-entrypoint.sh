@@ -2,7 +2,6 @@
 . /opt/bitnami/base/functions
 
 print_welcome_page
-check_for_updates &
 
 INIT_SEM=/tmp/initialized.sem
 PACKAGE_FILE=/app/composer.json
