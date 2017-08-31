@@ -1,14 +1,14 @@
-FROM bitnami/minideb-extras:jessie-r21
+FROM bitnami/minideb-extras:jessie-r22
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libbsd0 libc6 libedit2 liblzma5 libssl1.0.0 libtinfo5 libxml2 libxslt1.1 zlib1g
-RUN bitnami-pkg unpack postgresql-9.6.4-0 --checksum f8bb0805fe110e85ab8c7e38dc969db7a023cc71c514cf48f2a4fde65be7192c
+RUN bitnami-pkg unpack postgresql-9.6.5-0 --checksum 2e36161ff1703f1e442ee358673fcf0737ccc49bc81790974305a055905e9645
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="9.6.4-r0" \
+    BITNAMI_IMAGE_VERSION="9.6.5-r0" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
     POSTGRESQL_MASTER_HOST="" \
