@@ -14,7 +14,7 @@ if [[ -n $MARIADB_REPLICATION_MODE ]]; then
       ARGS+=" --innodb_flush_log_at_trx_commit=1"
       ;;
     slave)
-      ARGS+=" --relay-log=mysql-relay-bin --master-info-repository=TABLE --relay-log-info-repository=TABLE --log-slave-updates=1 --read-only=1"
+      ARGS+=" --relay-log=mysql-relay-bin --log-slave-updates=1 --read-only=1"
       ;;
   esac
 fi
