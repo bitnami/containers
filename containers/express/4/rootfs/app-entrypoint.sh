@@ -3,7 +3,6 @@
 . /opt/bitnami/express/functions
 
 print_welcome_page
-check_for_updates &
 
 if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
   bootstrap_express_app
