@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - 'mariadb_data:/bitnami'
+  orangehrm:
+    image: 'bitnami/orangehrm:3'
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '80:80'
+      - '443:443'
+    depends_on:
+      - mariadb
+    volumes:
+      - 'orangehrm_data:/bitnami'
+
+volumes:
+  mariadb_data:
+    driver: local
+  orangehrm_data:
+    driver: local
