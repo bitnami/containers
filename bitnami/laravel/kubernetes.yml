@@ -82,6 +82,13 @@ items:
         labels:
           io.kompose.service: myapp
       spec:
+        initContainers:
+        - name: volume-permissions
+          image: busybox
+          command: ['sh', '-c', 'chown -R 1000:1000 /app']
+          volumeMounts:
+          - mountPath: /app
+            name: myapp-claim0
         containers:
         - env:
           - name: DB_HOST
