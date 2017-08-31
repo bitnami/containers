@@ -2,7 +2,6 @@
 . /opt/bitnami/base/functions
 
 print_welcome_page
-check_for_updates &
 
 PROJECT_DIRECTORY=/app/$CODEIGNITER_PROJECT_NAME
 DEPLOY="$@"
