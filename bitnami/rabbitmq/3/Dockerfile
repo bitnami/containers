@@ -4,15 +4,15 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 # Install required system packages and dependencies
 RUN install_packages libc6 libssl1.0.0 libtinfo5 zlib1g
 RUN bitnami-pkg install erlang-19.3.0-0 --checksum 7cb86885f3f0992f8f55f61680e548056ed105a5f1c63e239dc9d283a00d5a14
-RUN bitnami-pkg unpack rabbitmq-3.6.11-2 --checksum 65add6dc930988c902b0040a347b441b4b2aa6e07c47ac033743f51d7c744bee
+RUN bitnami-pkg unpack rabbitmq-3.6.11-3 --checksum 5963c44e0149a5933bc4672903ca019af1e31c8dca817207959772e2525713ec
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.6.11-r3" \
+    BITNAMI_IMAGE_VERSION="3.6.11-r4" \
     PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:/opt/bitnami/rabbitmq/sbin:$PATH" \
     RABBITMQ_CLUSTER_NODE_NAME="" \
-    RABBITMQ_CLUSTER_PARTITION_HANDLING="autoheal" \
+    RABBITMQ_CLUSTER_PARTITION_HANDLING="ignore" \
     RABBITMQ_DISK_FREE_LIMIT="{mem_relative, 1.0}" \
     RABBITMQ_ERLANG_COOKIE="" \
     RABBITMQ_MANAGER_PORT_NUMBER="15672" \
