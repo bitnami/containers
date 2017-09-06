@@ -8,7 +8,7 @@
 
 [elastic.co/products/elasticsearch](https://www.elastic.co/products/elasticsearch)
 
-# TL;DR;
+# TL;DR
 
 ```bash
 $ docker run --name elasticsearch bitnami/elasticsearch:latest
@@ -255,7 +255,7 @@ services:
 
 ## Configuration file
 
-The image looks for configurations in `/bitnami/elasticsearch/conf/`. As mentioned in [Persisting your application](#persisting-your-application) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/elasticsearch-persistence/elasticsearch/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
+The image looks for user-defined configurations in `/bitnami/elasticsearch/conf/elasticsearch_custom.yml`. Create a file named `elasticsearch_custom.yml`  and mount it at `/bitnami/elasticsearch/conf/elasticsearch_custom.yml` to extend the default configuration.
 
 # Logging
 
