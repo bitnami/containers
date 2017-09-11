@@ -1,16 +1,16 @@
-FROM bitnami/minideb-extras:jessie-r21
+FROM bitnami/minideb-extras:jessie-r22
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libmysqlclient18 libncurses5 libpcap0.8 libreadline6 libsqlite3-0 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg install node-6.11.2-0 --checksum dae29e64f394dc3e3b37434d3cba2518e2a00e876a6c94cf7396632c266e520b
+RUN bitnami-pkg install node-6.11.3-0 --checksum 44d840c83cd9b3a09ecef5238b261372441d1803cf73b6c5ac5689a96d33db8b
 RUN bitnami-pkg install mongodb-client-3.4.7-0 --checksum 3e14403591cf764b5b6cc7667d3cf0f989820cba289ff1b37c25507a8ef4028f
-RUN bitnami-pkg unpack parse-2.6.0-0 --checksum 49ced97e39ba66ec07d3ecf4dceda167a3b0bf3ce64bb8635602269588702ab9
+RUN bitnami-pkg unpack parse-2.6.1-0 --checksum 26135918b2c2692d94620f66189bdec9a12f22885902715ba46969b4f6df5e12
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="2.6.0-r0" \
+    BITNAMI_IMAGE_VERSION="2.6.1-r0" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
