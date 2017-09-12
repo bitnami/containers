@@ -1,4 +1,5 @@
 {
+  "advertisedHostname": "{{$global.env.MONGODB_ADVERTISED_HOSTNAME}}",
   "database": "{{$global.env.MONGODB_DATABASE}}",
   "password": "{{$global.env.MONGODB_PASSWORD}}",
   "primaryHost": "{{$global.env.MONGODB_PRIMARY_HOST}}",

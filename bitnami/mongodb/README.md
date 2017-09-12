@@ -216,6 +216,7 @@ A [replication](https://docs.mongodb.com/manual/replication/) cluster can easily
  - `MONGODB_REPLICA_SET_NAME`: MongoDB replica set name. Default: **replicaset**
  - `MONGODB_PRIMARY_HOST`: MongoDB primary host. No defaults.
  - `MONGODB_PRIMARY_PORT_NUMBER`: MongoDB primary port. Default: **27017**
+ - `MONGODB_ADVERTISED_HOSTNAME`: MongoDB advertised hostname. No defaults. It is recommended to pass this environment variable if you experience issues with ephemeral IPs. Setting this env var makes the nodes of the replica set to be configured with a hostname instead of the machine IP.
 
 Only for authentication:
  - `MONGODB_REPLICA_SET_KEY`: MongoDB replica set key. Length should be greater than 5 characters and should not contain any special characters. Required for all nodes. No default.
@@ -357,6 +358,32 @@ $ docker-compose scale mongodb-primary=1 mongodb-secondary=3 mongodb-arbiter=1
 The above command scales up the number of secondary nodes to `3`. You can scale down in the same way.
 
 > **Note**: You should not scale up/down the number of primary nodes. Always have only one primary node running.
+
+
+### How is a replica set configured?
+
+There are three different roles in a replica set configuration (primary, secondary or arbiter). Each one of these roles are configured in a different way:
+
+**Primary node configuration:**
+
+The replica set is started with the `rs.initiate()` command and some configuration options to force the primary to be the primary. Basically, the priority is increased from the default (1) to 5.
+To verify the primary is actually the primary we validate it with the `db.isMaster().ismaster` command.
+
+The primary node has a volume attached so the data is preserved between deployments as long as the volume exists.
+
+In addition, the primary node initialization script will check for the existence of a `.initialized` file in the `/bitnami/mongodb` folder to discern whether it should create a new replica set or on the contrary a replica set has already been initialized.
+
+If the primary got killed and the volume is deleted, in order to start it again in the same replica set it is important to launch the container with the original IP so other members of the replica set already knows about it.
+
+**Secondary node configuration:**
+
+Once the primary node is up and running we can start adding secondary nodes (and arbiter). For that, the secondary node connects to the primary node and add itself as a secondary node with the command `rs.add(SECONDARY_NODE_HOST)`.
+
+After adding the secondary nodes we verified they have been successfully added by executing `rs.status().members` to see if they appear in the list.
+
+**Arbiter node configuration:**
+
+Finally, the arbiters follows the same procedure than secondary nodes with the exception that the command to add it to the replica set is `rs.addArb(ARBITER_NODE_HOST)`. An arbiter should be added when the sum of primary nodes plus secondaries nodes is even.
 
 ## Configuration file
 
