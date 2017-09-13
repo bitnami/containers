@@ -7,13 +7,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages libc6 libffi6 libgcc1 libglib2.0-0 liblzma5 libpcre3 libselinux1 libstdc++6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 zlib1g
 RUN bitnami-pkg install java-1.8.144-0 --checksum 8b4315727f65780d8223df0aeaf5e3beca10a14aa4e2cdd1f3541ab50b346433
-RUN bitnami-pkg unpack kafka-0.11.0-0-0 --checksum 76a2e6cb3fdc61b87ed44483bf9b402e959a58ed776f7d658b427366d397ba50
+RUN bitnami-pkg unpack kafka-0.11.0-1-0 --checksum 40cc89ffd7e50590cbc3903b549622948b3a709d0193ca9e6c2d1005136faa1e
 
 COPY rootfs /
 
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="0.11.0-0-r0" \
+    BITNAMI_IMAGE_VERSION="0.11.0-1-r0" \
     KAFKA_ADVERTISED_HOST_NAME="" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_ADVERTISED_PORT="9092" \
