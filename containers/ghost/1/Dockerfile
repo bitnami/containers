@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libmysqlclient18 libncurses5 libreadline6 libsqlite3-0 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
 RUN bitnami-pkg install node-6.11.3-0 --checksum 44d840c83cd9b3a09ecef5238b261372441d1803cf73b6c5ac5689a96d33db8b
 RUN bitnami-pkg install mysql-client-10.1.26-0 --checksum 731e07b76a06c8b7f2a0b79d528f2f1f37e49142f682ab27ab8f4edfc9176d83
-RUN bitnami-pkg unpack ghost-1.8.5-0 --checksum a38cc65260b2029c5c023ea676fc2087fbb47ebf672800990f68fd4baf8fd649
+RUN bitnami-pkg unpack ghost-1.8.6-0 --checksum 17110b4aade1c4d7018ed86e1984361d85f1707b93d8dd73371efe54bb8d968b
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="1.8.5-r0" \
+    BITNAMI_IMAGE_VERSION="1.8.6-r0" \
     BLOG_TITLE="User's Blog" \
     GHOST_EMAIL="user@example.com" \
     GHOST_HOST="" \
