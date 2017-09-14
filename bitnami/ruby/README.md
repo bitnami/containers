@@ -44,7 +44,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-rub
 
  - [`2.4`, `2.4.2-r0`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.2-r0/2.4/Dockerfile)
  - [`2.3`, `2.3.5-r0` (2.3/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.5-r0/2.3/Dockerfile)
- - [`2.2`, `2.2.7-r2` (2.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.7-r2/2.2/Dockerfile)
+ - [`2.2`, `2.2.8-r0` (2.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.8-r0/2.2/Dockerfile)
  - [`2.1`, `2.1.10-r4` (2.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-r4/2.1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://github.com/bitnami/bitnami-docker-ruby).
