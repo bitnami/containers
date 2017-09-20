@@ -7,14 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.27-0 --checksum 27b8591b6564856428e2a3480949d5
 RUN bitnami-pkg unpack php-7.0.23-0 --checksum 3e566682b62dacbf35282b33cbfa3cb0ff18bcc3221083212545e3290f519e32
 RUN bitnami-pkg install mysql-client-10.1.26-0 --checksum 731e07b76a06c8b7f2a0b79d528f2f1f37e49142f682ab27ab8f4edfc9176d83
 RUN bitnami-pkg install libphp-7.0.23-0 --checksum 55325169df846dc1009f9b57bd1cb22cfa6bc7a330a10ff0d448e2a534dab534
-RUN bitnami-pkg unpack piwik-3.1.0-0 --checksum 3977aa91476153f3963a413a9cd9f03d72880f63d877fbd09d3aa1611e53d4b3
+RUN bitnami-pkg unpack piwik-3.1.1-0 --checksum 8b22f1f99e1279737c377aa34b85a582d42066f29b0f1d84dc000ca6f113f964
 
 COPY rootfs /
 
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="piwik" \
-    BITNAMI_IMAGE_VERSION="3.1.0-r0" \
+    BITNAMI_IMAGE_VERSION="3.1.1-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
     MARIADB_PORT_NUMBER="3306" \
