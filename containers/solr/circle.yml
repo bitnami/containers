@@ -5,8 +5,8 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "6"
-          LATEST_STABLE: "6"
+          RELEASE_SERIES_LIST: "7"
+          LATEST_STABLE: "7"
           IMAGE_NAME: solr
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami

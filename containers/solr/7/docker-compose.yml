@@ -1,0 +1,13 @@
+version: '2'
+services:
+  solr:
+    image: 'bitnami/solr:7'
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '8983:8983'
+    volumes:
+      - 'solr_data:/bitnami'
+volumes:
+  solr_data:
+    driver: local
