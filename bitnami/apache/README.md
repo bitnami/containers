@@ -108,6 +108,47 @@ Access your web server in the browser by navigating to [http://localhost:8080](h
 
 # Configuration
 
+## Environment variables
+
+When you start the Apache image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+
+ * For docker-compose add the variable name and value under the application section:
+
+```yaml
+version: '2'
+
+services:
+  apache:
+    image: 'bitnami/apache:latest'
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '80:8080'
+      - '443:443'
+    environment:
+      - APACHE_HTTP_PORT_NUMBER=8080
+    volumes:
+      - 'apache_data:/bitnami'
+volumes:
+  apache_data:
+    driver: local
+```
+
+ * For manual execution add a `-e` option with each variable and value:
+
+```bash
+$ docker run -d --name apache -p 80:8080 -p 443:443 \
+  --network apache-tier \
+  --e APACHE_HTTP_PORT_NUMBER=8080 \
+  --volume /path/to/apache-persistence:/bitnami \
+  bitnami/apache:latest
+```
+
+Available variables:
+
+ - `APACHE_HTTP_PORT_NUMBER`: Port used by Apache for HTTP. Default: **80**
+ - `APACHE_HTTPS_PORT_NUMBER`: Port used by Apache for HTTPS. Default: **443**
+
 ## Adding custom virtual hosts
 
 The default `httpd.conf` includes virtual hosts placed in `/bitnami/apache/conf/vhosts/`. You can mount a `my_vhost.conf` file containing your custom virtual hosts at this location.
