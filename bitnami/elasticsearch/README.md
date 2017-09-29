@@ -187,6 +187,7 @@ Available variables:
  - `ELASTICSEARCH_CLUSTER_HOSTS`: List of elasticsearch hosts to set the cluster. Available separatos are ' ', ',' and ';' .No defaults.
  - `ELASTICSEARCH_CLIENT_NODE`: Elasticsearch node to behave as a 'smart router' for Kibana app. Default: **false**
  - `ELASTICSEARCH_NODE_NAME`: Elasticsearch node name. No defaults.
+ - `ELASTICSEARCH_HEAP_SIZE`: Memory used for the Xmx and Xms java heap values. Defaults to half of the host RAM.
 
 ## Setting up a cluster
 
