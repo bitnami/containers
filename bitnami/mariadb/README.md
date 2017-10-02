@@ -164,6 +164,31 @@ $ docker-compose up -d
 
 # Configuration
 
+## Passing extra command-line flags to mysqld startup
+
+Passing extra command-line flags to the mysqld service command is possible through the following env var:
+
+- `MARIADB_EXTRA_FLAGS`: Flags to be appended to the startup command. No defaults
+
+```bash
+$ docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes -e MARIADB_EXTRA_FLAGS='--max-connect-errors=1000 --max_connections=155' bitnami/mariadb:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    ports:
+      - '3306:3306'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_EXTRA_FLAGS=--max-connect-errors=1000 --max_connections=155
+```
+
 ## Setting the root password on first run
 
 The root user and password can easily be setup with the Bitnami MariaDB Docker image using the following environment variables:

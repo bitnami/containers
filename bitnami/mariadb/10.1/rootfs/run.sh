@@ -19,5 +19,10 @@ if [[ -n $MARIADB_REPLICATION_MODE ]]; then
   esac
 fi
 
+# configure extra command line flags
+if [[ -n $MARIADB_EXTRA_FLAGS ]]; then
+    ARGS+=" $MARIADB_EXTRA_FLAGS"
+fi
+
 info "Starting ${DAEMON}..."
 exec ${EXEC} ${ARGS}
