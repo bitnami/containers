@@ -39,7 +39,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-tom
 
 # Supported tags and respective `Dockerfile` links
 
- - [`9.0`, `9.0.0-M26-r0` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.0-M26-r0/9.0/Dockerfile)
+ - [`9.0`, `9.0.1-r0` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.1-r0/9.0/Dockerfile)
  - [`8.5`, `8.5.23-r0` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.23-r0/8.5/Dockerfile)
  - [`8.0`, `8.0.46-r1`, `latest` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.46-r1/8.0/Dockerfile)
  - [`7`, `7.0.81-r0` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.81-r0/7/Dockerfile)
