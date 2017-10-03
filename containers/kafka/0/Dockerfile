@@ -5,15 +5,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/"
 
 # Install required system packages and dependencies
-RUN install_packages libc6 libffi6 libgcc1 libglib2.0-0 liblzma5 libpcre3 libselinux1 libstdc++6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 zlib1g
-RUN bitnami-pkg install java-1.8.144-0 --checksum 8b4315727f65780d8223df0aeaf5e3beca10a14aa4e2cdd1f3541ab50b346433
-RUN bitnami-pkg unpack kafka-0.11.0-1-0 --checksum 40cc89ffd7e50590cbc3903b549622948b3a709d0193ca9e6c2d1005136faa1e
+RUN bitnami-pkg install java-1.8.144-1 --checksum 2f8fdda7d9a8d8ad57efc76fe2b1a322a9ec30395b6bcb09464901256348066c
+RUN bitnami-pkg unpack kafka-0.11.0-1-1 --checksum 39fe736cc98bd30ee500e819dc8ecf5c5d0255844b9958cb2f815a1b4eb9daf1
 
 COPY rootfs /
 
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="0.11.0-1-r0" \
+    BITNAMI_IMAGE_VERSION="0.11.0-1-r1" \
     KAFKA_ADVERTISED_HOST_NAME="" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_ADVERTISED_PORT="9092" \
@@ -25,7 +24,7 @@ ENV ALLOW_PLAINTEXT_LISTENER="no" \
     KAFKA_INTER_BROKER_PASSWORD="bitnami" \
     KAFKA_INTER_BROKER_USER="admin" \
     KAFKA_LISTENERS="PLAINTEXT://:9092" \
-    KAFKA_LOGS_DIRS="/opt/bitnami/kafka/logs" \
+    KAFKA_LOGS_DIRS="/opt/bitnami/kafka/data" \
     KAFKA_LOG_FLUSH_INTERVAL_MESSAGES="10000" \
     KAFKA_LOG_FLUSH_INTERVAL_MS="1000" \
     KAFKA_LOG_RETENTION_BYTES="1073741824" \

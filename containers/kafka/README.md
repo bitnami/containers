@@ -197,7 +197,7 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 - `KAFKA_SOCKET_SEND_BUFFER_BYTES`: The send buffer (SO_SNDBUF) used by the socket server. Default: **102400**
 - `KAFKA_SOCKET_RECEIVE_BUFFER_BYTES`: The receive buffer (SO_RCVBUF) used by the socket server. Default: **102400**
 - `KAFKA_SOCKET_REQUEST_MAX_BYTES`: The maximum size of a request that the socket server will accept (protection against OOM). Default: **104857600**
-- `KAFKA_LOGS_DIRS`: A comma separated list of directories under which to store log files. Default: **/opt/bitnami/kafka/logs**
+- `KAFKA_LOGS_DIRS`: A comma separated list of directories under which to store log files. Default: **/opt/bitnami/kafka/data**
 - `KAFKA_DELETE_TOPIC_ENABLE`: Switch to enable topic deletion or not, default value is false. Default: **false**
 - `KAFKA_LISTENERS`: The address the socket server listens on. Default: **PLAINTEXT://:9092**
 - `KAFKA_ADVERTISED_LISTENERS`: Hostname and port the broker will advertise to producers and consumers. Default: **PLAINTEXT://:9092**
