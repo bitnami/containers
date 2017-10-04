@@ -36,6 +36,9 @@ items:
         labels:
           io.kompose.service: redis
       spec:
+        securityContext:
+          runAsUser: 1001
+          fsGroup: 1001        
         containers:
         - image: bitnami/redis:latest
           name: redis
@@ -67,4 +70,3 @@ items:
   status: {}
 kind: List
 metadata: {}
-
