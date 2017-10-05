@@ -371,6 +371,11 @@ or using Docker Compose:
 $ docker-compose start apache
 ```
 
+# Useful Links
+
+- [Create An AMP Development Environment With Bitnami Containers
+](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
+
 # Notable Changes
 
 ## 2.4.18-r0
