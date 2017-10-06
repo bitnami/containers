@@ -9,7 +9,7 @@ jobs:
           LATEST_STABLE: "10.1"
           IMAGE_NAME: mariadb
           CHART_NAME:
-          CHART_REPO:
+          CHART_REPO: https://github.com/kubernetes/charts
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
