@@ -1,15 +1,18 @@
 FROM bitnami/minideb-extras:jessie-r22
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    HOME="/"
+
 # Install required system packages and dependencies
 RUN install_packages libaio1 libc6 libgcc1 libjemalloc1 libncurses5 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg unpack mariadb-10.1.28-0 --checksum 00045e03076cc597f82f6768bd0795adab01387fdbc08800016fa2da20960b5f
+RUN bitnami-pkg unpack mariadb-10.1.28-1 --checksum 1bf8aa2f262204ac44566bf6fd71e84f913b60294c9d74194f3742b0f1c13d92
 
 COPY rootfs /
 
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.1.28-r1" \
+    BITNAMI_IMAGE_VERSION="10.1.28-r2" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
@@ -27,5 +30,6 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
 
 EXPOSE 3306
 
+USER 1001
 ENTRYPOINT ["/app-entrypoint.sh"]
 CMD ["/run.sh"]

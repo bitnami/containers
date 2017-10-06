@@ -522,6 +522,10 @@ $ docker-compose start mariadb
 
 # Notable Changes
 
+## 10.1.28-r2
+
+- The mariadb container has been migrated to a non-root container approach. Previously the container run as root user and the mariadb daemon was started as mysql user. From now own, both the container and the mariadb daemon run as user 1001. As a consequence, the configuration files are writable by the user running the mariadb process.
+
 ## 10.1.24-r2
 
 - `VOLUME` instruction has been removed from the `Dockerfile`.
