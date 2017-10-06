@@ -36,6 +36,13 @@ items:
         labels:
           io.kompose.service: mariadb
       spec:
+        initContainers:
+        - name: volume-permissions
+          image: busybox
+          command: ['sh', '-c', 'chmod -R g+rwX /bitnami']
+          volumeMounts:
+          - mountPath: /bitnami
+            name: mariadb-mariadb-data
         containers:
         - env:
           - name: ALLOW_EMPTY_PASSWORD
@@ -70,4 +77,3 @@ items:
   status: {}
 kind: List
 metadata: {}
-
