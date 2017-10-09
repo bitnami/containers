@@ -25,20 +25,23 @@ $ express --git --css less example/
 To build a production Docker image of our application we'll use the `bitnami/node:6-prod` image, which is a production build of the Bitnami Node Image optimized for size.
 
 ```dockerfile
-FROM bitnami/node:6-prod
-
+FROM bitnami/node:6 as builder
 ENV NODE_ENV="production"
-
 COPY . /app
-
 WORKDIR /app
-
 RUN npm install
 
+FROM bitnami/node:6-prod
+ENV NODE_ENV="production"
+COPY --from=builder /app /app
+WORKDIR /app
+EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-We use the above `Dockerfile` to `COPY` the example application at the `/app` path of the container and install the npm module dependencies with the command `npm install`. Finally the Express application is start with `npm start`.
+The `Dockerfile` consists of two build stages. The first stage uses the development image, `bitnami/node:6`, to copy the application source and install the required application modules using `npm install`. The `NODE_ENV` environment variable is defined so that `npm install` only installs the application modules that are required in `production` executions.
+
+The second stage uses the production image, `bitnami/node:6-prod`, and copies over the application source and the installed modules from the previous stage. This creates a minimal Docker image that only consists of the application source, node modules and the node runtime.
 
 To build the Docker image, execute the command:
 
