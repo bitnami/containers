@@ -139,6 +139,9 @@ items:
         labels:
           io.kompose.service: mariadb
       spec:
+        securityContext:
+          runAsUser: 1001
+          fsGroup: 1001
         containers:
         - env:
           - name: ALLOW_EMPTY_PASSWORD
