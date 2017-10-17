@@ -19,6 +19,10 @@ jobs:
       - setup_remote_docker:
           version: 17.06.0-ce
       - run:
+          name: Upgrade system packages (workaround - https://github.com/docker-library/docker/issues/72)
+          command: |
+            apk upgrade --no-cache
+      - run:
           name: Install dependencies
           command: |
             apk add --no-cache curl bash coreutils
@@ -49,8 +53,13 @@ jobs:
               curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-development-image.sh | bash -
             fi
 
-deployment:
-  release:
-    tag: /^[0-9].*-r[0-9]+$/
-    commands:
-      - echo "workaround make tags run in 2.0 - https://discuss.circleci.com/t/git-tag-deploys-in-2-0/9493/8"
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /^[0-9].*-r[0-9]+$/
