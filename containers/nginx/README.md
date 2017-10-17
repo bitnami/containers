@@ -348,6 +348,11 @@ or using Docker Compose:
 $ docker-compose start nginx
 ```
 
+# Useful Links
+
+- [Create An EMP Development Environment With Bitnami Containers
+](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
+
 # Notable Changes
 
 ## 1.12.1-r2
