@@ -231,7 +231,7 @@ Available variables:
  - `GHOST_HOST`: Hostname for Ghost.
  - `GHOST_PORT_NUMBER`: Port number used in the generated application URLs. Default: **80**
  - `GHOST_USERNAME`: Ghost application username. Default: **user**
- - `GHOST_PASSWORD`: Ghost application password. Default: **bitnami1**
+ - `GHOST_PASSWORD`: Ghost application password. Minimum length is 10 characters. Default: **bitnami123**
  - `GHOST_EMAIL`: Ghost application email. Default: **user@example.com**
  - `BLOG_TITLE`: Ghost blog title. Default: **User's Blog**
  - `MARIADB_USER`: Root user for the MariaDB database. By default: root.
