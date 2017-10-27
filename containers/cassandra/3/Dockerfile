@@ -1,18 +1,16 @@
-FROM bitnami/minideb-extras:jessie-r19
+FROM bitnami/minideb-extras:jessie-r22
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-
-
 # Install required system packages and dependencies
-RUN install_packages libc6 libexpat1 libffi6 libfontconfig1 libfreetype6 libgcc1 libglib2.0-0 libjemalloc1 liblzma5 libncurses5 libpcre3 libpng12-0 libreadline6 libselinux1 libsqlite3-0 libssl1.0.0 libstdc++6 libtinfo5 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 zlib1g
-RUN bitnami-pkg install python-2.7.13-0 --checksum 7f5aac196054c7eb04c981243b4ddf37020cc3eb8a7cdc69d72da57212b21573
-RUN bitnami-pkg install java-1.8.131-0 --checksum 5b122a36c8ba44e2f9eb8cbb9b62dd87963742c46f85a04019115d2d43c69e33
-RUN bitnami-pkg unpack cassandra-3.11.0-0 --checksum 44951b1da39f42584dc3a5ec94cded35fcec5e008e3b5d3fc64067f0bf9ef6da
+RUN install_packages libbz2-1.0 libc6 libjemalloc1 libncurses5 libreadline6 libsqlite3-0 libssl1.0.0 libtinfo5 zlib1g
+RUN bitnami-pkg install python-2.7.14-0 --checksum 2ad513d9d4d4e2c2f98d96448617b5ab3c5dd48dc2e3cb02080ecc7215039ffa
+RUN bitnami-pkg install java-1.8.151-0 --checksum fbbea572d89988035aee16eefe53c852e8abfda84f6c7cf5c9a4772a72863143
+RUN bitnami-pkg unpack cassandra-3.11.1-0 --checksum e44225b796e47b04b63256215e212d4966c5b774764a42df7a4445b4f353cbe9
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.0-r2" \
+    BITNAMI_IMAGE_VERSION="3.11.1-r0" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
     CASSANDRA_ENABLE_REMOTE_CONNECTIONS="true" \
@@ -28,9 +26,6 @@ ENV BITNAMI_APP_NAME="cassandra" \
     CASSANDRA_TRANSPORT_PORT_NUMBER="7000" \
     CASSANDRA_USER="cassandra" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/cassandra/bin:$PATH"
-
-
-
 
 EXPOSE 9042 9160 7000 7001
 
