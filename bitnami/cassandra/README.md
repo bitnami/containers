@@ -111,7 +111,7 @@ Finally we create a new container instance to launch the Cassandra client and co
 ```bash
 $ docker run -it --rm \
     --network app-tier \
-    bitnami/cassandra:latest cqlsh --username cassandra --password cassandra-server cassandra
+    bitnami/cassandra:latest cqlsh --username cassandra --password cassandra cassandra-server
 ```
 
 ## Using Docker Compose
