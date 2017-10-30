@@ -131,6 +131,31 @@ $ docker-compose up -d
 
 # Configuration
 
+## Specify the cache size
+
+By default, the Bitnami Memcached container starts with a cache size of 64mb. You can specify other value using the `MEMCACHED_CACHE_SIZE` environment variable.
+
+```bash
+docker run --name memcached -e MEMCACHED_CACHE_SIZE=128 bitnami/memcached:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  memcached:
+    image: 'bitnami/memcached:latest'
+    ports:
+      - '11211:11211'
+    environment:
+      - MEMCACHED_CACHE_SIZE=128
+```
+
+> The default value of the `MEMCACHED_CACHE_SIZE` is `64`.
+
+
 ## Creating the Memcached admin user
 
 Authentication on the Memcached server is disabled by default. To enable authentication, specify a username and password for the Memcached admin user using the `MEMCACHED_USERNAME` and `MEMCACHED_PASSWORD` environment variables.
