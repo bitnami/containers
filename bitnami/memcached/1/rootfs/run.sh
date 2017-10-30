@@ -7,10 +7,11 @@ DAEMON=memcached
 EXEC=$(which $DAEMON)
 LOGFILE="/opt/bitnami/memcached/logs/memcached.log"
 PIDFILE="/opt/bitnami/memcached/tmp/memcached.pid"
+EXTRA_OPTIONS=" -m ${MEMCACHED_CACHE_SIZE:-64}"
 
-# configure command line flags for authentication
+# configure command line flag for authentication
 if [[ -n $MEMCACHED_PASSWORD ]]; then
-    EXTRA_OPTIONS="-S"
+    EXTRA_OPTIONS+=" -S"
 fi
 
 ARGS="-p 11211 -P ${PIDFILE} -u memcached -v ${EXTRA_OPTIONS} -vv > ${LOGFILE} 2>&1"
