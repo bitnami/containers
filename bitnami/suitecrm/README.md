@@ -233,7 +233,7 @@ Available variables:
  - `SUITECRM_USERNAME`: SuiteCRM application username. Default: **User**
  - `SUITECRM_PASSWORD`: SuiteCRM application password. Default: **bitnami**
  - `SUITECRM_EMAIL`: SuiteCRM application email. Default: **user@example.com**
- - `SUITECRM_LASTNAME`: SuiteCRM application last name. Default: **Name**
+ - `SUITECRM_LAST_NAME`: SuiteCRM application last name. Default: **Name**
  - `SUITECRM_HOST`: Host domain or IP.
  - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
  - `MARIADB_PASSWORD`: Root password for the MariaDB.
