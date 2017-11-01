@@ -3,19 +3,19 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libapr1 libaprutil1 libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls-deb0-28 libgpg-error0 libgssapi-krb5-2 libhogweed2 libicu52 libidn11 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmcrypt4 libncurses5 libnettle4 libp11-kit0 libpcre3 libpng12-0 libpq5 libreadline6 librtmp1 libsasl2-2 libssh2-1 libssl1.0.0 libstdc++6 libsybdb5 libtasn1-6 libtidy-0.99-0 libtinfo5 libuuid1 libxml2 libxslt1.1 zlib1g
-RUN bitnami-pkg unpack apache-2.4.27-0 --checksum 27b8591b6564856428e2a3480949d549316e2f7e5bd207faa7b8c6e3a9bb9cc0
-RUN bitnami-pkg unpack php-7.0.24-0 --checksum 05908d63d2d54cdeb5123e89a71e1355d25ffa2e84d448088d05aba3e3b3855f
+RUN bitnami-pkg unpack apache-2.4.29-0 --checksum 38af9f5ee6088655536238d9f70f4ce7fd6047e1c84fd5b02fa351efbc4f60c6
+RUN bitnami-pkg unpack php-7.0.25-0 --checksum 06b7eec17da189e1d7c4768d2a8ccc22aeae42b2261af52956c49f32840910ac
 RUN bitnami-pkg install mysql-client-10.1.28-0 --checksum 8a0ccfd6a62ffccdb25fcf39754c2526b120f416dd390194e8d6edd2ec8ddcee
-RUN bitnami-pkg install libphp-7.0.24-0 --checksum bbaa3ed760fc144e3f0a68f8aafa11ae24816d783f5cc757087a8089974fc5cd
-RUN bitnami-pkg install drush-8.1.14-0 --checksum ca552adb7ed50916f6468c211b0571f04498b2ddb6d921dbeb749b2dfa1e153f
-RUN bitnami-pkg unpack drupal-8.4.0-0 --checksum 915903938514373826417471f8d5d75c1f02402cc1617f18a2dc02cb118335d7
+RUN bitnami-pkg install libphp-7.0.25-0 --checksum 830adc5002b70b4000921b85590ef70390189e1b7b498e4c71515c9ba8af2a70
+RUN bitnami-pkg install drush-8.1.15-0 --checksum 3f3b9931aebc37c5a63dc6bc2ae1657dc0152054b787e64cd19b33a9e56024c3
+RUN bitnami-pkg unpack drupal-8.4.1-0 --checksum d99d08aaa80d03e851447648cadcca3352817e1c09f5aab9a51e7bd7606759a3
 
 COPY rootfs /
 
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.4.0-r0" \
+    BITNAMI_IMAGE_VERSION="8.4.1-r0" \
     DRUPAL_EMAIL="user@example.com" \
     DRUPAL_PASSWORD="bitnami" \
     DRUPAL_USERNAME="user" \
