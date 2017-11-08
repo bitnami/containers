@@ -41,7 +41,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-nod
 
 # Supported tags and respective `Dockerfile` links
 
- - [`8`, `8.9.0-r0` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.9.0-r0/8/Dockerfile), [`8-prod`, `8.9.0-r0-prod` (8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.9.0-r0/8/prod/Dockerfile)
+ - [`8`, `8.9.1-r0` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.9.1-r0/8/Dockerfile), [`8-prod`, `8.9.1-r0-prod` (8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.9.1-r0/8/prod/Dockerfile)
  - [`7`, `7.10.1-r3` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-r3/7/Dockerfile), [`7-prod`, `7.10.1-r3-prod` (7/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-r3/7/prod/Dockerfile)
  - [`6`, `6.12.0-r0`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.12.0-r0/6/Dockerfile), [`6-prod`, `6.12.0-r0-prod` (6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.12.0-r0/6/prod/Dockerfile)
  - [`4`, `4.8.6-r0` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/4.8.6-r0/4/Dockerfile), [`4-prod`, `4.8.6-r0-prod` (4/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/4.8.6-r0/4/prod/Dockerfile)
