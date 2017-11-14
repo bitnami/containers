@@ -2,6 +2,7 @@ FROM bitnami/minideb-extras:jessie-r22
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    BITNAMI_PKG_EXTRA_DIRS="/bitnami/mariadb/conf" \
     HOME="/"
 
 # Install required system packages and dependencies
@@ -12,7 +13,7 @@ COPY rootfs /
 
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.1.28-r2" \
+    BITNAMI_IMAGE_VERSION="10.1.28-r3" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
