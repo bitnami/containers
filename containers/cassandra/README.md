@@ -173,11 +173,10 @@ cassandra:
 Available variables:
 
  - `CASSANDRA_TRANSPORT_PORT_NUMBER`: Inter-node cluster communication port. Default: **7000**
- - `CASSANDRA_SSL_TRANSPORT_PORT_NUMBER`: SSL inter-node cluster communication port. Default: **7001**
  - `CASSANDRA_JMX_PORT_NUMBER`: JMX connections port. Default: **7199**
  - `CASSANDRA_CQL_PORT_NUMBER`: Client port. Default: **9042**.
- - `CASSANDRA_RPC_PORT_NUMBER`: Thrift RPC service connection port. Default: **9160**
  - `CASSANDRA_USER`: Cassandra user name. Defaults: **cassandra**
+ - `CASSANDRA_PASSWORD_SEEDER`: Password seeder will change the Cassandra default credentials at initialization. In clusters, only one node should be marked as password seeder. Default: **no**
  - `CASSANDRA_PASSWORD`: Cassandra user password. Default: **cassandra**
  - `CASSANDRA_HOST`: Hostname used to configure Cassandra. It can be either an IP or a domain. If left empty, it will be resolved to the machine IP.
  - `CASSANDRA_CLUSTER_NAME`: Cluster name to configure Cassandra.. Defaults: **My Cluster**
@@ -186,10 +185,11 @@ Available variables:
 
 ## Setting the server password on first run
 
-Passing the `CASSANDRA_PASSWORD` environment variable when running the image for the first time will set the Cassandra server password to the value of `CASSANDRA_PASSWORD`.
+Passing the `CASSANDRA_PASSWORD` environment variable along with `CASSANDRA_PASSWORD_SEEDER=yes` when running the image for the first time will set the Cassandra server password to the value of `CASSANDRA_PASSWORD`.
 
 ```bash
 $ docker run --name cassandra \
+    -e CASSANDRA_PASSWORD_SEEDER=yes \
     -e CASSANDRA_PASSWORD=password123 \
     bitnami/cassandra:latest
 ```
@@ -200,6 +200,7 @@ or using Docker Compose:
 cassandra:
   image: bitnami/cassandra:latest
   environment:
+    - CASSANDRA_PASSWORD_SEEDER=yes
     - CASSANDRA_PASSWORD=password123
 ```
 
@@ -208,9 +209,11 @@ cassandra:
 A cluster can easily be setup with the Bitnami Cassandra Docker Image using the following environment variables
 
  - `CASSANDRA_HOST`: Hostname used to configure Cassandra. It can be either an IP or a domain. If left empty, it will be resolved to the machine IP.
- - `CASSANDRA_CLUSTER_NAME`: Cluster name to configure Cassandra.. Defaults: **My Cluster**
+ - `CASSANDRA_CLUSTER_NAME`: Cluster name to configure Cassandra. Defaults: **My Cluster**
  - `CASSANDRA_SEEDS`: Hosts that will act as Cassandra seeds. No defaults.
  - `CASSANDRA_ENDPOINT_SNITCH`: Snitch name (which determines which data centers and racks nodes belong to). Default **SimpleSnitch**
+ - `CASSANDRA_PASSWORD_SEEDER`: Password seeder will change the Cassandra default credentials at initialization. Only one node should be marked as password seeder. Default: **no**
+ - `CASSANDRA_PASSWORD`: Cassandra user password. Default: **cassandra**
 
 ### Step 1: Create a new network.
 
@@ -226,6 +229,8 @@ $ docker run --name cassandra-node1 \
   -p 9042:9042 \
   -e CASSANDRA_CLUSTER_NAME=cassandra-cluster \
   -e CASSANDRA_SEEDS=cassandra-node1,cassandra-node2 \
+  -e CASSANDRA_PASSWORD_SEEDER=yes \
+  -e CASSANDRA_PASSWORD=mypassword \
   bitnami/cassandra:latest
 ```
 In the above command the container is added to a cluster named `cassandra-cluster` using the `CASSANDRA_CLUSTER_NAME`. The `CASSANDRA_CLUSTER_HOSTS` parameter set the name of the nodes that set the cluster so we will need to launch other container for the second node. Finally the `CASSANDRA_NODE_NAME` parameter allows to indicate a known name for the node, otherwise cassandra will generate a randon one.
@@ -237,6 +242,7 @@ $ docker run --name cassandra-node2 \
   --net=cassandra_network \
   -e CASSANDRA_CLUSTER_NAME=cassandra-cluster \
   -e CASSANDRA_SEEDS=cassandra-node1,cassandra-node2 \
+  -e CASSANDRA_PASSWORD=mypassword \
   bitnami/cassandra:latest
 ```
 
@@ -254,12 +260,15 @@ services:
     environment:
       - CASSANDRA_CLUSTER_NAME=cassandra-cluster
       - CASSANDRA_SEEDS=cassandra-node1,cassandra-node2
+      - CASSANDRA_PASSWORD_SEEDER=yes
+      - CASSANDRA_PASSWORD=password123
 
   cassandra-node2:
     image: bitnami/cassandra:latest
     environment:
       - CASSANDRA_CLUSTER_NAME=cassandra-cluster
       - CASSANDRA_SEEDS=cassandra-node1,cassandra-node2
+      - CASSANDRA_PASSWORD=password123
 ```
 
 ## Configuration file
