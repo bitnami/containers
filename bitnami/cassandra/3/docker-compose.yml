@@ -7,11 +7,12 @@ services:
       kompose.service.type: nodeport
     ports:
       - '7000:7000'
-      - '7001:7001'
       - '9042:9042'
-      - '9160:9160'
     volumes:
       - 'cassandra_data:/bitnami'
+    environment:
+      - CASSANDRA_PASSWORD_SEEDER=yes
+      - CASSANDRA_PASSWORD=cassandra
 volumes:
   cassandra_data:
     driver: local
