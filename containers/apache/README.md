@@ -173,7 +173,7 @@ For example, in order add a vhost for `www.example.com`:
 
 ```bash
 $ docker run --name apache \
-  -v /path/to/my_vhost.conf:/bitnami/apache/conf/vhost/my_vhost.conf:ro \
+  -v /path/to/my_vhost.conf:/bitnami/apache/conf/vhosts/my_vhost.conf:ro \
   bitnami/apache:latest
 ```
 
@@ -189,7 +189,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - /path/to/my_vhost.conf:/bitnami/apache/conf/vhost/my_vhost.conf:ro
+      - /path/to/my_vhost.conf:/bitnami/apache/conf/vhosts/my_vhost.conf:ro
 ```
 
 ## Using custom SSL certificates
