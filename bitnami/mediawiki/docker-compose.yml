@@ -9,7 +9,7 @@ services:
     volumes:
       - 'mariadb_data:/bitnami'
   mediawiki:
-    image: 'bitnami/mediawiki:1'
+    image: 'bitnami/mediawiki:latest'
     labels:
       kompose.service.type: nodeport
     environment:
