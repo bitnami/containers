@@ -52,20 +52,27 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_ghost
+      - MARIADB_DATABASE=bitnami_ghost
     volumes:
       - 'mariadb_data:/bitnami'
   ghost:
-    image: 'bitnami/ghost:latest'
+    image: 'bitnami/ghost:1'
     labels:
       kompose.service.type: nodeport
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - GHOST_DATABASE_USER=bn_ghost
+      - GHOST_DATABASE_NAME=bitnami_ghost
+      - ALLOW_EMPTY_PASSWORD=yes
+      - GHOST_HOST=localhost
     ports:
       - '80:2368'
     volumes:
       - 'ghost_data:/bitnami'
     depends_on:
       - mariadb
-    environment:
-      - GHOST_HOST=localhost
 volumes:
   mariadb_data:
     driver: local
@@ -83,23 +90,35 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker network create ghost-tier
   ```
 
-2. Start a MariaDB database in the network generated:
+2. Create a volume for MariaDB persistence and create a MariaDB container
 
-   ```bash
-   $ docker run -d --name mariadb --net=ghost-tier \
-      -e ALLOW_EMPTY_PASSWORD=yes \
-      bitnami/mariadb
-   ```
+  ```bash
+  $ docker volume create --name mariadb_data
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_ghost \
+    -e MARIADB_DATABASE=bitnami_ghost \
+    --net ghost-tier \
+    --volume mariadb_data:/bitnami \
+    bitnami/mariadb:latest
+  ```
 
    *Note:* You need to give the container a name in order to Ghost to resolve the host
 
-3. Run the Ghost container:
+3. Create volumes for Ghost persistence and launch the container
 
   ```bash
-  $ docker run -d -p 80:2368 --name ghost --net=ghost-tier bitnami/ghost
+  $ docker volume create --name ghost_data
+  $ docker run -d --name ghost -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e GHOST_DATABASE_USER=bn_ghost \
+    -e GHOST_DATABASE_NAME=bitnami_ghost \
+    --net ghost-tier \
+    --volume ghost_data:/bitnami \
+    bitnami/ghost:latest
   ```
 
-Then you can access your application at http://your-ip/
+Access your application at http://your-ip/
 
 > **Note!** If you want to access your application from a public IP or hostname you need to properly configured Ghost . You can handle it adjusting the configuration of the instance by setting the environment variable `GHOST_HOST` to your public IP or hostname.
 
@@ -125,6 +144,8 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_ghost
+      - MARIADB_DATABASE=bitnami_ghost
     volumes:
       - /path/to/mariadb-persistence:/bitnami
   ghost:
@@ -133,6 +154,11 @@ services:
       - mariadb
     ports:
       - '80:2368'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - GHOST_DATABASE_USER=bn_ghost
+      - GHOST_DATABASE_NAME=bitnami_ghost
+      - GHOST_HOST=localhost
     volumes:
       - '/path/to/ghost-persistence:/bitnami'
 ```
@@ -152,6 +178,8 @@ In this case you need to specify the directories to mount on the run command. Th
   ```bash
   $ docker run -d --name mariadb --net ghost-tier \
     -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_ghost \
+    -e MARIADB_DATABASE=bitnami_ghost \
     --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
   ```
@@ -161,7 +189,12 @@ In this case you need to specify the directories to mount on the run command. Th
 3. Create the Ghost container with host volumes:
 
   ```bash
-  $ docker run -d --name ghost -p 80:2368 --net ghost-tier \
+  $ docker run -d --name ghost -p 80:2368 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e GHOST_DATABASE_USER=bn_ghost \
+    -e GHOST_DATABASE_NAME=bitnami_ghost \
+    -e GHOST_HOST=localhost \
+    --net ghost-tier \
     --volume /path/to/ghost-persistence:/bitnami \
     bitnami/ghost:latest
   ```
@@ -228,18 +261,36 @@ ghost:
 ```
 
 Available variables:
- - `GHOST_HOST`: Hostname for Ghost.
- - `GHOST_PORT_NUMBER`: Port number used in the generated application URLs. Default: **80**
- - `GHOST_USERNAME`: Ghost application username. Default: **user**
- - `GHOST_PASSWORD`: Ghost application password. Minimum length is 10 characters. Default: **bitnami123**
- - `GHOST_EMAIL`: Ghost application email. Default: **user@example.com**
- - `BLOG_TITLE`: Ghost blog title. Default: **User's Blog**
- - `MARIADB_USER`: Root user for the MariaDB database. By default: root.
- - `MARIADB_PASSWORD`: Root password for the MariaDB database.
- - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
- - `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 
-### SMTP Configuration
+##### User and Site configuration
+- `GHOST_HOST`: Hostname for Ghost.
+- `GHOST_PORT_NUMBER`: Port number used in the generated application URLs. Default: **80**
+- `GHOST_USERNAME`: Ghost application username. Default: **user**
+- `GHOST_PASSWORD`: Ghost application password. Minimum length is 10 characters. Default: **bitnami123**
+- `GHOST_EMAIL`: Ghost application email. Default: **user@example.com**
+- `BLOG_TITLE`: Ghost blog title. Default: **User's Blog**
+
+##### Use an existing database
+
+- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `GHOST_DATABASE_NAME`: Database name that Ghost will use to connect with the database. Default: **bitnami_ghost**
+- `GHOST_DATABASE_USER`: Database user that Ghost will use to connect with the database. Default: **bn_ghost**
+- `GHOST_DATABASE_PASSWORD`: Database password that Ghost will use to connect with the database. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### Create a database for Ghost using mysql-client
+
+- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `MARIADB_ROOT_USER`: Database admin user. Default: **root**
+- `MARIADB_ROOT_PASSWORD`: Database password for the `MARIADB_ROOT_USER` user. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### SMTP Configuration
 
 To configure Ghost to send email using SMTP you can set the following environment variables:
  - `SMTP_HOST`: SMTP host.
@@ -258,6 +309,10 @@ This would be an example of SMTP configuration using a GMail account:
     ports:
       - 80:2368
     environment:
+      - GHOST_HOST=localhost
+      - ALLOW_EMPTY_PASSWORD=yes
+      - GHOST_DATABASE_USER=bn_ghost
+      - GHOST_DATABASE_NAME=bitnami_ghost
       - SMTP_HOST=smtp.gmail.com
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
@@ -268,6 +323,10 @@ This would be an example of SMTP configuration using a GMail account:
 
 ```bash
  $ docker run -d -p 80:2368 --name ghost --network=ghost-tier \
+    -e GHOST_HOST=localhost \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e GHOST_DATABASE_USER=bn_ghost \
+    -e GHOST_DATABASE_NAME=bitnami_ghost \
     -e SMTP_HOST=smtp.gmail.com \
     -e SMTP_SERVICE=GMail \
     -e SMTP_USER=your_email@gmail.com \

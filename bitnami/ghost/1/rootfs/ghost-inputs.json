@@ -1,9 +1,10 @@
 {
   "blogTitle": "{{$global.env.BLOG_TITLE}}",
-  "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
-  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
+  "databaseName": "{{$global.env.GHOST_DATABASE_NAME}}",
+  "databasePassword": "{{$global.env.GHOST_DATABASE_PASSWORD}}",
   "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
   "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
+  "databaseUser": "{{$global.env.GHOST_DATABASE_USER}}",
   "email": "{{$global.env.GHOST_EMAIL}}",
   "host": "{{$global.env.GHOST_HOST}}",
   "password": "{{$global.env.GHOST_PASSWORD}}",
