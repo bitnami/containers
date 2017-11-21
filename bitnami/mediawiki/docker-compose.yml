@@ -4,12 +4,20 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_mediawiki
+      - MARIADB_DATABASE=bitnami_mediawiki
     volumes:
       - 'mariadb_data:/bitnami'
   mediawiki:
-    image: 'bitnami/mediawiki:latest'
+    image: 'bitnami/mediawiki:1'
     labels:
       kompose.service.type: nodeport
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - MEDIAWIKI_DATABASE_USER=bn_mediawiki
+      - MEDIAWIKI_DATABASE_NAME=bitnami_mediawiki
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '80:80'
       - '443:443'
@@ -22,3 +30,4 @@ volumes:
     driver: local
   mediawiki_data:
     driver: local
+
