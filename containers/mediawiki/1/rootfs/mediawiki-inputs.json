@@ -1,8 +1,9 @@
 {
-  "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
-  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
+  "databaseName": "{{$global.env.MEDIAWIKI_DATABASE_NAME}}",
+  "databasePassword": "{{$global.env.MEDIAWIKI_DATABASE_PASSWORD}}",
   "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
   "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
+  "databaseUser": "{{$global.env.MEDIAWIKI_DATABASE_USER}}",
   "email": "{{$global.env.MEDIAWIKI_EMAIL}}",
   "password": "{{$global.env.MEDIAWIKI_PASSWORD}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",

@@ -58,10 +58,20 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_mediawiki
+      - MARIADB_DATABASE=bitnami_mediawiki
     volumes:
       - 'mariadb_data:/bitnami'
   mediawiki:
-    image: 'bitnami/mediawiki:latest'
+    image: 'bitnami/mediawiki:1'
+    labels:
+      kompose.service.type: nodeport
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - MEDIAWIKI_DATABASE_USER=bn_mediawiki
+      - MEDIAWIKI_DATABASE_NAME=bitnami_mediawiki
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '80:80'
       - '443:443'
@@ -86,20 +96,33 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker network create mediawiki-tier
   ```
 
-2. Start a MariaDB database in the network generated:
+2. Create a volume for MariaDB persistence and create a MariaDB container
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net mediawiki-tier bitnami/mariadb:latest
+  $ docker volume create --name mariadb_data
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_mediawiki \
+    -e MARIADB_DATABASE=bitnami_mediawiki \
+    --net mediawiki-tier \
+    --volume mariadb_data:/bitnami \
+    bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order for Mediawiki to resolve the host
 
-3. Run the Mediawiki container:
+3. Create volumes for MediaWiki persistence and launch the container
 
   ```bash
-  $ docker run -d -p 80:80 -p 443:443 --name mediawiki --net mediawiki-tier bitnami/mediawiki:latest
+  $ docker volume create --name mediawiki_data
+  $ docker run -d --name mediawiki -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MEDIAWIKI_DATABASE_USER=bn_mediawiki \
+    -e MEDIAWIKI_DATABASE_NAME=bitnami_mediawiki \
+    --net mediawiki-tier \
+    --volume mediawiki_data:/bitnami \
+    bitnami/mediawiki:latest
   ```
-
 Then you can access your application at http://your-ip/
 
 ## Persisting your application
@@ -124,6 +147,8 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_mediawiki
+      - MARIADB_DATABASE=bitnami_mediawiki
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
   mediawiki:
@@ -133,6 +158,10 @@ services:
     ports:
       - '80:80'
       - '443:443'
+    environment:
+      - MEDIAWIKI_DATABASE_USER=bn_mediawiki
+      - MEDIAWIKI_DATABASE_NAME=bitnami_mediawiki
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '/path/to/mediawiki-persistence:/bitnami'
 ```
@@ -150,7 +179,10 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Create a MariaDB container with host volume:
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_mediawiki \
+    -e MARIADB_DATABASE=bitnami_mediawiki \
     --net mediawiki-tier \
     --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
@@ -162,6 +194,9 @@ In this case you need to specify the directories to mount on the run command. Th
 
   ```bash
   $ docker run -d --name mediawiki -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MEDIAWIKI_DATABASE_USER=bn_mediawiki \
+    -e MEDIAWIKI_DATABASE_NAME=bitnami_mediawiki \
     --net mediawiki-tier \
     --volume /path/to/mediawiki-persistence:/bitnami \
     bitnami/mediawiki:latest
@@ -232,24 +267,42 @@ mediawiki:
 
 Available variables:
 
- - `MEDIAWIKI_USERNAME`: Mediawiki application username. Default: **user**
- - `MEDIAWIKI_PASSWORD`: Mediawiki application password. Default: **bitnami1**
- - `MEDIAWIKI_EMAIL`: Mediawiki application email. Default: **user@example.com**
- - `MEDIAWIKI_WIKI_NAME`: Mediawiki wiki name. Default: **Bitnami MediaWiki**
- - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
- - `MARIADB_PASSWORD`: Root password for the MariaDB.
- - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
- - `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+##### User and Site configuration
 
-### SMTP Configuration
+- `MEDIAWIKI_USERNAME`: Mediawiki application username. Default: **user**
+- `MEDIAWIKI_PASSWORD`: Mediawiki application password. Default: **bitnami1**
+- `MEDIAWIKI_EMAIL`: Mediawiki application email. Default: **user@example.com**
+- `MEDIAWIKI_WIKI_NAME`: Mediawiki wiki name. Default: **Bitnami MediaWiki**
+
+##### Use an existing database
+
+- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `MEDIAWIKI_DATABASE_NAME`: Database name that MediaWiki will use to connect with the database. Default: **bitnami_mediawiki**
+- `MEDIAWIKI_DATABASE_USER`: Database user that MediaWiki will use to connect with the database. Default: **bn_mediawiki**
+- `MEDIAWIKI_DATABASE_PASSWORD`: Database password that MediaWiki will use to connect with the database. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### Create a database for MediaWiki using mysql-client
+
+- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `MARIADB_ROOT_USER`: Database admin user. Default: **root**
+- `MARIADB_ROOT_PASSWORD`: Database password for the `MARIADB_ROOT_USER` user. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### SMTP Configuration
 
 To configure Mediawiki to send email using SMTP you can set the following environment variables:
 
- - `SMTP_HOST`: SMTP host.
- - `SMTP_HOST_ID`: SMTP host ID.
- - `SMTP_PORT`: SMTP port.
- - `SMTP_USER`: SMTP account user.
- - `SMTP_PASSWORD`: SMTP account password.
+- `SMTP_HOST`: SMTP host.
+- `SMTP_HOST_ID`: SMTP host ID.
+- `SMTP_PORT`: SMTP port.
+- `SMTP_USER`: SMTP account user.
+- `SMTP_PASSWORD`: SMTP account password.
 
 This would be an example of SMTP configuration using a GMail account:
 
@@ -262,6 +315,9 @@ This would be an example of SMTP configuration using a GMail account:
       - 80:80
       - 443:443
     environment:
+      - MEDIAWIKI_DATABASE_USER=bn_mediawiki
+      - MEDIAWIKI_DATABASE_NAME=bitnami_mediawiki
+      - ALLOW_EMPTY_PASSWORD=yes
       - SMTP_HOST=ssl://smtp.gmail.com
       - SMTP_HOST_ID=mydomain.com
       - SMTP_PORT=465
@@ -272,6 +328,8 @@ This would be an example of SMTP configuration using a GMail account:
 
   ```bash
   $ docker run -d --name mediawiki -p 80:80 -p 443:443 \
+    -e MEDIAWIKI_DATABASE_USER=bn_mediawiki \
+    -e MEDIAWIKI_DATABASE_NAME=bitnami_mediawiki \
     -e SMTP_HOST=ssl://smtp.gmail.com \
     -e SMTP_HOST_ID=mydomain.com \
     -e SMTP_PORT=465 \
