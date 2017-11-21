@@ -57,11 +57,20 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_drupal
+      - MARIADB_DATABASE=bitnami_drupal
     volumes:
       - 'mariadb_data:/bitnami'
-
   drupal:
-    image: 'bitnami/drupal:latest'
+    image: 'bitnami/drupal:8'
+    labels:
+      kompose.service.type: nodeport
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - DRUPAL_DATABASE_USER=bn_drupal
+      - DRUPAL_DATABASE_NAME=bitnami_drupal
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '80:80'
       - '443:443'
@@ -69,7 +78,6 @@ services:
       - 'drupal_data:/bitnami'
     depends_on:
       - mariadb
-
 volumes:
   mariadb_data:
     driver: local
@@ -87,21 +95,33 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker network create drupal-tier
   ```
 
-2. Start a MariaDB database in the network generated:
+2. Create a volume for MariaDB persistence and create a MariaDB container
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net drupal-tier bitnami/mariadb:latest
+  $ docker volume create --name mariadb_data
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_drupal \
+    -e MARIADB_DATABASE=bitnami_drupal \
+    --net drupal-tier \
+    --volume mariadb_data:/bitnami \
+    bitnami/mariadb:latest
   ```
 
-  *Note:* You need to give the container a name in order to Drupal to resolve the host
-
-3. Run the Drupal container:
+3. Create volumes for Drupal persistence and launch the container
 
   ```bash
-  $ docker run -d -p 80:80 -p 443:443 --name drupal --net drupal-tier bitnami/drupal:latest
+  $ docker volume create --name drupal_data
+  $ docker run -d --name drupal -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e DRUPAL_DATABASE_USER=bn_drupal \
+    -e DRUPAL_DATABASE_NAME=bitnami_drupal \
+    --net drupal-tier \
+    --volume drupal_data:/bitnami \
+    bitnami/drupal:latest
   ```
 
-Then you can access your application at http://your-ip/
+Access your application at http://your-ip/
 
 ## Persisting your application
 
@@ -125,6 +145,8 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_drupal
+      - MARIADB_DATABASE=bitnami_drupal
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
   drupal:
@@ -134,6 +156,10 @@ services:
     ports:
       - '80:80'
       - '443:443'
+    environment:
+      - DRUPAL_DATABASE_USER=bn_drupal
+      - DRUPAL_DATABASE_NAME=bitnami_drupal
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '/path/to/drupal-persistence:/bitnami'
 ```
@@ -149,7 +175,10 @@ services:
 2. Create a MariaDB container with host volume:
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_drupal \
+    -e MARIADB_DATABASE=bitnami_drupal \
     --net drupal-tier \
     --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
@@ -161,6 +190,9 @@ services:
 
   ```bash
   $ docker run -d --name drupal -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e DRUPAL_DATABASE_USER=bn_drupal \
+    -e DRUPAL_DATABASE_NAME=bitnami_drupal \
     --net drupal-tier \
     --volume /path/to/drupal-persistence:/bitnami \
     bitnami/drupal:latest
@@ -231,13 +263,31 @@ drupal:
 
 Available variables:
 
+##### User and Site configuration
+
  - `DRUPAL_USERNAME`: Drupal application username. Default: **user**
  - `DRUPAL_PASSWORD`: Drupal application password. Default: **bitnami**
  - `DRUPAL_EMAIL`: Drupal application email. Default: **user@example.com**
- - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
- - `MARIADB_PASSWORD`: Root password for the MariaDB.
- - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
- - `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+
+##### Use an existing database
+
+- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `DRUPAL_DATABASE_NAME`: Database name that Drupal will use to connect with the database. Default: **bitnami_drupal**
+- `DRUPAL_DATABASE_USER`: Database user that Drupal will use to connect with the database. Default: **bn_drupal**
+- `DRUPAL_DATABASE_PASSWORD`: Database password that Drupal will use to connect with the database. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### Create a database for Drupal using mysql-client
+
+- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `MARIADB_ROOT_USER`: Database admin user. Default: **root**
+- `MARIADB_ROOT_PASSWORD`: Database password for the `MARIADB_ROOT_USER` user. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 # Contributing
 
