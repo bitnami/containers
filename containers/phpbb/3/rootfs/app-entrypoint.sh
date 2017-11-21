@@ -4,10 +4,10 @@
 . /opt/bitnami/base/helpers
 
 print_welcome_page
-check_for_updates &
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
-  nami_initialize apache php phpbb
+  . /init.sh
+  nami_initialize apache php mysql-client phpbb
   info "Starting phpbb... "
 fi
 
