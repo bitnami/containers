@@ -1,5 +1,5 @@
 
-FROM bitnami/java:latest as development
+FROM bitnami/java:1.8 as development
 
 FROM bitnami/minideb:jessie
 LABEL maintainer "Bitnami <containers@bitnami.com>"
