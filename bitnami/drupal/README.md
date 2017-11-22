@@ -1,6 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-drupal/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-drupal/tree/master)
 [![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
-[![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-drupal/master/kubernetes.yml)
 
 # What is Drupal?
 
@@ -15,16 +14,6 @@ https://www.drupal.org/
 ```bash
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-drupal/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
-```
-
-## Kubernetes
-
-> **WARNING:** This is a beta configuration, currently unsupported.
-
-Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
-
-```bash
-$ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-drupal/master/kubernetes.yml
 ```
 
 # Why use Bitnami Images?
