@@ -20,7 +20,7 @@ if [[ "$ALLOW_EMPTY_PASSWORD" =~ ^(yes|Yes|YES)$ ]]; then
 else
   # Database creation by MySQL client
   if [[ -n "$MYSQL_CLIENT_CREATE_DATABASE_USER" && -z "$MYSQL_CLIENT_CREATE_DATABASE_PASSWORD" ]]; then
-    empty_password_error MSQL_CLIENT_CREATE_DATABASE_PASSWORD
+    empty_password_error MYSQL_CLIENT_CREATE_DATABASE_PASSWORD
   fi
   # WordPress database
   if [[ -z "$WORDPRESS_DATABASE_PASSWORD" ]]; then
