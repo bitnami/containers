@@ -3,6 +3,7 @@
   "zookeeperClientPassword": "{{$global.env.ZOO_CLIENT_PASSWORD}}",
   "zookeeperClientUser": "{{$global.env.ZOO_CLIENT_USER}}",
   "zookeeperEnableAuth": "{{$global.env.ZOO_ENABLE_AUTH}}",
+  "zookeeperHeapSize": "{{$global.env.ZOO_HEAP_SIZE}}",
   "zookeeperId": "{{$global.env.ZOO_SERVER_ID}}",
   "zookeeperInitLimit": "{{$global.env.ZOO_INIT_LIMIT}}",
   "zookeeperJvmFlags": "{{$global.env.JVMFLAGS}}",

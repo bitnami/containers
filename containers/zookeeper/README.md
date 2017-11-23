@@ -172,14 +172,15 @@ The configuration can easily be setup with the Bitnami Zookeeper Docker image us
  - `ZOO_TICK_TIME`: Basic time unit in milliseconds used by ZooKeeper for heartbeats. Default: **2000**
  - `ZOO_INIT_LIMIT`: ZooKeeper uses to limit the length of time the ZooKeeper servers in quorum have to connect to a leader. Default: **10**
  - `ZOO_SYNC_LIMIT`: How far out of date a server can be from a leader. Default: **5**
- - `ZOO_SERVERS`: Comma, space or colon separated list of servers. Example: server.1=zoo1:2888:3888,server.2=zoo2:2888:3888. No defaults.
+ - `ZOO_SERVERS`: Comma, space or colon separated list of servers. Example: zoo1:2888:3888,zoo2:2888:3888. No defaults.
  - `ZOO_CLIENT_USER`: User that will use Zookeeper clients to auth. Default: No defaults.
  - `ZOO_CLIENT_PASSWORD`: Password that will use Zookeeper clients to auth. No defaults.
  - `ZOO_SERVER_USERS`: Comma, semicolon or whitespace separated  list of user to be created.  Example: user1,user2,admin. No defaults
  - `ZOO_SERVER_PASSWORDS`: Comma, semicolo or whitespace separated list of passwords to assign to users when created. Example: pass4user1, pass4user2, pass4admin. No defaults
  - `ZOO_ENABLE_AUTH`: Enable Zookeeper auth. It uses SASL/Digest-MD5. Default: **no**
+ - `ZOO_HEAP_SIZE`: Size in MB for the Java Heap options (Xmx and XMs). This env var is ignored if Xmx an Xms are configured via `JVMFLAGS`. Default: **1024**
  - `ALLOW_ANONYMOUS_LOGIN`: If set to true, Allow to accept connections from unauthenticated users. Default: **no**
- - `JVMFLAGS`: Default JVMFLAGS for the ZooKeeper process. Default: **-Xmx1024m -Xms1024m**
+ - `JVMFLAGS`: Default JVMFLAGS for the ZooKeeper process. No defaults
 
 
 ```bash
@@ -285,11 +286,11 @@ services:
 
 A Zookeeper (https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html) cluster can easily be setup with the Bitnami Zookeeper Docker image using the following environment variables:
 
- - `ZOO_SERVERS`: Comma or colon separated list of servers. Example: server.1=zoo1:2888:3888,server.2=zoo2:2888:3888. No defaults.
+ - `ZOO_SERVERS`: Comma or colon separated list of servers. Example: zoo1:2888:3888,zoo2:2888:3888. No defaults.
 
 For reliable ZooKeeper service, you should deploy ZooKeeper in a cluster known as an ensemble. As long as a majority of the ensemble are up, the service will be available. Because Zookeeper requires a majority, it is best to use an odd number of machines. For example, with four machines ZooKeeper can only handle the failure of a single machine; if two machines fail, the remaining two machines do not constitute a majority. However, with five machines ZooKeeper can handle the failure of two machines.
 
-You have to use 0.0.0.0 as the host for the server. More concretely, if the ID of the zookeeper1 container starting is 1, then the ZOO_SERVERS environment variable has to be server.1=0.0.0.0:2888:3888,server.2=zookeeper2:2888:3888.server3=zookeeper3:2888:3888. See below:
+You have to use 0.0.0.0 as the host for the server. More concretely, if the ID of the zookeeper1 container starting is 1, then the ZOO_SERVERS environment variable has to be 0.0.0.0:2888:3888,zookeeper2:2888:3888.zookeeper3:2888:3888. See below:
 
 Create a Docker network to enable visibility to each other via the docker container name
 
@@ -307,7 +308,7 @@ The first step is to create one  Zookeeper instance.
 docker run --name zookeeper1 \
   --network app-tier \
   -e ZOO_SERVER_ID=1 \
-  -e ZOO_SERVERS=server.1=0.0.0.0:2888:3888,server.2=zookeeper2:2888:3888,server.3=zookeeper3:2888:3888 \
+  -e ZOO_SERVERS=0.0.0.0:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888 \
   -p 2181:2181 \
   -p 2888:2888 \
   -p 3888:3888 \
@@ -322,7 +323,7 @@ Next we start a new Zookeeper container.
 docker run --name zookeeper2 \
   --network app-tier \
   -e ZOO_SERVER_ID=2 \
-  -e ZOO_SERVERS=server.1=zookeeper1:2888:3888,server.2=0.0.0.0:2888:3888,server.3=zookeeper3:2888:3888 \
+  -e ZOO_SERVERS=zookeeper1:2888:3888,0.0.0.0:2888:3888,zookeeper3:2888:3888 \
   -p 2181:2181 \
   -p 2888:2888 \
   -p 3888:3888 \
@@ -337,7 +338,7 @@ Next we start another new Zookeeper container.
 docker run --name zookeeper3 \
   --network app-tier \
   -e ZOO_SERVER_ID=3 \
-  -e ZOO_SERVERS=server.1=zookeeper1:2888:3888,server.2=zookeeper2:2888:3888,server.3=0.0.0.0:2888:3888 \
+  -e ZOO_SERVERS=zookeeper1:2888:3888,zookeeper2:2888:3888,0.0.0.0:2888:3888 \
   -p 2181:2181 \
   -p 2888:2888 \
   -p 3888:3888 \
@@ -361,7 +362,7 @@ services:
       - /path/to/zookeeper-persistence:/bitnami/zookeeper
     environment:
       - ZOO_SERVER_ID=1
-      - ZOO_SERVERS=server.1=0.0.0.0:2888:3888,server.2=zookeeper2:2888:3888,server.3=zookeeper3:2888:3888
+      - ZOO_SERVERS=0.0.0.0:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
   zookeeper2:
     image: 'bitnami/zookeeper:latest'
     ports:
@@ -372,7 +373,7 @@ services:
       - /path/to/zookeeper-persistence:/bitnami/zookeeper
     environment:
       - ZOO_SERVER_ID=2
-      - ZOO_SERVERS=server.1=zookeeper1:2888:3888,server.2=0.0.0.0:2888:3888,server.3=zookeeper3:2888:3888
+      - ZOO_SERVERS=zookeeper1:2888:3888,0.0.0.0:2888:3888,zookeeper3:2888:3888
   zookeeper3:
     image: 'bitnami/zookeeper:latest'
     ports:
@@ -383,7 +384,7 @@ services:
       - /path/to/zookeeper-persistence:/bitnami/zookeeper
     environment:
       - ZOO_SERVER_ID=3
-      - ZOO_SERVERS=server.1=zookeeper1:2888:3888,server.2=zookeeper2:2888:3888,server.3=0.0.0.0:2888:3888
+      - ZOO_SERVERS=zookeeper1:2888:3888,zookeeper2:2888:3888,0.0.0.0:2888:3888
 ```
 
 # Logging

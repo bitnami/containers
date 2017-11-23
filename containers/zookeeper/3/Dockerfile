@@ -1,24 +1,24 @@
-FROM bitnami/minideb-extras:jessie-r20
+FROM bitnami/minideb-extras:jessie-r22
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/"
 
 # Install required system packages and dependencies
-RUN install_packages libc6 libffi6 libgcc1 libglib2.0-0 liblzma5 libpcre3 libselinux1 libstdc++6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 zlib1g
-RUN bitnami-pkg install java-1.8.141-0 --checksum 5e3e833f2899154285a7feb3d1511f26493f6091774ea90698c71866629991ff
-RUN bitnami-pkg unpack zookeeper-3.4.10-3 --checksum 58f430cc3b0959557dfb186c4388d915af2f1a2900cf1a8c2434544e81a39410
+RUN bitnami-pkg install java-1.8.151-0 --checksum fbbea572d89988035aee16eefe53c852e8abfda84f6c7cf5c9a4772a72863143
+RUN bitnami-pkg unpack zookeeper-3.4.10-4 --checksum f6b0687e1c872005645fbd043fbab1647a0045302e69fe0d7d32aee0d626d92a
 
 COPY rootfs /
 
 ENV ALLOW_ANONYMOUS_LOGIN="no" \
     BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.4.10-r4" \
-    JVMFLAGS="-Xmx1024m -Xms1024m" \
+    BITNAMI_IMAGE_VERSION="3.4.10-r5" \
+    JVMFLAGS="" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH" \
     ZOO_CLIENT_PASSWORD="" \
     ZOO_CLIENT_USER="" \
     ZOO_ENABLE_AUTH="no" \
+    ZOO_HEAP_SIZE="1024" \
     ZOO_INIT_LIMIT="10" \
     ZOO_PORT_NUMBER="2181" \
     ZOO_SERVERS="" \
