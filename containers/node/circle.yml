@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "9,8,7,6,4"
+          RELEASE_SERIES_LIST: "9,8,7,6"
           LATEST_STABLE: "6"
           IMAGE_NAME: node
           CHART_NAME: node
