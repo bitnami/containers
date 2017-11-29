@@ -1,0 +1,5 @@
+{
+  "elasticsearchPort": "{{$global.env.KIBANA_ELASTICSEARCH_PORT_NUMBER}}",
+  "elasticsearchURL": "{{$global.env.KIBANA_ELASTICSEARCH_URL}}",
+  "port": "{{$global.env.KIBANA_PORT_NUMBER}}"
+}
