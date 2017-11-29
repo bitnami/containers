@@ -1,7 +1,7 @@
 version: '2'
 services:
   elasticsearch:
-    image: 'bitnami/elasticsearch:5'
+    image: 'bitnami/elasticsearch:latest'
     volumes:
       - 'elasticsearch_data:/bitnami'
   kibana:
