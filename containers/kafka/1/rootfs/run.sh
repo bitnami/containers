@@ -16,7 +16,7 @@ if [[ -z "$KAFKA_BROKER_ID" ]]; then
     fi
 fi
 
-if [[ "$KAFKA_LISTENERS" =~ SASL_SSL ]]; then
+if [[ "$KAFKA_LISTENERS" =~ SASL ]]; then
     export KAFKA_OPTS="-Djava.security.auth.login.config=${KAFKA_HOME}/conf/kafka_jaas.conf"
 fi
 
