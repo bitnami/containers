@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "7.1,7.0,5.6"
+          RELEASE_SERIES_LIST: "7.2,7.1,7.0,5.6"
           LATEST_STABLE: "7.1"
           IMAGE_NAME: php-fpm
           DOCKER_PROJECT: bitnami
