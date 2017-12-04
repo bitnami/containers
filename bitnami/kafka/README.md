@@ -201,8 +201,6 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 - `KAFKA_DELETE_TOPIC_ENABLE`: Switch to enable topic deletion or not, default value is false. Default: **false**
 - `KAFKA_LISTENERS`: The address the socket server listens on. Default: **PLAINTEXT://:9092**
 - `KAFKA_ADVERTISED_LISTENERS`: Hostname and port the broker will advertise to producers and consumers. Default: **PLAINTEXT://:9092**
-- `KAFKA_ADVERTISED_PORT`: Kafka port for advertising. Default: **9092**
-- `KAFKA_ADVERTISED_HOST_NAME`: Kafka hostname for advertising. No default
 - `KAFKA_NUM_PARTITIONS`: The default number of log partitions per topic. Default: **1**
 - `KAFKA_NUM_RECOVERY_THREADS_PER_DATA_DIR` The number of threads per data directory to be used for log recovery at startup and flushing at shutdown. Default: **1**
 - `KAFKA_LOG_FLUSH_INTERVAL_MESSAGES`: The number of messages to accept before forcing a flush of data to disk. Default: **10000**
@@ -352,14 +350,14 @@ to work. You can find this files in the `/bitnami/kafka/config` directory
 Use this to generate messages using a secure setup
 
 ```bash
-cd /opt/bitnami/kafka/
-bin/kafka-console-producer.sh --broker-list broker:9092 --topic test --producer.config conf/producer.properties
+export KAFKA_OPTS="-Djava.security.auth.login.config=/opt/bitnami/kafka/conf/kafka_jaas.conf"
+kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic test --producer.config /opt/bitnami/kafka/conf/producer.properties
 ```
 Use this to consume messages using a secure setup
 
 ```bash
-cd /opt/bitnami/kafka/
-bin/kafka-console-consumer.sh --bootstrap-server broker:9092 --topic test --consumer.config conf/consumer.properties
+export KAFKA_OPTS="-Djava.security.auth.login.config=/opt/bitnami/kafka/conf/kafka_jaas.conf"
+kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic test --consumer.config /opt/bitnami/kafka/conf/consumer.properties
 ```
 If you use other tools to use your Kafka cluster, you'll need to provide the required information.
 You can find the required information in the files located at `/bitnami/kafka/conf` directory.

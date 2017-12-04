@@ -1,8 +1,6 @@
 {
   "allowPlaintextListener": "{{$global.env.ALLOW_PLAINTEXT_LISTENER}}",
-  "kafkaAdvertisedHostName": "{{$global.env.KAFKA_ADVERTISED_HOST_NAME}}",
   "kafkaAdvertisedListeners": "{{$global.env.KAFKA_ADVERTISED_LISTENERS}}",
-  "kafkaAdvertisedPort": "{{$global.env.KAFKA_ADVERTISED_PORT}}",
   "kafkaBrokerId": "{{$global.env.KAFKA_BROKER_ID}}",
   "kafkaBrokerPassword": "{{$global.env.KAFKA_BROKER_PASSWORD}}",
   "kafkaBrokerUser": "{{$global.env.KAFKA_BROKER_USER}}",
