@@ -7,15 +7,15 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libmysqlclient18 libncurses5 libreadline6 libsqlite3-0 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg install node-6.12.0-0 --checksum 40f925d35c877a20526039b908fc1adea4fb7dfae83634860c1e88bde5d751de
+RUN bitnami-pkg install node-8.9.1-0 --checksum 7069b5b90a4364153ffbf1be7a97e2dcbb8f9241e37141e0b5b3d4352a48d089
 RUN bitnami-pkg unpack mysql-client-10.1.29-0 --checksum 4b29436697f5fcdf38f3c9713a27208304fe36b858afc5aa5a7a4d3f17d84bac
-RUN bitnami-pkg unpack ghost-1.17.3-1 --checksum 186e8b042119be399176240d36790c51f04bc7d02154c76b189259b4cabe82ae
+RUN bitnami-pkg unpack ghost-1.18.3-0 --checksum 46dfb901c2c101c82bdaafe18f5fc14cf771c665953d70ec02a209e4e465d1f0
 
 COPY rootfs /
 
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="1.17.3-r1" \
+    BITNAMI_IMAGE_VERSION="1.18.3-r0" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \

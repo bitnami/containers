@@ -3,7 +3,11 @@
 . /opt/bitnami/base/helpers
 
 USER=ghost
-START_COMMAND="ghost start && tail -f /opt/bitnami/ghost/logs/ghost.log"
+
+# The reason to use the pipe is that currently there is no way to start ghost in unattended mode
+# as it will ask you to update ghost-cli or continue without doing it:
+# https://github.com/TryGhost/Ghost-CLI/issues/563
+START_COMMAND="echo y | ghost start && tail -f /opt/bitnami/ghost/logs/ghost.log"
 export NODE_ENV=production
 
 # If container is started as `root` user
