@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "6"
+          RELEASE_SERIES_LIST: "6,5"
           LATEST_STABLE: "6"
           IMAGE_NAME: elasticsearch
           DOCKER_PROJECT: bitnami
