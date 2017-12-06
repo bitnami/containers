@@ -3,12 +3,12 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libpcap0.8
-RUN bitnami-pkg unpack mongodb-3.4.10-0 --checksum cc16c3c3115d1799891fb7273ccf5320acec5af60eb1ce4fac13ee1f29c27515
+RUN bitnami-pkg unpack mongodb-3.6.0-0 --checksum b3c297d68276ff05323b43f49ec69d3a5c9d5309199915c65f4f26f9d2a9c85a
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.4.10-r0" \
+    BITNAMI_IMAGE_VERSION="3.6.0-r0" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_PASSWORD="" \
