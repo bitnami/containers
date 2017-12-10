@@ -165,7 +165,7 @@ In this case you need to specify the directories to mount on the run command. Th
     bitnami/prestashop:latest
   ```
 
-# Upgrading PrestasShop
+# Upgrading PrestaShop
 
 Bitnami provides up-to-date versions of MariaDB and PrestaShop, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the PrestaShop container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
 
