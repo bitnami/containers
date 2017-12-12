@@ -45,6 +45,13 @@ items:
            app: kafka
            io.kompose.service: kafka
        spec:
+         initContainers:
+         - name: volume-permissions
+           image: busybox
+           command: ['sh', '-c', 'chmod -R g+rwX /bitnami']
+           volumeMounts:
+           - mountPath: /bitnami
+             name: kafka-data
          terminationGracePeriodSeconds: 10
          containers:
          - name: kafka
@@ -53,6 +60,8 @@ items:
            env:
            - name: KAFKA_ZOOKEEPER_CONNECT
              value: zookeeper:2181
+           - name: ALLOW_PLAINTEXT_LISTENER
+             value: "yes"
            ports:
            - containerPort: 9092
            resources: {}
@@ -96,9 +105,19 @@ items:
         labels:
           io.kompose.service: zookeeper
       spec:
+        initContainers:
+        - name: volume-permissions
+          image: busybox
+          command: ['sh', '-c', 'chmod -R g+rwX /bitnami']
+          volumeMounts:
+          - mountPath: /bitnami
+            name: zookeeper-data
         containers:
         - image: bitnami/zookeeper:latest
           name: zookeeper
+          env:
+          - name: ALLOW_ANONYMOUS_LOGIN
+            value: "yes"
           ports:
           - containerPort: 2181
           resources: {}
@@ -127,4 +146,3 @@ items:
   status: {}
 kind: List
 metadata: {}
-
