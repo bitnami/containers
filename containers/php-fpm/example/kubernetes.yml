@@ -87,7 +87,7 @@ items:
       spec:
         containers:
         - name: example
-          image: tompizmor/php-example:0.0.1
+          image: bitnami/php-example:0.0.1
           ports:
           - containerPort: 9000
             name: http
