@@ -42,7 +42,7 @@ $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-php
 # Supported tags and respective `Dockerfile` links
 
  - [`7.2`, `7.2.0-r1` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.0-r1/7.2/Dockerfile), [`7.2-prod`, `7.2.0-r1-prod` (7.2/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.0-r1/7.2/prod/Dockerfile)
- - [`7.1`, `7.1.12-r0`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.12-r0/7.1/Dockerfile), [`7.1-prod`, `7.1.12-r0-prod` (7.1/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.12-r0/7.1/prod/Dockerfile)
+ - [`7.1`, `7.1.12-r1`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.12-r1/7.1/Dockerfile), [`7.1-prod`, `7.1.12-r1-prod` (7.1/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.12-r1/7.1/prod/Dockerfile)
  - [`7.0`, `7.0.26-r0` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.26-r0/7.0/Dockerfile), [`7.0-prod`, `7.0.26-r0-prod` (7.0/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.26-r0/7.0/prod/Dockerfile)
  - [`5.6`, `5.6.32-r0` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.32-r0/5.6/Dockerfile), [`5.6-prod`, `5.6.32-r0-prod` (5.6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.32-r0/5.6/prod/Dockerfile)
 
