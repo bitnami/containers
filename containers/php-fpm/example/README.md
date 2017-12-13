@@ -3,7 +3,7 @@
 ## TL;DR
 
 ```bash
-$ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-node/master/example/kubernetes.yml
+$ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-php-fpm/master/example/kubernetes.yml
 ```
 
 ## Introduction
@@ -17,7 +17,7 @@ For demonstration purposes we will create a phpinfo application, build a image w
 The example application is just the next snippet to show the phpinfo page.
 
 ```php
-<?phpinfo
+<?php
   phpinfo();
 ?>
 ```
@@ -43,7 +43,10 @@ The `Dockerfile` consists of two build stages. The first stage uses the developm
 
 The second stage uses the production image, `bitnami/php-fpm:7.1-prod`, and copies over the application source and the dependencies from the previous stage. This creates a minimal Docker image that only consists of the application source and dependencies and the php runtime.
 
-| NOTE: We don't need a multistage build for this specific example as the application does not have dependencies but it is done in this way to demostrate how to use it.
+> **Note**
+>
+> We don't need a multistage build for this specific example as the application does not have dependencies but it is done in this way to demostrate how to use it.
+
 
 To build the Docker image, execute the command:
 
@@ -96,6 +99,7 @@ $ kubectl create -f kubernetes.yml
 ingress "example-ingress" created
 service "example-svc" created
 service "nginx-svc" created
+configmap "example-configmap" created
 persistentvolumeclaim "example-data-pvc" created
 deployment "example-deployment" created
 deployment "nginx-deployment" created
