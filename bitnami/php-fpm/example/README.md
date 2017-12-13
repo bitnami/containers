@@ -45,7 +45,7 @@ The second stage uses the production image, `bitnami/php-fpm:7.1-prod`, and copi
 
 > **Note**
 >
-> We don't need a multistage build for this specific example as the application does not have dependencies but it is done in this way to demostrate how to use it.
+> We don't need a multistage build for this specific example as the application does not have dependencies but it is done in this way to demostrate how should be used.
 
 
 To build the Docker image, execute the command:
@@ -62,7 +62,7 @@ REPOSITORY                          TAG                    IMAGE ID            C
 bitnami/php-example                 0.0.1                  8c72c8c9a73e        32 minutes ago      202MB
 ```
 
-You can now launch and test the image locally. We will need a web-server like Nginx to server our php app with PHP-FPM. The following docker-compose file deploys both the php application and the nginx server mounting an already configured virtual host.
+You can now launch and test the image locally. We will need a web server like Nginx to server our php app with PHP-FPM. The following docker-compose file deploys both the php application and the nginx server mounting an already configured virtual host.
 
 
 ```yaml
