@@ -16,19 +16,20 @@ thousands of companies. Kafka requires a connection to a Zookeeper service.
 
 ```yaml
 version: '2'
-
 services:
   zookeeper:
     image: 'bitnami/zookeeper:latest'
     ports:
       - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
   kafka:
-    image: 'bitnami/kafka:0'
+    image: 'bitnami/kafka:latest'
     ports:
       - '9092:9092'
     environment:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-
+      - ALLOW_PLAINTEXT_LISTENER=yes
 ```
 
 ## Kubernetes
