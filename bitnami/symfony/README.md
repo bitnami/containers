@@ -1,6 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-symfony/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-symfony/tree/master)
 [![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
-[![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-symfony/master/kubernetes.yml)
 
 # Bitnami Symfony Development Container
 
