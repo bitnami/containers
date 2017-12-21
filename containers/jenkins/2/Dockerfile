@@ -4,14 +4,14 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 # Install required system packages and dependencies
 RUN install_packages libc6 libcomerr2 libcurl3 libffi6 libgcrypt20 libgmp10 libgnutls-deb0-28 libgpg-error0 libgssapi-krb5-2 libhogweed2 libidn11 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle4 libp11-kit0 librtmp1 libsasl2-2 libssh2-1 libssl1.0.0 libtasn1-6 openssh-client zlib1g
 RUN bitnami-pkg install java-1.8.151-0 --checksum fbbea572d89988035aee16eefe53c852e8abfda84f6c7cf5c9a4772a72863143
-RUN bitnami-pkg unpack tomcat-8.0.47-0 --checksum a000250a8120818d332d099114da7d8b9f28052487a286953257d2a651c53358
+RUN bitnami-pkg unpack tomcat-8.0.48-0 --checksum 42db3fa224a92161481e307cdd56d03dd92b691e59972936dc7decacedfcbcf8
 RUN bitnami-pkg install git-2.15.1-0 --checksum 09e673452fa9f0675df177eef93feeeb8b0214c577fedfbc7e021fa550d058b0
-RUN bitnami-pkg unpack jenkins-2.94.0-0 --checksum c43bc2455bc1e307755df3c70d4ffda586ccb138ed29b69bc91169eea759051e
+RUN bitnami-pkg unpack jenkins-2.97.0-0 --checksum 4f52817146eea0df7105c2258c426d0d2e8225f35dd03c3dd25e9b7d13c89927
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.94.0-r0" \
+    BITNAMI_IMAGE_VERSION="2.97.0-r0" \
     JENKINS_PASSWORD="bitnami" \
     JENKINS_USERNAME="user" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/git/bin:$PATH" \
