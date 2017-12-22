@@ -329,6 +329,27 @@ This would be an example of SMTP configuration using a GMail account:
     bitnami/mediawiki:latest
   ```
 
+# How to install imagemagick in the Bitnami MediaWiki Docker image
+
+If you require better quality thumbnails for your uploaded images, you may want to install imagemagick instead of using GD. To do so you can build your own docker image adding the `imagemagick` system package.
+
+1. Create the following Dockerfile
+
+```
+FROM bitnami/mediawiki:latest
+RUN install_packages imagemagick
+```
+
+2. Build the docker image
+
+```
+$ docker build -t bitnami/mediawiki:imagemagick .
+```
+
+3. Edit the _docker-compose.yml_ to use the docker image built in the previous step.
+
+4. Finally exec into your MediaWiki container and edit the file _/opt/bitnami/mediawiki/LocalSettings.php_ as described [here](https://www.mediawiki.org/wiki/Manual:Installing_third-party_tools#Image_thumbnailing) in order to start using imagemagick.
+
 # How to migrate from a Bitnami Mediawiki Stack
 
 You can follow these steps in order to migrate it to this container:
