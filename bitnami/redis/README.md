@@ -152,6 +152,32 @@ $ docker-compose up -d
 
 # Configuration
 
+
+## Passing extra command-line flags to redis-server startup
+
+Passing extra command-line flags to the redis service command is possible through the following env var:
+
+- `REDIS_EXTRA_FLAGS`: Flags to be appended to the startup command. No defaults
+
+```bash
+$ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes -e REDIS_EXTRA_FLAGS='--maxmemory 100mb' bitnami/redis:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  redis:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379:6379'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_EXTRA_FLAGS=--maxmemory 100mb
+```
+
 ## Setting the server password on first run
 
 Passing the `REDIS_PASSWORD` environment variable when running the image for the first time will set the Redis server password to the value of `REDIS_PASSWORD`.

@@ -7,6 +7,11 @@ DAEMON=redis-server
 EXEC=$(which $DAEMON)
 ARGS="/opt/bitnami/redis/conf/redis.conf --daemonize no"
 
+# configure extra command line flags
+if [[ -n "$REDIS_EXTRA_FLAGS" ]]; then
+    ARGS+=" $REDIS_EXTRA_FLAGS"
+fi
+
 # log output to stdout
 sed -i 's/^logfile /# logfile /g' /opt/bitnami/redis/conf/redis.conf
 
