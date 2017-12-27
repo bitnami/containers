@@ -7,13 +7,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libaio1 libc6 libgcc1 libjemalloc1 libncurses5 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg unpack mariadb-10.1.30-0 --checksum 28f849db6b13d1667687f49479f47c12cc79afb0947f538a870bf0f5e332d906
+RUN bitnami-pkg unpack mariadb-10.1.30-1 --checksum 95a2b2c55051d2babb34d950d161272a1da80c98460a15e84f7fbd77d4455b36
 
 COPY rootfs /
 
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.1.30-r0" \
+    BITNAMI_IMAGE_VERSION="10.1.30-r1" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
