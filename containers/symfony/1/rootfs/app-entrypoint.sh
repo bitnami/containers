@@ -4,7 +4,6 @@
 . /opt/bitnami/base/helpers
 
 print_welcome_page
-check_for_updates &
 
 export PROJECT_DIRECTORY=/app/$SYMFONY_PROJECT_NAME
 
