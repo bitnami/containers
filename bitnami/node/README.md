@@ -33,7 +33,7 @@ $ docker-compose up -d
  - [`9`, `9.3.0-r0` (9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.3.0-r0/9/Dockerfile), [`9-prod`, `9.3.0-r0-prod` (9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.3.0-r0/9/prod/Dockerfile)
  - [`8`, `8.9.3-r0` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.9.3-r0/8/Dockerfile), [`8-prod`, `8.9.3-r0-prod` (8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.9.3-r0/8/prod/Dockerfile)
  - [`7`, `7.10.1-r3` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-r3/7/Dockerfile), [`7-prod`, `7.10.1-r3-prod` (7/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-r3/7/prod/Dockerfile)
- - [`6`, `6.12.2-r0`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.12.2-r0/6/Dockerfile), [`6-prod`, `6.12.2-r0-prod` (6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.12.2-r0/6/prod/Dockerfile)
+ - [`6`, `6.12.3-r0`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.12.3-r0/6/Dockerfile), [`6-prod`, `6.12.3-r0-prod` (6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.12.3-r0/6/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
@@ -362,7 +362,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2015-2017 Bitnami
+Copyright (c) 2015-2018 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
