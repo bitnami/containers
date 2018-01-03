@@ -271,7 +271,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright 2016-2017 Bitnami
+Copyright 2016-2018 Bitnami
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

@@ -4,14 +4,14 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libncurses5 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
 RUN bitnami-pkg install java-1.8.151-0 --checksum fbbea572d89988035aee16eefe53c852e8abfda84f6c7cf5c9a4772a72863143
-RUN bitnami-pkg unpack tomcat-8.0.47-0 --checksum a000250a8120818d332d099114da7d8b9f28052487a286953257d2a651c53358
-RUN bitnami-pkg install mysql-client-10.1.29-0 --checksum 4b29436697f5fcdf38f3c9713a27208304fe36b858afc5aa5a7a4d3f17d84bac
-RUN bitnami-pkg unpack jasperreports-6.4.2-0 --checksum 8273f329f4369c0010dfd41b08dcc488ecdef5ac40f6c87e628c282c302660ae
+RUN bitnami-pkg unpack tomcat-8.0.48-0 --checksum 42db3fa224a92161481e307cdd56d03dd92b691e59972936dc7decacedfcbcf8
+RUN bitnami-pkg install mysql-client-10.1.30-0 --checksum 2f7bfecc0e405c53c0dc0508670af2b87124fbf3475f597fe8359e85d14e2a0c
+RUN bitnami-pkg unpack jasperreports-6.4.2-1 --checksum 895b8e2d06665582d6eb54930989ef11e1618f6033d0bbb3f7ee680bf1aea3dc
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="6.4.2-r0" \
+    BITNAMI_IMAGE_VERSION="6.4.2-r1" \
     JASPERREPORTS_EMAIL="user@example.com" \
     JASPERREPORTS_PASSWORD="bitnami" \
     JASPERREPORTS_USERNAME="user" \
