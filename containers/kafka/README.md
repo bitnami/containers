@@ -121,7 +121,7 @@ $ docker network create app-tier --driver bridge
 Use the `--network app-tier` argument to the `docker run` command to attach the Zookeeper container to the `app-tier` network.
 
 ```bash
-$ docker run -d --name zookeeker-server \
+$ docker run -d --name zookeeper-server \
     --network app-tier \
     bitnami/zookeeper:latest
 ```
