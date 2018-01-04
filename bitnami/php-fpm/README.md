@@ -32,7 +32,7 @@ $ docker-compose up -d
 
  - [`7.2`, `7.2.0-r1` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.0-r1/7.2/Dockerfile), [`7.2-prod`, `7.2.0-r1-prod` (7.2/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.0-r1/7.2/prod/Dockerfile)
  - [`7.1`, `7.1.12-r1`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.12-r1/7.1/Dockerfile), [`7.1-prod`, `7.1.12-r1-prod` (7.1/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.12-r1/7.1/prod/Dockerfile)
- - [`7.0`, `7.0.26-r1` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.26-r1/7.0/Dockerfile), [`7.0-prod`, `7.0.26-r1-prod` (7.0/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.26-r1/7.0/prod/Dockerfile)
+ - [`7.0`, `7.0.27-r0` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.27-r0/7.0/Dockerfile), [`7.0-prod`, `7.0.27-r0-prod` (7.0/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.27-r0/7.0/prod/Dockerfile)
  - [`5.6`, `5.6.32-r1` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.32-r1/5.6/Dockerfile), [`5.6-prod`, `5.6.32-r1-prod` (5.6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.32-r1/5.6/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
@@ -185,14 +185,14 @@ $ docker run -it --name php-fpm -v /path/to/app:/app bitnami/php-fpm \
 
 # Configuration
 
-You can mount a custom config file from your host to edit the default configuration for the php-fpm docker image. The following is an example to alter the configuration of the _php-fpm.conf_ configuration file:
+The image looks for configurations in `/bitnami/php-fpm/conf/`. You can mount a volume at `/bitnami` and copy/edit the configurations in `/bitnami/php-fpm/php-fpm/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
 ### Step 1: Run the PHP-FPM image
 
-Run the PHP-FPM image, mounting a file from your host.
+Run the PHP-FPM image, mounting a directory from your host.
 
 ```bash
-$ docker run --name phpfpm -v /path/to/php-fpm.conf:/opt/bitnami/php/etc/php-fpm.conf bitnami/php-fpm
+$ docker run --name phpfpm -v /path/to/php-fpm:/bitnami bitnami/php-fpm
 ```
 
 or using Docker Compose:
@@ -206,7 +206,7 @@ services:
     ports:
       - '9000:9000'
     volumes:
-      - /path/to/php-fpm.conf:/opt/bitnami/php/etc/php-fpm.conf
+      - /path/to/php-fpm:/bitnami
 ```
 
 ### Step 2: Edit the configuration
@@ -214,7 +214,7 @@ services:
 Edit the configuration on your host using your favorite editor.
 
 ```bash
-$ vi /path/to/php-fpm.conf
+$ vi /path/to/php-fpm/php-fpm/conf/php-fpm.conf
 ```
 
 ### Step 3: Restart PHP-FPM
@@ -360,7 +360,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2015-2017 Bitnami
+Copyright (c) 2015-2018 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
