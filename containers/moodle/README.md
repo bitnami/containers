@@ -155,6 +155,10 @@ In this case you need to specify the directories to mount on the run command. Th
 
 # Upgrade this application
 
+> **NOTE:** Since Moodle 3.4.0-r1, the application upgrades should be done manually inside the docker container following the [official documentation](https://docs.moodle.org/34/en/Upgrading).
+
+> As an alternative, you can try upgrading using an updated docker image but any data from the Moodle container will be lost and you will have to reinstall all the plugins and themes you manually added.
+
 Bitnami provides up-to-date versions of MariaDB and Moodle, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Moodle container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
 
 1. Get the updated images:
@@ -183,12 +187,24 @@ You can use these snapshots to restore the application state should the upgrade 
  * For docker-compose: `$ docker-compose rm -v moodle`
  * For manual execution: `$ docker rm -v moodle`
 
-5. Run the new image
+5. Remove the persisted data. This is needed from 3.4.0-r1 since the whole installation is persisted and otherwise the new docker image will use an old application code.
 
- * For docker-compose: `$ docker-compose start moodle`
+    * Get the volume containing the persisted data
+
+    ```bash
+    $ docker volume ls
+    ```
+
+    * Remove the volume
+
+    ```bash
+    $ docker volume rm YOUR_VOLUME
+    ```
+
+6. Run the new image
+
+ * For docker-compose: `$ docker-compose up moodle`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name moodle bitnami/moodle:latest`
-
-  *Note:* If you upgrade you will have to reinstall all the plugins and themes you manually added.
 
 # Configuration
 
@@ -291,7 +307,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright 2016-2017 Bitnami
+Copyright 2016-2018 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
