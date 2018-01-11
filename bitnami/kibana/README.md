@@ -12,7 +12,7 @@
 ## Docker Compose
 
 ```bash
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kibaba/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kibana/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -351,7 +351,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright 2016-2017 Bitnami
+Copyright 2016-2018 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
