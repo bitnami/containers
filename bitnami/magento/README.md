@@ -46,10 +46,19 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_magento
+      - MARIADB_PASSWORD=your_password
+      - MARIADB_DATABASE=bitnami_magento
     volumes:
       - 'mariadb_data:/bitnami'
   magento:
     image: 'bitnami/magento:latest'
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - MAGENTO_DATABASE_USER=bn_magento
+      - MAGENTO_DATABASE_PASSWORD=your_password
+      - MAGENTO_DATABASE_NAME=bitnami_magento
     ports:
       - '80:80'
       - '443:443'
@@ -75,18 +84,33 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker network create magento-tier
   ```
 
-2. Start a MariaDB database in the network generated:
+2. Create a volume for MariaDB persistence and create a MariaDB container
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net magento-tier bitnami/mariadb
+  $ docker volume create --name mariadb_data
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_magento \
+    -e MARIADB_PASSWORD=your_password \
+    -e MARIADB_DATABASE=bitnami_magento \
+    --net magento-tier \
+    --volume mariadb_data:/bitnami \
+    bitnami/mariadb:latest
   ```
 
-  *Note:* You need to give the container a name in order to Magento to resolve the host
+  *Note:* You need to give the container a name in order for Magento to resolve the host
 
-3. Run the Magento container:
+3. Create volumes for Magento persistence and launch the container
 
   ```bash
-  $ docker run -d -p 80:80 --name magento --net magento-tier bitnami/magento
+  $ docker volume create --name magento_data
+  $ docker run -d --name magento -p 80:80 -p 443:443 \
+    -e MAGENTO_DATABASE_USER=bn_magento \
+    -e MAGENTO_DATABASE_PASSWORD=your_password \
+    -e MAGENTO_DATABASE_NAME=bitnami_magento \
+    --net magento-tier \
+    --volume magento_data:/bitnami \
+    bitnami/magento:latest
   ```
 
 Then you can access your application at http://your-ip/
@@ -115,10 +139,19 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_magento
+      - MARIADB_PASSWORD=your_password
+      - MARIADB_DATABASE=bitnami_magento
     volumes:
       - /path/to/mariadb-persistence:/bitnami
   magento:
     image: 'bitnami/magento:latest'
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - MAGENTO_DATABASE_USER=bn_magento
+      - MAGENTO_DATABASE_PASSWORD=your_password
+      - MAGENTO_DATABASE_NAME=bitnami_magento
     depends_on:
       - mariadb
     ports:
@@ -142,7 +175,11 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Create a MariaDB container with host volume:
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  $ docker run -d --name mariadb
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_magento \
+    -e MARIADB_PASSWORD=your_password \
+    -e MARIADB_DATABASE=bitnami_magento \
     --net magento-tier \
     --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
@@ -154,6 +191,9 @@ In this case you need to specify the directories to mount on the run command. Th
 
   ```bash
   $ docker run -d --name magento -p 80:80 -p 443:443 \
+    -e MAGENTO_DATABASE_USER=bn_magento \
+    -e MAGENTO_DATABASE_PASSWORD=your_password \
+    -e MAGENTO_DATABASE_NAME=bitnami_magento \
     --net magento-tier \
     --volume /path/to/magento-persistence:/bitnami \
     bitnami/magento:latest
@@ -224,18 +264,42 @@ magento:
 
 Available variables:
 
- - `MAGENTO_USERNAME`: Magento application username. Default: **user**
- - `MAGENTO_PASSWORD`: Magento application password. Default: **bitnami1**
- - `MAGENTO_EMAIL`: Magento application email. Default: **user@example.com**
- - `MAGENTO_ADMINURI`: Prefix to access the Magento Admin. Default: **admin**
- - `MAGENTO_FIRSTNAME`: Magento application first name. Default: **FirstName**
- - `MAGENTO_LASTNAME`: Magento application last name. Default: **LastName**
- - `MAGENTO_HOST`: Host domain or IP.
- - `MAGENTO_MODE`: Magento mode. Valid values: **default**, **production**, **developer**. Default: **default**
- - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
- - `MARIADB_PASSWORD`: Root password for the MariaDB.
- - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
- - `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+#### User and Site configuration
+
+- `MAGENTO_USERNAME`: Magento application username. Default: **user**
+- `MAGENTO_PASSWORD`: Magento application password. Default: **bitnami1**
+- `MAGENTO_EMAIL`: Magento application email. Default: **user@example.com**
+- `MAGENTO_ADMINURI`: Prefix to access the Magento Admin. Default: **admin**
+- `MAGENTO_FIRSTNAME`: Magento application first name. Default: **FirstName**
+- `MAGENTO_LASTNAME`: Magento application last name. Default: **LastName**
+- `MAGENTO_HOST`: Host domain or IP.
+- `MAGENTO_MODE`: Magento mode. Valid values: **default**, **production**, **developer**. Default: **default**
+
+#### Database configuration
+
+There are two options to configure the Magento database. You can either use an existing database or create a new one from the Magento container using the mysql client.
+Below you can see the available environment variables for each option:
+
+##### Use an existing database
+
+- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `MAGENTO_DATABASE_NAME`: Database name that Magento will use to connect with the database. Default: **bitnami_magento**
+- `MAGENTO_DATABASE_USER`: Database user that Magento will use to connect with the database. Default: **bn_magento**
+- `MAGENTO_DATABASE_PASSWORD`: Database password that Magento will use to connect with the database. No defaults. Required.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### Create a database for Magento using mysql-client
+
+- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `MARIADB_ROOT_USER`: Database admin user. Default: **root**
+- `MARIADB_ROOT_PASSWORD`: Database password for the `MARIADB_ROOT_USER` user. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES`: Comma-separated list of privileges to grant to the database user. Default: **ALL**
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 # Contributing
 
@@ -259,7 +323,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright 2016-2017 Bitnami
+Copyright 2016-2018 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
