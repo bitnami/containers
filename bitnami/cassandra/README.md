@@ -405,7 +405,7 @@ Most real time communication happens in the `#containers` channel at [bitnami-os
 Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
-Copyright (c) 2016-2017 Bitnami
+Copyright (c) 2016-2018 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
