@@ -1,11 +1,11 @@
 version: '2'
 services:
   elasticsearch:
-    image: 'bitnami/elasticsearch:latest'
+    image: 'bitnami/elasticsearch:6'
     volumes:
       - 'elasticsearch_data:/bitnami'
   kibana:
-    image: 'bitnami/kibana:5'
+    image: 'bitnami/kibana:6'
     labels:
       kompose.service.type: nodeport
     ports:
