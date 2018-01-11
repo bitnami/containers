@@ -32,16 +32,6 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
 ```
 
-## Kubernetes
-
-> **WARNING:** This is a beta configuration, currently unsupported.
-
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
-
-```bash
-$ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-kafka/master/kubernetes.yml
-```
-
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -668,7 +658,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2015-2017 Bitnami
+Copyright (c) 2015-2018 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
