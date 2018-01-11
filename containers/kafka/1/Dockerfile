@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r22
+FROM bitnami/minideb-extras:jessie-r23
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,13 +6,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN bitnami-pkg install java-1.8.151-0 --checksum fbbea572d89988035aee16eefe53c852e8abfda84f6c7cf5c9a4772a72863143
-RUN bitnami-pkg unpack kafka-1.0.0-2 --checksum bb8127f309d46d3000443be10354eb4b2dc86b9455305bf1b43d319f9e7ca459
+RUN bitnami-pkg unpack kafka-1.0.0-3 --checksum ea0d23753d1df82179ffe005f6df2d2d0d8a8e5ef25feb6aeb4214372469db7c
 
 COPY rootfs /
 
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="1.0.0-r2" \
+    BITNAMI_IMAGE_VERSION="1.0.0-r3" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_BROKER_ID="-1" \
     KAFKA_BROKER_PASSWORD="bitnami" \
