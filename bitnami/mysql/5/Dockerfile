@@ -1,15 +1,15 @@
-FROM bitnami/minideb-extras:jessie-r22
+FROM bitnami/minideb-extras:jessie-r23
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libaio1 libnuma1 libssl1.0.0 zlib1g
-RUN bitnami-pkg unpack mysql-5.7.20-2 --checksum c062a660daed2966451fb5fb11491e3df48aaf66191a61c2de3fb730034cd109
+RUN bitnami-pkg unpack mysql-5.7.21-0 --checksum 97402be688e660f05b8d4cbca046575e533ddfa93327f7d01d9aa0e0ef3b1a79
 
 COPY rootfs /
 
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.20-r2" \
+    BITNAMI_IMAGE_VERSION="5.7.21-r0" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
