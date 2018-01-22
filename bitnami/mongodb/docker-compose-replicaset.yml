@@ -2,14 +2,14 @@ version: '2'
 
 services:
   mongodb-primary:
-    image: 'bitnami/mongodb:latest'
+    image: 'bitnami/mongodb:3.6'
     environment:
       - MONGODB_REPLICA_SET_MODE=primary
     volumes:
       - 'mongodb_master_data:/bitnami'
 
   mongodb-secondary:
-    image: 'bitnami/mongodb:latest'
+    image: 'bitnami/mongodb:3.6'
     depends_on:
       - mongodb-primary
     environment:
@@ -17,7 +17,7 @@ services:
       - MONGODB_PRIMARY_HOST=mongodb-primary
 
   mongodb-arbiter:
-    image: 'bitnami/mongodb:latest'
+    image: 'bitnami/mongodb:3.6'
     depends_on:
       - mongodb-primary
     environment:
