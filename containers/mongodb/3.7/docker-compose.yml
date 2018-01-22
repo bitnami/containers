@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mongodb:
-    image: 'bitnami/mongodb:3.6'
+    image: 'bitnami/mongodb:3.7'
     labels:
       kompose.service.type: nodeport
     ports:
