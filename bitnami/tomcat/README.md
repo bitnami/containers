@@ -28,7 +28,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
- - [`9.0`, `9.0.2-r0` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.2-r0/9.0/Dockerfile)
+ - [`9.0`, `9.0.4-r0` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.4-r0/9.0/Dockerfile)
  - [`8.5`, `8.5.24-r0` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.24-r0/8.5/Dockerfile)
  - [`8.0`, `8.0.48-r0`, `latest` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.48-r0/8.0/Dockerfile)
  - [`7`, `7.0.82-r0` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.82-r0/7/Dockerfile)
@@ -327,7 +327,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2015-2017 Bitnami
+Copyright (c) 2015-2018 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
