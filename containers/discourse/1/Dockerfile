@@ -6,13 +6,13 @@ RUN install_packages ghostscript imagemagick libbsd0 libc6 libcomerr2 libcurl3 l
 RUN bitnami-pkg install ruby-2.3.4-1 --checksum ea18a43840fdff9d113f7b3c6f4b6ec10abd88f1b84d65cda0bb61020dfdbb64
 RUN bitnami-pkg unpack postgresql-client-9.6.5-0 --checksum 96fe70bda6f0a296dcb594cd28b6810a03c6b4ba82c1ae13a228bda20cb4c423
 RUN bitnami-pkg install git-2.16.0-0 --checksum 70ecd7552d3b238d5644f13c06f9cb73a44457e30a60622b4638c124e1753365
-RUN bitnami-pkg unpack discourse-sidekiq-1.9.1-0 --checksum 68e5e22ea8e277dd7cbcaf395e5b586c59486b6402de417815d61f8df17705f3
-RUN bitnami-pkg unpack discourse-1.9.1-0 --checksum 1ae654808e333aed1395f401e4cd1a107e0d703deca6cc412d7c5488c8d01a2f
+RUN bitnami-pkg unpack discourse-sidekiq-1.9.2-0 --checksum a641d7c04643f2db1e690d5b1d1f1d3a630aaa13dffa3d2d0e313e23e58f7340
+RUN bitnami-pkg unpack discourse-1.9.2-0 --checksum 362b8a82e0443a1b3c6ceb2a2583dab647d8c2590d121f0f9c542353ec7f43ce
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="1.9.1-r0" \
+    BITNAMI_IMAGE_VERSION="1.9.2-r0" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="127.0.0.1" \
     DISCOURSE_PASSWORD="bitnami123" \
