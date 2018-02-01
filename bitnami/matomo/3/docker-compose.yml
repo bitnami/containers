@@ -6,8 +6,8 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'mariadb_data:/bitnami'
-  piwik:
-    image: 'bitnami/piwik:3'
+  matomo:
+    image: 'bitnami/matomo:3'
     labels:
       kompose.service.type: nodeport
     ports:
@@ -16,9 +16,9 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - 'piwik_data:/bitnami'
+      - 'matomo_data:/bitnami'
 volumes:
   mariadb_data:
     driver: local
-  piwik_data:
+  matomo_data:
     driver: local

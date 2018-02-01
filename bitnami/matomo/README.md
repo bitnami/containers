@@ -1,18 +1,18 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-piwik/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-piwik/tree/master)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-matomo/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-matomo/tree/master)
 [![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
-# What is Piwik?
+# What is Matomo?
 
-> Piwik is a free and open source web analytics application written by a team of international developers that runs on a PHP/MySQL webserver. It tracks online visits to one or more websites and displays reports on these visits for analysis. As of September 2015, Piwik was used by nearly 900 thousand websites, or 1.3% of all websites, and has been translated to more than 45 languages. New versions are regularly released every few weeks.
+> Matomo is a free and open source web analytics application written by a team of international developers that runs on a PHP/MySQL webserver. It tracks online visits to one or more websites and displays reports on these visits for analysis. As of September 2015, Matomo was used by nearly 900 thousand websites, or 1.3% of all websites, and has been translated to more than 45 languages. New versions are regularly released every few weeks.
 
-https://www.piwik.org/
+https://www.matomo.org/
 
 # TL;DR;
 
 ## Docker Compose
 
 ```bash
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-piwik/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-matomo/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -30,26 +30,26 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 
 # How to get this image
 
-The recommended way to get the Bitnami Piwik Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/piwik/).
-To use a specific version, you can pull a versioned tag. Find the [list of available versions] (https://hub.docker.com/r/bitnami/piwik/tags/) in the Docker Hub Registry.
+The recommended way to get the Bitnami Matomo Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/matomo/).
+To use a specific version, you can pull a versioned tag. Find the [list of available versions] (https://hub.docker.com/r/bitnami/matomo/tags/) in the Docker Hub Registry.
 
 ```bash
-docker pull bitnami/piwik:[TAG]
+docker pull bitnami/matomo:[TAG]
 ```
 
 If you wish, you can also build the image youself.
 
 ```bash
-docker build -t bitnami/piwik:latest https://github.com/bitnami/bitnami-docker-piwik.git
+docker build -t bitnami/matomo:latest https://github.com/bitnami/bitnami-docker-matomo.git
 ```
 
 # How to use this image
 
-Piwik requires access to a MySQL database or MariaDB database to store information. It uses our [MariaDB image] (https://github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
+Matomo requires access to a MySQL database or MariaDB database to store information. It uses our [MariaDB image] (https://github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
 
-## Run the Piwik image using Docker Compose
+## Run the Matomo image using Docker Compose
 
-This is the recommended way to run Piwik. You can use the following docker compose template:
+This is the recommended way to run Matomo. You can use the following docker compose template:
 
 ```yaml
 version: '2'
@@ -62,44 +62,44 @@ services:
     volumes:
       - 'mariadb_data:/bitnami'
   application:
-    image: 'bitnami/piwik:latest'
+    image: 'bitnami/matomo:latest'
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - 'piwik_data:/bitnami'
+      - 'matomo_data:/bitnami'
     depends_on:
       - mariadb
 
 volumes:
   mariadb_data:
     driver: local
-  piwik_data:
+  matomo_data:
     driver: local
 ```
 
-## Run the Piwik image using the Docker Command Line
+## Run the Matomo image using the Docker Command Line
 
 If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
 
 1. Create a new network for the application and the database:
 
   ```bash
-  $ docker network create piwik_network
+  $ docker network create matomo_network
   ```
 
 2. Start a MariaDB database in the network generated:
 
   ```
-   $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net=piwik_network bitnami/mariadb
+   $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net=matomo_network bitnami/mariadb
   ```
 
-  *Note:* You need to give the container a name in order to Piwik to resolve the host
+  *Note:* You need to give the container a name in order to Matomo to resolve the host
 
-3. Run the Piwik container:
+3. Run the Matomo container:
 
   ```bash
-  $ docker run -d -p 80:80 --name piwik --net=piwik_network bitnami/piwik
+  $ docker run -d -p 80:80 --name matomo --net=matomo_network bitnami/matomo
   ```
 
 Then you can access your application at http://your-ip/
@@ -110,7 +110,7 @@ If you remove the container all your data and configurations will be lost, and t
 
 For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
 
-The above examples define docker volumes namely `mariadb_data` and `piwik_data`. The Piwik application state will persist as long as these volumes are not removed.
+The above examples define docker volumes namely `mariadb_data` and `matomo_data`. The Matomo application state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -128,15 +128,15 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
-  piwik:
-    image: 'bitnami/piwik:latest'
+  matomo:
+    image: 'bitnami/matomo:latest'
     depends_on:
       - mariadb
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - '/path/to/piwik-persistence:/bitnami'
+      - '/path/to/matomo-persistence:/bitnami'
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -146,47 +146,47 @@ In this case you need to specify the directories to mount on the run command. Th
 1. Create a network (if it does not exist):
 
   ```bash
-  $ docker network create piwik-tier
+  $ docker network create matomo-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
   ```bash
   $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
-    --net piwik-tier \
+    --net matomo-tier \
     --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
   ```
-   *Note:* You need to give the container a name in order to Piwik to resolve the host
+   *Note:* You need to give the container a name in order to Matomo to resolve the host
 
-3. Create the Piwik container with host volumes:
+3. Create the Matomo container with host volumes:
 
   ```bash
-  $ docker run -d --name piwik -p 80:80 -p 443:443 \
-    --net piwik-tier \
-    --volume /path/to/piwik-persistence:/bitnami \
-    bitnami/piwik:latest
+  $ docker run -d --name matomo -p 80:80 -p 443:443 \
+    --net matomo-tier \
+    --volume /path/to/matomo-persistence:/bitnami \
+    bitnami/matomo:latest
   ```
 
-# Upgrading Piwik
+# Upgrading Matomo
 
-Bitnami provides up-to-date versions of MariaDB and Piwik, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Piwik container. For the MariaDB upgrade you can take a look at https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of MariaDB and Matomo, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Matomo container. For the MariaDB upgrade you can take a look at https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
 
 1. Get the updated images:
 
   ```bash
-  $ docker pull bitnami/piwik:latest
+  $ docker pull bitnami/matomo:latest
   ```
 
 2. Stop your container
 
- * For docker-compose: `$ docker-compose stop piwik`
- * For manual execution: `$ docker stop piwik`
+ * For docker-compose: `$ docker-compose stop matomo`
+ * For manual execution: `$ docker stop matomo`
 
 3. Take a snapshot of the application state
 
 ```bash
-$ rsync -a /path/to/piwik-persistence /path/to/piwik-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+$ rsync -a /path/to/matomo-persistence /path/to/matomo-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 Additionally, [snapshot the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
@@ -195,45 +195,45 @@ You can use these snapshots to restore the application state should the upgrade 
 
 4. Remove the currently running container
 
- * For docker-compose: `$ docker-compose rm -v piwik`
- * For manual execution: `$ docker rm -v piwik`
+ * For docker-compose: `$ docker-compose rm -v matomo`
+ * For manual execution: `$ docker rm -v matomo`
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start piwik`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name piwik bitnami/piwik:latest`
+ * For docker-compose: `$ docker-compose start matomo`
+ * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name matomo bitnami/matomo:latest`
 
 # Configuration
 
 ## Environment variables
 
-When you start the Piwik image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+When you start the Matomo image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
 
 ```yaml
 application:
-  image: bitnami/piwik:latest
+  image: bitnami/matomo:latest
   ports:
     - 80:80
   environment:
-    - PIWIK_PASSWORD=my_password
+    - MATOMO_PASSWORD=my_password
 ```
 
  * For manual execution add a `-e` option with each variable and value:
 
 ```bash
- $ docker run -d -e PIWIK_PASSWORD=my_password -p 80:80 --name piwik -v /your/local/path/bitnami/piwik:/bitnami --net=piwik_network bitnami/piwik
+ $ docker run -d -e MATOMO_PASSWORD=my_password -p 80:80 --name matomo -v /your/local/path/bitnami/matomo:/bitnami --net=matomo_network bitnami/matomo
 ```
 
 Available variables:
 
- - `PIWIK_USERNAME`: Piwik application username. Default: **User**
- - `PIWIK_HOST`: Piwik application host. Default: **127.0.0.1**
- - `PIWIK_PASSWORD`: Piwik application password. Default: **bitnami**
- - `PIWIK_EMAIL`: Piwik application email. Default: **user@example.com**
- - `PIWIK_WEBSITE_NAME`: Name of a website to track in Piwik. Default: **example**
- - `PIWIK_WEBSITE_HOST`: Website's host or domain to track in Piwik. Default: **https://example.org**
+ - `MATOMO_USERNAME`: Matomo application username. Default: **User**
+ - `MATOMO_HOST`: Matomo application host. Default: **127.0.0.1**
+ - `MATOMO_PASSWORD`: Matomo application password. Default: **bitnami**
+ - `MATOMO_EMAIL`: Matomo application email. Default: **user@example.com**
+ - `MATOMO_WEBSITE_NAME`: Name of a website to track in Matomo. Default: **example**
+ - `MATOMO_WEBSITE_HOST`: Website's host or domain to track in Matomo. Default: **https://example.org**
  - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
  - `MARIADB_PASSWORD`: Root password for the MariaDB.
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
@@ -241,13 +241,13 @@ Available variables:
 
 ### SMTP Configuration
 
-To configure Piwik to send email using SMTP you can set the following environment variables:
+To configure Matomo to send email using SMTP you can set the following environment variables:
 
- - `SMTP_HOST`: Piwik SMTP host.
- - `SMTP_PORT`: Piwik SMTP port.
- - `SMTP_USER`: Piwik SMTP account user.
- - `SMTP_PASSWORD`: Piwik SMTP account password.
- - `SMTP_PROTOCOL`: Piwik SMTP protocol to use.
+ - `SMTP_HOST`: Matomo SMTP host.
+ - `SMTP_PORT`: Matomo SMTP port.
+ - `SMTP_USER`: Matomo SMTP account user.
+ - `SMTP_PASSWORD`: Matomo SMTP account password.
+ - `SMTP_PROTOCOL`: Matomo SMTP protocol to use.
 
 This would be an example of SMTP configuration using a Gmail account:
 
@@ -255,7 +255,7 @@ This would be an example of SMTP configuration using a Gmail account:
 
 ```yaml
   application:
-    image: bitnami/piwik:latest
+    image: bitnami/matomo:latest
     ports:
       - 80:80
     environment:
@@ -270,16 +270,16 @@ This would be an example of SMTP configuration using a Gmail account:
 
 ```bash
  $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PROTOCOL=TLS -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e \
- SMTP_PASSWORD=your_password -p 80:80 --name piwik -v /your/local/path/bitnami/piwik:/bitnami bitnami/piwik
+ SMTP_PASSWORD=your_password -p 80:80 --name matomo -v /your/local/path/bitnami/matomo:/bitnami bitnami/matomo
 ```
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-piwik/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-piwik/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-matomo/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-matomo/pulls) with your contribution.
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-piwik/issues). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-matomo/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
@@ -295,7 +295,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright 2017 Bitnami
+Copyright 2018 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -6,8 +6,8 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
-  nami_initialize apache php piwik
-  info "Starting piwik... "
+  nami_initialize apache php matomo
+  info "Starting matomo... "
 fi
 
 exec tini -- "$@"
