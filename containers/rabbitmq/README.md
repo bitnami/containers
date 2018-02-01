@@ -132,7 +132,7 @@ services:
 
 > **IMPORTANT**:
 >
-> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 1. Please update the **YOUR_APPLICATION_IMAGE** placeholder in the above snippet with your application image
 > 2. In your application container, use the hostname `rabbitmq` to connect to the RabbitMQ server
 
 Launch the containers using:
@@ -167,7 +167,7 @@ Available variables:
  - `RABBITMQ_VHOST`: RabbitMQ application vhost. Default: **/**
  - `RABBITMQ_ERL_COOKIE`: Erlang cookie to determine whether different nodes are allowed to communicate with each other.
  - `RABBITMQ_NODE_TYPE`: Node Type. Valid values: *stats*, *queue-ram* or *queue-disc*. Default: **stats**
- - `RABBITMQ_NODE_NAME`: Node name and host. E.g.: *node@hostname* or *node* (localhost won't work in cluster topology). Default **rabbit@localhost**
+ - `RABBITMQ_NODE_NAME`: Node name and host. E.g.: *node@hostname* or *node* (localhost won't work in cluster topology). Default **rabbit@localhost**. If using this variable, ensure that you specify a valid host name as the container wil fail to start otherwise.
  - `RABBITMQ_NODE_PORT_NUMBER`: Node port. Default: **5672**
  - `RABBITMQ_CLUSTER_NODE_NAME`: Node name to cluster with. E.g.: **clusternode@hostname**
  - `RABBITMQ_CLUSTER_PARTITION_HANDLING`: Cluster partition recovery mechanism. Default: **ignore**
