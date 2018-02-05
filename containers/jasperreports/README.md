@@ -104,17 +104,18 @@ This requires a minor change to the `docker-compose.yml` template previously sho
 ```yaml
 version: '2'
 services:
-  mariadb: bitnami/mariadb:latest
-  volumes:
-    - /path/to/mariadb-persistence:/bitnami
-jasperreports:
-  image: bitnami/jasperreports:latest
-  depends_on:
-    - mariadb
-  ports:
-    - 80:8080
-  volumes:
-    - /path/to/jasperreports-persistence:/bitnami
+  mariadb: 
+    image: bitnami/mariadb:latest
+    volumes:
+      - /path/to/mariadb-persistence:/bitnami
+  jasperreports:
+    image: bitnami/jasperreports:latest
+    depends_on:
+      - mariadb
+    ports:
+      - 80:8080
+    volumes:
+      - /path/to/jasperreports-persistence:/bitnami
 ```
 
 ### Mount persistent folders manually
