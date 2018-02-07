@@ -7,14 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.29-1 --checksum 42114e87aafb1d519ab33451b68368
 RUN bitnami-pkg unpack php-7.0.27-0 --checksum 9e5a1ce65fce97b1c785cf8699c91de4a11c8d0bd8959e4b14a319fa0180b46f
 RUN bitnami-pkg install mysql-client-10.1.30-0 --checksum 2f7bfecc0e405c53c0dc0508670af2b87124fbf3475f597fe8359e85d14e2a0c
 RUN bitnami-pkg install libphp-7.0.27-0 --checksum b4936b7e66fca5a2bfb5c2a3ded1683d8c743894cdf8e15f7d5bde0413abd35d
-RUN bitnami-pkg unpack joomla-3.8.4-0 --checksum 2aad2cee3438ce7f96ed09694da3ea706e5d02b6dfd212ae9a3b1985a68d713d
+RUN bitnami-pkg unpack joomla-3.8.5-0 --checksum 44e3699833a7130d659976c97c145a6bd156f81eb469bc0235ecd734d7350129
 
 COPY rootfs /
 
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.8.4-r0" \
+    BITNAMI_IMAGE_VERSION="3.8.5-r0" \
     JOOMLA_EMAIL="user@example.com" \
     JOOMLA_FIRST_NAME="User" \
     JOOMLA_LAST_NAME="Name" \
