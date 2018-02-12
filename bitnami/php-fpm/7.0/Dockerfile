@@ -11,10 +11,10 @@ RUN mkdir -p /bitnami && ln -sf /bitnami/php /bitnami/php-fpm
 RUN mkdir /opt/bitnami/php/logs && touch /opt/bitnami/php/logs/php-fpm.log
 
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="7.0.27-r0" \
+    BITNAMI_IMAGE_VERSION="7.0.27-r1" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH"
 
 EXPOSE 9000
 
 WORKDIR /app
-CMD ["php-fpm","-F","--pid","/opt/bitnami/php/tmp/php-fpm.pid","-c","/opt/bitnami/php/conf/php-fpm.conf"]
+CMD ["php-fpm","-F","--pid","/opt/bitnami/php/tmp/php-fpm.pid","-y","/opt/bitnami/php/etc/php-fpm.conf"]
