@@ -6,7 +6,7 @@ jobs:
       - image: docker:17.06.0-ce-git
         environment:
           RELEASE_SERIES_LIST: "9.0,8.5,8.0,7"
-          LATEST_STABLE: "8.0"
+          LATEST_STABLE: "8.5"
           IMAGE_NAME: tomcat
           CHART_NAME: tomcat
           CHART_REPO: https://github.com/bitnami/charts
