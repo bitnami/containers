@@ -9,7 +9,8 @@ jobs:
           LATEST_STABLE: "1"
           IMAGE_NAME: ghost
           CHART_NAME: ghost
-          CHART_REPO: https://github.com/kubernetes/charts
+          CHART_REPO: https://github.com/bitnami/charts
+          EXTRA_CHART_REPOS_LIST: "https://github.com/kubernetes/charts"
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
@@ -48,7 +49,7 @@ jobs:
           name: Publish docker image
           command: |
             if [ -n "${CIRCLE_TAG}" ]; then
-              curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-release-image.sh | bash -
+              curl -sL https://raw.githubusercontent.com/tompizmor/test-infra/chart-test/circle/docker-release-image.sh | bash -
             elif [ "${CIRCLE_BRANCH}" == "master" ]; then
               curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-development-image.sh | bash -
             fi
