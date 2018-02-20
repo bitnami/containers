@@ -31,7 +31,8 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 
- - [`2.4`, `2.4.3-r0`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.3-r0/2.4/Dockerfile), [`2.4-prod`, `2.4.3-r0-prod` (2.4/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.3-r0/2.4/prod/Dockerfile)
+ - [`2.5`, `2.5.0-r0`, `latest` (2.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.0-r0/2.5/Dockerfile), [`2.5-prod`, `2.5.0-r0-prod` (2.5/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.0-r0/2.5/prod/Dockerfile)
+ - [`2.4`, `2.4.3-r0` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.3-r0/2.4/Dockerfile), [`2.4-prod`, `2.4.3-r0-prod` (2.4/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.3-r0/2.4/prod/Dockerfile)
  - [`2.3`, `2.3.6-r0` (2.3/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.6-r0/2.3/Dockerfile), [`2.3-prod`, `2.3.6-r0-prod` (2.3/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.6-r0/2.3/prod/Dockerfile)
  - [`2.2`, `2.2.9-r0` (2.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.9-r0/2.2/Dockerfile), [`2.2-prod`, `2.2.9-r0-prod` (2.2/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.9-r0/2.2/prod/Dockerfile)
  - [`2.1`, `2.1.10-r5` (2.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-r5/2.1/Dockerfile), [`2.1-prod`, `2.1.10-r5-prod` (2.1/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-r5/2.1/prod/Dockerfile)
@@ -308,7 +309,7 @@ Most real time communication happens in the `#containers` channel at [bitnami-os
 Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
-Copyright (c) 2015-2017 Bitnami
+Copyright (c) 2015-2018 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
