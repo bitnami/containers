@@ -2,13 +2,13 @@ FROM bitnami/minideb-extras:jessie-r23
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages libpcap0.8
-RUN bitnami-pkg unpack mongodb-3.7.2-0 --checksum 52b798b9dda46b6d3dbb54e7f859aba79eafbcb7268f9d5a302d823a61dd6900
+RUN install_packages libc6 libgcc1 libpcap0.8 libssl1.0.0
+RUN bitnami-pkg unpack mongodb-3.7.2-1 --checksum 17043e69c777dd53faa7126ae19335719579c4ca9bf3d5dd1f390e4de0af4125
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.7.2-r0" \
+    BITNAMI_IMAGE_VERSION="3.7.2-r1" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_PASSWORD="" \
