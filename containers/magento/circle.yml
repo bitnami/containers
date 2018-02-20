@@ -10,7 +10,7 @@ jobs:
           IMAGE_NAME: magento
           CHART_NAME: magento
           CHART_REPO: https://github.com/bitnami/charts
-          EXTRA_CHART_REPOS_LIST: "https://github.com/kubernetes/charts"s
+          EXTRA_CHART_REPOS_LIST: "https://github.com/kubernetes/charts"
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
