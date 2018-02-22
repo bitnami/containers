@@ -30,7 +30,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
- - [`3`, `3.6.3-r0`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.3-r0/3/Dockerfile), [`3-prod`, `3.6.3-r0-prod` (3/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.3-r0/3/prod/Dockerfile)
+ - [`3`, `3.6.4-r0`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.4-r0/3/Dockerfile), [`3-prod`, `3.6.4-r0-prod` (3/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.4-r0/3/prod/Dockerfile)
  - [`2`, `2.7.14-r0` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.14-r0/2/Dockerfile), [`2-prod`, `2.7.14-r0-prod` (2/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.14-r0/2/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/python GitHub repo](https://github.com/bitnami/bitnami-docker-python).
@@ -135,7 +135,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2017 Bitnami
+Copyright (c) 2018 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
