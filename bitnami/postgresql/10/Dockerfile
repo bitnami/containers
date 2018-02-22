@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r23
+FROM bitnami/minideb-extras:jessie-r24
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack postgresql-10.2.0-0 --checksum f7fcd851bc9480e01e9e09115b
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="10.2.0-r0" \
+    BITNAMI_IMAGE_VERSION="10.2.0-r1" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
     POSTGRESQL_MASTER_HOST="" \
