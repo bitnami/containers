@@ -9,6 +9,7 @@ jobs:
           LATEST_STABLE: "5"
           IMAGE_NAME: laravel
           DOCKER_PROJECT: bitnami
+          IBM_PROJECT: bitnami-bx-test
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
 
