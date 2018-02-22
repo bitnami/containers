@@ -9,6 +9,7 @@ jobs:
           LATEST_STABLE: "7.1"
           IMAGE_NAME: php-fpm
           DOCKER_PROJECT: bitnami
+          IBM_PROJECT: bitnami-bx-test
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
 
