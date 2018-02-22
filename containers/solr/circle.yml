@@ -9,6 +9,7 @@ jobs:
           LATEST_STABLE: "7"
           IMAGE_NAME: solr
           DOCKER_PROJECT: bitnami
+          IBM_PROJECT: bitnami-bx-test
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
 
