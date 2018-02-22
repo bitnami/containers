@@ -9,9 +9,9 @@ jobs:
           LATEST_STABLE: "3"
           IMAGE_NAME: zookeeper
           DOCKER_PROJECT: bitnami
+          IBM_PROJECT: bitnami-bx-test
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
-          IBM_PROJECT: bitnami-bx-test
 
     steps:
       - checkout
