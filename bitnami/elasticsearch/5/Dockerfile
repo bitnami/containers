@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r23
+FROM bitnami/minideb-extras:jessie-r24
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack elasticsearch-5.6.4-0 --checksum f89a4d55e04a3996f70297bb
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="5.6.4-r2" \
+    BITNAMI_IMAGE_VERSION="5.6.4-r3" \
     ELASTICSEARCH_CLIENT_NODE="" \
     ELASTICSEARCH_CLUSTER_HOSTS="" \
     ELASTICSEARCH_CLUSTER_NAME="elasticsearch-cluster" \
