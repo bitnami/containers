@@ -1,9 +1,9 @@
-FROM bitnami/minideb-extras:jessie-r20
+FROM bitnami/minideb-extras:jessie-r24
 
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_APP_NAME=codeigniter \
-    BITNAMI_IMAGE_VERSION=3.1.3-r7 \
+    BITNAMI_IMAGE_VERSION=3.1.3-r8 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/mysql/bin/:$PATH
 
 # System packages required
