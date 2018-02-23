@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r19-buildpack
+FROM bitnami/minideb-extras:jessie-r24-buildpack
 
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
@@ -19,7 +19,7 @@ RUN rm -rf /app
 
 # ExpressJS template
 ENV BITNAMI_APP_NAME=express
-ENV BITNAMI_IMAGE_VERSION=4.15.3-r2
+ENV BITNAMI_IMAGE_VERSION=4.15.3-r3
 
 COPY rootfs/ /
 
