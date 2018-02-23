@@ -289,7 +289,7 @@ discourse:
 Available variables:
 
  - `DISCOURSE_USERNAME`: Discourse application username. Default: **user**
- - `DISCOURSE_PASSWORD`: Discourse application password. Default: **bitnami**
+ - `DISCOURSE_PASSWORD`: Discourse application password. Default: **bitnami123**
  - `DISCOURSE_EMAIL`: Discourse application email. Default: **user@example.com**
  - `DISCOURSE_SITENAME`: Discourse site name. Default: **My site!**
  - `POSTGRESQL_ROOT_USER`: Root user for the Postgresql database. Default: **postgres**
