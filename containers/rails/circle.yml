@@ -11,6 +11,7 @@ jobs:
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
+          IBM_PROJECT: bitnami-bx-test
 
     steps:
       - checkout
