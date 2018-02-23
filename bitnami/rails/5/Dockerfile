@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r22-buildpack
+FROM bitnami/minideb-extras:jessie-r24-buildpack
 
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
@@ -19,7 +19,7 @@ RUN gem install therubyracer
 
 ENV RAILS_ENV=development
 ENV BITNAMI_APP_NAME=rails
-ENV BITNAMI_IMAGE_VERSION=5.1.4-r0
+ENV BITNAMI_IMAGE_VERSION=5.1.4-r1
 
 COPY rootfs/ /
 
