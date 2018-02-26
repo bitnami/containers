@@ -3,12 +3,12 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libbsd0 libc6 libedit2 liblzma5 libssl1.0.0 libtinfo5 libxml2 libxslt1.1 zlib1g
-RUN bitnami-pkg unpack postgresql-9.6.7-0 --checksum 0c1068287b6f9ec8cfa9d3141bd3da1421c4ece34456c137c4c273256ee97ae9
+RUN bitnami-pkg unpack postgresql-9.6.7-1 --checksum a723987dec014367ecd49c48d4ad29aa8b28c187fb416120a198287233c24831
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="9.6.7-r1" \
+    BITNAMI_IMAGE_VERSION="9.6.7-r2" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
     POSTGRESQL_MASTER_HOST="" \
