@@ -1,18 +1,15 @@
-FROM bitnami/minideb-extras:jessie-r19
+FROM bitnami/minideb-extras:jessie-r24
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-
-
 # Install required system packages and dependencies
-RUN install_packages libc6 libexpat1 libffi6 libfontconfig1 libfreetype6 libgcc1 libglib2.0-0 liblzma5 libpcre3 libpng12-0 libselinux1 libstdc++6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 zlib1g
-RUN bitnami-pkg install java-1.8.131-0 --checksum 5b122a36c8ba44e2f9eb8cbb9b62dd87963742c46f85a04019115d2d43c69e33
-RUN bitnami-pkg unpack wildfly-11.0.0-0 --checksum 210294a19deaba0d3614123086f54b538e4a51fb633498f0ed61226b4048e63f
+RUN bitnami-pkg install java-1.8.161-0 --checksum eb289afc43eda33d5920294460dc256f6543318506ca5a540bba9073412cfd06
+RUN bitnami-pkg unpack wildfly-11.0.0-1 --checksum bdcbbf014a52c494bc7b5aecaa0780726dc4f630a97b600a0596f7bfc951f2ee
 RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="11.0.0-r4" \
+    BITNAMI_IMAGE_VERSION="11.0.0-r5" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_JAVA_HOME="" \
     WILDFLY_JAVA_OPTS="" \
@@ -25,9 +22,6 @@ ENV BITNAMI_APP_NAME="wildfly" \
     WILDFLY_USERNAME="user" \
     WILDFLY_WILDFLY_HOME="/home/wildfly" \
     WILDFLY_WILDFLY_OPTS="-Dwildfly.as.deployment.ondemand=false"
-
-
-
 
 EXPOSE 8080 9990
 
