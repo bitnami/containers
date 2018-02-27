@@ -1,15 +1,15 @@
-FROM bitnami/minideb-extras:jessie-r22
+FROM bitnami/minideb-extras:jessie-r24
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libmysqlclient18 libncurses5 libreadline6 libsqlite3-0 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg install node-4.8.5-0 --checksum e4c1b99ede6d5c86cd94bf449704f0454de44104d3fb71bb3c0040b8cb84f2fe
-RUN bitnami-pkg unpack parse-dashboard-1.1.2-0 --checksum d760113e6749bea92d384908ec94c0f8ca470f60e1db08f11fb4344363aa57ba
+RUN bitnami-pkg install node-6.13.0-0 --checksum e27c93888fbadc8c438d97f69d49f376fed61bbcba1958c6fcc97f507238d0cf
+RUN bitnami-pkg unpack parse-dashboard-1.1.2-1 --checksum c59b86225ed46f5edc340246b301ddd54220dde9568726f635260712e097db14
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.1.2-r0" \
+    BITNAMI_IMAGE_VERSION="1.1.2-r1" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
     PARSE_DASHBOARD_PASSWORD="bitnami" \
@@ -18,7 +18,7 @@ ENV BITNAMI_APP_NAME="parse-dashboard" \
     PARSE_MASTER_KEY="mymasterKey" \
     PARSE_MOUNT_PATH="/parse" \
     PARSE_PORT_NUMBER="1337" \
-    PATH="/opt/bitnami/node/bin:$PATH"
+    PATH="/opt/bitnami/node/bin:/opt/bitnami/parse-dashboard/bin:$PATH"
 
 EXPOSE 4040
 
