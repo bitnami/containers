@@ -28,8 +28,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
- - [`11`, `11.0.0-r4`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/11.0.0-r4/11/Dockerfile)
- - [`10`, `10.1.0-r9` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/10.1.0-r9/10/Dockerfile)
+ - [`11`, `11.0.0-r5`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/11.0.0-r5/11/Dockerfile)
+ - [`10`, `10.1.0-r10` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/10.1.0-r10/10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
@@ -354,7 +354,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2015-2017 Bitnami
+Copyright (c) 2015-2018 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
