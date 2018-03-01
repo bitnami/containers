@@ -1,0 +1,15 @@
+image: bitnami/redis
+tags: [latest,4.0.8-r1,4.0,4.0-master]
+manifests:
+  -
+    image: bitnamippc64le/redis
+    tags: [latest,4.0.8-r1,4.0,4.0-master]
+    platform:
+      architecture: ppc64le
+      os: linux
+  -
+    image: bitnamiamd64/redis
+    tags: [latest,4.0.8-r1,4.0,4.0-master]
+    platform:
+      architecture: amd64
+      os: linux
