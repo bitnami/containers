@@ -11,7 +11,7 @@ COPY rootfs /
 
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.8-r2" \
+    BITNAMI_IMAGE_VERSION="4.0.8-r3" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_MASTER_HOST="" \
     REDIS_MASTER_PASSWORD="" \
