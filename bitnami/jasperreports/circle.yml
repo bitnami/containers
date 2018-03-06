@@ -12,7 +12,6 @@ jobs:
           CHART_REPO: https://github.com/bitnami/charts
           EXTRA_CHART_REPOS_LIST: "https://github.com/kubernetes/charts"
           DOCKER_PROJECT: bitnami
-          IBM_PROJECT: bitnami-bx-test
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
 
