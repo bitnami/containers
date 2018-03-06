@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/java-1.8.161-0-linux-x64-debian-8.tar.gz
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="1.8.161-r1" \
+    BITNAMI_IMAGE_VERSION="1.8.161-r2" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
