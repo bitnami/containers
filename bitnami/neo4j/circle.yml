@@ -7,7 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "3"
           LATEST_STABLE: "3"
-          IMAGE_NAME: solr
+          IMAGE_NAME: neo4j
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
