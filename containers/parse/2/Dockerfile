@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack parse-2.7.2-0 --checksum 4997454fd87e52a4e6931a029d83abec
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="2.7.2-r1" \
+    BITNAMI_IMAGE_VERSION="2.7.2-r2" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
