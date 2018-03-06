@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-neo4j/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-neo4j/tree/master)
-[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
 # What is Neo4j?
 
