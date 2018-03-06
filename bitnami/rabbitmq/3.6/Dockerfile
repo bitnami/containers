@@ -3,13 +3,13 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libssl1.0.0 libtinfo5 zlib1g
-RUN bitnami-pkg install erlang-20.2.0-0 --checksum 114f6c9c660c8413766cd77f2a3f5036e5dc79f29d4cf03b9ee763a8e506400f
+RUN bitnami-pkg install erlang-20.2.0-1 --checksum 1e1f4338d6147a5fc9f379119c35bcb03e749073ad0c50a3836bebba27902e23
 RUN bitnami-pkg unpack rabbitmq-3.6.15-0 --checksum 5218b2d87593f750b9aafacf94e167f1ffc80ad4694645aa210660438cc20aff
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.6.15-r1" \
+    BITNAMI_IMAGE_VERSION="3.6.15-r2" \
     PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:/opt/bitnami/rabbitmq/sbin:$PATH" \
     RABBITMQ_CLUSTER_NODE_NAME="" \
     RABBITMQ_CLUSTER_PARTITION_HANDLING="ignore" \
