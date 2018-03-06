@@ -11,7 +11,6 @@ jobs:
           CHART_NAME: apache
           CHART_REPO: https://github.com/bitnami/charts
           DOCKER_PROJECT: bitnami
-          IBM_PROJECT: bitnami-bx-test
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
 
