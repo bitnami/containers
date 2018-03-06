@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack jasperreports-6.4.2-1 --checksum 895b8e2d06665582d6eb5493
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="6.4.2-r2" \
+    BITNAMI_IMAGE_VERSION="6.4.2-r3" \
     JASPERREPORTS_EMAIL="user@example.com" \
     JASPERREPORTS_PASSWORD="bitnami" \
     JASPERREPORTS_USERNAME="user" \
