@@ -33,7 +33,7 @@ $ docker-compose up -d
 
  - [`2.5`, `2.5.0-r2`, `latest` (2.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.0-r2/2.5/Dockerfile), [`2.5-prod`, `2.5.0-r2-prod` (2.5/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.0-r2/2.5/prod/Dockerfile)
  - [`2.4`, `2.4.3-r2` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.3-r2/2.4/Dockerfile), [`2.4-prod`, `2.4.3-r2-prod` (2.4/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.3-r2/2.4/prod/Dockerfile)
- - [`2.3`, `2.3.6-r1` (2.3/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.6-r1/2.3/Dockerfile), [`2.3-prod`, `2.3.6-r1-prod` (2.3/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.6-r1/2.3/prod/Dockerfile)
+ - [`2.3`, `2.3.6-r2` (2.3/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.6-r2/2.3/Dockerfile), [`2.3-prod`, `2.3.6-r2-prod` (2.3/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.6-r2/2.3/prod/Dockerfile)
  - [`2.2`, `2.2.9-r1` (2.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.9-r1/2.2/Dockerfile), [`2.2-prod`, `2.2.9-r1-prod` (2.2/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.9-r1/2.2/prod/Dockerfile)
  - [`2.1`, `2.1.10-r6` (2.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-r6/2.1/Dockerfile), [`2.1-prod`, `2.1.10-r6-prod` (2.1/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-r6/2.1/prod/Dockerfile)
 
