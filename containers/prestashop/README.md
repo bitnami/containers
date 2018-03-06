@@ -186,7 +186,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start prestashop`
+ * For docker-compose: `$ docker-compose run prestashop`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name prestashop bitnami/prestashop:latest`
 
 # Configuration
@@ -228,6 +228,7 @@ Available variables:
  - `PRESTASHOP_PASSWORD`: PrestaShop application password. Default: **bitnami**
  - `PRESTASHOP_EMAIL`: PrestaShop application email. Default: **user@example.com**
  - `PRESTASHOP_HOST`: PrestaShop Host Server.
+ - `PRESTASHOP_COOKIE_CHECK_IP`: Whether to check the cookie's IP address or not. Default: **yes**. See (Troubleshooting)[#Troubleshooting] section.
  - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
  - `MARIADB_PASSWORD`: Root password for the MariaDB.
  - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
@@ -275,6 +276,10 @@ $ docker run -d --name prestashop -p 80:80 -p 443:443 \
   bitnami/prestashop:latest
 ```
 
+# Troubleshooting
+
+* If you are automatically logged out from the administration panel, you can try deploying PrestaShop with the environment variable `PRESTASHOP_COOKIE_CHECK_IP=no`
+
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an
@@ -299,7 +304,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright 2016-2017 Bitnami
+Copyright 2016-2018 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

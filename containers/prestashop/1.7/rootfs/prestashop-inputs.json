@@ -1,4 +1,5 @@
 {
+  "cookieCheckIP": "{{$global.env.PRESTASHOP_COOKIE_CHECK_IP}}",
   "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
   "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
   "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
