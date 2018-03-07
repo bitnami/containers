@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack cassandra-3.11.2-0 --checksum df67b18c6c21d1a1d56aad3d299
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.2-r1" \
+    BITNAMI_IMAGE_VERSION="3.11.2-r2" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
     CASSANDRA_ENABLE_REMOTE_CONNECTIONS="true" \
