@@ -9,7 +9,6 @@ jobs:
           LATEST_STABLE: "3"
           IMAGE_NAME: cassandra
           DOCKER_PROJECT: bitnami
-          IBM_PROJECT: bitnami-bx-test
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
 
