@@ -13,7 +13,6 @@ jobs:
           EXTRA_CHART_REPOS_LIST: "https://github.com/kubernetes/charts"
           SKIP_CHART_APP_VERSION_UPDATE: "1"
           DOCKER_PROJECT: bitnami
-          IBM_PROJECT: bitnami-bx-test
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
 
