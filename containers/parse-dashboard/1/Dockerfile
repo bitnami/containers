@@ -3,13 +3,13 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libmysqlclient18 libncurses5 libreadline6 libsqlite3-0 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg install node-6.13.0-0 --checksum e27c93888fbadc8c438d97f69d49f376fed61bbcba1958c6fcc97f507238d0cf
+RUN bitnami-pkg install node-6.13.1-0 --checksum 7ceb4606a523d952a879899e044d0630121791b297d29f6ccde184126a37d576
 RUN bitnami-pkg unpack parse-dashboard-1.1.2-1 --checksum c59b86225ed46f5edc340246b301ddd54220dde9568726f635260712e097db14
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.1.2-r1" \
+    BITNAMI_IMAGE_VERSION="1.1.2-r2" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
     PARSE_DASHBOARD_PASSWORD="bitnami" \
