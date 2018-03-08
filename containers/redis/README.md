@@ -152,6 +152,43 @@ $ docker-compose up -d
 
 # Configuration
 
+## Disabling Redis commands
+
+For security reasons, you may want to disable some commands. You can specify them by using the following environment
+variable on the first run:
+
+- `DISABLE_COMMANDS`: Comma-separated list of Redis commands to disable. Defaults to empty.
+
+```bash
+$ docker run --name redis -e DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG bitnami/redis:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  redis:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379:6379'
+    environment:
+      - DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
+```
+
+As specified in the docker-compose, `FLUSHDB` and `FLUSHALL` commands are disabled. Comment out or remove the
+environment variable if you don't want to disable any commands:
+
+```yaml
+version: '2'
+
+services:
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      # - DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+```
 
 ## Passing extra command-line flags to redis-server startup
 
