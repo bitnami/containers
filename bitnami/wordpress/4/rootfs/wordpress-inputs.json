@@ -16,5 +16,6 @@
   "smtpProtocol": "{{$global.env.SMTP_PROTOCOL}}",
   "smtpUser": "{{$global.env.SMTP_USER}}",
   "smtpUsername": "{{$global.env.SMTP_USERNAME}}",
+  "tablePrefix": "{{$global.env.WORDPRESS_TABLE_PREFIX}}",
   "username": "{{$global.env.WORDPRESS_USERNAME}}"
 }
