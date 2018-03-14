@@ -185,6 +185,8 @@ $ docker run -it --name php-fpm -v /path/to/app:/app bitnami/php-fpm \
 
 # Configuration
 
+## Mount a custom config file
+
 You can mount a custom config file from your host to edit the default configuration for the php-fpm docker image. The following is an example to alter the configuration of the _php-fpm.conf_ configuration file:
 
 ### Step 1: Run the PHP-FPM image
@@ -231,7 +233,26 @@ or using Docker Compose:
 $ docker-compose restart phpfpm
 ```
 
-In addition, PHP has been configured at compile time to scan the `/opt/bitnami/php/etc/conf.d/` folder for extra .ini configuration files so it is also possible to mount your customizations there.
+## Add additional .ini files
+
+PHP has been configured at compile time to scan the `/opt/bitnami/php/etc/conf.d/` folder for extra .ini configuration files so it is also possible to mount your customizations there.
+
+For example, you can override the default `max_file_uploads` setting by doing the following:
+
+1. Create a file called _custom.ini_ with the following content:
+
+```
+max_file_uploads = 30M
+```
+
+2. Run the php-fpm container mounting the custom file.
+
+```bash
+$ docker run -it -v /path/to/custom.ini:/opt/bitnami/php/etc/conf.d/custom.ini bitnami/php-fpm php -i | grep max_file_uploads
+
+```
+
+You should see that PHP is using the new specified value for the `max_file_uploads`.
 
 # Logging
 
@@ -322,6 +343,10 @@ $ docker-compose start phpfpm
 ](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
 # Notable Changes
+
+## 7.2.3-r2, 7.1.15-r2, 7.0.28-r2 and 5.6.34-r2 (2018-03-13)
+
+- PHP has been configured at compile time to scan the `/opt/bitnami/php/etc/conf.d/` folder for extra .ini configuration files
 
 ## 7.0.6-r0 (2016-05-17)
 
