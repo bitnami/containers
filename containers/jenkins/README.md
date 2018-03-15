@@ -192,6 +192,12 @@ $ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
   bitnami/jenkins:latest
 ```
 
+# Notable Changes
+
+## 2.107.1-r0
+
+- The Jenkins container has been migrated to the LTS version. From now on, this repository will only track long term support releases from [Jenkins](https://jenkins.io/changelog-stable/).
+
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-jenkins/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-jenkins/pulls) with your contribution.
