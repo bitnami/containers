@@ -199,7 +199,36 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the testlink image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+When you start the testlink image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. 
+
+##### User and Site configuration
+
+ - `TESTLINK_USERNAME`: TestLink admin username. Default: **user**
+ - `TESTLINK_PASSWORD`: TestLink admin password. Default: **bitnami**
+ - `TESTLINK_EMAIL`: TestLink admin email. Default: **user@example.com**
+ - `TESTLINK_LANGUAGE`: TestLink default language. Default: **en_US**
+
+##### Use an existing database
+
+- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `TESTLINK_DATABASE_NAME`: Database name that TestLink will use to connect with the database. Default: **bitnami_testlink**
+- `TESTLINK_DATABASE_USER`: Database user that TestLink will use to connect with the database. Default: **bn_testlink**
+- `TESTLINK_DATABASE_PASSWORD`: Database password that TestLink will use to connect with the database. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### Create a database for TestLink using mysql-client
+
+- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `MARIADB_ROOT_USER`: Database admin user. Default: **root**
+- `MARIADB_ROOT_PASSWORD`: Database password for the `MARIADB_ROOT_USER` user. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
 
@@ -224,17 +253,6 @@ testlink:
     --volume /path/to/php-persistence:/bitnami/php \
     bitnami/testlink:latest
   ```
-
-Available variables:
-
- - `TESTLINK_USERNAME`: TestLink admin username. Default: **user**
- - `TESTLINK_PASSWORD`: TestLink admin password. Default: **bitnami**
- - `TESTLINK_EMAIL`: TestLink admin email. Default: **user@example.com**
- - `TESTLINK_LANGUAGE`: TestLink default language. Default: **en_US**
- - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
- - `MARIADB_PASSWORD`: Root password for the MariaDB.
- - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
- - `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 
 ### SMTP Configuration
 
