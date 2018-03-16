@@ -237,7 +237,11 @@ $ docker-compose restart phpfpm
 
 PHP has been configured at compile time to scan the `/opt/bitnami/php/etc/conf.d/` folder for extra .ini configuration files so it is also possible to mount your customizations there.
 
-For example, you can override the default `max_file_uploads` setting by doing the following:
+Multiple files are loaded in alphabetical order. It is common to have a file per extension and use a numeric prefix to guarantee an order loading the configuration.
+
+Please check [http://php.net/manual/en/configuration.file.php#configuration.file.scan](http://php.net/manual/en/configuration.file.php#configuration.file.scan) to know more about this feature.
+
+In order to override the default `max_file_uploads` settings you can do the following:
 
 1. Create a file called _custom.ini_ with the following content:
 
@@ -252,7 +256,7 @@ $ docker run -it -v /path/to/custom.ini:/opt/bitnami/php/etc/conf.d/custom.ini b
 
 ```
 
-You should see that PHP is using the new specified value for the `max_file_uploads`.
+You should see that PHP is using the new specified value for the `max_file_uploads` setting.
 
 # Logging
 
