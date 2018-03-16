@@ -206,6 +206,8 @@ You can use these snapshots to restore the application state should the upgrade 
 
 The Osclass instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom Osclass:
 
+##### User and Site configuration
+
 - `OSCLASS_USERNAME`: Osclass application username. Default: **user**
 - `OSCLASS_PASSWORD`: Osclass application password. Default: **bitnami1**
 - `OSCLASS_EMAIL`: Osclass application email. Default: **user@example.com**
@@ -213,10 +215,28 @@ The Osclass instance can be customized by specifying environment variables on th
 - `OSCLASS_HOST`: Osclass application IP or domain. Default: **127.0.0.1**
 - `OSCLASS_PING_ENGINES`: Allow site to appear in search engines. Default: **1**
 - `OSCLASS_SAVE_STATS`: Automatically send usage statistics and crash reports to Osclass. Default: **1**
-- `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
-- `MARIADB_PASSWORD`: Root password for the MariaDB.
+
+##### Use an existing database
+
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
 - `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `OSCLASS_DATABASE_NAME`: Database name that Osclass will use to connect with the database. Default: **bitnami_osclass**
+- `OSCLASS_DATABASE_USER`: Database user that Osclass will use to connect with the database. Default: **bn_osclass**
+- `OSCLASS_DATABASE_PASSWORD`: Database password that Osclass will use to connect with the database. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### Create a database for Osclass using mysql-client
+
+- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `MARIADB_ROOT_USER`: Database admin user. Default: **root**
+- `MARIADB_ROOT_PASSWORD`: Database password for the `MARIADB_ROOT_USER` user. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+If you want to add a new environment variable:
 
 ### Specifying Environment variables using Docker Compose
 
