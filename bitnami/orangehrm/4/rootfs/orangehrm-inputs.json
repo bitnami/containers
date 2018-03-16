@@ -1,8 +1,9 @@
 {
-  "databaseAdminPassword": "{{$global.env.MARIADB_PASSWORD}}",
-  "databaseAdminUser": "{{$global.env.MARIADB_USER}}",
+  "databaseName": "{{$global.env.ORANGEHRM_DATABASE_NAME}}",
+  "databasePassword": "{{$global.env.ORANGEHRM_DATABASE_PASSWORD}}",
   "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
   "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
+  "databaseUser": "{{$global.env.ORANGEHRM_DATABASE_USER}}",
   "password": "{{$global.env.ORANGEHRM_PASSWORD}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
