@@ -210,7 +210,35 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the moodle image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+When you start the moodle image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. 
+
+##### User and Site configuration
+
+ - `MOODLE_USERNAME`: Moodle application username. Default: **user**
+ - `MOODLE_PASSWORD`: Moodle application password. Default: **bitnami**
+ - `MOODLE_EMAIL`: Moodle application email. Default: **user@example.com**
+
+##### Use an existing database
+
+- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `MOODLE_DATABASE_NAME`: Database name that Moodle will use to connect with the database. Default: **bitnami_moodle**
+- `MOODLE_DATABASE_USER`: Database user that Moodle will use to connect with the database. Default: **bn_moodle**
+- `MOODLE_DATABASE_PASSWORD`: Database password that Moodle will use to connect with the database. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### Create a database for Moodle using mysql-client
+
+- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `MARIADB_ROOT_USER`: Database admin user. Default: **root**
+- `MARIADB_ROOT_PASSWORD`: Database password for the `MARIADB_ROOT_USER` user. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
 
@@ -233,16 +261,6 @@ moodle:
      --volume /path/to/moodle-persistence:/bitnami \
      bitnami/moodle:latest
    ```
-
-Available variables:
-
- - `MOODLE_USERNAME`: Moodle application username. Default: **user**
- - `MOODLE_PASSWORD`: Moodle application password. Default: **bitnami**
- - `MOODLE_EMAIL`: Moodle application email. Default: **user@example.com**
- - `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
- - `MARIADB_PASSWORD`: Root password for the MariaDB.
- - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
- - `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 
 ### SMTP Configuration
 
