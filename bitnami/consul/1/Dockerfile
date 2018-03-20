@@ -2,12 +2,12 @@ FROM bitnami/minideb-extras:jessie-r24
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN bitnami-pkg unpack consul-1.0.6-0 --checksum 876d992b463d353c06beecb1d80767a641f2ce96409ad4262f17ffcea05750cc
+RUN bitnami-pkg unpack consul-1.0.6-1 --checksum 0613007a58359cf7751352fb55a27b5e0507ed69a3e89afa3d7244e7f98226a0
 
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.0.6-r0" \
+    BITNAMI_IMAGE_VERSION="1.0.6-r1" \
     CONSUL_BOOTSTRAP_EXPECT="1" \
     CONSUL_CLIENT_LAN_ADDRESS="0.0.0.0" \
     CONSUL_DATACENTER="dc1" \
@@ -31,4 +31,4 @@ EXPOSE 8300 8301 8500 8600
 EXPOSE 8301/udp 8600/udp
 
 ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["nami","start","--foreground","consul"]
+CMD ["/run.sh"]
