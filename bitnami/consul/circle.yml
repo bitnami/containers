@@ -5,8 +5,8 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "{{ range $index, $_ := .Branches }}{{ if ne $index 0 }},{{ end }}{{ .Branch }}{{ end }}"
-          LATEST_STABLE: "{{ .LatestStableBranch.Branch }}"
+          RELEASE_SERIES_LIST: "1"
+          LATEST_STABLE: "1"
           IMAGE_NAME: consul
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
@@ -31,7 +31,7 @@ jobs:
             docker info
       - restore_cache:
           keys:
-            - cache-{{"{{ .Branch }}"}}
+            - cache-{{ .Branch }}
           paths:
             - /cache/layers.tar
       - run:
@@ -39,7 +39,7 @@ jobs:
           command: |
             curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-image-test.sh | bash -
       - save_cache:
-          key: cache-{{"{{ .Branch }}"}}-{{"{{ epoch }}"}}
+          key: cache-{{ .Branch }}-{{ epoch }}
           paths:
             - /cache/layers.tar
       - deploy:
