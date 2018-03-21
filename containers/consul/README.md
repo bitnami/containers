@@ -305,7 +305,7 @@ In order to load your own configuration files, you will have to make them availa
 - Mounting a volume with your custom configuration
 - Adding custom configuration via environment variable.
 
-By default, the configuration of Consul is wrote to `/opt/bitnami/consul/consul.json` file  and persisted with the following content:
+By default, the configuration of Consul is written to `/opt/bitnami/consul/consul.json` file  and persisted with the following content:
 
 ```json
 {
