@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-node/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-node/tree/master)
-[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
 # What is Node.js?
 
@@ -30,7 +29,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
- - [`9`, `9.8.0-r0` (9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.8.0-r0/9/Dockerfile), [`9-prod`, `9.8.0-r0-prod` (9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.8.0-r0/9/prod/Dockerfile)
+ - [`9`, `9.9.0-r0` (9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.9.0-r0/9/Dockerfile), [`9-prod`, `9.9.0-r0-prod` (9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.9.0-r0/9/prod/Dockerfile)
  - [`8`, `8.10.0-r0` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.10.0-r0/8/Dockerfile), [`8-prod`, `8.10.0-r0-prod` (8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.10.0-r0/8/prod/Dockerfile)
  - [`7`, `7.10.1-r6` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-r6/7/Dockerfile), [`7-prod`, `7.10.1-r6-prod` (7/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-r6/7/prod/Dockerfile)
  - [`6`, `6.13.1-r0`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.13.1-r0/6/Dockerfile), [`6-prod`, `6.13.1-r0-prod` (6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.13.1-r0/6/prod/Dockerfile)
@@ -353,12 +352,6 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
-
-# Community
-
-Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
-
-Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 
