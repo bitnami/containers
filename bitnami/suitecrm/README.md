@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-suitecrm/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-suitecrm/tree/master)
-[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
 # What is SuiteCRM?
 
@@ -45,11 +44,19 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     environment:
+      - MARIADB_USER=bn_suitecrm
+      - MARIADB_DATABASE=bitnami_suitecrm
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'mariadb_data:/bitnami'
   suitecrm:
     image: 'bitnami/suitecrm:latest'
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - SUITECRM_DATABASE_USER=bn_suitecrm
+      - SUITECRM_DATABASE_NAME=bitnami_suitecrm
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '80:80'
       - '443:443'
@@ -75,18 +82,32 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker network create suitecrm-tier
   ```
 
-2. Start a MariaDB database in the network generated:
+2. Create a volume for MariaDB persistence and create a MariaDB container
 
   ```bash
-   $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net=suitecrm-tier bitnami/mariadb
+  $ docker volume create --name mariadb_data
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_suitecrm \
+    -e MARIADB_DATABASE=bitnami_suitecrm \
+    --net suitecrm-tier \
+    --volume mariadb_data:/bitnami \
+    bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to SuiteCRM to resolve the host
 
-3. Run the SuiteCRM container:
+3. Create volumes for Suitecrm persistence and launch the container
 
   ```bash
-  $ docker run -d -p 80:80 --name suitecrm --net=suitecrm-tier bitnami/suitecrm
+  $ docker volume create --name suitecrm_data
+  $ docker run -d --name suitecrm -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e SUITECRM_DATABASE_USER=bn_suitecrm \
+    -e SUITECRM_DATABASE_NAME=bitnami_suitecrm \
+    --net suitecrm-tier \
+    --volume suitecrm_data:/bitnami \
+    bitnami/suitecrm:latest
   ```
 
 Then you can access your application at http://your-ip/
@@ -113,9 +134,15 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_suitecrm
+      - MARIADB_DATABASE=bitnami_suitecrm
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
   suitecrm:
+    environment:
+      - SUITECRM_DATABASE_USER=bn_suitecrm
+      - SUITECRM_DATABASE_NAME=bitnami_suitecrm
+      - ALLOW_EMPTY_PASSWORD=yes
     image: 'bitnami/suitecrm:latest'
     depends_on:
       - mariadb
@@ -139,7 +166,10 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Create a MariaDB container with host volume:
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_suitecrm \
+    -e MARIADB_DATABASE=bitnami_suitecrm \
     --net suitecrm-tier \
     --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
@@ -150,6 +180,9 @@ In this case you need to specify the directories to mount on the run command. Th
 
   ```bash
   $ docker run -d --name suitecrm -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e SUITECRM_DATABASE_USER=bn_suitecrm \
+    -e SUITECRM_DATABASE_NAME=bitnami_suitecrm \
     --net suitecrm-tier \
     --volume /path/to/suitecrm-persistence:/bitnami \
     bitnami/suitecrm:latest
@@ -194,7 +227,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the SuiteCRM image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. 
+When you start the SuiteCRM image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
 
 ##### User and Site configuration
 
@@ -267,6 +300,10 @@ This would be an example of SMTP configuration using a Gmail account:
     ports:
       - 80:80
     environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - SUITECRM_DATABASE_USER=bn_suitecrm
+      - SUITECRM_DATABASE_NAME=bitnami_suitecrm
       - SUITECRM_SMTP_HOST=smtp.gmail.com
       - SUITECRM_SMTP_USER=your_email@gmail.com
       - SUITECRM_SMTP_PASSWORD=your_password
@@ -278,6 +315,10 @@ This would be an example of SMTP configuration using a Gmail account:
 
   ```bash
   $ docker run -d -p 80:80 -p 443:443 --name suitecrm  \
+    -e MARIADB_HOST=mariadb \
+    -e MARIADB_PORT_NUMBER=3306 \
+    -e SUITECRM_DATABASE_USER=bn_suitecrm \
+    -e SUITECRM_DATABASE_NAME=bitnami_suitecrm \
     -e SUITECRM_SMTP_HOST=smtp.gmail.com \
     -e SUITECRM_SMTP_PROTOCOL=TLS \
     -e SUITECRM_SMTP_PORT=587 \
@@ -301,12 +342,6 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `$ docker info`
 - Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
-
-# Community
-
-Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
-
-Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 
