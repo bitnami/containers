@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-moodle/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-moodle/tree/master)
-[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
 # What is Moodle?
 
@@ -45,11 +44,19 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     environment:
+      - MARIADB_USER=bn_moodle
+      - MARIADB_DATABASE=bitnami_moodle
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'mariadb_data:/bitnami'
   moodle:
     image: 'bitnami/moodle:latest'
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - MOODLE_DATABASE_USER=bn_moodle
+      - MOODLE_DATABASE_NAME=bitnami_moodle
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '80:80'
       - '443:443'
@@ -75,18 +82,32 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker network create moodle-tier
   ```
 
-2. Start a MariaDB database in the network generated:
+2. Create a volume for MariaDB persistence and create a MariaDB container
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net moodle-tier bitnami/mariadb
+  $ docker volume create --name mariadb_data
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_moodle \
+    -e MARIADB_DATABASE=bitnami_moodle \
+    --net moodle-tier \
+    --volume mariadb_data:/bitnami \
+    bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to Moodle to resolve the host
 
-3. Run the Moodle container:
+3. Create volumes for Moodle persistence and launch the container
 
   ```bash
-  $ docker run -d -p 80:80 -p 443:443 --name moodle --net moodle-tier bitnami/moodle
+  $ docker volume create --name moodle_data
+  $ docker run -d --name moodle -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MOODLE_DATABASE_USER=bn_moodle \
+    -e MOODLE_DATABASE_NAME=bitnami_moodle \
+    --net moodle-tier \
+    --volume moodle_data:/bitnami \
+    bitnami/moodle:latest
   ```
 
 Then you can access your application at http://your-ip/
@@ -113,10 +134,16 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_moodle
+      - MARIADB_DATABASE=bitnami_moodle
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
   moodle:
     image: 'bitnami/moodle:latest'
+    environment:
+      - MOODLE_DATABASE_USER=bn_moodle
+      - MOODLE_DATABASE_NAME=bitnami_moodle
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '80:80'
       - '443:443'
@@ -139,7 +166,13 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Start a MariaDB database in the previous network:
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes -v /path/to/mariadb-persistence:/bitnami --net moodle-tier bitnami/mariadb:latest
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_moodle \
+    -e MARIADB_DATABASE=bitnami_moodle \
+    -v /path/to/mariadb-persistence:/bitnami \
+    --net moodle-tier \
+    bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to Moodle to resolve the host
@@ -148,6 +181,9 @@ In this case you need to specify the directories to mount on the run command. Th
 
   ```bash
   $ docker run -d -p 80:80 -p 443:443 --name moodle \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MOODLE_DATABASE_USER=bn_moodle \
+    -e MOODLE_DATABASE_NAME=bitnami_moodle \
     --net moodle-tier \
     --volume /path/to/moodle-persistence:/bitnami \
     bitnami/moodle:latest
@@ -210,7 +246,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the moodle image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. 
+When you start the moodle image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
 
 ##### User and Site configuration
 
@@ -283,6 +319,10 @@ This would be an example of SMTP configuration using a GMail account:
       - 80:80
       - 443:443
     environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - MOODLE_DATABASE_USER=bn_moodle
+      - MOODLE_DATABASE_NAME=bitnami_moodle
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
@@ -294,6 +334,10 @@ This would be an example of SMTP configuration using a GMail account:
 
   ```bash
   $ docker run -d  -p 80:80 -p 443:443 --name moodle
+    -e MARIADB_HOST=mariadb \
+    -e MARIADB_PORT_NUMBER=3306 \
+    -e MOODLE_DATABASE_USER=bn_moodle \
+    -e MOODLE_DATABASE_NAME=bitnami_moodle \
     -e SMTP_HOST=smtp.gmail.com \
     -e SMTP_PORT=587 \
     -e SMTP_USER=your_email@gmail.com \
@@ -316,12 +360,6 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `$ docker info`
 - Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
-
-# Community
-
-Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
-
-Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 
