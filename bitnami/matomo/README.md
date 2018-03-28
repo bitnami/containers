@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-matomo/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-matomo/tree/master)
-[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
 # What is Matomo?
 
@@ -58,11 +57,19 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     environment:
+      - MARIADB_USER=bn_matomo
+      - MARIADB_DATABASE=bitnami_matomo
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'mariadb_data:/bitnami'
   application:
     image: 'bitnami/matomo:latest'
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - MATOMO_DATABASE_USER=bn_matomo
+      - MATOMO_DATABASE_NAME=bitnami_matomo
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '80:80'
       - '443:443'
@@ -88,18 +95,30 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker network create matomo_network
   ```
 
-2. Start a MariaDB database in the network generated:
-
-  ```
-   $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net=matomo_network bitnami/mariadb
-  ```
-
-  *Note:* You need to give the container a name in order to Matomo to resolve the host
-
-3. Run the Matomo container:
+2. Create a volume for MariaDB persistence and create a MariaDB container
 
   ```bash
-  $ docker run -d -p 80:80 --name matomo --net=matomo_network bitnami/matomo
+  $ docker volume create --name mariadb_data
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_matomo \
+    -e MARIADB_DATABASE=bitnami_matomo \
+    --net matomo-tier \
+    --volume mariadb_data:/bitnami \
+    bitnami/mariadb:latest
+  ```
+
+3. Create volumes for Matomo persistence and launch the container
+
+  ```bash
+  $ docker volume create --name matomo_data
+  $ docker run -d --name matomo -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MATOMO_DATABASE_USER=bn_matomo \
+    -e MATOMO_DATABASE_NAME=bitnami_matomo \
+    --net matomo-tier \
+    --volume matomo_data:/bitnami \
+    bitnami/matomo:latest
   ```
 
 Then you can access your application at http://your-ip/
@@ -126,10 +145,16 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_matomo
+      - MARIADB_DATABASE=bitnami_matomo
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
   matomo:
     image: 'bitnami/matomo:latest'
+    environment:
+      - MATOMO_DATABASE_USER=bn_matomo
+      - MATOMO_DATABASE_NAME=bitnami_matomo
+      - ALLOW_EMPTY_PASSWORD=yes
     depends_on:
       - mariadb
     ports:
@@ -152,7 +177,10 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Create a MariaDB container with host volume:
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  $ docker run -d --name mariadb
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_matomo \
+    -e MARIADB_DATABASE=bitnami_matomo \
     --net matomo-tier \
     --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
@@ -163,6 +191,9 @@ In this case you need to specify the directories to mount on the run command. Th
 
   ```bash
   $ docker run -d --name matomo -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MATOMO_DATABASE_USER=bn_matomo \
+    -e MATOMO_DATABASE_NAME=bitnami_matomo \
     --net matomo-tier \
     --volume /path/to/matomo-persistence:/bitnami \
     bitnami/matomo:latest
@@ -207,7 +238,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the Matomo image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. 
+When you start the Matomo image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
 
 ##### User and Site configuration
 
@@ -277,6 +308,10 @@ This would be an example of SMTP configuration using a Gmail account:
     ports:
       - 80:80
     environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - MATOMO_DATABASE_USER=bn_matomo
+      - MATOMO_DATABASE_NAME=bitnami_matomo
       - SMTP_HOST=smtp.gmail.com
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
@@ -287,8 +322,19 @@ This would be an example of SMTP configuration using a Gmail account:
  * For manual execution:
 
 ```bash
- $ docker run -d -e SMTP_HOST=smtp.gmail.com -e SMTP_PROTOCOL=TLS -e SMTP_PORT=587 -e SMTP_USER=your_email@gmail.com -e \
- SMTP_PASSWORD=your_password -p 80:80 --name matomo -v /your/local/path/bitnami/matomo:/bitnami bitnami/matomo
+ $ docker run -d --name matomo -p 80:80 -p 443:443 \
+   --net matomo-tier \
+   -e MARIADB_HOST=mariadb \
+   -e MARIADB_PORT_NUMBER=3306 \
+   -e MATOMO_DATABASE_USER=bn_matomo \
+   -e MATOMO_DATABASE_NAME=bitnami_matomo \
+   -e SMTP_HOST=smtp.gmail.com \
+   -e SMTP_PROTOCOL=TLS \
+   -e SMTP_PORT=587 \
+   -e SMTP_USER=your_email@gmail.com \
+   -e SMTP_PASSWORD=your_password \
+   -v /your/local/path/bitnami/matomo:/bitnami \
+ bitnami/matomo:latest
 ```
 
 # Contributing
@@ -304,12 +350,6 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `docker info`
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
-
-# Community
-
-Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
-
-Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 
