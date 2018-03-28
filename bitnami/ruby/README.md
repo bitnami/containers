@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-ruby/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-ruby/tree/master)
-[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
 # What is Ruby?
 
@@ -31,7 +30,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 
- - [`2.5`, `2.5.0-r2`, `latest` (2.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.0-r2/2.5/Dockerfile), [`2.5-prod`, `2.5.0-r2-prod` (2.5/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.0-r2/2.5/prod/Dockerfile)
+ - [`2.5`, `2.5.1-r0`, `latest` (2.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-r0/2.5/Dockerfile), [`2.5-prod`, `2.5.1-r0-prod` (2.5/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-r0/2.5/prod/Dockerfile)
  - [`2.4`, `2.4.3-r2` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.3-r2/2.4/Dockerfile), [`2.4-prod`, `2.4.3-r2-prod` (2.4/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.3-r2/2.4/prod/Dockerfile)
  - [`2.3`, `2.3.6-r2` (2.3/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.6-r2/2.3/Dockerfile), [`2.3-prod`, `2.3.6-r2-prod` (2.3/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.6-r2/2.3/prod/Dockerfile)
  - [`2.2`, `2.2.9-r2` (2.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.9-r2/2.2/Dockerfile), [`2.2-prod`, `2.2.9-r2-prod` (2.2/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.9-r2/2.2/prod/Dockerfile)
@@ -301,12 +300,6 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `docker info`
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
-
-# Community
-
-Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
-
-Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 Copyright (c) 2015-2018 Bitnami
