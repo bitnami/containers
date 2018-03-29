@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-php-fpm/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-php-fpm/tree/master)
-[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
 # What is PHP-FPM?
 
@@ -30,7 +29,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
- - [`7.2`, `7.2.3-r2` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.3-r2/7.2/Dockerfile), [`7.2-prod`, `7.2.3-r2-prod` (7.2/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.3-r2/7.2/prod/Dockerfile)
+ - [`7.2`, `7.2.4-r0` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.4-r0/7.2/Dockerfile), [`7.2-prod`, `7.2.4-r0-prod` (7.2/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.4-r0/7.2/prod/Dockerfile)
  - [`7.1`, `7.1.15-r2`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.15-r2/7.1/Dockerfile), [`7.1-prod`, `7.1.15-r2-prod` (7.1/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.15-r2/7.1/prod/Dockerfile)
  - [`7.0`, `7.0.28-r2` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.28-r2/7.0/Dockerfile), [`7.0-prod`, `7.0.28-r2-prod` (7.0/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.28-r2/7.0/prod/Dockerfile)
  - [`5.6`, `5.6.34-r2` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.34-r2/5.6/Dockerfile), [`5.6-prod`, `5.6.34-r2-prod` (5.6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.34-r2/5.6/prod/Dockerfile)
@@ -350,7 +349,7 @@ $ docker-compose start phpfpm
 
 ## 7.2.3-r2, 7.1.15-r2, 7.0.28-r2 and 5.6.34-r2 (2018-03-13)
 
-- PHP has been configured at compile time to scan the `/opt/bitnami/php/etc/conf.d/` folder for extra .ini configuration files
+- PHP has been configured at compile time to scan the `/opt/bitnami/php/etc/conf.d/` folder for extra .ini configuration files.
 
 ## 7.0.6-r0 (2016-05-17)
 
@@ -382,12 +381,6 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `docker info`
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
-
-# Community
-
-Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
-
-Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 
