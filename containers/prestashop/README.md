@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-prestashop/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-prestashop/tree/master)
-[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
 # What is PrestaShop?
 
@@ -43,10 +42,18 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_prestashop
+      - MARIADB_DATABASE=bitnami_prestashop
     volumes:
       - 'mariadb_data:/bitnami'
   prestashop:
     image: 'bitnami/prestashop:latest'
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - PRESTASHOP_DATABASE_USER=bn_prestashop
+      - PRESTASHOP_DATABASE_NAME=bitnami_prestashop
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '80:80'
       - '443:443'
@@ -71,18 +78,32 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker network create prestashop-tier
   ```
 
-2. Start a MariaDB database in the network generated:
+2. Create a volume for MariaDB persistence and create a MariaDB container
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --network prestashop-tier bitnami/mariadb
+  $ docker volume create --name mariadb_data
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_prestashop \
+    -e MARIADB_DATABASE=bitnami_prestashop \
+    --net prestashop-tier \
+    --volume mariadb_data:/bitnami \
+    bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to PrestaShop to resolve the host
 
-3. Run the PrestaShop container:
+3. Create volumes for Prestashop persistence and launch the container
 
   ```bash
-  $ docker run -d -p 80:80 -p 443:443 --name prestashop --network prestashop-tier bitnami/prestashop
+  $ docker volume create --name prestashop_data
+  $ docker run -d --name prestashop -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e PRESTASHOP_DATABASE_USER=bn_prestashop \
+    -e PRESTASHOP_DATABASE_NAME=bitnami_prestashop \
+    --net prestashop-tier \
+    --volume prestashop_data:/bitnami \
+    bitnami/prestashop:latest
   ```
 
 Then you can access your application at <http://your-ip/>
@@ -111,10 +132,16 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_prestashop
+      - MARIADB_DATABASE=bitnami_prestashop
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
   prestashop:
     image: 'bitnami/prestashop:latest'
+    environment:
+      - PRESTASHOP_DATABASE_USER=bn_prestashop
+      - PRESTASHOP_DATABASE_NAME=bitnami_prestashop
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '80:80'
       - '443:443'
@@ -137,7 +164,10 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Create a MariaDB container with host volume:
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_prestashop \
+    -e MARIADB_DATABASE=bitnami_prestashop \
     --network prestashop-tier \
     --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
@@ -149,6 +179,9 @@ In this case you need to specify the directories to mount on the run command. Th
 
   ```bash
   $ docker run -d --name prestashop -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e PRESTASHOP_DATABASE_USER=bn_prestashop \
+    -e PRESTASHOP_DATABASE_NAME=bitnami_prestashop \
     --network prestashop-tier \
     --volume /path/to/prestashop-persistence:/bitnami \
     bitnami/prestashop:latest
@@ -193,7 +226,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the PrestaShop image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. 
+When you start the PrestaShop image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
 
 ##### User and Site configuration
 
@@ -273,6 +306,10 @@ prestashop:
     - 80:80
     - 443:443
   environment:
+    - MARIADB_HOST=mariadb
+    - MARIADB_PORT_NUMBER=3306
+    - PRESTASHOP_DATABASE_USER=bn_prestashop
+    - PRESTASHOP_DATABASE_NAME=bitnami_prestashop
     - SMTP_HOST=smtp.gmail.com
     - SMTP_PORT=587
     - SMTP_PROTOCOL=tls
@@ -284,6 +321,10 @@ prestashop:
 
 ```bash
 $ docker run -d --name prestashop -p 80:80 -p 443:443 \
+  -e MARIADB_HOST=mariadb \
+  -e MARIADB_PORT_NUMBER=3306 \
+  -e PRESTASHOP_DATABASE_USER=bn_prestashop \
+  -e PRESTASHOP_DATABASE_NAME=bitnami_prestashop \
   -e SMTP_HOST=smtp.gmail.com \
   -e SMTP_PORT=587 \
   -e SMTP_PROTOCOL=tls \
@@ -313,12 +354,6 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `$ docker info`
 - Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
-
-# Community
-
-Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
-
-Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 
