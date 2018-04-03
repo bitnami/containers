@@ -9,8 +9,6 @@ jobs:
           LATEST_STABLE: "0"
           IMAGE_NAME: alertmanager
           DOCKER_PROJECT: bitnami
-          QUAY_PROJECT: bitnami
-          GCLOUD_PROJECT: bitnami-containers
 
     steps:
       - checkout
