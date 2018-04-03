@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-jasperreports/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-jasperreports/tree/master)
-[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
 # What is JasperReports Server?
 
@@ -41,11 +40,19 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     environment:
+      - MARIADB_USER=bn_jasperreports
+      - MARIADB_DATABASE=bitnami_jasperreports
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - mariadb_data:/bitnami
   jasperreports:
     image: bitnami/jasperreports:latest
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT=3306
+      - JASPERREPORTS_DATABASE_USER=bn_jasperreports
+      - JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports
+      - ALLOW_EMPTY_PASSWORD=yes
     depends_on:
       - mariadb
     ports:
@@ -73,10 +80,30 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker network create jasperreports-tier
   ```
 
-2. Run the JasperReports Server container:
+2. Create a volume for MariaDB persistence and create a MariaDB container
 
   ```bash
-  $ docker run -d -p 80:8080 --name jasperreports --net=jasperreports-tier bitnami/jasperreports
+  $ docker volume create --name mariadb_data
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_jasperreports \
+    -e MARIADB_DATABASE=bitnami_jasperreports \
+    --net jasperreports-tier \
+    --volume mariadb_data:/bitnami \
+    bitnami/mariadb:latest
+  ```
+
+3. Create volumes for JasperReports persistence and launch the container
+
+  ```bash
+  $ docker volume create --name jasperreports_data
+  $ docker run -d --name jasperreports -p 80:8080 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e JASPERREPORTS_DATABASE_USER=bn_jasperreports \
+    -e JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports \
+    --net jasperreports-tier \
+    --volume jasperreports_data:/bitnami \
+    bitnami/jasperreports:latest
   ```
 
 Then you can access your application at http://your-ip/. Enter bitnami default username and password:
@@ -105,10 +132,18 @@ This requires a minor change to the `docker-compose.yml` template previously sho
 version: '2'
 services:
   mariadb: bitnami/mariadb:latest
+  environment:
+    - ALLOW_EMPTY_PASSWORD=yes
+    - MARIADB_USER=bn_jasperreports
+    - MARIADB_DATABASE=bitnami_jasperreports
   volumes:
     - /path/to/mariadb-persistence:/bitnami
 jasperreports:
   image: bitnami/jasperreports:latest
+  environment:
+    - JASPERREPORTS_DATABASE_USER=bn_jasperreports
+    - JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports
+    - ALLOW_EMPTY_PASSWORD=yes
   depends_on:
     - mariadb
   ports:
@@ -130,7 +165,10 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Create a MariaDB container with host volume:
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_jasperreports \
+    -e MARIADB_DATABASE=bitnami_jasperreports \
     --net jasperreports-tier \
     --volume /path/to/mariadb-persistence:/bitnami \
    bitnami/mariadb:latest
@@ -140,6 +178,9 @@ In this case you need to specify the directories to mount on the run command. Th
 
   ```bash
   $  docker run -d --name jasperreports -p 80:8080 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e JASPERREPORTS_DATABASE_USER=bn_jasperreports \
+    -e JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports \
     --net jasperreports-tier \
     --volume /path/to/jasperreports-persistence:/bitnami \
     bitnami/jasperreports:latest
@@ -184,7 +225,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the jasperreports image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. 
+When you start the jasperreports image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
 
 ##### User and Site configuration
 
@@ -252,6 +293,10 @@ This would be an example of SMTP configuration using a GMail account:
     ports:
       - 80:8080
     environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - JASPERREPORTS_DATABASE_USER=bn_jasperreports
+      - JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_EMAIL=your_email@gmail.com
@@ -263,6 +308,11 @@ This would be an example of SMTP configuration using a GMail account:
 
 ```bash
  $ docker run -d -p 80:8080 --name jasperreports --net=jasperreports-tier \
+    -e MARIADB_HOST=mariadb \
+    -e MARIADB_PORT=3306 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e JASPERREPORTS_DATABASE_USER=bn_jasperreports \
+    -e JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports \
     -e SMTP_HOST=smtp.gmail.com \
     -e SMTP_PORT=587 \
     -e SMTP_USER=your_email@gmail.com \
@@ -284,12 +334,6 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `docker info`
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
-
-# Community
-
-Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
-
-Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 
