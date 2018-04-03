@@ -3,13 +3,13 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libaio1 libc6 libgcc1 libncurses5 libnuma1 libsasl2-2 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg unpack mysql-5.7.21-4 --checksum 0fa7ce5963229f481de27458c4cdf3fd341313872d40fd246fc6942d0aa03e3c
+RUN bitnami-pkg unpack mysql-5.7.21-5 --checksum 649eb3d3022f8403954e2bdac410b24f8815df7f10b672c7666e88cb3206e98b
 
 COPY rootfs /
 
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.21-r8" \
+    BITNAMI_IMAGE_VERSION="5.7.21-r9" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
