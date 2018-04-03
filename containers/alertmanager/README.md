@@ -28,7 +28,7 @@ The recommended way to get the Bitnami Alertmanager Docker Image is to pull the 
 $ docker pull bitnami/alertmanager:latest
 ```
 
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/AlertManager/tags/) in the Docker Hub Registry.
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/alertmanager/tags/) in the Docker Hub Registry.
 
 ```bash
 $ docker pull bitnami/alertmanager:[TAG]
