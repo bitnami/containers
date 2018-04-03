@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack postgresql-10.3.0-1 --checksum 964ce00ecbe2baf7cb3e4138a9
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="10.3.0-r2" \
+    BITNAMI_IMAGE_VERSION="10.3.0-r3" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
     POSTGRESQL_MASTER_HOST="" \
