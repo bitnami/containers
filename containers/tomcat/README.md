@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-tomcat/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-tomcat/tree/master)
-[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
 # What is Tomcat?
 
@@ -28,7 +27,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
- - [`9.0`, `9.0.6-r0` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.6-r0/9.0/Dockerfile)
+ - [`9.0`, `9.0.6-r1` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.6-r1/9.0/Dockerfile)
  - [`8.5`, `8.5.29-r0`, `latest` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.29-r0/8.5/Dockerfile)
  - [`8.0`, `8.0.50-r2` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.50-r2/8.0/Dockerfile)
  - [`7`, `7.0.85-r2` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.85-r2/7/Dockerfile)
@@ -318,12 +317,6 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `docker info`
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
-
-# Community
-
-Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
-
-Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 
