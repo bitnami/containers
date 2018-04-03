@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-opencart/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-opencart/tree/master)
-[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
 # What is OpenCart?
 
@@ -42,11 +41,19 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     environment:
+      - MARIADB_USER=bn_opencart
+      - MARIADB_DATABASE=bitnami_opencart
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'mariadb_data:/bitnami'
   opencart:
     image: 'bitnami/opencart:latest'
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - OPENCART_DATABASE_USER=bn_opencart
+      - OPENCART_DATABASE_NAME=bitnami_opencart
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '80:80'
       - '443:443'
@@ -71,18 +78,32 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker network create opencart-tier
   ```
 
-2. Start a MariaDB database in the network generated:
+2. Create a volume for MariaDB persistence and create a MariaDB container
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net=opencart_network bitnami/mariadb:latest
+  $ docker volume create --name mariadb_data
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_opencart \
+    -e MARIADB_DATABASE=bitnami_opencart \
+    --net opencart-tier \
+    --volume mariadb_data:/bitnami \
+    bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order to OpenCart to resolve the host
 
-3. Run the OpenCart container:
+3. Create volumes for Opencart persistence and launch the container
 
   ```bash
-  $ docker run -d -p 80:80 -p 443:443 --name opencart --net opencart-tier bitnami/opencart:latest
+  $ docker volume create --name opencart_data
+  $ docker run -d --name opencart -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e OPENCART_DATABASE_USER=bn_opencart \
+    -e OPENCART_DATABASE_NAME=bitnami_opencart \
+    --net opencart-tier \
+    --volume opencart_data:/bitnami \
+    bitnami/opencart:latest
   ```
 
 Then you can access the OpenCart storefront at http://your-ip/. To access the administration area, logon to http://your-ip/admin
@@ -111,10 +132,16 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_opencart
+      - MARIADB_DATABASE=bitnami_opencart
     volumes:
       - '/path/to/mariadb-persitence:/bitnami'
   opencart:
     image: 'bitnami/opencart:latest'
+    environment:
+      - OPENCART_DATABASE_USER=bn_opencart
+      - OPENCART_DATABASE_NAME=bitnami_opencart
+      - ALLOW_EMPTY_PASSWORD=yes
     depends_on:
       - mariadb
     ports:
@@ -137,7 +164,10 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Create a MariaDB container with host volume:
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_opencart \
+    -e MARIADB_DATABASE=bitnami_opencart \
     --net opencart-tier \
     --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
@@ -193,7 +223,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the opencart image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. 
+When you start the opencart image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
 
 ##### User and Site configuration
 
@@ -269,6 +299,10 @@ This would be an example of SMTP configuration using a GMail account:
       - 80:80
       - 443:443
     environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - OPENCART_DATABASE_USER=bn_opencart
+      - OPENCART_DATABASE_NAME=bitnami_opencart
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
@@ -281,6 +315,10 @@ This would be an example of SMTP configuration using a GMail account:
 
    ```bash
    $ docker run -d --name opencart -p 80:80 -p 443:443 \
+     -e MARIADB_HOST=mariadb \
+     -e MARIADB_PORT_NUMBER=3306 \
+     -e OPENCART_DATABASE_USER=bn_opencart \
+     -e OPENCART_DATABASE_NAME=bitnami_opencart \
      -e SMTP_HOST=smtp.gmail.com \
      -e SMTP_PORT=587 \
      -e SMTP_USER=your_email@gmail.com \
@@ -303,12 +341,6 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `$ docker info`
 - Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
-
-# Community
-
-Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
-
-Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 
