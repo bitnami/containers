@@ -44,12 +44,12 @@ $ docker build -t bitnami/alertmanager:latest https://github.com/bitnami/bitnami
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a volume at the `/bitnami` path. The above examples define a docker volume namely `alertmanager_data`. The Alertmanager application state will persist as long as this volume is not removed.
+For persistence you should mount a volume at the `/opt/bitnami/data` path. The above examples define a docker volume namely `alertmanager_data`. The Alertmanager application state will persist as long as this volume is not removed.
 
 To avoid inadvertent removal of this volume you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ```bash
-$ docker run -v /path/to/alertmanager-persistence:/bitnami bitnami/alertmanager:latest
+$ docker run -v /path/to/alertmanager-persistence:/opt/bitnami/data bitnami/alertmanager:latest
 ```
 
 # Connecting to other containers
@@ -82,6 +82,8 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 # Configuration
 
 This is an example configuration that should cover most relevant aspects of the new YAML configuration format. The full documentation of the configuration can be found [here](https://prometheus.io/docs/alerting/configuration/).
+
+This file is located at `/opt/bitnami/alertmanager/conf/config.yml`, you can check the [Persisting your data](# Persisting your application) section to add a custom volume to modify it.
 
 ```yaml
 global:
