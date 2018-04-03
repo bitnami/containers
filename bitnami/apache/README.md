@@ -171,8 +171,8 @@ or using Docker Compose:
 version: '2'
 
 services:
-  mariadb:
-    image: 'bitnami/nginx:latest'
+  apache:
+    image: 'bitnami/apache:latest'
     ports:
       - '80:80'
       - '443:443'
