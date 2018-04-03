@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-osclass/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-osclass/tree/master)
-[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
 # What is Osclass?
 
@@ -43,11 +42,19 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     environment:
+      - MARIADB_USER=bn_osclass
+      - MARIADB_DATABASE=bitnami_osclass
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - mariadb_data:/bitnami
   osclass:
     image: bitnami/osclass:latest
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - OSCLASS_DATABASE_USER=bn_osclass
+      - OSCLASS_DATABASE_NAME=bitnami_osclass
+      - ALLOW_EMPTY_PASSWORD=yes
     depends_on:
       - mariadb
     ports:
@@ -82,7 +89,10 @@ If you want to run the application manually instead of using `docker-compose`, t
 
   ```bash
   $ docker volume create --name mariadb_data
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_osclass \
+    -e MARIADB_DATABASE=bitnami_osclass \
     --net osclass-tier \
     --volume mariadb_data:/bitnami \
     bitnami/mariadb:latest
@@ -93,6 +103,9 @@ If you want to run the application manually instead of using `docker-compose`, t
   ```bash
   $ docker volume create --name osclass_data
   $ docker run -d --name osclass -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e OSCLASS_DATABASE_USER=bn_osclass \
+    -e OSCLASS_DATABASE_NAME=bitnami_osclass \
     --net osclass-tier \
     --volume osclass_data:/bitnami \
     bitnami/osclass:latest
@@ -126,10 +139,16 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_osclass
+      - MARIADB_DATABASE=bitnami_osclass
     volumes:
       - /path/to/mariadb-persistence:/bitnami
   osclass:
     image: bitnami/osclass:latest
+    environment:
+      - OSCLASS_DATABASE_USER=bn_osclass
+      - OSCLASS_DATABASE_NAME=bitnami_osclass
+      - ALLOW_EMPTY_PASSWORD=yes
     depends_on:
       - mariadb
     ports:
@@ -150,7 +169,10 @@ services:
 2. Create a MariaDB container with host volume
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_osclass \
+    -e MARIADB_DATABASE=bitnami_osclass \
     --net osclass-tier \
     --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
@@ -160,6 +182,9 @@ services:
 
   ```bash
   $ docker run -d --name osclass -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e OSCLASS_DATABASE_USER=bn_osclass \
+    -e OSCLASS_DATABASE_NAME=bitnami_osclass \
     --net osclass-tier \
     --volume /path/to/osclass-persistence:/bitnami \
     bitnami/osclass:latest
@@ -247,6 +272,8 @@ services:
   mariadb:
     image: 'bitnami/mariadb:latest'
     environment:
+      - MARIADB_USER=bn_osclass
+      - MARIADB_DATABASE=bitnami_osclass
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - mariadb_data:/bitnami
@@ -259,6 +286,11 @@ services:
       - '443:443'
     environment:
       - OSCLASS_PASSWORD=my_password
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - OSCLASS_DATABASE_USER=bn_osclass
+      - OSCLASS_DATABASE_NAME=bitnami_osclass
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - osclass_data:/bitnami
 volumes:
@@ -274,6 +306,10 @@ volumes:
 $ docker run -d --name osclass -p 80:80 -p 443:443 \
   --net osclass-tier \
   --env OSCLASS_PASSWORD=my_password \
+  -e ALLOW_EMPTY_PASSWORD=yes \
+  -e OSCLASS_DATABASE_USER=bn_osclass \
+  -e OSCLASS_DATABASE_NAME=bitnami_osclass \
+  -e OSCLASS_PASSWORD=my_password \
   --volume osclass_data:/bitnami \
   bitnami/osclass:latest
 ```
@@ -297,6 +333,10 @@ This would be an example of SMTP configuration using a GMail account:
     ports:
       - 80:80
     environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - OSCLASS_DATABASE_USER=bn_osclass
+      - OSCLASS_DATABASE_NAME=bitnami_osclass
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
@@ -311,6 +351,10 @@ This would be an example of SMTP configuration using a GMail account:
   ```bash
   $ docker run -d --name osclass -p 80:80 -p 443:443 \
     --net osclass-tier \
+    -e MARIADB_HOST=mariadb \
+    -e MARIADB_PORT_NUMBER=3306 \
+    -e OSCLASS_DATABASE_USER=bn_osclass \
+    -e OSCLASS_DATABASE_NAME=bitnami_osclass \
     -e SMTP_HOST=smtp.gmail.com \
     -e SMTP_PORT=587 \
     -e SMTP_PROTOCOL=tls \
@@ -333,12 +377,6 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `$ docker info`
 - Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
-
-# Community
-
-Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
-
-Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 
