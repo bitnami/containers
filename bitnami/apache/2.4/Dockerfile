@@ -11,7 +11,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.33-r0" \
+    BITNAMI_IMAGE_VERSION="2.4.33-r1" \
     PATH="/opt/bitnami/apache/bin:$PATH"
 
 EXPOSE 80 443
