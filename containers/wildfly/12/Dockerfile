@@ -9,7 +9,7 @@ RUN ln -sf /opt/bitnami/wildfly/data /app
 COPY rootfs /
 
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="12.0.0-r0" \
+    BITNAMI_IMAGE_VERSION="12.0.0-r1" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_JAVA_HOME="" \
     WILDFLY_JAVA_OPTS="" \
