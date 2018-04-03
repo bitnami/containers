@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-testlink/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-testlink/tree/master)
-[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
 # What is TestLink?
 
@@ -46,6 +45,8 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_testlink
+      - MARIADB_DATABASE=bitnami_testlink
     volumes:
       - 'mariadb_data:/bitnami'
   testlink:
@@ -58,9 +59,14 @@ services:
     depends_on:
       - mariadb
     environment:
-      TESTLINK_USERNAME: admin
-      TESTLINK_PASSWORD: verysecretadminpassword
-      TESTLINK_EMAIL: admin@example.com
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - TESTLINK_DATABASE_USER=bn_testlink
+      - TESTLINK_DATABASE_NAME=bitnami_testlink
+      - ALLOW_EMPTY_PASSWORD=yes
+      - TESTLINK_USERNAME: admin
+      - TESTLINK_PASSWORD: verysecretadminpassword
+      - TESTLINK_EMAIL: admin@example.com
 
 volumes:
   mariadb_data:
@@ -79,18 +85,32 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker network create testlink-tier
   ```
 
-2. Start a MariaDB database in the network generated:
+2. Create a volume for MariaDB persistence and create a MariaDB container
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes --net=testlink-tier bitnami/mariadb
+  $ docker volume create --name mariadb_data
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_testlink \
+    -e MARIADB_DATABASE=bitnami_testlink \
+    --net testlink-tier \
+    --volume mariadb_data:/bitnami \
+    bitnami/mariadb:latest
   ```
 
   *Note:* You need to give the container a name in order for TestLink to resolve the host
 
-3. Run the TestLink container:
+3. Create volumes for Testlink persistence and launch the container
 
   ```bash
-  $ docker run -d -p 80:80 --name testlink --net=testlink-tier bitnami/testlink
+  $ docker volume create --name testlink_data
+  $ docker run -d --name testlink -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e TESTLINK_DATABASE_USER=bn_testlink \
+    -e TESTLINK_DATABASE_NAME=bitnami_testlink \
+    --net testlink-tier \
+    --volume testlink_data:/bitnami \
+    bitnami/testlink:latest
   ```
 
 Then you can access your application at http://your-ip/
@@ -117,10 +137,16 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_testlink
+      - MARIADB_DATABASE=bitnami_testlink
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
   testlink:
     image: 'bitnami/testlink:latest'
+    environment:
+      - TESTLINK_DATABASE_USER=bn_testlink
+      - TESTLINK_DATABASE_NAME=bitnami_testlink
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '80:80'
       - '443:443'
@@ -143,7 +169,10 @@ In this case you need to specify the directories to mount on the run command. Th
 2. Create a MariaDB container with host volume:
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_testlink \
+    -e MARIADB_DATABASE=bitnami_testlink \
     --net testlink-tier \
     --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
@@ -155,6 +184,9 @@ In this case you need to specify the directories to mount on the run command. Th
 
   ```bash
   $ docker run -d -p 80:80 -p 443:443 --name testlink \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e TESTLINK_DATABASE_USER=bn_testlink \
+    -e TESTLINK_DATABASE_NAME=bitnami_testlink \
     --net testlink-tier \
     --volume /path/to/testlink-persistence:/bitnami \
     bitnami/testlink:latest
@@ -199,7 +231,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the testlink image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. 
+When you start the testlink image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
 
 ##### User and Site configuration
 
@@ -276,6 +308,10 @@ This would be an example of SMTP configuration using a GMail account:
       - '80:80'
       - '443:443'
     environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - TESTLINK_DATABASE_USER=bn_testlink
+      - TESTLINK_DATABASE_NAME=bitnami_testlink
       - SMTP_ENABLE=true
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
@@ -288,6 +324,10 @@ This would be an example of SMTP configuration using a GMail account:
 
   ```bash
   $ docker run -d -p 80:80 -p 443:443 --name testlink \
+    -e MARIADB_HOST=mariadb \
+    -e MARIADB_PORT_NUMBER=3306 \
+    -e TESTLINK_DATABASE_USER=bn_testlink \
+    -e TESTLINK_DATABASE_NAME=bitnami_testlink \
     -e SMTP_ENABLE=true \
     -e SMTP_HOST=smtp.gmail.com -e SMTP_PORT=587 \
     -e SMTP_USER=your_email@gmail.com \
@@ -311,12 +351,6 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `$ docker info`
 - Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
-
-# Community
-
-Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
-
-Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 
