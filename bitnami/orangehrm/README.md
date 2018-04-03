@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-orangehrm/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-orangehrm/tree/master)
-[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 
 # What is OrangeHRM?
 
@@ -43,10 +42,20 @@ version: '2'
 services:
   mariadb:
     image: bitnami/mariadb:latest
+    environment:
+      - MARIADB_USER=bn_orangehrm
+      - MARIADB_DATABASE=bitnami_orangehrm
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'mariadb_data:/bitnami'
   orangehrm:
     image: bitnami/orangehrm:latest
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - ORANGEHRM_DATABASE_USER=bn_orangehrm
+      - ORANGEHRM_DATABASE_NAME=bitnami_orangehrm
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '80:80'
       - '443:443'
@@ -82,6 +91,9 @@ If you want to run the application manually instead of using `docker-compose`, t
   ```bash
   $ docker volume create --name mariadb_data
   $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_orangehrm \
+    -e MARIADB_DATABASE=bitnami_orangehrm \
     --net orangehrm-tier \
     --volume mariadb_data:/bitnami \
     bitnami/mariadb:latest
@@ -92,6 +104,9 @@ If you want to run the application manually instead of using `docker-compose`, t
   ```bash
   $ docker volume create --name orangehrm_data
   $ docker run -d --name orangehrm -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e ORANGEHRM_DATABASE_USER=bn_orangehrm \
+    -e ORANGEHRM_DATABASE_NAME=bitnami_orangehrm \
     --net orangehrm-tier \
     --volume orangehrm_data:/bitnami \
     bitnami/orangehrm:latest
@@ -120,10 +135,16 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_orangehrm
+      - MARIADB_DATABASE=bitnami_orangehrm
     volumes:
       - /path/to/mariadb-persistence:/bitnami
   orangehrm:
     image: bitnami/orangehrm:latest
+    environment:
+      - ORANGEHRM_DATABASE_USER=bn_orangehrm
+      - ORANGEHRM_DATABASE_NAME=bitnami_orangehrm
+      - ALLOW_EMPTY_PASSWORD=yes
     depends_on:
       - mariadb
     ports:
@@ -144,7 +165,10 @@ services:
 2. Create a MariaDB container with host volume
 
   ```bash
-  $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_orangehrm \
+    -e MARIADB_DATABASE=bitnami_orangehrm \
     --net orangehrm-tier \
     --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
@@ -154,6 +178,9 @@ services:
 
   ```bash
   $ docker run -d --name orangehrm -p 80:80 -p 443:443 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e ORANGEHRM_DATABASE_USER=bn_orangehrm \
+    -e ORANGEHRM_DATABASE_NAME=bitnami_orangehrm \
     --net orangehrm-tier \
     --volume /path/to/orangehrm-persistence:/bitnami \
     bitnami/orangehrm:latest
@@ -238,6 +265,8 @@ services:
     image: 'bitnami/mariadb:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_orangehrm
+      - MARIADB_DATABASE=bitnami_orangehrm
     volumes:
       - mariadb_data:/bitnami
   orangehrm:
@@ -249,6 +278,11 @@ services:
       - '443:443'
     environment:
       - ORANGEHRM_PASSWORD=my_password
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - ORANGEHRM_DATABASE_USER=bn_orangehrm
+      - ORANGEHRM_DATABASE_NAME=bitnami_orangehrm
+      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - orangehrm_data:/bitnami
 volumes:
@@ -263,6 +297,10 @@ volumes:
 ```bash
 $ docker run -d --name orangehrm -p 80:80 -p 443:443 \
   --net orangehrm-tier \
+  --env ORANGEHRM_PASSWORD=my_password \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env ORANGEHRM_DATABASE_USER=bn_orangehrm \
+  --env ORANGEHRM_DATABASE_NAME=bitnami_orangehrm \
   --env ORANGEHRM_PASSWORD=my_password \
   --volume orangehrm_data:/bitnami \
   bitnami/orangehrm:latest
@@ -291,6 +329,10 @@ This would be an example of SMTP configuration using a GMail account:
       - 80:80
       - 443:443
     environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - ORANGEHRM_DATABASE_USER=bn_orangehrm
+      - ORANGEHRM_DATABASE_NAME=bitnami_orangehrm
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=465
       - SMTP_USER=your_email@gmail.com
@@ -305,6 +347,10 @@ This would be an example of SMTP configuration using a GMail account:
 ```bash
  $ docker run -d --name orangehrm -p 80:80 -p 443:443 \
    --net orangehrm-tier \
+   --env MARIADB_HOST=mariadb \
+   --env MARIADB_PORT_NUMBER=3306 \
+   --env ORANGEHRM_DATABASE_USER=bn_orangehrm \
+   --env ORANGEHRM_DATABASE_NAME=bitnami_orangehrm \
    --env SMTP_HOST=smtp.gmail.com \
    --env SMTP_PORT=465 --env SMTP_PROTOCOL=ssl \
    --env SMTP_USER=your_email@gmail.com \
@@ -326,12 +372,6 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `$ docker info`
 - Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
-
-# Community
-
-Most real time communication happens in the `#containers` channel at [bitnami-oss.slack.com](http://bitnami-oss.slack.com); you can sign up at [slack.oss.bitnami.com](http://slack.oss.bitnami.com).
-
-Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.slackarchive.io).
 
 # License
 
