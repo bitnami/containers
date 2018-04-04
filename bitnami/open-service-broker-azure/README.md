@@ -16,6 +16,16 @@ In order to use the charts in this repository, you must have the following compo
 
 This document describes how to install all these pre-requisities.
 
+# ENV Vars
+
+Remember that you need to provide these ENVs:
+
+
+ - AZURE_SUBSCRIPTION_ID
+ - AZURE_TENANT_ID
+ - AZURE_CLIENT_ID
+ - AZURE_CLIENT_SECRET
+
 # Step 1: Create a Compatible Kubernetes Cluster
 
 Please choose your preferred Kubernetes installation method below.
