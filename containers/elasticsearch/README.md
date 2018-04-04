@@ -168,23 +168,32 @@ elasticsearch:
 
 Available variables:
 
- - `ELASTICSEARCH_PLUGINS`: Comma, semi-colon or space separated list of plugins to install at initialization. No defaults
+ - `ELASTICSEARCH_CLUSTER_NAME`: The Elasticsearch Cluster Name. Default: **elasticsearch-cluster**
+ - `ELASTICSEARCH_CLUSTER_HOSTS`: List of elasticsearch hosts to set the cluster. Available separatos are ' ', ',' and ';'. No defaults.
+ - `ELASTICSEARCH_IS_DEDICATED_NODE`: Elasticsearch node to behave as a 'dedicated node'. Default: **no**
+ - `ELASTICSEARCH_NODE_TYPE`: Elasticsearch node type when behaving as a 'dedicated node'. Valid values: *master*, *data*, *coordinating* or *ingest*.
+ - `ELASTICSEARCH_NODE_NAME`: Elasticsearch node name. No defaults.
+ - `ELASTICSEARCH_BIND_ADDRESS`: Address/interface to bind by Elasticsearch. Default: **0.0.0.0**
  - `ELASTICSEARCH_PORT_NUMBER`: Elasticsearch port. Default: **9200**
  - `ELASTICSEARCH_NODE_PORT_NUMBER`: Elasticsearch Node to Node port. Default: **9300**
- - `ELASTICSEARCH_CLUSTER_NAME`: The Elasticsearch Cluster Name. Default: **elasticsearch-cluster**
- - `ELASTICSEARCH_CLUSTER_HOSTS`: List of elasticsearch hosts to set the cluster. Available separatos are ' ', ',' and ';' .No defaults.
- - `ELASTICSEARCH_CLIENT_NODE`: Elasticsearch node to behave as a 'smart router' for Kibana app. Default: **false**
- - `ELASTICSEARCH_NODE_NAME`: Elasticsearch node name. No defaults.
+ - `ELASTICSEARCH_PLUGINS`: Comma, semi-colon or space separated list of plugins to install at initialization. No defaults.
  - `ELASTICSEARCH_HEAP_SIZE`: Memory used for the Xmx and Xms java heap values. Defaults to half of the host RAM.
 
 ## Setting up a cluster
 
-A cluster can easily be setup with the Bitnami Elasticsearch Docker Image using the following environment variables
+A cluster can easily be setup with the Bitnami Elasticsearch Docker Image using the following environment variables:
 
  - `ELASTICSEARCH_CLUSTER_NAME`: The Elasticsearch Cluster Name. Default: **elasticsearch-cluster**
  - `ELASTICSEARCH_CLUSTER_HOSTS`: List of elasticsearch hosts to set the cluster. Available separatos are ' ', ',' and ';' .No defaults.
  - `ELASTICSEARCH_CLIENT_NODE`: Elasticsearch node to behave as a 'smart router' for Kibana app. Default: **false**
  - `ELASTICSEARCH_NODE_NAME`: Elasticsearch node name. No defaults.
+
+For larger cluster, you can setup 'dedicated nodes' using the following environment variables:
+
+ - `ELASTICSEARCH_IS_DEDICATED_NODE`: Elasticsearch node to behave as a 'dedicated node'. Default: **no**
+ - `ELASTICSEARCH_NODE_TYPE`: Elasticsearch node type when behaving as a 'dedicated node'. Valid values: *master*, *data*, *coordinating* or *ingest*.
+
+Find more information about 'dedicated nodes' in the [official documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html).
 
 ### Step 1: Create a new network.
 
@@ -324,6 +333,13 @@ or using Docker Compose:
 ```bash
 $ docker-compose start elasticsearch
 ```
+
+# Notable Changes
+
+## 6.2.3-r2 & 5.6.4-r6
+
+- Elasticsearch container can be configured as a dedicated node with 4 different types: *master*, *data*, *coordinating* or *ingest*.
+  Previously it was only achievable by using a custom `elasticsearch_custom.yml` file. From now on, you can use the environment variables `ELASTICSEARCH_IS_DEDICATED_NODE` & `ELASTICSEARCH_NODE_TYPE` to configure it.
 
 # Contributing
 
