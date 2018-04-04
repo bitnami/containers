@@ -5,8 +5,8 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "0"
-          LATEST_STABLE: "0"
+          RELEASE_SERIES_LIST: "1"
+          LATEST_STABLE: "1"
           IMAGE_NAME: cluster-autoscaler
           DOCKER_PROJECT: bitnami
 
