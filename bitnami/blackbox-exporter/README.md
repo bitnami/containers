@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-blackbox_exporter/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-blackbox_exporter/tree/master)
 
-# What is Blacbox_exporter?
+# What is Blackbox_exporter?
 
 The blackbox exporter allows blackbox probing of endpoints over HTTP, HTTPS, DNS, TCP and ICMP.
 
