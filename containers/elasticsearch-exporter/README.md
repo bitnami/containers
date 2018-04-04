@@ -74,6 +74,9 @@ To get a list of all the configuration option running
 ```
 elasticsearch_exporter --help
 ```
+
+In `/metrics` you can find the exported metrics.
+
 ### Mounting a volume
 
 Check the [Persisting your data](#Persisting your application) section to add custom volumes to the Elasticsearch_exporter container
