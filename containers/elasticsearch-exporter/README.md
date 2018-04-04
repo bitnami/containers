@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-elasticsearch_exporter/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-elasticsearch_exporter/tree/master)
 
-# What is Blacbox_exporter?
+# What is Elasticsearch_exporter?
 
 Prometheus exporter for various metrics about ElasticSearch.
 
