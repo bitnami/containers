@@ -1,0 +1,61 @@
+version: 2
+jobs:
+  build:
+    working_directory: /workdir
+    docker:
+      - image: docker:17.06.0-ce-git
+        environment:
+          RELEASE_SERIES_LIST: "0"
+          LATEST_STABLE: "0"
+          IMAGE_NAME: cluster-autoscaler
+          DOCKER_PROJECT: bitnami
+
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 17.06.0-ce
+      - run:
+          name: Upgrade system packages (workaround - https://github.com/docker-library/docker/issues/72)
+          command: |
+            apk upgrade --no-cache
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --no-cache curl bash coreutils
+      - run:
+          name: Docker info
+          command: |
+            docker version
+            docker info
+      - restore_cache:
+          keys:
+            - cache-{{ .Branch }}
+          paths:
+            - /cache/layers.tar
+      - run:
+          name: Build docker image
+          command: |
+            curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-image-test.sh | bash -
+      - save_cache:
+          key: cache-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /cache/layers.tar
+      - deploy:
+          name: Publish docker image
+          command: |
+            if [ -n "${CIRCLE_TAG}" ]; then
+              curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-release-image.sh | bash -
+            elif [ "${CIRCLE_BRANCH}" == "master" ]; then
+              curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-development-image.sh | bash -
+            fi
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /^[0-9].*-r[0-9]+$/
