@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-service-catalog-service-catalog/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-service-catalog-service-catalog/tree/master)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-service-catalog/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-service-catalog/tree/master)
 
 # What is Service-catalog?
 
@@ -24,30 +24,30 @@ Service Catalog installs into a Kubernetes cluster and runs behind the
 
 # Get this image
 
-The recommended way to get the Bitnami Service-catalog Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/service-catalog-service-catalog).
+The recommended way to get the Bitnami Service-catalog Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/service-catalog).
 
 ```bash
-$ docker pull bitnami/service-catalog-service-catalog:latest
+$ docker pull bitnami/service-catalog:latest
 ```
 
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/service-catalog-service-catalog/tags/) in the Docker Hub Registry.
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/service-catalog/tags/) in the Docker Hub Registry.
 
 ```bash
-$ docker pull bitnami/service-catalog-service-catalog:[TAG]
+$ docker pull bitnami/service-catalog:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/service-catalog-service-catalog:latest https://github.com/bitnami/bitnami-docker-service-catalog-service-catalog.git
+$ docker build -t bitnami/service-catalog:latest https://github.com/bitnami/bitnami-docker-service-catalog.git
 ```
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-service-catalog-service-catalog/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-service-catalog-service-catalog/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-service-catalog/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-service-catalog/pulls) with your contribution.
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-service-catalog-service-catalog/issues). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-service-catalog/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
