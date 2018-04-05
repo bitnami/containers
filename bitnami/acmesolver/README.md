@@ -2,12 +2,12 @@
 
 # What is Acmesolver?
 
-Acmesolveris a part of the cert-managetr project.
+Acmesolver is a part of the cert-manager project.
 cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources.
 
 It will ensure certificates are valid and up to date periodically, and attempt to renew certificates at an appropriate time before expiry.
 
-[https://github.com/kubernetes-incubator/service-catalog/](https://github.com/kubernetes-incubator/service-catalog/)
+[https://github.com/jetstack/cert-manager](https://github.com/jetstack/cert-manager)
 
 # Pre-requisites
 Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource support`
