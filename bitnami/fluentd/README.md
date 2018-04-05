@@ -94,10 +94,6 @@ Execute docker run with -v /path/to/dir:/opt/bitnami/fluentd/conf to share /path
 `FLUENTD_OPT`
 Use this variable to specify other Fluentd command line options, like -v or -q.
 
-### Mounting a volume
-
-Check the [Persisting your data](#Persisting your application) section to add custom volumes to the Fluentd container
-
 # Logging
 
 The Bitnami fluentd Docker image sends the container logs to the `stdout`. To view the logs:
