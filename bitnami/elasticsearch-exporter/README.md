@@ -77,10 +77,6 @@ elasticsearch_exporter --help
 
 In `/metrics` you can find the exported metrics.
 
-### Mounting a volume
-
-Check the [Persisting your data](#Persisting your application) section to add custom volumes to the Elasticsearch_exporter container
-
 # Logging
 
 The Bitnami elasticsearch_exporter Docker image sends the container logs to the `stdout`. To view the logs:
