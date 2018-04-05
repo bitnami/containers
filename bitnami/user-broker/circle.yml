@@ -7,7 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "0"
           LATEST_STABLE: "0"
-          IMAGE_NAME: service-catalog
+          IMAGE_NAME: user-broker
           DOCKER_PROJECT: bitnami
 
     steps:
