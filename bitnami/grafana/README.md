@@ -80,11 +80,7 @@ In your `custom.ini` uncomment (remove the leading ;) sign. And set `app_mode = 
 
 ## Production config
 
-Override the `/opt/bitnami/grafana/conf/grafana.ini` file by [Mounting a volume](#Mounting a volume)
-
-### Mounting a volume
-
-Check the [Persisting your data](#Persisting your application) section to add custom volumes to the Grafana container
+Override the `/opt/bitnami/grafana/conf/grafana.ini` file mounting a volume.
 
 # Logging
 
