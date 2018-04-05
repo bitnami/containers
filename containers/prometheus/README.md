@@ -89,10 +89,6 @@ Prometheus can reload its configuration at runtime. If the new configuration is 
 
 [Further information](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)
 
-### Mounting a volume
-
-Check the [Persisting your data](#Persisting your application) section to add custom volumes to the Prometheus container
-
 # Logging
 
 The Bitnami prometheus Docker image sends the container logs to the `stdout`. To view the logs:
