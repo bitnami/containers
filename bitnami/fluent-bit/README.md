@@ -82,10 +82,6 @@ Fluent Bit supports multiple extensions via plugins.
 
 [Plugins reference](http://fluentbit.io/documentation/)
 
-### Mounting a volume
-
-Check the [Persisting your data](#Persisting your application) section to add custom volumes to the Fluent Bit container
-
 # Logging
 
 The Bitnami fluent-bit Docker image sends the container logs to the `stdout`. To view the logs:
