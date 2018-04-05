@@ -74,10 +74,6 @@ There is varying support for collectors on each operating system.
 Collectors are enabled by providing a --collector.<name> flag. Collectors that are enabled by default can be disabled by providing a --no-collector.<name> flag.
 [Further information](https://prometheus.io/docs/introduction/overview/)
 
-### Mounting a volume
-
-Check the [Persisting your data](#Persisting your application) section to add custom volumes to the Node_exporter container
-
 # Logging
 
 The Bitnami node_exporter Docker image sends the container logs to the `stdout`. To view the logs:
