@@ -89,10 +89,6 @@ This file is located at `/opt/bitnami/alertmanager/conf/config.yml`, you can che
 
 `amtool` is a cli tool for interacting with the alertmanager api. It is bundled with all releases of alertmanager.
 
-### Mounting a volume
-
-Check the [Persisting your data](# Persisting your application) section to add custom volumes to the Alertmanager container
-
 # Logging
 
 The Bitnami alertmanager Docker image sends the container logs to the `stdout`. To view the logs:
