@@ -73,10 +73,6 @@ The Pushgateway has to be configured as a target to scrape by Prometheus, using 
 
 [Further information](https://prometheus.io/docs/instrumenting/pushing/)
 
-### Mounting a volume
-
-Check the [Persisting your data](#Persisting your application) section to add custom volumes to the Pushgateway container
-
 # Logging
 
 The Bitnami pushgateway Docker image sends the container logs to the `stdout`. To view the logs:
