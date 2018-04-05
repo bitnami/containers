@@ -110,10 +110,6 @@ scrape_configs:
 
 [Further information](https://github.com/prometheus/blackbox_exporter/blob/master/CONFIGURATION.md)
 
-### Mounting a volume
-
-Check the [Persisting your data](#Persisting your application) section to add custom volumes to the Blackbox_exporter container
-
 # Logging
 
 The Bitnami blackbox_exporter Docker image sends the container logs to the `stdout`. To view the logs:
