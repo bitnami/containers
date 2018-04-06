@@ -13,8 +13,8 @@ services:
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
-      - WORDPRESS_DATABASE_USER=bn_matomo
-      - WORDPRESS_DATABASE_NAME=bitnami_matomo
+      - MATOMO_DATABASE_USER=bn_matomo
+      - MATOMO_DATABASE_NAME=bitnami_matomo
       - ALLOW_EMPTY_PASSWORD=yes
     labels:
       kompose.service.type: nodeport
