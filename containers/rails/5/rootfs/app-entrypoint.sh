@@ -46,8 +46,8 @@ if [ "$1" == "bundle" -a "$2" == "exec" ]; then
   if ! app_present; then
     log "Creating rails application"
     rails new . --skip-bundle --database mysql
-    # Add rubyracer
-    sed -i "s/# gem 'therubyracer'/gem 'therubyracer'/" Gemfile
+    # Add mini_racer
+    sed -i "s/# gem 'mini_racer'/gem 'mini_racer'/" Gemfile
     log "Setting default host to \`mariadb\`"
     sed -i 's/host:.*$/host: mariadb/g' /app/config/database.yml
   fi
