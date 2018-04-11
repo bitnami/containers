@@ -422,6 +422,14 @@ As mentioned in [Persisting your database](#persisting-your-database) if you mou
 
 Refer to the [MySQL server option and variable reference guide](https://dev.mysql.com/doc/refman/5.1/en/mysqld-option-tables.html) for the complete list of configuration options.
 
+# Overwrite the main Configuration file
+
+It is also possible to use your custom `my.cnf` and overwrite the main configuration file.
+
+```bash
+$ docker run --name mariadb  -e ALLOW_EMPTY_PASSWORD=yes -v /path/to/my.cnf:/opt/bitnami/mariadb/conf/my.cnf:ro bitnami/mariadb:latest
+```
+
 # Logging
 
 The Bitnami MariaDB Docker image sends the container logs to the `stdout`. To view the logs:
@@ -509,6 +517,10 @@ $ docker-compose start mariadb
 ](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
 # Notable Changes
+
+## 10.2.14-r2 and 10.1.32-r1
+- The mariadb conf file is not in a persistent volume by default. 
+- The user is able to specify a custom file in the default location '/opt/bitnami/mariadb/conf/my.cnf'.
 
 ## 10.1.28-r2
 
