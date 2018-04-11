@@ -369,10 +369,10 @@ For example, in order to override the `max_allowed_packet` directive:
 max_allowed_packet=32M
 ```
 
-# Step 2: Run the mariaDB image with the designed volume attached.
+# Step 2: Run the MySQL image with the designed volume attached.
 
 ```bash
-$ docker run --name mysql -v /path/to/my_custom.cnf:/bitnami/mysql/conf/my_custom.cnf:ro bitnami/mysql:latest
+$ docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes -v /path/to/my_custom.cnf:/bitnami/mysql/conf/my_custom.cnf:ro bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -396,6 +396,14 @@ After that, your changes will be taken into account in the server's behaviour.
 As mentioned in [Persisting your database](#persisting-your-database) if you mount a volume at `/bitnami`, you could copy `my_custom.cnf` at `/path/to/mysql-persistence/mysql/conf/my_custom.cnf` or even edit the `/path/to/mysql-persistence/mysql/conf/my.cnf` file.
 
 Refer to the [MySQL server option and variable reference guide](https://dev.mysql.com/doc/refman/5.1/en/mysqld-option-tables.html) for the complete list of configuration options.
+
+# Overwrite the main Configuration file
+
+It is also possible to use your custom `my.cnf` and overwrite the main configuration file.
+
+```bash
+$ docker run --name mysql -v /path/to/my.cnf:/opt/bitnami/mysql/conf/my.cnf:ro bitnami/mysql:latest
+```
 
 # Logging
 
@@ -475,6 +483,10 @@ $ docker-compose start mysql
 ```
 
 # Notable Changes
+
+## 5.7.21-r6
+- The MySQL conf file is not in a persistent volume by default. 
+- The user is able to specify a custom file in the default location '/opt/bitnami/mysql/conf/my.cnf'.
 
 ## 5.7.17-r4
 
