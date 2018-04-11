@@ -82,7 +82,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 Prometheus is configured via command-line flags and a configuration file. While the command-line flags configure immutable system parameters (such as storage locations, amount of data to keep on disk and in memory, etc.), the configuration file defines everything related to scraping jobs and their instances, as well as which rule files to load.
 
-To view all available command-line flags, run ` docker run bitnami/prometheus:latest prometheus -h`.
+To view all available command-line flags, run ` docker run bitnami/prometheus:latest -h`.
 
 Prometheus can reload its configuration at runtime. If the new configuration is not well-formed, the changes will not be applied. A configuration reload is triggered by sending a SIGHUP to the Prometheus process or sending a HTTP POST request to the /-/reload endpoint (when the --web.enable-lifecycle flag is enabled). This will also reload any configured rule files.
 
