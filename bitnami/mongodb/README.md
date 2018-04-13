@@ -142,6 +142,31 @@ $ docker-compose up -d
 
 # Configuration
 
+## Passing extra command-line flags to mongod startup
+
+Passing extra command-line flags to the mongod service command is possible through the following env var:
+
+- `MONGODB_EXTRA_FLAGS`: Flags to be appended to the startup command. No defaults
+
+```bash
+$ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_EXTRA_FLAGS='--wiredTigerCacheSizeGB=2' bitnami/mongodb:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    ports:
+      - "27017:27017"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MONGODB_EXTRA_FLAGS=--wiredTigerCacheSizeGB=2
+```
+
 ## Setting the root password on first run
 
 Passing the `MONGODB_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the `root` user to the value of `MONGODB_ROOT_PASSWORD` and enabled authentication on the MongoDB server.
