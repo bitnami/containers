@@ -9,6 +9,8 @@ jobs:
           LATEST_STABLE: "2"
           IMAGE_NAME: prometheus
           DOCKER_PROJECT: bitnami
+          QUAY_PROJECT: bitnami
+          GCLOUD_PROJECT: bitnami-containers
 
     steps:
       - checkout
