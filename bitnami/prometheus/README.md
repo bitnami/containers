@@ -73,9 +73,9 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 $ docker run --name prometheus-node1 --network prometheus-network bitnami/prometheus:latest
 ```
 
-### Step 3: Run another containers
+### Step 3: Run other containers
 
-We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
+We can launch other containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
 
 # Configuration
