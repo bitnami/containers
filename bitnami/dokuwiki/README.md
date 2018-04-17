@@ -181,6 +181,14 @@ Available variables:
  - `DOKUWIKI_EMAIL`: Dokuwiki application email. Default: **user@example.com**
  - `DOKUWIKI_WIKI_NAME`: Dokuwiki wiki name. Default: **Bitnami DokuWiki**
 
+# Notable Changes
+
+## 0.20170219.201708232029-r3
+
+- Custom smileys, available in `lib/images/smileys/local`, are now persisted.
+- Address issue [#40](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/40).
+- In order to upgrade your image from previous versions, see the workaround provided on issue [#42](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/42).
+
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-dokuwiki/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-dokuwiki/pulls) with your contribution.

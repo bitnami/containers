@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r24
+FROM bitnami/minideb-extras:jessie-r27
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,11 +9,10 @@ RUN bitnami-pkg install libphp-7.0.29-0 --checksum 4b37430c93913ba40be454a583799
 RUN bitnami-pkg unpack dokuwiki-0.20170219.201708232029-3 --checksum 8df32a4b0e71e8ad8b8d4c9ae0eb5ada90bb0a41cc896c507404de16e09290f3
 
 COPY rootfs /
-
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="dokuwiki" \
-    BITNAMI_IMAGE_VERSION="0.20170219.201708232029-r6" \
+    BITNAMI_IMAGE_VERSION="0.20170219.201708232029-r7" \
     DOKUWIKI_EMAIL="user@example.com" \
     DOKUWIKI_FULL_NAME="Full Name" \
     DOKUWIKI_PASSWORD="bitnami1" \
