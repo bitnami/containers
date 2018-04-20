@@ -172,6 +172,7 @@ Available variables:
  - `RABBITMQ_CLUSTER_PARTITION_HANDLING`: Cluster partition recovery mechanism. Default: **ignore**
  - `RABBITMQ_MANAGER_PORT_NUMBER`: Manager port. Default: **15672**
  - `RABBITMQ_DISK_FREE_LIMIT`: Disk free space limit of the partition on which RabbitMQ is storing data. Default: **{mem_relative, 1.0}**
+ - `RABBITMQ_ULIMIT_NOFILES`: Resources limits: maximum number of open file descriptors. Default: **65536**
 
 ## Setting up a cluster
 
