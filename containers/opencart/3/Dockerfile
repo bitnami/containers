@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r24
+FROM bitnami/minideb-extras:jessie-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,12 +10,11 @@ RUN bitnami-pkg install libphp-7.0.29-0 --checksum 4b37430c93913ba40be454a583799
 RUN bitnami-pkg unpack opencart-3.0.2-0-1 --checksum 226543daca4fe590c0c5ff60f95cdd25a408ecd8416d330456e3b3be6af14e72
 
 COPY rootfs /
-
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="opencart" \
-    BITNAMI_IMAGE_VERSION="3.0.2-0-r5" \
+    BITNAMI_IMAGE_VERSION="3.0.2-0-r6" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
