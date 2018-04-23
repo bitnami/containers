@@ -13,6 +13,7 @@ jobs:
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
+          AZURE_PROJECT: bitnami
 
     steps:
       - checkout
