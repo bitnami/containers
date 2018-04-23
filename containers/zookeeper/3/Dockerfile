@@ -1,18 +1,17 @@
-FROM bitnami/minideb-extras:jessie-r24
+FROM bitnami/minideb-extras:jessie-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/"
 
 # Install required system packages and dependencies
-RUN bitnami-pkg install java-1.8.161-0 --checksum eb289afc43eda33d5920294460dc256f6543318506ca5a540bba9073412cfd06
+RUN bitnami-pkg install java-1.8.171-0 --checksum c5ea6aa978992a3606b070b3ef4287b0b8118611f015281868f4466a81c299b1
 RUN bitnami-pkg unpack zookeeper-3.4.10-9 --checksum 1d7f84ae01cc5e57132fec69c931a386f8359832880caad52d27dc4861306b8e
 
 COPY rootfs /
-
 ENV ALLOW_ANONYMOUS_LOGIN="no" \
     BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.4.10-r15" \
+    BITNAMI_IMAGE_VERSION="3.4.10-r16" \
     JVMFLAGS="" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH" \
     ZOO_CLIENT_PASSWORD="" \
