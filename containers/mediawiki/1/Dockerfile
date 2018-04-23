@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r24
+FROM bitnami/minideb-extras:jessie-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,12 +10,11 @@ RUN bitnami-pkg install libphp-7.0.29-0 --checksum 4b37430c93913ba40be454a583799
 RUN bitnami-pkg unpack mediawiki-1.30.0-0 --checksum f1a1caea8933c9485a0e432266074ecc3b62dd21339e5ee93100a940c90f5d3e
 
 COPY rootfs /
-
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="mediawiki" \
-    BITNAMI_IMAGE_VERSION="1.30.0-r3" \
+    BITNAMI_IMAGE_VERSION="1.30.0-r4" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
