@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r24
+FROM bitnami/minideb-extras:jessie-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,9 +8,8 @@ RUN bitnami-pkg install mysql-client-10.1.32-0 --checksum e65dc7fa2dd7fa6cac74d6
 RUN bitnami-pkg install symfony-1.5.11-0 --checksum 91bf34f8e58d04ef080ba7c56de8e1b5d0f0ab4e2da23f3a0e393befce93b545
 
 COPY rootfs /
-
 ENV BITNAMI_APP_NAME="symfony" \
-    BITNAMI_IMAGE_VERSION="1.5.11-r1" \
+    BITNAMI_IMAGE_VERSION="1.5.11-r2" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_USER="root" \
