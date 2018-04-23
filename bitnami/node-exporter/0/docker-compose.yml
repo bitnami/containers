@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  node_exporter:
+    image: bitnami/node_exporter:0
