@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r24
+FROM bitnami/minideb-extras:jessie-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,9 +7,8 @@ RUN bitnami-pkg install erlang-20.3.0-0 --checksum d2e6ccd154960eb289c1bde6b40a5
 RUN bitnami-pkg unpack rabbitmq-3.7.4-2 --checksum c816bd75165948297f048ff3ce7016f1e85f44bf60c493f6e20682b37a2c0e82
 
 COPY rootfs /
-
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.7.4-r3" \
+    BITNAMI_IMAGE_VERSION="3.7.4-r4" \
     PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:/opt/bitnami/rabbitmq/sbin:$PATH" \
     RABBITMQ_CLUSTER_NODE_NAME="" \
     RABBITMQ_CLUSTER_PARTITION_HANDLING="ignore" \
