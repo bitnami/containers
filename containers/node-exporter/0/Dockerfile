@@ -1,25 +1,22 @@
-FROM bitnami/minideb as development
+FROM bitnami/minideb:jessie as buildenv
 
-ARG NODE_EXPORTER_VERSION=0.15.2
-ARG NODE_EXPORTER_DIR=node_exporter-$NODE_EXPORTER_VERSION.linux-amd64
+RUN install_packages ca-certificates wget
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node_exporter-0.15.2-0-linux-x64-debian-8.tar.gz && \
+    tar -zxf /tmp/bitnami/pkg/cache/node_exporter-0.15.2-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/node_exporter-0.15.2-0-linux-x64-debian-8.tar.gz
 
-RUN install_packages wget ca-certificates
-
-RUN wget -nc https://github.com/prometheus/node_exporter/releases/download/v$NODE_EXPORTER_VERSION/$NODE_EXPORTER_DIR.tar.gz && \
-    tar -xzf $NODE_EXPORTER_DIR.tar.gz
+##################
 
 FROM bitnami/minideb:jessie
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ARG NODE_EXPORTER_VERSION=0.15.2
-ARG NODE_EXPORTER_DIR=node_exporter-$NODE_EXPORTER_VERSION.linux-amd64
+COPY --from=buildenv /opt/bitnami/node_exporter /opt/bitnami/node_exporter
+ENV BITNAMI_APP_NAME="node_exporter" \
+    BITNAMI_IMAGE_VERSION="0.15.2-r1" \
+    PATH="/opt/bitnami/node_exporter/bin:$PATH"
 
-COPY --from=development /$NODE_EXPORTER_DIR/node_exporter /opt/bitnami/node_exporter/bin/node_exporter
-COPY --from=development /$NODE_EXPORTER_DIR/LICENSE /opt/bitnami/node_exporter/LICENSE
+EXPOSE 9100
 
-ENV PATH="/opt/bitnami/node_exporter/bin:$PATH"
-
-EXPOSE     9100
-WORKDIR    /opt/bitnami/node_exporter
+WORKDIR /opt/bitnami/node_exporter
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/node_exporter/bin/node_exporter" ]
+ENTRYPOINT ["/opt/bitnami/node_exporter/bin/node_exporter"]
