@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r24
+FROM bitnami/minideb-extras:jessie-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,12 +10,11 @@ RUN bitnami-pkg install libphp-7.0.29-0 --checksum 4b37430c93913ba40be454a583799
 RUN bitnami-pkg unpack matomo-3.4.0-0 --checksum ef0386fa1a360357ceb526a69bdfe73051088eda39803cedf4cde15ed4b955d4
 
 COPY rootfs /
-
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="matomo" \
-    BITNAMI_IMAGE_VERSION="3.4.0-r1" \
+    BITNAMI_IMAGE_VERSION="3.4.0-r2" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
