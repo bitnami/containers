@@ -335,7 +335,7 @@ services:
       - redis-master
     environment:
       - REDIS_REPLICATION_MODE=slave
-      - REDIS_MASTER_HOST=redis-primary
+      - REDIS_MASTER_HOST=redis-master
       - REDIS_MASTER_PORT_NUMBER=6379
       - REDIS_MASTER_PASSWORD=my_master_password
       - REDIS_PASSWORD=my_slave_password
@@ -344,7 +344,7 @@ services:
 Scale the number of slaves using:
 
 ```bash
-$ docker-compose scale redis-primary=1 redis-secondary=3
+$ docker-compose scale redis-master=1 redis-secondary=3
 ```
 
 The above command scales up the number of slaves to `3`. You can scale down in the same way.
