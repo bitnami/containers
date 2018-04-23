@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r24
+FROM bitnami/minideb-extras:jessie-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,12 +10,11 @@ RUN bitnami-pkg install libphp-5.6.35-0 --checksum 4134a46ea3d2ba3b73ec4bbdb1c2e
 RUN bitnami-pkg unpack orangehrm-4.0.0-1 --checksum ffad776fc05303a64fd8e00cf16730422fd46315c62966e8e1d78d62d2d1ac5b
 
 COPY rootfs /
-
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.0.0-r4" \
+    BITNAMI_IMAGE_VERSION="4.0.0-r5" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
