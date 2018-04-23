@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r24
+FROM bitnami/minideb-extras:jessie-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,11 +9,10 @@ RUN bitnami-pkg install libphp-7.0.29-0 --checksum 4b37430c93913ba40be454a583799
 RUN bitnami-pkg unpack phpmyadmin-4.8.0-0 --checksum a801516ebf977b2fad7e61b617ef610b98ec6e8f6b1838cc3806cc520f842b36
 
 COPY rootfs /
-
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="4.8.0-r0" \
+    BITNAMI_IMAGE_VERSION="4.8.0-r1" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
     PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:$PATH" \
