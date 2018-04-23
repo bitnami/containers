@@ -1,15 +1,14 @@
-FROM bitnami/minideb-extras:jessie-r24
+FROM bitnami/minideb-extras:jessie-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN bitnami-pkg install java-1.8.161-0 --checksum eb289afc43eda33d5920294460dc256f6543318506ca5a540bba9073412cfd06
+RUN bitnami-pkg install java-1.8.171-0 --checksum c5ea6aa978992a3606b070b3ef4287b0b8118611f015281868f4466a81c299b1
 RUN bitnami-pkg unpack wildfly-11.0.0-1 --checksum bdcbbf014a52c494bc7b5aecaa0780726dc4f630a97b600a0596f7bfc951f2ee
 RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
-
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="11.0.0-r7" \
+    BITNAMI_IMAGE_VERSION="11.0.0-r8" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_JAVA_HOME="" \
     WILDFLY_JAVA_OPTS="" \
