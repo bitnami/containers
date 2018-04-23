@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r24
+FROM bitnami/minideb-extras:jessie-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,12 +11,11 @@ RUN bitnami-pkg unpack magento-2.2.3-0 --checksum a337a1dc4ef8f875edb9bccff072d2
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 
 COPY rootfs /
-
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.2.3-r2" \
+    BITNAMI_IMAGE_VERSION="2.2.3-r3" \
     MAGENTO_ADMINURI="admin" \
     MAGENTO_DATABASE_NAME="bitnami_magento" \
     MAGENTO_DATABASE_PASSWORD="" \
