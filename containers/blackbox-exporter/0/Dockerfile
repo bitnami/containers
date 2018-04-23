@@ -1,27 +1,22 @@
-FROM bitnami/minideb as development
+FROM bitnami/minideb:jessie as buildenv
 
-ARG BLACKBOX_EXPORTER_VERSION=0.12.0
-ARG BLACKBOX_EXPORTER_DIR=blackbox_exporter-$BLACKBOX_EXPORTER_VERSION.linux-amd64
+RUN install_packages ca-certificates wget
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/blackbox_exporter-0.12.0-0-linux-x64-debian-8.tar.gz && \
+    tar -zxf /tmp/bitnami/pkg/cache/blackbox_exporter-0.12.0-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/blackbox_exporter-0.12.0-0-linux-x64-debian-8.tar.gz
 
-RUN install_packages wget ca-certificates
-
-RUN wget -nc https://github.com/prometheus/blackbox_exporter/releases/download/v$BLACKBOX_EXPORTER_VERSION/$BLACKBOX_EXPORTER_DIR.tar.gz && \
-    tar -xzf $BLACKBOX_EXPORTER_DIR.tar.gz
+##################
 
 FROM bitnami/minideb:jessie
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ARG BLACKBOX_EXPORTER_VERSION=0.12.0
-ARG BLACKBOX_EXPORTER_DIR=blackbox_exporter-$BLACKBOX_EXPORTER_VERSION.linux-amd64
+COPY --from=buildenv /opt/bitnami/blackbox_exporter /opt/bitnami/blackbox_exporter
+ENV BITNAMI_APP_NAME="blackbox_exporter" \
+    BITNAMI_IMAGE_VERSION="0.12.0-r1" \
+    PATH="/opt/bitnami/blackbox_exporter/bin:$PATH"
 
-COPY --from=development /$BLACKBOX_EXPORTER_DIR/blackbox_exporter /opt/bitnami/blackbox_exporter/bin/blackbox_exporter
-COPY --from=development /$BLACKBOX_EXPORTER_DIR/blackbox.yml /opt/bitnami/blackbox_exporter/conf/config.yml
-COPY --from=development /$BLACKBOX_EXPORTER_DIR/LICENSE /opt/bitnami/blackbox_exporter/LICENSE
+EXPOSE 9115
 
-ENV PATH="/opt/bitnami/blackbox_exporter/bin:$PATH"
-
-EXPOSE     9115
-WORKDIR    /opt/bitnami/blackbox_exporter
+WORKDIR /opt/bitnami/blackbox_exporter
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/blackbox_exporter/bin/blackbox_exporter" ]
-CMD         [ "--config.file=/opt/bitnami/blackbox_exporter/conf/config.yml" ]
+ENTRYPOINT ["/opt/bitnami/blackbox_exporter/bin/blackbox_exporter"]

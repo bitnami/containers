@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  blackbox_exporter:
+    image: bitnami/blackbox_exporter:0
