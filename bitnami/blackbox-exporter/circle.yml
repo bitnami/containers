@@ -9,6 +9,8 @@ jobs:
           LATEST_STABLE: "0"
           IMAGE_NAME: blackbox_exporter
           DOCKER_PROJECT: bitnami
+          QUAY_PROJECT: bitnami
+          GCLOUD_PROJECT: bitnami-containers
 
     steps:
       - checkout
