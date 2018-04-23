@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r24
+FROM bitnami/minideb-extras:jessie-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,9 +9,8 @@ RUN bitnami-pkg install node-7.10.1-1 --checksum 7f326edcdc911932655af0283eb29e1
 RUN bitnami-pkg unpack odoo-10.0.20180315-0 --checksum 98b3b592d9a029b2ea8069263fb024f9d163640116ea21b517e6f42f7ba04945
 
 COPY rootfs /
-
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="10.0.20180315-r1" \
+    BITNAMI_IMAGE_VERSION="10.0.20180315-r2" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:$PATH" \
