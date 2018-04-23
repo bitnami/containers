@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r24
+FROM bitnami/minideb-extras:jessie-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,12 +10,11 @@ RUN bitnami-pkg install libphp-7.1.16-0 --checksum 3cecd20b90ee37662a8fc14812ccb
 RUN bitnami-pkg unpack osclass-3.7.4-2 --checksum 78f2b8200bbd85ea4348bf1e9c02068ae1d704885b6e3aa91a585b5b583c2e9c
 
 COPY rootfs /
-
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="osclass" \
-    BITNAMI_IMAGE_VERSION="3.7.4-r5" \
+    BITNAMI_IMAGE_VERSION="3.7.4-r6" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
