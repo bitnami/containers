@@ -8,11 +8,12 @@ jobs:
           RELEASE_SERIES_LIST: "2"
           LATEST_STABLE: "2"
           IMAGE_NAME: parse
-          CHART_REPO: https://github.com/bitnami/charts
-          EXTRA_CHART_REPOS_LIST: "https://github.com/kubernetes/charts"
+          CHART_NAME: parse
+          CHART_REPO: https://github.com/kubernetes/charts
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
+          AZURE_PROJECT: bitnami
 
     steps:
       - checkout

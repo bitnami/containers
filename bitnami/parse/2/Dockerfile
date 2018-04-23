@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r24
+FROM bitnami/minideb-extras:jessie-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,9 +8,8 @@ RUN bitnami-pkg install mongodb-client-3.7.2-0 --checksum 8c9d4f443ee9625b255c65
 RUN bitnami-pkg unpack parse-2.7.4-0 --checksum 0bd023bbb78a617cbd7977bb6adb65f755477a368eb8a110153f51cd3674f92e
 
 COPY rootfs /
-
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="2.7.4-r1" \
+    BITNAMI_IMAGE_VERSION="2.7.4-r2" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
