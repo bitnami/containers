@@ -1,30 +1,26 @@
-FROM bitnami/minideb as development
+FROM bitnami/minideb:jessie as buildenv
 
-ARG ALERTMANAGER_VERSION=0.14.0
-ARG ALERTMANAGER_DIR=alertmanager-$ALERTMANAGER_VERSION.linux-amd64
+RUN install_packages ca-certificates wget
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/alertmanager-0.14.0-0-linux-x64-debian-8.tar.gz && \
+    echo "fc5e1906725c70aeffc02ec88009a438a39a8c81e5462cb183269741af3a2977  /tmp/bitnami/pkg/cache/alertmanager-0.14.0-0-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/alertmanager-0.14.0-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/alertmanager-0.14.0-0-linux-x64-debian-8.tar.gz
 
-RUN install_packages wget ca-certificates
-
-RUN wget -nc https://github.com/prometheus/alertmanager/releases/download/v$ALERTMANAGER_VERSION/$ALERTMANAGER_DIR.tar.gz && \
-    tar -xzf $ALERTMANAGER_DIR.tar.gz
+##################
 
 FROM bitnami/minideb:jessie
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ARG ALERTMANAGER_VERSION=0.14.0
-ARG ALERTMANAGER_DIR=alertmanager-$ALERTMANAGER_VERSION.linux-amd64
+COPY --from=buildenv /opt/bitnami/alertmanager /opt/bitnami/alertmanager
+ENV BITNAMI_APP_NAME="alertmanager" \
+    BITNAMI_IMAGE_VERSION="0.14.0-r1" \
+    PATH="/opt/bitnami/alertmanager/bin:$PATH"
 
-COPY --from=development /$ALERTMANAGER_DIR/alertmanager /$ALERTMANAGER_DIR/amtool /opt/bitnami/alertmanager/bin/
-COPY --from=development /$ALERTMANAGER_DIR/simple.yml /opt/bitnami/alertmanager/conf/config.yml
-COPY --from=development /$ALERTMANAGER_DIR/LICENSE /opt/bitnami/alertmanager/LICENSE
+RUN mkdir -p /opt/bitnami/alertmanager/data/ && chmod g+rwX /opt/bitnami/alertmanager/data/
 
-RUN mkdir -p /opt/bitnami/alertmanager/data/ && chmod -R g+rwX /opt/bitnami/alertmanager/data/
+EXPOSE 9093
 
-ENV PATH="/opt/bitnami/alertmanager/bin:$PATH"
-
-USER       1001
-EXPOSE     9093
-WORKDIR    /opt/bitnami/alertmanager/data
-ENTRYPOINT [ "/opt/bitnami/alertmanager/bin/alertmanager" ]
-CMD        [ "--config.file=/opt/bitnami/alertmanager/conf/config.yml", \
-             "--storage.path=/opt/bitnami/alertmanager/data" ]
+WORKDIR /opt/bitnami/alertmanager
+USER 1001
+ENTRYPOINT ["/opt/bitnami/alertmanager/bin/alertmanager"]
+CMD ["--config.file=/opt/bitnami/alertmanager/conf/config.yml","--storage.path=/opt/bitnami/alertmanager/data"]
