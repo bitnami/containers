@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack discourse-1.9.5-0 --checksum be2be0a99c63dfa404ea7eaf4c80
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="1.9.5-r1" \
+    BITNAMI_IMAGE_VERSION="1.9.5-r2" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="127.0.0.1" \
     DISCOURSE_PASSWORD="bitnami123" \
