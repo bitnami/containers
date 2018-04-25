@@ -2,7 +2,7 @@ version: '2'
 
 services:
   nginx:
-    image: 'bitnami/nginx:1.12'
+    image: 'bitnami/nginx:1.14'
     labels:
       kompose.service.type: nodeport
     ports:
