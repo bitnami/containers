@@ -30,7 +30,7 @@ $ docker-compose up -d
  - [`9.0`, `9.0.7-r3` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.7-r3/9.0/Dockerfile)
  - [`8.5`, `8.5.30-r2`, `latest` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.30-r2/8.5/Dockerfile)
  - [`8.0`, `8.0.51-r3` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.51-r3/8.0/Dockerfile)
- - [`7`, `7.0.86-r2` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.86-r2/7/Dockerfile)
+ - [`7`, `7.0.86-r3` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.86-r3/7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
 
