@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r28
+FROM bitnami/minideb-extras:jessie-r30
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack neo4j-3.3.5-0 --checksum 53bc23062e1dfe2a72220c9291122d3f
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="3.3.5-r2" \
+    BITNAMI_IMAGE_VERSION="3.3.5-r3" \
     NEO4J_BOLT_PORT_NUMBER="7687" \
     NEO4J_HOST="" \
     NEO4J_HTTPS_PORT_NUMBER="7473" \
