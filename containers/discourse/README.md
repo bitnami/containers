@@ -271,7 +271,7 @@ discourse:
   ports:
     - 80:80
   environment:
-    - DISCOURSE_PASSWORD=bitnami
+    - DISCOURSE_PASSWORD=bitnami123
   volumes_from:
     - discourse_data:/bitnami
 ```
@@ -281,7 +281,7 @@ discourse:
 ```bash
  $ docker run -d --name discourse -p 80:80 \
  --net=discourse-tier \
- --env DISCOURSE_PASSWORD=bitnami \
+ --env DISCOURSE_PASSWORD=bitnami123 \
  --volume discourse_data:/bitnami \
  bitnami/discourse
 ```
