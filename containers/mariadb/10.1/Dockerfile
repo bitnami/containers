@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r30
+FROM bitnami/minideb-extras:jessie-r32
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack mariadb-10.1.32-4 --checksum f36273fe18ce950ca42377ec07da
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.1.32-r7" \
+    BITNAMI_IMAGE_VERSION="10.1.32-r8" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
