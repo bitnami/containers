@@ -277,6 +277,12 @@ Available variables:
 - `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
+# Notable Changes
+
+## 8.5.3-r1
+
+- The drupal container now uses drush to install and update the Drupal application.
+
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-drupal/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-drupal/pulls) with your contribution.
