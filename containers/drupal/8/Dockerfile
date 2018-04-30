@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r32
+FROM bitnami/minideb-extras:jessie-r35
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,15 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.33-0 --checksum 8b7e149b571298efb73d476ba0a87d
 RUN bitnami-pkg unpack php-7.1.17-0 --checksum f571a800da237fd50ea9d6a8d1f5b56a9ff73b2b9d40a6648a7556ac9a676829
 RUN bitnami-pkg unpack mysql-client-10.1.32-0 --checksum e65dc7fa2dd7fa6cac74d62a2cff2e3d40f650e721ac955381dc7b6f83d4a141
 RUN bitnami-pkg install libphp-7.1.17-0 --checksum eebda846d9f47f5b2c9c5a3497054a481977bac132504aee54d084033e66462a
-RUN bitnami-pkg install drush-8.1.16-0 --checksum 6cdfc4f32b6c89ebf8fdeb6cc4d3223b0f5591cd0969a040319e6b8f53ab971f
-RUN bitnami-pkg unpack drupal-8.5.3-0 --checksum 7f40fd960be37d65688aefbebe95fd00089c49e9436ee3076db5710b87bb1868
+RUN bitnami-pkg unpack drupal-8.5.3-1 --checksum 016b5647c25e8bbfdcd02e89a7908e5614d989547143177a3e24de902047c394
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.5.3-r1" \
+    BITNAMI_IMAGE_VERSION="8.5.3-r2" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
@@ -30,7 +29,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
     MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES="ALL" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
-    PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/mysql/bin:/opt/bitnami/drush:$PATH"
+    PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/mysql/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
 
 EXPOSE 80 443
 
