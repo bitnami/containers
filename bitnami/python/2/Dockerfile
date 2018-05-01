@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/python-2.7.14-1-linux-x64-debian-8.tar.gz
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="2.7.14-r8" \
+    BITNAMI_IMAGE_VERSION="2.7.14-r9" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8000
