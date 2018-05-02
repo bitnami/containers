@@ -27,6 +27,13 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Supported tags and respective `Dockerfile` links
+
+ - [`8.0`, `8.0.11-r0` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.11-r0/8.0/Dockerfile)
+ - [`5.7`, `5.7.22-r9`, `latest` (5.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.22-r9/5.7/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
+
 # Get this image
 
 The recommended way to get the Bitnami MySQL Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mysql).
@@ -485,7 +492,7 @@ $ docker-compose start mysql
 # Notable Changes
 
 ## 5.7.21-r6
-- The MySQL conf file is not in a persistent volume by default. 
+- The MySQL conf file is not in a persistent volume by default.
 - The user is able to specify a custom file in the default location '/opt/bitnami/mysql/conf/my.cnf'.
 
 ## 5.7.17-r4
