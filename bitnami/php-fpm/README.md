@@ -32,7 +32,7 @@ $ docker-compose up -d
  - [`7.2`, `7.2.5-r5` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.5-r5/7.2/Dockerfile), [`7.2-prod`, `7.2.5-r5-prod` (7.2/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.5-r5/7.2/prod/Dockerfile)
  - [`7.1`, `7.1.17-r6`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.17-r6/7.1/Dockerfile), [`7.1-prod`, `7.1.17-r6-prod` (7.1/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.17-r6/7.1/prod/Dockerfile)
  - [`7.0`, `7.0.30-r4` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.30-r4/7.0/Dockerfile), [`7.0-prod`, `7.0.30-r4-prod` (7.0/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.30-r4/7.0/prod/Dockerfile)
- - [`5.6`, `5.6.36-r5` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-r5/5.6/Dockerfile), [`5.6-prod`, `5.6.36-r5-prod` (5.6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-r5/5.6/prod/Dockerfile)
+ - [`5.6`, `5.6.36-r6` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-r6/5.6/Dockerfile), [`5.6-prod`, `5.6.36-r6-prod` (5.6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-r6/5.6/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
 
