@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r35
+FROM bitnami/minideb-extras:jessie-r36
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="12.0.0-r9" \
+    BITNAMI_IMAGE_VERSION="12.0.0-r10" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_JAVA_HOME="" \
     WILDFLY_JAVA_OPTS="" \
