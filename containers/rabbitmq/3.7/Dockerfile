@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r28
+FROM bitnami/minideb-extras:jessie-r38
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack rabbitmq-3.7.4-2 --checksum c816bd75165948297f048ff3ce701
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.7.4-r4" \
+    BITNAMI_IMAGE_VERSION="3.7.4-r5" \
     PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:/opt/bitnami/rabbitmq/sbin:$PATH" \
     RABBITMQ_CLUSTER_NODE_NAME="" \
     RABBITMQ_CLUSTER_PARTITION_HANDLING="ignore" \
