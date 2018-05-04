@@ -7,14 +7,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libpcre3 libssl1.0.0 zlib1g
-RUN bitnami-pkg unpack nginx-1.14.0-0 --checksum ba32771029a92369c3a31a2cfbdd8dbad90139570214889430e1443e469b81f0
+RUN bitnami-pkg unpack nginx-1.14.0-1 --checksum 9423653e0df361d431899f9b212253e15277573367e8460d1b37b4523c62cc56
 RUN ln -sf /opt/bitnami/nginx/html /app
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.14.0-r9" \
+    BITNAMI_IMAGE_VERSION="1.14.0-r10" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
     NGINX_HTTPS_PORT_NUMBER="8443" \
