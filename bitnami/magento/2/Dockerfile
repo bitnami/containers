@@ -7,15 +7,16 @@ RUN bitnami-pkg unpack apache-2.4.33-0 --checksum 8b7e149b571298efb73d476ba0a87d
 RUN bitnami-pkg unpack php-7.0.30-0 --checksum 349195fb8d087dd74499788d15f2de68ef35e7639b5b1f7a5c212019c30e6b17
 RUN bitnami-pkg unpack mysql-client-10.1.32-0 --checksum e65dc7fa2dd7fa6cac74d62a2cff2e3d40f650e721ac955381dc7b6f83d4a141
 RUN bitnami-pkg install libphp-7.0.30-0 --checksum 803dbfa89bd10df50e8a2abae29124806c94874ed06a99d9b3d4d565ba14363e
-RUN bitnami-pkg unpack magento-2.2.4-1 --checksum 5f90ed043a8d9b31503e706bab45c29fad766eb2b579665aaff2a7a2c518ed7e
+RUN bitnami-pkg unpack magento-2.2.4-2 --checksum 3e3b7ab690f7147aa62f757066d9c411a33553c05fb9a464572b0b7db054bd10
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
+RUN find /opt/bitnami/magento/htdocs -type d -print0 | xargs -0 chmod 775 && find /opt/bitnami/magento/htdocs -type f -print0 | xargs -0 chmod 664
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.2.4-r2" \
+    BITNAMI_IMAGE_VERSION="2.2.4-r3" \
     MAGENTO_ADMINURI="admin" \
     MAGENTO_DATABASE_NAME="bitnami_magento" \
     MAGENTO_DATABASE_PASSWORD="" \
