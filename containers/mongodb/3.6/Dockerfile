@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack mongodb-3.6.4-0 --checksum f4b3234267ffd8a68cdb43eff4b5bd
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.6.4-r3" \
+    BITNAMI_IMAGE_VERSION="3.6.4-r4" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_PASSWORD="" \
