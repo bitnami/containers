@@ -33,7 +33,7 @@ $ docker-compose up -d
  - [`9`, `9.11.1-r10` (9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.1-r10/9/Dockerfile), [`9-prod`, `9.11.1-r10-prod` (9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.1-r10/9/prod/Dockerfile)
  - [`8`, `8.11.1-r12` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.1-r12/8/Dockerfile), [`8-prod`, `8.11.1-r12-prod` (8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.1-r12/8/prod/Dockerfile)
  - [`7`, `7.10.1-r18` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-r18/7/Dockerfile), [`7-prod`, `7.10.1-r18-prod` (7/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-r18/7/prod/Dockerfile)
- - [`6`, `6.14.2-r4`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.2-r4/6/Dockerfile), [`6-prod`, `6.14.2-r4-prod` (6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.2-r4/6/prod/Dockerfile)
+ - [`6`, `6.14.2-r5`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.2-r5/6/Dockerfile), [`6-prod`, `6.14.2-r5-prod` (6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.2-r5/6/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
