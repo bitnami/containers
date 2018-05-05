@@ -6,7 +6,7 @@ RUN bitnami-pkg unpack consul-1.0.7-0 --checksum 08dfaccd3c552652663aae9e8c11f89
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.0.7-r9" \
+    BITNAMI_IMAGE_VERSION="1.0.7-r10" \
     CONSUL_BOOTSTRAP_EXPECT="1" \
     CONSUL_CLIENT_LAN_ADDRESS="0.0.0.0" \
     CONSUL_DATACENTER="dc1" \
