@@ -29,7 +29,7 @@ $ docker-compose up -d
 
  - [`12`, `12.0.0-r12` (12/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/12.0.0-r12/12/Dockerfile)
  - [`11`, `11.0.0-r19`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/11.0.0-r19/11/Dockerfile)
- - [`10`, `10.1.0-r23` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/10.1.0-r23/10/Dockerfile)
+ - [`10`, `10.1.0-r24` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/10.1.0-r24/10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
