@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r38
+FROM bitnami/minideb-extras:jessie-r39
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack jasperreports-6.4.3-0 --checksum 29c3b9c936d5f4714196b74b
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="6.4.3-r12" \
+    BITNAMI_IMAGE_VERSION="6.4.3-r13" \
     JASPERREPORTS_DATABASE_NAME="bitnami_jasperreports" \
     JASPERREPORTS_DATABASE_PASSWORD="" \
     JASPERREPORTS_DATABASE_USER="bn_jasperreports" \
