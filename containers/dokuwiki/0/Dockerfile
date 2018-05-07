@@ -6,13 +6,13 @@ RUN install_packages libapr1 libaprutil1 libbz2-1.0 libc6 libcomerr2 libcurl3 li
 RUN bitnami-pkg unpack apache-2.4.33-0 --checksum 8b7e149b571298efb73d476ba0a87df0d0f8aa17fa3adf0590ffc0d37bf5d6cf
 RUN bitnami-pkg unpack php-7.0.30-0 --checksum 349195fb8d087dd74499788d15f2de68ef35e7639b5b1f7a5c212019c30e6b17
 RUN bitnami-pkg install libphp-7.0.30-0 --checksum 803dbfa89bd10df50e8a2abae29124806c94874ed06a99d9b3d4d565ba14363e
-RUN bitnami-pkg unpack dokuwiki-0.20180422.201805030840-0 --checksum 688ad12829bc37ab30b5aa99b906964ab5373df008d061c771d10bdd2950d0f1
+RUN bitnami-pkg unpack dokuwiki-0.20180422.201805030840-1 --checksum 423f749987b9fdf3eaf71f0b95258e4ed8c61e8153a0bcb9a27b0ab31d545f5e
 
 COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="dokuwiki" \
-    BITNAMI_IMAGE_VERSION="0.20180422.201805030840-r4" \
+    BITNAMI_IMAGE_VERSION="0.20180422.201805030840-r5" \
     DOKUWIKI_EMAIL="user@example.com" \
     DOKUWIKI_FULL_NAME="Full Name" \
     DOKUWIKI_PASSWORD="bitnami1" \
