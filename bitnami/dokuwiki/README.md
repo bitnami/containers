@@ -189,6 +189,12 @@ Available variables:
 - Address issue [#40](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/40).
 - In order to upgrade your image from previous versions, see the workaround provided on issue [#42](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/42).
 
+## 0.20180422.201805030840-1
+
+- Custom InterWiki shortcut icons, available in `lib/images/interwiki/`, are now persisted.
+- Address issue [#40](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/40).
+- In order to upgrade your image from previous versions, see the workaround provided on issue [#42](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/42).
+
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-dokuwiki/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-dokuwiki/pulls) with your contribution.
