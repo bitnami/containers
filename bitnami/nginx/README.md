@@ -27,6 +27,11 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Supported tags and respective `Dockerfile` links
+
+* [`1.14`, `1.14.0-r17`, `latest` (1.14/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-r17/1.14/Dockerfile)
+* [`1.14-rhel-7`, `1.14.0-r2-rhel-7` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-r2/1.14/rhel-7/Dockerfile)
+
 # Get this image
 
 The recommended way to get the Bitnami nginx Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/nginx).
