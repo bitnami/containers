@@ -1,4 +1,5 @@
 #!/bin/bash
+
 . /opt/bitnami/base/functions
 . /opt/bitnami/base/helpers
 
@@ -16,7 +17,7 @@ if [[ -n $MEMCACHED_PASSWORD ]]; then
     export SASL_CONF_PATH="${CONFDIR}"
 fi
 
-ARGS="-p 11211 -P ${PIDFILE} -u memcached -v ${EXTRA_OPTIONS} -vv > ${LOGFILE} 2>&1"
+ARGS="-p 11211 -P ${PIDFILE} -u memcached -v ${EXTRA_OPTIONS} > ${LOGFILE} 2>&1"
 
 # If container is started as `root` user
 if [ $EUID -eq 0 ]; then
