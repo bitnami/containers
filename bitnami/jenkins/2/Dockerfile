@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r40
+FROM bitnami/minideb-extras:jessie-r41
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack jenkins-2.107.2-0 --checksum 5462ed17cfeb23979d380fa767bf
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.107.2-r14" \
+    BITNAMI_IMAGE_VERSION="2.107.2-r15" \
     JENKINS_PASSWORD="bitnami" \
     JENKINS_USERNAME="user" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/git/bin:$PATH" \
