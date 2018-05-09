@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r41
+FROM bitnami/minideb-extras:jessie-r42
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,14 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.33-0 --checksum 8b7e149b571298efb73d476ba0a87d
 RUN bitnami-pkg unpack php-7.0.30-0 --checksum 349195fb8d087dd74499788d15f2de68ef35e7639b5b1f7a5c212019c30e6b17
 RUN bitnami-pkg unpack mysql-client-10.1.32-0 --checksum e65dc7fa2dd7fa6cac74d62a2cff2e3d40f650e721ac955381dc7b6f83d4a141
 RUN bitnami-pkg install libphp-7.0.30-0 --checksum 803dbfa89bd10df50e8a2abae29124806c94874ed06a99d9b3d4d565ba14363e
-RUN bitnami-pkg unpack opencart-3.0.2-0-1 --checksum 226543daca4fe590c0c5ff60f95cdd25a408ecd8416d330456e3b3be6af14e72
+RUN bitnami-pkg unpack opencart-3.0.2-0-2 --checksum 7e88941da42c2dd152841dd5b296ea88b5a59d1695e9b252cc80525205edfa85
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="opencart" \
-    BITNAMI_IMAGE_VERSION="3.0.2-0-r20" \
+    BITNAMI_IMAGE_VERSION="3.0.2-0-r21" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
