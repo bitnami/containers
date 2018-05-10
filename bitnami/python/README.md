@@ -29,8 +29,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
- - [`3`, `3.6.5-r16`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-r16/3/Dockerfile), [`3-prod`, `3.6.5-r16-prod` (3/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-r16/3/prod/Dockerfile)
- - [`2`, `2.7.15-r6` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-r6/2/Dockerfile), [`2-prod`, `2.7.15-r6-prod` (2/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-r6/2/prod/Dockerfile)
+ - [`3`, `3.6.5-r17`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-r17/3/Dockerfile), [`3-prod`, `3.6.5-r17-prod` (3/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-r17/3/prod/Dockerfile)
+ - [`2`, `2.7.15-r7` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-r7/2/Dockerfile), [`2-prod`, `2.7.15-r7-prod` (2/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-r7/2/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/python GitHub repo](https://github.com/bitnami/bitnami-docker-python).
 
