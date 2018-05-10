@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r41
+FROM bitnami/minideb-extras:jessie-r43
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,12 +6,12 @@ RUN install_packages ghostscript imagemagick libbsd0 libc6 libcomerr2 libcurl3 l
 RUN bitnami-pkg install ruby-2.3.4-1 --checksum ea18a43840fdff9d113f7b3c6f4b6ec10abd88f1b84d65cda0bb61020dfdbb64
 RUN bitnami-pkg unpack postgresql-client-9.6.5-0 --checksum 96fe70bda6f0a296dcb594cd28b6810a03c6b4ba82c1ae13a228bda20cb4c423
 RUN bitnami-pkg install git-2.17.0-0 --checksum fbfa53f51d88bf6a8f0222f8861ed3b91f8ba4a0f7e1d8e132c3c5a596c963b2
-RUN bitnami-pkg unpack discourse-sidekiq-1.9.6-0 --checksum bde7fe3bda08ff822897c780c478d7525c2fc7d4b6c937b4275b3411923e81e6
+RUN bitnami-pkg unpack discourse-sidekiq-1.9.7-0 --checksum 35cb181a2eae0f7cf8fa1c2948a3e896dd1c23972aad2c0331d264c448883e36
 RUN bitnami-pkg unpack discourse-1.9.7-0 --checksum bc0aaaa9c54a172a174693256af8228660a16579484e33d9441f4ea9e45ee323
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="1.9.7-r5" \
+    BITNAMI_IMAGE_VERSION="1.9.7-r6" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="127.0.0.1" \
     DISCOURSE_PASSWORD="bitnami123" \
