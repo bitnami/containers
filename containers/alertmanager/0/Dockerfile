@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/alertmanager /opt/bitnami/alertmanager
 ENV BITNAMI_APP_NAME="alertmanager" \
-    BITNAMI_IMAGE_VERSION="0.14.0-r17" \
+    BITNAMI_IMAGE_VERSION="0.14.0-r18" \
     PATH="/opt/bitnami/alertmanager/bin:$PATH"
 
 RUN mkdir -p /opt/bitnami/alertmanager/data/ && chmod g+rwX /opt/bitnami/alertmanager/data/
