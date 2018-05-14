@@ -27,6 +27,11 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Supported tags and respective `Dockerfile` links
+
+* [`2.4`, `2.4.33-r22`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.33-r22/2.4/Dockerfile)
+* [`2.4-rhel-7`, `2.4.33-r0-rhel-7` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.33-r0-rhel-7/2.4/rhel-7/Dockerfile)
+
 # Get this image
 
 The recommended way to get the Bitnami Apache Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/apache).
