@@ -40,7 +40,7 @@ $ docker-compose up -d
 * [`7.2-rhel-7`, `7.2.5-r1-rhel-7` (7.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.5-r1-rhel-7/7.2/rhel-7/Dockerfile)
 * [`7.1-rhel-7`, `7.1.17-r1-rhel-7` (7.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.17-r1-rhel-7/7.1/rhel-7/Dockerfile)
 * [`7.0-rhel-7`, `7.0.30-r0-rhel-7` (7.0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.30-r0-rhel-7/7.0/rhel-7/Dockerfile)
-* [`5.6-rhel-7`, `5.6.36-r0-rhel-7` (5.6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-r0-rhel-7/5.6/rhel-7/Dockerfile)
+* [`5.6-rhel-7`, `5.6.36-r1-rhel-7` (5.6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-r1-rhel-7/5.6/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
 
