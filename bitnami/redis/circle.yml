@@ -8,8 +8,8 @@ jobs:
           RELEASE_SERIES_LIST: "4.0"
           LATEST_STABLE: "4.0"
           IMAGE_NAME: redis
-          CHART_NAME:
-          CHART_REPO:
+          CHART_NAME: redis
+          CHART_REPO: https://github.com/kubernetes/charts
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
