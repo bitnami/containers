@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  apache:
+    image: 'bitnami/apache:2.4-rhel-7'
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '80:8080'
+      - '443:8443'
+    volumes:
+      - 'apache_data:/bitnami'
+volumes:
+  apache_data:
+    driver: local
