@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1.14`, `1.14.0-r22`, `latest` (1.14/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-r22/1.14/Dockerfile)
+* [`1.14`, `1.14.0-r23`, `latest` (1.14/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-r23/1.14/Dockerfile)
 * [`1.14-rhel-7`, `1.14.0-r2-rhel-7` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-r2-rhel-7/1.14/rhel-7/Dockerfile)
 
 # Get this image
