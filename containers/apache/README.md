@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`2.4`, `2.4.33-r22`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.33-r22/2.4/Dockerfile)
+* [`2.4`, `2.4.33-r23`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.33-r23/2.4/Dockerfile)
 * [`2.4-rhel-7`, `2.4.33-r0-rhel-7` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.33-r0-rhel-7/2.4/rhel-7/Dockerfile)
 
 # Get this image
