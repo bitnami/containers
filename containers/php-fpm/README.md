@@ -29,15 +29,15 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`7.2`, `7.2.5-r19` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.5-r19/7.2/Dockerfile)
-* [`7.2-prod`, `7.2.5-r19-prod` (7.2/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.5-r19/7.2/prod/Dockerfile)
+* [`7.2`, `7.2.5-r18` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.5-r18/7.2/Dockerfile)
+* [`7.2-prod`, `7.2.5-r18-prod` (7.2/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.5-r18/7.2/prod/Dockerfile)
 * [`7.1`, `7.1.17-r19`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.17-r19/7.1/Dockerfile)
 * [`7.1-prod`, `7.1.17-r19-prod` (7.1/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.17-r19/7.1/prod/Dockerfile)
 * [`7.0`, `7.0.30-r18` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.30-r18/7.0/Dockerfile)
 * [`7.0-prod`, `7.0.30-r18-prod` (7.0/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.30-r18/7.0/prod/Dockerfile)
 * [`5.6`, `5.6.36-r20` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-r20/5.6/Dockerfile)
 * [`5.6-prod`, `5.6.36-r20-prod` (5.6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-r20/5.6/prod/Dockerfile)
-* [`7.2-rhel-7`, `7.2.5-r1-rhel-7` (7.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.5-r1-rhel-7/7.2/rhel-7/Dockerfile)
+* [`7.2-rhel-7`, `7.2.5-r2-rhel-7` (7.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.5-r2-rhel-7/7.2/rhel-7/Dockerfile)
 * [`7.1-rhel-7`, `7.1.17-r1-rhel-7` (7.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.17-r1-rhel-7/7.1/rhel-7/Dockerfile)
 * [`7.0-rhel-7`, `7.0.30-r0-rhel-7` (7.0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.30-r0-rhel-7/7.0/rhel-7/Dockerfile)
 * [`5.6-rhel-7`, `5.6.36-r1-rhel-7` (5.6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-r1-rhel-7/5.6/rhel-7/Dockerfile)
