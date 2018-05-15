@@ -12,7 +12,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/blackbox_exporter /opt/bitnami/blackbox_exporter
 ENV BITNAMI_APP_NAME="blackbox_exporter" \
-    BITNAMI_IMAGE_VERSION="0.12.0-r20" \
+    BITNAMI_IMAGE_VERSION="0.12.0-r21" \
     PATH="/opt/bitnami/blackbox_exporter/bin:$PATH"
 
 EXPOSE 9115
