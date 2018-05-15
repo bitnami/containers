@@ -1,10 +1,10 @@
-FROM bitnami/minideb-extras:jessie-r45
+FROM bitnami/minideb-extras:jessie-r46
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libapr1 libaprutil1 libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls-deb0-28 libgpg-error0 libgssapi-krb5-2 libhogweed2 libicu52 libidn11 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmcrypt4 libncurses5 libnettle4 libp11-kit0 libpcre3 libpng12-0 libpq5 libreadline6 librtmp1 libsasl2-2 libssh2-1 libssl1.0.0 libstdc++6 libsybdb5 libtasn1-6 libtidy-0.99-0 libtinfo5 libuuid1 libxml2 libxslt1.1 zlib1g
-RUN bitnami-pkg unpack apache-2.4.33-0 --checksum 8b7e149b571298efb73d476ba0a87df0d0f8aa17fa3adf0590ffc0d37bf5d6cf
-RUN bitnami-pkg unpack php-5.6.36-1 --checksum d716c8b52c0e56d013eacfb5373c1bd7107b81261f2ac5c7a5e384d7a928c621
+RUN bitnami-pkg unpack apache-2.4.33-1 --checksum 6d75b2446161eed96d5ab40d301d9a21d7d304f0323642fee9760e8525b0f852
+RUN bitnami-pkg unpack php-5.6.36-2 --checksum ef793e553a63156a3f4bb2d8209fe4e1df6ff5f162dd82811777bc482b6cc002
 RUN bitnami-pkg unpack mysql-client-10.1.32-1 --checksum f429bb2a440f3026975f33ffaff3badc75695c754e1b4094c438027fa0594ba1
 RUN bitnami-pkg install libphp-5.6.36-0 --checksum 4b4cea4d1bb3e8589acb18813e12d498ba4ddb29ffd0a457a5d8c4bf687c3261
 RUN bitnami-pkg unpack orangehrm-4.1.0-0 --checksum d1163a3993ab4085ebae1d7e5742439aed70c77eec1699ce26274856f2c662dc
@@ -14,7 +14,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.1.0-r5" \
+    BITNAMI_IMAGE_VERSION="4.1.0-r6" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
