@@ -1,15 +1,16 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-acmesolver/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-acmesolver/tree/master)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-cert-manager/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-cert-manager/tree/master)
 
 # What is Acmesolver?
 
 Acmesolver is a part of the cert-manager project.
-cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources.
+Cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources.
 
 It will ensure certificates are valid and up to date periodically, and attempt to renew certificates at an appropriate time before expiry.
 
 [https://github.com/jetstack/cert-manager](https://github.com/jetstack/cert-manager)
 
 # Pre-requisites
+
 Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource support`
 
 # Why use Bitnami Images?
@@ -21,6 +22,7 @@ Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource suppor
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
 # Further documentation
+
 For further documentation, please check [here](https://github.com/jetstack/cert-manager/blob/master/docs)
 
 # Contributing
@@ -38,6 +40,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
+
 Copyright 2018 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
