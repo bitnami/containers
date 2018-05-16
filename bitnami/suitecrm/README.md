@@ -236,6 +236,7 @@ When you start the SuiteCRM image, you can adjust the configuration of the insta
  - `SUITECRM_EMAIL`: SuiteCRM application email. Default: **user@example.com**
  - `SUITECRM_LASTNAME`: SuiteCRM application last name. Default: **Name**
  - `SUITECRM_HOST`: Host domain or IP.
+ - `SUITECRM_HTTP_TIMEOUT`: Timeout in seconds used on http requests during wizard installation. Default: **120**
 
 ##### Use an existing database
 

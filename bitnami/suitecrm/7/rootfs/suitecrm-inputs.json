@@ -6,6 +6,7 @@
   "databaseUser": "{{$global.env.SUITECRM_DATABASE_USER}}",
   "email": "{{$global.env.SUITECRM_EMAIL}}",
   "host": "{{$global.env.SUITECRM_HOST}}",
+  "httpTimeout": "{{$global.env.SUITECRM_HTTP_TIMEOUT}}",
   "lastName": "{{$global.env.SUITECRM_LAST_NAME}}",
   "password": "{{$global.env.SUITECRM_PASSWORD}}",
   "smtpHost": "{{$global.env.SUITECRM_SMTP_HOST}}",
