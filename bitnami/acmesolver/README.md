@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-cert-manager/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-cert-manager/tree/master)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-acmesolver/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-acmesolver/tree/master)
 
 # What is Acmesolver?
 
