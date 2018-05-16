@@ -1,25 +1,22 @@
-FROM bitnami/minideb as development
+FROM bitnami/minideb:jessie as buildenv
 
-ARG PUSHGATEWAY_VERSION=0.4.0
-ARG PUSHGATEWAY_DIR=pushgateway-$PUSHGATEWAY_VERSION.linux-amd64
+RUN install_packages ca-certificates wget
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/pushgateway-0.4.0-0-linux-x64-debian-8.tar.gz && \
+    tar -zxf /tmp/bitnami/pkg/cache/pushgateway-0.4.0-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/pushgateway-0.4.0-0-linux-x64-debian-8.tar.gz
 
-RUN install_packages wget ca-certificates
-
-RUN wget -nc https://github.com/prometheus/pushgateway/releases/download/v$PUSHGATEWAY_VERSION/$PUSHGATEWAY_DIR.tar.gz && \
-    tar -xzf $PUSHGATEWAY_DIR.tar.gz
+##################
 
 FROM bitnami/minideb:jessie
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ARG PUSHGATEWAY_VERSION=0.4.0
-ARG PUSHGATEWAY_DIR=pushgateway-$PUSHGATEWAY_VERSION.linux-amd64
+COPY --from=buildenv /opt/bitnami/pushgateway /opt/bitnami/pushgateway
+ENV BITNAMI_APP_NAME="pushgateway" \
+    BITNAMI_IMAGE_VERSION="0.4.0-r1" \
+    PATH="/opt/bitnami/pushgateway/bin:$PATH"
 
-COPY --from=development /$PUSHGATEWAY_DIR/pushgateway /opt/bitnami/pushgateway/bin/pushgateway
-COPY --from=development /$PUSHGATEWAY_DIR/LICENSE /opt/bitnami/pushgateway/LICENSE
+EXPOSE 9091
 
-ENV PATH="/opt/bitnami/pushgateway/bin:$PATH"
-
-EXPOSE     9091
+WORKDIR /opt/bitnami/pushgateway
 USER 1001
-WORKDIR    /opt/bitnami/pushgateway
-ENTRYPOINT [ "/opt/bitnami/pushgateway/bin/pushgateway" ]
+ENTRYPOINT ["/opt/bitnami/pushgateway/bin/pushgateway"]
