@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  cert-manager:
+    image: bitnami/cert-manager:0
