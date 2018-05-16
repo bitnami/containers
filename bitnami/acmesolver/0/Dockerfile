@@ -1,37 +1,22 @@
-FROM bitnami/minideb:jessie as development
+FROM bitnami/minideb:jessie as buildenv
 
-ARG CERT_MANAGER_VERSION=0.2.3
-ARG DEP_VERSION=0.4.1
-ARG GO_VERSION=1.9.4
+RUN install_packages ca-certificates wget
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/acmesolver-0.2.5-0-linux-x64-debian-8.tar.gz && \
+    tar -zxf /tmp/bitnami/pkg/cache/acmesolver-0.2.5-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/acmesolver-0.2.5-0-linux-x64-debian-8.tar.gz
 
-RUN install_packages wget ca-certificates git make tar wget gcc curl libltdl7 libdevmapper-dev
-
-RUN wget -nc https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz && \
-    tar -C /usr/local -xzf go$GO_VERSION.linux-amd64.tar.gz
-
-ENV GOPATH=/
-ENV PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
-
-RUN wget -nc https://github.com/golang/dep/releases/download/v$DEP_VERSION/dep-linux-amd64 && \
-    chmod +x dep-linux-amd64 && \
-    mv dep-linux-amd64 $GOPATH/bin/dep
-
-RUN mkdir -p /src/ && \
-    cd /src/ && \
-    git clone -b v${CERT_MANAGER_VERSION} --depth 1 https://github.com/jetstack/cert-manager.git && \
-    cd cert-manager && \
-    dep ensure -v && \
-    make acmesolver
+##################
 
 FROM bitnami/minideb:jessie
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+COPY --from=buildenv /opt/bitnami/acmesolver /opt/bitnami/acmesolver
+ENV BITNAMI_APP_NAME="acmesolver" \
+    BITNAMI_IMAGE_VERSION="0.2.5-r0" \
+    PATH="/opt/bitnami/acmesolver/bin:$PATH"
+
 RUN install_packages ca-certificates
 
-COPY --from=development /src/cert-manager/hack/build/dockerfiles/cert-manager-acmesolver_linux_amd64 /opt/bitnami/cert-manager/bin/acmesolver
-
-ENV PATH="/opt/bitnami/cert-manager/bin:$PATH"
-WORKDIR    /opt/bitnami/cert-manager
-
+WORKDIR /opt/bitnami/acmesolver
 USER 1001
-ENTRYPOINT ["/opt/bitnami/cert-manager/bin/acmesolver"]
+ENTRYPOINT ["/opt/bitnami/acmesolver/bin/acmesolver"]
