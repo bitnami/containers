@@ -1,9 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-rabbitmq/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-rabbitmq/tree/master)
 
-# Deprecation notice
-
-RabbitMQ 3.6.x release series has reached end of life. We strongly recommend using 3.7.x series instead.
-
 # What is RabbitMQ?
 
 > RabbitMQ is an open source message broker software that implements the Advanced Message Queuing Protocol (AMQP).
@@ -35,6 +31,8 @@ $ docker-compose up -d
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
 # Get this image
+
+**NOTE: The 3.6.x series is deprecated and no longer maintained, please upgrade to 3.7.x**
 
 The recommended way to get the Bitnami RabbitMQ Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/rabbitmq).
 
