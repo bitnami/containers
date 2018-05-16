@@ -1,5 +1,7 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-rabbitmq/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-rabbitmq/tree/master)
 
+# Deprecation notice
+
 RabbitMQ 3.6.x release series has reached end of life. We strongly recommend using 3.7.x series instead.
 
 # What is RabbitMQ?
