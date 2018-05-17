@@ -6,6 +6,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/"
 
 # Install required system packages and dependencies
+RUN install_packages cyrus-sasl-lib expat glibc keyutils-libs krb5-libs libcom_err libselinux nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre zlib
 RUN bitnami-pkg unpack apache-2.4.33-2 --checksum 8a763e0198778bb70c71e1750ae33955545f09436cf1f838c84308f404d59dc4
 RUN ln -sf /opt/bitnami/apache/htdocs /app
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
@@ -15,7 +16,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.33-r1" \
+    BITNAMI_IMAGE_VERSION="2.4.33-r2" \
     PATH="/opt/bitnami/apache/bin:$PATH"
 
 EXPOSE 8080 8443
