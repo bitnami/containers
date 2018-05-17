@@ -1,31 +1,27 @@
-FROM bitnami/minideb as development
+FROM bitnami/minideb:jessie as buildenv
 
-ARG GRAFANA_VERSION=5.0.3
-ARG GRAFANA_DIR=grafana-$GRAFANA_VERSION
+RUN install_packages ca-certificates wget
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-5.0.4-0-linux-x64-debian-8.tar.gz && \
+    echo "75619cd6925bc3c96b534697e441f96e33a5db6054645ffa946385791b3ff53b  /tmp/bitnami/pkg/cache/grafana-5.0.4-0-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/grafana-5.0.4-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/grafana-5.0.4-0-linux-x64-debian-8.tar.gz
+RUN mkdir -p /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/ && chmod g+rwX /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/
 
-RUN install_packages wget ca-certificates curl
-
-RUN wget -nc https://s3-us-west-2.amazonaws.com/grafana-releases/release/$GRAFANA_DIR.linux-x64.tar.gz && \
-    tar -xzf $GRAFANA_DIR.linux-x64.tar.gz
-
-
-RUN mkdir /$GRAFANA_DIR/data /$GRAFANA_DIR/logs
-RUN chmod g+w /$GRAFANA_DIR/data /$GRAFANA_DIR/logs
+##################
 
 FROM bitnami/minideb:jessie
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ARG GRAFANA_VERSION=5.0.3
-ARG GRAFANA_DIR=grafana-$GRAFANA_VERSION
+COPY --from=buildenv /opt/bitnami/grafana /opt/bitnami/grafana
+ENV BITNAMI_APP_NAME="grafana" \
+    BITNAMI_IMAGE_VERSION="5.0.4-r0" \
+    PATH="/opt/bitnami/grafana/bin:$PATH"
 
-COPY --from=development /$GRAFANA_DIR/ /opt/bitnami/grafana/
-COPY --from=development /$GRAFANA_DIR/conf/sample.ini /opt/bitnami/grafana/conf/grafana.ini
+RUN install_packages libfontconfig ca-certificates
 
-COPY rootfs/ /
+EXPOSE 3000
 
-ENV PATH="/opt/bitnami/grafana/bin:$PATH"
-
-EXPOSE     9115
-WORKDIR    /opt/bitnami/grafana
+COPY rootfs /
+WORKDIR /opt/bitnami/grafana
 USER 1001
-ENTRYPOINT [ "/run.sh" ]
+ENTRYPOINT ["/run.sh"]
