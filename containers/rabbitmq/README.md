@@ -32,8 +32,6 @@ $ docker-compose up -d
 
 # Get this image
 
-**NOTE: The 3.6.x series is deprecated and no longer maintained, please upgrade to 3.7.x**
-
 The recommended way to get the Bitnami RabbitMQ Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/rabbitmq).
 
 ```bash
