@@ -14,5 +14,5 @@
   "smtpUser": "{{$global.env.SMTP_USER}}",
   "username": "{{$global.env.MATOMO_USERNAME}}",
   "websiteHost": "{{$global.env.MATOMO_WEBSITE_HOST}}",
-  "websiteName": "{{$global.env.MATOM_WEBSITE_NAME}}"
+  "websiteName": "{{$global.env.MATOMO_WEBSITE_NAME}}"
 }
