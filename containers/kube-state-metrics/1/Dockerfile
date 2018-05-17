@@ -1,30 +1,25 @@
-FROM bitnami/minideb as development
+FROM bitnami/minideb:jessie as buildenv
 
-ARG KSM_VERSION=1.2.0
-ARG GO_VERSION=1.9.4
+RUN install_packages ca-certificates libc6 wget
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kube-state-metrics-1.3.1-0-linux-x64-debian-8.tar.gz && \
+    echo "b2d101c852fd4695f96dcffcd83b3aa912a67700932b2d90186be28b94cbbbe6  /tmp/bitnami/pkg/cache/kube-state-metrics-1.3.1-0-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kube-state-metrics-1.3.1-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kube-state-metrics-1.3.1-0-linux-x64-debian-8.tar.gz
 
-RUN install_packages wget ca-certificates git make tar wget gcc
-
-RUN wget -nc https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz && \
-    tar -C /usr/local -xzf go$GO_VERSION.linux-amd64.tar.gz
-
-ENV GOPATH=/
-ENV PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
-
-RUN mkdir -p /src/k8s.io && \
-    cd /src/k8s.io && \
-    git clone  -b v${KSM_VERSION} --depth 1 https://github.com/kubernetes/kube-state-metrics.git && \
-    cd /src/k8s.io/kube-state-metrics  && \
-    make build
+##################
 
 FROM bitnami/minideb:jessie
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-COPY --from=development /src/k8s.io/kube-state-metrics/kube-state-metrics /opt/bitnami/kube-state-metrics/bin/kube-state-metrics
-COPY --from=development /src/k8s.io/kube-state-metrics/LICENSE /opt/bitnami/kube-state-metrics/LICENSE
+COPY --from=buildenv /opt/bitnami/kube-state-metrics /opt/bitnami/kube-state-metrics
+ENV BITNAMI_APP_NAME="kube-state-metrics" \
+    BITNAMI_IMAGE_VERSION="1.3.1-r0" \
+    PATH="/opt/bitnami/kube-state-metrics/bin:$PATH"
 
-ENV PATH="/opt/bitnami/kube-state-metrics/bin:$PATH"
+RUN install_packages ca-certificates
+
 EXPOSE 8080 8081
+
+WORKDIR /opt/bitnami/kube-state-metrics
 USER 1001
-WORKDIR    /opt/bitnami/kube-state-metrics
-ENTRYPOINT ["/opt/bitnami/kube-state-metrics/bin/kube-state-metrics", "--port=8080", "--telemetry-port=8081"]
+ENTRYPOINT ["kube-state-metrics","--port=8080","--telemetry-port=8081"]

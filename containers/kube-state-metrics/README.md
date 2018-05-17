@@ -42,15 +42,17 @@ $ docker build -t bitnami/kube-state-metrics:latest https://github.com/bitnami/b
 
 # Configuration
 
-Resource recommendation
+## Resource recommendation
+
 Resource usage changes with the size of the cluster. As a general rule, you should allocate
 
-200MiB memory
-0.1 cores
+* 200MiB memory
+* 0.1 cores
+
 For clusters of more than 100 nodes, allocate at least
 
-2MiB memory per node
-0.001 cores per node
+* 2MiB memory per node
+* 0.001 cores per node
 
 # Contributing
 
