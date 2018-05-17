@@ -1,11 +1,11 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-cluster-scaler/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-cluster-autoscaler/tree/master)
 
-# What is Cluster-autoscaler?
+# What is Cluster Autoscaler?
 
 Cluster Autoscaler is a tool that automatically adjusts the size of the Kubernetes cluster when:
 
-there are pods that failed to run in the cluster due to insufficient resources.
-some nodes in the cluster are so underutilized, for an extended period of time, that they can be deleted and their pods will be easily placed on some other, existing nodes.
+* There are pods that failed to run in the cluster due to insufficient resources.
+* Some nodes in the cluster are so underutilized, for an extended period of time, that they can be deleted and their pods will be easily placed on some other, existing nodes.
 
 [https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler)
 
