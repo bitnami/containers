@@ -6,7 +6,7 @@ jobs:
       - image: docker:17.06.0-ce-git
         environment:
           RELEASE_SERIES_LIST: "2.4"
-          LATEST_STABLE: "2.4"
+          LATEST_STABLE: "2.42.4"
           IMAGE_NAME: apache
           CHART_NAME: apache
           CHART_REPO: https://github.com/bitnami/charts
@@ -63,4 +63,4 @@ workflows:
             branches:
               only: /.*/
             tags:
-              only: /^[0-9].*-r[0-9]+$/
+              only: /^[0-9].*-r[0-9]+(-(?!rhel).*)?$/
