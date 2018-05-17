@@ -1,30 +1,23 @@
-FROM bitnami/minideb:jessie as development
+FROM bitnami/minideb:jessie as buildenv
 
-ARG FLUENTD_EXPORTER_VERSION=0.1.0
-ARG GO_VERSION=1.9.4
+RUN install_packages ca-certificates wget
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluentd_exporter-0.2.0-0-linux-x64-debian-8.tar.gz && \
+    echo "23a95553173e305f991bdc41b1fd33b2f9366afbd6ba4f578cdf1d04eb59b718  /tmp/bitnami/pkg/cache/fluentd_exporter-0.2.0-0-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/fluentd_exporter-0.2.0-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/fluentd_exporter-0.2.0-0-linux-x64-debian-8.tar.gz
 
-RUN install_packages wget ca-certificates git make tar wget
-
-RUN wget -nc https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz && \
-    tar -C /usr/local -xzf go$GO_VERSION.linux-amd64.tar.gz
-
-ENV GOPATH=/
-ENV PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
-
-RUN mkdir -p /src/ && \
-    cd /src/ && \
-    git clone -b ${FLUENTD_EXPORTER_VERSION} --depth 1 https://github.com/V3ckt0r/fluentd_exporter.git && \
-    cd fluentd_exporter && \
-    go build fluentd_exporter.go
+##################
 
 FROM bitnami/minideb:jessie
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-COPY --from=development /src/fluentd_exporter/fluentd_exporter /opt/bitnami/fluentd_exporter/bin/fluentd_exporter
-COPY --from=development /src/fluentd_exporter/LICENSE /opt/bitnami/fluentd_exporter/LICENSE
+COPY --from=buildenv /opt/bitnami/fluentd_exporter /opt/bitnami/fluentd_exporter
+ENV BITNAMI_APP_NAME="fluentd_exporter" \
+    BITNAMI_IMAGE_VERSION="0.2.0-r1" \
+    PATH="/opt/bitnami/fluentd_exporter/bin:$PATH"
 
-ENV PATH="/opt/bitnami/fluentd_exporter/bin:$PATH"
 EXPOSE 9309
-WORKDIR    /opt/bitnami/fluentd_exporter
+
+WORKDIR /opt/bitnami/fluentd_exporter
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/fluentd_exporter/bin/fluentd_exporter" ]
+ENTRYPOINT ["fluentd_exporter"]
