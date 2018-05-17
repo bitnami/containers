@@ -1,24 +1,23 @@
-FROM bitnami/minideb as development
+FROM bitnami/minideb:jessie as buildenv
 
-ARG ELASTICSEARCH_EXPORTER_VERSION=1.0.2
-ARG ELASTICSEARCH_EXPORTER_DIR=elasticsearch_exporter-$ELASTICSEARCH_EXPORTER_VERSION.linux-amd64
+RUN install_packages ca-certificates wget
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/elasticsearch_exporter-1.0.2-0-linux-x64-debian-8.tar.gz && \
+    echo "304aa76a642f8689529a874956aec7905e39cc895bb0e91276915b63739d9acf  /tmp/bitnami/pkg/cache/elasticsearch_exporter-1.0.2-0-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/elasticsearch_exporter-1.0.2-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/elasticsearch_exporter-1.0.2-0-linux-x64-debian-8.tar.gz
 
-RUN install_packages wget ca-certificates
-RUN wget -nc https://github.com/justwatchcom/elasticsearch_exporter/releases/download/v$ELASTICSEARCH_EXPORTER_VERSION/$ELASTICSEARCH_EXPORTER_DIR.tar.gz && \
-    tar -xzf $ELASTICSEARCH_EXPORTER_DIR.tar.gz
+##################
 
 FROM bitnami/minideb:jessie
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ARG ELASTICSEARCH_EXPORTER_VERSION=1.0.2
-ARG ELASTICSEARCH_EXPORTER_DIR=elasticsearch_exporter-$ELASTICSEARCH_EXPORTER_VERSION.linux-amd64
+COPY --from=buildenv /opt/bitnami/elasticsearch_exporter /opt/bitnami/elasticsearch_exporter
+ENV BITNAMI_APP_NAME="elasticsearch_exporter" \
+    BITNAMI_IMAGE_VERSION="1.0.2-r1" \
+    PATH="/opt/bitnami/elasticsearch_exporter/bin:$PATH"
 
-COPY --from=development /$ELASTICSEARCH_EXPORTER_DIR/elasticsearch_exporter /opt/bitnami/elasticsearch_exporter/bin/elasticsearch_exporter
-COPY --from=development /$ELASTICSEARCH_EXPORTER_DIR/LICENSE /opt/bitnami/elasticsearch_exporter/LICENSE
+EXPOSE 9108
 
-ENV PATH="/opt/bitnami/elasticsearch_exporter/bin:$PATH"
-
-EXPOSE     9108
-WORKDIR    /opt/bitnami/elasticsearch_exporter
+WORKDIR /opt/bitnami/elasticsearch_exporter
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/elasticsearch_exporter/bin/elasticsearch_exporter" ]
+ENTRYPOINT ["/opt/bitnami/elasticsearch_exporter/bin/elasticsearch_exporter"]
