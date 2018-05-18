@@ -161,6 +161,7 @@ The configuration can easily be setup with the Bitnami Zookeeper Docker image us
  - `ZOO_TICK_TIME`: Basic time unit in milliseconds used by ZooKeeper for heartbeats. Default: **2000**
  - `ZOO_INIT_LIMIT`: ZooKeeper uses to limit the length of time the ZooKeeper servers in quorum have to connect to a leader. Default: **10**
  - `ZOO_SYNC_LIMIT`: How far out of date a server can be from a leader. Default: **5**
+ - `ZOO_MAX_CLIENT_CNXNS`: Limits the number of concurrent connections that a single client may make to a single member of the ZooKeeper ensemble. Default **60**
  - `ZOO_SERVERS`: Comma, space or colon separated list of servers. Example: zoo1:2888:3888,zoo2:2888:3888. No defaults.
  - `ZOO_CLIENT_USER`: User that will use Zookeeper clients to auth. Default: No defaults.
  - `ZOO_CLIENT_PASSWORD`: Password that will use Zookeeper clients to auth. No defaults.
