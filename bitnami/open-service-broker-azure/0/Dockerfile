@@ -1,34 +1,25 @@
+FROM bitnami/minideb:jessie as buildenv
 
-FROM bitnami/minideb:jessie as development
+RUN install_packages ca-certificates libc6 wget
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/open-service-broker-azure-0.11.0-0-linux-x64-debian-8.tar.gz && \
+    echo "fbf051e1ffb7328ed2efbebc004ea7ba3f8f19161cdbc57cb793ec6fd061e43c  /tmp/bitnami/pkg/cache/open-service-broker-azure-0.11.0-0-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/open-service-broker-azure-0.11.0-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/open-service-broker-azure-0.11.0-0-linux-x64-debian-8.tar.gz
 
-ENV BASE_PACKAGE_NAME=github.com/Azure/open-service-broker-azure
-ENV LDFLAGS=-"w -X $(BASE_PACKAGE_NAME)/pkg/version.commit=$(GIT_VERSION) -X $(BASE_PACKAGE_NAME)/pkg/version.version=$(BROKER_VERSION)"
-
-ARG BROKER_VERSION=0.9.0-alpha
-ARG GO_VERSION=1.9.4
-
-RUN install_packages wget ca-certificates git make tar wget
-
-RUN wget -nc https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz && \
-    tar -C /usr/local -xzf go$GO_VERSION.linux-amd64.tar.gz
-
-ENV GOPATH=/
-ENV PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
-
-RUN mkdir -p /src/github.com/Azure/ && \
-    cd /src/github.com/Azure/ && \
-    git clone -b v${BROKER_VERSION} --depth 1  https://$BASE_PACKAGE_NAME.git && \
-    cd open-service-broker-azure && \
-    go build -o bin/broker -ldflags "$LDFLAGS" ./cmd/broker
+##################
 
 FROM bitnami/minideb:jessie
-ARG BASE_PACKAGE_NAME=github.com/Azure/open-service-broker-azure
-COPY --from=development /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
-COPY --from=development /src/$BASE_PACKAGE_NAME/bin/broker /opt/bitnami/open-service-broker-azure/bin/broker
-COPY --from=development /src/$BASE_PACKAGE_NAME/LICENSE /opt/bitnami/open-service-broker-azure/LICENSE
+LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV PATH=/opt/bitnami/open-service-broker-azure/bin/:$PATH
+COPY --from=buildenv /opt/bitnami/open-service-broker-azure /opt/bitnami/open-service-broker-azure
+ENV BITNAMI_APP_NAME="open-service-broker-azure" \
+    BITNAMI_IMAGE_VERSION="0.11.0-r0" \
+    PATH="/opt/bitnami/open-service-broker-azure/bin:$PATH"
+
+RUN install_packages ca-certificates
 
 EXPOSE 8080
+
+WORKDIR /opt/bitnami/open-service-broker-azure
 USER 1001
-CMD ["/opt/bitnami/open-service-broker-azure/bin/broker"]
+ENTRYPOINT ["/opt/bitnami/open-service-broker-azure/bin/broker"]
