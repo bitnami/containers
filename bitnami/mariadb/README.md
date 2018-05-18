@@ -27,6 +27,15 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Supported tags and respective `Dockerfile` links
+
+* [`10.2`, `10.2.15-r1` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.15-r1/10.2/Dockerfile)
+* [`10.1`, `10.1.32-r26`, `latest` (10.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.32-r26/10.1/Dockerfile)
+* [`10.2-rhel-7`, `10.2.14-r0-rhel-7` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.14-r0-rhel-7/10.2/rhel-7/Dockerfile)
+* [`10.1-rhel-7`, `10.1.32-r0-rhel-7` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.32-r0-rhel-7/10.1/rhel-7/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
+
 # Get this image
 
 The recommended way to get the Bitnami MariaDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mariadb).
