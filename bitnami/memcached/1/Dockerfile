@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r48
+FROM bitnami/minideb-extras:jessie-r52
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack memcached-1.5.7-0 --checksum 454bbd745862574d7168d442666f
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.7-r23" \
+    BITNAMI_IMAGE_VERSION="1.5.7-r24" \
     MEMCACHED_CACHE_SIZE="64" \
     MEMCACHED_PASSWORD="" \
     MEMCACHED_USERNAME="root" \
