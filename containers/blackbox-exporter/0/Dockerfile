@@ -2,6 +2,7 @@ FROM bitnami/minideb:jessie as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/blackbox_exporter-0.12.0-0-linux-x64-debian-8.tar.gz && \
+    echo "0b253d443d8d5ec09111dbb42fe7b0077b7f7066157ad16c7d68abbb5c7e7ef6  /tmp/bitnami/pkg/cache/blackbox_exporter-0.12.0-0-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/blackbox_exporter-0.12.0-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/blackbox_exporter-0.12.0-0-linux-x64-debian-8.tar.gz
 
@@ -12,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/blackbox_exporter /opt/bitnami/blackbox_exporter
 ENV BITNAMI_APP_NAME="blackbox_exporter" \
-    BITNAMI_IMAGE_VERSION="0.12.0-r23" \
+    BITNAMI_IMAGE_VERSION="0.12.0-r24" \
     PATH="/opt/bitnami/blackbox_exporter/bin:$PATH"
 
 EXPOSE 9115
