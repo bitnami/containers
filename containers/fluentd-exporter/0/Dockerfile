@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/fluentd_exporter /opt/bitnami/fluentd_exporter
 ENV BITNAMI_APP_NAME="fluentd_exporter" \
-    BITNAMI_IMAGE_VERSION="0.2.0-r1" \
+    BITNAMI_IMAGE_VERSION="0.2.0-r2" \
     PATH="/opt/bitnami/fluentd_exporter/bin:$PATH"
 
 EXPOSE 9309
