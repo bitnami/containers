@@ -1,15 +1,15 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-fluentd_exporter/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-fluentd_exporter/tree/master)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-fluentd-exporter/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-fluentd-exporter/tree/master)
 
-# What is Fluentd_exporter?
+# What is Fluentd Exporter?
 
 Simple server that scrapes fluentd metrics endpoint and exports them as Prometheus metrics.
 
-[https://github.com/V3ckt0r/fluentd_exporter](https://github.com/V3ckt0r/fluentd_exporter)
+[https://github.com/V3ckt0r/fluentd-exporter](https://github.com/V3ckt0r/fluentd-exporter)
 
 # TL;DR;
 
 ```bash
-$ docker run --name fluentd_exporter bitnami/fluentd_exporter:latest
+$ docker run --name fluentd-exporter bitnami/fluentd-exporter:latest
 ```
 
 # Why use Bitnami Images?
@@ -22,22 +22,22 @@ $ docker run --name fluentd_exporter bitnami/fluentd_exporter:latest
 
 # Get this image
 
-The recommended way to get the Bitnami Fluentd_exporter Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/fluentd_exporter).
+The recommended way to get the Bitnami Fluentd Exporter Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/fluentd-exporter).
 
 ```bash
-$ docker pull bitnami/fluentd_exporter:latest
+$ docker pull bitnami/fluentd-exporter:latest
 ```
 
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/fluentd_exporter/tags/) in the Docker Hub Registry.
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/fluentd-exporter/tags/) in the Docker Hub Registry.
 
 ```bash
-$ docker pull bitnami/fluentd_exporter:[TAG]
+$ docker pull bitnami/fluentd-exporter:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/fluentd_exporter:latest https://github.com/bitnami/bitnami-docker-fluentd_exporter.git
+$ docker build -t bitnami/fluentd-exporter:latest https://github.com/bitnami/bitnami-docker-fluentd-exporter.git
 ```
 
 # Connecting to other containers
@@ -51,15 +51,15 @@ Containers attached to the same network can communicate with each other using th
 ### Step 1: Create a network
 
 ```bash
-$ docker network create fluentd_exporter-network --driver bridge
+$ docker network create fluentd-exporter-network --driver bridge
 ```
 
-### Step 2: Launch the Fluentd_exporter container within your network
+### Step 2: Launch the Fluentd Exporter container within your network
 
-Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `fluentd_exporter-network` network.
+Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `fluentd-exporter-network` network.
 
 ```bash
-$ docker run --name fluentd_exporter-node1 --network fluentd_exporter-network bitnami/fluentd_exporter:latest
+$ docker run --name fluentd-exporter-node1 --network fluentd-exporter-network bitnami/fluentd-exporter:latest
 ```
 
 ### Step 3: Run another containers
@@ -99,10 +99,10 @@ The metrics can then be accessed at: curl http://host:24220/api/plugins.json
 
 # Logging
 
-The Bitnami fluentd_exporter Docker image sends the container logs to the `stdout`. To view the logs:
+The Bitnami fluentd-exporter Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
-$ docker logs fluentd_exporter
+$ docker logs fluentd-exporter
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -111,12 +111,12 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ## Upgrade this image
 
-Bitnami provides up-to-date versions of fluentd_exporter, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Bitnami provides up-to-date versions of fluentd-exporter, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 ### Step 1: Get the updated image
 
 ```bash
-$ docker pull bitnami/fluentd_exporter:latest
+$ docker pull bitnami/fluentd-exporter:latest
 ```
 
 ### Step 2: Stop and backup the currently running container
@@ -124,13 +124,13 @@ $ docker pull bitnami/fluentd_exporter:latest
 Stop the currently running container using the command
 
 ```bash
-$ docker stop fluentd_exporter
+$ docker stop fluentd-exporter
 ```
 
-Next, take a snapshot of the persistent volume `/path/to/fluentd_exporter-persistence` using:
+Next, take a snapshot of the persistent volume `/path/to/fluentd-exporter-persistence` using:
 
 ```bash
-$ rsync -a /path/to/fluentd_exporter-persistence /path/to/fluentd_exporter-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+$ rsync -a /path/to/fluentd-exporter-persistence /path/to/fluentd-exporter-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 You can use this snapshot to restore the database state should the upgrade fail.
@@ -138,7 +138,7 @@ You can use this snapshot to restore the database state should the upgrade fail.
 ### Step 3: Remove the currently running container
 
 ```bash
-$ docker rm -v fluentd_exporter
+$ docker rm -v fluentd-exporter
 ```
 
 ### Step 4: Run the new image
@@ -146,16 +146,16 @@ $ docker rm -v fluentd_exporter
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
 ```bash
-$ docker run --name fluentd_exporter bitnami/fluentd_exporter:latest
+$ docker run --name fluentd-exporter bitnami/fluentd-exporter:latest
 ```
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-fluentd_exporter/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-fluentd_exporter/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-fluentd-exporter/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-fluentd-exporter/pulls) with your contribution.
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-fluentd_exporter/issues). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-fluentd-exporter/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
