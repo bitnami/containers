@@ -7,7 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "0"
           LATEST_STABLE: "0"
-          IMAGE_NAME: fluentd_exporter
+          IMAGE_NAME: fluentd-exporter
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
