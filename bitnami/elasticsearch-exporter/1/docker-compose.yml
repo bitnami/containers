@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  elasticsearch_exporter:
-    image: bitnami/elasticsearch_exporter:1
+  elasticsearch-exporter:
+    image: bitnami/elasticsearch-exporter:1
     ports:
       - '9108:9108'
