@@ -1,15 +1,15 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-blackbox_exporter/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-blackbox_exporter/tree/master)
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-blackbox-exporter/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-blackbox-exporter/tree/master)
 
-# What is Blackbox_exporter?
+# What is Blackbox Exporter?
 
 The blackbox exporter allows blackbox probing of endpoints over HTTP, HTTPS, DNS, TCP and ICMP.
 
-[https://github.com/prometheus/blackbox_exporter](https://github.com/prometheus/blackbox_exporter)
+[https://github.com/prometheus/blackbox-exporter](https://github.com/prometheus/blackbox-exporter)
 
 # TL;DR;
 
 ```bash
-$ docker run --name blackbox_exporter bitnami/blackbox_exporter:latest
+$ docker run --name blackbox-exporter bitnami/blackbox-exporter:latest
 ```
 
 # Why use Bitnami Images?
@@ -22,22 +22,22 @@ $ docker run --name blackbox_exporter bitnami/blackbox_exporter:latest
 
 # Get this image
 
-The recommended way to get the Bitnami Blackbox_exporter Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/blackbox_exporter).
+The recommended way to get the Bitnami Blackbox Exporter Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/blackbox-exporter).
 
 ```bash
-$ docker pull bitnami/blackbox_exporter:latest
+$ docker pull bitnami/blackbox-exporter:latest
 ```
 
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/blackbox_exporter/tags/) in the Docker Hub Registry.
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/blackbox-exporter/tags/) in the Docker Hub Registry.
 
 ```bash
-$ docker pull bitnami/blackbox_exporter:[TAG]
+$ docker pull bitnami/blackbox-exporter:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/blackbox_exporter:latest https://github.com/bitnami/bitnami-docker-blackbox_exporter.git
+$ docker build -t bitnami/blackbox-exporter:latest https://github.com/bitnami/bitnami-docker-blackbox-exporter.git
 ```
 
 # Connecting to other containers
@@ -51,15 +51,15 @@ Containers attached to the same network can communicate with each other using th
 ### Step 1: Create a network
 
 ```bash
-$ docker network create blackbox_exporter-network --driver bridge
+$ docker network create blackbox-exporter-network --driver bridge
 ```
 
 ### Step 2: Launch the Blacbox_exporter container within your network
 
-Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `blackbox_exporter-network` network.
+Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `blackbox-exporter-network` network.
 
 ```bash
-$ docker run --name blackbox_exporter-node1 --network blackbox_exporter-network bitnami/blackbox_exporter:latest
+$ docker run --name blackbox-exporter-node1 --network blackbox-exporter-network bitnami/blackbox-exporter:latest
 ```
 
 ### Step 3: Run another containers
@@ -71,7 +71,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 Blackbox exporter is configured via a configuration file and command-line flags (such as what configuration file to load, what port to listen on, and the logging format and level).
 
-The default location for the config file is `/opt/bitnami/blackbox_exporter/conf/config.yml`, you can mount a volume there in order to overwrite it.
+The default location for the config file is `/opt/bitnami/blackbox-exporter/conf/config.yml`, you can mount a volume there in order to overwrite it.
 
 The file is written in YAML format, defined by the scheme described below. Brackets indicate that a parameter is optional. For non-list parameters the value is set to the specified default.
 
@@ -108,14 +108,14 @@ scrape_configs:
         replacement: 127.0.0.1:9115  # The blackbox exporter's real hostname:port.
 ```
 
-[Further information](https://github.com/prometheus/blackbox_exporter/blob/master/CONFIGURATION.md)
+[Further information](https://github.com/prometheus/blackbox-exporter/blob/master/CONFIGURATION.md)
 
 # Logging
 
-The Bitnami blackbox_exporter Docker image sends the container logs to the `stdout`. To view the logs:
+The Bitnami blackbox-exporter Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
-$ docker logs blackbox_exporter
+$ docker logs blackbox-exporter
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -124,12 +124,12 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ## Upgrade this image
 
-Bitnami provides up-to-date versions of blackbox_exporter, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Bitnami provides up-to-date versions of blackbox-exporter, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 ### Step 1: Get the updated image
 
 ```bash
-$ docker pull bitnami/blackbox_exporter:latest
+$ docker pull bitnami/blackbox-exporter:latest
 ```
 
 ### Step 2: Stop and backup the currently running container
@@ -137,13 +137,13 @@ $ docker pull bitnami/blackbox_exporter:latest
 Stop the currently running container using the command
 
 ```bash
-$ docker stop blackbox_exporter
+$ docker stop blackbox-exporter
 ```
 
-Next, take a snapshot of the persistent volume `/path/to/blackbox_exporter-persistence` using:
+Next, take a snapshot of the persistent volume `/path/to/blackbox-exporter-persistence` using:
 
 ```bash
-$ rsync -a /path/to/blackbox_exporter-persistence /path/to/blackbox_exporter-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+$ rsync -a /path/to/blackbox-exporter-persistence /path/to/blackbox-exporter-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 You can use this snapshot to restore the database state should the upgrade fail.
@@ -151,7 +151,7 @@ You can use this snapshot to restore the database state should the upgrade fail.
 ### Step 3: Remove the currently running container
 
 ```bash
-$ docker rm -v blackbox_exporter
+$ docker rm -v blackbox-exporter
 ```
 
 ### Step 4: Run the new image
@@ -159,16 +159,16 @@ $ docker rm -v blackbox_exporter
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
 ```bash
-$ docker run --name blackbox_exporter bitnami/blackbox_exporter:latest
+$ docker run --name blackbox-exporter bitnami/blackbox-exporter:latest
 ```
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-blackbox_exporter/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-blackbox_exporter/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-blackbox-exporter/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-blackbox-exporter/pulls) with your contribution.
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-blackbox_exporter/issues). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-blackbox-exporter/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
