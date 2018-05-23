@@ -9,9 +9,8 @@ RUN install_packages wget ca-certificates git make tar wget gcc curl mercurial i
 RUN wget -nc https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz && \
     tar -C /usr/local -xzf go$GO_VERSION.linux-amd64.tar.gz
 
-ENV PATH=/usr/local/go/bin:$PATH
 ENV GOPATH=/tmp
-ENV PATH=$GOPATH/bin:$PATH
+ENV PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 
 RUN mkdir -p /tmp/bin && \
     wget -nc https://github.com/golang/dep/releases/download/v$DEP_VERSION/dep-linux-amd64 && \
