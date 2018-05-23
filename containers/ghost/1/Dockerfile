@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r53
+FROM bitnami/minideb-extras:jessie-r54
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX,o+rw" \
@@ -14,7 +14,7 @@ RUN bitnami-pkg unpack ghost-1.22.7-0 --checksum 9381d085812e1f3f7524004e40ea230
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="1.22.7-r5" \
+    BITNAMI_IMAGE_VERSION="1.22.7-r6" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
