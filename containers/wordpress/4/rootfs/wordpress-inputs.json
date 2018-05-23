@@ -8,6 +8,8 @@
   "email": "{{$global.env.WORDPRESS_EMAIL}}",
   "firstName": "{{$global.env.WORDPRESS_FIRST_NAME}}",
   "host": "{{$global.env.WORDPRESS_HOST}}",
+  "httpPort": "{{$global.env.WORDPRESS_HTTP_PORT}}",
+  "httpsPort": "{{$global.env.WORDPRESS_HTTPS_PORT}}",
   "lastName": "{{$global.env.WORDPRESS_LAST_NAME}}",
   "password": "{{$global.env.WORDPRESS_PASSWORD}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
