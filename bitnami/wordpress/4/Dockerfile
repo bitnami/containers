@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r53
+FROM bitnami/minideb-extras:jessie-r54
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,14 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.33-2 --checksum 303515aa732cb8a33c9018953f1f8b
 RUN bitnami-pkg unpack php-7.0.30-3 --checksum 6bd722cbf50b23d159394997370e1066fa1d4e05a70ff19fb940046db526c54b
 RUN bitnami-pkg unpack mysql-client-10.1.33-0 --checksum 1b1608f1c1f4e21f05037225e095c49035ad8bfdb8b580abbb904c9f2448a5c6
 RUN bitnami-pkg install libphp-7.0.30-3 --checksum 56a92497c5965c026a1faaa25bd7c47a65d629330d3f047f53a06a49d183c85f
-RUN bitnami-pkg unpack wordpress-4.9.6-0 --checksum c4e7c4606fc5a5c3e1e89c96581b8174392b6c56804c768a7860393c3aae433c
+RUN bitnami-pkg unpack wordpress-4.9.6-1 --checksum f7c6cf0e58767ea3676e5be8f1279e969ea137bf91872b04f46f79a4bed78bfd
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="4.9.6-r1" \
+    BITNAMI_IMAGE_VERSION="4.9.6-r2" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -37,6 +37,8 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     WORDPRESS_EMAIL="user@example.com" \
     WORDPRESS_FIRST_NAME="FirstName" \
     WORDPRESS_HOST="" \
+    WORDPRESS_HTTPS_PORT="443" \
+    WORDPRESS_HTTP_PORT="80" \
     WORDPRESS_LAST_NAME="LastName" \
     WORDPRESS_PASSWORD="bitnami" \
     WORDPRESS_TABLE_PREFIX="wp_" \
