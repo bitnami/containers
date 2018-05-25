@@ -7,6 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "10.1,10.2"
           LATEST_STABLE: "10.1"
+          DISTRIBUTIONS_LIST: "debian-8,rhel-7"
           IMAGE_NAME: mariadb
           CHART_NAME: mariadb
           CHART_REPO: https://github.com/kubernetes/charts
