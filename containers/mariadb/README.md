@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`10.2`, `10.2.15-r5` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.15-r5/10.2/Dockerfile)
+* [`10.2`, `10.2.15-r6` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.15-r6/10.2/Dockerfile)
 * [`10.1`, `10.1.33-r0`, `latest` (10.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-r0/10.1/Dockerfile)
 * [`10.2-rhel-7`, `10.2.15-r0-rhel-7` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.15-r0-rhel-7/10.2/rhel-7/Dockerfile)
 * [`10.1-rhel-7`, `10.1.33-r0-rhel-7` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-r0-rhel-7/10.1/rhel-7/Dockerfile)
