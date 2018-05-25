@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r55
+FROM bitnami/minideb-extras:jessie-r56
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN bitnami-pkg unpack parse-2.8.0-0 --checksum 4d24c855219be3d43fee320d5ef70e15
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="2.8.0-r3" \
+    BITNAMI_IMAGE_VERSION="2.8.0-r4" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
