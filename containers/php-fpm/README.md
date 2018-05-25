@@ -29,8 +29,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`7.2`, `7.2.5-r25` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.5-r25/7.2/Dockerfile)
-* [`7.2-prod`, `7.2.5-r25-prod` (7.2/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.5-r25/7.2/prod/Dockerfile)
+* [`7.2`, `7.2.6-r0` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.6-r0/7.2/Dockerfile)
+* [`7.2-prod`, `7.2.6-r0-prod` (7.2/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.6-r0/7.2/prod/Dockerfile)
 * [`7.1`, `7.1.17-r26`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.17-r26/7.1/Dockerfile)
 * [`7.1-prod`, `7.1.17-r26-prod` (7.1/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.17-r26/7.1/prod/Dockerfile)
 * [`7.0`, `7.0.30-r25` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.30-r25/7.0/Dockerfile)
