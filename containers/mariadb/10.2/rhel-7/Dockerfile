@@ -1,4 +1,4 @@
-FROM bitnami/redhat-extras:7
+FROM bitnami/redhat-extras:7-r2
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack mariadb-10.2.15-1 --checksum c83b3deae72602b5d4f0235b5b9d
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.15-r0" \
+    BITNAMI_IMAGE_VERSION="10.2.15-rhel-7-r1" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
