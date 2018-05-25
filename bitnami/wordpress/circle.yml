@@ -5,8 +5,10 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "4"
+          RELEASE_SERIES_LIST: "4,4-nginx-php5,4-nginx-php7,4-php5"
           LATEST_STABLE: "4"
+          VARIANTS_LIST: "nginx-php5,nginx-php7,php5"
+          DISTRIBUTIONS_LIST: "debian-8,rhel-7"
           IMAGE_NAME: wordpress
           CHART_NAME: wordpress
           CHART_REPO: https://github.com/kubernetes/charts

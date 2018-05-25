@@ -26,7 +26,10 @@ $ docker-compose up
 # Supported tags and respective `Dockerfile` links
 
 * [`4`, `4.9.6-r4`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-r4/4/Dockerfile)
-* [`4-rhel-7`, `4.9.6-r1-rhel-7` (4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-r1-rhel-7/4/rhel-7/Dockerfile)
+* [`4-rhel-7`, `4.9.6-rhel-7-r1` (4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-rhel-7-r1/4/rhel-7/Dockerfile)
+* [`4-nginx-php5-rhel-7`, `4.9.6-nginx-php5-rhel-7-r0` (4-nginx-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-nginx-php5-rhel-7-r0/4-nginx-php5/rhel-7/Dockerfile)
+* [`4-nginx-php7-rhel-7`, `4.9.6-nginx-php7-rhel-7-r0` (4-nginx-php7/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-nginx-php7-rhel-7-r0/4-nginx-php7/rhel-7/Dockerfile)
+* [`4-php5-rhel-7`, `4.9.6-php5-rhel-7-r0` (4-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-php5-rhel-7-r0/4-php5/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 

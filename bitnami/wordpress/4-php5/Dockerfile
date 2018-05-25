@@ -1,4 +1,4 @@
-FROM bitnami/redhat-extras:7
+FROM bitnami/redhat-extras:7-r2
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,12 +7,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
-RUN bitnami-pkg unpack apache-2.4.33-2 --checksum f8b2ed1be20d8b760274d07ccc5e2eb205fd7121cbb56c83456f6887a1eb4cc4
-RUN bitnami-pkg unpack php-7.0.30-3 --checksum e08b6fc7a366eab9ba73809c7073c9f0495cd51b5a98aa87aee28e99a156168c
+RUN bitnami-pkg unpack apache-2.4.33-3 --checksum c9ed08e5c752fe23eff64d19f1e2a4a34f6326732acc80ea685f2d8eda7ee96f
+RUN bitnami-pkg unpack php-5.6.36-2 --checksum 0450849b83be5c291cc777a380a404e0feb13213c932fd55255b92c25e3d5e5c
 RUN bitnami-pkg unpack mysql-client-10.1.33-0 --checksum 4b07acdb7d3f6a61161414ad7f7639da8f291962e242eb257f612d18c8231501
-RUN bitnami-pkg install libphp-7.0.30-3 --checksum 6b30a1a49beddad4c8a992976aff809bcbdd2115888530dd3b8257c58844369a
+RUN bitnami-pkg install libphp-5.6.36-1 --checksum b76a2058eb1a5612f4709fa5f09c4b2c93b31d38eb352e4b0ff53efdc40a8d23
 RUN bitnami-pkg unpack wordpress-4.9.6-1 --checksum 2a0125c17f96017e854d46809707df61c47ff30eb0f297e4fdb8f298607a3f4b
-RUN ln -sf /opt/bitnami/apache/htdocs /app
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/error_log
 
@@ -21,7 +20,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="4.9.6-r1" \
+    BITNAMI_IMAGE_VERSION="4.9.6-php5-rhel-7-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -53,7 +52,6 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
 
 EXPOSE 8080 8443
 
-WORKDIR /app
 USER 1001
 ENTRYPOINT ["/app-entrypoint.sh"]
 CMD ["httpd","-f","/bitnami/apache/conf/httpd.conf","-DFOREGROUND"]
