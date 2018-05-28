@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:10.2-ol-7'
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'mariadb_data:/bitnami'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+
+volumes:
+  mariadb_data:
+    driver: local
