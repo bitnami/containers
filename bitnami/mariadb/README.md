@@ -29,9 +29,11 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`10.2`, `10.2.15-r6` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.15-r6/10.2/Dockerfile)
 * [`10.2-rhel-7`, `10.2.15-rhel-7-r1` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.15-rhel-7-r1/10.2/rhel-7/Dockerfile)
+* [`10.2`, `10.2.15-r6` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.15-r6/10.2/Dockerfile)
+* [`10.2-ol-7`, `10.2.15-ol-7-r0` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.15-ol-7-r0/10.2/ol-7/Dockerfile)
 * [`10.1`, `10.1.33-r1`, `latest` (10.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-r1/10.1/Dockerfile)
+* [`10.1-ol-7`, `10.1.33-ol-7-r0` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-ol-7-r0/10.1/ol-7/Dockerfile)
 * [`10.1-rhel-7`, `10.1.33-rhel-7-r1` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-rhel-7-r1/10.1/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
@@ -528,7 +530,7 @@ $ docker-compose start mariadb
 # Notable Changes
 
 ## 10.2.14-r2 and 10.1.32-r1
-- The mariadb conf file is not in a persistent volume by default. 
+- The mariadb conf file is not in a persistent volume by default.
 - The user is able to specify a custom file in the default location '/opt/bitnami/mariadb/conf/my.cnf'.
 
 ## 10.1.28-r2
