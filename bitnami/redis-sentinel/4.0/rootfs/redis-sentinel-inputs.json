@@ -1,0 +1,8 @@
+{
+  "masterHost": "{{$global.env.REDIS_MASTER_HOST}}",
+  "masterPassword": "{{$global.env.REDIS_MASTER_PASSWORD}}",
+  "masterPort": "{{$global.env.REDIS_MASTER_PORT_NUMBER}}",
+  "masterSet": "{{$global.env.REDIS_MASTER_SET}}",
+  "port": "{{$global.env.REDIS_SENTINEL_PORT_NUMBER}}",
+  "quorum": "{{$global.env.REDIS_SENTINEL_QUORUM}}"
+}
