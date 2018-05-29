@@ -1,0 +1,4 @@
+{
+  "httpPort": "{{$global.env.APACHE_HTTP_PORT_NUMBER}}",
+  "httpsPort": "{{$global.env.APACHE_HTTPS_PORT_NUMBER}}"
+}
