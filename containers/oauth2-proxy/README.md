@@ -11,7 +11,7 @@ email, domain or group.
 # TL;DR;
 
 ```bash
-$ docker run --name oauth2-proxy bitnami/oauth2_proxy:latest
+$ docker run --name oauth2-proxy bitnami/oauth2-proxy:latest
 ```
 
 # Why use Bitnami Images?
@@ -24,7 +24,7 @@ $ docker run --name oauth2-proxy bitnami/oauth2_proxy:latest
 
 # Get this image
 
-The recommended way to get the Bitnami oauth2-proxy Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/oauth2_proxy).
+The recommended way to get the Bitnami oauth2-proxy Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/oauth2-proxy).
 
 ```bash
 $ docker pull bitnami/oauth2-proxy:latest
@@ -39,7 +39,7 @@ $ docker pull bitnami/oauth2-proxy:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/oauth2-proxy:latest https://github.com/bitnami/bitnami-docker-oauth2_proxy.git
+$ docker build -t bitnami/oauth2-proxy:latest https://github.com/bitnami/bitnami-docker-oauth2-proxy.git
 ```
 
 # Connecting to other containers
@@ -61,7 +61,7 @@ $ docker network create oauth2-proxy-network --driver bridge
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `oauth2-proxy-network` network.
 
 ```bash
-$ docker run --name oauth2-proxy-node1 --network oauth2_proxy-network bitnami/oauth2_proxy:latest
+$ docker run --name oauth2-proxy-node1 --network oauth2-proxy-network bitnami/oauth2-proxy:latest
 ```
 
 ### Step 3: Run another containers
@@ -109,7 +109,7 @@ $ docker stop oauth2-proxy
 Next, take a snapshot of the persistent volume `/path/to/oauth2-proxy-persistence` using:
 
 ```bash
-$ rsync -a /path/to/oauth2-proxy-persistence /path/to/oauth2_proxy-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+$ rsync -a /path/to/oauth2-proxy-persistence /path/to/oauth2-proxy-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 You can use this snapshot to restore the database state should the upgrade fail.
@@ -125,7 +125,7 @@ $ docker rm -v oauth2-proxy
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
 ```bash
-$ docker run --name oauth2-proxy bitnami/oauth2_proxy:latest
+$ docker run --name oauth2-proxy bitnami/oauth2-proxy:latest
 ```
 
 # Contributing
