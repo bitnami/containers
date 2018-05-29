@@ -1,18 +1,14 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-service-catalog/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-service-catalog/tree/master)
 
-# What is Service-catalog?
+# What is Service Catalog?
 
-The service-catalog project is in incubation to bring integration with service
-brokers to the Kubernetes ecosystem via the [Open Service Broker API](https://github.com/openservicebrokerapi/servicebroker).
+The [Service Catalog project](https://github.com/kubernetes-incubator/service-catalog/) project is in incubation to bring integration with service brokers to the Kubernetes ecosystem via the [Open Service Broker API](https://github.com/openservicebrokerapi/servicebroker).
 
-There are two differente images: `service-catalog` and `user-broker`
-
-[https://github.com/kubernetes-incubator/service-catalog/](https://github.com/kubernetes-incubator/service-catalog/)
+There are two different images: `service-catalog` and [`service-catalog`](https://github.com/bitnami/bitnami-docker-service-catalog)
 
 # TL;DR;
 
-Service Catalog installs into a Kubernetes cluster and runs behind the
-[Kubernetes API Aggregator](https://kubernetes.io/docs/concepts/api-extension/apiserver-aggregation/).
+Service Catalog installs into a Kubernetes cluster and runs behind the [Kubernetes API Aggregator](https://kubernetes.io/docs/concepts/api-extension/apiserver-aggregation/).
 
 # Why use Bitnami Images?
 
@@ -41,6 +37,7 @@ If you wish, you can also build the image yourself.
 ```bash
 $ docker build -t bitnami/service-catalog:latest https://github.com/bitnami/bitnami-docker-service-catalog.git
 ```
+
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-service-catalog/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-service-catalog/pulls) with your contribution.
@@ -56,6 +53,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
+
 Copyright 2018 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
