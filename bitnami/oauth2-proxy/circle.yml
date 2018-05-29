@@ -7,8 +7,12 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "2"
           LATEST_STABLE: "2"
-          IMAGE_NAME: oauth2_proxy
+          DISTRIBUTIONS_LIST: "debian-8"
+          IMAGE_NAME: oauth2-proxy
           DOCKER_PROJECT: bitnami
+          QUAY_PROJECT: bitnami
+          GCLOUD_PROJECT: bitnami-containers
+          AZURE_PROJECT: bitnami
 
     steps:
       - checkout
@@ -58,4 +62,4 @@ workflows:
             branches:
               only: /.*/
             tags:
-              only: /^[0-9].*-r[0-9]+$/
+              only: /^[0-9].*-r[0-9]+(-(?!rhel).*)?$/
