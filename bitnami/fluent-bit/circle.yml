@@ -7,8 +7,12 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "0"
           LATEST_STABLE: "0"
+          DISTRIBUTIONS_LIST: "debian-8"
           IMAGE_NAME: fluent-bit
           DOCKER_PROJECT: bitnami
+          QUAY_PROJECT: bitnami
+          GCLOUD_PROJECT: bitnami-containers
+          AZURE_PROJECT: bitnami
 
     steps:
       - checkout
@@ -58,4 +62,4 @@ workflows:
             branches:
               only: /.*/
             tags:
-              only: /^[0-9].*-r[0-9]+$/
+              only: /^[0-9].*-r[0-9]+(-(?!rhel).*)?$/

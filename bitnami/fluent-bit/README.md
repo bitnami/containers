@@ -6,7 +6,6 @@ Fluent Bit is a Data Forwarder for Linux, Embedded Linux, OSX and BSD family ope
 
 For more details about it capabilities and general features please visit the official documentation:
 
-
 [http://fluentbit.io](http://fluentbit.io)
 
 # TL;DR;
@@ -22,6 +21,12 @@ $ docker run --name fluent-bit bitnami/fluent-bit:latest
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+
+# Supported tags and respective `Dockerfile` links
+
+* [`0`, `0.13.2-r0`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.2-r0/0/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/fluent-bit GitHub repo](https://github.com/bitnami/bitnami-docker-fluent-bit).
 
 # Get this image
 
@@ -57,7 +62,7 @@ Containers attached to the same network can communicate with each other using th
 $ docker network create fluent-bit-network --driver bridge
 ```
 
-### Step 2: Launch the Blacbox_exporter container within your network
+### Step 2: Launch the Fluent Bit container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `fluent-bit-network` network.
 
@@ -69,6 +74,38 @@ $ docker run --name fluent-bit-node1 --network fluent-bit-network bitnami/fluent
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
+## Using Docker Compose
+
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Fluent Bit log processor from your own custom application image which is identified in the following snippet by the service name `myapp`.
+
+```yaml
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  fluent-bit:
+    image: 'bitnami/bitnami-docker-fluent-bit:latest'
+    networks:
+      - app-tier
+  myapp:
+    image: 'YOUR_APPLICATION_IMAGE'
+    networks:
+      - app-tier
+```
+
+> **IMPORTANT**:
+>
+> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
+> 2. In your application container, use the hostname `fluent-bit` to connect to the Fluent Bit log processor
+
+Launch the containers using:
+
+```bash
+$ docker-compose up -d
+```
 
 # Configuration
 
@@ -91,48 +128,6 @@ $ docker logs fluent-bit
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-# Maintenance
-
-## Upgrade this image
-
-Bitnami provides up-to-date versions of fluent-bit, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-### Step 1: Get the updated image
-
-```bash
-$ docker pull bitnami/fluent-bit:latest
-```
-
-### Step 2: Stop and backup the currently running container
-
-Stop the currently running container using the command
-
-```bash
-$ docker stop fluent-bit
-```
-
-Next, take a snapshot of the persistent volume `/path/to/fluent-bit-persistence` using:
-
-```bash
-$ rsync -a /path/to/fluent-bit-persistence /path/to/fluent-bit-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-You can use this snapshot to restore the database state should the upgrade fail.
-
-### Step 3: Remove the currently running container
-
-```bash
-$ docker rm -v fluent-bit
-```
-
-### Step 4: Run the new image
-
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
-
-```bash
-$ docker run --name fluent-bit bitnami/fluent-bit:latest
-```
 
 # Contributing
 
