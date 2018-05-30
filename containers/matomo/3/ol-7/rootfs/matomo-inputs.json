@@ -1,0 +1,18 @@
+{
+  "databaseName": "{{$global.env.MATOMO_DATABASE_NAME}}",
+  "databasePassword": "{{$global.env.MATOMO_DATABASE_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
+  "databaseUser": "{{$global.env.MATOMO_DATABASE_USER}}",
+  "email": "{{$global.env.MATOMO_EMAIL}}",
+  "host": "{{$global.env.MATOMO_HOST}}",
+  "password": "{{$global.env.MATOMO_PASSWORD}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpProtocol": "{{$global.env.SMTP_PROTOCOL}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "username": "{{$global.env.MATOMO_USERNAME}}",
+  "websiteHost": "{{$global.env.MATOMO_WEBSITE_HOST}}",
+  "websiteName": "{{$global.env.MATOMO_WEBSITE_NAME}}"
+}
