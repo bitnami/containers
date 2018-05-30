@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r56
+FROM bitnami/minideb-extras:jessie-r61
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,7 +6,7 @@ RUN install_packages libapr1 libaprutil1 libbz2-1.0 libc6 libcomerr2 libcurl3 li
 RUN bitnami-pkg unpack apache-2.4.33-3 --checksum 55bc664737e2ff9d534468088424ee4b04e770e67800e317c9db5b1e58cf2ffe
 RUN bitnami-pkg unpack php-7.0.30-3 --checksum 6bd722cbf50b23d159394997370e1066fa1d4e05a70ff19fb940046db526c54b
 RUN bitnami-pkg unpack mysql-client-10.1.33-0 --checksum 1b1608f1c1f4e21f05037225e095c49035ad8bfdb8b580abbb904c9f2448a5c6
-RUN bitnami-pkg install libphp-7.0.30-3 --checksum 56a92497c5965c026a1faaa25bd7c47a65d629330d3f047f53a06a49d183c85f
+RUN bitnami-pkg install libphp-7.0.30-6 --checksum 26e82eca4e88eb0f41ce1341850613422aa1988b08fb28872f20fcb40a88e55f
 RUN bitnami-pkg unpack owncloud-10.0.8-0 --checksum a494bc4b0bfb63d7d7c767dcd70839b9fa3c4e4373f1e8f3230ba6222defa912
 
 COPY rootfs /
@@ -14,7 +14,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.0.8-r21" \
+    BITNAMI_IMAGE_VERSION="10.0.8-r22" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
