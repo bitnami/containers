@@ -27,6 +27,7 @@ $ docker-compose up -d
 
 * [`8`, `8.5.3-r26`, `latest` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.3-r26/8/Dockerfile)
 * [`8-rhel-7`, `8.5.3-rhel-7-r1` (8/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.3-rhel-7-r1/8/rhel-7/Dockerfile)
+* [`8-php5-rhel-7`, `8.5.3-php5-rhel-7-r0` (8-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.3-php5-rhel-7-r0/8-php5/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
 
