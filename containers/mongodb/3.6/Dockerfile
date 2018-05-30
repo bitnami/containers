@@ -1,13 +1,13 @@
-FROM bitnami/minideb-extras:jessie-r56
+FROM bitnami/minideb-extras:jessie-r61
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libpcap0.8 libsasl2-2 libssl1.0.0
-RUN bitnami-pkg unpack mongodb-3.6.5-0 --checksum 3a52518e14f068b02694bfeefe1dfc854cf31f5249c9f1bf2973d3abb4477ad8
+RUN bitnami-pkg unpack mongodb-3.6.5-1 --checksum 4fff6f1afd90fab492d7855a4f1a3130b36a9a56d966027ff3dbfdcf6067d2f3
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.6.5-r4" \
+    BITNAMI_IMAGE_VERSION="3.6.5-r5" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_PASSWORD="" \
