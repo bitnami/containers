@@ -8,7 +8,7 @@ jobs:
           RELEASE_SERIES_LIST: "8,8-php5"
           LATEST_STABLE: "8"
           VARIANTS_LIST: "php5"
-          DISTRIBUTIONS_LIST: "debian-8,rhel-7"
+          DISTRIBUTIONS_LIST: "debian-8,ol-7,rhel-7"
           IMAGE_NAME: drupal
           CHART_NAME: drupal
           CHART_REPO: https://github.com/kubernetes/charts
