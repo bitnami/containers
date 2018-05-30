@@ -23,6 +23,12 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Supported tags and respective `Dockerfile` links
+
+* [`8`, `8.5.3-r26`, `latest` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.3-r26/8/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
+
 # Prerequisites
 
 To run this application you need Docker Engine 1.10.0. Docker Compose is recommended with a version 1.6.0 or later.
