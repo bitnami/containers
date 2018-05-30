@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r56
+FROM bitnami/minideb-extras:jessie-r61
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,7 +6,7 @@ RUN install_packages libapr1 libaprutil1 libbz2-1.0 libc6 libcomerr2 libcurl3 li
 RUN bitnami-pkg unpack apache-2.4.33-3 --checksum 55bc664737e2ff9d534468088424ee4b04e770e67800e317c9db5b1e58cf2ffe
 RUN bitnami-pkg unpack php-5.6.36-2 --checksum ef793e553a63156a3f4bb2d8209fe4e1df6ff5f162dd82811777bc482b6cc002
 RUN bitnami-pkg unpack mysql-client-10.1.33-0 --checksum 1b1608f1c1f4e21f05037225e095c49035ad8bfdb8b580abbb904c9f2448a5c6
-RUN bitnami-pkg install libphp-5.6.36-1 --checksum 419c67b62e7309bcc670685ebbfda706c1b36e45ba6c45bf30ff7c735c19969d
+RUN bitnami-pkg install libphp-5.6.36-3 --checksum 36a929d08c6a2c7fe0c66e66dedb078932f4bded38b365cba9479309b743e29f
 RUN bitnami-pkg unpack orangehrm-4.1.0-0 --checksum d1163a3993ab4085ebae1d7e5742439aed70c77eec1699ce26274856f2c662dc
 
 COPY rootfs /
@@ -14,7 +14,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.1.0-r12" \
+    BITNAMI_IMAGE_VERSION="4.1.0-r13" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
