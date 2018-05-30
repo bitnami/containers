@@ -5,8 +5,9 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "8"
+          RELEASE_SERIES_LIST: "8,8-php5"
           LATEST_STABLE: "8"
+          VARIANTS_LIST: "php5"
           DISTRIBUTIONS_LIST: "debian-8,rhel-7"
           IMAGE_NAME: drupal
           CHART_NAME: drupal
