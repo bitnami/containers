@@ -1,0 +1,14 @@
+version: '2'
+services:
+  dokuwiki:
+    image: 'bitnami/dokuwiki:0-ol-7'
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - 'dokuwiki_data:/bitnami'
+volumes:
+  dokuwiki_data:
+    driver: local
