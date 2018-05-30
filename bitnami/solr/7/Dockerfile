@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r60
+FROM bitnami/minideb-extras:jessie-r61
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack solr-7.3.1-0 --checksum 20618d803b7a535d2ae33936ae80e7b1c
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="7.3.1-r6" \
+    BITNAMI_IMAGE_VERSION="7.3.1-r7" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:$PATH" \
     SOLR_CORE="" \
     SOLR_CORE_CONF_DIR="data_driven_schema_configs" \
