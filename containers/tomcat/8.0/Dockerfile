@@ -1,14 +1,14 @@
-FROM bitnami/minideb-extras:jessie-r56
+FROM bitnami/minideb-extras:jessie-r63
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN bitnami-pkg install java-1.8.171-1 --checksum e8a1956085b60e632976f9671899919b245b6c4dfd0035292b4b47a16669d0fd
-RUN bitnami-pkg unpack tomcat-8.0.52-0 --checksum 4c3bed5f27061d8fc573a9a60441eac63da48fd54138c85dd0ec7dc8ab1a73d7
+RUN bitnami-pkg install java-1.8.171-3 --checksum 3454a0bda3a4fb282b6b9a7022677a48dc493df0e13cb04d3c92e070e102a244
+RUN bitnami-pkg unpack tomcat-8.0.52-1 --checksum 9b20a4f0dd9d5656b3c43d6e5ba7bb72787bc6e94533fe1b0c494d72cd7e86bb
 RUN ln -sf /opt/bitnami/tomcat/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="8.0.52-r12" \
+    BITNAMI_IMAGE_VERSION="8.0.52-r13" \
     JAVA_OPTS="-Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH" \
     TOMCAT_AJP_PORT_NUMBER="8009" \
