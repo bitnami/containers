@@ -28,6 +28,12 @@ $ docker-compose up
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Supported tags and respective `Dockerfile` links
+
+* [`1`, `1.1.0-r0`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.1.0-r0/1/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/nats GitHub repo](https://github.com/bitnami/bitnami-docker-nats).
+
 # Prerequisites
 
 To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://www.docker.com/products/docker-compose) is recommended with a version `1.6.0` or later.
@@ -76,16 +82,34 @@ Use the `--network app-tier` argument to the `docker run` command to attach the 
 
 ```bash
 $ docker run -d --name nats-server \
-  -p 4222:4222 --network app-tier \
-  bitnami/nats:latest
+    --network app-tier \
+    --publish 4222:4222 \
+    --publish 6222:6222 \
+    --publish 8222:8222 \
+    bitnami/nats:latest
 ```
 
 ### Step 3: Launch your NATS client instance
 
+You can create a small script which downloads, installs and uses the [NATS Golang client](https://github.com/nats-io/go-nats).
+
+There are some examples available to use that client. For instance, write the script below and save it as *nats-pub.sh* to use the publishing example:
+
+```bash
+#!/bin/bash
+
+go get github.com/nats-io/go-nats
+go build /go/src/github.com/nats-io/go-nats/examples/nats-pub.go
+./nats-pub -s nats://nats-server:4222 "$1" "$2"
+```
+
+Then, you can use the script to create a client instance as shown below:
+
 ```bash
 $ docker run -it --rm \
     --network app-tier \
-    bitnami/nats-client:latest
+    --volume /path/to/your/workspace:/go
+    golang ./nats-pub.sh foo bar
 ```
 
 ## Using Docker Compose
@@ -104,6 +128,8 @@ services:
     image: 'bitnami/nats:latest'
     ports:
       - 4222:4222
+      - 6222:6222
+      - 8222:8222
     networks:
       - app-tier
   myapp:
