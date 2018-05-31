@@ -5,8 +5,9 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "9.0,8.5,8.0,7"
+          RELEASE_SERIES_LIST: "7,8.0,8.5,9.0"
           LATEST_STABLE: "8.5"
+          DISTRIBUTIONS_LIST: "debian-8,ol-7"
           IMAGE_NAME: tomcat
           CHART_NAME: tomcat
           CHART_REPO: https://github.com/bitnami/charts
@@ -63,4 +64,4 @@ workflows:
             branches:
               only: /.*/
             tags:
-              only: /^[0-9].*-r[0-9]+$/
+              only: /^.*(?<!-rhel-7)-r[0-9]+$/
