@@ -1,15 +1,15 @@
-FROM bitnami/minideb-extras:jessie-r61
+FROM bitnami/minideb-extras:jessie-r64
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls-deb0-28 libgpg-error0 libgssapi-krb5-2 libhogweed2 libicu52 libidn11 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmcrypt4 libncurses5 libnettle4 libp11-kit0 libpng12-0 libpq5 libreadline6 librtmp1 libsasl2-2 libssh2-1 libssl1.0.0 libstdc++6 libsybdb5 libtasn1-6 libtidy-0.99-0 libtinfo5 libxml2 libxslt1.1 zlib1g
-RUN bitnami-pkg install php-7.1.18-0 --checksum 25874b1673343ee7e1d87900e47a88887f83b595d079549465df826f2e76d497
+RUN bitnami-pkg install php-7.1.18-1 --checksum 56f43b9ae65d24e2602ad4c1f1af6392be92a281684c80d62ba81c195d372c97
 RUN bitnami-pkg install mysql-client-10.1.33-0 --checksum 1b1608f1c1f4e21f05037225e095c49035ad8bfdb8b580abbb904c9f2448a5c6
 RUN bitnami-pkg install symfony-1.5.11-0 --checksum 91bf34f8e58d04ef080ba7c56de8e1b5d0f0ab4e2da23f3a0e393befce93b545
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="symfony" \
-    BITNAMI_IMAGE_VERSION="1.5.11-r31" \
+    BITNAMI_IMAGE_VERSION="1.5.11-r32" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_USER="root" \
