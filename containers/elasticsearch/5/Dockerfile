@@ -1,13 +1,13 @@
-FROM bitnami/minideb-extras:jessie-r61
+FROM bitnami/minideb-extras:jessie-r64
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN bitnami-pkg install java-1.8.171-2 --checksum 43dee4edccde5428da7b62dbd8371a08cd4f92ebfa3dca104f1e3d8480610cda
+RUN bitnami-pkg install java-1.8.171-3 --checksum 3454a0bda3a4fb282b6b9a7022677a48dc493df0e13cb04d3c92e070e102a244
 RUN bitnami-pkg unpack elasticsearch-5.6.4-2 --checksum 5afc6e3ac3060fadbea4b794dd2cbf6a7d8c4f1679b32864dc82e5208adf83e1
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="5.6.4-r36" \
+    BITNAMI_IMAGE_VERSION="5.6.4-r37" \
     ELASTICSEARCH_BIND_ADDRESS="" \
     ELASTICSEARCH_CLUSTER_HOSTS="" \
     ELASTICSEARCH_CLUSTER_NAME="elasticsearch-cluster" \
