@@ -1,20 +1,20 @@
-FROM bitnami/oraclelinux-extras:7-r3
+FROM bitnami/oraclelinux-extras:7-r5
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
+RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.33-3 --checksum 0611709446389dbf1b9a08ee4b8b447443e356e286a9c6dee312d55f72e465d6
-RUN bitnami-pkg unpack php-7.0.30-3 --checksum 1de72790ae78f941b400212bba9f04201373b7573e679818a7f06edbb65cf473
+RUN bitnami-pkg unpack php-7.0.30-4 --checksum c86bcdf4f7d864ed94d96b5f35f1fc919d22f02b0bc7aa13147b59e30ba51d7d
 RUN bitnami-pkg unpack mysql-client-10.1.33-0 --checksum 250e5cd0f6f256fb39e8d8b703856dbc0257f3da9659b8565398173a3119dd9c
-RUN bitnami-pkg install libphp-7.0.30-6 --checksum 31cf8fe7e06aee8a9954e5205b9d49e7ec8c8eef4d260a9ed21e1955ec10a9f9
-RUN bitnami-pkg unpack wordpress-4.9.6-2 --checksum 93ccb311631eac0ed4a8ea3d8f8d8872041681a4ec11fc769688e3e53180bc00
+RUN bitnami-pkg install libphp-7.0.30-7 --checksum 9466892a16f9013d9e467d6b96398e1ae33f721591f302656137e87e97af59fe
+RUN bitnami-pkg unpack wordpress-4.9.6-3 --checksum deb75a6ae19d8dbbd327a8dfcd532bbfb73cc2c48b653fb3d35e1700ed6928d9
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="4.9.6-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="4.9.6-ol-7-r2" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
