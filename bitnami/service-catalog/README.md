@@ -4,7 +4,7 @@
 
 The [Service Catalog project](https://github.com/kubernetes-incubator/service-catalog/) is in incubation to bring integration with service brokers to the Kubernetes ecosystem via the [Open Service Broker API](https://github.com/openservicebrokerapi/servicebroker).
 
-There are two different images: `service-catalog` and [`service-catalog`](https://github.com/bitnami/bitnami-docker-service-catalog)
+There are two different images: `service-catalog` and [`user-broker`](https://github.com/bitnami/bitnami-docker-user-broker)
 
 # TL;DR;
 
