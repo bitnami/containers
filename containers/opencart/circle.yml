@@ -64,4 +64,4 @@ workflows:
             branches:
               only: /.*/
             tags:
-              only: /^[0-9].*-r[0-9]+(-(?!rhel).*)?$/
+              only: /^.*(?<!-rhel-7)-r[0-9]+$/
