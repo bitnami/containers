@@ -24,7 +24,7 @@ $ docker run --name fluent-bit bitnami/fluent-bit:latest
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0`, `0.13.2-r4`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.2-r4/0/Dockerfile)
+* [`0`, `0.13.2-r5`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.2-r5/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluent-bit GitHub repo](https://github.com/bitnami/bitnami-docker-fluent-bit).
 
