@@ -27,7 +27,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
- - [`12`, `12.0.0-r29` (12/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/12.0.0-r29/12/Dockerfile)
+ - [`12`, `12.0.0-r30` (12/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/12.0.0-r30/12/Dockerfile)
  - [`11`, `11.0.0-r38`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/11.0.0-r38/11/Dockerfile)
  - [`10`, `10.1.0-r35` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/10.1.0-r35/10/Dockerfile)
 
