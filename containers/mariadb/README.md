@@ -32,9 +32,9 @@ $ docker-compose up -d
 * [`10.2`, `10.2.15-r10` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.15-r10/10.2/Dockerfile)
 * [`10.2-ol-7`, `10.2.15-ol-7-r0` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.15-ol-7-r0/10.2/ol-7/Dockerfile)
 * [`10.2-rhel-7`, `10.2.15-rhel-7-r1` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.15-rhel-7-r1/10.2/rhel-7/Dockerfile)
-* [`10.1-rhel-7`, `10.1.33-rhel-7-r1` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-rhel-7-r1/10.1/rhel-7/Dockerfile)
-* [`10.1`, `10.1.33-r4`, `latest` (10.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-r4/10.1/Dockerfile)
 * [`10.1-ol-7`, `10.1.33-ol-7-r0` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-ol-7-r0/10.1/ol-7/Dockerfile)
+* [`10.1-rhel-7`, `10.1.33-rhel-7-r1` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-rhel-7-r1/10.1/rhel-7/Dockerfile)
+* [`10.1`, `10.1.33-r5`, `latest` (10.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-r5/10.1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
 
