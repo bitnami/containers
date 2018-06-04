@@ -1,14 +1,15 @@
-FROM bitnami/oraclelinux-extras:7-r3
+FROM bitnami/oraclelinux-extras:7-r5
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
+RUN install_packages glib2 glibc libblkid libffi libgcc libmount libselinux libstdc++ libuuid pcre zlib
 RUN bitnami-pkg install java-1.8.171-3 --checksum eb0af616b0a3ab12bd8559a36e83246eb10e7893f6a654dc14a462246d433e40
-RUN bitnami-pkg unpack tomcat-8.0.52-1 --checksum f03b854781a713baa9cbc94cdac6ce0cca23459e0b940447b1161275c047ffa4
+RUN bitnami-pkg unpack tomcat-8.0.52-2 --checksum d54687bce7731651a2bc51dbcbf0484c3dde7c5ff4f8376326775c005373b781
 RUN ln -sf /opt/bitnami/tomcat/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="8.0.52-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="8.0.52-ol-7-r1" \
     JAVA_OPTS="-Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH" \
     TOMCAT_AJP_PORT_NUMBER="8009" \
