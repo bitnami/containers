@@ -3,12 +3,12 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN bitnami-pkg install java-1.8.171-3 --checksum 3454a0bda3a4fb282b6b9a7022677a48dc493df0e13cb04d3c92e070e102a244
-RUN bitnami-pkg unpack tomcat-9.0.8-0 --checksum 7a246559ae5b39ccd6da5467e740f7827d77f8200e7f277e01810a42fc704dba
+RUN bitnami-pkg unpack tomcat-9.0.8-1 --checksum 67f7966586a9b9d921ed0741b47871494b2541845bbe5b14f65e95a6c79eaa5a
 RUN ln -sf /opt/bitnami/tomcat/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="9.0.8-r20" \
+    BITNAMI_IMAGE_VERSION="9.0.8-r21" \
     JAVA_OPTS="-Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH" \
     TOMCAT_AJP_PORT_NUMBER="8009" \
