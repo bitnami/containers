@@ -8,13 +8,16 @@ RUN bitnami-pkg unpack php-7.0.30-4 --checksum e6c48cb951db7abeb83319bf06155385a
 RUN bitnami-pkg unpack mysql-client-10.1.33-0 --checksum 1b1608f1c1f4e21f05037225e095c49035ad8bfdb8b580abbb904c9f2448a5c6
 RUN bitnami-pkg install libphp-7.0.30-7 --checksum ee53b007b7ba11b7202fff5c112d0b13fd78cabab8fabf13a94723475f325f2e
 RUN bitnami-pkg unpack mediawiki-1.30.0-0 --checksum f1a1caea8933c9485a0e432266074ecc3b62dd21339e5ee93100a940c90f5d3e
+RUN locale-gen en_US.UTF-8
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="mediawiki" \
-    BITNAMI_IMAGE_VERSION="1.30.0-r33" \
+    BITNAMI_IMAGE_VERSION="1.30.0-r34" \
+    LANG="en_US.UTF-8" \
+    LANGUAGE="en_US:en" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
