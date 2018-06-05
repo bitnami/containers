@@ -29,8 +29,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
+ - [`10`, `10.3.0-r0` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.3.0-r0/10/Dockerfile), [`10-prod`, `10.3.0-r0-prod` (10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.3.0-r0/10/prod/Dockerfile)
  - [`10`, `10.2.1-ol-7-r0` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.2.1-ol-7-r0/10/Dockerfile), [`10-prod`, `10.2.1-ol-7-r0-prod` (10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.2.1-ol-7-r0/10/prod/Dockerfile)
- - [`10`, `10.2.1-r8` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.2.1-r8/10/Dockerfile), [`10-prod`, `10.2.1-r8-prod` (10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.2.1-r8/10/prod/Dockerfile)
  - [`9`, `9.11.1-r33` (9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.1-r33/9/Dockerfile), [`9-prod`, `9.11.1-r33-prod` (9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.1-r33/9/prod/Dockerfile)
  - [`9`, `9.11.1-ol-7-r0` (9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.1-ol-7-r0/9/Dockerfile), [`9-prod`, `9.11.1-ol-7-r0-prod` (9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.1-ol-7-r0/9/prod/Dockerfile)
  - [`8`, `8.11.2-r6` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.2-r6/8/Dockerfile), [`8-prod`, `8.11.2-r6-prod` (8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.2-r6/8/prod/Dockerfile)
