@@ -3,18 +3,18 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cronie cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
-RUN bitnami-pkg unpack apache-2.4.33-3 --checksum 0611709446389dbf1b9a08ee4b8b447443e356e286a9c6dee312d55f72e465d6
+RUN bitnami-pkg unpack apache-2.4.33-4 --checksum 4e8daac4fc3f70870a856be2dbabe35c060bae4319da105a1cd38ea2335cc5a1
 RUN bitnami-pkg unpack php-7.1.18-1 --checksum 9e0599d1248382244909ab13ac306908449a5244866906d10cb08c7540359a56
 RUN bitnami-pkg unpack mysql-client-10.1.33-0 --checksum 250e5cd0f6f256fb39e8d8b703856dbc0257f3da9659b8565398173a3119dd9c
 RUN bitnami-pkg install libphp-7.1.18-2 --checksum 1465643c9c31c1ed4c62308f3664e978da5d1034ba4cf85096ec5d80a27565ed
-RUN bitnami-pkg unpack moodle-3.5.0-2 --checksum f801ea431191eacf94dcf889284e216b46ec6b535f797621cb1c267f8828ddd9
+RUN bitnami-pkg unpack moodle-3.5.0-3 --checksum 6ccf5aa36c01903fe8f853b34746751d2025165dde27146787afa24ea82fb532
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.5.0-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="3.5.0-ol-7-r2" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
