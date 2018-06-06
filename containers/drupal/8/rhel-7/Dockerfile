@@ -7,11 +7,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
-RUN bitnami-pkg unpack apache-2.4.33-3 --checksum c9ed08e5c752fe23eff64d19f1e2a4a34f6326732acc80ea685f2d8eda7ee96f
-RUN bitnami-pkg unpack php-7.1.18-0 --checksum b644ba392f6b673c5beea17e9358f213648b8c7525f876c6d6f64e2ee7efe839
+RUN bitnami-pkg unpack apache-2.4.33-4 --checksum cc2b7ea816858476f7cb475e1319219b88461af51a25e6ba96592e0bb560e9ca
+RUN bitnami-pkg unpack php-7.1.18-1 --checksum c527067d47a06e1805ccff02a34c65d18705f343dd0bd37b5626c0b2e9eccdd4
 RUN bitnami-pkg unpack mysql-client-10.1.33-0 --checksum 4b07acdb7d3f6a61161414ad7f7639da8f291962e242eb257f612d18c8231501
 RUN bitnami-pkg install libphp-7.1.18-0 --checksum 333c8861a9f35ec48359a96cc9c5a3ceee51ad865db0292dd7867e950a0eea70
-RUN bitnami-pkg unpack drupal-8.5.3-3 --checksum d716a107a08ad38faff4761ac7e47431cef544ee693087e5f19272ba6b082a5f
+RUN bitnami-pkg unpack drupal-8.5.3-4 --checksum 2702aa505b60467009d09116585128278ee442a26e9cf83a554115c0c5b527a1
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/error_log
 
@@ -20,7 +20,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.5.3-rhel-7-r1" \
+    BITNAMI_IMAGE_VERSION="8.5.3-rhel-7-r2" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
