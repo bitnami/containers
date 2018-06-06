@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  prometheus:
+    image: bitnami/prometheus:latest
+    ports:
+      - '9090:9090'
