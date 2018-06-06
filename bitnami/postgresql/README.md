@@ -25,6 +25,16 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Supported tags and respective `Dockerfile` links
+
+* [`10`, `10.4.0-r8`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-r8/10/Dockerfile)
+* [`10-ol-7`, `10.4.0-ol-7-r0` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-ol-7-r0/10/ol-7/Dockerfile)
+* [`9.6`, `9.6.9-r9` (9.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-r9/9.6/Dockerfile)
+* [`9.6-ol-7`, `9.6.9-ol-7-r0` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-ol-7-r0/9.6/ol-7/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
+
+
 # Get this image
 
 The recommended way to get the Bitnami PostgreSQL Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/postgresql).
