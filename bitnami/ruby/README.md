@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`2.5`, `2.5.1-r35`, `latest` (2.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-r35/2.5/Dockerfile)
+* [`2.5`, `2.5.1-r36`, `latest` (2.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-r36/2.5/Dockerfile)
 * [`2.5-ol-7`, `2.5.1-ol-7-r0` (2.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-ol-7-r0/2.5/ol-7/Dockerfile)
 * [`2.4`, `2.4.4-r34` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-r34/2.4/Dockerfile)
 * [`2.4-ol-7`, `2.4.4-ol-7-r0` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-ol-7-r0/2.4/ol-7/Dockerfile)
@@ -37,8 +37,8 @@ $ docker-compose up -d
 * [`2.3-ol-7`, `2.3.7-ol-7-r0` (2.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-ol-7-r0/2.3/ol-7/Dockerfile)
 * [`2.2`, `2.2.10-r34` (2.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.10-r34/2.2/Dockerfile)
 * [`2.2-ol-7`, `2.2.10-ol-7-r0` (2.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.10-ol-7-r0/2.2/ol-7/Dockerfile)
-* [`2.1`, `2.1.10-r42` (2.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-r42/2.1/Dockerfile)
 * [`2.1-ol-7`, `2.1.10-ol-7-r0` (2.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-ol-7-r0/2.1/ol-7/Dockerfile)
+* [`2.1`, `2.1.10-r42` (2.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-r42/2.1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://github.com/bitnami/bitnami-docker-ruby).
 
