@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  fluentd-exporter:
+    image: bitnami/fluentd-exporter:latest
+    volumes:
+      - fluentd_exporter_data:/bitnami
+volumes:
+  fluentd_exporter_data:
+    driver: local
