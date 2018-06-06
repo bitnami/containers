@@ -1,10 +1,10 @@
 FROM bitnami/minideb:jessie as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nats-1.1.0-1-linux-x64-debian-8.tar.gz && \
-    echo "364ad96d072a20c7301c1e477dd5fbf03216efa05a2be61fd656fde93e386b4a  /tmp/bitnami/pkg/cache/nats-1.1.0-1-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/nats-1.1.0-1-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/nats-1.1.0-1-linux-x64-debian-8.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nats-1.1.0-2-linux-x64-debian-8.tar.gz && \
+    echo "5b013310bc1d1e656c59e88f953ff9bb9118d768bc594385701a4f3737814a54  /tmp/bitnami/pkg/cache/nats-1.1.0-2-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/nats-1.1.0-2-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/nats-1.1.0-2-linux-x64-debian-8.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/nats /opt/bitnami/nats
 ENV BITNAMI_APP_NAME="nats" \
-    BITNAMI_IMAGE_VERSION="1.1.0-r6" \
+    BITNAMI_IMAGE_VERSION="1.1.0-r7" \
     PATH="/opt/bitnami/nats/bin:$PATH"
 
 RUN install_packages curl
