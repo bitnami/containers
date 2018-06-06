@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  cluster-autoscaler:
+    image: bitnami/cluster-autoscaler:latest
+    volumes:
+      - cluster-autoscaler_data:/bitnami
+volumes:
+  cluster-autoscaler_data:
+    driver: local
