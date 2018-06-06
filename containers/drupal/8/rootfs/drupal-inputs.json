@@ -5,6 +5,8 @@
   "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
   "databaseUser": "{{$global.env.DRUPAL_DATABASE_USER}}",
   "email": "{{$global.env.DRUPAL_EMAIL}}",
+  "httpPort": "{{$global.env.DRUPAL_HTTP_PORT}}",
+  "httpsPort": "{{$global.env.DRUPAL_HTTPS_PORT}}",
   "password": "{{$global.env.DRUPAL_PASSWORD}}",
   "username": "{{$global.env.DRUPAL_USERNAME}}"
 }
