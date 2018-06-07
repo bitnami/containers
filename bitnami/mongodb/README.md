@@ -27,8 +27,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
+* [`3.7`, `3.7.9-r6` (3.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.7.9-r6/3.7/Dockerfile)
 * [`3.7-ol-7`, `3.7.9-ol-7-r0` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.7.9-ol-7-r0/3.7/ol-7/Dockerfile)
-* [`3.7`, `3.7.9-r5` (3.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.7.9-r5/3.7/Dockerfile)
 * [`3.6`, `3.6.5-r11`, `latest` (3.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.5-r11/3.6/Dockerfile)
 * [`3.6-ol-7`, `3.6.5-ol-7-r1` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.5-ol-7-r1/3.6/ol-7/Dockerfile)
 
@@ -56,7 +56,7 @@ $ docker build -t bitnami/mongodb:latest https://github.com/bitnami/bitnami-dock
 
 # Persisting your database
 
-If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
@@ -409,14 +409,14 @@ Finally, the arbiters follows the same procedure than secondary nodes with the e
 
 ## Configuration file
 
-The image looks for configurations in `/bitnami/mongodb/conf/`. As mentioned in [Persisting your database](#persisting-your-database) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/mongodb-persistence/mongodb/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
+The image looks for configurations in `/opt/bitnami/mongodb/conf/`. You can mount a volume at `/opt/bitnami/mongodb/conf/` and copy/edit the configurations in the `/path/to/mongodb-configuration-persistence/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
 ### Step 1: Run the MongoDB image
 
 Run the MongoDB image, mounting a directory from your host.
 
 ```bash
-$ docker run --name mongodb -v /path/to/mongodb-persistence:/bitnami bitnami/mongodb:latest
+$ docker run --name mongodb -v /path/to/mongodb-configuration-persistence:/opt/bitnami/mongodb/conf bitnami/mongodb:latest
 ```
 
 or using Docker Compose:
@@ -430,7 +430,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - /path/to/mongodb-persistence:/bitnami
+      - /path/to/mongodb-configuration-persistence:/opt/bitnami/mongodb/conf
 ```
 
 ### Step 2: Edit the configuration
@@ -438,7 +438,7 @@ services:
 Edit the configuration on your host using your favorite editor.
 
 ```bash
-$ vi /path/to/mongodb-persistence/mongodb/conf/mongodb.conf
+$ vi /path/to/mongodb-configuration-persistence/mongodb.conf
 ```
 
 ### Step 3: Restart MongoDB
