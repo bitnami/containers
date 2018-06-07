@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.33-4 --checksum f26751a96abdc45db43c4b92eb9f79
 RUN bitnami-pkg unpack php-7.0.30-4 --checksum e6c48cb951db7abeb83319bf06155385a5170a833e2ebfd1ee61e137633c0c7a
 RUN bitnami-pkg unpack mysql-client-10.1.33-0 --checksum 1b1608f1c1f4e21f05037225e095c49035ad8bfdb8b580abbb904c9f2448a5c6
 RUN bitnami-pkg install libphp-7.0.30-7 --checksum ee53b007b7ba11b7202fff5c112d0b13fd78cabab8fabf13a94723475f325f2e
-RUN bitnami-pkg unpack suitecrm-7.10.4-2 --checksum 057b57f362bd27a12a948a2c6a3e0a9a258cb160b24d2d9522da10fb0ddda76d
+RUN bitnami-pkg unpack suitecrm-7.10.6-0 --checksum 5ac0683e613a2c8df8db6f7ee451e3a11df9de0fe9f2457a665f857999510126
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 
 COPY rootfs /
@@ -15,7 +15,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="suitecrm" \
-    BITNAMI_IMAGE_VERSION="7.10.4-r31" \
+    BITNAMI_IMAGE_VERSION="7.10.6-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
