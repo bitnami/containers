@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r68
+FROM bitnami/minideb-extras:jessie-r69
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,7 +6,7 @@ RUN bitnami-pkg unpack redis-sentinel-4.0.9-1 --checksum 98c2482692bd81e50137d4d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="4.0.9-r8" \
+    BITNAMI_IMAGE_VERSION="4.0.9-r9" \
     PATH="/opt/bitnami/redis-sentinel/bin:$PATH" \
     REDIS_MASTER_HOST="redis" \
     REDIS_MASTER_PASSWORD="" \
