@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`7`, `7.10.4-r30`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.4-r30/7/Dockerfile)
+* [`7`, `7.10.4-r31`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.4-r31/7/Dockerfile)
 * [`7-ol-7`, `7.10.4-ol-7-r0` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.4-ol-7-r0/7/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
