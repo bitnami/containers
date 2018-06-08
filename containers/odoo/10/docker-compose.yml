@@ -6,8 +6,6 @@ services:
       - 'postgresql_data:/bitnami'
   odoo:
     image: 'bitnami/odoo:10'
-    labels:
-      kompose.service.type: nodeport
     ports:
       - '80:8069'
       - '443:8071'
