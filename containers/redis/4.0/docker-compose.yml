@@ -7,8 +7,6 @@ services:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
-    labels:
-      kompose.service.type: nodeport
     ports:
       - '6379:6379'
     volumes:
