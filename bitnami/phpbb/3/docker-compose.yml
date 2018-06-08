@@ -10,8 +10,6 @@ services:
       - 'mariadb_data:/bitnami'
   phpbb:
     image: 'bitnami/phpbb:3'
-    labels:
-      kompose.service.type: nodeport
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
