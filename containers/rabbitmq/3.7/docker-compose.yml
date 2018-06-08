@@ -3,8 +3,6 @@ version: '2'
 services:
   rabbitmq:
     image: 'bitnami/rabbitmq:3.7'
-    labels:
-      kompose.service.type: nodeport
     ports:
       - '4369:4369'
       - '5672:5672'
