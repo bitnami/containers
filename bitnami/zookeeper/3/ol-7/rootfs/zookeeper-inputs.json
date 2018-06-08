@@ -1,0 +1,17 @@
+{
+  "allowAnonymousLogin": "{{$global.env.ALLOW_ANONYMOUS_LOGIN}}",
+  "zookeeperClientPassword": "{{$global.env.ZOO_CLIENT_PASSWORD}}",
+  "zookeeperClientUser": "{{$global.env.ZOO_CLIENT_USER}}",
+  "zookeeperEnableAuth": "{{$global.env.ZOO_ENABLE_AUTH}}",
+  "zookeeperHeapSize": "{{$global.env.ZOO_HEAP_SIZE}}",
+  "zookeeperId": "{{$global.env.ZOO_SERVER_ID}}",
+  "zookeeperInitLimit": "{{$global.env.ZOO_INIT_LIMIT}}",
+  "zookeeperJvmFlags": "{{$global.env.JVMFLAGS}}",
+  "zookeeperMaxClientCnxns": "{{$global.env.ZOO_MAX_CLIENT_CNXNS}}",
+  "zookeeperPort": "{{$global.env.ZOO_PORT_NUMBER}}",
+  "zookeeperServerPasswords": "{{$global.env.ZOO_SERVER_PASSWORDS}}",
+  "zookeeperServerUsers": "{{$global.env.ZOO_SERVER_USERS}}",
+  "zookeeperServers": "{{$global.env.ZOO_SERVERS}}",
+  "zookeeperSyncLimit": "{{$global.env.ZOO_SYNC_LIMIT}}",
+  "zookeeperTickTime": "{{$global.env.ZOO_TICK_TIME}}"
+}
