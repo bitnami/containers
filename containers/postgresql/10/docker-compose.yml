@@ -3,8 +3,6 @@ version: '2'
 services:
   postgresql:
     image: 'bitnami/postgresql:10'
-    labels:
-      kompose.service.type: nodeport
     ports:
       - '5432:5432'
     volumes:
