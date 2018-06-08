@@ -12,8 +12,6 @@ services:
       - 'redis_data:/bitnami'
   discourse:
     image: 'bitnami/discourse:1'
-    labels:
-      kompose.service.type: nodeport
     ports:
       - '80:3000'
     depends_on:
