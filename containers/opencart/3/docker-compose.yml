@@ -17,8 +17,6 @@ services:
       - OPENCART_DATABASE_NAME=bitnami_opencart
       - OPENCART_HOST=localhost
       - ALLOW_EMPTY_PASSWORD=yes
-    labels:
-      kompose.service.type: nodeport
     ports:
       - '80:80'
       - '443:443'
