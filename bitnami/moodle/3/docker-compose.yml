@@ -16,8 +16,6 @@ services:
       - MOODLE_DATABASE_USER=bn_moodle
       - MOODLE_DATABASE_NAME=bitnami_moodle
       - ALLOW_EMPTY_PASSWORD=yes
-    labels:
-      kompose.service.type: nodeport
     ports:
       - '80:80'
       - '443:443'
