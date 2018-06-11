@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1`, `1.2.0-r29`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/1.2.0-r29/1/Dockerfile)
+* [`1`, `1.2.0-r30`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/1.2.0-r30/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse-dashboard GitHub repo](https://github.com/bitnami/bitnami-docker-parse-dashboard).
 
