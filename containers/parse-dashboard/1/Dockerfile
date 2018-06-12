@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r73
+FROM bitnami/minideb-extras:jessie-r74
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack parse-dashboard-1.2.0-1 --checksum 0bb357b3907f1970aee2ba
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.2.0-r30" \
+    BITNAMI_IMAGE_VERSION="1.2.0-r31" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
     PARSE_DASHBOARD_PASSWORD="bitnami" \
