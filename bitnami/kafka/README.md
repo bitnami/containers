@@ -40,8 +40,8 @@ services:
 
 # Supported tags and respective `Dockerfile` links
 
+* [`1`, `1.1.0-r38`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-r38/1/Dockerfile)
 * [`1-ol-7`, `1.1.0-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-ol-7-r0/1/ol-7/Dockerfile)
-* [`1`, `1.1.0-r37`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-r37/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
