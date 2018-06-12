@@ -13,7 +13,7 @@ if [[ -n $MONGODB_EXTRA_FLAGS ]]; then
 fi
 
 # log output to stdout
-sed -i 's/path: .*\/mongodb.log/path: /' /bitnami/mongodb/conf/mongodb.conf
+sed -i 's/path: .*\/mongodb.log/path: /' /opt/bitnami/mongodb/conf/mongodb.conf
 
 info "Starting ${DAEMON}..."
 exec gosu ${USER} ${EXEC} ${ARGS}
