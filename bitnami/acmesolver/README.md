@@ -21,6 +21,13 @@ Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource suppor
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Supported tags and respective `Dockerfile` links
+
+* [`0`, `0.3.0-r11`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.3.0-r11/0/Dockerfile)
+* [`0-ol-7`, `0.3.0-ol-7-r0` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.3.0-ol-7-r0/0/ol-7/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/acmesolver GitHub repo](https://github.com/bitnami/bitnami-docker-acmesolver).
+
 # Further documentation
 
 For further documentation, please check [here](https://github.com/jetstack/cert-manager/blob/master/docs)
