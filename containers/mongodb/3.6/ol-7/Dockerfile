@@ -3,11 +3,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libcom_err libgcc libpcap libselinux openssl-libs pcre zlib
-RUN bitnami-pkg unpack mongodb-3.6.5-1 --checksum e28d0fdc2e7f3d54d418547ef346e06c181bf938d4e63c3cf0a348ef58cbd6cf
+RUN bitnami-pkg unpack mongodb-3.6.5-2 --checksum aa0f8b11f6a3fac8fccce9fd46bc2de48275f0ad8c32df95072c2b02cd7cbce6
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.6.5-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="3.6.5-ol-7-r2" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_PASSWORD="" \
