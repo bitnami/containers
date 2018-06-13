@@ -503,7 +503,7 @@ docker-compose start zookeeper
 
 # Notable Changes
 
-## 3.4.12-r24
+## 3.4.12-r25
 
 - Configuration is not persisted, it is regenerated each time the container is created or it is used as volume.
 
