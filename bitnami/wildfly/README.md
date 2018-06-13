@@ -29,8 +29,8 @@ $ docker-compose up -d
 
 * [`12`, `12.0.0-r39` (12/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/12.0.0-r39/12/Dockerfile)
 * [`12-ol-7`, `12.0.0-ol-7-r0` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/12.0.0-ol-7-r0/12/ol-7/Dockerfile)
+* [`11`, `11.0.0-r48`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/11.0.0-r48/11/Dockerfile)
 * [`11-ol-7`, `11.0.0-ol-7-r0` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/11.0.0-ol-7-r0/11/ol-7/Dockerfile)
-* [`11`, `11.0.0-r47`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/11.0.0-r47/11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
