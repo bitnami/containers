@@ -412,7 +412,7 @@ $ docker run --name rabbitmq bitnami/rabbitmq:latest
 or using Docker Compose:
 
 ```bash
-$ docker-compose start rabbitmq
+$ docker-compose up rabbitmq
 ```
 
 # Notable changes
