@@ -11,8 +11,6 @@ services:
       - 'mariadb_data:/bitnami'
   drupal:
     image: 'bitnami/drupal:8'
-    labels:
-      kompose.service.type: nodeport
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
