@@ -25,8 +25,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3-ol-7`, `3.4.6-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/3.4.6-ol-7-r0/3/ol-7/Dockerfile)
 * [`3`, `3.4.6-r3`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/3.4.6-r3/3/Dockerfile)
+* [`3-ol-7`, `3.4.6-ol-7-r1` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/3.4.6-ol-7-r1/3/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
 
@@ -223,7 +223,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start redmine`
+ * For docker-compose: `$ docker-compose up redmine`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name redmine bitnami/redmine:latest`
 
 # Configuration
