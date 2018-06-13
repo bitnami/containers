@@ -29,10 +29,10 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`10.2-rhel-7`, `10.2.15-rhel-7-r2` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.15-rhel-7-r2/10.2/rhel-7/Dockerfile)
 * [`10.2`, `10.2.15-r20` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.15-r20/10.2/Dockerfile)
 * [`10.2-ol-7`, `10.2.15-ol-7-r1` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.15-ol-7-r1/10.2/ol-7/Dockerfile)
-* [`10.1`, `10.1.33-r14`, `latest` (10.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-r14/10.1/Dockerfile)
+* [`10.2-rhel-7`, `10.2.15-rhel-7-r2` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.15-rhel-7-r2/10.2/rhel-7/Dockerfile)
+* [`10.1`, `10.1.33-r15`, `latest` (10.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-r15/10.1/Dockerfile)
 * [`10.1-ol-7`, `10.1.33-ol-7-r1` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-ol-7-r1/10.1/ol-7/Dockerfile)
 * [`10.1-rhel-7`, `10.1.33-rhel-7-r2` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-rhel-7-r2/10.1/rhel-7/Dockerfile)
 
