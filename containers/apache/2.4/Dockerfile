@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r74
+FROM bitnami/minideb-extras:jessie-r75
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,7 +10,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.33-r46" \
+    BITNAMI_IMAGE_VERSION="2.4.33-r47" \
     PATH="/opt/bitnami/apache/bin:$PATH"
 
 EXPOSE 80 443
