@@ -29,8 +29,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
+* [`4.0-ol-7`, `4.0.10-ol-7-r0` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.10-ol-7-r0/4.0/ol-7/Dockerfile)
 * [`4.0`, `4.0.9-r24`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.9-r24/4.0/Dockerfile)
-* [`4.0-ol-7`, `4.0.9-ol-7-r13` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.9-ol-7-r13/4.0/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
@@ -487,7 +487,7 @@ $ docker run --name redis bitnami/redis:latest
 or using Docker Compose:
 
 ```bash
-$ docker-compose start redis
+$ docker-compose up redis
 ```
 
 # Notable Changes
