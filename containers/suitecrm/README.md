@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`7`, `7.10.6-r7`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.6-r7/7/Dockerfile)
+* [`7`, `7.10.6-r8`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.6-r8/7/Dockerfile)
 * [`7-ol-7`, `7.10.6-ol-7-r0` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.6-ol-7-r0/7/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
@@ -227,7 +227,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start suitecrm`
+ * For docker-compose: `$ docker-compose up suitecrm`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name suitecrm bitnami/suitecrm:latest`
 
 # Configuration
