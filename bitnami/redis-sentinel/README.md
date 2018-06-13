@@ -253,7 +253,7 @@ $ docker run --name redis bitnami/redis-sentinel:latest
 or using Docker Compose:
 
 ```bash
-$ docker-compose start redis
+$ docker-compose up redis
 ```
 
 # Contributing
