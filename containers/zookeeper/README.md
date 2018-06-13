@@ -6,7 +6,6 @@
 
 [https://zookeeper.apache.org/](https://zookeeper.apache.org/)
 
-
 # TL;DR;
 
 ```bash
@@ -35,7 +34,7 @@ services:
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3`, `3.4.12-r24`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-r24/3/Dockerfile)
+* [`3`, `3.4.12-r25`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-r25/3/Dockerfile)
 * [`3-ol-7`, `3.4.12-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-ol-7-r0/3/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
@@ -70,7 +69,7 @@ If you remove the container all your data and configurations will be lost, and t
 If you have already started using Zookeeper, follow the steps on
 [backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
 
-The image exposes a volume at `/bitnami/zookeeper` for the Zookeeper data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
+The image exposes a volume at `/bitnami/zookeeper` for the Zookeeper data. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
 docker run -v /path/to/zookeeper-persistence:/bitnami/zookeeper bitnami/zookeeper:latest
@@ -200,10 +199,10 @@ services:
 
 
 ## Configuration
-The image looks for configuration in the `conf/` directory of `/bitnami/zookeeper`.
+The image looks for configuration in the `conf/` directory of `/opt/bitnami/zookeeper`.
 
 ```
-docker run --name zookeeper -v /path/to/my_custom_conf_directory:/bitnami/zookeeper bitnami/zookeeper:latest
+docker run --name zookeeper -v /path/to/zoo.cfg:/opt/bitnami/zookeeper/conf/zoo.cfg  bitnami/zookeeper:latest
 ```
 After that, your changes will be taken into account in the server's behaviour.
 
@@ -212,7 +211,7 @@ After that, your changes will be taken into account in the server's behaviour.
 Run the Zookeeper image, mounting a directory from your host.
 
 ```bash
-docker run --name zookeeper -v /path/to/zookeeper-persistence:/bitnami/zookeeper bitnami/zookeeper:latest
+docker run --name zookeeper -v /path/to/zoo.cfg:/opt/bitnami/zookeeper/conf/zoo.cfg bitnami/zookeeper:latest
 ```
 
 or using Docker Compose:
@@ -226,7 +225,7 @@ services:
     ports:
       - '2181:2181'
     volumes:
-      - /path/to/zookeeper-persistence:/bitnami/zookeeper
+      - /path/to/zoo.cfg:/opt/bitnami/zookeeper/conf/zoo.cfg
 ```
 
 ### Step 2: Edit the configuration
@@ -234,7 +233,7 @@ services:
 Edit the configuration on your host using your favorite editor.
 
 ```bash
-vi /path/to/zookeeper-persistence/conf/zoo.cfg
+vi /path/to/zoo.cfg
 ```
 
 ### Step 3: Restart Zookeeper
@@ -404,7 +403,7 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ## Backing up your container
 
-To backup your data, configuration and logs, follow these simple steps:
+To backup your data, follow these simple steps:
 
 ### Step 1: Stop the currently running container
 
@@ -504,6 +503,10 @@ docker-compose start zookeeper
 
 # Notable Changes
 
+## 3.4.12-r24
+
+- Configuration is not persisted, it is regenerated each time the container is created or it is used as volume.
+
 ## 3.4.10-r4
 
 - The zookeeper container has been migrated to a non-root container approach. Previously the container run as `root` user and the zookeeper daemon was started as `zookeeper` user. From now own, both the container and the zookeeper daemon run as user `1001`.
@@ -512,7 +515,6 @@ docker-compose start zookeeper
 ## 3.4.10-r0
 
 - New release
-
 
 # Contributing
 
