@@ -318,7 +318,7 @@ $ docker run --name kibana bitnami/kibana:latest
 or using Docker Compose:
 
 ```bash
-$ docker-compose start kibana
+$ docker-compose up kibana
 ```
 
 # Notable Changes
