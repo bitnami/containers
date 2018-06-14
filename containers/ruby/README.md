@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`2.5`, `2.5.1-r43`, `latest` (2.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-r43/2.5/Dockerfile)
+* [`2.5`, `2.5.1-r44`, `latest` (2.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-r44/2.5/Dockerfile)
 * [`2.5-ol-7`, `2.5.1-ol-7-r0` (2.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-ol-7-r0/2.5/ol-7/Dockerfile)
 * [`2.4`, `2.4.4-r41` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-r41/2.4/Dockerfile)
 * [`2.4-ol-7`, `2.4.4-ol-7-r0` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-ol-7-r0/2.4/ol-7/Dockerfile)
@@ -275,7 +275,7 @@ $ docker run --name ruby bitnami/ruby:latest
 or using Docker Compose:
 
 ```bash
-$ docker-compose start ruby
+$ docker-compose up ruby
 ```
 
 # Notable Changes
