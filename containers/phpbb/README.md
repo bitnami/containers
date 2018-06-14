@@ -25,8 +25,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
+* [`3`, `3.2.2-r34`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.2-r34/3/Dockerfile)
 * [`3-ol-7`, `3.2.2-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.2-ol-7-r0/3/ol-7/Dockerfile)
-* [`3`, `3.2.2-r33`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.2-r33/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpbb GitHub repo](https://github.com/bitnami/bitnami-docker-phpbb).
 
@@ -228,7 +228,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start phpbb`
+ * For docker-compose: `$ docker-compose up phpbb`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name phpbb bitnami/phpbb:latest`
 
 # Configuration
