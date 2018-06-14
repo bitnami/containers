@@ -25,10 +25,10 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`8`, `8.5.4-r2`, `latest` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.4-r2/8/Dockerfile)
-* [`8-ol-7`, `8.5.4-ol-7-r0` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.4-ol-7-r0/8/ol-7/Dockerfile)
 * [`8-rhel-7`, `8.5.4-rhel-7-r0` (8/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.4-rhel-7-r0/8/rhel-7/Dockerfile)
+* [`8`, `8.5.4-r3`, `latest` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.4-r3/8/Dockerfile)
 * [`8-php5-rhel-7`, `8.5.4-php5-rhel-7-r1` (8-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.4-php5-rhel-7-r1/8-php5/rhel-7/Dockerfile)
+* [`8-ol-7`, `8.5.4-ol-7-r0` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.4-ol-7-r0/8/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
 
@@ -227,7 +227,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start drupal`
+ * For docker-compose: `$ docker-compose up drupal`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name drupal bitnami/drupal:latest`
 
 # Configuration
