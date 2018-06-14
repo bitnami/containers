@@ -40,7 +40,7 @@ services:
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1`, `1.1.0-r40`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-r40/1/Dockerfile)
+* [`1`, `1.1.0-r41`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-r41/1/Dockerfile)
 * [`1-ol-7`, `1.1.0-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-ol-7-r0/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
@@ -75,7 +75,7 @@ If you remove the container all your data and configurations will be lost, and t
 If you have already started using your database, follow the steps on
 [backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
 
-The image exposes a volume at `/bitnami/kafka` for the Kafka data and configurations. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
+The image exposes a volume at `/bitnami/kafka` for the Kafka data. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
 Using Docker Compose:
 
@@ -213,7 +213,7 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 - `KAFKA_BROKER_PASSWORD`: Kafka client user password. Default: **bitnami**
 - `KAFKA_ZOOKEEPER_USER`: Kafka Zookeeper user. No defaults
 - `KAFKA_ZOOKEEPER_PASSWORD`: Kafka Zookeeper user password. No defaults
-- `KAFKA_CERTIFICATE_PASSWORD`: Password for certificates. Default: **bitnami1**
+- `KAFKA_CERTIFICATE_PASSWORD`: Password for certificates. No defaults.
 - `KAFKA_HEAP_OPTS`: Kafka's Java Heap size. Default: **-Xmx1024m -Xms1024m**
 
 
@@ -253,14 +253,14 @@ volumes:
 ## Security
 
 The Bitnami Kafka docker image disables the PLAINTEXT listener for security reasons.
-You can enable the PLAINTEXT listener by adding this environment variable, but remember that this
+You can enable the PLAINTEXT listener by adding the next environment variable, but remember that this
 configuration is not recommended for production.
 
 ```
 ALLOW_PLAINTEXT_LISTENER=yes
 ```
 
-In order to configure SASL authentication over SSL, you should just define the proper listener by
+In order to configure SASL authentication over SSL, you should define the proper listener by
 passing the following env vars:
 
 ```
@@ -268,18 +268,49 @@ KAFKA_LISTENERS=SASL_SSL://:9092
 KAFKA_ADVERTISED_LISTENERS=SASL_SSL://:9092
 ```
 
-You can use your own certificates for SSL. You can drop your Java Key Stores files into
-`/bitnami/kafka/conf/certs`.
+You **must** also use your own certificates for SSL. You can drop your Java Key Stores files into `/opt/bitnami/kafka/conf/certs`.
 If the JKS is password protected (recommended), you will need to provide it to get access to the keystores:
 
 `KAFKA_CERTITICATE_PASSWORD=myCertificatePassword`
 
-This script will help you with the creation of the JKS and certificates. Use the same password for
-all them:
+The following script can help you with the creation of the JKS and certificates. Use the same password for all them:
 
 https://raw.githubusercontent.com/confluentinc/confluent-platform-security-tools/master/kafka-generate-ssl.sh
 
+The following docker-compose file is an example showing how to mount your JKS certificates protected by the password `certificatePassword123`.
+Additionally it is specifying the credentials for the broker, inter-broker and zookeeper users.
 
+```yaml
+version: '2'
+
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+     - '2181:2181'
+    environment:
+      - ZOO_ENABLE_AUTH=yes
+      - ZOO_SERVER_USERS=kafka
+      - ZOO_SERVER_PASSWORDS=kafka_password
+  kafka:
+    image: 'bitnami/kafka:latest'
+    ports:
+      - '9092'
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_LISTENERS=SASL_SSL://:9092
+      - KAFKA_ADVERTISED_LISTENERS=SASL_SSL://:9092
+      - KAFKA_ZOOKEEPER_USER=kafka
+      - KAFKA_ZOOKEEPER_PASSWORD=kafka_password
+      - KAFKA_INTER_BROKER_USER=interuser
+      - KAFKA_INTER_BROKER_PASSWORD=interpassword
+      - KAFKA_BROKER_USER=user
+      - KAFKA_BROKER_PASSWORD=password
+      - KAFKA_CERTIFICATE_PASSWORD=certificatePassword123
+    volumes:
+      - './kafka.keystore.jks:/opt/bitnami/kafka/conf/certs/kafka.keystore.jks:ro'
+      - './kafka.truststore.jks:/opt/bitnami/kafka/conf/certs/kafka.truststore.jks:ro'
+```
 
 ### InterBroker communications
 
@@ -341,7 +372,7 @@ credentials in the client. If your Kafka client allows it, use the credentials y
 
 While producing and consuming messages using the `bitnami/kafka` image, you'll need to point to the
 `consumer.properties` and/or `producer.properties` file, which contains the needed configuration
-to work. You can find this files in the `/bitnami/kafka/config` directory
+to work. You can find this files in the `/opt/bitnami/kafka/conf` directory
 
 Use this to generate messages using a secure setup
 
@@ -356,7 +387,7 @@ export KAFKA_OPTS="-Djava.security.auth.login.config=/opt/bitnami/kafka/conf/kaf
 kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic test --consumer.config /opt/bitnami/kafka/conf/consumer.properties
 ```
 If you use other tools to use your Kafka cluster, you'll need to provide the required information.
-You can find the required information in the files located at `/bitnami/kafka/conf` directory.
+You can find the required information in the files located at `/opt/bitnami/kafka/conf` directory.
 
 ## Setting up a Kafka Cluster
 
@@ -463,10 +494,10 @@ Topic:mytopic   PartitionCount:3        ReplicationFactor:3     Configs:
 ```
 
 ## Configuration
-The image looks for configuration in the `config/` directory of `/bitnami/kafka`.
+The image looks for configuration in the `conf/` directory of `/opt/bitnami/kafka`.
 
 ```
-docker run --name kafka -v /path/to/my_custom_conf_directory:/bitnami/kafka bitnami/kafka:latest
+docker run --name kafka -v /path/to/server.properties:/opt/bitnami/kafka/conf/server.properties bitnami/kafka:latest
 ```
 After that, your changes will be taken into account in the server's behaviour.
 
@@ -485,7 +516,7 @@ services:
     ports:
       - '9092:9092'
     volumes:
-      - /path/to/kafka-persistence:/bitnami/kafka
+      - /path/to/server.properties:/opt/bitnami/kafka/conf/server.properties
 ```
 
 ### Step 2: Edit the configuration
@@ -493,7 +524,7 @@ services:
 Edit the configuration on your host using your favorite editor.
 
 ```bash
-vi /path/to/kafka-persistence/config/server.properties
+vi /path/to/server.properties
 ```
 
 ### Step 3: Restart Kafka
@@ -630,6 +661,11 @@ docker-compose up kafka
 ```
 
 # Notable Changes
+
+## 1.1.0-r41
+
+- Configuration is not persisted anymore. It should be mounted as a volume or it will be regenerated each time the container is created.
+- Dummy certificates are not used anymore when the SASL_SSL listener is configured. These certificates must be mounted as volumes.
 
 ## 0.10.2.1-r3
 
