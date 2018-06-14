@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0`, `0.20180422.201805030840-r32`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-r32/0/Dockerfile)
+* [`0`, `0.20180422.201805030840-r33`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-r33/0/Dockerfile)
 * [`0-ol-7`, `0.20180422.201805030840-ol-7-r0` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-ol-7-r0/0/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dokuwiki GitHub repo](https://github.com/bitnami/bitnami-docker-dokuwiki).
@@ -150,7 +150,7 @@ You can use this snapshot to restore the application state should the upgrade fa
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start dokuwiki`
+ * For docker-compose: `$ docker-compose up dokuwiki`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name dokuwiki bitnami/dokuwiki:latest`
 
 # Configuration
