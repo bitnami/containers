@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack redis-4.0.10-0 --checksum a08072f633127ac31f99c0493ae9802
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.10-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="4.0.10-ol-7-r1" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
     REDIS_MASTER_HOST="" \
