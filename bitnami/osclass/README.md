@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3`, `3.7.4-r42`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/3.7.4-r42/3/Dockerfile)
+* [`3`, `3.7.4-r43`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/3.7.4-r43/3/Dockerfile)
 * [`3-ol-7`, `3.7.4-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/3.7.4-ol-7-r0/3/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/osclass GitHub repo](https://github.com/bitnami/bitnami-docker-osclass).
@@ -229,7 +229,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start osclass`
+ * For docker-compose: `$ docker-compose up osclass`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name osclass bitnami/osclass:latest`
 
 # Configuration
