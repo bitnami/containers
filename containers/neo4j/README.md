@@ -30,7 +30,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3`, `3.4.0-r13`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.0-r13/3/Dockerfile)
+* [`3`, `3.4.0-r14`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.0-r14/3/Dockerfile)
 * [`3-ol-7`, `3.4.0-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.0-ol-7-r0/3/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/neo4j GitHub repo](https://github.com/bitnami/bitnami-docker-neo4j).
@@ -246,7 +246,7 @@ $ docker run --name neo4j bitnami/neo4j:latest
 or using Docker Compose:
 
 ```bash
-$ docker-compose start neo4j
+$ docker-compose up neo4j
 ```
 
 # Contributing
