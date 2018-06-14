@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
- - [`1.8`, `1.8.171-r46` (1.8/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-r46/1.8/Dockerfile), [`1.8-prod`, `1.8.171-r46-prod` (1.8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-r46/1.8/prod/Dockerfile)
+ - [`1.8`, `1.8.171-r47` (1.8/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-r47/1.8/Dockerfile), [`1.8-prod`, `1.8.171-r47-prod` (1.8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-r47/1.8/prod/Dockerfile)
  - [`1.8`, `1.8.171-ol-7-r0` (1.8/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-ol-7-r0/1.8/Dockerfile), [`1.8-prod`, `1.8.171-ol-7-r0-prod` (1.8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-ol-7-r0/1.8/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
@@ -96,7 +96,7 @@ $ docker run --name java bitnami/java:latest
 or using Docker Compose:
 
 ```bash
-$ docker-compose start java
+$ docker-compose up java
 ```
 
 # Contributing
