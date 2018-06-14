@@ -23,7 +23,7 @@ $ docker run --name kubewatch bitnami/kubewatch:latest
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0`, `0.0.4-r11`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-r11/0/Dockerfile)
+* [`0`, `0.0.4-r12`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-r12/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubewatch GitHub repo](https://github.com/bitnami/bitnami-docker-kubewatch).
 
