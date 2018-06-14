@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`10`, `10.0.8-r32`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.8-r32/10/Dockerfile)
+* [`10`, `10.0.8-r33`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.8-r33/10/Dockerfile)
 * [`10-ol-7`, `10.0.8-ol-7-r0` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.8-ol-7-r0/10/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/owncloud GitHub repo](https://github.com/bitnami/bitnami-docker-owncloud).
@@ -232,7 +232,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
-  * For docker-compose: `$ docker-compose start owncloud`
+  * For docker-compose: `$ docker-compose up owncloud`
   * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name owncloud bitnami/owncloud:latest`
 
 # Configuration
