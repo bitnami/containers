@@ -226,7 +226,7 @@ docker run --name memcached bitnami/memcached:latest
 or using Docker Compose:
 
 ```bash
-docker-compose start memcached
+docker-compose up memcached
 ```
 
 # Notable Changes
