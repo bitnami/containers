@@ -25,8 +25,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
+* [`11`, `11.0.20180515-r18`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180515-r18/11/Dockerfile)
 * [`11-ol-7`, `11.0.20180515-ol-7-r0` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180515-ol-7-r0/11/ol-7/Dockerfile)
-* [`11`, `11.0.20180515-r17`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180515-r17/11/Dockerfile)
 * [`10`, `10.0.20180315-r41` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/10.0.20180315-r41/10/Dockerfile)
 * [`10-ol-7`, `10.0.20180315-ol-7-r0` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/10.0.20180315-ol-7-r0/10/ol-7/Dockerfile)
 
@@ -190,7 +190,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start odoo`
+ * For docker-compose: `$ docker-compose up odoo`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name odoo bitnami/odoo:latest`
 
 # Configuration
