@@ -30,7 +30,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
  - [`8.0`, `8.0.11-r0` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.11-r0/8.0/Dockerfile)
- - [`5.7`, `5.7.22-r38`, `latest` (5.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.22-r38/5.7/Dockerfile)
+ - [`5.7`, `5.7.22-r39`, `latest` (5.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.22-r39/5.7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
 
@@ -486,7 +486,7 @@ $ docker run --name mysql bitnami/mysql:latest
 or using Docker Compose:
 
 ```bash
-$ docker-compose start mysql
+$ docker-compose up mysql
 ```
 
 # Notable Changes
