@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1.7`, `1.7.3-3-r10`, `latest` (1.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.3-3-r10/1.7/Dockerfile)
+* [`1.7`, `1.7.3-3-r11`, `latest` (1.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.3-3-r11/1.7/Dockerfile)
 * [`1.7-ol-7`, `1.7.3-3-ol-7-r0` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.3-3-ol-7-r0/1.7/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
@@ -226,7 +226,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose run prestashop`
+ * For docker-compose: `$ docker-compose up prestashop`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name prestashop bitnami/prestashop:latest`
 
 # Configuration
