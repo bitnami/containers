@@ -34,7 +34,7 @@ services:
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3`, `3.4.12-r25`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-r25/3/Dockerfile)
+* [`3`, `3.4.12-r26`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-r26/3/Dockerfile)
 * [`3-ol-7`, `3.4.12-ol-7-r1` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-ol-7-r1/3/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
@@ -498,12 +498,12 @@ docker run --name zookeeper bitnami/zookeeper:latest
 or using Docker Compose:
 
 ```bash
-docker-compose start zookeeper
+docker-compose up zookeeper
 ```
 
 # Notable Changes
 
-## 3.4.12-r24
+## 3.4.12-r25
 
 - Configuration is not persisted, it is regenerated each time the container is created or it is used as volume.
 
