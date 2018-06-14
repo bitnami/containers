@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`2`, `2.121.1-r5`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.121.1-r5/2/Dockerfile)
+* [`2`, `2.121.1-r6`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.121.1-r6/2/Dockerfile)
 * [`2-ol-7`, `2.121.1-ol-7-r0` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.121.1-ol-7-r0/2/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
@@ -155,7 +155,7 @@ You can use this snapshot to restore the application state should the upgrade fa
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start jenkins`
+ * For docker-compose: `$ docker-compose up jenkins`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name jenkins bitnami/jenkins:latest`
 
 # Configuration
