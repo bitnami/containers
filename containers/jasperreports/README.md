@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`7`, `7.1.0-r12`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.0-r12/7/Dockerfile)
+* [`7`, `7.1.0-r13`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.0-r13/7/Dockerfile)
 * [`7-ol-7`, `7.1.0-ol-7-r0` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.0-ol-7-r0/7/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jasperreports GitHub repo](https://github.com/bitnami/bitnami-docker-jasperreports).
@@ -226,7 +226,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
-  * For docker-compose: `$ docker-compose start jasperreports`
+  * For docker-compose: `$ docker-compose up jasperreports`
   * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name jasperreports bitnami/jasperreports:latest`
 
 # Configuration
