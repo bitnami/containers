@@ -1,16 +1,16 @@
-FROM bitnami/minideb-extras:jessie-r75
+FROM bitnami/minideb-extras:jessie-r76
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/"
 
 # Install required system packages and dependencies
-RUN bitnami-pkg unpack redis-4.0.9-1 --checksum 9660d6d127da0e49fa7fb9c1858f9b2630e61c4f85721d60593c65781d4be451
+RUN bitnami-pkg unpack redis-4.0.10-0 --checksum 4168e47eb043c99e9ed9932c97f0a5973828811d77c2c05c9e2e434bbd39ae40
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.9-r24" \
+    BITNAMI_IMAGE_VERSION="4.0.10-r0" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
     REDIS_MASTER_HOST="" \
