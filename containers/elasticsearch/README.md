@@ -331,7 +331,7 @@ $ docker run --name elasticsearch bitnami/elasticsearch:latest
 or using Docker Compose:
 
 ```bash
-$ docker-compose start elasticsearch
+$ docker-compose up elasticsearch
 ```
 
 # Notable Changes
