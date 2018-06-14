@@ -9,8 +9,8 @@ jobs:
           LATEST_STABLE: "2"
           DISTRIBUTIONS_LIST: "debian-8,ol-7"
           IMAGE_NAME: parse
-          CHART_NAME: parse
-          CHART_REPO: https://github.com/kubernetes/charts
+          CHART_NAME:
+          CHART_REPO:
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers

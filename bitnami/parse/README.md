@@ -31,7 +31,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`2`, `2.8.1-r6`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/2.8.1-r6/2/Dockerfile)
+* [`2`, `2.8.2-r0`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/2.8.2-r0/2/Dockerfile)
 * [`2-ol-7`, `0.0.0-ol-7-r0` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/0.0.0-ol-7-r0/2/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
@@ -194,7 +194,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start parse`
+ * For docker-compose: `$ docker-compose up parse`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name parse bitnami/parse:latest`
 
 # Configuration
