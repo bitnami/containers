@@ -29,9 +29,9 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`2.4`, `2.4.33-r47`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.33-r47/2.4/Dockerfile)
-* [`2.4-ol-7`, `2.4.33-ol-7-r4` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.33-ol-7-r4/2.4/ol-7/Dockerfile)
 * [`2.4-rhel-7`, `2.4.33-rhel-7-r3` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.33-rhel-7-r3/2.4/rhel-7/Dockerfile)
+* [`2.4`, `2.4.33-r48`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.33-r48/2.4/Dockerfile)
+* [`2.4-ol-7`, `2.4.33-ol-7-r4` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.33-ol-7-r4/2.4/ol-7/Dockerfile)
 
 # Get this image
 
@@ -362,7 +362,7 @@ $ docker run --name apache bitnami/apache:latest
 or using Docker Compose:
 
 ```bash
-$ docker-compose start apache
+$ docker-compose up apache
 ```
 
 # Useful Links
