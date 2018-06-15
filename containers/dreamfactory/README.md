@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`2`, `2.12.0-r45`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.12.0-r45/2/Dockerfile)
+* [`2`, `2.12.0-r46`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.12.0-r46/2/Dockerfile)
 * [`2-ol-7`, `2.12.0-ol-7-r0` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.12.0-ol-7-r0/2/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
