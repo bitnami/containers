@@ -23,6 +23,12 @@ $ docker-compose up
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+## Supported tags and respective `Dockerfile` links
+
+* [`1`, `1.5.11-r46`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-r46/1/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
+
 ## Introduction
 
 [Symfony](https://symfony.com/), is a web application framework written in [PHP](http://www.php.net) under [MIT License](http://symfony.com/doc/current/contributing/code/license.html).
