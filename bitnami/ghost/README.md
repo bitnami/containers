@@ -27,6 +27,12 @@ $ docker-compose up -d
 
 To run this application you need Docker Engine 1.10.0. Docker Compose is recomended with a version 1.6.0 or later.
 
+# Supported tags and respective `Dockerfile` links
+
+* [`1`, `1.24.3-r3`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.24.3-r3/1/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
+
 # How to use this image
 
 ### Run the application using Docker Compose
