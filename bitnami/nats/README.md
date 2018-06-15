@@ -30,7 +30,7 @@ $ docker-compose up
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1`, `1.1.0-r20`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.1.0-r20/1/Dockerfile)
+* [`1`, `1.1.0-r21`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.1.0-r21/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nats GitHub repo](https://github.com/bitnami/bitnami-docker-nats).
 
@@ -148,6 +148,34 @@ Launch the containers using:
 ```bash
 $ docker-compose up -d
 ```
+
+# Configuration
+
+The configuration can easily be setup by mounting your own configuration file on the directory `/opt/bitnami/nats`:
+
+```
+docker run --name nats -v /path/to/gnatsd.conf:/opt/bitnami/nats/gnatsd.conf bitnami/nats:latest
+```
+
+After that, your configuration will be taken into account in the server's behaviour.
+
+Using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  nats:
+    image: bitnami/nats:latest
+    ports:
+      - '4222:4222'
+      - '6222:6222'
+      - '8222:8222'
+    volumes:
+      - /path/to/gnatsd.conf:/opt/bitnami/nats/gnatsd.conf
+```
+
+Find more information about how to create your own configuration file on this [link](https://github.com/nats-io/gnatsd#configuration-file)
 
 # Further documentation
 
