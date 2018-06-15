@@ -25,6 +25,12 @@ For further documentation, please check [here](https://github.com/Azure/open-ser
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Supported tags and respective `Dockerfile` links
+
+* [`0`, `0.11.0-r21`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.11.0-r21/0/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/open-service-broker-azure GitHub repo](https://github.com/bitnami/bitnami-docker-open-service-broker-azure).
+
 # Get this image
 
 The recommended way to get the Bitnami Open Service Broker Azure Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/open-service-broker-azure).
