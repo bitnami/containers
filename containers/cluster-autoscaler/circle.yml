@@ -7,6 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "1"
           LATEST_STABLE: "1"
+          DISTRIBUTIONS_LIST: "debian-8"
           IMAGE_NAME: cluster-autoscaler
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
@@ -61,4 +62,4 @@ workflows:
             branches:
               only: /.*/
             tags:
-              only: /^[0-9].*-r[0-9]+$/
+              only: /^.*(?<!-rhel-7)-r[0-9]+$/

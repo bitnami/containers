@@ -28,6 +28,12 @@ Azure https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cl
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Supported tags and respective `Dockerfile` links
+
+* [`1`, `1.2.2-r17`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.2.2-r17/1/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/cluster-autoscaler GitHub repo](https://github.com/bitnami/bitnami-docker-cluster-autoscaler).
+
 # Get this image
 
 The recommended way to get the Bitnami Cluster-autoscaler Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/cluster-autoscaler).
