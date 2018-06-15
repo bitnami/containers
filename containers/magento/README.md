@@ -25,8 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`2`, `2.2.4-r25`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.2.4-r25/2/Dockerfile)
-* [`2-ol-7`, `2.2.4-ol-7-r0` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.2.4-ol-7-r0/2/ol-7/Dockerfile)
+* [`2`, `2.2.4-r26`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.2.4-r26/2/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
 
@@ -237,7 +236,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start magento`
+ * For docker-compose: `$ docker-compose up magento`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name magento bitnami/magento:latest`
 
 # Configuration
