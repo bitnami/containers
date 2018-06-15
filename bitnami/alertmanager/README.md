@@ -20,6 +20,12 @@ $ docker run --name alertmanager bitnami/alertmanager:latest
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Supported tags and respective `Dockerfile` links
+
+* [`0`, `0.14.0-r48`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.14.0-r48/0/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/alertmanager GitHub repo](https://github.com/bitnami/bitnami-docker-alertmanager).
+
 # Get this image
 
 The recommended way to get the Bitnami Alertmanager Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/alertmanager).
