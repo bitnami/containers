@@ -27,6 +27,12 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Supported tags and respective `Dockerfile` links
+
+* [`6`, `6.2.4-r43`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.2.4-r43/6/Dockerfile)
+* [`5`, `5.6.4-r49` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-r49/5/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
 # Get this image
 
 The recommended way to get the Bitnami Elasticsearch Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/elasticsearch).
