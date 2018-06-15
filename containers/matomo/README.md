@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3`, `3.5.1-r0`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.5.1-r0/3/Dockerfile)
+* [`3`, `3.5.1-r1`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.5.1-r1/3/Dockerfile)
 * [`3-ol-7`, `3.5.1-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.5.1-ol-7-r0/3/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
@@ -238,7 +238,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start matomo`
+ * For docker-compose: `$ docker-compose up matomo`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name matomo bitnami/matomo:latest`
 
 # Configuration
