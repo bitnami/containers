@@ -1,10 +1,10 @@
 FROM bitnami/minideb:jessie as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/pushgateway-0.5.1-0-linux-x64-debian-8.tar.gz && \
-    echo "76780d88db1abf95bea31ddcf985475c980824bc456d37671f3eda8a09f26b38  /tmp/bitnami/pkg/cache/pushgateway-0.5.1-0-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/pushgateway-0.5.1-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/pushgateway-0.5.1-0-linux-x64-debian-8.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/pushgateway-0.5.2-0-linux-x64-debian-8.tar.gz && \
+    echo "746cf208fe6fc4afe4e5f24cf70a0ab7165354cebfffb4f5411923418f415f92  /tmp/bitnami/pkg/cache/pushgateway-0.5.2-0-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/pushgateway-0.5.2-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/pushgateway-0.5.2-0-linux-x64-debian-8.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/pushgateway /opt/bitnami/pushgateway
 ENV BITNAMI_APP_NAME="pushgateway" \
-    BITNAMI_IMAGE_VERSION="0.5.1-r11" \
+    BITNAMI_IMAGE_VERSION="0.5.2-r0" \
     PATH="/opt/bitnami/pushgateway/bin:$PATH"
 
 EXPOSE 9091
