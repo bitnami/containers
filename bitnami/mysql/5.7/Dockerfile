@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r77
+FROM bitnami/minideb-extras:jessie-r78
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack mysql-5.7.22-1 --checksum 76d8d3e195e719b28749ec42e68a9cb
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.22-r41" \
+    BITNAMI_IMAGE_VERSION="5.7.22-r42" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
