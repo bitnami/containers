@@ -26,7 +26,7 @@ $ docker-compose up
 # Supported tags and respective `Dockerfile` links
 
 * [`4-rhel-7`, `4.9.6-rhel-7-r2` (4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-rhel-7-r2/4/rhel-7/Dockerfile)
-* [`4`, `4.9.6-r26`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-r26/4/Dockerfile)
+* [`4`, `4.9.6-r27`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-r27/4/Dockerfile)
 * [`4-php5-rhel-7`, `4.9.6-php5-rhel-7-r1` (4-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-php5-rhel-7-r1/4-php5/rhel-7/Dockerfile)
 * [`4-ol-7`, `4.9.6-ol-7-r4` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-ol-7-r4/4/ol-7/Dockerfile)
 
