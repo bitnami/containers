@@ -322,17 +322,6 @@ or using Docker Compose:
 $ docker-compose up wildfly
 ```
 
-# Notable Changes
-
-## 10.0.0-r3
-
-- `WILDFLY_USER` parameter has been renamed to `WILDFLY_USERNAME`.
-
-## 10.0.0-r0
-
-- All volumes have been merged at `/bitnami/wildfly`. Now you only need to mount a single volume at `/bitnami/wildfly` for persistence.
-- The logs are always sent to the `stdout` and are no longer collected in the volume.
-
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-wildfly/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-wildfly/pulls) with your contribution.
