@@ -33,7 +33,7 @@ $ docker run --name prometheus bitnami/prometheus:latest
 
 # Supported tags and respective `Dockerfile` links
 
-* [`2`, `2.3.0-r11`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.0-r11/2/Dockerfile)
+* [`2`, `2.3.0-r12`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.0-r12/2/Dockerfile)
 * [`2-ol-7`, `2.3.0-ol-7-r0` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.0-ol-7-r0/2/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus).
