@@ -27,7 +27,7 @@ For further documentation, please check [here](https://github.com/Azure/open-ser
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0`, `0.12.0-r2`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-r2/0/Dockerfile)
+* [`0`, `0.12.0-r3`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-r3/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/open-service-broker-azure GitHub repo](https://github.com/bitnami/bitnami-docker-open-service-broker-azure).
 
