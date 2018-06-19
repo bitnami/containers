@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`2`, `2.2.4-r26`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.2.4-r26/2/Dockerfile)
+* [`2`, `2.2.4-r27`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.2.4-r27/2/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
 
