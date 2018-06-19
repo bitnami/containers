@@ -1,10 +1,10 @@
 FROM bitnami/minideb:jessie as buildenv
 
 RUN install_packages ca-certificates libc6 wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cluster-autoscaler-1.2.2-0-linux-x64-debian-8.tar.gz && \
-    echo "2ad4d3dcb523e57499f0205309a55d7ec555a00e0843da412c527a8140970d3a  /tmp/bitnami/pkg/cache/cluster-autoscaler-1.2.2-0-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.2.2-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.2.2-0-linux-x64-debian-8.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cluster-autoscaler-1.3.0-0-linux-x64-debian-8.tar.gz && \
+    echo "96d776ba48cf544d072d3389a7feeaada211838f51ffc47da7b2a2494324ce7e  /tmp/bitnami/pkg/cache/cluster-autoscaler-1.3.0-0-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.3.0-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.3.0-0-linux-x64-debian-8.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/cluster-autoscaler /opt/bitnami/cluster-autoscaler
 ENV BITNAMI_APP_NAME="cluster-autoscaler" \
-    BITNAMI_IMAGE_VERSION="1.2.2-r22" \
+    BITNAMI_IMAGE_VERSION="1.3.0-r0" \
     PATH="/opt/bitnami/cluster-autoscaler/bin:$PATH"
 
 RUN install_packages ca-certificates
