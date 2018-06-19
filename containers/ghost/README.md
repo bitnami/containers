@@ -29,7 +29,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1`, `1.24.4-r0`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.24.4-r0/1/Dockerfile)
+* [`1`, `1.24.5-r0`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.24.5-r0/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
 
