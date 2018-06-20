@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`6`, `6.2.4-r22`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.2.4-r22/6/Dockerfile)
+* [`6`, `6.2.4-r23`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.2.4-r23/6/Dockerfile)
 * [`5`, `5.6.10-r8` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.10-r8/5/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
