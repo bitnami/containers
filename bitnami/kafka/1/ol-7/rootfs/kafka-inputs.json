@@ -12,6 +12,7 @@
   "kafkaListeners": "{{$global.env.KAFKA_LISTENERS}}",
   "kafkaLogFlushIntervalMessages": "{{$global.env.KAFKA_LOG_FLUSH_INTERVAL_MESSAGES}}",
   "kafkaLogFlushIntervalMs": "{{$global.env.KAFKA_LOG_FLUSH_INTERVAL_MS}}",
+  "kafkaLogMessageFormatVersion": "{{$global.env.KAFKA_LOG_MESSAGE_FORMAT_VERSION}}",
   "kafkaLogRetentionBytes": "{{$global.env.KAFKA_LOG_RETENTION_BYTES}}",
   "kafkaLogRetentionCheckIntervalMs": "{{$global.env.KAFKA_LOG_RETENTION_CHECK_INTERVALS_MS}}",
   "kafkaLogRetentionHours": "{{$global.env.KAFKA_LOG_RETENTION_HOURS}}",
