@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r81
+FROM bitnami/minideb-extras:jessie-r82
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,12 +6,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN bitnami-pkg install java-1.8.171-3 --checksum 3454a0bda3a4fb282b6b9a7022677a48dc493df0e13cb04d3c92e070e102a244
-RUN bitnami-pkg unpack kafka-1.1.0-2 --checksum 006c9590d5fb953d1af19784e4fb247081dd29fa115da6e342e5e7eaf1df7104
+RUN bitnami-pkg unpack kafka-1.1.0-3 --checksum 8863de224cae17977efff35830d2263e6bb8df5d0851f8a6b519f5d121c60033
 
 COPY rootfs /
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="1.1.0-r47" \
+    BITNAMI_IMAGE_VERSION="1.1.0-r48" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_BROKER_ID="-1" \
     KAFKA_BROKER_PASSWORD="bitnami" \
@@ -25,6 +25,7 @@ ENV ALLOW_PLAINTEXT_LISTENER="no" \
     KAFKA_LOGS_DIRS="/opt/bitnami/kafka/data" \
     KAFKA_LOG_FLUSH_INTERVAL_MESSAGES="10000" \
     KAFKA_LOG_FLUSH_INTERVAL_MS="1000" \
+    KAFKA_LOG_MESSAGE_FORMAT_VERSION="" \
     KAFKA_LOG_RETENTION_BYTES="1073741824" \
     KAFKA_LOG_RETENTION_CHECK_INTERVALS_MS="300000" \
     KAFKA_LOG_RETENTION_HOURS="168" \

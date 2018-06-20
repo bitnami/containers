@@ -40,7 +40,7 @@ services:
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1`, `1.1.0-r47`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-r47/1/Dockerfile)
+* [`1`, `1.1.0-r48`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-r48/1/Dockerfile)
 * [`1-ol-7`, `1.1.0-ol-7-r1` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-ol-7-r1/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
@@ -205,6 +205,7 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 - `KAFKA_LOG_RETENTION_BYTES`: A size-based retention policy for logs. Default: **1073741824**
 - `KAFKA_SEGMENT_BYTES`: The maximum size of a log segment file. When this size is reached a new log segment will be created. Default: **1073741824**
 - `KAFKA_LOG_RETENTION_CHECK_INTERVALS_MS`: The interval at which log segments are checked to see if they can be deleted. Default: **300000**
+- `KAFKA_LOG_MESSAGE_FORMAT_VERSION`: Specify the message format version the broker will use to append messages to the logs. No defaults.
 - `KAFKA_ZOOKEEPER_CONNECT`: Comma separated host:port pairs, each corresponding to a Zookeeper Server. Default: **localhost:2181**
 - `KAFKA_ZOOKEEPER_CONNECT_TIMEOUT_MS`: Timeout in ms for connecting to zookeeper. Default: **6000**
 - `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Default: admin. Default: **admin**
