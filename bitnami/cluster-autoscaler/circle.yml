@@ -7,7 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "1"
           LATEST_STABLE: "1"
-          DISTRIBUTIONS_LIST: "debian-8"
+          DISTRIBUTIONS_LIST: "debian-8,ol-7"
           IMAGE_NAME: cluster-autoscaler
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
