@@ -6,6 +6,7 @@
   "databaseUser": "{{$global.env.OPENCART_DATABASE_USER}}",
   "email": "{{$global.env.OPENCART_EMAIL}}",
   "host": "{{$global.env.OPENCART_HOST}}",
+  "httpTimeout": "{{$global.env.OPENCART_HTTP_TIMEOUT}}",
   "password": "{{$global.env.OPENCART_PASSWORD}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
