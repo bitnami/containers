@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r5
+FROM bitnami/oraclelinux-extras:7-r12
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,12 +7,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages glib2 glibc libblkid libffi libgcc libmount libselinux libstdc++ libuuid pcre zlib
 RUN bitnami-pkg install java-1.8.171-3 --checksum eb0af616b0a3ab12bd8559a36e83246eb10e7893f6a654dc14a462246d433e40
-RUN bitnami-pkg unpack kafka-1.1.0-2 --checksum 850b56a26fde7e5d8ead17aca8227cbbecab5c0411f22223d539bc45de8cc29d
+RUN bitnami-pkg unpack kafka-1.1.0-3 --checksum dfbce00bd31f4f71f3ec6970e4afc8809ac9ecae50347302fa2e3c9ac3350fb6
 
 COPY rootfs /
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="1.1.0-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="1.1.0-ol-7-r2" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_BROKER_ID="-1" \
     KAFKA_BROKER_PASSWORD="bitnami" \
@@ -26,6 +26,7 @@ ENV ALLOW_PLAINTEXT_LISTENER="no" \
     KAFKA_LOGS_DIRS="/opt/bitnami/kafka/data" \
     KAFKA_LOG_FLUSH_INTERVAL_MESSAGES="10000" \
     KAFKA_LOG_FLUSH_INTERVAL_MS="1000" \
+    KAFKA_LOG_MESSAGE_FORMAT_VERSION="" \
     KAFKA_LOG_RETENTION_BYTES="1073741824" \
     KAFKA_LOG_RETENTION_CHECK_INTERVALS_MS="300000" \
     KAFKA_LOG_RETENTION_HOURS="168" \
