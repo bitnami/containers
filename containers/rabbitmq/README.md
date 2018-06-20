@@ -32,7 +32,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3.7`, `3.7.6-r7`, `latest` (3.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.6-r7/3.7/Dockerfile)
+* [`3.7`, `3.7.6-r8`, `latest` (3.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.6-r8/3.7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
