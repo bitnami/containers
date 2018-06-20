@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3`, `3.2.2-r40`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.2-r40/3/Dockerfile)
+* [`3`, `3.2.2-r41`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.2-r41/3/Dockerfile)
 * [`3-ol-7`, `3.2.2-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.2-ol-7-r0/3/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpbb GitHub repo](https://github.com/bitnami/bitnami-docker-phpbb).
