@@ -23,6 +23,13 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Supported tags and respective `Dockerfile` links
+
+* [`4`, `4.8.1-r9`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.8.1-r9/4/Dockerfile)
+* [`4-ol-7`, `4.8.1-ol-7-r0` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.8.1-ol-7-r0/4/ol-7/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/phpmyadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phpmyadmin).
+
 # Prerequisites
 
 To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://www.docker.com/products/docker-compose) is recommended with a version `1.6.0` or later.
@@ -195,7 +202,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start phpmyadmin`
+ * For docker-compose: `$ docker-compose up phpmyadmin`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name phpmyadmin bitnami/phpmyadmin:latest`
 
 # Configuration
