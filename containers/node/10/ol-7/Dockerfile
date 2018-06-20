@@ -1,13 +1,13 @@
-FROM bitnami/oraclelinux-extras:7-r5
+FROM bitnami/oraclelinux-extras:7-r12
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages build-essential bzip2-libs ca-certificates curl git glibc keyutils-libs krb5-libs libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre pkg-config readline sqlite unzip wget zlib
-RUN bitnami-pkg install node-10.4.1-0 --checksum e5b456e9919a4fddb904eee40a1876bd406b70c0a123e46cfaea36361a19f00c
+RUN bitnami-pkg install node-10.5.0-0 --checksum 2389bfae2ea7c5f802181c236330a6596355bfcbbde897662451cc5e18b676e8
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="10.4.1-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="10.5.0-ol-7-r0" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 3000
