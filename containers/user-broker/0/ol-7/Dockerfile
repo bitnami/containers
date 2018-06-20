@@ -1,0 +1,23 @@
+FROM bitnami/oraclelinux-extras:7-r12 as buildenv
+
+RUN install_packages ca-certificates wget
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/user-broker-0.1.21-0-linux-x86_64-ol-7.tar.gz && \
+    echo "e40d3e29d93b4c65c24ebcd86597fd0c6bb76e9dd79f3dbf7ba726bffdbf8ff5  /tmp/bitnami/pkg/cache/user-broker-0.1.21-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/user-broker-0.1.21-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/user-broker-0.1.21-0-linux-x86_64-ol-7.tar.gz
+
+##################
+
+FROM bitnami/oraclelinux-extras:7-r12
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+COPY --from=buildenv /opt/bitnami/user-broker /opt/bitnami/user-broker
+ENV BITNAMI_APP_NAME="user-broker" \
+    BITNAMI_IMAGE_VERSION="0.1.21-ol-7-r0" \
+    PATH="/opt/bitnami/user-broker/bin:$PATH"
+
+EXPOSE 8005 8080
+
+WORKDIR /opt/bitnami/user-broker
+USER 1001
+ENTRYPOINT ["/opt/bitnami/user-broker/bin/user-broker"]
