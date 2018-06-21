@@ -31,7 +31,7 @@ $ docker-compose up
 # Supported tags and respective `Dockerfile` links
 
 * [`1`, `1.1.0-r28`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.1.0-r28/1/Dockerfile)
-* [`1-ol-7`, `1.1.0-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.1.0-ol-7-r0/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.1.0-ol-7-r1` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.1.0-ol-7-r1/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nats GitHub repo](https://github.com/bitnami/bitnami-docker-nats).
 
