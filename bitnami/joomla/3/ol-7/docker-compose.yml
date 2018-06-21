@@ -16,8 +16,6 @@ services:
       - JOOMLA_DATABASE_USER=bn_joomla
       - JOOMLA_DATABASE_NAME=bitnami_joomla
       - ALLOW_EMPTY_PASSWORD=yes
-    labels:
-      kompose.service.type: nodeport
     ports:
       - '80:80'
       - '443:443'
