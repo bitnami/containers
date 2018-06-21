@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r82
+FROM bitnami/minideb-extras:jessie-r83
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack kibana-6.2.4-0 --checksum 5913503149444c065dec8bae1f5d618
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="6.2.4-r23" \
+    BITNAMI_IMAGE_VERSION="6.2.4-r24" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
