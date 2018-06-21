@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r12
+FROM bitnami/oraclelinux-extras:7-r13
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack memcached-1.5.8-0 --checksum abc2ac4ad85168120adb75a57a1d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.8-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="1.5.8-ol-7-r1" \
     MEMCACHED_CACHE_SIZE="64" \
     MEMCACHED_PASSWORD="" \
     MEMCACHED_USERNAME="root" \
