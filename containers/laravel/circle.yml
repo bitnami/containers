@@ -7,6 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "5"
           LATEST_STABLE: "5"
+          DISTRIBUTIONS_LIST: "debian-8,ol-7"
           IMAGE_NAME: laravel
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
