@@ -31,7 +31,7 @@ $ docker-compose up -d
 
 * [`7.2-rhel-7`, `7.2.6-rhel-7-r5` (7.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.6-rhel-7-r5/7.2/rhel-7/Dockerfile)
 * [`7.2`, `7.2.6-r29` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.6-r29/7.2/Dockerfile)
-* [`7.2-ol-7`, `7.2.6-ol-7-r4` (7.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.6-ol-7-r4/7.2/ol-7/Dockerfile)
+* [`7.2-ol-7`, `7.2.6-ol-7-r5` (7.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.6-ol-7-r5/7.2/ol-7/Dockerfile)
 * [`7.1-rhel-7`, `7.1.18-rhel-7-r2` (7.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.18-rhel-7-r2/7.1/rhel-7/Dockerfile)
 * [`7.1`, `7.1.18-r26`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.18-r26/7.1/Dockerfile)
 * [`7.1-ol-7`, `7.1.18-ol-7-r2` (7.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.18-ol-7-r2/7.1/ol-7/Dockerfile)
