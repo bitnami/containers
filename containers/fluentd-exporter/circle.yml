@@ -7,7 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "0"
           LATEST_STABLE: "0"
-          DISTRIBUTIONS_LIST: "debian-8"
+          DISTRIBUTIONS_LIST: "debian-8,ol-7"
           IMAGE_NAME: fluentd-exporter
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
