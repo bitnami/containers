@@ -6,13 +6,13 @@ RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds freetype glibc gmp 
 RUN bitnami-pkg unpack apache-2.4.33-4 --checksum 4e8daac4fc3f70870a856be2dbabe35c060bae4319da105a1cd38ea2335cc5a1
 RUN bitnami-pkg unpack php-7.0.30-5 --checksum e29bbc4dd7b4d09ec2c2ea47516b0d4d6bec5425e83c25a940990642d554558e
 RUN bitnami-pkg install libphp-7.0.30-8 --checksum d56f04ce65e0caabe624739aa5a1b4d0980b612edc5331b647c86457b1bc36e6
-RUN bitnami-pkg unpack phpmyadmin-4.8.1-0 --checksum d87630c0fc050f2a7499b6e778a689b0f83273d8f6bb9401c8db924d90a51809
+RUN bitnami-pkg unpack phpmyadmin-4.8.2-0 --checksum 4b112873cd7d538d1eac1230ea3f5df0249bdc95dc2e5f3938ae88d1b66fd86e
 
 COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="4.8.1-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="4.8.2-ol-7-r0" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
     PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:$PATH" \
