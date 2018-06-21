@@ -23,7 +23,7 @@ $ docker run --name pushgateway bitnami/pushgateway:latest
 # Supported tags and respective `Dockerfile` links
 
 * [`0`, `0.5.2-r6`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.5.2-r6/0/Dockerfile)
-* [`0-ol-7`, `0.5.2-ol-7-r0` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.5.2-ol-7-r0/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.5.2-ol-7-r1` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.5.2-ol-7-r1/0/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pushgateway GitHub repo](https://github.com/bitnami/bitnami-docker-pushgateway).
 
