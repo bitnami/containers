@@ -34,11 +34,9 @@ $ docker run --name prometheus bitnami/prometheus:latest
 # Supported tags and respective `Dockerfile` links
 
 * [`2`, `2.3.1-r3`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.1-r3/2/Dockerfile)
-* [`2-ol-7`, `2.3.1-ol-7-r1` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.1-ol-7-r1/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.3.1-ol-7-r2` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.1-ol-7-r2/2/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus).
-
-
 
 # Get this image
 
@@ -86,7 +84,6 @@ $ docker run --name prometheus-node1 --network prometheus-network bitnami/promet
 
 We can launch other containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
-
 # Configuration
 
 Prometheus is configured via command-line flags and a configuration file. While the command-line flags configure immutable system parameters (such as storage locations, amount of data to keep on disk and in memory, etc.), the configuration file defines everything related to scraping jobs and their instances, as well as which rule files to load.
@@ -94,7 +91,6 @@ Prometheus is configured via command-line flags and a configuration file. While 
 To view all available command-line flags, run ` docker run bitnami/prometheus:latest -h`.
 
 Prometheus can reload its configuration at runtime. If the new configuration is not well-formed, the changes will not be applied. A configuration reload is triggered by sending a SIGHUP to the Prometheus process or sending a HTTP POST request to the /-/reload endpoint (when the --web.enable-lifecycle flag is enabled). This will also reload any configured rule files.
-
 
 [Further information](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)
 
