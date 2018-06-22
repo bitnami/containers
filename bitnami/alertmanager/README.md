@@ -23,7 +23,7 @@ $ docker run --name alertmanager bitnami/alertmanager:latest
 # Supported tags and respective `Dockerfile` links
 
 * [`0`, `0.14.0-r55`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.14.0-r55/0/Dockerfile)
-* [`0-ol-7`, `0.14.0-ol-7-r1` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.14.0-ol-7-r1/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.14.0-ol-7-r2` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.14.0-ol-7-r2/0/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/alertmanager GitHub repo](https://github.com/bitnami/bitnami-docker-alertmanager).
 
@@ -85,12 +85,29 @@ $ docker run --name alertmanager-node1 --network alertmanager-network bitnami/al
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
-
 # Configuration
 
-Configuration is yaml based. The full documentation of the configuration can be found [here](https://prometheus.io/docs/alerting/configuration/).
+The configuration can easily be setup by mounting your own configuration file on the directory `/opt/bitnami/alertmanager/conf/`:
 
-This file is located at `/opt/bitnami/alertmanager/conf/config.yml`, you can check the [Persisting your data](# Persisting your application) section to add a custom volume to modify it.
+```
+docker run --name alertmanager -v /path/to/config.yml:/opt/bitnami/alertmanager/conf/conf.yml bitnami/alertmanager:latest
+```
+
+After that, your configuration will be taken into account in the server's behaviour.
+
+Using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  alertmanager:
+    image: bitnami/alertmanager:latest
+    volumes:
+      - /path/to/config.yml:/opt/bitnami/alertmanager/conf/conf.yml
+```
+
+Configuration is yaml based. The full documentation of the configuration can be found [here](https://prometheus.io/docs/alerting/configuration/).
 
 ## Amtool
 
