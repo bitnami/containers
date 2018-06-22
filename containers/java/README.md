@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
- - [`1.8`, `1.8.171-r57` (1.8/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-r57/1.8/Dockerfile), [`1.8-prod`, `1.8.171-r57-prod` (1.8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-r57/1.8/prod/Dockerfile)
+ - [`1.8`, `1.8.171-r58` (1.8/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-r58/1.8/Dockerfile), [`1.8-prod`, `1.8.171-r58-prod` (1.8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-r58/1.8/prod/Dockerfile)
  - [`1.8`, `1.8.171-ol-7-r2` (1.8/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-ol-7-r2/1.8/Dockerfile), [`1.8-prod`, `1.8.171-ol-7-r2-prod` (1.8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-ol-7-r2/1.8/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
@@ -50,14 +50,30 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/java https://github.com/bitnami/bitnami-docker-java.git
 ```
 
-# Running your Java jar or war
+# Configuration
+
+## Running your Java jar or war
 
 The default work directory for the Java image is `/app`. You can mount a folder from your host here that includes your Java jar or war, and run it normally using the `java` command.
 
 ```bash
-$ docker run -it --name java -v /path/to/app:/app bitnami/java \
+$ docker run -it --name java -v /path/to/app:/app bitnami/java:latest \
   java -jar package.jar
 ```
+
+or using Docker Compose:
+
+```
+java:
+  image: bitnami/java:latest
+  command: "java -jar package.jar"
+  volumes:
+    - .:/app
+```
+
+**Further Reading:**
+
+  - [Java SE Documentation](https://docs.oracle.com/javase/8/docs/api/)
 
 # Maintenance
 
