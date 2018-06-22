@@ -30,7 +30,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`3`, `3.6.5-r53`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-r53/3/Dockerfile)
-* [`3-ol-7`, `3.6.5-ol-7-r1` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-ol-7-r1/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.6.5-ol-7-r2` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-ol-7-r2/3/ol-7/Dockerfile)
 * [`2`, `2.7.15-r44` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-r44/2/Dockerfile)
 * [`2-ol-7`, `2.7.15-ol-7-r1` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-ol-7-r1/2/ol-7/Dockerfile)
 
@@ -65,7 +65,9 @@ By default, running this image will drop you into the Python REPL, where you can
 $ docker run -it --name python bitnami/python
 ```
 
-# Running your Python script
+# Configuration
+
+## Running your Python script
 
 The default work directory for the Python image is `/app`. You can mount a folder from your host here that includes your Python script, and run it normally using the `python` command.
 
@@ -73,6 +75,30 @@ The default work directory for the Python image is `/app`. You can mount a folde
 $ docker run -it --name python -v /path/to/app:/app bitnami/python \
   python script.py
 ```
+
+## Running a Python app with package dependencies
+
+If your Python app has a `requirements.txt` defining your app's dependencies, you can install the dependencies before running your app.
+
+```bash
+$ docker run --rm -v /path/to/app:/app bitnami/python pip install -r requirements.txt
+$ docker run -it --name python -v /path/to/app:/app bitnami/python python script.py
+```
+
+or using Docker Compose:
+
+```
+java:
+  image: bitnami/java:latest
+  command: "sh -c 'pip install -r requirements.txt && python script.py'"
+  volumes:
+    - .:/app
+```
+
+**Further Reading:**
+
+  - [python documentation](https://www.python.org/doc/)
+  - [pip documentation](https://pip.pypa.io/en/stable/)
 
 # Maintenance
 
