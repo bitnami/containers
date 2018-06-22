@@ -30,7 +30,7 @@ $ docker-compose up
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1`, `1.1.0-r28`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.1.0-r28/1/Dockerfile)
+* [`1`, `1.1.0-r29`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.1.0-r29/1/Dockerfile)
 * [`1-ol-7`, `1.1.0-ol-7-r1` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.1.0-ol-7-r1/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nats GitHub repo](https://github.com/bitnami/bitnami-docker-nats).
@@ -178,7 +178,7 @@ services:
 
 Find more information about how to create your own configuration file on this [link](https://github.com/nats-io/gnatsd#configuration-file)
 
-# Further documentation
+## Further documentation
 
 For further documentation, please check [NATS documentation](https://nats.io/documentation/)
 
