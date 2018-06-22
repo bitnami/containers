@@ -5,8 +5,9 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "1"
-          LATEST_STABLE: "1"
+          RELEASE_SERIES_LIST: "2"
+          LATEST_STABLE: "2"
+          DISTRIBUTIONS_LIST: "debian-8,ol-7"
           IMAGE_NAME: discourse
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
@@ -61,4 +62,4 @@ workflows:
             branches:
               only: /.*/
             tags:
-              only: /^[0-9].*-r[0-9]+$/
+              only: /^.*(?<!-rhel-7)-r[0-9]+$/
