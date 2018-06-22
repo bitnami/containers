@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
- - [`10`, `10.5.0-r2` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.5.0-r2/10/Dockerfile), [`10-prod`, `10.5.0-r2-prod` (10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.5.0-r2/10/prod/Dockerfile)
+ - [`10`, `10.5.0-r3` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.5.0-r3/10/Dockerfile), [`10-prod`, `10.5.0-r3-prod` (10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.5.0-r3/10/prod/Dockerfile)
  - [`10`, `10.5.0-ol-7-r2` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.5.0-ol-7-r2/10/Dockerfile), [`10-prod`, `10.5.0-ol-7-r2-prod` (10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.5.0-ol-7-r2/10/prod/Dockerfile)
  - [`9`, `9.11.2-r0` (9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-r0/9/Dockerfile), [`9-prod`, `9.11.2-r0-prod` (9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-r0/9/prod/Dockerfile)
  - [`9`, `9.11.2-ol-7-r2` (9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-ol-7-r2/9/Dockerfile), [`9-prod`, `9.11.2-ol-7-r2-prod` (9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-ol-7-r2/9/prod/Dockerfile)
@@ -74,7 +74,9 @@ $ docker run -it --name node bitnami/node
 
   - [nodejs.org/api/repl.html](https://nodejs.org/api/repl.html)
 
-# Running your Node.js script
+# Configuration
+
+## Running your Node.js script
 
 The default work directory for the Node.js image is `/app`. You can mount a folder from your host here that includes your Node.js script, and run it normally using the `node` command.
 
@@ -83,13 +85,13 @@ $ docker run -it --name node -v /path/to/app:/app bitnami/node \
   node script.js
 ```
 
-# Running a Node.js app with npm dependencies
+## Running a Node.js app with npm dependencies
 
 If your Node.js app has a `package.json` defining your app's dependencies and start script, you can install the dependencies before running your app.
 
 ```bash
 $ docker run --rm -v /path/to/app:/app bitnami/node npm install
-docker run -it --name node  -v /path/to/app:/app bitnami/node npm start
+$ docker run -it --name node  -v /path/to/app:/app bitnami/node npm start
 ```
 
 or using Docker Compose:
