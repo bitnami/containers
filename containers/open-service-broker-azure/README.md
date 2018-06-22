@@ -13,10 +13,6 @@ In order to use the charts in this repository, you must have the following compo
 1. [Kubernetes Service Catalog](https://github.com/kubernetes-incubator/service-catalog)
 1. [Open Service Broker for Azure](https://github.com/azure/open-service-broker-azure)
 
-# Further documentation
-
-For further documentation, please check [here](https://github.com/Azure/open-service-broker-azure/tree/master/docs)
-
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -27,7 +23,7 @@ For further documentation, please check [here](https://github.com/Azure/open-ser
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0`, `0.12.0-r5`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-r5/0/Dockerfile)
+* [`0`, `0.12.0-r6`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-r6/0/Dockerfile)
 * [`0-ol-7`, `0.12.0-ol-7-r1` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-ol-7-r1/0/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/open-service-broker-azure GitHub repo](https://github.com/bitnami/bitnami-docker-open-service-broker-azure).
@@ -51,6 +47,12 @@ If you wish, you can also build the image yourself.
 ```bash
 $ docker build -t bitnami/open-service-broker-azure:latest https://github.com/bitnami/bitnami-docker-open-service-broker-azure.git
 ```
+
+# Configuration
+
+# Further documentation
+
+For further documentation, please check [here](https://github.com/Azure/open-service-broker-azure/tree/master/docs)
 
 # Contributing
 
