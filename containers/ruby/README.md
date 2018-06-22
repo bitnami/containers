@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`2.5`, `2.5.1-r53`, `latest` (2.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-r53/2.5/Dockerfile)
+* [`2.5`, `2.5.1-r54`, `latest` (2.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-r54/2.5/Dockerfile)
 * [`2.5-ol-7`, `2.5.1-ol-7-r1` (2.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-ol-7-r1/2.5/ol-7/Dockerfile)
 * [`2.4`, `2.4.4-r51` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-r51/2.4/Dockerfile)
 * [`2.4-ol-7`, `2.4.4-ol-7-r1` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-ol-7-r1/2.4/ol-7/Dockerfile)
@@ -72,9 +72,11 @@ $ docker run -it --name ruby bitnami/ruby:latest
 
 **Further Reading:**
 
-  - [Ruby IRB Documentation](http://ruby-doc.org/stdlib-2.0.0/libdoc/irb/rdoc/IRB.html)
+  - [Ruby IRB Documentation](http://ruby-doc.org/stdlib-2.4.0/libdoc/irb/rdoc/IRB.html)
 
-# Running your Ruby script
+# Configuration
+
+## Running your Ruby script
 
 The default work directory for the Ruby image is `/app`. You can mount a folder from your host here that includes your Ruby script, and run it normally using the `ruby` command.
 
@@ -83,7 +85,7 @@ $ docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
   ruby script.rb
 ```
 
-# Running a Ruby app with gems
+## Running a Ruby app with gems
 
 If your Ruby app has a `Gemfile` defining your app's dependencies and start script, you can install the dependencies before running your app.
 
@@ -107,7 +109,7 @@ ruby:
   - [rubygems.org](https://rubygems.org/)
   - [bundler.io](http://bundler.io/)
 
-# Accessing a Ruby app running a web server
+## Accessing a Ruby app running a web server
 
 This image exposes port `3000` in the container, so you should ensure that your web server is binding to port `3000`, as well as listening on `0.0.0.0` to accept remote connections from your host.
 
