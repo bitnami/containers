@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`7`, `7.3.1-r29`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.3.1-r29/7/Dockerfile)
+* [`7`, `7.3.1-r31`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.3.1-r31/7/Dockerfile)
 * [`7-ol-7`, `7.3.1-ol-7-r1` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.3.1-ol-7-r1/7/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
