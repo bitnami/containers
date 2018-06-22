@@ -20,7 +20,7 @@ Service Catalog installs into a Kubernetes cluster and runs behind the [Kubernet
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0`, `0.1.22-r0`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-service-catalog/blob/0.1.22-r0/0/Dockerfile)
+* [`0`, `0.1.22-r1`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-service-catalog/blob/0.1.22-r1/0/Dockerfile)
 * [`0-ol-7`, `0.1.22-ol-7-r0` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-service-catalog/blob/0.1.22-ol-7-r0/0/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/service-catalog GitHub repo](https://github.com/bitnami/bitnami-docker-service-catalog).
@@ -44,6 +44,12 @@ If you wish, you can also build the image yourself.
 ```bash
 $ docker build -t bitnami/service-catalog:latest https://github.com/bitnami/bitnami-docker-service-catalog.git
 ```
+
+# Configuration
+
+## Further documentation
+
+For further documentation, please check [Service Catalog documentation](https://kubernetes.io/docs/concepts/extend-kubernetes/service-catalog/)
 
 # Contributing
 
