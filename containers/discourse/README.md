@@ -23,6 +23,13 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Supported tags and respective `Dockerfile` links
+
+* [`2-ol-7`, `2.0.2-ol-7-r0` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.2-ol-7-r0/2/ol-7/Dockerfile)
+* [`2`, `0.0.0-r0`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/0.0.0-r0/2/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
+
 # Prerequisites
 
 To run this application you need Docker Engine 1.10.0. Docker Compose is recommended with a version 1.6.0 or later.
@@ -253,7 +260,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start discourse sidekiq`
+ * For docker-compose: `$ docker-compose up discourse sidekiq`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name discourse bitnami/discourse:latest`
 
 # Configuration
