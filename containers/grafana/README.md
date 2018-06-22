@@ -22,8 +22,8 @@ $ docker run --name grafana bitnami/grafana:latest
 
 # Supported tags and respective `Dockerfile` links
 
-* [`5`, `5.1.4-r3`, `latest` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.1.4-r3/5/Dockerfile)
-* [`5-ol-7`, `5.1.4-ol-7-r0` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.1.4-ol-7-r0/5/ol-7/Dockerfile)
+* [`5`, `5.1.4-r4`, `latest` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.1.4-r4/5/Dockerfile)
+* [`5-ol-7`, `5.1.4-ol-7-r1` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.1.4-ol-7-r1/5/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -73,21 +73,40 @@ $ docker run --name grafana-node1 --network grafana-network bitnami/grafana:late
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
-
 # Configuration
 
 ## Dev config
 
 Create a `custom.ini` in the conf (`/opt/bitnami/grafana/conf`) directory to override default configuration options. You only need to add the options you want to override. Config files are applied in the order of:
+
 ```
 grafana.ini
 custom.ini
 ```
+
 In your `custom.ini` uncomment (remove the leading ;) sign. And set `app_mode = development`.
 
 ## Production config
 
 Override the `/opt/bitnami/grafana/conf/grafana.ini` file mounting a volume.
+
+```
+docker run --name grafana-node -v /path/to/grafana.ini:/opt/bitnami/grafana/conf/grafana.ini bitnami/grafana:latest
+```
+
+After that, your configuration will be taken into account in the server's behaviour.
+
+Using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  grafana:
+    image: bitnami/grafana:latest
+    volumes:
+      - /path/to/grafana.ini:/opt/bitnami/grafana/conf/grafana.ini
+```
 
 # Logging
 
