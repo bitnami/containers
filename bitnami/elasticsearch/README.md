@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`6`, `6.3.0-r2`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.0-r2/6/Dockerfile)
+* [`6`, `6.3.0-r3`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.0-r3/6/Dockerfile)
 * [`6-ol-7`, `6.3.0-ol-7-r2` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.0-ol-7-r2/6/ol-7/Dockerfile)
 * [`5`, `5.6.4-r58` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-r58/5/Dockerfile)
 * [`5-ol-7`, `5.6.4-ol-7-r1` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-ol-7-r1/5/ol-7/Dockerfile)
