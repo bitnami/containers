@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r15
+FROM bitnami/oraclelinux-extras:7-r16
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN mkdir -p /bitnami && ln -sf /bitnami/php /bitnami/php-fpm
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="7.1.18-ol-7-r5" \
+    BITNAMI_IMAGE_VERSION="7.1.18-ol-7-r6" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH"
 
 EXPOSE 9000
