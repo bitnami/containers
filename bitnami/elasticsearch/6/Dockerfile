@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack elasticsearch-6.3.0-0 --checksum 34517f0484fa6b5a6e073d81
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="6.3.0-r3" \
+    BITNAMI_IMAGE_VERSION="6.3.0-r4" \
     ELASTICSEARCH_BIND_ADDRESS="" \
     ELASTICSEARCH_CLUSTER_HOSTS="" \
     ELASTICSEARCH_CLUSTER_NAME="elasticsearch-cluster" \
