@@ -32,7 +32,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`4.0`, `4.0.10-r12`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.10-r12/4.0/Dockerfile)
+* [`4.0`, `4.0.10-r13`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.10-r13/4.0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
 
