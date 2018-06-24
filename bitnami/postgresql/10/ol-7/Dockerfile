@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r15
+FROM bitnami/oraclelinux-extras:7-r16
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack postgresql-10.4.0-1 --checksum 82488dd9ed148faf3601a93735
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="10.4.0-ol-7-r3" \
+    BITNAMI_IMAGE_VERSION="10.4.0-ol-7-r4" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
     POSTGRESQL_MASTER_HOST="" \
