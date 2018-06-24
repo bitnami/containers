@@ -29,7 +29,7 @@ $ docker-compose up -d
 
  - [`9.0`, `9.0.8-r43` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.8-r43/9.0/Dockerfile)
  - [`9.0`, `9.0.8-ol-7-r5` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.8-ol-7-r5/9.0/Dockerfile)
- - [`8.5`, `8.5.31-r43` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.31-r43/8.5/Dockerfile)
+ - [`8.5`, `8.5.31-r44` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.31-r44/8.5/Dockerfile)
  - [`8.5`, `8.5.31-ol-7-r4` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.31-ol-7-r4/8.5/Dockerfile)
  - [`8.0`, `8.0.52-r38` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.52-r38/8.0/Dockerfile)
  - [`8.0`, `8.0.52-ol-7-r4` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.52-ol-7-r4/8.0/Dockerfile)
