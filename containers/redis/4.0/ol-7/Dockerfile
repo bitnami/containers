@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r16
+FROM bitnami/oraclelinux-extras:7-r17
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack redis-4.0.10-0 --checksum a08072f633127ac31f99c0493ae9802
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.10-ol-7-r5" \
+    BITNAMI_IMAGE_VERSION="4.0.10-ol-7-r6" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
     REDIS_MASTER_HOST="" \
