@@ -21,7 +21,7 @@ $ docker run --name fluentd bitnami/fluentd:latest
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1`, `1.2.2-r16`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.2.2-r16/1/Dockerfile)
+* [`1`, `1.2.2-r17`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.2.2-r17/1/Dockerfile)
 * [`1-ol-7`, `1.2.2-ol-7-r6` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.2.2-ol-7-r6/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
@@ -83,23 +83,62 @@ docker run -d -p 24224:24224 -p 24224:24224/udp -v /data:/opt/bitnami/fluentd/lo
 
 Default configurations are to:
 
+ - configuration file at `/opt/bitnami/fluentd/conf/fluentd.conf`
  - listen port `24224` for Fluentd forward protocol
  - store logs with tag `docker.**` into `/opt/bitnami/fluentd/log/docker.*.log`
  - store all other logs into `/opt/bitnami/fluentd/log/data.*.log`
 
+You can overwrite the default configuration file by mounting your own configuration file on the directory `/opt/bitnami/fluentd/conf`:
+
+```
+docker run --name nats -v /path/to/fluentd.conf:/opt/bitnami/fluentd/conf/fluentd.conf bitnami/fluentd:latest
+```
+
+Using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  fluentd:
+    image: bitnami/fluentd:latest
+    ports:
+      - '24224:24224'
+      - '5140:5140'
+    volumes:
+      - /path/to/fluentd.conf:/opt/bitnami/fluentd/conf/fluentd.conf
+```
+
+You can also extend the default configuration by importing your custom configuration with the "@include" directive. It is a simple as creating a directory with you custom config files and mount it on the directory `/opt/bitnami/fluentd/conf/conf.d`:
+
+```
+docker run --name nats -v /path/to/custom-conf-directory:/opt/bitnami/fluentd/conf/conf.d bitnami/fluentd:latest
+```
+
+Using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  fluentd:
+    image: bitnami/fluentd:latest
+    ports:
+      - '24224:24224'
+      - '5140:5140'
+    volumes:
+      - /path/to/custom-conf-directory:/opt/bitnami/fluentd/conf/conf.d
+```
+
+Find more information about this feature, consult [official documentation](https://docs.fluentd.org/v0.12/articles/config-file)
+
 # Environment Variables
+
 Environment variable below are configurable to control how to execute fluentd process:
 
-`FLUENTD_CONF`
-This variable allows you to specify configuration file name that will be used in -c Fluentd command line option.
+ - `FLUENTD_CONF`: This variable allows you to specify configuration file name that will be used in -c Fluentd command line option. If you want to use your own configuration file (without any optional plugins), you can do it with this environment variable and Docker volumes (-v option of docker run).
 
-If you want to use your own configuration file (without any optional plugins), you can do it with this environment variable and Docker volumes (-v option of docker run).
-
-Write configuration file with filename yours.conf.
-Execute docker run with -v /path/to/dir:/opt/bitnami/fluentd/conf to share /path/to/dir/yours.conf in container, and -e FLUENTD_CONF=/opt/bitnami/fluentd/conf/yours.conf to read it.
-
-`FLUENTD_OPT`
-Use this variable to specify other Fluentd command line options, like -v or -q.
+ - `FLUENTD_OPT`: Use this variable to specify other Fluentd command line options, like -v or -q.
 
 # Logging
 
