@@ -1,0 +1,4 @@
+{
+  "modelName": "{{$global.env.TENSORFLOW_SERVING_MODEL_NAME}}",
+  "port": "{{$global.env.TENSORFLOW_SERVING_PORT_NUMBER}}"
+}
