@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  etcd:
+    image: bitnami/etcd:latest
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+    volumes:
+      - etcd_data:/bitnami
+volumes:
+  etcd_data:
+    driver: local
