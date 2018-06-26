@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/fluentd /opt/bitnami/fluentd
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.2.2-ol-7-r6" \
+    BITNAMI_IMAGE_VERSION="1.2.2-ol-7-r7" \
     GEM_HOME="/opt/bitnami/fluentd" \
     PATH="/opt/bitnami/fluentd/bin:$PATH"
 
