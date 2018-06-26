@@ -9,8 +9,8 @@ jobs:
           LATEST_STABLE: "1"
           DISTRIBUTIONS_LIST: "debian-8"
           IMAGE_NAME: parse-dashboard
-          CHART_NAME: parse
-          CHART_REPO: https://github.com/kubernetes/charts
+          CHART_NAME:
+          CHART_REPO:
           SKIP_CHART_APP_VERSION_UPDATE: "1"
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami

@@ -213,7 +213,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start parse-dashboard`
+ * For docker-compose: `$ docker-compose up parse-dashboard`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name parse-dashboard bitnami/parse-dashboard:latest`
 
 # Configuration
