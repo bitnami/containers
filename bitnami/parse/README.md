@@ -32,7 +32,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`2`, `2.8.2-r1`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/2.8.2-r1/2/Dockerfile)
-* [`2-ol-7`, `0.0.0-ol-7-r0` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/0.0.0-ol-7-r0/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.8.2-ol-7-r0` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/2.8.2-ol-7-r0/2/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
 
