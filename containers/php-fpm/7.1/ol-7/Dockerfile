@@ -1,14 +1,14 @@
-FROM bitnami/oraclelinux-extras:7-r17
+FROM bitnami/oraclelinux-extras:7-r18
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline xz-libs zlib
-RUN bitnami-pkg unpack php-7.1.18-2 --checksum 852a27db8227b8c426b6cbc1a3c67f2ae211d478cc64a21919cac8b3361ff7a8
+RUN bitnami-pkg unpack php-7.1.19-0 --checksum e6d122ecb479c672e9a34f1bb485b31ce2102877b59506108f65d8b6df95301e
 RUN mkdir -p /bitnami && ln -sf /bitnami/php /bitnami/php-fpm
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="7.1.18-ol-7-r7" \
+    BITNAMI_IMAGE_VERSION="7.1.19-ol-7-r0" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH"
 
 EXPOSE 9000
