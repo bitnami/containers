@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras:7-r3
+FROM gcr.io/helm-publish-ci/redhat-extras:7-r14
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,12 +6,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline xz-libs zlib
-RUN bitnami-pkg unpack php-7.2.6-5 --checksum b4c686849d061f165cafdf3ceca235071eec3d38b8c274df050a061d4cd0ec0b
+RUN bitnami-pkg unpack php-7.2.7-1 --checksum ed7fd7468ad65d390865a3d298cbf27487d072b0be8a5d284ebba6e5efaa4b36
 RUN mkdir -p /bitnami && ln -sf /bitnami/php /bitnami/php-fpm
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="7.2.6-rhel-7-r5" \
+    BITNAMI_IMAGE_VERSION="7.2.7-rhel-7-r0" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH"
 
 EXPOSE 9000
