@@ -36,7 +36,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1`, `1.1.0-r26`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.1.0-r26/1/Dockerfile)
+* [`1`, `1.1.0-r27`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.1.0-r27/1/Dockerfile)
 * [`1-ol-7`, `1.1.0-ol-7-r5` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.1.0-ol-7-r5/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/consul GitHub repo](https://github.com/bitnami/bitnami-docker-consul).
