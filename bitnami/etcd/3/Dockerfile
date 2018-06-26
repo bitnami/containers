@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/etcd /opt/bitnami/etcd
 ENV BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.3.8-r0" \
+    BITNAMI_IMAGE_VERSION="3.3.8-r1" \
     ETCD_ADVERTISE_CLIENT_URLS="http://127.0.0.1:2379" \
     ETCD_LISTEN_CLIENT_URLS="http://0.0.0.0:2379" \
     PATH="/opt/bitnami/etcd/bin:$PATH"

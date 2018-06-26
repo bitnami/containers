@@ -29,7 +29,7 @@ $ docker-compose up
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3`, `3.3.8-r0`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.8-r0/3/Dockerfile)
+* [`3`, `3.3.8-r1`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.8-r1/3/Dockerfile)
 * [`3-ol-7`, `0.0.0-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/0.0.0-ol-7-r0/3/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/etcd GitHub repo](https://github.com/bitnami/bitnami-docker-etcd).
