@@ -26,7 +26,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`1`, `1.24.5-r6`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.24.5-r6/1/Dockerfile)
-* [`1-ol-7`, `1.03.1-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.03.1-ol-7-r0/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.24.5-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.24.5-ol-7-r0/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
 
@@ -37,7 +37,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 # Supported tags and respective `Dockerfile` links
 
 * [`1`, `1.24.5-r6`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.24.5-r6/1/Dockerfile)
-* [`1-ol-7`, `1.03.1-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.03.1-ol-7-r0/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.24.5-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.24.5-ol-7-r0/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
 
