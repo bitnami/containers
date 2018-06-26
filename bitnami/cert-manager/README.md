@@ -23,7 +23,7 @@ Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource suppor
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0`, `0.3.1-r0`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.3.1-r0/0/Dockerfile)
+* [`0`, `0.3.1-r1`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.3.1-r1/0/Dockerfile)
 * [`0-ol-7`, `0.3.1-ol-7-r0` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.3.1-ol-7-r0/0/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cert-manager GitHub repo](https://github.com/bitnami/bitnami-docker-cert-manager).
