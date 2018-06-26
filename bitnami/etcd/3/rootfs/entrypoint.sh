@@ -27,12 +27,13 @@ fi
 # Validate authentication
 if [[ ! -z "$ETCD_ROOT_PASSWORD" ]]; then
     echo "==> Enabling etcd authentication..."
-    start-stop-daemon -S --exec /opt/bitnami/etcd/bin/etcd -d /opt/bitnami/etcd/ -b
+    etcd > /dev/null 2>&1 &
+    ETCD_PID=$!
     sleep 3
     echo "$ETCD_ROOT_PASSWORD" | etcdctl user add root
     etcdctl auth enable
     etcdctl -u root:"$ETCD_ROOT_PASSWORD" role revoke guest -path '/*' --readwrite
-    start-stop-daemon -K --exec /opt/bitnami/etcd/bin/etcd
+    kill $ETCD_PID
 fi
 
 
