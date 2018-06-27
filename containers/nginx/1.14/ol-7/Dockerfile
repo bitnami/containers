@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r17
+FROM bitnami/oraclelinux-extras:7-r19
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.14.0-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="1.14.0-ol-7-r12" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
     NGINX_HTTPS_PORT_NUMBER="8443" \
