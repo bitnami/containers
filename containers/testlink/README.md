@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1`, `1.9.17-r53`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-r53/1/Dockerfile)
+* [`1`, `1.9.17-r54`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-r54/1/Dockerfile)
 * [`1-ol-7`, `1.9.17-ol-7-r5` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-ol-7-r5/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/testlink GitHub repo](https://github.com/bitnami/bitnami-docker-testlink).
