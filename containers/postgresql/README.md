@@ -27,7 +27,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`10`, `10.4.0-r26`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-r26/10/Dockerfile)
+* [`10`, `10.4.0-r27`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-r27/10/Dockerfile)
 * [`10-ol-7`, `10.4.0-ol-7-r5` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-ol-7-r5/10/ol-7/Dockerfile)
 * [`9.6`, `9.6.9-r27` (9.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-r27/9.6/Dockerfile)
 * [`9.6-ol-7`, `9.6.9-ol-7-r5` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-ol-7-r5/9.6/ol-7/Dockerfile)
@@ -331,7 +331,7 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 ## Configuration file
 
-The image looks for configurations in `/bitnami/postgresql/conf/`. As mentioned in [Persisting your database](#persisting-your-database) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/postgresql-persistence/postgresql/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
+The image looks for configurations in `/opt/bitnami/postgresql/conf/`. You can mount a volume at `/opt/bitnami/postgresql/conf/` and copy/edit the configurations in the `/path/to/postgresql-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
 ### Step 1: Run the PostgreSQL image
 
@@ -339,7 +339,7 @@ Run the PostgreSQL image, mounting a directory from your host.
 
 ```bash
 $ docker run --name postgresql \
-    -v /path/to/postgresql-persistence:/bitnami \
+    -v /path/to/postgresql-persistence/conf/:/opt/bitnami/postgresql/conf/ \
     bitnami/postgresql:latest
 ```
 
@@ -354,7 +354,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - /path/to/postgresql-persistence:/bitnami
+      - /path/to/postgresql-persistence/conf/:/opt/bitnami/postresql/conf/
 ```
 
 ### Step 2: Edit the configuration
@@ -362,7 +362,7 @@ services:
 Edit the configuration on your host using your favorite editor.
 
 ```bash
-vi /path/to/postgresql-persistence/postgresql/conf/postgresql.conf
+vi /path/to/postgresql-persistence/conf/postgresql.conf
 ```
 
 ### Step 3: Restart PostgreSQL
