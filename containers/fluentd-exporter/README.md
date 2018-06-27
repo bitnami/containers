@@ -23,7 +23,7 @@ $ docker run --name fluentd-exporter bitnami/fluentd-exporter:latest
 # Supported tags and respective `Dockerfile` links
 
 * [`0`, `0.2.0-r38`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-r38/0/Dockerfile)
-* [`0-ol-7`, `0.2.0-ol-7-r1` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-ol-7-r1/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.2.0-ol-7-r2` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-ol-7-r2/0/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd-exporter).
 
