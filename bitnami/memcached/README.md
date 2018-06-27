@@ -29,8 +29,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1`, `1.5.8-r27`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.8-r27/1/Dockerfile)
-* [`1-ol-7`, `1.5.8-ol-7-r6` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.8-ol-7-r6/1/ol-7/Dockerfile)
+* [`1`, `1.5.8-r28`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.8-r28/1/Dockerfile)
+* [`1-ol-7`, `1.5.8-ol-7-r5` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.8-ol-7-r5/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/memcached GitHub repo](https://github.com/bitnami/bitnami-docker-memcached).
 
