@@ -5,12 +5,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/"
 
 # Install required system packages and dependencies
-RUN bitnami-pkg unpack redis-4.0.10-0 --checksum 4168e47eb043c99e9ed9932c97f0a5973828811d77c2c05c9e2e434bbd39ae40
+RUN bitnami-pkg unpack redis-4.0.10-1 --checksum 11be8a69c5220aa3dd2a2b45faa1a93ba979f2ce6fc8b98d2cef1a3a709649a3
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.10-r14" \
+    BITNAMI_IMAGE_VERSION="4.0.10-r15" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
     REDIS_MASTER_HOST="" \
