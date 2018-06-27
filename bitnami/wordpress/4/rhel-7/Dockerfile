@@ -1,4 +1,4 @@
-FROM bitnami/redhat-extras:7-r2
+FROM gcr.io/helm-publish-ci/redhat-extras:7-r15
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,11 +7,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
-RUN bitnami-pkg unpack apache-2.4.33-3 --checksum c9ed08e5c752fe23eff64d19f1e2a4a34f6326732acc80ea685f2d8eda7ee96f
-RUN bitnami-pkg unpack php-7.0.30-3 --checksum e08b6fc7a366eab9ba73809c7073c9f0495cd51b5a98aa87aee28e99a156168c
+RUN bitnami-pkg unpack apache-2.4.33-4 --checksum cc2b7ea816858476f7cb475e1319219b88461af51a25e6ba96592e0bb560e9ca
+RUN bitnami-pkg unpack php-7.0.30-6 --checksum e27f47f2351aebc51e098b948db97be63da8131206d9afd6401c695920fe7ca2
 RUN bitnami-pkg unpack mysql-client-10.1.33-0 --checksum 4b07acdb7d3f6a61161414ad7f7639da8f291962e242eb257f612d18c8231501
-RUN bitnami-pkg install libphp-7.0.30-3 --checksum 6b30a1a49beddad4c8a992976aff809bcbdd2115888530dd3b8257c58844369a
-RUN bitnami-pkg unpack wordpress-4.9.6-1 --checksum 2a0125c17f96017e854d46809707df61c47ff30eb0f297e4fdb8f298607a3f4b
+RUN bitnami-pkg install libphp-7.0.30-8 --checksum c499e289a80decf6d4ed43cb060aed09fd1f384970dc8124a541dc6335145534
+RUN bitnami-pkg unpack wordpress-4.9.6-5 --checksum 8fd215519e7f4cccfa8ec3fe7a0afe4933d34958a7fb7f195d962c87634c5caf
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/error_log
 
@@ -20,7 +20,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="4.9.6-rhel-7-r2" \
+    BITNAMI_IMAGE_VERSION="4.9.6-rhel-7-r3" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
