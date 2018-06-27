@@ -27,7 +27,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1`, `1.31.0-r14`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.31.0-r14/1/Dockerfile)
+* [`1`, `1.31.0-r15`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.31.0-r15/1/Dockerfile)
 * [`1-ol-7`, `1.31.0-ol-7-r5` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.31.0-ol-7-r5/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mediawiki GitHub repo](https://github.com/bitnami/bitnami-docker-mediawiki).
