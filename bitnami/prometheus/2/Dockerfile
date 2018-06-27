@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/prometheus /opt/bitnami/prometheus
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.3.1-r8" \
+    BITNAMI_IMAGE_VERSION="2.3.1-r9" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
