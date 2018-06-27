@@ -1,10 +1,10 @@
-FROM bitnami/minideb-extras:jessie-r87
+FROM bitnami/minideb-extras:jessie-r88
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls-deb0-28 libgpg-error0 libgssapi-krb5-2 libhogweed2 libicu52 libidn11 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmcrypt4 libncurses5 libnettle4 libp11-kit0 libpcre3 libpng12-0 libpq5 libreadline6 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.0.0 libstdc++6 libsybdb5 libtasn1-6 libtidy-0.99-0 libtinfo5 libxml2 libxslt1.1 zlib1g
 RUN bitnami-pkg unpack apache-2.4.33-4 --checksum f26751a96abdc45db43c4b92eb9f792a4b630ad0edd5667aa73ccafa0aeb3810
-RUN bitnami-pkg unpack php-7.1.19-0 --checksum 32f54a75d759517c8a3bc8630382f4a41d8149f3bb74a5d5b8490f3c69bfaf29
+RUN bitnami-pkg unpack php-7.1.19-1 --checksum 945467708f3be68e4e74a984b6eba3634fce2c7c2f9da3d1688744b7e58b5829
 RUN bitnami-pkg unpack mysql-client-10.1.34-0 --checksum 2954d9390cb8b91dc924beacc179ed03050f6c5cb7ad328010cdbde1ab05c1e9
 RUN bitnami-pkg install libphp-7.1.19-0 --checksum d2c5f7fbff697f87b8983f5f23a5a8eb495fc8b66a25f7f8391a622c79cd7dd1
 RUN bitnami-pkg unpack drupal-8.5.4-0 --checksum 26dc0c446f73ec77c77368f0eb4fce79ac6fe061004df82e34e6af71c3fa83e0
@@ -14,7 +14,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.5.4-r16" \
+    BITNAMI_IMAGE_VERSION="8.5.4-r17" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
