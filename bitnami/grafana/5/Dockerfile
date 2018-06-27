@@ -14,7 +14,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/grafana /opt/bitnami/grafana
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="5.1.4-r8" \
+    BITNAMI_IMAGE_VERSION="5.1.4-r9" \
     PATH="/opt/bitnami/grafana/bin:$PATH"
 
 RUN install_packages libfontconfig ca-certificates
