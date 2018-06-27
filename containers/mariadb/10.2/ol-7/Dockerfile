@@ -7,12 +7,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libaio libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre zlib
-RUN bitnami-pkg unpack mariadb-10.2.16-0 --checksum 969c0e087ca8bb1cc8c5e9dbced00290ca2eedc38211ee184e6cb0278211b18c
+RUN bitnami-pkg unpack mariadb-10.2.16-1 --checksum 10fa3309f2c6779b970b71fb9ef66c1aedbb5d25a6c065fab33a65ad694b72b5
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.16-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="10.2.16-ol-7-r2" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
