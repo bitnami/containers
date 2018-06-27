@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r18
+FROM bitnami/oraclelinux-extras:7-r19
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack mariadb-10.2.16-0 --checksum 969c0e087ca8bb1cc8c5e9dbced0
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.16-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="10.2.16-ol-7-r1" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
