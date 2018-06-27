@@ -7,14 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.33-4 --checksum 4e8daac4fc3f70870a856be2dbabe3
 RUN bitnami-pkg unpack php-7.1.19-1 --checksum 32d70be648a29cdf604acf5bba6e2b2ccb5d8b6de82ac3e8f9489b734d1bdd43
 RUN bitnami-pkg unpack mysql-client-10.1.34-0 --checksum 012f1f222898565b55f7d4522514c7c130d2bfe4c988754eed658ef6dafa980c
 RUN bitnami-pkg install libphp-7.1.19-0 --checksum 9633879ad66d6e9d080dd387b4497111ce3fafb8d17de9103493370d820ea5a6
-RUN bitnami-pkg unpack moodle-3.5.0-3 --checksum 6ccf5aa36c01903fe8f853b34746751d2025165dde27146787afa24ea82fb532
+RUN bitnami-pkg unpack moodle-3.5.0-4 --checksum 407adc3d5f810871d041d5de0547a81063c5801c0a2e8d461ff23fcde851cb2b
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.5.0-ol-7-r8" \
+    BITNAMI_IMAGE_VERSION="3.5.0-ol-7-r9" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
