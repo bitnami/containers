@@ -28,6 +28,14 @@ The Bitnami CodeIgniter Development Container has been carefully engineered to p
 
 [Learn more about Bitnami Development Containers.](https://docs.bitnami.com/containers/how-to/use-bitnami-development-containers/)
 
+# Supported tags and respective `Dockerfile` links
+
+* [`3`, `3.1.9-r2`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.9-r2/3/Dockerfile)
+* [`3-ol-7`, `3.1.9-ol-7-r1` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.9-ol-7-r1/3/ol-7/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/codeigniter GitHub repo](https://github.com/bitnami/bitnami-docker-codeigniter).
+
+
 ## Getting started
 
 The quickest way to get started with the Bitnami CodeIgniter Development Container is using [docker-compose](https://docs.docker.com/compose/).

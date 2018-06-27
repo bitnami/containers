@@ -1,5 +1,7 @@
 #!/bin/bash -e
+
 . /opt/bitnami/base/functions
+. /opt/bitnami/base/helpers
 
 print_welcome_page
 
@@ -21,3 +23,6 @@ if [ "$1" == "php" -a "$2" == "-S" ] ; then
 fi
 
 exec tini -- $DEPLOY
+
+
+exec tini -- "$@"
