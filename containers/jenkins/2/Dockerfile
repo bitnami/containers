@@ -6,11 +6,11 @@ RUN install_packages libc6 libcomerr2 libcurl3 libffi6 libgcrypt20 libgmp10 libg
 RUN bitnami-pkg install java-1.8.171-3 --checksum 3454a0bda3a4fb282b6b9a7022677a48dc493df0e13cb04d3c92e070e102a244
 RUN bitnami-pkg unpack tomcat-8.0.52-2 --checksum 573d3b019db704ec2c837fe7feb7c4af9fa0f329fa31968730784de996005d09
 RUN bitnami-pkg install git-2.18.0-0 --checksum 107278388849d944d1f3cc305087e1a1c0b3a52801c112572664e91c44a12cdf
-RUN bitnami-pkg unpack jenkins-2.121.1-1 --checksum 824e69ba80c0d6c253725bf607e45800dc6d4d4ad49927472283500f47a7843f
+RUN bitnami-pkg unpack jenkins-2.121.1-2 --checksum b7ef44a1f95570fd811cb6c8fdccf1b228026014c986087ce344e93a53771740
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.121.1-r21" \
+    BITNAMI_IMAGE_VERSION="2.121.1-r22" \
     JENKINS_PASSWORD="bitnami" \
     JENKINS_USERNAME="user" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/git/bin:$PATH" \
