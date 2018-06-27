@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras:7-r14
+FROM gcr.io/helm-publish-ci/redhat-extras:7-r15
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,12 +7,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libaio libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre zlib
-RUN bitnami-pkg unpack mariadb-10.2.16-0 --checksum 35e560350aa9ef20e948d46c29a087e50cfed8c687c39bbc4b5f149ee470d057
+RUN bitnami-pkg unpack mariadb-10.2.16-1 --checksum 24769a6b02bd921930f49ca2b7f4803c5e6b3eaf2626d0cb892e4e1b17919f86
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.16-rhel-7-r0" \
+    BITNAMI_IMAGE_VERSION="10.2.16-rhel-7-r1" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
