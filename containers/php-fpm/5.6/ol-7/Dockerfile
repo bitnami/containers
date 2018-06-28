@@ -3,12 +3,12 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline xz-libs zlib
-RUN bitnami-pkg unpack php-5.6.36-5 --checksum 507cfc1ad8ebd1d2e23c8a6b5d81263f92089d12b3fb0dd4f78d8f491cfd7ad0
+RUN bitnami-pkg unpack php-5.6.36-6 --checksum 8087dd19537e2fd1c6ca500b0fda5a5e5bcdb8cd94e0e72852759b3ba4a0ab26
 RUN mkdir -p /bitnami && ln -sf /bitnami/php /bitnami/php-fpm
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="5.6.36-ol-7-r9" \
+    BITNAMI_IMAGE_VERSION="5.6.36-ol-7-r10" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH"
 
 EXPOSE 9000
