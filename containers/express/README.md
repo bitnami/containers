@@ -20,6 +20,13 @@ $ docker-compose up
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Supported tags and respective `Dockerfile` links
+
+* [`4`, `4.16.3-r0`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/4.16.3-r0/4/Dockerfile)
+* [`4-ol-7`, `4.16.3-ol-7-r0` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/4.16.3-ol-7-r0/4/ol-7/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-codiad).
+
 ## Introduction
 
 [Express.js](http://expressjs.org/), or simply Express, is a web application framework for [Node.js](https://nodejs.org), released as free and open-source software under the [MIT License](https://github.com/nodejs/node/blob/master/LICENSE).
