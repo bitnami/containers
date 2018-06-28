@@ -13,7 +13,9 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/fluentd /opt/bitnami/fluentd
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.2.2-r21" \
+    BITNAMI_IMAGE_VERSION="1.2.2-r22" \
+    FLUENTD_CONF="fluentd.conf" \
+    FLUENTD_OPT="" \
     GEM_HOME="/opt/bitnami/fluentd" \
     PATH="/opt/bitnami/fluentd/bin:$PATH"
 
@@ -26,4 +28,4 @@ COPY rootfs /
 WORKDIR /opt/bitnami/fluentd
 USER 1001
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["fluentd","-c","/opt/bitnami/fluentd/conf/fluentd.conf","-p","/opt/bitnami/fluentd/plugins"]
+CMD ["fluentd","-c","/opt/bitnami/fluentd/conf/${FLUENTD_CONF}","-p","/opt/bitnami/fluentd/plugins","$FLUENTD_OPT"]
