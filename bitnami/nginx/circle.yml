@@ -9,8 +9,8 @@ jobs:
           LATEST_STABLE: "1.14"
           DISTRIBUTIONS_LIST: "debian-8,ol-7,rhel-7"
           IMAGE_NAME: nginx
-          CHART_NAME: nginx
-          CHART_REPO: https://github.com/bitnami/charts
+          CHART_NAME:
+          CHART_REPO:
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
