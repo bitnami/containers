@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r88
+FROM bitnami/minideb-extras:jessie-r90
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN bitnami-pkg unpack cassandra-3.11.2-4 --checksum ed18592e49fb1a03cf43722b801
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.2-r64" \
+    BITNAMI_IMAGE_VERSION="3.11.2-r65" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
     CASSANDRA_ENABLE_REMOTE_CONNECTIONS="true" \
