@@ -25,8 +25,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`2`, `2.0.2-r9`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.2-r9/2/Dockerfile)
-* [`2-ol-7`, `2.0.2-ol-7-r8` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.2-ol-7-r8/2/ol-7/Dockerfile)
+* [`2`, `2.0.2-r8`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.2-r8/2/Dockerfile)
+* [`2-ol-7`, `2.0.2-ol-7-r9` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.2-ol-7-r9/2/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
