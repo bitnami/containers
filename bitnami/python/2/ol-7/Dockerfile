@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r23
+FROM bitnami/oraclelinux-extras:7-r24
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg install python-2.7.15-1 --checksum b68b70cfe101ab13fc94c774c6291
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="2.7.15-ol-7-r10" \
+    BITNAMI_IMAGE_VERSION="2.7.15-ol-7-r11" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8000
