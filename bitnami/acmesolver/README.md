@@ -23,8 +23,8 @@ Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource suppor
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0`, `0.3.1-r6`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.3.1-r6/0/Dockerfile)
-* [`0-ol-7`, `0.3.1-ol-7-r5` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.3.1-ol-7-r5/0/ol-7/Dockerfile)
+* [`0`, `0.3.1-r7`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.3.1-r7/0/Dockerfile)
+* [`0-ol-7`, `0.3.1-ol-7-r6` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.3.1-ol-7-r6/0/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/acmesolver GitHub repo](https://github.com/bitnami/bitnami-docker-acmesolver).
 
