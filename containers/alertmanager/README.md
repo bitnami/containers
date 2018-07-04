@@ -22,8 +22,8 @@ $ docker run --name alertmanager bitnami/alertmanager:latest
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0`, `0.14.0-r66`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.14.0-r66/0/Dockerfile)
-* [`0-ol-7`, `0.14.0-ol-7-r13` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.14.0-ol-7-r13/0/ol-7/Dockerfile)
+* [`0`, `0.14.0-r67`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.14.0-r67/0/Dockerfile)
+* [`0-ol-7`, `0.14.0-ol-7-r12` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.14.0-ol-7-r12/0/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/alertmanager GitHub repo](https://github.com/bitnami/bitnami-docker-alertmanager).
 
