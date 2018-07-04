@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`4-ol-7`, `4.1.1-ol-7-r1` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.1.1-ol-7-r1/4/ol-7/Dockerfile)
+* [`4-ol-7`, `4.1.1-ol-7-r2` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.1.1-ol-7-r2/4/ol-7/Dockerfile)
 * [`4`, `4.1.0-r41`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.1.0-r41/4/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/orangehrm GitHub repo](https://github.com/bitnami/bitnami-docker-orangehrm).
