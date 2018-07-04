@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r24 as buildenv
+FROM bitnami/oraclelinux-extras:7-r25 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-5.2.1-0-linux-x64-debian-8.tar.gz && \
@@ -9,12 +9,12 @@ RUN mkdir -p /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/ && chmod g+rw
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r24
+FROM bitnami/oraclelinux-extras:7-r25
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/grafana /opt/bitnami/grafana
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="5.2.1-ol-7-r4" \
+    BITNAMI_IMAGE_VERSION="5.2.1-ol-7-r5" \
     PATH="/opt/bitnami/grafana/bin:$PATH"
 
 RUN install_packages fontconfig ca-certificates
