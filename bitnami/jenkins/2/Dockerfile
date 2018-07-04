@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack jenkins-2.121.1-2 --checksum b7ef44a1f95570fd811cb6c8fdcc
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.121.1-r23" \
+    BITNAMI_IMAGE_VERSION="2.121.1-r24" \
     JENKINS_PASSWORD="bitnami" \
     JENKINS_USERNAME="user" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/git/bin:$PATH" \
