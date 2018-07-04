@@ -24,7 +24,7 @@ In order to use the charts in this repository, you must have the following compo
 # Supported tags and respective `Dockerfile` links
 
 * [`0`, `0.12.0-r16`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-r16/0/Dockerfile)
-* [`0-ol-7`, `0.12.0-ol-7-r11` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-ol-7-r11/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.12.0-ol-7-r12` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-ol-7-r12/0/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/open-service-broker-azure GitHub repo](https://github.com/bitnami/bitnami-docker-open-service-broker-azure).
 
