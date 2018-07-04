@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack memcached-1.5.8-2 --checksum 78c58e7da72f60d97c447165ac54
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.8-r31" \
+    BITNAMI_IMAGE_VERSION="1.5.8-r32" \
     MEMCACHED_CACHE_SIZE="64" \
     MEMCACHED_PASSWORD="" \
     MEMCACHED_USERNAME="root" \
