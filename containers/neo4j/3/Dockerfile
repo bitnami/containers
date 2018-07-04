@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack neo4j-3.4.1-0 --checksum f38135a2e4b4a9dfa27e52ef8158cd1c
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="3.4.1-r17" \
+    BITNAMI_IMAGE_VERSION="3.4.1-r18" \
     NEO4J_BOLT_PORT_NUMBER="7687" \
     NEO4J_HOST="" \
     NEO4J_HTTPS_PORT_NUMBER="7473" \
