@@ -3,11 +3,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages build-essential bzip2-libs ca-certificates curl git glibc keyutils-libs krb5-libs libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre pkg-config readline sqlite unzip wget zlib
-RUN bitnami-pkg install node-10.5.0-0 --checksum 2389bfae2ea7c5f802181c236330a6596355bfcbbde897662451cc5e18b676e8
+RUN bitnami-pkg install node-10.6.0-0 --checksum 4d348fe2a4882049c91403517d09d834e6dc1cfb1e919d2a3d20bd83efe29122
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="10.5.0-ol-7-r14" \
+    BITNAMI_IMAGE_VERSION="10.6.0-ol-7-r0" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 3000
