@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack solr-7.4.0-1 --checksum 2d01d6c5b545155cbefe7d49b2d17a7e9
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="7.4.0-r10" \
+    BITNAMI_IMAGE_VERSION="7.4.0-r11" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:$PATH" \
     SOLR_CORE="" \
     SOLR_CORE_CONF_DIR="_default" \
