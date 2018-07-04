@@ -23,7 +23,7 @@ $ docker run --name elasticsearch-exporter bitnami/elasticsearch-exporter:latest
 # Supported tags and respective `Dockerfile` links
 
 * [`1`, `1.0.2-r44`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-r44/1/Dockerfile)
-* [`1-ol-7`, `1.0.2-ol-7-r12` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-ol-7-r12/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.0.2-ol-7-r13` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-ol-7-r13/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter).
 # Get this image
