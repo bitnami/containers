@@ -25,8 +25,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1.7`, `1.7.3-4-r1`, `latest` (1.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.3-4-r1/1.7/Dockerfile)
-* [`1.7-ol-7`, `1.7.3-4-ol-7-r3` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.3-4-ol-7-r3/1.7/ol-7/Dockerfile)
+* [`1.7`, `1.7.3-4-r2`, `latest` (1.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.3-4-r2/1.7/Dockerfile)
+* [`1.7-ol-7`, `1.7.3-4-ol-7-r4` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.3-4-ol-7-r4/1.7/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
