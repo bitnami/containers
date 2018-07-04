@@ -25,10 +25,10 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`11`, `11.0.20180615-r1`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180615-r1/11/Dockerfile)
+* [`11`, `11.0.20180615-r2`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180615-r2/11/Dockerfile)
 * [`11-ol-7`, `11.0.20180615-ol-7-r10` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180615-ol-7-r10/11/ol-7/Dockerfile)
 * [`10`, `10.0.20180615-r2` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/10.0.20180615-r2/10/Dockerfile)
-* [`10-ol-7`, `10.0.20180615-ol-7-r11` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/10.0.20180615-ol-7-r11/10/ol-7/Dockerfile)
+* [`10-ol-7`, `10.0.20180615-ol-7-r12` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/10.0.20180615-ol-7-r12/10/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
 
