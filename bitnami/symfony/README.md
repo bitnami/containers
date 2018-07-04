@@ -25,8 +25,8 @@ $ docker-compose up
 
 ## Supported tags and respective `Dockerfile` links
 
-* [`1`, `1.5.11-r55`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-r55/1/Dockerfile)
-* [`1-ol-7`, `1.5.11-ol-7-r10` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-ol-7-r10/1/ol-7/Dockerfile)
+* [`1`, `1.5.11-r56`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-r56/1/Dockerfile)
+* [`1-ol-7`, `1.5.11-ol-7-r11` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-ol-7-r11/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
 
