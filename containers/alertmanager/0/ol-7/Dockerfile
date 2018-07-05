@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r25 as buildenv
+FROM bitnami/oraclelinux-extras:7-r26 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/alertmanager-0.14.0-0-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r25
+FROM bitnami/oraclelinux-extras:7-r26
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/alertmanager /opt/bitnami/alertmanager
 ENV BITNAMI_APP_NAME="alertmanager" \
-    BITNAMI_IMAGE_VERSION="0.14.0-ol-7-r13" \
+    BITNAMI_IMAGE_VERSION="0.14.0-ol-7-r14" \
     PATH="/opt/bitnami/alertmanager/bin:$PATH"
 
 RUN mkdir -p /opt/bitnami/alertmanager/data/ && chmod g+rwX /opt/bitnami/alertmanager/data/
