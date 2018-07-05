@@ -25,8 +25,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3`, `3.5.0-r33`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.0-r33/3/Dockerfile)
-* [`3-ol-7`, `3.5.0-ol-7-r14` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.0-ol-7-r14/3/ol-7/Dockerfile)
+* [`3`, `3.5.0-r34`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.0-r34/3/Dockerfile)
+* [`3-ol-7`, `3.5.0-ol-7-r15` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.0-ol-7-r15/3/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
