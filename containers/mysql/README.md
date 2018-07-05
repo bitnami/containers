@@ -30,7 +30,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`8.0`, `8.0.11-r0` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.11-r0/8.0/Dockerfile)
-* [`8.0-ol-7`, `8.0.11-ol-7-r10` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.11-ol-7-r10/8.0/ol-7/Dockerfile)
+* [`8.0-ol-7`, `8.0.11-ol-7-r11` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.11-ol-7-r11/8.0/ol-7/Dockerfile)
 * [`5.7`, `5.7.22-r51`, `latest` (5.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.22-r51/5.7/Dockerfile)
 * [`5.7-ol-7`, `5.7.22-ol-7-r11` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.22-ol-7-r11/5.7/ol-7/Dockerfile)
 
