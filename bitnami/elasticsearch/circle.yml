@@ -7,7 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "5,6"
           LATEST_STABLE: "6"
-          DISTRIBUTIONS_LIST: "debian-8,ol-7"
+          DISTRIBUTIONS_LIST: "debian-8,debian-9,ol-7"
           IMAGE_NAME: elasticsearch
           CHART_NAME: elasticsearch
           CHART_REPO: https://github.com/bitnami/charts
