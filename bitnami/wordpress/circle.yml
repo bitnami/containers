@@ -8,7 +8,7 @@ jobs:
           RELEASE_SERIES_LIST: "4,4-php5"
           LATEST_STABLE: "4"
           VARIANTS_LIST: "php5"
-          DISTRIBUTIONS_LIST: "debian-8,ol-7,rhel-7"
+          DISTRIBUTIONS_LIST: "debian-8,debian-9,ol-7,rhel-7"
           IMAGE_NAME: wordpress
           CHART_NAME: wordpress
           CHART_REPO: https://github.com/kubernetes/charts
