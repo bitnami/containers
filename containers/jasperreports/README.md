@@ -26,7 +26,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`7`, `7.1.0-r29`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.0-r29/7/Dockerfile)
-* [`7-ol-7`, `7.1.0-ol-7-r13` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.0-ol-7-r13/7/ol-7/Dockerfile)
+* [`7-ol-7`, `7.1.0-ol-7-r14` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.0-ol-7-r14/7/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jasperreports GitHub repo](https://github.com/bitnami/bitnami-docker-jasperreports).
 
