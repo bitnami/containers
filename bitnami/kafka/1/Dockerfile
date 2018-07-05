@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r94
+FROM bitnami/minideb-extras:jessie-r95
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack kafka-1.1.0-4 --checksum d8a7af90e60f5709791e077c1e77cf74
 COPY rootfs /
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="1.1.0-r55" \
+    BITNAMI_IMAGE_VERSION="1.1.0-r56" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_BROKER_ID="-1" \
     KAFKA_BROKER_PASSWORD="bitnami" \
