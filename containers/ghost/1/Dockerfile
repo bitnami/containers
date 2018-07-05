@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r94
+FROM bitnami/minideb-extras:jessie-r95
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX,o+rw" \
@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX,o+rw" \
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libmysqlclient18 libncurses5 libreadline6 libsqlite3-0 libssl1.0.0 libstdc++6 libtinfo5 zlib1g
 RUN bitnami-pkg install node-8.11.3-0 --checksum e8a276dcff0eb7c501f7c8ba7bd3df532886faf31701fa83c4ab0d7614b4bef2
 RUN bitnami-pkg unpack mysql-client-10.1.34-0 --checksum 2954d9390cb8b91dc924beacc179ed03050f6c5cb7ad328010cdbde1ab05c1e9
-RUN bitnami-pkg unpack ghost-1.24.6-0 --checksum 64ee9bbdf0f7ee6140deb81dae297152c4767d29bacb45316262a94a9b9f48d3
+RUN bitnami-pkg unpack ghost-1.24.7-0 --checksum a7eb1ecad1f7b69ed1f6ef19e4b3b66990e7004b48da4524798cd76c44ebf247
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="1.24.6-r2" \
+    BITNAMI_IMAGE_VERSION="1.24.7-debian-8-r0" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
