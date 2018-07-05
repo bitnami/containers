@@ -25,10 +25,11 @@ $ docker-compose up
 
 # Supported tags and respective `Dockerfile` links
 
+* [`4-debian-8`, `4.9.7-debian-8-r0`, `4`, `4.9.7`, `4.9.7-r0`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.7-debian-8-r0/4/Dockerfile)
 * [`4-rhel-7`, `4.9.6-rhel-7-r3` (4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-rhel-7-r3/4/rhel-7/Dockerfile)
-* [`4`, `4.9.6-r39`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-r39/4/Dockerfile)
 * [`4-php5-rhel-7`, `4.9.6-php5-rhel-7-r2` (4-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-php5-rhel-7-r2/4-php5/rhel-7/Dockerfile)
-* [`4-ol-7`, `4.9.6-ol-7-r17` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-ol-7-r17/4/ol-7/Dockerfile)
+* [`4-ol-7`, `4.9.6-ol-7-r18` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-ol-7-r18/4/ol-7/Dockerfile)
+* [`4-debian-9`, `4.9.6-debian-9-r1` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.6-debian-9-r1/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
