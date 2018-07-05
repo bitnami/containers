@@ -34,7 +34,7 @@ services:
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3`, `3.4.12-r42`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-r42/3/Dockerfile)
+* [`3`, `3.4.12-r43`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-r43/3/Dockerfile)
 * [`3-ol-7`, `3.4.12-ol-7-r13` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-ol-7-r13/3/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
