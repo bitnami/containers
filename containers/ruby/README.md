@@ -33,7 +33,7 @@ $ docker-compose up -d
 * [`2.5-ol-7`, `2.5.1-ol-7-r13` (2.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-ol-7-r13/2.5/ol-7/Dockerfile)
 * [`2.4`, `2.4.4-r63` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-r63/2.4/Dockerfile)
 * [`2.4-ol-7`, `2.4.4-ol-7-r13` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-ol-7-r13/2.4/ol-7/Dockerfile)
-* [`2.3`, `2.3.7-r63` (2.3/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-r63/2.3/Dockerfile)
+* [`2.3`, `2.3.7-r64` (2.3/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-r64/2.3/Dockerfile)
 * [`2.3-ol-7`, `2.3.7-ol-7-r12` (2.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-ol-7-r12/2.3/ol-7/Dockerfile)
 * [`2.2`, `2.2.10-r62` (2.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.10-r62/2.2/Dockerfile)
 * [`2.2-ol-7`, `2.2.10-ol-7-r12` (2.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.10-ol-7-r12/2.2/ol-7/Dockerfile)
