@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r25
+FROM bitnami/oraclelinux-extras:7-r26
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN /opt/bitnami/ruby/bin/gem install bundler
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.1.10-ol-7-r12" \
+    BITNAMI_IMAGE_VERSION="2.1.10-ol-7-r13" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
