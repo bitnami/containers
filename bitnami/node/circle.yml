@@ -7,7 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "10,6,7,8,9"
           LATEST_STABLE: "6"
-          DISTRIBUTIONS_LIST: "debian-8,ol-7"
+          DISTRIBUTIONS_LIST: "debian-8,debian-9,ol-7"
           IMAGE_NAME: node
           CHART_NAME: node
           CHART_REPO: https://github.com/bitnami/charts
