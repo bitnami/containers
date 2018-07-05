@@ -1,0 +1,12 @@
+{
+  "bindAddress": "{{$global.env.ELASTICSEARCH_BIND_ADDRESS}}",
+  "clusterHosts": "{{$global.env.ELASTICSEARCH_CLUSTER_HOSTS}}",
+  "clusterName": "{{$global.env.ELASTICSEARCH_CLUSTER_NAME}}",
+  "isDedicatedNode": "{{$global.env.ELASTICSEARCH_IS_DEDICATED_NODE}}",
+  "javaHeapSize": "{{$global.env.ELASTICSEARCH_HEAP_SIZE}}",
+  "nodeName": "{{$global.env.ELASTICSEARCH_NODE_NAME}}",
+  "nodePort": "{{$global.env.ELASTICSEARCH_NODE_PORT_NUMBER}}",
+  "nodeType": "{{$global.env.ELASTICSEARCH_NODE_TYPE}}",
+  "plugins": "{{$global.env.ELASTICSEARCH_PLUGINS}}",
+  "port": "{{$global.env.ELASTICSEARCH_PORT_NUMBER}}"
+}
