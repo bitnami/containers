@@ -22,7 +22,7 @@ Deploy Kube-state-metrics on your [Kubernetes cluster](https://github.com/kubern
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1`, `1.3.1-r41`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.3.1-r41/1/Dockerfile)
+* [`1`, `1.3.1-r42`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.3.1-r42/1/Dockerfile)
 * [`1-ol-7`, `1.3.1-ol-7-r12` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.3.1-ol-7-r12/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kube-state-metrics GitHub repo](https://github.com/bitnami/bitnami-docker-kube-state-metrics).
