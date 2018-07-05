@@ -22,8 +22,8 @@ $ docker run --name blackbox-exporter bitnami/blackbox-exporter:latest
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0`, `0.12.0-r66`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.12.0-r66/0/Dockerfile)
-* [`0-ol-7`, `0.12.0-ol-7-r14` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.12.0-ol-7-r14/0/ol-7/Dockerfile)
+* [`0`, `0.12.0-r67`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.12.0-r67/0/Dockerfile)
+* [`0-ol-7`, `0.12.0-ol-7-r13` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.12.0-ol-7-r13/0/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/blackbox-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-blackbox-exporter).
 
