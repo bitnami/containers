@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras:7-r3
+FROM gcr.io/helm-publish-ci/redhat-extras:7-r21
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -8,10 +8,10 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.33-4 --checksum cc2b7ea816858476f7cb475e1319219b88461af51a25e6ba96592e0bb560e9ca
-RUN bitnami-pkg unpack php-7.1.18-1 --checksum c527067d47a06e1805ccff02a34c65d18705f343dd0bd37b5626c0b2e9eccdd4
+RUN bitnami-pkg unpack php-7.1.19-2 --checksum 2cd4c6a9f8b9307aac5750d97971c0284f029ea0845ee33512d8cd26715351b5
 RUN bitnami-pkg unpack mysql-client-10.1.33-0 --checksum 4b07acdb7d3f6a61161414ad7f7639da8f291962e242eb257f612d18c8231501
-RUN bitnami-pkg install libphp-7.1.18-0 --checksum 333c8861a9f35ec48359a96cc9c5a3ceee51ad865db0292dd7867e950a0eea70
-RUN bitnami-pkg unpack drupal-8.5.4-0 --checksum c0b280ac1abf84534900fec4469cca5672d6898580241d69cf2829b39d265e94
+RUN bitnami-pkg install libphp-7.1.19-0 --checksum e4577dc75f90cd77b490bda8124a82c6a62f1695c39c367f55ee32af2d00e6c3
+RUN bitnami-pkg unpack drupal-8.5.5-0 --checksum 149c78e1fe31d8555dce10b4db3f0d36dfef5d09645dae5ba20badafd86ea0ce
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/error_log
 
@@ -20,7 +20,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.5.4-rhel-7-r0" \
+    BITNAMI_IMAGE_VERSION="8.5.5-rhel-7-r0" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
