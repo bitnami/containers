@@ -1,0 +1,19 @@
+version: '2'
+services:
+  elasticsearch:
+    image: 'bitnami/elasticsearch:6'
+    volumes:
+      - 'elasticsearch_data:/bitnami'
+  kibana:
+    image: 'bitnami/kibana:6'
+    ports:
+      - '5601:5601'
+    volumes:
+      - 'kibana_data:/bitnami'
+    depends_on:
+      - elasticsearch
+volumes:
+  elasticsearch_data:
+    driver: local
+  kibana_data:
+    driver: local
