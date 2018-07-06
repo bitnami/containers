@@ -7,7 +7,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 COPY --from=development /opt/bitnami/python /opt/bitnami/python
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="2.7.15-r55" \
+    BITNAMI_IMAGE_VERSION="2.7.15-debian-8-r56" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 CMD ["python"]
