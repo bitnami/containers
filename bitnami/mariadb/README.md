@@ -30,11 +30,13 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`10.2-rhel-7`, `10.2.16-rhel-7-r1` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-rhel-7-r1/10.2/rhel-7/Dockerfile)
-* [`10.2`, `10.2.16-r4` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-r4/10.2/Dockerfile)
-* [`10.2-ol-7`, `10.2.16-ol-7-r9` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-ol-7-r9/10.2/ol-7/Dockerfile)
-* [`10.1`, `10.1.34-r11`, `latest` (10.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.34-r11/10.1/Dockerfile)
+* [`10.2-ol-7`, `10.2.16-ol-7-r10` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-ol-7-r10/10.2/ol-7/Dockerfile)
+* [`10.2-debian-9`, `10.2.16-debian-9-r1` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-debian-9-r1/10.2/debian-9/Dockerfile)
+* [`10.2-debian-8`, `10.2.16-debian-8-r4`, `10.2`, `10.2.16`, `10.2.16-r4` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-debian-8-r4/10.2/Dockerfile)
 * [`10.1-ol-7`, `10.1.34-ol-7-r13` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.34-ol-7-r13/10.1/ol-7/Dockerfile)
+* [`10.1-debian-8`, `10.1.34-debian-8-r11`, `10.1`, `10.1.34`, `10.1.34-r11`, `latest` (10.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.34-debian-8-r11/10.1/Dockerfile)
 * [`10.1-rhel-7`, `10.1.33-rhel-7-r2` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-rhel-7-r2/10.1/rhel-7/Dockerfile)
+* [`10.1-debian-9`, `0.0.0-debian-9-r0` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/0.0.0-debian-9-r0/10.1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
 
