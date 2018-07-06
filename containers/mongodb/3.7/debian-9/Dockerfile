@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack mongodb-3.7.9-1 --checksum 85ea406663eaffdffdc65a361dd165
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.7.9-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="3.7.9-debian-9-r2" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_PASSWORD="" \
