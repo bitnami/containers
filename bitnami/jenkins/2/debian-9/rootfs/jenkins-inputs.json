@@ -1,0 +1,4 @@
+{
+  "password": "{{$global.env.JENKINS_PASSWORD}}",
+  "username": "{{$global.env.JENKINS_USERNAME}}"
+}
