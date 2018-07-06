@@ -31,7 +31,7 @@ $ docker-compose up
 
 * [`3-ol-7`, `3.3.8-ol-7-r11` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.8-ol-7-r11/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.3.8-debian-9-r0` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.8-debian-9-r0/3/debian-9/Dockerfile)
-* [`3-debian-8`, `3.3.8-debian-8-r13`, `3`, `3.3.8`, `3.3.8-r13`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.8-debian-8-r13/3/Dockerfile)
+* [`3-debian-8`, `3.3.8-debian-8-r14`, `3`, `3.3.8`, `3.3.8-r14`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.8-debian-8-r14/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/etcd GitHub repo](https://github.com/bitnami/bitnami-docker-etcd).
 
