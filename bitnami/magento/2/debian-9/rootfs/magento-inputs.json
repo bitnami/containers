@@ -1,0 +1,15 @@
+{
+  "adminUri": "{{$global.env.MAGENTO_ADMINURI}}",
+  "databaseName": "{{$global.env.MAGENTO_DATABASE_NAME}}",
+  "databasePassword": "{{$global.env.MAGENTO_DATABASE_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
+  "databaseUser": "{{$global.env.MAGENTO_DATABASE_USER}}",
+  "email": "{{$global.env.MAGENTO_EMAIL}}",
+  "firstName": "{{$global.env.MAGENTO_FIRSTNAME}}",
+  "host": "{{$global.env.MAGENTO_HOST}}",
+  "lastName": "{{$global.env.MAGENTO_LASTNAME}}",
+  "mode": "{{$global.env.MAGENTO_MODE}}",
+  "password": "{{$global.env.MAGENTO_PASSWORD}}",
+  "username": "{{$global.env.MAGENTO_USERNAME}}"
+}
