@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack rabbitmq-3.7.7-0 --checksum 063bbd83ee9c9d455ac0624161539
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.7.7-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="3.7.7-debian-9-r2" \
     PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:/opt/bitnami/rabbitmq/sbin:$PATH" \
     RABBITMQ_CLUSTER_NODE_NAME="" \
     RABBITMQ_CLUSTER_PARTITION_HANDLING="ignore" \
