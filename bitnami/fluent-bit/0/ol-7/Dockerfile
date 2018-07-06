@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r26 as buildenv
+FROM bitnami/oraclelinux-extras:7-r27 as buildenv
 
 RUN install_packages bzip2-libs ca-certificates cyrus-sasl-lib elfutils-libelf elfutils-libs glibc keyutils-libs krb5-libs libattr libcap libcom_err libgcc libgcrypt libgpg-error libselinux lz4 nss-softokn-freebl openssl-libs pcre systemd-libs wget xz-libs zlib
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluent-bit-0.13.4-0-linux-x86_64-ol-7.tar.gz && \
@@ -8,15 +8,13 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r26
+FROM bitnami/oraclelinux-extras:7-r27
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/fluent-bit /opt/bitnami/fluent-bit
 ENV BITNAMI_APP_NAME="fluent-bit" \
-    BITNAMI_IMAGE_VERSION="0.13.4-ol-7-r14" \
+    BITNAMI_IMAGE_VERSION="0.13.4-ol-7-r15" \
     PATH="/opt/bitnami/fluent-bit/bin:$PATH"
-
-RUN install_packages ca-certificates libsasl2-2 libssl1.0.0
 
 EXPOSE 2020
 
