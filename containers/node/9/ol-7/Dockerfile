@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r26
+FROM bitnami/oraclelinux-extras:7-r27
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg install node-9.11.2-0 --checksum e921df96e5c33fc52abbeca385dc702
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="9.11.2-ol-7-r14" \
+    BITNAMI_IMAGE_VERSION="9.11.2-ol-7-r15" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 3000
