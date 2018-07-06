@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  kube-state-metrics:
+    image: bitnami/kube-state-metrics:1
+    ports:
+      - '8080:8080'
+      - '8081:8081'
+    volumes:
+      - kube-state-metrics_data:/bitnami
+volumes:
+  kube-state-metrics_data:
+    driver: local
