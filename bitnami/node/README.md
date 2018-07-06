@@ -43,7 +43,7 @@ $ docker-compose up -d
  - [`7`, `7.10.1-debian-8-r47` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-debian-8-r47/7/Dockerfile), [`7-prod`, `7.10.1-debian-8-r47-prod` (7/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-debian-8-r47/7/prod/Dockerfile)
  - [`6`, `6.14.3-ol-7-r14` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-ol-7-r14/6/Dockerfile), [`6-prod`, `6.14.3-ol-7-r14-prod` (6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-ol-7-r14/6/prod/Dockerfile)
  - [`6`, `6.14.3-debian-9-r2` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-debian-9-r2/6/Dockerfile), [`6-prod`, `6.14.3-debian-9-r2-prod` (6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-debian-9-r2/6/prod/Dockerfile)
- - [`6`, `6.14.3-debian-8-r20` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-debian-8-r20/6/Dockerfile), [`6-prod`, `6.14.3-debian-8-r20-prod` (6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-debian-8-r20/6/prod/Dockerfile)
+ - [`6`, `6.14.3-debian-8-r21` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-debian-8-r21/6/Dockerfile), [`6-prod`, `6.14.3-debian-8-r21-prod` (6/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-debian-8-r21/6/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
