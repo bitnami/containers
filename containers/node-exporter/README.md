@@ -23,8 +23,8 @@ $ docker run --name node-exporter bitnami/node-exporter:latest
 # Supported tags and respective `Dockerfile` links
 
 * [`0-ol-7`, `0.16.0-ol-7-r15` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.16.0-ol-7-r15/0/ol-7/Dockerfile)
+* [`0-debian-9`, `0.16.0-debian-9-r0` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.16.0-debian-9-r0/0/debian-9/Dockerfile)
 * [`0-debian-8`, `0.16.0-debian-8-r44`, `0`, `0.16.0`, `0.16.0-r44`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.16.0-debian-8-r44/0/Dockerfile)
-* [`0-debian-9`, `0.0.0-debian-9-r0` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.0.0-debian-9-r0/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-node-exporter).
 
