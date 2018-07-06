@@ -7,7 +7,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 COPY --from=development /opt/bitnami/node /opt/bitnami/node
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="9.11.2-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="9.11.2-debian-9-r2" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
 CMD ["node"]
