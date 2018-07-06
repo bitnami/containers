@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
- - [`10`, `10.6.0-ol-7-r1` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-ol-7-r1/10/Dockerfile), [`10-prod`, `10.6.0-ol-7-r1-prod` (10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-ol-7-r1/10/prod/Dockerfile)
+ - [`10`, `10.6.0-ol-7-r2` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-ol-7-r2/10/Dockerfile), [`10-prod`, `10.6.0-ol-7-r2-prod` (10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-ol-7-r2/10/prod/Dockerfile)
  - [`10`, `10.6.0-debian-9-r0` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-debian-9-r0/10/Dockerfile), [`10-prod`, `10.6.0-debian-9-r0-prod` (10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-debian-9-r0/10/prod/Dockerfile)
  - [`10`, `10.6.0-debian-8-r2` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-debian-8-r2/10/Dockerfile), [`10-prod`, `10.6.0-debian-8-r2-prod` (10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-debian-8-r2/10/prod/Dockerfile)
  - [`9`, `9.11.2-ol-7-r14` (9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-ol-7-r14/9/Dockerfile), [`9-prod`, `9.11.2-ol-7-r14-prod` (9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-ol-7-r14/9/prod/Dockerfile)
