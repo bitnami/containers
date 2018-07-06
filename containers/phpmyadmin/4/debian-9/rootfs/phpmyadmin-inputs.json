@@ -1,0 +1,7 @@
+{
+  "allowArbitraryServer": "{{$global.env.PHPMYADMIN_ALLOW_ARBITRARY_SERVER}}",
+  "allowNoPassword": "{{$global.env.PHPMYADMIN_ALLOW_NO_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.DATABASE_HOST}}",
+  "databaseServerPort": "{{$global.env.DATABASE_PORT_NUMBER}}",
+  "requireLocal": "{{$global.env.REQUIRE_LOCAL}}"
+}
