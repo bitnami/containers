@@ -1,16 +1,16 @@
-FROM bitnami/oraclelinux-extras:7-r27
+FROM bitnami/oraclelinux-extras:7-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages cyrus-sasl-lib glib2 glibc keyutils-libs krb5-libs libblkid libcom_err libcurl libffi libgcc libidn libmount libselinux libssh2 libstdc++ libuuid nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre zlib
 RUN bitnami-pkg install java-1.8.171-3 --checksum eb0af616b0a3ab12bd8559a36e83246eb10e7893f6a654dc14a462246d433e40
-RUN bitnami-pkg unpack tomcat-8.0.52-2 --checksum d54687bce7731651a2bc51dbcbf0484c3dde7c5ff4f8376326775c005373b781
+RUN bitnami-pkg unpack tomcat-8.0.53-0 --checksum 24567148f042a696afddb0b39f570a1309ebbdc8eeff1e6d22ccfe0aa7115504
 RUN bitnami-pkg install git-2.18.0-0 --checksum 1eb754ba867f732f706db6d202481ad968be9cb4def0421770ed1c52484a2e8e
 RUN bitnami-pkg unpack jenkins-2.121.1-2 --checksum 9fc56ffe8392a6b335bb523458e187a541ad36774ad5ec4b33d8728561bdc93a
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.121.1-ol-7-r16" \
+    BITNAMI_IMAGE_VERSION="2.121.1-ol-7-r17" \
     JENKINS_PASSWORD="bitnami" \
     JENKINS_USERNAME="user" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/git/bin:$PATH" \
