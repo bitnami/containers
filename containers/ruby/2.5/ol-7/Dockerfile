@@ -1,18 +1,19 @@
-FROM bitnami/oraclelinux-extras:7-r28
+FROM bitnami/oraclelinux-runtimes:7-r0
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git glibc keyutils-libs krb5-libs libcom_err libselinux ncurses-libs nss-softokn-freebl openssl-libs pcre pkg-config readline unzip wget zlib
-RUN bitnami-pkg install ruby-2.5.1-0 --checksum ec0d6bd902785a38ac057bc6e9ff243c78d5973e5345adeadc81184d32453511
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/ruby-2.5.1-0-linux-x86_64-ol-7.tar.gz && \
+    echo "ec0d6bd902785a38ac057bc6e9ff243c78d5973e5345adeadc81184d32453511  /tmp/bitnami/pkg/cache/ruby-2.5.1-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/ruby-2.5.1-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/ruby-2.5.1-0-linux-x86_64-ol-7.tar.gz
 RUN /opt/bitnami/ruby/bin/gem install bundler
 
-COPY rootfs /
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.5.1-ol-7-r15" \
+    BITNAMI_IMAGE_VERSION="2.5.1-ol-7-r16" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
 
 WORKDIR /app
-ENTRYPOINT ["/app-entrypoint.sh"]
 CMD ["irb"]
