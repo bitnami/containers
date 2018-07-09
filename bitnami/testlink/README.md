@@ -25,9 +25,9 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1-ol-7`, `1.9.17-ol-7-r14` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-ol-7-r14/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.9.17-ol-7-r15` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-ol-7-r15/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.9.17-debian-9-r0` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-debian-9-r0/1/debian-9/Dockerfile)
 * [`1-debian-8`, `1.9.17-debian-8-r59`, `1`, `1.9.17`, `1.9.17-r59`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-debian-8-r59/1/Dockerfile)
-* [`1-debian-9`, `0.0.0-debian-9-r0` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/0.0.0-debian-9-r0/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/testlink GitHub repo](https://github.com/bitnami/bitnami-docker-testlink).
 
