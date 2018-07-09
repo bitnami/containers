@@ -26,7 +26,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`11-ol-7`, `11.0.20180615-ol-7-r12` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180615-ol-7-r12/11/ol-7/Dockerfile)
-* [`11-debian-8`, `11.0.20180615-debian-8-r4`, `11`, `11.0.20180615`, `11.0.20180615-r4`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180615-debian-8-r4/11/Dockerfile)
+* [`11-debian-8`, `11.0.20180615-debian-8-r5`, `11`, `11.0.20180615`, `11.0.20180615-r5`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180615-debian-8-r5/11/Dockerfile)
 * [`10-ol-7`, `10.0.20180615-ol-7-r14` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/10.0.20180615-ol-7-r14/10/ol-7/Dockerfile)
 * [`10-debian-8`, `10.0.20180615-debian-8-r2`, `10`, `10.0.20180615`, `10.0.20180615-r2` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/10.0.20180615-debian-8-r2/10/Dockerfile)
 * [`10-debian-9`, `0.0.0-debian-9-r0` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/0.0.0-debian-9-r0/10/debian-9/Dockerfile)
