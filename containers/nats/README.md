@@ -30,8 +30,8 @@ $ docker-compose up
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1-ol-7`, `1.2.0-ol-7-r1` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.2.0-ol-7-r1/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.2.0-debian-9-r2` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.2.0-debian-9-r2/1/debian-9/Dockerfile)
+* [`1-ol-7`, `1.2.0-ol-7-r2` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.2.0-ol-7-r2/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.2.0-debian-9-r3` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.2.0-debian-9-r3/1/debian-9/Dockerfile)
 * [`1-debian-8`, `1.2.0-debian-8-r2`, `1`, `1.2.0`, `1.2.0-r2`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.2.0-debian-8-r2/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nats GitHub repo](https://github.com/bitnami/bitnami-docker-nats).
