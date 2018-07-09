@@ -1,0 +1,19 @@
+{
+  "databaseName": "{{$global.env.PHPBB_DATABASE_NAME}}",
+  "databasePassword": "{{$global.env.PHPBB_DATABASE_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
+  "databaseUser": "{{$global.env.PHPBB_DATABASE_USER}}",
+  "email": "{{$global.env.PHPBB_EMAIL}}",
+  "firstName": "{{$global.env.PHPBB_FIRST_NAME}}",
+  "forumDescription": "{{$global.env.PHPBB_FORUM_DESCRIPTION}}",
+  "forumName": "{{$global.env.PHPBB_FORUM_NAME}}",
+  "host": "{{$global.env.PHPBB_HOST}}",
+  "lastName": "{{$global.env.PHPBB_LAST_NAME}}",
+  "password": "{{$global.env.PHPBB_PASSWORD}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "username": "{{$global.env.PHPBB_USERNAME}}"
+}
