@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r96
+FROM bitnami/minideb-extras:jessie-r97
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -14,7 +14,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.8.10-debian-8-r5" \
+    BITNAMI_IMAGE_VERSION="3.8.10-debian-8-r6" \
     JOOMLA_DATABASE_NAME="bitnami_joomla" \
     JOOMLA_DATABASE_PASSWORD="" \
     JOOMLA_DATABASE_USER="bn_joomla" \
@@ -31,7 +31,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
     MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES="ALL" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
-    PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/mysql/bin:$PATH" \
+    PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:$PATH" \
     SMTP_HOST="" \
     SMTP_PASSWORD="" \
     SMTP_PORT="" \
