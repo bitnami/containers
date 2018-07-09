@@ -1,0 +1,20 @@
+version: '2'
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    volumes:
+      - 'postgresql_data:/bitnami'
+  odoo:
+    image: 'bitnami/odoo:10'
+    ports:
+      - '80:8069'
+      - '443:8071'
+    volumes:
+      - 'odoo_data:/bitnami'
+    depends_on:
+      - postgresql
+volumes:
+  postgresql_data:
+    driver: local
+  odoo_data:
+    driver: local
