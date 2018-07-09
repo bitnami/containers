@@ -21,7 +21,7 @@ $ docker run --name fluentd bitnami/fluentd:latest
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1-ol-7`, `1.2.2-ol-7-r17` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.2.2-ol-7-r17/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.2.2-ol-7-r19` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.2.2-ol-7-r19/1/ol-7/Dockerfile)
 * [`1-debian-8`, `1.2.2-debian-8-r30`, `1`, `1.2.2`, `1.2.2-r30`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.2.2-debian-8-r30/1/Dockerfile)
 * [`1-debian-9`, `0.0.0-debian-9-r0` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/0.0.0-debian-9-r0/1/debian-9/Dockerfile)
 
@@ -92,7 +92,7 @@ Default configurations are to:
 You can overwrite the default configuration file by mounting your own configuration file on the directory `/opt/bitnami/fluentd/conf`:
 
 ```
-docker run --name nats -v /path/to/fluentd.conf:/opt/bitnami/fluentd/conf/fluentd.conf bitnami/fluentd:latest
+docker run --name fluentd -v /path/to/fluentd.conf:/opt/bitnami/fluentd/conf/fluentd.conf bitnami/fluentd:latest
 ```
 
 Using Docker Compose:
@@ -113,7 +113,7 @@ services:
 You can also extend the default configuration by importing your custom configuration with the "@include" directive. It is a simple as creating a directory with you custom config files and mount it on the directory `/opt/bitnami/fluentd/conf/conf.d`:
 
 ```
-docker run --name nats -v /path/to/custom-conf-directory:/opt/bitnami/fluentd/conf/conf.d bitnami/fluentd:latest
+docker run --name fluentd -v /path/to/custom-conf-directory:/opt/bitnami/fluentd/conf/conf.d bitnami/fluentd:latest
 ```
 
 Using Docker Compose:
