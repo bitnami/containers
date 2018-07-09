@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/python-3.6.5-0-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="3.6.5-ol-7-r15" \
+    BITNAMI_IMAGE_VERSION="3.6.5-ol-7-r16" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8000
