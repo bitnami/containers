@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r96
+FROM bitnami/minideb-extras:jessie-r97
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -14,7 +14,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.1.1-debian-8-r1" \
+    BITNAMI_IMAGE_VERSION="4.1.1-debian-8-r2" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -28,7 +28,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     ORANGEHRM_DATABASE_USER="bn_orangehrm" \
     ORANGEHRM_PASSWORD="Bitnami.12345" \
     ORANGEHRM_USERNAME="admin" \
-    PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/mysql/bin:$PATH" \
+    PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:$PATH" \
     SMTP_HOST="" \
     SMTP_PASSWORD="" \
     SMTP_PORT="" \
