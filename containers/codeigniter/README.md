@@ -31,7 +31,7 @@ The Bitnami CodeIgniter Development Container has been carefully engineered to p
 # Supported tags and respective `Dockerfile` links
 
 * [`3-ol-7`, `3.1.9-ol-7-r9` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.9-ol-7-r9/3/ol-7/Dockerfile)
-* [`3-debian-8`, `3.1.9-debian-8-r9`, `3`, `3.1.9`, `3.1.9-r9`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.9-debian-8-r9/3/Dockerfile)
+* [`3-debian-8`, `3.1.9-debian-8-r10`, `3`, `3.1.9`, `3.1.9-r10`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.9-debian-8-r10/3/Dockerfile)
 * [`3-debian-9`, `0.0.0-debian-9-r0` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/0.0.0-debian-9-r0/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codeigniter GitHub repo](https://github.com/bitnami/bitnami-docker-codeigniter).
