@@ -7,7 +7,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 COPY --from=development /opt/bitnami/ruby /opt/bitnami/ruby
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.1.10-debian-8-r72" \
+    BITNAMI_IMAGE_VERSION="2.1.10-debian-8-r73" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 CMD ["irb"]
