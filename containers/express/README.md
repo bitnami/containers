@@ -23,8 +23,8 @@ $ docker-compose up
 # Supported tags and respective `Dockerfile` links
 
 * [`4-ol-7`, `4.16.3-ol-7-r8` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/4.16.3-ol-7-r8/4/ol-7/Dockerfile)
+* [`4-debian-9`, `4.16.3-debian-9-r0` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/4.16.3-debian-9-r0/4/debian-9/Dockerfile)
 * [`4-debian-8`, `4.16.3-debian-8-r0`, `4`, `4.16.3`, `4.16.3-r0`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/4.16.3-debian-8-r0/4/Dockerfile)
-* [`4-debian-9`, `0.0.0-debian-9-r0` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/0.0.0-debian-9-r0/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-codiad).
 
