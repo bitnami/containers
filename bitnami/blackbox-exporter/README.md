@@ -22,7 +22,7 @@ $ docker run --name blackbox-exporter bitnami/blackbox-exporter:latest
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0-ol-7`, `0.12.0-ol-7-r15` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.12.0-ol-7-r15/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.12.0-ol-7-r16` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.12.0-ol-7-r16/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.12.0-debian-9-r0` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.12.0-debian-9-r0/0/debian-9/Dockerfile)
 * [`0-debian-8`, `0.12.0-debian-8-r68`, `0`, `0.12.0`, `0.12.0-r68`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.12.0-debian-8-r68/0/Dockerfile)
 
