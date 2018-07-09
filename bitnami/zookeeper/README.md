@@ -36,7 +36,7 @@ services:
 
 * [`3-ol-7`, `3.4.12-ol-7-r15` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-ol-7-r15/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.4.12-debian-9-r2` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-debian-9-r2/3/debian-9/Dockerfile)
-* [`3-debian-8`, `3.4.12-debian-8-r44`, `3`, `3.4.12`, `3.4.12-r44`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-debian-8-r44/3/Dockerfile)
+* [`3-debian-8`, `3.4.12-debian-8-r45`, `3`, `3.4.12`, `3.4.12-r45`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-debian-8-r45/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
