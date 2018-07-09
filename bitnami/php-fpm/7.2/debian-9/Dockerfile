@@ -11,8 +11,8 @@ RUN mkdir -p /bitnami && ln -sf /bitnami/php /bitnami/php-fpm
 RUN mkdir /opt/bitnami/php/logs && touch /opt/bitnami/php/logs/php-fpm.log
 
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="7.2.7-debian-9-r3" \
-    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH"
+    BITNAMI_IMAGE_VERSION="7.2.7-debian-9-r4" \
+    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/php/sbin:$PATH"
 
 EXPOSE 9000
 
