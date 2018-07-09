@@ -20,7 +20,7 @@ User Broker is part of the Service Catalog that installs into a Kubernetes clust
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0-ol-7`, `0.1.23-ol-7-r8` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.1.23-ol-7-r8/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.1.23-ol-7-r9` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.1.23-ol-7-r9/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.1.23-debian-9-r0` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.1.23-debian-9-r0/0/debian-9/Dockerfile)
 * [`0-debian-8`, `0.1.23-debian-8-r8`, `0`, `0.1.23`, `0.1.23-r8`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.1.23-debian-8-r8/0/Dockerfile)
 
