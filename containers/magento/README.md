@@ -26,7 +26,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`2-ol-7`, `2.2.5-ol-7-r9` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.2.5-ol-7-r9/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.2.5-debian-9-r0` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.2.5-debian-9-r0/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.2.5-debian-9-r1` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.2.5-debian-9-r1/2/debian-9/Dockerfile)
 * [`2-debian-8`, `2.2.5-debian-8-r0`, `2`, `2.2.5`, `2.2.5-r0`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.2.5-debian-8-r0/2/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
