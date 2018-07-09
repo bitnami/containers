@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  tensorflow-serving:
+    image: 'bitnami/tensorflow-serving:0'
+    ports:
+      - '9000:9000'
+    volumes:
+      - 'tensorflow_serving_data:/bitnami'
+      - '/tmp/model-data:/bitnami/model-data'
+volumes:
+  tensorflow_serving_data:
+    driver: local
