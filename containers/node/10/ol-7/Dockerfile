@@ -1,17 +1,18 @@
-FROM bitnami/oraclelinux-extras:7-r28
+FROM bitnami/oraclelinux-runtimes:7-r0
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages build-essential bzip2-libs ca-certificates curl git glibc keyutils-libs krb5-libs libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre pkg-config readline sqlite unzip wget zlib
-RUN bitnami-pkg install node-10.6.0-0 --checksum 4d348fe2a4882049c91403517d09d834e6dc1cfb1e919d2a3d20bd83efe29122
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-10.6.0-0-linux-x86_64-ol-7.tar.gz && \
+    echo "4d348fe2a4882049c91403517d09d834e6dc1cfb1e919d2a3d20bd83efe29122  /tmp/bitnami/pkg/cache/node-10.6.0-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/node-10.6.0-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/node-10.6.0-0-linux-x86_64-ol-7.tar.gz
 
-COPY rootfs /
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="10.6.0-ol-7-r3" \
+    BITNAMI_IMAGE_VERSION="10.6.0-ol-7-r4" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 3000
 
 WORKDIR /app
-ENTRYPOINT ["/app-entrypoint.sh"]
 CMD ["node"]
