@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r70
+FROM bitnami/minideb-extras:stretch-r71
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack mysql-8.0.11-0 --checksum 10087cd0218c8b5ffa9be1dc7f5ad77
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="8.0.11-debian-9-r2" \
+    BITNAMI_IMAGE_VERSION="8.0.11-debian-9-r3" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
