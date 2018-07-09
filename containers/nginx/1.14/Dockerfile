@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r95
+FROM bitnami/minideb-extras:jessie-r97
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,9 +14,9 @@ RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.14.0-r63" \
-    NGINX_DAEMON_GROUP="" \
-    NGINX_DAEMON_USER="" \
+    BITNAMI_IMAGE_VERSION="1.14.0-debian-8-r64" \
+    NGINX_DAEMON_GROUP="nginx" \
+    NGINX_DAEMON_USER="nginx" \
     NGINX_HTTPS_PORT_NUMBER="8443" \
     NGINX_HTTP_PORT_NUMBER="8080" \
     PATH="/opt/bitnami/nginx/sbin:$PATH"
