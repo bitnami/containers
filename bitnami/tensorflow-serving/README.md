@@ -70,7 +70,7 @@ services:
   tensorflow-serving:
     image: 'bitnami/tensorflow-serving:latest'
     ports:
-      - '9000:9000'
+      - '8500:8500'
     volumes:
       - /path/to/tensorflow-serving-persistence:/bitnami
 ```
@@ -119,7 +119,7 @@ Finally we create a new container instance to launch the TensorFlow Serving clie
 $ docker run -it --rm \
     --volume /tmp/model-data:/bitnami/model-data
     --network app-tier \
-    bitnami/tensorflow-inception:latest inception_client --server=tensorflow-serving:9000 --image=path/to/image.jpg
+    bitnami/tensorflow-inception:latest inception_client --server=tensorflow-serving:8500 --image=path/to/image.jpg
 ```
 
 ## Using Docker Compose
@@ -178,7 +178,8 @@ services:
   tensorflow-serving:
     image: 'bitnami/tensorflow-serving:latest'
     ports:
-      - '9000:9000'
+      - '8500:8500'
+      - '8501:8501'
     volumes:
       - /path/to/tensorflow-serving-persistence:/bitnami
 ```
@@ -285,6 +286,12 @@ or using Docker Compose:
 ```bash
 $ docker-compose start tensorflow-serving
 ```
+
+# Notable Changes
+
+## 1.8.0-r12, 1.8.0-debian-9-r1, 1.8.0-ol-7-r11
+
+- The default serving port has changed from 9000 to 8500.
 
 # Contributing
 
