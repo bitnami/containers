@@ -27,7 +27,7 @@ $ docker-compose up -d
 
 * [`2-ol-7`, `2.12.0-ol-7-r15` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.12.0-ol-7-r15/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.12.0-debian-9-r0` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.12.0-debian-9-r0/2/debian-9/Dockerfile)
-* [`2-debian-8`, `2.12.0-debian-8-r68`, `2`, `2.12.0`, `2.12.0-r68`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.12.0-debian-8-r68/2/Dockerfile)
+* [`2-debian-8`, `2.12.0-debian-8-r69`, `2`, `2.12.0`, `2.12.0-r69`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.12.0-debian-8-r69/2/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
