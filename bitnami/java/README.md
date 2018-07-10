@@ -27,7 +27,7 @@ $ docker-compose up -d
 
  - [`1.8`, `1.8.171-ol-7-r17` (1.8/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-ol-7-r17/1.8/Dockerfile), [`1.8-prod`, `1.8.171-ol-7-r17-prod` (1.8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-ol-7-r17/1.8/prod/Dockerfile)
  - [`1.8`, `1.8.171-debian-9-r3` (1.8/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-debian-9-r3/1.8/Dockerfile), [`1.8-prod`, `1.8.171-debian-9-r3-prod` (1.8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-debian-9-r3/1.8/prod/Dockerfile)
- - [`1.8`, `1.8.171-debian-8-r72` (1.8/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-debian-8-r72/1.8/Dockerfile), [`1.8-prod`, `1.8.171-debian-8-r72-prod` (1.8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-debian-8-r72/1.8/prod/Dockerfile)
+ - [`1.8`, `1.8.171-debian-8-r73` (1.8/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-debian-8-r73/1.8/Dockerfile), [`1.8-prod`, `1.8.171-debian-8-r73-prod` (1.8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.171-debian-8-r73/1.8/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
 
