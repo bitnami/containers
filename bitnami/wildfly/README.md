@@ -30,7 +30,7 @@ $ docker-compose up -d
 * [`13-ol-7`, `13.0.0-ol-7-r16` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/13.0.0-ol-7-r16/13/ol-7/Dockerfile)
 * [`13-debian-9`, `13.0.0-debian-9-r2` (13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/13.0.0-debian-9-r2/13/debian-9/Dockerfile)
 * [`13-debian-8`, `13.0.0-debian-8-r20`, `13`, `13.0.0`, `13.0.0-r20`, `latest` (13/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/13.0.0-debian-8-r20/13/Dockerfile)
-* [`12-ol-7`, `12.0.0-ol-7-r15` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/12.0.0-ol-7-r15/12/ol-7/Dockerfile)
+* [`12-ol-7`, `12.0.0-ol-7-r16` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/12.0.0-ol-7-r16/12/ol-7/Dockerfile)
 * [`12-debian-9`, `12.0.0-debian-9-r1` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/12.0.0-debian-9-r1/12/debian-9/Dockerfile)
 * [`12-debian-8`, `12.0.0-debian-8-r59`, `12`, `12.0.0`, `12.0.0-r59` (12/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/12.0.0-debian-8-r59/12/Dockerfile)
 
