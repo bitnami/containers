@@ -27,7 +27,7 @@ $ docker-compose up -d
 
 * [`2-ol-7`, `2.121.1-ol-7-r17` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.121.1-ol-7-r17/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.121.1-debian-9-r4` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.121.1-debian-9-r4/2/debian-9/Dockerfile)
-* [`2-debian-8`, `2.121.1-debian-8-r27`, `2`, `2.121.1`, `2.121.1-r27`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.121.1-debian-8-r27/2/Dockerfile)
+* [`2-debian-8`, `2.121.1-debian-8-r28`, `2`, `2.121.1`, `2.121.1-r28`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.121.1-debian-8-r28/2/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
 
