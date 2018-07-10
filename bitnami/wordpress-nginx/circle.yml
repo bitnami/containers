@@ -14,8 +14,6 @@ jobs:
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami
           AZURE_PROJECT: bitnami
-          CHART_NAME:
-          CHART_REPO:
 
     steps:
       - checkout
