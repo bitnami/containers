@@ -27,7 +27,7 @@ $ docker-compose up
 
 * [`1-ol-7`, `1.5.11-ol-7-r14` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-ol-7-r14/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.5.11-debian-9-r0` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-9-r0/1/debian-9/Dockerfile)
-* [`1-debian-8`, `1.5.11-debian-8-r60`, `1`, `1.5.11`, `1.5.11-r60`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-8-r60/1/Dockerfile)
+* [`1-debian-8`, `1.5.11-debian-8-r61`, `1`, `1.5.11`, `1.5.11-r61`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-8-r61/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
 
