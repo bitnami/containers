@@ -7,12 +7,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages glib2 glibc libblkid libffi libgcc libmount libselinux libstdc++ libuuid pcre zlib
 RUN bitnami-pkg install java-1.8.171-3 --checksum eb0af616b0a3ab12bd8559a36e83246eb10e7893f6a654dc14a462246d433e40
-RUN bitnami-pkg unpack kafka-1.1.0-5 --checksum 8fa8d18dc828819869e36dd282530a6ce8224a3d7f06a40e424f85a226b9f7cc
+RUN bitnami-pkg unpack kafka-1.1.0-6 --checksum 130336c5fde1e92b8fc01bf992fc9829ab20de543e1c5c01bc13b0e2f46b41bc
 
 COPY rootfs /
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="1.1.0-ol-7-r19" \
+    BITNAMI_IMAGE_VERSION="1.1.0-ol-7-r20" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_BROKER_ID="-1" \
     KAFKA_BROKER_PASSWORD="bitnami" \
@@ -30,6 +30,7 @@ ENV ALLOW_PLAINTEXT_LISTENER="no" \
     KAFKA_LOG_RETENTION_BYTES="1073741824" \
     KAFKA_LOG_RETENTION_CHECK_INTERVALS_MS="300000" \
     KAFKA_LOG_RETENTION_HOURS="168" \
+    KAFKA_MAX_MESSAGE_BYTES="1000012" \
     KAFKA_NUM_IO_THREADS="8" \
     KAFKA_NUM_NETWORK_THREADS="3" \
     KAFKA_NUM_PARTITIONS="1" \
