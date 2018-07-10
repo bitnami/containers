@@ -37,8 +37,8 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`1-ol-7`, `1.2.0-ol-7-r6` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.2.0-ol-7-r6/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.2.0-debian-9-r3` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.2.0-debian-9-r3/1/debian-9/Dockerfile)
-* [`1-debian-8`, `1.2.0-debian-8-r5`, `1`, `1.2.0`, `1.2.0-r5`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.2.0-debian-8-r5/1/Dockerfile)
+* [`1-debian-9`, `1.2.0-debian-9-r4`, `1`, `1.2.0`, `1.2.0-r4`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.2.0-debian-9-r4/1/Dockerfile)
+* [`1-debian-8`, `1.2.0-debian-8-r5` (1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.2.0-debian-8-r5/1/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/consul GitHub repo](https://github.com/bitnami/bitnami-docker-consul).
 
@@ -283,6 +283,7 @@ When you start the Consul image, you can adjust the configuration of the instanc
 - `CONSUL_RPC_PORT_NUMBER`: Server RPC port. Default: **8300**.
 - `CONSUL_RAFT_MULTIPLIER`: An integer multiplier used by Consul servers to scale key Raft timing parameters. Default: **1**.
 - `CONSUL_LOCAL_CONFIG`: Custom user configuration that will be added as a file in the config dir.
+- `CONSUL_GOSSIP_ENCRYPTION`: Enable Gossip encryption. Default: **no**.
 - `CONSUL_GOSSIP_ENCRYPTION_KEY`: Gossip private simmetric key.
 - `CONSUL_DISABLE_KEYRING_FILE`: If set, the keyring will not be persisted to a file. Valid vaules: true, false. Default: **false**.
 - `CONSUL_UI`: Enable web user interface. Valid values: true, false. Default: **true**.
