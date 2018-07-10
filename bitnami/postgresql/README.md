@@ -27,7 +27,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`10-ol-7`, `10.4.0-ol-7-r16` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-ol-7-r16/10/ol-7/Dockerfile)
+* [`10-ol-7`, `10.4.0-ol-7-r17` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-ol-7-r17/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.4.0-debian-9-r4` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-debian-9-r4/10/debian-9/Dockerfile)
 * [`10-debian-8`, `10.4.0-debian-8-r33`, `10`, `10.4.0`, `10.4.0-r33`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-debian-8-r33/10/Dockerfile)
 * [`9.6-ol-7`, `9.6.9-ol-7-r15` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-ol-7-r15/9.6/ol-7/Dockerfile)
