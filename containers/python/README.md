@@ -31,7 +31,7 @@ $ docker-compose up -d
 
 * [`3-ol-7`, `3.6.5-ol-7-r17` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-ol-7-r17/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.6.5-debian-9-r4` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-debian-9-r4/3/debian-9/Dockerfile)
-* [`3-debian-8`, `3.6.5-debian-8-r65`, `3`, `3.6.5`, `3.6.5-r65`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-debian-8-r65/3/Dockerfile)
+* [`3-debian-8`, `3.6.5-debian-8-r66`, `3`, `3.6.5`, `3.6.5-r66`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-debian-8-r66/3/Dockerfile)
 * [`2-ol-7`, `2.7.15-ol-7-r18` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-ol-7-r18/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.7.15-debian-9-r4` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-debian-9-r4/2/debian-9/Dockerfile)
 * [`2-debian-8`, `2.7.15-debian-8-r57`, `2`, `2.7.15`, `2.7.15-r57` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-debian-8-r57/2/Dockerfile)
