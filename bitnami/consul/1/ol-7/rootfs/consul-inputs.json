@@ -5,6 +5,7 @@
   "disableKeyringFile": "{{$global.env.CONSUL_DISABLE_KEYRING_FILE}}",
   "dnsPort": "{{$global.env.CONSUL_DNS_PORT_NUMBER}}",
   "domain": "{{$global.env.CONSUL_DOMAIN}}",
+  "gossipEncryption": "{{$global.env.CONSUL_GOSSIP_ENCRYPTION}}",
   "gossipEncryptionKey": "{{$global.env.CONSUL_GOSSIP_ENCRYPTION_KEY}}",
   "httpPort": "{{$global.env.CONSUL_HTTP_PORT_NUMBER}}",
   "localConfig": "{{$global.env.CONSUL_LOCAL_CONFIG}}",
