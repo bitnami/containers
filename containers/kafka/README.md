@@ -41,8 +41,8 @@ services:
 # Supported tags and respective `Dockerfile` links
 
 * [`1-ol-7`, `1.1.0-ol-7-r19` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-ol-7-r19/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.1.0-debian-9-r4` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-debian-9-r4/1/debian-9/Dockerfile)
-* [`1-debian-8`, `1.1.0-debian-8-r60`, `1`, `1.1.0`, `1.1.0-r60`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-debian-8-r60/1/Dockerfile)
+* [`1-debian-9`, `1.1.0-debian-9-r5` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-debian-9-r5/1/debian-9/Dockerfile)
+* [`1-debian-8`, `1.1.0-debian-8-r59`, `1`, `1.1.0`, `1.1.0-r59`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-debian-8-r59/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -200,6 +200,7 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 - `KAFKA_ADVERTISED_LISTENERS`: Hostname and port the broker will advertise to producers and consumers. Default: **PLAINTEXT://:9092**
 - `KAFKA_NUM_PARTITIONS`: The default number of log partitions per topic. Default: **1**
 - `KAFKA_NUM_RECOVERY_THREADS_PER_DATA_DIR` The number of threads per data directory to be used for log recovery at startup and flushing at shutdown. Default: **1**
+- `KAFKA_MAX_MESSAGE_BYTES`: The largest record batch size allowed by Kafka. Default: **1000012**
 - `KAFKA_LOG_FLUSH_INTERVAL_MESSAGES`: The number of messages to accept before forcing a flush of data to disk. Default: **10000**
 - `KAFKA_LOG_FLUSH_INTERVAL_MS`: The maximum amount of time a message can sit in a log before we force a flush. Default: **1000**
 - `KAFKA_LOG_RETENTION_HOURS`: The minimum age of a log file to be eligible for deletion due to age. Default: **168**
