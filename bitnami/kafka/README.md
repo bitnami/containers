@@ -40,7 +40,7 @@ services:
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1-ol-7`, `1.1.0-ol-7-r18` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-ol-7-r18/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.1.0-ol-7-r19` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-ol-7-r19/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.1.0-debian-9-r4` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-debian-9-r4/1/debian-9/Dockerfile)
 * [`1-debian-8`, `1.1.0-debian-8-r59`, `1`, `1.1.0`, `1.1.0-r59`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-debian-8-r59/1/Dockerfile)
 
