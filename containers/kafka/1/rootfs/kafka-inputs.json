@@ -18,6 +18,7 @@
   "kafkaLogRetentionHours": "{{$global.env.KAFKA_LOG_RETENTION_HOURS}}",
   "kafkaLogSegmentBytes": "{{$global.env.KAFKA_SEGMENT_BYTES}}",
   "kafkaLogsDirs": "{{$global.env.KAFKA_LOGS_DIRS}}",
+  "kafkaMaxMessageBytes": "{{$global.env.KAFKA_MAX_MESSAGE_BYTES}}",
   "kafkaNumIoThreads": "{{$global.env.KAFKA_NUM_IO_THREADS}}",
   "kafkaNumNetworkThreads": "{{$global.env.KAFKA_NUM_NETWORK_THREADS}}",
   "kafkaNumPartitions": "{{$global.env.KAFKA_NUM_PARTITIONS}}",
