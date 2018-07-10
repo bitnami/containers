@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r97
+FROM bitnami/minideb-extras:jessie-r98
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack rabbitmq-3.7.7-0 --checksum 2e948e2c09c1c434513c3f15b3df4
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.7.7-debian-8-r3" \
+    BITNAMI_IMAGE_VERSION="3.7.7-debian-8-r4" \
     PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:/opt/bitnami/rabbitmq/sbin:$PATH" \
     RABBITMQ_CLUSTER_NODE_NAME="" \
     RABBITMQ_CLUSTER_PARTITION_HANDLING="ignore" \
