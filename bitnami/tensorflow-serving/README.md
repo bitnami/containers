@@ -33,8 +33,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1-ol-7`, `1.8.0-ol-7-r11` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.8.0-ol-7-r11/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.8.0-debian-9-r2` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.8.0-debian-9-r2/1/debian-9/Dockerfile)
+* [`1-ol-7`, `1.8.0-ol-7-r12` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.8.0-ol-7-r12/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.8.0-debian-9-r1` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.8.0-debian-9-r1/1/debian-9/Dockerfile)
 * [`1-debian-8`, `1.8.0-debian-8-r12`, `1`, `1.8.0`, `1.8.0-r12`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.8.0-debian-8-r12/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-serving).
