@@ -3,11 +3,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libstdc++6
-RUN bitnami-pkg unpack tensorflow-serving-1.8.0-1 --checksum ea7753acf01bac9983c73130445daef07b21d1ffc261e32fb47e03b910de6317
+RUN bitnami-pkg unpack tensorflow-serving-1.9.0-0 --checksum f662f30baab22110940d24708c4de86d62f33214fcbb4125e06bc2fd094fa25d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="1.8.0-debian-8-r14" \
+    BITNAMI_IMAGE_VERSION="1.9.0-debian-8-r0" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_MODEL_NAME="inception" \
     TENSORFLOW_SERVING_PORT_NUMBER="8500" \
