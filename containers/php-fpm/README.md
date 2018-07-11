@@ -31,20 +31,20 @@ $ docker-compose up -d
 
 * [`7.2-rhel-7`, `7.2.7-rhel-7-r1` (7.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.7-rhel-7-r1/7.2/rhel-7/Dockerfile)
 * [`7.2-ol-7`, `7.2.7-ol-7-r16` (7.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.7-ol-7-r16/7.2/ol-7/Dockerfile)
-* [`7.2-debian-9`, `7.2.7-debian-9-r6` (7.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.7-debian-9-r6/7.2/debian-9/Dockerfile)
-* [`7.2-debian-8`, `7.2.7-debian-8-r19`, `7.2`, `7.2.7`, `7.2.7-r19` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.7-debian-8-r19/7.2/Dockerfile)
+* [`7.2-debian-9`, `7.2.7-debian-9-r7`, `7.2`, `7.2.7`, `7.2.7-r7` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.7-debian-9-r7/7.2/Dockerfile)
+* [`7.2-debian-8`, `7.2.7-debian-8-r19` (7.2/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.7-debian-8-r19/7.2/debian-8/Dockerfile)
 * [`7.1-rhel-7`, `7.1.19-rhel-7-r2` (7.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.19-rhel-7-r2/7.1/rhel-7/Dockerfile)
 * [`7.1-ol-7`, `7.1.19-ol-7-r17` (7.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.19-ol-7-r17/7.1/ol-7/Dockerfile)
-* [`7.1-debian-9`, `7.1.19-debian-9-r6` (7.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.19-debian-9-r6/7.1/debian-9/Dockerfile)
-* [`7.1-debian-8`, `7.1.19-debian-8-r14`, `7.1`, `7.1.19`, `7.1.19-r14`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.19-debian-8-r14/7.1/Dockerfile)
+* [`7.1-debian-9`, `7.1.19-debian-9-r6`, `7.1`, `7.1.19`, `7.1.19-r6`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.19-debian-9-r6/7.1/Dockerfile)
+* [`7.1-debian-8`, `7.1.19-debian-8-r14` (7.1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.19-debian-8-r14/7.1/debian-8/Dockerfile)
 * [`7.0-rhel-7`, `7.0.30-rhel-7-r5` (7.0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.30-rhel-7-r5/7.0/rhel-7/Dockerfile)
 * [`7.0-ol-7`, `7.0.30-ol-7-r24` (7.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.30-ol-7-r24/7.0/ol-7/Dockerfile)
-* [`7.0-debian-9`, `7.0.30-debian-9-r6` (7.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.30-debian-9-r6/7.0/debian-9/Dockerfile)
-* [`7.0-debian-8`, `7.0.30-debian-8-r71`, `7.0`, `7.0.30`, `7.0.30-r71` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.30-debian-8-r71/7.0/Dockerfile)
+* [`7.0-debian-9`, `7.0.30-debian-9-r6`, `7.0`, `7.0.30`, `7.0.30-r6` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.30-debian-9-r6/7.0/Dockerfile)
+* [`7.0-debian-8`, `7.0.30-debian-8-r71` (7.0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.30-debian-8-r71/7.0/debian-8/Dockerfile)
 * [`5.6-rhel-7`, `5.6.36-rhel-7-r5` (5.6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-rhel-7-r5/5.6/rhel-7/Dockerfile)
 * [`5.6-ol-7`, `5.6.36-ol-7-r23` (5.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-ol-7-r23/5.6/ol-7/Dockerfile)
-* [`5.6-debian-9`, `5.6.36-debian-9-r7` (5.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-debian-9-r7/5.6/debian-9/Dockerfile)
-* [`5.6-debian-8`, `5.6.36-debian-8-r70`, `5.6`, `5.6.36`, `5.6.36-r70` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-debian-8-r70/5.6/Dockerfile)
+* [`5.6-debian-9`, `5.6.36-debian-9-r7`, `5.6`, `5.6.36`, `5.6.36-r7` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-debian-9-r7/5.6/Dockerfile)
+* [`5.6-debian-8`, `5.6.36-debian-8-r70` (5.6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-debian-8-r70/5.6/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
 
