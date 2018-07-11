@@ -24,8 +24,8 @@ In order to use the charts in this repository, you must have the following compo
 # Supported tags and respective `Dockerfile` links
 
 * [`0-ol-7`, `0.12.0-ol-7-r16` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-ol-7-r16/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.12.0-debian-9-r2` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-debian-9-r2/0/debian-9/Dockerfile)
-* [`0-debian-8`, `0.12.0-debian-8-r21`, `0`, `0.12.0`, `0.12.0-r21`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-debian-8-r21/0/Dockerfile)
+* [`0-debian-9`, `0.12.0-debian-9-r2`, `0`, `0.12.0`, `0.12.0-r2`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-debian-9-r2/0/Dockerfile)
+* [`0-debian-8`, `0.12.0-debian-8-r22` (0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-debian-8-r22/0/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/open-service-broker-azure GitHub repo](https://github.com/bitnami/bitnami-docker-open-service-broker-azure).
 
