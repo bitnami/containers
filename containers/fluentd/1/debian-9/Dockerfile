@@ -1,10 +1,10 @@
 FROM bitnami/ruby:latest-prod as buildenv
 
 RUN install_packages ca-certificates libc6 libgcc1 libstdc++6 wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluentd-1.2.2-2-linux-amd64-debian-9.tar.gz && \
-    echo "3915b2b8d4c73de2de50a747755b0c9952824b8794ab99a2e4e6aada3a7da207  /tmp/bitnami/pkg/cache/fluentd-1.2.2-2-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/fluentd-1.2.2-2-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/fluentd-1.2.2-2-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluentd-1.2.3-0-linux-amd64-debian-9.tar.gz && \
+    echo "c2818ccfc89f6824643ead61da721c7affe7a5240c704862ce0e53b845b77188  /tmp/bitnami/pkg/cache/fluentd-1.2.3-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/fluentd-1.2.3-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/fluentd-1.2.3-0-linux-amd64-debian-9.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/fluentd /opt/bitnami/fluentd
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.2.2-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="1.2.3-debian-9-r0" \
     FLUENTD_CONF="fluentd.conf" \
     FLUENTD_OPT="" \
     GEM_HOME="/opt/bitnami/fluentd" \
