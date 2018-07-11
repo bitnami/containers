@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r98
+FROM bitnami/minideb-extras:jessie-r100
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack kibana-5.6.10-0 --checksum fc616e812d81badd767a1b244ac82f
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="5.6.10-debian-8-r24" \
+    BITNAMI_IMAGE_VERSION="5.6.10-debian-8-r25" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
