@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r96
+FROM bitnami/minideb-extras:jessie-r100
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,14 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.33-4 --checksum f26751a96abdc45db43c4b92eb9f79
 RUN bitnami-pkg unpack php-7.0.30-8 --checksum c9bcf8d4c9c280645e44de07ae4a0e8d436333688094d5587b4b0766036cff8a
 RUN bitnami-pkg unpack mysql-client-10.1.34-0 --checksum 2954d9390cb8b91dc924beacc179ed03050f6c5cb7ad328010cdbde1ab05c1e9
 RUN bitnami-pkg install libphp-7.0.30-8 --checksum 0fb74a5477bdf72ee85751af91ee2e41beec5b18657a9891d7081a3e2ce7289e
-RUN bitnami-pkg unpack prestashop-1.7.3-4-0 --checksum b281a7201f8a03a701dcd56d80546feeeb953bbf90dea513b97519ad3b6483c7
+RUN bitnami-pkg unpack prestashop-1.7.4-0-0 --checksum 5cf1822ca07a26a7bf8f99bdc7b5d25b5697b514e10a53c6ccf8d09e0e939f19
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.3-4-debian-8-r4" \
+    BITNAMI_IMAGE_VERSION="1.7.4-0-debian-8-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -23,7 +23,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
     MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES="ALL" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
-    PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/mysql/bin:/opt/bitnami/prestashop/bin:$PATH" \
+    PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/prestashop/bin:$PATH" \
     PRESTASHOP_COOKIE_CHECK_IP="yes" \
     PRESTASHOP_DATABASE_NAME="bitnami_prestashop" \
     PRESTASHOP_DATABASE_PASSWORD="" \
