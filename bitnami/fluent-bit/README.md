@@ -24,8 +24,8 @@ $ docker run --name fluent-bit bitnami/fluent-bit:latest
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0-debian-9`, `0.13.4-debian-9-r2` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.4-debian-9-r2/0/debian-9/Dockerfile)
-* [`0-debian-8`, `0.13.4-debian-8-r23`, `0`, `0.13.4`, `0.13.4-r23`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.4-debian-8-r23/0/Dockerfile)
+* [`0-debian-9`, `0.13.4-debian-9-r2`, `0`, `0.13.4`, `0.13.4-r2`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.4-debian-9-r2/0/Dockerfile)
+* [`0-debian-8`, `0.13.4-debian-8-r24` (0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.4-debian-8-r24/0/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluent-bit GitHub repo](https://github.com/bitnami/bitnami-docker-fluent-bit).
 
