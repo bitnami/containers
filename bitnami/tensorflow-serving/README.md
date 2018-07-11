@@ -34,8 +34,8 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`1-ol-7`, `1.9.0-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.9.0-ol-7-r0/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.9.0-debian-9-r0`, `1`, `1.9.0`, `1.9.0-r0`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.9.0-debian-9-r0/1/Dockerfile)
 * [`1-debian-8`, `1.9.0-debian-8-r0` (1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.9.0-debian-8-r0/1/debian-8/Dockerfile)
-* [`1-debian-9`, `1.8.0-debian-9-r3`, `1`, `1.8.0`, `1.8.0-r3`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.8.0-debian-9-r3/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-serving GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-serving).
 
