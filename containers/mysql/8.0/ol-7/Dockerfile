@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r30
+FROM bitnami/oraclelinux-extras:7-r32
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack mysql-8.0.11-0 --checksum b6fbece5dd896e119a7f524c5ddcbda
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="8.0.11-ol-7-r14" \
+    BITNAMI_IMAGE_VERSION="8.0.11-ol-7-r15" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
