@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/python-3.6.5-0-linux-x64-debian-8.tar.gz
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="3.6.5-debian-8-r66" \
+    BITNAMI_IMAGE_VERSION="3.6.5-debian-8-r67" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8000
