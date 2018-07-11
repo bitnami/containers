@@ -26,7 +26,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`3-ol-7`, `3.8.10-ol-7-r12` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.10-ol-7-r12/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.8.10-debian-9-r2`, `3`, `3.8.10`, `3.8.10-r2`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.10-debian-9-r2/3/Dockerfile)
+* [`3-debian-9`, `3.8.10-debian-9-r3`, `3`, `3.8.10`, `3.8.10-r3`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.10-debian-9-r3/3/Dockerfile)
 * [`3-debian-8`, `3.8.10-debian-8-r8` (3/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.10-debian-8-r8/3/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
