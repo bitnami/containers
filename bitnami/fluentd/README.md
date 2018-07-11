@@ -21,7 +21,7 @@ $ docker run --name fluentd bitnami/fluentd:latest
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1-ol-7`, `1.2.2-ol-7-r21` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.2.2-ol-7-r21/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.2.3-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.2.3-ol-7-r0/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.2.2-debian-9-r1`, `1`, `1.2.2`, `1.2.2-r1`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.2.2-debian-9-r1/1/Dockerfile)
 * [`1-debian-8`, `1.2.2-debian-8-r30` (1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.2.2-debian-8-r30/1/debian-8/Dockerfile)
 
