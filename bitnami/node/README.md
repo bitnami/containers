@@ -30,20 +30,20 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`10-ol-7`, `10.6.0-ol-7-r7` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-ol-7-r7/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.6.0-debian-9-r5` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-debian-9-r5/10/debian-9/Dockerfile)
-* [`10-debian-8`, `10.6.0-debian-8-r4`, `10`, `10.6.0`, `10.6.0-r4` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-debian-8-r4/10/Dockerfile)
+* [`10-debian-9`, `10.6.0-debian-9-r6`, `10`, `10.6.0`, `10.6.0-r6` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-debian-9-r6/10/Dockerfile)
+* [`10-debian-8`, `10.6.0-debian-8-r4` (10/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-debian-8-r4/10/debian-8/Dockerfile)
 * [`9-ol-7`, `9.11.2-ol-7-r20` (9/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-ol-7-r20/9/ol-7/Dockerfile)
-* [`9-debian-9`, `9.11.2-debian-9-r5` (9/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-debian-9-r5/9/debian-9/Dockerfile)
-* [`9-debian-8`, `9.11.2-debian-8-r3`, `9`, `9.11.2`, `9.11.2-r3` (9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-debian-8-r3/9/Dockerfile)
+* [`9-debian-9`, `9.11.2-debian-9-r5`, `9`, `9.11.2`, `9.11.2-r5` (9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-debian-9-r5/9/Dockerfile)
+* [`9-debian-8`, `9.11.2-debian-8-r3` (9/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-debian-8-r3/9/debian-8/Dockerfile)
 * [`8-ol-7`, `8.11.3-ol-7-r21` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.3-ol-7-r21/8/ol-7/Dockerfile)
-* [`8-debian-9`, `8.11.3-debian-9-r5` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.3-debian-9-r5/8/debian-9/Dockerfile)
-* [`8-debian-8`, `8.11.3-debian-8-r21`, `8`, `8.11.3`, `8.11.3-r21` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.3-debian-8-r21/8/Dockerfile)
+* [`8-debian-9`, `8.11.3-debian-9-r5`, `8`, `8.11.3`, `8.11.3-r5` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.3-debian-9-r5/8/Dockerfile)
+* [`8-debian-8`, `8.11.3-debian-8-r21` (8/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.3-debian-8-r21/8/debian-8/Dockerfile)
 * [`7-ol-7`, `7.10.1-ol-7-r20` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-ol-7-r20/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.10.1-debian-9-r5` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-debian-9-r5/7/debian-9/Dockerfile)
-* [`7-debian-8`, `7.10.1-debian-8-r49`, `7`, `7.10.1`, `7.10.1-r49` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-debian-8-r49/7/Dockerfile)
+* [`7-debian-9`, `7.10.1-debian-9-r5`, `7`, `7.10.1`, `7.10.1-r5` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-debian-9-r5/7/Dockerfile)
+* [`7-debian-8`, `7.10.1-debian-8-r49` (7/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-debian-8-r49/7/debian-8/Dockerfile)
 * [`6-ol-7`, `6.14.3-ol-7-r20` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-ol-7-r20/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.14.3-debian-9-r7` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-debian-9-r7/6/debian-9/Dockerfile)
-* [`6-debian-8`, `6.14.3-debian-8-r23`, `6`, `6.14.3`, `6.14.3-r23`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-debian-8-r23/6/Dockerfile)
+* [`6-debian-9`, `6.14.3-debian-9-r7`, `6`, `6.14.3`, `6.14.3-r7`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-debian-9-r7/6/Dockerfile)
+* [`6-debian-8`, `6.14.3-debian-8-r23` (6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-debian-8-r23/6/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
