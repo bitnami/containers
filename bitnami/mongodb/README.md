@@ -27,7 +27,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`4-ol-7`, `4.0.0-ol-7-r3` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.0-ol-7-r3/4/ol-7/Dockerfile)
+* [`4-ol-7`, `4.0.0-ol-7-r4` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.0-ol-7-r4/4/ol-7/Dockerfile)
 * [`4-debian-9`, `4.0.0-debian-9-r5`, `4`, `4.0.0`, `4.0.0-r5` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.0-debian-9-r5/4/Dockerfile)
 * [`4-debian-8`, `4.0.0-debian-8-r3` (4/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.0-debian-8-r3/4/debian-8/Dockerfile)
 * [`3.6-ol-7`, `3.6.6-ol-7-r1` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-ol-7-r1/3.6/ol-7/Dockerfile)
