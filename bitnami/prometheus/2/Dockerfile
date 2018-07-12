@@ -1,10 +1,10 @@
 FROM bitnami/minideb:jessie as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.3.1-0-linux-x64-debian-8.tar.gz && \
-    echo "1fe691517752f9e4ba587bc9e9042488bf069fa3dfc2f0858e88309bfb420d33  /tmp/bitnami/pkg/cache/prometheus-2.3.1-0-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.3.1-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/prometheus-2.3.1-0-linux-x64-debian-8.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.3.2-0-linux-x64-debian-8.tar.gz && \
+    echo "4b75286b4e97470dc10ba2be5e7ca21334689ca284602f542b09d0bd1a3986e1  /tmp/bitnami/pkg/cache/prometheus-2.3.2-0-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.3.2-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/prometheus-2.3.2-0-linux-x64-debian-8.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/prometheus /opt/bitnami/prometheus
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.3.1-debian-8-r21" \
+    BITNAMI_IMAGE_VERSION="2.3.2-debian-8-r0" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
