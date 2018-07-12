@@ -4,11 +4,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 # Install required system packages and dependencies
 RUN install_packages glib2 glibc libblkid libffi libgcc libmount libselinux libstdc++ libuuid pcre zlib
 RUN bitnami-pkg install java-1.8.171-3 --checksum eb0af616b0a3ab12bd8559a36e83246eb10e7893f6a654dc14a462246d433e40
-RUN bitnami-pkg unpack elasticsearch-6.3.1-0 --checksum b3d591c044214adad1a2f4c68a3bd53de9014eec3ce326b9ebe25d4f50a65fca
+RUN bitnami-pkg unpack elasticsearch-6.3.1-1 --checksum 3a512e8e997078eeffad100a506d3821fb5f8a83658803adc17aee623f3fef83
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="6.3.1-ol-7-r5" \
+    BITNAMI_IMAGE_VERSION="6.3.1-ol-7-r6" \
     ELASTICSEARCH_BIND_ADDRESS="" \
     ELASTICSEARCH_CLUSTER_HOSTS="" \
     ELASTICSEARCH_CLUSTER_NAME="elasticsearch-cluster" \
