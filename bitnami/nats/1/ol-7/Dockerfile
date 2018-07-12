@@ -1,10 +1,10 @@
 FROM bitnami/oraclelinux-extras:7-r33 as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nats-1.2.0-1-linux-x86_64-ol-7.tar.gz && \
-    echo "12a765f31757be630471eae975d39be0bdf20d0f419326489e828f2be319b9ca  /tmp/bitnami/pkg/cache/nats-1.2.0-1-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/nats-1.2.0-1-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/nats-1.2.0-1-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nats-1.2.0-2-linux-x86_64-ol-7.tar.gz && \
+    echo "d4727501f523eafc33c8d61782efcf3a8ad42dd3dde1f540144d1785f538ce63  /tmp/bitnami/pkg/cache/nats-1.2.0-2-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/nats-1.2.0-2-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/nats-1.2.0-2-linux-x86_64-ol-7.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/nats /opt/bitnami/nats
 ENV BITNAMI_APP_NAME="nats" \
-    BITNAMI_IMAGE_VERSION="1.2.0-ol-7-r6" \
+    BITNAMI_IMAGE_VERSION="1.2.0-ol-7-r7" \
     PATH="/opt/bitnami/nats/bin:$PATH"
 
 RUN install_packages curl
