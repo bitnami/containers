@@ -31,7 +31,7 @@ $ docker-compose up -d
 
 * [`6-ol-7`, `6.3.1-ol-7-r5` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.1-ol-7-r5/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.3.1-debian-9-r6`, `6`, `6.3.1`, `6.3.1-r6`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.1-debian-9-r6/6/Dockerfile)
-* [`6-debian-8`, `6.3.1-debian-8-r5` (6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.1-debian-8-r5/6/debian-8/Dockerfile)
+* [`6-debian-8`, `6.3.1-debian-8-r6` (6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.1-debian-8-r6/6/debian-8/Dockerfile)
 * [`5-ol-7`, `5.6.4-ol-7-r17` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-ol-7-r17/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.6.4-debian-9-r5`, `5`, `5.6.4`, `5.6.4-r5` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-debian-9-r5/5/Dockerfile)
 * [`5-debian-8`, `5.6.4-debian-8-r69` (5/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-debian-8-r69/5/debian-8/Dockerfile)
