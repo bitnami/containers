@@ -44,7 +44,7 @@ $ docker-compose up -d
 * [`5.6-rhel-7`, `5.6.36-rhel-7-r5` (5.6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-rhel-7-r5/5.6/rhel-7/Dockerfile)
 * [`5.6-ol-7`, `5.6.36-ol-7-r24` (5.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-ol-7-r24/5.6/ol-7/Dockerfile)
 * [`5.6-debian-9`, `5.6.36-debian-9-r8`, `5.6`, `5.6.36`, `5.6.36-r8` (5.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-debian-9-r8/5.6/Dockerfile)
-* [`5.6-debian-8`, `5.6.36-debian-8-r71` (5.6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-debian-8-r71/5.6/debian-8/Dockerfile)
+* [`5.6-debian-8`, `5.6.36-debian-8-r72` (5.6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.36-debian-8-r72/5.6/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
 
