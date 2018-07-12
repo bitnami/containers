@@ -5,11 +5,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 RUN install_packages libbz2-1.0 libc6 libjemalloc1 libncurses5 libreadline6 libsqlite3-0 libssl1.0.0 libtinfo5 zlib1g
 RUN bitnami-pkg install python-2.7.15-1 --checksum f33b87516ede88fdea92c7e0409a80926eb4426d76637baf32e86a07879a845d
 RUN bitnami-pkg install java-1.8.171-3 --checksum 3454a0bda3a4fb282b6b9a7022677a48dc493df0e13cb04d3c92e070e102a244
-RUN bitnami-pkg unpack cassandra-3.11.2-4 --checksum ed18592e49fb1a03cf43722b8015fbaa53d0b7554e5d5e797cb138762afeb2a8
+RUN bitnami-pkg unpack cassandra-3.11.2-5 --checksum 9256ac471c83f68cbb42daed3bc47b3d3d6912da30beafa2143d88f10338a66c
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.2-debian-8-r76" \
+    BITNAMI_IMAGE_VERSION="3.11.2-debian-8-r77" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
     CASSANDRA_ENABLE_REMOTE_CONNECTIONS="true" \
