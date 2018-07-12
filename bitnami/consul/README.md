@@ -37,7 +37,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`1-ol-7`, `1.2.0-ol-7-r11` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.2.0-ol-7-r11/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.2.0-debian-9-r7`, `1`, `1.2.0`, `1.2.0-r7`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.2.0-debian-9-r7/1/Dockerfile)
+* [`1-debian-9`, `1.2.0-debian-9-r8`, `1`, `1.2.0`, `1.2.0-r8`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.2.0-debian-9-r8/1/Dockerfile)
 * [`1-debian-8`, `1.2.0-debian-8-r5` (1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.2.0-debian-8-r5/1/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/consul GitHub repo](https://github.com/bitnami/bitnami-docker-consul).
