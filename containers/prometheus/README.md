@@ -33,9 +33,9 @@ $ docker run --name prometheus bitnami/prometheus:latest
 
 # Supported tags and respective `Dockerfile` links
 
+* [`2-debian-8`, `2.3.2-debian-8-r0` (2/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.2-debian-8-r0/2/debian-8/Dockerfile)
 * [`2-ol-7`, `2.3.1-ol-7-r18` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.1-ol-7-r18/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.3.1-debian-9-r4`, `2`, `2.3.1`, `2.3.1-r4`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.1-debian-9-r4/2/Dockerfile)
-* [`2-debian-8`, `2.3.1-debian-8-r21` (2/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.1-debian-8-r21/2/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus).
 
