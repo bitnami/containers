@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 * [`10-ol-7`, `10.4.0-ol-7-r18` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-ol-7-r18/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.4.0-debian-9-r5`, `10`, `10.4.0`, `10.4.0-r5`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-debian-9-r5/10/Dockerfile)
-* [`10-debian-8`, `10.4.0-debian-8-r34` (10/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-debian-8-r34/10/debian-8/Dockerfile)
+* [`10-debian-8`, `10.4.0-debian-8-r35` (10/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-debian-8-r35/10/debian-8/Dockerfile)
 * [`9.6-ol-7`, `9.6.9-ol-7-r17` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-ol-7-r17/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.9-debian-9-r5`, `9.6`, `9.6.9`, `9.6.9-r5` (9.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-debian-9-r5/9.6/Dockerfile)
 * [`9.6-debian-8`, `9.6.9-debian-8-r34` (9.6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-debian-8-r34/9.6/debian-8/Dockerfile)
