@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r32 as buildenv
+FROM bitnami/oraclelinux-extras:7-r33 as buildenv
 
 RUN install_packages ca-certificates glibc wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/open-service-broker-azure-0.12.0-0-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r32
+FROM bitnami/oraclelinux-extras:7-r33
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/open-service-broker-azure /opt/bitnami/open-service-broker-azure
 ENV BITNAMI_APP_NAME="open-service-broker-azure" \
-    BITNAMI_IMAGE_VERSION="0.12.0-ol-7-r17" \
+    BITNAMI_IMAGE_VERSION="0.12.0-ol-7-r18" \
     PATH="/opt/bitnami/open-service-broker-azure/bin:$PATH"
 
 RUN install_packages ca-certificates
