@@ -1,18 +1,19 @@
-FROM bitnami/minideb-extras:jessie-r98
+FROM bitnami/minideb-extras:jessie-r101
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN bitnami-pkg unpack consul-1.2.0-0 --checksum 6d72ccd95c4f3ab2d8079f724835fa016cf39c5086d2a185c5e6c428cdf25b60
+RUN bitnami-pkg unpack consul-1.2.1-0 --checksum d0e2295e9f25738ea16877a4710859777e55e89591fde6a4b1f19aba9b70730d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.2.0-debian-8-r5" \
+    BITNAMI_IMAGE_VERSION="1.2.1-debian-8-r0" \
     CONSUL_BOOTSTRAP_EXPECT="1" \
     CONSUL_CLIENT_LAN_ADDRESS="0.0.0.0" \
     CONSUL_DATACENTER="dc1" \
     CONSUL_DISABLE_KEYRING_FILE="false" \
     CONSUL_DNS_PORT_NUMBER="8600" \
     CONSUL_DOMAIN="consul" \
+    CONSUL_GOSSIP_ENCRYPTION="no" \
     CONSUL_GOSSIP_ENCRYPTION_KEY="" \
     CONSUL_HTTP_PORT_NUMBER="8500" \
     CONSUL_LOCAL_CONFIG="" \
