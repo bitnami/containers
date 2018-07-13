@@ -27,12 +27,12 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`10-ol-7`, `10.4.0-ol-7-r19` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-ol-7-r19/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.4.0-debian-9-r6`, `10`, `10.4.0`, `10.4.0-r6`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-debian-9-r6/10/Dockerfile)
+* [`10-ol-7`, `10.4.0-ol-7-r20` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-ol-7-r20/10/ol-7/Dockerfile)
+* [`10-debian-9`, `10.4.0-debian-9-r7`, `10`, `10.4.0`, `10.4.0-r7`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-debian-9-r7/10/Dockerfile)
 * [`10-debian-8`, `10.4.0-debian-8-r36` (10/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-debian-8-r36/10/debian-8/Dockerfile)
 * [`9.6-ol-7`, `9.6.9-ol-7-r18` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-ol-7-r18/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.9-debian-9-r6`, `9.6`, `9.6.9`, `9.6.9-r6` (9.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-debian-9-r6/9.6/Dockerfile)
-* [`9.6-debian-8`, `9.6.9-debian-8-r35` (9.6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-debian-8-r35/9.6/debian-8/Dockerfile)
+* [`9.6-debian-8`, `9.6.9-debian-8-r36` (9.6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-debian-8-r36/9.6/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
 
