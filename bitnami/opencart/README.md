@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3-ol-7`, `3.0.2-0-ol-7-r19` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.2-0-ol-7-r19/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.0.2-0-ol-7-r20` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.2-0-ol-7-r20/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.0.2-0-debian-9-r3`, `3`, `3.0.2-0`, `3.0.2-0-r3`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.2-0-debian-9-r3/3/Dockerfile)
 * [`3-debian-8`, `3.0.2-0-debian-8-r65` (3/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.2-0-debian-8-r65/3/debian-8/Dockerfile)
 
