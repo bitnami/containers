@@ -23,7 +23,7 @@ $ docker run --name fluentd-exporter bitnami/fluentd-exporter:latest
 # Supported tags and respective `Dockerfile` links
 
 * [`0-ol-7`, `0.2.0-ol-7-r16` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-ol-7-r16/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.2.0-debian-9-r4`, `0`, `0.2.0`, `0.2.0-r4`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-9-r4/0/Dockerfile)
+* [`0-debian-9`, `0.2.0-debian-9-r5`, `0`, `0.2.0`, `0.2.0-r5`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-9-r5/0/Dockerfile)
 * [`0-debian-8`, `0.2.0-debian-8-r53` (0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-8-r53/0/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd-exporter).
