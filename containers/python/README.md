@@ -33,7 +33,7 @@ $ docker-compose up -d
 * [`3-debian-9`, `3.6.5-debian-9-r8`, `3`, `3.6.5`, `3.6.5-r8`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-debian-9-r8/3/Dockerfile)
 * [`3-debian-8`, `3.6.5-debian-8-r69` (3/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-debian-8-r69/3/debian-8/Dockerfile)
 * [`2-ol-7`, `2.7.15-ol-7-r19` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-ol-7-r19/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.7.15-debian-9-r7`, `2`, `2.7.15`, `2.7.15-r7` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-debian-9-r7/2/Dockerfile)
+* [`2-debian-9`, `2.7.15-debian-9-r8`, `2`, `2.7.15`, `2.7.15-r8` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-debian-9-r8/2/Dockerfile)
 * [`2-debian-8`, `2.7.15-debian-8-r61` (2/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-debian-8-r61/2/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/python GitHub repo](https://github.com/bitnami/bitnami-docker-python).
