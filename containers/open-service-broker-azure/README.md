@@ -23,7 +23,7 @@ In order to use the charts in this repository, you must have the following compo
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0-ol-7`, `0.12.0-ol-7-r18` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-ol-7-r18/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.12.0-ol-7-r19` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-ol-7-r19/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.12.0-debian-9-r4`, `0`, `0.12.0`, `0.12.0-r4`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-debian-9-r4/0/Dockerfile)
 * [`0-debian-8`, `0.12.0-debian-8-r24` (0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/0.12.0-debian-8-r24/0/debian-8/Dockerfile)
 
