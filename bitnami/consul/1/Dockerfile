@@ -2,11 +2,11 @@ FROM bitnami/minideb-extras:jessie-r102
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN bitnami-pkg unpack consul-1.2.1-0 --checksum d0e2295e9f25738ea16877a4710859777e55e89591fde6a4b1f19aba9b70730d
+RUN bitnami-pkg unpack consul-1.2.1-1 --checksum a3d2fce328e36fb7c07a22880373c8e6fd158d2b17d65dcc51dee707e5ccaa91
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.2.1-debian-8-r1" \
+    BITNAMI_IMAGE_VERSION="1.2.1-debian-8-r2" \
     CONSUL_BOOTSTRAP_EXPECT="1" \
     CONSUL_CLIENT_LAN_ADDRESS="0.0.0.0" \
     CONSUL_DATACENTER="dc1" \
