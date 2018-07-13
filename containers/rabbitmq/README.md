@@ -32,8 +32,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3.7-ol-7`, `3.7.7-ol-7-r6` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-ol-7-r6/3.7/ol-7/Dockerfile)
-* [`3.7-debian-9`, `3.7.7-debian-9-r6`, `3.7`, `3.7.7`, `3.7.7-r6`, `latest` (3.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-debian-9-r6/3.7/Dockerfile)
+* [`3.7-ol-7`, `3.7.7-ol-7-r7` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-ol-7-r7/3.7/ol-7/Dockerfile)
+* [`3.7-debian-9`, `3.7.7-debian-9-r7`, `3.7`, `3.7.7`, `3.7.7-r7`, `latest` (3.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-debian-9-r7/3.7/Dockerfile)
 * [`3.7-debian-8`, `3.7.7-debian-8-r7` (3.7/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-debian-8-r7/3.7/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
