@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/open-service-broker-azure /opt/bitnami/open-service-broker-azure
 ENV BITNAMI_APP_NAME="open-service-broker-azure" \
-    BITNAMI_IMAGE_VERSION="0.12.0-debian-8-r23" \
+    BITNAMI_IMAGE_VERSION="0.12.0-debian-8-r24" \
     PATH="/opt/bitnami/open-service-broker-azure/bin:$PATH"
 
 RUN install_packages ca-certificates
