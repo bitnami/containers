@@ -24,7 +24,7 @@ $ docker run --name metrics-server bitnami/metrics-server:latest
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0-ol-7`, `0.2.1-ol-7-r0` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.2.1-ol-7-r0/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.2.1-ol-7-r1` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.2.1-ol-7-r1/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.2.1-debian-9-r1`, `0`, `0.2.1`, `0.2.1-r1`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.2.1-debian-9-r1/0/Dockerfile)
 * [`0-debian-8`, `0.2.1-debian-8-r1` (0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.2.1-debian-8-r1/0/debian-8/Dockerfile)
 
