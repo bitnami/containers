@@ -26,7 +26,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`3-ol-7`, `3.5.1-ol-7-r4` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.1-ol-7-r4/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.5.1-debian-9-r4`, `3`, `3.5.1`, `3.5.1-r4`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.1-debian-9-r4/3/Dockerfile)
+* [`3-debian-9`, `3.5.1-debian-9-r5`, `3`, `3.5.1`, `3.5.1-r5`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.1-debian-9-r5/3/Dockerfile)
 * [`3-debian-8`, `3.5.1-debian-8-r2` (3/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.1-debian-8-r2/3/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
