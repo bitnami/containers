@@ -30,7 +30,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`4.0-ol-7`, `4.0.10-ol-7-r20` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.10-ol-7-r20/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.10-debian-9-r8`, `4.0`, `4.0.10`, `4.0.10-r8`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.10-debian-9-r8/4.0/Dockerfile)
+* [`4.0-debian-9`, `4.0.10-debian-9-r9`, `4.0`, `4.0.10`, `4.0.10-r9`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.10-debian-9-r9/4.0/Dockerfile)
 * [`4.0-debian-8`, `4.0.10-debian-8-r24` (4.0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.10-debian-8-r24/4.0/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
