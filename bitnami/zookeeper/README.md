@@ -34,7 +34,7 @@ services:
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3-ol-7`, `3.4.12-ol-7-r21` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-ol-7-r21/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.4.12-ol-7-r22` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-ol-7-r22/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.4.12-debian-9-r9`, `3`, `3.4.12`, `3.4.12-r9`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-debian-9-r9/3/Dockerfile)
 * [`3-debian-8`, `3.4.12-debian-8-r51` (3/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-debian-8-r51/3/debian-8/Dockerfile)
 
