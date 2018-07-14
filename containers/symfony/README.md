@@ -25,7 +25,7 @@ $ docker-compose up
 
 ## Supported tags and respective `Dockerfile` links
 
-* [`1-ol-7`, `1.5.11-ol-7-r17` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-ol-7-r17/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.5.11-ol-7-r18` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-ol-7-r18/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.5.11-debian-9-r4`, `1`, `1.5.11`, `1.5.11-r4`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-9-r4/1/Dockerfile)
 * [`1-debian-8`, `1.5.11-debian-8-r65` (1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-8-r65/1/debian-8/Dockerfile)
 
