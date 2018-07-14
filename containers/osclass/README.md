@@ -27,7 +27,7 @@ $ docker-compose up -d
 
 * [`3-ol-7`, `3.7.4-ol-7-r19` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/3.7.4-ol-7-r19/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.7.4-debian-9-r5`, `3`, `3.7.4`, `3.7.4-r5`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/3.7.4-debian-9-r5/3/Dockerfile)
-* [`3-debian-8`, `3.7.4-debian-8-r64` (3/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/3.7.4-debian-8-r64/3/debian-8/Dockerfile)
+* [`3-debian-8`, `3.7.4-debian-8-r65` (3/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/3.7.4-debian-8-r65/3/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/osclass GitHub repo](https://github.com/bitnami/bitnami-docker-osclass).
 
