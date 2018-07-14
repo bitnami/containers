@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r102
+FROM bitnami/minideb-extras:jessie-r103
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack discourse-2.0.2-0 --checksum e34329ca4eb2a896199e84c14535
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.0.2-debian-8-r17" \
+    BITNAMI_IMAGE_VERSION="2.0.2-debian-8-r18" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="127.0.0.1" \
     DISCOURSE_PASSWORD="bitnami123" \
