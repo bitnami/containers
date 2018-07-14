@@ -26,7 +26,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`4-ol-7`, `4.8.2-ol-7-r19` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.8.2-ol-7-r19/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.8.2-debian-9-r5`, `4`, `4.8.2`, `4.8.2-r5`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.8.2-debian-9-r5/4/Dockerfile)
+* [`4-debian-9`, `4.8.2-debian-9-r6`, `4`, `4.8.2`, `4.8.2-r6`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.8.2-debian-9-r6/4/Dockerfile)
 * [`4-debian-8`, `4.8.2-debian-8-r0` (4/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.8.2-debian-8-r0/4/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpmyadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phpmyadmin).
