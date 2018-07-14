@@ -27,7 +27,7 @@ $ docker-compose up -d
 
 * [`6-debian-9`, `6.3.1-debian-9-r3`, `6`, `6.3.1`, `6.3.1-r3`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.3.1-debian-9-r3/6/Dockerfile)
 * [`6-debian-8`, `6.3.1-debian-8-r1` (6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.3.1-debian-8-r1/6/debian-8/Dockerfile)
-* [`5-debian-9`, `5.6.10-debian-9-r5`, `5`, `5.6.10`, `5.6.10-r5` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.10-debian-9-r5/5/Dockerfile)
+* [`5-debian-9`, `5.6.10-debian-9-r6`, `5`, `5.6.10`, `5.6.10-r6` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.10-debian-9-r6/5/Dockerfile)
 * [`5-debian-8`, `5.6.10-debian-8-r28` (5/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.10-debian-8-r28/5/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
