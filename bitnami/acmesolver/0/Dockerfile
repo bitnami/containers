@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/acmesolver /opt/bitnami/acmesolver
 ENV BITNAMI_APP_NAME="acmesolver" \
-    BITNAMI_IMAGE_VERSION="0.3.2-debian-8-r6" \
+    BITNAMI_IMAGE_VERSION="0.3.2-debian-8-r7" \
     PATH="/opt/bitnami/acmesolver/bin:$PATH"
 
 RUN install_packages ca-certificates
