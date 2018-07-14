@@ -31,7 +31,7 @@ $ docker-compose up -d
 * [`4-debian-9`, `4.0.0-debian-9-r5`, `4`, `4.0.0`, `4.0.0-r5` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.0-debian-9-r5/4/Dockerfile)
 * [`4-debian-8`, `4.0.0-debian-8-r3` (4/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.0-debian-8-r3/4/debian-8/Dockerfile)
 * [`3.6-ol-7`, `3.6.6-ol-7-r4` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-ol-7-r4/3.6/ol-7/Dockerfile)
-* [`3.6-debian-9`, `3.6.6-debian-9-r4`, `3.6`, `3.6.6`, `3.6.6-r4`, `latest` (3.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-debian-9-r4/3.6/Dockerfile)
+* [`3.6-debian-9`, `3.6.6-debian-9-r5`, `3.6`, `3.6.6`, `3.6.6-r5`, `latest` (3.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-debian-9-r5/3.6/Dockerfile)
 * [`3.6-debian-8`, `3.6.6-debian-8-r6` (3.6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-debian-8-r6/3.6/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
