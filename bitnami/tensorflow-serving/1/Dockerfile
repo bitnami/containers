@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r102
+FROM bitnami/minideb-extras:jessie-r103
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack tensorflow-serving-1.9.0-0 --checksum f662f30baab22110940
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="1.9.0-debian-8-r2" \
+    BITNAMI_IMAGE_VERSION="1.9.0-debian-8-r3" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_MODEL_NAME="inception" \
     TENSORFLOW_SERVING_PORT_NUMBER="8500" \
