@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r101
+FROM bitnami/minideb-extras:jessie-r104
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack redmine-3.4.6-1 --checksum 7cb7d99ba1126036832b7f090bb6ce
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="3.4.6-debian-8-r26" \
+    BITNAMI_IMAGE_VERSION="3.4.6-debian-8-r27" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH" \
     REDMINE_DB_MYSQL="mariadb" \
     REDMINE_DB_PASSWORD="" \
