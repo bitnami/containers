@@ -41,7 +41,7 @@ services:
 # Supported tags and respective `Dockerfile` links
 
 * [`1-ol-7`, `1.1.0-ol-7-r24` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-ol-7-r24/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.1.0-debian-9-r9`, `1`, `1.1.0`, `1.1.0-r9`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-debian-9-r9/1/Dockerfile)
+* [`1-debian-9`, `1.1.0-debian-9-r10`, `1`, `1.1.0`, `1.1.0-r10`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-debian-9-r10/1/Dockerfile)
 * [`1-debian-8`, `1.1.0-debian-8-r59` (1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-debian-8-r59/1/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
