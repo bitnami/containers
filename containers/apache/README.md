@@ -30,8 +30,8 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`2.4-rhel-7`, `2.4.33-rhel-7-r3` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.33-rhel-7-r3/2.4/rhel-7/Dockerfile)
-* [`2.4-ol-7`, `2.4.33-ol-7-r24` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.33-ol-7-r24/2.4/ol-7/Dockerfile)
-* [`2.4-debian-9`, `2.4.33-debian-9-r7`, `2.4`, `2.4.33`, `2.4.33-r7`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.33-debian-9-r7/2.4/Dockerfile)
+* [`2.4-ol-7`, `2.4.33-ol-7-r25` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.33-ol-7-r25/2.4/ol-7/Dockerfile)
+* [`2.4-debian-9`, `2.4.33-debian-9-r8`, `2.4`, `2.4.33`, `2.4.33-r8`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.33-debian-9-r8/2.4/Dockerfile)
 * [`2.4-debian-8`, `2.4.33-debian-8-r73` (2.4/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.33-debian-8-r73/2.4/debian-8/Dockerfile)
 
 # Get this image
