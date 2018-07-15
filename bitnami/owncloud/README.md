@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`10-ol-7`, `10.0.8-ol-7-r20` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.8-ol-7-r20/10/ol-7/Dockerfile)
+* [`10-ol-7`, `10.0.8-ol-7-r21` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.8-ol-7-r21/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.0.8-debian-9-r5`, `10`, `10.0.8`, `10.0.8-r5`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.8-debian-9-r5/10/Dockerfile)
 * [`10-debian-8`, `10.0.8-debian-8-r56` (10/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.8-debian-8-r56/10/debian-8/Dockerfile)
 
