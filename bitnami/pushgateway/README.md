@@ -24,7 +24,7 @@ $ docker run --name pushgateway bitnami/pushgateway:latest
 
 * [`0-ol-7`, `0.5.2-ol-7-r20` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.5.2-ol-7-r20/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.5.2-debian-9-r6`, `0`, `0.5.2`, `0.5.2-r6`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.5.2-debian-9-r6/0/Dockerfile)
-* [`0-debian-8`, `0.5.2-debian-8-r26` (0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.5.2-debian-8-r26/0/debian-8/Dockerfile)
+* [`0-debian-8`, `0.5.2-debian-8-r27` (0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.5.2-debian-8-r27/0/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pushgateway GitHub repo](https://github.com/bitnami/bitnami-docker-pushgateway).
 
