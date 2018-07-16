@@ -26,7 +26,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`6-debian-9`, `6.3.1-debian-9-r4`, `6`, `6.3.1`, `6.3.1-r4`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.3.1-debian-9-r4/6/Dockerfile)
-* [`6-debian-8`, `6.3.1-debian-8-r1` (6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.3.1-debian-8-r1/6/debian-8/Dockerfile)
+* [`6-debian-8`, `6.3.1-debian-8-r2` (6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.3.1-debian-8-r2/6/debian-8/Dockerfile)
 * [`5-debian-9`, `5.6.10-debian-9-r7`, `5`, `5.6.10`, `5.6.10-r7` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.10-debian-9-r7/5/Dockerfile)
 * [`5-debian-8`, `5.6.10-debian-8-r29` (5/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.10-debian-8-r29/5/debian-8/Dockerfile)
 
