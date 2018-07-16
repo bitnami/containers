@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1-debian-9`, `1.2.0-debian-9-r6`, `1`, `1.2.0`, `1.2.0-r6`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/1.2.0-debian-9-r6/1/Dockerfile)
+* [`1-debian-9`, `1.2.0-debian-9-r7`, `1`, `1.2.0`, `1.2.0-r7`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/1.2.0-debian-9-r7/1/Dockerfile)
 * [`1-debian-8`, `1.2.0-debian-8-r31` (1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/1.2.0-debian-8-r31/1/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse-dashboard GitHub repo](https://github.com/bitnami/bitnami-docker-parse-dashboard).
