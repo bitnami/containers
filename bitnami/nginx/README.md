@@ -31,7 +31,7 @@ $ docker-compose up -d
 
 * [`1.14-rhel-7`, `1.14.0-rhel-7-r4` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-rhel-7-r4/1.14/rhel-7/Dockerfile)
 * [`1.14-ol-7`, `1.14.0-ol-7-r29` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-ol-7-r29/1.14/ol-7/Dockerfile)
-* [`1.14-debian-9`, `1.14.0-debian-9-r7`, `1.14`, `1.14.0`, `1.14.0-r7`, `latest` (1.14/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-debian-9-r7/1.14/Dockerfile)
+* [`1.14-debian-9`, `1.14.0-debian-9-r8`, `1.14`, `1.14.0`, `1.14.0-r8`, `latest` (1.14/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-debian-9-r8/1.14/Dockerfile)
 * [`1.14-debian-8`, `1.14.0-debian-8-r71` (1.14/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-debian-8-r71/1.14/debian-8/Dockerfile)
 
 # Get this image
