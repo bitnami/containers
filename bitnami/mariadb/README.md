@@ -30,7 +30,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`10.2-rhel-7`, `10.2.16-rhel-7-r1` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-rhel-7-r1/10.2/rhel-7/Dockerfile)
-* [`10.2-ol-7`, `10.2.16-ol-7-r17` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-ol-7-r17/10.2/ol-7/Dockerfile)
+* [`10.2-ol-7`, `10.2.16-ol-7-r18` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-ol-7-r18/10.2/ol-7/Dockerfile)
 * [`10.2-debian-9`, `10.2.16-debian-9-r11`, `10.2`, `10.2.16`, `10.2.16-r11` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-debian-9-r11/10.2/Dockerfile)
 * [`10.2-debian-8`, `10.2.16-debian-8-r11` (10.2/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-debian-8-r11/10.2/debian-8/Dockerfile)
 * [`10.1-ol-7`, `10.1.34-ol-7-r21` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.34-ol-7-r21/10.1/ol-7/Dockerfile)
