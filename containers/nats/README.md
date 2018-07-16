@@ -32,7 +32,7 @@ $ docker-compose up
 
 * [`1-ol-7`, `1.2.0-ol-7-r10` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.2.0-ol-7-r10/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.2.0-debian-9-r11`, `1`, `1.2.0`, `1.2.0-r11`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.2.0-debian-9-r11/1/Dockerfile)
-* [`1-debian-8`, `1.2.0-debian-8-r10` (1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.2.0-debian-8-r10/1/debian-8/Dockerfile)
+* [`1-debian-8`, `1.2.0-debian-8-r11` (1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.2.0-debian-8-r11/1/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nats GitHub repo](https://github.com/bitnami/bitnami-docker-nats).
 
