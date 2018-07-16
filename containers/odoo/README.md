@@ -30,7 +30,7 @@ $ docker-compose up -d
 * [`11-debian-8`, `11.0.20180615-debian-8-r12` (11/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180615-debian-8-r12/11/debian-8/Dockerfile)
 * [`10-ol-7`, `10.0.20180615-ol-7-r21` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/10.0.20180615-ol-7-r21/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.0.20180615-debian-9-r6`, `10`, `10.0.20180615`, `10.0.20180615-r6` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/10.0.20180615-debian-9-r6/10/Dockerfile)
-* [`10-debian-8`, `10.0.20180615-debian-8-r5` (10/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/10.0.20180615-debian-8-r5/10/debian-8/Dockerfile)
+* [`10-debian-8`, `10.0.20180615-debian-8-r6` (10/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/10.0.20180615-debian-8-r6/10/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
 
