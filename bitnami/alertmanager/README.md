@@ -24,7 +24,7 @@ $ docker run --name alertmanager bitnami/alertmanager:latest
 
 * [`0-ol-7`, `0.15.0-ol-7-r8` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.15.0-ol-7-r8/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.15.0-debian-9-r8`, `0`, `0.15.0`, `0.15.0-r8`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.15.0-debian-9-r8/0/Dockerfile)
-* [`0-debian-8`, `0.15.0-debian-8-r8` (0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.15.0-debian-8-r8/0/debian-8/Dockerfile)
+* [`0-debian-8`, `0.15.0-debian-8-r9` (0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.15.0-debian-8-r9/0/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/alertmanager GitHub repo](https://github.com/bitnami/bitnami-docker-alertmanager).
 
