@@ -42,7 +42,7 @@ services:
 
 * [`1-ol-7`, `1.1.0-ol-7-r28` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-ol-7-r28/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.1.0-debian-9-r13`, `1`, `1.1.0`, `1.1.0-r13`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-debian-9-r13/1/Dockerfile)
-* [`1-debian-8`, `1.1.0-debian-8-r59` (1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-debian-8-r59/1/debian-8/Dockerfile)
+* [`1-debian-8`, `1.1.0-debian-8-r61` (1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.0-debian-8-r61/1/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
