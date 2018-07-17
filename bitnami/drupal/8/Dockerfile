@@ -7,14 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.34-0 --checksum be3de7b24e809b3678f18da08ab220
 RUN bitnami-pkg unpack php-7.1.19-3 --checksum 6abeece779f39fadefe611cdd711dceee3448fb52211d7b5e0b1b5eeb0bfcbf6
 RUN bitnami-pkg unpack mysql-client-10.1.34-0 --checksum 2954d9390cb8b91dc924beacc179ed03050f6c5cb7ad328010cdbde1ab05c1e9
 RUN bitnami-pkg install libphp-7.1.19-0 --checksum d2c5f7fbff697f87b8983f5f23a5a8eb495fc8b66a25f7f8391a622c79cd7dd1
-RUN bitnami-pkg unpack drupal-8.5.5-0 --checksum dff97c9732d1ee51b2c36694b260a9f5b54fbe26df3f1d849f22651466c03a4e
+RUN bitnami-pkg unpack drupal-8.5.5-1 --checksum ded6e55a5d6cfab39f89f89077007b2238d7e71419c8a8a1690e94ece93d8438
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.5.5-debian-8-r9" \
+    BITNAMI_IMAGE_VERSION="8.5.5-debian-8-r10" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
@@ -22,6 +22,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     DRUPAL_HTTPS_PORT="443" \
     DRUPAL_HTTP_PORT="80" \
     DRUPAL_PASSWORD="bitnami" \
+    DRUPAL_PROFILE="standard" \
     DRUPAL_USERNAME="user" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
