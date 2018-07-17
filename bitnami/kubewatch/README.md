@@ -23,7 +23,7 @@ $ docker run --name kubewatch bitnami/kubewatch:latest
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0-ol-7`, `0.0.4-ol-7-r23` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-ol-7-r23/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.0.4-ol-7-r24` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-ol-7-r24/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.0.4-debian-9-r8`, `0`, `0.0.4`, `0.0.4-r8`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r8/0/Dockerfile)
 * [`0-debian-8`, `0.0.4-debian-8-r43` (0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-8-r43/0/debian-8/Dockerfile)
 
