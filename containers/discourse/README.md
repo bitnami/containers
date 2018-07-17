@@ -27,7 +27,7 @@ $ docker-compose up -d
 
 * [`2-ol-7`, `2.0.2-ol-7-r20` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.2-ol-7-r20/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.0.2-debian-9-r7`, `2`, `2.0.2`, `2.0.2-r7`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.2-debian-9-r7/2/Dockerfile)
-* [`2-debian-8`, `2.0.2-debian-8-r20` (2/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.2-debian-8-r20/2/debian-8/Dockerfile)
+* [`2-debian-8`, `2.0.2-debian-8-r21` (2/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.2-debian-8-r21/2/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
