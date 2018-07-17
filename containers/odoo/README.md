@@ -29,7 +29,7 @@ $ docker-compose up -d
 * [`11-debian-9`, `11.0.20180615-debian-9-r10`, `11`, `11.0.20180615`, `11.0.20180615-r10`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180615-debian-9-r10/11/Dockerfile)
 * [`11-debian-8`, `11.0.20180615-debian-8-r13` (11/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180615-debian-8-r13/11/debian-8/Dockerfile)
 * [`10-ol-7`, `10.0.20180615-ol-7-r23` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/10.0.20180615-ol-7-r23/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.0.20180615-debian-9-r7`, `10`, `10.0.20180615`, `10.0.20180615-r7` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/10.0.20180615-debian-9-r7/10/Dockerfile)
+* [`10-debian-9`, `10.0.20180615-debian-9-r8`, `10`, `10.0.20180615`, `10.0.20180615-r8` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/10.0.20180615-debian-9-r8/10/Dockerfile)
 * [`10-debian-8`, `10.0.20180615-debian-8-r6` (10/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/10.0.20180615-debian-8-r6/10/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
