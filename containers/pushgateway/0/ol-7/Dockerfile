@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r38 as buildenv
+FROM bitnami/oraclelinux-extras:7-r39 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/pushgateway-0.5.2-0-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r38
+FROM bitnami/oraclelinux-extras:7-r39
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/pushgateway /opt/bitnami/pushgateway
 ENV BITNAMI_APP_NAME="pushgateway" \
-    BITNAMI_IMAGE_VERSION="0.5.2-ol-7-r22" \
+    BITNAMI_IMAGE_VERSION="0.5.2-ol-7-r23" \
     PATH="/opt/bitnami/pushgateway/bin:$PATH"
 
 EXPOSE 9091
