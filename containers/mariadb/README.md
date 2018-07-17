@@ -33,7 +33,7 @@ $ docker-compose up -d
 * [`10.2-ol-7`, `10.2.16-ol-7-r19` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-ol-7-r19/10.2/ol-7/Dockerfile)
 * [`10.2-debian-9`, `10.2.16-debian-9-r12`, `10.2`, `10.2.16`, `10.2.16-r12` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-debian-9-r12/10.2/Dockerfile)
 * [`10.2-debian-8`, `10.2.16-debian-8-r12` (10.2/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-debian-8-r12/10.2/debian-8/Dockerfile)
-* [`10.1-ol-7`, `10.1.34-ol-7-r22` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.34-ol-7-r22/10.1/ol-7/Dockerfile)
+* [`10.1-ol-7`, `10.1.34-ol-7-r23` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.34-ol-7-r23/10.1/ol-7/Dockerfile)
 * [`10.1-debian-9`, `10.1.34-debian-9-r9`, `10.1`, `10.1.34`, `10.1.34-r9`, `latest` (10.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.34-debian-9-r9/10.1/Dockerfile)
 * [`10.1-debian-8`, `10.1.34-debian-8-r19` (10.1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.34-debian-8-r19/10.1/debian-8/Dockerfile)
 * [`10.1-rhel-7`, `10.1.33-rhel-7-r2` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.33-rhel-7-r2/10.1/rhel-7/Dockerfile)
