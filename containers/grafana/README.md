@@ -22,7 +22,7 @@ $ docker run --name grafana bitnami/grafana:latest
 
 # Supported tags and respective `Dockerfile` links
 
-* [`5-ol-7`, `5.2.1-ol-7-r13` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.2.1-ol-7-r13/5/ol-7/Dockerfile)
+* [`5-ol-7`, `5.2.1-ol-7-r14` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.2.1-ol-7-r14/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.2.1-debian-9-r8`, `5`, `5.2.1`, `5.2.1-r8`, `latest` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.2.1-debian-9-r8/5/Dockerfile)
 * [`5-debian-8`, `5.2.1-debian-8-r16` (5/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.2.1-debian-8-r16/5/debian-8/Dockerfile)
 
