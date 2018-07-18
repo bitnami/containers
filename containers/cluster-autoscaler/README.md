@@ -30,9 +30,9 @@ Azure https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cl
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1-ol-7`, `1.3.1-ol-7-r6` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.3.1-ol-7-r6/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.3.1-ol-7-r5` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.3.1-ol-7-r5/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.3.1-debian-9-r5`, `1`, `1.3.1`, `1.3.1-r5`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.3.1-debian-9-r5/1/Dockerfile)
-* [`1-debian-8`, `1.3.1-debian-8-r5` (1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.3.1-debian-8-r5/1/debian-8/Dockerfile)
+* [`1-debian-8`, `1.3.1-debian-8-r6` (1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.3.1-debian-8-r6/1/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cluster-autoscaler GitHub repo](https://github.com/bitnami/bitnami-docker-cluster-autoscaler).
 
