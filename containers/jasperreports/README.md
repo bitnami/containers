@@ -27,7 +27,7 @@ $ docker-compose up -d
 
 * [`7-ol-7`, `7.1.0-ol-7-r24` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.0-ol-7-r24/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.1.0-debian-9-r8`, `7`, `7.1.0`, `7.1.0-r8`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.0-debian-9-r8/7/Dockerfile)
-* [`7-debian-8`, `7.1.0-debian-8-r39` (7/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.0-debian-8-r39/7/debian-8/Dockerfile)
+* [`7-debian-8`, `7.1.0-debian-8-r40` (7/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.0-debian-8-r40/7/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jasperreports GitHub repo](https://github.com/bitnami/bitnami-docker-jasperreports).
 
