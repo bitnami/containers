@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r39
+FROM bitnami/oraclelinux-extras:7-r40
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,14 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.34-0 --checksum f12a3f629bf81de53f549eadbc6af8
 RUN bitnami-pkg unpack php-7.1.19-3 --checksum 68165fafea29601b840999d3d68c3ca24d3a8afd1b16ca530b522a96bccd7f90
 RUN bitnami-pkg unpack mysql-client-10.1.34-0 --checksum 012f1f222898565b55f7d4522514c7c130d2bfe4c988754eed658ef6dafa980c
 RUN bitnami-pkg install libphp-7.1.19-0 --checksum 9633879ad66d6e9d080dd387b4497111ce3fafb8d17de9103493370d820ea5a6
-RUN bitnami-pkg unpack drupal-8.5.5-0 --checksum 751b1e4d0ca2b3b9769826e77ff00a224395ad9ccb0e0708738157ac345fe8d7
+RUN bitnami-pkg unpack drupal-8.5.5-1 --checksum f25aa919bcfcfe0db6358d17a9f3a0a763e314256037cf643c4040c4ef17a1b0
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.5.5-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="8.5.5-ol-7-r12" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
@@ -22,6 +22,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     DRUPAL_HTTPS_PORT="443" \
     DRUPAL_HTTP_PORT="80" \
     DRUPAL_PASSWORD="bitnami" \
+    DRUPAL_PROFILE="standard" \
     DRUPAL_USERNAME="user" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
