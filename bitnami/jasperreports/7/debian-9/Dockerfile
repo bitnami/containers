@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r80
+FROM bitnami/minideb-extras:stretch-r81
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack jasperreports-7.1.0-0 --checksum 6861920266b698043309b9bc
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.1.0-debian-9-r8" \
+    BITNAMI_IMAGE_VERSION="7.1.0-debian-9-r9" \
     JASPERREPORTS_DATABASE_NAME="bitnami_jasperreports" \
     JASPERREPORTS_DATABASE_PASSWORD="" \
     JASPERREPORTS_DATABASE_USER="bn_jasperreports" \
