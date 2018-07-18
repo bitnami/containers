@@ -25,8 +25,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0-ol-7`, `0.20180422.201805030840-ol-7-r23` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-ol-7-r23/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.20180422.201805030840-debian-9-r9`, `0`, `0.20180422.201805030840`, `0.20180422.201805030840-r9`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-debian-9-r9/0/Dockerfile)
+* [`0-ol-7`, `0.20180422.201805030840-ol-7-r24` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-ol-7-r24/0/ol-7/Dockerfile)
+* [`0-debian-9`, `0.20180422.201805030840-debian-9-r10`, `0`, `0.20180422.201805030840`, `0.20180422.201805030840-r10`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-debian-9-r10/0/Dockerfile)
 * [`0-debian-8`, `0.20180422.201805030840-debian-8-r61` (0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-debian-8-r61/0/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dokuwiki GitHub repo](https://github.com/bitnami/bitnami-docker-dokuwiki).
