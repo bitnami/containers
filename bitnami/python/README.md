@@ -30,7 +30,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`3-ol-7`, `3.6.5-ol-7-r22` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-ol-7-r22/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.6.5-debian-9-r12`, `3`, `3.6.5`, `3.6.5-r12`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-debian-9-r12/3/Dockerfile)
+* [`3-debian-9`, `3.6.5-debian-9-r13`, `3`, `3.6.5`, `3.6.5-r13`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-debian-9-r13/3/Dockerfile)
 * [`3-debian-8`, `3.6.5-debian-8-r74` (3/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-debian-8-r74/3/debian-8/Dockerfile)
 * [`2-ol-7`, `2.7.15-ol-7-r23` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-ol-7-r23/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.7.15-debian-9-r12`, `2`, `2.7.15`, `2.7.15-r12` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-debian-9-r12/2/Dockerfile)
