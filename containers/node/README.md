@@ -15,7 +15,7 @@ $ docker run -it --name node bitnami/node
 ## Docker Compose
 
 ```bash
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mariadb/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-node/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
