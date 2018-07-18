@@ -28,7 +28,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`3-ol-7`, `3.11.2-ol-7-r25` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.2-ol-7-r25/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.11.2-debian-9-r12`, `3`, `3.11.2`, `3.11.2-r12`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.2-debian-9-r12/3/Dockerfile)
+* [`3-debian-9`, `3.11.2-debian-9-r13`, `3`, `3.11.2`, `3.11.2-r13`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.2-debian-9-r13/3/Dockerfile)
 * [`3-debian-8`, `3.11.2-debian-8-r82` (3/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.2-debian-8-r82/3/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
