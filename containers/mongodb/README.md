@@ -30,7 +30,7 @@ $ docker-compose up -d
 * [`4-ol-7`, `4.1.1-ol-7-r2` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.1-ol-7-r2/4/ol-7/Dockerfile)
 * [`4-debian-9`, `4.1.1-debian-9-r3`, `4`, `4.1.1`, `4.1.1-r3` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.1-debian-9-r3/4/Dockerfile)
 * [`4-debian-8`, `4.1.1-debian-8-r1` (4/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.1-debian-8-r1/4/debian-8/Dockerfile)
-* [`3.6-ol-7`, `3.6.6-ol-7-r7` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-ol-7-r7/3.6/ol-7/Dockerfile)
+* [`3.6-ol-7`, `3.6.6-ol-7-r8` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-ol-7-r8/3.6/ol-7/Dockerfile)
 * [`3.6-debian-9`, `3.6.6-debian-9-r9`, `3.6`, `3.6.6`, `3.6.6-r9`, `latest` (3.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-debian-9-r9/3.6/Dockerfile)
 * [`3.6-debian-8`, `3.6.6-debian-8-r10` (3.6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-debian-8-r10/3.6/debian-8/Dockerfile)
 
