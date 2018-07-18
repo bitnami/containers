@@ -27,8 +27,8 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
- - [`9.0`, `9.0.10-ol-7-r17` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.10-ol-7-r17/9.0/Dockerfile)
- - [`9.0`, `9.0.10-debian-9-r11` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.10-debian-9-r11/9.0/Dockerfile)
+ - [`9.0`, `9.0.10-ol-7-r18` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.10-ol-7-r18/9.0/Dockerfile)
+ - [`9.0`, `9.0.10-debian-9-r12` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.10-debian-9-r12/9.0/Dockerfile)
  - [`9.0`, `9.0.10-debian-8-r14` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.10-debian-8-r14/9.0/Dockerfile)
  - [`8.5`, `8.5.32-ol-7-r17` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.32-ol-7-r17/8.5/Dockerfile)
  - [`8.5`, `8.5.32-debian-9-r11` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.32-debian-9-r11/8.5/Dockerfile)
