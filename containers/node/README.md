@@ -15,7 +15,7 @@ $ docker run -it --name node bitnami/node
 ## Docker Compose
 
 ```bash
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-node/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mariadb/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -31,7 +31,7 @@ $ docker-compose up -d
 
 * [`10-ol-7`, `10.6.0-ol-7-r9` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-ol-7-r9/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.6.0-debian-9-r13`, `10`, `10.6.0`, `10.6.0-r13` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-debian-9-r13/10/Dockerfile)
-* [`10-debian-8`, `10.6.0-debian-8-r12` (10/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-debian-8-r12/10/debian-8/Dockerfile)
+* [`10-debian-8`, `10.6.0-debian-8-r13` (10/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.6.0-debian-8-r13/10/debian-8/Dockerfile)
 * [`9-ol-7`, `9.11.2-ol-7-r24` (9/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-ol-7-r24/9/ol-7/Dockerfile)
 * [`9-debian-9`, `9.11.2-debian-9-r12`, `9`, `9.11.2`, `9.11.2-r12` (9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-debian-9-r12/9/Dockerfile)
 * [`9-debian-8`, `9.11.2-debian-8-r9` (9/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-debian-8-r9/9/debian-8/Dockerfile)
