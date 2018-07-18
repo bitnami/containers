@@ -31,7 +31,7 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 * [`3-ol-7`, `3.4.3-ol-7-r2` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.3-ol-7-r2/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.4.3-debian-9-r1`, `3`, `3.4.3`, `3.4.3-r1`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.3-debian-9-r1/3/Dockerfile)
+* [`3-debian-9`, `3.4.3-debian-9-r2`, `3`, `3.4.3`, `3.4.3-r2`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.3-debian-9-r2/3/Dockerfile)
 * [`3-debian-8`, `3.4.3-debian-8-r2` (3/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.3-debian-8-r2/3/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/neo4j GitHub repo](https://github.com/bitnami/bitnami-docker-neo4j).
