@@ -29,21 +29,19 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+
+
 * [`2.5-ol-7`, `2.5.1-ol-7-r24` (2.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-ol-7-r24/2.5/ol-7/Dockerfile)
-* [`2.5-debian-9`, `2.5.1-debian-9-r11`, `2.5`, `2.5.1`, `2.5.1-r11`, `latest` (2.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-debian-9-r11/2.5/Dockerfile)
-* [`2.5-debian-8`, `2.5.1-debian-8-r77` (2.5/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-debian-8-r77/2.5/debian-8/Dockerfile)
+* [`2.5-debian-9`, `2.5.1-debian-9-r12`, `2.5`, `2.5.1`, `2.5.1-r12`, `latest` (2.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-debian-9-r12/2.5/Dockerfile)
 * [`2.4-ol-7`, `2.4.4-ol-7-r24` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-ol-7-r24/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.4-debian-9-r11`, `2.4`, `2.4.4`, `2.4.4-r11` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-debian-9-r11/2.4/Dockerfile)
-* [`2.4-debian-8`, `2.4.4-debian-8-r74` (2.4/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-debian-8-r74/2.4/debian-8/Dockerfile)
 * [`2.3-ol-7`, `2.3.7-ol-7-r24` (2.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-ol-7-r24/2.3/ol-7/Dockerfile)
 * [`2.3-debian-9`, `2.3.7-debian-9-r11`, `2.3`, `2.3.7`, `2.3.7-r11` (2.3/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-debian-9-r11/2.3/Dockerfile)
-* [`2.3-debian-8`, `2.3.7-debian-8-r75` (2.3/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-debian-8-r75/2.3/debian-8/Dockerfile)
 * [`2.2-ol-7`, `2.2.10-ol-7-r24` (2.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.10-ol-7-r24/2.2/ol-7/Dockerfile)
 * [`2.2-debian-9`, `2.2.10-debian-9-r11`, `2.2`, `2.2.10`, `2.2.10-r11` (2.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.10-debian-9-r11/2.2/Dockerfile)
-* [`2.2-debian-8`, `2.2.10-debian-8-r74` (2.2/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.10-debian-8-r74/2.2/debian-8/Dockerfile)
 * [`2.1-ol-7`, `2.1.10-ol-7-r24` (2.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-ol-7-r24/2.1/ol-7/Dockerfile)
 * [`2.1-debian-9`, `2.1.10-debian-9-r11`, `2.1`, `2.1.10`, `2.1.10-r11` (2.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-debian-9-r11/2.1/Dockerfile)
-* [`2.1-debian-8`, `2.1.10-debian-8-r82` (2.1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-debian-8-r82/2.1/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://github.com/bitnami/bitnami-docker-ruby).
 
