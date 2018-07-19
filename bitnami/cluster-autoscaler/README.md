@@ -30,9 +30,11 @@ Azure https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cl
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1-ol-7`, `1.3.1-ol-7-r6` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.3.1-ol-7-r6/1/ol-7/Dockerfile)
+> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+
+
+* [`1-ol-7`, `1.3.1-ol-7-r7` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.3.1-ol-7-r7/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.3.1-debian-9-r6`, `1`, `1.3.1`, `1.3.1-r6`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.3.1-debian-9-r6/1/Dockerfile)
-* [`1-debian-8`, `1.3.1-debian-8-r6` (1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.3.1-debian-8-r6/1/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cluster-autoscaler GitHub repo](https://github.com/bitnami/bitnami-docker-cluster-autoscaler).
 
