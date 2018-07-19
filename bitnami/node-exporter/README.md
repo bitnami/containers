@@ -22,9 +22,11 @@ $ docker run --name node-exporter bitnami/node-exporter:latest
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+
+
 * [`0-ol-7`, `0.16.0-ol-7-r25` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.16.0-ol-7-r25/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.16.0-debian-9-r10`, `0`, `0.16.0`, `0.16.0-r10`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.16.0-debian-9-r10/0/Dockerfile)
-* [`0-debian-8`, `0.16.0-debian-8-r54` (0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.16.0-debian-8-r54/0/debian-8/Dockerfile)
+* [`0-debian-9`, `0.16.0-debian-9-r11`, `0`, `0.16.0`, `0.16.0-r11`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.16.0-debian-9-r11/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-node-exporter).
 
