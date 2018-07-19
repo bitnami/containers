@@ -26,7 +26,7 @@ $ docker run --name grafana bitnami/grafana:latest
 
 
 * [`5-ol-7`, `5.2.1-ol-7-r15` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.2.1-ol-7-r15/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.2.1-debian-9-r9`, `5`, `5.2.1`, `5.2.1-r9`, `latest` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.2.1-debian-9-r9/5/Dockerfile)
+* [`5-debian-9`, `5.2.1-debian-9-r10`, `5`, `5.2.1`, `5.2.1-r10`, `latest` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.2.1-debian-9-r10/5/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
