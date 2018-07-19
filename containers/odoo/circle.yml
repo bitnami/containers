@@ -5,9 +5,9 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "10,11"
+          RELEASE_SERIES_LIST: "11"
           LATEST_STABLE: "11"
-          DISTRIBUTIONS_LIST: "debian-8,debian-9,ol-7"
+          DISTRIBUTIONS_LIST: "debian-9,ol-7"
           IMAGE_NAME: odoo
           CHART_NAME: odoo
           CHART_REPO: https://github.com/kubernetes/charts
