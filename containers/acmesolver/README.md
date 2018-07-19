@@ -23,9 +23,11 @@ Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource suppor
 
 # Supported tags and respective `Dockerfile` links
 
-* [`0-ol-7`, `0.3.2-ol-7-r11` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.3.2-ol-7-r11/0/ol-7/Dockerfile)
+> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+
+
+* [`0-ol-7`, `0.3.2-ol-7-r12` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.3.2-ol-7-r12/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.3.2-debian-9-r10`, `0`, `0.3.2`, `0.3.2-r10`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.3.2-debian-9-r10/0/Dockerfile)
-* [`0-debian-8`, `0.3.2-debian-8-r11` (0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.3.2-debian-8-r11/0/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/acmesolver GitHub repo](https://github.com/bitnami/bitnami-docker-acmesolver).
 
