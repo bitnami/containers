@@ -29,12 +29,13 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`6-ol-7`, `6.3.1-ol-7-r12` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.1-ol-7-r12/6/ol-7/Dockerfile)
+> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+
+
+* [`6-ol-7`, `6.3.1-ol-7-r13` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.1-ol-7-r13/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.3.1-debian-9-r13`, `6`, `6.3.1`, `6.3.1-r13`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.1-debian-9-r13/6/Dockerfile)
-* [`6-debian-8`, `6.3.1-debian-8-r12` (6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.1-debian-8-r12/6/debian-8/Dockerfile)
 * [`5-ol-7`, `5.6.4-ol-7-r17` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-ol-7-r17/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.6.4-debian-9-r5`, `5`, `5.6.4`, `5.6.4-r5` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-debian-9-r5/5/Dockerfile)
-* [`5-debian-8`, `5.6.4-debian-8-r69` (5/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-debian-8-r69/5/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
 # Get this image
