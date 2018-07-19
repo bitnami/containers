@@ -32,9 +32,9 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
+* [`7.2-debian-9`, `7.2.8-debian-9-r0`, `7.2`, `7.2.8`, `7.2.8-r0` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.8-debian-9-r0/7.2/Dockerfile)
 * [`7.2-rhel-7`, `7.2.7-rhel-7-r1` (7.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.7-rhel-7-r1/7.2/rhel-7/Dockerfile)
 * [`7.2-ol-7`, `7.2.7-ol-7-r25` (7.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.7-ol-7-r25/7.2/ol-7/Dockerfile)
-* [`7.2-debian-9`, `7.2.7-debian-9-r15`, `7.2`, `7.2.7`, `7.2.7-r15` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.7-debian-9-r15/7.2/Dockerfile)
 * [`7.1-rhel-7`, `7.1.19-rhel-7-r2` (7.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.19-rhel-7-r2/7.1/rhel-7/Dockerfile)
 * [`7.1-ol-7`, `7.1.19-ol-7-r26` (7.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.19-ol-7-r26/7.1/ol-7/Dockerfile)
 * [`7.1-debian-9`, `7.1.19-debian-9-r15`, `7.1`, `7.1.19`, `7.1.19-r15`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.19-debian-9-r15/7.1/Dockerfile)
