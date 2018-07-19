@@ -27,18 +27,17 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+
+
  - [`9.0`, `9.0.10-ol-7-r18` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.10-ol-7-r18/9.0/Dockerfile)
- - [`9.0`, `9.0.10-debian-9-r12` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.10-debian-9-r12/9.0/Dockerfile)
- - [`9.0`, `9.0.10-debian-8-r14` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.10-debian-8-r14/9.0/Dockerfile)
+ - [`9.0`, `9.0.10-debian-9-r13` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.10-debian-9-r13/9.0/Dockerfile)
  - [`8.5`, `8.5.32-ol-7-r18` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.32-ol-7-r18/8.5/Dockerfile)
  - [`8.5`, `8.5.32-debian-9-r12` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.32-debian-9-r12/8.5/Dockerfile)
- - [`8.5`, `8.5.32-debian-8-r14` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.32-debian-8-r14/8.5/Dockerfile)
  - [`8.0`, `8.0.53-ol-7-r10` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-ol-7-r10/8.0/Dockerfile)
  - [`8.0`, `8.0.53-debian-9-r10` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-debian-9-r10/8.0/Dockerfile)
- - [`8.0`, `8.0.53-debian-8-r9` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-debian-8-r9/8.0/Dockerfile)
  - [`7`, `7.0.90-ol-7-r10` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.90-ol-7-r10/7/Dockerfile)
  - [`7`, `7.0.90-debian-9-r10` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.90-debian-9-r10/7/Dockerfile)
- - [`7`, `7.0.90-debian-8-r10` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.90-debian-8-r10/7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
 
