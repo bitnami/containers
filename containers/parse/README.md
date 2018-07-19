@@ -35,7 +35,7 @@ $ docker-compose up -d
 
 
 * [`2-ol-7`, `2.8.2-ol-7-r20` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/2.8.2-ol-7-r20/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.8.2-debian-9-r9`, `2`, `2.8.2`, `2.8.2-r9`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/2.8.2-debian-9-r9/2/Dockerfile)
+* [`2-debian-9`, `2.8.2-debian-9-r10`, `2`, `2.8.2`, `2.8.2-r10`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/2.8.2-debian-9-r10/2/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
 
