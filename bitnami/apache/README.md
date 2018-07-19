@@ -29,10 +29,12 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+
+
 * [`2.4-rhel-7`, `2.4.34-rhel-7-r0` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-rhel-7-r0/2.4/rhel-7/Dockerfile)
-* [`2.4-ol-7`, `2.4.34-ol-7-r1` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-ol-7-r1/2.4/ol-7/Dockerfile)
-* [`2.4-debian-9`, `2.4.34-debian-9-r1`, `2.4`, `2.4.34`, `2.4.34-r1`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-debian-9-r1/2.4/Dockerfile)
-* [`2.4-debian-8`, `2.4.34-debian-8-r2` (2.4/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-debian-8-r2/2.4/debian-8/Dockerfile)
+* [`2.4-ol-7`, `2.4.34-ol-7-r2` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-ol-7-r2/2.4/ol-7/Dockerfile)
+* [`2.4-debian-9`, `2.4.34-debian-9-r3`, `2.4`, `2.4.34`, `2.4.34-r3`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-debian-9-r3/2.4/Dockerfile)
 
 # Get this image
 
