@@ -25,9 +25,11 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3-ol-7`, `3.4.6-ol-7-r26` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/3.4.6-ol-7-r26/3/ol-7/Dockerfile)
+> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+
+
+* [`3-ol-7`, `3.4.6-ol-7-r27` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/3.4.6-ol-7-r27/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.4.6-debian-9-r9`, `3`, `3.4.6`, `3.4.6-r9`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/3.4.6-debian-9-r9/3/Dockerfile)
-* [`3-debian-8`, `3.4.6-debian-8-r30` (3/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/3.4.6-debian-8-r30/3/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
 
