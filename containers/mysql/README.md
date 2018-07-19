@@ -29,12 +29,13 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+
+
 * [`8.0-ol-7`, `8.0.11-ol-7-r22` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.11-ol-7-r22/8.0/ol-7/Dockerfile)
-* [`8.0-debian-9`, `8.0.11-debian-9-r12`, `8.0`, `8.0.11`, `8.0.11-r12` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.11-debian-9-r12/8.0/Dockerfile)
-* [`8.0-debian-8`, `8.0.11-debian-8-r0` (8.0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.11-debian-8-r0/8.0/debian-8/Dockerfile)
+* [`8.0-debian-9`, `8.0.11-debian-9-r13`, `8.0`, `8.0.11`, `8.0.11-r13` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.11-debian-9-r13/8.0/Dockerfile)
 * [`5.7-ol-7`, `5.7.22-ol-7-r23` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.22-ol-7-r23/5.7/ol-7/Dockerfile)
 * [`5.7-debian-9`, `5.7.22-debian-9-r12`, `5.7`, `5.7.22`, `5.7.22-r12`, `latest` (5.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.22-debian-9-r12/5.7/Dockerfile)
-* [`5.7-debian-8`, `5.7.22-debian-8-r51` (5.7/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.22-debian-8-r51/5.7/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
 
