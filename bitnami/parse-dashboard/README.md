@@ -25,8 +25,10 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`1-debian-9`, `1.2.0-debian-9-r9`, `1`, `1.2.0`, `1.2.0-r9`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/1.2.0-debian-9-r9/1/Dockerfile)
-* [`1-debian-8`, `1.2.0-debian-8-r31` (1/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/1.2.0-debian-8-r31/1/debian-8/Dockerfile)
+> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+
+
+* [`1-debian-9`, `1.2.0-debian-9-r10`, `1`, `1.2.0`, `1.2.0-r10`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/1.2.0-debian-9-r10/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse-dashboard GitHub repo](https://github.com/bitnami/bitnami-docker-parse-dashboard).
 
