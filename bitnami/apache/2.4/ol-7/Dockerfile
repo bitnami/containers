@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r40
+FROM bitnami/oraclelinux-extras:7-r41
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,7 +10,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.34-ol-7-r2" \
+    BITNAMI_IMAGE_VERSION="2.4.34-ol-7-r3" \
     PATH="/opt/bitnami/apache/bin:$PATH"
 
 EXPOSE 80 443
