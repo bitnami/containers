@@ -7,7 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "2"
           LATEST_STABLE: "2"
-          DISTRIBUTIONS_LIST: "debian-8,debian-9,ol-7"
+          DISTRIBUTIONS_LIST: "debian-9,ol-7"
           IMAGE_NAME: oauth2-proxy
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
