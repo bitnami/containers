@@ -27,8 +27,8 @@ $ docker run --name external-dns bitnami/external-dns:latest
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`0-ol-7`, `0.5.4-ol-7-r1` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.5.4-ol-7-r1/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.5.4-debian-9-r2`, `0`, `0.5.4`, `0.5.4-r2`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.5.4-debian-9-r2/0/Dockerfile)
+* [`0-ol-7`, `0.5.4-ol-7-r2` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.5.4-ol-7-r2/0/ol-7/Dockerfile)
+* [`0-debian-9`, `0.5.4-debian-9-r1`, `0`, `0.5.4`, `0.5.4-r1`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.5.4-debian-9-r1/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/external-dns GitHub repo](https://github.com/bitnami/bitnami-docker-external-dns).
 
