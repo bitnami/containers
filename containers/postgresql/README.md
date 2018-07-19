@@ -27,12 +27,13 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+
+
 * [`10-ol-7`, `10.4.0-ol-7-r25` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-ol-7-r25/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.4.0-debian-9-r12`, `10`, `10.4.0`, `10.4.0-r12`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-debian-9-r12/10/Dockerfile)
-* [`10-debian-8`, `10.4.0-debian-8-r41` (10/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-debian-8-r41/10/debian-8/Dockerfile)
+* [`10-debian-9`, `10.4.0-debian-9-r13`, `10`, `10.4.0`, `10.4.0-r13`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-debian-9-r13/10/Dockerfile)
 * [`9.6-ol-7`, `9.6.9-ol-7-r24` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-ol-7-r24/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.9-debian-9-r12`, `9.6`, `9.6.9`, `9.6.9-r12` (9.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-debian-9-r12/9.6/Dockerfile)
-* [`9.6-debian-8`, `9.6.9-debian-8-r41` (9.6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-debian-8-r41/9.6/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
 
