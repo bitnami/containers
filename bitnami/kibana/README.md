@@ -25,10 +25,11 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`6-debian-9`, `6.3.1-debian-9-r5`, `6`, `6.3.1`, `6.3.1-r5`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.3.1-debian-9-r5/6/Dockerfile)
-* [`6-debian-8`, `6.3.1-debian-8-r3` (6/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.3.1-debian-8-r3/6/debian-8/Dockerfile)
+> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+
+
+* [`6-debian-9`, `6.3.1-debian-9-r6`, `6`, `6.3.1`, `6.3.1-r6`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.3.1-debian-9-r6/6/Dockerfile)
 * [`5-debian-9`, `5.6.10-debian-9-r10`, `5`, `5.6.10`, `5.6.10-r10` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.10-debian-9-r10/5/Dockerfile)
-* [`5-debian-8`, `5.6.10-debian-8-r32` (5/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.10-debian-8-r32/5/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
 
