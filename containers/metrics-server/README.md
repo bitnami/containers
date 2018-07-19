@@ -24,9 +24,11 @@ $ docker run --name metrics-server bitnami/metrics-server:latest
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+
+
 * [`0-ol-7`, `0.2.1-ol-7-r6` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.2.1-ol-7-r6/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.2.1-debian-9-r6`, `0`, `0.2.1`, `0.2.1-r6`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.2.1-debian-9-r6/0/Dockerfile)
-* [`0-debian-8`, `0.2.1-debian-8-r6` (0/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.2.1-debian-8-r6/0/debian-8/Dockerfile)
+* [`0-debian-9`, `0.2.1-debian-9-r7`, `0`, `0.2.1`, `0.2.1-r7`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.2.1-debian-9-r7/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/metrics-server GitHub repo](https://github.com/bitnami/bitnami-docker-metrics-server).
 
