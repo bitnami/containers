@@ -28,8 +28,8 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`3-ol-7`, `3.8.10-ol-7-r20` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.10-ol-7-r20/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.8.10-debian-9-r10`, `3`, `3.8.10`, `3.8.10-r10`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.10-debian-9-r10/3/Dockerfile)
+* [`3-ol-7`, `3.8.10-ol-7-r21` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.10-ol-7-r21/3/ol-7/Dockerfile)
+* [`3-debian-9`, `3.8.10-debian-9-r11`, `3`, `3.8.10`, `3.8.10-r11`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.10-debian-9-r11/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
 
