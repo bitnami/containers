@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r82
+FROM bitnami/minideb-extras:stretch-r83
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack elasticsearch-6.3.1-1 --checksum f4c0b1397e90848d6ef767b6
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="6.3.1-debian-9-r16" \
+    BITNAMI_IMAGE_VERSION="6.3.1-debian-9-r17" \
     ELASTICSEARCH_BIND_ADDRESS="" \
     ELASTICSEARCH_CLUSTER_HOSTS="" \
     ELASTICSEARCH_CLUSTER_NAME="elasticsearch-cluster" \
