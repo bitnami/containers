@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r82
+FROM bitnami/minideb-extras:stretch-r83
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX,o+rw" \
@@ -14,7 +14,7 @@ RUN bitnami-pkg unpack ghost-1.24.9-0 --checksum 38a24f2f1a351fe092aff421bae4ae8
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="1.24.9-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="1.24.9-debian-9-r2" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
