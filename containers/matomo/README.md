@@ -25,9 +25,11 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`3-ol-7`, `3.5.1-ol-7-r8` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.5.1-ol-7-r8/3/ol-7/Dockerfile)
+> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+
+
+* [`3-ol-7`, `3.5.1-ol-7-r9` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.5.1-ol-7-r9/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.5.1-debian-9-r1`, `3`, `3.5.1`, `3.5.1-r1`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.5.1-debian-9-r1/3/Dockerfile)
-* [`3-debian-8`, `3.5.1-debian-8-r15` (3/debian-8/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.5.1-debian-8-r15/3/debian-8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
 
