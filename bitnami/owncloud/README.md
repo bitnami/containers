@@ -28,8 +28,8 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`10-ol-7`, `10.0.9-ol-7-r3` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.9-ol-7-r3/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.0.9-debian-9-r2`, `10`, `10.0.9`, `10.0.9-r2`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.9-debian-9-r2/10/Dockerfile)
+* [`10-ol-7`, `10.0.9-ol-7-r2` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.9-ol-7-r2/10/ol-7/Dockerfile)
+* [`10-debian-9`, `10.0.9-debian-9-r3`, `10`, `10.0.9`, `10.0.9-r3`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.9-debian-9-r3/10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/owncloud GitHub repo](https://github.com/bitnami/bitnami-docker-owncloud).
 
