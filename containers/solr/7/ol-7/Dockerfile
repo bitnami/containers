@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r42
+FROM bitnami/oraclelinux-extras:7-r43
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack solr-7.4.0-1 --checksum 374080d2aad8e13e9967f29907cc451b2
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="7.4.0-ol-7-r24" \
+    BITNAMI_IMAGE_VERSION="7.4.0-ol-7-r25" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:$PATH" \
     SOLR_CORE="" \
     SOLR_CORE_CONF_DIR="_default" \
