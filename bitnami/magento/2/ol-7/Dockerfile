@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r42
+FROM bitnami/oraclelinux-extras:7-r43
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,7 +6,7 @@ RUN install_packages bzip2-libs cronie cyrus-sasl-lib expat freetds freetype gli
 RUN bitnami-pkg unpack apache-2.4.34-0 --checksum f12a3f629bf81de53f549eadbc6af8a24722c9b1f1b5da7da0b953fd3a40b236
 RUN bitnami-pkg unpack php-7.0.31-0 --checksum 4beb2f42b7d0c11519a2ac2ff7c82848f35cfc7028b38f038899434414f7b662
 RUN bitnami-pkg unpack mysql-client-10.1.34-0 --checksum 012f1f222898565b55f7d4522514c7c130d2bfe4c988754eed658ef6dafa980c
-RUN bitnami-pkg install libphp-7.0.30-8 --checksum d56f04ce65e0caabe624739aa5a1b4d0980b612edc5331b647c86457b1bc36e6
+RUN bitnami-pkg install libphp-7.0.31-0 --checksum 760bd9fad0870ff05810f287701879a858ee8952a146864aa06b18f8143ac3c5
 RUN bitnami-pkg unpack magento-2.2.5-0 --checksum 1f66e6ce485301dc714c240b29b9f038c12619843c4b7104399a9f0bb4ed632d
 RUN find /opt/bitnami/magento/htdocs -type d -print0 | xargs -0 chmod 775 && find /opt/bitnami/magento/htdocs -type f -print0 | xargs -0 chmod 664 && chown -R bitnami:daemon /opt/bitnami/magento/htdocs
 
@@ -15,7 +15,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.2.5-ol-7-r20" \
+    BITNAMI_IMAGE_VERSION="2.2.5-ol-7-r21" \
     MAGENTO_ADMINURI="admin" \
     MAGENTO_DATABASE_NAME="bitnami_magento" \
     MAGENTO_DATABASE_PASSWORD="" \
