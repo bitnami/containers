@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r83
+FROM bitnami/minideb-extras:stretch-r84
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,7 +6,7 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libf
 RUN bitnami-pkg unpack apache-2.4.34-0 --checksum 56464e0931e05066036f43ef56a7c5c3d2a5ddad85eebd62748e3223e6289ace
 RUN bitnami-pkg unpack php-7.0.31-0 --checksum 560220d81ecf58e7fbc97ccdb6a57fbb602fa330c45f5567749e9c2fdeb2506c
 RUN bitnami-pkg unpack mysql-client-10.2.16-0 --checksum b340647cdff0f520aa3070c55756f43b2fc908369a76c9565bcefeb35a5ea66a
-RUN bitnami-pkg install libphp-7.0.30-8 --checksum 79789406bd783e822b29ad82ea51316a3d48241072ebd4410d2fa0a821cf4423
+RUN bitnami-pkg install libphp-7.0.31-0 --checksum d6e6bff000d896b9dbc1407d1e01ccc81d5845ea3fd9cb9af1a63d8060c62671
 RUN bitnami-pkg unpack wordpress-4.9.7-0 --checksum ffd319592e7024c18875e08473320953b2dee9ef308809cd173ec7e7a373f631
 
 COPY rootfs /
@@ -14,7 +14,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="4.9.7-debian-9-r13" \
+    BITNAMI_IMAGE_VERSION="4.9.7-debian-9-r14" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
