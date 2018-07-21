@@ -11,7 +11,7 @@ jobs:
           DISTRIBUTIONS_LIST: "debian-9,ol-7,rhel-7"
           IMAGE_NAME: drupal
           CHART_NAME: drupal
-          CHART_REPO: https://github.com/kubernetes/charts
+          CHART_REPO: https://github.com/helm/charts
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
