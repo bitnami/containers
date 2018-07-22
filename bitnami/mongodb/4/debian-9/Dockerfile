@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r84
+FROM bitnami/minideb-extras:stretch-r85
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack mongodb-4.1.1-1 --checksum 72fbbdaf2a2bb5ed133397d29cbb92
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.1.1-debian-9-r6" \
+    BITNAMI_IMAGE_VERSION="4.1.1-debian-9-r7" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_PASSWORD="" \
