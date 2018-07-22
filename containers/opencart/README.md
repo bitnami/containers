@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 
 * [`3-ol-7`, `3.0.2-0-ol-7-r29` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.2-0-ol-7-r29/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.0.2-0-debian-9-r11`, `3`, `3.0.2-0`, `3.0.2-0-r11`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.2-0-debian-9-r11/3/Dockerfile)
+* [`3-debian-9`, `3.0.2-0-debian-9-r12`, `3`, `3.0.2-0`, `3.0.2-0-r12`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.2-0-debian-9-r12/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/opencart GitHub repo](https://github.com/bitnami/bitnami-docker-opencart).
 
