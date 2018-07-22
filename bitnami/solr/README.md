@@ -33,7 +33,7 @@ $ docker-compose up -d
 
 
 * [`7-ol-7`, `7.4.0-ol-7-r26` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.4.0-ol-7-r26/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.4.0-debian-9-r13`, `7`, `7.4.0`, `7.4.0-r13`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.4.0-debian-9-r13/7/Dockerfile)
+* [`7-debian-9`, `7.4.0-debian-9-r14`, `7`, `7.4.0`, `7.4.0-r14`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.4.0-debian-9-r14/7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
 
