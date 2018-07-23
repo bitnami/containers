@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r44
+FROM bitnami/oraclelinux-extras:7-r45
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack neo4j-3.4.4-0 --checksum 53737e4dc76c29a2a153f8b1588a1958
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="3.4.4-ol-7-r3" \
+    BITNAMI_IMAGE_VERSION="3.4.4-ol-7-r4" \
     NEO4J_BOLT_PORT_NUMBER="7687" \
     NEO4J_HOST="" \
     NEO4J_HTTPS_PORT_NUMBER="7473" \
