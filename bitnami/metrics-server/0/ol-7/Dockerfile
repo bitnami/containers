@@ -13,13 +13,14 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/metrics-server /opt/bitnami/metrics-server
 ENV BITNAMI_APP_NAME="metrics-server" \
-    BITNAMI_IMAGE_VERSION="0.2.1-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="0.2.1-ol-7-r12" \
     PATH="/opt/bitnami/metrics-server/bin:$PATH"
 
 RUN install_packages ca-certificates
+RUN chmod -R g+rwX /opt/bitnami/metrics-server
 
-EXPOSE 443
+EXPOSE 8443
 
 WORKDIR /opt/bitnami/metrics-server
 USER 1001
-ENTRYPOINT ["metrics-server"]
+ENTRYPOINT ["metrics-server","--secure-port=8443"]
