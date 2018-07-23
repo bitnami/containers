@@ -25,7 +25,7 @@ $ docker run --name fluentd-exporter bitnami/fluentd-exporter:latest
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`0-ol-7`, `0.2.0-ol-7-r25` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-ol-7-r25/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.2.0-ol-7-r26` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-ol-7-r26/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.2.0-debian-9-r14`, `0`, `0.2.0`, `0.2.0-r14`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-9-r14/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd-exporter).
