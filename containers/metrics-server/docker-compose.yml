@@ -4,4 +4,4 @@ services:
   metrics-server:
     image: bitnami/metrics-server:latest
     ports:
-      - '443:443'
+      - '8443:8443'
