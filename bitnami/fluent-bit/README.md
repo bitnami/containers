@@ -27,7 +27,7 @@ $ docker run --name fluent-bit bitnami/fluent-bit:latest
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`0-debian-9`, `0.13.4-debian-9-r15`, `0`, `0.13.4`, `0.13.4-r15`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.4-debian-9-r15/0/Dockerfile)
+* [`0-debian-9`, `0.13.4-debian-9-r16`, `0`, `0.13.4`, `0.13.4-r16`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.4-debian-9-r16/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluent-bit GitHub repo](https://github.com/bitnami/bitnami-docker-fluent-bit).
 
