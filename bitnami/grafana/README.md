@@ -25,8 +25,8 @@ $ docker run --name grafana bitnami/grafana:latest
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`5-ol-7`, `5.2.1-ol-7-r19` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.2.1-ol-7-r19/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.2.1-debian-9-r15`, `5`, `5.2.1`, `5.2.1-r15`, `latest` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.2.1-debian-9-r15/5/Dockerfile)
+* [`5-ol-7`, `5.2.1-ol-7-r20` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.2.1-ol-7-r20/5/ol-7/Dockerfile)
+* [`5-debian-9`, `5.2.1-debian-9-r14`, `5`, `5.2.1`, `5.2.1-r14`, `latest` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.2.1-debian-9-r14/5/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
