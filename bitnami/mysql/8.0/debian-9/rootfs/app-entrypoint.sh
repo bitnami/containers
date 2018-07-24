@@ -5,8 +5,7 @@
 
 print_welcome_page
 
-if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
-  . /init.sh
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
   nami_initialize mysql
   info "Starting mysql... "
 fi
