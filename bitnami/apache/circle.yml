@@ -9,8 +9,8 @@ jobs:
           LATEST_STABLE: "2.4"
           DISTRIBUTIONS_LIST: "debian-9,ol-7,rhel-7"
           IMAGE_NAME: apache
-          CHART_NAME: apache
-          CHART_REPO: https://github.com/bitnami/charts
+          CHART_NAME:
+          CHART_REPO:
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
