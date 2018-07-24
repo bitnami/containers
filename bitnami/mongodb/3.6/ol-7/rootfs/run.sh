@@ -16,4 +16,4 @@ fi
 sed -i 's/path: .*\/mongodb.log/path: /' /opt/bitnami/mongodb/conf/mongodb.conf
 
 info "Starting ${DAEMON}..."
-exec gosu ${USER} ${EXEC} ${ARGS}
+exec ${EXEC} ${ARGS}
