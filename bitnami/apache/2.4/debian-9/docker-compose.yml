@@ -4,8 +4,8 @@ services:
   apache:
     image: 'bitnami/apache:2.4'
     ports:
-      - '80:80'
-      - '443:443'
+      - '80:8080'
+      - '443:8443'
     volumes:
       - 'apache_data:/bitnami'
 volumes:
