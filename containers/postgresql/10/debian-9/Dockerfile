@@ -1,13 +1,16 @@
 FROM bitnami/minideb-extras:stretch-r87
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    HOME="/"
+
 # Install required system packages and dependencies
-RUN install_packages libbsd0 libc6 libedit2 libgcc1 libicu57 liblzma5 libncurses5 libssl1.1 libstdc++6 libtinfo5 libxml2 libxslt1.1 zlib1g
-RUN bitnami-pkg unpack postgresql-10.4.0-2 --checksum 400a1c851c784f2c4ea2c0fcfe5da7307195bbf96023f49f6e69077e06cddf86
+RUN install_packages libbsd0 libc6 libedit2 libgcc1 libicu57 liblzma5 libncurses5 libnss-wrapper libssl1.1 libstdc++6 libtinfo5 libxml2 libxslt1.1 zlib1g
+RUN bitnami-pkg unpack postgresql-10.4.0-3 --checksum 6f636c5f5311c030787ee4f45d820b41dfa74d0813189c591b85d750cdbfe522
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="10.4.0-debian-9-r18" \
+    BITNAMI_IMAGE_VERSION="10.4.0-debian-9-r19" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
     POSTGRESQL_MASTER_HOST="" \
@@ -21,5 +24,6 @@ ENV BITNAMI_APP_NAME="postgresql" \
 
 EXPOSE 5432
 
+USER 1001
 ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["nami","start","--foreground","postgresql"]
+CMD ["/run.sh"]
