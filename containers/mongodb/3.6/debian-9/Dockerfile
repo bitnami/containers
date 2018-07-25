@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r87
+FROM bitnami/minideb-extras:stretch-r88
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libpcap0.8 libssl1.1
-RUN bitnami-pkg unpack mongodb-3.6.6-3 --checksum 4addd9d7e19f756745ba779838a47d2287a506c1c6bc66d469091ba9bc1b6a22
+RUN bitnami-pkg unpack mongodb-3.6.6-4 --checksum d48eeed7a9ca8f0b204cd449c5f634b31c47c036f35c622a2342c2f1405ae7ec
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.6.6-debian-9-r16" \
+    BITNAMI_IMAGE_VERSION="3.6.6-debian-9-r17" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_PASSWORD="" \
