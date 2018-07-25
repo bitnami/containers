@@ -1,14 +1,18 @@
-FROM bitnami/minideb-extras:stretch-r87
+FROM bitnami/minideb-extras:stretch-r88
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    BITNAMI_PKG_EXTRA_DIRS="/opt/bitnami/mysql/conf" \
+    HOME="/"
+
 # Install required system packages and dependencies
-RUN install_packages libaio1 libatomic1 libc6 libgcc1 libncurses5 libsasl2-2 libssl1.1 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg unpack mysql-5.7.22-2 --checksum 3646c37264040a2015af4ea5741d11e7c87c32235e2dd5b0f6a01bbcef7310ed
+RUN install_packages libaio1 libatomic1 libc6 libgcc1 libncurses5 libsasl2-2 libstdc++6 libtinfo5 zlib1g
+RUN bitnami-pkg unpack mysql-5.7.22-3 --checksum 35322c0632029c1448e5044f71d019ab0811c184bd97f298c3babcb54b812339
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.22-debian-9-r17" \
+    BITNAMI_IMAGE_VERSION="5.7.22-debian-9-r18" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
@@ -22,9 +26,11 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_ROOT_PASSWORD="" \
     MYSQL_ROOT_USER="root" \
     MYSQL_USER="" \
-    PATH="/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH"
+    PATH="/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH" \
+    USER="root"
 
 EXPOSE 3306
 
+USER 1001
 ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["nami","start","--foreground","mysql"]
+CMD ["/run.sh"]
