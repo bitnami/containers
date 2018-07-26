@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r88
+FROM bitnami/minideb-extras:stretch-r89
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack mariadb-10.2.16-1 --checksum 3fc35f3e7ed5a3f2bb773a747537
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.16-debian-9-r19" \
+    BITNAMI_IMAGE_VERSION="10.2.16-debian-9-r20" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
