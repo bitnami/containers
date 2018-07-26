@@ -34,10 +34,10 @@ $ docker-compose up -d
 
 * [`7.2-rhel-7`, `7.2.8-rhel-7-r0` (7.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.8-rhel-7-r0/7.2/rhel-7/Dockerfile)
 * [`7.2-ol-7`, `7.2.8-ol-7-r7` (7.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.8-ol-7-r7/7.2/ol-7/Dockerfile)
-* [`7.2-debian-9`, `7.2.8-debian-9-r6`, `7.2`, `7.2.8`, `7.2.8-r6` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.8-debian-9-r6/7.2/Dockerfile)
+* [`7.2-debian-9`, `7.2.8-debian-9-r7`, `7.2`, `7.2.8`, `7.2.8-r7` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.8-debian-9-r7/7.2/Dockerfile)
 * [`7.1-rhel-7`, `7.1.20-rhel-7-r0` (7.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.20-rhel-7-r0/7.1/rhel-7/Dockerfile)
 * [`7.1-ol-7`, `7.1.20-ol-7-r5` (7.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.20-ol-7-r5/7.1/ol-7/Dockerfile)
-* [`7.1-debian-9`, `7.1.20-debian-9-r5`, `7.1`, `7.1.20`, `7.1.20-r5`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.20-debian-9-r5/7.1/Dockerfile)
+* [`7.1-debian-9`, `7.1.20-debian-9-r6`, `7.1`, `7.1.20`, `7.1.20-r6`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.20-debian-9-r6/7.1/Dockerfile)
 * [`7.0-rhel-7`, `7.0.31-rhel-7-r0` (7.0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.31-rhel-7-r0/7.0/rhel-7/Dockerfile)
 * [`7.0-ol-7`, `7.0.31-ol-7-r6` (7.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.31-ol-7-r6/7.0/ol-7/Dockerfile)
 * [`7.0-debian-9`, `7.0.31-debian-9-r6`, `7.0`, `7.0.31`, `7.0.31-r6` (7.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.31-debian-9-r6/7.0/Dockerfile)
