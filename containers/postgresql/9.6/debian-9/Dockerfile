@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r87
+FROM bitnami/minideb-extras:stretch-r89
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack postgresql-9.6.9-2 --checksum ed2e7a70d160066081fe66d664d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="9.6.9-debian-9-r19" \
+    BITNAMI_IMAGE_VERSION="9.6.9-debian-9-r20" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
     POSTGRESQL_MASTER_HOST="" \
