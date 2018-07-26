@@ -32,10 +32,10 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`10-ol-7`, `10.7.0-ol-7-r7` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.7.0-ol-7-r7/10/ol-7/Dockerfile)
+* [`10-ol-7`, `10.7.0-ol-7-r8` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.7.0-ol-7-r8/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.7.0-debian-9-r7`, `10`, `10.7.0`, `10.7.0-r7` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.7.0-debian-9-r7/10/Dockerfile)
 * [`9-ol-7`, `9.11.2-ol-7-r32` (9/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-ol-7-r32/9/ol-7/Dockerfile)
-* [`9-debian-9`, `9.11.2-debian-9-r18`, `9`, `9.11.2`, `9.11.2-r18` (9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-debian-9-r18/9/Dockerfile)
+* [`9-debian-9`, `9.11.2-debian-9-r19`, `9`, `9.11.2`, `9.11.2-r19` (9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/9.11.2-debian-9-r19/9/Dockerfile)
 * [`8-ol-7`, `8.11.3-ol-7-r33` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.3-ol-7-r33/8/ol-7/Dockerfile)
 * [`8-debian-9`, `8.11.3-debian-9-r20`, `8`, `8.11.3`, `8.11.3-r20` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.3-debian-9-r20/8/Dockerfile)
 * [`7-ol-7`, `7.10.1-ol-7-r32` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/7.10.1-ol-7-r32/7/ol-7/Dockerfile)
