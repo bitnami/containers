@@ -40,7 +40,7 @@ $ docker-compose up -d
 * [`2.3-debian-9`, `2.3.7-debian-9-r20`, `2.3`, `2.3.7`, `2.3.7-r20` (2.3/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-debian-9-r20/2.3/Dockerfile)
 * [`2.2-ol-7`, `2.2.10-ol-7-r33` (2.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.10-ol-7-r33/2.2/ol-7/Dockerfile)
 * [`2.2-debian-9`, `2.2.10-debian-9-r20`, `2.2`, `2.2.10`, `2.2.10-r20` (2.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.10-debian-9-r20/2.2/Dockerfile)
-* [`2.1-ol-7`, `2.1.10-ol-7-r32` (2.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-ol-7-r32/2.1/ol-7/Dockerfile)
+* [`2.1-ol-7`, `2.1.10-ol-7-r33` (2.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-ol-7-r33/2.1/ol-7/Dockerfile)
 * [`2.1-debian-9`, `2.1.10-debian-9-r19`, `2.1`, `2.1.10`, `2.1.10-r19` (2.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-debian-9-r19/2.1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://github.com/bitnami/bitnami-docker-ruby).
