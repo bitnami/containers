@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras:7-r26
+FROM gcr.io/helm-publish-ci/redhat-extras:7-r45
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -8,16 +8,16 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack nginx-1.14.0-2 --checksum c3018753530419ff71f9b625087b51a7c76092b58a3f057275b32c26ec4b5ef8
-RUN bitnami-pkg unpack php-7.0.30-7 --checksum 0e70df1fa2dbdf56a4121f0d31fd96fc2fcdd3885c1c9987b349dd981fe3fa3b
+RUN bitnami-pkg unpack php-7.0.31-0 --checksum f673a4202e001b6622a17821e9507994f8150f610995977b85083812b7e095ec
 RUN bitnami-pkg unpack mysql-client-10.1.33-0 --checksum 4b07acdb7d3f6a61161414ad7f7639da8f291962e242eb257f612d18c8231501
-RUN bitnami-pkg unpack wordpress-4.9.7-0 --checksum 607ff63ad0bc3ea6f6b805ed57b7cdf9f6788f3a868a1796125d8b4ca617dfee
+RUN bitnami-pkg unpack wordpress-4.9.7-1 --checksum c570454b241f9b7ae6a4b0e823c31f03544d2c559042e2989de511dde1e017a2
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="4.9.7-rhel-7-r0" \
+    BITNAMI_IMAGE_VERSION="4.9.7-rhel-7-r1" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
