@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-runtimes:7-r22
+FROM bitnami/oraclelinux-runtimes:7-r23
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/node-6.14.3-0-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="6.14.3-ol-7-r33" \
+    BITNAMI_IMAGE_VERSION="6.14.3-ol-7-r34" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 3000
