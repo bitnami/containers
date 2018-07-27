@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras:7-r15
+FROM gcr.io/helm-publish-ci/redhat-extras:7-r45
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,12 +7,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libaio libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre zlib
-RUN bitnami-pkg unpack mariadb-10.2.16-1 --checksum 24769a6b02bd921930f49ca2b7f4803c5e6b3eaf2626d0cb892e4e1b17919f86
+RUN bitnami-pkg unpack mariadb-10.2.16-2 --checksum 504ac4834ac200a466338329d08cc235440e5886b212d9ee38820d53d18f5958
+RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.16-rhel-7-r1" \
+    BITNAMI_IMAGE_VERSION="10.2.16-rhel-7-r2" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
@@ -26,7 +27,8 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MARIADB_ROOT_PASSWORD="" \
     MARIADB_ROOT_USER="root" \
     MARIADB_USER="" \
-    PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
+    PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH" \
+    USER="root"
 
 EXPOSE 3306
 
