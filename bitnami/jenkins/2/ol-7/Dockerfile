@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r48
+FROM bitnami/oraclelinux-extras:7-r49
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack jenkins-2.121.2-0 --checksum fd233ff68053890fbcc133fd89e0
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.121.2-ol-7-r6" \
+    BITNAMI_IMAGE_VERSION="2.121.2-ol-7-r7" \
     JENKINS_PASSWORD="bitnami" \
     JENKINS_USERNAME="user" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/git/bin:$PATH" \
