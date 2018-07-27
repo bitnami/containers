@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras:7-r38
+FROM gcr.io/helm-publish-ci/redhat-extras:7-r45
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN mkdir -p /bitnami && ln -sf /bitnami/php /bitnami/php-fpm
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="5.6.37-rhel-7-r0" \
+    BITNAMI_IMAGE_VERSION="5.6.37-rhel-7-r1" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/php/sbin:$PATH"
 
 EXPOSE 9000
