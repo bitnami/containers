@@ -28,7 +28,7 @@ fi
 # allow running custom initialization scripts
 if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && [[ ! -f /bitnami/mysql/.user_scripts_initialized ]] ; then
     echo "==> Loading user files from /docker-entrypoint-initdb.d";
-    if [[ ! -z "$MYSQL_ROOT_PASSWORD" ]]; then
+    if [[ -n "$MYSQL_ROOT_PASSWORD" ]]; then
         mysql=( mysql -uroot -p$MYSQL_ROOT_PASSWORD -hlocalhost )
         mysqladmin=( mysqladmin -uroot -p$MYSQL_ROOT_PASSWORD -hlocalhost )
     else
@@ -66,7 +66,7 @@ if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.
         esac
     done
     touch /bitnami/mysql/.user_scripts_initialized
-    if ! ${mysqladmin} shutdown || ! wait "$MYSQL_PID"; then
+    if ! "${mysqladmin[@]}" shutdown || ! wait "$MYSQL_PID"; then
         echo >&2 'MySQL init process failed.'
         exit 1
     fi
