@@ -13,7 +13,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="8.0.11-ol-7-r31" \
+    BITNAMI_IMAGE_VERSION="8.0.11-ol-7-r32" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
