@@ -35,8 +35,8 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`3.7-ol-7`, `3.7.7-ol-7-r22` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-ol-7-r22/3.7/ol-7/Dockerfile)
-* [`3.7-debian-9`, `3.7.7-debian-9-r21`, `3.7`, `3.7.7`, `3.7.7-r21`, `latest` (3.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-debian-9-r21/3.7/Dockerfile)
+* [`3.7-ol-7`, `3.7.7-ol-7-r21` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-ol-7-r21/3.7/ol-7/Dockerfile)
+* [`3.7-debian-9`, `3.7.7-debian-9-r22`, `3.7`, `3.7.7`, `3.7.7-r22`, `latest` (3.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-debian-9-r22/3.7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
