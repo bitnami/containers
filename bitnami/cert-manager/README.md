@@ -27,7 +27,7 @@ Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource suppor
 
 
 * [`0-ol-7`, `0.4.0-ol-7-r2` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.4.0-ol-7-r2/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.4.0-debian-9-r0`, `0`, `0.4.0`, `0.4.0-r0`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.4.0-debian-9-r0/0/Dockerfile)
+* [`0-debian-9`, `0.4.0-debian-9-r1`, `0`, `0.4.0`, `0.4.0-r1`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.4.0-debian-9-r1/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cert-manager GitHub repo](https://github.com/bitnami/bitnami-docker-cert-manager).
 
