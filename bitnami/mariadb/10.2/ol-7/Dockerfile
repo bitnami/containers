@@ -8,11 +8,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libaio libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre zlib
 RUN bitnami-pkg unpack mariadb-10.2.16-1 --checksum 10fa3309f2c6779b970b71fb9ef66c1aedbb5d25a6c065fab33a65ad694b72b5
+RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.16-ol-7-r28" \
+    BITNAMI_IMAGE_VERSION="10.2.16-ol-7-r29" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
@@ -26,7 +27,8 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MARIADB_ROOT_PASSWORD="" \
     MARIADB_ROOT_USER="root" \
     MARIADB_USER="" \
-    PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
+    PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH" \
+    USER="root"
 
 EXPOSE 3306
 
