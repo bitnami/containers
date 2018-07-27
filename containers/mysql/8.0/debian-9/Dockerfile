@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r89
+FROM bitnami/minideb-extras:stretch-r90
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack mysql-8.0.11-2 --checksum b83fc7ca74eeb48f2c1ea5efee109e7
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="8.0.11-debian-9-r15" \
+    BITNAMI_IMAGE_VERSION="8.0.11-debian-9-r16" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
