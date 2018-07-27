@@ -6,12 +6,12 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libf
 RUN bitnami-pkg unpack nginx-1.14.0-2 --checksum 9bc17f3a88adb34deb2a10e337b8112f0ff31c633bb09c9ec9b3b53948058043
 RUN bitnami-pkg unpack php-7.0.31-0 --checksum 560220d81ecf58e7fbc97ccdb6a57fbb602fa330c45f5567749e9c2fdeb2506c
 RUN bitnami-pkg unpack mysql-client-10.2.16-0 --checksum b340647cdff0f520aa3070c55756f43b2fc908369a76c9565bcefeb35a5ea66a
-RUN bitnami-pkg unpack wordpress-4.9.7-0 --checksum ffd319592e7024c18875e08473320953b2dee9ef308809cd173ec7e7a373f631
+RUN bitnami-pkg unpack wordpress-4.9.7-1 --checksum 661d4b543ede6717335a601674308bfdc77f5a8081eece88c58d7e7ee83a65ed
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="4.9.7-debian-9-r17" \
+    BITNAMI_IMAGE_VERSION="4.9.7-debian-9-r18" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
