@@ -34,8 +34,8 @@ $ docker-compose up -d
 
 * [`8.0-ol-7`, `8.0.11-ol-7-r32` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.11-ol-7-r32/8.0/ol-7/Dockerfile)
 * [`8.0-debian-9`, `8.0.11-debian-9-r18`, `8.0`, `8.0.11`, `8.0.11-r18` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.11-debian-9-r18/8.0/Dockerfile)
+* [`5.7-debian-9`, `5.7.23-debian-9-r0`, `5.7`, `5.7.23`, `5.7.23-r0`, `latest` (5.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.23-debian-9-r0/5.7/Dockerfile)
 * [`5.7-ol-7`, `5.7.22-ol-7-r33` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.22-ol-7-r33/5.7/ol-7/Dockerfile)
-* [`5.7-debian-9`, `5.7.22-debian-9-r22`, `5.7`, `5.7.22`, `5.7.22-r22`, `latest` (5.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.22-debian-9-r22/5.7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
 
@@ -501,6 +501,10 @@ $ docker-compose up mysql
 ```
 
 # Notable Changes
+
+## 5.7.22-r18 and 8.0.11-r16
+
+- The MySQL container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the MySQL daemon was started as the `mysql` user. From now on, both the container and the MySQL daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ## 5.7.21-r6
 - The MySQL conf file is not in a persistent volume by default.
