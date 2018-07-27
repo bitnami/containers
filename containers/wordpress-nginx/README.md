@@ -28,8 +28,8 @@ $ docker-compose up
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`4-rhel-7`, `4.9.7-rhel-7-r1` (4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.7-rhel-7-r1/4/rhel-7/Dockerfile)
-* [`4-php5-rhel-7`, `4.9.7-php5-rhel-7-r1` (4-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.7-php5-rhel-7-r1/4-php5/rhel-7/Dockerfile)
+* [`4-rhel-7`, `4.9.7-rhel-7-r0` (4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.7-rhel-7-r0/4/rhel-7/Dockerfile)
+* [`4-php5-rhel-7`, `4.9.7-php5-rhel-7-r2` (4-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.7-php5-rhel-7-r2/4-php5/rhel-7/Dockerfile)
 * [`4-php5-ol-7`, `4.9.7-php5-ol-7-r16` (4-php5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.7-php5-ol-7-r16/4-php5/ol-7/Dockerfile)
 * [`4-php5-debian-9`, `4.9.7-php5-debian-9-r17`, `4-php5`, `4.9.7-php5`, `4.9.7-php5-r17` (4-php5/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.7-php5-debian-9-r17/4-php5/Dockerfile)
 * [`4-ol-7`, `4.9.7-ol-7-r15` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.7-ol-7-r15/4/ol-7/Dockerfile)
