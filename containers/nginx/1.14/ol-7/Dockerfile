@@ -14,7 +14,7 @@ RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.14.0-ol-7-r41" \
+    BITNAMI_IMAGE_VERSION="1.14.0-ol-7-r42" \
     NGINX_DAEMON_GROUP="nginx" \
     NGINX_DAEMON_USER="nginx" \
     NGINX_HTTPS_PORT_NUMBER="8443" \
