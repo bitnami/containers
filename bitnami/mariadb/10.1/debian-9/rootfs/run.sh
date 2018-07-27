@@ -27,7 +27,7 @@ fi
 # allow running custom initialization scripts
 if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && [[ ! -f /bitnami/mariadb/.user_scripts_initialized ]] ; then
     echo "==> Loading user files from /docker-entrypoint-initdb.d";
-    if [[ ! -z "$MARIADB_ROOT_PASSWORD" ]]; then
+    if [[ -n "$MARIADB_ROOT_PASSWORD" ]]; then
         mysql=( mysql -uroot -p$MARIADB_ROOT_PASSWORD -hlocalhost )
         mysqladmin=( mysqladmin -uroot -p$MARIADB_ROOT_PASSWORD -hlocalhost )
     else
@@ -65,7 +65,7 @@ if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.
         esac
     done
     touch /bitnami/mariadb/.user_scripts_initialized
-    if ! ${mysqladmin} shutdown || ! wait "$MARIADB_PID"; then
+    if ! "${mysqladmin[@]}" shutdown || ! wait "$MARIADB_PID"; then
         echo >&2 'MariaDB init process failed.'
         exit 1
     fi
