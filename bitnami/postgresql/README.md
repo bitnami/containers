@@ -31,7 +31,7 @@ $ docker-compose up -d
 
 
 * [`10-ol-7`, `10.4.0-ol-7-r34` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-ol-7-r34/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.4.0-debian-9-r21`, `10`, `10.4.0`, `10.4.0-r21`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-debian-9-r21/10/Dockerfile)
+* [`10-debian-9`, `10.4.0-debian-9-r22`, `10`, `10.4.0`, `10.4.0-r22`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-debian-9-r22/10/Dockerfile)
 * [`9.6-ol-7`, `9.6.9-ol-7-r33` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-ol-7-r33/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.9-debian-9-r21`, `9.6`, `9.6.9`, `9.6.9-r21` (9.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-debian-9-r21/9.6/Dockerfile)
 
@@ -154,6 +154,12 @@ $ docker-compose up -d
 ```
 
 # Configuration
+
+## Initializing a new instance
+
+When the container is executed for the first time, it will execute the files with extensions `.sh`, `.sql` and `.sql.gz` located at `/docker-entrypoint-initdb.d`.
+
+In order to have your custom files inside the docker image you can mount them as a volume.
 
 ## Setting the root password on first run
 
