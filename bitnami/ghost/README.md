@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 
 * [`1-ol-7`, `1.25.2-ol-7-r2` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.2-ol-7-r2/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.25.2-debian-9-r2`, `1`, `1.25.2`, `1.25.2-r2`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.2-debian-9-r2/1/Dockerfile)
+* [`1-debian-9`, `1.25.2-debian-9-r3`, `1`, `1.25.2`, `1.25.2-r3`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.2-debian-9-r3/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
 
@@ -43,7 +43,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 
 * [`1-ol-7`, `1.25.2-ol-7-r2` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.2-ol-7-r2/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.25.2-debian-9-r2`, `1`, `1.25.2`, `1.25.2-r2`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.2-debian-9-r2/1/Dockerfile)
+* [`1-debian-9`, `1.25.2-debian-9-r3`, `1`, `1.25.2`, `1.25.2-r3`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.2-debian-9-r3/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
 
