@@ -31,7 +31,7 @@ $ docker-compose up -d
 
 
 * [`4-ol-7`, `4.1.1-ol-7-r11` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.1-ol-7-r11/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.1.1-debian-9-r12`, `4`, `4.1.1`, `4.1.1-r12` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.1-debian-9-r12/4/Dockerfile)
+* [`4-debian-9`, `4.1.1-debian-9-r13`, `4`, `4.1.1`, `4.1.1-r13` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.1-debian-9-r13/4/Dockerfile)
 * [`3.6-ol-7`, `3.6.6-ol-7-r17` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-ol-7-r17/3.6/ol-7/Dockerfile)
 * [`3.6-debian-9`, `3.6.6-debian-9-r19`, `3.6`, `3.6.6`, `3.6.6-r19`, `latest` (3.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-debian-9-r19/3.6/Dockerfile)
 
@@ -539,6 +539,10 @@ $ docker-compose up mongodb
 ```
 
 # Notable Changes
+
+## 3.6.6-r16 and 4.1.1-r9
+
+- The MongoDB container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the MongoDB daemon was started as the `mongo` user. From now on, both the container and the MongoDB daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ## 3.2.7-r5
 
