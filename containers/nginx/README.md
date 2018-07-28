@@ -34,7 +34,7 @@ $ docker-compose up -d
 
 * [`1.14-rhel-7`, `1.14.0-rhel-7-r6` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-rhel-7-r6/1.14/rhel-7/Dockerfile)
 * [`1.14-ol-7`, `1.14.0-ol-7-r42` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-ol-7-r42/1.14/ol-7/Dockerfile)
-* [`1.14-debian-9`, `1.14.0-debian-9-r21`, `1.14`, `1.14.0`, `1.14.0-r21`, `latest` (1.14/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-debian-9-r21/1.14/Dockerfile)
+* [`1.14-debian-9`, `1.14.0-debian-9-r22`, `1.14`, `1.14.0`, `1.14.0-r22`, `latest` (1.14/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-debian-9-r22/1.14/Dockerfile)
 * [`1.14-bash-debian-9`, `1.14.0-bash-debian-9-r0`, `1.14-bash`, `1.14.0-bash`, `1.14.0-bash-r0` (1.14-bash/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-bash-debian-9-r0/1.14-bash/Dockerfile)
 
 # Get this image
@@ -336,7 +336,7 @@ $ docker-compose up nginx
 
 ## 1.12.1-r2
 
-- The nginx container has been migrated to a non-root container approach. Previously the container run as `root` user and the nginx daemon was started as `nginx` user. From now own, both the container and the nginx daemon run as user `1001`.
+- The nginx container has been migrated to a non-root container approach. Previously the container run as `root` user and the nginx daemon was started as `nginx` user. From now on, both the container and the nginx daemon run as user `1001`.
   As a consequence, the configuration files are writable by the user running the nginx process.
 
 ## 1.10.0-r0
