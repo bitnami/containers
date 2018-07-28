@@ -27,7 +27,7 @@ Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource suppor
 
 
 * [`0-ol-7`, `0.4.0-ol-7-r2` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.4.0-ol-7-r2/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.4.0-debian-9-r2`, `0`, `0.4.0`, `0.4.0-r2`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.4.0-debian-9-r2/0/Dockerfile)
+* [`0-debian-9`, `0.4.0-debian-9-r3`, `0`, `0.4.0`, `0.4.0-r3`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.4.0-debian-9-r3/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/acmesolver GitHub repo](https://github.com/bitnami/bitnami-docker-acmesolver).
 
