@@ -35,8 +35,8 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`3.7-ol-7`, `3.7.7-ol-7-r21` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-ol-7-r21/3.7/ol-7/Dockerfile)
-* [`3.7-debian-9`, `3.7.7-debian-9-r22`, `3.7`, `3.7.7`, `3.7.7-r22`, `latest` (3.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-debian-9-r22/3.7/Dockerfile)
+* [`3.7-ol-7`, `3.7.7-ol-7-r22` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-ol-7-r22/3.7/ol-7/Dockerfile)
+* [`3.7-debian-9`, `3.7.7-debian-9-r23`, `3.7`, `3.7.7`, `3.7.7-r23`, `latest` (3.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-debian-9-r23/3.7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
@@ -426,6 +426,10 @@ $ docker-compose up rabbitmq
 ```
 
 # Notable changes
+
+## 3.7.7-r19
+
+- The RabbitMQ container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the RabbitMQ daemon was started as the `rabbitmq` user. From now on, both the container and the RabbitMQ daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ## 3.6.5-r2
 
