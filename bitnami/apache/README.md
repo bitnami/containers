@@ -34,7 +34,7 @@ $ docker-compose up -d
 
 * [`2.4-rhel-7`, `2.4.34-rhel-7-r1` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-rhel-7-r1/2.4/rhel-7/Dockerfile)
 * [`2.4-ol-7`, `2.4.34-ol-7-r11` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-ol-7-r11/2.4/ol-7/Dockerfile)
-* [`2.4-debian-9`, `2.4.34-debian-9-r11`, `2.4`, `2.4.34`, `2.4.34-r11`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-debian-9-r11/2.4/Dockerfile)
+* [`2.4-debian-9`, `2.4.34-debian-9-r12`, `2.4`, `2.4.34`, `2.4.34-r12`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-debian-9-r12/2.4/Dockerfile)
 
 # Get this image
 
@@ -73,15 +73,15 @@ services:
   apache:
     image: 'bitnami/apache:latest'
     ports:
-      - '80:80'
-      - '443:443'
+      - '80:8080'
+      - '443:8443'
     volumes:
       - /path/to/app:/app
 ```
 
 # Accessing your server from the host
 
-To access your web server from your host machine you can ask Docker to map a random port on your host to ports `80` and `443` exposed in the container.
+To access your web server from your host machine you can ask Docker to map a random port on your host to ports `8080` and `8443` exposed in the container.
 
 ```bash
 $ docker run --name apache -P bitnami/apache:latest
@@ -91,14 +91,14 @@ Run `docker port` to determine the random ports Docker assigned.
 
 ```bash
 $ docker port apache
-443/tcp -> 0.0.0.0:32768
-80/tcp -> 0.0.0.0:32769
+8443/tcp -> 0.0.0.0:32768
+8080/tcp -> 0.0.0.0:32769
 ```
 
 You can also manually specify the ports you want forwarded from your host to the container.
 
 ```bash
-$ docker run -p 8080:80 -p 8443:443 bitnami/apache:latest
+$ docker run -p 8080:8080 -p 8443:8443 bitnami/apache:latest
 ```
 
 Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
@@ -120,10 +120,10 @@ services:
     labels:
       kompose.service.type: nodeport
     ports:
-      - '80:8080'
-      - '443:443'
+      - '80:8081'
+      - '443:8443'
     environment:
-      - APACHE_HTTP_PORT_NUMBER=8080
+      - APACHE_HTTP_PORT_NUMBER=8081
     volumes:
       - 'apache_data:/bitnami'
 volumes:
@@ -134,17 +134,17 @@ volumes:
  * For manual execution add a `-e` option with each variable and value:
 
 ```bash
-$ docker run -d --name apache -p 80:8080 -p 443:443 \
+$ docker run -d --name apache -p 80:8081 -p 443:443 \
   --network apache-tier \
-  --e APACHE_HTTP_PORT_NUMBER=8080 \
+  --e APACHE_HTTP_PORT_NUMBER=8081 \
   --volume /path/to/apache-persistence:/bitnami \
   bitnami/apache:latest
 ```
 
 Available variables:
 
- - `APACHE_HTTP_PORT_NUMBER`: Port used by Apache for HTTP. Default: **80**
- - `APACHE_HTTPS_PORT_NUMBER`: Port used by Apache for HTTPS. Default: **443**
+ - `APACHE_HTTP_PORT_NUMBER`: Port used by Apache for HTTP. Default: **8080**
+ - `APACHE_HTTPS_PORT_NUMBER`: Port used by Apache for HTTPS. Default: **8443**
 
 ## Adding custom virtual hosts
 
@@ -155,7 +155,7 @@ For example, in order add a vhost for `www.example.com`:
 # Step 1: Write your `my_vhost.conf` file with the following content.
 
 ```apache
-<VirtualHost *:80>
+<VirtualHost *:8080>
   ServerName www.example.com
   DocumentRoot "/app"
   <Directory "/app">
@@ -183,8 +183,8 @@ services:
   apache:
     image: 'bitnami/apache:latest'
     ports:
-      - '80:80'
-      - '443:443'
+      - '80:8080'
+      - '443:8443'
     volumes:
       - /path/to/my_vhost.conf:/bitnami/apache/conf/vhosts/my_vhost.conf:ro
 ```
@@ -224,8 +224,8 @@ services:
   apache:
     image: 'bitnami/apache:latest'
     ports:
-      - '80:80'
-      - '443:443'
+      - '80:8080'
+      - '443:8443'
     volumes:
       - /path/to/apache-persistence/apache/conf/bitnami/certs:/bitnami/apache/conf/bitnami/certs
 ```
@@ -253,8 +253,8 @@ services:
   apache:
     image: 'bitnami/apache:latest'
     ports:
-      - '80:80'
-      - '443:443'
+      - '80:8080'
+      - '443:8443'
     volumes:
       - /path/to/apache-persistence:/bitnami
 ```
@@ -374,6 +374,10 @@ $ docker-compose up apache
 ](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
 
 # Notable Changes
+
+## 2.4.34-r8
+
+- The Apache container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Apache daemon was started as the `apache` user. From now on, both the container and the Apache daemon run as user `1001`. As a consequence, the HTTP/HTTPS ports exposed by the container are now 8080/8443 instead of 80/443. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ## 2.4.18-r0
 
