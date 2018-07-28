@@ -26,8 +26,8 @@ $ docker run --name kubewatch bitnami/kubewatch:latest
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`0-ol-7`, `0.0.4-ol-7-r32` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-ol-7-r32/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.0.4-debian-9-r18`, `0`, `0.0.4`, `0.0.4-r18`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r18/0/Dockerfile)
+* [`0-ol-7`, `0.0.4-ol-7-r33` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-ol-7-r33/0/ol-7/Dockerfile)
+* [`0-debian-9`, `0.0.4-debian-9-r19`, `0`, `0.0.4`, `0.0.4-r19`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r19/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubewatch GitHub repo](https://github.com/bitnami/bitnami-docker-kubewatch).
 
