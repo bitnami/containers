@@ -31,7 +31,7 @@ $ docker-compose up
 * [`4-rhel-7`, `4.9.7-rhel-7-r1` (4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.7-rhel-7-r1/4/rhel-7/Dockerfile)
 * [`4-php5-rhel-7`, `4.9.7-php5-rhel-7-r0` (4-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.7-php5-rhel-7-r0/4-php5/rhel-7/Dockerfile)
 * [`4-ol-7`, `4.9.7-ol-7-r19` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.7-ol-7-r19/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.9.7-debian-9-r23`, `4`, `4.9.7`, `4.9.7-r23`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.7-debian-9-r23/4/Dockerfile)
+* [`4-debian-9`, `4.9.7-debian-9-r24`, `4`, `4.9.7`, `4.9.7-r24`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.7-debian-9-r24/4/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
