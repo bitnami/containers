@@ -23,7 +23,7 @@ Service Catalog installs into a Kubernetes cluster and runs behind the [Kubernet
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`0-ol-7`, `0.1.27-ol-7-r1` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-service-catalog/blob/0.1.27-ol-7-r1/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.1.27-ol-7-r2` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-service-catalog/blob/0.1.27-ol-7-r2/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.1.27-debian-9-r2`, `0`, `0.1.27`, `0.1.27-r2`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-service-catalog/blob/0.1.27-debian-9-r2/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/service-catalog GitHub repo](https://github.com/bitnami/bitnami-docker-service-catalog).
