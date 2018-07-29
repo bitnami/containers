@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r90
+FROM bitnami/minideb-extras:stretch-r91
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.14.0-debian-9-r22" \
+    BITNAMI_IMAGE_VERSION="1.14.0-debian-9-r23" \
     NGINX_DAEMON_GROUP="nginx" \
     NGINX_DAEMON_USER="nginx" \
     NGINX_HTTPS_PORT_NUMBER="8443" \
