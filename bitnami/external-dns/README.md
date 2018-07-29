@@ -28,7 +28,7 @@ $ docker run --name external-dns bitnami/external-dns:latest
 
 
 * [`0-ol-7`, `0.5.4-ol-7-r9` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.5.4-ol-7-r9/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.5.4-debian-9-r9`, `0`, `0.5.4`, `0.5.4-r9`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.5.4-debian-9-r9/0/Dockerfile)
+* [`0-debian-9`, `0.5.4-debian-9-r11`, `0`, `0.5.4`, `0.5.4-r11`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.5.4-debian-9-r11/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/external-dns GitHub repo](https://github.com/bitnami/bitnami-docker-external-dns).
 
