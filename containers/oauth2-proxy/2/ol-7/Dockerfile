@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r49 as buildenv
+FROM bitnami/oraclelinux-extras:7-r51 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/oauth2-proxy-2.2.0-0-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r49
+FROM bitnami/oraclelinux-extras:7-r51
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/oauth2-proxy /opt/bitnami/oauth2-proxy
 ENV BITNAMI_APP_NAME="oauth2-proxy" \
-    BITNAMI_IMAGE_VERSION="2.2.0-ol-7-r33" \
+    BITNAMI_IMAGE_VERSION="2.2.0-ol-7-r34" \
     PATH="/opt/bitnami/oauth2-proxy/bin:$PATH"
 
 RUN install_packages ca-certificates
