@@ -25,7 +25,7 @@ $ docker run --name alertmanager bitnami/alertmanager:latest
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`0-ol-7`, `0.15.1-ol-7-r3` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.15.1-ol-7-r3/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.15.1-ol-7-r4` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.15.1-ol-7-r4/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.15.1-debian-9-r5`, `0`, `0.15.1`, `0.15.1-r5`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.15.1-debian-9-r5/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/alertmanager GitHub repo](https://github.com/bitnami/bitnami-docker-alertmanager).
