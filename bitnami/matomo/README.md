@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 
 * [`3-ol-7`, `3.5.1-ol-7-r15` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.5.1-ol-7-r15/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.5.1-debian-9-r5`, `3`, `3.5.1`, `3.5.1-r5`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.5.1-debian-9-r5/3/Dockerfile)
+* [`3-debian-9`, `3.5.1-debian-9-r6`, `3`, `3.5.1`, `3.5.1-r6`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.5.1-debian-9-r6/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
 
