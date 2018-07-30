@@ -28,7 +28,7 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`4-ol-7`, `4.8.2-ol-7-r32` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.8.2-ol-7-r32/4/ol-7/Dockerfile)
+* [`4-ol-7`, `4.8.2-ol-7-r33` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.8.2-ol-7-r33/4/ol-7/Dockerfile)
 * [`4-debian-9`, `4.8.2-debian-9-r10`, `4`, `4.8.2`, `4.8.2-r10`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.8.2-debian-9-r10/4/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpmyadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phpmyadmin).
