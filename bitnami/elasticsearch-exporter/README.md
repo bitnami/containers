@@ -26,7 +26,7 @@ $ docker run --name elasticsearch-exporter bitnami/elasticsearch-exporter:latest
 
 
 * [`1-ol-7`, `1.0.2-ol-7-r35` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-ol-7-r35/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.0.2-debian-9-r22`, `1`, `1.0.2`, `1.0.2-r22`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-debian-9-r22/1/Dockerfile)
+* [`1-debian-9`, `1.0.2-debian-9-r23`, `1`, `1.0.2`, `1.0.2-r23`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-debian-9-r23/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter).
 # Get this image
