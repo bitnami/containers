@@ -32,7 +32,7 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`1-ol-7`, `1.5.9-ol-7-r17` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.9-ol-7-r17/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.5.9-ol-7-r18` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.9-ol-7-r18/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.5.9-debian-9-r17`, `1`, `1.5.9`, `1.5.9-r17`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.9-debian-9-r17/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/memcached GitHub repo](https://github.com/bitnami/bitnami-docker-memcached).
