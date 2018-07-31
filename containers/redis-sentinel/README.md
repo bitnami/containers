@@ -36,7 +36,7 @@ $ docker-compose up -d
 
 
 * [`4.0-ol-7`, `4.0.10-ol-7-r29` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.10-ol-7-r29/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.10-debian-9-r24`, `4.0`, `4.0.10`, `4.0.10-r24`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.10-debian-9-r24/4.0/Dockerfile)
+* [`4.0-debian-9`, `4.0.10-debian-9-r25`, `4.0`, `4.0.10`, `4.0.10-r25`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.10-debian-9-r25/4.0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
 
