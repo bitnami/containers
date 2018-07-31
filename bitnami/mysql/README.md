@@ -33,7 +33,7 @@ $ docker-compose up -d
 
 
 * [`8.0-ol-7`, `8.0.11-ol-7-r34` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.11-ol-7-r34/8.0/ol-7/Dockerfile)
-* [`8.0-debian-9`, `8.0.11-debian-9-r20`, `8.0`, `8.0.11`, `8.0.11-r20` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.11-debian-9-r20/8.0/Dockerfile)
+* [`8.0-debian-9`, `8.0.11-debian-9-r21`, `8.0`, `8.0.11`, `8.0.11-r21` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.11-debian-9-r21/8.0/Dockerfile)
 * [`5.7-ol-7`, `5.7.23-ol-7-r0` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.23-ol-7-r0/5.7/ol-7/Dockerfile)
 * [`5.7-debian-9`, `5.7.23-debian-9-r3`, `5.7`, `5.7.23`, `5.7.23-r3`, `latest` (5.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.23-debian-9-r3/5.7/Dockerfile)
 
