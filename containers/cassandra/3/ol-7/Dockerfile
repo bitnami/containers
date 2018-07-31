@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r52
+FROM bitnami/oraclelinux-extras:7-r53
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN bitnami-pkg unpack cassandra-3.11.2-6 --checksum 8206ec49af443238c39b2fa2bbc
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.2-ol-7-r34" \
+    BITNAMI_IMAGE_VERSION="3.11.2-ol-7-r35" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
     CASSANDRA_ENABLE_REMOTE_CONNECTIONS="true" \
