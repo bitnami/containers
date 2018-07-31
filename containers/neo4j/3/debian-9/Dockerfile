@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r92
+FROM bitnami/minideb-extras:stretch-r93
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack neo4j-3.4.4-1 --checksum db8d034bfd93235e07562151edb13f85
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="3.4.4-debian-9-r12" \
+    BITNAMI_IMAGE_VERSION="3.4.4-debian-9-r13" \
     NEO4J_BOLT_PORT_NUMBER="7687" \
     NEO4J_HOST="" \
     NEO4J_HTTPS_PORT_NUMBER="7473" \
