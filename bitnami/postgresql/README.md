@@ -31,7 +31,7 @@ $ docker-compose up -d
 
 
 * [`10-ol-7`, `10.4.0-ol-7-r38` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-ol-7-r38/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.4.0-debian-9-r26`, `10`, `10.4.0`, `10.4.0-r26`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-debian-9-r26/10/Dockerfile)
+* [`10-debian-9`, `10.4.0-debian-9-r27`, `10`, `10.4.0`, `10.4.0-r27`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.4.0-debian-9-r27/10/Dockerfile)
 * [`9.6-ol-7`, `9.6.9-ol-7-r37` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-ol-7-r37/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.9-debian-9-r26`, `9.6`, `9.6.9`, `9.6.9-r26` (9.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.9-debian-9-r26/9.6/Dockerfile)
 
@@ -467,6 +467,10 @@ $ docker-compose up postgresql
 ```
 
 # Notable Changes
+
+## 9.6.9-r19 and 10.4.0-r19
+
+- The PostgreSQL container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the PostgreSQL daemon was started as the `postgres` user. From now on, both the container and the PostgreSQL daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ## 9.5.3-r5
 
