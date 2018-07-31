@@ -5,9 +5,8 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "1.14,1.14-bash"
+          RELEASE_SERIES_LIST: "1.14"
           LATEST_STABLE: "1.14"
-          VARIANTS_LIST: "bash"
           DISTRIBUTIONS_LIST: "debian-9,ol-7,rhel-7"
           IMAGE_NAME: nginx
           CHART_NAME: nginx
