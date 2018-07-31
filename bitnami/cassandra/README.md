@@ -31,7 +31,7 @@ $ docker-compose up -d
 
 
 * [`3-ol-7`, `3.11.2-ol-7-r34` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.2-ol-7-r34/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.11.2-debian-9-r23`, `3`, `3.11.2`, `3.11.2-r23`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.2-debian-9-r23/3/Dockerfile)
+* [`3-debian-9`, `3.11.2-debian-9-r24`, `3`, `3.11.2`, `3.11.2-r24`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.2-debian-9-r24/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
 
