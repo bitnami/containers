@@ -32,7 +32,7 @@ $ docker-compose up
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`3-ol-7`, `3.3.9-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.9-ol-7-r0/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.3.9-ol-7-r1` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.9-ol-7-r1/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.3.9-debian-9-r7`, `3`, `3.3.9`, `3.3.9-r7`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.9-debian-9-r7/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/etcd GitHub repo](https://github.com/bitnami/bitnami-docker-etcd).
