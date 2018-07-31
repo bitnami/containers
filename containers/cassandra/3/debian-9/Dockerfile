@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r92
+FROM bitnami/minideb-extras:stretch-r93
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN bitnami-pkg unpack cassandra-3.11.2-6 --checksum 01acae6c7ad52925105eeba2f88
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.2-debian-9-r23" \
+    BITNAMI_IMAGE_VERSION="3.11.2-debian-9-r24" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
     CASSANDRA_ENABLE_REMOTE_CONNECTIONS="true" \
