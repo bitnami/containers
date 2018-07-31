@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r52
+FROM bitnami/oraclelinux-extras:7-r53
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,7 +8,7 @@ RUN bitnami-pkg unpack elasticsearch-5.6.4-3 --checksum 86c9320a5817f1c8f9e00685
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="5.6.4-ol-7-r26" \
+    BITNAMI_IMAGE_VERSION="5.6.4-ol-7-r27" \
     ELASTICSEARCH_BIND_ADDRESS="" \
     ELASTICSEARCH_CLUSTER_HOSTS="" \
     ELASTICSEARCH_CLUSTER_NAME="elasticsearch-cluster" \
