@@ -318,7 +318,7 @@ $ docker-compose up nginx
 
 # Notable Changes
 
-## Debian 9 1.14.0-r24 and OL 7 1.14.0-r46
+## Debian 9 1.14.0-r25 and OL 7 1.14.0-r46
 
 - Decrease the size of the container. It is not necessary Node.js anymore. Nginx configuration moved to bash scripts in the rootfs/ folder.
 - Removed sample SSL certificates. The port 443/8443 is not enabled by default.
