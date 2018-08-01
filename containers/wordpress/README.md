@@ -28,7 +28,7 @@ $ docker-compose up
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`4-rhel-7`, `4.9.7-rhel-7-r1` (4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.7-rhel-7-r1/4/rhel-7/Dockerfile)
+* [`4-rhel-7`, `4.9.7-rhel-7-r2` (4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.7-rhel-7-r2/4/rhel-7/Dockerfile)
 * [`4-php5-rhel-7`, `4.9.7-php5-rhel-7-r0` (4-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.7-php5-rhel-7-r0/4-php5/rhel-7/Dockerfile)
 * [`4-ol-7`, `4.9.7-ol-7-r22` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.7-ol-7-r22/4/ol-7/Dockerfile)
 * [`4-debian-9`, `4.9.7-debian-9-r26`, `4`, `4.9.7`, `4.9.7-r26`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.7-debian-9-r26/4/Dockerfile)
