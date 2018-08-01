@@ -32,7 +32,7 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`1.14-rhel-7`, `1.14.0-rhel-7-r6` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-rhel-7-r6/1.14/rhel-7/Dockerfile)
+* [`1.14-rhel-7`, `1.14.0-rhel-7-r7` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-rhel-7-r7/1.14/rhel-7/Dockerfile)
 * [`1.14-ol-7`, `1.14.0-ol-7-r45` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-ol-7-r45/1.14/ol-7/Dockerfile)
 * [`1.14-debian-9`, `1.14.0-debian-9-r24`, `1.14`, `1.14.0`, `1.14.0-r24`, `latest` (1.14/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-debian-9-r24/1.14/Dockerfile)
 
@@ -76,7 +76,6 @@ services:
     image: 'bitnami/nginx:latest'
     ports:
       - '80:8080'
-      - '443:8443'
     volumes:
       - /path/to/app:/app
 ```
@@ -93,14 +92,13 @@ Run `docker port` to determine the random ports Docker assigned.
 
 ```bash
 $ docker port nginx
-8443/tcp -> 0.0.0.0:32768
 8080/tcp -> 0.0.0.0:32769
 ```
 
 You can also manually specify the ports you want forwarded from your host to the container.
 
 ```bash
-$ docker run -p 9000:8080 -p 9443:8443 bitnami/nginx:latest
+$ docker run -p 9000:8080 bitnami/nginx:latest
 ```
 
 Access your web server in the browser by navigating to [http://localhost:9000](http://localhost:9000/).
@@ -128,7 +126,7 @@ server {
 
 ```bash
 $ docker run --name nginx \
-  -v /path/to/my_vhost.conf:/bitnami/nginx/conf/vhosts/my_vhost.conf:ro \
+  -v /path/to/my_vhost.conf:/opt/bitnami/nginx/conf/vhosts/my_vhost.conf:ro \
   bitnami/nginx:latest
 ```
 
@@ -142,16 +140,13 @@ services:
     image: 'bitnami/nginx:latest'
     ports:
       - '80:8080'
-      - '443:8443'
     volumes:
-      - /path/to/my_vhost.conf:/bitnami/nginx/conf/vhosts/my_vhost.conf:ro
+      - /path/to/my_vhost.conf:/opt/bitnami/nginx/conf/vhosts/my_vhost.conf:ro
 ```
 
 ## Using custom SSL certificates
 
 *NOTE:* The steps below assume that you are using a custom domain name and that you have already configured the custom domain name to point to your server.
-
-This container comes with SSL support already pre-configured and with a dummy certificate in place (`server.crt` and `server.key` files in `/bitnami/nginx/conf/bitnami/certs`). If you want to use your own certificate (`.crt`) and certificate key (`.key`) files, follow the steps below:
 
 ### Step 1: Prepare your certificate files
 
@@ -163,12 +158,36 @@ $ cp /path/to/certfile.crt /path/to/nginx-persistence/nginx/conf/bitnami/certs/s
 $ cp /path/to/keyfile.key  /path/to/nginx-persistence/nginx/conf/bitnami/certs/server.key
 ```
 
-### Step 2: Run the Nginx image
+### Step 2: Provide a custom Virtual Host for SSL connections
+
+Write your `my_vhost.conf` file with the SSL configuration and the relative path to the certificates.
+```nginx
+  server {
+    listen       8443 ssl;
+  
+    ssl_certificate      bitnami/certs/server.crt;
+    ssl_certificate_key  bitnami/certs/server.key;
+  
+    ssl_session_cache    shared:SSL:1m;
+    ssl_session_timeout  5m;
+  
+    ssl_ciphers  HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers  on;
+  
+    location / {
+      root   html;
+      index  index.html index.htm;
+    }
+  }
+```
+
+### Step 3: Run the Nginx image and open the SSL port
 
 Run the Nginx image, mounting the certificates directory from your host.
 
 ```bash
 $ docker run --name nginx \
+  -v /path/to/my_vhost.conf:/opt/bitnami/nginx/conf/vhosts/my_vhost.conf:ro \
   -v /path/to/nginx-persistence/nginx/conf/bitnami/certs:/bitnami/nginx/conf/bitnami/certs \
   bitnami/nginx:latest
 ```
@@ -190,15 +209,12 @@ services:
 
 ## Full configuration
 
-The image looks for configurations in `/bitnami/nginx/conf/`. You can mount a volume at `/bitnami` and copy/edit the configurations in the `/bitnami/nginx/conf/`. The default configurations will be populated in the `conf/` directory if it's empty.
+The image looks for configurations in `/opt/bitnami/nginx/conf/nginx.conf`. You can overwrite the `nginx.conf` file using your own custom configuration file.
 
-### Step 1: Run the nginx image
-
-Run the nginx image, mounting a directory from your host.
 
 ```bash
 $ docker run --name nginx \
-  -v /path/to/nginx-persistence:/bitnami \
+  -v /path/to/your_nginx.conf:/opt/bitnami/nginx/conf/nginx.conf \
   bitnami/nginx:latest
 ```
 
@@ -212,36 +228,13 @@ services:
     image: 'bitnami/nginx:latest'
     ports:
       - '80:8080'
-      - '443:8443'
     volumes:
-      - /path/to/nginx-persistence:/bitnami
-```
-
-### Step 2: Edit the configuration
-
-Edit the configuration on your host using your favorite editor.
-
-```bash
-$ vi /path/to/nginx-persistence/nginx/conf/nginx.conf
-```
-
-### Step 4: Restart nginx
-
-After changing the configuration, restart your nginx container for changes to take effect.
-
-```bash
-$ docker restart nginx
-```
-
-or using Docker Compose:
-
-```bash
-$ docker-compose restart nginx
+      - /path/to/your_nginx.conf:/opt/bitnami/nginx/conf/nginx.conf
 ```
 
 # Reverse proxy to other containers
 
-nginx can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an nginx frontend. Bitnami provides example virtual hosts for all of our runtime containers in `/bitnami/nginx/conf/vhosts/`.
+nginx can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an nginx frontend. Bitnami provides example virtual hosts for all of our runtime containers in `/opt/bitnami/nginx/conf/vhosts/`.
 
 **Further Reading:**
 
@@ -292,14 +285,6 @@ or using Docker Compose:
 $ docker-compose stop nginx
 ```
 
-Next, take a snapshot of the persistent volume `/path/to/nginx-persistence` using:
-
-```bash
-$ rsync -a /path/to/nginx-persistence /path/to/nginx-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-You can use this snapshot to restore the database state should the upgrade fail.
-
 ### Step 3: Remove the currently running container
 
 ```bash
@@ -332,6 +317,14 @@ $ docker-compose up nginx
 ](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
 # Notable Changes
+
+## Debian 9 1.14.0-r24 and OL 7 1.14.0-r46
+
+- Decrease the size of the container. It is not necessary Node.js anymore. Nginx configuration moved to bash scripts in the rootfs/ folder.
+- Removed sample SSL certificates. The port 443/8443 is not enabled by default.
+- The main `nginx.conf` file is not persisted in a volume. The path is `/opt/bitnami/nginx/conf/nginx.conf`.
+- Dropped the default volume for persisting the configuration files.
+
 
 ## 1.12.1-r2
 
