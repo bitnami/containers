@@ -31,7 +31,7 @@ $ docker-compose up -d
 
 
 * [`3-ol-7`, `3.11.2-ol-7-r35` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.2-ol-7-r35/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.11.2-debian-9-r24`, `3`, `3.11.2`, `3.11.2-r24`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.2-debian-9-r24/3/Dockerfile)
+* [`3-debian-9`, `3.11.2-debian-9-r25`, `3`, `3.11.2`, `3.11.2-r25`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.2-debian-9-r25/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
 
@@ -392,6 +392,12 @@ or using Docker Compose:
 ```bash
 $ docker-compose up cassandra
 ```
+
+# Notable Changes
+
+## 3.11.2-r22
+
+- The Cassandra container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Cassandra daemon was started as the `cassandra` user. From now on, both the container and the Cassandra daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 # Contributing
 
