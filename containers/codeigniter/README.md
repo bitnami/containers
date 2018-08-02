@@ -33,8 +33,8 @@ The Bitnami CodeIgniter Development Container has been carefully engineered to p
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`3-ol-7`, `3.1.9-ol-7-r30` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.9-ol-7-r30/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.1.9-debian-9-r23`, `3`, `3.1.9`, `3.1.9-r23`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.9-debian-9-r23/3/Dockerfile)
+* [`3-ol-7`, `3.1.9-ol-7-r31` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.9-ol-7-r31/3/ol-7/Dockerfile)
+* [`3-debian-9`, `3.1.9-debian-9-r22`, `3`, `3.1.9`, `3.1.9-r22`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.9-debian-9-r22/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codeigniter GitHub repo](https://github.com/bitnami/bitnami-docker-codeigniter).
 
