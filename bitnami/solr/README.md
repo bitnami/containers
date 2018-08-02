@@ -33,7 +33,7 @@ $ docker-compose up -d
 
 
 * [`7-ol-7`, `7.4.0-ol-7-r32` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.4.0-ol-7-r32/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.4.0-debian-9-r23`, `7`, `7.4.0`, `7.4.0-r23`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.4.0-debian-9-r23/7/Dockerfile)
+* [`7-debian-9`, `7.4.0-debian-9-r24`, `7`, `7.4.0`, `7.4.0-r24`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.4.0-debian-9-r24/7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
 
@@ -255,6 +255,11 @@ or using Docker Compose:
 ```bash
 $ docker-compose up solr
 ```
+# Notable Changes
+
+## 7.4.0-r23
+
+- The Solr container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Solr daemon was started as the `solr` user. From now on, both the container and the MongoDB daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 # Contributing
 
