@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r91
+FROM bitnami/minideb-extras:stretch-r94
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack kibana-6.3.2-0 --checksum b7b3150eada68f07133f40f457f94fa
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="6.3.2-debian-9-r2" \
+    BITNAMI_IMAGE_VERSION="6.3.2-debian-9-r3" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
