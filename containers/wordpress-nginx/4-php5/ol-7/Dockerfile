@@ -1,17 +1,17 @@
-FROM bitnami/oraclelinux-extras:7-r53
+FROM bitnami/oraclelinux-extras:7-r56
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
+RUN install_packages bzip2-libs cyrus-sasl-lib freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline xz-libs zlib
 RUN bitnami-pkg unpack nginx-1.14.0-2 --checksum 1f459a388d680c18a47177b7e3c50af4e0402311b6f67ae72bd4bff76b6b965e
 RUN bitnami-pkg unpack php-5.6.37-0 --checksum d978b657a5baf990912900708f9537321785d96c706894374896cb089796595a
 RUN bitnami-pkg unpack mysql-client-10.1.34-0 --checksum 012f1f222898565b55f7d4522514c7c130d2bfe4c988754eed658ef6dafa980c
-RUN bitnami-pkg unpack wordpress-4.9.7-1 --checksum 2a2c3dd66a2c8822b13fdb30c36ae45c995b4d73e686dba9ce08252b5face821
+RUN bitnami-pkg unpack wordpress-4.9.8-0 --checksum 0af2c7e45d8140124eced1571ce0dca1beb081a906f6cc88440c2132809a4e5d
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="4.9.7-php5-ol-7-r20" \
+    BITNAMI_IMAGE_VERSION="4.9.8-php5-ol-7-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -22,7 +22,6 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
     NGINX_DAEMON_GROUP="daemon" \
     NGINX_DAEMON_USER="daemon" \
-    NGINX_HTTPS_PORT_NUMBER="443" \
     NGINX_HTTP_PORT_NUMBER="80" \
     PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:$PATH" \
     SMTP_HOST="" \
