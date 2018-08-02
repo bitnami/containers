@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r53
+FROM bitnami/oraclelinux-extras:7-r56
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack tensorflow-serving-1.9.0-0 --checksum c40ca4985227e91348c
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="1.9.0-ol-7-r17" \
+    BITNAMI_IMAGE_VERSION="1.9.0-ol-7-r18" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_MODEL_NAME="inception" \
     TENSORFLOW_SERVING_PORT_NUMBER="8500" \
