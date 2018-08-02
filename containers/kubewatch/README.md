@@ -27,7 +27,7 @@ $ docker run --name kubewatch bitnami/kubewatch:latest
 
 
 * [`0-ol-7`, `0.0.4-ol-7-r37` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-ol-7-r37/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.0.4-debian-9-r22`, `0`, `0.0.4`, `0.0.4-r22`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r22/0/Dockerfile)
+* [`0-debian-9`, `0.0.4-debian-9-r23`, `0`, `0.0.4`, `0.0.4-r23`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r23/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubewatch GitHub repo](https://github.com/bitnami/bitnami-docker-kubewatch).
 
