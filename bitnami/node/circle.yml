@@ -6,7 +6,7 @@ jobs:
       - image: docker:17.06.0-ce-git
         environment:
           RELEASE_SERIES_LIST: "10,6,8"
-          LATEST_STABLE: "6"
+          LATEST_STABLE: "8"
           DISTRIBUTIONS_LIST: "debian-9,ol-7"
           IMAGE_NAME: node
           CHART_NAME: node
