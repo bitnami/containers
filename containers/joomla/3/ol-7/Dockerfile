@@ -7,14 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.34-1 --checksum d06af72741b365147c39bb30ca9e1d
 RUN bitnami-pkg unpack php-7.0.31-1 --checksum f58969a4b2e7a6607e17bd6446c4a8e7af780d6275955c274495ac222ac81771
 RUN bitnami-pkg unpack mysql-client-10.1.34-0 --checksum 012f1f222898565b55f7d4522514c7c130d2bfe4c988754eed658ef6dafa980c
 RUN bitnami-pkg install libphp-7.0.31-0 --checksum 760bd9fad0870ff05810f287701879a858ee8952a146864aa06b18f8143ac3c5
-RUN bitnami-pkg unpack joomla-3.8.10-0 --checksum 56da2f666fbe010c889c6412a89ad6d2142161b1c804d90f6c335ff0956fa523
+RUN bitnami-pkg unpack joomla-3.8.11-0 --checksum 85448098a78760c311316475105bcf51243021bce4421f0afd5add8449d36fcc
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.8.10-ol-7-r31" \
+    BITNAMI_IMAGE_VERSION="3.8.11-ol-7-r0" \
     JOOMLA_DATABASE_NAME="bitnami_joomla" \
     JOOMLA_DATABASE_PASSWORD="" \
     JOOMLA_DATABASE_USER="bn_joomla" \
