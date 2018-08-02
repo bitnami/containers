@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras:7-r45
+FROM gcr.io/helm-publish-ci/redhat-extras:7-r52
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack apache-2.4.34-1 --checksum cdaa4e89b26534999debc5d7dc1b34
 RUN bitnami-pkg unpack php-5.6.37-0 --checksum b8a15abc0b10812ad6a022ee8a37551daef09ebb1fbcfa44d1cc65e807aa229c
 RUN bitnami-pkg unpack mysql-client-10.1.33-0 --checksum 4b07acdb7d3f6a61161414ad7f7639da8f291962e242eb257f612d18c8231501
 RUN bitnami-pkg install libphp-5.6.37-0 --checksum cf697ebb69ece27a31fe486af0e2d8710ca2dc98358047dd7f43f8b8f8553da4
-RUN bitnami-pkg unpack wordpress-4.9.7-1 --checksum c570454b241f9b7ae6a4b0e823c31f03544d2c559042e2989de511dde1e017a2
+RUN bitnami-pkg unpack wordpress-4.9.8-0 --checksum 92615e51c5417f36f7df3e2d3777537bfbfbd8ba38920c9da7e25d52e1f50931
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/error_log
 
@@ -20,7 +20,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="4.9.7-php5-rhel-7-r1" \
+    BITNAMI_IMAGE_VERSION="4.9.8-php5-rhel-7-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
