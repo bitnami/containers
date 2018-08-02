@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r55
+FROM bitnami/oraclelinux-extras:7-r56
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -13,7 +13,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="8.0.12-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="8.0.12-ol-7-r1" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
