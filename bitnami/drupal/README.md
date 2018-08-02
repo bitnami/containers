@@ -28,9 +28,9 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
+* [`8-ol-7`, `8.5.6-ol-7-r0` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.6-ol-7-r0/8/ol-7/Dockerfile)
 * [`8-rhel-7`, `8.5.5-rhel-7-r2` (8/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.5-rhel-7-r2/8/rhel-7/Dockerfile)
 * [`8-php5-rhel-7`, `8.5.5-php5-rhel-7-r2` (8-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.5-php5-rhel-7-r2/8-php5/rhel-7/Dockerfile)
-* [`8-ol-7`, `8.5.5-ol-7-r20` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.5-ol-7-r20/8/ol-7/Dockerfile)
 * [`8-debian-9`, `8.5.5-debian-9-r18`, `8`, `8.5.5`, `8.5.5-r18`, `latest` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.5-debian-9-r18/8/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
