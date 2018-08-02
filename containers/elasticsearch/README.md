@@ -32,7 +32,7 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`6-ol-7`, `6.3.2-ol-7-r5` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.2-ol-7-r5/6/ol-7/Dockerfile)
+* [`6-ol-7`, `6.3.2-ol-7-r6` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.2-ol-7-r6/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.3.2-debian-9-r7`, `6`, `6.3.2`, `6.3.2-r7`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.2-debian-9-r7/6/Dockerfile)
 * [`5-ol-7`, `5.6.4-ol-7-r27` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-ol-7-r27/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.6.4-debian-9-r18`, `5`, `5.6.4`, `5.6.4-r18` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-debian-9-r18/5/Dockerfile)
@@ -346,6 +346,10 @@ $ docker-compose up elasticsearch
 ```
 
 # Notable Changes
+
+## 6.2.3-r7 & 5.6.4-r18
+
+- The Elasticsearch container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Elasticsearch daemon was started as the `elasticsearch` user. From now on, both the container and the Elasticsearch daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ## 6.2.3-r2 & 5.6.4-r6
 

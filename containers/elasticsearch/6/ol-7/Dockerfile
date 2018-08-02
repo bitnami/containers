@@ -1,14 +1,17 @@
-FROM bitnami/oraclelinux-extras:7-r53
+FROM bitnami/oraclelinux-extras:7-r56
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    HOME="/"
 
 # Install required system packages and dependencies
 RUN install_packages glib2 glibc libblkid libffi libgcc libmount libselinux libstdc++ libuuid pcre zlib
 RUN bitnami-pkg install java-1.8.181-1 --checksum 6e7fc2779b6e0e3c6c0a2687b1d747d8a427594ff80b8c94b055c839e387e6b1
-RUN bitnami-pkg unpack elasticsearch-6.3.2-0 --checksum e7694e9c5a603fbf70979bd7c2216259b9b4d49144bc1893fcae5d16b44e94e0
+RUN bitnami-pkg unpack elasticsearch-6.3.2-1 --checksum 59b88d97d77399a09a659c494d4cbe5529b0f676e02c836921d8627a9fe9a50b
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="6.3.2-ol-7-r5" \
+    BITNAMI_IMAGE_VERSION="6.3.2-ol-7-r6" \
     ELASTICSEARCH_BIND_ADDRESS="" \
     ELASTICSEARCH_CLUSTER_HOSTS="" \
     ELASTICSEARCH_CLUSTER_NAME="elasticsearch-cluster" \
@@ -23,5 +26,6 @@ ENV BITNAMI_APP_NAME="elasticsearch" \
 
 EXPOSE 9200 9300
 
+USER 1001
 ENTRYPOINT ["/app-entrypoint.sh"]
 CMD ["nami","start","--foreground","elasticsearch"]
