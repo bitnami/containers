@@ -36,7 +36,7 @@ $ docker-compose up -d
 
 
 * [`4.0-ol-7`, `4.0.10-ol-7-r30` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.10-ol-7-r30/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.10-debian-9-r25`, `4.0`, `4.0.10`, `4.0.10-r25`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.10-debian-9-r25/4.0/Dockerfile)
+* [`4.0-debian-9`, `4.0.10-debian-9-r26`, `4.0`, `4.0.10`, `4.0.10-r26`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.10-debian-9-r26/4.0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
 
@@ -265,6 +265,12 @@ or using Docker Compose:
 ```bash
 $ docker-compose up redis
 ```
+
+# Notable Changes
+
+## 4.0.10-r25
+
+- The Redis sentinel container has been migrated to a non-root container approach. Previously the container run as `root` user and the redis daemon was started as `redis` user. From now own, both the container and the redis daemon run as user `1001`. As a consequence, the configuration files are writable by the user running the redis process. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 # Contributing
 
