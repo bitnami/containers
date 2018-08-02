@@ -33,7 +33,7 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`3-ol-7`, `3.4.4-ol-7-r10` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.4-ol-7-r10/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.4.5-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.5-ol-7-r0/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.4.4-debian-9-r13`, `3`, `3.4.4`, `3.4.4-r13`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.4-debian-9-r13/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/neo4j GitHub repo](https://github.com/bitnami/bitnami-docker-neo4j).
@@ -251,6 +251,12 @@ or using Docker Compose:
 ```bash
 $ docker-compose up neo4j
 ```
+
+# Notable Changes
+
+## 3.4.3-r13
+
+- The Neo4j container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Neo4j daemon was started as the `neo4j` user. From now on, both the container and the Neo4j daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 # Contributing
 
