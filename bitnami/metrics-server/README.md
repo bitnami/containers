@@ -28,7 +28,7 @@ $ docker run --name metrics-server bitnami/metrics-server:latest
 
 
 * [`0-ol-7`, `0.2.1-ol-7-r19` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.2.1-ol-7-r19/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.2.1-debian-9-r21`, `0`, `0.2.1`, `0.2.1-r21`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.2.1-debian-9-r21/0/Dockerfile)
+* [`0-debian-9`, `0.2.1-debian-9-r22`, `0`, `0.2.1`, `0.2.1-r22`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.2.1-debian-9-r22/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/metrics-server GitHub repo](https://github.com/bitnami/bitnami-docker-metrics-server).
 
