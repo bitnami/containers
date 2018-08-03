@@ -34,7 +34,7 @@ $ docker-compose up -d
 
 * [`1.14-rhel-7`, `1.14.0-rhel-7-r7` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-rhel-7-r7/1.14/rhel-7/Dockerfile)
 * [`1.14-ol-7`, `1.14.0-ol-7-r48` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-ol-7-r48/1.14/ol-7/Dockerfile)
-* [`1.14-debian-9`, `1.14.0-debian-9-r27`, `1.14`, `1.14.0`, `1.14.0-r27`, `latest` (1.14/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-debian-9-r27/1.14/Dockerfile)
+* [`1.14-debian-9`, `1.14.0-debian-9-r28`, `1.14`, `1.14.0`, `1.14.0-r28`, `latest` (1.14/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-debian-9-r28/1.14/Dockerfile)
 
 # Get this image
 
@@ -317,6 +317,10 @@ $ docker-compose up nginx
 ](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
 # Notable Changes
+
+## Debian 9 1.14.0-r28 and OL 7 1.14.0-r49
+- Added support for legacy paths for the 'nginx.conf' file and 'vhosts'.
+- Added warning for users that continue using the `/bitnami/nginx/conf/` path.
 
 ## Debian 9 1.14.0-r25 and OL 7 1.14.0-r46
 
