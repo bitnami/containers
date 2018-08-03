@@ -1,14 +1,17 @@
-FROM bitnami/minideb-extras:stretch-r93
+FROM bitnami/minideb-extras:stretch-r95
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    HOME="/"
 
 # Install required system packages and dependencies
 RUN install_packages libblkid1 libbsd0 libc6 libffi6 libgcc1 libglib2.0-0 libmount1 libpcre3 libselinux1 libstdc++6 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 zlib1g
 RUN bitnami-pkg install java-1.8.181-1 --checksum 66bba4b4a2647f981339d306da796905c222057c4277a5ef045e079981a404f4
-RUN bitnami-pkg unpack elasticsearch-5.6.4-3 --checksum cd6d92c3be318e1926cb5accf0d4778804130a7b1e40ec933eef7e3e51127a41
+RUN bitnami-pkg unpack elasticsearch-5.6.4-4 --checksum 1f1d2f3ef52bc165c329c461f110ca927513f309c25af6672e8541849b604da8
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="5.6.4-debian-9-r18" \
+    BITNAMI_IMAGE_VERSION="5.6.4-debian-9-r19" \
     ELASTICSEARCH_BIND_ADDRESS="" \
     ELASTICSEARCH_CLUSTER_HOSTS="" \
     ELASTICSEARCH_CLUSTER_NAME="elasticsearch-cluster" \
@@ -23,5 +26,6 @@ ENV BITNAMI_APP_NAME="elasticsearch" \
 
 EXPOSE 9200 9300
 
+USER 1001
 ENTRYPOINT ["/app-entrypoint.sh"]
 CMD ["nami","start","--foreground","elasticsearch"]
