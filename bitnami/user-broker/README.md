@@ -23,8 +23,8 @@ User Broker is part of the Service Catalog that installs into a Kubernetes clust
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
+* [`0-debian-9`, `0.1.28-debian-9-r0`, `0`, `0.1.28`, `0.1.28-r0`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.1.28-debian-9-r0/0/Dockerfile)
 * [`0-ol-7`, `0.1.27-ol-7-r5` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.1.27-ol-7-r5/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.1.27-debian-9-r7`, `0`, `0.1.27`, `0.1.27-r7`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.1.27-debian-9-r7/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/user-broker GitHub repo](https://github.com/bitnami/bitnami-docker-user-broker).
 
