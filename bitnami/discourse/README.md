@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 
 * [`2-ol-7`, `2.0.3-ol-7-r5` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.3-ol-7-r5/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.0.3-debian-9-r5`, `2`, `2.0.3`, `2.0.3-r5`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.3-debian-9-r5/2/Dockerfile)
+* [`2-debian-9`, `2.0.3-debian-9-r7`, `2`, `2.0.3`, `2.0.3-r7`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.3-debian-9-r7/2/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
@@ -314,7 +314,7 @@ Available variables:
 
 ### SMTP Configuration
 
-To configure Discourse to send email using SMTP you can set the following environment variables:
+To configure Discourse to send email using SMTP you can set the following environment variables for both container images, `discourse` and `discourse-sidekiq`:
 - `SMTP_HOST`: Host for outgoing SMTP email. No defaults.
 - `SMTP_PORT`: Port for outgoing SMTP email. No defaults.
 - `SMTP_USER`: User of SMTP used for authentication (likely email). No defaults.
@@ -337,17 +337,19 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PASSWORD=your_password
     volumes:
       - 'discourse_data:/bitnami'
-```
+  sidekiq:
+    image: 'bitnami/discourse-sidekiq:latest'
+    depends_on:
+      - discourse
+    volumes:
+      - 'sidekiq_data:/bitnami'
+    command: 'nami start --foreground discourse-sidekiq'
+    environment:
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USER=your_email@gmail.com
+      - SMTP_PASSWORD=your_password
 
-* For manual execution:
-
-```bash
-$ docker run -d --name discourse -p 80:3000 \
-  --net discourse-tier \
-  --env SMTP_HOST=smtp.gmail.com --env SMTP_PORT=587 \
-  --env SMTP_USER=your_email@gmail.com --env SMTP_PASSWORD=your_password \
-  --volume discourse_data:/bitnami \
-  bitnami/discourse:latest
 ```
 
 # Contributing
