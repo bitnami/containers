@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r94
+FROM bitnami/minideb-extras:stretch-r95
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,7 +6,7 @@ RUN bitnami-pkg unpack consul-1.2.2-0 --checksum 912a03fe869e1885f4d4012119f909b
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.2.2-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="1.2.2-debian-9-r1" \
     CONSUL_BOOTSTRAP_EXPECT="1" \
     CONSUL_CLIENT_LAN_ADDRESS="0.0.0.0" \
     CONSUL_DATACENTER="dc1" \
