@@ -28,7 +28,7 @@ $ docker-compose up
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`1-ol-7`, `1.5.11-ol-7-r34` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-ol-7-r34/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.5.11-ol-7-r35` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-ol-7-r35/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.5.11-debian-9-r24`, `1`, `1.5.11`, `1.5.11-r24`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-9-r24/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
