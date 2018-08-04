@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r95
+FROM bitnami/minideb-extras:stretch-r96
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack memcached-1.5.9-1 --checksum 0a8486c1b2e7a70bbce2b870ad78
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.9-debian-9-r21" \
+    BITNAMI_IMAGE_VERSION="1.5.9-debian-9-r22" \
     MEMCACHED_CACHE_SIZE="64" \
     MEMCACHED_PASSWORD="" \
     MEMCACHED_USERNAME="root" \
