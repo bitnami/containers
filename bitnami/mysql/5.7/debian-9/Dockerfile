@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r95
+FROM bitnami/minideb-extras:stretch-r96
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -13,7 +13,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.23-debian-9-r6" \
+    BITNAMI_IMAGE_VERSION="5.7.23-debian-9-r7" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
