@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/python-3.7.0-1-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="3.7.0-debian-9-r11" \
+    BITNAMI_IMAGE_VERSION="3.7.0-debian-9-r12" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8000
