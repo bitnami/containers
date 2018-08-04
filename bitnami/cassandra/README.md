@@ -30,8 +30,8 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`3-ol-7`, `3.11.3-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-ol-7-r0/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.11.3-debian-9-r2`, `3`, `3.11.3`, `3.11.3-r2`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-debian-9-r2/3/Dockerfile)
+* [`3-ol-7`, `3.11.3-ol-7-r1` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-ol-7-r1/3/ol-7/Dockerfile)
+* [`3-debian-9`, `3.11.3-debian-9-r1`, `3`, `3.11.3`, `3.11.3-r1`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-debian-9-r1/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
 
