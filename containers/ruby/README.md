@@ -38,7 +38,7 @@ $ docker-compose up -d
 * [`2.4-debian-9`, `2.4.4-debian-9-r28`, `2.4`, `2.4.4`, `2.4.4-r28` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-debian-9-r28/2.4/Dockerfile)
 * [`2.3-ol-7`, `2.3.7-ol-7-r41` (2.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-ol-7-r41/2.3/ol-7/Dockerfile)
 * [`2.3-debian-9`, `2.3.7-debian-9-r28`, `2.3`, `2.3.7`, `2.3.7-r28` (2.3/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-debian-9-r28/2.3/Dockerfile)
-* [`2.2-ol-7`, `2.2.10-ol-7-r40` (2.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.10-ol-7-r40/2.2/ol-7/Dockerfile)
+* [`2.2-ol-7`, `2.2.10-ol-7-r41` (2.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.10-ol-7-r41/2.2/ol-7/Dockerfile)
 * [`2.2-debian-9`, `2.2.10-debian-9-r27`, `2.2`, `2.2.10`, `2.2.10-r27` (2.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.10-debian-9-r27/2.2/Dockerfile)
 * [`2.1-ol-7`, `2.1.10-ol-7-r40` (2.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-ol-7-r40/2.1/ol-7/Dockerfile)
 * [`2.1-debian-9`, `2.1.10-debian-9-r27`, `2.1`, `2.1.10`, `2.1.10-r27` (2.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-debian-9-r27/2.1/Dockerfile)
