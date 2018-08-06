@@ -34,7 +34,7 @@ $ docker-compose up -d
 
 * [`10-ol-7`, `10.7.0-ol-7-r19` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.7.0-ol-7-r19/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.7.0-debian-9-r18`, `10`, `10.7.0`, `10.7.0-r18` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.7.0-debian-9-r18/10/Dockerfile)
-* [`8-ol-7`, `8.11.3-ol-7-r45` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.3-ol-7-r45/8/ol-7/Dockerfile)
+* [`8-ol-7`, `8.11.3-ol-7-r46` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.3-ol-7-r46/8/ol-7/Dockerfile)
 * [`8-debian-9`, `8.11.3-debian-9-r33`, `8`, `8.11.3`, `8.11.3-r33`, `latest` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.3-debian-9-r33/8/Dockerfile)
 * [`6-ol-7`, `6.14.3-ol-7-r43` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-ol-7-r43/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.14.3-debian-9-r33`, `6`, `6.14.3`, `6.14.3-r33` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-debian-9-r33/6/Dockerfile)
