@@ -5,8 +5,8 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "3.6,4"
-          LATEST_STABLE: "3.6"
+          RELEASE_SERIES_LIST: "3.6,4.0,4.1"
+          LATEST_STABLE: "4.0"
           DISTRIBUTIONS_LIST: "debian-9,ol-7"
           IMAGE_NAME: mongodb
           CHART_NAME: mongodb
