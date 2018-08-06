@@ -6,7 +6,7 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
-  nami_initialize tomcat jenkins
+  nami_initialize jenkins
   info "Starting jenkins... "
 fi
 
