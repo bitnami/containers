@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/nats /opt/bitnami/nats
 ENV BITNAMI_APP_NAME="nats" \
-    BITNAMI_IMAGE_VERSION="1.2.0-debian-9-r36" \
+    BITNAMI_IMAGE_VERSION="1.2.0-debian-9-r37" \
     PATH="/opt/bitnami/nats/bin:$PATH"
 
 RUN install_packages curl
