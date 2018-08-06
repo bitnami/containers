@@ -203,7 +203,7 @@ $ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
 
 # Notable Changes
 
-## 2.121.2-ol-7-r15 / 2.121.2-debian-9-r18
+## 2.121.2-ol-7-r14 / 2.121.2-debian-9-r18
 
 - Use Jetty instead of Tomcat as web server.
 
