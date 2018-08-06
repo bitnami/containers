@@ -35,7 +35,7 @@ $ docker-compose up -d
 * [`6-ol-7`, `6.3.2-ol-7-r8` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.2-ol-7-r8/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.3.2-debian-9-r12`, `6`, `6.3.2`, `6.3.2-r12`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.2-debian-9-r12/6/Dockerfile)
 * [`5-ol-7`, `5.6.4-ol-7-r30` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-ol-7-r30/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.6.4-debian-9-r22`, `5`, `5.6.4`, `5.6.4-r22` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-debian-9-r22/5/Dockerfile)
+* [`5-debian-9`, `5.6.4-debian-9-r23`, `5`, `5.6.4`, `5.6.4-r23` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-debian-9-r23/5/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
 # Get this image
