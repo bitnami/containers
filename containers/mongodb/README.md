@@ -30,10 +30,12 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`4-ol-7`, `4.1.1-ol-7-r16` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.1-ol-7-r16/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.1.1-debian-9-r20`, `4`, `4.1.1`, `4.1.1-r20` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.1-debian-9-r20/4/Dockerfile)
+* [`4.1-ol-7`, `4.1.1-ol-7-r0` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.1-ol-7-r0/4.1/ol-7/Dockerfile)
+* [`4.1-debian-9`, `4.1.1-debian-9-r17`, `4.1`, `4.1.1`, `4.1.1-r17` (4.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.1-debian-9-r17/4.1/Dockerfile)
+* [`4.0-debian-9`, `4.0.1-debian-9-r0`, `4.0`, `4.0.1`, `4.0.1-r0`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.1-debian-9-r0/4.0/Dockerfile)
+* [`4.0-ol-7`, `4.0.0-ol-7-r0` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.0-ol-7-r0/4.0/ol-7/Dockerfile)
 * [`3.6-ol-7`, `3.6.6-ol-7-r22` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-ol-7-r22/3.6/ol-7/Dockerfile)
-* [`3.6-debian-9`, `3.6.6-debian-9-r27`, `3.6`, `3.6.6`, `3.6.6-r27`, `latest` (3.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-debian-9-r27/3.6/Dockerfile)
+* [`3.6-debian-9`, `3.6.6-debian-9-r27`, `3.6`, `3.6.6`, `3.6.6-r27` (3.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-debian-9-r27/3.6/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
