@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/user-broker /opt/bitnami/user-broker
 ENV BITNAMI_APP_NAME="user-broker" \
-    BITNAMI_IMAGE_VERSION="0.1.28-debian-9-r3" \
+    BITNAMI_IMAGE_VERSION="0.1.28-debian-9-r4" \
     PATH="/opt/bitnami/user-broker/bin:$PATH"
 
 EXPOSE 8005 8080
