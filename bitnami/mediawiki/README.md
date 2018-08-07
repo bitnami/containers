@@ -31,7 +31,7 @@ $ docker-compose up -d
 
 
 * [`1-ol-7`, `1.31.0-ol-7-r38` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.31.0-ol-7-r38/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.31.0-debian-9-r27`, `1`, `1.31.0`, `1.31.0-r27`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.31.0-debian-9-r27/1/Dockerfile)
+* [`1-debian-9`, `1.31.0-debian-9-r28`, `1`, `1.31.0`, `1.31.0-r28`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.31.0-debian-9-r28/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mediawiki GitHub repo](https://github.com/bitnami/bitnami-docker-mediawiki).
 
