@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 
 * [`2-ol-7`, `2.0.3-ol-7-r5` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.3-ol-7-r5/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.0.3-debian-9-r10`, `2`, `2.0.3`, `2.0.3-r10`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.3-debian-9-r10/2/Dockerfile)
+* [`2-debian-9`, `2.0.3-debian-9-r11`, `2`, `2.0.3`, `2.0.3-r11`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.3-debian-9-r11/2/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
@@ -301,6 +301,7 @@ Available variables:
  - `DISCOURSE_PASSWORD`: Discourse application password. Default: **bitnami123**
  - `DISCOURSE_EMAIL`: Discourse application email. Default: **user@example.com**
  - `DISCOURSE_SITENAME`: Discourse site name. Default: **My site!**
+ - `DISCOURSE_HOSTNAME`: Dicourse Hostname to create application URLs for notifications. It can be either an IP or a domain. Default: **www.example.com**
  - `POSTGRESQL_ROOT_USER`: Root user for the Postgresql database. Default: **postgres**
  - `POSTGRESQL_ROOT_PASSWORD`: Root password for Postgresql.
  - `POSTGRESQL_HOST`: Hostname for Postgresql server. Default: **postgresql**

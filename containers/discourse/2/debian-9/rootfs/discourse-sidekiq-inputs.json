@@ -5,6 +5,7 @@
   "databaseUser": "{{$global.env.DISCOURSE_POSTGRESQL_USERNAME}}",
   "databaseUserPassword": "{{$global.env.DISCOURSE_POSTGRESQL_PASSWORD}}",
   "discourseHost": "{{$global.env.DISCOURSE_HOST}}",
+  "discourseHostname": "{{$global.env.DISCOURSE_HOSTNAME}}",
   "discoursePort": "{{$global.env.DISCOURSE_PORT}}",
   "redisHost": "{{$global.env.REDIS_HOST}}",
   "redisPassword": "{{$global.env.REDIS_PASSWORD}}",

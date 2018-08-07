@@ -28,6 +28,7 @@ services:
       - DISCOURSE_POSTGRESQL_NAME=bitnami_application
       - DISCOURSE_POSTGRESQL_USERNAME=bn_discourse
       - DISCOURSE_POSTGRESQL_PASSWORD=bitnami1
+      - DISCOURSE_HOSTNAME=www.example.com
   sidekiq:
     image: 'bitnami/discourse:2'
     depends_on:
@@ -41,6 +42,7 @@ services:
       - DISCOURSE_POSTGRESQL_PASSWORD=bitnami1
       - DISCOURSE_HOST=discourse
       - DISCOURSE_PORT=3000
+      - DISCOURSE_HOSTNAME=www.example.com
 volumes:
   postgresql_data:
     driver: local
