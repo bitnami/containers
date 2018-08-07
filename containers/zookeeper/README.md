@@ -37,8 +37,8 @@ services:
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`3-ol-7`, `3.4.12-ol-7-r49` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-ol-7-r49/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.4.12-debian-9-r39`, `3`, `3.4.12`, `3.4.12-r39`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-debian-9-r39/3/Dockerfile)
+* [`3-ol-7`, `3.4.12-ol-7-r48` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-ol-7-r48/3/ol-7/Dockerfile)
+* [`3-debian-9`, `3.4.12-debian-9-r40`, `3`, `3.4.12`, `3.4.12-r40`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-debian-9-r40/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
