@@ -33,7 +33,7 @@ $ docker-compose up -d
 
 
 * [`4.0-ol-7`, `4.0.11-ol-7-r0` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.11-ol-7-r0/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.11-debian-9-r0`, `4.0`, `4.0.11`, `4.0.11-r0`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.11-debian-9-r0/4.0/Dockerfile)
+* [`4.0-debian-9`, `4.0.11-debian-9-r1`, `4.0`, `4.0.11`, `4.0.11-r1`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.11-debian-9-r1/4.0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
