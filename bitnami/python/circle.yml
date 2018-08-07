@@ -5,8 +5,8 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "2,3"
-          LATEST_STABLE: "3"
+          RELEASE_SERIES_LIST: "2,3.6,3.7"
+          LATEST_STABLE: "3.7"
           DISTRIBUTIONS_LIST: "debian-9,ol-7"
           IMAGE_NAME: python
           DOCKER_PROJECT: bitnami
