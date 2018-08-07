@@ -32,8 +32,10 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`3-ol-7`, `3.7.0-ol-7-r15` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.0-ol-7-r15/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.7.0-debian-9-r15`, `3`, `3.7.0`, `3.7.0-r15`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.0-debian-9-r15/3/Dockerfile)
+* [`3.7-ol-7`, `3.7.0-ol-7-r15` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.0-ol-7-r15/3.7/ol-7/Dockerfile)
+* [`3.7-debian-9`, `3.7.0-debian-9-r15`, `3.7`, `3.7.0`, `3.7.0-r15`, `latest` (3.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.0-debian-9-r15/3.7/Dockerfile)
+* [`3.6-debian-9`, `3.6.6-debian-9-r0`, `3.6`, `3.6.6`, `3.6.6-r0` (3.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.6-debian-9-r0/3.6/Dockerfile)
+* [`3.6-ol-7`, `3.6.5-ol-7-r28` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.5-ol-7-r28/3.6/ol-7/Dockerfile)
 * [`2-ol-7`, `2.7.15-ol-7-r44` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-ol-7-r44/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.7.15-debian-9-r33`, `2`, `2.7.15`, `2.7.15-r33` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-debian-9-r33/2/Dockerfile)
 
