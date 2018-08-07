@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 
 * [`3-ol-7`, `3.5.1-ol-7-r24` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.1-ol-7-r24/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.5.1-debian-9-r28`, `3`, `3.5.1`, `3.5.1-r28`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.1-debian-9-r28/3/Dockerfile)
+* [`3-debian-9`, `3.5.1-debian-9-r29`, `3`, `3.5.1`, `3.5.1-r29`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.1-debian-9-r29/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
