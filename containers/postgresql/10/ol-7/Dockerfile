@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r60
+FROM bitnami/oraclelinux-extras:7-r61
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN rpm -Uvh --nodeps $(repoquery --location nss_wrapper)
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="10.4.0-ol-7-r42" \
+    BITNAMI_IMAGE_VERSION="10.4.0-ol-7-r43" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
     POSTGRESQL_MASTER_HOST="" \
