@@ -27,7 +27,7 @@ $ docker run --name oauth2-proxy bitnami/oauth2-proxy:latest
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`2-ol-7`, `2.2.0-ol-7-r38` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/2.2.0-ol-7-r38/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.2.0-ol-7-r39` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/2.2.0-ol-7-r39/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.2.0-debian-9-r28`, `2`, `2.2.0`, `2.2.0-r28`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/2.2.0-debian-9-r28/2/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
