@@ -32,8 +32,8 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`7-ol-7`, `7.4.0-ol-7-r34` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.4.0-ol-7-r34/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.4.0-debian-9-r29`, `7`, `7.4.0`, `7.4.0-r29`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.4.0-debian-9-r29/7/Dockerfile)
+* [`7-ol-7`, `7.4.0-ol-7-r35` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.4.0-ol-7-r35/7/ol-7/Dockerfile)
+* [`7-debian-9`, `7.4.0-debian-9-r28`, `7`, `7.4.0`, `7.4.0-r28`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.4.0-debian-9-r28/7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
 
