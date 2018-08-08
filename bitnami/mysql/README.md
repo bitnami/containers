@@ -32,7 +32,7 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`8.0-ol-7`, `8.0.12-ol-7-r4` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.12-ol-7-r4/8.0/ol-7/Dockerfile)
+* [`8.0-ol-7`, `8.0.12-ol-7-r5` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.12-ol-7-r5/8.0/ol-7/Dockerfile)
 * [`8.0-debian-9`, `8.0.12-debian-9-r4`, `8.0`, `8.0.12`, `8.0.12-r4` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.12-debian-9-r4/8.0/Dockerfile)
 * [`5.7-ol-7`, `5.7.23-ol-7-r4` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.23-ol-7-r4/5.7/ol-7/Dockerfile)
 * [`5.7-debian-9`, `5.7.23-debian-9-r12`, `5.7`, `5.7.23`, `5.7.23-r12`, `latest` (5.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.23-debian-9-r12/5.7/Dockerfile)
