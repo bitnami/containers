@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r61 as buildenv
+FROM bitnami/oraclelinux-extras:7-r62 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/external-dns-0.5.4-0-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r61
+FROM bitnami/oraclelinux-extras:7-r62
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/external-dns /opt/bitnami/external-dns
 ENV BITNAMI_APP_NAME="external-dns" \
-    BITNAMI_IMAGE_VERSION="0.5.4-ol-7-r15" \
+    BITNAMI_IMAGE_VERSION="0.5.4-ol-7-r16" \
     PATH="/opt/bitnami/external-dns/bin:$PATH"
 
 RUN install_packages ca-certificates
