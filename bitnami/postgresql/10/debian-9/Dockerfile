@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r99
+FROM bitnami/minideb-extras:stretch-r100
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="10.4.0-debian-9-r34" \
+    BITNAMI_IMAGE_VERSION="10.4.0-debian-9-r35" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
     POSTGRESQL_MASTER_HOST="" \
