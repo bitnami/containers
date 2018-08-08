@@ -26,7 +26,7 @@ In order to use the charts in this repository, you must have the following compo
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`1-ol-7`, `1.1.0-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/1.1.0-ol-7-r0/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.1.0-ol-7-r1` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/1.1.0-ol-7-r1/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.1.0-debian-9-r1`, `1`, `1.1.0`, `1.1.0-r1`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/1.1.0-debian-9-r1/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/open-service-broker-azure GitHub repo](https://github.com/bitnami/bitnami-docker-open-service-broker-azure).
