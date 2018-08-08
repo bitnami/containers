@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r61
+FROM bitnami/oraclelinux-extras:7-r62
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,13 +7,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages cyrus-sasl-lib glibc keyutils-libs krb5-libs libaio libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl pcre
-RUN bitnami-pkg unpack mysql-5.7.23-0 --checksum 7f5be5f6dfc5996356bd53202c9495f469a11bbe44cdcabe0380ef6e498081e5
+RUN bitnami-pkg unpack mysql-5.7.23-2 --checksum 2388bf57c2c992b0e450b23b6e752a8fa8cd5755e6cd8a2ed6999de79b99927e
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.23-ol-7-r4" \
+    BITNAMI_IMAGE_VERSION="5.7.23-ol-7-r5" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
