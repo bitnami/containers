@@ -28,8 +28,8 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`1-ol-7`, `1.9.17-ol-7-r39` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-ol-7-r39/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.9.17-debian-9-r27`, `1`, `1.9.17`, `1.9.17-r27`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-debian-9-r27/1/Dockerfile)
+* [`1-ol-7`, `1.9.17-ol-7-r38` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-ol-7-r38/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.9.17-debian-9-r28`, `1`, `1.9.17`, `1.9.17-r28`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-debian-9-r28/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/testlink GitHub repo](https://github.com/bitnami/bitnami-docker-testlink).
 
