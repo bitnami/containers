@@ -31,11 +31,11 @@ $ docker-compose up -d
 
 
  - [`9.0`, `9.0.10-ol-7-r34` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.10-ol-7-r34/9.0/Dockerfile)
- - [`9.0`, `9.0.10-debian-9-r33` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.10-debian-9-r33/9.0/Dockerfile)
+ - [`9.0`, `9.0.10-debian-9-r34` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.10-debian-9-r34/9.0/Dockerfile)
  - [`8.5`, `8.5.32-ol-7-r34` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.32-ol-7-r34/8.5/Dockerfile)
  - [`8.5`, `8.5.32-debian-9-r34` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.32-debian-9-r34/8.5/Dockerfile)
  - [`8.0`, `8.0.53-ol-7-r25` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-ol-7-r25/8.0/Dockerfile)
- - [`8.0`, `8.0.53-debian-9-r30` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-debian-9-r30/8.0/Dockerfile)
+ - [`8.0`, `8.0.53-debian-9-r31` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-debian-9-r31/8.0/Dockerfile)
  - [`7`, `7.0.90-ol-7-r24` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.90-ol-7-r24/7/Dockerfile)
  - [`7`, `7.0.90-debian-9-r30` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.90-debian-9-r30/7/Dockerfile)
 
