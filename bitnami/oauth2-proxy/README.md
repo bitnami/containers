@@ -28,7 +28,7 @@ $ docker run --name oauth2-proxy bitnami/oauth2-proxy:latest
 
 
 * [`0-ol-7`, `0.20180625.74543-ol-7-r0` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-ol-7-r0/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.20180625.74543-debian-9-r0`, `0`, `0.20180625.74543`, `0.20180625.74543-r0`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-debian-9-r0/0/Dockerfile)
+* [`0-debian-9`, `0.20180625.74543-debian-9-r1`, `0`, `0.20180625.74543`, `0.20180625.74543-r1`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-debian-9-r1/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
 
