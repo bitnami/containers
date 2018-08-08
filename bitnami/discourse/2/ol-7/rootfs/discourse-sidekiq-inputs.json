@@ -5,8 +5,14 @@
   "databaseUser": "{{$global.env.DISCOURSE_POSTGRESQL_USERNAME}}",
   "databaseUserPassword": "{{$global.env.DISCOURSE_POSTGRESQL_PASSWORD}}",
   "discourseHost": "{{$global.env.DISCOURSE_HOST}}",
+  "discourseHostname": "{{$global.env.DISCOURSE_HOSTNAME}}",
   "discoursePort": "{{$global.env.DISCOURSE_PORT}}",
   "redisHost": "{{$global.env.REDIS_HOST}}",
   "redisPassword": "{{$global.env.REDIS_PASSWORD}}",
-  "redisPort": "{{$global.env.REDIS_PORT_NUMBER}}"
+  "redisPort": "{{$global.env.REDIS_PORT_NUMBER}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpTls": "{{$global.env.SMTP_TLS}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}"
 }
