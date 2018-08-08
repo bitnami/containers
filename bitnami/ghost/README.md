@@ -28,8 +28,8 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`1-ol-7`, `1.25.3-ol-7-r3` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.3-ol-7-r3/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.25.3-debian-9-r5`, `1`, `1.25.3`, `1.25.3-r5`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.3-debian-9-r5/1/Dockerfile)
+* [`1-ol-7`, `1.25.3-ol-7-r2` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.3-ol-7-r2/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.25.3-debian-9-r6`, `1`, `1.25.3`, `1.25.3-r6`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.3-debian-9-r6/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
 
@@ -42,8 +42,8 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`1-ol-7`, `1.25.3-ol-7-r3` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.3-ol-7-r3/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.25.3-debian-9-r5`, `1`, `1.25.3`, `1.25.3-r5`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.3-debian-9-r5/1/Dockerfile)
+* [`1-ol-7`, `1.25.3-ol-7-r2` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.3-ol-7-r2/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.25.3-debian-9-r6`, `1`, `1.25.3`, `1.25.3-r6`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.3-debian-9-r6/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
 
