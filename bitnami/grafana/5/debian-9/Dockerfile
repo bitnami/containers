@@ -15,7 +15,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/grafana /opt/bitnami/grafana
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="5.2.2-debian-9-r13" \
+    BITNAMI_IMAGE_VERSION="5.2.2-debian-9-r14" \
     PATH="/opt/bitnami/grafana/bin:$PATH"
 
 RUN install_packages curl
