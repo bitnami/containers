@@ -28,7 +28,7 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
- - [`1.8`, `1.8.181-ol-7-r15` (1.8/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.181-ol-7-r15/1.8/Dockerfile), [`1.8-prod`, `1.8.181-ol-7-r15-prod` (1.8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.181-ol-7-r15/1.8/prod/Dockerfile)
+ - [`1.8`, `1.8.181-ol-7-r16` (1.8/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.181-ol-7-r16/1.8/Dockerfile), [`1.8-prod`, `1.8.181-ol-7-r16-prod` (1.8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.181-ol-7-r16/1.8/prod/Dockerfile)
  - [`1.8`, `1.8.181-debian-9-r22` (1.8/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.181-debian-9-r22/1.8/Dockerfile), [`1.8-prod`, `1.8.181-debian-9-r22-prod` (1.8/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.181-debian-9-r22/1.8/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
