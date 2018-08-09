@@ -40,7 +40,7 @@ $ docker-compose up -d
 
 
 * [`1-ol-7`, `1.2.2-ol-7-r4` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.2.2-ol-7-r4/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.2.2-debian-9-r6`, `1`, `1.2.2`, `1.2.2-r6`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.2.2-debian-9-r6/1/Dockerfile)
+* [`1-debian-9`, `1.2.2-debian-9-r7`, `1`, `1.2.2`, `1.2.2-r7`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.2.2-debian-9-r7/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/consul GitHub repo](https://github.com/bitnami/bitnami-docker-consul).
 
