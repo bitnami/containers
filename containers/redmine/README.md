@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 
 * [`3-ol-7`, `3.4.6-ol-7-r42` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/3.4.6-ol-7-r42/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.4.6-debian-9-r25`, `3`, `3.4.6`, `3.4.6-r25`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/3.4.6-debian-9-r25/3/Dockerfile)
+* [`3-debian-9`, `3.4.6-debian-9-r26`, `3`, `3.4.6`, `3.4.6-r26`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/3.4.6-debian-9-r26/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
 
