@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 
 * [`1.7-ol-7`, `1.7.4-2-ol-7-r8` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.4-2-ol-7-r8/1.7/ol-7/Dockerfile)
-* [`1.7-debian-9`, `1.7.4-2-debian-9-r8`, `1.7`, `1.7.4-2`, `1.7.4-2-r8`, `latest` (1.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.4-2-debian-9-r8/1.7/Dockerfile)
+* [`1.7-debian-9`, `1.7.4-2-debian-9-r9`, `1.7`, `1.7.4-2`, `1.7.4-2-r9`, `latest` (1.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.4-2-debian-9-r9/1.7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
