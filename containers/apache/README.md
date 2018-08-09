@@ -33,8 +33,8 @@ $ docker-compose up -d
 
 
 * [`2.4-rhel-7`, `2.4.34-rhel-7-r1` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-rhel-7-r1/2.4/rhel-7/Dockerfile)
-* [`2.4-ol-7`, `2.4.34-ol-7-r18` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-ol-7-r18/2.4/ol-7/Dockerfile)
-* [`2.4-debian-9`, `2.4.34-debian-9-r22`, `2.4`, `2.4.34`, `2.4.34-r22`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-debian-9-r22/2.4/Dockerfile)
+* [`2.4-ol-7`, `2.4.34-ol-7-r19` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-ol-7-r19/2.4/ol-7/Dockerfile)
+* [`2.4-debian-9`, `2.4.34-debian-9-r23`, `2.4`, `2.4.34`, `2.4.34-r23`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-debian-9-r23/2.4/Dockerfile)
 
 # Get this image
 
