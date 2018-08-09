@@ -25,8 +25,8 @@ $ docker run --name elasticsearch-exporter bitnami/elasticsearch-exporter:latest
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`1-ol-7`, `1.0.2-ol-7-r41` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-ol-7-r41/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.0.2-debian-9-r31`, `1`, `1.0.2`, `1.0.2-r31`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-debian-9-r31/1/Dockerfile)
+* [`1-ol-7`, `1.0.2-ol-7-r40` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-ol-7-r40/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.0.2-debian-9-r32`, `1`, `1.0.2`, `1.0.2-r32`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-debian-9-r32/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter).
 # Get this image
