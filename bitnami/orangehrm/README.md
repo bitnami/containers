@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 
 * [`4-ol-7`, `4.1.1-ol-7-r30` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.1.1-ol-7-r30/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.1.1-debian-9-r19`, `4`, `4.1.1`, `4.1.1-r19`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.1.1-debian-9-r19/4/Dockerfile)
+* [`4-debian-9`, `4.1.1-debian-9-r20`, `4`, `4.1.1`, `4.1.1-r20`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.1.1-debian-9-r20/4/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/orangehrm GitHub repo](https://github.com/bitnami/bitnami-docker-orangehrm).
 
