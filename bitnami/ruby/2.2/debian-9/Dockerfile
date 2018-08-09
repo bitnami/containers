@@ -10,7 +10,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN /opt/bitnami/ruby/bin/gem install bundler
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.2.10-debian-9-r31" \
+    BITNAMI_IMAGE_VERSION="2.2.10-debian-9-r32" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
