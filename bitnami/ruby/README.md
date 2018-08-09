@@ -32,8 +32,8 @@ $ docker-compose up -d
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
-* [`2.5-ol-7`, `2.5.1-ol-7-r44` (2.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-ol-7-r44/2.5/ol-7/Dockerfile)
-* [`2.5-debian-9`, `2.5.1-debian-9-r32`, `2.5`, `2.5.1`, `2.5.1-r32`, `latest` (2.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-debian-9-r32/2.5/Dockerfile)
+* [`2.5-ol-7`, `2.5.1-ol-7-r45` (2.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-ol-7-r45/2.5/ol-7/Dockerfile)
+* [`2.5-debian-9`, `2.5.1-debian-9-r31`, `2.5`, `2.5.1`, `2.5.1-r31`, `latest` (2.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-debian-9-r31/2.5/Dockerfile)
 * [`2.4-ol-7`, `2.4.4-ol-7-r44` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-ol-7-r44/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.4-debian-9-r31`, `2.4`, `2.4.4`, `2.4.4-r31` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-debian-9-r31/2.4/Dockerfile)
 * [`2.3-ol-7`, `2.3.7-ol-7-r44` (2.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-ol-7-r44/2.3/ol-7/Dockerfile)
