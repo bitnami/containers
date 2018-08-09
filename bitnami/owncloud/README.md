@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 
 * [`10-ol-7`, `10.0.9-ol-7-r16` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.9-ol-7-r16/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.0.9-debian-9-r19`, `10`, `10.0.9`, `10.0.9-r19`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.9-debian-9-r19/10/Dockerfile)
+* [`10-debian-9`, `10.0.9-debian-9-r20`, `10`, `10.0.9`, `10.0.9-r20`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.9-debian-9-r20/10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/owncloud GitHub repo](https://github.com/bitnami/bitnami-docker-owncloud).
 
