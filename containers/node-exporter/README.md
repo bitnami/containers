@@ -26,7 +26,7 @@ $ docker run --name node-exporter bitnami/node-exporter:latest
 
 
 * [`0-ol-7`, `0.16.0-ol-7-r40` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.16.0-ol-7-r40/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.16.0-debian-9-r30`, `0`, `0.16.0`, `0.16.0-r30`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.16.0-debian-9-r30/0/Dockerfile)
+* [`0-debian-9`, `0.16.0-debian-9-r31`, `0`, `0.16.0`, `0.16.0-r31`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.16.0-debian-9-r31/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-node-exporter).
 
