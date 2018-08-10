@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r98
+FROM bitnami/minideb-extras:stretch-r101
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -16,7 +16,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.2.5-debian-9-r21" \
+    BITNAMI_IMAGE_VERSION="2.2.5-debian-9-r22" \
     MAGENTO_ADMINURI="admin" \
     MAGENTO_DATABASE_NAME="bitnami_magento" \
     MAGENTO_DATABASE_PASSWORD="" \
