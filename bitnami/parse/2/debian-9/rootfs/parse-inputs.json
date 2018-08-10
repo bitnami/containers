@@ -1,6 +1,6 @@
 {
   "appId": "{{$global.env.PARSE_APP_ID}}",
-  "applicationPort": "{{$global.env.PARSE_PORT_NUMBER_NUMBER}}",
+  "applicationPort": "{{$global.env.PARSE_PORT_NUMBER}}",
   "databaseAdminPassword": "{{$global.env.MONGODB_PASSWORD}}",
   "databaseAdminUser": "{{$global.env.MONGODB_USER}}",
   "databaseServerHost": "{{$global.env.MONGODB_HOST}}",
