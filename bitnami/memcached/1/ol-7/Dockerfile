@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r63
+FROM bitnami/oraclelinux-extras:7-r64
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libevent libselinux nss-softokn-freebl pcre
-RUN bitnami-pkg unpack memcached-1.5.9-1 --checksum e86a595bccdc0ef59e023ffb1fc438ad4e1259d4fbe1965e683bc8914a9a40ed
+RUN bitnami-pkg unpack memcached-1.5.10-0 --checksum 6d1639867e45f06ce225b062062d6b50eafd1b888fe7ed8155f26470e6c82235
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.9-ol-7-r24" \
+    BITNAMI_IMAGE_VERSION="1.5.10-ol-7-r0" \
     MEMCACHED_CACHE_SIZE="64" \
     MEMCACHED_PASSWORD="" \
     MEMCACHED_USERNAME="root" \
