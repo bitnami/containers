@@ -34,9 +34,11 @@ $ docker-compose up -d
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
+
 
 * [`3.7-ol-7`, `3.7.7-ol-7-r30` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-ol-7-r30/3.7/ol-7/Dockerfile)
-* [`3.7-debian-9`, `3.7.7-debian-9-r34`, `3.7`, `3.7.7`, `3.7.7-r34`, `latest` (3.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-debian-9-r34/3.7/Dockerfile)
+* [`3.7-debian-9`, `3.7.7-debian-9-r35`, `3.7`, `3.7.7`, `3.7.7-r35`, `latest` (3.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-debian-9-r35/3.7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
@@ -173,6 +175,7 @@ Available variables:
 
  - `RABBITMQ_USERNAME`: RabbitMQ application username. Default: **user**
  - `RABBITMQ_PASSWORD`: RabbitMQ application password. Default: **bitnami**
+ - `RABBITMQ_HASHED_PASSWORD`: RabbitMQ application hasehd password.
  - `RABBITMQ_VHOST`: RabbitMQ application vhost. Default: **/**
  - `RABBITMQ_ERL_COOKIE`: Erlang cookie to determine whether different nodes are allowed to communicate with each other.
  - `RABBITMQ_NODE_TYPE`: Node Type. Valid values: *stats*, *queue-ram* or *queue-disc*. Default: **stats**
@@ -426,6 +429,11 @@ $ docker-compose up rabbitmq
 ```
 
 # Notable changes
+
+## 3.7.7-r30
+
+- The RabbitMQ container includes a new environment variable `RABBITMQ_HASHED_PASSWORD` that allows setting password via SHA256 hash (consult [official documentation](https://www.rabbitmq.com/passwords.html) for more information about password hashes).
+- Please note that password hashes must be generated following the [official algorithm](https://www.rabbitmq.com/passwords.html#computing-password-hash). You can use [this Python script](https://gist.githubusercontent.com/anapsix/4c3e8a8685ce5a3f0d7599c9902fd0d5/raw/1203a480fcec1982084b3528415c3cad26541b82/rmq_passwd_hash.py) to generate them.
 
 ## 3.7.7-r19
 
