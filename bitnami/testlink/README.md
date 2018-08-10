@@ -30,7 +30,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.9.17-ol-7-r40` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-ol-7-r40/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.9.17-ol-7-r41` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-ol-7-r41/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.9.17-debian-9-r30`, `1`, `1.9.17`, `1.9.17-r30`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-debian-9-r30/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/testlink GitHub repo](https://github.com/bitnami/bitnami-docker-testlink).
@@ -238,6 +238,9 @@ You can use these snapshots to restore the application state should the upgrade 
 
  * For docker-compose: `$ docker-compose up testlink`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name testlink bitnami/testlink:latest`
+
+6. Execute upgrading steps
+  In some cases you need to do some steps to finish the upgrading, please follow the [upgrading instructions from TestLink](https://github.com/TestLinkOpenSourceTRMS/testlink-code/#5-upgrade-and-migration). The TestLink install files are located at `/opt/bitnami/testlink_install`.
 
 # Configuration
 
