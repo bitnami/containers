@@ -31,10 +31,12 @@ $ docker-compose up -d
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
+
 
 * [`10.2-rhel-7`, `10.2.16-rhel-7-r3` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-rhel-7-r3/10.2/rhel-7/Dockerfile)
 * [`10.2-ol-7`, `10.2.16-ol-7-r29` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-ol-7-r29/10.2/ol-7/Dockerfile)
-* [`10.2-debian-9`, `10.2.16-debian-9-r35`, `10.2`, `10.2.16`, `10.2.16-r35` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-debian-9-r35/10.2/Dockerfile)
+* [`10.2-debian-9`, `10.2.16-debian-9-r36`, `10.2`, `10.2.16`, `10.2.16-r36` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-debian-9-r36/10.2/Dockerfile)
 * [`10.1-rhel-7`, `10.1.35-rhel-7-r0` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.35-rhel-7-r0/10.1/rhel-7/Dockerfile)
 * [`10.1-ol-7`, `10.1.35-ol-7-r2` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.35-ol-7-r2/10.1/ol-7/Dockerfile)
 * [`10.1-debian-9`, `10.1.35-debian-9-r3`, `10.1`, `10.1.35`, `10.1.35-r3`, `latest` (10.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.35-debian-9-r3/10.1/Dockerfile)
