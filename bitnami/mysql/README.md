@@ -34,8 +34,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`8.0-ol-7`, `8.0.12-ol-7-r7` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.12-ol-7-r7/8.0/ol-7/Dockerfile)
-* [`8.0-debian-9`, `8.0.12-debian-9-r6`, `8.0`, `8.0.12`, `8.0.12-r6` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.12-debian-9-r6/8.0/Dockerfile)
+* [`8.0-ol-7`, `8.0.12-ol-7-r6` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.12-ol-7-r6/8.0/ol-7/Dockerfile)
+* [`8.0-debian-9`, `8.0.12-debian-9-r7`, `8.0`, `8.0.12`, `8.0.12-r7` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.12-debian-9-r7/8.0/Dockerfile)
 * [`5.7-ol-7`, `5.7.23-ol-7-r6` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.23-ol-7-r6/5.7/ol-7/Dockerfile)
 * [`5.7-debian-9`, `5.7.23-debian-9-r14`, `5.7`, `5.7.23`, `5.7.23-r14`, `latest` (5.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.23-debian-9-r14/5.7/Dockerfile)
 
