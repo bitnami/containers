@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r63 as buildenv
+FROM bitnami/oraclelinux-extras:7-r66 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/elasticsearch-exporter-1.0.2-1-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r63
+FROM bitnami/oraclelinux-extras:7-r66
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/elasticsearch-exporter /opt/bitnami/elasticsearch-exporter
 ENV BITNAMI_APP_NAME="elasticsearch-exporter" \
-    BITNAMI_IMAGE_VERSION="1.0.2-ol-7-r41" \
+    BITNAMI_IMAGE_VERSION="1.0.2-ol-7-r42" \
     PATH="/opt/bitnami/elasticsearch-exporter/bin:$PATH"
 
 EXPOSE 9108
