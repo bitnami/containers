@@ -36,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`6-ol-7`, `6.3.2-ol-7-r12` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.2-ol-7-r12/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.3.2-debian-9-r16`, `6`, `6.3.2`, `6.3.2-r16`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.2-debian-9-r16/6/Dockerfile)
-* [`5-ol-7`, `5.6.4-ol-7-r33` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-ol-7-r33/5/ol-7/Dockerfile)
+* [`5-ol-7`, `5.6.4-ol-7-r34` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-ol-7-r34/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.6.4-debian-9-r27`, `5`, `5.6.4`, `5.6.4-r27` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-debian-9-r27/5/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
