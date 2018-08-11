@@ -24,8 +24,10 @@ $ docker run --name pushgateway bitnami/pushgateway:latest
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
-* [`0-ol-7`, `0.5.2-ol-7-r40` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.5.2-ol-7-r40/0/ol-7/Dockerfile)
+
+* [`0-ol-7`, `0.5.2-ol-7-r41` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.5.2-ol-7-r41/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.5.2-debian-9-r31`, `0`, `0.5.2`, `0.5.2-r31`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.5.2-debian-9-r31/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pushgateway GitHub repo](https://github.com/bitnami/bitnami-docker-pushgateway).
