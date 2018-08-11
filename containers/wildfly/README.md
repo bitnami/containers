@@ -29,8 +29,10 @@ $ docker-compose up -d
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
-* [`13-ol-7`, `13.0.0-ol-7-r39` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/13.0.0-ol-7-r39/13/ol-7/Dockerfile)
+
+* [`13-ol-7`, `13.0.0-ol-7-r40` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/13.0.0-ol-7-r40/13/ol-7/Dockerfile)
 * [`13-debian-9`, `13.0.0-debian-9-r31`, `13`, `13.0.0`, `13.0.0-r31`, `latest` (13/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/13.0.0-debian-9-r31/13/Dockerfile)
 * [`12-ol-7`, `12.0.0-ol-7-r39` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/12.0.0-ol-7-r39/12/ol-7/Dockerfile)
 * [`12-debian-9`, `12.0.0-debian-9-r31`, `12`, `12.0.0`, `12.0.0-r31` (12/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/12.0.0-debian-9-r31/12/Dockerfile)
