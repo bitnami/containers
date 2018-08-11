@@ -29,8 +29,8 @@ $ docker run --name oauth2-proxy bitnami/oauth2-proxy:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.20180625.74543-ol-7-r3` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-ol-7-r3/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.20180625.74543-debian-9-r2`, `0`, `0.20180625.74543`, `0.20180625.74543-r2`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-debian-9-r2/0/Dockerfile)
+* [`0-ol-7`, `0.20180625.74543-ol-7-r2` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-ol-7-r2/0/ol-7/Dockerfile)
+* [`0-debian-9`, `0.20180625.74543-debian-9-r3`, `0`, `0.20180625.74543`, `0.20180625.74543-r3`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-debian-9-r3/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
 
