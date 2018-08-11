@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r64 as buildenv
+FROM bitnami/oraclelinux-extras:7-r66 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/service-catalog-0.1.29-0-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r64
+FROM bitnami/oraclelinux-extras:7-r66
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/service-catalog /opt/bitnami/service-catalog
 ENV BITNAMI_APP_NAME="service-catalog" \
-    BITNAMI_IMAGE_VERSION="0.1.29-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="0.1.29-ol-7-r1" \
     PATH="/opt/bitnami/service-catalog/bin:$PATH"
 
 EXPOSE 8443 443
