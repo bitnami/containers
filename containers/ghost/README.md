@@ -23,16 +23,6 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
-# Supported tags and respective `Dockerfile` links
-
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
-
-
-* [`1-ol-7`, `1.25.4-ol-7-r1` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.4-ol-7-r1/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.25.4-debian-9-r0`, `1`, `1.25.4`, `1.25.4-r0`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.4-debian-9-r0/1/Dockerfile)
-
-Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
-
 # Prerequisites
 
 To run this application you need Docker Engine 1.10.0. Docker Compose is recomended with a version 1.6.0 or later.
@@ -41,8 +31,10 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
-* [`1-ol-7`, `1.25.4-ol-7-r1` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.4-ol-7-r1/1/ol-7/Dockerfile)
+
+* [`1-ol-7`, `1.25.4-ol-7-r2` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.4-ol-7-r2/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.25.4-debian-9-r0`, `1`, `1.25.4`, `1.25.4-r0`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.4-debian-9-r0/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
