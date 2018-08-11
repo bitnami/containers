@@ -27,8 +27,10 @@ $ docker-compose up
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
-* [`1-ol-7`, `1.5.11-ol-7-r38` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-ol-7-r38/1/ol-7/Dockerfile)
+
+* [`1-ol-7`, `1.5.11-ol-7-r39` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-ol-7-r39/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.5.11-debian-9-r30`, `1`, `1.5.11`, `1.5.11-r30`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-9-r30/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
