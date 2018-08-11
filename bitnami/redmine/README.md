@@ -27,8 +27,10 @@ $ docker-compose up -d
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
-* [`3-ol-7`, `3.4.6-ol-7-r42` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/3.4.6-ol-7-r42/3/ol-7/Dockerfile)
+
+* [`3-ol-7`, `3.4.6-ol-7-r43` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/3.4.6-ol-7-r43/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.4.6-debian-9-r26`, `3`, `3.4.6`, `3.4.6-r26`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/3.4.6-debian-9-r26/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
