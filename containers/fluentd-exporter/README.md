@@ -24,8 +24,10 @@ $ docker run --name fluentd-exporter bitnami/fluentd-exporter:latest
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
-* [`0-ol-7`, `0.2.0-ol-7-r37` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-ol-7-r37/0/ol-7/Dockerfile)
+
+* [`0-ol-7`, `0.2.0-ol-7-r38` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-ol-7-r38/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.2.0-debian-9-r31`, `0`, `0.2.0`, `0.2.0-r31`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-9-r31/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd-exporter).
