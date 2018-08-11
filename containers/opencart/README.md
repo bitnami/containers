@@ -27,8 +27,10 @@ $ docker-compose up -d
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
-* [`3-ol-7`, `3.0.2-0-ol-7-r40` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.2-0-ol-7-r40/3/ol-7/Dockerfile)
+
+* [`3-ol-7`, `3.0.2-0-ol-7-r41` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.2-0-ol-7-r41/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.0.2-0-debian-9-r25`, `3`, `3.0.2-0`, `3.0.2-0-r25`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.2-0-debian-9-r25/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/opencart GitHub repo](https://github.com/bitnami/bitnami-docker-opencart).
