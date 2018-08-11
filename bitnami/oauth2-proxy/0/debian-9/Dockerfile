@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/oauth2-proxy /opt/bitnami/oauth2-proxy
 ENV BITNAMI_APP_NAME="oauth2-proxy" \
-    BITNAMI_IMAGE_VERSION="0.20180625.74543-debian-9-r2" \
+    BITNAMI_IMAGE_VERSION="0.20180625.74543-debian-9-r3" \
     PATH="/opt/bitnami/oauth2-proxy/bin:$PATH"
 
 RUN install_packages ca-certificates
