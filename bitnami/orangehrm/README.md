@@ -27,8 +27,10 @@ $ docker-compose up -d
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
-* [`4-ol-7`, `4.1.1-ol-7-r30` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.1.1-ol-7-r30/4/ol-7/Dockerfile)
+
+* [`4-ol-7`, `4.1.1-ol-7-r31` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.1.1-ol-7-r31/4/ol-7/Dockerfile)
 * [`4-debian-9`, `4.1.1-debian-9-r20`, `4`, `4.1.1`, `4.1.1-r20`, `latest` (4/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.1.1-debian-9-r20/4/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/orangehrm GitHub repo](https://github.com/bitnami/bitnami-docker-orangehrm).
