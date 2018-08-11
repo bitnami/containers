@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r101
+FROM bitnami/minideb-extras:stretch-r103
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN bitnami-pkg unpack jenkins-2.121.2-2 --checksum 9517f834e816116b3afbebf38bb8
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.121.2-debian-9-r21" \
+    BITNAMI_IMAGE_VERSION="2.121.2-debian-9-r22" \
     JENKINS_PASSWORD="bitnami" \
     JENKINS_USERNAME="user" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/git/bin:$PATH"
