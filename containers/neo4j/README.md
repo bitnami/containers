@@ -32,9 +32,11 @@ $ docker-compose up -d
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
+
 
 * [`3-ol-7`, `3.4.5-ol-7-r5` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.5-ol-7-r5/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.4.5-debian-9-r7`, `3`, `3.4.5`, `3.4.5-r7`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.5-debian-9-r7/3/Dockerfile)
+* [`3-debian-9`, `3.4.5-debian-9-r9`, `3`, `3.4.5`, `3.4.5-r9`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.5-debian-9-r9/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/neo4j GitHub repo](https://github.com/bitnami/bitnami-docker-neo4j).
 
