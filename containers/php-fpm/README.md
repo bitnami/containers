@@ -31,10 +31,12 @@ $ docker-compose up -d
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
+
 
 * [`7.2-rhel-7`, `7.2.8-rhel-7-r1` (7.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.8-rhel-7-r1/7.2/rhel-7/Dockerfile)
 * [`7.2-ol-7`, `7.2.8-ol-7-r21` (7.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.8-ol-7-r21/7.2/ol-7/Dockerfile)
-* [`7.2-debian-9`, `7.2.8-debian-9-r21`, `7.2`, `7.2.8`, `7.2.8-r21` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.8-debian-9-r21/7.2/Dockerfile)
+* [`7.2-debian-9`, `7.2.8-debian-9-r22`, `7.2`, `7.2.8`, `7.2.8-r22` (7.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.8-debian-9-r22/7.2/Dockerfile)
 * [`7.1-rhel-7`, `7.1.20-rhel-7-r1` (7.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.20-rhel-7-r1/7.1/rhel-7/Dockerfile)
 * [`7.1-ol-7`, `7.1.20-ol-7-r20` (7.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.20-ol-7-r20/7.1/ol-7/Dockerfile)
 * [`7.1-debian-9`, `7.1.20-debian-9-r20`, `7.1`, `7.1.20`, `7.1.20-r20`, `latest` (7.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.20-debian-9-r20/7.1/Dockerfile)
