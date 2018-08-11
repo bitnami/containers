@@ -30,7 +30,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.9.17-ol-7-r41` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-ol-7-r41/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.9.17-ol-7-r42` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-ol-7-r42/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.9.17-debian-9-r30`, `1`, `1.9.17`, `1.9.17-r30`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-debian-9-r30/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/testlink GitHub repo](https://github.com/bitnami/bitnami-docker-testlink).
