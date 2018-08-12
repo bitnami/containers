@@ -34,8 +34,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4.0-ol-7`, `4.0.11-ol-7-r4` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.11-ol-7-r4/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.11-debian-9-r5`, `4.0`, `4.0.11`, `4.0.11-r5`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.11-debian-9-r5/4.0/Dockerfile)
+* [`4.0-ol-7`, `4.0.11-ol-7-r3` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.11-ol-7-r3/4.0/ol-7/Dockerfile)
+* [`4.0-debian-9`, `4.0.11-debian-9-r6`, `4.0`, `4.0.11`, `4.0.11-r6`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.11-debian-9-r6/4.0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
