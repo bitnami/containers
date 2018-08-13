@@ -34,8 +34,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-ol-7`, `7.4.0-ol-7-r40` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.4.0-ol-7-r40/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.4.0-debian-9-r33`, `7`, `7.4.0`, `7.4.0-r33`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.4.0-debian-9-r33/7/Dockerfile)
+* [`7-ol-7`, `7.4.0-ol-7-r39` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.4.0-ol-7-r39/7/ol-7/Dockerfile)
+* [`7-debian-9`, `7.4.0-debian-9-r34`, `7`, `7.4.0`, `7.4.0-r34`, `latest` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.4.0-debian-9-r34/7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
 
