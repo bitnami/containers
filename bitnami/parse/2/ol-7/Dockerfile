@@ -5,11 +5,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 RUN install_packages bzip2-libs glibc keyutils-libs krb5-libs libcom_err libgcc libpcap libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre readline sqlite zlib
 RUN bitnami-pkg install node-8.11.3-1 --checksum f457660e600261ad94b1a3c626348be4bcd31ed27e15925b8ab035a0e3cbb9a1
 RUN bitnami-pkg install mongodb-client-3.7.9-0 --checksum 7fbdfb5064e75d6b1aebb7a25e272649f20ac267347c8e6cd75e4c555c5ba509
-RUN bitnami-pkg unpack parse-2.8.3-1 --checksum 33353e01795086d001624b510cb01c16c781022b81d7ccdc3b2b0c9922513d7e
+RUN bitnami-pkg unpack parse-2.8.4-0 --checksum 82c72ee0488cde1f2ce2d34584c98055169c9426ca35857cd037cc2e1c1bb06b
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="2.8.3-ol-7-r5" \
+    BITNAMI_IMAGE_VERSION="2.8.4-ol-7-r0" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
