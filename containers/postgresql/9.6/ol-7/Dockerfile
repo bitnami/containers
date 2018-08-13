@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r63
+FROM bitnami/oraclelinux-extras:7-r68
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,13 +6,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libcom_err libselinux libxml2 libxslt ncurses-libs nss-softokn-freebl openssl-libs pcre readline xz-libs zlib
-RUN bitnami-pkg unpack postgresql-9.6.9-3 --checksum 26008dfb00db913c448a087781d5c72a75aaa1e9deea80738f99d452f37996e3
+RUN bitnami-pkg unpack postgresql-9.6.10-0 --checksum bec5b20af2c37cb49820bfbc18bc1cea6bf6df8c85285fb55a96f361fcf87c62
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN rpm -Uvh --nodeps $(repoquery --location nss_wrapper)
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="9.6.9-ol-7-r44" \
+    BITNAMI_IMAGE_VERSION="9.6.10-ol-7-r0" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
     POSTGRESQL_MASTER_HOST="" \
