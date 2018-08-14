@@ -34,9 +34,9 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`10.2-debian-9`, `10.2.17-debian-9-r0`, `10.2`, `10.2.17`, `10.2.17-r0` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.17-debian-9-r0/10.2/Dockerfile)
 * [`10.2-rhel-7`, `10.2.16-rhel-7-r3` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-rhel-7-r3/10.2/rhel-7/Dockerfile)
 * [`10.2-ol-7`, `10.2.16-ol-7-r29` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-ol-7-r29/10.2/ol-7/Dockerfile)
-* [`10.2-debian-9`, `10.2.16-debian-9-r39`, `10.2`, `10.2.16`, `10.2.16-r39` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.16-debian-9-r39/10.2/Dockerfile)
 * [`10.1-rhel-7`, `10.1.35-rhel-7-r0` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.35-rhel-7-r0/10.1/rhel-7/Dockerfile)
 * [`10.1-ol-7`, `10.1.35-ol-7-r6` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.35-ol-7-r6/10.1/ol-7/Dockerfile)
 * [`10.1-debian-9`, `10.1.35-debian-9-r7`, `10.1`, `10.1.35`, `10.1.35-r7`, `latest` (10.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.35-debian-9-r7/10.1/Dockerfile)
