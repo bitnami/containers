@@ -38,8 +38,8 @@ $ docker run --name prometheus bitnami/prometheus:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.3.2-ol-7-r26` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.2-ol-7-r26/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.3.2-debian-9-r30`, `2`, `2.3.2`, `2.3.2-r30`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.2-debian-9-r30/2/Dockerfile)
+* [`2-ol-7`, `2.3.2-ol-7-r25` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.2-ol-7-r25/2/ol-7/Dockerfile)
+* [`2-debian-9`, `2.3.2-debian-9-r31`, `2`, `2.3.2`, `2.3.2-r31`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.2-debian-9-r31/2/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus).
 
