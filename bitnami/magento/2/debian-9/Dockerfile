@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r103
+FROM bitnami/minideb-extras:stretch-r106
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.34-1 --checksum 35ab4cfd39577d1e7c5f6ef815ff27
 RUN bitnami-pkg unpack php-7.0.31-1 --checksum 820ec53b4671f5308575805afbbb48b2e870f0ff83da4746f8189b71ca31fb61
 RUN bitnami-pkg unpack mysql-client-10.2.16-1 --checksum d778ea1f39ee2c94b61422f4f64e476a558a19c3a6260de77a19988374cdf6c6
 RUN bitnami-pkg install libphp-7.0.31-0 --checksum d6e6bff000d896b9dbc1407d1e01ccc81d5845ea3fd9cb9af1a63d8060c62671
-RUN bitnami-pkg unpack magento-2.2.5-0 --checksum 8e685307191cbaf5bf015122bfde9f522ff475ebcbc05458e8f159f79225ed25
+RUN bitnami-pkg unpack magento-2.2.5-1 --checksum 78e9ff0729250bee9dc234fe14da3d370dd52beaf0f5469200b22ebdb4d6daf9
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 RUN find /opt/bitnami/magento/htdocs -type d -print0 | xargs -0 chmod 775 && find /opt/bitnami/magento/htdocs -type f -print0 | xargs -0 chmod 664 && chown -R bitnami:daemon /opt/bitnami/magento/htdocs
 
@@ -16,7 +16,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.2.5-debian-9-r23" \
+    BITNAMI_IMAGE_VERSION="2.2.5-debian-9-r24" \
     MAGENTO_ADMINURI="admin" \
     MAGENTO_DATABASE_NAME="bitnami_magento" \
     MAGENTO_DATABASE_PASSWORD="" \
