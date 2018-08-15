@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libcurl libgcc libidn libpcap libselinux libssh2 nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre zlib
-RUN bitnami-pkg unpack mongodb-4.0.1-0 --checksum 6a65db54c6d6a67e0d2a434c9e0fe184fe8338b4b96f541a57241bbb5a9c1437
+RUN bitnami-pkg unpack mongodb-4.0.1-1 --checksum 0b67a436e0403ddccfa94e8cd9137303d8d12d423149fb24cd7157dfc812066d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.0.1-ol-7-r8" \
+    BITNAMI_IMAGE_VERSION="4.0.1-ol-7-r9" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_PASSWORD="" \
