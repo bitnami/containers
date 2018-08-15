@@ -1,10 +1,10 @@
 FROM bitnami/minideb:stretch as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nats-1.2.0-8-linux-amd64-debian-9.tar.gz && \
-    echo "712df0c2b8727647be18b2e7f8dc2f8443a9ad99f879eb985481ff4ca862bce7  /tmp/bitnami/pkg/cache/nats-1.2.0-8-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/nats-1.2.0-8-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/nats-1.2.0-8-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nats-1.2.0-9-linux-amd64-debian-9.tar.gz && \
+    echo "dd9ff17541ceae79d78e11de4cec8cde2632b1a99ed00fa0ca95da6fff9fc115  /tmp/bitnami/pkg/cache/nats-1.2.0-9-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/nats-1.2.0-9-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/nats-1.2.0-9-linux-amd64-debian-9.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/nats /opt/bitnami/nats
 ENV BITNAMI_APP_NAME="nats" \
-    BITNAMI_IMAGE_VERSION="1.2.0-debian-9-r46" \
+    BITNAMI_IMAGE_VERSION="1.2.0-debian-9-r47" \
     PATH="/opt/bitnami/nats/bin:$PATH"
 
 RUN install_packages curl
