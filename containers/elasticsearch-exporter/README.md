@@ -27,8 +27,8 @@ $ docker run --name elasticsearch-exporter bitnami/elasticsearch-exporter:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.0.2-ol-7-r46` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-ol-7-r46/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.0.2-debian-9-r36`, `1`, `1.0.2`, `1.0.2-r36`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-debian-9-r36/1/Dockerfile)
+* [`1-ol-7`, `1.0.2-ol-7-r45` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-ol-7-r45/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.0.2-debian-9-r37`, `1`, `1.0.2`, `1.0.2-r37`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-debian-9-r37/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter).
 # Get this image
