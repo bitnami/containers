@@ -29,8 +29,8 @@ $ docker run --name fluent-bit bitnami/fluent-bit:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.13.7-ol-7-r6` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.7-ol-7-r6/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.13.7-debian-9-r7`, `0`, `0.13.7`, `0.13.7-r7`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.7-debian-9-r7/0/Dockerfile)
+* [`0-ol-7`, `0.13.7-ol-7-r7` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.7-ol-7-r7/0/ol-7/Dockerfile)
+* [`0-debian-9`, `0.13.7-debian-9-r6`, `0`, `0.13.7`, `0.13.7-r6`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.7-debian-9-r6/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluent-bit GitHub repo](https://github.com/bitnami/bitnami-docker-fluent-bit).
 
