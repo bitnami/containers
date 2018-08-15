@@ -6,12 +6,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6
-RUN bitnami-pkg unpack redis-4.0.11-1 --checksum 3d4743cfa85160fcf0f9ac2e98b4f34962999571fb2fa74284d580c6b88430fe
+RUN bitnami-pkg unpack redis-4.0.11-2 --checksum e97b8f4a65abe293003634090f588d8cdf4188bfea0efe68059d905a91872ed6
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.11-debian-9-r10" \
+    BITNAMI_IMAGE_VERSION="4.0.11-debian-9-r11" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
     REDIS_MASTER_HOST="" \
