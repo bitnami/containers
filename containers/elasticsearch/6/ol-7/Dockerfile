@@ -7,12 +7,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages glib2 glibc libblkid libffi libgcc libmount libselinux libstdc++ libuuid pcre zlib
 RUN bitnami-pkg install java-1.8.181-1 --checksum 6e7fc2779b6e0e3c6c0a2687b1d747d8a427594ff80b8c94b055c839e387e6b1
-RUN bitnami-pkg unpack elasticsearch-6.3.2-2 --checksum 882a3da3005f913c892177b7e82957cf9cef0573c70e1187dc4f71a96989802c
+RUN bitnami-pkg unpack elasticsearch-6.3.2-3 --checksum 17f017b03f495c7f3e65a6da77db24c344a6a8264bc7b78930dd5c1ae987f6d8
 RUN mkdir -p /bitnami/elasticsearch/conf/ && chmod g+rwX /bitnami/elasticsearch/conf/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="6.3.2-ol-7-r16" \
+    BITNAMI_IMAGE_VERSION="6.3.2-ol-7-r17" \
     ELASTICSEARCH_BIND_ADDRESS="" \
     ELASTICSEARCH_CLUSTER_HOSTS="" \
     ELASTICSEARCH_CLUSTER_NAME="elasticsearch-cluster" \
