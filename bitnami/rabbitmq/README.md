@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3.7-ol-7`, `3.7.7-ol-7-r35` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-ol-7-r35/3.7/ol-7/Dockerfile)
-* [`3.7-debian-9`, `3.7.7-debian-9-r39`, `3.7`, `3.7.7`, `3.7.7-r39`, `latest` (3.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-debian-9-r39/3.7/Dockerfile)
+* [`3.7-debian-9`, `3.7.7-debian-9-r40`, `3.7`, `3.7.7`, `3.7.7-r40`, `latest` (3.7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.7-debian-9-r40/3.7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
