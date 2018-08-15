@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r49
+FROM bitnami/oraclelinux-extras:7-r70
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,13 +7,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libaio libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre zlib
-RUN bitnami-pkg unpack mariadb-10.2.16-1 --checksum 10fa3309f2c6779b970b71fb9ef66c1aedbb5d25a6c065fab33a65ad694b72b5
+RUN bitnami-pkg unpack mariadb-10.2.17-0 --checksum 6755f7979a7e863c4e0b8c346fb67c92e3eee51148825a248ecff5b7acf1d5e6
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.16-ol-7-r29" \
+    BITNAMI_IMAGE_VERSION="10.2.17-ol-7-r0" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
