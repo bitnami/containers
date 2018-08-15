@@ -37,7 +37,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.8.4-ol-7-r3` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/2.8.4-ol-7-r3/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.8.4-debian-9-r2`, `2`, `2.8.4`, `2.8.4-r2`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/2.8.4-debian-9-r2/2/Dockerfile)
+* [`2-debian-9`, `2.8.4-debian-9-r3`, `2`, `2.8.4`, `2.8.4-r3`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/2.8.4-debian-9-r3/2/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
 
