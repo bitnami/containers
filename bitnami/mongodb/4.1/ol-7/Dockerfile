@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r69
+FROM bitnami/oraclelinux-extras:7-r70
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libcurl libgcc libidn libpcap libselinux libssh2 nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre zlib
-RUN bitnami-pkg unpack mongodb-4.1.1-4 --checksum a4101fcb1911ff7c747369b42dbab4c98a0ff397dc69878f6875c9f679c2311b
+RUN bitnami-pkg unpack mongodb-4.1.2-0 --checksum 62625baf5392841c8f7b3b49b5f7fcd3029a38b85afac53a72df5cd8a02c0999
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.1.1-ol-7-r23" \
+    BITNAMI_IMAGE_VERSION="4.1.2-ol-7-r0" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_PASSWORD="" \
