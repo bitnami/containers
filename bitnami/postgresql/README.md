@@ -32,7 +32,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`10-ol-7`, `10.5.0-ol-7-r2` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.5.0-ol-7-r2/10/ol-7/Dockerfile)
+* [`10-ol-7`, `10.5.0-ol-7-r3` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.5.0-ol-7-r3/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.5.0-debian-9-r3`, `10`, `10.5.0`, `10.5.0-r3`, `latest` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.5.0-debian-9-r3/10/Dockerfile)
 * [`9.6-ol-7`, `9.6.10-ol-7-r2` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.10-ol-7-r2/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.10-debian-9-r2`, `9.6`, `9.6.10`, `9.6.10-r2` (9.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.10-debian-9-r2/9.6/Dockerfile)
