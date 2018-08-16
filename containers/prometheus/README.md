@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.3.2-ol-7-r28` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.2-ol-7-r28/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.3.2-debian-9-r32`, `2`, `2.3.2`, `2.3.2-r32`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.2-debian-9-r32/2/Dockerfile)
+* [`2-debian-9`, `2.3.2-debian-9-r33`, `2`, `2.3.2`, `2.3.2-r33`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.3.2-debian-9-r33/2/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus).
 
