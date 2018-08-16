@@ -31,7 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`11-ol-7`, `11.0.20180715-ol-7-r15` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180715-ol-7-r15/11/ol-7/Dockerfile)
-* [`11-debian-9`, `11.0.20180715-debian-9-r8`, `11`, `11.0.20180715`, `11.0.20180715-r8`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180715-debian-9-r8/11/Dockerfile)
+* [`11-debian-9`, `11.0.20180715-debian-9-r9`, `11`, `11.0.20180715`, `11.0.20180715-r9`, `latest` (11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180715-debian-9-r9/11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
 
