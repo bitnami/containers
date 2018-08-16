@@ -27,7 +27,7 @@ $ docker run --name node-exporter bitnami/node-exporter:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.16.0-ol-7-r45` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.16.0-ol-7-r45/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.16.0-ol-7-r46` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.16.0-ol-7-r46/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.16.0-debian-9-r36`, `0`, `0.16.0`, `0.16.0-r36`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.16.0-debian-9-r36/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-node-exporter).
