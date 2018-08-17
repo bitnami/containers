@@ -1,10 +1,10 @@
 FROM bitnami/minideb:stretch as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/external-dns-0.5.4-0-linux-amd64-debian-9.tar.gz && \
-    echo "9dca77f3ccd58e2725f389baf21bebfb775187a071a85aaa6bacf9298a7c6d7e  /tmp/bitnami/pkg/cache/external-dns-0.5.4-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/external-dns-0.5.4-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/external-dns-0.5.4-0-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/external-dns-0.5.5-0-linux-amd64-debian-9.tar.gz && \
+    echo "edc7cbf92e55b42d913413b52119b2e861593f0d3b675324fb72e57c08337bdb  /tmp/bitnami/pkg/cache/external-dns-0.5.5-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/external-dns-0.5.5-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/external-dns-0.5.5-0-linux-amd64-debian-9.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/external-dns /opt/bitnami/external-dns
 ENV BITNAMI_APP_NAME="external-dns" \
-    BITNAMI_IMAGE_VERSION="0.5.4-debian-9-r27" \
+    BITNAMI_IMAGE_VERSION="0.5.5-debian-9-r0" \
     PATH="/opt/bitnami/external-dns/bin:$PATH"
 
 RUN install_packages ca-certificates

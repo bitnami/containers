@@ -22,6 +22,10 @@ $ docker run --name external-dns bitnami/external-dns:latest
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Why use a non-root container?
+
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -29,8 +33,8 @@ $ docker run --name external-dns bitnami/external-dns:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.5.4-ol-7-r22` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.5.4-ol-7-r22/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.5.4-debian-9-r27`, `0`, `0.5.4`, `0.5.4-r27`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.5.4-debian-9-r27/0/Dockerfile)
+* [`0-debian-9`, `0.5.5-debian-9-r0`, `0`, `0.5.5`, `0.5.5-r0`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.5.5-debian-9-r0/0/Dockerfile)
+* [`0-ol-7`, `0.5.4-ol-7-r23` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.5.4-ol-7-r23/0/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/external-dns GitHub repo](https://github.com/bitnami/bitnami-docker-external-dns).
 
