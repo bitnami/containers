@@ -27,6 +27,10 @@ $ docker-compose up
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Why use a non-root container?
+
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -35,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.3.9-ol-7-r15` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.9-ol-7-r15/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.3.9-debian-9-r25`, `3`, `3.3.9`, `3.3.9-r25`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.9-debian-9-r25/3/Dockerfile)
+* [`3-debian-9`, `3.3.9-debian-9-r26`, `3`, `3.3.9`, `3.3.9-r26`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.9-debian-9-r26/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/etcd GitHub repo](https://github.com/bitnami/bitnami-docker-etcd).
 
