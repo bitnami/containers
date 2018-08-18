@@ -38,6 +38,10 @@ services:
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Why use a non-root container?
+
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -45,7 +49,7 @@ services:
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.0.0-ol-7-r3` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.0.0-ol-7-r3/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.0.0-ol-7-r4` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.0.0-ol-7-r4/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.0.0-debian-9-r3`, `2`, `2.0.0`, `2.0.0-r3`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.0.0-debian-9-r3/2/Dockerfile)
 * [`1-ol-7`, `1.1.1-ol-7-r18` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r18/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.1.1-debian-9-r11`, `1`, `1.1.1`, `1.1.1-r11` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r11/1/Dockerfile)
