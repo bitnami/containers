@@ -27,6 +27,10 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Why use a non-root container?
+
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -35,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2.4-rhel-7`, `2.4.34-rhel-7-r1` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-rhel-7-r1/2.4/rhel-7/Dockerfile)
-* [`2.4-ol-7`, `2.4.34-ol-7-r26` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-ol-7-r26/2.4/ol-7/Dockerfile)
+* [`2.4-ol-7`, `2.4.34-ol-7-r27` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-ol-7-r27/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.34-debian-9-r29`, `2.4`, `2.4.34`, `2.4.34-r29`, `latest` (2.4/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-debian-9-r29/2.4/Dockerfile)
 
 # Get this image
