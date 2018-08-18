@@ -27,6 +27,10 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Why use a non-root container?
+
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -35,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10.2-rhel-7`, `10.2.17-rhel-7-r1` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.17-rhel-7-r1/10.2/rhel-7/Dockerfile)
-* [`10.2-ol-7`, `10.2.17-ol-7-r2` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.17-ol-7-r2/10.2/ol-7/Dockerfile)
+* [`10.2-ol-7`, `10.2.17-ol-7-r3` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.17-ol-7-r3/10.2/ol-7/Dockerfile)
 * [`10.2-debian-9`, `10.2.17-debian-9-r4`, `10.2`, `10.2.17`, `10.2.17-r4` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.17-debian-9-r4/10.2/Dockerfile)
 * [`10.1-rhel-7`, `10.1.35-rhel-7-r0` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.35-rhel-7-r0/10.1/rhel-7/Dockerfile)
 * [`10.1-ol-7`, `10.1.35-ol-7-r8` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.35-ol-7-r8/10.1/ol-7/Dockerfile)
