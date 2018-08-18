@@ -27,6 +27,10 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# Why use a non-root container?
+
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -34,7 +38,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`6-ol-7`, `6.3.2-ol-7-r18` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.2-ol-7-r18/6/ol-7/Dockerfile)
+* [`6-ol-7`, `6.3.2-ol-7-r19` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.2-ol-7-r19/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.3.2-debian-9-r22`, `6`, `6.3.2`, `6.3.2-r22`, `latest` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.3.2-debian-9-r22/6/Dockerfile)
 * [`5-ol-7`, `5.6.4-ol-7-r39` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-ol-7-r39/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.6.4-debian-9-r32`, `5`, `5.6.4`, `5.6.4-r32` (5/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-debian-9-r32/5/Dockerfile)
