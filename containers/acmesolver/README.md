@@ -33,7 +33,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.4.1-ol-7-r8` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.4.1-ol-7-r8/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.4.1-debian-9-r7`, `0`, `0.4.1`, `0.4.1-r7`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.4.1-debian-9-r7/0/Dockerfile)
+* [`0-debian-9`, `0.4.1-debian-9-r8`, `0`, `0.4.1`, `0.4.1-r8`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.4.1-debian-9-r8/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/acmesolver GitHub repo](https://github.com/bitnami/bitnami-docker-acmesolver).
 
