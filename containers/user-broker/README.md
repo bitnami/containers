@@ -30,7 +30,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.1.29-ol-7-r7` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.1.29-ol-7-r7/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.1.29-debian-9-r7`, `0`, `0.1.29`, `0.1.29-r7`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.1.29-debian-9-r7/0/Dockerfile)
+* [`0-debian-9`, `0.1.29-debian-9-r8`, `0`, `0.1.29`, `0.1.29-r8`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.1.29-debian-9-r8/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/user-broker GitHub repo](https://github.com/bitnami/bitnami-docker-user-broker).
 
