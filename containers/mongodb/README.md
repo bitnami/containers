@@ -37,7 +37,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4.1-ol-7`, `4.1.2-ol-7-r5` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.2-ol-7-r5/4.1/ol-7/Dockerfile)
-* [`4.1-debian-9`, `4.1.2-debian-9-r2`, `4.1`, `4.1.2`, `4.1.2-r2` (4.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.2-debian-9-r2/4.1/Dockerfile)
+* [`4.1-debian-9`, `4.1.2-debian-9-r4`, `4.1`, `4.1.2`, `4.1.2-r4` (4.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.2-debian-9-r4/4.1/Dockerfile)
 * [`4.0-ol-7`, `4.0.1-ol-7-r12` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.1-ol-7-r12/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.1-debian-9-r10`, `4.0`, `4.0.1`, `4.0.1-r10`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.1-debian-9-r10/4.0/Dockerfile)
 * [`3.6-ol-7`, `3.6.6-ol-7-r29` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-ol-7-r29/3.6/ol-7/Dockerfile)
@@ -185,6 +185,31 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MONGODB_EXTRA_FLAGS=--wiredTigerCacheSizeGB=2
+```
+
+## Enabling/disabling IPv6
+
+Enabling/disabling IPv6 is possible through the following env var:
+
+- `MONGODB_ENABLE_IPV6`: Whether to enable/disable IPv6 on MongoDB. Default: `yes`
+
+```bash
+$ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_IPV6=yes bitnami/mongodb:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    ports:
+      - "27017:27017"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MONGODB_ENABLE_IPV6=yes
 ```
 
 ## Setting the root password on first run
