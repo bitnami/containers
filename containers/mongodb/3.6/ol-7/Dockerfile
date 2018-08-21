@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r70
+FROM bitnami/oraclelinux-extras:7-r76
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,13 +6,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libcom_err libgcc libpcap libselinux openssl-libs pcre zlib
-RUN bitnami-pkg unpack mongodb-3.6.6-4 --checksum bb7f1479c09f5f2da20aded80ac2b151f6ee361adfeaadf871efa12bab1fc06e
+RUN bitnami-pkg unpack mongodb-3.6.7-0 --checksum a778ec5a542814eb7395a823b4574eb267a390296671eccc04ae463cd6b08e48
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.6.6-ol-7-r30" \
+    BITNAMI_IMAGE_VERSION="3.6.7-ol-7-r0" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
+    MONGODB_ENABLE_IPV6="yes" \
     MONGODB_PASSWORD="" \
     MONGODB_PRIMARY_HOST="" \
     MONGODB_PRIMARY_PORT_NUMBER="27017" \
