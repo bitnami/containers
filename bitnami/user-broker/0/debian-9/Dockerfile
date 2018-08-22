@@ -13,11 +13,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/user-broker /opt/bitnami/user-broker
 ENV BITNAMI_APP_NAME="user-broker" \
-    BITNAMI_IMAGE_VERSION="0.1.29-debian-9-r9" \
+    BITNAMI_IMAGE_VERSION="0.1.29-debian-9-r10" \
     PATH="/opt/bitnami/user-broker/bin:$PATH"
 
 EXPOSE 8005 8080
 
 WORKDIR /opt/bitnami/user-broker
 USER 1001
-ENTRYPOINT ["/opt/bitnami/user-broker/bin/user-broker"]
+ENTRYPOINT [ "/opt/bitnami/user-broker/bin/user-broker" ]
