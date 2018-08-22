@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/cluster-autoscaler /opt/bitnami/cluster-autoscaler
 ENV BITNAMI_APP_NAME="cluster-autoscaler" \
-    BITNAMI_IMAGE_VERSION="1.3.1-debian-9-r36" \
+    BITNAMI_IMAGE_VERSION="1.3.1-debian-9-r37" \
     PATH="/opt/bitnami/cluster-autoscaler/bin:$PATH"
 
 RUN install_packages ca-certificates
@@ -22,4 +22,4 @@ RUN chmod -R g+rwX /opt/bitnami/cluster-autoscaler/
 COPY rootfs /
 WORKDIR /opt/bitnami/cluster-autoscaler
 USER 1001
-CMD ["/run.sh"]
+CMD [ "/run.sh" ]
