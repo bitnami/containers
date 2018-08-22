@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r75
+FROM bitnami/oraclelinux-extras:7-r77
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,12 +9,12 @@ RUN bitnami-pkg unpack jenkins-2.121.3-0 --checksum 88bb7722b8a00b5af0c7a07f51c2
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.121.3-ol-7-r4" \
+    BITNAMI_IMAGE_VERSION="2.121.3-ol-7-r5" \
     JENKINS_PASSWORD="bitnami" \
     JENKINS_USERNAME="user" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/git/bin:$PATH"
 
 EXPOSE 8080 8443 50000
 
-ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["nami","start","--foreground","jenkins"]
+ENTRYPOINT [ "/app-entrypoint.sh" ]
+CMD [ "nami", "start", "--foreground", "jenkins" ]
