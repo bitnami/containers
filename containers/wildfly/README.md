@@ -32,7 +32,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`13-ol-7`, `13.0.0-ol-7-r48` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/13.0.0-ol-7-r48/13/ol-7/Dockerfile)
+* [`13-ol-7`, `13.0.0-ol-7-r49` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/13.0.0-ol-7-r49/13/ol-7/Dockerfile)
 * [`13-debian-9`, `13.0.0-debian-9-r37`, `13`, `13.0.0`, `13.0.0-r37`, `latest` (13/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/13.0.0-debian-9-r37/13/Dockerfile)
 * [`12-ol-7`, `12.0.0-ol-7-r48` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/12.0.0-ol-7-r48/12/ol-7/Dockerfile)
 * [`12-debian-9`, `12.0.0-debian-9-r37`, `12`, `12.0.0`, `12.0.0-r37` (12/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/12.0.0-debian-9-r37/12/Dockerfile)
@@ -326,6 +326,17 @@ or using Docker Compose:
 ```bash
 $ docker-compose up wildfly
 ```
+
+# Notable Changes
+
+## 10.0.0-r3
+
+- `WILDFLY_USER` parameter has been renamed to `WILDFLY_USERNAME`.
+
+## 10.0.0-r0
+
+- All volumes have been merged at `/bitnami/wildfly`. Now you only need to mount a single volume at `/bitnami/wildfly` for persistence.
+- The logs are always sent to the `stdout` and are no longer collected in the volume.
 
 # Contributing
 
