@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/external-dns /opt/bitnami/external-dns
 ENV BITNAMI_APP_NAME="external-dns" \
-    BITNAMI_IMAGE_VERSION="0.5.5-debian-9-r4" \
+    BITNAMI_IMAGE_VERSION="0.5.5-debian-9-r5" \
     PATH="/opt/bitnami/external-dns/bin:$PATH"
 
 RUN install_packages ca-certificates
@@ -22,4 +22,4 @@ EXPOSE 7979
 
 WORKDIR /opt/bitnami/external-dns
 USER 1001
-ENTRYPOINT ["external-dns"]
+ENTRYPOINT [ "external-dns" ]
