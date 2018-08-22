@@ -13,11 +13,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/blackbox-exporter /opt/bitnami/blackbox-exporter
 ENV BITNAMI_APP_NAME="blackbox-exporter" \
-    BITNAMI_IMAGE_VERSION="0.12.0-debian-9-r41" \
+    BITNAMI_IMAGE_VERSION="0.12.0-debian-9-r42" \
     PATH="/opt/bitnami/blackbox-exporter/bin:$PATH"
 
 EXPOSE 9115
 
 WORKDIR /opt/bitnami/blackbox-exporter
 USER 1001
-ENTRYPOINT ["/opt/bitnami/blackbox-exporter/bin/blackbox_exporter"]
+ENTRYPOINT [ "/opt/bitnami/blackbox-exporter/bin/blackbox_exporter" ]
