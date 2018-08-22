@@ -33,7 +33,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.0.4-ol-7-r52` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-ol-7-r52/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.0.4-debian-9-r36`, `0`, `0.0.4`, `0.0.4-r36`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r36/0/Dockerfile)
+* [`0-debian-9`, `0.0.4-debian-9-r37`, `0`, `0.0.4`, `0.0.4-r37`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r37/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubewatch GitHub repo](https://github.com/bitnami/bitnami-docker-kubewatch).
 
