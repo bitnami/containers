@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r113
+FROM bitnami/minideb-extras:stretch-r114
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -13,12 +13,12 @@ RUN mkdir -p /dist /app /.npm && chmod g+rwx /app /dist /.npm
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.16.3-debian-9-r27" \
+    BITNAMI_IMAGE_VERSION="4.16.3-debian-9-r28" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/express/bin:$PATH"
 
 EXPOSE 3000
 
 WORKDIR /app
 USER 1001
-ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["npm","start"]
+ENTRYPOINT [ "/app-entrypoint.sh" ]
+CMD [ "npm", "start" ]
