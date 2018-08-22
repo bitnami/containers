@@ -13,11 +13,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/cert-manager /opt/bitnami/cert-manager
 ENV BITNAMI_APP_NAME="cert-manager" \
-    BITNAMI_IMAGE_VERSION="0.4.1-debian-9-r10" \
+    BITNAMI_IMAGE_VERSION="0.4.1-debian-9-r11" \
     PATH="/opt/bitnami/cert-manager/bin:$PATH"
 
 RUN install_packages ca-certificates
 
 WORKDIR /opt/bitnami/cert-manager
 USER 1001
-ENTRYPOINT ["/opt/bitnami/cert-manager/bin/cert-manager"]
+ENTRYPOINT [ "/opt/bitnami/cert-manager/bin/cert-manager" ]
