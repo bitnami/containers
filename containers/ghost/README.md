@@ -35,7 +35,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.25.5-ol-7-r6` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.5-ol-7-r6/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.25.5-debian-9-r1`, `1`, `1.25.5`, `1.25.5-r1`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.5-debian-9-r1/1/Dockerfile)
+* [`1-debian-9`, `1.25.5-debian-9-r2`, `1`, `1.25.5`, `1.25.5-r2`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.5-debian-9-r2/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
 
