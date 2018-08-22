@@ -8,11 +8,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 RUN install_packages bzip2-libs glib2 glibc keyutils-libs krb5-libs libblkid libcom_err libffi libgcc libmount libselinux libstdc++ libuuid ncurses-libs nss-softokn-freebl openssl-libs pcre readline sqlite zlib
 RUN bitnami-pkg install python-2.7.15-2 --checksum 3dfc1b08e44ec28473c662fac58bd599ef8ea961f7571057efae7440718cb42e
 RUN bitnami-pkg install java-1.8.181-1 --checksum 6e7fc2779b6e0e3c6c0a2687b1d747d8a427594ff80b8c94b055c839e387e6b1
-RUN bitnami-pkg unpack cassandra-3.11.3-1 --checksum 96ef074dcd31c0fd801f9f4b0c82feb6764850426511092d551fb7add30a46a5
+RUN bitnami-pkg unpack cassandra-3.11.3-2 --checksum d95e0b63098c46e8d6df750ce10b8ba50bd65933ece16de154afc9ad5844d784
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.3-ol-7-r16" \
+    BITNAMI_IMAGE_VERSION="3.11.3-ol-7-r17" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
     CASSANDRA_ENABLE_REMOTE_CONNECTIONS="true" \
