@@ -13,11 +13,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/service-catalog /opt/bitnami/service-catalog
 ENV BITNAMI_APP_NAME="service-catalog" \
-    BITNAMI_IMAGE_VERSION="0.1.29-debian-9-r9" \
+    BITNAMI_IMAGE_VERSION="0.1.29-debian-9-r10" \
     PATH="/opt/bitnami/service-catalog/bin:$PATH"
 
 EXPOSE 8443 443
 
 WORKDIR /opt/bitnami/service-catalog
 USER 1001
-ENTRYPOINT ["/opt/bitnami/service-catalog/bin/service-catalog"]
+ENTRYPOINT [ "/opt/bitnami/service-catalog/bin/service-catalog" ]

@@ -30,7 +30,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.1.29-ol-7-r10` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-service-catalog/blob/0.1.29-ol-7-r10/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.1.29-debian-9-r9`, `0`, `0.1.29`, `0.1.29-r9`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-service-catalog/blob/0.1.29-debian-9-r9/0/Dockerfile)
+* [`0-debian-9`, `0.1.29-debian-9-r10`, `0`, `0.1.29`, `0.1.29-r10`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-service-catalog/blob/0.1.29-debian-9-r10/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/service-catalog GitHub repo](https://github.com/bitnami/bitnami-docker-service-catalog).
 
