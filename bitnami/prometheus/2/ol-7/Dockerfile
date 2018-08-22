@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r76 as buildenv
+FROM bitnami/oraclelinux-extras:7-r77 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.3.2-0-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r76
+FROM bitnami/oraclelinux-extras:7-r77
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/prometheus /opt/bitnami/prometheus
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.3.2-ol-7-r32" \
+    BITNAMI_IMAGE_VERSION="2.3.2-ol-7-r33" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
@@ -22,5 +22,5 @@ EXPOSE 9090
 
 WORKDIR /opt/bitnami/prometheus
 USER 1001
-ENTRYPOINT ["/opt/bitnami/prometheus/bin/prometheus"]
-CMD ["--config.file=/opt/bitnami/prometheus/conf/prometheus.yml","--storage.tsdb.path=/opt/bitnami/prometheus/data","--web.console.libraries=/opt/bitnami/prometheus/conf/console_libraries","--web.console.templates=/opt/bitnami/prometheus/conf/consoles"]
+ENTRYPOINT [ "/opt/bitnami/prometheus/bin/prometheus" ]
+CMD [ "--config.file=/opt/bitnami/prometheus/conf/prometheus.yml", "--storage.tsdb.path=/opt/bitnami/prometheus/data", "--web.console.libraries=/opt/bitnami/prometheus/conf/console_libraries", "--web.console.templates=/opt/bitnami/prometheus/conf/consoles" ]
