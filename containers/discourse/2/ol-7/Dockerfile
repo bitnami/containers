@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r76
+FROM bitnami/oraclelinux-extras:7-r77
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack discourse-2.0.3-2 --checksum 7c88ff6ff36c948560b85cee653f
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.0.3-ol-7-r17" \
+    BITNAMI_IMAGE_VERSION="2.0.3-ol-7-r18" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="127.0.0.1" \
     DISCOURSE_HOSTNAME="www.example.com" \
@@ -41,5 +41,5 @@ ENV BITNAMI_APP_NAME="discourse" \
 
 EXPOSE 3000
 
-ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["nami","start","--foreground","discourse"]
+ENTRYPOINT [ "/app-entrypoint.sh" ]
+CMD [ "nami", "start", "--foreground", "discourse" ]
