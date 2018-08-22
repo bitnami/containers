@@ -13,11 +13,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/acmesolver /opt/bitnami/acmesolver
 ENV BITNAMI_APP_NAME="acmesolver" \
-    BITNAMI_IMAGE_VERSION="0.4.1-debian-9-r10" \
+    BITNAMI_IMAGE_VERSION="0.4.1-debian-9-r11" \
     PATH="/opt/bitnami/acmesolver/bin:$PATH"
 
 RUN install_packages ca-certificates
 
 WORKDIR /opt/bitnami/acmesolver
 USER 1001
-ENTRYPOINT ["/opt/bitnami/acmesolver/bin/acmesolver"]
+ENTRYPOINT [ "/opt/bitnami/acmesolver/bin/acmesolver" ]
