@@ -34,7 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.13.7-ol-7-r9` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.7-ol-7-r9/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.13.7-debian-9-r8`, `0`, `0.13.7`, `0.13.7-r8`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.7-debian-9-r8/0/Dockerfile)
+* [`0-debian-9`, `0.13.7-debian-9-r9`, `0`, `0.13.7`, `0.13.7-r9`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.7-debian-9-r9/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluent-bit GitHub repo](https://github.com/bitnami/bitnami-docker-fluent-bit).
 
