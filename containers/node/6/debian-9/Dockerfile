@@ -9,10 +9,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/node-6.14.4-0-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="6.14.4-debian-9-r2" \
+    BITNAMI_IMAGE_VERSION="6.14.4-debian-9-r3" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 3000
 
 WORKDIR /app
-CMD ["node"]
+CMD [ "node" ]
