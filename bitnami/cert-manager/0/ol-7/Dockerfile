@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r76 as buildenv
+FROM bitnami/oraclelinux-extras:7-r77 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cert-manager-0.4.1-0-linux-x86_64-ol-7.tar.gz && \
@@ -8,16 +8,16 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r76
+FROM bitnami/oraclelinux-extras:7-r77
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/cert-manager /opt/bitnami/cert-manager
 ENV BITNAMI_APP_NAME="cert-manager" \
-    BITNAMI_IMAGE_VERSION="0.4.1-ol-7-r10" \
+    BITNAMI_IMAGE_VERSION="0.4.1-ol-7-r11" \
     PATH="/opt/bitnami/cert-manager/bin:$PATH"
 
 RUN install_packages ca-certificates
 
 WORKDIR /opt/bitnami/cert-manager
 USER 1001
-ENTRYPOINT ["/opt/bitnami/cert-manager/bin/cert-manager"]
+ENTRYPOINT [ "/opt/bitnami/cert-manager/bin/cert-manager" ]
