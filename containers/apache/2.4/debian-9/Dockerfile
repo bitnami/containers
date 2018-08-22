@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r108
+FROM bitnami/minideb-extras:stretch-r114
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -16,12 +16,12 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.34-debian-9-r29" \
+    BITNAMI_IMAGE_VERSION="2.4.34-debian-9-r30" \
     PATH="/opt/bitnami/apache/bin:$PATH"
 
 EXPOSE 8080 8443
 
 WORKDIR /app
 USER 1001
-ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["/run.sh"]
+ENTRYPOINT [ "/app-entrypoint.sh" ]
+CMD [ "/run.sh" ]
