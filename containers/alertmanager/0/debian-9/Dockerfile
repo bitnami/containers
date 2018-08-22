@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/alertmanager /opt/bitnami/alertmanager
 ENV BITNAMI_APP_NAME="alertmanager" \
-    BITNAMI_IMAGE_VERSION="0.15.2-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="0.15.2-debian-9-r1" \
     PATH="/opt/bitnami/alertmanager/bin:$PATH"
 
 RUN mkdir -p /opt/bitnami/alertmanager/data/ && chmod g+rwX /opt/bitnami/alertmanager/data/
@@ -22,5 +22,5 @@ EXPOSE 9093
 
 WORKDIR /opt/bitnami/alertmanager
 USER 1001
-ENTRYPOINT ["/opt/bitnami/alertmanager/bin/alertmanager"]
-CMD ["--config.file=/opt/bitnami/alertmanager/conf/config.yml","--storage.path=/opt/bitnami/alertmanager/data"]
+ENTRYPOINT [ "/opt/bitnami/alertmanager/bin/alertmanager" ]
+CMD [ "--config.file=/opt/bitnami/alertmanager/conf/config.yml", "--storage.path=/opt/bitnami/alertmanager/data" ]
