@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r113
+FROM bitnami/minideb-extras:stretch-r114
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack odoo-11.0.20180815-0 --checksum 614d9756456c77ea00d357351
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="11.0.20180815-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="11.0.20180815-debian-9-r1" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:$PATH" \
@@ -26,5 +26,5 @@ ENV BITNAMI_APP_NAME="odoo" \
 
 EXPOSE 8069 8071
 
-ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["nami","start","--foreground","odoo"]
+ENTRYPOINT [ "/app-entrypoint.sh" ]
+CMD [ "nami", "start", "--foreground", "odoo" ]
