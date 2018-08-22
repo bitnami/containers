@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/oauth2-proxy /opt/bitnami/oauth2-proxy
 ENV BITNAMI_APP_NAME="oauth2-proxy" \
-    BITNAMI_IMAGE_VERSION="0.20180625.74543-debian-9-r12" \
+    BITNAMI_IMAGE_VERSION="0.20180625.74543-debian-9-r13" \
     PATH="/opt/bitnami/oauth2-proxy/bin:$PATH"
 
 RUN install_packages ca-certificates
@@ -22,5 +22,5 @@ EXPOSE 8080 4180
 
 WORKDIR /opt/bitnami/oauth2-proxy
 USER 1001
-ENTRYPOINT ["oauth2_proxy"]
-CMD ["--upstream=http://0.0.0.0:8080/","--http-address=0.0.0.0:4180"]
+ENTRYPOINT [ "oauth2_proxy" ]
+CMD [ "--upstream=http://0.0.0.0:8080/", "--http-address=0.0.0.0:4180" ]
