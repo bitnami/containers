@@ -9,6 +9,7 @@
   "password": "{{$global.env.CASSANDRA_PASSWORD}}",
   "passwordSeeder": "{{$global.env.CASSANDRA_PASSWORD_SEEDER}}",
   "seeds": "{{$global.env.CASSANDRA_SEEDS}}",
+  "startupCQL": "{{$global.env.CASSANDRA_STARTUP_CQL}}",
   "transportPort": "{{$global.env.CASSANDRA_TRANSPORT_PORT_NUMBER}}",
   "username": "{{$global.env.CASSANDRA_USER}}"
 }
