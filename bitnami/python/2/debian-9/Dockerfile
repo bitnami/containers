@@ -9,10 +9,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/python-2.7.15-2-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="2.7.15-debian-9-r44" \
+    BITNAMI_IMAGE_VERSION="2.7.15-debian-9-r45" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8000
 
 WORKDIR /app
-CMD ["python"]
+CMD [ "python" ]
