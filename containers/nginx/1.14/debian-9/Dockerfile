@@ -18,7 +18,7 @@ RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.14.0-debian-9-r39" \
+    BITNAMI_IMAGE_VERSION="1.14.0-debian-9-r40" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
     NGINX_HTTP_PORT_NUMBER="8080" \
@@ -28,5 +28,5 @@ EXPOSE 8080
 
 WORKDIR /app
 USER 1001
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["/run.sh"]
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD [ "/run.sh" ]
