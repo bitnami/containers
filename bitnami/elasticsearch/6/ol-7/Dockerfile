@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r75
+FROM bitnami/oraclelinux-extras:7-r78
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN mkdir -p /bitnami/elasticsearch/conf/ && chmod g+rwX /bitnami/elasticsearch/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="6.3.2-ol-7-r21" \
+    BITNAMI_IMAGE_VERSION="6.3.2-ol-7-r22" \
     ELASTICSEARCH_BIND_ADDRESS="" \
     ELASTICSEARCH_CLUSTER_HOSTS="" \
     ELASTICSEARCH_CLUSTER_NAME="elasticsearch-cluster" \
@@ -28,5 +28,5 @@ ENV BITNAMI_APP_NAME="elasticsearch" \
 EXPOSE 9200 9300
 
 USER 1001
-ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["nami","start","--foreground","elasticsearch"]
+ENTRYPOINT [ "/app-entrypoint.sh" ]
+CMD [ "nami", "start", "--foreground", "elasticsearch" ]
