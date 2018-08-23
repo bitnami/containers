@@ -5,7 +5,7 @@
 > Neo4j is the world’s leading Graph Database. It is a high performance graph store with all the features expected of a mature and robust database, like a friendly query language and ACID transactions. The programmer works with a flexible network structure of nodes and relationships rather than static tables — yet enjoys all the benefits of enterprise-quality database. For many applications, Neo4j offers orders of magnitude performance benefits compared to relational DBs.
 
 
-[https://neo4.com](https://neo4.com)
+[https://neo4j.com](https://neo4j.com)
 
 # TL;DR;
 
@@ -35,7 +35,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.4.6-ol-7-r5` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.6-ol-7-r5/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.4.6-ol-7-r6` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.6-ol-7-r6/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.4.6-debian-9-r4`, `3`, `3.4.6`, `3.4.6-r4`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.6-debian-9-r4/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/neo4j GitHub repo](https://github.com/bitnami/bitnami-docker-neo4j).
