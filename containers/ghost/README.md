@@ -34,8 +34,8 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.25.5-ol-7-r7` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.5-ol-7-r7/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.25.5-debian-9-r3`, `1`, `1.25.5`, `1.25.5-r3`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/1.25.5-debian-9-r3/1/Dockerfile)
+* [`2-ol-7`, `2.0.3-ol-7-r0` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.0.3-ol-7-r0/2/ol-7/Dockerfile)
+* [`2-debian-9`, `0.0.0-debian-9-r0`, `2`, `0.0.0`, `0.0.0-r0`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/0.0.0-debian-9-r0/2/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
 
@@ -57,7 +57,7 @@ services:
     volumes:
       - 'mariadb_data:/bitnami'
   ghost:
-    image: 'bitnami/ghost:1'
+    image: 'bitnami/ghost:2'
     labels:
       kompose.service.type: nodeport
     environment:
