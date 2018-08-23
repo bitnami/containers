@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r108
+FROM bitnami/minideb-extras:stretch-r115
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -14,7 +14,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.8.11-debian-9-r11" \
+    BITNAMI_IMAGE_VERSION="3.8.11-debian-9-r12" \
     JOOMLA_DATABASE_NAME="bitnami_joomla" \
     JOOMLA_DATABASE_PASSWORD="" \
     JOOMLA_DATABASE_USER="bn_joomla" \
@@ -40,5 +40,5 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
 
 EXPOSE 80 443
 
-ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["nami","start","--foreground","apache"]
+ENTRYPOINT [ "/app-entrypoint.sh" ]
+CMD [ "nami", "start", "--foreground", "apache" ]
