@@ -13,11 +13,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/pushgateway /opt/bitnami/pushgateway
 ENV BITNAMI_APP_NAME="pushgateway" \
-    BITNAMI_IMAGE_VERSION="0.5.2-debian-9-r41" \
+    BITNAMI_IMAGE_VERSION="0.5.2-debian-9-r42" \
     PATH="/opt/bitnami/pushgateway/bin:$PATH"
 
 EXPOSE 9091
 
 WORKDIR /opt/bitnami/pushgateway
 USER 1001
-ENTRYPOINT ["/opt/bitnami/pushgateway/bin/pushgateway"]
+ENTRYPOINT [ "/opt/bitnami/pushgateway/bin/pushgateway" ]
