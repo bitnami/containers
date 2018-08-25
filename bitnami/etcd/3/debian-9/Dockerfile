@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/etcd /opt/bitnami/etcd
 ENV BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.3.9-debian-9-r29" \
+    BITNAMI_IMAGE_VERSION="3.3.9-debian-9-r30" \
     ETCD_ADVERTISE_CLIENT_URLS="http://127.0.0.1:2379" \
     ETCD_DATA_DIR="/opt/bitnami/etcd/data/" \
     ETCD_LISTEN_CLIENT_URLS="http://0.0.0.0:2379" \
@@ -27,5 +27,5 @@ EXPOSE 2379 2380
 COPY rootfs /
 WORKDIR /opt/bitnami/etcd
 USER 1001
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["etcd"]
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD [ "etcd" ]
