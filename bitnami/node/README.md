@@ -34,10 +34,10 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`10-ol-7`, `10.9.0-ol-7-r5` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.9.0-ol-7-r5/10/ol-7/Dockerfile)
+* [`10-ol-7`, `10.9.0-ol-7-r6` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.9.0-ol-7-r6/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.9.0-debian-9-r3`, `10`, `10.9.0`, `10.9.0-r3` (10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.9.0-debian-9-r3/10/Dockerfile)
 * [`8-ol-7`, `8.11.4-ol-7-r5` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.4-ol-7-r5/8/ol-7/Dockerfile)
-* [`8-debian-9`, `8.11.4-debian-9-r2`, `8`, `8.11.4`, `8.11.4-r2`, `latest` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.4-debian-9-r2/8/Dockerfile)
+* [`8-debian-9`, `8.11.4-debian-9-r3`, `8`, `8.11.4`, `8.11.4-r3`, `latest` (8/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.11.4-debian-9-r3/8/Dockerfile)
 * [`6-debian-9`, `6.14.4-debian-9-r4`, `6`, `6.14.4`, `6.14.4-r4` (6/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.4-debian-9-r4/6/Dockerfile)
 * [`6-ol-7`, `6.14.3-ol-7-r52` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.3-ol-7-r52/6/ol-7/Dockerfile)
 
