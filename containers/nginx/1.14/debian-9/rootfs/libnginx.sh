@@ -57,10 +57,10 @@ nginx_initialize() {
         info "WARNING: please use $NGINX_CONFDIR/nginx.conf instead"
         cp "$NGINX_VOLUME/conf/nginx.conf" "$NGINX_CONFDIR/nginx.conf"
     fi
+    if [ -d "$NGINX_VOLUME/conf/vhosts" ]; then
         info "WARNING: nginx.conf was found in a legacy location: $NGINX_VOLUME/conf/vhosts"
         info "WARNING: this path will not be supported in future releases"
         info "WARNING: please use $NGINX_CONFDIR/vhosts instead"
-    if [ -d "$NGINX_VOLUME/conf/vhosts" ]; then
         cp -r "$NGINX_VOLUME/conf/vhosts" "$NGINX_CONFDIR"
     fi
 
