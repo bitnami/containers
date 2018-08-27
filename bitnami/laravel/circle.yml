@@ -7,7 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "5"
           LATEST_STABLE: "5"
-          DISTRIBUTIONS_LIST: "debian-8,ol-7,debian-9"
+          DISTRIBUTIONS_LIST: "debian-9,ol-7"
           IMAGE_NAME: laravel
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
@@ -30,26 +30,11 @@ jobs:
           command: |
             docker version
             docker info
-      - restore_cache:
-          keys:
-            - cache-{{ .Branch }}
-          paths:
-            - /cache/layers.tar
-      - run:
-          name: Build docker image
-          command: |
-            curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-image-test.sh | bash -
-      - save_cache:
-          key: cache-{{ .Branch }}-{{ epoch }}
-          paths:
-            - /cache/layers.tar
       - deploy:
           name: Publish docker image
           command: |
             if [ -n "${CIRCLE_TAG}" ]; then
               curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-release-image.sh | bash -
-            elif [ "${CIRCLE_BRANCH}" == "master" ]; then
-              curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-development-image.sh | bash -
             fi
 
 workflows:
@@ -58,7 +43,5 @@ workflows:
     jobs:
       - build:
           filters:
-            branches:
-              only: /.*/
             tags:
               only: /^.*(?<!-rhel-7)-r[0-9]+$/
