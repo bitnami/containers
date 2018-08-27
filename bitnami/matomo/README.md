@@ -115,7 +115,7 @@ If you want to run the application manually instead of using docker-compose, the
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_matomo \
     -e MARIADB_DATABASE=bitnami_matomo \
-    --net matomo-tier \
+    --net matomo_network \
     --volume mariadb_data:/bitnami \
     bitnami/mariadb:latest
   ```
@@ -128,7 +128,7 @@ If you want to run the application manually instead of using docker-compose, the
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MATOMO_DATABASE_USER=bn_matomo \
     -e MATOMO_DATABASE_NAME=bitnami_matomo \
-    --net matomo-tier \
+    --net matomo_network \
     --volume matomo_data:/bitnami \
     bitnami/matomo:latest
   ```
