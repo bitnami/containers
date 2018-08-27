@@ -35,8 +35,6 @@ jobs:
           command: |
             if [ -n "${CIRCLE_TAG}" ]; then
               curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-release-image.sh | bash -
-            elif [ "${CIRCLE_BRANCH}" == "master" ]; then
-              curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-development-image.sh | bash -
             fi
 
 workflows:
@@ -45,7 +43,5 @@ workflows:
     jobs:
       - build:
           filters:
-            branches:
-              only: /.*/
             tags:
               only: /^.*(?<!-rhel-7)-r[0-9]+$/
