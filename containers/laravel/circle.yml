@@ -30,19 +30,6 @@ jobs:
           command: |
             docker version
             docker info
-      - restore_cache:
-          keys:
-            - cache-{{ .Branch }}
-          paths:
-            - /cache/layers.tar
-      - run:
-          name: Build docker image
-          command: |
-            curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-image-test.sh | bash -
-      - save_cache:
-          key: cache-{{ .Branch }}-{{ epoch }}
-          paths:
-            - /cache/layers.tar
       - deploy:
           name: Publish docker image
           command: |
