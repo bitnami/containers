@@ -19,7 +19,7 @@ USER bitnami
 RUN mkdir /tmp/app && cd /tmp/app && composer create-project "laravel/laravel=5.6.33" /tmp/app --prefer-dist
 
 ENV BITNAMI_APP_NAME=laravel
-ENV BITNAMI_IMAGE_VERSION=5.6.33
+ENV BITNAMI_IMAGE_VERSION=5.6.33-r0
 
 COPY rootfs/ /
 
