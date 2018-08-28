@@ -33,7 +33,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.20180625.74543-ol-7-r17` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-ol-7-r17/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.20180625.74543-ol-7-r18` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-ol-7-r18/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.20180625.74543-debian-9-r16`, `0`, `0.20180625.74543`, `0.20180625.74543-r16`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-debian-9-r16/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
