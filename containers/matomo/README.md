@@ -30,7 +30,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.5.1-ol-7-r26` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.5.1-ol-7-r26/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.5.1-ol-7-r27` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.5.1-ol-7-r27/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.5.1-debian-9-r13`, `3`, `3.5.1`, `3.5.1-r13`, `latest` (3/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.5.1-debian-9-r13/3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
@@ -183,7 +183,7 @@ In this case you need to specify the directories to mount on the run command. Th
 1. Create a network (if it does not exist):
 
   ```bash
-  $ docker network create matomo-tier
+  $ docker network create matomo_network
   ```
 
 2. Create a MariaDB container with host volume:
@@ -193,7 +193,7 @@ In this case you need to specify the directories to mount on the run command. Th
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_matomo \
     -e MARIADB_DATABASE=bitnami_matomo \
-    --net matomo-tier \
+    --net matomo_network \
     --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
   ```
@@ -206,7 +206,7 @@ In this case you need to specify the directories to mount on the run command. Th
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MATOMO_DATABASE_USER=bn_matomo \
     -e MATOMO_DATABASE_NAME=bitnami_matomo \
-    --net matomo-tier \
+    --net matomo_network \
     --volume /path/to/matomo-persistence:/bitnami \
     bitnami/matomo:latest
   ```
@@ -335,7 +335,7 @@ This would be an example of SMTP configuration using a Gmail account:
 
 ```bash
  $ docker run -d --name matomo -p 80:80 -p 443:443 \
-   --net matomo-tier \
+   --net matomo_network \
    -e MARIADB_HOST=mariadb \
    -e MARIADB_PORT_NUMBER=3306 \
    -e MATOMO_DATABASE_USER=bn_matomo \
