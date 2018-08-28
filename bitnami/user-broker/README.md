@@ -29,8 +29,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.1.29-ol-7-r14` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.1.29-ol-7-r14/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.1.29-debian-9-r11`, `0`, `0.1.29`, `0.1.29-r11`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.1.29-debian-9-r11/0/Dockerfile)
+* [`0-ol-7`, `0.1.29-ol-7-r15` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.1.29-ol-7-r15/0/ol-7/Dockerfile)
+* [`0-debian-9`, `0.1.29-debian-9-r12`, `0`, `0.1.29`, `0.1.29-r12`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.1.29-debian-9-r12/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/user-broker GitHub repo](https://github.com/bitnami/bitnami-docker-user-broker).
 
