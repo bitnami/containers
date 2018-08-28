@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r119
+FROM bitnami/minideb-extras:stretch-r121
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -13,7 +13,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.1.35-debian-9-r12" \
+    BITNAMI_IMAGE_VERSION="10.1.35-debian-9-r13" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
