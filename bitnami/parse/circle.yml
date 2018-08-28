@@ -5,8 +5,8 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "2"
-          LATEST_STABLE: "2"
+          RELEASE_SERIES_LIST: "3"
+          LATEST_STABLE: "3"
           DISTRIBUTIONS_LIST: "debian-9,ol-7"
           IMAGE_NAME: parse
           CHART_NAME: parse
