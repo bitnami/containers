@@ -1,18 +1,18 @@
-FROM bitnami/minideb-extras:stretch-r123
+FROM bitnami/minideb-extras:stretch-r124
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages ghostscript hostname imagemagick jhead libbsd0 libc6 libcomerr2 libcurl3 libedit2 libffi6 libgcc1 libgcrypt20 libgmp-dev libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libtasn1-6 libtinfo5 libunistring0 libxml2 libxml2-dev libxslt1-dev libxslt1.1 zlib1g zlib1g-dev
+RUN install_packages advancecomp ghostscript gifsicle hostname imagemagick jhead jpegoptim libbsd0 libc6 libcomerr2 libcurl3 libedit2 libffi6 libgcc1 libgcrypt20 libgmp-dev libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libjpeg-progs libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libtasn1-6 libtinfo5 libunistring0 libxml2 libxml2-dev libxslt1-dev libxslt1.1 optipng pngcrush pngquant zlib1g zlib1g-dev
 RUN bitnami-pkg install ruby-2.4.4-0 --checksum 8ffc50475a39ffe9f3048a64df2e20e1867ece8ba90d8e96c8a81a3a06334f5f
 RUN bitnami-pkg unpack postgresql-client-9.6.10-0 --checksum 89cb6e0fff65cdc6417f6b5d024a86239e047f07f3cc7e84142cc213db0fbda0
 RUN bitnami-pkg install git-2.18.0-1 --checksum acf77a7b174b2b4201335fc400a4fa32dbdca237d18fa90a5fa76f4fd3008517
-RUN bitnami-pkg unpack discourse-sidekiq-2.0.4-0 --checksum a0c14486f6136c033d28bab7b61cedf4c4ce6cfb60ea9d0af30712d499afec36
+RUN bitnami-pkg unpack discourse-sidekiq-2.0.4-1 --checksum 632efd5d32570e0123f2f686bf937091ad7185639ea4ec82c4798f28e58d7088
 RUN bitnami-pkg unpack discourse-2.0.4-0 --checksum 1580cc67c55b4b696bba58baac5087ac5fdcef77ff79da7e3ba3adecdfc6eebd
 
 COPY rootfs /
 RUN install_packages rsync
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.0.4-debian-9-r2" \
+    BITNAMI_IMAGE_VERSION="2.0.4-debian-9-r3" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="127.0.0.1" \
     DISCOURSE_HOSTNAME="www.example.com" \
