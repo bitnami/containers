@@ -30,7 +30,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.0.4-ol-7-r1` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.4-ol-7-r1/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.0.4-ol-7-r2` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.4-ol-7-r2/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.0.4-debian-9-r1`, `2`, `2.0.4`, `2.0.4-r1`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.0.4-debian-9-r1/2/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
@@ -303,7 +303,7 @@ Available variables:
  - `DISCOURSE_PASSWORD`: Discourse application password. Default: **bitnami123**
  - `DISCOURSE_EMAIL`: Discourse application email. Default: **user@example.com**
  - `DISCOURSE_SITENAME`: Discourse site name. Default: **My site!**
- - `DISCOURSE_HOSTNAME`: Dicourse Hostname to create application URLs for notifications. It can be either an IP or a domain. Default: **www.example.com**
+ - `DISCOURSE_HOSTNAME`: Discourse hostname to create application URLs for features such as email notifications and emojis. It can be either an IP or a domain. Default: **www.example.com**
  - `POSTGRESQL_ROOT_USER`: Root user for the Postgresql database. Default: **postgres**
  - `POSTGRESQL_ROOT_PASSWORD`: Root password for Postgresql.
  - `POSTGRESQL_HOST`: Hostname for Postgresql server. Default: **postgresql**
