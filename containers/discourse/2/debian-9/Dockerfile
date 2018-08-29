@@ -6,13 +6,13 @@ RUN install_packages advancecomp ghostscript gifsicle hostname imagemagick jhead
 RUN bitnami-pkg install ruby-2.4.4-0 --checksum 8ffc50475a39ffe9f3048a64df2e20e1867ece8ba90d8e96c8a81a3a06334f5f
 RUN bitnami-pkg unpack postgresql-client-9.6.10-0 --checksum 89cb6e0fff65cdc6417f6b5d024a86239e047f07f3cc7e84142cc213db0fbda0
 RUN bitnami-pkg install git-2.18.0-1 --checksum acf77a7b174b2b4201335fc400a4fa32dbdca237d18fa90a5fa76f4fd3008517
-RUN bitnami-pkg unpack discourse-sidekiq-2.0.4-1 --checksum 632efd5d32570e0123f2f686bf937091ad7185639ea4ec82c4798f28e58d7088
+RUN bitnami-pkg unpack discourse-sidekiq-2.0.4-2 --checksum 1e9caacd649f5d4ecee2d24838708d067c1528a101cdf490f4e58cf5fe5d5b2d
 RUN bitnami-pkg unpack discourse-2.0.4-0 --checksum 1580cc67c55b4b696bba58baac5087ac5fdcef77ff79da7e3ba3adecdfc6eebd
 
 COPY rootfs /
 RUN install_packages rsync
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.0.4-debian-9-r3" \
+    BITNAMI_IMAGE_VERSION="2.0.4-debian-9-r4" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="127.0.0.1" \
     DISCOURSE_HOSTNAME="www.example.com" \
