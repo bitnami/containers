@@ -6,13 +6,13 @@ RUN install_packages ImageMagick advancecomp cyrus-sasl-lib ghostscript gifsicle
 RUN bitnami-pkg install ruby-2.4.4-0 --checksum 8623ed8b7963916ff7f5ecf56c62ce3c144a1d11e56767500d0034c8e4f7e17c
 RUN bitnami-pkg unpack postgresql-client-9.6.10-0 --checksum 8060eeb7977a80dacb9bbcbc9d6081a6c6472d5fcee25e63bab04a1f128b5489
 RUN bitnami-pkg install git-2.18.0-1 --checksum e09020e93542133c5f61daaa5a47bdcb94ec5303dd336ae05fa561729786284c
-RUN bitnami-pkg unpack discourse-sidekiq-2.0.4-1 --checksum 19a6cebf5554cdc898dcb1aa0a1af7b10e5c69d721f9697d0dd7ad8d380aa697
+RUN bitnami-pkg unpack discourse-sidekiq-2.0.4-2 --checksum ab6d00decb238f288be6f00ba521f5da0b07272d2716beb80ad4aa4d2c26159b
 RUN bitnami-pkg unpack discourse-2.0.4-0 --checksum 2ee02096007cabe60df16796f951d997d89c04f98f9c9f49e296ceb3aef3d5ab
 
 COPY rootfs /
 RUN install_packages rsync
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.0.4-ol-7-r3" \
+    BITNAMI_IMAGE_VERSION="2.0.4-ol-7-r4" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="127.0.0.1" \
     DISCOURSE_HOSTNAME="www.example.com" \
