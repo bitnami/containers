@@ -31,7 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.9.17-ol-7-r57` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-ol-7-r57/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.9.17-debian-9-r42`, `1`, `1.9.17`, `1.9.17-r42`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-debian-9-r42/1/Dockerfile)
+* [`1-debian-9`, `1.9.17-debian-9-r43`, `1`, `1.9.17`, `1.9.17-r43`, `latest` (1/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.17-debian-9-r43/1/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/testlink GitHub repo](https://github.com/bitnami/bitnami-docker-testlink).
 
