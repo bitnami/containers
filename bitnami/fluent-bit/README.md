@@ -33,8 +33,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.13.8-ol-7-r0` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.8-ol-7-r0/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.13.8-debian-9-r2`, `0`, `0.13.8`, `0.13.8-r2`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.8-debian-9-r2/0/Dockerfile)
+* [`0-ol-7`, `0.13.8-ol-7-r1` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.8-ol-7-r1/0/ol-7/Dockerfile)
+* [`0-debian-9`, `0.13.8-debian-9-r1`, `0`, `0.13.8`, `0.13.8-r1`, `latest` (0/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.13.8-debian-9-r1/0/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluent-bit GitHub repo](https://github.com/bitnami/bitnami-docker-fluent-bit).
 
