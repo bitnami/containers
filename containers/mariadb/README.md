@@ -39,11 +39,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10.2-rhel-7`, `10.2.17-rhel-7-r2` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.17-rhel-7-r2/10.2/rhel-7/Dockerfile)
-* [`10.2-ol-7`, `10.2.17-ol-7-r12` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.17-ol-7-r12/10.2/ol-7/Dockerfile)
-* [`10.2-debian-9`, `10.2.17-debian-9-r11`, `10.2`, `10.2.17`, `10.2.17-r11` (10.2/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.17-debian-9-r11/10.2/Dockerfile)
+* [`10.2-ol-7`, `10.2.17-ol-7-r13` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.17-ol-7-r13/10.2/ol-7/Dockerfile)
+* [`10.2-debian-9`, `10.2.17-debian-9-r11`, `10.2`, `10.2.17`, `10.2.17-r11` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.17-debian-9-r11/10.2/debian-9/Dockerfile)
 * [`10.1-rhel-7`, `10.1.35-rhel-7-r1` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.35-rhel-7-r1/10.1/rhel-7/Dockerfile)
 * [`10.1-ol-7`, `10.1.35-ol-7-r17` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.35-ol-7-r17/10.1/ol-7/Dockerfile)
-* [`10.1-debian-9`, `10.1.35-debian-9-r13`, `10.1`, `10.1.35`, `10.1.35-r13`, `latest` (10.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.35-debian-9-r13/10.1/Dockerfile)
+* [`10.1-debian-9`, `10.1.35-debian-9-r13`, `10.1`, `10.1.35`, `10.1.35-r13`, `latest` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.35-debian-9-r13/10.1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
 
@@ -400,7 +400,7 @@ services:
 Scale the number of slaves using:
 
 ```bash
-$ docker-compose scale mariadb-master=1 mariadb-slave=3
+$ docker-compose up --detach --scale mariadb-master=1 --scale mariadb-slave=3
 ```
 
 The above command scales up the number of slaves to `3`. You can scale down in the same manner.
