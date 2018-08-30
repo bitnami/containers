@@ -38,8 +38,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4.0-ol-7`, `4.0.11-ol-7-r19` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.11-ol-7-r19/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.11-debian-9-r19`, `4.0`, `4.0.11`, `4.0.11-r19`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.11-debian-9-r19/4.0/Dockerfile)
+* [`4.0-ol-7`, `4.0.11-ol-7-r20` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.11-ol-7-r20/4.0/ol-7/Dockerfile)
+* [`4.0-debian-9`, `4.0.11-debian-9-r20`, `4.0`, `4.0.11`, `4.0.11-r20`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.11-debian-9-r20/4.0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
@@ -360,7 +360,7 @@ services:
 Scale the number of slaves using:
 
 ```bash
-$ docker-compose scale redis-master=1 redis-secondary=3
+$ docker-compose up --detach --scale redis-master=1 --scale redis-secondary=3
 ```
 
 The above command scales up the number of slaves to `3`. You can scale down in the same way.
