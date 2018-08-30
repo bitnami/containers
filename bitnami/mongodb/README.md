@@ -37,11 +37,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4.1-ol-7`, `4.1.2-ol-7-r7` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.2-ol-7-r7/4.1/ol-7/Dockerfile)
-* [`4.1-debian-9`, `4.1.2-debian-9-r12`, `4.1`, `4.1.2`, `4.1.2-r12` (4.1/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.2-debian-9-r12/4.1/Dockerfile)
+* [`4.1-debian-9`, `4.1.2-debian-9-r13`, `4.1`, `4.1.2`, `4.1.2-r13` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.2-debian-9-r13/4.1/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.2-ol-7-r1` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.2-ol-7-r1/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.2-debian-9-r0`, `4.0`, `4.0.2`, `4.0.2-r0`, `latest` (4.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.2-debian-9-r0/4.0/Dockerfile)
+* [`4.0-debian-9`, `4.0.2-debian-9-r0`, `4.0`, `4.0.2`, `4.0.2-r0`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.2-debian-9-r0/4.0/debian-9/Dockerfile)
 * [`3.6-ol-7`, `3.6.7-ol-7-r7` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.7-ol-7-r7/3.6/ol-7/Dockerfile)
-* [`3.6-debian-9`, `3.6.6-debian-9-r38`, `3.6`, `3.6.6`, `3.6.6-r38` (3.6/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-debian-9-r38/3.6/Dockerfile)
+* [`3.6-debian-9`, `3.6.6-debian-9-r38`, `3.6`, `3.6.6`, `3.6.6-r38` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.6-debian-9-r38/3.6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
@@ -410,7 +410,7 @@ volumes:
 Scale the number of secondary nodes using:
 
 ```bash
-$ docker-compose scale mongodb-primary=1 mongodb-secondary=3 mongodb-arbiter=1
+$ docker-compose up --detach --scale mongodb-primary=1 --scale mongodb-secondary=3 --scale mongodb-arbiter=1
 ```
 
 The above command scales up the number of secondary nodes to `3`. You can scale down in the same way.
