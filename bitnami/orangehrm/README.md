@@ -31,7 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4-ol-7`, `4.1.2-ol-7-r0` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.1.2-ol-7-r0/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.1.1-debian-9-r34`, `4`, `4.1.1`, `4.1.1-r34`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.1.1-debian-9-r34/4/debian-9/Dockerfile)
+* [`4-debian-9`, `4.1.2-debian-9-r0`, `4`, `4.1.2`, `4.1.2-r0`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.1.2-debian-9-r0/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/orangehrm GitHub repo](https://github.com/bitnami/bitnami-docker-orangehrm).
 
