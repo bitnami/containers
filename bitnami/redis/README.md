@@ -477,7 +477,7 @@ $ docker-compose up redis
 
 # Notable Changes
 
-## 4.0.1-r
+## 4.0.1-r24
 
 - Decrease the size of the container. It is not necessary Node.js anymore. Redis configuration moved to bash scripts in the `rootfs/` folder.
 - The recommended mount point to persist data changes to `/bitnami/redis/data`.
