@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4.0-ol-7`, `4.0.11-ol-7-r23` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.11-ol-7-r23/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.11-debian-9-r23`, `4.0`, `4.0.11`, `4.0.11-r23`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.11-debian-9-r23/4.0/debian-9/Dockerfile)
+* [`4.0-debian-9`, `4.0.11-debian-9-r24`, `4.0`, `4.0.11`, `4.0.11-r24`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.11-debian-9-r24/4.0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
@@ -65,7 +65,7 @@ $ docker build -t bitnami/redis:latest https://github.com/bitnami/bitnami-docker
 
 # Persisting your database
 
-If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
@@ -73,7 +73,7 @@ For persistence you should mount a directory at the `/bitnami` path. If the moun
 ```bash
 $ docker run \
     -e ALLOW_EMPTY_PASSWORD=yes \
-    -v /path/to/redis-persistence:/bitnami \
+    -v /path/to/redis-persistence:/bitnami/redis/data \
     bitnami/redis:latest
 ```
 
@@ -90,7 +90,7 @@ services:
     ports:
       - '6379:6379'
     volumes:
-      - /path/to/redis-persistence:/bitnami
+      - /path/to/redis-persistence:/bitnami/redis/data
 ```
 
 # Connecting to other containers
@@ -369,16 +369,13 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 ## Configuration file
 
-The image looks for configurations in `/bitnami/redis/conf/`. As mentioned in [Persisting your database](#persisting-your-database) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/redis-persistence/redis/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
-
-### Step 1: Run the Redis image
-
-Run the Redis image, mounting a directory from your host.
+The image looks for configurations in `/opt/bitnami/redis/etc/redis.conf`. You can overwrite the `redis.conf` file using your own custom configuration file.
 
 ```bash
 $ docker run --name redis \
     -e ALLOW_EMPTY_PASSWORD=yes \
-    -v /path/to/redis-persistence:/bitnami \
+    -v /path/to/your_redis.conf:/opt/bitnami/redis/etc/redis.conf \
+    -v /path/to/redis-data-persistence:/bitnami/redis/data \
     bitnami/redis:latest
 ```
 
@@ -395,29 +392,8 @@ services:
     ports:
       - '6379:6379'
     volumes:
-      - /path/to/redis-persistence:/bitnami
-```
-
-### Step 2: Edit the configuration
-
-Edit the configuration on your host using your favorite editor.
-
-```bash
-$ vi /path/to/redis-persistence/redis/conf/redis.conf
-```
-
-### Step 3: Restart Redis
-
-After changing the configuration, restart your Redis container for changes to take effect.
-
-```bash
-$ docker restart redis
-```
-
-or using Docker Compose:
-
-```bash
-$ docker-compose restart redis
+      - /path/to/your_redis.conf:/opt/bitnami/redis/etc/redis.conf
+      - /path/to/redis-persistence:/bitnami/redis/data
 ```
 
 Refer to the [Redis configuration](http://redis.io/topics/config) manual for the complete list of configuration options.
@@ -500,6 +476,26 @@ $ docker-compose up redis
 ```
 
 # Notable Changes
+
+## 4.0.1-r
+
+- Decrease the size of the container. It is not necessary Node.js anymore. Redis configuration moved to bash scripts in the `rootfs/` folder.
+- The recommended mount point to persist data changes to `/bitnami/redis/data`.
+- The main `redis.conf` file is not persisted in a volume. The path is `/opt/bitnami/redis/etc/redis.conf`.
+- Backwards compatibility is not guaranteed when data is persisted using docker-compose. You can use the workaround below to overcome it:
+
+```bash
+docker-compose down
+# Locate your volume and modify the file tree
+VOLUME=$(docker volume ls | grep "redis_data" | awk '{print $2}')
+docker run --rm -i -v=${VOLUME}:/tmp/redis busybox find /tmp/redis/data -maxdepth 1 -exec mv {} /tmp/redis \;
+docker run --rm -i -v=${VOLUME}:/tmp/redis busybox rm -rf /tmp/redis/{data,conf,.initialized}
+# Change the mount point
+sed -i -e 's#redis_data:/bitnami/redis#redis_data:/bitnami/redis/data#g' docker-compose.yml
+# Pull the latest bitnami/redis image
+docker pull bitnami/redis:latest
+docker-compose up -d
+```
 
 ## 4.0.1-r1
 
