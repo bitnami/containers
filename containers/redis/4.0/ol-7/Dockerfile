@@ -1,17 +1,21 @@
-FROM bitnami/oraclelinux-extras:7-r90
+FROM bitnami/oraclelinux-extras-base:7-r36
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    HOME="/"
+    HOME="/" \
+    OS_ARCH="x86_64" \
+    OS_FLAVOUR="ol-7" \
+    OS_NAME="linux"
 
 # Install required system packages and dependencies
 RUN install_packages glibc
-RUN bitnami-pkg unpack redis-4.0.11-3 --checksum 52a122a80087ac1fbfd0f681d7869aa44edc64865009ed9e79a6d84550fb15b5
+RUN . ./libcomponent.sh && component_unpack "redis" "4.0.11-3" --checksum 52a122a80087ac1fbfd0f681d7869aa44edc64865009ed9e79a6d84550fb15b5
 
 COPY rootfs /
+RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.11-ol-7-r23" \
+    BITNAMI_IMAGE_VERSION="4.0.11-ol-7-r24" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
     REDIS_MASTER_HOST="" \
@@ -23,5 +27,5 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
 EXPOSE 6379
 
 USER 1001
-ENTRYPOINT [ "/app-entrypoint.sh" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/run.sh" ]
