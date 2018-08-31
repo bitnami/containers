@@ -1,23 +1,30 @@
 #!/bin/bash
-. /opt/bitnami/base/functions
-. /opt/bitnami/base/helpers
 
-USER=redis
+set -o errexit
+set -o nounset
+set -o pipefail
+#set -o xtrace
+
+. /libredis.sh
+. /libos.sh
+eval "$(redis_env)"
+
+
 DAEMON=redis-server
 EXEC=$(which $DAEMON)
-ARGS="/opt/bitnami/redis/conf/redis.conf --daemonize no"
+ARGS="$REDIS_BASEDIR/etc/redis.conf --daemonize no"
+REDIS_EXTRA_FLAGS=${REDIS_EXTRA_FLAGS:-}
 
 # configure extra command line flags
 if [[ -n "$REDIS_EXTRA_FLAGS" ]]; then
     ARGS+=" $REDIS_EXTRA_FLAGS"
 fi
 
-# log output to stdout
-sed -i 's/^logfile /# logfile /g' /opt/bitnami/redis/conf/redis.conf
 
 # If container is started as `root` user
-if [ $EUID -eq 0 ]; then
-    exec gosu ${USER} ${EXEC} ${ARGS}
+if am_i_root; then
+    exec gosu "$REDIS_DAEMON_USER" "$EXEC" $ARGS
 else
-    exec ${EXEC} ${ARGS}
+    exec "$EXEC" $ARGS
 fi
+
