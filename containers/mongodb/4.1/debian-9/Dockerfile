@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack mongodb-4.1.2-5 --checksum bbe5ff01faef99444d547a05de14f7
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.1.2-debian-9-r15" \
+    BITNAMI_IMAGE_VERSION="4.1.2-debian-9-r16" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_ENABLE_IPV6="yes" \
