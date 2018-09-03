@@ -244,7 +244,7 @@ The OrangeHRM instance can be customized by specifying environment variables on 
 ##### User and Site configuration
 
 - `ORANGEHRM_USERNAME`: OrangeHRM application username. Default: **admin**
-- `ORANGEHRM_PASSWORD`: OrangeHRM application password. Default: **OrangeHRM.12345**
+- `ORANGEHRM_PASSWORD`: OrangeHRM application password. Default: **Bitnami.12345**
 
 ##### Use an existing database
 
