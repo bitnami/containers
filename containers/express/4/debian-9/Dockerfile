@@ -13,7 +13,7 @@ RUN mkdir -p /dist /app /.npm && chmod g+rwx /app /dist /.npm
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.16.3-debian-9-r40" \
+    BITNAMI_IMAGE_VERSION="4.16.3-debian-9-r41" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/express/bin:$PATH"
 
 EXPOSE 3000
