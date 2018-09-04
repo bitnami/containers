@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r126
+FROM bitnami/minideb-extras:stretch-r128
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,14 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.34-1 --checksum 35ab4cfd39577d1e7c5f6ef815ff27
 RUN bitnami-pkg unpack php-7.1.21-0 --checksum 7bad7c55c9e7d29e8a81baf753140eaacc40b70c588c45b462f3d6d9850352ef
 RUN bitnami-pkg unpack mysql-client-10.1.35-0 --checksum 368b07877bfeecb697d036647a39cac0152c11543763ec1290dad783c36fdd36
 RUN bitnami-pkg install libphp-7.1.21-0 --checksum 2071d2f097b8e7410151076975313bd09349aea4a77fd27c7dc7576412919ef9
-RUN bitnami-pkg unpack osclass-3.7.4-2 --checksum a9b9b05fdf661a2b400aa6ccf2b530651157a113c21a2fdab99e7ff4e719519f
+RUN bitnami-pkg unpack osclass-3.7.4-3 --checksum da340db1a106f3fdb37e2eee543398f353c926807b82601821a4996804a375da
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="osclass" \
-    BITNAMI_IMAGE_VERSION="3.7.4-debian-9-r43" \
+    BITNAMI_IMAGE_VERSION="3.7.4-debian-9-r44" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
