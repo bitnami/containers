@@ -30,7 +30,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.2.2-ol-7-r35` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.2-ol-7-r35/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.2.2-ol-7-r36` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.2-ol-7-r36/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.2.2-debian-9-r30`, `3`, `3.2.2`, `3.2.2-r30`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.2-debian-9-r30/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpbb GitHub repo](https://github.com/bitnami/bitnami-docker-phpbb).
