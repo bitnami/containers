@@ -32,8 +32,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`13-ol-7`, `13.0.0-ol-7-r62` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/13.0.0-ol-7-r62/13/ol-7/Dockerfile)
-* [`13-debian-9`, `13.0.0-debian-9-r47`, `13`, `13.0.0`, `13.0.0-r47`, `latest` (13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/13.0.0-debian-9-r47/13/debian-9/Dockerfile)
+* [`13-ol-7`, `13.0.0-ol-7-r61` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/13.0.0-ol-7-r61/13/ol-7/Dockerfile)
+* [`13-debian-9`, `13.0.0-debian-9-r48`, `13`, `13.0.0`, `13.0.0-r48`, `latest` (13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/13.0.0-debian-9-r48/13/debian-9/Dockerfile)
 * [`12-ol-7`, `12.0.0-ol-7-r61` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/12.0.0-ol-7-r61/12/ol-7/Dockerfile)
 * [`12-debian-9`, `12.0.0-debian-9-r48`, `12`, `12.0.0`, `12.0.0-r48` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/12.0.0-debian-9-r48/12/debian-9/Dockerfile)
 
