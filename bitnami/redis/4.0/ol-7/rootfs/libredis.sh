@@ -136,6 +136,10 @@ redis_conf_set() {
     local name="${1:?missing key}"
     local value="${2:-}"
 
+    # Sanitize inputs
+    value=${value//\\/\\\\}
+    value=${value//&/\\&}
+    value=${value//\?/\\?}
     if [ "$value" == "" ]; then
         value="\"$value\""
     fi
