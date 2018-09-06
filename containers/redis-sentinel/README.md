@@ -41,8 +41,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4.0-ol-7`, `4.0.11-ol-7-r27` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.11-ol-7-r27/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.11-debian-9-r28`, `4.0`, `4.0.11`, `4.0.11-r28`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.11-debian-9-r28/4.0/debian-9/Dockerfile)
+* [`4.0-ol-7`, `4.0.11-ol-7-r26` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.11-ol-7-r26/4.0/ol-7/Dockerfile)
+* [`4.0-debian-9`, `4.0.11-debian-9-r29`, `4.0`, `4.0.11`, `4.0.11-r29`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.11-debian-9-r29/4.0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
 
