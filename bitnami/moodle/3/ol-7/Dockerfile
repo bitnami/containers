@@ -1,10 +1,10 @@
-FROM bitnami/oraclelinux-extras:7-r95
+FROM bitnami/oraclelinux-extras:7-r96
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cronie cyrus-sasl-lib expat freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.34-1 --checksum d06af72741b365147c39bb30ca9e1df1501d97c3c6a44b200e64c3c4eb7878f6
-RUN bitnami-pkg unpack php-7.1.21-0 --checksum abb9367981b2ce1231810795234fd53cc586283afbb6fb20d58b4bce61661fcd
+RUN bitnami-pkg unpack php-7.1.21-1 --checksum 4cabe42c596860ab9ab75f2811e465e24d923e5dea139623d58aaeffc53f3d31
 RUN bitnami-pkg unpack mysql-client-10.1.35-0 --checksum e8b7b1feec15c0dd8c1643eb0ab0220c384e1eb981e1ef7cd51d06bb9fb09e6e
 RUN bitnami-pkg install libphp-7.1.21-0 --checksum e1b4055d7d47b37f22a5c4765c70a03a3130307bcd4779d3f01daa340519a9b0
 RUN bitnami-pkg unpack moodle-3.5.1-1 --checksum 1df3949d00f5e09ef426364eac3a360abb292a012c1ef9db9760c4b7dc4067cc
@@ -14,7 +14,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.5.1-ol-7-r49" \
+    BITNAMI_IMAGE_VERSION="3.5.1-ol-7-r50" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
