@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libpcap0.8 libssl1.1
-RUN bitnami-pkg unpack mongodb-3.6.7-1 --checksum 2856534944f85d66160804bbcc7db417223616ac8acbfa37cf7a768c92e3571d
+RUN bitnami-pkg unpack mongodb-3.6.7-2 --checksum 00b5748f83b4d70c0455b6e981c11778d93b6a170f14a9123319e3ca234c2b85
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.6.7-debian-9-r4" \
+    BITNAMI_IMAGE_VERSION="3.6.7-debian-9-r5" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_ENABLE_IPV6="yes" \
