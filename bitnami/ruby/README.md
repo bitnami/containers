@@ -34,8 +34,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2.5-ol-7`, `2.5.1-ol-7-r66` (2.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-ol-7-r66/2.5/ol-7/Dockerfile)
-* [`2.5-debian-9`, `2.5.1-debian-9-r55`, `2.5`, `2.5.1`, `2.5.1-r55`, `latest` (2.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-debian-9-r55/2.5/debian-9/Dockerfile)
+* [`2.5-ol-7`, `2.5.1-ol-7-r67` (2.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-ol-7-r67/2.5/ol-7/Dockerfile)
+* [`2.5-debian-9`, `2.5.1-debian-9-r54`, `2.5`, `2.5.1`, `2.5.1-r54`, `latest` (2.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-debian-9-r54/2.5/debian-9/Dockerfile)
 * [`2.4-ol-7`, `2.4.4-ol-7-r66` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-ol-7-r66/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.4-debian-9-r53`, `2.4`, `2.4.4`, `2.4.4-r53` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-debian-9-r53/2.4/debian-9/Dockerfile)
 * [`2.3-ol-7`, `2.3.7-ol-7-r66` (2.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-ol-7-r66/2.3/ol-7/Dockerfile)
