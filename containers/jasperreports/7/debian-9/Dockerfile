@@ -1,17 +1,17 @@
-FROM bitnami/minideb-extras:stretch-r131
+FROM bitnami/minideb-extras:stretch-r133
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libblkid1 libbsd0 libc6 libffi6 libgcc1 libglib2.0-0 libmount1 libncurses5 libpcre3 libselinux1 libssl1.0.2 libstdc++6 libtinfo5 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 zlib1g
 RUN bitnami-pkg install java-1.8.181-1 --checksum 66bba4b4a2647f981339d306da796905c222057c4277a5ef045e079981a404f4
 RUN bitnami-pkg unpack tomcat-8.0.53-1 --checksum 20b9b94827b7600a4975fb17847daaced71aaed42200925fb45f70a3d90ec2fc
-RUN bitnami-pkg unpack mysql-client-10.1.35-0 --checksum 368b07877bfeecb697d036647a39cac0152c11543763ec1290dad783c36fdd36
+RUN bitnami-pkg unpack mysql-client-10.1.36-0 --checksum e265f405c7707a49615c141ecf1e49aa0dc218d1d4660bbb51e94cfaa584c272
 RUN bitnami-pkg unpack jasperreports-7.1.0-0 --checksum 6861920266b698043309b9bc7bbf69e9674f50e621fb197a5f0cffe287163947
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.1.0-debian-9-r46" \
+    BITNAMI_IMAGE_VERSION="7.1.0-debian-9-r47" \
     JASPERREPORTS_DATABASE_NAME="bitnami_jasperreports" \
     JASPERREPORTS_DATABASE_PASSWORD="" \
     JASPERREPORTS_DATABASE_USER="bn_jasperreports" \
