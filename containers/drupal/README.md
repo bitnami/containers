@@ -30,9 +30,9 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`8-ol-7`, `8.6.1-ol-7-r0` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.1-ol-7-r0/8/ol-7/Dockerfile)
 * [`8-rhel-7`, `8.5.6-rhel-7-r0` (8/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.6-rhel-7-r0/8/rhel-7/Dockerfile)
 * [`8-php5-rhel-7`, `8.5.6-php5-rhel-7-r0` (8-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.6-php5-rhel-7-r0/8-php5/rhel-7/Dockerfile)
-* [`8-ol-7`, `8.5.6-ol-7-r29` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.6-ol-7-r29/8/ol-7/Dockerfile)
 * [`8-debian-9`, `8.5.6-debian-9-r21`, `8`, `8.5.6`, `8.5.6-r21`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.5.6-debian-9-r21/8/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
