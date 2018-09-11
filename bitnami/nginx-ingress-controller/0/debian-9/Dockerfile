@@ -1,10 +1,10 @@
 FROM bitnami/minideb:stretch as buildenv
 
 RUN install_packages ca-certificates curl libc6 libcomerr2 libcurl3 libffi6 libgcc1 libgcrypt20 libgeoip1 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libtasn1-6 libunistring0 wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.18.0-1-linux-amd64-debian-9.tar.gz && \
-    echo "8ad41e5fa5eada0a45f077164d13b2af6cb707e6b792379c187f1bd88c87df3c  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.18.0-1-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.18.0-1-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.18.0-1-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.19.0-0-linux-amd64-debian-9.tar.gz && \
+    echo "460dfbba4bfdb2b67be6dacc9ea92aa951dd44afe39b1659dcef89292ce71179  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.19.0-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.19.0-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.19.0-0-linux-amd64-debian-9.tar.gz
 RUN mkdir -p /opt/bitnami/nginx/conf/geoip && \
     cd /opt/bitnami/nginx/conf/geoip && \
     curl https://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz | gunzip >GeoIP.dat && \
@@ -21,7 +21,7 @@ COPY --from=buildenv /opt/bitnami/lua /opt/bitnami/lua
 COPY --from=buildenv /opt/bitnami/nginx /opt/bitnami/nginx
 COPY --from=buildenv /opt/bitnami/nginx-ingress-controller /opt/bitnami/nginx-ingress-controller
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.18.0-debian-9-r18" \
+    BITNAMI_IMAGE_VERSION="0.19.0-debian-9-r0" \
     PATH="/opt/bitnami/nginx-ingress-controller/bin:$PATH"
 
 RUN ln -sf /opt/bitnami/nginx/sbin/nginx /usr/sbin/nginx
