@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r130
+FROM bitnami/minideb-extras:stretch-r135
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,13 +7,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libaio1 libc6 libgcc1 libjemalloc1 libncurses5 libssl1.0.2 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg unpack mariadb-10.2.17-3 --checksum f827273cc260215b5b9bea1144fb8d0acfdd90a8daf8a6123098b498009d0ce0
+RUN bitnami-pkg unpack mariadb-10.2.17-4 --checksum 9eb9e7ba81f32784fedb15d857340ce9808a014e24248f3592a42ab565d054aa
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.17-debian-9-r20" \
+    BITNAMI_IMAGE_VERSION="10.2.17-debian-9-r21" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
