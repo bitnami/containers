@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras:7-r52
+FROM gcr.io/helm-publish-ci/redhat-extras:7-r97
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -8,10 +8,10 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.34-1 --checksum cdaa4e89b26534999debc5d7dc1b34d76fd42ea986e40941d276c0ad24c4016d
-RUN bitnami-pkg unpack php-5.6.37-0 --checksum b8a15abc0b10812ad6a022ee8a37551daef09ebb1fbcfa44d1cc65e807aa229c
-RUN bitnami-pkg unpack mysql-client-10.1.33-0 --checksum 4b07acdb7d3f6a61161414ad7f7639da8f291962e242eb257f612d18c8231501
+RUN bitnami-pkg unpack php-5.6.37-1 --checksum 3eba43fbb0e5795b52a282be72e8cbd270885e8e54dce6b18b6bb478d48b748a
+RUN bitnami-pkg unpack mysql-client-10.1.36-0 --checksum 46075d029b7e2537f7b9f13b4662a7539230bd2801c89087c675bc3efa98d839
 RUN bitnami-pkg install libphp-5.6.37-0 --checksum cf697ebb69ece27a31fe486af0e2d8710ca2dc98358047dd7f43f8b8f8553da4
-RUN bitnami-pkg unpack drupal-8.5.6-0 --checksum 7cf1d2000be5b4b000e2336a7b70cfee284362927ff2b06b1c2d89e3419e511b
+RUN bitnami-pkg unpack drupal-8.6.1-0 --checksum 587d7df1d6139623159ed730e698d3fd972b7cdaa8dabf47b7350a21174ac264
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/error_log
 
@@ -20,7 +20,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.5.6-php5-rhel-7-r0" \
+    BITNAMI_IMAGE_VERSION="8.6.1-php5-rhel-7-r0" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
@@ -43,5 +43,5 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
 EXPOSE 8080 8443
 
 USER 1001
-ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["httpd","-f","/bitnami/apache/conf/httpd.conf","-DFOREGROUND"]
+ENTRYPOINT [ "/app-entrypoint.sh" ]
+CMD [ "httpd", "-f", "/bitnami/apache/conf/httpd.conf", "-DFOREGROUND" ]
