@@ -30,8 +30,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.7-ol-7`, `1.7.4-2-ol-7-r38` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.4-2-ol-7-r38/1.7/ol-7/Dockerfile)
-* [`1.7-debian-9`, `1.7.4-2-debian-9-r30`, `1.7`, `1.7.4-2`, `1.7.4-2-r30`, `latest` (1.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.4-2-debian-9-r30/1.7/debian-9/Dockerfile)
+* [`1.7-ol-7`, `1.7.4-2-ol-7-r37` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.4-2-ol-7-r37/1.7/ol-7/Dockerfile)
+* [`1.7-debian-9`, `1.7.4-2-debian-9-r31`, `1.7`, `1.7.4-2`, `1.7.4-2-r31`, `latest` (1.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.4-2-debian-9-r31/1.7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
