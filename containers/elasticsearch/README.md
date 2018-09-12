@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6-ol-7`, `6.4.0-ol-7-r17` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.4.0-ol-7-r17/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.4.0-debian-9-r18`, `6`, `6.4.0`, `6.4.0-r18`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.4.0-debian-9-r18/6/debian-9/Dockerfile)
+* [`6-debian-9`, `6.4.0-debian-9-r19`, `6`, `6.4.0`, `6.4.0-r19`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.4.0-debian-9-r19/6/debian-9/Dockerfile)
 * [`5-ol-7`, `5.6.4-ol-7-r59` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-ol-7-r59/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.6.4-debian-9-r53`, `5`, `5.6.4`, `5.6.4-r53` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-debian-9-r53/5/debian-9/Dockerfile)
 
@@ -66,13 +66,13 @@ $ docker build -t bitnami/elasticsearch:latest https://github.com/bitnami/bitnam
 
 # Persisting your application
 
-If you remove the container all your data and configurations will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
 $ docker run \
-    -v /path/to/elasticsearch-persistence:/bitnami/elasticsearch \
+    -v /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data \
     bitnami/elasticsearch:latest
 ```
 
@@ -85,7 +85,7 @@ services:
   mariadb:
     image: bitnami/elasticsearch:latest
     volumes:
-      - /path/to/mariadb-persistence:/bitnami
+      - /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data
 ```
 
 # Connecting to other containers
@@ -179,7 +179,7 @@ elasticsearch:
  $ docker run -d --name elasticsearch \
     -p 9201:9201 --network=elasticsearch_network \
     -e ELASTICSEARCH_PORT_NUMBER=9201 \
-    -v /your/local/path/bitnami/elasticsearch:/bitnami/elasticsearch \
+    -v /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data \
     bitnami/elasticsearch
 ```
 
@@ -204,6 +204,7 @@ A cluster can easily be setup with the Bitnami Elasticsearch Docker Image using 
  - `ELASTICSEARCH_CLUSTER_HOSTS`: List of elasticsearch hosts to set the cluster. Available separatos are ' ', ',' and ';' .No defaults.
  - `ELASTICSEARCH_CLIENT_NODE`: Elasticsearch node to behave as a 'smart router' for Kibana app. Default: **false**
  - `ELASTICSEARCH_NODE_NAME`: Elasticsearch node name. No defaults.
+ - `ELASTICSEARCH_MINIMUM_MASTER_NODES`: Minimum Elasticsearch master nodes for quorum. No defaults.
 
 For larger cluster, you can setup 'dedicated nodes' using the following environment variables:
 
@@ -270,7 +271,30 @@ services:
 
 ## Configuration file
 
-The image looks for user-defined configurations in `/bitnami/elasticsearch/conf/elasticsearch_custom.yml`. Create a file named `elasticsearch_custom.yml`  and mount it at `/bitnami/elasticsearch/conf/elasticsearch_custom.yml` to extend the default configuration.
+The image looks for user-defined configurations in `/opt/bitnami/elasticsearch/conf/elasticsearch_custom.yml`. Create a file named `elasticsearch_custom.yml` and mount it at `/opt/bitnami/elasticsearch/conf/elasticsearch_custom.yml` to extend the default configuration.
+
+```bash
+$ docker run -d --name elasticsearch \
+    -p 9201:9201 \
+    -v /path/to/elasticsearch_custom.yml:/opt/bitnami/elasticsearch/conf/elasticsearch_custom.yml \
+    -v /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data \
+    bitnami/elasticsearch:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  elasticsearch:
+    image: 'bitnami/elasticsearch:latest'
+    ports:
+      - '9201:9201'
+    volumes:
+      - /path/to/elasticsearch_custom.yml:/opt/bitnami/elasticsearch/conf/elasticsearch_custom.yml
+      - /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data
+```
 
 # Logging
 
@@ -317,10 +341,10 @@ or using Docker Compose:
 $ docker-compose stop elasticsearch
 ```
 
-Next, take a snapshot of the persistent volume `/path/to/elasticsearch-persistence` using:
+Next, take a snapshot of the persistent volume `/path/to/elasticsearch-data-persistence` using:
 
 ```bash
-$ rsync -a /path/to/elasticsearch-persistence /path/to/elasticsearch-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+$ rsync -a /path/to/elasticsearch-data-persistence /path/to/elasticsearch-data-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 You can use this snapshot to restore the application state should the upgrade fail.
@@ -352,6 +376,23 @@ $ docker-compose up elasticsearch
 ```
 
 # Notable Changes
+
+## 6.4.0-debian-9-r19, 6.4.0-ol-7-r18, 5.6.4-debian-9-r54, and 5.6.4-ol-7-r60
+
+- Decrease the size of the container. It is not necessary Node.js anymore. Elasticsearch configuration moved to bash scripts in the `rootfs/` folder.
+- The recommended mount point to persist data changes to `/bitnami/elasticsearch/data`.
+- The Elasticsearch configuration files are not persisted in a volume anymore. Now, they can be found at `/opt/bitnami/elasticsearch/conf`.
+- Elasticsearch `plugins` and `modules` are not persisted anymore. It's necessary to indicate what plugins to install using the env. variable `ELASTICSEARCH_PLUGINS`
+- Backwards compatibility is not guaranteed when data is persisted using docker-compose. You can use the workaround below to overcome it:
+
+```bash
+docker-compose down
+# Change the mount point
+sed -i -e 's#elasticsearch_data:/bitnami#elasticsearch_data:/bitnami/elasticsearch/data#g' docker-compose.yml
+# Pull the latest bitnami/elasticsearch image
+docker pull bitnami/elasticsearch:latest
+docker-compose up -d
+```
 
 ## 6.2.3-r7 & 5.6.4-r18
 
