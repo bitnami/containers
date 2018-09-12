@@ -7,7 +7,7 @@ services:
       - '9200:9200'
       - '9300:9300'
     volumes:
-      - 'elasticsearch_data:/bitnami'
+      - 'elasticsearch_data:/bitnami/elasticsearch/data'
 volumes:
   elasticsearch_data:
     driver: local
