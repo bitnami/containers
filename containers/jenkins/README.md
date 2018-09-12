@@ -31,7 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.121.3-ol-7-r22` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.121.3-ol-7-r22/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.121.3-debian-9-r14`, `2`, `2.121.3`, `2.121.3-r14`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.121.3-debian-9-r14/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.121.3-debian-9-r15`, `2`, `2.121.3`, `2.121.3-r15`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.121.3-debian-9-r15/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
 
@@ -129,6 +129,36 @@ services:
     --volume /path/to/jenkins-persistence:/bitnami \
     bitnami/jenkins:latest
   ```
+
+# Preinstalling plugins
+
+You can rely on the `install-plugins.sh` script to pass a set of plugins to download with their dependencies.
+This script will perform downloads from update centers, an internet access is required for the default update centers.
+
+## Plugin version format
+
+Use plugin artifact ID, without `-plugin` extension, and append the version if needed separated by `:`.
+Dependencies that are already included in the Jenkins war will only be downloaded if their required version is newer than the one included.
+
+A custom version specifier can also be used:
+
+* `latest` - download the latest version from the main update center.
+  For Jenkins LTS images
+  (example: `git:latest`)
+
+## Script usage
+
+You can run the script manually in Dockerfile adding the following sentence after `COPY rootfs /`:
+
+```
+RUN /install-plugins.sh docker-slaves github-branch-source:1.8
+```
+
+Furthermore, it is possible to pass a file that contains this set of plugins (with or without line breaks), you should locate this file in the `rootfs` directory.
+
+```
+RUN /install-plugins.sh < /plugins.txt
+```
 
 # Upgrading Jenkins
 
