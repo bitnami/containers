@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`7.2-debian-9`, `7.2.9-debian-9-r23`, `7.2`, `7.2.9`, `7.2.9-r23` (7.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.9-debian-9-r23/7.2/debian-9/Dockerfile)
 * [`7.1-rhel-7`, `7.1.21-rhel-7-r3` (7.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.21-rhel-7-r3/7.1/rhel-7/Dockerfile)
 * [`7.1-ol-7`, `7.1.21-ol-7-r14` (7.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.21-ol-7-r14/7.1/ol-7/Dockerfile)
-* [`7.1-debian-9`, `7.1.21-debian-9-r16`, `7.1`, `7.1.21`, `7.1.21-r16`, `latest` (7.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.21-debian-9-r16/7.1/debian-9/Dockerfile)
+* [`7.1-debian-9`, `7.1.21-debian-9-r17`, `7.1`, `7.1.21`, `7.1.21-r17`, `latest` (7.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.21-debian-9-r17/7.1/debian-9/Dockerfile)
 * [`7.0-rhel-7`, `7.0.31-rhel-7-r4` (7.0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.31-rhel-7-r4/7.0/rhel-7/Dockerfile)
 * [`7.0-ol-7`, `7.0.31-ol-7-r48` (7.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.31-ol-7-r48/7.0/ol-7/Dockerfile)
 * [`7.0-debian-9`, `7.0.31-debian-9-r45`, `7.0`, `7.0.31`, `7.0.31-r45` (7.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.31-debian-9-r45/7.0/debian-9/Dockerfile)
