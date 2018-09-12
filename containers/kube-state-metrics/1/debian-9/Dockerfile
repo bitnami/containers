@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/kube-state-metrics /opt/bitnami/kube-state-metrics
 ENV BITNAMI_APP_NAME="kube-state-metrics" \
-    BITNAMI_IMAGE_VERSION="1.4.0-debian-9-r14" \
+    BITNAMI_IMAGE_VERSION="1.4.0-debian-9-r15" \
     PATH="/opt/bitnami/kube-state-metrics/bin:$PATH"
 
 RUN install_packages ca-certificates
