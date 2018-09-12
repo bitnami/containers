@@ -30,7 +30,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.2.5-ol-7-r66` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.2.5-ol-7-r66/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.2.5-ol-7-r67` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.2.5-ol-7-r67/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.2.5-debian-9-r31`, `2`, `2.2.5`, `2.2.5-r31`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.2.5-debian-9-r31/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
