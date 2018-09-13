@@ -36,10 +36,10 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4.1-ol-7`, `4.1.2-ol-7-r19` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.2-ol-7-r19/4.1/ol-7/Dockerfile)
-* [`4.1-debian-9`, `4.1.2-debian-9-r25`, `4.1`, `4.1.2`, `4.1.2-r25` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.2-debian-9-r25/4.1/debian-9/Dockerfile)
+* [`4.1-ol-7`, `4.1.2-ol-7-r20` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.2-ol-7-r20/4.1/ol-7/Dockerfile)
+* [`4.1-debian-9`, `4.1.2-debian-9-r24`, `4.1`, `4.1.2`, `4.1.2-r24` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.2-debian-9-r24/4.1/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.2-ol-7-r15` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.2-ol-7-r15/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.2-debian-9-r11`, `4.0`, `4.0.2`, `4.0.2-r11`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.2-debian-9-r11/4.0/debian-9/Dockerfile)
+* [`4.0-debian-9`, `4.0.2-debian-9-r12`, `4.0`, `4.0.2`, `4.0.2-r12`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.2-debian-9-r12/4.0/debian-9/Dockerfile)
 * [`3.6-ol-7`, `3.6.7-ol-7-r21` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.7-ol-7-r21/3.6/ol-7/Dockerfile)
 * [`3.6-debian-9`, `3.6.7-debian-9-r10`, `3.6`, `3.6.7`, `3.6.7-r10` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.7-debian-9-r10/3.6/debian-9/Dockerfile)
 
