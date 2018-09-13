@@ -39,9 +39,9 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`2.4-ol-7`, `2.4.4-ol-7-r72` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-ol-7-r72/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.4-debian-9-r59`, `2.4`, `2.4.4`, `2.4.4-r59` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-debian-9-r59/2.4/debian-9/Dockerfile)
 * [`2.3-ol-7`, `2.3.7-ol-7-r72` (2.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-ol-7-r72/2.3/ol-7/Dockerfile)
-* [`2.3-debian-9`, `2.3.7-debian-9-r58`, `2.3`, `2.3.7`, `2.3.7-r58` (2.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-debian-9-r58/2.3/debian-9/Dockerfile)
+* [`2.3-debian-9`, `2.3.7-debian-9-r59`, `2.3`, `2.3.7`, `2.3.7-r59` (2.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-debian-9-r59/2.3/debian-9/Dockerfile)
 * [`2.2-ol-7`, `2.2.10-ol-7-r71` (2.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.10-ol-7-r71/2.2/ol-7/Dockerfile)
-* [`2.2-debian-9`, `2.2.10-debian-9-r57`, `2.2`, `2.2.10`, `2.2.10-r57` (2.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.10-debian-9-r57/2.2/debian-9/Dockerfile)
+* [`2.2-debian-9`, `2.2.10-debian-9-r58`, `2.2`, `2.2.10`, `2.2.10-r58` (2.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.2.10-debian-9-r58/2.2/debian-9/Dockerfile)
 * [`2.1-ol-7`, `2.1.10-ol-7-r70` (2.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-ol-7-r70/2.1/ol-7/Dockerfile)
 * [`2.1-debian-9`, `2.1.10-debian-9-r58`, `2.1`, `2.1.10`, `2.1.10-r58` (2.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.1.10-debian-9-r58/2.1/debian-9/Dockerfile)
 
