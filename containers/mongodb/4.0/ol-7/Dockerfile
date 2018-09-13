@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r102
+FROM bitnami/oraclelinux-extras:7-r104
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack mongodb-4.0.2-3 --checksum 7dcef8ad60d29185b99317ac088691
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.0.2-ol-7-r15" \
+    BITNAMI_IMAGE_VERSION="4.0.2-ol-7-r16" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_ENABLE_IPV6="yes" \
