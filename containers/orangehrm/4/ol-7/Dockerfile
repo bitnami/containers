@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r102
+FROM bitnami/oraclelinux-extras:7-r105
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,14 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.34-1 --checksum d06af72741b365147c39bb30ca9e1d
 RUN bitnami-pkg unpack php-5.6.37-1 --checksum 3ae3fa5ec29715bcda82043f7b4ed6341eb8a8986c60ce82ffa44eb69b9d5cd7
 RUN bitnami-pkg unpack mysql-client-10.1.36-0 --checksum 066d5ea1a684175a9a9709a0d7d1585067324f58bcd8a569d1fd8e61028dc71b
 RUN bitnami-pkg install libphp-5.6.37-0 --checksum 15b51d2c174196fd40d27f215bd3c5c8e039d1e2c948b9b6801157b60d63fa1c
-RUN bitnami-pkg unpack orangehrm-4.1.2-0 --checksum 7acba6f59a2bc94be31b340a01ef870efc20bba5dfae14449e576bde25677201
+RUN bitnami-pkg unpack orangehrm-4.1.2-1-1 --checksum d9193b31613073db7bad83e6351fcd557e450c4e645f151a6d2f36ac0b7be3e9
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.1.2-ol-7-r12" \
+    BITNAMI_IMAGE_VERSION="4.1.2-1-ol-7-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
