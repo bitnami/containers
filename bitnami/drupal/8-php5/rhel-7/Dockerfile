@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras:7-r97
+FROM gcr.io/helm-publish-ci/redhat-extras:7-r101
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack apache-2.4.34-1 --checksum cdaa4e89b26534999debc5d7dc1b34
 RUN bitnami-pkg unpack php-5.6.37-1 --checksum 3eba43fbb0e5795b52a282be72e8cbd270885e8e54dce6b18b6bb478d48b748a
 RUN bitnami-pkg unpack mysql-client-10.1.36-0 --checksum 46075d029b7e2537f7b9f13b4662a7539230bd2801c89087c675bc3efa98d839
 RUN bitnami-pkg install libphp-5.6.37-0 --checksum cf697ebb69ece27a31fe486af0e2d8710ca2dc98358047dd7f43f8b8f8553da4
-RUN bitnami-pkg unpack drupal-8.6.1-0 --checksum 587d7df1d6139623159ed730e698d3fd972b7cdaa8dabf47b7350a21174ac264
+RUN bitnami-pkg unpack drupal-8.6.1-1 --checksum 3fda81c1caac872c86708978e4a2b9e6845dd668a24913811a794dec704e01ff
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/error_log
 
@@ -20,7 +20,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.6.1-php5-rhel-7-r0" \
+    BITNAMI_IMAGE_VERSION="8.6.1-php5-rhel-7-r1" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
