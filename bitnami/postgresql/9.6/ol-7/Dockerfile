@@ -6,13 +6,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libcom_err libselinux libxml2 libxslt ncurses-libs nss-softokn-freebl openssl-libs pcre readline xz-libs zlib
-RUN bitnami-pkg unpack postgresql-9.6.10-0 --checksum bec5b20af2c37cb49820bfbc18bc1cea6bf6df8c85285fb55a96f361fcf87c62
+RUN bitnami-pkg unpack postgresql-9.6.10-1 --checksum 95eaa23e188ed67bc538a4a6efff196b32179f45e611440193ac03772d511265
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN rpm -Uvh --nodeps $(repoquery --location nss_wrapper)
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="9.6.10-ol-7-r26" \
+    BITNAMI_IMAGE_VERSION="9.6.10-ol-7-r27" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
     POSTGRESQL_MASTER_HOST="" \
