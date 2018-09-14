@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r138
+FROM bitnami/minideb-extras:stretch-r139
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,14 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.34-1 --checksum 35ab4cfd39577d1e7c5f6ef815ff27
 RUN bitnami-pkg unpack php-7.0.31-3 --checksum 50c47cf30ec40fe022d9192f58f9865efac4b513e5b5fbd38c1894aeb9104cc0
 RUN bitnami-pkg unpack mysql-client-10.1.36-0 --checksum e265f405c7707a49615c141ecf1e49aa0dc218d1d4660bbb51e94cfaa584c272
 RUN bitnami-pkg install libphp-7.0.31-0 --checksum d6e6bff000d896b9dbc1407d1e01ccc81d5845ea3fd9cb9af1a63d8060c62671
-RUN bitnami-pkg unpack matomo-3.6.0-0 --checksum 23b0cb1df29ff6fc505a96d01626bae0740a93b7e3bbcf2324eecae04f89ac07
+RUN bitnami-pkg unpack matomo-3.6.0-1 --checksum 30eb64963f18b7ab611b6c7d74b4ee3a8b45cdd0ad8c0cd35b0f2c1d5099afb7
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="matomo" \
-    BITNAMI_IMAGE_VERSION="3.6.0-debian-9-r6" \
+    BITNAMI_IMAGE_VERSION="3.6.0-debian-9-r7" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
