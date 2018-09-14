@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras:7-r66
+FROM gcr.io/helm-publish-ci/redhat-extras:7-r101
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -8,10 +8,10 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.34-1 --checksum cdaa4e89b26534999debc5d7dc1b34d76fd42ea986e40941d276c0ad24c4016d
-RUN bitnami-pkg unpack php-7.0.31-1 --checksum 1adbbe5556dfa5fdaab13c012ca11b3a3d3ed42bdf526e5e3b9ae977a55b6768
-RUN bitnami-pkg unpack mysql-client-10.1.35-0 --checksum cbd83c2a1126d14e59c9fe88bf497d4eef8fe7c9b9aba415475c0849787f658c
+RUN bitnami-pkg unpack php-7.0.31-3 --checksum 6ca2dff0e411bc5a8c8db818dce2c2ca16c596096a653764b5a54e2cf8f8baff
+RUN bitnami-pkg unpack mysql-client-10.1.36-0 --checksum 46075d029b7e2537f7b9f13b4662a7539230bd2801c89087c675bc3efa98d839
 RUN bitnami-pkg install libphp-7.0.31-0 --checksum 7a7ba0fcb2026c4269f1a64d9dce3471d111d5281a7dd34c4d7ebef99795d5d9
-RUN bitnami-pkg unpack wordpress-4.9.8-1 --checksum 316c0224395ff374f703de71b26d42658e0d29dbed73072d2437838b9c61ad14
+RUN bitnami-pkg unpack wordpress-4.9.8-2 --checksum caf6545596fe37c706bff79cc414da77c429a5e7ce6172ba23722413afe19d27
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/error_log
 
@@ -20,7 +20,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="4.9.8-rhel-7-r1" \
+    BITNAMI_IMAGE_VERSION="4.9.8-rhel-7-r2" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -53,5 +53,5 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
 EXPOSE 8080 8443
 
 USER 1001
-ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["/run.sh"]
+ENTRYPOINT [ "/app-entrypoint.sh" ]
+CMD [ "/run.sh" ]
