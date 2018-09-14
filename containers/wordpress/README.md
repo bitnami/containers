@@ -30,7 +30,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-rhel-7`, `4.9.8-rhel-7-r1` (4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.8-rhel-7-r1/4/rhel-7/Dockerfile)
+* [`4-rhel-7`, `4.9.8-rhel-7-r2` (4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.8-rhel-7-r2/4/rhel-7/Dockerfile)
 * [`4-php5-rhel-7`, `4.9.8-php5-rhel-7-r0` (4-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.8-php5-rhel-7-r0/4-php5/rhel-7/Dockerfile)
 * [`4-ol-7`, `4.9.8-ol-7-r35` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.8-ol-7-r35/4/ol-7/Dockerfile)
 * [`4-debian-9`, `4.9.8-debian-9-r28`, `4`, `4.9.8`, `4.9.8-r28`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.8-debian-9-r28/4/debian-9/Dockerfile)
