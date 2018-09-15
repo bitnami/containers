@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r105
+FROM bitnami/oraclelinux-extras:7-r106
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack cassandra-3.11.3-8 --checksum 583ee9f4fb497a7203f208054be
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.3-ol-7-r37" \
+    BITNAMI_IMAGE_VERSION="3.11.3-ol-7-r38" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
     CASSANDRA_ENABLE_REMOTE_CONNECTIONS="true" \
