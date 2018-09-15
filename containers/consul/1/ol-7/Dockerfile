@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r105
+FROM bitnami/oraclelinux-extras:7-r106
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,7 +6,7 @@ RUN bitnami-pkg unpack consul-1.2.3-0 --checksum 7ea65d9ee5e0e92de8d278e1987e9b6
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.2.3-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="1.2.3-ol-7-r2" \
     CONSUL_BOOTSTRAP_EXPECT="1" \
     CONSUL_CLIENT_LAN_ADDRESS="0.0.0.0" \
     CONSUL_DATACENTER="dc1" \
