@@ -1,10 +1,10 @@
 FROM bitnami/minideb:stretch as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/user-broker-0.1.31-0-linux-amd64-debian-9.tar.gz && \
-    echo "9bbddf1f6e1c261b56fa39df4e6d1bb2817e3b030e55b9d69e6e307f29296f31  /tmp/bitnami/pkg/cache/user-broker-0.1.31-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/user-broker-0.1.31-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/user-broker-0.1.31-0-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/user-broker-0.1.32-0-linux-amd64-debian-9.tar.gz && \
+    echo "ae908157cc9db8ecf655891496f07f2bbbd702a7443b3a009e007f6e69d2268c  /tmp/bitnami/pkg/cache/user-broker-0.1.32-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/user-broker-0.1.32-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/user-broker-0.1.32-0-linux-amd64-debian-9.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/user-broker /opt/bitnami/user-broker
 ENV BITNAMI_APP_NAME="user-broker" \
-    BITNAMI_IMAGE_VERSION="0.1.31-debian-9-r7" \
+    BITNAMI_IMAGE_VERSION="0.1.32-debian-9-r0" \
     PATH="/opt/bitnami/user-broker/bin:$PATH"
 
 EXPOSE 8005 8080
