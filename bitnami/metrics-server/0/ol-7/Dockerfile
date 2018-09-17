@@ -1,10 +1,10 @@
 FROM bitnami/oraclelinux-extras:7-r108 as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metrics-server-0.3.0-0-linux-x86_64-ol-7.tar.gz && \
-    echo "bde546195bbd9e40877b3154427f2ee8da51fe45368a8eec6e03e8c16116d393  /tmp/bitnami/pkg/cache/metrics-server-0.3.0-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/metrics-server-0.3.0-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/metrics-server-0.3.0-0-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metrics-server-0.3.1-0-linux-x86_64-ol-7.tar.gz && \
+    echo "341c5b5c44863fc8c310f1617484447bbde4e8e7691fd4202c78a063ae85fd45  /tmp/bitnami/pkg/cache/metrics-server-0.3.1-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/metrics-server-0.3.1-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/metrics-server-0.3.1-0-linux-x86_64-ol-7.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/metrics-server /opt/bitnami/metrics-server
 ENV BITNAMI_APP_NAME="metrics-server" \
-    BITNAMI_IMAGE_VERSION="0.3.0-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="0.3.1-ol-7-r0" \
     PATH="/opt/bitnami/metrics-server/bin:$PATH"
 
 RUN install_packages ca-certificates
