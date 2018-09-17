@@ -7,13 +7,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libaio1 libatomic1 libc6 libgcc1 libncurses5 libsasl2-2 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg unpack mysql-5.7.23-3 --checksum 66769790039472d9941a520d4272dd21f2a35ad248dba11c678ccb4462c48bca
+RUN bitnami-pkg unpack mysql-5.7.23-4 --checksum d67c2a839278f091669c4ab4f1e89a661d7a75f8c0f62f3eb3be4ef805917367
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.23-debian-9-r43" \
+    BITNAMI_IMAGE_VERSION="5.7.23-debian-9-r44" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
