@@ -32,7 +32,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`4-rhel-7`, `4.9.8-rhel-7-r0` (4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-rhel-7-r0/4/rhel-7/Dockerfile)
 * [`4-php5-rhel-7`, `4.9.8-php5-rhel-7-r0` (4-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-php5-rhel-7-r0/4-php5/rhel-7/Dockerfile)
-* [`4-php5-ol-7`, `4.9.8-php5-ol-7-r35` (4-php5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-php5-ol-7-r35/4-php5/ol-7/Dockerfile)
+* [`4-php5-ol-7`, `4.9.8-php5-ol-7-r36` (4-php5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-php5-ol-7-r36/4-php5/ol-7/Dockerfile)
 * [`4-php5-debian-9`, `4.9.8-php5-debian-9-r14`, `4-php5`, `4.9.8-php5`, `4.9.8-php5-r14` (4-php5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-php5-debian-9-r14/4-php5/debian-9/Dockerfile)
 * [`4-ol-7`, `4.9.8-ol-7-r25` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-ol-7-r25/4/ol-7/Dockerfile)
 * [`4-debian-9`, `4.9.8-debian-9-r39`, `4`, `4.9.8`, `4.9.8-r39`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-debian-9-r39/4/debian-9/Dockerfile)
