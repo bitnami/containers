@@ -33,7 +33,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.31.0-ol-7-r77` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.31.0-ol-7-r77/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.31.0-debian-9-r55`, `1`, `1.31.0`, `1.31.0-r55`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.31.0-debian-9-r55/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.31.0-debian-9-r56`, `1`, `1.31.0`, `1.31.0-r56`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.31.0-debian-9-r56/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mediawiki GitHub repo](https://github.com/bitnami/bitnami-docker-mediawiki).
 
