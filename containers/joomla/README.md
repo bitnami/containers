@@ -30,8 +30,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.8.12-ol-7-r20` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.12-ol-7-r20/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.8.12-debian-9-r13`, `3`, `3.8.12`, `3.8.12-r13`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.12-debian-9-r13/3/debian-9/Dockerfile)
+* [`3-ol-7`, `3.8.12-ol-7-r19` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.12-ol-7-r19/3/ol-7/Dockerfile)
+* [`3-debian-9`, `3.8.12-debian-9-r14`, `3`, `3.8.12`, `3.8.12-r14`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.12-debian-9-r14/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
 
