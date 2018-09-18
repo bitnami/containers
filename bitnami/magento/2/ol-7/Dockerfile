@@ -4,10 +4,10 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cronie cyrus-sasl-lib expat freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.34-1 --checksum d06af72741b365147c39bb30ca9e1df1501d97c3c6a44b200e64c3c4eb7878f6
-RUN bitnami-pkg unpack php-7.0.32-0 --checksum 93f26a5a8cbdd046bbe1e3d029f4e7410cb6ea2a8a46f554e5327752277a4c5f
+RUN bitnami-pkg unpack php-7.0.32-1 --checksum e4dc53e7136006e86064102fea76ffe2f3ac357c48ff7393eb3047fd82ae05b6
 RUN bitnami-pkg unpack mysql-client-10.1.36-0 --checksum 066d5ea1a684175a9a9709a0d7d1585067324f58bcd8a569d1fd8e61028dc71b
-RUN bitnami-pkg install libphp-7.0.31-0 --checksum 760bd9fad0870ff05810f287701879a858ee8952a146864aa06b18f8143ac3c5
-RUN bitnami-pkg unpack magento-2.2.5-1 --checksum 96b1f99c69f5bf6c42b02790f6d6dcd2d6bf9afc692f46a8b0f86c72a9f31bd7
+RUN bitnami-pkg install libphp-7.0.32-0 --checksum 44c17fcbd804c4d806ad4f46beb20b885742aa0dd9ac0bce534f9f442c5ea48f
+RUN bitnami-pkg unpack magento-2.2.6-0 --checksum 9e8021038dc982134e8b69dabcb3164908db1f88e2aa7d038b60334e8675a086
 RUN find /opt/bitnami/magento/htdocs -type d -print0 | xargs -0 chmod 775 && find /opt/bitnami/magento/htdocs -type f -print0 | xargs -0 chmod 664 && chown -R bitnami:daemon /opt/bitnami/magento/htdocs
 
 COPY rootfs /
@@ -15,7 +15,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.2.5-ol-7-r71" \
+    BITNAMI_IMAGE_VERSION="2.2.6-ol-7-r0" \
     MAGENTO_ADMINURI="admin" \
     MAGENTO_DATABASE_NAME="bitnami_magento" \
     MAGENTO_DATABASE_PASSWORD="" \
