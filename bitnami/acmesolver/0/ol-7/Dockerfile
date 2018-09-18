@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r108 as buildenv
+FROM bitnami/oraclelinux-extras:7-r109 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/acmesolver-0.5.0-0-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r108
+FROM bitnami/oraclelinux-extras:7-r109
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/acmesolver /opt/bitnami/acmesolver
 ENV BITNAMI_APP_NAME="acmesolver" \
-    BITNAMI_IMAGE_VERSION="0.5.0-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="0.5.0-ol-7-r1" \
     PATH="/opt/bitnami/acmesolver/bin:$PATH"
 
 RUN install_packages ca-certificates
