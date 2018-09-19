@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras:7-r97
+FROM gcr.io/helm-publish-ci/redhat-extras:7-r106
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -13,7 +13,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.17-rhel-7-r4" \
+    BITNAMI_IMAGE_VERSION="10.2.17-rhel-7-r5" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
