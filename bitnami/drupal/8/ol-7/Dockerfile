@@ -1,12 +1,12 @@
-FROM bitnami/oraclelinux-extras:7-r109
+FROM bitnami/oraclelinux-extras:7-r110
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.34-1 --checksum d06af72741b365147c39bb30ca9e1df1501d97c3c6a44b200e64c3c4eb7878f6
-RUN bitnami-pkg unpack php-7.1.22-0 --checksum a72a7265c5e706b9b0cb22bfe0d2a321ae4adcfff659f5f8d34ce69f0150d51d
+RUN bitnami-pkg unpack php-7.1.22-1 --checksum d454d26b6288af034ee7af734bd3775f591c70345772c9b1c731c44ab60c5be7
 RUN bitnami-pkg unpack mysql-client-10.1.36-0 --checksum 066d5ea1a684175a9a9709a0d7d1585067324f58bcd8a569d1fd8e61028dc71b
-RUN bitnami-pkg install libphp-7.1.21-0 --checksum e1b4055d7d47b37f22a5c4765c70a03a3130307bcd4779d3f01daa340519a9b0
+RUN bitnami-pkg install libphp-7.1.22-1 --checksum 42018a53bcaf3217a061e58c9db5a2f31c8b92ee646fd7cf9ce0b78c421d2091
 RUN bitnami-pkg unpack drupal-8.6.1-1 --checksum fab45400922245efe7139016147b1c83cef685f0b708afc77a13ea1db8a826ed
 
 COPY rootfs /
@@ -14,7 +14,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.6.1-ol-7-r8" \
+    BITNAMI_IMAGE_VERSION="8.6.1-ol-7-r9" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
