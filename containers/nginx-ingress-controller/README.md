@@ -28,7 +28,7 @@ $ docker run --name nginx-ingress-controller bitnami/nginx-ingress-controller:la
 
 
 * [`0-ol-7`, `0.19.0-ol-7-r8` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.19.0-ol-7-r8/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.19.0-debian-9-r8`, `0`, `0.19.0`, `0.19.0-r8`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.19.0-debian-9-r8/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.19.0-debian-9-r9`, `0`, `0.19.0`, `0.19.0-r9`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.19.0-debian-9-r9/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nginx-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller).
 
