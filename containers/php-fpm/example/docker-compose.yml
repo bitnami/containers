@@ -1,0 +1,13 @@
+version: '2'
+services:
+  phpfpm:
+    image: 'bitnami/php-example:0.0.1'
+  nginx:
+    image: 'bitnami/nginx:latest'
+    depends_on:
+      - phpfpm
+    ports:
+      - '8080:8080'
+      - '8443:8443'
+    volumes:
+      - ./vhost/myapp.conf:/bitnami/nginx/conf/vhosts/myapp.conf
