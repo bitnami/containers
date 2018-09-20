@@ -1,6 +1,0 @@
-{
-  "core": "{{$global.env.SOLR_CORE}}",
-  "coreConfDir": "{{$global.env.SOLR_CORE_CONF_DIR}}",
-  "port": "{{$global.env.SOLR_PORT_NUMBER}}",
-  "serverDirectory": "{{$global.env.SOLR_SERVER_DIRECTORY}}"
-}
