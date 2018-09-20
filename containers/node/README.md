@@ -27,6 +27,10 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# How to deploy Node.js in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Node.js Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/node).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -34,7 +38,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`10-ol-7`, `10.10.0-ol-7-r12` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.10.0-ol-7-r12/10/ol-7/Dockerfile)
+* [`10-ol-7`, `10.10.0-ol-7-r13` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.10.0-ol-7-r13/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.10.0-debian-9-r11`, `10`, `10.10.0`, `10.10.0-r11` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.10.0-debian-9-r11/10/debian-9/Dockerfile)
 * [`8-ol-7`, `8.12.0-ol-7-r11` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.12.0-ol-7-r11/8/ol-7/Dockerfile)
 * [`8-debian-9`, `8.12.0-debian-9-r9`, `8`, `8.12.0`, `8.12.0-r9`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.12.0-debian-9-r9/8/debian-9/Dockerfile)
