@@ -14,5 +14,6 @@
   "smtpPort": "{{$global.env.SUITECRM_SMTP_PORT}}",
   "smtpProtocol": "{{$global.env.SUITECRM_SMTP_PROTOCOL}}",
   "smtpUser": "{{$global.env.SUITECRM_SMTP_USER}}",
-  "username": "{{$global.env.SUITECRM_USERNAME}}"
+  "username": "{{$global.env.SUITECRM_USERNAME}}",
+  "validateUserIP": "{{$global.env.SUITECRM_VALIDATE_USER_IP}}"
 }
