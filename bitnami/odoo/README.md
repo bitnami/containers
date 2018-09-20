@@ -30,8 +30,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`11-ol-7`, `11.0.20180915-ol-7-r3` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180915-ol-7-r3/11/ol-7/Dockerfile)
-* [`11-debian-9`, `11.0.20180915-debian-9-r2`, `11`, `11.0.20180915`, `11.0.20180915-r2`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180915-debian-9-r2/11/debian-9/Dockerfile)
+* [`11-ol-7`, `11.0.20180915-ol-7-r2` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180915-ol-7-r2/11/ol-7/Dockerfile)
+* [`11-debian-9`, `11.0.20180915-debian-9-r3`, `11`, `11.0.20180915`, `11.0.20180915-r3`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180915-debian-9-r3/11/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
 
