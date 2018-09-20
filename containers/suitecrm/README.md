@@ -23,6 +23,10 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# How to deploy SuiteCRM in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami SuiteCRM Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/suitecrm).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -30,7 +34,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-ol-7`, `7.10.9-ol-7-r2` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.9-ol-7-r2/7/ol-7/Dockerfile)
+* [`7-ol-7`, `7.10.9-ol-7-r4` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.9-ol-7-r4/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.10.9-debian-9-r2`, `7`, `7.10.9`, `7.10.9-r2`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.9-debian-9-r2/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
@@ -249,6 +253,7 @@ When you start the SuiteCRM image, you can adjust the configuration of the insta
  - `SUITECRM_LASTNAME`: SuiteCRM application last name. Default: **Name**
  - `SUITECRM_HOST`: Host domain or IP.
  - `SUITECRM_HTTP_TIMEOUT`: Timeout in seconds used on http requests during wizard installation. Default: **120**
+ - `SUITECRM_VALIDATE_USER_IP`: Whether to validate the user IP address or not. Default: **yes**. See (Troubleshooting)[#Troubleshooting] section.
 
 ##### Use an existing database
 
@@ -341,6 +346,9 @@ This would be an example of SMTP configuration using a Gmail account:
     --volume /path/to/suitecrm-persistence:/bitnami \
     bitnami/suitecrm:latest
   ```
+# Troubleshooting
+
+* If you are automatically logged out from the administration panel, you can try deploying SuiteCRM with the environment variable `SUITECRM_VALIDATE_USER_IP=no`
 
 # Contributing
 
