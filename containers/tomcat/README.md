@@ -32,7 +32,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
- - [`9.0`, `9.0.12-ol-7-r10` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.12-ol-7-r10/9.0/Dockerfile)
+ - [`9.0`, `9.0.12-ol-7-r11` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.12-ol-7-r11/9.0/Dockerfile)
  - [`9.0`, `9.0.12-debian-9-r9` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.12-debian-9-r9/9.0/Dockerfile)
  - [`8.5`, `8.5.34-ol-7-r8` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.34-ol-7-r8/8.5/Dockerfile)
  - [`8.5`, `8.5.34-debian-9-r7` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.34-debian-9-r7/8.5/Dockerfile)
