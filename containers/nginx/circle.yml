@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: /workdir
     docker:
-      - image: docker:17.06.0-ce-git
+      - image: docker:18.03.1-ce-git
         environment:
           RELEASE_SERIES_LIST: "1.14"
           LATEST_STABLE: "1.14"
@@ -19,11 +19,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 17.06.0-ce
-      - run:
-          name: Upgrade system packages (workaround - https://github.com/docker-library/docker/issues/72)
-          command: |
-            apk upgrade --no-cache
+          version: 18.03.1-ce
       - run:
           name: Install dependencies
           command: |
