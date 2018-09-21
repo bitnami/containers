@@ -22,6 +22,10 @@ $ docker run --name metrics-server bitnami/metrics-server:latest
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# How to deploy Metrics Server in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Metrics Server Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/metrics-server).
+
 # Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
@@ -34,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.3.1-ol-7-r3` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.1-ol-7-r3/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.3.1-debian-9-r3`, `0`, `0.3.1`, `0.3.1-r3`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.1-debian-9-r3/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.3.1-debian-9-r4`, `0`, `0.3.1`, `0.3.1-r4`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.1-debian-9-r4/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/metrics-server GitHub repo](https://github.com/bitnami/bitnami-docker-metrics-server).
 
