@@ -1,7 +1,8 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-kafka/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-kafka/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/kafka)](https://hub.docker.com/r/bitnami/kafka/)
 
-# What is kafka?
+# What is Kafka?
+
 Apache Kafka is a distributed streaming platform used for building real-time data pipelines and
 streaming apps. It is horizontally scalable, fault-tolerant, wicked fast, and runs in production in
 thousands of companies. Kafka requires a connection to a Zookeeper service.
@@ -38,6 +39,10 @@ services:
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# How to deploy Apache Kafka in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Kafka Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/kafka).
+
 # Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
@@ -49,7 +54,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.0.0-ol-7-r35` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.0.0-ol-7-r35/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.0.0-ol-7-r36` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.0.0-ol-7-r36/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.0.0-debian-9-r16`, `2`, `2.0.0`, `2.0.0-r16`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.0.0-debian-9-r16/2/debian-9/Dockerfile)
 * [`1-ol-7`, `1.1.1-ol-7-r45` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r45/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.1.1-debian-9-r24`, `1`, `1.1.1`, `1.1.1-r24` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r24/1/debian-9/Dockerfile)
