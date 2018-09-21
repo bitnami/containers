@@ -25,6 +25,10 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# How to deploy PostgreSQL in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami PostgreSQL Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/postgresql).
+
 # Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
@@ -36,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`10-ol-7`, `10.5.0-ol-7-r14` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.5.0-ol-7-r14/10/ol-7/Dockerfile)
+* [`10-ol-7`, `10.5.0-ol-7-r15` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.5.0-ol-7-r15/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.5.0-debian-9-r28`, `10`, `10.5.0`, `10.5.0-r28`, `latest` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.5.0-debian-9-r28/10/debian-9/Dockerfile)
 * [`9.6-ol-7`, `9.6.10-ol-7-r31` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.10-ol-7-r31/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.10-debian-9-r25`, `9.6`, `9.6.10`, `9.6.10-r25` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.10-debian-9-r25/9.6/debian-9/Dockerfile)
