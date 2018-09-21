@@ -27,6 +27,10 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# How to deploy Apache in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/apache).
+
 # Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
@@ -39,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2.4-rhel-7`, `2.4.34-rhel-7-r1` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-rhel-7-r1/2.4/rhel-7/Dockerfile)
-* [`2.4-ol-7`, `2.4.34-ol-7-r59` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-ol-7-r59/2.4/ol-7/Dockerfile)
+* [`2.4-ol-7`, `2.4.34-ol-7-r60` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-ol-7-r60/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.34-debian-9-r55`, `2.4`, `2.4.34`, `2.4.34-r55`, `latest` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/2.4.34-debian-9-r55/2.4/debian-9/Dockerfile)
 
 # Get this image
