@@ -1,8 +1,8 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-wildfly/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-wildfly/tree/master)
 
-# What is Wildfly?
+# What is WildFly?
 
-> [Wildfly](http://wildfly.org), formerly known as JBoss AS, or simply JBoss, is an application server authored by JBoss, now developed by Red Hat. WildFly is written in Java, and implements the Java Platform, Enterprise Edition (Java EE) specification.
+> [WildFly](http://wildfly.org), formerly known as JBoss AS, or simply JBoss, is an application server authored by JBoss, now developed by Red Hat. WildFly is written in Java, and implements the Java Platform, Enterprise Edition (Java EE) specification.
 
 # TLDR
 
@@ -25,6 +25,10 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# How to deploy WildFly in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami WildFly Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/wildfly).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -32,7 +36,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`14-ol-7`, `14.0.1-ol-7-r8` (14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/14.0.1-ol-7-r8/14/ol-7/Dockerfile)
+* [`14-ol-7`, `14.0.1-ol-7-r9` (14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/14.0.1-ol-7-r9/14/ol-7/Dockerfile)
 * [`14-debian-9`, `14.0.1-debian-9-r8`, `14`, `14.0.1`, `14.0.1-r8`, `latest` (14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/14.0.1-debian-9-r8/14/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
