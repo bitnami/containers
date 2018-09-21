@@ -22,13 +22,17 @@ $ docker run --name nginx-ingress-controller bitnami/nginx-ingress-controller:la
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# How to deploy NGINX Ingress Controller in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami NGINX Ingress Controller Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/nginx-ingress-controller).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
 
 
 * [`0-ol-7`, `0.19.0-ol-7-r10` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.19.0-ol-7-r10/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.19.0-debian-9-r10`, `0`, `0.19.0`, `0.19.0-r10`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.19.0-debian-9-r10/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.19.0-debian-9-r11`, `0`, `0.19.0`, `0.19.0-r11`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.19.0-debian-9-r11/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nginx-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller).
 
