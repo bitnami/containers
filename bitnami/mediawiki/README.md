@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-mediawiki/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-mediawiki/tree/master)
 
-# What is Mediawiki?
+# What is MediaWiki?
 
 > MediaWiki is an extremely powerful, scalable software and a feature-rich wiki implementation that uses PHP to process and display data stored in a database, such as MySQL.
 
@@ -25,6 +25,10 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# How to deploy MediaWiki in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MediaWiki Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/mediawiki).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -32,7 +36,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.31.0-ol-7-r79` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.31.0-ol-7-r79/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.31.1-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.31.1-ol-7-r0/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.31.0-debian-9-r57`, `1`, `1.31.0`, `1.31.0-r57`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.31.0-debian-9-r57/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mediawiki GitHub repo](https://github.com/bitnami/bitnami-docker-mediawiki).
