@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-kubewatch/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-kubewatch/tree/master)
 
-# What is Kubewatch ?
+# What is Kubewatch?
 
 > Kubewatch is a Kubernetes watcher that currently publishes notification to Slack.
 > Run it in your k8s cluster, and you will get event notifications in a slack channel.
@@ -21,6 +21,10 @@ $ docker run --name kubewatch bitnami/kubewatch:latest
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# How to deploy Kubewatch in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Kubewatch Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/kubewatch).
+
 # Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
@@ -32,7 +36,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.0.4-ol-7-r79` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-ol-7-r79/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.0.4-ol-7-r80` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-ol-7-r80/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.0.4-debian-9-r57`, `0`, `0.0.4`, `0.0.4-r57`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r57/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubewatch GitHub repo](https://github.com/bitnami/bitnami-docker-kubewatch).
