@@ -1,7 +1,8 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-zookeeper/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-zookeeper/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/zookeeper)](https://hub.docker.com/r/bitnami/zookeeper/)
 
-# What is zookeeper?
+# What is ZooKeeper?
+
 >ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services. All of these kinds of services are used in some form or other by distributed applications.
 
 [https://zookeeper.apache.org/](https://zookeeper.apache.org/)
@@ -32,6 +33,10 @@ services:
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# How to deploy ZooKeeper in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami ZooKeeper Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/zookeeper).
+
 # Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
@@ -43,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.4.12-ol-7-r85` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-ol-7-r85/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.4.12-ol-7-r87` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-ol-7-r87/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.4.12-debian-9-r59`, `3`, `3.4.12`, `3.4.12-r59`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-debian-9-r59/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
