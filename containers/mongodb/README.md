@@ -25,6 +25,10 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# How to deploy MongoDB in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MongoDB Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/mongodb).
+
 # Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
@@ -37,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4.1-ol-7`, `4.1.3-ol-7-r4` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.3-ol-7-r4/4.1/ol-7/Dockerfile)
-* [`4.1-debian-9`, `4.1.3-debian-9-r5`, `4.1`, `4.1.3`, `4.1.3-r5` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.3-debian-9-r5/4.1/debian-9/Dockerfile)
+* [`4.1-debian-9`, `4.1.3-debian-9-r6`, `4.1`, `4.1.3`, `4.1.3-r6` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.3-debian-9-r6/4.1/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.2-ol-7-r22` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.2-ol-7-r22/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.2-debian-9-r18`, `4.0`, `4.0.2`, `4.0.2-r18`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.2-debian-9-r18/4.0/debian-9/Dockerfile)
 * [`3.6-ol-7`, `3.6.8-ol-7-r2` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.8-ol-7-r2/3.6/ol-7/Dockerfile)
