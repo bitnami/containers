@@ -23,6 +23,10 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+# How to deploy Moodle in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Moodle Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/moodle).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -31,7 +35,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.5.2-ol-7-r15` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.2-ol-7-r15/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.5.2-debian-9-r14`, `3`, `3.5.2`, `3.5.2-r14`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.2-debian-9-r14/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.5.2-debian-9-r15`, `3`, `3.5.2`, `3.5.2-r15`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.2-debian-9-r15/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
