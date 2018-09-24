@@ -66,7 +66,7 @@ services:
     image: bitnami/jasperreports:latest
     environment:
       - MARIADB_HOST=mariadb
-      - MARIADB_PORT=3306
+      - MARIADB_PORT_NUMBER=3306
       - JASPERREPORTS_DATABASE_USER=bn_jasperreports
       - JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports
       - ALLOW_EMPTY_PASSWORD=yes
