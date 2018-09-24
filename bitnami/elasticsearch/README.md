@@ -275,12 +275,12 @@ services:
 
 ## Configuration file
 
-The image looks for user-defined configurations in `/opt/bitnami/elasticsearch/conf/elasticsearch_custom.yml`. Create a file named `elasticsearch_custom.yml` and mount it at `/opt/bitnami/elasticsearch/conf/elasticsearch_custom.yml` to extend the default configuration.
+The image looks for user-defined configurations in `/opt/bitnami/elasticsearch/config/elasticsearch_custom.yml`. Create a file named `elasticsearch_custom.yml` and mount it at `/opt/bitnami/elasticsearch/config/elasticsearch_custom.yml` to extend the default configuration.
 
 ```bash
 $ docker run -d --name elasticsearch \
     -p 9201:9201 \
-    -v /path/to/elasticsearch_custom.yml:/opt/bitnami/elasticsearch/conf/elasticsearch_custom.yml \
+    -v /path/to/elasticsearch_custom.yml:/opt/bitnami/elasticsearch/config/elasticsearch_custom.yml \
     -v /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data \
     bitnami/elasticsearch:latest
 ```
@@ -296,7 +296,7 @@ services:
     ports:
       - '9201:9201'
     volumes:
-      - /path/to/elasticsearch_custom.yml:/opt/bitnami/elasticsearch/conf/elasticsearch_custom.yml
+      - /path/to/elasticsearch_custom.yml:/opt/bitnami/elasticsearch/config/elasticsearch_custom.yml
       - /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data
 ```
 
@@ -385,7 +385,7 @@ $ docker-compose up elasticsearch
 
 - Decrease the size of the container. It is not necessary Node.js anymore. Elasticsearch configuration moved to bash scripts in the `rootfs/` folder.
 - The recommended mount point to persist data changes to `/bitnami/elasticsearch/data`.
-- The Elasticsearch configuration files are not persisted in a volume anymore. Now, they can be found at `/opt/bitnami/elasticsearch/conf`.
+- The Elasticsearch configuration files are not persisted in a volume anymore. Now, they can be found at `/opt/bitnami/elasticsearch/config`.
 - Elasticsearch `plugins` and `modules` are not persisted anymore. It's necessary to indicate what plugins to install using the env. variable `ELASTICSEARCH_PLUGINS`
 - Backwards compatibility is not guaranteed when data is persisted using docker-compose. You can use the workaround below to overcome it:
 
