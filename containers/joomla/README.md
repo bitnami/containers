@@ -34,7 +34,7 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.8.12-ol-7-r25` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.12-ol-7-r25/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.8.12-ol-7-r26` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.12-ol-7-r26/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.8.12-debian-9-r19`, `3`, `3.8.12`, `3.8.12-r19`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.12-debian-9-r19/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
