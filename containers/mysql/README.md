@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`8.0-ol-7`, `8.0.12-ol-7-r46` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.12-ol-7-r46/8.0/ol-7/Dockerfile)
 * [`8.0-debian-9`, `8.0.12-debian-9-r33`, `8.0`, `8.0.12`, `8.0.12-r33` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.12-debian-9-r33/8.0/debian-9/Dockerfile)
 * [`5.7-ol-7`, `5.7.23-ol-7-r43` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.23-ol-7-r43/5.7/ol-7/Dockerfile)
-* [`5.7-debian-9`, `5.7.23-debian-9-r51`, `5.7`, `5.7.23`, `5.7.23-r51`, `latest` (5.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.23-debian-9-r51/5.7/debian-9/Dockerfile)
+* [`5.7-debian-9`, `5.7.23-debian-9-r52`, `5.7`, `5.7.23`, `5.7.23-r52`, `latest` (5.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.23-debian-9-r52/5.7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
 
@@ -73,14 +73,14 @@ $ docker build -t bitnami/mysql:latest https://github.com/bitnami/bitnami-docker
 
 # Persisting your database
 
-If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
+For persistence you should mount a directory at the `/bitnami/mysql/data` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
 $ docker run \
     -e ALLOW_EMPTY_PASSWORD=yes \
-    -v /path/to/mysql-persistence:/bitnami \
+    -v /path/to/mysql-persistence:/bitnami/mysql/data \
     bitnami/mysql:latest
 ```
 
@@ -97,7 +97,7 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - /path/to/mysql-persistence:/bitnami
+      - /path/to/mysql-persistence:/bitnami/mysql/data
 ```
 
 # Connecting to other containers
@@ -350,7 +350,7 @@ services:
     ports:
       - '3306'
     volumes:
-      - /path/to/mysql-persistence:/bitnami
+      - /path/to/mysql-persistence:/bitnami/mysql/data
     environment:
       - MYSQL_REPLICATION_MODE=master
       - MYSQL_REPLICATION_USER=repl_user
@@ -386,7 +386,7 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 ## Configuration file
 
-The image looks for user-defined configurations in `/bitnami/mysql/conf/my_custom.cnf`. Create a file named `my_custom.cnf` and mount it at `/bitnami/mysql/conf/my_custom.cnf`.
+The image looks for user-defined configurations in `/opt/bitnami/mysql/conf/my_custom.cnf`. Create a file named `my_custom.cnf` and mount it at `/opt/bitnami/mysql/conf/my_custom.cnf`.
 
 For example, in order to override the `max_allowed_packet` directive:
 
@@ -400,7 +400,12 @@ max_allowed_packet=32M
 # Step 2: Run the MySQL image with the designed volume attached.
 
 ```bash
-$ docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes -v /path/to/my_custom.cnf:/bitnami/mysql/conf/my_custom.cnf:ro bitnami/mysql:latest
+$ docker run --name mysql \
+    -p 3306:3306 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -v /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro \
+    -v /path/to/mysql-persistence:/bitnami/mysql/data \
+    bitnami/mysql:latest
 ```
 
 or using Docker Compose:
@@ -416,12 +421,11 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - /path/to/my_custom.cnf:/bitnami/mysql/conf/my_custom.cnf:ro
+      - /path/to/mysql-persistence:/bitnami/mysql/data
+      - /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro
 ```
 
 After that, your changes will be taken into account in the server's behaviour.
-
-As mentioned in [Persisting your database](#persisting-your-database) if you mount a volume at `/bitnami`, you could copy `my_custom.cnf` at `/path/to/mysql-persistence/mysql/conf/my_custom.cnf` or even edit the `/path/to/mysql-persistence/mysql/conf/my.cnf` file.
 
 Refer to the [MySQL server option and variable reference guide](https://dev.mysql.com/doc/refman/5.1/en/mysqld-option-tables.html) for the complete list of configuration options.
 
@@ -511,6 +515,22 @@ $ docker-compose up mysql
 ```
 
 # Notable Changes
+
+## 5.7.23-r52 and 8.0.12-r34
+
+- Decrease the size of the container. It is not necessary Node.js anymore. MySQL configuration moved to bash scripts in the `rootfs/` folder.
+- The recommended mount point to persist data changes to `/bitnami/mysql/data`.
+- The MySQL configuration files are not persisted in a volume anymore. Now, they can be found at `/opt/bitnami/mysql/conf`.
+- Backwards compatibility is not guaranteed when data is persisted using docker-compose. You can use the workaround below to overcome it:
+
+```bash
+docker-compose down
+# Change the mount point
+sed -i -e 's#mysql_data:/bitnami#mysql_data:/bitnami/mysql/data#g' docker-compose.yml
+# Pull the latest bitnami/mysql image
+docker pull bitnami/mysql:latest
+docker-compose up -d
+```
 
 ## 5.7.22-r18 and 8.0.11-r16
 
