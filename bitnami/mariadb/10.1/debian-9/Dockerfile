@@ -1,19 +1,22 @@
-FROM bitnami/minideb-extras:stretch-r148
+FROM bitnami/minideb-extras-base:stretch-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    BITNAMI_PKG_EXTRA_DIRS="/bitnami/mariadb/conf" \
-    HOME="/"
+    HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-9" \
+    OS_NAME="linux"
 
 # Install required system packages and dependencies
 RUN install_packages libaio1 libc6 libgcc1 libjemalloc1 libncurses5 libssl1.0.2 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg unpack mariadb-10.1.36-4 --checksum b3b211ae728ff490810de5dbc8ac734029246dc81d1875e623a1bd8832566939
+RUN . ./libcomponent.sh && component_unpack "mariadb" "10.1.36-4" --checksum b3b211ae728ff490810de5dbc8ac734029246dc81d1875e623a1bd8832566939
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
+RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.1.36-debian-9-r13" \
+    BITNAMI_IMAGE_VERSION="10.1.36-debian-9-r14" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
@@ -27,11 +30,10 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MARIADB_ROOT_PASSWORD="" \
     MARIADB_ROOT_USER="root" \
     MARIADB_USER="" \
-    PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH" \
-    USER="root"
+    PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
 EXPOSE 3306
 
 USER 1001
-ENTRYPOINT [ "/app-entrypoint.sh" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/run.sh" ]
