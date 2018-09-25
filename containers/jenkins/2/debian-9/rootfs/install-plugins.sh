@@ -4,40 +4,11 @@
 
 set -o pipefail
 
-REF_DIR="/opt/bitnami/jenkins/plugins/"
+REF_DIR="/usr/share/jenkins/ref/plugins/"
 FAILED="$REF_DIR/failed-plugins.txt"
 JENKINS_WAR=/opt/bitnami/jenkins/jenkins.war
 
-versionLT() {
-    local v1; v1=$(echo "$1" | cut -d '-' -f 1 )
-    local q1; q1=$(echo "$1" | cut -s -d '-' -f 2- )
-    local v2; v2=$(echo "$2" | cut -d '-' -f 1 )
-    local q2; q2=$(echo "$2" | cut -s -d '-' -f 2- )
-    if [ "$v1" = "$v2" ]; then
-        if [ "$q1" = "$q2" ]; then
-            return 1
-        else
-            if [ -z "$q1" ]; then
-                return 1
-            else
-                if [ -z "$q2" ]; then
-                    return 0
-                else
-                    [  "$q1" = "$(echo -e "$q1\n$q2" | sort -V | head -n1)" ]
-                fi
-            fi
-        fi
-    else
-        [  "$v1" = "$(echo -e "$v1\n$v2" | sort -V | head -n1)" ]
-    fi
-}
-
-get_plugin_version() {
-    local archive; archive=$1
-    local version; version=$(unzip -p "$archive" META-INF/MANIFEST.MF | grep "^Plugin-Version: " | sed -e 's#^Plugin-Version: ##')
-    version=${version%%[[:space:]]}
-    echo "$version"
-}
+. /jenkins-support
 
 getLockFile() {
     printf '%s' "$REF_DIR/${1}.lock"
@@ -107,7 +78,7 @@ bundledPlugins() {
     if [ -f $JENKINS_WAR ]
     then
         TEMP_PLUGIN_DIR=/tmp/plugintemp.$$
-        for i in $(unzip -lf $JENKINS_WAR | grep -E '[WEB-INF\/detached-]plugins.*\..pi' | awk '{print $4}' | sort)
+        for i in $(unzip -lf $JENKINS_WAR | grep -E '[^detached-]plugins.*\..pi' | awk '{print $4}' | sort)
         do
             rm -fr $TEMP_PLUGIN_DIR
             mkdir -p $TEMP_PLUGIN_DIR
@@ -118,7 +89,6 @@ bundledPlugins() {
         done
         rm -fr $TEMP_PLUGIN_DIR
     else
-        rm -f "$TEMP_ALREADY_INSTALLED"
         echo "ERROR file not found: $JENKINS_WAR"
         exit 1
     fi

@@ -35,7 +35,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.138.1-ol-7-r12` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.138.1-ol-7-r12/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.138.1-debian-9-r10`, `2`, `2.138.1`, `2.138.1-r10`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.138.1-debian-9-r10/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.138.1-debian-9-r11`, `2`, `2.138.1`, `2.138.1-r11`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.138.1-debian-9-r11/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
 
@@ -134,25 +134,30 @@ services:
     bitnami/jenkins:latest
   ```
 
-# Preinstalling plugins
+# Customizations
 
-You can rely on the `install-plugins.sh` script to pass a set of plugins to download with their dependencies.
-This script will perform downloads from update centers, an internet access is required for the default update centers.
+For customizations, please note that this image works using the user `jenkins` and `uid=1001`.
 
-## Plugin version format
+## Preinstalling plugins
+
+To pass and download a set of plugins and their dependencies, use the `install-plugins.sh` script. It will download them from update centers
+
+> NOTE: Default update centers must have Internet access
+
+### Plugin version format
 
 Use plugin artifact ID, without `-plugin` extension, and append the version if needed separated by `:`.
-Dependencies that are already included in the Jenkins war will only be downloaded if their required version is newer than the one included.
+Dependencies that are already included in the Jenkins war file will only be downloaded if their required version is newer than the one already included.
 
-A custom version specifier can also be used:
+You can also use a custom version specifier:
 
 * `latest` - download the latest version from the main update center.
   For Jenkins LTS images
   (example: `git:latest`)
 
-## Script usage
+### Script usage
 
-You can run the script manually in Dockerfile adding the following sentence after `COPY rootfs /`:
+You can run the script manually in the Dockerfile by adding the following after the `COPY rootfs /` command:
 
 ```
 RUN /install-plugins.sh docker-slaves github-branch-source:1.8
@@ -163,6 +168,187 @@ Furthermore, it is possible to pass a file that contains this set of plugins (wi
 ```
 RUN /install-plugins.sh < /plugins.txt
 ```
+
+## Adding files/directories to the image
+
+You can include files to the image automatically. All files/directories located in `/usr/share/jenkins/ref` are copied to `JENKINS_HOME`.
+
+### Examples:
+
+#### Run groovy scripts at Jenkins start up
+
+We can create custom groovy scripts and make Jenkins run them at start up. We can also enforce them to run at a certain order by using a prefix in the names.
+
+However, using this feature will disable the default configuration done by the Bitnami scripts. This is intended to customize the Jenkins configuration by code.
+
+```bash
+mkdir jenkins-init.groovy.d
+echo "println '--> hello world!'" >jenkins-init.groovy.d/AA_hello.groovy
+echo "println '--> bye world!'" >jenkins-init.groovy.d/BA_bye.groovy
+
+docker run -d --name jenkins -e "DISABLE_JENKINS_INITIALIZATION=yes" -v "$(pwd)/jenkins-init.groovy.d:/usr/share/jenkins/ref/init.groovy.d" -p 80:8080 -p 443:8443 bitnami/jenkins:latest
+
+docker exec jenkins ls /opt/bitnami/jenkins/jenkins_home/init.groovy.d
+AA_hello.groovy
+BA_bye.groovy
+
+docker exec jenkins cat /opt/bitnami/jenkins/logs/jenkins.log | grep world
+--> hello world!
+--> bye world!
+```
+
+#### Use pre-downloaded plugins
+
+We can download plugins in a local folder and install them at run time.
+
+```bash
+docker run \
+  -v "$(pwd)/jenkins-plugins:/usr/share/jenkins/ref/plugins" \
+  bitnami/jenkins:latest \
+  install-plugins.sh \
+    role-strategy:latest
+
+docker run -d --name jenkins \
+  -v "$(pwd)/jenkins-plugins:/usr/share/jenkins/ref/plugins" \
+  -p 80:8080 \
+  -p 443:8443 \
+  bitnami/jenkins:latest
+
+docker exec jenkins ls /opt/bitnami/jenkins/jenkins_home/plugins/
+```
+
+#### Run custom `config.xml`
+
+We can make Jenkins run our own `config.xml` file.
+
+However, using this feature will disable the default configuration done by the Bitnami scripts. This is intended to customize the Jenkins configuration by code.
+
+In the example below we are going to use a role-based authorization strategy by default.
+
+```bash
+docker run \
+  -v "$(pwd)/jenkins-plugins:/usr/share/jenkins/ref/plugins" \
+  bitnami/jenkins:latest \
+  install-plugins.sh \
+    role-strategy:latest
+
+cat >config.xml <<EOF
+<?xml version='1.1' encoding='UTF-8'?>
+<hudson>
+  <disabledAdministrativeMonitors/>
+  <version>2.138.1</version>
+  <numExecutors>2</numExecutors>
+  <mode>NORMAL</mode>
+  <useSecurity>true</useSecurity>
+  <authorizationStrategy class="com.michelin.cio.hudson.plugins.rolestrategy.RoleBasedAuthorizationStrategy">
+    <roleMap type="projectRoles"/>
+    <roleMap type="globalRoles">
+      <role name="admin" pattern=".*">
+        <permissions>
+          <permission>hudson.model.View.Delete</permission>
+          <permission>hudson.model.Computer.Connect</permission>
+          <permission>hudson.model.Run.Delete</permission>
+          <permission>hudson.model.Computer.Create</permission>
+          <permission>hudson.model.View.Configure</permission>
+          <permission>hudson.model.Computer.Build</permission>
+          <permission>hudson.model.Item.Configure</permission>
+          <permission>hudson.model.Hudson.Administer</permission>
+          <permission>hudson.model.Item.Cancel</permission>
+          <permission>hudson.model.Item.Read</permission>
+          <permission>hudson.model.Computer.Delete</permission>
+          <permission>hudson.model.Item.Build</permission>
+          <permission>hudson.scm.SCM.Tag</permission>
+          <permission>hudson.model.Item.Move</permission>
+          <permission>hudson.model.Item.Discover</permission>
+          <permission>hudson.model.Hudson.Read</permission>
+          <permission>hudson.model.Item.Create</permission>
+          <permission>hudson.model.Item.Workspace</permission>
+          <permission>hudson.model.Computer.Provision</permission>
+          <permission>hudson.model.Run.Replay</permission>
+          <permission>hudson.model.View.Read</permission>
+          <permission>hudson.model.View.Create</permission>
+          <permission>hudson.model.Item.Delete</permission>
+          <permission>hudson.model.Computer.Configure</permission>
+          <permission>hudson.model.Computer.Disconnect</permission>
+          <permission>hudson.model.Run.Update</permission>
+        </permissions>
+        <assignedSIDs>
+          <sid>admin</sid>
+        </assignedSIDs>
+      </role>
+      <role name="viewer" pattern=".*">
+        <permissions>
+          <permission>hudson.model.Hudson.Read</permission>
+          <permission>hudson.model.Item.Read</permission>
+          <permission>hudson.model.Item.Discover</permission>
+          <permission>hudson.model.View.Read</permission>
+        </permissions>
+        <assignedSIDs>
+          <sid>authenticated</sid>
+        </assignedSIDs>
+      </role>
+    </roleMap>
+    <roleMap type="slaveRoles"/>
+  </authorizationStrategy>
+  <disableRememberMe>false</disableRememberMe>
+  <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
+  <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULL_NAME}</workspaceDir>
+  <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
+  <jdks/>
+  <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
+  <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
+  <clouds/>
+  <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
+  <views>
+    <hudson.model.AllView>
+      <owner class="hudson" reference="../../.."/>
+      <name>all</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+    </hudson.model.AllView>
+  </views>
+  <primaryView>all</primaryView>
+  <slaveAgentPort>-1</slaveAgentPort>
+  <label></label>
+  <crumbIssuer class="hudson.security.csrf.DefaultCrumbIssuer">
+    <excludeClientIPFromCrumb>false</excludeClientIPFromCrumb>
+  </crumbIssuer>
+  <nodeProperties/>
+  <globalNodeProperties/>
+</hudson>
+EOF
+
+docker run -d --name jenkins \
+  -e "DISABLE_JENKINS_INITIALIZATION=yes" \
+  -v "$(pwd)/jenkins-plugins:/usr/share/jenkins/ref/plugins" \
+  -v "$(pwd)/config.xml:/usr/share/jenkins/ref/config.xml" \
+  -p 80:8080 \
+  -p 443:8443 \
+  bitnami/jenkins:latest
+```
+
+> NOTE: We are using a `config.xml` created by Jenkins at first run.
+You can consider using groovy scripts to perform this kind of configuration too.
+
+> NOTE: We are not creating the `admin` user with this setup. It should be done separately.
+
+## Passing JVM parameters
+
+You might need to customize the JVM running Jenkins, typically to pass system properties or to tweak heap memory settings. Use the `JAVA_OPTS` environment variable for this purpose:
+
+```bash
+$ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
+  --env JAVA_OPTS=-Dhudson.footerURL=http://mycompany.com \
+  bitnami/jenkins:latest
+```
+
+## Skipping Bitnami initialization
+
+By default, when running this image, Bitnami implement some logic in order to configure it for working out of the box. This initialization consists of creating the user and password, preparing data to persist, installing some plugins, configuring permissions, creating the `JENKINS_HOME`, etc.
+You can skip it in two ways:
+- Setting the `DISABLE_JENKINS_INITIALIZATION` environment variable to `yes`.
+- Attaching a volume with a custom `JENKINS_HOME` that contains a functional Jenkins installation.
 
 # Upgrading Jenkins
 
@@ -201,10 +387,13 @@ You can use this snapshot to restore the application state should the upgrade fa
 
 ## Environment variables
 
-The Jenkins instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom Jenkins:
+The Jenkins instance can be customized by specifying environment variables on the first run. The following environment values are provided to customize Jenkins:
 
 - `JENKINS_USERNAME`: Jenkins admin username. Default: **user**
 - `JENKINS_PASSWORD`: Jenkins admin password. Default: **bitnami**
+- `JENKINS_HOME`: Jenkins home directory. Default: **/opt/bitnami/jenkins/jenkins_home**
+- `DISABLE_JENKINS_INITIALIZATION`: Allows to disable the initial Bitnami configuration for Jenkins. Default: **no**
+- `JAVA_OPTS`: Customize JVM parameters. No defaults.
 
 ### Specifying Environment variables using Docker Compose
 
