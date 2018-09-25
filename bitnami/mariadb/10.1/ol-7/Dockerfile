@@ -1,19 +1,22 @@
-FROM bitnami/oraclelinux-extras:7-r115
+FROM bitnami/oraclelinux-extras-base:7-r62
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    BITNAMI_PKG_EXTRA_DIRS="/bitnami/mariadb/conf" \
-    HOME="/"
+    HOME="/" \
+    OS_ARCH="x86_64" \
+    OS_FLAVOUR="ol-7" \
+    OS_NAME="linux"
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libaio libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre zlib
-RUN bitnami-pkg unpack mariadb-10.1.36-4 --checksum 75fe0766a5339acc310a395b0737d433671c91cd14eeb69ab91af45914d1a0f1
+RUN . ./libcomponent.sh && component_unpack "mariadb" "10.1.36-4" --checksum 75fe0766a5339acc310a395b0737d433671c91cd14eeb69ab91af45914d1a0f1
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
+RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.1.36-ol-7-r15" \
+    BITNAMI_IMAGE_VERSION="10.1.36-ol-7-r16" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
@@ -27,11 +30,10 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MARIADB_ROOT_PASSWORD="" \
     MARIADB_ROOT_USER="root" \
     MARIADB_USER="" \
-    PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH" \
-    USER="root"
+    PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
 EXPOSE 3306
 
 USER 1001
-ENTRYPOINT [ "/app-entrypoint.sh" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/run.sh" ]
