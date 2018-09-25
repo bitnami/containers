@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r148
+FROM bitnami/minideb-extras:stretch-r149
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack mongodb-4.0.2-4 --checksum 6cf8aa0fc5fc4c51d8c52f01208852
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.0.2-debian-9-r21" \
+    BITNAMI_IMAGE_VERSION="4.0.2-debian-9-r22" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_ENABLE_IPV6="yes" \
