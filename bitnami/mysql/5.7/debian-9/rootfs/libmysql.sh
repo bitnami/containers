@@ -321,6 +321,7 @@ mysql_start_bg() {
         return
     fi
 
+    [ -z "$DB_EXTRA_FLAGS" ] && extraFlags[0]=" " # Ensure 'extraFlags' array is not empty
     "$DB_BINDIR/mysqld_safe" \
         --defaults-file="$DB_BASEDIR/conf/my.cnf" \
         --basedir="$DB_BASEDIR" \
