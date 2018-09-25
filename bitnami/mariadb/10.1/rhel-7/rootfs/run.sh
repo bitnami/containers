@@ -1,28 +1,21 @@
 #!/bin/bash
-. /opt/bitnami/base/functions
-. /opt/bitnami/base/helpers
 
-DAEMON=mysqld_safe
-EXEC=$(which $DAEMON)
-ARGS="--defaults-file=/opt/bitnami/mariadb/conf/my.cnf"
+set -o errexit
+set -o nounset
+set -o pipefail
+# set -o xtrace
 
-# configure command line flags for replication
-if [[ -n $MARIADB_REPLICATION_MODE ]]; then
-  ARGS+=" --server-id=$RANDOM --binlog-format=ROW --log-bin=mysql-bin --sync-binlog=1"
-  case $MARIADB_REPLICATION_MODE in
-    master)
-      ARGS+=" --innodb_flush_log_at_trx_commit=1"
-      ;;
-    slave)
-      ARGS+=" --relay-log=mysql-relay-bin --log-slave-updates=1 --read-only=1"
-      ;;
-  esac
+. /libmariadb.sh
+. /libos.sh
+
+eval "$(mysql_env)"
+
+info "** Starting MariaDB **"
+# If container is started as `root` use
+extraFlags=($DB_EXTRA_FLAGS)
+[ -z "$DB_EXTRA_FLAGS" ] && extraFlags[0]=" " # Ensure 'extraFlags' array is not empty
+if am_i_root; then
+    exec gosu "$DB_DAEMON_USER" "$DB_BINDIR/mysqld_safe" --defaults-file="$DB_CONFDIR/my.cnf" --basedir="$DB_BASEDIR" --datadir="$DB_DATADIR" ${extraFlags[*]}
+else
+    exec "$DB_BINDIR/mysqld_safe" --defaults-file="$DB_CONFDIR/my.cnf" --basedir="$DB_BASEDIR" --datadir="$DB_DATADIR" ${extraFlags[*]}
 fi
-
-# configure extra command line flags
-if [[ -n $MARIADB_EXTRA_FLAGS ]]; then
-    ARGS+=" $MARIADB_EXTRA_FLAGS"
-fi
-
-info "Starting ${DAEMON}..."
-exec ${EXEC} ${ARGS}
