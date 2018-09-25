@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10.2-debian-9`, `10.2.17-debian-9-r35`, `10.2`, `10.2.17`, `10.2.17-r35` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.17-debian-9-r35/10.2/debian-9/Dockerfile)
 * [`10.1-rhel-7`, `10.1.36-rhel-7-r3` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.36-rhel-7-r3/10.1/rhel-7/Dockerfile)
 * [`10.1-ol-7`, `10.1.36-ol-7-r15` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.36-ol-7-r15/10.1/ol-7/Dockerfile)
-* [`10.1-debian-9`, `10.1.36-debian-9-r13`, `10.1`, `10.1.36`, `10.1.36-r13`, `latest` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.36-debian-9-r13/10.1/debian-9/Dockerfile)
+* [`10.1-debian-9`, `10.1.36-debian-9-r14`, `10.1`, `10.1.36`, `10.1.36-r14`, `latest` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.36-debian-9-r14/10.1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
 
@@ -75,14 +75,14 @@ $ docker build -t bitnami/mariadb:latest https://github.com/bitnami/bitnami-dock
 
 # Persisting your database
 
-If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
+For persistence you should mount a directory at the `/bitnami/mariadb` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
 $ docker run \
     -e ALLOW_EMPTY_PASSWORD=yes \
-    -v /path/to/mariadb-persistence:/bitnami \
+    -v /path/to/mariadb-persistence:/bitnami/mariadb \
     bitnami/mariadb:latest
 ```
 
@@ -99,7 +99,7 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - /path/to/mariadb-persistence:/bitnami
+      - /path/to/mariadb-persistence:/bitnami/mariadb
 ```
 
 # Connecting to other containers
@@ -377,7 +377,7 @@ services:
     ports:
       - '3306'
     volumes:
-      - /path/to/mariadb-persistence:/bitnami
+      - /path/to/mariadb-persistence:/bitnami/mariadb
     environment:
       - MARIADB_REPLICATION_MODE=master
       - MARIADB_REPLICATION_USER=repl_user
@@ -413,7 +413,7 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 ## Configuration file
 
-The image looks for user-defined configurations in `/bitnami/mariadb/conf/my_custom.cnf`. Create a file named `my_custom.cnf` and mount it at `/bitnami/mariadb/conf/my_custom.cnf`.
+The image looks for user-defined configurations in `/opt/bitnami/mariadb/conf/my_custom.cnf`. Create a file named `my_custom.cnf` and mount it at `/opt/bitnami/mariadb/conf/my_custom.cnf`.
 
 For example, in order to override the `max_allowed_packet` directive:
 
@@ -427,7 +427,12 @@ max_allowed_packet=32M
 # Step 2: Run the mariaDB image with the designed volume attached.
 
 ```bash
-$ docker run --name mariadb -v /path/to/my_custom.cnf:/bitnami/mariadb/conf/my_custom.cnf:ro bitnami/mariadb:latest
+$ docker run --name mariadb \
+    -p 3306:3306 \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -v /path/to/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro \
+    -v /path/to/mariadb-persistence:/bitnami/mariadb \
+    bitnami/mariadb:latest
 ```
 
 or using Docker Compose:
@@ -443,12 +448,11 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - /path/to/my_custom.cnf:/bitnami/mariadb/conf/my_custom.cnf:ro
+      - /path/to/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro
+      - /path/to/mariadb-persistence:/bitnami/mariadb
 ```
 
 After that, your changes will be taken into account in the server's behaviour.
-
-As mentioned in [Persisting your database](#persisting-your-database) if you mount a volume at `/bitnami`, you could copy `my_custom.cnf` at `/path/to/mariadb-persistence/mariadb/conf/my_custom.cnf` or even edit the `/path/to/mariadb-persistence/mariadb/conf/my.cnf` file.
 
 Refer to the [MySQL server option and variable reference guide](https://dev.mysql.com/doc/refman/5.1/en/mysqld-option-tables.html) for the complete list of configuration options.
 
@@ -547,6 +551,23 @@ $ docker-compose up mariadb
 ](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
 # Notable Changes
+
+
+## 10.1.36-r14 and 10.2.27-r36
+
+- Decrease the size of the container. It is not necessary Node.js anymore. MariaDB configuration moved to bash scripts in the `rootfs/` folder.
+- The recommended mount point to persist data changes to `/bitnami/mariadb`.
+- The MariaDB configuration files are not persisted in a volume anymore. Now, they can be found at `/opt/bitnami/mariadb/conf`.
+- Backwards compatibility is not guaranteed when data is persisted using docker-compose. You can use the workaround below to overcome it:
+
+```bash
+docker-compose down
+# Change the mount point
+sed -i -e 's#mariadb_data:/bitnami#mariadb_data:/bitnami/mariadb#g' docker-compose.yml
+# Pull the latest bitnami/mariadb image
+docker pull bitnami/mariadb:latest
+docker-compose up -d
+```
 
 ## 10.1.28-r2 and 10.2.16-r2
 
