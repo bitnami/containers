@@ -2,11 +2,11 @@ FROM bitnami/oraclelinux-extras:7-r116
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN bitnami-pkg unpack consul-1.2.3-0 --checksum 7ea65d9ee5e0e92de8d278e1987e9b618e41bdb08ff75fbd25b218c08ceeda01
+RUN bitnami-pkg unpack consul-1.2.3-1 --checksum 0281390c681f88b9660b1ebe28a0401978539c650cce6934f2026b2fc86a34b0
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.2.3-ol-7-r12" \
+    BITNAMI_IMAGE_VERSION="1.2.3-ol-7-r13" \
     CONSUL_BOOTSTRAP_EXPECT="1" \
     CONSUL_CLIENT_LAN_ADDRESS="0.0.0.0" \
     CONSUL_DATACENTER="dc1" \
