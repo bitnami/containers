@@ -84,6 +84,10 @@ redis_initialize() {
     # Leave default fsync (every second)
     redis_conf_set appendonly yes
 
+    # Disable RDB persistence, AOF persistence already enabled.
+    # Ref: https://redis.io/topics/persistence#interactions-between-aof-and-rdb-persistence
+    redis_conf_set save ""
+
     if [ -n "$REDIS_PASSWORD" ]; then
         redis_conf_set requirepass "$REDIS_PASSWORD"
     else
