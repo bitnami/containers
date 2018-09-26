@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r116
+FROM bitnami/oraclelinux-extras:7-r117
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -14,7 +14,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="opencart" \
-    BITNAMI_IMAGE_VERSION="3.0.2-0-ol-7-r86" \
+    BITNAMI_IMAGE_VERSION="3.0.2-0-ol-7-r87" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
