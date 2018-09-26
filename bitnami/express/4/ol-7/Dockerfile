@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r116
+FROM bitnami/oraclelinux-extras:7-r117
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -13,7 +13,7 @@ RUN mkdir -p /dist /app /.npm && chmod g+rwx /app /dist /.npm
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.16.3-ol-7-r69" \
+    BITNAMI_IMAGE_VERSION="4.16.3-ol-7-r70" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/express-generator/bin:/opt/bitnami/express/bin:$PATH"
 
 EXPOSE 3000
