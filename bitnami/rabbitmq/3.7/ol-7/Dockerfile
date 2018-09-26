@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r116
+FROM bitnami/oraclelinux-extras:7-r117
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -8,13 +8,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc ncurses-libs openssl-libs zlib
-RUN bitnami-pkg install erlang-21.0.0-1 --checksum 9ad6d6426c031237e0f27d8462e37ed4295dce73056d056b6aa287fbc83335c4
+RUN bitnami-pkg install erlang-21.1.0-0 --checksum 22447de33b57eac1ce6b22cc0a153677c9dfa4ee134b1c9bdc3661b7e27b3f5a
 RUN bitnami-pkg unpack rabbitmq-3.7.8-0 --checksum d44cd3582e30a97c85ebcb7048bc328d0212d5e6b4176fd64016dea63a17929e
 RUN mkdir -p /opt/bitnami/rabbitmq/.rabbitmq && mkdir -p /opt/bitnami/rabbitmq/var/log/rabbitmq && chmod g+rwX -R /opt/bitnami/rabbitmq/.rabbitmq /opt/bitnami/rabbitmq/var
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.7.8-ol-7-r5" \
+    BITNAMI_IMAGE_VERSION="3.7.8-ol-7-r6" \
     PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:/opt/bitnami/rabbitmq/sbin:$PATH" \
     RABBITMQ_CLUSTER_NODE_NAME="" \
     RABBITMQ_CLUSTER_PARTITION_HANDLING="ignore" \
