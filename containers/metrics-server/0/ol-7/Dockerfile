@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r116 as buildenv
+FROM bitnami/oraclelinux-extras:7-r117 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metrics-server-0.3.1-0-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r116
+FROM bitnami/oraclelinux-extras:7-r117
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/metrics-server /opt/bitnami/metrics-server
 ENV BITNAMI_APP_NAME="metrics-server" \
-    BITNAMI_IMAGE_VERSION="0.3.1-ol-7-r8" \
+    BITNAMI_IMAGE_VERSION="0.3.1-ol-7-r9" \
     PATH="/opt/bitnami/metrics-server/bin:$PATH"
 
 RUN install_packages ca-certificates
