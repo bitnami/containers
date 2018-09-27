@@ -1,0 +1,9 @@
+{
+  "database": "{{$global.env.POSTGRESQL_CLIENT_CREATE_DATABASE_NAME}}",
+  "databaseAdminPassword": "{{$global.env.POSTGRESQL_ROOT_PASSWORD}}",
+  "databaseAdminUser": "{{$global.env.POSTGRESQL_ROOT_USER}}",
+  "host": "{{$global.env.POSTGRESQL_HOST}}",
+  "password": "{{$global.env.POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD}}",
+  "port": "{{$global.env.POSTGRESQL_PORT_NUMBER}}",
+  "username": "{{$global.env.POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME}}"
+}
