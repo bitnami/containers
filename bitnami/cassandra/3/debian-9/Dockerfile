@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r148
+FROM bitnami/minideb-extras:stretch-r153
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -8,11 +8,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 RUN install_packages libblkid1 libbsd0 libbz2-1.0 libc6 libffi6 libgcc1 libglib2.0-0 libjemalloc1 libmount1 libncurses5 libpcre3 libreadline7 libselinux1 libsqlite3-0 libssl1.1 libstdc++6 libtinfo5 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 zlib1g
 RUN bitnami-pkg install python-2.7.15-2 --checksum 1d5e9d3a2f7225d159913e3a8792577057abc0ceba7c7d60299bb8d59933258c
 RUN bitnami-pkg install java-1.8.181-1 --checksum 66bba4b4a2647f981339d306da796905c222057c4277a5ef045e079981a404f4
-RUN bitnami-pkg unpack cassandra-3.11.3-9 --checksum 3c7602faa5bed231ae73d7eb068ca13f2c27e3f121cd5cce8acc0c68064040f7
+RUN bitnami-pkg unpack cassandra-3.11.3-10 --checksum 8e2d32cca627b3cbcadbbe14324a879df76b58d901be6b84bb187a5bb240894d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.3-debian-9-r58" \
+    BITNAMI_IMAGE_VERSION="3.11.3-debian-9-r59" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
     CASSANDRA_ENABLE_REMOTE_CONNECTIONS="true" \
