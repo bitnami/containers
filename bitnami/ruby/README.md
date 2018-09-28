@@ -35,7 +35,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2.5-ol-7`, `2.5.1-ol-7-r87` (2.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-ol-7-r87/2.5/ol-7/Dockerfile)
-* [`2.5-debian-9`, `2.5.1-debian-9-r74`, `2.5`, `2.5.1`, `2.5.1-r74`, `latest` (2.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-debian-9-r74/2.5/debian-9/Dockerfile)
+* [`2.5-debian-9`, `2.5.1-debian-9-r75`, `2.5`, `2.5.1`, `2.5.1-r75`, `latest` (2.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.1-debian-9-r75/2.5/debian-9/Dockerfile)
 * [`2.4-ol-7`, `2.4.4-ol-7-r86` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-ol-7-r86/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.4-debian-9-r73`, `2.4`, `2.4.4`, `2.4.4-r73` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.4-debian-9-r73/2.4/debian-9/Dockerfile)
 * [`2.3-ol-7`, `2.3.7-ol-7-r86` (2.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.7-ol-7-r86/2.3/ol-7/Dockerfile)
