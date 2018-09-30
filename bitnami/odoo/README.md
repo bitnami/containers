@@ -34,7 +34,7 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`11-ol-7`, `11.0.20180915-ol-7-r12` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180915-ol-7-r12/11/ol-7/Dockerfile)
+* [`11-ol-7`, `11.0.20180915-ol-7-r13` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180915-ol-7-r13/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.0.20180915-debian-9-r8`, `11`, `11.0.20180915`, `11.0.20180915-r8`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20180915-debian-9-r8/11/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
