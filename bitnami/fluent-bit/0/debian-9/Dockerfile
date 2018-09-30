@@ -1,10 +1,10 @@
 FROM bitnami/minideb:stretch as buildenv
 
 RUN install_packages ca-certificates libc6 libgcc1 libgcrypt20 libgpg-error0 liblz4-1 liblzma5 libpcre3 libsasl2-2 libselinux1 libssl1.1 libsystemd0 wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluent-bit-0.14.3-0-linux-amd64-debian-9.tar.gz && \
-    echo "a5b792f600b04d6ec8b6e912e6618071a81047a1c075218675025bade20f5334  /tmp/bitnami/pkg/cache/fluent-bit-0.14.3-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/fluent-bit-0.14.3-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/fluent-bit-0.14.3-0-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluent-bit-0.14.4-0-linux-amd64-debian-9.tar.gz && \
+    echo "8ff0b786ddcd3c58aff95e470d9ce136b51115c805de81d72314ebf597819d85  /tmp/bitnami/pkg/cache/fluent-bit-0.14.4-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/fluent-bit-0.14.4-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/fluent-bit-0.14.4-0-linux-amd64-debian-9.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/fluent-bit /opt/bitnami/fluent-bit
 ENV BITNAMI_APP_NAME="fluent-bit" \
-    BITNAMI_IMAGE_VERSION="0.14.3-debian-9-r8" \
+    BITNAMI_IMAGE_VERSION="0.14.4-debian-9-r0" \
     PATH="/opt/bitnami/fluent-bit/bin:$PATH"
 
 RUN install_packages ca-certificates libsasl2-2 libssl1.1
