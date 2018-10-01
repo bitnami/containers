@@ -4,12 +4,12 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 # Install required system packages and dependencies
 RUN install_packages libblkid1 libbsd0 libc6 libffi6 libgcc1 libglib2.0-0 libmount1 libpcre3 libselinux1 libstdc++6 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 zlib1g
 RUN bitnami-pkg install java-1.8.181-1 --checksum 66bba4b4a2647f981339d306da796905c222057c4277a5ef045e079981a404f4
-RUN bitnami-pkg unpack tomcat-7.0.90-0 --checksum ccdbac04147a7e32597db91b1c824f3734104abe6a8f5be6dc1c55f10cab2909
+RUN bitnami-pkg unpack tomcat-7.0.91-0 --checksum cf5c25fced33f7bf8c1d9b93bf84afc1522e175b5626659f30ebac249eccdcb0
 RUN ln -sf /opt/bitnami/tomcat/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="7.0.90-debian-9-r71" \
+    BITNAMI_IMAGE_VERSION="7.0.91-debian-9-r0" \
     JAVA_OPTS="-Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH" \
     TOMCAT_AJP_PORT_NUMBER="8009" \
