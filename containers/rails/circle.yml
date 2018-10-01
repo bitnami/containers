@@ -7,7 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "5"
           LATEST_STABLE: "5"
-          DISTRIBUTIONS_LIST: "debian-8,ol-7,debian-9"
+          DISTRIBUTIONS_LIST: "ol-7,debian-9"
           IMAGE_NAME: rails
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
