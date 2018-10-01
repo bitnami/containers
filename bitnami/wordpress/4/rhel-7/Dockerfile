@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras:7-r101
+FROM gcr.io/helm-publish-ci/redhat-extras:7-r119
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,10 +7,10 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
-RUN bitnami-pkg unpack apache-2.4.34-1 --checksum cdaa4e89b26534999debc5d7dc1b34d76fd42ea986e40941d276c0ad24c4016d
-RUN bitnami-pkg unpack php-7.0.31-3 --checksum 6ca2dff0e411bc5a8c8db818dce2c2ca16c596096a653764b5a54e2cf8f8baff
+RUN bitnami-pkg unpack apache-2.4.35-0 --checksum 27c21bf58f3de5f36aab8db3ccba8b8075c05a7c9ac5e4d26343fd6906cf29e1
+RUN bitnami-pkg unpack php-7.0.32-1 --checksum 8e043c1454dd86432358c2e20510c4c4db4a95be144db6719f637fc484f0a349
 RUN bitnami-pkg unpack mysql-client-10.1.36-0 --checksum 46075d029b7e2537f7b9f13b4662a7539230bd2801c89087c675bc3efa98d839
-RUN bitnami-pkg install libphp-7.0.31-0 --checksum 7a7ba0fcb2026c4269f1a64d9dce3471d111d5281a7dd34c4d7ebef99795d5d9
+RUN bitnami-pkg install libphp-7.0.32-2 --checksum 453578b2d5679fcaf647ac6fe381e915da289de3ae368b2d9de72065c1e2b62f
 RUN bitnami-pkg unpack wordpress-4.9.8-2 --checksum caf6545596fe37c706bff79cc414da77c429a5e7ce6172ba23722413afe19d27
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/error_log
@@ -20,7 +20,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="4.9.8-rhel-7-r2" \
+    BITNAMI_IMAGE_VERSION="4.9.8-rhel-7-r3" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
