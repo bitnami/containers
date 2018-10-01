@@ -9,14 +9,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libaio1 libc6 libgcc1 libjemalloc1 libncurses5 libssl1.0.2 libstdc++6 libtinfo5 zlib1g
-RUN . ./libcomponent.sh && component_unpack "mariadb" "10.2.17-4" --checksum 9eb9e7ba81f32784fedb15d857340ce9808a014e24248f3592a42ab565d054aa
+RUN . ./libcomponent.sh && component_unpack "mariadb" "10.2.18-0" --checksum 37754ded7f44cd6ace71aef043e1dac2dc459399e446231f46c3bcd34b5cd451
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.17-debian-9-r42" \
+    BITNAMI_IMAGE_VERSION="10.2.18-debian-9-r0" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
