@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages glibc ncurses-libs openssl-libs zlib
 RUN bitnami-pkg install erlang-21.1.0-0 --checksum 22447de33b57eac1ce6b22cc0a153677c9dfa4ee134b1c9bdc3661b7e27b3f5a
-RUN bitnami-pkg unpack rabbitmq-3.7.8-1 --checksum 6214f23ea61ab1ffcc2c8f007e19dd86a6e0c538bb21b22b75cb4079a403855b
+RUN bitnami-pkg unpack rabbitmq-3.7.8-2 --checksum a4065fea819c2fda14c396f916fc92a4e759db8b583896d2f75176f0361c36ce
 RUN mkdir -p /opt/bitnami/rabbitmq/.rabbitmq && mkdir -p /opt/bitnami/rabbitmq/var/log/rabbitmq && chmod g+rwX -R /opt/bitnami/rabbitmq/.rabbitmq /opt/bitnami/rabbitmq/var
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.7.8-ol-7-r13" \
+    BITNAMI_IMAGE_VERSION="3.7.8-ol-7-r14" \
     PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:/opt/bitnami/rabbitmq/sbin:$PATH" \
     RABBITMQ_CLUSTER_NODE_NAME="" \
     RABBITMQ_CLUSTER_PARTITION_HANDLING="ignore" \
