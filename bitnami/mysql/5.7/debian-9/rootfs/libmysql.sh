@@ -384,9 +384,9 @@ mysql_remote_execute() {
     local pass="${5:-}"
 
     if [ -z  "$pass" ]; then
-        cat - | "$DB_BINDIR/mysql" -N -h "$hostname" -P "$port" -u "$user" "$db" >/dev/null 2>&1
+        cat - | "$DB_BINDIR/mysql" -N -h "$hostname" -P "$port" -u "$user" --connect-timeout=5 "$db" >/dev/null 2>&1
     else
-        cat - | "$DB_BINDIR/mysql" -N -h "$hostname" -P "$port" -u "$user" -p"$pass" "$db" >/dev/null 2>&1
+        cat - | "$DB_BINDIR/mysql" -N -h "$hostname" -P "$port" -u "$user" --connect-timeout=5 -p"$pass" "$db" >/dev/null 2>&1
     fi
 }
 
