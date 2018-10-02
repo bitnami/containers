@@ -17,7 +17,7 @@ REDIS_EXTRA_FLAGS=${REDIS_EXTRA_FLAGS:-}
 
 # configure extra command line flags
 if [[ -n "$REDIS_EXTRA_FLAGS" ]]; then
-    warn "REDIS_EXTRA_FLAGS is depredated. Please specify any extra-flag use 'run.sh $REDIS_EXTRA_FLAGS' as command instead"
+    warn "REDIS_EXTRA_FLAGS is deprecated. Please specify any extra-flag using 'run.sh $REDIS_EXTRA_FLAGS' as command instead"
     ARGS+=" $REDIS_EXTRA_FLAGS"
 fi
 
