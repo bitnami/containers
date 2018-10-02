@@ -10,9 +10,8 @@ set -o pipefail
 
 print_welcome_page
 
-if [ "$*" = "/run.sh" ]; then
+if [[ "$*" = *"/run.sh"* ]]; then
     /setup.sh
 fi
-
 
 exec "$@"
