@@ -211,19 +211,16 @@ services:
 
 ## Passing extra command-line flags to redis-server startup
 
-Passing extra command-line flags to the redis service command is possible through the following env var:
-
-- `REDIS_EXTRA_FLAGS`: Flags to be appended to the startup command. No defaults
+Passing extra command-line flags to the redis service command is possible by adding them as arguments to *run.sh* script:
 
 ```bash
-$ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes -e REDIS_EXTRA_FLAGS='--maxmemory 100mb' bitnami/redis:latest
+$ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest /run.sh --maxmemory 100mb
 ```
 
 or using Docker Compose:
 
 ```yaml
 version: '2'
-
 services:
   redis:
     image: 'bitnami/redis:latest'
@@ -232,7 +229,10 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - REDIS_EXTRA_FLAGS=--maxmemory 100mb
+    command: /run.sh --maxmemory 100mb
 ```
+
+Refer to the [Redis documentation](https://redis.io/topics/config#passing-arguments-via-the-command-line) for the complete list of arguments.
 
 ## Setting the server password on first run
 

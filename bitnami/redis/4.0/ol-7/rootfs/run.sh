@@ -12,11 +12,12 @@ eval "$(redis_env)"
 
 DAEMON=redis-server
 EXEC=$(which $DAEMON)
-ARGS="$REDIS_BASEDIR/etc/redis.conf --daemonize no"
+ARGS="$REDIS_BASEDIR/etc/redis.conf --daemonize no $@"
 REDIS_EXTRA_FLAGS=${REDIS_EXTRA_FLAGS:-}
 
 # configure extra command line flags
 if [[ -n "$REDIS_EXTRA_FLAGS" ]]; then
+    warn "REDIS_EXTRA_FLAGS is deprecated. Please specify any extra-flag using 'run.sh $REDIS_EXTRA_FLAGS' as command instead"
     ARGS+=" $REDIS_EXTRA_FLAGS"
 fi
 
