@@ -14,4 +14,5 @@ if [[ "$*" = *"/run.sh"* ]]; then
     /setup.sh
 fi
 
+
 exec "$@"
