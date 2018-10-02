@@ -211,7 +211,7 @@ services:
 
 ## Passing extra command-line flags to redis-server startup
 
-Passing extra command-line flags to the redis service command is possible through by adding them as arguments to *run.sh* script:
+Passing extra command-line flags to the redis service command is possible by adding them as arguments to *run.sh* script:
 
 ```bash
 $ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest /run.sh --maxmemory 100mb
