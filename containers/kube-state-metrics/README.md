@@ -31,8 +31,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.4.0-ol-7-r34` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.4.0-ol-7-r34/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.4.0-debian-9-r35`, `1`, `1.4.0`, `1.4.0-r35`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.4.0-debian-9-r35/1/debian-9/Dockerfile)
+* [`1-ol-7`, `1.4.0-ol-7-r33` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.4.0-ol-7-r33/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.4.0-debian-9-r36`, `1`, `1.4.0`, `1.4.0-r36`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.4.0-debian-9-r36/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kube-state-metrics GitHub repo](https://github.com/bitnami/bitnami-docker-kube-state-metrics).
 
