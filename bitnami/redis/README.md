@@ -232,6 +232,8 @@ services:
     command: /run.sh --maxmemory 100mb
 ```
 
+Refer to the [Redis documentation](https://redis.io/topics/config#passing-arguments-via-the-command-line) for the complete list of arguments.
+
 ## Setting the server password on first run
 
 Passing the `REDIS_PASSWORD` environment variable when running the image for the first time will set the Redis server password to the value of `REDIS_PASSWORD`.
