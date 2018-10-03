@@ -1,0 +1,5 @@
+{
+  "httpPort": "{{$global.env.NGINX_HTTP_PORT_NUMBER}}",
+  "systemGroup": "{{$global.env.NGINX_DAEMON_GROUP}}",
+  "systemUser": "{{$global.env.NGINX_DAEMON_USER}}"
+}
