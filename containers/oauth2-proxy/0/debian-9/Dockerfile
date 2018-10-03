@@ -1,10 +1,10 @@
 FROM bitnami/minideb:stretch as buildenv
 
 RUN install_packages ca-certificates libc6 wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/oauth2-proxy-0.20180625.74543-3-linux-amd64-debian-9.tar.gz && \
-    echo "bec2caf56a9a8f54c0503a45af97c2edd6c6f0fe50f3fed97fa2293d5d8a303c  /tmp/bitnami/pkg/cache/oauth2-proxy-0.20180625.74543-3-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/oauth2-proxy-0.20180625.74543-3-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/oauth2-proxy-0.20180625.74543-3-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/oauth2-proxy-0.20180625.74543-4-linux-amd64-debian-9.tar.gz && \
+    echo "99476f2ac4d32c58273323712f4c26e44ec1d3c27e34ef3ac7f52e87f2f5e5bc  /tmp/bitnami/pkg/cache/oauth2-proxy-0.20180625.74543-4-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/oauth2-proxy-0.20180625.74543-4-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/oauth2-proxy-0.20180625.74543-4-linux-amd64-debian-9.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/oauth2-proxy /opt/bitnami/oauth2-proxy
 ENV BITNAMI_APP_NAME="oauth2-proxy" \
-    BITNAMI_IMAGE_VERSION="0.20180625.74543-debian-9-r43" \
+    BITNAMI_IMAGE_VERSION="0.20180625.74543-debian-9-r44" \
     PATH="/opt/bitnami/oauth2-proxy/bin:$PATH"
 
 RUN install_packages ca-certificates
