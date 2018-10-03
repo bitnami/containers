@@ -271,7 +271,7 @@ EOF
             mysql_upgrade
         else
             info "Flushing privileges..."
-            if  [ "$DB_REPLICATION_MODE" == "master" ]; then
+            if [ -z "$DB_REPLICATION_MODE" ] || [ "$DB_REPLICATION_MODE" == "master" ]; then
                 mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 flush privileges;
 EOF
