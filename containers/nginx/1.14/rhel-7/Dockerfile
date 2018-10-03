@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras-base:7-r41
+FROM gcr.io/helm-publish-ci/redhat-extras-base:7-r70
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libcom_err libselinux nss-softokn-freebl openssl-libs pcre zlib
-RUN . ./libcomponent.sh && component_unpack "nginx" "1.14.0-3" --checksum 98407ddbffca2daf2982cb96861e87ad8f28b622af73a906ebf5c4b4261b59aa
+RUN . ./libcomponent.sh && component_unpack "nginx" "1.14.0-4" --checksum 3982a82a584236d6b1cd1540cd74643a358bccb29887391707d15a3d89e2646c
 RUN ln -sf /opt/bitnami/nginx/html /app
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
@@ -18,7 +18,7 @@ RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.14.0-rhel-7-r10" \
+    BITNAMI_IMAGE_VERSION="1.14.0-rhel-7-r11" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
     NGINX_HTTP_PORT_NUMBER="8080" \
