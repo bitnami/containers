@@ -521,7 +521,7 @@ mysql_ensure_user_has_database_privileges() {
     local database="${2:?db is required}"
 
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-grant all on $database.* to '$user'@'%';
+grant all on \`$database\`.* to '$user'@'%';
 EOF
 }
 
