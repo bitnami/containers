@@ -42,8 +42,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`6-ol-7`, `6.4.2-ol-7-r1` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.4.2-ol-7-r1/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.4.2-debian-9-r0`, `6`, `6.4.2`, `6.4.2-r0`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.4.2-debian-9-r0/6/debian-9/Dockerfile)
+* [`6-ol-7`, `6.4.2-ol-7-r0` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.4.2-ol-7-r0/6/ol-7/Dockerfile)
+* [`6-debian-9`, `6.4.2-debian-9-r1`, `6`, `6.4.2`, `6.4.2-r1`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.4.2-debian-9-r1/6/debian-9/Dockerfile)
 * [`5-ol-7`, `5.6.4-ol-7-r79` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-ol-7-r79/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.6.4-debian-9-r74`, `5`, `5.6.4`, `5.6.4-r74` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.4-debian-9-r74/5/debian-9/Dockerfile)
 
