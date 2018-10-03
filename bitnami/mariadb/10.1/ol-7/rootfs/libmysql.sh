@@ -271,7 +271,7 @@ EOF
             mysql_upgrade
         else
             info "Flushing privileges..."
-            if  [ "$DB_REPLICATION_MODE" == "master" ]; then
+            if [ -z "$DB_REPLICATION_MODE" ] || [ "$DB_REPLICATION_MODE" == "master" ]; then
                 mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 flush privileges;
 EOF
@@ -384,9 +384,9 @@ mysql_remote_execute() {
     local pass="${5:-}"
 
     if [ -z  "$pass" ]; then
-        cat - | "$DB_BINDIR/mysql" -N -h "$hostname" -P "$port" -u "$user" "$db" >/dev/null 2>&1
+        cat - | "$DB_BINDIR/mysql" -N -h "$hostname" -P "$port" -u "$user" --connect-timeout=5 "$db" >/dev/null 2>&1
     else
-        cat - | "$DB_BINDIR/mysql" -N -h "$hostname" -P "$port" -u "$user" -p"$pass" "$db" >/dev/null 2>&1
+        cat - | "$DB_BINDIR/mysql" -N -h "$hostname" -P "$port" -u "$user" --connect-timeout=5 -p"$pass" "$db" >/dev/null 2>&1
     fi
 }
 
