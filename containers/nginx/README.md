@@ -1,8 +1,8 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-nginx/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-nginx/tree/master)
 
-# What is nginx?
+# What is NGINX?
 
-> nginx (pronounced "engine-x") is an open source reverse proxy server for HTTP, HTTPS, SMTP, POP3 and IMAP protocols, as well as a load balancer, HTTP cache, and a web server (origin server).
+> NGINX (pronounced "engine-x") is an open source reverse proxy server for HTTP, HTTPS, SMTP, POP3 and IMAP protocols, as well as a load balancer, HTTP cache, and a web server (origin server).
 
 [http://nginx.org/](nginx.org)
 
@@ -27,9 +27,9 @@ $ docker-compose up -d
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
-# How to deploy nginx in Kubernetes?
+# How to deploy NGINX Open Source in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami nginx Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/nginx).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami NGINX Open Source Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/nginx).
 
 # Why use a non-root container?
 
@@ -43,12 +43,12 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.14-rhel-7`, `1.14.0-rhel-7-r11` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-rhel-7-r11/1.14/rhel-7/Dockerfile)
-* [`1.14-ol-7`, `1.14.0-ol-7-r101` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-ol-7-r101/1.14/ol-7/Dockerfile)
+* [`1.14-ol-7`, `1.14.0-ol-7-r102` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-ol-7-r102/1.14/ol-7/Dockerfile)
 * [`1.14-debian-9`, `1.14.0-debian-9-r70`, `1.14`, `1.14.0`, `1.14.0-r70`, `latest` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-debian-9-r70/1.14/debian-9/Dockerfile)
 
 # Get this image
 
-The recommended way to get the Bitnami nginx Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/nginx).
+The recommended way to get the Bitnami NGINX Open Source Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/nginx).
 
 ```bash
 $ docker pull bitnami/nginx:latest
@@ -70,7 +70,7 @@ $ docker build -t bitnami/nginx:latest https://github.com/bitnami/bitnami-docker
 
 # Hosting a static website
 
-This nginx image exposes a volume at `/app`. Content mounted here is served by the default catch-all virtual host.
+This NGINX Open Source image exposes a volume at `/app`. Content mounted here is served by the default catch-all virtual host.
 
 ```bash
 $ docker run -v /path/to/app:/app bitnami/nginx:latest
@@ -191,9 +191,9 @@ Write your `my_vhost.conf` file with the SSL configuration and the relative path
   }
 ```
 
-### Step 3: Run the Nginx image and open the SSL port
+### Step 3: Run the NGINX Open Source image and open the SSL port
 
-Run the Nginx image, mounting the certificates directory from your host.
+Run the NGINX Open Source image, mounting the certificates directory from your host.
 
 ```bash
 $ docker run --name nginx \
@@ -244,15 +244,15 @@ services:
 
 # Reverse proxy to other containers
 
-nginx can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an nginx frontend. Bitnami provides example virtual hosts for all of our runtime containers in `/opt/bitnami/nginx/conf/vhosts/`.
+NGINX can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an NGINX frontend. Bitnami provides example virtual hosts for all of our runtime containers in `/opt/bitnami/nginx/conf/vhosts/`.
 
 **Further Reading:**
 
-  - [nginx reverse proxy](http://nginx.com/resources/admin-guide/reverse-proxy/)
+  - [NGINX reverse proxy](http://nginx.com/resources/admin-guide/reverse-proxy/)
 
 # Logging
 
-The Bitnami nginx Docker image sends the container logs to the `stdout`. To view the logs:
+The Bitnami NGINX Open Source Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
 $ docker logs nginx
@@ -270,7 +270,7 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ## Upgrade this image
 
-Bitnami provides up-to-date versions of nginx, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Bitnami provides up-to-date versions of NGINX Open Source, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 ### Step 1: Get the updated image
 
@@ -325,34 +325,6 @@ $ docker-compose up nginx
 
 - [Create An EMP Development Environment With Bitnami Containers
 ](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
-
-# Notable Changes
-
-## Debian 9 1.14.0-r28 and OL 7 1.14.0-r49
-- Added support for legacy paths for the 'nginx.conf' file and 'vhosts'.
-- Added warning for users that continue using the `/bitnami/nginx/conf/` path.
-
-## Debian 9 1.14.0-r25 and OL 7 1.14.0-r46
-
-- Decrease the size of the container. It is not necessary Node.js anymore. Nginx configuration moved to bash scripts in the rootfs/ folder.
-- Removed sample SSL certificates. The port 443/8443 is not enabled by default.
-- The main `nginx.conf` file is not persisted in a volume. The path is `/opt/bitnami/nginx/conf/nginx.conf`.
-- Dropped the default volume for persisting the configuration files.
-
-
-## 1.12.1-r2
-
-- The nginx container has been migrated to a non-root container approach. Previously the container run as `root` user and the nginx daemon was started as `nginx` user. From now on, both the container and the nginx daemon run as user `1001`.
-  As a consequence, the configuration files are writable by the user running the nginx process.
-
-## 1.10.0-r0
-
-- The configuration volume has been moved to `/bitnami/nginx`. Now you only need to mount a single volume at `/bitnami/nginx` for persisting configuration. `/app` is still used for serving content by the default virtual host.
-- The logs are always sent to the `stdout` and are no longer collected in the volume.
-
-## 1.8.0-4-r01 (2015-10-05)
-
-- `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
 
 # Contributing
 
