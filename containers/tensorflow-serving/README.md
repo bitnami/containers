@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.11.0-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.11.0-ol-7-r0/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.10.1-debian-9-r36`, `1`, `1.10.1`, `1.10.1-r36`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.10.1-debian-9-r36/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.11.0-debian-9-r0`, `1`, `1.11.0`, `1.11.0-r0`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.11.0-debian-9-r0/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-serving GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-serving).
 
