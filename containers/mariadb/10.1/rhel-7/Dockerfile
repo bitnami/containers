@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras-base:7-r70
+FROM gcr.io/helm-publish-ci/redhat-extras-base:7-r72
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -9,14 +9,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libaio libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre zlib
-RUN . ./libcomponent.sh && component_unpack "mariadb" "10.1.36-5" --checksum e3b36d3b4c46efc9933650ce5e7aea6c530b15b914b5dcbc600853d1371902d0
+RUN . ./libcomponent.sh && component_unpack "mariadb" "10.1.36-6" --checksum bde71821963d2c791d4131d83ba3313f5066c92e5eea7148cd05cae8bd5ed27e
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.1.36-rhel-7-r6" \
+    BITNAMI_IMAGE_VERSION="10.1.36-rhel-7-r7" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
