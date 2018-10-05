@@ -31,6 +31,8 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Memcached Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/memcached).
 
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
@@ -42,8 +44,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.5.10-ol-7-r52` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.10-ol-7-r52/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.5.10-debian-9-r46`, `1`, `1.5.10`, `1.5.10-r46`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.10-debian-9-r46/1/debian-9/Dockerfile)
+* [`1-ol-7`, `1.5.10-ol-7-r53` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.10-ol-7-r53/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.5.10-debian-9-r47`, `1`, `1.5.10`, `1.5.10-r47`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.10-debian-9-r47/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/memcached GitHub repo](https://github.com/bitnami/bitnami-docker-memcached).
 
