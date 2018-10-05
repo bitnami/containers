@@ -31,6 +31,8 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MariaDB Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/mariadb).
 
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
@@ -47,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10.2-debian-9`, `10.2.18-debian-9-r5`, `10.2`, `10.2.18`, `10.2.18-r5` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.18-debian-9-r5/10.2/debian-9/Dockerfile)
 * [`10.1-rhel-7`, `10.1.36-rhel-7-r6` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.36-rhel-7-r6/10.1/rhel-7/Dockerfile)
 * [`10.1-ol-7`, `10.1.36-ol-7-r28` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.36-ol-7-r28/10.1/ol-7/Dockerfile)
-* [`10.1-debian-9`, `10.1.36-debian-9-r27`, `10.1`, `10.1.36`, `10.1.36-r27`, `latest` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.36-debian-9-r27/10.1/debian-9/Dockerfile)
+* [`10.1-debian-9`, `10.1.36-debian-9-r28`, `10.1`, `10.1.36`, `10.1.36-r28`, `latest` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.36-debian-9-r28/10.1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
 
@@ -318,7 +320,7 @@ services:
 
 ## Setting up a replication cluster
 
-A **zero downtime** MariaDB master-slave [replication](https://dev.mysql.com/doc/refman/5.0/en/replication-howto.html) cluster can easily be setup with the Bitnami MariaDB Docker image using the following environment variables:
+A **zero downtime** MariaDB master-slave [replication](https://dev.mysql.com/doc/refman/5.7/en/server-option-variable-reference.html) cluster can easily be setup with the Bitnami MariaDB Docker image using the following environment variables:
 
  - `MARIADB_REPLICATION_MODE`: The replication mode. Possible values `master`/`slave`. No defaults.
  - `MARIADB_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
@@ -454,7 +456,7 @@ services:
 
 After that, your changes will be taken into account in the server's behaviour.
 
-Refer to the [MySQL server option and variable reference guide](https://dev.mysql.com/doc/refman/5.1/en/mysqld-option-tables.html) for the complete list of configuration options.
+Refer to the [MySQL server option and variable reference guide](https://dev.mysql.com/doc/refman/5.7/en/server-option-variable-reference.html) for the complete list of configuration options.
 
 # Overwrite the main Configuration file
 
