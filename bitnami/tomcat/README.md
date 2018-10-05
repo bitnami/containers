@@ -36,8 +36,8 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
- - [`9.0`, `9.0.12-ol-7-r26` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.12-ol-7-r26/9.0/Dockerfile)
- - [`9.0`, `9.0.12-debian-9-r20` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.12-debian-9-r20/9.0/Dockerfile)
+ - [`9.0`, `9.0.12-ol-7-r25` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.12-ol-7-r25/9.0/Dockerfile)
+ - [`9.0`, `9.0.12-debian-9-r21` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.12-debian-9-r21/9.0/Dockerfile)
  - [`8.5`, `8.5.34-ol-7-r23` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.34-ol-7-r23/8.5/Dockerfile)
  - [`8.5`, `8.5.34-debian-9-r19` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.34-debian-9-r19/8.5/Dockerfile)
  - [`8.0`, `8.0.53-ol-7-r75` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-ol-7-r75/8.0/Dockerfile)
