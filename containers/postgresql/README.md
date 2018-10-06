@@ -29,6 +29,8 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami PostgreSQL Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/postgresql).
 
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
@@ -41,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10-ol-7`, `10.5.0-ol-7-r29` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.5.0-ol-7-r29/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.5.0-debian-9-r42`, `10`, `10.5.0`, `10.5.0-r42`, `latest` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.5.0-debian-9-r42/10/debian-9/Dockerfile)
+* [`10-debian-9`, `10.5.0-debian-9-r43`, `10`, `10.5.0`, `10.5.0-r43`, `latest` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.5.0-debian-9-r43/10/debian-9/Dockerfile)
 * [`9.6-ol-7`, `9.6.10-ol-7-r46` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.10-ol-7-r46/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.10-debian-9-r37`, `9.6`, `9.6.10`, `9.6.10-r37` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.10-debian-9-r37/9.6/debian-9/Dockerfile)
 
