@@ -4,7 +4,7 @@
 
 > NGINX (pronounced "engine-x") is an open source reverse proxy server for HTTP, HTTPS, SMTP, POP3 and IMAP protocols, as well as a load balancer, HTTP cache, and a web server (origin server).
 
-[http://nginx.org/](nginx.org)
+[http://nginx.org/](http://nginx.org/)
 
 # TL;DR;
 
@@ -26,10 +26,17 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* All our images are daily released with the latest distribution packages available.
+
+[![Anchore](https://anchore.io/service/badges/image/ce813289727eff658da36d4ad024da30dcbffd1af3e3863b3846a1177ac8cca9)](https://anchore.io/image/dockerhub/bitnami%2Fnginx%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # How to deploy NGINX Open Source in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami NGINX Open Source Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/nginx).
+
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
 # Why use a non-root container?
 
@@ -43,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.14-rhel-7`, `1.14.0-rhel-7-r11` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-rhel-7-r11/1.14/rhel-7/Dockerfile)
-* [`1.14-ol-7`, `1.14.0-ol-7-r101` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-ol-7-r101/1.14/ol-7/Dockerfile)
+* [`1.14-ol-7`, `1.14.0-ol-7-r103` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-ol-7-r103/1.14/ol-7/Dockerfile)
 * [`1.14-debian-9`, `1.14.0-debian-9-r71`, `1.14`, `1.14.0`, `1.14.0-r71`, `latest` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-debian-9-r71/1.14/debian-9/Dockerfile)
 
 # Get this image
@@ -174,16 +181,16 @@ Write your `my_vhost.conf` file with the SSL configuration and the relative path
 ```nginx
   server {
     listen       8443 ssl;
-  
+
     ssl_certificate      bitnami/certs/server.crt;
     ssl_certificate_key  bitnami/certs/server.key;
-  
+
     ssl_session_cache    shared:SSL:1m;
     ssl_session_timeout  5m;
-  
+
     ssl_ciphers  HIGH:!aNULL:!MD5;
     ssl_prefer_server_ciphers  on;
-  
+
     location / {
       root   html;
       index  index.html index.htm;
