@@ -38,6 +38,8 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Consul Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/consul).
 
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -45,7 +47,7 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.2.3-ol-7-r22` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.2.3-ol-7-r22/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.2.3-ol-7-r24` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.2.3-ol-7-r24/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.2.3-debian-9-r16`, `1`, `1.2.3`, `1.2.3-r16`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.2.3-debian-9-r16/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/consul GitHub repo](https://github.com/bitnami/bitnami-docker-consul).
