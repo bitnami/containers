@@ -27,6 +27,8 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Drupal Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/drupal).
 
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -36,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`8-rhel-7`, `8.6.1-rhel-7-r1` (8/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.1-rhel-7-r1/8/rhel-7/Dockerfile)
 * [`8-php5-rhel-7`, `8.6.1-php5-rhel-7-r1` (8-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.1-php5-rhel-7-r1/8-php5/rhel-7/Dockerfile)
-* [`8-ol-7`, `8.6.1-ol-7-r25` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.1-ol-7-r25/8/ol-7/Dockerfile)
+* [`8-ol-7`, `8.6.1-ol-7-r26` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.1-ol-7-r26/8/ol-7/Dockerfile)
 * [`8-debian-9`, `8.6.1-debian-9-r24`, `8`, `8.6.1`, `8.6.1-r24`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.1-debian-9-r24/8/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
