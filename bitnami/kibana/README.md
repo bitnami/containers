@@ -30,7 +30,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`6-ol-7`, `6.4.2-ol-7-r4` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.4.2-ol-7-r4/6/ol-7/Dockerfile)
+* [`6-ol-7`, `6.4.2-ol-7-r5` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.4.2-ol-7-r5/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.4.2-debian-9-r3`, `6`, `6.4.2`, `6.4.2-r3`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.4.2-debian-9-r3/6/debian-9/Dockerfile)
 * [`5-ol-7`, `5.6.12-ol-7-r18` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.12-ol-7-r18/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.6.12-debian-9-r16`, `5`, `5.6.12`, `5.6.12-r16` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.12-debian-9-r16/5/debian-9/Dockerfile)
@@ -252,7 +252,7 @@ or using Docker Compose:
 $ docker-compose restart kibana
 ```
 
-Refer to the [configuration](http://kibana.io/topics/config) manual for the complete list of configuration options.
+Refer to the [configuration](https://www.elastic.co/guide/en/kibana/current/settings.html) manual for the complete list of configuration options.
 
 # Logging
 
