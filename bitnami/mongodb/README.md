@@ -29,6 +29,8 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MongoDB Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/mongodb).
 
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
@@ -41,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4.1-ol-7`, `4.1.3-ol-7-r20` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.3-ol-7-r20/4.1/ol-7/Dockerfile)
-* [`4.1-debian-9`, `4.1.3-debian-9-r20`, `4.1`, `4.1.3`, `4.1.3-r20` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.3-debian-9-r20/4.1/debian-9/Dockerfile)
+* [`4.1-debian-9`, `4.1.3-debian-9-r21`, `4.1`, `4.1.3`, `4.1.3-r21` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.3-debian-9-r21/4.1/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.3-ol-7-r2` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-ol-7-r2/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.3-debian-9-r3`, `4.0`, `4.0.3`, `4.0.3-r3`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-debian-9-r3/4.0/debian-9/Dockerfile)
 * [`3.6-ol-7`, `3.6.8-ol-7-r17` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.8-ol-7-r17/3.6/ol-7/Dockerfile)
