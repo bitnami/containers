@@ -27,6 +27,8 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami PrestaShop Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/prestashop).
 
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -34,7 +36,7 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.7-ol-7`, `1.7.4-3-ol-7-r1` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.4-3-ol-7-r1/1.7/ol-7/Dockerfile)
+* [`1.7-ol-7`, `1.7.4-3-ol-7-r2` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.4-3-ol-7-r2/1.7/ol-7/Dockerfile)
 * [`1.7-debian-9`, `1.7.4-3-debian-9-r1`, `1.7`, `1.7.4-3`, `1.7.4-3-r1`, `latest` (1.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.4-3-debian-9-r1/1.7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
