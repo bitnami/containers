@@ -29,6 +29,8 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami WildFly Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/wildfly).
 
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -36,7 +38,7 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`14-ol-7`, `14.0.1-ol-7-r22` (14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/14.0.1-ol-7-r22/14/ol-7/Dockerfile)
+* [`14-ol-7`, `14.0.1-ol-7-r24` (14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/14.0.1-ol-7-r24/14/ol-7/Dockerfile)
 * [`14-debian-9`, `14.0.1-debian-9-r20`, `14`, `14.0.1`, `14.0.1-r20`, `latest` (14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/14.0.1-debian-9-r20/14/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
