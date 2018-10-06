@@ -4,7 +4,7 @@
 
 The blackbox exporter allows blackbox probing of endpoints over HTTP, HTTPS, DNS, TCP and ICMP.
 
-[https://github.com/prometheus/blackbox-exporter](https://github.com/prometheus/blackbox-exporter)
+[https://github.com/prometheus/blackbox_exporter](https://github.com/prometheus/blackbox_exporter)
 
 # TL;DR;
 
@@ -31,7 +31,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.12.0-ol-7-r88` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.12.0-ol-7-r88/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.12.0-ol-7-r89` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.12.0-ol-7-r89/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.12.0-debian-9-r83`, `0`, `0.12.0`, `0.12.0-r83`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.12.0-debian-9-r83/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/blackbox-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-blackbox-exporter).
@@ -124,7 +124,7 @@ scrape_configs:
         replacement: 127.0.0.1:9115  # The blackbox exporter's real hostname:port.
 ```
 
-[Further information](https://github.com/prometheus/blackbox-exporter/blob/master/CONFIGURATION.md)
+[Further information](https://github.com/prometheus/blackbox_exporter/blob/master/CONFIGURATION.md)
 
 # Logging
 
