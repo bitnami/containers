@@ -33,7 +33,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.2.0-ol-7-r1` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/1.2.0-ol-7-r1/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.2.0-debian-9-r0`, `1`, `1.2.0`, `1.2.0-r0`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/1.2.0-debian-9-r0/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.2.0-debian-9-r1`, `1`, `1.2.0`, `1.2.0-r1`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/1.2.0-debian-9-r1/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/open-service-broker-azure GitHub repo](https://github.com/bitnami/bitnami-docker-open-service-broker-azure).
 
