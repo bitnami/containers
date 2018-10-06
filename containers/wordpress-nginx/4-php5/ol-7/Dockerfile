@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r127
+FROM bitnami/oraclelinux-extras:7-r128
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack wordpress-4.9.8-4 --checksum ab33d3a2cab27dab5ba7ddff655d
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="4.9.8-php5-ol-7-r53" \
+    BITNAMI_IMAGE_VERSION="4.9.8-php5-ol-7-r54" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
