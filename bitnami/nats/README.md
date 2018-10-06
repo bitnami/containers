@@ -32,6 +32,8 @@ $ docker-compose up
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami NATS Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/nats).
 
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
@@ -43,7 +45,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.3.0-ol-7-r36` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.3.0-ol-7-r36/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.3.0-ol-7-r38` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.3.0-ol-7-r38/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.3.0-debian-9-r21`, `1`, `1.3.0`, `1.3.0-r21`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.3.0-debian-9-r21/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nats GitHub repo](https://github.com/bitnami/bitnami-docker-nats).
