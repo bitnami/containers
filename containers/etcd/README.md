@@ -31,6 +31,8 @@ $ docker-compose up
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami etcd Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/etcd).
 
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
@@ -42,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.3.9-ol-7-r53` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.9-ol-7-r53/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.3.9-ol-7-r55` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.9-ol-7-r55/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.3.9-debian-9-r69`, `3`, `3.3.9`, `3.3.9-r69`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.9-debian-9-r69/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/etcd GitHub repo](https://github.com/bitnami/bitnami-docker-etcd).
