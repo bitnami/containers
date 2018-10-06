@@ -31,6 +31,8 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Node.js Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/node).
 
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -39,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10-ol-7`, `10.11.0-ol-7-r16` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.11.0-ol-7-r16/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.11.0-debian-9-r15`, `10`, `10.11.0`, `10.11.0-r15` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.11.0-debian-9-r15/10/debian-9/Dockerfile)
+* [`10-debian-9`, `10.11.0-debian-9-r16`, `10`, `10.11.0`, `10.11.0-r16` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.11.0-debian-9-r16/10/debian-9/Dockerfile)
 * [`8-ol-7`, `8.12.0-ol-7-r27` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.12.0-ol-7-r27/8/ol-7/Dockerfile)
 * [`8-debian-9`, `8.12.0-debian-9-r23`, `8`, `8.12.0`, `8.12.0-r23`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.12.0-debian-9-r23/8/debian-9/Dockerfile)
 * [`6-debian-9`, `6.14.4-debian-9-r38`, `6`, `6.14.4`, `6.14.4-r38` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.4-debian-9-r38/6/debian-9/Dockerfile)
@@ -341,7 +343,7 @@ $ docker-compose up node
 
 ## 6.2.0-r0 (2016-05-11)
 
-- Commands are now executed as the `root` user. Use the `--user` argument to switch to another user or change to the required user using `sudo` to launch applications. Alternatively, as of Docker 1.10 User Namespaces are supported by the docker daemon. Refer to the [daemon user namespace options](https://docs.docker.com/engine/reference/commandline/daemon/#daemon-user-namespace-options) for more details.
+- Commands are now executed as the `root` user. Use the `--user` argument to switch to another user or change to the required user using `sudo` to launch applications. Alternatively, as of Docker 1.10 User Namespaces are supported by the docker daemon. Refer to the [daemon user namespace options](https://docs.docker.com/engine/security/userns-remap/) for more details.
 
 ## 4.1.2-0 (2015-10-12)
 
