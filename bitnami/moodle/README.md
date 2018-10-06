@@ -4,7 +4,7 @@
 
 >Moodle is a very popular open source learning management solution (LMS) for the delivery of elearning courses and programs. It’s used not only by universities, but also by hundreds of corporations around the world who provide eLearning education for their employees. Moodle features a simple interface, drag-and-drop features, role-based permissions, deep reporting, many language translations, a well-documented API and more. With some of the biggest universities and organizations already using it, Moodle is ready to meet the needs of just about any size organization.
 
-https://www.moodle.org/
+https://moodle.org/
 
 # TL;DR;
 
@@ -27,6 +27,8 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Moodle Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/moodle).
 
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -35,7 +37,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.5.2-ol-7-r31` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.2-ol-7-r31/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.5.2-debian-9-r29`, `3`, `3.5.2`, `3.5.2-r29`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.2-debian-9-r29/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.5.2-debian-9-r30`, `3`, `3.5.2`, `3.5.2-r30`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.5.2-debian-9-r30/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
