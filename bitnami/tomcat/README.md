@@ -29,6 +29,8 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Tomcat Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/tomcat).
 
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -36,14 +38,14 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
- - [`9.0`, `9.0.12-ol-7-r26` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.12-ol-7-r26/9.0/Dockerfile)
- - [`9.0`, `9.0.12-debian-9-r21` (9.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.12-debian-9-r21/9.0/Dockerfile)
- - [`8.5`, `8.5.34-ol-7-r24` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.34-ol-7-r24/8.5/Dockerfile)
- - [`8.5`, `8.5.34-debian-9-r20` (8.5/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.34-debian-9-r20/8.5/Dockerfile)
- - [`8.0`, `8.0.53-ol-7-r76` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-ol-7-r76/8.0/Dockerfile)
- - [`8.0`, `8.0.53-debian-9-r72` (8.0/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-debian-9-r72/8.0/Dockerfile)
- - [`7`, `7.0.91-ol-7-r4` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.91-ol-7-r4/7/Dockerfile)
- - [`7`, `7.0.91-debian-9-r3` (7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.91-debian-9-r3/7/Dockerfile)
+* [`9.0-ol-7`, `9.0.12-ol-7-r26` (9.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.12-ol-7-r26/9.0/ol-7/Dockerfile)
+* [`9.0-debian-9`, `9.0.12-debian-9-r22`, `9.0`, `9.0.12`, `9.0.12-r22` (9.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.12-debian-9-r22/9.0/debian-9/Dockerfile)
+* [`8.5-ol-7`, `8.5.34-ol-7-r24` (8.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.34-ol-7-r24/8.5/ol-7/Dockerfile)
+* [`8.5-debian-9`, `8.5.34-debian-9-r20`, `8.5`, `8.5.34`, `8.5.34-r20`, `latest` (8.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.34-debian-9-r20/8.5/debian-9/Dockerfile)
+* [`8.0-ol-7`, `8.0.53-ol-7-r76` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-ol-7-r76/8.0/ol-7/Dockerfile)
+* [`8.0-debian-9`, `8.0.53-debian-9-r72`, `8.0`, `8.0.53`, `8.0.53-r72` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-debian-9-r72/8.0/debian-9/Dockerfile)
+* [`7-ol-7`, `7.0.91-ol-7-r4` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.91-ol-7-r4/7/ol-7/Dockerfile)
+* [`7-debian-9`, `7.0.91-debian-9-r3`, `7`, `7.0.91`, `7.0.91-r3` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.91-debian-9-r3/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
 
