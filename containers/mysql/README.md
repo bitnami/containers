@@ -31,6 +31,8 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MySQL Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mysql).
 
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
@@ -43,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8.0-ol-7`, `8.0.12-ol-7-r60` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.12-ol-7-r60/8.0/ol-7/Dockerfile)
-* [`8.0-debian-9`, `8.0.12-debian-9-r46`, `8.0`, `8.0.12`, `8.0.12-r46` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.12-debian-9-r46/8.0/debian-9/Dockerfile)
+* [`8.0-debian-9`, `8.0.12-debian-9-r47`, `8.0`, `8.0.12`, `8.0.12-r47` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.12-debian-9-r47/8.0/debian-9/Dockerfile)
 * [`5.7-ol-7`, `5.7.23-ol-7-r55` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.23-ol-7-r55/5.7/ol-7/Dockerfile)
 * [`5.7-debian-9`, `5.7.23-debian-9-r65`, `5.7`, `5.7.23`, `5.7.23-r65`, `latest` (5.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.23-debian-9-r65/5.7/debian-9/Dockerfile)
 
@@ -291,7 +293,7 @@ services:
 
 ## Setting up a replication cluster
 
-A **zero downtime** MySQL master-slave [replication](https://dev.mysql.com/doc/refman/5.0/en/replication-howto.html) cluster can easily be setup with the Bitnami MySQL Docker image using the following environment variables:
+A **zero downtime** MySQL master-slave [replication](https://dev.mysql.com/doc/refman/5.7/en/server-option-variable-reference.html) cluster can easily be setup with the Bitnami MySQL Docker image using the following environment variables:
 
  - `MYSQL_REPLICATION_MODE`: The replication mode. Possible values `master`/`slave`. No defaults.
  - `MYSQL_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
@@ -427,7 +429,7 @@ services:
 
 After that, your changes will be taken into account in the server's behaviour.
 
-Refer to the [MySQL server option and variable reference guide](https://dev.mysql.com/doc/refman/5.1/en/mysqld-option-tables.html) for the complete list of configuration options.
+Refer to the [MySQL server option and variable reference guide](https://dev.mysql.com/doc/refman/5.7/en/mysqld-option-tables.html) for the complete list of configuration options.
 
 # Overwrite the main Configuration file
 
