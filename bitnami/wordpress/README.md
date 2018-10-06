@@ -27,6 +27,8 @@ $ docker-compose up
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami WordPress Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/wordpress).
 
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -36,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`4-rhel-7`, `4.9.8-rhel-7-r4` (4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.8-rhel-7-r4/4/rhel-7/Dockerfile)
 * [`4-php5-rhel-7`, `4.9.8-php5-rhel-7-r0` (4-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.8-php5-rhel-7-r0/4-php5/rhel-7/Dockerfile)
-* [`4-ol-7`, `4.9.8-ol-7-r55` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.8-ol-7-r55/4/ol-7/Dockerfile)
+* [`4-ol-7`, `4.9.8-ol-7-r56` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.8-ol-7-r56/4/ol-7/Dockerfile)
 * [`4-debian-9`, `4.9.8-debian-9-r40`, `4`, `4.9.8`, `4.9.8-r40`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.8-debian-9-r40/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
