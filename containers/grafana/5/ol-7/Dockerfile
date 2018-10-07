@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r128 as buildenv
+FROM bitnami/oraclelinux-extras:7-r129 as buildenv
 
 RUN install_packages ca-certificates fontconfig-devel glibc libgcc libstdc++ wget zlib
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-5.2.5-1-linux-x86_64-ol-7.tar.gz && \
@@ -10,12 +10,12 @@ RUN mkdir -p /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/ && chmod g+rw
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r128
+FROM bitnami/oraclelinux-extras:7-r129
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/grafana /opt/bitnami/grafana
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="5.2.5-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="5.2.5-ol-7-r12" \
     PATH="/opt/bitnami/grafana/bin:$PATH"
 
 RUN install_packages curl
