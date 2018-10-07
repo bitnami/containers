@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/alertmanager /opt/bitnami/alertmanager
 ENV BITNAMI_APP_NAME="alertmanager" \
-    BITNAMI_IMAGE_VERSION="0.15.2-debian-9-r44" \
+    BITNAMI_IMAGE_VERSION="0.15.2-debian-9-r45" \
     PATH="/opt/bitnami/alertmanager/bin:$PATH"
 
 RUN install_packages ca-certificates
