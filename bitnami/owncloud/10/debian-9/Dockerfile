@@ -1,20 +1,20 @@
-FROM bitnami/minideb-extras:stretch-r156
+FROM bitnami/minideb-extras:stretch-r161
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmcrypt4 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5 libtinfo5 libunistring0 libxml2 libxslt1.1 zlib1g
 RUN bitnami-pkg unpack apache-2.4.35-0 --checksum 1e352e2185137fcad60bb6fdf2961368f59a35e2c2cab4ee94c77152f1c37299
-RUN bitnami-pkg unpack php-7.0.32-1 --checksum ba35c87fa72b1333c036491734e039bac53f5726c1e2458ce8126473240c3cc8
+RUN bitnami-pkg unpack php-7.1.22-3 --checksum 41d3a6d69a8624958ed765d8b562b3c9e852880a8bf0bad01aa870f630f98909
 RUN bitnami-pkg unpack mysql-client-10.2.18-0 --checksum 2ae3b6c2dc5f69815a2387776624bcc46cff197ac7cb78f8009e535f3662971a
-RUN bitnami-pkg install libphp-7.0.32-2 --checksum 03bb40ebb66af0ce2b1dc5cd9aeded75811e695e184e67b74f45b405a86af2a2
-RUN bitnami-pkg unpack owncloud-10.0.10-2 --checksum 7fa6e0f38f61fe5e7930e194f308b0f5d434db27839269fef1c6eecf8527ff64
+RUN bitnami-pkg unpack libphp-7.1.22-2 --checksum 17857e3e8c600de1c2217151059044330186ff2a3f0574b564519c40a8f4fdbb
+RUN bitnami-pkg unpack owncloud-10.0.10-3 --checksum 0a2b694e8719070dc33b2961ed24db06b7fcf9f7bd78646dc7c8478723eb74c1
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.0.10-debian-9-r13" \
+    BITNAMI_IMAGE_VERSION="10.0.10-debian-9-r14" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
