@@ -99,7 +99,7 @@ elasticsearch_initialize() {
         if [ -n "$plugins" ]; then
             local plugins_list
             plugins_list=$(tr ',;' ' ' <<< "${plugins}")
-            for plugin in "${plugins_list[@]}"; do
+            for plugin in ${plugins_list[@]}; do
                 info "Installing plugin: $plugin"
                 elasticsearch-plugin install -b -v "$plugin"
             done
