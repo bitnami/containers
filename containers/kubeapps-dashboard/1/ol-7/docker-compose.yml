@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  kubeapps-dashboard:
+    image: bitnami/kubeapps-dashboard:1-ol-7
+    ports:
+      - '80:80'
+      - '443:443'
