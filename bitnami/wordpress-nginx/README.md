@@ -26,6 +26,7 @@ $ docker-compose up
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: RHEL images are not available in any public registry. You can build them on your side on top of RHEL as described on this [doc](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html-single/getting_started_with_containers/index#creating_docker_images).
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
@@ -35,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`4-php5-ol-7`, `4.9.8-php5-ol-7-r56` (4-php5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-php5-ol-7-r56/4-php5/ol-7/Dockerfile)
 * [`4-php5-debian-9`, `4.9.8-php5-debian-9-r33`, `4-php5`, `4.9.8-php5`, `4.9.8-php5-r33` (4-php5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-php5-debian-9-r33/4-php5/debian-9/Dockerfile)
 * [`4-ol-7`, `4.9.8-ol-7-r25` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-ol-7-r25/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.9.8-debian-9-r58`, `4`, `4.9.8`, `4.9.8-r58`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-debian-9-r58/4/debian-9/Dockerfile)
+* [`4-debian-9`, `4.9.8-debian-9-r59`, `4`, `4.9.8`, `4.9.8-r59`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-debian-9-r59/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
 
