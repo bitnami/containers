@@ -30,13 +30,14 @@ $ docker-compose up -d
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: RHEL images are not available in any public registry. You can build them on your side on top of RHEL as described on this [doc](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html-single/getting_started_with_containers/index#creating_docker_images).
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`7.2-rhel-7`, `7.2.10-rhel-7-r2` (7.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.10-rhel-7-r2/7.2/rhel-7/Dockerfile)
 * [`7.2-ol-7`, `7.2.10-ol-7-r26` (7.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.10-ol-7-r26/7.2/ol-7/Dockerfile)
-* [`7.2-debian-9`, `7.2.10-debian-9-r26`, `7.2`, `7.2.10`, `7.2.10-r26` (7.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.10-debian-9-r26/7.2/debian-9/Dockerfile)
+* [`7.2-debian-9`, `7.2.10-debian-9-r27`, `7.2`, `7.2.10`, `7.2.10-r27` (7.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.10-debian-9-r27/7.2/debian-9/Dockerfile)
 * [`7.1-rhel-7`, `7.1.22-rhel-7-r2` (7.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.22-rhel-7-r2/7.1/rhel-7/Dockerfile)
 * [`7.1-ol-7`, `7.1.22-ol-7-r26` (7.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.22-ol-7-r26/7.1/ol-7/Dockerfile)
 * [`7.1-debian-9`, `7.1.22-debian-9-r27`, `7.1`, `7.1.22`, `7.1.22-r27`, `latest` (7.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.22-debian-9-r27/7.1/debian-9/Dockerfile)
