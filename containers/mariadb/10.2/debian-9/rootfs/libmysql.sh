@@ -30,6 +30,7 @@ export DB_CONFDIR=$DB_BASEDIR/conf
 export DB_LOGDIR=$DB_BASEDIR/logs
 export DB_TMPDIR=$DB_BASEDIR/tmp
 export DB_BINDIR=$DB_BASEDIR/bin
+export DB_SBINDIR=${DB_SBINDIR:-$DB_BASEDIR/bin}
 export PATH=$DB_BINDIR:$PATH
 export DB_DAEMON_USER=mysql
 export DB_DAEMON_GROUP=mysql
