@@ -26,6 +26,11 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/11e71c6ab14f6019f8277a4c4015f004b8c512cdeb57bf9c7537887d396d9997)](https://anchore.io/image/dockerhub/bitnami%2Fapache%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # How to deploy Apache in Kubernetes?
 
@@ -46,8 +51,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2.4-rhel-7`, `2.4.35-rhel-7-r0` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.35-rhel-7-r0/2.4/rhel-7/Dockerfile)
-* [`2.4-ol-7`, `2.4.35-ol-7-r14` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.35-ol-7-r14/2.4/ol-7/Dockerfile)
-* [`2.4-debian-9`, `2.4.35-debian-9-r14`, `2.4`, `2.4.35`, `2.4.35-r14`, `latest` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.35-debian-9-r14/2.4/debian-9/Dockerfile)
+* [`2.4-ol-7`, `2.4.35-ol-7-r15` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.35-ol-7-r15/2.4/ol-7/Dockerfile)
+* [`2.4-debian-9`, `2.4.35-debian-9-r15`, `2.4`, `2.4.35`, `2.4.35-r15`, `latest` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.35-debian-9-r15/2.4/debian-9/Dockerfile)
 
 # Get this image
 
