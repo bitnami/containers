@@ -26,11 +26,11 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* All our images are daily released with the latest distribution packages available.
+* Bitnami container images are released daily with the latest distribution packages available.
 
 [![Anchore](https://anchore.io/service/badges/image/ce813289727eff658da36d4ad024da30dcbffd1af3e3863b3846a1177ac8cca9)](https://anchore.io/image/dockerhub/bitnami%2Fnginx%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> The image overview badge contains a security report with all open CVEs. Click 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # How to deploy NGINX Open Source in Kubernetes?
 
@@ -45,13 +45,15 @@ Non-root container images add an extra layer of security and are generally recom
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: RHEL images are not available in any public registry. You can build them on your side on top of RHEL as described on this [doc](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html-single/getting_started_with_containers/index#creating_docker_images).
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`1.14-rhel-7`, `1.14.0-rhel-7-r11` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-rhel-7-r11/1.14/rhel-7/Dockerfile)
-* [`1.14-ol-7`, `1.14.0-ol-7-r105` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-ol-7-r105/1.14/ol-7/Dockerfile)
+* [`1.14-ol-7`, `1.14.0-ol-7-r106` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-ol-7-r106/1.14/ol-7/Dockerfile)
 * [`1.14-debian-9`, `1.14.0-debian-9-r73`, `1.14`, `1.14.0`, `1.14.0-r73`, `latest` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-debian-9-r73/1.14/debian-9/Dockerfile)
+
 
 # Get this image
 
