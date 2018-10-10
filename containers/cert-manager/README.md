@@ -20,6 +20,11 @@ Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource suppor
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/23a0dbe27241785daf393468bf5b6445d01a456e53f104ddf466905dd31f2e29)](https://anchore.io/image/dockerhub/bitnami%2Fcert-manager%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # Why use a non-root container?
 
@@ -32,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.5.0-ol-7-r23` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.5.0-ol-7-r23/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.5.0-ol-7-r24` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.5.0-ol-7-r24/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.5.0-debian-9-r23`, `0`, `0.5.0`, `0.5.0-r23`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.5.0-debian-9-r23/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cert-manager GitHub repo](https://github.com/bitnami/bitnami-docker-cert-manager).
