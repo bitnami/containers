@@ -37,7 +37,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.8.13-ol-7-r1` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.13-ol-7-r1/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.8.12-debian-9-r26`, `3`, `3.8.12`, `3.8.12-r26`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.12-debian-9-r26/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.8.13-debian-9-r0`, `3`, `3.8.13`, `3.8.13-r0`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.13-debian-9-r0/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
 
