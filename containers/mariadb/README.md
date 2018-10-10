@@ -40,13 +40,14 @@ Non-root container images add an extra layer of security and are generally recom
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: RHEL images are not available in any public registry. You can build them on your side on top of RHEL as described on this [doc](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html-single/getting_started_with_containers/index#creating_docker_images).
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`10.2-rhel-7`, `10.2.18-rhel-7-r3` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.18-rhel-7-r3/10.2/rhel-7/Dockerfile)
 * [`10.2-ol-7`, `10.2.18-ol-7-r8` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.18-ol-7-r8/10.2/ol-7/Dockerfile)
-* [`10.2-debian-9`, `10.2.18-debian-9-r8`, `10.2`, `10.2.18`, `10.2.18-r8` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.18-debian-9-r8/10.2/debian-9/Dockerfile)
+* [`10.2-debian-9`, `10.2.18-debian-9-r9`, `10.2`, `10.2.18`, `10.2.18-r9` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.18-debian-9-r9/10.2/debian-9/Dockerfile)
 * [`10.1-rhel-7`, `10.1.36-rhel-7-r7` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.36-rhel-7-r7/10.1/rhel-7/Dockerfile)
 * [`10.1-ol-7`, `10.1.36-ol-7-r32` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.36-ol-7-r32/10.1/ol-7/Dockerfile)
 * [`10.1-debian-9`, `10.1.36-debian-9-r30`, `10.1`, `10.1.36`, `10.1.36-r30`, `latest` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.36-debian-9-r30/10.1/debian-9/Dockerfile)
