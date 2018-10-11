@@ -50,7 +50,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2.4-rhel-7`, `2.4.35-rhel-7-r0` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.35-rhel-7-r0/2.4/rhel-7/Dockerfile)
+* [`2.4-rhel-7`, `2.4.35-rhel-7-r1` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.35-rhel-7-r1/2.4/rhel-7/Dockerfile)
 * [`2.4-ol-7`, `2.4.35-ol-7-r17` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.35-ol-7-r17/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.35-debian-9-r15`, `2.4`, `2.4.35`, `2.4.35-r15`, `latest` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.35-debian-9-r15/2.4/debian-9/Dockerfile)
 
@@ -218,9 +218,9 @@ This container comes with SSL support already pre-configured and with a dummy ce
 In your local computer, create a folder called `certs` and put your certificates files. Make sure you rename both files to `server.crt` and `server.key` respectively:
 
 ```bash
-$ mkdir /path/to/apache-persistence/apache/conf/bitnami/certs -p
-$ cp /path/to/certfile.crt /path/to/apache-persistence/apache/conf/bitnami/certs/server.crt
-$ cp /path/to/keyfile.key  /path/to/apache-persistence/apache/conf/bitnami/certs/server.key
+$ mkdir /path/to/apache-certs -p
+$ cp /path/to/certfile.crt /path/to/apache-certs/server.crt
+$ cp /path/to/keyfile.key  /path/to/apache-certs/server.key
 ```
 
 ### Step 2: Run the Apache image
@@ -229,7 +229,7 @@ Run the Apache image, mounting the certificates directory from your host.
 
 ```bash
 $ docker run --name apache \
-  -v /path/to/apache-persistence/apache/conf/bitnami/certs:/bitnami/apache/conf/bitnami/certs \
+  -v /path/to/apache-certs:/opt/bitnami/apache/certs \
   bitnami/apache:latest
 ```
 
@@ -245,7 +245,7 @@ services:
       - '80:8080'
       - '443:8443'
     volumes:
-      - /path/to/apache-persistence/apache/conf/bitnami/certs:/bitnami/apache/conf/bitnami/certs
+      - /path/to/apache-certs:/opt/bitnami/apache/certs
 ```
 
 ## Full configuration
