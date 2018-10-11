@@ -22,6 +22,11 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/1f091b6f620204ef6b2f12a8d16d4c0617819c46f63acee895e46e816e2d02bb)](https://anchore.io/image/dockerhub/bitnami%2Fjasperreports%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # How to deploy JasperReports Server in Kubernetes?
 
@@ -36,7 +41,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-ol-7`, `7.1.0-ol-7-r97` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.0-ol-7-r97/7/ol-7/Dockerfile)
+* [`7-ol-7`, `7.1.0-ol-7-r99` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.0-ol-7-r99/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.1.0-debian-9-r76`, `7`, `7.1.0`, `7.1.0-r76`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.0-debian-9-r76/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jasperreports GitHub repo](https://github.com/bitnami/bitnami-docker-jasperreports).
