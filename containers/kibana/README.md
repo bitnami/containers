@@ -22,6 +22,11 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/a5cb584bfa8c7ae4c300e2827fc142c6acd5823b6526c8472bc1c0e1c82ee691)](https://anchore.io/image/dockerhub/bitnami%2Fkibana%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # Supported tags and respective `Dockerfile` links
 
@@ -32,7 +37,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`6-ol-7`, `6.4.2-ol-7-r9` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.4.2-ol-7-r9/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.4.2-debian-9-r7`, `6`, `6.4.2`, `6.4.2-r7`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.4.2-debian-9-r7/6/debian-9/Dockerfile)
-* [`5-ol-7`, `5.6.12-ol-7-r22` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.12-ol-7-r22/5/ol-7/Dockerfile)
+* [`5-ol-7`, `5.6.12-ol-7-r23` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.12-ol-7-r23/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.6.12-debian-9-r21`, `5`, `5.6.12`, `5.6.12-r21` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.12-debian-9-r21/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
