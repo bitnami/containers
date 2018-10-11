@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack redis-sentinel-4.0.11-1 --checksum 88db191361a29f696cfc79
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="4.0.11-debian-9-r60" \
+    BITNAMI_IMAGE_VERSION="4.0.11-debian-9-r61" \
     PATH="/opt/bitnami/redis-sentinel/bin:$PATH" \
     REDIS_MASTER_HOST="redis" \
     REDIS_MASTER_PASSWORD="" \
