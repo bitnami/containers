@@ -19,6 +19,11 @@ $ docker run --name elasticsearch-exporter bitnami/elasticsearch-exporter:latest
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/4acb008d4f042228384746c04883021d12aff0eb4a44ae1fe9d890fa72322d1e)](https://anchore.io/image/dockerhub/bitnami%2Felasticsearch-exporter%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # Why use a non-root container?
 
@@ -31,8 +36,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.0.2-ol-7-r91` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-ol-7-r91/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.0.2-debian-9-r86`, `1`, `1.0.2`, `1.0.2-r86`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-debian-9-r86/1/debian-9/Dockerfile)
+* [`1-ol-7`, `1.0.2-ol-7-r92` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-ol-7-r92/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.0.2-debian-9-r87`, `1`, `1.0.2`, `1.0.2-r87`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-debian-9-r87/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter).
 # Get this image
