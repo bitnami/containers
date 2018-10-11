@@ -40,8 +40,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`10-debian-9`, `10.12.0-debian-9-r0`, `10`, `10.12.0`, `10.12.0-r0` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.12.0-debian-9-r0/10/debian-9/Dockerfile)
 * [`10-ol-7`, `10.11.0-ol-7-r20` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.11.0-ol-7-r20/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.11.0-debian-9-r19`, `10`, `10.11.0`, `10.11.0-r19` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.11.0-debian-9-r19/10/debian-9/Dockerfile)
 * [`8-ol-7`, `8.12.0-ol-7-r30` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.12.0-ol-7-r30/8/ol-7/Dockerfile)
 * [`8-debian-9`, `8.12.0-debian-9-r26`, `8`, `8.12.0`, `8.12.0-r26`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.12.0-debian-9-r26/8/debian-9/Dockerfile)
 * [`6-debian-9`, `6.14.4-debian-9-r42`, `6`, `6.14.4`, `6.14.4-r42` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.14.4-debian-9-r42/6/debian-9/Dockerfile)
