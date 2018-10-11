@@ -65,6 +65,10 @@ mysql_valid_settings() {
         error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
         exit 1
     }
+    long_password_error() {
+        error "The password can not be longer than 32 characters. Set the environment variable $1 with a shorter value"
+        exit 1
+    }
 
     if [ ! -z "$DB_REPLICATION_MODE" ]; then
         if [ "$DB_REPLICATION_MODE" == "master" ]; then
@@ -78,8 +82,7 @@ mysql_valid_settings() {
                     empty_password_error "$(get_env_var ROOT_PASSWORD)"
                 fi
                 if (( ${#DB_ROOT_PASSWORD} > 32 )); then
-                    error "The password can not be longer than 32 characters"
-                    exit 1
+                    long_password_error "$(get_env_var ROOT_PASSWORD)"
                 fi
                 if [ -n "$DB_USER" ] && [ -z "$DB_PASSWORD" ]; then
                     empty_password_error "$(get_env_var PASSWORD)"
