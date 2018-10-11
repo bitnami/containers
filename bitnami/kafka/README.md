@@ -38,6 +38,11 @@ services:
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/818665e73efad0e7fdbafd32ac412de086de1c2a1d8e5bc96dba076ee11c7ca5)](https://anchore.io/image/dockerhub/bitnami%2Fkafka%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # How to deploy Apache Kafka in Kubernetes?
 
@@ -57,7 +62,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.0.0-ol-7-r55` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.0.0-ol-7-r55/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.0.0-debian-9-r34`, `2`, `2.0.0`, `2.0.0-r34`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.0.0-debian-9-r34/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.0.0-debian-9-r35`, `2`, `2.0.0`, `2.0.0-r35`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.0.0-debian-9-r35/2/debian-9/Dockerfile)
 * [`1-ol-7`, `1.1.1-ol-7-r64` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r64/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.1.1-debian-9-r38`, `1`, `1.1.1`, `1.1.1-r38` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r38/1/debian-9/Dockerfile)
 
