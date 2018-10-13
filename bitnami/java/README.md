@@ -35,7 +35,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-- [`1.8`, `1.8.181-ol-7-r72` (1.8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.181-ol-7-r72/1.8/ol-7/Dockerfile), [`1.8-prod`, `1.8.181-ol-7-r72-prod` (1.8/ol-7/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.181-ol-7-r72/1.8/ol-7/prod/Dockerfile)
+- [`1.8`, `1.8.181-ol-7-r73` (1.8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.181-ol-7-r73/1.8/ol-7/Dockerfile), [`1.8-prod`, `1.8.181-ol-7-r73-prod` (1.8/ol-7/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.181-ol-7-r73/1.8/ol-7/prod/Dockerfile)
 - [`1.8`, `1.8.181-debian-9-r81` (1.8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.181-debian-9-r81/1.8/debian-9/Dockerfile), [`1.8-prod`, `1.8.181-debian-9-r81-prod` (1.8/debian-9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.181-debian-9-r81/1.8/debian-9/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
