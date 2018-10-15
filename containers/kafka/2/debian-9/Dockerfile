@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r166
+FROM bitnami/minideb-extras:stretch-r167
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,12 +7,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages libblkid1 libbsd0 libc6 libffi6 libgcc1 libglib2.0-0 libmount1 libpcre3 libselinux1 libstdc++6 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 zlib1g
 RUN bitnami-pkg install java-1.8.181-1 --checksum 66bba4b4a2647f981339d306da796905c222057c4277a5ef045e079981a404f4
-RUN bitnami-pkg unpack kafka-2.0.0-2 --checksum a4acb20aa5f0c5111f5dd266a17b81fcdcb399ff2151922b3a7c23bd31a86e3b
+RUN bitnami-pkg unpack kafka-2.0.0-3 --checksum 0d4ed2213fb212541a9733196e330659d8620f1131c43761c5af96b398164152
 
 COPY rootfs /
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.0.0-debian-9-r37" \
+    BITNAMI_IMAGE_VERSION="2.0.0-debian-9-r38" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_BROKER_ID="-1" \
     KAFKA_BROKER_PASSWORD="bitnami" \
@@ -23,6 +23,7 @@ ENV ALLOW_PLAINTEXT_LISTENER="no" \
     KAFKA_INTER_BROKER_PASSWORD="bitnami" \
     KAFKA_INTER_BROKER_USER="admin" \
     KAFKA_LISTENERS="PLAINTEXT://:9092" \
+    KAFKA_LISTENER_SECURITY_PROTOCOL_MAP="PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL" \
     KAFKA_LOGS_DIRS="/opt/bitnami/kafka/data" \
     KAFKA_LOG_FLUSH_INTERVAL_MESSAGES="10000" \
     KAFKA_LOG_FLUSH_INTERVAL_MS="1000" \
