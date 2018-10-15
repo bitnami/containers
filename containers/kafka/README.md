@@ -61,7 +61,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.0.0-ol-7-r58` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.0.0-ol-7-r58/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.0.0-ol-7-r59` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.0.0-ol-7-r59/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.0.0-debian-9-r37`, `2`, `2.0.0`, `2.0.0-r37`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.0.0-debian-9-r37/2/debian-9/Dockerfile)
 * [`1-ol-7`, `1.1.1-ol-7-r68` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r68/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.1.1-debian-9-r41`, `1`, `1.1.1`, `1.1.1-r41` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r41/1/debian-9/Dockerfile)
@@ -220,6 +220,7 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 - `KAFKA_DELETE_TOPIC_ENABLE`: Switch to enable topic deletion or not, default value is false. Default: **false**
 - `KAFKA_LISTENERS`: The address the socket server listens on. Default: **PLAINTEXT://:9092**
 - `KAFKA_ADVERTISED_LISTENERS`: Hostname and port the broker will advertise to producers and consumers. Default: **PLAINTEXT://:9092**
+- `KAFKA_LISTENER_SECURITY_PROTOCOL_MAP`: Maps listener names to security protocols. Default: **PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL**
 - `KAFKA_NUM_PARTITIONS`: The default number of log partitions per topic. Default: **1**
 - `KAFKA_NUM_RECOVERY_THREADS_PER_DATA_DIR` The number of threads per data directory to be used for log recovery at startup and flushing at shutdown. Default: **1**
 - `KAFKA_MAX_MESSAGE_BYTES`: The largest record batch size allowed by Kafka. Default: **1000012**
