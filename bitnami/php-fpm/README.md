@@ -26,6 +26,11 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/4eba7266a14620bbccd57d6bbda9f42ad5bfd19c03f2d983c543813057025dac)](https://anchore.io/image/dockerhub/bitnami%2Fphp-fpm%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # Supported tags and respective `Dockerfile` links
 
@@ -37,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`7.2-rhel-7`, `7.2.11-rhel-7-r1` (7.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.11-rhel-7-r1/7.2/rhel-7/Dockerfile)
 * [`7.2-ol-7`, `7.2.11-ol-7-r3` (7.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.11-ol-7-r3/7.2/ol-7/Dockerfile)
-* [`7.2-debian-9`, `7.2.11-debian-9-r4`, `7.2`, `7.2.11`, `7.2.11-r4` (7.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.11-debian-9-r4/7.2/debian-9/Dockerfile)
+* [`7.2-debian-9`, `7.2.11-debian-9-r5`, `7.2`, `7.2.11`, `7.2.11-r5` (7.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.11-debian-9-r5/7.2/debian-9/Dockerfile)
 * [`7.1-rhel-7`, `7.1.23-rhel-7-r1` (7.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.23-rhel-7-r1/7.1/rhel-7/Dockerfile)
 * [`7.1-ol-7`, `7.1.23-ol-7-r4` (7.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.23-ol-7-r4/7.1/ol-7/Dockerfile)
 * [`7.1-debian-9`, `7.1.23-debian-9-r4`, `7.1`, `7.1.23`, `7.1.23-r4`, `latest` (7.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.23-debian-9-r4/7.1/debian-9/Dockerfile)
