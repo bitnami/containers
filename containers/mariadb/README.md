@@ -26,6 +26,11 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/cba611544537b4fa24fd6160ba7b1601e344fef5cae816522264bfe0380b760a)](https://anchore.io/image/dockerhub/bitnami%2Fmariadb%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # How to deploy MariaDB in Kubernetes?
 
@@ -46,7 +51,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10.2-rhel-7`, `10.2.18-rhel-7-r3` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.18-rhel-7-r3/10.2/rhel-7/Dockerfile)
-* [`10.2-ol-7`, `10.2.18-ol-7-r15` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.18-ol-7-r15/10.2/ol-7/Dockerfile)
+* [`10.2-ol-7`, `10.2.18-ol-7-r16` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.18-ol-7-r16/10.2/ol-7/Dockerfile)
 * [`10.2-debian-9`, `10.2.18-debian-9-r15`, `10.2`, `10.2.18`, `10.2.18-r15` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.18-debian-9-r15/10.2/debian-9/Dockerfile)
 * [`10.1-rhel-7`, `10.1.36-rhel-7-r7` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.36-rhel-7-r7/10.1/rhel-7/Dockerfile)
 * [`10.1-ol-7`, `10.1.36-ol-7-r39` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.36-ol-7-r39/10.1/ol-7/Dockerfile)
