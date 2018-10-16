@@ -1,13 +1,13 @@
 
-FROM bitnami/ruby:2.3.7-ol-7-r102 as development
+FROM bitnami/ruby:2.3.7-ol-7-r103 as development
 
-FROM bitnami/oraclelinux-runtimes:7-r110
+FROM bitnami/oraclelinux-runtimes:7-r111
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=development /opt/bitnami/ruby /opt/bitnami/ruby
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.3.7-ol-7-r102" \
+    BITNAMI_IMAGE_VERSION="2.3.7-ol-7-r103" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 CMD [ "irb" ]
