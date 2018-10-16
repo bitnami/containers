@@ -22,6 +22,11 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/83ba3aef5e8d8d5fce5923a81d34802a7970a7cfbc2ce6222d0ba2e02fc8f3a6)](https://anchore.io/image/dockerhub/bitnami%2Fprestashop%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # How to deploy PrestaShop in Kubernetes?
 
@@ -37,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.7-ol-7`, `1.7.4-3-ol-7-r8` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.4-3-ol-7-r8/1.7/ol-7/Dockerfile)
-* [`1.7-debian-9`, `1.7.4-3-debian-9-r8`, `1.7`, `1.7.4-3`, `1.7.4-3-r8`, `latest` (1.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.4-3-debian-9-r8/1.7/debian-9/Dockerfile)
+* [`1.7-debian-9`, `1.7.4-3-debian-9-r9`, `1.7`, `1.7.4-3`, `1.7.4-3-r9`, `latest` (1.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.4-3-debian-9-r9/1.7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
