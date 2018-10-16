@@ -24,6 +24,11 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/aa6e5e6cca629759c021223d334c12641d6ba8a61f76ad9e8355500c2bae2818)](https://anchore.io/image/dockerhub/bitnami%2Fpostgresql%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # How to deploy PostgreSQL in Kubernetes?
 
@@ -43,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10-ol-7`, `10.5.0-ol-7-r39` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.5.0-ol-7-r39/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.5.0-debian-9-r51`, `10`, `10.5.0`, `10.5.0-r51`, `latest` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.5.0-debian-9-r51/10/debian-9/Dockerfile)
+* [`10-debian-9`, `10.5.0-debian-9-r52`, `10`, `10.5.0`, `10.5.0-r52`, `latest` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.5.0-debian-9-r52/10/debian-9/Dockerfile)
 * [`9.6-ol-7`, `9.6.10-ol-7-r55` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.10-ol-7-r55/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.10-debian-9-r46`, `9.6`, `9.6.10`, `9.6.10-r46` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.10-debian-9-r46/9.6/debian-9/Dockerfile)
 
