@@ -28,7 +28,7 @@ $ docker-compose up -d
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore](https://anchore.io/service/badges/image/ce813289727eff658da36d4ad024da30dcbffd1af3e3863b3846a1177ac8cca9)](https://anchore.io/image/dockerhub/bitnami%2Fnginx%3Alatest#security)
+[![Anchore Image Overview](https://anchore.io/service/badges/image/c05cd3a99d56ca60b3926909f6ea12b19b72e209e20f7830b6a7e321f6205477)](https://anchore.io/image/dockerhub/bitnami%2Fnginx%3Alatest#security)
 
 > The image overview badge contains a security report with all open CVEs. Click 'Show only CVEs with fixes' to get the list of actionable security issues.
 
@@ -51,7 +51,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.14-rhel-7`, `1.14.0-rhel-7-r11` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-rhel-7-r11/1.14/rhel-7/Dockerfile)
-* [`1.14-ol-7`, `1.14.0-ol-7-r111` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-ol-7-r111/1.14/ol-7/Dockerfile)
+* [`1.14-ol-7`, `1.14.0-ol-7-r112` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-ol-7-r112/1.14/ol-7/Dockerfile)
 * [`1.14-debian-9`, `1.14.0-debian-9-r78`, `1.14`, `1.14.0`, `1.14.0-r78`, `latest` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-debian-9-r78/1.14/debian-9/Dockerfile)
 
 
