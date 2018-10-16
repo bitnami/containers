@@ -30,6 +30,11 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/407ffba4305ad706d438a46225cc852fb508d5d81dadeb187bc7358c37e082fe)](https://anchore.io/image/dockerhub/bitnami%2Ftensorflow-serving%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # Supported tags and respective `Dockerfile` links
 
@@ -39,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.11.0-ol-7-r8` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.11.0-ol-7-r8/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.11.0-debian-9-r10`, `1`, `1.11.0`, `1.11.0-r10`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.11.0-debian-9-r10/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.11.0-debian-9-r11`, `1`, `1.11.0`, `1.11.0-r11`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.11.0-debian-9-r11/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-serving GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-serving).
 
