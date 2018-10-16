@@ -26,6 +26,11 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/e08f1be0456c8da518f40b10ee255de184a58e2f03bedf1ff807e1d9bd7e8f5d)](https://anchore.io/image/dockerhub/bitnami%2Fpython%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # Supported tags and respective `Dockerfile` links
 
@@ -35,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3.7-ol-7`, `3.7.0-ol-7-r76` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.0-ol-7-r76/3.7/ol-7/Dockerfile)
-* [`3.7-debian-9`, `3.7.0-debian-9-r77`, `3.7`, `3.7.0`, `3.7.0-r77`, `latest` (3.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.0-debian-9-r77/3.7/debian-9/Dockerfile)
+* [`3.7-debian-9`, `3.7.0-debian-9-r78`, `3.7`, `3.7.0`, `3.7.0-r78`, `latest` (3.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.0-debian-9-r78/3.7/debian-9/Dockerfile)
 * [`3.6-ol-7`, `3.6.6-ol-7-r59` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.6-ol-7-r59/3.6/ol-7/Dockerfile)
 * [`3.6-debian-9`, `3.6.6-debian-9-r60`, `3.6`, `3.6.6`, `3.6.6-r60` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.6-debian-9-r60/3.6/debian-9/Dockerfile)
 * [`2-ol-7`, `2.7.15-ol-7-r102` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-ol-7-r102/2/ol-7/Dockerfile)
