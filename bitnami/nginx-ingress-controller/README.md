@@ -10,6 +10,7 @@ https://github.com/kubernetes/ingress-nginx
 
 Deploy NGINX Ingress Controller for Kubernetes on your [Kubernetes cluster](https://kubernetes.io/docs/concepts/services-networking/ingress/).
 
+
 ```bash
 $ docker run --name nginx-ingress-controller bitnami/nginx-ingress-controller:latest
 ```
@@ -21,10 +22,16 @@ $ docker run --name nginx-ingress-controller bitnami/nginx-ingress-controller:la
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/c1a373099176b0ad8ce9850c178faecb744190fefe376fc2d1011d8d77573725)](https://anchore.io/image/dockerhub/bitnami%2Fnginx-ingress-controller%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # How to deploy NGINX Ingress Controller in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami NGINX Ingress Controller Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/nginx-ingress-controller).
+
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -34,13 +41,15 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 
 * [`0-ol-7`, `0.20.0-ol-7-r5` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.20.0-ol-7-r5/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.20.0-debian-9-r5`, `0`, `0.20.0`, `0.20.0-r5`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.20.0-debian-9-r5/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.20.0-debian-9-r6`, `0`, `0.20.0`, `0.20.0-r6`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.20.0-debian-9-r6/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nginx-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller).
+
 
 # Configuration
 
 For further documentation, please check [here](https://github.com/kubernetes/ingress-nginx).
+
 
 # Contributing
 
