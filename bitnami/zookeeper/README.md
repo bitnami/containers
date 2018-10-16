@@ -32,6 +32,11 @@ services:
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/2aa1c2d848d0a101e0e5864fb99e76f2a2e42c311e41162dcaab8b17a23db6f9)](https://anchore.io/image/dockerhub/bitnami%2Fzookeeper%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # How to deploy ZooKeeper in Kubernetes?
 
@@ -51,7 +56,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.4.12-ol-7-r113` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-ol-7-r113/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.4.12-debian-9-r80`, `3`, `3.4.12`, `3.4.12-r80`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-debian-9-r80/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.4.12-debian-9-r81`, `3`, `3.4.12`, `3.4.12-r81`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-debian-9-r81/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
