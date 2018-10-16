@@ -24,6 +24,11 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/fa0a94ef8f0ccae21b2ef6c80178f8d2cc24e2e93e535bd13c3c85cc39ef4609)](https://anchore.io/image/dockerhub/bitnami%2Ftomcat%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # How to deploy Apache Tomcat in Kubernetes?
 
@@ -39,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`9.0-ol-7`, `9.0.12-ol-7-r36` (9.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.12-ol-7-r36/9.0/ol-7/Dockerfile)
-* [`9.0-debian-9`, `9.0.12-debian-9-r31`, `9.0`, `9.0.12`, `9.0.12-r31` (9.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.12-debian-9-r31/9.0/debian-9/Dockerfile)
+* [`9.0-debian-9`, `9.0.12-debian-9-r32`, `9.0`, `9.0.12`, `9.0.12-r32` (9.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.12-debian-9-r32/9.0/debian-9/Dockerfile)
 * [`8.5-ol-7`, `8.5.34-ol-7-r33` (8.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.34-ol-7-r33/8.5/ol-7/Dockerfile)
 * [`8.5-debian-9`, `8.5.34-debian-9-r29`, `8.5`, `8.5.34`, `8.5.34-r29`, `latest` (8.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.34-debian-9-r29/8.5/debian-9/Dockerfile)
 * [`8.0-ol-7`, `8.0.53-ol-7-r86` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-ol-7-r86/8.0/ol-7/Dockerfile)
