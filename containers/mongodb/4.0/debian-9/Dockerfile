@@ -6,16 +6,17 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libcomerr2 libcurl3 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle6 libnghttp2-14 libp11-kit0 libpcap0.8 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libtasn1-6 libunistring0 zlib1g
-RUN bitnami-pkg unpack mongodb-4.0.3-0 --checksum 943d3d3e96dcc66c362d8e63b91987d8de051440334161b7a70294193a5a52c6
+RUN bitnami-pkg unpack mongodb-4.0.3-1 --checksum cc51a3378c37705551d4a59b1131e0af92c6965b4aeb3631b4fbce06466979de
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.0.3-debian-9-r15" \
+    BITNAMI_IMAGE_VERSION="4.0.3-debian-9-r16" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_ENABLE_IPV6="yes" \
     MONGODB_PASSWORD="" \
+    MONGODB_PORT_NUMBER="27017" \
     MONGODB_PRIMARY_HOST="" \
     MONGODB_PRIMARY_PORT_NUMBER="27017" \
     MONGODB_PRIMARY_ROOT_PASSWORD="" \
