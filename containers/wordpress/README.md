@@ -22,6 +22,11 @@ $ docker-compose up
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/c77d63d345426c1ca2fc6ab778ba35cdd5029e201fbd0d4bdf410d119dd69ee0)](https://anchore.io/image/dockerhub/bitnami%2Fwordpress%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # How to deploy WordPress in Kubernetes?
 
@@ -40,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`4-rhel-7`, `4.9.8-rhel-7-r4` (4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.8-rhel-7-r4/4/rhel-7/Dockerfile)
 * [`4-php5-rhel-7`, `4.9.8-php5-rhel-7-r0` (4-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.8-php5-rhel-7-r0/4-php5/rhel-7/Dockerfile)
 * [`4-ol-7`, `4.9.8-ol-7-r65` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.8-ol-7-r65/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.9.8-debian-9-r47`, `4`, `4.9.8`, `4.9.8-r47`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.8-debian-9-r47/4/debian-9/Dockerfile)
+* [`4-debian-9`, `4.9.8-debian-9-r48`, `4`, `4.9.8`, `4.9.8-r48`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/4.9.8-debian-9-r48/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
