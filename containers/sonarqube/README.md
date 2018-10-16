@@ -22,6 +22,11 @@ $ docker-compose up
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/388793c0cc98e4e1531e69d1dfa6dae6fd0719342b2eacde83023b25f16ce3af)](https://anchore.io/image/dockerhub/bitnami%2Fsonarqube%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # Supported tags and respective `Dockerfile` links
 
@@ -29,7 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7-ol-7`, `7.3.0-ol-7-r9` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.3.0-ol-7-r9/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.3.0-debian-9-r11`, `7`, `7.3.0`, `7.3.0-r11`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.3.0-debian-9-r11/7/debian-9/Dockerfile)
+* [`7-debian-9`, `7.3.0-debian-9-r12`, `7`, `7.3.0`, `7.3.0-r12`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.3.0-debian-9-r12/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
 
