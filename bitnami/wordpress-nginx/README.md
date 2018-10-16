@@ -22,6 +22,11 @@ $ docker-compose up
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/4ad4ad6e5fe331807af502f7baf3eafb48166f2c284eeacd68834e8069ceb291)](https://anchore.io/image/dockerhub/bitnami%2Fwordpress-nginx%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # Supported tags and respective `Dockerfile` links
 
@@ -36,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`4-php5-ol-7`, `4.9.8-php5-ol-7-r63` (4-php5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-php5-ol-7-r63/4-php5/ol-7/Dockerfile)
 * [`4-php5-debian-9`, `4.9.8-php5-debian-9-r40`, `4-php5`, `4.9.8-php5`, `4.9.8-php5-r40` (4-php5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-php5-debian-9-r40/4-php5/debian-9/Dockerfile)
 * [`4-ol-7`, `4.9.8-ol-7-r25` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-ol-7-r25/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.9.8-debian-9-r65`, `4`, `4.9.8`, `4.9.8-r65`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-debian-9-r65/4/debian-9/Dockerfile)
+* [`4-debian-9`, `4.9.8-debian-9-r66`, `4`, `4.9.8`, `4.9.8-r66`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-debian-9-r66/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
 
