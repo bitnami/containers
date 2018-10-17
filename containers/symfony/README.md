@@ -22,6 +22,11 @@ $ docker-compose up
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/d8a1b4e39cdea41f654234ce999d0a9435b6be3a6176061735b29f9db36487d3)](https://anchore.io/image/dockerhub/bitnami%2Fsymfony%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -31,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.5.11-ol-7-r100` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-ol-7-r100/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.5.11-debian-9-r91`, `1`, `1.5.11`, `1.5.11-r91`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-9-r91/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.5.11-debian-9-r92`, `1`, `1.5.11`, `1.5.11-r92`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-9-r92/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
 
