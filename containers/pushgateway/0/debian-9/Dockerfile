@@ -1,10 +1,10 @@
 FROM bitnami/minideb:stretch as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/pushgateway-0.5.2-1-linux-amd64-debian-9.tar.gz && \
-    echo "a116b01708766bb389601ae096fc1330eefdc5ff28b3355beb5971903867f148  /tmp/bitnami/pkg/cache/pushgateway-0.5.2-1-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/pushgateway-0.5.2-1-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/pushgateway-0.5.2-1-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/pushgateway-0.6.0-0-linux-amd64-debian-9.tar.gz && \
+    echo "50c562a1487c497d98b489a62a432eb715b99d50215e12c59ed5f7302a41d1a9  /tmp/bitnami/pkg/cache/pushgateway-0.6.0-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/pushgateway-0.6.0-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/pushgateway-0.6.0-0-linux-amd64-debian-9.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/pushgateway /opt/bitnami/pushgateway
 ENV BITNAMI_APP_NAME="pushgateway" \
-    BITNAMI_IMAGE_VERSION="0.5.2-debian-9-r92" \
+    BITNAMI_IMAGE_VERSION="0.6.0-debian-9-r0" \
     PATH="/opt/bitnami/pushgateway/bin:$PATH"
 
 EXPOSE 9091
