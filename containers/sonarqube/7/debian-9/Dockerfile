@@ -3,13 +3,13 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libblkid1 libbsd0 libc6 libedit2 libffi6 libgcc1 libglib2.0-0 libicu57 liblzma5 libmount1 libncurses5 libpcre3 libselinux1 libssl1.1 libstdc++6 libtinfo5 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 zlib1g
-RUN bitnami-pkg unpack postgresql-client-10.5.0-0 --checksum de76584ffc33de387c33193bfd72eb31f7e7bd6511ed7899f7c92094f2d3be54
-RUN bitnami-pkg install java-1.8.191-0 --checksum 2f23447f7bde96965880a0325da05c343ceef82b2f151d8efb400c51588f52cf
-RUN bitnami-pkg unpack sonarqube-7.3.0-2 --checksum 393e1773b6b8b68337d03c0c05011e0e6c8c053a5a7275c46b72e5b0c0e77b4f
+RUN bitnami-pkg unpack postgresql-client-10.5.0-1 --checksum 398cca9d24dd92dec294fd5727fa0a4841847a88d1316a11a338fd7d208ccb8f
+RUN bitnami-pkg install java-1.8.191-1 --checksum f05ed830d741b7dbdb3d09066552239023730516bdd2fd64578b66decd0ff867
+RUN bitnami-pkg unpack sonarqube-7.3.0-3 --checksum cd8df99bf6e705b47b8fd5325a93987554de7cf325db0daff49800008a9c989e
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="7.3.0-debian-9-r13" \
+    BITNAMI_IMAGE_VERSION="7.3.0-debian-9-r14" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/java/bin:/opt/bitnami/sonarqube/bin/linux-x86-64/:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
