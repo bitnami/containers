@@ -1,18 +1,18 @@
-FROM bitnami/minideb-extras:stretch-r168
+FROM bitnami/minideb-extras:stretch-r170
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/"
 
 # Install required system packages and dependencies
-RUN install_packages libblkid1 libbsd0 libc6 libffi6 libgcc1 libglib2.0-0 libmount1 libpcre3 libselinux1 libstdc++6 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 zlib1g
-RUN bitnami-pkg install java-1.8.181-1 --checksum 66bba4b4a2647f981339d306da796905c222057c4277a5ef045e079981a404f4
+RUN install_packages libblkid1 libbsd0 libc6 libffi6 libgcc1 libglib2.0-0 libmount1 libpcre3 libselinux1 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 zlib1g
+RUN bitnami-pkg install java-1.8.191-0 --checksum 2f23447f7bde96965880a0325da05c343ceef82b2f151d8efb400c51588f52cf
 RUN bitnami-pkg unpack kafka-2.0.0-3 --checksum 0d4ed2213fb212541a9733196e330659d8620f1131c43761c5af96b398164152
 
 COPY rootfs /
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.0.0-debian-9-r39" \
+    BITNAMI_IMAGE_VERSION="2.0.0-debian-9-r40" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_BROKER_ID="-1" \
     KAFKA_BROKER_PASSWORD="bitnami" \
