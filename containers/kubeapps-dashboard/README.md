@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.0.0-beta.3-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-dashboard/blob/1.0.0-beta.3-ol-7-r0/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.0.0-beta.2-debian-9-r7`, `1`, `1.0.0-beta.2`, `1.0.0-beta.2-r7`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-dashboard/blob/1.0.0-beta.2-debian-9-r7/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.0.0-beta.3-debian-9-r0`, `1`, `1.0.0-beta.3`, `1.0.0-beta.3-r0`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-dashboard/blob/1.0.0-beta.3-debian-9-r0/1/debian-9/Dockerfile)
 
 # Configuration
 
