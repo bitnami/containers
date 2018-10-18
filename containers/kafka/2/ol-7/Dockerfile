@@ -6,13 +6,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glib2 glibc libblkid libffi libgcc libmount libselinux libuuid pcre zlib
-RUN bitnami-pkg install java-1.8.191-0 --checksum b5815af4fe18301a0aebb58ae6fdb84444173c14f15252e8d8fe4015c454a43d
-RUN bitnami-pkg unpack kafka-2.0.0-3 --checksum b0d62906ecd5f3016fdd7210e7f92c70ffb2e3bdd3b0cac0be9c2a39646ec350
+RUN bitnami-pkg install java-1.8.191-1 --checksum 3997bf3325da463f2392c36882a1d56e52b5a52ce7124b7895755b4e95454032
+RUN bitnami-pkg unpack kafka-2.0.0-5 --checksum acb10a19e272f8013f9764d30ad5e79e075433adadb2fbb82b92bb9a19f0cb64
 
 COPY rootfs /
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.0.0-ol-7-r61" \
+    BITNAMI_IMAGE_VERSION="2.0.0-ol-7-r62" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_BROKER_ID="-1" \
     KAFKA_BROKER_PASSWORD="bitnami" \
@@ -20,6 +20,7 @@ ENV ALLOW_PLAINTEXT_LISTENER="no" \
     KAFKA_CERTIFICATE_PASSWORD="" \
     KAFKA_DELETE_TOPIC_ENABLE="false" \
     KAFKA_HEAP_OPTS="-Xmx1024m -Xms1024m" \
+    KAFKA_INTER_BROKER_LISTENER_NAME="" \
     KAFKA_INTER_BROKER_PASSWORD="bitnami" \
     KAFKA_INTER_BROKER_USER="admin" \
     KAFKA_LISTENERS="PLAINTEXT://:9092" \
