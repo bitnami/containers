@@ -1,17 +1,17 @@
-FROM bitnami/oraclelinux-extras:7-r140
+FROM bitnami/oraclelinux-extras:7-r141
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages cyrus-sasl-lib glib2 glibc keyutils-libs krb5-libs libblkid libcom_err libcurl libffi libgcc libidn libmount libselinux libssh2 libstdc++ libuuid nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre unzip zlib
-RUN bitnami-pkg install java-1.8.181-1 --checksum 6e7fc2779b6e0e3c6c0a2687b1d747d8a427594ff80b8c94b055c839e387e6b1
-RUN bitnami-pkg install git-2.19.1-0 --checksum a50a849103d0908bb94c4a048622aae0b090af99739309f7f2a093e119e9453e
-RUN bitnami-pkg unpack jenkins-2.138.2-0 --checksum bbb03d36ce0f1e086bec9801ea291ee54f8c0af4f16d8d7541bded00c621b08e
+RUN install_packages cyrus-sasl-lib glib2 glibc keyutils-libs krb5-libs libblkid libcom_err libcurl libffi libgcc libidn libmount libselinux libssh2 libuuid nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre unzip zlib
+RUN bitnami-pkg install java-1.8.191-1 --checksum 3997bf3325da463f2392c36882a1d56e52b5a52ce7124b7895755b4e95454032
+RUN bitnami-pkg install git-2.19.1-1 --checksum 9786936ea9b2cbcf5932fe704943f895acf89e38814d5d0ce24bd3213d384f40
+RUN bitnami-pkg unpack jenkins-2.138.2-1 --checksum 5a8098191241cf0c95310f838fa47b81c5380c7ec2aa881da383875b68ce16da
 RUN mkdir -p /usr/share/jenkins/ref
 
 COPY rootfs /
 RUN ln -sf /install-plugins.sh /usr/local/bin/install-plugins.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.138.2-ol-7-r6" \
+    BITNAMI_IMAGE_VERSION="2.138.2-ol-7-r7" \
     DISABLE_JENKINS_INITIALIZATION="no" \
     JAVA_OPTS="" \
     JENKINS_HOME="/opt/bitnami/jenkins/jenkins_home" \
