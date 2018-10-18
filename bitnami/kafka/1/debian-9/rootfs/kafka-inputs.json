@@ -9,6 +9,7 @@
   "kafkaHeapOpts": "{{$global.env.KAFKA_HEAP_OPTS}}",
   "kafkaInterBrokerPassword": "{{$global.env.KAFKA_INTER_BROKER_PASSWORD}}",
   "kafkaInterBrokerUser": "{{$global.env.KAFKA_INTER_BROKER_USER}}",
+  "kafkaListenerSecurityProtocolMap": "{{$global.env.KAFKA_LISTENER_SECURITY_PROTOCOL_MAP}}",
   "kafkaListeners": "{{$global.env.KAFKA_LISTENERS}}",
   "kafkaLogFlushIntervalMessages": "{{$global.env.KAFKA_LOG_FLUSH_INTERVAL_MESSAGES}}",
   "kafkaLogFlushIntervalMs": "{{$global.env.KAFKA_LOG_FLUSH_INTERVAL_MS}}",
