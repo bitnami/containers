@@ -1,10 +1,10 @@
 FROM bitnami/ruby:2.5-ol-7 as buildenv
 
 RUN install_packages ca-certificates glibc libgcc libstdc++ nss-softokn-freebl wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluentd-1.2.6-0-linux-x86_64-ol-7.tar.gz && \
-    echo "5a0227bb9eff233dbffde2efd1efe7b6620d1e4c3b3d29ffdc1ff9d793d9e5f3  /tmp/bitnami/pkg/cache/fluentd-1.2.6-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/fluentd-1.2.6-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/fluentd-1.2.6-0-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluentd-1.2.6-2-linux-x86_64-ol-7.tar.gz && \
+    echo "71a23367e4b0364dd54a513498c0d7abc572f20cd28c26b521eee183f0b4a235  /tmp/bitnami/pkg/cache/fluentd-1.2.6-2-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/fluentd-1.2.6-2-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/fluentd-1.2.6-2-linux-x86_64-ol-7.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/fluentd /opt/bitnami/fluentd
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.2.6-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="1.2.6-ol-7-r12" \
     FLUENTD_CONF="fluentd.conf" \
     FLUENTD_OPT="" \
     GEM_HOME="/opt/bitnami/fluentd" \
