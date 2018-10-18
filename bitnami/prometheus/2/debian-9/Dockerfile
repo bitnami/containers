@@ -13,9 +13,10 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/prometheus /opt/bitnami/prometheus
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.4.3-debian-9-r15" \
+    BITNAMI_IMAGE_VERSION="2.4.3-debian-9-r16" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
+RUN install_packages ca-certificates
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
 
 EXPOSE 9090
