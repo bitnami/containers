@@ -11,7 +11,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libcom_err libselinux nss-softokn-freebl openssl-libs pcre zlib
 RUN . ./libcomponent.sh && component_unpack "nginx" "1.14.0-4" --checksum 03cc1bffbb50ede2e777edcb4be83d9c16cde934e86fcc8b417b115ea4bcd615
-RUN . ./libcomponent.sh && component_unpack "kubeapps-dashboard" "1.0.0-beta.2-1" --checksum fa61ce97bc427f758425c5867824b67c9285d3f5ea8c910a95465521fd05ab4d
+RUN . ./libcomponent.sh && component_unpack "kubeapps-dashboard" "1.0.0-beta.3-0" --checksum 3c17cdd4a9f44d204f28c2984beb6f6a94674d72c8005b466b9535693bad426c
 RUN ln -sf /opt/bitnami/nginx/html /app
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /prepare.sh
 RUN rm -rf /opt/bitnami/nginx/html && mv /opt/bitnami/kubeapps-dashboard/build /opt/bitnami/nginx/html
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.0.0-beta.2-ol-7-r8" \
+    BITNAMI_IMAGE_VERSION="1.0.0-beta.3-ol-7-r0" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
     NGINX_HTTP_PORT_NUMBER="8080" \
