@@ -1,15 +1,15 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-consul/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-consul/tree/master)
 
-# What is Consul?
+# What is HashiCorp Consul?
 
-Consul has multiple components, bus as a whole, it is a tool for discovering and configuring services in your infrastructure. It provides several key features:
+HashiCorp Consul has multiple components, bus as a whole, it is a tool for discovering and configuring services in your infrastructure. It provides several key features:
 
 - Service Discovery
 - Health Checking
 - KV Store
 - Multi Datacenter
 
-Consul is designed to be friendly to both the DevOps community and application developers, making it perfect for modern, elastic infrastructures.
+HashiCorp Consul is designed to be friendly to both the DevOps community and application developers, making it perfect for modern, elastic infrastructures.
 
 [https://www.consul.io/](https://www.consul.io/)
 
@@ -39,9 +39,9 @@ $ docker-compose up -d
 
 > The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
-# How to deploy Consul in Kubernetes?
+# How to deploy HashiCorp Consul in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Consul Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/consul).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami HashiCorp Consul Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/consul).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -53,13 +53,13 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.3.0-ol-7-r7` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.3.0-ol-7-r7/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.3.0-debian-9-r1`, `1`, `1.3.0`, `1.3.0-r1`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.3.0-debian-9-r1/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.3.0-debian-9-r2`, `1`, `1.3.0`, `1.3.0-r2`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.3.0-debian-9-r2/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/consul GitHub repo](https://github.com/bitnami/bitnami-docker-consul).
 
 # Get this image
 
-The recommended way to get the Bitnami Consul Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/consul).
+The recommended way to get the Bitnami HashiCorp Consul Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/consul).
 
 ```bash
 $ docker pull bitnami/consul:latest
@@ -81,7 +81,7 @@ $ docker build -t bitnami/consul:latest https://github.com/bitnami/bitnami-docke
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a volume at the `/bitnami` path. The above examples define a docker volume namely `consul_data`. The Consul application state will persist as long as this volume is not removed.
+For persistence you should mount a volume at the `/bitnami` path. The above examples define a docker volume namely `consul_data`. The HashiCorp Consul application state will persist as long as this volume is not removed.
 
 To avoid inadvertent removal of this volume you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -112,7 +112,7 @@ Containers attached to the same network can communicate with each other using th
 $ docker network create consul-network --driver bridge
 ```
 
-### Step 2: Launch the Consul container within your network
+### Step 2: Launch the HashiCorp Consul container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `consul-network` network.
 
@@ -159,11 +159,11 @@ $ docker-compose up -d
 
 ## Docker Compose
 
-This is the simplest way to run Consul with clustering configuration:
+This is the simplest way to run HashiCorp Consul with clustering configuration:
 
 #### Step 1: Add a server node in your `docker-compose.yml`
 
-Copy the snippet below into your docker-compose.yml to add a Consul server node to your cluster configuration.
+Copy the snippet below into your docker-compose.yml to add a HashiCorp Consul server node to your cluster configuration.
 
 ```yaml
 version: '2'
@@ -191,7 +191,7 @@ services:
 
 #### Step 2: Add extra nodes to your configuration
 
-Update the definitions for nodes you want your Consul node cluster with.
+Update the definitions for nodes you want your HashiCorp Consul node cluster with.
 
 ```yaml
 consul-node2:
@@ -287,23 +287,23 @@ volumes:
 
 ## Environment variables
 
-When you start the Consul image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. The following environment values are provided to custom Consul:
+When you start the HashiCorp Consul image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. The following environment values are provided to custom HashiCorp Consul:
 
-- `CONSUL_SERVER_MODE`: Indicates if Consul is running in server or client mode. Valid values: server, client. Default: **server**.
+- `CONSUL_SERVER_MODE`: Indicates if HashiCorp Consul is running in server or client mode. Valid values: server, client. Default: **server**.
 - `CONSUL_SERF_LAN_ADDRESS`: Address used for Serf LAN communications. Default: **0.0.0.0**.
-- `CONSUL_CLIENT_LAN_ADDRESS`: Address in which Consul will bind client interfaces. Default: **0.0.0.0**.
+- `CONSUL_CLIENT_LAN_ADDRESS`: Address in which HashiCorp Consul will bind client interfaces. Default: **0.0.0.0**.
 - `CONSUL_SERF_LAN_PORT_NUMBER`: Serf LAN port. Defualt: **8301**.
 - `CONSUL_HTTP_PORT_NUMBER`: HTTP API port, used also for the UI. Default: **8500**.
 - `CONSUL_DNS_PORT_NUMBER`: DNS service port. Default: **8600**.
 - `CONSUL_RPC_PORT_NUMBER`: Server RPC port. Default: **8300**.
-- `CONSUL_RAFT_MULTIPLIER`: An integer multiplier used by Consul servers to scale key Raft timing parameters. Default: **1**.
+- `CONSUL_RAFT_MULTIPLIER`: An integer multiplier used by HashiCorp Consul servers to scale key Raft timing parameters. Default: **1**.
 - `CONSUL_LOCAL_CONFIG`: Custom user configuration that will be added as a file in the config dir.
 - `CONSUL_GOSSIP_ENCRYPTION`: Enable Gossip encryption. Default: **no**.
 - `CONSUL_GOSSIP_ENCRYPTION_KEY`: Gossip private simmetric key.
 - `CONSUL_DISABLE_KEYRING_FILE`: If set, the keyring will not be persisted to a file. Valid vaules: true, false. Default: **false**.
 - `CONSUL_UI`: Enable web user interface. Valid values: true, false. Default: **true**.
 - `CONSUL_BOOTSTRAP_EXPECT`: Number of expected nodes in the cluster, including itself. Default: **1**.
-- `CONSUL_DOMAIN`: Consul domain name. Default: **consul**.
+- `CONSUL_DOMAIN`: HashiCorp Consul domain name. Default: **consul**.
 - `CONSUL_DATACENTER"`: The datacenter in which the agent is running. Default: **dc1**.
 - `CONSUL_RETRY_JOIN`: "Address of another agent to join upon starting up. Default: **127.0.0.1**
 
@@ -322,14 +322,14 @@ consul:
 $ docker run -d -e CONSUL_HTTP_PORT_NUMBER=8888 --name consul bitnami/consul:latest
 ```
 
-## Using custom Consul configuration files
+## Using custom HashiCorp Consul configuration files
 
 In order to load your own configuration files, you will have to make them available to the container. You can do it doing the following:
 
 - Mounting a volume with your custom configuration
 - Adding custom configuration via environment variable.
 
-By default, the configuration of Consul is written to `/opt/bitnami/consul/consul.json` file  and persisted with the following content:
+By default, the configuration of HashiCorp Consul is written to `/opt/bitnami/consul/consul.json` file  and persisted with the following content:
 
 ```json
 {
@@ -356,7 +356,7 @@ By default, the configuration of Consul is written to `/opt/bitnami/consul/consu
 
 ### Configuring environment variables
 
-Configuration can be added by passing the configuration in JSON format via the environment variable `CONSUL_LOCAL_CONFIG`. Then consul will write a `local.json` file in the Consul configuration directory. Consul will load all files within the configuration directory in alphabetical order, so ones with starting with higher letters will prevail.
+Configuration can be added by passing the configuration in JSON format via the environment variable `CONSUL_LOCAL_CONFIG`. Then consul will write a `local.json` file in the HashiCorp Consul configuration directory. HashiCorp Consul will load all files within the configuration directory in alphabetical order, so ones with starting with higher letters will prevail.
 
 ```bash
 $ docker run -d -e CONSUL_LOCAL_CONFIG='{
@@ -369,10 +369,10 @@ $ docker run -d -e CONSUL_LOCAL_CONFIG='{
 
 ### Mounting a volume
 
-Check the [Persisting your data](# Persisting your application) section to add custom volumes to the Consul container
+Check the [Persisting your data](# Persisting your application) section to add custom volumes to the HashiCorp Consul container
 
 ## Configuring the Gossip encryption key
-Specifies the secret key to use for encryption of Consul network traffic. This key must be 16-bytes that are Base64-encoded. The easiest way to create an encryption key is to use `consul keygen`
+Specifies the secret key to use for encryption of HashiCorp Consul network traffic. This key must be 16-bytes that are Base64-encoded. The easiest way to create an encryption key is to use `consul keygen`
 
 ```bash
 $ docker run --name consul bitnami/consul:latest consul keygen
@@ -394,7 +394,7 @@ consul:
 ```
 
 
-The container has a Consul configuration directory set up at /consul/config and the agent will load any configuration files placed here by binding a volume or by composing a new image and adding files. Alternatively, configuration can be added by passing the configuration JSON via environment variable CONSUL_LOCAL_CONFIG. If this is bind mounted then ownership will be changed to the consul user when the container starts.
+The container has a HashiCorp Consul configuration directory set up at /consul/config and the agent will load any configuration files placed here by binding a volume or by composing a new image and adding files. Alternatively, configuration can be added by passing the configuration JSON via environment variable CONSUL_LOCAL_CONFIG. If this is bind mounted then ownership will be changed to the consul user when the container starts.
 
 # Logging
 
