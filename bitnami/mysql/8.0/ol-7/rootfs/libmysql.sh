@@ -135,6 +135,7 @@ bind-address=0.0.0.0
 log-error=$DB_LOGDIR/mysqld.log
 character-set-server=UTF8
 collation-server=utf8_general_ci
+plugin_dir=$DB_BASEDIR/plugin
 
 [client]
 port=$DB_PORT_NUMBER
