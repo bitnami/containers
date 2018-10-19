@@ -1,17 +1,17 @@
-FROM bitnami/oraclelinux-extras:7-r140
+FROM bitnami/oraclelinux-extras:7-r142
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ImageMagick bzip2-libs cyrus-sasl-lib expat fontconfig freetype glibc jbigkit-libs keyutils-libs krb5-libs libICE libSM libX11 libXau libXext libXt libcom_err libcurl libgcc libgomp libidn libjpeg-turbo libselinux libssh2 libstdc++ libtiff libtool-ltdl libuuid libxcb libxml2 libxslt mariadb-libs ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline xz-libs zlib
-RUN bitnami-pkg install ruby-2.4.4-0 --checksum 8623ed8b7963916ff7f5ecf56c62ce3c144a1d11e56767500d0034c8e4f7e17c
-RUN bitnami-pkg install postgresql-client-9.6.10-0 --checksum 8060eeb7977a80dacb9bbcbc9d6081a6c6472d5fcee25e63bab04a1f128b5489
-RUN bitnami-pkg install mysql-client-10.1.36-0 --checksum 066d5ea1a684175a9a9709a0d7d1585067324f58bcd8a569d1fd8e61028dc71b
-RUN bitnami-pkg install git-2.19.1-0 --checksum a50a849103d0908bb94c4a048622aae0b090af99739309f7f2a093e119e9453e
+RUN bitnami-pkg install ruby-2.4.5-0 --checksum baaa19777c655cdffb5859b412518719f3715cf17446e3c72369bdc876734f8c
+RUN bitnami-pkg install postgresql-client-9.6.10-1 --checksum 51146a16db5ec6a3a2c2f007935ee5bd1da74fe1e5ba2b19a08b15976e8338cb
+RUN bitnami-pkg install mysql-client-10.1.36-1 --checksum 37104f4fe6e526bbb437f61c33ecd8d14b2d576bc6d29b969daa252285acfd00
+RUN bitnami-pkg install git-2.19.1-1 --checksum 9786936ea9b2cbcf5932fe704943f895acf89e38814d5d0ce24bd3213d384f40
 RUN bitnami-pkg unpack redmine-3.4.6-2 --checksum 7ee7dac9288859017f7c38f9d2451aa3d74f781cad3fe1e27c0a8361c05daf52
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="3.4.6-ol-7-r107" \
+    BITNAMI_IMAGE_VERSION="3.4.6-ol-7-r108" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH" \
     REDMINE_DB_MYSQL="mariadb" \
     REDMINE_DB_PASSWORD="" \
