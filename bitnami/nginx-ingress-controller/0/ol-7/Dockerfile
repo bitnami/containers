@@ -21,7 +21,7 @@ COPY --from=buildenv /opt/bitnami/lua /opt/bitnami/lua
 COPY --from=buildenv /opt/bitnami/nginx /opt/bitnami/nginx
 COPY --from=buildenv /opt/bitnami/nginx-ingress-controller /opt/bitnami/nginx-ingress-controller
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.20.0-ol-7-r12" \
+    BITNAMI_IMAGE_VERSION="0.20.0-ol-7-r13" \
     PATH="/opt/bitnami/nginx-ingress-controller/bin:$PATH"
 
 RUN rpm -Uvh https://s3.amazonaws.com/aaronsilber/public/authbind-2.1.1-0.1.x86_64.rpm
