@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/service-catalog /opt/bitnami/service-catalog
 ENV BITNAMI_APP_NAME="service-catalog" \
-    BITNAMI_IMAGE_VERSION="0.1.36-ol-7-r5" \
+    BITNAMI_IMAGE_VERSION="0.1.36-ol-7-r6" \
     PATH="/opt/bitnami/service-catalog/bin:$PATH"
 
 EXPOSE 8443 443
