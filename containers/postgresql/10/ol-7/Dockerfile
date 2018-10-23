@@ -13,7 +13,7 @@ RUN chmod -R g+rwX /opt/bitnami/postgresql/conf/
 COPY rootfs /
 RUN rpm -Uvh --nodeps $(repoquery --location nss_wrapper)
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="10.5.0-ol-7-r49" \
+    BITNAMI_IMAGE_VERSION="10.5.0-ol-7-r50" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
     POSTGRESQL_MASTER_HOST="" \
