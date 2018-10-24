@@ -39,10 +39,10 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.7-ol-7`, `3.7.1-ol-7-r0` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.1-ol-7-r0/3.7/ol-7/Dockerfile)
+* [`3.7-ol-7`, `3.7.1-ol-7-r1` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.1-ol-7-r1/3.7/ol-7/Dockerfile)
 * [`3.7-debian-9`, `3.7.1-debian-9-r1`, `3.7`, `3.7.1`, `3.7.1-r1`, `latest` (3.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.1-debian-9-r1/3.7/debian-9/Dockerfile)
-* [`3.6-ol-7`, `3.6.7-ol-7-r0` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.7-ol-7-r0/3.6/ol-7/Dockerfile)
-* [`3.6-debian-9`, `3.6.7-debian-9-r0`, `3.6`, `3.6.7`, `3.6.7-r0` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.7-debian-9-r0/3.6/debian-9/Dockerfile)
+* [`3.6-ol-7`, `3.6.7-ol-7-r1` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.7-ol-7-r1/3.6/ol-7/Dockerfile)
+* [`3.6-debian-9`, `3.6.7-debian-9-r1`, `3.6`, `3.6.7`, `3.6.7-r1` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.7-debian-9-r1/3.6/debian-9/Dockerfile)
 * [`2-ol-7`, `2.7.15-ol-7-r111` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-ol-7-r111/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.7.15-debian-9-r100`, `2`, `2.7.15`, `2.7.15-r100` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-debian-9-r100/2/debian-9/Dockerfile)
 
