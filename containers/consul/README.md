@@ -53,7 +53,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.3.0-ol-7-r17` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.3.0-ol-7-r17/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.3.0-debian-9-r11`, `1`, `1.3.0`, `1.3.0-r11`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.3.0-debian-9-r11/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.3.0-debian-9-r12`, `1`, `1.3.0`, `1.3.0-r12`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.3.0-debian-9-r12/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/consul GitHub repo](https://github.com/bitnami/bitnami-docker-consul).
 
