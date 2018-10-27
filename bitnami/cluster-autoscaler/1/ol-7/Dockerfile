@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r149 as buildenv
+FROM bitnami/oraclelinux-extras:7-r150 as buildenv
 
 RUN install_packages ca-certificates glibc wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cluster-autoscaler-1.12.0-0-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r149
+FROM bitnami/oraclelinux-extras:7-r150
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/cluster-autoscaler /opt/bitnami/cluster-autoscaler
 ENV BITNAMI_APP_NAME="cluster-autoscaler" \
-    BITNAMI_IMAGE_VERSION="1.12.0-ol-7-r2" \
+    BITNAMI_IMAGE_VERSION="1.12.0-ol-7-r3" \
     PATH="/opt/bitnami/cluster-autoscaler/bin:$PATH"
 
 RUN install_packages ca-certificates
