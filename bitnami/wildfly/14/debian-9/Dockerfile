@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r180
+FROM bitnami/minideb-extras:stretch-r181
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="14.0.1-debian-9-r42" \
+    BITNAMI_IMAGE_VERSION="14.0.1-debian-9-r43" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_JAVA_HOME="" \
     WILDFLY_JAVA_OPTS="" \
