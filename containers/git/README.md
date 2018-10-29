@@ -21,6 +21,8 @@ $ docker run --name git bitnami/git:latest
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
+[![Anchore Image Overview](https://anchore.io/service/badges/image/a2ae03b31357aaad576ae5f527b2c319bfb241a9112529129baea26005ea1186)](https://anchore.io/image/dockerhub/bitnami%2Fgit%3Alatest#security)
+
 > The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # Supported tags and respective `Dockerfile` links
