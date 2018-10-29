@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r176
+FROM bitnami/minideb-extras:stretch-r181
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,13 +6,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libbsd0 libc6 libedit2 libgcc1 libicu57 liblzma5 libncurses5 libnss-wrapper libssl1.1 libstdc++6 libtinfo5 libxml2 libxslt1.1 zlib1g
-RUN bitnami-pkg unpack postgresql-10.5.0-5 --checksum aaf14dfb40cf9d381b548c6522d0ba248d03a2b2e437b8a4b310db075c30d190
+RUN bitnami-pkg unpack postgresql-10.5.0-6 --checksum 63c04c358f3d9468def085fb4833b849464f8128f3e9a4df15453f869eb5b59e
 RUN mkdir /docker-entrypoint-initdb.d /opt/bitnami/postgresql/conf/
 RUN chmod -R g+rwX /opt/bitnami/postgresql/conf/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="10.5.0-debian-9-r62" \
+    BITNAMI_IMAGE_VERSION="10.5.0-debian-9-r63" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
     POSTGRESQL_MASTER_HOST="" \
