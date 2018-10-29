@@ -7,7 +7,7 @@ RUN bitnami-pkg install git-2.19.1-2 --checksum f216b1ac61b0bf86f3531671dee5be53
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="git" \
-    BITNAMI_IMAGE_VERSION="2.19.1-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="2.19.1-ol-7-r2" \
     PATH="/opt/bitnami/git/bin:$PATH"
 
 ENTRYPOINT [ "git" ]
