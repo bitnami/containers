@@ -32,8 +32,8 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-ol-7`, `4.16.4-ol-7-r19` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.16.4-ol-7-r19/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.16.4-debian-9-r16`, `4`, `4.16.4`, `4.16.4-r16`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.16.4-debian-9-r16/4/debian-9/Dockerfile)
+* [`4-ol-7`, `4.16.4-ol-7-r18` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.16.4-ol-7-r18/4/ol-7/Dockerfile)
+* [`4-debian-9`, `4.16.4-debian-9-r17`, `4`, `4.16.4`, `4.16.4-r17`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.16.4-debian-9-r17/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-codiad).
 
