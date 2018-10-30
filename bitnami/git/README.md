@@ -21,6 +21,8 @@ $ docker run --name git bitnami/git:latest
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
+[![Anchore Image Overview](https://anchore.io/service/badges/image/a2ae03b31357aaad576ae5f527b2c319bfb241a9112529129baea26005ea1186)](https://anchore.io/image/dockerhub/bitnami%2Fgit%3Alatest#security)
+
 > The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # Supported tags and respective `Dockerfile` links
@@ -28,7 +30,7 @@ $ docker run --name git bitnami/git:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.19.1-ol-7-r2` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.19.1-ol-7-r2/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.19.1-ol-7-r3` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.19.1-ol-7-r3/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.19.1-debian-9-r2`, `2`, `2.19.1`, `2.19.1-r2`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.19.1-debian-9-r2/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/git GitHub repo](https://github.com/bitnami/bitnami-docker-git).
