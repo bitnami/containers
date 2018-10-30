@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r181
+FROM bitnami/minideb-extras:stretch-r182
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,12 +6,12 @@ RUN install_packages ghostscript imagemagick libbsd0 libbz2-1.0 libc6 libcomerr2
 RUN bitnami-pkg install ruby-2.4.5-0 --checksum 6b8fe1a5db54cc642125e96caf239329d27b2871cd0830a4158c312668a2afc7
 RUN bitnami-pkg install postgresql-client-9.6.10-1 --checksum 183670e5d3c1186ad98309216cb79c01187b7e71e0d2dae5121d41ff998313f5
 RUN bitnami-pkg install mysql-client-10.1.36-2 --checksum cae816bb8317abe3c2281c4d8787a9b293a3935e8caa4fc700a54429675755ae
-RUN bitnami-pkg install git-2.19.1-1 --checksum 0ea45e1d5975f3cefe6e992079206e86ec66e1481b46f2c8d302ef57d2dc7397
+RUN bitnami-pkg install git-2.19.1-2 --checksum afed897918bbbf73d72e4cb9b72e30dc43b09ed322d390e0cee889ee75c2e080
 RUN bitnami-pkg unpack redmine-3.4.6-2 --checksum 1e98e7a9a7c65707dc990df0ea6005a926ec9520b78e25faf2558e2699d98337
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="3.4.6-debian-9-r76" \
+    BITNAMI_IMAGE_VERSION="3.4.6-debian-9-r77" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH" \
     REDMINE_DB_MYSQL="mariadb" \
     REDMINE_DB_PASSWORD="" \
