@@ -492,7 +492,7 @@ $ docker-compose up redis
 
 ## 5.0.0-r0
 
-- Starting with Redis 5.0 the command [REPLICAOF](https://redis.io/commands/replicaof) is available in favor of `SLAVEOF`. For backward compatibility with previous versions, `slave` replication mode is still supported. We encourage the use of the `REPLICAOF` command if you are using Redis 5.0.`
+- Starting with Redis 5.0 the command [REPLICAOF](https://redis.io/commands/replicaof) is available in favor of `SLAVEOF`. For backward compatibility with previous versions, `slave` replication mode is still supported. We encourage the use of the `REPLICAOF` command if you are using Redis 5.0.
 
 ## 4.0.1-r24
 
