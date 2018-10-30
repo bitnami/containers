@@ -41,8 +41,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.8.13-ol-7-r23` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.13-ol-7-r23/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.8.13-debian-9-r22`, `3`, `3.8.13`, `3.8.13-r22`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.8.13-debian-9-r22/3/debian-9/Dockerfile)
+* [`3-ol-7`, `3.9.0-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.0-ol-7-r0/3/ol-7/Dockerfile)
+* [`3-debian-9`, `3.9.0-debian-9-r0`, `3`, `3.9.0`, `3.9.0-r0`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.0-debian-9-r0/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
 
