@@ -45,7 +45,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`11-ol-7`, `11.0.0-ol-7-r0` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.0.0-ol-7-r0/11/ol-7/Dockerfile)
+* [`11-ol-7`, `11.0.0-ol-7-r1` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.0.0-ol-7-r1/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.0.0-debian-9-r2`, `11`, `11.0.0`, `11.0.0-r2` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.0.0-debian-9-r2/11/debian-9/Dockerfile)
 * [`10-ol-7`, `10.12.0-ol-7-r19` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.12.0-ol-7-r19/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.12.0-debian-9-r20`, `10`, `10.12.0`, `10.12.0-r20` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.12.0-debian-9-r20/10/debian-9/Dockerfile)
