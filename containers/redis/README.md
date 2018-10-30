@@ -294,11 +294,11 @@ services:
 A [replication](http://redis.io/topics/replication) cluster can easily be setup with the Bitnami Redis Docker Image using the following environment variables:
 
  - `REDIS_REPLICATION_MODE`: The replication mode. Possible values `master`/`slave`. No defaults.
- - `REDIS_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
- - `REDIS_MASTER_PORT_NUMBER`: Server port of the replication master (slave parameter). Defaults to `6379`.
- - `REDIS_MASTER_PASSWORD`: Password to authenticate with the master (slave parameter). No defaults.
+ - `REDIS_MASTER_HOST`: Hostname/IP of replication master (replica node parameter). No defaults.
+ - `REDIS_MASTER_PORT_NUMBER`: Server port of the replication master (replica node parameter). Defaults to `6379`.
+ - `REDIS_MASTER_PASSWORD`: Password to authenticate with the master (replica node parameter). No defaults.
 
-In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
+In a replication cluster you can have one master and zero or more replicas. When replication is enabled the master node is in read-write mode, while the replicas are in read-only mode. For best performance its advisable to limit the reads to the replicas.
 
 ### Step 1: Create the replication master
 
@@ -313,12 +313,12 @@ $ docker run --name redis-master \
 
 In the above command the container is configured as the `master` using the `REDIS_REPLICATION_MODE` parameter. The `REDIS_PASSWORD` parameter enables authentication on the Redis master.
 
-### Step 2: Create the replication slave
+### Step 2: Create the replica node
 
-Next we start a Redis slave container.
+Next we start a Redis replica container.
 
 ```bash
-$ docker run --name redis-slave \
+$ docker run --name redis-replica \
   --link redis-master:master \
   -e REDIS_REPLICATION_MODE=slave \
   -e REDIS_MASTER_HOST=master \
@@ -328,19 +328,19 @@ $ docker run --name redis-slave \
   bitnami/redis:latest
 ```
 
-In the above command the container is configured as a `slave` using the `REDIS_REPLICATION_MODE` parameter. The `REDIS_MASTER_HOST`, `REDIS_MASTER_PORT_NUMBER` and `REDIS_MASTER_PASSWORD ` parameters are used connect and authenticate with the Redis master. The `REDIS_PASSWORD` parameter enables authentication on the Redis slave.
+In the above command the container is configured as a `slave` using the `REDIS_REPLICATION_MODE` parameter. The `REDIS_MASTER_HOST`, `REDIS_MASTER_PORT_NUMBER` and `REDIS_MASTER_PASSWORD ` parameters are used connect and authenticate with the Redis master. The `REDIS_PASSWORD` parameter enables authentication on the Redis replica.
 
-You now have a two node Redis master/slave replication cluster up and running which can be scaled by adding/removing slaves.
+You now have a two node Redis master/replica replication cluster up and running which can be scaled by adding/removing replicas.
 
-If the Redis master goes down you can reconfigure a slave to become a master using:
+If the Redis master goes down you can reconfigure a replica to become a master using:
 
 ```bash
-$ docker exec redis-slave redis-cli -a password123 SLAVEOF NO ONE
+$ docker exec redis-replica redis-cli -a password123 SLAVEOF NO ONE
 ```
 
-> **Note**: The configuration of the other slaves in the cluster needs to be updated so that they are aware of the new master. In our example, this would involve restarting the other slaves with `--link redis-slave:master`.
+> **Note**: The configuration of the other replicas in the cluster needs to be updated so that they are aware of the new master. In our example, this would involve restarting the other replicas with `--link redis-replica:master`.
 
-With Docker Compose the master/slave replication can be setup using:
+With Docker Compose the master/replica mode can be setup using:
 
 ```yaml
 version: '2'
@@ -356,7 +356,7 @@ services:
     volumes:
       - '/path/to/redis-persistence:/bitnami'
 
-  redis-slave:
+  redis-replica:
     image: 'bitnami/redis:latest'
     ports:
       - '6379'
@@ -367,16 +367,16 @@ services:
       - REDIS_MASTER_HOST=redis-master
       - REDIS_MASTER_PORT_NUMBER=6379
       - REDIS_MASTER_PASSWORD=my_master_password
-      - REDIS_PASSWORD=my_slave_password
+      - REDIS_PASSWORD=my_replica_password
 ```
 
-Scale the number of slaves using:
+Scale the number of replicas using:
 
 ```bash
 $ docker-compose up --detach --scale redis-master=1 --scale redis-secondary=3
 ```
 
-The above command scales up the number of slaves to `3`. You can scale down in the same way.
+The above command scales up the number of replicas to `3`. You can scale down in the same way.
 
 > **Note**: You should not scale up/down the number of master nodes. Always have only one master node running.
 
@@ -489,6 +489,10 @@ $ docker-compose up redis
 ```
 
 # Notable Changes
+
+## 5.0.0-r0
+
+- Starting with Redis 5.0 the command [REPLICAOF](https://redis.io/commands/replicaof) is available in favor of `SLAVEOF`. For backward compatibility with previous versions, `slave` replication mode is still supported. We encourage the use of the `REPLICAOF` command if you are using Redis 5.0.`
 
 ## 4.0.1-r24
 

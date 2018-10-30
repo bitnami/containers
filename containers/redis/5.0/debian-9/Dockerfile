@@ -1,0 +1,31 @@
+FROM bitnami/minideb-extras-base:stretch-r60
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-9" \
+    OS_NAME="linux"
+
+# Install required system packages and dependencies
+RUN install_packages libc6
+RUN . ./libcomponent.sh && component_unpack "redis" "5.0.0-3" --checksum 08cb44e764f2a928ae8d43189619162eefac850effec46afaf865f1da7c75d48
+
+COPY rootfs /
+RUN /prepare.sh
+ENV ALLOW_EMPTY_PASSWORD="no" \
+    BITNAMI_APP_NAME="redis" \
+    BITNAMI_IMAGE_VERSION="5.0.0-debian-9-r0" \
+    PATH="/opt/bitnami/redis/bin:$PATH" \
+    REDIS_DISABLE_COMMANDS="" \
+    REDIS_MASTER_HOST="" \
+    REDIS_MASTER_PASSWORD="" \
+    REDIS_MASTER_PORT_NUMBER="6379" \
+    REDIS_PASSWORD="" \
+    REDIS_REPLICATION_MODE=""
+
+EXPOSE 6379
+
+USER 1001
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD [ "/run.sh" ]
