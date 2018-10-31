@@ -19,6 +19,11 @@ $ docker-compose up
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/9ef49425bb2c92bb2780ca588f7cf22b8f0e40731a0f0a8fd7cecc0ad65ebcbc)](https://anchore.io/image/dockerhub/bitnami%2Flaravel%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 ## Supported tags and respective `Dockerfile` links
 
