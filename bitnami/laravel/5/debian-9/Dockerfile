@@ -1,32 +1,22 @@
-FROM bitnami/minideb-extras:stretch
-
+FROM bitnami/minideb-extras:stretch-r183
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-# System packages required
-RUN install_packages libc6 zlib1g libxslt1.1 libtidy-dev libreadline-dev libncurses5 libtinfo5 libmcrypt4 libldap-2.4-2 libstdc++6 libgmp10 libpng-dev libjpeg62-turbo libbz2-1.0 libxml2 libssl1.0-dev libcurl3 libfreetype6 libicu57 libgcc1 libgcrypt20 libsasl2-2 libgnutls28-dev liblzma5 libidn11 librtmp1 libssh2-1 libgssapi-krb5-2 libkrb5-3 libk5crypto3 libcomerr2 libgpg-error0 libp11-kit0 libtasn1-6 nettle-dev libhogweed4 libkrb5support0 libkeyutils1 libffi6 libsybdb5 libpq5
+# Install required system packages and dependencies
+RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libcomerr2 libcurl3 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmcrypt4 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5 libtinfo5 libunistring0 libxml2 libxslt1.1 zlib1g
+RUN bitnami-pkg unpack php-7.1.23-0 --checksum f7b1e5ccfd94938d0332805b2c05e5d1277234a56fa9d46edc58bb0ef3119581
+RUN bitnami-pkg install node-8.12.0-2 --checksum 6d88009c5341a9079eb11818946d6b3e079df2d70308614d6e1ecb92ac334938
+RUN bitnami-pkg install laravel-5.7.0-0 --checksum fbecabb48730c4bb3ef40f09f3d9a7f9a9c4f56b877a3ce22f8d66b4c72c068d
+RUN mkdir /app && chown bitnami:bitnami /app
 
-RUN bitnami-pkg install node-8.12.0-0 --checksum 9f9e6c75bcd194ab42730cdb90bc23db2d87aaf18c64ba13b9ecfb777cfebebe
-RUN bitnami-pkg unpack php-7.1.21-3 --checksum e2cffee88f6de8eef7ba435933800c40a6a5b8e5023b2289ca8ff76ff01fbbc4
-
-ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH
-ENV PATH=/opt/bitnami/php/sbin:/opt/bitnami/php/bin:/opt/bitnami/common/bin:~/.composer/vendor/bin:$PATH
-ENV NODE_PATH=/opt/bitnami/node/lib/node_modules
-
-RUN npm install -g gulp
-
-USER bitnami
-
-RUN mkdir /tmp/app && cd /tmp/app && composer create-project "laravel/laravel=5.7.0" /tmp/app --prefer-dist
-
-ENV BITNAMI_APP_NAME=laravel
-ENV BITNAMI_IMAGE_VERSION=5.7.0-r0
-
-COPY rootfs/ /
-
-WORKDIR /app
+COPY rootfs /
+ENV BITNAMI_APP_NAME="laravel" \
+    BITNAMI_IMAGE_VERSION="5.7.0-debian-9-r1" \
+    NODE_PATH="/opt/bitnami/node/lib/node_modules" \
+    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/laravel/bin:$PATH"
 
 EXPOSE 3000
 
-ENTRYPOINT ["/app-entrypoint.sh"]
-
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=3000"]
+WORKDIR /app
+USER bitnami
+ENTRYPOINT [ "/app-entrypoint.sh" ]
+CMD [ "php", "artisan", "serve", "--host=0.0.0.0", "--port=3000" ]
