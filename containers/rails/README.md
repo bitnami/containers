@@ -20,6 +20,18 @@ $ docker-compose up
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 
+## Supported tags and respective `Dockerfile` links
+
+> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
+
+
+* [`5-debian-9`, `5.2.1-debian-9-r1`, `5`, `5.2.1`, `5.2.1-r1`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/5.2.1-debian-9-r1/5/debian-9/Dockerfile)
+* [`5-ol-7`, `0.0.0-ol-7-r0` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/0.0.0-ol-7-r0/5/ol-7/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/rails GitHub repo](https://github.com/bitnami/bitnami-docker-rails).
+
 ## Introduction
 
 [Ruby on Rails](http://rubyonrails.org/), or simply Rails, is a web application framework written in [Ruby](https://www.ruby-lang.org) under [MIT License](https://github.com/rails/rails/blob/master/MIT-LICENSE). Rails is a model–view–controller (MVC) framework, providing default structures for a database, a web service, and web pages.
@@ -156,6 +168,10 @@ $ docker-compose restart myapp
 ```
 
 When the `myapp` service container is restarted, it will install all the missing gems before starting the WEBrick Rails application server.
+
+# Contributing
+
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-rails/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-rails/pulls) with your contribution.
 
 ## Issues
 
