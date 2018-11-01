@@ -46,7 +46,7 @@ redis_validate() {
             empty_password_error REDIS_PASSWORD
         fi
         # Replication user
-        if [[ "$REDIS_REPLICATION_MODE" == "slave"  && -z "$REDIS_MASTER_PASSWORD" ]]; then
+        if is_redis_replica_node && [[ -z "$REDIS_MASTER_PASSWORD" ]]; then
             empty_password_error REDIS_MASTER_PASSWORD
         fi
     fi
@@ -100,7 +100,7 @@ redis_initialize() {
     fi
 
     if [ -n "$REDIS_REPLICATION_MODE" ]; then
-        redis_configure_replication "$REDIS_REPLICATION_MODE"
+        redis_configure_replication
     fi
 }
 
@@ -118,19 +118,19 @@ EOF
 }
 
 redis_configure_replication() {
-    local mode="${1:?empty replication mode}"
-    # We should just add REDIS_REPLICATION_MODE to validations
-    # and assume is correct
-    if [ "$mode" == "master" ]; then
+    if [ "$REDIS_REPLICATION_MODE" == "master" ]; then
         if [ -n "$REDIS_PASSWORD" ]; then
             redis_conf_set masterauth "$REDIS_PASSWORD"
         fi
-    elif [ "$mode" == "slave" ]; then
+    elif is_redis_replica_node; then
         wait-for-port --host "$REDIS_MASTER_HOST" "$REDIS_MASTER_PORT_NUMBER"
         if [ -n "$REDIS_MASTER_PASSWORD" ]; then
             redis_conf_set masterauth "$REDIS_MASTER_PASSWORD"
         fi
-        redis_conf_set slaveof "$REDIS_MASTER_HOST $REDIS_MASTER_PORT_NUMBER"
+        # Starting with Redis 5, use 'replicaof' instead of 'slaveof'. Maintaining both for backward compatibility
+        local parameter="replicaof"
+        [[ $(redis_major_version) -lt 5 ]] && parameter="slaveof"
+        redis_conf_set "$parameter" "$REDIS_MASTER_HOST $REDIS_MASTER_PORT_NUMBER"
     fi
 }
 
@@ -176,6 +176,19 @@ is_redis_running() {
     else
         is_service_running "$pid"
     fi
+}
+
+# Check if redis is a replica node
+is_redis_replica_node() {
+    [[ "$REDIS_REPLICATION_MODE" =~ ^(slave|replica)$ ]]
+}
+
+redis_version() {
+    "${REDIS_BASEDIR}/bin/redis-cli" --version | egrep -o "[0-9]+.[0-9]+.[0-9]+"
+}
+
+redis_major_version() {
+    redis_version | egrep -o "^[0-9]+"
 }
 
 # Stops redis
