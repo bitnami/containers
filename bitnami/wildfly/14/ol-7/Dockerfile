@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r154
+FROM bitnami/oraclelinux-extras:7-r155
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="14.0.1-ol-7-r49" \
+    BITNAMI_IMAGE_VERSION="14.0.1-ol-7-r50" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_JAVA_HOME="" \
     WILDFLY_JAVA_OPTS="" \
