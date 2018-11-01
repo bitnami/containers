@@ -1,5 +1,5 @@
 
-FROM bitnami/node:8.12.0-debian-9-r49 as development
+FROM bitnami/node:8.12.0-debian-9-r50 as development
 
 FROM bitnami/minideb:stretch
 LABEL maintainer "Bitnami <containers@bitnami.com>"
@@ -7,7 +7,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 COPY --from=development /opt/bitnami/node /opt/bitnami/node
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="8.12.0-debian-9-r49" \
+    BITNAMI_IMAGE_VERSION="8.12.0-debian-9-r50" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
 CMD [ "node" ]
