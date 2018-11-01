@@ -7,12 +7,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages glib2 glibc libblkid libffi libgcc libmount libselinux libuuid pcre zlib
 RUN bitnami-pkg install java-1.8.191-1 --checksum 3997bf3325da463f2392c36882a1d56e52b5a52ce7124b7895755b4e95454032
-RUN bitnami-pkg unpack zookeeper-3.4.12-17 --checksum 0a8fe57d6b36deb62f06df941d6d577b81df68d3f6a80e9e711cb5da95eb9c36
+RUN bitnami-pkg unpack zookeeper-3.4.12-18 --checksum 6c6c63bae2556cf62ff5dea02c21c9031efc5688dc259d2b2c0ddc2cd131dd1d
 
 COPY rootfs /
 ENV ALLOW_ANONYMOUS_LOGIN="no" \
     BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.4.12-ol-7-r132" \
+    BITNAMI_IMAGE_VERSION="3.4.12-ol-7-r133" \
     JVMFLAGS="" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH" \
     ZOO_CLIENT_PASSWORD="" \
