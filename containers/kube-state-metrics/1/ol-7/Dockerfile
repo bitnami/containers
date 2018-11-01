@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r154 as buildenv
+FROM bitnami/oraclelinux-extras:7-r155 as buildenv
 
 RUN install_packages ca-certificates glibc wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kube-state-metrics-1.4.0-2-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r154
+FROM bitnami/oraclelinux-extras:7-r155
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/kube-state-metrics /opt/bitnami/kube-state-metrics
 ENV BITNAMI_APP_NAME="kube-state-metrics" \
-    BITNAMI_IMAGE_VERSION="1.4.0-ol-7-r66" \
+    BITNAMI_IMAGE_VERSION="1.4.0-ol-7-r67" \
     PATH="/opt/bitnami/kube-state-metrics/bin:$PATH"
 
 RUN install_packages ca-certificates
