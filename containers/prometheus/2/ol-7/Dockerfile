@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r154 as buildenv
+FROM bitnami/oraclelinux-extras:7-r155 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.4.3-1-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r154
+FROM bitnami/oraclelinux-extras:7-r155
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/prometheus /opt/bitnami/prometheus
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.4.3-ol-7-r27" \
+    BITNAMI_IMAGE_VERSION="2.4.3-ol-7-r28" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 RUN install_packages ca-certificates
