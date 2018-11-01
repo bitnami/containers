@@ -1,13 +1,13 @@
 
-FROM bitnami/node:8.12.0-ol-7-r53 as development
+FROM bitnami/node:8.12.0-ol-7-r54 as development
 
-FROM bitnami/oraclelinux-runtimes:7-r126
+FROM bitnami/oraclelinux-runtimes:7-r127
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=development /opt/bitnami/node /opt/bitnami/node
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="8.12.0-ol-7-r53" \
+    BITNAMI_IMAGE_VERSION="8.12.0-ol-7-r54" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
 CMD [ "node" ]
