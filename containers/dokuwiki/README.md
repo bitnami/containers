@@ -41,8 +41,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.20180422.201805030840-ol-7-r115` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-ol-7-r115/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.20180422.201805030840-debian-9-r91`, `0`, `0.20180422.201805030840`, `0.20180422.201805030840-r91`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-debian-9-r91/0/debian-9/Dockerfile)
+* [`0-ol-7`, `0.20180422.201805030840-ol-7-r114` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-ol-7-r114/0/ol-7/Dockerfile)
+* [`0-debian-9`, `0.20180422.201805030840-debian-9-r92`, `0`, `0.20180422.201805030840`, `0.20180422.201805030840-r92`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-debian-9-r92/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dokuwiki GitHub repo](https://github.com/bitnami/bitnami-docker-dokuwiki).
 
