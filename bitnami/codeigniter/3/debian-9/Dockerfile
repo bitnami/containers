@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r183
+FROM bitnami/minideb-extras:stretch-r184
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN bitnami-pkg install codeigniter-3.1.9-3 --checksum ec5dc6ae0ab6d88580a812641
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="codeigniter" \
-    BITNAMI_IMAGE_VERSION="3.1.9-debian-9-r108" \
+    BITNAMI_IMAGE_VERSION="3.1.9-debian-9-r109" \
     CODEIGNITER_PROJECT_NAME="myapp" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
