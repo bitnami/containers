@@ -1,10 +1,10 @@
 FROM bitnami/oraclelinux-extras:7-r155 as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/service-catalog-0.1.37-0-linux-x86_64-ol-7.tar.gz && \
-    echo "258f158627a1f2aab2f1d0c0ed00f6d30a4287d79494a425124cacebfa046c40  /tmp/bitnami/pkg/cache/service-catalog-0.1.37-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/service-catalog-0.1.37-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/service-catalog-0.1.37-0-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/service-catalog-0.1.37-1-linux-x86_64-ol-7.tar.gz && \
+    echo "2b1e8d13014254d5aa179fced5a0b21f83c1b55308dd129620910a8f50ca2747  /tmp/bitnami/pkg/cache/service-catalog-0.1.37-1-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/service-catalog-0.1.37-1-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/service-catalog-0.1.37-1-linux-x86_64-ol-7.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/service-catalog /opt/bitnami/service-catalog
 ENV BITNAMI_APP_NAME="service-catalog" \
-    BITNAMI_IMAGE_VERSION="0.1.37-ol-7-r7" \
+    BITNAMI_IMAGE_VERSION="0.1.37-ol-7-r8" \
     PATH="/opt/bitnami/service-catalog/bin:$PATH"
 
 EXPOSE 8443 443
