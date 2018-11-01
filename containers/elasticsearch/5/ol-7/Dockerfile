@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r100
+FROM bitnami/oraclelinux-extras-base:7-r101
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "elasticsearch" "5.6.12-1" --checksu
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="5.6.12-ol-7-r28" \
+    BITNAMI_IMAGE_VERSION="5.6.12-ol-7-r29" \
     ELASTICSEARCH_BIND_ADDRESS="" \
     ELASTICSEARCH_CLUSTER_HOSTS="" \
     ELASTICSEARCH_CLUSTER_NAME="elasticsearch-cluster" \
