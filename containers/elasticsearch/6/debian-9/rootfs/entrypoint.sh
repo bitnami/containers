@@ -4,15 +4,22 @@ set -o errexit
 set -o nounset
 set -o pipefail
 #set -o xtrace
+# shellcheck disable=SC1091
 
+# Load libraries
 . /libbitnami.sh
-. /libelasticsearch.sh && eval "$(elasticsearch_env)"
+. /libelasticsearch.sh
+
+# Load Elasticsearch env. variables
+eval "$(elasticsearch_env)"
 
 print_welcome_page
 
-if [ "$*" = "/run.sh" ]; then
+if [[ "$*" = "/run.sh" ]]; then
+    info "** Starting Elasticsearch setup **"
     /setup.sh
+    info "** Elasticsearch setup finished! **"
 fi
 
-
+echo ""
 exec "$@"
