@@ -14,7 +14,7 @@ set -o pipefail
 eval "$(mysql_env)"
 
 flags=("--defaults-file=${DB_CONFDIR}/my.cnf" "--basedir=$DB_BASEDIR" "--datadir=$DB_DATADIR" "--socket=${DB_TMPDIR}/mysql.sock" "--port=$DB_PORT_NUMBER")
-[[ -z "${DB_EXTRA_FLAGS:-}" ]] || flags=("${commonFlags[@]}" "${DB_EXTRA_FLAGS[@]}")
+[[ -z "${DB_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${DB_EXTRA_FLAGS[@]}")
 
 info "** Starting MariaDB **"
 if am_i_root; then

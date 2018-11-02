@@ -128,9 +128,8 @@ is_mysql_running() {
 #   None
 #########################
 mysql_start_bg() {
-    readonly commonFlags=("--defaults-file=${DB_BASEDIR}/conf/my.cnf" "--basedir=${DB_BASEDIR}" "--datadir=${DB_DATADIR}" "--socket=$DB_TMPDIR/mysql.sock" "--port=$DB_PORT_NUMBER")
-    local flags=("${commonFlags[@]}")
-    [[ -z "${DB_EXTRA_FLAGS:-}" ]] || flags=("${commonFlags[@]}" "${DB_EXTRA_FLAGS[@]}")
+    local flags=("--defaults-file=${DB_BASEDIR}/conf/my.cnf" "--basedir=${DB_BASEDIR}" "--datadir=${DB_DATADIR}" "--socket=$DB_TMPDIR/mysql.sock" "--port=$DB_PORT_NUMBER")
+    [[ -z "${DB_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${DB_EXTRA_FLAGS[@]}")
 
     debug "Starting $DB_FLAVOR in background..."
     is_mysql_running && return
