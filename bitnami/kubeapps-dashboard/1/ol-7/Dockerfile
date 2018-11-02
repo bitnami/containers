@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r101
+FROM bitnami/oraclelinux-extras-base:7-r102
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /prepare.sh
 RUN rm -rf /opt/bitnami/nginx/html && mv /opt/bitnami/kubeapps-dashboard/build /opt/bitnami/nginx/html
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.0.0-beta.3-ol-7-r13" \
+    BITNAMI_IMAGE_VERSION="1.0.0-beta.3-ol-7-r14" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
     NGINX_HTTP_PORT_NUMBER="8080" \
