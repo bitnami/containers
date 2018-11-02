@@ -4,20 +4,23 @@ set -o errexit
 set -o nounset
 set -o pipefail
 #set -o xtrace
+# shellcheck disable=SC1091
 
+# Load libraries
 . /libelasticsearch.sh
 . /libos.sh
+
+# Load Elasticsearch env. variables
 eval "$(elasticsearch_env)"
 
-DAEMON=elasticsearch
-EXEC=$(which "$DAEMON")
-ARGS="-p $ELASTICSEARCH_TMPDIR/elasticsearch.pid -Epath.data=$ELASTICSEARCH_DATADIR"
-
+# Constants
+EXEC=$(command -v elasticsearch)
+ARGS=("-p" "$ELASTICSEARCH_TMPDIR/elasticsearch.pid" "-Epath.data=$ELASTICSEARCH_DATADIR")
 export JAVA_HOME=/opt/bitnami/java
 
+info "** Starting Elasticsearch **"
 if am_i_root; then
-    exec gosu "$ELASTICSEARCH_DAEMON_USER" "$EXEC" $ARGS
+    exec gosu "$ELASTICSEARCH_DAEMON_USER" "$EXEC" "${ARGS[@]}"
 else
-    exec "$EXEC" $ARGS
+    exec "$EXEC" "${ARGS[@]}"
 fi
-
