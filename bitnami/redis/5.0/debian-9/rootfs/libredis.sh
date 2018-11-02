@@ -1,223 +1,145 @@
-#!/bin/bash -e
+#!/bin/bash
+#
+# Bitnami Redis library
 
+# shellcheck disable=SC1091
+
+# Load Generic Libraries
 . /libfile.sh
 . /liblog.sh
 . /libos.sh
 . /libservice.sh
 . /libvalidations.sh
 
-# Echo env vars for redis global configuration.
-redis_env() {
-    cat <<"EOF"
-export REDIS_EXTRAS_DIR=/opt/bitnami/extra/redis
-export REDIS_TEMPLATES_DIR=$REDIS_EXTRAS_DIR/templates
-export REDIS_BASEDIR=/opt/bitnami/redis
-export REDIS_VOLUME=/bitnami/redis
-export REDIS_TMPDIR=$REDIS_BASEDIR/tmp
-export REDIS_LOGDIR=$REDIS_BASEDIR/logs
-export PATH=$REDIS_BASEDIR/bin:$PATH
-export REDIS_DAEMON_USER=redis
-export REDIS_DAEMON_GROUP=redis
-EOF
+# Functions
+
+########################
+# Retrieve a configuration setting value
+# Globals:
+#   REDIS_BASEDIR
+# Arguments:
+#   $1 - key
+# Returns:
+#   None
+#########################
+redis_conf_get() {
+    local key="${1:?missing key}"
+
+    grep -E "^\s*$key " "${REDIS_BASEDIR}/etc/redis.conf" | awk '{print $2}'
 }
 
-# Validate settings in REDIS_* env vars.
-redis_validate() {
-    empty_password_enabled_warn() {
-        warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
-    }
-    empty_password_error() {
-        error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
-        exit 1
-    }
-
-    for var in REDIS_MASTER_PORT_NUMBER; do
-        local value=${!var}
-        if ! err=$(validate_port "$value"); then
-            error "The $var environment variable is invalid: $err"
-            exit 1
-        fi
-    done
-    if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
-        empty_password_enabled_warn
-    else
-        # Root user
-        if [[ -z "$REDIS_PASSWORD" ]]; then
-            empty_password_error REDIS_PASSWORD
-        fi
-        # Replication user
-        if is_redis_replica_node && [[ -z "$REDIS_MASTER_PASSWORD" ]]; then
-            empty_password_error REDIS_MASTER_PASSWORD
-        fi
-    fi
-}
-
-# Ensure the redis volume is initialised.
-redis_initialize() {
-    if [ -e "$REDIS_BASEDIR/etc/redis.conf" ]; then
-	if [ -e "$REDIS_BASEDIR/etc/redis-default.conf" ]; then
-	    rm "$REDIS_BASEDIR/etc/redis-default.conf"
-	fi
-	return
-    fi
-
-    for dir in "$REDIS_VOLUME/data" "$REDIS_BASEDIR/tmp" "$REDIS_LOGDIR"; do
-        ensure_dir_exists "$dir"
-        if am_i_root; then
-            chown "$REDIS_DAEMON_USER:$REDIS_DAEMON_GROUP" "$dir"
-        fi
-    done
-
-    mv "$REDIS_BASEDIR/etc/redis-default.conf" "$REDIS_BASEDIR/etc/redis.conf"
-
-    # Redis config
-    redis_conf_set dir "$REDIS_VOLUME/data"
-    # Log to stdout
-    redis_conf_set logfile ""
-    redis_conf_set pidfile "$REDIS_BASEDIR/tmp/redis.pid"
-    redis_conf_set daemonize yes
-
-    # Allow remote connections
-    redis_conf_set bind 0.0.0.0
-
-    # Enable AOF https://redis.io/topics/persistence#append-only-file
-    # Leave default fsync (every second)
-    redis_conf_set appendonly yes
-
-    # Disable RDB persistence, AOF persistence already enabled.
-    # Ref: https://redis.io/topics/persistence#interactions-between-aof-and-rdb-persistence
-    redis_conf_set save ""
-
-    if [ -n "$REDIS_PASSWORD" ]; then
-        redis_conf_set requirepass "$REDIS_PASSWORD"
-    else
-        redis_conf_unset requirepass
-    fi
-    if [ -n "$REDIS_DISABLE_COMMANDS" ]; then
-        # The current syntax gets a comma separated list of commands, we split them
-        # before passing to redis_disable_unsafe_commands
-        redis_disable_unsafe_commands $(tr ',' ' ' <<<"$REDIS_DISABLE_COMMANDS")
-    fi
-
-    if [ -n "$REDIS_REPLICATION_MODE" ]; then
-        redis_configure_replication
-    fi
-}
-
-redis_disable_unsafe_commands() {
-    info "Disabling commands: $*"
-    for cmd in "$@"; do
-        if egrep -q "^\s*rename-command\s+$cmd\s+\"\"\s*$" "$REDIS_BASEDIR/etc/redis.conf" ; then
-            info "$cmd was already disabled"
-            continue
-        fi
-        cat >> "$REDIS_BASEDIR/etc/redis.conf" <<EOF
-rename-command $cmd ""
-EOF
-    done
-}
-
-redis_configure_replication() {
-    if [ "$REDIS_REPLICATION_MODE" == "master" ]; then
-        if [ -n "$REDIS_PASSWORD" ]; then
-            redis_conf_set masterauth "$REDIS_PASSWORD"
-        fi
-    elif is_redis_replica_node; then
-        wait-for-port --host "$REDIS_MASTER_HOST" "$REDIS_MASTER_PORT_NUMBER"
-        if [ -n "$REDIS_MASTER_PASSWORD" ]; then
-            redis_conf_set masterauth "$REDIS_MASTER_PASSWORD"
-        fi
-        # Starting with Redis 5, use 'replicaof' instead of 'slaveof'. Maintaining both for backward compatibility
-        local parameter="replicaof"
-        [[ $(redis_major_version) -lt 5 ]] && parameter="slaveof"
-        redis_conf_set "$parameter" "$REDIS_MASTER_HOST $REDIS_MASTER_PORT_NUMBER"
-    fi
-}
-
-# Sets a configuration setting
+########################
+# Set a configuration setting value
+# Globals:
+#   REDIS_BASEDIR
+# Arguments:
+#   $1 - key
+#   $2 - value
+# Returns:
+#   None
+#########################
 redis_conf_set() {
     # TODO: improve this. Substitute action?
-    local name="${1:?missing key}"
+    local key="${1:?missing key}"
     local value="${2:-}"
 
     # Sanitize inputs
-    value=${value//\\/\\\\}
-    value=${value//&/\\&}
-    value=${value//\?/\\?}
-    if [ "$value" == "" ]; then
-        value="\"$value\""
-    fi
-    sed -i "s?^#*\s*$name .*?$name $value?g" "$REDIS_BASEDIR/etc/redis.conf"
+    value="${value//\\/\\\\}"
+    value="${value//&/\\&}"
+    value="${value//\?/\\?}"
+    [[ "$value" = "" ]] && value="\"$value\""
+
+    sed -i "s?^#*\s*$key .*?$key $value?g" "${REDIS_BASEDIR}/etc/redis.conf"
 }
 
-# Retrieves a configuration setting value
-redis_conf_get() {
-    local name="${1:?missing key}"
-    local value=$(grep -E "^\s*$name " "$REDIS_BASEDIR/etc/redis.conf" | awk '{print $2}')
-    echo "$value"
-}
-
-
-# Unsets a configuration directive
+########################
+# Unset a configuration setting value
+# Globals:
+#   REDIS_BASEDIR
+# Arguments:
+#   $1 - key
+# Returns:
+#   None
+#########################
 redis_conf_unset() {
     # TODO: improve this. Substitute action?
-    local name="${1:?missing key}"
-    sed -i "s?^\s*$name .*??g" "$REDIS_BASEDIR/etc/redis.conf"
+    local key="${1:?missing key}"
+    sed -i "s?^\s*$key .*??g" "${REDIS_BASEDIR}/etc/redis.conf"
 }
 
+########################
+# Get Redis version
+# Globals:
+#   REDIS_BASEDIR
+# Arguments:
+#   None
+# Returns:
+#   Redis versoon
+#########################
+redis_version() {
+    "${REDIS_BASEDIR}/bin/redis-cli" --version | grep -E -o "[0-9]+.[0-9]+.[0-9]+"
+}
 
-# Checks if redis is running
+########################
+# Get Redis major version
+# Globals:
+#   REDIS_BASEDIR
+# Arguments:
+#   None
+# Returns:
+#   Redis major version
+#########################
+redis_major_version() {
+    redis_version | grep -E -o "^[0-9]+"
+}
+
+########################
+# Check if redis is running
+# Globals:
+#   REDIS_BASEDIR
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
 is_redis_running() {
     local pid
-    pid="$(get_pid "$REDIS_BASEDIR/tmp/redis.pid")"
+    pid="$(get_pid_from_file "$REDIS_BASEDIR/tmp/redis.pid")"
 
-    if [ -z "$pid" ]; then
+    if [[ -z "$pid" ]]; then
         false
     else
         is_service_running "$pid"
     fi
 }
 
-# Check if redis is a replica node
-is_redis_replica_node() {
-    [[ "$REDIS_REPLICATION_MODE" =~ ^(slave|replica)$ ]]
-}
-
-redis_version() {
-    "${REDIS_BASEDIR}/bin/redis-cli" --version | egrep -o "[0-9]+.[0-9]+.[0-9]+"
-}
-
-redis_major_version() {
-    redis_version | egrep -o "^[0-9]+"
-}
-
-# Stops redis
+########################
+# Stop Redis
+# Globals:
+#   REDIS_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
 redis_stop() {
-    if ! is_redis_running ; then
-        return
-    fi
+    local pass
+    local port
+    local args
 
-    local pass=""
-    local port=""
+    ! is_redis_running && return
+    pass="$(redis_conf_get "requirepass")"
+    port="$(redis_conf_get "port")"
 
-    pass=$(redis_conf_get "requirepass")
-    port=$(redis_conf_get "port")
+    [[ -n "$pass" ]] && args+=("-a" "\"$pass\"")
+    [[ "$port" != "0" ]] && args+=("-p" "$port")
 
-    local args=""
-    if [ -n "$pass" ]; then
-        args="-a \"$pass\""
-    fi
-
-    if [ "$port" != "0" ]; then
-        args="$args -p $port"
-    fi
-
+    debug "Stopping Redis..."
     if am_i_root; then
-        gosu "$REDIS_DAEMON_USER" "$REDIS_BASEDIR/bin/redis-cli" $args shutdown
+        gosu "$REDIS_DAEMON_USER" "${REDIS_BASEDIR}/bin/redis-cli" "${args[@]}" shutdown
     else
-        "$REDIS_BASEDIR/bin/redis-cli" $args shutdown
+        "${REDIS_BASEDIR}/bin/redis-cli" "${args[@]}" shutdown
     fi
-
     local counter=5
     while is_redis_running ; do
         if [[ "$counter" -ne 0 ]]; then
@@ -228,15 +150,22 @@ redis_stop() {
     done
 }
 
-# Starts redis
+########################
+# Start redis and wait until it's ready
+# Globals:
+#   REDIS_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
 redis_start() {
-    if is_redis_running ; then
-        return
-    fi
+    is_redis_running && return
+    debug "Starting Redis..."
     if am_i_root; then
-        gosu "$REDIS_DAEMON_USER" "$REDIS_BASEDIR/bin/redis-server" "$REDIS_BASEDIR/etc/redis.conf"
+        gosu "$REDIS_DAEMON_USER" "${REDIS_BASEDIR}/bin/redis-server" "${REDIS_BASEDIR}/etc/redis.conf"
     else
-        "$REDIS_BASEDIR/bin/redis-server" "$REDIS_BASEDIR/etc/redis.conf"
+        "${REDIS_BASEDIR}/bin/redis-server" "${REDIS_BASEDIR}/etc/redis.conf"
     fi
     local counter=3
     while ! is_redis_running ; do
@@ -246,4 +175,173 @@ redis_start() {
         sleep 1;
         counter=$((counter - 1))
     done
+}
+
+########################
+# Load global variables used on Redis configuration.
+# Globals:
+#   REDIS_*
+# Arguments:
+#   None
+# Returns:
+#   Series of exports to be used as 'eval' arguments
+#########################
+redis_env() {
+    cat <<"EOF"
+export REDIS_BASEDIR="/opt/bitnami/redis"
+export REDIS_EXTRAS_DIR="/opt/bitnami/extra/redis"
+export REDIS_VOLUME="/bitnami/redis"
+export REDIS_TEMPLATES_DIR="${REDIS_EXTRAS_DIR}/templates"
+export REDIS_TMPDIR="${REDIS_BASEDIR}/tmp"
+export REDIS_LOGDIR="${REDIS_BASEDIR}/logs"
+export PATH="${REDIS_BASEDIR}/bin:$PATH"
+export REDIS_DAEMON_USER="redis"
+export REDIS_DAEMON_GROUP="redis"
+EOF
+}
+
+########################
+# Validate settings in REDIS_* env vars.
+# Globals:
+#   REDIS_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+redis_validate() {
+    debug "Validating settings in REDIS_* env vars.."
+
+    # Auxiliary functions
+    empty_password_enabled_warn() {
+        warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
+    }
+    empty_password_error() {
+        error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
+        exit 1
+    }
+
+    if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
+        empty_password_enabled_warn
+    else
+        [[ -z "$REDIS_PASSWORD" ]] && empty_password_error REDIS_PASSWORD
+    fi
+    if [[ -n "$REDIS_REPLICATION_MODE" ]]; then
+        if [[ "$REDIS_REPLICATION_MODE" =~ ^(slave|replica)$ ]]; then
+            if [[ -n "$REDIS_MASTER_PORT_NUMBER" ]]; then
+                if ! err=$(validate_port "$REDIS_MASTER_PORT_NUMBER"); then
+                    error "An invalid port was specified in the environment variable REDIS_MASTER_PORT_NUMBER: $err"
+                    exit 1
+                fi
+            fi
+            if is_boolean_yes "$ALLOW_EMPTY_PASSWORD" && [[ -z "$REDIS_MASTER_PASSWORD" ]]; then
+                empty_password_error REDIS_MASTER_PASSWORD
+            fi
+        elif [[ "$REDIS_REPLICATION_MODE" != "master" ]]; then
+            error "Invalid replication mode. Available options are 'master/replica'"
+            exit 1
+        fi
+    fi
+}
+
+
+
+########################
+# Configure Redis replication
+# Globals:
+#   REDIS_BASEDIR
+# Arguments:
+#   $1 - Replication mode
+# Returns:
+#   None
+#########################
+redis_configure_replication() {
+    info "Configuring replication mode..."
+
+    if [[ "$REDIS_REPLICATION_MODE" = "master" ]]; then
+        [[ -n "$REDIS_PASSWORD" ]] && redis_conf_set masterauth "$REDIS_PASSWORD"
+    elif [[ "$REDIS_REPLICATION_MODE" =~ ^(slave|replica)$ ]]; then
+        wait-for-port --host "$REDIS_MASTER_HOST" "$REDIS_MASTER_PORT_NUMBER"
+        [[ -n "$REDIS_MASTER_PASSWORD" ]] && redis_conf_set masterauth "$REDIS_MASTER_PASSWORD"
+        # Starting with Redis 5, use 'replicaof' instead of 'slaveof'. Maintaining both for backward compatibility
+        local parameter="replicaof"
+        [[ $(redis_major_version) -lt 5 ]] && parameter="slaveof"
+        redis_conf_set "$parameter" "$REDIS_MASTER_HOST $REDIS_MASTER_PORT_NUMBER"
+    fi
+}
+
+########################
+# Disable Redis command(s)
+# Globals:
+#   REDIS_BASEDIR
+# Arguments:
+#   $1 - Array of commands to disable
+# Returns:
+#   None
+#########################
+redis_disable_unsafe_commands() {
+    # The current syntax gets a comma separated list of commands, we split them
+    # before passing to redis_disable_unsafe_commands
+    read -r -a disabledCommands <<< "$(tr ',' ' ' <<< "$REDIS_DISABLE_COMMANDS")"
+    debug "Disabling commands: ${disabledCommands[*]}"
+    for cmd in "${disabledCommands[@]}"; do
+        if grep -E -q "^\s*rename-command\s+$cmd\s+\"\"\s*$" "${REDIS_BASEDIR}/etc/redis.conf"; then
+            debug "$cmd was already disabled"
+            continue
+        fi
+        echo "rename-command $cmd \"\"" >> "$REDIS_BASEDIR/etc/redis.conf"
+    done
+}
+
+########################
+# Ensure Redis is initialized
+# Globals:
+#   REDIS_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+redis_initialize() {
+    info "Initializing Redis..."
+
+    # User injected custom configuration
+    if [[ -e "$REDIS_BASEDIR/etc/redis.conf" ]]; then
+        [[ -e "$REDIS_BASEDIR/etc/redis-default.conf" ]] && rm "${REDIS_BASEDIR}/etc/redis-default.conf"
+    else
+        debug "Ensuring expected directories/files exist..."
+        for dir in "${REDIS_VOLUME}/data" "${REDIS_BASEDIR}/tmp" "${REDIS_LOGDIR}"; do
+            ensure_dir_exists "$dir"
+            if am_i_root; then
+                chown "$REDIS_DAEMON_USER:$REDIS_DAEMON_GROUP" "$dir"
+            fi
+        done
+        mv "$REDIS_BASEDIR/etc/redis-default.conf" "$REDIS_BASEDIR/etc/redis.conf"
+
+        # Redis config
+        debug "Setting Redis config file..."
+        redis_conf_set dir "${REDIS_VOLUME}/data"
+        redis_conf_set logfile "" # Log to stdout
+        redis_conf_set pidfile "${REDIS_BASEDIR}/tmp/redis.pid"
+        redis_conf_set daemonize yes
+        redis_conf_set bind 0.0.0.0 # Allow remote connections
+        # Enable AOF https://redis.io/topics/persistence#append-only-file
+        # Leave default fsync (every second)
+        redis_conf_set appendonly yes
+        # Disable RDB persistence, AOF persistence already enabled.
+        # Ref: https://redis.io/topics/persistence#interactions-between-aof-and-rdb-persistence
+        redis_conf_set save ""
+        if [[ -n "$REDIS_PASSWORD" ]]; then
+            redis_conf_set requirepass "$REDIS_PASSWORD"
+        else
+            redis_conf_unset requirepass
+        fi
+        if [[ -n "$REDIS_DISABLE_COMMANDS" ]]; then
+            redis_disable_unsafe_commands
+        fi
+        # Configure Replication mode
+        if [[ -n "$REDIS_REPLICATION_MODE" ]]; then
+            redis_configure_replication
+        fi
+    fi
 }
