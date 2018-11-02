@@ -9,8 +9,8 @@ jobs:
           LATEST_STABLE: "4.0"
           DISTRIBUTIONS_LIST: "debian-9,ol-7"
           IMAGE_NAME: redis
-          CHART_NAME: redis
-          CHART_REPO: https://github.com/helm/charts
+          
+          
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
