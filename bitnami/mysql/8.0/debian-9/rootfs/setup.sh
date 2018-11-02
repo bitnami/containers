@@ -4,23 +4,23 @@ set -o errexit
 set -o nounset
 set -o pipefail
 # set -o xtrace
+# shellcheck disable=SC1091
 
+# Load libraries
 . /libfs.sh
-. /libmysql.sh
 . /libos.sh
+. /libmysql.sh
 
-# ensure MySQL env var settings are valid
-mysql_valid_settings
+# Load MySQL env. variables
+eval "$(mysql_env)"
 
-# ensure MySQL is stopped when this script ends.
+# Ensure MySQL env var settings are valid
+mysql_validate
+# Ensure MySQL is stopped when this script ends.
 trap "mysql_stop" EXIT
-
-if am_i_root; then
-    ensure_user_exists "$DB_DAEMON_USER" "$DB_DAEMON_GROUP"
-fi
-
-# ensure MySQL is initialized
+# Ensure 'daemon' user exists when running as 'root'
+am_i_root && ensure_user_exists "$DB_DAEMON_USER" "$DB_DAEMON_GROUP"
+# Ensure MySQL is initialized
 mysql_initialize
-
-# allow running custom initialization scripts
+# Allow running custom initialization scripts
 msyql_custom_init_scripts
