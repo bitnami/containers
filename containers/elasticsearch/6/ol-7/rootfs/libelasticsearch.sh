@@ -25,7 +25,8 @@
 #   None
 #########################
 elasticsearch_conf_set() {
-    local name="${1:?missing key}"; shift
+    local name="${1:?missing key}"
+    shift
     local values=("${@}")
 
     if [[ "${#values[@]}" -eq 0 ]]; then
@@ -35,7 +36,7 @@ elasticsearch_conf_set() {
         yq w -i "$ELASTICSEARCH_CONF_FILE" "$name" "${values[0]}"
     else
         for i in "${!values[@]}"; do
-            yq w -i "$ELASTICSEARCH_CONF_FILE" "${name[$i]}" "${values[$i]}"
+            yq w -i "$ELASTICSEARCH_CONF_FILE" "$name[$i]" "${values[$i]}"
         done
     fi
 }
