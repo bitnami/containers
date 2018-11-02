@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r155 as buildenv
+FROM bitnami/oraclelinux-extras:7-r156 as buildenv
 
 RUN install_packages GeoIP ca-certificates curl cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libcurl libgcc libidn libselinux libssh2 libstdc++ nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre wget zlib
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.20.0-2-linux-x86_64-ol-7.tar.gz && \
@@ -13,7 +13,7 @@ RUN mkdir -p /opt/bitnami/nginx/conf/geoip && \
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r155
+FROM bitnami/oraclelinux-extras:7-r156
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/common /opt/bitnami/common
@@ -21,7 +21,7 @@ COPY --from=buildenv /opt/bitnami/lua /opt/bitnami/lua
 COPY --from=buildenv /opt/bitnami/nginx /opt/bitnami/nginx
 COPY --from=buildenv /opt/bitnami/nginx-ingress-controller /opt/bitnami/nginx-ingress-controller
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.20.0-ol-7-r23" \
+    BITNAMI_IMAGE_VERSION="0.20.0-ol-7-r24" \
     PATH="/opt/bitnami/nginx-ingress-controller/bin:$PATH"
 
 RUN rpm -Uvh https://s3.amazonaws.com/aaronsilber/public/authbind-2.1.1-0.1.x86_64.rpm
