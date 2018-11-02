@@ -234,7 +234,7 @@ redis_validate() {
                     exit 1
                 fi
             fi
-            if is_boolean_yes "$ALLOW_EMPTY_PASSWORD" && [[ -z "$REDIS_MASTER_PASSWORD" ]]; then
+            if ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD" && [[ -z "$REDIS_MASTER_PASSWORD" ]]; then
                 empty_password_error REDIS_MASTER_PASSWORD
             fi
         elif [[ "$REDIS_REPLICATION_MODE" != "master" ]]; then
