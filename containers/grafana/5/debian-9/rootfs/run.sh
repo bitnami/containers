@@ -6,21 +6,19 @@
 : "${GF_PATHS_PLUGINS:=/opt/bitnami/grafana/data/plugins}"
 : "${GF_PATHS_PROVISIONING:=/opt/bitnami/grafana/conf/provisioning}"
 
-if [ ! -z "${GF_INSTALL_PLUGINS}" ]; then
-  OLDIFS=$IFS
-  IFS=','
-  for plugin in ${GF_INSTALL_PLUGINS}; do
-    IFS=$OLDIFS
-    grafana-cli --pluginsDir "${GF_PATHS_PLUGINS}" plugins install ${plugin}
-  done
+if [[ -n "$GF_INSTALL_PLUGINS" ]]; then
+    read -r -a gf_plugins_list <<< "$(tr ',;' ' ' <<< "$GF_INSTALL_PLUGINS")"
+    for plugin in "${gf_plugins_list[@]}"; do
+        grafana-cli --pluginsDir "$GF_PATHS_PLUGINS" plugins install "$plugin"
+    done
 fi
 
-exec /opt/bitnami/grafana/bin/grafana-server              \
-  --homepath=/opt/bitnami/grafana/                         \
-  --config="$GF_PATHS_CONFIG"                           \
-  cfg:default.log.mode="console"                        \
-  cfg:default.paths.data="$GF_PATHS_DATA"               \
-  cfg:default.paths.logs="$GF_PATHS_LOGS"               \
-  cfg:default.paths.plugins="$GF_PATHS_PLUGINS"         \
-  cfg:default.paths.provisioning=$GF_PATHS_PROVISIONING \
-  "$@"
+exec /opt/bitnami/grafana/bin/grafana-server                 \
+     --homepath=/opt/bitnami/grafana/                        \
+     --config="$GF_PATHS_CONFIG"                             \
+     cfg:default.log.mode="console"                          \
+     cfg:default.paths.data="$GF_PATHS_DATA"                 \
+     cfg:default.paths.logs="$GF_PATHS_LOGS"                 \
+     cfg:default.paths.plugins="$GF_PATHS_PLUGINS"           \
+     cfg:default.paths.provisioning="$GF_PATHS_PROVISIONING" \
+     "$@"
