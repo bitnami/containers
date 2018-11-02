@@ -5,24 +5,26 @@
 
 print_welcome_page
 
+#!/bin/bash
+
 PROJECT_DIRECTORY=/app/$CODEIGNITER_PROJECT_NAME
-DEPLOY="$@"
+DEPLOY=("$@")
 
 echo "Starting application ..."
 
-if [ "$1" == "php" -a "$2" == "-S" ] ; then
-    if [ ! -d $PROJECT_DIRECTORY ] ; then
-      log "Creating example Codeigniter application"
-      nami execute codeigniter createProject --databaseServerHost $MARIADB_HOST --databaseServerPort $MARIADB_PORT_NUMBER --databaseAdminUser $MARIADB_USER $CODEIGNITER_PROJECT_NAME | grep -v undefined
-      log "Codeigniter app created"
+if [[ "$1" = "php" && "$2" = "-S" ]]; then
+    if [[ ! -d "$PROJECT_DIRECTORY" ]]; then
+        log "Creating example Codeigniter application"
+        nami execute codeigniter createProject --databaseServerHost "$MARIADB_HOST" --databaseServerPort "$MARIADB_PORT_NUMBER" --databaseAdminUser "$MARIADB_USER" "$CODEIGNITER_PROJECT_NAME" | grep -v undefined
+        log "Codeigniter app created"
     else
-      log "App already created"
-      cd $PROJECT_DIRECTORY
+        log "App already created"
+        cd "$PROJECT_DIRECTORY"
     fi
-  DEPLOY="$@ -t $PROJECT_DIRECTORY"
+    DEPLOY=("$@" "-t" "$PROJECT_DIRECTORY")
 fi
 
-exec tini -- $DEPLOY
+exec tini -- "${DEPLOY[@]}"
 
 
 exec tini -- "$@"
