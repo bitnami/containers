@@ -25,12 +25,13 @@ database_tier_exists() {
 __wait_for_db() {
   local host=$1
   local port=$2
-  local ip_address=$(getent hosts $1 | awk '{ print $1 }')
+  local ip_address
+  ip_address=$(getent hosts "$1" | awk '{ print $1 }')
 
   info "Connecting to at $host server at $ip_address:$port."
 
   counter=0
-  until nc -z $ip_address $port; do
+  until nc -z "$ip_address" "$port"; do
     counter=$((counter+1))
     if [ $counter == 10 ]; then
       error "Couldn't connect to $host server."

@@ -5,9 +5,11 @@
 
 print_welcome_page
 
+#!/bin/bash
+
 . /opt/bitnami/express/functions
 
-if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
+if [ "$1" = npm ] && [ "$2" = "start" -o "$2" = "run" ]; then
   bootstrap_express_app
 
   add_dockerfile
@@ -32,7 +34,7 @@ if [ "$1" == npm ] && [ "$2" == "start" -o "$2" == "run" ]; then
 
   migrate_db
 
-  touch $INIT_SEM
+  touch "$INIT_SEM"
 fi
 
 
