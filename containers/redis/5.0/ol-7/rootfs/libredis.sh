@@ -259,7 +259,9 @@ redis_configure_replication() {
     info "Configuring replication mode..."
 
     if [[ "$REDIS_REPLICATION_MODE" = "master" ]]; then
-        [[ -n "$REDIS_PASSWORD" ]] && redis_conf_set masterauth "$REDIS_PASSWORD"
+        if [[ -n "$REDIS_PASSWORD" ]]; then
+            redis_conf_set masterauth "$REDIS_PASSWORD"
+        fi
     elif [[ "$REDIS_REPLICATION_MODE" =~ ^(slave|replica)$ ]]; then
         wait-for-port --host "$REDIS_MASTER_HOST" "$REDIS_MASTER_PORT_NUMBER"
         [[ -n "$REDIS_MASTER_PASSWORD" ]] && redis_conf_set masterauth "$REDIS_MASTER_PASSWORD"
