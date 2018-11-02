@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r177
+FROM bitnami/minideb-extras:stretch-r185
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,12 +6,14 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libffi6 libfreetype6 l
 RUN bitnami-pkg unpack nginx-1.14.0-5 --checksum 9282eb39ae72201d15a72edf64e5751da803860caafb6b17599a9b95c720b30a
 RUN bitnami-pkg unpack php-5.6.38-2 --checksum 6f426bcf6d01c79e05b7f3d6f8161d600812d6cfba9798b54f5682a1e8a684c5
 RUN bitnami-pkg unpack mysql-client-10.2.18-1 --checksum b7075d312c4b963d781f9f52d64db601c0f16beed538b85fa5f83fac09c71890
-RUN bitnami-pkg unpack wordpress-4.9.8-5 --checksum d30f616a3e9ee53314c8d8ea14da632774076639d43796b45d018a9e429b9a9d
+RUN bitnami-pkg unpack wordpress-4.9.8-6 --checksum d842f412dc5c7065adae24bed9d85b8bd3dfd279a488bbeebc1ceaf2f5b35b55
+RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
+RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="4.9.8-php5-debian-9-r50" \
+    BITNAMI_IMAGE_VERSION="4.9.8-php5-debian-9-r51" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
