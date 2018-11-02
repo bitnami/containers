@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ##
 ## @brief     Helper function to show an error when KAFKA_LISTENERS does not configure a secure listener
 ## param $1   Input name

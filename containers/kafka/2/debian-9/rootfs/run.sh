@@ -9,7 +9,8 @@ START_COMMAND="${KAFKA_HOME}/bin/kafka-server-start.sh -daemon ${KAFKA_HOME}/con
 
 if [[ -z "$KAFKA_BROKER_ID" ]]; then
     if [[ -n "$BROKER_ID_COMMAND" ]]; then
-        export KAFKA_BROKER_ID=$(eval $BROKER_ID_COMMAND)
+        KAFKA_BROKER_ID="$(eval "$BROKER_ID_COMMAND")"
+        export KAFKA_BROKER_ID
     else
         # By default auto allocate broker ID
         export KAFKA_BROKER_ID=-1
