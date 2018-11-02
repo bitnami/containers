@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r184
+FROM bitnami/minideb-extras:stretch-r185
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack redis-sentinel-4.0.11-3 --checksum 491ad21431d2ff846bedd0
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="4.0.11-debian-9-r78" \
+    BITNAMI_IMAGE_VERSION="4.0.11-debian-9-r79" \
     PATH="/opt/bitnami/redis-sentinel/bin:$PATH" \
     REDIS_MASTER_HOST="redis" \
     REDIS_MASTER_PASSWORD="" \
