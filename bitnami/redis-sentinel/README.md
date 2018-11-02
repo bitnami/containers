@@ -46,8 +46,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5.0-ol-7`, `5.0.0-ol-7-r2` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.0-ol-7-r2/5.0/ol-7/Dockerfile)
-* [`5.0-debian-9`, `5.0.0-debian-9-r3`, `5.0`, `5.0.0`, `5.0.0-r3` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.0-debian-9-r3/5.0/debian-9/Dockerfile)
+* [`5.0-ol-7`, `5.0.0-ol-7-r3` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.0-ol-7-r3/5.0/ol-7/Dockerfile)
+* [`5.0-debian-9`, `5.0.0-debian-9-r2`, `5.0`, `5.0.0`, `5.0.0-r2` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.0-debian-9-r2/5.0/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.11-ol-7-r78` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.11-ol-7-r78/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.11-debian-9-r78`, `4.0`, `4.0.11`, `4.0.11-r78`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.11-debian-9-r78/4.0/debian-9/Dockerfile)
 
