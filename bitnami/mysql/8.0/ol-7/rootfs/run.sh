@@ -4,21 +4,20 @@ set -o errexit
 set -o nounset
 set -o pipefail
 # set -o xtrace
+# shellcheck disable=SC1091
 
 . /libmysql.sh
 . /libos.sh
 
+# Load MySQL env. variables
 eval "$(mysql_env)"
 
-# Redirect all logging to stdout
-ln -sf /dev/stdout $DB_LOGDIR/mysqld.log
+flags=("--defaults-file=${DB_CONFDIR}/my.cnf" "--basedir=$DB_BASEDIR" "--datadir=$DB_DATADIR" "--socket=${DB_TMPDIR}/mysql.sock" "--port=$DB_PORT_NUMBER")
+[[ -z "${DB_EXTRA_FLAGS:-}" ]] || flags=("${commonFlags[@]}" "${DB_EXTRA_FLAGS[@]}")
 
 info "** Starting MySQL **"
-# If container is started as `root` use
-extraFlags=($DB_EXTRA_FLAGS)
-[ -z "$DB_EXTRA_FLAGS" ] && extraFlags[0]=" " # Ensure 'extraFlags' array is not empty
 if am_i_root; then
-    exec gosu "$DB_DAEMON_USER" "$DB_SBINDIR/mysqld" --defaults-file="$DB_CONFDIR/my.cnf" --basedir="$DB_BASEDIR" --datadir="$DB_DATADIR" --socket=$DB_TMPDIR/mysql.sock --port=$DB_PORT_NUMBER ${extraFlags[*]}
+    exec gosu "$DB_DAEMON_USER" "${DB_SBINDIR}/mysqld" "${flags[@]}"
 else
-    exec "$DB_SBINDIR/mysqld" --defaults-file="$DB_CONFDIR/my.cnf" --basedir="$DB_BASEDIR" --datadir="$DB_DATADIR" --socket=$DB_TMPDIR/mysql.sock --port=$DB_PORT_NUMBER ${extraFlags[*]}
+    exec "${DB_SBINDIR}/mysqld" "${flags[@]}"
 fi
