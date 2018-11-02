@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ##
 ## @brief     Helper function to show an error when a password is empty and exit
 ## param $1   Input name
