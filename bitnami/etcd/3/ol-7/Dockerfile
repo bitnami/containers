@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r155 as buildenv
+FROM bitnami/oraclelinux-extras:7-r156 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/etcd-3.3.10-2-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r155
+FROM bitnami/oraclelinux-extras:7-r156
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/etcd /opt/bitnami/etcd
 ENV BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.3.10-ol-7-r24" \
+    BITNAMI_IMAGE_VERSION="3.3.10-ol-7-r25" \
     ETCD_ADVERTISE_CLIENT_URLS="http://127.0.0.1:2379" \
     ETCD_DATA_DIR="/opt/bitnami/etcd/data/" \
     ETCD_LISTEN_CLIENT_URLS="http://0.0.0.0:2379" \
