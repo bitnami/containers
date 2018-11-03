@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ##
 ## @brief     Helper function to show an error when ZOO_ENABLE_AUTH is set to no
 ## param $1   Input name
