@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r185
+FROM bitnami/minideb-extras:stretch-r186
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libevent-2.0-5 libsasl2-2 libsasl2-modules sasl2-bin
-RUN bitnami-pkg unpack memcached-1.5.11-1 --checksum 999da1dacfcbaecf52333771555707486e0235dee3003da041011305b80677da
+RUN bitnami-pkg unpack memcached-1.5.12-0 --checksum d4759fabbe2745f288db29992db4134d117816248d764265cb13c9f3ae625158
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.11-debian-9-r23" \
+    BITNAMI_IMAGE_VERSION="1.5.12-debian-9-r0" \
     MEMCACHED_CACHE_SIZE="64" \
     MEMCACHED_PASSWORD="" \
     MEMCACHED_USERNAME="root" \
