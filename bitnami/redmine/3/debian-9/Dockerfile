@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack redmine-3.4.6-3 --checksum cc1836636cbbca8338d0e74513fb19
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="3.4.6-debian-9-r81" \
+    BITNAMI_IMAGE_VERSION="3.4.6-debian-9-r82" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH" \
     REDMINE_DB_MYSQL="mariadb" \
     REDMINE_DB_PASSWORD="" \
