@@ -5,7 +5,7 @@
 ## param $1   Input name
 ##
 authentication_enabled_error() {
-    echo "The $1 environment variable does not enable authentication. Set the environment variable ALLOW_NONE_AUTHENTICAION=yes to allow the container to be started without authentication. This is recommended only for development."
+    echo "The $1 environment variable does not enable authentication. Set the environment variable ALLOW_NONE_AUTHENTICATION=yes to allow the container to be started without authentication. This is recommended only for development."
     exit 1
 }
 
