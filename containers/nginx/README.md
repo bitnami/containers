@@ -155,7 +155,7 @@ or using Docker Compose:
 version: '2'
 
 services:
-  mariadb:
+  nginx:
     image: 'bitnami/nginx:latest'
     ports:
       - '80:8080'
