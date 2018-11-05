@@ -41,7 +41,7 @@ if [ "${1}" == "php" -a "$2" == "artisan" -a "$3" == "serve" ]; then
   fi
 
   log "Installing/Updating Laravel dependencies (composer)"
-  composer update
+  composer install
   log "Dependencies updated"
 
   wait_for_db
