@@ -188,10 +188,9 @@ mysql_extra_flags() {
         elif [[ "$DB_REPLICATION_MODE" = "master" ]]; then
             dbExtraFlags+=("--innodb_flush_log_at_trx_commit=1")
         fi
-        echo "${dbExtraFlags[@]}"
-    else
-        echo ""
     fi
+
+    echo "${dbExtraFlags[@]}"
 }
 
 ########################
