@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r63
+FROM bitnami/minideb-extras-base:stretch-r67
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -9,13 +9,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6
-RUN . ./libcomponent.sh && component_unpack "redis" "4.0.11-6" --checksum c0025498e0014bf5023c6136606a511dd567fd1a6dd78938add9a6181d134fa4
+RUN . ./libcomponent.sh && component_unpack "redis" "4.0.11-7" --checksum e2962bca9d475fc318ed5ca7ef14077d9ff8364de8cc9898c073c28f7501edaa
 
 COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.11-debian-9-r84" \
+    BITNAMI_IMAGE_VERSION="4.0.11-debian-9-r85" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
     REDIS_MASTER_HOST="" \
