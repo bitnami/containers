@@ -1,13 +1,13 @@
-FROM bitnami/oraclelinux-extras:7-r156
+FROM bitnami/oraclelinux-extras:7-r160
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages glibc libgcc libstdc++
-RUN bitnami-pkg unpack kibana-5.6.12-1 --checksum 07f3a8297dc01a74d17dabbed19dd6fe71c852d1d71223e53a267f1ff005e54c
+RUN bitnami-pkg unpack kibana-5.6.12-2 --checksum 5415f81706e3fc55895c145d5b324fd4036e245dae0f33a3fb1938ff355b3a59
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="5.6.12-ol-7-r45" \
+    BITNAMI_IMAGE_VERSION="5.6.12-ol-7-r46" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
