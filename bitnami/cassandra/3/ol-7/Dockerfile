@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r156
+FROM bitnami/oraclelinux-extras:7-r160
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,12 +7,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs glib2 glibc keyutils-libs krb5-libs libblkid libcom_err libffi libgcc libmount libselinux libuuid ncurses-libs nss-softokn-freebl openssl-libs pcre readline sqlite zlib
 RUN bitnami-pkg install python-2.7.15-3 --checksum 4830fe03caf91b28ad6612fdaf4114c1a5e3dc00faa081dab44bf9567699797b
-RUN bitnami-pkg install java-1.8.191-1 --checksum 3997bf3325da463f2392c36882a1d56e52b5a52ce7124b7895755b4e95454032
-RUN bitnami-pkg unpack cassandra-3.11.3-11 --checksum f9bfa15f3bbb94e1b77460560d80e3609a85f7228b159d8a98d4ab3aca45bfc7
+RUN bitnami-pkg install java-1.8.191-2 --checksum 21af19babf220e44c3bde78fbaadd00970f707d1db4b55cb78dbff34e852e8c6
+RUN bitnami-pkg unpack cassandra-3.11.3-12 --checksum d23ac6c5944b5d63320b2512151b18aaadc3eec7d4d64acebb8f5c664be10947
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.3-ol-7-r80" \
+    BITNAMI_IMAGE_VERSION="3.11.3-ol-7-r81" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
     CASSANDRA_ENABLE_REMOTE_CONNECTIONS="true" \
