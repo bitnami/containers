@@ -1,19 +1,19 @@
-FROM bitnami/oraclelinux-extras:7-r156 as buildenv
+FROM bitnami/oraclelinux-extras:7-r160 as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.4.3-1-linux-x86_64-ol-7.tar.gz && \
-    echo "221adb921d832766004db2150e2a3dec54a76a623c001265aece97db7ac9e194  /tmp/bitnami/pkg/cache/prometheus-2.4.3-1-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.4.3-1-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/prometheus-2.4.3-1-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.5.0-0-linux-x86_64-ol-7.tar.gz && \
+    echo "82719c8e2ee22f11821eeb4b6fc3d4afd94f8f7a46c7399d5d27f36f5d29865a  /tmp/bitnami/pkg/cache/prometheus-2.5.0-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.5.0-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/prometheus-2.5.0-0-linux-x86_64-ol-7.tar.gz
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r156
+FROM bitnami/oraclelinux-extras:7-r160
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/prometheus /opt/bitnami/prometheus
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.4.3-ol-7-r29" \
+    BITNAMI_IMAGE_VERSION="2.5.0-ol-7-r0" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 RUN install_packages ca-certificates
