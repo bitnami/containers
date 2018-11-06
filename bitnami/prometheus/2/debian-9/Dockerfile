@@ -1,10 +1,10 @@
 FROM bitnami/minideb:stretch as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.4.3-1-linux-amd64-debian-9.tar.gz && \
-    echo "3b5d7316949e7826a8ba7b7db1a312cc542d72ed243d2f601a6983f9b2afa84e  /tmp/bitnami/pkg/cache/prometheus-2.4.3-1-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.4.3-1-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/prometheus-2.4.3-1-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.5.0-0-linux-amd64-debian-9.tar.gz && \
+    echo "9d16b92da3da16304462945dd685989101bf66655ffb152ca7233aa5f00f71cd  /tmp/bitnami/pkg/cache/prometheus-2.5.0-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.5.0-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/prometheus-2.5.0-0-linux-amd64-debian-9.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/prometheus /opt/bitnami/prometheus
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.4.3-debian-9-r31" \
+    BITNAMI_IMAGE_VERSION="2.5.0-debian-9-r0" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 RUN install_packages ca-certificates
