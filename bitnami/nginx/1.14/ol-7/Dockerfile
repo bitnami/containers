@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r102
+FROM bitnami/oraclelinux-extras-base:7-r106
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libcom_err libselinux nss-softokn-freebl openssl-libs pcre zlib
-RUN . ./libcomponent.sh && component_unpack "nginx" "1.14.0-5" --checksum 0257bbb5b3aab6f83b3d157efe54c6505486ef323fda58e867044a1d6c0d496e
+RUN . ./libcomponent.sh && component_unpack "nginx" "1.14.1-0" --checksum f8205fbf2779e1d2ea3755225cd1b7d6a16ccbfc18ede5ccbafc101bf46dea39
 RUN ln -sf /opt/bitnami/nginx/html /app
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
@@ -18,7 +18,7 @@ RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.14.0-ol-7-r130" \
+    BITNAMI_IMAGE_VERSION="1.14.1-ol-7-r0" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
     NGINX_HTTP_PORT_NUMBER="8080" \
