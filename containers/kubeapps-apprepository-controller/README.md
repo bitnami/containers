@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-kubeapps-apprepository-controller/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-kubeapps-apprepository-controller/tree/master)
-
 # What is Kubeapps AppRepository Controller?
 
 > Kubeapps AppRepository Controller is a core component of Kubeapps, a Web-based application deployment and management tool for Kubernetes clusters.
