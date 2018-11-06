@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r156
+FROM bitnami/oraclelinux-extras:7-r160
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,13 +6,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glib2 glibc libblkid libffi libgcc libmount libselinux libuuid pcre zlib
-RUN bitnami-pkg install java-1.8.191-1 --checksum 3997bf3325da463f2392c36882a1d56e52b5a52ce7124b7895755b4e95454032
-RUN bitnami-pkg unpack zookeeper-3.4.12-18 --checksum 6c6c63bae2556cf62ff5dea02c21c9031efc5688dc259d2b2c0ddc2cd131dd1d
+RUN bitnami-pkg install java-1.8.191-3 --checksum 47989825b516e8a1ea9f4a8a78e7e4f0a5a8d09515bd75d6fd75f2dd5c00fe3d
+RUN bitnami-pkg unpack zookeeper-3.4.12-19 --checksum f95155766966e6bcd25ffa92353823ab147de985ab050c7a46e6769475f39752
 
 COPY rootfs /
 ENV ALLOW_ANONYMOUS_LOGIN="no" \
     BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.4.12-ol-7-r134" \
+    BITNAMI_IMAGE_VERSION="3.4.12-ol-7-r135" \
     JVMFLAGS="" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH" \
     ZOO_CLIENT_PASSWORD="" \
