@@ -35,10 +35,10 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`6-debian-9`, `6.4.3-debian-9-r0`, `6`, `6.4.3`, `6.4.3-r0`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.4.3-debian-9-r0/6/debian-9/Dockerfile)
 * [`6-ol-7`, `6.4.2-ol-7-r16` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.4.2-ol-7-r16/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.4.2-debian-9-r14`, `6`, `6.4.2`, `6.4.2-r14`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.4.2-debian-9-r14/6/debian-9/Dockerfile)
+* [`5-ol-7`, `5.6.13-ol-7-r0` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.13-ol-7-r0/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.6.13-debian-9-r0`, `5`, `5.6.13`, `5.6.13-r0` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.13-debian-9-r0/5/debian-9/Dockerfile)
-* [`5-ol-7`, `5.6.12-ol-7-r46` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.12-ol-7-r46/5/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
 
