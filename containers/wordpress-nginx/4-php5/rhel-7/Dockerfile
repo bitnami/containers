@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras:7-r45
+FROM registry.rhc4tp.openshift.com/ospid-21274491-b512-4b83-9779-e3c7978039fb/partner-build-service:7-r114
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,17 +7,17 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
-RUN bitnami-pkg unpack nginx-1.14.0-2 --checksum c3018753530419ff71f9b625087b51a7c76092b58a3f057275b32c26ec4b5ef8
-RUN bitnami-pkg unpack php-5.6.37-0 --checksum b8a15abc0b10812ad6a022ee8a37551daef09ebb1fbcfa44d1cc65e807aa229c
-RUN bitnami-pkg unpack mysql-client-10.1.33-0 --checksum 4b07acdb7d3f6a61161414ad7f7639da8f291962e242eb257f612d18c8231501
-RUN bitnami-pkg unpack wordpress-4.9.7-1 --checksum c570454b241f9b7ae6a4b0e823c31f03544d2c559042e2989de511dde1e017a2
-RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
+RUN bitnami-pkg unpack nginx-1.14.0-5 --checksum 9bd2b1045d82829c5bbe1b286a43e11b6a0e1e19c5c34b7ad20b8df5bab2ca71
+RUN bitnami-pkg unpack php-5.6.38-2 --checksum 03ae59ec97f59c6b7f9c3043fff8b4485b6ad75502de492b46da7ab2a447025d
+RUN bitnami-pkg unpack mysql-client-10.1.36-1 --checksum e13014dbb969bfa2469f45694112e9b62fe886753899c8bc2cfd32705af999d9
+RUN bitnami-pkg unpack wordpress-4.9.8-6 --checksum 1bba683d48f17671f4c6cff1bd4432a7175e9b46df49c6765035be71bbe3cfb7
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
+RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="4.9.7-php5-rhel-7-r2" \
+    BITNAMI_IMAGE_VERSION="4.9.8-rhel-7-r7" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
