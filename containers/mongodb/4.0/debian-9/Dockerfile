@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r185
+FROM bitnami/minideb-extras:stretch-r191
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.0.3-debian-9-r36" \
+    BITNAMI_IMAGE_VERSION="4.0.3-debian-9-r37" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_ENABLE_IPV6="yes" \
