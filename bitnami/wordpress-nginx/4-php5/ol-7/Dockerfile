@@ -1,11 +1,11 @@
-FROM bitnami/oraclelinux-extras:7-r156
+FROM bitnami/oraclelinux-extras:7-r162
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline xz-libs zlib
-RUN bitnami-pkg unpack nginx-1.14.0-5 --checksum 0257bbb5b3aab6f83b3d157efe54c6505486ef323fda58e867044a1d6c0d496e
+RUN bitnami-pkg unpack nginx-1.14.1-0 --checksum f8205fbf2779e1d2ea3755225cd1b7d6a16ccbfc18ede5ccbafc101bf46dea39
 RUN bitnami-pkg unpack php-5.6.38-2 --checksum 1568b92a579d35ca9594cf20f49db8688b1d32a4a5f33d5df6d5c73463530423
-RUN bitnami-pkg unpack mysql-client-10.1.36-1 --checksum 37104f4fe6e526bbb437f61c33ecd8d14b2d576bc6d29b969daa252285acfd00
+RUN bitnami-pkg unpack mysql-client-10.1.37-0 --checksum c1a94cb16b0325672c1c653d017f909e705a0be0efc46cc2a2a416d7e6a196da
 RUN bitnami-pkg unpack wordpress-4.9.8-6 --checksum 568b09ab56488f9598e57e31aa2625d9df9f31e97094e10e86a8cd6ce5c1ee39
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
@@ -13,7 +13,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="4.9.8-php5-ol-7-r74" \
+    BITNAMI_IMAGE_VERSION="4.9.8-php5-ol-7-r75" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
