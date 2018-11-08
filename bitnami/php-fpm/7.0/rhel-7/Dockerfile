@@ -1,4 +1,4 @@
-FROM registry.rhc4tp.openshift.com/bitnami/rhel-extras-7:latest121
+FROM registry.rhc4tp.openshift.com/bitnami/rhel-extras-7:latest
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
