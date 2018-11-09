@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/metrics-server /opt/bitnami/metrics-server
 ENV BITNAMI_APP_NAME="metrics-server" \
-    BITNAMI_IMAGE_VERSION="0.3.1-debian-9-r38" \
+    BITNAMI_IMAGE_VERSION="0.3.1-debian-9-r39" \
     PATH="/opt/bitnami/metrics-server/bin:$PATH"
 
 RUN install_packages ca-certificates
