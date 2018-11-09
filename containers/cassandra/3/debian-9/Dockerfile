@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r191
+FROM bitnami/minideb-extras:stretch-r192
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack cassandra-3.11.3-13 --checksum 7080d27d697a25be9697736581
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.3-debian-9-r98" \
+    BITNAMI_IMAGE_VERSION="3.11.3-debian-9-r99" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
     CASSANDRA_ENABLE_REMOTE_CONNECTIONS="true" \
@@ -32,4 +32,4 @@ EXPOSE 9042 7000
 
 USER 1001
 ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "nami", "start", "--foreground", "cassandra" ]
+CMD [ "/run.sh" ]
