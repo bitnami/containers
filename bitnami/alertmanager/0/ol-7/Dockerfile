@@ -1,10 +1,10 @@
 FROM bitnami/oraclelinux-extras:7-r163 as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/alertmanager-0.15.2-2-linux-x86_64-ol-7.tar.gz && \
-    echo "b3f289d2685097d65fe3b0fc83e514686befacc4860f2ed20a67126402279f75  /tmp/bitnami/pkg/cache/alertmanager-0.15.2-2-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/alertmanager-0.15.2-2-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/alertmanager-0.15.2-2-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/alertmanager-0.15.3-0-linux-x86_64-ol-7.tar.gz && \
+    echo "4a9d18aca1be1e00ac01f44a82323c1473ea61bc3e90fd3ae09efb5edabb0d58  /tmp/bitnami/pkg/cache/alertmanager-0.15.3-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/alertmanager-0.15.3-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/alertmanager-0.15.3-0-linux-x86_64-ol-7.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/alertmanager /opt/bitnami/alertmanager
 ENV BITNAMI_APP_NAME="alertmanager" \
-    BITNAMI_IMAGE_VERSION="0.15.2-ol-7-r75" \
+    BITNAMI_IMAGE_VERSION="0.15.3-ol-7-r0" \
     PATH="/opt/bitnami/alertmanager/bin:$PATH"
 
 RUN install_packages ca-certificates
