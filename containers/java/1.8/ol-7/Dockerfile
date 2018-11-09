@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-runtimes:7-r134
+FROM bitnami/oraclelinux-runtimes:7-r135
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/java-1.8.191-3-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="1.8.191-ol-7-r20" \
+    BITNAMI_IMAGE_VERSION="1.8.191-ol-7-r21" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
