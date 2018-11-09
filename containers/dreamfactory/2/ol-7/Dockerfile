@@ -1,14 +1,14 @@
-FROM bitnami/oraclelinux-extras:7-r162
+FROM bitnami/oraclelinux-extras:7-r163
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libpcap libpng libselinux libssh2 libstdc++ libtasn1 libtidy libuv libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.37-1 --checksum 3220aa5e11f8a9914ddc3319235119b28da16c9a15ea33509feb40800d72d55b
 RUN bitnami-pkg install redis-client-4.0.11-2 --checksum eea131720c543e18ed771709b89967b6368f57fd742393d1d7568f18b296589f
-RUN bitnami-pkg unpack php-7.1.23-0 --checksum 2bed406160aa91e888eda47df01d9d55a8fbba40b78f806ca2bc481c5aca0754
+RUN bitnami-pkg unpack php-7.1.24-0 --checksum 788b5d132592c1777c1e38d16a7a5af29f76f9153c2e18f2516ab2543b80d62b
 RUN bitnami-pkg install mysql-client-10.1.37-0 --checksum c1a94cb16b0325672c1c653d017f909e705a0be0efc46cc2a2a416d7e6a196da
 RUN bitnami-pkg install mongodb-client-3.6.8-0 --checksum 27cfb8940fe38034938e2f4bd56b640d56fc9d83f2617691be74ead4353f0723
-RUN bitnami-pkg unpack libphp-7.1.23-2 --checksum eaf6275897d49c8a7d1f33922f049d9b99fca4ea7fee0f38ee65d972a2f1ae38
+RUN bitnami-pkg unpack libphp-7.1.24-0 --checksum eeb762bc0bab3be32b2a62fd7df82d53be77f33756f4bbff0df77428610320c9
 RUN bitnami-pkg unpack dreamfactory-2.14.1-2 --checksum 479dae0db411da8eef5f914c9f35cb3de00bbd3fb546d7b9e80e7b93e36c7d61
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
@@ -18,7 +18,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="2.14.1-ol-7-r33" \
+    BITNAMI_IMAGE_VERSION="2.14.1-ol-7-r34" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
     MARIADB_PORT_NUMBER="3306" \
