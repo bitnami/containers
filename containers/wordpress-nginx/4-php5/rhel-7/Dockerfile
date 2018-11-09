@@ -15,6 +15,8 @@ RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
+COPY wordpress-vhosts.conf /bitnami/nginx/conf/vhosts/
+
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
     BITNAMI_IMAGE_VERSION="4.9.8-php5-rhel-7-r7" \
