@@ -50,7 +50,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.14-ol-7`, `1.14.1-ol-7-r1` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.1-ol-7-r1/1.14/ol-7/Dockerfile)
+* [`1.14-ol-7`, `1.14.1-ol-7-r2` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.1-ol-7-r2/1.14/ol-7/Dockerfile)
 * [`1.14-debian-9`, `1.14.1-debian-9-r1`, `1.14`, `1.14.1`, `1.14.1-r1`, `latest` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.1-debian-9-r1/1.14/debian-9/Dockerfile)
 * [`1.14-rhel-7`, `1.14.0-rhel-7-r13` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.0-rhel-7-r13/1.14/rhel-7/Dockerfile)
 
@@ -155,7 +155,7 @@ or using Docker Compose:
 version: '2'
 
 services:
-  mariadb:
+  nginx:
     image: 'bitnami/nginx:latest'
     ports:
       - '80:8080'
