@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r70
+FROM bitnami/minideb-extras-base:stretch-r71
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -18,7 +18,7 @@ RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.14.1-debian-9-r2" \
+    BITNAMI_IMAGE_VERSION="1.14.1-debian-9-r3" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
     NGINX_HTTP_PORT_NUMBER="8080" \
