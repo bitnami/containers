@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r163
+FROM bitnami/oraclelinux-extras:7-r164
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg install git-2.19.1-2 --checksum f216b1ac61b0bf86f3531671dee5be53
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="git" \
-    BITNAMI_IMAGE_VERSION="2.19.1-ol-7-r8" \
+    BITNAMI_IMAGE_VERSION="2.19.1-ol-7-r9" \
     PATH="/opt/bitnami/git/bin:$PATH"
 
 ENTRYPOINT [ "git" ]
