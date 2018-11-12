@@ -5,7 +5,7 @@ services:
     volumes:
       - 'postgresql_data:/bitnami'
   redis:
-    image: 'bitnami/redis:latest'
+    image: 'bitnami/redis:4.0'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
