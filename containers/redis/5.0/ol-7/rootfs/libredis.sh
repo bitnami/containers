@@ -309,7 +309,9 @@ redis_initialize() {
 
     # User injected custom configuration
     if [[ -e "$REDIS_BASEDIR/etc/redis.conf" ]]; then
-        [[ -e "$REDIS_BASEDIR/etc/redis-default.conf" ]] && rm "${REDIS_BASEDIR}/etc/redis-default.conf"
+        if [[ -e "$REDIS_BASEDIR/etc/redis-default.conf" ]]; then
+          rm "${REDIS_BASEDIR}/etc/redis-default.conf"
+        fi
     else
         debug "Ensuring expected directories/files exist..."
         for dir in "${REDIS_VOLUME}/data" "${REDIS_BASEDIR}/tmp" "${REDIS_LOGDIR}"; do
