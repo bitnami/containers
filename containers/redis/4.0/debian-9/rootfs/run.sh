@@ -21,7 +21,7 @@ args=("$REDIS_BASEDIR/etc/redis.conf" "--daemonize" "no" "$@")
 # configure extra command line flags
 if [[ -n "$REDIS_EXTRA_FLAGS" ]]; then
     warn "REDIS_EXTRA_FLAGS is deprecated. Please specify any extra-flag using '/run.sh $REDIS_EXTRA_FLAGS' as command instead"
-    ARGS+=("$REDIS_EXTRA_FLAGS")
+    args+=("$REDIS_EXTRA_FLAGS")
 fi
 
 info "** Starting Redis **"
