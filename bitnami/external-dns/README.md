@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.5.8-ol-7-r28` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.5.8-ol-7-r28/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.5.8-debian-9-r10`, `0`, `0.5.8`, `0.5.8-r10`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.5.8-debian-9-r10/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.5.8-debian-9-r11`, `0`, `0.5.8`, `0.5.8-r11`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.5.8-debian-9-r11/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/external-dns GitHub repo](https://github.com/bitnami/bitnami-docker-external-dns).
 
