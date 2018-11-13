@@ -21,7 +21,7 @@ $ docker run --name pushgateway bitnami/pushgateway:latest
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/13ca668951dbeb979d59c01d20a94adb517a8bb1661dfd3e1c4473719b4645bd)](https://anchore.io/image/dockerhub/bitnami%2Fpushgateway%3Alatest#security)
+[![Anchore Image Overview](https://anchore.io/service/badges/image/61488e38ae94c0034727947148597a52ba10511e9f0c114acbc662d810ec102c)](https://anchore.io/image/dockerhub/bitnami%2Fpushgateway%3Alatest#security)
 
 > The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
@@ -36,7 +36,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.6.0-ol-7-r20` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.6.0-ol-7-r20/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.6.0-ol-7-r21` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.6.0-ol-7-r21/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.6.0-debian-9-r20`, `0`, `0.6.0`, `0.6.0-r20`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.6.0-debian-9-r20/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pushgateway GitHub repo](https://github.com/bitnami/bitnami-docker-pushgateway).
