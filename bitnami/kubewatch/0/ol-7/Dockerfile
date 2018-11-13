@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r166 as buildenv
+FROM bitnami/oraclelinux-extras:7-r167 as buildenv
 
 RUN install_packages ca-certificates glibc wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubewatch-0.0.4-1-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r166
+FROM bitnami/oraclelinux-extras:7-r167
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/kubewatch /opt/bitnami/kubewatch
 ENV BITNAMI_APP_NAME="kubewatch" \
-    BITNAMI_IMAGE_VERSION="0.0.4-ol-7-r128" \
+    BITNAMI_IMAGE_VERSION="0.0.4-ol-7-r129" \
     HOME="/opt/bitnami/kubewatch/" \
     KW_FLOCK_URL="" \
     KW_HIPCHAT_ROOM="" \
