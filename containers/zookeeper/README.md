@@ -276,10 +276,15 @@ Authentication based on SASL/Digest-MD5 can be easily enabled by passing the `ZO
 When enabling the ZooKeeper authentication, it is also required to pass the list of users and passwords that will
 be able to login.
 
+| Note: Authentication is enabled using the CLI tool `zkCli.sh`. Therefore, it's necessary to set
+`ZOO_CLIENT_USER` and `ZOO_CLIENT_PASSWORD` environment variables too.
+
 ```bash
 docker run -it -e ZOO_ENABLE_AUTH=yes \
                -e ZOO_SERVER_USERS=user1,user2 \
                -e ZOO_SERVER_PASSWORDS=pass4user1,pass4user2 \
+	       -e ZOO_CLIENT_USER=user1 \
+	       -e ZOO_CLIENT_PASSWORD=pass4user1 \
                bitnami/zookeeper
 ```
 
@@ -297,6 +302,8 @@ services:
       - ZOO_ENABLE_AUTH=yes
       - ZOO_SERVER_USERS=user1,user2
       - ZOO_SERVER_PASSWORDS=pass4user1,pass4user2
+      - ZOO_CLIENT_USER=user1
+      - ZOO_CLIENT_PASSWORD=pass4user1
 ```
 
 ## Setting up a Zookeeper ensemble
