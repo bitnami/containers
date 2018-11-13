@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.12.1-ol-7-r6` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.12.1-ol-7-r6/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.12.1-debian-9-r6`, `1`, `1.12.1`, `1.12.1-r6`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.12.1-debian-9-r6/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.12.1-debian-9-r7`, `1`, `1.12.1`, `1.12.1-r7`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.12.1-debian-9-r7/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cluster-autoscaler GitHub repo](https://github.com/bitnami/bitnami-docker-cluster-autoscaler).
 
