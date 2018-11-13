@@ -1,17 +1,19 @@
-FROM bitnami/oraclelinux-extras:7-r94
+FROM bitnami/oraclelinux-extras:7-r167
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages bzip2-libs cyrus-sasl-lib freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline xz-libs zlib
-RUN bitnami-pkg unpack nginx-1.14.0-2 --checksum 1f459a388d680c18a47177b7e3c50af4e0402311b6f67ae72bd4bff76b6b965e
-RUN bitnami-pkg unpack php-7.0.31-1 --checksum f58969a4b2e7a6607e17bd6446c4a8e7af780d6275955c274495ac222ac81771
-RUN bitnami-pkg unpack mysql-client-10.1.35-0 --checksum e8b7b1feec15c0dd8c1643eb0ab0220c384e1eb981e1ef7cd51d06bb9fb09e6e
-RUN bitnami-pkg unpack wordpress-4.9.8-1 --checksum 3487ab5dc3fd1232394158dccd92e9f768e5f92a7f5b979fdb12b2abdf392564
+RUN install_packages bzip2-libs cyrus-sasl-lib freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libmemcached libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline xz-libs zlib
+RUN bitnami-pkg unpack nginx-1.14.1-0 --checksum f8205fbf2779e1d2ea3755225cd1b7d6a16ccbfc18ede5ccbafc101bf46dea39
+RUN bitnami-pkg unpack php-7.1.24-1 --checksum c28f2db4764494844faeba4a401c6280fb2317e0020b0cc0551e1469ca87b5d7
+RUN bitnami-pkg unpack mysql-client-10.1.37-0 --checksum c1a94cb16b0325672c1c653d017f909e705a0be0efc46cc2a2a416d7e6a196da
+RUN bitnami-pkg unpack wordpress-4.9.8-7 --checksum 3797c03235ae611268400bffbbc431c69c27109fc61c78c61c07236852c03dcb
+RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
+RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="4.9.8-ol-7-r26" \
+    BITNAMI_IMAGE_VERSION="4.9.8-ol-7-r27" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
