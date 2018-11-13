@@ -31,7 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.12-ol-7`, `1.12.2-ol-7-r5` (1.12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.2-ol-7-r5/1.12/ol-7/Dockerfile)
-* [`1.12-debian-9`, `1.12.2-debian-9-r5`, `1.12`, `1.12.2`, `1.12.2-r5`, `latest` (1.12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.2-debian-9-r5/1.12/debian-9/Dockerfile)
+* [`1.12-debian-9`, `1.12.2-debian-9-r6`, `1.12`, `1.12.2`, `1.12.2-r6`, `latest` (1.12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.2-debian-9-r6/1.12/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubectl GitHub repo](https://github.com/bitnami/bitnami-docker-kubectl).
 
@@ -59,11 +59,13 @@ $ docker build -t bitnami/kubectl:latest https://github.com/bitnami/bitnami-dock
 
 ## Running commands
 
-To run commands inside this container you can use `docker run`, for example to execute `kubectl --version` you can follow below example
+To run commands inside this container you can use `docker run`, for example to execute `kubectl --version` you can follow the example below:
 
 ```bash
-$ docker run --name bitnami/kubectl:latest --version
+$ docker run --rm --name kubectl bitnami/kubectl:latest -- --version
 ```
+
+Consult the [Kubectl Reference Documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands) to find the completed list of commands available.
 
 # Contributing
 
