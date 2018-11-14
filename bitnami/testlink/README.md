@@ -87,9 +87,9 @@ services:
       - TESTLINK_DATABASE_USER=bn_testlink
       - TESTLINK_DATABASE_NAME=bitnami_testlink
       - ALLOW_EMPTY_PASSWORD=yes
-      - TESTLINK_USERNAME: admin
-      - TESTLINK_PASSWORD: verysecretadminpassword
-      - TESTLINK_EMAIL: admin@example.com
+      - TESTLINK_USERNAME=admin
+      - TESTLINK_PASSWORD=verysecretadminpassword
+      - TESTLINK_EMAIL=admin@example.com
 
 volumes:
   mariadb_data:
