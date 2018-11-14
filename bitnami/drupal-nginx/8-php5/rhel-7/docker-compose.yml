@@ -1,0 +1,33 @@
+version: '2'
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    volumes:
+      - 'mariadb_data:/bitnami'
+    environment:
+      - MARIADB_USER=bn_drupal
+      - MARIADB_DATABASE=bitnami_drupal
+      - ALLOW_EMPTY_PASSWORD=yes
+  drupal:
+    image: 'bitnami/drupal-nginx:8-php5-rhel-7'
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '80:8080'
+      - '443:8443'
+    volumes:
+      - 'drupal_data:/bitnami/drupal'
+      - './drupal-vhosts.conf:/bitnami/nginx/conf/vhosts/drupal-vhosts.conf'
+    depends_on:
+      - mariadb
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - WORDPRESS_DATABASE_USER=bn_wordpress
+      - WORDPRESS_DATABASE_NAME=bitnami_wordpress
+      - ALLOW_EMPTY_PASSWORD=yes
+volumes:
+  mariadb_data:
+    driver: local
+  drupal_data:
+    driver: local
