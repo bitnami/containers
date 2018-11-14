@@ -56,7 +56,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.4.12-ol-7-r141` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-ol-7-r141/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.4.12-debian-9-r105`, `3`, `3.4.12`, `3.4.12-r105`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-debian-9-r105/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.4.12-debian-9-r106`, `3`, `3.4.12`, `3.4.12-r106`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.12-debian-9-r106/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
@@ -276,15 +276,15 @@ Authentication based on SASL/Digest-MD5 can be easily enabled by passing the `ZO
 When enabling the ZooKeeper authentication, it is also required to pass the list of users and passwords that will
 be able to login.
 
-| Note: Authentication is enabled using the CLI tool `zkCli.sh`. Therefore, it's necessary to set
+> Note: Authentication is enabled using the CLI tool `zkCli.sh`. Therefore, it's necessary to set
 `ZOO_CLIENT_USER` and `ZOO_CLIENT_PASSWORD` environment variables too.
 
 ```bash
 docker run -it -e ZOO_ENABLE_AUTH=yes \
                -e ZOO_SERVER_USERS=user1,user2 \
                -e ZOO_SERVER_PASSWORDS=pass4user1,pass4user2 \
-	       -e ZOO_CLIENT_USER=user1 \
-	       -e ZOO_CLIENT_PASSWORD=pass4user1 \
+               -e ZOO_CLIENT_USER=user1 \
+               -e ZOO_CLIENT_PASSWORD=pass4user1 \
                bitnami/zookeeper
 ```
 
