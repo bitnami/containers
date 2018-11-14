@@ -12,7 +12,6 @@ RUN bitnami-pkg unpack php-7.1.24-0 --checksum 1b20890ff8725986800661f1bf50d976c
 RUN bitnami-pkg unpack mysql-client-10.1.37-0 --checksum a30c54095ffb4d9180f53d925a67e4b7e11523e48b67f2d5912c20d80a703f52
 RUN bitnami-pkg unpack libphp-7.1.24-0 --checksum 059342063fbee25674f52cba9fffdf87d0c99c1833dc84ccb1b6c0e22f5fe83c
 RUN bitnami-pkg unpack wordpress-4.9.8-7 --checksum 5f124f573fb85a53eb4236e6c3f2bb2cd19d589cc9dab3447636e0eb89bbd298
-
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
