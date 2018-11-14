@@ -9,9 +9,9 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.37-1 --checksum 0be48a8445346b61820b03a8833966eb5335bdd392801b7cb7d91a5a9c50e60c
 RUN bitnami-pkg unpack php-5.6.38-2 --checksum 03ae59ec97f59c6b7f9c3043fff8b4485b6ad75502de492b46da7ab2a447025d
-RUN bitnami-pkg unpack mysql-client-10.1.36-1 --checksum e13014dbb969bfa2469f45694112e9b62fe886753899c8bc2cfd32705af999d9
+RUN bitnami-pkg unpack mysql-client-10.1.37-0 --checksum a30c54095ffb4d9180f53d925a67e4b7e11523e48b67f2d5912c20d80a703f52
 RUN bitnami-pkg install libphp-5.6.38-2 --checksum 3a071c80731ac56d0889366c74381a9fa36f7cc1555c03d4f3ebfc7c18c8b342
-RUN bitnami-pkg unpack wordpress-4.9.8-6 --checksum 1bba683d48f17671f4c6cff1bd4432a7175e9b46df49c6765035be71bbe3cfb7
+RUN bitnami-pkg unpack wordpress-4.9.8-7 --checksum 5f124f573fb85a53eb4236e6c3f2bb2cd19d589cc9dab3447636e0eb89bbd298
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
