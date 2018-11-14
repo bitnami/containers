@@ -196,6 +196,7 @@ elasticsearch:
 
 Available variables:
 
+ - `BITNAMI_DEBUG`: Increase verbosity on initialization logs. Default **false**
  - `ELASTICSEARCH_CLUSTER_NAME`: The Elasticsearch Cluster Name. Default: **elasticsearch-cluster**
  - `ELASTICSEARCH_CLUSTER_HOSTS`: List of elasticsearch hosts to set the cluster. Available separatos are ' ', ',' and ';'. No defaults.
  - `ELASTICSEARCH_IS_DEDICATED_NODE`: Elasticsearch node to behave as a 'dedicated node'. Default: **no**

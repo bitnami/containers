@@ -397,6 +397,7 @@ elasticsearch_initialize() {
 elasticsearch_install_plugins() {
     read -r -a plugins_list <<< "$(tr ',;' ' ' <<< "$ELASTICSEARCH_PLUGINS")"
     debug "Installing plugins: ${plugins_list[*]}"
+    elasticsearch_conf_set plugin.mandatory "$ELASTICSEARCH_PLUGINS"
     for plugin in "${plugins_list[@]}"; do
         debug "Installing plugin: $plugin"
         if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
