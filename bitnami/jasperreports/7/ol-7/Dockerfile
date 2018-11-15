@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r167
+FROM bitnami/oraclelinux-extras:7-r168
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack jasperreports-7.1.0-1 --checksum 0d9ca053317f6e8ab49c2514
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.1.0-ol-7-r128" \
+    BITNAMI_IMAGE_VERSION="7.1.0-ol-7-r129" \
     JASPERREPORTS_DATABASE_NAME="bitnami_jasperreports" \
     JASPERREPORTS_DATABASE_PASSWORD="" \
     JASPERREPORTS_DATABASE_USER="bn_jasperreports" \
