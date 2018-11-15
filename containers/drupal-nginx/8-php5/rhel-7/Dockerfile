@@ -18,7 +18,7 @@ RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
 RUN mkdir -p /bitnami/nginx/conf/vhosts && chmod -R g+rwX /bitnami/nginx/conf
 
 COPY rootfs /
-COPY wordpress-vhosts.conf /bitnami/nginx/conf/vhosts/
+COPY drupal-vhosts.conf /bitnami/nginx/conf/vhosts/
 
 ENV ALLOW_EMPTY_PASSWORD="no" \
     NGINX_DAEMON_GROUP="" \
