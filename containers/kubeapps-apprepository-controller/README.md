@@ -1,8 +1,8 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-kubeapps-apprepository-controller/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-kubeapps-apprepository-controller/tree/master)
-
 # What is Kubeapps AppRepository Controller?
 
-> Kubeapps AppRepository Controller is a core component of Kubeapps, a Web-based application deployment and management tool for Kubernetes clusters.
+> Kubeapps AppRepository Controller is one of the main components of Kubeapps, a Web-based application deployment and management tool for Kubernetes clusters.
+>
+> This controller monitors resources of type 'AppRepository' and sync the database so it has information about the applications available on each repository configured.
 
 [https://kubeapps.com/](https://kubeapps.com/)
 
@@ -17,9 +17,6 @@ $ docker run --name kubeapps-apprepository-controller bitnami/kubeapps-appreposi
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* Bitnami container images are released daily with the latest distribution packages available.
 
 [![Anchore Image Overview](https://anchore.io/service/badges/image/17b93b3b61b73d94e0753d039d9137e2139a0a42e3ea266aba2ed98b5bffc0c8)](https://anchore.io/image/dockerhub/bitnami%2Fkubeapps-apprepository-controller%3Alatest#security)
 
@@ -38,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-scratch`, `1.0.0-scratch-r1`, `1`, `1.0.0`, `1.0.0-r1`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-apprepository-controller/blob/1.0.0/1/scratch/Dockerfile)
+* [`1-scratch`, `1.0.0-scratch-r2`, `1`, `1.0.0`, `1.0.0-r2`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-apprepository-controller/blob/1.0.0/1/scratch/Dockerfile)
 
 # Configuration
 
