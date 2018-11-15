@@ -8,11 +8,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages wget apr apr-util bzip2-libs glibc libcom_err libcurl expat libffi freetype libgcc libgcrypt gmp gnutls libgpg-error cyrus-sasl-gssapi libicu libidn libjpeg-turbo krb5-libs keyutils-libs openldap xz-libs libtomcrypt ncurses-libs nettle p11-kit pcre2 libpng libpng12 readline cyrus-sasl-lib libssh2 openssl-libs libstdc++ libtasn1 libuuid libxml2 libxslt zlib
 RUN bitnami-pkg unpack nginx-1.14.0-5 --checksum 9bd2b1045d82829c5bbe1b286a43e11b6a0e1e19c5c34b7ad20b8df5bab2ca71
-RUN bitnami-pkg unpack php-5.6.38-2 --checksum 03ae59ec97f59c6b7f9c3043fff8b4485b6ad75502de492b46da7ab2a447025d
+RUN bitnami-pkg unpack php-7.1.23-0 --checksum 9add08ad08b82b9533d3d625017031aa99b7259f5738d25b688e59e47ff1487f
 RUN bitnami-pkg unpack mysql-client-10.1.37-0 --checksum a30c54095ffb4d9180f53d925a67e4b7e11523e48b67f2d5912c20d80a703f52
 RUN bitnami-pkg unpack drupal-8.6.3-0 --checksum 7ad51731f1bfbb2b98f1f5f8ff994a30e318f537f523de59f80023b5c97ec446
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
-RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
+RUN ln -sf /dev/error /opt/bitnami/nginx/logs/error.log
 
 # TODO: Fix for htaccess issue
 RUN mkdir -p /bitnami/nginx/conf/vhosts && chmod -R g+rwX /bitnami/nginx/conf
