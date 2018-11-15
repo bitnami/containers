@@ -10,7 +10,6 @@ RUN install_packages wget apr apr-util bzip2-libs glibc libcom_err libcurl expat
 RUN bitnami-pkg unpack nginx-1.14.0-5 --checksum 9bd2b1045d82829c5bbe1b286a43e11b6a0e1e19c5c34b7ad20b8df5bab2ca71
 RUN bitnami-pkg unpack php-7.1.23-0 --checksum 9add08ad08b82b9533d3d625017031aa99b7259f5738d25b688e59e47ff1487f
 RUN bitnami-pkg unpack mysql-client-10.1.37-0 --checksum a30c54095ffb4d9180f53d925a67e4b7e11523e48b67f2d5912c20d80a703f52
-RUN bitnami-pkg unpack libphp-7.1.23-2 --checksum 2757a6961f347bbc90cffee59d2c54e9f7f2d0a427b3454c68abdc6b42ba11e6
 RUN bitnami-pkg unpack drupal-8.6.3-0 --checksum 7ad51731f1bfbb2b98f1f5f8ff994a30e318f537f523de59f80023b5c97ec446
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
