@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r167
+FROM bitnami/oraclelinux-extras:7-r168
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -13,7 +13,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="4.9.8-ol-7-r27" \
+    BITNAMI_IMAGE_VERSION="4.9.8-ol-7-r28" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
