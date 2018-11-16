@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/kubewatch /opt/bitnami/kubewatch
 ENV BITNAMI_APP_NAME="kubewatch" \
-    BITNAMI_IMAGE_VERSION="0.0.4-ol-7-r131" \
+    BITNAMI_IMAGE_VERSION="0.0.4-ol-7-r132" \
     HOME="/opt/bitnami/kubewatch/" \
     KW_FLOCK_URL="" \
     KW_HIPCHAT_ROOM="" \
