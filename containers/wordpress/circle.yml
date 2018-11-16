@@ -10,8 +10,8 @@ jobs:
           VARIANTS_LIST: "php5"
           DISTRIBUTIONS_LIST: "debian-9,ol-7,rhel-7"
           IMAGE_NAME: wordpress
-          CHART_NAME: wordpress
-          CHART_REPO: https://github.com/helm/charts
+          
+          
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
