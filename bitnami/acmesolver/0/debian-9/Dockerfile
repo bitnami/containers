@@ -1,10 +1,10 @@
 FROM bitnami/minideb:stretch as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/acmesolver-0.5.0-3-linux-amd64-debian-9.tar.gz && \
-    echo "e8dba6149ae49ba803ab4e416f0ec90ba507c058aac1534092fa5da761aa7e3e  /tmp/bitnami/pkg/cache/acmesolver-0.5.0-3-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/acmesolver-0.5.0-3-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/acmesolver-0.5.0-3-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/acmesolver-0.5.1-0-linux-amd64-debian-9.tar.gz && \
+    echo "9048e431f1cc2681ca8930ede4dd45a5d75194d2b8be317ce1775d6f0c777c77  /tmp/bitnami/pkg/cache/acmesolver-0.5.1-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/acmesolver-0.5.1-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/acmesolver-0.5.1-0-linux-amd64-debian-9.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/acmesolver /opt/bitnami/acmesolver
 ENV BITNAMI_APP_NAME="acmesolver" \
-    BITNAMI_IMAGE_VERSION="0.5.0-debian-9-r59" \
+    BITNAMI_IMAGE_VERSION="0.5.1-debian-9-r0" \
     PATH="/opt/bitnami/acmesolver/bin:$PATH"
 
 RUN install_packages ca-certificates
