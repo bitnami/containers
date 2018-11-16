@@ -37,7 +37,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.6.0-ol-7-r23` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.6.0-ol-7-r23/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.6.0-debian-9-r22`, `0`, `0.6.0`, `0.6.0-r22`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.6.0-debian-9-r22/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.6.0-debian-9-r23`, `0`, `0.6.0`, `0.6.0-r23`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.6.0-debian-9-r23/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pushgateway GitHub repo](https://github.com/bitnami/bitnami-docker-pushgateway).
 
