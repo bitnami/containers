@@ -35,12 +35,5 @@ spec:
             - --expander=least-waste
             - --nodes=1:10:k8s-worker-asg-1
             - --nodes=1:3:k8s-worker-asg-2
-          volumeMounts:
-            - name: ssl-certs
-              mountPath: /etc/ssl/certs/ca-certificates.crt
-              readOnly: true
           imagePullPolicy: "Always"
-      volumes:
-        - name: ssl-certs
-          hostPath:
-            path: "/etc/ssl/certs/ca-certificates.crt"
+

@@ -40,12 +40,5 @@ spec:
             - --cloud-provider=aws
             - --skip-nodes-with-local-storage=false
             - --nodes={{ node_asg_min }}:{{ node_asg_max }}:{{ name }}
-          volumeMounts:
-            - name: ssl-certs
-              mountPath: /etc/ssl/certs/ca-certificates.crt
-              readOnly: true
           imagePullPolicy: "Always"
-      volumes:
-        - name: ssl-certs
-          hostPath:
-            path: "/etc/ssl/certs/ca-certificates.crt"
+
