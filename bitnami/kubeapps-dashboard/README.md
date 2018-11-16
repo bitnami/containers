@@ -2,7 +2,9 @@
 
 # What is Kubeapps Dashboard?
 
-> Kubeapps dashboard is a core component of Kubeapps, a Web-based application deployment and management tool for Kubernetes clusters.
+> Kubeapps Dashboard is the core component of Kubeapps, a Web-based application deployment and management tool for Kubernetes clusters.
+>
+> It provides a simple browse and click experience for installing and manage Kubernetes applications packaged as Helm charts.
 
 [https://kubeapps.com/](https://kubeapps.com/)
 
@@ -38,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.0.0-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-dashboard/blob/1.0.0-ol-7-r0/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.0.0-ol-7-r1` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-dashboard/blob/1.0.0-ol-7-r1/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.0.0-debian-9-r0`, `1`, `1.0.0`, `1.0.0-r0`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-dashboard/blob/1.0.0-debian-9-r0/1/debian-9/Dockerfile)
 
 # Configuration
