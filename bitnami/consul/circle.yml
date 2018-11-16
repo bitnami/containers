@@ -9,8 +9,8 @@ jobs:
           LATEST_STABLE: "1"
           DISTRIBUTIONS_LIST: "debian-9,ol-7"
           IMAGE_NAME: consul
-          CHART_NAME: consul
-          CHART_REPO: https://github.com/bitnami/charts
+          
+          
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
           GCLOUD_PROJECT: bitnami-containers
