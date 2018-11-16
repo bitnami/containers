@@ -35,7 +35,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.1.3-ol-7-r3` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.1.3-ol-7-r3/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.1.3-ol-7-r4` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.1.3-ol-7-r4/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.1.3-debian-9-r2`, `2`, `2.1.3`, `2.1.3-r2`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.1.3-debian-9-r2/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
@@ -53,6 +53,11 @@ Running Discourse with a database server is the recommended way. You can either 
 ### Run the application using Docker Compose
 
 This is the recommended way to run Discourse. You can use the following docker compose template:
+
+> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
+> 
+> discourse:
+>  image: 'your-registry/discourse:your-version'
 
 ```yaml
 version: '2'
