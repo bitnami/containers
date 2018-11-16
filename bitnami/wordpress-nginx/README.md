@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`4-php5-rhel-7`, `4.9.8-php5-rhel-7-r0` (4-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-php5-rhel-7-r0/4-php5/rhel-7/Dockerfile)
 * [`4-php5-ol-7`, `4.9.8-php5-ol-7-r82` (4-php5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-php5-ol-7-r82/4-php5/ol-7/Dockerfile)
 * [`4-php5-debian-9`, `4.9.8-php5-debian-9-r57`, `4-php5`, `4.9.8-php5`, `4.9.8-php5-r57` (4-php5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-php5-debian-9-r57/4-php5/debian-9/Dockerfile)
-* [`4-ol-7`, `4.9.8-ol-7-r29` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-ol-7-r29/4/ol-7/Dockerfile)
+* [`4-ol-7`, `4.9.8-ol-7-r30` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-ol-7-r30/4/ol-7/Dockerfile)
 * [`4-debian-9`, `4.9.8-debian-9-r82`, `4`, `4.9.8`, `4.9.8-r82`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-debian-9-r82/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
@@ -56,6 +56,11 @@ WordPress requires access to a MySQL or MariaDB database to store information. W
 ## Using Docker Compose
 
 The recommended way to run WordPress is using Docker Compose using the `docker-compose.yml` file that you can find into the different directories, depending on the distro you want to use.
+
+> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
+> 
+> wordpress:
+>  image: 'your-registry/wordpress:your-version'
 
 Launch the containers using:
 
