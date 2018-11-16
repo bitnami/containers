@@ -1,4 +1,4 @@
-FROM gcr.io/helm-publish-ci/redhat-extras:7-r126
+FROM registry.rhc4tp.openshift.com/bitnami/rhel-extras-7:latest
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,13 +7,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
-RUN bitnami-pkg unpack apache-2.4.35-0 --checksum 27c21bf58f3de5f36aab8db3ccba8b8075c05a7c9ac5e4d26343fd6906cf29e1
+RUN bitnami-pkg unpack apache-2.4.37-1 --checksum 0be48a8445346b61820b03a8833966eb5335bdd392801b7cb7d91a5a9c50e60c
 RUN bitnami-pkg unpack php-5.6.38-2 --checksum 03ae59ec97f59c6b7f9c3043fff8b4485b6ad75502de492b46da7ab2a447025d
-RUN bitnami-pkg unpack mysql-client-10.1.36-0 --checksum 46075d029b7e2537f7b9f13b4662a7539230bd2801c89087c675bc3efa98d839
-RUN bitnami-pkg unpack libphp-5.6.38-1 --checksum 10d6d75e59ed466d8b1c6f2ac27c4913e6dd576d03d14823d7c408c2d927e7d6
-RUN bitnami-pkg unpack drupal-8.6.1-1 --checksum 3fda81c1caac872c86708978e4a2b9e6845dd668a24913811a794dec704e01ff
+RUN bitnami-pkg unpack mysql-client-10.1.36-1 --checksum e13014dbb969bfa2469f45694112e9b62fe886753899c8bc2cfd32705af999d9
+RUN bitnami-pkg install libphp-5.6.38-2 --checksum 3a071c80731ac56d0889366c74381a9fa36f7cc1555c03d4f3ebfc7c18c8b342
+RUN bitnami-pkg unpack drupal-8.6.2-1 --checksum e74f010ce44dab91635bada39b0485cbbb34502b053eea45bea9cba67edacf9c
+RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
-RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/error_log
+RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
