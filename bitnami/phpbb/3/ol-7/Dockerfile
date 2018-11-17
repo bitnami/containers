@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r169
+FROM bitnami/oraclelinux-extras:7-r170
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,14 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.37-1 --checksum 3220aa5e11f8a9914ddc3319235119
 RUN bitnami-pkg unpack php-7.1.24-2 --checksum d866d69b98bbdd90b92726a8c7004b673d1afd8c2fb08ef935997bf0895ccbc1
 RUN bitnami-pkg unpack mysql-client-10.1.37-0 --checksum c1a94cb16b0325672c1c653d017f909e705a0be0efc46cc2a2a416d7e6a196da
 RUN bitnami-pkg unpack libphp-7.1.24-1 --checksum 5902edafff09837a7cf975cea78dfdf2bcd98d7642e41e8ef3878ca58cb9ccb8
-RUN bitnami-pkg unpack phpbb-3.2.3-4 --checksum e4c4b1b33e4486c5c4868366c8c16e1d2245f4f87fe9573621969a4d89fa2f29
+RUN bitnami-pkg unpack phpbb-3.2.4-0 --checksum f9a0fcd267dc5e2e1756be367fabdaa5e3e64bd9802d6d871939510ed3f7aedf
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="phpbb" \
-    BITNAMI_IMAGE_VERSION="3.2.3-ol-7-r45" \
+    BITNAMI_IMAGE_VERSION="3.2.4-ol-7-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
