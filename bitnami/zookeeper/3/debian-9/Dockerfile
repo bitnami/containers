@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r199
+FROM bitnami/minideb-extras:stretch-r201
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack zookeeper-3.4.12-19 --checksum d3a214c4b12e6512e1ef6fab6e
 COPY rootfs /
 ENV ALLOW_ANONYMOUS_LOGIN="no" \
     BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.4.12-debian-9-r107" \
+    BITNAMI_IMAGE_VERSION="3.4.12-debian-9-r108" \
     JVMFLAGS="" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH" \
     ZOO_CLIENT_PASSWORD="" \
