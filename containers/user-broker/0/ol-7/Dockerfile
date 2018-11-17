@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r168 as buildenv
+FROM bitnami/oraclelinux-extras:7-r170 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/user-broker-0.1.38-0-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r168
+FROM bitnami/oraclelinux-extras:7-r170
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/user-broker /opt/bitnami/user-broker
 ENV BITNAMI_APP_NAME="user-broker" \
-    BITNAMI_IMAGE_VERSION="0.1.38-ol-7-r5" \
+    BITNAMI_IMAGE_VERSION="0.1.38-ol-7-r6" \
     PATH="/opt/bitnami/user-broker/bin:$PATH"
 
 EXPOSE 8005 8080
