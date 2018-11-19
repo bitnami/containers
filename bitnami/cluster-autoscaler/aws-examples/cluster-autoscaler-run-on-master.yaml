@@ -34,7 +34,7 @@ spec:
               cpu: 100m
               memory: 300Mi
           command:
-            - ./cluster-autoscaler
+            - cluster-autoscaler
             - --v=4
             - --stderrthreshold=info
             - --cloud-provider=aws
