@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/kubectl /opt/bitnami/kubectl
 ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.12.2-debian-9-r10" \
+    BITNAMI_IMAGE_VERSION="1.12.2-debian-9-r11" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 RUN chmod +x /opt/bitnami/kubectl/bin/kubectl
