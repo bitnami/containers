@@ -2,8 +2,10 @@
 
 > NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
 > 
+> ```
 > containers:
 >   - image: 'your-registry/cluster-autoscaler:your-version'
+> ```
 
 Run the command below to create the RBAC requirements to deploy Cluster Autoscaler on your cluster:
 
