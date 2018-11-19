@@ -59,8 +59,8 @@ The recommended way to run WordPress is using Docker Compose using the `docker-c
 
 > NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
 > 
-> wordpress:
->  image: 'your-registry/wordpress:your-version'
+> containers:
+>   - image: 'your-registry/cluster-autoscaler:your-version'
 
 Launch the containers using:
 
