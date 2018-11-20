@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r170
+FROM bitnami/oraclelinux-extras:7-r173
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack redis-sentinel-5.0.0-2 --checksum 40e52400fe62349c9cb7ab6
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="5.0.0-ol-7-r12" \
+    BITNAMI_IMAGE_VERSION="5.0.0-ol-7-r13" \
     PATH="/opt/bitnami/redis-sentinel/bin:$PATH" \
     REDIS_MASTER_HOST="redis" \
     REDIS_MASTER_PASSWORD="" \
