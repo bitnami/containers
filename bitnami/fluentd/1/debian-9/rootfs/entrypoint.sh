@@ -3,9 +3,9 @@
 FLUENTD_CONF=${FLUENTD_CONF:-"fluentd.conf"}
 CONF_FILE="/opt/bitnami/fluentd/conf/${FLUENTD_CONF}"
 
-if [ ! -e ${CONF_FILE} ]; then
+if [[ ! -e "$CONF_FILE" ]]; then
     echo "==> Writing config file..."
-    cat > ${CONF_FILE} << EOF
+    cat > "$CONF_FILE" << EOF
 <source>
   @type  forward
   @id    input1
