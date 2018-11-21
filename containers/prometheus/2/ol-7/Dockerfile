@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/prometheus /opt/bitnami/prometheus
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.5.0-ol-7-r14" \
+    BITNAMI_IMAGE_VERSION="2.5.0-ol-7-r15" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 RUN install_packages ca-certificates
