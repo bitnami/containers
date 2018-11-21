@@ -35,7 +35,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.7.0-ol-7-r1` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.7.0-ol-7-r1/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.7.0-ol-7-r2` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.7.0-ol-7-r2/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.7.0-debian-9-r1`, `3`, `3.7.0`, `3.7.0-r1`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.7.0-debian-9-r1/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
