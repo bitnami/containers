@@ -40,7 +40,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.4.10-ol-7-r5` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.10-ol-7-r5/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.4.10-ol-7-r6` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.10-ol-7-r6/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.4.10-debian-9-r3`, `3`, `3.4.10`, `3.4.10-r3`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.4.10-debian-9-r3/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/neo4j GitHub repo](https://github.com/bitnami/bitnami-docker-neo4j).
