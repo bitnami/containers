@@ -39,6 +39,18 @@ $ docker-compose up -d
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
 
+# How to deploy Redis Sentinel in Kubernetes?
+
+You can find an example for testing in the file `test.yaml`. To launch this sample file run:
+
+```bash
+$ kubectl apply -f test.yaml
+```
+
+> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
+>
+> - image: 'your-registry/image-name:your-version'
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -46,8 +58,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5.0-ol-7`, `5.0.0-ol-7-r16` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.0-ol-7-r16/5.0/ol-7/Dockerfile)
-* [`5.0-debian-9`, `5.0.0-debian-9-r18`, `5.0`, `5.0.0`, `5.0.0-r18` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.0-debian-9-r18/5.0/debian-9/Dockerfile)
+* [`5.0-ol-7`, `5.0.2-ol-7-r1` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.2-ol-7-r1/5.0/ol-7/Dockerfile)
+* [`5.0-debian-9`, `5.0.2-debian-9-r0`, `5.0`, `5.0.2`, `5.0.2-r0` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.2-debian-9-r0/5.0/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.11-ol-7-r95` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.11-ol-7-r95/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.11-debian-9-r92`, `4.0`, `4.0.11`, `4.0.11-r92`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.11-debian-9-r92/4.0/debian-9/Dockerfile)
 
