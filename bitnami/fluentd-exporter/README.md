@@ -29,6 +29,18 @@ $ docker run --name fluentd-exporter bitnami/fluentd-exporter:latest
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
 
+# How to deploy Fluentd exporter in Kubernetes?
+
+You can find an example for testing in the file `test.yaml`. To launch this sample file run:
+
+```bash
+$ kubectl apply -f test.yaml
+```
+
+> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
+>
+> - image: 'your-registry/image-name:your-version'
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -36,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.2.0-ol-7-r125` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-ol-7-r125/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.2.0-ol-7-r126` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-ol-7-r126/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.2.0-debian-9-r121`, `0`, `0.2.0`, `0.2.0-r121`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-9-r121/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd-exporter).
