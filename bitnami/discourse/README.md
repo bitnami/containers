@@ -28,6 +28,18 @@ $ docker-compose up -d
 
 > The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
+# How to deploy Discourse in Kubernetes?
+
+You can find an example for testing in the file `test.yaml`. To launch this sample file run:
+
+```bash
+$ kubectl apply -f test.yaml
+```
+
+> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
+>
+> - image: 'your-registry/image-name:your-version'
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -35,7 +47,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.1.3-ol-7-r10` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.1.3-ol-7-r10/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.1.3-ol-7-r11` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.1.3-ol-7-r11/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.1.3-debian-9-r6`, `2`, `2.1.3`, `2.1.3-r6`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.1.3-debian-9-r6/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
