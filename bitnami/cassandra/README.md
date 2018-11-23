@@ -34,6 +34,12 @@ $ docker-compose up -d
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
 
+# How to deploy Cassandra in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Cassandra Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/cassandra).
+
+Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -41,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.11.3-ol-7-r96` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-ol-7-r96/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.11.3-ol-7-r98` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-ol-7-r98/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.11.3-debian-9-r112`, `3`, `3.11.3`, `3.11.3-r112`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-debian-9-r112/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
