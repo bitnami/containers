@@ -32,6 +32,18 @@ $ docker-compose up -d
 
 > The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
+# How to deploy Ruby in Kubernetes?
+
+You can find an example for testing in the file `test.yaml`. To launch this sample file run:
+
+```bash
+$ kubectl apply -f test.yaml
+```
+
+> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
+>
+> - image: 'your-registry/image-name:your-version'
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -39,7 +51,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2.5-ol-7`, `2.5.3-ol-7-r28` (2.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.3-ol-7-r28/2.5/ol-7/Dockerfile)
+* [`2.5-ol-7`, `2.5.3-ol-7-r29` (2.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.3-ol-7-r29/2.5/ol-7/Dockerfile)
 * [`2.5-debian-9`, `2.5.3-debian-9-r27`, `2.5`, `2.5.3`, `2.5.3-r27`, `latest` (2.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.3-debian-9-r27/2.5/debian-9/Dockerfile)
 * [`2.4-ol-7`, `2.4.5-ol-7-r25` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.5-ol-7-r25/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.5-debian-9-r28`, `2.4`, `2.4.5`, `2.4.5-r28` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.5-debian-9-r28/2.4/debian-9/Dockerfile)
