@@ -32,6 +32,18 @@ $ docker-compose up -d
 
 > The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
+# How to deploy PHP-FPM in Kubernetes?
+
+You can find an example for testing in the file `test.yaml`. To launch this sample file run:
+
+```bash
+$ kubectl apply -f test.yaml
+```
+
+> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
+>
+> - image: 'your-registry/image-name:your-version'
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -42,7 +54,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`7.2-rhel-7`, `7.2.12-rhel-7-r1` (7.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.12-rhel-7-r1/7.2/rhel-7/Dockerfile)
 * [`7.2-ol-7`, `7.2.12-ol-7-r11` (7.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.12-ol-7-r11/7.2/ol-7/Dockerfile)
-* [`7.2-debian-9`, `7.2.12-debian-9-r17`, `7.2`, `7.2.12`, `7.2.12-r17` (7.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.12-debian-9-r17/7.2/debian-9/Dockerfile)
+* [`7.2-debian-9`, `7.2.12-debian-9-r18`, `7.2`, `7.2.12`, `7.2.12-r18` (7.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.12-debian-9-r18/7.2/debian-9/Dockerfile)
 * [`7.1-rhel-7`, `7.1.24-rhel-7-r1` (7.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.24-rhel-7-r1/7.1/rhel-7/Dockerfile)
 * [`7.1-ol-7`, `7.1.24-ol-7-r13` (7.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.24-ol-7-r13/7.1/ol-7/Dockerfile)
 * [`7.1-debian-9`, `7.1.24-debian-9-r15`, `7.1`, `7.1.24`, `7.1.24-r15`, `latest` (7.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.24-debian-9-r15/7.1/debian-9/Dockerfile)
