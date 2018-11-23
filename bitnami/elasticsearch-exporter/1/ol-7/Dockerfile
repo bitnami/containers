@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/elasticsearch-exporter /opt/bitnami/elasticsearch-exporter
 ENV BITNAMI_APP_NAME="elasticsearch-exporter" \
-    BITNAMI_IMAGE_VERSION="1.0.2-ol-7-r131" \
+    BITNAMI_IMAGE_VERSION="1.0.2-ol-7-r132" \
     PATH="/opt/bitnami/elasticsearch-exporter/bin:$PATH"
 
 EXPOSE 9108
