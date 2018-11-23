@@ -28,6 +28,18 @@ $ docker-compose up -d
 
 > The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
+# How to deploy Java in Kubernetes?
+
+You can find an example for testing in the file `test.yaml`. To launch this sample file run:
+
+```bash
+$ kubectl apply -f test.yaml
+```
+
+> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
+>
+> - image: 'your-registry/image-name:your-version'
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -36,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 - [`1.8`, `1.8.191-ol-7-r31` (1.8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-ol-7-r31/1.8/ol-7/Dockerfile), [`1.8-prod`, `1.8.191-ol-7-r31-prod` (1.8/ol-7/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-ol-7-r31/1.8/ol-7/prod/Dockerfile)
-- [`1.8`, `1.8.191-debian-9-r32` (1.8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-debian-9-r32/1.8/debian-9/Dockerfile), [`1.8-prod`, `1.8.191-debian-9-r32-prod` (1.8/debian-9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-debian-9-r32/1.8/debian-9/prod/Dockerfile)
+- [`1.8`, `1.8.191-debian-9-r33` (1.8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-debian-9-r33/1.8/debian-9/Dockerfile), [`1.8-prod`, `1.8.191-debian-9-r33-prod` (1.8/debian-9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-debian-9-r33/1.8/debian-9/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
 
