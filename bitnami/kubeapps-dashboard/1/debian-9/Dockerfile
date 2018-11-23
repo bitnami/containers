@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /prepare.sh
 RUN rm -rf /opt/bitnami/nginx/html && mv /opt/bitnami/kubeapps-dashboard/build /opt/bitnami/nginx/html
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.0.0-debian-9-r6" \
+    BITNAMI_IMAGE_VERSION="1.0.0-debian-9-r7" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
     NGINX_HTTP_PORT_NUMBER="8080" \
