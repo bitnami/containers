@@ -28,13 +28,25 @@ $ docker-compose up
 
 > The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
+# How to deploy SonarQube in Kubernetes?
+
+You can find an example for testing in the file `test.yaml`. To launch this sample file run:
+
+```bash
+$ kubectl apply -f test.yaml
+```
+
+> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
+>
+> - image: 'your-registry/image-name:your-version'
+
 # Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`7-ol-7`, `7.4.0-ol-7-r12` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.4.0-ol-7-r12/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.4.0-debian-9-r9`, `7`, `7.4.0`, `7.4.0-r9`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.4.0-debian-9-r9/7/debian-9/Dockerfile)
+* [`7-debian-9`, `7.4.0-debian-9-r10`, `7`, `7.4.0`, `7.4.0-r10`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.4.0-debian-9-r10/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
 
