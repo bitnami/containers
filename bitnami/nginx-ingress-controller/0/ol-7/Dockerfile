@@ -1,10 +1,10 @@
 FROM bitnami/oraclelinux-extras:7-r176 as buildenv
 
 RUN install_packages GeoIP ca-certificates curl cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libcurl libgcc libidn libselinux libssh2 libstdc++ nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre wget zlib
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.20.0-2-linux-x86_64-ol-7.tar.gz && \
-    echo "9a4988aaee630031ca3a157c9ab302d3ddb8d195683933867d156cfb19b4f3ad  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.20.0-2-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.20.0-2-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.20.0-2-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.21.0-0-linux-x86_64-ol-7.tar.gz && \
+    echo "1d7fac54cf5d7434fcaa763441c29be86377e0d31c4058f35738729c623e94c3  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.21.0-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.21.0-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.21.0-0-linux-x86_64-ol-7.tar.gz
 RUN mkdir -p /opt/bitnami/nginx/conf/geoip && \
     cd /opt/bitnami/nginx/conf/geoip && \
     curl https://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz | gunzip >GeoIP.dat && \
@@ -21,7 +21,7 @@ COPY --from=buildenv /opt/bitnami/lua /opt/bitnami/lua
 COPY --from=buildenv /opt/bitnami/nginx /opt/bitnami/nginx
 COPY --from=buildenv /opt/bitnami/nginx-ingress-controller /opt/bitnami/nginx-ingress-controller
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.20.0-ol-7-r38" \
+    BITNAMI_IMAGE_VERSION="0.21.0-ol-7-r0" \
     PATH="/opt/bitnami/nginx-ingress-controller/bin:$PATH"
 
 RUN rpm -Uvh https://s3.amazonaws.com/aaronsilber/public/authbind-2.1.1-0.1.x86_64.rpm
