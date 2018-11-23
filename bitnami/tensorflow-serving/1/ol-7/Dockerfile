@@ -3,11 +3,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages glibc libgcc libstdc++
-RUN bitnami-pkg unpack tensorflow-serving-1.12.0-0 --checksum 9a850999f54bc154a237b263971f37f2c1fd359c975053a36610fa170521df67
+RUN bitnami-pkg unpack tensorflow-serving-1.12.0-1 --checksum 49fc456031e2b37ab3252a8eadbaf84db69635cce7c0312d7fc949a1d55f745e
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="1.12.0-ol-7-r16" \
+    BITNAMI_IMAGE_VERSION="1.12.0-ol-7-r17" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_MODEL_NAME="inception" \
     TENSORFLOW_SERVING_PORT_NUMBER="8500" \
