@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`14-ol-7`, `14.0.1-ol-7-r64` (14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/14.0.1-ol-7-r64/14/ol-7/Dockerfile)
-* [`14-debian-9`, `14.0.1-debian-9-r57`, `14`, `14.0.1`, `14.0.1-r57`, `latest` (14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/14.0.1-debian-9-r57/14/debian-9/Dockerfile)
+* [`14-debian-9`, `14.0.1-debian-9-r58`, `14`, `14.0.1`, `14.0.1-r58`, `latest` (14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/14.0.1-debian-9-r58/14/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
