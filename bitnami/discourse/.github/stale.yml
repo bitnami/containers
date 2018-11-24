@@ -16,7 +16,7 @@ staleLabel: stale
 issues:
   # Comment to post when marking as stale. Set to `false` to disable
   markComment: >
-    This Issue has been automatically marked as "stale" because it has not had recent activity (for 15 days). It will be closed if no further activity occurs. Thank you for your contributions.
+    This Issue has been automatically marked as "stale" because it has not had recent activity (for 15 days). It will be closed if no further activity occurs. Thanks for the feedback.
 
   # Comment to post when closing a stale Issue or Pull Request.
   closeComment: >
@@ -25,7 +25,7 @@ issues:
 pulls:
   # Comment to post when marking as stale. Set to `false` to disable
   markComment: >
-    This Pull Request has been automatically marked as "stale" because it has not had recent activity (for 15 days). It will be closed if no further activity occurs. Thank you for your contributions.
+    This Pull Request has been automatically marked as "stale" because it has not had recent activity (for 15 days). It will be closed if no further activity occurs. Thank you for your contribution.
 
   # Comment to post when closing a stale Issue or Pull Request.
   closeComment: >
