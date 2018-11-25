@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r176
+FROM bitnami/oraclelinux-extras:7-r178
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -13,7 +13,7 @@ RUN chmod -R g+rwX /opt/bitnami/postgresql/conf/
 COPY rootfs /
 RUN rpm -Uvh --nodeps $(repoquery --location nss_wrapper)
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="10.6.0-ol-7-r8" \
+    BITNAMI_IMAGE_VERSION="10.6.0-ol-7-r9" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
     POSTGRESQL_MASTER_HOST="" \
