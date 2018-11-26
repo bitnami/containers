@@ -41,8 +41,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-ol-7`, `7.10.10-ol-7-r23` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.10-ol-7-r23/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.10.10-debian-9-r17`, `7`, `7.10.10`, `7.10.10-r17`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.10-debian-9-r17/7/debian-9/Dockerfile)
+* [`7-ol-7`, `7.10.10-ol-7-r26` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.10-ol-7-r26/7/ol-7/Dockerfile)
+* [`7-debian-9`, `7.10.10-debian-9-r18`, `7`, `7.10.10`, `7.10.10-r18`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.10-debian-9-r18/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
 
@@ -215,36 +215,17 @@ In this case you need to specify the directories to mount on the run command. Th
 
 Bitnami provides up-to-date versions of MariaDB and SuiteCRM, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the SuiteCRM container. For the MariaDB upgrade you can take a look at https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
 
-1. Get the updated images:
+1. Create snapshots, which you can use to restore the application state should the upgrade fail:
 
-  ```bash
-  $ docker pull bitnami/suitecrm:latest
-  ```
+    - Take a snapshot of the application state
 
-2. Stop your container
+        ```bash
+        $ rsync -a /path/to/suitecrm-persistence /path/to/suitecrm-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+        ```
 
- * For docker-compose: `$ docker-compose stop suitecrm`
- * For manual execution: `$ docker stop suitecrm`
+   - Create a [snapshot with the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container).
 
-3. Take a snapshot of the application state
-
-```bash
-$ rsync -a /path/to/suitecrm-persistence /path/to/suitecrm-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-Additionally, [snapshot the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
-
-You can use these snapshots to restore the application state should the upgrade fail.
-
-4. Remove the currently running container
-
- * For docker-compose: `$ docker-compose rm -v suitecrm`
- * For manual execution: `$ docker rm -v suitecrm`
-
-5. Run the new image
-
- * For docker-compose: `$ docker-compose up suitecrm`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name suitecrm bitnami/suitecrm:latest`
+3. Upgrade SuiteCRM by following the official [SuiteCRM upgrade instructions using the upgrade wizard](https://docs.suitecrm.com/admin/installation-guide/using-the-upgrade-wizard/).
 
 # Configuration
 
@@ -353,6 +334,12 @@ This would be an example of SMTP configuration using a Gmail account:
     --volume /path/to/suitecrm-persistence:/bitnami \
     bitnami/suitecrm:latest
   ```
+# Notable Changes
+
+## 7.10.10-debian-9-r18 and 7.10.10-ol-7-r24
+
+- Due to several broken SuiteCRM features and plugins, the entire `htdocs` directory is now being persisted (instead of a select number of files and directories). Because of this, upgrades will not work and a full migration needs to be performed. Upgrade instructions have been updated to reflect these changes.
+
 # Troubleshooting
 
 * If you are automatically logged out from the administration panel, you can try deploying SuiteCRM with the environment variable `SUITECRM_VALIDATE_USER_IP=no`
