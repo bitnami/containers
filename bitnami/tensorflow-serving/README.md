@@ -123,18 +123,35 @@ Use the `--network app-tier` argument to the `docker run` command to attach the 
 
 ```bash
 $ docker run -d --name tensorflow-serving \
-    --volume /tmp/model-data:/bitnami/model-data
+    --volume /tmp/model-data:/bitnami/model-data \
     --network app-tier \
     bitnami/tensorflow-serving:latest
 ```
 
-### Step 4: Launch your TensorFlow Inception client instance
+### Step 4: Export the data model
+
+Run the `tensorflow-inception` container in background mode to export the data model that you have already downloaded.
+
+```bash
+$ docker run -d --name tensorflow-inception \
+    --volume /tmp/model-data:/bitnami/model-data \
+    --network app-tier \
+    bitnami/tensorflow-inception:latest
+```
+
+Monitor the logs of tensorflow-serving until it shows the message `Successfully loaded servable version`. That will mean it is serving the model:
+
+```
+$ docker logs tensorflow-serving -f
+```
+
+### Step 5: Launch your TensorFlow Inception client instance
 
 Finally we create a new container instance to launch the TensorFlow Serving client and connect to the server created in the previous step:
 
 ```bash
 $ docker run -it --rm \
-    --volume /tmp/model-data:/bitnami/model-data
+    --volume /tmp/model-data:/bitnami/model-data \
     --network app-tier \
     bitnami/tensorflow-inception:latest inception_client --server=tensorflow-serving:8500 --image=path/to/image.jpg
 ```
