@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONF_FILE='/opt/bitnami/kubewatch/.kubewatch.yaml';
+CONF_FILE="${KW_CONFIG:-${HOME}}/.kubewatch.yaml";
 
 if [ ! -e ${CONF_FILE} ]; then
     echo "==> Writing config file..."
@@ -38,7 +38,8 @@ else
     echo "==> Config file exists..."
 fi
 
-
-
+# Required until the PR gets released
+# https://github.com/bitnami-labs/kubewatch/pull/157
+export HOME="${KW_CONFIG}"
 
 exec kubewatch "$@"
