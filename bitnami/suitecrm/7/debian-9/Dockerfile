@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r206
+FROM bitnami/minideb-extras:stretch-r207
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.37-1 --checksum 5b12f889e29303b3979c44a08f4189
 RUN bitnami-pkg unpack php-7.1.24-4 --checksum 467fe7e1bccd6b8531cba9dedb2c2fad7c32dfec7d044ed3a5fd2ee6b6c6074a
 RUN bitnami-pkg unpack mysql-client-10.1.37-0 --checksum 2d73953a0a8f630163e14308737b97541a8cbcdafdb1efeb5a2138e720d3de14
 RUN bitnami-pkg unpack libphp-7.1.24-1 --checksum 8185d7402b8e469dc40163d7f5cf447ba51c306823cc7354dd7aad26603e8d4f
-RUN bitnami-pkg unpack suitecrm-7.10.10-0 --checksum 59d129e3eb7bfa14b1a85f1f382518d456c59a9bed8ab25c74470ebe0cdf0161
+RUN bitnami-pkg unpack suitecrm-7.10.10-1 --checksum 7530d7f706df46e43df05c512d8df88963745bc19c2b57327b994cdec067b344
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 
 COPY rootfs /
@@ -15,7 +15,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="suitecrm" \
-    BITNAMI_IMAGE_VERSION="7.10.10-debian-9-r17" \
+    BITNAMI_IMAGE_VERSION="7.10.10-debian-9-r19" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
