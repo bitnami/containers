@@ -3,11 +3,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libstdc++6
-RUN bitnami-pkg unpack kibana-5.6.13-0 --checksum 6a442376a0041006bd447b3e351f52f92e20b166e802a4729cfc76a98899634a
+RUN bitnami-pkg unpack kibana-5.6.13-1 --checksum ec30113c6b2011d357fbd7e8dae67c20af50a52e30d92c2313c316a67a70778c
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="5.6.13-debian-9-r16" \
+    BITNAMI_IMAGE_VERSION="5.6.13-debian-9-r17" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
