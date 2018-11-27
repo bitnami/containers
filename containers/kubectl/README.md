@@ -21,7 +21,7 @@ $ docker run --name kubectl bitnami/kubectl:latest
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/a2ae03b31357aaad576ae5f527b2c319bfb241a9112529129baea26005ea1186)](https://anchore.io/image/dockerhub/bitnami%2Fkubectl%3Alatest#security)
+[![Anchore Image Overview](https://anchore.io/service/badges/image/d78d91421e4ccd244f2d91414ea8261cca8468562ae55ab5d184a3739a3cebc5)](https://anchore.io/image/dockerhub/bitnami%2Fkubectl%3Alatest#security)
 
 > The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
@@ -31,7 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.12-ol-7`, `1.12.3-ol-7-r0` (1.12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.3-ol-7-r0/1.12/ol-7/Dockerfile)
-* [`1.12-debian-9`, `1.12.3-debian-9-r0`, `1.12`, `1.12.3`, `1.12.3-r0`, `latest` (1.12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.3-debian-9-r0/1.12/debian-9/Dockerfile)
+* [`1.12-debian-9`, `1.12.3-debian-9-r1`, `1.12`, `1.12.3`, `1.12.3-r1`, `latest` (1.12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.3-debian-9-r1/1.12/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubectl GitHub repo](https://github.com/bitnami/bitnami-docker-kubectl).
 
