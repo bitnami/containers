@@ -48,7 +48,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.15.3-ol-7-r17` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.15.3-ol-7-r17/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.15.3-ol-7-r18` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.15.3-ol-7-r18/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.15.3-debian-9-r14`, `0`, `0.15.3`, `0.15.3-r14`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.15.3-debian-9-r14/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/alertmanager GitHub repo](https://github.com/bitnami/bitnami-docker-alertmanager).
