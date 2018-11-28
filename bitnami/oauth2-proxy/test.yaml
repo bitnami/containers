@@ -1,0 +1,43 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be use in producction.
+##
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-oauth2-proxy
+  name: test-oauth2-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-oauth2-proxy
+  template:
+    metadata:
+      labels:
+        app: test-oauth2-proxy
+    spec:
+      containers:
+      - image: bitnami/oauth2-proxy
+        name: oauth2-proxy
+        args:
+        - --email-domain=*
+        - --cookie-secure=false
+        - --cookie-secret=secretsecret
+        - --client-secret=ZXhhbXBsZS1hcHAtc2VjcmV0
+        - --client-id=example-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: test-oauth2-proxy
+  name: test-oauth2-proxy
+spec:
+  ports:
+  - port: 4180
+    protocol: TCP
+    targetPort: 4180
+  selector:
+    app: test-oauth2-proxy
+  type: ClusterIP
