@@ -5,6 +5,7 @@
   "databaseAdminUser": "{{$global.env.MONGODB_USER}}",
   "databaseServerHost": "{{$global.env.MONGODB_HOST}}",
   "databaseServerPort": "{{$global.env.MONGODB_PORT_NUMBER}}",
+  "enableCloudCode": "{{$global.env.PARSE_ENABLE_CLOUD_CODE}}",
   "host": "{{$global.env.PARSE_HOST}}",
   "masterKey": "{{$global.env.PARSE_MASTER_KEY}}",
   "mountPath": "{{$global.env.PARSE_MOUNT_PATH}}"
