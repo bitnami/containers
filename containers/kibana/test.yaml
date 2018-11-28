@@ -1,0 +1,39 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be use in producction.
+##
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-kibana
+  name: test-kibana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-kibana
+  template:
+    metadata:
+      labels:
+        app: test-kibana
+    spec:
+      containers:
+      - image: bitnami/kibana
+        name: kibana
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: test-kibana
+  name: test-kibana
+spec:
+  ports:
+  - port: 5601
+    protocol: TCP
+    targetPort: 5601
+  selector:
+    app: test-kibana
+  sessionAffinity: None
+  type: ClusterIP
+
