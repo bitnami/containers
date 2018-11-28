@@ -47,7 +47,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.1.2-ol-7-r1` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.1.2-ol-7-r1/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.1.2-ol-7-r2` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.1.2-ol-7-r2/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.1.2-debian-9-r0`, `3`, `3.1.2`, `3.1.2-r0`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.1.2-debian-9-r0/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
@@ -246,8 +246,75 @@ Available variables:
  - `PARSE_MOUNT_PATH`: Parse server mount path. Default: **/parse**
  - `PARSE_APP_ID`: Parse server App ID. Default: **myappID**
  - `PARSE_MASTER_KEY`: Parse server Master Key: **mymasterKey**
+ - `PARSE_ENABLE_CLOUD_CODE`: Enable Parse Cloud Code support. Default **no**
  - `MONGODB_HOST`: Hostname for Mongodb server. Default: **mongodb**
  - `MONGODB_PORT_NUMBER`: Port used by Mongodb server. Default: **27017**
+
+## How to deploy your Cloud functions with Parse Cloud Code?
+
+You can use Cloud Code to run a piece of code in your Parse Server instead of the user's mobile devices. To run your Cloud functions using this image, follow the steps below:
+
+* Create a directory on your host machine and put your Cloud functions on it. In the example below, a simple "Hello world!" function is used:
+
+```bash
+$ mkdir ~/cloud
+$ cat > ~/cloud/main.js <<'EOF'
+Parse.Cloud.define("sayHelloWorld", function(request, response) {
+    response.success("Hello world!");
+});
+EOF
+```
+
+* Mount the directory as a data volume at the `/opt/bitnami/parse/cloud` path on your Parse Container and set the environment variable `PARSE_ENABLE_CLOUD_CODE` to `yes`. You can use the `docker-compose.yml` below:
+
+> NOTE: In the example below, Parse Dashboard is also deployed.
+
+```yaml
+version: '2'
+services:
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    volumes:
+      - 'mongodb_data:/bitnami'
+  parse:
+    image: 'bitnami/parse:latest'
+    ports:
+      - '1337:1337'
+    environment:
+      - PARSE_ENABLE_CLOUD_CODE=yes
+    volumes:
+      - 'parse_data:/bitnami'
+      - '/path/to/home/directory/cloud:/opt/bitnami/parse/cloud'
+    depends_on:
+      - mongodb
+    parse-dashboard:
+      image: 'bitnami/parse-dashboard:latest'
+      ports:
+        - '80:4040'
+      volumes:
+        - 'parse_dashboard_data:/bitnami'
+      depends_on:
+        - parse
+volumes:
+  mongodb_data:
+    driver: local
+  parse_data:
+    driver: local
+  parse_dashboard_data:
+    driver: local
+```
+
+* Use the `docker-compose` tool to deploy Parse and Parse Dashboard:
+
+```
+$ docker-compose up -d
+```
+
+* Once both Parse and Parse Dashboard are running, access Parse Dashboard and browse to 'My Dashboard -> API Console'.
+* Then, send a 'test query' of type 'POST' using 'functions/sayHelloWorld' as endpoint. Ensure you activate the 'Master Key' parameter.
+* Everything should be working now and you should receive a 'Hello World' message in the results.
+
+Find more information about Cloud Code and Cloud functions in the [official documentation](https://docs.parseplatform.org/cloudcode/guide/).
 
 # Contributing
 
