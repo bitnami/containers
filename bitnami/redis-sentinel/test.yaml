@@ -1,0 +1,80 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be use in producction.
+##
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-redis
+  name: test-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-redis
+  template:
+    metadata:
+      labels:
+        app: test-redis
+    spec:
+      containers:
+      - image: bitnami/redis
+        name: test-redis
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes" 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: test-redis
+  name: test-redis
+spec:
+  ports:
+  - port: 6379
+    protocol: TCP
+    targetPort: 6379
+  selector:
+    app: test-redis
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-redis-sentinel
+  name: test-redis-sentinel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-redis-sentinel
+  template:
+    metadata:
+      labels:
+        app: test-redis-sentinel
+    spec:
+      containers:
+      - image: bitnami/redis-sentinel
+        name: test-redis-sentinel
+        env:
+        - name: REDIS_MASTER_HOST
+          value: test-redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: test-redis-sentinel
+  name: test-redis-sentinel
+spec:
+  ports:
+  - port: 26379
+    protocol: TCP
+    targetPort: 26379
+  selector:
+    app: test-redis-sentinel
+  sessionAffinity: None
+  type: ClusterIP
