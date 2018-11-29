@@ -1,0 +1,93 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be use in producction.
+##
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-postgresql
+  name: test-postgresql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-postgresql
+  template:
+    metadata:
+      labels:
+        app: test-postgresql
+    spec:
+      containers:
+      - image: bitnami/test-postgresql:10
+        name: test-postgresql
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-sonarqube
+  name: test-sonarqube
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-sonarqube
+  template:
+    metadata:
+      labels:
+        app: test-sonarqube
+    spec:
+      containers:
+      - env:
+        - name: POSTGRESQL_HOST
+          value: test-postgresql
+        - name: POSTGRESQL_ROOT_USER
+          value: postgres
+        - name: POSTGRESQL_CLIENT_CREATE_DATABASE_NAME
+          value: bitnami_test-sonarqube
+        - name: POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME
+          value: bn_test-sonarqube
+        - name: POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD
+          value: bitnami1234
+        - name: SONARQUBE_DATABASE_NAME
+          value: bitnami_test-sonarqube
+        - name: SONARQUBE_DATABASE_USER
+          value: bn_test-sonarqube
+        - name: SONARQUBE_DATABASE_PASSWORD
+          value: bitnami1234
+        - name: SONARQUBE_PASSWORD
+          value: qwer1234
+        image: bitnami/test-sonarqube
+        name: test-sonarqube
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: test-postgresql
+  name: test-postgresql
+spec:
+  ports:
+  - port: 5432
+    protocol: TCP
+    targetPort: 5432
+  selector:
+    app: test-postgresql
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: test-sonarqube
+  name: test-sonarqube
+spec:
+  ports:
+  - port: 9000
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    app: test-sonarqube
+  sessionAffinity: None
+  type: ClusterIP
