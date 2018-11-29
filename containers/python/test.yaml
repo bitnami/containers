@@ -1,0 +1,22 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be use in producction.
+##
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-python
+  name: test-python
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-python
+  template:
+    metadata:
+      labels:
+        app: test-python
+    spec:
+      containers:
+      - image: bitnami/python
+        name: python
