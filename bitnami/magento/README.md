@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.2.6-ol-7-r64` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.2.6-ol-7-r64/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.2.6-debian-9-r8`, `2`, `2.2.6`, `2.2.6-r8`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.2.6-debian-9-r8/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.2.6-debian-9-r9`, `2`, `2.2.6`, `2.2.6-r9`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.2.6-debian-9-r9/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
 
