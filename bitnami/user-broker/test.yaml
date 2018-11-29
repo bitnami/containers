@@ -1,0 +1,22 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be use in producction.
+##
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-user-broker
+  name: test-user-broker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-user-broker
+  template:
+    metadata:
+      labels:
+        app: test-user-broker
+    spec:
+      containers:
+      - image: bitnami/user-broker
+        name: user-broker
