@@ -1,0 +1,22 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be use in producction.
+##
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-certmanager
+  name: test-certmanager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-certmanager
+  template:
+    metadata:
+      labels:
+        app: test-certmanager
+    spec:
+      containers:
+      - image: bitnami/cert-manager
+        name: cert-manager
