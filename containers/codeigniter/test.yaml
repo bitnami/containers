@@ -1,0 +1,22 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be use in producction.
+##
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-codeigniter
+  name: test-codeigniter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-codeigniter
+  template:
+    metadata:
+      labels:
+        app: test-codeigniter
+    spec:
+      containers:
+      - image: bitnami/codeigniter
+        name: codeigniter
