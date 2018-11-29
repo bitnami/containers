@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-open-service-broker-azure
+  name: test-open-service-broker-azure
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-open-service-broker-azure
+  template:
+    metadata:
+      labels:
+        app: test-open-service-broker-azure
+    spec:
+      containers:
+      - image: bitnami/open-service-broker-azure
+        name: test-open-service-broker-azure
+        env:
+        - name: ENVIRONMENT
+          value: AzurePublicCloud
+        - name: AZURE_SUBSCRIPTION_ID
+          value: set_here_your_id
+        - name: AZURE_TENANT_ID
+          value: set_here_your_id
+        - name: AZURE_CLIENT_ID
+          value: set_here_your_id
+        - name: AZURE_CLIENT_SECRET
+          value: set_here_your_secret
