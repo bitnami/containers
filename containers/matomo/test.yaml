@@ -1,0 +1,93 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be use in producction.
+##
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-mariadb
+  name: test-mariadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-mariadb
+  template:
+    metadata:
+      labels:
+        app: test-mariadb
+    spec:
+      containers:
+      - image: bitnami/mariadb
+        name: test-mariadb
+        env:
+        - name: MARIADB_USER
+          value: bn_matomo
+        - name: MARIADB_DATABASE
+          value: bitnami_matomo
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-matomo
+  name: test-matomo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-matomo
+  template:
+    metadata:
+      labels:
+        app: test-matomo
+    spec:
+      containers:
+      - image: bitnami/matomo
+        name: test-matomo
+        env:
+        - name: MARIADB_HOST
+          value: test-mariadb
+        - name: MARIADB_PORT_NUMBER
+          value: "3306"
+        - name: WORDPRESS_DATABASE_USER
+          value: bn_matomo
+        - name: WORDPRESS_DATABASE_NAME
+          value: bitnami_matomo
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: test-mariadb
+  name: test-mariadb
+spec:
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    app: test-mariadb
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: test-matomo
+  name: test-matomo
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: test-matomo
+  sessionAffinity: None
+  type: ClusterIP
+
