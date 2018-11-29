@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r207
+FROM bitnami/minideb-extras:stretch-r208
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack tensorflow-resnet-1.12.0-0 --checksum 6bd45a8bea6c19f0f7f
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-resnet" \
-    BITNAMI_IMAGE_VERSION="1.12.0-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="1.12.0-debian-9-r1" \
     PATH="/opt/bitnami/tensorflow-resnet/bin:$PATH"
 
 USER 1001
