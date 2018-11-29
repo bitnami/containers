@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libpcre3 libssl1.1 zlib1g
-RUN . ./libcomponent.sh && component_unpack "nginx" "1.14.1-1" --checksum f4e068c0409cdf1569afc00b06f6c0f87f14210141f024bda625affa4314bac9
+RUN . ./libcomponent.sh && component_unpack "nginx" "1.14.1-2" --checksum bbccdd26a955e0e04fba24a5682b59da4776dd5bde12978c8bf8a9f480ad51ba
 RUN ln -sf /opt/bitnami/nginx/html /app
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
@@ -18,7 +18,8 @@ RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.14.1-debian-9-r19" \
+    BITNAMI_IMAGE_VERSION="1.14.1-debian-9-r20" \
+    NAMI_PREFIX="/.nami" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
     NGINX_HTTP_PORT_NUMBER="8080" \
