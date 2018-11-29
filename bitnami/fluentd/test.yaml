@@ -1,0 +1,22 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be use in producction.
+##
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-fluentd
+  name: test-fluentd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-fluentd
+  template:
+    metadata:
+      labels:
+        app: test-fluentd
+    spec:
+      containers:
+      - image: bitnami/fluentd
+        name: fluentd
