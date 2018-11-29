@@ -1,0 +1,39 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be use in producction.
+##
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-prometheus
+  name: test-prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-prometheus
+  template:
+    metadata:
+      labels:
+        app: test-prometheus
+    spec:
+      containers:
+      - image: bitnami/prometheus
+        name: prometheus
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: test-prometheus
+  name: test-prometheus
+spec:
+  ports:
+  - port: 9090
+    protocol: TCP
+    targetPort: 9090
+  selector:
+    app: test-prometheus
+  sessionAffinity: None
+  type: ClusterIP
+
