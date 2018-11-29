@@ -40,6 +40,10 @@ $ kubectl apply -f test.yaml
 >
 > - image: 'your-registry/image-name:your-version'
 
+# Why use a non-root container?
+
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -49,8 +53,10 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`6-ol-7`, `6.5.1-ol-7-r1` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.5.1-ol-7-r1/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.5.1-debian-9-r2`, `6`, `6.5.1`, `6.5.1-r2`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.5.1-debian-9-r2/6/debian-9/Dockerfile)
-* [`5-ol-7`, `5.6.13-ol-7-r21` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.13-ol-7-r21/5/ol-7/Dockerfile)
+* [`5-ol-7`, `5.6.13-ol-7-r22` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.13-ol-7-r22/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.6.13-debian-9-r19`, `5`, `5.6.13`, `5.6.13-r19` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.13-debian-9-r19/5/debian-9/Dockerfile)
+* [`5-rhel-7`, `0.0.0-rhel-7-r0` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/0.0.0-rhel-7-r0/5/rhel-7/Dockerfile)
+* [`6-rhel-7`, `0.0.0-rhel-7-r0` (6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/0.0.0-rhel-7-r0/6/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
 
@@ -353,6 +359,10 @@ $ docker-compose up kibana
 ```
 
 # Notable Changes
+
+## 6.5.1-r3 & 5.6.13-r20
+
+- The Kibana container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Kibana daemon was started as the `kibana` user. From now on, both the container and the Kibana daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ## 4.5.4-r1
 
