@@ -1,16 +1,16 @@
-FROM bitnami/minideb-extras:stretch-r207
+FROM bitnami/minideb-extras:stretch-r208
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libcomerr2 libcurl3 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5 libtinfo5 libunistring0 libxml2 libxslt1.1 zlib1g
 RUN bitnami-pkg unpack php-7.1.24-4 --checksum 467fe7e1bccd6b8531cba9dedb2c2fad7c32dfec7d044ed3a5fd2ee6b6c6074a
-RUN bitnami-pkg install node-8.13.0-2 --checksum 710ba15c17dbe274b91d02310b5ab0abb12b0fe7cde8b703c304c60a3753cd85
+RUN bitnami-pkg install node-8.14.0-0 --checksum d1abd89f77402e373b6bd1549f8ae95d21f46aaf0921a97c2d5a23fe3f03c07b
 RUN bitnami-pkg install laravel-5.7.15-0 --checksum 2ff97326a17b3c88ee26b13bf15931f4a25328dafecaa5d4d62dd039d3ff26b6
 RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="laravel" \
-    BITNAMI_IMAGE_VERSION="5.7.15-debian-9-r2" \
+    BITNAMI_IMAGE_VERSION="5.7.15-debian-9-r3" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/laravel/bin:$PATH"
 
