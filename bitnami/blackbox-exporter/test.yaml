@@ -1,0 +1,22 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be use in producction.
+##
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-blackbox-exporter
+  name: test-blackbox-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-blackbox-exporter
+  template:
+    metadata:
+      labels:
+        app: test-blackbox-exporter
+    spec:
+      containers:
+      - image: bitnami/blackbox-exporter
+        name: blackbox-exporter
