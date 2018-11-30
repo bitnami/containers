@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r182
+FROM bitnami/oraclelinux-extras:7-r183
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,8 +12,9 @@ RUN bitnami-pkg unpack zookeeper-3.4.12-19 --checksum f95155766966e6bcd25ffa9235
 COPY rootfs /
 ENV ALLOW_ANONYMOUS_LOGIN="no" \
     BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.4.12-ol-7-r154" \
+    BITNAMI_IMAGE_VERSION="3.4.12-ol-7-r155" \
     JVMFLAGS="" \
+    NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH" \
     ZOO_CLIENT_PASSWORD="" \
     ZOO_CLIENT_USER="" \
