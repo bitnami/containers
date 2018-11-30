@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack kafka-2.1.0-0 --checksum 1dfe9317d8cc924fea83edaab4c056be
 COPY rootfs /
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.1.0-debian-9-r6" \
+    BITNAMI_IMAGE_VERSION="2.1.0-debian-9-r7" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_BROKER_ID="-1" \
     KAFKA_BROKER_PASSWORD="bitnami" \
@@ -46,6 +46,7 @@ ENV ALLOW_PLAINTEXT_LISTENER="no" \
     KAFKA_ZOOKEEPER_CONNECT_TIMEOUT_MS="6000" \
     KAFKA_ZOOKEEPER_PASSWORD="" \
     KAFKA_ZOOKEEPER_USER="" \
+    NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/kafka/bin:$PATH"
 
 EXPOSE 9092
