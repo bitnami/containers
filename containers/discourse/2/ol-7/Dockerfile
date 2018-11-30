@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r182
+FROM bitnami/oraclelinux-extras:7-r183
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,13 +6,13 @@ RUN install_packages ImageMagick advancecomp cyrus-sasl-lib ghostscript gifsicle
 RUN bitnami-pkg install ruby-2.4.5-0 --checksum baaa19777c655cdffb5859b412518719f3715cf17446e3c72369bdc876734f8c
 RUN bitnami-pkg unpack postgresql-client-9.6.11-0 --checksum 9448fe9fbcff714a008ab0d91f704d3a7d522b492d4b6530bfc7eaadbc16032a
 RUN bitnami-pkg install git-2.19.2-0 --checksum 0d98ba10081908724152c819b0b7ddec46329319fca45182e4a2a50d0c2e49b9
-RUN bitnami-pkg unpack discourse-sidekiq-2.1.3-1 --checksum b8394d5d7700feedffc799cb6410ba130052576605d7557b4368313d2690832e
+RUN bitnami-pkg unpack discourse-sidekiq-2.1.4-0 --checksum 218af6983d702a4761f2da6fa4d3c5b67c10c48f87d251eef9e6323763248ac2
 RUN bitnami-pkg unpack discourse-2.1.3-0 --checksum ebc9621f05ce613be9dc6e6f7cb13cacbd53787a25f7c17971ad8d756259d261
 
 COPY rootfs /
 RUN install_packages rsync
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.1.3-ol-7-r17" \
+    BITNAMI_IMAGE_VERSION="2.1.3-ol-7-r18" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="127.0.0.1" \
     DISCOURSE_HOSTNAME="www.example.com" \
