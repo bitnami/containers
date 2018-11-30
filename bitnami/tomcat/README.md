@@ -43,9 +43,9 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`9.0-ol-7`, `9.0.13-ol-7-r16` (9.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.13-ol-7-r16/9.0/ol-7/Dockerfile)
+* [`9.0-ol-7`, `9.0.13-ol-7-r17` (9.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.13-ol-7-r17/9.0/ol-7/Dockerfile)
 * [`9.0-debian-9`, `9.0.13-debian-9-r14`, `9.0`, `9.0.13`, `9.0.13-r14` (9.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.13-debian-9-r14/9.0/debian-9/Dockerfile)
-* [`8.5-ol-7`, `8.5.35-ol-7-r17` (8.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.35-ol-7-r17/8.5/ol-7/Dockerfile)
+* [`8.5-ol-7`, `8.5.35-ol-7-r16` (8.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.35-ol-7-r16/8.5/ol-7/Dockerfile)
 * [`8.5-debian-9`, `8.5.35-debian-9-r14`, `8.5`, `8.5.35`, `8.5.35-r14`, `latest` (8.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.35-debian-9-r14/8.5/debian-9/Dockerfile)
 * [`8.0-ol-7`, `8.0.53-ol-7-r124` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-ol-7-r124/8.0/ol-7/Dockerfile)
 * [`8.0-debian-9`, `8.0.53-debian-9-r119`, `8.0`, `8.0.53`, `8.0.53-r119` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-debian-9-r119/8.0/debian-9/Dockerfile)
