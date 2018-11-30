@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r128
+FROM bitnami/oraclelinux-extras-base:7-r129
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -16,7 +16,7 @@ COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.24-ol-7-r30" \
+    BITNAMI_IMAGE_VERSION="5.7.24-ol-7-r31" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
@@ -30,6 +30,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_ROOT_PASSWORD="" \
     MYSQL_ROOT_USER="root" \
     MYSQL_USER="" \
+    NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mysql/bin:$PATH"
 
 EXPOSE 3306
