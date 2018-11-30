@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r182
+FROM bitnami/oraclelinux-extras:7-r183
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack cassandra-3.11.3-14 --checksum b1e8ae3c74dd62341f89a811f1
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.3-ol-7-r103" \
+    BITNAMI_IMAGE_VERSION="3.11.3-ol-7-r104" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
     CASSANDRA_DATACENTER="dc1" \
@@ -29,6 +29,7 @@ ENV BITNAMI_APP_NAME="cassandra" \
     CASSANDRA_STARTUP_CQL="" \
     CASSANDRA_TRANSPORT_PORT_NUMBER="7000" \
     CASSANDRA_USER="cassandra" \
+    NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/cassandra/bin:$PATH"
 
 EXPOSE 9042 7000
