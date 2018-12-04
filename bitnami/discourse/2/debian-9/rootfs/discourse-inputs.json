@@ -12,7 +12,7 @@
   "redisHost": "{{$global.env.REDIS_HOST}}",
   "redisPassword": "{{$global.env.REDIS_PASSWORD}}",
   "redisPort": "{{$global.env.REDIS_PORT_NUMBER}}",
-  "siteName": "{{$global.env.DISCOURSE_SITE_NAME}}",
+  "siteName": "{{$global.env.DISCOURSE_SITENAME}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
   "smtpPort": "{{$global.env.SMTP_PORT}}",
