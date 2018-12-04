@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r211
+FROM bitnami/minideb-extras:stretch-r212
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.37-1 --checksum 5b12f889e29303b3979c44a08f4189
 RUN bitnami-pkg unpack php-7.1.24-4 --checksum 467fe7e1bccd6b8531cba9dedb2c2fad7c32dfec7d044ed3a5fd2ee6b6c6074a
 RUN bitnami-pkg unpack mysql-client-10.2.19-0 --checksum 3546a8f5166c6c945b65f58cbadf8355e9389c019390a2f3dba72caa3af6efb5
 RUN bitnami-pkg unpack libphp-7.1.24-1 --checksum 8185d7402b8e469dc40163d7f5cf447ba51c306823cc7354dd7aad26603e8d4f
-RUN bitnami-pkg unpack moodle-3.5.3-0 --checksum d2a1ff5ba7cc05a3ea1f9c5e6536759313d3ba3087b09db4a50452b7e7ccea35
+RUN bitnami-pkg unpack moodle-3.6.0-0 --checksum dd620f5c20532f58fd792036e4c2b7fa684c9d6b3f0c7e57d3ee8b7be45df74c
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.5.3-debian-9-r15" \
+    BITNAMI_IMAGE_VERSION="3.6.0-debian-9-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
