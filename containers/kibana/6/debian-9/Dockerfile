@@ -7,11 +7,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libstdc++6
-RUN bitnami-pkg unpack kibana-6.5.1-1 --checksum 2ea030bd040a2c19d2aa3defc50dc73e49c03a3fad459636fb2e57b8c7a8af69
+RUN bitnami-pkg unpack kibana-6.5.2-0 --checksum 8b579c3b09da916593d7e7179d33b76a0e0e8645735abf47aa8491ca710c3f39
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="6.5.1-debian-9-r8" \
+    BITNAMI_IMAGE_VERSION="6.5.2-debian-9-r0" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
