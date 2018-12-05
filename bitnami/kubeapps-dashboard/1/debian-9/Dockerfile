@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r89
+FROM bitnami/minideb-extras-base:stretch-r90
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libpcre3 libssl1.1 zlib1g
-RUN . ./libcomponent.sh && component_unpack "nginx" "1.14.1-2" --checksum bbccdd26a955e0e04fba24a5682b59da4776dd5bde12978c8bf8a9f480ad51ba
+RUN . ./libcomponent.sh && component_unpack "nginx" "1.14.2-0" --checksum 1a09b45dc039dbf3927b9aa983367d222443c09db2b8095840b06f6dd714d288
 RUN . ./libcomponent.sh && component_unpack "kubeapps-dashboard" "1.0.0-1" --checksum 4e9c426418460727dfc2626b85eb242f3bc9a3714038149f7394b2f291e4a4a0
 RUN ln -sf /opt/bitnami/nginx/html /app
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /prepare.sh
 RUN rm -rf /opt/bitnami/nginx/html && mv /opt/bitnami/kubeapps-dashboard/build /opt/bitnami/nginx/html
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.0.0-debian-9-r16" \
+    BITNAMI_IMAGE_VERSION="1.0.0-debian-9-r17" \
     NAMI_PREFIX="/.nami" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
