@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/node-exporter /opt/bitnami/node-exporter
 ENV BITNAMI_APP_NAME="node-exporter" \
-    BITNAMI_IMAGE_VERSION="0.17.0-ol-7-r6" \
+    BITNAMI_IMAGE_VERSION="0.17.0-ol-7-r7" \
     PATH="/opt/bitnami/node-exporter/bin:$PATH"
 
 EXPOSE 9100
