@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r215
+FROM bitnami/minideb-extras:stretch-r216
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN chmod -R g+rwX /opt/bitnami/postgresql/conf/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="10.6.0-debian-9-r23" \
+    BITNAMI_IMAGE_VERSION="10.6.0-debian-9-r24" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
