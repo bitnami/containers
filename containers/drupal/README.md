@@ -43,8 +43,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8-rhel-7`, `8.6.4-rhel-7-r4` (8/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.4-rhel-7-r4/8/rhel-7/Dockerfile)
-* [`8-php5-rhel-7`, `8.6.4-php5-rhel-7-r3` (8-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.4-php5-rhel-7-r3/8-php5/rhel-7/Dockerfile)
-* [`8-ol-7`, `8.6.4-ol-7-r2` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.4-ol-7-r2/8/ol-7/Dockerfile)
+* [`8-php5-rhel-7`, `8.6.4-php5-rhel-7-r4` (8-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.4-php5-rhel-7-r4/8-php5/rhel-7/Dockerfile)
+* [`8-ol-7`, `8.6.4-ol-7-r3` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.4-ol-7-r3/8/ol-7/Dockerfile)
 * [`8-debian-9`, `8.6.4-debian-9-r3`, `8`, `8.6.4`, `8.6.4-r3`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.4-debian-9-r3/8/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
