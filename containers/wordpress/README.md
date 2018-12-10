@@ -42,7 +42,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-rhel-7`, `5.0.0-rhel-7-r2` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.0.0-rhel-7-r2/5/rhel-7/Dockerfile)
+* [`5-rhel-7`, `5.0.0-rhel-7-r3` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.0.0-rhel-7-r3/5/rhel-7/Dockerfile)
 * [`5-php5-rhel-7`, `5.0.0-php5-rhel-7-r0` (5-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.0.0-php5-rhel-7-r0/5-php5/rhel-7/Dockerfile)
 * [`5-ol-7`, `5.0.0-ol-7-r2` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.0.0-ol-7-r2/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.0.0-debian-9-r2`, `5`, `5.0.0`, `5.0.0-r2`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.0.0-debian-9-r2/5/debian-9/Dockerfile)
