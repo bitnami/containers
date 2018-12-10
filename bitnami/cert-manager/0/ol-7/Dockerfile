@@ -1,10 +1,10 @@
 FROM bitnami/oraclelinux-extras:7-r193 as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cert-manager-0.5.2-0-linux-x86_64-ol-7.tar.gz && \
-    echo "5f380f28b73a4b8e52ee5d51efc6b71dc8bdc878974c158562aa12c0ccb50ebe  /tmp/bitnami/pkg/cache/cert-manager-0.5.2-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/cert-manager-0.5.2-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/cert-manager-0.5.2-0-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cert-manager-0.5.2-20-linux-x86_64-ol-7.tar.gz && \
+    echo "d3649727413baeb64b01d7118e9837641f3cd7fd354db9e1e8ddeb52f43aafbf  /tmp/bitnami/pkg/cache/cert-manager-0.5.2-20-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/cert-manager-0.5.2-20-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/cert-manager-0.5.2-20-linux-x86_64-ol-7.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/cert-manager /opt/bitnami/cert-manager
 ENV BITNAMI_APP_NAME="cert-manager" \
-    BITNAMI_IMAGE_VERSION="0.5.2-ol-7-r23" \
+    BITNAMI_IMAGE_VERSION="0.5.2-ol-7-r24" \
     PATH="/opt/bitnami/cert-manager/bin:$PATH"
 
 RUN install_packages ca-certificates
