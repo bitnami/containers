@@ -199,10 +199,12 @@ elasticsearch_validate() {
     fi
 }
 
-# Bash math operations cannot handle float or complex math operations
-calc() {
-    local expr="${1:?missing expression}"
-    perl <<<"use POSIX qw/ceil/;print $expr"
+# Bash use floor by default. You can use it to get ceil.
+# ceil( a/b ) = floor( (a+b-1)/b )
+ceiling45() {
+    local num=$(($1*4))
+    local div=5
+    echo $(( (num + div - 1) / div ))
 }
 
 ########################
@@ -234,7 +236,7 @@ elasticsearch_cluster_configuration() {
         read -r -a host_list <<< "$(tr ',;' ' ' <<< "$ELASTICSEARCH_CLUSTER_HOSTS")"
         elasticsearch_conf_set discovery.zen.ping.unicast.hosts "${host_list[@]}"
         elasticsearch_conf_set discovery.initial_state_timeout "5m"
-        elasticsearch_conf_set gateway.recover_after_nodes "$(calc "ceil(${#host_list[@]}*0.8)")"
+        elasticsearch_conf_set gateway.recover_after_nodes "$(ceiling45 "${#host_list[@]}")"
         elasticsearch_conf_set gateway.expected_nodes "${#host_list[@]}"
         if [[ -n "$ELASTICSEARCH_MINIMUM_MASTER_NODES" ]]; then
             debug "Setting minimum master nodes for quorum to $ELASTICSEARCH_MINIMUM_MASTER_NODES..."
