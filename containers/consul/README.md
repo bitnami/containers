@@ -45,6 +45,10 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
+# Why use a non-root container?
+
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -52,7 +56,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.4.0-ol-7-r24` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.4.0-ol-7-r24/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.4.0-ol-7-r25` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.4.0-ol-7-r25/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.4.0-debian-9-r15`, `1`, `1.4.0`, `1.4.0-r15`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.4.0-debian-9-r15/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/consul GitHub repo](https://github.com/bitnami/bitnami-docker-consul).
@@ -474,6 +478,12 @@ or using Docker Compose:
 ```bash
 $ docker-compose up consul
 ```
+
+# Notable Changes
+
+## 1.4.0-r16
+
+- The Consul container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Consul daemon was started as the `consul` user. From now on, both the container and the Consul daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 # Contributing
 

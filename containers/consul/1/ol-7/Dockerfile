@@ -1,12 +1,16 @@
-FROM bitnami/oraclelinux-extras:7-r192
+FROM bitnami/oraclelinux-extras:7-r193
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    BITNAMI_PKG_EXTRA_DIRS="/opt/bitnami/consul/extra" \
+    HOME="/"
+
 # Install required system packages and dependencies
-RUN bitnami-pkg unpack consul-1.4.0-0 --checksum bf1323a74e68b2446270102e80e8a458a847842d110851f30a50309fb46936a6
+RUN bitnami-pkg unpack consul-1.4.0-20 --checksum 868c0b89190ac51a4187720e97bddb3c4a6ed123c7b7b8ccc64422fe68c16d99
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.4.0-ol-7-r24" \
+    BITNAMI_IMAGE_VERSION="1.4.0-ol-7-r25" \
     CONSUL_BOOTSTRAP_EXPECT="1" \
     CONSUL_CLIENT_LAN_ADDRESS="0.0.0.0" \
     CONSUL_DATACENTER="dc1" \
@@ -24,11 +28,13 @@ ENV BITNAMI_APP_NAME="consul" \
     CONSUL_SERF_LAN_PORT_NUMBER="8301" \
     CONSUL_SERVER_MODE="server" \
     CONSUL_UI="true" \
+    NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/consul/bin:$PATH"
 
 EXPOSE 8300 8301 8500 8600
 
 EXPOSE 8301/udp 8600/udp
 
+USER 1001
 ENTRYPOINT [ "/app-entrypoint.sh" ]
 CMD [ "/run.sh" ]
