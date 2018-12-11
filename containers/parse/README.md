@@ -40,6 +40,10 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
+# Why use a non-root container?
+
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -48,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.1.2-ol-7-r14` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.1.2-ol-7-r14/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.1.2-debian-9-r13`, `3`, `3.1.2`, `3.1.2-r13`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.1.2-debian-9-r13/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.1.2-debian-9-r14`, `3`, `3.1.2`, `3.1.2-r14`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.1.2-debian-9-r14/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
 
@@ -315,6 +319,12 @@ $ docker-compose up -d
 * Everything should be working now and you should receive a 'Hello World' message in the results.
 
 Find more information about Cloud Code and Cloud functions in the [official documentation](https://docs.parseplatform.org/cloudcode/guide/).
+
+# Notable Changes
+
+## 3.1.2-r14
+
+- The Parse container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Parse daemon was started as the `parse` user. From now on, both the container and the Parse daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 # Contributing
 
