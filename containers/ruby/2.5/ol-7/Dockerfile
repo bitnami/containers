@@ -1,16 +1,16 @@
-FROM bitnami/oraclelinux-runtimes:7-r165
+FROM bitnami/oraclelinux-runtimes:7-r166
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git glibc keyutils-libs krb5-libs libcom_err libselinux ncurses-libs nss-softokn-freebl openssl-libs pcre pkg-config readline unzip wget zlib
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/ruby-2.5.3-0-linux-x86_64-ol-7.tar.gz && \
-    echo "129d7b1d5542e25bf2efea8a93b27a7359f5fa5b9f7827fb98d7fee9e5d785e9  /tmp/bitnami/pkg/cache/ruby-2.5.3-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/ruby-2.5.3-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/ruby-2.5.3-0-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/ruby-2.5.3-20-linux-x86_64-ol-7.tar.gz && \
+    echo "094720248bd795fea12fbc960ad4250971ef986c33fee396f96346528a6e8a1d  /tmp/bitnami/pkg/cache/ruby-2.5.3-20-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/ruby-2.5.3-20-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/ruby-2.5.3-20-linux-x86_64-ol-7.tar.gz
 RUN /opt/bitnami/ruby/bin/gem install bundler
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.5.3-ol-7-r43" \
+    BITNAMI_IMAGE_VERSION="2.5.3-ol-7-r44" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
