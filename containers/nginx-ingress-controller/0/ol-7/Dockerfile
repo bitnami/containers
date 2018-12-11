@@ -1,10 +1,10 @@
-FROM bitnami/oraclelinux-extras:7-r193 as buildenv
+FROM bitnami/oraclelinux-extras:7-r194 as buildenv
 
 RUN install_packages GeoIP ca-certificates curl cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libcurl libgcc libidn libselinux libssh2 libstdc++ lua nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre wget zlib
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.21.0-5-linux-x86_64-ol-7.tar.gz && \
-    echo "043badba764c1fc55b6f9aa753cdef9da207de4b17aec6a0a5d1acb90eacfd7b  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.21.0-5-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.21.0-5-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.21.0-5-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.21.0-20-linux-x86_64-ol-7.tar.gz && \
+    echo "25e2c7dff32a6dccf9f2b5c3bf7e63b98331710aab18c55ff08f928df9b8bd45  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.21.0-20-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.21.0-20-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.21.0-20-linux-x86_64-ol-7.tar.gz
 RUN mkdir -p /opt/bitnami/nginx/conf/geoip && \
     cd /opt/bitnami/nginx/conf/geoip && \
     curl https://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz | gunzip >GeoIP.dat && \
@@ -13,7 +13,7 @@ RUN mkdir -p /opt/bitnami/nginx/conf/geoip && \
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r193
+FROM bitnami/oraclelinux-extras:7-r194
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/common /opt/bitnami/common
@@ -21,7 +21,7 @@ COPY --from=buildenv /opt/bitnami/lua /opt/bitnami/lua
 COPY --from=buildenv /opt/bitnami/nginx /opt/bitnami/nginx
 COPY --from=buildenv /opt/bitnami/nginx-ingress-controller /opt/bitnami/nginx-ingress-controller
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.21.0-ol-7-r23" \
+    BITNAMI_IMAGE_VERSION="0.21.0-ol-7-r24" \
     PATH="/opt/bitnami/nginx-ingress-controller/bin:$PATH"
 
 RUN rpm -Uvh https://s3.amazonaws.com/aaronsilber/public/authbind-2.1.1-0.1.x86_64.rpm
