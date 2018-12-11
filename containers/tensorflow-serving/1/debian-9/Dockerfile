@@ -1,13 +1,17 @@
 FROM bitnami/minideb-extras:stretch-r219
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    HOME="/"
+
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libstdc++6
-RUN bitnami-pkg unpack tensorflow-serving-1.12.0-20 --checksum 505bb3ba0ffaf0f0ff5f0e6fac0b72e501c35d9e2c1873f980b0c1ac8c340736
+RUN bitnami-pkg unpack tensorflow-serving-1.12.0-21 --checksum de1f80124a10a1dcc8b63e91acdb7bfcdfa600fd2f45e39882c4b99d91e44e4b
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="1.12.0-debian-9-r33" \
+    BITNAMI_IMAGE_VERSION="1.12.0-debian-9-r34" \
+    NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_MODEL_NAME="inception" \
     TENSORFLOW_SERVING_PORT_NUMBER="8500" \
@@ -15,5 +19,6 @@ ENV BITNAMI_APP_NAME="tensorflow-serving" \
 
 EXPOSE 8500
 
+USER 1001
 ENTRYPOINT [ "/app-entrypoint.sh" ]
 CMD [ "/run.sh" ]
