@@ -1,16 +1,22 @@
-FROM bitnami/minideb-extras:stretch-r218
+FROM bitnami/minideb-extras:stretch-r219
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    BITNAMI_PKG_EXTRA_DIRS="/home/wildfly" \
+    HOME="/"
 
 # Install required system packages and dependencies
 RUN install_packages libaio1 libblkid1 libc6 libffi6 libgcc1 libglib2.0-0 libmount1 libpcre3 libselinux1 libuuid1 zlib1g
-RUN bitnami-pkg install java-1.8.191-3 --checksum 7d4e5b3392c96451eb5aa9b834713f9ca37580316bc9607bd6da26ec98e7e226
-RUN bitnami-pkg unpack wildfly-14.0.1-3 --checksum aa701a272663e73118c765615ccd2f18444046b6b31154c206aaf00244ac7ecf
+RUN bitnami-pkg install java-1.8.191-20 --checksum e193fab6c3c4de4d30f81a09d3b33978baa31761aaa330e39ce5ae8753db4133
+RUN bitnami-pkg unpack wildfly-14.0.1-20 --checksum f5b18f8c9ab23d28d714bd29f7ae5a0d047a088957a5a6c861a87a0242eb262a
 RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="14.0.1-debian-9-r74" \
+    BITNAMI_IMAGE_VERSION="14.0.1-debian-9-r75" \
+    NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
+    WILDFLY_HOME="/home/wildfly" \
     WILDFLY_JAVA_HOME="" \
     WILDFLY_JAVA_OPTS="" \
     WILDFLY_MANAGEMENT_HTTP_PORT_NUMBER="9990" \
@@ -25,5 +31,6 @@ ENV BITNAMI_APP_NAME="wildfly" \
 
 EXPOSE 8080 9990
 
+USER 1001
 ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "nami", "start", "--foreground", "wildfly" ]
+CMD [ "/run.sh" ]
