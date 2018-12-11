@@ -1,16 +1,16 @@
-FROM bitnami/oraclelinux-extras:7-r193
+FROM bitnami/oraclelinux-extras:7-r194
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libmemcached libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
-RUN bitnami-pkg unpack php-7.1.25-0 --checksum 02a9136da3c027cd9782ff2e5e5ee1564b26f1ab15accda700f80a1e3ca81c82
-RUN bitnami-pkg install node-8.14.0-0 --checksum 8c5f6063a8064a06bc270e71173d92694a08a4b08aa05a0703926fe23221020c
-RUN bitnami-pkg install laravel-5.7.15-0 --checksum 2c2c9e22e9c74dd538edd165d3d31bdda2b6152b966147ca929367ee033a9c79
+RUN bitnami-pkg unpack php-7.1.25-20 --checksum 32a1c5bff48b141be69c9272c662f23a66285b0759095315abe19de5b452a56e
+RUN bitnami-pkg install node-8.14.0-20 --checksum 09f2e1fdde74203e56352e494d55644f227dc71399c9f45f412b415a40a1b8b1
+RUN bitnami-pkg install laravel-5.7.15-20 --checksum 07ab1b1a121378c73da660f3c0c19f553922ac5cc8b35d38e4a3ffdbf648c977
 RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="laravel" \
-    BITNAMI_IMAGE_VERSION="5.7.15-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="5.7.15-ol-7-r12" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/laravel/bin:$PATH"
 
