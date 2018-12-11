@@ -1,19 +1,19 @@
-FROM bitnami/oraclelinux-extras:7-r193 as buildenv
+FROM bitnami/oraclelinux-extras:7-r194 as buildenv
 
 RUN install_packages ca-certificates glibc wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubewatch-0.0.4-1-linux-x86_64-ol-7.tar.gz && \
-    echo "3ac44dcfa04f2772f9749b76390d8176b5b83926eb3ebe5a4d9b009aa49941f6  /tmp/bitnami/pkg/cache/kubewatch-0.0.4-1-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kubewatch-0.0.4-1-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kubewatch-0.0.4-1-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubewatch-0.0.4-20-linux-x86_64-ol-7.tar.gz && \
+    echo "8b5ca98bd02f4e3ebc8e8b93cc82abf5f64d96591f679b4a3a38c13ecc9e69d6  /tmp/bitnami/pkg/cache/kubewatch-0.0.4-20-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kubewatch-0.0.4-20-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kubewatch-0.0.4-20-linux-x86_64-ol-7.tar.gz
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r193
+FROM bitnami/oraclelinux-extras:7-r194
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/kubewatch /opt/bitnami/kubewatch
 ENV BITNAMI_APP_NAME="kubewatch" \
-    BITNAMI_IMAGE_VERSION="0.0.4-ol-7-r154" \
+    BITNAMI_IMAGE_VERSION="0.0.4-ol-7-r155" \
     KW_CONFIG="/opt/bitnami/kubewatch" \
     KW_FLOCK_URL="" \
     KW_HIPCHAT_ROOM="" \
