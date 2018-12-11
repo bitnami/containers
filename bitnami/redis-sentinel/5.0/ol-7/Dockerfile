@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r193
+FROM bitnami/oraclelinux-extras:7-r194
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc
-RUN bitnami-pkg unpack redis-sentinel-5.0.2-0 --checksum 48fbca98900a2b3e8ae47f79b63360e3a753e7a5ae8297867d8cb8fb64c6108c
+RUN bitnami-pkg unpack redis-sentinel-5.0.2-20 --checksum 19be5a3e6f0b6a1824affa56a7bac4a4acd04b5f5f6cd3fa643c6a8d2afc28f0
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="5.0.2-ol-7-r18" \
+    BITNAMI_IMAGE_VERSION="5.0.2-ol-7-r19" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis-sentinel/bin:$PATH" \
     REDIS_MASTER_HOST="redis" \
