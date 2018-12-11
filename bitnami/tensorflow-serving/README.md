@@ -327,7 +327,7 @@ $ docker-compose start tensorflow-serving
 
 # Notable Changes
 
-## 1.12.0-r
+## 1.12.0-r34
 
 - The TensorFlow Serving container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the TensorFlow Serving daemon was started as the `tensorflow` user. From now on, both the container and the TensorFlow Serving daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
