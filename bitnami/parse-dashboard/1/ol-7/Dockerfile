@@ -1,14 +1,18 @@
-FROM bitnami/oraclelinux-extras:7-r193
+FROM bitnami/oraclelinux-extras:7-r194
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    HOME="/"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs glibc keyutils-libs krb5-libs libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre readline sqlite zlib
-RUN bitnami-pkg install node-8.14.0-0 --checksum 8c5f6063a8064a06bc270e71173d92694a08a4b08aa05a0703926fe23221020c
-RUN bitnami-pkg unpack parse-dashboard-1.2.0-3 --checksum de5f87322cedfcce59bec3f47a1d11879b20dc747ac8c4c202675215012d2420
+RUN bitnami-pkg install node-8.14.0-20 --checksum 09f2e1fdde74203e56352e494d55644f227dc71399c9f45f412b415a40a1b8b1
+RUN bitnami-pkg unpack parse-dashboard-1.2.0-20 --checksum 28431df7763d2c528ee04974bd41c2c6eb80fe9b47f67a1a80914233fd69ef7e
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.2.0-ol-7-r118" \
+    BITNAMI_IMAGE_VERSION="1.2.0-ol-7-r119" \
+    NAMI_PREFIX="/.nami" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
     PARSE_DASHBOARD_PASSWORD="bitnami" \
@@ -21,5 +25,6 @@ ENV BITNAMI_APP_NAME="parse-dashboard" \
 
 EXPOSE 4040
 
+USER 1001
 ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "nami", "start", "--foreground", "parse-dashboard" ]
+CMD [ "/run.sh" ]
