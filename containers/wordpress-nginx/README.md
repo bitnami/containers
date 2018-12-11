@@ -48,12 +48,9 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-rhel-7`, `4.9.8-rhel-7-r0` (4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-rhel-7-r0/4/rhel-7/Dockerfile)
-* [`4-php5-rhel-7`, `4.9.8-php5-rhel-7-r0` (4-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-php5-rhel-7-r0/4-php5/rhel-7/Dockerfile)
-* [`4-php5-ol-7`, `4.9.8-php5-ol-7-r87` (4-php5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-php5-ol-7-r87/4-php5/ol-7/Dockerfile)
-* [`4-php5-debian-9`, `4.9.8-php5-debian-9-r63`, `4-php5`, `4.9.8-php5`, `4.9.8-php5-r63` (4-php5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-php5-debian-9-r63/4-php5/debian-9/Dockerfile)
-* [`4-ol-7`, `4.9.8-ol-7-r34` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-ol-7-r34/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.9.8-debian-9-r87`, `4`, `4.9.8`, `4.9.8-r87`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/4.9.8-debian-9-r87/4/debian-9/Dockerfile)
+* [`5-rhel-7`, `5.0.0-rhel-7-r-1` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.0.0-rhel-7-r-1/5/rhel-7/Dockerfile)
+* [`5-ol-7`, `5.0.0-ol-7-r-1` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.0.0-ol-7-r-1/5/ol-7/Dockerfile)
+* [`5-debian-9`, `5.0.0-debian-9-r0`, `5`, `5.0.0`, `5.0.0-r0`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.0.0-debian-9-r0/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
 
