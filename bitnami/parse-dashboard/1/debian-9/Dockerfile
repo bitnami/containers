@@ -1,14 +1,18 @@
-FROM bitnami/minideb-extras:stretch-r217
+FROM bitnami/minideb-extras:stretch-r219
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    HOME="/"
 
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg install node-8.14.0-0 --checksum d1abd89f77402e373b6bd1549f8ae95d21f46aaf0921a97c2d5a23fe3f03c07b
-RUN bitnami-pkg unpack parse-dashboard-1.2.0-4 --checksum 076df4febb9e93bb67c59d3b298d33d5acf1c0bd6716f77bb23b75450abc2731
+RUN bitnami-pkg install node-8.14.0-20 --checksum 408efbaecc9a5d5aa93f0e1755a15f5fe29c08d37baaac3900c9f02551d6da2b
+RUN bitnami-pkg unpack parse-dashboard-1.2.0-20 --checksum be2350ac9e70a56e92cf2f0f945f0297484e652540498bdcfa782ef7fc32b43d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.2.0-debian-9-r68" \
+    BITNAMI_IMAGE_VERSION="1.2.0-debian-9-r69" \
+    NAMI_PREFIX="/.nami" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
     PARSE_DASHBOARD_PASSWORD="bitnami" \
@@ -21,5 +25,6 @@ ENV BITNAMI_APP_NAME="parse-dashboard" \
 
 EXPOSE 4040
 
+USER 1001
 ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "nami", "start", "--foreground", "parse-dashboard" ]
+CMD [ "/run.sh" ]
