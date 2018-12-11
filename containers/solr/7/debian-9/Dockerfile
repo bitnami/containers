@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r218
+FROM bitnami/minideb-extras:stretch-r219
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,12 +6,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libblkid1 libc6 libffi6 libgcc1 libglib2.0-0 libmount1 libpcre3 libselinux1 libuuid1 lsof zlib1g
-RUN bitnami-pkg install java-1.8.191-3 --checksum 7d4e5b3392c96451eb5aa9b834713f9ca37580316bc9607bd6da26ec98e7e226
-RUN bitnami-pkg unpack solr-7.5.0-2 --checksum be139ac713a24c8d278a4bd888d71d907adb73196e4b7701e4df151d80e0493f
+RUN bitnami-pkg install java-1.8.191-20 --checksum e193fab6c3c4de4d30f81a09d3b33978baa31761aaa330e39ce5ae8753db4133
+RUN bitnami-pkg unpack solr-7.5.0-20 --checksum 363b7e62ec22af2b2830f3f7b015d3701aead3b2d69c6fc3fd440b2508a6b05c
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="7.5.0-debian-9-r66" \
+    BITNAMI_IMAGE_VERSION="7.5.0-debian-9-r67" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:$PATH" \
     SOLR_CORE="" \
