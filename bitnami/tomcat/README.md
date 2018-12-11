@@ -36,6 +36,10 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
+# Why use a non-root container?
+
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
@@ -49,7 +53,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`8.5-debian-9`, `8.5.35-debian-9-r25`, `8.5`, `8.5.35`, `8.5.35-r25`, `latest` (8.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.35-debian-9-r25/8.5/debian-9/Dockerfile)
 * [`8.0-ol-7`, `8.0.53-ol-7-r135` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-ol-7-r135/8.0/ol-7/Dockerfile)
 * [`8.0-debian-9`, `8.0.53-debian-9-r130`, `8.0`, `8.0.53`, `8.0.53-r130` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-debian-9-r130/8.0/debian-9/Dockerfile)
-* [`7-ol-7`, `7.0.92-ol-7-r19` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.92-ol-7-r19/7/ol-7/Dockerfile)
+* [`7-ol-7`, `7.0.92-ol-7-r20` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.92-ol-7-r20/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.0.92-debian-9-r19`, `7`, `7.0.92`, `7.0.92-r19` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.92-debian-9-r19/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
@@ -314,6 +318,10 @@ $ docker-compose up tomcat
 ```
 
 # Notable Changes
+
+## 9.0.13-r27 , 8.5.35-r26, 8.0.53-r131 & 7.0.92-r20
+
+- The Tomcat container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Tomcat daemon was started as the `tomcat` user. From now on, both the container and the Tomcat daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ## 8.0.35-r3
 
