@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r194
+FROM bitnami/oraclelinux-extras:7-r195
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack parse-dashboard-1.2.0-20 --checksum 28431df7763d2c528ee04
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.2.0-ol-7-r119" \
+    BITNAMI_IMAGE_VERSION="1.2.0-ol-7-r120" \
     NAMI_PREFIX="/.nami" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
