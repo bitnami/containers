@@ -8,7 +8,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.37-20 --checksum 8c93a99ad260e59bcbe1b93a3c3391806ade2d7266cb14dea622bd7b8255afd5
-RUN bitnami-pkg unpack php-7.1.24-1 --checksum 5e4c52ab502be352c1e2ebec807ad1bc8c8fd01a8b96a310c732d8a9ef803d58
+RUN bitnami-pkg unpack php-7.1.24-20 --checksum 84748fa4559c11ec721f052677a277e643f0d6edb747fccef6289ec9968ca45e
 RUN bitnami-pkg unpack mysql-client-10.1.37-20 --checksum 68dc0a5d7237b8eeb45d742203bd255e60d1bbf96c5daf00e7b1ed2892ca98a5
 RUN bitnami-pkg unpack libphp-7.1.25-20 --checksum 2d4359e62de5e630ec023446628cb4ac9812f99de54496e17c3383c3b9a8fd43
 RUN bitnami-pkg unpack drupal-8.6.4-20 --checksum 6738d8c22bb73158f3e73bddecd515830325a1dd4c303d6257ddbabd7b3e3d4b
@@ -21,7 +21,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.6.4-rhel-7-r7" \
+    BITNAMI_IMAGE_VERSION="8.6.4-rhel-7-r8" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
