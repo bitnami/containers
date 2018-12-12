@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r219
+FROM bitnami/minideb-extras:stretch-r220
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack tensorflow-serving-1.12.0-21 --checksum de1f80124a10a1dcc
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="1.12.0-debian-9-r34" \
+    BITNAMI_IMAGE_VERSION="1.12.0-debian-9-r35" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_MODEL_NAME="inception" \
