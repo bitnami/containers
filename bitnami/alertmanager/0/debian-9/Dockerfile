@@ -1,10 +1,10 @@
 FROM bitnami/minideb:stretch as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/alertmanager-0.15.3-0-linux-amd64-debian-9.tar.gz && \
-    echo "77185926d1f011563b52da00aebbd69f3caadef639a0f8a28068f9101b6792b5  /tmp/bitnami/pkg/cache/alertmanager-0.15.3-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/alertmanager-0.15.3-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/alertmanager-0.15.3-0-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/alertmanager-0.15.3-20-linux-amd64-debian-9.tar.gz && \
+    echo "f97db3bcae87dee72fb530a94bf3224c0a5f38768d988727496b04f2ba04be65  /tmp/bitnami/pkg/cache/alertmanager-0.15.3-20-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/alertmanager-0.15.3-20-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/alertmanager-0.15.3-20-linux-amd64-debian-9.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/alertmanager /opt/bitnami/alertmanager
 ENV BITNAMI_APP_NAME="alertmanager" \
-    BITNAMI_IMAGE_VERSION="0.15.3-debian-9-r28" \
+    BITNAMI_IMAGE_VERSION="0.15.3-debian-9-r29" \
     PATH="/opt/bitnami/alertmanager/bin:$PATH"
 
 RUN install_packages ca-certificates
