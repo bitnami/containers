@@ -1,10 +1,10 @@
 FROM bitnami/minideb:stretch as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluentd-exporter-0.2.0-2-linux-amd64-debian-9.tar.gz && \
-    echo "eb8d409fafa9ded93ca8fccb375aba82e38ee73d2bdd0baab6b7b87a6fc09a28  /tmp/bitnami/pkg/cache/fluentd-exporter-0.2.0-2-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/fluentd-exporter-0.2.0-2-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/fluentd-exporter-0.2.0-2-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluentd-exporter-0.2.0-20-linux-amd64-debian-9.tar.gz && \
+    echo "bb7333ce7e48a400f78e7b9fbdc0d77e44151e885ed166f4b0cb3071b1219058  /tmp/bitnami/pkg/cache/fluentd-exporter-0.2.0-20-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/fluentd-exporter-0.2.0-20-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/fluentd-exporter-0.2.0-20-linux-amd64-debian-9.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/fluentd-exporter /opt/bitnami/fluentd-exporter
 ENV BITNAMI_APP_NAME="fluentd-exporter" \
-    BITNAMI_IMAGE_VERSION="0.2.0-debian-9-r139" \
+    BITNAMI_IMAGE_VERSION="0.2.0-debian-9-r140" \
     PATH="/opt/bitnami/fluentd-exporter/bin:$PATH"
 
 EXPOSE 9309
