@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-jsonnet/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-jsonnet/tree/master)
-
 # What is jsonnet?
 
 > Jsonnet is a data templating language for application and tool developers, based on JSON.
@@ -25,7 +23,7 @@ $ docker run --name git bitnami/jsonnet:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0.11-ol-7`, `0.11.2-ol-7-r1` (0.11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/0.11.2-ol-7-r1/0.11/ol-7/Dockerfile)
+* [`0.11-ol-7`, `0.11.2-ol-7-r2` (0.11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/0.11.2-ol-7-r2/0.11/ol-7/Dockerfile)
 * [`0.11-debian-9`, `0.11.2-debian-9-r4`, `0.11`, `0.11.2`, `0.11.2-r4`, `latest` (0.11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/0.11.2-debian-9-r4/0.11/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jsonnet GitHub repo](https://github.com/bitnami/bitnami-docker-jsonnet).
