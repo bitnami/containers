@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r218
+FROM bitnami/minideb-extras:stretch-r221
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX,o+rw" \
@@ -7,14 +7,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX,o+rw" \
 
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libncurses5 libreadline7 libsqlite3-0 libssl1.0.2 libssl1.1 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg install node-8.14.0-0 --checksum d1abd89f77402e373b6bd1549f8ae95d21f46aaf0921a97c2d5a23fe3f03c07b
-RUN bitnami-pkg unpack mysql-client-10.1.37-0 --checksum 2d73953a0a8f630163e14308737b97541a8cbcdafdb1efeb5a2138e720d3de14
-RUN bitnami-pkg unpack ghost-2.7.1-0 --checksum 47b40dfabf6c2ff52d031be157b2866164493bda3bb98b15c5fc5d4b8c8b08e3
+RUN bitnami-pkg install node-8.14.0-20 --checksum 408efbaecc9a5d5aa93f0e1755a15f5fe29c08d37baaac3900c9f02551d6da2b
+RUN bitnami-pkg unpack mysql-client-10.1.37-20 --checksum 414e98c1024187f1f0300eb3571f3d5ae54cdb36f3f08430be634714700bd1d9
+RUN bitnami-pkg unpack ghost-2.8.0-0 --checksum 975f8d19f0af1da2b52b4848bf199070ee0480babbde8ae6a464351ae8301ac3
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="2.7.1-debian-9-r5" \
+    BITNAMI_IMAGE_VERSION="2.8.0-debian-9-r0" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
