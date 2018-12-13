@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r95
+FROM bitnami/minideb-extras-base:stretch-r98
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libpcre3 libssl1.1 zlib1g
-RUN . ./libcomponent.sh && component_unpack "nginx" "1.14.2-0" --checksum 1a09b45dc039dbf3927b9aa983367d222443c09db2b8095840b06f6dd714d288
+RUN . ./libcomponent.sh && component_unpack "nginx" "1.14.2-20" --checksum b9c38f5825b9f7b9625e0aa0ec38d8d4849504b4657bdbcbd6c1ddc0afa18596
 RUN ln -sf /opt/bitnami/nginx/html /app
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
@@ -18,10 +18,11 @@ RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.14.2-debian-9-r6" \
+    BITNAMI_IMAGE_VERSION="1.14.2-debian-9-r7" \
     NAMI_PREFIX="/.nami" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
+    NGINX_HTTPS_PORT_NUMBER="443" \
     NGINX_HTTP_PORT_NUMBER="8080" \
     PATH="/opt/bitnami/nginx/sbin:$PATH"
 
