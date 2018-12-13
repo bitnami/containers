@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack kafka-1.1.1-20 --checksum b4136a822a843adafb155c9679bc308
 COPY rootfs /
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="1.1.1-ol-7-r118" \
+    BITNAMI_IMAGE_VERSION="1.1.1-ol-7-r119" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_BROKER_ID="-1" \
     KAFKA_BROKER_PASSWORD="bitnami" \
