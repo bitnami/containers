@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack discourse-2.1.4-20 --checksum a205b2ab2aa46995d695fa6b26e
 COPY rootfs /
 RUN install_packages rsync
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.1.4-ol-7-r2" \
+    BITNAMI_IMAGE_VERSION="2.1.4-ol-7-r3" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_EXTERNAL_PORT_NUMBER="80" \
     DISCOURSE_HOST="127.0.0.1" \
