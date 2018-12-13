@@ -42,7 +42,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-rhel-7`, `5.0.0-rhel-7-r3` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.0.0-rhel-7-r3/5/rhel-7/Dockerfile)
+* [`5-rhel-7`, `5.0.0-rhel-7-r4` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.0.0-rhel-7-r4/5/rhel-7/Dockerfile)
 * [`5-ol-7`, `5.0.0-ol-7-r5` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.0.0-ol-7-r5/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.0.0-debian-9-r2`, `5`, `5.0.0`, `5.0.0-r2`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.0.0-debian-9-r2/5/debian-9/Dockerfile)
 
@@ -424,6 +424,32 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --volume wordpress_data:/bitnami \
   bitnami/wordpress:latest
 ```
+
+## WP-CLI tool
+
+The Bitnami WordPress container includes the command line interface **wp-cli** that can help you to manage and interact with your WP sites. To run this tool, please note you need use the proper system user, **daemon**.
+
+This would be an example of using **wp-cli** to display the help menu:
+
+* Using `docker-compose` command:
+
+```bash
+$ docker-compose exec wordpress sudo -u daemon -- wp help
+```
+
+* Using `docker` command:
+
+```bash
+$ docker exec wordpress sudo -u daemon -- wp help
+```
+
+Find more information about parameters available in the tool in the [official documentation](https://make.wordpress.org/cli/handbook/config/).
+
+# Notable Changes
+
+## 5.0.0-r0
+
+- **wp-cli** tool is included in the Docker image. Find it at **/opt/bitnami/wp-cli/bin/wp**.
 
 # Contributing
 
