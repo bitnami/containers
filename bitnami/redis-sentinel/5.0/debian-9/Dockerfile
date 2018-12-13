@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r220
+FROM bitnami/minideb-extras:stretch-r221
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6
-RUN bitnami-pkg unpack redis-sentinel-5.0.2-20 --checksum a19a3e440ae98ef9a3d9a0416295944940a6582009bbef0f6b8640298fddd6b1
+RUN bitnami-pkg unpack redis-sentinel-5.0.3-0 --checksum 530c45661263c9c72f197d692933f9b70f1d121ea88a88f7faa2c24c22bc3214
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="5.0.2-debian-9-r20" \
+    BITNAMI_IMAGE_VERSION="5.0.3-debian-9-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis-sentinel/bin:$PATH" \
     REDIS_MASTER_HOST="redis" \
