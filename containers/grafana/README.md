@@ -48,7 +48,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-ol-7`, `5.4.1-ol-7-r0` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.4.1-ol-7-r0/5/ol-7/Dockerfile)
+* [`5-ol-7`, `5.4.1-ol-7-r1` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.4.1-ol-7-r1/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.4.1-debian-9-r1`, `5`, `5.4.1`, `5.4.1-r1`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.4.1-debian-9-r1/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
@@ -132,6 +132,32 @@ services:
     image: bitnami/grafana:latest
     volumes:
       - /path/to/grafana.ini:/opt/bitnami/grafana/conf/grafana.ini
+```
+
+## Install plugins at initialization
+
+When you start the Grafana image, you can specify a comma, semi-colon or space separated list of plugins to install by setting the env. variable `GF_INSTALL_PLUGINS`.
+
+ * For docker-compose add the variable name and value under the application section:
+
+```yaml
+version: '2'
+
+services:
+  grafana:
+    image: bitnami/grafana:latest
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-kubernetes-app,grafana-example-app
+    ports:
+      - '3000:3000'
+```
+
+ * For manual execution add a `-e` option with each variable and value:
+
+```bash
+$ docker run -d --name grafana -p 3000:3000 \
+    -e GF_INSTALL_PLUGINS=grafana-kubernetes-app,grafana-example-app \
+    bitnami/grafana:latest
 ```
 
 # Logging
