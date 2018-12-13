@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r195
+FROM bitnami/oraclelinux-extras:7-r196
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack solr-7.5.0-20 --checksum 05eb883195e30c9d2e091679a4ec5624
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="7.5.0-ol-7-r77" \
+    BITNAMI_IMAGE_VERSION="7.5.0-ol-7-r78" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:$PATH" \
     SOLR_CORE="" \
