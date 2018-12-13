@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-drupal-nginx/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-drupal-nginx/tree/master)
+
 # What is Drupal with NGINX?
 
 > Drupal with NGINX combines one of the most versatile open source content management systems on the market with the power of the NGINX web server. Drupal is built for high performance and is scalable to many servers, has easy integration via REST, JSON, SOAP and other formats, and features a whopping 15,000 plugins to extend and customize the application for just about any type of website.
