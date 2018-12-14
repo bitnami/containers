@@ -5,8 +5,8 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "14"
-          LATEST_STABLE: "14"
+          RELEASE_SERIES_LIST: "15"
+          LATEST_STABLE: "15"
           DISTRIBUTIONS_LIST: "debian-9,ol-7"
           IMAGE_NAME: wildfly
           CHART_NAME: wildfly
