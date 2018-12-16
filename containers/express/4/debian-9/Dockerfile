@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r221
+FROM bitnami/minideb-extras:stretch-r224
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,13 +7,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo5 netcat zlib1g
 RUN bitnami-pkg install node-7.10.1-1 --checksum 53362288e961d298a724353710a31901d4cb8237894a26a2f676b35450c02975
-RUN bitnami-pkg install express-generator-4.16.0-20 --checksum 859ee257a507b63aeea64f5149c02900e51927c1e11e8f63ad9375c9ad88a19d
+RUN bitnami-pkg install express-generator-4.16.0-20 --checksum 0f91a8278661a1f32f8a5c27b35358081ddcd49eae70983c11b82a564485b464
 RUN bitnami-pkg install express-4.16.4-20 --checksum 97bf005fff08d569acd0be76cddd4486be90a2dad05e824e8237147b0c5543d0
 RUN mkdir -p /dist /app /.npm && chmod g+rwx /app /dist /.npm
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.16.4-debian-9-r50" \
+    BITNAMI_IMAGE_VERSION="4.16.4-debian-9-r61" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/express/bin:$PATH"
 
