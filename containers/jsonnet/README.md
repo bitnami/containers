@@ -7,7 +7,7 @@
 # TL;DR;
 
 ```bash
-$ docker run --name git bitnami/jsonnet:latest
+$ docker run --name jsonnet bitnami/jsonnet:latest
 ```
 
 # Why use Bitnami Images?
@@ -55,7 +55,7 @@ $ docker build -t bitnami/jsonnet:latest https://github.com/bitnami/bitnami-dock
 To run commands inside this container you can use `docker run`, for example to evaluate jsonnet code:
 
 ```bash
-$ docker run --name bitnami/jsonnet:latest -e "{hello: 'world'}"
+$ docker run --name jsonnet bitnami/jsonnet:latest -e "{hello: 'world'}"
 ```
 
 # Contributing
