@@ -6,13 +6,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libbsd0 libc6 libedit2 libgcc1 libicu57 liblzma5 libncurses5 libnss-wrapper libssl1.1 libstdc++6 libtinfo5 libxml2 libxslt1.1 zlib1g
-RUN bitnami-pkg unpack postgresql-11.1.0-21 --checksum fd04d05c0ed5ee46b5324133d4891b8a0b952ff0d938bb6209b664da6d4133d1
+RUN bitnami-pkg unpack postgresql-11.1.0-22 --checksum 2331915a38716fb34385d9a37e973c152dcb7aadf194f60d449a2a2fd0c8ebf9
 RUN mkdir /docker-entrypoint-initdb.d /opt/bitnami/postgresql/conf/
 RUN chmod -R g+rwX /opt/bitnami/postgresql/conf/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="11.1.0-debian-9-r25" \
+    BITNAMI_IMAGE_VERSION="11.1.0-debian-9-r26" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_DATABASE="" \
