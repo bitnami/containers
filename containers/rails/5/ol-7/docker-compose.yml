@@ -10,7 +10,8 @@ services:
     tty: true # Enables debugging capabilities when attached to this container.
     image: bitnami/rails:5-ol-7
     environment:
-      - DATABASE_URL=mysql2://mariadb/my_app_development
+      - MARIADB_HOST=mariadb
+      - MARIADB_DATABASE=my_app_development
     depends_on:
       - mariadb
     ports:

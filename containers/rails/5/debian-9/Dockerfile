@@ -7,6 +7,8 @@ RUN bitnami-pkg install ruby-2.4.5-20 --checksum f1496dcc6b4fce4c661c6af478ac989
 RUN bitnami-pkg install mysql-client-10.1.37-20 --checksum 414e98c1024187f1f0300eb3571f3d5ae54cdb36f3f08430be634714700bd1d9
 RUN bitnami-pkg install git-2.19.2-0 --checksum 24817a90223cfc91ce38cdc459dc6647dcf36754bf0300433ddb00ec276757ff
 RUN bitnami-pkg install rails-5.2.2-20 --checksum d29500cbf2d1a31a9101b2594b0034be8e0c1dedfc86b373a62b3d82d5954236
+RUN curl -sLo yq https://github.com/mikefarah/yq/releases/download/2.2.0/yq_linux_amd64 && \
+    chmod +x yq && mv yq /usr/local/bin/
 RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /

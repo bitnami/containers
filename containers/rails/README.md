@@ -80,13 +80,13 @@ Finally launch the Rails application development environment using:
 $ docker-compose up
 ```
 
-Among other things, the above command creates a container service, named `myapp`, for Rails development and bootstraps a new Rails application in the application directory. You can use your favorite IDE for developing the application.
+Among other things, the above command creates a container service, named `myapp`, for Rails development and bootstraps a new Rails application in the application directory. You can use your favourite IDE for developing the application.
 
 > **Note**
 >
 > If the application directory contained the source code of an existing Rails application, the Bitnami Rails Development Container would load the existing application instead of bootstrapping a new one.
 
-After the WEBrick application server has been launched in the `myapp` service, visit http://localhost:3000 in your favorite web browser and you'll be greeted by the default Rails welcome page.
+After the WEBrick application server has been launched in the `myapp` service, visit http://localhost:3000 in your favourite web browser and you'll be greeted by the default Rails welcome page.
 
 In addition to the Rails Development Container, the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master/docker-compose.yml) file also configures a MariaDB service to serve as the database backend of your Rails application.
 
@@ -138,19 +138,39 @@ Following are a few examples of launching some commonly used Rails development c
   $ docker-compose exec myapp bundle exec rake db:migrate
   ```
 
-  > **Note**
-  >
-  > Database migrations are automatically applied during the start up of the Rails Development Container. This means that the `myapp` service could also be restarted to apply the database migrations.
-  > ```bash
-  > $ docker-compose restart myapp
-  > ```
+> **Note**
+>
+> Database migrations are automatically applied during the start up of the Rails Development Container. This means that the `myapp` service could also be restarted to apply the database migrations.
+> ```bash
+> $ docker-compose restart myapp
+> ```
+
+## Configuring your database:
+
+You can configure the MariaDB hostname and database name to use for development purposes using the environment variables **MARIADB_HOST** & **MARIADB_DATABASE**.
+
+For example, you can configure your Rails app to use the `development-db` database running on the `my-mariadb` MariaDB server using the `docker-compose.yml` below:
+
+```yaml
+version: '2'
+
+services:
+  myapp::
+    image: bitnami/rails:latest
+    environment:
+      - MARIADB_HOST=my-mariadb
+      - MARIADB_DATABASE=development-db
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+```
 
 ## Running additional services:
 
-  Sometimes, your application will require extra pieces, such as background processing tools like Resque
-or Sidekiq.
+Sometimes, your application will require extra pieces, such as background processing tools like Resque or Sidekiq.
 
-  For these cases, it is possible to re-use this container to be run as an additional
+For these cases, it is possible to re-use this container to be run as an additional
 service in your docker-compose file by modifying the command
 executed.
 
