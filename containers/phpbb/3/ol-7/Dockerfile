@@ -7,14 +7,14 @@ RUN bitnami-pkg unpack apache-2.4.37-21 --checksum 98587b038258e6d67135adff1d7cc
 RUN bitnami-pkg unpack php-7.1.25-20 --checksum 32a1c5bff48b141be69c9272c662f23a66285b0759095315abe19de5b452a56e
 RUN bitnami-pkg unpack mysql-client-10.1.37-20 --checksum 916d5a9a191d3a704d9c586a83d8a79348d298e21dff4754feb47a01bf2e5f26
 RUN bitnami-pkg unpack libphp-7.1.25-20 --checksum b48d0d1862bd57dc614414191bb2bbb2ed610eca10f70a377b881b0e0d6fea9f
-RUN bitnami-pkg unpack phpbb-3.2.4-20 --checksum 950a219778b77a84a2888fec200e1f52baeb3fee4564efae781920e1302d4564
+RUN bitnami-pkg unpack phpbb-3.2.4-21 --checksum 06958ad7c457ded87522edb4a5a41951a72f20e267a725d645c9319dcaeb1c50
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="phpbb" \
-    BITNAMI_IMAGE_VERSION="3.2.4-ol-7-r34" \
+    BITNAMI_IMAGE_VERSION="3.2.4-ol-7-r35" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
