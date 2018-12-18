@@ -34,17 +34,17 @@ gems_up_to_date() {
 #   None
 #########################
 wait_for_db() {
-  local mariadb_host="$(yq r /app/config/database.yml default.host)"
-  local mariadb_address="$(getent hosts $mariadb_host | awk '{ print $1 }')"
+  local db_host="${DATABASE_HOST:-mariadb}"
+  local db_address="$(getent hosts $db_host | awk '{ print $1 }')"
   counter=0
-  log "Connecting to MariaDB at $mariadb_address"
-  while ! nc -z "$mariadb_host" 3306; do
+  log "Connecting to MariaDB at $db_address"
+  while ! nc -z "$db_host" 3306; do
     counter=$((counter+1))
     if [ $counter == 30 ]; then
       log "Error: Couldn't connect to MariaDB."
       exit 1
     fi
-    log "Trying to connect to mariadb at $mariadb_address. Attempt $counter."
+    log "Trying to connect to mariadb at $db_address. Attempt $counter."
     sleep 5
   done
 }
@@ -61,12 +61,12 @@ if [[ "$1" = "bundle" ]] && [[ "$2" = "exec" ]]; then
     sed -i -e "s/# gem 'mini_racer'/gem 'mini_racer'/" Gemfile
     # TODO: substitution using 'yq' once they support anchors
     # Related issue: https://github.com/mikefarah/yq/issues/178
-    # E.g: yq w -i /app/config/database.yml default.host "${MARIADB_HOST:-mariadb}"
-    # E.g: yq w -i /app/config/database.yml development.database "${MARIADB_HOST:-app_development}"
-    log "Setting default host to \`${MARIADB_HOST:-mariadb}\`..."
-    sed -i -e "s/host:.*$/host: ${MARIADB_HOST:-mariadb}/g" /app/config/database.yml
-    log "Setting development database to \`${MARIADB_DATABASE:-my_app_development}\`..."
-    sed -i -e "1,/test:/ s/database:.*$/database: ${MARIADB_DATABASE:-my_app_development}/g" /app/config/database.yml
+    # E.g: yq w -i /app/config/database.yml default.host '<%= ENV.fetch("DATABASE_HOST") { mariadb } %>'
+    # E.g: yq w -i /app/config/database.yml development.database '<%= ENV.fetch("DATABASE_NAME") { mariadb } %>'
+    log "Setting default host to \`${DATABASE_HOST:-mariadb}\`..."
+    sed -i -e 's/host:.*$/host: <%= ENV.fetch("DATABASE_HOST", "mariadb") %>/g' /app/config/database.yml
+    log "Setting development database to \`${DATABASE_NAME:-my_app_development}\`..."
+    sed -i -e '1,/test:/ s/database:.*$/database: <%= ENV.fetch("DATABASE_NAME", "my_app_development") %>/g' /app/config/database.yml
   fi
 
   if ! gems_up_to_date; then

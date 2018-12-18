@@ -147,7 +147,7 @@ Following are a few examples of launching some commonly used Rails development c
 
 ## Configuring your database:
 
-You can configure the MariaDB hostname and database name to use for development purposes using the environment variables **MARIADB_HOST** & **MARIADB_DATABASE**.
+You can configure the MariaDB hostname and database name to use for development purposes using the environment variables **DATABASE_HOST** & **DATABASE_NAME**.
 
 For example, you can configure your Rails app to use the `development-db` database running on the `my-mariadb` MariaDB server using the `docker-compose.yml` below:
 
@@ -158,8 +158,8 @@ services:
   myapp::
     image: bitnami/rails:latest
     environment:
-      - MARIADB_HOST=my-mariadb
-      - MARIADB_DATABASE=development-db
+      - DATABASE_HOST=my-mariadb
+      - DATABASE_NAME=development-db
     ports:
       - 3000:3000
     volumes:
