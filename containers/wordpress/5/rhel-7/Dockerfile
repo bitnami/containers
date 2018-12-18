@@ -7,7 +7,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
-RUN bitnami-pkg unpack apache-2.4.37-20 --checksum 8c93a99ad260e59bcbe1b93a3c3391806ade2d7266cb14dea622bd7b8255afd5
+RUN bitnami-pkg unpack apache-2.4.37-21 --checksum b7ae0764960ad19d6272b2b97b4fd48c16bf3c424cccd8342ab28064ce8072b8
 RUN bitnami-pkg unpack php-7.2.12-20 --checksum f2240901648bdab8acc66c2f49aab91fbe4bf7cc49149977f58ea373712bd29e
 RUN bitnami-pkg install wp-cli-2.0.1-1 --checksum 506480c5ffb3362e18dc6dbe16ed8ebd19867a8735e5259e383c2806f52e6c52
 RUN bitnami-pkg unpack mysql-client-10.1.37-20 --checksum 68dc0a5d7237b8eeb45d742203bd255e60d1bbf96c5daf00e7b1ed2892ca98a5
@@ -21,7 +21,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.0.1-rhel-7-r9" \
+    BITNAMI_IMAGE_VERSION="5.0.1-rhel-7-r10" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
