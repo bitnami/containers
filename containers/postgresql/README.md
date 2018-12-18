@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`11-ol-7`, `11.1.0-ol-7-r40` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.1.0-ol-7-r40/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.1.0-debian-9-r26`, `11`, `11.1.0`, `11.1.0-r26` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.1.0-debian-9-r26/11/debian-9/Dockerfile)
-* [`10-ol-7`, `10.6.0-ol-7-r43` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.6.0-ol-7-r43/10/ol-7/Dockerfile)
+* [`10-ol-7`, `10.6.0-ol-7-r44` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.6.0-ol-7-r44/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.6.0-debian-9-r31`, `10`, `10.6.0`, `10.6.0-r31`, `latest` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.6.0-debian-9-r31/10/debian-9/Dockerfile)
 * [`9.6-ol-7`, `9.6.11-ol-7-r44` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.11-ol-7-r44/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.11-debian-9-r30`, `9.6`, `9.6.11`, `9.6.11-r30` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.11-debian-9-r30/9.6/debian-9/Dockerfile)
@@ -182,7 +182,7 @@ In order to have your custom files inside the docker image you can mount them as
 
 ## Setting the root password on first run
 
-In the above commands you may have noticed the use of the `POSTGRESQL_PASSWORD` environment variable. Passing the `POSTGRESQL_PASSWORD` environment variable when running the image for the first time will set the password of the `postgres` user to the value of `POSTGRESQL_PASSWORD`.
+In the above commands you may have noticed the use of the `POSTGRESQL_PASSWORD` environment variable. Passing the `POSTGRESQL_PASSWORD` environment variable when running the image for the first time will set the password of the `postgres` user to the value of `POSTGRESQL_PASSWORD` (or the content of the file specified in `POSTGRESQL_PASSWORD_FILE`).
 
 ```bash
 $ docker run --name postgresql -e POSTGRESQL_PASSWORD=password123 bitnami/postgresql:latest
@@ -261,6 +261,7 @@ A [Streaming replication](http://www.postgresql.org/docs/9.4/static/warm-standby
  - `POSTGRESQL_REPLICATION_MODE`: Replication mode. Possible values `master`/`slave`. No defaults.
  - `POSTGRESQL_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
  - `POSTGRESQL_REPLICATION_PASSWORD`: The replication users password. No defaults.
+ - `POSTGRESQL_REPLICATION_PASSWORD_FILE`: Path to a file that contains the replication users password. This will override the value specified in `POSTGRESQL_REPLICATION_PASSWORD`. No defaults.
  - `POSTGRESQL_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
  - `POSTGRESQL_MASTER_PORT_NUMBER`: Server port of the replication master (slave parameter). Defaults to `5432`.
 
