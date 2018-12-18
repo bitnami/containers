@@ -16,6 +16,18 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
     echo "postgres:x:$(id -g):" > "$NSS_WRAPPER_GROUP"
   fi
 
+  if [[ -n $POSTGRESQL_PASSWORD_FILE ]]; then
+      declare PASSWORD_AUX
+      PASSWORD_AUX="$(< "${POSTGRESQL_PASSWORD_FILE}")"
+      export POSTGRESQL_PASSWORD=$PASSWORD_AUX
+  fi
+
+  if [[ -n $POSTGRESQL_REPLICATION_PASSWORD_FILE ]]; then
+      declare REPLICATION_PASSWORD_AUX
+      REPLICATION_PASSWORD_AUX="$(< "${POSTGRESQL_REPLICATION_PASSWORD_FILE}")"
+      export POSTGRESQL_REPLICATION_PASSWORD=$REPLICATION_PASSWORD_AUX
+  fi
+
   nami_initialize postgresql
   info "Starting postgresql... "
 fi
