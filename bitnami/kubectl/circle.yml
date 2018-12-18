@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "1.12"
+          RELEASE_SERIES_LIST: "1.10,1.11,1.12,1.9"
           LATEST_STABLE: "1.12"
           DISTRIBUTIONS_LIST: "debian-9,ol-7"
           IMAGE_NAME: kubectl
