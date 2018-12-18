@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-fluentd/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-fluentd/tree/master)
-
 # What is Fluentd?
 
 Fluentd is an open source data collector, which lets you unify the data collection and consumption for a better use and understanding of data.
@@ -16,7 +14,6 @@ $ docker run --name fluentd bitnami/fluentd:latest
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -48,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.3.2-ol-7-r12` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.3.2-ol-7-r12/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.3.2-debian-9-r11`, `1`, `1.3.2`, `1.3.2-r11`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.3.2-debian-9-r11/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.3.2-debian-9-r12`, `1`, `1.3.2`, `1.3.2-r12`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.3.2-debian-9-r12/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
 
