@@ -9,11 +9,9 @@ services:
   myapp:
     tty: true # Enables debugging capabilities when attached to this container.
     image: 'bitnami/rails:latest'
-    labels:
-      kompose.service.type: nodeport
     environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_DATABASE=my_app_development
+      - DATABASE_HOST=mariadb
+      - DATABASE_NAME=my_app_development
     depends_on:
       - mariadb
     ports:
