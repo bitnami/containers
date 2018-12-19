@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libstdc++6
-RUN bitnami-pkg unpack tensorflow-resnet-1.12.0-21 --checksum d9833dfde4b24444b7504fbc37132131448562557e35c9dbfc68111398f07f3b
+RUN bitnami-pkg unpack tensorflow-resnet-1.12.0-22 --checksum 8aa2e615ffdbb7b625b41892627ba83358626e6db003b109b8df9c79778fa907
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-resnet" \
-    BITNAMI_IMAGE_VERSION="1.12.0-debian-9-r22" \
+    BITNAMI_IMAGE_VERSION="1.12.0-debian-9-r23" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-resnet/bin:$PATH"
 
