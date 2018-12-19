@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r201 as buildenv
+FROM bitnami/oraclelinux-extras:7-r202 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nats-1.3.0-20-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r201
+FROM bitnami/oraclelinux-extras:7-r202
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/nats /opt/bitnami/nats
 ENV BITNAMI_APP_NAME="nats" \
-    BITNAMI_IMAGE_VERSION="1.3.0-ol-7-r110" \
+    BITNAMI_IMAGE_VERSION="1.3.0-ol-7-r111" \
     PATH="/opt/bitnami/nats/bin:$PATH"
 
 RUN install_packages curl
