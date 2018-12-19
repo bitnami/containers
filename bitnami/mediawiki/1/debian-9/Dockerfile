@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r226
+FROM bitnami/minideb-extras:stretch-r227
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,8 +8,8 @@ RUN bitnami-pkg unpack php-7.1.25-20 --checksum b4350f7370f196def8ff56462d7efb49
 RUN bitnami-pkg unpack mysql-client-10.1.37-20 --checksum 414e98c1024187f1f0300eb3571f3d5ae54cdb36f3f08430be634714700bd1d9
 RUN bitnami-pkg unpack libphp-7.1.25-21 --checksum c55887490c4242caaf4a7a9abefefaff71b5413cec6965b1e08a2795e4aff167
 RUN bitnami-pkg unpack mediawiki-1.31.1-20 --checksum 170f5f74d2c1111798dcb9803766166a151a3758d0c7b9181d59addd067a915b
-RUN locale-gen en_US.UTF-8
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
+RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="mediawiki" \
-    BITNAMI_IMAGE_VERSION="1.31.1-debian-9-r68" \
+    BITNAMI_IMAGE_VERSION="1.31.1-debian-9-r69" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     MARIADB_HOST="mariadb" \
