@@ -44,7 +44,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.11.3-ol-7-r130` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-ol-7-r130/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.11.3-ol-7-r131` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-ol-7-r131/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.11.3-debian-9-r128`, `3`, `3.11.3`, `3.11.3-r128`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-debian-9-r128/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
@@ -332,6 +332,27 @@ services:
       - CASSANDRA_SEEDS=cassandra-node1,cassandra-node2
       - CASSANDRA_PASSWORD=password123
 ```
+## Initializing with custom scripts
+
+When the container is executed for the first time, it will execute the files with extensions `.sh` and `.cql` located at `/docker-entrypoint-initdb.d`. This behavior can be skipped by setting the environment variable `CASSANDRA_IGNORE_INITDB_SCRIPTS`.
+
+In order to have your custom files inside the docker image you can mount them as a volume.
+
+```bash
+$ docker run --name cassandra \
+  -v /path/to/init-scripts:/docker-entrypoint-initdb.d \
+  -v /path/to/cassandra-persistence:/bitnami
+  bitnami/cassandra:latest
+```
+Or with docker-compose 
+
+```yaml
+cassandra:
+  image: bitnami/cassandra:latest
+  volumes:
+    - /path/to/init-scripts:/docker-entrypoint-initdb.d
+    - /path/to/cassandra-persistence:/bitnami
+```
 
 ## Configuration file
 
@@ -458,6 +479,10 @@ $ docker-compose up cassandra
 ```
 
 # Notable Changes
+
+## 3.11.3-r129
+
+-The Cassandra container now adds the possibility to inject custom initialization scripts by mounting cql and sh files in `/docker-entrypoint-initdb.d`. See [this section](#initializing-with-custom-scripts) for more information.
 
 ## 3.11.2-r22
 
