@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-tomcat/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-tomcat/tree/master)
-
 # What is Tomcat?
 
 > [Apache Tomcat](http://tomcat.apache.org), often referred to as Tomcat, is an open-source web server and servlet container developed by the [Apache Software Foundation (ASF)](https://www.apache.org). Tomcat implements several Java EE specifications including Java Servlet, JavaServer Pages (JSP), Java EL, and WebSocket, and provides a "pure Java" HTTP web server environment for Java code to run in.
@@ -22,7 +20,6 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -52,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`8.5-ol-7`, `8.5.35-ol-7-r38` (8.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.35-ol-7-r38/8.5/ol-7/Dockerfile)
 * [`8.5-debian-9`, `8.5.35-debian-9-r30`, `8.5`, `8.5.35`, `8.5.35-r30`, `latest` (8.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.35-debian-9-r30/8.5/debian-9/Dockerfile)
 * [`8.0-ol-7`, `8.0.53-ol-7-r151` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-ol-7-r151/8.0/ol-7/Dockerfile)
-* [`8.0-debian-9`, `8.0.53-debian-9-r137`, `8.0`, `8.0.53`, `8.0.53-r137` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-debian-9-r137/8.0/debian-9/Dockerfile)
+* [`8.0-debian-9`, `8.0.53-debian-9-r138`, `8.0`, `8.0.53`, `8.0.53-r138` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-debian-9-r138/8.0/debian-9/Dockerfile)
 * [`7-ol-7`, `7.0.92-ol-7-r32` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.92-ol-7-r32/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.0.92-debian-9-r26`, `7`, `7.0.92`, `7.0.92-r26` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.92-debian-9-r26/7/debian-9/Dockerfile)
 
