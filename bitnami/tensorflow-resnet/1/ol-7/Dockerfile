@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r201
+FROM bitnami/oraclelinux-extras:7-r202
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack tensorflow-resnet-1.12.0-21 --checksum 38b5a0cfc8c2c480a3
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-resnet" \
-    BITNAMI_IMAGE_VERSION="1.12.0-ol-7-r24" \
+    BITNAMI_IMAGE_VERSION="1.12.0-ol-7-r25" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-resnet/bin:$PATH"
 
