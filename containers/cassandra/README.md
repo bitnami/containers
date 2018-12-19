@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-cassandra/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-cassandra/tree/master)
-
 # What is Cassandra?
 
 > [Apache Cassandra](http://cassandra.apache.org) is a free and open-source distributed database management system designed to handle large amounts of data across many commodity servers, providing high availability with no single point of failure. Cassandra offers robust support for clusters spanning multiple datacenters, with asynchronous masterless replication allowing low latency operations for all clients.
@@ -22,7 +20,6 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -47,7 +44,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.11.3-ol-7-r129` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-ol-7-r129/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.11.3-ol-7-r130` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-ol-7-r130/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.11.3-debian-9-r128`, `3`, `3.11.3`, `3.11.3-r128`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-debian-9-r128/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
@@ -185,7 +182,7 @@ cassandra:
     bitnami/cassandra
 ```
 
-Available variables:
+**In case you do not mount custom configuration files**, the following variables are available for configuring cassandra:
 
  - `CASSANDRA_TRANSPORT_PORT_NUMBER`: Inter-node cluster communication port. Default: **7000**
  - `CASSANDRA_JMX_PORT_NUMBER`: JMX connections port. Default: **7199**
@@ -201,6 +198,52 @@ Available variables:
  - `CASSANDRA_ENABLE_RPC`: Enable the thrift RPC endpoint. Default :**true**
  - `CASSANDRA_DATACENTER`: Datacenter name for the cluster. Ignored in **SimpleSnitch** endpoint snitch. Default: **dc1**.
  - `CASSANDRA_RACK`: Rack name for the cluster. Ignored in **SimpleSnitch** endpoint snitch. Default: **rack1**.
+
+## Configuration file
+
+The image looks for configurations in `/opt/bitnami/cassandra/conf/`. You can mount a volume at `/bitnami/cassandra/conf/` and copy/edit the configurations in the `/path/to/cassandra-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
+
+For example, in order to override the `cassandra.yaml` configuration file:
+
+### Step 1: Write your custom `cassandra.yaml` file
+You can download the basic cassandra.yaml file like follows
+
+```bash
+wget https://svn.apache.org/repos/asf/cassandra/trunk/conf/cassandra.yaml
+```
+
+Perform any desired modifications in that file
+
+### Step 2: Run the Cassandra image with the designed volume attached.
+
+```bash
+$ docker run --name cassandra \
+    -p 7000:7000  \
+    -e CASSANDRA_PORT_NUMBER=7000 \
+    -v /path/to/cassandra.yaml:/bitnami/cassandra/conf/cassandra.yaml:ro \
+    -v /your/local/path/bitnami/cassandra:/bitnami \
+    bitnami/cassandra:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  cassandra:
+    image: bitnami/cassandra:latest
+    environment:
+      - CASSANDRA_TRANSPORT_PORT_NUMBER=7000
+    volumes:
+      - /path/to/cassandra.yaml:/bitnami/cassandra/conf/cassandra.yaml:ro
+      - /your/local/path/bitnami/cassandra:/bitnami
+```
+
+After that, your changes will be taken into account in the server's behaviour. Note that you can override any other Cassandra configuration file, such as `rack-dc.properties`.
+
+Refer to the [Cassandra configuration reference](https://docs.datastax.com/en/cassandra/3.0/cassandra/configuration/configCassandra_yaml.html) for the complete list of configuration options.
+
 
 ## Setting the server password on first run
 
@@ -225,7 +268,7 @@ cassandra:
 
 ## Setting up a cluster
 
-A cluster can easily be setup with the Bitnami Cassandra Docker Image using the following environment variables
+A cluster can easily be setup with the Bitnami Cassandra Docker Image. **In case you do not mount custom configuration files**, you can use the following environment variables:
 
  - `CASSANDRA_HOST`: Hostname used to configure Cassandra. It can be either an IP or a domain. If left empty, it will be resolved to the machine IP.
  - `CASSANDRA_CLUSTER_NAME`: Cluster name to configure Cassandra. Defaults: **My Cluster**
