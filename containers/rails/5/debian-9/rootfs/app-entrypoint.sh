@@ -27,7 +27,7 @@ gems_up_to_date() {
 ########################
 # Wait for database to be ready
 # Globals:
-#   DATABASE_URL
+#   DATABASE_HOST
 # Arguments:
 #   None
 # Returns:
@@ -72,7 +72,7 @@ if [[ "$1" = "bundle" ]] && [[ "$2" = "exec" ]]; then
   if ! gems_up_to_date; then
     log "Installing/Updating Rails dependencies (gems)..."
     bundle install
-    log "Gems updated"!!
+    log "Gems updated!!"
   fi
 
   if [[ -z $SKIP_DB_WAIT ]]; then
