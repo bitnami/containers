@@ -383,7 +383,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - /path/to/postgresql-persistence/conf/:/opt/bitnami/postresql/conf/
+      - /path/to/postgresql-persistence/conf/:/opt/bitnami/postgresql/conf/
 ```
 
 ### Step 2: Edit the configuration
