@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-postgresql/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-postgresql/tree/master)
-
 # What is PostgreSQL?
 
 > [PostgreSQL](http://www.postgresql.org) is an object-relational database management system (ORDBMS) with an emphasis on extensibility and on standards-compliance [[source]](https://en.wikipedia.org/wiki/PostgreSQL).
@@ -22,7 +20,6 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -51,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`11-debian-9`, `11.1.0-debian-9-r30`, `11`, `11.1.0`, `11.1.0-r30` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.1.0-debian-9-r30/11/debian-9/Dockerfile)
 * [`10-ol-7`, `10.6.0-ol-7-r46` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.6.0-ol-7-r46/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.6.0-debian-9-r35`, `10`, `10.6.0`, `10.6.0-r35`, `latest` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.6.0-debian-9-r35/10/debian-9/Dockerfile)
-* [`9.6-ol-7`, `9.6.11-ol-7-r47` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.11-ol-7-r47/9.6/ol-7/Dockerfile)
+* [`9.6-ol-7`, `9.6.11-ol-7-r48` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.11-ol-7-r48/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.11-debian-9-r34`, `9.6`, `9.6.11`, `9.6.11-r34` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.11-debian-9-r34/9.6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
@@ -360,7 +357,19 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 ## Configuration file
 
-The image looks for configurations in `/opt/bitnami/postgresql/conf/`. You can mount a volume at `/opt/bitnami/postgresql/conf/` and copy/edit the configurations in the `/path/to/postgresql-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
+The image looks for `postgresql.conf` file in `/opt/bitnami/postgresql/conf/`. You can mount a volume at `/opt/bitnami/postgresql/conf/` and copy/edit the `postgresql.conf` file in the `/path/to/postgresql-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
+
+```
+/path/to/postgresql-persistence/conf/
+└── postgresql.conf
+
+0 directories, 1 file
+```
+
+As PostgreSQL image is non-root, you need to set the proper permissions to the mounted directory in your host:
+```
+sudo chown 1001:1001 /path/to/postgresql-persistence/conf/
+```
 
 ### Step 1: Run the PostgreSQL image
 
@@ -409,6 +418,40 @@ $ docker-compose restart postgresql
 ```
 
 Refer to the [server configuration](http://www.postgresql.org/docs/9.4/static/runtime-config.html) manual for the complete list of configuration options.
+
+### Allow settings to be loaded from files other than the default `postgresql.conf`
+
+Apart of using a custom `postgresql.conf`, you can include files ending in `.conf` from the `conf.d` directory in the volume at `/opt/bitnami/postgresql/conf/`.
+For this purpose, the default `postgresql.conf` contains the following section:
+
+```
+#------------------------------------------------------------------------------
+# CONFIG FILE INCLUDES
+#------------------------------------------------------------------------------
+
+# These options allow settings to be loaded from files other than the
+# default postgresql.conf.
+
+include_dir = 'conf.d'  # Include files ending in '.conf' from directory 'conf.d'
+```
+
+In your host, you should create the extended configuration file under the `conf.d` directory:
+
+```bash
+mkdir -p /path/to/postgresql-persistence/conf/conf.d/
+vi /path/to/postgresql-persistence/conf/conf.d/extended.conf
+```
+
+If you are using your custom `postgresql.conf`, you should create (or uncomment) the above section in your config file, in this case the `/path/to/postgresql-persistence/conf/` structure should be something like
+
+```
+/path/to/postgresql-persistence/conf/
+├── conf.d
+│   └── extended.conf
+└── postgresql.conf
+
+1 directory, 2 files
+```
 
 # Logging
 
