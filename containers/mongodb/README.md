@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-mongodb/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-mongodb/tree/master)
-
 # What is MongoDB?
 
 > [MongoDB](https://www.mongodb.org/) is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas, making the integration of data in certain types of applications easier and faster.
@@ -22,7 +20,6 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -50,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`4.1-ol-7`, `4.1.4-ol-7-r56` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.4-ol-7-r56/4.1/ol-7/Dockerfile)
 * [`4.1-debian-9`, `4.1.4-debian-9-r62`, `4.1`, `4.1.4`, `4.1.4-r62` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.4-debian-9-r62/4.1/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.3-ol-7-r80` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-ol-7-r80/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.3-debian-9-r69`, `4.0`, `4.0.3`, `4.0.3-r69`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-debian-9-r69/4.0/debian-9/Dockerfile)
+* [`4.0-debian-9`, `4.0.3-debian-9-r70`, `4.0`, `4.0.3`, `4.0.3-r70`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-debian-9-r70/4.0/debian-9/Dockerfile)
 * [`3.6-ol-7`, `3.6.8-ol-7-r94` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.8-ol-7-r94/3.6/ol-7/Dockerfile)
 * [`3.6-debian-9`, `3.6.8-debian-9-r80`, `3.6`, `3.6.8`, `3.6.8-r80` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.8-debian-9-r80/3.6/debian-9/Dockerfile)
 
