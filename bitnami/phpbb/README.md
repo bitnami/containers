@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-phpbb/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-phpbb/tree/master)
-
 # What is phpBB?
 
 > If you need to build a community forum, try phpBB. First released in 2000, phpBB is a bulletin board solution that allows you to create forums and subforums. phpBB supports the notion of users and groups, file attachments, full-text search, notifications and more. Hundreds of modifications are available including themes, communications add-ons, spam management and more.
@@ -20,7 +18,6 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -41,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.2.4-ol-7-r35` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.4-ol-7-r35/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.2.4-ol-7-r37` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.4-ol-7-r37/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.2.4-debian-9-r25`, `3`, `3.2.4`, `3.2.4-r25`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.4-debian-9-r25/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpbb GitHub repo](https://github.com/bitnami/bitnami-docker-phpbb).
