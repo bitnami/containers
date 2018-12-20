@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`11-ol-7`, `11.1.0-ol-7-r45` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.1.0-ol-7-r45/11/ol-7/Dockerfile)
+* [`11-ol-7`, `11.1.0-ol-7-r46` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.1.0-ol-7-r46/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.1.0-debian-9-r31`, `11`, `11.1.0`, `11.1.0-r31` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.1.0-debian-9-r31/11/debian-9/Dockerfile)
 * [`10-ol-7`, `10.6.0-ol-7-r48` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.6.0-ol-7-r48/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.6.0-debian-9-r36`, `10`, `10.6.0`, `10.6.0-r36`, `latest` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.6.0-debian-9-r36/10/debian-9/Dockerfile)
@@ -357,7 +357,7 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 ## Configuration file
 
-The image looks for `postgresql.conf` file in `/opt/bitnami/postgresql/conf/`. You can mount a volume at `/opt/bitnami/postgresql/conf/` and copy/edit the `postgresql.conf` file in the `/path/to/postgresql-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
+The image looks for `postgresql.conf` file in `/opt/bitnami/postgresql/conf/`. You can mount a volume at `/bitnami/postgresql/conf/` and copy/edit the `postgresql.conf` file in the `/path/to/postgresql-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
 ```
 /path/to/postgresql-persistence/conf/
@@ -377,7 +377,7 @@ Run the PostgreSQL image, mounting a directory from your host.
 
 ```bash
 $ docker run --name postgresql \
-    -v /path/to/postgresql-persistence/conf/:/opt/bitnami/postgresql/conf/ \
+    -v /path/to/postgresql-persistence/conf/:/bitnami/postgresql/conf/ \
     bitnami/postgresql:latest
 ```
 
@@ -392,7 +392,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - /path/to/postgresql-persistence/conf/:/opt/bitnami/postgresql/conf/
+      - /path/to/postgresql-persistence/conf/:/bitnami/postgresql/conf/
 ```
 
 ### Step 2: Edit the configuration
@@ -421,7 +421,7 @@ Refer to the [server configuration](http://www.postgresql.org/docs/9.4/static/ru
 
 ### Allow settings to be loaded from files other than the default `postgresql.conf`
 
-Apart of using a custom `postgresql.conf`, you can include files ending in `.conf` from the `conf.d` directory in the volume at `/opt/bitnami/postgresql/conf/`.
+Apart of using a custom `postgresql.conf`, you can include files ending in `.conf` from the `conf.d` directory in the volume at `/bitnami/postgresql/conf/`.
 For this purpose, the default `postgresql.conf` contains the following section:
 
 ```
