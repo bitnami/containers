@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-redis/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-redis/tree/master)
-
 # What is Redis?
 
 > Redis is an advanced key-value cache and store. It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets, sorted sets, bitmaps and hyperloglogs.
@@ -24,7 +22,6 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -51,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`5.0-ol-7`, `5.0.3-ol-7-r12` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.3-ol-7-r12/5.0/ol-7/Dockerfile)
 * [`5.0-debian-9`, `5.0.3-debian-9-r5`, `5.0`, `5.0.3`, `5.0.3-r5` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.3-debian-9-r5/5.0/debian-9/Dockerfile)
-* [`4.0-ol-7`, `4.0.12-ol-7-r12` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.12-ol-7-r12/4.0/ol-7/Dockerfile)
+* [`4.0-ol-7`, `4.0.12-ol-7-r13` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.12-ol-7-r13/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.12-debian-9-r5`, `4.0`, `4.0.12`, `4.0.12-r5`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.12-debian-9-r5/4.0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
