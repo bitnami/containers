@@ -1,4 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-codeigniter/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-codeigniter/tree/master)
 
 # Bitnami CodeIgniter Development Container
 
@@ -17,7 +16,6 @@ $ docker-compose up
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -53,7 +51,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.1.9-ol-7-r165` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.9-ol-7-r165/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.1.9-debian-9-r153`, `3`, `3.1.9`, `3.1.9-r153`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.9-debian-9-r153/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.1.9-debian-9-r154`, `3`, `3.1.9`, `3.1.9-r154`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.9-debian-9-r154/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codeigniter GitHub repo](https://github.com/bitnami/bitnami-docker-codeigniter).
 
