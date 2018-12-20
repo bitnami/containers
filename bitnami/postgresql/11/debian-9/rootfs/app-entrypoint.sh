@@ -6,7 +6,15 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
-    if ! getent passwd "$(id -u)" &> /dev/null && [ -e /usr/lib/libnss_wrapper.so ]; then
+  # Copy mounted configuration files
+  PERSIST_CONF_DIR=/bitnami/postgresql/conf
+  CONF_DIR=/opt/bitnami/postgresql/conf
+  if [[ -d "$PERSIST_CONF_DIR" ]]; then
+    mkdir -p $CONF_DIR
+    cp -r $PERSIST_CONF_DIR/* $CONF_DIR 
+  fi
+
+  if ! getent passwd "$(id -u)" &> /dev/null && [ -e /usr/lib/libnss_wrapper.so ]; then
     export LD_PRELOAD='/usr/lib/libnss_wrapper.so'
     # shellcheck disable=SC2155
     export NSS_WRAPPER_PASSWD="$(mktemp)"
