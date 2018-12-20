@@ -1,4 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-cluster-scaler/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-cluster-autoscaler/tree/master)
 
 # What is Cluster Autoscaler?
 
@@ -35,7 +34,6 @@ Please note that Cluster Autoscaler a series of permissions/privileges to adjust
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -55,7 +53,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.13.1-ol-7-r15` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.13.1-ol-7-r15/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.13.1-debian-9-r15`, `1`, `1.13.1`, `1.13.1-r15`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.13.1-debian-9-r15/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.13.1-debian-9-r16`, `1`, `1.13.1`, `1.13.1-r16`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.13.1-debian-9-r16/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cluster-autoscaler GitHub repo](https://github.com/bitnami/bitnami-docker-cluster-autoscaler).
 
