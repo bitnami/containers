@@ -2,14 +2,14 @@ FROM bitnami/oraclelinux-runtimes:7-r175
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages ca-certificates glib2 glibc libblkid libffi libgcc libmount libselinux libuuid pcre wget zlib
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-1.8.191-20-linux-x86_64-ol-7.tar.gz && \
-    echo "385a62502dbd62180858f6d4f6afde334dad9862e0caab022c2327b467d1283d  /tmp/bitnami/pkg/cache/java-1.8.191-20-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/java-1.8.191-20-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/java-1.8.191-20-linux-x86_64-ol-7.tar.gz
+RUN install_packages ca-certificates glibc libgcc wget
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-1.8.191-21-linux-x86_64-ol-7.tar.gz && \
+    echo "2021c68dea11b0805161e15d5f1ee6e0670e148f262138fede55d41b488993fb  /tmp/bitnami/pkg/cache/java-1.8.191-21-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/java-1.8.191-21-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/java-1.8.191-21-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="1.8.191-ol-7-r57" \
+    BITNAMI_IMAGE_VERSION="1.8.191-ol-7-r58" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
