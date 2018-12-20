@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-mysql/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-mysql/tree/master)
-
 # What is MySQL?
 
 > MySQL is a fast, reliable, scalable, and easy to use open-source relational database system. MySQL Server is intended for mission-critical, heavy-load production systems as well as for embedding into mass-deployed software.
@@ -24,7 +22,6 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -49,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`8.0-ol-7`, `8.0.13-ol-7-r58` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.13-ol-7-r58/8.0/ol-7/Dockerfile)
+* [`8.0-ol-7`, `8.0.13-ol-7-r59` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.13-ol-7-r59/8.0/ol-7/Dockerfile)
 * [`8.0-debian-9`, `8.0.13-debian-9-r46`, `8.0`, `8.0.13`, `8.0.13-r46` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.13-debian-9-r46/8.0/debian-9/Dockerfile)
 * [`5.7-ol-7`, `5.7.24-ol-7-r54` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.24-ol-7-r54/5.7/ol-7/Dockerfile)
 * [`5.7-debian-9`, `5.7.24-debian-9-r49`, `5.7`, `5.7.24`, `5.7.24-r49`, `latest` (5.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.24-debian-9-r49/5.7/debian-9/Dockerfile)
