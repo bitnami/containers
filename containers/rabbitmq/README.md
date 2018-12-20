@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-rabbitmq/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-rabbitmq/tree/master)
-
 # What is RabbitMQ?
 
 > RabbitMQ is an open source message broker software that implements the Advanced Message Queuing Protocol (AMQP).
@@ -27,7 +25,6 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -52,7 +49,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.7-ol-7`, `3.7.9-ol-7-r33` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.9-ol-7-r33/3.7/ol-7/Dockerfile)
+* [`3.7-ol-7`, `3.7.9-ol-7-r34` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.9-ol-7-r34/3.7/ol-7/Dockerfile)
 * [`3.7-debian-9`, `3.7.9-debian-9-r24`, `3.7`, `3.7.9`, `3.7.9-r24`, `latest` (3.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.9-debian-9-r24/3.7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
