@@ -35,7 +35,8 @@ gems_up_to_date() {
 #########################
 wait_for_db() {
   local db_host="${DATABASE_HOST:-mariadb}"
-  local db_address="$(getent hosts $db_host | awk '{ print $1 }')"
+  local db_address
+  db_address="$(getent hosts "$db_host" | awk '{ print $1 }')"
   counter=0
   log "Connecting to MariaDB at $db_address"
   while ! nc -z "$db_host" 3306; do
