@@ -1,17 +1,17 @@
-FROM bitnami/minideb-extras:stretch-r218
+FROM bitnami/minideb-extras:stretch-r227
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libblkid1 libc6 libffi6 libgcc1 libglib2.0-0 libmount1 libncurses5 libpcre3 libselinux1 libssl1.0.2 libstdc++6 libtinfo5 libuuid1 zlib1g
-RUN bitnami-pkg install java-1.8.191-3 --checksum 7d4e5b3392c96451eb5aa9b834713f9ca37580316bc9607bd6da26ec98e7e226
-RUN bitnami-pkg unpack tomcat-8.0.53-2 --checksum 5a934168aaf2afcc3fdb69bb8aafe779ef6cc38f484e7df392a6513db8d7f695
-RUN bitnami-pkg unpack mysql-client-10.1.37-0 --checksum 2d73953a0a8f630163e14308737b97541a8cbcdafdb1efeb5a2138e720d3de14
-RUN bitnami-pkg unpack jasperreports-7.1.0-2 --checksum 63b9d44fbc686f102312a9692b5d37556ab87fe82a11c35e18ef46d9302a0b54
+RUN bitnami-pkg install java-1.8.191-20 --checksum e193fab6c3c4de4d30f81a09d3b33978baa31761aaa330e39ce5ae8753db4133
+RUN bitnami-pkg unpack tomcat-8.0.53-21 --checksum 294056e9bb2012cf2cf535f209843a6319a847275de8bfdab00c03d054743fd3
+RUN bitnami-pkg unpack mysql-client-10.1.37-21 --checksum b7a5a18edfffc9440e852a412ea08a90e5f64924240f1f76a2813e6e93edaa39
+RUN bitnami-pkg unpack jasperreports-7.1.0-20 --checksum 74c98504d729c162f3ad10ccf636d8a1640b26917424a147bb67028106588a70
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.1.0-debian-9-r126" \
+    BITNAMI_IMAGE_VERSION="7.1.0-debian-9-r127" \
     JASPERREPORTS_DATABASE_NAME="bitnami_jasperreports" \
     JASPERREPORTS_DATABASE_PASSWORD="" \
     JASPERREPORTS_DATABASE_USER="bn_jasperreports" \
