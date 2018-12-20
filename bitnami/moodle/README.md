@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-moodle/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-moodle/tree/master)
-
 # What is Moodle?
 
 >Moodle is a very popular open source learning management solution (LMS) for the delivery of elearning courses and programs. It’s used not only by universities, but also by hundreds of corporations around the world who provide eLearning education for their employees. Moodle features a simple interface, drag-and-drop features, role-based permissions, deep reporting, many language translations, a well-documented API and more. With some of the biggest universities and organizations already using it, Moodle is ready to meet the needs of just about any size organization.
@@ -20,7 +18,6 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -41,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.6.1-ol-7-r20` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.6.1-ol-7-r20/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.6.1-ol-7-r21` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.6.1-ol-7-r21/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.6.1-debian-9-r10`, `3`, `3.6.1`, `3.6.1-r10`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.6.1-debian-9-r10/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
