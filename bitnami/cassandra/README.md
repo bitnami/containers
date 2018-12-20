@@ -44,7 +44,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.11.3-ol-7-r132` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-ol-7-r132/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.11.3-ol-7-r133` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-ol-7-r133/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.11.3-debian-9-r129`, `3`, `3.11.3`, `3.11.3-r129`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-debian-9-r129/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
@@ -400,6 +400,19 @@ $ docker-compose restart cassandra
 ```
 
 Refer to the [configuration](http://docs.datastax.com/en/cassandra/3.x/cassandra/configuration/configTOC.html) manual for the complete list of configuration options.
+
+# TLS Encryption
+The Bitnami Cassandra Docker image allows configuring TLS encryption between nodes and between server-client. This is done by mounting in `/bitnami/cassandra/secrets` two files:
+
+ - `keystore`: File with the server keystore
+ - `truststore`: File with the server truststore
+
+Apart from that, the following environment variables must be set:
+
+ - `CASSANDRA_KEYSTORE_PASSWORD`: Password for accessing the keystore.
+ - `CASSANDRA_TRUSTSTORE_PASSWORD`: Password for accessing the truststore.
+ - `CASSANDRA_INTERNODE_ENCRYPTION`: Sets the type of encryption between nodes. The default value is `none`. Can be set to `all`, `none`, `dc` or `rack`.
+ - `CASSANDRA_CLIENT_ENCRYPTION`: Enables client-server encryption. The default value is `false`.
 
 # Logging
 
