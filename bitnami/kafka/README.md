@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-kafka/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-kafka/tree/master)
-[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/kafka)](https://hub.docker.com/r/bitnami/kafka/)
 
 # What is Kafka?
 
@@ -36,7 +34,6 @@ services:
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -63,7 +60,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`2-ol-7`, `2.1.0-ol-7-r31` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.1.0-ol-7-r31/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.1.0-debian-9-r18`, `2`, `2.1.0`, `2.1.0-r18`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.1.0-debian-9-r18/2/debian-9/Dockerfile)
-* [`1-ol-7`, `1.1.1-ol-7-r133` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r133/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.1.1-ol-7-r134` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r134/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.1.1-debian-9-r84`, `1`, `1.1.1`, `1.1.1-r84` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r84/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
