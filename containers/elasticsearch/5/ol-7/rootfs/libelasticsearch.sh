@@ -243,7 +243,7 @@ elasticsearch_cluster_configuration() {
             elasticsearch_conf_set discovery.zen.minimum_master_nodes "$ELASTICSEARCH_MINIMUM_MASTER_NODES"
         elif [[ "${#host_list[@]}" -gt 2 ]]; then
             local min_masters=""
-            min_masters=$((("${#host_list[@]}" / 2) +1))
+            min_masters=$(((${#host_list[@]} / 2) +1))
             debug "Calculating minimum master nodes for quorum: $min_masters..."
             elasticsearch_conf_set discovery.zen.minimum_master_nodes "$min_masters"
         fi
