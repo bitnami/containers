@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-drupal/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-drupal/tree/master)
-
 # What is Drupal?
 
 > Drupal is one of the most versatile open source content management systems on the market. Drupal is built for high performance and is scalable to many servers, has easy integration via REST, JSON, SOAP and other formats, and features a whopping 15,000 plugins to extend and customize the application for just about any type of website.
@@ -20,7 +18,6 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -43,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8-rhel-7`, `8.6.4-rhel-7-r22` (8/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.4-rhel-7-r22/8/rhel-7/Dockerfile)
-* [`8-php5-rhel-7`, `8.6.4-php5-rhel-7-r23` (8-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.4-php5-rhel-7-r23/8-php5/rhel-7/Dockerfile)
+* [`8-php5-rhel-7`, `8.6.4-php5-rhel-7-r24` (8-php5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.4-php5-rhel-7-r24/8-php5/rhel-7/Dockerfile)
 * [`8-ol-7`, `8.6.4-ol-7-r21` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.4-ol-7-r21/8/ol-7/Dockerfile)
 * [`8-debian-9`, `8.6.4-debian-9-r9`, `8`, `8.6.4`, `8.6.4-r9`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.4-debian-9-r9/8/debian-9/Dockerfile)
 
