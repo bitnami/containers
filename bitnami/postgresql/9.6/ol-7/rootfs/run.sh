@@ -10,13 +10,10 @@ fi
 # allow running custom initialization scripts
 if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && [[ ! -f /bitnami/postgresql/.user_scripts_initialized ]]; then
     info "Loading user files from /docker-entrypoint-initdb.d";
-    if [[ ! -z $POSTGRESQL_PASSWORD ]]; then
+    if [[ -n $POSTGRESQL_PASSWORD ]] && [[ $POSTGRESQL_USERNAME == "postgres" ]]; then
         export PGPASSWORD=$POSTGRESQL_PASSWORD
     fi
-    psql=( psql --username $POSTGRESQL_USERNAME )
-    if [[ -n $POSTGRESQL_DATABASE ]]; then
-        psql+=( --dbname $POSTGRESQL_DATABASE )
-    fi
+    psql=( psql --username postgres )
     nami start postgresql > /dev/null
     for f in /docker-entrypoint-initdb.d/*; do
         case "$f" in
