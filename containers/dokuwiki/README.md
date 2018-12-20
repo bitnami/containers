@@ -1,4 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-dokuwiki/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-dokuwiki/tree/master)
 
 # What is DokuWiki?
 
@@ -20,7 +19,6 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -42,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.20180422.201805030840-ol-7-r166` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-ol-7-r166/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.20180422.201805030840-debian-9-r127`, `0`, `0.20180422.201805030840`, `0.20180422.201805030840-r127`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-debian-9-r127/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.20180422.201805030840-debian-9-r128`, `0`, `0.20180422.201805030840`, `0.20180422.201805030840-r128`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-debian-9-r128/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dokuwiki GitHub repo](https://github.com/bitnami/bitnami-docker-dokuwiki).
 
