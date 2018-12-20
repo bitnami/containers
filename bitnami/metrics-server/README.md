@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.3.1-ol-7-r90` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.1-ol-7-r90/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.3.1-debian-9-r65`, `0`, `0.3.1`, `0.3.1-r65`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.1-debian-9-r65/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.3.1-debian-9-r66`, `0`, `0.3.1`, `0.3.1-r66`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.1-debian-9-r66/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/metrics-server GitHub repo](https://github.com/bitnami/bitnami-docker-metrics-server).
 
