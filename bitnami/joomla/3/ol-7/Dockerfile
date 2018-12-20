@@ -1,10 +1,10 @@
-FROM bitnami/oraclelinux-extras:7-r202
+FROM bitnami/oraclelinux-extras:7-r203
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libmemcached libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.37-21 --checksum 98587b038258e6d67135adff1d7ccf4d3d1da7168e2857c2a46fc5ee50e735b2
-RUN bitnami-pkg unpack php-7.1.25-20 --checksum 32a1c5bff48b141be69c9272c662f23a66285b0759095315abe19de5b452a56e
+RUN bitnami-pkg unpack php-7.1.25-21 --checksum 1f44b05378c6e9419b663a1f6d73fb8923493386e3a3e8a5b67619a9d5e34b9b
 RUN bitnami-pkg unpack mysql-client-10.1.37-20 --checksum 916d5a9a191d3a704d9c586a83d8a79348d298e21dff4754feb47a01bf2e5f26
 RUN bitnami-pkg unpack libphp-7.1.25-20 --checksum b48d0d1862bd57dc614414191bb2bbb2ed610eca10f70a377b881b0e0d6fea9f
 RUN bitnami-pkg unpack joomla-3.9.1-20 --checksum d425688c25d2b071ea6ae2b4b97ad49d3f6fa0ddb005e7443eedd3b9c90a41a4
@@ -17,7 +17,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.9.1-ol-7-r26" \
+    BITNAMI_IMAGE_VERSION="3.9.1-ol-7-r27" \
     JOOMLA_DATABASE_NAME="bitnami_joomla" \
     JOOMLA_DATABASE_PASSWORD="" \
     JOOMLA_DATABASE_USER="bn_joomla" \
