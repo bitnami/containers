@@ -5,7 +5,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/"
 
 # Install required system packages and dependencies
-RUN install_packages libblkid1 libbz2-1.0 libc6 libffi6 libgcc1 libglib2.0-0 libjemalloc1 libmount1 libncurses5 libpcre3 libreadline7 libselinux1 libsqlite3-0 libssl1.1 libtinfo5 libuuid1 zlib1g
+RUN install_packages libbz2-1.0 libc6 libgcc1 libjemalloc1 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libtinfo5 zlib1g
 RUN bitnami-pkg install python-2.7.15-20 --checksum 77c68cc5c463e53143bb7b6e6d322d5127d9cf4bd988b1aa217db2640e86e5fd
 RUN bitnami-pkg install java-1.8.191-20 --checksum e193fab6c3c4de4d30f81a09d3b33978baa31761aaa330e39ce5ae8753db4133
 RUN bitnami-pkg unpack cassandra-3.11.3-24 --checksum aa5053ef4c3d8a739d4a956c4743c246e8382505af33752d4adb3229430dd667
@@ -14,7 +14,7 @@ RUN chmod -R g+rwX /opt/bitnami/cassandra/conf/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.3-debian-9-r130" \
+    BITNAMI_IMAGE_VERSION="3.11.3-debian-9-r131" \
     CASSANDRA_CLIENT_ENCRYPTION="false" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
