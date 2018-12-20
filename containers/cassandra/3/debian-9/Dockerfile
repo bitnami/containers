@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r218
+FROM bitnami/minideb-extras:stretch-r227
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,13 +6,15 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libblkid1 libbz2-1.0 libc6 libffi6 libgcc1 libglib2.0-0 libjemalloc1 libmount1 libncurses5 libpcre3 libreadline7 libselinux1 libsqlite3-0 libssl1.1 libtinfo5 libuuid1 zlib1g
-RUN bitnami-pkg install python-2.7.15-3 --checksum 3bad9208e166794f4716e1ccd7424581cb3c45362c4cd3f96165f2f3b5bb1a74
-RUN bitnami-pkg install java-1.8.191-3 --checksum 7d4e5b3392c96451eb5aa9b834713f9ca37580316bc9607bd6da26ec98e7e226
-RUN bitnami-pkg unpack cassandra-3.11.3-14 --checksum 4a4bfa2f152d64a88a30bd694b7cd688b51633e3b31dc890e986ae793ff62908
+RUN bitnami-pkg install python-2.7.15-20 --checksum 77c68cc5c463e53143bb7b6e6d322d5127d9cf4bd988b1aa217db2640e86e5fd
+RUN bitnami-pkg install java-1.8.191-20 --checksum e193fab6c3c4de4d30f81a09d3b33978baa31761aaa330e39ce5ae8753db4133
+RUN bitnami-pkg unpack cassandra-3.11.3-22 --checksum 6ab5e3aeaa588d3dd55ad2907264b655a625c2bb55e6e4835f2b28b84941117c
+RUN mkdir -p /docker-entrypoint-initdb.d /opt/bitnami/cassandra/conf/
+RUN chmod -R g+rwX /opt/bitnami/cassandra/conf/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.3-debian-9-r128" \
+    BITNAMI_IMAGE_VERSION="3.11.3-debian-9-r129" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
     CASSANDRA_DATACENTER="dc1" \
