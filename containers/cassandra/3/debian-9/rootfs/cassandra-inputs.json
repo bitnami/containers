@@ -2,11 +2,14 @@
   "clusterName": "{{$global.env.CASSANDRA_CLUSTER_NAME}}",
   "cqlClientPort": "{{$global.env.CASSANDRA_CQL_PORT_NUMBER}}",
   "datacenter": "{{$global.env.CASSANDRA_DATACENTER}}",
+  "enableClientEncryption": "{{$global.env.CASSANDRA_CLIENT_ENCRYPTION}}",
   "enableRPC": "{{$global.env.CASSANDRA_ENABLE_RPC}}",
   "enableRemoteConnections": "{{$global.env.CASSANDRA_ENABLE_REMOTE_CONNECTIONS}}",
   "endpointSnitch": "{{$global.env.CASSANDRA_ENDPOINT_SNITCH}}",
   "host": "{{$global.env.CASSANDRA_HOST}}",
+  "internodeEncryption": "{{$global.env.CASSANDRA_INTERNODE_ENCRYPTION}}",
   "jmxPort": "{{$global.env.CASSANDRA_JMX_PORT_NUMBER}}",
+  "keystorePassword": "{{$global.env.CASSANDRA_KEYSTORE_PASSWORD}}",
   "numTokens": "{{$global.env.CASSANDRA_NUM_TOKENS}}",
   "password": "{{$global.env.CASSANDRA_PASSWORD}}",
   "passwordSeeder": "{{$global.env.CASSANDRA_PASSWORD_SEEDER}}",
@@ -14,5 +17,6 @@
   "seeds": "{{$global.env.CASSANDRA_SEEDS}}",
   "startupCQL": "{{$global.env.CASSANDRA_STARTUP_CQL}}",
   "transportPort": "{{$global.env.CASSANDRA_TRANSPORT_PORT_NUMBER}}",
+  "truststorePassword": "{{$global.env.CASSANDRA_TRUSTSTORE_PASSWORD}}",
   "username": "{{$global.env.CASSANDRA_USER}}"
 }
