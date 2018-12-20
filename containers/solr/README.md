@@ -1,4 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-solr/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-solr/tree/master)
 
 # What is Apache Solr?
 
@@ -24,7 +23,6 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -52,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7-ol-7`, `7.6.0-ol-7-r13` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.6.0-ol-7-r13/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.6.0-debian-9-r9`, `7`, `7.6.0`, `7.6.0-r9`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.6.0-debian-9-r9/7/debian-9/Dockerfile)
+* [`7-debian-9`, `7.6.0-debian-9-r10`, `7`, `7.6.0`, `7.6.0-r10`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/7.6.0-debian-9-r10/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
 
