@@ -198,6 +198,16 @@ export PATH="${REDIS_BASEDIR}/bin:$PATH"
 export REDIS_DAEMON_USER="redis"
 export REDIS_DAEMON_GROUP="redis"
 EOF
+    if [[ -f "$REDIS_PASSWORD_FILE" ]]; then
+        cat <<"EOF"
+export REDIS_PASSWORD="$(< "${REDIS_PASSWORD_FILE}")"
+EOF
+    fi
+    if [[ -f "$REDIS_MASTER_PASSWORD_FILE" ]]; then
+        cat <<"EOF"
+export REDIS_MASTER_PASSWORD="$(< "${REDIS_MASTER_PASSWORD_FILE}")"
+EOF
+    fi
 }
 
 ########################
