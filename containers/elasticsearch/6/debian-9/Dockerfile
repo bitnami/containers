@@ -10,12 +10,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1
 RUN . ./libcomponent.sh && component_unpack "java" "1.8.191-21" --checksum de7e78f5dbce5a3c2343e2a40f2f335868bd547598f1df364247b4425f2f2f1a
-RUN . ./libcomponent.sh && component_unpack "elasticsearch" "6.5.4-0" --checksum e7fb4533244786a310c7068f312f9d0fe10f63d4b208617c6d7fdf359bb5c509
+RUN . ./libcomponent.sh && component_unpack "elasticsearch" "6.5.4-1" --checksum 5bf8b52f7b36faa56d929ac2155f0f34c8334949efc9fd89824a099779a9ebb8
 
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="6.5.4-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="6.5.4-debian-9-r2" \
     ELASTICSEARCH_BIND_ADDRESS="" \
     ELASTICSEARCH_CLUSTER_HOSTS="" \
     ELASTICSEARCH_CLUSTER_NAME="elasticsearch-cluster" \
