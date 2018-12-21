@@ -1,4 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-grafana/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-grafana/tree/master)
 
 # What is Grafana?
 
@@ -17,7 +16,6 @@ $ docker run --name grafana bitnami/grafana:latest
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -49,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5-ol-7`, `5.4.2-ol-7-r13` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.4.2-ol-7-r13/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.4.2-debian-9-r13`, `5`, `5.4.2`, `5.4.2-r13`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.4.2-debian-9-r13/5/debian-9/Dockerfile)
+* [`5-debian-9`, `5.4.2-debian-9-r14`, `5`, `5.4.2`, `5.4.2-r14`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.4.2-debian-9-r14/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
