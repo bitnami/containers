@@ -7,12 +7,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1
 RUN bitnami-pkg install java-1.8.191-21 --checksum de7e78f5dbce5a3c2343e2a40f2f335868bd547598f1df364247b4425f2f2f1a
-RUN bitnami-pkg unpack kafka-2.1.0-20 --checksum 6ca1b7e6e7e79b0bcc65014f6d22e0fbf8135625a935cdae926b673c3627e72b
+RUN bitnami-pkg unpack kafka-2.1.0-21 --checksum ba06c3defc7c6b2941bfe1330ea13a7a52681dbe4c353d9713b732c63a99235e
 
 COPY rootfs /
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.1.0-debian-9-r21" \
+    BITNAMI_IMAGE_VERSION="2.1.0-debian-9-r22" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_BROKER_ID="-1" \
     KAFKA_BROKER_PASSWORD="bitnami" \
