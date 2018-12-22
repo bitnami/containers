@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10-ol-7`, `10.0.10-ol-7-r93` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.10-ol-7-r93/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.0.10-debian-9-r72`, `10`, `10.0.10`, `10.0.10-r72`, `latest` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.10-debian-9-r72/10/debian-9/Dockerfile)
+* [`10-debian-9`, `10.0.10-debian-9-r73`, `10`, `10.0.10`, `10.0.10-r73`, `latest` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.0.10-debian-9-r73/10/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/owncloud GitHub repo](https://github.com/bitnami/bitnami-docker-owncloud).
 
