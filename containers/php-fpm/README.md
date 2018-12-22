@@ -53,7 +53,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7.3-rhel-7`, `7.3.0-rhel-7-r3` (7.3/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.0-rhel-7-r3/7.3/rhel-7/Dockerfile)
-* [`7.3-ol-7`, `7.3.0-ol-7-r3` (7.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.0-ol-7-r3/7.3/ol-7/Dockerfile)
+* [`7.3-ol-7`, `7.3.0-ol-7-r4` (7.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.0-ol-7-r4/7.3/ol-7/Dockerfile)
 * [`7.3-debian-9`, `7.3.0-debian-9-r3`, `7.3`, `7.3.0`, `7.3.0-r3` (7.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.0-debian-9-r3/7.3/debian-9/Dockerfile)
 * [`7.2-rhel-7`, `7.2.13-rhel-7-r3` (7.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.13-rhel-7-r3/7.2/rhel-7/Dockerfile)
 * [`7.2-ol-7`, `7.2.13-ol-7-r14` (7.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.13-ol-7-r14/7.2/ol-7/Dockerfile)
@@ -65,7 +65,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`7.0-ol-7`, `7.0.33-ol-7-r14` (7.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.33-ol-7-r14/7.0/ol-7/Dockerfile)
 * [`7.0-debian-9`, `7.0.33-debian-9-r15`, `7.0`, `7.0.33`, `7.0.33-r15` (7.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.0.33-debian-9-r15/7.0/debian-9/Dockerfile)
 * [`5.6-rhel-7`, `5.6.39-rhel-7-r0` (5.6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.39-rhel-7-r0/5.6/rhel-7/Dockerfile)
-* [`5.6-ol-7`, `5.6.39-ol-7-r13` (5.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.39-ol-7-r13/5.6/ol-7/Dockerfile)
+* [`5.6-ol-7`, `5.6.39-ol-7-r14` (5.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.39-ol-7-r14/5.6/ol-7/Dockerfile)
 * [`5.6-debian-9`, `5.6.39-debian-9-r12`, `5.6`, `5.6.39`, `5.6.39-r12` (5.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.39-debian-9-r12/5.6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
