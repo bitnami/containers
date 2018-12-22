@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8.0-ol-7`, `8.0.13-ol-7-r60` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.13-ol-7-r60/8.0/ol-7/Dockerfile)
-* [`8.0-debian-9`, `8.0.13-debian-9-r47`, `8.0`, `8.0.13`, `8.0.13-r47` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.13-debian-9-r47/8.0/debian-9/Dockerfile)
+* [`8.0-debian-9`, `8.0.13-debian-9-r48`, `8.0`, `8.0.13`, `8.0.13-r48` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.13-debian-9-r48/8.0/debian-9/Dockerfile)
 * [`5.7-ol-7`, `5.7.24-ol-7-r56` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.24-ol-7-r56/5.7/ol-7/Dockerfile)
 * [`5.7-debian-9`, `5.7.24-debian-9-r51`, `5.7`, `5.7.24`, `5.7.24-r51`, `latest` (5.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.24-debian-9-r51/5.7/debian-9/Dockerfile)
 
@@ -69,10 +69,12 @@ in the Docker Hub Registry.
 $ docker pull bitnami/mysql:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```bash
-$ docker build -t bitnami/mysql:latest https://github.com/bitnami/bitnami-docker-mysql.git
+$ git clone https://github.com/bitnami/bitnami-docker-mysql.git
+$ cd bitnami-docker-mysql/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/mysql:latest .
 ```
 
 # Persisting your database
