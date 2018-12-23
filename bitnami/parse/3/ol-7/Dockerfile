@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r205
+FROM bitnami/oraclelinux-extras:7-r206
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack parse-3.1.2-20 --checksum 9f15a8ce46db459871b13fa2986bd43
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="3.1.2-ol-7-r30" \
+    BITNAMI_IMAGE_VERSION="3.1.2-ol-7-r31" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
