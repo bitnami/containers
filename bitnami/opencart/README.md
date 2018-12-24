@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.0.2-0-ol-7-r168` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.2-0-ol-7-r168/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.0.2-0-ol-7-r169` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.2-0-ol-7-r169/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.0.2-0-debian-9-r128`, `3`, `3.0.2-0`, `3.0.2-0-r128`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.2-0-debian-9-r128/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/opencart GitHub repo](https://github.com/bitnami/bitnami-docker-opencart).
