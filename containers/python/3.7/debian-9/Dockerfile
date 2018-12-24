@@ -3,13 +3,13 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git libbz2-1.0 libc6 libffi6 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libtinfo5 pkg-config unzip wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/python-3.7.1-20-linux-amd64-debian-9.tar.gz && \
-    echo "ba81c5d008a960b0517513e735c8941f27d24f69e84cefc41db06535e5eb0999  /tmp/bitnami/pkg/cache/python-3.7.1-20-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/python-3.7.1-20-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/python-3.7.1-20-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/python-3.7.2-0-linux-amd64-debian-9.tar.gz && \
+    echo "88e2a14d39f964107d14a15aa969d8999d3adf3d872fa6c285f9650652e95a7a  /tmp/bitnami/pkg/cache/python-3.7.2-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/python-3.7.2-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/python-3.7.2-0-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="3.7.1-debian-9-r58" \
+    BITNAMI_IMAGE_VERSION="3.7.2-debian-9-r0" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8000
