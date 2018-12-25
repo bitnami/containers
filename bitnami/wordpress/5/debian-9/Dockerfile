@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r232
+FROM bitnami/minideb-extras:stretch-r233
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,7 +6,7 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libf
 RUN bitnami-pkg unpack apache-2.4.37-21 --checksum b930db2471cbcdf2639c647794e724972cfcaba777ba0b922ddfc604a79c23fa
 RUN bitnami-pkg unpack php-7.2.13-21 --checksum df171304c0ce564f24171b2ecfc9a14fa6254ee754bb052349f8636ee969c524
 RUN bitnami-pkg install wp-cli-2.1.0-0 --checksum c44d62b19aa37754b55dc040b6e9fb50589ae2a3dac9e6c604653cf7a4f80893
-RUN bitnami-pkg unpack mysql-client-10.2.19-22 --checksum a142b77641b2f171291534a104d8a465db6ad19952a6ef74ed2536777cd7abbc
+RUN bitnami-pkg unpack mysql-client-10.2.20-0 --checksum 96446072a14d5498c1f6fb0e418c4373fef931f5b7171ff2c1d5c34cb73a5b8b
 RUN bitnami-pkg unpack libphp-7.2.13-21 --checksum f1c059a53540aa00a2de48640403789a32b436eb8f6af4a85ed81ffa3bbac5da
 RUN bitnami-pkg unpack wordpress-5.0.2-0 --checksum 375a87a243c4a28be00b78540c5590924ea9dbd0d1b33b9ed2f685ef5db73786
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.0.2-debian-9-r4" \
+    BITNAMI_IMAGE_VERSION="5.0.2-debian-9-r5" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
