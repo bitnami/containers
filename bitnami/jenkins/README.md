@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.150.1-ol-7-r27` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.150.1-ol-7-r27/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.150.1-debian-9-r14`, `2`, `2.150.1`, `2.150.1-r14`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.150.1-debian-9-r14/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.150.1-debian-9-r15`, `2`, `2.150.1`, `2.150.1-r15`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.150.1-debian-9-r15/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
 
