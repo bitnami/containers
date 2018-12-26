@@ -1,11 +1,14 @@
 {
+  "clusterAppName": "{{$global.env.POSTGRESQL_CLUSTER_APP_NAME}}",
   "database": "{{$global.env.POSTGRESQL_DATABASE}}",
   "masterHost": "{{$global.env.POSTGRESQL_MASTER_HOST}}",
   "masterPort": "{{$global.env.POSTGRESQL_MASTER_PORT_NUMBER}}",
+  "numSynchronousReplicas": "{{$global.env.POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS}}",
   "password": "{{$global.env.POSTGRESQL_PASSWORD}}",
   "postgresqlPort": "{{$global.env.POSTGRESQL_PORT_NUMBER}}",
   "replicationMode": "{{$global.env.POSTGRESQL_REPLICATION_MODE}}",
   "replicationPassword": "{{$global.env.POSTGRESQL_REPLICATION_PASSWORD}}",
   "replicationUser": "{{$global.env.POSTGRESQL_REPLICATION_USER}}",
+  "synchronousCommitMode": "{{$global.env.POSTGRESQL_SYNCHRONOUS_COMMIT_MODE}}",
   "username": "{{$global.env.POSTGRESQL_USERNAME}}"
 }
