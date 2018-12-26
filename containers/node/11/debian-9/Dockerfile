@@ -3,13 +3,13 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl ghostscript git imagemagick libbz2-1.0 libc6 libgcc1 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo5 pkg-config unzip wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-11.5.0-0-linux-amd64-debian-9.tar.gz && \
-    echo "7610a45ab61402fe16228f889dbeca7110918c3f08da381283bd59c69336f2a1  /tmp/bitnami/pkg/cache/node-11.5.0-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/node-11.5.0-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/node-11.5.0-0-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-11.6.0-0-linux-amd64-debian-9.tar.gz && \
+    echo "410d60332bec4e6b6fffbc852a236e5c400dc12ff46964a0e88e87bf90b4d603  /tmp/bitnami/pkg/cache/node-11.6.0-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/node-11.6.0-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/node-11.6.0-0-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="11.5.0-debian-9-r9" \
+    BITNAMI_IMAGE_VERSION="11.6.0-debian-9-r0" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 3000
