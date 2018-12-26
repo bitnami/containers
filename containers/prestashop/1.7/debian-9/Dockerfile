@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r229
+FROM bitnami/minideb-extras:stretch-r234
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.37-21 --checksum b930db2471cbcdf2639c647794e72
 RUN bitnami-pkg unpack php-7.1.25-21 --checksum 9c0ca4fc5ddafad98d27c94d459a921c1077139d5ece08198a6a48d18485fe13
 RUN bitnami-pkg unpack mysql-client-10.1.37-21 --checksum b7a5a18edfffc9440e852a412ea08a90e5f64924240f1f76a2813e6e93edaa39
 RUN bitnami-pkg unpack libphp-7.1.25-21 --checksum c55887490c4242caaf4a7a9abefefaff71b5413cec6965b1e08a2795e4aff167
-RUN bitnami-pkg unpack prestashop-1.7.4-4-20 --checksum f6f0a1519fe5131fe98402dd9812ddfe61c4ea61f0cdb5345c8e86df20caa2d9
+RUN bitnami-pkg unpack prestashop-1.7.5-0-0 --checksum 99cec1bd33d1a8e8b9bfdef5b84ab0d9af56ebc35ff2c30582534b86ed77f5ce
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
@@ -17,7 +17,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.4-4-debian-9-r30" \
+    BITNAMI_IMAGE_VERSION="1.7.5-0-debian-9-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
