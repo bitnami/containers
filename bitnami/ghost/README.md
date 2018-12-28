@@ -42,7 +42,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.9.1-ol-7-r9` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.9.1-ol-7-r9/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.9.1-ol-7-r10` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.9.1-ol-7-r10/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.9.1-debian-9-r8`, `2`, `2.9.1`, `2.9.1-r8`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.9.1-debian-9-r8/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
@@ -273,6 +273,7 @@ Available variables:
 ##### User and Site configuration
 - `GHOST_HOST`: Hostname for Ghost.
 - `GHOST_PORT_NUMBER`: Port number used in the generated application URLs. Default: **80**
+- `GHOST_PROTOCOL`: Protocol to use in the application URLs. Valid values are "http" and "https". Default: **http**
 - `GHOST_USERNAME`: Ghost application username. Default: **user**
 - `GHOST_PASSWORD`: Ghost application password. Minimum length is 10 characters. Default: **bitnami123**
 - `GHOST_EMAIL`: Ghost application email. Default: **user@example.com**
