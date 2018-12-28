@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r210
+FROM bitnami/oraclelinux-extras:7-r211
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN bitnami-pkg install codeigniter-3.1.9-20 --checksum 89663f811eb6b48554641848
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="codeigniter" \
-    BITNAMI_IMAGE_VERSION="3.1.9-ol-7-r172" \
+    BITNAMI_IMAGE_VERSION="3.1.9-ol-7-r173" \
     CODEIGNITER_PROJECT_NAME="myapp" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
