@@ -9,6 +9,7 @@
   "host": "{{$global.env.GHOST_HOST}}",
   "password": "{{$global.env.GHOST_PASSWORD}}",
   "port": "{{$global.env.GHOST_PORT_NUMBER}}",
+  "protocol": "{{$global.env.GHOST_PROTOCOL}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
   "smtpPort": "{{$global.env.SMTP_PORT}}",
