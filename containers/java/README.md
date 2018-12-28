@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 - [`1.8`, `1.8.191-ol-7-r65` (1.8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-ol-7-r65/1.8/ol-7/Dockerfile), [`1.8-prod`, `1.8.191-ol-7-r65-prod` (1.8/ol-7/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-ol-7-r65/1.8/ol-7/prod/Dockerfile)
-- [`1.8`, `1.8.191-debian-9-r70` (1.8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-debian-9-r70/1.8/debian-9/Dockerfile), [`1.8-prod`, `1.8.191-debian-9-r70-prod` (1.8/debian-9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-debian-9-r70/1.8/debian-9/prod/Dockerfile)
+- [`1.8`, `1.8.191-debian-9-r71` (1.8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-debian-9-r71/1.8/debian-9/Dockerfile), [`1.8-prod`, `1.8.191-debian-9-r71-prod` (1.8/debian-9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-debian-9-r71/1.8/debian-9/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
 
