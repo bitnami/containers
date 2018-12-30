@@ -45,11 +45,11 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`11-ol-7`, `11.6.0-ol-7-r4` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.6.0-ol-7-r4/11/ol-7/Dockerfile)
+* [`11-ol-7`, `11.6.0-ol-7-r3` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.6.0-ol-7-r3/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.6.0-debian-9-r3`, `11`, `11.6.0`, `11.6.0-r3` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.6.0-debian-9-r3/11/debian-9/Dockerfile)
 * [`10-ol-7`, `10.15.0-ol-7-r4` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.0-ol-7-r4/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.15.0-debian-9-r3`, `10`, `10.15.0`, `10.15.0-r3` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.0-debian-9-r3/10/debian-9/Dockerfile)
-* [`8-ol-7`, `8.15.0-ol-7-r3` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.15.0-ol-7-r3/8/ol-7/Dockerfile)
+* [`8-ol-7`, `8.15.0-ol-7-r4` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.15.0-ol-7-r4/8/ol-7/Dockerfile)
 * [`8-debian-9`, `8.15.0-debian-9-r3`, `8`, `8.15.0`, `8.15.0-r3`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.15.0-debian-9-r3/8/debian-9/Dockerfile)
 * [`6-ol-7`, `6.16.0-ol-7-r4` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.16.0-ol-7-r4/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.16.0-debian-9-r3`, `6`, `6.16.0`, `6.16.0-r3` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.16.0-debian-9-r3/6/debian-9/Dockerfile)
