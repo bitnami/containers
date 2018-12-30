@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/jsonnet /opt/bitnami/jsonnet
 ENV BITNAMI_APP_NAME="jsonnet" \
-    BITNAMI_IMAGE_VERSION="0.11.2-debian-9-r24" \
+    BITNAMI_IMAGE_VERSION="0.11.2-debian-9-r25" \
     PATH="/opt/bitnami/jsonnet/bin:$PATH"
 
 RUN chmod +x /opt/bitnami/jsonnet/bin/jsonnet
