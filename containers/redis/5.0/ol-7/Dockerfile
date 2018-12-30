@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r158
+FROM bitnami/oraclelinux-extras-base:7-r159
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.3-ol-7-r22" \
+    BITNAMI_IMAGE_VERSION="5.0.3-ol-7-r23" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
