@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/kubectl /opt/bitnami/kubectl
 ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.12.4-debian-9-r13" \
+    BITNAMI_IMAGE_VERSION="1.12.4-debian-9-r14" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 RUN install_packages ca-certificates
