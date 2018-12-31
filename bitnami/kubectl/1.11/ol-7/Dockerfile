@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r213 as buildenv
+FROM bitnami/oraclelinux-extras:7-r214 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubectl-1.11.6-1-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r213
+FROM bitnami/oraclelinux-extras:7-r214
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/kubectl /opt/bitnami/kubectl
 ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.11.6-ol-7-r14" \
+    BITNAMI_IMAGE_VERSION="1.11.6-ol-7-r15" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 RUN install_packages ca-certificates
