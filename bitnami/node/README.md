@@ -52,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`8-ol-7`, `8.15.0-ol-7-r5` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.15.0-ol-7-r5/8/ol-7/Dockerfile)
 * [`8-debian-9`, `8.15.0-debian-9-r5`, `8`, `8.15.0`, `8.15.0-r5`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.15.0-debian-9-r5/8/debian-9/Dockerfile)
 * [`6-ol-7`, `6.16.0-ol-7-r5` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.16.0-ol-7-r5/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.16.0-debian-9-r4`, `6`, `6.16.0`, `6.16.0-r4` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.16.0-debian-9-r4/6/debian-9/Dockerfile)
+* [`6-debian-9`, `6.16.0-debian-9-r5`, `6`, `6.16.0`, `6.16.0-r5` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.16.0-debian-9-r5/6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
