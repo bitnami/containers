@@ -47,8 +47,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2.4-rhel-7`, `2.4.37-rhel-7-r45` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.37-rhel-7-r45/2.4/rhel-7/Dockerfile)
-* [`2.4-ol-7`, `2.4.37-ol-7-r78` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.37-ol-7-r78/2.4/ol-7/Dockerfile)
+* [`2.4-rhel-7`, `2.4.37-rhel-7-r46` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.37-rhel-7-r46/2.4/rhel-7/Dockerfile)
+* [`2.4-ol-7`, `2.4.37-ol-7-r79` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.37-ol-7-r79/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.37-debian-9-r60`, `2.4`, `2.4.37`, `2.4.37-r60`, `latest` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.37-debian-9-r60/2.4/debian-9/Dockerfile)
 
 # Get this image
@@ -419,7 +419,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright (c) 2015-2018 Bitnami
+Copyright (c) 2015-2019 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
