@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.5.11-ol-7-r174` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-ol-7-r174/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.5.11-debian-9-r162`, `1`, `1.5.11`, `1.5.11-r162`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-9-r162/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.5.11-debian-9-r163`, `1`, `1.5.11`, `1.5.11-r163`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-9-r163/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
 
@@ -128,7 +128,7 @@ If you encountered a problem running this container, you can file an [issue](../
 
 ## License
 
-Copyright (c) 2015-2018 Bitnami
+Copyright (c) 2015-2019 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
