@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.12.0-ol-7-r39` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.12.0-ol-7-r39/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.12.0-ol-7-r40` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.12.0-ol-7-r40/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.12.0-debian-9-r35`, `1`, `1.12.0`, `1.12.0-r35`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.12.0-debian-9-r35/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-resnet GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-resnet).
@@ -197,7 +197,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright (c) 2018 Bitnami
+Copyright (c) 2019 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
