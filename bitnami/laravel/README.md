@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5-ol-7`, `5.7.19-ol-7-r14` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/5.7.19-ol-7-r14/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.7.19-debian-9-r14`, `5`, `5.7.19`, `5.7.19-r14`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/5.7.19-debian-9-r14/5/debian-9/Dockerfile)
+* [`5-debian-9`, `5.7.19-debian-9-r15`, `5`, `5.7.19`, `5.7.19-r15`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/5.7.19-debian-9-r15/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rails GitHub repo](https://github.com/bitnami/bitnami-docker-laravel).
 
@@ -140,7 +140,7 @@ If you encountered a problem running this container, you can file an [issue](../
 
 ## License
 
-Copyright (c) 2015-2018 Bitnami
+Copyright (c) 2015-2019 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
