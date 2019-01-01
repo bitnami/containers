@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/fluent-bit /opt/bitnami/fluent-bit
 ENV BITNAMI_APP_NAME="fluent-bit" \
-    BITNAMI_IMAGE_VERSION="0.14.9-debian-9-r29" \
+    BITNAMI_IMAGE_VERSION="0.14.9-debian-9-r30" \
     PATH="/opt/bitnami/fluent-bit/bin:$PATH"
 
 RUN install_packages ca-certificates libsasl2-2 libssl1.1
