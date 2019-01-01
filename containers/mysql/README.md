@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`8.0-ol-7`, `8.0.13-ol-7-r70` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.13-ol-7-r70/8.0/ol-7/Dockerfile)
 * [`8.0-debian-9`, `8.0.13-debian-9-r57`, `8.0`, `8.0.13`, `8.0.13-r57` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.13-debian-9-r57/8.0/debian-9/Dockerfile)
-* [`5.7-ol-7`, `5.7.24-ol-7-r66` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.24-ol-7-r66/5.7/ol-7/Dockerfile)
+* [`5.7-ol-7`, `5.7.24-ol-7-r67` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.24-ol-7-r67/5.7/ol-7/Dockerfile)
 * [`5.7-debian-9`, `5.7.24-debian-9-r61`, `5.7`, `5.7.24`, `5.7.24-r61`, `latest` (5.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.24-debian-9-r61/5.7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
@@ -570,7 +570,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright (c) 2015-2018 Bitnami
+Copyright (c) 2015-2019 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
