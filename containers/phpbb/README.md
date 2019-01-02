@@ -21,9 +21,8 @@ $ docker-compose up -d
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/be31c75e52a4e3b60a2d8441f8acf2c734d4803f8b98ea4e23ab10c899aaa306)](https://anchore.io/image/dockerhub/bitnami%2Fphpbb%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/phpbb?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy phpBB in Kubernetes?
 
@@ -39,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.2.5-ol-7-r11` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.5-ol-7-r11/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.2.5-debian-9-r9`, `3`, `3.2.5`, `3.2.5-r9`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.5-debian-9-r9/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.2.5-debian-9-r10`, `3`, `3.2.5`, `3.2.5-r10`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.5-debian-9-r10/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpbb GitHub repo](https://github.com/bitnami/bitnami-docker-phpbb).
 
