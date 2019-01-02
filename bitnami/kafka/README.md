@@ -37,9 +37,8 @@ services:
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/818665e73efad0e7fdbafd32ac412de086de1c2a1d8e5bc96dba076ee11c7ca5)](https://anchore.io/image/dockerhub/bitnami%2Fkafka%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/kafka?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy Apache Kafka in Kubernetes?
 
@@ -59,8 +58,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.1.0-ol-7-r47` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.1.0-ol-7-r47/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.1.0-debian-9-r31`, `2`, `2.1.0`, `2.1.0-r31`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.1.0-debian-9-r31/2/debian-9/Dockerfile)
-* [`1-ol-7`, `1.1.1-ol-7-r148` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r148/1/ol-7/Dockerfile)
+* [`2-debian-9`, `2.1.0-debian-9-r32`, `2`, `2.1.0`, `2.1.0-r32`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.1.0-debian-9-r32/2/debian-9/Dockerfile)
+* [`1-ol-7`, `1.1.1-ol-7-r149` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r149/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.1.1-debian-9-r98`, `1`, `1.1.1`, `1.1.1-r98` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r98/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
