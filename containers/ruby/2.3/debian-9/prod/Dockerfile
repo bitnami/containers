@@ -1,5 +1,5 @@
 
-FROM bitnami/ruby:2.3.8-debian-9-r69 as development
+FROM bitnami/ruby:2.3.8-debian-9-r70 as development
 
 FROM bitnami/minideb:stretch
 LABEL maintainer "Bitnami <containers@bitnami.com>"
@@ -7,7 +7,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 COPY --from=development /opt/bitnami/ruby /opt/bitnami/ruby
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.3.8-debian-9-r69" \
+    BITNAMI_IMAGE_VERSION="2.3.8-debian-9-r70" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 CMD [ "irb" ]
