@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r215
+FROM bitnami/oraclelinux-extras:7-r216
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack discourse-2.1.5-0 --checksum 28fdd8ac45ec6d5079dd32be4a79
 COPY rootfs /
 RUN install_packages rsync
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.1.5-ol-7-r18" \
+    BITNAMI_IMAGE_VERSION="2.1.5-ol-7-r19" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_EXTERNAL_PORT_NUMBER="80" \
     DISCOURSE_HOST="127.0.0.1" \
