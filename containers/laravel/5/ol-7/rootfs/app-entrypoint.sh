@@ -14,16 +14,18 @@ app_present() {
 }
 
 wait_for_db() {
-  mariadb_address=$(getent hosts mariadb | awk '{ print $1 }')
+  local db_host="${DB_HOST:-mariadb}"
+  local db_port="${DB_PORT:-3306}"
+  local db_address=$(getent hosts "$db_host" | awk '{ print $1 }')
   counter=0
-  log "Connecting to mariadb at $mariadb_address"
-  while ! curl --silent mariadb:3306 >/dev/null; do
+  log "Connecting to mariadb at $db_address"
+  while ! curl --silent "$db_address:$db_port" >/dev/null; do
     counter=$((counter+1))
     if [ $counter == 30 ]; then
       log "Error: Couldn't connect to mariadb."
       exit 1
     fi
-    log "Trying to connect to mariadb at $mariadb_address. Attempt $counter."
+    log "Trying to connect to mariadb at $db_address. Attempt $counter."
     sleep 5
   done
 }
