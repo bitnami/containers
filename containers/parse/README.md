@@ -27,9 +27,8 @@ $ docker-compose up -d
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/c18e8ce8166c125007f26904420615dc8fb4c6ebbacb85d2793c9b054d9b0c49)](https://anchore.io/image/dockerhub/bitnami%2Fparse%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/parse?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy Parse Server in Kubernetes?
 
@@ -48,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.1.3-ol-7-r3` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.1.3-ol-7-r3/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.1.3-ol-7-r4` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.1.3-ol-7-r4/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.1.3-debian-9-r2`, `3`, `3.1.3`, `3.1.3-r2`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.1.3-debian-9-r2/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
