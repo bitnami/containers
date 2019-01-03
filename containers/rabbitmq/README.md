@@ -28,9 +28,8 @@ $ docker-compose up -d
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/0e6192bbcb2fb49f36bc02791349959156ff70866e81f32aa13dd7283ca246b3)](https://anchore.io/image/dockerhub/bitnami%2Frabbitmq%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/rabbitmq?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy RabbitMQ in Kubernetes?
 
@@ -49,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.7-ol-7`, `3.7.9-ol-7-r48` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.9-ol-7-r48/3.7/ol-7/Dockerfile)
+* [`3.7-ol-7`, `3.7.9-ol-7-r49` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.9-ol-7-r49/3.7/ol-7/Dockerfile)
 * [`3.7-debian-9`, `3.7.9-debian-9-r36`, `3.7`, `3.7.9`, `3.7.9-r36`, `latest` (3.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.9-debian-9-r36/3.7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
