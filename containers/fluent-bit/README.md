@@ -21,9 +21,8 @@ $ docker run --name fluent-bit bitnami/fluent-bit:latest
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/64d83b3df2e02bb9aef553038a7d51246d5e13c4b821923b6023f52e5c1d15f4)](https://anchore.io/image/dockerhub/bitnami%2Ffluent-bit%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/fluent-bit?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # Why use a non-root container?
 
@@ -48,7 +47,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.14.9-ol-7-r32` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.14.9-ol-7-r32/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.14.9-ol-7-r33` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.14.9-ol-7-r33/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.14.9-debian-9-r31`, `0`, `0.14.9`, `0.14.9-r31`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/0.14.9-debian-9-r31/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluent-bit GitHub repo](https://github.com/bitnami/bitnami-docker-fluent-bit).
