@@ -30,9 +30,8 @@ $ docker run --name prometheus bitnami/prometheus:latest
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/505d2c0666840f9ddc70d57aa7b0d6def0a179334267b925aeb27d0cab761130)](https://anchore.io/image/dockerhub/bitnami%2Fprometheus%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/prometheus?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # Why use a non-root container?
 
@@ -57,7 +56,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.6.0-ol-7-r16` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.6.0-ol-7-r16/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.6.0-ol-7-r17` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.6.0-ol-7-r17/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.6.0-debian-9-r16`, `2`, `2.6.0`, `2.6.0-r16`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.6.0-debian-9-r16/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus).
