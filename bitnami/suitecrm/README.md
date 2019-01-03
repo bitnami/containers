@@ -21,9 +21,8 @@ $ docker-compose up -d
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/0cde068e02c8a7ae7be152a50210a9960da1a7f39b4cb595d4cc1bcd9ab5395d)](https://anchore.io/image/dockerhub/bitnami%2Fsuitecrm%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/suitecrm?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy SuiteCRM in Kubernetes?
 
@@ -38,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-ol-7`, `7.10.11-ol-7-r38` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.11-ol-7-r38/7/ol-7/Dockerfile)
+* [`7-ol-7`, `7.10.11-ol-7-r39` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.11-ol-7-r39/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.10.11-debian-9-r24`, `7`, `7.10.11`, `7.10.11-r24`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.10.11-debian-9-r24/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
