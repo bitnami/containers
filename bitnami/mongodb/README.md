@@ -23,9 +23,8 @@ $ docker-compose up -d
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/811f33341b5bdc0e55039ec84491869dedbb75f64919ae0012b161933970bfce)](https://anchore.io/image/dockerhub/bitnami%2Fmongodb%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/mongodb?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy MongoDB in Kubernetes?
 
@@ -44,9 +43,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4.1-ol-7`, `4.1.4-ol-7-r67` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.4-ol-7-r67/4.1/ol-7/Dockerfile)
+* [`4.1-ol-7`, `4.1.4-ol-7-r69` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.4-ol-7-r69/4.1/ol-7/Dockerfile)
 * [`4.1-debian-9`, `4.1.4-debian-9-r72`, `4.1`, `4.1.4`, `4.1.4-r72` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.4-debian-9-r72/4.1/debian-9/Dockerfile)
-* [`4.0-ol-7`, `4.0.3-ol-7-r92` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-ol-7-r92/4.0/ol-7/Dockerfile)
+* [`4.0-ol-7`, `4.0.3-ol-7-r93` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-ol-7-r93/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.3-debian-9-r80`, `4.0`, `4.0.3`, `4.0.3-r80`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-debian-9-r80/4.0/debian-9/Dockerfile)
 * [`3.6-ol-7`, `3.6.8-ol-7-r106` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.8-ol-7-r106/3.6/ol-7/Dockerfile)
 * [`3.6-debian-9`, `3.6.8-debian-9-r90`, `3.6`, `3.6.8`, `3.6.8-r90` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.8-debian-9-r90/3.6/debian-9/Dockerfile)
@@ -617,7 +616,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright (c) 2015-2018 Bitnami
+Copyright (c) 2015-2019 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
