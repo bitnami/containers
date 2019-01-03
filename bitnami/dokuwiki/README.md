@@ -22,9 +22,8 @@ $ docker-compose up -d
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/6a68936b86c9afaf463fcc787f1512660710089196915ce30d7497d3c158d8e3)](https://anchore.io/image/dockerhub/bitnami%2Fdokuwiki%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/dokuwiki?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy DokuWiki in Kubernetes?
 
@@ -40,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.20180422.201805030840-ol-7-r180` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-ol-7-r180/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.20180422.201805030840-debian-9-r138`, `0`, `0.20180422.201805030840`, `0.20180422.201805030840-r138`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-debian-9-r138/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.20180422.201805030840-debian-9-r139`, `0`, `0.20180422.201805030840`, `0.20180422.201805030840-r139`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201805030840-debian-9-r139/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dokuwiki GitHub repo](https://github.com/bitnami/bitnami-docker-dokuwiki).
 
