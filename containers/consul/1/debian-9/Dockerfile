@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/"
 
 # Install required system packages and dependencies
-RUN bitnami-pkg unpack consul-1.4.0-20 --checksum 92bde37d1183edcd3315ad26fd9c41b083cb8fb7187d83c0f0c5ece1bea8b068
+RUN bitnami-pkg unpack consul-1.4.0-21 --checksum 5515dd16ce76d3c2d5bbfd3470c1e04602560c8d12766cc4a787f49a4301ff02
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.4.0-debian-9-r17" \
+    BITNAMI_IMAGE_VERSION="1.4.0-debian-9-r18" \
     CONSUL_BOOTSTRAP_EXPECT="1" \
     CONSUL_CLIENT_LAN_ADDRESS="0.0.0.0" \
     CONSUL_DATACENTER="dc1" \
