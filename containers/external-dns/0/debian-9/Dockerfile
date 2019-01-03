@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/external-dns /opt/bitnami/external-dns
 ENV BITNAMI_APP_NAME="external-dns" \
-    BITNAMI_IMAGE_VERSION="0.5.9-debian-9-r32" \
+    BITNAMI_IMAGE_VERSION="0.5.9-debian-9-r33" \
     PATH="/opt/bitnami/external-dns/bin:$PATH"
 
 RUN install_packages ca-certificates
