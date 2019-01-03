@@ -17,9 +17,8 @@ $ docker run --name fluentd bitnami/fluentd:latest
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/609b195e9985be12f317c11377376c9ba14d8a93d0d16cc022124d376a4182c3)](https://anchore.io/image/dockerhub/bitnami%2Ffluentd%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/fluentd?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # Why use a non-root container?
 
@@ -45,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.3.2-ol-7-r28` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.3.2-ol-7-r28/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.3.2-debian-9-r27`, `1`, `1.3.2`, `1.3.2-r27`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.3.2-debian-9-r27/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.3.2-debian-9-r28`, `1`, `1.3.2`, `1.3.2-r28`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.3.2-debian-9-r28/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
 
