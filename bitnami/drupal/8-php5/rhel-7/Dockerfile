@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack apache-2.4.37-21 --checksum b7ae0764960ad19d6272b2b97b4fd
 RUN bitnami-pkg unpack php-5.6.39-0 --checksum 1e2b81f292f91bec6fd789af25e6d83844be2ea1be95ba6a0af60f0afe98a580
 RUN bitnami-pkg unpack mysql-client-10.1.37-21 --checksum 0a7e787e823d7c416eabf3fe66e3f6e9c6702c84c07241de2dffebbcb96d9172
 RUN bitnami-pkg unpack libphp-5.6.39-20 --checksum b47fa6ab89598bfb81727420a07fa5a0409e4fa2dd6ca3ffadc84f2d7e1921fe
-RUN bitnami-pkg unpack drupal-8.6.4-20 --checksum 6738d8c22bb73158f3e73bddecd515830325a1dd4c303d6257ddbabd7b3e3d4b
+RUN bitnami-pkg unpack drupal-8.6.5-0 --checksum 82144e3ead0a8fc4153e8fbbed406b1f28f4bffc2adbfb762f393b1bbb62119a
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/error_log
 
@@ -20,7 +20,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.6.4-php5-rhel-7-r36" \
+    BITNAMI_IMAGE_VERSION="8.6.5-php5-rhel-7-r0" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
