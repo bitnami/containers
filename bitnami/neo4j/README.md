@@ -26,9 +26,8 @@ $ docker-compose up -d
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/e0fa2ac6992f2b85d78eff1efedea1a1b8dfc6f7dddc219ada99ad27a65c759f)](https://anchore.io/image/dockerhub/bitnami%2Fneo4j%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/neo4j?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy Neo4j in Kubernetes?
 
@@ -50,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.5.1-ol-7-r12` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.1-ol-7-r12/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.5.1-debian-9-r12`, `3`, `3.5.1`, `3.5.1-r12`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.1-debian-9-r12/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.5.1-debian-9-r13`, `3`, `3.5.1`, `3.5.1-r13`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.1-debian-9-r13/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/neo4j GitHub repo](https://github.com/bitnami/bitnami-docker-neo4j).
 
