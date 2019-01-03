@@ -20,9 +20,7 @@ Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource suppor
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/d1a6f86119fee428eda43867cf6ba7396ac4a9db31608f0dc50b6906659bf8be)](https://anchore.io/image/dockerhub/bitnami%2Facmesolver%3Alatest#security)
-
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/acmesolver?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # Why use a non-root container?
 
@@ -47,7 +45,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-9`, `0.5.2-debian-9-r51`, `0`, `0.5.2`, `0.5.2-r51`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.5.2-debian-9-r51/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.5.2-debian-9-r52`, `0`, `0.5.2`, `0.5.2-r52`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/0.5.2-debian-9-r52/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/acmesolver GitHub repo](https://github.com/bitnami/bitnami-docker-acmesolver).
 
