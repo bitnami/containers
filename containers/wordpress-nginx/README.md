@@ -23,9 +23,8 @@ $ docker-compose up
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/4ad4ad6e5fe331807af502f7baf3eafb48166f2c284eeacd68834e8069ceb291)](https://anchore.io/image/dockerhub/bitnami%2Fwordpress-nginx%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/wordpress-nginx?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy WordPress-nginx in Kubernetes?
 
@@ -48,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5-rhel-7`, `5.0.2-rhel-7-r15` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.0.2-rhel-7-r15/5/rhel-7/Dockerfile)
-* [`5-ol-7`, `5.0.2-ol-7-r14` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.0.2-ol-7-r14/5/ol-7/Dockerfile)
+* [`5-ol-7`, `5.0.2-ol-7-r15` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.0.2-ol-7-r15/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.0.2-debian-9-r13`, `5`, `5.0.2`, `5.0.2-r13`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.0.2-debian-9-r13/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
