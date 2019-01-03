@@ -19,9 +19,8 @@ $ docker-compose up
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/9ef49425bb2c92bb2780ca588f7cf22b8f0e40731a0f0a8fd7cecc0ad65ebcbc)](https://anchore.io/image/dockerhub/bitnami%2Flaravel%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/laravel?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy Laravel Development in Kubernetes?
 
@@ -43,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5-ol-7`, `5.7.19-ol-7-r17` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/5.7.19-ol-7-r17/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.7.19-debian-9-r16`, `5`, `5.7.19`, `5.7.19-r16`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/5.7.19-debian-9-r16/5/debian-9/Dockerfile)
+* [`5-debian-9`, `5.7.19-debian-9-r18`, `5`, `5.7.19`, `5.7.19-r18`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/5.7.19-debian-9-r18/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rails GitHub repo](https://github.com/bitnami/bitnami-docker-laravel).
 
