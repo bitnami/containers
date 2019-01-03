@@ -21,9 +21,8 @@ $ docker run --name oauth2-proxy bitnami/oauth2-proxy:latest
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/c8406075d281ab4f89ad440357da3b6ffb031cdce43c0924fb8dc16678a73095)](https://anchore.io/image/dockerhub/bitnami%2Foauth2-proxy%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/oauth2-proxy?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # Why use a non-root container?
 
@@ -48,7 +47,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.20180625.74543-ol-7-r128` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-ol-7-r128/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.20180625.74543-ol-7-r129` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-ol-7-r129/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.20180625.74543-debian-9-r120`, `0`, `0.20180625.74543`, `0.20180625.74543-r120`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-debian-9-r120/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
