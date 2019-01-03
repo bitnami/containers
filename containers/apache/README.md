@@ -25,9 +25,8 @@ $ docker-compose up -d
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/11e71c6ab14f6019f8277a4c4015f004b8c512cdeb57bf9c7537887d396d9997)](https://anchore.io/image/dockerhub/bitnami%2Fapache%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/apache?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy Apache in Kubernetes?
 
@@ -49,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`2.4-rhel-7`, `2.4.37-rhel-7-r48` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.37-rhel-7-r48/2.4/rhel-7/Dockerfile)
 * [`2.4-ol-7`, `2.4.37-ol-7-r80` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.37-ol-7-r80/2.4/ol-7/Dockerfile)
-* [`2.4-debian-9`, `2.4.37-debian-9-r60`, `2.4`, `2.4.37`, `2.4.37-r60`, `latest` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.37-debian-9-r60/2.4/debian-9/Dockerfile)
+* [`2.4-debian-9`, `2.4.37-debian-9-r61`, `2.4`, `2.4.37`, `2.4.37-r61`, `latest` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.37-debian-9-r61/2.4/debian-9/Dockerfile)
 
 # Get this image
 
