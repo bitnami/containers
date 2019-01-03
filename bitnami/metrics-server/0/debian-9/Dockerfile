@@ -1,10 +1,10 @@
 FROM bitnami/minideb:stretch as buildenv
 
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metrics-server-0.3.1-20-linux-amd64-debian-9.tar.gz && \
-    echo "48a04ef6d6c9abdb4787a1985ef91c0b60c44076f9440ae1b7fb432761cbb9ef  /tmp/bitnami/pkg/cache/metrics-server-0.3.1-20-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/metrics-server-0.3.1-20-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/metrics-server-0.3.1-20-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metrics-server-0.3.1-23-linux-amd64-debian-9.tar.gz && \
+    echo "671ff01e07baa2d6a6feaba116429b2f21e84f0d71e11a8494133f8d45ed8d59  /tmp/bitnami/pkg/cache/metrics-server-0.3.1-23-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/metrics-server-0.3.1-23-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/metrics-server-0.3.1-23-linux-amd64-debian-9.tar.gz
 
 ##################
 
@@ -13,7 +13,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/metrics-server /opt/bitnami/metrics-server
 ENV BITNAMI_APP_NAME="metrics-server" \
-    BITNAMI_IMAGE_VERSION="0.3.1-debian-9-r67" \
+    BITNAMI_IMAGE_VERSION="0.3.1-debian-9-r68" \
     PATH="/opt/bitnami/metrics-server/bin:$PATH"
 
 RUN install_packages ca-certificates

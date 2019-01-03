@@ -20,9 +20,8 @@ $ docker run --name metrics-server bitnami/metrics-server:latest
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/531b87df597d52b68b114f7ce662f17facb6ff252339ce7b7c3d3c1e4a28e0f8)](https://anchore.io/image/dockerhub/bitnami%2Fmetrics-server%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/metrics-server?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy Metrics Server in Kubernetes?
 
@@ -41,8 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.3.1-ol-7-r91` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.1-ol-7-r91/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.3.1-debian-9-r67`, `0`, `0.3.1`, `0.3.1-r67`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.1-debian-9-r67/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.3.1-debian-9-r68`, `0`, `0.3.1`, `0.3.1-r68`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.1-debian-9-r68/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/metrics-server GitHub repo](https://github.com/bitnami/bitnami-docker-metrics-server).
 
@@ -66,7 +64,7 @@ request](https://github.com/bitnami/bitnami-docker-metrics-server/pulls) with yo
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
-Copyright 2018 Bitnami
+Copyright 2019 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
