@@ -71,8 +71,6 @@ Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https
 
 # Get this image
 
-**NOTE: PHP 7.0.x release series has reached end of life. We strongly recommend using 7.1.x series or higher instead.**
-
 The recommended way to get the Bitnami PHP-FPM Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/php-fpm).
 
 ```bash
