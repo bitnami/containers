@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r243
+FROM bitnami/minideb-extras:stretch-r244
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack kafka-2.1.0-22 --checksum 7ef4789b0cb12bd85e4d4d9c22675e8
 COPY rootfs /
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.1.0-debian-9-r34" \
+    BITNAMI_IMAGE_VERSION="2.1.0-debian-9-r35" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_BROKER_ID="-1" \
     KAFKA_BROKER_PASSWORD="bitnami" \
