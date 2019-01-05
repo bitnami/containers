@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r243
+FROM bitnami/minideb-extras:stretch-r244
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -13,7 +13,7 @@ RUN mkdir -p /dist /app /.npm && chmod g+rwx /app /dist /.npm
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.16.4-debian-9-r79" \
+    BITNAMI_IMAGE_VERSION="4.16.4-debian-9-r80" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/express/bin:$PATH"
 
