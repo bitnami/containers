@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r218 as buildenv
+FROM bitnami/oraclelinux-extras:7-r219 as buildenv
 
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluentd-exporter-0.2.0-20-linux-x86_64-ol-7.tar.gz && \
@@ -8,12 +8,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 ##################
 
-FROM bitnami/oraclelinux-extras:7-r218
+FROM bitnami/oraclelinux-extras:7-r219
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/fluentd-exporter /opt/bitnami/fluentd-exporter
 ENV BITNAMI_APP_NAME="fluentd-exporter" \
-    BITNAMI_IMAGE_VERSION="0.2.0-ol-7-r169" \
+    BITNAMI_IMAGE_VERSION="0.2.0-ol-7-r170" \
     PATH="/opt/bitnami/fluentd-exporter/bin:$PATH"
 
 EXPOSE 9309
