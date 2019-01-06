@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r244
+FROM bitnami/minideb-extras:stretch-r245
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -13,7 +13,7 @@ RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="15.0.0-debian-9-r20" \
+    BITNAMI_IMAGE_VERSION="15.0.0-debian-9-r21" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly" \
