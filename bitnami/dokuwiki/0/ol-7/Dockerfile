@@ -6,7 +6,7 @@ RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds freetype glibc gmp 
 RUN bitnami-pkg unpack apache-2.4.37-24 --checksum 8d30b7cef2a3f223b59d652fdad92d84198296cd6e30c844c3ecb32ce4676b88
 RUN bitnami-pkg unpack php-7.1.25-21 --checksum 1f44b05378c6e9419b663a1f6d73fb8923493386e3a3e8a5b67619a9d5e34b9b
 RUN bitnami-pkg unpack libphp-7.1.25-20 --checksum b48d0d1862bd57dc614414191bb2bbb2ed610eca10f70a377b881b0e0d6fea9f
-RUN bitnami-pkg unpack dokuwiki-0.20180422.201805030840-20 --checksum 3a0e1617f170854e06e352f484bb6a3f62b41224187d6ead769f1f4794bd570f
+RUN bitnami-pkg unpack dokuwiki-0.20180422.201901061035-0 --checksum f0ff52e1c18b8f49c707ad8993db0279e3b74b67cd52534753e61b004e04e8d0
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
@@ -15,7 +15,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="dokuwiki" \
-    BITNAMI_IMAGE_VERSION="0.20180422.201805030840-ol-7-r184" \
+    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-ol-7-r0" \
     DOKUWIKI_EMAIL="user@example.com" \
     DOKUWIKI_FULL_NAME="Full Name" \
     DOKUWIKI_PASSWORD="bitnami1" \
