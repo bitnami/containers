@@ -1,13 +1,13 @@
 
-FROM bitnami/python:2.7.15-ol-7-r177 as development
+FROM bitnami/python:2.7.15-ol-7-r178 as development
 
-FROM bitnami/oraclelinux-runtimes:7-r192
+FROM bitnami/oraclelinux-runtimes:7-r193
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=development /opt/bitnami/python /opt/bitnami/python
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="2.7.15-ol-7-r177" \
+    BITNAMI_IMAGE_VERSION="2.7.15-ol-7-r178" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 CMD [ "python" ]
