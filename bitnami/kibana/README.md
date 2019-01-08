@@ -48,11 +48,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`6-rhel-7`, `6.5.4-rhel-7-r13` (6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.5.4-rhel-7-r13/6/rhel-7/Dockerfile)
+* [`6-rhel-7`, `6.5.4-rhel-7-r14` (6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.5.4-rhel-7-r14/6/rhel-7/Dockerfile)
 * [`6-ol-7`, `6.5.4-ol-7-r20` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.5.4-ol-7-r20/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.5.4-debian-9-r20`, `6`, `6.5.4`, `6.5.4-r20`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.5.4-debian-9-r20/6/debian-9/Dockerfile)
 * [`5-rhel-7`, `5.6.14-rhel-7-r15` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.14-rhel-7-r15/5/rhel-7/Dockerfile)
-* [`5-ol-7`, `5.6.14-ol-7-r37` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.14-ol-7-r37/5/ol-7/Dockerfile)
+* [`5-ol-7`, `5.6.14-ol-7-r36` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.14-ol-7-r36/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.6.14-debian-9-r32`, `5`, `5.6.14`, `5.6.14-r32` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/5.6.14-debian-9-r32/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
