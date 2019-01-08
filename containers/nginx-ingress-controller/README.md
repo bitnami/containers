@@ -21,9 +21,9 @@ $ docker run --name nginx-ingress-controller bitnami/nginx-ingress-controller:la
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/c1a373099176b0ad8ce9850c178faecb744190fefe376fc2d1011d8d77573725)](https://anchore.io/image/dockerhub/bitnami%2Fnginx-ingress-controller%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/nginx-ingress-controller?tab=tags) contains a security report with all open CVEs. To get the list of actionable security\
+ issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy NGINX Ingress Controller in Kubernetes?
 
