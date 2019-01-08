@@ -44,8 +44,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.14.1-ol-7-r92` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.1-ol-7-r92/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.14.1-debian-9-r91`, `2`, `2.14.1`, `2.14.1-r91`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.1-debian-9-r91/2/debian-9/Dockerfile)
+* [`2-ol-7`, `2.14.1-ol-7-r93` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.1-ol-7-r93/2/ol-7/Dockerfile)
+* [`2-debian-9`, `2.14.1-debian-9-r92`, `2`, `2.14.1`, `2.14.1-r92`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.1-debian-9-r92/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
