@@ -1,13 +1,13 @@
 
-FROM bitnami/java:1.8.191-ol-7-r77 as development
+FROM bitnami/java:1.8.191-ol-7-r78 as development
 
-FROM bitnami/oraclelinux-runtimes:7-r194
+FROM bitnami/oraclelinux-runtimes:7-r195
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=development /opt/bitnami/java /opt/bitnami/java
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="1.8.191-ol-7-r77" \
+    BITNAMI_IMAGE_VERSION="1.8.191-ol-7-r78" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
