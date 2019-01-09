@@ -6,14 +6,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libcom_err libselinux libxml2 libxslt ncurses-libs nss-softokn-freebl openssl-libs pcre readline xz-libs zlib
-RUN bitnami-pkg unpack postgresql-9.6.11-27 --checksum c03c5057be8f84b52e866e964ecd7fb73cb28581a1f291a3e49bc867d83ccfa8
+RUN bitnami-pkg unpack postgresql-9.6.11-28 --checksum 0591dffb74488cf76c346e5b8885e39e3c44c8241e65ac51a7de933330631a7e
 RUN mkdir /docker-entrypoint-initdb.d /opt/bitnami/postgresql/conf/
 RUN chmod -R g+rwX /opt/bitnami/postgresql/conf/
 
 COPY rootfs /
 RUN rpm -Uvh --nodeps $(repoquery --location nss_wrapper)
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="9.6.11-ol-7-r69" \
+    BITNAMI_IMAGE_VERSION="9.6.11-ol-7-r70" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_CLUSTER_APP_NAME="walreceiver" \
