@@ -45,8 +45,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`4.1-ol-7`, `4.1.4-ol-7-r75` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.4-ol-7-r75/4.1/ol-7/Dockerfile)
 * [`4.1-debian-9`, `4.1.4-debian-9-r77`, `4.1`, `4.1.4`, `4.1.4-r77` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.4-debian-9-r77/4.1/debian-9/Dockerfile)
-* [`4.0-ol-7`, `4.0.3-ol-7-r100` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-ol-7-r100/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.3-debian-9-r84`, `4.0`, `4.0.3`, `4.0.3-r84`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-debian-9-r84/4.0/debian-9/Dockerfile)
+* [`4.0-ol-7`, `4.0.3-ol-7-r101` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-ol-7-r101/4.0/ol-7/Dockerfile)
+* [`4.0-debian-9`, `4.0.3-debian-9-r85`, `4.0`, `4.0.3`, `4.0.3-r85`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-debian-9-r85/4.0/debian-9/Dockerfile)
 * [`3.6-ol-7`, `3.6.8-ol-7-r113` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.8-ol-7-r113/3.6/ol-7/Dockerfile)
 * [`3.6-debian-9`, `3.6.8-debian-9-r95`, `3.6`, `3.6.8`, `3.6.8-r95` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.8-debian-9-r95/3.6/debian-9/Dockerfile)
 
@@ -198,6 +198,31 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MONGODB_EXTRA_FLAGS=--wiredTigerCacheSizeGB=2
+```
+
+## Increase system log verbosity level
+
+Increasing the system log verbosity level is possible through the following env var:
+
+- `MONGODB_SYSTEM_LOG_VERBOSITY`: MongoDB system log verbosity level. Default: `0`. Possible values: `[0,1,2,3,4,5]`. For more information about the verbosity levels please refer to the [MongoDB documentation](https://docs.mongodb.com/manual/reference/configuration-options/#systemLog.verbosity)
+
+```bash
+$ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_SYSTEM_LOG_VERBOSITY='3' bitnami/mongodb:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    ports:
+      - "27017:27017"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MONGODB_SYSTEM_LOG_VERBOSITY=3
 ```
 
 ## Enabling/disabling IPv6
