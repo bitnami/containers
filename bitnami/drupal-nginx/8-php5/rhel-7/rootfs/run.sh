@@ -11,7 +11,7 @@ PHP_TEMP_DIR="${PHP_INSTALLDIR}/tmp"
 _forwardTerm () {
  echo "Caugth signal SIGTERM, passing it to child processes..."
  cpids=$(pgrep -P $$ | xargs)
- kill -15 $cpids 2> /dev/null
+ kill -15 "$cpids" 2> /dev/null
  wait
  exit $?
 }
