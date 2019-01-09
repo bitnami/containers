@@ -8,16 +8,16 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline xz-libs zlib
 RUN bitnami-pkg unpack nginx-1.14.0-5 --checksum 9bd2b1045d82829c5bbe1b286a43e11b6a0e1e19c5c34b7ad20b8df5bab2ca71
-RUN bitnami-pkg unpack php-7.1.25-1 --checksum b6ff0d0faff32e7bb9d1c4a86f7908c8c19ee3ce85b66c22e974f2258797d660
+RUN bitnami-pkg unpack php-5.6.39-0 --checksum 1e2b81f292f91bec6fd789af25e6d83844be2ea1be95ba6a0af60f0afe98a580
 RUN bitnami-pkg unpack mysql-client-10.1.37-21 --checksum 0a7e787e823d7c416eabf3fe66e3f6e9c6702c84c07241de2dffebbcb96d9172
 RUN bitnami-pkg unpack drupal-8.6.5-0 --checksum 82144e3ead0a8fc4153e8fbbed406b1f28f4bffc2adbfb762f393b1bbb62119a
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
-RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
+RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="8.6.5-rhel-7-r7" \
+    BITNAMI_IMAGE_VERSION="8.6.5-php5-rhel-7-r7" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
