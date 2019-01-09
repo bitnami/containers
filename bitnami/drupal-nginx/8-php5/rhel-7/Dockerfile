@@ -6,32 +6,26 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/"
 
 # Install required system packages and dependencies
-RUN install_packages wget apr apr-util bzip2-libs glibc libcom_err libcurl expat libffi freetype libgcc libgcrypt gmp gnutls libgpg-error cyrus-sasl-gssapi libicu libidn libjpeg-turbo krb5-libs keyutils-libs openldap xz-libs libtomcrypt ncurses-libs nettle p11-kit pcre2 libpng libpng12 readline cyrus-sasl-lib libssh2 openssl-libs libstdc++ libtasn1 libuuid libxml2 libxslt zlib
+RUN install_packages bzip2-libs cyrus-sasl-lib freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline xz-libs zlib
 RUN bitnami-pkg unpack nginx-1.14.0-5 --checksum 9bd2b1045d82829c5bbe1b286a43e11b6a0e1e19c5c34b7ad20b8df5bab2ca71
-RUN bitnami-pkg unpack php-5.6.38-2 --checksum 03ae59ec97f59c6b7f9c3043fff8b4485b6ad75502de492b46da7ab2a447025d
-RUN bitnami-pkg unpack mysql-client-10.1.37-0 --checksum a30c54095ffb4d9180f53d925a67e4b7e11523e48b67f2d5912c20d80a703f52
-RUN bitnami-pkg unpack drupal-8.6.3-0 --checksum 7ad51731f1bfbb2b98f1f5f8ff994a30e318f537f523de59f80023b5c97ec446
+RUN bitnami-pkg unpack php-5.6.39-0 --checksum 1e2b81f292f91bec6fd789af25e6d83844be2ea1be95ba6a0af60f0afe98a580
+RUN bitnami-pkg unpack mysql-client-10.1.37-21 --checksum 0a7e787e823d7c416eabf3fe66e3f6e9c6702c84c07241de2dffebbcb96d9172
+RUN bitnami-pkg unpack drupal-8.6.5-0 --checksum 82144e3ead0a8fc4153e8fbbed406b1f28f4bffc2adbfb762f393b1bbb62119a
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
-# TODO: Fix for htaccess issue
-RUN mkdir -p /bitnami/nginx/conf/vhosts && chmod -R g+rwX /bitnami/nginx/conf
-
 COPY rootfs /
-COPY drupal-vhosts.conf /bitnami/nginx/conf/vhosts/
-
 ENV ALLOW_EMPTY_PASSWORD="no" \
-    NGINX_DAEMON_GROUP="" \
-    NGINX_DAEMON_USER="" \
-    NGINX_HTTPS_PORT_NUMBER="8443" \
-    NGINX_HTTP_PORT_NUMBER="8080" \
-    BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.6.3-php5-rhel-7-r0" \
+    BITNAMI_APP_NAME="drupal-nginx" \
+    BITNAMI_IMAGE_VERSION="8.6.5-php5-rhel-7-r7" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
     DRUPAL_EMAIL="user@example.com" \
+    DRUPAL_HTTPS_PORT="8443" \
+    DRUPAL_HTTP_PORT="8080" \
     DRUPAL_PASSWORD="bitnami" \
+    DRUPAL_PROFILE="standard" \
     DRUPAL_USERNAME="user" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
@@ -41,11 +35,15 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
     MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES="ALL" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
+    NAMI_PREFIX="/.nami" \
+    NGINX_DAEMON_GROUP="nginx" \
+    NGINX_DAEMON_USER="nginx" \
+    NGINX_HTTPS_PORT_NUMBER="8443" \
+    NGINX_HTTP_PORT_NUMBER="8080" \
     PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
 
-EXPOSE 8080 8443
+EXPOSE 8080
 
 USER 1001
-
-ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["/run.sh"]
+ENTRYPOINT [ "/app-entrypoint.sh" ]
+CMD [ "./run.sh" ]
