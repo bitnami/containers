@@ -12,5 +12,6 @@
   "replicaSetMode": "{{$global.env.MONGODB_REPLICA_SET_MODE}}",
   "replicaSetName": "{{$global.env.MONGODB_REPLICA_SET_NAME}}",
   "rootPassword": "{{$global.env.MONGODB_ROOT_PASSWORD}}",
+  "systemLogVerbosity": "{{$global.env.MONGODB_SYSTEM_LOG_VERBOSITY}}",
   "username": "{{$global.env.MONGODB_USERNAME}}"
 }
