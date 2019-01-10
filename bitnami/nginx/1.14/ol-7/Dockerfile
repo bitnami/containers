@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r169
+FROM bitnami/oraclelinux-extras-base:7-r170
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -13,12 +13,12 @@ RUN install_packages glibc keyutils-libs krb5-libs libcom_err libselinux nss-sof
 RUN . ./libcomponent.sh && component_unpack "nginx" "1.14.2-20" --checksum a977fe88500927549540238545e84148137557d100ec5550e74c80535c784f96
 RUN ln -sf /opt/bitnami/nginx/html /app
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
-RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
+RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.14.2-ol-7-r40" \
+    BITNAMI_IMAGE_VERSION="1.14.2-ol-7-r41" \
     NAMI_PREFIX="/.nami" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
