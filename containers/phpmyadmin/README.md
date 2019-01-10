@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4-ol-7`, `4.8.4-ol-7-r36` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.8.4-ol-7-r36/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.8.4-debian-9-r25`, `4`, `4.8.4`, `4.8.4-r25`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.8.4-debian-9-r25/4/debian-9/Dockerfile)
+* [`4-debian-9`, `4.8.4-debian-9-r26`, `4`, `4.8.4`, `4.8.4-r26`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.8.4-debian-9-r26/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpmyadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phpmyadmin).
 
