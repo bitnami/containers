@@ -11,17 +11,17 @@ RUN bitnami-pkg unpack apache-2.4.37-24 --checksum 52683d55dd384801422bead344fcc
 RUN bitnami-pkg unpack php-7.2.13-1 --checksum 0ec313e0bf9315492f9466487b478da338ce3c58f27e57f8141a103e330681ee
 RUN bitnami-pkg install wp-cli-2.1.0-0 --checksum 054d17c151d0b4b4fbb119eac077889f090c3572b3fe8e44584ff4ffb5e15a54
 RUN bitnami-pkg unpack mysql-client-10.1.37-21 --checksum 0a7e787e823d7c416eabf3fe66e3f6e9c6702c84c07241de2dffebbcb96d9172
-RUN bitnami-pkg unpack libphp-7.2.13-23 --checksum 479dff81fd2da37a7ee04e178b183f0596e947a959b6ea54a7c04d16e049475c
-RUN bitnami-pkg unpack wordpress-5.0.2-1 --checksum 630850142cfe6fc1915360939f915bd21ccc823fb2fa2f3e753859cd841bf7c6
+RUN bitnami-pkg unpack libphp-7.2.14-0 --checksum aba620fcdf5e2a589250befe3779004af5f9a61ac3ee6ade07ea3d76b4288990
+RUN bitnami-pkg unpack wordpress-5.0.3-0 --checksum 2eb4056551c2881a1ba37bfd3e7ce568152910f109018894991027bb5b20ae07
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
-RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/error_log
+RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.0.2-rhel-7-r22" \
+    BITNAMI_IMAGE_VERSION="5.0.3-rhel-7-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
