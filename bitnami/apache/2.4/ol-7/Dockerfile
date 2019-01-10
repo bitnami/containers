@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r223
+FROM bitnami/oraclelinux-extras:7-r224
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,13 +10,13 @@ RUN install_packages cyrus-sasl-lib expat glibc keyutils-libs krb5-libs libcom_e
 RUN bitnami-pkg unpack apache-2.4.37-24 --checksum 8d30b7cef2a3f223b59d652fdad92d84198296cd6e30c844c3ecb32ce4676b88
 RUN ln -sf /opt/bitnami/apache/htdocs /app
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
-RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/error_log
+RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
 COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.37-ol-7-r88" \
+    BITNAMI_IMAGE_VERSION="2.4.37-ol-7-r89" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/apache/bin:$PATH"
 
