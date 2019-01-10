@@ -12,12 +12,12 @@ RUN bitnami-pkg unpack php-7.1.25-1 --checksum b6ff0d0faff32e7bb9d1c4a86f7908c8c
 RUN bitnami-pkg unpack mysql-client-10.1.37-21 --checksum 0a7e787e823d7c416eabf3fe66e3f6e9c6702c84c07241de2dffebbcb96d9172
 RUN bitnami-pkg unpack drupal-8.6.5-0 --checksum 82144e3ead0a8fc4153e8fbbed406b1f28f4bffc2adbfb762f393b1bbb62119a
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
-RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
+RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="8.6.5-rhel-7-r7" \
+    BITNAMI_IMAGE_VERSION="8.6.5-rhel-7-r8" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
