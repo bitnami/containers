@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r169
+FROM bitnami/oraclelinux-extras-base:7-r170
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,13 +14,13 @@ RUN . ./libcomponent.sh && component_unpack "nginx" "1.14.2-20" --checksum a977f
 RUN . ./libcomponent.sh && component_unpack "kubeapps-dashboard" "1.1.0-0" --checksum 070b0ad00bcf387feceb17a3e2b7d1fa791974ad20859d76ad572bbeb1ac0b95
 RUN ln -sf /opt/bitnami/nginx/html /app
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
-RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/error.log
+RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 RUN /prepare.sh
 RUN rm -rf /opt/bitnami/nginx/html && mv /opt/bitnami/kubeapps-dashboard/build /opt/bitnami/nginx/html
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.1.0-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="1.1.0-ol-7-r12" \
     NAMI_PREFIX="/.nami" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
