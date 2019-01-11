@@ -3,7 +3,9 @@
   "disableCommands": "{{$global.env.REDIS_DISABLE_COMMANDS}}",
   "masterHost": "{{$global.env.REDIS_MASTER_HOST}}",
   "masterPassword": "{{$global.env.REDIS_MASTER_PASSWORD}}",
+  "masterPasswordFileLocation": "{{$global.env.REDIS_MASTER_PASSWORD_FILE}}",
   "masterPort": "{{$global.env.REDIS_MASTER_PORT_NUMBER}}",
   "password": "{{$global.env.REDIS_PASSWORD}}",
+  "passwordFileLocation": "{{$global.env.REDIS_PASSWORD_FILE}}",
   "replicationMode": "{{$global.env.REDIS_REPLICATION_MODE}}"
 }
