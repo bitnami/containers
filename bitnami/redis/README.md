@@ -45,8 +45,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5.0-ol-7`, `5.0.3-ol-7-r34` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.3-ol-7-r34/5.0/ol-7/Dockerfile)
-* [`5.0-debian-9`, `5.0.3-debian-9-r25`, `5.0`, `5.0.3`, `5.0.3-r25` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.3-debian-9-r25/5.0/debian-9/Dockerfile)
+* [`5.0-ol-7`, `5.0.3-ol-7-r35` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.3-ol-7-r35/5.0/ol-7/Dockerfile)
+* [`5.0-debian-9`, `5.0.3-debian-9-r26`, `5.0`, `5.0.3`, `5.0.3-r26` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.3-debian-9-r26/5.0/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.12-ol-7-r34` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.12-ol-7-r34/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.12-debian-9-r27`, `4.0`, `4.0.12`, `4.0.12-r27`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.12-debian-9-r27/4.0/debian-9/Dockerfile)
 
@@ -241,7 +241,7 @@ Refer to the [Redis documentation](https://redis.io/topics/config#passing-argume
 
 ## Setting the server password on first run
 
-Passing the `REDIS_PASSWORD` environment variable when running the image for the first time will set the Redis server password to the value of `REDIS_PASSWORD`.
+Passing the `REDIS_PASSWORD` environment variable when running the image for the first time will set the Redis server password to the value of `REDIS_PASSWORD` (or the content of the file specified in `REDIS_PASSWORD_FILE`).
 
 ```bash
 $ docker run --name redis -e REDIS_PASSWORD=password123 bitnami/redis:latest
@@ -292,7 +292,7 @@ A [replication](http://redis.io/topics/replication) cluster can easily be setup 
  - `REDIS_REPLICATION_MODE`: The replication mode. Possible values `master`/`slave`. No defaults.
  - `REDIS_MASTER_HOST`: Hostname/IP of replication master (replica node parameter). No defaults.
  - `REDIS_MASTER_PORT_NUMBER`: Server port of the replication master (replica node parameter). Defaults to `6379`.
- - `REDIS_MASTER_PASSWORD`: Password to authenticate with the master (replica node parameter). No defaults.
+ - `REDIS_MASTER_PASSWORD`: Password to authenticate with the master (replica node parameter). No defaults. As an alternative, you can mount a file with the password and set the `REDIS_MASTER_PASSWORD_FILE` variable.
 
 In a replication cluster you can have one master and zero or more replicas. When replication is enabled the master node is in read-write mode, while the replicas are in read-only mode. For best performance its advisable to limit the reads to the replicas.
 
