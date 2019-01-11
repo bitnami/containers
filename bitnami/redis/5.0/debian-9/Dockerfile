@@ -15,14 +15,16 @@ COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.3-debian-9-r26" \
+    BITNAMI_IMAGE_VERSION="5.0.3-debian-9-r27" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
     REDIS_MASTER_HOST="" \
     REDIS_MASTER_PASSWORD="" \
+    REDIS_MASTER_PASSWORD_FILE="/opt/bitnami/redis/secrets/redis-master-password" \
     REDIS_MASTER_PORT_NUMBER="6379" \
     REDIS_PASSWORD="" \
+    REDIS_PASSWORD_FILE="/opt/bitnami/redis/secrets/redis-password" \
     REDIS_REPLICATION_MODE=""
 
 EXPOSE 6379
