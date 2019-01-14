@@ -256,7 +256,7 @@ When you start the PrestaShop image, you can adjust the configuration of the ins
  - `PRESTASHOP_PASSWORD`: PrestaShop application password. Default: **bitnami**
  - `PRESTASHOP_EMAIL`: PrestaShop application email. Default: **user@example.com**
  - `PRESTASHOP_HOST`: PrestaShop Host Server.
- - `PRESTASHOP_COOKIE_CHECK_IP`: Whether to check the cookie's IP address or not. Default: **yes**. See (Troubleshooting)[#troubleshooting] section.
+ - `PRESTASHOP_COOKIE_CHECK_IP`: Whether to check the cookie's IP address or not. Default: **yes**. See [Troubleshooting](#troubleshooting) section.
  - `PRESTASHOP_COUNTRY`: Default country of the store. Default: **us**.
  - `PRESTASHOP_LANGUAGE`: Default language of the store (iso code). Default: **en**.
 
