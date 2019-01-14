@@ -1,10 +1,10 @@
 FROM bitnami/minideb:stretch as buildenv
 
 RUN install_packages ca-certificates libc6 libfontconfig libgcc1 libstdc++6 wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-5.4.2-0-linux-amd64-debian-9.tar.gz && \
-    echo "1a6a6fc798707d214351cd2a0d93cd3d6442031a7564d155c5d793166cbd8606  /tmp/bitnami/pkg/cache/grafana-5.4.2-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/grafana-5.4.2-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/grafana-5.4.2-0-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-5.4.3-0-linux-amd64-debian-9.tar.gz && \
+    echo "358c5cfbe5e55071f232020b0db39a97b889068ccccf5018c1f9d848222dd785  /tmp/bitnami/pkg/cache/grafana-5.4.3-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/grafana-5.4.3-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/grafana-5.4.3-0-linux-amd64-debian-9.tar.gz
 RUN mv /opt/bitnami/grafana/conf/sample.ini /opt/bitnami/grafana/conf/grafana.ini
 RUN mkdir -p /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/ && chmod g+rwX /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/
 
@@ -15,7 +15,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/grafana /opt/bitnami/grafana
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="5.4.2-debian-9-r38" \
+    BITNAMI_IMAGE_VERSION="5.4.3-debian-9-r0" \
     PATH="/opt/bitnami/grafana/bin:$PATH"
 
 RUN install_packages curl
