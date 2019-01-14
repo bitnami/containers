@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r249
+FROM bitnami/minideb-extras:stretch-r253
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN mkdir -p /usr/share/jenkins/ref
 COPY rootfs /
 RUN ln -sf /install-plugins.sh /usr/local/bin/install-plugins.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.150.1-debian-9-r31" \
+    BITNAMI_IMAGE_VERSION="2.150.1-debian-9-r32" \
     DISABLE_JENKINS_INITIALIZATION="no" \
     JAVA_OPTS="" \
     JENKINS_HOME="/opt/bitnami/jenkins/jenkins_home" \
@@ -22,4 +22,4 @@ ENV BITNAMI_APP_NAME="jenkins" \
 EXPOSE 8080 8443 50000
 
 ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "nami", "start", "--foreground", "jenkins" ]
+CMD [ "/run.sh" ]
