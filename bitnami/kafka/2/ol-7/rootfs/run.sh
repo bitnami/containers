@@ -2,9 +2,10 @@
 . /opt/bitnami/base/functions
 . /opt/bitnami/base/helpers
 
+
 USER=kafka
 KAFKA_HOME="/opt/bitnami/kafka"
-START_COMMAND="${KAFKA_HOME}/bin/kafka-server-start.sh -daemon ${KAFKA_HOME}/config/server.properties && ps ax | grep -i 'java.*kafka' | grep -v grep | awk '{print \$1}'  > ${KAFKA_HOME}/tmp/kafka.pid  && tail -f ${KAFKA_HOME}/logs/server.log"
+START_COMMAND="${KAFKA_HOME}/bin/kafka-server-start.sh ${KAFKA_HOME}/config/server.properties"
 
 if [[ -z "$KAFKA_BROKER_ID" ]]; then
     if [[ -n "$BROKER_ID_COMMAND" ]]; then
@@ -21,10 +22,8 @@ if [[ "$KAFKA_LISTENERS" =~ SASL ]]; then
 fi
 
 # If container is started as `root` user
-if [ $EUID -eq 0 ]; then
-    gosu ${USER} touch ${KAFKA_HOME}/logs/server.log
-    exec gosu ${USER} bash -c "${START_COMMAND}"
+if [[ $EUID -eq 0 ]]; then
+    exec gosu ${USER} bash -c "${START_COMMAND[@]}"
 else
-    touch ${KAFKA_HOME}/logs/server.log
-    exec bash -c "${START_COMMAND}"
+    exec bash -c "${START_COMMAND[@]}"
 fi
