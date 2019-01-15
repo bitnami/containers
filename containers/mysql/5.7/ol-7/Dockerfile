@@ -9,14 +9,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages cyrus-sasl-lib glibc keyutils-libs krb5-libs libaio libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl pcre
-RUN . ./libcomponent.sh && component_unpack "mysql" "5.7.24-20" --checksum 20511ea818082cde3e531d626ca385364c48eb821f49d72a30bc3913f1a25113
+RUN . ./libcomponent.sh && component_unpack "mysql" "5.7.24-21" --checksum 0e9ef44ceebf5aa4624e85e3eb46aa8e5d984be22d6606e6ecef3a7ab30a55eb
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.24-ol-7-r79" \
+    BITNAMI_IMAGE_VERSION="5.7.24-ol-7-r80" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
