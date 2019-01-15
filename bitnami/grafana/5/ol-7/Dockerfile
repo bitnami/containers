@@ -1,10 +1,10 @@
 FROM bitnami/oraclelinux-extras:7-r229 as buildenv
 
 RUN install_packages ca-certificates fontconfig-devel glibc libgcc libstdc++ wget zlib
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-5.4.3-0-linux-x86_64-ol-7.tar.gz && \
-    echo "a65075bcbab90561cc208d8b95bf3321e6907ba80758f3dc6ff172e4a71d998b  /tmp/bitnami/pkg/cache/grafana-5.4.3-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/grafana-5.4.3-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/grafana-5.4.3-0-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-5.4.3-1-linux-x86_64-ol-7.tar.gz && \
+    echo "790794790c9a7dafbf20900b49d598deee4fe5df7691a18578c8ca39e16889c3  /tmp/bitnami/pkg/cache/grafana-5.4.3-1-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/grafana-5.4.3-1-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/grafana-5.4.3-1-linux-x86_64-ol-7.tar.gz
 RUN mv /opt/bitnami/grafana/conf/sample.ini /opt/bitnami/grafana/conf/grafana.ini
 RUN mkdir -p /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/ && chmod g+rwX /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/
 
@@ -15,7 +15,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY --from=buildenv /opt/bitnami/grafana /opt/bitnami/grafana
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="5.4.3-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="5.4.3-ol-7-r2" \
     PATH="/opt/bitnami/grafana/bin:$PATH"
 
 RUN install_packages curl
