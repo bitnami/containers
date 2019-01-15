@@ -9,22 +9,22 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc
-RUN . ./libcomponent.sh && component_unpack "redis" "4.0.12-0" --checksum 09e279009d6e8ed23451bf3988e9bf1baa9920e073e62da5d431d91c55d07dd7
+RUN . ./libcomponent.sh && component_unpack "redis" "4.0.12-1" --checksum 817a0f856014ab8d5756f8ebc0d0bbed94d6599a62ea732bddce2c7ceed0f87c
 
 COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.12-ol-7-r38" \
+    BITNAMI_IMAGE_VERSION="4.0.12-ol-7-r39" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
     REDIS_MASTER_HOST="" \
     REDIS_MASTER_PASSWORD="" \
-    REDIS_MASTER_PASSWORD_FILE="/opt/bitnami/redis/secrets/redis-master-password" \
+    REDIS_MASTER_PASSWORD_FILE="" \
     REDIS_MASTER_PORT_NUMBER="6379" \
     REDIS_PASSWORD="" \
-    REDIS_PASSWORD_FILE="/opt/bitnami/redis/secrets/redis-password" \
+    REDIS_PASSWORD_FILE="" \
     REDIS_REPLICATION_MODE=""
 
 EXPOSE 6379
