@@ -37,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.7-ol-7`, `1.7.5-0-ol-7-r20` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.5-0-ol-7-r20/1.7/ol-7/Dockerfile)
+* [`1.7-ol-7`, `1.7.5-0-ol-7-r21` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.5-0-ol-7-r21/1.7/ol-7/Dockerfile)
 * [`1.7-debian-9`, `1.7.5-0-debian-9-r9`, `1.7`, `1.7.5-0`, `1.7.5-0-r9`, `latest` (1.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.5-0-debian-9-r9/1.7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
@@ -256,7 +256,7 @@ When you start the PrestaShop image, you can adjust the configuration of the ins
  - `PRESTASHOP_PASSWORD`: PrestaShop application password. Default: **bitnami**
  - `PRESTASHOP_EMAIL`: PrestaShop application email. Default: **user@example.com**
  - `PRESTASHOP_HOST`: PrestaShop Host Server.
- - `PRESTASHOP_COOKIE_CHECK_IP`: Whether to check the cookie's IP address or not. Default: **yes**. See (Troubleshooting)[#troubleshooting] section.
+ - `PRESTASHOP_COOKIE_CHECK_IP`: Whether to check the cookie's IP address or not. Default: **yes**. See [Troubleshooting](#troubleshooting) section.
  - `PRESTASHOP_COUNTRY`: Default country of the store. Default: **us**.
  - `PRESTASHOP_LANGUAGE`: Default language of the store (iso code). Default: **en**.
 
