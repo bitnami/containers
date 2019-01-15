@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r248
+FROM bitnami/minideb-extras:stretch-r254
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,8 +6,8 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libf
 RUN bitnami-pkg unpack apache-2.4.37-24 --checksum 19222f78a9c9e24beb85a625c118609ec16db55b17cc3092caa89a9866bbbe85
 RUN bitnami-pkg unpack php-7.1.25-21 --checksum 9c0ca4fc5ddafad98d27c94d459a921c1077139d5ece08198a6a48d18485fe13
 RUN bitnami-pkg unpack mysql-client-10.1.37-21 --checksum b7a5a18edfffc9440e852a412ea08a90e5f64924240f1f76a2813e6e93edaa39
-RUN bitnami-pkg unpack libphp-7.1.25-21 --checksum c55887490c4242caaf4a7a9abefefaff71b5413cec6965b1e08a2795e4aff167
-RUN bitnami-pkg unpack opencart-3.0.3-1-0 --checksum 516172f4fdb3cdc6284b705173700f4507a00da9ec254d6c11558bd74423fe23
+RUN bitnami-pkg unpack libphp-7.1.26-0 --checksum 762654f139d651bcc1bccbab211b1f366760f5af8b0bdb4153ff09188ace2288
+RUN bitnami-pkg unpack opencart-3.0.3-1-1 --checksum 32e38a40b0f0a28d494cf6c189396e513f8d8b56ec447178bf0ba6c7f60d97b0
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
@@ -17,7 +17,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="opencart" \
-    BITNAMI_IMAGE_VERSION="3.0.3-1-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="3.0.3-1-debian-9-r2" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
