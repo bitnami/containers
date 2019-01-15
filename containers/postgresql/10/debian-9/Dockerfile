@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r253
+FROM bitnami/minideb-extras:stretch-r254
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,7 +6,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libbsd0 libc6 libedit2 libgcc1 libicu57 liblzma5 libncurses5 libnss-wrapper libssl1.1 libstdc++6 libtinfo5 libxml2 libxslt1.1 zlib1g
-RUN bitnami-pkg unpack postgresql-10.6.0-27 --checksum db65a61ec2deb24ce0e14a5f9e637e2c65386219b7f89dfd48f58fe404af0c49
+RUN bitnami-pkg unpack postgresql-10.6.0-28 --checksum 9f4147a9326e351e9889004ba9813f9a6b98c890745f8839449ecef3c4952fef
 RUN echo 'en_GB.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN mkdir /docker-entrypoint-initdb.d /opt/bitnami/postgresql/conf/
@@ -14,7 +14,7 @@ RUN chmod -R g+rwX /opt/bitnami/postgresql/conf/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="10.6.0-debian-9-r60" \
+    BITNAMI_IMAGE_VERSION="10.6.0-debian-9-r61" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
