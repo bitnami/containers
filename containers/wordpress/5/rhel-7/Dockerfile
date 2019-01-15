@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack php-7.2.13-1 --checksum 0ec313e0bf9315492f9466487b478da33
 RUN bitnami-pkg install wp-cli-2.1.0-0 --checksum 054d17c151d0b4b4fbb119eac077889f090c3572b3fe8e44584ff4ffb5e15a54
 RUN bitnami-pkg unpack mysql-client-10.1.37-21 --checksum 0a7e787e823d7c416eabf3fe66e3f6e9c6702c84c07241de2dffebbcb96d9172
 RUN bitnami-pkg unpack libphp-7.2.14-0 --checksum aba620fcdf5e2a589250befe3779004af5f9a61ac3ee6ade07ea3d76b4288990
-RUN bitnami-pkg unpack wordpress-5.0.3-0 --checksum 2eb4056551c2881a1ba37bfd3e7ce568152910f109018894991027bb5b20ae07
+RUN bitnami-pkg unpack wordpress-5.0.3-1 --checksum 369802c80afc3d2b6812cfeca4454267f8bf3b19a7f6b12ecf3ffce11aa801e7
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
@@ -21,7 +21,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.0.3-rhel-7-r5" \
+    BITNAMI_IMAGE_VERSION="5.0.3-rhel-7-r6" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
