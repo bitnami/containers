@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r130
+FROM bitnami/minideb-extras-base:stretch-r131
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -9,22 +9,22 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6
-RUN . ./libcomponent.sh && component_unpack "redis" "4.0.12-0" --checksum 71c0ee47ef69f43773993f86be5d32044e8ed30d899ee0de5075e086c1f44430
+RUN . ./libcomponent.sh && component_unpack "redis" "4.0.12-1" --checksum 013067de176926e5eea4ce60826f7fd9ba1877dab6da74a750b5162a710995d4
 
 COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.12-debian-9-r31" \
+    BITNAMI_IMAGE_VERSION="4.0.12-debian-9-r32" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
     REDIS_MASTER_HOST="" \
     REDIS_MASTER_PASSWORD="" \
-    REDIS_MASTER_PASSWORD_FILE="/opt/bitnami/redis/secrets/redis-master-password" \
+    REDIS_MASTER_PASSWORD_FILE="" \
     REDIS_MASTER_PORT_NUMBER="6379" \
     REDIS_PASSWORD="" \
-    REDIS_PASSWORD_FILE="/opt/bitnami/redis/secrets/redis-password" \
+    REDIS_PASSWORD_FILE="" \
     REDIS_REPLICATION_MODE=""
 
 EXPOSE 6379
