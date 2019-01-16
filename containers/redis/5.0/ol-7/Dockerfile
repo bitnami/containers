@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r175
+FROM bitnami/oraclelinux-extras-base:7-r176
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,16 +15,16 @@ COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.3-ol-7-r38" \
+    BITNAMI_IMAGE_VERSION="5.0.3-ol-7-r39" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
     REDIS_MASTER_HOST="" \
     REDIS_MASTER_PASSWORD="" \
-    REDIS_MASTER_PASSWORD_FILE="/opt/bitnami/redis/secrets/redis-master-password" \
+    REDIS_MASTER_PASSWORD_FILE="" \
     REDIS_MASTER_PORT_NUMBER="6379" \
     REDIS_PASSWORD="" \
-    REDIS_PASSWORD_FILE="/opt/bitnami/redis/secrets/redis-password" \
+    REDIS_PASSWORD_FILE="" \
     REDIS_REPLICATION_MODE=""
 
 EXPOSE 6379
