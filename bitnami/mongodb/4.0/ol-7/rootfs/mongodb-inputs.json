@@ -1,6 +1,7 @@
 {
   "advertisedHostname": "{{$global.env.MONGODB_ADVERTISED_HOSTNAME}}",
   "database": "{{$global.env.MONGODB_DATABASE}}",
+  "disableSystemLog": "{{$global.env.MONGODB_DISABLE_SYSTEM_LOG}}",
   "enableIPv6": "{{$global.env.MONGODB_ENABLE_IPV6}}",
   "mongodbPort": "{{$global.env.MONGODB_PORT_NUMBER}}",
   "password": "{{$global.env.MONGODB_PASSWORD}}",

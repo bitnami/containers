@@ -43,11 +43,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4.1-ol-7`, `4.1.4-ol-7-r82` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.4-ol-7-r82/4.1/ol-7/Dockerfile)
+* [`4.1-ol-7`, `4.1.4-ol-7-r83` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.4-ol-7-r83/4.1/ol-7/Dockerfile)
 * [`4.1-debian-9`, `4.1.4-debian-9-r84`, `4.1`, `4.1.4`, `4.1.4-r84` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.4-debian-9-r84/4.1/debian-9/Dockerfile)
-* [`4.0-ol-7`, `4.0.3-ol-7-r108` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-ol-7-r108/4.0/ol-7/Dockerfile)
+* [`4.0-ol-7`, `4.0.3-ol-7-r110` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-ol-7-r110/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.3-debian-9-r93`, `4.0`, `4.0.3`, `4.0.3-r93`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-debian-9-r93/4.0/debian-9/Dockerfile)
-* [`3.6-ol-7`, `3.6.8-ol-7-r120` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.8-ol-7-r120/3.6/ol-7/Dockerfile)
+* [`3.6-ol-7`, `3.6.8-ol-7-r121` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.8-ol-7-r121/3.6/ol-7/Dockerfile)
 * [`3.6-debian-9`, `3.6.8-debian-9-r102`, `3.6`, `3.6.8`, `3.6.8-r102` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.8-debian-9-r102/3.6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
@@ -200,11 +200,12 @@ services:
       - MONGODB_EXTRA_FLAGS=--wiredTigerCacheSizeGB=2
 ```
 
-## Increase system log verbosity level
+## Configuring system log verbosity level
 
-Increasing the system log verbosity level is possible through the following env var:
+Configuring the system log verbosity level is possible through the following env vars:
 
-- `MONGODB_SYSTEM_LOG_VERBOSITY`: MongoDB system log verbosity level. Default: `0`. Possible values: `[0,1,2,3,4,5]`. For more information about the verbosity levels please refer to the [MongoDB documentation](https://docs.mongodb.com/manual/reference/configuration-options/#systemLog.verbosity)
+- `MONGODB_DISABLE_SYSTEM_LOG`: Whether to enable/disable system log on MongoDB. Default: `no`. Possible values: `[yes, no]`.
+- `MONGODB_SYSTEM_LOG_VERBOSITY`: MongoDB system log verbosity level. Default: `0`. Possible values: `[0, 1, 2, 3, 4, 5]`. For more information about the verbosity levels please refer to the [MongoDB documentation](https://docs.mongodb.com/manual/reference/configuration-options/#systemLog.verbosity)
 
 ```bash
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_SYSTEM_LOG_VERBOSITY='3' bitnami/mongodb:latest
@@ -229,7 +230,7 @@ services:
 
 Enabling/disabling IPv6 is possible through the following env var:
 
-- `MONGODB_ENABLE_IPV6`: Whether to enable/disable IPv6 on MongoDB. Default: `yes`
+- `MONGODB_ENABLE_IPV6`: Whether to enable/disable IPv6 on MongoDB. Default: `yes`. Possible values: `[yes, no]`
 
 ```bash
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_IPV6=yes bitnami/mongodb:latest
