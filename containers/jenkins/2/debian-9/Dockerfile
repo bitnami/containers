@@ -5,13 +5,13 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 RUN install_packages fontconfig fonts-dejavu-extra libc6 libcomerr2 libcurl3 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle6 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libtasn1-6 libunistring0 openssh-client unzip zlib1g
 RUN bitnami-pkg install java-1.8.191-21 --checksum de7e78f5dbce5a3c2343e2a40f2f335868bd547598f1df364247b4425f2f2f1a
 RUN bitnami-pkg install git-2.20.1-20 --checksum eeb8a6101929fc294dcead9e97938af819d45eff53ca5f531285de4686f4151f
-RUN bitnami-pkg unpack jenkins-2.150.1-25 --checksum a4b6bb3bf8755c7f5f7a73d22d7434a205ebcf3c865f57b526321f14cca52259
+RUN bitnami-pkg unpack jenkins-2.150.2-0 --checksum 19478ba8fc622f4439af28e9044e82e3305ca1437e34442f54c4541a83532f9b
 RUN mkdir -p /usr/share/jenkins/ref
 
 COPY rootfs /
 RUN ln -sf /install-plugins.sh /usr/local/bin/install-plugins.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.150.1-debian-9-r34" \
+    BITNAMI_IMAGE_VERSION="2.150.2-debian-9-r0" \
     DISABLE_JENKINS_INITIALIZATION="no" \
     JAVA_OPTS="" \
     JENKINS_HOME="/opt/bitnami/jenkins/jenkins_home" \
