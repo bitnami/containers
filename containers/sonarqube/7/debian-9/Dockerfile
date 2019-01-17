@@ -5,11 +5,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 RUN install_packages libblkid1 libbsd0 libc6 libedit2 libffi6 libgcc1 libglib2.0-0 libicu57 liblzma5 libmount1 libncurses5 libpcre3 libselinux1 libssl1.1 libstdc++6 libtinfo5 libuuid1 libxml2 libxslt1.1 zlib1g
 RUN bitnami-pkg unpack postgresql-client-10.6.0-20 --checksum 566509fb3c817cae6bab80d678fe3ee991d04ef508cb7fae552aa4f811373da6
 RUN bitnami-pkg install java-1.8.191-21 --checksum de7e78f5dbce5a3c2343e2a40f2f335868bd547598f1df364247b4425f2f2f1a
-RUN bitnami-pkg unpack sonarqube-7.5.0-0 --checksum d4d42f42ab2da35c082ed0aeddb3acfb4d0ca015f256fb58f8b4398b009c5947
+RUN bitnami-pkg unpack sonarqube-7.5.0-1 --checksum b0139b50feb09b7915c26a63c22ea09c86f38e10ebd9e4c269ad14c30657a8e9
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="7.5.0-debian-9-r28" \
+    BITNAMI_IMAGE_VERSION="7.5.0-debian-9-r29" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/java/bin:/opt/bitnami/sonarqube/bin/linux-x86-64/:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
