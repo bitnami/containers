@@ -1,10 +1,10 @@
-FROM bitnami/oraclelinux-extras:7-r230
+FROM bitnami/oraclelinux-extras:7-r231
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libmemcached libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.37-24 --checksum 8d30b7cef2a3f223b59d652fdad92d84198296cd6e30c844c3ecb32ce4676b88
-RUN bitnami-pkg unpack php-7.1.25-21 --checksum 1f44b05378c6e9419b663a1f6d73fb8923493386e3a3e8a5b67619a9d5e34b9b
+RUN bitnami-pkg unpack php-7.1.26-0 --checksum e00fa61ec021232fd46c9d3b2c11bc5e9c5c0fd3e8c26440befcaabe106c2717
 RUN bitnami-pkg unpack libphp-7.1.26-0 --checksum 312de7a34cdf817dbea8f03c793ed01b695825e0399c4212a8dfea199f6f34bd
 RUN bitnami-pkg unpack dokuwiki-0.20180422.201901061035-0 --checksum f0ff52e1c18b8f49c707ad8993db0279e3b74b67cd52534753e61b004e04e8d0
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
@@ -15,7 +15,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="dokuwiki" \
-    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-ol-7-r10" \
+    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-ol-7-r11" \
     DOKUWIKI_EMAIL="user@example.com" \
     DOKUWIKI_FULL_NAME="Full Name" \
     DOKUWIKI_PASSWORD="bitnami1" \
