@@ -9,7 +9,7 @@ RUN bitnami-pkg install codeigniter-3.1.9-20 --checksum 6425937c0b1c18b78899642c
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="codeigniter" \
-    BITNAMI_IMAGE_VERSION="3.1.9-debian-9-r183" \
+    BITNAMI_IMAGE_VERSION="3.1.9-debian-9-r184" \
     CODEIGNITER_PROJECT_NAME="myapp" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
