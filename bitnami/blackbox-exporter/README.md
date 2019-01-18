@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.13.0-ol-7-r50` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.13.0-ol-7-r50/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.13.0-debian-9-r52`, `0`, `0.13.0`, `0.13.0-r52`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.13.0-debian-9-r52/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.13.0-debian-9-r53`, `0`, `0.13.0`, `0.13.0-r53`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.13.0-debian-9-r53/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/blackbox-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-blackbox-exporter).
 
