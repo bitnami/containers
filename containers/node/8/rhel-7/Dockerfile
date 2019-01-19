@@ -10,7 +10,7 @@ RUN bitnami-pkg install node-8.15.0-0 --checksum e58329d20dc57c4f7d5a3cc42a7e3fe
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="8.15.0-rhel-7-r0" \
+    BITNAMI_IMAGE_VERSION="8.15.0-rhel-7-r1" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
