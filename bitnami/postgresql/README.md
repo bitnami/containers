@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`11-ol-7`, `11.1.0-ol-7-r78` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.1.0-ol-7-r78/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.1.0-debian-9-r61`, `11`, `11.1.0`, `11.1.0-r61` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.1.0-debian-9-r61/11/debian-9/Dockerfile)
-* [`10-ol-7`, `10.6.0-ol-7-r82` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.6.0-ol-7-r82/10/ol-7/Dockerfile)
+* [`10-ol-7`, `10.6.0-ol-7-r83` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.6.0-ol-7-r83/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.6.0-debian-9-r67`, `10`, `10.6.0`, `10.6.0-r67`, `latest` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.6.0-debian-9-r67/10/debian-9/Dockerfile)
 * [`9.6-ol-7`, `9.6.11-ol-7-r82` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.11-ol-7-r82/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.11-debian-9-r65`, `9.6`, `9.6.11`, `9.6.11-r65` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.11-debian-9-r65/9.6/debian-9/Dockerfile)
@@ -415,8 +415,8 @@ In the example above, commits will need to be written to both the master and one
 postgres=# select application_name as server, state,
 postgres-#       sync_priority as priority, sync_state
 postgres-#       from pg_stat_replication;
-   server    |   state   | priority | sync_state 
--------------+-----------+----------+------------
+   server    |   state   | priority | sync_state
+-------------|-----------|----------|------------
  walreceiver | streaming |        0 | sync
  walreceiver | streaming |        0 | async
 ```
@@ -521,6 +521,59 @@ If you are using your custom `postgresql.conf`, you should create (or uncomment)
 1 directory, 2 files
 ```
 
+## Specifyng initdb arguments
+
+Specifyng extra initdb arguments can easily be done using the following environment variables:
+
+ - `POSTGRESQL_INITDB_ARGS`: Specifies extra arguments for the initdb command. No defaults.
+ - `POSTGRESQL_INITDB_WALDIR`: Defines a custom location for the transaction log. No defaults.
+
+```bash
+$ docker run --name postgresql \
+  -e POSTGRESQL_INITDB_ARGS="--data-checksums" \
+  -e POSTGRESQL_INITDB_WALDIR="/bitnami/waldir" \
+  bitnami/postgresql:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRESQL_INITDB_ARGS=--data-checksums
+      - POSTGRESQL_INITDB_WALDIR=/bitnami/waldir
+```
+
+## Environment variables aliases
+
+The Bitnami PostgreSQL container allows two different sets of environment variables. Please see the list of environment variable aliases in the next table:
+
+| Environment Variable                 | Alias                              |
+| :----------------------------------- | :--------------------------------- |
+| POSTGRESQL_USERNAME                  | POSTGRES_USER                      |
+| POSTGRESQL_DATABASE                  | POSTGRES_DB                        |
+| POSTGRESQL_PASSWORD                  | POSTGRES_PASSWORD                  |
+| POSTGRESQL_PASSWORD_FILE             | POSTGRES_PASSWORD_FILE             |
+| POSTGRESQL_PORT_NUMBER               | POSTGRES_PORT_NUMBER               |
+| POSTGRESQL_INITDB_ARGS               | POSTGRES_INITDB_ARGS               |
+| POSTGRESQL_INITDB_WALDIR             | POSTGRES_INITDB_WALDIR             |
+| POSTGRESQL_DATA_DIR                  | PGDATA                             |
+| POSTGRESQL_REPLICATION_USER          | POSTGRES_REPLICATION_PASSWORD      |
+| POSTGRESQL_REPLICATION_MODE          | POSTGRES_REPLICATION_MODE          |
+| POSTGRESQL_REPLICATION_PASSWORD      | POSTGRES_REPLICATION_PASSWORD      |
+| POSTGRESQL_REPLICATION_PASSWORD_FILE | POSTGRES_REPLICATION_PASSWORD_FILE |
+| POSTGRESQL_CLUSTER_APP_NAME          | POSTGRES_CLUSTER_APP_NAME          |
+| POSTGRESQL_MASTER_HOST               | POSTGRES_MASTER_HOST               |
+| POSTGRESQL_MASTER_PORT_NUMBER        | POSTGRES_MASTER_PORT_NUMBER        |
+| POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS  | POSTGRES_NUM_SYNCHRONOUS_REPLICAS  |
+| POSTGRESQL_SYNCHRONOUS_COMMIT_MODE   | POSTGRES_SYNCHRONOUS_COMMIT_MODE   |
+
 # Logging
 
 The Bitnami PostgreSQL Docker image sends the container logs to the `stdout`. To view the logs:
@@ -598,6 +651,10 @@ $ docker-compose up postgresql
 ```
 
 # Notable Changes
+
+## 9.6.11-rXX, 10.6.0-rYY and 11.1.0-rZZ
+
+- The PostgreSQL container can be configured using two sets of environment variables. For more information, check [Environment variables aliases](#environment-variables-aliases)
 
 ## 9.6.11-r38, 10.6.0-r39 and 11.1.0-r34
 
