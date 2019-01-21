@@ -10,7 +10,7 @@ RUN bitnami-pkg install node-6.16.0-0 --checksum c3f6d8cf53b40ec1d8601f489e242f0
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="6.16.0-rhel-7-r2" \
+    BITNAMI_IMAGE_VERSION="6.16.0-rhel-7-r3" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
