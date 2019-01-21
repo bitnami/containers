@@ -652,7 +652,7 @@ $ docker-compose up postgresql
 
 # Notable Changes
 
-## 9.6.11-rXX, 10.6.0-rYY and 11.1.0-rZZ
+## 9.6.11-r66, 9.6.11-ol-7-r83, 10.6.0-r68, 10.6.0-ol-7-r83, 11.1.0-r62 and 11.1.0-ol-7-r79
 
 - The PostgreSQL container can be configured using two sets of environment variables. For more information, check [Environment variables aliases](#environment-variables-aliases)
 
