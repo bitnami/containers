@@ -36,6 +36,32 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
       export POSTGRESQL_REPLICATION_PASSWORD=$REPLICATION_PASSWORD_AUX
   fi
 
+  declareEnvironmentVariableAlias() {
+      if env | grep -q "$2"; then
+          export $1=${!2}
+      fi
+  }
+
+  # Alias created for official postgre image compatibility
+  declareEnvironmentVariableAlias POSTGRESQL_PASSWORD POSTGRES_PASSWORD
+  declareEnvironmentVariableAlias POSTGRESQL_DATABASE POSTGRES_DB
+  declareEnvironmentVariableAlias POSTGRESQL_USERNAME POSTGRES_USER
+  declareEnvironmentVariableAlias POSTGRESQL_DATA_DIR PGDATA
+  declareEnvironmentVariableAlias POSTGRESQL_INITDB_WALDIR POSTGRES_INITDB_WALDIR
+
+  # Alias created for maintain consistency using prefix
+  declareEnvironmentVariableAlias POSTGRESQL_CLUSTER_APP_NAME POSTGRES_CLUSTER_APP_NAME
+  declareEnvironmentVariableAlias POSTGRESQL_MASTER_HOST POSTGRES_MASTER_HOST
+  declareEnvironmentVariableAlias POSTGRESQL_MASTER_PORT_NUMBER POSTGRES_MASTER_PORT_NUMBER
+  declareEnvironmentVariableAlias POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS POSTGRES_NUM_SYNCHRONOUS_REPLICAS
+  declareEnvironmentVariableAlias POSTGRESQL_PORT_NUMBER POSTGRES_PORT_NUMBER
+  declareEnvironmentVariableAlias POSTGRESQL_REPLICATION_MODE POSTGRES_REPLICATION_MODE
+  declareEnvironmentVariableAlias POSTGRESQL_REPLICATION_PASSWORD POSTGRES_REPLICATION_PASSWORD
+  declareEnvironmentVariableAlias POSTGRESQL_REPLICATION_USER POSTGRES_REPLICATION_USER
+  declareEnvironmentVariableAlias POSTGRESQL_SYNCHRONOUS_COMMIT_MODE POSTGRES_SYNCHRONOUS_COMMIT_MODE
+  declareEnvironmentVariableAlias POSTGRESQL_PASSWORD_FILE POSTGRES_PASSWORD_FILE
+  declareEnvironmentVariableAlias POSTGRESQL_REPLICATION_PASSWORD_FILE POSTGRES_REPLICATION_PASSWORD_FILE
+
   nami_initialize postgresql
   info "Starting postgresql... "
 fi
