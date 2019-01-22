@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  blackbox-exporter:
+    image: bitnami/blackbox-exporter:0-rhel-7
+    volumes:
+      - blackbox-exporter_data:/bitnami
+volumes:
+  blackbox-exporter_data:
+    driver: local
