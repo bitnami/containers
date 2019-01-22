@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: docker:17.06.0-ce-git
         environment:
-          RELEASE_SERIES_LIST: "2.3,2.4,2.5"
+          RELEASE_SERIES_LIST: "2.3,2.4,2.5,2.6"
           LATEST_STABLE: "2.5"
           DISTRIBUTIONS_LIST: "debian-9,ol-7"
           IMAGE_NAME: ruby
