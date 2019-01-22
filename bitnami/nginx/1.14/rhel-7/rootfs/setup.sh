@@ -4,21 +4,20 @@ set -o errexit
 set -o nounset
 set -o pipefail
 #set -o xtrace
+# shellcheck disable=SC1091
 
+# Load libraries
 . /libos.sh
 . /libfs.sh
 . /libnginx.sh
 
-# ensure nginx env var settings are valid
+# Load NGINX env. variables
+eval "$(nginx_env)"
+
+# Ensure NGINX env. variables settings are valid
 nginx_validate
-
-# ensure nginx is stopped when this script ends.
+# Ensure NGINX is stopped when this script ends
 trap "nginx_stop" EXIT
-
-if am_i_root; then
-    ensure_user_exists "$NGINX_DAEMON_USER" "$NGINX_DAEMON_GROUP"
-fi
-
-# ensure nginx is initialized
+am_i_root && ensure_user_exists "$NGINX_DAEMON_USER" "$NGINX_DAEMON_GROUP"
+# Ensure NGINX is initialized
 nginx_initialize
-
