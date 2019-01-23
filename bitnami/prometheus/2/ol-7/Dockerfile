@@ -1,23 +1,17 @@
-FROM bitnami/oraclelinux-extras:7-r236 as buildenv
+FROM bitnami/oraclelinux-extras:7-r238
+LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+# Install required system packages and dependencies
 RUN install_packages ca-certificates wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.6.1-0-linux-x86_64-ol-7.tar.gz && \
     echo "ac3ba3d77a5111e44bf5e9c74212e80f9915dcf101292246bffe1d5717f31c05  /tmp/bitnami/pkg/cache/prometheus-2.6.1-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.6.1-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/prometheus-2.6.1-0-linux-x86_64-ol-7.tar.gz
 
-##################
-
-FROM bitnami/oraclelinux-extras:7-r236
-LABEL maintainer "Bitnami <containers@bitnami.com>"
-
-COPY --from=buildenv /opt/bitnami/prometheus /opt/bitnami/prometheus
-ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.6.1-ol-7-r7" \
-    PATH="/opt/bitnami/prometheus/bin:$PATH"
-
-RUN install_packages ca-certificates
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
+ENV BITNAMI_APP_NAME="prometheus" \
+    BITNAMI_IMAGE_VERSION="2.6.1-ol-7-r8" \
+    PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
 
