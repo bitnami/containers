@@ -10,7 +10,7 @@ RUN bitnami-pkg install java-1.8.191-0 --checksum 8593f8fb14f68c8b801b2f791bb977
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="1.8.191-rhel-7-r0" \
+    BITNAMI_IMAGE_VERSION="1.8.191-rhel-7-r1" \
     JAVA_HOME="/opt/bitnami/java" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:$PATH"
