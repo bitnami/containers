@@ -1,13 +1,13 @@
-FROM bitnami/minideb-extras:stretch-r261
+FROM bitnami/minideb-extras:stretch-r262
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmemcached11 libmemcachedutil2 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5 libtinfo5 libunistring0 libxml2 libxslt1.1 zlib1g
-RUN bitnami-pkg unpack apache-2.4.37-24 --checksum 19222f78a9c9e24beb85a625c118609ec16db55b17cc3092caa89a9866bbbe85
+RUN bitnami-pkg unpack apache-2.4.38-0 --checksum 86068bf5448720c0e9bd1bd0faa67d77f4a9cb49b2e8bc4a3605e3dcf03c2f2c
 RUN bitnami-pkg unpack php-7.2.14-0 --checksum 6545e143a815e52e1b03a031f33323a6a287530b8003cbcdb4da149bf87cdee6
 RUN bitnami-pkg install wp-cli-2.1.0-0 --checksum c44d62b19aa37754b55dc040b6e9fb50589ae2a3dac9e6c604653cf7a4f80893
 RUN bitnami-pkg unpack mysql-client-10.2.21-0 --checksum 4accf2a3b8e399feb092e20bf9210dadd8a99ca1aa623a1ee161025437d980c7
-RUN bitnami-pkg unpack libphp-7.2.14-0 --checksum d6cfbe9f4dfccaeeef3c69f4342ab1ecf7a2fdec3db07ca8015d9c1faf293dd3
+RUN bitnami-pkg unpack libphp-7.2.14-1 --checksum f4f0d7eacc6314322becfe7f7dbb19659e8ef76317befba41c7774c383717775
 RUN bitnami-pkg unpack wordpress-5.0.3-1 --checksum 66fc187ac312d7be042464d684f09eed87abb2c4bbf909f38a0b63093af04b0e
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.0.3-debian-9-r10" \
+    BITNAMI_IMAGE_VERSION="5.0.3-debian-9-r11" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
