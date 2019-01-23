@@ -1,6 +1,8 @@
-FROM bitnami/oraclelinux-extras:7-r236 as buildenv
+FROM bitnami/oraclelinux-extras:7-r238
+LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-RUN install_packages ca-certificates fontconfig-devel glibc libgcc libstdc++ wget zlib
+# Install required system packages and dependencies
+RUN install_packages ca-certificates curl fontconfig fontconfig-devel glibc libgcc libstdc++ wget zlib
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-5.4.3-1-linux-x86_64-ol-7.tar.gz && \
     echo "790794790c9a7dafbf20900b49d598deee4fe5df7691a18578c8ca39e16889c3  /tmp/bitnami/pkg/cache/grafana-5.4.3-1-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/grafana-5.4.3-1-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -8,22 +10,13 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN mv /opt/bitnami/grafana/conf/sample.ini /opt/bitnami/grafana/conf/grafana.ini
 RUN mkdir -p /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/ && chmod g+rwX /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/
 
-##################
-
-FROM bitnami/oraclelinux-extras:7-r236
-LABEL maintainer "Bitnami <containers@bitnami.com>"
-
-COPY --from=buildenv /opt/bitnami/grafana /opt/bitnami/grafana
+COPY rootfs /
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="5.4.3-ol-7-r9" \
+    BITNAMI_IMAGE_VERSION="5.4.3-ol-7-r10" \
     PATH="/opt/bitnami/grafana/bin:$PATH"
-
-RUN install_packages curl
-RUN install_packages fontconfig ca-certificates
 
 EXPOSE 3000
 
-COPY rootfs /
 WORKDIR /opt/bitnami/grafana
 USER 1001
 ENTRYPOINT [ "/run.sh" ]
