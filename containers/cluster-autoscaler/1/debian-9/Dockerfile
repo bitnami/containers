@@ -1,25 +1,19 @@
-FROM bitnami/minideb:stretch as buildenv
+FROM bitnami/minideb:stretch
+LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+# Install required system packages and dependencies
 RUN install_packages ca-certificates libc6 wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cluster-autoscaler-1.13.1-20-linux-amd64-debian-9.tar.gz && \
     echo "735302f5931b4228b409d3e6e49d063d996381d387e49b455fcc3338622b0da6  /tmp/bitnami/pkg/cache/cluster-autoscaler-1.13.1-20-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.13.1-20-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.13.1-20-linux-amd64-debian-9.tar.gz
 
-##################
-
-FROM bitnami/minideb:stretch
-LABEL maintainer "Bitnami <containers@bitnami.com>"
-
-COPY --from=buildenv /opt/bitnami/cluster-autoscaler /opt/bitnami/cluster-autoscaler
+COPY rootfs /
+RUN chmod -R g+rwX /opt/bitnami/cluster-autoscaler/
 ENV BITNAMI_APP_NAME="cluster-autoscaler" \
-    BITNAMI_IMAGE_VERSION="1.13.1-debian-9-r49" \
+    BITNAMI_IMAGE_VERSION="1.13.1-debian-9-r50" \
     PATH="/opt/bitnami/cluster-autoscaler/bin:$PATH"
 
-RUN install_packages ca-certificates
-RUN chmod -R g+rwX /opt/bitnami/cluster-autoscaler/
-
-COPY rootfs /
 WORKDIR /opt/bitnami/cluster-autoscaler
 USER 1001
 CMD [ "/run.sh" ]
