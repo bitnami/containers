@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r238
+FROM bitnami/oraclelinux-extras:7-r239
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/oauth2-proxy-0.20180625.74543-20-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="oauth2-proxy" \
-    BITNAMI_IMAGE_VERSION="0.20180625.74543-ol-7-r149" \
+    BITNAMI_IMAGE_VERSION="0.20180625.74543-ol-7-r150" \
     PATH="/opt/bitnami/oauth2-proxy/bin:$PATH"
 
 EXPOSE 8080 4180
