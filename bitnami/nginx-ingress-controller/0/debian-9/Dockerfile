@@ -1,28 +1,20 @@
-FROM bitnami/minideb:stretch as buildenv
-
-RUN install_packages ca-certificates curl libc6 libcomerr2 libcurl3 libffi6 libgcc1 libgcrypt20 libgeoip1 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblua5.1-0 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libtasn1-6 libunistring0 wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.21.0-20-linux-amd64-debian-9.tar.gz && \
-    echo "975360e4749e2e557e2fc5c513dd8374c0d564e8a9bdabf80fb85cbe1e2a4405  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.21.0-20-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.21.0-20-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.21.0-20-linux-amd64-debian-9.tar.gz
-RUN mkdir -p /opt/bitnami/nginx/conf/geoip && \
-    cd /opt/bitnami/nginx/conf/geoip && \
-    curl https://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz | gunzip >GeoIP.dat && \
-    curl https://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz | gunzip >GeoLiteCity.dat && \
-    curl http://download.maxmind.com/download/geoip/database/asnum/GeoIPASNum.dat.gz | gunzip >GeoIPASNum.dat
-
-##################
-
 FROM bitnami/minideb:stretch
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-COPY --from=buildenv /opt/bitnami/common /opt/bitnami/common
-COPY --from=buildenv /opt/bitnami/lua /opt/bitnami/lua
-COPY --from=buildenv /opt/bitnami/nginx /opt/bitnami/nginx
-COPY --from=buildenv /opt/bitnami/nginx-ingress-controller /opt/bitnami/nginx-ingress-controller
-ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.21.0-debian-9-r23" \
-    PATH="/opt/bitnami/nginx-ingress-controller/bin:$PATH"
+# Install required system packages and dependencies
+RUN install_packages authbind ca-certificates curl libc6 libcomerr2 libcurl3 libcurl4-openssl-dev libffi6 libgcc1 libgcrypt20 libgeoip-dev libgeoip1 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblua5.1-0 liblua5.1-dev libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpcre3-dev libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl-dev libssl1.0.2 libssl1.1 libstdc++6 libtasn1-6 libunistring0 python wget zlib1g zlib1g-dev
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.22.0-0-linux-amd64-debian-9.tar.gz && \
+    echo "7219c9860847eff6e8a362b8fc2af038b358d7e0bd164d050447a4cf5654de50  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.22.0-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.22.0-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.22.0-0-linux-amd64-debian-9.tar.gz
+RUN mkdir -p /opt/bitnami/nginx/conf/geoip && \
+    cd /opt/bitnami/nginx/conf/geoip && \
+    curl https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz | tar xvz && mv GeoLite2-City_*/*mmdb . && rm -r GeoLite2-City_*/ && \
+    curl https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz | tar xvz && mv GeoLite2-Country_*/*mmdb . && rm -r GeoLite2-Country_*/ && \
+    curl https://geolite.maxmind.com/download/geoip/database/GeoLite2-ASN.tar.gz | tar xvz && mv GeoLite2-ASN_*/*mmdb . && rm -r GeoLite2-ASN_*/ &&\
+    curl -L https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/geoip/GeoIP.dat --output GeoIP.dat &&\
+     curl -L https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/geoip/GeoIPASNum.dat --output GeoIPASNum.dat &&\
+    curl -L https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/geoip/GeoLiteCity.dat --output GeoLiteCity.dat
 
 RUN ln -sf /opt/bitnami/nginx/sbin/nginx /usr/sbin/nginx
 RUN ln -sf /opt/bitnami/nginx/conf /etc/nginx && \
@@ -43,7 +35,9 @@ RUN chown -R 1001 /etc/nginx /etc/ingress-controller && \
     chmod -R g+rwX /opt/bitnami/nginx-ingress-controller
 RUN chown -R 1001 /var/log/nginx && \
     chown -R 1001 /opt/bitnami/nginx/conf
-RUN install_packages authbind zlib1g-dev libpcre3-dev libssl-dev libcurl4-openssl-dev python liblua5.1-dev libgeoip-dev ca-certificates
+ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
+    BITNAMI_IMAGE_VERSION="0.22.0-debian-9-r0" \
+    PATH="/opt/bitnami/nginx-ingress-controller/bin:$PATH"
 
 EXPOSE 80 443
 
