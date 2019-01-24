@@ -6,12 +6,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline xz-libs zlib
-RUN bitnami-pkg unpack php-7.2.13-1 --checksum 0ec313e0bf9315492f9466487b478da338ce3c58f27e57f8141a103e330681ee
+RUN bitnami-pkg unpack php-7.2.14-0 --checksum c1ee63b32288e641c7f2999302306387e923aaed6b644fa88f54e97487c6bd26
 RUN mkdir -p /bitnami && ln -sf /bitnami/php /bitnami/php-fpm
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="7.2.13-rhel-7-r35" \
+    BITNAMI_IMAGE_VERSION="7.2.14-rhel-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/php/sbin:$PATH"
 
