@@ -36,7 +36,7 @@ RUN chown -R 1001 /etc/nginx /etc/ingress-controller && \
 RUN chown -R 1001 /var/log/nginx && \
     chown -R 1001 /opt/bitnami/nginx/conf
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.22.0-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="0.22.0-debian-9-r1" \
     PATH="/opt/bitnami/nginx-ingress-controller/bin:$PATH"
 
 EXPOSE 80 443
