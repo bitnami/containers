@@ -37,7 +37,7 @@ RUN chown -R 1001 /etc/nginx /etc/ingress-controller && \
 RUN chown -R 1001 /var/log/nginx && \
     chown -R 1001 /opt/bitnami/nginx/conf
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.22.0-rhel-7-r1" \
+    BITNAMI_IMAGE_VERSION="0.22.0-rhel-7-r2" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     NAMI_PREFIX="/.nami" \
