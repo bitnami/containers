@@ -6,7 +6,7 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libf
 RUN bitnami-pkg unpack apache-2.4.38-0 --checksum 86068bf5448720c0e9bd1bd0faa67d77f4a9cb49b2e8bc4a3605e3dcf03c2f2c
 RUN bitnami-pkg unpack php-7.1.26-0 --checksum 7eb823409228a314524d99c9982bc2a3c2d0f79a377fe269c40f4e24fe2a18fc
 RUN bitnami-pkg unpack libphp-7.1.26-1 --checksum 68a4b24e65f92258e376e8523dbf2b48011e8279290e4944dc510079f34504fa
-RUN bitnami-pkg unpack phpmyadmin-4.8.4-0 --checksum dc876cb4d74a9704f737f59c6db1dfab4d54d14a6ba5a00fc632cc4a95a08ff2
+RUN bitnami-pkg unpack phpmyadmin-4.8.5-0 --checksum e927b2563d2e47d67aec8a5cccd53ba6644657d797ce0f30471182f7d8c30f54
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
@@ -15,7 +15,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="4.8.4-debian-9-r41" \
+    BITNAMI_IMAGE_VERSION="4.8.5-debian-9-r0" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
     PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH" \
