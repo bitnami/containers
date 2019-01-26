@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.14.1-ol-7-r111` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.1-ol-7-r111/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.14.1-debian-9-r110`, `2`, `2.14.1`, `2.14.1-r110`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.1-debian-9-r110/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.14.1-debian-9-r111`, `2`, `2.14.1`, `2.14.1-r111`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.1-debian-9-r111/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
