@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`15-ol-7`, `15.0.1-ol-7-r19` (15/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/15.0.1-ol-7-r19/15/ol-7/Dockerfile)
+* [`15-ol-7`, `15.0.1-ol-7-r20` (15/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/15.0.1-ol-7-r20/15/ol-7/Dockerfile)
 * [`15-debian-9`, `15.0.1-debian-9-r18`, `15`, `15.0.1`, `15.0.1-r18`, `latest` (15/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/15.0.1-debian-9-r18/15/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
