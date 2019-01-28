@@ -7,7 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "1"
           LATEST_STABLE: "1"
-          DISTRIBUTIONS_LIST: "debian-9,ol-7"
+          DISTRIBUTIONS_LIST: "debian-9,ol-7,rhel-7"
           IMAGE_NAME: nats
           CHART_NAME: nats
           CHART_REPO: https://github.com/helm/charts
