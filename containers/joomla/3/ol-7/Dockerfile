@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r242
+FROM bitnami/oraclelinux-extras:7-r243
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.38-0 --checksum 20c206375c7c405daba10fa92616d6
 RUN bitnami-pkg unpack php-7.1.26-0 --checksum e00fa61ec021232fd46c9d3b2c11bc5e9c5c0fd3e8c26440befcaabe106c2717
 RUN bitnami-pkg unpack mysql-client-10.1.37-21 --checksum ce01cd40ec8c9612d6a37b75f9f559f7afb4508aa5ceae5f9392aa0d42c928fc
 RUN bitnami-pkg unpack libphp-7.1.26-1 --checksum 36f6223a894f84ad0e680ee498bc3667db1e2bee2f6753b74c4b5152cf683bdd
-RUN bitnami-pkg unpack joomla-3.9.2-0 --checksum e7b34e031766d23f71bdd5da2f7e05c8c25c7ac146850e8a0604fe8c4a44f196
+RUN bitnami-pkg unpack joomla-3.9.2-1 --checksum b3971e68c6706bbc78f47ab340a60f1802e9223669d01aa2193ab5f5d1867f9c
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
@@ -17,7 +17,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.9.2-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="3.9.2-ol-7-r12" \
     JOOMLA_DATABASE_NAME="bitnami_joomla" \
     JOOMLA_DATABASE_PASSWORD="" \
     JOOMLA_DATABASE_USER="bn_joomla" \
