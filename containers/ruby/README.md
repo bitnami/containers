@@ -50,11 +50,11 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2.6-ol-7`, `2.6.0-ol-7-r6` (2.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.0-ol-7-r6/2.6/ol-7/Dockerfile)
+* [`2.6-ol-7`, `2.6.0-ol-7-r5` (2.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.0-ol-7-r5/2.6/ol-7/Dockerfile)
 * [`2.6-debian-9`, `2.6.0-debian-9-r6`, `2.6`, `2.6.0`, `2.6.0-r6` (2.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.0-debian-9-r6/2.6/debian-9/Dockerfile)
 * [`2.5-ol-7`, `2.5.3-ol-7-r93` (2.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.3-ol-7-r93/2.5/ol-7/Dockerfile)
 * [`2.5-debian-9`, `2.5.3-debian-9-r95`, `2.5`, `2.5.3`, `2.5.3-r95`, `latest` (2.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.3-debian-9-r95/2.5/debian-9/Dockerfile)
-* [`2.4-ol-7`, `2.4.5-ol-7-r90` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.5-ol-7-r90/2.4/ol-7/Dockerfile)
+* [`2.4-ol-7`, `2.4.5-ol-7-r91` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.5-ol-7-r91/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.5-debian-9-r94`, `2.4`, `2.4.5`, `2.4.5-r94` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.5-debian-9-r94/2.4/debian-9/Dockerfile)
 * [`2.3-ol-7`, `2.3.8-ol-7-r91` (2.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.8-ol-7-r91/2.3/ol-7/Dockerfile)
 * [`2.3-debian-9`, `2.3.8-debian-9-r96`, `2.3`, `2.3.8`, `2.3.8-r96` (2.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.8-debian-9-r96/2.3/debian-9/Dockerfile)
