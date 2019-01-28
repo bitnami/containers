@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  alertmanager:
+    image: bitnami/alertmanager:0-rhel-7
+    ports:
+      - '9093:9093'
