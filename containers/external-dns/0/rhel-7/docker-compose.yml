@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  external-dns:
+    image: bitnami/external-dns:0-rhel-7
+    ports:
+      - '7979:7979'
