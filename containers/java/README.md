@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-java/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-java/tree/master)
-
 # What is Java?
 
 > Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible.
@@ -20,7 +18,6 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -48,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 - [`1.8`, `1.8.201-ol-7-r1` (1.8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.201-ol-7-r1/1.8/ol-7/Dockerfile), [`1.8-prod`, `1.8.201-ol-7-r1-prod` (1.8/ol-7/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.201-ol-7-r1/1.8/ol-7/prod/Dockerfile)
 - [`1.8`, `1.8.191-rhel-7-r6` (1.8/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-rhel-7-r6/1.8/rhel-7/Dockerfile), [`1.8-prod`, `1.8.191-rhel-7-r6-prod` (1.8/rhel-7/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-rhel-7-r6/1.8/rhel-7/prod/Dockerfile)
-- [`1.8`, `1.8.191-debian-9-r96` (1.8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-debian-9-r96/1.8/debian-9/Dockerfile), [`1.8-prod`, `1.8.191-debian-9-r96-prod` (1.8/debian-9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-debian-9-r96/1.8/debian-9/prod/Dockerfile)
+- [`1.8`, `1.8.191-debian-9-r97` (1.8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-debian-9-r97/1.8/debian-9/Dockerfile), [`1.8-prod`, `1.8.191-debian-9-r97-prod` (1.8/debian-9/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.191-debian-9-r97/1.8/debian-9/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
 
