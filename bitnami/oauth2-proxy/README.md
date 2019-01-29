@@ -5,7 +5,7 @@ A reverse proxy and static file server that provides authentication
 using Providers (Google, GitHub, and others) to validate accounts by
 email, domain or group.
 
-[https://github.com/giantswarm/oauth2_proxy](https://github.com/giantswarm/oauth2_proxy)
+[https://github.com/pusher/oauth2_proxy](https://github.com/pusher/oauth2_proxy)
 
 # TL;DR;
 
@@ -47,9 +47,9 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-rhel-7`, `0.20180625.74543-rhel-7-r0` (0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-rhel-7-r0/0/rhel-7/Dockerfile)
-* [`0-ol-7`, `0.20180625.74543-ol-7-r154` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-ol-7-r154/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.20180625.74543-debian-9-r146`, `0`, `0.20180625.74543`, `0.20180625.74543-r146`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/0.20180625.74543-debian-9-r146/0/debian-9/Dockerfile)
+* [`3-rhel-7`, `3.0.0-rhel-7-r0` (3/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/3.0.0-rhel-7-r0/3/rhel-7/Dockerfile)
+* [`3-ol-7`, `3.0.0-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/3.0.0-ol-7-r0/3/ol-7/Dockerfile)
+* [`3-debian-9`, `3.0.0-debian-9-r0`, `3`, `3.0.0`, `3.0.0-r0`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/3.0.0-debian-9-r0/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
 
