@@ -1,0 +1,19 @@
+{
+  "bootstrapExpect": "{{$global.env.CONSUL_BOOTSTRAP_EXPECT}}",
+  "clientAddress": "{{$global.env.CONSUL_CLIENT_LAN_ADDRESS}}",
+  "dataCenter": "{{$global.env.CONSUL_DATACENTER}}",
+  "disableKeyringFile": "{{$global.env.CONSUL_DISABLE_KEYRING_FILE}}",
+  "dnsPort": "{{$global.env.CONSUL_DNS_PORT_NUMBER}}",
+  "domain": "{{$global.env.CONSUL_DOMAIN}}",
+  "gossipEncryption": "{{$global.env.CONSUL_GOSSIP_ENCRYPTION}}",
+  "gossipEncryptionKey": "{{$global.env.CONSUL_GOSSIP_ENCRYPTION_KEY}}",
+  "httpPort": "{{$global.env.CONSUL_HTTP_PORT_NUMBER}}",
+  "localConfig": "{{$global.env.CONSUL_LOCAL_CONFIG}}",
+  "mode": "{{$global.env.CONSUL_SERVER_MODE}}",
+  "raftMultiplier": "{{$global.env.CONSUL_RAFT_MULTIPLIER}}",
+  "retryJoin": "{{$global.env.CONSUL_RETRY_JOIN}}",
+  "rpcPort": "{{$global.env.CONSUL_RPC_PORT_NUMBER}}",
+  "serfLanAddress": "{{$global.env.CONSUL_SERF_LAN_ADDRESS}}",
+  "serfLanPort": "{{$global.env.CONSUL_SERF_LAN_PORT_NUMBER}}",
+  "ui": "{{$global.env.CONSUL_UI}}"
+}
