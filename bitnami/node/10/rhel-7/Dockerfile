@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages build-essential bzip2-libs ca-certificates curl git glibc keyutils-libs krb5-libs libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre pkg-config readline unzip wget zlib
-RUN bitnami-pkg install node-10.15.0-0 --checksum 48166c233c210f7221084a632cc48fd0ca22d3c8d5f62111ec3027d641b9391f
+RUN bitnami-pkg install node-10.15.1-0 --checksum d087d66c6c6ebf803b51678180e9bc1ba6945119876d3399f4e3bfdd3216b9c6
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="10.15.0-rhel-7-r11" \
+    BITNAMI_IMAGE_VERSION="10.15.1-rhel-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
