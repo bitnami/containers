@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc libgcc
-RUN bitnami-pkg install java-1.8.191-0 --checksum 8593f8fb14f68c8b801b2f791bb977c8d60004938f791ce43a37978227f37920
+RUN bitnami-pkg install java-1.8.201-0 --checksum 9216aff7a05a39c45934859a19b66a5e1f343449fd929544a3aff1a6cddb35c2
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="1.8.191-rhel-7-r6" \
+    BITNAMI_IMAGE_VERSION="1.8.201-rhel-7-r0" \
     JAVA_HOME="/opt/bitnami/java" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:$PATH"
