@@ -3,15 +3,15 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates libc6 wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubewatch-0.0.4-20-linux-amd64-debian-9.tar.gz && \
-    echo "b049e7c93f55e344272f044593a2372a5137652160b571ee6ab5a3554270ce3f  /tmp/bitnami/pkg/cache/kubewatch-0.0.4-20-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kubewatch-0.0.4-20-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kubewatch-0.0.4-20-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubewatch-0.0.4-22-linux-amd64-debian-9.tar.gz && \
+    echo "e68a0e7efd3c840280779897ff7a852b0cca06edcc479fe874d8e7fd79f064e5  /tmp/bitnami/pkg/cache/kubewatch-0.0.4-22-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kubewatch-0.0.4-22-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kubewatch-0.0.4-22-linux-amd64-debian-9.tar.gz
 
 COPY rootfs /
 RUN chown -R 1001:root /opt/bitnami/kubewatch/ && chmod g+rwX /opt/bitnami/kubewatch/
 ENV BITNAMI_APP_NAME="kubewatch" \
-    BITNAMI_IMAGE_VERSION="0.0.4-debian-9-r162" \
+    BITNAMI_IMAGE_VERSION="0.0.4-debian-9-r163" \
     KW_CONFIG="/opt/bitnami/kubewatch" \
     KW_FLOCK_URL="" \
     KW_HIPCHAT_ROOM="" \
