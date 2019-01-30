@@ -3,7 +3,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libfreetype6 libgcc1 libncurses5 libssl1.0.2 libstdc++6 libtinfo5
-RUN bitnami-pkg install java-1.8.191-21 --checksum de7e78f5dbce5a3c2343e2a40f2f335868bd547598f1df364247b4425f2f2f1a
+RUN bitnami-pkg install java-1.8.201-0 --checksum de49557872836fdbd965389ebcc72e163f7242cf691d435993cc2e4f3cd56ae7
 RUN bitnami-pkg unpack tomcat-8.0.53-21 --checksum 294056e9bb2012cf2cf535f209843a6319a847275de8bfdab00c03d054743fd3
 RUN bitnami-pkg unpack mysql-client-10.1.37-21 --checksum b7a5a18edfffc9440e852a412ea08a90e5f64924240f1f76a2813e6e93edaa39
 RUN bitnami-pkg unpack jasperreports-7.1.0-20 --checksum 74c98504d729c162f3ad10ccf636d8a1640b26917424a147bb67028106588a70
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack jasperreports-7.1.0-20 --checksum 74c98504d729c162f3ad10c
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.1.0-debian-9-r164" \
+    BITNAMI_IMAGE_VERSION="7.1.0-debian-9-r165" \
     JASPERREPORTS_DATABASE_NAME="bitnami_jasperreports" \
     JASPERREPORTS_DATABASE_PASSWORD="" \
     JASPERREPORTS_DATABASE_USER="bn_jasperreports" \
