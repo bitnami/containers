@@ -7,13 +7,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1
-RUN bitnami-pkg install java-1.8.191-21 --checksum de7e78f5dbce5a3c2343e2a40f2f335868bd547598f1df364247b4425f2f2f1a
+RUN bitnami-pkg install java-1.8.201-0 --checksum de49557872836fdbd965389ebcc72e163f7242cf691d435993cc2e4f3cd56ae7
 RUN bitnami-pkg unpack tomcat-7.0.92-21 --checksum 37071a1c9d6ee8dd398b7dfec4aed7c4b809de5a33fb20d2c3d63b12781bcbf8
 RUN ln -sf /opt/bitnami/tomcat/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="7.0.92-debian-9-r65" \
+    BITNAMI_IMAGE_VERSION="7.0.92-debian-9-r66" \
     JAVA_OPTS="-Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH" \
