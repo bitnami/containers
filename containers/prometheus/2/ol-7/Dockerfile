@@ -3,14 +3,14 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.7.0-0-linux-x86_64-ol-7.tar.gz && \
-    echo "29480b47715a6ab383868726dc7cd83ea31a8e00cb5b04dea6c638fe991f5e78  /tmp/bitnami/pkg/cache/prometheus-2.7.0-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.7.0-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/prometheus-2.7.0-0-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.7.1-0-linux-x86_64-ol-7.tar.gz && \
+    echo "9b225dd1d88a3bbbf67ccb35a74d25c85e4b6f5dcea0c00f9b78906be9ba204c  /tmp/bitnami/pkg/cache/prometheus-2.7.1-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.7.1-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/prometheus-2.7.1-0-linux-x86_64-ol-7.tar.gz
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.7.0-ol-7-r2" \
+    BITNAMI_IMAGE_VERSION="2.7.1-ol-7-r0" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
