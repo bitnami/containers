@@ -2,6 +2,8 @@
 
 > [MongoDB](https://www.mongodb.org/) is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas, making the integration of data in certain types of applications easier and faster.
 
+All MongoDB versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Iniciative (OSI).
+
 # TL;DR;
 
 ```bash
@@ -43,11 +45,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4.1-ol-7`, `4.1.4-ol-7-r97` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.4-ol-7-r97/4.1/ol-7/Dockerfile)
-* [`4.1-debian-9`, `4.1.4-debian-9-r97`, `4.1`, `4.1.4`, `4.1.4-r97` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.4-debian-9-r97/4.1/debian-9/Dockerfile)
-* [`4.0-ol-7`, `4.0.3-ol-7-r123` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-ol-7-r123/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.3-debian-9-r107`, `4.0`, `4.0.3`, `4.0.3-r107`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-debian-9-r107/4.0/debian-9/Dockerfile)
-* [`3.6-ol-7`, `3.6.8-ol-7-r135` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.8-ol-7-r135/3.6/ol-7/Dockerfile)
+* [`4.1-ol-7`, `4.1.7-ol-7-r0` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.7-ol-7-r0/4.1/ol-7/Dockerfile)
+* [`4.1-debian-9`, `4.1.4-debian-9-r98`, `4.1`, `4.1.4`, `4.1.4-r98` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.4-debian-9-r98/4.1/debian-9/Dockerfile)
+* [`4.0-debian-9`, `4.0.5-debian-9-r0`, `4.0`, `4.0.5`, `4.0.5-r0`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.5-debian-9-r0/4.0/debian-9/Dockerfile)
+* [`4.0-ol-7`, `4.0.3-ol-7-r124` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.3-ol-7-r124/4.0/ol-7/Dockerfile)
+* [`3.6-ol-7`, `3.6.8-ol-7-r136` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.8-ol-7-r136/3.6/ol-7/Dockerfile)
 * [`3.6-debian-9`, `3.6.8-debian-9-r117`, `3.6`, `3.6.8`, `3.6.8-r117` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.8-debian-9-r117/3.6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
@@ -612,6 +614,9 @@ $ docker-compose up mongodb
 ```
 
 # Notable Changes
+
+## 3.6.9, 4.0.4 and 4.1.5 or later
+- All MongoDB versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Iniciative (OSI).
 
 ## 3.6.6-r16 and 4.1.1-r9
 
