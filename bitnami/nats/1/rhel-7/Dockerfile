@@ -9,9 +9,9 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/nats-1.4.0-0-linux-x86_64-rhel-7.tar.gz
 
 COPY rootfs /
-RUN chown -R 1001:1001 /opt/bitnami/nats
+RUN chown -R 1001:root /opt/bitnami/nats && chmod g+rwX /opt/bitnami/nats
 ENV BITNAMI_APP_NAME="nats" \
-    BITNAMI_IMAGE_VERSION="1.4.0-rhel-7-r1" \
+    BITNAMI_IMAGE_VERSION="1.4.0-rhel-7-r2" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     NAMI_PREFIX="/.nami" \
