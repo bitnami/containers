@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-python/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-python/tree/master)
-
 # What is Python?
 
 > Python is a programming language that lets you work quickly and integrate systems more effectively
@@ -24,7 +22,6 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
@@ -50,7 +47,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.7-ol-7`, `3.7.2-ol-7-r37` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.2-ol-7-r37/3.7/ol-7/Dockerfile)
+* [`3.7-ol-7`, `3.7.2-ol-7-r38` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.2-ol-7-r38/3.7/ol-7/Dockerfile)
 * [`3.7-ol-7-prod`, `3.7.2-ol-7-r0-prod` (3.7-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.2-ol-7-r0-prod/3.7-prod/ol-7/Dockerfile)
 * [`3.7-debian-9`, `3.7.2-debian-9-r38`, `3.7`, `3.7.2`, `3.7.2-r38`, `latest` (3.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.2-debian-9-r38/3.7/debian-9/Dockerfile)
 * [`3.7-debian-9-prod`, `3.7.2-debian-9-r0-prod`, `3.7-prod`, `3.7.2-prod`, `3.7.2-r0-prod`, `latest-prod` (3.7-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.2-debian-9-r0-prod/3.7-prod/debian-9/Dockerfile)
@@ -59,7 +56,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`3.6-debian-9`, `3.6.8-debian-9-r39`, `3.6`, `3.6.8`, `3.6.8-r39` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.8-debian-9-r39/3.6/debian-9/Dockerfile)
 * [`3.6-debian-9-prod`, `3.6.8-debian-9-r0-prod`, `3.6-prod`, `3.6.8-prod`, `3.6.8-r0-prod` (3.6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.8-debian-9-r0-prod/3.6-prod/debian-9/Dockerfile)
 * [`2-rhel-7`, `2.7.15-rhel-7-r10` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-rhel-7-r10/2/rhel-7/Dockerfile)
-* [`2-ol-7`, `2.7.15-ol-7-r201` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-ol-7-r201/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.7.15-ol-7-r202` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-ol-7-r202/2/ol-7/Dockerfile)
 * [`2-ol-7-prod`, `2.7.15-ol-7-r0-prod` (2-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-ol-7-r0-prod/2-prod/ol-7/Dockerfile)
 * [`2-debian-9`, `2.7.15-debian-9-r194`, `2`, `2.7.15`, `2.7.15-r194` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-debian-9-r194/2/debian-9/Dockerfile)
 * [`2-debian-9-prod`, `2.7.15-debian-9-r0-prod`, `2-prod`, `2.7.15-prod`, `2.7.15-r0-prod` (2-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.15-debian-9-r0-prod/2-prod/debian-9/Dockerfile)
