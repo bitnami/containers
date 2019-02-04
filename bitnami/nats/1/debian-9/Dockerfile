@@ -9,9 +9,9 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/nats-1.4.0-0-linux-amd64-debian-9.tar.gz
 
 COPY rootfs /
-RUN chown -R 1001:1001 /opt/bitnami/nats
+RUN chown -R 1001:root /opt/bitnami/nats && chmod g+rwX /opt/bitnami/nats
 ENV BITNAMI_APP_NAME="nats" \
-    BITNAMI_IMAGE_VERSION="1.4.0-debian-9-r14" \
+    BITNAMI_IMAGE_VERSION="1.4.0-debian-9-r15" \
     PATH="/opt/bitnami/nats/bin:$PATH"
 
 EXPOSE 4222 6222 8222
