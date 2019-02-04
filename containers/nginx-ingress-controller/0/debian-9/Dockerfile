@@ -29,14 +29,14 @@ RUN ln -sf /opt/bitnami/nginx/logs /var/log/nginx && \
 RUN mkdir -p /etc/authbind/byport /etc/authbind/byuid && \
     touch /etc/authbind/byport/80 /etc/authbind/byport/443 && \
     printf "0.0.0.0:1-1023\n::0:1-1023" >/etc/authbind/byuid/1001 && \
-    chown -R 1001 /etc/authbind/byport/* /etc/authbind/byuid/1001 && \
+    chown -R 1001:root /etc/authbind/byport/* /etc/authbind/byuid/1001 && \
     chmod 755 /etc/authbind/byport/* /etc/authbind/byuid/1001
-RUN chown -R 1001 /etc/nginx /etc/ingress-controller && \
-    chmod -R g+rwX /opt/bitnami/nginx-ingress-controller
-RUN chown -R 1001 /var/log/nginx && \
-    chown -R 1001 /opt/bitnami/nginx/conf
+RUN chown -R 1001:root /etc/nginx /etc/ingress-controller && \
+    chmod -R g+rwX /opt/bitnami/nginx-ingress-controller /etc/nginx /etc/ingress-controller
+RUN chown -R 1001:root /var/log/nginx && chmod g+rwX -R /var/log/nginx &&\
+    chown -R 1001:root /opt/bitnami/nginx/conf && chmod g+rwX -R /opt/bitnami/nginx/conf
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.22.0-debian-9-r6" \
+    BITNAMI_IMAGE_VERSION="0.22.0-debian-9-r7" \
     PATH="/opt/bitnami/nginx-ingress-controller/bin:$PATH"
 
 EXPOSE 80 443
