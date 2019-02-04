@@ -1,13 +1,13 @@
-FROM bitnami/oraclelinux-extras:7-r244
+FROM bitnami/oraclelinux-extras:7-r250
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libmemcached libpcap libpng libselinux libssh2 libstdc++ libtasn1 libtidy libuv libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
+RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libmemcached libpng libselinux libssh2 libstdc++ libtasn1 libtidy libuv libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.38-0 --checksum 20c206375c7c405daba10fa92616d68991fcf88a3706ad77e35632e30887bda5
 RUN bitnami-pkg install redis-client-4.0.12-20 --checksum 4d5b03ebb6cec20f59271291a6ec7b01546eb09259af0b2cdfb48cfcb9e45967
 RUN bitnami-pkg unpack php-7.1.26-0 --checksum e00fa61ec021232fd46c9d3b2c11bc5e9c5c0fd3e8c26440befcaabe106c2717
 RUN bitnami-pkg install mysql-client-10.1.37-21 --checksum ce01cd40ec8c9612d6a37b75f9f559f7afb4508aa5ceae5f9392aa0d42c928fc
-RUN bitnami-pkg install mongodb-client-3.6.8-20 --checksum 3b0fedcaf46621fa811b96918ee6afbc5fe8d5ebddcdba9f5470088b84827567
+RUN bitnami-pkg install mongodb-client-3.6.10-0 --checksum 2a8f97de69c4ff0e9ad8c0a28c29be28265867ee98efc7ae16d470c45e832dbb
 RUN bitnami-pkg unpack libphp-7.1.26-1 --checksum 36f6223a894f84ad0e680ee498bc3667db1e2bee2f6753b74c4b5152cf683bdd
 RUN bitnami-pkg unpack dreamfactory-2.14.1-20 --checksum a2b9cb6eada686c8a9882c49f2264eedc26645d4f5ef69fdfaaf321cd717e3cd
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
@@ -18,7 +18,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="2.14.1-ol-7-r115" \
+    BITNAMI_IMAGE_VERSION="2.14.1-ol-7-r116" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
     MARIADB_PORT_NUMBER="3306" \
