@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`15-rhel-7`, `15.0.1-rhel-7-r3` (15/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/15.0.1-rhel-7-r3/15/rhel-7/Dockerfile)
 * [`15-ol-7`, `15.0.1-ol-7-r25` (15/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/15.0.1-ol-7-r25/15/ol-7/Dockerfile)
-* [`15-debian-9`, `15.0.1-debian-9-r22`, `15`, `15.0.1`, `15.0.1-r22`, `latest` (15/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/15.0.1-debian-9-r22/15/debian-9/Dockerfile)
+* [`15-debian-9`, `15.0.1-debian-9-r23`, `15`, `15.0.1`, `15.0.1-r23`, `latest` (15/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/15.0.1-debian-9-r23/15/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
