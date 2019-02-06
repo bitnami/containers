@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-rhel-7`, `3.5.2-rhel-7-r10` (3/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.2-rhel-7-r10/3/rhel-7/Dockerfile)
-* [`3-ol-7`, `3.5.2-ol-7-r11` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.2-ol-7-r11/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.5.2-ol-7-r12` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.2-ol-7-r12/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.5.2-debian-9-r11`, `3`, `3.5.2`, `3.5.2-r11`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.2-debian-9-r11/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/neo4j GitHub repo](https://github.com/bitnami/bitnami-docker-neo4j).
