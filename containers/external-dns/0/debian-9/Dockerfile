@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/external-dns-0.5.10-0-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="external-dns" \
-    BITNAMI_IMAGE_VERSION="0.5.10-debian-9-r4" \
+    BITNAMI_IMAGE_VERSION="0.5.10-debian-9-r5" \
     PATH="/opt/bitnami/external-dns/bin:$PATH"
 
 EXPOSE 7979
