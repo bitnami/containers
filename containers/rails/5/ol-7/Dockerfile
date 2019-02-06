@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r251
+FROM bitnami/oraclelinux-extras:7-r252
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="5.2.2-ol-7-r58" \
+    BITNAMI_IMAGE_VERSION="5.2.2-ol-7-r59" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:/opt/bitnami/rails/bin:$PATH" \
     RAILS_ENV="development"
 
