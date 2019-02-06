@@ -14,7 +14,7 @@ RUN bitnami-pkg unpack ghost-2.13.2-0 --checksum abd7e8fafe147db3e45cb44262f4c1c
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="2.13.2-rhel-7-r0" \
+    BITNAMI_IMAGE_VERSION="2.13.2-rhel-7-r1" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
