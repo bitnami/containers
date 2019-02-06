@@ -46,8 +46,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-rhel-7`, `0.16.1-rhel-7-r3` (0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.16.1-rhel-7-r3/0/rhel-7/Dockerfile)
-* [`0-ol-7`, `0.16.1-ol-7-r2` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.16.1-ol-7-r2/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.16.1-debian-9-r3`, `0`, `0.16.1`, `0.16.1-r3`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.16.1-debian-9-r3/0/debian-9/Dockerfile)
+* [`0-ol-7`, `0.16.1-ol-7-r3` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.16.1-ol-7-r3/0/ol-7/Dockerfile)
+* [`0-debian-9`, `0.16.1-debian-9-r4`, `0`, `0.16.1`, `0.16.1-r4`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.16.1-debian-9-r4/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/alertmanager GitHub repo](https://github.com/bitnami/bitnami-docker-alertmanager).
 
