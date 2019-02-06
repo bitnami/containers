@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-rhel-7`, `5.0.3-rhel-7-r23` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.0.3-rhel-7-r23/5/rhel-7/Dockerfile)
+* [`5-rhel-7`, `5.0.3-rhel-7-r24` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.0.3-rhel-7-r24/5/rhel-7/Dockerfile)
 * [`5-ol-7`, `5.0.3-ol-7-r23` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.0.3-ol-7-r23/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.0.3-debian-9-r19`, `5`, `5.0.3`, `5.0.3-r19`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.0.3-debian-9-r19/5/debian-9/Dockerfile)
 
@@ -259,6 +259,7 @@ The WordPress instance can be customized by specifying environment variables on 
 - `WORDPRESS_FIRST_NAME`: WordPress user first name. Default: **FirstName**
 - `WORDPRESS_LAST_NAME`: WordPress user last name. Default: **LastName**
 - `WORDPRESS_BLOG_NAME`: WordPress blog name. Default: **User's blog**
+- `WORDPRESS_HTACESS_OVERRIDE_NONE`: Set the Apache `AllowOverride` variable to `None`. All the default directives will be loaded from `/opt/bitnami/wordpress/wordpress-htaccess.conf`. Default: **yes**.
 
 ##### Use an existing database
 
@@ -442,6 +443,10 @@ $ docker exec wordpress sudo -u daemon -- wp help
 Find more information about parameters available in the tool in the [official documentation](https://make.wordpress.org/cli/handbook/config/).
 
 # Notable Changes
+
+## 5.0.3-r20
+
+- For performance and security reasons, Apache will set the `AllowOverride` directive to `None` by default. This means that, instead of using `.htaccess` files, all the default directives will be moved to the `/opt/bitnami/wordpress/wordpress-htaccess.conf` file. The only downside of this is the compatibility with certain plugins, which would require changes in that file (you would need to mount a modified version of `wordpress-htaccess.conf` compatible with these plugins). If you want to have the default `.htaccess` behavior, set the `WORDPRESS_HTACCESS_OVERRIDE_NONE` env var to `no`.
 
 ## 5.0.0-r0
 
