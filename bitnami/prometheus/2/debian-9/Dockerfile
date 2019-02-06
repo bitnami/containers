@@ -10,7 +10,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.7.1-debian-9-r3" \
+    BITNAMI_IMAGE_VERSION="2.7.1-debian-9-r4" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
