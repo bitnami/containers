@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-runtimes:7-r223
+FROM bitnami/oraclelinux-runtimes:7-r224
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN mkdir -p /bitnami && ln -sf /bitnami/php /bitnami/php-fpm
 RUN mkdir /opt/bitnami/php/logs && touch /opt/bitnami/php/logs/php-fpm.log
 
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="7.2.14-ol-7-r16" \
+    BITNAMI_IMAGE_VERSION="7.2.14-ol-7-r17" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/php/sbin:$PATH"
 
 EXPOSE 9000
