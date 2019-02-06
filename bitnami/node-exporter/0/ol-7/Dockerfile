@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r252
+FROM bitnami/oraclelinux-extras:7-r253
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/node-exporter-0.17.0-20-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="node-exporter" \
-    BITNAMI_IMAGE_VERSION="0.17.0-ol-7-r70" \
+    BITNAMI_IMAGE_VERSION="0.17.0-ol-7-r71" \
     PATH="/opt/bitnami/node-exporter/bin:$PATH"
 
 EXPOSE 9100
