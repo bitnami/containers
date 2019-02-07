@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r253
+FROM bitnami/oraclelinux-extras:7-r254
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 COPY rootfs /
 RUN chmod g+rwX /opt/bitnami/etcd
 ENV BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.3.11-ol-7-r23" \
+    BITNAMI_IMAGE_VERSION="3.3.11-ol-7-r24" \
     ETCD_ADVERTISE_CLIENT_URLS="http://127.0.0.1:2379" \
     ETCD_DATA_DIR="/opt/bitnami/etcd/data/" \
     ETCD_LISTEN_CLIENT_URLS="http://0.0.0.0:2379" \
