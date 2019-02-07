@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/elasticsearch-exporter-1.0.2-20-linux-x86_64-rhel-7.tar.gz
 
 ENV BITNAMI_APP_NAME="elasticsearch-exporter" \
-    BITNAMI_IMAGE_VERSION="1.0.2-rhel-7-r14" \
+    BITNAMI_IMAGE_VERSION="1.0.2-rhel-7-r15" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     NAMI_PREFIX="/.nami" \
