@@ -12,7 +12,7 @@ RUN cp /opt/bitnami/php/etc/php-fpm.d/www.conf.default /opt/bitnami/php/etc/php-
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="5.6.40-rhel-7-r8" \
+    BITNAMI_IMAGE_VERSION="5.6.40-rhel-7-r9" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/php/sbin:$PATH"
 
