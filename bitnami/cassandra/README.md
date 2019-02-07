@@ -43,8 +43,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-rhel-7`, `3.11.3-rhel-7-r5` (3/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-rhel-7-r5/3/rhel-7/Dockerfile)
-* [`3-ol-7`, `3.11.3-ol-7-r184` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-ol-7-r184/3/ol-7/Dockerfile)
+* [`3-rhel-7`, `3.11.3-rhel-7-r6` (3/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-rhel-7-r6/3/rhel-7/Dockerfile)
+* [`3-ol-7`, `3.11.3-ol-7-r185` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-ol-7-r185/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.11.3-debian-9-r177`, `3`, `3.11.3`, `3.11.3-r177`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.3-debian-9-r177/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
