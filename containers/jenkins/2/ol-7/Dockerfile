@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r253
+FROM bitnami/oraclelinux-extras:7-r254
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN mkdir -p /usr/share/jenkins/ref
 COPY rootfs /
 RUN ln -sf /install-plugins.sh /usr/local/bin/install-plugins.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.150.2-ol-7-r19" \
+    BITNAMI_IMAGE_VERSION="2.150.2-ol-7-r20" \
     DISABLE_JENKINS_INITIALIZATION="no" \
     JAVA_OPTS="" \
     JENKINS_HOME="/opt/bitnami/jenkins/jenkins_home" \
