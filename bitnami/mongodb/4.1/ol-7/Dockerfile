@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r253
+FROM bitnami/oraclelinux-extras:7-r254
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.1.7-ol-7-r5" \
+    BITNAMI_IMAGE_VERSION="4.1.7-ol-7-r6" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_DISABLE_SYSTEM_LOG="no" \
