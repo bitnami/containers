@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r153
+FROM bitnami/minideb-extras-base:stretch-r154
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "elasticsearch" "6.6.0-0" --checksum
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="6.6.0-debian-9-r3" \
+    BITNAMI_IMAGE_VERSION="6.6.0-debian-9-r4" \
     ELASTICSEARCH_BIND_ADDRESS="" \
     ELASTICSEARCH_CLUSTER_HOSTS="" \
     ELASTICSEARCH_CLUSTER_NAME="elasticsearch-cluster" \
