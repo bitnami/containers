@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r276
+FROM bitnami/minideb-extras:stretch-r277
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN mkdir -p /opt/bitnami/rabbitmq/.rabbitmq && mkdir -p /opt/bitnami/rabbitmq/v
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.7.11-debian-9-r3" \
+    BITNAMI_IMAGE_VERSION="3.7.11-debian-9-r4" \
     PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:/opt/bitnami/rabbitmq/sbin:$PATH" \
     RABBITMQ_CLUSTER_NODE_NAME="" \
     RABBITMQ_CLUSTER_PARTITION_HANDLING="ignore" \
