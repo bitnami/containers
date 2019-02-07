@@ -1,10 +1,10 @@
-FROM bitnami/oraclelinux-extras:7-r253
+FROM bitnami/oraclelinux-extras:7-r254
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.38-1 --checksum e1622f1e16e595c1758123c494d45adbfe7a9f40924f8181241f723cd641bb6c
-RUN bitnami-pkg unpack php-7.1.26-0 --checksum e00fa61ec021232fd46c9d3b2c11bc5e9c5c0fd3e8c26440befcaabe106c2717
+RUN bitnami-pkg unpack php-7.1.26-1 --checksum bb6c5191cd6de813a204e5d0daf344ff199f36978a8b6b6f6a754980810a6f02
 RUN bitnami-pkg unpack libphp-7.1.26-1 --checksum 36f6223a894f84ad0e680ee498bc3667db1e2bee2f6753b74c4b5152cf683bdd
 RUN bitnami-pkg unpack phpmyadmin-4.8.5-0 --checksum fa6e22dd9dd5d8043f07359e70dfe01682cdafc423209a3858cc2b13e6d9f2b7
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
@@ -15,7 +15,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="4.8.5-ol-7-r7" \
+    BITNAMI_IMAGE_VERSION="4.8.5-ol-7-r8" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
     PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH" \
