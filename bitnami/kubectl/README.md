@@ -28,11 +28,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.13-rhel-7`, `1.13.3-rhel-7-r5` (1.13/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.3-rhel-7-r5/1.13/rhel-7/Dockerfile)
-* [`1.13-ol-7`, `1.13.3-ol-7-r5` (1.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.3-ol-7-r5/1.13/ol-7/Dockerfile)
+* [`1.13-ol-7`, `1.13.3-ol-7-r6` (1.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.3-ol-7-r6/1.13/ol-7/Dockerfile)
 * [`1.13-debian-9`, `1.13.3-debian-9-r5`, `1.13`, `1.13.3`, `1.13.3-r5`, `latest` (1.13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.3-debian-9-r5/1.13/debian-9/Dockerfile)
-* [`1.12-ol-7`, `1.12.5-ol-7-r17` (1.12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.5-ol-7-r17/1.12/ol-7/Dockerfile)
+* [`1.12-ol-7`, `1.12.5-ol-7-r18` (1.12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.5-ol-7-r18/1.12/ol-7/Dockerfile)
 * [`1.12-debian-9`, `1.12.5-debian-9-r17`, `1.12`, `1.12.5`, `1.12.5-r17` (1.12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.5-debian-9-r17/1.12/debian-9/Dockerfile)
-* [`1.11-ol-7`, `1.11.7-ol-7-r10` (1.11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.11.7-ol-7-r10/1.11/ol-7/Dockerfile)
+* [`1.11-ol-7`, `1.11.7-ol-7-r11` (1.11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.11.7-ol-7-r11/1.11/ol-7/Dockerfile)
 * [`1.11-debian-9`, `1.11.7-debian-9-r10`, `1.11`, `1.11.7`, `1.11.7-r10` (1.11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.11.7-debian-9-r10/1.11/debian-9/Dockerfile)
 * [`1.10-ol-7`, `1.10.12-ol-7-r44` (1.10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.10.12-ol-7-r44/1.10/ol-7/Dockerfile)
 * [`1.10-debian-9`, `1.10.12-debian-9-r44`, `1.10`, `1.10.12`, `1.10.12-r44` (1.10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.10.12-debian-9-r44/1.10/debian-9/Dockerfile)
