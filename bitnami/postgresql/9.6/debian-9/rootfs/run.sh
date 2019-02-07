@@ -15,6 +15,20 @@ if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.
     fi
     psql=( psql --username postgres )
     nami start postgresql > /dev/null
+    info "Initialization: Waiting for PostgreSQL to be available"
+    postgresql_available=0
+    for i in {1..60}; do
+        debug "Attempt $i"
+        if grep "is ready to accept connections" /opt/bitnami/postgresql/logs/postgresql.log > /dev/null; then
+            postgresql_available=1
+            break
+        fi
+        sleep 10
+    done
+    if [[ $postgresql_available == 0 ]]; then
+        echo "Error: PostgreSQL is not available after 600 seconds" 
+        exit 1
+    fi
     for f in /docker-entrypoint-initdb.d/*; do
         case "$f" in
             *.sh)
