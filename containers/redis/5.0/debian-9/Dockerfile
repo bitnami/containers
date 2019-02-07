@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r153
+FROM bitnami/minideb-extras-base:stretch-r154
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.3-debian-9-r48" \
+    BITNAMI_IMAGE_VERSION="5.0.3-debian-9-r49" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
