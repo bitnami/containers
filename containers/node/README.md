@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`11-rhel-7`, `11.9.0-rhel-7-r4` (11/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.9.0-rhel-7-r4/11/rhel-7/Dockerfile)
-* [`11-ol-7`, `11.9.0-ol-7-r5` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.9.0-ol-7-r5/11/ol-7/Dockerfile)
+* [`11-ol-7`, `11.9.0-ol-7-r6` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.9.0-ol-7-r6/11/ol-7/Dockerfile)
 * [`11-ol-7-prod`, `11.9.0-ol-7-r3-prod` (11-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.9.0-ol-7-r3-prod/11-prod/ol-7/Dockerfile)
 * [`11-debian-9`, `11.9.0-debian-9-r4`, `11`, `11.9.0`, `11.9.0-r4` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.9.0-debian-9-r4/11/debian-9/Dockerfile)
 * [`11-debian-9-prod`, `11.9.0-debian-9-r3-prod`, `11-prod`, `11.9.0-prod`, `11.9.0-r3-prod` (11-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.9.0-debian-9-r3-prod/11-prod/debian-9/Dockerfile)
