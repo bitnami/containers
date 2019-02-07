@@ -46,8 +46,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-rhel-7`, `1.5.12-rhel-7-r6` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.12-rhel-7-r6/1/rhel-7/Dockerfile)
-* [`1-ol-7`, `1.5.12-ol-7-r94` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.12-ol-7-r94/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.5.12-debian-9-r77`, `1`, `1.5.12`, `1.5.12-r77`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.12-debian-9-r77/1/debian-9/Dockerfile)
+* [`1-ol-7`, `1.5.12-ol-7-r93` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.12-ol-7-r93/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.5.12-debian-9-r78`, `1`, `1.5.12`, `1.5.12-r78`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.12-debian-9-r78/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/memcached GitHub repo](https://github.com/bitnami/bitnami-docker-memcached).
 
