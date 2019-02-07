@@ -10,7 +10,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 RUN chown -R 1001:root /opt/bitnami/metrics-server && chmod -R g+rwX /opt/bitnami/metrics-server
 ENV BITNAMI_APP_NAME="metrics-server" \
-    BITNAMI_IMAGE_VERSION="0.3.1-rhel-7-r6" \
+    BITNAMI_IMAGE_VERSION="0.3.1-rhel-7-r7" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     NAMI_PREFIX="/.nami" \
