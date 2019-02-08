@@ -41,8 +41,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-ol-7`, `4.16.4-ol-7-r119` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.16.4-ol-7-r119/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.16.4-debian-9-r110`, `4`, `4.16.4`, `4.16.4-r110`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.16.4-debian-9-r110/4/debian-9/Dockerfile)
+* [`4-ol-7`, `4.16.4-ol-7-r120` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.16.4-ol-7-r120/4/ol-7/Dockerfile)
+* [`4-debian-9`, `4.16.4-debian-9-r109`, `4`, `4.16.4`, `4.16.4-r109`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.16.4-debian-9-r109/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-codiad).
 
