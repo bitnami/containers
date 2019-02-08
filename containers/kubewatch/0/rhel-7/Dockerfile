@@ -11,7 +11,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 COPY rootfs /
 RUN chown -R 1001:root /opt/bitnami/kubewatch/ && chmod g+rwX /opt/bitnami/kubewatch/
 ENV BITNAMI_APP_NAME="kubewatch" \
-    BITNAMI_IMAGE_VERSION="0.0.4-rhel-7-r16" \
+    BITNAMI_IMAGE_VERSION="0.0.4-rhel-7-r17" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     KW_CONFIG="/opt/bitnami/kubewatch" \
