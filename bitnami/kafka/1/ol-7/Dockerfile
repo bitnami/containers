@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r254
+FROM bitnami/oraclelinux-extras:7-r255
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack kafka-1.1.1-23 --checksum 32e7c0844ed17979e0c395b8724ff50
 COPY rootfs /
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="1.1.1-ol-7-r184" \
+    BITNAMI_IMAGE_VERSION="1.1.1-ol-7-r185" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_BROKER_ID="-1" \
     KAFKA_BROKER_PASSWORD="bitnami" \
