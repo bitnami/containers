@@ -11,7 +11,7 @@ RUN mkdir -p /bitnami && ln -sf /bitnami/php /bitnami/php-fpm
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="5.6.40-rhel-7-r11" \
+    BITNAMI_IMAGE_VERSION="5.6.40-rhel-7-r12" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/php/sbin:$PATH"
 
