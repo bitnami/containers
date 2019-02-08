@@ -6,13 +6,12 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
-    if ! getent passwd "$(id -u)" &> /dev/null && [ -e /usr/lib/libnss_wrapper.so ]; then
-    export LD_PRELOAD='/usr/lib/libnss_wrapper.so'
-    export NSS_WRAPPER_PASSWD='/opt/bitnami/airflow/nss_passwd'
-    export NSS_WRAPPER_GROUP='/opt/bitnami/airflow/nss_group'
+  if [ ! $EUID -eq 0 ] && ! getent passwd "$(id -u)" &> /dev/null && [ -e /usr/lib/libnss_wrapper.so ]; then
     echo "airflow:x:$(id -u):$(id -g):Airflow:$AIRFLOW_HOME:/bin/false" > "$NSS_WRAPPER_PASSWD"
     echo "airflow:x:$(id -g):" > "$NSS_WRAPPER_GROUP"
-  fi
+else
+    unset LD_PRELOAD
+fi
 
   nami_initialize airflow-scheduler
   info "Starting airflow-scheduler... "
