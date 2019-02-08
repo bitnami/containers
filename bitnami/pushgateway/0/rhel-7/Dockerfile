@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/pushgateway-0.7.0-20-linux-x86_64-rhel-7.tar.gz
 
 ENV BITNAMI_APP_NAME="pushgateway" \
-    BITNAMI_IMAGE_VERSION="0.7.0-rhel-7-r15" \
+    BITNAMI_IMAGE_VERSION="0.7.0-rhel-7-r16" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     NAMI_PREFIX="/.nami" \
