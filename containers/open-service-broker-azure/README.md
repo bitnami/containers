@@ -48,7 +48,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-9`, `1.4.0-debian-9-r12`, `1`, `1.4.0`, `1.4.0-r12`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/1.4.0-debian-9-r12/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.4.0-debian-9-r13`, `1`, `1.4.0`, `1.4.0-r13`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/1.4.0-debian-9-r13/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/open-service-broker-azure GitHub repo](https://github.com/bitnami/bitnami-docker-open-service-broker-azure).
 
