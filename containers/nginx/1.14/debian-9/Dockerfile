@@ -18,7 +18,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.14.2-debian-9-r58" \
+    BITNAMI_IMAGE_VERSION="1.14.2-debian-9-r59" \
     NAMI_PREFIX="/.nami" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
