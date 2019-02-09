@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/oauth2-proxy-3.0.0-0-linux-x86_64-rhel-7.tar.gz
 
 ENV BITNAMI_APP_NAME="oauth2-proxy" \
-    BITNAMI_IMAGE_VERSION="3.0.0-rhel-7-r6" \
+    BITNAMI_IMAGE_VERSION="3.0.0-rhel-7-r7" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     NAMI_PREFIX="/.nami" \
