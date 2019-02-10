@@ -10,7 +10,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 RUN mkdir -p /opt/bitnami/alertmanager/data/ && chmod g+rwX /opt/bitnami/alertmanager/data/
 ENV BITNAMI_APP_NAME="alertmanager" \
-    BITNAMI_IMAGE_VERSION="0.16.1-rhel-7-r8" \
+    BITNAMI_IMAGE_VERSION="0.16.1-rhel-7-r9" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     NAMI_PREFIX="/.nami" \
