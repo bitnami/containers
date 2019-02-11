@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/open-service-broker-azure-1.4.0-0-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="open-service-broker-azure" \
-    BITNAMI_IMAGE_VERSION="1.4.0-debian-9-r13" \
+    BITNAMI_IMAGE_VERSION="1.4.0-debian-9-r14" \
     PATH="/opt/bitnami/open-service-broker-azure/bin:$PATH"
 
 EXPOSE 8080
