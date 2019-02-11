@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r277
+FROM bitnami/minideb-extras:stretch-r281
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN chmod -R g+rwX /opt/bitnami/cassandra/conf/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.3-debian-9-r178" \
+    BITNAMI_IMAGE_VERSION="3.11.3-debian-9-r179" \
     CASSANDRA_CLIENT_ENCRYPTION="false" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
