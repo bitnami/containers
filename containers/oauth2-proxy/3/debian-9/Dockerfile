@@ -3,13 +3,13 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/oauth2-proxy-3.0.0-0-linux-amd64-debian-9.tar.gz && \
-    echo "355ebd17a1572e18d9b1789c9f7b303feee404d901f042da0ffcc83283651f9b  /tmp/bitnami/pkg/cache/oauth2-proxy-3.0.0-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/oauth2-proxy-3.0.0-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/oauth2-proxy-3.0.0-0-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/oauth2-proxy-3.1.0-0-linux-amd64-debian-9.tar.gz && \
+    echo "eafb9fa30796454dee5462efa139f38e871915a44495d85b95d40cb198d2cbb6  /tmp/bitnami/pkg/cache/oauth2-proxy-3.1.0-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/oauth2-proxy-3.1.0-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/oauth2-proxy-3.1.0-0-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="oauth2-proxy" \
-    BITNAMI_IMAGE_VERSION="3.0.0-debian-9-r5" \
+    BITNAMI_IMAGE_VERSION="3.1.0-debian-9-r0" \
     PATH="/opt/bitnami/oauth2-proxy/bin:$PATH"
 
 EXPOSE 8080 4180
