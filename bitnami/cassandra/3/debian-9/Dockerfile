@@ -14,7 +14,7 @@ RUN chmod -R g+rwX /opt/bitnami/cassandra/conf/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.4-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="3.11.4-debian-9-r2" \
     CASSANDRA_CLIENT_ENCRYPTION="false" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
