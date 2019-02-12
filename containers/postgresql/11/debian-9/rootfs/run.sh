@@ -29,7 +29,9 @@ if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.
         echo "Error: PostgreSQL is not available after 600 seconds" 
         exit 1
     fi
-    for f in /docker-entrypoint-initdb.d/*; do
+    tmp_file=/tmp/filelist
+    find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)" > $tmp_file
+    while read -r f; do
         case "$f" in
             *.sh)
                 if [ -x "$f" ]; then
@@ -42,7 +44,8 @@ if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.
             *.sql.gz) echo "Executing $f"; gunzip -c "$f" | "${psql[@]}"; echo ;;
             *)        echo "Ignoring $f" ;;
         esac
-    done
+    done < $tmp_file
+    rm $tmp_file
     touch /bitnami/postgresql/.user_scripts_initialized
     nami stop postgresql > /dev/null
 fi
