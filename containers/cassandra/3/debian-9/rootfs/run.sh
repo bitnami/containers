@@ -42,7 +42,9 @@ if [[ -z $CASSANDRA_IGNORE_INITDB_SCRIPTS ]] && [[ -n $(find /docker-entrypoint-
         exit 1
     fi
     info "Loading user files from /docker-entrypoint-initdb.d";
-    for f in /docker-entrypoint-initdb.d/*; do
+    tmp_file=/tmp/filelist
+    find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|cql\)" > $tmp_file
+    while read -r f; do
         case "$f" in
             *.sh)
                 if [ -x "$f" ]; then
@@ -54,7 +56,8 @@ if [[ -z $CASSANDRA_IGNORE_INITDB_SCRIPTS ]] && [[ -n $(find /docker-entrypoint-
             *.cql)    echo "Executing $f"; "${cmd[@]}" -f "$f"; echo ;;
             *)        echo "Ignoring $f" ;;
         esac
-    done
+    done < $tmp_file
+    rm $tmp_file
     touch /bitnami/cassandra/.user_scripts_initialized
 fi
 
