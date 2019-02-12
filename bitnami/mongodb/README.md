@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`4.0-debian-9`, `4.0.6-debian-9-r4`, `4.0`, `4.0.6`, `4.0.6-r4`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.6-debian-9-r4/4.0/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.5-ol-7-r7` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.5-ol-7-r7/4.0/ol-7/Dockerfile)
 * [`3.6-ol-7`, `3.6.10-ol-7-r8` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.10-ol-7-r8/3.6/ol-7/Dockerfile)
-* [`3.6-debian-9`, `3.6.10-debian-9-r6`, `3.6`, `3.6.10`, `3.6.10-r6` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.10-debian-9-r6/3.6/debian-9/Dockerfile)
+* [`3.6-debian-9`, `3.6.10-debian-9-r7`, `3.6`, `3.6.10`, `3.6.10-r7` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.10-debian-9-r7/3.6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
@@ -280,7 +280,7 @@ The `root` user is configured to have full administrative access to the MongoDB 
 
 ## Creating a user and database on first run
 
-You can create a user with restricted access to a database while starting the container for the first time. To do this, provide the `MONGODB_USERNAME`, `MONGO_PASSWORD` and `MONGODB_DATABASE` environment variables.
+You can create a user with restricted access to a database while starting the container for the first time. To do this, provide the `MONGODB_USERNAME`, `MONGODB_PASSWORD` and `MONGODB_DATABASE` environment variables.
 
 ```bash
 $ docker run --name mongodb \
