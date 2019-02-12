@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r258
+FROM bitnami/oraclelinux-extras:7-r259
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -30,7 +30,7 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_HOST="127.0.0.1" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="airflow" \
-    BITNAMI_IMAGE_VERSION="1.10.2-ol-7-r6" \
+    BITNAMI_IMAGE_VERSION="1.10.2-ol-7-r7" \
     LD_LIBRARY_PATH="/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
     LD_PRELOAD="/usr/lib64/libnss_wrapper.so" \
     LNAME="airflow" \
