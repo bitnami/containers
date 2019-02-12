@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r258
+FROM bitnami/oraclelinux-extras:7-r259
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -13,7 +13,7 @@ RUN chmod -R g+rwX /opt/bitnami/postgresql/conf/
 COPY rootfs /
 RUN rpm -Uvh --nodeps $(repoquery --location nss_wrapper)
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="9.6.11-ol-7-r100" \
+    BITNAMI_IMAGE_VERSION="9.6.11-ol-7-r101" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/postgresql/bin:$PATH" \
     POSTGRESQL_CLUSTER_APP_NAME="walreceiver" \
