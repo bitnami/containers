@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/node-exporter-0.17.0-20-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="node-exporter" \
-    BITNAMI_IMAGE_VERSION="0.17.0-debian-9-r73" \
+    BITNAMI_IMAGE_VERSION="0.17.0-debian-9-r74" \
     PATH="/opt/bitnami/node-exporter/bin:$PATH"
 
 EXPOSE 9100
