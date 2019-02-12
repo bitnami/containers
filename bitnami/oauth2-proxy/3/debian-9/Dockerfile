@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/oauth2-proxy-3.1.0-0-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="oauth2-proxy" \
-    BITNAMI_IMAGE_VERSION="3.1.0-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="3.1.0-debian-9-r1" \
     PATH="/opt/bitnami/oauth2-proxy/bin:$PATH"
 
 EXPOSE 8080 4180
