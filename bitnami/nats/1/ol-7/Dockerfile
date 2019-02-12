@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r258
+FROM bitnami/oraclelinux-extras:7-r259
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 COPY rootfs /
 RUN chown -R 1001:root /opt/bitnami/nats && chmod g+rwX /opt/bitnami/nats
 ENV BITNAMI_APP_NAME="nats" \
-    BITNAMI_IMAGE_VERSION="1.4.1-ol-7-r2" \
+    BITNAMI_IMAGE_VERSION="1.4.1-ol-7-r3" \
     PATH="/opt/bitnami/nats/bin:$PATH"
 
 EXPOSE 4222 6222 8222
