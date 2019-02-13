@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r282
+FROM bitnami/minideb-extras:stretch-r283
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN bitnami-pkg install symfony-1.5.11-20 --checksum e512f0bbcf6c8a6c01f87adcb8f
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="symfony" \
-    BITNAMI_IMAGE_VERSION="1.5.11-debian-9-r199" \
+    BITNAMI_IMAGE_VERSION="1.5.11-debian-9-r200" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_USER="root" \
