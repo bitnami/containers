@@ -1,4 +1,5 @@
 {
+  "baseUrl": "{{$global.env.AIRFLOW_BASE_URl}}",
   "databaseName": "{{$global.env.AIRFLOW_DATABASE_NAME}}",
   "databaseServerHost": "{{$global.env.AIRFLOW_DATABASE_HOST}}",
   "databaseServerPort": "{{$global.env.AIRFLOW_DATABASE_PORT_NUMBER}}",
@@ -10,7 +11,9 @@
   "fernetKey": "{{$global.env.AIRFLOW_FERNET_KEY}}",
   "firstname": "{{$global.env.AIRFLOW_FIRSTNAME}}",
   "host": "{{$global.env.AIRFLOW_WEBSERVER_HOST}}",
+  "hostnameCallable": "{{$global.env.AIRFLOW_HOSTNAME_CALLABLE}}",
   "lastname": "{{$global.env.AIRFLOW_LASTNAME}}",
+  "loadExamples": "{{$global.env.AIRFLOW_LOAD_EXAMPLES}}",
   "password": "{{$global.env.AIRFLOW_PASSWORD}}",
   "redisHost": "{{$global.env.REDIS_HOST}}",
   "redisPassword": "{{$global.env.REDIS_PASSWORD}}",
