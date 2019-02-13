@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`1.14-rhel-7`, `1.14.2-rhel-7-r19` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.2-rhel-7-r19/1.14/rhel-7/Dockerfile)
 * [`1.14-ol-7`, `1.14.2-ol-7-r69` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.2-ol-7-r69/1.14/ol-7/Dockerfile)
-* [`1.14-debian-9`, `1.14.2-debian-9-r61`, `1.14`, `1.14.2`, `1.14.2-r61`, `latest` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.2-debian-9-r61/1.14/debian-9/Dockerfile)
+* [`1.14-debian-9`, `1.14.2-debian-9-r62`, `1.14`, `1.14.2`, `1.14.2-r62`, `latest` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.2-debian-9-r62/1.14/debian-9/Dockerfile)
 
 
 # Get this image
