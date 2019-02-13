@@ -9,6 +9,7 @@
   "databaseUserPassword": "{{$global.env.AIRFLOW_DATABASE_PASSWORD}}",
   "executor": "{{$global.env.AIRFLOW_EXECUTOR}}",
   "fernetKey": "{{$global.env.AIRFLOW_FERNET_KEY}}",
+  "hostnameCallable": "{{$global.env.AIRFLOW_HOSTNAME_CALLABLE}}",
   "loadExamples": "{{$global.env.AIRFLOW_LOAD_EXAMPLES}}",
   "redisHost": "{{$global.env.REDIS_HOST}}",
   "redisPassword": "{{$global.env.REDIS_PASSWORD}}",
