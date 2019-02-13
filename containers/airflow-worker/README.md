@@ -30,7 +30,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.10.2-ol-7-r2` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.2-ol-7-r2/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.10.2-ol-7-r3` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.2-ol-7-r3/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.10.2-debian-9-r7`, `1`, `1.10.2`, `1.10.2-r7`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.2-debian-9-r7/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-worker).
@@ -364,10 +364,11 @@ The Airflow Worker instance can be customized by specifying environment variable
 ##### Airflow Worker configuration
 
 - `AIRFLOW_EXECUTOR`: Airflow Worker executor. Default: **SequentialExecutor**
-- `AIRFLOW_FERNET_KEY`: Airflow Worker Fernet key. No defaults
+- `AIRFLOW_FERNET_KEY`: Airflow Worker Fernet key. No defaults.
 - `AIRFLOW_WEBSERVER_HOST`: Airflow Worker webserver host. Default: **127.0.0.1**
 - `AIRFLOW_WEBSERVER_PORT_NUMBER`: Airflow Worker webserver port. Default: **8080**
 - `AIRFLOW_LOAD_EXAMPLES`: To load example tasks into the application. Default: **yes**
+- `AIRFLOW_HOSTNAME_CALLABLE`: Method to obtain the hostname. No defaults.
 
 ##### Use an existing database
 
