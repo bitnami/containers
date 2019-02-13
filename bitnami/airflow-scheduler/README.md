@@ -31,7 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.10.2-ol-7-r2` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-scheduler/blob/1.10.2-ol-7-r2/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.10.2-debian-9-r7`, `1`, `1.10.2`, `1.10.2-r7`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-scheduler/blob/1.10.2-debian-9-r7/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.10.2-debian-9-r8`, `1`, `1.10.2`, `1.10.2-r8`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-scheduler/blob/1.10.2-debian-9-r8/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-scheduler).
 
@@ -364,10 +364,11 @@ The Airflow Scheduler instance can be customized by specifying environment varia
 ##### Airflow Scheduler configuration
 
 - `AIRFLOW_EXECUTOR`: Airflow Scheduler executor. Default: **SequentialExecutor**
-- `AIRFLOW_FERNET_KEY`: Airflow Scheduler Fernet key. No defaults
+- `AIRFLOW_FERNET_KEY`: Airflow Scheduler Fernet key. No defaults.
 - `AIRFLOW_WEBSERVER_HOST`: Airflow Scheduler webserver host. Default: **127.0.0.1**
 - `AIRFLOW_WEBSERVER_PORT_NUMBER`: Airflow Scheduler webserver port. Default: **8080**
 - `AIRFLOW_LOAD_EXAMPLES`: To load example tasks into the application. Default: **yes**
+- `AIRFLOW_HOSTNAME_CALLABLE`: Method to obtain the hostname. No defaults.
 
 ##### Use an existing database
 
