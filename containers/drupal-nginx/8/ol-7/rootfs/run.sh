@@ -6,7 +6,7 @@
 NGINX_INSTALLDIR="/opt/bitnami/nginx"
 NGINX_CONF_DIR="${NGINX_INSTALLDIR}/conf"
 PHP_INSTALLDIR="/opt/bitnami/php"
-PHP_CONF_DIR="${PHP_INSTALLDIR}/conf"
+PHP_CONF_DIR="${PHP_INSTALLDIR}/etc"
 PHP_TEMP_DIR="${PHP_INSTALLDIR}/tmp"
 
 _forwardTerm () {
