@@ -1,20 +1,23 @@
-FROM bitnami/minideb-extras:stretch-r276
+FROM bitnami/minideb-extras:stretch-r284
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmemcached11 libmemcachedutil2 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5 libtinfo5 libunistring0 libxml2 libxslt1.1 zlib1g
 RUN bitnami-pkg unpack nginx-1.14.2-21 --checksum 73c924db078bebc7173aa5a596036285d1da41cbe985d1e4cc024f681e6dca52
-RUN bitnami-pkg unpack php-7.2.14-0 --checksum 6545e143a815e52e1b03a031f33323a6a287530b8003cbcdb4da149bf87cdee6
+RUN bitnami-pkg unpack php-7.2.15-1 --checksum c81399c1a91bbde88c8c83618c9f9482abbde21835171c5ce421239ad5ff44ab
 RUN bitnami-pkg install wp-cli-2.1.0-0 --checksum c44d62b19aa37754b55dc040b6e9fb50589ae2a3dac9e6c604653cf7a4f80893
-RUN bitnami-pkg unpack mysql-client-10.2.21-0 --checksum 4accf2a3b8e399feb092e20bf9210dadd8a99ca1aa623a1ee161025437d980c7
-RUN bitnami-pkg unpack wordpress-5.0.3-2 --checksum f5efce2db7209bf8458dfa991bb3e428282db2de84bdc1c68d7e638ea1d76746
+RUN bitnami-pkg unpack mysql-client-10.2.22-0 --checksum 6ad851ee27c7cb10ed003d249c8094a85462ae90ef8b4145a3480c29fdfb31a9
+RUN bitnami-pkg unpack wordpress-5.0.3-5 --checksum b655b0c2d11ded11a92f997039bbf32893a8a921a8bf1da8d47f8d43ca2c9505
+RUN mkdir -p /opt/bitnami/php/logs && chown daemon /opt/bitnami/php/logs && \
+    mkdir -p /opt/bitnami/php/tmp && chown daemon /opt/bitnami/php/tmp && \
+    ln -sf /opt/bitnami/php/etc /opt/bitnami/php/conf
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="5.0.3-debian-9-r24" \
+    BITNAMI_IMAGE_VERSION="5.0.3-debian-9-r25" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
