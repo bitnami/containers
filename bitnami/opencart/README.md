@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.0.3-1-ol-7-r27` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-1-ol-7-r27/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.0.3-1-debian-9-r24`, `3`, `3.0.3-1`, `3.0.3-1-r24`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-1-debian-9-r24/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.0.3-1-debian-9-r25`, `3`, `3.0.3-1`, `3.0.3-1-r25`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-1-debian-9-r25/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/opencart GitHub repo](https://github.com/bitnami/bitnami-docker-opencart).
 
