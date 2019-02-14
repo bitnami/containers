@@ -1,8 +1,8 @@
-FROM bitnami/ruby:2.4.5-ol-7-r102 as development
+FROM bitnami/ruby:2.4.5-ol-7-r103 as development
 
 ######
 
-FROM bitnami/oraclelinux-runtimes:7-r232
+FROM bitnami/oraclelinux-runtimes:7-r233
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN install_packages ca-certificates glibc keyutils-libs krb5-libs libcom_err li
 COPY --from=development /opt/bitnami/ruby /opt/bitnami/ruby
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.4.5-ol-7-r8-prod" \
+    BITNAMI_IMAGE_VERSION="2.4.5-ol-7-r9-prod" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 CMD [ "irb" ]
