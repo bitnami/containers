@@ -12,7 +12,7 @@ RUN mkdir /opt/bitnami/php/logs && touch /opt/bitnami/php/logs/php-fpm.log
 RUN chown -R 1001:root /opt/bitnami/php/logs
 
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="7.2.15-rhel-7-r4" \
+    BITNAMI_IMAGE_VERSION="7.2.15-rhel-7-r5" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     NAMI_PREFIX="/.nami" \
