@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/external-dns-0.5.11-0-linux-x86_64-rhel-7.tar.gz
 
 ENV BITNAMI_APP_NAME="external-dns" \
-    BITNAMI_IMAGE_VERSION="0.5.11-rhel-7-r3" \
+    BITNAMI_IMAGE_VERSION="0.5.11-rhel-7-r4" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     NAMI_PREFIX="/.nami" \
