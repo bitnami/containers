@@ -10,7 +10,7 @@ RUN bitnami-pkg install java-11.0.2-0 --checksum fe79561c4dd339f9d68f633237b47b0
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="11.0.2-rhel-7-r9" \
+    BITNAMI_IMAGE_VERSION="11.0.2-rhel-7-r10" \
     JAVA_HOME="/opt/bitnami/java" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:$PATH"
