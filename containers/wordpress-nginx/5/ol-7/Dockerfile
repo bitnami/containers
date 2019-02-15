@@ -1,20 +1,23 @@
-FROM bitnami/oraclelinux-extras:7-r253
+FROM bitnami/oraclelinux-extras:7-r261
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline xz-libs zlib
 RUN bitnami-pkg unpack nginx-1.14.2-21 --checksum d4d907cc0c038a32cb7fe0d681552f469a5d6c2af51d12fe83c710f250c2e463
-RUN bitnami-pkg unpack php-7.2.14-0 --checksum dc9be0784a6afbd77743868dee1f951f3f95ac8941e7fbfdbb470ce8c8dc6e02
+RUN bitnami-pkg unpack php-7.2.15-1 --checksum 1828a0ae4c02cfea55b5d6836a989f59a7da2b2bc705e078b0c432caf53e029c
 RUN bitnami-pkg install wp-cli-2.1.0-0 --checksum 536326bfad2bd930b24e8dda405ce4a27545822b5bf0e7bd8a049f3cc9641cf7
-RUN bitnami-pkg unpack mysql-client-10.1.37-21 --checksum ce01cd40ec8c9612d6a37b75f9f559f7afb4508aa5ceae5f9392aa0d42c928fc
-RUN bitnami-pkg unpack wordpress-5.0.3-2 --checksum 4113c90a875b14559f9dbbfc3755af35124acabc723f0d587f18ba34473586ee
+RUN bitnami-pkg unpack mysql-client-10.1.38-0 --checksum 8140732986832471cc54aede727b66729811a0fa79e6fa86c7c791ce1f513451
+RUN bitnami-pkg unpack wordpress-5.0.3-5 --checksum 8677b8ed81e776e4b3bf5c81f0c1696f11d4459ea175b5eebc9fa01aabc6ab4f
+RUN mkdir -p /opt/bitnami/php/logs && chown daemon /opt/bitnami/php/logs && \
+    mkdir -p /opt/bitnami/php/tmp && chown daemon /opt/bitnami/php/tmp && \
+    ln -sf /opt/bitnami/php/etc /opt/bitnami/php/conf
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="5.0.3-ol-7-r24" \
+    BITNAMI_IMAGE_VERSION="5.0.3-ol-7-r25" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
