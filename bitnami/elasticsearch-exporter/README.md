@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`1-rhel-7`, `1.0.2-rhel-7-r24` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-rhel-7-r24/1/rhel-7/Dockerfile)
 * [`1-ol-7`, `1.0.2-ol-7-r215` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-ol-7-r215/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.0.2-debian-9-r208`, `1`, `1.0.2`, `1.0.2-r208`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-debian-9-r208/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.0.2-debian-9-r209`, `1`, `1.0.2`, `1.0.2-r209`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-debian-9-r209/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter).
 # Get this image
