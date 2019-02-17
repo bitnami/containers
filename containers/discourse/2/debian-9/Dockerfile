@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r286
+FROM bitnami/minideb-extras:stretch-r287
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack discourse-2.2.1-0 --checksum 5ec81f64666ff8716d19cf9c7e2a
 COPY rootfs /
 RUN install_packages rsync
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.2.1-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="2.2.1-debian-9-r2" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_EXTERNAL_PORT_NUMBER="80" \
     DISCOURSE_HOST="127.0.0.1" \
