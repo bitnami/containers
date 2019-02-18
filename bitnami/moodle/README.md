@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.6.2-ol-7-r33` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.6.2-ol-7-r33/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.6.2-debian-9-r29`, `3`, `3.6.2`, `3.6.2-r29`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.6.2-debian-9-r29/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.6.2-debian-9-r30`, `3`, `3.6.2`, `3.6.2-r30`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.6.2-debian-9-r30/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
