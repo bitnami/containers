@@ -11,7 +11,7 @@ RUN install_packages bzip2-libs ca-certificates glibc keyutils-libs krb5-libs li
 COPY --from=development /opt/bitnami/python /opt/bitnami/python
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="3.6.8-ol-7-r17-prod" \
+    BITNAMI_IMAGE_VERSION="3.6.8-ol-7-r18-prod" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 CMD [ "python" ]
