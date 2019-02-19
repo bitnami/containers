@@ -58,7 +58,9 @@ if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|js\)") ]]
         mongo=( mongo admin --host localhost --quiet )
     fi
 
-    for f in /docker-entrypoint-initdb.d/*; do
+    tmp_file=/tmp/filelist
+    find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|js\)" > $tmp_file
+    while read -r f; do
         case "$f" in
             *.sh)
                 if [ -x "$f" ]; then
@@ -70,7 +72,8 @@ if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|js\)") ]]
             *.js)   echo "Executing $f"; "${mongo[@]}" "$f"; echo ;;
             *)      echo "Ignoring $f" ;;
         esac
-    done
+    done < $tmp_file
+    rm $tmp_file
     touch /bitnami/mongodb/.user_scripts_initialized
     if ! ${EXEC} --dbpath="$dbpath" --pidfilepath="$pidfile" --shutdown || ! rm -f "$pidfile"; then
         echo >&2 'MongoDB init process failed.'
