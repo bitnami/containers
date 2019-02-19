@@ -6,9 +6,9 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libbsd0 libbz2-1.0 libc6 libcomerr2 libedit2 libffi6 libgcc1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmariadbclient18 libncurses5 libnettle6 libnss-wrapper libp11-kit0 libpq5 libreadline7 libsasl2-2 libsqlite3-0 libssl1.1 libstdc++6 libtasn1-6 libtinfo5 libxml2 libxslt1.1 zlib1g
-RUN bitnami-pkg install python-3.6.8-0 --checksum 834c79bfd9ec99af3c72b4fc4e79f699d0c975067c0a40dd9ce35e2b9a6c5ee9
+RUN bitnami-pkg install python-3.6.8-2 --checksum 2eb057ee7701667327f6bcc1fc8765abe5d9d003a64124e5f8505fa692e71eb8
 RUN bitnami-pkg install postgresql-client-10.7.0-1 --checksum a351a3ea00d4443bdc6892e5f9d45aaf2fbbdf7c2aa40ab6cf423c78d535cca1
-RUN bitnami-pkg unpack airflow-worker-1.10.2-3 --checksum d13802ddfcc2c695a0f952c1b358c8bfaedddca74aa2af66b9735e65ebf58fb7
+RUN bitnami-pkg unpack airflow-worker-1.10.2-4 --checksum e0fcf794b637ce971986da461f031469efda9dc2436437532060d4e2d22e4aa4
 
 COPY rootfs /
 ENV AIRFLOW_DATABASE_HOST="postgresql" \
@@ -26,7 +26,7 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     AIRFLOW_WORKER_PORT_NUMBER="8793" \
     BITNAMI_APP_NAME="airflow-worker" \
-    BITNAMI_IMAGE_VERSION="1.10.2-debian-9-r14" \
+    BITNAMI_IMAGE_VERSION="1.10.2-debian-9-r15" \
     C_FORCE_ROOT="True" \
     LD_LIBRARY_PATH="/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
     LD_PRELOAD="/usr/lib/libnss_wrapper.so" \
