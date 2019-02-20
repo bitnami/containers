@@ -8,11 +8,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 RUN install_packages bzip2-libs glibc keyutils-libs krb5-libs libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre readline sqlite zlib
 RUN bitnami-pkg install node-8.15.0-0 --checksum 33ff479fae5471e260617e48f5f8ba20166434368089474ba0139af8a96927da
 RUN bitnami-pkg install mongodb-client-4.0.6-0 --checksum d1287bf2bd7fb4006a580e7a3b193702db1485566d7e2b15f7a0ac090d0b7723
-RUN bitnami-pkg unpack parse-3.1.3-0 --checksum da785f22c05e8a8d601d030661dd80f25acfd3656dbb1f9c700b3c79f07087a1
+RUN bitnami-pkg unpack parse-3.1.3-1 --checksum cb0310e80f2e0783b3ea445a2f5b85ddd60ac8fa879faf6e452089bd2bbe7ebe
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="3.1.3-ol-7-r47" \
+    BITNAMI_IMAGE_VERSION="3.1.3-ol-7-r48" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
