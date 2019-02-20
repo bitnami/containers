@@ -9,13 +9,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6
-RUN . ./libcomponent.sh && component_unpack "redis" "4.0.12-1" --checksum 013067de176926e5eea4ce60826f7fd9ba1877dab6da74a750b5162a710995d4
+RUN . ./libcomponent.sh && component_unpack "redis" "4.0.13-0" --checksum 83139b2d01cb43df8e669fc134a069f5b2c993ef4c531b6906f4a64be5b793cd
 
 COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.12-debian-9-r60" \
+    BITNAMI_IMAGE_VERSION="4.0.13-debian-9-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
