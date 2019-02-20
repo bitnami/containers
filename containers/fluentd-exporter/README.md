@@ -45,9 +45,9 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-rhel-7`, `0.2.0-rhel-7-r28` (0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-rhel-7-r28/0/rhel-7/Dockerfile)
+* [`0-rhel-7`, `0.2.0-rhel-7-r29` (0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-rhel-7-r29/0/rhel-7/Dockerfile)
 * [`0-ol-7`, `0.2.0-ol-7-r211` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-ol-7-r211/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.2.0-debian-9-r209`, `0`, `0.2.0`, `0.2.0-r209`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-9-r209/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.2.0-debian-9-r208`, `0`, `0.2.0`, `0.2.0-r208`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-9-r208/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd-exporter).
 
