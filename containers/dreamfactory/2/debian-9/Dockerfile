@@ -1,10 +1,10 @@
-FROM bitnami/minideb-extras:stretch-r290
+FROM bitnami/minideb-extras:stretch-r291
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5 libtinfo5 libunistring0 libuv1 libxml2 libxslt1.1 zlib1g
 RUN bitnami-pkg unpack apache-2.4.38-1 --checksum 05c93df10a6e9fc17ee5f810045d80276fb394c1795667917f941d34c9f446e2
-RUN bitnami-pkg install redis-client-4.0.12-20 --checksum edaab0f89d20497c9cd1b9a2507e6da66b81bf6ae52ca045af5f0a8de28c4058
+RUN bitnami-pkg install redis-client-4.0.13-0 --checksum a52c41f24decceee6b4b5427759f6ca2f5385dc73254d264957142e12e846dd1
 RUN bitnami-pkg unpack php-7.1.26-4 --checksum f754253881b698526840265dcbed1e77ef170fd74aa89c4bf2c5b1c8477061c9
 RUN bitnami-pkg install mysql-client-10.2.22-0 --checksum 6ad851ee27c7cb10ed003d249c8094a85462ae90ef8b4145a3480c29fdfb31a9
 RUN bitnami-pkg install mongodb-client-3.6.10-0 --checksum 4d5c9a37ff2ad191b2447098065faa2b9ad6189037739366dcde584b1cda8626
@@ -18,7 +18,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="2.14.1-debian-9-r129" \
+    BITNAMI_IMAGE_VERSION="2.14.1-debian-9-r130" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
     MARIADB_PORT_NUMBER="3306" \
