@@ -1,7 +1,8 @@
-FROM bitnami/minideb-extras:stretch-r290
+FROM bitnami/minideb-extras:stretch-r291
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    BITNAMI_PKG_EXTRA_DIRS="/opt/bitnami/airflow/dags" \
     HOME="/"
 
 # Install required system packages and dependencies
@@ -32,7 +33,7 @@ ENV AIRFLOW_BASE_URl="" \
     AIRFLOW_WEBSERVER_HOST="127.0.0.1" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="airflow" \
-    BITNAMI_IMAGE_VERSION="1.10.2-debian-9-r17" \
+    BITNAMI_IMAGE_VERSION="1.10.2-debian-9-r18" \
     LD_LIBRARY_PATH="/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
     LD_PRELOAD="/usr/lib/libnss_wrapper.so" \
     NAMI_PREFIX="/.nami" \
