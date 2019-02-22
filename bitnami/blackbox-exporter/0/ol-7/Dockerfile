@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/blackbox-exporter-0.13.0-20-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="blackbox-exporter" \
-    BITNAMI_IMAGE_VERSION="0.13.0-ol-7-r80" \
+    BITNAMI_IMAGE_VERSION="0.13.0-ol-7-r81" \
     PATH="/opt/bitnami/blackbox-exporter/bin:$PATH"
 
 EXPOSE 9115
