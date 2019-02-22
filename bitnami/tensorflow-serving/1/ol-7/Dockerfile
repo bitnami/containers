@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack tensorflow-serving-1.12.0-24 --checksum 377a95a365b1da48b
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="1.12.0-ol-7-r109" \
+    BITNAMI_IMAGE_VERSION="1.12.0-ol-7-r110" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_MODEL_NAME="inception" \
