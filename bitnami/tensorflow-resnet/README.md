@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-rhel-7`, `1.12.0-rhel-7-r32` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.12.0-rhel-7-r32/1/rhel-7/Dockerfile)
-* [`1-ol-7`, `1.12.0-ol-7-r88` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.12.0-ol-7-r88/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.12.0-ol-7-r89` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.12.0-ol-7-r89/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.12.0-debian-9-r72`, `1`, `1.12.0`, `1.12.0-r72`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.12.0-debian-9-r72/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-resnet GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-resnet).
