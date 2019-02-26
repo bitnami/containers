@@ -43,11 +43,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`11-rhel-7`, `11.10.0-rhel-7-r2` (11/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.10.0-rhel-7-r2/11/rhel-7/Dockerfile)
 * [`11-ol-7-prod`, `11.10.0-ol-7-r9-prod` (11-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.10.0-ol-7-r9-prod/11-prod/ol-7/Dockerfile)
-* [`11-ol-7`, `11.10.0-ol-7-r9` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.10.0-ol-7-r9/11/ol-7/Dockerfile)
+* [`11-ol-7`, `11.10.0-ol-7-r10` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.10.0-ol-7-r10/11/ol-7/Dockerfile)
 * [`11-debian-9-prod`, `11.10.0-debian-9-r6-prod`, `11-prod`, `11.10.0-prod`, `11.10.0-r6-prod` (11-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.10.0-debian-9-r6-prod/11-prod/debian-9/Dockerfile)
 * [`11-debian-9`, `11.10.0-debian-9-r6`, `11`, `11.10.0`, `11.10.0-r6` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.10.0-debian-9-r6/11/debian-9/Dockerfile)
 * [`10-rhel-7`, `10.15.1-rhel-7-r2` (10/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.1-rhel-7-r2/10/rhel-7/Dockerfile)
-* [`10-ol-7`, `10.15.1-ol-7-r22` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.1-ol-7-r22/10/ol-7/Dockerfile)
+* [`10-ol-7`, `10.15.1-ol-7-r21` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.1-ol-7-r21/10/ol-7/Dockerfile)
 * [`10-ol-7-prod`, `10.15.1-ol-7-r19-prod` (10-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.1-ol-7-r19-prod/10-prod/ol-7/Dockerfile)
 * [`10-debian-9`, `10.15.1-debian-9-r19`, `10`, `10.15.1`, `10.15.1-r19` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.1-debian-9-r19/10/debian-9/Dockerfile)
 * [`10-debian-9-prod`, `10.15.1-debian-9-r16-prod`, `10-prod`, `10.15.1-prod`, `10.15.1-r16-prod` (10-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.1-debian-9-r16-prod/10-prod/debian-9/Dockerfile)
