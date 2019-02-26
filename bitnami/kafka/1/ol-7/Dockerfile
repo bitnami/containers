@@ -7,17 +7,18 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages glibc libgcc
 RUN bitnami-pkg install java-1.8.201-0 --checksum e71b797ceaaf8b0641d1641df129cea10124b058bc24d4ed74738725fabfb8c9
-RUN bitnami-pkg unpack kafka-1.1.1-23 --checksum 32e7c0844ed17979e0c395b8724ff503a1bc251a45cde2ada44f78a1af43fe9f
+RUN bitnami-pkg unpack kafka-1.1.1-24 --checksum 1b6b30babd6402ea2b0a8aae068f45505bf657b0ad7d8d3b16661c238dcbdba3
 
 COPY rootfs /
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="1.1.1-ol-7-r200" \
+    BITNAMI_IMAGE_VERSION="1.1.1-ol-7-r201" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_BROKER_ID="-1" \
     KAFKA_BROKER_PASSWORD="bitnami" \
     KAFKA_BROKER_USER="user" \
     KAFKA_CERTIFICATE_PASSWORD="" \
+    KAFKA_DEFAULT_REPLICATION_FACTOR="1" \
     KAFKA_DELETE_TOPIC_ENABLE="false" \
     KAFKA_HEAP_OPTS="-Xmx1024m -Xms1024m" \
     KAFKA_INTER_BROKER_LISTENER_NAME="" \

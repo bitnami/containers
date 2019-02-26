@@ -5,6 +5,7 @@
   "kafkaBrokerPassword": "{{$global.env.KAFKA_BROKER_PASSWORD}}",
   "kafkaBrokerUser": "{{$global.env.KAFKA_BROKER_USER}}",
   "kafkaCertificatePassword": "{{$global.env.KAFKA_CERTIFICATE_PASSWORD}}",
+  "kafkaDefaultReplicationFactor": "{{$global.env.KAFKA_DEFAULT_REPLICATION_FACTOR}}",
   "kafkaDeleteTopicEnable": "{{$global.env.KAFKA_DELETE_TOPIC_ENABLE}}",
   "kafkaHeapOpts": "{{$global.env.KAFKA_HEAP_OPTS}}",
   "kafkaInterBrokerListenerName": "{{$global.env.KAFKA_INTER_BROKER_LISTENER_NAME}}",
