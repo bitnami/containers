@@ -47,7 +47,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2.6-ol-7`, `2.6.1-ol-7-r20` (2.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.1-ol-7-r20/2.6/ol-7/Dockerfile)
+* [`2.6-ol-7`, `2.6.1-ol-7-r21` (2.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.1-ol-7-r21/2.6/ol-7/Dockerfile)
 * [`2.6-ol-7-prod`, `2.6.1-ol-7-r19-prod` (2.6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.1-ol-7-r19-prod/2.6-prod/ol-7/Dockerfile)
 * [`2.6-debian-9`, `2.6.1-debian-9-r20`, `2.6`, `2.6.1`, `2.6.1-r20` (2.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.1-debian-9-r20/2.6/debian-9/Dockerfile)
 * [`2.6-debian-9-prod`, `2.6.1-debian-9-r16-prod`, `2.6-prod`, `2.6.1-prod`, `2.6.1-r16-prod` (2.6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.1-debian-9-r16-prod/2.6-prod/debian-9/Dockerfile)
@@ -62,7 +62,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`2.3-ol-7-prod`, `2.3.8-ol-7-r19-prod` (2.3-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.8-ol-7-r19-prod/2.3-prod/ol-7/Dockerfile)
 * [`2.3-ol-7`, `2.3.8-ol-7-r113` (2.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.8-ol-7-r113/2.3/ol-7/Dockerfile)
 * [`2.3-debian-9-prod`, `2.3.8-debian-9-r17-prod`, `2.3-prod`, `2.3.8-prod`, `2.3.8-r17-prod` (2.3-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.8-debian-9-r17-prod/2.3-prod/debian-9/Dockerfile)
-* [`2.3-debian-9`, `2.3.8-debian-9-r118`, `2.3`, `2.3.8`, `2.3.8-r118` (2.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.8-debian-9-r118/2.3/debian-9/Dockerfile)
+* [`2.3-debian-9`, `2.3.8-debian-9-r117`, `2.3`, `2.3.8`, `2.3.8-r117` (2.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.3.8-debian-9-r117/2.3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://github.com/bitnami/bitnami-docker-ruby).
 
