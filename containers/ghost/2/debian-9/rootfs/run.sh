@@ -10,6 +10,8 @@ USER=ghost
 START_COMMAND="echo y | ghost start && tail -f /opt/bitnami/ghost/logs/ghost.log"
 export NODE_ENV=production
 
+cd /opt/bitnami/ghost || exit 1
+
 # If container is started as `root` user
 if [ $EUID -eq 0 ]; then
     exec gosu ${USER} bash -c "${START_COMMAND}"
