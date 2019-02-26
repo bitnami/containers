@@ -58,7 +58,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-rhel-7`, `2.1.1-rhel-7-r6` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.1.1-rhel-7-r6/2/rhel-7/Dockerfile)
-* [`2-ol-7`, `2.1.1-ol-7-r5` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.1.1-ol-7-r5/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.1.1-ol-7-r7` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.1.1-ol-7-r7/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.1.1-debian-9-r5`, `2`, `2.1.1`, `2.1.1-r5`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.1.1-debian-9-r5/2/debian-9/Dockerfile)
 * [`1-ol-7`, `1.1.1-ol-7-r200` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r200/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.1.1-debian-9-r140`, `1`, `1.1.1`, `1.1.1-r140` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r140/1/debian-9/Dockerfile)
@@ -219,6 +219,7 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 - `KAFKA_ADVERTISED_LISTENERS`: Hostname and port the broker will advertise to producers and consumers. Default: **PLAINTEXT://:9092**
 - `KAFKA_LISTENER_SECURITY_PROTOCOL_MAP`: Maps listener names to security protocols. Default: **PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL**
 - `KAFKA_INTER_BROKER_LISTENER_NAME`: Name of listener used for communication between brokers. No defaults.
+- `KAFKA_DEFAULT_REPLICATION_FACTOR`: Default replication factors for automatically created topics. Default: **1**
 - `KAFKA_NUM_PARTITIONS`: The default number of log partitions per topic. Default: **1**
 - `KAFKA_NUM_RECOVERY_THREADS_PER_DATA_DIR` The number of threads per data directory to be used for log recovery at startup and flushing at shutdown. Default: **1**
 - `KAFKA_MAX_MESSAGE_BYTES`: The largest record batch size allowed by Kafka. Default: **1000012**
