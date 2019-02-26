@@ -41,8 +41,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-ol-7`, `5.7.19-ol-7-r66` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/5.7.19-ol-7-r66/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.7.19-debian-9-r65`, `5`, `5.7.19`, `5.7.19-r65`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/5.7.19-debian-9-r65/5/debian-9/Dockerfile)
+* [`5-ol-7`, `5.8.0-ol-7-r0` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/5.8.0-ol-7-r0/5/ol-7/Dockerfile)
+* [`5-debian-9`, `5.8.0-debian-9-r0`, `5`, `5.8.0`, `5.8.0-r0`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/5.8.0-debian-9-r0/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rails GitHub repo](https://github.com/bitnami/bitnami-docker-laravel).
 
