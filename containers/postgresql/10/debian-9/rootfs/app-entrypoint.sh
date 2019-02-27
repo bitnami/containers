@@ -48,6 +48,7 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
   declareEnvironmentVariableAlias POSTGRESQL_USERNAME POSTGRES_USER
   declareEnvironmentVariableAlias POSTGRESQL_DATA_DIR PGDATA
   declareEnvironmentVariableAlias POSTGRESQL_INITDB_WALDIR POSTGRES_INITDB_WALDIR
+  declareEnvironmentVariableAlias POSTGRESQL_INITDB_ARGS POSTGRES_INITDB_ARGS
 
   # Alias created for maintain consistency using prefix
   declareEnvironmentVariableAlias POSTGRESQL_CLUSTER_APP_NAME POSTGRES_CLUSTER_APP_NAME
