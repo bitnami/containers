@@ -2,7 +2,7 @@ FROM registry.rhc4tp.openshift.com/bitnami/rhel-extras-7:latest
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages GeoIP GeoIP-devel ca-certificates curl cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libcurl libcurl-devel libgcc libidn libselinux libssh2 libstdc++ lua lua-devel nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre python wget zlib
+RUN install_packages GeoIP ca-certificates curl cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libcurl libcurl-devel libgcc libidn libselinux libssh2 libstdc++ lua nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre python wget zlib
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.22.0-0-linux-x86_64-rhel-7.tar.gz && \
     echo "04d179a8b96f382b8f2855617b88c4c0526758c3e1929a83094feeaa022733d2  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.22.0-0-linux-x86_64-rhel-7.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.22.0-0-linux-x86_64-rhel-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -37,7 +37,7 @@ RUN chown -R 1001:root /etc/nginx /etc/ingress-controller && \
 RUN chown -R 1001:root /var/log/nginx && chmod g+rwX -R /var/log/nginx &&\
     chown -R 1001:root /opt/bitnami/nginx/conf && chmod g+rwX -R /opt/bitnami/nginx/conf
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.22.0-rhel-7-r20" \
+    BITNAMI_IMAGE_VERSION="0.22.0-rhel-7-r21" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     NAMI_PREFIX="/.nami" \
