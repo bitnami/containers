@@ -55,12 +55,12 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`8-ol-7`, `8.15.0-ol-7-r56` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.15.0-ol-7-r56/8/ol-7/Dockerfile)
 * [`8-ol-7-prod`, `8.15.0-ol-7-r20-prod` (8-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.15.0-ol-7-r20-prod/8-prod/ol-7/Dockerfile)
 * [`8-debian-9`, `8.15.0-debian-9-r44`, `8`, `8.15.0`, `8.15.0-r44`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.15.0-debian-9-r44/8/debian-9/Dockerfile)
-* [`8-debian-9-prod`, `8.15.0-debian-9-r16-prod`, `8-prod`, `8.15.0-prod`, `8.15.0-r16-prod`, `latest-prod` (8-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.15.0-debian-9-r16-prod/8-prod/debian-9/Dockerfile)
+* [`8-debian-9-prod`, `8.15.0-debian-9-r17-prod`, `8-prod`, `8.15.0-prod`, `8.15.0-r17-prod`, `latest-prod` (8-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.15.0-debian-9-r17-prod/8-prod/debian-9/Dockerfile)
 * [`6-rhel-7`, `6.16.0-rhel-7-r13` (6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.16.0-rhel-7-r13/6/rhel-7/Dockerfile)
 * [`6-ol-7`, `6.16.0-ol-7-r56` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.16.0-ol-7-r56/6/ol-7/Dockerfile)
 * [`6-ol-7-prod`, `6.16.0-ol-7-r20-prod` (6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.16.0-ol-7-r20-prod/6-prod/ol-7/Dockerfile)
 * [`6-debian-9`, `6.16.0-debian-9-r45`, `6`, `6.16.0`, `6.16.0-r45` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.16.0-debian-9-r45/6/debian-9/Dockerfile)
-* [`6-debian-9-prod`, `6.16.0-debian-9-r18-prod`, `6-prod`, `6.16.0-prod`, `6.16.0-r18-prod` (6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.16.0-debian-9-r18-prod/6-prod/debian-9/Dockerfile)
+* [`6-debian-9-prod`, `6.16.0-debian-9-r17-prod`, `6-prod`, `6.16.0-prod`, `6.16.0-r17-prod` (6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.16.0-debian-9-r17-prod/6-prod/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
