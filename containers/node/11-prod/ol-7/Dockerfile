@@ -1,4 +1,4 @@
-FROM bitnami/node:11.10.0-ol-7-r12 as development
+FROM bitnami/node:11.10.1-ol-7-r0 as development
 
 ######
 
@@ -11,7 +11,7 @@ RUN install_packages bzip2-libs ca-certificates glibc keyutils-libs krb5-libs li
 COPY --from=development /opt/bitnami/node /opt/bitnami/node
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="11.10.0-ol-7-r12-prod" \
+    BITNAMI_IMAGE_VERSION="11.10.1-ol-7-r0-prod" \
     PATH="/opt/bitnami/node/bin:$PATH"
 
 CMD [ "node" ]
