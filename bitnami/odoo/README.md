@@ -251,7 +251,7 @@ To configure Odoo to send email using SMTP you can set the following environment
  - `SMTP_PORT`: SMTP port.
  - `SMTP_USER`: SMTP account user.
  - `SMTP_PASSWORD`: SMTP account password.
- - `SMTP_TLS`: Use TLS encription with SMTP. Default **true**
+ - `SMTP_PROTOCOL`: Secure connection protocol to use for SMTP [tls, ssl, none].
 
 This would be an example of SMTP configuration using a GMail account:
 
@@ -268,6 +268,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
+      - SMTP_PROTOCOL=tls
 ```
 
  * For manual execution:
@@ -278,6 +279,7 @@ This would be an example of SMTP configuration using a GMail account:
     --env SMTP_PORT=587 \
     --env SMTP_USER=your_email@gmail.com \
     --env SMTP_PASSWORD=your_password \
+    --env SMTP_PROTOCOL=tls \
     --net odoo-tier \
     --volume /path/to/odoo-persistence:/bitnami \
     bitnami/odoo:latest
