@@ -1,19 +1,17 @@
 version: '2'
 services:
   postgresql:
-    image: 'bitnami/postgresql:9.6'
+    image: 'bitnami/postgresql:10'
     volumes:
       - 'postgresql_data:/bitnami'
   redis:
-    image: 'bitnami/redis:latest'
+    image: 'bitnami/redis:4.0'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'redis_data:/bitnami'
   discourse:
     image: 'bitnami/discourse:latest'
-    labels:
-      kompose.service.type: nodeport
     ports:
       - '80:3000'
     depends_on:
@@ -30,6 +28,7 @@ services:
       - DISCOURSE_POSTGRESQL_NAME=bitnami_application
       - DISCOURSE_POSTGRESQL_USERNAME=bn_discourse
       - DISCOURSE_POSTGRESQL_PASSWORD=bitnami1
+      - DISCOURSE_HOSTNAME=www.example.com
   sidekiq:
     image: 'bitnami/discourse:latest'
     depends_on:
@@ -43,6 +42,7 @@ services:
       - DISCOURSE_POSTGRESQL_PASSWORD=bitnami1
       - DISCOURSE_HOST=discourse
       - DISCOURSE_PORT=3000
+      - DISCOURSE_HOSTNAME=www.example.com
 volumes:
   postgresql_data:
     driver: local
