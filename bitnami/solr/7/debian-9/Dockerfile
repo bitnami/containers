@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r298
+FROM bitnami/minideb-extras:stretch-r299
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack solr-7.7.1-0 --checksum 698282bb1a3d9a9e4629f3b1c50130bfb
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="7.7.1-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="7.7.1-debian-9-r2" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:$PATH" \
     SOLR_CORE="" \
