@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r275
+FROM bitnami/oraclelinux-extras:7-r276
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,12 +6,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs glibc keyutils-libs krb5-libs libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre readline sqlite zlib
-RUN bitnami-pkg install node-8.15.0-0 --checksum 33ff479fae5471e260617e48f5f8ba20166434368089474ba0139af8a96927da
+RUN bitnami-pkg install node-8.15.1-0 --checksum f0df1bd1597227f101ef44c0242257e48332c68965d8b422a78192f6a1686f27
 RUN bitnami-pkg unpack parse-dashboard-1.2.0-21 --checksum 5634f9dc8e572bb53ca56a620ec8267d396387d380b9b8684862df9b36770178
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.2.0-ol-7-r199" \
+    BITNAMI_IMAGE_VERSION="1.2.0-ol-7-r200" \
     NAMI_PREFIX="/.nami" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
