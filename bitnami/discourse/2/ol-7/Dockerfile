@@ -1,18 +1,18 @@
-FROM bitnami/oraclelinux-extras:7-r255
+FROM bitnami/oraclelinux-extras:7-r276
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages ImageMagick advancecomp cyrus-sasl-lib file ghostscript gifsicle glibc hostname imagemagick jhead keyutils-libs krb5-libs libcom_err libcurl libgcc libidn libjpeg libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs optipng pcre pngquant postgresql-libs readline xz-libs zlib
-RUN bitnami-pkg install ruby-2.4.5-20 --checksum f26eeb2bba7058b2327d6587e02911b4f906dbef8275f826e065f39e33bf668b
-RUN bitnami-pkg unpack postgresql-client-9.6.11-20 --checksum 3167116810a3835a51f6110952d11d3951c940ee1bfc515d37f9f04816ba71fb
-RUN bitnami-pkg install git-2.20.1-20 --checksum 160b41e17f0414c1206e97cc1eef3720596c0229922b68d4ded4a69bfc08cc51
-RUN bitnami-pkg unpack discourse-sidekiq-2.2.1-0 --checksum 0a30ad105c3d9349f39bd9b8d9062d361b2b168cfc2c1b3fe1b430c2c2fdc4bf
-RUN bitnami-pkg unpack discourse-2.1.8-0 --checksum cfa9b66a41080facd540cb358c0a3547ade6b0d3b8a197c69d27671c0f0a31d8
+RUN install_packages ImageMagick advancecomp file cyrus-sasl-lib ghostscript gifsicle glibc hostname jhead keyutils-libs krb5-libs libcom_err libcurl libedit libgcc libidn libjpeg libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs optipng pcre pngquant postgresql-libs readline xz-libs zlib
+RUN bitnami-pkg install ruby-2.5.3-21 --checksum 065e8e8c592b2c1543c97ab30cb4a1ea2740b7c98a4cb3b137121a0ea6fb5a32
+RUN bitnami-pkg unpack postgresql-client-10.7.0-0 --checksum 8984b9748b6b696ca687c769b324371132c01ea9b71b4773a3d199f1987a6761
+RUN bitnami-pkg install git-2.21.0-0 --checksum 8dc7078aeaa3c3bf7010f3adbdb2f7ec9c3737c7eb6c7c1b2f547350c42fcfa5
+RUN bitnami-pkg unpack discourse-sidekiq-2.2.1-2 --checksum 80f27e6e95b7bd7e2bbbb5396293ce8305dc60ca02e750d04a337466ba4fbe6a
+RUN bitnami-pkg unpack discourse-2.2.1-3 --checksum 962665f896e68c0b80c38bde3292dc0d8d87831be31b59a593d087786c45d04b
 
 COPY rootfs /
 RUN install_packages rsync
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.1.8-ol-7-r14" \
+    BITNAMI_IMAGE_VERSION="2.2.1-ol-7-r13" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_EXTERNAL_PORT_NUMBER="80" \
     DISCOURSE_HOST="127.0.0.1" \
