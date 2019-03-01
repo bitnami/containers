@@ -2,17 +2,17 @@ FROM bitnami/oraclelinux-extras:7-r276
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages ImageMagick advancecomp file cyrus-sasl-lib ghostscript gifsicle glibc hostname jhead keyutils-libs krb5-libs libcom_err libcurl libedit libgcc libidn libjpeg libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs optipng pcre pngquant postgresql-libs readline xz-libs zlib
+RUN install_packages ImageMagick advancecomp cyrus-sasl-lib file ghostscript gifsicle glibc hostname jhead keyutils-libs krb5-libs libcom_err libcurl libedit libgcc libidn libjpeg libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs optipng pcre pngquant postgresql-libs readline xz-libs zlib
 RUN bitnami-pkg install ruby-2.5.3-21 --checksum 065e8e8c592b2c1543c97ab30cb4a1ea2740b7c98a4cb3b137121a0ea6fb5a32
 RUN bitnami-pkg unpack postgresql-client-10.7.0-0 --checksum 8984b9748b6b696ca687c769b324371132c01ea9b71b4773a3d199f1987a6761
 RUN bitnami-pkg install git-2.21.0-0 --checksum 8dc7078aeaa3c3bf7010f3adbdb2f7ec9c3737c7eb6c7c1b2f547350c42fcfa5
-RUN bitnami-pkg unpack discourse-sidekiq-2.2.1-2 --checksum 80f27e6e95b7bd7e2bbbb5396293ce8305dc60ca02e750d04a337466ba4fbe6a
-RUN bitnami-pkg unpack discourse-2.2.1-3 --checksum 962665f896e68c0b80c38bde3292dc0d8d87831be31b59a593d087786c45d04b
+RUN bitnami-pkg unpack discourse-sidekiq-2.2.2-0 --checksum a7e29a26edf78457d370693745180cff095c4f7c991370be78aa8649e69c122a
+RUN bitnami-pkg unpack discourse-2.2.2-0 --checksum c532c1864fe9ebee2b83748e71e76066daab05a8bbd450dede1013fdde0d5427
 
 COPY rootfs /
 RUN install_packages rsync
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.2.1-ol-7-r13" \
+    BITNAMI_IMAGE_VERSION="2.2.2-ol-7-r0" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_EXTERNAL_PORT_NUMBER="80" \
     DISCOURSE_HOST="127.0.0.1" \
