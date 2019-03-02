@@ -46,8 +46,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-rhel-7`, `0.6.2-rhel-7-r10` (0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.6.2-rhel-7-r10/0/rhel-7/Dockerfile)
-* [`0-debian-9`, `0.6.2-debian-9-r9`, `0`, `0.6.2`, `0.6.2-r9`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.6.2-debian-9-r9/0/debian-9/Dockerfile)
+* [`0-rhel-7`, `0.6.2-rhel-7-r9` (0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.6.2-rhel-7-r9/0/rhel-7/Dockerfile)
+* [`0-debian-9`, `0.6.2-debian-9-r10`, `0`, `0.6.2`, `0.6.2-r10`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.6.2-debian-9-r10/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cert-manager GitHub repo](https://github.com/bitnami/bitnami-docker-cert-manager).
 
