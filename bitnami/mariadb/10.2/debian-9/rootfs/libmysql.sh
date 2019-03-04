@@ -14,13 +14,13 @@
 # Functions
 
 ########################
-# Gets an env. variable name based on the suffix
+# Gets an environment variable name based on the suffix
 # Globals:
 #   DB_FLAVOR
 # Arguments:
-#   $1 - env. variable suffix
+#   $1 - environment variable suffix
 # Returns:
-#   env. variable name
+#   environment variable name
 #########################
 get_env_var() {
     local id="${1:?id is required}"
@@ -28,11 +28,11 @@ get_env_var() {
 }
 
 ########################
-# Gets an env. variable value based on the suffix
+# Gets an environment variable value based on the suffix
 # Arguments:
-#   $1 - env. variable suffix
+#   $1 - environment variable suffix
 # Returns:
-#   env. variable value
+#   environment variable value
 #########################
 get_env_var_value() {
     local envVar
@@ -241,7 +241,7 @@ EOF
 }
 
 ########################
-# Validate settings in MYSQL_*/MARIADB_* env. variables
+# Validate settings in MYSQL_*/MARIADB_* environment variables
 # Globals:
 #   DB_*
 # Arguments:
