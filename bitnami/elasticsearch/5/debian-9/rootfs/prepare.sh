@@ -6,7 +6,7 @@
 . /libelasticsearch.sh
 . /libfs.sh
 
-# Load Elasticsearch env. variables
+# Load Elasticsearch environment variables
 eval "$(elasticsearch_env)"
 
 for dir in "$ELASTICSEARCH_TMPDIR" "$ELASTICSEARCH_DATADIR" "$ELASTICSEARCH_LOGDIR" "${ELASTICSEARCH_BASEDIR}/plugins" "${ELASTICSEARCH_BASEDIR}/modules" "${ELASTICSEARCH_CONFDIR}/scripts"; do

@@ -11,12 +11,12 @@ set -o pipefail
 . /libfs.sh
 . /libelasticsearch.sh
 
-# Load Elasticsearch env. variables
+# Load Elasticsearch environment variables
 eval "$(elasticsearch_env)"
 
 # Ensure kernel settings are valid
 elasticsearch_validate_kernel
-# Ensure Elasticsearch env var settings are valid
+# Ensure Elasticsearch environment variables settings are valid
 elasticsearch_validate
 # Ensure Elasticsearch is stopped when this script ends
 trap "elasticsearch_stop" EXIT
