@@ -5,12 +5,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/"
 
 # Install required system packages and dependencies
-RUN install_packages curl gcc gcc-c++ git glibc keyutils-libs krb5-libs libcom_err libselinux libtool make ncurses-libs nss-softokn-freebl openssl-libs patch pcre pkgconfig unzip zlib
-RUN bitnami-pkg install python-2.7.15-20 --checksum 026d98bfeddf908ba9774e2a54b992ece8877f5e07ed1e991f44747c2b22c59c
+RUN install_packages bzip2-libs curl gcc gcc-c++ git glibc keyutils-libs krb5-libs libcom_err libselinux libtool make ncurses-libs nss-softokn-freebl openssl-libs patch pcre pkgconfig readline sqlite unzip zlib
+RUN bitnami-pkg install python-2.7.16-0 --checksum 131f66315fd55f1c6baab732ad8504a25c1b91638c057e87a12100c04c187877
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="2.7.15-rhel-7-r30" \
+    BITNAMI_IMAGE_VERSION="2.7.16-rhel-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
