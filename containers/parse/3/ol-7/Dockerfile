@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r278
+FROM bitnami/oraclelinux-extras:7-r279
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,13 +6,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs glibc keyutils-libs krb5-libs libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre readline sqlite zlib
-RUN bitnami-pkg install node-8.15.1-0 --checksum f0df1bd1597227f101ef44c0242257e48332c68965d8b422a78192f6a1686f27
+RUN bitnami-pkg install node-8.15.1-1 --checksum 855c9535671e31199c6bfe42e5a5dd5ae184c374f32a5d2bee0d66d1f66f03fc
 RUN bitnami-pkg install mongodb-client-4.0.6-0 --checksum d1287bf2bd7fb4006a580e7a3b193702db1485566d7e2b15f7a0ac090d0b7723
 RUN bitnami-pkg unpack parse-3.1.3-1 --checksum cb0310e80f2e0783b3ea445a2f5b85ddd60ac8fa879faf6e452089bd2bbe7ebe
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="3.1.3-ol-7-r58" \
+    BITNAMI_IMAGE_VERSION="3.1.3-ol-7-r59" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
