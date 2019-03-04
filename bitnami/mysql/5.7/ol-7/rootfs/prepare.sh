@@ -6,7 +6,7 @@
 . /libfs.sh
 . /libmysql.sh
 
-# Load MySQL env. variables
+# Load MySQL environment variables
 eval "$(mysql_env)"
 
 for dir in "$DB_TMPDIR" "$DB_LOGDIR" "$DB_CONFDIR" "${DB_CONFDIR}/bitnami" "$DB_VOLUMEDIR" "$DB_DATADIR"; do
