@@ -11,7 +11,7 @@ set -o pipefail
 . /libos.sh
 . /libmariadb.sh
 
-# Load MariaDB env. variables
+# Load MariaDB environment variables
 eval "$(mysql_env)"
 
 # Ensure MariaDB env var settings are valid
