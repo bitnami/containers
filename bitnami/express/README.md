@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4-ol-7`, `4.16.4-ol-7-r140` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.16.4-ol-7-r140/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.16.4-debian-9-r129`, `4`, `4.16.4`, `4.16.4-r129`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.16.4-debian-9-r129/4/debian-9/Dockerfile)
+* [`4-debian-9`, `4.16.4-debian-9-r130`, `4`, `4.16.4`, `4.16.4-r130`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.16.4-debian-9-r130/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-codiad).
 
