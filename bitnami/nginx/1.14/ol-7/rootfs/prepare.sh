@@ -5,7 +5,7 @@
 # Load libraries
 . /libnginx.sh
 
-# Load NGINX env. variables
+# Load NGINX environment variables
 eval "$(nginx_env)"
 
 for dir in "/bitnami" "$NGINX_VOLUME" "$NGINX_CONFDIR" "$NGINX_BASEDIR" "$NGINX_TMPDIR"; do
