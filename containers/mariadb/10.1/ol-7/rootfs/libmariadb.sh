@@ -4,7 +4,7 @@
 
 # shellcheck disable=SC1091
 
-# Export env. variables
+# Export environment variables
 export DB_FLAVOR="mariadb"
 export DB_SBINDIR="/opt/bitnami/${DB_FLAVOR}/sbin"
 
