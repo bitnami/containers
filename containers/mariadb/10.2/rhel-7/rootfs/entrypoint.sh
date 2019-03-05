@@ -10,7 +10,7 @@ set -o pipefail
 . /libbitnami.sh
 . /libmariadb.sh
 
-# Load MariaDB env. variables
+# Load MariaDB environment variables
 eval "$(mysql_env)"
 
 print_welcome_page
