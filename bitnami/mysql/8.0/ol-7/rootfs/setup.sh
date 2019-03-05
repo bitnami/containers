@@ -11,10 +11,10 @@ set -o pipefail
 . /libos.sh
 . /libmysql.sh
 
-# Load MySQL env. variables
+# Load MySQL environment variables
 eval "$(mysql_env)"
 
-# Ensure MySQL env var settings are valid
+# Ensure MySQL environment variables settings are valid
 mysql_validate
 # Ensure MySQL is stopped when this script ends.
 trap "mysql_stop" EXIT
