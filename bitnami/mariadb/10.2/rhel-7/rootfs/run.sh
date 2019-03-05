@@ -10,7 +10,7 @@ set -o pipefail
 . /libmariadb.sh
 . /libos.sh
 
-# Load MariaDB env. variables
+# Load MariaDB environment variables
 eval "$(mysql_env)"
 
 flags=("--defaults-file=${DB_CONFDIR}/my.cnf" "--basedir=$DB_BASEDIR" "--datadir=$DB_DATADIR" "--socket=${DB_TMPDIR}/mysql.sock" "--port=$DB_PORT_NUMBER")
