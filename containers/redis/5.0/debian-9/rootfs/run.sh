@@ -10,7 +10,7 @@ set -o pipefail
 . /libos.sh
 . /libredis.sh
 
-# Load Redis env. variables
+# Load Redis environment variables
 eval "$(redis_env)"
 
 # Constants
