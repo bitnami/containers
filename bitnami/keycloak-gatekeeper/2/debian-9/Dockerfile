@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r176
+FROM bitnami/minideb-extras-base:stretch-r180
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -8,13 +8,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     OS_NAME="linux"
 
 # Install required system packages and dependencies
-RUN install_packages ca-certificates jq wget
-RUN mkdir -p /opt/bitnami/keycloak-gatekeeper/bin && wget https://github.com/keycloak/keycloak-gatekeeper/releases/download/v2.3.0/keycloak-proxy-linux-amd64 && mv keycloak-proxy-linux-amd64 /opt/bitnami/keycloak-gatekeeper/bin/keycloak-proxy
+RUN install_packages ca-certificates jq libc6 wget
+RUN . ./libcomponent.sh && component_unpack "keycloak-gatekeeper" "2.3.0-0" --checksum e1dedb739156f14ab714bcaee13c2c929186782cf22ddf8746bbb0b17439a8c3
 
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="keycloak-gatekeeper" \
-    BITNAMI_IMAGE_VERSION="-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="2.3.0-debian-9-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/keycloak-gatekeeper/bin:$PATH"
 
