@@ -6,7 +6,7 @@
 . /libkeycloak.sh
 . /libfs.sh
 
-# Load Redis env. variables
+# Load Keycloak Gatekeeper environment variables
 eval "$(keycloak_env)"
 
 for dir in "$KEYCLOAK_GATEKEEPER_CONFDIR" "${KEYCLOAK_GATEKEEPER_BINDIR}"; do
