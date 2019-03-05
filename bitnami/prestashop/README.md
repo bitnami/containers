@@ -37,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.7-ol-7`, `1.7.5-1-ol-7-r12` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.5-1-ol-7-r12/1.7/ol-7/Dockerfile)
+* [`1.7-ol-7`, `1.7.5-1-ol-7-r13` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.5-1-ol-7-r13/1.7/ol-7/Dockerfile)
 * [`1.7-debian-9`, `1.7.5-1-debian-9-r10`, `1.7`, `1.7.5-1`, `1.7.5-1-r10`, `latest` (1.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.5-1-debian-9-r10/1.7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
@@ -253,7 +253,7 @@ When you start the PrestaShop image, you can adjust the configuration of the ins
  - `APACHE_HTTPS_PORT_NUMBER`: Port used by Apache for HTTPS. Default: **443**
  - `PRESTASHOP_FIRST_NAME`: PrestaShop application User's First Name. Default: **Bitnami**
  - `PRESTASHOP_LAST_NAME`: PrestaShop application User's Last Name. Default: **User**
- - `PRESTASHOP_PASSWORD`: PrestaShop application password. Default: **bitnami**
+ - `PRESTASHOP_PASSWORD`: PrestaShop application password. Default: **bitnami1**
  - `PRESTASHOP_EMAIL`: PrestaShop application email. Default: **user@example.com**
  - `PRESTASHOP_HOST`: PrestaShop Host Server.
  - `PRESTASHOP_COOKIE_CHECK_IP`: Whether to check the cookie's IP address or not. Default: **yes**. See [Troubleshooting](#troubleshooting) section.
