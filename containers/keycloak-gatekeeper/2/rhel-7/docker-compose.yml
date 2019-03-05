@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  keycloak-gatekeeper:
+    image: bitnami/keycloak-gatekeeper:2-rhel-7
+    ports:
+      - '3000:3000'
