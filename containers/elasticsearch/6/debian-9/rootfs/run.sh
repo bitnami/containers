@@ -10,7 +10,7 @@ set -o pipefail
 . /libelasticsearch.sh
 . /libos.sh
 
-# Load Elasticsearch env. variables
+# Load Elasticsearch environment variables
 eval "$(elasticsearch_env)"
 
 # Constants
