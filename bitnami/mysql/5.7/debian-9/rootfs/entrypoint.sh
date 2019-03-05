@@ -10,7 +10,7 @@ set -o pipefail
 . /libbitnami.sh
 . /libmysql.sh
 
-# Load MySQL env. variables
+# Load MySQL environment variables
 eval "$(mysql_env)"
 
 print_welcome_page
