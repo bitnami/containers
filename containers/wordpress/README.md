@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-rhel-7`, `5.1.0-rhel-7-r10` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.0-rhel-7-r10/5/rhel-7/Dockerfile)
+* [`5-rhel-7`, `5.1.0-rhel-7-r11` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.0-rhel-7-r11/5/rhel-7/Dockerfile)
 * [`5-ol-7`, `5.1.0-ol-7-r10` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.0-ol-7-r10/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.1.0-debian-9-r10`, `5`, `5.1.0`, `5.1.0-r10`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.0-debian-9-r10/5/debian-9/Dockerfile)
 
@@ -368,7 +368,7 @@ This would be an example of SMTP configuration using a GMail account:
 
 * For manual execution:
 
-```
+```bash
 $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --net wordpress-tier \
   --env SMTP_HOST=smtp.gmail.com --env SMTP_PORT=587 \
@@ -410,7 +410,7 @@ This would be an example of using an external database for WordPress.
 
 * For manual execution:
 
-```
+```bash
 $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --net wordpress-tier \
   --env MARIADB_HOST=mariadb_host \
