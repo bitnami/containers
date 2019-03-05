@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`6-rhel-7`, `6.6.1-rhel-7-r12` (6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.6.1-rhel-7-r12/6/rhel-7/Dockerfile)
 * [`6-ol-7`, `6.6.1-ol-7-r12` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.6.1-ol-7-r12/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.6.1-debian-9-r11`, `6`, `6.6.1`, `6.6.1-r11`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.6.1-debian-9-r11/6/debian-9/Dockerfile)
-* [`5-ol-7`, `5.6.15-ol-7-r12` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.15-ol-7-r12/5/ol-7/Dockerfile)
+* [`5-ol-7`, `5.6.15-ol-7-r13` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.15-ol-7-r13/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.6.15-debian-9-r11`, `5`, `5.6.15`, `5.6.15-r11` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/5.6.15-debian-9-r11/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
@@ -280,12 +280,13 @@ services:
 
 ## Configuration file
 
-The image looks for user-defined configurations in `/opt/bitnami/elasticsearch/config/elasticsearch_custom.yml`. Create a file named `elasticsearch_custom.yml` and mount it at `/opt/bitnami/elasticsearch/config/elasticsearch_custom.yml` to extend the default configuration.
+In order to use a custom configuration file instead of the default one provided out of the box, you can create a file named `elasticsearch.yml` and mount it at `/opt/bitnami/elasticsearch/config/elasticsearch.yml` to overwrite the default configuration.
+Please, note that the whole configuration file will be replaced by the provided one, ensure that the syntax and fields are properly set.
 
 ```bash
 $ docker run -d --name elasticsearch \
     -p 9201:9201 \
-    -v /path/to/elasticsearch_custom.yml:/opt/bitnami/elasticsearch/config/elasticsearch_custom.yml \
+    -v /path/to/elasticsearch.yml:/opt/bitnami/elasticsearch/config/elasticsearch.yml \
     -v /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data \
     bitnami/elasticsearch:latest
 ```
@@ -301,7 +302,7 @@ services:
     ports:
       - '9201:9201'
     volumes:
-      - /path/to/elasticsearch_custom.yml:/opt/bitnami/elasticsearch/config/elasticsearch_custom.yml
+      - /path/to/elasticsearch.yml:/opt/bitnami/elasticsearch/config/elasticsearch.yml
       - /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data
 ```
 
@@ -385,6 +386,10 @@ $ docker-compose up elasticsearch
 ```
 
 # Notable Changes
+
+## 6.6.1-debian-9-r12, 6.6.1-ol-7-r13, 6.6.1-rhel-7-r13, 5.6.15-debian-9-r12 and 5.6.15-ol-7-r13
+
+- Deprecate the use of `elasticsearch_custom.yml` in favor of replacing the whole `elasticsearch.yml` file.
 
 ## 6.4.0-debian-9-r19, 6.4.0-ol-7-r18, 5.6.4-debian-9-r54, and 5.6.4-ol-7-r60
 
