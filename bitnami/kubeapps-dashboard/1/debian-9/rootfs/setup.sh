@@ -11,10 +11,10 @@ set -o pipefail
 . /libfs.sh
 . /libnginx.sh
 
-# Load NGINX env. variables
+# Load NGINX environment variables
 eval "$(nginx_env)"
 
-# Ensure NGINX env. variables settings are valid
+# Ensure NGINX environment variables settings are valid
 nginx_validate
 # Ensure NGINX is stopped when this script ends
 trap "nginx_stop" EXIT

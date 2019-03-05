@@ -10,7 +10,7 @@ set -o pipefail
 . /libbitnami.sh
 . /libnginx.sh
 
-# Load NGINX env. variables
+# Load NGINX environment variables
 eval "$(nginx_env)"
 
 print_welcome_page

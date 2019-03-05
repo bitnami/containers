@@ -10,7 +10,7 @@ set -o pipefail
 . /liblog.sh
 . /libnginx.sh
 
-# Load NGINX env. variables
+# Load NGINX environment variables
 eval "$(nginx_env)"
 
 info "** Starting NGINX **"
