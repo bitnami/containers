@@ -11,10 +11,10 @@ set -o pipefail
 . /libfs.sh
 . /libredis.sh
 
-# Load Redis env. variables
+# Load Redis environment variables
 eval "$(redis_env)"
 
-# Ensure Redis env. variables settings are valid
+# Ensure Redis environment variables settings are valid
 redis_validate
 # Ensure Redis is stopped when this script ends
 trap "redis_stop" EXIT
