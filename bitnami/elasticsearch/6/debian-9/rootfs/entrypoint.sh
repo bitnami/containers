@@ -10,7 +10,7 @@ set -o pipefail
 . /libbitnami.sh
 . /libelasticsearch.sh
 
-# Load Elasticsearch env. variables
+# Load Elasticsearch environment variables
 eval "$(elasticsearch_env)"
 
 print_welcome_page
