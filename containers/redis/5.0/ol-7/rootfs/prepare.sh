@@ -6,7 +6,7 @@
 . /libredis.sh
 . /libfs.sh
 
-# Load Redis env. variables
+# Load Redis environment variables
 eval "$(redis_env)"
 
 for dir in "$REDIS_VOLUME" "${REDIS_VOLUME}/data" ; do

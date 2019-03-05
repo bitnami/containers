@@ -10,7 +10,7 @@ set -o pipefail
 . /libbitnami.sh
 . /libredis.sh
 
-# Load Redis env. variables
+# Load Redis environment variables
 eval "$(redis_env)"
 
 print_welcome_page
