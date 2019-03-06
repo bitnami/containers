@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r225
+FROM bitnami/oraclelinux-extras-base:7-r226
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "keycloak-gatekeeper" "2.3.0-0" --ch
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="keycloak-gatekeeper" \
-    BITNAMI_IMAGE_VERSION="2.3.0-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="2.3.0-ol-7-r1" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/keycloak-gatekeeper/bin:$PATH"
 
