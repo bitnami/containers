@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r300
+FROM bitnami/minideb-extras:stretch-r304
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -8,12 +8,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1
 RUN bitnami-pkg install java-1.8.201-0 --checksum de49557872836fdbd965389ebcc72e163f7242cf691d435993cc2e4f3cd56ae7
-RUN bitnami-pkg unpack tomcat-8.5.38-0 --checksum ce6af1d749ae98a42ca429031f13a2eec9ddc652da45c9ce18ae97bb56d30dde
+RUN bitnami-pkg unpack tomcat-8.5.38-1 --checksum b729387d0b32653e41c38788a3e74e8392d2f86a7dda9e0beea088878dbab0f0
 RUN ln -sf /opt/bitnami/tomcat/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="8.5.38-debian-9-r17" \
+    BITNAMI_IMAGE_VERSION="8.5.38-debian-9-r18" \
     JAVA_OPTS="-Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH" \
