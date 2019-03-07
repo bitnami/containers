@@ -3,14 +3,14 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gcc gcc-c++ git glibc keyutils-libs krb5-libs libcom_err libselinux libtool make ncurses-libs nss-softokn-freebl openssl-libs patch pcre pkgconfig readline unzip wget zlib
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/ruby-2.6.1-0-linux-x86_64-ol-7.tar.gz && \
-    echo "2234dcba9f85489d910fc99154aa7d2ad0aac9e1e413400601075dc2afd7c96c  /tmp/bitnami/pkg/cache/ruby-2.6.1-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/ruby-2.6.1-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/ruby-2.6.1-0-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/ruby-2.6.1-1-linux-x86_64-ol-7.tar.gz && \
+    echo "4d1053828bbed20c09e1927c8ff1b2c9a01f59f69761c3d5fd9bb773e797f34b  /tmp/bitnami/pkg/cache/ruby-2.6.1-1-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/ruby-2.6.1-1-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/ruby-2.6.1-1-linux-x86_64-ol-7.tar.gz
 RUN /opt/bitnami/ruby/bin/gem install bundler
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.6.1-ol-7-r29" \
+    BITNAMI_IMAGE_VERSION="2.6.1-ol-7-r30" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
