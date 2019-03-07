@@ -8,11 +8,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.38-2 --checksum 7b5327dc0ec3bd78f1ed781e1a7c5275b5426ea08acc36226cb7ca3950cb61c0
-RUN bitnami-pkg unpack php-7.2.15-1 --checksum b000af6f84b0908f38449c0b91fc33057bcba10312413a5a26263f40368c54bd
+RUN bitnami-pkg unpack php-7.2.16-0 --checksum 0af39e1be57a916f52b29ac155bbc76955317dbad643620722df29dd63ff0e60
 RUN bitnami-pkg install wp-cli-2.1.0-0 --checksum 054d17c151d0b4b4fbb119eac077889f090c3572b3fe8e44584ff4ffb5e15a54
 RUN bitnami-pkg unpack mysql-client-10.1.38-0 --checksum fdd44abc2ff752b759ded1a7f27e334feed2be427a5850e2d21f2d093f3fee75
-RUN bitnami-pkg unpack libphp-7.2.15-1 --checksum 917833c999898b47994ab3e4414808948c3ed0697996bdc112b1994c9c99c3a3
-RUN bitnami-pkg unpack wordpress-5.1.0-3 --checksum 022e4017a5f60cb6fa45c918d42b2d38100cbae6def39a9adf94d8522fce5b2b
+RUN bitnami-pkg unpack libphp-7.2.16-0 --checksum b6440208caba3398e365a1329bb0b832d6712bd1054941ecc830f1c2ceb19c0c
+RUN bitnami-pkg unpack wordpress-5.1.0-4 --checksum 6592ebef72acf6d2840e6f18a0dfae00136e4b0d7ff20ab7d943d8352c48843e
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
@@ -21,7 +21,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.1.0-rhel-7-r15" \
+    BITNAMI_IMAGE_VERSION="5.1.0-rhel-7-r16" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
