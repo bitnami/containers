@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r181
+FROM bitnami/minideb-extras-base:stretch-r182
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "keycloak-gatekeeper" "2.3.0-0" --ch
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="keycloak-gatekeeper" \
-    BITNAMI_IMAGE_VERSION="2.3.0-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="2.3.0-debian-9-r2" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/keycloak-gatekeeper/bin:$PATH"
 
