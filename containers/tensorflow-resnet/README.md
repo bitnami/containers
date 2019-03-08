@@ -11,7 +11,7 @@ Before running the docker image you first need to download the ResNet model trai
 $ mkdir /tmp/model-data
 $ cd /tmp/model-data
 $ wget 'http://download.tensorflow.org/models/official/20181001_resnet/savedmodels/resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz'
-$ tar xzf --strip-components=2 resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz
+$ tar xzf resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz --strip-components=2
 ```
 
 ## Docker Compose
@@ -41,8 +41,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-rhel-7`, `1.13.0-rhel-7-r1` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.13.0-rhel-7-r1/1/rhel-7/Dockerfile)
-* [`1-ol-7`, `1.13.0-ol-7-r2` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.13.0-ol-7-r2/1/ol-7/Dockerfile)
+* [`1-rhel-7`, `1.13.0-rhel-7-r2` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.13.0-rhel-7-r2/1/rhel-7/Dockerfile)
+* [`1-ol-7`, `1.13.0-ol-7-r3` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.13.0-ol-7-r3/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.13.0-debian-9-r2`, `1`, `1.13.0`, `1.13.0-r2`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.13.0-debian-9-r2/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-resnet GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-resnet).
