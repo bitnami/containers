@@ -38,23 +38,23 @@ fi
 # allow running custom initialization scripts
 if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && [[ ! -f /bitnami/postgresql/.user_scripts_initialized ]]; then
     info "Loading user files from /docker-entrypoint-initdb.d";
-    if [[ -n $POSTGRESQL_PASSWORD ]] && [[ $POSTGRESQL_USERNAME == "postgres" ]]; then
+    if [[ -n $POSTGRESQL_PASSWORD ]]; then
         export PGPASSWORD=$POSTGRESQL_PASSWORD
     fi
-    psql=( psql --username postgres )
+    if [[ $POSTGRESQL_USERNAME == "postgres" ]]; then
+        psql=( psql -U postgres)
+    else
+        psql=( psql -U $POSTGRESQL_USERNAME -d $POSTGRESQL_DATABASE )
+    fi
     postgresqlStart &
     info "Initialization: Waiting for PostgreSQL to be available"
-    postgresql_available=0
-    for i in {1..60}; do
-        log "Attempt $i"
-        if grep "is ready to accept connections" /opt/bitnami/postgresql/logs/postgresql.log > /dev/null; then
-            postgresql_available=1
-            break
-        fi
-        sleep 10
+    retries=30
+    until "${psql[@]}" -h 127.0.0.1 -c "select 1" > /dev/null 2>&1 || [ $retries -eq 0 ]; do
+        info "Waiting for PostgreSQL server: $((retries--)) remaining attempts..."
+        sleep 2
     done
-    if [[ $postgresql_available == 0 ]]; then
-        echo "Error: PostgreSQL is not available after 600 seconds"
+    if [[ $retries == 0 ]]; then
+        echo "Error: PostgreSQL is not available after 60 seconds"
         exit 1
     fi
     tmp_file=/tmp/filelist
