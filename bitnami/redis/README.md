@@ -377,6 +377,21 @@ The above command scales up the number of replicas to `3`. You can scale down in
 
 > **Note**: You should not scale up/down the number of master nodes. Always have only one master node running.
 
+### Using redis-sentinel
+
+If you have redis-sentinel running, you can use it to find the current master
+
+```bash
+$ docker run --name redis-replica \
+  --link redis-master:master \
+  -e REDIS_REPLICATION_MODE=slave \
+  -e REDIS_SENTINEL_HOST=redis-sentinel \
+  -e REDIS_SENTINEL_PORT_NUMBER=26379 \
+  -e REDIS_SENTINEL_MASTER_NAME=mymaster \
+  -e REDIS_PASSWORD=password123 \
+  bitnami/redis:latest
+```
+
 ## Configuration file
 
 The image looks for configurations in `/opt/bitnami/redis/etc/redis.conf`. You can overwrite the `redis.conf` file using your own custom configuration file.
