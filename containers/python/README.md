@@ -47,7 +47,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.7-ol-7`, `3.7.2-ol-7-r67` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.2-ol-7-r67/3.7/ol-7/Dockerfile)
+* [`3.7-ol-7`, `3.7.2-ol-7-r68` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.2-ol-7-r68/3.7/ol-7/Dockerfile)
 * [`3.7-ol-7-prod`, `3.7.2-ol-7-r29-prod` (3.7-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.2-ol-7-r29-prod/3.7-prod/ol-7/Dockerfile)
 * [`3.7-debian-9`, `3.7.2-debian-9-r67`, `3.7`, `3.7.2`, `3.7.2-r67`, `latest` (3.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.2-debian-9-r67/3.7/debian-9/Dockerfile)
 * [`3.7-debian-9-prod`, `3.7.2-debian-9-r27-prod`, `3.7-prod`, `3.7.2-prod`, `3.7.2-r27-prod`, `latest-prod` (3.7-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.2-debian-9-r27-prod/3.7-prod/debian-9/Dockerfile)
@@ -59,8 +59,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`2-rhel-7`, `2.7.16-rhel-7-r4` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.16-rhel-7-r4/2/rhel-7/Dockerfile)
 * [`2-ol-7`, `2.7.16-ol-7-r4` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.16-ol-7-r4/2/ol-7/Dockerfile)
 * [`2-ol-7-prod`, `2.7.16-ol-7-r3-prod` (2-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.16-ol-7-r3-prod/2-prod/ol-7/Dockerfile)
+* [`2-debian-9`, `2.7.16-debian-9-r4`, `2`, `2.7.16`, `2.7.16-r4` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.16-debian-9-r4/2/debian-9/Dockerfile)
 * [`2-debian-9-prod`, `2.7.16-debian-9-r3-prod`, `2-prod`, `2.7.16-prod`, `2.7.16-r3-prod` (2-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.16-debian-9-r3-prod/2-prod/debian-9/Dockerfile)
-* [`2-debian-9`, `2.7.16-debian-9-r3`, `2`, `2.7.16`, `2.7.16-r3` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.16-debian-9-r3/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/python GitHub repo](https://github.com/bitnami/bitnami-docker-python).
 
