@@ -296,7 +296,7 @@ KAFKA_ADVERTISED_LISTENERS=SASL_SSL://:9092
 You **must** also use your own certificates for SSL. You can drop your Java Key Stores files into `/opt/bitnami/kafka/conf/certs`.
 If the JKS is password protected (recommended), you will need to provide it to get access to the keystores:
 
-`KAFKA_CERTITICATE_PASSWORD=myCertificatePassword`
+`KAFKA_CERTIFICATE_PASSWORD=myCertificatePassword`
 
 The following script can help you with the creation of the JKS and certificates. Use the same password for all them:
 
