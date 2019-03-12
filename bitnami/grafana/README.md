@@ -45,7 +45,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-ol-7`, `5.4.3-ol-7-r47` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.4.3-ol-7-r47/5/ol-7/Dockerfile)
+* [`5-ol-7`, `5.4.3-ol-7-r48` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.4.3-ol-7-r48/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.4.3-debian-9-r51`, `5`, `5.4.3`, `5.4.3-r51`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/5.4.3-debian-9-r51/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
