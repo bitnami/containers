@@ -45,9 +45,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-rhel-7`, `1.5.12-rhel-7-r38` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.12-rhel-7-r38/1/rhel-7/Dockerfile)
-* [`1-ol-7`, `1.5.12-ol-7-r124` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.12-ol-7-r124/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.5.12-debian-9-r107`, `1`, `1.5.12`, `1.5.12-r107`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.12-debian-9-r107/1/debian-9/Dockerfile)
+* [`1-rhel-7`, `1.5.12-rhel-7-r39` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.12-rhel-7-r39/1/rhel-7/Dockerfile)
+* [`1-ol-7`, `1.5.12-ol-7-r125` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.12-ol-7-r125/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.5.12-debian-9-r108`, `1`, `1.5.12`, `1.5.12-r108`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.12-debian-9-r108/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/memcached GitHub repo](https://github.com/bitnami/bitnami-docker-memcached).
 
