@@ -43,9 +43,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`15-rhel-7`, `15.0.1-rhel-7-r36` (15/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/15.0.1-rhel-7-r36/15/rhel-7/Dockerfile)
-* [`15-ol-7`, `15.0.1-ol-7-r57` (15/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/15.0.1-ol-7-r57/15/ol-7/Dockerfile)
-* [`15-debian-9`, `15.0.1-debian-9-r53`, `15`, `15.0.1`, `15.0.1-r53`, `latest` (15/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/15.0.1-debian-9-r53/15/debian-9/Dockerfile)
+* [`16-rhel-7`, `16.0.0-rhel-7-r0` (16/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/16.0.0-rhel-7-r0/16/rhel-7/Dockerfile)
+* [`16-ol-7`, `16.0.0-ol-7-r0` (16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/16.0.0-ol-7-r0/16/ol-7/Dockerfile)
+* [`16-debian-9`, `16.0.0-debian-9-r0`, `16`, `16.0.0`, `16.0.0-r0`, `latest` (16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/16.0.0-debian-9-r0/16/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
