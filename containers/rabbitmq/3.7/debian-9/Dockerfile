@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r310
+FROM bitnami/minideb-extras:stretch-r311
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -8,13 +8,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libssl1.1 libtinfo5 zlib1g
-RUN bitnami-pkg install erlang-21.2.0-0 --checksum 3f3dfdec897f08210b4854e5f6cfdde77511902ce3dd03c2c5e9a0e599f04d49
+RUN bitnami-pkg install erlang-21.3.0-0 --checksum 0d86bd202d7d208fc32032716b7e954af3104ee3a4040ef2befba3b59a89d652
 RUN bitnami-pkg unpack rabbitmq-3.7.13-0 --checksum 57fb0ae7359eea199a1f5ba4206e671bc357db0c7e80944ce5ecf9ef44fca045
 RUN mkdir -p /opt/bitnami/rabbitmq/.rabbitmq && mkdir -p /opt/bitnami/rabbitmq/var/log/rabbitmq && chmod g+rwX -R /opt/bitnami/rabbitmq/.rabbitmq /opt/bitnami/rabbitmq/var
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.7.13-debian-9-r5" \
+    BITNAMI_IMAGE_VERSION="3.7.13-debian-9-r6" \
     PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:/opt/bitnami/rabbitmq/sbin:$PATH" \
     RABBITMQ_CLUSTER_NODE_NAME="" \
     RABBITMQ_CLUSTER_PARTITION_HANDLING="ignore" \
