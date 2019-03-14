@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r288
+FROM bitnami/oraclelinux-extras:7-r289
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN mkdir -p /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/ && chmod g+rw
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="5.4.3-ol-7-r49" \
+    BITNAMI_IMAGE_VERSION="5.4.3-ol-7-r50" \
     PATH="/opt/bitnami/grafana/bin:$PATH"
 
 EXPOSE 3000
