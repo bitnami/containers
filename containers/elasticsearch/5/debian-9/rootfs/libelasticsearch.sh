@@ -370,21 +370,19 @@ elasticsearch_initialize() {
         am_i_root && chown "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "$dir"
     done
 
-    debug "Setting default configuration"
-    elasticsearch_conf_set http.port "$ELASTICSEARCH_PORT_NUMBER"
-    elasticsearch_conf_set path.data "$ELASTICSEARCH_DATADIR"
-    elasticsearch_conf_set transport.tcp.port "$ELASTICSEARCH_NODE_PORT_NUMBER"
-    elasticsearch_cluster_configuration
-    elasticsearch_configure_node_type
-    elasticsearch_set_heap_size
-
-    # User injected custom configuration
-    readonly custom_conf_file="$ELASTICSEARCH_CONFDIR/elasticsearch_custom.yml"
-    if [[ -f "$custom_conf_file" ]]; then
-        debug "Custom configuration detected. Injecting..."
-        echo "" >> "$ELASTICSEARCH_CONF_FILE"
-        cat "$custom_conf_file" >> "$ELASTICSEARCH_CONF_FILE"
+    if [[ -f "$ELASTICSEARCH_CONF_FILE" ]]; then
+        info "Custom configuration file detected, using it..."
+        rm -rf "$ELASTICSEARCH_CONFDIR/es_config.sample"
+    else
+        info "Setting default configuration"
+        mv "$ELASTICSEARCH_CONFDIR/es_config.sample" "$ELASTICSEARCH_CONF_FILE"
+        elasticsearch_conf_set http.port "$ELASTICSEARCH_PORT_NUMBER"
+        elasticsearch_conf_set path.data "$ELASTICSEARCH_DATADIR"
+        elasticsearch_conf_set transport.tcp.port "$ELASTICSEARCH_NODE_PORT_NUMBER"
+        elasticsearch_cluster_configuration
+        elasticsearch_configure_node_type
     fi
+    elasticsearch_set_heap_size
 }
 
 ########################
