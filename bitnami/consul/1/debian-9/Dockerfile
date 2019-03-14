@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r311
+FROM bitnami/minideb-extras:stretch-r312
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack consul-1.4.3-0 --checksum 465ccc97d84e3753f1b3ee20486e05b
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.4.3-debian-9-r8" \
+    BITNAMI_IMAGE_VERSION="1.4.3-debian-9-r9" \
     CONSUL_BOOTSTRAP_EXPECT="1" \
     CONSUL_CLIENT_LAN_ADDRESS="0.0.0.0" \
     CONSUL_DATACENTER="dc1" \
