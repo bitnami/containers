@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack parse-3.1.3-1 --checksum 43d57e01afcf90ea55623480063cfcf7
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="3.1.3-rhel-7-r21" \
+    BITNAMI_IMAGE_VERSION="3.1.3-rhel-7-r22" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
