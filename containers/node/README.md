@@ -41,14 +41,14 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`11-rhel-7`, `11.11.0-rhel-7-r9` (11/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.11.0-rhel-7-r9/11/rhel-7/Dockerfile)
-* [`11-ol-7-prod`, `11.11.0-ol-7-r9-prod` (11-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.11.0-ol-7-r9-prod/11-prod/ol-7/Dockerfile)
-* [`11-ol-7`, `11.11.0-ol-7-r9` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.11.0-ol-7-r9/11/ol-7/Dockerfile)
-* [`11-debian-9`, `11.11.0-debian-9-r9`, `11`, `11.11.0`, `11.11.0-r9` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.11.0-debian-9-r9/11/debian-9/Dockerfile)
-* [`11-debian-9-prod`, `11.11.0-debian-9-r8-prod`, `11-prod`, `11.11.0-prod`, `11.11.0-r8-prod` (11-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.11.0-debian-9-r8-prod/11-prod/debian-9/Dockerfile)
+* [`11-rhel-7`, `11.12.0-rhel-7-r0` (11/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.12.0-rhel-7-r0/11/rhel-7/Dockerfile)
+* [`11-ol-7-prod`, `11.12.0-ol-7-r0-prod` (11-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.12.0-ol-7-r0-prod/11-prod/ol-7/Dockerfile)
+* [`11-ol-7`, `11.12.0-ol-7-r0` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.12.0-ol-7-r0/11/ol-7/Dockerfile)
+* [`11-debian-9-prod`, `11.12.0-debian-9-r0-prod`, `11-prod`, `11.12.0-prod`, `11.12.0-r0-prod` (11-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.12.0-debian-9-r0-prod/11-prod/debian-9/Dockerfile)
+* [`11-debian-9`, `11.12.0-debian-9-r0`, `11`, `11.12.0`, `11.12.0-r0` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.12.0-debian-9-r0/11/debian-9/Dockerfile)
 * [`10-ol-7-prod`, `10.15.3-ol-7-r10-prod` (10-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.3-ol-7-r10-prod/10-prod/ol-7/Dockerfile)
 * [`10-ol-7`, `10.15.3-ol-7-r10` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.3-ol-7-r10/10/ol-7/Dockerfile)
-* [`10-debian-9-prod`, `10.15.3-debian-9-r9-prod`, `10-prod`, `10.15.3-prod`, `10.15.3-r9-prod` (10-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.3-debian-9-r9-prod/10-prod/debian-9/Dockerfile)
+* [`10-debian-9-prod`, `10.15.3-debian-9-r10-prod`, `10-prod`, `10.15.3-prod`, `10.15.3-r10-prod` (10-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.3-debian-9-r10-prod/10-prod/debian-9/Dockerfile)
 * [`10-debian-9`, `10.15.3-debian-9-r10`, `10`, `10.15.3`, `10.15.3-r10` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.3-debian-9-r10/10/debian-9/Dockerfile)
 * [`10-rhel-7`, `10.15.1-rhel-7-r2` (10/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.1-rhel-7-r2/10/rhel-7/Dockerfile)
 * [`8-rhel-7`, `8.15.1-rhel-7-r15` (8/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.15.1-rhel-7-r15/8/rhel-7/Dockerfile)
@@ -63,6 +63,13 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`6-rhel-7`, `6.16.0-rhel-7-r13` (6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.16.0-rhel-7-r13/6/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
+
+# What are `prod` tagged containers for?
+
+Containers tagged `prod` are production containers based on [minideb](https://github.com/bitnami/minideb). They contain the minimal dependencies required by an application to work.
+They don't include development dependencies, so they are commonly used in multi-stage builds as the target image. Application code and dependencies should be copied from a different container.
+The resultant containers only contain the necessary pieces of software to run the application. Therefore, they are smaller and safer.
+Learn how to use multi-stage builds to build your production application container in the [example](/example) directory
 
 # Get this image
 
