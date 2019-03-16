@@ -66,10 +66,17 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`5.6-rhel-7`, `5.6.40-rhel-7-r46` (5.6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.40-rhel-7-r46/5.6/rhel-7/Dockerfile)
 * [`5.6-ol-7`, `5.6.40-ol-7-r61` (5.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.40-ol-7-r61/5.6/ol-7/Dockerfile)
 * [`5.6-ol-7-prod`, `5.6.40-ol-7-r40-prod` (5.6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.40-ol-7-r40-prod/5.6-prod/ol-7/Dockerfile)
-* [`5.6-debian-9`, `5.6.40-debian-9-r61`, `5.6`, `5.6.40`, `5.6.40-r61` (5.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.40-debian-9-r61/5.6/debian-9/Dockerfile)
+* [`5.6-debian-9`, `5.6.40-debian-9-r62`, `5.6`, `5.6.40`, `5.6.40-r62` (5.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.40-debian-9-r62/5.6/debian-9/Dockerfile)
 * [`5.6-debian-9-prod`, `5.6.40-debian-9-r40-prod`, `5.6-prod`, `5.6.40-prod`, `5.6.40-r40-prod` (5.6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.40-debian-9-r40-prod/5.6-prod/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
+
+# What are `prod` tagged containers for?
+
+Containers tagged `prod` are production containers based on [minideb](https://github.com/bitnami/minideb). They contain the minimal dependencies required by an application to work.
+They don't include development dependencies, so they are commonly used in multi-stage builds as the target image. Application code and dependencies should be copied from a different container.
+The resultant containers only contain the necessary pieces of software to run the application. Therefore, they are smaller and safer.
+Learn how to use multi-stage builds to build your production application container in the [example](/example) directory
 
 # Get this image
 
