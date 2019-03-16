@@ -42,10 +42,10 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`11-rhel-7`, `11.12.0-rhel-7-r0` (11/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.12.0-rhel-7-r0/11/rhel-7/Dockerfile)
-* [`11-ol-7`, `11.12.0-ol-7-r1` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.12.0-ol-7-r1/11/ol-7/Dockerfile)
 * [`11-ol-7-prod`, `11.12.0-ol-7-r0-prod` (11-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.12.0-ol-7-r0-prod/11-prod/ol-7/Dockerfile)
-* [`11-debian-9-prod`, `11.12.0-debian-9-r1-prod`, `11-prod`, `11.12.0-prod`, `11.12.0-r1-prod` (11-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.12.0-debian-9-r1-prod/11-prod/debian-9/Dockerfile)
-* [`11-debian-9`, `11.12.0-debian-9-r0`, `11`, `11.12.0`, `11.12.0-r0` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.12.0-debian-9-r0/11/debian-9/Dockerfile)
+* [`11-ol-7`, `11.12.0-ol-7-r0` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.12.0-ol-7-r0/11/ol-7/Dockerfile)
+* [`11-debian-9`, `11.12.0-debian-9-r1`, `11`, `11.12.0`, `11.12.0-r1` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.12.0-debian-9-r1/11/debian-9/Dockerfile)
+* [`11-debian-9-prod`, `11.12.0-debian-9-r0-prod`, `11-prod`, `11.12.0-prod`, `11.12.0-r0-prod` (11-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.12.0-debian-9-r0-prod/11-prod/debian-9/Dockerfile)
 * [`10-ol-7-prod`, `10.15.3-ol-7-r11-prod` (10-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.3-ol-7-r11-prod/10-prod/ol-7/Dockerfile)
 * [`10-ol-7`, `10.15.3-ol-7-r11` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.3-ol-7-r11/10/ol-7/Dockerfile)
 * [`10-debian-9-prod`, `10.15.3-debian-9-r11-prod`, `10-prod`, `10.15.3-prod`, `10.15.3-r11-prod` (10-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.3-debian-9-r11-prod/10-prod/debian-9/Dockerfile)
