@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6
-RUN bitnami-pkg unpack redis-sentinel-5.0.3-0 --checksum 530c45661263c9c72f197d692933f9b70f1d121ea88a88f7faa2c24c22bc3214
+RUN bitnami-pkg unpack redis-sentinel-5.0.4-0 --checksum 867eb244a54d65089cea056c9c3e61f8b45eecfa0a003feb19e2a57400888e4e
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="5.0.3-debian-9-r91" \
+    BITNAMI_IMAGE_VERSION="5.0.4-debian-9-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis-sentinel/bin:$PATH" \
     REDIS_MASTER_HOST="redis" \
