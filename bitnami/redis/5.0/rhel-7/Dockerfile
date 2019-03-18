@@ -9,13 +9,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc
-RUN . ./libcomponent.sh && component_unpack "redis" "5.0.3-0" --checksum b9dbbc7f794f92d755951694eeecd2b577806789057239427e7739ecfc63d346
+RUN . ./libcomponent.sh && component_unpack "redis" "5.0.4-0" --checksum 5e86c50b36da34ac61c88919cba0425bd5a8c2ad9073f78f04dbab5d1bca911a
 
 COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.3-rhel-7-r51" \
+    BITNAMI_IMAGE_VERSION="5.0.4-rhel-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
