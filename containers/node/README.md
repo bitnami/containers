@@ -67,8 +67,11 @@ Subscribe to project updates by watching the [bitnami/node GitHub repo](https://
 # What are `prod` tagged containers for?
 
 Containers tagged `prod` are production containers based on [minideb](https://github.com/bitnami/minideb). They contain the minimal dependencies required by an application to work.
+
 They don't include development dependencies, so they are commonly used in multi-stage builds as the target image. Application code and dependencies should be copied from a different container.
+
 The resultant containers only contain the necessary pieces of software to run the application. Therefore, they are smaller and safer.
+
 Learn how to use multi-stage builds to build your production application container in the [example](/example) directory
 
 # Get this image
