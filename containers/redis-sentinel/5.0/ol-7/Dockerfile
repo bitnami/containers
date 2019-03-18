@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc
-RUN bitnami-pkg unpack redis-sentinel-5.0.3-0 --checksum a05f9cf4059e0fa1bc9730d98bc18c16e406434a39bb69ab984152fc448fb3bc
+RUN bitnami-pkg unpack redis-sentinel-5.0.4-0 --checksum 25f2df6373d45390a870fc2a7221e9c2307778eaca5a62f81274f6042fc3970b
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="5.0.3-ol-7-r92" \
+    BITNAMI_IMAGE_VERSION="5.0.4-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis-sentinel/bin:$PATH" \
     REDIS_MASTER_HOST="redis" \
