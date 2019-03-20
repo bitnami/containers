@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r294
+FROM bitnami/oraclelinux-extras:7-r295
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,12 +6,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libcom_err libgcc libpcap libselinux openssl-libs pcre zlib
-RUN bitnami-pkg unpack mongodb-3.6.10-2 --checksum 8cb5ec191152a5bc63b4644092ec4dbfc4622bf198e3dcc1a84391d7ba0e3eb4
+RUN bitnami-pkg unpack mongodb-3.6.10-3 --checksum f707193383a929c99f446f462b507d064d777c3e2816692ce8aff45af6df98a2
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.6.10-ol-7-r44" \
+    BITNAMI_IMAGE_VERSION="3.6.10-ol-7-r55" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_DISABLE_SYSTEM_LOG="no" \
