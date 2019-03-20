@@ -379,7 +379,12 @@ The above command scales up the number of replicas to `3`. You can scale down in
 
 ### Using redis-sentinel
 
-If you have redis-sentinel running, you can use it to find the current master
+If you have redis-sentinel running, you can use it to find the current master by configuring the following environment variables:
+- REDIS_REPLICATION_MODE=slave (we only want to configure this when in slave mode)
+- REDIS_SENTINEL_HOST=<sentinel-hosts> (this would ideally be a round robin DNS hostname)
+- REDIS_SENTINEL_PORT=<port sentinel is listening on>
+
+What happens behind the scenes is at startup the sentinel gets queried for the current master IP and port, and sets the ```REDIS_MASTER_HOST``` and ```REDIS_MASTER_PORTNUMER``` with those values.
 
 ```bash
 $ docker run --name redis-replica \
