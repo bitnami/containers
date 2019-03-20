@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r317
+FROM bitnami/minideb-extras:stretch-r318
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,12 +6,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libcomerr2 libcurl3 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle6 libnghttp2-14 libp11-kit0 libpcap0.8 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libtasn1-6 libunistring0 zlib1g
-RUN bitnami-pkg unpack mongodb-4.0.6-3 --checksum 69b6261a7a0d0b81760c4e45363fda698b79a8095b29fe956dbb54faf8a8886e
+RUN bitnami-pkg unpack mongodb-4.0.6-4 --checksum d214d545052f570a6fef8684c792fb853736d7fc95abba8bd70cece6f100dd33
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.0.6-debian-9-r40" \
+    BITNAMI_IMAGE_VERSION="4.0.6-debian-9-r47" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_DISABLE_SYSTEM_LOG="no" \
