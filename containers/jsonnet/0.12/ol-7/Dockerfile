@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r294
+FROM bitnami/oraclelinux-extras:7-r295
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,7 +10,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 RUN chmod +x /opt/bitnami/jsonnet/bin/jsonnet
 ENV BITNAMI_APP_NAME="jsonnet" \
-    BITNAMI_IMAGE_VERSION="0.12.1-ol-7-r27" \
+    BITNAMI_IMAGE_VERSION="0.12.1-ol-7-r28" \
     PATH="/opt/bitnami/jsonnet/bin:$PATH"
 
 USER 1001
