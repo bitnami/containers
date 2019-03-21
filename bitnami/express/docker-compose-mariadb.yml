@@ -7,7 +7,7 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_DATABASE=myapp
 
-  myapp:
+  express:
     tty: true # Enables debugging capabilities when attached to this container.
     image: bitnami/express:latest
     command: npm run development

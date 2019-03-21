@@ -4,12 +4,10 @@ services:
   mongodb:
     image: 'bitnami/mongodb:latest'
 
-  myapp:
+  express:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: 'bitnami/express:latest'
-    labels:
-      kompose.service.type: nodeport
-    command: npm run development
+    image: 'bitnami/express:4'
+    command: npm start
     environment:
       - PORT=3000
       - NODE_ENV=development
