@@ -2,8 +2,6 @@ version: '2'
 
 services:
   memcached:
-    image: 'bitnami/memcached:latest'
-    labels:
-      kompose.service.type: nodeport
+    image: 'bitnami/memcached:1'
     ports:
       - '11211:11211'
