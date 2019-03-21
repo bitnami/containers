@@ -2,6 +2,6 @@ version: '2'
 
 services:
   alertmanager:
-    image: bitnami/alertmanager:latest
+    image: bitnami/alertmanager:0
     ports:
       - '9093:9093'
