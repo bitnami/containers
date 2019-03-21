@@ -10,7 +10,7 @@ services:
       - POSTGRESQL_USERNAME=bn_airflow
       - POSTGRESQL_PASSWORD=bitnami1
   airflow:
-    image: 'bitnami/airflow:latest'
+    image: bitnami/airflow:1
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USER=bn_airflow
