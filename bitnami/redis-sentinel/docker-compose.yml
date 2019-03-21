@@ -2,11 +2,11 @@ version: '2'
 
 services:
   redis-sentinel:
-    image: bitnami/redis-sentinel:latest
+    image: bitnami/redis-sentinel:4.0
     volumes:
       - redis-sentinel_data:/bitnami
   redis:
-    image: bitnami/redis:latest
+    image: bitnami/redis:4.0
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
