@@ -1,11 +1,12 @@
 version: '2'
+
 services:
   postgresql:
     image: 'bitnami/postgresql:10'
     volumes:
       - 'postgresql_data:/bitnami'
   sonarqube:
-    image: bitnami/sonarqube:latest
+    image: bitnami/sonarqube:7-debian-9
     ports:
       - '80:9000'
     environment:
