@@ -13,8 +13,6 @@ services:
       - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster
       - ETCD_INITIAL_CLUSTER=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380
       - ETCD_INITIAL_CLUSTER_STATE=new
-    volumes:
-      - etcd1_data:/bitnami
   etcd2:
     image: bitnami/etcd:latest
     environment:
@@ -27,8 +25,6 @@ services:
       - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster
       - ETCD_INITIAL_CLUSTER=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380
       - ETCD_INITIAL_CLUSTER_STATE=new
-    volumes:
-      - etcd2_data:/bitnami
   etcd3:
     image: bitnami/etcd:latest
     environment:
@@ -41,13 +37,3 @@ services:
       - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster
       - ETCD_INITIAL_CLUSTER=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380
       - ETCD_INITIAL_CLUSTER_STATE=new
-    volumes:
-      - etcd3_data:/bitnami
-
-volumes:
-  etcd1_data:
-    driver: local
-  etcd2_data:
-    driver: local
-  etcd3_data:
-    driver: local
