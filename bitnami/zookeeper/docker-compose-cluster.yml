@@ -12,7 +12,7 @@ services:
     environment:
       - ZOO_SERVER_ID=1
       - ALLOW_ANONYMOUS_LOGIN=yes
-      - ZOO_SERVERS=server.1=0.0.0.0:2888:3888,server.2=zookeeper2:2888:3888,server.3=zookeeper3:2888:3888
+      - ZOO_SERVERS=0.0.0.0:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
   zookeeper2:
     image: 'bitnami/zookeeper:latest'
     ports:
@@ -24,7 +24,7 @@ services:
     environment:
       - ZOO_SERVER_ID=2
       - ALLOW_ANONYMOUS_LOGIN=yes
-      - ZOO_SERVERS=server.1=zookeeper:2888:3888,server.2=0.0.0.0:2888:3888,server.3=zookeeper3:2888:3888
+      - ZOO_SERVERS=zookeeper:2888:3888,0.0.0.0:2888:3888,zookeeper3:2888:3888
   zookeeper3:
     image: 'bitnami/zookeeper:latest'
     ports:
@@ -36,7 +36,7 @@ services:
     environment:
       - ZOO_SERVER_ID=3
       - ALLOW_ANONYMOUS_LOGIN=yes
-      - ZOO_SERVERS=server.1=zookeeper:2888:3888,server.2=zookeeper2:2888:3888,server.3=0.0.0.0:2888:3888
+      - ZOO_SERVERS=zookeeper:2888:3888,zookeeper2:2888:3888,0.0.0.0:2888:3888
 
 volumes:
   zookeeper_data:
