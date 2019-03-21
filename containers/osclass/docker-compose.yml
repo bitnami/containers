@@ -9,7 +9,7 @@ services:
     volumes:
       - 'mariadb_data:/bitnami'
   osclass:
-    image: 'bitnami/osclass:latest'
+    image: 'bitnami/osclass:3'
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
@@ -17,8 +17,6 @@ services:
       - OSCLASS_DATABASE_USER=bn_osclass
       - OSCLASS_DATABASE_NAME=bitnami_osclass
       - ALLOW_EMPTY_PASSWORD=yes
-    labels:
-      kompose.service.type: nodeport
     ports:
       - '80:80'
       - '443:443'
