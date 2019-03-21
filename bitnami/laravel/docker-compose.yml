@@ -11,9 +11,7 @@ services:
 
   myapp:
     tty: true
-    image: 'bitnami/laravel:latest'
-    labels:
-      kompose.service.type: nodeport
+    image: bitnami/laravel:5-debian-9
     environment:
       - DB_HOST=mariadb
       - DB_USERNAME=my_user
