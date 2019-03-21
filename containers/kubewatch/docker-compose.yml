@@ -2,4 +2,4 @@ version: '2'
 
 services:
   kubewatch:
-    image: bitnami/kubewatch:latest
+    image: bitnami/kubewatch:0
