@@ -2,4 +2,4 @@ version: '2'
 
 services:
   blackbox-exporter:
-    image: bitnami/blackbox-exporter:latest
+    image: bitnami/blackbox-exporter:0
