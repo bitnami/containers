@@ -2,6 +2,6 @@ version: '2'
 
 services:
   grafana:
-    image: bitnami/grafana:latest
+    image: bitnami/grafana:6
     ports:
       - '3000:3000'
