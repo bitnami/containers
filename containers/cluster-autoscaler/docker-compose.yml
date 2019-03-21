@@ -2,7 +2,7 @@ version: '2'
 
 services:
   cluster-autoscaler:
-    image: bitnami/cluster-autoscaler:latest
+    image: bitnami/cluster-autoscaler:1
     volumes:
       - cluster-autoscaler_data:/bitnami
 volumes:
