@@ -10,7 +10,7 @@ services:
     volumes:
       - 'mariadb_data:/bitnami'
   prestashop:
-    image: 'bitnami/prestashop:latest'
+    image: 'bitnami/prestashop:1.7'
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
@@ -18,8 +18,6 @@ services:
       - PRESTASHOP_DATABASE_USER=bn_prestashop
       - PRESTASHOP_DATABASE_NAME=bitnami_prestashop
       - ALLOW_EMPTY_PASSWORD=yes
-    labels:
-      kompose.service.type: nodeport
     ports:
       - '80:80'
       - '443:443'
