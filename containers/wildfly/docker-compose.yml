@@ -2,9 +2,7 @@ version: '2'
 
 services:
   wildfly:
-    image: 'bitnami/wildfly:latest'
-    labels:
-      kompose.service.type: nodeport
+    image: 'bitnami/wildfly:16'
     ports:
       - '8080:8080'
       - '9990:9990'
