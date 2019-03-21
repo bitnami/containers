@@ -9,7 +9,7 @@ services:
     volumes:
       - 'mariadb_data:/bitnami'
   owncloud:
-    image: 'bitnami/owncloud:latest'
+    image: 'bitnami/owncloud:10'
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
@@ -20,8 +20,6 @@ services:
       # note: this setting will only be applied on the first run
       # ref: https://github.com/bitnami/bitnami-docker-owncloud#configuration
       - OWNCLOUD_HOST=localhost
-    labels:
-      kompose.service.type: nodeport
     ports:
       - '80:80'
       - '443:443'
