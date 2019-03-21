@@ -2,4 +2,4 @@ version: '2'
 
 services:
   acmesolver:
-    image: bitnami/acmesolver:latest
+    image: bitnami/acmesolver:0
