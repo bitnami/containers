@@ -2,7 +2,7 @@ version: '2'
 
 services:
   fluentd-exporter:
-    image: bitnami/fluentd-exporter:latest
+    image: bitnami/fluentd-exporter:0
     volumes:
       - fluentd_exporter_data:/bitnami
 volumes:
