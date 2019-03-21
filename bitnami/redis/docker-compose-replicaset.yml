@@ -9,6 +9,8 @@ services:
       - REDIS_REPLICATION_MODE=master
       - REDIS_PASSWORD=my_password
       - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    volumes:
+      - 'redis_data:/bitnami/redis/data'
 
   redis-secondary:
     image: 'bitnami/redis:latest'
@@ -23,3 +25,7 @@ services:
       - REDIS_MASTER_PASSWORD=my_password
       - REDIS_PASSWORD=my_password
       - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+
+volumes:
+  redis_data:
+    driver: local
