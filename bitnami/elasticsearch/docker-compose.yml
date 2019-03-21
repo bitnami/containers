@@ -2,14 +2,12 @@ version: '2'
 
 services:
   elasticsearch:
-    image: 'bitnami/elasticsearch:latest'
-    labels:
-      kompose.service.type: nodeport
+    image: 'bitnami/elasticsearch:6'
     ports:
       - '9200:9200'
       - '9300:9300'
     volumes:
-      - 'elasticsearch_data:/bitnami'
+      - 'elasticsearch_data:/bitnami/elasticsearch/data'
 volumes:
   elasticsearch_data:
     driver: local
