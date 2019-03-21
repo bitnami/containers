@@ -11,7 +11,7 @@ services:
       - 'tensorflow_serving_data:/bitnami'
       - '/tmp/model-data:/bitnami/model-data'
   tensorflow-resnet:
-    image: 'bitnami/tensorflow-resnet:latest'
+    image: 'bitnami/tensorflow-resnet:1'
     depends_on:
       - tensorflow-serving
     volumes:
