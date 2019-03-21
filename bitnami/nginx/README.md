@@ -249,7 +249,25 @@ services:
 
 # Reverse proxy to other containers
 
-NGINX can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an NGINX frontend. Bitnami provides example virtual hosts for all of our runtime containers in `/opt/bitnami/nginx/conf/vhosts/`.
+NGINX can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an NGINX frontend. [Add a virtual host](#adding-custom-virtual-hosts) like the following to do so:
+
+```
+server {
+    listen 0.0.0.0:80;
+    server_name yourapp.com;
+    access_log /logs/yourapp_access.log;
+    error_log /logs/yourapp_error.log;
+
+    location / {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header HOST $http_host;
+        proxy_set_header X-NginX-Proxy true;
+
+        proxy_pass http://[your_container_alias]:[your_container_port];
+        proxy_redirect off;
+    }
+}
+```
 
 **Further Reading:**
 
