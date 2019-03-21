@@ -1,9 +1,7 @@
 version: '2'
 services:
   myapp:
-    image: 'bitnami/codeigniter:latest'
-    labels:
-      kompose.service.type: nodeport
+    image: 'bitnami/codeigniter:3'
     ports:
       - '8000:8000'
     volumes:
