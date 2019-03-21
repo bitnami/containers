@@ -1,7 +1,7 @@
 version: '2'
 services:
   neo4j:
-    image: 'bitnami/neo4j:latest'
+    image: 'bitnami/neo4j:3'
     ports:
       - '7474:7474'
       - '7473:7473'
