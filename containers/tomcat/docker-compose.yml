@@ -2,9 +2,7 @@ version: '2'
 
 services:
   tomcat:
-    image: 'bitnami/tomcat:latest'
-    labels:
-      kompose.service.type: nodeport
+    image: 'bitnami/tomcat:8.5'
     ports:
       - '8080:8080'
     volumes:
