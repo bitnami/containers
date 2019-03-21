@@ -1,5 +1,4 @@
 version: '2'
-
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
@@ -8,7 +7,7 @@ services:
 
   myapp:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: 'bitnami/rails:latest'
+    image: bitnami/rails:5-debian-9
     environment:
       - DATABASE_HOST=mariadb
       - DATABASE_NAME=my_app_development
