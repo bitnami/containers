@@ -13,9 +13,7 @@ services:
     depends_on:
       - mongodb
   parse-dashboard:
-    image: 'bitnami/parse-dashboard:latest'
-    labels:
-      kompose.service.type: nodeport
+    image: 'bitnami/parse-dashboard:1'
     ports:
       - '80:4040'
     volumes:
