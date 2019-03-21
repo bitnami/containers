@@ -7,7 +7,7 @@ services:
     volumes:
       - 'mariadb_data:/bitnami'
   redmine:
-    image: 'bitnami/redmine:latest'
+    image: 'bitnami/redmine:4'
     ports:
       - '80:3000'
     volumes:
