@@ -249,14 +249,14 @@ services:
 
 # Reverse proxy to other containers
 
-NGINX can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an NGINX frontend. [Add a virtual host](#adding-custom-virtual-hosts) like the following to do so:
+NGINX can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an NGINX frontend. To do so, [add a virtual host](#adding-custom-virtual-hosts) like the following in the `/opt/bitnami/nginx/conf/vhosts/` folder:
 
 ```
 server {
-    listen 0.0.0.0:80;
+    listen 0.0.0.0:8080;
     server_name yourapp.com;
-    access_log /logs/yourapp_access.log;
-    error_log /logs/yourapp_error.log;
+    access_log /opt/bitnami/nginx/logs/yourapp_access.log;
+    error_log /opt/bitnami/nginx/logs/yourapp_error.log;
 
     location / {
         proxy_set_header X-Real-IP $remote_addr;
