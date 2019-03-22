@@ -55,8 +55,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5.0-rhel-7`, `5.0.4-rhel-7-r3` (5.0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.4-rhel-7-r3/5.0/rhel-7/Dockerfile)
-* [`5.0-ol-7`, `5.0.4-ol-7-r4` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.4-ol-7-r4/5.0/ol-7/Dockerfile)
+* [`5.0-rhel-7`, `5.0.4-rhel-7-r4` (5.0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.4-rhel-7-r4/5.0/rhel-7/Dockerfile)
+* [`5.0-ol-7`, `5.0.4-ol-7-r3` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.4-ol-7-r3/5.0/ol-7/Dockerfile)
 * [`5.0-debian-9`, `5.0.4-debian-9-r4`, `5.0`, `5.0.4`, `5.0.4-r4` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.4-debian-9-r4/5.0/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.14-ol-7-r4` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-ol-7-r4/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.14-debian-9-r4`, `4.0`, `4.0.14`, `4.0.14-r4`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-debian-9-r4/4.0/debian-9/Dockerfile)
