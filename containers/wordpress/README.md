@@ -38,9 +38,9 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-rhel-7`, `5.1.1-rhel-7-r9` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.1-rhel-7-r9/5/rhel-7/Dockerfile)
+* [`5-rhel-7`, `5.1.1-rhel-7-r10` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.1-rhel-7-r10/5/rhel-7/Dockerfile)
 * [`5-ol-7`, `5.1.1-ol-7-r10` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.1-ol-7-r10/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.1.1-debian-9-r9`, `5`, `5.1.1`, `5.1.1-r9`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.1-debian-9-r9/5/debian-9/Dockerfile)
+* [`5-debian-9`, `5.1.1-debian-9-r10`, `5`, `5.1.1`, `5.1.1-r10`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.1-debian-9-r10/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
