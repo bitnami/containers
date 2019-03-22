@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r196
+FROM bitnami/minideb-extras-base:stretch-r197
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -16,7 +16,7 @@ COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.22-debian-9-r37" \
+    BITNAMI_IMAGE_VERSION="10.2.22-debian-9-r38" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
