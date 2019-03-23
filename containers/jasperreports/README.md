@@ -37,8 +37,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-ol-7`, `7.1.1-ol-7-r19` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.1-ol-7-r19/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.1.1-debian-9-r17`, `7`, `7.1.1`, `7.1.1-r17`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.1-debian-9-r17/7/debian-9/Dockerfile)
+* [`7-ol-7`, `7.1.1-ol-7-r18` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.1-ol-7-r18/7/ol-7/Dockerfile)
+* [`7-debian-9`, `7.1.1-debian-9-r18`, `7`, `7.1.1`, `7.1.1-r18`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.1-debian-9-r18/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jasperreports GitHub repo](https://github.com/bitnami/bitnami-docker-jasperreports).
 
