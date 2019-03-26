@@ -52,8 +52,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-rhel-7`, `1.4.4-rhel-7-r4` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.4.4-rhel-7-r4/1/rhel-7/Dockerfile)
-* [`1-ol-7`, `1.4.4-ol-7-r5` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.4.4-ol-7-r5/1/ol-7/Dockerfile)
+* [`1-rhel-7`, `1.4.4-rhel-7-r5` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.4.4-rhel-7-r5/1/rhel-7/Dockerfile)
+* [`1-ol-7`, `1.4.4-ol-7-r4` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.4.4-ol-7-r4/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.4.4-debian-9-r0`, `1`, `1.4.4`, `1.4.4-r0`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.4.4-debian-9-r0/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/consul GitHub repo](https://github.com/bitnami/bitnami-docker-consul).
