@@ -2,7 +2,7 @@ version: '2'
 
 services:
   consul:
-    image: bitnami/consul:latest
+    image: bitnami/consul:1
     volumes:
       - consul_data:/bitnami
     ports:
