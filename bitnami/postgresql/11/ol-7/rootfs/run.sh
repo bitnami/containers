@@ -8,6 +8,9 @@ DATA_DIR="${MOUNT_POINT_DIR}/data"
 CONF_FILE="${POSTGRESQL_BASE_DIR}/conf/postgresql.conf"
 PID_FILE="${POSTGRESQL_BASE_DIR}/tmp/postgresql.pid"
 PG_HBA_FILE="${POSTGRESQL_BASE_DIR}/data/pg_hba.conf"
+if [[ -f "${POSTGRESQL_BASE_DIR}/conf/pg_hba.conf" ]];then
+    PG_HBA_FILE="${POSTGRESQL_BASE_DIR}/conf/pg_hba.conf"
+fi
 
 START_ARGS=("-D" "$DATA_DIR" "--config-file=$CONF_FILE" "--external_pid_file=$PID_FILE" "--hba_file=$PG_HBA_FILE")
 STOP_ARGS=("stop" "-w" "-D" "$DATA_DIR")
