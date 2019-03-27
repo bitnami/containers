@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.38-2 --checksum f28dbfaf4c6f3ce1b2e8e9f33ed13a
 RUN bitnami-pkg unpack php-7.1.27-0 --checksum 4b1d988744f941ce434e6367ae2ebb24d5eb0165ff8a5f17fb8c3f048cfc6189
 RUN bitnami-pkg unpack mysql-client-10.2.23-0 --checksum 3f364d915f1e62037db20a41c7d750004d69c897dd7934e9a3cd2d4c491f4175
 RUN bitnami-pkg unpack libphp-7.1.27-0 --checksum 189e5268903e19b865b3aaae16535c276c2720c5104a23a2749b100c9038c6aa
-RUN bitnami-pkg unpack magento-2.3.0-20 --checksum a3ee4e9dcd48f732de088ea6b233a1971be7416b3d07537a289fa923e8d72401
+RUN bitnami-pkg unpack magento-2.3.1-0 --checksum c76defe8894161b0d3989f1c2d131140f73df752b4d2a24338425145c258e0c2
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
@@ -19,7 +19,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.0-debian-9-r89" \
+    BITNAMI_IMAGE_VERSION="2.3.1-debian-9-r0" \
     MAGENTO_ADMINURI="admin" \
     MAGENTO_DATABASE_NAME="bitnami_magento" \
     MAGENTO_DATABASE_PASSWORD="" \
