@@ -6,13 +6,13 @@ RUN install_packages advancecomp file ghostscript gifsicle hostname imagemagick 
 RUN bitnami-pkg install ruby-2.5.5-0 --checksum 7f676dbe187bb037fed4fd25da35ac68b34621e629ea5b80ee82afbccfbe9c6f
 RUN bitnami-pkg unpack postgresql-client-10.7.0-1 --checksum a351a3ea00d4443bdc6892e5f9d45aaf2fbbdf7c2aa40ab6cf423c78d535cca1
 RUN bitnami-pkg install git-2.21.0-0 --checksum 37eb00d863f94194c0c31464c2c747bc784e662adbab240b5f0ef46b3e259e52
-RUN bitnami-pkg unpack discourse-sidekiq-2.2.3-1 --checksum ffb21f10c3bbe57d109ce1b577ab0d429289772e77b7000d262a92b8d3d84de9
-RUN bitnami-pkg unpack discourse-2.2.3-1 --checksum 556e5fd852f2301715868b33824944575fe9fe801e39d2bb2d709165bc668164
+RUN bitnami-pkg unpack discourse-sidekiq-2.2.4-0 --checksum ddf352e600b70010027801792ba35aa39ad8236bc1e6b2d41d1eabad8d91a0e3
+RUN bitnami-pkg unpack discourse-2.2.4-0 --checksum 60761a1845f4ab8a2a39bfe0f35b2bb399bd8856dda406dd67d292e267b5453f
 RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.2.3-debian-9-r7" \
+    BITNAMI_IMAGE_VERSION="2.2.4-debian-9-r0" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_EXTERNAL_PORT_NUMBER="80" \
     DISCOURSE_HOST="discourse" \
