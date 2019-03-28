@@ -231,7 +231,7 @@ When you start the SuiteCRM image, you can adjust the configuration of the insta
 
 ##### User and Site configuration
 
- - `SUITECRM_USERNAME`: SuiteCRM application username. Default: **User**
+ - `SUITECRM_USERNAME`: SuiteCRM application username. Default: **user**
  - `SUITECRM_PASSWORD`: SuiteCRM application password. Default: **bitnami**
  - `SUITECRM_EMAIL`: SuiteCRM application email. Default: **user@example.com**
  - `SUITECRM_LAST_NAME`: SuiteCRM application last name. Default: **Name**
