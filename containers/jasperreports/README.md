@@ -153,13 +153,13 @@ This requires a minor change to the `docker-compose.yml` template previously sho
 version: '2'
 services:
   mariadb: 
-  image: bitnami/mariadb:latest
-  environment:
-    - ALLOW_EMPTY_PASSWORD=yes
-    - MARIADB_USER=bn_jasperreports
-    - MARIADB_DATABASE=bitnami_jasperreports
-  volumes:
-    - /path/to/mariadb-persistence:/bitnami
+    image: bitnami/mariadb:latest
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_jasperreports
+      - MARIADB_DATABASE=bitnami_jasperreports
+    volumes:
+      - /path/to/mariadb-persistence:/bitnami
   jasperreports:
     image: bitnami/jasperreports:latest
     environment:
