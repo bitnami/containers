@@ -37,8 +37,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-ol-7`, `7.11.2-ol-7-r33` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.2-ol-7-r33/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.11.2-debian-9-r34`, `7`, `7.11.2`, `7.11.2-r34`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.2-debian-9-r34/7/debian-9/Dockerfile)
+* [`7-ol-7`, `7.11.3-ol-7-r0` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.3-ol-7-r0/7/ol-7/Dockerfile)
+* [`7-debian-9`, `7.11.3-debian-9-r0`, `7`, `7.11.3`, `7.11.3-r0`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.3-debian-9-r0/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
 
@@ -231,13 +231,13 @@ When you start the SuiteCRM image, you can adjust the configuration of the insta
 
 ##### User and Site configuration
 
- - `SUITECRM_USERNAME`: SuiteCRM application username. Default: **user**
+ - `SUITECRM_USERNAME`: SuiteCRM application username. Default: **User**
  - `SUITECRM_PASSWORD`: SuiteCRM application password. Default: **bitnami**
  - `SUITECRM_EMAIL`: SuiteCRM application email. Default: **user@example.com**
- - `SUITECRM_LAST_NAME`: SuiteCRM application last name. Default: **Name**
+ - `SUITECRM_LASTNAME`: SuiteCRM application last name. Default: **Name**
  - `SUITECRM_HOST`: Host domain or IP.
  - `SUITECRM_HTTP_TIMEOUT`: Timeout in seconds used on http requests during wizard installation. Default: **120**
- - `SUITECRM_VALIDATE_USER_IP`: Whether to validate the user IP address or not. Default: **yes**. See [Troubleshooting](#troubleshooting) section.
+ - `SUITECRM_VALIDATE_USER_IP`: Whether to validate the user IP address or not. Default: **yes**. See (Troubleshooting)[#Troubleshooting] section.
 
 ##### Use an existing database
 
