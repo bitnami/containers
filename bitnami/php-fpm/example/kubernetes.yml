@@ -14,7 +14,7 @@ items:
           paths:
             - path: /
               backend:
-                serviceName: example-svc
+                serviceName: nginx-svc
                 servicePort: 80
     tls:
 - apiVersion: v1
@@ -27,7 +27,7 @@ items:
     ports:
     - name: http
       port: 9000
-      targetPort: http
+      targetPort: 9000
     selector:
       app: example
   status:
