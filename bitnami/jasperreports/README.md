@@ -148,28 +148,30 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 ### Mount host directories as data volumes with Docker Compose
 
 This requires a minor change to the `docker-compose.yml` template previously shown:
+
 ```yaml
 version: '2'
 services:
-  mariadb: bitnami/mariadb:latest
+  mariadb: 
+  image: bitnami/mariadb:latest
   environment:
     - ALLOW_EMPTY_PASSWORD=yes
     - MARIADB_USER=bn_jasperreports
     - MARIADB_DATABASE=bitnami_jasperreports
   volumes:
     - /path/to/mariadb-persistence:/bitnami
-jasperreports:
-  image: bitnami/jasperreports:latest
-  environment:
-    - JASPERREPORTS_DATABASE_USER=bn_jasperreports
-    - JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports
-    - ALLOW_EMPTY_PASSWORD=yes
-  depends_on:
-    - mariadb
-  ports:
-    - 80:8080
-  volumes:
-    - /path/to/jasperreports-persistence:/bitnami
+  jasperreports:
+    image: bitnami/jasperreports:latest
+    environment:
+      - JASPERREPORTS_DATABASE_USER=bn_jasperreports
+      - JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports
+      - ALLOW_EMPTY_PASSWORD=yes
+    depends_on:
+      - mariadb
+    ports:
+      - 80:8080
+    volumes:
+      - /path/to/jasperreports-persistence:/bitnami
 ```
 
 ### Mount persistent folders manually
