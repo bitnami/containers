@@ -234,10 +234,10 @@ When you start the SuiteCRM image, you can adjust the configuration of the insta
  - `SUITECRM_USERNAME`: SuiteCRM application username. Default: **User**
  - `SUITECRM_PASSWORD`: SuiteCRM application password. Default: **bitnami**
  - `SUITECRM_EMAIL`: SuiteCRM application email. Default: **user@example.com**
- - `SUITECRM_LASTNAME`: SuiteCRM application last name. Default: **Name**
+ - `SUITECRM_LAST_NAME`: SuiteCRM application last name. Default: **Name**
  - `SUITECRM_HOST`: Host domain or IP.
  - `SUITECRM_HTTP_TIMEOUT`: Timeout in seconds used on http requests during wizard installation. Default: **120**
- - `SUITECRM_VALIDATE_USER_IP`: Whether to validate the user IP address or not. Default: **yes**. See (Troubleshooting)[#Troubleshooting] section.
+ - `SUITECRM_VALIDATE_USER_IP`: Whether to validate the user IP address or not. Default: **yes**. See [Troubleshooting](#troubleshooting) section.
 
 ##### Use an existing database
 
