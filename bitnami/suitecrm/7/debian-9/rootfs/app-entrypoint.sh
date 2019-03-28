@@ -6,7 +6,8 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
-  nami_initialize apache php suitecrm
+  . /init.sh
+  nami_initialize apache php mysql-client libphp suitecrm
   info "Starting suitecrm... "
 fi
 
