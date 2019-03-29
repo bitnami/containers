@@ -1,4 +1,6 @@
 version: '2'
 services:
   kubectl:
-    image: bitnami/kubectl:1.13-rhel-7
+    # Build action should be successful from any RHEL Host system running the Docker service with subscription managed registered
+    # + info: https://access.redhat.com/solutions/253273
+    build: .
