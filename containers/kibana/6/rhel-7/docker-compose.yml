@@ -1,11 +1,16 @@
 version: '2'
 services:
   elasticsearch:
-    image: 'bitnami/elasticsearch:6'
+    # A Red Hat Customer Portal login is required to access this image. If you do not have one already, you can obtain one at https://www.redhat.com/wapps/ugc/register.html
+    # Pull action should be successful from any RHEL Host system running the Docker service and executing the following command: docker login registry.connect.redhat.com
+    # + info: https://access.redhat.com/containers/?tab=images&platform=docker#/registry.connect.redhat.com/bitnami/elasticsearch
+    image: registry.connect.redhat.com/bitnami/elasticsearch
     volumes:
       - 'elasticsearch_data:/bitnami'
   kibana:
-    image: 'bitnami/kibana:6-rhel-7'
+    # Build action should be successful from any RHEL Host system running the Docker service with subscription managed registered
+    # + info: https://access.redhat.com/solutions/253273
+    build: .
     ports:
       - '5601:5601'
     volumes:
