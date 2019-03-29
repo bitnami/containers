@@ -2,7 +2,9 @@ version: '2'
 
 services:
   consul:
-    image: bitnami/consul:1-rhel-7
+    # Build action should be successful from any RHEL Host system running the Docker service with subscription managed registered
+    # + info: https://access.redhat.com/solutions/253273
+    build: .
     volumes:
       - consul_data:/bitnami
     ports:
