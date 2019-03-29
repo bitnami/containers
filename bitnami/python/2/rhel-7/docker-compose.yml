@@ -3,7 +3,9 @@ version: '2'
 services:
   python:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: 'bitnami/python:2-rhel-7'
+    # Build action should be successful from any RHEL Host system running the Docker service with subscription managed registered
+    # + info: https://access.redhat.com/solutions/253273
+    build: .
     ports:
       - 8000:8000
     volumes:
