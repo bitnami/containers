@@ -5,7 +5,10 @@ services:
     volumes:
       - mongodb_data:/bitnami
   parse:
-    image: bitnami/parse:3-rhel-7
+    # A Red Hat Customer Portal login is required to access this image. If you do not have one already, you can obtain one at https://www.redhat.com/wapps/ugc/register.html
+    # Pull action should be successful from any RHEL Host system running the Docker service and executing the following command: docker login registry.connect.redhat.com
+    # + info: https://access.redhat.com/containers/?tab=images&platform=docker#/registry.connect.redhat.com/bitnami/parse
+    image: registry.connect.redhat.com/bitnami/parse
     ports:
       - '1337:1337'
     volumes:
