@@ -2,7 +2,9 @@ version: '2'
 
 services:
   kube-state-metrics:
-    image: bitnami/kube-state-metrics:1-rhel-7
+    # Build action should be successful from any RHEL Host system running the Docker service with subscription managed registered
+    # + info: https://access.redhat.com/solutions/253273
+    build: .
     ports:
       - '8080:8080'
       - '8081:8081'
