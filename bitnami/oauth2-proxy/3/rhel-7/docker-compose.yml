@@ -2,7 +2,9 @@ version: '2'
 
 services:
   oauth2-proxy:
-    image: bitnami/oauth2-proxy:3-rhel-7
+    # Build action should be successful from any RHEL Host system running the Docker service with subscription managed registered
+    # + info: https://access.redhat.com/solutions/253273
+    build: .
     ports:
       - '8080:8080'
       - '4180:4180'
