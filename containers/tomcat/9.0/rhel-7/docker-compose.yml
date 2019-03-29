@@ -2,7 +2,9 @@ version: '2'
 
 services:
   tomcat:
-    image: 'bitnami/tomcat:9.0-rhel-7'
+    # Build action should be successful from any RHEL Host system running the Docker service with subscription managed registered
+    # + info: https://access.redhat.com/solutions/253273
+    build: .
     ports:
       - '8080:8080'
     volumes:
