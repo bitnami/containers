@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`11-ol-7`, `11.2.0-ol-7-r43` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.2.0-ol-7-r43/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.2.0-debian-9-r43`, `11`, `11.2.0`, `11.2.0-r43` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.2.0-debian-9-r43/11/debian-9/Dockerfile)
-* [`10-ol-7`, `10.7.0-ol-7-r43` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.7.0-ol-7-r43/10/ol-7/Dockerfile)
+* [`10-ol-7`, `10.7.0-ol-7-r44` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.7.0-ol-7-r44/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.7.0-debian-9-r43`, `10`, `10.7.0`, `10.7.0-r43`, `latest` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.7.0-debian-9-r43/10/debian-9/Dockerfile)
 * [`9.6-ol-7`, `9.6.12-ol-7-r43` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.12-ol-7-r43/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.12-debian-9-r43`, `9.6`, `9.6.12`, `9.6.12-r43` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.12-debian-9-r43/9.6/debian-9/Dockerfile)
@@ -564,7 +564,7 @@ The Bitnami PostgreSQL container allows two different sets of environment variab
 | POSTGRESQL_INITDB_ARGS               | POSTGRES_INITDB_ARGS               |
 | POSTGRESQL_INITDB_WALDIR             | POSTGRES_INITDB_WALDIR             |
 | POSTGRESQL_DATA_DIR                  | PGDATA                             |
-| POSTGRESQL_REPLICATION_USER          | POSTGRES_REPLICATION_USER          |
+| POSTGRESQL_REPLICATION_USER          | POSTGRES_REPLICATION_PASSWORD      |
 | POSTGRESQL_REPLICATION_MODE          | POSTGRES_REPLICATION_MODE          |
 | POSTGRESQL_REPLICATION_PASSWORD      | POSTGRES_REPLICATION_PASSWORD      |
 | POSTGRESQL_REPLICATION_PASSWORD_FILE | POSTGRES_REPLICATION_PASSWORD_FILE |
