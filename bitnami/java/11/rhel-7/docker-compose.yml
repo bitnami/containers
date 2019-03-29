@@ -3,7 +3,9 @@ version: '2'
 services:
   java:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: 'bitnami/java:11-rhel-7'
+    # Build action should be successful from any RHEL Host system running the Docker service with subscription managed registered
+    # + info: https://access.redhat.com/solutions/253273
+    build: .
     command: ["tail", "-f", "/dev/null"] # To keep the container running
     ports:
       - 8080:8080
