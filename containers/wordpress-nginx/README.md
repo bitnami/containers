@@ -45,7 +45,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-rhel-7`, `5.1.1-rhel-7-r16` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.1.1-rhel-7-r16/5/rhel-7/Dockerfile)
+* [`5-rhel-7`, `5.1.1-rhel-7-r17` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.1.1-rhel-7-r17/5/rhel-7/Dockerfile)
 * [`5-ol-7`, `5.1.1-ol-7-r16` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.1.1-ol-7-r16/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.1.1-debian-9-r16`, `5`, `5.1.1`, `5.1.1-r16`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.1.1-debian-9-r16/5/debian-9/Dockerfile)
 
@@ -140,7 +140,10 @@ services:
     volumes:
       - /path/to/mariadb-persistence:/bitnami
   wordpress:
-    image: bitnami/wordpress-nginx:latest-rhel-7
+    # A Red Hat Customer Portal login is required to access this image. If you do not have one already, you can obtain one at https://www.redhat.com/wapps/ugc/register.html
+    # Pull action should be successful from any RHEL Host system running the Docker service and executing the following command: docker login registry.connect.redhat.com
+    # + info: https://access.redhat.com/containers/?tab=images&platform=docker#/registry.connect.redhat.com/bitnami/wordpress-nginx-php7
+    image: registry.connect.redhat.com/bitnami/wordpress-nginx-php7
     depends_on:
       - mariadb
     ports:
@@ -244,7 +247,10 @@ This would be an example of SMTP configuration using a GMail account:
 
 ```yaml
   wordpress:
-    image: bitnami/wordpress-nginx:latest-rhel-7
+    # A Red Hat Customer Portal login is required to access this image. If you do not have one already, you can obtain one at https://www.redhat.com/wapps/ugc/register.html
+    # Pull action should be successful from any RHEL Host system running the Docker service and executing the following command: docker login registry.connect.redhat.com
+    # + info: https://access.redhat.com/containers/?tab=images&platform=docker#/registry.connect.redhat.com/bitnami/wordpress-nginx-php7
+    image: registry.connect.redhat.com/bitnami/wordpress-nginx-php7
     ports:
       - 80:80
       - 443:443
