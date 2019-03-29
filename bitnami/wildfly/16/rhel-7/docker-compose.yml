@@ -2,7 +2,9 @@ version: '2'
 
 services:
   wildfly:
-    image: 'bitnami/wildfly:16-rhel-7'
+    # Build action should be successful from any RHEL Host system running the Docker service with subscription managed registered
+    # + info: https://access.redhat.com/solutions/253273
+    build: .
     labels:
       kompose.service.type: nodeport
     ports:
