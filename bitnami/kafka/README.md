@@ -58,7 +58,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-rhel-7`, `2.2.0-rhel-7-r2` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-rhel-7-r2/2/rhel-7/Dockerfile)
-* [`2-ol-7`, `2.2.0-ol-7-r3` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-ol-7-r3/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.2.0-ol-7-r4` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-ol-7-r4/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.2.0-debian-9-r2`, `2`, `2.2.0`, `2.2.0-r2`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-debian-9-r2/2/debian-9/Dockerfile)
 * [`1-ol-7`, `1.1.1-ol-7-r232` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r232/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.1.1-debian-9-r167`, `1`, `1.1.1`, `1.1.1-r167` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r167/1/debian-9/Dockerfile)
@@ -220,6 +220,9 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 - `KAFKA_LISTENER_SECURITY_PROTOCOL_MAP`: Maps listener names to security protocols. Default: **PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL**
 - `KAFKA_INTER_BROKER_LISTENER_NAME`: Name of listener used for communication between brokers. No defaults.
 - `KAFKA_DEFAULT_REPLICATION_FACTOR`: Default replication factors for automatically created topics. Default: **1**
+- `KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR`: The replication factor for the offsets topic. Default: **1**
+- `KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR`: The replication factor for the transaction topic. Default: **1**
+- `KAFKA_TRANSACTION_STATE_LOG_MIN_ISR`: Overridden min.insync.replicas config for the transaction topic. Default: **1**
 - `KAFKA_NUM_PARTITIONS`: The default number of log partitions per topic. Default: **1**
 - `KAFKA_NUM_RECOVERY_THREADS_PER_DATA_DIR` The number of threads per data directory to be used for log recovery at startup and flushing at shutdown. Default: **1**
 - `KAFKA_MAX_MESSAGE_BYTES`: The largest record batch size allowed by Kafka. Default: **1000012**
