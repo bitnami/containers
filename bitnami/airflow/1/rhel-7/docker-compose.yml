@@ -12,8 +12,8 @@ services:
   airflow:
     # A Red Hat Customer Portal login is required to access this image. If you do not have one already, you can obtain one at https://www.redhat.com/wapps/ugc/register.html
     # Pull action should be successful from any RHEL Host system running the Docker service and executing the following command: docker login registry.connect.redhat.com
-    # + info: https://access.redhat.com/containers/?tab=images&platform=docker#/registry.connect.redhat.com/bitnami/airflow
-    image: registry.connect.redhat.com/bitnami/airflow
+    # + info: https://access.redhat.com/containers/?tab=images&platform=docker#/registry.connect.redhat.com/bitnami/apache-airflow
+    image: registry.connect.redhat.com/bitnami/apache-airflow
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USER=bn_airflow
