@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r248
+FROM bitnami/oraclelinux-extras-base:7-r249
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -16,7 +16,7 @@ COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="8.0.15-ol-7-r48" \
+    BITNAMI_IMAGE_VERSION="8.0.15-ol-7-r49" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
