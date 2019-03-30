@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7-ol-7`, `7.1.1-ol-7-r25` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.1-ol-7-r25/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.1.1-debian-9-r24`, `7`, `7.1.1`, `7.1.1-r24`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.1-debian-9-r24/7/debian-9/Dockerfile)
+* [`7-debian-9`, `7.1.1-debian-9-r25`, `7`, `7.1.1`, `7.1.1-r25`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.1.1-debian-9-r25/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jasperreports GitHub repo](https://github.com/bitnami/bitnami-docker-jasperreports).
 
@@ -69,7 +69,7 @@ services:
     image: bitnami/jasperreports:latest
     environment:
       - MARIADB_HOST=mariadb
-      - MARIADB_PORT=3306
+      - MARIADB_PORT_NUMBER=3306
       - JASPERREPORTS_DATABASE_USER=bn_jasperreports
       - JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports
       - ALLOW_EMPTY_PASSWORD=yes
@@ -151,25 +151,26 @@ This requires a minor change to the `docker-compose.yml` template previously sho
 ```yaml
 version: '2'
 services:
-  mariadb: bitnami/mariadb:latest
-  environment:
-    - ALLOW_EMPTY_PASSWORD=yes
-    - MARIADB_USER=bn_jasperreports
-    - MARIADB_DATABASE=bitnami_jasperreports
-  volumes:
-    - /path/to/mariadb-persistence:/bitnami
-jasperreports:
-  image: bitnami/jasperreports:latest
-  environment:
-    - JASPERREPORTS_DATABASE_USER=bn_jasperreports
-    - JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports
-    - ALLOW_EMPTY_PASSWORD=yes
-  depends_on:
-    - mariadb
-  ports:
-    - 80:8080
-  volumes:
-    - /path/to/jasperreports-persistence:/bitnami
+  mariadb:
+    image: bitnami/mariadb:latest
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_jasperreports
+      - MARIADB_DATABASE=bitnami_jasperreports
+    volumes:
+      - /path/to/mariadb-persistence:/bitnami
+  jasperreports:
+    image: bitnami/jasperreports:latest
+    environment:
+      - JASPERREPORTS_DATABASE_USER=bn_jasperreports
+      - JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports
+      - ALLOW_EMPTY_PASSWORD=yes
+    depends_on:
+      - mariadb
+    ports:
+      - 80:8080
+    volumes:
+      - /path/to/jasperreports-persistence:/bitnami
 ```
 
 ### Mount persistent folders manually
@@ -329,7 +330,7 @@ This would be an example of SMTP configuration using a GMail account:
 ```bash
  $ docker run -d -p 80:8080 --name jasperreports --net=jasperreports-tier \
     -e MARIADB_HOST=mariadb \
-    -e MARIADB_PORT=3306 \
+    -e MARIADB_PORT_NUMBER=3306 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e JASPERREPORTS_DATABASE_USER=bn_jasperreports \
     -e JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports \
