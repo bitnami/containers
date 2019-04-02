@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r330
+FROM bitnami/minideb-extras:stretch-r331
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -14,7 +14,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="phpbb" \
-    BITNAMI_IMAGE_VERSION="3.2.5-debian-9-r88" \
+    BITNAMI_IMAGE_VERSION="3.2.5-debian-9-r89" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
