@@ -177,7 +177,7 @@ cassandra:
 
 ```bash
  $ docker run --name cassandra -d -p 7000:7000 --network=cassandra_network \
-    -e CASSANDRA_PORT_NUMBER=7000 \
+    -e CASSANDRA_TRANSPORT_PORT_NUMBER=7000 \
     -v /your/local/path/bitnami/cassandra:/bitnami \
     bitnami/cassandra
 ```
@@ -219,7 +219,7 @@ Perform any desired modifications in that file
 ```bash
 $ docker run --name cassandra \
     -p 7000:7000  \
-    -e CASSANDRA_PORT_NUMBER=7000 \
+    -e CASSANDRA_TRANSPORT_PORT_NUMBER=7000 \
     -v /path/to/cassandra.yaml:/bitnami/cassandra/conf/cassandra.yaml:ro \
     -v /your/local/path/bitnami/cassandra:/bitnami \
     bitnami/cassandra:latest
