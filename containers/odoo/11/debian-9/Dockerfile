@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r330
+FROM bitnami/minideb-extras:stretch-r331
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack odoo-11.0.20190315-0 --checksum 71dadb373de1751a9a861fa19
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="11.0.20190315-debian-9-r17" \
+    BITNAMI_IMAGE_VERSION="11.0.20190315-debian-9-r18" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:$PATH" \
