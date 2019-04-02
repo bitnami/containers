@@ -1,8 +1,8 @@
-FROM bitnami/python:2.7.16-ol-7-r28 as development
+FROM bitnami/python:2.7.16-ol-7-r29 as development
 
 ######
 
-FROM bitnami/oraclelinux-runtimes:7-r277
+FROM bitnami/oraclelinux-runtimes:7-r278
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN install_packages bzip2-libs ca-certificates glibc keyutils-libs krb5-libs li
 COPY --from=development /opt/bitnami/python /opt/bitnami/python
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="2.7.16-ol-7-r29-prod" \
+    BITNAMI_IMAGE_VERSION="2.7.16-ol-7-r30-prod" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 CMD [ "python" ]
