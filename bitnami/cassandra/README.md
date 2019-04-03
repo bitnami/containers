@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-rhel-7`, `3.11.4-rhel-7-r51` (3/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.4-rhel-7-r51/3/rhel-7/Dockerfile)
-* [`3-ol-7`, `3.11.4-ol-7-r50` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.4-ol-7-r50/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.11.4-ol-7-r51` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.4-ol-7-r51/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.11.4-debian-9-r48`, `3`, `3.11.4`, `3.11.4-r48`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.4-debian-9-r48/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
@@ -191,7 +191,7 @@ cassandra:
  - `CASSANDRA_PASSWORD_SEEDER`: Password seeder will change the Cassandra default credentials at initialization. In clusters, only one node should be marked as password seeder. Default: **no**
  - `CASSANDRA_PASSWORD`: Cassandra user password. Default: **cassandra**
  - `CASSANDRA_NUM_TOKENS`: Number of tokens for the node. Default: **256**.
-- `CASSANDRA_HOST`: Hostname used to configure Cassandra. It can be either an IP or a domain. If left empty, it will be resolved to the machine IP.
+ - `CASSANDRA_HOST`: Hostname used to configure Cassandra. It can be either an IP or a domain. If left empty, it will be resolved to the machine IP.
  - `CASSANDRA_CLUSTER_NAME`: Cluster name to configure Cassandra.. Defaults: **My Cluster**
  - `CASSANDRA_SEEDS`: Hosts that will act as Cassandra seeds. No defaults.
  - `CASSANDRA_ENDPOINT_SNITCH`: Snitch name (which determines which data centers and racks nodes belong to). Default **SimpleSnitch**
@@ -344,7 +344,7 @@ $ docker run --name cassandra \
   -v /path/to/cassandra-persistence:/bitnami
   bitnami/cassandra:latest
 ```
-Or with docker-compose 
+Or with docker-compose
 
 ```yaml
 cassandra:
