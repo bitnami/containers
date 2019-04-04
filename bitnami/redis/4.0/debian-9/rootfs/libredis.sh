@@ -197,6 +197,9 @@ export REDIS_LOGDIR="${REDIS_BASEDIR}/logs"
 export PATH="${REDIS_BASEDIR}/bin:$PATH"
 export REDIS_DAEMON_USER="redis"
 export REDIS_DAEMON_GROUP="redis"
+export REDIS_SENTINEL_HOST="${REDIS_SENTINEL_HOST:-}"
+export REDIS_SENTINEL_MASTER_NAME="${REDIS_SENTINEL_MASTER_NAME:-}"
+export REDIS_SENTINEL_PORT_NUMBER="${REDIS_SENTINEL_PORT_NUMBER:-26379}"
 EOF
     if [[ -f "$REDIS_PASSWORD_FILE" ]]; then
         cat <<"EOF"
@@ -273,6 +276,11 @@ redis_configure_replication() {
             redis_conf_set masterauth "$REDIS_PASSWORD"
         fi
     elif [[ "$REDIS_REPLICATION_MODE" =~ ^(slave|replica)$ ]]; then
+        if [[ -n "$REDIS_SENTINEL_HOST" ]]; then
+            REDIS_SENTINEL_INFO=($(redis-cli -h "$REDIS_SENTINEL_HOST" -p "$REDIS_SENTINEL_PORT_NUMBER" sentinel get-master-addr-by-name "$REDIS_SENTINEL_MASTER_NAME"))
+            REDIS_MASTER_HOST=${REDIS_SENTINEL_INFO[0]}
+            REDIS_MASTER_PORT_NUMBER=${REDIS_SENTINEL_INFO[1]}
+        fi
         wait-for-port --host "$REDIS_MASTER_HOST" "$REDIS_MASTER_PORT_NUMBER"
         [[ -n "$REDIS_MASTER_PASSWORD" ]] && redis_conf_set masterauth "$REDIS_MASTER_PASSWORD"
         # Starting with Redis 5, use 'replicaof' instead of 'slaveof'. Maintaining both for backward compatibility
