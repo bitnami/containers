@@ -46,10 +46,10 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5.0-rhel-7`, `5.0.4-rhel-7-r16` (5.0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.4-rhel-7-r16/5.0/rhel-7/Dockerfile)
-* [`5.0-ol-7`, `5.0.4-ol-7-r16` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.4-ol-7-r16/5.0/ol-7/Dockerfile)
+* [`5.0-ol-7`, `5.0.4-ol-7-r17` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.4-ol-7-r17/5.0/ol-7/Dockerfile)
 * [`5.0-debian-9`, `5.0.4-debian-9-r16`, `5.0`, `5.0.4`, `5.0.4-r16` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.4-debian-9-r16/5.0/debian-9/Dockerfile)
-* [`4.0-ol-7`, `4.0.14-ol-7-r15` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-ol-7-r15/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.14-debian-9-r15`, `4.0`, `4.0.14`, `4.0.14-r15`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-debian-9-r15/4.0/debian-9/Dockerfile)
+* [`4.0-ol-7`, `4.0.14-ol-7-r16` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-ol-7-r16/4.0/ol-7/Dockerfile)
+* [`4.0-debian-9`, `4.0.14-debian-9-r16`, `4.0`, `4.0.14`, `4.0.14-r16`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-debian-9-r16/4.0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
@@ -376,26 +376,6 @@ $ docker-compose up --detach --scale redis-master=1 --scale redis-secondary=3
 The above command scales up the number of replicas to `3`. You can scale down in the same way.
 
 > **Note**: You should not scale up/down the number of master nodes. Always have only one master node running.
-
-### Using redis-sentinel
-
-If you have redis-sentinel running, you can use it to find the current master by configuring the following environment variables:
-- REDIS_REPLICATION_MODE=slave (we only want to configure this when in slave mode)
-- REDIS_SENTINEL_HOST=<sentinel-hosts> (this would ideally be a round robin DNS hostname)
-- REDIS_SENTINEL_PORT=<port sentinel is listening on>
-
-What happens behind the scenes is at startup the sentinel gets queried for the current master IP and port, and sets the ```REDIS_MASTER_HOST``` and ```REDIS_MASTER_PORTNUMER``` with those values.
-
-```bash
-$ docker run --name redis-replica \
-  --link redis-master:master \
-  -e REDIS_REPLICATION_MODE=slave \
-  -e REDIS_SENTINEL_HOST=redis-sentinel \
-  -e REDIS_SENTINEL_PORT_NUMBER=26379 \
-  -e REDIS_SENTINEL_MASTER_NAME=mymaster \
-  -e REDIS_PASSWORD=password123 \
-  bitnami/redis:latest
-```
 
 ## Configuration file
 
