@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r209
+FROM bitnami/minideb-extras-base:stretch-r210
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ COPY rootfs /
 RUN /prepare.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.4-debian-9-r16" \
+    BITNAMI_IMAGE_VERSION="5.0.4-debian-9-r17" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
@@ -23,9 +23,6 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     REDIS_MASTER_PASSWORD="" \
     REDIS_MASTER_PASSWORD_FILE="" \
     REDIS_MASTER_PORT_NUMBER="6379" \
-    REDIS_SENTINEL_HOST="" \
-    REDIS_SENTINEL_MASTER_NAME="mymaster" \
-    REDIS_SENTINEL_PORT_NUMBER="26379" \
     REDIS_PASSWORD="" \
     REDIS_PASSWORD_FILE="" \
     REDIS_REPLICATION_MODE=""
