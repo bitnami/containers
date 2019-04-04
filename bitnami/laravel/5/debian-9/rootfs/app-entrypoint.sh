@@ -13,6 +13,10 @@ app_present() {
   [ -f /app/config/database.php ]
 }
 
+vendor_present() {
+  [ -f /app/vendor ]
+}
+
 wait_for_db() {
   local db_host="${DB_HOST:-mariadb}"
   local db_port="${DB_PORT:-3306}"
@@ -43,8 +47,13 @@ if [ "${1}" == "php" -a "$2" == "artisan" -a "$3" == "serve" ]; then
   fi
 
   log "Installing/Updating Laravel dependencies (composer)"
-  composer install
-  log "Dependencies updated"
+  if ! vendor_present; then
+    composer install
+    log "Dependencies installed"
+  else
+    composer update
+    log "Dependencies updated"
+  fi
 
   wait_for_db
 
