@@ -3,16 +3,16 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs ca-certificates cyrus-sasl-lib freetype glibc gmp keyutils-libs krb5-libs libcom_err libcurl libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libpng libselinux libssh2 libstdc++ libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline wget xz-libs zlib
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/php-7.3.3-0-linux-x86_64-rhel-7.tar.gz && \
-    echo "b240f8c51436cbf1e83c012b3777394dab57592386cdc8cebd736f0722740f8f  /tmp/bitnami/pkg/cache/php-7.3.3-0-linux-x86_64-rhel-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/php-7.3.3-0-linux-x86_64-rhel-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/php-7.3.3-0-linux-x86_64-rhel-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/php-7.3.4-0-linux-x86_64-rhel-7.tar.gz && \
+    echo "592fed7eefad46db058975c7e7bf04775e91dc752d7d72b668cd0342f89b5225  /tmp/bitnami/pkg/cache/php-7.3.4-0-linux-x86_64-rhel-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/php-7.3.4-0-linux-x86_64-rhel-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/php-7.3.4-0-linux-x86_64-rhel-7.tar.gz
 RUN mkdir -p /bitnami && ln -sf /bitnami/php /bitnami/php-fpm
 RUN mkdir /opt/bitnami/php/logs && touch /opt/bitnami/php/logs/php-fpm.log
 RUN chown -R 1001:root /opt/bitnami/php/logs
 
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="7.3.3-rhel-7-r28" \
+    BITNAMI_IMAGE_VERSION="7.3.4-rhel-7-r0" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     NAMI_PREFIX="/.nami" \
