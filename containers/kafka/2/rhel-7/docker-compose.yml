@@ -2,7 +2,7 @@ version: '2'
 
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:3'
+    image: bitnami/zookeeper:3
     ports:
       - '2181:2181'
     volumes:
@@ -10,7 +10,11 @@ services:
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
   kafka:
-    image: 'bitnami/kafka:2-rhel-7'
+    # Force docker-compose to use a comprehensive name for the image
+    image: bitnami_kafka:rhel-7
+    # Build action should be successful from any RHEL Host system running the Docker service with subscription managed registered
+    # + info: https://access.redhat.com/solutions/253273
+    build: .
     ports:
       - '9092:9092'
     volumes:
