@@ -7,11 +7,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages glibc libgcc
 RUN bitnami-pkg install java-1.8.201-0 --checksum 9216aff7a05a39c45934859a19b66a5e1f343449fd929544a3aff1a6cddb35c2
-RUN bitnami-pkg unpack neo4j-3.5.3-0 --checksum fe6e7017cae4552b9ef99d21c8d8ab10bfcc81611ca39bed504f392962b42a17
+RUN bitnami-pkg unpack neo4j-3.5.4-0 --checksum 8c2e0a9e762208e04fa3da848e913f0096bc35302fb3e1c5adef48ddbe528daa
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="3.5.3-rhel-7-r53" \
+    BITNAMI_IMAGE_VERSION="3.5.4-rhel-7-r0" \
     NAMI_PREFIX="/.nami" \
     NEO4J_BOLT_PORT_NUMBER="7687" \
     NEO4J_HOST="" \
