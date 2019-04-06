@@ -6,12 +6,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libpcap0.8 libssl1.1
-RUN bitnami-pkg unpack mongodb-3.6.11-1 --checksum 4070d3ac2092dae8ad901cb057df25f5647dd501f1265521be8510c818934f66
+RUN bitnami-pkg unpack mongodb-3.6.12-0 --checksum 2bfd517ee9740f11fcb2666a162a3ebc44b6286669eedd47863245dc850c167e
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.6.11-debian-9-r42" \
+    BITNAMI_IMAGE_VERSION="3.6.12-debian-9-r0" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_DISABLE_SYSTEM_LOG="no" \
