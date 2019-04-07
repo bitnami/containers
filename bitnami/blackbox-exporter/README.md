@@ -47,8 +47,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-rhel-7`, `0.14.0-rhel-7-r23` (0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.14.0-rhel-7-r23/0/rhel-7/Dockerfile)
-* [`0-ol-7`, `0.14.0-ol-7-r22` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.14.0-ol-7-r22/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.14.0-debian-9-r23`, `0`, `0.14.0`, `0.14.0-r23`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.14.0-debian-9-r23/0/debian-9/Dockerfile)
+* [`0-ol-7`, `0.14.0-ol-7-r23` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.14.0-ol-7-r23/0/ol-7/Dockerfile)
+* [`0-debian-9`, `0.14.0-debian-9-r22`, `0`, `0.14.0`, `0.14.0-r22`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.14.0-debian-9-r22/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/blackbox-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-blackbox-exporter).
 
