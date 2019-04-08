@@ -48,7 +48,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`8-rhel-7`, `8.0.0-rhel-7-r13` (8/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.0.0-rhel-7-r13/8/rhel-7/Dockerfile)
+* [`8-rhel-7`, `8.0.0-rhel-7-r14` (8/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.0.0-rhel-7-r14/8/rhel-7/Dockerfile)
 * [`8-ol-7`, `8.0.0-ol-7-r12` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.0.0-ol-7-r12/8/ol-7/Dockerfile)
 * [`8-debian-9`, `8.0.0-debian-9-r12`, `8`, `8.0.0`, `8.0.0-r12`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.0.0-debian-9-r12/8/debian-9/Dockerfile)
 
