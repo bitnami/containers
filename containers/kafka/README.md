@@ -57,7 +57,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-rhel-7`, `2.2.0-rhel-7-r5` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-rhel-7-r5/2/rhel-7/Dockerfile)
+* [`2-rhel-7`, `2.2.0-rhel-7-r6` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-rhel-7-r6/2/rhel-7/Dockerfile)
 * [`2-ol-7`, `2.2.0-ol-7-r13` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-ol-7-r13/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.2.0-debian-9-r11`, `2`, `2.2.0`, `2.2.0-r11`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-debian-9-r11/2/debian-9/Dockerfile)
 * [`1-ol-7`, `1.1.1-ol-7-r243` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r243/1/ol-7/Dockerfile)
