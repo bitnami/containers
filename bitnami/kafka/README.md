@@ -58,7 +58,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-rhel-7`, `2.2.0-rhel-7-r6` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-rhel-7-r6/2/rhel-7/Dockerfile)
-* [`2-ol-7`, `2.2.0-ol-7-r13` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-ol-7-r13/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.2.0-ol-7-r15` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-ol-7-r15/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.2.0-debian-9-r12`, `2`, `2.2.0`, `2.2.0-r12`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-debian-9-r12/2/debian-9/Dockerfile)
 * [`1-ol-7`, `1.1.1-ol-7-r243` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r243/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.1.1-debian-9-r177`, `1`, `1.1.1`, `1.1.1-r177` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r177/1/debian-9/Dockerfile)
@@ -243,7 +243,7 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 - `KAFKA_ZOOKEEPER_PASSWORD`: Kafka Zookeeper user password. No defaults
 - `KAFKA_CERTIFICATE_PASSWORD`: Password for certificates. No defaults.
 - `KAFKA_HEAP_OPTS`: Kafka's Java Heap size. Default: **-Xmx1024m -Xms1024m**
-
+- `KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM`: The endpoint identification algorithm to validate server hostname using server certificate. Default: **https**
 
 
 ```bash
