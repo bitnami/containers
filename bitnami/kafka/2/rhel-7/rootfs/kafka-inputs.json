@@ -31,6 +31,7 @@
   "kafkaSocketReceiveBufferBytes": "{{$global.env.KAFKA_SOCKET_RECEIVE_BUFFER_BYTES}}",
   "kafkaSocketRequestMaxBytes": "{{$global.env.KAFKA_SOCKET_REQUEST_MAX_BYTES}}",
   "kafkaSocketSendBufferBytes": "{{$global.env.KAFKA_SOCKET_SEND_BUFFER_BYTES}}",
+  "kafkaSslEndpointIdentificationAlgorithm": "{{$global.env.KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM}}",
   "kafkaTransactionStateLogMinIsr": "{{$global.env.KAFKA_TRANSACTION_STATE_LOG_MIN_ISR}}",
   "kafkaTransactionStateLogReplicationFactor": "{{$global.env.KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR}}",
   "kafkaZookeeperConnect": "{{$global.env.KAFKA_ZOOKEEPER_CONNECT}}",

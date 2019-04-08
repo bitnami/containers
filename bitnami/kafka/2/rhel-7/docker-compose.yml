@@ -11,7 +11,7 @@ services:
       - ALLOW_ANONYMOUS_LOGIN=yes
   kafka:
     # Force docker-compose to use a comprehensive name for the image
-    image: bitnami_kafka:rhel-7
+    image: bitnami_kafka:2-rhel-7
     # Build action should be successful from any RHEL Host system running the Docker service with subscription managed registered
     # + info: https://access.redhat.com/solutions/253273
     build: .
