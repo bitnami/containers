@@ -9,7 +9,7 @@ services:
       - 'elasticsearch_data:/bitnami'
   kibana:
     # Force docker-compose to use a comprehensive name for the image
-    image: bitnami_kibana:rhel-7
+    image: bitnami_kibana:6-rhel-7
     # Build action should be successful from any RHEL Host system running the Docker service with subscription managed registered
     # + info: https://access.redhat.com/solutions/253273
     build: .
