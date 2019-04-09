@@ -7,11 +7,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs glibc keyutils-libs krb5-libs libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre readline sqlite zlib
 RUN bitnami-pkg install node-8.15.1-1 --checksum 855c9535671e31199c6bfe42e5a5dd5ae184c374f32a5d2bee0d66d1f66f03fc
-RUN bitnami-pkg unpack parse-dashboard-1.2.0-21 --checksum 5634f9dc8e572bb53ca56a620ec8267d396387d380b9b8684862df9b36770178
+RUN bitnami-pkg unpack parse-dashboard-1.3.0-0 --checksum f08a7ebf05c27fa88a68facafb76d6ce4344d17553a7bd4b15740dbcb9cc4100
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.2.0-ol-7-r229" \
+    BITNAMI_IMAGE_VERSION="1.3.0-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
