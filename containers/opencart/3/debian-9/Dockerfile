@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.39-0 --checksum e6108f6ea91c18d8f5481a1015b301
 RUN bitnami-pkg unpack php-7.1.28-0 --checksum d42b033c9f897a43d96b1a34c5ebf53472f3c880ae1e3abf39ee361e116cccbe
 RUN bitnami-pkg unpack mysql-client-10.1.38-0 --checksum 7202055a6688186df2570efea631940d25f5bb6ecd06f4e036c852d13ffded0c
 RUN bitnami-pkg unpack libphp-7.1.28-0 --checksum 7ffe158e479228a559c4d87547c41bf1c88b17b87601b8c1565c1deb8918297e
-RUN bitnami-pkg unpack opencart-3.0.3-1-2 --checksum 63ab86a990007cb1ec49f05204604032656a417e545fc6741505444ec74907fc
+RUN bitnami-pkg unpack opencart-3.0.3-2-0 --checksum 594256aa9d9a50d70b0e3174425d6339fc1b510931abc8558376b4a3cd128135
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
@@ -17,7 +17,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="opencart" \
-    BITNAMI_IMAGE_VERSION="3.0.3-1-debian-9-r76" \
+    BITNAMI_IMAGE_VERSION="3.0.3-2-debian-9-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
