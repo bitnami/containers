@@ -4,7 +4,7 @@ services:
   java:
     tty: true # Enables debugging capabilities when attached to this container.
     # Force docker-compose to use a comprehensive name for the image
-    image: bitnami_java:rhel-7
+    image: bitnami_java:11-rhel-7
     # Build action should be successful from any RHEL Host system running the Docker service with subscription managed registered
     # + info: https://access.redhat.com/solutions/253273
     build: .
