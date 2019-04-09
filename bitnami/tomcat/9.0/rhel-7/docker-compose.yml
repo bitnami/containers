@@ -3,7 +3,7 @@ version: '2'
 services:
   tomcat:
     # Force docker-compose to use a comprehensive name for the image
-    image: bitnami_tomcat:rhel-7
+    image: bitnami_tomcat:9.0-rhel-7
     # Build action should be successful from any RHEL Host system running the Docker service with subscription managed registered
     # + info: https://access.redhat.com/solutions/253273
     build: .
