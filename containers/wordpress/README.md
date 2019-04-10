@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-rhel-7`, `5.1.1-rhel-7-r30` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.1-rhel-7-r30/5/rhel-7/Dockerfile)
+* [`5-rhel-7`, `5.1.1-rhel-7-r31` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.1-rhel-7-r31/5/rhel-7/Dockerfile)
 * [`5-ol-7`, `5.1.1-ol-7-r29` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.1-ol-7-r29/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.1.1-debian-9-r28`, `5`, `5.1.1`, `5.1.1-r28`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.1-debian-9-r28/5/debian-9/Dockerfile)
 
@@ -269,6 +269,7 @@ The WordPress instance can be customized by specifying environment variables on 
 - `WORDPRESS_TABLE_PREFIX`: Table prefix to use in WordPress. Default: **wp_**
 - `WORDPRESS_DATABASE_USER`: Database user that WordPress will use to connect with the database. Default: **bn_wordpress**
 - `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database. No defaults.
+- `WORDPRESS_SKIP_INSTALL`: Force the container to not execute the WordPress installation wizard. This is necessary in case you use a database that already has WordPress data. Default: **no**
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ##### Create a database for WordPress using mysql-client
@@ -422,6 +423,8 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   bitnami/wordpress:latest
 ```
 
+In case the database already contains data from a previous WordPress installation, you need to set the variable `WORDPRESS_SKIP_INSTALL` to `yes`. Otherwise, the container would execute the installation wizard and could modify the existing data in the database. Note that, when setting `WORDPRESS_SKIP_INSTALL` to `yes`, the values `WORDPRESS_USERNAME`, `WORDPRESS_PASSWORD`, `WORDPRESS_BLOG_NAME`, `WORDPRESS_EMAIL`, `WORDPRESS_BLOG_NAME` and `WORDPRESS_SMTP_*` variables will be ignored. Make sure that, in this imported database, the table prefix matches the one set in `WORDPRESS_TABLE_PREFIX`.
+
 ## WP-CLI tool
 
 The Bitnami WordPress container includes the command line interface **wp-cli** that can help you to manage and interact with your WP sites. To run this tool, please note you need use the proper system user, **daemon**.
@@ -443,6 +446,10 @@ $ docker exec wordpress sudo -u daemon -- wp help
 Find more information about parameters available in the tool in the [official documentation](https://make.wordpress.org/cli/handbook/config/).
 
 # Notable Changes
+
+## 5.1.1-r28, 5.1.1-rhel-7-r31 and 5.1.1-ol-7-r30
+
+- Users reported that they wanted to import their WordPress database from other installations, such as [this ticket](https://github.com/bitnami/bitnami-docker-wordpress/issues/157). Now, in order to cover this use case, the variable `WORDPRESS_SKIP_INSTALLATION` can be set to avoid the container launch the WordPress installation wizard.
 
 ## 5.0.3-r20
 
