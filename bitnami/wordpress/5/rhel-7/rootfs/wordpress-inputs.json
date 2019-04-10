@@ -13,6 +13,7 @@
   "httpsPort": "{{$global.env.WORDPRESS_HTTPS_PORT}}",
   "lastName": "{{$global.env.WORDPRESS_LAST_NAME}}",
   "password": "{{$global.env.WORDPRESS_PASSWORD}}",
+  "skipInstall": "{{$global.env.WORDPRESS_SKIP_INSTALL}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
   "smtpPort": "{{$global.env.SMTP_PORT}}",
