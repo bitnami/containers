@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack nginx-1.14.2-21 --checksum 73c924db078bebc7173aa5a5960362
 RUN bitnami-pkg unpack php-7.2.17-0 --checksum 97bd9cae7ecc3a5d674f018f908091c8a69dbe88ab0bd7288361b1e3f3fb88ec
 RUN bitnami-pkg install wp-cli-2.1.0-0 --checksum c44d62b19aa37754b55dc040b6e9fb50589ae2a3dac9e6c604653cf7a4f80893
 RUN bitnami-pkg unpack mysql-client-10.2.23-0 --checksum 3f364d915f1e62037db20a41c7d750004d69c897dd7934e9a3cd2d4c491f4175
-RUN bitnami-pkg unpack wordpress-5.1.1-1 --checksum 0d91120e6787d814bdac35e1e1079a6f1316f36321343bd2c517244203145e0e
+RUN bitnami-pkg unpack wordpress-5.1.1-2 --checksum 267603807577dae3a71058db25db0afa5ef65e82bfcb53022d17a61015ba39f6
 RUN mkdir -p /opt/bitnami/php/logs && chown daemon /opt/bitnami/php/logs && \
     mkdir -p /opt/bitnami/php/tmp && chown daemon /opt/bitnami/php/tmp && \
     ln -sf /opt/bitnami/php/etc /opt/bitnami/php/conf
@@ -17,7 +17,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="5.1.1-debian-9-r28" \
+    BITNAMI_IMAGE_VERSION="5.1.1-debian-9-r29" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -49,6 +49,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     WORDPRESS_HTTP_PORT="80" \
     WORDPRESS_LAST_NAME="LastName" \
     WORDPRESS_PASSWORD="bitnami" \
+    WORDPRESS_SKIP_INSTALL="no" \
     WORDPRESS_TABLE_PREFIX="wp_" \
     WORDPRESS_USERNAME="user"
 
