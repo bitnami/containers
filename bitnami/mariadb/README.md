@@ -46,12 +46,12 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`10.2-rhel-7`, `10.2.23-rhel-7-r16` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.23-rhel-7-r16/10.2/rhel-7/Dockerfile)
+* [`10.2-rhel-7`, `10.2.23-rhel-7-r17` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.23-rhel-7-r17/10.2/rhel-7/Dockerfile)
 * [`10.2-ol-7`, `10.2.23-ol-7-r16` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.23-ol-7-r16/10.2/ol-7/Dockerfile)
 * [`10.2-debian-9`, `10.2.23-debian-9-r16`, `10.2`, `10.2.23`, `10.2.23-r16` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.23-debian-9-r16/10.2/debian-9/Dockerfile)
 * [`10.1-rhel-7`, `10.1.38-rhel-7-r62` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.38-rhel-7-r62/10.1/rhel-7/Dockerfile)
 * [`10.1-ol-7`, `10.1.38-ol-7-r60` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.38-ol-7-r60/10.1/ol-7/Dockerfile)
-* [`10.1-debian-9`, `10.1.38-debian-9-r56`, `10.1`, `10.1.38`, `10.1.38-r56`, `latest` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.38-debian-9-r56/10.1/debian-9/Dockerfile)
+* [`10.1-debian-9`, `10.1.38-debian-9-r57`, `10.1`, `10.1.38`, `10.1.38-r57`, `latest` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.38-debian-9-r57/10.1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
 
