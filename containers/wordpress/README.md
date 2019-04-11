@@ -38,8 +38,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-rhel-7`, `5.1.1-rhel-7-r31` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.1-rhel-7-r31/5/rhel-7/Dockerfile)
-* [`5-ol-7`, `5.1.1-ol-7-r29` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.1-ol-7-r29/5/ol-7/Dockerfile)
+* [`5-rhel-7`, `5.1.1-rhel-7-r32` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.1-rhel-7-r32/5/rhel-7/Dockerfile)
+* [`5-ol-7`, `5.1.1-ol-7-r30` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.1-ol-7-r30/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.1.1-debian-9-r29`, `5`, `5.1.1`, `5.1.1-r29`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.1-debian-9-r29/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
@@ -449,7 +449,7 @@ Find more information about parameters available in the tool in the [official do
 
 ## 5.1.1-r28, 5.1.1-rhel-7-r31 and 5.1.1-ol-7-r30
 
-- Users reported that they wanted to import their WordPress database from other installations, such as [this ticket](https://github.com/bitnami/bitnami-docker-wordpress/issues/157). Now, in order to cover this use case, the variable `WORDPRESS_SKIP_INSTALLATION` can be set to avoid the container launch the WordPress installation wizard.
+- Users reported that they wanted to import their WordPress database from other installations, such as [this ticket](https://github.com/bitnami/bitnami-docker-wordpress/issues/157). Now, in order to cover this use case, the variable `WORDPRESS_SKIP_INSTALL` can be set to avoid the container launch the WordPress installation wizard.
 
 ## 5.0.3-r20
 
