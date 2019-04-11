@@ -10,7 +10,7 @@ RUN bitnami-pkg install python-2.7.16-0 --checksum 131f66315fd55f1c6baab732ad850
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="2.7.16-rhel-7-r39" \
+    BITNAMI_IMAGE_VERSION="2.7.16-rhel-7-r40" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
