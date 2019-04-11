@@ -3,14 +3,14 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metrics-server-0.3.1-24-linux-x86_64-rhel-7.tar.gz && \
-    echo "7aaf229840b0330095d50dbefa5c9040899f32ba88cc6e5c65c987061897fe8f  /tmp/bitnami/pkg/cache/metrics-server-0.3.1-24-linux-x86_64-rhel-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/metrics-server-0.3.1-24-linux-x86_64-rhel-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/metrics-server-0.3.1-24-linux-x86_64-rhel-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metrics-server-0.3.2-0-linux-x86_64-rhel-7.tar.gz && \
+    echo "567c65d93e0e19953b564baf84c935fe04fe7fdb209db0c09512b6def26b955b  /tmp/bitnami/pkg/cache/metrics-server-0.3.2-0-linux-x86_64-rhel-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/metrics-server-0.3.2-0-linux-x86_64-rhel-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/metrics-server-0.3.2-0-linux-x86_64-rhel-7.tar.gz
 
 RUN chown -R 1001:root /opt/bitnami/metrics-server && chmod -R g+rwX /opt/bitnami/metrics-server
 ENV BITNAMI_APP_NAME="metrics-server" \
-    BITNAMI_IMAGE_VERSION="0.3.1-rhel-7-r72" \
+    BITNAMI_IMAGE_VERSION="0.3.2-rhel-7-r0" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     NAMI_PREFIX="/.nami" \
