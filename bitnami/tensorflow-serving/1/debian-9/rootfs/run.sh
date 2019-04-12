@@ -6,7 +6,7 @@
 DAEMON="tensorflow-serving.sh"
 USER=tensorflow
 EXEC=$(which $DAEMON)
-START_COMMAND="${EXEC} start && tail -f /opt/bitnami/tensorflow-serving/logs/tensorflow-serving.log"
+START_COMMAND="${EXEC} start-foreground"
 
 # If container is started as `root` user
 if [ $EUID -eq 0 ]; then
