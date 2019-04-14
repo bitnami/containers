@@ -3,10 +3,10 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages GeoIP ca-certificates curl cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libcurl libcurl-devel libgcc libidn libselinux libssh2 libstdc++ lua nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre python wget zlib
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.24.0-0-linux-x86_64-rhel-7.tar.gz && \
-    echo "3a5e22416984c5f7cfdc53b303fa9784d528f77c261a24df946702099691da42  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.24.0-0-linux-x86_64-rhel-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.24.0-0-linux-x86_64-rhel-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.24.0-0-linux-x86_64-rhel-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.24.1-0-linux-x86_64-rhel-7.tar.gz && \
+    echo "c3ede3cd0280181869a2997e05f9d27369d1503b6b05d610f4c2b80079fd84c5  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.24.1-0-linux-x86_64-rhel-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.24.1-0-linux-x86_64-rhel-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.24.1-0-linux-x86_64-rhel-7.tar.gz
 RUN mkdir -p /opt/bitnami/nginx/conf/geoip && \
     cd /opt/bitnami/nginx/conf/geoip && \
     curl https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz | tar xvz && mv GeoLite2-City_*/*mmdb . && rm -r GeoLite2-City_*/ && \
@@ -38,7 +38,7 @@ RUN chown -R 1001:root /etc/nginx /etc/ingress-controller && \
 RUN chown -R 1001:root /var/log/nginx && chmod g+rwX -R /var/log/nginx &&\
     chown -R 1001:root /opt/bitnami/nginx/conf && chmod g+rwX -R /opt/bitnami/nginx/conf
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.24.0-rhel-7-r7" \
+    BITNAMI_IMAGE_VERSION="0.24.1-rhel-7-r0" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     NAMI_PREFIX="/.nami" \
