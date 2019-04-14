@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r317
+FROM bitnami/oraclelinux-extras:7-r319
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -8,12 +8,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages glibc libgcc
 RUN bitnami-pkg install java-1.8.201-0 --checksum e71b797ceaaf8b0641d1641df129cea10124b058bc24d4ed74738725fabfb8c9
-RUN bitnami-pkg unpack tomcat-8.5.39-0 --checksum 6f64bac6f44c18937fcccfc5b7332464c16d68819c2d67f0f99326ba9b38c335
+RUN bitnami-pkg unpack tomcat-8.5.40-0 --checksum 407fe707db280e75d343b58dad2e16a5123d0e7d9d051c8a2e793ebf2838ccfd
 RUN ln -sf /opt/bitnami/tomcat/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="8.5.39-ol-7-r17" \
+    BITNAMI_IMAGE_VERSION="8.5.40-ol-7-r0" \
     JAVA_OPTS="-Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH" \
