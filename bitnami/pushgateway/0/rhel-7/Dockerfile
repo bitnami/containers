@@ -3,13 +3,13 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/pushgateway-0.7.0-20-linux-x86_64-rhel-7.tar.gz && \
-    echo "7e0df68ea61da68d50d6dda0268dab8cb410c527ffacf9df9d3eab3658123668  /tmp/bitnami/pkg/cache/pushgateway-0.7.0-20-linux-x86_64-rhel-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/pushgateway-0.7.0-20-linux-x86_64-rhel-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/pushgateway-0.7.0-20-linux-x86_64-rhel-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/pushgateway-0.8.0-0-linux-x86_64-rhel-7.tar.gz && \
+    echo "720ac5c1aaad84609c2dfe539bdc5923ff0f916554eb5dfa51750f25b8d7f025  /tmp/bitnami/pkg/cache/pushgateway-0.8.0-0-linux-x86_64-rhel-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/pushgateway-0.8.0-0-linux-x86_64-rhel-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/pushgateway-0.8.0-0-linux-x86_64-rhel-7.tar.gz
 
 ENV BITNAMI_APP_NAME="pushgateway" \
-    BITNAMI_IMAGE_VERSION="0.7.0-rhel-7-r81" \
+    BITNAMI_IMAGE_VERSION="0.8.0-rhel-7-r0" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     NAMI_PREFIX="/.nami" \
