@@ -14,7 +14,7 @@ RUN bitnami-pkg unpack ghost-2.19.4-0 --checksum c9260b140569369e664169df91aa6ce
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="2.19.4-ol-7-r7" \
+    BITNAMI_IMAGE_VERSION="2.19.4-ol-7-r8" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
@@ -22,7 +22,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     GHOST_EMAIL="user@example.com" \
     GHOST_HOST="" \
     GHOST_PASSWORD="bitnami123" \
-    GHOST_PORT_NUMBER="" \
+    GHOST_PORT_NUMBER="80" \
     GHOST_PROTOCOL="http" \
     GHOST_USERNAME="user" \
     MARIADB_HOST="mariadb" \
