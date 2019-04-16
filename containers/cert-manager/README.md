@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-rhel-7`, `0.7.0-rhel-7-r36` (0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.7.0-rhel-7-r36/0/rhel-7/Dockerfile)
-* [`0-debian-9`, `0.7.0-debian-9-r34`, `0`, `0.7.0`, `0.7.0-r34`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.7.0-debian-9-r34/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.7.0-debian-9-r35`, `0`, `0.7.0`, `0.7.0-r35`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cert-manager/blob/0.7.0-debian-9-r35/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cert-manager GitHub repo](https://github.com/bitnami/bitnami-docker-cert-manager).
 
