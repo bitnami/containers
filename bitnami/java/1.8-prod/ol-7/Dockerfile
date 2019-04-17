@@ -1,8 +1,8 @@
-FROM bitnami/java:1.8.201-ol-7-r73 as development
+FROM bitnami/java:1.8.201-ol-7-r74 as development
 
 ######
 
-FROM bitnami/oraclelinux-runtimes:7-r292
+FROM bitnami/oraclelinux-runtimes:7-r293
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN install_packages ca-certificates glibc libgcc wget
 COPY --from=development /opt/bitnami/java /opt/bitnami/java
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="1.8.201-ol-7-r69-prod" \
+    BITNAMI_IMAGE_VERSION="1.8.201-ol-7-r70-prod" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
