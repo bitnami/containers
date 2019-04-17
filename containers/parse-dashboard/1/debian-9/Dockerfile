@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r345
+FROM bitnami/minideb-extras:stretch-r346
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,12 +6,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg install node-8.15.1-1 --checksum 039875569c77f45fb93687964a6a0f39730cbc03d4b927fff2f8b147ad073076
+RUN bitnami-pkg install node-8.16.0-0 --checksum 78a03661720e52ad60e308abcc2ed8576afb3da51b4fb9021252d0ee87fddc8f
 RUN bitnami-pkg unpack parse-dashboard-1.3.0-0 --checksum 3dd61618e7b68b9983ab05217a17cbadc9a63d880ff6a77b6530600f3f40aecb
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.3.0-debian-9-r6" \
+    BITNAMI_IMAGE_VERSION="1.3.0-debian-9-r7" \
     NAMI_PREFIX="/.nami" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
