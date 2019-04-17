@@ -61,7 +61,7 @@ if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.
         exit 1
     fi
     tmp_file=/tmp/filelist
-    find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)" > $tmp_file
+    find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)" | sort > $tmp_file
     while read -r f; do
         case "$f" in
             *.sh)
