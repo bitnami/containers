@@ -3,13 +3,13 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/service-catalog-0.1.42-0-linux-amd64-debian-9.tar.gz && \
-    echo "e41b009dea84cfff7488721f864f6b57ee5b74d4d1fd2de731c8256b5eb381f2  /tmp/bitnami/pkg/cache/service-catalog-0.1.42-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/service-catalog-0.1.42-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/service-catalog-0.1.42-0-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/service-catalog-0.1.43-0-linux-amd64-debian-9.tar.gz && \
+    echo "d3b86617541960185d34bee47fe26f879c94b0ea78060e8e672ad2e035dc6332  /tmp/bitnami/pkg/cache/service-catalog-0.1.43-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/service-catalog-0.1.43-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/service-catalog-0.1.43-0-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="service-catalog" \
-    BITNAMI_IMAGE_VERSION="0.1.42-debian-9-r47" \
+    BITNAMI_IMAGE_VERSION="0.1.43-debian-9-r0" \
     PATH="/opt/bitnami/service-catalog/bin:$PATH"
 
 EXPOSE 8443 443
