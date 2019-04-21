@@ -38,7 +38,7 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
 
   declareEnvironmentVariableAlias() {
       if env | grep -q "$2"; then
-          export $1=${!2}
+          export $1="${!2}"
       fi
   }
 
