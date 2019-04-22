@@ -97,7 +97,7 @@ services:
 The configuration can also be setup by providing command-line options.
 
 ```bash
-$ docker run --name keycloak-gatekeeper bitnami/keycloak-gatekeeper:latest /run.sh \
+$ docker run --name keycloak-gatekeeper bitnami/keycloak-gatekeeper:latest /keycloak-proxy \
   --listen 127.0.0.1:3000 \
   --upstream-url http://127.0.0.1:80 \
   --discovery-url https://keycloak.example.com/auth/realms/<REALM_NAME> \
@@ -113,7 +113,7 @@ services:
   keycloak-gatekeeper:
     image: bitnami/keycloak-gatekeeper:latest
     command:
-      - /run.sh
+      - /keycloak-proxy
       - --listen
       - 127.0.0.1:3000
       - --upstream-url
