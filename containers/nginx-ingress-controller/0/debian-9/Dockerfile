@@ -9,12 +9,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.24.1-0-linux-amd64-debian-9.tar.gz
 RUN mkdir -p /opt/bitnami/nginx/conf/geoip && \
     cd /opt/bitnami/nginx/conf/geoip && \
-    curl https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz | tar xvz && mv GeoLite2-City_*/*mmdb . && rm -r GeoLite2-City_*/ && \
-    curl https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz | tar xvz && mv GeoLite2-Country_*/*mmdb . && rm -r GeoLite2-Country_*/ && \
-    curl https://geolite.maxmind.com/download/geoip/database/GeoLite2-ASN.tar.gz | tar xvz && mv GeoLite2-ASN_*/*mmdb . && rm -r GeoLite2-ASN_*/ &&\
-    curl -L https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/geoip/GeoIP.dat --output GeoIP.dat &&\
-     curl -L https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/geoip/GeoIPASNum.dat --output GeoIPASNum.dat &&\
-    curl -L https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/geoip/GeoLiteCity.dat --output GeoLiteCity.dat
+    curl -fL https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz | tar xvz && mv GeoLite2-City_*/*mmdb . && rm -r GeoLite2-City_*/ && \
+    curl -fL https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz | tar xvz && mv GeoLite2-Country_*/*mmdb . && rm -r GeoLite2-Country_*/ && \
+    curl -fL https://geolite.maxmind.com/download/geoip/database/GeoLite2-ASN.tar.gz | tar xvz && mv GeoLite2-ASN_*/*mmdb . && rm -r GeoLite2-ASN_*/ &&\
+    curl -fL https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/etc/nginx/geoip/GeoIP.dat --output GeoIP.dat &&\
+    curl -fL https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/etc/nginx/geoip/GeoIPASNum.dat --output GeoIPASNum.dat &&\
+    curl -fL https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/etc/nginx/geoip/GeoLiteCity.dat --output GeoLiteCity.dat
 
 COPY rootfs /
 RUN ln -sf /opt/bitnami/nginx/sbin/nginx /usr/sbin/nginx
