@@ -22,7 +22,7 @@ RUN rm -rf /opt/bitnami/nginx/html && \
     ln -sf /opt/bitnami/kubeapps /opt/bitnami/kubeapps-dashboard && \
     mv /opt/bitnami/kubeapps/build /opt/bitnami/nginx/html
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.3.1-debian-9-r25" \
+    BITNAMI_IMAGE_VERSION="1.3.1-debian-9-r26" \
     NAMI_PREFIX="/.nami" \
     NGINX_DAEMON_GROUP="" \
     NGINX_DAEMON_USER="" \
