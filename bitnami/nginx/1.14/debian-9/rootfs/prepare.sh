@@ -4,17 +4,19 @@
 
 # Load libraries
 . /libnginx.sh
+. /libfs.sh
 
 # Load NGINX environment variables
 eval "$(nginx_env)"
 
-for dir in "/bitnami" "$NGINX_VOLUME" "$NGINX_CONFDIR" "$NGINX_BASEDIR" "$NGINX_TMPDIR"; do
+# Ensure non-root user has write permissions on a set of directories
+for dir in "/bitnami" "$NGINX_VOLUME" "${NGINX_CONFDIR}/server_blocks" "${NGINX_CONFDIR}/bitnami" "$NGINX_BASEDIR" "$NGINX_TMPDIR"; do
     ensure_dir_exists "$dir"
-    chmod -R g+rwX "$dir"
 done
-
-# Users can mount their html sites at /app
-ln -sf "$NGINX_BASEDIR/html" /app
-# Redirect all logging to stdout/stderr
-ln -sf /dev/stdout "$NGINX_LOGDIR/access.log"
-ln -sf /dev/stderr "$NGINX_LOGDIR/error.log"
+chmod -R g+rwX "$NGINX_VOLUME" "$NGINX_CONFDIR" "$NGINX_TMPDIR"
+# Configure default HTTP port
+nginx_config_http_port
+# Unset HTTP_PROXY header to protect vs HTTPPOXY vulnerability
+nginx_patch_httpoxy_vulnerability
+# Prepare directories for users to mount its static files and certificates
+nginx_prepare_directories

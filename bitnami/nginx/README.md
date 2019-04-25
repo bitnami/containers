@@ -46,9 +46,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.14-rhel-7`, `1.14.2-rhel-7-r79` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.2-rhel-7-r79/1.14/rhel-7/Dockerfile)
-* [`1.14-ol-7`, `1.14.2-ol-7-r131` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.2-ol-7-r131/1.14/ol-7/Dockerfile)
-* [`1.14-debian-9`, `1.14.2-debian-9-r125`, `1.14`, `1.14.2`, `1.14.2-r125`, `latest` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.2-debian-9-r125/1.14/debian-9/Dockerfile)
+* [`1.14-rhel-7`, `1.14.2-rhel-7-r78` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.2-rhel-7-r78/1.14/rhel-7/Dockerfile)
+* [`1.14-ol-7`, `1.14.2-ol-7-r127` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.2-ol-7-r127/1.14/ol-7/Dockerfile)
+* [`1.14-debian-9`, `1.14.2-debian-9-r120`, `1.14`, `1.14.2`, `1.14.2-r120`, `latest` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.2-debian-9-r120/1.14/debian-9/Dockerfile)
 
 
 # Get this image
@@ -75,7 +75,7 @@ $ docker build -t bitnami/nginx:latest https://github.com/bitnami/bitnami-docker
 
 # Hosting a static website
 
-This NGINX Open Source image exposes a volume at `/app`. Content mounted here is served by the default catch-all virtual host.
+This NGINX Open Source image exposes a volume at `/app`. Content mounted here is served by the default catch-all server block.
 
 ```bash
 $ docker run -v /path/to/app:/app bitnami/nginx:latest
@@ -120,13 +120,13 @@ Access your web server in the browser by navigating to [http://localhost:9000](h
 
 # Configuration
 
-## Adding custom virtual hosts
+## Adding custom server blocks
 
-The default `nginx.conf` includes virtual hosts placed in `/bitnami/nginx/conf/vhosts/`. You can mount a `my_vhost.conf` file containing your custom virtual hosts at this location.
+The default `nginx.conf` includes server blocks placed in `/opt/bitnami/nginx/conf/server_blocks/`. You can mount a `my_server_block.conf` file containing your custom server block at this location.
 
-For example, in order add a vhost for `www.example.com`:
+For example, in order add a server block for `www.example.com`:
 
-# Step 1: Write your `my_vhost.conf` file with the following content.
+# Step 1: Write your `my_server_block.conf` file with the following content.
 
 ```nginx
 server {
@@ -141,7 +141,7 @@ server {
 
 ```bash
 $ docker run --name nginx \
-  -v /path/to/my_vhost.conf:/opt/bitnami/nginx/conf/vhosts/my_vhost.conf:ro \
+  -v /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro \
   bitnami/nginx:latest
 ```
 
@@ -156,7 +156,7 @@ services:
     ports:
       - '80:8080'
     volumes:
-      - /path/to/my_vhost.conf:/opt/bitnami/nginx/conf/vhosts/my_vhost.conf:ro
+      - /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro
 ```
 
 ## Using custom SSL certificates
@@ -168,14 +168,15 @@ services:
 In your local computer, create a folder called `certs` and put your certificates files. Make sure you rename both files to `server.crt` and `server.key` respectively:
 
 ```bash
-$ mkdir /path/to/nginx-persistence/nginx/conf/bitnami/certs -p
-$ cp /path/to/certfile.crt /path/to/nginx-persistence/nginx/conf/bitnami/certs/server.crt
-$ cp /path/to/keyfile.key  /path/to/nginx-persistence/nginx/conf/bitnami/certs/server.key
+$ mkdir -p /path/to/nginx-persistence/certs
+$ cp /path/to/certfile.crt /path/to/nginx-persistence/certs/server.crt
+$ cp /path/to/keyfile.key  /path/to/nginx-persistence/certs/server.key
 ```
 
-### Step 2: Provide a custom Virtual Host for SSL connections
+### Step 2: Provide a custom Server Block for SSL connections
 
-Write your `my_vhost.conf` file with the SSL configuration and the relative path to the certificates.
+Write your `my_server_block.conf` file with the SSL configuration and the relative path to the certificates:
+
 ```nginx
   server {
     listen       8443 ssl;
@@ -202,8 +203,8 @@ Run the NGINX Open Source image, mounting the certificates directory from your h
 
 ```bash
 $ docker run --name nginx \
-  -v /path/to/my_vhost.conf:/opt/bitnami/nginx/conf/vhosts/my_vhost.conf:ro \
-  -v /path/to/nginx-persistence/nginx/conf/bitnami/certs:/bitnami/nginx/conf/bitnami/certs \
+  -v /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro \
+  -v /path/to/nginx-persistence/certs:/certs \
   bitnami/nginx:latest
 ```
 
@@ -219,7 +220,8 @@ services:
     - '80:8080'
     - '443:8443'
     volumes:
-    - /path/to/nginx-persistence/nginx/conf/bitnami/certs:/bitnami/nginx/conf/bitnami/certs
+    - /path/to/nginx-persistence/certs:/certs
+    - /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro
 ```
 
 ## Full configuration
@@ -229,7 +231,7 @@ The image looks for configurations in `/opt/bitnami/nginx/conf/nginx.conf`. You 
 
 ```bash
 $ docker run --name nginx \
-  -v /path/to/your_nginx.conf:/opt/bitnami/nginx/conf/nginx.conf \
+  -v /path/to/your_nginx.conf:/opt/bitnami/nginx/conf/nginx.conf:ro \
   bitnami/nginx:latest
 ```
 
@@ -244,12 +246,12 @@ services:
     ports:
       - '80:8080'
     volumes:
-      - /path/to/your_nginx.conf:/opt/bitnami/nginx/conf/nginx.conf
+      - /path/to/your_nginx.conf:/opt/bitnami/nginx/conf/nginx.conf:ro
 ```
 
 # Reverse proxy to other containers
 
-NGINX can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an NGINX frontend. To do so, [add a virtual host](#adding-custom-virtual-hosts) like the following in the `/opt/bitnami/nginx/conf/vhosts/` folder:
+NGINX can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an NGINX frontend. To do so, [add a server block](#adding-custom-server-blocks) like the following in the `/opt/bitnami/nginx/conf/erver_blocks/` folder:
 
 ```
 server {
@@ -288,6 +290,123 @@ $ docker-compose logs nginx
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+
+# Understand this image structure
+
+The Bitnami NGINX Docker image is built using a Dockerfile with the structure below:
+
+```Dockerfile
+FROM bitnami/minideb-extras-base
+...
+# Install required system packages and dependencies
+RUN install_packages xxx yyy zzz
+RUN . ./libcomponent.sh && component_unpack "nginx" "a.b.c-0"
+...
+COPY rootfs /
+RUN /prepare.sh
+...
+ENV BITNAMI_APP_NAME="nginx" ...
+EXPOSE 8080 8443
+VOLUME /app
+VOLUME /certs
+WORKDIR /app
+USER 1001
+...
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD [ "/run.sh" ]
+```
+
+We can identify several sections within the Dockerfile:
+
+- A section where all the required components are installed.
+- A section where all the components are statically configured.
+- A section where the env. variables, the ports to be exposed, the working directory and the user are defined.
+  - Note that once the user is set to 1001, unprivileged commands cannot be executed anymore.
+- A section where the entrypoint and command used to start the service are declared.
+  - Take into account these actions are not executed until the container is started.
+
+# Customizing Bitnami NGINX Docker Image
+
+The Bitnami NGINX Docker image is designed to be extended so it can be used as the base image for your custom web applications.
+
+> Note: It's recommended to read the [previous section](./#understand-this-image-structure) to understand the Dockerfile structure, before extending this image.
+
+## Extending the Bitnami NGINX Docker Image
+
+Before extending this image, please note there are certain configuration settings you can modify using the original image:
+
+- Settings that can be adapted using environment variables. For instance, you can change the port used by NGINX for HTTP setting the environment variable `NGINX_HTTP_PORT_NUMBER`.
+- [Adding custom server blocks](./#adding-custom-server-blocks).
+- [Replacing the 'nginx.conf' file](./#full-configuration).
+- [Using custom SSL certificates](./#using-custom-ssl-certificates).
+
+If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
+
+```Dockerfile
+FROM bitnami/nginx
+## Put your customizations below
+...
+```
+
+On this example, we provide an extended wit the following modifications:
+
+- Install `vim` editor.
+- Modify the NGINX configuration.
+- Modify the ports used by NGINX.
+- Modify the container user.
+
+```Dockerfile
+FROM bitnami/nginx
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+## Install 'vim'
+USER 0 # Required to perform privileged actions
+RUN install_packages vim
+
+## Modify 'worker_connections' on NGINX config file to '512'
+RUN sed -i -r "s#(\s+)worker_connections(\s+)[0-9]+;#\1worker_connections\2512;#g" /opt/bitnami/nginx/conf/nginx.conf
+
+## Modify the ports used by NGINX by default
+ENV NGINX_HTTP_PORT_NUMBER=8181
+EXPOSE 8181 8443
+
+## Modify the default container user
+USER 1002
+```
+
+Based on the extended image, you can use a Docker Compose like the one below to add other features:
+
+- Adding custom server block
+- Adding custom certificates
+- Cloning your web app and serve it trough NGINX
+
+```yaml
+version: '2'
+
+services:
+  nginx:
+    build: .
+    ports:
+      - '80:8181'
+      - '443:8443'
+    depends_on:
+      - cloner
+    volumes:
+      - ./config/my_server_block.conf:/opt/bitnami/nginx/conf/conf.d/server_blocks/my_server_block.conf:ro
+      - ./certs:/certs
+      - data:/app
+  cloner:
+    image: 'bitnami/git:latest'
+    command:
+      - clone
+      - https://github.com/cloudacademy/static-website-example
+      - /app
+    volumes:
+      - data:/app
+volumes:
+  data:
+    driver: local
+```
 
 # Maintenance
 
