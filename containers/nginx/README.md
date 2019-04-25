@@ -46,9 +46,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.14-rhel-7`, `1.14.2-rhel-7-r79` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.2-rhel-7-r79/1.14/rhel-7/Dockerfile)
-* [`1.14-ol-7`, `1.14.2-ol-7-r131` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.2-ol-7-r131/1.14/ol-7/Dockerfile)
-* [`1.14-debian-9`, `1.14.2-debian-9-r125`, `1.14`, `1.14.2`, `1.14.2-r125`, `latest` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.14.2-debian-9-r125/1.14/debian-9/Dockerfile)
+* [`1.16-debian-9`, `1.16.0-debian-9-r0`, `1.16`, `1.16.0`, `1.16.0-r0`, `latest` (1.16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-debian-9-r0/1.16/debian-9/Dockerfile)
+* [`1.16-rhel-7`, `0.0.0-rhel-7-r0` (1.16/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/0.0.0-rhel-7-r0/1.16/rhel-7/Dockerfile)
+* [`1.16-ol-7`, `0.0.0-ol-7-r0` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/0.0.0-ol-7-r0/1.16/ol-7/Dockerfile)
 
 
 # Get this image
