@@ -5,3 +5,5 @@ services:
     image: 'bitnami/nginx:1.14'
     ports:
       - '80:8080'
+    environment:
+      - NGINX_HTTP_PORT_NUMBER=8080
