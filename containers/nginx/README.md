@@ -318,27 +318,29 @@ CMD [ "/run.sh" ]
 
 We can identify several sections within the Dockerfile:
 
-- A section where all the required components are installed.
-- A section where all the components are statically configured.
-- A section where the env. variables, the ports to be exposed, the working directory and the user are defined.
+- Components installation.
+- Components static configuration.
+- Environment variables.
+- Ports to be exposed.
+- Working directory and user.
   - Note that once the user is set to 1001, unprivileged commands cannot be executed anymore.
-- A section where the entrypoint and command used to start the service are declared.
+- Entrypoint and command.
   - Take into account these actions are not executed until the container is started.
 
 # Customizing the Bitnami NGINX Docker image
 
 The Bitnami NGINX Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
-> Note: It's recommended to read the [previous section](./#understand-this-image-structure) to understand the Dockerfile structure, before extending this image.
+> Note: It's recommended to read the [previous section](#understand-this-image-structure) to understand the Dockerfile structure, before extending this image.
 
 ## Extending the Bitnami NGINX Docker image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
 - Settings that can be adapted using environment variables. For instance, you can change the port used by NGINX for HTTP setting the environment variable `NGINX_HTTP_PORT_NUMBER`.
-- [Adding custom server blocks](./#adding-custom-server-blocks).
-- [Replacing the 'nginx.conf' file](./#full-configuration).
-- [Using custom SSL certificates](./#using-custom-ssl-certificates).
+- [Adding custom server blocks](#adding-custom-server-blocks).
+- [Replacing the 'nginx.conf' file](#full-configuration).
+- [Using custom SSL certificates](#using-custom-ssl-certificates).
 
 If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
 
@@ -367,7 +369,7 @@ RUN install_packages vim
 RUN sed -i -r "s#(\s+)worker_connections(\s+)[0-9]+;#\1worker_connections\2512;#g" /opt/bitnami/nginx/conf/nginx.conf
 
 ## Modify the ports used by NGINX by default
-ENV NGINX_HTTP_PORT_NUMBER=8181
+ENV NGINX_HTTP_PORT_NUMBER=8181 # It is also possible to change this environment variable at runtime
 EXPOSE 8181 8443
 
 ## Modify the default container user
