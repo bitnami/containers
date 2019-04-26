@@ -291,7 +291,7 @@ $ docker-compose logs nginx
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Understand this image structure
+# Understand the structure of this image
 
 The Bitnami NGINX Docker image is built using a Dockerfile with the structure below:
 
@@ -325,13 +325,13 @@ We can identify several sections within the Dockerfile:
 - A section where the entrypoint and command used to start the service are declared.
   - Take into account these actions are not executed until the container is started.
 
-# Customizing Bitnami NGINX Docker Image
+# Customizing the Bitnami NGINX Docker image
 
 The Bitnami NGINX Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
 > Note: It's recommended to read the [previous section](./#understand-this-image-structure) to understand the Dockerfile structure, before extending this image.
 
-## Extending the Bitnami NGINX Docker Image
+## Extending the Bitnami NGINX Docker image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -348,12 +348,12 @@ FROM bitnami/nginx
 ...
 ```
 
-On this example, we provide an extended wit the following modifications:
+In this example, we provide an extended with the following modifications:
 
 - Install `vim` editor.
-- Modify the NGINX configuration.
+- Modify the NGINX configuration file.
 - Modify the ports used by NGINX.
-- Modify the container user.
+- Change the user that runs the container.
 
 ```Dockerfile
 FROM bitnami/nginx
