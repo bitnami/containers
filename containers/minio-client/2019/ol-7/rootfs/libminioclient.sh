@@ -17,6 +17,7 @@ minio_client_env() {
     cat <<"EOF"
 export MINIO_CLIENT_BASEDIR="/opt/bitnami/minio-client"
 export MINIO_CLIENT_CONFIGDIR="/.mc"
+export MINIO_SERVER_HOST="${MINIO_SERVER_HOST:-}"
 export MINIO_SERVER_PORT="${MINIO_SERVER_PORT:-9000}"
 export MINIO_SERVER_ACCESS_KEY="${MINIO_SERVER_ACCESS_KEY:-}"
 export MINIO_SERVER_SECRET_KEY="${MINIO_SERVER_SECRET_KEY:-}"
