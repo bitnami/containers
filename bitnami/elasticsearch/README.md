@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`7-ol-7`, `7.0.0-ol-7-r5` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.0.0-ol-7-r5/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.0.0-debian-9-r0`, `7`, `7.0.0`, `7.0.0-r0`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.0.0-debian-9-r0/7/debian-9/Dockerfile)
-* [`6-ol-7`, `6.7.1-ol-7-r16` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.7.1-ol-7-r16/6/ol-7/Dockerfile)
+* [`6-ol-7`, `6.7.1-ol-7-r17` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.7.1-ol-7-r17/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.7.1-debian-9-r14`, `6`, `6.7.1`, `6.7.1-r14` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.7.1-debian-9-r14/6/debian-9/Dockerfile)
 * [`7-rhel-7`, `0.0.0-rhel-7-r0` (7/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/0.0.0-rhel-7-r0/7/rhel-7/Dockerfile)
 
@@ -195,7 +195,8 @@ Available variables:
 
  - `BITNAMI_DEBUG`: Increase verbosity on initialization logs. Default **false**
  - `ELASTICSEARCH_CLUSTER_NAME`: The Elasticsearch Cluster Name. Default: **elasticsearch-cluster**
- - `ELASTICSEARCH_CLUSTER_HOSTS`: List of elasticsearch hosts to set the cluster. Available separatos are ' ', ',' and ';'. No defaults.
+ - `ELASTICSEARCH_CLUSTER_HOSTS`: List of elasticsearch hosts to set the cluster. Available separators are ' ', ',' and ';'. No defaults.
+ - `ELASTICSEARCH_CLUSTER_MASTER_HOSTS`: List of elasticsearch master-eligible hosts. Available separators are ' ', ',' and ';'. If no values are provided, it will have the same value than `ELASTICSEARCH_CLUSTER_HOSTS`.
  - `ELASTICSEARCH_IS_DEDICATED_NODE`: Elasticsearch node to behave as a 'dedicated node'. Default: **no**
  - `ELASTICSEARCH_NODE_TYPE`: Elasticsearch node type when behaving as a 'dedicated node'. Valid values: *master*, *data*, *coordinating* or *ingest*.
  - `ELASTICSEARCH_NODE_NAME`: Elasticsearch node name. No defaults.
@@ -210,7 +211,7 @@ Available variables:
 A cluster can easily be setup with the Bitnami Elasticsearch Docker Image using the following environment variables:
 
  - `ELASTICSEARCH_CLUSTER_NAME`: The Elasticsearch Cluster Name. Default: **elasticsearch-cluster**
- - `ELASTICSEARCH_CLUSTER_HOSTS`: List of elasticsearch hosts to set the cluster. Available separatos are ' ', ',' and ';' .No defaults.
+ - `ELASTICSEARCH_CLUSTER_HOSTS`: List of elasticsearch hosts to set the cluster. Available separators are ' ', ',' and ';'. No defaults.
  - `ELASTICSEARCH_CLIENT_NODE`: Elasticsearch node to behave as a 'smart router' for Kibana app. Default: **false**
  - `ELASTICSEARCH_NODE_NAME`: Elasticsearch node name. No defaults.
  - `ELASTICSEARCH_MINIMUM_MASTER_NODES`: Minimum Elasticsearch master nodes for quorum. No defaults.
@@ -219,6 +220,7 @@ For larger cluster, you can setup 'dedicated nodes' using the following environm
 
  - `ELASTICSEARCH_IS_DEDICATED_NODE`: Elasticsearch node to behave as a 'dedicated node'. Default: **no**
  - `ELASTICSEARCH_NODE_TYPE`: Elasticsearch node type when behaving as a 'dedicated node'. Valid values: *master*, *data*, *coordinating* or *ingest*.
+ - `ELASTICSEARCH_CLUSTER_MASTER_HOSTS`: List of elasticsearch master-eligible hosts. Available separators are ' ', ',' and ';'. If no values are provided, it will have the same value than `ELASTICSEARCH_CLUSTER_HOSTS`.
 
 Find more information about 'dedicated nodes' in the [official documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html).
 
