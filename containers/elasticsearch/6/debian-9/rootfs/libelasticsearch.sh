@@ -234,7 +234,16 @@ elasticsearch_cluster_configuration() {
     elasticsearch_conf_set node.name "${ELASTICSEARCH_NODE_NAME:-$(hostname)}"
     if [[ -n "$ELASTICSEARCH_CLUSTER_HOSTS" ]]; then
         read -r -a host_list <<< "$(tr ',;' ' ' <<< "$ELASTICSEARCH_CLUSTER_HOSTS")"
-        elasticsearch_conf_set discovery.zen.ping.unicast.hosts "${host_list[@]}"
+        master_list=( "${host_list[@]}" )
+        if [[ -n "$ELASTICSEARCH_CLUSTER_MASTER_HOSTS" ]]; then
+            read -r -a master_list <<< "$(tr ',;' ' ' <<< "$ELASTICSEARCH_CLUSTER_MASTER_HOSTS")"
+        fi
+        ELASTICSEARCH_MAJOR_VERSION=$(elasticsearch --version | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}' | awk -F "." '{print $1}')
+        if [[ "$ELASTICSEARCH_MAJOR_VERSION" -le 6 ]]; then
+            elasticsearch_conf_set discovery.zen.ping.unicast.hosts "${host_list[@]}"
+        else
+            elasticsearch_conf_set discovery.seed_hosts "${host_list[@]}"
+        fi
         elasticsearch_conf_set discovery.initial_state_timeout "5m"
         elasticsearch_conf_set gateway.recover_after_nodes "$(ceiling45 "${#host_list[@]}")"
         elasticsearch_conf_set gateway.expected_nodes "${#host_list[@]}"
@@ -246,7 +255,16 @@ elasticsearch_cluster_configuration() {
             min_masters=$(((${#host_list[@]} / 2) +1))
             debug "Calculating minimum master nodes for quorum: $min_masters..."
             elasticsearch_conf_set discovery.zen.minimum_master_nodes "$min_masters"
+            if [[ "$ELASTICSEARCH_NODE_TYPE" = "master" ]] && [[ "$ELASTICSEARCH_MAJOR_VERSION" -gt 6 ]]; then
+                elasticsearch_conf_set cluster.initial_master_nodes "${master_list[@]}"
+            fi
+        elif [[ "${#host_list[@]}" -eq 1 ]]; then
+            if [[ "$ELASTICSEARCH_NODE_TYPE" = "master" ]] && [[ "$ELASTICSEARCH_MAJOR_VERSION" -gt 6 ]]; then
+                elasticsearch_conf_set cluster.initial_master_nodes "${master_list[@]}"
+            fi
         fi
+    else
+        elasticsearch_conf_set "discovery.type" "single-node"
     fi
 }
 
