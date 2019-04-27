@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libevent-2.0-5 libsasl2-2 libsasl2-modules sasl2-bin
-RUN bitnami-pkg unpack memcached-1.5.13-0 --checksum c65169b7da33f156d7db7d94fbedafbad8bb222bc2d47b0121609ae98b01adbc
+RUN bitnami-pkg unpack memcached-1.5.14-0 --checksum 9a4978cb3f83e1a9f14b74430dfbd84bbb0f091ac2cb06b0c994f035d72246ed
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.13-debian-9-r6" \
+    BITNAMI_IMAGE_VERSION="1.5.14-debian-9-r0" \
     MEMCACHED_CACHE_SIZE="64" \
     MEMCACHED_PASSWORD="" \
     MEMCACHED_USERNAME="root" \
