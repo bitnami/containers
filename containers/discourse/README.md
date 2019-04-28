@@ -375,6 +375,10 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PASSWORD=your_password
 
 ```
+You may need to turn on `Less secure app access` in your Google account security settings.
+Note that Google does not officially allow using GMail as an SMTP server so this should not be used in production.
+
+
 
 # Contributing
 
