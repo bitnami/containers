@@ -37,6 +37,16 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
 
+# Supported tags and respective `Dockerfile` links
+
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
+
+
+* [`2019-ol-7`, `2019.4.23-ol-7-r0` (2019/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.4.23-ol-7-r0/2019/ol-7/Dockerfile)
+* [`2019-debian-9`, `2019.4.23-debian-9-r0`, `2019`, `2019.4.23`, `2019.4.23-r0`, `latest` (2019/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.4.23-debian-9-r0/2019/debian-9/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/minio GitHub repo](https://github.com/bitnami/bitnami-docker-minio).
+
 # Get this image
 
 The recommended way to get the Bitnami MinIO Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/minio).
