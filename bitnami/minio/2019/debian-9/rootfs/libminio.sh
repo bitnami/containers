@@ -28,6 +28,7 @@ export MINIO_BASEDIR="/opt/bitnami/minio"
 export MINIO_LOGDIR="${MINIO_BASEDIR}/log"
 export MINIO_DATADIR="/data"
 export MINIO_CERTSDIR="/certs"
+export MINIO_SKIP_CLIENT="${MINIO_SKIP_CLIENT:-no}"
 export MINIO_DISTRIBUTED_MODE_ENABLED="${MINIO_DISTRIBUTED_MODE_ENABLED:-no}"
 export MINIO_PORT_NUMBER="${MINIO_PORT_NUMBER:-9000}"
 export MINIO_DAEMON_USER="minio"
@@ -94,7 +95,7 @@ minio_start_bg() {
         "${exec}" "${args[@]}" >/dev/null 2>&1 &
     fi
     export MINIO_PID="$!"
-    sleep 5
+    sleep 10
 }
 
 ########################
