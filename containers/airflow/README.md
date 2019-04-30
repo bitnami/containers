@@ -31,7 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-rhel-7`, `1.10.3-rhel-7-r0` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.3-rhel-7-r0/1/rhel-7/Dockerfile)
-* [`1-ol-7`, `1.10.3-ol-7-r3` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.3-ol-7-r3/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.10.3-ol-7-r4` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.3-ol-7-r4/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.10.3-debian-9-r7`, `1`, `1.10.3`, `1.10.3-r7`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.3-debian-9-r7/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow).
@@ -71,7 +71,7 @@ services:
       - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW_EXECUTOR=CeleryExecutor
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
-      - AIRFLOW_DATABASE_USER=bn_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
     volumes:
       - airflow_worker_data:/bitnami
@@ -81,7 +81,7 @@ services:
       - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW_EXECUTOR=CeleryExecutor
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
-      - AIRFLOW_DATABASE_USER=bn_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
       - AIRFLOW_LOAD_EXAMPLES=yes
     volumes:
@@ -92,7 +92,7 @@ services:
       - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW_EXECUTOR=CeleryExecutor
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
-      - AIRFLOW_DATABASE_USER=bn_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
       - AIRFLOW_PASSWORD=bitnami123
       - AIRFLOW_USERNAME=user
@@ -162,7 +162,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
-    -e AIRFLOW_DATABASE_USER=bn_airflow \
+    -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
     -e AIRFLOW_PASSWORD=bitnami123 \
     -e AIRFLOW_USERNAME=user \
@@ -180,7 +180,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
-    -e AIRFLOW_DATABASE_USER=bn_airflow \
+    -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
     -e AIRFLOW_LOAD_EXAMPLES=yes \
     --net airflow-tier \
@@ -196,7 +196,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
-    -e AIRFLOW_DATABASE_USER=bn_airflow \
+    -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
     --net airflow-tier \
     --volume airflow_worker_data:/bitnami \
@@ -242,7 +242,7 @@ services:
       - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW_EXECUTOR=CeleryExecutor
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
-      - AIRFLOW_DATABASE_USER=bn_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
     volumes:
       - /path/to/airflow-persistence:/bitnami
@@ -252,7 +252,7 @@ services:
       - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW_EXECUTOR=CeleryExecutor
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
-      - AIRFLOW_DATABASE_USER=bn_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
       - AIRFLOW_LOAD_EXAMPLES=yes
     volumes:
@@ -263,7 +263,7 @@ services:
       - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW_EXECUTOR=CeleryExecutor
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
-      - AIRFLOW_DATABASE_USER=bn_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
       - AIRFLOW_PASSWORD=bitnami123
       - AIRFLOW_USERNAME=user
@@ -314,7 +314,7 @@ services:
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
-    -e AIRFLOW_DATABASE_USER=bn_airflow \
+    -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
     -e AIRFLOW_PASSWORD=bitnami123 \
     -e AIRFLOW_USERNAME=user \
@@ -332,7 +332,7 @@ services:
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
-    -e AIRFLOW_DATABASE_USER=bn_airflow \
+    -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
     -e AIRFLOW_LOAD_EXAMPLES=yes \
     --net airflow-tier \
@@ -348,7 +348,7 @@ services:
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
-    -e AIRFLOW_DATABASE_USER=bn_airflow \
+    -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
     --net airflow-tier \
     --volume /path/to/airflow-worker-persistence:/bitnami \
@@ -405,7 +405,7 @@ services:
       - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW_EXECUTOR=CeleryExecutor
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
-      - AIRFLOW_DATABASE_USER=bn_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
       - AIRFLOW_PASSWORD=bitnami123
       - AIRFLOW_USERNAME=user
@@ -419,7 +419,7 @@ $ docker run -d --name airflow -p 8080:8080 \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
-    -e AIRFLOW_DATABASE_USER=bn_airflow \
+    -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
     -e AIRFLOW_PASSWORD=bitnami123 \
     -e AIRFLOW_USERNAME=user \
@@ -451,7 +451,7 @@ This would be an example of SMTP configuration using a GMail account:
       - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW_EXECUTOR=CeleryExecutor
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
-      - AIRFLOW_DATABASE_USER=bn_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
       - AIRFLOW_PASSWORD=bitnami
       - AIRFLOW_USERNAME=tomas
@@ -473,7 +473,7 @@ $ docker run -d --name airflow -p 8080:8080 \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
-    -e AIRFLOW_DATABASE_USER=bn_airflow \
+    -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
     -e AIRFLOW_PASSWORD=bitnami123 \
     -e AIRFLOW_USERNAME=user \

@@ -1,5 +1,5 @@
 {
-  "baseUrl": "{{$global.env.AIRFLOW_BASE_URl}}",
+  "baseUrl": "{{$global.env.AIRFLOW_BASE_URL}}",
   "databaseName": "{{$global.env.AIRFLOW_DATABASE_NAME}}",
   "databaseServerHost": "{{$global.env.AIRFLOW_DATABASE_HOST}}",
   "databaseServerPort": "{{$global.env.AIRFLOW_DATABASE_PORT_NUMBER}}",

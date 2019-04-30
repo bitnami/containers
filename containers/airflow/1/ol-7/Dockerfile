@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack airflow-1.10.3-1 --checksum 033660653a65e6208dc5d49c3ba96
 
 COPY rootfs /
 RUN rpm -Uvh --nodeps $(repoquery --location nss_wrapper)
-ENV AIRFLOW_BASE_URl="" \
+ENV AIRFLOW_BASE_URL="" \
     AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_DATABASE_NAME="bitnami_airflow" \
     AIRFLOW_DATABASE_PASSWORD="bitnami1" \
@@ -34,7 +34,7 @@ ENV AIRFLOW_BASE_URl="" \
     AIRFLOW_WEBSERVER_HOST="127.0.0.1" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="airflow" \
-    BITNAMI_IMAGE_VERSION="1.10.3-ol-7-r3" \
+    BITNAMI_IMAGE_VERSION="1.10.3-ol-7-r4" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
     LD_PRELOAD="/usr/lib64/libnss_wrapper.so" \
     LNAME="airflow" \
