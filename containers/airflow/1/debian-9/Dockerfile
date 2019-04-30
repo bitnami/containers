@@ -12,7 +12,7 @@ RUN bitnami-pkg install postgresql-client-10.7.0-1 --checksum a351a3ea00d4443bdc
 RUN bitnami-pkg unpack airflow-1.10.3-1 --checksum dc5698b27cb686f71dba2c06dd8bbfdc48734c3392243080487bcf87b41d8fc8
 
 COPY rootfs /
-ENV AIRFLOW_BASE_URl="" \
+ENV AIRFLOW_BASE_URL="" \
     AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_DATABASE_NAME="bitnami_airflow" \
     AIRFLOW_DATABASE_PASSWORD="bitnami1" \
@@ -33,7 +33,7 @@ ENV AIRFLOW_BASE_URl="" \
     AIRFLOW_WEBSERVER_HOST="127.0.0.1" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="airflow" \
-    BITNAMI_IMAGE_VERSION="1.10.3-debian-9-r7" \
+    BITNAMI_IMAGE_VERSION="1.10.3-debian-9-r8" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
     LD_PRELOAD="/usr/lib/libnss_wrapper.so" \
     LNAME="airflow" \
