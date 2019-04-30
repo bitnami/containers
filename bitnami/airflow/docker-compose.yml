@@ -13,7 +13,7 @@ services:
     image: bitnami/airflow:1
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
-      - AIRFLOW_DATABASE_USER=bn_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
       - AIRFLOW_EXECUTOR=LocalExecutor
     ports:
