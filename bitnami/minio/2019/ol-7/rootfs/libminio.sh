@@ -26,15 +26,35 @@ minio_env() {
     cat <<"EOF"
 export MINIO_BASEDIR="/opt/bitnami/minio"
 export MINIO_LOGDIR="${MINIO_BASEDIR}/log"
+export MINIO_SECRETSDIR="${MINIO_BASEDIR}/secrets"
 export MINIO_DATADIR="/data"
 export MINIO_CERTSDIR="/certs"
 export MINIO_SKIP_CLIENT="${MINIO_SKIP_CLIENT:-no}"
 export MINIO_DISTRIBUTED_MODE_ENABLED="${MINIO_DISTRIBUTED_MODE_ENABLED:-no}"
+export MINIO_DEFAULT_BUCKETS="${MINIO_DEFAULT_BUCKETS:-}"
 export MINIO_PORT_NUMBER="${MINIO_PORT_NUMBER:-9000}"
 export MINIO_DAEMON_USER="minio"
 export MINIO_DAEMON_GROUP="minio"
 export PATH="${MINIO_BASEDIR}/bin:$PATH"
 EOF
+    if [[ -n "${MINIO_ACCESS_KEY_FILE:-}" ]]; then
+        cat <<"EOF"
+export MINIO_ACCESS_KEY="$(< "${MINIO_ACCESS_KEY_FILE}")"
+EOF
+    else
+        cat <<"EOF"
+export MINIO_ACCESS_KEY="${MINIO_ACCESS_KEY:-}"
+EOF
+    fi
+    if [[ -n "${MINIO_SECRET_KEY_FILE:-}" ]]; then
+        cat <<"EOF"
+export MINIO_SECRET_KEY="$(< "${MINIO_SECRET_KEY_FILE}")"
+EOF
+    else
+        cat <<"EOF"
+export MINIO_SECRET_KEY="${MINIO_SECRET_KEY:-}"
+EOF
+    fi
 }
 
 ########################
@@ -173,5 +193,24 @@ minio_validate() {
             error "The HTTP log file specified at the environment variable MINIO_HTTP_TRACE is not writtable by current user \"$(id -u)\""
             exit 1
         fi
+    fi
+}
+
+########################
+# Create default buckets
+# Globals:
+#   MINIO_DEFAULT_BUCKETS
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+minio_create_default_buckets() {
+    if [[ -n "$MINIO_DEFAULT_BUCKETS" ]]; then
+        read -r -a buckets <<< "$(tr ',;' ' ' <<< "${MINIO_DEFAULT_BUCKETS}")"
+        info "Creating default buckets..."
+        for b in "${buckets[@]}"; do
+            minio_client_execute mb "local/${b}"
+        done
     fi
 }

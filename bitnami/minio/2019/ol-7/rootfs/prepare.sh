@@ -10,12 +10,12 @@
 eval "$(minio_env)"
 
 # Ensure non-root user has write permissions on a set of directories
-for dir in "$MINIO_DATADIR" "$MINIO_CERTSDIR" "$MINIO_LOGDIR"; do
+for dir in "$MINIO_DATADIR" "$MINIO_CERTSDIR" "$MINIO_LOGDIR" "$MINIO_SECRETSDIR"; do
     ensure_dir_exists "$dir"
 done
 # Redirect all logging to stdout/stderr
 ln -sf /dev/stdout "$MINIO_LOGDIR/minio-http.log"
-chmod -R g+rwX "$MINIO_DATADIR" "$MINIO_CERTSDIR" "$MINIO_LOGDIR"
+chmod -R g+rwX "$MINIO_DATADIR" "$MINIO_CERTSDIR" "$MINIO_LOGDIR" "$MINIO_SECRETSDIR"
 
 # Load MinIO Client environment variables
 eval "$(minio_client_env)"
