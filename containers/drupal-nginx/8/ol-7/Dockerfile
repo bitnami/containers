@@ -6,7 +6,7 @@ RUN install_packages bzip2-libs cyrus-sasl-lib freetds freetype glibc gmp gnutls
 RUN bitnami-pkg unpack nginx-1.14.2-21 --checksum d4d907cc0c038a32cb7fe0d681552f469a5d6c2af51d12fe83c710f250c2e463
 RUN bitnami-pkg unpack php-7.1.28-0 --checksum 455e6e54b802112ee77cd96f9eb1d26e77865640a17b5e08b7ba8abd68e8a2d3
 RUN bitnami-pkg unpack mysql-client-10.1.38-0 --checksum 8140732986832471cc54aede727b66729811a0fa79e6fa86c7c791ce1f513451
-RUN bitnami-pkg unpack drupal-8.6.15-0 --checksum 747b86748286757e17717545dc9369105b64433370ab2757e78a95252702ab97
+RUN bitnami-pkg unpack drupal-8.7.0-0 --checksum c793aac33d4e0399914e85670026d145bea4d2dda41b48907e616b90523bc489
 RUN mkdir -p /opt/bitnami/php/logs && chown daemon /opt/bitnami/php/logs && \
     mkdir -p /opt/bitnami/php/tmp && chown daemon /opt/bitnami/php/tmp && \
     ln -sf /opt/bitnami/php/etc /opt/bitnami/php/conf
@@ -16,7 +16,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="8.6.15-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="8.7.0-ol-7-r0" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
