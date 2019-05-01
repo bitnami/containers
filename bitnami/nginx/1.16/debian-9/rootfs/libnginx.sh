@@ -103,7 +103,7 @@ EOF
 # Globals:
 #   NGINX_CONFDIR
 # Arguments:
-#    $1 - (optionl) HTTP Port
+#    $1 - (optional) HTTP Port
 # Returns:
 #   None
 #########################
@@ -146,6 +146,7 @@ nginx_prepare_directories() {
     # Users can mount their certificates at /certs
     ln -sf /certs "${NGINX_CONFDIR}/bitnami/certs"
     # Fix to avoid issues for those using the old structure (vhosts)
+    warn "Creating a symlink to support mounting custom server_blocks at \"${NGINX_CONFDIR}/vhosts\". It will be deprecated in future versions."
     ln -sf "${NGINX_CONFDIR}/server_blocks" "${NGINX_CONFDIR}/vhosts"
 }
 
