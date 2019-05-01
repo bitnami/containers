@@ -33,4 +33,6 @@ else
         # Wait for other clients (distribute mode)
         sleep 5
     fi
+    # Create default buckets
+    minio_create_default_buckets
 fi
