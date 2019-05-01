@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.39-0 --checksum e6108f6ea91c18d8f5481a1015b301
 RUN bitnami-pkg unpack php-7.1.28-0 --checksum d42b033c9f897a43d96b1a34c5ebf53472f3c880ae1e3abf39ee361e116cccbe
 RUN bitnami-pkg unpack mysql-client-10.1.38-0 --checksum 7202055a6688186df2570efea631940d25f5bb6ecd06f4e036c852d13ffded0c
 RUN bitnami-pkg unpack libphp-7.1.28-0 --checksum 7ffe158e479228a559c4d87547c41bf1c88b17b87601b8c1565c1deb8918297e
-RUN bitnami-pkg unpack mediawiki-1.32.0-0 --checksum 0ec20230e522aac4c01d7e23fdb0f60e164d0f3c5ad20f94d8a072342ff6e75d
+RUN bitnami-pkg unpack mediawiki-1.32.1-0 --checksum 8b673979bc80872f666733f5c08ad215bb0add17a317f849b5ee9c04a72b1cbb
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="mediawiki" \
-    BITNAMI_IMAGE_VERSION="1.32.0-debian-9-r78" \
+    BITNAMI_IMAGE_VERSION="1.32.1-debian-9-r0" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     MARIADB_HOST="mariadb" \
