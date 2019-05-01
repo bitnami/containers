@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2019-ol-7`, `2019.4.23-ol-7-r0` (2019/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.4.23-ol-7-r0/2019/ol-7/Dockerfile)
+* [`2019-ol-7`, `2019.4.23-ol-7-r2` (2019/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.4.23-ol-7-r2/2019/ol-7/Dockerfile)
 * [`2019-debian-9`, `2019.4.23-debian-9-r1`, `2019`, `2019.4.23`, `2019.4.23-r1`, `latest` (2019/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.4.23-debian-9-r1/2019/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio GitHub repo](https://github.com/bitnami/bitnami-docker-minio).
@@ -194,6 +194,31 @@ or using Docker Compose:
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-minio/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 $ docker-compose exec minio mc admin info local
+```
+
+## Creating default buckets
+
+You can create a series of buckets in the MinIO server during the initialization of the container by setting the environment variable `MINIO_DEFAULT_BUCKETS` as shown below:
+
+```bash
+$ docker run --name minio \
+    --publish 9000:9000 \
+    --env MINIO_DEFAULT_BUCKETS='my-first-bucket,my-second-bucket' \
+    bitnami/minio:latest
+```
+
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  minio:
+    image: 'bitnami/minio:latest'
+    ports:
+      - '9000:9000'
+    environment:
+      - MINIO_DEFAULT_BUCKETS=my-first-bucket,my-second-bucket
 ```
 
 ## Securing access to MinIO server with TLS
