@@ -115,42 +115,6 @@ nginx_config_http_port() {
 }
 
 ########################
-# Unset HTTP_PROXY header to protect vs HTTPPOXY vulnerability
-# Ref: https://www.digitalocean.com/community/tutorials/how-to-protect-your-server-against-the-httpoxy-vulnerability
-# Globals:
-#   NGINX_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-nginx_patch_httpoxy_vulnerability() {
-    debug "Unsetting HTTP_PROXY header..."
-    echo '# Unset the HTTP_PROXY header' >> "${NGINX_CONFDIR}/fastcgi_params"
-    echo 'fastcgi_param  HTTP_PROXY         "";' >> "${NGINX_CONFDIR}/fastcgi_params"
-}
-
-########################
-# Prepare directories for users to mount its static files and certificates
-# Globals:
-#   NGINX_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-nginx_prepare_directories() {
-    # Users can mount their html sites at /app
-    mv "${NGINX_BASEDIR}/html" /app
-    ln -sf /app "${NGINX_BASEDIR}/html"
-    # Users can mount their certificates at /certs
-    ln -sf /certs "${NGINX_CONFDIR}/bitnami/certs"
-    # Fix to avoid issues for those using the old structure (vhosts)
-    warn "Creating a symlink to support mounting custom server_blocks at \"${NGINX_CONFDIR}/vhosts\". It will be deprecated in future versions."
-    ln -sf "${NGINX_CONFDIR}/server_blocks" "${NGINX_CONFDIR}/vhosts"
-}
-
-########################
 # Validate settings in NGINX_* env vars
 # Globals:
 #   NGINX_*
@@ -213,6 +177,10 @@ nginx_initialize() {
         if [[ -n "${NGINX_DAEMON_USER:-}" ]]; then
             chown -R "${NGINX_DAEMON_USER:-}" "${NGINX_CONFDIR}" "$NGINX_TMPDIR"
         fi
+    else
+        # The "user" directive makes sense only if the master process runs with super-user privileges
+        # TODO: find an appropriate NGINX parser to avoid 'sed calls'
+        sed -i -E "s/(^user)/# \1/g" ${NGINX_CONFDIR}/nginx.conf
     fi
 
     debug "Updating 'nginx.conf' based on user configuration..."

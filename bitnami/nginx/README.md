@@ -364,6 +364,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 ## Install 'vim'
 USER 0 # Required to perform privileged actions
 RUN install_packages vim
+USER 1001 # Revert to the original non-root user
 
 ## Modify 'worker_connections' on NGINX config file to '512'
 RUN sed -i -r "s#(\s+)worker_connections(\s+)[0-9]+;#\1worker_connections\2512;#g" /opt/bitnami/nginx/conf/nginx.conf
