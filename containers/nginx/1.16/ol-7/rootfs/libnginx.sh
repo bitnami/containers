@@ -111,7 +111,7 @@ nginx_config_http_port() {
     local http_port=${1:-8080}
     debug "Configuring default HTTP port..."
     # TODO: find an appropriate NGINX parser to avoid 'sed calls'
-    sed -i -E "s/(listen\s+)[0-9]{1,5};/\1${http_port};/g" ${NGINX_CONFDIR}/nginx.conf
+    sed -i -E "s/(listen\s+)[0-9]{1,5};/\1${http_port};/g" "${NGINX_CONFDIR}/nginx.conf"
 }
 
 ########################
@@ -180,7 +180,7 @@ nginx_initialize() {
     else
         # The "user" directive makes sense only if the master process runs with super-user privileges
         # TODO: find an appropriate NGINX parser to avoid 'sed calls'
-        sed -i -E "s/(^user)/# \1/g" ${NGINX_CONFDIR}/nginx.conf
+        sed -i -E "s/(^user)/# \1/g" "${NGINX_CONFDIR}/nginx.conf"
     fi
 
     debug "Updating 'nginx.conf' based on user configuration..."
