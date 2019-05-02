@@ -46,10 +46,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.16-ol-7`, `1.16.0-ol-7-r1` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-ol-7-r1/1.16/ol-7/Dockerfile)
+* [`1.16-ol-7`, `1.16.0-ol-7-r2` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-ol-7-r2/1.16/ol-7/Dockerfile)
 * [`1.16-debian-9`, `1.16.0-debian-9-r2`, `1.16`, `1.16.0`, `1.16.0-r2`, `latest` (1.16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-debian-9-r2/1.16/debian-9/Dockerfile)
 * [`1.16-rhel-7`, `0.0.0-rhel-7-r0` (1.16/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/0.0.0-rhel-7-r0/1.16/rhel-7/Dockerfile)
-
 
 # Get this image
 
@@ -303,7 +302,7 @@ RUN install_packages xxx yyy zzz
 RUN . ./libcomponent.sh && component_unpack "nginx" "a.b.c-0"
 ...
 COPY rootfs /
-RUN /prepare.sh
+RUN /postunpack.sh
 ...
 ENV BITNAMI_APP_NAME="nginx" ...
 EXPOSE 8080 8443
@@ -468,8 +467,7 @@ $ docker-compose up nginx
 
 # Useful Links
 
-- [Create An EMP Development Environment With Bitnami Containers
-](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
+- [Create An EMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
 # Contributing
 
