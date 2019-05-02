@@ -12,7 +12,7 @@ RUN install_packages glibc keyutils-libs krb5-libs libcom_err libselinux nss-sof
 RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.0-0" --checksum de3f2e7f973f2d4a60069edfd3b71d7b106bbb54b347bcf6d2781a71a1b65aca
 
 COPY rootfs /
-RUN /prepare.sh
+RUN /post-unpack.sh
 
 ENV BITNAMI_APP_NAME="nginx" \
     BITNAMI_IMAGE_VERSION="1.16.0-ol-7-r0" \

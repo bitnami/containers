@@ -12,7 +12,7 @@ RUN install_packages libc6 libpcre3 libssl1.1 zlib1g
 RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.0-0" --checksum b08c5b2a428e2e54726d47e290102496780db1ddd4a0a67bed82da6c34e56784
 
 COPY rootfs /
-RUN /prepare.sh
+RUN /post-unpack.sh
 
 ENV BITNAMI_APP_NAME="nginx" \
     BITNAMI_IMAGE_VERSION="1.16.0-debian-9-r0" \
