@@ -47,7 +47,7 @@ if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.
     if [[ $POSTGRESQL_USERNAME == "postgres" ]]; then
         psql=( psql -U postgres)
     else
-        psql=( psql -U $POSTGRESQL_USERNAME -d $POSTGRESQL_DATABASE )
+        psql=( psql -U "$POSTGRESQL_USERNAME" -d "$POSTGRESQL_DATABASE" )
     fi
     postgresqlStart &
     info "Initialization: Waiting for PostgreSQL to be available"
