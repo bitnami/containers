@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r322
+FROM bitnami/oraclelinux-extras:7-r323
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.2.4-ol-7-r16" \
+    BITNAMI_IMAGE_VERSION="2.2.4-ol-7-r17" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_EXTERNAL_PORT_NUMBER="80" \
     DISCOURSE_HOST="discourse" \
