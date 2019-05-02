@@ -367,7 +367,7 @@ RUN install_packages vim
 USER 1001 # Revert to the original non-root user
 
 ## Modify 'worker_connections' on NGINX config file to '512'
-RUN sed -i -r "s#(\s+)worker_connections(\s+)[0-9]+;#\1worker_connections\2512;#g" /opt/bitnami/nginx/conf/nginx.conf
+RUN sed -i -r "s#(\s+worker_connections\s+)[0-9]+;#\1512;#" /opt/bitnami/nginx/conf/nginx.conf
 
 ## Modify the ports used by NGINX by default
 ENV NGINX_HTTP_PORT_NUMBER=8181 # It is also possible to change this environment variable at runtime
