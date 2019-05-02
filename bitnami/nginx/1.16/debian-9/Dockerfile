@@ -9,20 +9,26 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libpcre3 libssl1.1 zlib1g
-RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.0-0" --checksum b08c5b2a428e2e54726d47e290102496780db1ddd4a0a67bed82da6c34e56784
+RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.0-1" --checksum c8e9546c7521b136863423c35d748ddc66bb59d65a157501df2c57254c2df3f8
+RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
+RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
+RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 
 COPY rootfs /
 RUN /postunpack.sh
-
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.16.0-debian-9-r2" \
+    BITNAMI_IMAGE_VERSION="1.16.0-debian-9-r3" \
     NAMI_PREFIX="/.nami" \
+    NGINX_ENABLE_CUSTOM_PORTS="no" \
+    NGINX_HTTPS_PORT_NUMBER="" \
+    NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/nginx/sbin:$PATH"
 
+VOLUME [ "/app", "/certs" ]
+
 EXPOSE 8080 8443
-VOLUME [ "/app" "/certs" ]
+
 WORKDIR /app
 USER 1001
-
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/run.sh" ]
