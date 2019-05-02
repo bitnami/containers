@@ -46,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.16-ol-7`, `1.16.0-ol-7-r1` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-ol-7-r1/1.16/ol-7/Dockerfile)
+* [`1.16-ol-7`, `1.16.0-ol-7-r3` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-ol-7-r3/1.16/ol-7/Dockerfile)
 * [`1.16-debian-9`, `1.16.0-debian-9-r3`, `1.16`, `1.16.0`, `1.16.0-r3`, `latest` (1.16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-debian-9-r3/1.16/debian-9/Dockerfile)
 * [`1.16-rhel-7`, `0.0.0-rhel-7-r0` (1.16/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/0.0.0-rhel-7-r0/1.16/rhel-7/Dockerfile)
 
@@ -468,6 +468,13 @@ $ docker-compose up nginx
 # Useful Links
 
 - [Create An EMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
+
+# Notable Changes
+
+## 1.16.0-r3
+
+- This image has been adapted so it's easier to customize. See the [Customizing the Bitnami NGINX Docker image](#customizing-the-bitnami-nginx-docker-image) section for more information.
+- The recommended mount point for adding custom server blocks changes from `/opt/bitnami/nginx/conf/vhosts` to `/opt/bitnami/nginx/conf/server_blocks`. Remember to update your Docker Compose files to user the new mount point.
 
 # Contributing
 
