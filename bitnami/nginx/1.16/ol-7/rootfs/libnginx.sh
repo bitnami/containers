@@ -61,7 +61,7 @@ nginx_start() {
     is_nginx_running && return
     debug "Starting NGIX..."
     if am_i_root; then
-        gosu "$NGINX_DAEMON_USER" "${NGINX_BASEDIR}/sbin/nginx" -c "${NGINX_CONFDIR}/nginx.conf"
+        gosu "${NGINX_DAEMON_USER}" "${NGINX_BASEDIR}/sbin/nginx" -c "${NGINX_CONFDIR}/nginx.conf"
     else
         "${NGINX_BASEDIR}/sbin/nginx" -c "${NGINX_CONFDIR}/nginx.conf"
     fi
@@ -99,6 +99,22 @@ EOF
 }
 
 ########################
+# Configure default HTTP port
+# Globals:
+#   NGINX_CONFDIR
+# Arguments:
+#    $1 - (optional) HTTP Port
+# Returns:
+#   None
+#########################
+nginx_config_http_port() {
+    local http_port=${1:-8080}
+    debug "Configuring default HTTP port..."
+    # TODO: find an appropriate NGINX parser to avoid 'sed calls'
+    sed -i -E "s/(listen\s+)[0-9]{1,5};/\1${http_port};/g" ${NGINX_CONFDIR}/nginx.conf
+}
+
+########################
 # Validate settings in NGINX_* env vars
 # Globals:
 #   NGINX_*
@@ -112,19 +128,21 @@ nginx_validate() {
 
     local validate_port_args=()
     ! am_i_root && validate_port_args+=("-unprivileged")
-    if ! err=$(validate_port "${validate_port_args[@]}" "$NGINX_HTTP_PORT_NUMBER"); then
-        error "An invalid port was specified in the environment variable NGINX_HTTP_PORT_NUMBER: $err"
-        exit 1
+    if [[ -n "${NGINX_HTTP_PORT_NUMBER:-}" ]]; then
+        if ! err=$(validate_port "${validate_port_args[@]}" "${NGINX_HTTP_PORT_NUMBER:-}"); then
+            error "An invalid port was specified in the environment variable NGINX_HTTP_PORT_NUMBER: $err"
+            exit 1
+        fi
     fi
 
     for var in "NGINX_DAEMON_USER" "NGINX_DAEMON_GROUP"; do
         if am_i_root; then
-            if [[ -z "${!var}" ]]; then
+            if [[ -z "${!var:-}" ]]; then
                 error "The $var environment variable cannot be empty when running as root"
                 exit 1
             fi
         else
-            if [[ -n "${!var}" ]]; then
+            if [[ -n "${!var:-}" ]]; then
                 warn "The $var environment variable will be ignored when running as non-root"
             fi
         fi
@@ -132,7 +150,7 @@ nginx_validate() {
 }
 
 ########################
-# Ensure NGINX is initialized
+# Initialize NGINX
 # Globals:
 #   NGINX_*
 # Arguments:
@@ -145,29 +163,28 @@ nginx_initialize() {
 
     # Persisted configuration files from old versions
     if [[ -f "$NGINX_VOLUME/conf/nginx.conf" ]]; then
-        warn "'nginx.conf' was found in a legacy location: ${NGINX_VOLUME}/conf/nginx.conf"
-        warn "  Please use ${NGINX_CONFDIR}/nginx.conf instead"
-        debug "Moving 'nginx.conf' file to new location..."
-        cp "$NGINX_VOLUME/conf/nginx.conf" "$NGINX_CONFDIR/nginx.conf"
+        error "A 'nginx.conf' file was found inside '${NGINX_VOLUME}/conf'. This configuration is not supported anymore. Please mount the configuration file at '${NGINX_CONFDIR}/nginx.conf' instead."
+        exit 1
     fi
     if ! is_dir_empty "$NGINX_VOLUME/conf/vhosts"; then
-        warn "Custom vhosts config files were found in a legacy directory: $NGINX_VOLUME/conf/vhosts"
-        warn "  Please use ${NGINX_CONFDIR}/vhosts instead"
-        debug "Moving vhosts config files to new location..."
-        cp -r "$NGINX_VOLUME/conf/vhosts" "$NGINX_CONFDIR"
+        error "Custom server blocks files were found inside '$NGINX_VOLUME/conf/vhosts'. This configuration is not supported anymore. Please mount your custom server blocks config files at '${NGINX_CONFDIR}/server_blocks' instead."
+        exit 1
     fi
 
-    if [[ -e "${NGINX_CONFDIR}/nginx.conf" ]]; then
-        debug "Custom configuration detected. Using it..."
-        return
+    if am_i_root; then
+        debug "Ensure NGINX daemon user/group exists..."
+        ensure_user_exists "$NGINX_DAEMON_USER" "$NGINX_DAEMON_GROUP"
+        if [[ -n "${NGINX_DAEMON_USER:-}" ]]; then
+            chown -R "${NGINX_DAEMON_USER:-}" "${NGINX_CONFDIR}" "$NGINX_TMPDIR"
+        fi
     else
-        debug "'nginx.conf' not found. Applying bitnami configuration..."
-        debug "Ensuring expected directories/files exist..."
-        for dir in "$NGINX_TMPDIR" "$NGINX_CONFDIR" "${NGINX_CONFDIR}/vhosts"; do
-            ensure_dir_exists "$dir" "$NGINX_DAEMON_USER"
-        done
-        debug "Rendering 'nginx.conf.tpl' template..."
-        render-template "${NGINX_TEMPLATES_DIR}/nginx.conf.tpl" > "${NGINX_CONFDIR}/nginx.conf"
-        echo 'fastcgi_param HTTP_PROXY "";' >> "${NGINX_CONFDIR}/fastcgi_params"
+        # The "user" directive makes sense only if the master process runs with super-user privileges
+        # TODO: find an appropriate NGINX parser to avoid 'sed calls'
+        sed -i -E "s/(^user)/# \1/g" ${NGINX_CONFDIR}/nginx.conf
+    fi
+
+    debug "Updating 'nginx.conf' based on user configuration..."
+    if [[ -n "${NGINX_HTTP_PORT_NUMBER:-}" ]]; then
+      nginx_config_http_port "${NGINX_HTTP_PORT_NUMBER}"
     fi
 }
