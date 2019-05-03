@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7-ol-7`, `7.0.1-ol-7-r1` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.0.1-ol-7-r1/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.0.1-debian-9-r0`, `7`, `7.0.1`, `7.0.1-r0`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.0.1-debian-9-r0/7/debian-9/Dockerfile)
+* [`7-debian-9`, `7.0.1-debian-9-r1`, `7`, `7.0.1`, `7.0.1-r1`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.0.1-debian-9-r1/7/debian-9/Dockerfile)
 * [`6-ol-7`, `6.7.1-ol-7-r20` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.7.1-ol-7-r20/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.7.1-debian-9-r17`, `6`, `6.7.1`, `6.7.1-r17` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.7.1-debian-9-r17/6/debian-9/Dockerfile)
 * [`7-rhel-7`, `0.0.0-rhel-7-r0` (7/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/0.0.0-rhel-7-r0/7/rhel-7/Dockerfile)
