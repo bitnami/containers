@@ -44,10 +44,10 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`11-ol-7`, `11.2.0-ol-7-r65` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.2.0-ol-7-r65/11/ol-7/Dockerfile)
-* [`11-debian-9`, `11.2.0-debian-9-r67`, `11`, `11.2.0`, `11.2.0-r67` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.2.0-debian-9-r67/11/debian-9/Dockerfile)
+* [`11-debian-9`, `11.2.0-debian-9-r68`, `11`, `11.2.0`, `11.2.0-r68` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.2.0-debian-9-r68/11/debian-9/Dockerfile)
 * [`10-ol-7`, `10.7.0-ol-7-r65` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.7.0-ol-7-r65/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.7.0-debian-9-r67`, `10`, `10.7.0`, `10.7.0-r67`, `latest` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.7.0-debian-9-r67/10/debian-9/Dockerfile)
-* [`9.6-ol-7`, `9.6.12-ol-7-r65` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.12-ol-7-r65/9.6/ol-7/Dockerfile)
+* [`9.6-ol-7`, `9.6.12-ol-7-r66` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.12-ol-7-r66/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.12-debian-9-r68`, `9.6`, `9.6.12`, `9.6.12-r68` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.12-debian-9-r68/9.6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
