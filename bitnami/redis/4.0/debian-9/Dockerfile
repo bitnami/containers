@@ -12,10 +12,10 @@ RUN install_packages libc6
 RUN . ./libcomponent.sh && component_unpack "redis" "4.0.14-0" --checksum ca947647670f60eb4e4df73c03d25eda34a2212a0815e00ab065a2e56ef75768
 
 COPY rootfs /
-RUN /prepare.sh
+RUN /postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.14-debian-9-r35" \
+    BITNAMI_IMAGE_VERSION="4.0.14-debian-9-r36" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
