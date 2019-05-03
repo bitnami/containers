@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`5-rhel-7`, `5.1.1-rhel-7-r40` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.1.1-rhel-7-r40/5/rhel-7/Dockerfile)
 * [`5-ol-7`, `5.1.1-ol-7-r41` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.1.1-ol-7-r41/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.1.1-debian-9-r45`, `5`, `5.1.1`, `5.1.1-r45`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.1.1-debian-9-r45/5/debian-9/Dockerfile)
+* [`5-debian-9`, `5.1.1-debian-9-r46`, `5`, `5.1.1`, `5.1.1-r46`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.1.1-debian-9-r46/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
 
@@ -107,7 +107,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e WORDPRESS_DATABASE_NAME=bitnami_wordpress \
     --net wordpress-tier \
     --volume wordpress_data:/bitnami \
-    --volume ./wordpress-vhosts.conf:/bitnami/nginx/conf/vhosts/wordpress-vhosts.conf \
+    --volume ./wordpress-vhosts.conf:/bitnami/nginx/conf/server_blocks/wordpress-vhosts.conf \
     bitnami/wordpress-nginx:latest
   ```
 
@@ -155,7 +155,7 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - /path/to/wordpress-persistence:/bitnami
-      - ./wordpress-vhosts.conf:/bitnami/nginx/conf/vhosts/wordpress-vhosts.conf
+      - ./wordpress-vhosts.conf:/bitnami/nginx/conf/server_blocks/wordpress-vhosts.conf
 ```
 
 # Upgrading WordPress
@@ -266,7 +266,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PROTOCOL=tls
     volumes:
       - wordpress_data:/bitnami/wordpress-nginx
-      - ./wordpress-vhosts.conf:/bitnami/nginx/conf/vhosts/wordpress-vhosts.conf
+      - ./wordpress-vhosts.conf:/bitnami/nginx/conf/server_blocks/wordpress-vhosts.conf
 ```
 
 * For manual execution:
@@ -279,7 +279,7 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --env ALLOW_EMPTY_PASSWORD=yes --env WORDPRESS_DATABASE_USER=bn_wordpress \
   --env WORDPRESS_DATABASE_NAME=bitnami_wordpress \
   --volume wordpress_data:/bitnami/wordpress-nginx \
-  --volume ./wordpress-vhosts.conf:/bitnami/nginx/conf/vhosts/wordpress-vhosts.conf \
+  --volume ./wordpress-vhosts.conf:/bitnami/nginx/conf/server_blocks/wordpress-vhosts.conf \
   bitnami/wordpress-nginx:latest
 ```
 
@@ -310,7 +310,7 @@ This would be an example of using an external database for WordPress.
       - WORDPRESS_DATABASE_PASSWORD=wordpress_password
     volumes:
       - wordpress_data:/bitnami
-      - ./wordpress-vhosts.conf:/bitnami/nginx/conf/vhosts/wordpress-vhosts.conf
+      - ./wordpress-vhosts.conf:/bitnami/nginx/conf/server_blocks/wordpress-vhosts.conf
 ```
 
 * For manual execution:
@@ -324,7 +324,7 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --env WORDPRESS_DATABASE_USER=wordpress_user \
   --env WORDPRESS_DATABASE_PASSWORD=wordpress_password \
   --volume wordpress_data:/bitnami \
-  --volume ./wordpress-vhosts.conf:/bitnami/nginx/conf/vhosts/wordpress-vhosts.conf \
+  --volume ./wordpress-vhosts.conf:/bitnami/nginx/conf/server_blocks/wordpress-vhosts.conf \
   bitnami/wordpress-nginx:latest
 ```
 
