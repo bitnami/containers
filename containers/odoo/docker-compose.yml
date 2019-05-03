@@ -1,7 +1,7 @@
 version: '2'
 services:
   postgresql:
-    image: 'bitnami/postgresql:latest'
+    image: 'bitnami/postgresql:10'
     volumes:
       - 'postgresql_data:/bitnami'
   odoo:
