@@ -13,10 +13,10 @@ RUN . ./libcomponent.sh && component_unpack "mariadb" "10.3.14-0" --checksum ea4
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
-RUN /prepare.sh
+RUN /postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.3.14-debian-9-r2" \
+    BITNAMI_IMAGE_VERSION="10.3.14-debian-9-r3" \
     MARIADB_DATABASE="" \
     MARIADB_MASTER_HOST="" \
     MARIADB_MASTER_PORT_NUMBER="" \
