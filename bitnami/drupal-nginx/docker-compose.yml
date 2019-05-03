@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
+    image: 'bitnami/mariadb:10.1'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_drupal
@@ -22,7 +22,7 @@ services:
       - '443:443'
     volumes:
       - 'drupal_data:/bitnami/drupal'
-      - './drupal-vhosts.conf:/bitnami/nginx/conf/vhosts/drupal-vhosts.conf'
+      - './drupal-server-block.conf:/opt/bitnami/nginx/conf/server_blocks/drupal-server-block.conf'
     depends_on:
       - mariadb
 volumes:

@@ -119,7 +119,7 @@ If you want to run the application manually instead of using docker-compose, the
     -e DRUPAL_DATABASE_NAME=bitnami_drupal \
     --net drupal-tier \
     --volume drupal_data:/bitnami
-    --volume ./drupal-vhosts.conf:/bitnami/nginx/conf/vhosts/drupal-vhosts.conf \
+    --volume ./drupal-vhosts.conf:/bitnami/nginx/conf/server_blocks/drupal-vhosts.conf \
     bitnami/drupal-nginx:latest
   ```
 
