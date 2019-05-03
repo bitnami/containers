@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r322
+FROM bitnami/oraclelinux-extras:7-r323
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,13 +6,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc libgcc
-RUN bitnami-pkg install java-1.8.201-0 --checksum e71b797ceaaf8b0641d1641df129cea10124b058bc24d4ed74738725fabfb8c9
+RUN bitnami-pkg install java-1.8.212-0 --checksum 7d11dad71234819fb290bcadc2997bda088ba6b21f245d397c068de4cf3757db
 RUN bitnami-pkg unpack kafka-2.2.0-2 --checksum ca5df4055dea569c4f6ea45e6ee59a138b96949c92c9347d09e18882bd13cabf
 
 COPY rootfs /
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.2.0-ol-7-r24" \
+    BITNAMI_IMAGE_VERSION="2.2.0-ol-7-r25" \
     KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
     KAFKA_BROKER_ID="-1" \
     KAFKA_BROKER_PASSWORD="bitnami" \
