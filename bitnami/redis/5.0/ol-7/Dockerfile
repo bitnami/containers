@@ -12,10 +12,10 @@ RUN install_packages glibc
 RUN . ./libcomponent.sh && component_unpack "redis" "5.0.4-0" --checksum 62743681bd59191d7f04d2e50e726f0059639ed9b21b4bf7a3dea45eb572f024
 
 COPY rootfs /
-RUN /prepare.sh
+RUN /postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.4-ol-7-r32" \
+    BITNAMI_IMAGE_VERSION="5.0.4-ol-7-r33" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
