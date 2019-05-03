@@ -45,8 +45,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`8.0-ol-7`, `8.0.15-ol-7-r69` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.15-ol-7-r69/8.0/ol-7/Dockerfile)
-* [`8.0-debian-9`, `8.0.15-debian-9-r71`, `8.0`, `8.0.15`, `8.0.15-r71` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.15-debian-9-r71/8.0/debian-9/Dockerfile)
+* [`8.0-ol-7`, `8.0.15-ol-7-r68` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.15-ol-7-r68/8.0/ol-7/Dockerfile)
+* [`8.0-debian-9`, `8.0.15-debian-9-r72`, `8.0`, `8.0.15`, `8.0.15-r72` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.15-debian-9-r72/8.0/debian-9/Dockerfile)
 * [`5.7-ol-7`, `5.7.26-ol-7-r2` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.26-ol-7-r2/5.7/ol-7/Dockerfile)
 * [`5.7-debian-9`, `5.7.26-debian-9-r3`, `5.7`, `5.7.26`, `5.7.26-r3`, `latest` (5.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.26-debian-9-r3/5.7/debian-9/Dockerfile)
 
