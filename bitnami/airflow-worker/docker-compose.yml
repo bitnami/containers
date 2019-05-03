@@ -1,7 +1,7 @@
 version: '2'
 services:
   postgresql:
-    image: bitnami/postgresql:latest
+    image: bitnami/postgresql:10
     volumes:
       - 'postgresql_data:/bitnami'
     environment:
@@ -9,7 +9,7 @@ services:
       - POSTGRESQL_USERNAME=bn_airflow
       - POSTGRESQL_PASSWORD=bitnami1
   redis:
-    image: bitnami/redis:latest
+    image: bitnami/redis:4.0
     volumes:
       - 'redis_data:/bitnami'
     environment:
@@ -24,7 +24,7 @@ services:
     volumes:
       - airflow_worker_data:/bitnami
   airflow-scheduler:
-    image: bitnami/airflow-scheduler:latest
+    image: bitnami/airflow-scheduler:1
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
@@ -33,7 +33,7 @@ services:
     volumes:
       - airflow_scheduler_data:/bitnami
   airflow:
-    image: bitnami/airflow:latest
+    image: bitnami/airflow:1
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
