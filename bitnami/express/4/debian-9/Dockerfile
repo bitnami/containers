@@ -9,14 +9,14 @@ RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libcomerr2 libcurl
 RUN bitnami-pkg install sequelize-cli-5.4.0-1 --checksum 23c3be9b4a442e65a6434c70b85ccd14c774b270cc19477abf4e1862b5f6c0e7
 RUN bitnami-pkg install node-10.15.3-0 --checksum 6d6c24d3f86c4da3d55ef44c169c011b06120c88e291c233fc14fbf4e78f9578
 RUN bitnami-pkg install git-2.21.0-0 --checksum 37eb00d863f94194c0c31464c2c747bc784e662adbab240b5f0ef46b3e259e52
-RUN bitnami-pkg install express-generator-4.16.0-22 --checksum c524b61b7e2590f872db1d141daf51f003ad1ee83fa045f62d2d1166085cf22d
+RUN bitnami-pkg install express-generator-4.16.1-0 --checksum 6577ac319892f89db59c4e47464893e995aea20da8873ea42a56f18db2e00a31
 RUN bitnami-pkg install express-4.16.4-23 --checksum 38b6ff25d42c14c93f406cf18bacdaacf2a89de8c96604a981d672bc53ecdb7a
 RUN bitnami-pkg install bower-1.8.8-2 --checksum 60f4e1edc7b1ce26b521b2b276b9da6136edee188d8edd8e9e6191d23170e033
 RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwx /dist /app /.npm /.config /.cache /.local
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.16.4-debian-9-r178" \
+    BITNAMI_IMAGE_VERSION="4.16.4-debian-9-r179" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/sequelize-cli/bin:/opt/bitnami/node/bin:/opt/bitnami/git/bin:/opt/bitnami/express/bin:/opt/bitnami/bower/bin:$PATH"
 
