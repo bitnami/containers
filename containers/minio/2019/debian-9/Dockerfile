@@ -13,9 +13,9 @@ RUN . ./libcomponent.sh && component_unpack "minio-client" "2019.5.1-0" --checks
 RUN . ./libcomponent.sh && component_unpack "minio" "2019.5.2-0" --checksum af7b03575dbef712d408189920ac44e4b1753615557789eb453a22f00a5972a8
 
 COPY rootfs /
-RUN /prepare.sh
+RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="minio" \
-    BITNAMI_IMAGE_VERSION="2019.5.2-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="2019.5.2-debian-9-r1" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
