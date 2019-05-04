@@ -13,10 +13,10 @@ RUN . ./libcomponent.sh && component_unpack "mysql" "5.7.26-0" --checksum 90488b
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
-RUN /prepare.sh
+RUN /postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.26-ol-7-r2" \
+    BITNAMI_IMAGE_VERSION="5.7.26-ol-7-r3" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
