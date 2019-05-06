@@ -18,6 +18,5 @@ eval "$(nginx_env)"
 nginx_validate
 # Ensure NGINX is stopped when this script ends
 trap "nginx_stop" EXIT
-am_i_root && ensure_user_exists "$NGINX_DAEMON_USER" "$NGINX_DAEMON_GROUP"
-# Ensure NGINX is initialized
+# Initialize NGINX
 nginx_initialize
