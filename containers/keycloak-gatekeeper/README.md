@@ -7,7 +7,7 @@
 # TL;DR;
 
 ```bash
-$ docker run --rm --name keycloak-gatekeeper bitnami/keycloak-gatekeeper:2 keycloak-proxy --help
+$ docker run --rm --name keycloak-gatekeeper bitnami/keycloak-gatekeeper:2 /keycloak-proxy --help
 ```
 
 ## Docker Compose
@@ -36,7 +36,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-scratch`, `2.3.0-scratch-r1`, `2`, `2.3.0`, `2.3.0-r1`, `latest` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/2.3.0/2/scratch/Dockerfile)
+* [`2-scratch`, `2.3.0-scratch-r2`, `2`, `2.3.0`, `2.3.0-r2`, `latest` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/2.3.0/2/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak-gatekeeper GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper).
 
@@ -73,7 +73,10 @@ $ docker build -t bitnami/keycloak-gatekeeper:latest https://github.com/bitnami/
 The configuration can easily be setup by mounting your own configuration file on the directory `/opt/bitnami/keycloak-gatekeeper/conf` (both JSON and YAML formats are supported: `config.json` or `config.yaml`).
 
 ```bash
-$ docker run --name keycloak-gatekeeper -v /path/to/config.yaml:/opt/bitnami/keycloak-gatekeeper/config.yaml bitnami/keycloak-gatekeeper:latest
+$ docker run --name keycloak-gatekeeper \
+  --volume /path/to/config.yaml:/opt/bitnami/keycloak-gatekeeper/config.yaml \
+  bitnami/keycloak-gatekeeper:latest \
+  /keycloak-proxy --config /opt/bitnami/keycloak-gatekeeper/config.yaml
 ```
 
 After that, your configuration will be taken into account in Keycloak Gatekeeper.
@@ -88,8 +91,9 @@ services:
     image: bitnami/keycloak-gatekeeper:latest
     ports:
       - '3000:3000'
+    command: /keycloak-proxy --config /opt/bitnami/keycloak-gatekeeper/config.yaml
     volumes:
-      - /path/to/config.yaml:/opt/bitnami/keycloak-gatekeeper/config.yaml
+      - /path/to/config.yaml:/opt/bitnami/keycloak-gatekeeper/config.yaml:ro
 ```
 
 ## Using command-line options
