@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r326
+FROM bitnami/oraclelinux-extras:7-r327
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,10 +10,10 @@ RUN bitnami-pkg unpack tensorflow-serving-1.13.0-0 --checksum f2dc2f57a13b4e50ee
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="1.13.0-ol-7-r52" \
+    BITNAMI_IMAGE_VERSION="1.13.0-ol-7-r53" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
-    TENSORFLOW_SERVING_MODEL_NAME="inception" \
+    TENSORFLOW_SERVING_MODEL_NAME="resnet" \
     TENSORFLOW_SERVING_PORT_NUMBER="8500" \
     TENSORFLOW_SERVING_REST_API_PORT_NUMBER="8501"
 
