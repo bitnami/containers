@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "minio" "2019.5.2-0" --checksum a32c
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="minio" \
-    BITNAMI_IMAGE_VERSION="2019.5.2-ol-7-r4" \
+    BITNAMI_IMAGE_VERSION="2019.5.2-ol-7-r5" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
