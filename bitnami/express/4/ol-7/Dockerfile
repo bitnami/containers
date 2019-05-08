@@ -7,7 +7,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libcurl libgcc libidn libselinux libssh2 libstdc++ nc ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre readline sqlite zlib
 RUN bitnami-pkg install sequelize-cli-5.4.0-1 --checksum 079954c8be67d58601649b4d6cc5535e335b33406a4773093f43855015e031b8
-RUN bitnami-pkg install node-10.15.3-0 --checksum fe0edff37e44b8ab1a17d0ebf06ebb87db99423e965ded002b7ad6370afdd44c
+RUN bitnami-pkg install node-10.15.3-1 --checksum 2309ec0810dbe0cf2ff12c3ae9bdaff723419ffd33774ea21753e29b925262e2
 RUN bitnami-pkg install git-2.21.0-0 --checksum 8dc7078aeaa3c3bf7010f3adbdb2f7ec9c3737c7eb6c7c1b2f547350c42fcfa5
 RUN bitnami-pkg install express-generator-4.16.1-0 --checksum a0164cb2836139755197cabc5d7024a447e4bf9531c2cce644725489a18408fb
 RUN bitnami-pkg install express-4.16.4-23 --checksum 51f9a5896165c3749919ae3e2346b361d89f11ba20e36a4d2598c4397c3f1fdb
@@ -16,7 +16,7 @@ RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwx /dist /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.16.4-ol-7-r186" \
+    BITNAMI_IMAGE_VERSION="4.16.4-ol-7-r187" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/sequelize-cli/bin:/opt/bitnami/node/bin:/opt/bitnami/git/bin:/opt/bitnami/express-generator/bin:/opt/bitnami/express/bin:/opt/bitnami/bower/bin:$PATH"
 
