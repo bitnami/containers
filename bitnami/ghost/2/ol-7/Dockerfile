@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r327
+FROM bitnami/oraclelinux-extras:7-r328
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX,o+rw" \
@@ -7,14 +7,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX,o+rw" \
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs glibc keyutils-libs krb5-libs libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre readline sqlite zlib
-RUN bitnami-pkg install node-8.16.0-0 --checksum 64d75a23b8c90448c79430d5b6cada893296e3cb41841d38a0be7278a140bfa4
-RUN bitnami-pkg unpack mysql-client-10.1.39-0 --checksum 7ac7efb8400917e5ac49a8a5ea22cac62f079870cda71fa432303f2303f7e533
+RUN bitnami-pkg install node-8.16.0-1 --checksum 470d8ce306757810be4888ed14c57c62b5864eac815fcd86d1e10dc32b52d542
+RUN bitnami-pkg unpack mysql-client-10.1.40-0 --checksum 42463db101d01a34a666677e4126b53f3a579b2cda7f698ac3100c6c40ce6c18
 RUN bitnami-pkg unpack ghost-2.22.0-0 --checksum 4ce608997b0cb8cbee8ee6c66fa109406fd0bd8263cea079866154579eb88e24
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="2.22.0-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="2.22.0-ol-7-r1" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
