@@ -45,9 +45,9 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`11-ol-7`, `11.2.0-ol-7-r70` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.2.0-ol-7-r70/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.2.0-debian-9-r69`, `11`, `11.2.0`, `11.2.0-r69` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.2.0-debian-9-r69/11/debian-9/Dockerfile)
-* [`10-ol-7`, `10.7.0-ol-7-r70` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.7.0-ol-7-r70/10/ol-7/Dockerfile)
+* [`10-ol-7`, `10.7.0-ol-7-r71` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.7.0-ol-7-r71/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.7.0-debian-9-r68`, `10`, `10.7.0`, `10.7.0-r68`, `latest` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.7.0-debian-9-r68/10/debian-9/Dockerfile)
-* [`9.6-ol-7`, `9.6.12-ol-7-r70` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.12-ol-7-r70/9.6/ol-7/Dockerfile)
+* [`9.6-ol-7`, `9.6.12-ol-7-r71` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.12-ol-7-r71/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.12-debian-9-r69`, `9.6`, `9.6.12`, `9.6.12-r69` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.12-debian-9-r69/9.6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
@@ -295,7 +295,7 @@ $ docker run --name postgresql-slave \
   bitnami/postgresql:latest
 ```
 
-In the above command the container is configured as a `slave` using the `POSTGRESQL_REPLICATION_MODE` parameter. Before the replication slave is started, the `POSTGRESQL_MASTER_HOST` and `POSTGRESQL_MASTER_PORT_NUMBER` parameters are used by the slave container to connect to the master and replicate the initial database from the master. The `POSTGRESQL_REPLICATION_USER` and `POSTGRESQL_REPLICATION_PASSWORD` credentials are used to authenticate with the master.
+In the above command the container is configured as a `slave` using the `POSTGRESQL_REPLICATION_MODE` parameter. Before the replication slave is started, the `POSTGRESQL_MASTER_HOST` and `POSTGRESQL_MASTER_PORT_NUMBER` parameters are used by the slave container to connect to the master and replicate the initial database from the master. The `POSTGRESQL_REPLICATION_USER` and `POSTGRESQL_REPLICATION_PASSWORD` credentials are used to authenticate with the master. In order to change the `pg_hba.conf` default settings, the slave needs to know if `POSTGRESQL_PASSWORD` is set.
 
 With these two commands you now have a two node PostgreSQL master-slave streaming replication cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
 
@@ -341,6 +341,7 @@ services:
       - POSTGRESQL_REPLICATION_USER=repl_user
       - POSTGRESQL_REPLICATION_PASSWORD=repl_password
       - POSTGRESQL_MASTER_HOST=postgresql-master
+      - POSTGRESQL_PASSWORD=my_password
       - POSTGRESQL_MASTER_PORT_NUMBER=5432
 ```
 
@@ -651,6 +652,12 @@ $ docker-compose up postgresql
 ```
 
 # Notable Changes
+
+## 9.6.12-r69, 9.6.12-ol-7-r71, 10.7.0-r68, 10.7.0-ol-7-r70, 11.2.0-r68 and 11.2.0-ol-7-r70
+
+- Decrease the size of the container. It is not necessary Node.js anymore. PostgreSQL configuration moved to bash scripts in the rootfs/ folder.
+- This container is backwards compatible with the previous versions, as the mount folders remain unchanged.
+- The `POSTGRESQL_PASSWORD` variable must be passed to the slaves so they generate the proper `pg_hba.conf` admission rules.
 
 ## 9.6.11-r66, 9.6.11-ol-7-r83, 10.6.0-r68, 10.6.0-ol-7-r83, 11.1.0-r62 and 11.1.0-ol-7-r79
 
