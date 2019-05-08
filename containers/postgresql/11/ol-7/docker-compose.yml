@@ -7,6 +7,8 @@ services:
       - '5432:5432'
     volumes:
       - 'postgresql_data:/bitnami'
+    environment:
+      - 'ALLOW_EMPTY_PASSWORD=yes'
 
 volumes:
   postgresql_data:
