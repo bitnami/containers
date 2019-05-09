@@ -2,12 +2,12 @@ FROM bitnami/minideb-extras:stretch-r358
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmemcached11 libmemcachedutil2 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5 libtinfo5 libunistring0 libxml2 libxslt1.1 zlib1g
-RUN bitnami-pkg unpack nginx-1.16.0-5 --checksum 93abb37595ca16a1962bb2dad57b7d0ac84f397af127c4a46244a666867511a0
-RUN bitnami-pkg unpack php-7.2.18-0 --checksum a537ba3e532e08ec3a3b752a27867a850f8a40082a31d58a3c221d20024c47a4
+RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmemcached11 libmemcachedutil2 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5 libtinfo5 libunistring0 libxml2 libxslt1.1 libzip4 zlib1g
+RUN bitnami-pkg unpack nginx-1.16.0-6 --checksum 8f8f06dc6a9b57b4c5f9b147e57dbef1aadcb2223212596ff744a4fbdda56307
+RUN bitnami-pkg unpack php-7.3.5-0 --checksum 0f27654056265c01afa748c3e056846d0d7f2c816b0e53ad7d723bff04cb4bce
 RUN bitnami-pkg install wp-cli-2.2.0-0 --checksum 230debaa90f07d59e90682341d15b6350e0b92de70a502862e7c09fcc9619bd8
-RUN bitnami-pkg unpack mysql-client-10.2.23-0 --checksum 3f364d915f1e62037db20a41c7d750004d69c897dd7934e9a3cd2d4c491f4175
-RUN bitnami-pkg unpack wordpress-5.2.0-0 --checksum 36db0513909b074e190b14dcfc4d2cdca5ed1b4c23c70eaa8516fc4e3e590799
+RUN bitnami-pkg unpack mysql-client-10.3.14-0 --checksum 9f78223021e366e30b263dac38b66b01d42f81bc52964faf723ea33e8cc79439
+RUN bitnami-pkg unpack wordpress-5.2.0-1 --checksum dd322eb22449151be0a699acfe661c59a7b92261f8cf6b9233e830ce97ca7b61
 RUN mkdir -p /opt/bitnami/php/logs && chown daemon /opt/bitnami/php/logs && \
     mkdir -p /opt/bitnami/php/tmp && chown daemon /opt/bitnami/php/tmp && \
     ln -sf /opt/bitnami/php/etc /opt/bitnami/php/conf
@@ -17,7 +17,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="5.2.0-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="5.2.0-debian-9-r1" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
