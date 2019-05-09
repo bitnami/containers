@@ -48,20 +48,20 @@ postgresql_env() {
       local -r original="${2:?missing original environment variable}"
 
       if env | grep -q "${original}"; then
-          cat << EOF 
+          cat << EOF
 export $alias="${!original}"
 EOF
       fi
     }
-  
+
     # Alias created for official PostgreSQL image compatibility
     declare_env_alias POSTGRESQL_DATABASE POSTGRES_DB
     declare_env_alias POSTGRESQL_USERNAME POSTGRES_USER
     declare_env_alias POSTGRESQL_DATA_DIR PGDATA
 
     local -r suffixes=(
-      "PASSWORD" "INITDB_WAL_DIR" "INITDB_ARGS" "CLUSTER_APP_NAME" 
-      "MASTER_HOST" "MASTER_PORT_NUMBER" "NUM_SYNCHRONOUS_REPLICAS" 
+      "PASSWORD" "INITDB_WAL_DIR" "INITDB_ARGS" "CLUSTER_APP_NAME"
+      "MASTER_HOST" "MASTER_PORT_NUMBER" "NUM_SYNCHRONOUS_REPLICAS"
       "PORT_NUMBER" "REPLICATION_MODE" "REPLICATION_PASSWORD" "REPLICATION_USER"
       "SYNCHRONOUS_COMMIT_MODE" "PASSWORD_FILE" "REPLICATION_PASSWORD_FILE" "INIT_MAX_TIMEOUT"
     )
@@ -316,9 +316,9 @@ postgresql_set_property() {
 #   None
 #########################
 postgresql_create_replication_user() {
-    local -r escaped_password="${POSTGRESQL_REPLICATION_PASSWORD//\'/\'\'}" 
+    local -r escaped_password="${POSTGRESQL_REPLICATION_PASSWORD//\'/\'\'}"
     info "Creating replication user $POSTGRESQL_REPLICATION_USER"
-    echo "CREATE ROLE $POSTGRESQL_REPLICATION_USER REPLICATION LOGIN ENCRYPTED PASSWORD '$escaped_password'" | postgresql_execute 
+    echo "CREATE ROLE $POSTGRESQL_REPLICATION_USER REPLICATION LOGIN ENCRYPTED PASSWORD '$escaped_password'" | postgresql_execute
 }
 
 ########################
@@ -353,7 +353,7 @@ postgresql_configure_replication_parameters() {
 #   None
 #########################
 postgresql_alter_postgres_user() {
-    local -r escaped_password="${POSTGRESQL_PASSWORD//\'/\'\'}" 
+    local -r escaped_password="${POSTGRESQL_PASSWORD//\'/\'\'}"
     info "Changing password of ${POSTGRESQL_USERNAME}"
     echo "ALTER ROLE postgres WITH PASSWORD '$escaped_password';" | postgresql_execute
 }
@@ -368,7 +368,7 @@ postgresql_alter_postgres_user() {
 #   None
 #########################
 postgresql_create_admin_user() {
-    local -r escaped_password="${POSTGRESQL_PASSWORD//\'/\'\'}" 
+    local -r escaped_password="${POSTGRESQL_PASSWORD//\'/\'\'}"
     info "Creating user ${POSTGRESQL_USERNAME}"
     echo "CREATE ROLE ${POSTGRESQL_USERNAME} WITH LOGIN CREATEDB PASSWORD '${escaped_password}';" | postgresql_execute
     info "Grating access to ${POSTGRESQL_USERNAME} to the database ${POSTGRESQL_DATABASE}"
@@ -481,7 +481,7 @@ postgresql_initialize() {
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && postgresql_create_replication_user
             is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
-        else 
+        else
             postgresql_slave_init_db
             is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
             is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
@@ -503,7 +503,7 @@ postgresql_initialize() {
 #   None
 #########################
 postgresql_custom_init_scripts() {
-    info "Loading custom scripts..."   
+    info "Loading custom scripts..."
     if [[ -n $(find "$POSTGRESQL_INITSCRIPTS_DIR/" -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && [[ ! -f "$POSTGRESQL_VOLUME_DIR/.user_scripts_initialized" ]] ; then
         info "Loading user's custom files from $POSTGRESQL_INITSCRIPTS_DIR ...";
         postgresql_start_bg
@@ -584,7 +584,7 @@ postgresql_start_bg() {
     "$POSTGRESQL_BIN_DIR"/pg_ctl "start" "${pg_ctl_flags[@]}"
     local -r pg_isready_args=("-U" "postgres")
     local counter=$POSTGRESQL_INIT_MAX_TIMEOUT
-    while ! "$POSTGRESQL_BIN_DIR"/pg_isready "${pg_isready_args[@]}";do 
+    while ! "$POSTGRESQL_BIN_DIR"/pg_isready "${pg_isready_args[@]}";do
         sleep 1
         counter=$((counter - 1 ))
         if (( counter <= 0 ));then
@@ -636,13 +636,13 @@ postgresql_master_init_db() {
     if [[ -n "${initdb_args[*]:-}" ]];then
         info "Initializing PostgreSQL with ${initdb_args[*]} extra initdb arguments"
         "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" "${initdb_args[@]}"
-    else 
+    else
         "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres"
     fi
 }
 
 ########################
-# Initialize slave node by running pg_basebackup 
+# Initialize slave node by running pg_basebackup
 # Globals:
 #   POSTGRESQL_*
 # Arguments:
@@ -656,7 +656,7 @@ postgresql_slave_init_db() {
     local -r check_cmd=("$POSTGRESQL_BIN_DIR"/pg_isready)
     local ready_counter=$POSTGRESQL_INIT_MAX_TIMEOUT
 
-    while ! PGPASSWORD=$POSTGRESQL_REPLICATION_PASSWORD "${check_cmd[@]}" "${check_args[@]}";do 
+    while ! PGPASSWORD=$POSTGRESQL_REPLICATION_PASSWORD "${check_cmd[@]}" "${check_args[@]}";do
         sleep 1
         ready_counter=$(( ready_counter - 1 ))
         if (( ready_counter <= 0 ));then
@@ -682,7 +682,7 @@ postgresql_slave_init_db() {
 }
 
 ########################
-# Create recovery.conf in slave node 
+# Create recovery.conf in slave node
 # Globals:
 #   POSTGRESQL_*
 # Arguments:
