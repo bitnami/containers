@@ -11,7 +11,7 @@ services:
       - POSTGRESQL_REPLICATION_MODE=master
       - POSTGRESQL_REPLICATION_USER=repl_user
       - POSTGRESQL_REPLICATION_PASSWORD=repl_password
-      - POSTGRESQL_USERNAME=my_user
+      - POSTGRESQL_USERNAME=postgres
       - POSTGRESQL_PASSWORD=my_password
       - POSTGRESQL_DATABASE=my_database
   postgresql-slave:
@@ -25,6 +25,7 @@ services:
       - POSTGRESQL_REPLICATION_USER=repl_user
       - POSTGRESQL_REPLICATION_PASSWORD=repl_password
       - POSTGRESQL_MASTER_HOST=postgresql-master
+      - POSTGRESQL_PASSWORD=my_password
       - POSTGRESQL_MASTER_PORT_NUMBER=5432
 
 volumes:
