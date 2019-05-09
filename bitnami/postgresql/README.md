@@ -653,7 +653,7 @@ $ docker-compose up postgresql
 
 # Notable Changes
 
-## 9.6.12-r69, 9.6.12-ol-7-r71, 10.7.0-r68, 10.7.0-ol-7-r70, 11.2.0-r68 and 11.2.0-ol-7-r70
+## 9.6.12-r70, 9.6.12-ol-7-r72, 10.7.0-r69, 10.7.0-ol-7-r71, 11.2.0-r69 and 11.2.0-ol-7-r71
 
 - Decrease the size of the container. It is not necessary Node.js anymore. PostgreSQL configuration moved to bash scripts in the rootfs/ folder.
 - This container is backwards compatible with the previous versions, as the mount folders remain unchanged.
