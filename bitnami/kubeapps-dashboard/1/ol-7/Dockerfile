@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r274
+FROM bitnami/oraclelinux-extras-base:7-r275
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -9,7 +9,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libcom_err libselinux nss-softokn-freebl openssl-libs pcre zlib
-RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.0-6" --checksum f00a3badedab0413c7240309e1617d581724070e8c867600f27362e1bb59d825
+RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.0-7" --checksum 9ca0f53021627b90346e52b6705ed5c2144e001712fc8a19cddd3cd334ffc380
 RUN . ./libcomponent.sh && component_unpack "kubeapps" "1.3.2-0" --checksum de2f965c31f506b26c1657ee160a0757255fd8ed499cdfe26c8ac40d0261344d
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
@@ -21,7 +21,7 @@ RUN rm -rf /app && \
     ln -sf /opt/bitnami/kubeapps /opt/bitnami/kubeapps-dashboard && \
     mv /opt/bitnami/kubeapps/build /app
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.3.2-ol-7-r3" \
+    BITNAMI_IMAGE_VERSION="1.3.2-ol-7-r4" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
