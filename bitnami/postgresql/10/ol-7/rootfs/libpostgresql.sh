@@ -432,7 +432,7 @@ postgresql_initialize() {
     # User injected custom configuration
     if [[ -d "$POSTGRESQL_MOUNTED_CONF_DIR" ]] && compgen -G "$POSTGRESQL_MOUNTED_CONF_DIR"/* > /dev/null;then
         debug "Copying files from $POSTGRESQL_MOUNTED_CONF_DIR to $POSTGRESQL_CONF_DIR"
-        cp -fr "$POSTGRESQL_MOUNTED_CONF_DIR"/* "$POSTGRESQL_CONF_DIR"
+        cp -fr "$POSTGRESQL_MOUNTED_CONF_DIR"/. "$POSTGRESQL_CONF_DIR"
     fi
     local create_conf_file=yes
     local create_pghba_file=yes
