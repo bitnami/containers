@@ -630,7 +630,7 @@ is_postgresql_running() {
 postgresql_master_init_db() {
     local initdb_args=()
     if [[ -n "${POSTGRESQL_INITDB_ARGS[*]}" ]]; then
-        initdb_args+=(${POSTGRESQL_INITDB_ARGS[@]})
+        initdb_args+=("${POSTGRESQL_INITDB_ARGS[@]}")
     fi
     if [[ -n "$POSTGRESQL_INITDB_WAL_DIR" ]]; then
         ensure_dir_exists "$POSTGRESQL_INITDB_WAL_DIR"
