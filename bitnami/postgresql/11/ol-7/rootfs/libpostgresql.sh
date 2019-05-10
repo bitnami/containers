@@ -462,7 +462,7 @@ postgresql_initialize() {
     debug "Ensuring expected directories/files exist..."
     for dir in "$POSTGRESQL_TMP_DIR" "$POSTGRESQL_LOG_DIR"; do
         ensure_dir_exists "$dir"
-        am_i_root && chown "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$dir"
+        am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$dir"
     done
     is_boolean_yes "$create_conf_file" && postgresql_create_config
     is_boolean_yes "$create_pghba_file" && postgresql_create_pghba && postgresql_allow_local_connection
@@ -479,7 +479,7 @@ postgresql_initialize() {
         [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]] && [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
     else
         ensure_dir_exists "$POSTGRESQL_DATA_DIR"
-        am_i_root && chown "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$POSTGRESQL_DATA_DIR"
+        am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_DATA_DIR"
         if [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]]; then
             postgresql_master_init_db
             postgresql_start_bg
@@ -646,7 +646,7 @@ postgresql_master_init_db() {
     fi
     if [[ -n "$POSTGRESQL_INITDB_WAL_DIR" ]]; then
         ensure_dir_exists "$POSTGRESQL_INITDB_WAL_DIR"
-        am_i_root && chown "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$POSTGRESQL_INITDB_WAL_DIR"
+        am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_INITDB_WAL_DIR"
         initdb_args+=("--waldir" "$POSTGRESQL_INITDB_WAL_DIR")
     fi
     if [[ -n "${initdb_args[*]:-}" ]]; then
