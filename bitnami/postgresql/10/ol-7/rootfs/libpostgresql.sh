@@ -72,13 +72,13 @@ EOF
     # Ensure the image is compatible with Helm chart 3.x.x series
     local -r postgresql_data="${POSTGRESQL_DATA_DIR:-${PGDATA:-}}"
     if [[ -n "${postgresql_data:-}" ]]; then
-	if [[ -d "${postgresql_data}/data" ]] || [[ "${postgresql_data}" = "/bitnami/postgresql" ]]; then
-	    warn "Data directory is set with a legacy value, adapting POSTGRESQL_DATA_DIR..."
-	    warn "POSTGRESQL_DATA_DIR set to \"${postgresql_data}/data\"!!"
-	    cat << EOF
+        if [[ -d "${postgresql_data}/data" ]] || [[ "${postgresql_data}" = "/bitnami/postgresql" ]]; then
+            warn "Data directory is set with a legacy value, adapting POSTGRESQL_DATA_DIR..."
+            warn "POSTGRESQL_DATA_DIR set to \"${postgresql_data}/data\"!!"
+            cat << EOF
 export POSTGRESQL_DATA_DIR="${postgresql_data}/data"
 EOF
-	fi
+        fi
     fi
 
     cat <<"EOF"
@@ -651,15 +651,15 @@ postgresql_master_init_db() {
     fi
     if [[ -n "${initdb_args[*]:-}" ]]; then
         info "Initializing PostgreSQL with ${initdb_args[*]} extra initdb arguments"
-	if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-	    "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" "${initdb_args[@]}"
-	else
-	    "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" "${initdb_args[@]}" >/dev/null 2>&1
-	fi
+        if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+            "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" "${initdb_args[@]}"
+        else
+            "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" "${initdb_args[@]}" >/dev/null 2>&1
+        fi
     elif [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
         "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres"
     else
-	"$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" >/dev/null 2>&1
+        "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" >/dev/null 2>&1
     fi
 }
 
