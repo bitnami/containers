@@ -1,7 +1,7 @@
 version: '2'
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.1'
+    image: 'bitnami/mariadb:10.3'
     volumes:
       - 'mariadb_data:/bitnami'
     environment:
