@@ -55,9 +55,9 @@ EOF
     }
 
     # Alias created for official PostgreSQL image compatibility
-    declare_env_alias POSTGRESQL_DATABASE POSTGRES_DB
-    declare_env_alias POSTGRESQL_USERNAME POSTGRES_USER
-    declare_env_alias POSTGRESQL_DATA_DIR PGDATA
+    [[ -z "${POSTGRESQL_DATABASE:-}" ]] && declare_env_alias POSTGRESQL_DATABASE POSTGRES_DB
+    [[ -z "${POSTGRESQL_USERNAME:-}" ]] && declare_env_alias POSTGRESQL_USERNAME POSTGRES_USER
+    [[ -z "${POSTGRESQL_DATA_DIR:-}" ]] && declare_env_alias POSTGRESQL_DATA_DIR PGDATA
 
     local -r suffixes=(
       "PASSWORD" "INITDB_WAL_DIR" "INITDB_ARGS" "CLUSTER_APP_NAME"
@@ -68,6 +68,18 @@ EOF
     for s in "${suffixes[@]}"; do
       declare_env_alias "POSTGRESQL_${s}" "POSTGRES_${s}"
     done
+
+    # Ensure the image is compatible with Helm chart 3.x.x series
+    local -r postgresql_data="${POSTGRESQL_DATA_DIR:-${PGDATA:-}}"
+    if [[ -n "${postgresql_data:-}" ]]; then
+	if [[ -d "${postgresql_data}/data" ]] || [[ "${postgresql_data}" = "/bitnami/postgresql" ]]; then
+	    warn "Data directory is set with a legacy value, adapting POSTGRESQL_DATA_DIR..."
+	    warn "POSTGRESQL_DATA_DIR set to \"${postgresql_data}/data\"!!"
+	    cat << EOF
+export POSTGRESQL_DATA_DIR="${postgresql_data}/data"
+EOF
+	fi
+    fi
 
     cat <<"EOF"
 # Paths
