@@ -9,6 +9,6 @@ services:
     depends_on:
       - mariadb
   mariadb:
-    image: 'bitnami/mariadb:10.1-ol-7'
+    image: 'bitnami/mariadb:10.3-ol-7'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
