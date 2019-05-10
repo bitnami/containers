@@ -264,7 +264,7 @@ EOF
 #   None
 #########################
 postgresql_restrict_pghba() {
-    if [[ -n "$POSTGRESQL_PASSWORD" ]];then
+    if [[ -n "$POSTGRESQL_PASSWORD" ]]; then
         sed -i 's/trust/md5/g' "$POSTGRESQL_PGHBA_FILE"
     fi
 }
@@ -280,7 +280,7 @@ postgresql_restrict_pghba() {
 #########################
 postgresql_add_replication_to_pghba() {
     local replication_auth="trust"
-    if [[ -n "$POSTGRESQL_REPLICATION_PASSWORD" ]];then
+    if [[ -n "$POSTGRESQL_REPLICATION_PASSWORD" ]]; then
         replication_auth="md5"
     fi
     cat << EOF >> "$POSTGRESQL_PGHBA_FILE"
@@ -318,7 +318,7 @@ postgresql_set_property() {
 postgresql_create_replication_user() {
     local -r escaped_password="${POSTGRESQL_REPLICATION_PASSWORD//\'/\'\'}"
     info "Creating replication user $POSTGRESQL_REPLICATION_USER"
-    echo "CREATE ROLE $POSTGRESQL_REPLICATION_USER REPLICATION LOGIN ENCRYPTED PASSWORD '$escaped_password'" | postgresql_execute
+    echo "CREATE ROLE \"$POSTGRESQL_REPLICATION_USER\" REPLICATION LOGIN ENCRYPTED PASSWORD '$escaped_password'" | postgresql_execute
 }
 
 ########################
@@ -337,7 +337,7 @@ postgresql_configure_replication_parameters() {
     postgresql_set_property "max_wal_senders" "16"
     postgresql_set_property "wal_keep_segments" "12"
     postgresql_set_property "hot_standby" "on"
-    if (( POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS > 0 ));then
+    if (( POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS > 0 )); then
         postgresql_set_property "synchronous_commit" "$POSTGRESQL_SYNCHRONOUS_COMMIT_MODE"
         postgresql_set_property "synchronous_standby_names" "$POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS ($POSTGRESQL_CLUSTER_APP_NAME)"
     fi
@@ -370,9 +370,9 @@ postgresql_alter_postgres_user() {
 postgresql_create_admin_user() {
     local -r escaped_password="${POSTGRESQL_PASSWORD//\'/\'\'}"
     info "Creating user ${POSTGRESQL_USERNAME}"
-    echo "CREATE ROLE ${POSTGRESQL_USERNAME} WITH LOGIN CREATEDB PASSWORD '${escaped_password}';" | postgresql_execute
-    info "Grating access to ${POSTGRESQL_USERNAME} to the database ${POSTGRESQL_DATABASE}"
-    echo GRANT ALL PRIVILEGES ON DATABASE "${POSTGRESQL_DATABASE}" TO "${POSTGRESQL_USERNAME}"\; | postgresql_execute "" "postgres" "$POSTGRESQL_PASSWORD"
+    echo "CREATE ROLE \"${POSTGRESQL_USERNAME}\" WITH LOGIN CREATEDB PASSWORD '${escaped_password}';" | postgresql_execute
+    info "Grating access to \"${POSTGRESQL_USERNAME}\" to the database \"${POSTGRESQL_DATABASE}\""
+    echo "GRANT ALL PRIVILEGES ON DATABASE \"${POSTGRESQL_DATABASE}\" TO \"${POSTGRESQL_USERNAME}\"\;" | postgresql_execute "" "postgres" "$POSTGRESQL_PASSWORD"
 }
 
 ########################
@@ -385,7 +385,7 @@ postgresql_create_admin_user() {
 #   None
 #########################
 postgresql_create_custom_database() {
-    echo "CREATE DATABASE $POSTGRESQL_DATABASE" | postgresql_execute "" "postgres" "" "localhost"
+    echo "CREATE DATABASE \"$POSTGRESQL_DATABASE\"" | postgresql_execute "" "postgres" "" "localhost"
 }
 
 ########################
@@ -430,7 +430,7 @@ postgresql_initialize() {
     info "Initializing PostgreSQL database..."
 
     # User injected custom configuration
-    if [[ -d "$POSTGRESQL_MOUNTED_CONF_DIR" ]] && compgen -G "$POSTGRESQL_MOUNTED_CONF_DIR"/* > /dev/null;then
+    if [[ -d "$POSTGRESQL_MOUNTED_CONF_DIR" ]] && compgen -G "$POSTGRESQL_MOUNTED_CONF_DIR"/* > /dev/null; then
         debug "Copying files from $POSTGRESQL_MOUNTED_CONF_DIR to $POSTGRESQL_CONF_DIR"
         cp -fr "$POSTGRESQL_MOUNTED_CONF_DIR"/. "$POSTGRESQL_CONF_DIR"
     fi
@@ -458,7 +458,7 @@ postgresql_initialize() {
     if [[ -e "$POSTGRESQL_DATA_DIR" ]]; then
         info "Deploying PostgreSQL with persisted data..."
         local -r postmaster_path="$POSTGRESQL_DATA_DIR"/postmaster.pid
-        if [[ -f "$postmaster_path" ]];then
+        if [[ -f "$postmaster_path" ]]; then
             info "Cleaning stale postmaster.pid file"
             rm "$postmaster_path"
         fi
@@ -468,11 +468,11 @@ postgresql_initialize() {
     else
         ensure_dir_exists "$POSTGRESQL_DATA_DIR"
         am_i_root && chown "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$POSTGRESQL_DATA_DIR"
-        if [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]];then
+        if [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]]; then
             postgresql_master_init_db
             postgresql_start_bg
             [[ -n "${POSTGRESQL_DATABASE}" ]] && postgresql_create_custom_database
-            if [[ "$POSTGRESQL_USERNAME" = "postgres" ]];then
+            if [[ "$POSTGRESQL_USERNAME" = "postgres" ]]; then
                 postgresql_alter_postgres_user
             else
                 postgresql_create_admin_user
@@ -581,13 +581,17 @@ postgresql_start_bg() {
     local -r pg_ctl_flags=("-w" "-D" "$POSTGRESQL_DATA_DIR" -l "$POSTGRESQL_LOG_FILE" "-o" "--config-file=$POSTGRESQL_CONF_FILE --external_pid_file=$POSTGRESQL_PID_FILE --hba_file=$POSTGRESQL_PGHBA_FILE")
     info "Starting PostgreSQL in background..."
     is_postgresql_running && return
-    "$POSTGRESQL_BIN_DIR"/pg_ctl "start" "${pg_ctl_flags[@]}"
+    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+       "$POSTGRESQL_BIN_DIR"/pg_ctl "start" "${pg_ctl_flags[@]}"
+    else
+       "$POSTGRESQL_BIN_DIR"/pg_ctl "start" "${pg_ctl_flags[@]}" >/dev/null 2>&1
+    fi
     local -r pg_isready_args=("-U" "postgres")
     local counter=$POSTGRESQL_INIT_MAX_TIMEOUT
     while ! "$POSTGRESQL_BIN_DIR"/pg_isready "${pg_isready_args[@]}";do
         sleep 1
         counter=$((counter - 1 ))
-        if (( counter <= 0 ));then
+        if (( counter <= 0 )); then
             error "PostgreSQL is not ready after $POSTGRESQL_INIT_MAX_TIMEOUT seconds"
             exit 1
         fi
@@ -625,19 +629,25 @@ is_postgresql_running() {
 #########################
 postgresql_master_init_db() {
     local initdb_args=()
-    if [[ -n "${POSTGRESQL_INITDB_ARGS[*]}" ]];then
-        initdb_args+=(${POSTGRESQL_INITDB_ARGS[@]})
+    if [[ -n "${POSTGRESQL_INITDB_ARGS[*]}" ]]; then
+        initdb_args+=("${POSTGRESQL_INITDB_ARGS[@]}")
     fi
-    if [[ -n "$POSTGRESQL_INITDB_WAL_DIR" ]];then
+    if [[ -n "$POSTGRESQL_INITDB_WAL_DIR" ]]; then
         ensure_dir_exists "$POSTGRESQL_INITDB_WAL_DIR"
         am_i_root && chown "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$POSTGRESQL_INITDB_WAL_DIR"
         initdb_args+=("--waldir" "$POSTGRESQL_INITDB_WAL_DIR")
     fi
-    if [[ -n "${initdb_args[*]:-}" ]];then
+    if [[ -n "${initdb_args[*]:-}" ]]; then
         info "Initializing PostgreSQL with ${initdb_args[*]} extra initdb arguments"
-        "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" "${initdb_args[@]}"
-    else
+	if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+	    "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" "${initdb_args[@]}"
+	else
+	    "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" "${initdb_args[@]}" >/dev/null 2>&1
+	fi
+    elif [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
         "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres"
+    else
+	"$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" >/dev/null 2>&1
     fi
 }
 
@@ -659,7 +669,7 @@ postgresql_slave_init_db() {
     while ! PGPASSWORD=$POSTGRESQL_REPLICATION_PASSWORD "${check_cmd[@]}" "${check_args[@]}";do
         sleep 1
         ready_counter=$(( ready_counter - 1 ))
-        if (( ready_counter <= 0 ));then
+        if (( ready_counter <= 0 )); then
             error "PostgreSQL master is not ready after $POSTGRESQL_INIT_MAX_TIMEOUT seconds"
             exit 1
         fi
@@ -673,7 +683,7 @@ postgresql_slave_init_db() {
         debug "Backup command failed. Sleeping and trying again"
         sleep 1
         replication_counter=$(( replication_counter - 1 ))
-        if (( replication_counter <= 0 ));then
+        if (( replication_counter <= 0 )); then
             error "Slave replication failed after trying for $POSTGRESQL_INIT_MAX_TIMEOUT seconds"
             exit 1
         fi
