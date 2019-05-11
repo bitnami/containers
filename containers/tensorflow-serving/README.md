@@ -41,9 +41,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
-{{ range $index, $b := .Branches }}
-* [{{ range $index, $tag := .Tags }}{{ if ne $index 0 }}, {{ end }}`{{ $tag }}`{{ end }} ({{ $b.ReleaseSeries }}/{{ .Distro }}/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/{{ .Version }}/{{ .ReleaseSeries }}/{{ .Distro }}/Dockerfile)
-{{- end }}
+
+* [`1-rhel-7`, `1.13.0-rhel-7-r45` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.13.0-rhel-7-r45/1/rhel-7/Dockerfile)
+* [`1-ol-7`, `1.13.0-ol-7-r58` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.13.0-ol-7-r58/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.13.0-debian-9-r47`, `1`, `1.13.0`, `1.13.0-r47`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.13.0-debian-9-r47/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-serving GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-serving).
 
@@ -346,7 +347,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright {{ .CurrentYear }} Bitnami
+Copyright 2019 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -359,4 +360,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
