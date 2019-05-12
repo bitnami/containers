@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`9.0-rhel-7`, `9.0.19-rhel-7-r2` (9.0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.19-rhel-7-r2/9.0/rhel-7/Dockerfile)
-* [`9.0-ol-7`, `9.0.19-ol-7-r14` (9.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.19-ol-7-r14/9.0/ol-7/Dockerfile)
+* [`9.0-ol-7`, `9.0.19-ol-7-r15` (9.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.19-ol-7-r15/9.0/ol-7/Dockerfile)
 * [`9.0-debian-9`, `9.0.19-debian-9-r9`, `9.0`, `9.0.19`, `9.0.19-r9` (9.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.19-debian-9-r9/9.0/debian-9/Dockerfile)
 * [`8.5-ol-7`, `8.5.40-ol-7-r16` (8.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.40-ol-7-r16/8.5/ol-7/Dockerfile)
 * [`8.5-debian-9`, `8.5.40-debian-9-r10`, `8.5`, `8.5.40`, `8.5.40-r10`, `latest` (8.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.40-debian-9-r10/8.5/debian-9/Dockerfile)
