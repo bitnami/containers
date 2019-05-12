@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r331
+FROM bitnami/oraclelinux-extras:7-r332
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX,o+rw" \
@@ -14,7 +14,7 @@ RUN bitnami-pkg unpack ghost-2.22.0-0 --checksum 4ce608997b0cb8cbee8ee6c66fa1094
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="2.22.0-ol-7-r4" \
+    BITNAMI_IMAGE_VERSION="2.22.0-ol-7-r5" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
