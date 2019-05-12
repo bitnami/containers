@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r331
+FROM bitnami/oraclelinux-extras:7-r332
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,7 +10,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 RUN chmod +x /opt/bitnami/kubectl/bin/kubectl
 ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.13.4-ol-7-r64" \
+    BITNAMI_IMAGE_VERSION="1.13.4-ol-7-r65" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 USER 1001
