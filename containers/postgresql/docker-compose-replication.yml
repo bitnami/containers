@@ -2,7 +2,7 @@ version: '2'
 
 services:
   postgresql-master:
-    image: 'bitnami/postgresql:latest'
+    image: 'bitnami/postgresql:10'
     ports:
       - '5432'
     volumes:
@@ -15,7 +15,7 @@ services:
       - POSTGRESQL_PASSWORD=my_password
       - POSTGRESQL_DATABASE=my_database
   postgresql-slave:
-    image: 'bitnami/postgresql:latest'
+    image: 'bitnami/postgresql:10'
     ports:
       - '5432'
     depends_on:
