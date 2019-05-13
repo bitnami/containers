@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mysql-master:
-    image: 'bitnami/mysql:latest'
+    image: 'bitnami/mysql:5.7'
     ports:
       - '3306'
     volumes:
@@ -16,7 +16,7 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_ROOT_PASSWORD=my_root_password
   mysql-slave:
-    image: 'bitnami/mysql:latest'
+    image: 'bitnami/mysql:5.7'
     ports:
       - '3306'
     depends_on:
