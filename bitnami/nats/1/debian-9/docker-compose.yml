@@ -2,7 +2,7 @@ version: '2'
 
 services:
   nats:
-    image: bitnami/nats:1-debian-9
+    image: bitnami/nats:1
     ports:
       - '4222:4222'
       - '6222:6222'
