@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.1'
+    image: 'bitnami/mariadb:10.3'
     environment:
       - MARIADB_USER=bn_testlink
       - MARIADB_DATABASE=bitnami_testlink
