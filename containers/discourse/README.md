@@ -377,6 +377,7 @@ This would be an example of SMTP configuration using a GMail account:
 ```
 See the [documentation on troubleshooting SMTP issues](https://docs.bitnami.com/general/how-to/troubleshoot-smtp-issues/) if there are problems.
 In particular you will need to [make changes to your Google account settings](https://docs.bitnami.com/general/faq/troubleshooting/troubleshoot-smtp-gmail/) when using GMail.
+GMail also has [limits on the number of messages](https://support.google.com/a/answer/176600) that can be sent.
 
 # Contributing
 
