@@ -3,11 +3,11 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages cron libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5 libtinfo5 libunistring0 libxml2 libxslt1.1 zlib1g
-RUN bitnami-pkg unpack apache-2.4.39-0 --checksum e6108f6ea91c18d8f5481a1015b301d17ea59ba9d641e1a06b3860d66ffa46b0
+RUN bitnami-pkg unpack apache-2.4.39-1 --checksum 8b191adc55155e604cc224309a0179585f898dff83a470272d5fa5cbefc4c17e
 RUN bitnami-pkg unpack php-7.1.29-0 --checksum cd0fba56de5fc1fa5c3d4eb5ef85bcd613cf0875fefe37beaddc9327f5cd7d8e
-RUN bitnami-pkg unpack mysql-client-10.2.23-0 --checksum 3f364d915f1e62037db20a41c7d750004d69c897dd7934e9a3cd2d4c491f4175
+RUN bitnami-pkg unpack mysql-client-10.2.24-0 --checksum 99b9d2d0ac257a4c8945d5fa69b5963b0f1fed53866cd7bf64675850481d50d7
 RUN bitnami-pkg unpack libphp-7.1.29-0 --checksum cd6c0c8fdd006dcb730cc4fe3c42420c00f2db9641353be735b8e29f579c34f8
-RUN bitnami-pkg unpack magento-2.3.1-1 --checksum d3bd34c49c77d1aa5c3a4f2cde9778933d47115cd41878da004b04ff00ff1785
+RUN bitnami-pkg unpack magento-2.3.1-2 --checksum de00b8df7f4102c842d6df4cf84a74e08ca9d8b86c4bdd8d1427c2dc8514e1a8
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
@@ -19,7 +19,9 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.1-debian-9-r26" \
+    BITNAMI_IMAGE_VERSION="2.3.1-debian-9-r27" \
+    EXTERNAL_HTTPS_PORT_NUMBER="443" \
+    EXTERNAL_HTTP_PORT_NUMBER="80" \
     MAGENTO_ADMINURI="admin" \
     MAGENTO_DATABASE_NAME="bitnami_magento" \
     MAGENTO_DATABASE_PASSWORD="" \
