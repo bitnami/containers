@@ -259,7 +259,7 @@ The WordPress instance can be customized by specifying environment variables on 
 - `WORDPRESS_FIRST_NAME`: WordPress user first name. Default: **FirstName**
 - `WORDPRESS_LAST_NAME`: WordPress user last name. Default: **LastName**
 - `WORDPRESS_BLOG_NAME`: WordPress blog name. Default: **User's blog**
-- `WORDPRESS_HTACESS_OVERRIDE_NONE`: Set the Apache `AllowOverride` variable to `None`. All the default directives will be loaded from `/opt/bitnami/wordpress/wordpress-htaccess.conf`. Default: **yes**.
+- `WORDPRESS_HTACCESS_OVERRIDE_NONE`: Set the Apache `AllowOverride` variable to `None`. All the default directives will be loaded from `/opt/bitnami/wordpress/wordpress-htaccess.conf`. Default: **yes**.
 
 ##### Use an existing database
 
