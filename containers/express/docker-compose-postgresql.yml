@@ -2,13 +2,13 @@ version: '2'
 
 services:
   postgresql:
-    image: bitnami/postgresql:latest
+    image: bitnami/postgresql:10
     environment:
       - POSTGRESQL_DATABASE=myapp
 
   express:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: bitnami/express:latest
+    image: bitnami/express:4
     command: npm run development
     environment:
       - PORT=3000
