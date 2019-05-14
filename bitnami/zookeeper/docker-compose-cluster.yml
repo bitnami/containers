@@ -2,7 +2,7 @@ version: '2'
 
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:latest'
+    image: 'bitnami/zookeeper:3'
     ports:
       - '2181'
       - '2888'
@@ -14,7 +14,7 @@ services:
       - ALLOW_ANONYMOUS_LOGIN=yes
       - ZOO_SERVERS=0.0.0.0:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
   zookeeper2:
-    image: 'bitnami/zookeeper:latest'
+    image: 'bitnami/zookeeper:3'
     ports:
       - '2181'
       - '2888'
@@ -26,7 +26,7 @@ services:
       - ALLOW_ANONYMOUS_LOGIN=yes
       - ZOO_SERVERS=zookeeper:2888:3888,0.0.0.0:2888:3888,zookeeper3:2888:3888
   zookeeper3:
-    image: 'bitnami/zookeeper:latest'
+    image: 'bitnami/zookeeper:3'
     ports:
       - '2181'
       - '2888'
