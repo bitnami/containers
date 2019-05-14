@@ -4,6 +4,7 @@ services:
   mongodb-primary:
     image: 'bitnami/mongodb:4.0'
     environment:
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-primary
       - MONGODB_REPLICA_SET_MODE=primary
       - MONGODB_ROOT_PASSWORD=password123
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
@@ -15,6 +16,7 @@ services:
     depends_on:
       - mongodb-primary
     environment:
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary
       - MONGODB_REPLICA_SET_MODE=secondary
       - MONGODB_PRIMARY_HOST=mongodb-primary
       - MONGODB_PRIMARY_ROOT_PASSWORD=password123
@@ -25,6 +27,7 @@ services:
     depends_on:
       - mongodb-primary
     environment:
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-arbiter
       - MONGODB_REPLICA_SET_MODE=arbiter
       - MONGODB_PRIMARY_HOST=mongodb-primary
       - MONGODB_PRIMARY_ROOT_PASSWORD=password123
