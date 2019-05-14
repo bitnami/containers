@@ -6,7 +6,7 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libffi6 libfreetype6 l
 RUN bitnami-pkg unpack nginx-1.16.0-6 --checksum 8f8f06dc6a9b57b4c5f9b147e57dbef1aadcb2223212596ff744a4fbdda56307
 RUN bitnami-pkg unpack php-7.3.5-0 --checksum 0f27654056265c01afa748c3e056846d0d7f2c816b0e53ad7d723bff04cb4bce
 RUN bitnami-pkg install wp-cli-2.2.0-0 --checksum 230debaa90f07d59e90682341d15b6350e0b92de70a502862e7c09fcc9619bd8
-RUN bitnami-pkg unpack mysql-client-10.3.14-0 --checksum 9f78223021e366e30b263dac38b66b01d42f81bc52964faf723ea33e8cc79439
+RUN bitnami-pkg unpack mysql-client-10.3.15-0 --checksum eb269ede06f5e5ed64dfe3515784f2c942a944c6f32c3ff030bebd5a134a50c0
 RUN bitnami-pkg unpack wordpress-5.2.0-3 --checksum cd4e3d73f4bada3ff714a361e6c17e7e96a45166df8607d6722bf48e941602ef
 RUN mkdir -p /opt/bitnami/php/logs && chown daemon /opt/bitnami/php/logs && \
     mkdir -p /opt/bitnami/php/tmp && chown daemon /opt/bitnami/php/tmp && \
@@ -17,7 +17,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="5.2.0-debian-9-r4" \
+    BITNAMI_IMAGE_VERSION="5.2.0-debian-9-r5" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
