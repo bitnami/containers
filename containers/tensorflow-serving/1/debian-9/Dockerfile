@@ -10,10 +10,10 @@ RUN bitnami-pkg unpack tensorflow-serving-1.13.0-0 --checksum 4ceb7d64b39c2b3898
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="1.13.0-debian-9-r47" \
+    BITNAMI_IMAGE_VERSION="1.13.0-debian-9-r48" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
-    TENSORFLOW_SERVING_MODEL_NAME="inception" \
+    TENSORFLOW_SERVING_MODEL_NAME="resnet" \
     TENSORFLOW_SERVING_PORT_NUMBER="8500" \
     TENSORFLOW_SERVING_REST_API_PORT_NUMBER="8501"
 
