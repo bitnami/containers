@@ -6,6 +6,8 @@
   "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
   "databaseUser": "{{$global.env.MAGENTO_DATABASE_USER}}",
   "email": "{{$global.env.MAGENTO_EMAIL}}",
+  "externalHttpPort": "{{$global.env.EXTERNAL_HTTP_PORT_NUMBER}}",
+  "externalHttpsPort": "{{$global.env.EXTERNAL_HTTPS_PORT_NUMBER}}",
   "firstName": "{{$global.env.MAGENTO_FIRSTNAME}}",
   "host": "{{$global.env.MAGENTO_HOST}}",
   "lastName": "{{$global.env.MAGENTO_LASTNAME}}",
