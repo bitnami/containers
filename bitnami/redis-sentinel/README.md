@@ -55,9 +55,9 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5.0-rhel-7`, `5.0.4-rhel-7-r30` (5.0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.4-rhel-7-r30/5.0/rhel-7/Dockerfile)
-* [`5.0-ol-7`, `5.0.4-ol-7-r46` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.4-ol-7-r46/5.0/ol-7/Dockerfile)
-* [`5.0-debian-9`, `5.0.4-debian-9-r39`, `5.0`, `5.0.4`, `5.0.4-r39`, `latest` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.4-debian-9-r39/5.0/debian-9/Dockerfile)
+* [`5.0-rhel-7`, `5.0.5-rhel-7-r0` (5.0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.5-rhel-7-r0/5.0/rhel-7/Dockerfile)
+* [`5.0-ol-7`, `5.0.5-ol-7-r0` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.5-ol-7-r0/5.0/ol-7/Dockerfile)
+* [`5.0-debian-9`, `5.0.5-debian-9-r0`, `5.0`, `5.0.5`, `5.0.5-r0`, `latest` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.5-debian-9-r0/5.0/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.14-ol-7-r44` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-ol-7-r44/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.14-debian-9-r38`, `4.0`, `4.0.14`, `4.0.14-r38` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-debian-9-r38/4.0/debian-9/Dockerfile)
 
