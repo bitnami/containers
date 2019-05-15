@@ -375,6 +375,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PASSWORD=your_password
 
 ```
+See the [documentation on troubleshooting SMTP issues](https://docs.bitnami.com/general/how-to/troubleshoot-smtp-issues/) if there are problems.
 
 # Contributing
 
