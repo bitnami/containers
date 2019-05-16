@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`12-ol-7-prod`, `12.2.0-ol-7-r10-prod` (12-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.2.0-ol-7-r10-prod/12-prod/ol-7/Dockerfile)
 * [`12-ol-7`, `12.2.0-ol-7-r10` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.2.0-ol-7-r10/12/ol-7/Dockerfile)
-* [`12-debian-9-prod`, `12.2.0-debian-9-r4-prod`, `12-prod`, `12.2.0-prod`, `12.2.0-r4-prod` (12-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.2.0-debian-9-r4-prod/12-prod/debian-9/Dockerfile)
+* [`12-debian-9-prod`, `12.2.0-debian-9-r5-prod`, `12-prod`, `12.2.0-prod`, `12.2.0-r5-prod` (12-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.2.0-debian-9-r5-prod/12-prod/debian-9/Dockerfile)
 * [`12-debian-9`, `12.2.0-debian-9-r4`, `12`, `12.2.0`, `12.2.0-r4` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.2.0-debian-9-r4/12/debian-9/Dockerfile)
 * [`11-ol-7-prod`, `11.15.0-ol-7-r16-prod` (11-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-ol-7-r16-prod/11-prod/ol-7/Dockerfile)
 * [`11-ol-7`, `11.15.0-ol-7-r16` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-ol-7-r16/11/ol-7/Dockerfile)
@@ -62,8 +62,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`8-debian-9`, `8.16.0-debian-9-r12`, `8`, `8.16.0`, `8.16.0-r12` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.16.0-debian-9-r12/8/debian-9/Dockerfile)
 * [`6-ol-7-prod`, `6.17.1-ol-7-r32-prod` (6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-ol-7-r32-prod/6-prod/ol-7/Dockerfile)
 * [`6-ol-7`, `6.17.1-ol-7-r32` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-ol-7-r32/6/ol-7/Dockerfile)
-* [`6-debian-9-prod`, `6.17.1-debian-9-r25-prod`, `6-prod`, `6.17.1-prod`, `6.17.1-r25-prod` (6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-debian-9-r25-prod/6-prod/debian-9/Dockerfile)
 * [`6-debian-9`, `6.17.1-debian-9-r25`, `6`, `6.17.1`, `6.17.1-r25` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-debian-9-r25/6/debian-9/Dockerfile)
+* [`6-debian-9-prod`, `6.17.1-debian-9-r24-prod`, `6-prod`, `6.17.1-prod`, `6.17.1-r24-prod` (6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-debian-9-r24-prod/6-prod/debian-9/Dockerfile)
 * [`6-rhel-7`, `6.16.0-rhel-7-r13` (6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.16.0-rhel-7-r13/6/rhel-7/Dockerfile)
 * [`12-rhel-7`, `0.0.0-rhel-7-r0` (12/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/0.0.0-rhel-7-r0/12/rhel-7/Dockerfile)
 
