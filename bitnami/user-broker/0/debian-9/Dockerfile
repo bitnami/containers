@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/user-broker-0.2.0-0-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="user-broker" \
-    BITNAMI_IMAGE_VERSION="0.2.0-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="0.2.0-debian-9-r2" \
     PATH="/opt/bitnami/user-broker/bin:$PATH"
 
 EXPOSE 8005 8080
