@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r239
+FROM bitnami/minideb-extras-base:stretch-r240
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -21,7 +21,7 @@ RUN rm -rf /app && \
     ln -sf /opt/bitnami/kubeapps /opt/bitnami/kubeapps-dashboard && \
     mv /opt/bitnami/kubeapps/build /app
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.3.2-debian-9-r4" \
+    BITNAMI_IMAGE_VERSION="1.3.2-debian-9-r5" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
