@@ -43,11 +43,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`12-ol-7-prod`, `12.2.0-ol-7-r10-prod` (12-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.2.0-ol-7-r10-prod/12-prod/ol-7/Dockerfile)
 * [`12-ol-7`, `12.2.0-ol-7-r10` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.2.0-ol-7-r10/12/ol-7/Dockerfile)
+* [`12-debian-9`, `12.2.0-debian-9-r5`, `12`, `12.2.0`, `12.2.0-r5` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.2.0-debian-9-r5/12/debian-9/Dockerfile)
 * [`12-debian-9-prod`, `12.2.0-debian-9-r4-prod`, `12-prod`, `12.2.0-prod`, `12.2.0-r4-prod` (12-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.2.0-debian-9-r4-prod/12-prod/debian-9/Dockerfile)
-* [`12-debian-9`, `12.2.0-debian-9-r4`, `12`, `12.2.0`, `12.2.0-r4` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.2.0-debian-9-r4/12/debian-9/Dockerfile)
 * [`11-ol-7-prod`, `11.15.0-ol-7-r16-prod` (11-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-ol-7-r16-prod/11-prod/ol-7/Dockerfile)
 * [`11-ol-7`, `11.15.0-ol-7-r16` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-ol-7-r16/11/ol-7/Dockerfile)
-* [`11-debian-9-prod`, `11.15.0-debian-9-r8-prod`, `11-prod`, `11.15.0-prod`, `11.15.0-r8-prod` (11-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-debian-9-r8-prod/11-prod/debian-9/Dockerfile)
+* [`11-debian-9-prod`, `11.15.0-debian-9-r7-prod`, `11-prod`, `11.15.0-prod`, `11.15.0-r7-prod` (11-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-debian-9-r7-prod/11-prod/debian-9/Dockerfile)
 * [`11-debian-9`, `11.15.0-debian-9-r7`, `11`, `11.15.0`, `11.15.0-r7` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-debian-9-r7/11/debian-9/Dockerfile)
 * [`11-rhel-7`, `11.14.0-rhel-7-r5` (11/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.14.0-rhel-7-r5/11/rhel-7/Dockerfile)
 * [`10-ol-7`, `10.15.3-ol-7-r61` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.3-ol-7-r61/10/ol-7/Dockerfile)
