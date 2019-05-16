@@ -16,7 +16,7 @@ RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwx /dist /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.16.4-ol-7-r195" \
+    BITNAMI_IMAGE_VERSION="4.16.4-ol-7-r196" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/sequelize-cli/bin:/opt/bitnami/node/bin:/opt/bitnami/git/bin:/opt/bitnami/express-generator/bin:/opt/bitnami/express/bin:/opt/bitnami/bower/bin:$PATH"
 
