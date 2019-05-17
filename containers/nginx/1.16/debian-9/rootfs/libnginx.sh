@@ -204,7 +204,7 @@ nginx_initialize() {
         # The "user" directive makes sense only if the master process runs with super-user privileges
         # TODO: find an appropriate NGINX parser to avoid 'sed calls'
         nginx_configuration="$(sed -E "s/(^user)/# \1/g" "${NGINX_CONFDIR}/nginx.conf")"
-        echo "$nginx_configuration" | tee "${NGINX_CONFDIR}/nginx.conf" > /dev/null
+        echo "$nginx_configuration" > "${NGINX_CONFDIR}/nginx.conf"
     fi
 
     debug "Updating 'nginx.conf' based on user configuration..."
