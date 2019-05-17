@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r361
+FROM bitnami/minideb-extras:stretch-r362
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack parse-dashboard-1.3.0-0 --checksum 3dd61618e7b68b9983ab05
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.3.0-debian-9-r17" \
+    BITNAMI_IMAGE_VERSION="1.3.0-debian-9-r18" \
     NAMI_PREFIX="/.nami" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
