@@ -108,7 +108,7 @@ EOF
 #   Boolean
 #########################
 is_nginx_config_writable() {
-    if >> "${NGINX_CONFDIR}/nginx.conf"; then
+    if [[ -w "${NGINX_CONFDIR}/nginx.conf" ]]; then
     true
     else
         warn "'nginx.conf' is not writable by current user. Skipping modifications..."
