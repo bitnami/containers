@@ -132,7 +132,7 @@ nginx_config_http_port() {
         debug "Configuring default HTTP port..."
         # TODO: find an appropriate NGINX parser to avoid 'sed calls'
         nginx_configuration="$(sed -E "s/(listen\s+)[0-9]{1,5};/\1${http_port};/g" "${NGINX_CONFDIR}/nginx.conf")"
-        echo "$nginx_configuration" | tee "${NGINX_CONFDIR}/nginx.conf" > /dev/null
+        echo "$nginx_configuration" > "${NGINX_CONFDIR}/nginx.conf"
     fi
 }
 
