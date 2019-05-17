@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r361
+FROM bitnami/minideb-extras:stretch-r362
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack neo4j-3.5.5-0 --checksum d9f702b5993bab38ee0f2e05b97ae047
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="3.5.5-debian-9-r4" \
+    BITNAMI_IMAGE_VERSION="3.5.5-debian-9-r5" \
     NAMI_PREFIX="/.nami" \
     NEO4J_BOLT_PORT_NUMBER="7687" \
     NEO4J_HOST="" \
