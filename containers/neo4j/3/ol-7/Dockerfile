@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r339
+FROM bitnami/oraclelinux-extras:7-r340
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack neo4j-3.5.5-0 --checksum 9a48e01239b4498a7072deaa2a878598
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="3.5.5-ol-7-r9" \
+    BITNAMI_IMAGE_VERSION="3.5.5-ol-7-r10" \
     NAMI_PREFIX="/.nami" \
     NEO4J_BOLT_PORT_NUMBER="7687" \
     NEO4J_HOST="" \
