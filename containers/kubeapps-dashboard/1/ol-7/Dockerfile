@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libcom_err libselinux nss-softokn-freebl openssl-libs pcre zlib
 RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.0-7" --checksum 9ca0f53021627b90346e52b6705ed5c2144e001712fc8a19cddd3cd334ffc380
-RUN . ./libcomponent.sh && component_unpack "kubeapps" "1.3.2-0" --checksum de2f965c31f506b26c1657ee160a0757255fd8ed499cdfe26c8ac40d0261344d
+RUN . ./libcomponent.sh && component_unpack "kubeapps" "1.4.0-0" --checksum 310c32ff761a3762e2bf9f0edfc374d1f9550494bf20bec88118e100fd613ebc
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 RUN chmod -R g+rwX /opt/bitnami/nginx/conf
@@ -21,7 +21,7 @@ RUN rm -rf /app && \
     ln -sf /opt/bitnami/kubeapps /opt/bitnami/kubeapps-dashboard && \
     mv /opt/bitnami/kubeapps/build /app
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.3.2-ol-7-r13" \
+    BITNAMI_IMAGE_VERSION="1.4.0-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
