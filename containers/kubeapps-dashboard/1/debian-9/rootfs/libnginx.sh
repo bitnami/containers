@@ -99,6 +99,24 @@ EOF
 }
 
 ########################
+# Check if NGINX configuration file is writable by current user
+# Globals:
+#   NGINX_CONFDIR
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_nginx_config_writable() {
+    if [[ -w "${NGINX_CONFDIR}/nginx.conf" ]]; then
+    true
+    else
+        warn "'nginx.conf' is not writable by current user. Skipping modifications..."
+        false
+    fi
+}
+
+########################
 # Configure default HTTP port
 # Globals:
 #   NGINX_CONFDIR
@@ -109,9 +127,13 @@ EOF
 #########################
 nginx_config_http_port() {
     local http_port=${1:-8080}
-    debug "Configuring default HTTP port..."
-    # TODO: find an appropriate NGINX parser to avoid 'sed calls'
-    sed -i -E "s/(listen\s+)[0-9]{1,5};/\1${http_port};/g" "${NGINX_CONFDIR}/nginx.conf"
+    if is_nginx_config_writable; then
+        local nginx_configuration
+        debug "Configuring default HTTP port..."
+        # TODO: find an appropriate NGINX parser to avoid 'sed calls'
+        nginx_configuration="$(sed -E "s/(listen\s+)[0-9]{1,5};/\1${http_port};/g" "${NGINX_CONFDIR}/nginx.conf")"
+        echo "$nginx_configuration" > "${NGINX_CONFDIR}/nginx.conf"
+    fi
 }
 
 ########################
@@ -177,14 +199,16 @@ nginx_initialize() {
         if [[ -n "${NGINX_DAEMON_USER:-}" ]]; then
             chown -R "${NGINX_DAEMON_USER:-}" "${NGINX_CONFDIR}" "$NGINX_TMPDIR"
         fi
-    else
+    elif is_nginx_config_writable; then
+        local nginx_configuration
         # The "user" directive makes sense only if the master process runs with super-user privileges
         # TODO: find an appropriate NGINX parser to avoid 'sed calls'
-        sed -i -E "s/(^user)/# \1/g" "${NGINX_CONFDIR}/nginx.conf"
+        nginx_configuration="$(sed -E "s/(^user)/# \1/g" "${NGINX_CONFDIR}/nginx.conf")"
+        echo "$nginx_configuration" > "${NGINX_CONFDIR}/nginx.conf"
     fi
 
     debug "Updating 'nginx.conf' based on user configuration..."
     if [[ -n "${NGINX_HTTP_PORT_NUMBER:-}" ]]; then
-      nginx_config_http_port "${NGINX_HTTP_PORT_NUMBER}"
+        nginx_config_http_port "${NGINX_HTTP_PORT_NUMBER}"
     fi
 }
