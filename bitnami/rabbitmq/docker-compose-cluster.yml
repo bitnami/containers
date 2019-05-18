@@ -1,7 +1,7 @@
 version: '2'
 services:
   stats:
-    image: bitnami/rabbitmq
+    image: bitnami/rabbitmq:3.7
     environment:
       - RABBITMQ_NODE_TYPE=stats
       - RABBITMQ_NODE_NAME=rabbit@stats
@@ -11,7 +11,7 @@ services:
     volumes:
       - 'rabbitmqstats_data:/bitnami'
   queue-disc1:
-    image: bitnami/rabbitmq
+    image: bitnami/rabbitmq:3.7
     environment:
       - RABBITMQ_NODE_TYPE=queue-disc
       - RABBITMQ_NODE_NAME=rabbit@queue-disc1
@@ -20,7 +20,7 @@ services:
     volumes:
       - 'rabbitmqdisc1_data:/bitnami'
   queue-ram1:
-    image: bitnami/rabbitmq
+    image: bitnami/rabbitmq:3.7
     environment:
       - RABBITMQ_NODE_TYPE=queue-ram
       - RABBITMQ_NODE_NAME=rabbit@queue-ram1
