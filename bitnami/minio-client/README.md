@@ -37,7 +37,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2019-ol-7`, `2019.5.1-ol-7-r20` (2019/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.5.1-ol-7-r20/2019/ol-7/Dockerfile)
-* [`2019-debian-9`, `2019.5.1-debian-9-r8`, `2019`, `2019.5.1`, `2019.5.1-r8`, `latest` (2019/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.5.1-debian-9-r8/2019/debian-9/Dockerfile)
+* [`2019-debian-9`, `2019.5.1-debian-9-r9`, `2019`, `2019.5.1`, `2019.5.1-r9`, `latest` (2019/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.5.1-debian-9-r9/2019/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio-client GitHub repo](https://github.com/bitnami/bitnami-docker-minio-client).
 
