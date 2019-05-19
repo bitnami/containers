@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r340
+FROM bitnami/oraclelinux-extras:7-r341
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack consul-1.5.0-0 --checksum 4732a8ec4b9e98378b19dffdff82405
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.5.0-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="1.5.0-ol-7-r12" \
     CONSUL_BOOTSTRAP_EXPECT="1" \
     CONSUL_CLIENT_LAN_ADDRESS="0.0.0.0" \
     CONSUL_DATACENTER="dc1" \
