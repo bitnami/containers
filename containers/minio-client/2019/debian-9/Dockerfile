@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r242
+FROM bitnami/minideb-extras-base:stretch-r243
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "minio-client" "2019.5.1-0" --checks
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="minio-client" \
-    BITNAMI_IMAGE_VERSION="2019.5.1-debian-9-r8" \
+    BITNAMI_IMAGE_VERSION="2019.5.1-debian-9-r9" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/minio-client/bin:$PATH"
 
