@@ -2,9 +2,9 @@ version: '2'
 
 services:
   postgresql:
-    image: 'bitnami/postgresql:10'
+    image: 'bitnami/postgresql:10-ol-7'
     volumes:
-      - 'postgresql_data:/bitnami'
+      - 'postgresql_data:/bitnami/postgresql'
     environment:
       - POSTGRESQL_DATABASE=bitnami_airflow
       - POSTGRESQL_USERNAME=bn_airflow
