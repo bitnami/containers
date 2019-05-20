@@ -52,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-rhel-7`, `3.4.14-rhel-7-r13` (3/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.14-rhel-7-r13/3/rhel-7/Dockerfile)
-* [`3-ol-7`, `3.4.14-ol-7-r38` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.14-ol-7-r38/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.4.14-ol-7-r39` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.14-ol-7-r39/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.4.14-debian-9-r22`, `3`, `3.4.14`, `3.4.14-r22`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.14-debian-9-r22/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
@@ -193,6 +193,7 @@ The configuration can easily be setup with the Bitnami Zookeeper Docker image us
  - `ZOO_SERVER_PASSWORDS`: Comma, semicolo or whitespace separated list of passwords to assign to users when created. Example: pass4user1, pass4user2, pass4admin. No defaults
  - `ZOO_ENABLE_AUTH`: Enable Zookeeper auth. It uses SASL/Digest-MD5. Default: **no**
  - `ZOO_HEAP_SIZE`: Size in MB for the Java Heap options (Xmx and XMs). This env var is ignored if Xmx an Xms are configured via `JVMFLAGS`. Default: **1024**
+ - `ZOO_LOG_LEVEL`: Zookeeper log level. Available levels are: `ALL`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`, `OFF`, `TRACE`. Default: **INFO**
  - `ALLOW_ANONYMOUS_LOGIN`: If set to true, Allow to accept connections from unauthenticated users. Default: **no**
  - `JVMFLAGS`: Default JVMFLAGS for the ZooKeeper process. No defaults
 

@@ -7,6 +7,7 @@
   "zookeeperId": "{{$global.env.ZOO_SERVER_ID}}",
   "zookeeperInitLimit": "{{$global.env.ZOO_INIT_LIMIT}}",
   "zookeeperJvmFlags": "{{$global.env.JVMFLAGS}}",
+  "zookeeperLogLevel": "{{$global.env.ZOO_LOG_LEVEL}}",
   "zookeeperMaxClientCnxns": "{{$global.env.ZOO_MAX_CLIENT_CNXNS}}",
   "zookeeperPort": "{{$global.env.ZOO_PORT_NUMBER}}",
   "zookeeperServerPasswords": "{{$global.env.ZOO_SERVER_PASSWORDS}}",
