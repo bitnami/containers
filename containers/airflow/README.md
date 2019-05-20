@@ -357,6 +357,10 @@ services:
 
 # Configuration
 
+## Load DAG files
+
+Custom DAG files can be mounted to `/opt/bitnami/airflow/dags`.
+
 ## Environment variables
 
 The Airflow instance can be customized by specifying environment variables on the first run. The following environment values are provided to customize Airflow:
