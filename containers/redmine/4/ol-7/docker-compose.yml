@@ -1,13 +1,13 @@
 version: '2'
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.1-ol-7'
+    image: 'bitnami/mariadb:10.3-ol-7'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'mariadb_data:/bitnami'
   redmine:
-    image: 'bitnami/redmine:4-ol'
+    image: 'bitnami/redmine:4-ol-7'
     ports:
       - '80:3000'
     volumes:

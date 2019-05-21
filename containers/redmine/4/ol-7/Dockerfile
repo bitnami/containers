@@ -1,17 +1,17 @@
-FROM bitnami/oraclelinux-extras:7-r328
+FROM bitnami/oraclelinux-extras:7-r343
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ImageMagick bzip2-libs cyrus-sasl-lib expat fontconfig freetype ghostscript glibc jbigkit-libs keyutils-libs krb5-libs libICE libSM libX11 libXau libXext libXt libcom_err libcurl libedit libgcc libgomp libidn libjpeg-turbo libpng libselinux libssh2 libstdc++ libtiff libtool-ltdl libuuid libxcb libxml2 libxslt mariadb-libs ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline xz-libs zlib
-RUN bitnami-pkg install ruby-2.4.6-0 --checksum 09e98e42c237283ef4ae5887ef105cc356edcc9744a8591262756cf4c1402da5
-RUN bitnami-pkg install postgresql-client-9.6.12-0 --checksum e656a1e2ccaa7d3f498ea515e7b601a1ae989548951a76762baf134264569d89
-RUN bitnami-pkg install mysql-client-10.1.40-0 --checksum 42463db101d01a34a666677e4126b53f3a579b2cda7f698ac3100c6c40ce6c18
+RUN bitnami-pkg install ruby-2.6.3-0 --checksum edc7a2d314c592d73272df68e28490846c325d829cdcba97c41fe0fd19edc0f3
+RUN bitnami-pkg install postgresql-client-11.3.0-0 --checksum 85cdf4e7ac8df71922a0ed95cd8c61f7b630070b3a315e46844a6b49a25c15d4
+RUN bitnami-pkg install mysql-client-10.3.15-0 --checksum 8200bab1521dde4a6c377789abdff7f4b30d64843a4a78affb319f833f9f260f
 RUN bitnami-pkg install git-2.21.0-0 --checksum 8dc7078aeaa3c3bf7010f3adbdb2f7ec9c3737c7eb6c7c1b2f547350c42fcfa5
-RUN bitnami-pkg unpack redmine-4.0.3-0 --checksum a2c66b167fe52fd91f855ea50898c5efe0d76590c650701f123fa66c645cc118
+RUN bitnami-pkg unpack redmine-4.0.3-1 --checksum 2301483d31a3abbdb25b3b5d54eadfb83852b0564d426ceaab106f887540b97d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.0.3-ol-7-r27" \
+    BITNAMI_IMAGE_VERSION="4.0.3-ol-7-r28" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH" \
     REDMINE_DB_MYSQL="mariadb" \
     REDMINE_DB_PASSWORD="" \
