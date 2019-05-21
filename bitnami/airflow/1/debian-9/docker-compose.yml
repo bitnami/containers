@@ -4,7 +4,7 @@ services:
   postgresql:
     image: 'bitnami/postgresql:10'
     volumes:
-      - 'postgresql_data:/bitnami'
+      - 'postgresql_data:/bitnami/postgresql'
     environment:
       - POSTGRESQL_DATABASE=bitnami_airflow
       - POSTGRESQL_USERNAME=bn_airflow
