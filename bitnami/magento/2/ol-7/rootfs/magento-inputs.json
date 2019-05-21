@@ -5,6 +5,8 @@
   "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
   "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
   "databaseUser": "{{$global.env.MAGENTO_DATABASE_USER}}",
+  "elasticsearchServerHost": "{{$global.env.ELASTICSEARCH_HOST}}",
+  "elasticsearchServerPort": "{{$global.env.ELASTICSEARCH_PORT_NUMBER}}",
   "email": "{{$global.env.MAGENTO_EMAIL}}",
   "externalHttpPort": "{{$global.env.EXTERNAL_HTTP_PORT_NUMBER}}",
   "externalHttpsPort": "{{$global.env.EXTERNAL_HTTPS_PORT_NUMBER}}",

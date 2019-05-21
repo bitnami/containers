@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.39-1 --checksum 7f435021b5146a191298f8c161f135
 RUN bitnami-pkg unpack php-7.1.29-0 --checksum 5a0aefb353b003d4d0cd83601c5c8d20e552ddee27ca8a7b54fe66117a6335bd
 RUN bitnami-pkg unpack mysql-client-10.2.24-0 --checksum 1058dcb11bc5043bbeac780bdb6443b31d0f61035e620d5ed0538fd75829fd36
 RUN bitnami-pkg unpack libphp-7.1.29-0 --checksum f78176fb7260ee165cddfc76d744ba3984360a11481b09632d4117ad16ad0c41
-RUN bitnami-pkg unpack magento-2.3.1-2 --checksum 5ec0eb21bba68bf5068391c05578aeafff2347092607d185cf27096a4741115c
+RUN bitnami-pkg unpack magento-2.3.1-3 --checksum 12c8623d08131aa78fcdb08b56f1e526c4329e76cfe200c5754b5e4d78d48116
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
@@ -18,7 +18,9 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.1-ol-7-r41" \
+    BITNAMI_IMAGE_VERSION="2.3.1-ol-7-r42" \
+    ELASTICSEARCH_HOST="" \
+    ELASTICSEARCH_PORT_NUMBER="" \
     EXTERNAL_HTTPS_PORT_NUMBER="443" \
     EXTERNAL_HTTP_PORT_NUMBER="80" \
     MAGENTO_ADMINURI="admin" \

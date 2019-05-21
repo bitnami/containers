@@ -17,6 +17,8 @@ services:
       - MAGENTO_DATABASE_USER=bn_magento
       - MAGENTO_DATABASE_PASSWORD=magento_db_password
       - MAGENTO_DATABASE_NAME=bitnami_magento
+      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT_NUMBER=9200
     ports:
       - '80:80'
       - '443:443'
@@ -24,7 +26,14 @@ services:
       - 'magento_data:/bitnami'
     depends_on:
       - mariadb
+      - elasticsearch
+  elasticsearch:
+    image: 'bitnami/elasticsearch:6-ol-7'
+    volumes:
+      - 'elasticsearch_data:/bitnami/elasticsearch/data'
 volumes:
+  elasticsearch_data:
+    driver: local
   mariadb_data:
     driver: local
   magento_data:
