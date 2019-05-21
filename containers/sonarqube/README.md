@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7-ol-7`, `7.7.0-ol-7-r28` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.7.0-ol-7-r28/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.7.0-debian-9-r25`, `7`, `7.7.0`, `7.7.0-r25`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.7.0-debian-9-r25/7/debian-9/Dockerfile)
+* [`7-debian-9`, `7.7.0-debian-9-r26`, `7`, `7.7.0`, `7.7.0-r26`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.7.0-debian-9-r26/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
 
@@ -71,7 +71,7 @@ services:
       - POSTGRESQL_PASSWORD=bitnami1234
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'postgresql_data:/bitnami'
+      - 'postgresql_data:/bitnami/postgresql'
   sonarqube:
     image: bitnami/sonarqube:latest
     ports:
@@ -116,7 +116,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e POSTGRESQL_DATABASE=bitnami_sonarqube \
     -e POSTGRESQL_PASSWORD=bitnami1234 \
     --net sonarqube-tier \
-    --volume postgresql_data:/bitnami \
+    --volume postgresql_data:/bitnami/postgresql \
     bitnami/postgresql:latest
   ```
 
@@ -298,7 +298,7 @@ services:
       - POSTGRESQL_PASSWORD=bitnami1234
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - postgresql_data:/bitnami
+      - postgresql_data:/bitnami/postgresql
   sonarqube:
     image: bitnami/sonarqube:latest
     depends_on:
