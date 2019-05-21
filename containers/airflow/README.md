@@ -229,7 +229,7 @@ services:
       - POSTGRESQL_USERNAME=bn_airflow
       - POSTGRESQL_PASSWORD=bitnami1
     volumes:
-      - /path/to/airflow-persistence:/bitnami
+      - /path/to/airflow-persistence:/bitnami/postgresql
   redis:
     image: 'bitnami/redis:latest'
     environment:
@@ -458,8 +458,8 @@ This would be an example of SMTP configuration using a GMail account:
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
       - AIRFLOW_PASSWORD=bitnami
-      - AIRFLOW_USERNAME=tomas
-      - AIRFLOW_EMAIL=tompizmor@gmail.com
+      - AIRFLOW_USERNAME=user
+      - AIRFLOW_EMAIL=user@email.com
       - AIRFLOW__SMTP__SMTP_HOST=smtp@gmail.com
       - AIRFLOW__SMTP__SMTP_USER=your_email@gmail.com
       - AIRFLOW__SMTP__SMTP_PASSWORD=your_password
