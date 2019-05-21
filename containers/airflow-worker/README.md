@@ -32,7 +32,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`1-rhel-7`, `1.10.3-rhel-7-r0` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.3-rhel-7-r0/1/rhel-7/Dockerfile)
 * [`1-ol-7`, `1.10.3-ol-7-r25` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.3-ol-7-r25/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.10.3-debian-9-r16`, `1`, `1.10.3`, `1.10.3-r16`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.3-debian-9-r16/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.10.3-debian-9-r18`, `1`, `1.10.3`, `1.10.3-r18`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.3-debian-9-r18/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-worker).
 
@@ -55,7 +55,7 @@ services:
   postgresql:
     image: 'bitnami/postgresql:latest'
     volumes:
-      - 'postgresql_data:/bitnami'
+      - 'postgresql_data:/bitnami/postgresql'
     environment:
       - POSTGRESQL_DATABASE=bitnami_airflow
       - POSTGRESQL_USERNAME=bn_airflow
@@ -140,7 +140,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e POSTGRESQL_PASSWORD=bitnami1 \
     -e POSTGRESQL_DATABASE=bitnami_airflow \
     --net airflow-tier \
-    --volume postgresql_data:/bitnami \
+    --volume postgresql_data:/bitnami/postgresql \
     bitnami/postgresql:latest
   ```
 
