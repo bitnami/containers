@@ -37,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.3.1-ol-7-r41` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.3.1-ol-7-r41/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.3.1-ol-7-r42` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.3.1-ol-7-r42/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.3.1-debian-9-r34`, `2`, `2.3.1`, `2.3.1-r34`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.3.1-debian-9-r34/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
@@ -294,6 +294,13 @@ Available variables:
 - `EXTERNAL_HTTP_PORT_NUMBER`: Port to access Magento from outside of the container using HTTP. Used to configure Magento's internal routes. Default: **80**
 - `EXTERNAL_HTTPS_PORT_NUMBER`: Port to access Magento from outside of the container using HTTPS. Used to configure Magento's internal routes. Default: **443**
 - `MAGENTO_MODE`: Magento mode. Valid values: **default**, **production**, **developer**. Default: **default**
+
+#### Search configuration
+
+Elasticsearch is now the default search engine in Magento 2.3. To configure it, use the following environment variables. If not specified, MySQL search will be used, but please note that it's been deprecated.
+
+- `ELASTICSEARCH_HOST`: Hostname for the Elasticsearch server.
+- `ELASTICSEARCH_PORT_NUMBER`: Port used by the Elasticsearch server.
 
 #### Database configuration
 
