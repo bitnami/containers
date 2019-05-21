@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r365
+FROM bitnami/minideb-extras:stretch-r366
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack kibana-6.8.0-0 --checksum d3449f5b3a3b4f3649a2d0f4ec06bd7
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="6.8.0-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="6.8.0-debian-9-r1" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
