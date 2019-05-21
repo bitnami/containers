@@ -6,11 +6,11 @@ RUN install_packages ghostscript imagemagick libbsd0 libbz2-1.0 libc6 libedit2 l
 RUN bitnami-pkg install python-3.6.8-2 --checksum 2eb057ee7701667327f6bcc1fc8765abe5d9d003a64124e5f8505fa692e71eb8
 RUN bitnami-pkg install postgresql-client-11.3.0-0 --checksum eb5e96b4b53e9f60dc07d5f9823d09f7884aa9c2408da5bec92beb6cbf6a9de4
 RUN bitnami-pkg install node-7.10.1-1 --checksum 53362288e961d298a724353710a31901d4cb8237894a26a2f676b35450c02975
-RUN bitnami-pkg unpack odoo-12.0.20190415-0 --checksum 8fb0ec8038a0b94791d2cea70bc9c43b60ea1858499f2b48858f0962cd84c7e0
+RUN bitnami-pkg unpack odoo-12.0.20190515-0 --checksum 606c2e82c47b830e5266730c9db6b1476c08369378e1153c8a52fea0d4b3303e
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="12.0.20190415-debian-9-r4" \
+    BITNAMI_IMAGE_VERSION="12.0.20190515-debian-9-r0" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:$PATH" \
