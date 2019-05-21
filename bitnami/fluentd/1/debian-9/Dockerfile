@@ -11,7 +11,7 @@ RUN chmod g+rwX /opt/bitnami/fluentd/conf /opt/bitnami/fluentd/logs
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.5.0-debian-9-r2" \
+    BITNAMI_IMAGE_VERSION="1.5.0-debian-9-r3" \
     FLUENTD_CONF="fluentd.conf" \
     FLUENTD_OPT="" \
     GEM_HOME="/opt/bitnami/fluentd" \
