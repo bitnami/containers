@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r366
+FROM bitnami/minideb-extras:stretch-r367
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.39-1 --checksum 8b191adc55155e604cc224309a0179
 RUN bitnami-pkg unpack php-7.1.29-0 --checksum cd0fba56de5fc1fa5c3d4eb5ef85bcd613cf0875fefe37beaddc9327f5cd7d8e
 RUN bitnami-pkg unpack mysql-client-10.2.24-0 --checksum 99b9d2d0ac257a4c8945d5fa69b5963b0f1fed53866cd7bf64675850481d50d7
 RUN bitnami-pkg unpack libphp-7.1.29-0 --checksum cd6c0c8fdd006dcb730cc4fe3c42420c00f2db9641353be735b8e29f579c34f8
-RUN bitnami-pkg unpack magento-2.3.1-2 --checksum de00b8df7f4102c842d6df4cf84a74e08ca9d8b86c4bdd8d1427c2dc8514e1a8
+RUN bitnami-pkg unpack magento-2.3.1-4 --checksum c5d3beedda736721873d4d7e15bddc26f465305452ba9db520528bf903b284e5
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
@@ -19,7 +19,9 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.1-debian-9-r34" \
+    BITNAMI_IMAGE_VERSION="2.3.1-debian-9-r35" \
+    ELASTICSEARCH_HOST="" \
+    ELASTICSEARCH_PORT_NUMBER="" \
     EXTERNAL_HTTPS_PORT_NUMBER="443" \
     EXTERNAL_HTTP_PORT_NUMBER="80" \
     MAGENTO_ADMINURI="admin" \
