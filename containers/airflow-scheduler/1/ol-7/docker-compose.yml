@@ -8,6 +8,7 @@ services:
       - POSTGRESQL_DATABASE=bitnami_airflow
       - POSTGRESQL_USERNAME=bn_airflow
       - POSTGRESQL_PASSWORD=bitnami1
+      - ALLOW_EMPTY_PASSWORD=yes
   redis:
     image: bitnami/redis:5.0-ol-7
     volumes:
