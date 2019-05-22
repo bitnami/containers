@@ -339,6 +339,10 @@ This would be an example of SMTP configuration using a Gmail account:
 # Troubleshooting
 
 * If you are automatically logged out from the administration panel, you can try deploying SuiteCRM with the environment variable `SUITECRM_VALIDATE_USER_IP=no`
+* If you get a timeout error during the initial setup similar to:
+  > Error executing 'postInstallation': Timeout: did not get to load all resources on this page
+
+  You can try to increase the value of the `SUITECRM_HTTP_TIMEOUT` environment variable mentioned above.
 
 # Contributing
 
