@@ -23,6 +23,7 @@ $ docker-compose up -d
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -47,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`12-debian-9`, `12.3.1-debian-9-r1`, `12`, `12.3.1`, `12.3.1-r1` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.3.1-debian-9-r1/12/debian-9/Dockerfile)
 * [`11-ol-7-prod`, `11.15.0-ol-7-r24-prod` (11-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-ol-7-r24-prod/11-prod/ol-7/Dockerfile)
 * [`11-ol-7`, `11.15.0-ol-7-r24` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-ol-7-r24/11/ol-7/Dockerfile)
-* [`11-debian-9-prod`, `11.15.0-debian-9-r15-prod`, `11-prod`, `11.15.0-prod`, `11.15.0-r15-prod` (11-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-debian-9-r15-prod/11-prod/debian-9/Dockerfile)
+* [`11-debian-9-prod`, `11.15.0-debian-9-r16-prod`, `11-prod`, `11.15.0-prod`, `11.15.0-r16-prod` (11-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-debian-9-r16-prod/11-prod/debian-9/Dockerfile)
 * [`11-debian-9`, `11.15.0-debian-9-r15`, `11`, `11.15.0`, `11.15.0-r15` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-debian-9-r15/11/debian-9/Dockerfile)
 * [`11-rhel-7`, `11.14.0-rhel-7-r5` (11/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.14.0-rhel-7-r5/11/rhel-7/Dockerfile)
 * [`10-ol-7`, `10.15.3-ol-7-r69` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.15.3-ol-7-r69/10/ol-7/Dockerfile)
