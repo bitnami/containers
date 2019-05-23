@@ -6,7 +6,7 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libffi6 libfreetype6 l
 RUN bitnami-pkg unpack nginx-1.16.0-6 --checksum 8f8f06dc6a9b57b4c5f9b147e57dbef1aadcb2223212596ff744a4fbdda56307
 RUN bitnami-pkg unpack php-7.1.29-0 --checksum cd0fba56de5fc1fa5c3d4eb5ef85bcd613cf0875fefe37beaddc9327f5cd7d8e
 RUN bitnami-pkg unpack mysql-client-10.3.15-0 --checksum eb269ede06f5e5ed64dfe3515784f2c942a944c6f32c3ff030bebd5a134a50c0
-RUN bitnami-pkg unpack drupal-8.7.1-0 --checksum 7746f1d1470ce0195b0ead059bf09d3a7eab00f2701d17438784886604ceca37
+RUN bitnami-pkg unpack drupal-8.7.2-0 --checksum 42027b9993df9682dcea240658b3756b4aa70350b32437216ad99e2725a71b47
 RUN mkdir -p /opt/bitnami/php/logs && chown daemon /opt/bitnami/php/logs && \
     mkdir -p /opt/bitnami/php/tmp && chown daemon /opt/bitnami/php/tmp && \
     ln -sf /opt/bitnami/php/etc /opt/bitnami/php/conf
@@ -16,7 +16,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="8.7.1-debian-9-r11" \
+    BITNAMI_IMAGE_VERSION="8.7.2-debian-9-r0" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
