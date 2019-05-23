@@ -23,6 +23,7 @@ $ docker-compose up -d
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -65,7 +66,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`7.1-rhel-7`, `7.1.28-rhel-7-r12` (7.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.28-rhel-7-r12/7.1/rhel-7/Dockerfile)
 * [`5.6-rhel-7`, `5.6.40-rhel-7-r78` (5.6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.40-rhel-7-r78/5.6/rhel-7/Dockerfile)
 * [`5.6-ol-7-prod`, `5.6.40-ol-7-r97-prod` (5.6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.40-ol-7-r97-prod/5.6-prod/ol-7/Dockerfile)
-* [`5.6-ol-7`, `5.6.40-ol-7-r119` (5.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.40-ol-7-r119/5.6/ol-7/Dockerfile)
+* [`5.6-ol-7`, `5.6.40-ol-7-r120` (5.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.40-ol-7-r120/5.6/ol-7/Dockerfile)
 * [`5.6-debian-9-prod`, `5.6.40-debian-9-r90-prod`, `5.6-prod`, `5.6.40-prod`, `5.6.40-r90-prod` (5.6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.40-debian-9-r90-prod/5.6-prod/debian-9/Dockerfile)
 * [`5.6-debian-9`, `5.6.40-debian-9-r111`, `5.6`, `5.6.40`, `5.6.40-r111` (5.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/5.6.40-debian-9-r111/5.6/debian-9/Dockerfile)
 
