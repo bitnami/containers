@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/fluent-bit-1.1.1-0-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="fluent-bit" \
-    BITNAMI_IMAGE_VERSION="1.1.1-ol-7-r3" \
+    BITNAMI_IMAGE_VERSION="1.1.1-ol-7-r4" \
     PATH="/opt/bitnami/fluent-bit/bin:$PATH"
 
 EXPOSE 2020
