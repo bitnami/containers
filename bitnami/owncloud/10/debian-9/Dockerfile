@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.39-1 --checksum 8b191adc55155e604cc224309a0179
 RUN bitnami-pkg unpack php-7.2.18-0 --checksum a537ba3e532e08ec3a3b752a27867a850f8a40082a31d58a3c221d20024c47a4
 RUN bitnami-pkg unpack mysql-client-10.3.15-0 --checksum eb269ede06f5e5ed64dfe3515784f2c942a944c6f32c3ff030bebd5a134a50c0
 RUN bitnami-pkg unpack libphp-7.2.18-0 --checksum 78207e62df240821ab9e6f8669ab415223b38c9c85c7e4b04b45c6fb0c9582d0
-RUN bitnami-pkg unpack owncloud-10.1.1-0 --checksum 58364f203a5215f79609f41ab2a04bb9982927d179c001955229257a7f44e633
+RUN bitnami-pkg unpack owncloud-10.2.0-0 --checksum 5ea6682d93133726feeb53df9c3d761d546826e35361cf485930b3cc2d17896a
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
@@ -17,7 +17,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.1.1-debian-9-r21" \
+    BITNAMI_IMAGE_VERSION="10.2.0-debian-9-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
