@@ -28,12 +28,12 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.14-ol-7`, `1.14.2-ol-7-r6` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.2-ol-7-r6/1.14/ol-7/Dockerfile)
-* [`1.14-debian-9`, `1.14.2-debian-9-r6`, `1.14`, `1.14.2`, `1.14.2-r6`, `latest` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.2-debian-9-r6/1.14/debian-9/Dockerfile)
+* [`1.14-debian-9`, `1.14.2-debian-9-r7`, `1.14`, `1.14.2`, `1.14.2-r7`, `latest` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.2-debian-9-r7/1.14/debian-9/Dockerfile)
 * [`1.14-rhel-7`, `1.14.1-rhel-7-r7` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.1-rhel-7-r7/1.14/rhel-7/Dockerfile)
 * [`1.13-rhel-7`, `1.13.4-rhel-7-r41` (1.13/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-rhel-7-r41/1.13/rhel-7/Dockerfile)
 * [`1.13-ol-7`, `1.13.4-ol-7-r77` (1.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-ol-7-r77/1.13/ol-7/Dockerfile)
 * [`1.13-debian-9`, `1.13.4-debian-9-r67`, `1.13`, `1.13.4`, `1.13.4-r67` (1.13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-debian-9-r67/1.13/debian-9/Dockerfile)
-* [`1.12-ol-7`, `1.12.8-ol-7-r23` (1.12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.8-ol-7-r23/1.12/ol-7/Dockerfile)
+* [`1.12-ol-7`, `1.12.8-ol-7-r24` (1.12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.8-ol-7-r24/1.12/ol-7/Dockerfile)
 * [`1.12-debian-9`, `1.12.8-debian-9-r14`, `1.12`, `1.12.8`, `1.12.8-r14` (1.12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.8-debian-9-r14/1.12/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubectl GitHub repo](https://github.com/bitnami/bitnami-docker-kubectl).
