@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.5.0-ol-7-r4` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.5.0-ol-7-r4/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.5.0-debian-9-r3`, `1`, `1.5.0`, `1.5.0-r3`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.5.0-debian-9-r3/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.5.0-debian-9-r5`, `1`, `1.5.0`, `1.5.0-r5`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.5.0-debian-9-r5/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
 
