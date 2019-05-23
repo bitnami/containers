@@ -10,8 +10,32 @@
 . /liblog.sh
 . /libservice.sh
 . /libvalidations.sh
+. /libversion.sh
 
 # Functions
+
+########################
+# Extract mysql version from version string
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   Version string
+#########################
+mysql_get_version() {
+    local ver_string
+    local -a ver_split
+
+    ver_string=$("${DB_BINDIR}/mysql" "--version")
+    ver_split=(${ver_string// / })
+
+    if [[ "$ver_string" == *" Distrib "* ]]; then
+        echo "${ver_split[4]::-1}"
+    else
+        echo "${ver_split[2]}"
+    fi
+}
 
 ########################
 # Gets an environment variable name based on the suffix
@@ -130,8 +154,10 @@ is_mysql_running() {
 mysql_start_bg() {
     local flags=("--defaults-file=${DB_BASEDIR}/conf/my.cnf" "--basedir=${DB_BASEDIR}" "--datadir=${DB_DATADIR}" "--socket=$DB_TMPDIR/mysql.sock" "--port=$DB_PORT_NUMBER")
     [[ -z "${DB_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${DB_EXTRA_FLAGS[@]}")
+    [[ -z "${DB_FORCE_UPGRADE:-}" ]] || flags=("${flags[@]}" "--upgrade=FORCE")
 
     debug "Starting $DB_FLAVOR in background..."
+
     is_mysql_running && return
 
     if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
@@ -443,14 +469,26 @@ EOF
 #########################
 mysql_upgrade() {
     local args=("--defaults-file=${DB_CONFDIR}/my.cnf" "-u" "$DB_ROOT_USER")
+    local major_version
+
+    major_version=$(get_sematic_version "$(mysql_get_version)" 1)
+
     debug "Running mysql_upgrade..."
-    if is_boolean_yes "${ROOT_AUTH_ENABLED:-false}"; then
-        args+=("-p$DB_ROOT_PASSWORD")
-    fi
-    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-        "${DB_BINDIR}/mysql_upgrade" "${args[@]}"
-    else
-        "${DB_BINDIR}/mysql_upgrade" "${args[@]}" >/dev/null 2>&1
+
+    if [[ "$DB_FLAVOR" = "mysql" ]] && [[ "$major_version" = "8" ]]; then
+        mysql_stop
+        export DB_FORCE_UPGRADE=true
+        mysql_start_bg
+        unset DB_FORCE_UPGRADE
+    else 
+        if is_boolean_yes "${ROOT_AUTH_ENABLED:-false}"; then
+            args+=("-p$DB_ROOT_PASSWORD")
+        fi
+        if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+            "${DB_BINDIR}/mysql_upgrade" "${args[@]}"
+        else
+            "${DB_BINDIR}/mysql_upgrade" "${args[@]}" >/dev/null 2>&1
+        fi
     fi
 }
 
