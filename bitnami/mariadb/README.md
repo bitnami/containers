@@ -23,6 +23,7 @@ $ docker-compose up -d
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -48,11 +49,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`10.3-ol-7`, `10.3.15-ol-7-r9` (10.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.15-ol-7-r9/10.3/ol-7/Dockerfile)
 * [`10.3-debian-9`, `10.3.15-debian-9-r9`, `10.3`, `10.3.15`, `10.3.15-r9`, `latest` (10.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.15-debian-9-r9/10.3/debian-9/Dockerfile)
-* [`10.2-ol-7`, `10.2.24-ol-7-r14` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.24-ol-7-r14/10.2/ol-7/Dockerfile)
+* [`10.2-ol-7`, `10.2.24-ol-7-r15` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.24-ol-7-r15/10.2/ol-7/Dockerfile)
 * [`10.2-debian-9`, `10.2.24-debian-9-r12`, `10.2`, `10.2.24`, `10.2.24-r12` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.24-debian-9-r12/10.2/debian-9/Dockerfile)
 * [`10.2-rhel-7`, `10.2.23-rhel-7-r23` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.23-rhel-7-r23/10.2/rhel-7/Dockerfile)
 * [`10.1-ol-7`, `10.1.40-ol-7-r17` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.40-ol-7-r17/10.1/ol-7/Dockerfile)
-* [`10.1-debian-9`, `10.1.40-debian-9-r12`, `10.1`, `10.1.40`, `10.1.40-r12` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.40-debian-9-r12/10.1/debian-9/Dockerfile)
+* [`10.1-debian-9`, `10.1.40-debian-9-r13`, `10.1`, `10.1.40`, `10.1.40-r13` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.40-debian-9-r13/10.1/debian-9/Dockerfile)
 * [`10.1-rhel-7`, `10.1.38-rhel-7-r69` (10.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.38-rhel-7-r69/10.1/rhel-7/Dockerfile)
 * [`10.3-rhel-7`, `0.0.0-rhel-7-r0` (10.3/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/0.0.0-rhel-7-r0/10.3/rhel-7/Dockerfile)
 
