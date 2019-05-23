@@ -17,6 +17,7 @@ $ docker run --name alertmanager bitnami/alertmanager:latest
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -46,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.17.0-ol-7-r22` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.17.0-ol-7-r22/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.17.0-debian-9-r11`, `0`, `0.17.0`, `0.17.0-r11`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.17.0-debian-9-r11/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.17.0-debian-9-r12`, `0`, `0.17.0`, `0.17.0-r12`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.17.0-debian-9-r12/0/debian-9/Dockerfile)
 * [`0-rhel-7`, `0.16.2-rhel-7-r11` (0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.16.2-rhel-7-r11/0/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/alertmanager GitHub repo](https://github.com/bitnami/bitnami-docker-alertmanager).
