@@ -19,6 +19,7 @@ $ docker run --name fluent-bit bitnami/fluent-bit:latest
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -47,7 +48,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.1.1-ol-7-r3` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.1.1-ol-7-r3/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.1.1-ol-7-r4` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.1.1-ol-7-r4/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.1.1-debian-9-r3`, `1`, `1.1.1`, `1.1.1-r3`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.1.1-debian-9-r3/1/debian-9/Dockerfile)
 * [`1-rhel-7`, `1.0.6-rhel-7-r20` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.0.6-rhel-7-r20/1/rhel-7/Dockerfile)
 
