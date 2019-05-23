@@ -42,11 +42,11 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`12-ol-7-prod`, `12.3.1-ol-7-r2-prod` (12-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.3.1-ol-7-r2-prod/12-prod/ol-7/Dockerfile)
+* [`12-ol-7-prod`, `12.3.1-ol-7-r1-prod` (12-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.3.1-ol-7-r1-prod/12-prod/ol-7/Dockerfile)
 * [`12-ol-7`, `12.3.1-ol-7-r1` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.3.1-ol-7-r1/12/ol-7/Dockerfile)
 * [`12-debian-9-prod`, `12.3.1-debian-9-r1-prod`, `12-prod`, `12.3.1-prod`, `12.3.1-r1-prod` (12-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.3.1-debian-9-r1-prod/12-prod/debian-9/Dockerfile)
 * [`12-debian-9`, `12.3.1-debian-9-r1`, `12`, `12.3.1`, `12.3.1-r1` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.3.1-debian-9-r1/12/debian-9/Dockerfile)
-* [`11-ol-7-prod`, `11.15.0-ol-7-r24-prod` (11-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-ol-7-r24-prod/11-prod/ol-7/Dockerfile)
+* [`11-ol-7-prod`, `11.15.0-ol-7-r25-prod` (11-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-ol-7-r25-prod/11-prod/ol-7/Dockerfile)
 * [`11-ol-7`, `11.15.0-ol-7-r24` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-ol-7-r24/11/ol-7/Dockerfile)
 * [`11-debian-9-prod`, `11.15.0-debian-9-r16-prod`, `11-prod`, `11.15.0-prod`, `11.15.0-r16-prod` (11-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-debian-9-r16-prod/11-prod/debian-9/Dockerfile)
 * [`11-debian-9`, `11.15.0-debian-9-r15`, `11`, `11.15.0`, `11.15.0-r15` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-debian-9-r15/11/debian-9/Dockerfile)
