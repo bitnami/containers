@@ -8,7 +8,6 @@
   "databaseUser": "{{$global.env.DISCOURSE_POSTGRESQL_USERNAME}}",
   "databaseUserPassword": "{{$global.env.DISCOURSE_POSTGRESQL_PASSWORD}}",
   "email": "{{$global.env.DISCOURSE_EMAIL}}",
-  "externalPort": "{{$global.env.DISCOURSE_EXTERNAL_PORT_NUMBER}}",
   "hostname": "{{$global.env.DISCOURSE_HOSTNAME}}",
   "password": "{{$global.env.DISCOURSE_PASSWORD}}",
   "redisHost": "{{$global.env.REDIS_HOST}}",
