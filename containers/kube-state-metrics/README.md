@@ -17,6 +17,7 @@ Deploy Kube-state-metrics on your [Kubernetes cluster](https://github.com/kubern
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -45,7 +46,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-9`, `1.6.0-debian-9-r11`, `1`, `1.6.0`, `1.6.0-r11`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.6.0-debian-9-r11/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.6.0-debian-9-r13`, `1`, `1.6.0`, `1.6.0-r13`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.6.0-debian-9-r13/1/debian-9/Dockerfile)
 * [`1-rhel-7`, `1.5.0-rhel-7-r74` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.5.0-rhel-7-r74/1/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kube-state-metrics GitHub repo](https://github.com/bitnami/bitnami-docker-kube-state-metrics).
