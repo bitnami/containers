@@ -23,6 +23,7 @@ $ docker-compose up -d
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -46,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.16-ol-7`, `1.16.0-ol-7-r31` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-ol-7-r31/1.16/ol-7/Dockerfile)
+* [`1.16-ol-7`, `1.16.0-ol-7-r32` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-ol-7-r32/1.16/ol-7/Dockerfile)
 * [`1.16-debian-9`, `1.16.0-debian-9-r21`, `1.16`, `1.16.0`, `1.16.0-r21`, `latest` (1.16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-debian-9-r21/1.16/debian-9/Dockerfile)
 * [`1.16-rhel-7`, `0.0.0-rhel-7-r0` (1.16/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/0.0.0-rhel-7-r0/1.16/rhel-7/Dockerfile)
 
