@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r345
+FROM bitnami/oraclelinux-extras:7-r346
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,12 +6,12 @@ RUN install_packages fontconfig freetype glibc keyutils-libs krb5-libs libcom_er
 RUN bitnami-pkg install java-1.8.212-0 --checksum 7d11dad71234819fb290bcadc2997bda088ba6b21f245d397c068de4cf3757db
 RUN bitnami-pkg unpack tomcat-9.0.20-0 --checksum 5d72b17cb44adf30f0244febdb05a8bbb9341c19cb7697d32930d4eaf2dced39
 RUN bitnami-pkg unpack mysql-client-10.3.15-0 --checksum 8200bab1521dde4a6c377789abdff7f4b30d64843a4a78affb319f833f9f260f
-RUN bitnami-pkg unpack jasperreports-7.1.1-2 --checksum 69f2959af9b65f20d4a7a5d43d9a30b53591e45f91a56dfbe0fcbdd924fd084b
+RUN bitnami-pkg unpack jasperreports-7.2.0-0 --checksum 09b72c7b5433ee27a0448440a319ca59b6ef87e42dfa77b2dca46d619d0755fe
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.1.1-ol-7-r75" \
+    BITNAMI_IMAGE_VERSION="7.2.0-ol-7-r0" \
     JASPERREPORTS_DATABASE_NAME="bitnami_jasperreports" \
     JASPERREPORTS_DATABASE_PASSWORD="" \
     JASPERREPORTS_DATABASE_USER="bn_jasperreports" \
