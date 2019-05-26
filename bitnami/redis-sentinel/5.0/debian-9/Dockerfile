@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack redis-sentinel-5.0.5-0 --checksum 8e869ce9305a5bbcc62cf6e
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="5.0.5-debian-9-r11" \
+    BITNAMI_IMAGE_VERSION="5.0.5-debian-9-r12" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis-sentinel/bin:$PATH" \
     REDIS_MASTER_HOST="redis" \
