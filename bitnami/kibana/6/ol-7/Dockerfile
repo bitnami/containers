@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack kibana-6.8.0-0 --checksum 718a1915b6382312d75e1710999ed8c
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="6.8.0-ol-7-r5" \
+    BITNAMI_IMAGE_VERSION="6.8.0-ol-7-r6" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
