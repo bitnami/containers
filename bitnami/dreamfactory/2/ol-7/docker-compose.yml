@@ -2,19 +2,19 @@ version: '2'
 
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.2-ol-7'
+    image: 'bitnami/mariadb:10.3-ol-7'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'mariadb_data:/bitnami'
   redis:
-    image: 'bitnami/redis:4.0-ol-7'
+    image: 'bitnami/redis:5.0-ol-7'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'redis_data:/bitnami'
   mongodb:
-    image: 'bitnami/mongodb:3.6-ol-7'
+    image: 'bitnami/mongodb:4.0-ol-7'
     volumes:
       - 'mongodb_data:/bitnami'
   dreamfactory:
