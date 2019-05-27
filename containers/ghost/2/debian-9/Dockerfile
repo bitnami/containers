@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX,o+rw" \
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libncurses5 libreadline7 libsqlite3-0 libssl1.0.2 libssl1.1 libstdc++6 libtinfo5 zlib1g
 RUN bitnami-pkg install node-8.16.0-1 --checksum 36e0f45fdd69a2470d220f72f04298354c43d8e91c7217998c078c02ff67c698
 RUN bitnami-pkg unpack mysql-client-10.3.15-0 --checksum eb269ede06f5e5ed64dfe3515784f2c942a944c6f32c3ff030bebd5a134a50c0
-RUN bitnami-pkg unpack ghost-2.22.3-0 --checksum 260f84b5554039fdcaedf61fe7d9921b103147f80a588d1dfa2aabbc7aa66a0a
+RUN bitnami-pkg unpack ghost-2.23.0-0 --checksum 8eaa94855794587823ca3ba7f58906cb220c3b8eb2271d034c010bbbf0a2da00
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="2.22.3-debian-9-r4" \
+    BITNAMI_IMAGE_VERSION="2.23.0-debian-9-r0" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
