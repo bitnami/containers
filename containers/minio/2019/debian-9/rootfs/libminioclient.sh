@@ -28,7 +28,6 @@ EOF
 ########################
 # Execute an arbitrary MinIO client command
 # Globals:
-#   BITNAMI_DEBUG
 #   MINIO_CLIENT_CONFIGDIR
 # Arguments:
 #   $@ - Command to execute
@@ -40,6 +39,22 @@ minio_client_execute() {
     exec=$(command -v mc)
 
     "${exec}" "${args[@]}"
+}
+
+########################
+# Execute an arbitrary MinIO client command with a 2s timeout
+# Globals:
+#   MINIO_CLIENT_CONFIGDIR
+# Arguments:
+#   $@ - Command to execute
+# Returns:
+#   None
+minio_client_execute_timeout() {
+    local args=("--config-dir" "${MINIO_CLIENT_CONFIGDIR}" "--quiet" "$@")
+    local exec
+    exec=$(command -v mc)
+
+    timeout 2s "${exec}" "${args[@]}"
 }
 
 ########################
