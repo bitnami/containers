@@ -25,7 +25,7 @@ services:
     ports:
       - '9092:9092'
     environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
 ```
 
@@ -61,8 +61,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`2-rhel-7`, `2.2.0-rhel-7-r16` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-rhel-7-r16/2/rhel-7/Dockerfile)
 * [`2-ol-7`, `2.2.0-ol-7-r52` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-ol-7-r52/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.2.0-debian-9-r39`, `2`, `2.2.0`, `2.2.0-r39`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-debian-9-r39/2/debian-9/Dockerfile)
-* [`1-ol-7`, `1.1.1-ol-7-r285` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r285/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.1.1-debian-9-r203`, `1`, `1.1.1`, `1.1.1-r203` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r203/1/debian-9/Dockerfile)
+* [`1-ol-7`, `1.1.1-ol-7-r286` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r286/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.1.1-debian-9-r204`, `1`, `1.1.1`, `1.1.1-r204` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r204/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -149,7 +149,7 @@ Use the `--network app-tier` argument to the `docker run` command to attach the 
 ```bash
 $ docker run -d --name kafka-server \
     --network app-tier \
-    -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
+    -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
     bitnami/kafka:latest
 ```
 
@@ -160,7 +160,7 @@ Finally we create a new container instance to launch the Kafka client and connec
 ```bash
 $ docker run -it --rm \
     --network app-tier \
-    -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
+    -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
     bitnami/kafka:latest kafka-topics.sh --list  --zookeeper zookeeper-server:2181
 ```
 
@@ -207,35 +207,6 @@ $ docker-compose up -d
 The configuration can easily be setup with the Bitnami Kafka Docker image using the following environment variables:
 
 - `ALLOW_PLAINTEXT_LISTENER`: Allow to use the PLAINTEXT listener. Default: **no**
-- `KAFKA_PORT_NUMBER`: Kafka port. Default: **9092**
-- `KAFKA_BROKER_ID`: ID of the Kafka node. Default: **-1**
-- `KAFKA_NUM_NETWORK_THREADS`: The number of threads handling network requests.
-- `KAFKA_NUM_IO_THREADS`: The number of threads doing disk I/O. Default: **3**
-- `KAFKA_SOCKET_SEND_BUFFER_BYTES`: The send buffer (SO_SNDBUF) used by the socket server. Default: **102400**
-- `KAFKA_SOCKET_RECEIVE_BUFFER_BYTES`: The receive buffer (SO_RCVBUF) used by the socket server. Default: **102400**
-- `KAFKA_SOCKET_REQUEST_MAX_BYTES`: The maximum size of a request that the socket server will accept (protection against OOM). Default: **104857600**
-- `KAFKA_LOGS_DIRS`: A comma separated list of directories under which to store log files. Default: **/opt/bitnami/kafka/data**
-- `KAFKA_DELETE_TOPIC_ENABLE`: Switch to enable topic deletion or not, default value is false. Default: **false**
-- `KAFKA_LISTENERS`: The address the socket server listens on. Default: **PLAINTEXT://:9092**
-- `KAFKA_ADVERTISED_LISTENERS`: Hostname and port the broker will advertise to producers and consumers. Default: **PLAINTEXT://:9092**
-- `KAFKA_LISTENER_SECURITY_PROTOCOL_MAP`: Maps listener names to security protocols. Default: **PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL**
-- `KAFKA_INTER_BROKER_LISTENER_NAME`: Name of listener used for communication between brokers. No defaults.
-- `KAFKA_DEFAULT_REPLICATION_FACTOR`: Default replication factors for automatically created topics. Default: **1**
-- `KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR`: The replication factor for the offsets topic. Default: **1**
-- `KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR`: The replication factor for the transaction topic. Default: **1**
-- `KAFKA_TRANSACTION_STATE_LOG_MIN_ISR`: Overridden min.insync.replicas config for the transaction topic. Default: **1**
-- `KAFKA_NUM_PARTITIONS`: The default number of log partitions per topic. Default: **1**
-- `KAFKA_NUM_RECOVERY_THREADS_PER_DATA_DIR` The number of threads per data directory to be used for log recovery at startup and flushing at shutdown. Default: **1**
-- `KAFKA_MAX_MESSAGE_BYTES`: The largest record batch size allowed by Kafka. Default: **1000012**
-- `KAFKA_LOG_FLUSH_INTERVAL_MESSAGES`: The number of messages to accept before forcing a flush of data to disk. Default: **10000**
-- `KAFKA_LOG_FLUSH_INTERVAL_MS`: The maximum amount of time a message can sit in a log before we force a flush. Default: **1000**
-- `KAFKA_LOG_RETENTION_HOURS`: The minimum age of a log file to be eligible for deletion due to age. Default: **168**
-- `KAFKA_LOG_RETENTION_BYTES`: A size-based retention policy for logs. Default: **1073741824**
-- `KAFKA_SEGMENT_BYTES`: The maximum size of a log segment file. When this size is reached a new log segment will be created. Default: **1073741824**
-- `KAFKA_LOG_RETENTION_CHECK_INTERVALS_MS`: The interval at which log segments are checked to see if they can be deleted. Default: **300000**
-- `KAFKA_LOG_MESSAGE_FORMAT_VERSION`: Specify the message format version the broker will use to append messages to the logs. No defaults.
-- `KAFKA_ZOOKEEPER_CONNECT`: Comma separated host:port pairs, each corresponding to a Zookeeper Server. Default: **localhost:2181**
-- `KAFKA_ZOOKEEPER_CONNECT_TIMEOUT_MS`: Timeout in ms for connecting to zookeeper. Default: **6000**
 - `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Default: admin. Default: **admin**
 - `KAFKA_INTER_BROKER_PASSWORD`: Kafka inter broker communication password. Default: **bitnami**
 - `KAFKA_BROKER_USER`: Kafka client user. Default: **user**
@@ -244,11 +215,11 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 - `KAFKA_ZOOKEEPER_PASSWORD`: Kafka Zookeeper user password. No defaults
 - `KAFKA_CERTIFICATE_PASSWORD`: Password for certificates. No defaults.
 - `KAFKA_HEAP_OPTS`: Kafka's Java Heap size. Default: **-Xmx1024m -Xms1024m**
-- `KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM`: The endpoint identification algorithm to validate server hostname using server certificate. Default: **https**
 
+Additionally, any environment variable beginning with `KAFKA_CFG_` will be mapped to its corresponding Kafka key. For example, use `KAFKA_CFG_BACKGROUND_THREADS` in order to set `background.threads`.
 
 ```bash
-docker run --name kafka -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 bitnami/kafka:latest
+docker run --name kafka -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 bitnami/kafka:latest
 ```
 
 or using Docker Compose:
@@ -270,7 +241,7 @@ services:
     volumes:
       - 'kafka_data:/bitnami/kafka'
     environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
 
 volumes:
   zookeeper_data:
@@ -293,8 +264,8 @@ In order to configure SASL authentication over SSL, you should define the proper
 passing the following env vars:
 
 ```
-KAFKA_LISTENERS=SASL_SSL://:9092
-KAFKA_ADVERTISED_LISTENERS=SASL_SSL://:9092
+KAFKA_CFG_LISTENERS=SASL_SSL://:9092
+KAFKA_CFG_ADVERTISED_LISTENERS=SASL_SSL://:9092
 ```
 
 You **must** also use your own certificates for SSL. You can drop your Java Key Stores files into `/opt/bitnami/kafka/conf/certs`.
@@ -326,9 +297,9 @@ services:
     ports:
       - '9092'
     environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_LISTENERS=SASL_SSL://:9092
-      - KAFKA_ADVERTISED_LISTENERS=SASL_SSL://:9092
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_LISTENERS=SASL_SSL://:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=SASL_SSL://:9092
       - KAFKA_ZOOKEEPER_USER=kafka
       - KAFKA_ZOOKEEPER_PASSWORD=kafka_password
       - KAFKA_INTER_BROKER_USER=interuser
@@ -387,9 +358,9 @@ services:
     ports:
       - '9092'
     environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_LISTENERS=SASL_SSL://:9092
-      - KAFKA_ADVERTISED_LISTENERS=SASL_SSL://:9092
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_LISTENERS=SASL_SSL://:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=SASL_SSL://:9092
       - KAFKA_ZOOKEEPER_USER=kafka
       - KAFKA_ZOOKEEPER_PASSWORD=kafka_password
 ```
@@ -422,7 +393,7 @@ You can find the required information in the files located at `/opt/bitnami/kafk
 
 A Kafka cluster can easily be setup with the Bitnami Kafka Docker image using the following environment variables:
 
- - `KAFKA_ZOOKEEPER_CONNECT`: Comma separated host:port pairs, each corresponding to a Zookeeper Server.
+ - `KAFKA_CFG_ZOOKEEPER_CONNECT`: Comma separated host:port pairs, each corresponding to a Zookeeper Server.
 
 
 Create a Docker network to enable visibility to each other via the docker container name
@@ -449,7 +420,7 @@ The first step is to create one Kafka instance.
 ```bash
 docker run --name kafka1 \
   --network app-tier \
-  -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
+  -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
   -p 9092:9092 \
   bitnami/kafka:latest
 ```
@@ -461,7 +432,7 @@ Next we start a new Kafka container.
 ```bash
 docker run --name kafka2 \
   --network app-tier \
-  -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
+  -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
   -p 9092:9092 \
   bitnami/kafka:latest
 ```
@@ -473,7 +444,7 @@ Next we start another new Kafka container.
 ```bash
 docker run --name kafka3 \
   --network app-tier \
-  -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
+  -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
   -p 9092:9092 \
   bitnami/kafka:latest
 ```
@@ -494,19 +465,19 @@ services:
     ports:
       - '9092'
     environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
   kafka2:
     image: 'bitnami/kafka:latest'
     ports:
       - '9092'
     environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
   kafka3:
     image: 'bitnami/kafka:latest'
     ports:
       - '9092'
     environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
 ```
 
 Then, you can create a replicated topic with:
@@ -690,6 +661,40 @@ docker-compose up kafka
 ```
 
 # Notable Changes
+
+## 1.1.1-debian-9-r205, 2.2.0-debian-9-r40, 1.1.1-ol-r286, and 2.2.0-ol-7-r53
+
+- Configuration changes. Most environment variables now start with `KAFKA_CFG_`, as they are now mapped directly to Kafka keys. Variables changed:
+   - `KAFKA_ADVERTISED_LISTENERS` -> `KAFKA_CFG_ADVERTISED_LISTENERS`
+   - `KAFKA_BROKER_ID` -> `KAFKA_CFG_BROKER_ID`
+   - `KAFKA_DEFAULT_REPLICATION_FACTOR` -> `KAFKA_CFG_DEFAULT_REPLICATION_FACTOR`
+   - `KAFKA_DELETE_TOPIC_ENABLE` -> `KAFKA_CFG_DELETE_TOPIC_ENABLE`
+   - `KAFKA_INTER_BROKER_LISTENER_NAME` -> `KAFKA_CFG_INTER_BROKER_LISTENER_NAME`
+   - `KAFKA_LISTENERS` -> `KAFKA_CFG_LISTENERS`
+   - `KAFKA_LISTENER_SECURITY_PROTOCOL_MAP` -> `KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP`
+   - `KAFKA_LOGS_DIRS` -> `KAFKA_CFG_LOG_DIRS`
+   - `KAFKA_LOG_FLUSH_INTERVAL_MESSAGES` -> `KAFKA_CFG_LOG_FLUSH_INTERVAL_MESSAGES`
+   - `KAFKA_LOG_FLUSH_INTERVAL_MS` -> `KAFKA_CFG_LOG_FLUSH_INTERVAL_MS`
+   - `KAFKA_LOG_MESSAGE_FORMAT_VERSION` -> `KAFKA_CFG_LOG_MESSAGE_FORMAT_VERSION`
+   - `KAFKA_LOG_RETENTION_BYTES` -> `KAFKA_CFG_LOG_RETENTION_BYTES`
+   - `KAFKA_LOG_RETENTION_CHECK_INTERVALS_MS` -> `KAFKA_CFG_LOG_RETENTION_CHECK_INTERVAL_MS`
+   - `KAFKA_LOG_RETENTION_HOURS` -> `KAFKA_CFG_LOG_RETENTION_HOURS`
+   - `KAFKA_MAX_MESSAGE_BYTES` -> `KAFKA_CFG_MESSAGE_MAX_BYTES`
+   - `KAFKA_NUM_IO_THREADS` -> `KAFKA_CFG_NUM_IO_THREADS`
+   - `KAFKA_NUM_NETWORK_THREADS` -> `KAFKA_CFG_NUM_NETWORK_THREADS`
+   - `KAFKA_NUM_PARTITIONS` -> `KAFKA_CFG_NUM_PARTITIONS`
+   - `KAFKA_NUM_RECOVERY_THREADS_PER_DATA_DIR` -> `KAFKA_CFG_NUM_RECOVERY_THREADS_PER_DATA_DIR`
+   - `KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR` -> `KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR`
+   - `KAFKA_PORT_NUMBER` -> `KAFKA_CFG_PORT`
+   - `KAFKA_SEGMENT_BYTES` -> `KAFKA_CFG_SEGMENT_BYTES`
+   - `KAFKA_SOCKET_RECEIVE_BUFFER_BYTES` -> `KAFKA_CFG_SOCKET_RECEIVE_BUFFER_BYTES`
+   - `KAFKA_SOCKET_REQUEST_MAX_BYTES` -> `KAFKA_CFG_SOCKET_REQUEST_MAX_BYTES`
+   - `KAFKA_SOCKET_SEND_BUFFER_BYTES` -> `KAFKA_CFG_SOCKET_SEND_BUFFER_BYTES`
+   - `KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM` -> `KAFKA_CFG_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM`
+   - `KAFKA_TRANSACTION_STATE_LOG_MIN_ISR` -> `KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR`
+   - `KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR` -> `KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR`
+   - `KAFKA_ZOOKEEPER_CONNECT_TIMEOUT_MS` -> `KAFKA_CFG_ZOOKEEPER_CONNECTION_TIMEOUT_MS`
+   - `KAFKA_ZOOKEEPER_CONNECT` -> `KAFKA_CFG_ZOOKEEPER_CONNECT`
 
 ## 1.1.0-r41
 
