@@ -9,7 +9,7 @@ RUN bitnami-pkg unpack php-7.1.29-0 --checksum 5a0aefb353b003d4d0cd83601c5c8d20e
 RUN bitnami-pkg install mysql-client-10.3.15-0 --checksum 8200bab1521dde4a6c377789abdff7f4b30d64843a4a78affb319f833f9f260f
 RUN bitnami-pkg install mongodb-client-4.0.9-0 --checksum 8b59434d1c01e074f4f6c4dccf29afb06954236dd2f988b7b926c944d101c88e
 RUN bitnami-pkg unpack libphp-7.1.29-0 --checksum f78176fb7260ee165cddfc76d744ba3984360a11481b09632d4117ad16ad0c41
-RUN bitnami-pkg unpack dreamfactory-2.14.1-20 --checksum a2b9cb6eada686c8a9882c49f2264eedc26645d4f5ef69fdfaaf321cd717e3cd
+RUN bitnami-pkg unpack dreamfactory-2.14.1-21 --checksum 6cf0bbb4f17333d5b8fd6f9648397fe8a99ec1f08bb1b903d447a3c93d6a133e
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
@@ -18,7 +18,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="2.14.1-ol-7-r200" \
+    BITNAMI_IMAGE_VERSION="2.14.1-ol-7-r201" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
     MARIADB_PORT_NUMBER="3306" \
