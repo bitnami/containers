@@ -12,28 +12,34 @@ services:
     ports:
       - '9092'
     environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
       - 'kafka2_data:/bitnami'
+    depends_on:
+      - zookeeper
   kafka2:
     image: 'bitnami/kafka:2'
     ports:
       - '9092'
     environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
       - 'kafka_data:/bitnami'
+    depends_on:
+      - zookeeper
   kafka3:
     image: 'bitnami/kafka:2'
     ports:
       - '9092'
     environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
       - 'kafka3_data:/bitnami'
+    depends_on:
+      - zookeeper
 
 volumes:
   kafka_data:
