@@ -6,12 +6,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libcurl libgcc libidn libpcap libselinux libssh2 nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre zlib
-RUN bitnami-pkg unpack mongodb-4.1.11-0 --checksum 8374a890947f06a9cfbd584833669be592b5be3e767a4ec5e79f1de47becd390
+RUN bitnami-pkg unpack mongodb-4.1.12-0 --checksum 50d43a5929c8e85abf740564aa26c30e5e875c7ab271b345c10d7a9bb5fb3ddc
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.1.11-ol-7-r20" \
+    BITNAMI_IMAGE_VERSION="4.1.12-ol-7-r0" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_DISABLE_SYSTEM_LOG="no" \
