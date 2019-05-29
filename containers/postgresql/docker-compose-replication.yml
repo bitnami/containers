@@ -6,7 +6,7 @@ services:
     ports:
       - '5432'
     volumes:
-      - 'postgresql_master_data:/bitnami'
+      - 'postgresql_master_data:/bitnami/postgresql'
     environment:
       - POSTGRESQL_REPLICATION_MODE=master
       - POSTGRESQL_REPLICATION_USER=repl_user
