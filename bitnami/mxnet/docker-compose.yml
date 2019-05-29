@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  pytorch:
+    tty: true
+    image: 'bitnami/mxnet:1'
+    volumes:
+      - '.:/app'
