@@ -6,7 +6,8 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "httpd" ]]; then
-  nami_initialize apache php libphp phpmyadmin
+  . /apache-init.sh
+  nami_initialize apache php phpmyadmin
   info "Starting phpmyadmin... "
 fi
 
