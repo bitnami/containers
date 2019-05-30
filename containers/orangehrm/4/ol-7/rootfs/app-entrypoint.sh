@@ -6,7 +6,8 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "httpd" ]]; then
-  nami_initialize apache php mysql-client libphp orangehrm
+  . /apache-init.sh
+  nami_initialize apache php mysql-client orangehrm
   info "Starting orangehrm... "
 fi
 
