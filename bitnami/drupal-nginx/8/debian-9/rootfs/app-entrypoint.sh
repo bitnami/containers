@@ -5,9 +5,9 @@
 
 print_welcome_page
 
-if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "./run.sh" ]]; then
-  . /init.sh
-  nami_initialize nginx mysql-client drupal
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
+  . /drupal-init.sh
+  nami_initialize php nginx mysql-client drupal
   info "Starting drupal... "
 fi
 
