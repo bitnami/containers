@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.7.0-ol-7-r12` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.7.0-ol-7-r12/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.7.0-ol-7-r13` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.7.0-ol-7-r13/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.7.0-debian-9-r11`, `3`, `3.7.0`, `3.7.0-r11`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.7.0-debian-9-r11/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
@@ -366,6 +366,14 @@ This would be an example of SMTP configuration using a GMail account:
     --volume /path/to/moodle-persistence:/bitnami \
     bitnami/moodle:latest
   ```
+
+# Notable Changes
+
+## 3.7.0-debian-9-r12 and 3.7.0-ol-7-r13
+
+- The Apache configuration volume (`/bitnami/apache`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the Apache configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom Apache configuration files are advised to mount a volume for the configuration at `/opt/bitnami/apache/conf`, or mount specific configuration files individually.
+- The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
+- Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`. Find an example at [Using custom SSL certificates](#using-custom-ssl-certificates).
 
 # Contributing
 
