@@ -3,20 +3,17 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libmemcached libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline xz-libs zlib
+RUN bitnami-pkg unpack php-7.1.29-1 --checksum a77b1a3cb6a8a9b4d7547bda98b273002d852ea5d3e40e04339c8f9adc712add
 RUN bitnami-pkg unpack nginx-1.16.0-7 --checksum 9ca0f53021627b90346e52b6705ed5c2144e001712fc8a19cddd3cd334ffc380
-RUN bitnami-pkg unpack php-7.1.29-0 --checksum 5a0aefb353b003d4d0cd83601c5c8d20e552ddee27ca8a7b54fe66117a6335bd
 RUN bitnami-pkg unpack mysql-client-10.3.15-0 --checksum 8200bab1521dde4a6c377789abdff7f4b30d64843a4a78affb319f833f9f260f
-RUN bitnami-pkg unpack drupal-8.7.2-0 --checksum b7f6c3c0b63e9985cde7e9a08c064f68c48ae5f7b40c033c3a02c44257b587c7
-RUN mkdir -p /opt/bitnami/php/logs && chown daemon /opt/bitnami/php/logs && \
-    mkdir -p /opt/bitnami/php/tmp && chown daemon /opt/bitnami/php/tmp && \
-    ln -sf /opt/bitnami/php/etc /opt/bitnami/php/conf
+RUN bitnami-pkg unpack drupal-8.7.2-1 --checksum 542b58a1efa71b0b407b3685a2456e179a7f27ee9db8445637330a8ce7d08154
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="8.7.2-ol-7-r7" \
+    BITNAMI_IMAGE_VERSION="8.7.2-ol-7-r8" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
@@ -37,9 +34,9 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
-    PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
+    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/php/sbin:/opt/bitnami/nginx/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
 
 EXPOSE 80 443
 
 ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "./run.sh" ]
+CMD [ "/run.sh" ]
