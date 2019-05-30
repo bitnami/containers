@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5-ol-7`, `5.2.1-ol-7-r7` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.2.1-ol-7-r7/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.2.1-debian-9-r6`, `5`, `5.2.1`, `5.2.1-r6`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.2.1-debian-9-r6/5/debian-9/Dockerfile)
+* [`5-debian-9`, `5.2.1-debian-9-r8`, `5`, `5.2.1`, `5.2.1-r8`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.2.1-debian-9-r8/5/debian-9/Dockerfile)
 * [`5-rhel-7`, `5.1.1-rhel-7-r40` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.1.1-rhel-7-r40/5/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
@@ -328,6 +328,13 @@ $ docker run -d --name wordpress -p 80:80 -p 443:443 \
   --volume ./wordpress-vhosts.conf:/bitnami/nginx/conf/server_blocks/wordpress-vhosts.conf \
   bitnami/wordpress-nginx:latest
 ```
+
+# Notable Changes
+
+## 5.2.1-debian-9-r8 and 5.2.1-ol-7-r8
+
+- The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
+- Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`. Find an example at [Using custom SSL certificates](#using-custom-ssl-certificates).
 
 # Contributing
 
