@@ -3,21 +3,18 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline xz-libs zlib
+RUN bitnami-pkg unpack php-7.3.5-1 --checksum 2d1538eb581fbf03b8473a7b5639cb91533722646cac95b02c76211af8bde2fe
+RUN bitnami-pkg install wp-cli-2.2.0-1 --checksum dad13882c5036483480f6e74bf4ad2b4c587392b32b3ad7d4336c5f507ce81b3
 RUN bitnami-pkg unpack nginx-1.16.0-7 --checksum 9ca0f53021627b90346e52b6705ed5c2144e001712fc8a19cddd3cd334ffc380
-RUN bitnami-pkg unpack php-7.3.5-0 --checksum d87f224bceb767f97cf5f611e61f9bbfc9347b1de7795a1f0f10063eb8e40f91
-RUN bitnami-pkg install wp-cli-2.2.0-0 --checksum 9a4b33e6dc5457f0c5c8a16f74dc9404953fb4b7d12ee3cdcd772d6aa712623d
 RUN bitnami-pkg unpack mysql-client-10.3.15-0 --checksum 8200bab1521dde4a6c377789abdff7f4b30d64843a4a78affb319f833f9f260f
-RUN bitnami-pkg unpack wordpress-5.2.1-0 --checksum 398f15addfe93b5e05b890c063353f5cf279fa2effc7d79f524e7111d917c852
-RUN mkdir -p /opt/bitnami/php/logs && chown daemon /opt/bitnami/php/logs && \
-    mkdir -p /opt/bitnami/php/tmp && chown daemon /opt/bitnami/php/tmp && \
-    ln -sf /opt/bitnami/php/etc /opt/bitnami/php/conf
+RUN bitnami-pkg unpack wordpress-5.2.1-1 --checksum 24a2c0e2651080139b821b6cea164201f11e2fceb1d0722263202111b63bdc9b
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="5.2.1-ol-7-r7" \
+    BITNAMI_IMAGE_VERSION="5.2.1-ol-7-r8" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -29,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
-    PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/wp-cli/bin:/opt/bitnami/mysql/bin:$PATH" \
+    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/php/sbin:/opt/bitnami/wp-cli/bin:/opt/bitnami/nginx/sbin:/opt/bitnami/mysql/bin:$PATH" \
     SMTP_HOST="" \
     SMTP_PASSWORD="" \
     SMTP_PORT="" \
@@ -55,4 +52,4 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
 EXPOSE 80 443
 
 ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "./run.sh" ]
+CMD [ "/run.sh" ]
