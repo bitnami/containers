@@ -5,7 +5,8 @@
 
 print_welcome_page
 
-#!/bin/bash
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "php" ]]; then
+  #!/bin/bash
 
 PROJECT_DIRECTORY=/app/$CODEIGNITER_PROJECT_NAME
 DEPLOY=("$@")
@@ -26,5 +27,8 @@ fi
 
 exec tini -- "${DEPLOY[@]}"
 
+  nami_initialize php
+  info "Starting codeigniter... "
+fi
 
 exec tini -- "$@"
