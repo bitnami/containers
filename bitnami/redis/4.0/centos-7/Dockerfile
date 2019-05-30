@@ -9,13 +9,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc
-RUN . ./libcomponent.sh && component_unpack "redis" "4.0.14-0" --checksum ed7a391203d22fbdb0975b852f2035843685939cb9460b1fb14e4608df2b89e7
+RUN . ./libcomponent.sh && component_unpack "redis" "4.0.14-1" --checksum e330060b86690ac28b161edc910836a10d30eb495e374efb014ec96ae31ff41f
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.14-centos-7-r2" \
+    BITNAMI_IMAGE_VERSION="4.0.14-centos-7-r3" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
