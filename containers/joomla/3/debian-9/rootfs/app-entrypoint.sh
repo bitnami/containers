@@ -6,7 +6,8 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "httpd" ]]; then
-  nami_initialize apache php mysql-client libphp joomla
+  . /apache-init.sh
+  nami_initialize apache php mysql-client joomla
   info "Starting joomla... "
 fi
 
