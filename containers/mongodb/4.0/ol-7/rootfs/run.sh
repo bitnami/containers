@@ -25,7 +25,7 @@ fi
 sed -i 's/path: .*\/mongodb.log/path: /' /opt/bitnami/mongodb/conf/mongodb.conf
 
 # allow running custom initialization scripts
-if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|js\)") ]] && [[ ! -f /bitnami/mongodb/.user_scripts_initialized ]] ; then
+if [[ "$(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|js\)")" != "" ]] && [[ ! -f /bitnami/mongodb/.user_scripts_initialized ]]; then
     mongodbStart &
     pidfile="/opt/bitnami/mongodb/tmp/mongodb.pid"
     dbpath="/bitnami/mongodb/data/db"
