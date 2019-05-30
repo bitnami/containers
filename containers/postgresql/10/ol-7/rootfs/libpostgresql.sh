@@ -106,7 +106,7 @@ export POSTGRESQL_DAEMON_GROUP="postgresql"
 # Settings
 export POSTGRESQL_INIT_MAX_TIMEOUT=${POSTGRESQL_INIT_MAX_TIMEOUT:-60}
 export POSTGRESQL_CLUSTER_APP_NAME=${POSTGRESQL_CLUSTER_APP_NAME:-walreceiver}
-export POSTGRESQL_DATABASE="${POSTGRESQL_DATABASE:-}"
+export POSTGRESQL_DATABASE="${POSTGRESQL_DATABASE:-postgres}"
 export POSTGRESQL_INITDB_ARGS="${POSTGRESQL_INITDB_ARGS:-}"
 export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
 export POSTGRESQL_INITDB_WAL_DIR="${POSTGRESQL_INITDB_WAL_DIR:-}"
@@ -489,7 +489,7 @@ postgresql_initialize() {
         if [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]]; then
             postgresql_master_init_db
             postgresql_start_bg
-            [[ -n "${POSTGRESQL_DATABASE}" ]] && postgresql_create_custom_database
+            [[ -n "${POSTGRESQL_DATABASE}" ]] && [[ "$POSTGRESQL_DATABASE" != "postgres"]] && postgresql_create_custom_database
             if [[ "$POSTGRESQL_USERNAME" = "postgres" ]]; then
                 postgresql_alter_postgres_user
             else
