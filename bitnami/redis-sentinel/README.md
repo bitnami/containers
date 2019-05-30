@@ -60,7 +60,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`5.0-ol-7`, `5.0.5-ol-7-r14` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.5-ol-7-r14/5.0/ol-7/Dockerfile)
 * [`5.0-debian-9`, `5.0.5-debian-9-r15`, `5.0`, `5.0.5`, `5.0.5-r15`, `latest` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.5-debian-9-r15/5.0/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.14-ol-7-r61` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-ol-7-r61/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.14-debian-9-r53`, `4.0`, `4.0.14`, `4.0.14-r53` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-debian-9-r53/4.0/debian-9/Dockerfile)
+* [`4.0-debian-9`, `4.0.14-debian-9-r54`, `4.0`, `4.0.14`, `4.0.14-r54` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-debian-9-r54/4.0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
 
