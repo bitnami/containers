@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2.4-rhel-7`, `2.4.39-rhel-7-r14` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.39-rhel-7-r14/2.4/rhel-7/Dockerfile)
-* [`2.4-ol-7`, `2.4.39-ol-7-r49` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.39-ol-7-r49/2.4/ol-7/Dockerfile)
+* [`2.4-ol-7`, `2.4.39-ol-7-r50` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.39-ol-7-r50/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.39-debian-9-r39`, `2.4`, `2.4.39`, `2.4.39-r39`, `latest` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.39-debian-9-r39/2.4/debian-9/Dockerfile)
 
 # Get this image
@@ -132,18 +132,11 @@ version: '2'
 services:
   apache:
     image: 'bitnami/apache:latest'
-    labels:
-      kompose.service.type: nodeport
     ports:
       - '80:8081'
       - '443:8443'
     environment:
       - APACHE_HTTP_PORT_NUMBER=8081
-    volumes:
-      - 'apache_data:/bitnami'
-volumes:
-  apache_data:
-    driver: local
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -152,7 +145,6 @@ volumes:
 $ docker run -d --name apache -p 80:8081 -p 443:443 \
   --network apache-tier \
   --e APACHE_HTTP_PORT_NUMBER=8081 \
-  --volume /path/to/apache-persistence:/bitnami \
   bitnami/apache:latest
 ```
 
@@ -163,11 +155,11 @@ Available variables:
 
 ## Adding custom virtual hosts
 
-The default `httpd.conf` includes virtual hosts placed in `/bitnami/apache/conf/vhosts/`. You can mount a `my_vhost.conf` file containing your custom virtual hosts at this location.
+The default `httpd.conf` includes virtual hosts placed in `/opt/bitnami/apache/conf/vhosts/`. You can mount a `my_vhost.conf` file containing your custom virtual hosts at this location.
 
 For example, in order add a vhost for `www.example.com`:
 
-# Step 1: Write your `my_vhost.conf` file with the following content.
+### Step 1: Write your `my_vhost.conf` file with the following content.
 
 ```apache
 <VirtualHost *:8080>
@@ -181,11 +173,11 @@ For example, in order add a vhost for `www.example.com`:
 </VirtualHost>
 ```
 
-# Step 2: Mount the configuration as a volume.
+### Step 2: Mount the configuration as a volume.
 
 ```bash
 $ docker run --name apache \
-  -v /path/to/my_vhost.conf:/bitnami/apache/conf/vhosts/my_vhost.conf:ro \
+  -v /path/to/my_vhost.conf:/opt/bitnami/apache/conf/vhosts/my_vhost.conf:ro \
   bitnami/apache:latest
 ```
 
@@ -201,14 +193,14 @@ services:
       - '80:8080'
       - '443:8443'
     volumes:
-      - /path/to/my_vhost.conf:/bitnami/apache/conf/vhosts/my_vhost.conf:ro
+      - /path/to/my_vhost.conf:/opt/bitnami/apache/conf/vhosts/my_vhost.conf:ro
 ```
 
 ## Using custom SSL certificates
 
 *NOTE:* The steps below assume that you are using a custom domain name and that you have already configured the custom domain name to point to your server.
 
-This container comes with SSL support already pre-configured and with a dummy certificate in place (`server.crt` and `server.key` files in `/bitnami/apache/conf/bitnami/certs`). If you want to use your own certificate (`.crt`) and certificate key (`.key`) files, follow the steps below:
+This container comes with SSL support already pre-configured and with a dummy certificate in place (`server.crt` and `server.key` files in `/certs`). If you want to use your own certificate (`.crt`) and certificate key (`.key`) files, follow the steps below:
 
 ### Step 1: Prepare your certificate files
 
@@ -226,7 +218,7 @@ Run the Apache image, mounting the certificates directory from your host.
 
 ```bash
 $ docker run --name apache \
-  -v /path/to/apache-certs:/opt/bitnami/apache/certs \
+  -v /path/to/apache-certs:/certs \
   bitnami/apache:latest
 ```
 
@@ -242,20 +234,16 @@ services:
       - '80:8080'
       - '443:8443'
     volumes:
-      - /path/to/apache-certs:/opt/bitnami/apache/certs
+      - /path/to/apache-certs:/certs
 ```
 
 ## Full configuration
 
-The image looks for configurations in `/bitnami/apache/conf/`. You can mount a volume at `/bitnami` and copy/edit the configurations in the `/bitnami/apache/conf/`. The default configurations will be populated in the `conf/` directory if it's empty.
-
-### Step 1: Run the Apache image
-
-Run the Apache image, mounting a directory from your host.
+The image looks for configurations in `/opt/bitnami/apache/conf`. You can overwrite the `httpd.conf` file using your own custom configuration file.
 
 ```bash
 $ docker run --name apache \
-  -v /path/to/apache-persistence:/bitnami \
+  -v /path/to/httpd.conf:/opt/bitnami/apache/conf/httpd.conf \
   bitnami/apache:latest
 ```
 
@@ -271,29 +259,7 @@ services:
       - '80:8080'
       - '443:8443'
     volumes:
-      - /path/to/apache-persistence:/bitnami
-```
-
-### Step 2: Edit the configuration
-
-Edit the configuration on your host using your favorite editor.
-
-```bash
-$ vi /path/to/apache-persistence/apache/conf/httpd.conf
-```
-
-### Step 4: Restart Apache
-
-After changing the configuration, restart your Apache container for the changes to take effect.
-
-```bash
-$ docker restart apache
-```
-
-or using Docker Compose:
-
-```bash
-$ docker-compose restart apache
+      - /path/to/httpd.conf:/opt/bitnami/apache/conf/httpd.conf
 ```
 
 # Reverse proxy to other containers
@@ -319,6 +285,123 @@ $ docker-compose logs apache
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+
+# Understand the structure of this image
+
+The Bitnami Apache Docker image is built using a Dockerfile with the structure below:
+
+```Dockerfile
+FROM bitnami/minideb-extras
+...
+# Install required system packages and dependencies
+RUN install_packages xxx yyy zzz
+RUN bitnami-pkg unpack apache-aa.bb.cc-dd
+...
+COPY rootfs /
+ENV APACHE_PARAMETER="xyz" ...
+VOLUME [ "/app", "/certs" ]
+EXPOSE 8080 8443
+WORKDIR /app
+USER 1001
+ENTRYPOINT [ "/app-entrypoint.sh" ]
+CMD [ "httpd", "-f", "/opt/bitnami/apache/conf/httpd.conf", "-DFOREGROUND" ]
+```
+
+We can identify several sections within the Dockerfile:
+
+- Components installation.
+- Components static configuration.
+- Environment variables.
+- Volumes.
+- Ports to be exposed.
+- Working directory and user.
+  - Note that once the user is set to 1001, unprivileged commands cannot be executed anymore.
+- Entrypoint and command.
+  - Take into account these actions are not executed until the container is started.
+
+# Customize this image
+
+The Bitnami Apache Docker image is designed to be extended so it can be used as the base image for your custom web applications.
+
+> Note: It's recommended to read the [previous section](#understand-the-structure-of-this-image) to understand the Dockerfile structure, before extending this image.
+
+## Extend this image
+
+Before extending this image, please note there are certain configuration settings you can modify using the original image:
+
+- Settings that can be adapted using environment variables. For instance, you can change the ports used by Apache for HTTP and HTTPS, by setting the environment variables `APACHE_HTTP_PORT_NUMBER` and `APACHE_HTTPS_PORT_NUMBER` respectively.
+- [Adding custom virtual hosts](#adding-custom-virtual-hosts).
+- [Replacing the 'httpd.conf' file](#full-configuration).
+- [Using custom SSL certificates](#using-custom-ssl-certificates).
+
+If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
+
+```Dockerfile
+FROM bitnami/apache
+## Put your customizations below
+...
+```
+
+In this example, we provide an extended with the following modifications:
+
+- Install `vim` editor.
+- Modify the Apache configuration file.
+- Modify the ports used by Apache.
+- Change the user that runs the container.
+
+```Dockerfile
+FROM bitnami/apache
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+## Install 'vim'
+USER 0 # Required to perform privileged actions
+RUN install_packages vim
+USER 1001 # Revert to the original non-root user
+
+## Enable mod_ratelimit module
+RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
+
+## Modify the ports used by Apache by default
+ENV APACHE_HTTP_PORT_NUMBER=8181 # It is also possible to change this environment variable at runtime
+EXPOSE 8181 8443
+
+## Modify the default container user
+USER 1002
+```
+
+Based on the extended image, you can use a Docker Compose like the one below to add other features:
+
+- Adding custom server block
+- Adding custom certificates
+- Cloning your web app and serve it trough Apache
+
+```yaml
+version: '2'
+
+services:
+  apache:
+    build: .
+    ports:
+      - '80:8181'
+      - '443:8443'
+    depends_on:
+      - cloner
+    volumes:
+      - ./config/my_vhost.conf:/opt/bitnami/apache/conf/vhosts/my_vhost.conf:ro
+      - ./certs:/certs
+      - data:/app
+  cloner:
+    image: 'bitnami/git:latest'
+    command:
+      - clone
+      - https://github.com/cloudacademy/static-website-example
+      - /app
+    volumes:
+      - data:/app
+volumes:
+  data:
+    driver: local
+```
 
 # Maintenance
 
@@ -389,6 +472,13 @@ $ docker-compose up apache
 ](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
 
 # Notable Changes
+
+## 2.4.39-debian-9-r40 and 2.4.39-ol-7-r50
+
+- This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
+- The Apache configuration volume (`/bitnami/apache`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the Apache configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom Apache configuration files are advised to mount a volume for the configuration at `/opt/bitnami/apache/conf`, or mount specific configuration files individually.
+- The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
+- Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`. Find an example at [Using custom SSL certificates](#using-custom-ssl-certificates).
 
 ## 2.4.34-r8
 
