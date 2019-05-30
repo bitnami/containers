@@ -5,9 +5,9 @@
 
 print_welcome_page
 
-if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "./run.sh" ]]; then
-  . /init.sh
-  nami_initialize nginx mysql-client wordpress
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
+  . /wordpress-init.sh
+  nami_initialize php nginx mysql-client wordpress
   info "Starting wordpress... "
 fi
 
