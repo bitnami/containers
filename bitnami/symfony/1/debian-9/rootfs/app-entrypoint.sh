@@ -5,7 +5,8 @@
 
 print_welcome_page
 
-#!/bin/bash
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
+  #!/bin/bash
 
 export PROJECT_DIRECTORY="/app/$SYMFONY_PROJECT_NAME"
 
@@ -29,5 +30,8 @@ fi
 
 echo "symfony successfully initialized"
 
+  nami_initialize php
+  info "Starting symfony... "
+fi
 
 exec tini -- "$@"
