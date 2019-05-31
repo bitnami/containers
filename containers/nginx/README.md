@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`1.16-ol-7`, `1.16.0-ol-7-r39` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-ol-7-r39/1.16/ol-7/Dockerfile)
 * [`1.16-debian-9`, `1.16.0-debian-9-r29`, `1.16`, `1.16.0`, `1.16.0-r29`, `latest` (1.16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-debian-9-r29/1.16/debian-9/Dockerfile)
-* [`1.16-centos-7`, `1.16.0-centos-7-r4` (1.16/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-centos-7-r4/1.16/centos-7/Dockerfile)
+* [`1.16-centos-7`, `1.16.0-centos-7-r5` (1.16/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-centos-7-r5/1.16/centos-7/Dockerfile)
 * [`1.16-rhel-7`, `0.0.0-rhel-7-r0` (1.16/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/0.0.0-rhel-7-r0/1.16/rhel-7/Dockerfile)
 
 # Get this image
@@ -294,7 +294,7 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 # Understand the structure of this image
 
-The Bitnami NGINX Docker image is built using a Dockerfile with the structure below:
+The Bitnami NGINX Open Source Docker image is built using a Dockerfile with the structure below:
 
 ```Dockerfile
 FROM bitnami/minideb-extras-base
@@ -323,18 +323,19 @@ We can identify several sections within the Dockerfile:
 - Components static configuration.
 - Environment variables.
 - Ports to be exposed.
+- Volumes.
 - Working directory and user.
   - Note that once the user is set to 1001, unprivileged commands cannot be executed anymore.
 - Entrypoint and command.
   - Take into account these actions are not executed until the container is started.
 
-# Customizing the Bitnami NGINX Docker image
+# Customize this image
 
-The Bitnami NGINX Docker image is designed to be extended so it can be used as the base image for your custom web applications.
+The Bitnami NGINX Open Source Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
-> Note: It's recommended to read the [previous section](#understand-this-image-structure) to understand the Dockerfile structure, before extending this image.
+> Note: It's recommended to read the [previous section](#understand-the-structure-of-this-image) to understand the Dockerfile structure, before extending this image.
 
-## Extending the Bitnami NGINX Docker image
+## Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -475,7 +476,7 @@ $ docker-compose up nginx
 
 ## 1.16.0-r3
 
-- This image has been adapted so it's easier to customize. See the [Customizing the Bitnami NGINX Docker image](#customizing-the-bitnami-nginx-docker-image) section for more information.
+- This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 - The recommended mount point for adding custom server blocks changes from `/opt/bitnami/nginx/conf/vhosts` to `/opt/bitnami/nginx/conf/server_blocks`. Remember to update your Docker Compose files to user the new mount point.
 
 # Contributing
