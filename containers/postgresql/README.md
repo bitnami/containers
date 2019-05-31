@@ -428,6 +428,11 @@ postgres-#       from pg_stat_replication;
 
 > **Note:** For more advanced setups, you can define different replication groups with the `application_name` parameter, by setting the `POSTGRESQL_CLUSTER_APP_NAME` environment variable.
 
+### Fsync
+By default, fsync is turned on in the configuration. This means that the PostgreSQL server will try to make sure that updates are physically written to disk. It is possible to turn fsync off, which can be beneficial when running the image for testing purposes.  Turning fsync off will often result in a performance benefit, but can however cause unrecoverable data corruption in the event of a power failure or system crash.
+
+
+
 ## Configuration file
 
 The image looks for `postgresql.conf` file in `/opt/bitnami/postgresql/conf/`. You can mount a volume at `/bitnami/postgresql/conf/` and copy/edit the `postgresql.conf` file in the `/path/to/postgresql-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
