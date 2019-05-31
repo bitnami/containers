@@ -1,13 +1,13 @@
-FROM bitnami/oraclelinux-extras:7-r351
+FROM bitnami/oraclelinux-extras:7-r352
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.39-2 --checksum bd13d67036ecb691256893b0ba4034364b90c05747b2afbaa3c097fb218bc2e1
-RUN bitnami-pkg unpack php-7.1.29-1 --checksum a77b1a3cb6a8a9b4d7547bda98b273002d852ea5d3e40e04339c8f9adc712add
+RUN bitnami-pkg unpack php-7.1.30-0 --checksum 232ee9f323d2ba318e43574670b8e5b327c8f6b9635aebe8b73fb7b8ec2c22f9
 RUN bitnami-pkg unpack mysql-client-10.3.15-0 --checksum 8200bab1521dde4a6c377789abdff7f4b30d64843a4a78affb319f833f9f260f
-RUN bitnami-pkg install libphp-7.1.29-1 --checksum 1af86409324c23a7536fcb9411a0cacaaa65ca181e812e6476e0fdbf9c2fea0a
-RUN bitnami-pkg unpack drupal-8.7.2-1 --checksum 542b58a1efa71b0b407b3685a2456e179a7f27ee9db8445637330a8ce7d08154
+RUN bitnami-pkg install libphp-7.1.30-0 --checksum 15aa01c485336e8f34f2fba037acecb1af506d7abc23d0942a08c55de339ddf5
+RUN bitnami-pkg unpack drupal-8.7.2-1 --checksum 93f8018c1f32f7d32ac0e1042e08e0a446a55a3efb282e5ca05a3d1f1bfba3e6
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.7.2-ol-7-r8" \
+    BITNAMI_IMAGE_VERSION="8.7.2-ol-7-r9" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
