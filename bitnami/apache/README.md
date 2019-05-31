@@ -26,7 +26,6 @@ $ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-
 > This [CVE scan report](https://quay.io/repository/bitnami/apache?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy Apache in Kubernetes?
@@ -48,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2.4-rhel-7`, `2.4.39-rhel-7-r14` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.39-rhel-7-r14/2.4/rhel-7/Dockerfile)
-* [`2.4-ol-7`, `2.4.39-ol-7-r50` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.39-ol-7-r50/2.4/ol-7/Dockerfile)
+* [`2.4-ol-7`, `2.4.39-ol-7-r52` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.39-ol-7-r52/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.39-debian-9-r41`, `2.4`, `2.4.39`, `2.4.39-r41`, `latest` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.39-debian-9-r41/2.4/debian-9/Dockerfile)
 
 # Get this image
@@ -307,23 +306,23 @@ ENTRYPOINT [ "/app-entrypoint.sh" ]
 CMD [ "httpd", "-f", "/opt/bitnami/apache/conf/httpd.conf", "-DFOREGROUND" ]
 ```
 
-We can identify several sections within the Dockerfile:
+The Dockerfile has several sections related to:
 
-- Components installation.
-- Components static configuration.
-- Environment variables.
-- Volumes.
-- Ports to be exposed.
-- Working directory and user.
-  - Note that once the user is set to 1001, unprivileged commands cannot be executed anymore.
-- Entrypoint and command.
-  - Take into account these actions are not executed until the container is started.
+- Components installation
+- Components static configuration
+- Environment variables
+- Volumes
+- Ports to be exposed
+- Working directory and user
+  - Note that once the user is set to 1001, unprivileged commands cannot be executed any longer.
+- Entrypoint and command
+  - Take into account that these actions are not executed until the container is started.
 
 # Customize this image
 
 The Bitnami Apache Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
-> Note: It's recommended to read the [previous section](#understand-the-structure-of-this-image) to understand the Dockerfile structure, before extending this image.
+> Note: Read the [previous section](#understand-the-structure-of-this-image) to understand the Dockerfile structure before extending this image.
 
 ## Extend this image
 
@@ -342,12 +341,12 @@ FROM bitnami/apache
 ...
 ```
 
-In this example, we provide an extended with the following modifications:
+Here is an example of extending the image with the following modifications:
 
-- Install `vim` editor.
-- Modify the Apache configuration file.
-- Modify the ports used by Apache.
-- Change the user that runs the container.
+- Install the `vim` editor
+- Modify the Apache configuration file
+- Modify the ports used by Apache
+- Change the user that runs the container
 
 ```Dockerfile
 FROM bitnami/apache
@@ -362,18 +361,19 @@ USER 1001 # Revert to the original non-root user
 RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
 
 ## Modify the ports used by Apache by default
-ENV APACHE_HTTP_PORT_NUMBER=8181 # It is also possible to change this environment variable at runtime
-EXPOSE 8181 8443
+# It is also possible to change these environment variables at runtime
+ENV APACHE_HTTP_PORT_NUMBER=8181 
+EXPOSE 8181 8143
 
 ## Modify the default container user
 USER 1002
 ```
 
-Based on the extended image, you can use a Docker Compose like the one below to add other features:
+Based on the extended image, you can use a Docker Compose file like the one below to add other features:
 
-- Adding custom server block
-- Adding custom certificates
-- Cloning your web app and serve it trough Apache
+- Add a custom virtual host
+- Add custom certificates
+- Clone your web application and serve it through Apache
 
 ```yaml
 version: '2'
@@ -477,7 +477,6 @@ $ docker-compose up apache
 
 - This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 - The Apache configuration volume (`/bitnami/apache`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the Apache configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom Apache configuration files are advised to mount a volume for the configuration at `/opt/bitnami/apache/conf`, or mount specific configuration files individually.
-- The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
 - Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`. Find an example at [Using custom SSL certificates](#using-custom-ssl-certificates).
 
 ## 2.4.34-r8
