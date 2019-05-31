@@ -47,9 +47,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.16-ol-7`, `1.16.0-ol-7-r39` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-ol-7-r39/1.16/ol-7/Dockerfile)
+* [`1.16-ol-7`, `1.16.0-ol-7-r40` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-ol-7-r40/1.16/ol-7/Dockerfile)
 * [`1.16-debian-9`, `1.16.0-debian-9-r30`, `1.16`, `1.16.0`, `1.16.0-r30`, `latest` (1.16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-debian-9-r30/1.16/debian-9/Dockerfile)
-* [`1.16-centos-7`, `1.16.0-centos-7-r5` (1.16/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-centos-7-r5/1.16/centos-7/Dockerfile)
+* [`1.16-centos-7`, `1.16.0-centos-7-r6` (1.16/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-centos-7-r6/1.16/centos-7/Dockerfile)
 * [`1.16-rhel-7`, `0.0.0-rhel-7-r0` (1.16/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/0.0.0-rhel-7-r0/1.16/rhel-7/Dockerfile)
 
 # Get this image
@@ -317,23 +317,23 @@ ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/run.sh" ]
 ```
 
-We can identify several sections within the Dockerfile:
+The Dockerfile has several sections related to:
 
-- Components installation.
-- Components static configuration.
-- Environment variables.
-- Ports to be exposed.
-- Volumes.
-- Working directory and user.
-  - Note that once the user is set to 1001, unprivileged commands cannot be executed anymore.
-- Entrypoint and command.
-  - Take into account these actions are not executed until the container is started.
+- Components installation
+- Components static configuration
+- Environment variables
+- Volumes
+- Ports to be exposed
+- Working directory and user
+  - Note that once the user is set to 1001, unprivileged commands cannot be executed any longer.
+- Entrypoint and command
+  - Take into account that these actions are not executed until the container is started.
 
 # Customize this image
 
 The Bitnami NGINX Open Source Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
-> Note: It's recommended to read the [previous section](#understand-the-structure-of-this-image) to understand the Dockerfile structure, before extending this image.
+> Note: Read the [previous section](#understand-the-structure-of-this-image) to understand the Dockerfile structure before extending this image.
 
 ## Extend this image
 
@@ -352,12 +352,12 @@ FROM bitnami/nginx
 ...
 ```
 
-In this example, we provide an extended with the following modifications:
+Here is an example of extending the image with the following modifications:
 
-- Install `vim` editor.
-- Modify the NGINX configuration file.
-- Modify the ports used by NGINX.
-- Change the user that runs the container.
+- Install the `vim` editor
+- Modify the Apache configuration file
+- Modify the ports used by Apache
+- Change the user that runs the container
 
 ```Dockerfile
 FROM bitnami/nginx
@@ -373,17 +373,17 @@ RUN sed -i -r "s#(\s+worker_connections\s+)[0-9]+;#\1512;#" /opt/bitnami/nginx/c
 
 ## Modify the ports used by NGINX by default
 ENV NGINX_HTTP_PORT_NUMBER=8181 # It is also possible to change this environment variable at runtime
-EXPOSE 8181 8443
+EXPOSE 8181 8143
 
 ## Modify the default container user
 USER 1002
 ```
 
-Based on the extended image, you can use a Docker Compose like the one below to add other features:
+Based on the extended image, you can use a Docker Compose file like the one below to add other features:
 
-- Adding custom server block
-- Adding custom certificates
-- Cloning your web app and serve it trough NGINX
+- Add a custom server block
+- Add custom certificates
+- Clone your web application and serve it through NGINX
 
 ```yaml
 version: '2'
