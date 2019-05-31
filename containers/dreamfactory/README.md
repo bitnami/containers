@@ -45,8 +45,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.14.1-ol-7-r205` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.1-ol-7-r205/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.14.1-debian-9-r195`, `2`, `2.14.1`, `2.14.1-r195`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.1-debian-9-r195/2/debian-9/Dockerfile)
+* [`2-ol-7`, `2.14.1-ol-7-r206` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.1-ol-7-r206/2/ol-7/Dockerfile)
+* [`2-debian-9`, `2.14.1-debian-9-r196`, `2`, `2.14.1`, `2.14.1-r196`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.1-debian-9-r196/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
@@ -376,13 +376,102 @@ $ docker run -d --name dreamfactory -p 80:80 -p 443:443 \
   bitnami/dreamfactory:latest
 ```
 
+# Customize this image
+
+The Bitnami DreamFactory Docker image is designed to be extended so it can be used as the base image for your custom web applications.
+
+## Extend this image
+
+Before extending this image, please note there are certain configuration settings you can modify using the original image:
+
+- Settings that can be adapted using environment variables. For instance, you can change the ports used by Apache for HTTP and HTTPS, by setting the environment variables `APACHE_HTTP_PORT_NUMBER` and `APACHE_HTTPS_PORT_NUMBER` respectively.
+- [Adding custom virtual hosts](https://github.com/bitnami/bitnami-docker-apache#adding-custom-virtual-hosts).
+- [Replacing the 'httpd.conf' file](https://github.com/bitnami/bitnami-docker-apache#full-configuration).
+- [Using custom SSL certificates](https://github.com/bitnami/bitnami-docker-apache#using-custom-ssl-certificates).
+
+If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
+
+```Dockerfile
+FROM bitnami/dreamfactory
+## Put your customizations below
+...
+```
+
+Here is an example of extending the image with the following modifications:
+
+- Install the `vim` editor
+- Modify the Apache configuration file
+- Modify the ports used by Apache
+
+```Dockerfile
+FROM bitnami/dreamfactory
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+## Install 'vim'
+RUN install_packages vim
+
+## Enable mod_ratelimit module
+RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
+
+## Modify the ports used by Apache by default
+# It is also possible to change these environment variables at runtime
+ENV APACHE_HTTP_PORT_NUMBER=8181 
+ENV APACHE_HTTPS_PORT_NUMBER=8143
+EXPOSE 8181 8143
+```
+
+Based on the extended image, you can use a Docker Compose file like the one below to add other features:
+
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:10.3'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - 'mariadb_data:/bitnami'
+  redis:
+    image: 'bitnami/redis:5.0'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - 'redis_data:/bitnami'
+  mongodb:
+    image: 'bitnami/mongodb:4.0'
+    volumes:
+      - 'mongodb_data:/bitnami'
+  dreamfactory:
+    build: .
+    ports:
+      - '80:8181'
+      - '443:8143'
+    depends_on:
+      - mariadb
+      - redis
+      - mongodb
+    volumes:
+      - 'dreamfactory_data:/bitnami'
+volumes:
+  mariadb_data:
+    driver: local
+  redis_data:
+    driver: local
+  mongodb_data:
+    driver: local
+  dreamfactory_data:
+    driver: local
+```
+
 # Notable Changes
 
 ## 2.14.1-debian-9-r195 and 2.14.1-ol-7-r204
 
+- This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 - The Apache configuration volume (`/bitnami/apache`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the Apache configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom Apache configuration files are advised to mount a volume for the configuration at `/opt/bitnami/apache/conf`, or mount specific configuration files individually.
-- The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
-- Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`. Find an example at [Using custom SSL certificates](#using-custom-ssl-certificates).
+- The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually. 
+- Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`. 
 
 # Contributing
 
