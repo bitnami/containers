@@ -48,8 +48,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.16-ol-7`, `1.16.0-ol-7-r42` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-ol-7-r42/1.16/ol-7/Dockerfile)
-* [`1.16-debian-9`, `1.16.0-debian-9-r31`, `1.16`, `1.16.0`, `1.16.0-r31`, `latest` (1.16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-debian-9-r31/1.16/debian-9/Dockerfile)
-* [`1.16-centos-7`, `1.16.0-centos-7-r6` (1.16/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-centos-7-r6/1.16/centos-7/Dockerfile)
+* [`1.16-debian-9`, `1.16.0-debian-9-r32`, `1.16`, `1.16.0`, `1.16.0-r32`, `latest` (1.16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-debian-9-r32/1.16/debian-9/Dockerfile)
+* [`1.16-centos-7`, `1.16.0-centos-7-r7` (1.16/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-centos-7-r7/1.16/centos-7/Dockerfile)
 * [`1.16-rhel-7`, `0.0.0-rhel-7-r0` (1.16/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/0.0.0-rhel-7-r0/1.16/rhel-7/Dockerfile)
 
 # Get this image
