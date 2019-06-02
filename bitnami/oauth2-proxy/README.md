@@ -49,8 +49,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-rhel-7`, `3.1.0-rhel-7-r61` (3/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/3.1.0-rhel-7-r61/3/rhel-7/Dockerfile)
-* [`3-ol-7`, `3.1.0-ol-7-r91` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/3.1.0-ol-7-r91/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.1.0-debian-9-r82`, `3`, `3.1.0`, `3.1.0-r82`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/3.1.0-debian-9-r82/3/debian-9/Dockerfile)
+* [`3-ol-7`, `3.1.0-ol-7-r92` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/3.1.0-ol-7-r92/3/ol-7/Dockerfile)
+* [`3-debian-9`, `3.1.0-debian-9-r81`, `3`, `3.1.0`, `3.1.0-r81`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/3.1.0-debian-9-r81/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
 
