@@ -21,6 +21,7 @@ postgresql_enable_nss_wrapper
 if [[ "$*" = *"/run.sh"* ]]; then
     info "** Starting PostgreSQL setup **"
     /setup.sh
+    touch "$POSTGRESQL_TMP_DIR"/.initialized
     info "** PostgreSQL setup finished! **"
 fi
 
