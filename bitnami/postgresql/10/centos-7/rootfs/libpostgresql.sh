@@ -62,7 +62,7 @@ EOF
     local -r suffixes=(
       "PASSWORD" "INITDB_WAL_DIR" "INITDB_ARGS" "CLUSTER_APP_NAME"
       "MASTER_HOST" "MASTER_PORT_NUMBER" "NUM_SYNCHRONOUS_REPLICAS"
-      "PORT_NUMBER" "REPLICATION_MODE" "REPLICATION_PASSWORD" "REPLICATION_USER"
+      "PORT_NUMBER" "REPLICATION_MODE" "REPLICATION_PASSWORD" "REPLICATION_USER" "FSYNC"
       "SYNCHRONOUS_COMMIT_MODE" "PASSWORD_FILE" "REPLICATION_PASSWORD_FILE" "INIT_MAX_TIMEOUT"
     )
     for s in "${suffixes[@]}"; do
@@ -117,6 +117,7 @@ export POSTGRESQL_PORT_NUMBER="${POSTGRESQL_PORT_NUMBER:-5432}"
 export POSTGRESQL_REPLICATION_MODE="${POSTGRESQL_REPLICATION_MODE:-master}"
 export POSTGRESQL_REPLICATION_USER="${POSTGRESQL_REPLICATION_USER:-}"
 export POSTGRESQL_SYNCHRONOUS_COMMIT_MODE="${POSTGRESQL_SYNCHRONOUS_COMMIT_MODE:-on}"
+export POSTGRESQL_FSYNC="${POSTGRESQL_FSYNC:-on}"
 export POSTGRESQL_USERNAME="${POSTGRESQL_USERNAME:-postgres}"
 EOF
     if [[ -n "${POSTGRESQL_PASSWORD_FILE:-}" ]] && [[ -f "$POSTGRESQL_PASSWORD_FILE" ]]; then
@@ -362,6 +363,20 @@ postgresql_configure_replication_parameters() {
 }
 
 ########################
+# Change postgresql.conf by setting fsync
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+postgresql_configure_fsync() {
+    info "Configuring fsync"
+    postgresql_set_property "fsync" "$POSTGRESQL_FSYNC"
+}
+
+########################
 # Alter password of the postgres user
 # Globals:
 #   POSTGRESQL_*
@@ -482,6 +497,7 @@ postgresql_initialize() {
         fi
         is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
         is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
+        is_boolean_yes "$create_conf_file" && postgresql_configure_fsync 
         [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]] && [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
     else
         ensure_dir_exists "$POSTGRESQL_DATA_DIR"
@@ -498,11 +514,13 @@ postgresql_initialize() {
             is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && postgresql_create_replication_user
             is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
+            is_boolean_yes "$create_conf_file" && postgresql_configure_fsync 
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
         else
             postgresql_slave_init_db
             is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
             is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
+            is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
             postgresql_configure_recovery
         fi
     fi
