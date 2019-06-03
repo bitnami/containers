@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2.4-rhel-7`, `2.4.39-rhel-7-r14` (2.4/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.39-rhel-7-r14/2.4/rhel-7/Dockerfile)
-* [`2.4-ol-7`, `2.4.39-ol-7-r55` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.39-ol-7-r55/2.4/ol-7/Dockerfile)
+* [`2.4-ol-7`, `2.4.39-ol-7-r56` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.39-ol-7-r56/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.39-debian-9-r44`, `2.4`, `2.4.39`, `2.4.39-r44`, `latest` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.39-debian-9-r44/2.4/debian-9/Dockerfile)
 
 # Get this image
@@ -154,7 +154,7 @@ Available variables:
 
 ## Adding custom virtual hosts
 
-The default `httpd.conf` includes virtual hosts placed in `/opt/bitnami/apache/conf/vhosts/`. You can mount a `my_vhost.conf` file containing your custom virtual hosts at this location.
+The default `httpd.conf` includes virtual hosts placed in `/opt/bitnami/apache/conf/vhosts/`. You can mount a `my_vhost.conf` file containing your custom virtual hosts at the `/vhosts` folder.
 
 For example, in order add a vhost for `www.example.com`:
 
@@ -176,7 +176,7 @@ For example, in order add a vhost for `www.example.com`:
 
 ```bash
 $ docker run --name apache \
-  -v /path/to/my_vhost.conf:/opt/bitnami/apache/conf/vhosts/my_vhost.conf:ro \
+  -v /path/to/my_vhost.conf:/vhosts/my_vhost.conf:ro \
   bitnami/apache:latest
 ```
 
@@ -192,7 +192,7 @@ services:
       - '80:8080'
       - '443:8443'
     volumes:
-      - /path/to/my_vhost.conf:/opt/bitnami/apache/conf/vhosts/my_vhost.conf:ro
+      - /path/to/my_vhost.conf:/vhosts/my_vhost.conf:ro
 ```
 
 ## Using custom SSL certificates
