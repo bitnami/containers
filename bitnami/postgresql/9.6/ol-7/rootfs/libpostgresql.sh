@@ -488,7 +488,7 @@ postgresql_initialize() {
     is_boolean_yes "$create_conf_file" && postgresql_create_config
     is_boolean_yes "$create_pghba_file" && postgresql_create_pghba && postgresql_allow_local_connection
 
-    if [[ -e "$POSTGRESQL_DATA_DIR" ]]; then
+    if ! is_dir_empty "$POSTGRESQL_DATA_DIR"; then
         info "Deploying PostgreSQL with persisted data..."
         local -r postmaster_path="$POSTGRESQL_DATA_DIR"/postmaster.pid
         if [[ -f "$postmaster_path" ]]; then
