@@ -496,7 +496,8 @@ postgresql_initialize() {
             rm "$postmaster_path"
         fi
         is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
-        is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters && postgresql_configure_fsync
+        is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
+        is_boolean_yes "$create_conf_file" && postgresql_configure_fsync 
         [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]] && [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
     else
         ensure_dir_exists "$POSTGRESQL_DATA_DIR"
@@ -512,12 +513,14 @@ postgresql_initialize() {
             fi
             is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && postgresql_create_replication_user
-            is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters && postgresql_configure_fsync
+            is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
+            is_boolean_yes "$create_conf_file" && postgresql_configure_fsync 
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
         else
             postgresql_slave_init_db
             is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
-            is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters && postgresql_configure_fsync
+            is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
+            is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
             postgresql_configure_recovery
         fi
     fi
