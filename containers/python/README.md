@@ -48,13 +48,13 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`3.7-ol-7`, `3.7.3-ol-7-r61` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.3-ol-7-r61/3.7/ol-7/Dockerfile)
 * [`3.7-ol-7-prod`, `3.7.3-ol-7-r60-prod` (3.7-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.3-ol-7-r60-prod/3.7-prod/ol-7/Dockerfile)
-* [`3.7-ol-7`, `3.7.3-ol-7-r60` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.3-ol-7-r60/3.7/ol-7/Dockerfile)
 * [`3.7-debian-9-prod`, `3.7.3-debian-9-r50-prod`, `3.7-prod`, `3.7.3-prod`, `3.7.3-r50-prod`, `latest-prod` (3.7-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.3-debian-9-r50-prod/3.7-prod/debian-9/Dockerfile)
 * [`3.7-debian-9`, `3.7.3-debian-9-r50`, `3.7`, `3.7.3`, `3.7.3-r50`, `latest` (3.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.3-debian-9-r50/3.7/debian-9/Dockerfile)
 * [`3.6-rhel-7`, `3.6.8-rhel-7-r60` (3.6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.8-rhel-7-r60/3.6/rhel-7/Dockerfile)
 * [`3.6-ol-7`, `3.6.8-ol-7-r149` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.8-ol-7-r149/3.6/ol-7/Dockerfile)
-* [`3.6-ol-7-prod`, `3.6.8-ol-7-r110-prod` (3.6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.8-ol-7-r110-prod/3.6-prod/ol-7/Dockerfile)
+* [`3.6-ol-7-prod`, `3.6.8-ol-7-r111-prod` (3.6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.8-ol-7-r111-prod/3.6-prod/ol-7/Dockerfile)
 * [`3.6-debian-9-prod`, `3.6.8-debian-9-r97-prod`, `3.6-prod`, `3.6.8-prod`, `3.6.8-r97-prod` (3.6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.8-debian-9-r97-prod/3.6-prod/debian-9/Dockerfile)
 * [`3.6-debian-9`, `3.6.8-debian-9-r136`, `3.6`, `3.6.8`, `3.6.8-r136` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.8-debian-9-r136/3.6/debian-9/Dockerfile)
 * [`2-rhel-7`, `2.7.16-rhel-7-r45` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.16-rhel-7-r45/2/rhel-7/Dockerfile)
