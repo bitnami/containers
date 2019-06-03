@@ -234,7 +234,7 @@ postgresql_create_config() {
     cp "$POSTGRESQL_BASE_DIR/share/postgresql.conf.sample" "$POSTGRESQL_CONF_FILE"
     # Update default value for 'include_dir' directive
     # ref: https://github.com/postgres/postgres/commit/fb9c475597c245562a28d1e916b575ac4ec5c19f#diff-f5544d9b6d218cc9677524b454b41c60
-    if ! grep include_dir "$POSTGRESQL_CONF_FILE" > /dev/null; then 
+    if ! grep include_dir "$POSTGRESQL_CONF_FILE" > /dev/null; then
         error "include_dir line is not present in $POSTGRESQL_CONF_FILE. This may be due to a changes in a new version of PostgreSQL. Please check"
         exit 1
     fi
@@ -488,7 +488,7 @@ postgresql_initialize() {
     is_boolean_yes "$create_conf_file" && postgresql_create_config
     is_boolean_yes "$create_pghba_file" && postgresql_create_pghba && postgresql_allow_local_connection
 
-    if ! is_dir_empty "$POSTGRESQL_DATA_DIR"; then
+    if [[ -e "$POSTGRESQL_DATA_DIR" ]]; then
         info "Deploying PostgreSQL with persisted data..."
         local -r postmaster_path="$POSTGRESQL_DATA_DIR"/postmaster.pid
         if [[ -f "$postmaster_path" ]]; then
@@ -497,7 +497,7 @@ postgresql_initialize() {
         fi
         is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
         is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
-        is_boolean_yes "$create_conf_file" && postgresql_configure_fsync 
+        is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
         [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]] && [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
     else
         ensure_dir_exists "$POSTGRESQL_DATA_DIR"
@@ -514,7 +514,7 @@ postgresql_initialize() {
             is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && postgresql_create_replication_user
             is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
-            is_boolean_yes "$create_conf_file" && postgresql_configure_fsync 
+            is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
         else
             postgresql_slave_init_db
