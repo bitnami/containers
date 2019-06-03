@@ -45,14 +45,14 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`11-ol-7`, `11.3.0-ol-7-r26` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.3.0-ol-7-r26/11/ol-7/Dockerfile)
-* [`11-debian-9`, `11.3.0-debian-9-r24`, `11`, `11.3.0`, `11.3.0-r24`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.3.0-debian-9-r24/11/debian-9/Dockerfile)
+* [`11-debian-9`, `11.3.0-debian-9-r25`, `11`, `11.3.0`, `11.3.0-r25`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.3.0-debian-9-r25/11/debian-9/Dockerfile)
 * [`11-centos-7`, `11.3.0-centos-7-r8` (11/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.3.0-centos-7-r8/11/centos-7/Dockerfile)
 * [`10-ol-7`, `10.8.0-ol-7-r25` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.8.0-ol-7-r25/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.8.0-debian-9-r24`, `10`, `10.8.0`, `10.8.0-r24` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.8.0-debian-9-r24/10/debian-9/Dockerfile)
+* [`10-debian-9`, `10.8.0-debian-9-r25`, `10`, `10.8.0`, `10.8.0-r25` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.8.0-debian-9-r25/10/debian-9/Dockerfile)
 * [`10-centos-7`, `10.8.0-centos-7-r8` (10/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.8.0-centos-7-r8/10/centos-7/Dockerfile)
 * [`9.6-ol-7`, `9.6.13-ol-7-r26` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.13-ol-7-r26/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.13-debian-9-r25`, `9.6`, `9.6.13`, `9.6.13-r25` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.13-debian-9-r25/9.6/debian-9/Dockerfile)
-* [`9.6-centos-7`, `9.6.13-centos-7-r8` (9.6/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.13-centos-7-r8/9.6/centos-7/Dockerfile)
+* [`9.6-centos-7`, `9.6.13-centos-7-r9` (9.6/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.13-centos-7-r9/9.6/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
 
@@ -427,11 +427,6 @@ postgres-#       from pg_stat_replication;
 ```
 
 > **Note:** For more advanced setups, you can define different replication groups with the `application_name` parameter, by setting the `POSTGRESQL_CLUSTER_APP_NAME` environment variable.
-
-### Fsync
-By default, fsync is turned on in the configuration. This means that the PostgreSQL server will try to make sure that updates are physically written to disk. It is possible to turn fsync off, which can be beneficial when running the image for testing purposes.  Turning fsync off will often result in a performance benefit, but can however cause unrecoverable data corruption in the event of a power failure or system crash.
-
-
 
 ## Configuration file
 
