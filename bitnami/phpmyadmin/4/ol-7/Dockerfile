@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r356
+FROM bitnami/oraclelinux-extras:7-r357
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -16,7 +16,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="4.8.5-ol-7-r116" \
+    BITNAMI_IMAGE_VERSION="4.8.5-ol-7-r117" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
     PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH" \
