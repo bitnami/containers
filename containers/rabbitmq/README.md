@@ -49,7 +49,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.7-ol-7`, `3.7.15-ol-7-r18` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.15-ol-7-r18/3.7/ol-7/Dockerfile)
+* [`3.7-ol-7`, `3.7.15-ol-7-r19` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.15-ol-7-r19/3.7/ol-7/Dockerfile)
 * [`3.7-debian-9`, `3.7.15-debian-9-r17`, `3.7`, `3.7.15`, `3.7.15-r17`, `latest` (3.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.15-debian-9-r17/3.7/debian-9/Dockerfile)
 * [`3.7-rhel-7`, `3.7.14-rhel-7-r21` (3.7/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.14-rhel-7-r21/3.7/rhel-7/Dockerfile)
 
@@ -77,7 +77,7 @@ $ docker build -t bitnami/rabbitmq:latest https://github.com/bitnami/bitnami-doc
 
 # Persisting your application
 
-If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
@@ -318,51 +318,7 @@ volumes:
 
 ## Configuration file
 
-The image looks for configurations in `/bitnami/rabbitmq/conf/`. As mentioned in [Persisting your application](#persisting-your-application) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/rabbitmq-persistence/rabbitmq/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
-
-### Step 1: Run the RabbitMQ image
-
-Run the RabbitMQ image, mounting a directory from your host.
-
-```bash
-$ docker run --name rabbitmq -v /path/to/rabbitmq-persistence:/bitnami bitnami/rabbitmq:latest
-```
-
-or using Docker Compose:
-
-```yaml
-version: '2'
-
-services:
-  rabbitmq:
-    image: 'bitnami/rabbitmq:latest'
-    ports:
-      - '15672:15672'
-    volumes:
-      - /path/to/rabbitmq-persistence:/bitnami
-```
-
-### Step 2: Edit the configuration
-
-Edit the configuration on your host using your favorite editor.
-
-```bash
-$ vi /path/to/rabbitmq-persistence/rabbitmq/conf/rabbitmq.config
-```
-
-### Step 3: Restart RabbitMQ
-
-After changing the configuration, restart your RabbitMQ container for changes to take effect.
-
-```bash
-$ docker restart rabbitmq
-```
-
-or using Docker Compose:
-
-```bash
-$ docker-compose restart rabbitmq
-```
+A custom configuration file can be mounted to the `/opt/bitnami/rabbitmq/etc/rabbitmq` directory. If no file is mounted, the container will generate one.
 
 # Logging
 
@@ -442,6 +398,10 @@ $ docker-compose up rabbitmq
 ```
 
 # Notable changes
+
+## 3.7.15-rX
+- Decrease the size of the container. Node.js is not needed anymore. RabbitMQ configuration logic has been moved to bash scripts in the `rootfs` folder.
+- Configuration is not persisted anymore.
 
 ## 3.7.7-r35
 
