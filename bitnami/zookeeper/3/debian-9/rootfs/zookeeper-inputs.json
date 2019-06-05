@@ -10,6 +10,7 @@
   "zookeeperLogLevel": "{{$global.env.ZOO_LOG_LEVEL}}",
   "zookeeperMaxClientCnxns": "{{$global.env.ZOO_MAX_CLIENT_CNXNS}}",
   "zookeeperPort": "{{$global.env.ZOO_PORT_NUMBER}}",
+  "zookeeperReconfigEnabled": "{{$global.env.ZOO_RECONFIG_ENABLED}}",
   "zookeeperServerPasswords": "{{$global.env.ZOO_SERVER_PASSWORDS}}",
   "zookeeperServerUsers": "{{$global.env.ZOO_SERVER_USERS}}",
   "zookeeperServers": "{{$global.env.ZOO_SERVERS}}",

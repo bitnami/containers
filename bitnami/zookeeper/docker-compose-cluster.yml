@@ -5,38 +5,32 @@ services:
     image: 'bitnami/zookeeper:3'
     ports:
       - '2181'
-      - '2888'
-      - '3888'
     volumes:
       - zookeeper_data:/bitnami
     environment:
       - ZOO_SERVER_ID=1
       - ALLOW_ANONYMOUS_LOGIN=yes
-      - ZOO_SERVERS=0.0.0.0:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
+      - ZOO_SERVERS=zookeeper:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
   zookeeper2:
     image: 'bitnami/zookeeper:3'
     ports:
       - '2181'
-      - '2888'
-      - '3888'
     volumes:
       - zookeeper2_data:/bitnami
     environment:
       - ZOO_SERVER_ID=2
       - ALLOW_ANONYMOUS_LOGIN=yes
-      - ZOO_SERVERS=zookeeper:2888:3888,0.0.0.0:2888:3888,zookeeper3:2888:3888
+      - ZOO_SERVERS=zookeeper:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
   zookeeper3:
     image: 'bitnami/zookeeper:3'
     ports:
       - '2181'
-      - '2888'
-      - '3888'
     volumes:
       - zookeeper3_data:/bitnami
     environment:
       - ZOO_SERVER_ID=3
       - ALLOW_ANONYMOUS_LOGIN=yes
-      - ZOO_SERVERS=zookeeper:2888:3888,zookeeper2:2888:3888,0.0.0.0:2888:3888
+      - ZOO_SERVERS=zookeeper:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
 
 volumes:
   zookeeper_data:
