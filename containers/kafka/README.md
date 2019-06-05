@@ -425,7 +425,7 @@ docker run --name kafka1 \
   bitnami/kafka:latest
 ```
 
-### Step 2: Create the second node
+### Step 3: Create the second node
 
 Next we start a new Kafka container.
 
@@ -437,7 +437,7 @@ docker run --name kafka2 \
   bitnami/kafka:latest
 ```
 
-### Step 3: Create the third node
+### Step 4: Create the third node
 
 Next we start another new Kafka container.
 
