@@ -7,7 +7,7 @@ export ZOO_LOG_DIR=/opt/bitnami/zookeeper/logs
 export ZOOPIDFILE=/opt/bitnami/zookeeper/tmp/zookeeper.pid
 
 USER=zookeeper
-START_COMMAND="/opt/bitnami/zookeeper/bin/zkServer.sh start && tail -f ${ZOO_LOG_DIR}/zookeeper.out"
+START_COMMAND="/opt/bitnami/zookeeper/bin/zkServer.sh start && tail -f ${ZOO_LOG_DIR}/zookeeper-*.out"
 
 # If container is started as `root` user
 if [ $EUID -eq 0 ]; then
