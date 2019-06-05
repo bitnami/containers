@@ -52,8 +52,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.5.5-ol-7-r1` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.5-ol-7-r1/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.5.5-debian-9-r0`, `3`, `3.5.5`, `3.5.5-r0`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.5-debian-9-r0/3/debian-9/Dockerfile)
+* [`3-ol-7`, `3.5.5-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.5-ol-7-r0/3/ol-7/Dockerfile)
+* [`3-debian-9`, `3.5.5-debian-9-r1`, `3`, `3.5.5`, `3.5.5-r1`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.5-debian-9-r1/3/debian-9/Dockerfile)
 * [`3-rhel-7`, `3.4.14-rhel-7-r13` (3/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.14-rhel-7-r13/3/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
