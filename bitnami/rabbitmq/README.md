@@ -399,7 +399,7 @@ $ docker-compose up rabbitmq
 
 # Notable changes
 
-## 3.7.15-rX
+## 3.7.15-r18, 3.7.15-ol-7-r19
 - Decrease the size of the container. Node.js is not needed anymore. RabbitMQ configuration logic has been moved to bash scripts in the `rootfs` folder.
 - Configuration is not persisted anymore.
 
