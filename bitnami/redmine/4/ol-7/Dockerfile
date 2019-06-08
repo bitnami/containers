@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r360
+FROM bitnami/oraclelinux-extras:7-r361
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,12 +6,12 @@ RUN install_packages ImageMagick bzip2-libs cyrus-sasl-lib expat fontconfig free
 RUN bitnami-pkg install ruby-2.6.3-0 --checksum edc7a2d314c592d73272df68e28490846c325d829cdcba97c41fe0fd19edc0f3
 RUN bitnami-pkg install postgresql-client-11.3.0-0 --checksum 85cdf4e7ac8df71922a0ed95cd8c61f7b630070b3a315e46844a6b49a25c15d4
 RUN bitnami-pkg install mysql-client-10.3.15-0 --checksum 8200bab1521dde4a6c377789abdff7f4b30d64843a4a78affb319f833f9f260f
-RUN bitnami-pkg install git-2.21.0-0 --checksum 8dc7078aeaa3c3bf7010f3adbdb2f7ec9c3737c7eb6c7c1b2f547350c42fcfa5
+RUN bitnami-pkg install git-2.22.0-0 --checksum 5dc73d3ed8b4f84c89e75fd7c08ec147a528eaf1017946d68c3732748885b3e2
 RUN bitnami-pkg unpack redmine-4.0.3-1 --checksum 2301483d31a3abbdb25b3b5d54eadfb83852b0564d426ceaab106f887540b97d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.0.3-ol-7-r46" \
+    BITNAMI_IMAGE_VERSION="4.0.3-ol-7-r47" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH" \
     REDMINE_DB_MYSQL="mariadb" \
     REDMINE_DB_PASSWORD="" \
