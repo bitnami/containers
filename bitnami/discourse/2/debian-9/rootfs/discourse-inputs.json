@@ -15,6 +15,7 @@
   "redisPort": "{{$global.env.REDIS_PORT_NUMBER}}",
   "siteName": "{{$global.env.DISCOURSE_SITENAME}}",
   "skipInstall": "{{$global.env.DISCOURSE_SKIP_INSTALL}}",
+  "smtpAuth": "{{$global.env.SMTP_AUTH}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
   "smtpPort": "{{$global.env.SMTP_PORT}}",
