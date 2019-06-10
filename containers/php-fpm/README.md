@@ -126,9 +126,9 @@ networks:
     driver: bridge
 ```
 
-### Step 2: Create a virtual host
+### Step 2: Create a server block
 
-Let's create an nginx virtual host to reverse proxy to our PHP-FPM container.
+Let's create an nginx server block to reverse proxy to our PHP-FPM container.
 
 ```nginx
 server {
@@ -152,7 +152,7 @@ server {
 
 Notice we've substituted the link alias name `myapp`, we will use the same name when creating the container.
 
-Copy the virtual host above, saving the file somewhere on your host. We will mount it as a volume in our nginx container.
+Copy the server block above, saving the file somewhere on your host. We will mount it as a volume in our nginx container.
 
 ### Step 3: Run the PHP-FPM image with a specific name
 
@@ -181,7 +181,7 @@ services:
 
 ```bash
 $ docker run -it \
-  -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf \
+  -v /path/to/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/yourapp.conf \
   --network app-tier \
   bitnami/nginx
 ```
@@ -200,7 +200,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf
+      - /path/to/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/yourapp.conf
 ```
 
 # PHP runtime

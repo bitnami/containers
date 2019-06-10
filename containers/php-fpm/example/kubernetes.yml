@@ -145,10 +145,10 @@ items:
             initialDelaySeconds: 5
             timeoutSeconds: 1
           volumeMounts:
-          - name: nginx-vhost
-            mountPath: /bitnami/nginx/conf/vhosts
+          - name: nginx-server-blocks
+            mountPath: /bitnami/nginx/conf/server_blocks
         volumes:
-        - name: nginx-vhost
+        - name: nginx-server-blocks
           configMap:
             name: nginx-configmap
         restartPolicy: Always
