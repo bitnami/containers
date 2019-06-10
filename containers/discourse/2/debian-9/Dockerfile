@@ -1,18 +1,18 @@
-FROM bitnami/minideb-extras:stretch-r383
+FROM bitnami/minideb-extras:stretch-r386
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages advancecomp file ghostscript gifsicle hostname imagemagick jhead jpegoptim libbsd0 libc6 libcomerr2 libcurl3 libedit2 libffi6 libgcc1 libgcrypt20 libgmp-dev libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libjpeg-progs libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libtasn1-6 libtinfo5 libunistring0 libxml2 libxml2-dev libxslt1-dev libxslt1.1 optipng pngcrush pngquant rsync zlib1g zlib1g-dev
 RUN bitnami-pkg install ruby-2.5.5-0 --checksum 7f676dbe187bb037fed4fd25da35ac68b34621e629ea5b80ee82afbccfbe9c6f
 RUN bitnami-pkg unpack postgresql-client-11.3.0-0 --checksum eb5e96b4b53e9f60dc07d5f9823d09f7884aa9c2408da5bec92beb6cbf6a9de4
-RUN bitnami-pkg install git-2.21.0-0 --checksum 37eb00d863f94194c0c31464c2c747bc784e662adbab240b5f0ef46b3e259e52
-RUN bitnami-pkg unpack discourse-sidekiq-2.2.5-3 --checksum 69b899b17dad4795da2ac079d49b97efdc301553ef72bbdc5180de3f101f8e0e
-RUN bitnami-pkg unpack discourse-2.2.5-2 --checksum 88323308cb827503a448b1321c8f15aa57430a502a076be6f45bfa4e8f0f9cc4
+RUN bitnami-pkg install git-2.22.0-0 --checksum efa83383130dac1a51b192acdec4868d5d2593385efece42fdb5c52525583b55
+RUN bitnami-pkg unpack discourse-sidekiq-2.2.5-4 --checksum 3a47a0625038ba471c806c256e1af66a9b8d296dddbf7da553a6969c7696a52d
+RUN bitnami-pkg unpack discourse-2.2.5-3 --checksum ee5bc969afe885e4d7e9fdf9bd1257788eb278ed44ead4f07b632d9cbbcd9742
 RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.2.5-debian-9-r19" \
+    BITNAMI_IMAGE_VERSION="2.2.5-debian-9-r20" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="discourse" \
     DISCOURSE_HOSTNAME="127.0.0.1" \
@@ -36,6 +36,7 @@ ENV BITNAMI_APP_NAME="discourse" \
     REDIS_HOST="redis" \
     REDIS_PASSWORD="" \
     REDIS_PORT_NUMBER="6379" \
+    SMTP_AUTH="login" \
     SMTP_HOST="" \
     SMTP_PASSWORD="" \
     SMTP_PORT="" \
