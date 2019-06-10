@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r385
+FROM bitnami/minideb-extras:stretch-r386
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="matomo" \
-    BITNAMI_IMAGE_VERSION="3.9.1-debian-9-r61" \
+    BITNAMI_IMAGE_VERSION="3.9.1-debian-9-r62" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
