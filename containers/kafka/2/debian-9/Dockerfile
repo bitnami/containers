@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack kafka-2.2.1-2 --checksum 4fa9e894b89de593899a0bec4a9e2de2
 COPY rootfs /
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.2.1-debian-9-r11" \
+    BITNAMI_IMAGE_VERSION="2.2.1-debian-9-r12" \
     KAFKA_BROKER_PASSWORD="bitnami" \
     KAFKA_BROKER_USER="user" \
     KAFKA_CERTIFICATE_PASSWORD="" \
