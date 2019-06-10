@@ -10,4 +10,4 @@ services:
       - '8080:8080'
       - '8443:8443'
     volumes:
-      - ./vhost/myapp.conf:/bitnami/nginx/conf/vhosts/myapp.conf
+      - ./server_blocks/myapp.conf:/opt/bitnami/nginx/conf/server_blocks/myapp.conf

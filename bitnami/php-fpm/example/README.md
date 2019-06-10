@@ -62,7 +62,7 @@ REPOSITORY                          TAG                    IMAGE ID            C
 bitnami/php-example                 0.0.1                  8c72c8c9a73e        32 minutes ago      202MB
 ```
 
-You can now launch and test the image locally. We will need a web server like Nginx to server our php app with PHP-FPM. The following docker-compose file deploys both the php application and the nginx server mounting an already configured virtual host.
+You can now launch and test the image locally. We will need a web server like Nginx to server our php app with PHP-FPM. The following docker-compose file deploys both the php application and the nginx server mounting an already configured server block.
 
 
 ```yaml
@@ -78,7 +78,7 @@ services:
       - '8080:8080'
       - '8443:8443'
     volumes:
-      - ./vhost/myapp.conf:/bitnami/nginx/conf/vhosts/myapp.conf
+      - ./server_blocks/myapp.conf:/opt/bitnami/nginx/conf/server_blocks/myapp.conf
 ```
 You can start the deployment with this command:
 
