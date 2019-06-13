@@ -1,29 +1,29 @@
 #!/bin/bash
-. /opt/bitnami/base/functions
-. /opt/bitnami/base/helpers
 
+set -o errexit
+set -o nounset
+set -o pipefail
+# set -o xtrace # Uncomment this line for debugging purpose
+# shellcheck disable=SC1091
 
-USER=kafka
-KAFKA_HOME="/opt/bitnami/kafka"
-START_COMMAND="${KAFKA_HOME}/bin/kafka-server-start.sh ${KAFKA_HOME}/config/server.properties"
+# Load libraries
+. /libkafka.sh
+. /libos.sh
 
-if [[ -z "$KAFKA_CFG_BROKER_ID" ]]; then
-    if [[ -n "$BROKER_ID_COMMAND" ]]; then
-        KAFKA_CFG_BROKER_ID="$(eval "$BROKER_ID_COMMAND")"
-        export KAFKA_CFG_BROKER_ID
-    else
-        # By default auto allocate broker ID
-        export KAFKA_CFG_BROKER_ID=-1
-    fi
+# Load Kafka environment variables
+eval "$(kafka_env)"
+
+if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]]; then
+    export KAFKA_OPTS="-Djava.security.auth.login.config=$KAFKA_HOME/conf/kafka_jaas.conf"
 fi
 
-if [[ "$KAFKA_CFG_LISTENERS" =~ SASL ]]; then
-    export KAFKA_OPTS="-Djava.security.auth.login.config=${KAFKA_HOME}/conf/kafka_jaas.conf"
-fi
+flags=("$KAFKA_CONFDIR/server.properties")
+[[ -z "${KAFKA_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${KAFKA_EXTRA_FLAGS[@]}")
+START_COMMAND=("$KAFKA_HOME/bin/kafka-server-start.sh" "${flags[@]}")
 
-# If container is started as `root` user
-if [[ $EUID -eq 0 ]]; then
-    exec gosu ${USER} bash -c "${START_COMMAND[@]}"
+info "** Starting Kafka **"
+if am_i_root; then
+    exec gosu "$KAFKA_DAEMON_USER" exec "${START_COMMAND[@]}"
 else
-    exec bash -c "${START_COMMAND[@]}"
+    exec "${START_COMMAND[@]}"
 fi
