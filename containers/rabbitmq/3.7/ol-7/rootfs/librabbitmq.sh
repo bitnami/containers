@@ -216,15 +216,7 @@ is_rabbitmq_running() {
     if [[ -z "${RABBITMQ_PID:-}" ]]; then
         false
     else
-        if ! is_service_running "$RABBITMQ_PID"; then
-            false
-        else
-            if debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" await_startup; then
-                true
-            else
-                false
-            fi
-        fi
+        is_service_running "$RABBITMQ_PID"
     fi
 }
 
@@ -268,12 +260,11 @@ rabbitmq_start_bg() {
     export RABBITMQ_PID="$!"
 
     local counter=0
-    while ! is_rabbitmq_running; do
+    while ! "${RABBITMQ_BIN_DIR}/rabbitmqctl" wait --pid "$RABBITMQ_PID" --timeout 5; do
         debug "Waiting for RabbitMQ to start..."
-        sleep 1
         counter=$((counter + 1))
 
-        if [[ $counter -eq 60 ]]; then
+        if [[ $counter -eq 10 ]]; then
             error "Couldn't start RabbitMQ in background."
             exit 1
         fi
@@ -293,7 +284,7 @@ rabbitmq_start_bg() {
 rabbitmq_stop() {
     ! is_rabbitmq_running && return
     info "Stopping RabbitMQ..."
-    
+
     debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" stop
 
     local counter=10
@@ -345,7 +336,7 @@ migrate_old_configuration() {
 
     if am_i_root; then
         [[ -e "${RABBITMQ_VOLUME_DIR}/.initialized" ]] && rm "${RABBITMQ_VOLUME_DIR}/.initialized"
-        rm -rf "${RABBITMQ_VOLUME_DIR}/conf" "${RABBITMQ_VOLUME_DIR:?}/var" "${RABBITMQ_VOLUME_DIR}/.rabbitmq" 
+        rm -rf "${RABBITMQ_VOLUME_DIR}/conf" "${RABBITMQ_VOLUME_DIR:?}/var" "${RABBITMQ_VOLUME_DIR}/.rabbitmq"
     else
         warn "Old configuration migrated, please manually remove the 'conf', 'var' and '.rabbitmq' directories from the volume."
     fi
