@@ -1,25 +1,27 @@
-FROM bitnami/minideb-extras:stretch-r389
+FROM bitnami/minideb-extras-base:stretch-r271
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    HOME="/"
+    HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-9" \
+    OS_NAME="linux"
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1
-RUN bitnami-pkg install java-1.8.212-0 --checksum 54a18672c8b4c1a44324c607a6bc616f614a062005d5e3384f91f10ff6f6edea
-RUN bitnami-pkg unpack kafka-2.2.1-3 --checksum 9104766b3f8da386d98c80074b57a15caf443eb2543b12012387aceb0e392f9d
+RUN . ./libcomponent.sh && component_unpack "java" "1.8.212-0" --checksum 54a18672c8b4c1a44324c607a6bc616f614a062005d5e3384f91f10ff6f6edea
+RUN . ./libcomponent.sh && component_unpack "kafka" "2.2.1-3" --checksum 9104766b3f8da386d98c80074b57a15caf443eb2543b12012387aceb0e392f9d
 
 COPY rootfs /
+RUN /postunpack.sh
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.2.1-debian-9-r16" \
+    BITNAMI_IMAGE_VERSION="2.2.1-debian-9-r17" \
     KAFKA_BROKER_PASSWORD="bitnami" \
     KAFKA_BROKER_USER="user" \
     KAFKA_CERTIFICATE_PASSWORD="" \
     KAFKA_CFG_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
-    KAFKA_CFG_BROKER_ID="-1" \
     KAFKA_CFG_LISTENERS="PLAINTEXT://:9092" \
-    KAFKA_CFG_LOG_DIRS="/opt/bitnami/kafka/data" \
     KAFKA_CFG_ZOOKEEPER_CONNECT="localhost:2181" \
     KAFKA_HEAP_OPTS="-Xmx1024m -Xms1024m" \
     KAFKA_INTER_BROKER_PASSWORD="bitnami" \
@@ -33,5 +35,5 @@ ENV ALLOW_PLAINTEXT_LISTENER="no" \
 EXPOSE 9092
 
 USER 1001
-ENTRYPOINT [ "/app-entrypoint.sh" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/run.sh" ]
