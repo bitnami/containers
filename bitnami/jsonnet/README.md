@@ -24,9 +24,9 @@ $ docker run --name jsonnet bitnami/jsonnet:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0.12-rhel-7`, `0.12.1-rhel-7-r54` (0.12/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/0.12.1-rhel-7-r54/0.12/rhel-7/Dockerfile)
-* [`0.12-ol-7`, `0.12.1-ol-7-r105` (0.12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/0.12.1-ol-7-r105/0.12/ol-7/Dockerfile)
-* [`0.12-debian-9`, `0.12.1-debian-9-r95`, `0.12`, `0.12.1`, `0.12.1-r95`, `latest` (0.12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/0.12.1-debian-9-r95/0.12/debian-9/Dockerfile)
+* [`0.13-ol-7`, `0.13.0-ol-7-r0` (0.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/0.13.0-ol-7-r0/0.13/ol-7/Dockerfile)
+* [`0.13-debian-9`, `0.13.0-debian-9-r0`, `0.13`, `0.13.0`, `0.13.0-r0`, `latest` (0.13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/0.13.0-debian-9-r0/0.13/debian-9/Dockerfile)
+* [`0.13-rhel-7`, `0.0.0-rhel-7-r0` (0.13/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/0.0.0-rhel-7-r0/0.13/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jsonnet GitHub repo](https://github.com/bitnami/bitnami-docker-jsonnet).
 
