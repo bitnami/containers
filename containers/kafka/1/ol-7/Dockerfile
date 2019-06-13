@@ -1,25 +1,27 @@
-FROM bitnami/oraclelinux-extras:7-r366
+FROM bitnami/oraclelinux-extras-base:7-r316
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    HOME="/"
+    HOME="/" \
+    OS_ARCH="x86_64" \
+    OS_FLAVOUR="ol-7" \
+    OS_NAME="linux"
 
 # Install required system packages and dependencies
 RUN install_packages glibc libgcc
-RUN bitnami-pkg install java-1.8.212-0 --checksum 7d11dad71234819fb290bcadc2997bda088ba6b21f245d397c068de4cf3757db
-RUN bitnami-pkg unpack kafka-1.1.1-30 --checksum 31c3f9d7712eaceb152a53d483764eb5b5c2d75724744f7ba4bf0398b88df3de
+RUN . ./libcomponent.sh && component_unpack "java" "1.8.212-0" --checksum 7d11dad71234819fb290bcadc2997bda088ba6b21f245d397c068de4cf3757db
+RUN . ./libcomponent.sh && component_unpack "kafka" "1.1.1-30" --checksum 31c3f9d7712eaceb152a53d483764eb5b5c2d75724744f7ba4bf0398b88df3de
 
 COPY rootfs /
+RUN /postunpack.sh
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="1.1.1-ol-7-r306" \
+    BITNAMI_IMAGE_VERSION="1.1.1-ol-7-r307" \
     KAFKA_BROKER_PASSWORD="bitnami" \
     KAFKA_BROKER_USER="user" \
     KAFKA_CERTIFICATE_PASSWORD="" \
     KAFKA_CFG_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
-    KAFKA_CFG_BROKER_ID="-1" \
     KAFKA_CFG_LISTENERS="PLAINTEXT://:9092" \
-    KAFKA_CFG_LOG_DIRS="/opt/bitnami/kafka/data" \
     KAFKA_CFG_ZOOKEEPER_CONNECT="localhost:2181" \
     KAFKA_HEAP_OPTS="-Xmx1024m -Xms1024m" \
     KAFKA_INTER_BROKER_PASSWORD="bitnami" \
@@ -33,5 +35,5 @@ ENV ALLOW_PLAINTEXT_LISTENER="no" \
 EXPOSE 9092
 
 USER 1001
-ENTRYPOINT [ "/app-entrypoint.sh" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/run.sh" ]
