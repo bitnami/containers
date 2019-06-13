@@ -10,13 +10,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages glibc libgcc
 RUN . ./libcomponent.sh && component_unpack "java" "1.8.212-0" --checksum 7d11dad71234819fb290bcadc2997bda088ba6b21f245d397c068de4cf3757db
-RUN . ./libcomponent.sh && component_unpack "kafka" "2.2.1-3" --checksum ea21d75e7c8f15736b8c5e99696a2f9a8fea95054e800dd51870d8939ef7e99c
+RUN . ./libcomponent.sh && component_unpack "kafka" "2.2.1-4" --checksum 0e5d1caadb03fb2ce752b3c1376997ecb890e56b33393963aedd6eb8e6cd7e5d
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.2.1-ol-7-r15" \
+    BITNAMI_IMAGE_VERSION="2.2.1-ol-7-r16" \
     KAFKA_BROKER_PASSWORD="bitnami" \
     KAFKA_BROKER_USER="user" \
     KAFKA_CERTIFICATE_PASSWORD="" \
