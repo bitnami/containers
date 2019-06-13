@@ -62,7 +62,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`2-debian-9`, `2.2.1-debian-9-r16`, `2`, `2.2.1`, `2.2.1-r16`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.1-debian-9-r16/2/debian-9/Dockerfile)
 * [`2-rhel-7`, `2.2.0-rhel-7-r16` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-rhel-7-r16/2/rhel-7/Dockerfile)
 * [`1-ol-7`, `1.1.1-ol-7-r306` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r306/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.1.1-debian-9-r224`, `1`, `1.1.1`, `1.1.1-r224` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r224/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.1.1-debian-9-r225`, `1`, `1.1.1`, `1.1.1-r225` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r225/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -193,7 +193,8 @@ services:
 > **IMPORTANT**:
 >
 > 1. Please update the `YOUR_APPLICATION_IMAGE` placeholder in the above snippet with your application image
-> 2. In your application container, use the hostname `kafka` to connect to the Kafka server
+> 2. Configure Kafka and ZooKeeper persistence, and configure them either via environment variables or by [mounting configuration files](#full-configuration).
+> 3. In your application container, use the hostname `kafka` to connect to the Kafka server
 
 Launch the containers using:
 
@@ -202,7 +203,6 @@ $ docker-compose up -d
 ```
 
 # Configuration
-
 
 The configuration can easily be setup with the Bitnami Kafka Docker image using the following environment variables:
 
@@ -219,10 +219,10 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 Additionally, any environment variable beginning with `KAFKA_CFG_` will be mapped to its corresponding Kafka key. For example, use `KAFKA_CFG_BACKGROUND_THREADS` in order to set `background.threads`.
 
 ```bash
-docker run --name kafka -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 bitnami/kafka:latest
+docker run --name kafka -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 -e ALLOW_PLAINTEXT_LISTENER=yes bitnami/kafka:latest
 ```
 
-or using Docker Compose:
+Or using Docker Compose:
 
 ```yaml
 version: '2'
@@ -232,16 +232,19 @@ services:
     image: 'bitnami/zookeeper:latest'
     ports:
       - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
     volumes:
       - 'zookeeper_data:/bitnami/zookeeper'
   kafka:
-    image: 'bitnami/kafka:0'
+    image: 'bitnami/kafka:latest'
     ports:
       - '9092:9092'
     volumes:
       - 'kafka_data:/bitnami/kafka'
     environment:
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
 
 volumes:
   zookeeper_data:
@@ -273,12 +276,17 @@ If the JKS is password protected (recommended), you will need to provide it to g
 
 `KAFKA_CERTIFICATE_PASSWORD=myCertificatePassword`
 
-The following script can help you with the creation of the JKS and certificates. Use the same password for all them:
+The following script can help you with the creation of the JKS and certificates:
 
 https://raw.githubusercontent.com/confluentinc/confluent-platform-security-tools/master/kafka-generate-ssl.sh
 
+Keep in mind the following notes:
+
+* When prompted to enter a password, use the same one for all.
+* Set the Common Name or FQDN values to your Kafka container hostname, e.g. `kafka.example.com`. After entering this value, when prompted "What is your first and last name?", enter this value as well.
+
 The following docker-compose file is an example showing how to mount your JKS certificates protected by the password `certificatePassword123`.
-Additionally it is specifying the credentials for the broker, inter-broker and zookeeper users.
+Additionally it is specifying the Kafka container hostname and the credentials for the broker, inter-broker and zookeeper users.
 
 ```yaml
 version: '2'
@@ -294,6 +302,7 @@ services:
       - ZOO_SERVER_PASSWORDS=kafka_password
   kafka:
     image: 'bitnami/kafka:latest'
+    hostname: kafka.example.com
     ports:
       - '9092'
     environment:
@@ -328,7 +337,6 @@ You can provide your own credentials using this environment variables:
 
 - `KAFKA_BROKER_USER`: Kafka client user. Default: **user**
 - `KAFKA_BROKER_PASSWORD`: Kafka client user password. Default: **bitnami**
-
 
 ### Kafka ZooKeeper client configuration
 
@@ -395,7 +403,6 @@ A Kafka cluster can easily be setup with the Bitnami Kafka Docker image using th
 
  - `KAFKA_CFG_ZOOKEEPER_CONNECT`: Comma separated host:port pairs, each corresponding to a Zookeeper Server.
 
-
 Create a Docker network to enable visibility to each other via the docker container name
 
 ```bash
@@ -409,6 +416,7 @@ The first step is to create one Zookeeper instance.
 ```bash
 docker run --name zookeeper \
   --network app-tier \
+  -e ALLOW_ANONYMOUS_LOGIN=yes \
   -p 2181:2181 \
   bitnami/zookeeper:latest
 ```
@@ -421,6 +429,7 @@ The first step is to create one Kafka instance.
 docker run --name kafka1 \
   --network app-tier \
   -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
+  -e ALLOW_PLAINTEXT_LISTENER=yes \
   -p 9092:9092 \
   bitnami/kafka:latest
 ```
@@ -433,6 +442,7 @@ Next we start a new Kafka container.
 docker run --name kafka2 \
   --network app-tier \
   -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
+  -e ALLOW_PLAINTEXT_LISTENER=yes \
   -p 9092:9092 \
   bitnami/kafka:latest
 ```
@@ -445,6 +455,7 @@ Next we start another new Kafka container.
 docker run --name kafka3 \
   --network app-tier \
   -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
+  -e ALLOW_PLAINTEXT_LISTENER=yes \
   -p 9092:9092 \
   bitnami/kafka:latest
 ```
@@ -460,24 +471,29 @@ services:
     image: 'bitnami/zookeeper:latest'
     ports:
      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
   kafka1:
     image: 'bitnami/kafka:latest'
     ports:
       - '9092'
     environment:
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
   kafka2:
     image: 'bitnami/kafka:latest'
     ports:
       - '9092'
     environment:
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
   kafka3:
     image: 'bitnami/kafka:latest'
     ports:
       - '9092'
     environment:
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
 ```
 
 Then, you can create a replicated topic with:
@@ -493,7 +509,7 @@ Topic:mytopic   PartitionCount:3        ReplicationFactor:3     Configs:
         Topic: mytopic  Partition: 2    Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
 ```
 
-## Configuration
+## Full configuration
 The image looks for configuration in the `conf/` directory of `/opt/bitnami/kafka`.
 
 ```
@@ -535,12 +551,11 @@ After changing the configuration, restart your Kafka container for changes to ta
 docker restart kafka
 ```
 
-or using Docker Compose:
+Or using Docker Compose:
 
 ```bash
 docker-compose restart kafka
 ```
-
 
 # Logging
 
@@ -550,7 +565,7 @@ The Bitnami Kafka Docker image sends the container logs to the `stdout`. To view
 docker logs kafka
 ```
 
-or using Docker Compose:
+Or using Docker Compose:
 
 ```bash
 docker-compose logs kafka
@@ -570,7 +585,7 @@ To backup your data, configuration and logs, follow these simple steps:
 docker stop kafka
 ```
 
-or using Docker Compose:
+Or using Docker Compose:
 
 ```bash
 docker-compose stop kafka
@@ -585,7 +600,7 @@ docker run --rm -v /path/to/kafka-backups:/backups --volumes-from kafka busybox 
   cp -a /bitnami/kafka:latest /backups/latest
 ```
 
-or using Docker Compose:
+Or using Docker Compose:
 
 ```bash
 docker run --rm -v /path/to/kafka-backups:/backups --volumes-from `docker-compose ps -q kafka` busybox \
@@ -600,7 +615,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 docker run -v /path/to/kafka-backups/latest:/bitnami/kafka bitnami/kafka:latest
 ```
 
-or using Docker Compose:
+Or using Docker Compose:
 
 ```yaml
 version: '2'
@@ -639,7 +654,7 @@ Follow the steps on [creating a backup](#backing-up-your-container).
 docker rm -v kafka
 ```
 
-or using Docker Compose:
+Or using Docker Compose:
 
 
 ```bash
@@ -654,7 +669,7 @@ Re-create your container from the new image, [restoring your backup](#restoring-
 docker run --name kafka bitnami/kafka:latest
 ```
 
-or using Docker Compose:
+Or using Docker Compose:
 
 ```bash
 docker-compose up kafka
@@ -662,7 +677,20 @@ docker-compose up kafka
 
 # Notable Changes
 
-## 1.1.1-debian-9-r205, 2.2.0-debian-9-r40, 1.1.1-ol-r286, and 2.2.0-ol-7-r53
+## 1.1.1-debian-9-r224, 2.2.1-debian-9-r16, 1.1.1-ol-7-r306 and 2.2.1-ol-7-r14
+
+- The following environment variables were beingly wrongly translated into `KAFKA_CFG_` environment variables, and therefore they were being wrongly mapped into Kafka keys:
+
+  - `KAFKA_LOGS_DIRS` -> `KAFKA_CFG_LOG_DIRS`
+  - `KAFKA_PORT_NUMBER` -> `KAFKA_CFG_PORT`
+  - `KAFKA_ZOOKEEPER_CONNECT_TIMEOUT_MS` -> `KAFKA_CFG_ZOOKEEPER_CONNECTION_TIMEOUT_MS`
+
+- For consistency reasons with previous environment variables, the following `KAFKA_` to `KAFKA_CFG_` environment variable translations are now supported for mapping into Kafka keys:
+
+  - `KAFKA_LOG_DIRS` -> `KAFKA_CFG_LOG_DIRS`
+  - `KAFKA_ZOOKEEPER_CONNECTION_TIMEOUT_MS` -> `KAFKA_CFG_ZOOKEEPER_CONNECTION_TIMEOUT_MS`
+
+## 1.1.1-debian-9-r205, 2.2.0-debian-9-r40, 1.1.1-ol-7-r286, and 2.2.0-ol-7-r53
 
 - Configuration changes. Most environment variables now start with `KAFKA_CFG_`, as they are now mapped directly to Kafka keys. Variables changed:
    - `KAFKA_ADVERTISED_LISTENERS` -> `KAFKA_CFG_ADVERTISED_LISTENERS`
@@ -685,7 +713,7 @@ docker-compose up kafka
    - `KAFKA_NUM_PARTITIONS` -> `KAFKA_CFG_NUM_PARTITIONS`
    - `KAFKA_NUM_RECOVERY_THREADS_PER_DATA_DIR` -> `KAFKA_CFG_NUM_RECOVERY_THREADS_PER_DATA_DIR`
    - `KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR` -> `KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR`
-   - `KAFKA_PORT_NUMBER` -> `KAFKA_CFG_PORT`
+   - `KAFKA_PORT` -> `KAFKA_CFG_PORT`
    - `KAFKA_SEGMENT_BYTES` -> `KAFKA_CFG_SEGMENT_BYTES`
    - `KAFKA_SOCKET_RECEIVE_BUFFER_BYTES` -> `KAFKA_CFG_SOCKET_RECEIVE_BUFFER_BYTES`
    - `KAFKA_SOCKET_REQUEST_MAX_BYTES` -> `KAFKA_CFG_SOCKET_REQUEST_MAX_BYTES`
@@ -693,7 +721,7 @@ docker-compose up kafka
    - `KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM` -> `KAFKA_CFG_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM`
    - `KAFKA_TRANSACTION_STATE_LOG_MIN_ISR` -> `KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR`
    - `KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR` -> `KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR`
-   - `KAFKA_ZOOKEEPER_CONNECT_TIMEOUT_MS` -> `KAFKA_CFG_ZOOKEEPER_CONNECTION_TIMEOUT_MS`
+   - `KAFKA_ZOOKEEPER_CONNECT_TIMEOUT_MS` -> `KAFKA_CFG_ZOOKEEPER_CONNECT_TIMEOUT_MS`
    - `KAFKA_ZOOKEEPER_CONNECT` -> `KAFKA_CFG_ZOOKEEPER_CONNECT`
 
 ## 1.1.0-r41
