@@ -59,10 +59,10 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.2.1-ol-7-r16` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.1-ol-7-r16/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.2.1-debian-9-r18`, `2`, `2.2.1`, `2.2.1-r18`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.1-debian-9-r18/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.2.1-debian-9-r19`, `2`, `2.2.1`, `2.2.1-r19`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.1-debian-9-r19/2/debian-9/Dockerfile)
 * [`2-rhel-7`, `2.2.0-rhel-7-r16` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-rhel-7-r16/2/rhel-7/Dockerfile)
 * [`1-ol-7`, `1.1.1-ol-7-r308` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r308/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.1.1-debian-9-r227`, `1`, `1.1.1`, `1.1.1-r227` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r227/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.1.1-debian-9-r226`, `1`, `1.1.1`, `1.1.1-r226` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r226/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
