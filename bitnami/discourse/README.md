@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.2.6-ol-7-r3` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.2.6-ol-7-r3/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.2.6-debian-9-r2`, `2`, `2.2.6`, `2.2.6-r2`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.2.6-debian-9-r2/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.2.6-debian-9-r4`, `2`, `2.2.6`, `2.2.6-r4`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.2.6-debian-9-r4/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
@@ -376,6 +376,14 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
 
+```
+
+In order to verify your configuration works properly, you can test your configuration parameters from the container itself.
+
+```
+docker run -it bitnami/discourse:latest bash
+install_packages swaks
+swaks --to your_email@domain.com --from your_email@domain.com --server your.smtp.server.com --auth LOGIN --auth-user your_email@domain.com -tls
 ```
 
 See the [documentation on troubleshooting SMTP issues](https://docs.bitnami.com/general/how-to/troubleshoot-smtp-issues/) if there are problems.
