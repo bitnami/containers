@@ -158,9 +158,20 @@ $ docker-compose up -d
 
 # Configuration
 
+## Environment variables
+
+The Redis Sentinel instance can be customized by specifying environment variables on the first run. The following environment values are provided to customize Redis Sentinel:
+
+- `REDIS_MASTER_HOST`: Host of the Redis master to monitor. Default: **redis**.
+- `REDIS_MASTER_PORT_NUMBER`: Port of the Redis master to monitor. Default: **6379**.
+- `REDIS_MASTER_SET`: Name of the set of Redis instances to monitor. Default: **mymaster**.
+- `REDIS_MASTER_PASSWORD`: Password to authenticate with the master. No defaults.
+- `REDIS_SENTINEL_PORT_NUMBER`: Redis Sentinel port. Default: **26379**.
+- `REDIS_SENTINEL_QUORUM`: Number of Sentinels that need to agree about the fact the master is not reachable. Default: **2**.
+
 ## Configuration file
 
-The image looks for configurations in `/bitnami/redis-sentinel/conf/`. You can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/redis-persistence/redis/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
+The image looks for configurations in `/bitnami/redis-sentinel/conf/`. You can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/redis-persistence/redis-sentinel/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
 ### Step 1: Run the Redis Sentinel image
 
@@ -194,7 +205,7 @@ services:
 Edit the configuration on your host using your favorite editor.
 
 ```bash
-$ vi /path/to/redis-persistence/redis/conf/redis.conf
+$ vi /path/to/redis-persistence/redis-sentinel/conf/redis.conf
 ```
 
 ### Step 3: Restart Redis
