@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4-ol-7`, `4.9.0-1-ol-7-r10` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.9.0-1-ol-7-r10/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.9.0-1-debian-9-r11`, `4`, `4.9.0-1`, `4.9.0-1-r11`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.9.0-1-debian-9-r11/4/debian-9/Dockerfile)
+* [`4-debian-9`, `4.9.0-1-debian-9-r12`, `4`, `4.9.0-1`, `4.9.0-1-r12`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.9.0-1-debian-9-r12/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpmyadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phpmyadmin).
 
@@ -228,7 +228,13 @@ The phpMyAdmin instance can be customized by specifying environment variables on
 - `PHPMYADMIN_ALLOW_NO_PASSWORD`: Whether to allow logins without a password. Default: **true**
 - `DATABASE_HOST`: Database server host. Default: **mariadb**
 - `DATABASE_PORT_NUMBER`: Database server port. Default: **3306**
-- `WEBSERVER_REQUIRE`: Tests whether an authenticated user is authorized by an authorization provider. Default: **all granted**
+- `DATABASE_ENABLE_SSL`: Whether to enable SSL for the connection between phpMyAdmin and the MySQL server to secure the connection. Default: **no**
+- `DATABASE_SSL_KEY`: Path to the client key file when using SSL. Default: **no**
+- `DATABASE_SSL_CERT`: Path to the client certificate file when using SSL.
+- `DATABASE_SSL_CA`: Path to the CA file when using SSL.
+- `DATABASE_SSL_CA_PATH`: Directory containing trusted SSL CA certificates in PEM format.
+- `DATABASE_SSL_CIPHERS`: List of allowable ciphers for connections when using SSL.
+- `DATABASE_SSL_VERIFY`: Enable SSL certificate validation. Default: **yes**
 
 ### Specifying Environment variables using Docker Compose
 
