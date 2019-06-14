@@ -59,7 +59,7 @@ This is the recommended way to run PrestaShop. You can use the following docker 
 version: '2'
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
+    image: 'bitnami/mariadb:10.1'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_prestashop
@@ -108,7 +108,7 @@ If you want to run the application manually instead of using docker-compose, the
     -e MARIADB_DATABASE=bitnami_prestashop \
     --net prestashop-tier \
     --volume mariadb_data:/bitnami \
-    bitnami/mariadb:latest
+    bitnami/mariadb:10.1
   ```
 
   *Note:* You need to give the container a name in order to PrestaShop to resolve the host
@@ -149,7 +149,7 @@ version: '2'
 
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
+    image: 'bitnami/mariadb:10.1'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_prestashop
@@ -190,7 +190,7 @@ In this case you need to specify the directories to mount on the run command. Th
     -e MARIADB_DATABASE=bitnami_prestashop \
     --network prestashop-tier \
     --volume /path/to/mariadb-persistence:/bitnami \
-    bitnami/mariadb:latest
+    bitnami/mariadb:10.1
   ```
 
   *Note:* You need to give the container a name in order to PrestaShop to resolve the host
