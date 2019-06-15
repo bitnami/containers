@@ -33,7 +33,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`1-rhel-7`, `1.10.3-rhel-7-r0` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.3-rhel-7-r0/1/rhel-7/Dockerfile)
 * [`1-ol-7`, `1.10.3-ol-7-r51` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.3-ol-7-r51/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.10.3-debian-9-r42`, `1`, `1.10.3`, `1.10.3-r42`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.3-debian-9-r42/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.10.3-debian-9-r43`, `1`, `1.10.3`, `1.10.3-r43`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.3-debian-9-r43/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-worker).
 
@@ -48,77 +48,10 @@ You will need an [Airflow Webserver](https://www.github.com/bitnami/bitnami-dock
 
 ## Using Docker Compose
 
-The recommended way to run Airflow Worker is using Docker Compose using the following `docker-compose.yml` template:
-
-```yaml
-version: '2'
-services:
-  postgresql:
-    image: 'bitnami/postgresql:latest'
-    volumes:
-      - 'postgresql_data:/bitnami/postgresql'
-    environment:
-      - POSTGRESQL_DATABASE=bitnami_airflow
-      - POSTGRESQL_USERNAME=bn_airflow
-      - POSTGRESQL_PASSWORD=bitnami1
-  redis:
-    image: 'bitnami/redis:latest'
-    volumes:
-      - 'redis_data:/bitnami'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-  airflow-worker:
-    image: bitnami/airflow-worker:latest
-    environment:
-      - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
-      - AIRFLOW_EXECUTOR=CeleryExecutor
-      - AIRFLOW_DATABASE_NAME=bitnami_airflow
-      - AIRFLOW_DATABASE_USERNAME=bn_airflow
-      - AIRFLOW_DATABASE_PASSWORD=bitnami1
-    volumes:
-      - airflow_worker_data:/bitnami
-  airflow-scheduler:
-    image: bitnami/airflow-scheduler:latest
-    environment:
-      - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
-      - AIRFLOW_EXECUTOR=CeleryExecutor
-      - AIRFLOW_DATABASE_NAME=bitnami_airflow
-      - AIRFLOW_DATABASE_USERNAME=bn_airflow
-      - AIRFLOW_DATABASE_PASSWORD=bitnami1
-      - AIRFLOW_LOAD_EXAMPLES=yes
-    volumes:
-      - airflow_scheduler_data:/bitnami
-  airflow:
-    image: bitnami/airflow:latest
-    environment:
-      - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
-      - AIRFLOW_EXECUTOR=CeleryExecutor
-      - AIRFLOW_DATABASE_NAME=bitnami_airflow
-      - AIRFLOW_DATABASE_USERNAME=bn_airflow
-      - AIRFLOW_DATABASE_PASSWORD=bitnami1
-      - AIRFLOW_PASSWORD=bitnami123
-      - AIRFLOW_USERNAME=user
-      - AIRFLOW_EMAIL=user@example.com
-    ports:
-      - '8080:8080'
-    volumes:
-      - airflow_data:/bitnami
-volumes:
-  airflow_scheduler_data:
-    driver: local
-  airflow_worker_data:
-    driver: local
-  airflow_data:
-    driver: local
-  postgresql_data:
-    driver: local
-  redis_data:
-    driver: local
-```
-
-Launch the containers using:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-airflow-worker/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
 ```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-airflow-worker/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
