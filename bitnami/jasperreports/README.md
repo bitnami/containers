@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-ol-7`, `7.2.0-ol-7-r22` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.2.0-ol-7-r22/7/ol-7/Dockerfile)
+* [`7-ol-7`, `7.2.0-ol-7-r23` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.2.0-ol-7-r23/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.2.0-debian-9-r23`, `7`, `7.2.0`, `7.2.0-r23`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.2.0-debian-9-r23/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jasperreports GitHub repo](https://github.com/bitnami/bitnami-docker-jasperreports).
@@ -52,41 +52,11 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 ## Run the application using Docker Compose
 
-This is the recommended way to run JasperReports Server. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-jasperreports/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - MARIADB_USER=bn_jasperreports
-      - MARIADB_DATABASE=bitnami_jasperreports
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - mariadb_data:/bitnami
-  jasperreports:
-    image: bitnami/jasperreports:latest
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - JASPERREPORTS_DATABASE_USER=bn_jasperreports
-      - JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports
-      - ALLOW_EMPTY_PASSWORD=yes
-    depends_on:
-      - mariadb
-    ports:
-      - '80:8080'
-      - '443:8443'
-    volumes:
-      - jasperreports_data:/bitnami
-
-volumes:
-  mariadb_data:
-    driver: local
-  jasperreports_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-jasperreports/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 Then you can access your application at http://your-ip/. Enter bitnami default username and password `user/ bitnami`
@@ -148,28 +118,14 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the `docker-compose.yml` template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-jasperreports/blob/master/docker-compose.yml) file present in this repository:
+
 ```yaml
-version: '2'
 services:
   mariadb:
-    image: bitnami/mariadb:latest
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_jasperreports
-      - MARIADB_DATABASE=bitnami_jasperreports
     volumes:
       - /path/to/mariadb-persistence:/bitnami
   jasperreports:
-    image: bitnami/jasperreports:latest
-    environment:
-      - JASPERREPORTS_DATABASE_USER=bn_jasperreports
-      - JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports
-      - ALLOW_EMPTY_PASSWORD=yes
-    depends_on:
-      - mariadb
-    ports:
-      - 80:8080
     volumes:
       - /path/to/jasperreports-persistence:/bitnami
 ```
@@ -277,13 +233,10 @@ When you start the jasperreports image, you can adjust the configuration of the 
 
 If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For Docker Compose, add the variable name and value under the application section:
 
   ```yaml
   jasperreports:
-    image: bitnami/jasperreports:latest
-    ports:
-      - 80:8080
     environment:
       - JASPERREPORTS_PASSWORD=my_password
   ```
@@ -307,23 +260,21 @@ To configure JasperReports Server to send email using SMTP you can set the follo
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose:
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-jasperreports/blob/master/docker-compose.yml) file present in this repository:
+
 
 ```yaml
-  jasperreports:
-    image: bitnami/jasperreports:latest
-    ports:
-      - 80:8080
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - JASPERREPORTS_DATABASE_USER=bn_jasperreports
-      - JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports
-      - SMTP_HOST=smtp.gmail.com
-      - SMTP_PORT=587
-      - SMTP_EMAIL=your_email@gmail.com
-      - SMTP_USER=your_email@gmail.com
-      - SMTP_PASSWORD=your_password
+jasperreports:
+  environment:
+    - MARIADB_HOST=mariadb
+    - MARIADB_PORT_NUMBER=3306
+    - JASPERREPORTS_DATABASE_USER=bn_jasperreports
+    - JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports
+    - SMTP_HOST=smtp.gmail.com
+    - SMTP_PORT=587
+    - SMTP_EMAIL=your_email@gmail.com
+    - SMTP_USER=your_email@gmail.com
+    - SMTP_PASSWORD=your_password
 ```
 
  * For manual execution:
