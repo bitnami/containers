@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`7-ol-7`, `7.1.1-ol-7-r20` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.1.1-ol-7-r20/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.1.1-debian-9-r21`, `7`, `7.1.1`, `7.1.1-r21`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.1.1-debian-9-r21/7/debian-9/Dockerfile)
 * [`6-ol-7`, `6.8.0-ol-7-r28` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.0-ol-7-r28/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.8.0-debian-9-r28`, `6`, `6.8.0`, `6.8.0-r28` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.0-debian-9-r28/6/debian-9/Dockerfile)
+* [`6-debian-9`, `6.8.0-debian-9-r29`, `6`, `6.8.0`, `6.8.0-r29` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.0-debian-9-r29/6/debian-9/Dockerfile)
 * [`7-rhel-7`, `0.0.0-rhel-7-r0` (7/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/0.0.0-rhel-7-r0/7/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
@@ -85,16 +85,12 @@ $ docker run \
     bitnami/elasticsearch:latest
 ```
 
-or using Docker Compose:
+or by making a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
-services:
-  mariadb:
-    image: bitnami/elasticsearch:latest
-    volumes:
-      - /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data
+mariadb:
+  volumes:
+    - /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data
 ```
 
 # Connecting to other containers
@@ -173,11 +169,10 @@ $ docker-compose up -d
 
 When you start the elasticsearch image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For Docker Compose, add the variable name and value under the application section:
 
 ```yaml
 elasticsearch:
-  image: bitnami/elasticsearch:latest
   environment:
     - ELASTICSEARCH_PORT_NUMBER=9201
 ```
@@ -294,19 +289,13 @@ $ docker run -d --name elasticsearch \
     bitnami/elasticsearch:latest
 ```
 
-or using Docker Compose:
+or by changing the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
-services:
-  elasticsearch:
-    image: 'bitnami/elasticsearch:latest'
-    ports:
-      - '9201:9201'
-    volumes:
-      - /path/to/elasticsearch.yml:/opt/bitnami/elasticsearch/config/elasticsearch.yml
-      - /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data
+elasticsearch:
+  volumes:
+    - /path/to/elasticsearch.yml:/opt/bitnami/elasticsearch/config/elasticsearch.yml
+    - /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data
 ```
 
 # Logging
