@@ -39,7 +39,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.20180422.201901061035-ol-7-r144` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201901061035-ol-7-r144/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.20180422.201901061035-ol-7-r145` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201901061035-ol-7-r145/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.20180422.201901061035-debian-9-r130`, `0`, `0.20180422.201901061035`, `0.20180422.201901061035-r130`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201901061035-debian-9-r130/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dokuwiki GitHub repo](https://github.com/bitnami/bitnami-docker-dokuwiki).
@@ -53,21 +53,11 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run Dokuwiki. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-services:
-  dokuwiki:
-    image: 'bitnami/dokuwiki:latest'
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - 'dokuwiki_data:/bitnami'
-volumes:
-  dokuwiki_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-dokuwiki/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ### Run the application manually
@@ -100,19 +90,12 @@ To avoid inadvertent removal of this volume you can [mount host directories as d
 
 ### Mount persistent folders in the host using docker-compose
 
-This requires a sightly modification from the template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
-services:
-  dokuwiki:
-    image: 'bitnami/dokuwiki:latest'
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - '/path/to/dokuwiki-persistence:/bitnami'
+dokuwiki:
+  volumes:
+    - '/path/to/dokuwiki-persistence:/bitnami'
 ```
 
 ### Mount persistent folders manually
