@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6-ol-7`, `6.2.2-ol-7-r9` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.2.2-ol-7-r9/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.2.2-debian-9-r9`, `6`, `6.2.2`, `6.2.2-r9`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.2.2-debian-9-r9/6/debian-9/Dockerfile)
+* [`6-debian-9`, `6.2.2-debian-9-r10`, `6`, `6.2.2`, `6.2.2-r10`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.2.2-debian-9-r10/6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -120,34 +120,24 @@ docker run --name grafana-node -v /path/to/grafana.ini:/opt/bitnami/grafana/conf
 
 After that, your configuration will be taken into account in the server's behaviour.
 
-Using Docker Compose:
+You can also do this by changing the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-grafana/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
-services:
-  grafana:
-    image: bitnami/grafana:latest
-    volumes:
-      - /path/to/grafana.ini:/opt/bitnami/grafana/conf/grafana.ini
+grafana:
+  volumes:
+    - /path/to/grafana.ini:/opt/bitnami/grafana/conf/grafana.ini
 ```
 
 ## Install plugins at initialization
 
 When you start the Grafana image, you can specify a comma, semi-colon or space separated list of plugins to install by setting the env. variable `GF_INSTALL_PLUGINS`.
 
- * For docker-compose add the variable name and value under the application section:
+ * For Docker Compose, add the variable name and value under the application section:
 
 ```yaml
-version: '2'
-
-services:
-  grafana:
-    image: bitnami/grafana:latest
-    environment:
-      - GF_INSTALL_PLUGINS=grafana-kubernetes-app,grafana-example-app
-    ports:
-      - '3000:3000'
+grafana:
+  environment:
+    - GF_INSTALL_PLUGINS=grafana-kubernetes-app,grafana-example-app
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -160,7 +150,7 @@ $ docker run -d --name grafana -p 3000:3000 \
 
 # Logging
 
-The Bitnami grafana Docker image sends the container logs to the `stdout`. To view the logs:
+The Bitnami Grafana Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
 $ docker logs grafana
