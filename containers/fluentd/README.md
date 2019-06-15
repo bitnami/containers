@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.5.2-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.5.2-ol-7-r0/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.5.2-debian-9-r0`, `1`, `1.5.2`, `1.5.2-r0`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.5.2-debian-9-r0/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.5.2-debian-9-r1`, `1`, `1.5.2`, `1.5.2-r1`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.5.2-debian-9-r1/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
 
@@ -98,13 +98,13 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 # Configuration
 
-To create endpoint that collectc logs on your host just run:
+To create an endpoint that collects logs on your host just run:
 
 ```
 docker run -d -p 24224:24224 -p 24224:24224/udp -v /data:/opt/bitnami/fluentd/log fluentd
 ```
 
-Default configurations are to:
+Default configurations are:
 
  - configuration file at `/opt/bitnami/fluentd/conf/fluentd.conf`
  - listen port `24224` for Fluentd forward protocol
@@ -117,19 +117,12 @@ You can overwrite the default configuration file by mounting your own configurat
 docker run --name fluentd -v /path/to/fluentd.conf:/opt/bitnami/fluentd/conf/fluentd.conf bitnami/fluentd:latest
 ```
 
-Using Docker Compose:
+You can also do this by changing the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-fluentd/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
-services:
-  fluentd:
-    image: bitnami/fluentd:latest
-    ports:
-      - '24224:24224'
-      - '5140:5140'
-    volumes:
-      - /path/to/fluentd.conf:/opt/bitnami/fluentd/conf/fluentd.conf
+fluentd:
+  volumes:
+    - /path/to/fluentd.conf:/opt/bitnami/fluentd/conf/fluentd.conf
 ```
 
 You can also extend the default configuration by importing your custom configuration with the "@include" directive. It is a simple as creating a directory with you custom config files and mount it on the directory `/opt/bitnami/fluentd/conf/conf.d`:
@@ -138,19 +131,12 @@ You can also extend the default configuration by importing your custom configura
 docker run --name fluentd -v /path/to/custom-conf-directory:/opt/bitnami/fluentd/conf/conf.d bitnami/fluentd:latest
 ```
 
-Using Docker Compose:
+You can also do this by changing the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-fluentd/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
-services:
-  fluentd:
-    image: bitnami/fluentd:latest
-    ports:
-      - '24224:24224'
-      - '5140:5140'
-    volumes:
-      - /path/to/custom-conf-directory:/opt/bitnami/fluentd/conf/conf.d
+fluentd:
+  volumes:
+    - /path/to/custom-conf-directory:/opt/bitnami/fluentd/conf/conf.d
 ```
 
 Find more information about this feature, consult [official documentation](https://docs.fluentd.org/v0.12/articles/config-file)
