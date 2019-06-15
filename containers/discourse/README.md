@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.2.6-ol-7-r4` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.2.6-ol-7-r4/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.2.6-debian-9-r3`, `2`, `2.2.6`, `2.2.6-r3`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.2.6-debian-9-r3/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.2.6-debian-9-r5`, `2`, `2.2.6`, `2.2.6-r5`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.2.6-debian-9-r5/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
@@ -62,57 +62,10 @@ Running Discourse with a database server is the recommended way. You can either 
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run Discourse. You can use the following docker compose template:
-
-> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
-> 
-> discourse:
->  image: 'your-registry/discourse:your-version'
-
-```yaml
-version: '2'
-
-services:
-  postgresql:
-    image: 'bitnami/postgresql:latest'
-    volumes:
-      - 'postgresql_data:/bitnami/postgresql'
-  redis:
-    image: 'bitnami/redis:4.0'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - 'redis_data:/bitnami'
-  discourse:
-    image: 'bitnami/discourse:latest'
-    ports:
-      - '80:3000'
-    volumes:
-      - 'discourse_data:/bitnami'
-    depends_on:
-      - postgresql
-      - redis
-  sidekiq:
-    image: 'bitnami/discourse:latest'
-    depends_on:
-      - discourse
-    volumes:
-      - 'sidekiq_data:/bitnami'
-    command: 'nami start --foreground discourse-sidekiq'
-volumes:
-  postgresql_data:
-    driver: local
-  redis_data:
-    driver: local
-  discourse_data:
-    driver: local
-  sidekiq_data:
-    driver: local
-```
-
-Launch the containers using:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-discourse/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
 ```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-discourse/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -169,38 +122,22 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount persistent folders in the host using docker-compose
 
-This requires a sight modification from the template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-discourse/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   postgresql:
-    image: 'bitnami/postgresql:latest'
     volumes:
       - '/path/to/your/local/postgresql_data:/bitnami/postgresql'
   redis:
-    image: 'bitnami/redis:4.0'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '/path/to/your/local/redis_data:/bitnami'
   discourse:
-    image: 'bitnami/discourse:latest'
-    ports:
-      - '80:3000'
     volumes:
       - '/path/to/discourse-persistence:/bitnami'
-    depends_on:
-      - postgresql
-      - redis
   sidekiq:
-    image: 'bitnami/discourse:latest'
-    depends_on:
-      - discourse
     volumes:
       - '/path/to/sidekiq-persistence:/bitnami'
-    command: 'nami start --foreground discourse-sidekiq'
 ```
 
 ### Mount persistent folders manually
@@ -349,33 +286,22 @@ To configure Discourse to send email using SMTP you can set the following enviro
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose (application part):
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-discourse/blob/master/docker-compose.yml) file present in this repository:
+
 
 ```yaml
   discourse:
-    image: 'bitnami/discourse:latest'
-    ports:
-      - '80:3000'
     environment:
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
-    volumes:
-      - 'discourse_data:/bitnami'
   sidekiq:
-    image: 'bitnami/discourse-sidekiq:latest'
-    depends_on:
-      - discourse
-    volumes:
-      - 'sidekiq_data:/bitnami'
-    command: 'nami start --foreground discourse-sidekiq'
     environment:
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
-
 ```
 
 In order to verify your configuration works properly, you can test your configuration parameters from the container itself.
