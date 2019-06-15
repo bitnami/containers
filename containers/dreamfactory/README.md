@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.14.2-ol-7-r9` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.2-ol-7-r9/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.14.2-debian-9-r9`, `2`, `2.14.2`, `2.14.2-r9`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.2-debian-9-r9/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.14.2-debian-9-r10`, `2`, `2.14.2`, `2.14.2-r10`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.2-debian-9-r10/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
@@ -61,54 +61,10 @@ DreamFactory requires access to a MySQL database or MariaDB database to store in
 
 ## Using Docker Compose
 
-The recommended way to run DreamFactory is using Docker Compose using the following `docker-compose.yml` template:
-
-```yaml
-version: '2'
-
-services:
-  mariadb:
-    image: bitnami/mariadb:latest
-    volumes:
-      - mariadb_data:/bitnami
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-  mongodb:
-    image: 'bitnami/mongodb:latest'
-    volumes:
-      - 'mongodb_data:/bitnami'
-  redis:
-    image: 'bitnami/redis:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - 'redis_data:/bitnami'
-  dreamfactory:
-    image: bitnami/dreamfactory:latest
-    depends_on:
-      - mariadb
-      - mongodb
-      - redis
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - dreamfactory_data:/bitnami
-
-volumes:
-  mariadb_data:
-    driver: local
-  mongodb_data:
-    driver: local
-  redis_data:
-    driver: local
-  dreamfactory_data:
-    driver: local
-```
-
-Launch the containers using:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
 ```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-dreamfactory/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -176,37 +132,19 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-The following `docker-compose.yml` template demonstrates the use of host directories as data volumes.
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: bitnami/mariadb:latest
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - /path/to/mariadb-persistence:/bitnami
   mongodb:
-    image: 'bitnami/mongodb:latest'
-    volumes:
       - '/path/to/mongodb-persistence:/bitnami'
   redis:
-    image: 'bitnami/redis:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '/path/to/redis-persistence:/bitnami'
   dreamfactory:
-    image: bitnami/dreamfactory:latest
-    depends_on:
-      - mariadb
-      - mongodb
-      - redis
-    ports:
-      - '80:80'
-      - '443:443'
     volumes:
       - /path/to/dreamfactory-persistence:/bitnami
 ```
@@ -316,53 +254,16 @@ The DreamFactory instance can be customized by specifying environment variables 
 
 ### Specifying Environment variables using Docker Compose
 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/master/docker-compose.yml) file present in this repository:
+
 ```yaml
-version: '2'
-
-services:
-  mariadb:
-    image: bitnami/mariadb:latest
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - mariadb_data:/bitnami
-  mongodb:
-    image: bitnami/mongodb:latest
-    volumes:
-      - mongodb_data:/bitnami
-  redis:
-    image: bitnami/redis:latest
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - redis_data:/bitnami
-  dreamfactory:
-    image: bitnami/dreamfactory:latest
-    depends_on:
-      - mariadb
-      - mongodb
-      - redis
-    ports:
-      - '80:80'
-      - '443:443'
-    environment:
-      - SMTP_HOST=smtp.gmail.com
-      - SMTP_PORT=587
-      - SMTP_USER=your_email@gmail.com
-      - SMTP_PASSWORD=your_password
-      - SMTP_PROTOCOL=tls
-    volumes:
-      - dreamfactory_data:/bitnami
-
-volumes:
-  mariadb_data:
-    driver: local
-  mongodb_data:
-    driver: local
-  redis_data:
-    driver: local
-  dreamfactory_data:
-    driver: local
+dreamfactory:
+  environment:
+    - SMTP_HOST=smtp.gmail.com
+    - SMTP_PORT=587
+    - SMTP_USER=your_email@gmail.com
+    - SMTP_PASSWORD=your_password
+    - SMTP_PROTOCOL=tls
 ```
 
 ### Specifying environment variables on the Docker command line
