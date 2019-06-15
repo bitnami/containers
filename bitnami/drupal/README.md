@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8-ol-7`, `8.7.3-ol-7-r9` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.7.3-ol-7-r9/8/ol-7/Dockerfile)
-* [`8-debian-9`, `8.7.3-debian-9-r10`, `8`, `8.7.3`, `8.7.3-r10`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.7.3-debian-9-r10/8/debian-9/Dockerfile)
+* [`8-debian-9`, `8.7.3-debian-9-r11`, `8`, `8.7.3`, `8.7.3-r11`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.7.3-debian-9-r11/8/debian-9/Dockerfile)
 * [`8-rhel-7`, `8.6.14-rhel-7-r6` (8/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.14-rhel-7-r6/8/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
@@ -57,40 +57,11 @@ Running Drupal with a database server is the recommended way. You can either use
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run Drupal. You can use the following `docker-compose.yml` template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-drupal/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_drupal
-      - MARIADB_DATABASE=bitnami_drupal
-    volumes:
-      - 'mariadb_data:/bitnami'
-  drupal:
-    image: 'bitnami/drupal:8'
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - DRUPAL_DATABASE_USER=bn_drupal
-      - DRUPAL_DATABASE_NAME=bitnami_drupal
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - 'drupal_data:/bitnami'
-    depends_on:
-      - mariadb
-volumes:
-  mariadb_data:
-    driver: local
-  drupal_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-drupal/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ### Run the application manually
@@ -143,31 +114,13 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the `docker-compose.yml` template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-drupal/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
-services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_drupal
-      - MARIADB_DATABASE=bitnami_drupal
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
   drupal:
-    image: 'bitnami/drupal:latest'
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
-    environment:
-      - DRUPAL_DATABASE_USER=bn_drupal
-      - DRUPAL_DATABASE_NAME=bitnami_drupal
-      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '/path/to/drupal-persistence:/bitnami'
 ```
@@ -245,16 +198,12 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the drupal image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+When you start the Drupal image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For Docker Compose, add the variable name and value under the application section:
 
 ```yaml
 drupal:
-  image: bitnami/drupal:latest
-  ports:
-    - 80:80
-    - 443:443
   environment:
     - DRUPAL_PASSWORD=my_password
 ```
