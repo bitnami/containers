@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.7-ol-7`, `1.7.5-2-ol-7-r34` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.5-2-ol-7-r34/1.7/ol-7/Dockerfile)
+* [`1.7-ol-7`, `1.7.5-2-ol-7-r35` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.5-2-ol-7-r35/1.7/ol-7/Dockerfile)
 * [`1.7-debian-9`, `1.7.5-2-debian-9-r28`, `1.7`, `1.7.5-2`, `1.7.5-2-r28`, `latest` (1.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.5-2-debian-9-r28/1.7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
@@ -400,7 +400,7 @@ RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt
 
 ## Modify the ports used by Apache by default
 # It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181 
+ENV APACHE_HTTP_PORT_NUMBER=8181
 ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
