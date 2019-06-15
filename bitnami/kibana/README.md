@@ -52,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`7-ol-7`, `7.1.1-ol-7-r18` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.1.1-ol-7-r18/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.1.1-debian-9-r17`, `7`, `7.1.1`, `7.1.1-r17`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.1.1-debian-9-r17/7/debian-9/Dockerfile)
 * [`6-ol-7`, `6.8.0-ol-7-r27` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.8.0-ol-7-r27/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.8.0-debian-9-r26`, `6`, `6.8.0`, `6.8.0-r26` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.8.0-debian-9-r26/6/debian-9/Dockerfile)
+* [`6-debian-9`, `6.8.0-debian-9-r27`, `6`, `6.8.0`, `6.8.0-r27` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.8.0-debian-9-r27/6/debian-9/Dockerfile)
 * [`6-rhel-7`, `6.7.2-rhel-7-r0` (6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.7.2-rhel-7-r0/6/rhel-7/Dockerfile)
 * [`7-rhel-7`, `0.0.0-rhel-7-r0` (7/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/0.0.0-rhel-7-r0/7/rhel-7/Dockerfile)
 
@@ -82,31 +82,11 @@ $ docker build -t bitnami/kibana:latest https://github.com/bitnami/bitnami-docke
 
 ## Run the application using Docker Compose
 
-This is the recommended way to run Kibana. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kibana/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-
-services:
-  kibana:
-    image: 'bitnami/kibana:latest'
-    ports:
-      - 5601:5601
-    environment:
-      - KIBANA_ELASTICSEARCH_URL=elasticsearch
-    volumes:
-      - 'kibana_data:/bitnami'
-  elasticsearch:
-    image: 'bitnami/elasticsearch:latest'
-    ports:
-      - 9200:9200
-    volumes:
-      - 'elasticsearch_data:/bitnami'
-volumes:
-  kibana_data:
-    driver: local
-  elasticsearch_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kibana/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Run the application manually
@@ -149,11 +129,10 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 $ docker run -v /path/to/kibana-persistence:/bitnami bitnami/kibana:latest
 ```
 
-or using Docker Compose:
+or modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kibana/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 kibana:
-  image: bitnami/kibana:latest
   volumes:
     - /path/to/kibana-persistence:/bitnami
 ```
@@ -242,11 +221,10 @@ Run the Kibana image, mounting a directory from your host.
 $ docker run --name kibana -v /path/to/kibana-persistence:/bitnami bitnami/kibana:latest
 ```
 
-or using Docker Compose:
+or modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kibana/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 kibana:
-  image: bitnami/kibana:latest
   volumes:
     - /path/to/kibana-persistence:/bitnami
 ```
