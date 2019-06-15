@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.1.3-ol-7-r1` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.1.3-ol-7-r1/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.1.3-debian-9-r0`, `1`, `1.1.3`, `1.1.3-r0`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.1.3-debian-9-r0/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.1.3-debian-9-r2`, `1`, `1.1.3`, `1.1.3-r2`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.1.3-debian-9-r2/1/debian-9/Dockerfile)
 * [`1-rhel-7`, `1.0.6-rhel-7-r20` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.0.6-rhel-7-r20/1/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluent-bit GitHub repo](https://github.com/bitnami/bitnami-docker-fluent-bit).
@@ -96,9 +96,9 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 $ docker run --name fluent-bit-node1 --network fluent-bit-network bitnami/fluent-bit:latest
 ```
 
-### Step 3: Run another containers
+### Step 3: Run another container
 
-We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
+We can launch another container using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
 ## Using Docker Compose
 
