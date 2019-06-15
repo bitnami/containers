@@ -9,24 +9,13 @@ thousands of companies. Kafka requires a connection to a Zookeeper service.
 
 # TL;DR;
 
-## Docker Compose
+## Run the application using Docker Compose
 
-```yaml
-version: '2'
-services:
-  zookeeper:
-    image: 'bitnami/zookeeper:latest'
-    ports:
-      - '2181:2181'
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
-  kafka:
-    image: 'bitnami/kafka:latest'
-    ports:
-      - '9092:9092'
-    environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-      - ALLOW_PLAINTEXT_LISTENER=yes
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kafka/blob/master/docker-compose.yml) file. Run the application using it as shown below:
+
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kafka/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 # Why use Bitnami Images?
@@ -58,11 +47,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.2.1-ol-7-r16` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.1-ol-7-r16/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.2.1-ol-7-r18` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.1-ol-7-r18/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.2.1-debian-9-r19`, `2`, `2.2.1`, `2.2.1-r19`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.1-debian-9-r19/2/debian-9/Dockerfile)
 * [`2-rhel-7`, `2.2.0-rhel-7-r16` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.2.0-rhel-7-r16/2/rhel-7/Dockerfile)
-* [`1-ol-7`, `1.1.1-ol-7-r308` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r308/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.1.1-debian-9-r226`, `1`, `1.1.1`, `1.1.1-r226` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r226/1/debian-9/Dockerfile)
+* [`1-ol-7`, `1.1.1-ol-7-r309` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r309/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.1.1-debian-9-r227`, `1`, `1.1.1`, `1.1.1-r227` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r227/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -100,20 +89,12 @@ The image exposes a volume at `/bitnami/kafka` for the Kafka data. For persisten
 
 Using Docker Compose:
 
-```yaml
-version: '2'
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kafka/blob/master/docker-compose.yml) file present in this repository:
 
-services:
-  zookeeper:
-    image: 'bitnami/zookeeper:latest'
-    ports:
-      - '2181:2181'
-  kafka:
-    image: 'bitnami/kafka:latest'
-    ports:
-      - '9092:9092'
-    volumes:
-      - /path/to/kafka-persistence:/bitnami/kafka
+```yaml
+kafka:
+  volumes:
+    - /path/to/kafka-persistence:/bitnami/kafka
 ```
 
 # Connecting to other containers
@@ -222,35 +203,12 @@ Additionally, any environment variable beginning with `KAFKA_CFG_` will be mappe
 docker run --name kafka -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 -e ALLOW_PLAINTEXT_LISTENER=yes bitnami/kafka:latest
 ```
 
-Or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kafka/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
-services:
-  zookeeper:
-    image: 'bitnami/zookeeper:latest'
-    ports:
-      - '2181:2181'
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
-    volumes:
-      - 'zookeeper_data:/bitnami/zookeeper'
-  kafka:
-    image: 'bitnami/kafka:latest'
-    ports:
-      - '9092:9092'
-    volumes:
-      - 'kafka_data:/bitnami/kafka'
-    environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-      - ALLOW_PLAINTEXT_LISTENER=yes
-
-volumes:
-  zookeeper_data:
-    driver: local
-  kafka_data:
-    driver: local
+kafka:
+  environment:
+    - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
 ```
 
 ## Security
@@ -521,18 +479,12 @@ After that, your changes will be taken into account in the server's behaviour.
 
 Run the Kafka image, mounting a directory from your host.
 
-Using Docker Compose:
+Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kafka/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
-services:
-  kafka:
-    image: 'bitnami/kafka:latest'
-    ports:
-      - '9092:9092'
-    volumes:
-      - /path/to/server.properties:/opt/bitnami/kafka/conf/server.properties
+kafka:
+  volumes:
+    - /path/to/server.properties:/opt/bitnami/kafka/conf/server.properties
 ```
 
 ### Step 2: Edit the configuration
@@ -615,18 +567,12 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 docker run -v /path/to/kafka-backups/latest:/bitnami/kafka bitnami/kafka:latest
 ```
 
-Or using Docker Compose:
+You can also modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kafka/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
-services:
-  kafka:
-    image: 'bitnami/kafka:latest'
-    ports:
-      - '9092:9092'
-    volumes:
-      - /path/to/kafka-backups/latest:/bitnami/kafka
+kafka:
+  volumes:
+    - /path/to/kafka-backups/latest:/bitnami/kafka
 ```
 
 ## Upgrade this image
