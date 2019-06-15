@@ -46,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.3.13-ol-7-r46` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.13-ol-7-r46/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.3.13-ol-7-r47` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.13-ol-7-r47/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.3.13-debian-9-r34`, `3`, `3.3.13`, `3.3.13-r34`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.13-debian-9-r34/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/etcd GitHub repo](https://github.com/bitnami/bitnami-docker-etcd).
@@ -167,22 +167,12 @@ docker run --name etcd -v /path/to/etcd.conf.yml:/opt/bitnami/etcd/conf/etcd.con
 
 After that, your configuration will be taken into account in the server's behaviour.
 
-Using Docker Compose:
+You can also do this by changing the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-etcd/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
-services:
-  etcd:
-    image: bitnami/etcd:latest
-    environment:
-      - ALLOW_NONE_AUTHENTICATION=yes
-      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
-    ports:
-      - '2379:2379'
-      - '2380:2380'
-    volumes:
-      - /path/to/etcd.conf.yml:/opt/bitnami/etcd/conf/etcd.conf.yml
+etcd:
+  volumes:
+    - /path/to/etcd.conf.yml:/opt/bitnami/etcd/conf/etcd.conf.yml
 ```
 
 You can find a sample configuration file on this [link](https://github.com/coreos/etcd/blob/master/etcd.conf.yml.sample)
