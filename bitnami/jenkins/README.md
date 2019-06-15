@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.164.3-ol-7-r36` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.164.3-ol-7-r36/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.164.3-ol-7-r38` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.164.3-ol-7-r38/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.164.3-debian-9-r34`, `2`, `2.164.3`, `2.164.3-r34`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.164.3-debian-9-r34/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
@@ -51,26 +51,10 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 
 ## Using Docker Compose
 
-The recommended way to run Jenkins is using Docker Compose using the following `docker-compose.yml` template:
-
-```yaml
-version: '2'
-services:
-  jenkins:
-    image: 'bitnami/jenkins:latest'
-    ports:
-      - '80:8080'
-      - '443:8443'
-    volumes:
-      - 'jenkins_data:/bitnami'
-volumes:
-  jenkins_data:
-    driver: local
-```
-
-Launch the containers using:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-jenkins/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
 ```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-jenkins/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -106,19 +90,12 @@ To avoid inadvertent removal of this volume you can [mount host directories as d
 
 ### Mount host directories as data volumes with Docker Compose
 
-The following `docker-compose.yml` template demonstrates the use of host directories as data volumes.
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-jenkins/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
-services:
-  jenkins:
-    image: bitnami/jenkins:latest
-    ports:
-      - '80:8080'
-      - '443:8443'
-    volumes:
-      - /path/to/jenkins-persistence:/bitnami
+jenkins:
+  volumes:
+    - /path/to/jenkins-persistence:/bitnami
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -401,23 +378,12 @@ The Jenkins instance can be customized by specifying environment variables on th
 
 ### Specifying Environment variables using Docker Compose
 
+Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-jenkins/blob/master/docker-compose.yml) file present in this repository:
+
 ```yaml
-version: '2'
-
-services:
-  jenkins:
-    image: bitnami/jenkins:latest
-    ports:
-      - '80:8080'
-      - '443:8443'
-    environment:
-      - JENKINS_PASSWORD=my_password
-    volumes:
-      - jenkins_data:/bitnami
-
-volumes:
-  jenkins_data:
-    driver: local
+jenkins:
+  environment:
+    - JENKINS_PASSWORD=my_password
 ```
 
 ### Specifying Environment variables on the Docker command line
