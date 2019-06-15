@@ -42,7 +42,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.23.4-ol-7-r2` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.23.4-ol-7-r2/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.23.4-ol-7-r3` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.23.4-ol-7-r3/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.23.4-debian-9-r2`, `2`, `2.23.4`, `2.23.4-r2`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.23.4-debian-9-r2/2/debian-9/Dockerfile)
 * [`2-rhel-7`, `2.22.1-rhel-7-r0` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.22.1-rhel-7-r0/2/rhel-7/Dockerfile)
 
@@ -52,39 +52,11 @@ Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https:/
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run Ghost. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-ghost/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_ghost
-      - MARIADB_DATABASE=bitnami_ghost
-    volumes:
-      - 'mariadb_data:/bitnami'
-  ghost:
-    image: 'bitnami/ghost:2'
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - GHOST_DATABASE_USER=bn_ghost
-      - GHOST_DATABASE_NAME=bitnami_ghost
-      - ALLOW_EMPTY_PASSWORD=yes
-      - GHOST_HOST=localhost
-    ports:
-      - '80:2368'
-    volumes:
-      - 'ghost_data:/bitnami'
-    depends_on:
-      - mariadb
-volumes:
-  mariadb_data:
-    driver: local
-  ghost_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-ghost/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ### Run the application manually
@@ -141,31 +113,14 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the `docker-compose.yml` template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-ghost/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_ghost
-      - MARIADB_DATABASE=bitnami_ghost
     volumes:
       - /path/to/mariadb-persistence:/bitnami
   ghost:
-    image: bitnami/ghost:latest
-    depends_on:
-      - mariadb
-    ports:
-      - '80:2368'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - GHOST_DATABASE_USER=bn_ghost
-      - GHOST_DATABASE_NAME=bitnami_ghost
-      - GHOST_HOST=localhost
     volumes:
       - '/path/to/ghost-persistence:/bitnami'
 ```
@@ -247,13 +202,10 @@ You can use these snapshots to restore the application state should the upgrade 
 
 When you start the ghost image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For Docker Compose, add the variable name and value under the application section:
 
 ```yaml
 ghost:
-  image: bitnami/ghost:latest
-  ports:
-    - 80:2368
   environment:
     - GHOST_HOST=my_host
 ```
@@ -311,23 +263,16 @@ To configure Ghost to send email using SMTP you can set the following environmen
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose:
+ * Change the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-ghost/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-  ghost:
-    image: bitnami/ghost:latest
-    ports:
-      - 80:2368
-    environment:
-      - GHOST_HOST=localhost
-      - ALLOW_EMPTY_PASSWORD=yes
-      - GHOST_DATABASE_USER=bn_ghost
-      - GHOST_DATABASE_NAME=bitnami_ghost
-      - SMTP_HOST=smtp.gmail.com
-      - SMTP_USER=your_email@gmail.com
-      - SMTP_PASSWORD=your_password
-      - SMTP_FROM_ADDRESS="'Custom Name' <myemail@address.com>"
-      - SMTP_SERVICE=GMail
+ghost:
+  environment:
+    - SMTP_HOST=smtp.gmail.com
+    - SMTP_USER=your_email@gmail.com
+    - SMTP_PASSWORD=your_password
+    - SMTP_FROM_ADDRESS="'Custom Name' <myemail@address.com>"
+    - SMTP_SERVICE=GMail
 ```
 
  * For manual execution:
