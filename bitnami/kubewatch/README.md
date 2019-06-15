@@ -41,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-rhel-7`, `0.0.4-rhel-7-r82` (0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-rhel-7-r82/0/rhel-7/Dockerfile)
-* [`0-debian-9`, `0.0.4-debian-9-r273`, `0`, `0.0.4`, `0.0.4-r273`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r273/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.0.4-debian-9-r274`, `0`, `0.0.4`, `0.0.4-r274`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r274/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubewatch GitHub repo](https://github.com/bitnami/bitnami-docker-kubewatch).
 
@@ -97,16 +97,12 @@ $ docker run --name kubewatch \
   bitnami/kubewatch:latest
 ```
 
-or using the following docker-compose file:
+or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kubewatch/blob/master/docker-compose.yml) file present in this repository as shown:
 
 ```yaml
-version: '2'
-
-services:
-  kubewatch:
-    image: bitnami/kubewatch:latest
-    volumes:
-      -  ./path/to/your/kubewatch.yaml:/opt/bitnami/kubewatch/.kubewatch.yaml
+kubewatch:
+  volumes:
+    -  ./path/to/your/kubewatch.yaml:/opt/bitnami/kubewatch/.kubewatch.yaml
 ```
 
 # Contributing
