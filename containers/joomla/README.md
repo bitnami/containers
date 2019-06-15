@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.9.8-ol-7-r3` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.8-ol-7-r3/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.9.8-ol-7-r4` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.8-ol-7-r4/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.9.8-debian-9-r3`, `3`, `3.9.8`, `3.9.8-r3`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.8-debian-9-r3/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
@@ -55,41 +55,11 @@ Running Joomla with a database server is the recommended way. You can either use
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run Joomla! You can use the following `docker-compose.yml` template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-joomla/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - MARIADB_USER=bn_joomla
-      - MARIADB_DATABASE=bitnami_joomla
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - 'mariadb_data:/bitnami'
-  joomla:
-    image: 'bitnami/joomla:latest'
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - JOOMLA_DATABASE_USER=bn_joomla
-      - JOOMLA_DATABASE_NAME=bitnami_joomla
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - 'joomla_data:/bitnami'
-    depends_on:
-      - mariadb
-
-volumes:
-  mariadb_data:
-    driver: local
-  joomla_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-joomla/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ### Run the application manually
@@ -144,33 +114,15 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the `docker-compose.yml` template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-joomla/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_joomla
-      - MARIADB_DATABASE=bitnami_joomla
-    volumes:
-      - '/path/to/mariadb_persistence:/bitnami'
-  joomla:
-    image: 'bitnami/joomla:latest'
-    environment:
-      - JOOMLA_DATABASE_USER=bn_joomla
-      - JOOMLA_DATABASE_NAME=bitnami_joomla
-      - ALLOW_EMPTY_PASSWORD=yes
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - '/path/to/joomla-persistence:/bitnami'
+mariadb:
+  volumes:
+    - '/path/to/mariadb_persistence:/bitnami'
+joomla:
+  volumes:
+    - '/path/to/joomla-persistence:/bitnami'
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -250,7 +202,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the joomla image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
+When you start the Joomla! image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
 
 ##### User and Site configuration
 
@@ -280,14 +232,10 @@ When you start the joomla image, you can adjust the configuration of the instanc
 
 If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For Docker Compose add the variable name and value under the application section:
 
 ```yaml
 joomla:
-  image: bitnami/joomla:latest
-  ports:
-    - 80:80
-    - 443:443B
   environment:
     - JOOMLA_PASSWORD=my_password
 ```
@@ -315,14 +263,10 @@ To configure Joomla to send email using SMTP you can set the following environme
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose:
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-discourse/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
   joomla:
-    image: bitnami/joomla:latest
-    ports:
-      - 80:80
-      - 443:443
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
