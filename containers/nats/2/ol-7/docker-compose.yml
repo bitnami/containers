@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  nats:
+    image: bitnami/nats:2-ol-7
+    ports:
+      - '4222:4222'
+      - '6222:6222'
+      - '8222:8222'
+

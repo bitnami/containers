@@ -47,9 +47,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-rhel-7`, `1.4.1-rhel-7-r67` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.4.1-rhel-7-r67/1/rhel-7/Dockerfile)
-* [`1-ol-7`, `1.4.1-ol-7-r119` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.4.1-ol-7-r119/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.4.1-debian-9-r106`, `1`, `1.4.1`, `1.4.1-r106`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/1.4.1-debian-9-r106/1/debian-9/Dockerfile)
+* [`2-ol-7`, `2.0.0-ol-7-r0` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/2.0.0-ol-7-r0/2/ol-7/Dockerfile)
+* [`2-debian-9`, `2.0.0-debian-9-r0`, `2`, `2.0.0`, `2.0.0-r0`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/2.0.0-debian-9-r0/2/debian-9/Dockerfile)
+* [`2-rhel-7`, `0.0.0-rhel-7-r0` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/0.0.0-rhel-7-r0/2/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nats GitHub repo](https://github.com/bitnami/bitnami-docker-nats).
 
@@ -173,7 +173,7 @@ $ docker-compose up -d
 The configuration can easily be setup by mounting your own configuration file on the directory `/opt/bitnami/nats`:
 
 ```
-docker run --name nats -v /path/to/gnatsd.conf:/opt/bitnami/nats/gnatsd.conf bitnami/nats:latest
+docker run --name nats -v /path/to/nats-server.conf:/opt/bitnami/nats/nats-server.conf bitnami/nats:latest
 ```
 
 After that, your configuration will be taken into account in the server's behaviour.
@@ -191,10 +191,10 @@ services:
       - '6222:6222'
       - '8222:8222'
     volumes:
-      - /path/to/gnatsd.conf:/opt/bitnami/nats/gnatsd.conf
+      - /path/to/nats-server.conf:/opt/bitnami/nats/nats-server.conf
 ```
 
-Find more information about how to create your own configuration file on this [link](https://github.com/nats-io/gnatsd#configuration-file)
+Find more information about how to create your own configuration file on this [link](https://nats-io.github.io/docs/nats_server/configuration.html)
 
 ## Further documentation
 
