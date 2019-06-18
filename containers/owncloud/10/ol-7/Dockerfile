@@ -1,11 +1,11 @@
-FROM bitnami/oraclelinux-extras:7-r370
+FROM bitnami/oraclelinux-extras:7-r371
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.39-2 --checksum bd13d67036ecb691256893b0ba4034364b90c05747b2afbaa3c097fb218bc2e1
 RUN bitnami-pkg unpack php-7.2.19-0 --checksum bddea5a54f545442db766173001ec859ea559d0242dd4713edcbf346d4404b99
-RUN bitnami-pkg unpack mysql-client-10.3.15-0 --checksum 8200bab1521dde4a6c377789abdff7f4b30d64843a4a78affb319f833f9f260f
+RUN bitnami-pkg unpack mysql-client-10.3.16-0 --checksum bc7ef5b2abef585c0079a7e4cb2a099c5f40cf39402c52078438a39882953ab4
 RUN bitnami-pkg install libphp-7.2.19-0 --checksum f32b82660579bbd1d9bd85fd6a9bd487a363693ebf800eedcab24db88b7bde58
 RUN bitnami-pkg unpack owncloud-10.2.0-1 --checksum 74aee31056fc410087e42b188a659c97950cb068af3cb07d5e7d60f4648fff42
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.2.0-ol-7-r26" \
+    BITNAMI_IMAGE_VERSION="10.2.0-ol-7-r27" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
