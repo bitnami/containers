@@ -155,6 +155,7 @@ mysql_start_bg() {
     local flags=("--defaults-file=${DB_BASEDIR}/conf/my.cnf" "--basedir=${DB_BASEDIR}" "--datadir=${DB_DATADIR}" "--socket=$DB_TMPDIR/mysql.sock" "--port=$DB_PORT_NUMBER")
     [[ -z "${DB_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${DB_EXTRA_FLAGS[@]}")
     [[ -z "${DB_FORCE_UPGRADE:-}" ]] || flags=("${flags[@]}" "--upgrade=FORCE")
+    am_i_root && flags=("${flags[@]}" "--user=$DB_DAEMON_USER")
 
     debug "Starting $DB_FLAVOR in background..."
 
@@ -386,6 +387,7 @@ EOF
 mysql_install_db() {
     local command="${DB_BINDIR}/mysql_install_db"
     local args=("--defaults-file=${DB_CONFDIR}/my.cnf" "--basedir=${DB_BASEDIR}" "--datadir=${DB_DATADIR}")
+    am_i_root && args=("${args[@]}" "--user=$DB_DAEMON_USER")
     debug "Installing database..."
     if [[ "$DB_FLAVOR" = "mysql" ]]; then
         command="${DB_BINDIR}/mysqld"
