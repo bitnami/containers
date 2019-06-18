@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-9`, `2.4.3-debian-9-r3`, `2`, `2.4.3`, `2.4.3-r3`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/2.4.3-debian-9-r3/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.4.3-debian-9-r4`, `2`, `2.4.3`, `2.4.3-r4`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/2.4.3-debian-9-r4/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spark GitHub repo](https://github.com/bitnami/bitnami-docker-spark).
 
@@ -121,7 +121,9 @@ The Bitnani Spark docker image supports enabling RPC authentication, RPC encrypt
 ```
 
 > Please note that `RPC_AUTHENTICATION_SECRET` is a placeholder that needs to be updated with a correct value.
+
 > Be also aware that currently is not possible to submit an application to a standalone cluster if RPC authentication is configured. More info about the issue [here](https://issues.apache.org/jira/browse/SPARK-25078).
+
 Additionally, SSL configuration can be easily activated following the next steps:
 
 1. Enable SSL configuration by setting the following env vars:
