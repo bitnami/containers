@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libpcap0.8 libssl1.1
-RUN . ./libcomponent.sh && component_unpack "mongodb" "3.6.13-1" --checksum 52a7ccd5904f529b3df039396062906ef4dd213a198f6625ee1b8886de51ce3a
+RUN . ./libcomponent.sh && component_unpack "mongodb" "3.6.13-2" --checksum aeb9b636a87960d57099ab05d89da32a1e07a5d95842457f42874710dc876780
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.6.13-debian-9-r14" \
+    BITNAMI_IMAGE_VERSION="3.6.13-debian-9-r15" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_DISABLE_SYSTEM_LOG="no" \
