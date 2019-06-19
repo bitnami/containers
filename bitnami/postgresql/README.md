@@ -44,12 +44,12 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`11-ol-7`, `11.3.0-ol-7-r46` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.3.0-ol-7-r46/11/ol-7/Dockerfile)
+* [`11-ol-7`, `11.3.0-ol-7-r47` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.3.0-ol-7-r47/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.3.0-debian-9-r47`, `11`, `11.3.0`, `11.3.0-r47`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.3.0-debian-9-r47/11/debian-9/Dockerfile)
 * [`11-centos-7`, `11.3.0-centos-7-r29` (11/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.3.0-centos-7-r29/11/centos-7/Dockerfile)
 * [`10-ol-7`, `10.8.0-ol-7-r45` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.8.0-ol-7-r45/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.8.0-debian-9-r45`, `10`, `10.8.0`, `10.8.0-r45` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.8.0-debian-9-r45/10/debian-9/Dockerfile)
-* [`10-centos-7`, `10.8.0-centos-7-r28` (10/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.8.0-centos-7-r28/10/centos-7/Dockerfile)
+* [`10-debian-9`, `10.8.0-debian-9-r46`, `10`, `10.8.0`, `10.8.0-r46` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.8.0-debian-9-r46/10/debian-9/Dockerfile)
+* [`10-centos-7`, `10.8.0-centos-7-r29` (10/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.8.0-centos-7-r29/10/centos-7/Dockerfile)
 * [`9.6-ol-7`, `9.6.13-ol-7-r47` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.13-ol-7-r47/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.13-debian-9-r45`, `9.6`, `9.6.13`, `9.6.13-r45` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.13-debian-9-r45/9.6/debian-9/Dockerfile)
 * [`9.6-centos-7`, `9.6.13-centos-7-r28` (9.6/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.13-centos-7-r28/9.6/centos-7/Dockerfile)
