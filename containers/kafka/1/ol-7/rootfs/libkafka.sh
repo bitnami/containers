@@ -310,6 +310,11 @@ kafka_configure_from_environment_variables() {
 kafka_initialize() {
     info "Initializing Kafka..."
 
+    if ! is_dir_empty "$KAFKA_CONFDIR"; then
+        info "Persisted data detected. Restoring..."
+        return
+    fi
+
     # Check for mounted configuration files
     cp -r "$KAFKA_BASEDIR"/config/. "$KAFKA_CONFDIR"
     rm -rf "$KAFKA_BASEDIR"/config
