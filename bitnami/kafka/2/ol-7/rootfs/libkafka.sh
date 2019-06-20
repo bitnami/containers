@@ -308,6 +308,12 @@ kafka_configure_from_environment_variables() {
 #   None
 #########################
 kafka_initialize() {
+    # Since we remove this directory afterwards, it allows us to check if Kafka had already been initialized
+    if [[ ! -d "$KAFKA_BASEDIR"/configtmp ]]; then
+        info "Kafka has already been initialized"
+        return
+    fi
+
     info "Initializing Kafka..."
 
     # Check for mounted configuration files
