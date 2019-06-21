@@ -175,7 +175,7 @@ kafka_validate() {
     if is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
         warn "You set the environment variable ALLOW_PLAINTEXT_LISTENER=$ALLOW_PLAINTEXT_LISTENER. For safety reasons, do not use this flag in a production environment."
     fi
-    if [[ "$KAFKA_CFG_LISTENERS" =~ SASL_SSL ]]; then
+    if [[ "$KAFKA_CFG_LISTENERS" =~ SASL_SSL ]] || [[ "$KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP" =~ SASL_SSL ]]; then
         if [[ ! -f "$KAFKA_CONFDIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_CONFDIR"/certs/kafka.truststore.jks ]]; then
             error "In order to configure the SASL_SSL listener for Kafka you must mount your kafka.keystore.jks and kafka.trustore.jks certificates to the $KAFKA_CONFDIR/certs directory."
             exit 1
@@ -325,10 +325,15 @@ kafka_initialize() {
         cp -r "$KAFKA_BASEDIR"/configtmp/. "$KAFKA_CONFDIR"
         kafka_server_conf_set log.dirs "$KAFKA_DATADIR"
         kafka_configure_from_environment_variables
-        if [[ "$KAFKA_CFG_LISTENERS" =~ SASL_SSL ]]; then
+        if [[ "$KAFKA_CFG_LISTENERS" =~ SASL_SSL ]] || [[ "$KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP" =~ SASL_SSL ]]; then
             kafka_configure_sasl_ssl_listener
-        elif [[ "$KAFKA_CFG_LISTENERS" =~ SASL_PLAINTEXT ]]; then
+        elif [[ "$KAFKA_CFG_LISTENERS" =~ SASL_PLAINTEXT ]] || [[ "$KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP" =~ SASL_PLAINTEXT ]]; then
             kafka_configure_sasl_plaintext_listener
+        fi
+
+        # Remove security.inter.broker.protocol if KAFKA_CFG_INTER_BROKER_LISTENER_NAME is configured
+        if [[ ! -z "$KAFKA_CFG_INTER_BROKER_LISTENER_NAME" ]]; then
+            sed -i '/security.inter.broker.protocol/d' "$KAFKA_CONF_FILE"
         fi
     fi
     rm -rf "$KAFKA_BASEDIR"/configtmp
