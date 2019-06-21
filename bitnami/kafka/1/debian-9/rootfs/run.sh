@@ -13,7 +13,7 @@ set -o pipefail
 # Load Kafka environment variables
 eval "$(kafka_env)"
 
-if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]]; then
+if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL ]]; then
     export KAFKA_OPTS="-Djava.security.auth.login.config=$KAFKA_HOME/conf/kafka_jaas.conf"
 fi
 
