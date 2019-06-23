@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r375
+FROM bitnami/oraclelinux-extras:7-r376
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -17,7 +17,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.39-ol-7-r75" \
+    BITNAMI_IMAGE_VERSION="2.4.39-ol-7-r76" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/apache/bin:$PATH"
 
