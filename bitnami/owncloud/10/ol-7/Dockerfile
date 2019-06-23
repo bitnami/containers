@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r375
+FROM bitnami/oraclelinux-extras:7-r376
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.2.0-ol-7-r31" \
+    BITNAMI_IMAGE_VERSION="10.2.0-ol-7-r32" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
