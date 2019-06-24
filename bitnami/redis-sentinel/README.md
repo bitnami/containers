@@ -60,7 +60,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`5.0-ol-7`, `5.0.5-ol-7-r41` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.5-ol-7-r41/5.0/ol-7/Dockerfile)
 * [`5.0-debian-9`, `5.0.5-debian-9-r47`, `5.0`, `5.0.5`, `5.0.5-r47`, `latest` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.5-debian-9-r47/5.0/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.14-ol-7-r86` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-ol-7-r86/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.14-debian-9-r79`, `4.0`, `4.0.14`, `4.0.14-r79` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-debian-9-r79/4.0/debian-9/Dockerfile)
+* [`4.0-debian-9`, `4.0.14-debian-9-r80`, `4.0`, `4.0.14`, `4.0.14-r80` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-debian-9-r80/4.0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
 
@@ -165,7 +165,7 @@ The Redis Sentinel instance can be customized by specifying environment variable
 - `REDIS_MASTER_HOST`: Host of the Redis master to monitor. Default: **redis**.
 - `REDIS_MASTER_PORT_NUMBER`: Port of the Redis master to monitor. Default: **6379**.
 - `REDIS_MASTER_SET`: Name of the set of Redis instances to monitor. Default: **mymaster**.
-- `REDIS_MASTER_PASSWORD`: Password to authenticate with the master. No defaults.
+- `REDIS_MASTER_PASSWORD`: Password to authenticate with the master. No defaults. As an alternative, you can mount a file with the password and set the `REDIS_MASTER_PASSWORD_FILE` variable.
 - `REDIS_SENTINEL_PORT_NUMBER`: Redis Sentinel port. Default: **26379**.
 - `REDIS_SENTINEL_QUORUM`: Number of Sentinels that need to agree about the fact the master is not reachable. Default: **2**.
 
