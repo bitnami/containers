@@ -42,8 +42,8 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.23.4-ol-7-r12` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.23.4-ol-7-r12/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.23.4-debian-9-r11`, `2`, `2.23.4`, `2.23.4-r11`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.23.4-debian-9-r11/2/debian-9/Dockerfile)
+* [`2-ol-7`, `2.23.4-ol-7-r11` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.23.4-ol-7-r11/2/ol-7/Dockerfile)
+* [`2-debian-9`, `2.23.4-debian-9-r12`, `2`, `2.23.4`, `2.23.4-r12`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.23.4-debian-9-r12/2/debian-9/Dockerfile)
 * [`2-rhel-7`, `2.22.1-rhel-7-r0` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.22.1-rhel-7-r0/2/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
