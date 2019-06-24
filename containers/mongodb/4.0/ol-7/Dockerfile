@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libcurl libgcc libidn libpcap libselinux libssh2 nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre zlib
-RUN . ./libcomponent.sh && component_unpack "mongodb" "4.0.10-2" --checksum 981e9f312998a2f7bdd417b57d559a6afdb020f9d7f3448a7a38bd6aa1a79753
+RUN . ./libcomponent.sh && component_unpack "mongodb" "4.0.10-3" --checksum b421e77c82317e8f0993762c09313ed28338462b2b3a7a6349991e37bbbe0f76
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.0.10-ol-7-r30" \
+    BITNAMI_IMAGE_VERSION="4.0.10-ol-7-r31" \
     MONGODB_ADVERTISED_HOSTNAME="" \
     MONGODB_DATABASE="" \
     MONGODB_DISABLE_SYSTEM_LOG="no" \

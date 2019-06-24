@@ -13,6 +13,8 @@
 . /libvalidations.sh
 . /libos.sh
 . /libfs.sh
+. /libnet.sh
+
 
 ########################
 # Loads global variables used on MongoDB configuration.
@@ -58,6 +60,7 @@ export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
 EOF
 }
 
+
 ########################
 # Validate settings in MONGODB_* env. variables
 # Globals:
@@ -82,6 +85,9 @@ in the primary node and MONGODB_PRIMARY_ROOT_PASSWORD in the rest of nodes"
     }
 
     if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
+        if [[ -z "$MONGODB_ADVERTISED_HOSTNAME" ]]; then
+            warn "In order to use hostnames instead of IPs your should set MONGODB_ADVERTISED_HOSTNAME"
+        fi
         if [[ "$MONGODB_REPLICA_SET_MODE" =~ ^(secondary|arbiter) ]]; then
             if [[ -z "$MONGODB_PRIMARY_HOST" ]]; then
                 error_message="In order to configure MongoDB as secondary or arbiter node \
@@ -109,21 +115,16 @@ you need to provide the MONGODB_PRIMARY_HOST env var"
                 error_message="MONGODB_ROOT_PASSWORD have to be set on a 'primary' node!"
                 print_error_exit "$error_message"
             fi
-		else
-		    error_message="You set the environment variable MONGODB_REPLICA_SET_MODE with an invalid value. \
+        else
+            error_message="You set the environment variable MONGODB_REPLICA_SET_MODE with an invalid value. \
 Available options are 'primary/secondary/arbiter'"
             print_error_exit "$error_message"
         fi
     fi
 
-
-    is_boolean_yes "$MONGODB_DISABLE_SYSTEM_LOG" && MONGODB_DISABLE_SYSTEM_LOG="true" || MONGODB_DISABLE_SYSTEM_LOG="false"
-    is_boolean_yes "$MONGODB_ENABLE_DIRECTORY_PER_DB" && MONGODB_ENABLE_DIRECTORY_PER_DB="true" || MONGODB_ENABLE_DIRECTORY_PER_DB="false"
-    is_boolean_yes "$MONGODB_ENABLE_IPV6" && MONGODB_ENABLE_IPV6="true" || MONGODB_ENABLE_IPV6="false"
-
     if [[ -n "$MONGODB_REPLICA_SET_KEY" ]] && (( ${#MONGODB_REPLICA_SET_KEY} < 5 )); then
-    		error_message="MONGODB_REPLICA_SET_KEY must be, at least, 5 characters long!"
-    		print_error_exit "$error_message"
+        error_message="MONGODB_REPLICA_SET_KEY must be, at least, 5 characters long!"
+        print_error_exit "$error_message"
     fi
 
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
@@ -160,7 +161,7 @@ mongodb_create_config() {
 #   $2 - Password
 #   $3 - Database where to run the queries
 #   $4 - Host (default 127.0.0.1)
-#   $5 - Port (default 27017)
+#   $5 - Port (default $MONGODB_PORT_NUMBER)
 # Returns:
 #   None
 ########################
@@ -169,7 +170,7 @@ mongodb_execute() {
     local password="${2:-}"
     local database="${3:-}"
     local host="${4:-127.0.0.1}"
-    local port="${5:-27017}"
+    local port="${5:-$MONGODB_PORT_NUMBER}"
     local result
 
     # If password is empty it means no auth, do not specify user
@@ -223,6 +224,20 @@ is_mongodb_running() {
 }
 
 ########################
+# Checks if MongoDB is not running
+# Globals:
+#   MONGODB_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_mongodb_not_running() {
+    ! is_mongodb_running
+    return "$?"
+}
+
+########################
 # Retart MongoDB service
 # Globals:
 #   None
@@ -252,9 +267,14 @@ mongodb_start_bg() {
     [[ -z "${MONGODB_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${MONGODB_EXTRA_FLAGS[@]}")
 
     debug "Starting MongoDB in background..."
+
     is_mongodb_running && return
 
-    debug_execute "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
+    if am_i_root; then
+        debug_execute gosu "$MONGODB_DAEMON_USER" "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
+    else
+       debug_execute "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
+    fi
 
     # wait until the server is up and answering queries
     retry_while "mongodb_is_mongodb_started" 120 5
@@ -272,7 +292,7 @@ mongodb_start_bg() {
 mongodb_is_mongodb_started() {
     local result
 
-    result=$(mongodb_execute <<EOF
+    result=$(mongodb_execute 2>/dev/null <<EOF
 db
 EOF
 )
@@ -291,7 +311,9 @@ EOF
 mongodb_stop() {
     ! is_mongodb_running && return
     info "Stopping MongoDB..."
+
     stop_service_using_pid "$MONGODB_PID_FILE"
+    retry_while "is_mongodb_not_running"
 }
 
 ########################
@@ -425,11 +447,16 @@ mongodb_configure_key_file() {
     info "Writing keyfile for replica set authentication: $key $keyfile"
     echo "$key" >> "$keyfile"
 
-    chmod 600 "${keyfile}"
+    chmod 600 "$keyfile"
+
+    if am_i_root; then
+        configure_permissions "$keyfile" "$MONGODB_DAEMON_USER" "$MONGODB_DAEMON_GROUP" "" "600"
+    else
+        chmod 600 "$keyfile"
+    fi
 
     mongodb_config_apply_regex "#?authorization:.*" "authorization: enabled" 
     mongodb_config_apply_regex "#?keyFile:.*" "keyFile: $keyfile" 
-
 }
 
 ########################
@@ -451,9 +478,9 @@ EOF
 )
 
     if grep "\"ok\" : 1" <<< "$result" > /dev/null; then
-	true
+        true
     else 
-	false
+        false
     fi 
 }
 
@@ -475,9 +502,9 @@ rs.add('$node:$MONGODB_PORT_NUMBER')
 EOF
 )
     if grep "\"ok\" : 1" <<< "$result" > /dev/null; then
-	true
+        true
     else 
-	false
+        false
     fi 
 }
 
@@ -499,9 +526,9 @@ rs.addArb('$node:$MONGODB_PORT_NUMBER')
 EOF
 )
     if grep "\"ok\" : 1" <<< "$result" > /dev/null; then
-	true
+        true
     else 
-	false
+        false
     fi 
 }
 
@@ -557,15 +584,15 @@ mongodb_configure_primary() {
 #########################
 mongodb_is_node_confirmed() {
     local node="${1:?node is required}"
-info "is node confirmed"
+
     result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
 rs.status().members
 EOF
 )
     if grep "$node" <<< "$result" > /dev/null; then
-	true
+        true
     else 
-	false
+        false
     fi 
 }
 
@@ -605,9 +632,9 @@ db.isMaster().ismaster
 EOF
 )
     if grep "true" <<< "$result" > /dev/null; then
-	true
+        true
     else 
-	false
+        false
     fi 
 }
 
@@ -629,7 +656,7 @@ EOF
     if grep "\"user\" :" <<< "$result" > /dev/null; then
         true
     else
-	false
+        false
     fi
 }
 
@@ -746,18 +773,19 @@ mongodb_wait_until_sync_complete() {
 # Globals:
 #   MONGODB_*
 # Arguments:
-#   None
+#   $1 - node
 # Returns:
 #   None
 #########################
 mongodb_node_currently_in_cluster() {
+    local node="${1:?node is required}"
     local result
 
     result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
 rs.status()
 EOF
 )
-    if grep "name.*$MONGODB_ADVERTISED_HOSTNAME" <<< "$result" > /dev/null; then
+    if grep "name.*$node" <<< "$result" > /dev/null; then
         true
     else
         false
@@ -774,34 +802,38 @@ EOF
 #   None
 #########################
 mongodb_configure_replica_set() {
+    local node
+
     info "Configuring MongoDB replica set..."
+
+    [[ -n "$MONGODB_ADVERTISED_HOSTNAME" ]] && node="$MONGODB_ADVERTISED_HOSTNAME" || node=$(get_machine_ip)
 
     mongodb_enable_replicasetmode
     mongodb_restart
 
     case "$MONGODB_REPLICA_SET_MODE" in
         "primary" )
-             mongodb_configure_primary "$MONGODB_ADVERTISED_HOSTNAME"
+             mongodb_configure_primary "$node"
              ;;
         "secondary")
             mongodb_wait_for_primary_node
 
-            if mongodb_node_currently_in_cluster; then
+            if mongodb_node_currently_in_cluster "$node"; then
                 info "Node currently in the cluster"
             else
                 info "Adding node to the cluster"
-	        mongodb_configure_secondary "$MONGODB_ADVERTISED_HOSTNAME"
-		fi
+                mongodb_configure_secondary "$node"
+            fi
             ;;
          "arbiter")
             mongodb_wait_for_primary_node
 
-            if mongodb_node_currently_in_cluster; then
+            if mongodb_node_currently_in_cluster "$node"; then
                 info "Node currently in the cluster"
             else
                 info "Adding node to the cluster"
-                mongodb_configure_arbiter "$MONGODB_ADVERTISED_HOSTNAME"
-	    fi
+                mongodb_configure_arbiter "$node"
+            fi
             ;;
         "dynamic")
             # Do nothing
@@ -916,6 +948,10 @@ mongodb_initialize() {
 
     info "Initializing MongoDB..."
 
+    # Configuring permissions for tmp, logs and data folders
+    am_i_root && chown -LR "$MONGODB_DAEMON_USER":"$MONGODB_DAEMON_GROUP" "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR"
+    am_i_root && configure_permissions "$MONGODB_DATA_DIR" "$MONGODB_DAEMON_USER" "$MONGODB_DAEMON_GROUP" "755" "644"
+
     if is_dir_empty "$MONGODB_DATA_DIR/db"; then
         info "Deploying MongoDB from scratch..."
         ensure_dir_exists "$MONGODB_DATA_DIR/db"
@@ -966,10 +1002,6 @@ mongodb_initialize() {
             mongodb_enable_replicasetmode
         fi
     fi
-
-    # Configuring permissions for tmp, logs and data folders
-    am_i_root && chown -LR "$MONGODB_DAEMON_USER":"$MONGODB_GROUP" "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR"
-    am_i_root && configure_permissions "$MONGODB_DATA_DIR" "$MONGODB_DAEMON_USER" "$MONGODB_DAEMON_GROUP" "755" "644"
 
     mongodb_print_properties $persisted
 }
