@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r399
+FROM bitnami/minideb-extras:stretch-r400
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -16,7 +16,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="4.9.0-1-debian-9-r21" \
+    BITNAMI_IMAGE_VERSION="4.9.0-1-debian-9-r22" \
     DATABASE_ENABLE_SSL="no" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
