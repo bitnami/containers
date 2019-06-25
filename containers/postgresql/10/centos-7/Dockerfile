@@ -15,7 +15,7 @@ COPY rootfs /
 RUN yum -y install epel-release && yum -y update && yum -y install nss_wrapper
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="10.9.0-centos-7-r5" \
+    BITNAMI_IMAGE_VERSION="10.9.0-centos-7-r6" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
