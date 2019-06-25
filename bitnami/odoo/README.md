@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`12-ol-7`, `12.0.20190615-ol-7-r9` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20190615-ol-7-r9/12/ol-7/Dockerfile)
+* [`12-ol-7`, `12.0.20190615-ol-7-r10` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20190615-ol-7-r10/12/ol-7/Dockerfile)
 * [`12-debian-9`, `12.0.20190615-debian-9-r9`, `12`, `12.0.20190615`, `12.0.20190615-r9`, `latest` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20190615-debian-9-r9/12/debian-9/Dockerfile)
 * [`11-ol-7`, `11.0.20190615-ol-7-r10` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20190615-ol-7-r10/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.0.20190615-debian-9-r9`, `11`, `11.0.20190615`, `11.0.20190615-r9` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20190615-debian-9-r9/11/debian-9/Dockerfile)
