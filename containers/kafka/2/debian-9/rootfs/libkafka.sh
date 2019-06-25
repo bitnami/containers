@@ -121,7 +121,7 @@ EOF
 kafka_declare_alias_env() {
     local -r alias="${1:?missing environment variable alias}"
     local -r original="${2:?missing original environment variable}"
-    if env | grep -q "${original}"; then
+    if printenv "${original}" > /dev/null; then
         export "$alias"="${!original:-}"
     fi
 }
