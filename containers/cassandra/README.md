@@ -210,7 +210,7 @@ For example, in order to override the `cassandra.yaml` configuration file:
 You can download the basic cassandra.yaml file like follows
 
 ```bash
-wget https://svn.apache.org/repos/asf/cassandra/trunk/conf/cassandra.yaml
+wget https://raw.githubusercontent.com/apache/cassandra/trunk/conf/cassandra.yaml
 ```
 
 Perform any desired modifications in that file
