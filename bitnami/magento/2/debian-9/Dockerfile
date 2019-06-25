@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.39-2 --checksum ff55ee9cccf484bac61fa91558fc7f
 RUN bitnami-pkg unpack php-7.1.30-0 --checksum cee5b9024346ecbdfa75d0d96ad29a6bdfbfa12278fa87ee482c0f8a03edd5cc
 RUN bitnami-pkg unpack mysql-client-10.2.25-0 --checksum 5842e2830b0d36e519cbcc43d4025217fbbb76f5c7af7a61cce1b256dda546fc
 RUN bitnami-pkg install libphp-7.1.30-0 --checksum 8b0088abe4159423424b036eb5f598388d5fd4e59e54a3a5f1ecf6071b8a7fee
-RUN bitnami-pkg unpack magento-2.3.1-5 --checksum 07cb44dab521499b4c443d8aa68588d120885e16f425428ab65c60b87ca34721
+RUN bitnami-pkg unpack magento-2.3.2-0 --checksum eec14f6fb927238a312c2beb44d22cac816c99eb99bab74f280f990d753a7070
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
@@ -20,7 +20,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.1-debian-9-r71" \
+    BITNAMI_IMAGE_VERSION="2.3.2-debian-9-r0" \
     ELASTICSEARCH_HOST="" \
     ELASTICSEARCH_PORT_NUMBER="" \
     EXTERNAL_HTTPS_PORT_NUMBER="443" \
