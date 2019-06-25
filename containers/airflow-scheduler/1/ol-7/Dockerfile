@@ -9,7 +9,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 RUN install_packages bzip2-libs cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libedit libffi libgcc libselinux libstdc++ libxml2 libxslt mariadb-libs ncurses-libs nss-softokn-freebl openssl-libs pcre readline sqlite xz-libs zlib
 RUN bitnami-pkg install python-3.6.8-2 --checksum ef147d69b97d735e099fe281f6e7270ad9d5101eb2a4aca364525b1776b2e6ae
 RUN bitnami-pkg install postgresql-client-10.9.0-0 --checksum 31aa472b734f9c3ada6974cc6cafa80d5d2c3f009502a49f8a764507f1aa7dda
-RUN bitnami-pkg unpack airflow-scheduler-1.10.3-1 --checksum acbb9dba176cd8ace44ea0f730a37769e5cf99a7400a592490d8de2588b1e013
+RUN bitnami-pkg unpack airflow-scheduler-1.10.3-2 --checksum 893b1a4706aa0e3bfea639dcb32318d4aa02351b346095b05b83c5a52c754fbd
 
 COPY rootfs /
 RUN rpm -Uvh --nodeps $(repoquery --location nss_wrapper)
@@ -28,7 +28,7 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_HOST="airflow" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="airflow-scheduler" \
-    BITNAMI_IMAGE_VERSION="1.10.3-ol-7-r62" \
+    BITNAMI_IMAGE_VERSION="1.10.3-ol-7-r63" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
     LD_PRELOAD="/usr/lib64/libnss_wrapper.so" \
     LNAME="airflow" \
