@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r283
+FROM bitnami/minideb-extras-base:stretch-r284
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -9,7 +9,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgeoip1 libpcre3 libssl1.1 zlib1g
-RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.0-9" --checksum fdcc0db2f9632ea80d5a7b104c0cc16d0b0fd6262ed4adac2da12add922783eb
+RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.0-10" --checksum 489de7e6a04916f4e6657ebb4781947b7f13a1376c6a602d484ddef5ae131909
 RUN . ./libcomponent.sh && component_unpack "kubeapps" "1.4.1-0" --checksum ada783e897812fb696595aaac4bb00c75f1ee8287cf979c1e617c35cac13c548
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
@@ -21,7 +21,7 @@ RUN rm -rf /app && \
     ln -sf /opt/bitnami/kubeapps /opt/bitnami/kubeapps-dashboard && \
     mv /opt/bitnami/kubeapps/build /app
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.4.1-debian-9-r19" \
+    BITNAMI_IMAGE_VERSION="1.4.1-debian-9-r20" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
