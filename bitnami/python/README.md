@@ -48,8 +48,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`3.7-ol-7-prod`, `3.7.3-ol-7-r84-prod` (3.7-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.3-ol-7-r84-prod/3.7-prod/ol-7/Dockerfile)
 * [`3.7-ol-7`, `3.7.3-ol-7-r84` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.3-ol-7-r84/3.7/ol-7/Dockerfile)
-* [`3.7-ol-7-prod`, `3.7.3-ol-7-r83-prod` (3.7-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.3-ol-7-r83-prod/3.7-prod/ol-7/Dockerfile)
 * [`3.7-debian-9-prod`, `3.7.3-debian-9-r73-prod`, `3.7-prod`, `3.7.3-prod`, `3.7.3-r73-prod`, `latest-prod` (3.7-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.3-debian-9-r73-prod/3.7-prod/debian-9/Dockerfile)
 * [`3.7-debian-9`, `3.7.3-debian-9-r73`, `3.7`, `3.7.3`, `3.7.3-r73`, `latest` (3.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.3-debian-9-r73/3.7/debian-9/Dockerfile)
 * [`3.6-rhel-7`, `3.6.8-rhel-7-r60` (3.6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.8-rhel-7-r60/3.6/rhel-7/Dockerfile)
