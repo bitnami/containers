@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-9`, `0.3.3-debian-9-r46`, `0`, `0.3.3`, `0.3.3-r46`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.3-debian-9-r46/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.3.3-debian-9-r47`, `0`, `0.3.3`, `0.3.3-r47`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.3-debian-9-r47/0/debian-9/Dockerfile)
 * [`0-rhel-7`, `0.3.2-rhel-7-r5` (0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.2-rhel-7-r5/0/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/metrics-server GitHub repo](https://github.com/bitnami/bitnami-docker-metrics-server).
