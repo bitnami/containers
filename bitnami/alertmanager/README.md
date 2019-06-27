@@ -115,7 +115,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 The configuration can easily be setup by mounting your own configuration file on the directory `/opt/bitnami/alertmanager/conf/`:
 
 ```
-docker run --name alertmanager -v /path/to/config.yml:/opt/bitnami/alertmanager/conf/conf.yml bitnami/alertmanager:latest
+docker run --name alertmanager -v /path/to/config.yml:/opt/bitnami/alertmanager/conf/config.yml bitnami/alertmanager:latest
 ```
 
 After that, your configuration will be taken into account in the server's behaviour.
@@ -129,7 +129,7 @@ services:
   alertmanager:
     image: bitnami/alertmanager:latest
     volumes:
-      - /path/to/config.yml:/opt/bitnami/alertmanager/conf/conf.yml
+      - /path/to/config.yml:/opt/bitnami/alertmanager/conf/config.yml
 ```
 
 Configuration is yaml based. The full documentation of the configuration can be found [here](https://prometheus.io/docs/alerting/configuration/).
