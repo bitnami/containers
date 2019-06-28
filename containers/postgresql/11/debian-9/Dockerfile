@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r285
+FROM bitnami/minideb-extras-base:stretch-r286
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -16,7 +16,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="11.4.0-debian-9-r7" \
+    BITNAMI_IMAGE_VERSION="11.4.0-debian-9-r8" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
