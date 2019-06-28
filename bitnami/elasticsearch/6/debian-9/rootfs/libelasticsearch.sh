@@ -376,6 +376,10 @@ migrate_old_data() {
 elasticsearch_initialize() {
     info "Configuring/Initializing Elasticsearch..."
 
+    # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
+    # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
+    rm -f "$ELASTICSEARCH_TMPDIR/elasticsearch.pid"
+
     # Persisted data from old versions
     if ! is_dir_empty "$ELASTICSEARCH_DATADIR"; then
         debug "Detected persisted data from previous deployments"
