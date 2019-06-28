@@ -9,7 +9,7 @@ RUN bitnami-pkg install codeigniter-3.1.10-1 --checksum b6c7a8769c37dcb107863cc3
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="codeigniter" \
-    BITNAMI_IMAGE_VERSION="3.1.10-ol-7-r141" \
+    BITNAMI_IMAGE_VERSION="3.1.10-ol-7-r142" \
     CODEIGNITER_PROJECT_NAME="myapp" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
