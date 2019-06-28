@@ -15,7 +15,7 @@ COPY rootfs /
 RUN /postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.14-debian-9-r87" \
+    BITNAMI_IMAGE_VERSION="4.0.14-debian-9-r88" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH" \
     REDIS_DISABLE_COMMANDS="" \
