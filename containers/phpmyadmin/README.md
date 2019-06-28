@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-ol-7`, `4.9.0-1-ol-7-r24` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.9.0-1-ol-7-r24/4/ol-7/Dockerfile)
+* [`4-ol-7`, `4.9.0-1-ol-7-r25` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.9.0-1-ol-7-r25/4/ol-7/Dockerfile)
 * [`4-debian-9`, `4.9.0-1-debian-9-r24`, `4`, `4.9.0-1`, `4.9.0-1-r24`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.9.0-1-debian-9-r24/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpmyadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phpmyadmin).
