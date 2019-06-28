@@ -363,7 +363,7 @@ mongodb_config_apply_regex() {
 
 # Arguments:
 #   None
-# Return 
+# Return
 #   None
 #########################
 mongodb_enable_auth() {
@@ -408,7 +408,7 @@ mongodb_enable_replicasetmode() {
 mongodb_create_users() {
     local result
 
-    info "Creating users..." 
+    info "Creating users..."
     if [[ -n "$MONGODB_ROOT_PASSWORD" ]] && ! [[ "$MONGODB_REPLICA_SET_MODE"  =~ ^(secondary|arbiter) ]]; then
         info "Creating root user..."
         result=$(mongodb_execute <<EOF
@@ -455,8 +455,8 @@ mongodb_configure_key_file() {
         chmod 600 "$keyfile"
     fi
 
-    mongodb_config_apply_regex "#?authorization:.*" "authorization: enabled" 
-    mongodb_config_apply_regex "#?keyFile:.*" "keyFile: $keyfile" 
+    mongodb_config_apply_regex "#?authorization:.*" "authorization: enabled"
+    mongodb_config_apply_regex "#?keyFile:.*" "keyFile: $keyfile"
 }
 
 ########################
@@ -479,9 +479,9 @@ EOF
 
     if grep "\"ok\" : 1" <<< "$result" > /dev/null; then
         true
-    else 
+    else
         false
-    fi 
+    fi
 }
 
 ########################
@@ -503,9 +503,9 @@ EOF
 )
     if grep "\"ok\" : 1" <<< "$result" > /dev/null; then
         true
-    else 
+    else
         false
-    fi 
+    fi
 }
 
 ########################
@@ -527,9 +527,9 @@ EOF
 )
     if grep "\"ok\" : 1" <<< "$result" > /dev/null; then
         true
-    else 
+    else
         false
-    fi 
+    fi
 }
 
 ########################
@@ -591,9 +591,9 @@ EOF
 )
     if grep "$node" <<< "$result" > /dev/null; then
         true
-    else 
+    else
         false
-    fi 
+    fi
 }
 
 ########################
@@ -633,9 +633,9 @@ EOF
 )
     if grep "true" <<< "$result" > /dev/null; then
         true
-    else 
+    else
         false
-    fi 
+    fi
 }
 
 ########################
@@ -652,7 +652,7 @@ mongodb_is_primary_available() {
     result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
 db.getUsers()
 EOF
-)   
+)
     if grep "\"user\" :" <<< "$result" > /dev/null; then
         true
     else
@@ -813,8 +813,8 @@ mongodb_configure_replica_set() {
 
     case "$MONGODB_REPLICA_SET_MODE" in
         "primary" )
-             mongodb_configure_primary "$node"
-             ;;
+            mongodb_configure_primary "$node"
+            ;;
         "secondary")
             mongodb_wait_for_primary_node
 
@@ -947,6 +947,10 @@ mongodb_initialize() {
     local persisted=false
 
     info "Initializing MongoDB..."
+
+    # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
+    # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
+    rm -f "$MONGODB_PID_FILE"
 
     # Configuring permissions for tmp, logs and data folders
     am_i_root && chown -LR "$MONGODB_DAEMON_USER":"$MONGODB_DAEMON_GROUP" "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR"
