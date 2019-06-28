@@ -8,12 +8,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     OS_NAME="linux"
 
 # Install required system packages and dependencies
-RUN . ./libcomponent.sh && component_unpack "minio-client" "2019.6.19-0" --checksum cd8edfd69a86b75f020e93662e41eba1cfa207a2699be6f8031c404196932a78
+RUN . ./libcomponent.sh && component_unpack "minio-client" "2019.6.27-0" --checksum 79461157ab5c376f2bb6062d431846c50b343e801a97c66346ca5f3c411c35a8
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="minio-client" \
-    BITNAMI_IMAGE_VERSION="2019.6.19-debian-9-r8" \
+    BITNAMI_IMAGE_VERSION="2019.6.27-debian-9-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/minio-client/bin:$PATH"
 
