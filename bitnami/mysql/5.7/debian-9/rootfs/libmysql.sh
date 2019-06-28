@@ -696,6 +696,10 @@ mysql_ensure_optional_database_exists() {
 mysql_initialize() {
     info "Initializing $DB_FLAVOR database..."
 
+    # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
+    # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
+    rm -f "$DB_TMPDIR/mysqld.pid"
+
     # User injected custom configuration
     if [[ -f "$DB_CONFDIR/my_custom.cnf" ]]; then
         debug "Custom configuration detected. Injecting..."
