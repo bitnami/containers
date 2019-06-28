@@ -462,6 +462,10 @@ postgresql_is_file_external() {
 postgresql_initialize() {
     info "Initializing PostgreSQL database..."
 
+    # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
+    # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
+    rm -f "$POSTGRESQL_PID_FILE"
+
     # User injected custom configuration
     if [[ -d "$POSTGRESQL_MOUNTED_CONF_DIR" ]] && compgen -G "$POSTGRESQL_MOUNTED_CONF_DIR"/* > /dev/null; then
         debug "Copying files from $POSTGRESQL_MOUNTED_CONF_DIR to $POSTGRESQL_CONF_DIR"
