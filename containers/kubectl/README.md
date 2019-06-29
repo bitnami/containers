@@ -28,12 +28,12 @@ $ docker run --name kubectl bitnami/kubectl:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.14-ol-7`, `1.14.3-ol-7-r22` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.3-ol-7-r22/1.14/ol-7/Dockerfile)
+* [`1.14-ol-7`, `1.14.3-ol-7-r23` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.3-ol-7-r23/1.14/ol-7/Dockerfile)
 * [`1.14-debian-9`, `1.14.3-debian-9-r21`, `1.14`, `1.14.3`, `1.14.3-r21`, `latest` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.3-debian-9-r21/1.14/debian-9/Dockerfile)
 * [`1.14-rhel-7`, `1.14.1-rhel-7-r7` (1.14/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.1-rhel-7-r7/1.14/rhel-7/Dockerfile)
 * [`1.13-rhel-7`, `1.13.4-rhel-7-r41` (1.13/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-rhel-7-r41/1.13/rhel-7/Dockerfile)
 * [`1.13-ol-7`, `1.13.4-ol-7-r115` (1.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-ol-7-r115/1.13/ol-7/Dockerfile)
-* [`1.13-debian-9`, `1.13.4-debian-9-r104`, `1.13`, `1.13.4`, `1.13.4-r104` (1.13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-debian-9-r104/1.13/debian-9/Dockerfile)
+* [`1.13-debian-9`, `1.13.4-debian-9-r105`, `1.13`, `1.13.4`, `1.13.4-r105` (1.13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-debian-9-r105/1.13/debian-9/Dockerfile)
 * [`1.12-ol-7`, `1.12.9-ol-7-r32` (1.12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.9-ol-7-r32/1.12/ol-7/Dockerfile)
 * [`1.12-debian-9`, `1.12.9-debian-9-r32`, `1.12`, `1.12.9`, `1.12.9-r32` (1.12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.9-debian-9-r32/1.12/debian-9/Dockerfile)
 
