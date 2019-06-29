@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r404
+FROM bitnami/minideb-extras:stretch-r405
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -16,7 +16,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="dokuwiki" \
-    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-debian-9-r144" \
+    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-debian-9-r145" \
     DOKUWIKI_EMAIL="user@example.com" \
     DOKUWIKI_FULL_NAME="Full Name" \
     DOKUWIKI_PASSWORD="bitnami1" \
