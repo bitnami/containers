@@ -183,6 +183,10 @@ nginx_validate() {
 nginx_initialize() {
     info "Initializing NGINX..."
 
+    # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
+    # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
+    rm -f "${NGINX_TMPDIR}/nginx.pid"
+
     # Persisted configuration files from old versions
     if [[ -f "$NGINX_VOLUME/conf/nginx.conf" ]]; then
         error "A 'nginx.conf' file was found inside '${NGINX_VOLUME}/conf'. This configuration is not supported anymore. Please mount the configuration file at '${NGINX_CONFDIR}/nginx.conf' instead."
