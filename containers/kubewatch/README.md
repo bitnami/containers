@@ -8,9 +8,8 @@
 # TL;DR;
 
 ```bash
-$ docker run --name kubewatch bitnami/kubewatch:latest
+$ docker run -it --network host -v $HOME/.kubewatch.yaml:/root/.kubewatch.yaml -v $HOME/.kube/config:/opt/bitnami/kubewatch/.kube/config --name kubewatch bitnami/kubewatch:latest
 ```
-
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
