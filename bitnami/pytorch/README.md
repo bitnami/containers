@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.1.0-ol-7-r63` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.1.0-ol-7-r63/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.1.0-debian-9-r50`, `1`, `1.1.0`, `1.1.0-r50`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.1.0-debian-9-r50/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.1.0-debian-9-r51`, `1`, `1.1.0`, `1.1.0-r51`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.1.0-debian-9-r51/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pytorch GitHub repo](https://github.com/bitnami/bitnami-docker-pytorch).
 
