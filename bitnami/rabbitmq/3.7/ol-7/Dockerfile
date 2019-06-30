@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r332
+FROM bitnami/oraclelinux-extras-base:7-r333
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "rabbitmq" "3.7.15-1" --checksum efd
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.7.15-ol-7-r45" \
+    BITNAMI_IMAGE_VERSION="3.7.15-ol-7-r46" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
