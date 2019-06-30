@@ -1,4 +1,4 @@
-FROM bitnami/ruby:2.4.6-debian-9-r72 as development
+FROM bitnami/ruby:2.4.6-debian-9-r73 as development
 
 ######
 
@@ -14,7 +14,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 COPY --from=development /opt/bitnami/ruby /opt/bitnami/ruby
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.4.6-debian-9-r72-prod" \
+    BITNAMI_IMAGE_VERSION="2.4.6-debian-9-r73-prod" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 CMD [ "irb" ]
