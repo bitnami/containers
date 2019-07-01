@@ -1,4 +1,4 @@
-FROM bitnami/centos-extras-base:7-r58
+FROM bitnami/centos-extras-base:7-r59
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ COPY rootfs /
 RUN yum -y install epel-release && yum -y update && yum -y install nss_wrapper
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="9.6.14-centos-7-r12" \
+    BITNAMI_IMAGE_VERSION="9.6.14-centos-7-r13" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
