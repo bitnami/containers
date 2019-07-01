@@ -48,7 +48,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2.6-ol-7-prod`, `2.6.3-ol-7-r65-prod` (2.6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.3-ol-7-r65-prod/2.6-prod/ol-7/Dockerfile)
+* [`2.6-ol-7-prod`, `2.6.3-ol-7-r66-prod` (2.6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.3-ol-7-r66-prod/2.6-prod/ol-7/Dockerfile)
 * [`2.6-ol-7`, `2.6.3-ol-7-r65` (2.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.3-ol-7-r65/2.6/ol-7/Dockerfile)
 * [`2.6-debian-9-prod`, `2.6.3-debian-9-r57-prod`, `2.6-prod`, `2.6.3-prod`, `2.6.3-r57-prod`, `latest-prod` (2.6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.3-debian-9-r57-prod/2.6-prod/debian-9/Dockerfile)
 * [`2.6-debian-9`, `2.6.3-debian-9-r55`, `2.6`, `2.6.3`, `2.6.3-r55`, `latest` (2.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.3-debian-9-r55/2.6/debian-9/Dockerfile)
