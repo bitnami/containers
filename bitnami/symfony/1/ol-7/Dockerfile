@@ -9,7 +9,7 @@ RUN bitnami-pkg install symfony-1.5.11-20 --checksum d4714f97e462524266a97626854
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="symfony" \
-    BITNAMI_IMAGE_VERSION="1.5.11-ol-7-r341" \
+    BITNAMI_IMAGE_VERSION="1.5.11-ol-7-r342" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_USER="root" \
