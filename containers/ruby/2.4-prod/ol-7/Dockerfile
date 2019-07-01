@@ -11,7 +11,7 @@ RUN install_packages ca-certificates glibc keyutils-libs krb5-libs libcom_err li
 COPY --from=development /opt/bitnami/ruby /opt/bitnami/ruby
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.4.6-ol-7-r81-prod" \
+    BITNAMI_IMAGE_VERSION="2.4.6-ol-7-r82-prod" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 CMD [ "irb" ]
