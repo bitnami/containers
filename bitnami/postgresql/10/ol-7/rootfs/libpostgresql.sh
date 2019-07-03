@@ -167,8 +167,8 @@ postgresql_validate() {
             empty_password_error "POSTGRESQL_PASSWORD"
             exit 1
         fi
-        if (( ${#POSTGRESQL_PASSWORD} > 63 )); then
-            error "The password cannot be longer than 63 characters. Set the environment variable POSTGRESQL_PASSWORD with a shorter value"
+        if (( ${#POSTGRESQL_PASSWORD} > 100 )); then
+            error "The password cannot be longer than 100 characters. Set the environment variable POSTGRESQL_PASSWORD with a shorter value"
             exit 1
         fi
         if [[ -n "$POSTGRESQL_USERNAME" ]] && [[ -z "$POSTGRESQL_PASSWORD" ]]; then
