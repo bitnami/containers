@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`4.1-ol-7`, `4.1.13-ol-7-r40` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.13-ol-7-r40/4.1/ol-7/Dockerfile)
 * [`4.1-debian-9`, `4.1.13-debian-9-r39`, `4.1`, `4.1.13`, `4.1.13-r39` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.13-debian-9-r39/4.1/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.10-ol-7-r41` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.10-ol-7-r41/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.10-debian-9-r41`, `4.0`, `4.0.10`, `4.0.10-r41`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.10-debian-9-r41/4.0/debian-9/Dockerfile)
+* [`4.0-debian-9`, `4.0.10-debian-9-r42`, `4.0`, `4.0.10`, `4.0.10-r42`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.10-debian-9-r42/4.0/debian-9/Dockerfile)
 * [`3.6-ol-7`, `3.6.13-ol-7-r32` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.13-ol-7-r32/3.6/ol-7/Dockerfile)
 * [`3.6-debian-9`, `3.6.13-debian-9-r32`, `3.6`, `3.6.13`, `3.6.13-r32` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.13-debian-9-r32/3.6/debian-9/Dockerfile)
 
@@ -233,7 +233,9 @@ services:
 
 Enabling/disabling IPv6 is possible through the following env var:
 
-- `MONGODB_ENABLE_IPV6`: Whether to enable/disable IPv6 on MongoDB. Default: `yes`. Possible values: `[yes, no]`
+- `MONGODB_ENABLE_IPV6`: Whether to enable/disable IPv6 on MongoDB. Default: `no`. Possible values: `[yes, no]`
+
+To enable IPv6 support, you can execute:
 
 ```bash
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_IPV6=yes bitnami/mongodb:latest
@@ -641,7 +643,12 @@ $ docker-compose up mongodb
 
 # Notable Changes
 
+## 3.6.13-r33, 4.0.10-r42, 4.1.13-r40 and 4.1.13-r41
+
+- `MONGODB_ENABLE_IPV6` set to `false` by default, if you want to enable IPv6, you need to set this environment variable to `true`. You can find more info at the above ["Enabling/disabling IPv6"](#enablingdisabling-ipv6) section.
+
 ## 3.6.9, 4.0.4 and 4.1.5 or later
+
 - All MongoDB versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Iniciative (OSI).
 
 ## 3.6.6-r16 and 4.1.1-r9
