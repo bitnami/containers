@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r408
+FROM bitnami/minideb-extras:stretch-r409
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,7 +7,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libbsd0 libbz2-1.0 libc6 libcomerr2 libedit2 libffi6 libgcc1 libgssapi-krb5-2 libicu57 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libmariadbclient18 libncurses5 libnss-wrapper libreadline7 libsasl2-2 libsqlite3-0 libssl1.1 libstdc++6 libtinfo5 libxml2 libxslt1.1 zlib1g
-RUN bitnami-pkg install python-3.6.8-2 --checksum 2eb057ee7701667327f6bcc1fc8765abe5d9d003a64124e5f8505fa692e71eb8
+RUN bitnami-pkg install python-3.6.9-0 --checksum a3303f1de534403d1c1286b3f16a8052d48a06dbb7bf1cf004c7bd9db1b57873
 RUN bitnami-pkg install postgresql-client-10.9.0-0 --checksum 1a1b4b3f6582abf88a6d109c0f55a65496f0a23b5fadc0b8642800d4d29179e0
 RUN bitnami-pkg unpack airflow-1.10.3-2 --checksum 6fec23db262ae265ad3aa3d509d78091460257d45ac761b9db06d06180aeefd3
 
@@ -33,7 +33,7 @@ ENV AIRFLOW_BASE_URL="" \
     AIRFLOW_WEBSERVER_HOST="127.0.0.1" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="airflow" \
-    BITNAMI_IMAGE_VERSION="1.10.3-debian-9-r53" \
+    BITNAMI_IMAGE_VERSION="1.10.3-debian-9-r54" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
     LD_PRELOAD="/usr/lib/libnss_wrapper.so" \
     LNAME="airflow" \
