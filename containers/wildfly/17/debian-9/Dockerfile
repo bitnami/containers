@@ -8,12 +8,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages libaio1 libc6 libgcc1
 RUN bitnami-pkg install java-1.8.212-0 --checksum 54a18672c8b4c1a44324c607a6bc616f614a062005d5e3384f91f10ff6f6edea
-RUN bitnami-pkg unpack wildfly-17.0.0-0 --checksum ee0d26c232bcf9f4ae2ff24160df0fc40a134a8324a33f4518b76347b2dc71a8
+RUN bitnami-pkg unpack wildfly-17.0.1-0 --checksum 5acc5e072e35fbf1d9b1acc8e298b654212e2678f5b2caa601fa55ee105a89ef
 RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="17.0.0-debian-9-r22" \
+    BITNAMI_IMAGE_VERSION="17.0.1-debian-9-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly" \
