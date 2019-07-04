@@ -1,0 +1,5 @@
+{
+  "enableCustomPorts": "{{$global.env.NGINX_ENABLE_CUSTOM_PORTS}}",
+  "httpPort": "{{$global.env.NGINX_HTTP_PORT_NUMBER}}",
+  "httpsPort": "{{$global.env.NGINX_HTTPS_PORT_NUMBER}}"
+}
