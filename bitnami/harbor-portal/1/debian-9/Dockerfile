@@ -1,0 +1,34 @@
+FROM bitnami/minideb-extras-base:stretch-r292
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-9" \
+    OS_NAME="linux"
+
+# Install required system packages and dependencies
+RUN install_packages libc6 libgeoip1 libpcre3 libssl1.1 zlib1g
+RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.0-12" --checksum 6328bcc005fd92bb3a5ae061e29dd4dcc8158f858972d41d309455ffbd88aa08
+RUN . ./libcomponent.sh && component_unpack "harbor" "1.8.1-0" --checksum 03e639830b27621a88f6f9080fd8539810b0db57bcf3ca0dc8426850f7f65d52
+RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
+RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
+RUN chmod -R g+rwX /opt/bitnami/nginx/conf
+
+COPY rootfs /
+RUN /postunpack.sh
+RUN /postunpack-harbor-portal.sh
+ENV BITNAMI_APP_NAME="harbor-portal" \
+    BITNAMI_IMAGE_VERSION="1.8.1-debian-9-r0" \
+    NAMI_PREFIX="/.nami" \
+    NGINX_ENABLE_CUSTOM_PORTS="no" \
+    NGINX_HTTPS_PORT_NUMBER="" \
+    NGINX_HTTP_PORT_NUMBER="" \
+    PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/harbor/bin:$PATH"
+
+EXPOSE 8080 8443
+
+WORKDIR /opt/bitnami/harbor
+USER 1001
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD [ "/run.sh" ]
