@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r409
+FROM bitnami/minideb-extras:stretch-r410
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.39-2 --checksum ff55ee9cccf484bac61fa91558fc7f
 RUN bitnami-pkg unpack php-7.1.30-0 --checksum cee5b9024346ecbdfa75d0d96ad29a6bdfbfa12278fa87ee482c0f8a03edd5cc
 RUN bitnami-pkg unpack mysql-client-10.3.16-0 --checksum c22e014b6fc259a67fcdd52b365e62ed08e6d7e6871888d9ef935c8531ada9b2
 RUN bitnami-pkg install libphp-7.1.30-0 --checksum 8b0088abe4159423424b036eb5f598388d5fd4e59e54a3a5f1ecf6071b8a7fee
-RUN bitnami-pkg unpack drupal-8.7.3-0 --checksum 88941b41dd099f9514058bba66c4f86f73e7a7cea9ca6ae3964ae86393584b65
+RUN bitnami-pkg unpack drupal-8.7.4-0 --checksum e128f675f7c7aa9679551c49accb2501d2b1954f90f8b57cfb70572d29cacb2a
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.7.3-debian-9-r28" \
+    BITNAMI_IMAGE_VERSION="8.7.4-debian-9-r0" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
