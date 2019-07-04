@@ -47,10 +47,10 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4.1-ol-7`, `4.1.13-ol-7-r41` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.13-ol-7-r41/4.1/ol-7/Dockerfile)
-* [`4.1-debian-9`, `4.1.13-debian-9-r39`, `4.1`, `4.1.13`, `4.1.13-r39` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.13-debian-9-r39/4.1/debian-9/Dockerfile)
+* [`4.1-debian-9`, `4.1.13-debian-9-r40`, `4.1`, `4.1.13`, `4.1.13-r40` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.13-debian-9-r40/4.1/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.10-ol-7-r42` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.10-ol-7-r42/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.10-debian-9-r42`, `4.0`, `4.0.10`, `4.0.10-r42`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.10-debian-9-r42/4.0/debian-9/Dockerfile)
-* [`3.6-ol-7`, `3.6.13-ol-7-r33` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.13-ol-7-r33/3.6/ol-7/Dockerfile)
+* [`3.6-ol-7`, `3.6.13-ol-7-r34` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.13-ol-7-r34/3.6/ol-7/Dockerfile)
 * [`3.6-debian-9`, `3.6.13-debian-9-r33`, `3.6`, `3.6.13`, `3.6.13-r33` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.13-debian-9-r33/3.6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
@@ -648,6 +648,7 @@ $ docker-compose up mongodb
 - `MONGODB_ENABLE_IPV6` set to `false` by default, if you want to enable IPv6, you need to set this environment variable to `true`. You can find more info at the above ["Enabling/disabling IPv6"](#enablingdisabling-ipv6) section.
 
 ## 3.6.13-debian-9-r15, 3.6.13-ol-7-r15, 4.0.10-debian-9-r23, 4.0.10-ol-7-r24, 4.1.13-debian-9-r22, 4.1.13-ol-7-r23 or later
+
 - Decrease the size of the container. Node.js is not needed anymore. MongoDB configuration logic has been moved to bash scripts in the rootfs folder.
 
 ## 3.6.9, 4.0.4 and 4.1.5 or later
