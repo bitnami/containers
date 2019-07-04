@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r409
+FROM bitnami/minideb-extras:stretch-r410
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,11 +7,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libstdc++6
-RUN bitnami-pkg unpack kibana-7.1.1-0 --checksum 733476de720e5e5cfd6eaee366993b5cb725ce1e8fe227bc7ed9f8d15ac3eec2
+RUN bitnami-pkg unpack kibana-7.2.0-0 --checksum 52d65da7bc34a4d78bc284b9a195ecdb1cf5d733fa45db2c1d69241245c202b5
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="7.1.1-debian-9-r36" \
+    BITNAMI_IMAGE_VERSION="7.2.0-debian-9-r0" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
