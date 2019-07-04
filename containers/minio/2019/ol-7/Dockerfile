@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r330
+FROM bitnami/oraclelinux-extras-base:7-r337
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -9,13 +9,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates jq
-RUN . ./libcomponent.sh && component_unpack "minio-client" "2019.6.19-0" --checksum 1d2939645e177e9d89f45820b08ca4d7bd03a7b2609808bf9402b9e194690cba
-RUN . ./libcomponent.sh && component_unpack "minio" "2019.6.19-0" --checksum 67d4904b097827a53b727edaf3d89f05a0d0b60d1994e39b5074fc970e42be71
+RUN . ./libcomponent.sh && component_unpack "minio-client" "2019.7.3-0" --checksum dbe64f91ac16cc2506620f81ff4c45a4fcc6524567cea6d21a795bdc31ae2d68
+RUN . ./libcomponent.sh && component_unpack "minio" "2019.6.27-0" --checksum 70c9dff08207ac28afda58675d5311e97f5827604199dd3a792acee634ec7ae6
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="minio" \
-    BITNAMI_IMAGE_VERSION="2019.6.19-ol-7-r8" \
+    BITNAMI_IMAGE_VERSION="2019.6.27-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
