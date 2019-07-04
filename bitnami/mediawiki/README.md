@@ -40,8 +40,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.32.2-ol-7-r26` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.32.2-ol-7-r26/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.32.2-debian-9-r28`, `1`, `1.32.2`, `1.32.2-r28`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.32.2-debian-9-r28/1/debian-9/Dockerfile)
+* [`1-ol-7`, `1.33.0-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.33.0-ol-7-r0/1/ol-7/Dockerfile)
+* [`1-debian-9`, `1.33.0-debian-9-r0`, `1`, `1.33.0`, `1.33.0-r0`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.33.0-debian-9-r0/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mediawiki GitHub repo](https://github.com/bitnami/bitnami-docker-mediawiki).
 
@@ -276,7 +276,7 @@ Available variables:
 ##### User and Site configuration
 
 - `MEDIAWIKI_USERNAME`: Mediawiki application username. Default: **user**
-- `MEDIAWIKI_PASSWORD`: Mediawiki application password. Default: **bitnami1**
+- `MEDIAWIKI_PASSWORD`: Mediawiki application password. Default: **bitnami123**
 - `MEDIAWIKI_EMAIL`: Mediawiki application email. Default: **user@example.com**
 - `MEDIAWIKI_WIKI_NAME`: Mediawiki wiki name. Default: **Bitnami MediaWiki**
 
@@ -486,7 +486,7 @@ RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt
 
 ## Modify the ports used by Apache by default
 # It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181 
+ENV APACHE_HTTP_PORT_NUMBER=8181
 ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
@@ -525,7 +525,7 @@ volumes:
   mediawiki_data:
     driver: local
 ```
-  
+
 # Notable Changes
 
 ## 1.32.1-debian-9-r20 and 1.32.1-ol-7-r33
