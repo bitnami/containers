@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r292
+FROM bitnami/minideb-extras-base:stretch-r293
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "harbor-clair" "1.8.1-0" --checksum 
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="harbor-clair" \
-    BITNAMI_IMAGE_VERSION="1.8.1-debian-9-r2" \
+    BITNAMI_IMAGE_VERSION="1.8.1-debian-9-r3" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/git/bin:/opt/bitnami/harbor-clair/bin:$PATH"
 
