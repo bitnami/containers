@@ -8,8 +8,9 @@
 # TL;DR;
 
 ```bash
-$ docker run -it --network host -v $HOME/.kubewatch.yaml:/root/.kubewatch.yaml -v $HOME/.kube/config:/opt/bitnami/kubewatch/.kube/config --name kubewatch bitnami/kubewatch:latest
+$ docker run --name kubewatch bitnami/kubewatch:latest
 ```
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -40,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-rhel-7`, `0.0.4-rhel-7-r82` (0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-rhel-7-r82/0/rhel-7/Dockerfile)
-* [`0-debian-9`, `0.0.4-debian-9-r294`, `0`, `0.0.4`, `0.0.4-r294`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r294/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.0.4-debian-9-r295`, `0`, `0.0.4`, `0.0.4-r295`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r295/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubewatch GitHub repo](https://github.com/bitnami/bitnami-docker-kubewatch).
 
