@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r389
+FROM bitnami/oraclelinux-extras:7-r390
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack kibana-6.8.1-0 --checksum cb29b5e5582b5562e380e4c47157379
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="6.8.1-ol-7-r16" \
+    BITNAMI_IMAGE_VERSION="6.8.1-ol-7-r17" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
