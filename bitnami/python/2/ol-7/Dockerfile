@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-runtimes:7-r362
+FROM bitnami/oraclelinux-runtimes:7-r363
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/python-2.7.16-0-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="2.7.16-ol-7-r117" \
+    BITNAMI_IMAGE_VERSION="2.7.16-ol-7-r118" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8000
