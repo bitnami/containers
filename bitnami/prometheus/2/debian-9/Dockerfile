@@ -3,14 +3,14 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.10.0-0-linux-amd64-debian-9.tar.gz && \
-    echo "50a2257a571b05b1cb5ce5d9c82c33711e5abfa34b06d971df7788f9ed15fa69  /tmp/bitnami/pkg/cache/prometheus-2.10.0-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.10.0-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/prometheus-2.10.0-0-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.11.0-0-linux-amd64-debian-9.tar.gz && \
+    echo "06e58b192fab2c263651960dcd64f4bed6c2a9bc6559ecc774d15bff1325c647  /tmp/bitnami/pkg/cache/prometheus-2.11.0-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.11.0-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/prometheus-2.11.0-0-linux-amd64-debian-9.tar.gz
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.10.0-debian-9-r44" \
+    BITNAMI_IMAGE_VERSION="2.11.0-debian-9-r0" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
