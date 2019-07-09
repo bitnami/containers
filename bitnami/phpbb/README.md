@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.2.7-ol-7-r71` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.7-ol-7-r71/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.2.7-debian-9-r59`, `3`, `3.2.7`, `3.2.7-r59`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.7-debian-9-r59/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.2.7-debian-9-r60`, `3`, `3.2.7`, `3.2.7-r60`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.7-debian-9-r60/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpbb GitHub repo](https://github.com/bitnami/bitnami-docker-phpbb).
 
