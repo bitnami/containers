@@ -49,10 +49,10 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`11-centos-7`, `11.4.0-centos-7-r21` (11/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.4.0-centos-7-r21/11/centos-7/Dockerfile)
 * [`10-ol-7`, `10.9.0-ol-7-r21` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.9.0-ol-7-r21/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.9.0-debian-9-r20`, `10`, `10.9.0`, `10.9.0-r20` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.9.0-debian-9-r20/10/debian-9/Dockerfile)
-* [`10-centos-7`, `10.9.0-centos-7-r20` (10/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.9.0-centos-7-r20/10/centos-7/Dockerfile)
+* [`10-centos-7`, `10.9.0-centos-7-r21` (10/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.9.0-centos-7-r21/10/centos-7/Dockerfile)
 * [`9.6-ol-7`, `9.6.14-ol-7-r23` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.14-ol-7-r23/9.6/ol-7/Dockerfile)
-* [`9.6-debian-9`, `9.6.14-debian-9-r19`, `9.6`, `9.6.14`, `9.6.14-r19` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.14-debian-9-r19/9.6/debian-9/Dockerfile)
-* [`9.6-centos-7`, `9.6.14-centos-7-r20` (9.6/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.14-centos-7-r20/9.6/centos-7/Dockerfile)
+* [`9.6-debian-9`, `9.6.14-debian-9-r20`, `9.6`, `9.6.14`, `9.6.14-r20` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.14-debian-9-r20/9.6/debian-9/Dockerfile)
+* [`9.6-centos-7`, `9.6.14-centos-7-r21` (9.6/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.14-centos-7-r21/9.6/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
 
@@ -578,6 +578,11 @@ The Bitnami PostgreSQL container allows two different sets of environment variab
 | POSTGRESQL_MASTER_PORT_NUMBER        | POSTGRES_MASTER_PORT_NUMBER        |
 | POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS  | POSTGRES_NUM_SYNCHRONOUS_REPLICAS  |
 | POSTGRESQL_SYNCHRONOUS_COMMIT_MODE   | POSTGRES_SYNCHRONOUS_COMMIT_MODE   |
+
+> *IMPORTANT*: Changing the `POSTGRES_USER` will not change the owner of the database that will continue being the `postgres` user. In order to change the database owner, please access using `postgres` as user (`$ psql -U postgres ...`) and execute the following command:
+```
+alter database POSTGRES_DATABASE owner to POSTGRES_USER;
+```
 
 # Logging
 
