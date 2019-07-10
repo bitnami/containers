@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.3.2-ol-7-r17` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.3.2-ol-7-r17/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.3.2-debian-9-r13`, `2`, `2.3.2`, `2.3.2-r13`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.3.2-debian-9-r13/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.3.2-debian-9-r14`, `2`, `2.3.2`, `2.3.2-r14`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.3.2-debian-9-r14/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
 
@@ -55,43 +55,12 @@ Running Magento with a database server is the recommended way. You can either us
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run Magento. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-magento/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_magento
-      - MARIADB_PASSWORD=your_password
-      - MARIADB_DATABASE=bitnami_magento
-    volumes:
-      - 'mariadb_data:/bitnami'
-  magento:
-    image: 'bitnami/magento:latest'
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - MAGENTO_DATABASE_USER=bn_magento
-      - MAGENTO_DATABASE_PASSWORD=your_password
-      - MAGENTO_DATABASE_NAME=bitnami_magento
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - 'magento_data:/bitnami'
-    depends_on:
-      - mariadb
-
-volumes:
-  mariadb_data:
-    driver: local
-  magento_data:
-    driver: local
-```
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-magento/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
+``` 
 
 ### Run the application manually
 
@@ -148,37 +117,20 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the `docker-compose.yml` template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-magento/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_magento
-      - MARIADB_PASSWORD=your_password
-      - MARIADB_DATABASE=bitnami_magento
+  ...
     volumes:
       - /path/to/mariadb-persistence:/bitnami
+  ...
   magento:
-    image: 'bitnami/magento:latest'
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - MAGENTO_DATABASE_USER=bn_magento
-      - MAGENTO_DATABASE_PASSWORD=your_password
-      - MAGENTO_DATABASE_NAME=bitnami_magento
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
+  ...
     volumes:
       - '/path/to/magento-persistence:/bitnami'
-
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -259,16 +211,14 @@ You can use these snapshots to restore the application state should the upgrade 
 
 When you start the magento image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
-
+ * For docker-compose, add the variable to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-magento/blob/master/docker-compose.yml) file present in this repository:
+ 
 ```yaml
 magento:
-  image: bitnami/magento:latest
-  ports:
-    - 80:80
-    - 443:443
+  ...
   environment:
     - MAGENTO_PASSWORD=my_password1234
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
