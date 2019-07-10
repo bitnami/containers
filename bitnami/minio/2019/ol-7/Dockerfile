@@ -10,12 +10,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages ca-certificates jq
 RUN . ./libcomponent.sh && component_unpack "minio-client" "2019.7.9-0" --checksum 9ff998344970cf336ff8df04c45f9c8de1f38cade29aa751588ea1e5bf882e55
-RUN . ./libcomponent.sh && component_unpack "minio" "2019.7.5-0" --checksum 382da471b54e440838899f868b3c4e2447e9a96d347ba1775244e24e5b0748c7
+RUN . ./libcomponent.sh && component_unpack "minio" "2019.7.10-0" --checksum d717fbd08cb7ece44300b65f6c377e6fd246130be94a696acd73ac0fe33c1885
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="minio" \
-    BITNAMI_IMAGE_VERSION="2019.7.5-ol-7-r5" \
+    BITNAMI_IMAGE_VERSION="2019.7.10-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
