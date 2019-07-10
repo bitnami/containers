@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc libgcc libstdc++
-RUN bitnami-pkg unpack tensorflow-serving-1.13.0-0 --checksum f2dc2f57a13b4e50ee70c0fc233c56a9d143b4ba8d4e4bb4fc94755d07337fc8
+RUN bitnami-pkg unpack tensorflow-serving-1.14.0-0 --checksum 1f8d951b265dbb20671d252d5c71851770a3629c25f4611ae7925aed194b39a2
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="1.13.0-ol-7-r120" \
+    BITNAMI_IMAGE_VERSION="1.14.0-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_MODEL_NAME="resnet" \
