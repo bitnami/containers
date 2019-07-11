@@ -38,8 +38,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.7-ol-7`, `1.7.5-2-ol-7-r56` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.5-2-ol-7-r56/1.7/ol-7/Dockerfile)
-* [`1.7-debian-9`, `1.7.5-2-debian-9-r50`, `1.7`, `1.7.5-2`, `1.7.5-2-r50`, `latest` (1.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.5-2-debian-9-r50/1.7/debian-9/Dockerfile)
+* [`1.7-debian-9`, `1.7.6-0-debian-9-r0`, `1.7`, `1.7.6-0`, `1.7.6-0-r0`, `latest` (1.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.6-0-debian-9-r0/1.7/debian-9/Dockerfile)
+* [`1.7-ol-7`, `1.7.5-2-ol-7-r57` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.5-2-ol-7-r57/1.7/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
@@ -53,39 +53,11 @@ Running PrestaShop with a database server is the recommended way. You can either
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run PrestaShop. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-prestashop/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-services:
-  mariadb:
-    image: 'bitnami/mariadb:10.1'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_prestashop
-      - MARIADB_DATABASE=bitnami_prestashop
-    volumes:
-      - 'mariadb_data:/bitnami'
-  prestashop:
-    image: 'bitnami/prestashop:latest'
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - PRESTASHOP_DATABASE_USER=bn_prestashop
-      - PRESTASHOP_DATABASE_NAME=bitnami_prestashop
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - 'prestashop_data:/bitnami'
-    depends_on:
-      - mariadb
-volumes:
-  mariadb_data:
-    driver: local
-  prestashop_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-prestashop/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ### Run the application manually
@@ -142,33 +114,20 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the `docker-compose.yml` template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-prestashop/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.1'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_prestashop
-      - MARIADB_DATABASE=bitnami_prestashop
+  ...
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
+  ...
   prestashop:
-    image: 'bitnami/prestashop:latest'
-    environment:
-      - PRESTASHOP_DATABASE_USER=bn_prestashop
-      - PRESTASHOP_DATABASE_NAME=bitnami_prestashop
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '80:80'
-      - '443:443'
+  ...
     volumes:
       - '/path/to/prestashop-persistence:/bitnami'
-   depends_on:
-      - mariadb
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -283,18 +242,14 @@ When you start the PrestaShop image, you can adjust the configuration of the ins
 
 If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-prestashop/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 prestashop:
-  image: bitnami/prestashop:latest
-  ports:
-    - 80:80
-    - 443:443
+  ...
   environment:
     - PRESTASHOP_HOST=your_host
-  volumes:
-    - prestashop_data:/bitnami
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -319,14 +274,11 @@ To configure PrestaShop to send email using SMTP you can set the following envir
 
 This would be an example of SMTP configuration using a GMail account:
 
-* docker-compose:
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-prestashop/blob/master/docker-compose.yml) file present in this repository: :
 
 ```yaml
 prestashop:
-  image: bitnami/prestashop:latest
-  ports:
-    - 80:80
-    - 443:443
+  ...
   environment:
     - MARIADB_HOST=mariadb
     - MARIADB_PORT_NUMBER=3306
@@ -337,6 +289,7 @@ prestashop:
     - SMTP_PROTOCOL=tls
     - SMTP_USER=your_email@gmail.com
     - SMTP_PASSWORD=your_password
+  ...
 ```
 
 * For manual execution:
