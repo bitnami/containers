@@ -1,12 +1,12 @@
-FROM bitnami/oraclelinux-extras:7-r393
+FROM bitnami/oraclelinux-extras:7-r394
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
+RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.39-2 --checksum bd13d67036ecb691256893b0ba4034364b90c05747b2afbaa3c097fb218bc2e1
-RUN bitnami-pkg unpack php-7.1.30-0 --checksum 232ee9f323d2ba318e43574670b8e5b327c8f6b9635aebe8b73fb7b8ec2c22f9
+RUN bitnami-pkg unpack php-7.2.20-0 --checksum 4bb0ceb538177080889830454a6738f65eb3a4519f007e9619c0dafe9c899baf
 RUN bitnami-pkg unpack mysql-client-10.3.16-0 --checksum bc7ef5b2abef585c0079a7e4cb2a099c5f40cf39402c52078438a39882953ab4
-RUN bitnami-pkg install libphp-7.1.30-0 --checksum 15aa01c485336e8f34f2fba037acecb1af506d7abc23d0942a08c55de339ddf5
+RUN bitnami-pkg install libphp-7.2.20-0 --checksum 26d8a503146cb41b9d04ab8031da265426f32eb6725e907ad031e5ded9dfd5a7
 RUN bitnami-pkg unpack phpbb-3.2.7-1 --checksum cb62ea3eb8d5309cba4c7b244252625bce8c17311c796f6e49e7387c2bc793b1
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="phpbb" \
-    BITNAMI_IMAGE_VERSION="3.2.7-ol-7-r72" \
+    BITNAMI_IMAGE_VERSION="3.2.7-ol-7-r73" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
