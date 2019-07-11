@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-ol-7`, `4.3.2-0-ol-7-r7` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.3.2-0-ol-7-r7/4/ol-7/Dockerfile)
+* [`4-ol-7`, `4.3.2-0-ol-7-r8` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.3.2-0-ol-7-r8/4/ol-7/Dockerfile)
 * [`4-debian-9`, `4.3.2-0-debian-9-r5`, `4`, `4.3.2-0`, `4.3.2-0-r5`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.3.2-0-debian-9-r5/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/orangehrm GitHub repo](https://github.com/bitnami/bitnami-docker-orangehrm).
@@ -53,46 +53,12 @@ OrangeHRM requires access to a MySQL database or MariaDB database to store infor
 
 Running OrangeHRM with a database server is the recommended way. You can either use docker-compose or run the containers manually. We'll use our very own [MariaDB image](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
 
-## Using Docker Compose
+### Using Docker Compose
 
-The recommended way to run OrangeHRM is using Docker Compose using the following `docker-compose.yml` template:
-
-```yaml
-version: '2'
-services:
-  mariadb:
-    image: bitnami/mariadb:latest
-    environment:
-      - MARIADB_USER=bn_orangehrm
-      - MARIADB_DATABASE=bitnami_orangehrm
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - 'mariadb_data:/bitnami'
-  orangehrm:
-    image: bitnami/orangehrm:latest
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - ORANGEHRM_DATABASE_USER=bn_orangehrm
-      - ORANGEHRM_DATABASE_NAME=bitnami_orangehrm
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - 'orangehrm_data:/bitnami'
-    depends_on:
-      - mariadb
-volumes:
-  mariadb_data:
-    driver: local
-  orangehrm_data:
-    driver: local
-```
-
-Launch the containers using:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-orangehrm/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
 ```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-orangehrm/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -146,32 +112,20 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-The following `docker-compose.yml` template demonstrates the use of host directories as data volumes.
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-orangehrm/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_orangehrm
-      - MARIADB_DATABASE=bitnami_orangehrm
+  ...
     volumes:
       - /path/to/mariadb-persistence:/bitnami
+  ...
   orangehrm:
-    image: bitnami/orangehrm:latest
-    environment:
-      - ORANGEHRM_DATABASE_USER=bn_orangehrm
-      - ORANGEHRM_DATABASE_NAME=bitnami_orangehrm
-      - ALLOW_EMPTY_PASSWORD=yes
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
+  ...
     volumes:
       - /path/to/orangehrm-persistence:/bitnami
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -278,24 +232,19 @@ If you want to add a new environment variable:
 
 ### Specifying Environment variables using Docker Compose
 
+This requires a change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-orangehrm/blob/master/docker-compose.yml) file present in this repository: 
+
 ```yaml
-version: '2'
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
+  ...
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_orangehrm
       - MARIADB_DATABASE=bitnami_orangehrm
-    volumes:
-      - mariadb_data:/bitnami
+  ...
   orangehrm:
-    image: bitnami/orangehrm:latest
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
+  ...
     environment:
       - ORANGEHRM_PASSWORD=my_password
       - MARIADB_HOST=mariadb
@@ -303,13 +252,7 @@ services:
       - ORANGEHRM_DATABASE_USER=bn_orangehrm
       - ORANGEHRM_DATABASE_NAME=bitnami_orangehrm
       - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - orangehrm_data:/bitnami
-volumes:
-  mariadb_data:
-    driver: local
-  orangehrm_data:
-    driver: local
+  ...
 ```
 
 ### Specifying Environment variables on the Docker command line
@@ -338,16 +281,11 @@ To configure OrangeHRM to send email using SMTP you can set the following enviro
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose (application part):
-
+ * This requires a change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-orangehrm/blob/master/docker-compose.yml) file present in this repository: 
+ 
 ```yaml
   orangehrm:
-    image: bitnami/orangehrm:latest
-    depends_on:
-      - mariadb
-    ports:
-      - 80:80
-      - 443:443
+  ...
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
@@ -358,8 +296,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
       - SMTP_PROTOCOL=ssl
-    volumes:
-      - orangehrm_data:/bitnami
+  ...
 ```
 
 * For manual execution:
