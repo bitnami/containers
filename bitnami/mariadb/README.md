@@ -47,10 +47,10 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`10.3-ol-7`, `10.3.16-ol-7-r24` (10.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.16-ol-7-r24/10.3/ol-7/Dockerfile)
+* [`10.3-ol-7`, `10.3.16-ol-7-r25` (10.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.16-ol-7-r25/10.3/ol-7/Dockerfile)
 * [`10.3-debian-9`, `10.3.16-debian-9-r23`, `10.3`, `10.3.16`, `10.3.16-r23`, `latest` (10.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.16-debian-9-r23/10.3/debian-9/Dockerfile)
-* [`10.2-ol-7`, `10.2.25-ol-7-r24` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.25-ol-7-r24/10.2/ol-7/Dockerfile)
-* [`10.2-debian-9`, `10.2.25-debian-9-r23`, `10.2`, `10.2.25`, `10.2.25-r23` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.25-debian-9-r23/10.2/debian-9/Dockerfile)
+* [`10.2-ol-7`, `10.2.25-ol-7-r25` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.25-ol-7-r25/10.2/ol-7/Dockerfile)
+* [`10.2-debian-9`, `10.2.25-debian-9-r24`, `10.2`, `10.2.25`, `10.2.25-r24` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.25-debian-9-r24/10.2/debian-9/Dockerfile)
 * [`10.2-rhel-7`, `10.2.23-rhel-7-r23` (10.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.23-rhel-7-r23/10.2/rhel-7/Dockerfile)
 * [`10.1-ol-7`, `10.1.40-ol-7-r70` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.40-ol-7-r70/10.1/ol-7/Dockerfile)
 * [`10.1-debian-9`, `10.1.40-debian-9-r64`, `10.1`, `10.1.40`, `10.1.40-r64` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.40-debian-9-r64/10.1/debian-9/Dockerfile)
@@ -96,20 +96,15 @@ $ docker run \
     bitnami/mariadb:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '3306:3306'
+  ...
     volumes:
       - /path/to/mariadb-persistence:/bitnami/mariadb
+  ...
 ```
 
 # Connecting to other containers
@@ -202,19 +197,16 @@ Passing extra command-line flags to the mysqld service command is possible throu
 $ docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes -e MARIADB_EXTRA_FLAGS='--max-connect-errors=1000 --max_connections=155' bitnami/mariadb:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    ports:
-      - '3306:3306'
+  ...
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_EXTRA_FLAGS=--max-connect-errors=1000 --max_connections=155
+  ...
 ```
 
 ## Setting the root password on first run
@@ -230,18 +222,15 @@ Passing the `MARIADB_ROOT_PASSWORD` environment variable when running the image 
 $ docker run --name mariadb -e MARIADB_ROOT_PASSWORD=password123 bitnami/mariadb:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    ports:
-      - '3306:3306'
+  ...
     environment:
       - MARIADB_ROOT_PASSWORD=password123
+  ...
 ```
 
 **Warning** The `MARIADB_ROOT_USER` user is always created with remote access. It's suggested that the `MARIADB_ROOT_PASSWORD` env variable is always specified to set a password for the `MARIADB_ROOT_USER` user. In case you want to allow the `MARIADB_ROOT_USER` user to access the database without a password set the environment variable `ALLOW_EMPTY_PASSWORD=yes`. **This is recommended only for development**.
@@ -254,18 +243,16 @@ By default the MariaDB image expects all the available passwords to be set. In o
 $ docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes bitnami/mariadb:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository: 
+
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    ports:
-      - '3306:3306'
+  ...
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+  ...
 ```
 
 ## Creating a database on first run
@@ -279,19 +266,16 @@ $ docker run --name mariadb \
     bitnami/mariadb:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    ports:
-      - '3306:3306'
+  ...
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_DATABASE=my_database
+  ...
 ```
 
 ## Creating a database user on first run
@@ -307,21 +291,18 @@ $ docker run --name mariadb \
   bitnami/mariadb:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    ports:
-      - '3306:3306'
+  ...
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=my_user
       - MARIADB_PASSWORD=my_password
       - MARIADB_DATABASE=my_database
+  ...
 ```
 
 **Note!** The `root` user will be created with remote access and without a password if `ALLOW_EMPTY_PASSWORD` is enabled. Please provide the `MARIADB_ROOT_PASSWORD` env variable instead if you want to set a password for the `root` user.
@@ -445,21 +426,16 @@ $ docker run --name mariadb \
     bitnami/mariadb:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '3306:3306'
+  ...
     volumes:
       - /path/to/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro
       - /path/to/mariadb-persistence:/bitnami/mariadb
+  ...
 ```
 
 After that, your changes will be taken into account in the server's behaviour.
