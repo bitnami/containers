@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack memcached-1.5.16-0 --checksum e052c595d0a67bcba8f083046d1
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.16-debian-9-r45" \
+    BITNAMI_IMAGE_VERSION="1.5.16-debian-9-r46" \
     MEMCACHED_CACHE_SIZE="64" \
     MEMCACHED_PASSWORD="" \
     MEMCACHED_USERNAME="root" \
