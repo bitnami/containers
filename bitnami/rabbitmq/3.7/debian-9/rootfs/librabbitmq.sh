@@ -179,8 +179,6 @@ rabbitmq_create_erlang_cookie() {
     fi
 
     echo "$RABBITMQ_ERL_COOKIE" > "${RABBITMQ_HOME_DIR}/.erlang.cookie"
-    echo "$RABBITMQ_ERL_COOKIE" > "${RABBITMQ_LIB_DIR}/.erlang.cookie"
-    chmod 400 "${RABBITMQ_HOME_DIR}/.erlang.cookie" "${RABBITMQ_LIB_DIR}/.erlang.cookie"
 }
 
 ########################
@@ -400,9 +398,12 @@ rabbitmq_initialize() {
     # Persisted configuration files from old versions
     ! is_dir_empty "$RABBITMQ_VOLUME_DIR" && [[ -d "${RABBITMQ_VOLUME_DIR}/conf" ]] && migrate_old_configuration && skip_setup=true
 
-    [[ ! -e "$RABBITMQ_CONF_DIR/rabbitmq.config" ]] && rabbitmq_create_config_file
-    [[ ! -e "$RABBITMQ_CONF_DIR/rabbit-env.conf" ]] && rabbitmq_create_environment_file
-    rabbitmq_create_erlang_cookie
+    [[ ! -f "${RABBITMQ_CONF_DIR}/rabbitmq.config" ]] && rabbitmq_create_config_file
+    [[ ! -f "${RABBITMQ_CONF_DIR}/rabbit-env.conf" ]] && rabbitmq_create_environment_file
+
+    [[ ! -f "${RABBITMQ_HOME_DIR}/.erlang.cookie" ]] && rabbitmq_create_erlang_cookie
+    chmod 400 "${RABBITMQ_HOME_DIR}/.erlang.cookie"
+    ln -sf "${RABBITMQ_HOME_DIR}/.erlang.cookie" "${RABBITMQ_LIB_DIR}/.erlang.cookie"
 
     debug "Ensuring expected directories/files exist..."
     for dir in "$RABBITMQ_DATA_DIR" "$RABBITMQ_LIB_DIR" "$RABBITMQ_HOME_DIR"; do
