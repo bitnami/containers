@@ -57,8 +57,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.11.0-ol-7-r2` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.11.0-ol-7-r2/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.11.0-debian-9-r1`, `2`, `2.11.0`, `2.11.0-r1`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.11.0-debian-9-r1/2/debian-9/Dockerfile)
+* [`2-ol-7`, `2.11.1-ol-7-r0` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.11.1-ol-7-r0/2/ol-7/Dockerfile)
+* [`2-debian-9`, `2.11.1-debian-9-r0`, `2`, `2.11.1`, `2.11.1-r0`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.11.1-debian-9-r0/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus).
 
@@ -112,7 +112,7 @@ We can launch other containers using the same flag (`--network NETWORK`) in the 
 
 Prometheus is configured via command-line flags and a configuration file. While the command-line flags configure immutable system parameters (such as storage locations, amount of data to keep on disk and in memory, etc.), the configuration file defines everything related to scraping jobs and their instances, as well as which rule files to load.
 
-To view all available command-line flags, run ` docker run bitnami/prometheus:latest -h`.
+To view all available command-line flags, run `docker run bitnami/prometheus:latest -h`.
 
 Prometheus can reload its configuration at runtime. If the new configuration is not well-formed, the changes will not be applied. A configuration reload is triggered by sending a SIGHUP to the Prometheus process or sending a HTTP POST request to the /-/reload endpoint (when the --web.enable-lifecycle flag is enabled). This will also reload any configured rule files.
 
@@ -120,7 +120,7 @@ Prometheus can reload its configuration at runtime. If the new configuration is 
 
 # Logging
 
-The Bitnami prometheus Docker image sends the container logs to the `stdout`. To view the logs:
+The Bitnami Prometheus Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
 $ docker logs prometheus
