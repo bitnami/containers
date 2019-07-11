@@ -46,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.5.16-ol-7-r47` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.16-ol-7-r47/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.5.16-ol-7-r48` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.16-ol-7-r48/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.5.16-debian-9-r45`, `1`, `1.5.16`, `1.5.16-r45`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.16-debian-9-r45/1/debian-9/Dockerfile)
 * [`1-rhel-7`, `1.5.13-rhel-7-r0` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.13-rhel-7-r0/1/rhel-7/Dockerfile)
 
@@ -152,18 +152,15 @@ By default, the Bitnami Memcached container starts with a cache size of 64mb. Yo
 docker run --name memcached -e MEMCACHED_CACHE_SIZE=128 bitnami/memcached:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-memcached/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   memcached:
-    image: 'bitnami/memcached:latest'
-    ports:
-      - '11211:11211'
+  ...
     environment:
       - MEMCACHED_CACHE_SIZE=128
+  ...
 ```
 
 > The default value of the `MEMCACHED_CACHE_SIZE` is `64`.
@@ -180,19 +177,18 @@ docker run --name memcached \
   bitnami/memcached:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-memcached/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 version: '2'
 
 services:
   memcached:
-    image: 'bitnami/memcached:latest'
-    ports:
-      - '11211:11211'
+  ...
     environment:
       - MEMCACHED_USERNAME=my_user
       - MEMCACHED_PASSWORD=my_password
+  ...
 ```
 
 > The default value of the `MEMCACHED_USERNAME` is `root`.
