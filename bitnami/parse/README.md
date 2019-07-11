@@ -48,8 +48,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.5.0-ol-7-r8` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.5.0-ol-7-r8/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.5.0-debian-9-r6`, `3`, `3.5.0`, `3.5.0-r6`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.5.0-debian-9-r6/3/debian-9/Dockerfile)
+* [`3-ol-7`, `3.6.0-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.6.0-ol-7-r0/3/ol-7/Dockerfile)
+* [`3-debian-9`, `3.6.0-debian-9-r0`, `3`, `3.6.0`, `3.6.0-r0`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.6.0-debian-9-r0/3/debian-9/Dockerfile)
 * [`3-rhel-7`, `3.3.0-rhel-7-r0` (3/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.3.0-rhel-7-r0/3/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
@@ -64,33 +64,13 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 Running Parse with a database server is the recommended way. You can either use docker-compose or run the containers manually.
 
-### Run the application using Docker Compose
+## Run the application using Docker Compose
 
-This is the recommended way to run Parse. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-
-services:
-  mongodb:
-    image: 'bitnami/mongodb:latest'
-    volumes:
-      - 'mongodb_data:/bitnami'
-  parse:
-    image: 'bitnami/parse:latest'
-    environment:
-      PARSE_HOST: your_host
-    ports:
-      - '1337:1337'
-    volumes:
-      - 'parse_data:/bitnami'
-    depends_on:
-      - mongodb
-volumes:
-  mongodb_data:
-    driver: local
-  parse_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-parse/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ### Run the application manually
@@ -131,23 +111,19 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the `docker-compose.yml` template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
   mongodb:
-    image: 'bitnami/mongodb:latest'
+  ...
     volumes:
       - '/path/to/your/local/mongodb_data:/bitnami'
+  ...
   parse:
-    image: bitnami/parse:latest
-    depends_on:
-      - mongodb
-    ports:
-      - 1337:1337
+  ...
     volumes:
       - '/path/to/parse-persistence:/bitnami'
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -221,19 +197,14 @@ You can use these snapshots to restore the application state should the upgrade 
 
 When you start the parse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 parse:
-  image: bitnami/parse:latest
-  ports:
-    - 1337:1337
+  ...
   environment:
     - PARSE_HOST=my_host
-  volumes:
-    - 'parse_data:/bitnami'
-  depends_on:
-    - mongodb
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
