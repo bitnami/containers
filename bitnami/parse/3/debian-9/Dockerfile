@@ -8,11 +8,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo5 zlib1g
 RUN bitnami-pkg install node-8.16.0-1 --checksum 36e0f45fdd69a2470d220f72f04298354c43d8e91c7217998c078c02ff67c698
 RUN bitnami-pkg install mongodb-client-4.0.10-0 --checksum b23e0b93c98b489b37d815172eb2922f642e2c706e5b39272f7cba9638a1053d
-RUN bitnami-pkg unpack parse-3.5.0-0 --checksum 7573faed4cf4058727b0ba52a8157bfcc46796a1f0a66e7d3934d7f94fb6dc55
+RUN bitnami-pkg unpack parse-3.6.0-0 --checksum 1770e879f3d695f2a005522a87ea1c52fd1b8b287f84774981b25d905b0c890c
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="3.5.0-debian-9-r6" \
+    BITNAMI_IMAGE_VERSION="3.6.0-debian-9-r0" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
