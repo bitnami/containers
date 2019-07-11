@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.7.1-ol-7-r5` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.7.1-ol-7-r5/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.7.1-ol-7-r6` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.7.1-ol-7-r6/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.7.1-debian-9-r3`, `3`, `3.7.1`, `3.7.1-r3`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.7.1-debian-9-r3/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
@@ -55,41 +55,11 @@ Running Moodle with a database server is the recommended way. You can either use
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run Moodle. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - MARIADB_USER=bn_moodle
-      - MARIADB_DATABASE=bitnami_moodle
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - 'mariadb_data:/bitnami'
-  moodle:
-    image: 'bitnami/moodle:latest'
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - MOODLE_DATABASE_USER=bn_moodle
-      - MOODLE_DATABASE_NAME=bitnami_moodle
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - 'moodle_data:/bitnami'
-    depends_on:
-      - mariadb
-
-volumes:
-  mariadb_data:
-    driver: local
-  moodle_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-moodle/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ### Run the application manually
@@ -144,33 +114,20 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount persistent folders in the host using docker-compose
 
-This requires a sightly modification from the template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_moodle
-      - MARIADB_DATABASE=bitnami_moodle
+  ...
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
+  ...
   moodle:
-    image: 'bitnami/moodle:latest'
-    environment:
-      - MOODLE_DATABASE_USER=bn_moodle
-      - MOODLE_DATABASE_NAME=bitnami_moodle
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - '/path/to/moodle-persistence:/bitnami'
+  ...
     depends_on:
       - mariadb
+  ...
 ```
 
 ### Mount persistent folders manually
@@ -296,16 +253,14 @@ When you start the moodle image, you can adjust the configuration of the instanc
 
 If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For docker-compose add the variable name and value under the application section, modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 moodle:
-  image: bitnami/moodle:latest
-  ports:
-    - 80:80
-    - 443:443
+  ...
   environment:
     - MOODLE_PASSWORD=my_password
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -330,14 +285,11 @@ To configure Moodle to send email using SMTP you can set the following environme
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose:
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository: 
 
   ```yaml
   moodle:
-    image: bitnami/moodle:latest
-    ports:
-      - 80:80
-      - 443:443
+  ...
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
@@ -348,6 +300,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
       - SMTP_PROTOCOL=tls
+  ...
   ```
 
 * For manual execution:
