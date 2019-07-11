@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`11-debian-9`, `11.4.0-debian-9-r20`, `11`, `11.4.0`, `11.4.0-r20`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.4.0-debian-9-r20/11/debian-9/Dockerfile)
 * [`11-centos-7`, `11.4.0-centos-7-r23` (11/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.4.0-centos-7-r23/11/centos-7/Dockerfile)
 * [`10-ol-7`, `10.9.0-ol-7-r23` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.9.0-ol-7-r23/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.9.0-debian-9-r21`, `10`, `10.9.0`, `10.9.0-r21` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.9.0-debian-9-r21/10/debian-9/Dockerfile)
+* [`10-debian-9`, `10.9.0-debian-9-r22`, `10`, `10.9.0`, `10.9.0-r22` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.9.0-debian-9-r22/10/debian-9/Dockerfile)
 * [`10-centos-7`, `10.9.0-centos-7-r23` (10/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.9.0-centos-7-r23/10/centos-7/Dockerfile)
 * [`9.6-ol-7`, `9.6.14-ol-7-r25` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.14-ol-7-r25/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.14-debian-9-r21`, `9.6`, `9.6.14`, `9.6.14-r21` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.14-debian-9-r21/9.6/debian-9/Dockerfile)
@@ -89,18 +89,15 @@ $ docker run \
     bitnami/postgresql:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   postgresql:
-    image: 'bitnami/postgresql:latest'
-    ports:
-      - '5432:5432'
+  ...
     volumes:
       - /path/to/postgresql-persistence:/bitnami
+  ...
 ```
 
 # Connecting to other containers
@@ -188,18 +185,15 @@ In the above commands you may have noticed the use of the `POSTGRESQL_PASSWORD` 
 $ docker run --name postgresql -e POSTGRESQL_PASSWORD=password123 bitnami/postgresql:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   postgresql:
-    image: 'bitnami/postgresql:latest'
-    ports:
-      - '5432:5432'
+  ...
     environment:
       - POSTGRESQL_PASSWORD=password123
+  ...
 ```
 
 **Note!**
@@ -213,18 +207,15 @@ By passing the `POSTGRESQL_DATABASE` environment variable when running the image
 $ docker run --name postgresql -e POSTGRESQL_DATABASE=my_database bitnami/postgresql:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   postgresql:
-    image: 'bitnami/postgresql:latest'
-    ports:
-      - '5432:5432'
+  ...
     environment:
       - POSTGRESQL_DATABASE=my_database
+  ...
 ```
 
 ## Creating a database user on first run
@@ -235,20 +226,17 @@ You can also create a restricted database user that only has permissions for the
 $ docker run --name postgresql -e POSTGRESQL_USERNAME=my_user -e POSTGRESQL_PASSWORD=password123 -e POSTGRESQL_DATABASE=my_database bitnami/postgresql:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   postgresql:
-    image: 'bitnami/postgresql:latest'
-    ports:
-      - '5432:5432'
+  ...
     environment:
       - POSTGRESQL_USERNAME=my_user
       - POSTGRESQL_PASSWORD=password123
       - POSTGRESQL_DATABASE=my_database
+  ...
 ```
 
 **Note!**
@@ -540,19 +528,16 @@ $ docker run --name postgresql \
   bitnami/postgresql:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   postgresql:
-    image: 'bitnami/postgresql:latest'
-    ports:
-      - '5432:5432'
+  ...
     environment:
       - POSTGRESQL_INITDB_ARGS=--data-checksums
       - POSTGRESQL_INITDB_WALDIR=/bitnami/waldir
+  ...
 ```
 
 ## Environment variables aliases
