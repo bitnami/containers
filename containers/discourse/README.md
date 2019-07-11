@@ -227,6 +227,10 @@ You can use these snapshots to restore the application state should the upgrade 
 
 # Configuration
 
+## Configuration files
+
+You can mount your configuration files to the `/opt/bitnami/discourse/conf` directory.
+
 ## Environment variables
 
 When you start the discourse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
