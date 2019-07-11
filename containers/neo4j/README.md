@@ -49,7 +49,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.5.7-ol-7-r7` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.7-ol-7-r7/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.5.7-ol-7-r8` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.7-ol-7-r8/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.5.7-debian-9-r5`, `3`, `3.5.7`, `3.5.7-r5`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.7-debian-9-r5/3/debian-9/Dockerfile)
 * [`3-rhel-7`, `3.5.5-rhel-7-r0` (3/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.5-rhel-7-r0/3/rhel-7/Dockerfile)
 
@@ -87,13 +87,14 @@ To avoid inadvertent removal of this volume you can [mount host directories as d
 $ docker run -v /path/to/neo4j-persistence:/bitnami bitnami/neo4j:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-neo4j/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 neo4j:
-  image: bitnami/neo4j:latest
+  ...
   volumes:
     - /path/to/neo4j-persistence:/bitnami
+  ...
 ```
 
 # Connecting to other containers
@@ -164,11 +165,14 @@ When you start the neo4j image, you can adjust the configuration of the instance
 
 ### Specifying Environment Variables using Docker Compose
 
+Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-neo4j/blob/master/docker-compose.yml) file present in this repository:
+
 ```yaml
 neo4j:
-  image: bitnami/neo4j:latest
+  ...
   environment:
     - NEO4J_BOLT_PORT_NUMBER=7777
+  ...
 ```
 
 ### Specifying Environment Variables on the Docker command line
@@ -183,11 +187,14 @@ In order to load your own configuration files, you will have to make them availa
 
 ### Using Docker Compose
 
+Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-neo4j/blob/master/docker-compose.yml) file present in this repository:
+
 ```yaml
 neo4j:
-  image: bitnami/neo4j:latest
+  ...
   volumes:
     - '/local/path/to/your/confDir:/container/path/to/your/confDir'
+  ...
 ```
 
 # Logging
