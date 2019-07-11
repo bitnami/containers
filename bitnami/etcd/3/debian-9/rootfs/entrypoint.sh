@@ -30,9 +30,8 @@ if [[ ! -z "$ETCD_ROOT_PASSWORD" ]]; then
     etcd > /dev/null 2>&1 &
     ETCD_PID=$!
     sleep 3
-    echo "$ETCD_ROOT_PASSWORD" | etcdctl user add root
+    echo "$ETCD_ROOT_PASSWORD" | etcdctl user add root --interactive=false
     etcdctl auth enable
-    etcdctl -u root:"$ETCD_ROOT_PASSWORD" role revoke guest -path '/*' --readwrite
     kill $ETCD_PID
 fi
 
