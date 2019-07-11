@@ -22,7 +22,6 @@ $ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-
 > This [CVE scan report](https://quay.io/repository/bitnami/opencart?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy OpenCart in Kubernetes?
@@ -38,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.0.3-2-ol-7-r85` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-2-ol-7-r85/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.0.3-2-ol-7-r86` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-2-ol-7-r86/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.0.3-2-debian-9-r73`, `3`, `3.0.3-2`, `3.0.3-2-r73`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-2-debian-9-r73/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/opencart GitHub repo](https://github.com/bitnami/bitnami-docker-opencart).
@@ -53,39 +52,11 @@ Running OpenCart with a database server is the recommended way. You can either u
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run OpenCart. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-opencart/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - MARIADB_USER=bn_opencart
-      - MARIADB_DATABASE=bitnami_opencart
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - 'mariadb_data:/bitnami'
-  opencart:
-    image: 'bitnami/opencart:latest'
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - OPENCART_DATABASE_USER=bn_opencart
-      - OPENCART_DATABASE_NAME=bitnami_opencart
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - 'opencart_data:/bitnami'
-    depends_on:
-      - mariadb
-volumes:
-  mariadb_data:
-    driver: local
-  opencart_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-opencart/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ### Run the application manually
@@ -142,33 +113,20 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount persistent folders in the host using docker-compose
 
-This requires a minor change to the `docker-compose.yml` template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-opencart/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_opencart
-      - MARIADB_DATABASE=bitnami_opencart
+  ...
     volumes:
       - '/path/to/mariadb-persitence:/bitnami'
+  ...
   opencart:
-    image: 'bitnami/opencart:latest'
-    environment:
-      - OPENCART_DATABASE_USER=bn_opencart
-      - OPENCART_DATABASE_NAME=bitnami_opencart
-      - ALLOW_EMPTY_PASSWORD=yes
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
+  ...
     volumes:
       - '/path/to/opencart-persistence:/bitnami'
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -275,18 +233,14 @@ When you start the opencart image, you can adjust the configuration of the insta
 
 If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-opencart/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 opencart:
-  image: bitnami/opencart:latest
-  ports:
-    - 80:80
-    - 443:443
+  ...
   environment:
     - OPENCART_HOST=your_host
-  volumes:
-      - opencart_data:/bitnami
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -311,14 +265,11 @@ To configure OpenCart to send email using SMTP you can set the following environ
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose:
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-opencart/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
   opencart:
-    image: bitnami/opencart:latest
-    ports:
-      - 80:80
-      - 443:443
+  ...
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
@@ -330,6 +281,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PASSWORD=your_password
     volumes:
       - opencart_data:/bitnami
+  ...
 ```
 
  * For manual execution:
