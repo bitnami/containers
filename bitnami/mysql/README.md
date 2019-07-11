@@ -48,8 +48,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`8.0-ol-7`, `8.0.16-ol-7-r57` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.16-ol-7-r57/8.0/ol-7/Dockerfile)
 * [`8.0-debian-9`, `8.0.16-debian-9-r64`, `8.0`, `8.0.16`, `8.0.16-r64`, `latest` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.16-debian-9-r64/8.0/debian-9/Dockerfile)
-* [`5.7-ol-7`, `5.7.26-ol-7-r80` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.26-ol-7-r80/5.7/ol-7/Dockerfile)
-* [`5.7-debian-9`, `5.7.26-debian-9-r67`, `5.7`, `5.7.26`, `5.7.26-r67` (5.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.26-debian-9-r67/5.7/debian-9/Dockerfile)
+* [`5.7-ol-7`, `5.7.26-ol-7-r81` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.26-ol-7-r81/5.7/ol-7/Dockerfile)
+* [`5.7-debian-9`, `5.7.26-debian-9-r68`, `5.7`, `5.7.26`, `5.7.26-r68` (5.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.26-debian-9-r68/5.7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
 
@@ -90,20 +90,15 @@ $ docker run \
     bitnami/mysql:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mysql/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   mysql:
-    image: 'bitnami/mysql:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '3306:3306'
+  ...
     volumes:
       - /path/to/mysql-persistence:/bitnami/mysql/data
+  ...
 ```
 
 # Connecting to other containers
@@ -199,18 +194,15 @@ Passing the `MYSQL_ROOT_PASSWORD` environment variable when running the image fo
 $ docker run --name mysql -e MYSQL_ROOT_PASSWORD=password123 bitnami/mysql:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mysql/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   mysql:
-    image: 'bitnami/mysql:latest'
-    ports:
-      - '3306:3306'
+  ...
     environment:
       - MYSQL_ROOT_PASSWORD=password123
+  ...
 ```
 
 **Warning** The `MYSQL_ROOT_USER` user is always created with remote access. It's suggested that the `MYSQL_ROOT_PASSWORD` env variable is always specified to set a password for the `MYSQL_ROOT_USER` user. In case you want to allow the `MYSQL_ROOT_USER` user to access the database without a password set the environment variable `ALLOW_EMPTY_PASSWORD=yes`. **This is recommended only for development**.
@@ -223,18 +215,15 @@ By default the MySQL image expects all the available passwords to be set. In ord
 $ docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mysql/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   mysql:
-    image: 'bitnami/mysql:latest'
-    ports:
-      - '3306:3306'
+  ...
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+  ...
 ```
 
 ## Creating a database on first run
@@ -248,19 +237,16 @@ $ docker run --name mysql \
     bitnami/mysql:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mysql/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   mysql:
-    image: 'bitnami/mysql:latest'
-    ports:
-      - '3306:3306'
+  ...
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=my_database
+  ...
 ```
 
 ## Creating a database user on first run
@@ -276,21 +262,18 @@ $ docker run --name mysql \
   bitnami/mysql:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mysql/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   mysql:
-    image: 'bitnami/mysql:latest'
-    ports:
-      - '3306:3306'
+  ...
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_USER=my_user
       - MYSQL_PASSWORD=my_password
       - MYSQL_DATABASE=my_database
+  ...
 ```
 
 **Note!** The `root` user will be created with remote access and without a password if `ALLOW_EMPTY_PASSWORD` is enabled. Please provide the `MYSQL_ROOT_PASSWORD` env variable instead if you want to set a password for the `root` user.
@@ -414,21 +397,16 @@ $ docker run --name mysql \
     bitnami/mysql:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mysql/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   mysql:
-    image: 'bitnami/mysql:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '3306:3306'
+  ...
     volumes:
       - /path/to/mysql-persistence:/bitnami/mysql/data
       - /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro
+  ...
 ```
 
 After that, your changes will be taken into account in the server's behaviour.
