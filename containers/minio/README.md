@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2019-ol-7`, `2019.7.10-ol-7-r0` (2019/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.7.10-ol-7-r0/2019/ol-7/Dockerfile)
+* [`2019-ol-7`, `2019.7.10-ol-7-r1` (2019/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.7.10-ol-7-r1/2019/ol-7/Dockerfile)
 * [`2019-debian-9`, `2019.7.10-debian-9-r0`, `2019`, `2019.7.10`, `2019.7.10-r0`, `latest` (2019/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.7.10-debian-9-r0/2019/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio GitHub repo](https://github.com/bitnami/bitnami-docker-minio).
@@ -81,18 +81,15 @@ $ docker run --name minio \
     bitnami/minio:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-minio/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   minio:
-    image: 'bitnami/minio:latest'
-    ports:
-      - '9000:9000'
+  ...
     volumes:
       - /path/to/minio-persistence:/data
+  ...
 ```
 
 # Connecting to other containers
@@ -208,25 +205,22 @@ $ docker run --name minio \
     bitnami/minio:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-minio/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   minio:
-    image: 'bitnami/minio:latest'
-    ports:
-      - '9000:9000'
+  ...
     environment:
       - MINIO_DEFAULT_BUCKETS=my-first-bucket,my-second-bucket
+  ...
 ```
 
 ## Securing access to MinIO server with TLS
 
 You can secure the access to MinIO server with TLS as detailed at [MinIO documentation](https://docs.min.io/docs/how-to-secure-access-to-minio-server-with-tls.html).
 
-This image expects the certificates to be mounted at the `/certs` directory. You can put you key and certificate files on a local directory and mount it in the container as shown below:
+This image expects the certificates to be mounted at the `/certs` directory. You can put your key and certificate files on a local directory and mount it in the container as shown below:
 
 ```bash
 $ docker run --name minio \
@@ -235,18 +229,15 @@ $ docker run --name minio \
     bitnami/minio:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-minio/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   minio:
-    image: 'bitnami/minio:latest'
-    ports:
-      - '9000:9000'
+  ...
     volumes:
       - /path/to/certs:/certs
+  ...
 ```
 
 ## Setting up MinIO in Distributed Mode
@@ -325,18 +316,15 @@ $ docker run --name minio \
     bitnami/minio:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-minio/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   minio:
-    image: 'bitnami/minio:latest'
-    ports:
-      - '9000:9000'
+  ...
     environment:
       - MINIO_HTTP_TRACE=/opt/bitnami/minio/log/minio.log
+  ...
 ```
 
 # Maintenance
