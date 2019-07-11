@@ -47,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.16-ol-7`, `1.16.0-ol-7-r88` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-ol-7-r88/1.16/ol-7/Dockerfile)
+* [`1.16-ol-7`, `1.16.0-ol-7-r89` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-ol-7-r89/1.16/ol-7/Dockerfile)
 * [`1.16-debian-9`, `1.16.0-debian-9-r76`, `1.16`, `1.16.0`, `1.16.0-r76`, `latest` (1.16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-debian-9-r76/1.16/debian-9/Dockerfile)
 * [`1.16-centos-7`, `1.16.0-centos-7-r54` (1.16/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-centos-7-r54/1.16/centos-7/Dockerfile)
 * [`1.16-rhel-7`, `0.0.0-rhel-7-r0` (1.16/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/0.0.0-rhel-7-r0/1.16/rhel-7/Dockerfile)
@@ -82,18 +82,16 @@ This NGINX Open Source image exposes a volume at `/app`. Content mounted here is
 $ docker run -v /path/to/app:/app bitnami/nginx:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-nginx/blob/master/docker-compose.yml) file present in this repository:
+
 
 ```yaml
-version: '2'
-
 services:
   nginx:
-    image: 'bitnami/nginx:latest'
-    ports:
-      - '80:8080'
+  ...
     volumes:
       - /path/to/app:/app
+  ...
 ```
 
 # Accessing your server from the host
@@ -146,18 +144,15 @@ $ docker run --name nginx \
   bitnami/nginx:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-nginx/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   nginx:
-    image: 'bitnami/nginx:latest'
-    ports:
-      - '80:8080'
+  ...
     volumes:
       - /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro
+  ...
 ```
 
 ## Using custom SSL certificates
@@ -209,20 +204,16 @@ $ docker run --name nginx \
   bitnami/nginx:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-nginx/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   nginx:
-    image: 'bitnami/nginx:latest'
-    ports:
-    - '80:8080'
-    - '443:8443'
+  ...
     volumes:
     - /path/to/nginx-persistence/certs:/certs
     - /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro
+  ...
 ```
 
 ## Full configuration
@@ -236,18 +227,15 @@ $ docker run --name nginx \
   bitnami/nginx:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-nginx/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   nginx:
-    image: 'bitnami/nginx:latest'
-    ports:
-      - '80:8080'
+  ...
     volumes:
       - /path/to/your_nginx.conf:/opt/bitnami/nginx/conf/nginx.conf:ro
+  ...
 ```
 
 # Reverse proxy to other containers
