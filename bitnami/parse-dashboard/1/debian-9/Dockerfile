@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack parse-dashboard-1.3.3-0 --checksum c7093d0e32e4718b01aef7
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.3.3-debian-9-r22" \
+    BITNAMI_IMAGE_VERSION="1.3.3-debian-9-r23" \
     NAMI_PREFIX="/.nami" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
