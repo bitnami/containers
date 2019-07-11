@@ -23,7 +23,6 @@ $ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-
 > This [CVE scan report](https://quay.io/repository/bitnami/matomo?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy Matomo in Kubernetes?
@@ -46,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.10.0-ol-7-r9` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.10.0-ol-7-r9/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.10.0-debian-9-r7`, `3`, `3.10.0`, `3.10.0-r7`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.10.0-debian-9-r7/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.10.0-debian-9-r8`, `3`, `3.10.0`, `3.10.0-r8`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.10.0-debian-9-r8/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
 
@@ -73,46 +72,16 @@ docker build -t bitnami/matomo:latest https://github.com/bitnami/bitnami-docker-
 
 Matomo requires access to a MySQL database or MariaDB database to store information. It uses our [MariaDB image] (https://github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
 
-## Run the Matomo image using Docker Compose
+## Run the application using Docker Compose
 
-This is the recommended way to run Matomo. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-matomo/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-matomo/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
+``` 
 
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - MARIADB_USER=bn_matomo
-      - MARIADB_DATABASE=bitnami_matomo
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - 'mariadb_data:/bitnami'
-  application:
-    image: 'bitnami/matomo:latest'
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - MATOMO_DATABASE_USER=bn_matomo
-      - MATOMO_DATABASE_NAME=bitnami_matomo
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - 'matomo_data:/bitnami'
-    depends_on:
-      - mariadb
-
-volumes:
-  mariadb_data:
-    driver: local
-  matomo_data:
-    driver: local
-```
-
-## Run the Matomo image using the Docker Command Line
+## Run the application using the Docker Command Line
 
 If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
 
@@ -162,33 +131,20 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the `docker-compose.yml` template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-matomo/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_matomo
-      - MARIADB_DATABASE=bitnami_matomo
+  ...
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
+  ...
   matomo:
-    image: 'bitnami/matomo:latest'
-    environment:
-      - MATOMO_DATABASE_USER=bn_matomo
-      - MATOMO_DATABASE_NAME=bitnami_matomo
-      - ALLOW_EMPTY_PASSWORD=yes
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
+  ...
     volumes:
       - '/path/to/matomo-persistence:/bitnami'
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -298,15 +254,14 @@ When you start the Matomo image, you can adjust the configuration of the instanc
 
 If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-matomo/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 application:
-  image: bitnami/matomo:latest
-  ports:
-    - 80:80
+  ...
   environment:
     - MATOMO_PASSWORD=my_password
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -327,23 +282,18 @@ To configure Matomo to send email using SMTP you can set the following environme
 
 This would be an example of SMTP configuration using a Gmail account:
 
- * docker-compose:
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-matomo/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
   application:
-    image: bitnami/matomo:latest
-    ports:
-      - 80:80
+  ...
     environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - MATOMO_DATABASE_USER=bn_matomo
-      - MATOMO_DATABASE_NAME=bitnami_matomo
       - SMTP_HOST=smtp.gmail.com
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
       - SMTP_PROTOCOL=tls
       - SMTP_PORT=587
+  ...
 ```
 
  * For manual execution:
