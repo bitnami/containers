@@ -24,7 +24,6 @@ $ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-
 > This [CVE scan report](https://quay.io/repository/bitnami/mediawiki?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy MediaWiki in Kubernetes?
@@ -40,7 +39,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.33.0-ol-7-r6` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.33.0-ol-7-r6/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.33.0-ol-7-r7` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.33.0-ol-7-r7/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.33.0-debian-9-r4`, `1`, `1.33.0`, `1.33.0-r4`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.33.0-debian-9-r4/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mediawiki GitHub repo](https://github.com/bitnami/bitnami-docker-mediawiki).
@@ -51,46 +50,18 @@ To run this application you need Docker Engine 1.10.0. It is recommended that yo
 
 # How to use this image
 
-## Run Mediawiki with a Database Container
+## Run MediaWiki with a Database Container
 
-Running Mediawiki with a database server is the recommended way. You can either use docker-compose or run the containers manually.
+Running MediaWiki with a database server is the recommended way. You can either use docker-compose or run the containers manually.
 
-### Run the application using Docker Compose
+## Run the application using Docker Compose
 
-This is the recommended way to run Mediawiki. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mediawiki/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_mediawiki
-      - MARIADB_DATABASE=bitnami_mediawiki
-    volumes:
-      - 'mariadb_data:/bitnami'
-  mediawiki:
-    image: 'bitnami/mediawiki:1'
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - MEDIAWIKI_DATABASE_USER=bn_mediawiki
-      - MEDIAWIKI_DATABASE_NAME=bitnami_mediawiki
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - 'mediawiki_data:/bitnami'
-    depends_on:
-      - mariadb
-volumes:
-  mariadb_data:
-    driver: local
-  mediawiki_data:
-    driver: local
-```
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mediawiki/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
+``` 
 
 ### Run the application manually
 
@@ -143,33 +114,20 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the `docker-compose.yml` template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mediawiki/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_mediawiki
-      - MARIADB_DATABASE=bitnami_mediawiki
+  ...
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
+  ...
   mediawiki:
-    image: 'bitnami/mediawiki:latest'
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
-    environment:
-      - MEDIAWIKI_DATABASE_USER=bn_mediawiki
-      - MEDIAWIKI_DATABASE_NAME=bitnami_mediawiki
-      - ALLOW_EMPTY_PASSWORD=yes
+  ...
     volumes:
       - '/path/to/mediawiki-persistence:/bitnami'
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -194,9 +152,9 @@ In this case you need to specify the directories to mount on the run command. Th
     bitnami/mariadb:latest
   ```
 
-  *Note:* You need to give the container a name in order to Mediawiki to resolve the host
+  *Note:* You need to give the container a name in order to MediaWiki to resolve the host
 
-3. Run the Mediawiki container:
+3. Run the MediaWiki container:
 
   ```bash
   $ docker run -d --name mediawiki -p 80:80 -p 443:443 \
@@ -210,7 +168,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 # Upgrade this application
 
-Bitnami provides up-to-date versions of MariaDB and Mediawiki, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Mediawiki container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of MariaDB and MediaWiki, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Mediawiki container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
 
 1. Get the updated images:
 
@@ -249,16 +207,14 @@ You can use these snapshots to restore the application state should the upgrade 
 
 When you start the mediawiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mediawiki/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 mediawiki:
-  image: bitnami/mediawiki:latest
-  ports:
-    - 80:80
-    - 443:443
+  ...
   environment:
     - MEDIAWIKI_PASSWORD=my_password
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -312,14 +268,11 @@ To configure Mediawiki to send email using SMTP you can set the following enviro
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose:
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mediawiki/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
   mediawiki:
-    image: bitnami/mediawiki:latest
-    ports:
-      - 80:80
-      - 443:443
+  ...
     environment:
       - MEDIAWIKI_DATABASE_USER=bn_mediawiki
       - MEDIAWIKI_DATABASE_NAME=bitnami_mediawiki
@@ -329,6 +282,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PORT=465
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
+  ...
 ```
  * For manual execution:
 
