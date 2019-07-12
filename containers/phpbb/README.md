@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.2.7-ol-7-r73` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.7-ol-7-r73/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.2.7-ol-7-r74` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.7-ol-7-r74/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.2.7-debian-9-r61`, `3`, `3.2.7`, `3.2.7-r61`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.2.7-debian-9-r61/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpbb GitHub repo](https://github.com/bitnami/bitnami-docker-phpbb).
@@ -53,41 +53,13 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 Running phpBB with a database server is the recommended way. You can either use docker-compose or run the containers manually.
 
-### Run the application using Docker Compose
+## Run the application using Docker Compose
 
-This is the recommended way to run phpBB. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phpbb/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_phpbb
-      - MARIADB_DATABASE=bitnami_phpbb
-    volumes:
-      - 'mariadb_data:/bitnami'
-  phpbb:
-    image: 'bitnami/phpbb:3'
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - PHPBB_DATABASE_USER=bn_phpbb
-      - PHPBB_DATABASE_NAME=bitnami_phpbb
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - 'phpbb_data:/bitnami'
-    depends_on:
-      - mariadb
-volumes:
-  mariadb_data:
-    driver: local
-  phpbb_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-phpbb/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ### Run the application manually
@@ -142,33 +114,20 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the `docker-compose.yml` template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phpbb/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_phpbb
-      - MARIADB_DATABASE=bitnami_phpbb
+  ...
     volumes:
       - '/path/to/your/local/mariadb_data:/bitnami'
+  ...
   phpbb:
-    image: 'bitnami/phpbb:latest'
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
-    environment:
-      - PHPBB_DATABASE_USER=bn_phpbb
-      - PHPBB_DATABASE_NAME=bitnami_phpbb
-      - ALLOW_EMPTY_PASSWORD=yes
+  ...
     volumes:
       - '/path/to/phpbb-persistence:/bitnami'
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -248,15 +207,14 @@ You can use these snapshots to restore the application state should the upgrade 
 
 When you start the phpbb image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phpbb/blob/master/docker-compose.yml) file present in this repository: :
 
   ```yaml
   phpbb:
-    image: bitnami/phpbb:latest
-    ports:
-      - 80:80
+  ...
     environment:
       - PHPBB_PASSWORD=my_password
+  ...
   ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -314,14 +272,11 @@ To configure phpBB to send email using SMTP you can set the following environmen
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose:
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phpbb/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
   phpbb:
-    image: bitnami/phpbb:latest
-    ports:
-      - 80:80
-      - 443:443
+  ...
     environment:
       - PHPBB_DATABASE_USER=bn_phpbb
       - PHPBB_DATABASE_NAME=bitnami_phpbb
@@ -329,6 +284,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
+  ...
 ```
 
  * For manual execution:
