@@ -56,11 +56,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`7.3-rhel-7`, `7.3.4-rhel-7-r13` (7.3/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.4-rhel-7-r13/7.3/rhel-7/Dockerfile)
 * [`7.2-ol-7-prod`, `7.2.20-ol-7-r7-prod` (7.2-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.20-ol-7-r7-prod/7.2-prod/ol-7/Dockerfile)
 * [`7.2-ol-7`, `7.2.20-ol-7-r7` (7.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.20-ol-7-r7/7.2/ol-7/Dockerfile)
-* [`7.2-debian-9-prod`, `7.2.20-debian-9-r6-prod`, `7.2-prod`, `7.2.20-prod`, `7.2.20-r6-prod` (7.2-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.20-debian-9-r6-prod/7.2-prod/debian-9/Dockerfile)
+* [`7.2-debian-9-prod`, `7.2.20-debian-9-r7-prod`, `7.2-prod`, `7.2.20-prod`, `7.2.20-r7-prod` (7.2-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.20-debian-9-r7-prod/7.2-prod/debian-9/Dockerfile)
 * [`7.2-debian-9`, `7.2.20-debian-9-r6`, `7.2`, `7.2.20`, `7.2.20-r6` (7.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.20-debian-9-r6/7.2/debian-9/Dockerfile)
 * [`7.2-rhel-7`, `7.2.17-rhel-7-r11` (7.2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.17-rhel-7-r11/7.2/rhel-7/Dockerfile)
+* [`7.1-ol-7-prod`, `7.1.30-ol-7-r43-prod` (7.1-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.30-ol-7-r43-prod/7.1-prod/ol-7/Dockerfile)
 * [`7.1-ol-7`, `7.1.30-ol-7-r43` (7.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.30-ol-7-r43/7.1/ol-7/Dockerfile)
-* [`7.1-ol-7-prod`, `7.1.30-ol-7-r42-prod` (7.1-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.30-ol-7-r42-prod/7.1-prod/ol-7/Dockerfile)
 * [`7.1-debian-9-prod`, `7.1.30-debian-9-r41-prod`, `7.1-prod`, `7.1.30-prod`, `7.1.30-r41-prod` (7.1-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.30-debian-9-r41-prod/7.1-prod/debian-9/Dockerfile)
 * [`7.1-debian-9`, `7.1.30-debian-9-r41`, `7.1`, `7.1.30`, `7.1.30-r41` (7.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.30-debian-9-r41/7.1/debian-9/Dockerfile)
 * [`7.1-rhel-7`, `7.1.28-rhel-7-r12` (7.1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.28-rhel-7-r12/7.1/rhel-7/Dockerfile)
@@ -242,18 +242,15 @@ Run the PHP-FPM image, mounting a file from your host.
 $ docker run --name phpfpm -v /path/to/php-fpm.conf:/opt/bitnami/php/etc/php-fpm.conf bitnami/php-fpm
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-php-fpm/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   phpfpm:
-    image: 'bitnami/php-fpm:latest'
-    ports:
-      - '9000:9000'
+  ...
     volumes:
       - /path/to/php-fpm.conf:/opt/bitnami/php/etc/php-fpm.conf
+  ...
 ```
 
 ### Step 2: Edit the configuration
