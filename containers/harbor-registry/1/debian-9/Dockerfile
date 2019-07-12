@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r295
+FROM bitnami/minideb-extras-base:stretch-r297
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "harbor-registry" "1.8.1-0" --checks
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-registry" \
-    BITNAMI_IMAGE_VERSION="1.8.1-debian-9-r7" \
+    BITNAMI_IMAGE_VERSION="1.8.1-debian-9-r8" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-registry/bin:$PATH"
 
