@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.3.3-ol-7-r31` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/1.3.3-ol-7-r31/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.3.3-debian-9-r23`, `1`, `1.3.3`, `1.3.3-r23`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/1.3.3-debian-9-r23/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.3.3-debian-9-r24`, `1`, `1.3.3`, `1.3.3-r24`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/1.3.3-debian-9-r24/1/debian-9/Dockerfile)
 * [`1-rhel-7`, `1.3.0-rhel-7-r8` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/1.3.0-rhel-7-r8/1/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse-dashboard GitHub repo](https://github.com/bitnami/bitnami-docker-parse-dashboard).
@@ -51,39 +51,12 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run Parse Dashboard. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-services:
-  mongodb:
-    image: 'bitnami/mongodb:latest'
-    volumes:
-      - 'mongodb_data:/bitnami'
-  parse:
-    image: 'bitnami/parse:latest'
-    volumes:
-      - 'parse_data:/bitnami'
-    ports:
-      - '1337:1337'
-    depends_on:
-      - mongodb
-  parse-dashboard:
-    image: 'bitnami/parse-dashboard:latest'
-    ports:
-      - '80:4040'
-    volumes:
-      - 'parse_dashboard_data:/bitnami'
-    depends_on:
-      - mongodb
-volumes:
-  mongodb_data:
-    driver: local
-  parse_data:
-    driver: local
-  parse_dashboard_data:
-    driver: local
-```
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-parse-dashboard/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
+``` 
 
 ### Run the application manually
 
@@ -129,32 +102,25 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the `docker-compose.yml` template previously shown:
-```yaml
-version: '2'
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/master/docker-compose.yml) file present in this repository: 
 
+```yaml
 services:
   mongodb:
-    image: 'bitnami/mongodb:latest'
+  ...
     volumes:
       - '/path/to/mongodb-persistence:/bitnami'
+  ...
   parse:
-    image: 'bitnami/parse:latest'
-    ports:
-      - '1337:1337'
-    depends_on:
-        - mongodb
+  ...
     volumes:
       - '/path/to/parse-persistence:/bitnami'
+  ...
   parse-dashboard:
-    image: 'bitnami/parse-dashboard:latest'
-    ports:
-      - '80:4040'
-    depends_on:
-      - mongodb
+  ...
     volumes:
       - '/path/to/parse_dashboard-persistence:/bitnami'
-
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -236,19 +202,15 @@ You can use these snapshots to restore the application state should the upgrade 
 
 When you start the parse-dashboard image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/master/docker-compose.yml) file present in this repository:
+
 
 ```yaml
 parse-dashboard:
-  image: bitnami/parse-dashboard:latest
-  ports:
-    - 80:4040
+  ...
   environment:
     - PARSE_DASHBOARD_PASSWORD=my_password
-  volumes:
-    - 'parse_dashboard_data:/bitnami'
-  depends_on:
-    - parse
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
