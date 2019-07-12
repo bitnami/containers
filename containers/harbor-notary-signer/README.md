@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`1-centos-7`, `-centos-7-r0` (1/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-notary-signer/blob/-centos-7-r0/1/centos-7/Dockerfile)
 * [`1-ol-7`, `1.8.1-ol-7-r10` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-notary-signer/blob/1.8.1-ol-7-r10/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.8.1-debian-9-r7`, `1`, `1.8.1`, `1.8.1-r7`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-notary-signer/blob/1.8.1-debian-9-r7/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.8.1-debian-9-r8`, `1`, `1.8.1`, `1.8.1-r8`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-notary-signer/blob/1.8.1-debian-9-r8/1/debian-9/Dockerfile)
 
 # Configuration
 
