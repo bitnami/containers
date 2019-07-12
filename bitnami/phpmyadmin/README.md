@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-ol-7`, `4.9.0-1-ol-7-r39` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.9.0-1-ol-7-r39/4/ol-7/Dockerfile)
+* [`4-ol-7`, `4.9.0-1-ol-7-r40` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.9.0-1-ol-7-r40/4/ol-7/Dockerfile)
 * [`4-debian-9`, `4.9.0-1-debian-9-r37`, `4`, `4.9.0-1`, `4.9.0-1-r37`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/4.9.0-1-debian-9-r37/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpmyadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phpmyadmin).
@@ -53,38 +53,10 @@ phpMyAdmin requires access to a MySQL database or MariaDB database to work. We'l
 
 ## Using Docker Compose
 
-The recommended way to run phpMyAdmin is using Docker Compose using the following `docker-compose.yml` template:
-
-```yaml
-version: '2'
-
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - mariadb_data:/bitnami
-  phpmyadmin:
-    image: bitnami/phpmyadmin:latest
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - phpmyadmin_data:/bitnami
-
-volumes:
-  mariadb_data:
-    driver: local
-  phpmyadmin_data:
-    driver: local
-```
-
-Launch the containers using:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
 ```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-phpmyadmin/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -132,27 +104,20 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-The following `docker-compose.yml` template demonstrates the use of host directories as data volumes.
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
+  ...
     volumes:
       - /path/to/mariadb-persistence:/bitnami
+  ...
   phpmyadmin:
-    image: bitnami/phpmyadmin:latest
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
+  ...
     volumes:
       - /path/to/phpmyadmin-persistence:/bitnami
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -238,34 +203,21 @@ The phpMyAdmin instance can be customized by specifying environment variables on
 
 ### Specifying Environment variables using Docker Compose
 
-```yaml
-version: '2'
+This requires a change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/master/docker-compose.yml) file present in this repository: 
 
+```yaml
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
+  ...
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - mariadb_data:/bitnami
+  ...
   phpmyadmin:
-    image: bitnami/phpmyadmin:latest
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
+  ...
     environment:
       - PHPMYADMIN_ALLOW_NO_PASSWORD=false
       - PHPMYADMIN_ALLOW_ARBITRARY_SERVER=true
-    volumes:
-      - phpmyadmin_data:/bitnami
-
-volumes:
-  mariadb_data:
-    driver: local
-  phpmyadmin_data:
-    driver: local
+  ...
 ```
 
 ### Specifying Environment variables on the Docker command line
