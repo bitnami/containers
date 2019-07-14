@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r416
+FROM bitnami/minideb-extras:stretch-r417
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -17,7 +17,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.39-debian-9-r84" \
+    BITNAMI_IMAGE_VERSION="2.4.39-debian-9-r85" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/apache/bin:$PATH"
 
