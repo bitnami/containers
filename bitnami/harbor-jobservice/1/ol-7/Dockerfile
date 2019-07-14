@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r346
+FROM bitnami/oraclelinux-extras-base:7-r347
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "harbor-jobservice" "1.8.1-0" --chec
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-jobservice" \
-    BITNAMI_IMAGE_VERSION="1.8.1-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="1.8.1-ol-7-r12" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-jobservice/bin:$PATH"
 
