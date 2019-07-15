@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-debian-9`, `2.25.6-debian-9-r4`, `2`, `2.25.6`, `2.25.6-r4`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.25.6-debian-9-r4/2/debian-9/Dockerfile)
-* [`2-ol-7`, `2.25.4-ol-7-r13` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.25.4-ol-7-r13/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.25.4-ol-7-r14` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.25.4-ol-7-r14/2/ol-7/Dockerfile)
 * [`2-rhel-7`, `2.22.1-rhel-7-r0` (2/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/2.22.1-rhel-7-r0/2/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
@@ -118,11 +118,15 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 ```yaml
 services:
   mariadb:
+  ...
     volumes:
       - /path/to/mariadb-persistence:/bitnami
+  ...
   ghost:
+  ...
     volumes:
       - '/path/to/ghost-persistence:/bitnami'
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -206,8 +210,10 @@ When you start the ghost image, you can adjust the configuration of the instance
 
 ```yaml
 ghost:
+  ...
   environment:
     - GHOST_HOST=my_host
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -267,12 +273,14 @@ This would be an example of SMTP configuration using a GMail account:
 
 ```yaml
 ghost:
+  ...
   environment:
     - SMTP_HOST=smtp.gmail.com
     - SMTP_USER=your_email@gmail.com
     - SMTP_PASSWORD=your_password
     - SMTP_FROM_ADDRESS="'Custom Name' <myemail@address.com>"
     - SMTP_SERVICE=GMail
+  ...
 ```
 
  * For manual execution:
