@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7-ol-7`, `7.2.0-ol-7-r20` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.2.0-ol-7-r20/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.2.0-debian-9-r12`, `7`, `7.2.0`, `7.2.0-r12`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.2.0-debian-9-r12/7/debian-9/Dockerfile)
+* [`7-debian-9`, `7.2.0-debian-9-r13`, `7`, `7.2.0`, `7.2.0-r13`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.2.0-debian-9-r13/7/debian-9/Dockerfile)
 * [`6-ol-7`, `6.8.1-ol-7-r22` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.1-ol-7-r22/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.8.1-debian-9-r20`, `6`, `6.8.1`, `6.8.1-r20` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.1-debian-9-r20/6/debian-9/Dockerfile)
 * [`7-rhel-7`, `0.0.0-rhel-7-r0` (7/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/0.0.0-rhel-7-r0/7/rhel-7/Dockerfile)
@@ -89,8 +89,10 @@ or by making a minor change to the [`docker-compose.yml`](https://github.com/bit
 
 ```yaml
 mariadb:
+  ...
   volumes:
     - /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data
+  ...
 ```
 
 # Connecting to other containers
@@ -173,8 +175,10 @@ When you start the elasticsearch image, you can adjust the configuration of the 
 
 ```yaml
 elasticsearch:
+  ...
   environment:
     - ELASTICSEARCH_PORT_NUMBER=9201
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -293,9 +297,11 @@ or by changing the [`docker-compose.yml`](https://github.com/bitnami/bitnami-doc
 
 ```yaml
 elasticsearch:
+  ...
   volumes:
     - /path/to/elasticsearch.yml:/opt/bitnami/elasticsearch/config/elasticsearch.yml
     - /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data
+  ...
 ```
 
 # Logging
