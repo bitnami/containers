@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r417
+FROM bitnami/minideb-extras:stretch-r418
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack tensorflow-serving-1.14.0-0 --checksum 3cdd5ecec1dab8806c
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="1.14.0-debian-9-r4" \
+    BITNAMI_IMAGE_VERSION="1.14.0-debian-9-r5" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_MODEL_NAME="resnet" \
