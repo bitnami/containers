@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`9.0-ol-7`, `9.0.22-ol-7-r5` (9.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.22-ol-7-r5/9.0/ol-7/Dockerfile)
-* [`9.0-debian-9`, `9.0.22-debian-9-r3`, `9.0`, `9.0.22`, `9.0.22-r3`, `latest` (9.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.22-debian-9-r3/9.0/debian-9/Dockerfile)
+* [`9.0-debian-9`, `9.0.22-debian-9-r4`, `9.0`, `9.0.22`, `9.0.22-r4`, `latest` (9.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.22-debian-9-r4/9.0/debian-9/Dockerfile)
 * [`9.0-rhel-7`, `9.0.20-rhel-7-r0` (9.0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.20-rhel-7-r0/9.0/rhel-7/Dockerfile)
 * [`8.5-ol-7`, `8.5.43-ol-7-r5` (8.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.43-ol-7-r5/8.5/ol-7/Dockerfile)
 * [`8.5-debian-9`, `8.5.43-debian-9-r4`, `8.5`, `8.5.43`, `8.5.43-r4` (8.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.43-debian-9-r4/8.5/debian-9/Dockerfile)
@@ -86,18 +86,15 @@ For persistence you should mount a directory at the `/bitnami` path. If the moun
 $ docker run -v /path/to/tomcat-persistence:/bitnami bitnami/tomcat:latest
 ```
 
-or using Docker Compose:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tomcat/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   tomcat:
-    image: 'bitnami/tomcat:latest'
-    ports:
-      - '8080:8080'
+  ...
     volumes:
       - /path/to/tomcat-persistence:/bitnami
+  ...
 ```
 
 # Deploying web applications on Tomcat
@@ -164,17 +161,16 @@ Additionally you can specify a user name for the management user using the `TOMC
 
 ### Specifying Environment variables using Docker Compose
 
-```yaml
-version: '2'
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tomcat/blob/master/docker-compose.yml) file present in this repository: 
 
+```yaml
 services:
   tomcat:
-    image: 'bitnami/tomcat:latest'
-    ports:
-      - '8080:8080'
+  ...
     environment:
       - TOMCAT_USERNAME=my_user
       - TOMCAT_PASSWORD=my_password
+  ...
 ```
 
 ### Specifying Environment variables on the Docker command line
@@ -198,18 +194,15 @@ Run the Tomcat image, mounting a directory from your host.
 $ docker run --name tomcat -v /path/to/tomcat-persistence:/bitnami bitnami/tomcat:latest
 ```
 
-or using Docker Compose:
+or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tomcat/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   tomcat:
-    image: 'bitnami/tomcat:latest'
-    ports:
-      - '8080:8080'
+  ...
     volumes:
       - /path/to/tomcat-persistence:/bitnami
+  ...
 ```
 
 ### Step 2: Edit the configuration
