@@ -57,8 +57,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5.0-rhel-7`, `5.0.5-rhel-7-r0` (5.0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.5-rhel-7-r0/5.0/rhel-7/Dockerfile)
-* [`5.0-ol-7`, `5.0.5-ol-7-r62` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.5-ol-7-r62/5.0/ol-7/Dockerfile)
-* [`5.0-debian-9`, `5.0.5-debian-9-r66`, `5.0`, `5.0.5`, `5.0.5-r66`, `latest` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.5-debian-9-r66/5.0/debian-9/Dockerfile)
+* [`5.0-ol-7`, `5.0.5-ol-7-r63` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.5-ol-7-r63/5.0/ol-7/Dockerfile)
+* [`5.0-debian-9`, `5.0.5-debian-9-r67`, `5.0`, `5.0.5`, `5.0.5-r67`, `latest` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.5-debian-9-r67/5.0/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.14-ol-7-r108` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-ol-7-r108/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.14-debian-9-r99`, `4.0`, `4.0.14`, `4.0.14-r99` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-debian-9-r99/4.0/debian-9/Dockerfile)
 
@@ -184,20 +184,15 @@ $ docker run --name redis-sentinel \
     bitnami/redis-sentinel:latest
 ```
 
-or using Docker Compose:
+You can also modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   redis-sentinel:
-    image: 'bitnami/redis-sentinel:latest'
-    environment:
-      - REDIS_MASTER_HOST=redis
-    ports:
-      - '26379:26379'
+  ...
     volumes:
       - /path/to/redis-persistence:/bitnami
+  ...
 ```
 
 ### Step 2: Edit the configuration
