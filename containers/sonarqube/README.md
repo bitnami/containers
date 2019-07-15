@@ -43,8 +43,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-ol-7`, `7.9.1-ol-7-r4` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.1-ol-7-r4/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.9.1-debian-9-r3`, `7`, `7.9.1`, `7.9.1-r3`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.1-debian-9-r3/7/debian-9/Dockerfile)
+* [`7-ol-7`, `7.9.1-ol-7-r3` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.1-ol-7-r3/7/ol-7/Dockerfile)
+* [`7-debian-9`, `7.9.1-debian-9-r4`, `7`, `7.9.1`, `7.9.1-r4`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.1-debian-9-r4/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
 
@@ -58,42 +58,12 @@ SonarQube requires access to a PostgreSQL database to store information. We'll u
 
 ## Using Docker Compose
 
-The recommended way to run SonarQube is using Docker Compose using the following `docker-compose.yml` template:
+### Run the application using Docker Compose
 
-```yaml
-version: '2'
-
-services:
-  postgresql:
-    image: 'bitnami/postgresql:10'
-    environment:
-      - POSTGRESQL_USERNAME=bn_sonarqube
-      - POSTGRESQL_DATABASE=bitnami_sonarqube
-      - POSTGRESQL_PASSWORD=bitnami1234
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - 'postgresql_data:/bitnami/postgresql'
-  sonarqube:
-    image: bitnami/sonarqube:latest
-    ports:
-      - '80:9000'
-    environment:
-      - POSTGRESQL_HOST=postgresql
-      - SONARQUBE_DATABASE_NAME=bitnami_sonarqube
-      - SONARQUBE_DATABASE_USER=bn_sonarqube
-      - SONARQUBE_DATABASE_PASSWORD=bitnami1234
-    volumes:
-      - sonarqube_data:/bitnami
-volumes:
-  sonarqube_data:
-    driver: local
-  postgresql_data:
-    driver: local
-```
-
-Launch the containers using:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-sonarqube/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
 ```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-sonarqube/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -287,25 +257,20 @@ The SonarQube instance can be customized by specifying environment variables on 
 
 ### Specifying Environment variables using Docker Compose
 
-```yaml
-version: '2'
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-sonarqube/blob/master/docker-compose.yml) file present in this repository: 
 
+```yaml
 services:
   postgresql:
-    image: 'bitnami/postgresql:latest'
+  ...
     environment:
       - POSTGRESQL_USER=bn_sonarqube
       - POSTGRESQL_DATABASE=bitnami_sonarqube
       - POSTGRESQL_PASSWORD=bitnami1234
       - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - postgresql_data:/bitnami/postgresql
+  ...
   sonarqube:
-    image: bitnami/sonarqube:latest
-    depends_on:
-      - postgresql
-    ports:
-      - '80:9000'
+  ...
     environment:
       - POSTGRESQL_HOST=postgresql
       - POSTGRESQL_PORT_NUMBER=5432
@@ -313,14 +278,7 @@ services:
       - SONARQUBE_DATABASE_NAME=bitnami_sonarqube
       - SONARQUBE_DATABASE_PASSWORD=bitnami1234
       - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - sonarqube_data:/bitnami
-
-volumes:
-  postgresql_data:
-    driver: local
-  sonarqube_data:
-    driver: local
+  ...
 ```
 
 ### Specifying Environment variables on the Docker command line
@@ -347,13 +305,11 @@ To configure SonarQube to send email using SMTP you can set the following enviro
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose (application part):
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-sonarqube/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
   sonarqube:
-    image: bitnami/sonarqube:latest
-    ports:
-      - 80:9000
+  ...
     environment:
       - POSTGRESQL_HOST=postgresql
       - POSTGRESQL_PORT_NUMBER=5432
@@ -365,8 +321,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
       - SMTP_PROTOCOL=tls
-    volumes:
-      - sonarqube_data:/bitnami/sonarqube
+  ...
 ```
 
 * For manual execution:
@@ -393,13 +348,11 @@ The Bitnami SonarQube container supports connecting the SonarQube application to
 
 This would be an example of using an external database for SonarQube.
 
- * docker-compose:
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-sonarqube/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
   sonarqube:
-    image: bitnami/sonarqube:latest
-    ports:
-      - 80:9000
+  ...
     environment:
       - POSTGRESQL_HOST=postgresql_host
       - POSTGRESQL_ROOT_USER=postgresql_root_user
@@ -408,8 +361,7 @@ This would be an example of using an external database for SonarQube.
       - SONARQUBE_DATABASE_NAME=sonarqube_db
       - SONARQUBE_DATABASE_USER=sonarqube_user
       - SONARQUBE_DATABASE_PASSWORD=sonarqube_password
-    volumes:
-      - sonarqube_data:/bitnami
+  ...
 ```
 
 * For manual execution:
