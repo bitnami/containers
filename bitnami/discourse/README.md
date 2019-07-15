@@ -45,8 +45,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`2-debian-9`, `2.3.2-debian-9-r0`, `2`, `2.3.2`, `2.3.2-r0`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.3.2-debian-9-r0/2/debian-9/Dockerfile)
 * [`2-ol-7`, `2.3.1-ol-7-r7` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.3.1-ol-7-r7/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.3.1-debian-9-r6`, `2`, `2.3.1`, `2.3.1-r6`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.3.1-debian-9-r6/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
@@ -127,17 +127,25 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 ```yaml
 services:
   postgresql:
+  ...
     volumes:
       - '/path/to/your/local/postgresql_data:/bitnami/postgresql'
+  ...
   redis:
+  ...
     volumes:
       - '/path/to/your/local/redis_data:/bitnami'
+  ...
   discourse:
+  ...
     volumes:
       - '/path/to/discourse-persistence:/bitnami'
+  ...
   sidekiq:
+  ...
     volumes:
       - '/path/to/sidekiq-persistence:/bitnami'
+  ...
 ```
 
 ### Mount persistent folders manually
@@ -235,17 +243,14 @@ You can mount your configuration files to the `/opt/bitnami/discourse/conf` dire
 
 When you start the discourse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-discourse/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 discourse:
-  image: bitnami/discourse:latest
-  ports:
-    - 80:80
+  ...
   environment:
     - DISCOURSE_PASSWORD=bitnami123
-  volumes_from:
-    - discourse_data:/bitnami
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -292,20 +297,23 @@ This would be an example of SMTP configuration using a GMail account:
 
  * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-discourse/blob/master/docker-compose.yml) file present in this repository:
 
-
 ```yaml
   discourse:
+  ...
     environment:
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
+  ...
   sidekiq:
+  ...
     environment:
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
+  ...
 ```
 
 In order to verify your configuration works properly, you can test your configuration parameters from the container itself.
