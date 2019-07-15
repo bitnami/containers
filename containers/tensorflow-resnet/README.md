@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.14.0-ol-7-r5` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.14.0-ol-7-r5/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.14.0-debian-9-r4`, `1`, `1.14.0`, `1.14.0-r4`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.14.0-debian-9-r4/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.14.0-debian-9-r5`, `1`, `1.14.0`, `1.14.0-r5`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.14.0-debian-9-r5/1/debian-9/Dockerfile)
 * [`1-rhel-7`, `1.13.0-rhel-7-r43` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/1.13.0-rhel-7-r43/1/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-resnet GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-resnet).
@@ -60,35 +60,11 @@ Running TensorFlow ResNet client with the TensorFlow Serving server is the recom
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run TensorFlow ResNet client. You can use the following `docker-compose.yml` template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-
-services:
-  tensorflow-serving:
-    image: 'bitnami/tensorflow-serving:latest'
-    environment:
-      - TENSORFLOW_SERVING_MODEL_NAME=resnet
-    ports:
-      - '8500:8500'
-      - '8501:8501'
-    volumes:
-      - 'tensorflow_serving_data:/bitnami'
-      - '/tmp/model-data/:/bitnami/model-data'
-  tensorflow-resnet:
-    image: 'bitnami/tensorflow-resnet:latest'
-    volumes:
-      - 'tensorflow_resnet_data:/bitnami'
-      - '/tmp/model-data/:/bitnami/model-data'
-    depends_on:
-      - tensorflow-serving
-
-volumes:
-  tensorflow_serving_data:
-    driver: local
-  tensorflow_resnet_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-tensorflow-resnet/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ### Run the application manually
