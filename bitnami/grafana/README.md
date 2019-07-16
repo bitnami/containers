@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6-ol-7`, `6.2.5-ol-7-r20` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.2.5-ol-7-r20/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.2.5-debian-9-r20`, `6`, `6.2.5`, `6.2.5-r20`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.2.5-debian-9-r20/6/debian-9/Dockerfile)
+* [`6-debian-9`, `6.2.5-debian-9-r21`, `6`, `6.2.5`, `6.2.5-r21`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.2.5-debian-9-r21/6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -124,8 +124,10 @@ You can also do this by changing the [`docker-compose.yml`](https://github.com/b
 
 ```yaml
 grafana:
+  ...
   volumes:
     - /path/to/grafana.ini:/opt/bitnami/grafana/conf/grafana.ini
+  ...
 ```
 
 ## Install plugins at initialization
@@ -136,8 +138,10 @@ When you start the Grafana image, you can specify a comma, semi-colon or space s
 
 ```yaml
 grafana:
+  ...
   environment:
     - GF_INSTALL_PLUGINS=grafana-kubernetes-app,grafana-example-app
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
