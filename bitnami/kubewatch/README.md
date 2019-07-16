@@ -41,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-rhel-7`, `0.0.4-rhel-7-r82` (0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-rhel-7-r82/0/rhel-7/Dockerfile)
-* [`0-debian-9`, `0.0.4-debian-9-r303`, `0`, `0.0.4`, `0.0.4-r303`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r303/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.0.4-debian-9-r304`, `0`, `0.0.4`, `0.0.4-r304`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r304/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubewatch GitHub repo](https://github.com/bitnami/bitnami-docker-kubewatch).
 
@@ -101,8 +101,10 @@ or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-k
 
 ```yaml
 kubewatch:
+  ...
   volumes:
     -  ./path/to/your/kubewatch.yaml:/opt/bitnami/kubewatch/.kubewatch.yaml
+  ...
 ```
 
 # Contributing
