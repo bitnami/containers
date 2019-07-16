@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8-ol-7`, `8.1.1-ol-7-r49` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.1.1-ol-7-r49/8/ol-7/Dockerfile)
-* [`8-debian-9`, `8.1.1-debian-9-r46`, `8`, `8.1.1`, `8.1.1-r46`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.1.1-debian-9-r46/8/debian-9/Dockerfile)
+* [`8-debian-9`, `8.1.1-debian-9-r47`, `8`, `8.1.1`, `8.1.1-r47`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.1.1-debian-9-r47/8/debian-9/Dockerfile)
 * [`8-rhel-7`, `8.0.0-rhel-7-r21` (8/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.0.0-rhel-7-r21/8/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
@@ -87,13 +87,14 @@ To avoid inadvertent removal of this volume you can [mount host directories as d
 $ docker run -v /path/to/solr-persistence:/bitnami bitnami/solr:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
 solr:
-  image: bitnami/solr:latest
+  ...
   volumes:
     - /path/to/solr-persistence:/bitnami
+  ...
 ```
 
 # Connecting to other containers
@@ -167,11 +168,14 @@ When you start the solr image, you can adjust the configuration of the instance 
 
 ### Specifying Environment Variables using Docker Compose
 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository: 
+
 ```yaml
 solr:
-  image: bitnami/solr:latest
+  ...
   environment:
     - SOLR_CORE=my_core
+  ...
 ```
 
 ### Specifying Environment Variables on the Docker command line
@@ -186,13 +190,16 @@ In order to load your own configuration files, you will have to make them availa
 
 ### Using Docker Compose
 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository: 
+
 ```yaml
 solr:
-  image: bitnami/solr:latest
+  ...
   environment:
     - SOLR_CORE_CONF_DIR=/path/to/your/confDir
   volumes:
     - '/local/path/to/your/confDir:/container/path/to/your/confDir'
+  ...
 ```
 
 # Logging
