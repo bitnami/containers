@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.9.19-ol-7-r159` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.19-ol-7-r159/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.9.19-debian-9-r143`, `1`, `1.9.19`, `1.9.19-r143`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.19-debian-9-r143/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.9.19-debian-9-r144`, `1`, `1.9.19`, `1.9.19-r144`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.19-debian-9-r144/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/testlink GitHub repo](https://github.com/bitnami/bitnami-docker-testlink).
 
@@ -55,44 +55,11 @@ Running TestLink with a database server is the recommended way. You can either u
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run TestLink. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-testlink/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_testlink
-      - MARIADB_DATABASE=bitnami_testlink
-    volumes:
-      - 'mariadb_data:/bitnami'
-  testlink:
-    image: 'bitnami/testlink:latest'
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - 'testlink_data:/bitnami'
-    depends_on:
-      - mariadb
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - TESTLINK_DATABASE_USER=bn_testlink
-      - TESTLINK_DATABASE_NAME=bitnami_testlink
-      - ALLOW_EMPTY_PASSWORD=yes
-      - TESTLINK_USERNAME=admin
-      - TESTLINK_PASSWORD=verysecretadminpassword
-      - TESTLINK_EMAIL=admin@example.com
-
-volumes:
-  mariadb_data:
-    driver: local
-  testlink_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-testlink/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ### Run the application manually
@@ -147,33 +114,20 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the `docker-compose.yml` template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-testlink/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_testlink
-      - MARIADB_DATABASE=bitnami_testlink
+  ...
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
+  ...
   testlink:
-    image: 'bitnami/testlink:latest'
-    environment:
-      - TESTLINK_DATABASE_USER=bn_testlink
-      - TESTLINK_DATABASE_NAME=bitnami_testlink
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '80:80'
-      - '443:443'
+  ...
     volumes:
       - '/path/to/testlink-persistence:/bitnami'
-    depends_on:
-      - mariadb
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -285,16 +239,15 @@ When you start the testlink image, you can adjust the configuration of the insta
 
 If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For docker-compose add the variable name and value under the application section in the  [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-testlink/blob/master/docker-compose.yml) file present in this repository:
+
 
 ```yaml
 testlink:
-  image: bitnami/testlink:latest
-  ports:
-    - '80:80'
-    - '443:443'
+  ...
   environment:
     - TESTLINK_PASSWORD=my_password
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -322,14 +275,11 @@ To configure TestLink to send email using SMTP you can set the following environ
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose:
+ * For docker-compose add the variable name and value under the application section in the  [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-testlink/blob/master/docker-compose.yml) file present in this repository:
 
   ```yaml
   testlink:
-    image: bitnami/testlink:latest
-    ports:
-      - '80:80'
-      - '443:443'
+    ...
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
@@ -341,6 +291,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
       - SMTP_CONNECTION_MODE=tls
+    ...
   ```
 
  * For manual execution:
