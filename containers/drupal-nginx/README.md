@@ -111,11 +111,15 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 
 ```yaml
   mariadb:
+  ...
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
+  ...
   drupal:
+  ...
     volumes:
       - '/path/to/drupal-persistence:/bitnami'
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -197,8 +201,10 @@ When you start the Drupal image, you can adjust the configuration of the instanc
 
 ```yaml
 drupal:
+  ...
   environment:
     - DRUPAL_PASSWORD=my_password
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
