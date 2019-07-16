@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4-ol-7`, `4.0.4-ol-7-r30` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.0.4-ol-7-r30/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.0.4-debian-9-r30`, `4`, `4.0.4`, `4.0.4-r30`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.0.4-debian-9-r30/4/debian-9/Dockerfile)
+* [`4-debian-9`, `4.0.4-debian-9-r31`, `4`, `4.0.4`, `4.0.4-r31`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.0.4-debian-9-r31/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
 
@@ -55,31 +55,11 @@ Running Redmine with a database server is the recommended way. You can either us
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run Redmine. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redmine/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - 'mariadb_data:/bitnami'
-  redmine:
-    image: 'bitnami/redmine:latest'
-    ports:
-      - '80:3000'
-    volumes:
-      - 'redmine_data:/bitnami'
-    depends_on:
-      - mariadb
-volumes:
-  mariadb_data:
-    driver: local
-  redmine_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-redmine/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ### Run the application manually
@@ -161,20 +141,16 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 The following `docker-compose.yml` template demonstrates the use of host directories as data volumes.
 
 ```yaml
-version: '2'
-
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
+  ...
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
+  ...
   redmine:
-    image: bitnami/redmine:latest
-    ports:
-      - 80:3000
+  ...
     volumes:
       - '/path/to/redmine-persistence:/bitnami'
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -245,19 +221,14 @@ You can use these snapshots to restore the application state should the upgrade 
 
 When you start the redmine image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redmine/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
 redmine:
-  image: bitnami/redmine:latest
-  ports:
-    - 80:3000
+  ...
   environment:
     - REDMINE_PASSWORD=my_password
-  volumes:
-    - 'redmine_data:/bitnami'
-  depends_on:
-    - mariadb
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -273,7 +244,7 @@ Available variables:
  - `REDMINE_USERNAME`: Redmine application username. Default: **user**
  - `REDMINE_PASSWORD`: Redmine application password. Default: **bitnami1**
  - `REDMINE_EMAIL`: Redmine application email. Default: **user@example.com**
- - `REDMINE_LANG`: Redmine application default language. Default: **en**
+ - `REDMINE_LANGUAGE`: Redmine application default language. Default: **en**
  - `REDMINE_DB_USERNAME`: Root user for the application database. Default: **root**
  - `REDMINE_DB_PASSWORD`: Root password for the database.
  - `REDMINE_DB_MYSQL`: Hostname for MySQL server. Default: **mariadb**
@@ -291,18 +262,17 @@ To configure Redmine to send email using SMTP you can set the following environm
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose:
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redmine/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
   redmine:
-    image: bitnami/redmine:latest
-    ports:
-      - 80:3000
+  ...
     environment:
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
+  ...
 ```
 
  * For manual execution:
