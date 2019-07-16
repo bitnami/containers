@@ -53,7 +53,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.5.5-ol-7-r43` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.5-ol-7-r43/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.5.5-debian-9-r41`, `3`, `3.5.5`, `3.5.5-r41`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.5-debian-9-r41/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.5.5-debian-9-r42`, `3`, `3.5.5`, `3.5.5-r42`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.5-debian-9-r42/3/debian-9/Dockerfile)
 * [`3-rhel-7`, `3.4.14-rhel-7-r13` (3/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.4.14-rhel-7-r13/3/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
@@ -94,18 +94,15 @@ The image exposes a volume at `/bitnami/zookeeper` for the Zookeeper data. For p
 docker run -v /path/to/zookeeper-persistence:/bitnami/zookeeper bitnami/zookeeper:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-zookeeper/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:latest'
-    ports:
-      - '2181:2181'
+  ...
     volumes:
       - /path/to/zookeeper-persistence:/bitnami/zookeeper
+  ...
 ```
 
 # Connecting to other containers
@@ -204,18 +201,15 @@ The configuration can easily be setup with the Bitnami Zookeeper Docker image us
 docker run --name zookeeper -e ZOO_SERVER_ID=1 bitnami/zookeeper:latest
 ```
 
-or using Docker Compose:
+or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-zookeeper/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:latest'
-    ports:
-      - '2181:2181'
+  ...
     environment:
       - ZOO_SERVER_ID=1
+  ...
 ```
 
 
@@ -288,22 +282,19 @@ docker run -it -e ZOO_ENABLE_AUTH=yes \
                bitnami/zookeeper
 ```
 
-or using Docker Compose:
+or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-zookeeper/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:latest'
-    ports:
-      - '2181:2181'
+  ...
     environment:
       - ZOO_ENABLE_AUTH=yes
       - ZOO_SERVER_USERS=user1,user2
       - ZOO_SERVER_PASSWORDS=pass4user1,pass4user2
       - ZOO_CLIENT_USER=user1
       - ZOO_CLIENT_PASSWORD=pass4user1
+  ...
 ```
 
 ## Setting up a Zookeeper ensemble
