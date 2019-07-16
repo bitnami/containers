@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-ol-7`, `7.2.0-ol-7-r53` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.2.0-ol-7-r53/7/ol-7/Dockerfile)
+* [`7-ol-7`, `7.2.0-ol-7-r54` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.2.0-ol-7-r54/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.2.0-debian-9-r51`, `7`, `7.2.0`, `7.2.0-r51`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.2.0-debian-9-r51/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jasperreports GitHub repo](https://github.com/bitnami/bitnami-docker-jasperreports).
@@ -123,11 +123,15 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 ```yaml
 services:
   mariadb:
+  ...
     volumes:
       - /path/to/mariadb-persistence:/bitnami
+  ...
   jasperreports:
+  ...
     volumes:
       - /path/to/jasperreports-persistence:/bitnami
+  ...
 ```
 
 ### Mount persistent folders manually
@@ -237,8 +241,10 @@ If you want to add a new environment variable:
 
   ```yaml
   jasperreports:
+    ...
     environment:
       - JASPERREPORTS_PASSWORD=my_password
+    ...
   ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -265,6 +271,7 @@ This would be an example of SMTP configuration using a GMail account:
 
 ```yaml
 jasperreports:
+  ...
   environment:
     - MARIADB_HOST=mariadb
     - MARIADB_PORT_NUMBER=3306
@@ -275,6 +282,7 @@ jasperreports:
     - SMTP_EMAIL=your_email@gmail.com
     - SMTP_USER=your_email@gmail.com
     - SMTP_PASSWORD=your_password
+  ...
 ```
 
  * For manual execution:
