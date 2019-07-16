@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.9.10-ol-7-r4` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.10-ol-7-r4/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.9.10-ol-7-r5` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.10-ol-7-r5/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.9.10-debian-9-r0`, `3`, `3.9.10`, `3.9.10-r0`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.10-debian-9-r0/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
@@ -118,11 +118,15 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 
 ```yaml
 mariadb:
+  ...
   volumes:
     - '/path/to/mariadb_persistence:/bitnami'
+  ...
 joomla:
+  ...
   volumes:
     - '/path/to/joomla-persistence:/bitnami'
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -236,8 +240,10 @@ If you want to add a new environment variable:
 
 ```yaml
 joomla:
+  ...
   environment:
     - JOOMLA_PASSWORD=my_password
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -267,6 +273,7 @@ This would be an example of SMTP configuration using a GMail account:
 
 ```yaml
   joomla:
+  ...
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
@@ -276,6 +283,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_PORT=587
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
+  ...
 ```
 
  * For manual execution:
