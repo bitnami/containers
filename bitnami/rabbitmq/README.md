@@ -49,7 +49,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.7-ol-7`, `3.7.16-ol-7-r8` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.16-ol-7-r8/3.7/ol-7/Dockerfile)
+* [`3.7-ol-7`, `3.7.16-ol-7-r9` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.16-ol-7-r9/3.7/ol-7/Dockerfile)
 * [`3.7-debian-9`, `3.7.16-debian-9-r7`, `3.7`, `3.7.16`, `3.7.16-r7`, `latest` (3.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.16-debian-9-r7/3.7/debian-9/Dockerfile)
 * [`3.7-rhel-7`, `3.7.14-rhel-7-r21` (3.7/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.14-rhel-7-r21/3.7/rhel-7/Dockerfile)
 
@@ -87,13 +87,14 @@ $ docker run \
     bitnami/rabbitmq:latest
 ```
 
-or using Docker Compose:
+You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/master/docker-compose.yml) file present in this repository:
 
 ```
 rabbitmq:
-  image: bitnami/rabbitmq:latest
+  ...
   volumes:
     - /path/to/rabbitmq-persistence:/bitnami
+  ...
 ```
 
 # Connecting to other containers
@@ -171,15 +172,14 @@ $ docker-compose up -d
 
  When you start the rabbitmq image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
-* For docker-compose add the variable name and value under the application section:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/master/docker-compose.yml) file present in this repository: :
 
 ```yaml
 rabbitmq:
-  image: bitnami/rabbitmq:latest
-  ports:
-    - 15672:15672
+  ...
   environment:
     - RABBITMQ_PASSWORD=my_password
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value.
