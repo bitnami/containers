@@ -39,7 +39,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-ol-7`, `5.2.2-ol-7-r21` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.2.2-ol-7-r21/5/ol-7/Dockerfile)
+* [`5-ol-7`, `5.2.2-ol-7-r22` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.2.2-ol-7-r22/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.2.2-debian-9-r20`, `5`, `5.2.2`, `5.2.2-r20`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.2.2-debian-9-r20/5/debian-9/Dockerfile)
 * [`5-rhel-7`, `5.1.1-rhel-7-r40` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.1.1-rhel-7-r40/5/rhel-7/Dockerfile)
 
@@ -53,48 +53,12 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 
 WordPress requires access to a MySQL or MariaDB database to store information. We'll use our very own [MariaDB image](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
 
-## Using Docker Compose
+## Run the application using Docker Compose
 
-The recommended way to run WordPress is using Docker Compose using the following `docker-compose.yml` template:
-
-```yaml
-version: '2'
-
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    volumes:
-      - 'mariadb_data:/bitnami'
-    environment:
-      - MARIADB_USER=bn_wordpress
-      - MARIADB_DATABASE=bitnami_wordpress
-      - ALLOW_EMPTY_PASSWORD=yes
-  wordpress:
-    image: 'bitnami/wordpress:latest'
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - 'wordpress_data:/bitnami'
-    depends_on:
-      - mariadb
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - WORDPRESS_DATABASE_USER=bn_wordpress
-      - WORDPRESS_DATABASE_NAME=bitnami_wordpress
-      - ALLOW_EMPTY_PASSWORD=yes
-
-volumes:
-  mariadb_data:
-    driver: local
-  wordpress_data:
-    driver: local
-```
-
-Launch the containers using:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
 ```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-wordpress/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -148,33 +112,20 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-The following `docker-compose.yml` template demonstrates the use of host directories as data volumes.
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_wordpress
-      - MARIADB_DATABASE=bitnami_wordpress
+  ...
     volumes:
       - /path/to/mariadb-persistence:/bitnami
+  ...
   wordpress:
-    image: bitnami/wordpress:latest
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
-    environment:
-      - WORDPRESS_DATABASE_USER=bn_wordpress
-      - WORDPRESS_DATABASE_NAME=bitnami_wordpress
-      - ALLOW_EMPTY_PASSWORD=yes
+  ...
     volumes:
       - /path/to/wordpress-persistence:/bitnami
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -287,39 +238,26 @@ The WordPress instance can be customized by specifying environment variables on 
 
 ### Specifying Environment variables using Docker Compose
 
-```yaml
-version: '2'
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress/blob/master/docker-compose.yml) file present in this repository: 
 
+```yaml
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
+  ...
     environment:
       - MARIADB_USER=bn_wordpress
       - MARIADB_DATABASE=bitnami_wordpress
       - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - mariadb_data:/bitnami
+  ...
   wordpress:
-    image: bitnami/wordpress:latest
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
+  ...
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_USER=bn_wordpress
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
       - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - wordpress_data:/bitnami
-
-volumes:
-  mariadb_data:
-    driver: local
-  wordpress_data:
-    driver: local
+  ...
 ```
 
 ### Specifying Environment variables on the Docker command line
@@ -346,14 +284,11 @@ To configure WordPress to send email using SMTP you can set the following enviro
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose (application part):
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
   wordpress:
-    image: bitnami/wordpress:latest
-    ports:
-      - 80:80
-      - 443:443
+    ...
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
@@ -364,8 +299,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
       - SMTP_PROTOCOL=tls
-    volumes:
-      - wordpress_data:/bitnami/wordpress
+    ...
 ```
 
 * For manual execution:
@@ -392,22 +326,18 @@ The Bitnami WordPress container supports connecting the WordPress application to
 
 This would be an example of using an external database for WordPress.
 
- * docker-compose:
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
   wordpress:
-    image: bitnami/wordpress:latest
-    ports:
-      - 80:80
-      - 443:443
+    ...
     environment:
       - MARIADB_HOST=mariadb_host
       - MARIADB_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_NAME=wordpress_db
       - WORDPRESS_DATABASE_USER=wordpress_user
       - WORDPRESS_DATABASE_PASSWORD=wordpress_password
-    volumes:
-      - wordpress_data:/bitnami
+    ...
 ```
 
 * For manual execution:
