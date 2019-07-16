@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7-ol-7`, `7.11.6-ol-7-r14` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.6-ol-7-r14/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.11.6-debian-9-r12`, `7`, `7.11.6`, `7.11.6-r12`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.6-debian-9-r12/7/debian-9/Dockerfile)
+* [`7-debian-9`, `7.11.6-debian-9-r13`, `7`, `7.11.6`, `7.11.6-r13`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.6-debian-9-r13/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
 
@@ -55,41 +55,11 @@ Running SuiteCRM with a database server is the recommended way. You can either u
 
 ### Run the application using Docker Compose
 
-This is the recommended way to run SuiteCRM. You can use the following docker compose template:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-suitecrm/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```yaml
-version: '2'
-
-services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - MARIADB_USER=bn_suitecrm
-      - MARIADB_DATABASE=bitnami_suitecrm
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - 'mariadb_data:/bitnami'
-  suitecrm:
-    image: 'bitnami/suitecrm:latest'
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - SUITECRM_DATABASE_USER=bn_suitecrm
-      - SUITECRM_DATABASE_NAME=bitnami_suitecrm
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - 'suitecrm_data:/bitnami'
-    depends_on:
-      - mariadb
-
-volumes:
-  mariadb_data:
-    driver: local
-  suitecrm_data:
-    driver: local
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-suitecrm/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ### Run the application manually
@@ -144,33 +114,20 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the `docker-compose.yml` template previously shown:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-suitecrm/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_suitecrm
-      - MARIADB_DATABASE=bitnami_suitecrm
+  ...
     volumes:
       - '/path/to/mariadb-persistence:/bitnami'
+  ...
   suitecrm:
-    environment:
-      - SUITECRM_DATABASE_USER=bn_suitecrm
-      - SUITECRM_DATABASE_NAME=bitnami_suitecrm
-      - ALLOW_EMPTY_PASSWORD=yes
-    image: 'bitnami/suitecrm:latest'
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
+  ...
     volumes:
       - '/path/to/suitecrm-persistence:/bitnami'
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -262,15 +219,14 @@ When you start the SuiteCRM image, you can adjust the configuration of the insta
 
 If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-suitecrm/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 suitecrm:
-  image: bitnami/suitecrm:latest
-  ports:
-    - 80:80
+  ...
   environment:
     - SUITECRM_PASSWORD=my_password
+  ...
 ```
 
  * For manual execution add a `-e` option with each variable and value:
@@ -295,13 +251,11 @@ To configure SugarCMR to send email using SMTP you can set the following environ
 
 This would be an example of SMTP configuration using a Gmail account:
 
- * docker-compose:
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-suitecrm/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
   suitecrm:
-    image: bitnami/suitecrm:latest
-    ports:
-      - 80:80
+    ...
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
@@ -312,6 +266,7 @@ This would be an example of SMTP configuration using a Gmail account:
       - SUITECRM_SMTP_PASSWORD=your_password
       - SUITECRM_SMTP_PROTOCOL=TLS
       - SUITECRM_SMTP_PORT=587
+    ...
 ```
 
  * For manual execution:
