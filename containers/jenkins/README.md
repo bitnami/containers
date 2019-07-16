@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.176.1-ol-7-r28` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.176.1-ol-7-r28/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.176.1-ol-7-r29` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.176.1-ol-7-r29/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.176.1-debian-9-r25`, `2`, `2.176.1`, `2.176.1-r25`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.176.1-debian-9-r25/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
@@ -94,8 +94,10 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 
 ```yaml
 jenkins:
+  ...
   volumes:
     - /path/to/jenkins-persistence:/bitnami
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -382,8 +384,10 @@ Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-jenk
 
 ```yaml
 jenkins:
+  ...
   environment:
     - JENKINS_PASSWORD=my_password
+  ...
 ```
 
 ### Specifying Environment variables on the Docker command line
