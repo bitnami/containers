@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-9`, `2.4.3-debian-9-r30`, `2`, `2.4.3`, `2.4.3-r30`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/2.4.3-debian-9-r30/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.4.3-debian-9-r31`, `2`, `2.4.3`, `2.4.3-r31`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/2.4.3-debian-9-r31/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spark GitHub repo](https://github.com/bitnami/bitnami-docker-spark).
 
@@ -75,12 +75,15 @@ docker build -t bitnami/spark:latest https://github.com/bitnami/bitnami-docker-s
 
 When you start the spark image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
-* For docker-compose add the variable name and value under the application section:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-spark/blob/master/docker-compose.yml) file present in this repository:
 
+```
 spark:
-  image: bitnami/spark:latest
+  ...
   environment:
     - SPARK_MODE=master
+  ...
+```
 
 * For manual execution add a -e option with each variable and value:
 
@@ -160,8 +163,10 @@ The image looks for configuration in the `conf/` directory of `/opt/bitnami/spar
 ### Using docker-compose
 
 ```yaml
+...
 volumes:
   - /path/to/spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
+...  
 ```
 
 ### Using the command line
@@ -231,18 +236,16 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 docker run -v /path/to/spark-backups/latest:/bitnami/spark bitnami/spark:latest
 ```
 
-or using Docker Compose:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-spark/blob/master/docker-compose.yml) file present in this repository:
+
 
 ```yaml
-version: '2'
-
 services:
   spark:
-    image: 'bitnami/spark:latest'
-    ports:
-      - '8080:8080'
+  ...
     volumes:
       - /path/to/spark-backups/latest:/bitnami/spark
+  ...
 ```
 
 ## Upgrade this image
