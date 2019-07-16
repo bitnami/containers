@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.14.0-ol-7-r5` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.14.0-ol-7-r5/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.14.0-ol-7-r6` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.14.0-ol-7-r6/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.14.0-debian-9-r5`, `1`, `1.14.0`, `1.14.0-r5`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.14.0-debian-9-r5/1/debian-9/Dockerfile)
 * [`1-rhel-7`, `1.13.0-rhel-7-r45` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.13.0-rhel-7-r45/1/rhel-7/Dockerfile)
 
@@ -79,18 +79,15 @@ For persistence you should mount a volume at the `/bitnami` path for the TensorF
 $ docker run -v /path/to/tensorflow-serving-persistence:/bitnami bitnami/tensorflow-serving:latest
 ```
 
-or using Docker Compose:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   tensorflow-serving:
-    image: 'bitnami/tensorflow-serving:latest'
-    ports:
-      - '8500:8500'
+  ...
     volumes:
       - /path/to/tensorflow-serving-persistence:/bitnami
+  ...
 ```
 
 # Connecting to other containers
@@ -204,19 +201,15 @@ Run the TensorFlow Serving image, mounting a directory from your host.
 $ docker run --name tensorflow-serving -v /path/to/tensorflow-serving-persistence:/bitnami bitnami/tensorflow-serving:latest
 ```
 
-or using Docker Compose:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   tensorflow-serving:
-    image: 'bitnami/tensorflow-serving:latest'
-    ports:
-      - '8500:8500'
-      - '8501:8501'
+  ...
     volumes:
       - /path/to/tensorflow-serving-persistence:/bitnami
+  ...
 ```
 
 ### Step 2: Edit the configuration
