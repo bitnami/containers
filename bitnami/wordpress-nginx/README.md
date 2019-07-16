@@ -46,7 +46,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-ol-7`, `5.2.2-ol-7-r21` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.2.2-ol-7-r21/5/ol-7/Dockerfile)
+* [`5-ol-7`, `5.2.2-ol-7-r22` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.2.2-ol-7-r22/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.2.2-debian-9-r21`, `5`, `5.2.2`, `5.2.2-r21`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.2.2-debian-9-r21/5/debian-9/Dockerfile)
 * [`5-rhel-7`, `5.1.1-rhel-7-r40` (5/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.1.1-rhel-7-r40/5/rhel-7/Dockerfile)
 
@@ -62,18 +62,17 @@ WordPress requires access to a MySQL or MariaDB database to store information. W
 
 ## Using Docker Compose
 
-The recommended way to run WordPress is using Docker Compose using the `docker-compose.yml` file that you can find into the different directories, depending on the distro you want to use.
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/master/docker-compose.yml) file. Run the application using it as shown below:
+
+```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-wordpress-nginx/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
+```
 
 > NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
 >
 > wordpress:
 >  image: 'your-registry/wordpress:your-version'
-
-Launch the containers using:
-
-```bash
-$ docker-compose up -d
-```
 
 ## Using the Docker Command Line
 
@@ -126,37 +125,21 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-The following `docker-compose.yml` template demonstrates the use of host directories as data volumes.
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_wordpress
-      - MARIADB_DATABASE=bitnami_wordpress
+  ...
     volumes:
       - /path/to/mariadb-persistence:/bitnami
+  ...
   wordpress:
-    # A Red Hat Customer Portal login is required to access this image. If you do not have one already, you can obtain one at https://www.redhat.com/wapps/ugc/register.html
-    # Pull action should be successful from any RHEL Host system running the Docker service and executing the following command: docker login registry.connect.redhat.com
-    # + info: https://access.redhat.com/containers/?tab=images&platform=docker#/registry.connect.redhat.com/bitnami/wordpress-nginx-php7
-    image: registry.connect.redhat.com/bitnami/wordpress-nginx-php7
-    depends_on:
-      - mariadb
-    ports:
-      - '80:80'
-      - '443:443'
-    environment:
-      - WORDPRESS_DATABASE_USER=bn_wordpress
-      - WORDPRESS_DATABASE_NAME=bitnami_wordpress
-      - ALLOW_EMPTY_PASSWORD=yes
+  ...
     volumes:
       - /path/to/wordpress-persistence:/bitnami
       - ./wordpress-vhosts.conf:/bitnami/nginx/conf/server_blocks/wordpress-vhosts.conf
+  ...
 ```
 
 # Upgrading WordPress
@@ -244,17 +227,11 @@ To configure WordPress to send email using SMTP you can set the following enviro
 
 This would be an example of SMTP configuration using a GMail account:
 
- * docker-compose (application part):
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
   wordpress:
-    # A Red Hat Customer Portal login is required to access this image. If you do not have one already, you can obtain one at https://www.redhat.com/wapps/ugc/register.html
-    # Pull action should be successful from any RHEL Host system running the Docker service and executing the following command: docker login registry.connect.redhat.com
-    # + info: https://access.redhat.com/containers/?tab=images&platform=docker#/registry.connect.redhat.com/bitnami/wordpress-nginx-php7
-    image: registry.connect.redhat.com/bitnami/wordpress-nginx-php7
-    ports:
-      - 80:80
-      - 443:443
+    ...
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
@@ -265,9 +242,7 @@ This would be an example of SMTP configuration using a GMail account:
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
       - SMTP_PROTOCOL=tls
-    volumes:
-      - wordpress_data:/bitnami/wordpress-nginx
-      - ./wordpress-vhosts.conf:/bitnami/nginx/conf/server_blocks/wordpress-vhosts.conf
+    ...
 ```
 
 * For manual execution:
@@ -295,23 +270,18 @@ The Bitnami WordPress container supports connecting the WordPress application to
 
 This would be an example of using an external database for WordPress.
 
- * docker-compose:
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
   wordpress:
-    image: bitnami/wordpress-nginx:latest
-    ports:
-      - 80:80
-      - 443:443
+    ...
     environment:
       - MARIADB_HOST=mariadb_host
       - MARIADB_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_NAME=wordpress_db
       - WORDPRESS_DATABASE_USER=wordpress_user
       - WORDPRESS_DATABASE_PASSWORD=wordpress_password
-    volumes:
-      - wordpress_data:/bitnami
-      - ./wordpress-vhosts.conf:/bitnami/nginx/conf/server_blocks/wordpress-vhosts.conf
+    ...
 ```
 
 * For manual execution:
