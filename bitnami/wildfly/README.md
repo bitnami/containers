@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`17-ol-7`, `17.0.1-ol-7-r12` (17/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/17.0.1-ol-7-r12/17/ol-7/Dockerfile)
-* [`17-debian-9`, `17.0.1-debian-9-r10`, `17`, `17.0.1`, `17.0.1-r10`, `latest` (17/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/17.0.1-debian-9-r10/17/debian-9/Dockerfile)
+* [`17-debian-9`, `17.0.1-debian-9-r11`, `17`, `17.0.1`, `17.0.1-r11`, `latest` (17/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/17.0.1-debian-9-r11/17/debian-9/Dockerfile)
 * [`17-rhel-7`, `0.0.0-rhel-7-r0` (17/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/0.0.0-rhel-7-r0/17/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
@@ -82,19 +82,15 @@ $ docker run -p 8080:8080 -p 9990:9990 \
     bitnami/wildfly:latest
 ```
 
-or using Docker Compose:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wildfly/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
 services:
   wildfly:
-    image: 'bitnami/wildfly:latest'
-    ports:
-      - '8080:8080'
-      - '9990:9990'
+  ...
     volumes:
       - /path/to/wildfly-persistence:/bitnami
+  ...
 ```
 
 # Deploying web applications on Wildfly
@@ -192,20 +188,16 @@ $ docker run --name wildfly \
   bitnami/wildfly:latest
 ```
 
-or using Docker Compose:
+or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wildfly/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   wildfly:
-    image: 'bitnami/wildfly:latest'
-    ports:
-      - '8080:8080'
-      - '9990:9990'
+  ...
     environment:
       - WILDFLY_USERNAME=my_user
       - WILDFLY_PASSWORD=my_password
+  ...
 ```
 
 ## Configuration files
@@ -220,19 +212,15 @@ Run the Wildfly image, mounting a directory from your host.
 $ docker run --name wildfly -v /path/to/wildfly-persistence:/bitnami bitnami/wildfly:latest
 ```
 
-or using Docker Compose:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wildfly/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   wildfly:
-    image: 'bitnami/wildfly:latest'
-    ports:
-      - '8080:8080'
-      - '9990:9990'
+  ...
     volumes:
       - /path/to/wildfly-persistence:/bitnami
+  ...
 ```
 
 ### Step 2: Edit the configuration
