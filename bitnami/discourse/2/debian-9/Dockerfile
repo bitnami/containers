@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r418
+FROM bitnami/minideb-extras:stretch-r419
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,14 +6,14 @@ RUN install_packages advancecomp file ghostscript gifsicle hostname imagemagick 
 RUN bitnami-pkg install ruby-2.5.5-0 --checksum 7f676dbe187bb037fed4fd25da35ac68b34621e629ea5b80ee82afbccfbe9c6f
 RUN bitnami-pkg unpack postgresql-client-11.4.0-0 --checksum 39c430fe23aef65ef26ca6f3cdd3758991ab25dff5e5c3bc2e4864d7b23ce2d3
 RUN bitnami-pkg install git-2.22.0-0 --checksum efa83383130dac1a51b192acdec4868d5d2593385efece42fdb5c52525583b55
-RUN bitnami-pkg unpack discourse-sidekiq-2.3.1-1 --checksum a32f5bf6371b13d8165846930c3676a58cb90fd23062e72cfb9d905f9606d7a0
+RUN bitnami-pkg unpack discourse-sidekiq-2.3.2-0 --checksum 36021cf8f1388a4294776a2ddd383e9b33d80b1a50fe3a6b7c53771c31f48540
 RUN bitnami-pkg install brotli-1.0.7-0 --checksum b44d76e4352da8d17ac91213b6eebd8b3910e6874ef763cdcab51d21936b8fd1
 RUN bitnami-pkg unpack discourse-2.3.2-0 --checksum 399c27df55b5253ae409a2d5dd77478172f3a6c1f4afb53c4c0684e7a6b1fb84
 RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.3.2-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="2.3.2-debian-9-r1" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="discourse" \
     DISCOURSE_HOSTNAME="127.0.0.1" \
