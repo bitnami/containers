@@ -39,7 +39,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.20180422.201901061035-ol-7-r174` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201901061035-ol-7-r174/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.20180422.201901061035-ol-7-r176` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201901061035-ol-7-r176/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.20180422.201901061035-debian-9-r159`, `0`, `0.20180422.201901061035`, `0.20180422.201901061035-r159`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201901061035-debian-9-r159/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dokuwiki GitHub repo](https://github.com/bitnami/bitnami-docker-dokuwiki).
@@ -94,8 +94,10 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 
 ```yaml
 dokuwiki:
+  ...
   volumes:
     - '/path/to/dokuwiki-persistence:/bitnami'
+  ...
 ```
 
 ### Mount persistent folders manually
@@ -156,16 +158,14 @@ You can use this snapshot to restore the application state should the upgrade fa
 
 When you start the DokuWiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section:
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/master/docker-compose.yml) file present in this repository:
 
   ```yaml
   dokuwiki:
-    image: bitnami/dokuwiki:latest
-    ports:
-      - 80:80
-      - 443:443
+    ...
     environment:
       - DOKUWIKI_PASSWORD=my_password
+    ...
   ```
 
  * For manual execution add a `-e` option with each variable and value:
