@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5-ol-7`, `5.2.3-0-ol-7-r99` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/5.2.3-0-ol-7-r99/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.2.3-0-debian-9-r87`, `5`, `5.2.3-0`, `5.2.3-0-r87`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/5.2.3-0-debian-9-r87/5/debian-9/Dockerfile)
+* [`5-debian-9`, `5.2.3-0-debian-9-r89`, `5`, `5.2.3-0`, `5.2.3-0-r89`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/5.2.3-0-debian-9-r89/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rails GitHub repo](https://github.com/bitnami/bitnami-docker-rails).
 
@@ -147,20 +147,16 @@ Following are a few examples of launching some commonly used Rails development c
 
 You can configure the MariaDB hostname and database name to use for development purposes using the environment variables **DATABASE_HOST** & **DATABASE_NAME**.
 
-For example, you can configure your Rails app to use the `development-db` database running on the `my-mariadb` MariaDB server using the `docker-compose.yml` below:
+For example, you can configure your Rails app to use the `development-db` database running on the `my-mariadb` MariaDB server by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-rails/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
 services:
-  myapp::
-    image: bitnami/rails:latest
+  myapp:
+  ...
     environment:
       - DATABASE_HOST=my-mariadb
       - DATABASE_NAME=development-db
-    ports:
-      - 3000:3000
-    volumes:
-      - .:/app
+  ...
 ```
 
 ## Running additional services:
@@ -169,11 +165,9 @@ Sometimes, your application will require extra pieces, such as background proces
 or Sidekiq.
 
 For these cases, it is possible to re-use this container to be run as an additional
-service in your docker-compose file by modifying the command
-executed.
+service in your docker-compose file by modifying the command executed.
 
-For example, you could run a Sidekiq container by adding the following to your
-`docker-compose.yml` file:
+For example, you could run a Sidekiq container by adding the following to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-rails/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -185,6 +179,7 @@ services:
       # since it is being executed by the rails service.
       - SKIP_DB_SETUP=true
     command: bundle exec sidekiq
+  ...
 ```
 
 > **Note**
