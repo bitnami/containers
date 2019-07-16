@@ -51,8 +51,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`5.0-centos-7`, `5.0.5-centos-7-r52` (5.0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.5-centos-7-r52/5.0/centos-7/Dockerfile)
 * [`5.0-rhel-7`, `5.0.4-rhel-7-r30` (5.0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.4-rhel-7-r30/5.0/rhel-7/Dockerfile)
 * [`4.0-ol-7`, `4.0.14-ol-7-r115` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-ol-7-r115/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.14-debian-9-r102`, `4.0`, `4.0.14`, `4.0.14-r102` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-debian-9-r102/4.0/debian-9/Dockerfile)
-* [`4.0-centos-7`, `4.0.14-centos-7-r52` (4.0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-centos-7-r52/4.0/centos-7/Dockerfile)
+* [`4.0-debian-9`, `4.0.14-debian-9-r103`, `4.0`, `4.0.14`, `4.0.14-r103` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-debian-9-r103/4.0/debian-9/Dockerfile)
+* [`4.0-centos-7`, `4.0.14-centos-7-r53` (4.0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-centos-7-r53/4.0/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
@@ -90,20 +90,15 @@ $ docker run \
     bitnami/redis:latest
 ```
 
-or using Docker Compose:
+You can also do this by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   redis:
-    image: 'bitnami/redis:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '6379:6379'
+  ...
     volumes:
       - /path/to/redis-persistence:/bitnami/redis/data
+  ...
 ```
 
 # Connecting to other containers
@@ -182,8 +177,7 @@ $ docker-compose up -d
 
 ## Disabling Redis commands
 
-For security reasons, you may want to disable some commands. You can specify them by using the following environment
-variable on the first run:
+For security reasons, you may want to disable some commands. You can specify them by using the following environment variable on the first run:
 
 - `DISABLE_COMMANDS`: Comma-separated list of Redis commands to disable. Defaults to empty.
 
@@ -191,31 +185,27 @@ variable on the first run:
 $ docker run --name redis -e DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG bitnami/redis:latest
 ```
 
-or using Docker Compose:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   redis:
-    image: 'bitnami/redis:latest'
-    ports:
-      - '6379:6379'
+  ...
     environment:
       - DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
+  ...
 ```
 
 As specified in the docker-compose, `FLUSHDB` and `FLUSHALL` commands are disabled. Comment out or remove the
 environment variable if you don't want to disable any commands:
 
 ```yaml
-version: '2'
-
 services:
   redis:
-    image: 'bitnami/redis:latest'
+  ...
     environment:
       # - DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+  ...
 ```
 
 ## Passing extra command-line flags to redis-server startup
@@ -226,19 +216,16 @@ Passing extra command-line flags to the redis service command is possible by add
 $ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest /run.sh --maxmemory 100mb
 ```
 
-or using Docker Compose:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   redis:
-    image: 'bitnami/redis:latest'
-    ports:
-      - '6379:6379'
+  ...
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     command: /run.sh --maxmemory 100mb
+  ...
 ```
 
 Refer to the [Redis documentation](https://redis.io/topics/config#passing-arguments-via-the-command-line) for the complete list of arguments.
@@ -251,18 +238,15 @@ Passing the `REDIS_PASSWORD` environment variable when running the image for the
 $ docker run --name redis -e REDIS_PASSWORD=password123 bitnami/redis:latest
 ```
 
-or using Docker Compose:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   redis:
-    image: 'bitnami/redis:latest'
-    ports:
-      - '6379:6379'
+  ...
     environment:
       - REDIS_PASSWORD=password123
+  ...
 ```
 
 **Warning** The Redis database is always configured with remote access enabled. It's suggested that the `REDIS_PASSWORD` env variable is always specified to set a password. In case you want to access the database without a password set the environment variable `ALLOW_EMPTY_PASSWORD=yes`. **This is recommended only for development**.
@@ -275,21 +259,18 @@ By default the Redis image expects all the available passwords to be set. In ord
 $ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
 ```
 
-or using Docker Compose:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   redis:
-    image: 'bitnami/redis:latest'
-    ports:
-      - '6379:6379'
+  ...
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+  ...
 ```
 
-## Setting up a replication
+## Setting up replication
 
 A [replication](http://redis.io/topics/replication) cluster can easily be setup with the Bitnami Redis Docker Image using the following environment variables:
 
@@ -392,21 +373,16 @@ $ docker run --name redis \
     bitnami/redis:latest
 ```
 
-or using Docker Compose:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository: 
 
 ```yaml
-version: '2'
-
 services:
   redis:
-    image: 'bitnami/redis:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '6379:6379'
+  ...
     volumes:
       - /path/to/your_redis.conf:/opt/bitnami/redis/etc/redis.conf
       - /path/to/redis-persistence:/bitnami/redis/data
+  ...
 ```
 
 Refer to the [Redis configuration](http://redis.io/topics/config) manual for the complete list of configuration options.
