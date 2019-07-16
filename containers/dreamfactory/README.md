@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.14.2-ol-7-r35` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.2-ol-7-r35/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.14.2-debian-9-r34`, `2`, `2.14.2`, `2.14.2-r34`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.2-debian-9-r34/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.14.2-debian-9-r35`, `2`, `2.14.2`, `2.14.2-r35`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/2.14.2-debian-9-r35/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
@@ -137,16 +137,25 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 ```yaml
 services:
   mariadb:
+  ...
     volumes:
       - /path/to/mariadb-persistence:/bitnami
+  ...
   mongodb:
+  ...
+    volumes:
       - '/path/to/mongodb-persistence:/bitnami'
+  ...
   redis:
+  ...
     volumes:
       - '/path/to/redis-persistence:/bitnami'
+  ...
   dreamfactory:
+  ...
     volumes:
       - /path/to/dreamfactory-persistence:/bitnami
+  ...
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -258,12 +267,14 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 
 ```yaml
 dreamfactory:
+  ...
   environment:
     - SMTP_HOST=smtp.gmail.com
     - SMTP_PORT=587
     - SMTP_USER=your_email@gmail.com
     - SMTP_PASSWORD=your_password
     - SMTP_PROTOCOL=tls
+  ...
 ```
 
 ### Specifying environment variables on the Docker command line
