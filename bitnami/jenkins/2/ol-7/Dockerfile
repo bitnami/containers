@@ -5,13 +5,13 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 RUN install_packages cyrus-sasl-lib fontconfig glibc keyutils-libs krb5-libs libcom_err libcurl libgcc libidn libselinux libssh2 nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre unzip zlib
 RUN bitnami-pkg install java-1.8.212-0 --checksum 7d11dad71234819fb290bcadc2997bda088ba6b21f245d397c068de4cf3757db
 RUN bitnami-pkg install git-2.22.0-0 --checksum 5dc73d3ed8b4f84c89e75fd7c08ec147a528eaf1017946d68c3732748885b3e2
-RUN bitnami-pkg unpack jenkins-2.176.1-0 --checksum bdc51f926d5a35e64486739a5f1a26be1f3d7e730cfc8f8648d9aec5ba599628
+RUN bitnami-pkg unpack jenkins-2.176.2-0 --checksum 94675a0904d4638a0be56337856c9345294699afafa2257bb7ec5f84d6a13f59
 RUN mkdir -p /usr/share/jenkins/ref
 
 COPY rootfs /
 RUN ln -sf /install-plugins.sh /usr/local/bin/install-plugins.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.176.1-ol-7-r30" \
+    BITNAMI_IMAGE_VERSION="2.176.2-ol-7-r0" \
     DISABLE_JENKINS_INITIALIZATION="no" \
     JAVA_OPTS="" \
     JENKINS_HOME="/opt/bitnami/jenkins/jenkins_home" \
