@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r301
+FROM bitnami/minideb-extras-base:stretch-r302
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "mxnet" "1.4.1-0" --checksum 36c9b2f
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="mxnet" \
-    BITNAMI_IMAGE_VERSION="1.4.1-debian-9-r43" \
+    BITNAMI_IMAGE_VERSION="1.4.1-debian-9-r44" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:$PATH"
