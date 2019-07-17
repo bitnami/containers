@@ -1,8 +1,8 @@
-FROM bitnami/php-fpm:7.3.7-ol-7-r12 as development
+FROM bitnami/php-fpm:7.3.7-ol-7-r13 as development
 
 ######
 
-FROM bitnami/oraclelinux-runtimes:7-r370
+FROM bitnami/oraclelinux-runtimes:7-r371
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ COPY --from=development /opt/bitnami/common /opt/bitnami/common
 COPY --from=development /opt/bitnami/php /opt/bitnami/php
 
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="7.3.7-ol-7-r12-prod" \
+    BITNAMI_IMAGE_VERSION="7.3.7-ol-7-r13-prod" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/php/sbin:$PATH"
 
 CMD [ "php-fpm", "-F", "--pid", "/opt/bitnami/php/tmp/php-fpm.pid", "-y", "/opt/bitnami/php/etc/php-fpm.conf" ]
