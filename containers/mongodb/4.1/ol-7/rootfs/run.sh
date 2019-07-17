@@ -8,7 +8,7 @@ set -o pipefail
 . /libmongodb.sh
 . /libos.sh
 
-# Load MySQL env. variables
+# Load MongoDB env. variables
 eval "$(mongodb_env)"
 
 flags=("--config=$MONGODB_CONFIG_FILE")
