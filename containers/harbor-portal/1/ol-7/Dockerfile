@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r349
+FROM bitnami/oraclelinux-extras-base:7-r350
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -19,7 +19,7 @@ COPY rootfs /
 RUN /postunpack.sh
 RUN /postunpack-harbor-portal.sh
 ENV BITNAMI_APP_NAME="harbor-portal" \
-    BITNAMI_IMAGE_VERSION="1.8.1-ol-7-r12" \
+    BITNAMI_IMAGE_VERSION="1.8.1-ol-7-r13" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
