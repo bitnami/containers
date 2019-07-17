@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/blackbox-exporter-0.14.0-0-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="blackbox-exporter" \
-    BITNAMI_IMAGE_VERSION="0.14.0-debian-9-r105" \
+    BITNAMI_IMAGE_VERSION="0.14.0-debian-9-r106" \
     PATH="/opt/bitnami/blackbox-exporter/bin:$PATH"
 
 EXPOSE 9115
