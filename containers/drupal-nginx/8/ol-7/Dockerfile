@@ -6,14 +6,14 @@ RUN install_packages GeoIP bzip2-libs cyrus-sasl-lib freetds freetype glibc gmp 
 RUN bitnami-pkg unpack php-7.3.7-0 --checksum 433c0d4c346ba1cc2c3e4a117c28acf418460e777863fb341c9be99a3b6afa87
 RUN bitnami-pkg unpack nginx-1.16.0-13 --checksum 48c91e3a274ff2f9db599c85c799bd2cf5181ecd406c37fb44ee56561d31d4fe
 RUN bitnami-pkg unpack mysql-client-10.3.16-0 --checksum bc7ef5b2abef585c0079a7e4cb2a099c5f40cf39402c52078438a39882953ab4
-RUN bitnami-pkg unpack drupal-8.7.4-0 --checksum abd463935b1af0802b927b974ca780d3232e9eddbfee0d91daaf4a86734aeaf5
+RUN bitnami-pkg unpack drupal-8.7.5-0 --checksum b67c8772685b7b018b2adaa39835052a2d3a02cb8089ed38a50d9d887bcb6026
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="8.7.4-ol-7-r13" \
+    BITNAMI_IMAGE_VERSION="8.7.5-ol-7-r0" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
