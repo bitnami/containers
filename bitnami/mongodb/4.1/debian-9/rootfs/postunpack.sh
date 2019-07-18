@@ -7,7 +7,7 @@
 . /liblog.sh
 . /libmongodb.sh
 
-# Load MySQL env. variables
+# Load MongoDB env. variables
 eval "$(mongodb_env)"
 
 for dir in "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR" "$MONGODB_CONFIG_DIR" "$MONGODB_DATA_DIR"; do
