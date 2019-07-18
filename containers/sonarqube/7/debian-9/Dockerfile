@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r420
+FROM bitnami/minideb-extras:stretch-r421
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN bitnami-pkg unpack sonarqube-7.9.1-0 --checksum e88e7e8b112b823141365babdaf0
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="7.9.1-debian-9-r6" \
+    BITNAMI_IMAGE_VERSION="7.9.1-debian-9-r7" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/java/bin:/opt/bitnami/sonarqube/bin/linux-x86-64/:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
