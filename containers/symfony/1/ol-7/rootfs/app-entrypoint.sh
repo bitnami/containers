@@ -15,21 +15,40 @@ echo "Starting application ..."
 if [ "$1" = "/run.sh" ]; then
   # Create a Symfony app if not found
   if [ ! -d "$PROJECT_DIRECTORY" ] ; then
-    log "Creating example Symfony application"
-    nami execute symfony createProject --databaseServerHost "$MARIADB_HOST" --databaseServerPort "$MARIADB_PORT_NUMBER" --databaseAdminUser "$MARIADB_USER" "$SYMFONY_PROJECT_NAME" | grep -v undefined
+    log "Creating a project with symfony/skeleton"
+
+    composer create-project symfony/skeleton $SYMFONY_PROJECT_NAME
+
+    if [ -z "$SYMFONY_NO_DB" ] ; then
+      log "Installing symfony/orm-pack"
+      composer require symfony/orm-pack -d $PROJECT_DIRECTORY
+    fi
+
+    export DATABASE_URL=mysql://$MARIADB_USER@$MARIADB_HOST/$MARIADB_DATABASE
+
+    if [ ! -f "$PROJECT_DIRECTORY/.env.local" ] ; then
+      touch $PROJECT_DIRECTORY
+      echo "DATABASE_URL=$DATABASE_URL" >> $PROJECT_DIRECTORY/.env.local
+      log "Added MariaDB container credentials to .env.local"
+    fi
+
     log "Symfony app created"
   else
     log "App already created"
   fi
 
+  # Symfony 3.x -> web/
+  [ -d "$PROJECT_DIRECTORY/web" ] && export WEB_DIR=$PROJECT_DIRECTORY/web
+  # Symfony 4.x -> public/
+  [ -d "$PROJECT_DIRECTORY/public" ] && export WEB_DIR=$PROJECT_DIRECTORY/public
+
   # Link Symfony app to the index
-  if [ ! -f "$PROJECT_DIRECTORY/web/index.php" ]; then
-    sudo ln -s "$PROJECT_DIRECTORY/web/app.php" "$PROJECT_DIRECTORY/web/index.php"
+  if [ ! -f "$WEB_DIR/index.php" ] && [ -f "$WEB_DIR/app.php" ]; then
+    sudo ln -s "$WEB_DIR/app.php" "$WEB_DIR/web/index.php"
   fi
 fi
 
 echo "symfony successfully initialized"
-
   nami_initialize php
   info "Starting symfony... "
 fi
