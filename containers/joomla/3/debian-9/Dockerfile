@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r413
+FROM bitnami/minideb-extras:stretch-r421
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.39-2 --checksum ff55ee9cccf484bac61fa91558fc7f
 RUN bitnami-pkg unpack php-7.3.7-0 --checksum 706d0a7a939eaa105f6091e77ae72193b986297db5d03f3678099d8a419164c6
 RUN bitnami-pkg unpack mysql-client-10.1.40-0 --checksum a5c2274fd7aa82aa199f9d1ce57bb173e4a80fdc638fb1525146da06c6d1b7f0
 RUN bitnami-pkg install libphp-7.3.7-0 --checksum 7d4272961bfcbcb047469fcd34067a1b9fbe31ba10a32576e8483584630d3565
-RUN bitnami-pkg unpack joomla-3.9.9-0 --checksum 3e06e3c96d782e68c5156ea026089f5b3ba7c127c820042c0b61a04bbb2ab5c8
+RUN bitnami-pkg unpack joomla-3.9.10-0 --checksum 939ce34711323ccf75544b9471490fa0760db7ae38ea4486b82b1756754d7a08
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.9.9-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="3.9.10-debian-9-r0" \
     JOOMLA_DATABASE_NAME="bitnami_joomla" \
     JOOMLA_DATABASE_PASSWORD="" \
     JOOMLA_DATABASE_USER="bn_joomla" \
