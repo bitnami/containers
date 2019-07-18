@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r350
+FROM bitnami/oraclelinux-extras-base:7-r351
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "harbor-core" "1.8.1-0" --checksum 8
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-core" \
-    BITNAMI_IMAGE_VERSION="1.8.1-ol-7-r15" \
+    BITNAMI_IMAGE_VERSION="1.8.1-ol-7-r16" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-core/bin:$PATH"
 
