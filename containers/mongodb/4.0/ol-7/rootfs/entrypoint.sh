@@ -10,7 +10,7 @@ set -o pipefail
 . /libbitnami.sh
 . /libmongodb.sh
 
-# Load MySQL env. variables
+# Load MongoDB env. variables
 eval "$(mongodb_env)"
 
 print_welcome_page
