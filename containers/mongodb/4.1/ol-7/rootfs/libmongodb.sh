@@ -445,7 +445,7 @@ mongodb_configure_key_file() {
     local key="${2:?key is required}"
 
     info "Writing keyfile for replica set authentication: $key $keyfile"
-    echo "$key" >> "$keyfile"
+    echo "$key" > "$keyfile"
 
     chmod 600 "$keyfile"
 
