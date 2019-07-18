@@ -14,6 +14,8 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-discourse/m
 $ docker-compose up -d
 ```
 
+**Note:** The `DISCOURSE_HOSTNAME` environment variable is set to `www.example.com` by default. Please, provide a valid domain name before deploying the solution, or add this domain to your local `hosts` file pointing to `127.0.0.1`.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
