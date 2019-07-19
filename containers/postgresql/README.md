@@ -81,11 +81,11 @@ $ docker build -t bitnami/postgresql:latest https://github.com/bitnami/bitnami-d
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
+For persistence you should mount a directory at the `/bitnami/postgresql` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
 $ docker run \
-    -v /path/to/postgresql-persistence:/bitnami \
+    -v /path/to/postgresql-persistence:/bitnami/postgresql \
     bitnami/postgresql:latest
 ```
 
@@ -96,7 +96,7 @@ services:
   postgresql:
   ...
     volumes:
-      - /path/to/postgresql-persistence:/bitnami
+      - /path/to/postgresql-persistence:/bitnami/postgresql
   ...
 ```
 
@@ -312,7 +312,7 @@ services:
     ports:
       - '5432'
     volumes:
-      - 'postgresql_master_data:/bitnami'
+      - 'postgresql_master_data:/bitnami/postgresql'
     environment:
       - POSTGRESQL_REPLICATION_MODE=master
       - POSTGRESQL_REPLICATION_USER=repl_user
@@ -321,7 +321,7 @@ services:
       - POSTGRESQL_PASSWORD=my_password
       - POSTGRESQL_DATABASE=my_database
     volumes:
-      - '/path/to/postgresql-persistence:/bitnami'
+      - '/path/to/postgresql-persistence:/bitnami/postgresql'
   postgresql-slave:
     image: 'bitnami/postgresql:latest'
     ports:
@@ -364,7 +364,7 @@ services:
     ports:
       - '5432'
     volumes:
-      - 'postgresql_master_data:/bitnami'
+      - 'postgresql_master_data:/bitnami/postgresql'
     environment:
       - POSTGRESQL_REPLICATION_MODE=master
       - POSTGRESQL_REPLICATION_USER=repl_user
@@ -375,7 +375,7 @@ services:
       - POSTGRESQL_SYNCHRONOUS_COMMIT_MODE=on
       - POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS=1
     volumes:
-      - '/path/to/postgresql-persistence:/bitnami'
+      - '/path/to/postgresql-persistence:/bitnami/postgresql'
   postgresql-slave:
     image: 'bitnami/postgresql:latest'
     ports:
