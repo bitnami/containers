@@ -3,13 +3,13 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates libc6 wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/open-service-broker-azure-1.8.0-0-linux-amd64-debian-9.tar.gz && \
-    echo "372e81c55eb2068d051f46b10691731419c803228a8c24f154be3baebadd6788  /tmp/bitnami/pkg/cache/open-service-broker-azure-1.8.0-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/open-service-broker-azure-1.8.0-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/open-service-broker-azure-1.8.0-0-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/open-service-broker-azure-1.8.2-0-linux-amd64-debian-9.tar.gz && \
+    echo "25954d44ad8fb8f5ca54990076159df5bc289899f7f2ea2408d7b75da5222a28  /tmp/bitnami/pkg/cache/open-service-broker-azure-1.8.2-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/open-service-broker-azure-1.8.2-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/open-service-broker-azure-1.8.2-0-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="open-service-broker-azure" \
-    BITNAMI_IMAGE_VERSION="1.8.0-debian-9-r27" \
+    BITNAMI_IMAGE_VERSION="1.8.2-debian-9-r0" \
     PATH="/opt/bitnami/open-service-broker-azure/bin:$PATH"
 
 EXPOSE 8080
