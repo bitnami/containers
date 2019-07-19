@@ -1,1 +1,1 @@
-# bitnami-docker-redis-exporter
+# bitnami-docker-postgres-exporter
