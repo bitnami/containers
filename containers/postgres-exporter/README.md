@@ -1,0 +1,1 @@
+# bitnami-docker-redis-exporter
