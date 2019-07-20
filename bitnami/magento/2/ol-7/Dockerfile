@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r402
+FROM bitnami/oraclelinux-extras:7-r403
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -19,7 +19,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.2-ol-7-r26" \
+    BITNAMI_IMAGE_VERSION="2.3.2-ol-7-r27" \
     ELASTICSEARCH_HOST="" \
     ELASTICSEARCH_PORT_NUMBER="" \
     EXTERNAL_HTTPS_PORT_NUMBER="443" \
