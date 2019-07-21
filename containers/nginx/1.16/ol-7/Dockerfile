@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r353
+FROM bitnami/oraclelinux-extras-base:7-r354
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -17,7 +17,7 @@ RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.16.0-ol-7-r98" \
+    BITNAMI_IMAGE_VERSION="1.16.0-ol-7-r99" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
