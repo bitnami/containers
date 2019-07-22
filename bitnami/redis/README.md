@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5.0-ol-7`, `5.0.5-ol-7-r73` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.5-ol-7-r73/5.0/ol-7/Dockerfile)
-* [`5.0-debian-9`, `5.0.5-debian-9-r72`, `5.0`, `5.0.5`, `5.0.5-r72`, `latest` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.5-debian-9-r72/5.0/debian-9/Dockerfile)
+* [`5.0-debian-9`, `5.0.5-debian-9-r73`, `5.0`, `5.0.5`, `5.0.5-r73`, `latest` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.5-debian-9-r73/5.0/debian-9/Dockerfile)
 * [`5.0-centos-7`, `5.0.5-centos-7-r58` (5.0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.5-centos-7-r58/5.0/centos-7/Dockerfile)
 * [`5.0-rhel-7`, `5.0.4-rhel-7-r30` (5.0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.4-rhel-7-r30/5.0/rhel-7/Dockerfile)
 * [`4.0-ol-7`, `4.0.14-ol-7-r122` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-ol-7-r122/4.0/ol-7/Dockerfile)
