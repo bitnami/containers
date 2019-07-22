@@ -8,13 +8,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 RUN install_packages libbz2-1.0 libc6 libgcc1 libjemalloc1 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libtinfo5 zlib1g
 RUN bitnami-pkg install python-2.7.16-0 --checksum 1bd6ac396615c99f639a1b4755425accd03e0ec500e52bf068491cc0cac6d385
 RUN bitnami-pkg install java-1.8.212-0 --checksum 54a18672c8b4c1a44324c607a6bc616f614a062005d5e3384f91f10ff6f6edea
-RUN bitnami-pkg unpack cassandra-3.11.4-2 --checksum f7f4f21085263e26895ade45078a6a4c01fd48014f0ce9ea73b7be44db4f6366
+RUN bitnami-pkg unpack cassandra-3.11.4-3 --checksum 68369ea1592bbe52edf4abb4475e1b54235b0df4a15e91d844e6159367770606
 RUN mkdir -p /docker-entrypoint-initdb.d /opt/bitnami/cassandra/conf/
 RUN chmod -R g+rwX /opt/bitnami/cassandra/conf/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.4-debian-9-r137" \
+    BITNAMI_IMAGE_VERSION="3.11.4-debian-9-r138" \
     CASSANDRA_CLIENT_ENCRYPTION="false" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
