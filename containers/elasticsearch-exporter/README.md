@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`1-rhel-7`, `1.0.2-rhel-7-r84` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-rhel-7-r84/1/rhel-7/Dockerfile)
 * [`1-ol-7`, `1.0.2-ol-7-r363` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-ol-7-r363/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.0.2-debian-9-r344`, `1`, `1.0.2`, `1.0.2-r344`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-debian-9-r344/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.0.2-debian-9-r345`, `1`, `1.0.2`, `1.0.2-r345`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.2-debian-9-r345/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter).
 # Get this image
@@ -175,7 +175,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
-Copyright 2018 Bitnami
+Copyright (c) 2019 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
