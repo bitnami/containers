@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.2.2-ol-7-r3` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.2.2-ol-7-r3/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.2.2-debian-9-r3`, `1`, `1.2.2`, `1.2.2-r3`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.2.2-debian-9-r3/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.2.2-debian-9-r4`, `1`, `1.2.2`, `1.2.2-r4`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.2.2-debian-9-r4/1/debian-9/Dockerfile)
 * [`1-rhel-7`, `1.0.6-rhel-7-r20` (1/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.0.6-rhel-7-r20/1/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluent-bit GitHub repo](https://github.com/bitnami/bitnami-docker-fluent-bit).
@@ -170,7 +170,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
-Copyright 2018 Bitnami
+Copyright (c) 2019 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
