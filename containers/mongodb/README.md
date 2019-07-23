@@ -179,7 +179,8 @@ In order to have your custom files inside the docker image you can mount them as
 
 Passing extra command-line flags to the mongod service command is possible through the following env var:
 
-- `MONGODB_EXTRA_FLAGS`: Flags to be appended to the startup command. No defaults
+- `MONGODB_EXTRA_FLAGS`: Flags to be appended to the `mongod` startup command. No defaults
+- `MONGODB_CLIENT_EXTRA_FLAGS`: Flags to be appended to the `mongo` command which is used to connect to the (local or remote) `mongod` daemon. No defaults
 
 ```bash
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_EXTRA_FLAGS='--wiredTigerCacheSizeGB=2' bitnami/mongodb:latest
@@ -491,6 +492,24 @@ After adding the secondary nodes we verified they have been successfully added b
 **Arbiter node configuration:**
 
 Finally, the arbiters follows the same procedure than secondary nodes with the exception that the command to add it to the replica set is `rs.addArb(ARBITER_NODE_HOST)`. An arbiter should be added when the sum of primary nodes plus secondaries nodes is even.
+
+## Enabling SSL/TLS
+
+This container also supports enabling SSL/TLS between servers in the cluster, as well as between mongo clients and servers.
+Run the [`start-generate-certificates.sh`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/certicates/start-generate-certificates.sh) to generate example certificates (**NOT for production usage**), and the example [`docker-compose-replicaset-ssl.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose-replicaset-ssl.yml) to start a cluster using the generated certificates.
+
+The example requires SSL for inter-server communication and it requires clients to present valid x509 certificates as well.
+
+To also allow clients to connect using username and password (without x509 certificates) see: https://docs.mongodb.com/manual/reference/configuration-options/#net.ssl.allowConnectionsWithoutCertificates
+See https://docs.mongodb.com/manual/reference/program/mongod/#tls-ssl-options for more extensive information regarding related configuration options.
+
+### Connecting to the mongo daemon
+From within the container it should be possible to connect to the mongo daemon using:
+```bash
+/opt/bitnami/mongodb/bin/mongo -u root -p password123 --host mongodb-primary --ssl --sslPEMKeyFile=/certificates/mongodb-primary.pem --sslCAFile=/certificates/mongoCA.crt
+```
+
+**NB**: We only support `--clusterAuthMode=keyFile` in this configuration.
 
 ## Configuration file
 

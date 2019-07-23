@@ -57,6 +57,8 @@ export MONGODB_REPLICA_SET_KEY="${MONGODB_REPLICA_SET_KEY:-}"
 export MONGODB_REPLICA_SET_NAME="${MONGODB_REPLICA_SET_NAME:-replicaset}"
 export MONGODB_ENABLE_MAJORITY_READ="${MONGODB_ENABLE_MAJORITY_READ:-yes}"
 export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
+export MONGODB_EXTRA_FLAGS="${MONGODB_EXTRA_FLAGS:-}"
+export MONGODB_CLIENT_EXTRA_FLAGS="${MONGODB_CLIENT_EXTRA_FLAGS:-}"
 EOF
 }
 
@@ -160,17 +162,20 @@ mongodb_create_config() {
 #   $1 - User to run queries
 #   $2 - Password
 #   $3 - Database where to run the queries
-#   $4 - Host (default 127.0.0.1)
+#   $4 - Host (default to result of get_mongo_hostname function)
 #   $5 - Port (default $MONGODB_PORT_NUMBER)
+#   $6 - Extra Flags (default to $MONGODB_CLIENT_EXTRA_FLAGS)
 # Returns:
 #   None
 ########################
 mongodb_execute() {
+    local mongo_hostname=$(get_mongo_hostname)
     local user="${1:-}"
     local password="${2:-}"
     local database="${3:-}"
-    local host="${4:-127.0.0.1}"
+    local host="${4:-$mongo_hostname}"
     local port="${5:-$MONGODB_PORT_NUMBER}"
+    local extra_args="${6:-$MONGODB_CLIENT_EXTRA_FLAGS}"
     local result
 
     # If password is empty it means no auth, do not specify user
@@ -179,9 +184,21 @@ mongodb_execute() {
     local -a args=("--host" "$host" "--port" "$port")
     [[ -n "$user" ]] && args+=("-u" "$user")
     [[ -n "$password" ]] && args+=("-p" "$password")
+    [[ -n "$extra_args" ]] && args+=($extra_args)
     [[ -n "$database" ]] && args+=("$database")
 
     "$MONGODB_BIN_DIR/mongo" "${args[@]}"
+}
+
+########################
+# Determine the hostname by which to contact the locally running mongo daemon
+# Returns:
+#   The value of $MONGODB_ADVERTISED_HOSTNAME or the current host address
+########################
+get_mongo_hostname() {
+    local node
+    [[ -n "$MONGODB_ADVERTISED_HOSTNAME" ]] && node="$MONGODB_ADVERTISED_HOSTNAME" || node=$(get_machine_ip)
+    echo "$node"
 }
 
 ########################
@@ -264,7 +281,7 @@ mongodb_start_bg() {
     # Use '--fork' option to enable daemon mode
     # ref: https://docs.mongodb.com/manual/reference/program/mongod/#cmdoption-mongod-fork
     local flags=("--fork" "--config=$MONGODB_CONFIG_FILE")
-    [[ -z "${MONGODB_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${MONGODB_EXTRA_FLAGS[@]}")
+    [[ -z "${MONGODB_EXTRA_FLAGS:-}" ]] || flags+=(${MONGODB_EXTRA_FLAGS})
 
     debug "Starting MongoDB in background..."
 
@@ -397,7 +414,7 @@ mongodb_enable_replicasetmode() {
 }
 
 ########################
-# Creates the apropiate users
+# Creates the appropriate users
 # Globals:
 #   MONGODB_*
 # Arguments:
@@ -472,7 +489,7 @@ mongodb_is_primary_node_initiated() {
     local node="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute "root" "$MONGODB_ROOT_PASSWORD" "admin" "127.0.0.1" "$MONGODB_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "root" "$MONGODB_ROOT_PASSWORD" "admin" "$node" "$MONGODB_PORT_NUMBER" "$MONGODB_CLIENT_EXTRA_FLAGS" <<EOF
 rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME","members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
 EOF
 )
@@ -485,7 +502,7 @@ EOF
 }
 
 ########################
-# Gets if secondary node is pendig
+# Gets if secondary node is pending
 # Globals:
 #   MONGODB_*
 # Arguments:
@@ -497,7 +514,7 @@ mongodb_is_secondary_node_pending() {
     local node="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" "$MONGODB_CLIENT_EXTRA_FLAGS" <<EOF
 rs.add('$node:$MONGODB_PORT_NUMBER')
 EOF
 )
@@ -509,7 +526,7 @@ EOF
 }
 
 ########################
-# Gets if arbiter node is pendig
+# Gets if arbiter node is pending
 # Globals:
 #   MONGODB_*
 # Arguments:
@@ -521,7 +538,7 @@ mongodb_is_arbiter_node_pending() {
     local node="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" "$MONGODB_CLIENT_EXTRA_FLAGS" <<EOF
 rs.addArb('$node:$MONGODB_PORT_NUMBER')
 EOF
 )
@@ -585,7 +602,7 @@ mongodb_configure_primary() {
 mongodb_is_node_confirmed() {
     local node="${1:?node is required}"
 
-    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" "$MONGODB_CLIENT_EXTRA_FLAGS" <<EOF
 rs.status().members
 EOF
 )
@@ -627,7 +644,7 @@ mongodb_wait_confirmation() {
 mongodb_is_primary_node_up() {
     debug "Validating $MONGODB_PRIMARY_HOST as primary node..."
 
-    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" "$MONGODB_CLIENT_EXTRA_FLAGS" <<EOF
 db.isMaster().ismaster
 EOF
 )
@@ -649,7 +666,7 @@ EOF
 #########################
 mongodb_is_primary_available() {
     local result
-    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" "$MONGODB_CLIENT_EXTRA_FLAGS" <<EOF
 db.getUsers()
 EOF
 )
@@ -733,7 +750,7 @@ mongodb_configure_arbiter() {
 mongodb_is_not_in_sync(){
     local result
 
-    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" "$MONGODB_CLIENT_EXTRA_FLAGS" <<EOF
 db.printSlaveReplicationInfo()
 EOF
 )
@@ -781,7 +798,7 @@ mongodb_node_currently_in_cluster() {
     local node="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" "$MONGODB_CLIENT_EXTRA_FLAGS" <<EOF
 rs.status()
 EOF
 )
@@ -802,11 +819,10 @@ EOF
 #   None
 #########################
 mongodb_configure_replica_set() {
-    local node
 
     info "Configuring MongoDB replica set..."
 
-    [[ -n "$MONGODB_ADVERTISED_HOSTNAME" ]] && node="$MONGODB_ADVERTISED_HOSTNAME" || node=$(get_machine_ip)
+    local node=$(get_mongo_hostname)
 
     mongodb_enable_replicasetmode
     mongodb_restart
