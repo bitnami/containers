@@ -1,0 +1,38 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be used in production.
+##
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-nginx-exporter
+  name: test-nginx-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-nginx-exporter
+  template:
+    metadata:
+      labels:
+        app: test-nginx-exporter
+    spec:
+      containers:
+      - image: bitnami/nginx-exporter
+        name: nginx-exporter
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: test-nginx-exporter
+  name: test-nginx-exporter
+spec:
+  ports:
+  - port: 9113
+    protocol: TCP
+    targetPort: 9113
+  selector:
+    app: test-nginx-exporter
+  sessionAffinity: None
+  type: ClusterIP
