@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-rhel-7`, `0.8.0-rhel-7-r1` (0/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.8.0-rhel-7-r1/0/rhel-7/Dockerfile)
-* [`0-ol-7`, `0.8.0-ol-7-r89` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.8.0-ol-7-r89/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.8.0-ol-7-r90` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.8.0-ol-7-r90/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.8.0-debian-9-r81`, `0`, `0.8.0`, `0.8.0-r81`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.8.0-debian-9-r81/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pushgateway GitHub repo](https://github.com/bitnami/bitnami-docker-pushgateway).
@@ -172,7 +172,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
-Copyright 2018 Bitnami
+Copyright (c) 2019 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
