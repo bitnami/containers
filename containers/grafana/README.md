@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6-ol-7`, `6.2.5-ol-7-r27` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.2.5-ol-7-r27/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.2.5-debian-9-r27`, `6`, `6.2.5`, `6.2.5-r27`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.2.5-debian-9-r27/6/debian-9/Dockerfile)
+* [`6-debian-9`, `6.2.5-debian-9-r28`, `6`, `6.2.5`, `6.2.5-r28`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.2.5-debian-9-r28/6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -219,7 +219,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
-Copyright 2018 Bitnami
+Copyright (c) 2019 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
