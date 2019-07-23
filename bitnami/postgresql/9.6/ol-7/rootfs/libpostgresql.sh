@@ -83,7 +83,7 @@ EOF
 
     cat <<"EOF"
 # Paths
-export POSTGRESQL_VOLUME_DIR="/bitnami/postgresql"
+export POSTGRESQL_VOLUME_DIR="${POSTGRESQL_VOLUME_DIR:-/bitnami/postgresql}"
 export POSTGRESQL_DATA_DIR="${POSTGRESQL_DATA_DIR:-$POSTGRESQL_VOLUME_DIR/data}"
 export POSTGRESQL_BASE_DIR="/opt/bitnami/postgresql"
 export POSTGRESQL_CONF_DIR="$POSTGRESQL_BASE_DIR/conf"
