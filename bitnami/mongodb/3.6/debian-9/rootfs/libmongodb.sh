@@ -169,11 +169,10 @@ mongodb_create_config() {
 #   None
 ########################
 mongodb_execute() {
-    local mongo_hostname=$(get_mongo_hostname)
     local user="${1:-}"
     local password="${2:-}"
     local database="${3:-}"
-    local host="${4:-$mongo_hostname}"
+    local host="${4:-$(get_mongo_hostname)}"
     local port="${5:-$MONGODB_PORT_NUMBER}"
     local extra_args="${6:-$MONGODB_CLIENT_EXTRA_FLAGS}"
     local result
