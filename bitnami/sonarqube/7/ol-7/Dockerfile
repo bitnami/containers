@@ -1,15 +1,15 @@
-FROM bitnami/oraclelinux-extras:7-r406
+FROM bitnami/oraclelinux-extras:7-r407
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages glib2 glibc keyutils-libs krb5-libs libblkid libcom_err libedit libffi libgcc libmount libselinux libstdc++ libuuid libxml2 libxslt ncurses-libs nss-softokn-freebl openssl-libs pcre xz-libs zlib
 RUN bitnami-pkg unpack postgresql-client-10.9.0-0 --checksum 31aa472b734f9c3ada6974cc6cafa80d5d2c3f009502a49f8a764507f1aa7dda
-RUN bitnami-pkg install java-11.0.3-0 --checksum 21221453b840f18dfd38e329fe5ef6f5621815c7bf3036f01f872b06edcef84c
+RUN bitnami-pkg install java-11.0.4-0 --checksum 3a17c3d9c943fc8342a9aa9786e924627d5b5579163e957d0ca1c9de523626f3
 RUN bitnami-pkg unpack sonarqube-7.9.1-0 --checksum 87161afe7bca2f37a4ae93d6bccf9c6d84972ac3d0db8ad7390fd1fc480cf6fb
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="7.9.1-ol-7-r12" \
+    BITNAMI_IMAGE_VERSION="7.9.1-ol-7-r13" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/java/bin:/opt/bitnami/sonarqube/bin/linux-x86-64/:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
