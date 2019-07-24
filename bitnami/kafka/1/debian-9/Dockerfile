@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r308
+FROM bitnami/minideb-extras-base:stretch-r309
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -8,15 +8,15 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     OS_NAME="linux"
 
 # Install required system packages and dependencies
-RUN install_packages libc6 libgcc1
-RUN . ./libcomponent.sh && component_unpack "java" "1.8.212-0" --checksum 54a18672c8b4c1a44324c607a6bc616f614a062005d5e3384f91f10ff6f6edea
+RUN install_packages libc6 libgcc1 zlib1g
+RUN . ./libcomponent.sh && component_unpack "java" "1.8.222-0" --checksum e5a677e160c01cd605bc6aae75cc937d4b2d37514b3e1d0a1dd2d332422e68c7
 RUN . ./libcomponent.sh && component_unpack "kafka" "1.1.1-31" --checksum d00175ba6d82cfa343646ef9a614f890d5a51a40aeb1699e08b43fc17c6a143a
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV ALLOW_PLAINTEXT_LISTENER="no" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="1.1.1-debian-9-r272" \
+    BITNAMI_IMAGE_VERSION="1.1.1-debian-9-r273" \
     KAFKA_BROKER_PASSWORD="bitnami" \
     KAFKA_BROKER_USER="user" \
     KAFKA_CERTIFICATE_PASSWORD="" \
