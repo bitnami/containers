@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r426
+FROM bitnami/minideb-extras:stretch-r427
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -6,14 +6,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/"
 
 # Install required system packages and dependencies
-RUN install_packages libaio1 libc6 libgcc1
-RUN bitnami-pkg install java-1.8.212-0 --checksum 54a18672c8b4c1a44324c607a6bc616f614a062005d5e3384f91f10ff6f6edea
+RUN install_packages libaio1 libc6 libgcc1 zlib1g
+RUN bitnami-pkg install java-1.8.222-0 --checksum e5a677e160c01cd605bc6aae75cc937d4b2d37514b3e1d0a1dd2d332422e68c7
 RUN bitnami-pkg unpack wildfly-17.0.1-0 --checksum 5acc5e072e35fbf1d9b1acc8e298b654212e2678f5b2caa601fa55ee105a89ef
 RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="17.0.1-debian-9-r18" \
+    BITNAMI_IMAGE_VERSION="17.0.1-debian-9-r19" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly" \
