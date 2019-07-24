@@ -477,12 +477,15 @@ mysql_upgrade() {
 
     debug "Running mysql_upgrade..."
 
+    if [[ "$DB_FLAVOR" = "mysql" ]] && [[ "$major_version" = "5" ]]; then
+        args+=("--force")
+    fi
     if [[ "$DB_FLAVOR" = "mysql" ]] && [[ "$major_version" = "8" ]]; then
         mysql_stop
         export DB_FORCE_UPGRADE=true
         mysql_start_bg
         unset DB_FORCE_UPGRADE
-    else 
+    else
         if is_boolean_yes "${ROOT_AUTH_ENABLED:-false}"; then
             args+=("-p$DB_ROOT_PASSWORD")
         fi
@@ -718,6 +721,11 @@ mysql_initialize() {
 
     if [[ -e "$DB_DATADIR/mysql" ]]; then
         info "Persisted data detected. Restoring..."
+        # if MYSQL/MARIADB_ROOT_PASSWORD is set, enable auth
+        [[ -n "$(get_env_var ROOT_PASSWORD)" ]] && export ROOT_AUTH_ENABLED="yes"
+        info "Running mysql_upgrade..."
+        mysql_start_bg
+        mysql_upgrade
         return
     else
         debug "Cleaning data directory to ensure successfully initialization..."
