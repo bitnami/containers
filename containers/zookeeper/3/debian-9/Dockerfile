@@ -1,18 +1,18 @@
-FROM bitnami/minideb-extras:stretch-r426
+FROM bitnami/minideb-extras:stretch-r427
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/"
 
 # Install required system packages and dependencies
-RUN install_packages libc6 libgcc1
-RUN bitnami-pkg install java-1.8.212-0 --checksum 54a18672c8b4c1a44324c607a6bc616f614a062005d5e3384f91f10ff6f6edea
+RUN install_packages libc6 libgcc1 zlib1g
+RUN bitnami-pkg install java-1.8.222-0 --checksum e5a677e160c01cd605bc6aae75cc937d4b2d37514b3e1d0a1dd2d332422e68c7
 RUN bitnami-pkg unpack zookeeper-3.5.5-3 --checksum 6807836b1e0081342d7cc65d976df9119c5f6d2849d5f4ac0cf67f5e105c25c6
 
 COPY rootfs /
 ENV ALLOW_ANONYMOUS_LOGIN="no" \
     BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.5.5-debian-9-r49" \
+    BITNAMI_IMAGE_VERSION="3.5.5-debian-9-r50" \
     JVMFLAGS="" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH" \
