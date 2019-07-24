@@ -16,7 +16,7 @@ COPY rootfs /
 RUN /postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.27-ol-7-r2" \
+    BITNAMI_IMAGE_VERSION="5.7.27-ol-7-r3" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
