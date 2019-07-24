@@ -1,17 +1,17 @@
-FROM bitnami/minideb-extras:stretch-r426
+FROM bitnami/minideb-extras:stretch-r427
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/"
 
 # Install required system packages and dependencies
-RUN install_packages libc6 libgcc1
-RUN bitnami-pkg install java-1.8.212-0 --checksum 54a18672c8b4c1a44324c607a6bc616f614a062005d5e3384f91f10ff6f6edea
+RUN install_packages libc6 libgcc1 zlib1g
+RUN bitnami-pkg install java-1.8.222-0 --checksum e5a677e160c01cd605bc6aae75cc937d4b2d37514b3e1d0a1dd2d332422e68c7
 RUN bitnami-pkg unpack neo4j-3.5.8-0 --checksum 9a424b21444f5750175b7e4e90251514f8565c581af7bdab46bd0e36b02f7cbd
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="3.5.8-debian-9-r2" \
+    BITNAMI_IMAGE_VERSION="3.5.8-debian-9-r3" \
     NAMI_PREFIX="/.nami" \
     NEO4J_BOLT_PORT_NUMBER="7687" \
     NEO4J_HOST="" \
