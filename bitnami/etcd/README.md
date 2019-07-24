@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.3.13-ol-7-r87` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.13-ol-7-r87/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.3.13-debian-9-r57`, `3`, `3.3.13`, `3.3.13-r57`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.13-debian-9-r57/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.3.13-debian-9-r58`, `3`, `3.3.13`, `3.3.13-r58`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.13-debian-9-r58/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/etcd GitHub repo](https://github.com/bitnami/bitnami-docker-etcd).
 
