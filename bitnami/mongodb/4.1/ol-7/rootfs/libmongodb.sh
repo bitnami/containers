@@ -195,9 +195,7 @@ mongodb_execute() {
 #   The value of $MONGODB_ADVERTISED_HOSTNAME or the current host address
 ########################
 get_mongo_hostname() {
-    local node
-    [[ -n "$MONGODB_ADVERTISED_HOSTNAME" ]] && node="$MONGODB_ADVERTISED_HOSTNAME" || node=$(get_machine_ip)
-    echo "$node"
+    [[ -n "$MONGODB_ADVERTISED_HOSTNAME" ]] &&  echo "$MONGODB_ADVERTISED_HOSTNAME" || echo $(get_machine_ip)
 }
 
 ########################
@@ -818,10 +816,9 @@ EOF
 #   None
 #########################
 mongodb_configure_replica_set() {
+    local node=$(get_mongo_hostname)
 
     info "Configuring MongoDB replica set..."
-
-    local node=$(get_mongo_hostname)
 
     mongodb_enable_replicasetmode
     mongodb_restart
