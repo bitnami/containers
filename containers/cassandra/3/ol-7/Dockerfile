@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r406
+FROM bitnami/oraclelinux-extras:7-r407
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,14 +7,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs glibc keyutils-libs krb5-libs libcom_err libgcc libselinux ncurses-libs nss-softokn-freebl openssl-libs pcre readline sqlite zlib
 RUN bitnami-pkg install python-2.7.16-0 --checksum f1818dfd2f72ba498d54702d4e6aa44fcdecc1f0b1fc7d99703e74b4626f6395
-RUN bitnami-pkg install java-1.8.212-0 --checksum 7d11dad71234819fb290bcadc2997bda088ba6b21f245d397c068de4cf3757db
+RUN bitnami-pkg install java-1.8.222-0 --checksum a90f4ce71ff9b392efdf61e6941117afa31d2d6528bd1a3cad1c6459bcac2b0b
 RUN bitnami-pkg unpack cassandra-3.11.4-3 --checksum 64788e4a1c77818adc285cae90b159d45d40b8488440d3c1d0dd253f3c854b72
 RUN mkdir -p /docker-entrypoint-initdb.d /opt/bitnami/cassandra/conf/
 RUN chmod -R g+rwX /opt/bitnami/cassandra/conf/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.4-ol-7-r155" \
+    BITNAMI_IMAGE_VERSION="3.11.4-ol-7-r156" \
     CASSANDRA_CLIENT_ENCRYPTION="false" \
     CASSANDRA_CLUSTER_NAME="My Cluster" \
     CASSANDRA_CQL_PORT_NUMBER="9042" \
