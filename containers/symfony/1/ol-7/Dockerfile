@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r400
+FROM bitnami/oraclelinux-extras:7-r408
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN bitnami-pkg install symfony-1.5.11-20 --checksum d4714f97e462524266a97626854
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="symfony" \
-    BITNAMI_IMAGE_VERSION="1.5.11-ol-7-r358" \
+    BITNAMI_IMAGE_VERSION="1.5.11-ol-7-r366" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/symfony/bin:$PATH"
 
 EXPOSE 8000
