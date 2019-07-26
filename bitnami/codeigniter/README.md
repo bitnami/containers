@@ -51,7 +51,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.1.10-ol-7-r170` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.10-ol-7-r170/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.1.10-debian-9-r152`, `3`, `3.1.10`, `3.1.10-r152`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.10-debian-9-r152/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.1.10-debian-9-r154`, `3`, `3.1.10`, `3.1.10-r154`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.10-debian-9-r154/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codeigniter GitHub repo](https://github.com/bitnami/bitnami-docker-codeigniter).
 
