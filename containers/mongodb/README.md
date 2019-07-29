@@ -495,21 +495,69 @@ Finally, the arbiters follows the same procedure than secondary nodes with the e
 
 ## Enabling SSL/TLS
 
-This container also supports enabling SSL/TLS between servers in the cluster, as well as between mongo clients and servers.
-Run the [`start-generate-certificates.sh`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/certicates/start-generate-certificates.sh) to generate example certificates (**NOT for production usage**), and the example [`docker-compose-replicaset-ssl.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose-replicaset-ssl.yml) to start a cluster using the generated certificates.
+This container supports enabling SSL/TLS between nodes in the cluster, as well as between mongo clients and nodes, by setting the `MONGODB_EXTRA_FLAGS` and `MONGODB_CLIENT_EXTRA_FLAGS` environment variables.
+Before starting the cluster you need to generate PEM certificates as required by Mongo - one way is to create self-signed certificates using `openssl` (see http://www.openssl.org).
 
-The example requires SSL for inter-server communication and it requires clients to present valid x509 certificates as well.
+Another option would be to use letsencrypt certificates; the required configuration steps for that scenario are left as an exercise for the user and are beyond the scope of this README.
 
-To also allow clients to connect using username and password (without x509 certificates) see: https://docs.mongodb.com/manual/reference/configuration-options/#net.ssl.allowConnectionsWithoutCertificates
-See https://docs.mongodb.com/manual/reference/program/mongod/#tls-ssl-options for more extensive information regarding related configuration options.
+### Generating self-signed certificates
 
-### Connecting to the mongo daemon
-From within the container it should be possible to connect to the mongo daemon using:
+- Generate a new private key which will be used to create your own Certificate Authority (CA):
 ```bash
-/opt/bitnami/mongodb/bin/mongo -u root -p password123 --host mongodb-primary --ssl --sslPEMKeyFile=/certificates/mongodb-primary.pem --sslCAFile=/certificates/mongoCA.crt
+openssl genrsa -out mongoCA.key 2048
+```
+
+- Create the public certificate for your own CA:
+```bash
+openssl req -x509 -new -key mongoCA.key -out mongoCA.crt
+```
+
+- Create a Certificate Signing Request for a node `${NODE_NAME}`, the essential part here is that the `Common Name` corresponds to the hostname by which the nodes will be addressed.
+Example for `mongodb-primary`:
+```bash
+export NODE_NAME=mongodb-primary
+openssl req -new -nodes -keyout mongodb-primary.key -out mongodb-primary.csr
+```
+
+- Create a certificate from the Certificate Signing Request and sign it using the private key of your previously created Certificate Authority:
+```bash
+openssl x509 \
+    -req -days 365 -in mongodb-primary.csr -out mongodb-primary.crt \
+    -CA mongoCA.crt -CAkey mongoCA.key -CAcreateserial -extensions req
+```
+
+- Create a PEM bundle using the private key and the public certificate:
+```bash
+cat mongodb-primary.key mongodb-primary.crt > mongodb-primary.pem
+```
+
+Afterwards you do not need the `mongodb-primary.csr` Certificate Signing Request.
+
+Repeat the process to generate PEM bundles for all the nodes in your cluster.
+
+### Starting the cluster
+After having generated the certificates and making them available to the containers at the correct mount points (i.e. `/certificates/`), the environment variables could be setup as in the following examples.
+
+Example settings for the primary node:
+- `MONGODB_EXTRA_FLAGS=--sslMode=requireSSL --sslPEMKeyFile=/certificates/mongodb-primary.pem --sslClusterFile=/certificates/mongodb-primary.pem --sslCAFile=/certificates/mongoCA.crt`
+- `MONGODB_CLIENT_EXTRA_FLAGS=--ssl --sslPEMKeyFile=/certificates/mongodb-primary.pem --sslCAFile=/certificates/mongoCA.crt`
+
+Example corresponding settings for a secondary node:
+- `MONGODB_EXTRA_FLAGS=--sslMode=requireSSL --sslPEMKeyFile=/certificates/mongodb-primary.pem --sslClusterFile=/certificates/mongodb-secondary.pem --sslCAFile=/certificates/mongoCA.crt`
+- `MONGODB_CLIENT_EXTRA_FLAGS=--ssl --sslPEMKeyFile=/certificates/mongodb-primary.pem --sslCAFile=/certificates/mongoCA.crt`
+
+### Connecting to the mongo daemon via SSL
+After successfully starting a cluster as specified, within the container it should be possible to connect to the mongo daemon on the primary node using:
+```bash
+/opt/bitnami/mongodb/bin/mongo -u root -p ${MONGODB_ROOT_PASSWORD} --host mongodb-primary --ssl --sslPEMKeyFile=/certificates/mongodb-primary.pem --sslCAFile=/certificates/mongoCA.crt
 ```
 
 **NB**: We only support `--clusterAuthMode=keyFile` in this configuration.
+
+### References
+- To also allow clients to connect using username and password (without X509 certificates): https://docs.mongodb.com/manual/reference/configuration-options/#net.ssl.allowConnectionsWithoutCertificates
+- For more extensive information regarding related configuration options: https://docs.mongodb.com/manual/reference/program/mongod/#tls-ssl-options,
+Especially client authentication and requirements for common name and OU/DN/etc. fields in the certificates are important for creating a secure setup.
 
 ## Configuration file
 
