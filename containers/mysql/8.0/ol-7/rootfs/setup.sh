@@ -24,5 +24,8 @@ am_i_root && ensure_user_exists "$DB_DAEMON_USER" "$DB_DAEMON_GROUP"
 mysql_initialize
 # Allow running custom initialization scripts
 msyql_custom_init_scripts
+# Stop MySQL before flagging it as fully initialized.
+# Relying only on the trap defined above could produce a race condition.
+mysql_stop
 # Flag MySQL as initialized for the benefit of later processes.
 mysql_flag_initialized
