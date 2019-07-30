@@ -42,15 +42,13 @@ Non-root container images add an extra layer of security and are generally recom
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
-> NOTE: RHEL images are not available in any public registry. You can build them on your side on top of RHEL as described on this [doc](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html-single/getting_started_with_containers/index#creating_docker_images).
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.16-ol-7`, `1.16.0-ol-7-r107` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-ol-7-r107/1.16/ol-7/Dockerfile)
+* [`1.16-ol-7`, `1.16.0-ol-7-r108` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-ol-7-r108/1.16/ol-7/Dockerfile)
 * [`1.16-debian-9`, `1.16.0-debian-9-r96`, `1.16`, `1.16.0`, `1.16.0-r96`, `latest` (1.16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-debian-9-r96/1.16/debian-9/Dockerfile)
-* [`1.16-centos-7`, `1.16.0-centos-7-r71` (1.16/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-centos-7-r71/1.16/centos-7/Dockerfile)
-* [`1.16-rhel-7`, `0.0.0-rhel-7-r0` (1.16/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/0.0.0-rhel-7-r0/1.16/rhel-7/Dockerfile)
+* [`1.16-centos-7`, `1.16.0-centos-7-r72` (1.16/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.0-centos-7-r72/1.16/centos-7/Dockerfile)
 
 # Get this image
 
