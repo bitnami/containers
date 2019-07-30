@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r432
+FROM bitnami/minideb-extras:stretch-r433
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack parse-3.7.0-0 --checksum b7713f32e974a6c19bd1f1fe4bc0e47b
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="3.7.0-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="3.7.0-debian-9-r1" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
