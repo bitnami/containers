@@ -313,6 +313,7 @@ $ docker run -d --name prestashop -p 80:80 -p 443:443 \
 # Troubleshooting
 
 * If you are automatically logged out from the administration panel, you can try deploying PrestaShop with the environment variable `PRESTASHOP_COOKIE_CHECK_IP=no`
+* In order to enable TLS 1.2 support, please use the Debian based container.
 
 # Customize this image
 
