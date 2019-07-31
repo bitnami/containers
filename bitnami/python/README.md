@@ -124,8 +124,8 @@ $ docker run -it --name python -v /path/to/app:/app bitnami/python python script
 or using Docker Compose:
 
 ```
-java:
-  image: bitnami/java:latest
+python:
+  image: bitnami/python:latest
   command: "sh -c 'pip install -r requirements.txt && python script.py'"
   volumes:
     - .:/app
