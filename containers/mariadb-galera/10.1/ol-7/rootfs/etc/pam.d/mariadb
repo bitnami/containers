@@ -1,0 +1,2 @@
+auth required pam_ldap.so try_first_pass debug
+account required pam_ldap.so debug
