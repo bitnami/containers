@@ -199,6 +199,8 @@ services:
 **Note!**
 The `postgres` user is a superuser and has full administrative access to the PostgreSQL database.
 
+Refer to [Creating a database user on first run](#creating-a-database-user-on-first-run) if you want to set an unprivileged user and a password for the `postgres` user.
+
 ## Creating a database on first run
 
 By passing the `POSTGRESQL_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the PostgreSQL client.
@@ -240,7 +242,7 @@ services:
 ```
 
 **Note!**
-When `POSTGRESQL_USERNAME` is specified, the `postgres` user is not assigned a password and as a result you cannot login remotely to the PostgreSQL server as the `postgres` user.
+When `POSTGRESQL_USERNAME` is specified, the `postgres` user is not assigned a password and as a result you cannot login remotely to the PostgreSQL server as the `postgres` user. If you still want to have access with the user `postgres`, please set the `POSTGRESQL_POSTGRES_PASSWORD` environment variable (or the content of the file specified in `POSTGRESQL_POSTGRES_PASSWORD_FILE`).
 
 ## Setting up a streaming replication
 
@@ -550,6 +552,8 @@ The Bitnami PostgreSQL container allows two different sets of environment variab
 | POSTGRESQL_DATABASE                  | POSTGRES_DB                        |
 | POSTGRESQL_PASSWORD                  | POSTGRES_PASSWORD                  |
 | POSTGRESQL_PASSWORD_FILE             | POSTGRES_PASSWORD_FILE             |
+| POSTGRESQL_POSTGRES_PASSWORD         | POSTGRES_POSTGRES_PASSWORD         |
+| POSTGRESQL_POSTGRES_PASSWORD_FILE    | POSTGRES_POSTGRES_PASSWORD_FILE    |
 | POSTGRESQL_PORT_NUMBER               | POSTGRES_PORT_NUMBER               |
 | POSTGRESQL_INITDB_ARGS               | POSTGRES_INITDB_ARGS               |
 | POSTGRESQL_INITDB_WALDIR             | POSTGRES_INITDB_WALDIR             |
