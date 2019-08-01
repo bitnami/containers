@@ -516,19 +516,19 @@ openssl req -x509 -new -key mongoCA.key -out mongoCA.crt
 Example for `mongodb-primary`:
 ```bash
 export NODE_NAME=mongodb-primary
-openssl req -new -nodes -keyout mongodb-primary.key -out mongodb-primary.csr
+openssl req -new -nodes -keyout ${NODE_NAME}.key -out ${NODE_NAME}.csr
 ```
 
 - Create a certificate from the Certificate Signing Request and sign it using the private key of your previously created Certificate Authority:
 ```bash
 openssl x509 \
-    -req -days 365 -in mongodb-primary.csr -out mongodb-primary.crt \
+    -req -days 365 -in ${NODE_NAME}.csr -out ${NODE_NAME}.crt \
     -CA mongoCA.crt -CAkey mongoCA.key -CAcreateserial -extensions req
 ```
 
 - Create a PEM bundle using the private key and the public certificate:
 ```bash
-cat mongodb-primary.key mongodb-primary.crt > mongodb-primary.pem
+cat mongodb-primary.key ${NODE_NAME}.crt > ${NODE_NAME}.pem
 ```
 
 Afterwards you do not need the `mongodb-primary.csr` Certificate Signing Request.
