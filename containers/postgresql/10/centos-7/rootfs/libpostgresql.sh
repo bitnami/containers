@@ -60,10 +60,11 @@ EOF
     [[ -z "${POSTGRESQL_DATA_DIR:-}" ]] && declare_env_alias POSTGRESQL_DATA_DIR PGDATA
 
     local -r suffixes=(
-      "PASSWORD" "INITDB_WAL_DIR" "INITDB_ARGS" "CLUSTER_APP_NAME"
+      "PASSWORD" "POSTGRES_PASSWORD" "INITDB_WAL_DIR" "INITDB_ARGS" "CLUSTER_APP_NAME"
       "MASTER_HOST" "MASTER_PORT_NUMBER" "NUM_SYNCHRONOUS_REPLICAS"
       "PORT_NUMBER" "REPLICATION_MODE" "REPLICATION_PASSWORD" "REPLICATION_USER" "FSYNC"
-      "SYNCHRONOUS_COMMIT_MODE" "PASSWORD_FILE" "REPLICATION_PASSWORD_FILE" "INIT_MAX_TIMEOUT"
+      "SYNCHRONOUS_COMMIT_MODE" "PASSWORD_FILE" "POSTGRES_PASSWORD_FILE"
+      "REPLICATION_PASSWORD_FILE" "INIT_MAX_TIMEOUT"
     )
     for s in "${suffixes[@]}"; do
       declare_env_alias "POSTGRESQL_${s}" "POSTGRES_${s}"
@@ -136,6 +137,15 @@ EOF
     else
         cat <<"EOF"
 export POSTGRESQL_REPLICATION_PASSWORD="${POSTGRESQL_REPLICATION_PASSWORD:-}"
+EOF
+    fi
+    if [[ -n "${POSTGRESQL_POSTGRES_PASSWORD_FILE:-}" ]] && [[ -f "$POSTGRESQL_POSTGRES_PASSWORD_FILE" ]]; then
+        cat <<"EOF"
+export POSTGRESQL_POSTGRES_PASSWORD="$(< "${POSTGRESQL_POSTGRES_PASSWORD_FILE}")"
+EOF
+    else
+        cat <<"EOF"
+export POSTGRESQL_POSTGRES_PASSWORD="${POSTGRESQL_POSTGRES_PASSWORD:-}"
 EOF
     fi
 }
@@ -381,13 +391,13 @@ postgresql_configure_fsync() {
 # Globals:
 #   POSTGRESQL_*
 # Arguments:
-#   None
+#   Password
 # Returns:
 #   None
 #########################
 postgresql_alter_postgres_user() {
-    local -r escaped_password="${POSTGRESQL_PASSWORD//\'/\'\'}"
-    info "Changing password of ${POSTGRESQL_USERNAME}"
+    local -r escaped_password="${1//\'/\'\'}"
+    info "Changing password of postgres"
     echo "ALTER ROLE postgres WITH PASSWORD '$escaped_password';" | postgresql_execute
 }
 
@@ -511,8 +521,11 @@ postgresql_initialize() {
             postgresql_start_bg
             [[ -n "${POSTGRESQL_DATABASE}" ]] && [[ "$POSTGRESQL_DATABASE" != "postgres" ]] && postgresql_create_custom_database
             if [[ "$POSTGRESQL_USERNAME" = "postgres" ]]; then
-                postgresql_alter_postgres_user
+                postgresql_alter_postgres_user "$POSTGRESQL_PASSWORD"
             else
+                if [[ -n "$POSTGRESQL_POSTGRES_PASSWORD" ]]; then
+                    postgresql_alter_postgres_user "$POSTGRESQL_POSTGRES_PASSWORD"
+                fi
                 postgresql_create_admin_user
             fi
             is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
