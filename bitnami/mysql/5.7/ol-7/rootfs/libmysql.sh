@@ -796,3 +796,16 @@ msyql_custom_init_scripts() {
         touch "$DB_VOLUMEDIR"/.user_scripts_initialized
     fi
 }
+
+########################
+# Flag MySQL has fully initialized.
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mysql_flag_initialized() {
+    touch "$DB_VOLUMEDIR"/.mysql_initialized
+}
