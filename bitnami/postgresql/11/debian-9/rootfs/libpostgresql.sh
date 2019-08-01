@@ -60,10 +60,11 @@ EOF
     [[ -z "${POSTGRESQL_DATA_DIR:-}" ]] && declare_env_alias POSTGRESQL_DATA_DIR PGDATA
 
     local -r suffixes=(
-      "PASSWORD" "INITDB_WAL_DIR" "INITDB_ARGS" "CLUSTER_APP_NAME"
+      "PASSWORD" "POSTGRES_PASSWORD" "INITDB_WAL_DIR" "INITDB_ARGS" "CLUSTER_APP_NAME"
       "MASTER_HOST" "MASTER_PORT_NUMBER" "NUM_SYNCHRONOUS_REPLICAS"
       "PORT_NUMBER" "REPLICATION_MODE" "REPLICATION_PASSWORD" "REPLICATION_USER" "FSYNC"
-      "SYNCHRONOUS_COMMIT_MODE" "PASSWORD_FILE" "REPLICATION_PASSWORD_FILE" "INIT_MAX_TIMEOUT"
+      "SYNCHRONOUS_COMMIT_MODE" "PASSWORD_FILE" "POSTGRES_PASSWORD_FILE"
+      "REPLICATION_PASSWORD_FILE" "INIT_MAX_TIMEOUT"
     )
     for s in "${suffixes[@]}"; do
       declare_env_alias "POSTGRESQL_${s}" "POSTGRES_${s}"
@@ -522,7 +523,7 @@ postgresql_initialize() {
             if [[ "$POSTGRESQL_USERNAME" = "postgres" ]]; then
                 postgresql_alter_postgres_user "$POSTGRESQL_PASSWORD"
             else
-                if [[ ! -z "$POSTGRESQL_POSTGRES_PASSWORD" ]]; then
+                if [[ -n "$POSTGRESQL_POSTGRES_PASSWORD" ]]; then
                     postgresql_alter_postgres_user "$POSTGRESQL_POSTGRES_PASSWORD"
                 fi
                 postgresql_create_admin_user
