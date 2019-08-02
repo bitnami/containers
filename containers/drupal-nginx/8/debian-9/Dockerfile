@@ -3,7 +3,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libffi6 libfreetype6 libgcc1 libgcrypt20 libgeoip1 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmemcached11 libmemcachedutil2 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5 libtinfo5 libunistring0 libxml2 libxslt1.1 libzip4 zlib1g
-RUN bitnami-pkg unpack php-7.3.7-0 --checksum 706d0a7a939eaa105f6091e77ae72193b986297db5d03f3678099d8a419164c6
+RUN bitnami-pkg unpack php-7.3.8-0 --checksum cc67ec3f4ff34c0f757e59e28b43572c4b20b938b84cd88a09a186dfd327abd0
 RUN bitnami-pkg unpack nginx-1.16.0-12 --checksum 6328bcc005fd92bb3a5ae061e29dd4dcc8158f858972d41d309455ffbd88aa08
 RUN bitnami-pkg unpack mysql-client-10.3.17-0 --checksum 71d59fafc3e7e3e598af0c2b6788d77558630afe647ec1f922ffdd5025f3d737
 RUN bitnami-pkg unpack drupal-8.7.5-0 --checksum 3cbbde9a2ad7e3a3f0e01e8b2959a5fbca1909a9518b77fc30b309d9d2a088eb
@@ -13,7 +13,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="8.7.5-debian-9-r15" \
+    BITNAMI_IMAGE_VERSION="8.7.5-debian-9-r16" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
