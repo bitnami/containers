@@ -46,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`8.0-ol-7`, `8.0.17-ol-7-r10` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.17-ol-7-r10/8.0/ol-7/Dockerfile)
+* [`8.0-ol-7`, `8.0.17-ol-7-r11` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.17-ol-7-r11/8.0/ol-7/Dockerfile)
 * [`8.0-debian-9`, `8.0.17-debian-9-r10`, `8.0`, `8.0.17`, `8.0.17-r10`, `latest` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.17-debian-9-r10/8.0/debian-9/Dockerfile)
 * [`5.7-ol-7`, `5.7.27-ol-7-r11` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.27-ol-7-r11/5.7/ol-7/Dockerfile)
 * [`5.7-debian-9`, `5.7.27-debian-9-r11`, `5.7`, `5.7.27`, `5.7.27-r11` (5.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.27-debian-9-r11/5.7/debian-9/Dockerfile)
@@ -290,7 +290,6 @@ services:
       test: bash -c "[ -f /bitnami/mysql/.mysql_initialized ]" && mysql -uMYSQL_USER -pMYSQL_PASSWORD MYSQL_DATABASE --silent --execute "SHOW TABLES;"
   ...
 ```
-
 ## Setting up a replication cluster
 
 A **zero downtime** MySQL master-slave [replication](https://dev.mysql.com/doc/refman/5.7/en/server-option-variable-reference.html) cluster can easily be setup with the Bitnami MySQL Docker image using the following environment variables:
