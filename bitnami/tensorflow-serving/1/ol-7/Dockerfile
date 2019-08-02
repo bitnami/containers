@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack tensorflow-serving-1.14.0-0 --checksum 1f8d951b265dbb2067
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="1.14.0-ol-7-r22" \
+    BITNAMI_IMAGE_VERSION="1.14.0-ol-7-r23" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_MODEL_NAME="resnet" \
