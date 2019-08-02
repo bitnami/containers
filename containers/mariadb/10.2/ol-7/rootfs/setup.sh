@@ -23,4 +23,4 @@ am_i_root && ensure_user_exists "$DB_DAEMON_USER" "$DB_DAEMON_GROUP"
 # Ensure MariaDB is initialized
 mysql_initialize
 # Allow running custom initialization scripts
-msyql_custom_init_scripts
+mysql_custom_init_scripts
