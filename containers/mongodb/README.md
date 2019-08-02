@@ -495,9 +495,12 @@ Finally, the arbiters follows the same procedure than secondary nodes with the e
 
 ## Enabling SSL/TLS
 
-This container supports enabling SSL/TLS between nodes in the cluster, as well as between mongo clients and nodes, by setting the `MONGODB_EXTRA_FLAGS` and `MONGODB_CLIENT_EXTRA_FLAGS` environment variables.
+This container supports enabling SSL/TLS between nodes in the cluster, as well as between mongo clients and nodes, by setting the `MONGODB_EXTRA_FLAGS` and `MONGODB_CLIENT_EXTRA_FLAGS` environment variables,
+together with the correct `MONGODB_ADVERTISED_HOSTNAME`.
 Before starting the cluster you need to generate PEM certificates as required by Mongo - one way is to create self-signed certificates using `openssl` (see http://www.openssl.org).
 
+**The certificates generated as described are not for production use**
+ 
 Another option would be to use letsencrypt certificates; the required configuration steps for that scenario are left as an exercise for the user and are beyond the scope of this README.
 
 ### Generating self-signed certificates
@@ -509,14 +512,18 @@ openssl genrsa -out mongoCA.key 2048
 
 - Create the public certificate for your own CA:
 ```bash
-openssl req -x509 -new -key mongoCA.key -out mongoCA.crt
+openssl req -x509 -new \
+    -subj "/C=US/ST=NY/L=New York/O=Example Corp/OU=IT Department/CN=mongoCA" \
+    -key mongoCA.key -out mongoCA.crt
 ```
 
 - Create a Certificate Signing Request for a node `${NODE_NAME}`, the essential part here is that the `Common Name` corresponds to the hostname by which the nodes will be addressed.
 Example for `mongodb-primary`:
 ```bash
 export NODE_NAME=mongodb-primary
-openssl req -new -nodes -keyout ${NODE_NAME}.key -out ${NODE_NAME}.csr
+openssl req -new -nodes \
+    -subj "/C=US/ST=NY/L=New York/O=Example Corp/OU=IT Department/CN=${NODE_NAME}" \
+    -keyout ${NODE_NAME}.key -out ${NODE_NAME}.csr
 ```
 
 - Create a certificate from the Certificate Signing Request and sign it using the private key of your previously created Certificate Authority:
@@ -528,23 +535,28 @@ openssl x509 \
 
 - Create a PEM bundle using the private key and the public certificate:
 ```bash
-cat mongodb-primary.key ${NODE_NAME}.crt > ${NODE_NAME}.pem
+cat ${NODE_NAME}.key ${NODE_NAME}.crt > ${NODE_NAME}.pem
 ```
 
-Afterwards you do not need the `mongodb-primary.csr` Certificate Signing Request.
+NB: Afterwards you do not need the Certificate Signing Request.
+```bash
+rm ${NODE_NAME}.csr
+```
 
 Repeat the process to generate PEM bundles for all the nodes in your cluster.
 
 ### Starting the cluster
 After having generated the certificates and making them available to the containers at the correct mount points (i.e. `/certificates/`), the environment variables could be setup as in the following examples.
 
-Example settings for the primary node:
+Example settings for the primary node `mongodb-primary`:
+- `MONGODB_ADVERTISED_HOSTNAME=mongodb-primary`
 - `MONGODB_EXTRA_FLAGS=--sslMode=requireSSL --sslPEMKeyFile=/certificates/mongodb-primary.pem --sslClusterFile=/certificates/mongodb-primary.pem --sslCAFile=/certificates/mongoCA.crt`
 - `MONGODB_CLIENT_EXTRA_FLAGS=--ssl --sslPEMKeyFile=/certificates/mongodb-primary.pem --sslCAFile=/certificates/mongoCA.crt`
 
-Example corresponding settings for a secondary node:
-- `MONGODB_EXTRA_FLAGS=--sslMode=requireSSL --sslPEMKeyFile=/certificates/mongodb-primary.pem --sslClusterFile=/certificates/mongodb-secondary.pem --sslCAFile=/certificates/mongoCA.crt`
-- `MONGODB_CLIENT_EXTRA_FLAGS=--ssl --sslPEMKeyFile=/certificates/mongodb-primary.pem --sslCAFile=/certificates/mongoCA.crt`
+Example corresponding settings for a secondary node `mongodb-secondary`:
+- `MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary`
+- `MONGODB_EXTRA_FLAGS=--sslMode=requireSSL --sslPEMKeyFile=/certificates/mongodb-secondary.pem --sslClusterFile=/certificates/mongodb-secondary.pem --sslCAFile=/certificates/mongoCA.crt`
+- `MONGODB_CLIENT_EXTRA_FLAGS=--ssl --sslPEMKeyFile=/certificates/mongodb-secondary.pem --sslCAFile=/certificates/mongoCA.crt`
 
 ### Connecting to the mongo daemon via SSL
 After successfully starting a cluster as specified, within the container it should be possible to connect to the mongo daemon on the primary node using:
