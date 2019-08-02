@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "harbor-notary-signer" "1.8.2-rc1-1"
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-notary-signer" \
-    BITNAMI_IMAGE_VERSION="1.8.2-rc1-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="1.8.2-rc1-ol-7-r12" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-notary-signer/bin:$PATH" \
     SERVICE_NAME="notary_signer"
