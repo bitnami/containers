@@ -776,7 +776,7 @@ EOF
 # Returns:
 #   None
 #########################
-msyql_custom_init_scripts() {
+mysql_custom_init_scripts() {
     if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && [[ ! -f "$DB_VOLUMEDIR/.user_scripts_initialized" ]] ; then
         info "Loading user's custom files from /docker-entrypoint-initdb.d ...";
         for f in /docker-entrypoint-initdb.d/*; do
