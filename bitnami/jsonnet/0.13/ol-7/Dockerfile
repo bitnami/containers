@@ -10,7 +10,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 RUN chmod +x /opt/bitnami/jsonnet/bin/jsonnet
 ENV BITNAMI_APP_NAME="jsonnet" \
-    BITNAMI_IMAGE_VERSION="0.13.0-ol-7-r46" \
+    BITNAMI_IMAGE_VERSION="0.13.0-ol-7-r47" \
     PATH="/opt/bitnami/jsonnet/bin:$PATH"
 
 USER 1001
