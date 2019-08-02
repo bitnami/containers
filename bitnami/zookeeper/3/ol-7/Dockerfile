@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack zookeeper-3.5.5-3 --checksum ff16f181238a5a0edb088f80c958
 COPY rootfs /
 ENV ALLOW_ANONYMOUS_LOGIN="no" \
     BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.5.5-ol-7-r60" \
+    BITNAMI_IMAGE_VERSION="3.5.5-ol-7-r61" \
     JVMFLAGS="" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH" \
