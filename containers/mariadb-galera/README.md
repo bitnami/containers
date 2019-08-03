@@ -42,8 +42,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10.3-ol-7`, `10.3.17-ol-7-r1` (10.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.17-ol-7-r1/10.3/ol-7/Dockerfile)
-* [`10.3-debian-9`, `10.3.17-debian-9-r1`, `10.3`, `10.3.17`, `10.3.17-r1`, `latest` (10.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.17-debian-9-r1/10.3/debian-9/Dockerfile)
-* [`10.3-centos-7`, `10.3.17-centos-7-r2` (10.3/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.17-centos-7-r2/10.3/centos-7/Dockerfile)
+* [`10.3-debian-9`, `10.3.17-debian-9-r2`, `10.3`, `10.3.17`, `10.3.17-r2`, `latest` (10.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.17-debian-9-r2/10.3/debian-9/Dockerfile)
+* [`10.3-centos-7`, `10.3.17-centos-7-r1` (10.3/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.17-centos-7-r1/10.3/centos-7/Dockerfile)
 * [`10.2-ol-7`, `10.2.26-ol-7-r1` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.26-ol-7-r1/10.2/ol-7/Dockerfile)
 * [`10.2-debian-9`, `10.2.26-debian-9-r1`, `10.2`, `10.2.26`, `10.2.26-r1` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.26-debian-9-r1/10.2/debian-9/Dockerfile)
 * [`10.2-centos-7`, `10.2.26-centos-7-r1` (10.2/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.26-centos-7-r1/10.2/centos-7/Dockerfile)
