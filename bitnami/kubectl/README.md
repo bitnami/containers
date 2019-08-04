@@ -28,8 +28,8 @@ $ docker run --name kubectl bitnami/kubectl:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.15-ol-7`, `1.15.1-ol-7-r17` (1.15/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.1-ol-7-r17/1.15/ol-7/Dockerfile)
-* [`1.15-debian-9`, `1.15.1-debian-9-r16`, `1.15`, `1.15.1`, `1.15.1-r16`, `latest` (1.15/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.1-debian-9-r16/1.15/debian-9/Dockerfile)
+* [`1.15-ol-7`, `1.15.1-ol-7-r16` (1.15/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.1-ol-7-r16/1.15/ol-7/Dockerfile)
+* [`1.15-debian-9`, `1.15.1-debian-9-r17`, `1.15`, `1.15.1`, `1.15.1-r17`, `latest` (1.15/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.1-debian-9-r17/1.15/debian-9/Dockerfile)
 * [`1.14-ol-7`, `1.14.3-ol-7-r58` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.3-ol-7-r58/1.14/ol-7/Dockerfile)
 * [`1.14-debian-9`, `1.14.3-debian-9-r56`, `1.14`, `1.14.3`, `1.14.3-r56` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.3-debian-9-r56/1.14/debian-9/Dockerfile)
 * [`1.13-ol-7`, `1.13.4-ol-7-r151` (1.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-ol-7-r151/1.13/ol-7/Dockerfile)
