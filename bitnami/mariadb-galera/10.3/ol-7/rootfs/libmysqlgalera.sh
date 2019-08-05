@@ -283,6 +283,10 @@ export DB_LDAP_BASE="$(get_env_var_value LDAP_BASE)"
 export DB_LDAP_BIND_DN="$(get_env_var_value LDAP_BIND_DN)"
 export DB_LDAP_BIND_PASSWORD="$(get_env_var_value LDAP_BIND_PASSWORD)"
 export DB_LDAP_BASE_LOOKUP="$(get_env_var_value LDAP_BASE_LOOKUP)"
+DB_LDAP_NSS_INITGROUPS_IGNOREUSERS="$(get_env_var_value LDAP_NSS_INITGROUPS_IGNOREUSERS)"
+export DB_LDAP_NSS_INITGROUPS_IGNOREUSERS="${DB_LDAP_NSS_INITGROUPS_IGNOREUSERS:-root,nslcd}"
+export DB_LDAP_SCOPE="$(get_env_var_value LDAP_SCOPE)"
+export DB_LDAP_TLS_REQCERT="$(get_env_var_value LDAP_TLS_REQCERT)"
 read -r -a DB_EXTRA_FLAGS <<< "$(mysql_extra_flags)"
 export DB_EXTRA_FLAGS
 EOF
@@ -832,6 +836,7 @@ ldap_config() {
     if [[ -n "${DB_LDAP_URI}" && "${DB_LDAP_BASE}" && "${DB_LDAP_BIND_DN}" && "${DB_LDAP_BIND_PASSWORD}" ]]; then
         info "Configuring LDAP connection"
         cat >>"/etc/nslcd.conf"<<EOF
+nss_initgroups_ignoreusers $DB_LDAP_NSS_INITGROUPS_IGNOREUSERS
 uri $DB_LDAP_URI
 base $DB_LDAP_BASE
 binddn $DB_LDAP_BIND_DN
@@ -841,6 +846,16 @@ EOF
         if [[ -n "${DB_LDAP_BASE_LOOKUP}" ]]; then
             cat >>"/etc/nslcd.conf"<<EOF
 base passwd $DB_LDAP_BASE_LOOKUP
+EOF
+        fi
+        if [[ -n "${DB_LDAP_SCOPE}" ]]; then
+            cat >>"/etc/nslcd.conf"<<EOF
+scope $DB_LDAP_SCOPE
+EOF
+        fi
+        if [[ -n "${DB_LDAP_TLS_REQCERT}" ]]; then
+            cat >>"/etc/nslcd.conf"<<EOF
+tls_reqcert $DB_LDAP_TLS_REQCERT
 EOF
         fi
         chmod 600 /etc/nslcd.conf
