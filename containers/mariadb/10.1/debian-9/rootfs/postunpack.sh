@@ -16,3 +16,6 @@ chmod -R g+rwX "$DB_TMPDIR" "$DB_LOGDIR" "$DB_CONFDIR" "${DB_CONFDIR}/bitnami" "
 
 # Redirect all logging to stdout
 ln -sf /dev/stdout "$DB_LOGDIR/mysqld.log"
+
+# Fix to avoid issues detecting plugins in mysql_install_db
+ln -sf "$DB_BASEDIR/plugin" "$DB_BASEDIR/lib/plugin"
