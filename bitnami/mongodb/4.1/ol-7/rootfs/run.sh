@@ -12,7 +12,7 @@ set -o pipefail
 eval "$(mongodb_env)"
 
 flags=("--config=$MONGODB_CONFIG_FILE")
-[[ -z "${MONGODB_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${MONGODB_EXTRA_FLAGS[@]}")
+[[ -z "${MONGODB_EXTRA_FLAGS:-}" ]] || flags+=(${MONGODB_EXTRA_FLAGS})
 
 info "** Starting MongoDB **"
 if am_i_root; then
