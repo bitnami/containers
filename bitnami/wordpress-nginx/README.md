@@ -45,7 +45,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-ol-7`, `5.2.2-ol-7-r43` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.2.2-ol-7-r43/5/ol-7/Dockerfile)
+* [`5-ol-7`, `5.2.2-ol-7-r44` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.2.2-ol-7-r44/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.2.2-debian-9-r43`, `5`, `5.2.2`, `5.2.2-r43`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.2.2-debian-9-r43/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
@@ -123,7 +123,7 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/master/docker-compose.yml) file present in this repository: 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -191,6 +191,7 @@ The WordPress instance can be customized by specifying environment variables on 
 - `WORDPRESS_FIRST_NAME`: WordPress user first name. Default: **FirstName**
 - `WORDPRESS_LAST_NAME`: WordPress user last name. Default: **LastName**
 - `WORDPRESS_BLOG_NAME`: WordPress blog name. Default: **User's blog**
+- `WORDPRESS_SCHEME`: Scheme to generate application URLs. Default: **http**
 
 ##### Use an existing database
 
@@ -225,7 +226,7 @@ To configure WordPress to send email using SMTP you can set the following enviro
 
 This would be an example of SMTP configuration using a GMail account:
 
- * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/master/docker-compose.yml) file present in this repository: 
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
   wordpress:
@@ -268,7 +269,7 @@ The Bitnami WordPress container supports connecting the WordPress application to
 
 This would be an example of using an external database for WordPress.
 
- * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/master/docker-compose.yml) file present in this repository: 
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
   wordpress:
@@ -336,7 +337,7 @@ RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt
 
 ## Modify the ports used by Apache by default
 # It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181 
+ENV APACHE_HTTP_PORT_NUMBER=8181
 ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
