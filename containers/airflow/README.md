@@ -32,7 +32,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.10.3-ol-7-r95` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.3-ol-7-r95/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.10.3-debian-9-r86`, `1`, `1.10.3`, `1.10.3-r86`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.3-debian-9-r86/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.10.3-debian-9-r87`, `1`, `1.10.3`, `1.10.3-r87`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.3-debian-9-r87/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow).
 
