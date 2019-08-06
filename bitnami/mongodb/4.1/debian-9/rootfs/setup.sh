@@ -26,3 +26,5 @@ am_i_root && ensure_user_exists "$MONGODB_DAEMON_USER" "$MONGODB_DAEMON_GROUP"
 
 # Ensure MongoDB is initialized
 mongodb_initialize
+# Allow running custom initialization scripts
+mongodb_custom_init_scripts
