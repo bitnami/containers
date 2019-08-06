@@ -1040,6 +1040,15 @@ mongodb_custom_init_scripts() {
         info "Loading user's custom files from $MONGODB_INITSCRIPTS_DIR ...";
         mongodb_start_bg
         local -r tmp_file=/tmp/filelist
+        local mongo_user
+        local mongo_pass
+        if [[ -n "$MONGODB_ROOT_PASSWORD" ]];then 
+            mongo_user=root
+            mongo_pass="$MONGODB_ROOT_PASSWORD"
+        else
+            mongo_user="$MONGODB_USERNAME"
+            mongo_pass="$MONGODB_PASSWORD"
+        fi
         find "$MONGODB_INITSCRIPTS_DIR" -type f -regex ".*\.\(sh\|js\|js.gz\)" | sort > $tmp_file
         while read -r f; do
             case "$f" in
@@ -1050,8 +1059,8 @@ mongodb_custom_init_scripts() {
                         debug "Sourcing $f"; . "$f"
                     fi
                     ;;
-                *.js)    debug "Executing $f"; mongodb_execute "$MONGODB_USERNAME" "$MONGODB_PASSWORD" < "$f";;
-                *.js.gz) debug "Executing $f"; gunzip -c "$f" | mongodb_execute "$MONGODB_USERNAME" "$MONGODB_PASSWORD";;
+                *.js)    debug "Executing $f"; mongodb_execute "$mongo_user" "$mongo_pass" < "$f";;
+                *.js.gz) debug "Executing $f"; gunzip -c "$f" | mongodb_execute "$mongo_user" "$mongo_pass";;
                 *)        debug "Ignoring $f" ;;
             esac
         done < $tmp_file
