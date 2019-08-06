@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4.1-ol-7`, `4.1.13-ol-7-r74` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.13-ol-7-r74/4.1/ol-7/Dockerfile)
-* [`4.1-debian-9`, `4.1.13-debian-9-r71`, `4.1`, `4.1.13`, `4.1.13-r71` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.13-debian-9-r71/4.1/debian-9/Dockerfile)
+* [`4.1-debian-9`, `4.1.13-debian-9-r72`, `4.1`, `4.1.13`, `4.1.13-r72` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.13-debian-9-r72/4.1/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.11-ol-7-r11` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.11-ol-7-r11/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.11-debian-9-r11`, `4.0`, `4.0.11`, `4.0.11-r11`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.11-debian-9-r11/4.0/debian-9/Dockerfile)
 * [`3.6-ol-7`, `3.6.13-ol-7-r66` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.13-ol-7-r66/3.6/ol-7/Dockerfile)
@@ -179,8 +179,7 @@ In order to have your custom files inside the docker image you can mount them as
 
 Passing extra command-line flags to the mongod service command is possible through the following env var:
 
-- `MONGODB_EXTRA_FLAGS`: Flags to be appended to the `mongod` startup command. No defaults
-- `MONGODB_CLIENT_EXTRA_FLAGS`: Flags to be appended to the `mongo` command which is used to connect to the (local or remote) `mongod` daemon. No defaults
+- `MONGODB_EXTRA_FLAGS`: Flags to be appended to the startup command. No defaults
 
 ```bash
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_EXTRA_FLAGS='--wiredTigerCacheSizeGB=2' bitnami/mongodb:latest
@@ -492,84 +491,6 @@ After adding the secondary nodes we verified they have been successfully added b
 **Arbiter node configuration:**
 
 Finally, the arbiters follows the same procedure than secondary nodes with the exception that the command to add it to the replica set is `rs.addArb(ARBITER_NODE_HOST)`. An arbiter should be added when the sum of primary nodes plus secondaries nodes is even.
-
-## Enabling SSL/TLS
-
-This container supports enabling SSL/TLS between nodes in the cluster, as well as between mongo clients and nodes, by setting the `MONGODB_EXTRA_FLAGS` and `MONGODB_CLIENT_EXTRA_FLAGS` environment variables,
-together with the correct `MONGODB_ADVERTISED_HOSTNAME`.
-Before starting the cluster you need to generate PEM certificates as required by Mongo - one way is to create self-signed certificates using `openssl` (see http://www.openssl.org).
-
-**The certificates generated as described are not for production use**
- 
-Another option would be to use letsencrypt certificates; the required configuration steps for that scenario are left as an exercise for the user and are beyond the scope of this README.
-
-### Generating self-signed certificates
-
-- Generate a new private key which will be used to create your own Certificate Authority (CA):
-```bash
-openssl genrsa -out mongoCA.key 2048
-```
-
-- Create the public certificate for your own CA:
-```bash
-openssl req -x509 -new \
-    -subj "/C=US/ST=NY/L=New York/O=Example Corp/OU=IT Department/CN=mongoCA" \
-    -key mongoCA.key -out mongoCA.crt
-```
-
-- Create a Certificate Signing Request for a node `${NODE_NAME}`, the essential part here is that the `Common Name` corresponds to the hostname by which the nodes will be addressed.
-Example for `mongodb-primary`:
-```bash
-export NODE_NAME=mongodb-primary
-openssl req -new -nodes \
-    -subj "/C=US/ST=NY/L=New York/O=Example Corp/OU=IT Department/CN=${NODE_NAME}" \
-    -keyout ${NODE_NAME}.key -out ${NODE_NAME}.csr
-```
-
-- Create a certificate from the Certificate Signing Request and sign it using the private key of your previously created Certificate Authority:
-```bash
-openssl x509 \
-    -req -days 365 -in ${NODE_NAME}.csr -out ${NODE_NAME}.crt \
-    -CA mongoCA.crt -CAkey mongoCA.key -CAcreateserial -extensions req
-```
-
-- Create a PEM bundle using the private key and the public certificate:
-```bash
-cat ${NODE_NAME}.key ${NODE_NAME}.crt > ${NODE_NAME}.pem
-```
-
-NB: Afterwards you do not need the Certificate Signing Request.
-```bash
-rm ${NODE_NAME}.csr
-```
-
-Repeat the process to generate PEM bundles for all the nodes in your cluster.
-
-### Starting the cluster
-After having generated the certificates and making them available to the containers at the correct mount points (i.e. `/certificates/`), the environment variables could be setup as in the following examples.
-
-Example settings for the primary node `mongodb-primary`:
-- `MONGODB_ADVERTISED_HOSTNAME=mongodb-primary`
-- `MONGODB_EXTRA_FLAGS=--sslMode=requireSSL --sslPEMKeyFile=/certificates/mongodb-primary.pem --sslClusterFile=/certificates/mongodb-primary.pem --sslCAFile=/certificates/mongoCA.crt`
-- `MONGODB_CLIENT_EXTRA_FLAGS=--ssl --sslPEMKeyFile=/certificates/mongodb-primary.pem --sslCAFile=/certificates/mongoCA.crt`
-
-Example corresponding settings for a secondary node `mongodb-secondary`:
-- `MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary`
-- `MONGODB_EXTRA_FLAGS=--sslMode=requireSSL --sslPEMKeyFile=/certificates/mongodb-secondary.pem --sslClusterFile=/certificates/mongodb-secondary.pem --sslCAFile=/certificates/mongoCA.crt`
-- `MONGODB_CLIENT_EXTRA_FLAGS=--ssl --sslPEMKeyFile=/certificates/mongodb-secondary.pem --sslCAFile=/certificates/mongoCA.crt`
-
-### Connecting to the mongo daemon via SSL
-After successfully starting a cluster as specified, within the container it should be possible to connect to the mongo daemon on the primary node using:
-```bash
-/opt/bitnami/mongodb/bin/mongo -u root -p ${MONGODB_ROOT_PASSWORD} --host mongodb-primary --ssl --sslPEMKeyFile=/certificates/mongodb-primary.pem --sslCAFile=/certificates/mongoCA.crt
-```
-
-**NB**: We only support `--clusterAuthMode=keyFile` in this configuration.
-
-### References
-- To also allow clients to connect using username and password (without X509 certificates): https://docs.mongodb.com/manual/reference/configuration-options/#net.ssl.allowConnectionsWithoutCertificates
-- For more extensive information regarding related configuration options: https://docs.mongodb.com/manual/reference/program/mongod/#tls-ssl-options,
-Especially client authentication and requirements for common name and OU/DN/etc. fields in the certificates are important for creating a secure setup.
 
 ## Configuration file
 

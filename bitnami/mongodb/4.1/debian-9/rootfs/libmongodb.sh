@@ -57,8 +57,6 @@ export MONGODB_REPLICA_SET_KEY="${MONGODB_REPLICA_SET_KEY:-}"
 export MONGODB_REPLICA_SET_NAME="${MONGODB_REPLICA_SET_NAME:-replicaset}"
 export MONGODB_ENABLE_MAJORITY_READ="${MONGODB_ENABLE_MAJORITY_READ:-yes}"
 export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
-export MONGODB_EXTRA_FLAGS="${MONGODB_EXTRA_FLAGS:-}"
-export MONGODB_CLIENT_EXTRA_FLAGS="${MONGODB_CLIENT_EXTRA_FLAGS:-}"
 EOF
 }
 
@@ -162,7 +160,7 @@ mongodb_create_config() {
 #   $1 - User to run queries
 #   $2 - Password
 #   $3 - Database where to run the queries
-#   $4 - Host (default to result of get_mongo_hostname function)
+#   $4 - Host (default 127.0.0.1)
 #   $5 - Port (default $MONGODB_PORT_NUMBER)
 # Returns:
 #   None
@@ -171,9 +169,8 @@ mongodb_execute() {
     local user="${1:-}"
     local password="${2:-}"
     local database="${3:-}"
-    local host="${4:-$(get_mongo_hostname)}"
+    local host="${4:-127.0.0.1}"
     local port="${5:-$MONGODB_PORT_NUMBER}"
-    local extra_args="$MONGODB_CLIENT_EXTRA_FLAGS"
     local result
 
     # If password is empty it means no auth, do not specify user
@@ -182,19 +179,9 @@ mongodb_execute() {
     local -a args=("--host" "$host" "--port" "$port")
     [[ -n "$user" ]] && args+=("-u" "$user")
     [[ -n "$password" ]] && args+=("-p" "$password")
-    [[ -n "$extra_args" ]] && args+=($extra_args)
     [[ -n "$database" ]] && args+=("$database")
 
     "$MONGODB_BIN_DIR/mongo" "${args[@]}"
-}
-
-########################
-# Determine the hostname by which to contact the locally running mongo daemon
-# Returns:
-#   The value of $MONGODB_ADVERTISED_HOSTNAME or the current host address
-########################
-get_mongo_hostname() {
-    [[ -n "$MONGODB_ADVERTISED_HOSTNAME" ]] && echo "$MONGODB_ADVERTISED_HOSTNAME" || echo $(get_machine_ip)
 }
 
 ########################
@@ -277,7 +264,7 @@ mongodb_start_bg() {
     # Use '--fork' option to enable daemon mode
     # ref: https://docs.mongodb.com/manual/reference/program/mongod/#cmdoption-mongod-fork
     local flags=("--fork" "--config=$MONGODB_CONFIG_FILE")
-    [[ -z "${MONGODB_EXTRA_FLAGS:-}" ]] || flags+=(${MONGODB_EXTRA_FLAGS})
+    [[ -z "${MONGODB_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${MONGODB_EXTRA_FLAGS[@]}")
 
     debug "Starting MongoDB in background..."
 
@@ -410,7 +397,7 @@ mongodb_enable_replicasetmode() {
 }
 
 ########################
-# Creates the appropriate users
+# Creates the apropiate users
 # Globals:
 #   MONGODB_*
 # Arguments:
@@ -485,7 +472,7 @@ mongodb_is_primary_node_initiated() {
     local node="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute "root" "$MONGODB_ROOT_PASSWORD" "admin" "$node" "$MONGODB_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "root" "$MONGODB_ROOT_PASSWORD" "admin" "127.0.0.1" "$MONGODB_PORT_NUMBER" <<EOF
 rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME","members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
 EOF
 )
@@ -498,7 +485,7 @@ EOF
 }
 
 ########################
-# Gets if secondary node is pending
+# Gets if secondary node is pendig
 # Globals:
 #   MONGODB_*
 # Arguments:
@@ -522,7 +509,7 @@ EOF
 }
 
 ########################
-# Gets if arbiter node is pending
+# Gets if arbiter node is pendig
 # Globals:
 #   MONGODB_*
 # Arguments:
@@ -819,7 +806,8 @@ mongodb_configure_replica_set() {
 
     info "Configuring MongoDB replica set..."
 
-    node=$(get_mongo_hostname)
+    [[ -n "$MONGODB_ADVERTISED_HOSTNAME" ]] && node="$MONGODB_ADVERTISED_HOSTNAME" || node=$(get_machine_ip)
+
     mongodb_enable_replicasetmode
     mongodb_restart
 
