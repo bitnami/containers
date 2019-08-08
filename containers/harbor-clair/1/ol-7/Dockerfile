@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r371
+FROM bitnami/oraclelinux-extras-base:7-r372
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "harbor-clair" "1.8.2-rc1-1" --check
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="harbor-clair" \
-    BITNAMI_IMAGE_VERSION="1.8.2-rc1-ol-7-r17" \
+    BITNAMI_IMAGE_VERSION="1.8.2-rc1-ol-7-r18" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/git/bin:/opt/bitnami/harbor-clair/bin:$PATH"
 
