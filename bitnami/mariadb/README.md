@@ -46,12 +46,12 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`10.3-ol-7`, `10.3.17-ol-7-r11` (10.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.17-ol-7-r11/10.3/ol-7/Dockerfile)
-* [`10.3-debian-9`, `10.3.17-debian-9-r8`, `10.3`, `10.3.17`, `10.3.17-r8`, `latest` (10.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.17-debian-9-r8/10.3/debian-9/Dockerfile)
+* [`10.3-ol-7`, `10.3.17-ol-7-r12` (10.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.17-ol-7-r12/10.3/ol-7/Dockerfile)
+* [`10.3-debian-9`, `10.3.17-debian-9-r9`, `10.3`, `10.3.17`, `10.3.17-r9`, `latest` (10.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.17-debian-9-r9/10.3/debian-9/Dockerfile)
 * [`10.2-ol-7`, `10.2.26-ol-7-r12` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.26-ol-7-r12/10.2/ol-7/Dockerfile)
-* [`10.2-debian-9`, `10.2.26-debian-9-r11`, `10.2`, `10.2.26`, `10.2.26-r11` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.26-debian-9-r11/10.2/debian-9/Dockerfile)
-* [`10.1-ol-7`, `10.1.41-ol-7-r11` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.41-ol-7-r11/10.1/ol-7/Dockerfile)
-* [`10.1-debian-9`, `10.1.41-debian-9-r11`, `10.1`, `10.1.41`, `10.1.41-r11` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.41-debian-9-r11/10.1/debian-9/Dockerfile)
+* [`10.2-debian-9`, `10.2.26-debian-9-r12`, `10.2`, `10.2.26`, `10.2.26-r12` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.26-debian-9-r12/10.2/debian-9/Dockerfile)
+* [`10.1-ol-7`, `10.1.41-ol-7-r12` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.41-ol-7-r12/10.1/ol-7/Dockerfile)
+* [`10.1-debian-9`, `10.1.41-debian-9-r12`, `10.1`, `10.1.41`, `10.1.41-r12` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.41-debian-9-r12/10.1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
 
@@ -404,14 +404,14 @@ The image looks for user-defined configurations in `/opt/bitnami/mariadb/conf/my
 
 For example, in order to override the `max_allowed_packet` directive:
 
-# Step 1: Write your `my_custom.cnf` file with the following content.
+### Step 1: Write your `my_custom.cnf` file with the following content.
 
 ```config
 [mysqld]
 max_allowed_packet=32M
 ```
 
-# Step 2: Run the mariaDB image with the designed volume attached.
+### Step 2: Run the mariaDB image with the designed volume attached.
 
 ```bash
 $ docker run --name mariadb \
@@ -438,7 +438,7 @@ After that, your changes will be taken into account in the server's behaviour.
 
 Refer to the [MySQL server option and variable reference guide](https://dev.mysql.com/doc/refman/5.7/en/server-option-variable-reference.html) for the complete list of configuration options.
 
-# Overwrite the main Configuration file
+### Overwrite the main Configuration file
 
 It is also possible to use your custom `my.cnf` and overwrite the main configuration file.
 
