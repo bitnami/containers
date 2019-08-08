@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.9.0-ol-7-r0` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.9.0-ol-7-r0/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.9.0-debian-9-r1`, `0`, `0.9.0`, `0.9.0-r1`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.9.0-debian-9-r1/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.9.0-debian-9-r2`, `0`, `0.9.0`, `0.9.0-r2`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.9.0-debian-9-r2/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/chartmuseum GitHub repo](https://github.com/bitnami/bitnami-docker-chartmuseum).
 
@@ -77,11 +77,11 @@ This image allows all the configuration explained on the [ChartMuseum web](https
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
+For persistence you should mount a directory at the `/bitnami/data` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
 $ docker run \
-    -v /path/to/chartmuseum-persistence:/bitnami \
+    -v /path/to/chartmuseum-persistence:/bitnami/data \
     bitnami/chartmuseum:latest
 ```
 
@@ -91,9 +91,13 @@ You can also do this with a minor change to the [`docker-compose.yml`](https://g
 chartmuseum:
   ...
   volumes:
-    - /path/to/chartmuseum-persistence:/bitnami
+    - /path/to/chartmuseum-persistence:/bitnami/data
   ...
 ```
+
+# Using TLS certificates
+
+To configure ChartMuseum to use TLS certificates you can mount a directory into `/bitnami/certs` containing the files `server.crt` and `server.key`. 
 
 # Connecting to other containers
 
