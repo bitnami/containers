@@ -733,7 +733,6 @@ mysql_initialize() {
         info "Running mysql_upgrade..."
         mysql_start_bg
         mysql_upgrade
-        return
     else
         debug "Cleaning data directory to ensure successfully initialization..."
         rm -rf "${DB_DATADIR:?}"/*
