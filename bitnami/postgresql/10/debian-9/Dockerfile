@@ -9,14 +9,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libbsd0 libc6 libedit2 libgcc1 libicu57 liblzma5 libncurses5 libnss-wrapper libssl1.1 libstdc++6 libtinfo5 libxml2 libxslt1.1 locales zlib1g
-RUN . ./libcomponent.sh && component_unpack "postgresql" "10.9.0-0" --checksum c045f5cb5fb69dce7b757f3904b4b75bcb0e785bd6dc8af983baa4062a2d4e6a
+RUN . ./libcomponent.sh && component_unpack "postgresql" "10.10.0-0" --checksum ea470bfcbc087f07261d84fe8bdbe8342c58ea587bbc6472bd1c3a085e66639c
 RUN echo 'en_GB.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="10.9.0-debian-9-r51" \
+    BITNAMI_IMAGE_VERSION="10.10.0-debian-9-r0" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
