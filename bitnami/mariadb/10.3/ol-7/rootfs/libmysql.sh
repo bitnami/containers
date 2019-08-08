@@ -354,7 +354,7 @@ tmpdir=$DB_TMPDIR
 socket=$DB_TMPDIR/mysql.sock
 pid-file=$DB_TMPDIR/mysqld.pid
 max_allowed_packet=16M
-bind-address=0.0.0.0
+bind-address=127.0.0.1
 log-error=$DB_LOGDIR/mysqld.log
 character-set-server=UTF8
 collation-server=utf8_general_ci
@@ -705,8 +705,14 @@ mysql_initialize() {
 
     # User injected custom configuration
     if [[ -f "$DB_CONFDIR/my_custom.cnf" ]]; then
-        debug "Custom configuration detected. Injecting..."
+        debug "Custom configuration my_custom.conf detected. Injecting..."
         cat "$DB_CONFDIR/my_custom.cnf" > "$DB_CONFDIR/bitnami/my_custom.cnf"
+    fi
+    local user_provided_conf
+    # User injected main configuration
+    if [[ -f "$DB_CONFDIR/my.cnf" ]]; then
+        debug "Custom configuration my.cnf detected"
+        user_provided_conf=yes
     fi
 
     # Persisted configuration files from old versions
@@ -717,7 +723,8 @@ mysql_initialize() {
         ensure_dir_exists "$dir"
         am_i_root && chown "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$dir"
     done
-    [[ ! -e "$DB_CONFDIR/my.cnf" ]] && mysql_create_config
+
+    ! is_boolean_yes user_provided_conf && mysql_create_config
 
     if [[ -e "$DB_DATADIR/mysql" ]]; then
         info "Persisted data detected. Restoring..."
@@ -765,6 +772,9 @@ flush privileges;
 EOF
         fi
     fi
+
+    # After configuration, open mysql
+    ! is_boolean_yes user_provided_conf && sed -i 's/bind\-address=.*/bind-address=0.0.0.0/g' "$DB_CONFDIR/my.cnf"
 }
 
 ########################
