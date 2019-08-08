@@ -121,8 +121,13 @@ Following are a few examples of launching some commonly used Laravel development
   ```bash
   $ docker-compose exec myapp php artisan route:list
   ```
+- Create a new application controller named `UserController`:
 
-- Create a new application controller named `User`:
+  ```bash
+  $ docker-compose exec myapp php artisan make:controller UserController
+  ```
+
+- Installing a new composer package called `phpmailer/phpmailer` with version `5.2.*`:
 
   ```bash
   $ docker-compose exec myapp composer require phpmailer/phpmailer:5.2.*
