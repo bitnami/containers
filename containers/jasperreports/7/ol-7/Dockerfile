@@ -6,12 +6,12 @@ RUN install_packages fontconfig freetype glibc keyutils-libs krb5-libs libcom_er
 RUN bitnami-pkg install java-1.8.222-0 --checksum a90f4ce71ff9b392efdf61e6941117afa31d2d6528bd1a3cad1c6459bcac2b0b
 RUN bitnami-pkg unpack tomcat-9.0.22-0 --checksum ea8dcd13f4876975176db334c17d85731fe86057d66c53709ee577054111e83d
 RUN bitnami-pkg unpack mysql-client-10.3.17-0 --checksum 83fd01acb88a54d028a327870cec66bf43f57f326814a16dc4626a5171742229
-RUN bitnami-pkg unpack jasperreports-7.2.0-0 --checksum 09b72c7b5433ee27a0448440a319ca59b6ef87e42dfa77b2dca46d619d0755fe
+RUN bitnami-pkg unpack jasperreports-7.2.0-1 --checksum f7b36f3e76e068cf56ecdda3572529656f1ea81da41f15bd7eee4395b2c45e59
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.2.0-ol-7-r77" \
+    BITNAMI_IMAGE_VERSION="7.2.0-ol-7-r78" \
     JASPERREPORTS_DATABASE_NAME="bitnami_jasperreports" \
     JASPERREPORTS_DATABASE_PASSWORD="" \
     JASPERREPORTS_DATABASE_USER="bn_jasperreports" \
