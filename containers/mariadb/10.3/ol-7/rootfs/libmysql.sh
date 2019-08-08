@@ -708,7 +708,7 @@ mysql_initialize() {
         debug "Custom configuration my_custom.conf detected. Injecting..."
         cat "$DB_CONFDIR/my_custom.cnf" > "$DB_CONFDIR/bitnami/my_custom.cnf"
     fi
-    local user_provided_conf
+    local user_provided_conf=no
     # User injected main configuration
     if [[ -f "$DB_CONFDIR/my.cnf" ]]; then
         debug "Custom configuration my.cnf detected"
@@ -724,7 +724,7 @@ mysql_initialize() {
         am_i_root && chown "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$dir"
     done
 
-    ! is_boolean_yes user_provided_conf && mysql_create_config
+    ! is_boolean_yes "$user_provided_conf" && mysql_create_config
 
     if [[ -e "$DB_DATADIR/mysql" ]]; then
         info "Persisted data detected. Restoring..."
@@ -773,7 +773,9 @@ EOF
     fi
 
     # After configuration, open mysql
-    ! is_boolean_yes user_provided_conf && sed -i 's/bind\-address=.*/bind-address=0.0.0.0/g' "$DB_CONFDIR/my.cnf"
+    if ! is_boolean_yes "$user_provided_conf";then
+       sed -i 's/bind\-address=.*/bind-address=0.0.0.0/g' "$DB_CONFDIR/my.cnf"
+    fi
 }
 
 ########################
