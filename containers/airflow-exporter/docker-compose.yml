@@ -1,0 +1,6 @@
+version: '2'
+services:
+  airflow-exporter:
+    image: bitnami/airflow-exporter:0
+    ports:
+      - 9112:9112
