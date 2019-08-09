@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7-ol-7`, `7.9.1-ol-7-r29` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.1-ol-7-r29/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.9.1-debian-9-r28`, `7`, `7.9.1`, `7.9.1-r28`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.1-debian-9-r28/7/debian-9/Dockerfile)
+* [`7-debian-9`, `7.9.1-debian-9-r29`, `7`, `7.9.1`, `7.9.1-r29`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.1-debian-9-r29/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
 
@@ -234,6 +234,9 @@ The SonarQube instance can be customized by specifying environment variables on 
 - `SONARQUBE_ELASTICSEARCH_PORT_NUMBER`: SonarQube Elasticsearch application port. Default: **9001**
 - `SONARQUBE_ENABLE_DEMO_DATA`: It can be used to import a sample project and install a sample plugin. Default: **no**
 - `SONARQUBE_WEB_CONTEXT`: SonarQube prefix used to access to the application. Default: **/**
+- `SONARQUBE_CE_JAVA_ADD_OPTS`: Additional Java options for Compute Engine. No defaults.
+- `SONARQUBE_ELASTICSEARCH_JAVA_ADD_OPTS`: Additional Java options for Elasticsearch. No defaults.
+- `SONARQUBE_WEB_JAVA_ADD_OPTS`: Additional Java options for Web. No defaults.
 
 ##### Use an existing database
 
@@ -257,7 +260,7 @@ The SonarQube instance can be customized by specifying environment variables on 
 
 ### Specifying Environment variables using Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-sonarqube/blob/master/docker-compose.yml) file present in this repository: 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-sonarqube/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
