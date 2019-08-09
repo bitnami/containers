@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`8.0-ol-7`, `8.0.17-ol-7-r17` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.17-ol-7-r17/8.0/ol-7/Dockerfile)
 * [`8.0-debian-9`, `8.0.17-debian-9-r17`, `8.0`, `8.0.17`, `8.0.17-r17`, `latest` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.17-debian-9-r17/8.0/debian-9/Dockerfile)
-* [`5.7-ol-7`, `5.7.27-ol-7-r18` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.27-ol-7-r18/5.7/ol-7/Dockerfile)
+* [`5.7-ol-7`, `5.7.27-ol-7-r20` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.27-ol-7-r20/5.7/ol-7/Dockerfile)
 * [`5.7-debian-9`, `5.7.27-debian-9-r19`, `5.7`, `5.7.27`, `5.7.27-r19` (5.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.27-debian-9-r19/5.7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
@@ -391,14 +391,14 @@ The image looks for user-defined configurations in `/opt/bitnami/mysql/conf/my_c
 
 For example, in order to override the `max_allowed_packet` directive:
 
-# Step 1: Write your `my_custom.cnf` file with the following content.
+### Step 1: Write your `my_custom.cnf` file with the following content.
 
 ```config
 [mysqld]
 max_allowed_packet=32M
 ```
 
-# Step 2: Run the MySQL image with the designed volume attached.
+### Step 2: Run the MySQL image with the designed volume attached.
 
 ```bash
 $ docker run --name mysql \
@@ -425,7 +425,7 @@ After that, your changes will be taken into account in the server's behaviour.
 
 Refer to the [MySQL server option and variable reference guide](https://dev.mysql.com/doc/refman/5.7/en/mysqld-option-tables.html) for the complete list of configuration options.
 
-# Overwrite the main Configuration file
+### Overwrite the main Configuration file
 
 It is also possible to use your custom `my.cnf` and overwrite the main configuration file.
 
