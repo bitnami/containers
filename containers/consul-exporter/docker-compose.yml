@@ -1,0 +1,6 @@
+version: '2'
+services:
+  consul-exporter:
+    image: bitnami/consul-exporter:0
+    ports:
+      - 9107:9107
