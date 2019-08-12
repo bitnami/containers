@@ -7,12 +7,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 zlib1g
 RUN bitnami-pkg install java-1.8.222-0 --checksum e5a677e160c01cd605bc6aae75cc937d4b2d37514b3e1d0a1dd2d332422e68c7
-RUN bitnami-pkg unpack zookeeper-3.5.5-3 --checksum 6807836b1e0081342d7cc65d976df9119c5f6d2849d5f4ac0cf67f5e105c25c6
+RUN bitnami-pkg unpack zookeeper-3.5.5-4 --checksum 82e99f2555a61a0782f92172f8d9942f1bfd84fe243e6ca4a04ccaa0aa5571b6
 
 COPY rootfs /
 ENV ALLOW_ANONYMOUS_LOGIN="no" \
     BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.5.5-debian-9-r70" \
+    BITNAMI_IMAGE_VERSION="3.5.5-debian-9-r71" \
     JVMFLAGS="" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH" \
