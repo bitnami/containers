@@ -1,4 +1,4 @@
-FROM bitnami/centos-extras-base:7-r94
+FROM bitnami/centos-extras-base:7-r102
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -17,14 +17,12 @@ RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.16.0-centos-7-r80" \
+    BITNAMI_IMAGE_VERSION="1.16.0-centos-7-r81" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/nginx/sbin:$PATH"
-
-VOLUME [ "/app", "/certs" ]
 
 EXPOSE 8080 8443
 
