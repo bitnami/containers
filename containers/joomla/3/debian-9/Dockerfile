@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.39-2 --checksum ff55ee9cccf484bac61fa91558fc7f
 RUN bitnami-pkg unpack php-7.3.8-0 --checksum cc67ec3f4ff34c0f757e59e28b43572c4b20b938b84cd88a09a186dfd327abd0
 RUN bitnami-pkg unpack mysql-client-10.1.41-0 --checksum 6a76f3331783ab71f7afe5275ae0b82a4f859d3e11b1593940324e7963574e55
 RUN bitnami-pkg install libphp-7.3.8-0 --checksum 5cfa7600f2881c7cbd2f6aa5a77c9b900d5a2e85fb71d3e482f2b64e504c6fb3
-RUN bitnami-pkg unpack joomla-3.9.10-0 --checksum 939ce34711323ccf75544b9471490fa0760db7ae38ea4486b82b1756754d7a08
+RUN bitnami-pkg unpack joomla-3.9.11-0 --checksum ed8f50f2c93522711a2309591c777d09e6d87ccece20a776029a808fef199451
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.9.10-debian-9-r28" \
+    BITNAMI_IMAGE_VERSION="3.9.11-debian-9-r0" \
     JOOMLA_DATABASE_NAME="bitnami_joomla" \
     JOOMLA_DATABASE_PASSWORD="" \
     JOOMLA_DATABASE_USER="bn_joomla" \
