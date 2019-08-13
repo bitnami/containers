@@ -17,11 +17,11 @@ ENV APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.39-ol-7-r128" \
+    BITNAMI_IMAGE_VERSION="2.4.39-ol-7-r129" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/apache/bin:$PATH"
 
-VOLUME [ "/certs", "/app" ]
+VOLUME [ "/certs" ]
 
 EXPOSE 8080 8443
 
