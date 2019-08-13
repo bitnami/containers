@@ -10,11 +10,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages libc6 libcomerr2 libcurl3 libffi6 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle6 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libtasn1-6 libunistring0 rpm xz-utils zlib1g
 RUN . ./libcomponent.sh && component_unpack "git" "2.22.1-0" --checksum 7e983e31255589679f002d44d62fb66a77958cc58f0430a81f5a30166a307506
-RUN . ./libcomponent.sh && component_unpack "harbor-clair" "1.8.2-rc1-1" --checksum 3f2fdd467ddfa7ef28b63237fe0b81ecbc36378d6a8bedc5ebc213e388598327
+RUN . ./libcomponent.sh && component_unpack "harbor-clair" "1.8.1-0" --checksum 9d5b6ac7afcfe3158ef80b86d23b8e6ba98950b8e35fa1753c21982bdd990ce6
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="harbor-clair" \
-    BITNAMI_IMAGE_VERSION="1.8.2-rc1-debian-9-r23" \
+    BITNAMI_IMAGE_VERSION="1.8.1-debian-9-r19" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/git/bin:/opt/bitnami/harbor-clair/bin:$PATH"
 
