@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.39-2 --checksum ff55ee9cccf484bac61fa91558fc7f
 RUN bitnami-pkg unpack php-7.3.8-0 --checksum cc67ec3f4ff34c0f757e59e28b43572c4b20b938b84cd88a09a186dfd327abd0
 RUN bitnami-pkg unpack mysql-client-10.3.17-0 --checksum 71d59fafc3e7e3e598af0c2b6788d77558630afe647ec1f922ffdd5025f3d737
 RUN bitnami-pkg install libphp-7.3.8-0 --checksum 5cfa7600f2881c7cbd2f6aa5a77c9b900d5a2e85fb71d3e482f2b64e504c6fb3
-RUN bitnami-pkg unpack matomo-3.11.0-0 --checksum f4988ce386141997d6511584ad84a3c9d6217cad4e72b1de7f387b02dee3730c
+RUN bitnami-pkg unpack matomo-3.11.0-1 --checksum 5ce9fb334384200abe3937eee070d946cad1a6b0c78bf2ee4eb3af33227a2063
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="matomo" \
-    BITNAMI_IMAGE_VERSION="3.11.0-debian-9-r21" \
+    BITNAMI_IMAGE_VERSION="3.11.0-debian-9-r22" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -27,6 +27,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MATOMO_DATABASE_PASSWORD="" \
     MATOMO_DATABASE_USER="bn_matomo" \
     MATOMO_EMAIL="user@example.com" \
+    MATOMO_ENABLE_PROXY_URI_HEADER="no" \
     MATOMO_HOST="127.0.0.1" \
     MATOMO_PASSWORD="bitnami" \
     MATOMO_USERNAME="User" \

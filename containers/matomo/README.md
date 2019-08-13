@@ -44,8 +44,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.11.0-ol-7-r20` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.11.0-ol-7-r20/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.11.0-debian-9-r21`, `3`, `3.11.0`, `3.11.0-r21`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.11.0-debian-9-r21/3/debian-9/Dockerfile)
+* [`3-ol-7`, `3.11.0-ol-7-r21` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.11.0-ol-7-r21/3/ol-7/Dockerfile)
+* [`3-debian-9`, `3.11.0-debian-9-r22`, `3`, `3.11.0`, `3.11.0-r22`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.11.0-debian-9-r22/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
 
@@ -79,7 +79,7 @@ The main folder of this repository contains a functional [`docker-compose.yml`](
 ```bash
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-matomo/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
-``` 
+```
 
 ## Run the application using the Docker Command Line
 
@@ -131,7 +131,7 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-matomo/blob/master/docker-compose.yml) file present in this repository: 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-matomo/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -231,6 +231,7 @@ When you start the Matomo image, you can adjust the configuration of the instanc
  - `MATOMO_EMAIL`: Matomo application email. Default: **user@example.com**
  - `MATOMO_WEBSITE_NAME`: Name of a website to track in Matomo. Default: **example**
  - `MATOMO_WEBSITE_HOST`: Website's host or domain to track in Matomo. Default: **https://example.org**
+ - `MATOMO_ENABLE_PROXY_URI_HEADER`: Enable 'proxy_uri_header' in Matomo configuration file. Default: **no**
 
 ##### Use an existing database
 
@@ -282,7 +283,7 @@ To configure Matomo to send email using SMTP you can set the following environme
 
 This would be an example of SMTP configuration using a Gmail account:
 
- * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-matomo/blob/master/docker-compose.yml) file present in this repository: 
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-matomo/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
   application:
@@ -353,7 +354,7 @@ RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt
 
 ## Modify the ports used by Apache by default
 # It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181 
+ENV APACHE_HTTP_PORT_NUMBER=8181
 ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
