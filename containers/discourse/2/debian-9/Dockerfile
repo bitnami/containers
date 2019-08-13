@@ -1,11 +1,11 @@
-FROM bitnami/minideb-extras:stretch-r446
+FROM bitnami/minideb-extras:stretch-r447
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages advancecomp file ghostscript gifsicle hostname imagemagick jhead jpegoptim libbsd0 libc6 libcomerr2 libcurl3 libedit2 libffi6 libgcc1 libgcrypt20 libgmp-dev libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libjpeg-progs libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libtasn1-6 libtinfo5 libunistring0 libxml2 libxml2-dev libxslt1-dev libxslt1.1 optipng pngcrush pngquant rsync zlib1g zlib1g-dev
 RUN bitnami-pkg install ruby-2.5.5-0 --checksum 7f676dbe187bb037fed4fd25da35ac68b34621e629ea5b80ee82afbccfbe9c6f
 RUN bitnami-pkg unpack postgresql-client-11.5.0-0 --checksum 4798fe3bac0bfc7d5c10f3a7cb7f2ab39bd9b9551756782bfae0d56bc0d74d4b
-RUN bitnami-pkg install git-2.22.0-0 --checksum efa83383130dac1a51b192acdec4868d5d2593385efece42fdb5c52525583b55
+RUN bitnami-pkg install git-2.22.1-0 --checksum 7e983e31255589679f002d44d62fb66a77958cc58f0430a81f5a30166a307506
 RUN bitnami-pkg unpack discourse-sidekiq-2.3.2-0 --checksum 36021cf8f1388a4294776a2ddd383e9b33d80b1a50fe3a6b7c53771c31f48540
 RUN bitnami-pkg install brotli-1.0.7-0 --checksum b44d76e4352da8d17ac91213b6eebd8b3910e6874ef763cdcab51d21936b8fd1
 RUN bitnami-pkg unpack discourse-2.3.2-0 --checksum 399c27df55b5253ae409a2d5dd77478172f3a6c1f4afb53c4c0684e7a6b1fb84
@@ -13,7 +13,7 @@ RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.3.2-debian-9-r28" \
+    BITNAMI_IMAGE_VERSION="2.3.2-debian-9-r29" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="discourse" \
     DISCOURSE_HOSTNAME="127.0.0.1" \
