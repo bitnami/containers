@@ -17,14 +17,12 @@ RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.16.0-ol-7-r122" \
+    BITNAMI_IMAGE_VERSION="1.16.0-ol-7-r123" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/nginx/sbin:$PATH"
-
-VOLUME [ "/app", "/certs" ]
 
 EXPOSE 8080 8443
 
