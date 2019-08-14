@@ -65,6 +65,21 @@ get_env_var_value() {
 }
 
 ########################
+# Gets an environment variable value for the master node and based on the suffix
+# Arguments:
+#   $1 - environment variable suffix
+# Returns:
+#   environment variable value
+#########################
+get_master_env_var_value() {
+    local envVar
+    PREFIX=""
+    [[ "$DB_REPLICATION_MODE" = "slave" ]] && PREFIX="MASTER_"
+    envVar="$(get_env_var "$PREFIX$1")"
+    echo "${!envVar:-}"
+}
+
+########################
 # Execute an arbitrary query/queries against the running MySQL/MariaDB service
 # Stdin:
 #   Query/queries to execute
@@ -168,8 +183,8 @@ mysql_start_bg() {
     fi
 
     # wait until the server is up and answering queries.
-    local args=(mysql root)
-    is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("$DB_ROOT_PASSWORD")
+    local args=("mysql" "root")
+    is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("$(get_master_env_var_value ROOT_PASSWORD)")
     while ! echo "select 1" | mysql_execute "${args[@]}"; do
         sleep 1
     done
@@ -354,7 +369,7 @@ tmpdir=$DB_TMPDIR
 socket=$DB_TMPDIR/mysql.sock
 pid-file=$DB_TMPDIR/mysqld.pid
 max_allowed_packet=16M
-bind-address=0.0.0.0
+bind-address=127.0.0.1
 log-error=$DB_LOGDIR/mysqld.log
 character-set-server=UTF8
 collation-server=utf8_general_ci
@@ -477,17 +492,17 @@ mysql_upgrade() {
 
     debug "Running mysql_upgrade..."
 
-    if [[ "$DB_FLAVOR" = "mysql" ]] && [[ "$major_version" = "5" ]]; then
-        args+=("--force")
-    fi
-    if [[ "$DB_FLAVOR" = "mysql" ]] && [[ "$major_version" = "8" ]]; then
+    if [[ "$DB_FLAVOR" = "mysql" ]] && [[ "$major_version" -ge "8" ]]; then
         mysql_stop
         export DB_FORCE_UPGRADE=true
         mysql_start_bg
         unset DB_FORCE_UPGRADE
     else
-        if is_boolean_yes "${ROOT_AUTH_ENABLED:-false}"; then
-            args+=("-p$DB_ROOT_PASSWORD")
+        if [[ "$DB_FLAVOR" = "mysql" ]]; then
+            args+=("--force")
+        fi
+        if [[ -z "$DB_REPLICATION_MODE" ]] || [[ "$DB_REPLICATION_MODE" = "master" ]]; then
+            is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("-p$(get_master_env_var_value ROOT_PASSWORD)")
         fi
         if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
             "${DB_BINDIR}/mysql_upgrade" "${args[@]}"
@@ -602,7 +617,6 @@ mysql_ensure_root_user_exists() {
     local password="${2:-}"
 
     debug "Configuring root user credentials..."
-    [[ -n "$password" ]] && export ROOT_AUTH_ENABLED="yes"
     if [ "$DB_FLAVOR" == "mariadb" ]; then
         mysql_execute "mysql" "root" <<EOF
 -- create root@localhost user for local admin access
@@ -705,8 +719,14 @@ mysql_initialize() {
 
     # User injected custom configuration
     if [[ -f "$DB_CONFDIR/my_custom.cnf" ]]; then
-        debug "Custom configuration detected. Injecting..."
+        debug "Custom configuration my_custom.conf detected. Injecting..."
         cat "$DB_CONFDIR/my_custom.cnf" > "$DB_CONFDIR/bitnami/my_custom.cnf"
+    fi
+    local user_provided_conf=no
+    # User injected main configuration
+    if [[ -f "$DB_CONFDIR/my.cnf" ]]; then
+        debug "Custom configuration my.cnf detected"
+        user_provided_conf=yes
     fi
 
     # Persisted configuration files from old versions
@@ -717,16 +737,18 @@ mysql_initialize() {
         ensure_dir_exists "$dir"
         am_i_root && chown "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$dir"
     done
-    [[ ! -e "$DB_CONFDIR/my.cnf" ]] && mysql_create_config
+
+    ! is_boolean_yes "$user_provided_conf" && mysql_create_config
 
     if [[ -e "$DB_DATADIR/mysql" ]]; then
         info "Persisted data detected. Restoring..."
-        # if MYSQL/MARIADB_ROOT_PASSWORD is set, enable auth
-        [[ -n "$(get_env_var ROOT_PASSWORD)" ]] && export ROOT_AUTH_ENABLED="yes"
-        info "Running mysql_upgrade..."
-        mysql_start_bg
-        mysql_upgrade
-        return
+        if [[ "$DB_FLAVOR" = "mysql" ]]; then
+            # if MYSQL/MARIADB_ROOT_PASSWORD is set, enable auth
+            [[ -n "$(get_master_env_var_value ROOT_PASSWORD)" ]] && export ROOT_AUTH_ENABLED="yes"
+            info "Running mysql_upgrade..."
+            mysql_start_bg
+            mysql_upgrade
+        fi
     else
         debug "Cleaning data directory to ensure successfully initialization..."
         rm -rf "${DB_DATADIR:?}"/*
@@ -738,7 +760,7 @@ DELETE FROM mysql.user WHERE user<>'mysql.sys';
 EOF
         # slaves do not need to configure users
         if [[ -z "$DB_REPLICATION_MODE" ]] || [[ "$DB_REPLICATION_MODE" = "master" ]]; then
-            if  [[ "$DB_REPLICATION_MODE" = "master" ]]; then
+            if [[ "$DB_REPLICATION_MODE" = "master" ]]; then
                 debug "Starting replication..."
                 if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
                     echo "RESET MASTER;" | "$DB_BINDIR/mysql" --defaults-file="$DB_CONFDIR/my.cnf" -N -u root
@@ -750,6 +772,7 @@ EOF
             mysql_ensure_user_not_exists "" # ensure unknown user does not exist
             mysql_ensure_optional_database_exists "$DB_DATABASE" "$DB_USER" "$DB_PASSWORD"
         fi
+        [[ -n "$(get_master_env_var_value ROOT_PASSWORD)" ]] && export ROOT_AUTH_ENABLED="yes"
         # configure replication mode
         [[ -n "$DB_REPLICATION_MODE" ]] && mysql_configure_replication
         if [[ "$DB_FLAVOR" = "mysql" ]]; then
@@ -764,6 +787,11 @@ EOF
 flush privileges;
 EOF
         fi
+    fi
+
+    # After configuration, open mysql
+    if ! is_boolean_yes "$user_provided_conf";then
+       sed -i 's/bind\-address=.*/bind-address=0.0.0.0/g' "$DB_CONFDIR/my.cnf"
     fi
 }
 

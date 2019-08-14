@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r324
+FROM bitnami/minideb-extras-base:stretch-r330
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -9,14 +9,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libaio1 libc6 libgcc1 libncurses5 libsasl2-2 libssl1.1 libstdc++6 libtinfo5 zlib1g
-RUN . ./libcomponent.sh && component_unpack "mysql" "8.0.17-0" --checksum 28f2a59ad89053fc919243c77bb8b2150772b46ef14754ff1187fcbef4386eb2
+RUN . ./libcomponent.sh && component_unpack "mysql" "8.0.17-1" --checksum 70a3b688df2ea71d260d0efb3916b50a31859ccea3291a366411b02256e1e1b9
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="8.0.17-debian-9-r17" \
+    BITNAMI_IMAGE_VERSION="8.0.17-debian-9-r18" \
     MYSQL_DATABASE="" \
     MYSQL_MASTER_HOST="" \
     MYSQL_MASTER_PORT_NUMBER="" \
