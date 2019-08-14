@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl
-RUN . ./libcomponent.sh && component_unpack "harbor-registry" "1.8.1-0" --checksum 23146d76a17d9a92b3ec89f6ab1e35fb6b062b1693a24faa56ccf39c4dfe219f
+RUN . ./libcomponent.sh && component_unpack "harbor-registry" "1.8.2-0" --checksum b271d7d897874921970d227004a11eed57e4100c20ce7237aba2d0eb2eb8f947
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-registry" \
-    BITNAMI_IMAGE_VERSION="1.8.1-ol-7-r22" \
+    BITNAMI_IMAGE_VERSION="1.8.2-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-registry/bin:$PATH"
 
