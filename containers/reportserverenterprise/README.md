@@ -32,8 +32,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.0.7-6008-ol-7-r27` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.0.7-6008-ol-7-r27/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.0.7-6008-debian-9-r26`, `3`, `3.0.7-6008`, `3.0.7-6008-r26`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.0.7-6008-debian-9-r26/3/debian-9/Dockerfile)
+* [`3-ol-7`, `3.0.7-6008-ol-7-r26` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.0.7-6008-ol-7-r26/3/ol-7/Dockerfile)
+* [`3-debian-9`, `3.0.7-6008-debian-9-r27`, `3`, `3.0.7-6008`, `3.0.7-6008-r27`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.0.7-6008-debian-9-r27/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/reportserverenterprise GitHub repo](https://github.com/bitnami/bitnami-docker-reportserverenterprise).
 
