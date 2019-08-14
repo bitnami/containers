@@ -7,7 +7,7 @@ RUN bitnami-pkg unpack apache-2.4.39-2 --checksum bd13d67036ecb691256893b0ba4034
 RUN bitnami-pkg unpack php-7.3.8-0 --checksum 0cb38be663ea54976a58f46e1dd1201727a81798b88a5c5b2163c4c39921d32d
 RUN bitnami-pkg unpack mysql-client-10.1.41-0 --checksum 0da921868a72b59000042c371ab0bb492636266fe668dd1c26cabd7e4d01f92b
 RUN bitnami-pkg install libphp-7.3.8-0 --checksum 9237f5bbf1b4ae3b7d0522d5eb8ef61a404b6533e0299a48f8f836774c69ea02
-RUN bitnami-pkg unpack moodle-3.7.1-0 --checksum d2b277babcd7313272abfb60934bf92026d7fc125d0298344e03a8a22ebcc855
+RUN bitnami-pkg unpack moodle-3.7.1-1 --checksum f345f5341fd71735893336e4809e21a970d9adadbdeb0c3d07c04c944d90798c
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.7.1-ol-7-r40" \
+    BITNAMI_IMAGE_VERSION="3.7.1-ol-7-r41" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -30,6 +30,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MOODLE_LANGUAGE="en" \
     MOODLE_PASSWORD="bitnami" \
     MOODLE_SITENAME="New Site" \
+    MOODLE_SKIP_INSTALL="no" \
     MOODLE_USERNAME="user" \
     MYSQL_CLIENT_CREATE_DATABASE_NAME="" \
     MYSQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
