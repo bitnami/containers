@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.14.0-ol-7-r35` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.14.0-ol-7-r35/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.14.0-debian-9-r35`, `1`, `1.14.0`, `1.14.0-r35`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.14.0-debian-9-r35/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.14.0-debian-9-r36`, `1`, `1.14.0`, `1.14.0-r36`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.14.0-debian-9-r36/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-serving GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-serving).
 
@@ -78,7 +78,7 @@ For persistence you should mount a volume at the `/bitnami` path for the TensorF
 $ docker run -v /path/to/tensorflow-serving-persistence:/bitnami bitnami/tensorflow-serving:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/master/docker-compose.yml) file present in this repository: 
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -187,6 +187,16 @@ $ docker-compose up -d
 ```
 
 # Configuration
+
+## Environment variables
+
+Tensorflow Serving can be customized by specifying environment variables on the first run. The following environment values are provided to custom Tensorflow:
+
+- `TENSORFLOW_SERVING_PORT_NUMBER`: TensorFlow Serving Port. Default: **8500**
+- `TENSORFLOW_SERVING_REST_API_PORT_NUMBER`: TensorFlow Serving Rest API Port. Default: **8501**
+- `TENSORFLOW_SERVING_MODEL_NAME`: TensorFlow Model to serve. Default: **resnet**
+- `TENSORFLOW_SERVING_ENABLE_MONITORING`: Expose Prometheus metrics. Default: **no**
+- `TENSORFLOW_SERVING_MONITORING_PATH`: The API path where the metrics can be scraped. Default: **/monitoring/prometheus/metrics**
 
 ## Configuration file
 
