@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.7.1-ol-7-r40` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.7.1-ol-7-r40/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.7.1-ol-7-r41` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.7.1-ol-7-r41/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.7.1-debian-9-r38`, `3`, `3.7.1`, `3.7.1-r38`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.7.1-debian-9-r38/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
@@ -239,6 +239,7 @@ When you start the moodle image, you can adjust the configuration of the instanc
 - `MOODLE_DATABASE_USER`: Database user that Moodle will use to connect with the database. Default: **bn_moodle**
 - `MOODLE_DATABASE_PASSWORD`: Database password that Moodle will use to connect with the database. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+- `MOODLE_SKIP_INSTALL`: Do not run the Moodle installation wizard. This is necessary in case you use a database that already has Moodle data. Default: **no**
 
 ##### Create a database for Moodle using mysql-client
 
@@ -400,6 +401,10 @@ volumes:
 ```
   
 # Notable Changes
+
+## 3.7.1-debian-9-r38 and 3.7.1-ol-7-r40
+
+- It is now possible to use existing Moodle databases from other installations, as requested in [#95](https://github.com/bitnami/bitnami-docker-moodle/issues/95). In order to do this, use the environment variable `MOODLE_SKIP_INSTALL`, which forces the container not to run the initial Moodle setup wizard.
 
 ## 3.7.0-debian-9-r12 and 3.7.0-ol-7-r13
 
