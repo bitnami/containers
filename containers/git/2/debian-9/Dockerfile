@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r447
+FROM bitnami/minideb-extras:stretch-r448
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,7 +7,7 @@ RUN bitnami-pkg install git-2.22.1-0 --checksum 7e983e31255589679f002d44d62fb66a
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="git" \
-    BITNAMI_IMAGE_VERSION="2.22.1-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="2.22.1-debian-9-r2" \
     PATH="/opt/bitnami/git/bin:$PATH"
 
 ENTRYPOINT [ "git" ]
