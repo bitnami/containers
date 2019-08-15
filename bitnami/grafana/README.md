@@ -46,8 +46,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`6-ol-7`, `6.3.2-ol-7-r8` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.3.2-ol-7-r8/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.3.2-debian-9-r8`, `6`, `6.3.2`, `6.3.2-r8`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.3.2-debian-9-r8/6/debian-9/Dockerfile)
+* [`6-ol-7`, `6.3.3-ol-7-r0` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.3.3-ol-7-r0/6/ol-7/Dockerfile)
+* [`6-debian-9`, `6.3.3-debian-9-r0`, `6`, `6.3.3`, `6.3.3-r0`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.3.3-debian-9-r0/6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -68,7 +68,7 @@ $ docker pull bitnami/grafana:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/grafana:latest https://github.com/bitnami/bitnami-docker-grafana.git
+$ docker build -t bitnami/grafana:latest 'https://github.com/bitnami/bitnami-docker-grafana.git#master:6/debian-9'
 ```
 
 # Connecting to other containers
