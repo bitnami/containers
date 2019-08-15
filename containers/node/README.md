@@ -42,10 +42,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`12-debian-9-prod`, `12.8.1-debian-9-r0-prod`, `12-prod`, `12.8.1-prod`, `12.8.1-r0-prod` (12-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.8.1-debian-9-r0-prod/12-prod/debian-9/Dockerfile)
+* [`12-debian-9`, `12.8.1-debian-9-r0`, `12`, `12.8.1`, `12.8.1-r0` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.8.1-debian-9-r0/12/debian-9/Dockerfile)
 * [`12-ol-7-prod`, `12.8.0-ol-7-r9-prod` (12-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.8.0-ol-7-r9-prod/12-prod/ol-7/Dockerfile)
 * [`12-ol-7`, `12.8.0-ol-7-r9` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.8.0-ol-7-r9/12/ol-7/Dockerfile)
-* [`12-debian-9-prod`, `12.8.0-debian-9-r9-prod`, `12-prod`, `12.8.0-prod`, `12.8.0-r9-prod` (12-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.8.0-debian-9-r9-prod/12-prod/debian-9/Dockerfile)
-* [`12-debian-9`, `12.8.0-debian-9-r9`, `12`, `12.8.0`, `12.8.0-r9` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.8.0-debian-9-r9/12/debian-9/Dockerfile)
 * [`11-ol-7-prod`, `11.15.0-ol-7-r113-prod` (11-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-ol-7-r113-prod/11-prod/ol-7/Dockerfile)
 * [`11-ol-7`, `11.15.0-ol-7-r110` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-ol-7-r110/11/ol-7/Dockerfile)
 * [`11-debian-9-prod`, `11.15.0-debian-9-r99-prod`, `11-prod`, `11.15.0-prod`, `11.15.0-r99-prod` (11-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/11.15.0-debian-9-r99-prod/11-prod/debian-9/Dockerfile)
@@ -93,7 +93,7 @@ $ docker pull bitnami/node:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/node https://github.com/bitnami/bitnami-docker-node.git
+$ docker build -t bitnami/node 'https://github.com/bitnami/bitnami-docker-node.git#master:10/debian-9'
 ```
 
 # Entering the REPL
