@@ -1,4 +1,4 @@
-FROM bitnami/node:12.8.0-debian-9-r9 as development
+FROM bitnami/node:12.8.1-debian-9-r0 as development
 
 ######
 
@@ -14,7 +14,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 COPY --from=development /opt/bitnami/node /opt/bitnami/node
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="12.8.0-debian-9-r9-prod" \
+    BITNAMI_IMAGE_VERSION="12.8.1-debian-9-r0-prod" \
     PATH="/opt/bitnami/node/bin:$PATH"
 
 CMD [ "node" ]
