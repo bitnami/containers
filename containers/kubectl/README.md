@@ -31,11 +31,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`1.15-ol-7`, `1.15.2-ol-7-r9` (1.15/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.2-ol-7-r9/1.15/ol-7/Dockerfile)
 * [`1.15-debian-9`, `1.15.2-debian-9-r9`, `1.15`, `1.15.2`, `1.15.2-r9`, `latest` (1.15/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.2-debian-9-r9/1.15/debian-9/Dockerfile)
 * [`1.14-ol-7`, `1.14.3-ol-7-r69` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.3-ol-7-r69/1.14/ol-7/Dockerfile)
-* [`1.14-debian-9`, `1.14.3-debian-9-r67`, `1.14`, `1.14.3`, `1.14.3-r67` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.3-debian-9-r67/1.14/debian-9/Dockerfile)
-* [`1.13-ol-7`, `1.13.4-ol-7-r163` (1.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-ol-7-r163/1.13/ol-7/Dockerfile)
+* [`1.14-debian-9`, `1.14.3-debian-9-r68`, `1.14`, `1.14.3`, `1.14.3-r68` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.3-debian-9-r68/1.14/debian-9/Dockerfile)
+* [`1.13-ol-7`, `1.13.4-ol-7-r162` (1.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-ol-7-r162/1.13/ol-7/Dockerfile)
 * [`1.13-debian-9`, `1.13.4-debian-9-r150`, `1.13`, `1.13.4`, `1.13.4-r150` (1.13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-debian-9-r150/1.13/debian-9/Dockerfile)
 * [`1.12-ol-7`, `1.12.10-ol-7-r37` (1.12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.10-ol-7-r37/1.12/ol-7/Dockerfile)
-* [`1.12-debian-9`, `1.12.10-debian-9-r36`, `1.12`, `1.12.10`, `1.12.10-r36` (1.12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.10-debian-9-r36/1.12/debian-9/Dockerfile)
+* [`1.12-debian-9`, `1.12.10-debian-9-r37`, `1.12`, `1.12.10`, `1.12.10-r37` (1.12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.12.10-debian-9-r37/1.12/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubectl GitHub repo](https://github.com/bitnami/bitnami-docker-kubectl).
 
