@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4.1-ol-7`, `4.1.13-ol-7-r85` (4.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.13-ol-7-r85/4.1/ol-7/Dockerfile)
-* [`4.1-debian-9`, `4.1.13-debian-9-r82`, `4.1`, `4.1.13`, `4.1.13-r82` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.13-debian-9-r82/4.1/debian-9/Dockerfile)
+* [`4.1-debian-9`, `4.1.13-debian-9-r83`, `4.1`, `4.1.13`, `4.1.13-r83` (4.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.1.13-debian-9-r83/4.1/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.12-ol-7-r5` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.12-ol-7-r5/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.12-debian-9-r5`, `4.0`, `4.0.12`, `4.0.12-r5`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.12-debian-9-r5/4.0/debian-9/Dockerfile)
 * [`3.6-ol-7`, `3.6.13-ol-7-r77` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.13-ol-7-r77/3.6/ol-7/Dockerfile)
@@ -87,7 +87,7 @@ $ docker run \
     bitnami/mongodb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -186,7 +186,7 @@ Passing extra command-line flags to the mongod service command is possible throu
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_EXTRA_FLAGS='--wiredTigerCacheSizeGB=2' bitnami/mongodb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -209,7 +209,7 @@ Configuring the system log verbosity level is possible through the following env
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_SYSTEM_LOG_VERBOSITY='3' bitnami/mongodb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -233,7 +233,7 @@ To enable IPv6 support, you can execute:
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_IPV6=yes bitnami/mongodb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -255,7 +255,7 @@ Enabling/disabling [directoryPerDB](https://docs.mongodb.com/manual/reference/co
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_DIRECTORY_PER_DB=yes bitnami/mongodb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -276,7 +276,7 @@ $ docker run --name mongodb \
   -e MONGODB_ROOT_PASSWORD=password123 bitnami/mongodb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -299,7 +299,7 @@ $ docker run --name mongodb \
   -e MONGODB_DATABASE=my_database bitnami/mongodb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -500,7 +500,7 @@ together with the correct `MONGODB_ADVERTISED_HOSTNAME`.
 Before starting the cluster you need to generate PEM certificates as required by Mongo - one way is to create self-signed certificates using `openssl` (see http://www.openssl.org).
 
 **The certificates generated as described are not for production use**
- 
+
 Another option would be to use letsencrypt certificates; the required configuration steps for that scenario are left as an exercise for the user and are beyond the scope of this README.
 
 ### Generating self-signed certificates
