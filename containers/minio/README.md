@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2019-ol-7`, `2019.8.7-ol-7-r7` (2019/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.8.7-ol-7-r7/2019/ol-7/Dockerfile)
+* [`2019-ol-7`, `2019.8.7-ol-7-r9` (2019/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.8.7-ol-7-r9/2019/ol-7/Dockerfile)
 * [`2019-debian-9`, `2019.8.7-debian-9-r8`, `2019`, `2019.8.7`, `2019.8.7-r8`, `latest` (2019/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.8.7-debian-9-r8/2019/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio GitHub repo](https://github.com/bitnami/bitnami-docker-minio).
@@ -65,7 +65,7 @@ $ docker pull bitnami/minio:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/minio:latest https://github.com/bitnami/bitnami-docker-minio.git
+$ docker build -t bitnami/minio:latest 'https://github.com/bitnami/bitnami-docker-minio.git#master:2019/debian-9'
 ```
 
 # Persisting your database
