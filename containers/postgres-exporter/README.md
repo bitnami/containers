@@ -46,7 +46,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-9`, `0.5.1-debian-9-r23`, `0`, `0.5.1`, `0.5.1-r23`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgres-exporter/blob/0.5.1-debian-9-r23/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.5.1-debian-9-r24`, `0`, `0.5.1`, `0.5.1-r24`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgres-exporter/blob/0.5.1-debian-9-r24/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgres-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-postgres-exporter).
 
@@ -67,7 +67,7 @@ $ docker pull bitnami/postgres-exporter:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/postgres-exporter:latest https://github.com/bitnami/bitnami-docker-postgres-exporter.git
+$ docker build -t bitnami/postgres-exporter:latest 'https://github.com/bitnami/bitnami-docker-postgres-exporter.git#master:0/debian-9'
 ```
 
 # Connecting to other containers
