@@ -47,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.3.0-ol-7-r53` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.3.0-ol-7-r53/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.3.0-ol-7-r54` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.3.0-ol-7-r54/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.3.0-debian-9-r46`, `2`, `2.3.0`, `2.3.0-r46`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.3.0-debian-9-r46/2/debian-9/Dockerfile)
 * [`1-ol-7`, `1.1.1-ol-7-r379` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-ol-7-r379/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.1.1-debian-9-r295`, `1`, `1.1.1`, `1.1.1-r295` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/1.1.1-debian-9-r295/1/debian-9/Dockerfile)
@@ -73,7 +73,7 @@ docker pull bitnami/kafka:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-docker build -t bitnami/kafka:latest https://github.com/bitnami/bitnami-docker-kafka.git
+docker build -t bitnami/kafka:latest 'https://github.com/bitnami/bitnami-docker-kafka.git#master:2/debian-9'
 ```
 
 # Persisting your data
