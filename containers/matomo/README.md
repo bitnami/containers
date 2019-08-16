@@ -44,8 +44,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.11.0-ol-7-r24` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.11.0-ol-7-r24/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.11.0-debian-9-r23`, `3`, `3.11.0`, `3.11.0-r23`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.11.0-debian-9-r23/3/debian-9/Dockerfile)
+* [`3-ol-7`, `3.11.0-ol-7-r25` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.11.0-ol-7-r25/3/ol-7/Dockerfile)
+* [`3-debian-9`, `3.11.0-debian-9-r24`, `3`, `3.11.0`, `3.11.0-r24`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.11.0-debian-9-r24/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
 
@@ -65,7 +65,7 @@ docker pull bitnami/matomo:[TAG]
 If you wish, you can also build the image youself.
 
 ```bash
-docker build -t bitnami/matomo:latest https://github.com/bitnami/bitnami-docker-matomo.git
+docker build -t bitnami/matomo:latest 'https://github.com/bitnami/bitnami-docker-matomo.git#master:3/debian-9'
 ```
 
 # How to use this image
