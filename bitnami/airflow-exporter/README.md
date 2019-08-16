@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-9`, `0.20180711.0-debian-9-r6`, `0`, `0.20180711.0`, `0.20180711.0-r6`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-exporter/blob/0.20180711.0-debian-9-r6/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.20180711.0-debian-9-r7`, `0`, `0.20180711.0`, `0.20180711.0-r7`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-exporter/blob/0.20180711.0-debian-9-r7/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-exporter).
 
@@ -65,7 +65,7 @@ $ docker pull bitnami/airflow-exporter:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/airflow-exporter:latest https://github.com/bitnami/bitnami-docker-airflow-exporter.git
+$ docker build -t bitnami/airflow-exporter:latest 'https://github.com/bitnami/bitnami-docker-airflow-exporter.git#master:0/debian-9'
 ```
 
 # Connecting to other containers
