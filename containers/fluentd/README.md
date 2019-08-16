@@ -44,7 +44,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.6.3-ol-7-r16` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.6.3-ol-7-r16/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.6.3-ol-7-r18` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.6.3-ol-7-r18/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.6.3-debian-9-r17`, `1`, `1.6.3`, `1.6.3-r17`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.6.3-debian-9-r17/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
@@ -66,7 +66,7 @@ $ docker pull bitnami/fluentd:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/fluentd:latest https://github.com/bitnami/bitnami-docker-fluentd.git
+$ docker build -t bitnami/fluentd:latest 'https://github.com/bitnami/bitnami-docker-fluentd.git#master:1/debian-9'
 ```
 
 # Connecting to other containers
