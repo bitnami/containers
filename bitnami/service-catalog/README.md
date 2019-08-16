@@ -44,7 +44,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-9`, `0.2.1-debian-9-r71`, `0`, `0.2.1`, `0.2.1-r71`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-service-catalog/blob/0.2.1-debian-9-r71/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.2.1-debian-9-r72`, `0`, `0.2.1`, `0.2.1-r72`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-service-catalog/blob/0.2.1-debian-9-r72/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/service-catalog GitHub repo](https://github.com/bitnami/bitnami-docker-service-catalog).
 
@@ -65,7 +65,7 @@ $ docker pull bitnami/service-catalog:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/service-catalog:latest https://github.com/bitnami/bitnami-docker-service-catalog.git
+$ docker build -t bitnami/service-catalog:latest 'https://github.com/bitnami/bitnami-docker-service-catalog.git#master:0/debian-9'
 ```
 
 # Configuration
