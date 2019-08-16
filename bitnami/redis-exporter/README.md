@@ -46,7 +46,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-9`, `1.0.4-debian-9-r7`, `1`, `1.0.4`, `1.0.4-r7`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-exporter/blob/1.0.4-debian-9-r7/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.0.4-debian-9-r8`, `1`, `1.0.4`, `1.0.4-r8`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-exporter/blob/1.0.4-debian-9-r8/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-redis-exporter).
 
@@ -67,7 +67,7 @@ $ docker pull bitnami/redis-exporter:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/redis-exporter:latest https://github.com/bitnami/bitnami-docker-redis-exporter.git
+$ docker build -t bitnami/redis-exporter:latest 'https://github.com/bitnami/bitnami-docker-redis-exporter.git#master:1/debian-9'
 ```
 
 # Connecting to other containers
