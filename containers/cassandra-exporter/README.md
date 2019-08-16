@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-9`, `2.3.0-debian-9-r6`, `2`, `2.3.0`, `2.3.0-r6`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra-exporter/blob/2.3.0-debian-9-r6/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.3.0-debian-9-r7`, `2`, `2.3.0`, `2.3.0-r7`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra-exporter/blob/2.3.0-debian-9-r7/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra-exporter).
 
@@ -65,7 +65,7 @@ $ docker pull bitnami/cassandra-exporter:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/cassandra-exporter:latest https://github.com/bitnami/bitnami-docker-cassandra-exporter.git
+$ docker build -t bitnami/cassandra-exporter:latest 'https://github.com/bitnami/bitnami-docker-cassandra-exporter.git#master:2/debian-9'
 ```
 
 # Connecting to other containers
