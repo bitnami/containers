@@ -50,11 +50,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`2.6-ol-7-prod`, `2.6.3-ol-7-r111-prod` (2.6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.3-ol-7-r111-prod/2.6-prod/ol-7/Dockerfile)
 * [`2.6-ol-7`, `2.6.3-ol-7-r110` (2.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.3-ol-7-r110/2.6/ol-7/Dockerfile)
-* [`2.6-debian-9-prod`, `2.6.3-debian-9-r103-prod`, `2.6-prod`, `2.6.3-prod`, `2.6.3-r103-prod`, `latest-prod` (2.6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.3-debian-9-r103-prod/2.6-prod/debian-9/Dockerfile)
+* [`2.6-debian-9-prod`, `2.6.3-debian-9-r102-prod`, `2.6-prod`, `2.6.3-prod`, `2.6.3-r102-prod`, `latest-prod` (2.6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.3-debian-9-r102-prod/2.6-prod/debian-9/Dockerfile)
 * [`2.6-debian-9`, `2.6.3-debian-9-r101`, `2.6`, `2.6.3`, `2.6.3-r101`, `latest` (2.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.3-debian-9-r101/2.6/debian-9/Dockerfile)
 * [`2.5-ol-7`, `2.5.5-ol-7-r146` (2.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.5-ol-7-r146/2.5/ol-7/Dockerfile)
 * [`2.5-ol-7-prod`, `2.5.5-ol-7-r145-prod` (2.5-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.5-ol-7-r145-prod/2.5-prod/ol-7/Dockerfile)
-* [`2.5-debian-9`, `2.5.5-debian-9-r136`, `2.5`, `2.5.5`, `2.5.5-r136` (2.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.5-debian-9-r136/2.5/debian-9/Dockerfile)
+* [`2.5-debian-9`, `2.5.5-debian-9-r137`, `2.5`, `2.5.5`, `2.5.5-r137` (2.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.5-debian-9-r137/2.5/debian-9/Dockerfile)
 * [`2.5-debian-9-prod`, `2.5.5-debian-9-r134-prod`, `2.5-prod`, `2.5.5-prod`, `2.5.5-r134-prod` (2.5-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.5-debian-9-r134-prod/2.5-prod/debian-9/Dockerfile)
 * [`2.4-ol-7-prod`, `2.4.6-ol-7-r128-prod` (2.4-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.6-ol-7-r128-prod/2.4-prod/ol-7/Dockerfile)
 * [`2.4-ol-7`, `2.4.6-ol-7-r126` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.6-ol-7-r126/2.4/ol-7/Dockerfile)
