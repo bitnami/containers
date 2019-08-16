@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.4.3-ol-7-r17` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/1.4.3-ol-7-r17/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.4.3-debian-9-r17`, `1`, `1.4.3`, `1.4.3-r17`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/1.4.3-debian-9-r17/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.4.3-debian-9-r18`, `1`, `1.4.3`, `1.4.3-r18`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/1.4.3-debian-9-r18/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse-dashboard GitHub repo](https://github.com/bitnami/bitnami-docker-parse-dashboard).
 
@@ -55,7 +55,7 @@ The main folder of this repository contains a functional [`docker-compose.yml`](
 ```bash
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-parse-dashboard/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
-``` 
+```
 
 ### Run the application manually
 
@@ -101,7 +101,7 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/master/docker-compose.yml) file present in this repository: 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -222,6 +222,7 @@ Available variables:
  - `PARSE_DASHBOARD_USER`: Parse Dashboard application username. Default: **user**
  - `PARSE_DASHBOARD_PASSWORD`: Parse Dashboard application password. Default: **bitnami**
  - `PARSE_HOST`: This host is for Parse Dashboard knows how to form the urls to Parse Server.
+ - `PARSE_USE_HOSTNAME`: Whether to use a hostname or an IP to configure the "serverURL" setting. Default: **no**
  - `PARSE_PORT_NUMBER`: Parse Server Port. Default: **1337**
  - `PARSE_APP_ID`: Parse Server App Id. Default: **myappID**
  - `PARSE_MASTER_KEY`: Parse Server Master Key. Default: **mymasterKey**
