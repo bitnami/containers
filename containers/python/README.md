@@ -54,8 +54,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`3.7-debian-9`, `3.7.4-debian-9-r38`, `3.7`, `3.7.4`, `3.7.4-r38`, `latest` (3.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.4-debian-9-r38/3.7/debian-9/Dockerfile)
 * [`3.6-ol-7-prod`, `3.6.9-ol-7-r45-prod` (3.6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.9-ol-7-r45-prod/3.6-prod/ol-7/Dockerfile)
 * [`3.6-ol-7`, `3.6.9-ol-7-r44` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.9-ol-7-r44/3.6/ol-7/Dockerfile)
+* [`3.6-debian-9`, `3.6.9-debian-9-r44`, `3.6`, `3.6.9`, `3.6.9-r44` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.9-debian-9-r44/3.6/debian-9/Dockerfile)
 * [`3.6-debian-9-prod`, `3.6.9-debian-9-r43-prod`, `3.6-prod`, `3.6.9-prod`, `3.6.9-r43-prod` (3.6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.9-debian-9-r43-prod/3.6-prod/debian-9/Dockerfile)
-* [`3.6-debian-9`, `3.6.9-debian-9-r43`, `3.6`, `3.6.9`, `3.6.9-r43` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.9-debian-9-r43/3.6/debian-9/Dockerfile)
 * [`2-ol-7-prod`, `2.7.16-ol-7-r157-prod` (2-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.16-ol-7-r157-prod/2-prod/ol-7/Dockerfile)
 * [`2-ol-7`, `2.7.16-ol-7-r155` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.16-ol-7-r155/2/ol-7/Dockerfile)
 * [`2-debian-9-prod`, `2.7.16-debian-9-r147-prod`, `2-prod`, `2.7.16-prod`, `2.7.16-r147-prod` (2-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.16-debian-9-r147-prod/2-prod/debian-9/Dockerfile)
@@ -90,7 +90,7 @@ $ docker pull bitnami/python:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/python https://github.com/bitnami/bitnami-docker-python.git
+$ docker build -t bitnami/python 'https://github.com/bitnami/bitnami-docker-python.git#master:3.7/debian-9'
 ```
 
 # Entering the REPL
