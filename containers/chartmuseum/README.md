@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.9.0-ol-7-r8` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.9.0-ol-7-r8/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.9.0-debian-9-r8`, `0`, `0.9.0`, `0.9.0-r8`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.9.0-debian-9-r8/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.9.0-debian-9-r10`, `0`, `0.9.0`, `0.9.0-r10`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.9.0-debian-9-r10/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/chartmuseum GitHub repo](https://github.com/bitnami/bitnami-docker-chartmuseum).
 
@@ -66,7 +66,7 @@ $ docker pull bitnami/chartmuseum:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/chartmuseum:latest https://github.com/bitnami/bitnami-docker-chartmuseum.git
+$ docker build -t bitnami/chartmuseum:latest 'https://github.com/bitnami/bitnami-docker-chartmuseum.git#master:0/debian-9'
 ```
 
 # Configuring this image
