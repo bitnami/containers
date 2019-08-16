@@ -53,7 +53,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.5.3-ol-7-r20` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.5.3-ol-7-r20/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.5.3-ol-7-r21` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.5.3-ol-7-r21/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.5.3-debian-9-r21`, `1`, `1.5.3`, `1.5.3-r21`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.5.3-debian-9-r21/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/consul GitHub repo](https://github.com/bitnami/bitnami-docker-consul).
@@ -75,7 +75,7 @@ $ docker pull bitnami/consul:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/consul:latest https://github.com/bitnami/bitnami-docker-consul.git
+$ docker build -t bitnami/consul:latest 'https://github.com/bitnami/bitnami-docker-consul.git#master:1/debian-9'
 ```
 
 # Persisting your application
