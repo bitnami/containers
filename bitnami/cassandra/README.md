@@ -44,7 +44,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.11.4-ol-7-r178` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.4-ol-7-r178/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.11.4-ol-7-r179` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.4-ol-7-r179/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.11.4-debian-9-r164`, `3`, `3.11.4`, `3.11.4-r164`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.4-debian-9-r164/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
@@ -66,7 +66,7 @@ $ docker pull bitnami/cassandra:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/cassandra:latest https://github.com/bitnami/bitnami-docker-cassandra.git
+$ docker build -t bitnami/cassandra:latest 'https://github.com/bitnami/bitnami-docker-cassandra.git#master:3/debian-9'
 ```
 
 # Persisting your application
