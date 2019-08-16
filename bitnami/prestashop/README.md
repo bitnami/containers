@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.7-ol-7`, `1.7.6-0-ol-7-r35` (1.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.6-0-ol-7-r35/1.7/ol-7/Dockerfile)
-* [`1.7-debian-9`, `1.7.6-0-debian-9-r34`, `1.7`, `1.7.6-0`, `1.7.6-0-r34`, `latest` (1.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.6-0-debian-9-r34/1.7/debian-9/Dockerfile)
+* [`1.7-debian-9`, `1.7.6-0-debian-9-r35`, `1.7`, `1.7.6-0`, `1.7.6-0-r35`, `latest` (1.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.6-0-debian-9-r35/1.7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
