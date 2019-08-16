@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8-ol-7`, `8.2.0-ol-7-r16` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.2.0-ol-7-r16/8/ol-7/Dockerfile)
-* [`8-debian-9`, `8.2.0-debian-9-r15`, `8`, `8.2.0`, `8.2.0-r15`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.2.0-debian-9-r15/8/debian-9/Dockerfile)
+* [`8-debian-9`, `8.2.0-debian-9-r17`, `8`, `8.2.0`, `8.2.0-r17`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.2.0-debian-9-r17/8/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
 
@@ -71,7 +71,7 @@ $ docker pull bitnami/solr:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/solr:latest https://github.com/bitnami/bitnami-docker-solr.git
+$ docker build -t bitnami/solr:latest 'https://github.com/bitnami/bitnami-docker-solr.git#master:8/debian-9'
 ```
 
 # Persisting your application
