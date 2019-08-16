@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.9.1-ol-7-r14` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.9.1-ol-7-r14/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.9.1-debian-9-r14`, `0`, `0.9.1`, `0.9.1-r14`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.9.1-debian-9-r14/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.9.1-debian-9-r15`, `0`, `0.9.1`, `0.9.1-r15`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.9.1-debian-9-r15/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pushgateway GitHub repo](https://github.com/bitnami/bitnami-docker-pushgateway).
 
@@ -68,7 +68,7 @@ $ docker pull bitnami/pushgateway:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/pushgateway:latest https://github.com/bitnami/bitnami-docker-pushgateway.git
+$ docker build -t bitnami/pushgateway:latest 'https://github.com/bitnami/bitnami-docker-pushgateway.git#master:0/debian-9'
 ```
 
 # Connecting to other containers
