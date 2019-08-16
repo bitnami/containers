@@ -46,7 +46,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-9`, `1.7.2-debian-9-r10`, `1`, `1.7.2`, `1.7.2-r10`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.7.2-debian-9-r10/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.7.2-debian-9-r11`, `1`, `1.7.2`, `1.7.2-r11`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.7.2-debian-9-r11/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kube-state-metrics GitHub repo](https://github.com/bitnami/bitnami-docker-kube-state-metrics).
 
@@ -67,7 +67,7 @@ $ docker pull bitnami/kube-state-metrics:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/kube-state-metrics:latest https://github.com/bitnami/bitnami-docker-kube-state-metrics.git
+$ docker build -t bitnami/kube-state-metrics:latest 'https://github.com/bitnami/bitnami-docker-kube-state-metrics.git#master:1/debian-9'
 ```
 
 # Configuration
