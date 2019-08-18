@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r451
+FROM bitnami/minideb-extras:stretch-r452
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-0-debian-9-r36" \
+    BITNAMI_IMAGE_VERSION="1.7.6-0-debian-9-r37" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
