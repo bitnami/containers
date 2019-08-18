@@ -46,11 +46,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5.0-ol-7`, `5.0.5-ol-7-r100` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.5-ol-7-r100/5.0/ol-7/Dockerfile)
+* [`5.0-ol-7`, `5.0.5-ol-7-r101` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.5-ol-7-r101/5.0/ol-7/Dockerfile)
 * [`5.0-debian-9`, `5.0.5-debian-9-r100`, `5.0`, `5.0.5`, `5.0.5-r100`, `latest` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.5-debian-9-r100/5.0/debian-9/Dockerfile)
 * [`5.0-centos-7`, `5.0.5-centos-7-r78` (5.0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.5-centos-7-r78/5.0/centos-7/Dockerfile)
 * [`4.0-ol-7`, `4.0.14-ol-7-r148` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-ol-7-r148/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.14-debian-9-r137`, `4.0`, `4.0.14`, `4.0.14-r137` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-debian-9-r137/4.0/debian-9/Dockerfile)
+* [`4.0-debian-9`, `4.0.14-debian-9-r136`, `4.0`, `4.0.14`, `4.0.14-r136` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-debian-9-r136/4.0/debian-9/Dockerfile)
 * [`4.0-centos-7`, `4.0.14-centos-7-r84` (4.0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-centos-7-r84/4.0/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
