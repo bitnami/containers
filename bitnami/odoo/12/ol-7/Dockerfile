@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r431
+FROM bitnami/oraclelinux-extras:7-r432
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack odoo-12.0.20190715-1 --checksum 18fa7e7bbf61e38e1c5477dfe
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="12.0.20190715-ol-7-r34" \
+    BITNAMI_IMAGE_VERSION="12.0.20190715-ol-7-r35" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:$PATH" \
