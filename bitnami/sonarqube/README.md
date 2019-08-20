@@ -43,7 +43,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-ol-7`, `7.9.1-ol-7-r41` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.1-ol-7-r41/7/ol-7/Dockerfile)
+* [`7-ol-7`, `7.9.1-ol-7-r42` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.1-ol-7-r42/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.9.1-debian-9-r40`, `7`, `7.9.1`, `7.9.1-r40`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.1-debian-9-r40/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
@@ -254,8 +254,8 @@ The SonarQube instance can be customized by specifying environment variables on 
 - `POSTGRESQL_ROOT_USER`: Database admin user. Default: **root**
 - `POSTGRESQL_ROOT_PASSWORD`: Database password for the `POSTGRESQL_ROOT_USER` user. No defaults.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the postgresql client module. No defaults.
-- `POSTGRESQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the postgresql client module. No defaults.
-- `POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `POSTGRESQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
+- `POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME`: New database user to be created by the postgresql client module. No defaults.
+- `POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME` user. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ### Specifying Environment variables using Docker Compose
