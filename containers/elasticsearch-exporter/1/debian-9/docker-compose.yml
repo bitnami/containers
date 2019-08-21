@@ -4,4 +4,4 @@ services:
   elasticsearch-exporter:
     image: bitnami/elasticsearch-exporter:1
     ports:
-      - '9108:9108'
+      - '9114:9114'
