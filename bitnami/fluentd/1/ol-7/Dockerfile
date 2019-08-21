@@ -3,15 +3,15 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates glibc libgcc libjemalloc-dev libstdc++ nss-softokn-freebl wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluentd-1.6.3-0-linux-x86_64-ol-7.tar.gz && \
-    echo "233ee11bd5e5c5ab704389fd9c5039696b0f86c070ab2f878e0dbfb3f0feb31e  /tmp/bitnami/pkg/cache/fluentd-1.6.3-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/fluentd-1.6.3-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/fluentd-1.6.3-0-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluentd-1.7.0-0-linux-x86_64-ol-7.tar.gz && \
+    echo "cea64c6d79cf4ec1eecb30a7226018c155f9413eb409086b5c47da3fe5be6203  /tmp/bitnami/pkg/cache/fluentd-1.7.0-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/fluentd-1.7.0-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/fluentd-1.7.0-0-linux-x86_64-ol-7.tar.gz
 RUN chmod g+rwX /opt/bitnami/fluentd/conf /opt/bitnami/fluentd/logs
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.6.3-ol-7-r23" \
+    BITNAMI_IMAGE_VERSION="1.7.0-ol-7-r0" \
     FLUENTD_CONF="fluentd.conf" \
     FLUENTD_OPT="" \
     GEM_HOME="/opt/bitnami/fluentd" \
