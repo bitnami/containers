@@ -1,0 +1,15 @@
+{
+  "allowPlaintextListener": "{{$global.env.ALLOW_PLAINTEXT_LISTENER}}",
+  "kafkaAdvertisedListeners": "{{$global.env.KAFKA_CFG_ADVERTISED_LISTENERS}}",
+  "kafkaBrokerPassword": "{{$global.env.KAFKA_BROKER_PASSWORD}}",
+  "kafkaBrokerUser": "{{$global.env.KAFKA_BROKER_USER}}",
+  "kafkaCertificatePassword": "{{$global.env.KAFKA_CERTIFICATE_PASSWORD}}",
+  "kafkaHeapOpts": "{{$global.env.KAFKA_HEAP_OPTS}}",
+  "kafkaInterBrokerPassword": "{{$global.env.KAFKA_INTER_BROKER_PASSWORD}}",
+  "kafkaInterBrokerUser": "{{$global.env.KAFKA_INTER_BROKER_USER}}",
+  "kafkaListeners": "{{$global.env.KAFKA_CFG_LISTENERS}}",
+  "kafkaPort": "{{$global.env.KAFKA_PORT_NUMBER}}",
+  "kafkaZookeeperConnect": "{{$global.env.KAFKA_CFG_ZOOKEEPER_CONNECT}}",
+  "kafkaZookeeperPassword": "{{$global.env.KAFKA_ZOOKEEPER_PASSWORD}}",
+  "kafkaZookeeperUser": "{{$global.env.KAFKA_ZOOKEEPER_USER}}"
+}
