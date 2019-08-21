@@ -1,0 +1,14 @@
+{
+  "clusterNodeName": "{{$global.env.RABBITMQ_CLUSTER_NODE_NAME}}",
+  "clusterPartitionHandling": "{{$global.env.RABBITMQ_CLUSTER_PARTITION_HANDLING}}",
+  "diskFreeLimit": "{{$global.env.RABBITMQ_DISK_FREE_LIMIT}}",
+  "erlangCookie": "{{$global.env.RABBITMQ_ERL_COOKIE}}",
+  "hashedPassword": "{{$global.env.RABBITMQ_HASHED_PASSWORD}}",
+  "managerPort": "{{$global.env.RABBITMQ_MANAGER_PORT_NUMBER}}",
+  "nodeName": "{{$global.env.RABBITMQ_NODE_NAME}}",
+  "nodePort": "{{$global.env.RABBITMQ_NODE_PORT_NUMBER}}",
+  "nodeType": "{{$global.env.RABBITMQ_NODE_TYPE}}",
+  "password": "{{$global.env.RABBITMQ_PASSWORD}}",
+  "username": "{{$global.env.RABBITMQ_USERNAME}}",
+  "vhost": "{{$global.env.RABBITMQ_VHOST}}"
+}
