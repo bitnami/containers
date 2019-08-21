@@ -44,13 +44,13 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`9.0-ol-7`, `9.0.24-ol-7-r1` (9.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.24-ol-7-r1/9.0/ol-7/Dockerfile)
+* [`9.0-ol-7`, `9.0.24-ol-7-r2` (9.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.24-ol-7-r2/9.0/ol-7/Dockerfile)
 * [`9.0-debian-9`, `9.0.24-debian-9-r1`, `9.0`, `9.0.24`, `9.0.24-r1`, `latest` (9.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.24-debian-9-r1/9.0/debian-9/Dockerfile)
 * [`8.5-ol-7`, `8.5.43-ol-7-r42` (8.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.43-ol-7-r42/8.5/ol-7/Dockerfile)
 * [`8.5-debian-9`, `8.5.43-debian-9-r41`, `8.5`, `8.5.43`, `8.5.43-r41` (8.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.43-debian-9-r41/8.5/debian-9/Dockerfile)
 * [`8.0-ol-7`, `8.0.53-ol-7-r383` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-ol-7-r383/8.0/ol-7/Dockerfile)
 * [`8.0-debian-9`, `8.0.53-debian-9-r351`, `8.0`, `8.0.53`, `8.0.53-r351` (8.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-debian-9-r351/8.0/debian-9/Dockerfile)
-* [`7-ol-7`, `7.0.96-ol-7-r19` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.96-ol-7-r19/7/ol-7/Dockerfile)
+* [`7-ol-7`, `7.0.96-ol-7-r20` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.96-ol-7-r20/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.0.96-debian-9-r20`, `7`, `7.0.96`, `7.0.96-r20` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.96-debian-9-r20/7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
