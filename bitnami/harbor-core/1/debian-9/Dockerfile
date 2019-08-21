@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r337
+FROM bitnami/minideb-extras-base:stretch-r338
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "harbor-core" "1.8.2-0" --checksum 4
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-core" \
-    BITNAMI_IMAGE_VERSION="1.8.2-debian-9-r6" \
+    BITNAMI_IMAGE_VERSION="1.8.2-debian-9-r7" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-core/bin:$PATH"
 
