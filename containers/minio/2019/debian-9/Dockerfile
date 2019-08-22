@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r338
+FROM bitnami/minideb-extras-base:stretch-r339
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -9,13 +9,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates jq
-RUN . ./libcomponent.sh && component_unpack "minio-client" "2019.8.14-0" --checksum 63fc22ee9ab4a3a051273d79f239ee5287043cf6fe63f87e75ac95fddd8b2e94
-RUN . ./libcomponent.sh && component_unpack "minio" "2019.8.14-0" --checksum 5d094912713407de5a4fa670706b479acf08128b872dd46bc99c6fcc37d71d0c
+RUN . ./libcomponent.sh && component_unpack "minio-client" "2019.8.21-0" --checksum 50da6acd30ab1ef779263ff93b5f1b16515d8fdbaa01b965affc80c107e46617
+RUN . ./libcomponent.sh && component_unpack "minio" "2019.8.21-0" --checksum daeee12039abb1431e23e0b8cb9096a7ad0b50cb533b841304340ac88f2be3a4
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="minio" \
-    BITNAMI_IMAGE_VERSION="2019.8.14-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="2019.8.21-debian-9-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
