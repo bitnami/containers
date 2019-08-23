@@ -43,9 +43,9 @@ Non-root container images add an extra layer of security and are generally recom
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
-* [`0-debian-9`, `0.12.1-debian-9-r25`, `0`, `0.12.1`, `0.12.1-r25`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysqld-exporter/blob/0.12.1-debian-9-r25/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.12.1-debian-9-r24`, `0`, `0.12.1`, `0.12.1-r24`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysqld-exporter/blob/0.12.1-debian-9-r24/0/debian-9/Dockerfile)
 
-* [`0-centos-7`, `0.12.1-centos-7-r21` (0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysqld-exporter/blob/0.12.1-centos-7-r21/0/centos-7/Dockerfile)
+* [`0-centos-7`, `0.12.1-centos-7-r22` (0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysqld-exporter/blob/0.12.1-centos-7-r22/0/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysqld-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-mysqld-exporter).
 
