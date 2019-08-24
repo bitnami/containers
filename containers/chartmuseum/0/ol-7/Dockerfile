@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r387
+FROM bitnami/oraclelinux-extras-base:7-r388
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN . ./libcomponent.sh && component_unpack "chartmuseum" "0.9.0-1" --checksum a
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.9.0-ol-7-r16" \
+    BITNAMI_IMAGE_VERSION="0.9.0-ol-7-r17" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/chartmuseum/bin:$PATH"
 
