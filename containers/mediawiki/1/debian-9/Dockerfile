@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r458
+FROM bitnami/minideb-extras:stretch-r459
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -19,7 +19,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="mediawiki" \
-    BITNAMI_IMAGE_VERSION="1.33.0-debian-9-r50" \
+    BITNAMI_IMAGE_VERSION="1.33.0-debian-9-r51" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     MARIADB_HOST="mariadb" \
