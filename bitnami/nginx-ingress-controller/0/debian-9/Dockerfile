@@ -2,13 +2,13 @@ FROM bitnami/minideb:stretch
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages authbind ca-certificates curl libc6 libcomerr2 libcurl3 libcurl4-openssl-dev libffi6 libgcc1 libgcrypt20 libgeoip-dev libgeoip1 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblua5.1-0 liblua5.1-dev libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpcre3-dev libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl-dev libssl1.0.2 libssl1.1 libstdc++6 libtasn1-6 libunistring0 python wget zlib1g zlib1g-dev
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.24.1-0-linux-amd64-debian-9.tar.gz && \
-    echo "83b1d65f434ed445c094878e41cad60929faec3facc6ce9509914b0f92a6c901  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.24.1-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.24.1-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.24.1-0-linux-amd64-debian-9.tar.gz
-RUN mkdir -p /opt/bitnami/nginx/conf/geoip && \
-    cd /opt/bitnami/nginx/conf/geoip && \
+RUN install_packages ca-certificates curl libc6 libcap2-bin libcomerr2 libcurl3 libcurl4-openssl-dev libffi6 libgcc1 libgcrypt20 libgeoip-dev libgeoip1 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblua5.1-0 liblua5.1-dev libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpcre3-dev libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl-dev libssl1.0.2 libstdc++6 libtasn1-6 libunistring0 python wget zlib1g zlib1g-dev
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.25.1-1-linux-amd64-debian-9.tar.gz && \
+    echo "d5598398deeee24d9e67c9d18847fa986ad428223c8c84d68ec63e534656af3c  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.25.1-1-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.25.1-1-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.25.1-1-linux-amd64-debian-9.tar.gz
+RUN mkdir -p /opt/bitnami/openresty/nginx/conf/geoip && \
+    cd /opt/bitnami/openresty/nginx/conf/geoip && \
     curl -fL https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz | tar xvz && mv GeoLite2-City_*/*mmdb . && rm -r GeoLite2-City_*/ && \
     curl -fL https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz | tar xvz && mv GeoLite2-Country_*/*mmdb . && rm -r GeoLite2-Country_*/ && \
     curl -fL https://geolite.maxmind.com/download/geoip/database/GeoLite2-ASN.tar.gz | tar xvz && mv GeoLite2-ASN_*/*mmdb . && rm -r GeoLite2-ASN_*/ &&\
@@ -16,32 +16,33 @@ RUN mkdir -p /opt/bitnami/nginx/conf/geoip && \
     curl -fL https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/etc/nginx/geoip/GeoIPASNum.dat --output GeoIPASNum.dat &&\
     curl -fL https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/etc/nginx/geoip/GeoLiteCity.dat --output GeoLiteCity.dat
 
-COPY rootfs /
-RUN ln -sf /opt/bitnami/nginx/sbin/nginx /usr/sbin/nginx
-RUN ln -sf /opt/bitnami/nginx/conf /etc/nginx && \
-    ln -sf /opt/bitnami/nginx/modules /etc/nginx/modules
+RUN setcap cap_net_bind_service=+ep /opt/bitnami/nginx-ingress-controller/bin/nginx-ingress-controller \
+    && setcap -v cap_net_bind_service=+ep /opt/bitnami/nginx-ingress-controller/bin/nginx-ingress-controller
+RUN setcap cap_net_bind_service=+ep /opt/bitnami/openresty/nginx/sbin/nginx \
+    && setcap -v cap_net_bind_service=+ep /opt/bitnami/openresty/nginx/sbin/nginx
+RUN mkdir -p /usr/local/openresty/nginx/sbin && ln -sf /opt/bitnami/openresty/nginx/sbin/nginx /usr/local/openresty/nginx/sbin/nginx
+RUN ln -sf /opt/bitnami/openresty/nginx/conf /etc/nginx && \
+    ln -sf /opt/bitnami/openresty/nginx/modules /etc/nginx/modules
 RUN ln -sf /opt/bitnami/nginx-ingress-controller/bin/nginx-ingress-controller /nginx-ingress-controller
 RUN mkdir -p /etc/ingress-controller/auth /etc/ingress-controller/ssl
 RUN ln -s /opt/bitnami/lua/lib/lua /usr/local/lib/lua
 RUN ln -sf /opt/bitnami/nginx-ingress-controller/scripts /ingress-controller
-RUN ln -sf /opt/bitnami/nginx/logs /var/log/nginx && \
+RUN mkdir -p /opt/bitnami/openresty/nginx/logs && \
+    ln -sf /opt/bitnami/openresty/nginx/logs /var/log/nginx && \
     ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
-RUN mkdir -p /etc/authbind/byport /etc/authbind/byuid && \
-    touch /etc/authbind/byport/80 /etc/authbind/byport/443 && \
-    printf "0.0.0.0:1-1023\n::0:1-1023" >/etc/authbind/byuid/1001 && \
-    chown -R 1001:root /etc/authbind/byport/* /etc/authbind/byuid/1001 && \
-    chmod 755 /etc/authbind/byport/* /etc/authbind/byuid/1001
 RUN chown -R 1001:root /etc/nginx /etc/ingress-controller && \
     chmod -R g+rwX /opt/bitnami/nginx-ingress-controller /etc/nginx /etc/ingress-controller
 RUN chown -R 1001:root /var/log/nginx && chmod g+rwX -R /var/log/nginx &&\
-    chown -R 1001:root /opt/bitnami/nginx/conf && chmod g+rwX -R /opt/bitnami/nginx/conf
+    chown -R 1001:root /opt/bitnami/openresty/nginx/conf && chmod g+rwX -R /opt/bitnami/openresty/nginx/conf
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.24.1-debian-9-r91" \
+    BITNAMI_IMAGE_VERSION="0.25.1-debian-9-r0" \
+    LUA_CPATH="/opt/bitnami/openresty/nginx/conf/lua/?.lua;/opt/bitnami/openresty/lualib/?.so;./?.so;/opt/bitnami/lua/lib/lua/?.so;;" \
+    LUA_PATH="/opt/bitnami/openresty/lualib/?.lua;/opt/bitnami/lua/share/lua/5.1/?/init.lua;/opt/bitnami/openresty/nginx/conf/lua/?.lua;;" \
     PATH="/opt/bitnami/nginx-ingress-controller/bin:$PATH"
 
 EXPOSE 80 443
 
 WORKDIR /opt/bitnami/nginx-ingress-controller
 USER 1001
-ENTRYPOINT [ "/app-entrypoint.sh" ]
+ENTRYPOINT [ "nginx-ingress-controller" ]
