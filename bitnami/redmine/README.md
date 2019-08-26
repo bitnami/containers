@@ -38,8 +38,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-ol-7`, `4.0.4-ol-7-r71` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.0.4-ol-7-r71/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.0.4-debian-9-r69`, `4`, `4.0.4`, `4.0.4-r69`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.0.4-debian-9-r69/4/debian-9/Dockerfile)
+* [`4-ol-7`, `4.0.4-ol-7-r72` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.0.4-ol-7-r72/4/ol-7/Dockerfile)
+* [`4-debian-9`, `4.0.4-debian-9-r70`, `4`, `4.0.4`, `4.0.4-r70`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.0.4-debian-9-r70/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
 
@@ -69,24 +69,31 @@ If you want to run the application manually instead of using docker-compose, the
 1. Create a new network for the application and the database:
 
   ```bash
-  $ docker network create redmine_network
+  $ docker network create redmine-tier
   ```
 
-2. Start a MariaDB database in the network generated:
-
+2. Create a volume for MariaDB persistence and create a MariaDB container
   ```bash
-  $ docker run -d --name mariadb --net=redmine_network \
-      -e ALLOW_EMPTY_PASSWORD=yes \
-      bitnami/mariadb
+  $ docker volume create --name mariadb_data
+  $ docker run -d --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_redmine \
+    -e MARIADB_DATABASE=bitnami_redmine \
+    --net redmine-tier \
+    --volume mariadb_data:/bitnami \
+    bitnami/mariadb:latest
   ```
 
-  *Note:* You need to give the container a name in order to Redmine to resolve the host
-
-3. Run the Redmine container:
+3. Create volumes for Redmine persistence and launch the container
 
   ```bash
-  $ docker run -d --name redmine --net=redmine_network -p 80:3000 \
-      bitnami/redmine
+  $ docker volume create --name redmine_data
+  $ docker run -d --name redmine -p 80:3000 \
+    -e REDMINE_DB_USERNAME=bn_redmine \
+    -e REDMINE_DB_NAME=bitnami_redmine \
+    --net redmine-tier \
+    --volume redmine_data:/bitnami \
+    bitnami/redmine:latest
   ```
 
 Then you can access your application at http://your-ip/
@@ -103,18 +110,23 @@ or use the next docker-compose template:
 
 ```yaml
 version: '2'
-
 services:
   postgresql:
-    image: 'bitnami/postgresql:latest'
+    image: 'bitnami/postgresql:11'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - POSTGRESQL_USERNAME=bn_redmine
+      - POSTGRESQL_DATABASE=bitnami_redmine
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
   redmine:
-    image: 'bitnami/redmine:latest'
+    image: 'bitnami/redmine:4'
     ports:
       - '80:3000'
     environment:
       - REDMINE_DB_POSTGRES=postgresql
+      - REDMINE_DB_USERNAME=bn_redmine
+      - REDMINE_DB_NAME=bitnami_redmine
     volumes:
       - 'redmine_data:/bitnami'
     depends_on:
@@ -164,8 +176,11 @@ The following `docker-compose.yml` template demonstrates the use of host directo
 2. Create a MariaDB container with host volume:
 
   ```bash
-  $ docker run -d --name mariadb --net redmine-tier \
+  $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_USER=bn_redmine \
+    -e MARIADB_DATABASE=bitnami_redmine \
+    --net redmine-tier \
     --volume /path/to/mariadb-persistence:/bitnami \
     bitnami/mariadb:latest
   ```
@@ -175,7 +190,10 @@ The following `docker-compose.yml` template demonstrates the use of host directo
 3. Run the Redmine container:
 
   ```bash
-  $ docker run -d --name redmine -p 80:3000 --net redmine-tier \
+  $ docker run -d --name redmine -p 80:3000 \
+    -e REDMINE_DB_USERNAME=bn_redmine \
+    -e REDMINE_DB_NAME=bitnami_redmine \
+    --net redmine-tier \
     --volume /path/to/redmine-persistence:/bitnami \
     bitnami/redmine:latest
   ```
@@ -245,8 +263,9 @@ Available variables:
  - `REDMINE_PASSWORD`: Redmine application password. Default: **bitnami1**
  - `REDMINE_EMAIL`: Redmine application email. Default: **user@example.com**
  - `REDMINE_LANGUAGE`: Redmine application default language. Default: **en**
- - `REDMINE_DB_USERNAME`: Root user for the application database. Default: **root**
- - `REDMINE_DB_PASSWORD`: Root password for the database.
+ - `REDMINE_DB_USERNAME`: Database user the application will connect with. Default: **bn_redmine**
+ - `REDMINE_DB_PASSWORD`: Password for the database user.
+ - `REDMINE_DB_NAME`: Database the application will connect to. Default: **bitnami_redmine**
  - `REDMINE_DB_MYSQL`: Hostname for MySQL server. Default: **mariadb**
  - `REDMINE_DB_POSTGRES`: Hostname for PostgreSQL server. No defaults
  - `REDMINE_DB_PORT_NUMBER`: Port used by database server. Default: **3306**

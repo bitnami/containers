@@ -7,17 +7,18 @@ RUN bitnami-pkg install ruby-2.6.3-0 --checksum 522af3dfc94655fe0858f27bcfb5304e
 RUN bitnami-pkg install postgresql-client-11.5.0-0 --checksum 4798fe3bac0bfc7d5c10f3a7cb7f2ab39bd9b9551756782bfae0d56bc0d74d4b
 RUN bitnami-pkg install mysql-client-10.3.17-0 --checksum 71d59fafc3e7e3e598af0c2b6788d77558630afe647ec1f922ffdd5025f3d737
 RUN bitnami-pkg install git-2.23.0-0 --checksum 54731b0fecdf38ab559cdd76311a229915bf0581b213a5806d3c7d56c5399981
-RUN bitnami-pkg unpack redmine-4.0.4-0 --checksum df7603446384457a9b70715e2ed5cfcad16df6c419c39ec9927a5fb7cc5424a1
+RUN bitnami-pkg unpack redmine-4.0.4-1 --checksum b206fe78004d5226a2b9e2cac864d3a8045161650f5ef582f9096e243b6dd7a2
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.0.4-debian-9-r69" \
+    BITNAMI_IMAGE_VERSION="4.0.4-debian-9-r70" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH" \
     REDMINE_DB_MYSQL="mariadb" \
+    REDMINE_DB_NAME="bitnami_redmine" \
     REDMINE_DB_PASSWORD="" \
     REDMINE_DB_PORT_NUMBER="" \
     REDMINE_DB_POSTGRES="" \
-    REDMINE_DB_USERNAME="" \
+    REDMINE_DB_USERNAME="bn_redmine" \
     REDMINE_EMAIL="user@example.com" \
     REDMINE_LANGUAGE="en" \
     REDMINE_PASSWORD="bitnami1" \
