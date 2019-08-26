@@ -58,10 +58,10 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`8-ol-7-prod`, `8.16.1-ol-7-r10-prod` (8-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.16.1-ol-7-r10-prod/8-prod/ol-7/Dockerfile)
 * [`8-ol-7`, `8.16.1-ol-7-r10` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.16.1-ol-7-r10/8/ol-7/Dockerfile)
 * [`8-debian-9-prod`, `8.16.1-debian-9-r9-prod`, `8-prod`, `8.16.1-prod`, `8.16.1-r9-prod` (8-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.16.1-debian-9-r9-prod/8-prod/debian-9/Dockerfile)
-* [`8-debian-9`, `8.16.1-debian-9-r9`, `8`, `8.16.1`, `8.16.1-r9` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.16.1-debian-9-r9/8/debian-9/Dockerfile)
+* [`8-debian-9`, `8.16.1-debian-9-r10`, `8`, `8.16.1`, `8.16.1-r10` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.16.1-debian-9-r10/8/debian-9/Dockerfile)
 * [`6-ol-7-prod`, `6.17.1-ol-7-r139-prod` (6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-ol-7-r139-prod/6-prod/ol-7/Dockerfile)
 * [`6-ol-7`, `6.17.1-ol-7-r137` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-ol-7-r137/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.17.1-debian-9-r127`, `6`, `6.17.1`, `6.17.1-r127` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-debian-9-r127/6/debian-9/Dockerfile)
+* [`6-debian-9`, `6.17.1-debian-9-r128`, `6`, `6.17.1`, `6.17.1-r128` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-debian-9-r128/6/debian-9/Dockerfile)
 * [`6-debian-9-prod`, `6.17.1-debian-9-r126-prod`, `6-prod`, `6.17.1-prod`, `6.17.1-r126-prod` (6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-debian-9-r126-prod/6-prod/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
