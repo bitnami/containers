@@ -20,6 +20,8 @@ mysql_validate
 trap "mysql_stop" EXIT
 # Ensure 'daemon' user exists when running as 'root'
 am_i_root && ensure_user_exists "$DB_DAEMON_USER" "$DB_DAEMON_GROUP"
+# Fix logging issue when running as root
+am_i_root && chmod o+w "$(readlink /dev/stdout)"
 # Ensure MySQL is initialized
 mysql_initialize
 # Allow running custom initialization scripts
