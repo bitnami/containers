@@ -1,9 +1,10 @@
 {
-  "databaseAdminPassword": "{{$global.env.REDMINE_DB_PASSWORD}}",
-  "databaseAdminUser": "{{$global.env.REDMINE_DB_USERNAME}}",
   "databaseMysqlHost": "{{$global.env.REDMINE_DB_MYSQL}}",
+  "databaseName": "{{$global.env.REDMINE_DB_NAME}}",
+  "databasePassword": "{{$global.env.REDMINE_DB_PASSWORD}}",
   "databasePostgresHost": "{{$global.env.REDMINE_DB_POSTGRES}}",
   "databaseServerPort": "{{$global.env.REDMINE_DB_PORT_NUMBER}}",
+  "databaseUser": "{{$global.env.REDMINE_DB_USERNAME}}",
   "email": "{{$global.env.REDMINE_EMAIL}}",
   "language": "{{$global.env.REDMINE_LANGUAGE}}",
   "password": "{{$global.env.REDMINE_PASSWORD}}",
