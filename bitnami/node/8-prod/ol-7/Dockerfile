@@ -1,8 +1,8 @@
-FROM bitnami/node:8.16.1-ol-7-r9 as development
+FROM bitnami/node:8.16.1-ol-7-r10 as development
 
 ######
 
-FROM bitnami/oraclelinux-runtimes:7-r410
+FROM bitnami/oraclelinux-runtimes:7-r411
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN install_packages bzip2-libs ca-certificates glibc keyutils-libs krb5-libs li
 COPY --from=development /opt/bitnami/node /opt/bitnami/node
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="8.16.1-ol-7-r9-prod" \
+    BITNAMI_IMAGE_VERSION="8.16.1-ol-7-r10-prod" \
     PATH="/opt/bitnami/node/bin:$PATH"
 
 CMD [ "node" ]
