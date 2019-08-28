@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r461
+FROM bitnami/minideb-extras:stretch-r462
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,12 +6,12 @@ RUN install_packages libc6 libgcc1 libncurses5 libssl1.0.2 libstdc++6 libtinfo5 
 RUN bitnami-pkg install java-1.8.222-0 --checksum e5a677e160c01cd605bc6aae75cc937d4b2d37514b3e1d0a1dd2d332422e68c7
 RUN bitnami-pkg unpack tomcat-9.0.24-0 --checksum 6658e3362af87b86d8f1c6af56b26385938fc979017eb8612119fe468acedb77
 RUN bitnami-pkg unpack mysql-client-10.3.17-0 --checksum 71d59fafc3e7e3e598af0c2b6788d77558630afe647ec1f922ffdd5025f3d737
-RUN bitnami-pkg unpack reportserverenterprise-3.0.7-6008-0 --checksum cc7c37318545aa5c4e4c03585262a618ab8ed5b0be9cfd1647a7602680d72fa5
+RUN bitnami-pkg unpack reportserverenterprise-3.0.8-6009-0 --checksum 19ee22d2fda69b0579d7dfc5889a9f55256c5129cbe29228d86588370c1d7be2
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserverenterprise" \
-    BITNAMI_IMAGE_VERSION="3.0.7-6008-debian-9-r40" \
+    BITNAMI_IMAGE_VERSION="3.0.8-6009-debian-9-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
