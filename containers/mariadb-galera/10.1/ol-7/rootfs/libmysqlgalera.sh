@@ -325,7 +325,7 @@ mysql_validate() {
                 empty_password_error "$(get_env_var ROOT_PASSWORD)"
             fi
             if (( ${#DB_ROOT_PASSWORD} > 32 )); then
-                error "The password can not be longer than 32 characters. Set the environment variable $1 with a shorter value"
+                error "The password can not be longer than 32 characters. Set the environment variable $(get_env_var ROOT_PASSWORD) with a shorter value (currently ${#DB_ROOT_PASSWORD} characters)"
                 exit 1
             fi
             if [[ -n "$DB_USER" ]] && [[ -z "$DB_PASSWORD" ]]; then
