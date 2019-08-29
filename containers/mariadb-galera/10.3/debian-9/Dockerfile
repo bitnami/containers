@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r323
+FROM bitnami/minideb-extras-base:stretch-r345
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV OS_ARCH="amd64" \
@@ -13,7 +13,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb-galera" \
-    BITNAMI_IMAGE_VERSION="10.3.17-debian-9-r8" \
+    BITNAMI_IMAGE_VERSION="10.3.17-debian-9-r9" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
 EXPOSE 3306 4444 4567 4568
