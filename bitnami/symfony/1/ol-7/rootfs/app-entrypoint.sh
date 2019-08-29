@@ -22,9 +22,9 @@ if [ "$1" = "/run.sh" ]; then
     if [ ! -z "$SYMFONY_SKIP_DB" ] ; then
       log "Installing symfony/orm-pack"
       composer require symfony/orm-pack -d $PROJECT_DIRECTORY
-    fi
 
-    export DATABASE_URL=mysql://$MARIADB_USER@$MARIADB_HOST/$MARIADB_DATABASE
+      export DATABASE_URL=mysql://$MARIADB_USER@$MARIADB_HOST/$MARIADB_DATABASE
+    fi
 
     if [ ! -f "$PROJECT_DIRECTORY/.env.local" ] ; then
       touch $PROJECT_DIRECTORY/.env.local
