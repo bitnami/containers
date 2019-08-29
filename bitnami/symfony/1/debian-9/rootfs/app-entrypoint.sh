@@ -19,7 +19,7 @@ if [ "$1" = "/run.sh" ]; then
 
     composer create-project symfony/skeleton $SYMFONY_PROJECT_NAME
 
-    if [ -z "$SYMFONY_NO_DB" ] ; then
+    if [ ! -z "$SYMFONY_SKIP_DB" ] ; then
       log "Installing symfony/orm-pack"
       composer require symfony/orm-pack -d $PROJECT_DIRECTORY
     fi
