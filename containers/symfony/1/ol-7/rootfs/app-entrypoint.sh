@@ -27,7 +27,7 @@ if [ "$1" = "/run.sh" ]; then
     export DATABASE_URL=mysql://$MARIADB_USER@$MARIADB_HOST/$MARIADB_DATABASE
 
     if [ ! -f "$PROJECT_DIRECTORY/.env.local" ] ; then
-      touch $PROJECT_DIRECTORY
+      touch $PROJECT_DIRECTORY/.env.local
       echo "DATABASE_URL=$DATABASE_URL" >> $PROJECT_DIRECTORY/.env.local
       log "Added MariaDB container credentials to .env.local"
     fi
