@@ -11,9 +11,9 @@ RUN mkdir -p /opt/bitnami/openresty/nginx/conf/geoip && \
     cd /opt/bitnami/openresty/nginx/conf/geoip && \
     curl -fL https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz | tar xvz && mv GeoLite2-City_*/*mmdb . && rm -r GeoLite2-City_*/ && \
     curl -fL https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz | tar xvz && mv GeoLite2-Country_*/*mmdb . && rm -r GeoLite2-Country_*/ && \
-    curl -fL https://geolite.maxmind.com/download/geoip/database/GeoLite2-ASN.tar.gz | tar xvz && mv GeoLite2-ASN_*/*mmdb . && rm -r GeoLite2-ASN_*/ &&\
-    curl -fL https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/etc/nginx/geoip/GeoIP.dat --output GeoIP.dat &&\
-    curl -fL https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/etc/nginx/geoip/GeoIPASNum.dat --output GeoIPASNum.dat &&\
+    curl -fL https://geolite.maxmind.com/download/geoip/database/GeoLite2-ASN.tar.gz | tar xvz && mv GeoLite2-ASN_*/*mmdb . && rm -r GeoLite2-ASN_*/ && \
+    curl -fL https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/etc/nginx/geoip/GeoIP.dat --output GeoIP.dat && \
+    curl -fL https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/etc/nginx/geoip/GeoIPASNum.dat --output GeoIPASNum.dat && \
     curl -fL https://github.com/kubernetes/ingress-nginx/raw/master/images/nginx/rootfs/etc/nginx/geoip/GeoLiteCity.dat --output GeoLiteCity.dat
 
 RUN setcap cap_net_bind_service=+ep /opt/bitnami/nginx-ingress-controller/bin/nginx-ingress-controller \
@@ -31,10 +31,11 @@ RUN mkdir -p /opt/bitnami/openresty/nginx/logs && \
     ln -sf /opt/bitnami/openresty/nginx/logs /var/log/nginx && \
     ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
-RUN chown -R 1001:root /etc/nginx /etc/ingress-controller && \
+RUN chgrp -R root /etc/nginx && \
+    chown -R www-data:root /etc/ingress-controller && \
     chmod -R g+rwX /opt/bitnami/nginx-ingress-controller /etc/nginx /etc/ingress-controller
-RUN chown -R 1001:root /var/log/nginx && chmod g+rwX -R /var/log/nginx &&\
-    chown -R 1001:root /opt/bitnami/openresty/nginx/conf && chmod g+rwX -R /opt/bitnami/openresty/nginx/conf
+RUN chgrp -R root /var/log/nginx && chmod g+rwX -R /var/log/nginx && \
+    chgrp -R root /opt/bitnami/openresty/nginx/conf && chmod g+rwX -R /opt/bitnami/openresty/nginx/conf
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
     BITNAMI_IMAGE_VERSION="0.25.1-debian-9-r2" \
     LUA_CPATH="/opt/bitnami/openresty/nginx/conf/lua/?.lua;/opt/bitnami/openresty/lualib/?.so;./?.so;/opt/bitnami/lua/lib/lua/?.so;;" \
