@@ -5,7 +5,8 @@
 > present, `composer create-project symfony/skeleton $SYMFONY_PROJECT_NAME`
 > is run to create a Symfony 4.x project.
 >
-> In the absence of the `$SYMFONY_NO_DB,` envvar/flag, `symfony/orm-pack` is installed.
+> Include a non null value in the `$SYMFONY_SKIP_DB,` envvar/flag, to skip over
+> installing `symfony/orm-pack`
 
 ## TL;DR;
 
