@@ -547,6 +547,25 @@ postgresql_initialize() {
 }
 
 ########################
+# Run custom pre-initialization scripts
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+postgresql_custom_pre_init_scripts() {
+    info "Loading custom pre-init scripts..."
+    if [[ -n $(find "$POSTGRESQL_PREINITSCRIPTS_DIR/" -type f -name "*.sh") ]]; then
+        info "Loading user's custom files from $POSTGRESQL_PREINITSCRIPTS_DIR ...";
+        find "$POSTGRESQL_PREINITSCRIPTS_DIR/" -type f -name "*.sh" | sort | while read -r f; do
+            debug "Executing $f"; "$f"
+        done
+    fi
+}
+
+########################
 # Run custom initialization scripts
 # Globals:
 #   POSTGRESQL_*
