@@ -560,7 +560,11 @@ postgresql_custom_pre_init_scripts() {
     if [[ -n $(find "$POSTGRESQL_PREINITSCRIPTS_DIR/" -type f -name "*.sh") ]]; then
         info "Loading user's custom files from $POSTGRESQL_PREINITSCRIPTS_DIR ...";
         find "$POSTGRESQL_PREINITSCRIPTS_DIR/" -type f -name "*.sh" | sort | while read -r f; do
-            debug "Executing $f"; "$f"
+            if [[ -x "$f" ]]; then
+                debug "Executing $f"; "$f"
+            else
+                debug "Sourcing $f"; . "$f"
+            fi
         done
     fi
 }
