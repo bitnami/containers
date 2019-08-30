@@ -217,8 +217,9 @@ mysql_stop() {
 mysql_extra_flags() {
     local randNumber
     local dbExtraFlags
+    local userExtraFlags
     randNumber=$(head /dev/urandom | tr -dc 0-9 | head -c 3 ; echo '')
-    read -r -a dbExtraFlags <<< "$(get_env_var_value EXTRA_FLAGS)"
+    read -r -a userExtraFlags <<< "$(get_env_var_value EXTRA_FLAGS)"
 
     if [[ -n "$DB_REPLICATION_MODE" ]]; then
         dbExtraFlags+=("--server-id=$randNumber" "--binlog-format=ROW" "--log-bin=mysql-bin" "--sync-binlog=1")
@@ -231,6 +232,8 @@ mysql_extra_flags() {
             dbExtraFlags+=("--innodb_flush_log_at_trx_commit=1")
         fi
     fi
+
+    dbExtraFlags+=("${userExtraFlags[@]}")
 
     echo "${dbExtraFlags[@]}"
 }
