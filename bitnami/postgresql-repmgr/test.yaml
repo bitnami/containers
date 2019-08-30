@@ -1,0 +1,77 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be used in producction.
+##
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test-postgresql-repmgr
+  labels:
+    app.kubernetes.io/name: test-postgresql-repmgr
+spec:
+  serviceName: test-postgresql-repmgr-headless
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-postgresql-repmgr
+  template:
+    metadata:
+      labels:
+        app: test-postgresql-repmgr
+    spec:
+      containers:
+      - image: bitnami/postgresql-repmgr
+        name: postgresql-repmgr
+        env:
+        - name: POSTGRESQL_POSTGRES_PASSWORD
+          value: "adminpassword"
+        - name: POSTGRESQL_USERNAME
+          value: "customuser"
+        - name: POSTGRESQL_PASSWORD
+          value: "custompassword"
+        - name: POSTGRESQL_DATABASE
+          value: "customdatabase"
+        - name: REPMGR_PASSWORD
+          value: "repmgrpassword"
+        - name: REPMGR_PRIMARY_HOST
+          value: "test-postgresql-repmgr-0"
+        - name: REPMGR_NODE_NAME
+          value: "test-postgresql-repmgr-0"
+        - name: REPMGR_NODE_NETWORK_NAME
+          value: "test-postgresql-repmgr-0"
+        - name: REPMGR_PARTNER_NODES
+          value: "test-postgresql-repmgr-0"
+        ports:
+        - name: postgresql
+          containerPort: 5432
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-postgresql-repmgr
+  labels:
+    app.kubernetes.io/name: test-postgresql-repmgr
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+    protocol: TCP
+    targetPort: postgresql
+  selector:
+    app.kubernetes.io/name: test-postgresql-repmgr
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-postgresql-repmgr-headless
+  labels:
+    app.kubernetes.io/name: test-postgresql-repmgr
+spec:
+  ClusterIP: None
+  type: ClusterIP
+  ports:
+  - port: 5432
+    protocol: TCP
+    targetPort: postgresql
+  selector:
+    app.kubernetes.io/name: test-postgresql-repmgr
