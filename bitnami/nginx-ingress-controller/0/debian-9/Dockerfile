@@ -31,8 +31,7 @@ RUN mkdir -p /opt/bitnami/openresty/nginx/logs && \
     ln -sf /opt/bitnami/openresty/nginx/logs /var/log/nginx && \
     ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
-RUN chgrp -R root /etc/nginx && \
-    chown -R www-data:root /etc/ingress-controller && \
+RUN chown -LR www-data:root /etc/nginx /etc/ingress-controller && \
     chmod -R g+rwX /opt/bitnami/nginx-ingress-controller /etc/nginx /etc/ingress-controller
 RUN chgrp -R root /var/log/nginx && chmod g+rwX -R /var/log/nginx && \
     chgrp -R root /opt/bitnami/openresty/nginx/conf && chmod g+rwX -R /opt/bitnami/openresty/nginx/conf
