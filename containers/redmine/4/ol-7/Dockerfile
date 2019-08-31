@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r445
+FROM bitnami/oraclelinux-extras:7-r446
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack redmine-4.0.4-1 --checksum 9a0f0711a13e17f6e85d7aba5b19cc
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.0.4-ol-7-r77" \
+    BITNAMI_IMAGE_VERSION="4.0.4-ol-7-r78" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH" \
     REDMINE_DB_MYSQL="mariadb" \
     REDMINE_DB_NAME="bitnami_redmine" \
