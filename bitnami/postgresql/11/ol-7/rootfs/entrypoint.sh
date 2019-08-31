@@ -12,6 +12,7 @@ set -o pipefail
 
 # Load Redis environment variables
 eval "$(postgresql_env)"
+export MODULE=postgresql
 
 print_welcome_page
 
