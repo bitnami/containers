@@ -1,15 +1,15 @@
-FROM bitnami/oraclelinux-extras:7-r445
+FROM bitnami/oraclelinux-extras:7-r446
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib freetds-libs freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline xz-libs zlib
-RUN bitnami-pkg unpack php-7.3.9-0 --checksum 4d485c03583bba6b5ff16dba7e3e73024939e3da95f77a0f64b560072053a0d3
+RUN bitnami-pkg unpack php-7.3.9-1 --checksum d12b49a00eb74dae3b46b4c5b57c9709e79e3157ddd26959c8ca08e919265bb7
 RUN bitnami-pkg install mysql-client-10.3.17-0 --checksum 83fd01acb88a54d028a327870cec66bf43f57f326814a16dc4626a5171742229
 RUN bitnami-pkg install codeigniter-3.1.10-1 --checksum b6c7a8769c37dcb107863cc3db9c7979fe013f41d9d4443812a8fada48120b9d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="codeigniter" \
-    BITNAMI_IMAGE_VERSION="3.1.10-ol-7-r206" \
+    BITNAMI_IMAGE_VERSION="3.1.10-ol-7-r207" \
     CODEIGNITER_PROJECT_NAME="myapp" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
