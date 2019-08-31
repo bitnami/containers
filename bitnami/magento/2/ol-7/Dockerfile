@@ -1,10 +1,10 @@
-FROM bitnami/oraclelinux-extras:7-r445
+FROM bitnami/oraclelinux-extras:7-r446
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cronie cyrus-sasl-lib expat freetds-libs freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.41-1 --checksum 64b7880c3d0f0f9e7cde0e71496eed06d4240a90a2b6d62c2443fce54c614691
-RUN bitnami-pkg unpack php-7.2.22-0 --checksum 6acf32eb998dab006ad94242087a3cd771ae12dd940fe56871b7824ed6b53df8
+RUN bitnami-pkg unpack php-7.2.22-1 --checksum 28d77ca448a8e3a8a0cfe487e7ce858b433a0dfad882bfee34303d9fef567ac2
 RUN bitnami-pkg unpack mysql-client-10.2.26-0 --checksum 85a505d21e1c6d7e67a8d50856773127656a604d0fab15fe6d7e8ca92a9c8805
 RUN bitnami-pkg install libphp-7.2.22-0 --checksum 061b2675f485ac761a1bc91b7dc30b5056a3cecc4fda7a5396bfcefdf09b9c4d
 RUN bitnami-pkg unpack magento-2.3.2-2 --checksum e52d7ff1311b8aaf0b69136d154fbd3fdb7be1e9b50e50029bcd6203797b32f5
@@ -19,7 +19,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.2-ol-7-r68" \
+    BITNAMI_IMAGE_VERSION="2.3.2-ol-7-r69" \
     ELASTICSEARCH_HOST="" \
     ELASTICSEARCH_PORT_NUMBER="" \
     EXTERNAL_HTTPS_PORT_NUMBER="443" \
