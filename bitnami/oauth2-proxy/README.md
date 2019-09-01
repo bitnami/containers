@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4-ol-7`, `4.0.0-ol-7-r2` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/4.0.0-ol-7-r2/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.0.0-debian-9-r1`, `4`, `4.0.0`, `4.0.0-r1`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/4.0.0-debian-9-r1/4/debian-9/Dockerfile)
+* [`4-debian-9`, `4.0.0-debian-9-r2`, `4`, `4.0.0`, `4.0.0-r2`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/4.0.0-debian-9-r2/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
 
