@@ -1,0 +1,140 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be use in producction.
+##
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-pgpool
+  labels:
+    app.kubernetes.io/name: test-pgpool
+    app.kubernetes.io/component: pgpool
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: test-pgpool
+      app.kubernetes.io/component: pgpool
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: test-pgpool
+        app.kubernetes.io/component: pgpool
+    spec:
+      containers:
+      - image: bitnami/pgpool
+        name: pgpool
+        env:
+        - name: PGPOOL_BACKEND_NODES
+          value: "0:test-pgpool-backend-0:5432"
+        - name: PGPOOL_SR_CHECK_USER
+          value: "postgres"
+        - name: PGPOOL_SR_CHECK_PASSWORD
+          value: "adminpassword"
+        - name: PGPOOL_ENABLE_LDAP
+          value: "no"
+        - name: PGPOOL_USERNAME
+          values: "customuser"
+        - name: PGPOOL_PASSWORD
+          value: "custompassword"
+        ports:
+        - name: postgresql
+          containerPort: 5432
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-pgpool
+  labels:
+    app.kubernetes.io/name: test-pgpool
+    app.kubernetes.io/component: pgpool
+spec:
+  ports:
+  - port: 5432
+    protocol: TCP
+    targetPort: postgresql
+  selector:
+    app.kubernetes.io/name: test-pgpool
+    app.kubernetes.io/component: pgpool
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test-pgpool-backend
+  labels:
+    app.kubernetes.io/name: test-pgpool-backend
+    app.kubernetes.io/component: postgresql
+spec:
+  serviceName: test-pgpool-backend-headless
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: test-pgpool-backend
+      app.kubernetes.io/component: postgresql
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: test-pgpool-backend
+        app.kubernetes.io/component: postgresql
+    spec:
+      containers:
+      - image: bitnami/postgresql-repmgr
+        name: postgresql-repmgr
+        env:
+        - name: POSTGRESQL_POSTGRES_PASSWORD
+          value: "adminpassword"
+        - name: POSTGRESQL_USERNAME
+          value: "customuser"
+        - name: POSTGRESQL_PASSWORD
+          value: "custompassword"
+        - name: POSTGRESQL_DATABASE
+          value: "customdatabase"
+        - name: REPMGR_PASSWORD
+          value: "repmgrpassword"
+        - name: REPMGR_PRIMARY_HOST
+          value: "test-pgpool-backend-0"
+        - name: REPMGR_NODE_NAME
+          value: "test-pgpool-backend-0"
+        - name: REPMGR_NODE_NETWORK_NAME
+          value: "test-pgpool-backend-0"
+        - name: REPMGR_PARTNER_NODES
+          value: "test-pgpool-backend-0"
+        ports:
+        - name: postgresql
+          containerPort: 5432
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-pgpool-backend
+  labels:
+    app.kubernetes.io/name: test-pgpool-backend
+    app.kubernetes.io/component: postgresql
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+    protocol: TCP
+    targetPort: postgresql
+  selector:
+    app.kubernetes.io/name: test-pgpool-backend
+    app.kubernetes.io/component: postgresql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-pgpool-backend--headless
+  labels:
+    app.kubernetes.io/name: test-pgpool-backend
+    app.kubernetes.io/component: postgresql
+spec:
+  ClusterIP: None
+  type: ClusterIP
+  ports:
+  - port: 5432
+    protocol: TCP
+    targetPort: postgresql
+  selector:
+    app.kubernetes.io/name: test-pgpool-backend
+    app.kubernetes.io/component: postgresql
