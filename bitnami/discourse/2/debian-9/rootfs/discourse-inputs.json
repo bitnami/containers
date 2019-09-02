@@ -9,6 +9,7 @@
   "databaseUserPassword": "{{$global.env.DISCOURSE_POSTGRESQL_PASSWORD}}",
   "email": "{{$global.env.DISCOURSE_EMAIL}}",
   "hostname": "{{$global.env.DISCOURSE_HOSTNAME}}",
+  "passengerSpawnMethod": "{{$global.env.DISCOURSE_PASSENGER_SPAWN_METHOD}}",
   "password": "{{$global.env.DISCOURSE_PASSWORD}}",
   "redisHost": "{{$global.env.REDIS_HOST}}",
   "redisPassword": "{{$global.env.REDIS_PASSWORD}}",
