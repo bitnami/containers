@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4-ol-7`, `4.0.3-ol-7-r0` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/4.0.3-ol-7-r0/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.0.3-debian-9-r3`, `4`, `4.0.3`, `4.0.3-r3`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/4.0.3-debian-9-r3/4/debian-9/Dockerfile)
+* [`4-debian-9`, `4.0.3-debian-9-r4`, `4`, `4.0.3`, `4.0.3-r4`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/4.0.3-debian-9-r4/4/debian-9/Dockerfile)
 * [`4-centos-7`, `4.0.3-centos-7-r0` (4/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/4.0.3-centos-7-r0/4/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
@@ -293,7 +293,7 @@ If the master goes down, **repmgr** will ensure any of the standby nodes takes t
 
 > **Note**: The configuration of the other nodes in the cluster needs to be updated so that they are aware of them. This would require you to restart the old nodes adapting the `REPMGR_PARTNER_NODES` environment variable.
 
-With Docker Compose the HA PostgreSQL cluster can be setup using the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository:
+With Docker Compose the HA PostgreSQL cluster can be setup using the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/master/docker-compose.yml) file present in this repository:
 
 ```bash
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-postgresql-repmgr/master/docker-compose.yml > docker-compose.yml
@@ -408,9 +408,9 @@ If you are using your custom `postgresql.conf`, you should create (or uncomment)
 ```
 
 
-## Environment variables aliases
+## Environment variables
 
-Please see the list of environment variable available in the Bitnami PostgreSQL with Replication Manager container in the next table:
+Please see the list of environment variables available in the Bitnami PostgreSQL with Replication Manager container in the next table:
 
 | Environment Variable                 | Default value                      |
 | :----------------------------------- | :--------------------------------- |
