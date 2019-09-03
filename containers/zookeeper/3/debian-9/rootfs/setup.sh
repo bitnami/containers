@@ -25,7 +25,7 @@ else
     ZOOKEEPER_OWNERSHIP_USER=""
 fi
 # Ensure directories used by ZooKeeper exist and have proper ownership and permissions
-for dir in "$ZOO_DATADIR" "$ZOO_CONFDIR" "$ZOO_LOG_DIR"; do
+for dir in "$ZOO_DATA_DIR" "$ZOO_CONF_DIR" "$ZOO_LOG_DIR"; do
     ensure_dir_exists "$dir" "$ZOOKEEPER_OWNERSHIP_USER"
 done
 # Ensure ZooKeeper is initialized

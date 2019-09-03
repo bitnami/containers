@@ -14,7 +14,7 @@ set -o pipefail
 # Load ZooKeeper environment variables
 eval "$(zookeeper_env)"
 
-START_COMMAND=("${ZOO_BASEDIR}/bin/zkServer.sh" "start-foreground")
+START_COMMAND=("${ZOO_BASE_DIR}/bin/zkServer.sh" "start-foreground")
 
 info "** Starting ZooKeeper **"
 if am_i_root; then
