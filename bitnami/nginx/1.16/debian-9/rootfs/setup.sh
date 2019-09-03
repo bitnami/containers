@@ -18,5 +18,7 @@ eval "$(nginx_env)"
 nginx_validate
 # Ensure NGINX is stopped when this script ends
 trap "nginx_stop" EXIT
+# Fix logging issue when running as root
+am_i_root && chmod o+w "$(readlink /dev/stdout)" "$(readlink /dev/stderr)"
 # Initialize NGINX
 nginx_initialize
