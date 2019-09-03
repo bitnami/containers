@@ -9,6 +9,7 @@ services:
       - zookeeper_data:/bitnami
     environment:
       - ZOO_SERVER_ID=1
+      - ALLOW_ANONYMOUS_LOGIN=yes
       - ZOO_SERVERS=zookeeper:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
   zookeeper2:
     image: 'bitnami/zookeeper:3'
@@ -18,6 +19,7 @@ services:
       - zookeeper2_data:/bitnami
     environment:
       - ZOO_SERVER_ID=2
+      - ALLOW_ANONYMOUS_LOGIN=yes
       - ZOO_SERVERS=zookeeper:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
   zookeeper3:
     image: 'bitnami/zookeeper:3'
@@ -27,6 +29,7 @@ services:
       - zookeeper3_data:/bitnami
     environment:
       - ZOO_SERVER_ID=3
+      - ALLOW_ANONYMOUS_LOGIN=yes
       - ZOO_SERVERS=zookeeper:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
 
 volumes:

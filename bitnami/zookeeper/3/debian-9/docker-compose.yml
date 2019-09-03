@@ -5,6 +5,8 @@ services:
     image: 'bitnami/zookeeper:3'
     ports:
       - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
     volumes:
       - 'zookeeper_data:/bitnami/zookeeper'
 
