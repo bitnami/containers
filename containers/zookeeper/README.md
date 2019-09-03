@@ -1,4 +1,3 @@
-
 # What is ZooKeeper?
 
 >ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services. All of these kinds of services are used in some form or other by distributed applications.
@@ -59,7 +58,7 @@ Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](htt
 
 # Get this image
 
-The recommended way to get the Bitnami Zookeeper Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/zookeeper).
+The recommended way to get the Bitnami ZooKeeper Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/zookeeper).
 
 ```bash
 docker pull bitnami/zookeeper:latest
@@ -84,16 +83,16 @@ docker build -t bitnami/zookeeper:latest 'https://github.com/bitnami/bitnami-doc
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 **Note!**
-If you have already started using Zookeeper, follow the steps on
+If you have already started using ZooKeeper, follow the steps on
 [backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
 
-The image exposes a volume at `/bitnami/zookeeper` for the Zookeeper data. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
+The image exposes a volume at `/bitnami/zookeeper` for the ZooKeeper data. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
 docker run -v /path/to/zookeeper-persistence:/bitnami/zookeeper bitnami/zookeeper:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-zookeeper/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-zookeeper/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -106,13 +105,13 @@ services:
 
 # Connecting to other containers
 
-Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Zookeeper server running inside a container can easily be accessed by your application containers.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a ZooKeeper server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
 ## Using the Command Line
 
-In this example, we will create a Zookeeper client instance that will connect to the server instance that is running on the same docker network as the client.
+In this example, we will create a ZooKeeper client instance that will connect to the server instance that is running on the same docker network as the client.
 
 ### Step 1: Create a network
 
@@ -120,9 +119,9 @@ In this example, we will create a Zookeeper client instance that will connect to
 $ docker network create app-tier --driver bridge
 ```
 
-### Step 2: Launch the Zookeeper server instance
+### Step 2: Launch the ZooKeeper server instance
 
-Use the `--network app-tier` argument to the `docker run` command to attach the Zookeeper container to the `app-tier` network.
+Use the `--network app-tier` argument to the `docker run` command to attach the ZooKeeper container to the `app-tier` network.
 
 ```bash
 $ docker run -d --name zookeeper-server \
@@ -130,9 +129,9 @@ $ docker run -d --name zookeeper-server \
     bitnami/zookeeper:latest
 ```
 
-### Step 3: Launch your Zookeeper client instance
+### Step 3: Launch your ZooKeeper client instance
 
-Finally we create a new container instance to launch the Zookeeper client and connect to the server created in the previous step:
+Finally we create a new container instance to launch the ZooKeeper client and connect to the server created in the previous step:
 
 ```bash
 $ docker run -it --rm \
@@ -142,7 +141,7 @@ $ docker run -it --rm \
 
 ## Using Docker Compose
 
-When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Zookeeper server from your own custom application image which is identified in the following snippet by the service name `myapp`.
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the ZooKeeper server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
 ```yaml
 version: '2'
@@ -165,7 +164,7 @@ services:
 > **IMPORTANT**:
 >
 > 1. Please update the `YOUR_APPLICATION_IMAGE` placeholder in the above snippet with your application image
-> 2. In your application container, use the hostname `zookeeper` to connect to the Zookeeper server
+> 2. In your application container, use the hostname `zookeeper` to connect to the ZooKeeper server
 
 Launch the containers using:
 
@@ -175,32 +174,31 @@ $ docker-compose up -d
 
 # Configuration
 
-The configuration can easily be setup with the Bitnami Zookeeper Docker image using the following environment variables:
+The configuration can easily be setup with the Bitnami ZooKeeper Docker image using the following environment variables:
 
- - `ZOO_PORT_NUMBER`: Zookeeper client port. Default: **2181**
+ - `ZOO_PORT_NUMBER`: ZooKeeper client port. Default: **2181**
  - `ZOO_SERVER_ID`: ID of the server in the ensemble. Default: **1**
  - `ZOO_TICK_TIME`: Basic time unit in milliseconds used by ZooKeeper for heartbeats. Default: **2000**
  - `ZOO_INIT_LIMIT`: ZooKeeper uses to limit the length of time the ZooKeeper servers in quorum have to connect to a leader. Default: **10**
  - `ZOO_SYNC_LIMIT`: How far out of date a server can be from a leader. Default: **5**
  - `ZOO_MAX_CLIENT_CNXNS`: Limits the number of concurrent connections that a single client may make to a single member of the ZooKeeper ensemble. Default **60**
+ - `ZOO_4LW_COMMANDS_WHITELIST`: List of whitelisted [4LW](https://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_4lw) commands. Default **srvr, mntr**
  - `ZOO_SERVERS`: Comma, space or colon separated list of servers. Example: zoo1:2888:3888,zoo2:2888:3888. No defaults.
- - `ZOO_CLIENT_USER`: User that will use Zookeeper clients to auth. Default: No defaults.
- - `ZOO_CLIENT_PASSWORD`: Password that will use Zookeeper clients to auth. No defaults.
+ - `ZOO_CLIENT_USER`: User that will use ZooKeeper clients to auth. Default: No defaults.
+ - `ZOO_CLIENT_PASSWORD`: Password that will use ZooKeeper clients to auth. No defaults.
  - `ZOO_SERVER_USERS`: Comma, semicolon or whitespace separated  list of user to be created.  Example: user1,user2,admin. No defaults
  - `ZOO_SERVER_PASSWORDS`: Comma, semicolo or whitespace separated list of passwords to assign to users when created. Example: pass4user1, pass4user2, pass4admin. No defaults
- - `ZOO_ENABLE_AUTH`: Enable Zookeeper auth. It uses SASL/Digest-MD5. Default: **no**
+ - `ZOO_ENABLE_AUTH`: Enable ZooKeeper auth. It uses SASL/Digest-MD5. Default: **no**
  - `ZOO_RECONFIG_ENABLED`: Enable ZooKeeper Dynamic Reconfiguration. Default: **no**
  - `ZOO_HEAP_SIZE`: Size in MB for the Java Heap options (Xmx and XMs). This env var is ignored if Xmx an Xms are configured via `JVMFLAGS`. Default: **1024**
- - `ZOO_LOG_LEVEL`: Zookeeper log level. Available levels are: `ALL`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`, `OFF`, `TRACE`. Default: **INFO**
- - `ALLOW_ANONYMOUS_LOGIN`: If set to true, Allow to accept connections from unauthenticated users. Default: **no**
+ - `ZOO_LOG_LEVEL`: ZooKeeper log level. Available levels are: `ALL`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`, `OFF`, `TRACE`. Default: **INFO**
  - `JVMFLAGS`: Default JVMFLAGS for the ZooKeeper process. No defaults
-
 
 ```bash
 docker run --name zookeeper -e ZOO_SERVER_ID=1 bitnami/zookeeper:latest
 ```
 
-or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-zookeeper/blob/master/docker-compose.yml) file present in this repository: 
+or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-zookeeper/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -220,9 +218,9 @@ docker run --name zookeeper -v /path/to/zoo.cfg:/opt/bitnami/zookeeper/conf/zoo.
 ```
 After that, your changes will be taken into account in the server's behaviour.
 
-### Step 1: Run the Zookeeper image
+### Step 1: Run the ZooKeeper image
 
-Run the Zookeeper image, mounting a directory from your host.
+Run the ZooKeeper image, mounting a directory from your host.
 
 ```bash
 docker run --name zookeeper -v /path/to/zoo.cfg:/opt/bitnami/zookeeper/conf/zoo.cfg bitnami/zookeeper:latest
@@ -250,9 +248,9 @@ Edit the configuration on your host using your favorite editor.
 vi /path/to/zoo.cfg
 ```
 
-### Step 3: Restart Zookeeper
+### Step 3: Restart ZooKeeper
 
-After changing the configuration, restart your Zookeeper container for changes to take effect.
+After changing the configuration, restart your ZooKeeper container for changes to take effect.
 
 ```bash
 docker restart zookeeper
@@ -281,7 +279,7 @@ docker run -it -e ZOO_ENABLE_AUTH=yes \
                bitnami/zookeeper
 ```
 
-or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-zookeeper/blob/master/docker-compose.yml) file present in this repository: 
+or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-zookeeper/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -296,13 +294,13 @@ services:
   ...
 ```
 
-## Setting up a Zookeeper ensemble
+## Setting up a ZooKeeper ensemble
 
-A Zookeeper (https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html) cluster can easily be setup with the Bitnami Zookeeper Docker image using the following environment variables:
+A ZooKeeper (https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html) cluster can easily be setup with the Bitnami ZooKeeper Docker image using the following environment variables:
 
  - `ZOO_SERVERS`: Comma or colon separated list of servers. Example: zoo1:2888:3888,zoo2:2888:3888. No defaults.
 
-For reliable ZooKeeper service, you should deploy ZooKeeper in a cluster known as an ensemble. As long as a majority of the ensemble are up, the service will be available. Because Zookeeper requires a majority, it is best to use an odd number of machines. For example, with four machines ZooKeeper can only handle the failure of a single machine; if two machines fail, the remaining two machines do not constitute a majority. However, with five machines ZooKeeper can handle the failure of two machines.
+For reliable ZooKeeper service, you should deploy ZooKeeper in a cluster known as an ensemble. As long as a majority of the ensemble are up, the service will be available. Because ZooKeeper requires a majority, it is best to use an odd number of machines. For example, with four machines ZooKeeper can only handle the failure of a single machine; if two machines fail, the remaining two machines do not constitute a majority. However, with five machines ZooKeeper can handle the failure of two machines.
 
 You have to use 0.0.0.0 as the host for the server. More concretely, if the ID of the zookeeper1 container starting is 1, then the ZOO_SERVERS environment variable has to be 0.0.0.0:2888:3888,zookeeper2:2888:3888.zookeeper3:2888:3888. See below:
 
@@ -316,7 +314,7 @@ docker network create app-tier --driver bridge
 
 ### Step 1: Create the first node
 
-The first step is to create one  Zookeeper instance.
+The first step is to create one  ZooKeeper instance.
 
 ```bash
 docker run --name zookeeper1 \
@@ -331,7 +329,7 @@ docker run --name zookeeper1 \
 
 ### Step 2: Create the second node
 
-Next we start a new Zookeeper container.
+Next we start a new ZooKeeper container.
 
 ```bash
 docker run --name zookeeper2 \
@@ -346,7 +344,7 @@ docker run --name zookeeper2 \
 
 ### Step 3: Create the third node
 
-Next we start another new Zookeeper container.
+Next we start another new ZooKeeper container.
 
 ```bash
 docker run --name zookeeper3 \
@@ -358,7 +356,7 @@ docker run --name zookeeper3 \
   -p 3888:3888 \
   bitnami/zookeeper:latest
 ```
-You now have a two node Zookeeper cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
+You now have a two node ZooKeeper cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
 
 With Docker Compose the ensemble can be setup using:
 
@@ -403,7 +401,7 @@ services:
 
 # Logging
 
-The Bitnami Zookeeper Docker image sends the container logs to the `stdout`. To view the logs:
+The Bitnami ZooKeeper Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```bash
 docker logs zookeeper
@@ -475,7 +473,7 @@ services:
 
 ## Upgrade this image
 
-Bitnami provides up-to-date versions of Zookeeper, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Bitnami provides up-to-date versions of ZooKeeper, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 ### Step 1: Get the updated image
 
@@ -520,6 +518,10 @@ docker-compose up zookeeper
 ```
 
 # Notable Changes
+
+## 3.5.5-r95
+
+- ZooKeeper configuration moved to bash scripts in the rootfs/ folder.
 
 ## 3.4.12-r25
 
