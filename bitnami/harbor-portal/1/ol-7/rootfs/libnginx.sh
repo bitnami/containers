@@ -89,11 +89,11 @@ nginx_env() {
     cat <<"EOF"
 export NGINX_BASEDIR="/opt/bitnami/nginx"
 export NGINX_VOLUME="/bitnami/nginx"
-export NGINX_EXTRAS_DIR="/opt/bitnami/extra/nginx"
-export NGINX_TEMPLATES_DIR="${NGINX_EXTRAS_DIR}/templates"
 export NGINX_TMPDIR="${NGINX_BASEDIR}/tmp"
 export NGINX_CONFDIR="${NGINX_BASEDIR}/conf"
 export NGINX_LOGDIR="${NGINX_BASEDIR}/logs"
+export NGINX_DAEMON_USER="${NGINX_DAEMON_USER:-daemon}"
+export NGINX_DAEMON_GROUP="${NGINX_DAEMON_GROUP:-daemon}"
 export PATH="${NGINX_BASEDIR}/sbin:$PATH"
 EOF
 }
@@ -156,19 +156,6 @@ nginx_validate() {
             exit 1
         fi
     fi
-
-    for var in "NGINX_DAEMON_USER" "NGINX_DAEMON_GROUP"; do
-        if am_i_root; then
-            if [[ -z "${!var:-}" ]]; then
-                error "The $var environment variable cannot be empty when running as root"
-                exit 1
-            fi
-        else
-            if [[ -n "${!var:-}" ]]; then
-                warn "The $var environment variable will be ignored when running as non-root"
-            fi
-        fi
-    done
 }
 
 ########################
@@ -197,21 +184,22 @@ nginx_initialize() {
         exit 1
     fi
 
+    debug "Updating 'nginx.conf' based on user configuration..."
+    local nginx_user_configuration
     if am_i_root; then
-        debug "Ensure NGINX daemon user/group exists..."
+        debug "Ensuring NGINX daemon user/group exists..."
         ensure_user_exists "$NGINX_DAEMON_USER" "$NGINX_DAEMON_GROUP"
         if [[ -n "${NGINX_DAEMON_USER:-}" ]]; then
-            chown -R "${NGINX_DAEMON_USER:-}" "${NGINX_CONFDIR}" "$NGINX_TMPDIR"
+            chown -R "${NGINX_DAEMON_USER:-}" "$NGINX_TMPDIR"
         fi
-    elif is_nginx_config_writable; then
-        local nginx_configuration
+        nginx_user_configuration="$(sed -E "s/^(user\s+).*/\1 ${NGINX_DAEMON_USER:-} ${NGINX_DAEMON_GROUP:-};/g" "${NGINX_CONFDIR}/nginx.conf")"
+        is_nginx_config_writable && echo "$nginx_user_configuration" > "${NGINX_CONFDIR}/nginx.conf"
+    else
         # The "user" directive makes sense only if the master process runs with super-user privileges
         # TODO: find an appropriate NGINX parser to avoid 'sed calls'
-        nginx_configuration="$(sed -E "s/(^user)/# \1/g" "${NGINX_CONFDIR}/nginx.conf")"
-        echo "$nginx_configuration" > "${NGINX_CONFDIR}/nginx.conf"
+        nginx_user_configuration="$(sed -E "s/(^user)/# \1/g" "${NGINX_CONFDIR}/nginx.conf")"
+        is_nginx_config_writable && echo "$nginx_user_configuration" > "${NGINX_CONFDIR}/nginx.conf"
     fi
-
-    debug "Updating 'nginx.conf' based on user configuration..."
     if [[ -n "${NGINX_HTTP_PORT_NUMBER:-}" ]]; then
         nginx_config_http_port "${NGINX_HTTP_PORT_NUMBER}"
     fi
