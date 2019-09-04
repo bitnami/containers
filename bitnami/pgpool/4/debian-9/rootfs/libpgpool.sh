@@ -274,7 +274,7 @@ pgpool_create_config() {
     pgpool_set_property "health_check_max_retries" "5"
     pgpool_set_property "health_check_retry_delay" "5"
     # Failover settings
-    pgpool_set_property "failover_command" "echo \">>> Failover - that will initialize new primary node search\""
+    pgpool_set_property "failover_command" "echo \">>> Failover - that will initialize new primary node search!\""
     pgpool_set_property "failover_on_backend_error" "off"
     # Keeps searching for a primary node forever when a failover occurs
     pgpool_set_property "search_primary_node_timeout" "0"
