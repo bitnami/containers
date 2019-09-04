@@ -520,7 +520,7 @@ docker-compose up zookeeper
 
 # Notable Changes
 
-## 3.5.5-r95
+## 3.5.5-r96
 
 - ZooKeeper configuration moved to bash scripts in the rootfs/ folder.
 
