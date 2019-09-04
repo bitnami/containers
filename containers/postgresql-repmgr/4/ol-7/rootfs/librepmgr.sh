@@ -143,8 +143,8 @@ repmgr_validate() {
     fi
     if [[ -z "$REPMGR_NODE_NAME" ]]; then
         print_error_exit "The node name is required. Set the environment variable REPMGR_NODE_NAME with the node name."
-    elif [[ ! "$REPMGR_NODE_NAME" =~ ^[A-Za-z]+-[0-9]+$ ]]; then
-        print_error_exit "The node name does not follow the required format. Valid format: [A-Za-z]+-[0-9]+"
+    elif [[ ! "$REPMGR_NODE_NAME" =~ ^.*+-[0-9]+$ ]]; then
+        print_error_exit "The node name does not follow the required format. Valid format: ^.*+-[0-9]+$"
     fi
     if [[ -z "$(repmgr_get_node_id)" ]]; then
         print_error_exit "The node id is required. Set the environment variable REPMGR_NODE_ID with the node id."
@@ -421,7 +421,7 @@ pg_bindir=$POSTGRESQL_BIN_DIR
 # FIXME: these 2 parameter should work
 node_id=$(repmgr_get_node_id)
 node_name=$REPMGR_NODE_NAME
-conninfo='user=$REPMGR_USERNAME password=$REPMGR_PASSWORD host=$REPMGR_NODE_NAME dbname=$REPMGR_DATABASE port=$REPMGR_PRIMARY_PORT connect_timeout=$REPMGR_CONNECT_TIMEOUT'
+conninfo='user=$REPMGR_USERNAME password=$REPMGR_PASSWORD host=$REPMGR_NODE_NETWORK_NAME dbname=$REPMGR_DATABASE port=$REPMGR_PRIMARY_PORT connect_timeout=$REPMGR_CONNECT_TIMEOUT'
 failover=automatic
 promote_command='PGPASSWORD=$REPMGR_PASSWORD repmgr standby promote -f "$REPMGR_CONF_FILE" --log-level DEBUG --verbose'
 follow_command='PGPASSWORD=$REPMGR_PASSWORD repmgr standby follow -f "$REPMGR_CONF_FILE" -W --log-level DEBUG --verbose'
@@ -446,7 +446,7 @@ EOF
 #########################
 repmgr_wait_primary_node() {
     local return_value=1
-    local -i timeout=300
+    local -i timeout=60
     local -i step=10
     local -i max_tries=$(( timeout / step ))
     local schemata
