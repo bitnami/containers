@@ -356,12 +356,36 @@ zookeeper_start_bg() {
 # Globals:
 #   ZOO_*
 # Arguments:
-#   log_dir
+#   None
 # Returns:
 #   None
 #########################
 zookeeper_stop() {
-    local -r log_dir="${1:-$ZOO_LOG_DIR}"
+    "${ZOO_BASE_DIR}/bin/zkServer.sh" stop
+}
 
-    ZOO_LOG_DIR="$log_dir" "${ZOO_BASE_DIR}/bin/zkServer.sh" stop
+########################
+# Ensure a smooth transition to Bash logic in Helm Chart deployments.
+# See https://github.com/bitnami/charts/pull/1390/files#diff-6b063ad92827264b128cc05c45bd9232L85-L90
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+zookeeper_ensure_backwards_compatibility() {
+    mkdir -p /opt/bitnami/base
+    cat >/opt/bitnami/base/functions <<EOF
+#!/bin/bash
+
+# Load Generic Libraries
+. /liblog.sh
+
+warn "You are probably using an old version of the bitnami/zookeeper Helm Chart. Please consider upgrading to 5.0.0 or later."
+
+exec /entrypoint.sh /run.sh
+EOF
+
+    chmod +x /opt/bitnami/base/functions
 }
