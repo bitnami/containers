@@ -46,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-ol-7`, `7.3.1-ol-7-r12` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.3.1-ol-7-r12/7/ol-7/Dockerfile)
+* [`7-ol-7`, `7.3.1-ol-7-r13` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.3.1-ol-7-r13/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.3.1-debian-9-r7`, `7`, `7.3.1`, `7.3.1-r7`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.3.1-debian-9-r7/7/debian-9/Dockerfile)
 * [`6-ol-7`, `6.8.2-ol-7-r35` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.2-ol-7-r35/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.8.2-debian-9-r35`, `6`, `6.8.2`, `6.8.2-r35` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.2-debian-9-r35/6/debian-9/Dockerfile)
@@ -383,6 +383,10 @@ $ docker-compose up elasticsearch
 ```
 
 # Notable Changes
+
+## 6.8.2-debian-9-r36, 6.8.2-ol-7-r36, 7.3.1-debian-9-r8, 7.3.1-ol-7-r13
+
+- Updated OpenJDK to version 11
 
 ## 6.6.1-debian-9-r12, 6.6.1-ol-7-r13, 6.6.1-rhel-7-r13, 5.6.15-debian-9-r12 and 5.6.15-ol-7-r13
 
