@@ -74,7 +74,7 @@ is_minio_running() {
         if ! is_service_running "$MINIO_PID"; then
             false
         else
-            status="$(minio_client_execute_timeout admin service status local --json | jq -r .service)"
+            status="$(minio_client_execute_timeout admin info server local --json | jq -r .service)"
             if [[ "$status" = "on" ]]; then
                 true
             else
@@ -126,18 +126,21 @@ minio_start_bg() {
 #   None
 #########################
 minio_stop() {
-    ! is_minio_running && return
-    info "Stopping MinIO..."
-    minio_client_execute admin service stop local || true
+    if [[ is_minio_running ]]; then
+        info "Stopping MinIO..."
+        minio_client_execute_timeout admin service stop local || true
 
-    local counter=5
-    while is_minio_running ; do
-        if [[ "$counter" -ne 0 ]]; then
-            break
-        fi
-        sleep 1;
-        counter=$((counter - 1))
-    done
+        local counter=5
+        while is_minio_running ; do
+            if [[ "$counter" -ne 0 ]]; then
+                break
+            fi
+            sleep 1;
+            counter=$((counter - 1))
+        done
+    else
+        info "MinIO is already stopped..."
+    fi
 }
 
 ########################
