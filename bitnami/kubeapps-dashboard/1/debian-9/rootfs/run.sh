@@ -14,8 +14,4 @@ set -o pipefail
 eval "$(nginx_env)"
 
 info "** Starting NGINX **"
-if am_i_root; then
-    exec gosu "${NGINX_DAEMON_USER}" "${NGINX_BASEDIR}/sbin/nginx" -c "${NGINX_CONFDIR}/nginx.conf" -g "daemon off; user ${NGINX_DAEMON_USER} ${NGINX_DAEMON_GROUP}"
-else
-    exec "${NGINX_BASEDIR}/sbin/nginx" -c "${NGINX_CONFDIR}/nginx.conf" -g "daemon off;"
-fi
+exec "${NGINX_BASEDIR}/sbin/nginx" -c "${NGINX_CONFDIR}/nginx.conf" -g "daemon off;"
