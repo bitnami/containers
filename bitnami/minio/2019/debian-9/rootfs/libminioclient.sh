@@ -54,7 +54,7 @@ minio_client_execute_timeout() {
     local exec
     exec=$(command -v mc)
 
-    timeout 2s "${exec}" "${args[@]}"
+    timeout 5s "${exec}" "${args[@]}"
 }
 
 ########################
