@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r453
+FROM bitnami/minideb-extras:stretch-r469
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -8,11 +8,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo5 zlib1g
 RUN bitnami-pkg install node-8.16.1-0 --checksum 912809b0cd1ddc5828dea8f09fdf55e09653e62a95b38dac9823efc8b659fe9a
 RUN bitnami-pkg install mongodb-client-4.0.12-0 --checksum e58c66cfe148818b8536f52173b91bf92ac9295e22b40e114bff2bb92bf57584
-RUN bitnami-pkg unpack parse-3.7.2-0 --checksum de864250a89df543ce8379fd7b1455c8cdd2621e9623ef0a69d013f9bf7aad19
+RUN bitnami-pkg unpack parse-3.8.0-0 --checksum 99ce56cb957e015fa37fe94dfcb3a62c18c4570d21de841fff33155124857be2
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="3.7.2-debian-9-r19" \
+    BITNAMI_IMAGE_VERSION="3.8.0-debian-9-r0" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
