@@ -386,6 +386,4 @@ warn "You are probably using an old version of the bitnami/zookeeper Helm Chart.
 
 exec /entrypoint.sh /run.sh
 EOF
-
-    chmod +x /opt/bitnami/base/functions
 }
