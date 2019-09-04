@@ -14,3 +14,6 @@ for dir in "$ZOO_DATA_DIR" "$ZOO_CONF_DIR" "$ZOO_LOG_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
+
+# Ensure a smooth transition to Bash logic in chart deployments
+zookeeper_ensure_backwards_compatibility
