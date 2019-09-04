@@ -121,51 +121,14 @@ zookeeper_initialize() {
     info "Initializing ZooKeeper..."
 
     if [[ ! -f "$ZOO_CONF_FILE" ]]; then
-        info "No injected configuration file found, creating default config file..."
-        cp "${ZOO_CONF_DIR}/zoo_sample.cfg" "$ZOO_CONF_FILE"
-        zookeeper_conf_set "$ZOO_CONF_FILE" tickTime "$ZOO_TICK_TIME"
-        zookeeper_conf_set "$ZOO_CONF_FILE" initLimit "$ZOO_INIT_LIMIT"
-        zookeeper_conf_set "$ZOO_CONF_FILE" syncLimit "$ZOO_SYNC_LIMIT"
-        zookeeper_conf_set "$ZOO_CONF_FILE" dataDir "$ZOO_DATA_DIR"
-        zookeeper_conf_set "$ZOO_CONF_FILE" clientPort "$ZOO_PORT_NUMBER"
-        zookeeper_conf_set "$ZOO_CONF_FILE" maxClientCnxns "$ZOO_MAX_CLIENT_CNXNS"
-        zookeeper_conf_set "$ZOO_CONF_FILE" reconfigEnabled "$(is_boolean_yes "$ZOO_RECONFIG_ENABLED" && echo true || echo false)"
-        zookeeper_conf_set "$ZOO_CONF_FILE" 4lw.commands.whitelist "$ZOO_4LW_COMMANDS_WHITELIST"
-        # Set log level
-        zookeeper_conf_set "${ZOO_CONF_DIR}/log4j.properties" zookeeper.console.threshold "$ZOO_LOG_LEVEL"
+        info "No injected configuration file found, creating default config files..."
+        zookeeper_generate_conf
 
-        # Add zookeeper servers to configuration
-        read -r -a zookeeper_servers_list <<< "${ZOO_SERVERS//[;, ]/ }"
-        if [[ ${#zookeeper_servers_list[@]} -gt 1 ]]; then
-            local i=1
-            for server in "${zookeeper_servers_list[@]}"; do
-                info "Adding server: ${server}";
-                zookeeper_conf_set "$ZOO_CONF_FILE" server.$i "${server};${ZOO_PORT_NUMBER}"
-                (( i++ ))
-            done
-        else
-            info "No additional servers were specified. ZooKeeper will run in standalone mode..."
-        fi
-
-        # Modify Java environment
-        # Heap size
-        if [[ "$JVMFLAGS" =~ -Xm[xs].*-Xm[xs] ]]; then
-            debug "Using specified values (JVMFLAGS=${JVMFLAGS})"
-        else
-            debug "Setting '-Xmx${ZOO_HEAP_SIZE}m -Xms${ZOO_HEAP_SIZE}m' heap options..."
-            export JVMFLAGS="${JVMFLAGS} -Xmx${ZOO_HEAP_SIZE}m -Xms${ZOO_HEAP_SIZE}m"
-        fi
-        # JAAS
+        zookeeper_configure_heap_size "$ZOO_HEAP_SIZE"
         if is_boolean_yes "$ZOO_ENABLE_AUTH"; then
-            info "Enabling authentication..."
-            zookeeper_conf_set "$ZOO_CONF_FILE" authProvider.1 org.apache.zookeeper.server.auth.SASLAuthenticationProvider
-            zookeeper_conf_set "$ZOO_CONF_FILE" requireClientAuthScheme sasl
-            info "Creating jaas file..."
+            zookeeper_enable_authentication "$ZOO_CONF_FILE"
             zookeeper_create_jaas_file "${ZOO_CONF_DIR}/zoo_jaas.conf" "$ZOO_CLIENT_USER" "$ZOO_CLIENT_PASSWORD" "$ZOO_SERVER_USERS" "$ZOO_SERVER_PASSWORDS"
-            export JVMFLAGS="${JVMFLAGS} -Djava.security.auth.login.config=${ZOO_CONF_DIR}/zoo_jaas.conf"
         fi
-
-        echo "export JVMFLAGS=\"${JVMFLAGS}\"" > "${ZOO_CONF_DIR}/java.env"
     else
         info "Configuration files found..."
     fi
@@ -180,6 +143,79 @@ zookeeper_initialize() {
     else
         info "Deploying ZooKeeper with persisted data..."
     fi
+}
+
+########################
+# Generate the configuration files for ZooKeeper
+# Globals:
+#   ZOO_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+zookeeper_generate_conf() {
+    cp "${ZOO_CONF_DIR}/zoo_sample.cfg" "$ZOO_CONF_FILE"
+    zookeeper_conf_set "$ZOO_CONF_FILE" tickTime "$ZOO_TICK_TIME"
+    zookeeper_conf_set "$ZOO_CONF_FILE" initLimit "$ZOO_INIT_LIMIT"
+    zookeeper_conf_set "$ZOO_CONF_FILE" syncLimit "$ZOO_SYNC_LIMIT"
+    zookeeper_conf_set "$ZOO_CONF_FILE" dataDir "$ZOO_DATA_DIR"
+    zookeeper_conf_set "$ZOO_CONF_FILE" clientPort "$ZOO_PORT_NUMBER"
+    zookeeper_conf_set "$ZOO_CONF_FILE" maxClientCnxns "$ZOO_MAX_CLIENT_CNXNS"
+    zookeeper_conf_set "$ZOO_CONF_FILE" reconfigEnabled "$(is_boolean_yes "$ZOO_RECONFIG_ENABLED" && echo true || echo false)"
+    zookeeper_conf_set "$ZOO_CONF_FILE" 4lw.commands.whitelist "$ZOO_4LW_COMMANDS_WHITELIST"
+    # Set log level
+    zookeeper_conf_set "${ZOO_CONF_DIR}/log4j.properties" zookeeper.console.threshold "$ZOO_LOG_LEVEL"
+
+    # Add zookeeper servers to configuration
+    read -r -a zookeeper_servers_list <<< "${ZOO_SERVERS//[;, ]/ }"
+    if [[ ${#zookeeper_servers_list[@]} -gt 1 ]]; then
+        local i=1
+        for server in "${zookeeper_servers_list[@]}"; do
+            info "Adding server: ${server}"
+            zookeeper_conf_set "$ZOO_CONF_FILE" server.$i "${server};${ZOO_PORT_NUMBER}"
+            (( i++ ))
+        done
+    else
+        info "No additional servers were specified. ZooKeeper will run in standalone mode..."
+    fi
+}
+
+########################
+# Configure heap size
+# Globals:
+#   JVMFLAGS
+# Arguments:
+#   $1 - heap_size
+# Returns:
+#   None
+#########################
+zookeeper_configure_heap_size() {
+    local -r heap_size="${1:?heap_size is required}"
+
+    if [[ "$JVMFLAGS" =~ -Xm[xs].*-Xm[xs] ]]; then
+        debug "Using specified values (JVMFLAGS=${JVMFLAGS})"
+    else
+        debug "Setting '-Xmx${heap_size}m -Xms${heap_size}m' heap options..."
+        zookeeper_export_jvmflags "-Xmx${heap_size}m -Xms${heap_size}m"
+    fi
+}
+
+########################
+# Enable authentication for ZooKeeper
+# Globals:
+#   None
+# Arguments:
+#   $1 - filename
+# Returns:
+#   None
+#########################
+zookeeper_enable_authentication() {
+    local -r filename="${1:?filename is required}"
+
+    info "Enabling authentication..."
+    zookeeper_conf_set "$filename" authProvider.1 org.apache.zookeeper.server.auth.SASLAuthenticationProvider
+    zookeeper_conf_set "$filename" requireClientAuthScheme sasl
 }
 
 ########################
@@ -208,7 +244,7 @@ zookeeper_conf_set() {
 ########################
 # Create a JAAS file for authentication
 # Globals:
-#   None
+#   JVMFLAGS
 # Arguments:
 #   $1 - filename
 #   $2 - Client user
@@ -225,6 +261,7 @@ zookeeper_create_jaas_file() {
     local -r server_users="${4:?server users are required}"
     local -r server_passwords="${5:?server passwords are required}"
 
+    info "Creating jaas file..."
     read -r -a server_users_list <<< "${server_users//[;, ]/ }"
     read -r -a server_passwords_list <<< "${server_passwords//[;, ]/ }"
 
@@ -245,6 +282,7 @@ Server {
     $(echo -e -n "${zookeeper_server_user_passwords}")
 };
 EOF
+    zookeeper_export_jvmflags "-Djava.security.auth.login.config=${filename}"
 }
 
 ########################
@@ -266,16 +304,62 @@ zookeeper_configure_acl() {
     acl_string="${acl_string#,}"
 
     local -r start_bg_dir="$(mktemp -d)"
-    local start_command="${ZOO_BASE_DIR}/bin/zkServer.sh start"
-    am_i_root && ensure_dir_exists "$start_bg_dir" "$ZOO_DAEMON_USER" && start_command="gosu ${ZOO_DAEMON_USER} ${start_command}"
-    ZOO_LOG_DIR=${start_bg_dir} $start_command
-    wait-for-port "$ZOO_PORT_NUMBER"
+    zookeeper_start_bg "$start_bg_dir"
 
     for path in / /zookeeper /zookeeper/quota; do
         info "Setting the ACL rule '${acl_string}' in ${path}"
-        retry_while "${ZOO_BASE_DIR}/bin/zkCli.sh setAcl ${path} ${acl_string}"
+        retry_while "${ZOO_BASE_DIR}/bin/zkCli.sh setAcl ${path} ${acl_string}" 400
     done
 
-    ZOO_LOG_DIR="$start_bg_dir" "${ZOO_BASE_DIR}/bin/zkServer.sh" stop
+    zookeeper_stop
     rm -r "$start_bg_dir"
+}
+
+########################
+# Export JVMFLAGS
+# Globals:
+#   JVMFLAGS
+# Arguments:
+#   $1 - value
+# Returns:
+#   None
+#########################
+zookeeper_export_jvmflags() {
+    local -r value="${1:?value is required}"
+
+    export JVMFLAGS="${JVMFLAGS} ${value}"
+    echo "export JVMFLAGS=\"${JVMFLAGS}\"" > "${ZOO_CONF_DIR}/java.env"
+}
+
+########################
+# Start ZooKeeper in background mode and waits until it's ready
+# Globals:
+#   ZOO_*
+# Arguments:
+#   start_bg_dir
+# Returns:
+#   None
+#########################
+zookeeper_start_bg() {
+    local -r start_bg_dir="${1:-$ZOO_LOG_DIR}"
+
+    local start_command="${ZOO_BASE_DIR}/bin/zkServer.sh start"
+    am_i_root && ensure_dir_exists "$start_bg_dir" "$ZOO_DAEMON_USER" && start_command="gosu ${ZOO_DAEMON_USER} ${start_command}"
+    ZOO_LOG_DIR=${start_bg_dir} $start_command
+    wait-for-port -timeout 60 "$ZOO_PORT_NUMBER"
+}
+
+########################
+# Stop ZooKeeper
+# Globals:
+#   ZOO_*
+# Arguments:
+#   log_dir
+# Returns:
+#   None
+#########################
+zookeeper_stop() {
+    local -r log_dir="${1:-$ZOO_LOG_DIR}"
+
+    ZOO_LOG_DIR="$log_dir" "${ZOO_BASE_DIR}/bin/zkServer.sh" stop
 }
