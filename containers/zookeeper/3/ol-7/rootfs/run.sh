@@ -1,17 +1,25 @@
 #!/bin/bash
-. /opt/bitnami/base/functions
-. /opt/bitnami/base/helpers
 
+# shellcheck disable=SC1091
 
-export ZOO_LOG_DIR=/opt/bitnami/zookeeper/logs
-export ZOOPIDFILE=/opt/bitnami/zookeeper/tmp/zookeeper.pid
+set -o errexit
+set -o nounset
+set -o pipefail
+# set -o xtrace # Uncomment this line for debugging purposes
 
-USER=zookeeper
-START_COMMAND="/opt/bitnami/zookeeper/bin/zkServer.sh start && tail -f ${ZOO_LOG_DIR}/zookeeper.out"
+# Load libraries
+. /libzookeeper.sh
+. /libos.sh
+. /liblog.sh
 
-# If container is started as `root` user
-if [ $EUID -eq 0 ]; then
-    exec gosu ${USER} bash -c "${START_COMMAND}"
+# Load ZooKeeper environment variables
+eval "$(zookeeper_env)"
+
+START_COMMAND=("${ZOO_BASE_DIR}/bin/zkServer.sh" "start-foreground")
+
+info "** Starting ZooKeeper **"
+if am_i_root; then
+    exec gosu "$ZOO_DAEMON_USER" "${START_COMMAND[@]}"
 else
-    exec bash -c "${START_COMMAND}"
+    exec "${START_COMMAND[@]}"
 fi
