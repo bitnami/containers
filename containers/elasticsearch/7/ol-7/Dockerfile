@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r400
+FROM bitnami/oraclelinux-extras-base:7-r401
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -9,13 +9,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages alsa-lib-devel freetype-devel glibc hostname libX11-devel libXext-devel libXi-devel libXrender-devel libXtst-devel libgcc zlib
-RUN . ./libcomponent.sh && component_unpack "java" "1.8.222-0" --checksum a90f4ce71ff9b392efdf61e6941117afa31d2d6528bd1a3cad1c6459bcac2b0b
+RUN . ./libcomponent.sh && component_unpack "java" "11.0.4-0" --checksum 3a17c3d9c943fc8342a9aa9786e924627d5b5579163e957d0ca1c9de523626f3
 RUN . ./libcomponent.sh && component_unpack "elasticsearch" "7.3.1-0" --checksum 03f1a146658a7b4abb11625eae00d90c8d30a152424a6f77c8e3d02922928cee
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="7.3.1-ol-7-r12" \
+    BITNAMI_IMAGE_VERSION="7.3.1-ol-7-r13" \
     ELASTICSEARCH_BIND_ADDRESS="" \
     ELASTICSEARCH_CLUSTER_HOSTS="" \
     ELASTICSEARCH_CLUSTER_MASTER_HOSTS="" \
