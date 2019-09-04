@@ -8,6 +8,7 @@
 . /liblog.sh
 . /libvalidations.sh
 . /libos.sh
+. /libfs.sh
 
 # Functions
 
@@ -285,8 +286,8 @@ EOF
     zookeeper_export_jvmflags "-Djava.security.auth.login.config=${filename}"
 
     # Restrict file permissions
+    am_i_root && owned_by "$filename" "$ZOO_DAEMON_USER"
     chmod 400 "$filename"
-    ! am_i_root || owned_by "$filename" "$ZOO_DAEMON_USER"
 }
 
 ########################
@@ -307,8 +308,7 @@ zookeeper_configure_acl() {
     done
     acl_string="${acl_string#,}"
 
-    local -r start_bg_dir="$(mktemp -d)"
-    zookeeper_start_bg "$start_bg_dir"
+    zookeeper_start_bg
 
     for path in / /zookeeper /zookeeper/quota; do
         info "Setting the ACL rule '${acl_string}' in ${path}"
@@ -316,7 +316,7 @@ zookeeper_configure_acl() {
     done
 
     zookeeper_stop
-    rm -r "$start_bg_dir"
+    mv "${ZOO_LOG_DIR}/zookeeper.out" "${ZOO_LOG_DIR}/zookeeper.out.firstboot"
 }
 
 ########################
@@ -340,16 +340,14 @@ zookeeper_export_jvmflags() {
 # Globals:
 #   ZOO_*
 # Arguments:
-#   start_bg_dir
+#   None
 # Returns:
 #   None
 #########################
 zookeeper_start_bg() {
-    local -r start_bg_dir="${1:-$ZOO_LOG_DIR}"
-
     local start_command="${ZOO_BASE_DIR}/bin/zkServer.sh start"
-    am_i_root && ensure_dir_exists "$start_bg_dir" "$ZOO_DAEMON_USER" && start_command="gosu ${ZOO_DAEMON_USER} ${start_command}"
-    ZOO_LOG_DIR=${start_bg_dir} $start_command
+    am_i_root && start_command="gosu ${ZOO_DAEMON_USER} ${start_command}"
+    $start_command
     wait-for-port -timeout 60 "$ZOO_PORT_NUMBER"
 }
 
