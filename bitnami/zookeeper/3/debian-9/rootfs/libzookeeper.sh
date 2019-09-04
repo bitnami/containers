@@ -244,7 +244,7 @@ zookeeper_conf_set() {
 ########################
 # Create a JAAS file for authentication
 # Globals:
-#   JVMFLAGS
+#   JVMFLAGS, ZOO_DAEMON_USER
 # Arguments:
 #   $1 - filename
 #   $2 - Client user
@@ -283,6 +283,10 @@ Server {
 };
 EOF
     zookeeper_export_jvmflags "-Djava.security.auth.login.config=${filename}"
+
+    # Restrict file permissions
+    chmod 400 "$filename"
+    ! am_i_root || owned_by "$filename" "$ZOO_DAEMON_USER"
 }
 
 ########################

@@ -10,6 +10,7 @@ set -o pipefail
 # Load libraries
 . /libzookeeper.sh
 . /libos.sh
+. /liblog.sh
 
 # Load ZooKeeper environment variables
 eval "$(zookeeper_env)"
