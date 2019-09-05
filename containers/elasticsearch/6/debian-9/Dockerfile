@@ -10,12 +10,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages libc6 zlib1g
 RUN . ./libcomponent.sh && component_unpack "java" "11.0.4-0" --checksum 43f132058f32891eaf2243a0484b6566dfeec2c2db4c5e10b036783083e8f039
-RUN . ./libcomponent.sh && component_unpack "elasticsearch" "6.8.2-0" --checksum 6222ce47e77c22c9bb418c05f58bdaed65d1599036531233386a9b43abca5d37
+RUN . ./libcomponent.sh && component_unpack "elasticsearch" "6.8.3-0" --checksum 21e082dbaf5b22723f62b4d51d737ac1b1a1c4e6f89154790e669630ae3801f3
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="6.8.2-debian-9-r38" \
+    BITNAMI_IMAGE_VERSION="6.8.3-debian-9-r0" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/elasticsearch/bin:$PATH"
