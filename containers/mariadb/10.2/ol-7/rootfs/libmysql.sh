@@ -233,9 +233,9 @@ mysql_extra_flags() {
         fi
     fi
 
-    [[ -z ${userExtraFlags:-} ]] || dbExtraFlags=("${dbExtraFlags[@]}" "${userExtraFlags[@]}")
+    [[ -z ${userExtraFlags:-} ]] || dbExtraFlags=("${dbExtraFlags[@]:-}" "${userExtraFlags[@]}")
 
-    echo "${dbExtraFlags[@]}"
+    echo "${dbExtraFlags[@]:-}"
 }
 
 ########################
