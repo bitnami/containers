@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r351
+FROM bitnami/minideb-extras-base:stretch-r352
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -13,19 +13,10 @@ RUN . ./libcomponent.sh && component_unpack "redis" "4.0.14-1" --checksum 13f130
 
 COPY rootfs /
 RUN /postunpack.sh
-ENV ALLOW_EMPTY_PASSWORD="no" \
-    BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.14-debian-9-r154" \
+ENV BITNAMI_APP_NAME="redis" \
+    BITNAMI_IMAGE_VERSION="4.0.14-debian-9-r155" \
     NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/redis/bin:$PATH" \
-    REDIS_DISABLE_COMMANDS="" \
-    REDIS_MASTER_HOST="" \
-    REDIS_MASTER_PASSWORD="" \
-    REDIS_MASTER_PASSWORD_FILE="" \
-    REDIS_MASTER_PORT_NUMBER="6379" \
-    REDIS_PASSWORD="" \
-    REDIS_PASSWORD_FILE="" \
-    REDIS_REPLICATION_MODE=""
+    PATH="/opt/bitnami/redis/bin:$PATH"
 
 EXPOSE 6379
 
