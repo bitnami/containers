@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r352
+FROM bitnami/minideb:stretch
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,8 +7,9 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     OS_FLAVOUR="debian-9" \
     OS_NAME="linux"
 
+COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages libc6 libgeoip1 libpcre3 libssl1.1 zlib1g
+RUN install_packages ca-certificates curl libc6 libgeoip1 libpcre3 libssl1.1 procps zlib1g
 RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-0" --checksum 9beea2a7aa9a47c4b52067916bf19b0fd4695c89a2bd538d6d67a4e354f5334a
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
@@ -17,7 +18,7 @@ RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.16.1-debian-9-r25" \
+    BITNAMI_IMAGE_VERSION="1.16.1-debian-9-r26" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/nginx/sbin:$PATH"
 
