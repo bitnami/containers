@@ -49,34 +49,6 @@ nginx_stop() {
 }
 
 ########################
-# Start NGINX and wait until it's ready
-# Globals:
-#   NGINX_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-nginx_start() {
-    is_nginx_running && return
-    debug "Starting NGIX..."
-    if am_i_root; then
-        gosu "${NGINX_DAEMON_USER}" "${NGINX_BASEDIR}/sbin/nginx" -c "${NGINX_CONFDIR}/nginx.conf"
-    else
-        "${NGINX_BASEDIR}/sbin/nginx" -c "${NGINX_CONFDIR}/nginx.conf"
-    fi
-
-    local counter=3
-    while ! is_nginx_running ; do
-        if [[ "$counter" -ne 0 ]]; then
-            break
-        fi
-        sleep 1;
-        counter=$((counter - 1))
-    done
-}
-
-########################
 # Load global variables used on NGINX configuration
 # Globals:
 #   NGINX_*
