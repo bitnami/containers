@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r351
+FROM bitnami/minideb-extras-base:stretch-r352
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,21 +14,8 @@ RUN . ./libcomponent.sh && component_unpack "kafka" "2.3.0-0" --checksum e2ce5f1
 
 COPY rootfs /
 RUN /postunpack.sh
-ENV ALLOW_PLAINTEXT_LISTENER="no" \
-    BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.3.0-debian-9-r68" \
-    KAFKA_BROKER_PASSWORD="bitnami" \
-    KAFKA_BROKER_USER="user" \
-    KAFKA_CERTIFICATE_PASSWORD="" \
-    KAFKA_CFG_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
-    KAFKA_CFG_LISTENERS="PLAINTEXT://:9092" \
-    KAFKA_CFG_ZOOKEEPER_CONNECT="localhost:2181" \
-    KAFKA_HEAP_OPTS="-Xmx1024m -Xms1024m" \
-    KAFKA_INTER_BROKER_PASSWORD="bitnami" \
-    KAFKA_INTER_BROKER_USER="admin" \
-    KAFKA_PORT_NUMBER="9092" \
-    KAFKA_ZOOKEEPER_PASSWORD="" \
-    KAFKA_ZOOKEEPER_USER="" \
+ENV BITNAMI_APP_NAME="kafka" \
+    BITNAMI_IMAGE_VERSION="2.3.0-debian-9-r69" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/kafka/bin:$PATH"
 
