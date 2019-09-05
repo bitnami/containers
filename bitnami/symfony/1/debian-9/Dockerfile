@@ -10,13 +10,13 @@ RUN bitnami-pkg install symfony-1.5.11-20 --checksum e512f0bbcf6c8a6c01f87adcb8f
 COPY rootfs /
 ENV BITNAMI_APP_NAME="symfony" \
     BITNAMI_IMAGE_VERSION="1.5.11-debian-9-r384" \
+    MARIADB_DATABASE="bitnami_myapp" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_USER="root" \
-    MARIADB_DATABASE="bitnami_myapp" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/symfony/bin:$PATH" \
     SYMFONY_PROJECT_NAME="myapp" \
-    SYMFONY_SKIP_DB=
+    SYMFONY_SKIP_DB=""
 
 EXPOSE 8000
 
