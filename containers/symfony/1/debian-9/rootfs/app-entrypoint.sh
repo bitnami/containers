@@ -17,17 +17,17 @@ if [ "$1" = "/run.sh" ]; then
   if [ ! -d "$PROJECT_DIRECTORY" ] ; then
     log "Creating a project with symfony/skeleton"
 
-    composer create-project symfony/skeleton $SYMFONY_PROJECT_NAME
+    composer create-project symfony/skeleton "$SYMFONY_PROJECT_NAME"
 
     if [ -z "$SYMFONY_SKIP_DB" ] ; then
       log "Installing symfony/orm-pack"
-      composer require symfony/orm-pack -d $PROJECT_DIRECTORY
+      composer require symfony/orm-pack -d "$PROJECT_DIRECTORY"
 
-      export DATABASE_URL="mysql://${MARIADB_USER}:${MARIADB_PASSWORD}@${MARIADB_HOST}:${MARIADB_PORT_NUMBER}/${MARIADB_DATABASE}"
+      export DATABASE_URL="mysql://$MARIADB_USER:$MARIADB_PASSWORD@$MARIADB_HOST:$MARIADB_PORT_NUMBER/$MARIADB_DATABASE"
 
       if [ ! -f "$PROJECT_DIRECTORY/.env.local" ] ; then
-        touch $PROJECT_DIRECTORY/.env.local
-        echo "DATABASE_URL=$DATABASE_URL" >> $PROJECT_DIRECTORY/.env.local
+        touch "$PROJECT_DIRECTORY/.env.local"
+        echo "DATABASE_URL=$DATABASE_URL" >> "$PROJECT_DIRECTORY/.env.local"
         log "Added MariaDB container credentials to .env.local"
       fi
     fi
@@ -49,6 +49,7 @@ if [ "$1" = "/run.sh" ]; then
 fi
 
 echo "symfony successfully initialized"
+
   nami_initialize php
   info "Starting symfony... "
 fi
