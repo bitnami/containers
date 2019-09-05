@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4-ol-7`, `4.0.3-ol-7-r2` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/4.0.3-ol-7-r2/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.0.3-debian-9-r5`, `4`, `4.0.3`, `4.0.3-r5`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/4.0.3-debian-9-r5/4/debian-9/Dockerfile)
+* [`4-debian-9`, `4.0.3-debian-9-r6`, `4`, `4.0.3`, `4.0.3-r6`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/4.0.3-debian-9-r6/4/debian-9/Dockerfile)
 * [`4-centos-7`, `4.0.3-centos-7-r2` (4/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/4.0.3-centos-7-r2/4/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
@@ -302,20 +302,18 @@ $ docker-compose up -d
 
 ## Configuration file
 
-The image looks for a `postgresql.conf` file in `/opt/bitnami/postgresql/conf/`. You can mount a volume at `/bitnami/postgresql/conf/` and copy/edit the `postgresql.conf` file in the `/path/to/postgresql-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
+The image looks for the `repmgr.conf`, `postgresql.conf` and `pg_hba.conf` files in `/opt/bitnami/repmgr/conf/` and `/opt/bitnami/postgresql/conf/`. You can mount a volume at `/bitnami/repmgr/conf/` and copy/edit the configuration files in the `/path/to/custom-conf/`. The default configurations will be populated to the `conf/` directories if `/bitnami/repmgr/conf/` is empty.
 
 ```
-/path/to/postgresql-persistence/conf/
+/path/to/custom-conf/
 └── postgresql.conf
-
-0 directories, 1 file
 ```
 
 As the PostgreSQL with Replication manager image is non-root, you need to set the proper permissions to the mounted directory in your host:
 
 ```bash
-$ sudo chgrp -R root /path/to/postgresql-persistence/conf/
-$ sudo chmod -R g+rwX /path/to/postgresql-persistence/conf/
+$ sudo chgrp -R root /path/to/custom-conf/
+$ sudo chmod -R g+rwX /path/to/custom-conf/
 ```
 
 ### Step 1: Run the PostgreSQL image
@@ -324,7 +322,7 @@ Run the PostgreSQL image, mounting a directory from your host.
 
 ```bash
 $ docker run --name pg-0 \
-    -v /path/to/postgresql-persistence/conf/:/bitnami/postgresql/conf/ \
+    -v /path/to/custom-conf/:/bitnami/repmgr/conf/ \
     bitnami/postgresql-repmgr:latest
 ```
 
@@ -339,13 +337,13 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - /path/to/postgresql-persistence/conf/:/bitnami/postgresql/conf/
+      - /path/to/custom-conf/:/bitnami/repmgr/conf/
   pg-1:
     image: bitnami/postgresql-repmgr:latest
     ports:
       - '5432:5432'
     volumes:
-      - /path/to/postgresql-persistence/conf/:/bitnami/postgresql/conf/
+      - /path/to/custom-conf/:/bitnami/repmgr/conf/
 ```
 
 ### Step 2: Edit the configuration
@@ -353,7 +351,7 @@ services:
 Edit the configuration on your host using your favorite editor.
 
 ```bash
-vi /path/to/postgresql-persistence/conf/postgresql.conf
+vi /path/to/custom-conf/postgresql.conf
 ```
 
 ### Step 3: Restart PostgreSQL
@@ -375,7 +373,7 @@ Refer to the [server configuration](http://www.postgresql.org/docs/10/static/run
 
 ### Allow settings to be loaded from files other than the default `postgresql.conf`
 
-Apart of using a custom `postgresql.conf`, you can include files ending in `.conf` from the `conf.d` directory in the volume at `/bitnami/postgresql/conf/`.
+Apart of using a custom `repmgr.conf`, `postgresql.conf` or `pg_hba.conf`, you can include files ending in `.conf` from the `conf.d` directory in the volume at `/bitnami/postgresql/conf/`.
 For this purpose, the default `postgresql.conf` contains the following section:
 
 ```
@@ -389,24 +387,77 @@ For this purpose, the default `postgresql.conf` contains the following section:
 include_dir = 'conf.d'  # Include files ending in '.conf' from directory 'conf.d'
 ```
 
-In your host, you should create the extended configuration file under the `conf.d` directory:
+If you are using your custom `postgresql.conf`, you should create (or uncomment) the above section in your config file, in this case the structure should be something like
+
+```
+/path/to/custom-conf/
+└── postgresql.conf
+/path/to/extra-custom-conf/
+└── extended.conf
+```
+
+Remember to set the proper permissions to the mounted directory in your host:
 
 ```bash
-mkdir -p /path/to/postgresql-persistence/conf/conf.d/
-vi /path/to/postgresql-persistence/conf/conf.d/extended.conf
+$ sudo chgrp -R root /path/to/extra-custom-conf/
+$ sudo chmod -R g+rwX /path/to/extra-custom-conf/
 ```
 
-If you are using your custom `postgresql.conf`, you should create (or uncomment) the above section in your config file, in this case the `/path/to/postgresql-persistence/conf/` structure should be something like
+### Step 1: Run the PostgreSQL image
 
+Run the PostgreSQL image, mounting a directory from your host.
+
+```bash
+$ docker run --name pg-0 \
+    -v /path/to/extra-custom-conf/:/bitnami/postgresql/conf/conf.d/ \
+    -v /path/to/custom-conf/:/bitnami/repmgr/conf/ \
+    bitnami/postgresql-repmgr:latest
 ```
-/path/to/postgresql-persistence/conf/
-├── conf.d
-│   └── extended.conf
-└── postgresql.conf
 
-1 directory, 2 files
+or using Docker Compose:
+
+```yaml
+version: '2'
+
+services:
+  pg-0:
+    image: bitnami/postgresql-repmgr:latest
+    ports:
+      - '5432:5432'
+    volumes:
+      - /path/to/extra-custom-conf/:/bitnami/postgresql/conf/conf.d/
+      - /path/to/custom-conf/:/bitnami/repmgr/conf/
+  pg-1:
+    image: bitnami/postgresql-repmgr:latest
+    ports:
+      - '5432:5432'
+    volumes:
+      - /path/to/extra-custom-conf/:/bitnami/postgresql/conf/conf.d/
+      - /path/to/custom-conf/:/bitnami/repmgr/conf/
 ```
 
+### Step 2: Edit the configuration
+
+Edit the configuration on your host using your favorite editor.
+
+```bash
+vi /path/to/extra-custom-conf/extended.conf
+```
+
+### Step 3: Restart PostgreSQL
+
+After changing the configuration, restart your PostgreSQL container for changes to take effect.
+
+```bash
+$ docker restart pg-0
+```
+
+or using Docker Compose:
+
+```bash
+$ docker-compose restart pg-0
+$ docker-compose restart pg-1
+```
 
 ## Environment variables
 
