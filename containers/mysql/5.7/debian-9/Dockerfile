@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r351
+FROM bitnami/minideb-extras-base:stretch-r352
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,22 +14,8 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /postunpack.sh
-ENV ALLOW_EMPTY_PASSWORD="no" \
-    BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.27-debian-9-r48" \
-    MYSQL_DATABASE="" \
-    MYSQL_MASTER_HOST="" \
-    MYSQL_MASTER_PORT_NUMBER="" \
-    MYSQL_MASTER_ROOT_PASSWORD="" \
-    MYSQL_MASTER_ROOT_USER="" \
-    MYSQL_PASSWORD="" \
-    MYSQL_PORT_NUMBER="3306" \
-    MYSQL_REPLICATION_MODE="" \
-    MYSQL_REPLICATION_PASSWORD="" \
-    MYSQL_REPLICATION_USER="" \
-    MYSQL_ROOT_PASSWORD="" \
-    MYSQL_ROOT_USER="root" \
-    MYSQL_USER="" \
+ENV BITNAMI_APP_NAME="mysql" \
+    BITNAMI_IMAGE_VERSION="5.7.27-debian-9-r49" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH"
 
