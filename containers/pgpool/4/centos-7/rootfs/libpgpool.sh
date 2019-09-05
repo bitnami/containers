@@ -317,19 +317,19 @@ base $PGPOOL_LDAP_BASE
 binddn $PGPOOL_LDAP_BIND_DN
 bindpw $PGPOOL_LDAP_BIND_PASSWORD
 EOF
-    if [[ -n "${DB_LDAP_BASE_LOOKUP}" ]]; then
+    if [[ -n "${PGPOOL_LDAP_BASE_LOOKUP}" ]]; then
         cat >> "/etc/nslcd.conf" << EOF
-base passwd $DB_LDAP_BASE_LOOKUP
+base passwd $PGPOOL_LDAP_BASE_LOOKUP
 EOF
     fi
-    if [[ -n "${DB_LDAP_SCOPE}" ]]; then
+    if [[ -n "${PGPOOL_LDAP_SCOPE}" ]]; then
         cat >> "/etc/nslcd.conf" << EOF
-scope $DB_LDAP_SCOPE
+scope $PGPOOL_LDAP_SCOPE
 EOF
     fi
-    if [[ -n "${DB_LDAP_TLS_REQCERT}" ]]; then
+    if [[ -n "${PGPOOL_LDAP_TLS_REQCERT}" ]]; then
             cat >> "/etc/nslcd.conf" << EOF
-tls_reqcert $DB_LDAP_TLS_REQCERT
+tls_reqcert $PGPOOL_LDAP_TLS_REQCERT
 EOF
     fi
     chmod 600 /etc/nslcd.conf
@@ -339,9 +339,10 @@ EOF
         centos-*|rhel-*|ol-*) openldap_conf=/etc/openldap/ldap.conf ;;
         *) ;;
     esac
-    sed -i "s/BASE.*/BASE  \"$PGPOOL_LDAP_BASE\"/" "${openldap_conf}"
-    sed -i "s/URI.*/URI    $PGPOOL_LDAP_URI/" "${openldap_conf}"
-    nslcd --debug &
+    cat >>"${openldap_conf}"<<EOF
+BASE $PGPOOL_LDAP_BASE
+URI $PGPOOL_LDAP_URI
+EOF
 }
 
 ########################
