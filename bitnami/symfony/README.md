@@ -1,8 +1,12 @@
 
 # Bitnami Symfony Development Container
 
-> Note that this is a development container that includes the [`symfony` command-line tool](https://symfony.com/blog/introducing-the-new-symfony-installer).
-> This allows you to create a project based on any version of symfony.
+> Note that this is a development container. If a Symfony app is not already
+> present, `composer create-project symfony/skeleton $SYMFONY_PROJECT_NAME`
+> is run to create a Symfony 4.x project.
+>
+> Include a non null value in the `$SYMFONY_SKIP_DB` envvar/flag, to skip over
+> installing `symfony/orm-pack`.
 
 ## TL;DR;
 
@@ -73,6 +77,36 @@ Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitn
 
 ```bash
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-symfony/master/docker-compose.yml
+```
+
+Set a few environment variables in the `docker-compose.yml`:
+
+```yaml
+version: '2'
+
+services:
+  myapp:
+    image: 'bitnami/symfony:1'
+    ports:
+      - '8000:8000'
+    volumes:
+      - '.:/app'
+    environment:
+      - SYMFONY_PROJECT_NAME=myapp
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - MARIADB_USER=bobby
+      - MARIADB_PASSWORD=tables
+      - MARIADB_DATABASE=myapp
+    depends_on:
+      - mariadb
+  mariadb:
+    image: 'bitnami/mariadb:10.3'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bobby
+      - MARIADB_PASSWORD=tables
+      - MARIADB_DATABASE=myapp
 ```
 
 Finally launch the Symfony application development environment using:
