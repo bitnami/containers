@@ -7,20 +7,9 @@ services:
       - '8000:8000'
     volumes:
       - '.:/app'
-    environment:
-      - SYMFONY_PROJECT_NAME=myapp
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - MARIADB_USER=bobby
-      - MARIADB_PASSWORD=tables
-      - MARIADB_DATABASE=myapp
     depends_on:
       - mariadb
   mariadb:
     image: 'bitnami/mariadb:10.3'
     environment:
-      - MARIADB_PORT_NUMBER=3306
-      - MARIADB_USER=bobby
-      - MARIADB_PASSWORD=tables
-      - MARIADB_DATABASE=myapp
       - ALLOW_EMPTY_PASSWORD=yes

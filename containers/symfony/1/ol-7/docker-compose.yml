@@ -1,4 +1,5 @@
 version: '2'
+
 services:
   myapp:
     image: 'bitnami/symfony:1-ol-7'

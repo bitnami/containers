@@ -19,17 +19,17 @@ if [ "$1" = "/run.sh" ]; then
 
     composer create-project symfony/skeleton $SYMFONY_PROJECT_NAME
 
-    if [ ! -z "$SYMFONY_SKIP_DB" ] ; then
+    if [ -z "$SYMFONY_SKIP_DB" ] ; then
       log "Installing symfony/orm-pack"
       composer require symfony/orm-pack -d $PROJECT_DIRECTORY
 
-      export DATABASE_URL=mysql://$MARIADB_USER@$MARIADB_HOST/$MARIADB_DATABASE
-    fi
+      export DATABASE_URL="mysql://${MARIADB_USER}:${MARIADB_PASSWORD}@${MARIADB_HOST}:${MARIADB_PORT_NUMBER}/${MARIADB_DATABASE}"
 
-    if [ ! -f "$PROJECT_DIRECTORY/.env.local" ] ; then
-      touch $PROJECT_DIRECTORY/.env.local
-      echo "DATABASE_URL=$DATABASE_URL" >> $PROJECT_DIRECTORY/.env.local
-      log "Added MariaDB container credentials to .env.local"
+      if [ ! -f "$PROJECT_DIRECTORY/.env.local" ] ; then
+        touch $PROJECT_DIRECTORY/.env.local
+        echo "DATABASE_URL=$DATABASE_URL" >> $PROJECT_DIRECTORY/.env.local
+        log "Added MariaDB container credentials to .env.local"
+      fi
     fi
 
     log "Symfony app created"
@@ -44,7 +44,7 @@ if [ "$1" = "/run.sh" ]; then
 
   # Link Symfony app to the index
   if [ ! -f "$WEB_DIR/index.php" ] && [ -f "$WEB_DIR/app.php" ]; then
-    sudo ln -s "$WEB_DIR/app.php" "$WEB_DIR/web/index.php"
+    ln -s "$WEB_DIR/app.php" "$WEB_DIR/index.php"
   fi
 fi
 
