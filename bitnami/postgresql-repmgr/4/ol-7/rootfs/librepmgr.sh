@@ -41,6 +41,7 @@ repmgr_env() {
 # Paths
 export REPMGR_BASE_DIR="/opt/bitnami/repmgr"
 export REPMGR_CONF_DIR="${REPMGR_BASE_DIR}/conf"
+export REPMGR_MOUNTED_CONF_DIR="${REPMGR_MOUNTED_CONF_DIR:-/bitnami/repmgr/conf}"
 export REPMGR_TMP_DIR="${REPMGR_BASE_DIR}/tmp"
 export REPMGR_EVENTS_DIR="${REPMGR_BASE_DIR}/events"
 export REPMGR_PRIMARY_ROLE_LOCK_FILE_NAME="${REPMGR_TMP_DIR}/master.lock"
@@ -353,14 +354,14 @@ repmgr_inject_postgresql_configuration() {
     postgresql_set_property "logging_collector" "on"
     postgresql_set_property "log_directory" "$POSTGRESQL_LOG_DIR"
     postgresql_set_property "log_filename" "postgresql.log"
-    cp "$POSTGRESQL_CONF_FILE" "$POSTGRESQL_MOUNTED_CONF_DIR/postgresql.conf"
+    cp "$POSTGRESQL_CONF_FILE" "${POSTGRESQL_MOUNTED_CONF_DIR}/postgresql.conf"
 }
 
 ########################
 # Use a different pg_hba.conf file by pretending it's an injected custom configuration\
 # Globals:
+#   POSTGRESQL_MOUNTED_CONF_DIR
 #   REPMGR_*
-#   POSTGRESQL_*
 # Arguments:
 #   None
 # Returns:
@@ -382,21 +383,29 @@ EOF
 # Prepare PostgreSQL default configuration
 # Globals:
 #   POSTGRESQL_MOUNTED_CONF_DIR
+#   REPMGR_MOUNTED_CONF_DIR
 # Arguments:
 #   None
 # Returns:
 #   None
 #########################
 repmgr_postgresql_configuration() {
-  repmgr_info "Preparing PostgreSQL configuration..."
-  # User injected custom configuration
-  if [[ -d "$POSTGRESQL_MOUNTED_CONF_DIR" ]] && compgen -G "$POSTGRESQL_MOUNTED_CONF_DIR"/* > /dev/null; then
-      repmgr_debug "User injected custom configuration detected!"
-  else
-      ensure_dir_exists "$POSTGRESQL_MOUNTED_CONF_DIR"
-      repmgr_inject_postgresql_configuration
-      repmgr_inject_pghba_configuration
-  fi
+    repmgr_info "Preparing PostgreSQL configuration..."
+    # User injected custom configuration
+    if [[ -d "$REPMGR_MOUNTED_CONF_DIR" ]] && compgen -G "$REPMGR_MOUNTED_CONF_DIR"/* > /dev/null; then
+        repmgr_debug "User injected custom configuration detected!"
+    fi
+    ensure_dir_exists "$POSTGRESQL_MOUNTED_CONF_DIR"
+    if [[ -f "${REPMGR_MOUNTED_CONF_DIR}/postgresql.conf" ]]; then
+        cp "${REPMGR_MOUNTED_CONF_DIR}/postgresql.conf" "${POSTGRESQL_MOUNTED_CONF_DIR}/postgresql.conf"
+    else
+        repmgr_inject_postgresql_configuration
+    fi
+    if [[ -f "${REPMGR_MOUNTED_CONF_DIR}/pg_hba.conf" ]]; then
+        cp "${REPMGR_MOUNTED_CONF_DIR}/pg_hba.conf" "${POSTGRESQL_MOUNTED_CONF_DIR}/pg_hba.conf"
+    else
+        repmgr_inject_pghba_configuration
+    fi
 }
 
 ########################
@@ -412,7 +421,11 @@ repmgr_postgresql_configuration() {
 repmgr_generate_repmgr_config() {
     repmgr_info "Preparing repmgr configuration..."
 
-    cat << EOF >> "$REPMGR_CONF_FILE"
+    if [[ -f "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" ]]; then
+        repmgr_info "Custom repmgr.conf file detected"
+        cp "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" "$REPMGR_CONF_FILE"
+    else
+        cat << EOF >> "$REPMGR_CONF_FILE"
 event_notification_command='${REPMGR_EVENTS_DIR}/router.sh %n %e %s "%t" "%d"'
 ssh_options=-o \"StrictHostKeyChecking no\" -v
 use_replication_slots=$REPMGR_USE_REPLICATION_SLOTS
@@ -433,6 +446,7 @@ degraded_monitoring_timeout=$REPMGR_DEGRADED_MONITORING_TIMEOUT
 data_directory=$POSTGRESQL_DATA_DIR
 async_query_timeout=$REPMGR_MASTER_RESPONSE_TIMEOUT
 EOF
+    fi
 }
 
 ########################
@@ -587,6 +601,8 @@ repmgr_initialize() {
         postgresql_stop
         postgresql_start_bg
         repmgr_register_primary
+        # Allow running custom initialization scripts
+        postgresql_custom_init_scripts
     else
         postgresql_start_bg
         repmgr_unregister_standby
