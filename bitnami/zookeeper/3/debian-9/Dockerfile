@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r351
+FROM bitnami/minideb-extras-base:stretch-r352
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 zlib1g
 RUN . ./libcomponent.sh && component_unpack "java" "1.8.222-0" --checksum e5a677e160c01cd605bc6aae75cc937d4b2d37514b3e1d0a1dd2d332422e68c7
-RUN . ./libcomponent.sh && component_unpack "zookeeper" "3.5.5-4" --checksum 82e99f2555a61a0782f92172f8d9942f1bfd84fe243e6ca4a04ccaa0aa5571b6
+RUN . ./libcomponent.sh && component_unpack "zookeeper" "3.5.5-5" --checksum 2d7751f1471b04bcff3334dcf030f541d3d035728b23ead262a891b530bd4a21
 
 COPY rootfs /
 RUN /postunpack.sh
