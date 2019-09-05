@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r401
+FROM bitnami/oraclelinux-extras-base:7-r402
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,23 +15,11 @@ RUN . ./libcomponent.sh && component_unpack "rabbitmq" "3.7.17-0" --checksum 187
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.7.17-ol-7-r38" \
+    BITNAMI_IMAGE_VERSION="3.7.17-ol-7-r39" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:/opt/bitnami/rabbitmq/sbin:$PATH" \
-    RABBITMQ_CLUSTER_NODE_NAME="" \
-    RABBITMQ_CLUSTER_PARTITION_HANDLING="ignore" \
-    RABBITMQ_DISK_FREE_LIMIT="{mem_relative, 1.0}" \
-    RABBITMQ_ERL_COOKIE="" \
-    RABBITMQ_HASHED_PASSWORD="" \
-    RABBITMQ_MANAGER_PORT_NUMBER="15672" \
-    RABBITMQ_NODE_NAME="rabbit@localhost" \
-    RABBITMQ_NODE_PORT_NUMBER="5672" \
-    RABBITMQ_NODE_TYPE="stats" \
-    RABBITMQ_PASSWORD="bitnami" \
-    RABBITMQ_USERNAME="user" \
-    RABBITMQ_VHOST="/"
+    PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:/opt/bitnami/rabbitmq/sbin:$PATH"
 
 EXPOSE 4369 5672 25672 15672
 
