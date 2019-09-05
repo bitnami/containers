@@ -5,8 +5,8 @@
 > present, `composer create-project symfony/skeleton $SYMFONY_PROJECT_NAME`
 > is run to create a Symfony 4.x project.
 >
-> Include a non null value in the `$SYMFONY_SKIP_DB,` envvar/flag, to skip over
-> installing `symfony/orm-pack`
+> Include a non null value in the `$SYMFONY_SKIP_DB` envvar/flag, to skip over
+> installing `symfony/orm-pack`.
 
 ## TL;DR;
 
@@ -15,8 +15,6 @@
 ```bash
 $ mkdir ~/myapp && cd ~/myapp
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-symfony/master/docker-compose.yml
-# Set some default envvars
-$ echo "SYMFONY_PROJECT_NAME=myapp\nMARIADB_HOST=mariadb\nMARIADB_PORT_NUMBER=3306\nMARIADB_USER=bobby\nMARIADB_PASSWORD=tables\nMARIADB_DATABASE=myapp" > .env
 $ docker-compose up
 ```
 
@@ -81,10 +79,34 @@ Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitn
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-symfony/master/docker-compose.yml
 ```
 
-Set a few environment variables
+Set a few environment variables in the `docker-compose.yml`:
 
-```bash
-$ echo "SYMFONY_PROJECT_NAME=myapp\nMARIADB_HOST=mariadb\nMARIADB_PORT_NUMBER=3306\nMARIADB_USER=bobby\nMARIADB_PASSWORD=tables\nMARIADB_DATABASE=myapp" > .env
+```yaml
+version: '2'
+
+services:
+  myapp:
+    image: 'bitnami/symfony:1'
+    ports:
+      - '8000:8000'
+    volumes:
+      - '.:/app'
+    environment:
+      - SYMFONY_PROJECT_NAME=myapp
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - MARIADB_USER=bobby
+      - MARIADB_PASSWORD=tables
+      - MARIADB_DATABASE=myapp
+    depends_on:
+      - mariadb
+  mariadb:
+    image: 'bitnami/mariadb:10.3'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bobby
+      - MARIADB_PASSWORD=tables
+      - MARIADB_DATABASE=myapp
 ```
 
 Finally launch the Symfony application development environment using:
