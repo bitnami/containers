@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r401
+FROM bitnami/oraclelinux-extras-base:7-r402
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,21 +14,8 @@ RUN . ./libcomponent.sh && component_unpack "kafka" "2.3.0-0" --checksum a5bb07f
 
 COPY rootfs /
 RUN /postunpack.sh
-ENV ALLOW_PLAINTEXT_LISTENER="no" \
-    BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.3.0-ol-7-r74" \
-    KAFKA_BROKER_PASSWORD="bitnami" \
-    KAFKA_BROKER_USER="user" \
-    KAFKA_CERTIFICATE_PASSWORD="" \
-    KAFKA_CFG_ADVERTISED_LISTENERS="PLAINTEXT://:9092" \
-    KAFKA_CFG_LISTENERS="PLAINTEXT://:9092" \
-    KAFKA_CFG_ZOOKEEPER_CONNECT="localhost:2181" \
-    KAFKA_HEAP_OPTS="-Xmx1024m -Xms1024m" \
-    KAFKA_INTER_BROKER_PASSWORD="bitnami" \
-    KAFKA_INTER_BROKER_USER="admin" \
-    KAFKA_PORT_NUMBER="9092" \
-    KAFKA_ZOOKEEPER_PASSWORD="" \
-    KAFKA_ZOOKEEPER_USER="" \
+ENV BITNAMI_APP_NAME="kafka" \
+    BITNAMI_IMAGE_VERSION="2.3.0-ol-7-r75" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/kafka/bin:$PATH"
 

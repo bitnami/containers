@@ -47,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.3.0-ol-7-r74` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.3.0-ol-7-r74/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.3.0-ol-7-r75` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.3.0-ol-7-r75/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.3.0-debian-9-r68`, `2`, `2.3.0`, `2.3.0-r68`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.3.0-debian-9-r68/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
@@ -432,8 +432,8 @@ services:
     image: 'bitnami/zookeeper:latest'
     ports:
      - '2181:2181'
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
+    environment
+     - ALLOW_ANONYMOUS_LOGIN=yes
   kafka1:
     image: 'bitnami/kafka:latest'
     ports:
