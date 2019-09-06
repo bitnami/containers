@@ -94,10 +94,9 @@ is_minio_running() {
 #   None
 #########################
 minio_start_bg() {
-    local exec
-    local args
-    exec=$(command -v minio)
-    args=("server" "--certs-dir" "${MINIO_CERTSDIR}")
+    local -r exec=$(command -v minio)
+    local args=("server" "--certs-dir" "${MINIO_CERTSDIR}")
+
     if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
         read -r -a nodes <<< "$(tr ',;' ' ' <<< "${MINIO_DISTRIBUTED_NODES}")"
         for node in "${nodes[@]}"; do
@@ -214,7 +213,11 @@ minio_create_default_buckets() {
         read -r -a buckets <<< "$(tr ',;' ' ' <<< "${MINIO_DEFAULT_BUCKETS}")"
         info "Creating default buckets..."
         for b in "${buckets[@]}"; do
-            minio_client_execute mb "local/${b}"
+            if ! minio_client_bucket_exists "local/${b}"; then
+                minio_client_execute mb "local/${b}"
+            else
+                info "Bucket local/${b} already exists, skipping creation."
+            fi
         done
     fi
 }
