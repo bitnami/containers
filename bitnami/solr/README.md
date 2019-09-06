@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8-ol-7`, `8.2.0-ol-7-r39` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.2.0-ol-7-r39/8/ol-7/Dockerfile)
-* [`8-debian-9`, `8.2.0-debian-9-r37`, `8`, `8.2.0`, `8.2.0-r37`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.2.0-debian-9-r37/8/debian-9/Dockerfile)
+* [`8-debian-9`, `8.2.0-debian-9-r38`, `8`, `8.2.0`, `8.2.0-r38`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.2.0-debian-9-r38/8/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
 
