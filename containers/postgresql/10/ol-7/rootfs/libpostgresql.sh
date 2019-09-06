@@ -385,7 +385,7 @@ postgresql_configure_replication_parameters() {
     postgresql_set_property "hot_standby" "on"
     if (( POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS > 0 )); then
         postgresql_set_property "synchronous_commit" "$POSTGRESQL_SYNCHRONOUS_COMMIT_MODE"
-        postgresql_set_property "synchronous_standby_names" "$POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS ($POSTGRESQL_CLUSTER_APP_NAME)"
+        postgresql_set_property "synchronous_standby_names" "${POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS} (\"${POSTGRESQL_CLUSTER_APP_NAME}\")"
     fi
 }
 
@@ -783,6 +783,6 @@ postgresql_configure_recovery() {
     cp -f "$POSTGRESQL_BASE_DIR/share/recovery.conf.sample" "$POSTGRESQL_RECOVERY_FILE"
     chmod 600 "$POSTGRESQL_RECOVERY_FILE"
     postgresql_set_property "standby_mode" "on" "$POSTGRESQL_RECOVERY_FILE"
-    postgresql_set_property "primary_conninfo" "host=$POSTGRESQL_MASTER_HOST port=$POSTGRESQL_MASTER_PORT_NUMBER user=$POSTGRESQL_REPLICATION_USER password=$POSTGRESQL_REPLICATION_PASSWORD application_name=$POSTGRESQL_CLUSTER_APP_NAME" "$POSTGRESQL_RECOVERY_FILE"
-    postgresql_set_property "trigger_file" "/tmp/postgresql.trigger.$POSTGRESQL_MASTER_PORT_NUMBER" "$POSTGRESQL_RECOVERY_FILE"
+    postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD} application_name=\"${POSTGRESQL_CLUSTER_APP_NAME}\"" "$POSTGRESQL_RECOVERY_FILE"
+    postgresql_set_property "trigger_file" "/tmp/postgresql.trigger.${POSTGRESQL_MASTER_PORT_NUMBER}" "$POSTGRESQL_RECOVERY_FILE"
 }
