@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r352
+FROM bitnami/minideb-extras-base:stretch-r354
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "spark" "2.4.4-0" --checksum cc74cae
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="spark" \
-    BITNAMI_IMAGE_VERSION="2.4.4-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="2.4.4-debian-9-r1" \
     JAVA_HOME="/opt/bitnami/java" \
     NSS_WRAPPER_GROUP="/opt/bitnami/spark/tmp/nss_group" \
     NSS_WRAPPER_PASSWD="/opt/bitnami/spark/tmp/nss_passwd" \
