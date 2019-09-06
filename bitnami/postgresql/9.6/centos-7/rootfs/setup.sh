@@ -27,10 +27,11 @@ postgresql_validate
 trap "postgresql_stop" EXIT
 # Ensure 'daemon' user exists when running as 'root'
 am_i_root && ensure_user_exists "$POSTGRESQL_DAEMON_USER" "$POSTGRESQL_DAEMON_GROUP"
+# Allow running custom pre-initialization scripts
+postgresql_custom_pre_init_scripts
 # Ensure PostgreSQL is initialized
 postgresql_initialize
 # Allow running custom initialization scripts
-postgresql_custom_pre_init_scripts
 postgresql_custom_init_scripts
 
 # Allow remote connections once the initialization is finished
