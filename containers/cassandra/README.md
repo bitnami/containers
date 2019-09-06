@@ -44,7 +44,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.11.4-ol-7-r200` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.4-ol-7-r200/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.11.4-ol-7-r201` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.4-ol-7-r201/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.11.4-debian-9-r187`, `3`, `3.11.4`, `3.11.4-r187`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.4-debian-9-r187/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
@@ -277,6 +277,15 @@ A cluster can easily be setup with the Bitnami Cassandra Docker Image. **In case
  - `CASSANDRA_PASSWORD_SEEDER`: Password seeder will change the Cassandra default credentials at initialization. Only one node should be marked as password seeder. Default: **no**
  - `CASSANDRA_PASSWORD`: Cassandra user password. Default: **cassandra**
 
+Cassandra is a resource-intensive application. Depending on the target system, the initialization can take long. The container has internal timeouts when checking the initialization process. You can use the following environment variables to address that:
+
+- `CASSANDRA_INIT_MAX_RETRIES`: Maximum retries for checking that Cassandra is initialized. Default: **100**.
+- `CASSANDRA_INIT_SLEEP_TIME`: Sleep time (in seconds) between retries for checking that Cassandra is initialized. Default: **5**.
+- `CASSANDRA_CQL_MAX_RETRIES`: Maximum retries for checking that the Cassandra client can access the database in localhost. Default: **20**.
+- `CASSANDRA_CQL_SLEEP_TIME`: Sleep time (in seconds) between retries for checking that the Cassandra client can access the database in localhost. Default: **5**.
+- `CASSANDRA_PEER_CQL_MAX_RETRIES`: Maximum retries for checking that the Cassandra client can access the database located in a peer host. This is used for ensuring that all of the peers are initialized before changing the database credentials. Default: **100**.
+- `CASSANDRA_PEER_CQL_SLEEP_TIME`: Sleep time (in seconds) between retries for checking that the Cassandra client can access the database in a peer host. Default: **5**.
+
 ### Step 1: Create a new network.
 
 ```bash
@@ -492,6 +501,10 @@ $ docker-compose up cassandra
 ```
 
 # Notable Changes
+
+## 3.11.4-debian-9-r181 and 3.11.4-ol-7-r194
+
+- Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder.
 
 ## 3.11.3-r129
 

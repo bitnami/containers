@@ -1,45 +1,27 @@
-FROM bitnami/oraclelinux-extras:7-r453
+FROM bitnami/oraclelinux-extras-base:7-r407
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    HOME="/"
+    HOME="/" \
+    OS_ARCH="x86_64" \
+    OS_FLAVOUR="ol-7" \
+    OS_NAME="linux"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs glibc keyutils-libs krb5-libs libcom_err libgcc libselinux ncurses-libs nss-softokn-freebl openssl-libs pcre readline sqlite zlib
-RUN bitnami-pkg install python-2.7.16-0 --checksum f1818dfd2f72ba498d54702d4e6aa44fcdecc1f0b1fc7d99703e74b4626f6395
-RUN bitnami-pkg install java-1.8.222-0 --checksum a90f4ce71ff9b392efdf61e6941117afa31d2d6528bd1a3cad1c6459bcac2b0b
-RUN bitnami-pkg unpack cassandra-3.11.4-3 --checksum 64788e4a1c77818adc285cae90b159d45d40b8488440d3c1d0dd253f3c854b72
-RUN mkdir -p /docker-entrypoint-initdb.d /opt/bitnami/cassandra/conf/
-RUN chmod -R g+rwX /opt/bitnami/cassandra/conf/
+RUN . ./libcomponent.sh && component_unpack "python" "2.7.16-0" --checksum f1818dfd2f72ba498d54702d4e6aa44fcdecc1f0b1fc7d99703e74b4626f6395
+RUN . ./libcomponent.sh && component_unpack "java" "1.8.222-0" --checksum a90f4ce71ff9b392efdf61e6941117afa31d2d6528bd1a3cad1c6459bcac2b0b
+RUN . ./libcomponent.sh && component_unpack "cassandra" "3.11.4-3" --checksum 64788e4a1c77818adc285cae90b159d45d40b8488440d3c1d0dd253f3c854b72
 
 COPY rootfs /
+RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.4-ol-7-r200" \
-    CASSANDRA_CLIENT_ENCRYPTION="false" \
-    CASSANDRA_CLUSTER_NAME="My Cluster" \
-    CASSANDRA_CQL_PORT_NUMBER="9042" \
-    CASSANDRA_DATACENTER="dc1" \
-    CASSANDRA_ENABLE_REMOTE_CONNECTIONS="true" \
-    CASSANDRA_ENABLE_RPC="true" \
-    CASSANDRA_ENDPOINT_SNITCH="SimpleSnitch" \
-    CASSANDRA_HOST="" \
-    CASSANDRA_INTERNODE_ENCRYPTION="none" \
-    CASSANDRA_JMX_PORT_NUMBER="7199" \
-    CASSANDRA_KEYSTORE_PASSWORD="cassandra" \
-    CASSANDRA_NUM_TOKENS="256" \
-    CASSANDRA_PASSWORD="cassandra" \
-    CASSANDRA_PASSWORD_SEEDER="no" \
-    CASSANDRA_RACK="rack1" \
-    CASSANDRA_SEEDS="" \
-    CASSANDRA_STARTUP_CQL="" \
-    CASSANDRA_TRANSPORT_PORT_NUMBER="7000" \
-    CASSANDRA_TRUSTSTORE_PASSWORD="cassandra" \
-    CASSANDRA_USER="cassandra" \
+    BITNAMI_IMAGE_VERSION="3.11.4-ol-7-r201" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/cassandra/bin:$PATH"
 
 EXPOSE 9042 7000
 
 USER 1001
-ENTRYPOINT [ "/app-entrypoint.sh" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/run.sh" ]

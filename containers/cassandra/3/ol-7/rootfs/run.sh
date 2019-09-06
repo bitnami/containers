@@ -1,64 +1,67 @@
 #!/bin/bash
+
 set -o errexit
+set -o nounset
 set -o pipefail
+# set -o xtrace # Uncomment this line for debugging purpose
+# shellcheck disable=SC1091
 
-. /opt/bitnami/base/functions
-. /opt/bitnami/base/helpers
+# Load libraries
+. /liblog.sh
+. /libcassandra.sh
+. /libos.sh
 
-USER=cassandra
-DAEMON=cassandra
-EXEC=$(which $DAEMON)
-ARGS=("-p /opt/bitnami/cassandra/tmp/cassandra.pid" "-R" "-f")
+# Load Cassandra environment variables
+eval "$(cassandra_env)"
 
-info "Starting ${DAEMON}..."
+# As we cannot use "local" we will use "readonly" for read-only variables.
+# The scope of "readonly" is global, so we attach "__run_" to avoid conflicts 
+# with other variables in libcassandra.sh
 
-# If container is started as `root` user
-if [ $EUID -eq 0 ]; then
-    gosu "$USER" "$EXEC" "${ARGS[@]}" &
-else
-    "$EXEC" "${ARGS[@]}" &
-fi
+info "** Starting Cassandra **"
 
-echo $! > /opt/bitnami/cassandra/tmp/cassandra.pid
+# During the startup logic, we bootstap Cassandra. This is because Cassandra seeder nodes
+# need to be able to connect to each other, and after that authentication can be configured.
+# However, some applications may detect at this point that the database is ready.
+# While in other bitnami containers we would stop the database and run it in foreground,
+# we prefer keeping it running in this case.
+# So, in this run.sh script, we first check if Cassandra was already running in 
+# one of the two cases:
+#
+#  1) Initial cluster initialization
+#  2) Init scripts
+#
+# If none of the two cases apply, we assume it is an error and exit
+if is_cassandra_running; then
+    readonly __run_pid="$(get_pid_from_file "$CASSANDRA_PID_FILE")"
+    running_log_file=""
 
-# allow running custom initialization scripts
-if [[ -z $CASSANDRA_IGNORE_INITDB_SCRIPTS ]] && [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|cql\)") ]] && [[ ! -f /bitnami/cassandra/.user_scripts_initialized ]]; then
-    cmd=("cqlsh" "-u" "$CASSANDRA_USER")
-    if [[ -n $CASSANDRA_PASSWORD ]]; then
-        cmd+=("-p" "$CASSANDRA_PASSWORD")
-    fi
-    info "Initialization: Waiting for Cassandra to be available"
-    cassandra_available=0
-    for i in {1..60}; do
-        echo "Attempt $i"
-        if "${cmd[@]}" -e "DESCRIBE KEYSPACES"; then
-            cassandra_available=1
-            break
-        fi
-        sleep 10
-    done
-    if [[ $cassandra_available == 0 ]]; then
-        echo "Error: Cassandra is not available after 600 seconds" 
+    if [[ -f "$CASSANDRA_FIRST_BOOT_LOG_FILE" ]]; then
+        running_log_file="$CASSANDRA_FIRST_BOOT_LOG_FILE"
+        info "Cassandra already running with PID $__run_pid because of the intial cluster setup"
+    elif [[ -f "$CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE" ]]; then
+        running_log_file="$CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE"
+        info "Cassandra already running PID $__run_pid because of the init scripts execution"
+    else
+        error "Cassandra is already running for an unexpected reason. Exiting"
         exit 1
     fi
-    info "Loading user files from /docker-entrypoint-initdb.d";
-    tmp_file=/tmp/filelist
-    find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|cql\)" > $tmp_file
-    while read -r f; do
-        case "$f" in
-            *.sh)
-                if [ -x "$f" ]; then
-                    echo "Executing $f"; "$f"
-                else
-                    echo "Sourcing $f"; . "$f"
-                fi
-                ;;
-            *.cql)    echo "Executing $f"; "${cmd[@]}" -f "$f"; echo ;;
-            *)        echo "Ignoring $f" ;;
-        esac
-    done < $tmp_file
-    rm $tmp_file
-    touch /bitnami/cassandra/.user_scripts_initialized
-fi
 
-wait
+    info "Tailing $running_log_file"
+    readonly __run_tail_cmd="$(which tail)"
+    readonly __run_tail_flags=("--pid=${__run_pid}" "-n" "1000" "-f" "$running_log_file")
+
+    if am_i_root; then
+        exec gosu "$CASSANDRA_DAEMON_USER" "${__run_tail_cmd}" "${__run_tail_flags[@]}"
+    else
+        exec "${__run_tail_cmd}" "${__run_tail_flags[@]}"
+    fi
+else
+    readonly __run_cmd="${CASSANDRA_BIN_DIR}/cassandra"
+    readonly __run_flags=("-p $CASSANDRA_PID_FILE" "-R" "-f")
+    if am_i_root; then
+        exec gosu "$CASSANDRA_DAEMON_USER" "${__run_cmd}" "${__run_flags[@]}"
+    else
+        exec "${__run_cmd}" "${__run_flags[@]}"
+    fi
+fi
