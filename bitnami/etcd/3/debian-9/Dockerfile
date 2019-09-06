@@ -3,15 +3,15 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/etcd-3.4.0-0-linux-amd64-debian-9.tar.gz && \
-    echo "0ae0dd4bfad5f3f72aefe2b3e678fde62900a5e18a3bdb5c889d9f7851d5155d  /tmp/bitnami/pkg/cache/etcd-3.4.0-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/etcd-3.4.0-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/etcd-3.4.0-0-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/etcd-3.4.0-1-linux-amd64-debian-9.tar.gz && \
+    echo "2a044835e79d8fc9c41d64b67ef02a6513dec9327cf83015cc42142e81eaa357  /tmp/bitnami/pkg/cache/etcd-3.4.0-1-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/etcd-3.4.0-1-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/etcd-3.4.0-1-linux-amd64-debian-9.tar.gz
 
 COPY rootfs /
 RUN chmod g+rwX /opt/bitnami/etcd
 ENV BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.4.0-debian-9-r4" \
+    BITNAMI_IMAGE_VERSION="3.4.0-debian-9-r5" \
     ETCDCTL_API="3" \
     ETCD_ADVERTISE_CLIENT_URLS="http://127.0.0.1:2379" \
     ETCD_DATA_DIR="/opt/bitnami/etcd/data/" \
