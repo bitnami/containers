@@ -303,7 +303,7 @@ mongodb_start_bg() {
     fi
 
     # wait until the server is up and answering queries
-    retry_while "mongodb_is_mongodb_started" 120 5
+    retry_while "mongodb_is_mongodb_started" 25
 }
 
 ########################
@@ -559,29 +559,6 @@ EOF
 }
 
 ########################
-# Retries a command until timeout
-# Arguments:
-#   $1 - cmd (as a string)
-#   $2 - timeout (in seconds). Default: 60
-#   $3 - step (in seconds). Default: 5
-# Returns:
-#   None
-#########################
-retry_while() {
-    local -r cmd=${1:?cmd is missing}
-    local -r timeout="${2:-60}"
-    local -r step="${3:-5}"
-    local return_value=1
-
-    read -r -a command <<< "$cmd"
-    for ((i = 0 ; i <= timeout ; i+=step )); do
-        "${command[@]}" && return_value=0 && break
-        sleep "$step"
-    done
-    return $return_value
-}
-
-########################
 # Configure primary node
 # Globals:
 #   MONGODB_*
@@ -596,7 +573,7 @@ mongodb_configure_primary() {
     info "Configuring MongoDB primary node...: $node"
     wait-for-port -timeout 360 "$MONGODB_PORT_NUMBER"
 
-    retry_while "mongodb_is_primary_node_initiated $node" 90 5
+    retry_while "mongodb_is_primary_node_initiated $node" 15
 }
 
 ########################
@@ -635,7 +612,7 @@ mongodb_wait_confirmation() {
     local node="${1:?node is required}"
 
     debug "Waiting until $node is added to the replica set..."
-    if retry_while "mongodb_is_node_confirmed $node" 90 5; then
+    if retry_while "mongodb_is_node_confirmed $node" 15; then
         info "Node $node is confirmed!"
     else
         error "Unable to confirm that $node has been added to the replica set!"
@@ -700,10 +677,10 @@ mongodb_wait_for_primary_node() {
     wait-for-port -host "$MONGODB_PRIMARY_HOST" -timeout 360 "$MONGODB_PRIMARY_PORT_NUMBER"
     info "Found MongoDB server listening at $MONGODB_PRIMARY_HOST:$MONGODB_PRIMARY_PORT_NUMBER !"
 
-    retry_while "mongodb_is_primary_available" 90 5
+    retry_while "mongodb_is_primary_available" 15
     info "MongoDB server listening and working at $MONGODB_PRIMARY_HOST:$MONGODB_PRIMARY_PORT_NUMBER !"
     debug "Waiting for primary to be ready..."
-    if retry_while "mongodb_is_primary_node_up" 180 5; then
+    if retry_while "mongodb_is_primary_node_up" 35; then
         info "Primary node ready."
     else
         error "Unable to validate $MONGODB_PRIMARY_HOST as primary node in the replica set scenario!"
@@ -725,7 +702,7 @@ mongodb_configure_secondary() {
     local node="${1:?node is required}"
 
     info "Configuring MongoDB secondary node..."
-    retry_while "mongodb_is_secondary_node_pending $node" 90 5
+    retry_while "mongodb_is_secondary_node_pending $node" 15
     mongodb_wait_confirmation "$node"
 }
 
@@ -743,7 +720,7 @@ mongodb_configure_arbiter() {
     local node="${1:?node is required}"
 
     info "Configuring MongoDB arbiter node"
-    retry_while "mongodb_is_arbiter_node_pending $node" 90 5
+    retry_while "mongodb_is_arbiter_node_pending $node" 15
     mongodb_wait_confirmation "$node"
 }
 
@@ -782,14 +759,14 @@ EOF
 #   None
 #########################
 mongodb_wait_until_sync_complete() {
-    local -r seconds=10
+    local -r retries=10
 
     info "Waiting until initial data sync is complete..."
 
-    if retry_while "mongodb_is_not_in_sync" $seconds 1; then
+    if retry_while "mongodb_is_not_in_sync" $retries 1; then
         info "initial data sync completed"
     else
-        error "Initial data sync did not finish after $seconds seconds"
+        error "Initial data sync did not finish after $retries seconds"
         exit 1
     fi
 }
@@ -1053,7 +1030,7 @@ mongodb_custom_init_scripts() {
         local -r tmp_file=/tmp/filelist
         local mongo_user
         local mongo_pass
-        if [[ -n "$MONGODB_ROOT_PASSWORD" ]];then 
+        if [[ -n "$MONGODB_ROOT_PASSWORD" ]];then
             mongo_user=root
             mongo_pass="$MONGODB_ROOT_PASSWORD"
         else
