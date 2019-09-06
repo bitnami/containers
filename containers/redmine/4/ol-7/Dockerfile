@@ -7,11 +7,11 @@ RUN bitnami-pkg install ruby-2.6.4-0 --checksum 8774fa00c7fbf9bd5e8af4425f20c466
 RUN bitnami-pkg install postgresql-client-11.5.0-0 --checksum 928f0e50c64eed64cb72c16a9da0602c2489685985abba677e1d9350fe9a421c
 RUN bitnami-pkg install mysql-client-10.3.17-0 --checksum 83fd01acb88a54d028a327870cec66bf43f57f326814a16dc4626a5171742229
 RUN bitnami-pkg install git-2.23.0-0 --checksum 30618c63e72727b90b3cc3e7f8747e599ec11352b29812285a27029807d8766d
-RUN bitnami-pkg unpack redmine-4.0.4-1 --checksum 9a0f0711a13e17f6e85d7aba5b19cc8bff028422f16272f75689681b0be6dc66
+RUN bitnami-pkg unpack redmine-4.0.4-2 --checksum 32937cebd2e21d014775ce4f1d08bae009a8469add5c8727990d426d2e590484
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.0.4-ol-7-r87" \
+    BITNAMI_IMAGE_VERSION="4.0.4-ol-7-r88" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH" \
     REDMINE_DB_MYSQL="mariadb" \
     REDMINE_DB_NAME="bitnami_redmine" \
