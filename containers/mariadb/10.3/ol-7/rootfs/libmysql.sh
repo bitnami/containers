@@ -251,6 +251,7 @@ mysql_extra_flags() {
 #########################
 mysql_env() {
     cat <<"EOF"
+export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
 export DB_FLAVOR="${DB_FLAVOR:-"mysql"}"
 export DB_VOLUMEDIR="/bitnami/$DB_FLAVOR"
 export DB_DATADIR="$DB_VOLUMEDIR/data"
