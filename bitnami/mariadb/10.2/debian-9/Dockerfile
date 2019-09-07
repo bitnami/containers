@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r354
+FROM bitnami/minideb-extras-base:stretch-r355
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.26-debian-9-r43" \
+    BITNAMI_IMAGE_VERSION="10.2.26-debian-9-r44" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
