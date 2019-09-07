@@ -26,6 +26,23 @@ EOF
 }
 
 ########################
+# Check if a bucket already exists
+# Globals:
+#   MINIO_CLIENT_CONFIGDIR
+# Arguments:
+#   $1 - Bucket name
+# Returns:
+#   Boolean
+minio_client_bucket_exists() {
+    local -r bucket_name="${1:?bucket required}"
+    if minio_client_execute ls "${bucket_name}" >/dev/null 2>&1; then
+       true
+    else
+       false
+    fi
+}
+
+########################
 # Execute an arbitrary MinIO client command
 # Globals:
 #   MINIO_CLIENT_CONFIGDIR
@@ -34,7 +51,7 @@ EOF
 # Returns:
 #   None
 minio_client_execute() {
-    local args=("--config-dir" "${MINIO_CLIENT_CONFIGDIR}" "--quiet" "$@")
+    local -r args=("--config-dir" "${MINIO_CLIENT_CONFIGDIR}" "--quiet" "$@")
     local exec
     exec=$(command -v mc)
 
@@ -50,7 +67,7 @@ minio_client_execute() {
 # Returns:
 #   None
 minio_client_execute_timeout() {
-    local args=("--config-dir" "${MINIO_CLIENT_CONFIGDIR}" "--quiet" "$@")
+    local -r args=("--config-dir" "${MINIO_CLIENT_CONFIGDIR}" "--quiet" "$@")
     local exec
     exec=$(command -v mc)
 
@@ -81,7 +98,7 @@ minio_client_configure_server() {
 #   Series of exports to be used as 'eval' arguments
 #########################
 minio_client_configure_local() {
-  local config_file="${1:?missing config_file}"
+  local -r config_file="${1:?missing config_file}"
   local access_key
   local secret_key
 
