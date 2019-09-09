@@ -19,5 +19,6 @@
   "sonarqubeSearchJavaAdditionalOpts": "{{$global.env.SONARQUBE_ELASTICSEARCH_JAVA_ADD_OPTS}}",
   "sonarqubeWebContext": "{{$global.env.SONARQUBE_WEB_CONTEXT}}",
   "sonarqubeWebJavaAdditionalOpts": "{{$global.env.SONARQUBE_WEB_JAVA_ADD_OPTS}}",
+  "startTimeout": "{{$global.env.SONARQUBE_START_TIMEOUT}}",
   "username": "{{$global.env.SONARQUBE_USERNAME}}"
 }
