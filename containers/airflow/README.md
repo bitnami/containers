@@ -97,6 +97,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
+    -e AIRFLOW_LOAD_EXAMPLES=yes \
     -e AIRFLOW_PASSWORD=bitnami123 \
     -e AIRFLOW_USERNAME=user \
     -e AIRFLOW_EMAIL=user@example.com \
@@ -177,6 +178,7 @@ services:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_LOAD_EXAMPLES=yes
     volumes:
       - /path/to/airflow-persistence:/bitnami
   airflow-scheduler:
@@ -249,6 +251,7 @@ services:
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
+    -e AIRFLOW_LOAD_EXAMPLES=yes \
     -e AIRFLOW_PASSWORD=bitnami123 \
     -e AIRFLOW_USERNAME=user \
     -e AIRFLOW_EMAIL=user@example.com \
