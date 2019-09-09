@@ -5,10 +5,10 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
-. /liblog.sh
-. /libvalidations.sh
-. /libos.sh
 . /libfs.sh
+. /liblog.sh
+. /libos.sh
+. /libvalidations.sh
 
 # Functions
 
@@ -23,20 +23,28 @@
 #########################
 zookeeper_env() {
     cat <<"EOF"
+# Format log messages
+export MODULE=zookeeper
+export BITNAMI_DEBUG=${BITNAMI_DEBUG:-false}
+
+# Paths
 export ZOO_BASE_DIR="/opt/bitnami/zookeeper"
-export ZOO_VOLUME_DIR="/bitnami/zookeeper"
-export ZOO_DATA_DIR="${ZOO_VOLUME_DIR}/data"
+export ZOO_DATA_DIR="/bitnami/zookeeper/data"
 export ZOO_CONF_DIR="${ZOO_BASE_DIR}/conf"
 export ZOO_CONF_FILE="${ZOO_CONF_DIR}/zoo.cfg"
 export ZOO_LOG_DIR="${ZOO_BASE_DIR}/logs"
+export ZOO_BIN_DIR="${ZOO_BASE_DIR}/bin"
 
+# Users
 export ZOO_DAEMON_USER="zookeeper"
 export ZOO_DAEMON_GROUP="zookeeper"
 
+# Cluster configuration
 export ZOO_PORT_NUMBER="${ZOO_PORT_NUMBER:-2181}"
 export ZOO_SERVER_ID="${ZOO_SERVER_ID:-1}"
 export ZOO_SERVERS="${ZOO_SERVERS:-}"
 
+# Zookeeper settings
 export ZOO_TICK_TIME="${ZOO_TICK_TIME:-2000}"
 export ZOO_INIT_LIMIT="${ZOO_INIT_LIMIT:-10}"
 export ZOO_SYNC_LIMIT="${ZOO_SYNC_LIMIT:-5}"
@@ -45,16 +53,34 @@ export ZOO_LOG_LEVEL="${ZOO_LOG_LEVEL:-INFO}"
 export ZOO_4LW_COMMANDS_WHITELIST="${ZOO_4LW_COMMANDS_WHITELIST:-srvr, mntr}"
 export ZOO_RECONFIG_ENABLED="${ZOO_RECONFIG_ENABLED:-no}"
 
+# Java settings
 export JVMFLAGS="${JVMFLAGS:-}"
 export ZOO_HEAP_SIZE="${ZOO_HEAP_SIZE:-1024}"
 
+# Authentication
 export ALLOW_ANONYMOUS_LOGIN="${ALLOW_ANONYMOUS_LOGIN:-no}"
 export ZOO_ENABLE_AUTH="${ZOO_ENABLE_AUTH:-no}"
 export ZOO_CLIENT_USER="${ZOO_CLIENT_USER:-}"
-export ZOO_CLIENT_PASSWORD="${ZOO_CLIENT_PASSWORD:-}"
 export ZOO_SERVER_USERS="${ZOO_SERVER_USERS:-}"
+EOF
+    if [[ -f "${ZOO_CLIENT_PASSWORD_FILE:-}" ]]; then
+        cat <<"EOF"
+export ZOO_CLIENT_PASSWORD="$(< "${ZOO_CLIENT_PASSWORD_FILE}")"
+EOF
+    else
+        cat <<"EOF"
+export ZOO_CLIENT_PASSWORD="${ZOO_CLIENT_PASSWORD:-}"
+EOF
+    fi
+    if [[ -f "${ZOO_SERVER_PASSWORDS_FILE:-}" ]]; then
+        cat <<"EOF"
+export ZOO_SERVER_PASSWORDS="$(< "${ZOO_SERVER_PASSWORDS_FILE}")"
+EOF
+    else
+        cat <<"EOF"
 export ZOO_SERVER_PASSWORDS="${ZOO_SERVER_PASSWORDS:-}"
 EOF
+    fi
 }
 
 ########################
@@ -67,32 +93,34 @@ EOF
 #   None
 #########################
 zookeeper_validate() {
+    local error_code=0
     debug "Validating settings in ZOO_* env vars..."
 
-    local error_code=0
+    # Auxiliary functions
+    print_error_exit() {
+        error "$1"
+        (( ++error_code ))
+    }
 
     # ZooKeeper authentication validations
     if is_boolean_yes "$ALLOW_ANONYMOUS_LOGIN"; then
         warn "You have set the environment variable ALLOW_ANONYMOUS_LOGIN=${ALLOW_ANONYMOUS_LOGIN}. For safety reasons, do not use this flag in a production environment."
     elif ! is_boolean_yes "$ZOO_ENABLE_AUTH"; then
-        error "The ZOO_ENABLE_AUTH environment variable does not configure authentication. Set the environment variable ALLOW_ANONYMOUS_LOGIN=yes to allow unauthenticated users to connect to ZooKeeper. This is recommended only for development."
-        (( ++error_code ))
+        print_error_exit "The ZOO_ENABLE_AUTH environment variable does not configure authentication. Set the environment variable ALLOW_ANONYMOUS_LOGIN=yes to allow unauthenticated users to connect to ZooKeeper."
     fi
 
     # ZooKeeper port validations
     local validate_port_args=()
     ! am_i_root && validate_port_args+=("-unprivileged")
     if ! err=$(validate_port "${validate_port_args[@]}" "$ZOO_PORT_NUMBER"); then
-        error "An invalid port was specified in the environment variable ZOO_PORT_NUMBER: $err"
-        (( ++error_code ))
+        print_error_exit "An invalid port was specified in the environment variable ZOO_PORT_NUMBER: $err"
     fi
 
     # ZooKeeper server users validations
     read -r -a server_users_list <<< "${ZOO_SERVER_USERS//[;, ]/ }"
     read -r -a server_passwords_list <<< "${ZOO_SERVER_PASSWORDS//[;, ]/ }"
     if [[ ${#server_users_list[@]} -ne ${#server_passwords_list[@]} ]]; then
-        error "ZOO_SERVER_USERS and ZOO_SERVER_PASSWORDS lists should have the same length"
-        (( ++error_code ))
+        print_error_exit "ZOO_SERVER_USERS and ZOO_SERVER_PASSWORDS lists should have the same length"
     fi
 
     # ZooKeeper server list validations
@@ -100,13 +128,11 @@ zookeeper_validate() {
         read -r -a zookeeper_servers_list <<< "${ZOO_SERVERS//[;, ]/ }"
         for server in "${zookeeper_servers_list[@]}"; do
             if ! echo "$server" | grep -q -E "^[^:]+:[^:]+:[^:]+$"; then
-                error "Zookeeper server ${server} should follow the next syntax: host:port:port. Example: zookeeper:2888:3888"
-                (( ++error_code ))
+                print_error_exit "Zookeeper server ${server} should follow the next syntax: host:port:port. Example: zookeeper:2888:3888"
             fi
         done
     fi
-
-    [[ error_code -eq 0 ]] || exit $error_code
+    [[ $error_code -eq 0 ]] || exit $error_code
 }
 
 ########################
@@ -124,14 +150,13 @@ zookeeper_initialize() {
     if [[ ! -f "$ZOO_CONF_FILE" ]]; then
         info "No injected configuration file found, creating default config files..."
         zookeeper_generate_conf
-
         zookeeper_configure_heap_size "$ZOO_HEAP_SIZE"
         if is_boolean_yes "$ZOO_ENABLE_AUTH"; then
             zookeeper_enable_authentication "$ZOO_CONF_FILE"
-            zookeeper_create_jaas_file "${ZOO_CONF_DIR}/zoo_jaas.conf" "$ZOO_CLIENT_USER" "$ZOO_CLIENT_PASSWORD" "$ZOO_SERVER_USERS" "$ZOO_SERVER_PASSWORDS"
+            zookeeper_create_jaas_file
         fi
     else
-        info "Configuration files found..."
+        info "User injected custom configuration detected!"
     fi
 
     if is_dir_empty "$ZOO_DATA_DIR"; then
@@ -139,7 +164,7 @@ zookeeper_initialize() {
         echo "$ZOO_SERVER_ID" > "${ZOO_DATA_DIR}/myid"
 
         if is_boolean_yes "$ZOO_ENABLE_AUTH" && [[ $ZOO_SERVER_ID -eq 1 ]] && [[ -n $ZOO_SERVER_USERS ]]; then
-            zookeeper_configure_acl "$ZOO_SERVER_USERS"
+            zookeeper_configure_acl
         fi
     else
         info "Deploying ZooKeeper with persisted data..."
@@ -245,26 +270,16 @@ zookeeper_conf_set() {
 ########################
 # Create a JAAS file for authentication
 # Globals:
-#   JVMFLAGS, ZOO_DAEMON_USER
+#   JVMFLAGS, ZOO_*
 # Arguments:
-#   $1 - filename
-#   $2 - Client user
-#   $3 - Client password
-#   $4 - List of server users
-#   $5 - List of server passwords
+#   None
 # Returns:
 #   None
 #########################
 zookeeper_create_jaas_file() {
-    local -r filename="${1:?filename is required}"
-    local -r client_user="${2:?client user is required}"
-    local -r client_password="${3:?client password is required}"
-    local -r server_users="${4:?server users are required}"
-    local -r server_passwords="${5:?server passwords are required}"
-
     info "Creating jaas file..."
-    read -r -a server_users_list <<< "${server_users//[;, ]/ }"
-    read -r -a server_passwords_list <<< "${server_passwords//[;, ]/ }"
+    read -r -a server_users_list <<< "${ZOO_SERVER_USERS//[;, ]/ }"
+    read -r -a server_passwords_list <<< "${ZOO_SERVER_PASSWORDS//[;, ]/ }"
 
     local zookeeper_server_user_passwords=""
     for i in $(seq 0 $(( ${#server_users_list[@]} - 1 ))); do
@@ -272,38 +287,36 @@ zookeeper_create_jaas_file() {
     done
     zookeeper_server_user_passwords="${zookeeper_server_user_passwords#\\n   };"
 
-    cat >"$filename" <<EOF
+    cat >"${ZOO_CONF_DIR}/zoo_jaas.conf" <<EOF
 Client {
     org.apache.zookeeper.server.auth.DigestLoginModule required
-    username="${client_user}"
-    password="${client_password}";
+    username="$ZOO_CLIENT_USER"
+    password="$ZOO_CLIENT_PASSWORD";
 };
 Server {
     org.apache.zookeeper.server.auth.DigestLoginModule required
     $(echo -e -n "${zookeeper_server_user_passwords}")
 };
 EOF
-    zookeeper_export_jvmflags "-Djava.security.auth.login.config=${filename}"
+    zookeeper_export_jvmflags "-Djava.security.auth.login.config=${ZOO_CONF_DIR}/zoo_jaas.conf"
 
     # Restrict file permissions
-    am_i_root && owned_by "$filename" "$ZOO_DAEMON_USER"
-    chmod 400 "$filename"
+    am_i_root && owned_by "${ZOO_CONF_DIR}/zoo_jaas.conf" "$ZOO_DAEMON_USER"
+    chmod 400 "${ZOO_CONF_DIR}/zoo_jaas.conf"
 }
 
 ########################
 # Configures ACL settings
 # Globals:
-#   ZOO_CONF_FILE, ZOO_BASE_DIR, ZOO_PORT_NUMBER
+#   ZOO_*
 # Arguments:
-#   $1 - List of server users
+#   None
 # Returns:
 #   None
 #########################
 zookeeper_configure_acl() {
-    local -r server_users="${1:?server users are required}"
-
     local acl_string=""
-    for server_user in ${server_users//[;, ]/ }; do
+    for server_user in ${ZOO_SERVER_USERS//[;, ]/ }; do
         acl_string="${acl_string},sasl:${server_user}:crdwa"
     done
     acl_string="${acl_string#,}"
@@ -312,7 +325,7 @@ zookeeper_configure_acl() {
 
     for path in / /zookeeper /zookeeper/quota; do
         info "Setting the ACL rule '${acl_string}' in ${path}"
-        retry_while "${ZOO_BASE_DIR}/bin/zkCli.sh setAcl ${path} ${acl_string}" 400
+        retry_while "${ZOO_BIN_DIR}/zkCli.sh setAcl ${path} ${acl_string}" 80
     done
 
     zookeeper_stop
@@ -345,9 +358,14 @@ zookeeper_export_jvmflags() {
 #   None
 #########################
 zookeeper_start_bg() {
-    local start_command="${ZOO_BASE_DIR}/bin/zkServer.sh start"
+    local start_command="${ZOO_BIN_DIR}/zkServer.sh start"
+    info "Starting ZooKeeper in background..."
     am_i_root && start_command="gosu ${ZOO_DAEMON_USER} ${start_command}"
-    $start_command
+    if [[ "$BITNAMI_DEBUG" = true ]]; then
+        $start_command
+    else
+        $start_command >/dev/null 2>&1
+    fi
     wait-for-port -timeout 60 "$ZOO_PORT_NUMBER"
 }
 
@@ -361,7 +379,12 @@ zookeeper_start_bg() {
 #   None
 #########################
 zookeeper_stop() {
-    "${ZOO_BASE_DIR}/bin/zkServer.sh" stop
+    info "Stopping ZooKeeper..."
+    if [[ "$BITNAMI_DEBUG" = true ]]; then
+        "${ZOO_BIN_DIR}/zkServer.sh" stop
+    else
+        "${ZOO_BIN_DIR}/zkServer.sh" stop >/dev/null 2>&1
+    fi
 }
 
 ########################
@@ -375,8 +398,8 @@ zookeeper_stop() {
 #   None
 #########################
 zookeeper_ensure_backwards_compatibility() {
-    mkdir -p /opt/bitnami/base
-    cat >/opt/bitnami/base/functions <<EOF
+    mkdir -p "/opt/bitnami/base"
+    cat > "/opt/bitnami/base/functions" <<EOF
 #!/bin/bash
 
 # Load Generic Libraries
