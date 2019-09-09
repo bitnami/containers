@@ -22,7 +22,7 @@ ENV BITNAMI_APP_NAME="postgresql" \
     NSS_WRAPPER_LIB="/usr/lib64/libnss_wrapper.so" \
     PATH="/opt/bitnami/postgresql/bin:$PATH"
 
-VOLUME [ "/bitnami/postgresql", "/docker-entrypoint-initdb.d" ]
+VOLUME [ "/bitnami/postgresql", "/docker-entrypoint-initdb.d", "/docker-entrypoint-preinitdb.d" ]
 
 EXPOSE 5432
 
