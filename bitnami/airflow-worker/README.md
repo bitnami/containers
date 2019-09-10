@@ -32,7 +32,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.10.5-ol-7-r8` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.5-ol-7-r8/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.10.5-debian-9-r5`, `1`, `1.10.5`, `1.10.5-r5`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.5-debian-9-r5/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.10.5-debian-9-r6`, `1`, `1.10.5`, `1.10.5-r6`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.5-debian-9-r6/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-worker).
 
@@ -98,6 +98,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
+    -e AIRFLOW_LOAD_EXAMPLES=yes \
     -e AIRFLOW_PASSWORD=bitnami123 \
     -e AIRFLOW_USERNAME=user \
     -e AIRFLOW_EMAIL=user@example.com \
@@ -178,6 +179,7 @@ services:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_LOAD_EXAMPLES=yes
     volumes:
       - /path/to/airflow-persistence:/bitnami
   airflow-scheduler:
@@ -250,6 +252,7 @@ services:
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
+    -e AIRFLOW_LOAD_EXAMPLES=yes \
     -e AIRFLOW_PASSWORD=bitnami123 \
     -e AIRFLOW_USERNAME=user \
     -e AIRFLOW_EMAIL=user@example.com \
@@ -301,7 +304,6 @@ The Airflow Worker instance can be customized by specifying environment variable
 - `AIRFLOW_FERNET_KEY`: Airflow Worker Fernet key. No defaults.
 - `AIRFLOW_WEBSERVER_HOST`: Airflow Worker webserver host. Default: **airflow**
 - `AIRFLOW_WEBSERVER_PORT_NUMBER`: Airflow Worker webserver port. Default: **8080**
-- `AIRFLOW_LOAD_EXAMPLES`: To load example tasks into the application. Default: **yes**
 - `AIRFLOW_HOSTNAME_CALLABLE`: Method to obtain the hostname. No defaults.
 
 ##### Use an existing database
