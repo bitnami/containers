@@ -42,7 +42,7 @@ http {
     gzip_http_version 1.0;
     gzip_comp_level 2;
     gzip_proxied any;
-    gzip_types text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+    gzip_types text/plain text/css application/javascript text/xml application/xml application/xml+rss;
 
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 
