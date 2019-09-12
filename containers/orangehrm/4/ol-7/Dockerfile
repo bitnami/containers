@@ -1,11 +1,11 @@
-FROM bitnami/oraclelinux-extras:7-r463
+FROM bitnami/oraclelinux-extras:7-r464
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds-libs freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.41-1 --checksum 64b7880c3d0f0f9e7cde0e71496eed06d4240a90a2b6d62c2443fce54c614691
 RUN bitnami-pkg unpack php-7.2.22-1 --checksum 28d77ca448a8e3a8a0cfe487e7ce858b433a0dfad882bfee34303d9fef567ac2
-RUN bitnami-pkg unpack mysql-client-10.2.26-0 --checksum 85a505d21e1c6d7e67a8d50856773127656a604d0fab15fe6d7e8ca92a9c8805
+RUN bitnami-pkg unpack mysql-client-10.2.27-0 --checksum 47b194f203b682f3b23258f7402bda225ca653595c11facc9ff1111bea6c5699
 RUN bitnami-pkg install libphp-7.2.22-0 --checksum 061b2675f485ac761a1bc91b7dc30b5056a3cecc4fda7a5396bfcefdf09b9c4d
 RUN bitnami-pkg unpack orangehrm-4.3.3-0-0 --checksum 79eaf89d80718d6fb01b027a8eff08cb068de6a847962fdb91402ae1daab62fc
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
@@ -18,7 +18,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.3.3-0-ol-7-r12" \
+    BITNAMI_IMAGE_VERSION="4.3.3-0-ol-7-r13" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
