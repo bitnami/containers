@@ -10,7 +10,7 @@ set -o pipefail
 . /libbitnami.sh
 . /libpostgresql.sh
 
-# Load Redis environment variables
+# Load PostgreSQL environment variables
 eval "$(postgresql_env)"
 export MODULE=postgresql
 
