@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5-ol-7`, `5.2.3-ol-7-r12` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.2.3-ol-7-r12/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.2.3-debian-9-r9`, `5`, `5.2.3`, `5.2.3-r9`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.2.3-debian-9-r9/5/debian-9/Dockerfile)
+* [`5-debian-9`, `5.2.3-debian-9-r10`, `5`, `5.2.3`, `5.2.3-r10`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.2.3-debian-9-r10/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
@@ -322,6 +322,7 @@ The Bitnami WordPress container supports connecting the WordPress application to
 - `WORDPRESS_DATABASE_NAME`: Database name that WordPress will use to connect with the database. Default: **bitnami_wordpress**
 - `WORDPRESS_DATABASE_USER`: Database user that WordPress will use to connect with the database. Default: **bn_wordpress**
 - `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database. No defaults.
+- `WORDPRESS_DATABASE_SSL_CA_FILE`: Certificate to connect with the  database using SSL. No defaults.
 
 This would be an example of using an external database for WordPress.
 
