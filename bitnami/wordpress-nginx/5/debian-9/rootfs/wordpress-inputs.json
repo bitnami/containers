@@ -2,6 +2,7 @@
   "blogName": "{{$global.env.WORDPRESS_BLOG_NAME}}",
   "databaseName": "{{$global.env.WORDPRESS_DATABASE_NAME}}",
   "databasePassword": "{{$global.env.WORDPRESS_DATABASE_PASSWORD}}",
+  "databaseSSLCAFile": "{{$global.env.WORDPRESS_DATABASE_SSL_CA_FILE}}",
   "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
   "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
   "databaseUser": "{{$global.env.WORDPRESS_DATABASE_USER}}",
