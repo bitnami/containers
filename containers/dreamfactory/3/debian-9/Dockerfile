@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r477
+FROM bitnami/minideb-extras:stretch-r478
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,7 +6,7 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libf
 RUN bitnami-pkg unpack apache-2.4.41-1 --checksum 4a3bb4e02de7df61c742b4fa57a044487e8d168da630cf84b29129f45e6e9225
 RUN bitnami-pkg install redis-client-5.0.5-0 --checksum 16bf4512016b4c458cd4e42d2cb18641678674a8bdf6152856b1374b20d5baa7
 RUN bitnami-pkg unpack php-7.1.32-1 --checksum cc7566f3a1ee887ffdb9bf8d8c101369b161c57e004e5bef225f9df8ba972379
-RUN bitnami-pkg install mysql-client-10.3.18-0 --checksum 195259f878cd1325192bcd4a2e6109a677171df83fa0455d54037160d946bb9f
+RUN bitnami-pkg install mysql-client-10.3.18-1 --checksum 0923287dea11bd5880530ca456435e3f4c1c089bee2f8eea1dbf69821478e370
 RUN bitnami-pkg install mongodb-client-4.0.12-0 --checksum e58c66cfe148818b8536f52173b91bf92ac9295e22b40e114bff2bb92bf57584
 RUN bitnami-pkg install libphp-7.1.32-0 --checksum 60915a007f2a55786cdc371fa2cc9c511912f1f294be0fbb0c6fc1faec75ae76
 RUN bitnami-pkg unpack dreamfactory-3.0.1-0 --checksum df6b9bf059e291a77d6cfe9d0c1049138f7f2502dcbac7342f9e2f5334596177
@@ -19,7 +19,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="3.0.1-debian-9-r23" \
+    BITNAMI_IMAGE_VERSION="3.0.1-debian-9-r24" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
     MARIADB_PORT_NUMBER="3306" \
