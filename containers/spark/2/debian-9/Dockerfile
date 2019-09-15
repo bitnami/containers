@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "spark" "2.4.4-0" --checksum cc74cae
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="spark" \
-    BITNAMI_IMAGE_VERSION="2.4.4-debian-9-r8" \
+    BITNAMI_IMAGE_VERSION="2.4.4-debian-9-r9" \
     JAVA_HOME="/opt/bitnami/java" \
     NSS_WRAPPER_GROUP="/opt/bitnami/spark/tmp/nss_group" \
     NSS_WRAPPER_PASSWD="/opt/bitnami/spark/tmp/nss_passwd" \
