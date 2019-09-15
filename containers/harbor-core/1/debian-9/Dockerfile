@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "harbor-core" "1.8.2-0" --checksum 4
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-core" \
-    BITNAMI_IMAGE_VERSION="1.8.2-debian-9-r32" \
+    BITNAMI_IMAGE_VERSION="1.8.2-debian-9-r33" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-core/bin:$PATH"
 
