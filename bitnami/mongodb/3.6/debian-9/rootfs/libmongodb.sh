@@ -91,11 +91,12 @@ mongodb_validate() {
     local -r replicaset_error_message="In order to configure MongoDB replica set authentication you \
 need to provide the MONGODB_REPLICA_SET_KEY on every node, specify MONGODB_ROOT_PASSWORD \
 in the primary node and MONGODB_PRIMARY_ROOT_PASSWORD in the rest of nodes"
+    local error_code=0
 
     # Auxiliary functions
-    print_error_exit() {
+    print_validation_error() {
         error "$1"
-        exit 1
+        error_code=1
     }
 
     if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
@@ -106,47 +107,49 @@ in the primary node and MONGODB_PRIMARY_ROOT_PASSWORD in the rest of nodes"
             if [[ -z "$MONGODB_PRIMARY_HOST" ]]; then
                 error_message="In order to configure MongoDB as secondary or arbiter node \
 you need to provide the MONGODB_PRIMARY_HOST env var"
-                print_error_exit "$error_message"
+                print_validation_error "$error_message"
             fi
             if ([[ -n "$MONGODB_PRIMARY_ROOT_PASSWORD" ]] && [[ -z "$MONGODB_REPLICA_SET_KEY" ]]) || \
                ([[ -z "$MONGODB_PRIMARY_ROOT_PASSWORD" ]] && [[ -n "$MONGODB_REPLICA_SET_KEY" ]]); then
-                print_error_exit "$replicaset_error_message"
+                print_validation_error "$replicaset_error_message"
             fi
             if [[ -n "$MONGODB_ROOT_PASSWORD" ]]; then
                 error_message="MONGODB_ROOT_PASSWORD shouldn't be set on a 'non-primary' node!"
-                print_error_exit "$error_message"
+                print_validation_error "$error_message"
             fi
         elif [[ "$MONGODB_REPLICA_SET_MODE" = "primary" ]]; then
             if ([[ -n "$MONGODB_ROOT_PASSWORD" ]] && [[ -z "$MONGODB_REPLICA_SET_KEY" ]]) || \
                ([[ -z "$MONGODB_ROOT_PASSWORD" ]] && [[ -n "$MONGODB_REPLICA_SET_KEY" ]]); then
-                print_error_exit "$replicaset_error_message"
+                print_validation_error "$replicaset_error_message"
             fi
             if [[ -n "$MONGODB_PRIMARY_ROOT_PASSWORD" ]]; then
                 error_message="MONGODB_PRIMARY_ROOT_PASSWORD shouldn't be set on a 'primary' node!"
-                print_error_exit "$error_message"
+                print_validation_error "$error_message"
             fi
             if [[ -z "$MONGODB_ROOT_PASSWORD" ]]; then
                 error_message="MONGODB_ROOT_PASSWORD have to be set on a 'primary' node!"
-                print_error_exit "$error_message"
+                print_validation_error "$error_message"
             fi
         else
             error_message="You set the environment variable MONGODB_REPLICA_SET_MODE with an invalid value. \
 Available options are 'primary/secondary/arbiter'"
-            print_error_exit "$error_message"
+            print_validation_error "$error_message"
         fi
     fi
 
     if [[ -n "$MONGODB_REPLICA_SET_KEY" ]] && (( ${#MONGODB_REPLICA_SET_KEY} < 5 )); then
         error_message="MONGODB_REPLICA_SET_KEY must be, at least, 5 characters long!"
-        print_error_exit "$error_message"
+        print_validation_error "$error_message"
     fi
 
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
     elif [[ -n "$MONGODB_USERNAME" ]] && [[ -z "$MONGODB_PASSWORD" ]]; then
         error_message="The MONGODB_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
-        print_error_exit "$error_message"
+        print_validation_error "$error_message"
     fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 
