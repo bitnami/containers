@@ -178,58 +178,54 @@ EOF
 #########################
 postgresql_validate() {
     postgresql_info "Validating settings in POSTGRESQL_* env vars.."
+    local error_code=0
 
     # Auxiliary functions
+    print_validation_error() {
+        postgresql_error "$1"
+        error_code=1
+    }
+
     empty_password_enabled_warn() {
         postgresql_warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
     }
     empty_password_error() {
-        postgresql_error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
-        exit 1
+        print_validation_error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
     }
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
         empty_password_enabled_warn
     else
         if [[ -z "$POSTGRESQL_PASSWORD" ]]; then
             empty_password_error "POSTGRESQL_PASSWORD"
-            exit 1
         fi
         if (( ${#POSTGRESQL_PASSWORD} > 100 )); then
-            postgresql_error "The password cannot be longer than 100 characters. Set the environment variable POSTGRESQL_PASSWORD with a shorter value"
-            exit 1
+            print_validation_error "The password cannot be longer than 100 characters. Set the environment variable POSTGRESQL_PASSWORD with a shorter value"
         fi
         if [[ -n "$POSTGRESQL_USERNAME" ]] && [[ -z "$POSTGRESQL_PASSWORD" ]]; then
             empty_password_error "POSTGRESQL_PASSWORD"
-            exit 1
         fi
         if [[ -n "$POSTGRESQL_USERNAME" ]] && [[ "$POSTGRESQL_USERNAME" != "postgres" ]] && [[ -n "$POSTGRESQL_PASSWORD" ]] && [[ -z "$POSTGRESQL_DATABASE" ]]; then
-            postgresql_error "In order to use a custom PostgreSQL user you need to set the environment variable POSTGRESQL_DATABASE as well"
-            exit 1
+            print_validation_error "In order to use a custom PostgreSQL user you need to set the environment variable POSTGRESQL_DATABASE as well"
         fi
     fi
     if [[ -n "$POSTGRESQL_REPLICATION_MODE" ]]; then
         if [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]]; then
             if (( POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS < 0 )); then
-                postgresql_error "The number of synchronous replicas cannot be less than 0. Set the environment variable POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS"
-                exit 1
+                print_validation_error "The number of synchronous replicas cannot be less than 0. Set the environment variable POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS"
             fi
         elif [[ "$POSTGRESQL_REPLICATION_MODE" = "slave" ]]; then
             if [[ -z "$POSTGRESQL_MASTER_HOST" ]]; then
-                postgresql_error "Slave replication mode chosen without setting the environment variable POSTGRESQL_MASTER_HOST. Use it to indicate where the Master node is running"
-                exit 1
+                print_validation_error "Slave replication mode chosen without setting the environment variable POSTGRESQL_MASTER_HOST. Use it to indicate where the Master node is running"
             fi
             if [[ -z "$POSTGRESQL_REPLICATION_USER" ]]; then
-                postgresql_error "Slave replication mode chosen without setting the environment variable POSTGRESQL_REPLICATION_USER. Make sure that the master also has this parameter set"
-                exit 1
+                print_validation_error "Slave replication mode chosen without setting the environment variable POSTGRESQL_REPLICATION_USER. Make sure that the master also has this parameter set"
             fi
         else
-            postgresql_error "Invalid replication mode. Available options are 'master/slave'"
-            exit 1
+            print_validation_error "Invalid replication mode. Available options are 'master/slave'"
         fi
         # Common replication checks
         if [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && [[ -z "$POSTGRESQL_REPLICATION_PASSWORD" ]]; then
             empty_password_error "POSTGRESQL_REPLICATION_PASSWORD"
-            exit 1
         fi
     else
         if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
@@ -237,14 +233,14 @@ postgresql_validate() {
         else
             if [[ -z "$POSTGRESQL_PASSWORD" ]]; then
                 empty_password_error "POSTGRESQL_PASSWORD"
-                exit 1
             fi
             if [[ -n "$POSTGRESQL_USERNAME" ]] && [[ -z "$POSTGRESQL_PASSWORD" ]]; then
                 empty_password_error "POSTGRESQL_PASSWORD"
-                exit 1
             fi
         fi
     fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 ########################
