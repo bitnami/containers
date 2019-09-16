@@ -97,30 +97,30 @@ zookeeper_validate() {
     debug "Validating settings in ZOO_* env vars..."
 
     # Auxiliary functions
-    print_error_exit() {
+    print_validation_error() {
         error "$1"
-        (( ++error_code ))
+        error_code=1
     }
 
     # ZooKeeper authentication validations
     if is_boolean_yes "$ALLOW_ANONYMOUS_LOGIN"; then
         warn "You have set the environment variable ALLOW_ANONYMOUS_LOGIN=${ALLOW_ANONYMOUS_LOGIN}. For safety reasons, do not use this flag in a production environment."
     elif ! is_boolean_yes "$ZOO_ENABLE_AUTH"; then
-        print_error_exit "The ZOO_ENABLE_AUTH environment variable does not configure authentication. Set the environment variable ALLOW_ANONYMOUS_LOGIN=yes to allow unauthenticated users to connect to ZooKeeper."
+        print_validation_error "The ZOO_ENABLE_AUTH environment variable does not configure authentication. Set the environment variable ALLOW_ANONYMOUS_LOGIN=yes to allow unauthenticated users to connect to ZooKeeper."
     fi
 
     # ZooKeeper port validations
     local validate_port_args=()
     ! am_i_root && validate_port_args+=("-unprivileged")
     if ! err=$(validate_port "${validate_port_args[@]}" "$ZOO_PORT_NUMBER"); then
-        print_error_exit "An invalid port was specified in the environment variable ZOO_PORT_NUMBER: $err"
+        print_validation_error "An invalid port was specified in the environment variable ZOO_PORT_NUMBER: $err"
     fi
 
     # ZooKeeper server users validations
     read -r -a server_users_list <<< "${ZOO_SERVER_USERS//[;, ]/ }"
     read -r -a server_passwords_list <<< "${ZOO_SERVER_PASSWORDS//[;, ]/ }"
     if [[ ${#server_users_list[@]} -ne ${#server_passwords_list[@]} ]]; then
-        print_error_exit "ZOO_SERVER_USERS and ZOO_SERVER_PASSWORDS lists should have the same length"
+        print_validation_error "ZOO_SERVER_USERS and ZOO_SERVER_PASSWORDS lists should have the same length"
     fi
 
     # ZooKeeper server list validations
@@ -128,11 +128,12 @@ zookeeper_validate() {
         read -r -a zookeeper_servers_list <<< "${ZOO_SERVERS//[;, ]/ }"
         for server in "${zookeeper_servers_list[@]}"; do
             if ! echo "$server" | grep -q -E "^[^:]+:[^:]+:[^:]+$"; then
-                print_error_exit "Zookeeper server ${server} should follow the next syntax: host:port:port. Example: zookeeper:2888:3888"
+                print_validation_error "Zookeeper server ${server} should follow the next syntax: host:port:port. Example: zookeeper:2888:3888"
             fi
         done
     fi
-    [[ $error_code -eq 0 ]] || exit $error_code
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 ########################
