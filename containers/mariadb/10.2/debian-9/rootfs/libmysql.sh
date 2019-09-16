@@ -297,14 +297,19 @@ EOF
 #########################
 mysql_validate() {
     info "Validating settings in MYSQL_*/MARIADB_* env vars.."
+    local error_code=0
 
     # Auxiliary functions
+    print_validation_error() {
+        error "$1"
+        error_code=1
+    }
+
     empty_password_enabled_warn() {
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
     }
     empty_password_error() {
-        error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
-        exit 1
+        print_validation_error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
     }
 
     if [[ -n "$DB_REPLICATION_MODE" ]]; then
@@ -319,8 +324,7 @@ mysql_validate() {
                     empty_password_error "$(get_env_var ROOT_PASSWORD)"
                 fi
                 if (( ${#DB_ROOT_PASSWORD} > 32 )); then
-                    error "The password can not be longer than 32 characters. Set the environment variable $(get_env_var ROOT_PASSWORD) with a shorter value (currently ${#DB_ROOT_PASSWORD} characters)"
-                    exit 1
+                    print_validation_error "The password can not be longer than 32 characters. Set the environment variable $(get_env_var ROOT_PASSWORD) with a shorter value (currently ${#DB_ROOT_PASSWORD} characters)"
                 fi
                 if [[ -n "$DB_USER" ]] && [[ -z "$DB_PASSWORD" ]]; then
                     empty_password_error "$(get_env_var PASSWORD)"
@@ -328,12 +332,10 @@ mysql_validate() {
             fi
         elif [[ "$DB_REPLICATION_MODE" = "slave" ]]; then
             if [[ -z "$DB_MASTER_HOST" ]]; then
-                error "Slave replication mode chosen without setting the environment variable $(get_env_var MASTER_HOST). Use it to indicate where the Master node is running"
-                exit 1
+                print_validation_error "Slave replication mode chosen without setting the environment variable $(get_env_var MASTER_HOST). Use it to indicate where the Master node is running"
             fi
         else
-            error "Invalid replication mode. Available options are 'master/slave'"
-            exit 1
+            print_validation_error "Invalid replication mode. Available options are 'master/slave'"
         fi
     else
         if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
@@ -347,6 +349,8 @@ mysql_validate() {
             fi
         fi
     fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 ########################
