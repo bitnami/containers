@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack jasperreports-7.2.0-1 --checksum 96d844de1da1092970a36c23
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.2.0-debian-9-r114" \
+    BITNAMI_IMAGE_VERSION="7.2.0-debian-9-r115" \
     JASPERREPORTS_DATABASE_NAME="bitnami_jasperreports" \
     JASPERREPORTS_DATABASE_PASSWORD="" \
     JASPERREPORTS_DATABASE_USER="bn_jasperreports" \
