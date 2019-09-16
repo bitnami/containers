@@ -74,10 +74,16 @@ EOF
 #########################
 rabbitmq_validate() {
     info "Validating settings in RABBITMQ_* env vars.."
+    local error_code=0
+
+    # Auxiliary functions
+    print_validation_error() {
+        error "$1"
+        error_code=1
+    }
 
     if [[ -z "$RABBITMQ_PASSWORD" && -z "$RABBITMQ_HASHED_PASSWORD" ]]; then
-        error "You must indicate a password or a hashed password."
-        exit 1
+        print_validation_error "You must indicate a password or a hashed password."
     fi
 
     if [[ -n "$RABBITMQ_PASSWORD" && -n "$RABBITMQ_HASHED_PASSWORD" ]]; then
@@ -86,15 +92,13 @@ rabbitmq_validate() {
 
     if [[ "$RABBITMQ_NODE_TYPE" = "stats" ]]; then
         if ! validate_ipv4 "$RABBITMQ_MANAGER_BIND_IP"; then
-            error "An invalid IP was specified in the environment variable RABBITMQ_MANAGER_BIND_IP."
-            exit 1
+            print_validation_error "An invalid IP was specified in the environment variable RABBITMQ_MANAGER_BIND_IP."
         fi
 
         local validate_port_args=()
         ! am_i_root && validate_port_args+=("-unprivileged")
         if ! err=$(validate_port "${validate_port_args[@]}" "$RABBITMQ_MANAGER_PORT_NUMBER"); then
-            error "An invalid port was specified in the environment variable RABBITMQ_MANAGER_PORT_NUMBER: ${err}."
-            exit 1
+            print_validation_error "An invalid port was specified in the environment variable RABBITMQ_MANAGER_PORT_NUMBER: ${err}."
         fi
 
         if [[ -n "$RABBITMQ_CLUSTER_NODE_NAME" ]]; then
@@ -105,9 +109,10 @@ rabbitmq_validate() {
             warn "You did not define any node to cluster with."
         fi
     else
-        error "${RABBITMQ_NODE_TYPE} is not a valid type. You can use 'stats', 'queue-disc' or 'queue-ram'."
-        exit 1
+        print_validation_error "${RABBITMQ_NODE_TYPE} is not a valid type. You can use 'stats', 'queue-disc' or 'queue-ram'."
     fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 ########################
