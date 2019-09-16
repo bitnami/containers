@@ -24,7 +24,7 @@ $ docker run --name jsonnet bitnami/jsonnet:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0.13-ol-7`, `0.13.0-ol-7-r95` (0.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/0.13.0-ol-7-r95/0.13/ol-7/Dockerfile)
+* [`0.13-ol-7`, `0.13.0-ol-7-r96` (0.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/0.13.0-ol-7-r96/0.13/ol-7/Dockerfile)
 * [`0.13-debian-9`, `0.13.0-debian-9-r91`, `0.13`, `0.13.0`, `0.13.0-r91`, `latest` (0.13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/0.13.0-debian-9-r91/0.13/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jsonnet GitHub repo](https://github.com/bitnami/bitnami-docker-jsonnet).
