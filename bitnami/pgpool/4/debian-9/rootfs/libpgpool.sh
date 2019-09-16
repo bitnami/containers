@@ -94,39 +94,42 @@ EOF
 #########################
 pgpool_validate() {
     info "Validating settings in PGPOOL_* env vars..."
+    local error_code=0
 
     # Auxiliary functions
-    print_error_exit() {
+    print_validation_error() {
         error "$1"
-        exit 1
+        error_code=1
     }
 
     if [[ -z "$PGPOOL_SR_CHECK_USER" ]] || [[ -z "$PGPOOL_SR_CHECK_PASSWORD" ]]; then
-        print_error_exit "The PostrgreSQL replication credentials are mandatory. Set the environment variables PGPOOL_SR_CHECK_USER and PGPOOL_SR_CHECK_PASSWORD with the PostrgreSQL replication credentials."
+        print_validation_error "The PostrgreSQL replication credentials are mandatory. Set the environment variables PGPOOL_SR_CHECK_USER and PGPOOL_SR_CHECK_PASSWORD with the PostrgreSQL replication credentials."
     fi
     if is_boolean_yes "$PGPOOL_ENABLE_LDAP"; then
         if [[ -z "${PGPOOL_LDAP_URI}" ]] || [[ -z "${PGPOOL_LDAP_BASE}" ]] || [[ -z "${PGPOOL_LDAP_BIND_DN}" ]] || [[ -z "${PGPOOL_LDAP_BIND_PASSWORD}" ]]; then
-            print_error_exit "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables PGPOOL_LDAP_URI, PGPOOL_LDAP_BASE, PGPOOL_LDAP_BIND_DN and PGPOOL_LDAP_BIND_PASSWORD with the LDAP configuration."
+            print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables PGPOOL_LDAP_URI, PGPOOL_LDAP_BASE, PGPOOL_LDAP_BIND_DN and PGPOOL_LDAP_BIND_PASSWORD with the LDAP configuration."
         fi
     else
         if [[ -z "$PGPOOL_USERNAME" ]] || [[ -z "$PGPOOL_PASSWORD" ]]; then
-            print_error_exit "The database credentials are required when LDAP authentication is not enabled. Set the environment variables PGPOOL_USERNAME and PGPOOL_PASSWORD with the database credentials."
+            print_validation_error "The database credentials are required when LDAP authentication is not enabled. Set the environment variables PGPOOL_USERNAME and PGPOOL_PASSWORD with the database credentials."
         fi
     fi
     if [[ -z "$PGPOOL_BACKEND_NODES" ]]; then
-        print_error_exit "The list of backend nodes cannot be empty. Set the environment variable PGPOOL_BACKEND_NODES with a comma separated list of backend nodes."
+        print_validation_error "The list of backend nodes cannot be empty. Set the environment variable PGPOOL_BACKEND_NODES with a comma separated list of backend nodes."
     else
         read -r -a nodes <<< "$(tr ',;' ' ' <<< "${PGPOOL_BACKEND_NODES}")"
         for node in "${nodes[@]}"; do
             read -r -a fields <<< "$(tr ':' ' ' <<< "${node}")"
             if [[ -z "${fields[0]:-}" ]]; then
-                print_error_exit "Error checking entry '$node', the field 'backend number' must be set!"
+                print_validation_error "Error checking entry '$node', the field 'backend number' must be set!"
             fi
             if [[ -z "${fields[1]:-}" ]]; then
-                print_error_exit "Error checking entry '$node', the field 'host' must be set!"
+                print_validation_error "Error checking entry '$node', the field 'host' must be set!"
             fi
         done
     fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 ########################
