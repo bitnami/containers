@@ -34,7 +34,7 @@ kafka_common_conf_set() {
         return 1
     elif [[ "${#values[@]}" -ne 1 ]]; then
         for i in "${!values[@]}"; do
-            kafka_common_conf_set "$file" "$key[$i]" "${values[$i]}"
+            kafka_common_conf_set "$file" "${key[$i]}" "${values[$i]}"
         done
     else
         value="${values[0]}"
@@ -194,12 +194,19 @@ kafka_create_alias_environment_variables() {
 #########################
 kafka_validate() {
     debug "Validating settings in KAFKA_* env vars..."
+    local error_code=0
+
+    # Auxiliary functions
+    print_validation_error() {
+        error "$1"
+        error_code=1
+    }
+
     local validate_port_args=()
     ! am_i_root && validate_port_args+=("-unprivileged")
     for var in "KAFKA_PORT_NUMBER"; do
         if ! err=$(validate_port "${validate_port_args[@]}" "${!var}"); then
-            error "An invalid port was specified in the environment variable $var: $err"
-            exit 1
+            print_validation_error "An invalid port was specified in the environment variable $var: $err"
         fi
     done
     if is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
@@ -207,13 +214,13 @@ kafka_validate() {
     fi
     if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL_SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL_SSL ]]; then
         if [[ ! -f "$KAFKA_CONFDIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_CONFDIR"/certs/kafka.truststore.jks ]]; then
-            error "In order to configure the SASL_SSL listener for Kafka you must mount your kafka.keystore.jks and kafka.trustore.jks certificates to the $KAFKA_CONFDIR/certs directory."
-            exit 1
+            print_validation_error "In order to configure the SASL_SSL listener for Kafka you must mount your kafka.keystore.jks and kafka.trustore.jks certificates to the $KAFKA_CONFDIR/certs directory."
         fi
     elif ! is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
-        error "The KAFKA_CFG_LISTENERS environment variable does not configure a secure listener. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
-        exit 1
+        print_validation_error "The KAFKA_CFG_LISTENERS environment variable does not configure a secure listener. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
     fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 ########################
