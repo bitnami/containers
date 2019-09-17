@@ -231,14 +231,19 @@ EOF
 #########################
 redis_validate() {
     debug "Validating settings in REDIS_* env vars.."
+    local error_code=0
 
     # Auxiliary functions
+    print_validation_error() {
+        error "$1"
+        error_code=1
+    }
+
     empty_password_enabled_warn() {
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
     }
     empty_password_error() {
-        error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
-        exit 1
+        print_validation_error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
     }
 
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
@@ -250,18 +255,18 @@ redis_validate() {
         if [[ "$REDIS_REPLICATION_MODE" =~ ^(slave|replica)$ ]]; then
             if [[ -n "$REDIS_MASTER_PORT_NUMBER" ]]; then
                 if ! err=$(validate_port "$REDIS_MASTER_PORT_NUMBER"); then
-                    error "An invalid port was specified in the environment variable REDIS_MASTER_PORT_NUMBER: $err"
-                    exit 1
+                    print_validation_error "An invalid port was specified in the environment variable REDIS_MASTER_PORT_NUMBER: $err"
                 fi
             fi
             if ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD" && [[ -z "$REDIS_MASTER_PASSWORD" ]]; then
                 empty_password_error REDIS_MASTER_PASSWORD
             fi
         elif [[ "$REDIS_REPLICATION_MODE" != "master" ]]; then
-            error "Invalid replication mode. Available options are 'master/replica'"
-            exit 1
+            print_validation_error "Invalid replication mode. Available options are 'master/replica'"
         fi
     fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 
