@@ -303,14 +303,19 @@ EOF
 #########################
 mysql_validate() {
     info "Validating settings in MYSQL_*/MARIADB_* env vars.."
+    local error_code=0
 
     # Auxiliary functions
+    print_validation_error() {
+        error "$1"
+        error_code=1
+    }
+
     empty_password_enabled_warn() {
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
     }
     empty_password_error() {
-        error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
-        exit 1
+        print_validation_error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
     }
 
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
@@ -325,8 +330,7 @@ mysql_validate() {
                 empty_password_error "$(get_env_var ROOT_PASSWORD)"
             fi
             if (( ${#DB_ROOT_PASSWORD} > 32 )); then
-                error "The password can not be longer than 32 characters. Set the environment variable $(get_env_var ROOT_PASSWORD) with a shorter value (currently ${#DB_ROOT_PASSWORD} characters)"
-                exit 1
+                print_validation_error "The password can not be longer than 32 characters. Set the environment variable $(get_env_var ROOT_PASSWORD) with a shorter value (currently ${#DB_ROOT_PASSWORD} characters)"
             fi
             if [[ -n "$DB_USER" ]] && [[ -z "$DB_PASSWORD" ]]; then
                 empty_password_error "$(get_env_var PASSWORD)"
@@ -335,14 +339,14 @@ mysql_validate() {
     fi
 
     if [[ -z "$DB_GALERA_CLUSTER_NAME" ]]; then
-        error "Galera cluster cannot be created without setting the environment variable $(get_env_var GALERA_CLUSTER_NAME)."
-        exit 1
+        print_validation_error "Galera cluster cannot be created without setting the environment variable $(get_env_var GALERA_CLUSTER_NAME)."
     fi
 
     if ! is_boolean_yes "$DB_GALERA_CLUSTER_BOOTSTRAP" && [[ -z "$DB_GALERA_CLUSTER_ADDRESS" ]]; then
-        error "Galera cluster cannot be created without setting the environment variable $(get_env_var GALERA_CLUSTER_ADDRESS). If you are bootstrapping a new Galera cluster, set the environment variable MARIADB_GALERA_CLUSTER_BOOTSTRAP=yes."
-        exit 1
+        print_validation_error "Galera cluster cannot be created without setting the environment variable $(get_env_var GALERA_CLUSTER_ADDRESS). If you are bootstrapping a new Galera cluster, set the environment variable MARIADB_GALERA_CLUSTER_BOOTSTRAP=yes."
     fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 ########################
