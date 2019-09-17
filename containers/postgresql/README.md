@@ -171,9 +171,15 @@ $ docker-compose up -d
 
 # Configuration
 
+## On container start
+
+When the container is executed, it will execute the files with extension `.sh` located at `/docker-entrypoint-preinitdb.d` before initializing or starting postgresql.
+
+In order to have your custom files inside the docker image you can mount them as a volume.
+
 ## Initializing a new instance
 
-When the container is executed for the first time, it will execute the files with extensions `.sh`, `.sql` and `.sql.gz` located at `/docker-entrypoint-initdb.d`.
+When the container is executed for the first time, it will execute the files with extensions `.sh`, `.sql` and `.sql.gz` located at `/docker-entrypoint-initdb.d` after starting postgresql.
 
 In order to have your custom files inside the docker image you can mount them as a volume.
 

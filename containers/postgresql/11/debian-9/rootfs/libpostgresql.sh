@@ -115,6 +115,7 @@ export POSTGRESQL_TMP_DIR="$POSTGRESQL_BASE_DIR/tmp"
 export POSTGRESQL_PID_FILE="$POSTGRESQL_TMP_DIR/postgresql.pid"
 export POSTGRESQL_BIN_DIR="$POSTGRESQL_BASE_DIR/bin"
 export POSTGRESQL_INITSCRIPTS_DIR=/docker-entrypoint-initdb.d
+export POSTGRESQL_PREINITSCRIPTS_DIR=/docker-entrypoint-preinitdb.d
 export PATH="$POSTGRESQL_BIN_DIR:$PATH"
 
 # Users
@@ -557,6 +558,29 @@ postgresql_initialize() {
 
     # Delete conf files generated on first run
     rm -f "$POSTGRESQL_DATA_DIR"/postgresql.conf "$POSTGRESQL_DATA_DIR"/pg_hba.conf
+}
+
+########################
+# Run custom pre-initialization scripts
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+postgresql_custom_pre_init_scripts() {
+    info "Loading custom pre-init scripts..."
+    if [[ -n $(find "$POSTGRESQL_PREINITSCRIPTS_DIR/" -type f -name "*.sh") ]]; then
+        info "Loading user's custom files from $POSTGRESQL_PREINITSCRIPTS_DIR ...";
+        find "$POSTGRESQL_PREINITSCRIPTS_DIR/" -type f -name "*.sh" | sort | while read -r f; do
+            if [[ -x "$f" ]]; then
+                debug "Executing $f"; "$f"
+            else
+                debug "Sourcing $f"; . "$f"
+            fi
+        done
+    fi
 }
 
 ########################
