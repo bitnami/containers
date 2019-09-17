@@ -129,34 +129,37 @@ repmgr_get_node_id() {
 #########################
 repmgr_validate() {
     repmgr_info "Validating settings in REPMGR_* env vars..."
+    local error_code=0
 
     # Auxiliary functions
-    print_error_exit() {
+    print_validation_error() {
         repmgr_error "$1"
-        exit 1
+        error_code=1
     }
 
     if [[ -z "$REPMGR_PARTNER_NODES" ]]; then
-        print_error_exit "The list of partner nodes cannot be empty. Set the environment variable REPMGR_PARTNER_NODES with a comma separated list of partner nodes."
+        print_validation_error "The list of partner nodes cannot be empty. Set the environment variable REPMGR_PARTNER_NODES with a comma separated list of partner nodes."
     fi
     if [[ -z "$REPMGR_PRIMARY_HOST" ]]; then
-        print_error_exit "The initial primary host is required. Set the environment variable REPMGR_PRIMARY_HOST with the initial primary host."
+        print_validation_error "The initial primary host is required. Set the environment variable REPMGR_PRIMARY_HOST with the initial primary host."
     fi
     if [[ -z "$REPMGR_NODE_NAME" ]]; then
-        print_error_exit "The node name is required. Set the environment variable REPMGR_NODE_NAME with the node name."
+        print_validation_error "The node name is required. Set the environment variable REPMGR_NODE_NAME with the node name."
     elif [[ ! "$REPMGR_NODE_NAME" =~ ^.*+-[0-9]+$ ]]; then
-        print_error_exit "The node name does not follow the required format. Valid format: ^.*+-[0-9]+$"
+        print_validation_error "The node name does not follow the required format. Valid format: ^.*+-[0-9]+$"
     fi
     if [[ -z "$(repmgr_get_node_id)" ]]; then
-        print_error_exit "The node id is required. Set the environment variable REPMGR_NODE_ID with the node id."
+        print_validation_error "The node id is required. Set the environment variable REPMGR_NODE_ID with the node id."
     fi
     if [[ -z "$REPMGR_NODE_NETWORK_NAME" ]]; then
-        print_error_exit "The node network name is required. Set the environment variable REPMGR_NODE_NETWORK_NAME with the node network name."
+        print_validation_error "The node network name is required. Set the environment variable REPMGR_NODE_NETWORK_NAME with the node network name."
     fi
     # Credentials validations
     if [[ -z "$REPMGR_USERNAME" ]] || [[ -z "$REPMGR_PASSWORD" ]]; then
-        print_error_exit "The repmgr credentials are mandatory. Set the environment variables REPMGR_USERNAME and REPMGR_PASSWORD with the repmgr credentials."
+        print_validation_error "The repmgr credentials are mandatory. Set the environment variables REPMGR_USERNAME and REPMGR_PASSWORD with the repmgr credentials."
     fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 ########################
