@@ -208,12 +208,12 @@ export REDIS_PASSWORD="${REDIS_PASSWORD:-}"
 export REDIS_REPLICATION_MODE="${REDIS_REPLICATION_MODE:-}"
 export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
 EOF
-    if [[ -f "$REDIS_PASSWORD_FILE" ]]; then
+    if [[ -f "${REDIS_PASSWORD_FILE:-}" ]]; then
         cat <<"EOF"
 export REDIS_PASSWORD="$(< "${REDIS_PASSWORD_FILE}")"
 EOF
     fi
-    if [[ -f "$REDIS_MASTER_PASSWORD_FILE" ]]; then
+    if [[ -f "${REDIS_MASTER_PASSWORD_FILE:-}" ]]; then
         cat <<"EOF"
 export REDIS_MASTER_PASSWORD="$(< "${REDIS_MASTER_PASSWORD_FILE}")"
 EOF
