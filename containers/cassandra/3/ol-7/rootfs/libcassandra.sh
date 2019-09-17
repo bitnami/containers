@@ -165,7 +165,7 @@ cassandra_yaml_set_as_array() {
     local -r conf_file="${4:-$CASSANDRA_CONF_FILE}"
     local substitution="\2${property}:"
 
-    for value in ${array[@]}; do
+    for value in "${array[@]}"; do
         if is_boolean_yes "$use_quotes"; then
             substitution+="\n\2  - '${value}'"
         else
@@ -187,8 +187,13 @@ cassandra_yaml_set_as_array() {
 #########################
 cassandra_validate() {
     info "Validating settings in CASSANDRA_* env vars.."
+    local error_code=0
 
     # Auxiliary functions
+    print_validation_error() {
+        error "$1"
+        error_code=1
+    }
 
     check_default_password() {
         if [[ "${!1}" = "cassandra" ]]; then
@@ -198,15 +203,13 @@ cassandra_validate() {
 
     check_yes_no_value() {
         if ! is_yes_no_value "${!1}"; then
-            error "The allowed values for $1 are [yes, no]"
-            exit 1
+            print_validation_error "The allowed values for $1 are [yes, no]"
         fi
     }
 
     check_true_false_value() {
         if ! is_true_false_value "${!1}"; then
-            error "The allowed values for $1 are [true, false]"
-            exit 1
+            print_validation_error "The allowed values for $1 are [true, false]"
         fi
     }
 
@@ -217,8 +220,7 @@ cassandra_validate() {
                 i_aux="${!i}"
                 j_aux="${!j}"
                 if [[ "${!i_aux}" = "${!j_aux}" ]]; then
-                    echo "${!i} and ${!j} are bound to the same port"
-                    exit 1
+                    print_validation_error "${!i} and ${!j} are bound to the same port"
                 fi
             done
         done
@@ -228,8 +230,7 @@ cassandra_validate() {
         local validate_port_args=()
         ! am_i_root && validate_port_args+=("-unprivileged")
         if ! err=$(validate_port "${validate_port_args[@]}" "${!1}"); then
-            error "An invalid port was specified in the environment variable $1: $err"
-            exit 1
+            print_validation_error "An invalid port was specified in the environment variable $1: $err"
         fi
     }
 
@@ -241,22 +242,19 @@ cassandra_validate() {
 
     check_positive_value() {
         if ! is_positive_int "${!1}"; then
-            error "The variable $1 must be positive integer"
-            exit 1
+            print_validation_error "The variable $1 must be positive integer"
         fi
     }
 
     check_empty_value() {
         if is_empty_value "${!1}"; then
-            error "The $1 environment variable is empty or not set."
-            exit 1
+            print_validation_error "The $1 environment variable is empty or not set."
         fi
     }
 
     check_password_file() {
         if [[ -n "${!1:-}" ]] && ! [[ -f "${!1:-}" ]]; then
-            error "The variable $1 is defined but the file ${!1} is not accessible or does not exist"
-            exit 1
+            print_validation_error "The variable $1 is defined but the file ${!1} is not accessible or does not exist"
         fi
     }
 
@@ -306,9 +304,10 @@ cassandra_validate() {
     done
 
     if (( ${#CASSANDRA_PASSWORD} > 512 )); then
-        error "The password cannot be longer than 512 characters. Set the environment variable CASSANDRA_PASSWORD with a shorter value"
-        exit 1
+        print_validation_error "The password cannot be longer than 512 characters. Set the environment variable CASSANDRA_PASSWORD with a shorter value"
     fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 ########################
