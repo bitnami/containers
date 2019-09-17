@@ -68,54 +68,56 @@ EOF
 #   None
 #########################
 spark_validate() {
+    local error_code=0
+
+    # Auxiliary functions
+    print_validation_error() {
+        error "$1"
+        error_code=1
+    }
+
     # Validate spark mode
     case "$SPARK_MODE" in
         master|worker)
         ;;
         *)
-            error "Invalid mode $SPARK_MODE. Supported types are 'master/worker'"
-            exit 1
+            print_validation_error "Invalid mode $SPARK_MODE. Supported types are 'master/worker'"
     esac
 
     # Validate worker node inputs
     if [[ "$SPARK_MODE" == "worker" ]]; then
         if [[ -z "$SPARK_MASTER_URL" ]]; then
-            error "For worker nodes you need to specify the SPARK_MASTER_URL"
-            exit 1
+            print_validation_error "For worker nodes you need to specify the SPARK_MASTER_URL"
         fi
     fi
 
     # Validate SSL parameters
     if is_boolean_yes "$SPARK_SSL_ENABLED"; then
         if [[ -z "$SPARK_SSL_KEY_PASSWORD" ]]; then
-            error "If you enable SSL configuration, you must provide the password to the private key in the key store."
-            exit 1
+            print_validation_error "If you enable SSL configuration, you must provide the password to the private key in the key store."
         fi
         if [[ -z "$SPARK_SSL_KEYSTORE_PASSWORD" ]]; then
-            error "If you enable SSL configuration, you must provide the password to the key store."
-            exit 1
+            print_validation_error "If you enable SSL configuration, you must provide the password to the key store."
         fi
         if [[ -z "$SPARK_SSL_TRUSTSTORE_PASSWORD" ]]; then
-            error "If you enable SSL configuration, you must provide the password to the trust store."
-            exit 1
+            print_validation_error "If you enable SSL configuration, you must provide the password to the trust store."
         fi
         if [[ ! -f "${SPARK_CONFDIR}/certs/spark-keystore.jks" ]]; then
-            error "If you enable SSL configuration, you must mount your keystore file to \"${SPARK_CONFDIR}/certs/spark-keystore.jks\""
-            exit 1
+            print_validation_error "If you enable SSL configuration, you must mount your keystore file to \"${SPARK_CONFDIR}/certs/spark-keystore.jks\""
         fi
         if [[ ! -f "${SPARK_CONFDIR}/certs/spark-truststore.jks" ]]; then
-            error "If you enable SSL configuration, you must mount your trutstore file to \"${SPARK_CONFDIR}/certs/spark-truststore.jks\""
-            exit 1
+            print_validation_error "If you enable SSL configuration, you must mount your trutstore file to \"${SPARK_CONFDIR}/certs/spark-truststore.jks\""
         fi
     fi
 
     # Validate RPC parameters
     if is_boolean_yes "$SPARK_RPC_AUTHENTICATION_ENABLED"; then
         if [[ -z "$SPARK_RPC_AUTHENTICATION_SECRET" ]]; then
-            error "If you enable RPC authentication, you must provide the RPC authentication secret."
-            exit 1
+            print_validation_error "If you enable RPC authentication, you must provide the RPC authentication secret."
         fi
     fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 ########################
