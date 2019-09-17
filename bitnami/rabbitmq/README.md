@@ -49,8 +49,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.7-ol-7`, `3.7.17-ol-7-r53` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.17-ol-7-r53/3.7/ol-7/Dockerfile)
-* [`3.7-debian-9`, `3.7.17-debian-9-r53`, `3.7`, `3.7.17`, `3.7.17-r53`, `latest` (3.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.17-debian-9-r53/3.7/debian-9/Dockerfile)
+* [`3.7-ol-7`, `3.7.18-ol-7-r0` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.18-ol-7-r0/3.7/ol-7/Dockerfile)
+* [`3.7-debian-9`, `3.7.18-debian-9-r0`, `3.7`, `3.7.18`, `3.7.18-r0`, `latest` (3.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.18-debian-9-r0/3.7/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
