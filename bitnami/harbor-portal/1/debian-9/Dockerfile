@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r362
+FROM bitnami/minideb-extras-base:stretch-r363
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -19,7 +19,7 @@ COPY rootfs /
 RUN /postunpack.sh
 RUN /postunpack-harbor-portal.sh
 ENV BITNAMI_APP_NAME="harbor-portal" \
-    BITNAMI_IMAGE_VERSION="1.8.2-debian-9-r28" \
+    BITNAMI_IMAGE_VERSION="1.8.2-debian-9-r29" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/harbor/bin:$PATH"
 
