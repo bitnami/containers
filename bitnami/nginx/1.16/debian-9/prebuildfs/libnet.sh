@@ -27,3 +27,18 @@ get_machine_ip() {
     dns_lookup "$(hostname)"
 }
 
+########################
+# Check if the provided argument is a resolved hostname
+# Arguments:
+#   $1 - Value to check
+# Returns:
+#   Boolean
+#########################
+is_hostname_resolved() {
+    local -r host="${1:?missing value}"
+    if dns_lookup "$host" > /dev/null; then
+        true
+    else
+        false 
+    fi
+}

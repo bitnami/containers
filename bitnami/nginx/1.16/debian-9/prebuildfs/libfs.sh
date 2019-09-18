@@ -109,11 +109,19 @@ configure_permissions_ownership() {
     read -r -a filepaths <<< "$paths"
     for p in "${filepaths[@]}"; do
         if [[ -e "$p" ]]; then
-            [[ -n $dir_mode ]] && find -L "$p" -type d -exec chmod "$dir_mode" {} \;
-            [[ -n $file_mode ]] && find -L "$p" -type f -exec chmod "$file_mode" {} \;
-            [[ -n $user ]] && [[ -n $group ]] && chown -LR "$user":"$group" "$p"
-            [[ -n $user ]] && [[ -z $group ]] && chown -LR "$user" "$p"
-            [[ -z $user ]] && [[ -n $group ]] && chgrp -LR "$group" "$p"
+            if [[ -n $dir_mode ]]; then
+                find -L "$p" -type d -exec chmod "$dir_mode" {} \;
+            fi
+            if [[ -n $file_mode ]]; then
+                find -L "$p" -type f -exec chmod "$file_mode" {} \;
+            fi
+            if [[ -n $user ]] && [[ -n $group ]]; then
+                chown -LR "$user":"$group" "$p"
+            elif [[ -n $user ]] && [[ -z $group ]]; then
+                chown -LR "$user" "$p"
+            elif [[ -z $user ]] && [[ -n $group ]]; then
+                chgrp -LR "$group" "$p"
+            fi
         else
             stderr_print "$p does not exist"
         fi
