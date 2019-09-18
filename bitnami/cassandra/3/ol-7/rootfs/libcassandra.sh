@@ -940,9 +940,9 @@ cassandra_start_bg() {
     local -r args=("-p $CASSANDRA_PID_FILE" "-R" "-f")
 
     if am_i_root; then
-        gosu "$CASSANDRA_DAEMON_USER" "$cmd" "${args[@]}" 2>&1 > $logger &
+        gosu "$CASSANDRA_DAEMON_USER" "${cmd[@]}" "${args[@]}" > "$logger" 2>&1 &
     else
-        "$cmd" "${args[@]}" 2>&1 > $logger &
+        "${cmd[@]}" "${args[@]}" > "$logger" 2>&1 &
     fi
 
     # Even though we set the pid, cassandra is not creating the proper file, so we create it manually
