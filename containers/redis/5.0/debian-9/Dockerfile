@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "redis" "5.0.5-1" --checksum f43c562
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.5-debian-9-r138" \
+    BITNAMI_IMAGE_VERSION="5.0.5-debian-9-r139" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH"
 
