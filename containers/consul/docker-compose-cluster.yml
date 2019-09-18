@@ -7,7 +7,7 @@ services:
       - CONSUL_BOOTSTRAP_EXPECT=3
       - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
       - CONSUL_DISABLE_KEYRING_FILE=true
-      - CONSUL_RETRY_JOIN=consul-node1
+      - CONSUL_RETRY_JOIN_ADDRESS=consul-node1
     ports:
       - '8300:8300'
       - '8301:8301'
@@ -24,8 +24,8 @@ services:
       - CONSUL_BOOTSTRAP_EXPECT=3
       - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
       - CONSUL_DISABLE_KEYRING_FILE=true
-      - CONSUL_RETRY_JOIN=consul-node1
-      - CONSUL_UI=false
+      - CONSUL_RETRY_JOIN_ADDRESS=consul-node1
+      - CONSUL_ENABLE_UI=false
     volumes:
       - 'consul-node2_data:/bitnami'
 
@@ -35,8 +35,8 @@ services:
       - CONSUL_BOOTSTRAP_EXPECT=3
       - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
       - CONSUL_DISABLE_KEYRING_FILE=true
-      - CONSUL_RETRY_JOIN=consul-node1
-      - CONSUL_UI=false
+      - CONSUL_RETRY_JOIN_ADDRESS=consul-node1
+      - CONSUL_ENABLE_UI=false
     volumes:
       - 'consul-node3_data:/bitnami'
 
