@@ -1,17 +1,26 @@
 #!/bin/bash
 
-. /opt/bitnami/base/functions
-. /opt/bitnami/base/helpers
+set -o errexit
+set -o nounset
+set -o pipefail
 
-USER=consul
-DAEMON=consul
-EXEC=$(which $DAEMON)
-START_COMMAND="${EXEC} agent -config-dir /opt/bitnami/consul/conf | tee /opt/bitnami/consul/logs/consul.log"
+. /libconsul.sh
+. /libos.sh
+. /liblog.sh
 
-info "Starting ${DAEMON}..."
-# If container is started as `root` user
-if [ $EUID -eq 0 ]; then
-    exec gosu ${USER} bash -c "${START_COMMAND}"
+# Load Consul env. variables
+eval "$(consul_env)"
+
+EXEC="${CONSUL_BASE_DIR}/bin/consul"
+flags=("agent" "-config-dir" "${CONSUL_CONF_DIR}" "-log-file" "${CONSUL_LOG_FILE}")
+
+if [[ "${CONSUL_AGENT_MODE}" = "server" ]]; then
+    flags+=("-server")
+fi
+
+info "** Starting Consul **"
+if am_i_root; then
+    exec gosu "${CONSUL_SYSTEM_USER}" "${EXEC}" "${flags[@]}"
 else
-    exec bash -c "${START_COMMAND}"
+    exec "${EXEC}" "${flags[@]}"
 fi
