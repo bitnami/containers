@@ -1,17 +1,17 @@
-FROM bitnami/oraclelinux-extras:7-r469
+FROM bitnami/oraclelinux-extras:7-r470
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/etcd-3.4.0-2-linux-x86_64-ol-7.tar.gz && \
-    echo "bc24c96d81190bd72d6a0fb2595d34e2af08b9d4ef746d5c98acb33050dc45ea  /tmp/bitnami/pkg/cache/etcd-3.4.0-2-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/etcd-3.4.0-2-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/etcd-3.4.0-2-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/etcd-3.4.1-0-linux-x86_64-ol-7.tar.gz && \
+    echo "2f17198e2912cb471305f62bd70d19e0d984e4d426cb52b790c2f181ba64f1e7  /tmp/bitnami/pkg/cache/etcd-3.4.1-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/etcd-3.4.1-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/etcd-3.4.1-0-linux-x86_64-ol-7.tar.gz
 
 COPY rootfs /
 RUN chmod g+rwX /opt/bitnami/etcd
 ENV BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.4.0-ol-7-r19" \
+    BITNAMI_IMAGE_VERSION="3.4.1-ol-7-r0" \
     ETCDCTL_API="3" \
     ETCD_ADVERTISE_CLIENT_URLS="http://127.0.0.1:2379" \
     ETCD_DATA_DIR="/opt/bitnami/etcd/data/" \
