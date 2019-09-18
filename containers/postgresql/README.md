@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`11-ol-7`, `11.5.0-ol-7-r44` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.5.0-ol-7-r44/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.5.0-debian-9-r42`, `11`, `11.5.0`, `11.5.0-r42`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.5.0-debian-9-r42/11/debian-9/Dockerfile)
-* [`11-centos-7`, `11.5.0-centos-7-r40` (11/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.5.0-centos-7-r40/11/centos-7/Dockerfile)
+* [`11-centos-7`, `11.5.0-centos-7-r41` (11/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.5.0-centos-7-r41/11/centos-7/Dockerfile)
 * [`10-ol-7`, `10.10.0-ol-7-r43` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.10.0-ol-7-r43/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.10.0-debian-9-r42`, `10`, `10.10.0`, `10.10.0-r42` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.10.0-debian-9-r42/10/debian-9/Dockerfile)
 * [`10-centos-7`, `10.10.0-centos-7-r45` (10/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.10.0-centos-7-r45/10/centos-7/Dockerfile)
@@ -89,7 +89,7 @@ $ docker run \
     bitnami/postgresql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -179,7 +179,7 @@ In order to have your custom files inside the docker image you can mount them as
 
 ## Initializing a new instance
 
-When the container is executed for the first time, it will execute the files with extensions `.sh`, `.sql` and `.sql.gz` located at `/docker-entrypoint-initdb.d` after starting postgresql.
+When the container is executed for the first time, it will execute the files with extensions `.sh`, `.sql` and `.sql.gz` located at `/docker-entrypoint-initdb.d`.
 
 In order to have your custom files inside the docker image you can mount them as a volume.
 
@@ -191,7 +191,7 @@ In the above commands you may have noticed the use of the `POSTGRESQL_PASSWORD` 
 $ docker run --name postgresql -e POSTGRESQL_PASSWORD=password123 bitnami/postgresql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -215,7 +215,7 @@ By passing the `POSTGRESQL_DATABASE` environment variable when running the image
 $ docker run --name postgresql -e POSTGRESQL_DATABASE=my_database bitnami/postgresql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -234,7 +234,7 @@ You can also create a restricted database user that only has permissions for the
 $ docker run --name postgresql -e POSTGRESQL_USERNAME=my_user -e POSTGRESQL_PASSWORD=password123 -e POSTGRESQL_DATABASE=my_database bitnami/postgresql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -536,7 +536,7 @@ $ docker run --name postgresql \
   bitnami/postgresql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
