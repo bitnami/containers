@@ -25,7 +25,7 @@ user_exists() {
 #########################
 group_exists() {
     local group="${1:?group is missing}"
-    getent group "$group"
+    getent group "$group" >/dev/null 2>&1
 }
 
 ########################
@@ -109,24 +109,24 @@ debug_execute() {
 }
 
 ########################
-# Retries a command until timeout
+# Retries a command a given number of times
 # Arguments:
 #   $1 - cmd (as a string)
-#   $2 - timeout (in seconds). Default: 60
-#   $3 - step (in seconds). Default: 5
+#   $2 - max retries. Default: 12
+#   $3 - sleep between retries (in seconds). Default: 5
 # Returns:
 #   Boolean
 #########################
 retry_while() {
     local -r cmd="${1:?cmd is missing}"
-    local -r timeout="${2:-60}"
-    local -r step="${3:-5}"
+    local -r retries="${2:-12}"
+    local -r sleep_time="${3:-5}"
     local return_value=1
 
     read -r -a command <<< "$cmd"
-    for ((i = 0 ; i <= timeout ; i+=step )); do
+    for ((i = 1 ; i <= retries ; i+=1 )); do
         "${command[@]}" && return_value=0 && break
-        sleep "$step"
+        sleep "$sleep_time"
     done
     return $return_value
 }
