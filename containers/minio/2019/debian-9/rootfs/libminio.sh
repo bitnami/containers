@@ -7,6 +7,7 @@
 
 # Load Libraries
 . /libservice.sh
+. /libnet.sh
 . /libos.sh
 . /libvalidations.sh
 . /libminioclient.sh
@@ -67,6 +68,7 @@ EOF
 #   Boolean
 #########################
 is_minio_running() {
+    local node
     local status
     if [[ -z "${MINIO_PID:-}" ]]; then
         false
@@ -74,7 +76,8 @@ is_minio_running() {
         if ! is_service_running "$MINIO_PID"; then
             false
         else
-            status="$(minio_client_execute_timeout admin info server local --json | jq -r .service)"
+            node=$(minio_node_hostname)
+            status="$(minio_client_execute_timeout admin info server local --json | grep "\"address\":\"${node}:" | jq -r .service)"
             if [[ "$status" = "on" ]]; then
                 true
             else
@@ -125,7 +128,7 @@ minio_start_bg() {
 #   None
 #########################
 minio_stop() {
-    if [[ is_minio_running ]]; then
+    if is_minio_running; then
         info "Stopping MinIO..."
         minio_client_execute_timeout admin service stop local || true
 
@@ -153,20 +156,24 @@ minio_stop() {
 #########################
 minio_validate() {
     debug "Validating settings in MINIO_* env vars.."
+    local error_code=0
+
+    # Auxiliary functions
+    print_validation_error() {
+        error "$1"
+        error_code=1
+    }
 
     if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
         if [[ -z "${MINIO_ACCESS_KEY:-}" ]] || [[ -z "${MINIO_ACCESS_KEY:-}" ]]; then
-            error "Distributed mode is enabled. Both MINIO_ACCESS_KEY and MINIO_ACCESS_KEY environment must be set"
-            exit 1
+            print_validation_error "Distributed mode is enabled. Both MINIO_ACCESS_KEY and MINIO_ACCESS_KEY environment must be set"
         fi
         if [[ -z "${MINIO_DISTRIBUTED_NODES:-}" ]]; then
-            error "Distributed mode is enabled. Nodes must be indicated setting the environment variable MINIO_DISTRIBUTED_NODES"
-            exit 1
+            print_validation_error "Distributed mode is enabled. Nodes must be indicated setting the environment variable MINIO_DISTRIBUTED_NODES"
         else
             read -r -a nodes <<< "$(tr ',;' ' ' <<< "${MINIO_DISTRIBUTED_NODES}")"
             if [[ "${#nodes[@]}" -lt 4 ]] || (( "${#nodes[@]}" % 2 )); then
-                error "Number of nodes must even and greater than 4."
-                exit 1
+                print_validation_error "Number of nodes must even and greater than 4."
             fi
         fi
     else
@@ -178,8 +185,7 @@ minio_validate() {
     local validate_port_args=()
     ! am_i_root && validate_port_args+=("-unprivileged")
     if ! err=$(validate_port "${validate_port_args[@]}" "$MINIO_PORT_NUMBER"); then
-        error "An invalid port was specified in the environment variable MINIO_PORT_NUMBER: $err"
-        exit 1
+        print_validation_error "An invalid port was specified in the environment variable MINIO_PORT_NUMBER: $err"
     fi
 
     if [[ -n "${MINIO_BROWSER:-}" ]]; then
@@ -193,10 +199,11 @@ minio_validate() {
         if [[ -w "$MINIO_HTTP_TRACE" ]]; then
             info "HTTP log trace enabled. Find the HTTP logs at: $MINIO_HTTP_TRACE"
         else
-            error "The HTTP log file specified at the environment variable MINIO_HTTP_TRACE is not writtable by current user \"$(id -u)\""
-            exit 1
+            print_validation_error "The HTTP log file specified at the environment variable MINIO_HTTP_TRACE is not writtable by current user \"$(id -u)\""
         fi
     fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 ########################
@@ -219,5 +226,28 @@ minio_create_default_buckets() {
                 info "Bucket local/${b} already exists, skipping creation."
             fi
         done
+    fi
+}
+
+########################
+# Return the node name of this instance
+# Globals:
+#   MINIO_DISTRIBUTED_MODE_ENABLED
+#   MINIO_DISTRIBUTED_NODES
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+minio_node_hostname() {
+    if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
+        read -r -a nodes <<< "$(tr ',;' ' ' <<< "${MINIO_DISTRIBUTED_NODES}")"
+        for node in "${nodes[@]}"; do
+            [[ $(get_machine_ip) = $(dns_lookup "$node") ]] && echo "$node" && return
+        done
+        error "Could not find own node in MINIO_DISTRIBUTE_NODES: ${MINIO_DISTRIBUTED_NODES}"
+        exit 1
+    else
+        echo "localhost"
     fi
 }
