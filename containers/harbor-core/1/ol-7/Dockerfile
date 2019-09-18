@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc
-RUN . ./libcomponent.sh && component_unpack "harbor-core" "1.8.2-0" --checksum 61f00b5531c079805bc44edf23574765d3fbd8b56c6510e336ab202ebc388cc5
+RUN . ./libcomponent.sh && component_unpack "harbor-core" "1.8.3-0" --checksum 92ef3c86b72be7d12927863ea7c32f3ae99a64cd64b6cf0e2a1d9844f93a9a48
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-core" \
-    BITNAMI_IMAGE_VERSION="1.8.2-ol-7-r37" \
+    BITNAMI_IMAGE_VERSION="1.8.3-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-core/bin:$PATH"
 
