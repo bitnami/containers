@@ -36,7 +36,7 @@ elasticsearch_conf_set() {
         yq w -i "$ELASTICSEARCH_CONF_FILE" "$name" "${values[0]}"
     else
         for i in "${!values[@]}"; do
-            yq w -i "$ELASTICSEARCH_CONF_FILE" "$name[$i]" "${values[$i]}"
+            yq w -i "$ELASTICSEARCH_CONF_FILE" "${name}[${i}]" "${values[$i]}"
         done
     fi
 }
@@ -184,14 +184,20 @@ elasticsearch_validate_kernel() {
 #   None
 #########################
 elasticsearch_validate() {
+    local error_code=0
+
     # Auxiliary functions
+    print_validation_error() {
+        error "$1"
+        error_code=1
+    }
+
     validate_node_type() {
         case "$ELASTICSEARCH_NODE_TYPE" in
             coordinating|data|ingest|master)
                 ;;
             *)
-                error "Invalid node type $ELASTICSEARCH_NODE_TYPE. Supported types are 'coordinating/data/ingest/master'"
-                exit 1
+                print_validation_error "Invalid node type $ELASTICSEARCH_NODE_TYPE. Supported types are 'coordinating/data/ingest/master'"
         esac
     }
 
@@ -200,15 +206,15 @@ elasticsearch_validate() {
     ! am_i_root && validate_port_args+=("-unprivileged")
     for var in "ELASTICSEARCH_PORT_NUMBER" "ELASTICSEARCH_NODE_PORT_NUMBER"; do
         if ! err=$(validate_port "${validate_port_args[@]}" "${!var}"); then
-            error "An invalid port was specified in the environment variable $var: $err"
-            exit 1
+            print_validation_error "An invalid port was specified in the environment variable $var: $err"
         fi
     done
     is_boolean_yes "$ELASTICSEARCH_IS_DEDICATED_NODE" && validate_node_type
     if [[ -n "$ELASTICSEARCH_BIND_ADDRESS" ]] && ! validate_ipv4 "$ELASTICSEARCH_BIND_ADDRESS"; then
-        error "The Bind Address specified in the environment variable ELASTICSEARCH_BIND_ADDRESS is not a valid IPv4"
-        exit 1
+        print_validation_error "The Bind Address specified in the environment variable ELASTICSEARCH_BIND_ADDRESS is not a valid IPv4"
     fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 # Bash use floor by default. You can use it to get ceil.
