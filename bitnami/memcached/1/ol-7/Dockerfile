@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libevent libselinux nss-softokn-freebl pcre
-RUN bitnami-pkg unpack memcached-1.5.17-0 --checksum 057276dc56c94d5b4b467942dd4cb4805f3e38bbd65bd21a69ae60d86e57b812
+RUN bitnami-pkg unpack memcached-1.5.18-0 --checksum e58b7c71aeeac20b234cb8215088f9acde45922d395b0c7c581bf00280302b7e
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.17-ol-7-r26" \
+    BITNAMI_IMAGE_VERSION="1.5.18-ol-7-r0" \
     MEMCACHED_CACHE_SIZE="64" \
     MEMCACHED_PASSWORD="" \
     MEMCACHED_USERNAME="root" \
