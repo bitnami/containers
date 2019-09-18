@@ -53,7 +53,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.6.1-ol-7-r6` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.6.1-ol-7-r6/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.6.1-ol-7-r7` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.6.1-ol-7-r7/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.6.1-debian-9-r5`, `1`, `1.6.1`, `1.6.1-r5`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.6.1-debian-9-r5/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/consul GitHub repo](https://github.com/bitnami/bitnami-docker-consul).
@@ -176,7 +176,7 @@ services:
       - CONSUL_BOOTSTRAP_EXPECT=3
       - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
       - CONSUL_DISABLE_KEYRING_FILE=true
-      - CONSUL_RETRY_JOIN=consul-node1
+      - CONSUL_RETRY_JOIN_ADDRESS=consul-node1
     ports:
       - '8300:8300'
       - '8301:8301'
@@ -201,8 +201,8 @@ consul-node2:
     - CONSUL_BOOTSTRAP_EXPECT=3
     - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
     - CONSUL_DISABLE_KEYRING_FILE=true
-    - CONSUL_RETRY_JOIN=consul-node1
-    - CONSUL_UI=false
+    - CONSUL_RETRY_JOIN_ADDRESS=consul-node1
+    - CONSUL_ENABLE_UI=false
   volumes:
     - 'consul-node2_data:/bitnami'
 
@@ -212,8 +212,8 @@ consul-node3:
     - CONSUL_BOOTSTRAP_EXPECT=3
     - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
     - CONSUL_DISABLE_KEYRING_FILE=true
-    - CONSUL_RETRY_JOIN=consul-node1
-    - CONSUL_UI=false
+    - CONSUL_RETRY_JOIN_ADDRESS=consul-node1
+    - CONSUL_ENABLE_UI=false
   volumes:
     - 'consul-node3_data:/bitnami'
 ```
@@ -242,7 +242,7 @@ services:
       - CONSUL_BOOTSTRAP_EXPECT=3
       - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
       - CONSUL_DISABLE_KEYRING_FILE=true
-      - CONSUL_RETRY_JOIN=consul-node1
+      - CONSUL_RETRY_JOIN_ADDRESS=consul-node1
     ports:
       - '8300:8300'
       - '8301:8301'
@@ -259,8 +259,8 @@ services:
       - CONSUL_BOOTSTRAP_EXPECT=3
       - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
       - CONSUL_DISABLE_KEYRING_FILE=true
-      - CONSUL_RETRY_JOIN=consul-node1
-      - CONSUL_UI=false
+      - CONSUL_RETRY_JOIN_ADDRESS=consul-node1
+      - CONSUL_ENABLE_UI=false
     volumes:
       - 'consul-node2_data:/bitnami'
 
@@ -270,8 +270,8 @@ services:
       - CONSUL_BOOTSTRAP_EXPECT=3
       - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
       - CONSUL_DISABLE_KEYRING_FILE=true
-      - CONSUL_RETRY_JOIN=consul-node1
-      - CONSUL_UI=false
+      - CONSUL_RETRY_JOIN_ADDRESS=consul-node1
+      - CONSUL_ENABLE_UI=false
     volumes:
       - 'consul-node3_data:/bitnami'
 
@@ -290,7 +290,7 @@ volumes:
 
 When you start the HashiCorp Consul image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. The following environment values are provided to custom HashiCorp Consul:
 
-- `CONSUL_SERVER_MODE`: Indicates if HashiCorp Consul is running in server or client mode. Valid values: server, client. Default: **server**.
+- `CONSUL_AGENT_MODE`: Indicates if HashiCorp Consul is running in server or client mode. Valid values: server, client. Default: **server**.
 - `CONSUL_SERF_LAN_ADDRESS`: Address used for Serf LAN communications. Default: **0.0.0.0**.
 - `CONSUL_CLIENT_LAN_ADDRESS`: Address in which HashiCorp Consul will bind client interfaces. Default: **0.0.0.0**.
 - `CONSUL_SERF_LAN_PORT_NUMBER`: Serf LAN port. Defualt: **8301**.
@@ -301,12 +301,13 @@ When you start the HashiCorp Consul image, you can adjust the configuration of t
 - `CONSUL_LOCAL_CONFIG`: Custom user configuration that will be added as a file in the config dir.
 - `CONSUL_GOSSIP_ENCRYPTION`: Enable Gossip encryption. Default: **no**.
 - `CONSUL_GOSSIP_ENCRYPTION_KEY`: Gossip private simmetric key.
+- `CONSUL_GOSSIP_ENCRYPTION_KEY_FILE`: File containing the gossip private simmetric key. If both `CONSUL_GOSSIP_ENCRYPTION_KEY` and `CONSUL_GOSSIP_ENCRYPTION_KEY_FILE` are provided, consul will use the `CONSUL_GOSSIP_ENCRYPTION_KEY_FILE`.
 - `CONSUL_DISABLE_KEYRING_FILE`: If set, the keyring will not be persisted to a file. Valid vaules: true, false. Default: **false**.
-- `CONSUL_UI`: Enable web user interface. Valid values: true, false. Default: **true**.
+- `CONSUL_ENABLE_UI`: Enable web user interface. Valid values: true, false. Default: **true**.
 - `CONSUL_BOOTSTRAP_EXPECT`: Number of expected nodes in the cluster, including itself. Default: **1**.
 - `CONSUL_DOMAIN`: HashiCorp Consul domain name. Default: **consul**.
 - `CONSUL_DATACENTER"`: The datacenter in which the agent is running. Default: **dc1**.
-- `CONSUL_RETRY_JOIN`: "Address of another agent to join upon starting up. Default: **127.0.0.1**
+- `CONSUL_RETRY_JOIN_ADDRESS`: "Address of another agent to join upon starting up. Default: **127.0.0.1**
 
 ### Specifying Environment Variables using Docker Compose
 
@@ -477,6 +478,18 @@ $ docker-compose up consul
 ```
 
 # Notable Changes
+
+## Debian 1.6.1-r6 and Oracle 1.6.1-r7
+
+Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder.
+Also, some env var changes have been performed maintaining backward compatibility through aliases:
+
+| New value                   | Old value            |
+| --------------------------- | -------------------- |
+| `CONSUL_ENABLE_UI`          | `CONSUL_UI`          |
+| `CONSUL_AGENT_MODE`         | `CONSUL_SERVER_MODE` |
+| `CONSUL_RETRY_JOIN_ADDRESS` | `CONSUL_RETRY_JOIN`  |
+
 
 ## 1.4.0-r16
 
