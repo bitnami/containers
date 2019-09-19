@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r480
+FROM bitnami/minideb-extras:stretch-r482
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,17 +9,11 @@ RUN bitnami-pkg install wp-cli-2.3.0-0 --checksum 7e781573d52a2019c78318aad46f4e
 RUN bitnami-pkg unpack mysql-client-10.3.18-1 --checksum 0923287dea11bd5880530ca456435e3f4c1c089bee2f8eea1dbf69821478e370
 RUN bitnami-pkg install libphp-7.3.9-0 --checksum 255f11dda8a7f4b9ee1bb91ca8802e65548b7ab304c300c37432f2910312fcdd
 RUN bitnami-pkg unpack wordpress-5.2.3-2 --checksum a254f59451e40d4e73bb7630fa022e508ab98eda184107be48b5228f3c149d62
-RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
-RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
-    APACHE_HTTPS_PORT_NUMBER="" \
-    APACHE_HTTP_PORT_NUMBER="" \
-    APACHE_SET_HTTPS_PORT="no" \
-    APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.2.3-debian-9-r15" \
+    BITNAMI_IMAGE_VERSION="5.2.3-debian-9-r16" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -52,9 +46,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     WORDPRESS_TABLE_PREFIX="wp_" \
     WORDPRESS_USERNAME="user"
 
-VOLUME [ "/certs" ]
-
 EXPOSE 80 443
 
 ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "httpd", "-f", "/opt/bitnami/apache/conf/httpd.conf", "-DFOREGROUND" ]
+CMD [ "nami", "start", "--foreground", "apache" ]
