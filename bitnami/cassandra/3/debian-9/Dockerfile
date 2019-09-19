@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r363
+FROM bitnami/minideb-extras-base:stretch-r365
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -16,7 +16,7 @@ RUN . ./libcomponent.sh && component_unpack "cassandra" "3.11.4-3" --checksum 68
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.4-debian-9-r200" \
+    BITNAMI_IMAGE_VERSION="3.11.4-debian-9-r201" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/cassandra/bin:$PATH"
 
