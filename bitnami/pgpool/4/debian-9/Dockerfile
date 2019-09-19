@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r363
+FROM bitnami/minideb-extras-base:stretch-r365
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV OS_ARCH="amd64" \
@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "pgpool" "4.0.6-0" --checksum d34a29
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="pgpool" \
-    BITNAMI_IMAGE_VERSION="4.0.6-debian-9-r17" \
+    BITNAMI_IMAGE_VERSION="4.0.6-debian-9-r18" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/pgpool/bin:$PATH"
 
 EXPOSE 5432
