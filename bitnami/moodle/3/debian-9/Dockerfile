@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r480
+FROM bitnami/minideb-extras:stretch-r482
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,18 +8,12 @@ RUN bitnami-pkg unpack php-7.3.9-1 --checksum c82b1601abbb8cdff5b18d5c162cc04ad6
 RUN bitnami-pkg unpack mysql-client-10.1.41-1 --checksum ad775119fc439ef17b7c1bdcb558768e6b0a5d2c2c4de6112ef371347f950d77
 RUN bitnami-pkg install libphp-7.3.9-0 --checksum 255f11dda8a7f4b9ee1bb91ca8802e65548b7ab304c300c37432f2910312fcdd
 RUN bitnami-pkg unpack moodle-3.7.2-0 --checksum 13471fbc67fd2ab81ad4d9d4ba57b279cb73fc2932b2aaf7612129e267fae722
-RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
-RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
-    APACHE_HTTPS_PORT_NUMBER="" \
-    APACHE_HTTP_PORT_NUMBER="" \
-    APACHE_SET_HTTPS_PORT="no" \
-    APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.7.2-debian-9-r12" \
+    BITNAMI_IMAGE_VERSION="3.7.2-debian-9-r13" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -43,8 +37,6 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     SMTP_PORT="" \
     SMTP_PROTOCOL="" \
     SMTP_USER=""
-
-VOLUME [ "/certs" ]
 
 EXPOSE 80 443
 
