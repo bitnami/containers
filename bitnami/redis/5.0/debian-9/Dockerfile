@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r363
+FROM bitnami/minideb-extras-base:stretch-r365
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "redis" "5.0.5-1" --checksum f43c562
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.5-debian-9-r139" \
+    BITNAMI_IMAGE_VERSION="5.0.5-debian-9-r140" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH"
 
