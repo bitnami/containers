@@ -45,8 +45,10 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2.4-ol-7`, `2.4.41-ol-7-r41` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.41-ol-7-r41/2.4/ol-7/Dockerfile)
+* [`2.4-ol-7`, `2.4.41-ol-7-r42` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.41-ol-7-r42/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.41-debian-9-r39`, `2.4`, `2.4.41`, `2.4.41-r39`, `latest` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.41-debian-9-r39/2.4/debian-9/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/apache GitHub repo](https://github.com/bitnami/bitnami-docker-apache).
 
 # Get this image
 
@@ -288,20 +290,22 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 The Bitnami Apache Docker image is built using a Dockerfile with the structure below:
 
 ```Dockerfile
-FROM bitnami/minideb-extras
+FROM bitnami/minideb-extras-base
 ...
 # Install required system packages and dependencies
 RUN install_packages xxx yyy zzz
-RUN bitnami-pkg unpack apache-aa.bb.cc-dd
+RUN . ./libcomponent.sh && component_unpack "apache" "aa.bb.cc-dd"
 ...
 COPY rootfs /
-ENV APACHE_PARAMETER="xyz" ...
-VOLUME [ "/app", "/certs" ]
+
+ENV ...
+
 EXPOSE 8080 8443
+
 WORKDIR /app
 USER 1001
-ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "httpd", "-f", "/opt/bitnami/apache/conf/httpd.conf", "-DFOREGROUND" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD [ "/run.sh" ]
 ```
 
 The Dockerfile has several sections related to:
@@ -360,8 +364,8 @@ RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt
 
 ## Modify the ports used by Apache by default
 # It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181 
-EXPOSE 8181 8143
+ENV APACHE_HTTP_PORT_NUMBER=8181
+EXPOSE 8181 8443
 
 ## Modify the default container user
 USER 1002
@@ -385,7 +389,7 @@ services:
     depends_on:
       - cloner
     volumes:
-      - ./config/my_vhost.conf:/opt/bitnami/apache/conf/vhosts/my_vhost.conf:ro
+      - ./config/my_vhost.conf:/vhosts/my_vhost.conf:ro
       - ./certs:/certs
       - data:/app
   cloner:
@@ -470,6 +474,10 @@ $ docker-compose up apache
 ](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
 
 # Notable Changes
+
+## 2.4.41-debian-9-r40 and 2.4.41-ol-7-r42
+
+- Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder.
 
 ## 2.4.39-debian-9-r40 and 2.4.39-ol-7-r50
 
