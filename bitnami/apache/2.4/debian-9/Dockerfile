@@ -1,31 +1,24 @@
-FROM bitnami/minideb-extras:stretch-r482
+FROM bitnami/minideb-extras-base:stretch-r365
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    HOME="/"
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-9" \
+    OS_NAME="linux"
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libexpat1 libffi6 libgmp10 libgnutls30 libhogweed4 libidn11 libldap-2.4-2 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libsasl2-2 libssl1.1 libtasn1-6 zlib1g
-RUN bitnami-pkg unpack apache-2.4.41-1 --checksum 4a3bb4e02de7df61c742b4fa57a044487e8d168da630cf84b29129f45e6e9225
-RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
-RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
-RUN chmod -R g+rwX /opt/bitnami/apache/tmp /opt/bitnami/apache/conf
+RUN . ./libcomponent.sh && component_unpack "apache" "2.4.41-1" --checksum 4a3bb4e02de7df61c742b4fa57a044487e8d168da630cf84b29129f45e6e9225
 
 COPY rootfs /
-ENV APACHE_HTTPS_PORT_NUMBER="8443" \
-    APACHE_HTTP_PORT_NUMBER="8080" \
-    APACHE_SET_HTTPS_PORT="no" \
-    APACHE_SET_HTTP_PORT="no" \
-    BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.41-debian-9-r39" \
-    NAMI_PREFIX="/.nami" \
+RUN /postunpack.sh
+ENV BITNAMI_APP_NAME="apache" \
+    BITNAMI_IMAGE_VERSION="2.4.41-debian-9-r40" \
     PATH="/opt/bitnami/apache/bin:$PATH"
-
-VOLUME [ "/certs" ]
 
 EXPOSE 8080 8443
 
 WORKDIR /app
 USER 1001
-ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "httpd", "-f", "/opt/bitnami/apache/conf/httpd.conf", "-DFOREGROUND" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD [ "/run.sh" ]
