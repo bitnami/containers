@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r421
+FROM bitnami/oraclelinux-extras-base:7-r422
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "mongodb" "4.0.12-0" --checksum d756
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.0.12-ol-7-r43" \
+    BITNAMI_IMAGE_VERSION="4.0.12-ol-7-r44" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mongodb/bin:$PATH"
 
