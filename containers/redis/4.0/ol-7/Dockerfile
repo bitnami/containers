@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc
-RUN . ./libcomponent.sh && component_unpack "redis" "4.0.14-1" --checksum e41238fd87f4dbb9d435d96a8f040b563f9f4ac425a4ea7ac06f85c946547542
+RUN . ./libcomponent.sh && component_unpack "redis" "4.0.14-2" --checksum 7c651b7aa358ee8a98436a9fc7a199e98a30bff42bf351e856a996cfefeaa7c2
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.14-ol-7-r185" \
+    BITNAMI_IMAGE_VERSION="4.0.14-ol-7-r186" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH"
 
