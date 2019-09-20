@@ -4,16 +4,16 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds-libs freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.41-1 --checksum 64b7880c3d0f0f9e7cde0e71496eed06d4240a90a2b6d62c2443fce54c614691
-RUN bitnami-pkg unpack php-7.3.9-1 --checksum d12b49a00eb74dae3b46b4c5b57c9709e79e3157ddd26959c8ca08e919265bb7
-RUN bitnami-pkg install wp-cli-2.3.0-0 --checksum 7ae9887b24f2b2a7821d9df9c0f837d140cf78dd0993015255ce901ec3326533
-RUN bitnami-pkg unpack mysql-client-10.3.18-1 --checksum d591461ce65ca7c65ebdaf443a4dad68c05e5153cf2d5a9a97b2ff1171dfe42e
+RUN bitnami-pkg unpack php-7.3.9-2 --checksum 5c1255ac466225ad8a68d970ee6f6e2e246d39e01aeab455557ea267bd55160a
+RUN bitnami-pkg install wp-cli-2.3.0-1 --checksum 3d5f2c4659ddd73a99a6021ab49951641642315fa495ef8dd7e5adc1c6aaff52
+RUN bitnami-pkg unpack mysql-client-10.3.18-2 --checksum c9d987cf8f6f6831d04920d64598d0c77cf994235753cf4d5d18ac787c12918e
 RUN bitnami-pkg install libphp-7.3.9-0 --checksum d571181cffcf99e28bf1a53f5664136b391f99996f1471ab426aa73e6f09eed2
-RUN bitnami-pkg unpack wordpress-5.2.3-2 --checksum 90a75d92f95ace7300c1b96321aa7174438dafd61fa41ddfdec02e4ea97e8a5d
+RUN bitnami-pkg unpack wordpress-5.2.3-3 --checksum 0d58e416ac2ef8bb435fa2e3541ebfafec24161bf7e23f95e66c7c0be245e608
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.2.3-ol-7-r20" \
+    BITNAMI_IMAGE_VERSION="5.2.3-ol-7-r21" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
