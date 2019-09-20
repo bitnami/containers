@@ -1,0 +1,48 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be used in production.
+##
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-couchdb
+  labels:
+    app.kubernetes.io/name: test-couchdb
+    app.kubernetes.io/component: couchdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: test-couchdb
+      app.kubernetes.io/component: couchdb
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: test-couchdb
+        app.kubernetes.io/component: couchdb
+    spec:
+      containers:
+      - image: bitnami/couchdb
+        name: couchdb
+        env:
+        - name: ALLOW_ANONYMOUS_LOGIN
+          value: "yes"
+        ports:
+        - name: couchdb
+          containerPort: 5984
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-couchdb
+  labels:
+    app.kubernetes.io/name: test-couchdb
+    app.kubernetes.io/component: couchdb
+spec:
+  ports:
+  - port: 5984
+    protocol: TCP
+    targetPort: couchdb
+  selector:
+    app.kubernetes.io/name: test-couchdb
+    app.kubernetes.io/component: couchdb
