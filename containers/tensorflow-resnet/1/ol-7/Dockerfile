@@ -6,11 +6,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc libgcc libstdc++
-RUN bitnami-pkg unpack tensorflow-resnet-1.14.0-0 --checksum 42be68452ff070e37178a45f6ffe122b68e53090ca78028b4f7f7adfb96d6f1a
+RUN bitnami-pkg unpack tensorflow-resnet-1.14.0-1 --checksum 8b0398e26ebde30507357e6c25fc4761f616ae4853427987ae7aa2bb6ea35215
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-resnet" \
-    BITNAMI_IMAGE_VERSION="1.14.0-ol-7-r76" \
+    BITNAMI_IMAGE_VERSION="1.14.0-ol-7-r77" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-resnet/bin:$PATH"
 
