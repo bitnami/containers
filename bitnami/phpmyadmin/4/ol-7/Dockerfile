@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r471
+FROM bitnami/oraclelinux-extras:7-r472
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,16 +7,10 @@ RUN bitnami-pkg unpack apache-2.4.41-1 --checksum 64b7880c3d0f0f9e7cde0e71496eed
 RUN bitnami-pkg unpack php-7.3.9-1 --checksum d12b49a00eb74dae3b46b4c5b57c9709e79e3157ddd26959c8ca08e919265bb7
 RUN bitnami-pkg install libphp-7.3.9-0 --checksum d571181cffcf99e28bf1a53f5664136b391f99996f1471ab426aa73e6f09eed2
 RUN bitnami-pkg unpack phpmyadmin-4.9.0-1-1 --checksum 3e4e5d989ae22bf94e2f64ac03359262b5c4fa4d407fed47e9ce78d72e518d04
-RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
-RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
 COPY rootfs /
-ENV APACHE_HTTPS_PORT_NUMBER="" \
-    APACHE_HTTP_PORT_NUMBER="" \
-    APACHE_SET_HTTPS_PORT="no" \
-    APACHE_SET_HTTP_PORT="no" \
-    BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="4.9.0-1-ol-7-r108" \
+ENV BITNAMI_APP_NAME="phpmyadmin" \
+    BITNAMI_IMAGE_VERSION="4.9.0-1-ol-7-r109" \
     DATABASE_ENABLE_SSL="no" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
@@ -31,9 +25,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     PHPMYADMIN_ALLOW_NO_PASSWORD="true" \
     REQUIRE_LOCAL="no"
 
-VOLUME [ "/certs" ]
-
 EXPOSE 80 443
 
 ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "httpd", "-f", "/opt/bitnami/apache/conf/httpd.conf", "-DFOREGROUND" ]
+CMD [ "nami", "start", "--foreground", "apache" ]
