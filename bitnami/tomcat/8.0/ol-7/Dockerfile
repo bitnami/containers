@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack tomcat-8.0.53-22 --checksum 307d965a78e5f7f2d931c244a4cbe
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="8.0.53-ol-7-r417" \
+    BITNAMI_IMAGE_VERSION="8.0.53-ol-7-r418" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
