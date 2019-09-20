@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc
-RUN . ./libcomponent.sh && component_unpack "harbor-notary-server" "1.9.0-0" --checksum 8fac75df96226286b84d924ce69f65fb99d6082629eeb3cc489f8737d9586264
+RUN . ./libcomponent.sh && component_unpack "harbor-notary-server" "1.9.0-1" --checksum 4feb9f05ed70c0ec45bea35400c43f4ca71038ffe6ede1987cc49a3295710fae
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-notary-server" \
-    BITNAMI_IMAGE_VERSION="1.9.0-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="1.9.0-ol-7-r2" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-notary-server/bin:$PATH" \
     SERVICE_NAME="notary_server"
