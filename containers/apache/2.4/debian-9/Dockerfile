@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "apache" "2.4.41-1" --checksum 4a3bb
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.41-debian-9-r41" \
+    BITNAMI_IMAGE_VERSION="2.4.41-debian-9-r42" \
     PATH="/opt/bitnami/apache/bin:$PATH"
 
 EXPOSE 8080 8443
