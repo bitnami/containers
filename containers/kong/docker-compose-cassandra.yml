@@ -1,0 +1,25 @@
+version: '2'
+services:
+  cassandra:
+    image: bitnami/cassandra:3
+    volumes:
+      - cassandra_data:/bitnami
+    environment:
+      - CASSANDRA_CLUSTER_NAME=cassandra-cluster
+      - CASSANDRA_SEEDS=cassandra
+      - CASSANDRA_USER=kong
+      - CASSANDRA_PASSWORD=kong
+      - CASSANDRA_PASSWORD_SEEDER=yes
+  kong:
+    image: bitnami/kong:1
+    ports:
+      - 8000:8000
+      - 8443:8443
+    environment:
+      - KONG_MIGRATE=yes
+      - KONG_DATABASE=cassandra
+      - KONG_CASSANDRA_CONTACT_POINTS=cassandra
+      - KONG_CASSANDRA_PASSWORD=kong
+volumes:
+  cassandra_data:
+    driver: local
