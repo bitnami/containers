@@ -5,8 +5,7 @@
 
 print_welcome_page
 
-if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "httpd" ]]; then
-  . /apache-init.sh
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
   . /osclass-init.sh
   nami_initialize apache php mysql-client osclass
   info "Starting osclass... "
