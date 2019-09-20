@@ -1,0 +1,109 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be used in production.
+##
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: test-postgresql
+    app.kubernetes.io/component: test-postgresql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: test-postgresql
+      app.kubernetes.io/component: postgresql
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: test-postgresql
+        app.kubernetes.io/component: postgresql
+    spec:
+      containers:
+      - image: bitnami/postgresql
+        name: test-postgresql
+        env:
+        - name: POSTGRESQL_USERNAME
+          value: kong
+        - name: POSTGRESQL_PASSWORD
+          value: bitnami
+        - name: POSTGRESQL_DATABASE
+          value: kong
+        posts:
+        - name: postgresql
+          containerPort: 5432
+          protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: test-kong
+    app.kubernetes.io/component: kong
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: test-kong
+      app.kubernetes.io/component: kong
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: test-kong
+        app.kubernetes.io/component: kong
+    spec:
+      containers:
+      - image: bitnami/kong
+        name: kong
+        env:
+        - name: KONG_MIGRATE
+          value: yes
+        - name: KONG_PG_HOST
+          value: postgresql
+        - name: KONG_PG_PASSWORD
+          value: bitnami
+        ports:
+        - name: kong-proxy
+          containerPort: 8000
+          protocol: TCP
+        - name: kong-proxy-ssl
+          containerPort: 8000
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-postgresql
+  labels:
+    app.kubernetes.io/name: test-postgresql
+    app.kubernetes.io/component: postgresql
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+    protocol: TCP
+    targetPort: postgresql
+  selector:
+    app.kubernetes.io/name: test-postgresql
+    app.kubernetes.io/component: postgresql
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-kong
+  labels:
+    app.kubernetes.io/name: test-kong
+    app.kubernetes.io/component: kong
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: kong-proxy
+  - port: 8443
+    protocol: TCP
+    targetPort: kong-proxy-ssl
+  selector:
+    app.kubernetes.io/name: test-kong
+    app.kubernetes.io/component: kong
