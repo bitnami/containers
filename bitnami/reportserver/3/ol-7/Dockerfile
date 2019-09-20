@@ -3,15 +3,15 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libcom_err libgcc libselinux libstdc++ ncurses-libs openssl-libs pcre zlib
-RUN bitnami-pkg install java-1.8.222-0 --checksum a90f4ce71ff9b392efdf61e6941117afa31d2d6528bd1a3cad1c6459bcac2b0b
+RUN bitnami-pkg install java-1.8.222-1 --checksum 664cacaa11342e877410b197d21343543c2987cd66f15d2adc32cc61eee48eaa
 RUN bitnami-pkg unpack tomcat-9.0.24-0 --checksum 4fe1009901b4f436bf7381532076307f17d61ce28b4683fca37e35163d5ddf28
-RUN bitnami-pkg unpack mysql-client-10.3.18-1 --checksum d591461ce65ca7c65ebdaf443a4dad68c05e5153cf2d5a9a97b2ff1171dfe42e
-RUN bitnami-pkg unpack reportserver-3.0.8-6009-0 --checksum 50ab91e7660397fb8cb05ea88e49fa5e616b44403191cde234e9f967369345c5
+RUN bitnami-pkg unpack mysql-client-10.3.18-2 --checksum c9d987cf8f6f6831d04920d64598d0c77cf994235753cf4d5d18ac787c12918e
+RUN bitnami-pkg unpack reportserver-3.0.8-6009-1 --checksum 362c907e62033f13cebf564087532b8bf26a38e79cffa18e2f1b89f50d1c5514
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserver" \
-    BITNAMI_IMAGE_VERSION="3.0.8-6009-ol-7-r26" \
+    BITNAMI_IMAGE_VERSION="3.0.8-6009-ol-7-r27" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
