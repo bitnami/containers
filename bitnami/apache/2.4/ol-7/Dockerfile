@@ -8,12 +8,12 @@ ENV HOME="/" \
 
 # Install required system packages and dependencies
 RUN install_packages cyrus-sasl-lib expat glibc keyutils-libs krb5-libs libcom_err libnghttp2 libselinux nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre zlib
-RUN . ./libcomponent.sh && component_unpack "apache" "2.4.41-1" --checksum 64b7880c3d0f0f9e7cde0e71496eed06d4240a90a2b6d62c2443fce54c614691
+RUN . ./libcomponent.sh && component_unpack "apache" "2.4.41-2" --checksum bf50a12c033c1ff0e1cb7696cc1abd29a132cc1c5225e9d2fdbb3c6584e349fe
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.41-ol-7-r43" \
+    BITNAMI_IMAGE_VERSION="2.4.41-ol-7-r44" \
     PATH="/opt/bitnami/apache/bin:$PATH"
 
 EXPOSE 8080 8443
