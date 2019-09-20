@@ -8,11 +8,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     OS_NAME="linux"
 
 # Install required system packages and dependencies
-RUN . ./libcomponent.sh && component_unpack "chartmuseum" "0.9.0-1" --checksum b00f680b3b1454e257fc23f52dcd4f7fc2a4a4bc02ba1f405812e282fbe954d6
+RUN . ./libcomponent.sh && component_unpack "chartmuseum" "0.9.0-2" --checksum 01f4572c5f1dda178835c137f313989621d42647a07d2e5f24711efe77a9537d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.9.0-debian-9-r46" \
+    BITNAMI_IMAGE_VERSION="0.9.0-debian-9-r47" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/chartmuseum/bin:$PATH"
 
