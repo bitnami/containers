@@ -23,6 +23,7 @@ $ docker-compose up
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 > This [CVE scan report](https://quay.io/repository/bitnami/keycloak-gatekeeper?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
@@ -36,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-scratch`, `2.3.0-scratch-r2`, `2`, `2.3.0`, `2.3.0-r2`, `latest` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/2.3.0/2/scratch/Dockerfile)
+* [`2-scratch`, `2.3.0-scratch-r3`, `2`, `2.3.0`, `2.3.0-r3`, `latest` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/2.3.0/2/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak-gatekeeper GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper).
 
@@ -63,7 +64,7 @@ $ docker pull bitnami/keycloak-gatekeeper:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/keycloak-gatekeeper:latest https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper.git
+$ docker build -t bitnami/keycloak-gatekeeper:latest 'https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper.git#master:2/scratch'
 ```
 
 # Configuration
@@ -81,19 +82,15 @@ $ docker run --name keycloak-gatekeeper \
 
 After that, your configuration will be taken into account in Keycloak Gatekeeper.
 
-Using Docker Compose:
+You can do this using Docker Compose by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
-services:
-  keycloak-gatekeeper:
-    image: bitnami/keycloak-gatekeeper:latest
-    ports:
-      - '3000:3000'
-    command: /keycloak-proxy --config /opt/bitnami/keycloak-gatekeeper/config.yaml
-    volumes:
-      - /path/to/config.yaml:/opt/bitnami/keycloak-gatekeeper/config.yaml:ro
+keycloak-gatekeeper:
+  ...
+  command: /keycloak-proxy --config /opt/bitnami/keycloak-gatekeeper/config.yaml
+  volumes:
+    - /path/to/config.yaml:/opt/bitnami/keycloak-gatekeeper/config.yaml:ro
+  ...
 ```
 
 ## Using command-line options
@@ -108,26 +105,22 @@ $ docker run --name keycloak-gatekeeper bitnami/keycloak-gatekeeper:latest /keyc
   --client-id <CLIENT_ID>
 ```
 
-Using Docker Compose:
+You can do this using Docker Compose by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-version: '2'
-
-services:
-  keycloak-gatekeeper:
-    image: bitnami/keycloak-gatekeeper:latest
-    command:
-      - /keycloak-proxy
-      - --listen
-      - 127.0.0.1:3000
-      - --upstream-url
-      - http://127.0.0.1:80
-      - --discovery-url
-      - https://keycloak.example.com/auth/realms/<REALM_NAME>
-      - --client-id
-      - <CLIENT_ID>
-    ports:
-      - '3000:3000'
+keycloak-gatekeeper:
+  ...
+  command:
+    - /keycloak-proxy
+    - --listen
+    - 127.0.0.1:3000
+    - --upstream-url
+    - http://127.0.0.1:80
+    - --discovery-url
+    - https://keycloak.example.com/auth/realms/<REALM_NAME>
+    - --client-id
+    - <CLIENT_ID>
+  ...
 ```
 
 Find more information about the available configuration options on this [link](https://www.keycloak.org/docs/latest/securing_apps/index.html#configuration-options)
