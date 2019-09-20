@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r471
+FROM bitnami/oraclelinux-extras:7-r472
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,16 +10,10 @@ RUN bitnami-pkg install mysql-client-10.3.18-1 --checksum d591461ce65ca7c65ebdaf
 RUN bitnami-pkg install mongodb-client-4.0.12-0 --checksum 5b76a5dc447981b48b968df93b64b1f9051bfc6f68787d50d4a775308074f5cc
 RUN bitnami-pkg install libphp-7.1.32-0 --checksum 610f060804c3bf81cb587cb2b39cb8dd120b2b37e182854ab5a04f4f89c51ebb
 RUN bitnami-pkg unpack dreamfactory-3.0.1-0 --checksum 4adfec9855b36206a047c8436eed1899027f15231944471582cb9172cc5dc8a1
-RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
-RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
 COPY rootfs /
-ENV APACHE_HTTPS_PORT_NUMBER="" \
-    APACHE_HTTP_PORT_NUMBER="" \
-    APACHE_SET_HTTPS_PORT="no" \
-    APACHE_SET_HTTP_PORT="no" \
-    BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="3.0.1-ol-7-r32" \
+ENV BITNAMI_APP_NAME="dreamfactory" \
+    BITNAMI_IMAGE_VERSION="3.0.1-ol-7-r33" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
     MARIADB_PORT_NUMBER="3306" \
@@ -38,9 +32,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     SMTP_PROTOCOL="" \
     SMTP_USER=""
 
-VOLUME [ "/certs" ]
-
 EXPOSE 80 443
 
 ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "httpd", "-f", "/opt/bitnami/apache/conf/httpd.conf", "-DFOREGROUND" ]
+CMD [ "nami", "start", "--foreground", "apache" ]
