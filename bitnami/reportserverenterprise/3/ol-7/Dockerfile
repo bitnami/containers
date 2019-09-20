@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r471
+FROM bitnami/oraclelinux-extras:7-r472
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack reportserverenterprise-3.0.8-6009-0 --checksum da001cee0d
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserverenterprise" \
-    BITNAMI_IMAGE_VERSION="3.0.8-6009-ol-7-r21" \
+    BITNAMI_IMAGE_VERSION="3.0.8-6009-ol-7-r22" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -36,13 +36,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     SMTP_SSL_ENABLE="false" \
     SMTP_TLS_ENABLE="false" \
     SMTP_TLS_REQUIRED="false" \
-    SMTP_USER="" \
-    TOMCAT_AJP_PORT_NUMBER="8009" \
-    TOMCAT_ALLOW_REMOTE_MANAGEMENT="0" \
-    TOMCAT_HTTP_PORT_NUMBER="8080" \
-    TOMCAT_PASSWORD="" \
-    TOMCAT_SHUTDOWN_PORT_NUMBER="8005" \
-    TOMCAT_USERNAME="user"
+    SMTP_USER=""
 
 EXPOSE 8080 8443
 
