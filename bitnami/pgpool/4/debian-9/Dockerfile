@@ -7,13 +7,13 @@ ENV OS_ARCH="amd64" \
 
 # Install required system packages and dependencies
 RUN install_packages ldap-utils libaudit1 libbsd0 libc6 libcap-ng0 libedit2 libgcc1 libicu57 liblzma5 libncurses5 libnss-ldapd libpam-ldap libpam0g libssl1.1 libstdc++6 libtinfo5 libuuid1 libxml2 libxslt1.1 nslcd zlib1g
-RUN . ./libcomponent.sh && component_unpack "postgresql-client" "10.10.0-0" --checksum 1f7e0f81461e8ab2593f88f79a2eb618ee657647fcc971b4c150a7fd9c40433a
-RUN . ./libcomponent.sh && component_unpack "pgpool" "4.0.6-0" --checksum d34a29982d08302f13c6c3531e2cf4e01c5042d1126fd3347b573c695552e140
+RUN . ./libcomponent.sh && component_unpack "postgresql-client" "10.10.0-1" --checksum 77f89198ede517c8355f466642643cc787989b16bd136c0efcfea0a2d21282cb
+RUN . ./libcomponent.sh && component_unpack "pgpool" "4.0.6-1" --checksum 57b281979f058f56f0db85e1e39617531d21816b9dc7a406f2da9fa27cb1c46e
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="pgpool" \
-    BITNAMI_IMAGE_VERSION="4.0.6-debian-9-r19" \
+    BITNAMI_IMAGE_VERSION="4.0.6-debian-9-r20" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/pgpool/bin:$PATH"
 
 EXPOSE 5432
