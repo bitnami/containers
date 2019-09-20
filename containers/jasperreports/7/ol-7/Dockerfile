@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r471
+FROM bitnami/oraclelinux-extras:7-r472
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack jasperreports-7.2.0-1 --checksum f7b36f3e76e068cf56ecdda3
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.2.0-ol-7-r124" \
+    BITNAMI_IMAGE_VERSION="7.2.0-ol-7-r125" \
     JASPERREPORTS_DATABASE_NAME="bitnami_jasperreports" \
     JASPERREPORTS_DATABASE_PASSWORD="" \
     JASPERREPORTS_DATABASE_USER="bn_jasperreports" \
@@ -32,13 +32,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     SMTP_PASSWORD="" \
     SMTP_PORT="" \
     SMTP_PROTOCOL="" \
-    SMTP_USER="" \
-    TOMCAT_AJP_PORT_NUMBER="8009" \
-    TOMCAT_ALLOW_REMOTE_MANAGEMENT="0" \
-    TOMCAT_HTTP_PORT_NUMBER="8080" \
-    TOMCAT_PASSWORD="" \
-    TOMCAT_SHUTDOWN_PORT_NUMBER="8005" \
-    TOMCAT_USERNAME="user"
+    SMTP_USER=""
 
 EXPOSE 8080 8443
 
