@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r482
+FROM bitnami/minideb-extras:stretch-r483
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,17 +8,11 @@ RUN bitnami-pkg unpack php-7.2.22-1 --checksum 354146eb8ad2cbe69ddb62ac259a026e1
 RUN bitnami-pkg unpack mysql-client-10.3.18-1 --checksum 0923287dea11bd5880530ca456435e3f4c1c089bee2f8eea1dbf69821478e370
 RUN bitnami-pkg install libphp-7.2.22-0 --checksum fbe0fcc057cbc1b6541b1533267537c51e626bad2c46643e96f8f9aa2abfa31f
 RUN bitnami-pkg unpack phpbb-3.2.7-1 --checksum 94994fcc6d25e0916319f9171a21e865b662a5df8af4d9a68ba25b794f4253e7
-RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
-RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
-    APACHE_HTTPS_PORT_NUMBER="" \
-    APACHE_HTTP_PORT_NUMBER="" \
-    APACHE_SET_HTTPS_PORT="no" \
-    APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="phpbb" \
-    BITNAMI_IMAGE_VERSION="3.2.7-debian-9-r128" \
+    BITNAMI_IMAGE_VERSION="3.2.7-debian-9-r129" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -44,9 +38,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     SMTP_PORT="" \
     SMTP_USER=""
 
-VOLUME [ "/certs" ]
-
 EXPOSE 80 443
 
 ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "httpd", "-f", "/opt/bitnami/apache/conf/httpd.conf", "-DFOREGROUND" ]
+CMD [ "nami", "start", "--foreground", "apache" ]
