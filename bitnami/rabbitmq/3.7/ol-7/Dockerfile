@@ -9,13 +9,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc ncurses-libs openssl-libs zlib
-RUN . ./libcomponent.sh && component_unpack "erlang" "22.1.0-0" --checksum ee441c626910944178716ae352b9647ec59130d2b54e6c87ce1eec095f0d204b
-RUN . ./libcomponent.sh && component_unpack "rabbitmq" "3.7.18-0" --checksum 2e105f1eaaab3fd29a7a6ebe26dade81d805e86e9da8a257c0cf17dc6ee0982e
+RUN . ./libcomponent.sh && component_unpack "erlang" "22.1.0-1" --checksum e3c861c70ab15fa6d3757f0d36af12f6f89c1f3bfc800e40654ecb4551436a0e
+RUN . ./libcomponent.sh && component_unpack "rabbitmq" "3.7.18-1" --checksum 4c916c3ea1c2aca80b9ba1eb16631f11b6b3590422e58ff34b72851580ec599b
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.7.18-ol-7-r3" \
+    BITNAMI_IMAGE_VERSION="3.7.18-ol-7-r4" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
