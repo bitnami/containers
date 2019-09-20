@@ -9,13 +9,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc libgcc zlib
-RUN . ./libcomponent.sh && component_unpack "java" "1.8.222-0" --checksum a90f4ce71ff9b392efdf61e6941117afa31d2d6528bd1a3cad1c6459bcac2b0b
-RUN . ./libcomponent.sh && component_unpack "zookeeper" "3.5.5-5" --checksum f82ce31ffc52b2cbabc0ddeb3a8715716cc14ed11c9533daf04da32f9ab220bd
+RUN . ./libcomponent.sh && component_unpack "java" "1.8.222-1" --checksum 664cacaa11342e877410b197d21343543c2987cd66f15d2adc32cc61eee48eaa
+RUN . ./libcomponent.sh && component_unpack "zookeeper" "3.5.5-6" --checksum 5f6e44cff972bb40405dbad0dd1f89c4c13f4a57b5e42cc5992161894528d805
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.5.5-ol-7-r109" \
+    BITNAMI_IMAGE_VERSION="3.5.5-ol-7-r110" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH"
 
