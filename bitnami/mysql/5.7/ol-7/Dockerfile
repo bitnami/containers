@@ -9,13 +9,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages cyrus-sasl-lib glibc keyutils-libs krb5-libs libaio libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl pcre
-RUN . ./libcomponent.sh && component_unpack "mysql" "5.7.27-1" --checksum 814a109993bbf8c84cef3c1f3e4104d5f7f9f01ecd596b38e494f7e2b9dfce51
+RUN . ./libcomponent.sh && component_unpack "mysql" "5.7.27-2" --checksum 8f292af502e21cc8a077c8082acfa83a94bd4f80116c600eb455ad2e4d259195
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.27-ol-7-r66" \
+    BITNAMI_IMAGE_VERSION="5.7.27-ol-7-r67" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mysql/bin:$PATH"
 
