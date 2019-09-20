@@ -7,13 +7,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc libaio libgcc zlib
-RUN bitnami-pkg install java-1.8.222-0 --checksum a90f4ce71ff9b392efdf61e6941117afa31d2d6528bd1a3cad1c6459bcac2b0b
-RUN bitnami-pkg unpack wildfly-17.0.1-0 --checksum 47794d26c09d33e7397e71e4e2eafd7f7211735e1411e3d776d9a52279ce3a90
+RUN bitnami-pkg install java-1.8.222-1 --checksum 664cacaa11342e877410b197d21343543c2987cd66f15d2adc32cc61eee48eaa
+RUN bitnami-pkg unpack wildfly-17.0.1-1 --checksum e4a37283f484dfdb6c7c89f3d52f44145f0f16774bd317c36c2cac0d06f4a16c
 RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="17.0.1-ol-7-r83" \
+    BITNAMI_IMAGE_VERSION="17.0.1-ol-7-r84" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly" \
