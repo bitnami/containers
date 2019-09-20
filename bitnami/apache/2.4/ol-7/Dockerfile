@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r422
+FROM bitnami/oraclelinux-extras-base:7-r423
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "apache" "2.4.41-1" --checksum 64b78
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.41-ol-7-r42" \
+    BITNAMI_IMAGE_VERSION="2.4.41-ol-7-r43" \
     PATH="/opt/bitnami/apache/bin:$PATH"
 
 EXPOSE 8080 8443
