@@ -1,29 +1,19 @@
-FROM bitnami/oraclelinux-extras:7-r471
+FROM bitnami/oraclelinux-extras:7-r472
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    BITNAMI_PKG_EXTRA_DIRS="/home/tomcat" \
     HOME="/"
 
 # Install required system packages and dependencies
 RUN install_packages glibc libgcc zlib
-RUN bitnami-pkg install java-1.8.222-0 --checksum a90f4ce71ff9b392efdf61e6941117afa31d2d6528bd1a3cad1c6459bcac2b0b
-RUN bitnami-pkg unpack tomcat-7.0.96-0 --checksum 93f018c8080fab753c69404d17b3d594da44218b61761271f4497a8af0e5aa4a
-RUN ln -sf /opt/bitnami/tomcat/data /app
+RUN bitnami-pkg install java-1.8.222-1 --checksum 664cacaa11342e877410b197d21343543c2987cd66f15d2adc32cc61eee48eaa
+RUN bitnami-pkg unpack tomcat-7.0.96-1 --checksum 7fea32150a6f4a4fdde7e52ca2ea4acc73f1524b43bdf39bac878225e3a9227d
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="7.0.96-ol-7-r53" \
-    JAVA_OPTS="-Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8" \
+    BITNAMI_IMAGE_VERSION="7.0.96-ol-7-r54" \
     NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH" \
-    TOMCAT_AJP_PORT_NUMBER="8009" \
-    TOMCAT_ALLOW_REMOTE_MANAGEMENT="0" \
-    TOMCAT_HOME="/home/tomcat" \
-    TOMCAT_HTTP_PORT_NUMBER="8080" \
-    TOMCAT_PASSWORD="" \
-    TOMCAT_SHUTDOWN_PORT_NUMBER="8005" \
-    TOMCAT_USERNAME="user"
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
 EXPOSE 8080
 
