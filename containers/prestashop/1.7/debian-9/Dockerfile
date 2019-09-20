@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r482
+FROM bitnami/minideb-extras:stretch-r483
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,17 +8,11 @@ RUN bitnami-pkg unpack php-7.2.22-1 --checksum 354146eb8ad2cbe69ddb62ac259a026e1
 RUN bitnami-pkg unpack mysql-client-10.1.41-1 --checksum ad775119fc439ef17b7c1bdcb558768e6b0a5d2c2c4de6112ef371347f950d77
 RUN bitnami-pkg install libphp-7.2.22-0 --checksum fbe0fcc057cbc1b6541b1533267537c51e626bad2c46643e96f8f9aa2abfa31f
 RUN bitnami-pkg unpack prestashop-1.7.6-1-0 --checksum c74ea7d77701bc5abb0c06f4161d6364069caf842a2f2ff6b30612244d78f444
-RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
-RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
-    APACHE_HTTPS_PORT_NUMBER="" \
-    APACHE_HTTP_PORT_NUMBER="" \
-    APACHE_SET_HTTPS_PORT="no" \
-    APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-1-debian-9-r22" \
+    BITNAMI_IMAGE_VERSION="1.7.6-1-debian-9-r23" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -45,9 +39,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     SMTP_PROTOCOL="" \
     SMTP_USER=""
 
-VOLUME [ "/certs" ]
-
 EXPOSE 80 443
 
 ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "httpd", "-f", "/opt/bitnami/apache/conf/httpd.conf", "-DFOREGROUND" ]
+CMD [ "nami", "start", "--foreground", "apache" ]
