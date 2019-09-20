@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6
-RUN . ./libcomponent.sh && component_unpack "redis" "5.0.5-1" --checksum f43c5625691360ae2c5a43aebb772b9ae05a3268efabe5c0474e0804505f0a9a
+RUN . ./libcomponent.sh && component_unpack "redis" "5.0.5-2" --checksum f695fff6d1aecaeb2bee37837ad126442828e9264c861e9a6f06ded07274903e
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.5-debian-9-r141" \
+    BITNAMI_IMAGE_VERSION="5.0.5-debian-9-r142" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH"
 
