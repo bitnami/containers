@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6
-RUN . ./libcomponent.sh && component_unpack "harbor-notary-server" "1.9.0-0" --checksum cd04e663e0a5102a3b20e9c55bf1b79d1f904104f154518cc5d78c83f5299928
+RUN . ./libcomponent.sh && component_unpack "harbor-notary-server" "1.9.0-1" --checksum f2f21323ca014055a57e4211f50dc4cbc2fe97bbee846025235e8bafd8b4ddf5
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-notary-server" \
-    BITNAMI_IMAGE_VERSION="1.9.0-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="1.9.0-debian-9-r2" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-notary-server/bin:$PATH" \
     SERVICE_NAME="notary_server"
