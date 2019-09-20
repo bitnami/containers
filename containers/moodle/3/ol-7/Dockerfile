@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r471
+FROM bitnami/oraclelinux-extras:7-r472
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,17 +8,11 @@ RUN bitnami-pkg unpack php-7.3.9-1 --checksum d12b49a00eb74dae3b46b4c5b57c9709e7
 RUN bitnami-pkg unpack mysql-client-10.1.41-1 --checksum 8ffd1d59e2a60ae3a1d314d86212b05d02ae0f5ff0e2691e8e48dd367d4854a7
 RUN bitnami-pkg install libphp-7.3.9-0 --checksum d571181cffcf99e28bf1a53f5664136b391f99996f1471ab426aa73e6f09eed2
 RUN bitnami-pkg unpack moodle-3.7.2-0 --checksum f869aff58f40e116dba3777d0c5224e78d0867ab1b743cc731c4042c705730c7
-RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
-RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
-    APACHE_HTTPS_PORT_NUMBER="" \
-    APACHE_HTTP_PORT_NUMBER="" \
-    APACHE_SET_HTTPS_PORT="no" \
-    APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.7.2-ol-7-r13" \
+    BITNAMI_IMAGE_VERSION="3.7.2-ol-7-r14" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -42,8 +36,6 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     SMTP_PORT="" \
     SMTP_PROTOCOL="" \
     SMTP_USER=""
-
-VOLUME [ "/certs" ]
 
 EXPOSE 80 443
 
