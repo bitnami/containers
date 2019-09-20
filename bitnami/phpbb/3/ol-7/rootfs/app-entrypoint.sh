@@ -5,7 +5,7 @@
 
 print_welcome_page
 
-if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "httpd" ]]; then
+if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
   . /phpbb-init.sh
   nami_initialize apache php mysql-client phpbb
   info "Starting phpbb... "
