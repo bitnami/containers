@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/redis-exporter-1.1.1-0-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="redis-exporter" \
-    BITNAMI_IMAGE_VERSION="1.1.1-debian-9-r12" \
+    BITNAMI_IMAGE_VERSION="1.1.1-debian-9-r13" \
     PATH="/opt/bitnami/redis-exporter/bin:$PATH"
 
 EXPOSE 9121
