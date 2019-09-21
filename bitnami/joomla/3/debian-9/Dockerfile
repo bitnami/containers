@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r483
+FROM bitnami/minideb-extras:stretch-r484
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack joomla-3.9.11-0 --checksum ed8f50f2c93522711a2309591c777d
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.9.11-debian-9-r36" \
+    BITNAMI_IMAGE_VERSION="3.9.11-debian-9-r37" \
     JOOMLA_DATABASE_NAME="bitnami_joomla" \
     JOOMLA_DATABASE_PASSWORD="" \
     JOOMLA_DATABASE_USER="bn_joomla" \
