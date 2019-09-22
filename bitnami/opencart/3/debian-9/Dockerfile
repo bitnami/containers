@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack opencart-3.0.3-2-1 --checksum 7b06f20da43fe5057b885023dd1
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="opencart" \
-    BITNAMI_IMAGE_VERSION="3.0.3-2-debian-9-r139" \
+    BITNAMI_IMAGE_VERSION="3.0.3-2-debian-9-r140" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
