@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r473
+FROM bitnami/oraclelinux-extras:7-r474
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack orangehrm-4.3.3-0-0 --checksum 79eaf89d80718d6fb01b027a8e
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.3.3-0-ol-7-r22" \
+    BITNAMI_IMAGE_VERSION="4.3.3-0-ol-7-r23" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
