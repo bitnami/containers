@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/kube-state-metrics-1.7.2-1-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="kube-state-metrics" \
-    BITNAMI_IMAGE_VERSION="1.7.2-debian-9-r48" \
+    BITNAMI_IMAGE_VERSION="1.7.2-debian-9-r49" \
     PATH="/opt/bitnami/kube-state-metrics/bin:$PATH"
 
 EXPOSE 8080 8081
