@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack orangehrm-4.3.3-0-0 --checksum 412bad0a18baba76295b54ec51
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.3.3-0-debian-9-r17" \
+    BITNAMI_IMAGE_VERSION="4.3.3-0-debian-9-r18" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
