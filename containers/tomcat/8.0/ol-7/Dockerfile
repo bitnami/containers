@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r473
+FROM bitnami/oraclelinux-extras:7-r474
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack tomcat-8.0.53-23 --checksum 472914d1aba64fc8af159cbe9a02b
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="8.0.53-ol-7-r420" \
+    BITNAMI_IMAGE_VERSION="8.0.53-ol-7-r421" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
