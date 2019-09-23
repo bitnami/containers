@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack tensorflow-resnet-1.14.0-1 --checksum e42b36801ad89638438
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-resnet" \
-    BITNAMI_IMAGE_VERSION="1.14.0-debian-9-r64" \
+    BITNAMI_IMAGE_VERSION="1.14.0-debian-9-r65" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-resnet/bin:$PATH"
 
