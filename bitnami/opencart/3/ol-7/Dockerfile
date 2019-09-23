@@ -7,12 +7,12 @@ RUN bitnami-pkg unpack apache-2.4.41-2 --checksum bf50a12c033c1ff0e1cb7696cc1abd
 RUN bitnami-pkg unpack php-7.3.9-2 --checksum 5c1255ac466225ad8a68d970ee6f6e2e246d39e01aeab455557ea267bd55160a
 RUN bitnami-pkg unpack mysql-client-10.3.18-2 --checksum c9d987cf8f6f6831d04920d64598d0c77cf994235753cf4d5d18ac787c12918e
 RUN bitnami-pkg install libphp-7.3.9-0 --checksum d571181cffcf99e28bf1a53f5664136b391f99996f1471ab426aa73e6f09eed2
-RUN bitnami-pkg unpack opencart-3.0.3-2-1 --checksum d7bd381efdfcbf3441063bc4a1c60b32057295be5da2c1ad5adb9c4e084b7502
+RUN bitnami-pkg unpack opencart-3.0.3-2-2 --checksum c16d0c07d338afb76355f647c3b16f5e039aa22d59240f70ef5ba31d077b4d95
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="opencart" \
-    BITNAMI_IMAGE_VERSION="3.0.3-2-ol-7-r164" \
+    BITNAMI_IMAGE_VERSION="3.0.3-2-ol-7-r165" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
