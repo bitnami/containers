@@ -1,27 +1,33 @@
 #!/bin/bash
 
-. /opt/bitnami/base/functions
-. /opt/bitnami/base/helpers
+# shellcheck disable=SC1091
 
-USER=memcached
-DAEMON=memcached
-EXEC=$(which $DAEMON)
-LOGFILE="/opt/bitnami/memcached/logs/memcached.log"
-PIDFILE="/opt/bitnami/memcached/tmp/memcached.pid"
-CONFDIR="/opt/bitnami/memcached/conf/"
-EXTRA_OPTIONS=" -m ${MEMCACHED_CACHE_SIZE:-64}"
+set -o errexit
+set -o nounset
+set -o pipefail
+# set -o xtrace # Uncomment this line for debugging purposes
 
-# configure command line flag and env vars for authentication
-if [[ -n $MEMCACHED_PASSWORD ]]; then
-    EXTRA_OPTIONS+=" -S"
-    export SASL_CONF_PATH="${CONFDIR}"
+# Load libraries
+. /liblog.sh
+. /libos.sh
+. /libmemcached.sh
+
+# Load Memcached environment variables
+eval "$(memcached_env)"
+
+# Constants
+EXEC=$(command -v memcached)
+
+# Configure arguments with extra flags
+args=("-u ${MEMCACHED_DAEMON_USER}" "-p ${MEMCACHED_PORT_NUMBER}" "-m ${MEMCACHED_CACHE_SIZE}" "$(memcached_debug_flags)")
+if [[ -f "${SASL_DB_FILE}" ]]; then
+    args+=("-S")
 fi
+args+=("$@")
 
-ARGS="-p 11211 -P ${PIDFILE} -u memcached -v ${EXTRA_OPTIONS} > ${LOGFILE} 2>&1"
-
-# If container is started as `root` user
-if [ $EUID -eq 0 ]; then
-    exec gosu ${USER} ${EXEC} ${ARGS}
+info "** Starting Memcached **"
+if am_i_root; then
+    exec gosu "${MEMCACHED_DAEMON_USER}" "${EXEC}" "${args[@]}"
 else
-    exec ${EXEC} ${ARGS}
+    exec "${EXEC}" "${args[@]}"
 fi
