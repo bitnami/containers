@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "zookeeper" "3.5.5-6" --checksum d9b
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.5.5-debian-9-r111" \
+    BITNAMI_IMAGE_VERSION="3.5.5-debian-9-r112" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH"
 
