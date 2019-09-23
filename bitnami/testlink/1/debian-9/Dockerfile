@@ -7,12 +7,12 @@ RUN bitnami-pkg unpack apache-2.4.41-2 --checksum 54e604bee81357824146780a26fbd9
 RUN bitnami-pkg unpack php-7.3.9-2 --checksum 69246bf42d21036e31e0f7791e3f3f969cdd3ece404802585766b92967de048f
 RUN bitnami-pkg unpack mysql-client-10.3.18-2 --checksum 9ba76d9543cc87642f23cc4987e12750e8690d45274c3701aa429ef19e3b8e08
 RUN bitnami-pkg install libphp-7.3.9-0 --checksum 255f11dda8a7f4b9ee1bb91ca8802e65548b7ab304c300c37432f2910312fcdd
-RUN bitnami-pkg unpack testlink-1.9.19-1 --checksum b5d74b618f9acc96c09b87cb2f4f6ed9a4008c85bd7d86db834a986ec22e4bbd
+RUN bitnami-pkg unpack testlink-1.9.19-2 --checksum b91eb82ed2bedd9a779a11f4938ec544db5a3d3e6daac8ca9fb1fbcd8038368e
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="testlink" \
-    BITNAMI_IMAGE_VERSION="1.9.19-debian-9-r214" \
+    BITNAMI_IMAGE_VERSION="1.9.19-debian-9-r215" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
