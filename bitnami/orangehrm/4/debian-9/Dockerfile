@@ -6,13 +6,13 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libf
 RUN bitnami-pkg unpack apache-2.4.41-2 --checksum 54e604bee81357824146780a26fbd99a889852240ae94cc4779264c9f231f535
 RUN bitnami-pkg unpack php-7.2.22-2 --checksum bd188cdcb17e98673db3aa05756cd183c467d62fa88c15cc41a436daac73e72e
 RUN bitnami-pkg unpack mysql-client-10.2.27-2 --checksum 6bffd027329f6786b0c0ef649564d83de216ee51a26bb92644c446d9ed1e6817
-RUN bitnami-pkg install libphp-7.2.22-0 --checksum fbe0fcc057cbc1b6541b1533267537c51e626bad2c46643e96f8f9aa2abfa31f
-RUN bitnami-pkg unpack orangehrm-4.3.3-0-0 --checksum 412bad0a18baba76295b54ec5179f23c34230bf2405563b069c0bbe86bd49695
+RUN bitnami-pkg install libphp-7.2.22-1 --checksum 01a84cf1c469f1d59f84eeec31b8c9fb535d5cd6eff4a4c5fb3cac504d463561
+RUN bitnami-pkg unpack orangehrm-4.3.3-0-1 --checksum fc3a0d8ba7b9a796e90338a1f3dcea5d69ec346ae9f74f3125a4215e66c22937
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.3.3-0-debian-9-r18" \
+    BITNAMI_IMAGE_VERSION="4.3.3-0-debian-9-r19" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
