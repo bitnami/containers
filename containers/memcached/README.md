@@ -46,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.5.18-ol-7-r6` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.18-ol-7-r6/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.5.18-ol-7-r7` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.18-ol-7-r7/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.5.18-debian-9-r5`, `1`, `1.5.18`, `1.5.18-r5`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.18-debian-9-r5/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/memcached GitHub repo](https://github.com/bitnami/bitnami-docker-memcached).
@@ -167,7 +167,9 @@ services:
 
 ## Creating the Memcached admin user
 
-Authentication on the Memcached server is disabled by default. To enable authentication, specify a username and password for the Memcached admin user using the `MEMCACHED_USERNAME` and `MEMCACHED_PASSWORD` environment variables.
+Authentication on the Memcached server is disabled by default. To enable authentication, specify the password for the Memcached admin user using the `MEMCACHED_PASSWORD` environment variable (or in the content of the file specified in `MEMCACHED_PASSWORD_FILE`).
+
+To customize the username of the Memcached admin user, which defaults to `root`, the `MEMCACHED_USERNAME` variable should be specified.
 
 ```bash
 docker run --name memcached \
@@ -191,6 +193,42 @@ services:
 ```
 
 > The default value of the `MEMCACHED_USERNAME` is `root`.
+
+## Passing extra command-line flags to memcached
+
+Passing extra command-line flags to the Memcached service command is possible by adding them as arguments to *run.sh* script:
+
+```bash
+$ docker run --name memcached bitnami/memcached:latest /run.sh -vvv
+```
+
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-memcached/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  memcached:
+  ...
+    command: /run.sh -vvv
+  ...
+```
+
+Refer to the [Memcached man page](https://www.unix.com/man-page/linux/1/memcached/) for the complete list of arguments.
+
+## Using custom SASL configuration
+
+In order to load your own SASL configuration file, you will have to make them available to the container. You can do it doing the following:
+
+- Mounting a volume with your custom configuration
+- Adding custom configuration via environment variable.
+
+By default, when authentication is enabled the SASL configuration of Memcached is written to `/opt/bitnami/memcached/sasl2/memcached.conf` file with the following content:
+
+```config
+mech_list: plain
+sasldb_path: /opt/bitnami/memcached/conf/memcachedsasldb
+```
+
+The `/opt/bitnami/memcached/conf/memcachedsasldb` is the path to the sasldb file that contains the list of Memcached users.
 
 # Logging
 
@@ -250,6 +288,12 @@ docker-compose up memcached
 ```
 
 # Notable Changes
+
+## 1.5.18-debian-9-r6 and 1.5.18-ol-7-r7
+
+- Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/ folder.
+- Custom SASL configuration should be mounted at `/opt/bitnami/memcached/conf/sasl2/` instead of `/bitnami/memcached/conf/`.
+- Password for Memcached admin user can be specified in the content of the file specified in `MEMCACHED_PASSWORD_FILE`.
 
 ## 1.5.0-r1
 
