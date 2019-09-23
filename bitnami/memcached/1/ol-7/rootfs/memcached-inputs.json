@@ -1,5 +1,0 @@
-{
-  "cacheSize": "{{$global.env.MEMCACHED_CACHE_SIZE}}",
-  "password": "{{$global.env.MEMCACHED_PASSWORD}}",
-  "username": "{{$global.env.MEMCACHED_USERNAME}}"
-}
