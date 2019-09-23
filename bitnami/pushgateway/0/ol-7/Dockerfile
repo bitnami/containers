@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r474
+FROM bitnami/oraclelinux-extras:7-r475
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/pushgateway-0.9.1-1-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="pushgateway" \
-    BITNAMI_IMAGE_VERSION="0.9.1-ol-7-r56" \
+    BITNAMI_IMAGE_VERSION="0.9.1-ol-7-r57" \
     PATH="/opt/bitnami/pushgateway/bin:$PATH"
 
 EXPOSE 9091
