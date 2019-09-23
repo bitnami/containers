@@ -6,13 +6,13 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libf
 RUN bitnami-pkg unpack apache-2.4.41-2 --checksum 54e604bee81357824146780a26fbd99a889852240ae94cc4779264c9f231f535
 RUN bitnami-pkg unpack php-7.2.22-2 --checksum bd188cdcb17e98673db3aa05756cd183c467d62fa88c15cc41a436daac73e72e
 RUN bitnami-pkg unpack mysql-client-10.3.18-2 --checksum 9ba76d9543cc87642f23cc4987e12750e8690d45274c3701aa429ef19e3b8e08
-RUN bitnami-pkg install libphp-7.2.22-0 --checksum fbe0fcc057cbc1b6541b1533267537c51e626bad2c46643e96f8f9aa2abfa31f
-RUN bitnami-pkg unpack phpbb-3.2.7-1 --checksum 94994fcc6d25e0916319f9171a21e865b662a5df8af4d9a68ba25b794f4253e7
+RUN bitnami-pkg install libphp-7.2.22-1 --checksum 01a84cf1c469f1d59f84eeec31b8c9fb535d5cd6eff4a4c5fb3cac504d463561
+RUN bitnami-pkg unpack phpbb-3.2.7-2 --checksum 10fd5fd47abee0b43ba9e7df45b9a970c40d6c310be22e7cb436e18de8d40d81
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="phpbb" \
-    BITNAMI_IMAGE_VERSION="3.2.7-debian-9-r132" \
+    BITNAMI_IMAGE_VERSION="3.2.7-debian-9-r133" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
