@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack drupal-8.7.7-0 --checksum 83966dced7b2b89e7c05a77c90568f4
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.7.7-debian-9-r16" \
+    BITNAMI_IMAGE_VERSION="8.7.7-debian-9-r17" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
