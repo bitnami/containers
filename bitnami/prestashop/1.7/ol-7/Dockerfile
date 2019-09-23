@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r474
+FROM bitnami/oraclelinux-extras:7-r475
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack prestashop-1.7.6-1-0 --checksum 2fdff58b4b5b03d94348ebb49
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-1-ol-7-r30" \
+    BITNAMI_IMAGE_VERSION="1.7.6-1-ol-7-r31" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
