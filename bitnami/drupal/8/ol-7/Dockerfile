@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r474
+FROM bitnami/oraclelinux-extras:7-r475
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack drupal-8.7.7-0 --checksum 8e803841b11d898620e1578e1b1494e
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.7.7-ol-7-r21" \
+    BITNAMI_IMAGE_VERSION="8.7.7-ol-7-r22" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
