@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r367
+FROM bitnami/minideb-extras-base:stretch-r368
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "elasticsearch" "7.3.2-1" --checksum
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="7.3.2-debian-9-r9" \
+    BITNAMI_IMAGE_VERSION="7.3.2-debian-9-r10" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/elasticsearch/bin:$PATH"
