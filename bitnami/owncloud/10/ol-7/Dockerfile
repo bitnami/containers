@@ -6,13 +6,13 @@ RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds-libs freetype glibc
 RUN bitnami-pkg unpack apache-2.4.41-2 --checksum bf50a12c033c1ff0e1cb7696cc1abd29a132cc1c5225e9d2fdbb3c6584e349fe
 RUN bitnami-pkg unpack php-7.2.22-2 --checksum 57a218b0f376107e8e2eac7cf36d817f71dc2da7dbcb21cc10995fc020fdb9f9
 RUN bitnami-pkg unpack mysql-client-10.3.18-2 --checksum c9d987cf8f6f6831d04920d64598d0c77cf994235753cf4d5d18ac787c12918e
-RUN bitnami-pkg install libphp-7.2.22-0 --checksum 061b2675f485ac761a1bc91b7dc30b5056a3cecc4fda7a5396bfcefdf09b9c4d
-RUN bitnami-pkg unpack owncloud-10.2.1-0 --checksum d78fd8861f8b1058bdd2b9759148b94ceadf32af9e07e9f53d3add26299b05e0
+RUN bitnami-pkg install libphp-7.2.22-1 --checksum 67a5567885cb6f06f149793eadde262bc8782fa02a2d436010e9fbd718d33d04
+RUN bitnami-pkg unpack owncloud-10.2.1-1 --checksum fe77f6dbccc1277155eeeb1842faa10f78b5bc86a3ba61387242edf8dedeb306
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.2.1-ol-7-r79" \
+    BITNAMI_IMAGE_VERSION="10.2.1-ol-7-r80" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
