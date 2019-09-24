@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r426
+FROM bitnami/oraclelinux-extras-base:7-r427
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.27-ol-7-r13" \
+    BITNAMI_IMAGE_VERSION="10.2.27-ol-7-r14" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
