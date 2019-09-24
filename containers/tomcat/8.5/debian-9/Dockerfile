@@ -1,32 +1,24 @@
-FROM bitnami/minideb-extras:stretch-r482
+FROM bitnami/minideb-extras-base:stretch-r368
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    BITNAMI_PKG_EXTRA_DIRS="/home/tomcat" \
-    HOME="/"
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-9" \
+    OS_NAME="linux"
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 zlib1g
-RUN bitnami-pkg install java-1.8.222-0 --checksum e5a677e160c01cd605bc6aae75cc937d4b2d37514b3e1d0a1dd2d332422e68c7
-RUN bitnami-pkg unpack tomcat-8.5.45-0 --checksum 6cdb56e5c1044d342d0205347365bf866fbfaf476c18bc53cd77f24e8d9ea281
-RUN ln -sf /opt/bitnami/tomcat/data /app
+RUN . ./libcomponent.sh && component_unpack "java" "1.8.222-1" --checksum 373c9f3d2943b9ff653fc0e7c69b1d54a75807726691a09190648808500b8253
+RUN . ./libcomponent.sh && component_unpack "tomcat" "8.5.46-0" --checksum e976797f9cb1345ad96211855882d03805607f52dec45754a34c8d5eaaa6f6f8
 
 COPY rootfs /
+RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="8.5.45-debian-9-r28" \
-    JAVA_OPTS="-Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8" \
-    NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH" \
-    TOMCAT_AJP_PORT_NUMBER="8009" \
-    TOMCAT_ALLOW_REMOTE_MANAGEMENT="0" \
-    TOMCAT_HOME="/home/tomcat" \
-    TOMCAT_HTTP_PORT_NUMBER="8080" \
-    TOMCAT_PASSWORD="" \
-    TOMCAT_SHUTDOWN_PORT_NUMBER="8005" \
-    TOMCAT_USERNAME="user"
+    BITNAMI_IMAGE_VERSION="8.5.46-debian-9-r0" \
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
 EXPOSE 8080
 
 USER 1001
-ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "nami", "start", "--foreground", "tomcat" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD [ "/run.sh" ]
