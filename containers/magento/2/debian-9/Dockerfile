@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r483
+FROM bitnami/minideb-extras:stretch-r484
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,7 +6,7 @@ RUN install_packages cron libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6
 RUN bitnami-pkg unpack apache-2.4.41-2 --checksum 54e604bee81357824146780a26fbd99a889852240ae94cc4779264c9f231f535
 RUN bitnami-pkg unpack php-7.2.22-2 --checksum bd188cdcb17e98673db3aa05756cd183c467d62fa88c15cc41a436daac73e72e
 RUN bitnami-pkg unpack mysql-client-10.2.27-2 --checksum 6bffd027329f6786b0c0ef649564d83de216ee51a26bb92644c446d9ed1e6817
-RUN bitnami-pkg install libphp-7.2.22-0 --checksum fbe0fcc057cbc1b6541b1533267537c51e626bad2c46643e96f8f9aa2abfa31f
+RUN bitnami-pkg install libphp-7.2.22-1 --checksum 01a84cf1c469f1d59f84eeec31b8c9fb535d5cd6eff4a4c5fb3cac504d463561
 RUN bitnami-pkg unpack magento-2.3.2-2 --checksum 8f088f0bfc5e0ce0144598dd3cc175806ecca82b20b62a07eb9308a2352c9945
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 RUN find /opt/bitnami/magento/htdocs -type d -print0 | xargs -0 chmod 775 && find /opt/bitnami/magento/htdocs -type f -print0 | xargs -0 chmod 664 && chown -R bitnami:daemon /opt/bitnami/magento/htdocs
@@ -14,7 +14,7 @@ RUN find /opt/bitnami/magento/htdocs -type d -print0 | xargs -0 chmod 775 && fin
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.2-debian-9-r64" \
+    BITNAMI_IMAGE_VERSION="2.3.2-debian-9-r65" \
     ELASTICSEARCH_HOST="" \
     ELASTICSEARCH_PORT_NUMBER="" \
     EXTERNAL_HTTPS_PORT_NUMBER="443" \
