@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10.2-debian-9`, `10.2.27-debian-9-r13`, `10.2`, `10.2.27`, `10.2.27-r13` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.27-debian-9-r13/10.2/debian-9/Dockerfile)
 * [`10.2-centos-7`, `10.2.27-centos-7-r14` (10.2/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.27-centos-7-r14/10.2/centos-7/Dockerfile)
 * [`10.1-ol-7`, `10.1.41-ol-7-r60` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.41-ol-7-r60/10.1/ol-7/Dockerfile)
-* [`10.1-debian-9`, `10.1.41-debian-9-r58`, `10.1`, `10.1.41`, `10.1.41-r58` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.41-debian-9-r58/10.1/debian-9/Dockerfile)
+* [`10.1-debian-9`, `10.1.41-debian-9-r59`, `10.1`, `10.1.41`, `10.1.41-r59` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.41-debian-9-r59/10.1/debian-9/Dockerfile)
 * [`10.1-centos-7`, `10.1.41-centos-7-r60` (10.1/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.41-centos-7-r60/10.1/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb-galera GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb-galera).
@@ -305,11 +305,71 @@ services:
 
 **Note!** The `root` user will be created with remote access and without a password if `ALLOW_EMPTY_PASSWORD` is enabled. Please provide the `MARIADB_ROOT_PASSWORD` env variable instead if you want to set a password for the `root` user.
 
+## Enabling LDAP support
+
+LDAP configuration parameters must be specified if you wish to enable LDAP support for your MariaDB Galera cluster. The following environment variables are available to configure LDAP support:
+
+ - `MARIADB_LDAP_URI`: LDAP URL beginning in the form `ldap[s]://<hostname>:<port>`. No defaults.
+
+ - `MARIADB_LDAP_BASE`: LDAP base DN. No defaults.
+
+ - `MARIADB_LDAP_BIND_DN`: LDAP bind DN. No defaults.
+
+ - `MARIADB_LDAP_BIND_PASSWORD`: LDAP bind password. No defaults.
+
+ - `MARIADB_LDAP_BASE_LOOKUP`: LDAP base lookup (Optional). No defaults.
+
+ - `MARIADB_LDAP_NSS_INITGROUPS_IGNOREUSERS`: LDAP ignored users. Defaults to `root,nslcd`.
+
+ - `MARIADB_LDAP_SCOPE`: LDAP search scope (Optional). No defaults.
+
+ - `MARIADB_LDAP_TLS_REQCERT`: LDAP TLS check on server certificates (Optional). No defaults.
+
+### Step 1: Start MariaDB Galera with LDAP support
+
+```bash
+$ docker run --name mariadb \
+  -e ALLOW_EMPTY_PASSWORD=yes \
+  -e MARIADB_LDAP_URI=ldap://ldap.example.org/ \
+  -e MARIADB_LDAP_BASE=dc=example,dc=org \
+  -e MARIADB_LDAP_BIND_DN=cn=admin,dc=example,dc=org \
+  -e MARIADB_LDAP_BIND_PASSWORD=admin \
+  bitnami/mariadb-galera:latest
+```
+
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  mariadb:
+  ...
+    environment:
+      - MARIADB_LDAP_URI=ldap://ldap.example.org/
+      - MARIADB_LDAP_BASE=dc=example,dc=org
+      - MARIADB_LDAP_BIND_DN=cn=admin,dc=example,dc=org
+      - MARIADB_LDAP_BIND_PASSWORD=admin
+  ...
+```
+
+**Note**: The LDAP connection parameters can be fine tuned by specifying the `MARIADB_LDAP_BASE_LOOKUP`, `MARIADB_LDAP_SCOPE` and `MARIADB_LDAP_TLS_REQCERT` environment variables.
+
+### Step 2: Configure PAM authenticated LDAP users
+
+Login to the MariaDB server using the `root` credentials and configure the LDAP users you wish to have access to the MariaDB Galera cluster.
+
+```bash
+$ mysql -uroot -e "CREATE USER 'foo'@'localhost' IDENTIFIED VIA pam USING 'mariadb';"
+```
+
+The above command configures the database user `foo` to authenticate itself with the LDAP credentials to log in to MariaDB Galera server.
+
+Refer to the [OpenLDAP Administrator's Guide](https://www.openldap.org/doc/admin24/) to learn more about LDAP.
+
 ## Setting up a multi-master cluster
 
 A **zero downtime** MariaDB Galera [replication](https://dev.mysql.com/doc/refman/5.7/en/server-option-variable-reference.html) cluster can easily be setup with the Bitnami MariaDB Galera Docker image by starting additional MariaDB Galera nodes. The following environment variables are available to configure the cluster:
 
-- `MARIADB_GALERA_CLUSTER_BOOTSTRAP`: Whether node is first node of the cluster. No defaults.
+ - `MARIADB_GALERA_CLUSTER_BOOTSTRAP`: Whether node is first node of the cluster. No defaults.
 
  - `MARIADB_GALERA_CLUSTER_NAME`: Galera cluster name. Default to `galera`.
 
