@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.9.0-ol-7-r51` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.9.0-ol-7-r51/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.9.0-debian-9-r50`, `0`, `0.9.0`, `0.9.0-r50`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.9.0-debian-9-r50/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.9.0-debian-9-r51`, `0`, `0.9.0`, `0.9.0-r51`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.9.0-debian-9-r51/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/chartmuseum GitHub repo](https://github.com/bitnami/bitnami-docker-chartmuseum).
 
