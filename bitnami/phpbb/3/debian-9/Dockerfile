@@ -7,12 +7,12 @@ RUN bitnami-pkg unpack apache-2.4.41-2 --checksum 54e604bee81357824146780a26fbd9
 RUN bitnami-pkg unpack php-7.2.22-2 --checksum bd188cdcb17e98673db3aa05756cd183c467d62fa88c15cc41a436daac73e72e
 RUN bitnami-pkg unpack mysql-client-10.3.18-2 --checksum 9ba76d9543cc87642f23cc4987e12750e8690d45274c3701aa429ef19e3b8e08
 RUN bitnami-pkg install libphp-7.2.22-1 --checksum 01a84cf1c469f1d59f84eeec31b8c9fb535d5cd6eff4a4c5fb3cac504d463561
-RUN bitnami-pkg unpack phpbb-3.2.7-2 --checksum 10fd5fd47abee0b43ba9e7df45b9a970c40d6c310be22e7cb436e18de8d40d81
+RUN bitnami-pkg unpack phpbb-3.2.8-0 --checksum 19e8ca130e20bae88e2955435368d0be419c972a1dbfe475f72e99573e21b5a9
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="phpbb" \
-    BITNAMI_IMAGE_VERSION="3.2.7-debian-9-r133" \
+    BITNAMI_IMAGE_VERSION="3.2.8-debian-9-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
