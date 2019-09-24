@@ -69,6 +69,11 @@ $ docker run --rm --name kubectl bitnami/kubectl:latest -- --version
 
 Consult the [Kubectl Reference Documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands) to find the completed list of commands available.
 
+Remote run:
+```bash
+docker run -v $(pwd)/config:/.kube/config --rm --name kubectl bitnami/kubectl:latest
+```
+
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-kubectl/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-kubectl/pulls) with your contribution.
