@@ -6,13 +6,13 @@ RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds-libs freetype glibc
 RUN bitnami-pkg unpack apache-2.4.41-2 --checksum bf50a12c033c1ff0e1cb7696cc1abd29a132cc1c5225e9d2fdbb3c6584e349fe
 RUN bitnami-pkg unpack php-7.2.22-2 --checksum 57a218b0f376107e8e2eac7cf36d817f71dc2da7dbcb21cc10995fc020fdb9f9
 RUN bitnami-pkg unpack mysql-client-10.2.27-2 --checksum 68c66c640d34436eec7077a22b3ab6a54925337dea711579c6ad9e0410908e19
-RUN bitnami-pkg install libphp-7.2.22-0 --checksum 061b2675f485ac761a1bc91b7dc30b5056a3cecc4fda7a5396bfcefdf09b9c4d
-RUN bitnami-pkg unpack orangehrm-4.3.3-0-0 --checksum 79eaf89d80718d6fb01b027a8eff08cb068de6a847962fdb91402ae1daab62fc
+RUN bitnami-pkg install libphp-7.2.22-1 --checksum 67a5567885cb6f06f149793eadde262bc8782fa02a2d436010e9fbd718d33d04
+RUN bitnami-pkg unpack orangehrm-4.3.3-0-1 --checksum c14695ff5b30292b7e640d8d32d390bafe83cf08b0b14dc9b6f578a4bbb4c0dc
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.3.3-0-ol-7-r24" \
+    BITNAMI_IMAGE_VERSION="4.3.3-0-ol-7-r25" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
