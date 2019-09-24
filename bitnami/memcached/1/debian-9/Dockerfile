@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r367
+FROM bitnami/minideb-extras-base:stretch-r368
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "memcached" "1.5.18-1" --checksum 0d
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.18-debian-9-r6" \
+    BITNAMI_IMAGE_VERSION="1.5.18-debian-9-r7" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
 
 EXPOSE 11211
