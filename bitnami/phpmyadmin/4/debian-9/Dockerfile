@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r484
+FROM bitnami/minideb-extras:stretch-r485
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack phpmyadmin-4.9.1-0 --checksum e66327b570c78c86d42af7aaac1
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="4.9.1-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="4.9.1-debian-9-r1" \
     DATABASE_ENABLE_SSL="no" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
