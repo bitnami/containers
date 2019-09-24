@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r367
+FROM bitnami/minideb-extras-base:stretch-r368
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "mongodb" "3.6.14-1" --checksum 4a58
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.6.14-debian-9-r35" \
+    BITNAMI_IMAGE_VERSION="3.6.14-debian-9-r36" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mongodb/bin:$PATH"
 
