@@ -6,11 +6,11 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libf
 RUN bitnami-pkg unpack apache-2.4.41-2 --checksum 54e604bee81357824146780a26fbd99a889852240ae94cc4779264c9f231f535
 RUN bitnami-pkg unpack php-7.3.9-2 --checksum 69246bf42d21036e31e0f7791e3f3f969cdd3ece404802585766b92967de048f
 RUN bitnami-pkg install libphp-7.3.9-1 --checksum 2be110c509e1945a1fcbd7ef7de3bdb2b5d4df465fde98c18e7143cfba335d47
-RUN bitnami-pkg unpack phpmyadmin-4.9.0-1-1 --checksum f4b69d7702612f2b0cbcb13c62aa0b0b2cde9082fc7cd35126969cd491212980
+RUN bitnami-pkg unpack phpmyadmin-4.9.1-0 --checksum e66327b570c78c86d42af7aaac1e27fb19a80d48d987e36eeaf13610c50a62ab
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="4.9.0-1-debian-9-r112" \
+    BITNAMI_IMAGE_VERSION="4.9.1-debian-9-r0" \
     DATABASE_ENABLE_SSL="no" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
