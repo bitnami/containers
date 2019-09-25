@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack tensorflow-serving-1.14.0-2 --checksum ea3e94ba4acd8bb606
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="1.14.0-debian-9-r78" \
+    BITNAMI_IMAGE_VERSION="1.14.0-debian-9-r79" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_ENABLE_MONITORING="no" \
