@@ -4,7 +4,7 @@
 . /opt/bitnami/base/helpers
 
 _forwardTerm () {
-    echo "Caugth signal SIGTERM, passing it to child processes..."
+    echo "Caught signal SIGTERM, passing it to child processes..."
     pgrep -P $$ | xargs kill -15 2>/dev/null
     wait
     exit $?
