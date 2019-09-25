@@ -9,13 +9,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libaio1 libc6 libgcc1 libncurses5 libsasl2-2 libssl1.1 libstdc++6 libtinfo5 zlib1g
-RUN . ./libcomponent.sh && component_unpack "mysql" "8.0.17-2" --checksum 4cf9bed71ae6d8885f4b91cba418631e08c7b0c159da388e38c323d1b320438d
+RUN . ./libcomponent.sh && component_unpack "mysql" "8.0.17-3" --checksum 202b44b5b76fc1e440be99684c98a47d37c0d74047c5102ca1b61b6b462cfa07
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="8.0.17-debian-9-r61" \
+    BITNAMI_IMAGE_VERSION="8.0.17-debian-9-r62" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH"
 
