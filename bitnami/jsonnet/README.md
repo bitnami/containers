@@ -25,7 +25,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0.13-ol-7`, `0.13.0-ol-7-r106` (0.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/0.13.0-ol-7-r106/0.13/ol-7/Dockerfile)
-* [`0.13-debian-9`, `0.13.0-debian-9-r101`, `0.13`, `0.13.0`, `0.13.0-r101`, `latest` (0.13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/0.13.0-debian-9-r101/0.13/debian-9/Dockerfile)
+* [`0.13-debian-9`, `0.13.0-debian-9-r102`, `0.13`, `0.13.0`, `0.13.0-r102`, `latest` (0.13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/0.13.0-debian-9-r102/0.13/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jsonnet GitHub repo](https://github.com/bitnami/bitnami-docker-jsonnet).
 
