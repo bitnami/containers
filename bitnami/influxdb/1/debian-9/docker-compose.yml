@@ -1,0 +1,12 @@
+version: '2'
+services:
+  influxdb:
+    image: bitnami/influxdb:1
+    ports:
+      - 8086:8086
+      - 8088:8088
+    volumes:
+      - influxdb_data:/bitnami/influxdb
+volumes:
+  influxdb_data:
+    driver: local
