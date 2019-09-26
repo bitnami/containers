@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r485
+FROM bitnami/minideb-extras:stretch-r486
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -13,7 +13,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mediawiki" \
-    BITNAMI_IMAGE_VERSION="1.33.0-debian-9-r83" \
+    BITNAMI_IMAGE_VERSION="1.33.0-debian-9-r84" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     MARIADB_HOST="mariadb" \
