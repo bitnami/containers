@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "pgpool" "4.0.6-1" --checksum 5270b5
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="pgpool" \
-    BITNAMI_IMAGE_VERSION="4.0.6-centos-7-r27" \
+    BITNAMI_IMAGE_VERSION="4.0.6-centos-7-r28" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/pgpool/bin:$PATH"
 
 EXPOSE 5432
