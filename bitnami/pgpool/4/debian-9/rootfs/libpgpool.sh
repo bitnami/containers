@@ -48,7 +48,7 @@ export PGPOOL_DAEMON_GROUP="pgpool"
 export PGPOOL_PORT_NUMBER="${PGPOOL_PORT_NUMBER:-5432}"
 export PGPOOL_BACKEND_NODES="${PGPOOL_BACKEND_NODES:-}"
 export PGPOOL_SR_CHECK_USER="${PGPOOL_SR_CHECK_USER:-}"
-export PGPOOL_USERNAME="${PGPOOL_USERNAME:-postgresql}"
+export PGPOOL_USERNAME="${PGPOOL_USERNAME:-postgres}"
 export PGPOOL_ENABLE_LDAP="${PGPOOL_ENABLE_LDAP:-no}"
 export PGPOOL_TIMEOUT="360"
 
@@ -161,6 +161,7 @@ pgpool_create_pghba() {
     cat > "$PGPOOL_PGHBA_FILE" << EOF
 local    all             all                            trust
 host     all             $PGPOOL_SR_CHECK_USER       all         trust
+host     all             $PGPOOL_USERNAME       all         trust
 host     all             wide               all         trust
 host     all             pop_user           all         trust
 host     all             all                all         $authentication
@@ -236,8 +237,6 @@ EOF
 #########################
 pgpool_create_config() {
     local -i node_counter=0
-    local pwd_file="$PGPOOL_PWD_FILE"
-    is_boolean_yes "$PGPOOL_ENABLE_LDAP" && pwd_file=""
 
     info "Generating pgpool.conf file..."
     # Configuring Pgpool-II to use the streaming replication mode since it's the recommended way
@@ -254,7 +253,7 @@ pgpool_create_config() {
     # Authentication settings
     # ref: http://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#RUNTIME-CONFIG-AUTHENTICATION-SETTINGS
     pgpool_set_property "enable_pool_hba" "on"
-    pgpool_set_property "pool_passwd" "$pwd_file"
+    pgpool_set_property "pool_passwd" "$PGPOOL_PWD_FILE"
     pgpool_set_property "authentication_timeout" "30"
     # Connection Pooling settings
     # http://www.pgpool.net/docs/latest/en/html/runtime-config-connection-pooling.html
@@ -391,8 +390,7 @@ pgpool_initialize() {
         pgpool_create_config
         if is_boolean_yes "$PGPOOL_ENABLE_LDAP"; then
             pgpool_ldap_config
-        else
-            pgpool_generate_password_file
         fi
+        pgpool_generate_password_file
     fi
 }
