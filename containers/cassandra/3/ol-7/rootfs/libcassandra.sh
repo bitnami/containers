@@ -217,9 +217,7 @@ cassandra_validate() {
         local -r total="$#"
         for i in $(seq 1 "$((total - 1))"); do
             for j in $(seq "$((i + 1))" "$total"); do
-                i_aux="${!i}"
-                j_aux="${!j}"
-                if [[ "${!i_aux}" = "${!j_aux}" ]]; then
+                if (( "${!i}" == "${!j}" )); then
                     print_validation_error "${!i} and ${!j} are bound to the same port"
                 fi
             done
@@ -236,7 +234,7 @@ cassandra_validate() {
 
     check_resolved_hostname() {
         if ! is_hostname_resolved "$1"; then
-            warn "Hostname $1 could not be resolved. This could lead to connection isssues"
+            warn "Hostname $1 could not be resolved. This could lead to connection issues"
         fi
     }
 
@@ -937,7 +935,7 @@ cassandra_start_bg() {
 
     info "Starting Cassandra"
     local -r cmd=("$CASSANDRA_BIN_DIR/cassandra")
-    local -r args=("-p $CASSANDRA_PID_FILE" "-R" "-f")
+    local -r args=("-p" "$CASSANDRA_PID_FILE" "-R" "-f")
 
     if am_i_root; then
         gosu "$CASSANDRA_DAEMON_USER" "${cmd[@]}" "${args[@]}" > "$logger" 2>&1 &
