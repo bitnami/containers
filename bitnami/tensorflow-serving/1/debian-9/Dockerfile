@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r485
+FROM bitnami/minideb-extras:stretch-r486
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack tensorflow-serving-1.14.0-2 --checksum ea3e94ba4acd8bb606
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="1.14.0-debian-9-r79" \
+    BITNAMI_IMAGE_VERSION="1.14.0-debian-9-r80" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_ENABLE_MONITORING="no" \
