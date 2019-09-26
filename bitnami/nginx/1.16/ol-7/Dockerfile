@@ -9,7 +9,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages GeoIP glibc keyutils-libs krb5-libs libcom_err libselinux nss-softokn-freebl openssl-libs pcre zlib
-RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-1" --checksum 77740c3ba899b88ddb3c42bc36bbec88a88af741a02ea7968ae9b504bdbce961
+RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-2" --checksum 8c94ff1560c97e485e56f5abcf892a4794d0b0b68facd86d4ecf22cf9ac52d7d
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 RUN chmod -R g+rwX /opt/bitnami/nginx/conf
@@ -17,7 +17,7 @@ RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.16.1-ol-7-r50" \
+    BITNAMI_IMAGE_VERSION="1.16.1-ol-7-r51" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/nginx/sbin:$PATH"
 
