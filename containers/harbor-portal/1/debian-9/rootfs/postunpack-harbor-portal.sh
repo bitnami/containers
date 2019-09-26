@@ -19,7 +19,6 @@ done
 # Loading bitnami paths
 sed -i "s|/usr/share/nginx/html|${HARBOR_PORTAL_BASEDIR}|g" "$HARBOR_PORTAL_NGINX_CONFFILE"
 sed -i "s|/etc/nginx/mime.types|${NGINX_CONFDIR}/mime.types|g" "$HARBOR_PORTAL_NGINX_CONFFILE"
-sed -i 's|80|8080|g' "$HARBOR_PORTAL_NGINX_CONFFILE"
 
 cp -a "${HARBOR_PORTAL_NGINX_CONFDIR}/." "$NGINX_CONFDIR"
 chmod -R g+rwX "$NGINX_CONFDIR"
