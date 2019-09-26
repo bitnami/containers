@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r477
+FROM bitnami/oraclelinux-extras:7-r478
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack testlink-1.9.19-2 --checksum ed6c502c8259bf04480795747240
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="testlink" \
-    BITNAMI_IMAGE_VERSION="1.9.19-ol-7-r237" \
+    BITNAMI_IMAGE_VERSION="1.9.19-ol-7-r238" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
