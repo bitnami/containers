@@ -84,7 +84,7 @@ eval "$(apache_env)"
 apache_setup_bitnami_config
 
 # Ensure non-root user has write permissions on a set of directories
-for dir in "$APACHE_TMP_DIR" "$APACHE_CONF_DIR" "$APACHE_LOG_DIR" "$APACHE_VHOSTS_DIR" "$APACHE_HTACCESS_DIR"; do
+for dir in "$APACHE_TMP_DIR" "$APACHE_CONF_DIR" "$APACHE_LOG_DIR" "$APACHE_VHOSTS_DIR" "$APACHE_HTACCESS_DIR" "$APACHE_HTDOCS_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done

@@ -30,6 +30,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 export APACHE_BASE_DIR="/opt/bitnami/apache"
 export APACHE_BIN_DIR="${APACHE_BASE_DIR}/bin"
 export APACHE_CONF_DIR="${APACHE_BASE_DIR}/conf"
+export APACHE_HTDOCS_DIR="${APACHE_BASE_DIR}/htdocs"
 export APACHE_LOG_DIR="${APACHE_BASE_DIR}/logs"
 export APACHE_TMP_DIR="${APACHE_BASE_DIR}/tmp"
 export APACHE_VHOSTS_DIR="${APACHE_CONF_DIR}/vhosts"
@@ -177,8 +178,8 @@ apache_initialize() {
     # Mount application files
     if ! is_dir_empty "/app"; then
         info "Mounting application files from '/app'..."
-        rm -rf "/opt/bitnami/apache/htdocs"
-        ln -sf "/app" "/opt/bitnami/apache/htdocs"
+        rm -rf "$APACHE_HTDOCS_DIR"
+        ln -sf "/app" "$APACHE_HTDOCS_DIR"
     fi
 
     # Port configuration
