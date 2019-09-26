@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r368
+FROM bitnami/minideb-extras-base:stretch-r369
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.27-debian-9-r76" \
+    BITNAMI_IMAGE_VERSION="5.7.27-debian-9-r77" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH"
 
