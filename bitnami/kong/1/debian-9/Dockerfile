@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r369
+FROM bitnami/minideb-extras-base:stretch-r370
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "kong" "1.3.0-3" --checksum 7f8c9f21
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kong" \
-    BITNAMI_IMAGE_VERSION="1.3.0-debian-9-r11" \
+    BITNAMI_IMAGE_VERSION="1.3.0-debian-9-r12" \
     PATH="/opt/bitnami/kong/bin:/opt/bitnami/kong/openresty/bin:/opt/bitnami/kong/openresty/luajit/bin:/opt/bitnami/kong/openresty/nginx/sbin:$PATH"
 
 EXPOSE 8000 8001 8443 8444
