@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r369
+FROM bitnami/minideb-extras-base:stretch-r370
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "tomcat" "7.0.96-1" --checksum 1ab29
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="7.0.96-debian-9-r52" \
+    BITNAMI_IMAGE_VERSION="7.0.96-debian-9-r53" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
 EXPOSE 8080
