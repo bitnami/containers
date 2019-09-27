@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-runtimes:7-r449
+FROM bitnami/oraclelinux-runtimes:7-r450
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/php-7.1.32-4-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="7.1.32-ol-7-r35" \
+    BITNAMI_IMAGE_VERSION="7.1.32-ol-7-r36" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH"
 
 EXPOSE 9000
