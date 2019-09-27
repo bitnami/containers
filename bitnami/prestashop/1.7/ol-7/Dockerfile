@@ -1,18 +1,18 @@
-FROM bitnami/oraclelinux-extras:7-r478
+FROM bitnami/oraclelinux-extras:7-r479
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds-libs freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.41-2 --checksum bf50a12c033c1ff0e1cb7696cc1abd29a132cc1c5225e9d2fdbb3c6584e349fe
-RUN bitnami-pkg unpack php-7.2.22-2 --checksum 57a218b0f376107e8e2eac7cf36d817f71dc2da7dbcb21cc10995fc020fdb9f9
+RUN bitnami-pkg unpack php-7.2.23-0 --checksum 7af5dcd7127c63df8c31b81b1c4a38cf0877138dc8dcf847f4ac87f723ed86b4
 RUN bitnami-pkg unpack mysql-client-10.1.41-2 --checksum 0b9c71d017de92ae27c1c59e0876d4c7fb3b7140177cea3b9bd0d1f7b950beaa
-RUN bitnami-pkg install libphp-7.2.22-1 --checksum 67a5567885cb6f06f149793eadde262bc8782fa02a2d436010e9fbd718d33d04
+RUN bitnami-pkg install libphp-7.2.23-0 --checksum 1c237502348e2e90bf666e7aa256676c003e8097038abaac68e92a4665f4b13a
 RUN bitnami-pkg unpack prestashop-1.7.6-1-1 --checksum e339a6674498e5c9f0c8ab9db6bfe3a5dbb9e0a6afa25f507fef3c260de2f9b0
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-1-ol-7-r35" \
+    BITNAMI_IMAGE_VERSION="1.7.6-1-ol-7-r36" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
