@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r429
+FROM bitnami/oraclelinux-extras-base:7-r430
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "harbor-notary-server" "1.9.0-1" --c
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-notary-server" \
-    BITNAMI_IMAGE_VERSION="1.9.0-ol-7-r8" \
+    BITNAMI_IMAGE_VERSION="1.9.0-ol-7-r9" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-notary-server/bin:$PATH" \
     SERVICE_NAME="notary_server"
