@@ -6,6 +6,7 @@ services:
       - MARIADB_USER=bn_matomo
       - MARIADB_DATABASE=bitnami_matomo
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_EXTRA_FLAGS=--max_allowed_packet=64MB
     volumes:
       - 'mariadb_data:/bitnami'
   matomo:
