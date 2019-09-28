@@ -574,7 +574,7 @@ mongodb_configure_primary() {
     local node="${1:?node is required}"
 
     info "Configuring MongoDB primary node...: $node"
-    wait-for-port -timeout 360 "$MONGODB_PORT_NUMBER"
+    wait-for-port --timeout 360 "$MONGODB_PORT_NUMBER"
 
     retry_while "mongodb_is_primary_node_initiated $node" 15
 }
@@ -677,7 +677,7 @@ mongodb_wait_for_primary_node() {
     debug "Waiting for primary node..."
 
     info "Trying to connect to MongoDB server..."
-    wait-for-port -host "$MONGODB_PRIMARY_HOST" -timeout 360 "$MONGODB_PRIMARY_PORT_NUMBER"
+    wait-for-port --host "$MONGODB_PRIMARY_HOST" --timeout 360 "$MONGODB_PRIMARY_PORT_NUMBER"
     info "Found MongoDB server listening at $MONGODB_PRIMARY_HOST:$MONGODB_PRIMARY_PORT_NUMBER !"
 
     retry_while "mongodb_is_primary_available" 15
