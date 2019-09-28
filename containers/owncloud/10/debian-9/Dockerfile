@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r487
+FROM bitnami/minideb-extras:stretch-r489
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack owncloud-10.2.1-1 --checksum 851999935cc70dfeaafddd01624b
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.2.1-debian-9-r74" \
+    BITNAMI_IMAGE_VERSION="10.2.1-debian-9-r75" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
