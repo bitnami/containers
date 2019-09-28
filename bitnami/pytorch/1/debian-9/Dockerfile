@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r370
+FROM bitnami/minideb-extras-base:stretch-r372
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "pytorch" "1.2.0-0" --checksum 96bf1
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="pytorch" \
-    BITNAMI_IMAGE_VERSION="1.2.0-debian-9-r51" \
+    BITNAMI_IMAGE_VERSION="1.2.0-debian-9-r52" \
     LD_LIBRARY_PATH="/opt/bitnami/miniconda/lib/python3.7/site-packages/torch/lib/:/opt/bitnami/miniconda/lib/python3.7/site-packages/PIL/.libs/:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/miniconda/bin:$PATH"
