@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r487
+FROM bitnami/minideb-extras:stretch-r489
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack orangehrm-4.3.3-0-1 --checksum fc3a0d8ba7b9a796e90338a1f3
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.3.3-0-debian-9-r22" \
+    BITNAMI_IMAGE_VERSION="4.3.3-0-debian-9-r23" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
