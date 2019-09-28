@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r487
+FROM bitnami/minideb-extras:stretch-r489
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack drupal-8.7.7-1 --checksum c8da620bec6cb4b9452b7d1f6df9eb8
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.7.7-debian-9-r21" \
+    BITNAMI_IMAGE_VERSION="8.7.7-debian-9-r22" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
