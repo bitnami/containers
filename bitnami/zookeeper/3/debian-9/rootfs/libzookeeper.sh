@@ -367,7 +367,7 @@ zookeeper_start_bg() {
     else
         $start_command >/dev/null 2>&1
     fi
-    wait-for-port -timeout 60 "$ZOO_PORT_NUMBER"
+    wait-for-port --timeout 60 "$ZOO_PORT_NUMBER"
 }
 
 ########################
