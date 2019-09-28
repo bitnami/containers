@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r370
+FROM bitnami/minideb-extras-base:stretch-r372
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "harbor-notary-signer" "1.9.0-1" --c
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-notary-signer" \
-    BITNAMI_IMAGE_VERSION="1.9.0-debian-9-r9" \
+    BITNAMI_IMAGE_VERSION="1.9.0-debian-9-r10" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-notary-signer/bin:$PATH" \
     SERVICE_NAME="notary_signer"
