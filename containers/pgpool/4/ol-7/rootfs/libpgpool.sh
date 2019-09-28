@@ -210,7 +210,7 @@ pgpool_create_backend_config() {
 
     #check if it is possible to connect to the node
     debug "Waiting for backend '$host' ..."
-    if wait-for-port -host "$host" -timeout "$PGPOOL_TIMEOUT" "$port"; then
+    if wait-for-port --host "$host" --timeout "$PGPOOL_TIMEOUT" "$port"; then
         debug "Backend '$host' is ready. Adding its information to the configuration..."
         cat >> "$PGPOOL_CONF_FILE" << EOF
 backend_hostname$num = '$host'
