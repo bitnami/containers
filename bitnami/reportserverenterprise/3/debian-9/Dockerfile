@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r487
+FROM bitnami/minideb-extras:stretch-r489
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack reportserverenterprise-3.0.8-6009-2 --checksum d3cd27de39
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserverenterprise" \
-    BITNAMI_IMAGE_VERSION="3.0.8-6009-debian-9-r27" \
+    BITNAMI_IMAGE_VERSION="3.0.8-6009-debian-9-r28" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
