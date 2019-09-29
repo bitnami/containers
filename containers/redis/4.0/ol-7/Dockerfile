@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r431
+FROM bitnami/oraclelinux-extras-base:7-r432
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "redis" "4.0.14-2" --checksum 7c651b
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.14-ol-7-r194" \
+    BITNAMI_IMAGE_VERSION="4.0.14-ol-7-r195" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH"
 
