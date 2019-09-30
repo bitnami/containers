@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r432
+FROM bitnami/oraclelinux-extras-base:7-r433
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "couchdb" "2.3.1-0" --checksum efd3c
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="couchdb" \
-    BITNAMI_IMAGE_VERSION="2.3.1-ol-7-r9" \
+    BITNAMI_IMAGE_VERSION="2.3.1-ol-7-r10" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/couchdb/bin:$PATH"
 
