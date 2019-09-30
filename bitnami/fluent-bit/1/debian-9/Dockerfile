@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/fluent-bit-1.2.2-1-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="fluent-bit" \
-    BITNAMI_IMAGE_VERSION="1.2.2-debian-9-r73" \
+    BITNAMI_IMAGE_VERSION="1.2.2-debian-9-r74" \
     PATH="/opt/bitnami/fluent-bit/bin:$PATH"
 
 EXPOSE 2020
