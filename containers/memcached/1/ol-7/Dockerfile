@@ -8,12 +8,12 @@ ENV HOME="/" \
 
 # Install required system packages and dependencies
 RUN install_packages cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libevent libselinux nss-softokn-freebl pcre
-RUN . ./libcomponent.sh && component_unpack "memcached" "1.5.18-1" --checksum 54587c522dfe0c1e5153ce3feb33e134a82d874c84be50a502f641a6d0fd39f5
+RUN . ./libcomponent.sh && component_unpack "memcached" "1.5.18-2" --checksum 2b758778fc93f555aa401c20ac4fc1949541fc0495155e21be077a30517db4ed
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.18-ol-7-r14" \
+    BITNAMI_IMAGE_VERSION="1.5.18-ol-7-r15" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
 
 EXPOSE 11211
