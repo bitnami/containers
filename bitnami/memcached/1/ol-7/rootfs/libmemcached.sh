@@ -167,7 +167,7 @@ memcached_create_user() {
     local user="${1:?user is required}"
     local password="${2:?password is required}"
     debug "Creating memcached user '${user}'"
-    echo "${password}" | saslpasswd2 -f "${SASL_DB_FILE}" -a "memcached" -c "${user} -p"
+    echo "${password}" | saslpasswd2 -f "${SASL_DB_FILE}" -a "memcached" -c "${user}" -p
 }
 
 ########################
