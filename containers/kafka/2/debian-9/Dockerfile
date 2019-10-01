@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r372
+FROM bitnami/minideb-extras-base:stretch-r374
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "kafka" "2.3.0-1" --checksum 4a125a6
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.3.0-debian-9-r94" \
+    BITNAMI_IMAGE_VERSION="2.3.0-debian-9-r95" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/kafka/bin:$PATH"
 
