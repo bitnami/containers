@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  influxdb-relay:
+    image: bitnami/influxdb-relay:0-scratch
+    ports:
+      - 9096:9096
+      - 9097:9097
