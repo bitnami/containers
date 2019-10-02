@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r491
+FROM bitnami/minideb-extras:stretch-r492
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack opencart-3.0.3-2-2 --checksum 99959641e72178f2c094c93f977
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="opencart" \
-    BITNAMI_IMAGE_VERSION="3.0.3-2-debian-9-r148" \
+    BITNAMI_IMAGE_VERSION="3.0.3-2-debian-9-r149" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
