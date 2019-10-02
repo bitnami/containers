@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r491
+FROM bitnami/minideb-extras:stretch-r492
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack phpbb-3.2.8-0 --checksum 19e8ca130e20bae88e2955435368d0be
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="phpbb" \
-    BITNAMI_IMAGE_VERSION="3.2.8-debian-9-r7" \
+    BITNAMI_IMAGE_VERSION="3.2.8-debian-9-r8" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
