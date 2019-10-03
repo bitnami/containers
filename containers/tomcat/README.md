@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`9.0-ol-7`, `9.0.26-ol-7-r7` (9.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.26-ol-7-r7/9.0/ol-7/Dockerfile)
-* [`9.0-debian-9`, `9.0.26-debian-9-r7`, `9.0`, `9.0.26`, `9.0.26-r7`, `latest` (9.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.26-debian-9-r7/9.0/debian-9/Dockerfile)
+* [`9.0-debian-9`, `9.0.26-debian-9-r8`, `9.0`, `9.0.26`, `9.0.26-r8`, `latest` (9.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.26-debian-9-r8/9.0/debian-9/Dockerfile)
 * [`8.5-ol-7`, `8.5.46-ol-7-r7` (8.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.46-ol-7-r7/8.5/ol-7/Dockerfile)
 * [`8.5-debian-9`, `8.5.46-debian-9-r7`, `8.5`, `8.5.46`, `8.5.46-r7` (8.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.46-debian-9-r7/8.5/debian-9/Dockerfile)
 * [`8.0-ol-7`, `8.0.53-ol-7-r433` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.0.53-ol-7-r433/8.0/ol-7/Dockerfile)
@@ -85,7 +85,7 @@ For persistence you should mount a directory at the `/bitnami` path. If the moun
 $ docker run -v /path/to/tomcat-persistence:/bitnami bitnami/tomcat:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tomcat/blob/master/docker-compose.yml) file present in this repository: 
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tomcat/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -160,7 +160,7 @@ Additionally you can specify a user name for the management user using the `TOMC
 
 ### Specifying Environment variables using Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tomcat/blob/master/docker-compose.yml) file present in this repository: 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tomcat/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
