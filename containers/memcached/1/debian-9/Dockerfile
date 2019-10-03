@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "memcached" "1.5.19-0" --checksum e6
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.19-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="1.5.19-debian-9-r2" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
 
 EXPOSE 11211
