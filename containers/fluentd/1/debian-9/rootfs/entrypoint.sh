@@ -1,50 +1,26 @@
 #!/bin/bash
 
-FLUENTD_CONF=${FLUENTD_CONF:-"fluentd.conf"}
-CONF_FILE="/opt/bitnami/fluentd/conf/${FLUENTD_CONF}"
+# shellcheck disable=SC1091
 
-if [[ ! -e "$CONF_FILE" ]]; then
-    echo "==> Writing config file..."
-    cat > "$CONF_FILE" << EOF
-<source>
-  @type  forward
-  @id    input1
-  @label @mainstream
-  port  24224
-</source>
+set -o errexit
+set -o nounset
+set -o pipefail
+#set -o xtrace
 
-<filter **>
-  @type stdout
-</filter>
+# Load libraries
+. /libfluentd.sh
+. /libbitnami.sh
 
-<label @mainstream>
-  <match docker.**>
-    @type file
-    @id   output_docker1
-    path         /opt/bitnami/fluentd/logs/docker.*.log
-    symlink_path /opt/bitnami/fluentd/logs/docker.log
-    append       true
-    time_slice_format %Y%m%d
-    time_slice_wait   1m
-    time_format       %Y%m%dT%H%M%S%z
-  </match>
-  <match **>
-    @type file
-    @id   output1
-    path         /opt/bitnami/fluentd/logs/data.*.log
-    symlink_path /opt/bitnami/fluentd/logs/data.log
-    append       true
-    time_slice_format %Y%m%d
-    time_slice_wait   10m
-    time_format       %Y%m%dT%H%M%S%z
-  </match>
-</label>
+# Load Fluentd environment
+eval "$(fluentd_env)"
 
-# Include config files in the ./config.d directory
-@include config.d/*.conf
-EOF
-else
-    echo "==> Detected config file. It would be used instead of creating one."
+print_welcome_page
+
+if [[ "$*" == *"/run.sh"* ]]; then
+    info "** Starting Fluentd setup **"
+    /setup.sh
+    info "** Fluentd setup finished! **"
 fi
 
-eval "$@"
+echo ""
+exec "$@"
