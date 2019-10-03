@@ -183,49 +183,21 @@ $ docker run --name tomcat \
 
 ## Configuration files
 
-The image looks for configurations in `/bitnami/tomcat/conf/`. As mentioned in [Persisting your application](#persisting-your-application) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/tomcat-persistence/tomcat/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
-
-### Step 1: Run the Tomcat image
-
-Run the Tomcat image, mounting a directory from your host.
+During the initialization of the container, the default Tomcat configuration files are modified with the basic options defined through [environment variables](#environment-variables). If you want to add more specific configuration options, you can always mount your own configuration files under `/opt/bitnami/tomcat/conf/` to override the existing ones. Please note that those files should be writable by the system user of the container.
 
 ```bash
-$ docker run --name tomcat -v /path/to/tomcat-persistence:/bitnami bitnami/tomcat:latest
+docker run --name tomcat -v /path/to/config/server.xml:/opt/bitnami/tomcat/conf/server.xml bitnami/tomcat:latest
 ```
 
-or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tomcat/blob/master/docker-compose.yml) file present in this repository: 
+or using Docker Compose:
 
 ```yaml
 services:
   tomcat:
   ...
     volumes:
-      - /path/to/tomcat-persistence:/bitnami
+      - /path/to/config/server.xml:/opt/bitnami/tomcat/conf/server.xml
   ...
-```
-
-### Step 2: Edit the configuration
-
-Edit the configuration on your host using your favorite editor.
-
-eg.
-
-```bash
-$ vim /path/to/tomcat-persistence/tomcat/conf/server.xml
-```
-
-### Step 3: Restart Tomcat
-
-After changing the configuration, restart your Tomcat container for the changes to take effect.
-
-```bash
-$ docker restart tomcat
-```
-
-or using Docker Compose:
-
-```bash
-$ docker-compose restart tomcat
 ```
 
 Refer to the [Tomcat configuration](https://tomcat.apache.org/tomcat-7.0-doc/config/index.html) manual for the complete list of configuration options.
@@ -309,7 +281,7 @@ $ docker-compose up tomcat
 
 # Notable Changes
 
-## Debian: 9.0.13-r34, 8.5.35-r29, 8.0.53-r380, 7.0.92-r50. Oracle: 9.0.13-r35 , 8.5.35-r33, 8.0.53-r416, 7.0.92-r54. 
+## Debian: 9.0.26-r0, 8.5.46-r0, 8.0.53-r382, 7.0.96-r50. Oracle: 9.0.24-ol-7-r35, 8.5.45-ol-7-r34, 8.0.53-ol-7-r426, 7.0.96-ol-7-r61
 
 - Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder.
 
