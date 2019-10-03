@@ -1,25 +1,26 @@
-FROM bitnami/ruby:2.6-ol-7-prod
+FROM bitnami/oraclelinux-extras-base:7-r436
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV HOME="/" \
+    OS_ARCH="x86_64" \
+    OS_FLAVOUR="ol-7" \
+    OS_NAME="linux"
+
 # Install required system packages and dependencies
-RUN install_packages ca-certificates glibc libgcc libjemalloc-dev libstdc++ wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluentd-1.7.3-0-linux-x86_64-ol-7.tar.gz && \
-    echo "3b0e66da1a66439f85dbf4a4d4c55c39ccb28a8f69b22d45e59b318494c52052  /tmp/bitnami/pkg/cache/fluentd-1.7.3-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/fluentd-1.7.3-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/fluentd-1.7.3-0-linux-x86_64-ol-7.tar.gz
-RUN chmod g+rwX /opt/bitnami/fluentd/conf /opt/bitnami/fluentd/logs
+RUN install_packages ca-certificates glibc jemalloc-devel keyutils-libs krb5-libs libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre readline wget zlib
+RUN . ./libcomponent.sh && component_unpack "ruby" "2.6.5-0" --checksum 29ef6f1ed911c95ada9710d617438ec90e6e822cae31d2b82d578f9b9e7b1c30
+RUN . ./libcomponent.sh && component_unpack "fluentd" "1.7.3-0" --checksum 3b0e66da1a66439f85dbf4a4d4c55c39ccb28a8f69b22d45e59b318494c52052
 
 COPY rootfs /
+RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.7.3-ol-7-r2" \
-    FLUENTD_CONF="fluentd.conf" \
-    FLUENTD_OPT="" \
+    BITNAMI_IMAGE_VERSION="1.7.3-ol-7-r3" \
     GEM_HOME="/opt/bitnami/fluentd" \
-    PATH="/opt/bitnami/fluentd/bin:$PATH"
+    PATH="/opt/bitnami/ruby/bin:/opt/bitnami/fluentd/bin:$PATH"
 
 EXPOSE 24224 5140
 
 WORKDIR /opt/bitnami/fluentd
 USER 1001
 ENTRYPOINT [ "/entrypoint.sh" ]
-CMD [ "fluentd", "-c", "/opt/bitnami/fluentd/conf/${FLUENTD_CONF}", "-p", "/opt/bitnami/fluentd/plugins", "$FLUENTD_OPT" ]
+CMD [ "/run.sh" ]
