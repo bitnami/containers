@@ -1,4 +1,4 @@
-FROM bitnami/centos-extras-base:7-r159
+FROM bitnami/centos-extras-base:7-r160
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "redis" "5.0.5-2" --checksum da5725c
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.5-centos-7-r130" \
+    BITNAMI_IMAGE_VERSION="5.0.5-centos-7-r131" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH"
 
