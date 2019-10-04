@@ -190,6 +190,8 @@ The configuration can easily be setup with the Bitnami ZooKeeper Docker image us
  - `ZOO_SERVER_PASSWORDS`: Comma, semicolo or whitespace separated list of passwords to assign to users when created. Example: pass4user1, pass4user2, pass4admin. No defaults
  - `ZOO_ENABLE_AUTH`: Enable ZooKeeper auth. It uses SASL/Digest-MD5. Default: **no**
  - `ZOO_RECONFIG_ENABLED`: Enable ZooKeeper Dynamic Reconfiguration. Default: **no**
+ - `ZOO_AUTOPURGE_INTERVAL`: The time interval in hours for which the autopurge task is triggered. Set to a positive integer (1 and above) to enable auto purging of old snapshots and log files. Default: **0**
+ - `ZOO_AUTOPURGE_RETAIN_COUNT`: When auto purging is enabled, ZooKeeper retains the most recent snapshots and the corresponding transaction logs in the dataDir and dataLogDir respectively to this number and deletes the rest. Defaults to 3. Minimum value is 3. Default: **3**
  - `ZOO_HEAP_SIZE`: Size in MB for the Java Heap options (Xmx and XMs). This env var is ignored if Xmx an Xms are configured via `JVMFLAGS`. Default: **1024**
  - `ALLOW_ANONYMOUS_LOGIN`: If set to true, Allow to accept connections from unauthenticated users. Default: **no**
  - `ZOO_LOG_LEVEL`: ZooKeeper log level. Available levels are: `ALL`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`, `OFF`, `TRACE`. Default: **INFO**
