@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack moodle-3.7.2-1 --checksum 5f1c1d9a6bf948dd4d0fb32c229615f
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.7.2-ol-7-r29" \
+    BITNAMI_IMAGE_VERSION="3.7.2-ol-7-r30" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
