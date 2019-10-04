@@ -8,12 +8,12 @@ ENV HOME="/" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc libgcc libicu libstdc++ ncurses-libs openssl-libs zlib
-RUN . ./libcomponent.sh && component_unpack "couchdb" "2.3.1-0" --checksum efd3c7e83cb0d10e6f0c03b378a1bcf9322993a9a76950dd4154532263f07a1d
+RUN . ./libcomponent.sh && component_unpack "couchdb" "2.3.1-1" --checksum 8853cf6e6f917b1172f5fc969ca9ad0d4ab210eb23687621a58649a45eb2ff6d
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="couchdb" \
-    BITNAMI_IMAGE_VERSION="2.3.1-ol-7-r15" \
+    BITNAMI_IMAGE_VERSION="2.3.1-ol-7-r16" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/couchdb/bin:$PATH"
 
