@@ -12,7 +12,7 @@ RUN . ./libcomponent.sh && component_unpack "chartmuseum" "0.9.0-2" --checksum 8
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.9.0-ol-7-r61" \
+    BITNAMI_IMAGE_VERSION="0.9.0-ol-7-r62" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/chartmuseum/bin:$PATH"
 
