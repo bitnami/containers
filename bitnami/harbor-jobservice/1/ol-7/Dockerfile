@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "harbor-jobservice" "1.9.0-1" --chec
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-jobservice" \
-    BITNAMI_IMAGE_VERSION="1.9.0-ol-7-r16" \
+    BITNAMI_IMAGE_VERSION="1.9.0-ol-7-r17" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-jobservice/bin:$PATH"
 
