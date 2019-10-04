@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.7.8-ol-7-r9` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.7.8-ol-7-r9/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.7.8-debian-9-r7`, `1`, `1.7.8`, `1.7.8-r7`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.7.8-debian-9-r7/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.7.8-debian-9-r8`, `1`, `1.7.8`, `1.7.8-r8`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.7.8-debian-9-r8/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb).
 

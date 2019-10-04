@@ -13,13 +13,13 @@ RUN . ./libcomponent.sh && component_unpack "influxdb" "1.7.8-0" --checksum df7d
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="influxdb" \
-    BITNAMI_IMAGE_VERSION="1.7.8-debian-9-r7" \
+    BITNAMI_IMAGE_VERSION="1.7.8-debian-9-r8" \
     PATH="/opt/bitnami/influxdb/bin:$PATH"
 
-VOLUME [ "/bitnami/influxdb" ]
+VOLUME [ "/bitnami/influxdb" ] 
 
 EXPOSE 8088 8086
 
 USER 1001
-ENTRYPOINT [ "/entrypoint.sh" ]
-CMD [ "/run.sh" ]
+ENTRYPOINT [ "/entrypoint.sh" ] 
+CMD [ "/run.sh" ] 
