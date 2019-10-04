@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack joomla-3.9.12-0 --checksum a3e73835d5888fa975032f6714d331
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.9.12-ol-7-r10" \
+    BITNAMI_IMAGE_VERSION="3.9.12-ol-7-r11" \
     JOOMLA_DATABASE_NAME="bitnami_joomla" \
     JOOMLA_DATABASE_PASSWORD="" \
     JOOMLA_DATABASE_USER="bn_joomla" \
