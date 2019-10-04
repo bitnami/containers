@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack phpmyadmin-4.9.1-0 --checksum 4c154ea3ad22c4c496dd13fabf0
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="4.9.1-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="4.9.1-ol-7-r12" \
     DATABASE_ENABLE_SSL="no" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
