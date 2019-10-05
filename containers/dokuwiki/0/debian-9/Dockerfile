@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r492
+FROM bitnami/minideb-extras:stretch-r493
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack dokuwiki-0.20180422.201901061035-2 --checksum 745b45641bb
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="dokuwiki" \
-    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-debian-9-r240" \
+    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-debian-9-r241" \
     DOKUWIKI_EMAIL="user@example.com" \
     DOKUWIKI_FULL_NAME="Full Name" \
     DOKUWIKI_PASSWORD="bitnami1" \
