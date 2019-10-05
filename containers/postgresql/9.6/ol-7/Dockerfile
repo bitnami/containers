@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r437
+FROM bitnami/oraclelinux-extras-base:7-r438
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ COPY rootfs /
 RUN rpm -Uvh --nodeps $(repoquery --location nss_wrapper)
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="9.6.15-ol-7-r64" \
+    BITNAMI_IMAGE_VERSION="9.6.15-ol-7-r65" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
