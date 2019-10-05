@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r375
+FROM bitnami/minideb-extras-base:stretch-r376
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "fluentd" "1.7.3-0" --checksum 75dcd
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.7.3-debian-9-r2" \
+    BITNAMI_IMAGE_VERSION="1.7.3-debian-9-r3" \
     GEM_HOME="/opt/bitnami/fluentd" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/fluentd/bin:$PATH"
 
