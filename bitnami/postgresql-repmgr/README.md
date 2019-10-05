@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`4-ol-7`, `4.0.3-ol-7-r36` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/4.0.3-ol-7-r36/4/ol-7/Dockerfile)
 * [`4-debian-9`, `4.0.3-debian-9-r37`, `4`, `4.0.3`, `4.0.3-r37`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/4.0.3-debian-9-r37/4/debian-9/Dockerfile)
-* [`4-centos-7`, `4.0.3-centos-7-r38` (4/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/4.0.3-centos-7-r38/4/centos-7/Dockerfile)
+* [`4-centos-7`, `4.0.3-centos-7-r39` (4/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/4.0.3-centos-7-r39/4/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
 
