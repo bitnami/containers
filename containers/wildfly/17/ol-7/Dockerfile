@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r487
+FROM bitnami/oraclelinux-extras:7-r488
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -13,7 +13,7 @@ RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="17.0.1-ol-7-r100" \
+    BITNAMI_IMAGE_VERSION="17.0.1-ol-7-r101" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly" \
