@@ -1,10 +1,10 @@
-FROM bitnami/oraclelinux-extras:7-r488
+FROM bitnami/oraclelinux-extras:7-r489
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds-libs freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.41-2 --checksum bf50a12c033c1ff0e1cb7696cc1abd29a132cc1c5225e9d2fdbb3c6584e349fe
-RUN bitnami-pkg unpack php-7.2.23-0 --checksum 7af5dcd7127c63df8c31b81b1c4a38cf0877138dc8dcf847f4ac87f723ed86b4
+RUN bitnami-pkg unpack php-7.2.23-1 --checksum d18989e284fe37705c6a4e128ae649990a0d872286a13da25f537a002380802e
 RUN bitnami-pkg unpack mysql-client-10.3.18-2 --checksum c9d987cf8f6f6831d04920d64598d0c77cf994235753cf4d5d18ac787c12918e
 RUN bitnami-pkg install libphp-7.2.23-0 --checksum 1c237502348e2e90bf666e7aa256676c003e8097038abaac68e92a4665f4b13a
 RUN bitnami-pkg unpack phpbb-3.2.8-0 --checksum ae67d387a5d9ecb2eec0816ceb4a2c78897a0545d83b9e70c9499a87329afa3b
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack phpbb-3.2.8-0 --checksum ae67d387a5d9ecb2eec0816ceb4a2c78
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="phpbb" \
-    BITNAMI_IMAGE_VERSION="3.2.8-ol-7-r13" \
+    BITNAMI_IMAGE_VERSION="3.2.8-ol-7-r14" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
