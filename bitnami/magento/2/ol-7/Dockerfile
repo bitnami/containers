@@ -7,13 +7,13 @@ RUN bitnami-pkg unpack apache-2.4.41-2 --checksum bf50a12c033c1ff0e1cb7696cc1abd
 RUN bitnami-pkg unpack php-7.2.23-1 --checksum d18989e284fe37705c6a4e128ae649990a0d872286a13da25f537a002380802e
 RUN bitnami-pkg unpack mysql-client-10.2.27-2 --checksum 68c66c640d34436eec7077a22b3ab6a54925337dea711579c6ad9e0410908e19
 RUN bitnami-pkg install libphp-7.2.23-0 --checksum 1c237502348e2e90bf666e7aa256676c003e8097038abaac68e92a4665f4b13a
-RUN bitnami-pkg unpack magento-2.3.2-2 --checksum e52d7ff1311b8aaf0b69136d154fbd3fdb7be1e9b50e50029bcd6203797b32f5
+RUN bitnami-pkg unpack magento-2.3.3-0 --checksum a85d1c466bf6c73bf352b0d94b8cb23709d2f7a4c0e565573226fc79006958bc
 RUN find /opt/bitnami/magento/htdocs -type d -print0 | xargs -0 chmod 775 && find /opt/bitnami/magento/htdocs -type f -print0 | xargs -0 chmod 664 && chown -R bitnami:daemon /opt/bitnami/magento/htdocs
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.2-ol-7-r109" \
+    BITNAMI_IMAGE_VERSION="2.3.3-ol-7-r0" \
     ELASTICSEARCH_HOST="" \
     ELASTICSEARCH_PORT_NUMBER="" \
     EXTERNAL_HTTPS_PORT_NUMBER="443" \
