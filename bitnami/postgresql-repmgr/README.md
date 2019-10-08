@@ -43,9 +43,15 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-ol-7`, `4.0.3-ol-7-r40` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/4.0.3-ol-7-r40/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.0.3-debian-9-r40`, `4`, `4.0.3`, `4.0.3-r40`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/4.0.3-debian-9-r40/4/debian-9/Dockerfile)
-* [`4-centos-7`, `4.0.3-centos-7-r42` (4/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/4.0.3-centos-7-r42/4/centos-7/Dockerfile)
+* [`11-centos-7`, `11.5.0-centos-7-r0` (11/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.5.0-centos-7-r0/11/centos-7/Dockerfile)
+* [`10-debian-9`, `10.10.0-debian-9-r0`, `10`, `10.10.0`, `10.10.0-r0` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.10.0-debian-9-r0/10/debian-9/Dockerfile)
+* [`9.6-debian-9`, `-debian-9-r0`, `9.6`, ``, `-r0` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/-debian-9-r0/9.6/debian-9/Dockerfile)
+* [`11-debian-9`, `-debian-9-r0`, `11`, ``, `-r0`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/-debian-9-r0/11/debian-9/Dockerfile)
+* [`10-ol-7`, `-ol-7-r0` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/-ol-7-r0/10/ol-7/Dockerfile)
+* [`11-ol-7`, `-ol-7-r0` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/-ol-7-r0/11/ol-7/Dockerfile)
+* [`9.6-ol-7`, `-ol-7-r0` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/-ol-7-r0/9.6/ol-7/Dockerfile)
+* [`9.6-centos-7`, `-centos-7-r0` (9.6/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/-centos-7-r0/9.6/centos-7/Dockerfile)
+* [`10-centos-7`, `-centos-7-r0` (10/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/-centos-7-r0/10/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
 
@@ -66,7 +72,7 @@ $ docker pull bitnami/postgresql-repmgr:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/postgresql-repmgr:latest 'https://github.com/bitnami/bitnami-docker-postgresql-repmgr.git#master:4/debian-9'
+$ docker build -t bitnami/postgresql-repmgr:latest 'https://github.com/bitnami/bitnami-docker-postgresql-repmgr.git#master:11/debian-9'
 ```
 
 # Persisting your application
