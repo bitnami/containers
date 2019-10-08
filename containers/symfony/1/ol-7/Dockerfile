@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r489
+FROM bitnami/oraclelinux-extras:7-r490
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN bitnami-pkg install symfony-1.5.11-21 --checksum 6195f827b5de65ef0363d568236
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="symfony" \
-    BITNAMI_IMAGE_VERSION="1.5.11-ol-7-r446" \
+    BITNAMI_IMAGE_VERSION="1.5.11-ol-7-r447" \
     MARIADB_DATABASE="bitnami_myapp" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
