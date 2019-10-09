@@ -49,8 +49,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.7-ol-7`, `3.7.19-ol-7-r7` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.19-ol-7-r7/3.7/ol-7/Dockerfile)
-* [`3.7-debian-9`, `3.7.19-debian-9-r5`, `3.7`, `3.7.19`, `3.7.19-r5`, `latest` (3.7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.7.19-debian-9-r5/3.7/debian-9/Dockerfile)
+* [`3.8-debian-9`, `3.8.0-debian-9-r0`, `3.8`, `3.8.0`, `3.8.0-r0`, `latest` (3.8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.0-debian-9-r0/3.8/debian-9/Dockerfile)
+* [`3.8-ol-7`, `0.0.0-ol-7-r0` (3.8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/0.0.0-ol-7-r0/3.8/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
@@ -71,7 +71,7 @@ $ docker pull bitnami/rabbitmq:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/rabbitmq:latest 'https://github.com/bitnami/bitnami-docker-rabbitmq.git#master:3.7/debian-9'
+$ docker build -t bitnami/rabbitmq:latest 'https://github.com/bitnami/bitnami-docker-rabbitmq.git#master:3.8/debian-9'
 ```
 
 # Persisting your application
