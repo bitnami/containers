@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r490
+FROM bitnami/oraclelinux-extras:7-r491
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/fluentd-exporter-0.2.0-21-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="fluentd-exporter" \
-    BITNAMI_IMAGE_VERSION="0.2.0-ol-7-r439" \
+    BITNAMI_IMAGE_VERSION="0.2.0-ol-7-r440" \
     PATH="/opt/bitnami/fluentd-exporter/bin:$PATH"
 
 EXPOSE 9309
