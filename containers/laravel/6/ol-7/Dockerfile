@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r490
+FROM bitnami/oraclelinux-extras:7-r491
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,7 +10,7 @@ RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="laravel" \
-    BITNAMI_IMAGE_VERSION="6.2.0-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="6.2.0-ol-7-r1" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/laravel/bin:$PATH"
 
