@@ -30,10 +30,12 @@ MODULE=pgpool
 export PGPOOL_BASE_DIR="/opt/bitnami/pgpool"
 export PGPOOL_DATA_DIR="${PGPOOL_BASE_DIR}/data"
 export PGPOOL_CONF_DIR="${PGPOOL_BASE_DIR}/conf"
+export PGPOOL_ETC_DIR="${PGPOOL_BASE_DIR}/etc"
 export PGPOOL_LOG_DIR="${PGPOOL_BASE_DIR}/logs"
 export PGPOOL_TMP_DIR="${PGPOOL_BASE_DIR}/tmp"
 export PGPOOL_BIN_DIR="${PGPOOL_BASE_DIR}/bin"
 export PGPOOL_CONF_FILE="${PGPOOL_CONF_DIR}/pgpool.conf"
+export PGPOOL_PCP_CONF_FILE="${PGPOOL_ETC_DIR}/pcp.conf"
 export PGPOOL_PGHBA_FILE="${PGPOOL_CONF_DIR}/pool_hba.conf"
 export PGPOOL_PID_FILE="${PGPOOL_TMP_DIR}/pgpool.pid"
 export PGPOOL_LOG_FILE="${PGPOOL_LOG_DIR}/pgpool.log"
@@ -48,7 +50,8 @@ export PGPOOL_DAEMON_GROUP="pgpool"
 export PGPOOL_PORT_NUMBER="${PGPOOL_PORT_NUMBER:-5432}"
 export PGPOOL_BACKEND_NODES="${PGPOOL_BACKEND_NODES:-}"
 export PGPOOL_SR_CHECK_USER="${PGPOOL_SR_CHECK_USER:-}"
-export PGPOOL_USERNAME="${PGPOOL_USERNAME:-postgres}"
+export PGPOOL_POSTGRES_USERNAME="${PGPOOL_POSTGRES_USERNAME:-postgres}"
+export PGPOOL_ADMIN_USERNAME="${PGPOOL_ADMIN_USERNAME:-}"
 export PGPOOL_ENABLE_LDAP="${PGPOOL_ENABLE_LDAP:-no}"
 export PGPOOL_TIMEOUT="360"
 
@@ -63,13 +66,22 @@ export PGPOOL_LDAP_SCOPE="${PGPOOL_LDAP_SCOPE:-}"
 export PGPOOL_LDAP_TLS_REQCERT="${PGPOOL_LDAP_TLS_REQCERT:-}"
 
 EOF
-    if [[ -f "${PGPOOL_PASSWORD_FILE:-}" ]]; then
+    if [[ -f "${PGPOOL_ADMIN_PASSWORD_FILE:-}" ]]; then
         cat << "EOF"
-export PGPOOL_PASSWORD="$(< "${PGPOOL_PASSWORD_FILE}")"
+export PGPOOL_ADMIN_PASSWORD="$(< "${PGPOOL_ADMIN_PASSWORD_FILE}")"
 EOF
     else
         cat << "EOF"
-export PGPOOL_PASSWORD="${PGPOOL_PASSWORD:-}"
+export PGPOOL_ADMIN_PASSWORD="${PGPOOL_ADMIN_PASSWORD:-}"
+EOF
+    fi
+    if [[ -f "${PGPOOL_POSTGRES_PASSWORD_FILE:-}" ]]; then
+        cat << "EOF"
+export PGPOOL_POSTGRES_PASSWORD="$(< "${PGPOOL_POSTGRES_PASSWORD_FILE}")"
+EOF
+    else
+        cat << "EOF"
+export PGPOOL_POSTGRES_PASSWORD="${PGPOOL_POSTGRES_PASSWORD:-}"
 EOF
     fi
     if [[ -f "${PGPOOL_SR_CHECK_PASSWORD_FILE:-}" ]]; then
@@ -102,17 +114,17 @@ pgpool_validate() {
         error_code=1
     }
 
+    if [[ -z "$PGPOOL_ADMIN_USERNAME" ]] || [[ -z "$PGPOOL_ADMIN_PASSWORD" ]]; then
+        print_validation_error "The Pgpool administrator user's credentials are mandatory. Set the environment variables PGPOOL_ADMIN_USERNAME and PGPOOL_ADMIN_PASSWORD with the Pgpool administrator user's credentials."
+    fi
     if [[ -z "$PGPOOL_SR_CHECK_USER" ]] || [[ -z "$PGPOOL_SR_CHECK_PASSWORD" ]]; then
         print_validation_error "The PostrgreSQL replication credentials are mandatory. Set the environment variables PGPOOL_SR_CHECK_USER and PGPOOL_SR_CHECK_PASSWORD with the PostrgreSQL replication credentials."
     fi
-    if is_boolean_yes "$PGPOOL_ENABLE_LDAP"; then
-        if [[ -z "${PGPOOL_LDAP_URI}" ]] || [[ -z "${PGPOOL_LDAP_BASE}" ]] || [[ -z "${PGPOOL_LDAP_BIND_DN}" ]] || [[ -z "${PGPOOL_LDAP_BIND_PASSWORD}" ]]; then
-            print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables PGPOOL_LDAP_URI, PGPOOL_LDAP_BASE, PGPOOL_LDAP_BIND_DN and PGPOOL_LDAP_BIND_PASSWORD with the LDAP configuration."
-        fi
-    else
-        if [[ -z "$PGPOOL_USERNAME" ]] || [[ -z "$PGPOOL_PASSWORD" ]]; then
-            print_validation_error "The database credentials are required when LDAP authentication is not enabled. Set the environment variables PGPOOL_USERNAME and PGPOOL_PASSWORD with the database credentials."
-        fi
+    if is_boolean_yes "$PGPOOL_ENABLE_LDAP" && ( [[ -z "${PGPOOL_LDAP_URI}" ]] || [[ -z "${PGPOOL_LDAP_BASE}" ]] || [[ -z "${PGPOOL_LDAP_BIND_DN}" ]] || [[ -z "${PGPOOL_LDAP_BIND_PASSWORD}" ]] ); then
+        print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables PGPOOL_LDAP_URI, PGPOOL_LDAP_BASE, PGPOOL_LDAP_BIND_DN and PGPOOL_LDAP_BIND_PASSWORD with the LDAP configuration."
+    fi
+    if [[ -z "$PGPOOL_POSTGRES_USERNAME" ]] || [[ -z "$PGPOOL_POSTGRES_PASSWORD" ]]; then
+        print_validation_error "The administrator's database credentials are required. Set the environment variables PGPOOL_POSTGRES_USERNAME and PGPOOL_POSTGRES_PASSWORD with the administrator's database credentials."
     fi
     if [[ -z "$PGPOOL_BACKEND_NODES" ]]; then
         print_validation_error "The list of backend nodes cannot be empty. Set the environment variable PGPOOL_BACKEND_NODES with a comma separated list of backend nodes."
@@ -161,7 +173,7 @@ pgpool_create_pghba() {
     cat > "$PGPOOL_PGHBA_FILE" << EOF
 local    all             all                            trust
 host     all             $PGPOOL_SR_CHECK_USER       all         trust
-host     all             $PGPOOL_USERNAME       all         trust
+host     all             $PGPOOL_POSTGRES_USERNAME       all         md5
 host     all             wide               all         trust
 host     all             pop_user           all         trust
 host     all             all                all         $authentication
@@ -348,7 +360,7 @@ EOF
 }
 
 ########################
-# Configure LDAP connections
+# Generates a password file for local authentication
 # Globals:
 #   PGPOOL_*
 # Arguments:
@@ -357,9 +369,28 @@ EOF
 #   None
 #########################
 pgpool_generate_password_file() {
-    info "Generating password file for pgpool..."
+    info "Generating password file for local authentication..."
 
-    pg_md5 -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_USERNAME" "$PGPOOL_PASSWORD"
+    pg_md5 -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_POSTGRES_USERNAME" "$PGPOOL_POSTGRES_PASSWORD"
+}
+
+########################
+# Generate a password file for pgpool admin user
+# Globals:
+#   PGPOOL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+pgpool_generate_admin_password_file() {
+    info "Generating password file for pgpool admin user..."
+    local passwd
+
+    passwd=$(pg_md5 "$PGPOOL_ADMIN_PASSWORD")
+    cat >>"$PGPOOL_PCP_CONF_FILE"<<EOF
+$PGPOOL_ADMIN_USERNAME:$passwd
+EOF
 }
 
 ########################
@@ -392,5 +423,6 @@ pgpool_initialize() {
             pgpool_ldap_config
         fi
         pgpool_generate_password_file
+        pgpool_generate_admin_password_file
     fi
 }
