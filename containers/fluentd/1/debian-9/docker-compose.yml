@@ -7,7 +7,7 @@ services:
       - '24224:24224'
       - '5140:5140'
     volumes:
-      - fluentd_data:/bitnami
+      - fluentd_data:/bitnami/fluentd
 volumes:
   fluentd_data:
     driver: local
