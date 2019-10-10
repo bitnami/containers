@@ -69,9 +69,12 @@ $ docker run --rm --name kubectl bitnami/kubectl:latest -- --version
 
 Consult the [Kubectl Reference Documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands) to find the completed list of commands available.
 
-Remote run:
+## Loading your own configuration
+
+It's possible to load your own configuration, which is useful if you want to connect to a remote cluster:
+
 ```bash
-docker run -v $(pwd)/config:/.kube/config --rm --name kubectl bitnami/kubectl:latest
+$ docker run --rm --name kubectl -v /path/to/your/kube/config:/.kube/config bitnami/kubectl:latest
 ```
 
 # Contributing
