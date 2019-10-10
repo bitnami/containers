@@ -41,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`4-ol-7`, `4.0.6-ol-7-r42` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.0.6-ol-7-r42/4/ol-7/Dockerfile)
 * [`4-debian-9`, `4.0.6-debian-9-r39`, `4`, `4.0.6`, `4.0.6-r39`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.0.6-debian-9-r39/4/debian-9/Dockerfile)
-* [`4-centos-7`, `4.0.6-centos-7-r42` (4/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.0.6-centos-7-r42/4/centos-7/Dockerfile)
+* [`4-centos-7`, `4.0.6-centos-7-r43` (4/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.0.6-centos-7-r43/4/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
 
@@ -120,11 +120,13 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 $ docker run --detach --rm --name pgpool \
   --network my-network \
   --env PGPOOL_BACKEND_NODES=0:pg-0:5432,1:pg-1:5432 \
-  --env PGPOOL_SR_CHECK_USER=postgres \
-  --env PGPOOL_SR_CHECK_PASSWORD=adminpassword \
+  --env PGPOOL_SR_CHECK_USER=customuser \
+  --env PGPOOL_SR_CHECK_PASSWORD=custompassword \
   --env PGPOOL_ENABLE_LDAP=no \
-  --env PGPOOL_USERNAME=customuser \
-  --env PGPOOL_PASSWORD=custompassword \
+  --env PGPOOL_POSTGRES_USERNAME=postgres \
+  --env PGPOOL_POSTGRES_PASSWORD=adminpassword \
+  --env PGPOOL_ADMIN_USERNAME=admin \
+  --env PGPOOL_ADMIN_PASSWORD=adminpassword \
   bitnami/pgpool:latest
 ```
 
@@ -149,12 +151,13 @@ version: '2'
 networks:
   my-network:
     driver: bridge
-
 services:
-  postgresql:
-    image: bitnami/postgresql-repmgr:4
+  pg-0:
+    image: bitnami/postgresql-repmgr:11
     ports:
       - 5432
+    volumes:
+      - pg_0_data:/bitnami/postgresql
     environment:
       - POSTGRESQL_POSTGRES_PASSWORD=adminpassword
       - POSTGRESQL_USERNAME=customuser
@@ -162,24 +165,47 @@ services:
       - POSTGRESQL_DATABASE=customdatabase
       - REPMGR_PASSWORD=repmgrpassword
       - REPMGR_PRIMARY_HOST=pg-0
-      - REPMGR_PARTNER_NODES=pg-0
+      - REPMGR_PARTNER_NODES=pg-0,pg-1
       - REPMGR_NODE_NAME=pg-0
       - REPMGR_NODE_NETWORK_NAME=pg-0
-  pgpool:
-    image: 'bitnami/pgpool:latest'
-    networks:
-      - my-network
+  pg-1:
+    image: bitnami/postgresql-repmgr:11
+    ports:
+      - 5432
+    volumes:
+      - pg_1_data:/bitnami/postgresql
     environment:
-      - PGPOOL_BACKEND_NODES=0:pg-0:5432
-      - PGPOOL_SR_CHECK_USER=postgres
-      - PGPOOL_SR_CHECK_PASSWORD=adminpassword
+      - POSTGRESQL_POSTGRES_PASSWORD=adminpassword
+      - POSTGRESQL_USERNAME=customuser
+      - POSTGRESQL_PASSWORD=custompassword
+      - POSTGRESQL_DATABASE=customdatabase
+      - REPMGR_PASSWORD=repmgrpassword
+      - REPMGR_PRIMARY_HOST=pg-0
+      - REPMGR_PARTNER_NODES=pg-0,pg-1
+      - REPMGR_NODE_NAME=pg-1
+      - REPMGR_NODE_NETWORK_NAME=pg-1
+  pgpool:
+    image: bitnami/pgpool:4
+    ports:
+      - 5432:5432
+    environment:
+      - PGPOOL_BACKEND_NODES=0:pg-0:5432,1:pg-1:5432
+      - PGPOOL_SR_CHECK_USER=customuser
+      - PGPOOL_SR_CHECK_PASSWORD=custompassword
       - PGPOOL_ENABLE_LDAP=no
-      - PGPOOL_USERNAME=customuser
-      - PGPOOL_PASSWORD=custompassword
+      - PGPOOL_POSTGRES_USERNAME=postgres
+      - PGPOOL_POSTGRES_PASSWORD=adminpassword
+      - PGPOOL_ADMIN_USERNAME=admin
+      - PGPOOL_ADMIN_PASSWORD=adminpassword
   myapp:
     image: 'YOUR_APPLICATION_IMAGE'
     networks:
       - my-network
+volumes:
+  pg_0_data:
+    driver: local
+  pg_1_data:
+    driver: local
 ```
 
 > **IMPORTANT**:
@@ -201,14 +227,17 @@ A HA PostgreSQL cluster with Pgpool, [Streaming replication](https://www.postgre
 
 Pgpool:
 
-- `PGPOOL_USERNAME`: Custom database username. No defaults.
-- `PGPOOL_PASSWORD`: Password for the custom user set in the `PGPOOL_USERNAME` environment variable. No defaults.
 - `PGPOOL_PASSWORD_FILE`: Path to a file that contains the password for the custom user set in the `PGPOOL_USERNAME` environment variable. This will override the value specified in `PGPOOL_PASSWORD`. No defaults.
 - `PGPOOL_SR_CHECK_USER`: Username to use to perform streaming checks. No defaults.
 - `PGPOOL_SR_CHECK_PASSWORD`: Password to use to perform streaming checks. No defaults.
 - `PGPOOL_SR_CHECK_PASSWORD_FILE`: Path to a file that contains the password to use to perform streaming checks. This will override the value specified in `PGPOOL_SR_CHECK_PASSWORD`. No defaults.
 - `PGPOOL_BACKEND_NODES`: Comma separated list of backend nodes in the cluster.  No defaults.
 - `PGPOOL_ENABLE_LDAP`: Whether to enable LDAP authentication. Defaults to `no`.
+- `PGPOOL_POSTGRES_USERNAME`: Postgres administrator user name, this will be use to allow postgres admin authentication through Pgpool.
+- `PGPOOL_POSTGRES_PASSWORD`: Password for the user set in `PGPOOL_POSTGRES_USERNAME` environment variable. No defaults.
+- `PGPOOL_ADMIN_USERNAME`: Username for the pgpool administrator. No defaults.
+- `PGPOOL_ADMIN_PASSWORD`: Password for the user set in `PGPOOL_ADMIN_USERNAME` environment variable. No defaults.
+
 
 PostgreSQL with Replication Manager:
 
@@ -372,11 +401,14 @@ Please see the list of environment variables available in the Bitnami Pgpool con
 | PGPOOL_SR_CHECK_USER                 | `nil`                              |
 | PGPOOL_SR_CHECK_PASSWORD             | `nil`                              |
 | PGPOOL_SR_CHECK_PASSWORD_FILE        | `nil`                              |
-| PGPOOL_USERNAME                      | `nil`                              |
-| PGPOOL_PASSWORD                      | `nil`                              |
+| PGPOOL_POSTGRES_USERNAME             | `nil`                              |
+| PGPOOL_POSTGRES_PASSWORD             | `nil`                              |
 | PGPOOL_PASSWORD_FILE                 | `nil`                              |
 | PGPOOL_TIMEOUT                       | `360`                              |
 | PGPOOL_ENABLE_LDAP                   | `no`                               |
+| PGPOOL_ADMIN_USERNAME=admin          | `nil`                              |
+| PGPOOL_ADMIN_PASSWORD=adminpassword  | `nil`                              |
+
 
 # Logging
 
