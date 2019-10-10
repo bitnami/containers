@@ -10,12 +10,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libgomp1 libquadmath0 libstdc++6 libx11-6
 RUN . ./libcomponent.sh && component_unpack "miniconda" "4.7.10-0" --checksum 6de1a01e9776a87cd40f5b19f5735562413f8225d36f3907e286a79864bfb081
-RUN . ./libcomponent.sh && component_unpack "pytorch" "1.2.0-0" --checksum 96bf156fa3fca36b7f1b46d5dd184d806568d1c696554481fec246771b4fe42f
+RUN . ./libcomponent.sh && component_unpack "pytorch" "1.3.0-0" --checksum ca70b73529120af74f7e21fd5f0f17f86b82e00146cf7f260a005156dce8dd76
 
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="pytorch" \
-    BITNAMI_IMAGE_VERSION="1.2.0-debian-9-r63" \
+    BITNAMI_IMAGE_VERSION="1.3.0-debian-9-r0" \
     LD_LIBRARY_PATH="/opt/bitnami/miniconda/lib/python3.7/site-packages/torch/lib/:/opt/bitnami/miniconda/lib/python3.7/site-packages/PIL/.libs/:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/miniconda/bin:$PATH"
