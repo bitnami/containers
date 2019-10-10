@@ -49,8 +49,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.5.9-ol-7-r43` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.9-ol-7-r43/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.5.9-debian-9-r38`, `3`, `3.5.9`, `3.5.9-r38`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.9-debian-9-r38/3/debian-9/Dockerfile)
+* [`3-ol-7`, `3.5.11-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.11-ol-7-r0/3/ol-7/Dockerfile)
+* [`3-debian-9`, `3.5.11-debian-9-r0`, `3`, `3.5.11`, `3.5.11-r0`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.11-debian-9-r0/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/neo4j GitHub repo](https://github.com/bitnami/bitnami-docker-neo4j).
 
