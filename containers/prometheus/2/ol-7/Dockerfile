@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r491
+FROM bitnami/oraclelinux-extras:7-r492
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,10 +7,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "b5da69592202283268465394ea5d89cd023278d596cb06447378ad58015230c2  /tmp/bitnami/pkg/cache/prometheus-2.13.0-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.13.0-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/prometheus-2.13.0-0-linux-x86_64-ol-7.tar.gz
+RUN ln -sf /opt/bitnami/prometheus/conf /etc/prometheus
+RUN ln -sf /opt/bitnami/prometheus/data /prometheus
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.13.0-ol-7-r5" \
+    BITNAMI_IMAGE_VERSION="2.13.0-ol-7-r6" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
