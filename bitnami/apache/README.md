@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2.4-ol-7`, `2.4.41-ol-7-r66` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.41-ol-7-r66/2.4/ol-7/Dockerfile)
-* [`2.4-debian-9`, `2.4.41-debian-9-r61`, `2.4`, `2.4.41`, `2.4.41-r61`, `latest` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.41-debian-9-r61/2.4/debian-9/Dockerfile)
+* [`2.4-debian-9`, `2.4.41-debian-9-r62`, `2.4`, `2.4.41`, `2.4.41-r62`, `latest` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.41-debian-9-r62/2.4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/apache GitHub repo](https://github.com/bitnami/bitnami-docker-apache).
 
