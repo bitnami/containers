@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6-ol-7`, `6.4.2-ol-7-r3` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.4.2-ol-7-r3/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.4.2-debian-9-r1`, `6`, `6.4.2`, `6.4.2-r1`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.4.2-debian-9-r1/6/debian-9/Dockerfile)
+* [`6-debian-9`, `6.4.2-debian-9-r2`, `6`, `6.4.2`, `6.4.2-r2`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.4.2-debian-9-r2/6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -132,23 +132,26 @@ grafana:
 
 ## Install plugins at initialization
 
-When you start the Grafana image, you can specify a comma, semi-colon or space separated list of plugins to install by setting the env. variable `GF_INSTALL_PLUGINS`.
+When you start the Grafana image, you can specify a comma, semi-colon or space separated list of plugins to install by setting the env. variable `GF_INSTALL_PLUGINS`. The entries in `GF_INSTALL_PLUGINS` have two different formats:
 
- * For Docker Compose, add the variable name and value under the application section:
+ * `plugin_id`: This will download the plugin with name `plugin_id` from [the official Grafana plugins page](https://grafana.com/grafana/plugins).
+ * `plugin_id=url`: This will download the plugin with name `plugin_id` using the zip file specified in `url`. In case you want to skip TLS verification, set the variable `GF_INSTALL_PLUGINS_SKIP_TLS` to `yes`.
+
+For Docker Compose, add the variable name and value under the application section:
 
 ```yaml
 grafana:
   ...
   environment:
-    - GF_INSTALL_PLUGINS=grafana-kubernetes-app,grafana-example-app
+    - GF_INSTALL_PLUGINS=grafana-kubernetes-app,worldping=worldpring=https://github.com/raintank/worldping-app/releases/download/v1.2.6/worldping-app-release-1.2.6.zip
   ...
 ```
 
- * For manual execution add a `-e` option with each variable and value:
+For manual execution add a `-e` option with each variable and value:
 
 ```bash
 $ docker run -d --name grafana -p 3000:3000 \
-    -e GF_INSTALL_PLUGINS=grafana-kubernetes-app,grafana-example-app \
+    -e GF_INSTALL_PLUGINS="grafana-kubernetes-app,worldpring=https://github.com/raintank/worldping-app/releases/download/v1.2.6/worldping-app-release-1.2.6.zip" \
     bitnami/grafana:latest
 ```
 
