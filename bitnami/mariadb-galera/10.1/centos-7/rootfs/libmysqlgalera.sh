@@ -1,194 +1,15 @@
 #!/bin/bash
 #
-# Bitnami MySQL library
+# Bitnami MySQL Galera library
 
 # shellcheck disable=SC1090
 # shellcheck disable=SC1091
 
-# Load Generic Libraries
-. /libfile.sh
 . /liblog.sh
+. /libos.sh
 . /libservice.sh
 . /libvalidations.sh
 . /libversion.sh
-
-# Functions
-
-########################
-# Extract mysql version from version string
-# Globals:
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   Version string
-#########################
-mysql_get_version() {
-    local ver_string
-    local -a ver_split
-
-    ver_string=$("${DB_BINDIR}/mysql" "--version")
-    ver_split=(${ver_string// / })
-
-    if [[ "$ver_string" == *" Distrib "* ]]; then
-        echo "${ver_split[4]::-1}"
-    else
-        echo "${ver_split[2]}"
-    fi
-}
-
-########################
-# Gets an environment variable name based on the suffix
-# Globals:
-#   DB_FLAVOR
-# Arguments:
-#   $1 - environment variable suffix
-# Returns:
-#   environment variable name
-#########################
-get_env_var() {
-    local id="${1:?id is required}"
-    echo "${DB_FLAVOR^^}_${id}"
-}
-
-########################
-# Gets an environment variable value based on the suffix
-# Arguments:
-#   $1 - environment variable suffix
-# Returns:
-#   environment variable value
-#########################
-get_env_var_value() {
-    local envVar
-    envVar="$(get_env_var "$1")"
-    echo "${!envVar:-}"
-}
-
-########################
-# Execute an arbitrary query/queries against the running MySQL/MariaDB service
-# Stdin:
-#   Query/queries to execute
-# Globals:
-#   BITNAMI_DEBUG
-#   DB_*
-# Arguments:
-#   $1 - Database where to run the queries
-#   $2 - User to run queries
-#   $3 - Password
-# Returns:
-#   None
-mysql_execute() {
-    local db="${1:-}"
-    local user="${2:-root}"
-    local pass="${3:-}"
-
-    local args=("--defaults-file=$DB_CONFDIR/my.cnf" "-N" "-u" "$user" "$db")
-    [[ -n "$pass" ]] && args+=("-p$pass")
-    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-        "$DB_BINDIR/mysql" "${args[@]}"
-    else
-        "$DB_BINDIR/mysql" "${args[@]}" >/dev/null 2>&1
-    fi
-}
-
-########################
-# Execute an arbitrary query/queries against a remote MySQL/MariaDB service
-# Stdin:
-#   Query/queries to execute
-# Globals:
-#   BITNAMI_DEBUG
-#   DB_*
-# Arguments:
-#   $1 - Database where to run the queries
-#   $2 - Remote MySQL/MariaDB service hostname
-#   $3 - Remote MySQL/MariaDB service port
-#   $4 - User to run queries
-#   $5 - Password
-# Returns:
-#   None
-mysql_remote_execute() {
-    local db="${1:-}"
-    local hostname="${2:?hostname is required}"
-    local port="${3:?port is required}"
-    local user="${4:?user is required}"
-    local pass="${5:-}"
-
-    local args=("-N" "-h" "$hostname" "-P" "$port" "-u" "$user" "--connect-timeout=5" "$db")
-    [[ -n "$pass" ]] && args+=("-p$pass")
-    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-        "$DB_BINDIR/mysql" "${args[@]}"
-    else
-        "$DB_BINDIR/mysql" "${args[@]}" >/dev/null 2>&1
-    fi
-}
-
-########################
-# Checks if MySQL/MariaDB is running
-# Globals:
-#   DB_TMPDIR
-# Arguments:
-#   None
-# Returns:
-#   Boolean
-#########################
-is_mysql_running() {
-    local pid
-    pid="$(get_pid_from_file "$DB_TMPDIR/mysqld.pid")"
-
-    if [[ -z "$pid" ]]; then
-        false
-    else
-        is_service_running "$pid"
-    fi
-}
-
-########################
-# Starts MySQL/MariaDB in the background and waits until it's ready
-# Globals:
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-mysql_start_bg() {
-    local flags=("--defaults-file=${DB_BASEDIR}/conf/my.cnf" "--basedir=${DB_BASEDIR}" "--datadir=${DB_DATADIR}" "--socket=$DB_TMPDIR/mysql.sock" "--port=$DB_PORT_NUMBER")
-    [[ -z "${DB_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${DB_EXTRA_FLAGS[@]}")
-    [[ -z "${DB_FORCE_UPGRADE:-}" ]] || flags=("${flags[@]}" "--upgrade=FORCE")
-    am_i_root && flags=("${flags[@]}" "--user=$DB_DAEMON_USER")
-
-    debug "Starting $DB_FLAVOR in background..."
-
-    is_mysql_running && return
-
-    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-        "${DB_SBINDIR}/mysqld" "${flags[@]}" &
-    else
-        "${DB_SBINDIR}/mysqld" "${flags[@]}" >/dev/null 2>&1 &
-    fi
-
-    # wait until the server is up and answering queries.
-    local args=(mysql root)
-    is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("$DB_ROOT_PASSWORD")
-    while ! echo "select 1" | mysql_execute "${args[@]}"; do
-        sleep 1
-    done
-}
-
-
-########################
-# Stop MySQL/Mariadb
-# Globals:
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-mysql_stop() {
-    info "Stopping $DB_FLAVOR..."
-    stop_service_using_pid "$DB_TMPDIR/mysqld.pid"
-}
 
 ########################
 # Configure database extra start flags
@@ -409,154 +230,6 @@ EOF
 }
 
 ########################
-# Initialize database data
-# Globals:
-#   BITNAMI_DEBUG
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-mysql_install_db() {
-    local command="${DB_BINDIR}/mysql_install_db"
-    local args=("--defaults-file=${DB_CONFDIR}/my.cnf" "--basedir=${DB_BASEDIR}" "--datadir=${DB_DATADIR}")
-    am_i_root && args=("${args[@]}" "--user=$DB_DAEMON_USER")
-    debug "Installing database..."
-    if [[ "$DB_FLAVOR" = "mysql" ]]; then
-        command="${DB_BINDIR}/mysqld"
-        args+=("--initialize-insecure")
-    fi
-    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-        $command "${args[@]}"
-    else
-        $command "${args[@]}" >/dev/null 2>&1
-    fi
-}
-
-########################
-# Migrate old custom configuration files
-# Globals:
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-migrate_old_configuration() {
-    local old_custom_conf_file="$DB_VOLUMEDIR/conf/my_custom.cnf"
-    local custom_conf_file="$DB_CONFDIR/bitnami/my_custom.cnf"
-    debug "Persisted configuration detected. Migrating any existing 'my_custom.cnf' file to new location..."
-    warn "Custom configuration files won't be persisted any longer!"
-    if [[ -f "$old_custom_conf_file" ]]; then
-        info "Adding old custom configuration to user configuration"
-        echo "" >> "$custom_conf_file"
-        cat "$old_custom_conf_file" >> "$custom_conf_file"
-    fi
-    if am_i_root; then
-        [[ -e "$DB_VOLUMEDIR/.initialized" ]] && rm "$DB_VOLUMEDIR/.initialized"
-        rm -rf "$DB_VOLUMEDIR/conf"
-    else
-        warn "Old custom configuration migrated, please manually remove the 'conf' directory from the volume use to persist data"
-    fi
-}
-
-########################
-# Upgrade Database Schema
-# Globals:
-#   BITNAMI_DEBUG
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-mysql_upgrade() {
-    local args=("--defaults-file=${DB_CONFDIR}/my.cnf" "-u" "$DB_ROOT_USER")
-    local major_version
-
-    major_version=$(get_sematic_version "$(mysql_get_version)" 1)
-
-    debug "Running mysql_upgrade..."
-
-    if [[ "$DB_FLAVOR" = "mysql" ]] && [[ "$major_version" = "8" ]]; then
-        mysql_stop
-        export DB_FORCE_UPGRADE=true
-        mysql_start_bg
-        unset DB_FORCE_UPGRADE
-    else
-        if is_boolean_yes "${ROOT_AUTH_ENABLED:-false}"; then
-            args+=("-p$DB_ROOT_PASSWORD")
-        fi
-        if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-            "${DB_BINDIR}/mysql_upgrade" "${args[@]}"
-        else
-            "${DB_BINDIR}/mysql_upgrade" "${args[@]}" >/dev/null 2>&1
-        fi
-    fi
-}
-
-########################
-# Ensure a db user exists with the given password for the '%' host
-# Globals:
-#   DB_*
-# Arguments:
-#   $1 - db user
-#   $2 - password
-# Returns:
-#   None
-#########################
-mysql_ensure_user_exists() {
-    local user="${1:?user is required}"
-    local password="${2:-}"
-    local hosts
-
-    debug "creating db user \'$user\'..."
-    mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-create $([[ "$DB_FLAVOR" = "mariadb" ]] && echo "or replace") user '$user'@'%' $([[ "$password" != "" ]] && echo "identified by '$password'");
-EOF
-    debug "Removing all other hosts for the user..."
-    hosts=$(mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-select Host from user where User='$user' and Host!='%';
-EOF
-)
-    for host in $hosts; do
-        mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-drop user '$user'@'$host';
-EOF
-    done
-}
-
-########################
-# Ensure a db user does not exist
-# Globals:
-#   DB_*
-# Arguments:
-#   $1 - db user
-# Returns:
-#   None
-#########################
-mysql_ensure_user_not_exists() {
-    local user="${1}"
-    local hosts
-
-    if [[ -z "$user" ]]; then
-        debug "removing the unknown user"
-    else
-        debug "removing user $user"
-    fi
-    hosts=$(mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-select Host from user where User='$user';
-EOF
-)
-    for host in $hosts; do
-        mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-drop user '$user'@'$host';
-EOF
-    done
-}
-
-########################
 # Ensure the mariabackup user exists for host 'localhost' and has full access (galera)
 # Globals:
 #   DB_*
@@ -618,106 +291,6 @@ EOF
 }
 
 ########################
-# Ensure the root user exists for host '%' and has full access
-# Globals:
-#   DB_*
-# Arguments:
-#   $1 - root user
-#   $2 - root password
-# Returns:
-#   None
-#########################
-mysql_ensure_root_user_exists() {
-    local user="${1:?user is required}"
-    local password="${2:-}"
-
-    debug "Configuring root user credentials..."
-    [[ -n "$password" ]] && export ROOT_AUTH_ENABLED="yes"
-    if [ "$DB_FLAVOR" == "mariadb" ]; then
-        mysql_execute "mysql" "root" <<EOF
--- create root@localhost user for local admin access
--- create user 'root'@'localhost' $([ "$password" != "" ] && echo "identified by '$password'");
--- grant all on *.* to 'root'@'localhost' with grant option;
--- create admin user for remote access
-create user '$user'@'%' $([ "$password" != "" ] && echo "identified by '$password'");
-grant all on *.* to '$user'@'%' with grant option;
-flush privileges;
-EOF
-    else
-        mysql_execute "mysql" "root" <<EOF
--- create admin user
-create user '$user'@'%' $([ "$password" != "" ] && echo "identified by '$password'");
-grant all on *.* to '$user'@'%' with grant option;
-flush privileges;
-EOF
-    fi
-}
-
-########################
-# Ensure the application database exists
-# Globals:
-#   DB_*
-# Arguments:
-#   $1 - database name
-# Returns:
-#   None
-#########################
-mysql_ensure_database_exists() {
-    local database="${1:?database is required}"
-
-    debug "Creating database $database..."
-    mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-create database if not exists \`$database\`;
-EOF
-}
-
-########################
-# Ensure a user has all privileges to access a database
-# Globals:
-#   DB_*
-# Arguments:
-#   $1 - database name
-#   $2 - database user
-# Returns:
-#   None
-#########################
-mysql_ensure_user_has_database_privileges() {
-    local user="${1:?user is required}"
-    local database="${2:?db is required}"
-
-    debug "Providing privileges to username $user on database $database..."
-    mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-grant all on \`$database\`.* to '$user'@'%';
-EOF
-}
-
-########################
-# Optionally create the given database, and then optionally create a user with
-# full privileges on the database.
-# Globals:
-#   DB_*
-# Arguments:
-#   $1 - database name
-#   $2 - database user
-#   $3 - database password
-# Returns:
-#   None
-#########################
-mysql_ensure_optional_database_exists() {
-    local database="${1:-}"
-    local user="${2:-}"
-    local password="${3:-}"
-
-    if [[ "$database" != "" ]]; then
-        mysql_ensure_database_exists "$database"
-        if [[ "$user" != "" ]]; then
-            mysql_ensure_user_exists "$user" "$password"
-            mysql_ensure_user_has_database_privileges "$user" "$database"
-        fi
-    fi
-}
-
-########################
 # Ensure MySQL/MariaDB is initialized
 # Globals:
 #   DB_*
@@ -770,6 +343,7 @@ EOF
             mysql_ensure_galera_mariabackup_user_exists "$DB_GALERA_MARIABACKUP_USER" "$DB_GALERA_MARIABACKUP_PASSWORD"
             mysql_ensure_replication_user_exists "monitor" "monitor"
 
+            [[ -n "$(get_master_env_var_value ROOT_PASSWORD)" ]] && export ROOT_AUTH_ENABLED="yes"
             if [[ "$DB_FLAVOR" = "mysql" ]]; then
                 mysql_upgrade
             else
@@ -877,4 +451,466 @@ EOF
 
         nslcd --debug &
     fi
+}
+
+########################
+# Extract mysql version from version string
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   Version string
+#########################
+mysql_get_version() {
+    local ver_string
+    local -a ver_split
+
+    ver_string=$("${DB_BINDIR}/mysql" "--version")
+    ver_split=(${ver_string// / })
+
+    if [[ "$ver_string" == *" Distrib "* ]]; then
+        echo "${ver_split[4]::-1}"
+    else
+        echo "${ver_split[2]}"
+    fi
+}
+
+########################
+# Gets an environment variable name based on the suffix
+# Globals:
+#   DB_FLAVOR
+# Arguments:
+#   $1 - environment variable suffix
+# Returns:
+#   environment variable name
+#########################
+get_env_var() {
+    local id="${1:?id is required}"
+    echo "${DB_FLAVOR^^}_${id}"
+}
+
+########################
+# Gets an environment variable value based on the suffix
+# Arguments:
+#   $1 - environment variable suffix
+# Returns:
+#   environment variable value
+#########################
+get_env_var_value() {
+    local envVar
+    envVar="$(get_env_var "$1")"
+    echo "${!envVar:-}"
+}
+
+########################
+# Gets an environment variable value for the master node and based on the suffix
+# Arguments:
+#   $1 - environment variable suffix
+# Returns:
+#   environment variable value
+#########################
+get_master_env_var_value() {
+    local envVar
+    PREFIX=""
+    [[ "$DB_REPLICATION_MODE" = "slave" ]] && PREFIX="MASTER_"
+    envVar="$(get_env_var "$PREFIX$1")"
+    echo "${!envVar:-}"
+}
+
+########################
+# Execute an arbitrary query/queries against the running MySQL/MariaDB service
+# Stdin:
+#   Query/queries to execute
+# Globals:
+#   BITNAMI_DEBUG
+#   DB_*
+# Arguments:
+#   $1 - Database where to run the queries
+#   $2 - User to run queries
+#   $3 - Password
+# Returns:
+#   None
+mysql_execute() {
+    local db="${1:-}"
+    local user="${2:-root}"
+    local pass="${3:-}"
+
+    local args=("--defaults-file=$DB_CONFDIR/my.cnf" "-N" "-u" "$user" "$db")
+    [[ -n "$pass" ]] && args+=("-p$pass")
+    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+        "$DB_BINDIR/mysql" "${args[@]}"
+    else
+        "$DB_BINDIR/mysql" "${args[@]}" >/dev/null 2>&1
+    fi
+}
+
+########################
+# Execute an arbitrary query/queries against a remote MySQL/MariaDB service
+# Stdin:
+#   Query/queries to execute
+# Globals:
+#   BITNAMI_DEBUG
+#   DB_*
+# Arguments:
+#   $1 - Database where to run the queries
+#   $2 - Remote MySQL/MariaDB service hostname
+#   $3 - Remote MySQL/MariaDB service port
+#   $4 - User to run queries
+#   $5 - Password
+# Returns:
+#   None
+mysql_remote_execute() {
+    local db="${1:-}"
+    local hostname="${2:?hostname is required}"
+    local port="${3:?port is required}"
+    local user="${4:?user is required}"
+    local pass="${5:-}"
+
+    local args=("-N" "-h" "$hostname" "-P" "$port" "-u" "$user" "--connect-timeout=5" "$db")
+    [[ -n "$pass" ]] && args+=("-p$pass")
+    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+        "$DB_BINDIR/mysql" "${args[@]}"
+    else
+        "$DB_BINDIR/mysql" "${args[@]}" >/dev/null 2>&1
+    fi
+}
+
+########################
+# Checks if MySQL/MariaDB is running
+# Globals:
+#   DB_TMPDIR
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_mysql_running() {
+    local pid
+    pid="$(get_pid_from_file "$DB_TMPDIR/mysqld.pid")"
+
+    if [[ -z "$pid" ]]; then
+        false
+    else
+        is_service_running "$pid"
+    fi
+}
+
+########################
+# Starts MySQL/MariaDB in the background and waits until it's ready
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+########################
+# Starts MySQL/MariaDB in the background and waits until it's ready
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mysql_start_bg() {
+    local flags=("--defaults-file=${DB_BASEDIR}/conf/my.cnf" "--basedir=${DB_BASEDIR}" "--datadir=${DB_DATADIR}" "--socket=$DB_TMPDIR/mysql.sock" "--port=$DB_PORT_NUMBER")
+    [[ -z "${DB_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${DB_EXTRA_FLAGS[@]}")
+    [[ -z "${DB_FORCE_UPGRADE:-}" ]] || flags=("${flags[@]}" "--upgrade=FORCE")
+    am_i_root && flags=("${flags[@]}" "--user=$DB_DAEMON_USER")
+
+    debug "Starting $DB_FLAVOR in background..."
+
+    is_mysql_running && return
+
+    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+        "${DB_SBINDIR}/mysqld" "${flags[@]}" &
+    else
+        "${DB_SBINDIR}/mysqld" "${flags[@]}" >/dev/null 2>&1 &
+    fi
+
+    # wait until the server is up and answering queries.
+    local args=("mysql" "root")
+    is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("$(get_master_env_var_value ROOT_PASSWORD)")
+    while ! echo "select 1" | mysql_execute "${args[@]}"; do
+        sleep 1
+    done
+}
+
+########################
+# Stop MySQL/Mariadb
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mysql_stop() {
+    info "Stopping $DB_FLAVOR..."
+    stop_service_using_pid "$DB_TMPDIR/mysqld.pid"
+}
+
+########################
+# Initialize database data
+# Globals:
+#   BITNAMI_DEBUG
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mysql_install_db() {
+    local command="${DB_BINDIR}/mysql_install_db"
+    local args=("--defaults-file=${DB_CONFDIR}/my.cnf" "--basedir=${DB_BASEDIR}" "--datadir=${DB_DATADIR}")
+    am_i_root && args=("${args[@]}" "--user=$DB_DAEMON_USER")
+    debug "Installing database..."
+    if [[ "$DB_FLAVOR" = "mysql" ]]; then
+        command="${DB_BINDIR}/mysqld"
+        args+=("--initialize-insecure")
+    fi
+    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+        $command "${args[@]}"
+    else
+        $command "${args[@]}" >/dev/null 2>&1
+    fi
+}
+
+########################
+# Upgrade Database Schema
+# Globals:
+#   BITNAMI_DEBUG
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mysql_upgrade() {
+    local args=("--defaults-file=${DB_CONFDIR}/my.cnf" "-u" "$DB_ROOT_USER")
+    local major_version
+
+    major_version=$(get_sematic_version "$(mysql_get_version)" 1)
+
+    debug "Running mysql_upgrade..."
+
+    if [[ "$DB_FLAVOR" = "mysql" ]] && [[ "$major_version" -ge "8" ]]; then
+        mysql_stop
+        export DB_FORCE_UPGRADE=true
+        mysql_start_bg
+        unset DB_FORCE_UPGRADE
+    else
+        if [[ "$DB_FLAVOR" = "mysql" ]]; then
+            args+=("--force")
+        fi
+        if [[ -z "$DB_REPLICATION_MODE" ]] || [[ "$DB_REPLICATION_MODE" = "master" ]]; then
+            is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("-p$(get_master_env_var_value ROOT_PASSWORD)")
+        fi
+        if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+            "${DB_BINDIR}/mysql_upgrade" "${args[@]}"
+        else
+            "${DB_BINDIR}/mysql_upgrade" "${args[@]}" >/dev/null 2>&1
+        fi
+    fi
+}
+
+########################
+# Migrate old custom configuration files
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+migrate_old_configuration() {
+    local old_custom_conf_file="$DB_VOLUMEDIR/conf/my_custom.cnf"
+    local custom_conf_file="$DB_CONFDIR/bitnami/my_custom.cnf"
+    debug "Persisted configuration detected. Migrating any existing 'my_custom.cnf' file to new location..."
+    warn "Custom configuration files won't be persisted any longer!"
+    if [[ -f "$old_custom_conf_file" ]]; then
+        info "Adding old custom configuration to user configuration"
+        echo "" >> "$custom_conf_file"
+        cat "$old_custom_conf_file" >> "$custom_conf_file"
+    fi
+    if am_i_root; then
+        [[ -e "$DB_VOLUMEDIR/.initialized" ]] && rm "$DB_VOLUMEDIR/.initialized"
+        rm -rf "$DB_VOLUMEDIR/conf"
+    else
+        warn "Old custom configuration migrated, please manually remove the 'conf' directory from the volume use to persist data"
+    fi
+}
+
+########################
+# Ensure a db user exists with the given password for the '%' host
+# Globals:
+#   DB_*
+# Arguments:
+#   $1 - db user
+#   $2 - password
+# Returns:
+#   None
+#########################
+mysql_ensure_user_exists() {
+    local user="${1:?user is required}"
+    local password="${2:-}"
+    local hosts
+
+    debug "creating db user \'$user\'..."
+    mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+create $([[ "$DB_FLAVOR" = "mariadb" ]] && echo "or replace") user '$user'@'%' $([[ "$password" != "" ]] && echo "identified by '$password'");
+EOF
+    debug "Removing all other hosts for the user..."
+    hosts=$(mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+select Host from user where User='$user' and Host!='%';
+EOF
+)
+    for host in $hosts; do
+        mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+drop user '$user'@'$host';
+EOF
+    done
+}
+
+########################
+# Ensure a db user does not exist
+# Globals:
+#   DB_*
+# Arguments:
+#   $1 - db user
+# Returns:
+#   None
+#########################
+mysql_ensure_user_not_exists() {
+    local user="${1}"
+    local hosts
+
+    if [[ -z "$user" ]]; then
+        debug "removing the unknown user"
+    else
+        debug "removing user $user"
+    fi
+    hosts=$(mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+select Host from user where User='$user';
+EOF
+)
+    for host in $hosts; do
+        mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+drop user '$user'@'$host';
+EOF
+    done
+}
+
+########################
+# Ensure the root user exists for host '%' and has full access
+# Globals:
+#   DB_*
+# Arguments:
+#   $1 - root user
+#   $2 - root password
+# Returns:
+#   None
+#########################
+mysql_ensure_root_user_exists() {
+    local user="${1:?user is required}"
+    local password="${2:-}"
+
+    debug "Configuring root user credentials..."
+    if [ "$DB_FLAVOR" == "mariadb" ]; then
+        mysql_execute "mysql" "root" <<EOF
+-- create root@localhost user for local admin access
+-- create user 'root'@'localhost' $([ "$password" != "" ] && echo "identified by '$password'");
+-- grant all on *.* to 'root'@'localhost' with grant option;
+-- create admin user for remote access
+create user '$user'@'%' $([ "$password" != "" ] && echo "identified by '$password'");
+grant all on *.* to '$user'@'%' with grant option;
+flush privileges;
+EOF
+    else
+        mysql_execute "mysql" "root" <<EOF
+-- create admin user
+create user '$user'@'%' $([ "$password" != "" ] && echo "identified by '$password'");
+grant all on *.* to '$user'@'%' with grant option;
+flush privileges;
+EOF
+    fi
+}
+
+########################
+# Ensure the application database exists
+# Globals:
+#   DB_*
+# Arguments:
+#   $1 - database name
+# Returns:
+#   None
+#########################
+mysql_ensure_database_exists() {
+    local database="${1:?database is required}"
+
+    debug "Creating database $database..."
+    mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+create database if not exists \`$database\`;
+EOF
+}
+
+########################
+# Ensure a user has all privileges to access a database
+# Globals:
+#   DB_*
+# Arguments:
+#   $1 - database name
+#   $2 - database user
+# Returns:
+#   None
+#########################
+mysql_ensure_user_has_database_privileges() {
+    local user="${1:?user is required}"
+    local database="${2:?db is required}"
+
+    debug "Providing privileges to username $user on database $database..."
+    mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+grant all on \`$database\`.* to '$user'@'%';
+EOF
+}
+
+########################
+# Optionally create the given database, and then optionally create a user with
+# full privileges on the database.
+# Globals:
+#   DB_*
+# Arguments:
+#   $1 - database name
+#   $2 - database user
+#   $3 - database password
+# Returns:
+#   None
+#########################
+mysql_ensure_optional_database_exists() {
+    local database="${1:-}"
+    local user="${2:-}"
+    local password="${3:-}"
+
+    if [[ "$database" != "" ]]; then
+        mysql_ensure_database_exists "$database"
+        if [[ "$user" != "" ]]; then
+            mysql_ensure_user_exists "$user" "$password"
+            mysql_ensure_user_has_database_privileges "$user" "$database"
+        fi
+    fi
+}
+
+########################
+# Flag MySQL has fully initialized.
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mysql_flag_initialized() {
+    touch "$DB_VOLUMEDIR"/.mysql_initialized
 }
