@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/fluentd-exporter-0.2.0-21-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="fluentd-exporter" \
-    BITNAMI_IMAGE_VERSION="0.2.0-debian-9-r421" \
+    BITNAMI_IMAGE_VERSION="0.2.0-debian-9-r422" \
     PATH="/opt/bitnami/fluentd-exporter/bin:$PATH"
 
 EXPOSE 9309
