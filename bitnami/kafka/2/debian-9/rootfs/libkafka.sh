@@ -214,7 +214,7 @@ kafka_validate() {
     fi
     if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL_SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL_SSL ]]; then
         if [[ ! -f "$KAFKA_CONFDIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_CONFDIR"/certs/kafka.truststore.jks ]]; then
-            print_validation_error "In order to configure the SASL_SSL listener for Kafka you must mount your kafka.keystore.jks and kafka.trustore.jks certificates to the $KAFKA_CONFDIR/certs directory."
+            print_validation_error "In order to configure the SASL_SSL listener for Kafka you must mount your kafka.keystore.jks and kafka.truststore.jks certificates to the $KAFKA_CONFDIR/certs directory."
         fi
     elif ! is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
         print_validation_error "The KAFKA_CFG_LISTENERS environment variable does not configure a secure listener. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
