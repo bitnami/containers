@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r444
+FROM bitnami/oraclelinux-extras-base:7-r445
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "tomcat" "9.0.26-0" --checksum fc880
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="9.0.26-ol-7-r16" \
+    BITNAMI_IMAGE_VERSION="9.0.26-ol-7-r17" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
 EXPOSE 8080
