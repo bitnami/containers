@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r444
+FROM bitnami/oraclelinux-extras-base:7-r445
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "minio-client" "2019.10.9-0" --check
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="minio-client" \
-    BITNAMI_IMAGE_VERSION="2019.10.9-ol-7-r2" \
+    BITNAMI_IMAGE_VERSION="2019.10.9-ol-7-r3" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/minio-client/bin:$PATH"
 
