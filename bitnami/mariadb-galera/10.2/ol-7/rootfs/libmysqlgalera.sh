@@ -538,11 +538,7 @@ mysql_execute() {
 
     local args=("--defaults-file=$DB_CONFDIR/my.cnf" "-N" "-u" "$user" "$db")
     [[ -n "$pass" ]] && args+=("-p$pass")
-    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-        "$DB_BINDIR/mysql" "${args[@]}"
-    else
-        "$DB_BINDIR/mysql" "${args[@]}" >/dev/null 2>&1
-    fi
+    debug_execute "$DB_BINDIR/mysql" "${args[@]}"
 }
 
 ########################
@@ -569,11 +565,7 @@ mysql_remote_execute() {
 
     local args=("-N" "-h" "$hostname" "-P" "$port" "-u" "$user" "--connect-timeout=5" "$db")
     [[ -n "$pass" ]] && args+=("-p$pass")
-    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-        "$DB_BINDIR/mysql" "${args[@]}"
-    else
-        "$DB_BINDIR/mysql" "${args[@]}" >/dev/null 2>&1
-    fi
+    debug_execute "$DB_BINDIR/mysql" "${args[@]}"
 }
 
 ########################
@@ -605,8 +597,42 @@ is_mysql_running() {
 # Returns:
 #   None
 #########################
+mysql_start_bg() {
+    local flags=("--defaults-file=${DB_BASEDIR}/conf/my.cnf" "--basedir=${DB_BASEDIR}" "--datadir=${DB_DATADIR}" "--socket=$DB_TMPDIR/mysql.sock" "--port=$DB_PORT_NUMBER")
+    [[ -z "${DB_EXTRA_FLAGS:-}" ]] || flags+=("${DB_EXTRA_FLAGS[@]}")
+    am_i_root && flags+=("--user=$DB_DAEMON_USER")
+    # the slave should only start in run.sh, elseways user credentials would be needed for any connection
+    flags+=("--skip-slave-start")
+    flags+=("$@")
+
+    is_mysql_running && return
+
+    info "Starting $DB_FLAVOR in background"
+    debug_execute "${DB_SBINDIR}/mysqld" "${flags[@]}" &
+
+    # we cannot use wait_for_mysql_access here as mysql_upgrade for MySQL >=8 depends on this command
+    # users are not configured on slave nodes during initialization due to --skip-slave-start
+    wait_for_mysql
+}
+
 ########################
-# Starts MySQL/MariaDB in the background and waits until it's ready
+# Wait for MySQL/MariaDB to be running
+# Globals:
+#   DB_TMPDIR
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+wait_for_mysql() {
+    local pid
+    while ! is_mysql_running; do
+        sleep 1
+    done
+}
+
+########################
+# Wait for MySQL/MariaDB to be ready for accepting connections
 # Globals:
 #   DB_*
 # Arguments:
@@ -614,22 +640,7 @@ is_mysql_running() {
 # Returns:
 #   None
 #########################
-mysql_start_bg() {
-    local flags=("--defaults-file=${DB_BASEDIR}/conf/my.cnf" "--basedir=${DB_BASEDIR}" "--datadir=${DB_DATADIR}" "--socket=$DB_TMPDIR/mysql.sock" "--port=$DB_PORT_NUMBER")
-    [[ -z "${DB_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${DB_EXTRA_FLAGS[@]}")
-    [[ -z "${DB_FORCE_UPGRADE:-}" ]] || flags=("${flags[@]}" "--upgrade=FORCE")
-    am_i_root && flags=("${flags[@]}" "--user=$DB_DAEMON_USER")
-
-    debug "Starting $DB_FLAVOR in background..."
-
-    is_mysql_running && return
-
-    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-        "${DB_SBINDIR}/mysqld" "${flags[@]}" &
-    else
-        "${DB_SBINDIR}/mysqld" "${flags[@]}" >/dev/null 2>&1 &
-    fi
-
+wait_for_mysql_access() {
     # wait until the server is up and answering queries.
     local args=("mysql" "root")
     is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("$(get_master_env_var_value ROOT_PASSWORD)")
@@ -648,7 +659,9 @@ mysql_start_bg() {
 #   None
 #########################
 mysql_stop() {
-    info "Stopping $DB_FLAVOR..."
+    ! is_mysql_running && return
+
+    info "Stopping $DB_FLAVOR"
     stop_service_using_pid "$DB_TMPDIR/mysqld.pid"
 }
 
@@ -666,16 +679,11 @@ mysql_install_db() {
     local command="${DB_BINDIR}/mysql_install_db"
     local args=("--defaults-file=${DB_CONFDIR}/my.cnf" "--basedir=${DB_BASEDIR}" "--datadir=${DB_DATADIR}")
     am_i_root && args=("${args[@]}" "--user=$DB_DAEMON_USER")
-    debug "Installing database..."
     if [[ "$DB_FLAVOR" = "mysql" ]]; then
         command="${DB_BINDIR}/mysqld"
         args+=("--initialize-insecure")
     fi
-    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-        $command "${args[@]}"
-    else
-        $command "${args[@]}" >/dev/null 2>&1
-    fi
+    debug_execute "$command" "${args[@]}"
 }
 
 ########################
@@ -689,30 +697,17 @@ mysql_install_db() {
 #   None
 #########################
 mysql_upgrade() {
-    local args=("--defaults-file=${DB_CONFDIR}/my.cnf" "-u" "$DB_ROOT_USER")
+    local args=("--defaults-file=${DB_CONFDIR}/my.cnf" "-u" "$DB_ROOT_USER" "--force")
     local major_version
-
-    major_version=$(get_sematic_version "$(mysql_get_version)" 1)
-
-    debug "Running mysql_upgrade..."
-
+    major_version="$(get_sematic_version "$(mysql_get_version)" 1)"
+    info "Running mysql_upgrade"
     if [[ "$DB_FLAVOR" = "mysql" ]] && [[ "$major_version" -ge "8" ]]; then
         mysql_stop
-        export DB_FORCE_UPGRADE=true
-        mysql_start_bg
-        unset DB_FORCE_UPGRADE
+        mysql_start_bg "--upgrade=FORCE"
     else
-        if [[ "$DB_FLAVOR" = "mysql" ]]; then
-            args+=("--force")
-        fi
-        if [[ -z "$DB_REPLICATION_MODE" ]] || [[ "$DB_REPLICATION_MODE" = "master" ]]; then
-            is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("-p$(get_master_env_var_value ROOT_PASSWORD)")
-        fi
-        if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-            "${DB_BINDIR}/mysql_upgrade" "${args[@]}"
-        else
-            "${DB_BINDIR}/mysql_upgrade" "${args[@]}" >/dev/null 2>&1
-        fi
+        mysql_start_bg
+        is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("-p$(get_master_env_var_value ROOT_PASSWORD)")
+        debug_execute "${DB_BINDIR}/mysql_upgrade" "${args[@]}"
     fi
 }
 
@@ -728,8 +723,8 @@ mysql_upgrade() {
 migrate_old_configuration() {
     local old_custom_conf_file="$DB_VOLUMEDIR/conf/my_custom.cnf"
     local custom_conf_file="$DB_CONFDIR/bitnami/my_custom.cnf"
-    debug "Persisted configuration detected. Migrating any existing 'my_custom.cnf' file to new location..."
-    warn "Custom configuration files won't be persisted any longer!"
+    debug "Persisted configuration detected. Migrating any existing 'my_custom.cnf' file to new location"
+    warn "Custom configuration files are not persisted any longer"
     if [[ -f "$old_custom_conf_file" ]]; then
         info "Adding old custom configuration to user configuration"
         echo "" >> "$custom_conf_file"
@@ -758,11 +753,11 @@ mysql_ensure_user_exists() {
     local password="${2:-}"
     local hosts
 
-    debug "creating db user \'$user\'..."
+    debug "creating database user \'$user\'"
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 create $([[ "$DB_FLAVOR" = "mariadb" ]] && echo "or replace") user '$user'@'%' $([[ "$password" != "" ]] && echo "identified by '$password'");
 EOF
-    debug "Removing all other hosts for the user..."
+    debug "Removing all other hosts for the user"
     hosts=$(mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 select Host from user where User='$user' and Host!='%';
 EOF
@@ -817,7 +812,7 @@ mysql_ensure_root_user_exists() {
     local user="${1:?user is required}"
     local password="${2:-}"
 
-    debug "Configuring root user credentials..."
+    debug "Configuring root user credentials"
     if [ "$DB_FLAVOR" == "mariadb" ]; then
         mysql_execute "mysql" "root" <<EOF
 -- create root@localhost user for local admin access
@@ -850,7 +845,7 @@ EOF
 mysql_ensure_database_exists() {
     local database="${1:?database is required}"
 
-    debug "Creating database $database..."
+    debug "Creating database $database"
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 create database if not exists \`$database\`;
 EOF
@@ -870,7 +865,7 @@ mysql_ensure_user_has_database_privileges() {
     local user="${1:?user is required}"
     local database="${2:?db is required}"
 
-    debug "Providing privileges to username $user on database $database..."
+    debug "Providing privileges to username $user on database $database"
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 grant all on \`$database\`.* to '$user'@'%';
 EOF
