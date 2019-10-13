@@ -12,7 +12,7 @@ RUN . ./libcomponent.sh && component_unpack "consul" "1.6.1-2" --checksum d57037
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.6.1-debian-9-r29" \
+    BITNAMI_IMAGE_VERSION="1.6.1-debian-9-r30" \
     PATH="/opt/bitnami/consul/bin:$PATH"
 
 EXPOSE 8300 8301 8500 8600
