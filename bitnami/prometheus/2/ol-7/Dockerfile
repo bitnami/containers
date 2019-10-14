@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r495
+FROM bitnami/oraclelinux-extras:7-r496
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN ln -sf /opt/bitnami/prometheus/data /prometheus
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.13.0-ol-7-r9" \
+    BITNAMI_IMAGE_VERSION="2.13.0-ol-7-r10" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
