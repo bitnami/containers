@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r446
+FROM bitnami/oraclelinux-extras-base:7-r447
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "kafka" "2.3.0-1" --checksum a1ed290
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.3.0-ol-7-r117" \
+    BITNAMI_IMAGE_VERSION="2.3.0-ol-7-r118" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/kafka/bin:$PATH"
 
