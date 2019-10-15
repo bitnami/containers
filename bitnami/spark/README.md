@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-9`, `2.4.4-debian-9-r33`, `2`, `2.4.4`, `2.4.4-r33`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/2.4.4-debian-9-r33/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.4.4-debian-9-r34`, `2`, `2.4.4`, `2.4.4-r34`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/2.4.4-debian-9-r34/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spark GitHub repo](https://github.com/bitnami/bitnami-docker-spark).
 
@@ -142,7 +142,7 @@ Additionally, SSL configuration can be easily activated following the next steps
 
 > Please note that `KEY_PASSWORD`, `KEYSTORE_PASSWORD`, and `TRUSTSTORE_PASSWORD` are placeholders that needs to be updated with a correct value.
 
-2. You need to mount your spark keystore and trustore files to `/opt/bitnami/spark/conf/certs`. Please note they should be called `spark-keystore.jks` and `spark-truststore.jks` and they should be in JKS format.
+2. You need to mount your spark keystore and truststore files to `/opt/bitnami/spark/conf/certs`. Please note they should be called `spark-keystore.jks` and `spark-truststore.jks` and they should be in JKS format.
 
 ## Setting up a Spark Cluster
 
