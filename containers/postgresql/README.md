@@ -44,6 +44,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`12-ol-7`, `12.0.0-ol-7-r0` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.0.0-ol-7-r0/12/ol-7/Dockerfile)
+* [`12-debian-9`, `12.0.0-debian-9-r0`, `12`, `12.0.0`, `12.0.0-r0` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.0.0-debian-9-r0/12/debian-9/Dockerfile)
 * [`11-ol-7`, `11.5.0-ol-7-r75` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.5.0-ol-7-r75/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.5.0-debian-9-r69`, `11`, `11.5.0`, `11.5.0-r69`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.5.0-debian-9-r69/11/debian-9/Dockerfile)
 * [`11-centos-7`, `11.5.0-centos-7-r70` (11/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.5.0-centos-7-r70/11/centos-7/Dockerfile)
@@ -53,6 +55,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`9.6-ol-7`, `9.6.15-ol-7-r75` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.15-ol-7-r75/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.15-debian-9-r70`, `9.6`, `9.6.15`, `9.6.15-r70` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.15-debian-9-r70/9.6/debian-9/Dockerfile)
 * [`9.6-centos-7`, `9.6.15-centos-7-r74` (9.6/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.15-centos-7-r74/9.6/centos-7/Dockerfile)
+* [`12-centos-7`, `0.0.0-centos-7-r0` (12/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/0.0.0-centos-7-r0/12/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
 
