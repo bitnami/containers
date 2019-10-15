@@ -10,13 +10,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages libc6 libssl1.1 libtinfo5 locales zlib1g
 RUN . ./libcomponent.sh && component_unpack "erlang" "22.1.0-1" --checksum decd14af45d2185862fb271330f92b593c574ec5c7129473fa1c8fc7d14589dc
-RUN . ./libcomponent.sh && component_unpack "rabbitmq" "3.8.0-0" --checksum 45b65ce3fbfc28cf95bf78c99601a9b5597060ad0d9a7803d872ddd9815062e9
+RUN . ./libcomponent.sh && component_unpack "rabbitmq" "3.8.0-1" --checksum 05bccdd0c4a7aa74c0e51089e01b4c17007e9af1d689e4bd515bb772167a9b44
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.8.0-debian-9-r4" \
+    BITNAMI_IMAGE_VERSION="3.8.0-debian-9-r5" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
