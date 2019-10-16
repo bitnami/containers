@@ -160,7 +160,7 @@ apache_initialize() {
     # Copy vhosts files
     if ! is_dir_empty "/vhosts"; then
         info "Found mounted virtual hosts in '/vhosts'. Copying them to '/opt/bitnami/apache/conf/vhosts'"
-        cp -r "/vhosts/." "${APACHE_VHOSTS_DIR}"
+        cp -Lr "/vhosts/." "${APACHE_VHOSTS_DIR}"
     fi
 
     # Mount certificate files
