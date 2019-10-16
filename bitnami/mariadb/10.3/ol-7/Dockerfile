@@ -9,13 +9,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages audit-libs glibc keyutils-libs krb5-libs libaio libcap-ng libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pam pcre zlib
-RUN . ./libcomponent.sh && component_unpack "mariadb" "10.3.18-3" --checksum 9f4d09dd5036a76810a7487c5ef0f27308c697c39029857753e89f11c37ba37b
+RUN . ./libcomponent.sh && component_unpack "mariadb" "10.3.18-4" --checksum a779f102c313991040eb2a99d4b3eebb3f467c3f61152afe30d4cf2a6a5bf69a
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.3.18-ol-7-r40" \
+    BITNAMI_IMAGE_VERSION="10.3.18-ol-7-r41" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
