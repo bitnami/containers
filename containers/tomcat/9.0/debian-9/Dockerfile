@@ -9,12 +9,12 @@ ENV HOME="/" \
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 zlib1g
 RUN . ./libcomponent.sh && component_unpack "java" "1.8.222-1" --checksum 373c9f3d2943b9ff653fc0e7c69b1d54a75807726691a09190648808500b8253
-RUN . ./libcomponent.sh && component_unpack "tomcat" "9.0.26-0" --checksum 30425af60c0895882dacdf0aa1bc5b0a42a3a50f87f65a5cf0d514c6bbbca697
+RUN . ./libcomponent.sh && component_unpack "tomcat" "9.0.27-0" --checksum b738c621845bcce5572270b1b1a562b126bf16ee2cea8c2b98661eb3fe4db805
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="9.0.26-debian-9-r14" \
+    BITNAMI_IMAGE_VERSION="9.0.27-debian-9-r0" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
 EXPOSE 8080
