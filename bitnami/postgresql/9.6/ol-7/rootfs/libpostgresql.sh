@@ -138,6 +138,11 @@ export POSTGRESQL_REPLICATION_USER="${POSTGRESQL_REPLICATION_USER:-}"
 export POSTGRESQL_SYNCHRONOUS_COMMIT_MODE="${POSTGRESQL_SYNCHRONOUS_COMMIT_MODE:-on}"
 export POSTGRESQL_FSYNC="${POSTGRESQL_FSYNC:-on}"
 export POSTGRESQL_USERNAME="${POSTGRESQL_USERNAME:-postgres}"
+
+# Version
+export POSTGRESQL_VERSION="$(echo "$BITNAMI_IMAGE_VERSION" | grep -oP "^\d+\.\d+\.\d+")"
+export POSTGRESQL_MAJOR_VERSION="$(echo "$BITNAMI_IMAGE_VERSION" | grep -oP "^\d+")"
+
 EOF
     if [[ -f "${POSTGRESQL_PASSWORD_FILE:-}" ]]; then
         cat <<"EOF"
@@ -475,6 +480,30 @@ postgresql_is_file_external() {
 }
 
 ########################
+# Remove flags and postmaster files from a previous run (case of container restart)
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+postgresql_clean_from_restart() {
+    local -r -a files=(
+        "$POSTGRESQL_DATA_DIR"/postmaster.pid
+        "$POSTGRESQL_DATA_DIR"/standby.signal
+        "$POSTGRESQL_DATA_DIR"/recovery.signal
+    )
+
+    for file in "${files[@]}"; do
+        if [[ -f "$file" ]]; then
+            postgresql_info "Cleaning stale $file file"
+            rm "$file"
+        fi
+    done
+}
+
+########################
 # Ensure PostgreSQL is initialized
 # Globals:
 #   POSTGRESQL_*
@@ -485,7 +514,7 @@ postgresql_is_file_external() {
 #########################
 postgresql_initialize() {
     postgresql_info "Initializing PostgreSQL database..."
-
+    postgresql_clean_from_restart
     # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
     # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
     rm -f "$POSTGRESQL_PID_FILE"
@@ -518,11 +547,6 @@ postgresql_initialize() {
 
     if ! is_dir_empty "$POSTGRESQL_DATA_DIR"; then
         postgresql_info "Deploying PostgreSQL with persisted data..."
-        local -r postmaster_path="$POSTGRESQL_DATA_DIR"/postmaster.pid
-        if [[ -f "$postmaster_path" ]]; then
-            postgresql_info "Cleaning stale postmaster.pid file"
-            rm "$postmaster_path"
-        fi
         is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
         is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
         is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
@@ -800,9 +824,15 @@ postgresql_slave_init_db() {
 #########################
 postgresql_configure_recovery() {
     postgresql_info "Setting up streaming replication slave..."
-    cp -f "$POSTGRESQL_BASE_DIR/share/recovery.conf.sample" "$POSTGRESQL_RECOVERY_FILE"
-    chmod 600 "$POSTGRESQL_RECOVERY_FILE"
-    postgresql_set_property "standby_mode" "on" "$POSTGRESQL_RECOVERY_FILE"
-    postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD} application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_RECOVERY_FILE"
-    postgresql_set_property "trigger_file" "/tmp/postgresql.trigger.${POSTGRESQL_MASTER_PORT_NUMBER}" "$POSTGRESQL_RECOVERY_FILE"
+    if (( POSTGRESQL_MAJOR_VERSION >= 12 )); then
+        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD} application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_CONF_FILE"
+        postgresql_set_property "promote_trigger_file" "/tmp/postgresql.trigger.${POSTGRESQL_MASTER_PORT_NUMBER}" "$POSTGRESQL_CONF_FILE"
+        touch "$POSTGRESQL_DATA_DIR"/standby.signal
+    else
+        cp -f "$POSTGRESQL_BASE_DIR/share/recovery.conf.sample" "$POSTGRESQL_RECOVERY_FILE"
+        chmod 600 "$POSTGRESQL_RECOVERY_FILE"
+        postgresql_set_property "standby_mode" "on" "$POSTGRESQL_RECOVERY_FILE"
+        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD} application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_RECOVERY_FILE"
+        postgresql_set_property "trigger_file" "/tmp/postgresql.trigger.${POSTGRESQL_MASTER_PORT_NUMBER}" "$POSTGRESQL_RECOVERY_FILE"
+    fi
 }
