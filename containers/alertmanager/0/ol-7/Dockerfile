@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r497
+FROM bitnami/oraclelinux-extras:7-r498
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN ln -sf /opt/bitnami/alertmanager/data /alertmanager
 
 RUN mkdir -p /opt/bitnami/alertmanager/data/ && chmod g+rwX /opt/bitnami/alertmanager/data/
 ENV BITNAMI_APP_NAME="alertmanager" \
-    BITNAMI_IMAGE_VERSION="0.19.0-ol-7-r47" \
+    BITNAMI_IMAGE_VERSION="0.19.0-ol-7-r48" \
     PATH="/opt/bitnami/alertmanager/bin:$PATH"
 
 EXPOSE 9093
