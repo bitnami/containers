@@ -112,7 +112,7 @@ logstash_validate() {
 logstash_copy_mounted_config() {
     if ! is_dir_empty "$LOGSTASH_MOUNTED_CONF_DIR"; then
         info "Mounted config directory detected"
-        cp -r "$LOGSTASH_MOUNTED_CONF_DIR"/* "$LOGSTASH_CONF_DIR"
+        cp -Lr "$LOGSTASH_MOUNTED_CONF_DIR"/* "$LOGSTASH_CONF_DIR"
     fi
 }
 
