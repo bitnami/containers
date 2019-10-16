@@ -246,6 +246,8 @@ KafkaServer {
    password="{{KAFKA_INTER_BROKER_PASSWORD}}"
    user_{{KAFKA_INTER_BROKER_USER}}="{{KAFKA_INTER_BROKER_PASSWORD}}"
    user_{{KAFKA_BROKER_USER}}="{{KAFKA_BROKER_PASSWORD}}";
+
+   org.apache.kafka.common.security.scram.ScramLoginModule required;
 };
 EOF
     if [[ -n "$KAFKA_ZOOKEEPER_USER" ]] && [[ -n "$KAFKA_ZOOKEEPER_PASSWORD" ]]; then
@@ -282,7 +284,7 @@ kafka_configure_sasl_ssl_listener() {
     kafka_server_conf_set ssl.truststore.location "$KAFKA_CONFDIR"/certs/kafka.truststore.jks
     kafka_server_conf_set ssl.truststore.password "$KAFKA_CERTIFICATE_PASSWORD"
     kafka_server_conf_set sasl.mechanism.inter.broker.protocol PLAIN
-    kafka_server_conf_set sasl.enabled.mechanisms PLAIN
+    kafka_server_conf_set sasl.enabled.mechanisms PLAIN,SCRAM-SHA-256,SCRAM-SHA-512
     kafka_server_conf_set security.inter.broker.protocol SASL_SSL
     kafka_server_conf_set ssl.client.auth required
     # Set producer/consumer configuration
@@ -309,7 +311,7 @@ kafka_configure_sasl_plaintext_listener() {
     kafka_generate_jaas_authentication_file
     # Set Kafka configuration
     kafka_server_conf_set sasl.mechanism.inter.broker.protocol PLAIN
-    kafka_server_conf_set sasl.enabled.mechanisms PLAIN
+    kafka_server_conf_set sasl.enabled.mechanisms PLAIN,SCRAM-SHA-256,SCRAM-SHA-512
     kafka_server_conf_set security.inter.broker.protocol SASL_PLAINTEXT
     # Set producer/consumer configuration
     kafka_producer_consumer_conf_set security.protocol SASL_SSL
