@@ -1,0 +1,48 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be used in production.
+##
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: test-logstash-exporter
+    app.kubernetes.io/component: logstash-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: test-logstash-exporter
+      app.kubernetes.io/component: logstash-exporter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: test-logstash-exporter
+        app.kubernetes.io/component: logstash-exporter
+    spec:
+      containers:
+      - image: bitnami/logstash-exporter
+        name: logstash-exporter
+        #env:
+        #- name: BITNAMI_DEBUG
+        #- value: 0
+        ports:
+        - name: logstash-exporter-port-9198
+          containerPort: 9198
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-logstash-exporter
+  labels:
+    app.kubernetes.io/name: test-logstash-exporter
+    app.kubernetes.io/component: logstash-exporter
+spec:
+  type: ClusterIP
+  ports:
+  - port: 9198
+    protocol: TCP
+    targetPort: logstash-exporter-port-9198
+  selector:
+    app.kubernetes.io/name: test-logstash-exporter
+    app.kubernetes.io/component: logstash-exporter
