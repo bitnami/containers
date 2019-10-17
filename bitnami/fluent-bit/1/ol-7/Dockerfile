@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r498
+FROM bitnami/oraclelinux-extras:7-r499
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/fluent-bit-1.3.2-0-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="fluent-bit" \
-    BITNAMI_IMAGE_VERSION="1.3.2-ol-7-r5" \
+    BITNAMI_IMAGE_VERSION="1.3.2-ol-7-r6" \
     PATH="/opt/bitnami/fluent-bit/bin:$PATH"
 
 EXPOSE 2020
