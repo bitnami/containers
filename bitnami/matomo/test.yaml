@@ -52,9 +52,9 @@ spec:
           value: test-mariadb
         - name: MARIADB_PORT_NUMBER
           value: "3306"
-        - name: WORDPRESS_DATABASE_USER
+        - name: MATOMO_DATABASE_USER
           value: bn_matomo
-        - name: WORDPRESS_DATABASE_NAME
+        - name: MATOMO_DATABASE_NAME
           value: bitnami_matomo
         - name: ALLOW_EMPTY_PASSWORD
           value: "yes"
