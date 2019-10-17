@@ -334,8 +334,8 @@ migrate_old_configuration() {
     debug "Persisted configuration detected. Migrating any existing configuration files..."
     warn "Configuration files won't be persisted anymore!"
 
-    cp -r "${RABBITMQ_VOLUME_DIR}/conf/." "$RABBITMQ_CONF_DIR"
-    cp -r "${RABBITMQ_VOLUME_DIR}/var/lib/rabbitmq/mnesia" "$RABBITMQ_VOLUME_DIR"
+    cp -Lr "${RABBITMQ_VOLUME_DIR}/conf/." "$RABBITMQ_CONF_DIR"
+    cp -Lr "${RABBITMQ_VOLUME_DIR}/var/lib/rabbitmq/mnesia" "$RABBITMQ_VOLUME_DIR"
 
     if am_i_root; then
         [[ -e "${RABBITMQ_VOLUME_DIR}/.initialized" ]] && rm "${RABBITMQ_VOLUME_DIR}/.initialized"
@@ -434,4 +434,3 @@ rabbitmq_initialize() {
         rabbitmq_enable_plugin "rabbitmq_management_agent"
     fi
 }
-
