@@ -1,0 +1,6 @@
+version: '2'
+services:
+  prometheus-operator:
+    image: bitnami/prometheus-operator:0
+    ports:
+      - 8080:8080
