@@ -84,6 +84,7 @@ export PGCONNECT_TIMEOUT="${PGCONNECT_TIMEOUT:-10}"
 # Credentials
 export REPMGR_USERNAME="${REPMGR_USERNAME:-repmgr}"
 export REPMGR_DATABASE="${REPMGR_DATABASE:-repmgr}"
+export REPMGR_PGHBA_TRUST_ALL="${REPMGR_PGHBA_TRUST_ALL:-no}"
 EOF
 if [[ -f "${REPMGR_PASSWORD_FILE:-}" ]]; then
     cat <<"EOF"
@@ -157,6 +158,10 @@ repmgr_validate() {
     # Credentials validations
     if [[ -z "$REPMGR_USERNAME" ]] || [[ -z "$REPMGR_PASSWORD" ]]; then
         print_validation_error "The repmgr credentials are mandatory. Set the environment variables REPMGR_USERNAME and REPMGR_PASSWORD with the repmgr credentials."
+    fi
+
+    if ! is_yes_no_value "$REPMGR_PGHBA_TRUST_ALL"; then
+        print_validation_error "The allowed values for REPMGR_PGHBA_TRUST_ALL are: yes or no."
     fi
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
@@ -372,6 +377,7 @@ repmgr_inject_postgresql_configuration() {
 #########################
 repmgr_inject_pghba_configuration() {
     repmgr_debug "Injecting a new pg_hba.conf file..."
+
     cat > "${POSTGRESQL_MOUNTED_CONF_DIR}/pg_hba.conf" << EOF
 host     all            $REPMGR_USERNAME    0.0.0.0/0    trust
 host     $REPMGR_DATABASE         $REPMGR_USERNAME    0.0.0.0/0    trust
@@ -596,7 +602,7 @@ repmgr_initialize() {
     postgresql_enable_remote_connections
     # Configure port and restrict access to PostgreSQL (MD5)
     postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
-    postgresql_restrict_pghba
+    is_boolean_yes "$REPMGR_PGHBA_TRUST_ALL" || postgresql_restrict_pghba
     if [[ "$REPMGR_ROLE" = "primary" ]]; then
         repmgr_create_repmgr_user
         repmgr_create_repmgr_db
