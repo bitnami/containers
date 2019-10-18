@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`11-debian-9`, `11.5.0-debian-9-r7`, `11`, `11.5.0`, `11.5.0-r7`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.5.0-debian-9-r7/11/debian-9/Dockerfile)
 * [`11-centos-7`, `11.5.0-centos-7-r10` (11/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.5.0-centos-7-r10/11/centos-7/Dockerfile)
 * [`10-ol-7`, `10.10.0-ol-7-r10` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.10.0-ol-7-r10/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.10.0-debian-9-r7`, `10`, `10.10.0`, `10.10.0-r7` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.10.0-debian-9-r7/10/debian-9/Dockerfile)
+* [`10-debian-9`, `10.10.0-debian-9-r8`, `10`, `10.10.0`, `10.10.0-r8` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.10.0-debian-9-r8/10/debian-9/Dockerfile)
 * [`10-centos-7`, `10.10.0-centos-7-r10` (10/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.10.0-centos-7-r10/10/centos-7/Dockerfile)
 * [`9.6-ol-7`, `9.6.15-ol-7-r10` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.15-ol-7-r10/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.15-debian-9-r7`, `9.6`, `9.6.15`, `9.6.15-r7` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.15-debian-9-r7/9.6/debian-9/Dockerfile)
@@ -250,6 +250,7 @@ A HA PostgreSQL cluster with [Streaming replication](https://www.postgresql.org/
 - `REPMGR_PARTNER_NODES`: Comma separated list of partner nodes in the cluster.  No defaults.
 - `REPMGR_NODE_NAME`: Node name. No defaults.
 - `REPMGR_NODE_NETWORK_NAME`: Node hostname. No defaults.
+- `REPMGR_PGHBA_TRUST_ALL`: This will set the auth-method in the generated pg_hba.conf. Set it to `yes` only if you are using pgpool with LDAP authentication. Default to `no`.
 
 In a HA PostgreSQL cluster you can have one primary and zero or more standby nodes. The primary node is in read-write mode, while the standby nodes are in read-only mode. For best performance its advisable to limit the reads to the standby nodes.
 
