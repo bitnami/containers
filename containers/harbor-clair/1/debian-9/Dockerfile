@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "harbor-clair" "1.9.1-0" --checksum 
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="harbor-clair" \
-    BITNAMI_IMAGE_VERSION="1.9.1-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="1.9.1-debian-9-r3" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/git/bin:/opt/bitnami/harbor-clair/bin:$PATH"
 
