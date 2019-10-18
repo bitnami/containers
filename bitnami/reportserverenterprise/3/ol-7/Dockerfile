@@ -6,12 +6,12 @@ RUN install_packages fontconfig glibc keyutils-libs krb5-libs libcom_err libgcc 
 RUN bitnami-pkg install java-1.8.222-1 --checksum 664cacaa11342e877410b197d21343543c2987cd66f15d2adc32cc61eee48eaa
 RUN bitnami-pkg unpack tomcat-9.0.27-0 --checksum 488a8fcddcd600ae8c9f32bb55ed4cf6f25d35d1e960b1aecc2b6391b6a30319
 RUN bitnami-pkg unpack mysql-client-10.3.18-2 --checksum c9d987cf8f6f6831d04920d64598d0c77cf994235753cf4d5d18ac787c12918e
-RUN bitnami-pkg unpack reportserverenterprise-3.1.0-6010-0 --checksum 6e97a0ad4083395c577fce8e70aa0fdb90f14fd91e12bf4f6ef36a2e8591bbed
+RUN bitnami-pkg unpack reportserverenterprise-3.1.0-6011-0 --checksum 94876b20583b887937966c9ad4208642542f52158686a2688daf006e1bc03202
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserverenterprise" \
-    BITNAMI_IMAGE_VERSION="3.1.0-6010-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="3.1.0-6011-ol-7-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
