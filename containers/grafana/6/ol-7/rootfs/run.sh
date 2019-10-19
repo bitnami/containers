@@ -4,7 +4,16 @@
 : "${GF_PATHS_DATA:=/opt/bitnami/grafana/data}"
 : "${GF_PATHS_LOGS:=/opt/bitnami/grafana/logs}"
 : "${GF_PATHS_PLUGINS:=/opt/bitnami/grafana/data/plugins}"
+: "${GF_PATHS_DEFAULT_PLUGINS:=/opt/bitnami/grafana/default-plugins}"
 : "${GF_PATHS_PROVISIONING:=/opt/bitnami/grafana/conf/provisioning}"
+
+# Recover plugins installed when building the image
+if [[ ! -e "$GF_PATHS_PLUGINS" ]] || [[ -z "$(ls -A "$GF_PATHS_PLUGINS")" ]]; then
+    mkdir -p "$GF_PATHS_PLUGINS"
+    if [[ -e "$GF_PATHS_DEFAULT_PLUGINS" ]] && [[ -n "$(ls -A "$GF_PATHS_DEFAULT_PLUGINS")" ]]; then
+        cp -r "$GF_PATHS_DEFAULT_PLUGINS"/* "$GF_PATHS_PLUGINS"
+    fi
+fi
 
 if [[ -n "$GF_INSTALL_PLUGINS" ]]; then
     splitted_plugin_list=$(tr ',;' ' ' <<< "${GF_INSTALL_PLUGINS}")
