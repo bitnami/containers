@@ -208,7 +208,6 @@ pgpool_set_property() {
 #   None
 #########################
 pgpool_create_backend_config() {
-    local return_value=1
     local -r node=${1:?node is missing}
 
     # default values
@@ -231,11 +230,10 @@ backend_weight$num = $weight
 backend_data_directory$num = '$dir'
 backend_flag$num = '$flag'
 EOF
-        return_value=0
     else
-        warn "Backend $host did not respond after $PGPOOL_TIMEOUT seconds!"
+        error "Backend $host did not respond after $PGPOOL_TIMEOUT seconds!"
+        exit 1
     fi
-    return $return_value
 }
 
 ########################
@@ -296,14 +294,8 @@ pgpool_create_config() {
     # Backend settings
     read -r -a nodes <<< "$(tr ',;' ' ' <<< "${PGPOOL_BACKEND_NODES}")"
     for node in "${nodes[@]}"; do
-        pgpool_create_backend_config "$node" && node_counter+=1
+        pgpool_create_backend_config "$node"
     done
-
-    if [[ $node_counter -ne ${#nodes[@]} ]]; then
-        error "Not enough active nodes. $node_counter node(s) found, ${#nodes[@]} needed"
-    else
-        info "$node_counter node(s) were found, ${#nodes[@]} needed"
-    fi
 }
 
 ########################
