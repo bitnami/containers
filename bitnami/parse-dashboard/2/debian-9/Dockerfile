@@ -6,12 +6,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo5 zlib1g
-RUN bitnami-pkg install node-8.16.2-0 --checksum c7da50178b78b154a323574abec57799aef9d6f8264ddb145d3732a17fd6c4ad
+RUN bitnami-pkg install node-8.16.2-1 --checksum d2da906c3cd700a73750e9090720ffd2f7cc64deae0f191abf62d1fe989b8e61
 RUN bitnami-pkg unpack parse-dashboard-2.0.3-1 --checksum a94df2c159b3d0444af9147fd64da70f0eff812dc72bac458b08b56e09f2e214
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="2.0.3-debian-9-r29" \
+    BITNAMI_IMAGE_VERSION="2.0.3-debian-9-r30" \
     NAMI_PREFIX="/.nami" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
