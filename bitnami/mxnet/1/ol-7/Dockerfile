@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r452
+FROM bitnami/oraclelinux-extras-base:7-r453
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "mxnet" "1.5.1-0" --checksum b0ea341
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="mxnet" \
-    BITNAMI_IMAGE_VERSION="1.5.1-ol-7-r8" \
+    BITNAMI_IMAGE_VERSION="1.5.1-ol-7-r9" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:$PATH"
