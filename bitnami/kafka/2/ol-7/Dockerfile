@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "kafka" "2.3.0-1" --checksum a1ed290
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.3.0-ol-7-r125" \
+    BITNAMI_IMAGE_VERSION="2.3.0-ol-7-r126" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/kafka/bin:$PATH"
 
