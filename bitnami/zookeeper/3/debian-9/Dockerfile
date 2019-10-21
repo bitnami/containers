@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r376
+FROM bitnami/minideb-extras-base:stretch-r377
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "zookeeper" "3.5.6-0" --checksum 6f6
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.5.6-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="3.5.6-debian-9-r2" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH"
 
