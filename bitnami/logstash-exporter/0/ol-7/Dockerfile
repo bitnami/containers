@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r502
+FROM bitnami/oraclelinux-extras:7-r503
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/logstash-exporter-0.1.2-0-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="logstash-exporter" \
-    BITNAMI_IMAGE_VERSION="0.1.2-ol-7-r3" \
+    BITNAMI_IMAGE_VERSION="0.1.2-ol-7-r4" \
     PATH="/opt/bitnami/logstash-exporter/bin:$PATH"
 
 EXPOSE 9198
