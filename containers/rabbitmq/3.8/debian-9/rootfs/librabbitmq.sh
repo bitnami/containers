@@ -35,6 +35,7 @@ export RABBITMQ_DATA_DIR="${RABBITMQ_VOLUME_DIR}/mnesia"
 export RABBITMQ_HOME_DIR="${RABBITMQ_BASE_DIR}/.rabbitmq"
 export RABBITMQ_LIB_DIR="${RABBITMQ_BASE_DIR}/var/lib/rabbitmq"
 export RABBITMQ_LOG_DIR="${RABBITMQ_BASE_DIR}/var/log/rabbitmq"
+export RABBITMQ_PLUGINS_DIR="${RABBITMQ_BASE_DIR}/plugins"
 export PATH="${RABBITMQ_BIN_DIR}:${PATH}"
 
 # OS
