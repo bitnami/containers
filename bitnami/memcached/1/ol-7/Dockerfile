@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r455
+FROM bitnami/oraclelinux-extras-base:7-r456
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "memcached" "1.5.19-2" --checksum 21
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.19-ol-7-r24" \
+    BITNAMI_IMAGE_VERSION="1.5.19-ol-7-r25" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
 
 EXPOSE 11211
