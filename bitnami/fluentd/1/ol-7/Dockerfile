@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r454
+FROM bitnami/oraclelinux-extras-base:7-r455
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "fluentd" "1.7.3-0" --checksum 3b0e6
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.7.3-ol-7-r22" \
+    BITNAMI_IMAGE_VERSION="1.7.3-ol-7-r23" \
     GEM_HOME="/opt/bitnami/fluentd" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/fluentd/bin:$PATH"
 
