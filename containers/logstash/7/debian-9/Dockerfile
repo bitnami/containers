@@ -8,13 +8,13 @@ ENV HOME="/" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 zlib1g
-RUN . ./libcomponent.sh && component_unpack "logstash" "7.4.0-0" --checksum 832ad4a041ba2c0c20a42f91349801b315b97943a4e5288c1aa55f20d23f1599
-RUN . ./libcomponent.sh && component_unpack "java" "1.8.222-1" --checksum 373c9f3d2943b9ff653fc0e7c69b1d54a75807726691a09190648808500b8253
+RUN . ./libcomponent.sh && component_unpack "logstash" "7.4.1-0" --checksum 4f54b999468d31dffadf56be6a9195a5c86dc38e446dd42a2425215896e63aba
+RUN . ./libcomponent.sh && component_unpack "java" "1.8.232-0" --checksum f4e5ff1d4fb13baf9bb2a4f2e5ffb328cf9eeb26d0b91214196e4473c2874adc
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="logstash" \
-    BITNAMI_IMAGE_VERSION="7.4.0-debian-9-r9" \
+    BITNAMI_IMAGE_VERSION="7.4.1-debian-9-r0" \
     PATH="/opt/bitnami/logstash/bin:/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 8080
