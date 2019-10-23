@@ -3,15 +3,15 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/etcd-3.4.2-0-linux-x86_64-ol-7.tar.gz && \
-    echo "e0818ecb99a01ebee97128232487cac8ac4ea36f2ef3bb3a9d843411063cb48a  /tmp/bitnami/pkg/cache/etcd-3.4.2-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/etcd-3.4.2-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/etcd-3.4.2-0-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/etcd-3.4.3-0-linux-x86_64-ol-7.tar.gz && \
+    echo "2c7dd3063e81a71b5ddfcc8f3b1c6fb7f42cf61b7dda552ae8d13c8da075c73c  /tmp/bitnami/pkg/cache/etcd-3.4.3-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/etcd-3.4.3-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/etcd-3.4.3-0-linux-x86_64-ol-7.tar.gz
 
 COPY rootfs /
 RUN chmod g+rwX /opt/bitnami/etcd
 ENV BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.4.2-ol-7-r13" \
+    BITNAMI_IMAGE_VERSION="3.4.3-ol-7-r0" \
     ETCDCTL_API="3" \
     ETCD_ADVERTISE_CLIENT_URLS="http://127.0.0.1:2379" \
     ETCD_DATA_DIR="/opt/bitnami/etcd/data/" \
