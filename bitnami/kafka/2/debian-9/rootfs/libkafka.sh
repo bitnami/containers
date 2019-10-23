@@ -332,7 +332,9 @@ kafka_configure_from_environment_variables() {
     for var in "${!KAFKA_CFG_@}"; do
         key="$(echo "$var" | sed -e 's/^KAFKA_CFG_//g' -e 's/_/\./g' | tr '[:upper:]' '[:lower:]')"
         value="${!var}"
-        kafka_server_conf_set "$key" "$value"
+        if [[ -n "$value" ]]; then
+            kafka_server_conf_set "$key" "$value"
+        fi
     done
 }
 
