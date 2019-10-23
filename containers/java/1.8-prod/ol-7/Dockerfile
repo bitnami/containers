@@ -1,4 +1,4 @@
-FROM bitnami/java:1.8.222-ol-7-r99 as development
+FROM bitnami/java:1.8.232-ol-7-r0 as development
 
 ######
 
@@ -11,7 +11,7 @@ RUN install_packages ca-certificates glibc libgcc wget zlib
 COPY --from=development /opt/bitnami/java /opt/bitnami/java
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="1.8.222-ol-7-r98-prod" \
+    BITNAMI_IMAGE_VERSION="1.8.232-ol-7-r0-prod" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
