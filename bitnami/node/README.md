@@ -42,6 +42,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`13-debian-9-prod`, `13.0.1-debian-9-r0-prod`, `13-prod`, `13.0.1-prod`, `13.0.1-r0-prod` (13-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.0.1-debian-9-r0-prod/13-prod/debian-9/Dockerfile)
+* [`13-debian-9`, `13.0.1-debian-9-r0`, `13`, `13.0.1`, `13.0.1-r0` (13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.0.1-debian-9-r0/13/debian-9/Dockerfile)
 * [`12-ol-7-prod`, `12.13.0-ol-7-r4-prod` (12-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.13.0-ol-7-r4-prod/12-prod/ol-7/Dockerfile)
 * [`12-ol-7`, `12.13.0-ol-7-r4` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.13.0-ol-7-r4/12/ol-7/Dockerfile)
 * [`12-debian-9`, `12.13.0-debian-9-r3`, `12`, `12.13.0`, `12.13.0-r3` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.13.0-debian-9-r3/12/debian-9/Dockerfile)
@@ -63,6 +65,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`6-ol-7`, `6.17.1-ol-7-r202` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-ol-7-r202/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.17.1-debian-9-r184`, `6`, `6.17.1`, `6.17.1-r184` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-debian-9-r184/6/debian-9/Dockerfile)
 * [`6-debian-9-prod`, `6.17.1-debian-9-r183-prod`, `6-prod`, `6.17.1-prod`, `6.17.1-r183-prod` (6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-debian-9-r183-prod/6-prod/debian-9/Dockerfile)
+* [`13-ol-7-prod`, `0.0.0-ol-7-r0-prod` (13-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/0.0.0-ol-7-r0-prod/13-prod/ol-7/Dockerfile)
+* [`13-ol-7`, `0.0.0-ol-7-r0` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/0.0.0-ol-7-r0/13/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
