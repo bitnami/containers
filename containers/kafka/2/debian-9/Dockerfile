@@ -9,13 +9,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 zlib1g
-RUN . ./libcomponent.sh && component_unpack "java" "1.8.222-1" --checksum 373c9f3d2943b9ff653fc0e7c69b1d54a75807726691a09190648808500b8253
+RUN . ./libcomponent.sh && component_unpack "java" "1.8.232-0" --checksum f4e5ff1d4fb13baf9bb2a4f2e5ffb328cf9eeb26d0b91214196e4473c2874adc
 RUN . ./libcomponent.sh && component_unpack "kafka" "2.3.0-1" --checksum 4a125a6a78a7dd68e47bff901135943174cf322d6c5cbfdd6be63441dfac3935
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.3.0-debian-9-r113" \
+    BITNAMI_IMAGE_VERSION="2.3.0-debian-9-r114" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/kafka/bin:$PATH"
 
