@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r506
+FROM bitnami/oraclelinux-extras:7-r507
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN ln -sf /opt/bitnami/prometheus-operator/bin/operator /bin/operator
 RUN ln -sf /opt/bitnami/prometheus-operator/bin/prometheus-config-reloader /bin/prometheus-config-reloader
 
 ENV BITNAMI_APP_NAME="prometheus-operator" \
-    BITNAMI_IMAGE_VERSION="0.33.0-ol-7-r6" \
+    BITNAMI_IMAGE_VERSION="0.33.0-ol-7-r7" \
     PATH="/opt/bitnami/prometheus-operator/bin:$PATH"
 
 EXPOSE 8080
