@@ -15,6 +15,27 @@
 # Functions
 
 ########################
+# Write a configuration setting value
+# Globals:
+#   ELASTICSEARCH_CONF_FILE
+# Arguments:
+#   $1 - key
+#   $2 - value
+# Returns:
+#   None
+#########################
+elasticsearch_conf_write() {
+    local key="${1:?missing key}"
+    local value="${2:?missing value}"
+
+    if [[ -s "$ELASTICSEARCH_CONF_FILE" ]]; then
+        yq w -i "$ELASTICSEARCH_CONF_FILE" "$key" "$value"
+    else
+        yq n "$key" "$value" > "$ELASTICSEARCH_CONF_FILE"
+    fi
+}
+
+########################
 # Set a configuration setting value
 # Globals:
 #   ELASTICSEARCH_CONF_FILE
@@ -25,18 +46,20 @@
 #   None
 #########################
 elasticsearch_conf_set() {
-    local name="${1:?missing key}"
+    local key="${1:?missing key}"
     shift
     local values=("${@}")
 
     if [[ "${#values[@]}" -eq 0 ]]; then
-        stderr_print "missing value"
+        stderr_print "missing values"
         return 1
-    elif [[ "${#values[@]}" -eq 1 ]]; then
-        yq w -i "$ELASTICSEARCH_CONF_FILE" "$name" "${values[0]}"
+    elif [[ "${#values[@]}" -eq 1 ]] && [[ -n "${values[0]}" ]]; then
+        elasticsearch_conf_write "$key" "${values[0]}"
     else
         for i in "${!values[@]}"; do
-            yq w -i "$ELASTICSEARCH_CONF_FILE" "${name}[${i}]" "${values[$i]}"
+            if [[ -n "${values[$i]}" ]]; then
+                elasticsearch_conf_write "$key" "${values[$i]}"
+            fi
         done
     fi
 }
@@ -244,7 +267,7 @@ elasticsearch_cluster_configuration() {
         fi
     }
 
-    info "Configuration Elasticsearch cluster settings..."
+    info "Configuring Elasticsearch cluster settings..."
     elasticsearch_conf_set network.host "$(get_machine_ip)"
     elasticsearch_conf_set network.publish_host "$(get_machine_ip)"
     elasticsearch_conf_set network.bind_host "$(bind_address)"
@@ -412,10 +435,9 @@ elasticsearch_initialize() {
 
     if [[ -f "$ELASTICSEARCH_CONF_FILE" ]]; then
         info "Custom configuration file detected, using it..."
-        rm -rf "$ELASTICSEARCH_CONFDIR/es_config.sample"
     else
         info "Setting default configuration"
-        mv "$ELASTICSEARCH_CONFDIR/es_config.sample" "$ELASTICSEARCH_CONF_FILE"
+        touch "$ELASTICSEARCH_CONF_FILE"
         elasticsearch_conf_set http.port "$ELASTICSEARCH_PORT_NUMBER"
         elasticsearch_conf_set path.data "$ELASTICSEARCH_DATADIR"
         elasticsearch_conf_set transport.tcp.port "$ELASTICSEARCH_NODE_PORT_NUMBER"
