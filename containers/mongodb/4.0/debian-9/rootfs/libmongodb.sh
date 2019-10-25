@@ -126,10 +126,6 @@ you need to provide the MONGODB_PRIMARY_HOST env var"
                 error_message="MONGODB_PRIMARY_ROOT_PASSWORD shouldn't be set on a 'primary' node!"
                 print_validation_error "$error_message"
             fi
-            if [[ -z "$MONGODB_ROOT_PASSWORD" ]]; then
-                error_message="MONGODB_ROOT_PASSWORD have to be set on a 'primary' node!"
-                print_validation_error "$error_message"
-            fi
         else
             error_message="You set the environment variable MONGODB_REPLICA_SET_MODE with an invalid value. \
 Available options are 'primary/secondary/arbiter'"
