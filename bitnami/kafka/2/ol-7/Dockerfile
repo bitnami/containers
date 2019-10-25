@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r458
+FROM bitnami/oraclelinux-extras-base:7-r459
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,12 +10,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages glibc libgcc zlib
 RUN . ./libcomponent.sh && component_unpack "java" "1.8.232-0" --checksum fbac74363c807fce14538c5f9a9232602adc7883c1c5936571c741625de2479e
-RUN . ./libcomponent.sh && component_unpack "kafka" "2.3.0-1" --checksum a1ed290d5e7b70913421a224b2d30d08199281a7bbc299eedd6f874a93cb5387
+RUN . ./libcomponent.sh && component_unpack "kafka" "2.3.1-0" --checksum fd169bd2ba9967a8f61c28e5e56c8b61040582027c332024f6bcc8b41ee1fd5e
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.3.0-ol-7-r131" \
+    BITNAMI_IMAGE_VERSION="2.3.1-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/kafka/bin:$PATH"
 
