@@ -525,9 +525,9 @@ If you are using your custom `postgresql.conf`, you should create (or uncomment)
 1 directory, 2 files
 ```
 
-## Specifyng initdb arguments
+## Specifying initdb arguments
 
-Specifyng extra initdb arguments can easily be done using the following environment variables:
+Specifying extra initdb arguments can easily be done using the following environment variables:
 
  - `POSTGRESQL_INITDB_ARGS`: Specifies extra arguments for the initdb command. No defaults.
  - `POSTGRESQL_INITDB_WALDIR`: Defines a custom location for the transaction log. No defaults.
