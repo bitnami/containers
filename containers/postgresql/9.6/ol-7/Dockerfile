@@ -8,14 +8,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     OS_NAME="linux"
 
 # Install required system packages and dependencies
-RUN install_packages glibc keyutils-libs krb5-libs libcom_err libedit libselinux libuuid libxml2 libxslt ncurses-libs nss-softokn-freebl openssl-libs pcre xz-libs zlib
-RUN . ./libcomponent.sh && component_unpack "postgresql" "9.6.15-3" --checksum abc0f156374976dc05b033006239fa602227ad0568a0e5031a1a712809032127
+RUN install_packages glibc keyutils-libs krb5-libs libcom_err libedit libgcc libselinux libstdc++ libuuid libxml2 libxslt ncurses-libs nss-softokn-freebl openssl-libs pcre sqlite xz-libs zlib
+RUN . ./libcomponent.sh && component_unpack "postgresql" "9.6.15-4" --checksum 012e7e5a49b30909a3b6664488c02d0ab50a49c258ebd1c63c8010df277a3038
 
 COPY rootfs /
 RUN rpm -Uvh --nodeps $(repoquery --location nss_wrapper)
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="9.6.15-ol-7-r87" \
+    BITNAMI_IMAGE_VERSION="9.6.15-ol-7-r88" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
