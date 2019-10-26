@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "fluentd" "1.7.4-0" --checksum a5ca2
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.7.4-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="1.7.4-debian-9-r1" \
     GEM_HOME="/opt/bitnami/fluentd" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/fluentd/bin:$PATH"
 
