@@ -43,7 +43,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`11-ol-7`, `11.5.0-ol-7-r20` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.5.0-ol-7-r20/11/ol-7/Dockerfile)
+* [`11-ol-7`, `11.5.0-ol-7-r21` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.5.0-ol-7-r21/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.5.0-debian-9-r16`, `11`, `11.5.0`, `11.5.0-r16`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.5.0-debian-9-r16/11/debian-9/Dockerfile)
 * [`11-centos-7`, `11.5.0-centos-7-r20` (11/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.5.0-centos-7-r20/11/centos-7/Dockerfile)
 * [`10-ol-7`, `10.10.0-ol-7-r20` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.10.0-ol-7-r20/10/ol-7/Dockerfile)
