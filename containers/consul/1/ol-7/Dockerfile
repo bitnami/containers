@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r461
+FROM bitnami/oraclelinux-extras-base:7-r462
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -12,7 +12,7 @@ RUN . ./libcomponent.sh && component_unpack "consul" "1.6.1-2" --checksum bdd83a
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.6.1-ol-7-r50" \
+    BITNAMI_IMAGE_VERSION="1.6.1-ol-7-r51" \
     PATH="/opt/bitnami/consul/bin:$PATH"
 
 EXPOSE 8300 8301 8500 8600
