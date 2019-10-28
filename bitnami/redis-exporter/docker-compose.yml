@@ -2,4 +2,4 @@ version: '2'
 
 services:
   redis-exporter:
-    image: bitnami/redis-exporter:0
+    image: bitnami/redis-exporter:1
