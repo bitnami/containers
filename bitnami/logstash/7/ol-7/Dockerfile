@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r461
+FROM bitnami/oraclelinux-extras-base:7-r462
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "java" "1.8.232-0" --checksum fbac74
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="logstash" \
-    BITNAMI_IMAGE_VERSION="7.4.1-ol-7-r4" \
+    BITNAMI_IMAGE_VERSION="7.4.1-ol-7-r5" \
     PATH="/opt/bitnami/logstash/bin:/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 8080
