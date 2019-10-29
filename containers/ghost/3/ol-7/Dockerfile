@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX,o+rw" \
 RUN install_packages bzip2-libs glibc keyutils-libs krb5-libs libX11-devel libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre readline sqlite zlib
 RUN bitnami-pkg install node-10.17.0-0 --checksum 892c719867dc5d4f495ec2432f9ef6d48151507512d8796c7e56028cf4dee43e
 RUN bitnami-pkg unpack mysql-client-10.3.18-2 --checksum c9d987cf8f6f6831d04920d64598d0c77cf994235753cf4d5d18ac787c12918e
-RUN bitnami-pkg unpack ghost-3.0.0-0 --checksum a6991b94f266ec2ace7410e905f09d7399c5a51eca37a2524cf953a8cad12d84
+RUN bitnami-pkg unpack ghost-3.0.1-0 --checksum 661482f96f0503573d916fa9dc36c7c73acc30a40022e23118190b1733e03868
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="3.0.0-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="3.0.1-ol-7-r0" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
