@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`12-ol-7`, `12.0.0-ol-7-r17` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.0.0-ol-7-r17/12/ol-7/Dockerfile)
-* [`12-debian-9`, `12.0.0-debian-9-r11`, `12`, `12.0.0`, `12.0.0-r11` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.0.0-debian-9-r11/12/debian-9/Dockerfile)
+* [`12-debian-9`, `12.0.0-debian-9-r12`, `12`, `12.0.0`, `12.0.0-r12` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.0.0-debian-9-r12/12/debian-9/Dockerfile)
 * [`12-centos-7`, `12.0.0-centos-7-r17` (12/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.0.0-centos-7-r17/12/centos-7/Dockerfile)
 * [`11-ol-7`, `11.5.0-ol-7-r92` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.5.0-ol-7-r92/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.5.0-debian-9-r80`, `11`, `11.5.0`, `11.5.0-r80`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.5.0-debian-9-r80/11/debian-9/Dockerfile)
@@ -660,7 +660,7 @@ $ docker-compose up postgresql
 
 # Notable Changes
 
-## 9.6.15-r80, 9.6.15-ol-7-r88, 9.6.15-centos-7-r87, 10.10.0-r80, 10.10.0-ol-7-r86, 10.10.0-centos-7-r87, 11.5.0-r78, 11.5.0-centos-7-r83, 11.5.0-ol-7-r88, 12.0.0-r9, 12.0.0-centos-7-r13 and 12.0.0-ol-7-r13.
+## 9.6.15-r82, 9.6.15-ol-7-r92, 9.6.15-centos-7-r91, 10.10.0-r82, 10.10.0-ol-7-r90, 10.10.0-centos-7-r91, 11.5.0-r80, 11.5.0-centos-7-r87, 11.5.0-ol-7-r92, 12.0.0-r11, 12.0.0-centos-7-r17 and 12.0.0-ol-7-r17
 
 - Adds Postgis extension to postgresql, version 2.3.x to Postgresiql 9.6 and version 2.5 to 10, 11 and 12.
 
