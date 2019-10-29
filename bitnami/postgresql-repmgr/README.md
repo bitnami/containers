@@ -577,7 +577,7 @@ $ docker-compose up pg-1
 
 # Notable Changes
 
-## 9.6.15-r17, 9.6.15-ol-7-r22, 9.6.15-centos-7-r22, 10.10.0-r17, 10.10.0-ol-7-r22, 10.10.0-centos-7-r22, 11.5.0-r17, 11.5.0-centos-7-r22, 11.5.0-ol-7-r22.
+## 9.6.15-r18, 9.6.15-ol-7-r23, 9.6.15-centos-7-r23, 10.10.0-r18, 10.10.0-ol-7-r23, 10.10.0-centos-7-r23, 11.5.0-r19, 11.5.0-centos-7-r23, 11.5.0-ol-7-r23.
 
 - Adds Postgis extension to postgresql, version 2.3.x to Postgresiql 9.6 and version 2.5 to 10, 11 and 12.
 
