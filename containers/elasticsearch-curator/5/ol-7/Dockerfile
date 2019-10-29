@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r511
+FROM bitnami/oraclelinux-extras:7-r512
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch-curator" \
-    BITNAMI_IMAGE_VERSION="5.8.1-ol-7-r3" \
+    BITNAMI_IMAGE_VERSION="5.8.1-ol-7-r4" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
