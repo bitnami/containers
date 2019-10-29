@@ -4,15 +4,15 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 # Install required system packages and dependencies
 RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmemcached11 libmemcachedutil2 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5 libtinfo5 libunistring0 libxml2 libxslt1.1 zlib1g
 RUN bitnami-pkg unpack apache-2.4.41-2 --checksum 54e604bee81357824146780a26fbd99a889852240ae94cc4779264c9f231f535
-RUN bitnami-pkg unpack php-7.2.23-1 --checksum 1b79eddf8e998a9ad7ae20a1801cd4c6b989872547a833fefb920df6b185cc75
+RUN bitnami-pkg unpack php-7.2.24-0 --checksum 1b07c4047c4091aea0dbf93a36a7cbcedb84c6a57e65035fde48fa7ef7daafd3
 RUN bitnami-pkg unpack mysql-client-10.3.18-2 --checksum 9ba76d9543cc87642f23cc4987e12750e8690d45274c3701aa429ef19e3b8e08
-RUN bitnami-pkg install libphp-7.2.23-0 --checksum 9491d3b6612d5a9c6a833a5ecc1b3aa74b5956d8c635eca9996a7ed2db273bef
-RUN bitnami-pkg unpack owncloud-10.2.1-1 --checksum 851999935cc70dfeaafddd01624b927cc0d89fea49dff19f92fde180ceeb234d
+RUN bitnami-pkg install libphp-7.2.24-0 --checksum 7c56993a3952525d70b1a81bd4a46abf31398452cdd6924a42e1d7e3f159989c
+RUN bitnami-pkg unpack owncloud-10.3.0-3 --checksum 977ff4e67f9e951b28b5b6ad3a92d02da3c099f619c40e451e4ae8f8d034f062
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.2.1-debian-9-r88" \
+    BITNAMI_IMAGE_VERSION="10.3.0-debian-9-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
