@@ -1,28 +1,23 @@
-FROM bitnami/oraclelinux-extras:7-r511
+FROM bitnami/oraclelinux-extras-base:7-r463
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    HOME="/"
+ENV HOME="/" \
+    OS_ARCH="x86_64" \
+    OS_FLAVOUR="ol-7" \
+    OS_NAME="linux"
 
 # Install required system packages and dependencies
 RUN install_packages glibc
-RUN bitnami-pkg unpack redis-sentinel-5.0.5-2 --checksum ea0830225d19f7e574fa1b5c10a5df32936468cb20bc51e2a652651b1ca33dff
+RUN . ./libcomponent.sh && component_unpack "redis-sentinel" "5.0.5-2" --checksum ea0830225d19f7e574fa1b5c10a5df32936468cb20bc51e2a652651b1ca33dff
 
 COPY rootfs /
+RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="5.0.5-ol-7-r175" \
-    NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/redis-sentinel/bin:$PATH" \
-    REDIS_MASTER_HOST="redis" \
-    REDIS_MASTER_PASSWORD="" \
-    REDIS_MASTER_PASSWORD_FILE="" \
-    REDIS_MASTER_PORT_NUMBER="6379" \
-    REDIS_MASTER_SET="mymaster" \
-    REDIS_SENTINEL_PORT_NUMBER="26379" \
-    REDIS_SENTINEL_QUORUM="2"
+    BITNAMI_IMAGE_VERSION="5.0.5-ol-7-r176" \
+    PATH="/opt/bitnami/redis-sentinel/bin:$PATH"
 
 EXPOSE 26379
 
 USER 1001
-ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "nami", "start", "--foreground", "redis-sentinel" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD [ "/run.sh" ]
