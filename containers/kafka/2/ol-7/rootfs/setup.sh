@@ -40,3 +40,5 @@ for dir in "$KAFKA_LOGDIR" "$KAFKA_CONFDIR" "$KAFKA_VOLUMEDIR" "$KAFKA_DATADIR";
 done
 # Ensure Kafka is initialized
 kafka_initialize
+# Ensure custom initialization scripts are executed
+kafka_custom_init_scripts
