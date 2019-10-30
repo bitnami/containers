@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r463
+FROM bitnami/oraclelinux-extras-base:7-r464
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -15,7 +15,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.28-ol-7-r17" \
+    BITNAMI_IMAGE_VERSION="5.7.28-ol-7-r18" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mysql/bin:$PATH"
 
