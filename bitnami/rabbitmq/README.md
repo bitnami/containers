@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3.8-ol-7`, `3.8.0-ol-7-r25` (3.8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.0-ol-7-r25/3.8/ol-7/Dockerfile)
-* [`3.8-debian-9`, `3.8.0-debian-9-r16`, `3.8`, `3.8.0`, `3.8.0-r16`, `latest` (3.8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.0-debian-9-r16/3.8/debian-9/Dockerfile)
+* [`3.8-debian-9`, `3.8.0-debian-9-r17`, `3.8`, `3.8.0`, `3.8.0-r17`, `latest` (3.8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.0-debian-9-r17/3.8/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
@@ -198,6 +198,11 @@ Available variables:
  - `RABBITMQ_MANAGER_PORT_NUMBER`: Manager port. Default: **15672**
  - `RABBITMQ_DISK_FREE_LIMIT`: Disk free space limit of the partition on which RabbitMQ is storing data. Default: **{mem_relative, 1.0}**
  - `RABBITMQ_ULIMIT_NOFILES`: Resources limits: maximum number of open file descriptors. Default: **65536**
+ - `RABBITMQ_ENABLE_LDAP`: Enable the LDAP configuration. Defaults to `no`.
+ - `RABBITMQ_LDAP_TLS`: Enable secure LDAP configuration. Defaults to `no`.
+ - `RABBITMQ_LDAP_SERVER`: Hostname of the LDAP server. No defaults.
+ - `RABBITMQ_LDAP_SERVER_PORT`: Port of the LDAP server. Defaults to `389`.
+ - `RABBITMQ_LDAP_USER_DN_PATTERN`: DN used to bind to LDAP in the form `cn=$${username},dc=example,dc=org`. No defaults.
 
 ## Setting up a cluster
 
@@ -319,6 +324,18 @@ volumes:
 
 A custom configuration file can be mounted to the `/opt/bitnami/rabbitmq/etc/rabbitmq` directory. If no file is mounted, the container will generate one.
 
+## Enabling LDAP support
+
+LDAP configuration parameters must be specified if you wish to enable LDAP support. The following environment variables are available to configure LDAP support:
+
+ - `RABBITMQ_ENABLE_LDAP`: Enable the LDAP configuration. Defaults to `no`.
+ - `RABBITMQ_LDAP_TLS`: Enable secure LDAP configuration. Defaults to `no`.
+ - `RABBITMQ_LDAP_SERVER`: Hostname of the LDAP server. No defaults.
+ - `RABBITMQ_LDAP_SERVER_PORT`: Port of the LDAP server. Defaults to `389`.
+ - `RABBITMQ_LDAP_USER_DN_PATTERN`: DN used to bind to LDAP in the form `cn=$${username},dc=example,dc=org`.No defaults.
+
+> Note: To escape `$` in `RABBITMQ_LDAP_USER_DN_PATTERN` you need to use `$$`.
+
 # Logging
 
 The Bitnami RabbitMQ Docker image sends the container logs to the `stdout`. To view the logs:
@@ -397,6 +414,10 @@ $ docker-compose up rabbitmq
 ```
 
 # Notable changes
+
+## 3.8.0-r17, 3.8.0-ol-7-r26
+
+- LDAP authentication 
 
 ## 3.7.15-r18, 3.7.15-ol-7-r19
 - Decrease the size of the container. Node.js is not needed anymore. RabbitMQ configuration logic has been moved to bash scripts in the `rootfs` folder.
