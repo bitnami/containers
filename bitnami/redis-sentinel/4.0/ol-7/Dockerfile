@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r463
+FROM bitnami/oraclelinux-extras-base:7-r464
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "redis-sentinel" "4.0.14-2" --checks
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="4.0.14-ol-7-r223" \
+    BITNAMI_IMAGE_VERSION="4.0.14-ol-7-r224" \
     PATH="/opt/bitnami/redis-sentinel/bin:$PATH"
 
 EXPOSE 26379
