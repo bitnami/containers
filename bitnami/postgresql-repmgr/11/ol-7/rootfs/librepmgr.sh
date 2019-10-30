@@ -603,6 +603,7 @@ repmgr_initialize() {
     # Configure port and restrict access to PostgreSQL (MD5)
     postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
     is_boolean_yes "$REPMGR_PGHBA_TRUST_ALL" || postgresql_restrict_pghba
+    postgresql_start_bg
     if [[ "$REPMGR_ROLE" = "primary" ]]; then
         repmgr_create_repmgr_user
         repmgr_create_repmgr_db
@@ -613,7 +614,6 @@ repmgr_initialize() {
         # Allow running custom initialization scripts
         postgresql_custom_init_scripts
     else
-        postgresql_start_bg
         repmgr_unregister_standby
         repmgr_register_standby
     fi
