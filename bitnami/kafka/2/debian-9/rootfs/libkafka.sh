@@ -376,3 +376,38 @@ kafka_initialize() {
     rm -rf "$KAFKA_BASEDIR"/configtmp
     ln -s "$KAFKA_CONFDIR" "$KAFKA_BASEDIR"/config
 }
+
+########################
+# Run custom initialization scripts
+# Globals:
+#   KAFKA_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kafka_custom_init_scripts() {
+    if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\)") ]] && [[ ! -f "$KAFKA_VOLUMEDIR/.user_scripts_initialized" ]] ; then
+        info "Loading user's custom files from /docker-entrypoint-initdb.d";
+        for f in /docker-entrypoint-initdb.d/*; do
+            debug "Executing $f"
+            case "$f" in
+                *.sh)
+                    if [[ -x "$f" ]]; then
+                        if ! "$f"; then
+                            error "Failed executing $f"
+                            return 1
+                        fi
+                    else
+                        warn "Sourcing $f as it is not executable by the current user, any error may cause initialization to fail"
+                        . "$f"
+                    fi
+                    ;;
+                *)
+                    warn "Skipping $f, supported formats are: .sh"
+                    ;;
+            esac
+        done
+        touch "$KAFKA_VOLUMEDIR"/.user_scripts_initialized
+    fi
+}
