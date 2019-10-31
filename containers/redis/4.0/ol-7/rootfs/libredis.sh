@@ -283,6 +283,9 @@ redis_validate() {
 redis_configure_replication() {
     info "Configuring replication mode..."
 
+    redis_conf_set replica-announce-ip `hostname -i`
+    redis_conf_set replica-announce-port "$REDIS_MASTER_PORT_NUMBER"
+
     if [[ "$REDIS_REPLICATION_MODE" = "master" ]]; then
         if [[ -n "$REDIS_PASSWORD" ]]; then
             redis_conf_set masterauth "$REDIS_PASSWORD"
