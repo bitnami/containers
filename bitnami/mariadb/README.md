@@ -51,7 +51,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10.2-ol-7`, `10.2.27-ol-7-r57` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.27-ol-7-r57/10.2/ol-7/Dockerfile)
 * [`10.2-debian-9`, `10.2.27-debian-9-r48`, `10.2`, `10.2.27`, `10.2.27-r48` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.27-debian-9-r48/10.2/debian-9/Dockerfile)
 * [`10.1-ol-7`, `10.1.41-ol-7-r105` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.41-ol-7-r105/10.1/ol-7/Dockerfile)
-* [`10.1-debian-9`, `10.1.41-debian-9-r96`, `10.1`, `10.1.41`, `10.1.41-r96` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.41-debian-9-r96/10.1/debian-9/Dockerfile)
+* [`10.1-debian-9`, `10.1.41-debian-9-r97`, `10.1`, `10.1.41`, `10.1.41-r97` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.41-debian-9-r97/10.1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
 
@@ -92,7 +92,7 @@ $ docker run \
     bitnami/mariadb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -102,6 +102,8 @@ services:
       - /path/to/mariadb-persistence:/bitnami/mariadb
   ...
 ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Connecting to other containers
 
@@ -193,7 +195,7 @@ Passing extra command-line flags to the mysqld service command is possible throu
 $ docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes -e MARIADB_EXTRA_FLAGS='--max-connect-errors=1000 --max_connections=155' bitnami/mariadb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -218,7 +220,7 @@ Passing the `MARIADB_ROOT_PASSWORD` environment variable when running the image 
 $ docker run --name mariadb -e MARIADB_ROOT_PASSWORD=password123 bitnami/mariadb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -239,7 +241,7 @@ By default the MariaDB image expects all the available passwords to be set. In o
 $ docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes bitnami/mariadb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
 
 
 ```yaml
@@ -262,7 +264,7 @@ $ docker run --name mariadb \
     bitnami/mariadb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -287,7 +289,7 @@ $ docker run --name mariadb \
   bitnami/mariadb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -422,7 +424,7 @@ $ docker run --name mariadb \
     bitnami/mariadb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
