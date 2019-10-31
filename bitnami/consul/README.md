@@ -54,7 +54,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.6.1-ol-7-r54` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.6.1-ol-7-r54/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.6.1-debian-9-r43`, `1`, `1.6.1`, `1.6.1-r43`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.6.1-debian-9-r43/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.6.1-debian-9-r44`, `1`, `1.6.1`, `1.6.1-r44`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.6.1-debian-9-r44/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/consul GitHub repo](https://github.com/bitnami/bitnami-docker-consul).
 
@@ -98,6 +98,8 @@ consul:
   volumes:
     - /path/to/consul-persistence:/bitnami
 ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Connecting to other containers
 
