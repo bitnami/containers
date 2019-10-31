@@ -6,9 +6,9 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
-  . /matomo-init.sh
-  nami_initialize apache php mysql-client matomo
-  info "Starting matomo... "
+    . /matomo-init.sh
+    nami_initialize apache php mysql-client matomo
+    info "Starting matomo... "
 fi
 
 exec tini -- "$@"
