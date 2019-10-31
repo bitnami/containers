@@ -36,6 +36,7 @@ export RABBITMQ_HOME_DIR="${RABBITMQ_BASE_DIR}/.rabbitmq"
 export RABBITMQ_LIB_DIR="${RABBITMQ_BASE_DIR}/var/lib/rabbitmq"
 export RABBITMQ_LOG_DIR="${RABBITMQ_BASE_DIR}/var/log/rabbitmq"
 export RABBITMQ_PLUGINS_DIR="${RABBITMQ_BASE_DIR}/plugins"
+export RABBITMQ_LDAP_TLS_DIR="${RABBITMQ_BASE_DIR}/certs-ldap"
 export PATH="${RABBITMQ_BIN_DIR}:${PATH}"
 
 # OS
@@ -61,6 +62,11 @@ export RABBITMQ_USERNAME="${RABBITMQ_USERNAME:-user}"
 export RABBITMQ_VHOST="${RABBITMQ_VHOST:-/}"
 # Print all log messages to standard output
 export RABBITMQ_LOGS="${RABBITMQ_LOGS:--}"
+export RABBITMQ_ENABLE_LDAP="${RABBITMQ_ENABLE_LDAP:-no}"
+export RABBITMQ_LDAP_TLS="${RABBITMQ_LDAP_TLS:-no}"
+export RABBITMQ_LDAP_SERVER="${RABBITMQ_LDAP_SERVER:-}"
+export RABBITMQ_LDAP_SERVER_PORT="${RABBITMQ_LDAP_SERVER_PORT:-389}"
+export RABBITMQ_LDAP_USER_DN_PATTERN="${RABBITMQ_LDAP_USER_DN_PATTERN:-}"
 EOF
 }
 
@@ -89,6 +95,17 @@ rabbitmq_validate() {
 
     if [[ -n "$RABBITMQ_PASSWORD" && -n "$RABBITMQ_HASHED_PASSWORD" ]]; then
         warn "You initialized RabbitMQ indicating both a password and a hashed password. Please note only the hashed password will be considered."
+    fi
+
+    if ! is_yes_no_value "$RABBITMQ_ENABLE_LDAP"; then
+        print_validation_error "An invalid value was specified in the environment variable RABBITMQ_ENABLE_LDAP. Valid values are: yes or no"
+    fi
+
+    if is_boolean_yes "$RABBITMQ_ENABLE_LDAP" && ( [[ -z "${RABBITMQ_LDAP_SERVER}" ]] || [[ -z "${RABBITMQ_LDAP_USER_DN_PATTERN}" ]] ); then
+        print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables RABBITMQ_LDAP_SERVER and RABBITMQ_LDAP_USER_DN_PATTERN."
+        if !  is_yes_no_value "$RABBITMQ_LDAP_TLS"; then
+            print_validation_error "An invalid value was specified in the environment variable RABBITMQ_LDAP_TLS. Valid values are: yes or no"
+        fi
     fi
 
     if [[ "$RABBITMQ_NODE_TYPE" = "stats" ]]; then
@@ -127,16 +144,49 @@ rabbitmq_validate() {
 #########################
 rabbitmq_create_config_file() {
     debug "Creating configuration file..."
+    local auth_backend=""
+    local separator=""
+
+    is_boolean_yes "$RABBITMQ_ENABLE_LDAP" && auth_backend="{auth_backends, [rabbit_auth_backend_ldap]},"
+    is_boolean_yes "$RABBITMQ_LDAP_TLS" && separator=","
+
     cat > "${RABBITMQ_CONF_DIR}/rabbitmq.config" <<EOF
 [
   {rabbit,
     [
+      $auth_backend
       {tcp_listeners, [$RABBITMQ_NODE_PORT_NUMBER]},
       {disk_free_limit, $RABBITMQ_DISK_FREE_LIMIT},
       {cluster_partition_handling, $RABBITMQ_CLUSTER_PARTITION_HANDLING},
       {default_vhost, <<"$RABBITMQ_VHOST">>},
       {default_user, <<"$RABBITMQ_USERNAME">>},
       {default_permissions, [<<".*">>, <<".*">>, <<".*">>]}
+EOF
+
+    if is_boolean_yes "$RABBITMQ_ENABLE_LDAP"; then
+        cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.config" <<EOF
+    ]
+  },
+  {rabbitmq_auth_backend_ldap,
+    [
+     {servers,               ["$RABBITMQ_LDAP_SERVER"]},
+     {user_dn_pattern,       "$RABBITMQ_LDAP_USER_DN_PATTERN"},
+     {port,                  $RABBITMQ_LDAP_SERVER_PORT}$separator
+EOF
+
+        if is_boolean_yes "$RABBITMQ_LDAP_TLS"; then
+            cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.config" <<EOF
+     {use_ssl,               true},
+     {ssl_options, [{cacertfile,"${RABBITMQ_LDAP_TLS_DIR}/ca_certificate.pem"},
+                    {certfile,"${RABBITMQ_LDAP_TLS_DIR}/server_certificate.pem"},
+                    {keyfile,"${RABBITMQ_LDAP_TLS_DIR}/server_key.pem"},
+                    {verify, verify_peer},
+                    {fail_if_no_peer_cert, true}]}
+EOF
+        fi
+    fi
+
+    cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.config" <<EOF
     ]
   },
   {rabbitmq_management,
@@ -416,7 +466,6 @@ rabbitmq_initialize() {
         ensure_dir_exists "$dir"
         am_i_root && chown -R "$RABBITMQ_DAEMON_USER:$RABBITMQ_DAEMON_GROUP" "$dir"
     done
-
     if "$skip_setup"; then
         info "Persisted data detected. Restoring..."
     else
@@ -433,5 +482,9 @@ rabbitmq_initialize() {
         rabbitmq_enable_plugin "rabbitmq_management"
     else
         rabbitmq_enable_plugin "rabbitmq_management_agent"
+    fi
+
+    if is_boolean_yes "$RABBITMQ_ENABLE_LDAP"; then
+        rabbitmq_enable_plugin "rabbitmq_auth_backend_ldap"
     fi
 }
