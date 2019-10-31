@@ -6,8 +6,8 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
-  nami_initialize apache php mysql-client joomla
-  info "Starting joomla... "
+    nami_initialize apache php mysql-client joomla
+    info "Starting joomla... "
 fi
 
 exec tini -- "$@"
