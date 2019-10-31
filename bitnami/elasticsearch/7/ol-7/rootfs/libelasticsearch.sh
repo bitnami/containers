@@ -288,6 +288,9 @@ elasticsearch_cluster_configuration() {
         elasticsearch_conf_set discovery.initial_state_timeout "5m"
         elasticsearch_conf_set gateway.recover_after_nodes "$(ceiling45 "${#host_list[@]}")"
         elasticsearch_conf_set gateway.expected_nodes "${#host_list[@]}"
+        if [[ "$ELASTICSEARCH_NODE_TYPE" = "master" ]] && [[ "$ELASTICSEARCH_MAJOR_VERSION" -gt 6 ]]; then
+            elasticsearch_conf_set cluster.initial_master_nodes "${master_list[@]}"
+        fi
         if [[ -n "$ELASTICSEARCH_MINIMUM_MASTER_NODES" ]]; then
             debug "Setting minimum master nodes for quorum to $ELASTICSEARCH_MINIMUM_MASTER_NODES..."
             elasticsearch_conf_set discovery.zen.minimum_master_nodes "$ELASTICSEARCH_MINIMUM_MASTER_NODES"
@@ -296,13 +299,6 @@ elasticsearch_cluster_configuration() {
             min_masters=$(((${#host_list[@]} / 2) +1))
             debug "Calculating minimum master nodes for quorum: $min_masters..."
             elasticsearch_conf_set discovery.zen.minimum_master_nodes "$min_masters"
-            if [[ "$ELASTICSEARCH_NODE_TYPE" = "master" ]] && [[ "$ELASTICSEARCH_MAJOR_VERSION" -gt 6 ]]; then
-                elasticsearch_conf_set cluster.initial_master_nodes "${master_list[@]}"
-            fi
-        elif [[ "${#host_list[@]}" -eq 1 ]]; then
-            if [[ "$ELASTICSEARCH_NODE_TYPE" = "master" ]] && [[ "$ELASTICSEARCH_MAJOR_VERSION" -gt 6 ]]; then
-                elasticsearch_conf_set cluster.initial_master_nodes "${master_list[@]}"
-            fi
         fi
     else
         elasticsearch_conf_set "discovery.type" "single-node"
