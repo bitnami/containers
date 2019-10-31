@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8-ol-7`, `8.2.0-ol-7-r100` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.2.0-ol-7-r100/8/ol-7/Dockerfile)
-* [`8-debian-9`, `8.2.0-debian-9-r88`, `8`, `8.2.0`, `8.2.0-r88`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.2.0-debian-9-r88/8/debian-9/Dockerfile)
+* [`8-debian-9`, `8.2.0-debian-9-r89`, `8`, `8.2.0`, `8.2.0-r89`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.2.0-debian-9-r89/8/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
 
@@ -86,7 +86,7 @@ To avoid inadvertent removal of this volume you can [mount host directories as d
 $ docker run -v /path/to/solr-persistence:/bitnami bitnami/solr:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 solr:
@@ -95,6 +95,8 @@ solr:
     - /path/to/solr-persistence:/bitnami
   ...
 ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Connecting to other containers
 
@@ -167,7 +169,7 @@ When you start the solr image, you can adjust the configuration of the instance 
 
 ### Specifying Environment Variables using Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository: 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 solr:
@@ -189,7 +191,7 @@ In order to load your own configuration files, you will have to make them availa
 
 ### Using Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository: 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 solr:
