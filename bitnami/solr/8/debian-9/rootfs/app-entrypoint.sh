@@ -6,8 +6,8 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
-  nami_initialize solr
-  info "Starting solr... "
+    nami_initialize solr
+    info "Starting solr... "
 fi
 
 exec tini -- "$@"
