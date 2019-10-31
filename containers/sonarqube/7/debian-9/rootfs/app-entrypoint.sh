@@ -6,8 +6,8 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
-  nami_initialize postgresql-client sonarqube
-  info "Starting sonarqube... "
+    nami_initialize postgresql-client sonarqube
+    info "Starting sonarqube... "
 fi
 
 exec tini -- "$@"
