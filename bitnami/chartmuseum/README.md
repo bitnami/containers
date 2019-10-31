@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.9.0-ol-7-r91` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.9.0-ol-7-r91/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.9.0-debian-9-r82`, `0`, `0.9.0`, `0.9.0-r82`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.9.0-debian-9-r82/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.9.0-debian-9-r83`, `0`, `0.9.0`, `0.9.0-r83`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.9.0-debian-9-r83/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/chartmuseum GitHub repo](https://github.com/bitnami/bitnami-docker-chartmuseum).
 
@@ -95,9 +95,11 @@ chartmuseum:
   ...
 ```
 
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+
 # Using TLS certificates
 
-To configure ChartMuseum to use TLS certificates you can mount a directory into `/bitnami/certs` containing the files `server.crt` and `server.key`. 
+To configure ChartMuseum to use TLS certificates you can mount a directory into `/bitnami/certs` containing the files `server.crt` and `server.key`.
 
 # Connecting to other containers
 
