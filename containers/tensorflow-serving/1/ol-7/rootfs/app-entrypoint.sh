@@ -6,8 +6,8 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
-  nami_initialize tensorflow-serving
-  info "Starting tensorflow-serving... "
+    nami_initialize tensorflow-serving
+    info "Starting tensorflow-serving... "
 fi
 
 exec tini -- "$@"
