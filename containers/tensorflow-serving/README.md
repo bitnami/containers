@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.14.0-ol-7-r114` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.14.0-ol-7-r114/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.14.0-debian-9-r109`, `1`, `1.14.0`, `1.14.0-r109`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.14.0-debian-9-r109/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.14.0-debian-9-r110`, `1`, `1.14.0`, `1.14.0-r110`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.14.0-debian-9-r110/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-serving GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-serving).
 
@@ -88,6 +88,8 @@ services:
       - /path/to/tensorflow-serving-persistence:/bitnami
   ...
 ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Connecting to other containers
 
