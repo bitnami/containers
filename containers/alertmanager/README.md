@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.19.0-ol-7-r64` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.19.0-ol-7-r64/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.19.0-debian-9-r53`, `0`, `0.19.0`, `0.19.0-r53`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.19.0-debian-9-r53/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.19.0-debian-9-r54`, `0`, `0.19.0`, `0.19.0-r54`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-alertmanager/blob/0.19.0-debian-9-r54/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/alertmanager GitHub repo](https://github.com/bitnami/bitnami-docker-alertmanager).
 
@@ -82,6 +82,8 @@ To avoid inadvertent removal of this volume you can [mount host directories as d
 ```bash
 $ docker run -v /path/to/alertmanager-persistence:/opt/bitnami/data bitnami/alertmanager:latest
 ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Connecting to other containers
 
