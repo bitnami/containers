@@ -52,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.5.6-ol-7-r13` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.6-ol-7-r13/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.5.6-debian-9-r8`, `3`, `3.5.6`, `3.5.6-r8`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.6-debian-9-r8/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.5.6-debian-9-r9`, `3`, `3.5.6`, `3.5.6-r9`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.6-debian-9-r9/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
@@ -102,6 +102,8 @@ services:
       - /path/to/zookeeper-persistence:/bitnami/zookeeper
   ...
 ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Connecting to other containers
 
