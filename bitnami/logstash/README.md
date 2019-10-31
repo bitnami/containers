@@ -1,6 +1,6 @@
 # What is Logstash?
 
-Logstash is an open source, server-side data processing pipeline that ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite "stash." 
+Logstash is an open source, server-side data processing pipeline that ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite "stash."
 [https://www.elastic.co/products/logstash](https://www.elastic.co/products/logstash)
 
 # TL;DR;
@@ -44,9 +44,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-ol-7`, `7.4.1-ol-7-r8` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.4.1-ol-7-r8/7/ol-7/Dockerfile)
+* [`7-ol-7`, `7.4.2-ol-7-r0` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.4.2-ol-7-r0/7/ol-7/Dockerfile)
+* [`7-centos-7`, `7.4.2-centos-7-r0` (7/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.4.2-centos-7-r0/7/centos-7/Dockerfile)
 * [`7-debian-9`, `7.4.1-debian-9-r6`, `7`, `7.4.1`, `7.4.1-r6`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.4.1-debian-9-r6/7/debian-9/Dockerfile)
-* [`7-centos-7`, `7.4.1-centos-7-r0` (7/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.4.1-centos-7-r0/7/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/logstash GitHub repo](https://github.com/bitnami/bitnami-docker-logstash).
 
@@ -91,6 +91,8 @@ logstash:
     - /path/to/logstash-persistence:/bitnami
   ...
 ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Connecting to other containers
 
