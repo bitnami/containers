@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`5.0-debian-9`, `5.0.5-debian-9-r178`, `5.0`, `5.0.5`, `5.0.5-r178`, `latest` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.5-debian-9-r178/5.0/debian-9/Dockerfile)
 * [`5.0-centos-7`, `5.0.5-centos-7-r160` (5.0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.5-centos-7-r160/5.0/centos-7/Dockerfile)
 * [`4.0-ol-7`, `4.0.14-ol-7-r230` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-ol-7-r230/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.14-debian-9-r208`, `4.0`, `4.0.14`, `4.0.14-r208` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-debian-9-r208/4.0/debian-9/Dockerfile)
+* [`4.0-debian-9`, `4.0.14-debian-9-r209`, `4.0`, `4.0.14`, `4.0.14-r209` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-debian-9-r209/4.0/debian-9/Dockerfile)
 * [`4.0-centos-7`, `4.0.14-centos-7-r167` (4.0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-centos-7-r167/4.0/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
@@ -89,7 +89,7 @@ $ docker run \
     bitnami/redis:latest
 ```
 
-You can also do this by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository: 
+You can also do this by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -99,6 +99,8 @@ services:
       - /path/to/redis-persistence:/bitnami/redis/data
   ...
 ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Connecting to other containers
 
@@ -184,7 +186,7 @@ For security reasons, you may want to disable some commands. You can specify the
 $ docker run --name redis -e DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG bitnami/redis:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository: 
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -215,7 +217,7 @@ Passing extra command-line flags to the redis service command is possible by add
 $ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest /run.sh --maxmemory 100mb
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository: 
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -237,7 +239,7 @@ Passing the `REDIS_PASSWORD` environment variable when running the image for the
 $ docker run --name redis -e REDIS_PASSWORD=password123 bitnami/redis:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository: 
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -258,7 +260,7 @@ By default the Redis image expects all the available passwords to be set. In ord
 $ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository: 
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -372,7 +374,7 @@ $ docker run --name redis \
     bitnami/redis:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository: 
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
