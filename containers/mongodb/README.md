@@ -98,6 +98,8 @@ services:
   ...
 ```
 
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+
 # Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a MongoDB server running inside a container can easily be accessed by your application containers.
