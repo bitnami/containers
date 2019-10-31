@@ -46,8 +46,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-ol-7`, `7.4.1-ol-7-r8` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.4.1-ol-7-r8/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.4.1-debian-9-r6`, `7`, `7.4.1`, `7.4.1-r6`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.4.1-debian-9-r6/7/debian-9/Dockerfile)
+* [`7-ol-7`, `7.4.2-ol-7-r0` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.4.2-ol-7-r0/7/ol-7/Dockerfile)
+* [`7-debian-9`, `7.4.2-debian-9-r0`, `7`, `7.4.2`, `7.4.2-r0`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.4.2-debian-9-r0/7/debian-9/Dockerfile)
 * [`6-ol-7`, `6.8.4-ol-7-r8` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.4-ol-7-r8/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.8.4-debian-9-r7`, `6`, `6.8.4`, `6.8.4-r7` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.4-debian-9-r7/6/debian-9/Dockerfile)
 
@@ -93,6 +93,8 @@ mariadb:
     - /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data
   ...
 ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Connecting to other containers
 
