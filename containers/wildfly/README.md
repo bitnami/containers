@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`18-ol-7`, `18.0.0-ol-7-r23` (18/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/18.0.0-ol-7-r23/18/ol-7/Dockerfile)
-* [`18-debian-9`, `18.0.0-debian-9-r16`, `18`, `18.0.0`, `18.0.0-r16`, `latest` (18/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/18.0.0-debian-9-r16/18/debian-9/Dockerfile)
+* [`18-debian-9`, `18.0.0-debian-9-r17`, `18`, `18.0.0`, `18.0.0-r17`, `latest` (18/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/18.0.0-debian-9-r17/18/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
@@ -91,6 +91,8 @@ services:
       - /path/to/wildfly-persistence:/bitnami
   ...
 ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Deploying web applications on Wildfly
 
@@ -187,7 +189,7 @@ $ docker run --name wildfly \
   bitnami/wildfly:latest
 ```
 
-or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wildfly/blob/master/docker-compose.yml) file present in this repository: 
+or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wildfly/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -211,7 +213,7 @@ Run the Wildfly image, mounting a directory from your host.
 $ docker run --name wildfly -v /path/to/wildfly-persistence:/bitnami bitnami/wildfly:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wildfly/blob/master/docker-compose.yml) file present in this repository: 
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wildfly/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
