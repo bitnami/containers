@@ -30,6 +30,6 @@ else
     fi
 fi
 
-if [[ -e "/htacces/wordpress-htaccess.conf" ]]; then
-    cp -L "/htacces/wordpress-htaccess.conf" "/opt/bitnami/wordpress/wordpress-htaccess.conf"
+if [[ -e "/htaccess/wordpress-htaccess.conf" ]]; then
+    cp -L "/htaccess/wordpress-htaccess.conf" "/opt/bitnami/wordpress/wordpress-htaccess.conf"
 fi
