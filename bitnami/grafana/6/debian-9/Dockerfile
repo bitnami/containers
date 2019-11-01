@@ -12,7 +12,7 @@ RUN mkdir -p /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/ && chmod g+rw
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="6.4.3-debian-9-r10" \
+    BITNAMI_IMAGE_VERSION="6.4.3-debian-9-r11" \
     PATH="/opt/bitnami/grafana/bin:$PATH"
 
 EXPOSE 3000
