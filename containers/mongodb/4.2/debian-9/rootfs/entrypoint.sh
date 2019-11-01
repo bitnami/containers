@@ -1,10 +1,10 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 
 set -o errexit
 set -o nounset
 set -o pipefail
 
-# shellcheck disable=SC1091
 
 # Load libraries
 . /libbitnami.sh

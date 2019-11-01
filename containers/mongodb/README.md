@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4.2-ol-7`, `4.2.1-ol-7-r17` (4.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.1-ol-7-r17/4.2/ol-7/Dockerfile)
-* [`4.2-debian-9`, `4.2.1-debian-9-r13`, `4.2`, `4.2.1`, `4.2.1-r13` (4.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.1-debian-9-r13/4.2/debian-9/Dockerfile)
+* [`4.2-debian-9`, `4.2.1-debian-9-r14`, `4.2`, `4.2.1`, `4.2.1-r14` (4.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.1-debian-9-r14/4.2/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.13-ol-7-r19` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.13-ol-7-r19/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.13-debian-9-r13`, `4.0`, `4.0.13`, `4.0.13-r13`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.13-debian-9-r13/4.0/debian-9/Dockerfile)
 * [`3.6-ol-7`, `3.6.14-ol-7-r77` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.14-ol-7-r77/3.6/ol-7/Dockerfile)
@@ -575,14 +575,14 @@ Especially client authentication and requirements for common name and OU/DN/etc.
 
 ## Configuration file
 
-The image looks for configurations in `/opt/bitnami/mongodb/conf/`. You can mount a volume at `/opt/bitnami/mongodb/conf/` and copy/edit the configurations in the `/path/to/mongodb-configuration-persistence/`. The default configurations will be populated to the `conf/` directory if it's empty.
+The image looks for mounted configurations files in `/bitnami/mongodb/conf/`. You can mount a volume at `/bitnami/mongodb/conf/` and copy/edit the configurations in the `/path/to/mongodb-configuration-persistence/`. The default configurations will be populated to the `/opt/bitnami/mongodb/conf/` directory if it's empty.
 
 ### Step 1: Run the MongoDB image
 
 Run the MongoDB image, mounting a directory from your host.
 
 ```bash
-$ docker run --name mongodb -v /path/to/mongodb-configuration-persistence:/opt/bitnami/mongodb/conf bitnami/mongodb:latest
+$ docker run --name mongodb -v /path/to/mongodb-configuration-persistence:/bitnami/mongodb/conf bitnami/mongodb:latest
 ```
 
 or using Docker Compose:
@@ -596,7 +596,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - /path/to/mongodb-configuration-persistence:/opt/bitnami/mongodb/conf
+      - /path/to/mongodb-configuration-persistence:/bitnami/mongodb/conf
 ```
 
 ### Step 2: Edit the configuration
@@ -702,6 +702,10 @@ $ docker-compose up mongodb
 ```
 
 # Notable Changes
+
+## 3.6.14-r69, 4.0.13-r11, and 4.2.1-r12
+
+- The configuration files mount point changed from `/opt/bitnami/mongodb/conf` to `/bitnami/mongodb/conf`.
 
 ## 3.6.13-r33, 4.0.10-r42, 4.1.13-r40 and 4.1.13-r41
 
