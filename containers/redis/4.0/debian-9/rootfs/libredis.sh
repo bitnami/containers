@@ -7,6 +7,7 @@
 # Load Generic Libraries
 . /libfile.sh
 . /liblog.sh
+. /libnet.sh
 . /libos.sh
 . /libservice.sh
 . /libvalidations.sh
@@ -283,7 +284,7 @@ redis_validate() {
 redis_configure_replication() {
     info "Configuring replication mode..."
 
-    redis_conf_set replica-announce-ip `hostname -i`
+    redis_conf_set replica-announce-ip $(get_machine_ip)
     redis_conf_set replica-announce-port "$REDIS_MASTER_PORT_NUMBER"
 
     if [[ "$REDIS_REPLICATION_MODE" = "master" ]]; then
