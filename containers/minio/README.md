@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2019-ol-7`, `2019.10.12-ol-7-r20` (2019/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.10.12-ol-7-r20/2019/ol-7/Dockerfile)
-* [`2019-debian-9`, `2019.10.12-debian-9-r4`, `2019`, `2019.10.12`, `2019.10.12-r4`, `latest` (2019/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.10.12-debian-9-r4/2019/debian-9/Dockerfile)
+* [`2019-debian-9`, `2019.10.12-debian-9-r5`, `2019`, `2019.10.12`, `2019.10.12-r5`, `latest` (2019/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.10.12-debian-9-r5/2019/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio GitHub repo](https://github.com/bitnami/bitnami-docker-minio).
 
@@ -81,7 +81,7 @@ $ docker run --name minio \
     bitnami/minio:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-minio/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-minio/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -91,6 +91,8 @@ services:
       - /path/to/minio-persistence:/data
   ...
 ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Connecting to other containers
 
@@ -205,7 +207,7 @@ $ docker run --name minio \
     bitnami/minio:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-minio/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-minio/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -229,7 +231,7 @@ $ docker run --name minio \
     bitnami/minio:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-minio/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-minio/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -316,7 +318,7 @@ $ docker run --name minio \
     bitnami/minio:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-minio/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-minio/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
