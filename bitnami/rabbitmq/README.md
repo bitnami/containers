@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3.8-ol-7`, `3.8.0-ol-7-r26` (3.8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.0-ol-7-r26/3.8/ol-7/Dockerfile)
-* [`3.8-debian-9`, `3.8.0-debian-9-r17`, `3.8`, `3.8.0`, `3.8.0-r17`, `latest` (3.8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.0-debian-9-r17/3.8/debian-9/Dockerfile)
+* [`3.8-debian-9`, `3.8.0-debian-9-r18`, `3.8`, `3.8.0`, `3.8.0-r18`, `latest` (3.8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.0-debian-9-r18/3.8/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
@@ -95,6 +95,8 @@ rabbitmq:
     - /path/to/rabbitmq-persistence:/bitnami
   ...
 ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Connecting to other containers
 
@@ -417,7 +419,7 @@ $ docker-compose up rabbitmq
 
 ## 3.8.0-r17, 3.8.0-ol-7-r26
 
-- LDAP authentication 
+- LDAP authentication
 
 ## 3.7.15-r18, 3.7.15-ol-7-r19
 - Decrease the size of the container. Node.js is not needed anymore. RabbitMQ configuration logic has been moved to bash scripts in the `rootfs` folder.
