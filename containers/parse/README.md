@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.9.0-ol-7-r52` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.9.0-ol-7-r52/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.9.0-ol-7-r53` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.9.0-ol-7-r53/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.9.0-debian-9-r24`, `3`, `3.9.0`, `3.9.0-r24`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/3.9.0-debian-9-r24/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
@@ -107,6 +107,8 @@ For persistence you should mount a volume at the `/bitnami` path. Additionally y
 The above examples define docker volumes namely `mongodb_data` and `parse_data`. The Parse application state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 ### Mount host directories as data volumes with Docker Compose
 
