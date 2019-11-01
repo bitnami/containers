@@ -25,7 +25,8 @@ net:
     enabled: true
     pathPrefix: {{MONGODB_TMP_DIR}}
   ipv6: {{MONGODB_ENABLE_IPV6}}
-  bindIpAll: true
+  bindIpAll: false
+  bindIp: 127.0.0.1
 
 # replica set options
 #replication:
