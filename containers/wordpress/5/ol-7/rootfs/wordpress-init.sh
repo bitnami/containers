@@ -29,3 +29,7 @@ else
         empty_password_error WORDPRESS_DATABASE_PASSWORD
     fi
 fi
+
+if [[ -e "/htacces/wordpress-htaccess.conf" ]]; then
+    cp -L "/htacces/wordpress-htaccess.conf" "/opt/bitnami/wordpress/wordpress-htaccess.conf"
+fi
