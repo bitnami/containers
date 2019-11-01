@@ -42,7 +42,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.0.2-ol-7-r1` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/3.0.2-ol-7-r1/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.0.2-ol-7-r2` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/3.0.2-ol-7-r2/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.0.2-debian-9-r0`, `3`, `3.0.2`, `3.0.2-r0`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/3.0.2-debian-9-r0/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
@@ -163,6 +163,8 @@ In this case you need to specify the directories to mount on the run command. Th
     --volume /path/to/ghost-persistence:/bitnami \
     bitnami/ghost:latest
   ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Upgrade this application
 
