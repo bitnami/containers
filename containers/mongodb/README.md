@@ -327,15 +327,13 @@ A [replication](https://docs.mongodb.com/manual/replication/) cluster can easily
  - `MONGODB_PRIMARY_HOST`: MongoDB primary host. No defaults.
  - `MONGODB_PRIMARY_PORT_NUMBER`: MongoDB primary node port, as seen by other nodes. Default: **27017**
  - `MONGODB_ADVERTISED_HOSTNAME`: MongoDB advertised hostname. No defaults. It is recommended to pass this environment variable if you experience issues with ephemeral IPs. Setting this env var makes the nodes of the replica set to be configured with a hostname instead of the machine IP.
-
-Only for authentication:
  - `MONGODB_REPLICA_SET_KEY`: MongoDB replica set key. Length should be greater than 5 characters and should not contain any special characters. Required for all nodes. No default.
  - `MONGODB_ROOT_PASSWORD`: MongoDB root password. No defaults. Only for primary node.
- - `MONGODB_PRIMARY_ROOT_PASSWORD`: MongoDB primary root password. No defaults. Only for secondaries and aribters nodes.
+ - `MONGODB_PRIMARY_ROOT_PASSWORD`: MongoDB primary root password. No defaults. Only for secondaries and arbiter nodes.
 
 In a replication cluster you can have one primary node, zero or more secondary nodes and zero or one arbiter node.
 
-> **Note**: The total number of nodes on a replica set sceneraio cannot be higher than 8 (1 primary, 6 secondaries and 1 arbiter)
+> **Note**: The total number of nodes on a replica set scenario cannot be higher than 8 (1 primary, 6 secondaries and 1 arbiter)
 
 ### Step 1: Create the replication primary
 
@@ -344,7 +342,10 @@ The first step is to start the MongoDB primary.
 ```bash
 $ docker run --name mongodb-primary \
   -e MONGODB_REPLICA_SET_MODE=primary \
-   bitnami/mongodb:latest
+  -e MONGODB_ADVERTISED_HOSTNAME=mongodb-primary \
+  -e MONGODB_ROOT_PASSWORD=password123 \
+  -e MONGODB_REPLICA_SET_KEY=replicasetkey123 \
+  bitnami/mongodb:latest
 ```
 
 In the above command the container is configured as the `primary` using the `MONGODB_REPLICA_SET_MODE` parameter.
@@ -357,8 +358,11 @@ Next we start a MongoDB secondary container.
 $ docker run --name mongodb-secondary \
   --link mongodb-primary:primary \
   -e MONGODB_REPLICA_SET_MODE=secondary \
+  -e MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary \
   -e MONGODB_PRIMARY_HOST=primary \
   -e MONGODB_PRIMARY_PORT_NUMBER=27017 \
+  -e MONGODB_PRIMARY_ROOT_PASSWORD=password123 \
+  -e MONGODB_REPLICA_SET_KEY=replicasetkey123 \
   bitnami/mongodb:latest
 ```
 
@@ -372,14 +376,17 @@ Finally we start a MongoDB arbiter container.
 $ docker run --name mongodb-arbiter \
   --link mongodb-primary:primary \
   -e MONGODB_REPLICA_SET_MODE=arbiter \
+  -e MONGODB_ADVERTISED_HOSTNAME=mongodb-arbiter \
   -e MONGODB_PRIMARY_HOST=primary \
   -e MONGODB_PRIMARY_PORT_NUMBER=27017 \
+  -e MONGODB_PRIMARY_ROOT_PASSWORD=password123 \
+  -e MONGODB_REPLICA_SET_KEY=replicasetkey123 \
   bitnami/mongodb:latest
 ```
 
 In the above command the container is configured as a `arbiter` using the `MONGODB_REPLICA_SET_MODE` parameter. The `MONGODB_PRIMARY_HOST` and `MONGODB_PRIMARY_PORT_NUMBER` parameters are used connect and with the MongoDB primary.
 
-You now have a three node MongoDB replication cluster up and running which can be scaled by adding/removing secondarys.
+You now have a three node MongoDB replication cluster up and running which can be scaled by adding/removing secondaries.
 
 With Docker Compose the replicaset can be setup using:
 
@@ -390,45 +397,11 @@ services:
   mongodb-primary:
     image: 'bitnami/mongodb:latest'
     environment:
-      - MONGODB_REPLICA_SET_MODE=primary
-    volumes:
-      - 'mongodb_master_data:/bitnami'
-
-  mongodb-secondary:
-    image: 'bitnami/mongodb:latest'
-    depends_on:
-      - mongodb-primary
-    environment:
-      - MONGODB_REPLICA_SET_MODE=secondary
-      - MONGODB_PRIMARY_HOST=mongodb-primary
-      - MONGODB_PRIMARY_PORT_NUMBER=27017
-
-  mongodb-arbiter:
-    image: 'bitnami/mongodb:latest'
-    depends_on:
-      - mongodb-primary
-    environment:
-      - MONGODB_REPLICA_SET_MODE=arbiter
-      - MONGODB_PRIMARY_HOST=mongodb-primary
-      - MONGODB_PRIMARY_PORT_NUMBER=27017
-
-volumes:
-  mongodb_master_data:
-    driver: local
-```
-
-Or in case you want to set up the replicaset with authentication you can use the following file:
-
-```yaml
-version: '2'
-
-services:
-  mongodb-primary:
-    image: 'bitnami/mongodb:latest'
-    environment:
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-primary
       - MONGODB_REPLICA_SET_MODE=primary
       - MONGODB_ROOT_PASSWORD=password123
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
+
     volumes:
       - 'mongodb_master_data:/bitnami'
 
@@ -437,6 +410,7 @@ services:
     depends_on:
       - mongodb-primary
     environment:
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary
       - MONGODB_REPLICA_SET_MODE=secondary
       - MONGODB_PRIMARY_HOST=mongodb-primary
       - MONGODB_PRIMARY_PORT_NUMBER=27017
@@ -448,6 +422,7 @@ services:
     depends_on:
       - mongodb-primary
     environment:
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-arbiter
       - MONGODB_REPLICA_SET_MODE=arbiter
       - MONGODB_PRIMARY_HOST=mongodb-primary
       - MONGODB_PRIMARY_PORT_NUMBER=27017
