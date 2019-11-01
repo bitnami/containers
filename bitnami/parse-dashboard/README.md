@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.0.5-ol-7-r7` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/2.0.5-ol-7-r7/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.0.5-ol-7-r8` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/2.0.5-ol-7-r8/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.0.5-debian-9-r5`, `2`, `2.0.5`, `2.0.5-r5`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/2.0.5-debian-9-r5/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse-dashboard GitHub repo](https://github.com/bitnami/bitnami-docker-parse-dashboard).
@@ -121,6 +121,8 @@ services:
       - '/path/to/parse_dashboard-persistence:/bitnami'
   ...
 ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 ### Mount host directories as data volumes using the Docker command line
 
