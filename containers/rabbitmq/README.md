@@ -189,7 +189,7 @@ Available variables:
 
  - `RABBITMQ_USERNAME`: RabbitMQ application username. Default: **user**
  - `RABBITMQ_PASSWORD`: RabbitMQ application password. Default: **bitnami**
- - `RABBITMQ_HASHED_PASSWORD`: RabbitMQ application hasehd password.
+ - `RABBITMQ_HASHED_PASSWORD`: RabbitMQ application hashed password.
  - `RABBITMQ_VHOST`: RabbitMQ application vhost. Default: **/**
  - `RABBITMQ_ERL_COOKIE`: Erlang cookie to determine whether different nodes are allowed to communicate with each other.
  - `RABBITMQ_NODE_TYPE`: Node Type. Valid values: *stats*, *queue-ram* or *queue-disc*. Default: **stats**
