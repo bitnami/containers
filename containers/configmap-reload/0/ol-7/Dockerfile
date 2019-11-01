@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r514
+FROM bitnami/oraclelinux-extras:7-r515
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,7 +10,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN ln -sf /opt/bitnami/configmap-reload/bin/configmap-reload /bin/configmap-reload
 
 ENV BITNAMI_APP_NAME="configmap-reload" \
-    BITNAMI_IMAGE_VERSION="0.3.0-ol-7-r14" \
+    BITNAMI_IMAGE_VERSION="0.3.0-ol-7-r15" \
     PATH="/opt/bitnami/configmap-reload/bin:$PATH"
 
 EXPOSE 8080
