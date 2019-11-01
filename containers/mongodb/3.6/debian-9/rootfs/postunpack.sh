@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # shellcheck disable=SC1091
 
 # Load libraries
@@ -10,10 +9,10 @@
 # Load MongoDB env. variables
 eval "$(mongodb_env)"
 
-for dir in "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR" "$MONGODB_CONFIG_DIR" "$MONGODB_DATA_DIR" "$MONGODB_PERSIST_DIR"; do
+for dir in "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR" "$MONGODB_CONF_DIR" "$MONGODB_DATA_DIR" "$MONGODB_VOLUME_DIR"; do
     ensure_dir_exists "$dir"
 done
-chmod -R g+rwX "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR" "$MONGODB_CONFIG_DIR" "$MONGODB_DATA_DIR" "$MONGODB_PERSIST_DIR"
+chmod -R g+rwX "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR" "$MONGODB_CONF_DIR" "$MONGODB_DATA_DIR" "$MONGODB_VOLUME_DIR"
 
 # Create .dbshell file to avoid error message
 touch /.dbshell && chmod g+rw /.dbshell

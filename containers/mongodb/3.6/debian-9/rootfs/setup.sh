@@ -1,9 +1,9 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 
 set -o errexit
 set -o nounset
 set -o pipefail
-# shellcheck disable=SC1091
 
 # Load libraries
 . /libfs.sh
@@ -26,5 +26,8 @@ am_i_root && ensure_user_exists "$MONGODB_DAEMON_USER" "$MONGODB_DAEMON_GROUP"
 
 # Ensure MongoDB is initialized
 mongodb_initialize
+
+mongodb_set_listen_all_conf
+
 # Allow running custom initialization scripts
 mongodb_custom_init_scripts
