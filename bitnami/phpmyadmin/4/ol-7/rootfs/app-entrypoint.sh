@@ -6,8 +6,10 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
+    . /apache-init.sh
     nami_initialize apache php phpmyadmin
     info "Starting phpmyadmin... "
+    . /post-init.sh
 fi
 
 exec tini -- "$@"
