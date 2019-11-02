@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r466
+FROM bitnami/oraclelinux-extras-base:7-r467
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV OS_ARCH="x86_64" \
@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "pgpool" "4.1.0-0" --checksum 590805
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="pgpool" \
-    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r2" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/pgpool/bin:$PATH"
 
 EXPOSE 5432
