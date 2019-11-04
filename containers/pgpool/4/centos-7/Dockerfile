@@ -1,4 +1,4 @@
-FROM bitnami/centos-extras-base:7-r192
+FROM bitnami/centos-extras-base:7-r193
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV OS_ARCH="x86_64" \
@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "pgpool" "4.1.0-0" --checksum 8c2263
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="pgpool" \
-    BITNAMI_IMAGE_VERSION="4.1.0-centos-7-r4" \
+    BITNAMI_IMAGE_VERSION="4.1.0-centos-7-r5" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/pgpool/bin:$PATH"
 
 EXPOSE 5432
