@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r468
+FROM bitnami/oraclelinux-extras-base:7-r469
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "influxdb" "1.7.9-0" --checksum 7fe4
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="influxdb" \
-    BITNAMI_IMAGE_VERSION="1.7.9-ol-7-r8" \
+    BITNAMI_IMAGE_VERSION="1.7.9-ol-7-r9" \
     PATH="/opt/bitnami/influxdb/bin:$PATH"
 
 VOLUME [ "/bitnami/influxdb" ]
