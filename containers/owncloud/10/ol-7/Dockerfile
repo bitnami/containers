@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r517
+FROM bitnami/oraclelinux-extras:7-r518
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack owncloud-10.3.0-3 --checksum 8790ddd460a97ef3e842d8870410
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.3.0-ol-7-r22" \
+    BITNAMI_IMAGE_VERSION="10.3.0-ol-7-r23" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
