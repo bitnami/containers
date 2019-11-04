@@ -28,9 +28,9 @@ $ docker run --name git bitnami/git:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.23.0-ol-7-r86` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.23.0-ol-7-r86/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.23.0-debian-9-r74`, `2`, `2.23.0`, `2.23.0-r74`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.23.0-debian-9-r74/2/debian-9/Dockerfile)
-* [`2-centos-7`, `2.23.0-centos-7-r0` (2/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.23.0-centos-7-r0/2/centos-7/Dockerfile)
+* [`2-ol-7`, `2.24.0-ol-7-r0` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.24.0-ol-7-r0/2/ol-7/Dockerfile)
+* [`2-debian-9`, `2.24.0-debian-9-r0`, `2`, `2.24.0`, `2.24.0-r0`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.24.0-debian-9-r0/2/debian-9/Dockerfile)
+* [`2-centos-7`, `2.24.0-centos-7-r0` (2/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.24.0-centos-7-r0/2/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/git GitHub repo](https://github.com/bitnami/bitnami-docker-git).
 
