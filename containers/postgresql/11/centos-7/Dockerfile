@@ -9,13 +9,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libcom_err libedit libgcc libicu libselinux libstdc++ libuuid libxml2 libxslt ncurses-libs openssl-libs pcre sqlite xz-libs zlib
-RUN . ./libcomponent.sh && component_unpack "postgresql" "11.5.0-5" --checksum ea0b3b3aa1a557af288ad3a4282021652c184a302ce3044dde12839a1069b919
+RUN . ./libcomponent.sh && component_unpack "postgresql" "11.5.0-6" --checksum 881fdab9aaef86558184f8ee283d3b965d17bf0ff88c8edd582cf6a8c67ed2cf
 
 COPY rootfs /
 RUN yum --enablerepo base,updates,extras -y install epel-release && yum --enablerepo base,updates,extras -y update && yum --enablerepo base,updates -y install nss_wrapper
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="11.5.0-centos-7-r94" \
+    BITNAMI_IMAGE_VERSION="11.5.0-centos-7-r95" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
