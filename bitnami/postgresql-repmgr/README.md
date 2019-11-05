@@ -50,8 +50,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10-debian-9`, `10.10.0-debian-9-r19`, `10`, `10.10.0`, `10.10.0-r19` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.10.0-debian-9-r19/10/debian-9/Dockerfile)
 * [`10-centos-7`, `10.10.0-centos-7-r26` (10/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.10.0-centos-7-r26/10/centos-7/Dockerfile)
 * [`9.6-ol-7`, `9.6.15-ol-7-r25` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.15-ol-7-r25/9.6/ol-7/Dockerfile)
-* [`9.6-debian-9`, `9.6.15-debian-9-r19`, `9.6`, `9.6.15`, `9.6.15-r19` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.15-debian-9-r19/9.6/debian-9/Dockerfile)
+* [`9.6-debian-9`, `9.6.15-debian-9-r20`, `9.6`, `9.6.15`, `9.6.15-r20` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.15-debian-9-r20/9.6/debian-9/Dockerfile)
 * [`9.6-centos-7`, `9.6.15-centos-7-r25` (9.6/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.15-centos-7-r25/9.6/centos-7/Dockerfile)
+* [`12-ol-7`, `0.0.0-ol-7-r0` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/0.0.0-ol-7-r0/12/ol-7/Dockerfile)
+* [`12-debian-9`, `0.0.0-debian-9-r0`, `12`, `0.0.0`, `0.0.0-r0` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/0.0.0-debian-9-r0/12/debian-9/Dockerfile)
+* [`12-centos-7`, `0.0.0-centos-7-r0` (12/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/0.0.0-centos-7-r0/12/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
 
@@ -88,6 +91,8 @@ $ docker run \
 ```
 
 The [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository already configures persistence.
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Connecting to other containers
 
