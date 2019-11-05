@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r377
+FROM bitnami/minideb-extras-base:stretch-r378
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -9,14 +9,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libbsd0 libc6 libedit2 libgcc1 libicu57 liblzma5 libncurses5 libnss-wrapper libsqlite3-0 libssl1.1 libstdc++6 libtinfo5 libuuid1 libxml2 libxslt1.1 locales zlib1g
-RUN . ./libcomponent.sh && component_unpack "postgresql" "9.6.15-4" --checksum 0efabf6267882382fd6a1076fb8e85f118d7a69d843be267f0b6c77ad685621d
+RUN . ./libcomponent.sh && component_unpack "postgresql" "9.6.15-5" --checksum d4c4001b0fc5ce6d415ce411a23ac6b9fc59b9cab3332db090a05d1c81f3337a
 RUN echo 'en_GB.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="9.6.15-debian-9-r86" \
+    BITNAMI_IMAGE_VERSION="9.6.15-debian-9-r87" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
