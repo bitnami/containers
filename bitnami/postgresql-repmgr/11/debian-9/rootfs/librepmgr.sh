@@ -436,24 +436,24 @@ repmgr_generate_repmgr_config() {
     else
         cat << EOF >> "$REPMGR_CONF_FILE"
 event_notification_command='${REPMGR_EVENTS_DIR}/router.sh %n %e %s "%t" "%d"'
-ssh_options=-o \"StrictHostKeyChecking no\" -v
-use_replication_slots=$REPMGR_USE_REPLICATION_SLOTS
-pg_bindir=$POSTGRESQL_BIN_DIR
+ssh_options='-o "StrictHostKeyChecking no" -v'
+use_replication_slots='${REPMGR_USE_REPLICATION_SLOTS}'
+pg_bindir='${POSTGRESQL_BIN_DIR}'
 
 # FIXME: these 2 parameter should work
 node_id=$(repmgr_get_node_id)
-node_name=$REPMGR_NODE_NAME
-conninfo='user=$REPMGR_USERNAME password=$REPMGR_PASSWORD host=$REPMGR_NODE_NETWORK_NAME dbname=$REPMGR_DATABASE port=$REPMGR_PRIMARY_PORT connect_timeout=$REPMGR_CONNECT_TIMEOUT'
-failover=automatic
-promote_command='PGPASSWORD=$REPMGR_PASSWORD repmgr standby promote -f "$REPMGR_CONF_FILE" --log-level DEBUG --verbose'
-follow_command='PGPASSWORD=$REPMGR_PASSWORD repmgr standby follow -f "$REPMGR_CONF_FILE" -W --log-level DEBUG --verbose'
-reconnect_attempts=$REPMGR_RECONNECT_ATTEMPTS
-reconnect_interval=$REPMGR_RECONNECT_INTERVAL
-log_level=$REPMGR_LOG_LEVEL
-priority=$REPMGR_NODE_PRIORITY
-degraded_monitoring_timeout=$REPMGR_DEGRADED_MONITORING_TIMEOUT
-data_directory=$POSTGRESQL_DATA_DIR
-async_query_timeout=$REPMGR_MASTER_RESPONSE_TIMEOUT
+node_name='${REPMGR_NODE_NAME}'
+conninfo='user=${REPMGR_USERNAME} password=${REPMGR_PASSWORD} host=${REPMGR_NODE_NETWORK_NAME} dbname=${REPMGR_DATABASE} port=${REPMGR_PRIMARY_PORT} connect_timeout=${REPMGR_CONNECT_TIMEOUT}'
+failover='automatic'
+promote_command='PGPASSWORD=${REPMGR_PASSWORD} repmgr standby promote -f "${REPMGR_CONF_FILE}" --log-level DEBUG --verbose'
+follow_command='PGPASSWORD=${REPMGR_PASSWORD} repmgr standby follow -f "${REPMGR_CONF_FILE}" -W --log-level DEBUG --verbose'
+reconnect_attempts='${REPMGR_RECONNECT_ATTEMPTS}'
+reconnect_interval='${REPMGR_RECONNECT_INTERVAL}'
+log_level='${REPMGR_LOG_LEVEL}'
+priority='${REPMGR_NODE_PRIORITY}'
+degraded_monitoring_timeout='${REPMGR_DEGRADED_MONITORING_TIMEOUT}'
+data_directory='${POSTGRESQL_DATA_DIR}'
+async_query_timeout='${REPMGR_MASTER_RESPONSE_TIMEOUT}'
 EOF
     fi
 }
@@ -504,7 +504,7 @@ repmgr_wait_primary_node() {
 #########################
 repmgr_clone_primary() {
     repmgr_info "Cloning data from primary node..."
-    local -r flags=("-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_PRIMARY_PORT" "-U" "$REPMGR_USERNAME" "-d" "$REPMGR_DATABASE" "-D" "$POSTGRESQL_DATA_DIR" "standby" "clone" "--fast-checkpoint" "--force")
+    local -r flags=("-f" "$REPMGR_CONF_FILE" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_PRIMARY_PORT" "-U" "$REPMGR_USERNAME" "-d" "$REPMGR_DATABASE" "-D" "$POSTGRESQL_DATA_DIR" "standby" "clone" "--fast-checkpoint" "--force")
 
     PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
 }
@@ -545,7 +545,7 @@ repmgr_register_primary() {
 }
 
 ########################
-# Unregister secondary node
+# Unregister standby node
 # Globals:
 #   REPMGR_*
 # Arguments:
@@ -554,13 +554,16 @@ repmgr_register_primary() {
 #   None
 #########################
 repmgr_unregister_standby() {
-    repmgr_info "Unregistering secondary node..."
+    repmgr_info "Unregistering standby node..."
 
-    echo "DELETE FROM repmgr.nodes WHERE conninfo LIKE '%host=$REPMGR_NODE_NETWORK_NAME%'" |  postgresql_execute "$REPMGR_DATABASE" "$REPMGR_USERNAME" "$REPMGR_PASSWORD" "$REPMGR_CURRENT_PRIMARY_HOST" "$REPMGR_PRIMARY_PORT"
+    local -r flags=("standby" "unregister" "-f" "$REPMGR_CONF_FILE" "--node-id=$(repmgr_get_node_id)")
+
+    # The command below can fail when the node doesn't exist yet
+    debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}" || true
 }
 
 ########################
-# Resgister a node as secondary
+# Resgister a node as standby
 # Globals:
 #   REPMGR_*
 # Arguments:
@@ -570,7 +573,7 @@ repmgr_unregister_standby() {
 #########################
 repmgr_register_standby() {
     repmgr_info "Registering Standby node..."
-    local -r flags=("-f" "$REPMGR_CONF_FILE" "standby" "register" "--force")
+    local -r flags=("standby" "register" "-f" "$REPMGR_CONF_FILE" "--force" "--verbose")
 
     debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
 }
@@ -603,8 +606,8 @@ repmgr_initialize() {
     # Configure port and restrict access to PostgreSQL (MD5)
     postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
     is_boolean_yes "$REPMGR_PGHBA_TRUST_ALL" || postgresql_restrict_pghba
-    postgresql_start_bg
     if [[ "$REPMGR_ROLE" = "primary" ]]; then
+        postgresql_start_bg
         repmgr_create_repmgr_user
         repmgr_create_repmgr_db
         # Restart PostgreSQL
@@ -614,6 +617,8 @@ repmgr_initialize() {
         # Allow running custom initialization scripts
         postgresql_custom_init_scripts
     else
+        (( POSTGRESQL_MAJOR_VERSION >= 12 )) && postgresql_configure_recovery
+        postgresql_start_bg
         repmgr_unregister_standby
         repmgr_register_standby
     fi
