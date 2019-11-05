@@ -193,6 +193,7 @@ plugin_dir=$DB_BASEDIR/plugin
 port=$DB_PORT_NUMBER
 socket=$DB_TMPDIR/mysql.sock
 default-character-set=UTF8
+plugin_dir=$DB_BASEDIR/plugin
 
 [manager]
 port=$DB_PORT_NUMBER
