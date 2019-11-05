@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r469
+FROM bitnami/oraclelinux-extras-base:7-r470
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -16,7 +16,7 @@ RUN . ./libcomponent.sh && component_unpack "cassandra" "3.11.5-0" --checksum dc
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.5-ol-7-r6" \
+    BITNAMI_IMAGE_VERSION="3.11.5-ol-7-r7" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/cassandra/bin:$PATH"
 
