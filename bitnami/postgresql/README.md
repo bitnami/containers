@@ -52,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`11-centos-7`, `11.5.0-centos-7-r93` (11/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.5.0-centos-7-r93/11/centos-7/Dockerfile)
 * [`10-ol-7`, `10.10.0-ol-7-r96` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.10.0-ol-7-r96/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.10.0-debian-9-r86`, `10`, `10.10.0`, `10.10.0-r86` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.10.0-debian-9-r86/10/debian-9/Dockerfile)
-* [`10-centos-7`, `10.10.0-centos-7-r97` (10/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.10.0-centos-7-r97/10/centos-7/Dockerfile)
+* [`10-centos-7`, `10.10.0-centos-7-r98` (10/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.10.0-centos-7-r98/10/centos-7/Dockerfile)
 * [`9.6-ol-7`, `9.6.15-ol-7-r98` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.15-ol-7-r98/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.15-debian-9-r86`, `9.6`, `9.6.15`, `9.6.15-r86` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.15-debian-9-r86/9.6/debian-9/Dockerfile)
 * [`9.6-centos-7`, `9.6.15-centos-7-r97` (9.6/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.15-centos-7-r97/9.6/centos-7/Dockerfile)
@@ -583,6 +583,13 @@ The Bitnami PostgreSQL container allows two different sets of environment variab
 ```
 alter database POSTGRES_DATABASE owner to POSTGRES_USER;
 ```
+
+It is possible to change the user that PostgreSQL will use to execute the init scripts. To do so, use the following environment variables:
+
+| Environment variable           | Description                                                       |
+|--------------------------------|-------------------------------------------------------------------|
+| POSTGRESQL_INITSCRIPTS_USERNAME | User that will be used to execute the init scripts                |
+| POSTGRESQL_INITSCRIPTS_PASSWORD | Password for the user specified in POSTGRESQL_INITSCRIPT_USERNAME |
 
 # Logging
 
