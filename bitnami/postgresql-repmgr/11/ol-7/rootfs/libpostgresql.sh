@@ -139,6 +139,18 @@ export POSTGRESQL_SYNCHRONOUS_COMMIT_MODE="${POSTGRESQL_SYNCHRONOUS_COMMIT_MODE:
 export POSTGRESQL_FSYNC="${POSTGRESQL_FSYNC:-on}"
 export POSTGRESQL_USERNAME="${POSTGRESQL_USERNAME:-postgres}"
 
+if [[ -z "${POSTGRESQL_INITSCRIPTS_USERNAME:-}" ]]; then
+    export POSTGRESQL_INITSCRIPTS_USERNAME=$POSTGRESQL_USERNAME
+else
+    export POSTGRESQL_INITSCRIPTS_USERNAME=$POSTGRESQL_INITSCRIPTS_USERNAME
+fi
+
+if [[ -z "${POSTGRESQL_INITSCRIPTS_PASSWORD:-}" ]]; then
+    export POSTGRESQL_INITSCRIPTS_PASSWORD=$POSTGRESQL_PASSWORD
+else
+    export POSTGRESQL_INITSCRIPTS_PASSWORD=$POSTGRESQL_INITSCRIPTS_PASSWORD
+fi
+
 # Version
 export POSTGRESQL_VERSION="$(echo "$BITNAMI_IMAGE_VERSION" | grep -oP "^\d+\.\d+\.\d+")"
 export POSTGRESQL_MAJOR_VERSION="$(echo "$BITNAMI_IMAGE_VERSION" | grep -oP "^\d+")"
@@ -630,8 +642,8 @@ postgresql_custom_init_scripts() {
                         postgresql_debug "Sourcing $f"; . "$f"
                     fi
                     ;;
-                *.sql)    postgresql_debug "Executing $f"; postgresql_execute "$POSTGRESQL_DATABASE" "$POSTGRESQL_USERNAME" "$POSTGRESQL_PASSWORD" < "$f";;
-                *.sql.gz) postgresql_debug "Executing $f"; gunzip -c "$f" | postgresql_execute "$POSTGRESQL_DATABASE" "$POSTGRESQL_USERNAME" "$POSTGRESQL_PASSWORD";;
+                *.sql)    postgresql_debug "Executing $f"; postgresql_execute "$POSTGRESQL_DATABASE" "$POSTGRESQL_INITSCRIPTS_USERNAME" "$POSTGRESQL_INITSCRIPTS_PASSWORD" < "$f";;
+                *.sql.gz) postgresql_debug "Executing $f"; gunzip -c "$f" | postgresql_execute "$POSTGRESQL_DATABASE" "$POSTGRESQL_INITSCRIPTS_USERNAME" "$POSTGRESQL_INITSCRIPTS_PASSWORD";;
                 *)        postgresql_debug "Ignoring $f" ;;
             esac
         done
