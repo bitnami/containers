@@ -9,13 +9,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages glibc keyutils-libs krb5-libs libcom_err libedit libgcc libicu libselinux libstdc++ libuuid libxml2 libxslt ncurses-libs openssl-libs pcre sqlite xz-libs zlib
-RUN . ./libcomponent.sh && component_unpack "postgresql-repmgr" "11.5.0-1" --checksum b1a6e5fd1d15b9b680a6d16d96f0ea6341123acc9d11443ce5c4c8c121d8881a
+RUN . ./libcomponent.sh && component_unpack "postgresql-repmgr" "11.5.0-2" --checksum 193853b4ec5c2e86ce0201bcc58bbb7626b92a9ff06e4bc0a3313195f97fa0b3
 
 COPY rootfs /
 RUN rpm -Uvh --nodeps $(repoquery --location nss_wrapper)
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql-repmgr" \
-    BITNAMI_IMAGE_VERSION="11.5.0-ol-7-r26" \
+    BITNAMI_IMAGE_VERSION="11.5.0-ol-7-r27" \
     NAMI_PREFIX="/.nami" \
     NSS_WRAPPER_LIB="/usr/lib64/libnss_wrapper.so" \
     PATH="/opt/bitnami/postgresql-repmgr/bin:/opt/bitnami/repmgr/bin:/opt/bitnami/postgresql/bin:$PATH"
