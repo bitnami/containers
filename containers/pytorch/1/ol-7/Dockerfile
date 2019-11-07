@@ -11,12 +11,12 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl glibc gzip hostname libX11 libaio-devel libgcc libgomp libquadmath libstdc++ nss-softokn-freebl procps-ng sudo tar which
 RUN . ./libcomponent.sh && component_unpack "miniconda" "4.7.12-0" --checksum b8d9f716b8a4c41953286b1a9a07638c5adc02922a6735260b0a899ba6315980
-RUN . ./libcomponent.sh && component_unpack "pytorch" "1.3.0-0" --checksum 1faad1c85fe47a81b1204994bd767a75d0412af233e13739dafc8581b982ad6b
+RUN . ./libcomponent.sh && component_unpack "pytorch" "1.3.1-0" --checksum a9e5866ab3268c104f791d4351b0d6aaf54d5a980941ab3943a2abd0236ea39a
 
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="pytorch" \
-    BITNAMI_IMAGE_VERSION="1.3.0-ol-7-r30" \
+    BITNAMI_IMAGE_VERSION="1.3.1-ol-7-r0" \
     LD_LIBRARY_PATH="/opt/bitnami/miniconda/lib/python3.7/site-packages/torch/lib/:/opt/bitnami/miniconda/lib/python3.7/site-packages/PIL/.libs/:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/miniconda/bin:$PATH"
