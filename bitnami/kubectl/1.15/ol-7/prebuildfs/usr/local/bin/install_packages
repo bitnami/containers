@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+set -u
+n=0
+max=2
+until [ $n -gt $max ]; do
+    set +e
+    yum --enablerepo base,updates,ol7_developer_EPEL,ol7_optional_latest install -y "$@"
+    CODE=$?
+    set -e
+    if [ $CODE -eq 0 ]; then
+        break
+    fi
+    if [ $n -eq $max ]; then
+        exit $CODE
+    fi
+    echo "yum failed, retrying"
+    n=$(($n + 1))
+done
+rm -r /var/cache/yum
