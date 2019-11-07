@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras-base:7-r471
+FROM oraclelinux:7-slim
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -7,12 +7,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     OS_FLAVOUR="ol-7" \
     OS_NAME="linux"
 
+COPY prebuildfs /
 # Install required system packages and dependencies
+RUN install_packages ca-certificates curl gzip hostname libaio-devel procps-ng sudo tar which
 RUN . ./libcomponent.sh && component_unpack "chartmuseum" "0.9.0-2" --checksum 8c723dabb09d083328447275859f75f49285ae0a88783208cbbe6e4801398d6a
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.9.0-ol-7-r97" \
+    BITNAMI_IMAGE_VERSION="0.9.0-ol-7-r98" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/chartmuseum/bin:$PATH"
 
