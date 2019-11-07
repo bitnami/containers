@@ -1,19 +1,21 @@
-FROM bitnami/oraclelinux-extras-base:7-r471
+FROM oraclelinux:7-slim
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV OS_ARCH="x86_64" \
     OS_FLAVOUR="ol-7" \
     OS_NAME="linux"
 
+COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages audit-libs glibc hostname iproute keyutils-libs krb5-libs libaio libcap-ng libcom_err libgcc libselinux libstdc++ lsof ncurses-libs nss-pam-ldapd nss-softokn-freebl openldap-clients openssl-libs pam pcre rsync socat zlib
+RUN install_packages audit-libs ca-certificates curl glibc gzip hostname iproute keyutils-libs krb5-libs libaio libaio-devel libcap-ng libcom_err libgcc libselinux libstdc++ lsof ncurses-libs nss-pam-ldapd nss-softokn-freebl openldap-clients openssl-libs pam pcre procps-ng rsync socat sudo tar which zlib
 RUN . ./libcomponent.sh && component_unpack "mariadb-galera" "10.3.18-2" --checksum a1f16832d6e99c684b5442f46684754a7f2efcdb54212c3c6a0f756a1bb8fa86
+RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && chmod u+x /usr/local/bin/gosu && mkdir -p /opt/bitnami/licenses && curl --silent -L https://raw.githubusercontent.com/tianon/gosu/master/LICENSE > /opt/bitnami/licenses/gosu-1.11.txt
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb-galera" \
-    BITNAMI_IMAGE_VERSION="10.3.18-ol-7-r61" \
+    BITNAMI_IMAGE_VERSION="10.3.18-ol-7-r62" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
 EXPOSE 3306 4444 4567 4568
