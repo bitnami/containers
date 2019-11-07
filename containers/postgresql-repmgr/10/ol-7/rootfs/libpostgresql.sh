@@ -122,6 +122,10 @@ export PATH="$POSTGRESQL_BIN_DIR:$PATH"
 export POSTGRESQL_DAEMON_USER="postgresql"
 export POSTGRESQL_DAEMON_GROUP="postgresql"
 
+# Version
+export POSTGRESQL_VERSION="$(echo "$BITNAMI_IMAGE_VERSION" | grep -oP "^\d+\.\d+\.\d+")"
+export POSTGRESQL_MAJOR_VERSION="$(echo "$BITNAMI_IMAGE_VERSION" | grep -oP "^\d+")"
+
 # Settings
 export POSTGRESQL_INIT_MAX_TIMEOUT=${POSTGRESQL_INIT_MAX_TIMEOUT:-60}
 export POSTGRESQL_CLUSTER_APP_NAME=${POSTGRESQL_CLUSTER_APP_NAME:-walreceiver}
@@ -139,23 +143,18 @@ export POSTGRESQL_SYNCHRONOUS_COMMIT_MODE="${POSTGRESQL_SYNCHRONOUS_COMMIT_MODE:
 export POSTGRESQL_FSYNC="${POSTGRESQL_FSYNC:-on}"
 export POSTGRESQL_USERNAME="${POSTGRESQL_USERNAME:-postgres}"
 
-if [[ -z "${POSTGRESQL_INITSCRIPTS_USERNAME:-}" ]]; then
-    export POSTGRESQL_INITSCRIPTS_USERNAME=$POSTGRESQL_USERNAME
-else
-    export POSTGRESQL_INITSCRIPTS_USERNAME=$POSTGRESQL_INITSCRIPTS_USERNAME
-fi
-
-if [[ -z "${POSTGRESQL_INITSCRIPTS_PASSWORD:-}" ]]; then
-    export POSTGRESQL_INITSCRIPTS_PASSWORD=$POSTGRESQL_PASSWORD
-else
-    export POSTGRESQL_INITSCRIPTS_PASSWORD=$POSTGRESQL_INITSCRIPTS_PASSWORD
-fi
-
-# Version
-export POSTGRESQL_VERSION="$(echo "$BITNAMI_IMAGE_VERSION" | grep -oP "^\d+\.\d+\.\d+")"
-export POSTGRESQL_MAJOR_VERSION="$(echo "$BITNAMI_IMAGE_VERSION" | grep -oP "^\d+")"
-
+# Internal
+export POSTGRESQL_FIRST_BOOT="yes"
 EOF
+    if [[ -z "${POSTGRESQL_INITSCRIPTS_USERNAME:-}" ]]; then
+        cat <<"EOF"
+export POSTGRESQL_INITSCRIPTS_USERNAME="${POSTGRESQL_USERNAME}"
+EOF
+    else
+        cat <<"EOF"
+export POSTGRESQL_INITSCRIPTS_USERNAME="${POSTGRESQL_INITSCRIPTS_USERNAME}"
+EOF
+    fi
     if [[ -f "${POSTGRESQL_PASSWORD_FILE:-}" ]]; then
         cat <<"EOF"
 export POSTGRESQL_PASSWORD="$(< "${POSTGRESQL_PASSWORD_FILE}")"
@@ -181,6 +180,15 @@ EOF
     else
         cat <<"EOF"
 export POSTGRESQL_POSTGRES_PASSWORD="${POSTGRESQL_POSTGRES_PASSWORD:-}"
+EOF
+    fi
+    if [[ -z "${POSTGRESQL_INITSCRIPTS_PASSWORD:-}" ]]; then
+        cat <<"EOF"
+export POSTGRESQL_INITSCRIPTS_PASSWORD="${POSTGRESQL_PASSWORD:-}"
+EOF
+    else
+        cat <<"EOF"
+export POSTGRESQL_INITSCRIPTS_PASSWORD="${POSTGRESQL_INITSCRIPTS_PASSWORD:-}"
 EOF
     fi
 }
@@ -559,6 +567,7 @@ postgresql_initialize() {
 
     if ! is_dir_empty "$POSTGRESQL_DATA_DIR"; then
         postgresql_info "Deploying PostgreSQL with persisted data..."
+        export POSTGRESQL_FIRST_BOOT="no"
         is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
         is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
         is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
