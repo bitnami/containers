@@ -1,8 +1,9 @@
-FROM bitnami/oraclelinux-extras:7-r520
+FROM oraclelinux:7-slim
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates wget
+RUN install_packages ca-certificates curl gzip hostname libaio-devel procps-ng sudo tar wget which
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/alertmanager-0.19.0-1-linux-x86_64-ol-7.tar.gz && \
     echo "fa1d5ab40af6967e945d6db545f29a37ba5362f48b4ed3dc8a0973e0b3b71846  /tmp/bitnami/pkg/cache/alertmanager-0.19.0-1-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/alertmanager-0.19.0-1-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -12,7 +13,7 @@ RUN ln -sf /opt/bitnami/alertmanager/data /alertmanager
 
 RUN mkdir -p /opt/bitnami/alertmanager/data/ && chmod g+rwX /opt/bitnami/alertmanager/data/
 ENV BITNAMI_APP_NAME="alertmanager" \
-    BITNAMI_IMAGE_VERSION="0.19.0-ol-7-r70" \
+    BITNAMI_IMAGE_VERSION="0.19.0-ol-7-r71" \
     PATH="/opt/bitnami/alertmanager/bin:$PATH"
 
 EXPOSE 9093
