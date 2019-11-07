@@ -142,6 +142,9 @@ export POSTGRESQL_REPLICATION_USER="${POSTGRESQL_REPLICATION_USER:-}"
 export POSTGRESQL_SYNCHRONOUS_COMMIT_MODE="${POSTGRESQL_SYNCHRONOUS_COMMIT_MODE:-on}"
 export POSTGRESQL_FSYNC="${POSTGRESQL_FSYNC:-on}"
 export POSTGRESQL_USERNAME="${POSTGRESQL_USERNAME:-postgres}"
+
+# Internal
+export POSTGRESQL_FIRST_BOOT="yes"
 EOF
     if [[ -z "${POSTGRESQL_INITSCRIPTS_USERNAME:-}" ]]; then
         cat <<"EOF"
@@ -564,6 +567,7 @@ postgresql_initialize() {
 
     if ! is_dir_empty "$POSTGRESQL_DATA_DIR"; then
         postgresql_info "Deploying PostgreSQL with persisted data..."
+        export POSTGRESQL_FIRST_BOOT="no"
         is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
         is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
         is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
