@@ -1,8 +1,9 @@
-FROM bitnami/oraclelinux-extras:7-r520
+FROM oraclelinux:7-slim
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates wget
+RUN install_packages ca-certificates curl gzip hostname libaio-devel procps-ng sudo tar wget which
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.13.1-0-linux-x86_64-ol-7.tar.gz && \
     echo "059f2d06a533d2b0c49e07f3e80b83cc645f1b04daf89376939416abd8fe44d7  /tmp/bitnami/pkg/cache/prometheus-2.13.1-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.13.1-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -12,7 +13,7 @@ RUN ln -sf /opt/bitnami/prometheus/data /prometheus
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.13.1-ol-7-r22" \
+    BITNAMI_IMAGE_VERSION="2.13.1-ol-7-r23" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
