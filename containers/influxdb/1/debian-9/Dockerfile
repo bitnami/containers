@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r377
+FROM bitnami/minideb-extras-base:stretch-r378
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -8,12 +8,12 @@ ENV HOME="/" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6
-RUN . ./libcomponent.sh && component_unpack "influxdb" "1.7.8-0" --checksum df7df066c5644eda0adb6801f9edd85b85f9aa5c761adf335c380c4fff2f351b
+RUN . ./libcomponent.sh && component_unpack "influxdb" "1.7.9-0" --checksum 4d77d238e8688ba993689c7df9cdfbf053eccf5e0fd31dd0117a858e10d1bb13
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="influxdb" \
-    BITNAMI_IMAGE_VERSION="1.7.8-debian-9-r24" \
+    BITNAMI_IMAGE_VERSION="1.7.9-debian-9-r0" \
     PATH="/opt/bitnami/influxdb/bin:$PATH"
 
 VOLUME [ "/bitnami/influxdb" ]
