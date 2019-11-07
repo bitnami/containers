@@ -8,6 +8,7 @@
 # Load Generic Libraries
 . /liblog.sh
 . /libfs.sh
+. /libnet.sh
 . /libos.sh
 . /libservice.sh
 . /libvalidations.sh
@@ -209,6 +210,8 @@ pgpool_set_property() {
 #########################
 pgpool_create_backend_config() {
     local -r node=${1:?node is missing}
+    local -r retries=5
+    local -r sleep_time=3
 
     # default values
     read -r -a fields <<< "$(tr ':' ' ' <<< "${node}")"
@@ -221,6 +224,10 @@ pgpool_create_backend_config() {
 
     #check if it is possible to connect to the node
     debug "Waiting for backend '$host' ..."
+    if ! retry_while "is_hostname_resolved $host" "$retries" "$sleep_time"; then
+        error "$host is not a resolved hostname"
+        exit 1
+    fi
     if wait-for-port --host "$host" --timeout "$PGPOOL_TIMEOUT" "$port"; then
         debug "Backend '$host' is ready. Adding its information to the configuration..."
         cat >> "$PGPOOL_CONF_FILE" << EOF
