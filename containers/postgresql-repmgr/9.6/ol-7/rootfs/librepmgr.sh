@@ -74,6 +74,8 @@ export REPMGR_STANDBY_ROLE_LOCK_FILE_NAME="${REPMGR_TMP_DIR}/standby.lock"
 export REPMGR_MASTER_RESPONSE_TIMEOUT="${REPMGR_MASTER_RESPONSE_TIMEOUT:-20}"
 export REPMGR_DEGRADED_MONITORING_TIMEOUT="${REPMGR_DEGRADED_MONITORING_TIMEOUT:-5}"
 
+export REPMGR_UPGRADE_EXTENSION="${REPMGR_UPGRADE_EXTENSION:-no}"
+
 # These are internal
 export REPMGR_SWITCH_ROLE="${REPMGR_SWITCH_ROLE:-no}"
 export REPMGR_CURRENT_PRIMARY_HOST=""
@@ -162,6 +164,9 @@ repmgr_validate() {
 
     if ! is_yes_no_value "$REPMGR_PGHBA_TRUST_ALL"; then
         print_validation_error "The allowed values for REPMGR_PGHBA_TRUST_ALL are: yes or no."
+    fi
+    if ! is_yes_no_value "$REPMGR_UPGRADE_EXTENSION"; then
+        print_validation_error "The allowed values for REPMGR_UPGRADE_EXTENSION are: yes or no."
     fi
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
@@ -579,6 +584,21 @@ repmgr_register_standby() {
 }
 
 ########################
+# Upgrade repmgr extension
+# Globals:
+#   REPMGR_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+repmgr_upgrade_extension() {
+    repmgr_info "Upgrading repmgr extension..."
+
+    echo "ALTER EXTENSION repmgr UPDATE" | postgresql_execute "$REPMGR_DATABASE" "$REPMGR_USERNAME" "$REPMGR_PASSWORD"
+}
+
+########################
 # Initialize repmgr service
 # Globals:
 #   REPMGR_*
@@ -607,15 +627,23 @@ repmgr_initialize() {
     postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
     is_boolean_yes "$REPMGR_PGHBA_TRUST_ALL" || postgresql_restrict_pghba
     if [[ "$REPMGR_ROLE" = "primary" ]]; then
-        postgresql_start_bg
-        repmgr_create_repmgr_user
-        repmgr_create_repmgr_db
-        # Restart PostgreSQL
-        postgresql_stop
-        postgresql_start_bg
-        repmgr_register_primary
-        # Allow running custom initialization scripts
-        postgresql_custom_init_scripts
+        if is_boolean_yes "$POSTGRESQL_FIRST_BOOT"; then
+            postgresql_start_bg
+            repmgr_create_repmgr_user
+            repmgr_create_repmgr_db
+            # Restart PostgreSQL
+            postgresql_stop
+            postgresql_start_bg
+            repmgr_register_primary
+            # Allow running custom initialization scripts
+            postgresql_custom_init_scripts
+        elif is_boolean_yes "$REPMGR_UPGRADE_EXTENSION"; then
+            # Upgrade repmgr extension
+            postgresql_start_bg
+            repmgr_upgrade_extension
+        else
+            repmgr_debug "Skipping repmgr configuration..."
+        fi
     else
         (( POSTGRESQL_MAJOR_VERSION >= 12 )) && postgresql_configure_recovery
         postgresql_start_bg
