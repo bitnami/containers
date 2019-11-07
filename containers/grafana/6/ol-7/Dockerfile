@@ -1,8 +1,9 @@
-FROM bitnami/oraclelinux-extras:7-r520
+FROM oraclelinux:7-slim
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages bzip2-libs ca-certificates curl dbus-libs elfutils-libelf elfutils-libs expat fontconfig fontconfig-devel glib2 glibc libattr libblkid libcap libffi libgcc libgcrypt libgpg-error libmount libselinux libstdc++ libuuid lz4 nspr nss nss-util pcre systemd-libs wget xz-libs zlib
+RUN install_packages bzip2-libs ca-certificates curl dbus-libs elfutils-libelf elfutils-libs expat fontconfig fontconfig-devel glib2 glibc gzip hostname libaio-devel libattr libblkid libcap libffi libgcc libgcrypt libgpg-error libmount libselinux libstdc++ libuuid lz4 nspr nss nss-util pcre procps-ng sudo systemd-libs tar wget which xz-libs zlib
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-6.4.3-0-linux-x86_64-ol-7.tar.gz && \
     echo "26e24db2c752289274b3677d01e73bd06b2e7905fb99fc8ea2102d1ecc81ac8c  /tmp/bitnami/pkg/cache/grafana-6.4.3-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/grafana-6.4.3-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -12,7 +13,7 @@ RUN mkdir -p /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/ && chmod g+rw
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="6.4.3-ol-7-r22" \
+    BITNAMI_IMAGE_VERSION="6.4.3-ol-7-r23" \
     PATH="/opt/bitnami/grafana/bin:$PATH"
 
 EXPOSE 3000
