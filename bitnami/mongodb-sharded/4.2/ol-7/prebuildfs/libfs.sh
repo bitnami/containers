@@ -35,7 +35,7 @@ ensure_dir_exists() {
     local owner="${2:-}"
 
     mkdir -p "${dir}"
-    if [[ "$owner" != "" ]]; then
+    if [[ -n $owner ]]; then
         owned_by "$dir" "$owner"
     fi
 }
