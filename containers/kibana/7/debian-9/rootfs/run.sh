@@ -20,7 +20,7 @@ if [[ $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.sh") != "" ]] &&  
     else
         bash -c "${kibana_cmd}" "${kibana_args[@]}" > "$log_file" 2>&1 &
     fi
-    readonly kibana_pid="$!"
+    kibana_pid="$!"
 
     if [[ "$KIBANA_FORCE_INITSCRIPTS" == "true" ]]; then
         info "Forcing execution of user files"
@@ -57,7 +57,7 @@ if [[ $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.sh") != "" ]] &&  
     touch /bitnami/kibana/.user_scripts_initialized
     echo "Tailing $log_file"
     readonly tail_cmd="$(command -v tail)"
-    readonly tail_flags=("--pid=${__run_pid}" "-n" "1000" "-f" "$log_file")
+    readonly tail_flags=("--pid=${kibana_pid}" "-n" "1000" "-f" "$log_file")
     if [[ $EUID -eq 0 ]]; then
         exec gosu "${KIBANA_DAEMON_USER}" "${tail_cmd}" "${tail_flags[@]}"
     else
