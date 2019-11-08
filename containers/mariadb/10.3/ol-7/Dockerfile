@@ -10,14 +10,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages audit-libs ca-certificates curl glibc gzip hostname keyutils-libs krb5-libs libaio libaio-devel libcap-ng libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pam pcre procps-ng sudo tar which zlib
-RUN . ./libcomponent.sh && component_unpack "mariadb" "10.3.18-4" --checksum a779f102c313991040eb2a99d4b3eebb3f467c3f61152afe30d4cf2a6a5bf69a
+RUN . ./libcomponent.sh && component_unpack "mariadb" "10.3.20-0" --checksum c32022b530a8f6c8e24569248da90bd8e01b40011c9ebf19aa1c65afa177e6f3
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && chmod u+x /usr/local/bin/gosu && mkdir -p /opt/bitnami/licenses && curl --silent -L https://raw.githubusercontent.com/tianon/gosu/master/LICENSE > /opt/bitnami/licenses/gosu-1.11.txt
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.3.18-ol-7-r66" \
+    BITNAMI_IMAGE_VERSION="10.3.20-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
