@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r525
+FROM bitnami/oraclelinux-extras:7-r526
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack suitecrm-7.11.9-0 --checksum 0a367f7ac5adc7486ec685a002ee
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="suitecrm" \
-    BITNAMI_IMAGE_VERSION="7.11.9-ol-7-r2" \
+    BITNAMI_IMAGE_VERSION="7.11.9-ol-7-r3" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
