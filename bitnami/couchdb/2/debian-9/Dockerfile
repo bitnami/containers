@@ -13,7 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "couchdb" "2.3.1-5" --checksum 80b15
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="couchdb" \
-    BITNAMI_IMAGE_VERSION="2.3.1-debian-9-r45" \
+    BITNAMI_IMAGE_VERSION="2.3.1-debian-9-r46" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/couchdb/bin:$PATH"
 
