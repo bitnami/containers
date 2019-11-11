@@ -216,6 +216,49 @@ kafka:
   ...
 ```
 
+## Accessing Kafka with internal and external clients
+
+In order to use internal and external clients to access Kafka brokers you need to configure one listener for each kind of clients.
+
+To do so, add the following environment variables to your docker-compose:
+
+```diff
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
++     - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
++     - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,PLAINTEXT_HOST://:29092
++     - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+```
+
+And expose the extra port:
+
+```diff
+    ports:
+      - '9092:9092'
++     - '29092:29092'
+```
+
+### Producer and consumer using internal client
+
+These clients will use the docker hostname to connect to Kafka.
+
+```
+kafka-console-producer.sh --broker-list kafka:9092 --topic test
+kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic test --from-beginning
+```
+
+### Producer and consumer using external client
+
+These clients will use the localhost listener created in the port 29092 to connect to Kafka.
+
+```
+kafka-console-producer.sh --broker-list localhost:29092 --topic test
+kafka-console-consumer.sh --bootstrap-server localhost:29092 --topic test --from-beginning
+```
+
+More info about Kafka listeners can be found in [this great article](https://rmoff.net/2018/08/02/kafka-listeners-explained/)
+
 ## Security
 
 The Bitnami Kafka docker image disables the PLAINTEXT listener for security reasons.
