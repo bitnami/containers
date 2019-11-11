@@ -8,12 +8,12 @@ ENV HOME="/" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libevent-2.0-5 libsasl2-2 libsasl2-modules sasl2-bin
-RUN . ./libcomponent.sh && component_unpack "memcached" "1.5.19-2" --checksum 09ff4555c91f7937ac3b0f4558697d86d6b1cd5cbb11d2cc98cab44b7c45149b
+RUN . ./libcomponent.sh && component_unpack "memcached" "1.5.20-0" --checksum 226a749c2bc050f657c5c8a24c491f34d24644f50de1b59f106809b52d4ddba0
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.19-debian-9-r33" \
+    BITNAMI_IMAGE_VERSION="1.5.20-debian-9-r0" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
 
 EXPOSE 11211
