@@ -8,12 +8,12 @@ ENV HOME="/" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6
-RUN . ./libcomponent.sh && component_unpack "redis-sentinel" "5.0.5-2" --checksum 6e07f0df41a87f98f7d74aa616a64a8a2dd4482b58d3a86c39eef1255d8c63b0
+RUN . ./libcomponent.sh && component_unpack "redis-sentinel" "5.0.6-0" --checksum 229ab184c1216f26278dbb7866703ee8f8fc82e7a37015fc9b840a48db5bcea9
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="5.0.5-debian-9-r178" \
+    BITNAMI_IMAGE_VERSION="5.0.6-debian-9-r0" \
     PATH="/opt/bitnami/redis-sentinel/bin:$PATH"
 
 EXPOSE 26379
