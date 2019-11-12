@@ -43,8 +43,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.14.0-ol-7-r127` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.14.0-ol-7-r127/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.14.0-debian-9-r119`, `1`, `1.14.0`, `1.14.0-r119`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/1.14.0-debian-9-r119/1/debian-9/Dockerfile)
+* [`2-ol-7`, `2.0.0-ol-7-r0` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/2.0.0-ol-7-r0/2/ol-7/Dockerfile)
+* [`2-debian-9`, `0.0.0-debian-9-r0`, `2`, `0.0.0`, `0.0.0-r0`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/0.0.0-debian-9-r0/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-serving GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-serving).
 
@@ -65,7 +65,7 @@ $ docker pull bitnami/tensorflow-serving:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/tensorflow-serving:latest 'https://github.com/bitnami/bitnami-docker-tensorflow-serving.git#master:1/debian-9'
+$ docker build -t bitnami/tensorflow-serving:latest 'https://github.com/bitnami/bitnami-docker-tensorflow-serving.git#master:2/debian-9'
 ```
 
 # Persisting your configuration

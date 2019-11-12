@@ -1,0 +1,7 @@
+{
+  "enableMonitoring": "{{$global.env.TENSORFLOW_SERVING_ENABLE_MONITORING}}",
+  "modelName": "{{$global.env.TENSORFLOW_SERVING_MODEL_NAME}}",
+  "monitoringPath": "{{$global.env.TENSORFLOW_SERVING_MONITORING_PATH}}",
+  "port": "{{$global.env.TENSORFLOW_SERVING_PORT_NUMBER}}",
+  "restApiPort": "{{$global.env.TENSORFLOW_SERVING_REST_API_PORT_NUMBER}}"
+}
