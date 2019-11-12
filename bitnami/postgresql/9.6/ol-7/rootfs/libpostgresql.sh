@@ -142,6 +142,19 @@ export POSTGRESQL_REPLICATION_USER="${POSTGRESQL_REPLICATION_USER:-}"
 export POSTGRESQL_SYNCHRONOUS_COMMIT_MODE="${POSTGRESQL_SYNCHRONOUS_COMMIT_MODE:-on}"
 export POSTGRESQL_FSYNC="${POSTGRESQL_FSYNC:-on}"
 export POSTGRESQL_USERNAME="${POSTGRESQL_USERNAME:-postgres}"
+export POSTGRESQL_ENABLE_LDAP="${POSTGRESQL_ENABLE_LDAP:-no}"
+export POSTGRESQL_LDAP_URL="${POSTGRESQL_LDAP_URL:-}"
+export POSTGRESQL_LDAP_PREFIX="${POSTGRESQL_LDAP_PREFIX:-}"
+export POSTGRESQL_LDAP_SUFFIX="${POSTGRESQL_LDAP_SUFFIX:-}"
+export POSTGRESQL_LDAP_SERVER="${POSTGRESQL_LDAP_SERVER:-}"
+export POSTGRESQL_LDAP_PORT="${POSTGRESQL_LDAP_PORT:-}"
+export POSTGRESQL_LDAP_SCHEME="${POSTGRESQL_LDAP_SCHEME:-}"
+export POSTGRESQL_LDAP_TLS="${POSTGRESQL_LDAP_TLS:-}"
+export POSTGRESQL_LDAP_BASE_DN="${POSTGRESQL_LDAP_BASE_DN:-}"
+export POSTGRESQL_LDAP_BIND_DN="${POSTGRESQL_LDAP_BIND_DN:-}"
+export POSTGRESQL_LDAP_BIND_PASSWORD="${POSTGRESQL_LDAP_BIND_PASSWORD:-}"
+export POSTGRESQL_LDAP_SEARCH_ATTR="${POSTGRESQL_LDAP_SEARCH_ATTR:-}"
+export POSTGRESQL_LDAP_SEARCH_FILTER="${POSTGRESQL_LDAP_SEARCH_FILTER:-}"
 
 # Internal
 export POSTGRESQL_FIRST_BOOT="yes"
@@ -266,6 +279,14 @@ postgresql_validate() {
         fi
     fi
 
+    if ! is_yes_no_value "$POSTGRESQL_ENABLE_LDAP"; then
+        empty_password_error "The values allowed for POSTGRESQL_ENABLE_LDAP are: yes or no"
+    fi
+
+    if is_boolean_yes "$POSTGRESQL_ENABLE_LDAP" && [[ -n "$POSTGRESQL_LDAP_URL" ]] && [[ -n "$POSTGRESQL_LDAP_SERVER" ]]; then
+        empty_password_error "You can not set POSTGRESQL_LDAP_URL and POSTGRESQL_LDAP_SERVER at the same time. Check your LDAP configuration."
+    fi
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -291,6 +312,62 @@ postgresql_create_config() {
 }
 
 ########################
+# Create ldap auth configuration in pg_hba,
+# but keeps postgres user to authenticate locally
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+postgresql_ldap_auth_configuration() {
+    postgresql_info "Generating LDAP authentication configuration"
+    local ldap_configuration=""
+
+    if [[ -n "$POSTGRESQL_LDAP_URL" ]]; then
+        ldap_configuration="ldapurl=\"$POSTGRESQL_LDAP_URL\""
+    else
+        ldap_configuration="ldapserver=${POSTGRESQL_LDAP_SERVER}"
+
+        [[ -n "$POSTGRESQL_LDAP_PREFIX" ]] && ldap_configuration+=" ldapprefix=\"${POSTGRESQL_LDAP_PREFIX}\""
+        [[ -n "$POSTGRESQL_LDAP_SUFFIX" ]] && ldap_configuration+=" ldapsuffix=\"${POSTGRESQL_LDAP_SUFFIX}\""
+        [[ -n "$POSTGRESQL_LDAP_PORT" ]] && ldap_configuration+=" ldapport=${POSTGRESQL_LDAP_PORT}"
+        [[ -n "$POSTGRESQL_LDAP_BASE_DN" ]] && ldap_configuration+=" ldapbasedn=\"${POSTGRESQL_LDAP_BASE_DN}\""
+        [[ -n "$POSTGRESQL_LDAP_BIND_DN" ]] && ldap_configuration+=" ldapbinddn=\"${POSTGRESQL_LDAP_BIND_DN}\""
+        [[ -n "$POSTGRESQL_LDAP_BIND_PASSWORD" ]] && ldap_configuration+=" ldapbindpasswd=${POSTGRESQL_LDAP_BIND_PASSWORD}"
+        [[ -n "$POSTGRESQL_LDAP_SEARCH_ATTR" ]] && ldap_configuration+=" ldapsearchattribute=${POSTGRESQL_LDAP_SEARCH_ATTR}"
+        [[ -n "$POSTGRESQL_LDAP_SEARCH_FILTER" ]] && ldap_configuration+=" ldapsearchfilter=\"${POSTGRESQL_LDAP_SEARCH_FILTER}\""
+        [[ -n "$POSTGRESQL_LDAP_TLS" ]] && ldap_configuration+=" ldaptls=${POSTGRESQL_LDAP_TLS}"
+        [[ -n "$POSTGRESQL_LDAP_SCHEME" ]] && ldap_configuration+=" ldapscheme=${POSTGRESQL_LDAP_SCHEME}"
+    fi
+
+    cat << EOF > "$POSTGRESQL_PGHBA_FILE"
+host     all             postgres        0.0.0.0/0               trust
+host     all             postgres        ::1/128                 trust
+host     all             all             0.0.0.0/0               ldap $ldap_configuration
+host     all             all             ::1/128                 ldap $ldap_configuration
+EOF
+}
+
+########################
+# Create local auth configuration in pg_hba
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+postgresql_password_auth_configuration() {
+    postgresql_info "Generating local authentication configuration"
+    cat << EOF > "$POSTGRESQL_PGHBA_FILE"
+host     all             all             0.0.0.0/0               trust
+host     all             all             ::1/128                 trust
+EOF
+}
+
+########################
 # Create basic pg_hba.conf file
 # Globals:
 #   POSTGRESQL_*
@@ -301,10 +378,12 @@ postgresql_create_config() {
 #########################
 postgresql_create_pghba() {
     postgresql_info "pg_hba.conf file not detected. Generating it..."
-    cat << EOF > "$POSTGRESQL_PGHBA_FILE"
-host     all             all             0.0.0.0/0               trust
-host     all             all             ::1/128                 trust
-EOF
+
+    if is_boolean_yes "$POSTGRESQL_ENABLE_LDAP"; then
+        postgresql_ldap_auth_configuration
+    else
+        postgresql_password_auth_configuration
+    fi
 }
 
 ########################

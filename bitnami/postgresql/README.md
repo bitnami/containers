@@ -53,7 +53,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10-ol-7`, `10.10.0-ol-7-r105` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.10.0-ol-7-r105/10/ol-7/Dockerfile)
 * [`10-debian-9`, `10.10.0-debian-9-r92`, `10`, `10.10.0`, `10.10.0-r92` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.10.0-debian-9-r92/10/debian-9/Dockerfile)
 * [`10-centos-7`, `10.10.0-centos-7-r106` (10/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.10.0-centos-7-r106/10/centos-7/Dockerfile)
-* [`9.6-ol-7`, `9.6.15-ol-7-r107` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.15-ol-7-r107/9.6/ol-7/Dockerfile)
+* [`9.6-ol-7`, `9.6.15-ol-7-r108` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.15-ol-7-r108/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.15-debian-9-r92`, `9.6`, `9.6.15`, `9.6.15-r92` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.15-debian-9-r92/9.6/debian-9/Dockerfile)
 * [`9.6-centos-7`, `9.6.15-centos-7-r106` (9.6/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.15-centos-7-r106/9.6/centos-7/Dockerfile)
 
@@ -429,6 +429,32 @@ postgres-#       from pg_stat_replication;
 
 > **Note:** For more advanced setups, you can define different replication groups with the `application_name` parameter, by setting the `POSTGRESQL_CLUSTER_APP_NAME` environment variable.
 
+## LDAP authentication
+
+In order to use LDAP authentication you need to enable it setting the environment variable `POSTGRESQL_ENABLE_LDAP` to  `yes`.
+
+There are two ways of setting up the LDAP configuration:
+
+- By configuring `POSTGRESQL_LDAP_URL`, where you can configure all the associated parameters in the URL.
+- Setting up the parameters `POSTGRESQL_LDAP_xxxx` independently.
+
+The LDAP related parameters are:
+
+* `POSTGRESQL_LDAP_SERVER`: IP addresses or names of the LDAP servers to connect to. Separated by spaces.
+* `POSTGRESQL_LDAP_PORT`: Port number on the LDAP server to connect to
+* `POSTGRESQL_LDAP_SCHEME`: Set to `ldaps` to use LDAPS. Default to none.
+* `POSTGRESQL_LDAP_TLS`: Set to `1` to use TLS encryption. Default to none.
+* `POSTGRESQL_LDAP_PREFIX`: String to prepend to the user name when forming the DN to bind. Default to none. 
+* `POSTGRESQL_LDAP_SUFFIX`:  String to append to the user name when forming the DN to bind. Default to none. 
+* `POSTGRESQL_LDAP_BASE_DN`: Root DN to begin the search for the user in. Default to none.
+* `POSTGRESQL_LDAP_BIND_DN`: DN of user to bind to LDAP. Default to none.
+* `POSTGRESQL_LDAP_BIND_PASSWORD`: Password for the user to bind to LDAP. Default to none.
+* `POSTGRESQL_LDAP_SEARCH_ATTR`: Attribute to match against the user name in the search. Default to none.
+* `POSTGRESQL_LDAP_SEARCH_FILTER`: The search filter to use when doing search+bind authentication. Default to none.
+* `POSTGRESQL_LDAP_URL`: URL to connect to, in the format: `ldap[s]://host[:port]/basedn[?[attribute][?[scope][?[filter]]]]` .
+
+For more information refer to [Postgresql LDAP auth configuration documentation](https://www.postgresql.org/docs/12/auth-ldap.html).
+
 ## Configuration file
 
 The image looks for `postgresql.conf` file in `/opt/bitnami/postgresql/conf/`. You can mount a volume at `/bitnami/postgresql/conf/` and copy/edit the `postgresql.conf` file in the `/path/to/postgresql-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
@@ -668,6 +694,11 @@ $ docker-compose up postgresql
 ```
 
 # Notable Changes
+
+
+##9.6.15-r93, 9.6.15-ol-7-r108, 9.6.15-centos-7-r107, 10.10.0-r923, 10.10.0-ol-7-r106, 10.10.0-centos-7-r107, 11.5.0-r89, 11.5.0-centos-7-r103, 11.5.0-ol-7-r108, 12.0.0-r21, 12.0.0-centos-7-r34 and 12.0.0-ol-7-r32
+
+- Adds LDAP authentication support
 
 ## 9.6.15-r82, 9.6.15-ol-7-r92, 9.6.15-centos-7-r91, 10.10.0-r82, 10.10.0-ol-7-r90, 10.10.0-centos-7-r91, 11.5.0-r80, 11.5.0-centos-7-r87, 11.5.0-ol-7-r92, 12.0.0-r11, 12.0.0-centos-7-r17 and 12.0.0-ol-7-r17
 
