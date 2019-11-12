@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r526
+FROM bitnami/oraclelinux-extras:7-r527
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack moodle-3.7.3-0 --checksum 9353a598c998b411a8cf89d355740ce
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.7.3-ol-7-r3" \
+    BITNAMI_IMAGE_VERSION="3.7.3-ol-7-r4" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
