@@ -1,10 +1,10 @@
-FROM bitnami/oraclelinux-extras:7-r526
+FROM bitnami/oraclelinux-extras:7-r527
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds-libs freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmcrypt libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libuv libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
 RUN bitnami-pkg unpack apache-2.4.41-2 --checksum bf50a12c033c1ff0e1cb7696cc1abd29a132cc1c5225e9d2fdbb3c6584e349fe
-RUN bitnami-pkg install redis-client-5.0.5-1 --checksum f97c537a52a8566d0968d0418ef52f1a97f9fe205ed4ce06cc7daca8b094813c
+RUN bitnami-pkg install redis-client-5.0.6-0 --checksum f43d4a651273315ede72478a99ad6c1d4c7d6dc2efb20d3f36f404c60da47087
 RUN bitnami-pkg unpack php-7.1.33-0 --checksum f0d4060d152165ce210c3433b2fe98a9462fb5a5c64a855228986c217667c93c
 RUN bitnami-pkg install mysql-client-10.3.20-0 --checksum 6e895c7c56273bf724d87014c70187045fa0a399d9f24067e84f27475e3c071a
 RUN bitnami-pkg install mongodb-client-4.0.13-0 --checksum e0d6f27b173e6c09071a3b3416be0d79f606f2472ed8864db770d025040cf22a
@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack dreamfactory-3.0.1-0 --checksum 4adfec9855b36206a047c8436
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="3.0.1-ol-7-r87" \
+    BITNAMI_IMAGE_VERSION="3.0.1-ol-7-r88" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
     MARIADB_PORT_NUMBER="3306" \
