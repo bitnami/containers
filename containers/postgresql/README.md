@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`12-ol-7`, `12.0.0-ol-7-r33` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.0.0-ol-7-r33/12/ol-7/Dockerfile)
-* [`12-debian-9`, `12.0.0-debian-9-r20`, `12`, `12.0.0`, `12.0.0-r20` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.0.0-debian-9-r20/12/debian-9/Dockerfile)
+* [`12-debian-9`, `12.0.0-debian-9-r21`, `12`, `12.0.0`, `12.0.0-r21` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.0.0-debian-9-r21/12/debian-9/Dockerfile)
 * [`12-centos-7`, `12.0.0-centos-7-r34` (12/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.0.0-centos-7-r34/12/centos-7/Dockerfile)
 * [`11-ol-7`, `11.5.0-ol-7-r108` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.5.0-ol-7-r108/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.5.0-debian-9-r88`, `11`, `11.5.0`, `11.5.0-r88`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.5.0-debian-9-r88/11/debian-9/Dockerfile)
@@ -696,7 +696,7 @@ $ docker-compose up postgresql
 # Notable Changes
 
 
-##9.6.15-r93, 9.6.15-ol-7-r108, 9.6.15-centos-7-r107, 10.10.0-r923, 10.10.0-ol-7-r106, 10.10.0-centos-7-r107, 11.5.0-r89, 11.5.0-centos-7-r103, 11.5.0-ol-7-r108, 12.0.0-r21, 12.0.0-centos-7-r34 and 12.0.0-ol-7-r32
+## 9.6.15-r93, 9.6.15-ol-7-r108, 9.6.15-centos-7-r107, 10.10.0-r923, 10.10.0-ol-7-r106, 10.10.0-centos-7-r107, 11.5.0-r89, 11.5.0-centos-7-r103, 11.5.0-ol-7-r108, 12.0.0-r21, 12.0.0-centos-7-r34 and 12.0.0-ol-7-r32
 
 - Adds LDAP authentication support
 
