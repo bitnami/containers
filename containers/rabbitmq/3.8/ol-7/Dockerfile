@@ -16,7 +16,7 @@ RUN . ./libcomponent.sh && component_unpack "rabbitmq" "3.8.1-0" --checksum 179e
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.8.1-ol-7-r12" \
+    BITNAMI_IMAGE_VERSION="3.8.1-ol-7-r13" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
