@@ -13,5 +13,12 @@ set -o pipefail
 # Load Fluentd environment
 eval "$(fluentd_env)"
 
-# Ensure non-root user has write permissions on a set of directories
-chmod -R g+rwX "$FLUENTD_BASE_DIR"
+for subdir in "gems" "specifications" "cache" "doc"; do
+    ensure_dir_exists "$FLUENTD_BASE_DIR/$subdir"
+    chmod -R g+rwX "$FLUENTD_BASE_DIR/$subdir"
+done
+
+for dir in "$FLUENTD_CONF_DIR" "$FLUENTD_LOG_DIR" "$FLUENTD_PLUGINS_DIR"; do
+    ensure_dir_exists "$dir"
+    chmod -R g+rwX "$dir"
+done
