@@ -25,8 +25,8 @@ export FLUENTD_LOG_DIR="${FLUENTD_BASE_DIR}/logs"
 export FLUENTD_PLUGINS_DIR="${FLUENTD_BASE_DIR}/plugins"
 
 # Users
-export FLUENTD_DAEMON_USER="fluentd"
-export FLUENTD_DAEMON_GROUP="fluentd"
+export FLUENTD_DAEMON_USER="${FLUENTD_DAEMON_USER:-fluentd}"
+export FLUENTD_DAEMON_GROUP="${FLUENTD_DAEMON_GROUP:-fluentd}"
 
 # Configuration
 export FLUENTD_CONF="${FLUENTD_CONF:-}"
