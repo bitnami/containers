@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "redis-sentinel" "5.0.6-0" --checksu
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="5.0.6-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="5.0.6-ol-7-r2" \
     PATH="/opt/bitnami/redis-sentinel/bin:$PATH"
 
 EXPOSE 26379
