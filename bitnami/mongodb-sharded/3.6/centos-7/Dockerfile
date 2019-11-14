@@ -1,4 +1,4 @@
-FROM bitnami/centos-extras-base:7-r204
+FROM bitnami/centos-extras-base:7-r205
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "mongodb" "3.6.15-0" --checksum caa2
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.6.15-centos-7-r10" \
+    BITNAMI_IMAGE_VERSION="3.6.15-centos-7-r11" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mongodb/bin:$PATH"
 
