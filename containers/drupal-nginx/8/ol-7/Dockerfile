@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r528
+FROM bitnami/oraclelinux-extras:7-r529
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,14 +6,14 @@ RUN install_packages GeoIP bzip2-libs cyrus-sasl-lib freetds-libs freetype glibc
 RUN bitnami-pkg unpack php-7.3.11-0 --checksum 88001699b01c3677a29c36a865db155d36d7cac6df0173934d43b952b3e0714a
 RUN bitnami-pkg unpack nginx-1.16.1-2 --checksum 8c94ff1560c97e485e56f5abcf892a4794d0b0b68facd86d4ecf22cf9ac52d7d
 RUN bitnami-pkg unpack mysql-client-10.3.20-0 --checksum 6e895c7c56273bf724d87014c70187045fa0a399d9f24067e84f27475e3c071a
-RUN bitnami-pkg unpack drupal-8.7.9-0 --checksum 36b0dcf637cda1d4dcf5780ff6f4ff2f7d76c554f0e5282c4048c98376509c15
+RUN bitnami-pkg unpack drupal-8.7.10-0 --checksum 1f92469c6560e6e2652bc9ad1c35838dc4cbb767346c7a3c6419c3c4610d2a02
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="8.7.9-ol-7-r7" \
+    BITNAMI_IMAGE_VERSION="8.7.10-ol-7-r0" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
