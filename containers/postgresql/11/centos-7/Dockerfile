@@ -1,4 +1,4 @@
-FROM bitnami/centos-extras-base:7-r204
+FROM bitnami/centos-extras-base:7-r205
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,10 +12,10 @@ RUN install_packages glibc keyutils-libs krb5-libs libcom_err libedit libgcc lib
 RUN . ./libcomponent.sh && component_unpack "postgresql" "11.5.0-6" --checksum 881fdab9aaef86558184f8ee283d3b965d17bf0ff88c8edd582cf6a8c67ed2cf
 
 COPY rootfs /
-RUN yum --enablerepo base,updates,extras -y install epel-release && yum --enablerepo base,updates,extras -y update && yum --enablerepo base,updates -y install nss_wrapper
+RUN yum --enablerepo base,updates,extras -y install epel-release && yum --nogpgcheck --enablerepo base,updates,extras -y update && yum --enablerepo base,updates -y install nss_wrapper
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="11.5.0-centos-7-r104" \
+    BITNAMI_IMAGE_VERSION="11.5.0-centos-7-r105" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
