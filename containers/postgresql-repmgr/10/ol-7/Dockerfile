@@ -9,14 +9,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libedit libgcc libicu libselinux libstdc++ libuuid libxml2 libxslt ncurses-libs nss-softokn-freebl openssl-libs pcre procps-ng sqlite sudo tar which xz-libs zlib
-RUN . ./libcomponent.sh && component_unpack "postgresql-repmgr" "10.10.0-2" --checksum ae594a7971f292d07eb3b6968a76b81a3445815ce35de43766d985b48a2acc1a
+RUN install_packages ca-certificates curl cyrus-sasl-lib glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libedit libgcc libicu libselinux libstdc++ libuuid libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre procps-ng sqlite sudo tar which xz-libs zlib
+RUN . ./libcomponent.sh && component_unpack "postgresql-repmgr" "10.11.0-0" --checksum b98b75abcd50ac99bd66f6aef8b2f5b209ac2deb315b2d9f58c60621da1d426f
 
 COPY rootfs /
 RUN rpm -Uvh --nodeps $(repoquery --location nss_wrapper)
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql-repmgr" \
-    BITNAMI_IMAGE_VERSION="10.10.0-ol-7-r36" \
+    BITNAMI_IMAGE_VERSION="10.11.0-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     NSS_WRAPPER_LIB="/usr/lib64/libnss_wrapper.so" \
     PATH="/opt/bitnami/postgresql-repmgr/bin:/opt/bitnami/repmgr/bin:/opt/bitnami/postgresql/bin:$PATH"
