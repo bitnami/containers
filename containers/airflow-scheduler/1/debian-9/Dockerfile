@@ -9,7 +9,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 RUN install_packages libbsd0 libbz2-1.0 libc6 libcomerr2 libedit2 libffi6 libgcc1 libgssapi-krb5-2 libicu57 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libmariadbclient18 libncurses5 libnss-wrapper libreadline7 libsasl2-2 libsqlite3-0 libssl1.1 libstdc++6 libtinfo5 libuuid1 libxml2 libxslt1.1 zlib1g
 RUN bitnami-pkg install python-3.6.9-2 --checksum 7ed6019242d0e6928c6cb314e554d929970f6bbaa0b4c6c2f8631d4cf5f31f3b
 RUN bitnami-pkg install postgresql-client-10.10.0-1 --checksum 77f89198ede517c8355f466642643cc787989b16bd136c0efcfea0a2d21282cb
-RUN bitnami-pkg unpack airflow-scheduler-1.10.5-1 --checksum 1923ea38ffcddf5305fb63d8d01926b0a302eb4df5d73dae6fc5ecee91d4c407
+RUN bitnami-pkg unpack airflow-scheduler-1.10.6-0 --checksum 9e008bc8bb392f96996eb7efa6de3b3a95557b3451963caa175cbf1aff17f302
 
 COPY rootfs /
 ENV AIRFLOW_DATABASE_HOST="postgresql" \
@@ -27,7 +27,7 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_HOST="airflow" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="airflow-scheduler" \
-    BITNAMI_IMAGE_VERSION="1.10.5-debian-9-r67" \
+    BITNAMI_IMAGE_VERSION="1.10.6-debian-9-r0" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
     LD_PRELOAD="/usr/lib/libnss_wrapper.so" \
     LNAME="airflow" \
