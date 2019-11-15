@@ -42,7 +42,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`13-ol-7-prod`, `13.1.0-ol-7-r9-prod` (13-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.1.0-ol-7-r9-prod/13-prod/ol-7/Dockerfile)
+* [`13-ol-7-prod`, `13.1.0-ol-7-r10-prod` (13-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.1.0-ol-7-r10-prod/13-prod/ol-7/Dockerfile)
 * [`13-ol-7`, `13.1.0-ol-7-r10` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.1.0-ol-7-r10/13/ol-7/Dockerfile)
 * [`13-debian-9-prod`, `13.1.0-debian-9-r7-prod`, `13-prod`, `13.1.0-prod`, `13.1.0-r7-prod` (13-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.1.0-debian-9-r7-prod/13-prod/debian-9/Dockerfile)
 * [`13-debian-9`, `13.1.0-debian-9-r7`, `13`, `13.1.0`, `13.1.0-r7` (13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.1.0-debian-9-r7/13/debian-9/Dockerfile)
