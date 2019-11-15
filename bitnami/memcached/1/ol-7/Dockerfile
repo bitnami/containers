@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "memcached" "1.5.20-0" --checksum ed
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.20-ol-7-r3" \
+    BITNAMI_IMAGE_VERSION="1.5.20-ol-7-r4" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
 
 EXPOSE 11211
