@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r377
+FROM bitnami/minideb-extras-base:stretch-r379
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages libc6 libgeoip1 libpcre3 libssl1.1 zlib1g
 RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-2" --checksum 9d8592ed4d88b4b6d3d6480a63f39edecb1dc79bead112849717f8243a488b9a
-RUN . ./libcomponent.sh && component_unpack "harbor" "1.9.1-0" --checksum a2586e27b384f696daa05deb709e00a8ae495bbe3830b5ce933051f269f1ef1b
+RUN . ./libcomponent.sh && component_unpack "harbor" "1.9.2-0" --checksum f189e6a5791aa545cddeb7543a157d7e53699778a5e3d0e556137e38547e32cb
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 RUN chmod -R g+rwX /opt/bitnami/nginx/conf
@@ -19,7 +19,7 @@ COPY rootfs /
 RUN /postunpack.sh
 RUN /postunpack-harbor-portal.sh
 ENV BITNAMI_APP_NAME="harbor-portal" \
-    BITNAMI_IMAGE_VERSION="1.9.1-debian-9-r8" \
+    BITNAMI_IMAGE_VERSION="1.9.2-debian-9-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/harbor/bin:$PATH"
 
