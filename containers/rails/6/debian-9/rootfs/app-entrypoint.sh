@@ -92,7 +92,15 @@ if [[ "$1" = "bundle" ]] && [[ "$2" = "exec" ]]; then
   else
     if [[ -z $SKIP_DB_SETUP ]]; then
       log "Configuring the database..."
-      bundle exec rails db:create
+      while ! bundle exec rails db:create; do
+        counter=$((counter+1))
+        if [ $counter == 30 ]; then
+          log "Error: db:create failed"
+          exit 1
+        fi
+        log "Trying to execute db:create. Attempt $counter."
+        sleep 5
+      done
     fi
     log "Initialization finished!!!"
     touch $INIT_SEM
@@ -100,7 +108,15 @@ if [[ "$1" = "bundle" ]] && [[ "$2" = "exec" ]]; then
 
   if [[ -z $SKIP_DB_SETUP ]]; then
     log "Applying database migrations (db:migrate)..."
-    bundle exec rails db:migrate
+    while ! bundle exec rails db:migrate; do
+      counter=$((counter+1))
+      if [ $counter == 30 ]; then
+        log "Error: db:migrate failed"
+        exit 1
+      fi
+      log "Trying to execute db:migrate. Attempt $counter."
+      sleep 5
+    done
   fi
 fi
 
