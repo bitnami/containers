@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.9.2-ol-7-r13` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-registryctl/blob/1.9.2-ol-7-r13/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.9.2-debian-9-r9`, `1`, `1.9.2`, `1.9.2-r9`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-registryctl/blob/1.9.2-debian-9-r9/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.9.2-debian-9-r10`, `1`, `1.9.2`, `1.9.2-r10`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-registryctl/blob/1.9.2-debian-9-r10/1/debian-9/Dockerfile)
 * [`1-centos-7`, `1.9.2-centos-7-r0` (1/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-registryctl/blob/1.9.2-centos-7-r0/1/centos-7/Dockerfile)
 
 # Configuration
