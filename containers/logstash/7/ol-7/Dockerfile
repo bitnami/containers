@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "java" "1.8.232-0" --checksum fbac74
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="logstash" \
-    BITNAMI_IMAGE_VERSION="7.4.2-ol-7-r19" \
+    BITNAMI_IMAGE_VERSION="7.4.2-ol-7-r20" \
     PATH="/opt/bitnami/logstash/bin:/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 8080
