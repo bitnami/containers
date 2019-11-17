@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-runtimes:7-r502
+FROM bitnami/oraclelinux-runtimes:7-r503
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/ruby-2.4.9-0-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.4.9-ol-7-r48" \
+    BITNAMI_IMAGE_VERSION="2.4.9-ol-7-r49" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
