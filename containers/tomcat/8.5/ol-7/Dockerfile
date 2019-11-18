@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "tomcat" "8.5.47-0" --checksum 5cb32
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="8.5.47-ol-7-r38" \
+    BITNAMI_IMAGE_VERSION="8.5.47-ol-7-r39" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
 EXPOSE 8080
