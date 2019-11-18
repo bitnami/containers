@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6
-RUN . ./libcomponent.sh && component_unpack "harbor-core" "1.9.2-0" --checksum 9692b9f8303950402ec5129628a39e44038b692d99a1d60fe4a7e41477aa79d1
+RUN . ./libcomponent.sh && component_unpack "harbor-core" "1.9.3-0" --checksum 033952ee7ae27d9857fbd2dc66ed161cf827ddb29ecc0a0d4d1bc35fc606e50b
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-core" \
-    BITNAMI_IMAGE_VERSION="1.9.2-debian-9-r10" \
+    BITNAMI_IMAGE_VERSION="1.9.3-debian-9-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-core/bin:$PATH"
 
