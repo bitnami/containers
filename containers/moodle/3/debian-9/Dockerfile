@@ -7,13 +7,13 @@ RUN bitnami-pkg unpack apache-2.4.41-2 --checksum 54e604bee81357824146780a26fbd9
 RUN bitnami-pkg unpack php-7.3.11-0 --checksum 65d3eb32f36d3017a4d729670cf0362108335e8af19f82ae4d6283db4cf4a73f
 RUN bitnami-pkg unpack mysql-client-10.1.43-0 --checksum 7b4dce9c8a619e8af1b67a3df57f66bfd8d336bc1a38e7076a9b15a9b983f2d1
 RUN bitnami-pkg install libphp-7.3.11-0 --checksum 1307c158dcc78e3c91b6b24d319ddd01d476093ba7ac6ba2b9d224bd4ab2c97a
-RUN bitnami-pkg unpack moodle-3.7.3-0 --checksum fcf702846fea947d84c6f1a8f80d05eab748cf7518a3a0285ba13d313b9bbe33
+RUN bitnami-pkg unpack moodle-3.8.0-0 --checksum 5391b4c394346c48fe082c4c1ece54e9a7fccd04c562d1175748a7d316f95ba9
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.7.3-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="3.8.0-debian-9-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
