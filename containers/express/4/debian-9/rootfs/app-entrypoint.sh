@@ -4,7 +4,6 @@
 . /opt/bitnami/base/helpers
 
 print_welcome_page
-
 #!/bin/bash
 
 . /opt/bitnami/express/functions
