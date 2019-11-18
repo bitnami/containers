@@ -10,12 +10,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel procps-ng sudo tar which
-RUN . ./libcomponent.sh && component_unpack "harbor-notary-server" "1.9.2-0" --checksum 8670facfa45aa00b2c3b74ee306f2eb040c03be73fd4194d6a62d165408614bd
+RUN . ./libcomponent.sh && component_unpack "harbor-notary-server" "1.9.3-0" --checksum 1acb45ff86b5512ad3097937315771d617e64d00a68120733820f3198442e7a0
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-notary-server" \
-    BITNAMI_IMAGE_VERSION="1.9.2-ol-7-r14" \
+    BITNAMI_IMAGE_VERSION="1.9.3-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-notary-server/bin:$PATH" \
     SERVICE_NAME="notary_server"
