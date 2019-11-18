@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6
-RUN . ./libcomponent.sh && component_unpack "harbor-jobservice" "1.9.2-0" --checksum 5c0965965d9eacbb17a217107b6c40ae7e28ac25901581ada16f2caa8a245366
+RUN . ./libcomponent.sh && component_unpack "harbor-jobservice" "1.9.3-0" --checksum 4a8b8f284ebc6b64bb430b3ef6e31e63fb917723977aa3ec99ec42728b538351
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-jobservice" \
-    BITNAMI_IMAGE_VERSION="1.9.2-debian-9-r10" \
+    BITNAMI_IMAGE_VERSION="1.9.3-debian-9-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-jobservice/bin:$PATH"
 
