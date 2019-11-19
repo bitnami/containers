@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages libc6 libgeoip1 libpcre3 libssl1.1 zlib1g
 RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-2" --checksum 9d8592ed4d88b4b6d3d6480a63f39edecb1dc79bead112849717f8243a488b9a
-RUN . ./libcomponent.sh && component_unpack "kubeapps" "1.6.1-0" --checksum a36dc5dd749394f48120ff2215dce0ccade5a9455c4e375fe1cede66f566c299
+RUN . ./libcomponent.sh && component_unpack "kubeapps" "1.7.0-0" --checksum 5a46f7d7e90f7ee6eaf34fae301dc34dd239c989502114c7ccdd26e6edbde0ff
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 RUN chmod -R g+rwX /opt/bitnami/nginx/conf
@@ -21,7 +21,7 @@ RUN rm -rf /app && \
     ln -sf /opt/bitnami/kubeapps /opt/bitnami/kubeapps-dashboard && \
     mv /opt/bitnami/kubeapps/build /app
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.6.1-debian-9-r11" \
+    BITNAMI_IMAGE_VERSION="1.7.0-debian-9-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/kubeapps/bin:$PATH"
 
