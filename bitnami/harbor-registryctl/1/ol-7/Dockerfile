@@ -16,7 +16,7 @@ RUN . ./libcomponent.sh && component_unpack "harbor-registry" "1.9.3-0" --checks
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-registryctl" \
-    BITNAMI_IMAGE_VERSION="1.9.3-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="1.9.3-ol-7-r1" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-registryctl/bin:/opt/bitnami/harbor-registry/bin:$PATH"
 
