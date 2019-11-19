@@ -7,12 +7,12 @@ ENV HOME="/" \
     OS_NAME="linux"
 
 # Install required system packages and dependencies
-RUN . ./libcomponent.sh && component_unpack "consul" "1.6.1-2" --checksum d570375b9a0a42abd53d116b988adb02ffadf7a3db9b800edd22a716bddfb146
+RUN . ./libcomponent.sh && component_unpack "consul" "1.6.2-0" --checksum ce4d2fc2fc8b7aa3befd6bba7b614c9374856531ce3401e522188951ce0aa12f
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.6.1-debian-9-r52" \
+    BITNAMI_IMAGE_VERSION="1.6.2-debian-9-r0" \
     PATH="/opt/bitnami/consul/bin:$PATH"
 
 EXPOSE 8300 8301 8500 8600
