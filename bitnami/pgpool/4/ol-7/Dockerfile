@@ -7,8 +7,8 @@ ENV OS_ARCH="x86_64" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages audit-libs ca-certificates curl glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcap-ng libcom_err libedit libgcc libicu libselinux libstdc++ libuuid libxml2 libxslt ncurses-libs nss-pam-ldapd nss-softokn-freebl openldap openldap-clients openssl-libs pam pcre procps-ng sudo tar unzip which xz-libs zlib
-RUN . ./libcomponent.sh && component_unpack "postgresql-client" "10.10.0-1" --checksum 24291521359e5224519371ea621712f55de4afd559abb7792c882c99c68e9120
+RUN install_packages audit-libs ca-certificates curl cyrus-sasl-lib glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcap-ng libcom_err libedit libgcc libicu libselinux libstdc++ libuuid libxml2 libxslt ncurses-libs nspr nss nss-pam-ldapd nss-softokn-freebl nss-util openldap openldap-clients openssl-libs pam pcre procps-ng sudo tar unzip which xz-libs zlib
+RUN . ./libcomponent.sh && component_unpack "postgresql-client" "10.11.0-0" --checksum 7698c1aeb96133009652bfe6b05713c2450effcdc53f094194d06fe15a04f580
 RUN . ./libcomponent.sh && component_unpack "pgpool" "4.1.0-0" --checksum 5908051d048dc81ce94cb68eca57488a582369858396c00cf3d455aa29f20be6
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && chmod u+x /usr/local/bin/gosu && mkdir -p /opt/bitnami/licenses && curl --silent -L https://raw.githubusercontent.com/tianon/gosu/master/LICENSE > /opt/bitnami/licenses/gosu-1.11.txt
 RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/v1.0/wait-for-port.zip > /tmp/wait-for-port.zip && echo "8d26181f4629211b70db4f96236616056b1ed8e5920d8023f7c883071e76c1ed /tmp/wait-for-port.zip" | sha256sum --check && unzip -q -d /usr/local/bin -o /tmp/wait-for-port.zip wait-for-port && mkdir -p /opt/bitnami/licenses && curl --silent -L https://raw.githubusercontent.com/bitnami/wait-for-port/master/COPYING > /opt/bitnami/licenses/wait-for-port-1.0.txt
@@ -16,7 +16,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="pgpool" \
-    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r13" \
+    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r14" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/pgpool/bin:$PATH"
 
 EXPOSE 5432
