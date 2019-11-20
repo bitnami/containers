@@ -3,18 +3,18 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libffi6 libfreetype6 libgcc1 libgcrypt20 libgeoip1 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu57 libidn11 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmemcached11 libmemcachedutil2 libncurses5 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5 libtinfo5 libunistring0 libxml2 libxslt1.1 libzip4 zlib1g
-RUN bitnami-pkg unpack php-7.3.11-0 --checksum 65d3eb32f36d3017a4d729670cf0362108335e8af19f82ae4d6283db4cf4a73f
+RUN bitnami-pkg unpack php-7.3.11-1 --checksum 4f13049295556c7e9ba9e4071a9b74ee343b49c7c8ae8a057a2370773dbefd7f
 RUN bitnami-pkg install wp-cli-2.4.0-0 --checksum 3bf68efbc817708e466a6ba32dd8ec46408931c38b7e568c76a7bc2c76319578
-RUN bitnami-pkg unpack nginx-1.16.1-2 --checksum 9d8592ed4d88b4b6d3d6480a63f39edecb1dc79bead112849717f8243a488b9a
+RUN bitnami-pkg unpack nginx-1.16.1-3 --checksum 1a8f6f36c91ddd0f73a1bb5fd00f1e1d099213dff38c8032abc197d887df3531
 RUN bitnami-pkg unpack mysql-client-10.3.20-0 --checksum 743aff4ba4858e3eb7d3e10ec9d7ae08b5ddbbb3257cfbbba73062991605e5e6
-RUN bitnami-pkg unpack wordpress-5.3.0-0 --checksum 87102a95655d982fe1f6afa25e5b80d8ca2f2952a34b7b4a3714ba10e8df58b4
+RUN bitnami-pkg unpack wordpress-5.3.0-1 --checksum 2c034a91b87aebc25943b5e0d3a708e496706c3400f18669fd1c00aea1b104e3
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="5.3.0-debian-9-r4" \
+    BITNAMI_IMAGE_VERSION="5.3.0-debian-9-r5" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
