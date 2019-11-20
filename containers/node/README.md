@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`13-ol-7-prod`, `13.1.0-ol-7-r16-prod` (13-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.1.0-ol-7-r16-prod/13-prod/ol-7/Dockerfile)
 * [`13-ol-7`, `13.1.0-ol-7-r16` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.1.0-ol-7-r16/13/ol-7/Dockerfile)
 * [`13-debian-9`, `13.1.0-debian-9-r14`, `13`, `13.1.0`, `13.1.0-r14` (13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.1.0-debian-9-r14/13/debian-9/Dockerfile)
-* [`13-debian-9-prod`, `13.1.0-debian-9-r11-prod`, `13-prod`, `13.1.0-prod`, `13.1.0-r11-prod` (13-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.1.0-debian-9-r11-prod/13-prod/debian-9/Dockerfile)
+* [`13-debian-9-prod`, `13.1.0-debian-9-r12-prod`, `13-prod`, `13.1.0-prod`, `13.1.0-r12-prod` (13-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.1.0-debian-9-r12-prod/13-prod/debian-9/Dockerfile)
 * [`12-ol-7-prod`, `12.13.1-ol-7-r2-prod` (12-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.13.1-ol-7-r2-prod/12-prod/ol-7/Dockerfile)
 * [`12-ol-7`, `12.13.1-ol-7-r2` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.13.1-ol-7-r2/12/ol-7/Dockerfile)
 * [`12-debian-9`, `12.13.1-debian-9-r1`, `12`, `12.13.1`, `12.13.1-r1` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.13.1-debian-9-r1/12/debian-9/Dockerfile)
