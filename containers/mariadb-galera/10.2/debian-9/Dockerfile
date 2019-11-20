@@ -7,13 +7,13 @@ ENV OS_ARCH="amd64" \
 
 # Install required system packages and dependencies
 RUN install_packages iproute2 ldap-utils libaio1 libaudit1 libc6 libcap-ng0 libgcc1 libjemalloc1 libncurses5 libnss-ldapd libpam-ldapd libpam0g libssl1.0.2 libstdc++6 libtinfo5 lsof nslcd rsync socat zlib1g
-RUN . ./libcomponent.sh && component_unpack "mariadb-galera" "10.2.29-0" --checksum 4a644d3c118b26a0fabceabf34bd57a73e66d3c7e1ccdcf31facca45340a9d08
+RUN . ./libcomponent.sh && component_unpack "mariadb-galera" "10.2.29-1" --checksum 44b33c83339e34a3e7b77fb7ac059271ec164de9c872bdcfd8918902af0e1d15
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb-galera" \
-    BITNAMI_IMAGE_VERSION="10.2.29-debian-9-r13" \
+    BITNAMI_IMAGE_VERSION="10.2.29-debian-9-r14" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
 EXPOSE 3306 4444 4567 4568
