@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 libgeoip1 libpcre3 libssl1.1 procps zlib1g
-RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-2" --checksum 9d8592ed4d88b4b6d3d6480a63f39edecb1dc79bead112849717f8243a488b9a
+RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-3" --checksum 1a8f6f36c91ddd0f73a1bb5fd00f1e1d099213dff38c8032abc197d887df3531
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 RUN chmod -R g+rwX /opt/bitnami/nginx/conf
@@ -18,7 +18,7 @@ RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.16.1-debian-9-r94" \
+    BITNAMI_IMAGE_VERSION="1.16.1-debian-9-r95" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/nginx/sbin:$PATH"
 
