@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7-ol-7`, `7.4.2-ol-7-r26` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.4.2-ol-7-r26/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.4.2-debian-9-r9`, `7`, `7.4.2`, `7.4.2-r9`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.4.2-debian-9-r9/7/debian-9/Dockerfile)
+* [`7-debian-9`, `7.4.2-debian-9-r10`, `7`, `7.4.2`, `7.4.2-r10`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.4.2-debian-9-r10/7/debian-9/Dockerfile)
 * [`6-ol-7`, `6.8.4-ol-7-r33` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.4-ol-7-r33/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.8.4-debian-9-r31`, `6`, `6.8.4`, `6.8.4-r31` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.4-debian-9-r31/6/debian-9/Dockerfile)
 
@@ -385,6 +385,11 @@ $ docker-compose up elasticsearch
 ```
 
 # Notable Changes
+
+## 6.8.4-debian-9-rXX, 6.8.4-ol-7-rXX, 7.4.2-debian-9-rXX, 7.4.2-ol-7-rXX
+
+- Arbitrary user ID(s) when running the container with a non-privileged user are not supported (only `1001` UID is allowed).
+- This is temporary solution while Elasticsearch maintainers address an issue with ownership/permissions when installing plugins. Issue reported at: https://github.com/bitnami/bitnami-docker-elasticsearch/issues/50
 
 ## 6.8.2-debian-9-r36, 6.8.2-ol-7-r36, 7.3.1-debian-9-r8, 7.3.1-ol-7-r13
 
