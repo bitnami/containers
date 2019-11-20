@@ -8,12 +8,12 @@ ENV HOME="/" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libpcre3 libssl1.1 libyaml-0-2 perl zlib1g
-RUN . ./libcomponent.sh && component_unpack "kong" "1.4.0-0" --checksum 51463b1e46c74b195cee4474801afa93aef5f116b5b9229240f1580bc1bbbb0e
+RUN . ./libcomponent.sh && component_unpack "kong" "1.4.0-1" --checksum 265942c437e59283dcb94e0a7e911526ff3b36befd013ed82e7b6deef6f17ad6
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kong" \
-    BITNAMI_IMAGE_VERSION="1.4.0-debian-9-r21" \
+    BITNAMI_IMAGE_VERSION="1.4.0-debian-9-r22" \
     PATH="/opt/bitnami/kong/bin:/opt/bitnami/kong/openresty/bin:/opt/bitnami/kong/openresty/luajit/bin:/opt/bitnami/kong/openresty/nginx/sbin:$PATH"
 
 EXPOSE 8000 8001 8443 8444
