@@ -3,14 +3,14 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libedit libffi libgcc libgcrypt libgpg-error libselinux libstdc++ libuuid libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre readline sqlite xz-libs zlib
-RUN bitnami-pkg install python-3.6.9-2 --checksum 66cd0029243b797825cf74faab4bf6030ecac6152b67646881259da1a1c321c0
+RUN bitnami-pkg install python-3.6.9-3 --checksum d536fd53c119fbd4e3cc34ba5f371c652eb9d78565617b53fb12b2ab5a8f7682
 RUN bitnami-pkg install postgresql-client-11.6.0-0 --checksum c0df49723944b7b842053d0cfb4f2ffe0313575ecfbb213e113b50989d008c1a
 RUN bitnami-pkg install node-7.10.1-1 --checksum c58b53a2ea5feafe1e0f0ef4b990d9ff55c37089ff5fba12e1938183e8a81a2f
-RUN bitnami-pkg unpack odoo-13.0.20191110-0 --checksum 1b1dc6f27e49995edfc4a323f17154a61d66f7bbb32b1ebd953493e5c5d9b75e
+RUN bitnami-pkg unpack odoo-13.0.20191110-1 --checksum c49c9537bfa12750df4e501cd033098433d4f686b44240240737059caa620a41
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="13.0.20191110-ol-7-r10" \
+    BITNAMI_IMAGE_VERSION="13.0.20191110-ol-7-r11" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:$PATH" \
