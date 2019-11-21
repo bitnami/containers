@@ -4,13 +4,13 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip hostname libaio-devel procps-ng sudo tar wget which
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/oauth2-proxy-4.0.0-1-linux-x86_64-ol-7.tar.gz && \
-    echo "c18e19e2ae941bfbb079b5926377564a117f138b08e0b54373b11a4c2ef9857b  /tmp/bitnami/pkg/cache/oauth2-proxy-4.0.0-1-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/oauth2-proxy-4.0.0-1-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/oauth2-proxy-4.0.0-1-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/oauth2-proxy-4.0.0-2-linux-x86_64-ol-7.tar.gz && \
+    echo "1e23a476194a6ddd772cbf7bfdbe73809fbbf86104bc1f28f8ff0404cee40880  /tmp/bitnami/pkg/cache/oauth2-proxy-4.0.0-2-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/oauth2-proxy-4.0.0-2-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/oauth2-proxy-4.0.0-2-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="oauth2-proxy" \
-    BITNAMI_IMAGE_VERSION="4.0.0-ol-7-r90" \
+    BITNAMI_IMAGE_VERSION="4.0.0-ol-7-r91" \
     PATH="/opt/bitnami/oauth2-proxy/bin:$PATH"
 
 EXPOSE 8080 4180
