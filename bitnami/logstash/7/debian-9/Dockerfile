@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras-base:stretch-r378
+FROM bitnami/minideb-extras-base:stretch-r379
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "java" "1.8.232-0" --checksum f4e5ff
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="logstash" \
-    BITNAMI_IMAGE_VERSION="7.4.2-debian-9-r2" \
+    BITNAMI_IMAGE_VERSION="7.4.2-debian-9-r3" \
     PATH="/opt/bitnami/logstash/bin:/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 8080
