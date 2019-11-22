@@ -2,7 +2,7 @@ FROM bitnami/minideb:stretch
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages ca-certificates wget
+RUN install_packages ca-certificates curl procps unzip wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/etcd-3.4.3-0-linux-amd64-debian-9.tar.gz && \
     echo "d79db6d8502de2fbe2201bf4afece4627d1fdbfcfcedc3451278a31ce1f943bd  /tmp/bitnami/pkg/cache/etcd-3.4.3-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/etcd-3.4.3-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -11,7 +11,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 COPY rootfs /
 RUN chmod g+rwX /opt/bitnami/etcd
 ENV BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.4.3-debian-9-r14" \
+    BITNAMI_IMAGE_VERSION="3.4.3-debian-9-r15" \
     ETCDCTL_API="3" \
     ETCD_ADVERTISE_CLIENT_URLS="http://127.0.0.1:2379" \
     ETCD_DATA_DIR="/opt/bitnami/etcd/data/" \
