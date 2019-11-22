@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r537
+FROM bitnami/oraclelinux-extras:7-r538
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,13 +6,13 @@ RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds-libs freetype glibc
 RUN bitnami-pkg unpack apache-2.4.41-3 --checksum 30ae9f98466bc180ec5b3121b000e0a8ee36ee3434d4645c7c3aa22710cc6166
 RUN bitnami-pkg unpack php-7.2.24-0 --checksum 03e0363d640044e2810d88267bd345a51214d0d38a6bed9d00f0150f31856267
 RUN bitnami-pkg unpack mysql-client-10.3.20-0 --checksum 6e895c7c56273bf724d87014c70187045fa0a399d9f24067e84f27475e3c071a
-RUN bitnami-pkg install libphp-7.2.24-0 --checksum b1ad2dc6a36226ebf712e96d1eecda5b95a1b320342f12e63b1831500bd87b39
+RUN bitnami-pkg install libphp-7.2.25-0 --checksum 5afa401df3f0f8f985c05ac26595d0fa71cd31ebbe8ff6bbe196fa42e28282b5
 RUN bitnami-pkg unpack owncloud-10.3.1-0 --checksum 132c330812385da8fcb5e5dbf207666cc8ba5534cd148c8b6d6f3f778be5ef91
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.3.1-ol-7-r7" \
+    BITNAMI_IMAGE_VERSION="10.3.1-ol-7-r8" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
