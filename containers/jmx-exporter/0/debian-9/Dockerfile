@@ -2,7 +2,7 @@ FROM bitnami/minideb:stretch
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages ca-certificates libc6 libgcc1 wget zlib1g
+RUN install_packages ca-certificates curl libc6 libgcc1 procps unzip wget zlib1g
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jmx-exporter-0.12.0-1-linux-amd64-debian-9.tar.gz && \
     echo "4c26bcc1b1e535232dfb5dabd5c8dab8343ce5de01d424c45671a9f847050a09  /tmp/bitnami/pkg/cache/jmx-exporter-0.12.0-1-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/jmx-exporter-0.12.0-1-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -13,7 +13,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/java-1.8.232-0-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="jmx-exporter" \
-    BITNAMI_IMAGE_VERSION="0.12.0-debian-9-r102" \
+    BITNAMI_IMAGE_VERSION="0.12.0-debian-9-r103" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 5556
