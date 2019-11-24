@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r542
+FROM bitnami/oraclelinux-extras:7-r543
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack opencart-3.0.3-2-2 --checksum c16d0c07d338afb76355f647c3b
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="opencart" \
-    BITNAMI_IMAGE_VERSION="3.0.3-2-ol-7-r229" \
+    BITNAMI_IMAGE_VERSION="3.0.3-2-ol-7-r230" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
