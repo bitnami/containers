@@ -36,7 +36,6 @@ export RABBITMQ_HOME_DIR="${RABBITMQ_BASE_DIR}/.rabbitmq"
 export RABBITMQ_LIB_DIR="${RABBITMQ_BASE_DIR}/var/lib/rabbitmq"
 export RABBITMQ_LOG_DIR="${RABBITMQ_BASE_DIR}/var/log/rabbitmq"
 export RABBITMQ_PLUGINS_DIR="${RABBITMQ_BASE_DIR}/plugins"
-export RABBITMQ_LDAP_TLS_DIR="${RABBITMQ_BASE_DIR}/certs-ldap"
 export PATH="${RABBITMQ_BIN_DIR}:${PATH}"
 
 # OS
@@ -176,12 +175,7 @@ EOF
 
         if is_boolean_yes "$RABBITMQ_LDAP_TLS"; then
             cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.config" <<EOF
-     {use_ssl,               true},
-     {ssl_options, [{cacertfile,"${RABBITMQ_LDAP_TLS_DIR}/ca_certificate.pem"},
-                    {certfile,"${RABBITMQ_LDAP_TLS_DIR}/server_certificate.pem"},
-                    {keyfile,"${RABBITMQ_LDAP_TLS_DIR}/server_key.pem"},
-                    {verify, verify_peer},
-                    {fail_if_no_peer_cert, true}]}
+     {use_ssl,               true}
 EOF
         fi
     fi
