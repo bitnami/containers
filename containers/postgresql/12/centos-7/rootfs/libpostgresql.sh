@@ -850,9 +850,11 @@ is_postgresql_running() {
 #   Boolean
 #########################
 postgresql_master_init_db() {
+    local envExtraFlags=()
     local initdb_args=()
-    if [[ -n "${POSTGRESQL_INITDB_ARGS[*]}" ]]; then
-        initdb_args+=("${POSTGRESQL_INITDB_ARGS[@]}")
+    if [[ -n "${POSTGRESQL_INITDB_ARGS}" ]]; then
+        read -r -a envExtraFlags <<< "$POSTGRESQL_INITDB_ARGS"
+        initdb_args+=("${envExtraFlags[@]}")
     fi
     if [[ -n "$POSTGRESQL_INITDB_WAL_DIR" ]]; then
         ensure_dir_exists "$POSTGRESQL_INITDB_WAL_DIR"
