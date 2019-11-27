@@ -7,13 +7,13 @@ RUN bitnami-pkg unpack apache-2.4.41-3 --checksum 4cbd05e6df93361999856d4f77a412
 RUN bitnami-pkg unpack php-7.3.12-0 --checksum 017d386f054ac1752531dda9344f65bb903b85cbb6e70420b41ef5256b82ff80
 RUN bitnami-pkg unpack mysql-client-10.3.20-0 --checksum 743aff4ba4858e3eb7d3e10ec9d7ae08b5ddbbb3257cfbbba73062991605e5e6
 RUN bitnami-pkg install libphp-7.3.12-0 --checksum 7ec2d2d73c6f945b16f00ee8f76639d894c4e5123b7f51095e0cbd84015dc2cf
-RUN bitnami-pkg unpack matomo-3.12.0-0 --checksum fb07445819b9ad98351f02c764f6ef685655461b5510e904a1c4771a3e7a3e66
+RUN bitnami-pkg unpack matomo-3.13.0-0 --checksum 7ad6178f37bd867837c1e7dd29c976d9909108d8332ec4afec10290f8d14421c
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="matomo" \
-    BITNAMI_IMAGE_VERSION="3.12.0-debian-9-r16" \
+    BITNAMI_IMAGE_VERSION="3.13.0-debian-9-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
