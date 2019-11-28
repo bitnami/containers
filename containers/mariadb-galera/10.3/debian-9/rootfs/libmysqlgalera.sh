@@ -682,6 +682,8 @@ mysql_install_db() {
     if [[ "$DB_FLAVOR" = "mysql" ]]; then
         command="${DB_BINDIR}/mysqld"
         args+=("--initialize-insecure")
+    else
+        args+=("--auth-root-authentication-method=normal")
     fi
     debug_execute "$command" "${args[@]}"
 }
