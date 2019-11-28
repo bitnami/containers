@@ -149,10 +149,11 @@ Find more information about this feature, consult [official documentation](https
 
 Environment variable below are configurable to control how to execute fluentd process:
 
- - `FLUENTD_CONF`: This variable allows you to specify configuration file name that will be used in -c Fluentd command line option. If you want to use your own configuration file (without any optional plugins), you can do it with this environment variable and Docker volumes (-v option of docker run).
-
- - `FLUENTD_OPT`: Use this variable to specify other Fluentd command line options, like -v or -q.
-
+  - `FLUENTD_CONF`: This variable allows you to specify configuration file name that will be used in -c Fluentd command line option. If you want to use your own configuration file (without any optional plugins), you can do it with this environment variable and Docker volumes (-v option of docker run).
+  - `FLUENTD_OPT`: Use this variable to specify other Fluentd command line options, like -v or -q.
+  - `FLUENTD_DAEMON_USER`: The user that will run the `fluentd` process when the container is run as root.
+  - `FLUENTD_DAEMON_GROUP`: The group of the user that will run the `fluentd` process when the container is run as root.
+ 
 # Logging
 
 The Bitnami fluentd Docker image sends the container logs to the `stdout`. To view the logs:
