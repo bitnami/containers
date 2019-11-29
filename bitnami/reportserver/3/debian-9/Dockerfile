@@ -6,12 +6,12 @@ RUN install_packages fontconfig fonts-dejavu-extra libc6 libgcc1 libncurses5 lib
 RUN bitnami-pkg install java-1.8.232-0 --checksum f4e5ff1d4fb13baf9bb2a4f2e5ffb328cf9eeb26d0b91214196e4473c2874adc
 RUN bitnami-pkg unpack tomcat-9.0.29-0 --checksum 64c56d143c29daf500e3093604eea3c4ebc3b57cb1c31f0396603221d6ab331b
 RUN bitnami-pkg unpack mysql-client-10.3.20-0 --checksum 743aff4ba4858e3eb7d3e10ec9d7ae08b5ddbbb3257cfbbba73062991605e5e6
-RUN bitnami-pkg unpack reportserver-3.1.0-6015-1 --checksum cd3b1a342ae7318222bab4fee0c96be1d8d7199067e5f89bb3d461cc7aa57b16
+RUN bitnami-pkg unpack reportserver-3.1.0-6016-0 --checksum 3febe8c83076bd7cc15fe157789d2a2d7e66eb7c69e18b4637c2d19456aa41a6
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserver" \
-    BITNAMI_IMAGE_VERSION="3.1.0-6015-debian-9-r35" \
+    BITNAMI_IMAGE_VERSION="3.1.0-6016-debian-9-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
