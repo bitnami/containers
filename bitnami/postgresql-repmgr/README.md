@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`12-ol-7`, `12.1.0-ol-7-r16` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.1.0-ol-7-r16/12/ol-7/Dockerfile)
 * [`12-debian-9`, `12.1.0-debian-9-r11`, `12`, `12.1.0`, `12.1.0-r11` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.1.0-debian-9-r11/12/debian-9/Dockerfile)
-* [`12-centos-7`, `12.1.0-centos-7-r17` (12/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.1.0-centos-7-r17/12/centos-7/Dockerfile)
+* [`12-centos-7`, `12.1.0-centos-7-r18` (12/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.1.0-centos-7-r18/12/centos-7/Dockerfile)
 * [`11-ol-7`, `11.6.0-ol-7-r16` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.6.0-ol-7-r16/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.6.0-debian-9-r9`, `11`, `11.6.0`, `11.6.0-r9`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.6.0-debian-9-r9/11/debian-9/Dockerfile)
 * [`11-centos-7`, `11.6.0-centos-7-r18` (11/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.6.0-centos-7-r18/11/centos-7/Dockerfile)
