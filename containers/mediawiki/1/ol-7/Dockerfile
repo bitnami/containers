@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r547
+FROM bitnami/oraclelinux-extras:7-r548
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack mediawiki-1.33.1-0 --checksum 3b5dcadac681cd5171172412fbb
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mediawiki" \
-    BITNAMI_IMAGE_VERSION="1.33.1-ol-7-r55" \
+    BITNAMI_IMAGE_VERSION="1.33.1-ol-7-r56" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
