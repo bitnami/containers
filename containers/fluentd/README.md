@@ -44,7 +44,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.7.4-ol-7-r43` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.7.4-ol-7-r43/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.7.4-ol-7-r44` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.7.4-ol-7-r44/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.7.4-debian-9-r28`, `1`, `1.7.4`, `1.7.4-r28`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.7.4-debian-9-r28/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
@@ -153,7 +153,7 @@ Environment variable below are configurable to control how to execute fluentd pr
   - `FLUENTD_OPT`: Use this variable to specify other Fluentd command line options, like -v or -q.
   - `FLUENTD_DAEMON_USER`: The user that will run the `fluentd` process when the container is run as root.
   - `FLUENTD_DAEMON_GROUP`: The group of the user that will run the `fluentd` process when the container is run as root.
- 
+
 # Logging
 
 The Bitnami fluentd Docker image sends the container logs to the `stdout`. To view the logs:
