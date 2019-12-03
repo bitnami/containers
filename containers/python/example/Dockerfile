@@ -1,9 +1,15 @@
 FROM bitnami/python:3 as builder
-COPY . /app
+
+COPY requirements.txt /app
+
 WORKDIR /app
 RUN virtualenv . && \
     . bin/activate && \
-    pip install django && \
+    pip install -r requirements.txt
+
+COPY . /app
+
+RUN . bin/activate && \
     python manage.py migrate
 
 FROM bitnami/python:3-prod
