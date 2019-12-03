@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "chartmuseum" "0.9.0-2" --checksum 0
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.9.0-debian-9-r114" \
+    BITNAMI_IMAGE_VERSION="0.9.0-debian-9-r115" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/chartmuseum/bin:$PATH"
 
