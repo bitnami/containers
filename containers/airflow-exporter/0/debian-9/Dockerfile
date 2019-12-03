@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/airflow-exporter-0.20180711.0-1-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="airflow-exporter" \
-    BITNAMI_IMAGE_VERSION="0.20180711.0-debian-9-r111" \
+    BITNAMI_IMAGE_VERSION="0.20180711.0-debian-9-r112" \
     PATH="/opt/bitnami/airflow-exporter/bin:$PATH"
 
 EXPOSE 9112
