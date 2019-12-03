@@ -1,4 +1,4 @@
-FROM bitnami/python:2 as builder
+FROM bitnami/python:3 as builder
 COPY . /app
 WORKDIR /app
 RUN virtualenv . && \
@@ -6,7 +6,7 @@ RUN virtualenv . && \
     pip install django && \
     python manage.py migrate
 
-FROM bitnami/python:2-prod
+FROM bitnami/python:3-prod
 COPY --from=builder /app /app
 WORKDIR /app
 EXPOSE 8000
