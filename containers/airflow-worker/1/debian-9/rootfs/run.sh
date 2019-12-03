@@ -6,7 +6,7 @@
 USER=airflow
 DAEMON=airflow
 EXEC=$(which $DAEMON)
-START_COMMAND="${EXEC} worker | tee /opt/bitnami/airflow/logs/airflow-worker.log"
+START_COMMAND="${EXEC} worker -q $AIRFLOW_QUEUE | tee /opt/bitnami/airflow/logs/airflow-worker.log"
 
 echo "Waiting for db..."
 counter=0;
