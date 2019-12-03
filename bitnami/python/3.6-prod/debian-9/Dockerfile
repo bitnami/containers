@@ -1,4 +1,4 @@
-FROM bitnami/python:3.6.9-debian-9-r147 as development
+FROM bitnami/python:3.6.9-debian-9-r148 as development
 
 ######
 
@@ -14,7 +14,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 COPY --from=development /opt/bitnami/python /opt/bitnami/python
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="3.6.9-debian-9-r145-prod" \
+    BITNAMI_IMAGE_VERSION="3.6.9-debian-9-r146-prod" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 CMD [ "python" ]
