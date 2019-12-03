@@ -7,7 +7,9 @@ USER=airflow
 DAEMON=airflow
 EXEC=$(which $DAEMON)
 START_COMMAND="${EXEC} webserver | tee /opt/bitnami/airflow/logs/airflow-webserver.log"
-
+if [ $AIRFLOW_POOL ]; then
+    CREATE_POOL="${EXEC} pool -s $AIRFLOW_POOL_NAME $AIRFLOW_POOL_SIZE $AIRFLOW_POOL_DESCRIPTION | tee /opt/bitnami/airflow/logs/airflow-webserver.log"
+fi
 echo "Waiting for db..."
 counter=0;
 res=1000;
@@ -27,6 +29,12 @@ info "Starting ${DAEMON}..."
 # If container is started as `root` user
 if [ $EUID -eq 0 ]; then
     exec gosu ${USER} bash -c "${START_COMMAND}"
+    if [ $AIRFLOW_POOL ]; then
+	exec gosu ${USER} bash -c "${CREATE_POOL}"
+    fi
 else
     exec bash -c "${START_COMMAND}"
+    if [ $AIRFLOW_POOL ]; then
+	exec bash -c "${CREATE_POOL}"
+    fi
 fi
