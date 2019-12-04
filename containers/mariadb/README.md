@@ -48,12 +48,16 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`10.4-ol-7`, `10.4.10-ol-7-r7` (10.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.10-ol-7-r7/10.4/ol-7/Dockerfile)
 * [`10.4-debian-9`, `10.4.10-debian-9-r5`, `10.4`, `10.4.10`, `10.4.10-r5` (10.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.10-debian-9-r5/10.4/debian-9/Dockerfile)
+* [`10.4-photon-3`, `10.4.0.0-photon-3-r0` (10.4/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.0.0-photon-3-r0/10.4/photon-3/Dockerfile)
 * [`10.3-ol-7`, `10.3.20-ol-7-r30` (10.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.20-ol-7-r30/10.3/ol-7/Dockerfile)
 * [`10.3-debian-9`, `10.3.20-debian-9-r17`, `10.3`, `10.3.20`, `10.3.20-r17`, `latest` (10.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.20-debian-9-r17/10.3/debian-9/Dockerfile)
+* [`10.3-photon-3`, `10.3.0.0-photon-3-r0` (10.3/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.0.0-photon-3-r0/10.3/photon-3/Dockerfile)
 * [`10.2-ol-7`, `10.2.29-ol-7-r30` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.29-ol-7-r30/10.2/ol-7/Dockerfile)
-* [`10.2-debian-9`, `10.2.29-debian-9-r25`, `10.2`, `10.2.29`, `10.2.29-r25` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.29-debian-9-r25/10.2/debian-9/Dockerfile)
+* [`10.2-debian-9`, `10.2.29-debian-9-r26`, `10.2`, `10.2.29`, `10.2.29-r26` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.29-debian-9-r26/10.2/debian-9/Dockerfile)
+* [`10.2-photon-3`, `10.2.0.0-photon-3-r0` (10.2/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.0.0-photon-3-r0/10.2/photon-3/Dockerfile)
 * [`10.1-ol-7`, `10.1.43-ol-7-r29` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.43-ol-7-r29/10.1/ol-7/Dockerfile)
 * [`10.1-debian-9`, `10.1.43-debian-9-r26`, `10.1`, `10.1.43`, `10.1.43-r26` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.43-debian-9-r26/10.1/debian-9/Dockerfile)
+* [`10.1-photon-3`, `10.1.0.0-photon-3-r0` (10.1/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.0.0-photon-3-r0/10.1/photon-3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
 
@@ -215,6 +219,7 @@ The root user and password can easily be setup with the Bitnami MariaDB Docker i
 
  - `MARIADB_ROOT_USER`: The database admin user. Defaults to `root`.
  - `MARIADB_ROOT_PASSWORD`: The database admin user password. No defaults.
+ - `MARIADB_ROOT_PASSWORD_FILE`: Path to a file that contains the admin user password. This will override the value specified in `MARIADB_ROOT_PASSWORD`. No defaults.
 
 Passing the `MARIADB_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the `MARIADB_ROOT_USER` user to the value of `MARIADB_ROOT_PASSWORD`.
 
@@ -280,7 +285,7 @@ services:
 
 ## Creating a database user on first run
 
-You can create a restricted database user that only has permissions for the database created with the [`MARIADB_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `MARIADB_USER` environment variable and to set a password for the database user provide the `MARIADB_PASSWORD` variable.
+You can create a restricted database user that only has permissions for the database created with the [`MARIADB_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `MARIADB_USER` environment variable and to set a password for the database user provide the `MARIADB_PASSWORD` variable (alternatively, you can set the `MARIADB_PASSWORD_FILE` with the path to a file that contains the user password).
 
 ```bash
 $ docker run --name mariadb \
@@ -314,10 +319,12 @@ A **zero downtime** MariaDB master-slave [replication](https://dev.mysql.com/doc
  - `MARIADB_REPLICATION_MODE`: The replication mode. Possible values `master`/`slave`. No defaults.
  - `MARIADB_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
  - `MARIADB_REPLICATION_PASSWORD`: The replication users password. No defaults.
+ - `MARIADB_REPLICATION_PASSWORD_FILE`: Path to a file that contains the replication user password. This will override the value specified in `MARIADB_REPLICATION_PASSWORD`. No defaults.
  - `MARIADB_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
  - `MARIADB_MASTER_PORT_NUMBER`: Server port of the replication master (slave parameter). Defaults to `3306`.
  - `MARIADB_MASTER_ROOT_USER`: User on replication master with access to `MARIADB_DATABASE` (slave parameter). Defaults to `root`
  - `MARIADB_MASTER_ROOT_PASSWORD`: Password of user on replication master with access to `MARIADB_DATABASE` (slave parameter). No defaults.
+ - `MARIADB_MASTER_ROOT_PASSWORD_FILE`: Path to a file that contains the password of user on replication master with access to `MARIADB_DATABASE`. This will override the value specified in `MARIADB_MASTER_ROOT_PASSWORD`. No defaults.
 
 In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
 
