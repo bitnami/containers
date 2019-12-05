@@ -7,7 +7,7 @@ RUN bitnami-pkg install git-2.24.0-0 --checksum dee050702e785983e6d45c1ec197c99f
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="git" \
-    BITNAMI_IMAGE_VERSION="2.24.0-debian-9-r28" \
+    BITNAMI_IMAGE_VERSION="2.24.0-debian-9-r29" \
     PATH="/opt/bitnami/git/bin:$PATH"
 
 ENTRYPOINT [ "git" ]
