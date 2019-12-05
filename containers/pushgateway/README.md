@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-photon-3`, `1.0.0-photon-3-r0` (1/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/1.0.0-photon-3-r0/1/photon-3/Dockerfile)
-* [`1-ol-7`, `1.0.0-ol-7-r43` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/1.0.0-ol-7-r43/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.0.0-ol-7-r44` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/1.0.0-ol-7-r44/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.0.0-debian-9-r38`, `1`, `1.0.0`, `1.0.0-r38`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/1.0.0-debian-9-r38/1/debian-9/Dockerfile)
 * [`0-ol-7`, `0.10.0-ol-7-r62` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.10.0-ol-7-r62/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.10.0-debian-9-r49`, `0`, `0.10.0`, `0.10.0-r49` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.10.0-debian-9-r49/0/debian-9/Dockerfile)
