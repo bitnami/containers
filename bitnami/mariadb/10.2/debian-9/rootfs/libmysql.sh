@@ -182,23 +182,14 @@ mysql_validate() {
                 if [[ -n "$DB_REPLICATION_USER" ]] && [[ -z "$DB_REPLICATION_PASSWORD" ]]; then
                     empty_password_error "$(get_env_var REPLICATION_PASSWORD)"
                 fi
-                if [[ -n "$DB_REPLICATION_USER" ]] && [[ "$DB_REPLICATION_PASSWORD" = *\\* ]]; then
-                    backslash_password_error "$(get_env_var DB_REPLICATION_PASSWORD)"
-                fi
                 if [[ -z "$DB_ROOT_PASSWORD" ]]; then
                     empty_password_error "$(get_env_var ROOT_PASSWORD)"
                 fi
                 if (( ${#DB_ROOT_PASSWORD} > 32 )); then
                     print_validation_error "The password can not be longer than 32 characters. Set the environment variable $(get_env_var ROOT_PASSWORD) with a shorter value (currently ${#DB_ROOT_PASSWORD} characters)"
                 fi
-                if [[ "$DB_ROOT_PASSWORD" = *\\* ]]; then
-                    backslash_password_error "$(get_env_var ROOT_PASSWORD)"
-                fi
                 if [[ -n "$DB_USER" ]] && [[ -z "$DB_PASSWORD" ]]; then
                     empty_password_error "$(get_env_var PASSWORD)"
-                fi
-                if [[ -n "$DB_USER" ]] && [[ "$DB_PASSWORD" = *\\* ]]; then
-                    backslash_password_error "$(get_env_var ROOT_PASSWORD)"
                 fi
             fi
         elif [[ "$DB_REPLICATION_MODE" = "slave" ]]; then
@@ -215,18 +206,20 @@ mysql_validate() {
             if [[ -z "$DB_ROOT_PASSWORD" ]]; then
                 empty_password_error "$(get_env_var ROOT_PASSWORD)"
             fi
-            if [[ "$DB_ROOT_PASSWORD" = *\\* ]]; then
-                backslash_password_error "$(get_env_var ROOT_PASSWORD)"
-            fi
             if [[ -n "$DB_USER" ]] && [[ -z "$DB_PASSWORD" ]]; then
                 empty_password_error "$(get_env_var PASSWORD)"
             fi
-            if [[ -n "$DB_USER" ]] && [[ "$DB_PASSWORD" = *\\* ]]; then
-                backslash_password_error "$(get_env_var DB_PASSWORD)"
-            fi
         fi
     fi
-
+    if [[ "${DB_ROOT_PASSWORD:-}" = *\\* ]]; then
+        backslash_password_error "$(get_env_var ROOT_PASSWORD)"
+    fi
+    if [[ "${DB_PASSWORD:-}" = *\\* ]]; then
+        backslash_password_error "$(get_env_var PASSWORD)"
+    fi
+    if [[ "${DB_REPLICATION_PASSWORD:-}" = *\\* ]]; then
+        backslash_password_error "$(get_env_var REPLICATION_PASSWORD)"
+    fi
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
