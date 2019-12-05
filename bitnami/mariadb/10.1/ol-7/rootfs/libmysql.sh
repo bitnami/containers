@@ -48,7 +48,7 @@ mysql_extra_flags() {
 # Loads global variables used on MySQL/MariaDB configuration.
 # Globals:
 #   DB_FLAVOR
-#   DB_SBINDIR
+#   DB_SBIN_DIR
 #   MYSQL_*/MARIADB_*
 # Arguments:
 #   None
@@ -57,39 +57,92 @@ mysql_extra_flags() {
 #########################
 mysql_env() {
     cat <<"EOF"
-export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
 export DB_FLAVOR="${DB_FLAVOR:-"mysql"}"
-export DB_VOLUMEDIR="/bitnami/$DB_FLAVOR"
-export DB_DATADIR="$DB_VOLUMEDIR/data"
-export DB_BASEDIR="/opt/bitnami/$DB_FLAVOR"
-export DB_CONFDIR="$DB_BASEDIR/conf"
-export DB_LOGDIR="$DB_BASEDIR/logs"
-export DB_TMPDIR="$DB_BASEDIR/tmp"
-export DB_BINDIR="$DB_BASEDIR/bin"
-export DB_SBINDIR="${DB_SBINDIR:-$DB_BASEDIR/bin}"
-export PATH="$DB_BINDIR:$PATH"
+# Format log messages
+export MODULE="$DB_FLAVOR"
+export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
+# Paths
+export DB_VOLUME_DIR="/bitnami/$DB_FLAVOR"
+export DB_DATA_DIR="$DB_VOLUME_DIR/data"
+export DB_BASE_DIR="/opt/bitnami/$DB_FLAVOR"
+export DB_CONF_DIR="$DB_BASE_DIR/conf"
+export DB_LOG_DIR="$DB_BASE_DIR/logs"
+export DB_TMP_DIR="$DB_BASE_DIR/tmp"
+export DB_BIN_DIR="$DB_BASE_DIR/bin"
+export DB_SBIN_DIR="${DB_SBIN_DIR:-$DB_BASE_DIR/bin}"
+export PATH="$DB_BIN_DIR:$PATH"
+# Users
 export DB_DAEMON_USER="mysql"
 export DB_DAEMON_GROUP="mysql"
+# Settings
 export DB_MASTER_HOST="$(get_env_var_value MASTER_HOST)"
 MASTER_PORT_NUMBER="$(get_env_var_value MASTER_PORT_NUMBER)"
 export DB_MASTER_PORT_NUMBER="${MASTER_PORT_NUMBER:-3306}"
-MASTER_ROOT_USER="$(get_env_var_value MASTER_ROOT_USER)"
-export DB_MASTER_ROOT_USER="${MASTER_ROOT_USER:-root}"
-export DB_MASTER_ROOT_PASSWORD="$(get_env_var_value MASTER_ROOT_PASSWORD)"
 PORT_NUMBER="$(get_env_var_value PORT_NUMBER)"
 export DB_PORT_NUMBER="${PORT_NUMBER:-3306}"
 export DB_REPLICATION_MODE="$(get_env_var_value REPLICATION_MODE)"
-export DB_REPLICATION_USER="$(get_env_var_value REPLICATION_USER)"
-export DB_REPLICATION_PASSWORD="$(get_env_var_value REPLICATION_PASSWORD)"
-export DB_DATABASE="$(get_env_var_value DATABASE)"
-export DB_USER="$(get_env_var_value USER)"
-export DB_PASSWORD="$(get_env_var_value PASSWORD)"
-ROOT_USER="$(get_env_var_value ROOT_USER)"
-export DB_ROOT_USER="${ROOT_USER:-root}"
-export DB_ROOT_PASSWORD="$(get_env_var_value ROOT_PASSWORD)"
 read -r -a DB_EXTRA_FLAGS <<< "$(mysql_extra_flags)"
 export DB_EXTRA_FLAGS
+# Authentication
+export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
+ROOT_USER="$(get_env_var_value ROOT_USER)"
+export DB_ROOT_USER="${ROOT_USER:-root}"
+export DB_DATABASE="$(get_env_var_value DATABASE)"
+export DB_USER="$(get_env_var_value USER)"
+export DB_REPLICATION_USER="$(get_env_var_value REPLICATION_USER)"
+MASTER_ROOT_USER="$(get_env_var_value MASTER_ROOT_USER)"
+export DB_MASTER_ROOT_USER="${MASTER_ROOT_USER:-root}"
 EOF
+    # Credentials should be allowed to be mounted as files to avoid sensitive data
+    # in the environment variables
+    password_file="$(get_env_var_value ROOT_PASSWORD_FILE)"
+    if [[ -f "${password_file:-}" ]]; then
+        cat <<"EOF"
+    DB_ROOT_PASSWORD_FILE="$(get_env_var_value ROOT_PASSWORD_FILE)"
+    export DB_ROOT_PASSWORD="$(< "${DB_ROOT_PASSWORD_FILE}")"
+EOF
+    else
+        cat <<"EOF"
+    DB_ROOT_PASSWORD="$(get_env_var_value ROOT_PASSWORD)"
+    export DB_ROOT_PASSWORD="${DB_ROOT_PASSWORD:-}"
+EOF
+    fi
+    password_file="$(get_env_var_value PASSWORD_FILE)"
+    if [[ -f "${password_file:-}" ]]; then
+        cat <<"EOF"
+    DB_PASSWORD_FILE="$(get_env_var_value PASSWORD_FILE)"
+    export DB_PASSWORD="$(< "${DB_PASSWORD_FILE}")"
+EOF
+    else
+        cat <<"EOF"
+    DB_PASSWORD="$(get_env_var_value PASSWORD)"
+    export DB_PASSWORD="${DB_PASSWORD:-}"
+EOF
+    fi
+    password_file="$(get_env_var_value REPLICATION_PASSWORD_FILE)"
+    if [[ -f "${password_file:-}" ]]; then
+        cat <<"EOF"
+    DB_REPLICATION_PASSWORD_FILE="$(get_env_var_value REPLICATION_PASSWORD_FILE)"
+    export DB_REPLICATION_PASSWORD="$(< "${DB_REPLICATION_PASSWORD_FILE}")"
+EOF
+    else
+        cat <<"EOF"
+    DB_REPLICATION_PASSWORD="$(get_env_var_value REPLICATION_PASSWORD)"
+    export DB_REPLICATION_PASSWORD="${DB_REPLICATION_PASSWORD:-}"
+EOF
+    fi
+    password_file="$(get_env_var_value MASTER_ROOT_PASSWORD_FILE)"
+    if [[ -f "${password_file:-}" ]]; then
+        cat <<"EOF"
+    DB_MASTER_ROOT_PASSWORD_FILE="$(get_env_var_value MASTER_ROOT_PASSWORD_FILE)"
+    export DB_MASTER_ROOT_PASSWORD="$(< "${DB_MASTER_ROOT_PASSWORD_FILE}")"
+EOF
+    else
+        cat <<"EOF"
+    DB_MASTER_ROOT_PASSWORD="$(get_env_var_value MASTER_ROOT_PASSWORD)"
+    export DB_MASTER_ROOT_PASSWORD="${DB_MASTER_ROOT_PASSWORD:-}"
+EOF
+    fi
 }
 
 ########################
@@ -170,37 +223,37 @@ mysql_validate() {
 #########################
 mysql_create_config() {
     debug "Creating main configuration file"
-    cat > "$DB_CONFDIR/my.cnf" <<EOF
+    cat > "$DB_CONF_DIR/my.cnf" <<EOF
 [mysqladmin]
 user=$DB_USER
 
 [mysqld]
 skip-name-resolve
 explicit_defaults_for_timestamp
-basedir=$DB_BASEDIR
+basedir=$DB_BASE_DIR
 port=$DB_PORT_NUMBER
-tmpdir=$DB_TMPDIR
-socket=$DB_TMPDIR/mysql.sock
-pid-file=$DB_TMPDIR/mysqld.pid
+tmpdir=$DB_TMP_DIR
+socket=$DB_TMP_DIR/mysql.sock
+pid-file=$DB_TMP_DIR/mysqld.pid
 max_allowed_packet=16M
 bind-address=127.0.0.1
-log-error=$DB_LOGDIR/mysqld.log
+log-error=$DB_LOG_DIR/mysqld.log
 character-set-server=UTF8
 collation-server=utf8_general_ci
-plugin_dir=$DB_BASEDIR/plugin
+plugin_dir=$DB_BASE_DIR/plugin
 
 [client]
 port=$DB_PORT_NUMBER
-socket=$DB_TMPDIR/mysql.sock
+socket=$DB_TMP_DIR/mysql.sock
 default-character-set=UTF8
-plugin_dir=$DB_BASEDIR/plugin
+plugin_dir=$DB_BASE_DIR/plugin
 
 [manager]
 port=$DB_PORT_NUMBER
-socket=$DB_TMPDIR/mysql.sock
-pid-file=$DB_TMPDIR/mysqld.pid
+socket=$DB_TMP_DIR/mysql.sock
+pid-file=$DB_TMP_DIR/mysqld.pid
 
-!include $DB_CONFDIR/bitnami/my_custom.cnf
+!include $DB_CONF_DIR/bitnami/my_custom.cnf
 EOF
 }
 
@@ -281,32 +334,32 @@ mysql_initialize() {
 
     # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
     # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
-    rm -f "$DB_TMPDIR/mysqld.pid"
+    rm -f "$DB_TMP_DIR/mysqld.pid"
 
     # User injected custom configuration
-    if [[ -f "$DB_CONFDIR/my_custom.cnf" ]]; then
+    if [[ -f "$DB_CONF_DIR/my_custom.cnf" ]]; then
         debug "Injecting custom configuration from my_custom.conf"
-        cat "$DB_CONFDIR/my_custom.cnf" > "$DB_CONFDIR/bitnami/my_custom.cnf"
+        cat "$DB_CONF_DIR/my_custom.cnf" > "$DB_CONF_DIR/bitnami/my_custom.cnf"
     fi
     local user_provided_conf=no
     # User injected main configuration
-    if [[ -f "$DB_CONFDIR/my.cnf" ]]; then
+    if [[ -f "$DB_CONF_DIR/my.cnf" ]]; then
         debug "Custom configuration my.cnf detected"
         user_provided_conf=yes
     fi
 
     # Persisted configuration files from old versions
-    ! is_dir_empty "$DB_VOLUMEDIR" && [[ -d "$DB_VOLUMEDIR/conf" ]] && migrate_old_configuration
+    ! is_dir_empty "$DB_VOLUME_DIR" && [[ -d "$DB_VOLUME_DIR/conf" ]] && migrate_old_configuration
 
     debug "Ensuring expected directories/files exist"
-    for dir in "$DB_DATADIR" "$DB_TMPDIR" "$DB_LOGDIR"; do
+    for dir in "$DB_DATA_DIR" "$DB_TMP_DIR" "$DB_LOG_DIR"; do
         ensure_dir_exists "$dir"
         am_i_root && chown "$DB_DAEMON_USER":"$DB_DAEMON_GROUP" "$dir"
     done
 
     ! is_boolean_yes "$user_provided_conf" && mysql_create_config
 
-    if [[ -e "$DB_DATADIR/mysql" ]]; then
+    if [[ -e "$DB_DATA_DIR/mysql" ]]; then
         info "Using persisted data"
         # mysql_upgrade requires the server to be running
         [[ -n "$(get_master_env_var_value ROOT_PASSWORD)" ]] && export ROOT_AUTH_ENABLED="yes"
@@ -314,7 +367,7 @@ mysql_initialize() {
         mysql_upgrade
     else
         debug "Cleaning data directory to ensure successfully initialization"
-        rm -rf "${DB_DATADIR:?}"/*
+        rm -rf "${DB_DATA_DIR:?}"/*
         info "Installing database"
         mysql_install_db
         mysql_start_bg
@@ -329,7 +382,7 @@ EOF
         if [[ -z "$DB_REPLICATION_MODE" ]] || [[ "$DB_REPLICATION_MODE" = "master" ]]; then
             if [[ "$DB_REPLICATION_MODE" = "master" ]]; then
                 debug "Starting replication"
-                echo "RESET MASTER;" | debug_execute "$DB_BINDIR/mysql" --defaults-file="$DB_CONFDIR/my.cnf" -N -u root
+                echo "RESET MASTER;" | debug_execute "$DB_BIN_DIR/mysql" --defaults-file="$DB_CONF_DIR/my.cnf" -N -u root
             fi
             mysql_ensure_root_user_exists "$DB_ROOT_USER" "$DB_ROOT_PASSWORD"
             mysql_ensure_user_not_exists "" # ensure unknown user does not exist
@@ -343,7 +396,7 @@ EOF
 
     # After configuration, open mysql
     if ! is_boolean_yes "$user_provided_conf";then
-       sed -i 's/bind\-address=.*/bind-address=0.0.0.0/g' "$DB_CONFDIR/my.cnf"
+       sed -i 's/bind\-address=.*/bind-address=0.0.0.0/g' "$DB_CONF_DIR/my.cnf"
     fi
 }
 
@@ -357,7 +410,7 @@ EOF
 #   None
 #########################
 mysql_custom_init_scripts() {
-    if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && [[ ! -f "$DB_VOLUMEDIR/.user_scripts_initialized" ]] ; then
+    if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && [[ ! -f "$DB_VOLUME_DIR/.user_scripts_initialized" ]] ; then
         info "Loading user's custom files from /docker-entrypoint-initdb.d";
         for f in /docker-entrypoint-initdb.d/*; do
             debug "Executing $f"
@@ -394,7 +447,7 @@ mysql_custom_init_scripts() {
                     ;;
             esac
         done
-        touch "$DB_VOLUMEDIR"/.user_scripts_initialized
+        touch "$DB_VOLUME_DIR"/.user_scripts_initialized
     fi
 }
 
@@ -411,7 +464,7 @@ mysql_get_version() {
     local ver_string
     local -a ver_split
 
-    ver_string=$("${DB_BINDIR}/mysql" "--version")
+    ver_string=$("${DB_BIN_DIR}/mysql" "--version")
     ver_split=(${ver_string// / })
 
     if [[ "$ver_string" == *" Distrib "* ]]; then
@@ -457,10 +510,16 @@ get_env_var_value() {
 #########################
 get_master_env_var_value() {
     local envVar
+
     PREFIX=""
     [[ "$DB_REPLICATION_MODE" = "slave" ]] && PREFIX="MASTER_"
-    envVar="$(get_env_var "$PREFIX$1")"
-    echo "${!envVar:-}"
+    envVar="$(get_env_var "${PREFIX}${1}_FILE")"
+    if [[ -f "${!envVar:-}" ]]; then
+	      echo "$(< "${!envVar}")"
+    else
+	      envVar="$(get_env_var "${PREFIX}${1}")"
+	      echo "${!envVar:-}"
+    fi
 }
 
 ########################
@@ -481,9 +540,9 @@ mysql_execute() {
     local user="${2:-root}"
     local pass="${3:-}"
 
-    local args=("--defaults-file=$DB_CONFDIR/my.cnf" "-N" "-u" "$user" "$db")
+    local args=("--defaults-file=$DB_CONF_DIR/my.cnf" "-N" "-u" "$user" "$db")
     [[ -n "$pass" ]] && args+=("-p$pass")
-    debug_execute "$DB_BINDIR/mysql" "${args[@]}"
+    debug_execute "$DB_BIN_DIR/mysql" "${args[@]}"
 }
 
 ########################
@@ -510,13 +569,13 @@ mysql_remote_execute() {
 
     local args=("-N" "-h" "$hostname" "-P" "$port" "-u" "$user" "--connect-timeout=5" "$db")
     [[ -n "$pass" ]] && args+=("-p$pass")
-    debug_execute "$DB_BINDIR/mysql" "${args[@]}"
+    debug_execute "$DB_BIN_DIR/mysql" "${args[@]}"
 }
 
 ########################
 # Checks if MySQL/MariaDB is running
 # Globals:
-#   DB_TMPDIR
+#   DB_TMP_DIR
 # Arguments:
 #   None
 # Returns:
@@ -524,7 +583,7 @@ mysql_remote_execute() {
 #########################
 is_mysql_running() {
     local pid
-    pid="$(get_pid_from_file "$DB_TMPDIR/mysqld.pid")"
+    pid="$(get_pid_from_file "$DB_TMP_DIR/mysqld.pid")"
 
     if [[ -z "$pid" ]]; then
         false
@@ -543,7 +602,7 @@ is_mysql_running() {
 #   None
 #########################
 mysql_start_bg() {
-    local flags=("--defaults-file=${DB_BASEDIR}/conf/my.cnf" "--basedir=${DB_BASEDIR}" "--datadir=${DB_DATADIR}" "--socket=$DB_TMPDIR/mysql.sock" "--port=$DB_PORT_NUMBER")
+    local flags=("--defaults-file=${DB_BASE_DIR}/conf/my.cnf" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}" "--socket=$DB_TMP_DIR/mysql.sock" "--port=$DB_PORT_NUMBER")
     [[ -z "${DB_EXTRA_FLAGS:-}" ]] || flags+=("${DB_EXTRA_FLAGS[@]}")
     am_i_root && flags+=("--user=$DB_DAEMON_USER")
     # the slave should only start in run.sh, elseways user credentials would be needed for any connection
@@ -553,7 +612,7 @@ mysql_start_bg() {
     is_mysql_running && return
 
     info "Starting $DB_FLAVOR in background"
-    debug_execute "${DB_SBINDIR}/mysqld" "${flags[@]}" &
+    debug_execute "${DB_SBIN_DIR}/mysqld" "${flags[@]}" &
 
     # we cannot use wait_for_mysql_access here as mysql_upgrade for MySQL >=8 depends on this command
     # users are not configured on slave nodes during initialization due to --skip-slave-start
@@ -563,7 +622,7 @@ mysql_start_bg() {
 ########################
 # Wait for MySQL/MariaDB to be running
 # Globals:
-#   DB_TMPDIR
+#   DB_TMP_DIR
 # Arguments:
 #   None
 # Returns:
@@ -607,7 +666,7 @@ mysql_stop() {
     ! is_mysql_running && return
 
     info "Stopping $DB_FLAVOR"
-    stop_service_using_pid "$DB_TMPDIR/mysqld.pid"
+    stop_service_using_pid "$DB_TMP_DIR/mysqld.pid"
 }
 
 ########################
@@ -621,11 +680,11 @@ mysql_stop() {
 #   None
 #########################
 mysql_install_db() {
-    local command="${DB_BINDIR}/mysql_install_db"
-    local args=("--defaults-file=${DB_CONFDIR}/my.cnf" "--basedir=${DB_BASEDIR}" "--datadir=${DB_DATADIR}")
+    local command="${DB_BIN_DIR}/mysql_install_db"
+    local args=("--defaults-file=${DB_CONF_DIR}/my.cnf" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}")
     am_i_root && args=("${args[@]}" "--user=$DB_DAEMON_USER")
     if [[ "$DB_FLAVOR" = "mysql" ]]; then
-        command="${DB_BINDIR}/mysqld"
+        command="${DB_BIN_DIR}/mysqld"
         args+=("--initialize-insecure")
     else
         args+=("--auth-root-authentication-method=normal")
@@ -644,7 +703,7 @@ mysql_install_db() {
 #   None
 #########################
 mysql_upgrade() {
-    local args=("--defaults-file=${DB_CONFDIR}/my.cnf" "-u" "$DB_ROOT_USER" "--force")
+    local args=("--defaults-file=${DB_CONF_DIR}/my.cnf" "-u" "$DB_ROOT_USER" "--force")
     local major_version
     major_version="$(get_sematic_version "$(mysql_get_version)" 1)"
     info "Running mysql_upgrade"
@@ -654,7 +713,7 @@ mysql_upgrade() {
     else
         mysql_start_bg
         is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("-p$(get_master_env_var_value ROOT_PASSWORD)")
-        debug_execute "${DB_BINDIR}/mysql_upgrade" "${args[@]}"
+        debug_execute "${DB_BIN_DIR}/mysql_upgrade" "${args[@]}"
     fi
 }
 
@@ -668,8 +727,8 @@ mysql_upgrade() {
 #   None
 #########################
 migrate_old_configuration() {
-    local old_custom_conf_file="$DB_VOLUMEDIR/conf/my_custom.cnf"
-    local custom_conf_file="$DB_CONFDIR/bitnami/my_custom.cnf"
+    local old_custom_conf_file="$DB_VOLUME_DIR/conf/my_custom.cnf"
+    local custom_conf_file="$DB_CONF_DIR/bitnami/my_custom.cnf"
     debug "Persisted configuration detected. Migrating any existing 'my_custom.cnf' file to new location"
     warn "Custom configuration files are not persisted any longer"
     if [[ -f "$old_custom_conf_file" ]]; then
@@ -678,8 +737,8 @@ migrate_old_configuration() {
         cat "$old_custom_conf_file" >> "$custom_conf_file"
     fi
     if am_i_root; then
-        [[ -e "$DB_VOLUMEDIR/.initialized" ]] && rm "$DB_VOLUMEDIR/.initialized"
-        rm -rf "$DB_VOLUMEDIR/conf"
+        [[ -e "$DB_VOLUME_DIR/.initialized" ]] && rm "$DB_VOLUME_DIR/.initialized"
+        rm -rf "$DB_VOLUME_DIR/conf"
     else
         warn "Old custom configuration migrated, please manually remove the 'conf' directory from the volume use to persist data"
     fi
@@ -854,5 +913,5 @@ mysql_ensure_optional_database_exists() {
 #   None
 #########################
 mysql_flag_initialized() {
-    touch "$DB_VOLUMEDIR"/.mysql_initialized
+    touch "$DB_VOLUME_DIR"/.mysql_initialized
 }
