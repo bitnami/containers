@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6-ol-7`, `6.5.1-ol-7-r7` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.5.1-ol-7-r7/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.5.1-debian-9-r6`, `6`, `6.5.1`, `6.5.1-r6`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.5.1-debian-9-r6/6/debian-9/Dockerfile)
+* [`6-debian-9`, `6.5.1-debian-9-r7`, `6`, `6.5.1`, `6.5.1-r7`, `latest` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.5.1-debian-9-r7/6/debian-9/Dockerfile)
 * [`6-photon-3`, `6.0.0-photon-3-r0` (6/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.0.0-photon-3-r0/6/photon-3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
