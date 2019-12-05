@@ -170,6 +170,9 @@ mysql_validate() {
     empty_password_error() {
         print_validation_error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
     }
+    backslash_password_error() {
+        print_validation_error "The password cannot contain backslashes ('\'). Set the environment variable $1 with no backslashes (more info at https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html)"
+    }
 
     if [[ -n "$DB_REPLICATION_MODE" ]]; then
         if [[ "$DB_REPLICATION_MODE" = "master" ]]; then
@@ -208,7 +211,15 @@ mysql_validate() {
             fi
         fi
     fi
-
+    if [[ "${DB_ROOT_PASSWORD:-}" = *\\* ]]; then
+        backslash_password_error "$(get_env_var ROOT_PASSWORD)"
+    fi
+    if [[ "${DB_PASSWORD:-}" = *\\* ]]; then
+        backslash_password_error "$(get_env_var PASSWORD)"
+    fi
+    if [[ "${DB_REPLICATION_PASSWORD:-}" = *\\* ]]; then
+        backslash_password_error "$(get_env_var REPLICATION_PASSWORD)"
+    fi
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -819,6 +830,7 @@ mysql_ensure_root_user_exists() {
     local password="${2:-}"
 
     debug "Configuring root user credentials"
+
     if [ "$DB_FLAVOR" == "mariadb" ]; then
         mysql_execute "mysql" "root" <<EOF
 -- create root@localhost user for local admin access
