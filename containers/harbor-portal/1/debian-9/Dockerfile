@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /postunpack.sh
 RUN /postunpack-harbor-portal.sh
 ENV BITNAMI_APP_NAME="harbor-portal" \
-    BITNAMI_IMAGE_VERSION="1.9.3-debian-9-r8" \
+    BITNAMI_IMAGE_VERSION="1.9.3-debian-9-r9" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/harbor/bin:$PATH"
 
