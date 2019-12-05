@@ -13,8 +13,8 @@ RUN . ./libcomponent.sh && component_unpack "mongodb" "3.6.16-0" --checksum 4c99
 
 COPY rootfs /
 RUN /postunpack.sh
-ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.6.16-centos-7-r2" \
+ENV BITNAMI_APP_NAME="mongodb-sharded" \
+    BITNAMI_IMAGE_VERSION="3.6.16-centos-7-r3" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mongodb/bin:$PATH"
 
