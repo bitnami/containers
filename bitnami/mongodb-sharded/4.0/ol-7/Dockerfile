@@ -18,8 +18,8 @@ RUN curl --silent -L https://github.com/mikefarah/yq/releases/download/2.4.0/yq_
 
 COPY rootfs /
 RUN /postunpack.sh
-ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.0.13-ol-7-r35" \
+ENV BITNAMI_APP_NAME="mongodb-sharded" \
+    BITNAMI_IMAGE_VERSION="4.0.13-ol-7-r36" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mongodb/bin:$PATH"
 
