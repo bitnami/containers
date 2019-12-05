@@ -6,7 +6,7 @@
 
 # Export environment variables
 export DB_FLAVOR="mariadb"
-export DB_SBINDIR="/opt/bitnami/${DB_FLAVOR}/sbin"
+export DB_SBIN_DIR="/opt/bitnami/${DB_FLAVOR}/sbin"
 
 # Load MySQL Library
 # 'libmariadbgalera.sh' is just a wrapper of 'libmysqlgalera.sh'
