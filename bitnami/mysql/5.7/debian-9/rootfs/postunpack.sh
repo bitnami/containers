@@ -9,10 +9,10 @@
 # Load MySQL environment variables
 eval "$(mysql_env)"
 
-for dir in "$DB_TMPDIR" "$DB_LOGDIR" "$DB_CONFDIR" "${DB_CONFDIR}/bitnami" "$DB_VOLUMEDIR" "$DB_DATADIR"; do
+for dir in "$DB_TMP_DIR" "$DB_LOG_DIR" "$DB_CONF_DIR" "${DB_CONF_DIR}/bitnami" "$DB_VOLUME_DIR" "$DB_DATA_DIR"; do
     ensure_dir_exists "$dir"
 done
-chmod -R g+rwX "$DB_TMPDIR" "$DB_LOGDIR" "$DB_CONFDIR" "${DB_CONFDIR}/bitnami" "$DB_VOLUMEDIR" "$DB_DATADIR"
+chmod -R g+rwX "$DB_TMP_DIR" "$DB_LOG_DIR" "$DB_CONF_DIR" "${DB_CONF_DIR}/bitnami" "$DB_VOLUME_DIR" "$DB_DATA_DIR"
 
 # Redirect all logging to stdout
-ln -sf /dev/stdout "$DB_LOGDIR/mysqld.log"
+ln -sf /dev/stdout "$DB_LOG_DIR/mysqld.log"
