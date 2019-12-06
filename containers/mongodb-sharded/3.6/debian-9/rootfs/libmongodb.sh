@@ -29,7 +29,7 @@ mongodb_env() {
     cat <<"EOF"
 # Paths
 export MONGODB_VOLUME_DIR="/bitnami"
-export MONGODB_DATA_DIR="$MONGODB_VOLUME_DIR/mongodb/data"
+export MONGODB_DATA_DIR="${MONGODB_DATA_DIR:-${MONGODB_VOLUME_DIR}/mongodb/data}"
 export MONGODB_BASE_DIR="/opt/bitnami/mongodb"
 export MONGODB_CONF_DIR="$MONGODB_BASE_DIR/conf"
 export MONGODB_MOUNTED_CONF_DIR="${MONGODB_MOUNTED_CONF_DIR:-${MONGODB_VOLUME_DIR}/conf}"
