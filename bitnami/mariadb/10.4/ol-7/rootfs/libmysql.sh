@@ -220,6 +220,7 @@ mysql_validate() {
     if [[ "${DB_REPLICATION_PASSWORD:-}" = *\\* ]]; then
         backslash_password_error "$(get_env_var REPLICATION_PASSWORD)"
     fi
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -830,7 +831,6 @@ mysql_ensure_root_user_exists() {
     local password="${2:-}"
 
     debug "Configuring root user credentials"
-
     if [ "$DB_FLAVOR" == "mariadb" ]; then
         mysql_execute "mysql" "root" <<EOF
 -- create root@localhost user for local admin access
