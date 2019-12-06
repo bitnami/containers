@@ -138,6 +138,9 @@ mysql_validate() {
     empty_password_error() {
         print_validation_error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
     }
+    backslash_password_error() {
+        print_validation_error "The password cannot contain backslashes ('\'). Set the environment variable $1 with no backslashes (more info at https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html)"
+    }
 
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
         empty_password_enabled_warn
@@ -165,6 +168,13 @@ mysql_validate() {
 
     if ! is_boolean_yes "$DB_GALERA_CLUSTER_BOOTSTRAP" && [[ -z "$DB_GALERA_CLUSTER_ADDRESS" ]]; then
         print_validation_error "Galera cluster cannot be created without setting the environment variable $(get_env_var GALERA_CLUSTER_ADDRESS). If you are bootstrapping a new Galera cluster, set the environment variable MARIADB_GALERA_CLUSTER_BOOTSTRAP=yes."
+    fi
+
+    if [[ "${DB_ROOT_PASSWORD:-}" = *\\* ]]; then
+        backslash_password_error "$(get_env_var ROOT_PASSWORD)"
+    fi
+    if [[ "${DB_PASSWORD:-}" = *\\* ]]; then
+        backslash_password_error "$(get_env_var PASSWORD)"
     fi
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
