@@ -15,7 +15,7 @@ RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="4.0.14-ol-7-r263" \
+    BITNAMI_IMAGE_VERSION="4.0.14-ol-7-r264" \
     PATH="/opt/bitnami/redis-sentinel/bin:$PATH"
 
 EXPOSE 26379
