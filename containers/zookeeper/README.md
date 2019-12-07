@@ -52,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.5.6-ol-7-r52` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.6-ol-7-r52/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.5.6-debian-9-r34`, `3`, `3.5.6`, `3.5.6-r34`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.6-debian-9-r34/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.5.6-debian-9-r35`, `3`, `3.5.6`, `3.5.6-r35`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.6-debian-9-r35/3/debian-9/Dockerfile)
 * [`3-photon-3`, `3.0.0-photon-3-r0` (3/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.0.0-photon-3-r0/3/photon-3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
