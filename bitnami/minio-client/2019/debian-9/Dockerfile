@@ -16,7 +16,7 @@ RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="minio-client" \
-    BITNAMI_IMAGE_VERSION="2019.10.9-debian-9-r45" \
+    BITNAMI_IMAGE_VERSION="2019.10.9-debian-9-r46" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/minio-client/bin:$PATH"
 
