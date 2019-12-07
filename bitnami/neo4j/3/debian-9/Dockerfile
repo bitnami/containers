@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack neo4j-3.5.13-0 --checksum 7be6d9cb8329d0bb57bf5942cbcb5c6
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="3.5.13-debian-9-r6" \
+    BITNAMI_IMAGE_VERSION="3.5.13-debian-9-r7" \
     NAMI_PREFIX="/.nami" \
     NEO4J_BOLT_PORT_NUMBER="7687" \
     NEO4J_HOST="" \
