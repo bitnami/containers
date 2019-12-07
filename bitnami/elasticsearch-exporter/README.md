@@ -46,7 +46,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.1.0-ol-7-r117` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.1.0-ol-7-r117/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.1.0-ol-7-r118` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.1.0-ol-7-r118/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.1.0-debian-9-r103`, `1`, `1.1.0`, `1.1.0-r103`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.1.0-debian-9-r103/1/debian-9/Dockerfile)
 * [`1-photon-3`, `1.0.0-photon-3-r0` (1/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.0.0-photon-3-r0/1/photon-3/Dockerfile)
 
