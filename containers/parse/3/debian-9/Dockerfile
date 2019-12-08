@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack parse-3.9.0-1 --checksum c42451793e4a89aadf8ff46d91c0e0ba
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="3.9.0-debian-9-r38" \
+    BITNAMI_IMAGE_VERSION="3.9.0-debian-9-r39" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
