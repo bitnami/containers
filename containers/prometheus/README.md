@@ -57,7 +57,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.14.0-ol-7-r28` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.14.0-ol-7-r28/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.14.0-ol-7-r29` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.14.0-ol-7-r29/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.14.0-debian-9-r24`, `2`, `2.14.0`, `2.14.0-r24`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.14.0-debian-9-r24/2/debian-9/Dockerfile)
 * [`2-photon-3`, `2.0.0-photon-3-r0` (2/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.0.0-photon-3-r0/2/photon-3/Dockerfile)
 
