@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`12-ol-7`, `12.1.0-ol-7-r25` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.1.0-ol-7-r25/12/ol-7/Dockerfile)
+* [`12-ol-7`, `12.1.0-ol-7-r26` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.1.0-ol-7-r26/12/ol-7/Dockerfile)
 * [`12-debian-9`, `12.1.0-debian-9-r20`, `12`, `12.1.0`, `12.1.0-r20` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.1.0-debian-9-r20/12/debian-9/Dockerfile)
 * [`12-centos-7`, `12.1.0-centos-7-r28` (12/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.1.0-centos-7-r28/12/centos-7/Dockerfile)
 * [`12-photon-3`, `12.0.0-photon-3-r0` (12/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.0.0-photon-3-r0/12/photon-3/Dockerfile)
