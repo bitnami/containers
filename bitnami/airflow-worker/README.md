@@ -133,6 +133,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
+    -e AIRFLOW_QUEUE=new_queue \
     --net airflow-tier \
     --volume airflow_worker_data:/bitnami \
     bitnami/airflow-worker:latest
