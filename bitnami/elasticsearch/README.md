@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`7-debian-9`, `7.5.0-debian-9-r5`, `7`, `7.5.0`, `7.5.0-r5`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.5.0-debian-9-r5/7/debian-9/Dockerfile)
 * [`7-photon-3`, `7.0.0-photon-3-r0` (7/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.0.0-photon-3-r0/7/photon-3/Dockerfile)
 * [`6-ol-7`, `6.8.5-ol-7-r21` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.5-ol-7-r21/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.8.5-debian-9-r14`, `6`, `6.8.5`, `6.8.5-r14` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.5-debian-9-r14/6/debian-9/Dockerfile)
+* [`6-debian-9`, `6.8.5-debian-9-r15`, `6`, `6.8.5`, `6.8.5-r15` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.5-debian-9-r15/6/debian-9/Dockerfile)
 * [`6-photon-3`, `6.0.0-photon-3-r0` (6/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.0.0-photon-3-r0/6/photon-3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
