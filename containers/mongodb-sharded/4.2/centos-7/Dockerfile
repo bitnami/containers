@@ -9,12 +9,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libcurl libgcc libidn libpcap libselinux libssh2 nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre zlib
-RUN . ./libcomponent.sh && component_unpack "mongodb" "4.2.1-0" --checksum 2140c11b8201e6a65d491547a3337e50bbc5c85e1c41a300191cb613f1d0d744
+RUN . ./libcomponent.sh && component_unpack "mongodb" "4.2.2-0" --checksum 0bc13cda6bc36d702bdaa58948537244a0a44252f342f8d2eacf6129f3672835
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb-sharded" \
-    BITNAMI_IMAGE_VERSION="4.2.1-centos-7-r41" \
+    BITNAMI_IMAGE_VERSION="4.2.2-centos-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mongodb/bin:$PATH"
 
