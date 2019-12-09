@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r557
+FROM bitnami/oraclelinux-extras:7-r558
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack joomla-3.9.13-0 --checksum 0d9940fe4b0e01349e1d9e65f0f246
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.9.13-ol-7-r34" \
+    BITNAMI_IMAGE_VERSION="3.9.13-ol-7-r35" \
     JOOMLA_DATABASE_NAME="bitnami_joomla" \
     JOOMLA_DATABASE_PASSWORD="" \
     JOOMLA_DATABASE_USER="bn_joomla" \
