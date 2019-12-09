@@ -15,6 +15,8 @@ set -o pipefail
 # Load MySQL environment variables
 eval "$(mysql_env)"
 
+# Ensure mysql unix socket file does not exist
+rm -rf "$DB_TMP_DIR/mysql.sock.lock"
 # Ensure MySQL environment variables settings are valid
 mysql_validate
 # Ensure MySQL is stopped when this script ends.
