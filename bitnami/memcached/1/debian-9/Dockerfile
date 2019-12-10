@@ -15,7 +15,7 @@ RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.20-debian-9-r22" \
+    BITNAMI_IMAGE_VERSION="1.5.20-debian-9-r23" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
 
 EXPOSE 11211
