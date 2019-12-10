@@ -7,12 +7,12 @@ RUN bitnami-pkg unpack apache-2.4.41-3 --checksum 30ae9f98466bc180ec5b3121b000e0
 RUN bitnami-pkg unpack php-7.2.25-1 --checksum a5aa3b417ec5c068adecb67cb257178ac42bf3059c422efa81d762079f914116
 RUN bitnami-pkg unpack mysql-client-10.3.20-0 --checksum 6e895c7c56273bf724d87014c70187045fa0a399d9f24067e84f27475e3c071a
 RUN bitnami-pkg install libphp-7.2.25-0 --checksum 5afa401df3f0f8f985c05ac26595d0fa71cd31ebbe8ff6bbe196fa42e28282b5
-RUN bitnami-pkg unpack owncloud-10.3.1-0 --checksum 132c330812385da8fcb5e5dbf207666cc8ba5534cd148c8b6d6f3f778be5ef91
+RUN bitnami-pkg unpack owncloud-10.3.2-0 --checksum 033af79e178020945629b1556c1df805192f66d3e6ceccb5d067957a3333ea9b
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.3.1-ol-7-r28" \
+    BITNAMI_IMAGE_VERSION="10.3.2-ol-7-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
