@@ -6,13 +6,13 @@ RUN install_packages build-essential default-libmysqlclient-dev ghostscript imag
 RUN bitnami-pkg install ruby-2.6.5-0 --checksum 3a856a4569b5d4f59628209a1ab1b78619647bf1f4d5f11ca3ae6b28ee1e7fa9
 RUN bitnami-pkg install node-10.17.0-1 --checksum 0b7f3de4f463789d093f5fb9c7647d43f20035714bc48f67aac4faf31f2e4446
 RUN bitnami-pkg install mysql-client-10.3.20-0 --checksum 743aff4ba4858e3eb7d3e10ec9d7ae08b5ddbbb3257cfbbba73062991605e5e6
-RUN bitnami-pkg install git-2.24.0-0 --checksum dee050702e785983e6d45c1ec197c99ffa9f12b38fe5574f53a11c16ba8435ba
+RUN bitnami-pkg install git-2.24.1-0 --checksum 0bd650ac89eff766d64b3d19145ba69873742b8a18815c2957e1fddf86e796ef
 RUN bitnami-pkg install rails-6.0.1-0-0 --checksum c3c10b5e74b21fd1604652eae8e20f3c8c2c15495c1f21de1c736a0dab7c1036
 RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="6.0.1-0-debian-9-r20" \
+    BITNAMI_IMAGE_VERSION="6.0.1-0-debian-9-r21" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:/opt/bitnami/rails/bin:$PATH" \
     RAILS_ENV="development"
 
