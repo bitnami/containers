@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2019-ol-7`, `2019.10.9-ol-7-r67` (2019/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.10.9-ol-7-r67/2019/ol-7/Dockerfile)
+* [`2019-ol-7`, `2019.10.9-ol-7-r68` (2019/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.10.9-ol-7-r68/2019/ol-7/Dockerfile)
 * [`2019-debian-9`, `2019.10.9-debian-9-r48`, `2019`, `2019.10.9`, `2019.10.9-r48`, `latest` (2019/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.10.9-debian-9-r48/2019/debian-9/Dockerfile)
 * [`2019-photon-3`, `2019.0.0-photon-3-r0` (2019/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2019.0.0-photon-3-r0/2019/photon-3/Dockerfile)
 
