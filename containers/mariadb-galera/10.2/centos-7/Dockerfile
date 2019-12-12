@@ -1,4 +1,4 @@
-FROM bitnami/centos-extras-base:7-r234
+FROM bitnami/centos-extras-base:7-r235
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV OS_ARCH="x86_64" \
@@ -7,13 +7,13 @@ ENV OS_ARCH="x86_64" \
 
 # Install required system packages and dependencies
 RUN install_packages audit-libs glibc iproute keyutils-libs krb5-libs libaio libcap-ng libcom_err libgcc libselinux libstdc++ lsof ncurses-libs nss-pam-ldapd nss-softokn-freebl openldap-clients openssl-libs pam pcre rsync socat zlib
-RUN . ./libcomponent.sh && component_unpack "mariadb-galera" "10.2.29-1" --checksum 413ab923daa8fad7d95ff54ca293788f3ae67543649f072ebca09fa327a69c78
+RUN . ./libcomponent.sh && component_unpack "mariadb-galera" "10.2.30-0" --checksum 659b181cdfae78b95054d47283996ad54c4c1ab5a5e1613efbf43f5e65af7830
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb-galera" \
-    BITNAMI_IMAGE_VERSION="10.2.29-centos-7-r37" \
+    BITNAMI_IMAGE_VERSION="10.2.30-centos-7-r0" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
 EXPOSE 3306 4444 4567 4568
