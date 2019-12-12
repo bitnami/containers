@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.0.5-ol-7-r52` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/2.0.5-ol-7-r52/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.0.5-debian-9-r42`, `2`, `2.0.5`, `2.0.5-r42`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/2.0.5-debian-9-r42/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.0.5-debian-9-r43`, `2`, `2.0.5`, `2.0.5-r43`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/2.0.5-debian-9-r43/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse-dashboard GitHub repo](https://github.com/bitnami/bitnami-docker-parse-dashboard).
 
@@ -223,7 +223,8 @@ parse-dashboard:
 Available variables:
  - `PARSE_DASHBOARD_USER`: Parse Dashboard application username. Default: **user**
  - `PARSE_DASHBOARD_PASSWORD`: Parse Dashboard application password. Default: **bitnami**
- - `PARSE_HOST`: This host is for Parse Dashboard knows how to form the urls to Parse Server.
+ - `PARSE_HOST`: Host used by Parse Dashboard to form the URLs to Parse Server.
+ - `PARSE_PROTOCOL`: Protocol used by Parse Dashboard to form the URLs to Parse Server. Default: **http**
  - `PARSE_USE_HOSTNAME`: Whether to use a hostname or an IP to configure the "serverURL" setting. Default: **no**
  - `PARSE_PORT_NUMBER`: Parse Server Port. Default: **1337**
  - `PARSE_APP_ID`: Parse Server App Id. Default: **myappID**
