@@ -28,13 +28,13 @@ done
 info "Starting ${DAEMON}..."
 # If container is started as `root` user
 if [ $EUID -eq 0 ]; then
-    exec gosu ${USER} bash -c "${START_COMMAND}"
     if [ $AIRFLOW_POOL ]; then
-	exec gosu ${USER} bash -c "${CREATE_POOL}"
+	gosu ${USER} bash -c "${CREATE_POOL}"
     fi
-else
-    exec bash -c "${START_COMMAND}"
+	exec gosu ${USER} bash -c "${START_COMMAND}"
+    else
     if [ $AIRFLOW_POOL ]; then
-	exec bash -c "${CREATE_POOL}"
+	bash -c "${CREATE_POOL}"
     fi
-fi
+	exec bash -c "${START_COMMAND}"
+    fi
