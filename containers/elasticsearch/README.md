@@ -46,12 +46,12 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`7-photon-3`, `7.5.0-photon-3-r0` (7/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.5.0-photon-3-r0/7/photon-3/Dockerfile)
 * [`7-ol-7`, `7.5.0-ol-7-r11` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.5.0-ol-7-r11/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.5.0-debian-9-r8`, `7`, `7.5.0`, `7.5.0-r8`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.5.0-debian-9-r8/7/debian-9/Dockerfile)
-* [`7-photon-3`, `7.0.0-photon-3-r0` (7/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.0.0-photon-3-r0/7/photon-3/Dockerfile)
+* [`6-photon-3`, `6.8.5-photon-3-r0` (6/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.5-photon-3-r0/6/photon-3/Dockerfile)
 * [`6-ol-7`, `6.8.5-ol-7-r25` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.5-ol-7-r25/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.8.5-debian-9-r17`, `6`, `6.8.5`, `6.8.5-r17` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.5-debian-9-r17/6/debian-9/Dockerfile)
-* [`6-photon-3`, `6.0.0-photon-3-r0` (6/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.0.0-photon-3-r0/6/photon-3/Dockerfile)
+* [`6-debian-9`, `6.8.5-debian-9-r18`, `6`, `6.8.5`, `6.8.5-r18` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.5-debian-9-r18/6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
 # Get this image
