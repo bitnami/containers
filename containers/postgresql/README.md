@@ -47,19 +47,15 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`12-ol-7`, `12.1.0-ol-7-r31` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.1.0-ol-7-r31/12/ol-7/Dockerfile)
 * [`12-debian-9`, `12.1.0-debian-9-r24`, `12`, `12.1.0`, `12.1.0-r24` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.1.0-debian-9-r24/12/debian-9/Dockerfile)
 * [`12-centos-7`, `12.1.0-centos-7-r33` (12/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.1.0-centos-7-r33/12/centos-7/Dockerfile)
-* [`12-photon-3`, `12.0.0-photon-3-r0` (12/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.0.0-photon-3-r0/12/photon-3/Dockerfile)
 * [`11-ol-7`, `11.6.0-ol-7-r31` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.6.0-ol-7-r31/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.6.0-debian-9-r21`, `11`, `11.6.0`, `11.6.0-r21`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.6.0-debian-9-r21/11/debian-9/Dockerfile)
 * [`11-centos-7`, `11.6.0-centos-7-r33` (11/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.6.0-centos-7-r33/11/centos-7/Dockerfile)
-* [`11-photon-3`, `11.0.0-photon-3-r0` (11/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.0.0-photon-3-r0/11/photon-3/Dockerfile)
 * [`10-ol-7`, `10.11.0-ol-7-r31` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.11.0-ol-7-r31/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.11.0-debian-9-r24`, `10`, `10.11.0`, `10.11.0-r24` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.11.0-debian-9-r24/10/debian-9/Dockerfile)
+* [`10-debian-9`, `10.11.0-debian-9-r25`, `10`, `10.11.0`, `10.11.0-r25` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.11.0-debian-9-r25/10/debian-9/Dockerfile)
 * [`10-centos-7`, `10.11.0-centos-7-r33` (10/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.11.0-centos-7-r33/10/centos-7/Dockerfile)
-* [`10-photon-3`, `10.0.0-photon-3-r0` (10/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.0.0-photon-3-r0/10/photon-3/Dockerfile)
 * [`9.6-ol-7`, `9.6.16-ol-7-r31` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.16-ol-7-r31/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.16-debian-9-r23`, `9.6`, `9.6.16`, `9.6.16-r23` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.16-debian-9-r23/9.6/debian-9/Dockerfile)
 * [`9.6-centos-7`, `9.6.16-centos-7-r33` (9.6/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.16-centos-7-r33/9.6/centos-7/Dockerfile)
-* [`9.6-photon-3`, `9.6.0.0-photon-3-r0` (9.6/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.0.0-photon-3-r0/9.6/photon-3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
 
