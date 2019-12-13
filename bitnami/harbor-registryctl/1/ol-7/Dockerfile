@@ -10,13 +10,13 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel procps-ng sudo tar which
-RUN . ./libcomponent.sh && component_unpack "harbor-registryctl" "1.9.3-0" --checksum e2ae46ced88d3e7f87746f6c27eb5b61cfa524fac1aeaa705ce72d052e1801ba
-RUN . ./libcomponent.sh && component_unpack "harbor-registry" "1.9.3-1" --checksum eb51a27a65d7f70824bb8cb5ff1c343d5745665b9734c766250606a9adfce7bd
+RUN . ./libcomponent.sh && component_unpack "harbor-registryctl" "1.10.0-0" --checksum 6553074eb7a95b86faeab0bd5e99045a3b6e3fd199459fe3b12d4e5c267d0318
+RUN . ./libcomponent.sh && component_unpack "harbor-registry" "1.10.0-0" --checksum 549f9393beed846e40db92c1ed9e442e50a1c0806250068244b8d3406f51728b
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-registryctl" \
-    BITNAMI_IMAGE_VERSION="1.9.3-ol-7-r27" \
+    BITNAMI_IMAGE_VERSION="1.10.0-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-registryctl/bin:/opt/bitnami/harbor-registry/bin:$PATH"
 
