@@ -40,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-9`, `0.0.4-debian-9-r435`, `0`, `0.0.4`, `0.0.4-r435`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r435/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.0.4-debian-9-r436`, `0`, `0.0.4`, `0.0.4-r436`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-9-r436/0/debian-9/Dockerfile)
 * [`0-photon-3`, `0.0.0-photon-3-r0` (0/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.0-photon-3-r0/0/photon-3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubewatch GitHub repo](https://github.com/bitnami/bitnami-docker-kubewatch).
