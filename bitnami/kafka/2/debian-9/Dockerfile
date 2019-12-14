@@ -22,7 +22,7 @@ RUN curl --silent -L https://github.com/bitnami/render-template/releases/downloa
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.3.1-debian-9-r38" \
+    BITNAMI_IMAGE_VERSION="2.3.1-debian-9-r39" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/kafka/bin:$PATH"
 
