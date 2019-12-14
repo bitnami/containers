@@ -48,9 +48,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-ol-7`, `4.1.0-ol-7-r3` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/4.1.0-ol-7-r3/4/ol-7/Dockerfile)
+* [`4-ol-7`, `4.1.0-ol-7-r4` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/4.1.0-ol-7-r4/4/ol-7/Dockerfile)
 * [`4-debian-9`, `4.1.0-debian-9-r2`, `4`, `4.1.0`, `4.1.0-r2`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/4.1.0-debian-9-r2/4/debian-9/Dockerfile)
-* [`4-photon-3`, `4.0.0-photon-3-r0` (4/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/4.0.0-photon-3-r0/4/photon-3/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
 
