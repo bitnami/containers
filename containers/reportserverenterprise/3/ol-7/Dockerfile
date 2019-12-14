@@ -1,17 +1,17 @@
-FROM bitnami/oraclelinux-extras:7-r562
+FROM bitnami/oraclelinux-extras:7-r563
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages fontconfig glibc keyutils-libs krb5-libs libcom_err libgcc libselinux libstdc++ ncurses-libs openssl-libs pcre zlib
 RUN bitnami-pkg install java-1.8.232-0 --checksum fbac74363c807fce14538c5f9a9232602adc7883c1c5936571c741625de2479e
-RUN bitnami-pkg unpack tomcat-9.0.29-0 --checksum 82f2bc0b2dc864fa65263c54a750e10453a61f759bbda580359a2dd6d72922b0
+RUN bitnami-pkg unpack tomcat-9.0.30-0 --checksum 654139a2496081c0726556ee0aeac696eb1841b637459153bf15d90b1b246c86
 RUN bitnami-pkg unpack mysql-client-10.3.21-0 --checksum 9e012f0e449a963c923c8ea7a5cc2ab2c688564ed910eaab2aef1ad70c5d8e4b
 RUN bitnami-pkg unpack reportserverenterprise-3.1.0-6016-1 --checksum 1e26c60ec5ebbe366da65e24039515da35284e206d53a33b087e8c3ab9163b41
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserverenterprise" \
-    BITNAMI_IMAGE_VERSION="3.1.0-6016-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="3.1.0-6016-ol-7-r12" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
