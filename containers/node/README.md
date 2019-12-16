@@ -63,7 +63,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`8-ol-7`, `8.16.2-ol-7-r72` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.16.2-ol-7-r72/8/ol-7/Dockerfile)
 * [`8-debian-9`, `8.16.2-debian-9-r60`, `8`, `8.16.2`, `8.16.2-r60` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.16.2-debian-9-r60/8/debian-9/Dockerfile)
 * [`8-debian-9-prod`, `8.16.2-debian-9-r56-prod`, `8-prod`, `8.16.2-prod`, `8.16.2-r56-prod` (8-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/8.16.2-debian-9-r56-prod/8-prod/debian-9/Dockerfile)
-* [`6-ol-7-prod`, `6.17.1-ol-7-r261-prod` (6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-ol-7-r261-prod/6-prod/ol-7/Dockerfile)
+* [`6-ol-7-prod`, `6.17.1-ol-7-r262-prod` (6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-ol-7-r262-prod/6-prod/ol-7/Dockerfile)
 * [`6-ol-7`, `6.17.1-ol-7-r258` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-ol-7-r258/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.17.1-debian-9-r231`, `6`, `6.17.1`, `6.17.1-r231` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-debian-9-r231/6/debian-9/Dockerfile)
 * [`6-debian-9-prod`, `6.17.1-debian-9-r225-prod`, `6-prod`, `6.17.1-prod`, `6.17.1-r225-prod` (6-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-debian-9-r225-prod/6-prod/debian-9/Dockerfile)
