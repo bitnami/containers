@@ -133,6 +133,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
+    -e AIRFLOW_QUEUE=new_queue \
     --net airflow-tier \
     --volume airflow_worker_data:/bitnami \
     bitnami/airflow-worker:latest
@@ -305,6 +306,7 @@ The Airflow Worker instance can be customized by specifying environment variable
 - `AIRFLOW_WEBSERVER_HOST`: Airflow Worker webserver host. Default: **airflow**
 - `AIRFLOW_WEBSERVER_PORT_NUMBER`: Airflow Worker webserver port. Default: **8080**
 - `AIRFLOW_HOSTNAME_CALLABLE`: Method to obtain the hostname. No defaults.
+- `AIRFLOW_QUEUE`: A queue for the worker to pull tasks from.
 
 ##### Use an existing database
 
