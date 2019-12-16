@@ -10,11 +10,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip hostname libaio-devel procps-ng sudo tar which
-RUN . ./libcomponent.sh && component_unpack "chartmuseum" "0.10.0-0" --checksum d0ff38f9f6f96d18d302b5524370c93bb58578432aee9f5e8b2d1590e893bc4e
+RUN . ./libcomponent.sh && component_unpack "chartmuseum" "0.11.0-0" --checksum 76ff181b182d6564a00871e1094041d0c24d3a372522e5686c9e89d01b369e94
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.10.0-ol-7-r7" \
+    BITNAMI_IMAGE_VERSION="0.11.0-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/chartmuseum/bin:$PATH"
 
