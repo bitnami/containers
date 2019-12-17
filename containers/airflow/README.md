@@ -316,6 +316,9 @@ The Airflow instance can be customized by specifying environment variables on th
 - `AIRFLOW_LOAD_EXAMPLES`: To load example tasks into the application. Default: **yes**
 - `AIRFLOW_BASE_URL`: Airflow webserver base URL. No defaults.
 - `AIRFLOW_HOSTNAME_CALLABLE`: Method to obtain the hostname. No defaults.
+- `AIRFLOW_POOL_NAME`: Pool name. No defaults.
+- `AIRFLOW_POOL_SIZE`: Pool size, required with `AIRFLOW_POOL_NAME`. No defaults.
+- `AIRFLOW_POOL_DESC`: Pool description, required with `AIRFLOW_POOL_NAME`. No defaults.
 
 ##### Use an existing database
 
