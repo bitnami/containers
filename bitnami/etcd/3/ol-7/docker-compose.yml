@@ -6,7 +6,7 @@ services:
     environment:
       - ALLOW_NONE_AUTHENTICATION=yes
     volumes:
-      - etcd_data:/bitnami
+      - etcd_data:/bitnami/etcd
 volumes:
   etcd_data:
     driver: local
