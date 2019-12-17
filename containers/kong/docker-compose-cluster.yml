@@ -37,6 +37,9 @@ services:
       - KONG_DATABASE=cassandra
       - KONG_CASSANDRA_CONTACT_POINTS=cassandra,cassandra2
       - KONG_CASSANDRA_PASSWORD=kong
+      # See NGINX worker_processes setting at http://nginx.org/en/docs/ngx_core_module.html#worker_processes
+      # If in doubt, set to the amount of CPU cores divided by the number of Kong/Cassandra nodes in the machine
+      - KONG_NGINX_WORKER_PROCESSES=2
   kong2:
     image: bitnami/kong:1
     ports:
@@ -46,6 +49,9 @@ services:
       - KONG_DATABASE=cassandra
       - KONG_CASSANDRA_CONTACT_POINTS=cassandra,cassandra2
       - KONG_CASSANDRA_PASSWORD=kong
+      # See NGINX worker_processes setting at http://nginx.org/en/docs/ngx_core_module.html#worker_processes
+      # If in doubt, set to the amount of CPU cores divided by the number of Kong/Cassandra nodes in the machine
+      - KONG_NGINX_WORKER_PROCESSES=2
 volumes:
   cassandra_data:
     driver: local
