@@ -11,7 +11,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 libgcc1 procps unzip zlib1g
 RUN . ./libcomponent.sh && component_unpack "java" "1.8.232-0" --checksum f4e5ff1d4fb13baf9bb2a4f2e5ffb328cf9eeb26d0b91214196e4473c2874adc
-RUN . ./libcomponent.sh && component_unpack "kafka" "2.3.1-0" --checksum 8b1454f90f47f2f95589c41a8e29ab4ed87ab1cdaac9e5c3a7c33c0bf3e5247a
+RUN . ./libcomponent.sh && component_unpack "kafka" "2.4.0-0" --checksum 1c61d2e7684d778a2aef05aa3becf6f28dfc9bd18e71a89e1fd88eb0de29f8c1
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
     echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
     chmod u+x /usr/local/bin/gosu && \
@@ -22,7 +22,7 @@ RUN curl --silent -L https://github.com/bitnami/render-template/releases/downloa
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.3.1-debian-9-r41" \
+    BITNAMI_IMAGE_VERSION="2.4.0-debian-9-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/kafka/bin:$PATH"
 
