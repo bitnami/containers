@@ -23,6 +23,10 @@ do
     sleep 1
 done
 
+if [[ -n "$AIRFLOW_POOL_NAME" ]] && [[ -n "$AIRFLOW_POOL_SIZE" ]] && [[ -n "$AIRFLOW_POOL_DESC" ]]; then
+    ${EXEC} pool -s "$AIRFLOW_POOL_NAME" "$AIRFLOW_POOL_SIZE" "$AIRFLOW_POOL_DESC"
+fi
+
 info "Starting ${DAEMON}..."
 # If container is started as `root` user
 if [ $EUID -eq 0 ]; then
