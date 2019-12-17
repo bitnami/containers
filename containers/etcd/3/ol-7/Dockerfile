@@ -11,11 +11,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 COPY rootfs /
 RUN chmod g+rwX /opt/bitnami/etcd
+RUN mkdir -p /bitnami/etcd/data/ && chmod g+rwX /bitnami/etcd/data/
 ENV BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.4.3-ol-7-r63" \
+    BITNAMI_IMAGE_VERSION="3.4.3-ol-7-r64" \
     ETCDCTL_API="3" \
     ETCD_ADVERTISE_CLIENT_URLS="http://127.0.0.1:2379" \
-    ETCD_DATA_DIR="/opt/bitnami/etcd/data/" \
+    ETCD_DATA_DIR="/bitnami/etcd/data/" \
     ETCD_LISTEN_CLIENT_URLS="http://0.0.0.0:2379" \
     PATH="/opt/bitnami/etcd/bin:$PATH"
 
