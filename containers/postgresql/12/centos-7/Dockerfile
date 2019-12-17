@@ -9,17 +9,16 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libedit libgcc libicu libselinux libstdc++ libuuid libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre sqlite xz-libs zlib
-RUN . ./libcomponent.sh && component_unpack "postgresql" "12.1.0-1" --checksum c8bf3d93e8bc0b4f27e17d8481a6f2e2a87f904742ea8bb404eb392ddf17fb2c
+RUN . ./libcomponent.sh && component_unpack "postgresql" "12.1.0-3" --checksum d8c444164e5b421bbbe8dc84050774d227b6072b58304e15b189114c849fdbef
 
 COPY rootfs /
-RUN yum --enablerepo base,updates,extras -y install epel-release && yum --nogpgcheck --enablerepo base,updates,extras -y update && yum --enablerepo base,updates -y install nss_wrapper
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="12.1.0-centos-7-r37" \
+    BITNAMI_IMAGE_VERSION="12.1.0-centos-7-r38" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
-    NSS_WRAPPER_LIB="/usr/lib64/libnss_wrapper.so" \
+    NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
     PATH="/opt/bitnami/postgresql/bin:$PATH"
 
 VOLUME [ "/bitnami/postgresql", "/docker-entrypoint-initdb.d", "/docker-entrypoint-preinitdb.d" ]
