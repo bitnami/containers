@@ -9,15 +9,14 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages cyrus-sasl-lib glibc keyutils-libs krb5-libs libcom_err libedit libgcc libicu libselinux libstdc++ libuuid libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre sqlite xz-libs zlib
-RUN . ./libcomponent.sh && component_unpack "postgresql-repmgr" "11.6.0-1" --checksum 6dda74d91f3c2e7d8022e3678eb36fe1146ee6c4fc309435e635335ff3f187e9
+RUN . ./libcomponent.sh && component_unpack "postgresql-repmgr" "11.6.0-2" --checksum de167d0df1faeaef96be544e68706affd8fe4e491fa5384ecc9f49636102f926
 
 COPY rootfs /
-RUN yum --enablerepo base,updates,extras -y install epel-release && yum --nogpgcheck --enablerepo base,updates,extras -y update && yum --enablerepo base,updates -y install nss_wrapper
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql-repmgr" \
-    BITNAMI_IMAGE_VERSION="11.6.0-centos-7-r36" \
+    BITNAMI_IMAGE_VERSION="11.6.0-centos-7-r37" \
     NAMI_PREFIX="/.nami" \
-    NSS_WRAPPER_LIB="/usr/lib64/libnss_wrapper.so" \
+    NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
     PATH="/opt/bitnami/postgresql-repmgr/bin:/opt/bitnami/repmgr/bin:/opt/bitnami/postgresql/bin:$PATH"
 
 EXPOSE 5432
