@@ -42,11 +42,11 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`13-debian-9-prod`, `13.5.0-debian-9-r0-prod`, `13-prod`, `13.5.0-prod`, `13.5.0-r0-prod` (13-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.5.0-debian-9-r0-prod/13-prod/debian-9/Dockerfile)
+* [`13-debian-9`, `13.5.0-debian-9-r0`, `13`, `13.5.0`, `13.5.0-r0` (13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.5.0-debian-9-r0/13/debian-9/Dockerfile)
 * [`13-photon-3`, `13.4.0-photon-3-r0` (13/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.4.0-photon-3-r0/13/photon-3/Dockerfile)
 * [`13-ol-7-prod`, `13.4.0-ol-7-r1-prod` (13-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.4.0-ol-7-r1-prod/13-prod/ol-7/Dockerfile)
 * [`13-ol-7`, `13.4.0-ol-7-r1` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.4.0-ol-7-r1/13/ol-7/Dockerfile)
-* [`13-debian-9-prod`, `13.4.0-debian-9-r0-prod`, `13-prod`, `13.4.0-prod`, `13.4.0-r0-prod` (13-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.4.0-debian-9-r0-prod/13-prod/debian-9/Dockerfile)
-* [`13-debian-9`, `13.4.0-debian-9-r0`, `13`, `13.4.0`, `13.4.0-r0` (13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.4.0-debian-9-r0/13/debian-9/Dockerfile)
 * [`12-photon-3`, `12.14.0-photon-3-r0` (12/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.14.0-photon-3-r0/12/photon-3/Dockerfile)
 * [`12-ol-7-prod`, `12.14.0-ol-7-r1-prod` (12-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.14.0-ol-7-r1-prod/12-prod/ol-7/Dockerfile)
 * [`12-ol-7`, `12.14.0-ol-7-r1` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.14.0-ol-7-r1/12/ol-7/Dockerfile)
