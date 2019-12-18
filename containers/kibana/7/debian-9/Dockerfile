@@ -7,12 +7,12 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libstdc++6
-RUN bitnami-pkg unpack kibana-7.5.0-0 --checksum 152f288a1ef29b6dabc77a662a63ae2042cd1e2099ef4c42c42d19d6ca92eaa2
+RUN bitnami-pkg unpack kibana-7.5.1-0 --checksum ee971494daf389734982891320fbb59d68ea371d42d770c6b27a6d953e950ad9
 RUN mkdir -p /bitnami/kibana/ /docker-entrypoint-initdb.d/ && chmod -R g+rwX /bitnami/ /docker-entrypoint-initdb.d/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="7.5.0-debian-9-r9" \
+    BITNAMI_IMAGE_VERSION="7.5.1-debian-9-r1" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
