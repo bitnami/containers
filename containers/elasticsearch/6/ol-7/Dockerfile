@@ -11,7 +11,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel procps-ng sudo tar which zlib
 RUN . ./libcomponent.sh && component_unpack "java" "11.0.5-0" --checksum e45456416649c404add4f02355d6efe6c82f960153a9807e4ba9fea16d28a237
-RUN . ./libcomponent.sh && component_unpack "elasticsearch" "6.8.5-0" --checksum c147f15a60ba673d0a62f805958df3e41ba326912bb95a3d108d0a8e989ff0ba
+RUN . ./libcomponent.sh && component_unpack "elasticsearch" "6.8.6-0" --checksum 36d259ed9c8fca470cfc22134ca1268f7168e072467ed2f3e7d75ea5dc1f2313
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
     echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
     chmod u+x /usr/local/bin/gosu && \
@@ -22,7 +22,7 @@ RUN curl --silent -L https://github.com/mikefarah/yq/releases/download/2.4.0/yq_
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="6.8.5-ol-7-r30" \
+    BITNAMI_IMAGE_VERSION="6.8.6-ol-7-r0" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/elasticsearch/bin:$PATH"
