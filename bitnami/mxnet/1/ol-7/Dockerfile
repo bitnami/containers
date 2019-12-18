@@ -16,7 +16,7 @@ RUN . ./libcomponent.sh && component_unpack "mxnet" "1.5.1-1" --checksum e79139b
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="mxnet" \
-    BITNAMI_IMAGE_VERSION="1.5.1-ol-7-r71" \
+    BITNAMI_IMAGE_VERSION="1.5.1-ol-7-r72" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:$PATH"
