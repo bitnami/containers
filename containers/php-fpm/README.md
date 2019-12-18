@@ -48,8 +48,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`7.4-ol-7`, `7.4.0-ol-7-r1` (7.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.0-ol-7-r1/7.4/ol-7/Dockerfile)
 * [`7.4-ol-7-prod`, `7.4.0-ol-7-r0-prod` (7.4-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.0-ol-7-r0-prod/7.4-prod/ol-7/Dockerfile)
-* [`7.4-ol-7`, `7.4.0-ol-7-r0` (7.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.0-ol-7-r0/7.4/ol-7/Dockerfile)
 * [`7.4-debian-9-prod`, `7.4.0-debian-9-r0-prod`, `7.4-prod`, `7.4.0-prod`, `7.4.0-r0-prod` (7.4-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.0-debian-9-r0-prod/7.4-prod/debian-9/Dockerfile)
 * [`7.4-debian-9`, `7.4.0-debian-9-r0`, `7.4`, `7.4.0`, `7.4.0-r0` (7.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.0-debian-9-r0/7.4/debian-9/Dockerfile)
 * [`7.3-ol-7-prod`, `7.3.12-ol-7-r28-prod` (7.3-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.12-ol-7-r28-prod/7.3-prod/ol-7/Dockerfile)
