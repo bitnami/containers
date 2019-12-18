@@ -13,7 +13,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/cassandra-exporter-2.3.0-1-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="cassandra-exporter" \
-    BITNAMI_IMAGE_VERSION="2.3.0-debian-9-r116" \
+    BITNAMI_IMAGE_VERSION="2.3.0-debian-9-r117" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 8080
