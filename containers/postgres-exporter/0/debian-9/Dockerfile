@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/postgres-exporter-0.8.0-0-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="postgres-exporter" \
-    BITNAMI_IMAGE_VERSION="0.8.0-debian-9-r17" \
+    BITNAMI_IMAGE_VERSION="0.8.0-debian-9-r18" \
     PATH="/opt/bitnami/postgres-exporter/bin:$PATH"
 
 EXPOSE 9187
