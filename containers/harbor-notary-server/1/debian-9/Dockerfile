@@ -15,7 +15,7 @@ RUN . ./libcomponent.sh && component_unpack "harbor-notary-server" "1.10.0-0" --
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-notary-server" \
-    BITNAMI_IMAGE_VERSION="1.10.0-debian-9-r3" \
+    BITNAMI_IMAGE_VERSION="1.10.0-debian-9-r4" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-notary-server/bin:$PATH" \
     SERVICE_NAME="notary_server"
