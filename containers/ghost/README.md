@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.1.1-ol-7-r14` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/3.1.1-ol-7-r14/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.1.1-debian-9-r10`, `3`, `3.1.1`, `3.1.1-r10`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/3.1.1-debian-9-r10/3/debian-9/Dockerfile)
+* [`3-debian-9`, `3.1.1-debian-9-r11`, `3`, `3.1.1`, `3.1.1-r11`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/3.1.1-debian-9-r11/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
 
@@ -202,6 +202,55 @@ You can use these snapshots to restore the application state should the upgrade 
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name ghost bitnami/ghost:latest`
 
 # Configuration
+
+## Setting a custom storage adapters 
+
+This example shows how to install the [Storage Adapter for S3](https://github.com/colinmeinke/ghost-storage-adapter-s3#ghost-storage-adapter-s3).
+
+```
+FROM bitnami/ghost:latest
+
+USER root
+
+RUN install_packages jq
+RUN mkdir -p /.npm && chmod -R g+rwX,o+rw /.npm
+
+COPY post_ghost_config.sh /
+RUN chmod +x /post_ghost_config.sh \
+    && cp /app-entrypoint.sh /tmp/app-entrypoint.sh \
+    && sed '/info "Starting ghost... "/ a . /post_ghost_config.sh' /tmp/app-entrypoint.sh > /app-entrypoint.sh 
+
+ENV AWS_ACCESS_KEY_ID="AWS_ACCESS_KEY_ID" \
+    AWS_ACCESS_SECRET_KEY="AWS_ACCESS_SECRET_KEY" \
+    AWS_REGION="AWS_REGION" \
+    AWS_BUCKET="AWS_BUCKET" 
+
+USER 1001
+
+RUN cd /bitnami/ghost \
+    && npm i --silent ghost-storage-adapter-s3 \ 
+    && mkdir -p /bitnami/ghost/content/adapters/storage/s3 \
+    && cp -r ./node_modules/ghost-storage-adapter-s3/* /bitnami/ghost/content/adapters/storage/s3/ 
+```
+
+1. Add `jq` tool, prepare npm and install an adapter.
+
+2. Add configuration for the adapter.
+
+**Create a script using `jq` for adding configuration to the `config.production.json`.**
+
+```bash
+#!/bin/bash -e
+cp /bitnami/ghost/config.production.json /tmp/config.tmp.json
+
+jq -r --arg keyId $AWS_ACCESS_KEY_ID --arg accessKey $AWS_ACCESS_SECRET_KEY --arg region $AWS_REGION --arg bucket $AWS_BUCKET \
+    '. + { storage: { active: "s3", s3: { accessKeyId: $keyId, secretAccessKey: $accessKey, region: $region, bucket: $bucket } } }' \
+    /tmp/config.tmp.json > /bitnami/ghost/config.production.json
+```
+
+**Add it to the `app-entrypoint.sh` just after ghost is configured.**
+
+Finally, build the container and set the required environment variables to configure the adapter.
 
 ## Environment variables
 
