@@ -13,7 +13,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/jenkins-exporter-0.20171225.0-1-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="jenkins-exporter" \
-    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-9-r123" \
+    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-9-r124" \
     PATH="/opt/bitnami/jenkins-exporter/venv/bin:$PATH"
 
 EXPOSE 9118
