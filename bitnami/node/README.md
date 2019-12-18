@@ -375,10 +375,6 @@ $ docker-compose up node
 
 # Notable Changes
 
-## 4.8.4-r1, 6.11.2-r1, 7.10.1-r1 and 8.3.0-r1
-
-- The node container has been migrated to a non-root container approach. Previously the container run as `root`. From now own the container run as user `1001`.
-
 ## 6.2.0-r0 (2016-05-11)
 
 - Commands are now executed as the `root` user. Use the `--user` argument to switch to another user or change to the required user using `sudo` to launch applications. Alternatively, as of Docker 1.10 User Namespaces are supported by the docker daemon. Refer to the [daemon user namespace options](https://docs.docker.com/engine/security/userns-remap/) for more details.
