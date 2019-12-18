@@ -57,7 +57,7 @@ mysql_extra_flags() {
 #########################
 mysql_env() {
     cat <<"EOF"
-export DB_FLAVOR="${DB_FLAVOR:-"mysql"}"
+export DB_FLAVOR="${DB_FLAVOR:-mysql}"
 # Format log messages
 export MODULE="$DB_FLAVOR"
 export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
