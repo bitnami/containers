@@ -13,7 +13,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/java-1.8.232-0-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="jmx-exporter" \
-    BITNAMI_IMAGE_VERSION="0.12.0-debian-9-r123" \
+    BITNAMI_IMAGE_VERSION="0.12.0-debian-9-r124" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 5556
