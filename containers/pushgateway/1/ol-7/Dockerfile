@@ -10,7 +10,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/pushgateway-1.0.0-0-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="pushgateway" \
-    BITNAMI_IMAGE_VERSION="1.0.0-ol-7-r57" \
+    BITNAMI_IMAGE_VERSION="1.0.0-ol-7-r58" \
     PATH="/opt/bitnami/pushgateway/bin:$PATH"
 
 EXPOSE 9091
