@@ -6,14 +6,14 @@ RUN install_packages ImageMagick advancecomp cyrus-sasl-lib file ghostscript gif
 RUN bitnami-pkg install ruby-2.6.5-0 --checksum 29ef6f1ed911c95ada9710d617438ec90e6e822cae31d2b82d578f9b9e7b1c30
 RUN bitnami-pkg unpack postgresql-client-11.6.0-0 --checksum c0df49723944b7b842053d0cfb4f2ffe0313575ecfbb213e113b50989d008c1a
 RUN bitnami-pkg install git-2.24.1-0 --checksum ecc3a4f7b7a77ffb00ef66a9b02613c52a5b6d77bf9a5279fa139a66e6265460
-RUN bitnami-pkg unpack discourse-sidekiq-2.3.7-0 --checksum deced8089ab565ddfa1a3f282f902f370882a80722db708d24b9d8e4df4c756a
+RUN bitnami-pkg unpack discourse-sidekiq-2.3.8-0 --checksum fa599df4aa89f4a246a273216872dcebece74893adac7fb180cef1eb09f86ca1
 RUN bitnami-pkg install brotli-1.0.7-1 --checksum 92c77710e899ebedff06d583af7938a56b80df9584675109df5aee1d5899e8da
-RUN bitnami-pkg unpack discourse-2.3.7-0 --checksum 4e5d45b79a2ae9bf4270ca7e70dcfc3d4dcde9df827cd5f28f1d5b710d682256
+RUN bitnami-pkg unpack discourse-2.3.8-0 --checksum e404067c6078feb5efc9d0ce8d40ad3642e22229c3900fe0630e0fba19581a82
 RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.3.7-ol-7-r14" \
+    BITNAMI_IMAGE_VERSION="2.3.8-ol-7-r0" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="discourse" \
     DISCOURSE_HOSTNAME="127.0.0.1" \
