@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/memcached-exporter-0.6.0-1-linux-amd64-debian-9.tar.gz
 
 ENV BITNAMI_APP_NAME="memcached-exporter" \
-    BITNAMI_IMAGE_VERSION="0.6.0-debian-9-r100" \
+    BITNAMI_IMAGE_VERSION="0.6.0-debian-9-r101" \
     PATH="/opt/bitnami/memcached-exporter/bin:$PATH"
 
 EXPOSE 9150
