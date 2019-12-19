@@ -16,7 +16,7 @@ RUN . ./libcomponent.sh && component_unpack "pytorch" "1.3.1-0" --checksum 6e6fa
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="pytorch" \
-    BITNAMI_IMAGE_VERSION="1.3.1-debian-9-r30" \
+    BITNAMI_IMAGE_VERSION="1.3.1-debian-9-r31" \
     LD_LIBRARY_PATH="/opt/bitnami/miniconda/lib/python3.7/site-packages/torch/lib/:/opt/bitnami/miniconda/lib/python3.7/site-packages/PIL/.libs/:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/miniconda/bin:$PATH"
