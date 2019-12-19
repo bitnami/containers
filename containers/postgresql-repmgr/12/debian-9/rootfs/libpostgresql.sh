@@ -123,8 +123,8 @@ export POSTGRESQL_DAEMON_USER="postgresql"
 export POSTGRESQL_DAEMON_GROUP="postgresql"
 
 # Version
-export POSTGRESQL_VERSION="$(echo "$BITNAMI_IMAGE_VERSION" | grep -oP "^\d+\.\d+\.\d+")"
-export POSTGRESQL_MAJOR_VERSION="$(echo "$BITNAMI_IMAGE_VERSION" | grep -oP "^\d+")"
+export POSTGRESQL_VERSION="$(echo "$BITNAMI_IMAGE_VERSION" | grep -oE "^[0-9]+\.[0-9]+\.[0-9]+")"
+export POSTGRESQL_MAJOR_VERSION="$(echo "$BITNAMI_IMAGE_VERSION" | grep -oE "^[0-9]+")"
 
 # Settings
 export POSTGRESQL_INIT_MAX_TIMEOUT=${POSTGRESQL_INIT_MAX_TIMEOUT:-60}
