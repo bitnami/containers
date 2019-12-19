@@ -10,7 +10,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN ln -sf /opt/bitnami/configmap-reload/bin/configmap-reload /bin/configmap-reload
 
 ENV BITNAMI_APP_NAME="configmap-reload" \
-    BITNAMI_IMAGE_VERSION="0.3.0-debian-9-r54" \
+    BITNAMI_IMAGE_VERSION="0.3.0-debian-9-r55" \
     PATH="/opt/bitnami/configmap-reload/bin:$PATH"
 
 EXPOSE 8080
