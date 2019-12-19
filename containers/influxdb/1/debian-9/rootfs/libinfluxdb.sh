@@ -201,7 +201,7 @@ influxdb_conf_get() {
     local -r key="${1:?missing key}"
 #     local -r section="${2:?missing section}"
 
-    grep -oP "^ *$key *= *\K.*$" "$INFLUXDB_CONF_FILE"
+    sed -n -e "s/^ *$key *= *//p" "$INFLUXDB_CONF_FILE"
 #     toml-parser -r "$section" "$key" "$INFLUXDB_CONF_FILE"
 }
 
