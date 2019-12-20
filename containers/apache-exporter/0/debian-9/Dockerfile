@@ -10,7 +10,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN ln -sf /opt/bitnami/apache-exporter/bin/apache_exporter /bin/apache_exporter
 
 ENV BITNAMI_APP_NAME="apache-exporter" \
-    BITNAMI_IMAGE_VERSION="0.7.0-debian-9-r142" \
+    BITNAMI_IMAGE_VERSION="0.7.0-debian-9-r143" \
     PATH="/opt/bitnami/apache-exporter/bin:$PATH"
 
 EXPOSE 9117
