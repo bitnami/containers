@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r568
+FROM bitnami/oraclelinux-extras:7-r569
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -8,12 +8,12 @@ RUN bitnami-pkg install redis-client-5.0.7-0 --checksum 1fb70d37880e4b45f3197ca8
 RUN bitnami-pkg unpack php-7.1.33-2 --checksum 1f180c82f1583db9d54192e42c9f422d9a107e599e4647a31c9f24a890217e8d
 RUN bitnami-pkg install mysql-client-10.3.21-0 --checksum 9e012f0e449a963c923c8ea7a5cc2ab2c688564ed910eaab2aef1ad70c5d8e4b
 RUN bitnami-pkg install mongodb-client-4.0.14-0 --checksum 26d1f8800df81bb045f4b1737a951edde2642176d0a34560def6c6f372a0448b
-RUN bitnami-pkg install libphp-7.1.33-1 --checksum 4708383b1e7e84c57dc8e12920ad81bc4baae5bda977566b5fe872f928ba85f5
+RUN bitnami-pkg install libphp-7.1.33-2 --checksum f3752515730c45cfac9b2b211f2f6e6564cc97345f59e1d08fa74b030047af6e
 RUN bitnami-pkg unpack dreamfactory-3.0.1-0 --checksum 4adfec9855b36206a047c8436eed1899027f15231944471582cb9172cc5dc8a1
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="3.0.1-ol-7-r125" \
+    BITNAMI_IMAGE_VERSION="3.0.1-ol-7-r126" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
     MARIADB_PORT_NUMBER="3306" \
