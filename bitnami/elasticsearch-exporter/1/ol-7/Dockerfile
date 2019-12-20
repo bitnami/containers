@@ -10,7 +10,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/elasticsearch-exporter-1.1.0-1-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="elasticsearch-exporter" \
-    BITNAMI_IMAGE_VERSION="1.1.0-ol-7-r130" \
+    BITNAMI_IMAGE_VERSION="1.1.0-ol-7-r131" \
     PATH="/opt/bitnami/elasticsearch-exporter/bin:$PATH"
 
 EXPOSE 9114
