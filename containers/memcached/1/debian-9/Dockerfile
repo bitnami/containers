@@ -10,6 +10,8 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 libevent-2.0-5 libsasl2-2 libsasl2-modules procps sasl2-bin unzip
 RUN . ./libcomponent.sh && component_unpack "memcached" "1.5.20-0" --checksum 226a749c2bc050f657c5c8a24c491f34d24644f50de1b59f106809b52d4ddba0
+RUN apt-get update && apt-get upgrade && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
     echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
     chmod u+x /usr/local/bin/gosu && \
@@ -19,7 +21,7 @@ RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.20-debian-9-r30" \
+    BITNAMI_IMAGE_VERSION="1.5.20-debian-9-r31" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
 
 EXPOSE 11211
