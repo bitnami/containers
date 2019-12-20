@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r568
+FROM bitnami/oraclelinux-extras:7-r569
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,13 +6,13 @@ RUN install_packages bzip2-libs cronie cyrus-sasl-lib expat freetds-libs freetyp
 RUN bitnami-pkg unpack apache-2.4.41-3 --checksum 30ae9f98466bc180ec5b3121b000e0a8ee36ee3434d4645c7c3aa22710cc6166
 RUN bitnami-pkg unpack php-7.3.13-0 --checksum a51ab66c0ae1dd1503084b35380659069ba03fe2644e2034752b346c87b3c89e
 RUN bitnami-pkg unpack mysql-client-10.1.43-0 --checksum eb30f14e1bc364fea5fc47b0d17d4a1cb506b89339c4e88b0f9f0c879dd99434
-RUN bitnami-pkg install libphp-7.3.13-0 --checksum 02f298b5d1860432be836e93ec785030b79c27f82fb9ab6b9fe4ddf29dd3dce3
+RUN bitnami-pkg install libphp-7.3.13-1 --checksum 98cbce6668636f4104863eef78f9c29f6f97a5c44fbec102fa7ef91b4f46d459
 RUN bitnami-pkg unpack moodle-3.8.0-0 --checksum 1e36b69358d0a5f32ab5a611f20a2318629e78a40685002e7097d8db4d3b3a18
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.8.0-ol-7-r33" \
+    BITNAMI_IMAGE_VERSION="3.8.0-ol-7-r34" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
