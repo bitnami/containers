@@ -6,13 +6,13 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libf
 RUN bitnami-pkg unpack apache-2.4.41-3 --checksum 4cbd05e6df93361999856d4f77a4124443bc11b47abb090b3cfd19544cce627c
 RUN bitnami-pkg unpack php-7.2.26-0 --checksum 09913de0231b210fa87a6fb4eb7a63c8aecd58d48eac814b2748edae9bb2527e
 RUN bitnami-pkg unpack mysql-client-10.1.43-0 --checksum 7b4dce9c8a619e8af1b67a3df57f66bfd8d336bc1a38e7076a9b15a9b983f2d1
-RUN bitnami-pkg install libphp-7.2.26-0 --checksum dfaa2c0090697e9b7cf54aac5a30c8f906aa0fc529f0b1cd42a59910cbd8a529
+RUN bitnami-pkg install libphp-7.2.26-1 --checksum 20391515dbb6c613501560be9f5ad3e2ea5cd713f16c0ae0f2a569abe62d864e
 RUN bitnami-pkg unpack prestashop-1.7.6-2-0 --checksum d796cbaeaa5f4888a067b7b9a81e5fda0d92087635b2be0271310622146cf971
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-2-debian-9-r16" \
+    BITNAMI_IMAGE_VERSION="1.7.6-2-debian-9-r17" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
