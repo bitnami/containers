@@ -93,6 +93,7 @@ export DB_REPLICATION_USER="$(get_env_var_value REPLICATION_USER)"
 MASTER_ROOT_USER="$(get_env_var_value MASTER_ROOT_USER)"
 export DB_MASTER_ROOT_USER="${MASTER_ROOT_USER:-root}"
 EOF
+    DB_FLAVOR="${DB_FLAVOR:-mysql}"
     # Credentials should be allowed to be mounted as files to avoid sensitive data
     # in the environment variables
     password_file="$(get_env_var_value ROOT_PASSWORD_FILE)"
