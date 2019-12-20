@@ -10,7 +10,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/node-exporter-0.18.1-1-linux-x86_64-ol-7.tar.gz
 
 ENV BITNAMI_APP_NAME="node-exporter" \
-    BITNAMI_IMAGE_VERSION="0.18.1-ol-7-r206" \
+    BITNAMI_IMAGE_VERSION="0.18.1-ol-7-r207" \
     PATH="/opt/bitnami/node-exporter/bin:$PATH"
 
 EXPOSE 9100
