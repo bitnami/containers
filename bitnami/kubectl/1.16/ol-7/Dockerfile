@@ -11,7 +11,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 RUN chmod +x /opt/bitnami/kubectl/bin/kubectl
 ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.16.3-ol-7-r38" \
+    BITNAMI_IMAGE_VERSION="1.16.3-ol-7-r39" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 USER 1001
