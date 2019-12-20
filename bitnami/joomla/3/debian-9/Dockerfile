@@ -6,13 +6,13 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libf
 RUN bitnami-pkg unpack apache-2.4.41-3 --checksum 4cbd05e6df93361999856d4f77a4124443bc11b47abb090b3cfd19544cce627c
 RUN bitnami-pkg unpack php-7.3.13-0 --checksum 5e55d9741383f32ea8fadfbeae5a6fd9b86f188c67e9839e26449f80dd3addef
 RUN bitnami-pkg unpack mysql-client-10.1.43-0 --checksum 7b4dce9c8a619e8af1b67a3df57f66bfd8d336bc1a38e7076a9b15a9b983f2d1
-RUN bitnami-pkg install libphp-7.3.13-0 --checksum 2fb92c20ee75e835092f95839b9521a430c6e8c4e920369c060cf424a5d897f9
+RUN bitnami-pkg install libphp-7.3.13-1 --checksum 0f5266ffcb237cb8db12717591d2669c0b4020104ca87eb0e090ef96d2464046
 RUN bitnami-pkg unpack joomla-3.9.14-0 --checksum 6f5895c6a0b2536661fe08db1feebd2f624f845c474e374e4aace6cb5b578c39
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.9.14-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="3.9.14-debian-9-r2" \
     JOOMLA_DATABASE_NAME="bitnami_joomla" \
     JOOMLA_DATABASE_PASSWORD="" \
     JOOMLA_DATABASE_USER="bn_joomla" \
