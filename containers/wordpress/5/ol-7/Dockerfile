@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r568
+FROM bitnami/oraclelinux-extras:7-r569
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -7,13 +7,13 @@ RUN bitnami-pkg unpack apache-2.4.41-3 --checksum 30ae9f98466bc180ec5b3121b000e0
 RUN bitnami-pkg unpack php-7.3.13-0 --checksum a51ab66c0ae1dd1503084b35380659069ba03fe2644e2034752b346c87b3c89e
 RUN bitnami-pkg install wp-cli-2.4.0-0 --checksum 877560924b4eaeba08a4e7086f85495260dce4adc4bbd3a6e876903544912b35
 RUN bitnami-pkg unpack mysql-client-10.3.21-0 --checksum 9e012f0e449a963c923c8ea7a5cc2ab2c688564ed910eaab2aef1ad70c5d8e4b
-RUN bitnami-pkg install libphp-7.3.13-0 --checksum 02f298b5d1860432be836e93ec785030b79c27f82fb9ab6b9fe4ddf29dd3dce3
+RUN bitnami-pkg install libphp-7.3.13-1 --checksum 98cbce6668636f4104863eef78f9c29f6f97a5c44fbec102fa7ef91b4f46d459
 RUN bitnami-pkg unpack wordpress-5.3.2-0 --checksum 5cd69d988e488e53f547bad2469e0b21db5b8b83535203c4b93304149b811649
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.3.2-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="5.3.2-ol-7-r2" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
