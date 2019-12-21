@@ -8,9 +8,11 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "541ea50a6d548233ef6a9967d0de3d68fb2a3aa57f14ab182902d4731817d6e6  /tmp/bitnami/pkg/cache/pushgateway-0.10.0-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/pushgateway-0.10.0-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/pushgateway-0.10.0-0-linux-x86_64-ol-7.tar.gz
+RUN yum upgrade -y && \
+    rm -r /var/cache/yum
 
 ENV BITNAMI_APP_NAME="pushgateway" \
-    BITNAMI_IMAGE_VERSION="0.10.0-ol-7-r77" \
+    BITNAMI_IMAGE_VERSION="0.10.0-ol-7-r78" \
     PATH="/opt/bitnami/pushgateway/bin:$PATH"
 
 EXPOSE 9091
