@@ -7,9 +7,11 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "6291d3d8d8964f9308426dc6328e5c1b5bd4b716a8ea2bd227ea3e84f991495b  /tmp/bitnami/pkg/cache/kafka-exporter-1.2.0-1-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/kafka-exporter-1.2.0-1-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/kafka-exporter-1.2.0-1-linux-amd64-debian-9.tar.gz
+RUN apt-get update && apt-get upgrade && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="kafka-exporter" \
-    BITNAMI_IMAGE_VERSION="1.2.0-debian-9-r125" \
+    BITNAMI_IMAGE_VERSION="1.2.0-debian-9-r126" \
     PATH="/opt/bitnami/kafka-exporter/bin:$PATH"
 
 EXPOSE 9308
