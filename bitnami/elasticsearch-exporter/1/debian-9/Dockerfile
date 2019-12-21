@@ -7,9 +7,11 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "40c411a0e31ded2752ab51803d7bd6f8d61d6f3697bbe50a4b0cacf374644db9  /tmp/bitnami/pkg/cache/elasticsearch-exporter-1.1.0-1-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/elasticsearch-exporter-1.1.0-1-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/elasticsearch-exporter-1.1.0-1-linux-amd64-debian-9.tar.gz
+RUN apt-get update && apt-get upgrade && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="elasticsearch-exporter" \
-    BITNAMI_IMAGE_VERSION="1.1.0-debian-9-r114" \
+    BITNAMI_IMAGE_VERSION="1.1.0-debian-9-r115" \
     PATH="/opt/bitnami/elasticsearch-exporter/bin:$PATH"
 
 EXPOSE 9114
