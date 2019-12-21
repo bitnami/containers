@@ -10,6 +10,8 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel libgcc libicu libstdc++ ncurses-libs openssl-libs procps-ng sudo tar unzip which zlib
 RUN . ./libcomponent.sh && component_unpack "couchdb" "2.3.1-5" --checksum 5ba614026391bc3a4d2748531d76ccdd365e32f0befae99e059c816ff88a834b
+RUN yum upgrade -y && \
+    rm -r /var/cache/yum
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
     echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
     chmod u+x /usr/local/bin/gosu && \
@@ -25,7 +27,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="couchdb" \
-    BITNAMI_IMAGE_VERSION="2.3.1-ol-7-r101" \
+    BITNAMI_IMAGE_VERSION="2.3.1-ol-7-r102" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/couchdb/bin:$PATH"
 
