@@ -7,6 +7,8 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "edead703e5d8d5f37adf40e2b3580993820a72a67e389c84cac03d10e1498bed  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.26.1-1-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.26.1-1-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.26.1-1-linux-amd64-debian-9.tar.gz
+RUN apt-get update && apt-get upgrade && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN mkdir -p /opt/bitnami/openresty/nginx/conf/geoip && \
     cd /opt/bitnami/openresty/nginx/conf/geoip && \
     curl -fL https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz | tar xvz && mv GeoLite2-City_*/*mmdb . && rm -r GeoLite2-City_*/ && \
@@ -36,7 +38,7 @@ RUN chown -LR www-data:root /etc/nginx /etc/ingress-controller && \
 RUN chgrp -R root /var/log/nginx && chmod g+rwX -R /var/log/nginx && \
     chgrp -R root /opt/bitnami/openresty/nginx/conf && chmod g+rwX -R /opt/bitnami/openresty/nginx/conf
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.26.1-debian-9-r51" \
+    BITNAMI_IMAGE_VERSION="0.26.1-debian-9-r52" \
     LUA_CPATH="/opt/bitnami/openresty/nginx/conf/lua/?.lua;/opt/bitnami/openresty/lualib/?.so;./?.so;/opt/bitnami/lua/lib/lua/?.so;;" \
     LUA_PATH="/opt/bitnami/openresty/lualib/?.lua;/opt/bitnami/lua/share/lua/5.1/?/init.lua;/opt/bitnami/lua/lib/lua/?.lua;/opt/bitnami/openresty/nginx/conf/lua/?.lua;;" \
     PATH="/opt/bitnami/nginx-ingress-controller/bin:/opt/bitnami/openresty/nginx/sbin:$PATH"
