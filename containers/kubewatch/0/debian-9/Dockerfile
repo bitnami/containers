@@ -7,11 +7,13 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "0bc02ed6d260d60d384894da342ab7746a069ff875b3dcdae5023faa388dc549  /tmp/bitnami/pkg/cache/kubewatch-0.0.4-24-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/kubewatch-0.0.4-24-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/kubewatch-0.0.4-24-linux-amd64-debian-9.tar.gz
+RUN apt-get update && apt-get upgrade && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 RUN chown -R 1001:root /opt/bitnami/kubewatch/ && chmod g+rwX /opt/bitnami/kubewatch/
 ENV BITNAMI_APP_NAME="kubewatch" \
-    BITNAMI_IMAGE_VERSION="0.0.4-debian-9-r441" \
+    BITNAMI_IMAGE_VERSION="0.0.4-debian-9-r442" \
     KW_CONFIG="/opt/bitnami/kubewatch" \
     KW_FLOCK_URL="" \
     KW_HIPCHAT_ROOM="" \
