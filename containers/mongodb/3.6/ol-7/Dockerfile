@@ -11,6 +11,8 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libgcc libpcap libselinux openssl-libs pcre procps-ng sudo tar unzip which zlib
 RUN . ./libcomponent.sh && component_unpack "mongodb" "3.6.16-0" --checksum 99d519a156055e127eae45eef5368a305801612f27eeabbf9c58eefb1b81da90
+RUN yum upgrade -y && \
+    rm -r /var/cache/yum
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
     echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
     chmod u+x /usr/local/bin/gosu && \
@@ -27,7 +29,7 @@ RUN curl --silent -L https://github.com/mikefarah/yq/releases/download/2.4.0/yq_
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.6.16-ol-7-r18" \
+    BITNAMI_IMAGE_VERSION="3.6.16-ol-7-r19" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mongodb/bin:$PATH"
 
