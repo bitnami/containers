@@ -7,9 +7,11 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "538436bc117b83eb4644c069aec25492cb708d1a12ed7bf09622d3af10425108  /tmp/bitnami/pkg/cache/pushgateway-0.10.0-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/pushgateway-0.10.0-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/pushgateway-0.10.0-0-linux-amd64-debian-9.tar.gz
+RUN apt-get update && apt-get upgrade && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="pushgateway" \
-    BITNAMI_IMAGE_VERSION="0.10.0-debian-9-r61" \
+    BITNAMI_IMAGE_VERSION="0.10.0-debian-9-r62" \
     PATH="/opt/bitnami/pushgateway/bin:$PATH"
 
 EXPOSE 9091
