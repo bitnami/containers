@@ -12,6 +12,8 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel libgcc procps-ng sudo tar unzip which zlib
 RUN . ./libcomponent.sh && component_unpack "java" "1.8.232-0" --checksum fbac74363c807fce14538c5f9a9232602adc7883c1c5936571c741625de2479e
 RUN . ./libcomponent.sh && component_unpack "kafka" "2.4.0-0" --checksum 21b2cb36f6ee34fb350c92fb40538b1c155388fddc4d5e9746aa738494355855
+RUN yum upgrade -y && \
+    rm -r /var/cache/yum
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
     echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
     chmod u+x /usr/local/bin/gosu && \
@@ -22,7 +24,7 @@ RUN curl --silent -L https://github.com/bitnami/render-template/releases/downloa
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.4.0-ol-7-r3" \
+    BITNAMI_IMAGE_VERSION="2.4.0-ol-7-r4" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/kafka/bin:$PATH"
 
