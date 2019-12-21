@@ -10,6 +10,8 @@ COPY prebuildfs /
 RUN install_packages audit-libs ca-certificates curl cyrus-sasl-lib glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcap-ng libcom_err libedit libgcc libicu libselinux libstdc++ libuuid libxml2 libxslt ncurses-libs nspr nss nss-pam-ldapd nss-softokn-freebl nss-util openldap openldap-clients openssl-libs pam pcre procps-ng sudo tar unzip which xz-libs zlib
 RUN . ./libcomponent.sh && component_unpack "postgresql-client" "10.11.0-0" --checksum 7698c1aeb96133009652bfe6b05713c2450effcdc53f094194d06fe15a04f580
 RUN . ./libcomponent.sh && component_unpack "pgpool" "4.1.0-1" --checksum 6a475ce61d6b53a09fa86a43a1eb241948618c59be49e6bcefd4593b93444b2f
+RUN yum upgrade -y && \
+    rm -r /var/cache/yum
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
     echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
     chmod u+x /usr/local/bin/gosu && \
@@ -24,7 +26,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="pgpool" \
-    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r48" \
+    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r49" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/pgpool/bin:$PATH"
 
 EXPOSE 5432
