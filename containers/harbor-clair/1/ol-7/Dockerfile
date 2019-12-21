@@ -12,6 +12,8 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl cyrus-sasl-lib glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libcurl libidn libselinux libssh2 nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre procps-ng sudo tar unzip which zlib
 RUN . ./libcomponent.sh && component_unpack "git" "2.24.1-0" --checksum ecc3a4f7b7a77ffb00ef66a9b02613c52a5b6d77bf9a5279fa139a66e6265460
 RUN . ./libcomponent.sh && component_unpack "harbor-clair" "1.10.0-0" --checksum 0e5803d0d20c187a8389140770cbf02d8c1bec7a70b48ab1a023712e636ff12d
+RUN yum upgrade -y && \
+    rm -r /var/cache/yum
 RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/v1.0/wait-for-port.zip > /tmp/wait-for-port.zip && \
     echo "8d26181f4629211b70db4f96236616056b1ed8e5920d8023f7c883071e76c1ed /tmp/wait-for-port.zip" | sha256sum --check && \
     unzip -q -d /usr/local/bin -o /tmp/wait-for-port.zip wait-for-port && \
@@ -20,7 +22,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="harbor-clair" \
-    BITNAMI_IMAGE_VERSION="1.10.0-ol-7-r7" \
+    BITNAMI_IMAGE_VERSION="1.10.0-ol-7-r8" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/git/bin:/opt/bitnami/harbor-clair/bin:$PATH"
 
