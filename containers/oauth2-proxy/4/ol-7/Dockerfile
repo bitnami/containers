@@ -8,9 +8,11 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "5273c41ee48cf76371143845174ef21bb6f647780d4f04b0179b3deeccc2a094  /tmp/bitnami/pkg/cache/oauth2-proxy-4.1.0-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/oauth2-proxy-4.1.0-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/oauth2-proxy-4.1.0-0-linux-x86_64-ol-7.tar.gz
+RUN yum upgrade -y && \
+    rm -r /var/cache/yum
 
 ENV BITNAMI_APP_NAME="oauth2-proxy" \
-    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r10" \
+    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r11" \
     PATH="/opt/bitnami/oauth2-proxy/bin:$PATH"
 
 EXPOSE 8080 4180
