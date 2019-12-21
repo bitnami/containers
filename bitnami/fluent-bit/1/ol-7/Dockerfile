@@ -8,9 +8,11 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "896807c340e748a08d8e8048108bfc54e260e51f1d61a7f0e4f51b04f662d24d  /tmp/bitnami/pkg/cache/fluent-bit-1.3.5-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/fluent-bit-1.3.5-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/fluent-bit-1.3.5-0-linux-x86_64-ol-7.tar.gz
+RUN yum upgrade -y && \
+    rm -r /var/cache/yum
 
 ENV BITNAMI_APP_NAME="fluent-bit" \
-    BITNAMI_IMAGE_VERSION="1.3.5-ol-7-r2" \
+    BITNAMI_IMAGE_VERSION="1.3.5-ol-7-r3" \
     PATH="/opt/bitnami/fluent-bit/bin:$PATH"
 
 EXPOSE 2020
