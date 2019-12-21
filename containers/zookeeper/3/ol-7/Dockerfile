@@ -12,6 +12,8 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel libgcc procps-ng sudo tar unzip which zlib
 RUN . ./libcomponent.sh && component_unpack "java" "1.8.232-0" --checksum fbac74363c807fce14538c5f9a9232602adc7883c1c5936571c741625de2479e
 RUN . ./libcomponent.sh && component_unpack "zookeeper" "3.5.6-0" --checksum 4910370f8d11b38a3d826ee33d1aa03b4679bb9387a5f727f49d2db85590c8c2
+RUN yum upgrade -y && \
+    rm -r /var/cache/yum
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
     echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
     chmod u+x /usr/local/bin/gosu && \
@@ -26,7 +28,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.5.6-ol-7-r66" \
+    BITNAMI_IMAGE_VERSION="3.5.6-ol-7-r67" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH"
 
