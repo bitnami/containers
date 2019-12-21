@@ -11,9 +11,11 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "f4e5ff1d4fb13baf9bb2a4f2e5ffb328cf9eeb26d0b91214196e4473c2874adc  /tmp/bitnami/pkg/cache/java-1.8.232-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/java-1.8.232-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/java-1.8.232-0-linux-amd64-debian-9.tar.gz
+RUN apt-get update && apt-get upgrade && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="jmx-exporter" \
-    BITNAMI_IMAGE_VERSION="0.12.0-debian-9-r125" \
+    BITNAMI_IMAGE_VERSION="0.12.0-debian-9-r126" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 5556
