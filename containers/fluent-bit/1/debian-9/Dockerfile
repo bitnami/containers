@@ -7,9 +7,11 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "2b4a62feb1d99a4bb033f436c8e6e075b1f6fb1674251bfbf214ef78eaaa2c44  /tmp/bitnami/pkg/cache/fluent-bit-1.3.5-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/fluent-bit-1.3.5-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/fluent-bit-1.3.5-0-linux-amd64-debian-9.tar.gz
+RUN apt-get update && apt-get upgrade && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="fluent-bit" \
-    BITNAMI_IMAGE_VERSION="1.3.5-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="1.3.5-debian-9-r2" \
     PATH="/opt/bitnami/fluent-bit/bin:$PATH"
 
 EXPOSE 2020
