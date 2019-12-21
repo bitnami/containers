@@ -8,9 +8,11 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "7e4851011cf84bb5339985b1309b3900b75eeebfa951c319eed6fd9f9b0bea24  /tmp/bitnami/pkg/cache/elasticsearch-exporter-1.1.0-1-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/elasticsearch-exporter-1.1.0-1-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/elasticsearch-exporter-1.1.0-1-linux-x86_64-ol-7.tar.gz
+RUN yum upgrade -y && \
+    rm -r /var/cache/yum
 
 ENV BITNAMI_APP_NAME="elasticsearch-exporter" \
-    BITNAMI_IMAGE_VERSION="1.1.0-ol-7-r131" \
+    BITNAMI_IMAGE_VERSION="1.1.0-ol-7-r132" \
     PATH="/opt/bitnami/elasticsearch-exporter/bin:$PATH"
 
 EXPOSE 9114
