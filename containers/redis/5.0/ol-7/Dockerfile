@@ -11,6 +11,8 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel procps-ng sudo tar unzip which
 RUN . ./libcomponent.sh && component_unpack "redis" "5.0.7-0" --checksum 21935196027fe2f029041b772546a328a1d5f0d6e7f7f3679f3c2008a8958957
+RUN yum upgrade -y && \
+    rm -r /var/cache/yum
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
     echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
     chmod u+x /usr/local/bin/gosu && \
@@ -25,7 +27,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.7-ol-7-r33" \
+    BITNAMI_IMAGE_VERSION="5.0.7-ol-7-r34" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH"
 
