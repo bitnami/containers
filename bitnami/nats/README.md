@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.1.2-ol-7-r36` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/2.1.2-ol-7-r36/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.1.2-debian-9-r26`, `2`, `2.1.2`, `2.1.2-r26`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/2.1.2-debian-9-r26/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.1.2-debian-9-r27`, `2`, `2.1.2`, `2.1.2-r27`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/2.1.2-debian-9-r27/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nats GitHub repo](https://github.com/bitnami/bitnami-docker-nats).
 
