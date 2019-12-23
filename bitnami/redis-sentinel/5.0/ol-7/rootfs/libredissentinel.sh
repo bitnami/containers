@@ -76,6 +76,7 @@ export REDIS_MASTER_PORT_NUMBER="${REDIS_MASTER_PORT_NUMBER:-6379}"
 export REDIS_MASTER_SET="${REDIS_MASTER_SET:-mymaster}"
 export REDIS_SENTINEL_PORT_NUMBER="${REDIS_SENTINEL_PORT_NUMBER:-26379}"
 export REDIS_SENTINEL_QUORUM="${REDIS_SENTINEL_QUORUM:-2}"
+export REDIS_SENTINEL_PASSWORD="${REDIS_SENTINEL_PASSWORD:-}"
 EOF
     if [[ -f "${REDIS_MASTER_PASSWORD_FILE:-}" ]]; then
         cat <<"EOF"
@@ -151,6 +152,7 @@ redis_initialize() {
 
         # Service
         redis_conf_set "port" "$REDIS_SENTINEL_PORT_NUMBER"
+        [[ -z "$REDIS_SENTINEL_PASSWORD" ]] || redis_conf_set "requirepass" "$REDIS_SENTINEL_PASSWORD"
         redis_conf_set "bind" "0.0.0.0"
         redis_conf_set "daemonize" "yes"
         redis_conf_set "pidfile" "$REDIS_SENTINEL_PID_FILE"
