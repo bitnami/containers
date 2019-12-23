@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r571
+FROM bitnami/oraclelinux-extras:7-r572
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack phpmyadmin-4.9.2-0 --checksum a1dc37747201528b1c5e34dde0e
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="4.9.2-ol-7-r31" \
+    BITNAMI_IMAGE_VERSION="4.9.2-ol-7-r32" \
     DATABASE_ENABLE_SSL="no" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
