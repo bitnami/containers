@@ -38,7 +38,7 @@ RUN chown -LR www-data:root /etc/nginx /etc/ingress-controller && \
 RUN chgrp -R root /var/log/nginx && chmod g+rwX -R /var/log/nginx && \
     chgrp -R root /opt/bitnami/openresty/nginx/conf && chmod g+rwX -R /opt/bitnami/openresty/nginx/conf
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.26.1-debian-9-r53" \
+    BITNAMI_IMAGE_VERSION="0.26.1-debian-9-r54" \
     LUA_CPATH="/opt/bitnami/openresty/nginx/conf/lua/?.lua;/opt/bitnami/openresty/lualib/?.so;./?.so;/opt/bitnami/lua/lib/lua/?.so;;" \
     LUA_PATH="/opt/bitnami/openresty/lualib/?.lua;/opt/bitnami/lua/share/lua/5.1/?/init.lua;/opt/bitnami/lua/lib/lua/?.lua;/opt/bitnami/openresty/nginx/conf/lua/?.lua;;" \
     PATH="/opt/bitnami/nginx-ingress-controller/bin:/opt/bitnami/openresty/nginx/sbin:$PATH"
