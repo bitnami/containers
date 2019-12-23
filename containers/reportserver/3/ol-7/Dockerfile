@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r571
+FROM bitnami/oraclelinux-extras:7-r572
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack reportserver-3.1.0-6018-0 --checksum 1460d47550d33bc531da
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserver" \
-    BITNAMI_IMAGE_VERSION="3.1.0-6018-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="3.1.0-6018-ol-7-r2" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
