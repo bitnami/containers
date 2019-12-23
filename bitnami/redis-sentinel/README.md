@@ -57,7 +57,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5.0-ol-7`, `5.0.7-ol-7-r36` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.7-ol-7-r36/5.0/ol-7/Dockerfile)
-* [`5.0-debian-9`, `5.0.7-debian-9-r26`, `5.0`, `5.0.7`, `5.0.7-r26`, `latest` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.7-debian-9-r26/5.0/debian-9/Dockerfile)
+* [`5.0-debian-9`, `5.0.7-debian-9-r27`, `5.0`, `5.0.7`, `5.0.7-r27`, `latest` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.7-debian-9-r27/5.0/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.14-ol-7-r281` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-ol-7-r281/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.14-debian-9-r244`, `4.0`, `4.0.14`, `4.0.14-r244` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-debian-9-r244/4.0/debian-9/Dockerfile)
 
@@ -167,7 +167,7 @@ The Redis Sentinel instance can be customized by specifying environment variable
 - `REDIS_MASTER_PASSWORD`: Password to authenticate with the master. No defaults. As an alternative, you can mount a file with the password and set the `REDIS_MASTER_PASSWORD_FILE` variable.
 - `REDIS_SENTINEL_PORT_NUMBER`: Redis Sentinel port. Default: **26379**.
 - `REDIS_SENTINEL_QUORUM`: Number of Sentinels that need to agree about the fact the master is not reachable. Default: **2**.
-- `REDIS_SENTINEL_PASSWORD`: Password to authenticate with this sentinel and to authenticate to other sentinels. No defaults. Needs to be identical on all sentinels.
+- `REDIS_SENTINEL_PASSWORD`: Password to authenticate with this sentinel and to authenticate to other sentinels. No defaults. Needs to be identical on all sentinels. As an alternative, you can mount a file with the password and set the `REDIS_SENTINEL_PASSWORD_FILE` variable.
 
 ## Configuration file
 
