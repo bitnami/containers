@@ -83,6 +83,11 @@ EOF
 export REDIS_MASTER_PASSWORD="$(< "${REDIS_MASTER_PASSWORD_FILE}")"
 EOF
     fi
+    if [[ -f "${REDIS_SENTINEL_PASSWORD_FILE:-}" ]]; then
+        cat <<"EOF"
+export REDIS_SENTINEL_PASSWORD="$(< "${REDIS_SENTINEL_PASSWORD_FILE}")"
+EOF
+    fi
 }
 
 ########################
@@ -152,11 +157,11 @@ redis_initialize() {
 
         # Service
         redis_conf_set "port" "$REDIS_SENTINEL_PORT_NUMBER"
-        [[ -z "$REDIS_SENTINEL_PASSWORD" ]] || redis_conf_set "requirepass" "$REDIS_SENTINEL_PASSWORD"
         redis_conf_set "bind" "0.0.0.0"
         redis_conf_set "daemonize" "yes"
         redis_conf_set "pidfile" "$REDIS_SENTINEL_PID_FILE"
         redis_conf_set "logfile" "$REDIS_SENTINEL_LOG_FILE"
+        [[ -z "$REDIS_SENTINEL_PASSWORD" ]] || redis_conf_set "requirepass" "$REDIS_SENTINEL_PASSWORD"
 
         # Master set
         redis_conf_set "sentinel monitor" "${REDIS_MASTER_SET} ${REDIS_MASTER_HOST} ${REDIS_MASTER_PORT_NUMBER} ${REDIS_SENTINEL_QUORUM}"
