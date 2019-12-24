@@ -8,9 +8,9 @@ ENV HOME="/" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel libgcc procps-ng sudo tar which zlib
-RUN . ./libcomponent.sh && component_unpack "java" "1.8.232-0" --checksum fbac74363c807fce14538c5f9a9232602adc7883c1c5936571c741625de2479e
-RUN . ./libcomponent.sh && component_unpack "tomcat" "9.0.30-0" --checksum 654139a2496081c0726556ee0aeac696eb1841b637459153bf15d90b1b246c86
+RUN install_packages ca-certificates curl glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libselinux nss-softokn-freebl openssl-libs pcre procps-ng sudo tar which zlib
+RUN . ./libcomponent.sh && component_unpack "java" "11.0.5-0" --checksum e45456416649c404add4f02355d6efe6c82f960153a9807e4ba9fea16d28a237
+RUN . ./libcomponent.sh && component_unpack "tomcat" "9.0.30-1" --checksum 65c34f5014ef726d1ed8508502b6db08a51766f30251427d3b1cba6b5bb2b00d
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
@@ -22,7 +22,7 @@ RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="9.0.30-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="9.0.30-ol-7-r12" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
 EXPOSE 8080
