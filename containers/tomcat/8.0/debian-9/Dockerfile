@@ -8,9 +8,9 @@ ENV HOME="/" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libc6 libgcc1 procps unzip zlib1g
-RUN . ./libcomponent.sh && component_unpack "java" "1.8.232-0" --checksum f4e5ff1d4fb13baf9bb2a4f2e5ffb328cf9eeb26d0b91214196e4473c2874adc
-RUN . ./libcomponent.sh && component_unpack "tomcat" "8.0.53-23" --checksum 0d899a5e407872f0cc5d20631eb83ee2efa837280524b4fb0f388f9f0378d476
+RUN install_packages ca-certificates curl libc6 libssl1.1 procps unzip zlib1g
+RUN . ./libcomponent.sh && component_unpack "java" "11.0.5-0" --checksum 9fc7502ca3c073e6ae7dd6cfa0c2da6b6c26caccbe41b6d7b5a9d26050ee54ff
+RUN . ./libcomponent.sh && component_unpack "tomcat" "8.0.53-24" --checksum 1206b60d30cd2919ec0e39e3d69ae63a0efcc40765ce4a6356898962f89e5a7a
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
@@ -22,7 +22,7 @@ RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="8.0.53-debian-9-r456" \
+    BITNAMI_IMAGE_VERSION="8.0.53-debian-9-r457" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
 EXPOSE 8080
