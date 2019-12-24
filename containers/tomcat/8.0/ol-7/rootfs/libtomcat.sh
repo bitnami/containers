@@ -161,6 +161,10 @@ export JAVA_HOME
 
 JAVA_OPTS="$JAVA_OPTS"
 export JAVA_OPTS
+
+# Load Tomcat Native library
+LD_LIBRARY_PATH="${TOMCAT_LIB_DIR}:\${LD_LIBRARY_PATH:+:\$LD_LIBRARY_PATH}"
+export LD_LIBRARY_PATH
 EOF
 }
 
