@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip hostname libaio-devel procps-ng sudo tar which
-RUN . ./libcomponent.sh && component_unpack "minio-client" "2019.12.17-0" --checksum 878272abfc8df12e79a225ab794d4e11312c13d1344244d6714102528747425d
+RUN . ./libcomponent.sh && component_unpack "minio-client" "2019.12.24-0" --checksum 18d3921f875d0f656461d096a6df9acfbded4fdc530a24451b134345e44b1c28
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
@@ -22,7 +22,7 @@ RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="minio-client" \
-    BITNAMI_IMAGE_VERSION="2019.12.17-ol-7-r7" \
+    BITNAMI_IMAGE_VERSION="2019.12.24-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/minio-client/bin:$PATH"
 
