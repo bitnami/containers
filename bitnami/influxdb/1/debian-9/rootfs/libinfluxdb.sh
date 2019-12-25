@@ -266,7 +266,7 @@ influxdb_start_bg_noauth() {
     info "Starting InfluxDB in background..."
     local start_command=("${INFLUXDB_BIN_DIR}/influxd" "-config" "$INFLUXDB_CONF_FILE")
     am_i_root && start_command=("gosu" "$INFLUXDB_DAEMON_USER" "${start_command[@]}")
-    INFLUXDB_HTTP_HTTPS_ENABLED=false debug_execute "${start_command[@]}" &
+    INFLUXDB_HTTP_HTTPS_ENABLED=false INFLUXDB_HTTP_BIND_ADDRESS="127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}" debug_execute "${start_command[@]}" &
     wait-for-port "$INFLUXDB_PORT_NUMBER"
 }
 
@@ -426,8 +426,6 @@ influxdb_initialize() {
         influxdb_create_config
     fi
 
-    local -r original_http_bind_address="$INFLUXDB_HTTP_BIND_ADDRESS"
-    export INFLUXDB_HTTP_BIND_ADDRESS="127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}"
     if is_dir_empty "$INFLUXDB_DATA_DIR"; then
         info "Deploying InfluxDB from scratch"
         if is_boolean_yes "$INFLUXDB_HTTP_AUTH_ENABLED"; then
@@ -447,7 +445,6 @@ influxdb_initialize() {
     else
         info "Deploying InfluxDB with persisted data"
     fi
-    export INFLUXDB_HTTP_BIND_ADDRESS="$original_http_bind_address"
 }
 
 ########################
