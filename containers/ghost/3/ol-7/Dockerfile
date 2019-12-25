@@ -1,10 +1,11 @@
-FROM bitnami/oraclelinux-extras:7-r573
+FROM bitnami/oraclelinux-extras:7-r574
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX,o+rw" \
     BITNAMI_PKG_EXTRA_DIRS="/.ghost /opt/bitnami/content" \
     HOME="/"
 
+COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs glibc keyutils-libs krb5-libs libX11-devel libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre readline sqlite zlib
 RUN bitnami-pkg install node-10.18.0-0 --checksum a6119d638448b43f99e18eb4b1a9c9759445b672bb33ae3ce6a7273fa3a7e029
@@ -14,7 +15,7 @@ RUN bitnami-pkg unpack ghost-3.1.1-0 --checksum ace08cb3daf2f83e0204a1a886b20017
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="3.1.1-ol-7-r20" \
+    BITNAMI_IMAGE_VERSION="3.1.1-ol-7-r21" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
