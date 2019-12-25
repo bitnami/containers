@@ -3,10 +3,10 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 libcap2-bin libcomerr2 libcurl3 libcurl4-openssl-dev libffi6 libgcc1 libgcrypt20 libgeoip-dev libgeoip1 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblua5.1-0 liblua5.1-dev libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpcre3-dev libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl-dev libssl1.0.2 libssl1.1 libstdc++6 libtasn1-6 libunistring0 procps python unzip wget zlib1g zlib1g-dev
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.26.1-1-linux-amd64-debian-9.tar.gz && \
-    echo "edead703e5d8d5f37adf40e2b3580993820a72a67e389c84cac03d10e1498bed  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.26.1-1-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.26.1-1-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.26.1-1-linux-amd64-debian-9.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.26.2-0-linux-amd64-debian-9.tar.gz && \
+    echo "531be1dbfff1b5636848ddcf63ca21925b5bc6f0f9ffc4e170cf38e1ee349999  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.26.2-0-linux-amd64-debian-9.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.26.2-0-linux-amd64-debian-9.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.26.2-0-linux-amd64-debian-9.tar.gz
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN mkdir -p /opt/bitnami/openresty/nginx/conf/geoip && \
@@ -38,7 +38,7 @@ RUN chown -LR www-data:root /etc/nginx /etc/ingress-controller && \
 RUN chgrp -R root /var/log/nginx && chmod g+rwX -R /var/log/nginx && \
     chgrp -R root /opt/bitnami/openresty/nginx/conf && chmod g+rwX -R /opt/bitnami/openresty/nginx/conf
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.26.1-debian-9-r55" \
+    BITNAMI_IMAGE_VERSION="0.26.2-debian-9-r0" \
     LUA_CPATH="/opt/bitnami/openresty/nginx/conf/lua/?.lua;/opt/bitnami/openresty/lualib/?.so;./?.so;/opt/bitnami/lua/lib/lua/?.so;;" \
     LUA_PATH="/opt/bitnami/openresty/lualib/?.lua;/opt/bitnami/lua/share/lua/5.1/?/init.lua;/opt/bitnami/lua/lib/lua/?.lua;/opt/bitnami/openresty/nginx/conf/lua/?.lua;;" \
     PATH="/opt/bitnami/nginx-ingress-controller/bin:/opt/bitnami/openresty/nginx/sbin:$PATH"
