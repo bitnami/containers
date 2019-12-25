@@ -1,4 +1,4 @@
-FROM bitnami/centos-extras-base:7-r247
+FROM bitnami/centos-extras-base:7-r248
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "postgresql-repmgr" "10.11.0-2" --ch
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql-repmgr" \
-    BITNAMI_IMAGE_VERSION="10.11.0-centos-7-r45" \
+    BITNAMI_IMAGE_VERSION="10.11.0-centos-7-r46" \
     NAMI_PREFIX="/.nami" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
     PATH="/opt/bitnami/postgresql-repmgr/bin:/opt/bitnami/repmgr/bin:/opt/bitnami/postgresql/bin:$PATH"
