@@ -1,6 +1,7 @@
-FROM bitnami/oraclelinux-extras:7-r573
+FROM bitnami/oraclelinux-extras:7-r574
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ImageMagick cyrus-sasl-lib ghostscript glibc keyutils-libs krb5-libs libcom_err libcurl libedit libgcc libidn libselinux libssh2 libstdc++ libuuid libxml2 libxslt mariadb-libs ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre postgresql-libs readline xz-libs zlib
 RUN bitnami-pkg install ruby-2.6.5-0 --checksum 29ef6f1ed911c95ada9710d617438ec90e6e822cae31d2b82d578f9b9e7b1c30
@@ -11,7 +12,7 @@ RUN bitnami-pkg unpack redmine-4.1.0-0 --checksum 4bcee5d2f53ad8dc6a93a1f6bd0ce6
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r2" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH" \
     REDMINE_DB_MYSQL="mariadb" \
     REDMINE_DB_NAME="bitnami_redmine" \
