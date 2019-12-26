@@ -15,7 +15,7 @@ services:
       - '443:443'
     volumes:
       - 'wordpress_data:/bitnami'
-      - './wordpress-server-block.conf:/opt/bitnami/nginx/conf/server_blocks/wordpress-server-block.conf'
+      - './wordpress-server-block.conf:/opt/bitnami/nginx/conf/server_blocks/wordpress-server-block.conf:ro'
     depends_on:
       - mariadb
     environment:
