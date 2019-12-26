@@ -28,10 +28,12 @@ $ docker run --name kubectl bitnami/kubectl:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`1.17-ol-7`, `1.17.0-ol-7-r0` (1.17/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.17.0-ol-7-r0/1.17/ol-7/Dockerfile)
+* [`1.17-debian-9`, `1.17.0-debian-9-r0`, `1.17`, `1.17.0`, `1.17.0-r0` (1.17/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.17.0-debian-9-r0/1.17/debian-9/Dockerfile)
 * [`1.16-ol-7`, `1.16.3-ol-7-r45` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.3-ol-7-r45/1.16/ol-7/Dockerfile)
-* [`1.16-debian-9`, `1.16.3-debian-9-r33`, `1.16`, `1.16.3`, `1.16.3-r33` (1.16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.3-debian-9-r33/1.16/debian-9/Dockerfile)
+* [`1.16-debian-9`, `1.16.3-debian-9-r33`, `1.16`, `1.16.3`, `1.16.3-r33`, `latest` (1.16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.3-debian-9-r33/1.16/debian-9/Dockerfile)
 * [`1.15-ol-7`, `1.15.3-ol-7-r138` (1.15/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.3-ol-7-r138/1.15/ol-7/Dockerfile)
-* [`1.15-debian-9`, `1.15.3-debian-9-r111`, `1.15`, `1.15.3`, `1.15.3-r111`, `latest` (1.15/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.3-debian-9-r111/1.15/debian-9/Dockerfile)
+* [`1.15-debian-9`, `1.15.3-debian-9-r111`, `1.15`, `1.15.3`, `1.15.3-r111` (1.15/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.3-debian-9-r111/1.15/debian-9/Dockerfile)
 * [`1.14-ol-7`, `1.14.3-ol-7-r214` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.3-ol-7-r214/1.14/ol-7/Dockerfile)
 * [`1.14-debian-9`, `1.14.3-debian-9-r190`, `1.14`, `1.14.3`, `1.14.3-r190` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.3-debian-9-r190/1.14/debian-9/Dockerfile)
 * [`1.13-ol-7`, `1.13.4-ol-7-r305` (1.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-ol-7-r305/1.13/ol-7/Dockerfile)
@@ -56,7 +58,7 @@ $ docker pull bitnami/kubectl:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/kubectl:latest 'https://github.com/bitnami/bitnami-docker-kubectl.git#master:1.15/debian-9'
+$ docker build -t bitnami/kubectl:latest 'https://github.com/bitnami/bitnami-docker-kubectl.git#master:1.16/debian-9'
 ```
 
 # Configuration
