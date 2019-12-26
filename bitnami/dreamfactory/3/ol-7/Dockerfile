@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r574
+FROM bitnami/oraclelinux-extras:7-r575
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY prebuildfs /
@@ -14,7 +14,7 @@ RUN bitnami-pkg unpack dreamfactory-3.0.1-0 --checksum 4adfec9855b36206a047c8436
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="3.0.1-ol-7-r131" \
+    BITNAMI_IMAGE_VERSION="3.0.1-ol-7-r132" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
     MARIADB_PORT_NUMBER="3306" \
