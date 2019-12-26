@@ -1,4 +1,4 @@
 version: '2'
 services:
   kubectl:
-    image: bitnami/kubectl:1.15-debian-9
+    image: bitnami/kubectl:1.16-debian-9
