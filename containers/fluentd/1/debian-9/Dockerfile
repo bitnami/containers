@@ -10,7 +10,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl ghostscript imagemagick libc6 libgcc1 libgmp-dev libjemalloc-dev libncurses5 libncurses5-dev libreadline-dev libreadline7 libssl1.0.2 libstdc++6 libtinfo5 libxml2-dev libxslt1-dev procps unzip wget zlib1g zlib1g-dev
 RUN . ./libcomponent.sh && component_unpack "ruby" "2.6.5-0" --checksum 3a856a4569b5d4f59628209a1ab1b78619647bf1f4d5f11ca3ae6b28ee1e7fa9
-RUN . ./libcomponent.sh && component_unpack "fluentd" "1.8.0-0" --checksum e94c1391629e4644d9b9e5046b653e020bc8cd996b1aaf2c71f542557b21a88e
+RUN . ./libcomponent.sh && component_unpack "fluentd" "1.8.1-0" --checksum f099afb12e8a27968be6cfced353b810affa083f22b68e581a863f68b66ccf8d
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
@@ -22,7 +22,7 @@ RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.8.0-debian-9-r11" \
+    BITNAMI_IMAGE_VERSION="1.8.1-debian-9-r0" \
     GEM_HOME="/opt/bitnami/fluentd" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/fluentd/bin:$PATH"
 
