@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.2.0-ol-7-r523` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-ol-7-r523/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.2.0-debian-9-r488`, `0`, `0.2.0`, `0.2.0-r488`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-9-r488/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.2.0-debian-9-r489`, `0`, `0.2.0`, `0.2.0-r489`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-9-r489/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd-exporter).
 
