@@ -1,5 +1,5 @@
 ## This is test deployment for Kubernetes platforms.
-## This is _not_ intended to be used in producction.
+## This is not intended to be used in production.
 ##
 apiVersion: apps/v1
 kind: StatefulSet
