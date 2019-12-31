@@ -651,6 +651,7 @@ postgresql_initialize() {
         is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
         is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
         [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]] && [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
+        [[ "$POSTGRESQL_REPLICATION_MODE" = "slave" ]] && postgresql_configure_recovery
     else
         ensure_dir_exists "$POSTGRESQL_DATA_DIR"
         am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_DATA_DIR"
