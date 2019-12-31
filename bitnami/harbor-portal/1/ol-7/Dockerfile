@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages GeoIP ca-certificates curl glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libselinux nss-softokn-freebl openssl-libs pcre procps-ng sudo tar which zlib
-RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-3" --checksum 4a2eb5c1dca2f7fcd7d3f40986c82a1d58bf5cc8de304717c25e8956c51c49e0
+RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-4" --checksum 492b05515c2f72241dc9efa7d92d18ce58e54ea437d643b40ba5b2aaf5077142
 RUN . ./libcomponent.sh && component_unpack "harbor" "1.10.0-0" --checksum 4b47dbb966f77f5c89c8d17aa185201774ffdd453e857940baca9e6e8b151476
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /postunpack.sh
 RUN /postunpack-harbor-portal.sh
 ENV BITNAMI_APP_NAME="harbor-portal" \
-    BITNAMI_IMAGE_VERSION="1.10.0-ol-7-r13" \
+    BITNAMI_IMAGE_VERSION="1.10.0-ol-7-r14" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/harbor/bin:$PATH"
 
