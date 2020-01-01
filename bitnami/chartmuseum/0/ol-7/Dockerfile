@@ -16,7 +16,7 @@ RUN yum upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.11.0-ol-7-r16" \
+    BITNAMI_IMAGE_VERSION="0.11.0-ol-7-r17" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/chartmuseum/bin:$PATH"
 
