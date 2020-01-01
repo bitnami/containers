@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5-ol-7`, `5.3.2-ol-7-r13` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.3.2-ol-7-r13/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.3.2-debian-9-r9`, `5`, `5.3.2`, `5.3.2-r9`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.3.2-debian-9-r9/5/debian-9/Dockerfile)
+* [`5-debian-9`, `5.3.2-debian-9-r10`, `5`, `5.3.2`, `5.3.2-r10`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.3.2-debian-9-r10/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
@@ -492,7 +492,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright 2015-2019 Bitnami
+Copyright 2015-2020 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
