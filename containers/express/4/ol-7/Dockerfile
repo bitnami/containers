@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r580
+FROM bitnami/oraclelinux-extras:7-r581
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -17,7 +17,7 @@ RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwx /dist /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.17.1-ol-7-r202" \
+    BITNAMI_IMAGE_VERSION="4.17.1-ol-7-r203" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/sequelize-cli/bin:/opt/bitnami/node/bin:/opt/bitnami/git/bin:/opt/bitnami/express-generator/bin:/opt/bitnami/express/bin:/opt/bitnami/bower/bin:$PATH"
 
