@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-9`, `0.10.0-debian-9-r89`, `0`, `0.10.0`, `0.10.0-r89`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb-exporter/blob/0.10.0-debian-9-r89/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.10.0-debian-9-r90`, `0`, `0.10.0`, `0.10.0-r90`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb-exporter/blob/0.10.0-debian-9-r90/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb-exporter).
 
@@ -158,7 +158,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright 2019 Bitnami
+Copyright 2020 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
