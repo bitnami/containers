@@ -58,7 +58,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`5.0-ol-7`, `5.0.7-ol-7-r44` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.7-ol-7-r44/5.0/ol-7/Dockerfile)
 * [`5.0-debian-9`, `5.0.7-debian-9-r33`, `5.0`, `5.0.7`, `5.0.7-r33`, `latest` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.7-debian-9-r33/5.0/debian-9/Dockerfile)
-* [`4.0-ol-7`, `4.0.14-ol-7-r289` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-ol-7-r289/4.0/ol-7/Dockerfile)
+* [`4.0-ol-7`, `4.0.14-ol-7-r290` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-ol-7-r290/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.14-debian-9-r251`, `4.0`, `4.0.14`, `4.0.14-r251` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-debian-9-r251/4.0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
@@ -321,7 +321,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
-Copyright (c) 2019 Bitnami
+Copyright (c) 2020 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
