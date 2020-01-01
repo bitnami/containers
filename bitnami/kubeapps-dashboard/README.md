@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.7.2-ol-7-r0` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-dashboard/blob/1.7.2-ol-7-r0/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.7.2-debian-9-r15`, `1`, `1.7.2`, `1.7.2-r15`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-dashboard/blob/1.7.2-debian-9-r15/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.7.2-debian-9-r16`, `1`, `1.7.2`, `1.7.2-r16`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-dashboard/blob/1.7.2-debian-9-r16/1/debian-9/Dockerfile)
 
 # Configuration
 
@@ -61,7 +61,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright (c) 2019 Bitnami
+Copyright (c) 2020 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
