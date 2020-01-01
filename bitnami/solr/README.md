@@ -49,7 +49,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`8-ol-7`, `8.3.1-ol-7-r28` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.3.1-ol-7-r28/8/ol-7/Dockerfile)
+* [`8-ol-7`, `8.3.1-ol-7-r29` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.3.1-ol-7-r29/8/ol-7/Dockerfile)
 * [`8-debian-9`, `8.3.1-debian-9-r22`, `8`, `8.3.1`, `8.3.1-r22`, `latest` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.3.1-debian-9-r22/8/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
@@ -302,7 +302,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
-Copyright 2016-2019 Bitnami
+Copyright 2016-2020 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
