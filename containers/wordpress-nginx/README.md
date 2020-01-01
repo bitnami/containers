@@ -45,7 +45,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-ol-7`, `5.3.2-ol-7-r10` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.3.2-ol-7-r10/5/ol-7/Dockerfile)
+* [`5-ol-7`, `5.3.2-ol-7-r11` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.3.2-ol-7-r11/5/ol-7/Dockerfile)
 * [`5-debian-9`, `5.3.2-debian-9-r10`, `5`, `5.3.2`, `5.3.2-r10`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.3.2-debian-9-r10/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
@@ -403,7 +403,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright 2015-2019 Bitnami
+Copyright 2015-2020 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
