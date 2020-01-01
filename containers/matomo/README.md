@@ -44,7 +44,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.13.0-ol-7-r34` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.13.0-ol-7-r34/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.13.0-ol-7-r35` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.13.0-ol-7-r35/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.13.0-debian-9-r26`, `3`, `3.13.0`, `3.13.0-r26`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.13.0-debian-9-r26/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
@@ -419,7 +419,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright 2019 Bitnami
+Copyright 2020 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
