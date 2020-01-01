@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`1-ol-7`, `1.0.1-ol-7-r11` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/1.0.1-ol-7-r11/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.0.1-debian-9-r8`, `1`, `1.0.1`, `1.0.1-r8`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/1.0.1-debian-9-r8/1/debian-9/Dockerfile)
-* [`0-ol-7`, `0.10.0-ol-7-r88` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.10.0-ol-7-r88/0/ol-7/Dockerfile)
+* [`0-ol-7`, `0.10.0-ol-7-r89` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.10.0-ol-7-r89/0/ol-7/Dockerfile)
 * [`0-debian-9`, `0.10.0-debian-9-r70`, `0`, `0.10.0`, `0.10.0-r70` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.10.0-debian-9-r70/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pushgateway GitHub repo](https://github.com/bitnami/bitnami-docker-pushgateway).
@@ -173,7 +173,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
-Copyright (c) 2019 Bitnami
+Copyright (c) 2020 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
