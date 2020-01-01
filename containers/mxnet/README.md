@@ -38,7 +38,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.5.1-ol-7-r85` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mxnet/blob/1.5.1-ol-7-r85/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.5.1-ol-7-r86` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mxnet/blob/1.5.1-ol-7-r86/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.5.1-debian-9-r61`, `1`, `1.5.1`, `1.5.1-r61`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mxnet/blob/1.5.1-debian-9-r61/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mxnet GitHub repo](https://github.com/bitnami/bitnami-docker-mxnet).
@@ -147,7 +147,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright (c) 2019 Bitnami
+Copyright (c) 2020 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
