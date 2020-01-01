@@ -57,7 +57,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`2.5-debian-9`, `2.5.7-debian-9-r78`, `2.5`, `2.5.7`, `2.5.7-r78` (2.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.7-debian-9-r78/2.5/debian-9/Dockerfile)
 * [`2.5-debian-9-prod`, `2.5.7-debian-9-r74-prod`, `2.5-prod`, `2.5.7-prod`, `2.5.7-r74-prod` (2.5-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.7-debian-9-r74-prod/2.5-prod/debian-9/Dockerfile)
 * [`2.4-ol-7-prod`, `2.4.9-ol-7-r95-prod` (2.4-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.9-ol-7-r95-prod/2.4-prod/ol-7/Dockerfile)
-* [`2.4-ol-7`, `2.4.9-ol-7-r94` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.9-ol-7-r94/2.4/ol-7/Dockerfile)
+* [`2.4-ol-7`, `2.4.9-ol-7-r95` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.9-ol-7-r95/2.4/ol-7/Dockerfile)
 * [`2.4-debian-9`, `2.4.9-debian-9-r77`, `2.4`, `2.4.9`, `2.4.9-r77` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.9-debian-9-r77/2.4/debian-9/Dockerfile)
 * [`2.4-debian-9-prod`, `2.4.9-debian-9-r73-prod`, `2.4-prod`, `2.4.9-prod`, `2.4.9-r73-prod` (2.4-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.9-debian-9-r73-prod/2.4-prod/debian-9/Dockerfile)
 
@@ -340,7 +340,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
-Copyright (c) 2015-2019 Bitnami
+Copyright (c) 2015-2020 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
