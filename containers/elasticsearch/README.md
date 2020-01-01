@@ -46,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-ol-7`, `7.5.1-ol-7-r13` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.5.1-ol-7-r13/7/ol-7/Dockerfile)
+* [`7-ol-7`, `7.5.1-ol-7-r14` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.5.1-ol-7-r14/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.5.1-debian-9-r10`, `7`, `7.5.1`, `7.5.1-r10`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.5.1-debian-9-r10/7/debian-9/Dockerfile)
 * [`6-ol-7`, `6.8.6-ol-7-r13` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.6-ol-7-r13/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.8.6-debian-9-r10`, `6`, `6.8.6`, `6.8.6-r10` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.6-debian-9-r10/6/debian-9/Dockerfile)
@@ -440,7 +440,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
-Copyright 2016-2019 Bitnami
+Copyright 2016-2020 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
