@@ -1,4 +1,4 @@
-FROM bitnami/centos-extras-base:7-r254
+FROM bitnami/centos-extras-base:7-r255
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV OS_ARCH="x86_64" \
@@ -13,7 +13,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb-galera" \
-    BITNAMI_IMAGE_VERSION="10.1.43-centos-7-r58" \
+    BITNAMI_IMAGE_VERSION="10.1.43-centos-7-r59" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
 EXPOSE 3306 4444 4567 4568
