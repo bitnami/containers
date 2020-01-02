@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r581
+FROM bitnami/oraclelinux-extras:7-r582
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY prebuildfs /
@@ -14,7 +14,7 @@ RUN find /opt/bitnami/magento/htdocs -type d -print0 | xargs -0 chmod 775 && fin
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.3-ol-7-r85" \
+    BITNAMI_IMAGE_VERSION="2.3.3-ol-7-r86" \
     ELASTICSEARCH_HOST="" \
     ELASTICSEARCH_PORT_NUMBER="" \
     EXTERNAL_HTTPS_PORT_NUMBER="443" \
