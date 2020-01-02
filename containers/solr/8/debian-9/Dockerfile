@@ -7,11 +7,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 lsof zlib1g
 RUN bitnami-pkg install java-1.8.232-0 --checksum f4e5ff1d4fb13baf9bb2a4f2e5ffb328cf9eeb26d0b91214196e4473c2874adc
-RUN bitnami-pkg unpack solr-8.3.1-0 --checksum a07cdb292f33799bdd19a3b8f998333d603fc732e8f2a6d9e54af3c87fa613c4
+RUN bitnami-pkg unpack solr-8.4.0-0 --checksum ed0ad6470159e534ef1df37bdcbd5fef058fdadcece15619c580b16ecc32d5de
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="8.3.1-debian-9-r24" \
+    BITNAMI_IMAGE_VERSION="8.4.0-debian-9-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:$PATH" \
     SOLR_CORE="" \
