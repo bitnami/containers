@@ -22,7 +22,7 @@ RUN curl --silent -L https://github.com/bitnami/render-template/releases/downloa
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.6.2-ol-7-r50" \
+    BITNAMI_IMAGE_VERSION="1.6.2-ol-7-r51" \
     PATH="/opt/bitnami/consul/bin:$PATH"
 
 EXPOSE 8300 8301 8500 8600
