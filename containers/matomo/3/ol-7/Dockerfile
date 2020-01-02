@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r581
+FROM bitnami/oraclelinux-extras:7-r582
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY prebuildfs /
@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack matomo-3.13.0-0 --checksum 20d68e21aaddd52fc4551c0f30e1fd
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="matomo" \
-    BITNAMI_IMAGE_VERSION="3.13.0-ol-7-r35" \
+    BITNAMI_IMAGE_VERSION="3.13.0-ol-7-r36" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
