@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.34.0-ol-7-r66` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.34.0-ol-7-r66/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.34.0-debian-9-r31`, `0`, `0.34.0`, `0.34.0-r31`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.34.0-debian-9-r31/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.34.0-debian-9-r32`, `0`, `0.34.0`, `0.34.0-r32`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.34.0-debian-9-r32/0/debian-9/Dockerfile)
 * [`0-centos-7`, `0.34.0-centos-7-r0` (0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.34.0-centos-7-r0/0/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus-operator GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus-operator).
