@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack prestashop-1.7.6-2-0 --checksum d796cbaeaa5f4888a067b7b9a
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-2-debian-9-r26" \
+    BITNAMI_IMAGE_VERSION="1.7.6-2-debian-9-r27" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
