@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack reportserverenterprise-3.1.0-6018-0 --checksum 7b13770173
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserverenterprise" \
-    BITNAMI_IMAGE_VERSION="3.1.0-6018-debian-9-r8" \
+    BITNAMI_IMAGE_VERSION="3.1.0-6018-debian-9-r9" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
