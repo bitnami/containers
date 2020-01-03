@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`0-debian-9`, `0.12.1-debian-9-r148`, `0`, `0.12.1`, `0.12.1-r148`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysqld-exporter/blob/0.12.1-debian-9-r148/0/debian-9/Dockerfile)
 
-* [`0-centos-7`, `0.12.1-centos-7-r162` (0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysqld-exporter/blob/0.12.1-centos-7-r162/0/centos-7/Dockerfile)
+* [`0-centos-7`, `0.12.1-centos-7-r163` (0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysqld-exporter/blob/0.12.1-centos-7-r163/0/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysqld-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-mysqld-exporter).
 
