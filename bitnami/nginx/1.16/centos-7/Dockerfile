@@ -1,4 +1,4 @@
-FROM bitnami/centos-extras-base:7-r256
+FROM bitnami/centos-extras-base:7-r257
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -17,7 +17,7 @@ RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.16.1-centos-7-r160" \
+    BITNAMI_IMAGE_VERSION="1.16.1-centos-7-r161" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/nginx/sbin:$PATH"
 
