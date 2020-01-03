@@ -41,7 +41,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`10.4-ol-7`, `10.4.11-ol-7-r14` (10.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.11-ol-7-r14/10.4/ol-7/Dockerfile)
+* [`10.4-ol-7`, `10.4.11-ol-7-r15` (10.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.11-ol-7-r15/10.4/ol-7/Dockerfile)
 * [`10.4-debian-9`, `10.4.11-debian-9-r11`, `10.4`, `10.4.11`, `10.4.11-r11` (10.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.11-debian-9-r11/10.4/debian-9/Dockerfile)
 * [`10.4-centos-7`, `10.4.11-centos-7-r15` (10.4/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.11-centos-7-r15/10.4/centos-7/Dockerfile)
 * [`10.3-ol-7`, `10.3.21-ol-7-r24` (10.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.21-ol-7-r24/10.3/ol-7/Dockerfile)
