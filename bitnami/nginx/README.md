@@ -46,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.16-ol-7`, `1.16.1-ol-7-r160` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.1-ol-7-r160/1.16/ol-7/Dockerfile)
+* [`1.16-ol-7`, `1.16.1-ol-7-r161` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.1-ol-7-r161/1.16/ol-7/Dockerfile)
 * [`1.16-debian-9`, `1.16.1-debian-9-r129`, `1.16`, `1.16.1`, `1.16.1-r129`, `latest` (1.16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.1-debian-9-r129/1.16/debian-9/Dockerfile)
 * [`1.16-centos-7`, `1.16.1-centos-7-r160` (1.16/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.1-centos-7-r160/1.16/centos-7/Dockerfile)
 
