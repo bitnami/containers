@@ -9,12 +9,12 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages glibc libaio libgcc zlib
 RUN bitnami-pkg install java-1.8.232-0 --checksum fbac74363c807fce14538c5f9a9232602adc7883c1c5936571c741625de2479e
-RUN bitnami-pkg unpack wildfly-18.0.1-1 --checksum a72bf716d4d9f9eaec6bfa0b3ab272754fb6aa6ffe709e890a2edac200a2e96e
+RUN bitnami-pkg unpack wildfly-18.0.1-2 --checksum 8140612d5885e56bd44a7966a8439521bb2dc436bb6282b4e5e3bcc3693c3174
 RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="18.0.1-ol-7-r52" \
+    BITNAMI_IMAGE_VERSION="18.0.1-ol-7-r53" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly" \
