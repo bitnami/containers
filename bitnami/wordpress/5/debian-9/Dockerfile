@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack wordpress-5.3.2-0 --checksum 621ba83575d0b4cc60788d8db8ba
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.3.2-debian-9-r11" \
+    BITNAMI_IMAGE_VERSION="5.3.2-debian-9-r12" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
