@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r582
+FROM bitnami/oraclelinux-extras:7-r583
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY prebuildfs /
@@ -11,7 +11,7 @@ RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="laravel" \
-    BITNAMI_IMAGE_VERSION="6.8.0-ol-7-r16" \
+    BITNAMI_IMAGE_VERSION="6.8.0-ol-7-r17" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/laravel/bin:$PATH"
 
