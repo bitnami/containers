@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack osclass-3.7.4-22 --checksum 962e503138ed6100d5f6f92f571e7
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="osclass" \
-    BITNAMI_IMAGE_VERSION="3.7.4-debian-9-r428" \
+    BITNAMI_IMAGE_VERSION="3.7.4-debian-9-r429" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
