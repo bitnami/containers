@@ -13,7 +13,7 @@ RUN yum upgrade -y && \
 
 RUN chmod +x /opt/bitnami/kubectl/bin/kubectl
 ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.13.4-ol-7-r313" \
+    BITNAMI_IMAGE_VERSION="1.13.4-ol-7-r314" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 USER 1001
