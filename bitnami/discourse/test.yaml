@@ -1,5 +1,5 @@
 ## This is test deployment for Kubernetes platforms.
-## This is _not_ intended to be use in producction.
+## This is not intended to be used in production.
 ##
 apiVersion: extensions/v1beta1
 kind: Deployment
