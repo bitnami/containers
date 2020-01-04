@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r583
+FROM bitnami/oraclelinux-extras:7-r584
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY prebuildfs /
@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack opencart-3.0.3-2-2 --checksum c16d0c07d338afb76355f647c3b
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="opencart" \
-    BITNAMI_IMAGE_VERSION="3.0.3-2-ol-7-r270" \
+    BITNAMI_IMAGE_VERSION="3.0.3-2-ol-7-r271" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
