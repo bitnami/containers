@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4-ol-7`, `4.1.0-ol-7-r64` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.0-ol-7-r64/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.1.0-debian-9-r51`, `4`, `4.1.0`, `4.1.0-r51`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.0-debian-9-r51/4/debian-9/Dockerfile)
+* [`4-debian-9`, `4.1.0-debian-9-r52`, `4`, `4.1.0`, `4.1.0-r52`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.0-debian-9-r52/4/debian-9/Dockerfile)
 * [`4-centos-7`, `4.1.0-centos-7-r72` (4/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.0-centos-7-r72/4/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
