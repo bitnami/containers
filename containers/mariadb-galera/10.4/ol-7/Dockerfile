@@ -8,7 +8,7 @@ ENV OS_ARCH="x86_64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages audit-libs ca-certificates curl glibc gzip hostname iproute keyutils-libs krb5-libs libaio libaio-devel libcap-ng libcom_err libgcc libselinux libstdc++ lsof ncurses-libs nss-pam-ldapd nss-softokn-freebl openldap-clients openssl-libs pam pcre procps-ng rsync socat sudo tar which zlib
-RUN . ./libcomponent.sh && component_unpack "mariadb-galera" "10.4.11-0" --checksum b2a40bd9ec11908f5721a16de59460991545be6c199c8012663a76df86a287e5
+RUN . ./libcomponent.sh && component_unpack "mariadb-galera" "10.4.11-1" --checksum 144112b4cfa56f221e32f3d456de26add599b68aeadf0d78f07cde533fad279c
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
@@ -21,7 +21,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb-galera" \
-    BITNAMI_IMAGE_VERSION="10.4.11-ol-7-r16" \
+    BITNAMI_IMAGE_VERSION="10.4.11-ol-7-r17" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
 EXPOSE 3306 4444 4567 4568
