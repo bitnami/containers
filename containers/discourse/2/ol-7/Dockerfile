@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r579
+FROM bitnami/oraclelinux-extras:7-r584
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY prebuildfs /
@@ -9,12 +9,12 @@ RUN bitnami-pkg unpack postgresql-client-11.6.0-0 --checksum c0df49723944b7b8420
 RUN bitnami-pkg install git-2.24.1-0 --checksum ecc3a4f7b7a77ffb00ef66a9b02613c52a5b6d77bf9a5279fa139a66e6265460
 RUN bitnami-pkg unpack discourse-sidekiq-2.3.8-0 --checksum fa599df4aa89f4a246a273216872dcebece74893adac7fb180cef1eb09f86ca1
 RUN bitnami-pkg install brotli-1.0.7-1 --checksum 92c77710e899ebedff06d583af7938a56b80df9584675109df5aee1d5899e8da
-RUN bitnami-pkg unpack discourse-2.3.8-0 --checksum e404067c6078feb5efc9d0ce8d40ad3642e22229c3900fe0630e0fba19581a82
+RUN bitnami-pkg unpack discourse-2.3.8-1 --checksum 48dd81edad7683dbf404b4e8ab3666404c13b406b60084aa481163f29be036c5
 RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.3.8-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="2.3.8-ol-7-r12" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="discourse" \
     DISCOURSE_HOSTNAME="127.0.0.1" \
