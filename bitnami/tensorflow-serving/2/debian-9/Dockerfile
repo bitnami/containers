@@ -11,7 +11,7 @@ RUN echo "deb http://http.us.debian.org/debian testing main non-free contrib" >>
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="2.0.0-debian-9-r42" \
+    BITNAMI_IMAGE_VERSION="2.0.0-debian-9-r43" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_ENABLE_MONITORING="no" \
