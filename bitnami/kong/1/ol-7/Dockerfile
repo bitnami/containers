@@ -16,7 +16,7 @@ RUN yum upgrade -y && \
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kong" \
-    BITNAMI_IMAGE_VERSION="1.4.2-ol-7-r18" \
+    BITNAMI_IMAGE_VERSION="1.4.2-ol-7-r19" \
     PATH="/opt/bitnami/kong/bin:/opt/bitnami/kong/openresty/bin:/opt/bitnami/kong/openresty/luajit/bin:/opt/bitnami/kong/openresty/nginx/sbin:$PATH"
 
 EXPOSE 8000 8001 8443 8444
