@@ -1,4 +1,4 @@
-FROM bitnami/centos-extras-base:7-r258
+FROM bitnami/centos-extras-base:7-r259
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -9,7 +9,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/logstash-exporter-0.1.2-0-linux-x86_64-centos-7.tar.gz
 
 ENV BITNAMI_APP_NAME="logstash-exporter" \
-    BITNAMI_IMAGE_VERSION="0.1.2-centos-7-r84" \
+    BITNAMI_IMAGE_VERSION="0.1.2-centos-7-r85" \
     OS_ARCH="x86_64" \
     OS_FLAVOUR="centos-7" \
     OS_NAME="linux" \
