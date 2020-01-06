@@ -1,4 +1,4 @@
-FROM bitnami/centos-extras-base:7-r259
+FROM bitnami/centos-extras-base:7-r260
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,7 +10,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN ln -sf /opt/bitnami/mysqld-exporter/bin/mysqld_exporter /bin/mysqld_exporter
 
 ENV BITNAMI_APP_NAME="mysqld-exporter" \
-    BITNAMI_IMAGE_VERSION="0.12.1-centos-7-r165" \
+    BITNAMI_IMAGE_VERSION="0.12.1-centos-7-r166" \
     OS_ARCH="x86_64" \
     OS_FLAVOUR="centos-7" \
     OS_NAME="linux" \
