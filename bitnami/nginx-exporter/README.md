@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-9`, `0.5.0-debian-9-r23`, `0`, `0.5.0`, `0.5.0-r23`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-exporter/blob/0.5.0-debian-9-r23/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.5.0-debian-9-r24`, `0`, `0.5.0`, `0.5.0-r24`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-exporter/blob/0.5.0-debian-9-r24/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nginx-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-nginx-exporter).
 
