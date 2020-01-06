@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r585
+FROM bitnami/oraclelinux-extras:7-r586
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY prebuildfs /
@@ -12,7 +12,7 @@ RUN mkdir -p /usr/share/jenkins/ref
 COPY rootfs /
 RUN ln -sf /install-plugins.sh /usr/local/bin/install-plugins.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.204.1-ol-7-r17" \
+    BITNAMI_IMAGE_VERSION="2.204.1-ol-7-r18" \
     DISABLE_JENKINS_INITIALIZATION="no" \
     JAVA_OPTS="" \
     JENKINS_HOME="/opt/bitnami/jenkins/jenkins_home" \
