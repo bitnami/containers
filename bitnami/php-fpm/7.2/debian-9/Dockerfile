@@ -12,7 +12,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="7.2.26-debian-9-r14" \
+    BITNAMI_IMAGE_VERSION="7.2.26-debian-9-r15" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH"
 
 EXPOSE 9000
