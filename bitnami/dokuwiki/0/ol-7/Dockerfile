@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r585
+FROM bitnami/oraclelinux-extras:7-r586
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY prebuildfs /
@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack dokuwiki-0.20180422.201901061035-2 --checksum b1bed0f2326
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="dokuwiki" \
-    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-ol-7-r356" \
+    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-ol-7-r357" \
     DOKUWIKI_EMAIL="user@example.com" \
     DOKUWIKI_FULL_NAME="Full Name" \
     DOKUWIKI_PASSWORD="bitnami1" \
