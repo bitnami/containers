@@ -39,7 +39,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.7.9-ol-7-r76` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.7.9-ol-7-r76/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.7.9-ol-7-r77` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.7.9-ol-7-r77/1/ol-7/Dockerfile)
 * [`1-debian-9`, `1.7.9-debian-9-r48`, `1`, `1.7.9`, `1.7.9-r48`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.7.9-debian-9-r48/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb).
