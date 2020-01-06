@@ -1,4 +1,4 @@
-FROM bitnami/centos-extras-base:7-r259
+FROM bitnami/centos-extras-base:7-r260
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "postgresql" "12.1.0-3" --checksum d
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="12.1.0-centos-7-r58" \
+    BITNAMI_IMAGE_VERSION="12.1.0-centos-7-r59" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
