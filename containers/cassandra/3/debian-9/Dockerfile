@@ -25,7 +25,7 @@ RUN curl --silent -L https://github.com/mikefarah/yq/releases/download/2.4.0/yq_
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.5-debian-9-r49" \
+    BITNAMI_IMAGE_VERSION="3.11.5-debian-9-r50" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/cassandra/bin:$PATH"
 
