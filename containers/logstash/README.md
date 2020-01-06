@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7-ol-7`, `7.5.1-ol-7-r19` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.5.1-ol-7-r19/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.5.1-debian-9-r13`, `7`, `7.5.1`, `7.5.1-r13`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.5.1-debian-9-r13/7/debian-9/Dockerfile)
+* [`7-debian-9`, `7.5.1-debian-9-r14`, `7`, `7.5.1`, `7.5.1-r14`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.5.1-debian-9-r14/7/debian-9/Dockerfile)
 * [`7-centos-7`, `7.5.1-centos-7-r0` (7/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.5.1-centos-7-r0/7/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/logstash GitHub repo](https://github.com/bitnami/bitnami-docker-logstash).
