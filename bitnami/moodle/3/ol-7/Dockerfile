@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r585
+FROM bitnami/oraclelinux-extras:7-r586
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY prebuildfs /
@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack moodle-3.8.0-0 --checksum 1e36b69358d0a5f32ab5a611f20a231
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.8.0-ol-7-r50" \
+    BITNAMI_IMAGE_VERSION="3.8.0-ol-7-r51" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
