@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "postgresql-repmgr" "12.1.0-2" --che
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql-repmgr" \
-    BITNAMI_IMAGE_VERSION="12.1.0-centos-7-r58" \
+    BITNAMI_IMAGE_VERSION="12.1.0-centos-7-r59" \
     NAMI_PREFIX="/.nami" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
     PATH="/opt/bitnami/postgresql-repmgr/bin:/opt/bitnami/repmgr/bin:/opt/bitnami/postgresql/bin:$PATH"
