@@ -10,7 +10,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN ln -sf /opt/bitnami/mysqld-exporter/bin/mysqld_exporter /bin/mysqld_exporter
 
 ENV BITNAMI_APP_NAME="mysqld-exporter" \
-    BITNAMI_IMAGE_VERSION="0.12.1-centos-7-r166" \
+    BITNAMI_IMAGE_VERSION="0.12.1-centos-7-r167" \
     OS_ARCH="x86_64" \
     OS_FLAVOUR="centos-7" \
     OS_NAME="linux" \
