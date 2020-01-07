@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack phpbb-3.3.0-0 --checksum 49751618ad4ab1cc2575336107156bb0
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="phpbb" \
-    BITNAMI_IMAGE_VERSION="3.3.0-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="3.3.0-ol-7-r2" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
