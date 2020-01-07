@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.3.0-ol-7-r84` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-configmap-reload/blob/0.3.0-ol-7-r84/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.3.0-debian-9-r69`, `0`, `0.3.0`, `0.3.0-r69`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-configmap-reload/blob/0.3.0-debian-9-r69/0/debian-9/Dockerfile)
+* [`0-debian-9`, `0.3.0-debian-9-r70`, `0`, `0.3.0`, `0.3.0-r70`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-configmap-reload/blob/0.3.0-debian-9-r70/0/debian-9/Dockerfile)
 * [`0-centos-7`, `0.3.0-centos-7-r0` (0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-configmap-reload/blob/0.3.0-centos-7-r0/0/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/configmap-reload GitHub repo](https://github.com/bitnami/bitnami-docker-configmap-reload).
