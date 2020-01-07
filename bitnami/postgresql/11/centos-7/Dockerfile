@@ -14,7 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "postgresql" "11.6.0-3" --checksum f
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="11.6.0-centos-7-r60" \
+    BITNAMI_IMAGE_VERSION="11.6.0-centos-7-r61" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
