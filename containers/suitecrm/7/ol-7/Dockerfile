@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack suitecrm-7.11.10-0 --checksum 5e40d79f7d8f1a0d092cb869d54
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="suitecrm" \
-    BITNAMI_IMAGE_VERSION="7.11.10-ol-7-r56" \
+    BITNAMI_IMAGE_VERSION="7.11.10-ol-7-r57" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
