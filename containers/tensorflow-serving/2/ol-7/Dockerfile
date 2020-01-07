@@ -11,7 +11,7 @@ RUN bitnami-pkg unpack tensorflow-serving-2.0.0-0 --checksum 8e5efddeb6d3b4e15d5
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="2.0.0-ol-7-r58" \
+    BITNAMI_IMAGE_VERSION="2.0.0-ol-7-r59" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_ENABLE_MONITORING="no" \
