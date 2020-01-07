@@ -17,7 +17,7 @@ RUN apt-get update && apt-get upgrade && \
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-registry" \
-    BITNAMI_IMAGE_VERSION="1.10.0-debian-9-r19" \
+    BITNAMI_IMAGE_VERSION="1.10.0-debian-9-r20" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-registry/bin:$PATH"
 
