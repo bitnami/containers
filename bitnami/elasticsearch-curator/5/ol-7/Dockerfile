@@ -13,7 +13,7 @@ RUN yum reinstall -y glibc-common && localedef -c -f UTF-8 -i en_US en_US.UTF-8
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch-curator" \
-    BITNAMI_IMAGE_VERSION="5.8.1-ol-7-r72" \
+    BITNAMI_IMAGE_VERSION="5.8.1-ol-7-r73" \
     LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
     NAMI_PREFIX="/.nami" \
