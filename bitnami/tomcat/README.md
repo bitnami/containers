@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`9.0-ol-7`, `9.0.30-ol-7-r25` (9.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.30-ol-7-r25/9.0/ol-7/Dockerfile)
+* [`9.0-ol-7`, `9.0.30-ol-7-r26` (9.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.30-ol-7-r26/9.0/ol-7/Dockerfile)
 * [`9.0-debian-9`, `9.0.30-debian-9-r19`, `9.0`, `9.0.30`, `9.0.30-r19`, `latest` (9.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.30-debian-9-r19/9.0/debian-9/Dockerfile)
 * [`8.5-ol-7`, `8.5.50-ol-7-r26` (8.5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.50-ol-7-r26/8.5/ol-7/Dockerfile)
 * [`8.5-debian-9`, `8.5.50-debian-9-r20`, `8.5`, `8.5.50`, `8.5.50-r20` (8.5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.50-debian-9-r20/8.5/debian-9/Dockerfile)
