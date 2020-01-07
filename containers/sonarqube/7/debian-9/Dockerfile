@@ -9,7 +9,7 @@ RUN bitnami-pkg unpack sonarqube-7.9.2-0 --checksum 92ba66e87137ef72c50c05b77ff8
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="7.9.2-debian-9-r20" \
+    BITNAMI_IMAGE_VERSION="7.9.2-debian-9-r21" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/java/bin:/opt/bitnami/sonarqube/bin/linux-x86-64/:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
