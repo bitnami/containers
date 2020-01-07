@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack testlink-1.9.19-3 --checksum 4ee7535d8d915844816ad3fef0a4
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="testlink" \
-    BITNAMI_IMAGE_VERSION="1.9.19-ol-7-r343" \
+    BITNAMI_IMAGE_VERSION="1.9.19-ol-7-r344" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
