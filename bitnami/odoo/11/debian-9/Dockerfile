@@ -10,7 +10,7 @@ RUN bitnami-pkg unpack odoo-11.0.20191215-1 --checksum 127957b7f9d624bab8a0d2e94
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="11.0.20191215-debian-9-r17" \
+    BITNAMI_IMAGE_VERSION="11.0.20191215-debian-9-r18" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:$PATH" \
