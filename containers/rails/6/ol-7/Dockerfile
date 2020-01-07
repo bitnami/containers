@@ -13,7 +13,7 @@ RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="6.0.2-1-ol-7-r21" \
+    BITNAMI_IMAGE_VERSION="6.0.2-1-ol-7-r22" \
     BUNDLE_BUILD__SASSC="--disable-march-tune-native" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:/opt/bitnami/rails/bin:$PATH" \
     RAILS_ENV="development"
