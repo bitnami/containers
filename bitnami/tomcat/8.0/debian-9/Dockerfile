@@ -22,7 +22,7 @@ RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="8.0.53-debian-9-r467" \
+    BITNAMI_IMAGE_VERSION="8.0.53-debian-9-r468" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
 EXPOSE 8080
