@@ -11,7 +11,7 @@ RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="kube-state-metrics" \
-    BITNAMI_IMAGE_VERSION="1.9.0-debian-9-r14" \
+    BITNAMI_IMAGE_VERSION="1.9.0-debian-9-r15" \
     PATH="/opt/bitnami/kube-state-metrics/bin:$PATH"
 
 EXPOSE 8080 8081
