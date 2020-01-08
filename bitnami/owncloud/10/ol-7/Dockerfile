@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack owncloud-10.3.2-0 --checksum 033af79e178020945629b1556c1d
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.3.2-ol-7-r28" \
+    BITNAMI_IMAGE_VERSION="10.3.2-ol-7-r29" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
