@@ -1,0 +1,4 @@
+version: '2'
+services:
+  kubeapps-assetsvc:
+    image: bitnami/kubeapps-assetsvc:1-scratch
