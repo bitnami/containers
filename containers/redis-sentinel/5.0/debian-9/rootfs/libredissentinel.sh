@@ -76,6 +76,8 @@ export REDIS_MASTER_PORT_NUMBER="${REDIS_MASTER_PORT_NUMBER:-6379}"
 export REDIS_MASTER_SET="${REDIS_MASTER_SET:-mymaster}"
 export REDIS_SENTINEL_PORT_NUMBER="${REDIS_SENTINEL_PORT_NUMBER:-26379}"
 export REDIS_SENTINEL_QUORUM="${REDIS_SENTINEL_QUORUM:-2}"
+export REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS="${REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS:-60000}"
+export REDIS_SENTINEL_FAILOVER_TIMEOUT="${REDIS_SENTINEL_FAILOVER_TIMEOUT:-180000}"
 export REDIS_SENTINEL_PASSWORD="${REDIS_SENTINEL_PASSWORD:-}"
 EOF
     if [[ -f "${REDIS_MASTER_PASSWORD_FILE:-}" ]]; then
@@ -126,6 +128,8 @@ redis_validate() {
     [[ -w "$REDIS_SENTINEL_CONF_FILE" ]] || print_validation_error "The configuration file ${REDIS_SENTINEL_CONF_FILE} is not writable"
 
     is_positive_int "$REDIS_SENTINEL_QUORUM" || print_validation_error "Invalid quorum value (only positive integers allowed)"
+    is_positive_int "$REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS" || print_validation_error "Invalid down-after-milliseconds value (only positive integers allowed)"
+    is_positive_int "$REDIS_SENTINEL_FAILOVER_TIMEOUT" || print_validation_error "Invalid failover-timeout value (only positive integers allowed)"
 
     check_allowed_port REDIS_SENTINEL_PORT_NUMBER
     check_resolved_hostname "$REDIS_MASTER_HOST"
@@ -165,8 +169,8 @@ redis_initialize() {
 
         # Master set
         redis_conf_set "sentinel monitor" "${REDIS_MASTER_SET} ${REDIS_MASTER_HOST} ${REDIS_MASTER_PORT_NUMBER} ${REDIS_SENTINEL_QUORUM}"
-        redis_conf_set "sentinel down-after-milliseconds" "${REDIS_MASTER_SET} 60000"
-        redis_conf_set "sentinel failover-timeout" "${REDIS_MASTER_SET} 180000"
+        redis_conf_set "sentinel down-after-milliseconds" "${REDIS_MASTER_SET} ${REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS}"
+        redis_conf_set "sentinel failover-timeout" "${REDIS_MASTER_SET} ${REDIS_SENTINEL_FAILOVER_TIMEOUT}"
         redis_conf_set "sentinel parallel-syncs" "${REDIS_MASTER_SET} 1"
         [[ -z "$REDIS_MASTER_PASSWORD" ]] || redis_conf_set "sentinel auth-pass" "${REDIS_MASTER_SET} ${REDIS_MASTER_PASSWORD}"
 
