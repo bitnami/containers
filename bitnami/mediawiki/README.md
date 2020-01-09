@@ -235,6 +235,7 @@ Available variables:
 - `MEDIAWIKI_PASSWORD`: Mediawiki application password. Default: **bitnami123**
 - `MEDIAWIKI_EMAIL`: Mediawiki application email. Default: **user@example.com**
 - `MEDIAWIKI_WIKI_NAME`: Mediawiki wiki name. Default: **Bitnami MediaWiki**
+- `MEDIAWIKI_HOST`: Mediawiki application host. No defaults.
 
 ##### Use an existing database
 
