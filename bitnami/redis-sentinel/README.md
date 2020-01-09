@@ -2,7 +2,7 @@
 # What is Redis Sentinel?
 
 > Redis Sentinel provides high availability for Redis. In practical terms this means that using Sentinel you can create a Redis deployment that resists without human intervention to certain kind of failures.
-> 
+>
 > Redis Sentinel also provides other collateral tasks such as monitoring, notifications and acts as a configuration provider for clients.
 
 
@@ -168,6 +168,8 @@ The Redis Sentinel instance can be customized by specifying environment variable
 - `REDIS_SENTINEL_PORT_NUMBER`: Redis Sentinel port. Default: **26379**.
 - `REDIS_SENTINEL_QUORUM`: Number of Sentinels that need to agree about the fact the master is not reachable. Default: **2**.
 - `REDIS_SENTINEL_PASSWORD`: Password to authenticate with this sentinel and to authenticate to other sentinels. No defaults. Needs to be identical on all sentinels. As an alternative, you can mount a file with the password and set the `REDIS_SENTINEL_PASSWORD_FILE` variable.
+- `REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS`: Number of milliseconds before master is declared down. Default: **60000**.
+- `REDIS_SENTINEL_FAILOVER_TIMEOUT`: Specifies the failover timeout in milliseconds. Default: **180000**.
 
 ## Configuration file
 
@@ -184,7 +186,7 @@ $ docker run --name redis-sentinel \
     bitnami/redis-sentinel:latest
 ```
 
-You can also modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/master/docker-compose.yml) file present in this repository: 
+You can also modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
