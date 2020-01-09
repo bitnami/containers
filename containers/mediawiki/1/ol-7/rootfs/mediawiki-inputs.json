@@ -5,6 +5,7 @@
   "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
   "databaseUser": "{{$global.env.MEDIAWIKI_DATABASE_USER}}",
   "email": "{{$global.env.MEDIAWIKI_EMAIL}}",
+  "host": "{{$global.env.MEDIAWIKI_HOST}}",
   "password": "{{$global.env.MEDIAWIKI_PASSWORD}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
   "smtpHostID": "{{$global.env.SMTP_HOST_ID}}",
