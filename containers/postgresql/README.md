@@ -333,8 +333,6 @@ services:
       - POSTGRESQL_USERNAME=my_user
       - POSTGRESQL_PASSWORD=my_password
       - POSTGRESQL_DATABASE=my_database
-    volumes:
-      - '/path/to/postgresql-persistence:/bitnami/postgresql'
   postgresql-slave:
     image: 'bitnami/postgresql:latest'
     ports:
@@ -348,6 +346,9 @@ services:
       - POSTGRESQL_MASTER_HOST=postgresql-master
       - POSTGRESQL_PASSWORD=my_password
       - POSTGRESQL_MASTER_PORT_NUMBER=5432
+
+volumes:
+  postgresql_master_data:
 ```
 
 Scale the number of slaves using:
