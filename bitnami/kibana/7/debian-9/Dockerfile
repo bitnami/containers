@@ -3,7 +3,8 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     BITNAMI_PKG_EXTRA_DIRS="/opt/bitnami/kibana/optimize" \
-    HOME="/"
+    HOME="/" \
+    PATH="/opt/bitnami/kibana/bin:$PATH"
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libstdc++6
@@ -12,12 +13,11 @@ RUN mkdir -p /bitnami/kibana/ /docker-entrypoint-initdb.d/ && chmod -R g+rwX /bi
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="7.5.1-debian-9-r14" \
+    BITNAMI_IMAGE_VERSION="7.5.1-debian-9-r15" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
-    NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/kibana/bin:$PATH"
+    NAMI_PREFIX="/.nami"
 
 EXPOSE 5601
 
