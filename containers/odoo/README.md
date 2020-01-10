@@ -38,11 +38,11 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`13-ol-7`, `13.0.20191210-ol-7-r34` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20191210-ol-7-r34/13/ol-7/Dockerfile)
-* [`13-debian-9`, `13.0.20191210-debian-9-r24`, `13`, `13.0.20191210`, `13.0.20191210-r24`, `latest` (13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20191210-debian-9-r24/13/debian-9/Dockerfile)
+* [`13-ol-7`, `13.0.20200110-ol-7-r0` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20200110-ol-7-r0/13/ol-7/Dockerfile)
+* [`13-debian-9`, `13.0.20200110-debian-9-r0`, `13`, `13.0.20200110`, `13.0.20200110-r0`, `latest` (13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20200110-debian-9-r0/13/debian-9/Dockerfile)
 * [`12-ol-7`, `12.0.20191215-ol-7-r31` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20191215-ol-7-r31/12/ol-7/Dockerfile)
 * [`12-debian-9`, `12.0.20191215-debian-9-r22`, `12`, `12.0.20191215`, `12.0.20191215-r22` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20191215-debian-9-r22/12/debian-9/Dockerfile)
-* [`11-ol-7`, `11.0.20191215-ol-7-r29` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20191215-ol-7-r29/11/ol-7/Dockerfile)
+* [`11-ol-7`, `11.0.20191215-ol-7-r30` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20191215-ol-7-r30/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.0.20191215-debian-9-r20`, `11`, `11.0.20191215`, `11.0.20191215-r20` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20191215-debian-9-r20/11/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
