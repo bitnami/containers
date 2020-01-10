@@ -44,7 +44,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.13.0-ol-7-r47` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.13.0-ol-7-r47/3/ol-7/Dockerfile)
+* [`3-ol-7`, `3.13.0-ol-7-r48` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.13.0-ol-7-r48/3/ol-7/Dockerfile)
 * [`3-debian-9`, `3.13.0-debian-9-r33`, `3`, `3.13.0`, `3.13.0-r33`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.13.0-debian-9-r33/3/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
@@ -279,7 +279,8 @@ To configure Matomo to send email using SMTP you can set the following environme
  - `SMTP_PORT`: Matomo SMTP port.
  - `SMTP_USER`: Matomo SMTP account user.
  - `SMTP_PASSWORD`: Matomo SMTP account password.
- - `SMTP_PROTOCOL`: Matomo SMTP protocol to use.
+ - `SMTP_PROTOCOL`: Matomo SMTP protocol to use. Available protocols are: "ssl", "tls". No default.
+ - `SMTP_AUTH`: Matomo SMTP authentication mechanism to use. Available mechanisms are: "Plain", "Login", "Crammd5". Default: **Plain**.
 
 This would be an example of SMTP configuration using a Gmail account:
 
@@ -293,6 +294,7 @@ This would be an example of SMTP configuration using a Gmail account:
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
       - SMTP_PROTOCOL=tls
+      - SMTP_AUTH=Plain
       - SMTP_PORT=587
   ...
 ```
@@ -308,6 +310,7 @@ This would be an example of SMTP configuration using a Gmail account:
    -e MATOMO_DATABASE_NAME=bitnami_matomo \
    -e SMTP_HOST=smtp.gmail.com \
    -e SMTP_PROTOCOL=TLS \
+   -e SMTP_AUTH=Plain \
    -e SMTP_PORT=587 \
    -e SMTP_USER=your_email@gmail.com \
    -e SMTP_PASSWORD=your_password \
