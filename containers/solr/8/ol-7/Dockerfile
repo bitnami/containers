@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack solr-8.4.0-0 --checksum a5905eddcb620c6f81ce4a25c19b5ba44
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="8.4.0-ol-7-r7" \
+    BITNAMI_IMAGE_VERSION="8.4.0-ol-7-r8" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:$PATH" \
     SOLR_CORE="" \
