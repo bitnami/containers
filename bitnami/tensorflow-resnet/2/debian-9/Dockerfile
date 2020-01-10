@@ -2,7 +2,8 @@ FROM bitnami/minideb-extras:stretch-r494
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    HOME="/"
+    HOME="/" \
+    PATH="/opt/bitnami/tensorflow-resnet/bin:$PATH"
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libstdc++6
@@ -11,9 +12,8 @@ RUN echo "deb http://http.us.debian.org/debian testing main non-free contrib" >>
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-resnet" \
-    BITNAMI_IMAGE_VERSION="2.0.0-debian-9-r43" \
-    NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/tensorflow-resnet/bin:$PATH"
+    BITNAMI_IMAGE_VERSION="2.0.0-debian-9-r44" \
+    NAMI_PREFIX="/.nami"
 
 USER 1001
 ENTRYPOINT [ "/app-entrypoint.sh" ]
