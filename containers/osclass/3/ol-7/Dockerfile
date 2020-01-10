@@ -1,6 +1,8 @@
 FROM bitnami/oraclelinux-extras:7-r589
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:$PATH"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs cyrus-sasl-lib expat freetds-libs freetype glibc gmp gnutls keyutils-libs krb5-libs libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs readline sqlite xz-libs zlib
@@ -13,7 +15,7 @@ RUN bitnami-pkg unpack osclass-3.7.4-22 --checksum 8988c5c3a7b0727770b6db4bb36d6
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="osclass" \
-    BITNAMI_IMAGE_VERSION="3.7.4-ol-7-r545" \
+    BITNAMI_IMAGE_VERSION="3.7.4-ol-7-r546" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -32,7 +34,6 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     OSCLASS_SAVE_STATS="1" \
     OSCLASS_USERNAME="user" \
     OSCLASS_WEB_TITLE="Sample Web Page" \
-    PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:$PATH" \
     SMTP_HOST="" \
     SMTP_PASSWORD="" \
     SMTP_PORT="" \
