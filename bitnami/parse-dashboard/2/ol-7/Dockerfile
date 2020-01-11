@@ -1,8 +1,9 @@
-FROM bitnami/oraclelinux-extras:7-r589
+FROM bitnami/oraclelinux-extras:7-r591
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    HOME="/"
+    HOME="/" \
+    PATH="/opt/bitnami/node/bin:/opt/bitnami/parse-dashboard/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -12,7 +13,7 @@ RUN bitnami-pkg unpack parse-dashboard-2.0.5-1 --checksum 8014ec9ed4e580dc1adc32
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="2.0.5-ol-7-r82" \
+    BITNAMI_IMAGE_VERSION="2.0.5-ol-7-r83" \
     NAMI_PREFIX="/.nami" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
@@ -23,8 +24,7 @@ ENV BITNAMI_APP_NAME="parse-dashboard" \
     PARSE_MOUNT_PATH="/parse" \
     PARSE_PORT_NUMBER="1337" \
     PARSE_PROTOCOL="http" \
-    PARSE_USE_HOSTNAME="no" \
-    PATH="/opt/bitnami/node/bin:/opt/bitnami/parse-dashboard/bin:$PATH"
+    PARSE_USE_HOSTNAME="no"
 
 EXPOSE 4040
 
