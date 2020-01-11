@@ -3,7 +3,8 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     BITNAMI_PKG_EXTRA_DIRS="/home/wildfly" \
-    HOME="/"
+    HOME="/" \
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH"
 
 # Install required system packages and dependencies
 RUN install_packages libaio1 libc6 libgcc1 zlib1g
@@ -13,9 +14,8 @@ RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="18.0.1-debian-9-r47" \
+    BITNAMI_IMAGE_VERSION="18.0.1-debian-9-r48" \
     NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly" \
     WILDFLY_JAVA_HOME="" \
     WILDFLY_JAVA_OPTS="" \
