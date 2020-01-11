@@ -2,7 +2,8 @@ FROM bitnami/minideb-extras:stretch-r494
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    HOME="/"
+    HOME="/" \
+    PATH="/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:$PATH"
 
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo5 zlib1g
@@ -12,7 +13,7 @@ RUN bitnami-pkg unpack parse-3.10.0-0 --checksum 4a7cd1933aefd9364c8e2329854f2f3
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="3.10.0-debian-9-r1" \
+    BITNAMI_IMAGE_VERSION="3.10.0-debian-9-r2" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
@@ -23,8 +24,7 @@ ENV BITNAMI_APP_NAME="parse" \
     PARSE_HOST="127.0.0.1" \
     PARSE_MASTER_KEY="mymasterKey" \
     PARSE_MOUNT_PATH="/parse" \
-    PARSE_PORT_NUMBER="1337" \
-    PATH="/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:$PATH"
+    PARSE_PORT_NUMBER="1337"
 
 EXPOSE 1337
 
