@@ -1,8 +1,9 @@
-FROM bitnami/oraclelinux-extras:7-r589
+FROM bitnami/oraclelinux-extras:7-r591
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    HOME="/"
+    HOME="/" \
+    PATH="/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -13,7 +14,7 @@ RUN bitnami-pkg unpack parse-3.10.0-0 --checksum ad1521691c650449ffe73e044d24b5f
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="3.10.0-ol-7-r2" \
+    BITNAMI_IMAGE_VERSION="3.10.0-ol-7-r3" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
@@ -24,8 +25,7 @@ ENV BITNAMI_APP_NAME="parse" \
     PARSE_HOST="127.0.0.1" \
     PARSE_MASTER_KEY="mymasterKey" \
     PARSE_MOUNT_PATH="/parse" \
-    PARSE_PORT_NUMBER="1337" \
-    PATH="/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:$PATH"
+    PARSE_PORT_NUMBER="1337"
 
 EXPOSE 1337
 
