@@ -1,8 +1,9 @@
-FROM bitnami/oraclelinux-extras:7-r589
+FROM bitnami/oraclelinux-extras:7-r591
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    HOME="/"
+    HOME="/" \
+    PATH="/opt/bitnami/python/bin:/opt/bitnami/elasticsearch-curator/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -13,11 +14,10 @@ RUN yum reinstall -y glibc-common && localedef -c -f UTF-8 -i en_US en_US.UTF-8
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch-curator" \
-    BITNAMI_IMAGE_VERSION="5.8.1-ol-7-r80" \
+    BITNAMI_IMAGE_VERSION="5.8.1-ol-7-r81" \
     LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
-    NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/python/bin:/opt/bitnami/elasticsearch-curator/bin:$PATH"
+    NAMI_PREFIX="/.nami"
 
 USER 1001
 ENTRYPOINT [ "curator" ]
