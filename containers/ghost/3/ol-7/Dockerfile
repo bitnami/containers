@@ -1,9 +1,10 @@
-FROM bitnami/oraclelinux-extras:7-r589
+FROM bitnami/oraclelinux-extras:7-r591
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX,o+rw" \
     BITNAMI_PKG_EXTRA_DIRS="/.ghost /opt/bitnami/content" \
-    HOME="/"
+    HOME="/" \
+    PATH="/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/ghost/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -15,7 +16,7 @@ RUN bitnami-pkg unpack ghost-3.2.0-0 --checksum f8bc4fbf248a113a7c8b3812383739f3
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="3.2.0-ol-7-r15" \
+    BITNAMI_IMAGE_VERSION="3.2.0-ol-7-r16" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
@@ -35,7 +36,6 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES="ALL" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
     NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/ghost/bin:$PATH" \
     SMTP_FROM_ADDRESS="" \
     SMTP_HOST="" \
     SMTP_PASSWORD="" \
