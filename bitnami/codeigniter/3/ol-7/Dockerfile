@@ -1,5 +1,7 @@
-FROM bitnami/oraclelinux-extras:7-r589
+FROM bitnami/oraclelinux-extras:7-r591
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/codeigniter/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -10,12 +12,11 @@ RUN bitnami-pkg install codeigniter-3.1.11-1 --checksum 688a0ac5b62282e30398fa20
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="codeigniter" \
-    BITNAMI_IMAGE_VERSION="3.1.11-ol-7-r117" \
+    BITNAMI_IMAGE_VERSION="3.1.11-ol-7-r118" \
     CODEIGNITER_PROJECT_NAME="myapp" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
-    MARIADB_USER="root" \
-    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/codeigniter/bin:$PATH"
+    MARIADB_USER="root"
 
 EXPOSE 8000
 
