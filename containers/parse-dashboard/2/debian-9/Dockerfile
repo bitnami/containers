@@ -2,7 +2,8 @@ FROM bitnami/minideb-extras:stretch-r494
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    HOME="/"
+    HOME="/" \
+    PATH="/opt/bitnami/node/bin:/opt/bitnami/parse-dashboard/bin:$PATH"
 
 # Install required system packages and dependencies
 RUN install_packages ghostscript imagemagick libbz2-1.0 libc6 libgcc1 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo5 zlib1g
@@ -11,7 +12,7 @@ RUN bitnami-pkg unpack parse-dashboard-2.0.5-1 --checksum 4f2862707eccd08bc45ba3
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="2.0.5-debian-9-r70" \
+    BITNAMI_IMAGE_VERSION="2.0.5-debian-9-r71" \
     NAMI_PREFIX="/.nami" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
@@ -22,8 +23,7 @@ ENV BITNAMI_APP_NAME="parse-dashboard" \
     PARSE_MOUNT_PATH="/parse" \
     PARSE_PORT_NUMBER="1337" \
     PARSE_PROTOCOL="http" \
-    PARSE_USE_HOSTNAME="no" \
-    PATH="/opt/bitnami/node/bin:/opt/bitnami/parse-dashboard/bin:$PATH"
+    PARSE_USE_HOSTNAME="no"
 
 EXPOSE 4040
 
