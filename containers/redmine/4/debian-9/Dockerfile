@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack redmine-4.1.0-0 --checksum c69bfc2dea34a9079d448c8beef461
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.1.0-debian-9-r13" \
+    BITNAMI_IMAGE_VERSION="4.1.0-debian-9-r14" \
     REDMINE_DB_MYSQL="mariadb" \
     REDMINE_DB_NAME="bitnami_redmine" \
     REDMINE_DB_PASSWORD="" \
