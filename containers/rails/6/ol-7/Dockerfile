@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r589
+FROM bitnami/oraclelinux-extras:7-r591
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV PATH="/opt/bitnami/ruby/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:/opt/bitnami/rails/bin:$PATH"
@@ -15,7 +15,7 @@ RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="6.0.2-1-ol-7-r27" \
+    BITNAMI_IMAGE_VERSION="6.0.2-1-ol-7-r28" \
     BUNDLE_BUILD__SASSC="--disable-march-tune-native" \
     RAILS_ENV="development"
 
