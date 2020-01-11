@@ -1,9 +1,10 @@
-FROM bitnami/oraclelinux-extras:7-r589
+FROM bitnami/oraclelinux-extras:7-r591
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     BITNAMI_PKG_EXTRA_DIRS="/home/wildfly" \
-    HOME="/"
+    HOME="/" \
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -14,9 +15,8 @@ RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="18.0.1-ol-7-r63" \
+    BITNAMI_IMAGE_VERSION="18.0.1-ol-7-r64" \
     NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly" \
     WILDFLY_JAVA_HOME="" \
     WILDFLY_JAVA_OPTS="" \
