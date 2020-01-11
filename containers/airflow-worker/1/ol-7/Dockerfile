@@ -1,9 +1,10 @@
-FROM bitnami/oraclelinux-extras:7-r589
+FROM bitnami/oraclelinux-extras:7-r591
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     BITNAMI_PKG_EXTRA_DIRS="/opt/bitnami/airflow/dags" \
-    HOME="/"
+    HOME="/" \
+    PATH="/opt/bitnami/python/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/airflow-worker/bin:/opt/bitnami/airflow/venv/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -29,7 +30,7 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     AIRFLOW_WORKER_PORT_NUMBER="8793" \
     BITNAMI_APP_NAME="airflow-worker" \
-    BITNAMI_IMAGE_VERSION="1.10.7-ol-7-r18" \
+    BITNAMI_IMAGE_VERSION="1.10.7-ol-7-r19" \
     C_FORCE_ROOT="True" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
     LD_PRELOAD="/usr/lib64/libnss_wrapper.so" \
@@ -37,7 +38,6 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     NAMI_PREFIX="/.nami" \
     NSS_WRAPPER_GROUP="/opt/bitnami/airflow/nss_group" \
     NSS_WRAPPER_PASSWD="/opt/bitnami/airflow/nss_passwd" \
-    PATH="/opt/bitnami/python/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/airflow-worker/bin:/opt/bitnami/airflow/venv/bin:$PATH" \
     REDIS_HOST="redis" \
     REDIS_PASSWORD="" \
     REDIS_PORT_NUMBER="6379" \
