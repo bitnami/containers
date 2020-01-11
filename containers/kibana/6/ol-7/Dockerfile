@@ -1,9 +1,10 @@
-FROM bitnami/oraclelinux-extras:7-r589
+FROM bitnami/oraclelinux-extras:7-r591
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     BITNAMI_PKG_EXTRA_DIRS="/opt/bitnami/kibana/optimize" \
-    HOME="/"
+    HOME="/" \
+    PATH="/opt/bitnami/kibana/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -13,12 +14,11 @@ RUN mkdir -p /bitnami/kibana/ /docker-entrypoint-initdb.d/ && chmod -R g+rwX /bi
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="6.8.6-ol-7-r23" \
+    BITNAMI_IMAGE_VERSION="6.8.6-ol-7-r24" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
-    NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/kibana/bin:$PATH"
+    NAMI_PREFIX="/.nami"
 
 EXPOSE 5601
 
