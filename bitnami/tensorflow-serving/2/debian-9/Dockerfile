@@ -2,7 +2,8 @@ FROM bitnami/minideb-extras:stretch-r494
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    HOME="/"
+    HOME="/" \
+    PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH"
 
 # Install required system packages and dependencies
 RUN install_packages libc6 libgcc1 libstdc++6
@@ -11,9 +12,8 @@ RUN echo "deb http://http.us.debian.org/debian testing main non-free contrib" >>
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="2.0.0-debian-9-r49" \
+    BITNAMI_IMAGE_VERSION="2.0.0-debian-9-r50" \
     NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/bazel-bin/tensorflow_serving/model_servers:$PATH" \
     TENSORFLOW_SERVING_ENABLE_MONITORING="no" \
     TENSORFLOW_SERVING_MODEL_NAME="resnet" \
     TENSORFLOW_SERVING_MONITORING_PATH="/monitoring/prometheus/metrics" \
