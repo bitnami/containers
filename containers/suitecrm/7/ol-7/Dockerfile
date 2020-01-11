@@ -1,5 +1,7 @@
-FROM bitnami/oraclelinux-extras:7-r589
+FROM bitnami/oraclelinux-extras:7-r591
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -13,7 +15,7 @@ RUN bitnami-pkg unpack suitecrm-7.11.10-0 --checksum 5e40d79f7d8f1a0d092cb869d54
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="suitecrm" \
-    BITNAMI_IMAGE_VERSION="7.11.10-ol-7-r63" \
+    BITNAMI_IMAGE_VERSION="7.11.10-ol-7-r64" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -22,7 +24,6 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
     MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES="ALL" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
-    PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:$PATH" \
     SUITECRM_DATABASE_NAME="bitnami_<<name>>" \
     SUITECRM_DATABASE_PASSWORD="" \
     SUITECRM_DATABASE_USER="bn_<<name>>" \
