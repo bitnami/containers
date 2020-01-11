@@ -1,5 +1,7 @@
-FROM bitnami/oraclelinux-extras:7-r589
+FROM bitnami/oraclelinux-extras:7-r591
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -13,7 +15,7 @@ RUN bitnami-pkg unpack owncloud-10.3.2-0 --checksum 033af79e178020945629b1556c1d
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.3.2-ol-7-r34" \
+    BITNAMI_IMAGE_VERSION="10.3.2-ol-7-r35" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -28,8 +30,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     OWNCLOUD_EMAIL="user@example.com" \
     OWNCLOUD_HOST="" \
     OWNCLOUD_PASSWORD="bitnami" \
-    OWNCLOUD_USERNAME="user" \
-    PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:$PATH"
+    OWNCLOUD_USERNAME="user"
 
 EXPOSE 80 443
 
