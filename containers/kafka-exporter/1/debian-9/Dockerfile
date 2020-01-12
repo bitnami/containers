@@ -11,7 +11,7 @@ RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="kafka-exporter" \
-    BITNAMI_IMAGE_VERSION="1.2.0-debian-9-r142" \
+    BITNAMI_IMAGE_VERSION="1.2.0-debian-9-r143" \
     PATH="/opt/bitnami/kafka-exporter/bin:$PATH"
 
 EXPOSE 9308
