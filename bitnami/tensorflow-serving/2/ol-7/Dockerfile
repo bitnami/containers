@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r591
+FROM bitnami/oraclelinux-extras:7-r592
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack tensorflow-serving-2.0.0-0 --checksum 8e5efddeb6d3b4e15d5
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="2.0.0-ol-7-r66" \
+    BITNAMI_IMAGE_VERSION="2.0.0-ol-7-r67" \
     NAMI_PREFIX="/.nami" \
     TENSORFLOW_SERVING_ENABLE_MONITORING="no" \
     TENSORFLOW_SERVING_MODEL_NAME="resnet" \
