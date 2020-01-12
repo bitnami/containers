@@ -12,7 +12,7 @@ RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="laravel" \
-    BITNAMI_IMAGE_VERSION="6.8.0-debian-9-r19" \
+    BITNAMI_IMAGE_VERSION="6.8.0-debian-9-r20" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules"
 
 EXPOSE 3000
