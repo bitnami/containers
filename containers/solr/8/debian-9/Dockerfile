@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack solr-8.4.0-0 --checksum ed0ad6470159e534ef1df37bdcbd5fef0
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="8.4.0-debian-9-r11" \
+    BITNAMI_IMAGE_VERSION="8.4.0-debian-9-r12" \
     NAMI_PREFIX="/.nami" \
     SOLR_CORE="" \
     SOLR_CORE_CONF_DIR="_default" \
