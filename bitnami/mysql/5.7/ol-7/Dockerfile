@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl cyrus-sasl-lib glibc gzip hostname keyutils-libs krb5-libs libaio libaio-devel libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre procps-ng sudo tar which zlib
-RUN . ./libcomponent.sh && component_unpack "mysql" "5.7.28-1" --checksum e8db7a6371aeec39b5b3e8eba49270e247efb7d82c80078cdacd764ee3c670e4
+RUN . ./libcomponent.sh && component_unpack "mysql" "5.7.29-0" --checksum f1807406fb53156cd952ec90d935f704827f0cee4ecafd198749915e4a69d284
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
@@ -23,7 +23,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.28-ol-7-r100" \
+    BITNAMI_IMAGE_VERSION="5.7.29-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mysql/bin:$PATH"
 
