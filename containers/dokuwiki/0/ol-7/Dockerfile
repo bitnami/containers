@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r592
+FROM bitnami/oraclelinux-extras:7-r593
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH"
@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack dokuwiki-0.20180422.201901061035-2 --checksum b1bed0f2326
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="dokuwiki" \
-    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-ol-7-r363" \
+    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-ol-7-r364" \
     DOKUWIKI_EMAIL="user@example.com" \
     DOKUWIKI_FULL_NAME="Full Name" \
     DOKUWIKI_PASSWORD="bitnami1" \
