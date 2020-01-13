@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r592
+FROM bitnami/oraclelinux-extras:7-r593
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/php/sbin:/opt/bitnami/wp-cli/bin:/opt/bitnami/nginx/sbin:/opt/bitnami/mysql/bin:$PATH"
@@ -17,7 +17,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="5.3.2-ol-7-r27" \
+    BITNAMI_IMAGE_VERSION="5.3.2-ol-7-r28" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
