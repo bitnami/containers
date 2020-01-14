@@ -9,7 +9,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libc6 libcomerr2 libcurl3 libffi6 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle6 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libtasn1-6 libunistring0 procps rpm unzip xz-utils zlib1g
+RUN install_packages ca-certificates curl libc6 libcomerr2 libcurl3 libffi6 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle6 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.0.2 libssl1.1 libtasn1-6 libunistring0 procps rpm sudo unzip xz-utils zlib1g
 RUN . ./libcomponent.sh && component_unpack "git" "2.25.0-0" --checksum 49b040c04ed41e5707e3aac4bbc13553a865dc16acd2053e50e4355d13a373d1
 RUN . ./libcomponent.sh && component_unpack "harbor-clair" "1.10.0-0" --checksum 4580d85537319d0e9d4a280f6d3f97da669016125ced63ad9c862b9d73368c2e
 RUN apt-get update && apt-get upgrade && \
@@ -22,7 +22,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="harbor-clair" \
-    BITNAMI_IMAGE_VERSION="1.10.0-debian-9-r25" \
+    BITNAMI_IMAGE_VERSION="1.10.0-debian-9-r26" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/git/bin:/opt/bitnami/harbor-clair/bin:$PATH"
 
