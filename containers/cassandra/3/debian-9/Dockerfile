@@ -9,7 +9,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libbz2-1.0 libc6 libgcc1 libjemalloc1 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libtinfo5 procps unzip zlib1g
+RUN install_packages ca-certificates curl libbz2-1.0 libc6 libgcc1 libjemalloc1 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libtinfo5 procps sudo unzip zlib1g
 RUN . ./libcomponent.sh && component_unpack "python" "2.7.17-1" --checksum 27dd8b9191d766d555257113720c176fa13ba38c64000c373d14924eac7dc070
 RUN . ./libcomponent.sh && component_unpack "java" "1.8.232-0" --checksum f4e5ff1d4fb13baf9bb2a4f2e5ffb328cf9eeb26d0b91214196e4473c2874adc
 RUN . ./libcomponent.sh && component_unpack "cassandra" "3.11.5-0" --checksum d5eb10e00efad602ea3a8129dff9dac7ae82daebad8896914a3670050c1464f3
@@ -25,7 +25,7 @@ RUN curl --silent -L https://github.com/mikefarah/yq/releases/download/2.4.0/yq_
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.5-debian-9-r55" \
+    BITNAMI_IMAGE_VERSION="3.11.5-debian-9-r56" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/cassandra/bin:$PATH"
 
