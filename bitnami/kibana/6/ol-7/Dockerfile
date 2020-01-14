@@ -9,12 +9,8 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel libgcc libstdc++ procps-ng sudo tar which
-RUN curl --silent -L https://nami-prod.s3.amazonaws.com/tools/nami/releases/nami-1.0.0-1-linux-x64.tar.gz > /tmp/nami-linux-x64.tar.gz && \
-    echo "80488279b056d5e9c183fe34097c5f496715ab16a602afcc9f78d59f15139a16 /tmp/nami-linux-x64.tar.gz" | sha256sum --check && \
-    mkdir -p /opt/bitnami/nami /opt/bitnami/licenses && \
-    tar xzf /tmp/nami-linux-x64.tar.gz --strip 1 -C /opt/bitnami/nami && \
-    rm /tmp/nami-linux-x64.tar.gz && \
-    curl --silent -L https://raw.githubusercontent.com/bitnami/nami/master/COPYING > /opt/bitnami/licenses/nami-1.0.0-1.txt
+RUN /bitnami-user.sh && \
+    /install-nami.sh
 RUN bitnami-pkg unpack kibana-6.8.6-0 --checksum bfc2a79de6f7185537cedb38ddcd8eef942afd3b4fe97a4e8763b834029e67a6
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -35,7 +31,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="6.8.6-ol-7-r27" \
+    BITNAMI_IMAGE_VERSION="6.8.6-ol-7-r28" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
