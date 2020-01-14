@@ -9,12 +9,8 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs ca-certificates curl cyrus-sasl-lib glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libedit libffi libgcc libselinux libstdc++ libuuid libxml2 libxslt mariadb-libs ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre procps-ng readline sqlite sudo tar which xz-libs zlib
-RUN curl --silent -L https://nami-prod.s3.amazonaws.com/tools/nami/releases/nami-1.0.0-1-linux-x64.tar.gz > /tmp/nami-linux-x64.tar.gz && \
-    echo "80488279b056d5e9c183fe34097c5f496715ab16a602afcc9f78d59f15139a16 /tmp/nami-linux-x64.tar.gz" | sha256sum --check && \
-    mkdir -p /opt/bitnami/nami /opt/bitnami/licenses && \
-    tar xzf /tmp/nami-linux-x64.tar.gz --strip 1 -C /opt/bitnami/nami && \
-    rm /tmp/nami-linux-x64.tar.gz && \
-    curl --silent -L https://raw.githubusercontent.com/bitnami/nami/master/COPYING > /opt/bitnami/licenses/nami-1.0.0-1.txt
+RUN /bitnami-user.sh && \
+    /install-nami.sh
 RUN bitnami-pkg install python-3.6.10-0 --checksum 5a8e49832c587612e6b4afa4dfe4708dc2153263ec594006eb7972c3352773b3
 RUN bitnami-pkg install postgresql-client-10.11.0-0 --checksum 7698c1aeb96133009652bfe6b05713c2450effcdc53f094194d06fe15a04f580
 RUN bitnami-pkg unpack airflow-worker-1.10.7-0 --checksum fa986024ced22b28f197d401b57d0f4c8198a61d824df6d2a0f8cfde48f9f4d2
@@ -51,7 +47,7 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     AIRFLOW_WORKER_PORT_NUMBER="8793" \
     BITNAMI_APP_NAME="airflow-worker" \
-    BITNAMI_IMAGE_VERSION="1.10.7-ol-7-r22" \
+    BITNAMI_IMAGE_VERSION="1.10.7-ol-7-r23" \
     C_FORCE_ROOT="True" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
     LD_PRELOAD="/usr/lib64/libnss_wrapper.so" \
