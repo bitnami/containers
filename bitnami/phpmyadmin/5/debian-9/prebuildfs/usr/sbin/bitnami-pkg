@@ -44,7 +44,7 @@ identify_distro() {
 }
 
 identify_arch() {
-  local arch=$(arch)
+  local arch=$(uname -m)
 
   case "${arch}" in
   ppc64le)
@@ -58,6 +58,9 @@ identify_arch() {
       arch=x86_64
       ;;
     rhel-*)
+      arch=x86_64
+      ;;
+    photon-*)
       arch=x86_64
       ;;
     esac
