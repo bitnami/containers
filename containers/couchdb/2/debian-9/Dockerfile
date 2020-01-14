@@ -8,7 +8,7 @@ ENV HOME="/" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libc6 libgcc1 libicu57 libssl1.1 libstdc++6 libtinfo5 procps unzip zlib1g
+RUN install_packages ca-certificates curl libc6 libgcc1 libicu57 libssl1.1 libstdc++6 libtinfo5 procps sudo unzip zlib1g
 RUN . ./libcomponent.sh && component_unpack "couchdb" "2.3.1-6" --checksum 0659a09a8c04ce20dcd680068bdeea110512358c100f33693b58de71d61e708f
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -27,7 +27,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="couchdb" \
-    BITNAMI_IMAGE_VERSION="2.3.1-debian-9-r97" \
+    BITNAMI_IMAGE_VERSION="2.3.1-debian-9-r98" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/couchdb/bin:$PATH"
 
