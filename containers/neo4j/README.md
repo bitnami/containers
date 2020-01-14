@@ -49,8 +49,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.5.14-ol-7-r27` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.14-ol-7-r27/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.5.14-debian-9-r25`, `3`, `3.5.14`, `3.5.14-r25`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/3.5.14-debian-9-r25/3/debian-9/Dockerfile)
+* [`4-ol-7`, `4.0.0-ol-7-r0` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/4.0.0-ol-7-r0/4/ol-7/Dockerfile)
+* [`4-debian-9`, `4.0.0-debian-9-r0`, `4`, `4.0.0`, `4.0.0-r0`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/4.0.0-debian-9-r0/4/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/neo4j GitHub repo](https://github.com/bitnami/bitnami-docker-neo4j).
 
@@ -71,7 +71,7 @@ $ docker pull bitnami/neo4j:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/neo4j:latest 'https://github.com/bitnami/bitnami-docker-neo4j.git#master:3/debian-9'
+$ docker build -t bitnami/neo4j:latest 'https://github.com/bitnami/bitnami-docker-neo4j.git#master:4/debian-9'
 ```
 
 # Persisting your application
