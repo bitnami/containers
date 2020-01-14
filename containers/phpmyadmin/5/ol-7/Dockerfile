@@ -13,11 +13,15 @@ RUN curl --silent -L https://nami-prod.s3.amazonaws.com/tools/nami/releases/nami
     rm /tmp/nami-linux-x64.tar.gz && \
     curl --silent -L https://raw.githubusercontent.com/bitnami/nami/master/COPYING > /opt/bitnami/licenses/nami-1.0.0-1.txt
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
-RUN bitnami-pkg unpack php-7.3.13-0 --checksum a51ab66c0ae1dd1503084b35380659069ba03fe2644e2034752b346c87b3c89e
+RUN bitnami-pkg unpack php-7.3.13-1 --checksum a2bb2a5ddd668c0662a12704747c5a6843f2ba05d03fb03f1e95140c33e14ffc
 RUN bitnami-pkg install libphp-7.3.13-2 --checksum ddba3fba1c2c84d24cbe3545222644d6c5ccc0a3e2340b03ad28c09d0f0d0c53
 RUN bitnami-pkg unpack phpmyadmin-5.0.1-0 --checksum f2c268bc409824d90f62225496febb2a850354aaaeda74daca9f07f1050b84d1
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
+RUN useradd -ms /bin/bash bitnami && \
+    mkdir -p /opt/bitnami && chown bitnami:bitnami /opt/bitnami && \
+    sed -i -e 's/\s*Defaults\s*secure_path\s*=/# Defaults secure_path=/' /etc/sudoers && \
+    echo 'bitnami ALL=NOPASSWD: ALL' >> /etc/sudoers
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
     echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
     chmod u+x /usr/local/bin/gosu && \
@@ -34,7 +38,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="5.0.1-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="5.0.1-ol-7-r1" \
     DATABASE_ENABLE_SSL="no" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
