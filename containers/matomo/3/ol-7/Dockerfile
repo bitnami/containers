@@ -19,6 +19,10 @@ RUN bitnami-pkg install libphp-7.3.13-2 --checksum ddba3fba1c2c84d24cbe354522264
 RUN bitnami-pkg unpack matomo-3.13.0-3 --checksum 0e01a3fe37f334a9253dd0d0aa896ad91669f150c485722088330dd27fc42c89
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
+RUN useradd -ms /bin/bash bitnami && \
+    mkdir -p /opt/bitnami && chown bitnami:bitnami /opt/bitnami && \
+    sed -i -e 's/\s*Defaults\s*secure_path\s*=/# Defaults secure_path=/' /etc/sudoers && \
+    echo 'bitnami ALL=NOPASSWD: ALL' >> /etc/sudoers
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
     echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
     chmod u+x /usr/local/bin/gosu && \
@@ -36,7 +40,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="matomo" \
-    BITNAMI_IMAGE_VERSION="3.13.0-ol-7-r53" \
+    BITNAMI_IMAGE_VERSION="3.13.0-ol-7-r54" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
