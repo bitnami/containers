@@ -12,7 +12,7 @@ RUN bitnami-pkg install ruby-2.6.5-0 --checksum 29ef6f1ed911c95ada9710d617438ec9
 RUN bitnami-pkg install node-10.18.1-0 --checksum c61f5ce812c3092ed4b91d56638cae0b53445e53a044339ca248ce57d730769a
 RUN bitnami-pkg install mysql-client-10.3.21-0 --checksum 9e012f0e449a963c923c8ea7a5cc2ab2c688564ed910eaab2aef1ad70c5d8e4b
 RUN bitnami-pkg install git-2.25.0-0 --checksum 2fd25c5b37cec238a759c3c3643c156d4fe5b00716e2152c7c494cf6729673c9
-RUN bitnami-pkg install rails-6.0.2-1-0 --checksum 9ab997a69804a883e92cc69321082b01330494114f0861b41e125e1dc6050bf3
+RUN bitnami-pkg install rails-6.0.2-1-1 --checksum a55541347cdbac9c56ebf60af3227f044012388df1915c9448503ff7df0cee91
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN mkdir /app && chown bitnami:bitnami /app
@@ -32,7 +32,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="6.0.2-1-ol-7-r31" \
+    BITNAMI_IMAGE_VERSION="6.0.2-1-ol-7-r32" \
     BUNDLE_BUILD__SASSC="--disable-march-tune-native" \
     RAILS_ENV="development"
 
