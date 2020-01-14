@@ -18,6 +18,10 @@ RUN bitnami-pkg install node-7.10.1-1 --checksum c58b53a2ea5feafe1e0f0ef4b990d9f
 RUN bitnami-pkg unpack odoo-11.0.20191215-1 --checksum 41a07615e8080431759cc62153e1363b142989821de82f5bbee0bb08a00bacf2
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
+RUN useradd -ms /bin/bash bitnami && \
+    mkdir -p /opt/bitnami && chown bitnami:bitnami /opt/bitnami && \
+    sed -i -e 's/\s*Defaults\s*secure_path\s*=/# Defaults secure_path=/' /etc/sudoers && \
+    echo 'bitnami ALL=NOPASSWD: ALL' >> /etc/sudoers
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
     echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
     chmod u+x /usr/local/bin/gosu && \
@@ -34,7 +38,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="11.0.20191215-ol-7-r34" \
+    BITNAMI_IMAGE_VERSION="11.0.20191215-ol-7-r35" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
     POSTGRESQL_HOST="postgresql" \
