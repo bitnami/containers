@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl cyrus-sasl-lib glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libcurl libidn libselinux libssh2 nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre procps-ng sudo tar unzip which zlib
-RUN . ./libcomponent.sh && component_unpack "git" "2.24.1-0" --checksum ecc3a4f7b7a77ffb00ef66a9b02613c52a5b6d77bf9a5279fa139a66e6265460
+RUN . ./libcomponent.sh && component_unpack "git" "2.25.0-0" --checksum 2fd25c5b37cec238a759c3c3643c156d4fe5b00716e2152c7c494cf6729673c9
 RUN . ./libcomponent.sh && component_unpack "harbor-clair" "1.10.0-0" --checksum 0e5803d0d20c187a8389140770cbf02d8c1bec7a70b48ab1a023712e636ff12d
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -22,7 +22,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="harbor-clair" \
-    BITNAMI_IMAGE_VERSION="1.10.0-ol-7-r31" \
+    BITNAMI_IMAGE_VERSION="1.10.0-ol-7-r32" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/git/bin:/opt/bitnami/harbor-clair/bin:$PATH"
 
