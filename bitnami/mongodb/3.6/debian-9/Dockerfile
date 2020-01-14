@@ -9,7 +9,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libc6 libgcc1 libpcap0.8 libssl1.1 procps unzip
+RUN install_packages ca-certificates curl libc6 libgcc1 libpcap0.8 libssl1.1 procps sudo unzip
 RUN . ./libcomponent.sh && component_unpack "mongodb" "3.6.16-0" --checksum 448cdf9784970777723b50ad5a662788792efdfbc1bd83a4579ba24b83a3871c
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -29,7 +29,7 @@ RUN curl --silent -L https://github.com/mikefarah/yq/releases/download/2.4.0/yq_
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.6.16-debian-9-r33" \
+    BITNAMI_IMAGE_VERSION="3.6.16-debian-9-r34" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mongodb/bin:$PATH"
 
