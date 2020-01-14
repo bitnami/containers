@@ -9,7 +9,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libc6 procps unzip
+RUN install_packages ca-certificates curl libc6 procps sudo unzip
 RUN . ./libcomponent.sh && component_unpack "harbor-registryctl" "1.10.0-0" --checksum 7c3126a9e3dc421f3b68c69c2682c1306abe3367d3e2da04f447bb328413ba90
 RUN . ./libcomponent.sh && component_unpack "harbor-registry" "1.10.0-0" --checksum af9c5eaf11704e45e5ecf0406b4966f018247d559e9fe0ee33b69a17380bc824
 RUN apt-get update && apt-get upgrade && \
@@ -19,7 +19,7 @@ RUN curl --silent -L https://github.com/mikefarah/yq/releases/download/2.4.0/yq_
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-registryctl" \
-    BITNAMI_IMAGE_VERSION="1.10.0-debian-9-r25" \
+    BITNAMI_IMAGE_VERSION="1.10.0-debian-9-r26" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-registryctl/bin:/opt/bitnami/harbor-registry/bin:$PATH"
 
