@@ -8,7 +8,7 @@ ENV HOME="/" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libc6 procps unzip
+RUN install_packages ca-certificates curl libc6 procps sudo unzip
 RUN . ./libcomponent.sh && component_unpack "influxdb" "1.7.9-0" --checksum 4d77d238e8688ba993689c7df9cdfbf053eccf5e0fd31dd0117a858e10d1bb13
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -26,7 +26,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="influxdb" \
-    BITNAMI_IMAGE_VERSION="1.7.9-debian-9-r49" \
+    BITNAMI_IMAGE_VERSION="1.7.9-debian-9-r50" \
     PATH="/opt/bitnami/influxdb/bin:$PATH"
 
 VOLUME [ "/bitnami/influxdb" ]
