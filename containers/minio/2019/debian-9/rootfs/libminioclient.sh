@@ -99,16 +99,7 @@ minio_client_configure_server() {
 #########################
 minio_client_configure_local() {
   local -r config_file="${1:?missing config_file}"
-  local access_key
-  local secret_key
 
   info "Adding local Minio host to 'mc' configuration..."
-  if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
-      # Access keys are set via environment variables in Distributed Mode
-      minio_client_execute config host add local "http://localhost:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ACCESS_KEY}" "${MINIO_SERVER_SECRET_KEY}"
-  else
-      access_key="$(jq -r .credential.accessKey < "${config_file}")"
-      secret_key="$(jq -r .credential.secretKey < "${config_file}")"
-      minio_client_execute config host add local "http://localhost:${MINIO_SERVER_PORT_NUMBER}" "${access_key}" "${secret_key}"
-  fi
+  minio_client_execute config host add local "http://localhost:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ACCESS_KEY}" "${MINIO_SERVER_SECRET_KEY}" >/dev/null 2>&1
 }
