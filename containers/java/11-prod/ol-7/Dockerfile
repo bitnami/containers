@@ -1,17 +1,20 @@
-FROM bitnami/java:11.0.5-ol-7-r85 as development
+FROM bitnami/java:11.0.5-ol-7-r86 as development
 
 ######
 
-FROM bitnami/oraclelinux-runtimes:7-r564
+FROM oraclelinux:7-slim
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates glibc wget zlib
+RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel procps-ng sudo tar which zlib
+RUN yum upgrade -y && \
+    rm -r /var/cache/yum
 
 COPY --from=development /opt/bitnami/java /opt/bitnami/java
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="11.0.5-ol-7-r86-prod" \
+    BITNAMI_IMAGE_VERSION="11.0.5-ol-7-r87-prod" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
