@@ -11,7 +11,7 @@ RUN /bitnami-user.sh && \
 RUN bitnami-pkg install python-3.6.10-0 --checksum 3d7e860761a828ac03c631386b6711433e07bd96d6184d73c11f59d6a7e3b480
 RUN bitnami-pkg install postgresql-client-11.6.0-0 --checksum 84762a54c89698bd4bf9bc380252591492b67464918c291cf2b666e1a74b8f3b
 RUN bitnami-pkg install node-7.10.1-1 --checksum 53362288e961d298a724353710a31901d4cb8237894a26a2f676b35450c02975
-RUN bitnami-pkg unpack odoo-12.0.20191215-1 --checksum deb760aa04c3a7bf85d561636dea1c8d0b67eea104a82e49e23a78aca3ad051e
+RUN bitnami-pkg unpack odoo-12.0.20200115-0 --checksum dfe663786ede74cd8f2eb54d3f038f7168010f5f8b1ce26d64fcb2a854b0a21e
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
@@ -30,7 +30,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="12.0.20191215-debian-9-r26" \
+    BITNAMI_IMAGE_VERSION="12.0.20200115-debian-9-r0" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
     POSTGRESQL_HOST="postgresql" \
