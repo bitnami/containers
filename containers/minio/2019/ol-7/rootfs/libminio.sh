@@ -44,7 +44,7 @@ export MINIO_ACCESS_KEY="$(< "${MINIO_ACCESS_KEY_FILE}")"
 EOF
     else
         cat <<"EOF"
-export MINIO_ACCESS_KEY="${MINIO_ACCESS_KEY:-}"
+export MINIO_ACCESS_KEY="${MINIO_ACCESS_KEY:-minio}"
 EOF
     fi
     if [[ -n "${MINIO_SECRET_KEY_FILE:-}" ]]; then
@@ -53,7 +53,7 @@ export MINIO_SECRET_KEY="$(< "${MINIO_SECRET_KEY_FILE}")"
 EOF
     else
         cat <<"EOF"
-export MINIO_SECRET_KEY="${MINIO_SECRET_KEY:-}"
+export MINIO_SECRET_KEY="${MINIO_SECRET_KEY:-miniosecret}"
 EOF
     fi
 }
@@ -77,8 +77,8 @@ is_minio_running() {
             false
         else
             node=$(minio_node_hostname)
-            status="$(minio_client_execute_timeout admin info server local --json | grep "\"address\":\"${node}:" | jq -r .service)"
-            if [[ "$status" = "on" ]]; then
+            status="$(minio_client_execute_timeout admin info local --json | jq -r .info.mode)"
+            if [[ "$status" = "online" ]]; then
                 true
             else
                 false
@@ -130,7 +130,7 @@ minio_start_bg() {
 minio_stop() {
     if is_minio_running; then
         info "Stopping MinIO..."
-        minio_client_execute_timeout admin service stop local || true
+        minio_client_execute_timeout admin service stop local >/dev/null 2>&1 || true
 
         local counter=5
         while is_minio_running ; do
