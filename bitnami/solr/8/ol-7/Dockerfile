@@ -8,12 +8,8 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel libgcc lsof procps-ng sudo tar which zlib
-RUN curl --silent -L https://nami-prod.s3.amazonaws.com/tools/nami/releases/nami-1.0.0-1-linux-x64.tar.gz > /tmp/nami-linux-x64.tar.gz && \
-    echo "80488279b056d5e9c183fe34097c5f496715ab16a602afcc9f78d59f15139a16 /tmp/nami-linux-x64.tar.gz" | sha256sum --check && \
-    mkdir -p /opt/bitnami/nami /opt/bitnami/licenses && \
-    tar xzf /tmp/nami-linux-x64.tar.gz --strip 1 -C /opt/bitnami/nami && \
-    rm /tmp/nami-linux-x64.tar.gz && \
-    curl --silent -L https://raw.githubusercontent.com/bitnami/nami/master/COPYING > /opt/bitnami/licenses/nami-1.0.0-1.txt
+RUN /bitnami-user.sh && \
+    /install-nami.sh
 RUN bitnami-pkg install java-1.8.232-0 --checksum fbac74363c807fce14538c5f9a9232602adc7883c1c5936571c741625de2479e
 RUN bitnami-pkg unpack solr-8.4.1-0 --checksum 1c4fdf3d539afd1f5cae5e818b5b80a6215d31738e2b3d7fc1a79c6657e92eea
 RUN yum upgrade -y && \
@@ -34,7 +30,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="8.4.1-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="8.4.1-ol-7-r1" \
     NAMI_PREFIX="/.nami" \
     SOLR_CORE="" \
     SOLR_CORE_CONF_DIR="_default" \
