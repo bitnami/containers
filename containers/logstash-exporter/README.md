@@ -52,8 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.1.2-ol-7-r94` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash-exporter/blob/0.1.2-ol-7-r94/0/ol-7/Dockerfile)
-* [`0-debian-9`, `0.1.2-debian-9-r77`, `0`, `0.1.2`, `0.1.2-r77`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash-exporter/blob/0.1.2-debian-9-r77/0/debian-9/Dockerfile)
-* [`0-centos-7`, `0.1.2-centos-7-r99` (0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash-exporter/blob/0.1.2-centos-7-r99/0/centos-7/Dockerfile)
+* [`0-debian-9`, `0.1.2-debian-9-r78`, `0`, `0.1.2`, `0.1.2-r78`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash-exporter/blob/0.1.2-debian-9-r78/0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/logstash-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-logstash-exporter).
 
@@ -150,6 +149,13 @@ Re-create your container from the new image.
 ```bash
 $ docker run --name logstash-exporter bitnami/logstash-exporter:latest
 ```
+
+# Notable Changes
+
+## 0.1.2-centos-7-r99
+
+- `0.1.2-centos-7-r99` is considered the latest image based on CentOS.
+- Standard supported distros: Debian & OEL.
 
 # Contributing
 
