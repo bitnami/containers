@@ -9,9 +9,11 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl jq procps unzip
-RUN . ./libcomponent.sh && component_unpack "minio-client" "2019.10.9-0" --checksum a753ccb20427d6af60d2849b74dd6f8a76c46cddba33e37c136d1e67efd256bf
-RUN . ./libcomponent.sh && component_unpack "minio" "2019.10.12-0" --checksum 94c5e0161e19acf06adcf205963ec2bd6f566b62113d669259629c0ff1d5c7d1
+RUN install_packages ca-certificates curl jq procps sudo unzip
+RUN . ./libcomponent.sh && component_unpack "minio-client" "2019.12.24-0" --checksum 5df763dfa23a71b1b45c7a95995471f2271f0147fc391f2ba1dfa90b8545ca17
+RUN . ./libcomponent.sh && component_unpack "minio" "2019.12.30-0" --checksum 3fbfb2c928ca40809a9246a4035da55e88bb0be332cecf0dbdd59fcb79ac06b2
+RUN apt-get update && apt-get upgrade && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
     echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
     chmod u+x /usr/local/bin/gosu && \
@@ -21,7 +23,7 @@ RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="minio" \
-    BITNAMI_IMAGE_VERSION="2019.10.12-debian-9-r34" \
+    BITNAMI_IMAGE_VERSION="2019.12.30-debian-9-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
