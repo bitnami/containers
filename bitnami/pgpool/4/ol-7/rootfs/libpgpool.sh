@@ -55,6 +55,7 @@ export PGPOOL_POSTGRES_USERNAME="${PGPOOL_POSTGRES_USERNAME:-postgres}"
 export PGPOOL_ADMIN_USERNAME="${PGPOOL_ADMIN_USERNAME:-}"
 export PGPOOL_ENABLE_LDAP="${PGPOOL_ENABLE_LDAP:-no}"
 export PGPOOL_TIMEOUT="360"
+export PGPOOL_ENABLE_LOAD_BALANCING="${PGPOOL_ENABLE_LOAD_BALANCING:-yes}"
 
 # LDAP
 export PGPOOL_LDAP_URI="${PGPOOL_LDAP_URI:-}"
@@ -140,6 +141,9 @@ pgpool_validate() {
                 print_validation_error "Error checking entry '$node', the field 'host' must be set!"
             fi
         done
+    fi
+    if ! is_yes_no_value "$PGPOOL_ENABLE_LOAD_BALANCING"; then
+        print_validation_error "The values allowed for PGPOOL_ENABLE_LOAD_BALANCING are: yes or no"
     fi
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
@@ -254,6 +258,13 @@ EOF
 #########################
 pgpool_create_config() {
     local -i node_counter=0
+    local load_balance_mode=""
+
+    if is_boolean_yes "$PGPOOL_ENABLE_LOAD_BALANCING"; then
+        load_balance_mode="on"
+    else
+        load_balance_mode="off"
+    fi
 
     info "Generating pgpool.conf file..."
     # Configuring Pgpool-II to use the streaming replication mode since it's the recommended way
@@ -279,7 +290,7 @@ pgpool_create_config() {
     pgpool_set_property "pid_file_name" "$PGPOOL_PID_FILE"
     pgpool_set_property "logdir" "$PGPOOL_LOG_DIR"
     # Load Balancing settings
-    pgpool_set_property "load_balance_mode" "on"
+    pgpool_set_property "load_balance_mode" "$load_balance_mode"
     pgpool_set_property "black_function_list" "nextval,setval"
     # Streaming settings
     pgpool_set_property "sr_check_user" "$PGPOOL_SR_CHECK_USER"

@@ -32,6 +32,8 @@ spec:
           value: "adminpassword"
         - name: PGPOOL_ENABLE_LDAP
           value: "no"
+        - name: PGPOOL_ENABLE_LOAD_BALANCING
+          value: "yes"
         - name: PGPOOL_USERNAME
           values: "customuser"
         - name: PGPOOL_PASSWORD

@@ -233,6 +233,7 @@ Pgpool:
 - `PGPOOL_SR_CHECK_PASSWORD_FILE`: Path to a file that contains the password to use to perform streaming checks. This will override the value specified in `PGPOOL_SR_CHECK_PASSWORD`. No defaults.
 - `PGPOOL_BACKEND_NODES`: Comma separated list of backend nodes in the cluster.  No defaults.
 - `PGPOOL_ENABLE_LDAP`: Whether to enable LDAP authentication. Defaults to `no`.
+- `PGPOOL_ENABLE_LOAD_BALANCING`: Whether to enable Load-Balancing mode. Defaults to `yes`.
 - `PGPOOL_POSTGRES_USERNAME`: Postgres administrator user name, this will be use to allow postgres admin authentication through Pgpool.
 - `PGPOOL_POSTGRES_PASSWORD`: Password for the user set in `PGPOOL_POSTGRES_USERNAME` environment variable. No defaults.
 - `PGPOOL_ADMIN_USERNAME`: Username for the pgpool administrator. No defaults.
@@ -408,6 +409,7 @@ Please see the list of environment variables available in the Bitnami Pgpool con
 | PGPOOL_ENABLE_LDAP                   | `no`                               |
 | PGPOOL_ADMIN_USERNAME=admin          | `nil`                              |
 | PGPOOL_ADMIN_PASSWORD=adminpassword  | `nil`                              |
+| PGPOOL_ENABLE_LOAD_BALANCING         | `yes`                              |
 
 
 # Logging
