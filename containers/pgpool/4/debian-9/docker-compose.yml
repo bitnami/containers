@@ -45,6 +45,7 @@ services:
       - PGPOOL_POSTGRES_PASSWORD=adminpassword
       - PGPOOL_ADMIN_USERNAME=admin
       - PGPOOL_ADMIN_PASSWORD=adminpassword
+      - PGPOOL_ENABLE_LOAD_BALANCING=yes
 volumes:
   pg_0_data:
     driver: local
