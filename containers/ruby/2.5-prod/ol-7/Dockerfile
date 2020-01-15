@@ -1,17 +1,20 @@
-FROM bitnami/ruby:2.5.7-ol-7-r110 as development
+FROM bitnami/ruby:2.5.7-ol-7-r112 as development
 
 ######
 
-FROM bitnami/oraclelinux-runtimes:7-r564
+FROM oraclelinux:7-slim
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates glibc keyutils-libs krb5-libs libcom_err libselinux ncurses-libs nss-softokn-freebl openssl-libs pcre readline wget zlib
+RUN install_packages ca-certificates curl glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libselinux ncurses-libs nss-softokn-freebl openssl-libs pcre procps-ng readline sudo tar which zlib
+RUN yum upgrade -y && \
+    rm -r /var/cache/yum
 
 COPY --from=development /opt/bitnami/ruby /opt/bitnami/ruby
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.5.7-ol-7-r107-prod" \
+    BITNAMI_IMAGE_VERSION="2.5.7-ol-7-r108-prod" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 CMD [ "irb" ]
