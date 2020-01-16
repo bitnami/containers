@@ -29,7 +29,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="7.9.2-debian-9-r28" \
+    BITNAMI_IMAGE_VERSION="7.9.2-debian-9-r29" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME="" \
