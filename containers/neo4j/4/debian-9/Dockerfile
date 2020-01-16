@@ -30,7 +30,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="4.0.0-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="4.0.0-debian-9-r1" \
     NAMI_PREFIX="/.nami" \
     NEO4J_BOLT_PORT_NUMBER="7687" \
     NEO4J_HOST="" \
