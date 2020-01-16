@@ -31,7 +31,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r27" \
+    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r28" \
     REDMINE_DB_MYSQL="mariadb" \
     REDMINE_DB_NAME="bitnami_redmine" \
     REDMINE_DB_PASSWORD="" \
