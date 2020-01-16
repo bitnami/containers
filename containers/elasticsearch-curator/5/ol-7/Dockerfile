@@ -31,7 +31,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch-curator" \
-    BITNAMI_IMAGE_VERSION="5.8.1-ol-7-r85" \
+    BITNAMI_IMAGE_VERSION="5.8.1-ol-7-r86" \
     LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
     NAMI_PREFIX="/.nami"
