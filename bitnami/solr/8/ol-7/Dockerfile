@@ -30,7 +30,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="8.4.1-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="8.4.1-ol-7-r2" \
     NAMI_PREFIX="/.nami" \
     SOLR_CORE="" \
     SOLR_CORE_CONF_DIR="_default" \
