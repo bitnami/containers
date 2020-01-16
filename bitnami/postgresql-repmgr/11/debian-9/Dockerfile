@@ -18,13 +18,15 @@ RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-
     chmod u+x /usr/local/bin/gosu && \
     mkdir -p /opt/bitnami/licenses && \
     curl --silent -L https://raw.githubusercontent.com/tianon/gosu/master/LICENSE > /opt/bitnami/licenses/gosu-1.11.txt
+RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
+    DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 RUN echo 'en_GB.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql-repmgr" \
-    BITNAMI_IMAGE_VERSION="11.6.0-debian-9-r46" \
+    BITNAMI_IMAGE_VERSION="11.6.0-debian-9-r47" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
