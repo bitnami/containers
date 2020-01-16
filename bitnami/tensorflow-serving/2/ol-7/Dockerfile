@@ -29,7 +29,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="2.0.0-ol-7-r70" \
+    BITNAMI_IMAGE_VERSION="2.0.0-ol-7-r71" \
     NAMI_PREFIX="/.nami" \
     TENSORFLOW_SERVING_ENABLE_MONITORING="no" \
     TENSORFLOW_SERVING_MODEL_NAME="resnet" \
