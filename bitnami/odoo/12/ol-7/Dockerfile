@@ -30,7 +30,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="12.0.20200115-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="12.0.20200115-ol-7-r1" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
     POSTGRESQL_HOST="postgresql" \
