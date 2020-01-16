@@ -41,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`13-ol-7`, `13.0.20200110-ol-7-r6` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20200110-ol-7-r6/13/ol-7/Dockerfile)
 * [`13-debian-9`, `13.0.20200110-debian-9-r5`, `13`, `13.0.20200110`, `13.0.20200110-r5`, `latest` (13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20200110-debian-9-r5/13/debian-9/Dockerfile)
 * [`12-ol-7`, `12.0.20200115-ol-7-r1` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20200115-ol-7-r1/12/ol-7/Dockerfile)
-* [`12-debian-9`, `12.0.20200115-debian-9-r0`, `12`, `12.0.20200115`, `12.0.20200115-r0` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20200115-debian-9-r0/12/debian-9/Dockerfile)
+* [`12-debian-9`, `12.0.20200115-debian-9-r1`, `12`, `12.0.20200115`, `12.0.20200115-r1` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20200115-debian-9-r1/12/debian-9/Dockerfile)
 * [`11-ol-7`, `11.0.20200115-ol-7-r1` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20200115-ol-7-r1/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.0.20200115-debian-9-r1`, `11`, `11.0.20200115`, `11.0.20200115-r1` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20200115-debian-9-r1/11/debian-9/Dockerfile)
 
