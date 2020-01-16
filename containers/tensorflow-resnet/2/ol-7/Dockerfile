@@ -10,7 +10,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel libgcc libstdc++ procps-ng sudo tar which
 RUN /bitnami-user.sh && \
     /install-nami.sh
-RUN bitnami-pkg unpack tensorflow-resnet-2.0.0-0 --checksum fdad9f60167a53cfb937571d439674f04c443d7a3b150d374e4d8eba4c7617b6
+RUN bitnami-pkg unpack tensorflow-resnet-2.1.0-0 --checksum 41bcfb1f1ef6837a7837aeb2a2a9f5167052370b72c83f3ecba2e6e1495e9585
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
@@ -29,7 +29,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-resnet" \
-    BITNAMI_IMAGE_VERSION="2.0.0-ol-7-r66" \
+    BITNAMI_IMAGE_VERSION="2.1.0-ol-7-r0" \
     NAMI_PREFIX="/.nami"
 
 USER 1001
