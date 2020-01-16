@@ -46,9 +46,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.16-ol-7`, `1.16.1-ol-7-r173` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.1-ol-7-r173/1.16/ol-7/Dockerfile)
+* [`1.16-ol-7`, `1.16.1-ol-7-r174` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.1-ol-7-r174/1.16/ol-7/Dockerfile)
 * [`1.16-debian-9`, `1.16.1-debian-9-r139`, `1.16`, `1.16.1`, `1.16.1-r139`, `latest` (1.16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.1-debian-9-r139/1.16/debian-9/Dockerfile)
-* [`1.16-centos-7`, `1.16.1-centos-7-r173` (1.16/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.1-centos-7-r173/1.16/centos-7/Dockerfile)
 
 # Get this image
 
@@ -457,6 +456,11 @@ $ docker-compose up nginx
 - [Create An EMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
 # Notable Changes
+
+## 1.16.1-centos-7-r173
+
+- `1.16.1-centos-7-r173` is considered the latest image based on CentOS.
+- Standard supported distros: Debian & OEL.
 
 ## 1.16.0-r3
 
