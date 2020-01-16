@@ -20,6 +20,8 @@ RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-
     chmod u+x /usr/local/bin/gosu && \
     mkdir -p /opt/bitnami/licenses && \
     curl --silent -L https://raw.githubusercontent.com/tianon/gosu/master/LICENSE > /opt/bitnami/licenses/gosu-1.11.txt
+RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
+    DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.net:80" "keyserver.ubuntu.com" "hkp://keyserver.ubuntu.com:80" "pgp.mit.edu"; do gpg --keyserver $server --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 && break || : ; done && \
     gpg --fingerprint 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 | grep -q "6380 DC42 8747 F6C3 93FE  ACA5 9A84 159D 7001 A4E5" && \
@@ -33,7 +35,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mediawiki" \
-    BITNAMI_IMAGE_VERSION="1.34.0-debian-9-r6" \
+    BITNAMI_IMAGE_VERSION="1.34.0-debian-9-r7" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     MARIADB_HOST="mariadb" \
