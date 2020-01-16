@@ -35,7 +35,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.17.1-ol-7-r216" \
+    BITNAMI_IMAGE_VERSION="4.17.1-ol-7-r217" \
     NAMI_PREFIX="/.nami"
 
 EXPOSE 3000
