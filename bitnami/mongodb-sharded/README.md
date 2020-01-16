@@ -49,15 +49,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4.2-ol-7`, `4.2.2-ol-7-r41` (4.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.2-ol-7-r41/4.2/ol-7/Dockerfile)
-* [`4.2-debian-9`, `4.2.2-debian-9-r33`, `4.2`, `4.2.2`, `4.2.2-r33` (4.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.2-debian-9-r33/4.2/debian-9/Dockerfile)
-* [`4.2-centos-7`, `4.2.2-centos-7-r41` (4.2/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.2-centos-7-r41/4.2/centos-7/Dockerfile)
+* [`4.2-debian-9`, `4.2.2-debian-9-r34`, `4.2`, `4.2.2`, `4.2.2-r34` (4.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.2-debian-9-r34/4.2/debian-9/Dockerfile)
 * [`4.0-ol-7`, `4.0.14-ol-7-r31` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.14-ol-7-r31/4.0/ol-7/Dockerfile)
 * [`4.0-debian-9`, `4.0.14-debian-9-r24`, `4.0`, `4.0.14`, `4.0.14-r24`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.14-debian-9-r24/4.0/debian-9/Dockerfile)
-* [`4.0-centos-7`, `4.0.14-centos-7-r29` (4.0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.14-centos-7-r29/4.0/centos-7/Dockerfile)
 * [`3.6-ol-7`, `3.6.16-ol-7-r48` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.16-ol-7-r48/3.6/ol-7/Dockerfile)
 * [`3.6-debian-9`, `3.6.16-debian-9-r34`, `3.6`, `3.6.16`, `3.6.16-r34` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.16-debian-9-r34/3.6/debian-9/Dockerfile)
-* [`3.6-centos-7`, `3.6.16-centos-7-r49` (3.6/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.16-centos-7-r49/3.6/centos-7/Dockerfile)
-* [`3.4-centos-7`, `3.4.23-centos-7-r0` (3.4/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.4.23-centos-7-r0/3.4/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
@@ -307,6 +303,13 @@ or using Docker Compose:
 ```bash
 $ docker-compose up mongodb-sharded
 ```
+
+# Notable Changes
+
+## 3.6.16-centos-7-r49, 4.0.14-centos-7-r29, and 4.2.2-centos-7-r41
+
+- `3.6.16-centos-7-r49`, `4.0.14-centos-7-r29`, and `4.2.2-centos-7-r41` are considered the latest images based on CentOS.
+- Standard supported distros: Debian & OEL.
 
 # Contributing
 
