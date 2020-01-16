@@ -31,7 +31,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="6.8.6-ol-7-r28" \
+    BITNAMI_IMAGE_VERSION="6.8.6-ol-7-r29" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
