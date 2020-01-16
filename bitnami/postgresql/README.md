@@ -46,16 +46,12 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`12-ol-7`, `12.1.0-ol-7-r71` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.1.0-ol-7-r71/12/ol-7/Dockerfile)
 * [`12-debian-9`, `12.1.0-debian-9-r51`, `12`, `12.1.0`, `12.1.0-r51` (12/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.1.0-debian-9-r51/12/debian-9/Dockerfile)
-* [`12-centos-7`, `12.1.0-centos-7-r72` (12/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.1.0-centos-7-r72/12/centos-7/Dockerfile)
 * [`11-ol-7`, `11.6.0-ol-7-r70` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.6.0-ol-7-r70/11/ol-7/Dockerfile)
 * [`11-debian-9`, `11.6.0-debian-9-r48`, `11`, `11.6.0`, `11.6.0-r48`, `latest` (11/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.6.0-debian-9-r48/11/debian-9/Dockerfile)
-* [`11-centos-7`, `11.6.0-centos-7-r71` (11/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.6.0-centos-7-r71/11/centos-7/Dockerfile)
 * [`10-ol-7`, `10.11.0-ol-7-r70` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.11.0-ol-7-r70/10/ol-7/Dockerfile)
-* [`10-debian-9`, `10.11.0-debian-9-r52`, `10`, `10.11.0`, `10.11.0-r52` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.11.0-debian-9-r52/10/debian-9/Dockerfile)
-* [`10-centos-7`, `10.11.0-centos-7-r72` (10/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.11.0-centos-7-r72/10/centos-7/Dockerfile)
+* [`10-debian-9`, `10.11.0-debian-9-r53`, `10`, `10.11.0`, `10.11.0-r53` (10/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.11.0-debian-9-r53/10/debian-9/Dockerfile)
 * [`9.6-ol-7`, `9.6.16-ol-7-r65` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.16-ol-7-r65/9.6/ol-7/Dockerfile)
 * [`9.6-debian-9`, `9.6.16-debian-9-r50`, `9.6`, `9.6.16`, `9.6.16-r50` (9.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.16-debian-9-r50/9.6/debian-9/Dockerfile)
-* [`9.6-centos-7`, `9.6.16-centos-7-r71` (9.6/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.16-centos-7-r71/9.6/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
 
@@ -445,8 +441,8 @@ The LDAP related parameters are:
 * `POSTGRESQL_LDAP_PORT`: Port number on the LDAP server to connect to
 * `POSTGRESQL_LDAP_SCHEME`: Set to `ldaps` to use LDAPS. Default to none.
 * `POSTGRESQL_LDAP_TLS`: Set to `1` to use TLS encryption. Default to none.
-* `POSTGRESQL_LDAP_PREFIX`: String to prepend to the user name when forming the DN to bind. Default to none. 
-* `POSTGRESQL_LDAP_SUFFIX`:  String to append to the user name when forming the DN to bind. Default to none. 
+* `POSTGRESQL_LDAP_PREFIX`: String to prepend to the user name when forming the DN to bind. Default to none.
+* `POSTGRESQL_LDAP_SUFFIX`:  String to append to the user name when forming the DN to bind. Default to none.
 * `POSTGRESQL_LDAP_BASE_DN`: Root DN to begin the search for the user in. Default to none.
 * `POSTGRESQL_LDAP_BIND_DN`: DN of user to bind to LDAP. Default to none.
 * `POSTGRESQL_LDAP_BIND_PASSWORD`: Password for the user to bind to LDAP. Default to none.
@@ -696,6 +692,10 @@ $ docker-compose up postgresql
 
 # Notable Changes
 
+## 9.6.16-centos-7-r71, 10.11.0-centos-7-r72, 11.6.0-centos-7-r71, and 12.1.0-centos-7-r72
+
+- `9.6.16-centos-7-r71`, `10.11.0-centos-7-r72`, `11.6.0-centos-7-r71`, and `12.1.0-centos-7-r72` are considered the latest images based on CentOS.
+- Standard supported distros: Debian & OEL.
 
 ## 9.6.15-r93, 9.6.15-ol-7-r108, 9.6.15-centos-7-r107, 10.10.0-r923, 10.10.0-ol-7-r106, 10.10.0-centos-7-r107, 11.5.0-r89, 11.5.0-centos-7-r103, 11.5.0-ol-7-r108, 12.0.0-r21, 12.0.0-centos-7-r34 and 12.0.0-ol-7-r32
 
