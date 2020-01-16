@@ -32,7 +32,7 @@ RUN for server in "ha.pool.sks-keyservers.net" "hkp://p80.pool.sks-keyservers.ne
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="6.0.2-1-ol-7-r32" \
+    BITNAMI_IMAGE_VERSION="6.0.2-1-ol-7-r33" \
     BUNDLE_BUILD__SASSC="--disable-march-tune-native" \
     RAILS_ENV="development"
 
