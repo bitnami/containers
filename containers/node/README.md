@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`13-photon-3`, `13.6.0-photon-3-r0` (13/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.6.0-photon-3-r0/13/photon-3/Dockerfile)
 * [`13-ol-7`, `13.6.0-ol-7-r8` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.6.0-ol-7-r8/13/ol-7/Dockerfile)
-* [`13-ol-7-prod`, `13.6.0-ol-7-r6-prod` (13-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.6.0-ol-7-r6-prod/13-prod/ol-7/Dockerfile)
+* [`13-ol-7-prod`, `13.6.0-ol-7-r7-prod` (13-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.6.0-ol-7-r7-prod/13-prod/ol-7/Dockerfile)
 * [`13-debian-9-prod`, `13.6.0-debian-9-r6-prod`, `13-prod`, `13.6.0-prod`, `13.6.0-r6-prod` (13-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.6.0-debian-9-r6-prod/13-prod/debian-9/Dockerfile)
 * [`13-debian-9`, `13.6.0-debian-9-r6`, `13`, `13.6.0`, `13.6.0-r6` (13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.6.0-debian-9-r6/13/debian-9/Dockerfile)
 * [`12-photon-3`, `12.14.1-photon-3-r0` (12/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.14.1-photon-3-r0/12/photon-3/Dockerfile)
