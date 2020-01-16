@@ -10,7 +10,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl dirmngr gnupg libc6 libgcc1 libstdc++6 procps sudo unzip
 RUN /bitnami-user.sh && \
     /install-nami.sh
-RUN bitnami-pkg unpack tensorflow-resnet-2.0.0-0 --checksum 62581ca622c5421aa8f45644a2d3afd995819bd252d5016646b154d31baa0212
+RUN bitnami-pkg unpack tensorflow-resnet-2.1.0-0 --checksum 51d4f2e7c54e86a17a25b3e915775d226d918689413164331d216b7183b53416
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
@@ -30,7 +30,7 @@ RUN echo "deb http://http.us.debian.org/debian testing main non-free contrib" >>
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-resnet" \
-    BITNAMI_IMAGE_VERSION="2.0.0-debian-9-r48" \
+    BITNAMI_IMAGE_VERSION="2.1.0-debian-9-r0" \
     NAMI_PREFIX="/.nami"
 
 USER 1001
