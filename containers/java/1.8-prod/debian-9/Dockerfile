@@ -1,4 +1,4 @@
-FROM bitnami/java:1.8.232-debian-9-r77 as development
+FROM bitnami/java:1.8.232-debian-9-r78 as development
 
 ######
 
@@ -6,7 +6,7 @@ FROM bitnami/minideb:stretch
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages ca-certificates libc6 libgcc1 zlib1g
+RUN install_packages ca-certificates curl libc6 libgcc1 procps sudo unzip zlib1g
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
@@ -16,7 +16,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 COPY --from=development /opt/bitnami/java /opt/bitnami/java
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="1.8.232-debian-9-r65-prod" \
+    BITNAMI_IMAGE_VERSION="1.8.232-debian-9-r66-prod" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
