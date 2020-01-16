@@ -1,4 +1,4 @@
-FROM bitnami/python:2.7.17-debian-9-r79 as development
+FROM bitnami/python:2.7.17-debian-9-r80 as development
 
 ######
 
@@ -6,7 +6,7 @@ FROM bitnami/minideb:stretch
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages ca-certificates libbz2-1.0 libc6 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libtinfo5 zlib1g
+RUN install_packages ca-certificates curl libbz2-1.0 libc6 libncurses5 libreadline7 libsqlite3-0 libssl1.1 libtinfo5 procps sudo unzip zlib1g
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
@@ -16,7 +16,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 COPY --from=development /opt/bitnami/python /opt/bitnami/python
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="2.7.17-debian-9-r69-prod" \
+    BITNAMI_IMAGE_VERSION="2.7.17-debian-9-r70-prod" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 CMD [ "python" ]
