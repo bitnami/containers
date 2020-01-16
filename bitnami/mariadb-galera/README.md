@@ -43,16 +43,12 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`10.4-ol-7`, `10.4.11-ol-7-r32` (10.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.11-ol-7-r32/10.4/ol-7/Dockerfile)
 * [`10.4-debian-9`, `10.4.11-debian-9-r21`, `10.4`, `10.4.11`, `10.4.11-r21` (10.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.11-debian-9-r21/10.4/debian-9/Dockerfile)
-* [`10.4-centos-7`, `10.4.11-centos-7-r32` (10.4/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.11-centos-7-r32/10.4/centos-7/Dockerfile)
 * [`10.3-ol-7`, `10.3.21-ol-7-r41` (10.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.21-ol-7-r41/10.3/ol-7/Dockerfile)
 * [`10.3-debian-9`, `10.3.21-debian-9-r26`, `10.3`, `10.3.21`, `10.3.21-r26`, `latest` (10.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.21-debian-9-r26/10.3/debian-9/Dockerfile)
-* [`10.3-centos-7`, `10.3.21-centos-7-r41` (10.3/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.21-centos-7-r41/10.3/centos-7/Dockerfile)
 * [`10.2-ol-7`, `10.2.30-ol-7-r41` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.30-ol-7-r41/10.2/ol-7/Dockerfile)
-* [`10.2-debian-9`, `10.2.30-debian-9-r28`, `10.2`, `10.2.30`, `10.2.30-r28` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.30-debian-9-r28/10.2/debian-9/Dockerfile)
-* [`10.2-centos-7`, `10.2.30-centos-7-r40` (10.2/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.30-centos-7-r40/10.2/centos-7/Dockerfile)
+* [`10.2-debian-9`, `10.2.30-debian-9-r29`, `10.2`, `10.2.30`, `10.2.30-r29` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.30-debian-9-r29/10.2/debian-9/Dockerfile)
 * [`10.1-ol-7`, `10.1.43-ol-7-r71` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.43-ol-7-r71/10.1/ol-7/Dockerfile)
 * [`10.1-debian-9`, `10.1.43-debian-9-r59`, `10.1`, `10.1.43`, `10.1.43-r59` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.43-debian-9-r59/10.1/debian-9/Dockerfile)
-* [`10.1-centos-7`, `10.1.43-centos-7-r78` (10.1/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.43-centos-7-r78/10.1/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb-galera GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb-galera).
 
@@ -556,6 +552,14 @@ $ docker-compose up mariadb
 
 - [Create An AMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
 - [Create An EMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
+
+# Notable Changes
+
+## 10.1.43-centos-7-r78, 10.2.30-centos-7-r40, 10.3.21-centos-7-r41, and 10.4.11-centos-7-r32
+
+- `10.1.43-centos-7-r78`, `10.2.30-centos-7-r40`, `10.3.21-centos-7-r41`, and `10.4.11-centos-7-r32` are considered the latest images based on CentOS.
+- Standard supported distros: Debian & OEL.
+
 
 # Contributing
 
