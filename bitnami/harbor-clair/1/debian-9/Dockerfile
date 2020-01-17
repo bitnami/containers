@@ -14,6 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "git" "2.25.0-0" --checksum 49b040c0
 RUN . ./libcomponent.sh && component_unpack "harbor-clair" "1.10.0-0" --checksum 4580d85537319d0e9d4a280f6d3f97da669016125ced63ad9c862b9d73368c2e
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN /build/install-gosu.sh
 RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/v1.0/wait-for-port.zip > /tmp/wait-for-port.zip && \
     echo "8d26181f4629211b70db4f96236616056b1ed8e5920d8023f7c883071e76c1ed /tmp/wait-for-port.zip" | sha256sum --check && \
     unzip -q -d /usr/local/bin -o /tmp/wait-for-port.zip wait-for-port && \
@@ -22,7 +23,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="harbor-clair" \
-    BITNAMI_IMAGE_VERSION="1.10.0-debian-9-r27" \
+    BITNAMI_IMAGE_VERSION="1.10.0-debian-9-r28" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/git/bin:/opt/bitnami/harbor-clair/bin:$PATH"
 
