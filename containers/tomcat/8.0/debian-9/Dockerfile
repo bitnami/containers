@@ -13,16 +13,12 @@ RUN . ./libcomponent.sh && component_unpack "java" "11.0.5-0" --checksum 9fc7502
 RUN . ./libcomponent.sh && component_unpack "tomcat" "8.0.53-24" --checksum 1206b60d30cd2919ec0e39e3d69ae63a0efcc40765ce4a6356898962f89e5a7a
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
-RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
-    echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
-    chmod u+x /usr/local/bin/gosu && \
-    mkdir -p /opt/bitnami/licenses && \
-    curl --silent -L https://raw.githubusercontent.com/tianon/gosu/master/LICENSE > /opt/bitnami/licenses/gosu-1.11.txt
+RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="8.0.53-debian-9-r475" \
+    BITNAMI_IMAGE_VERSION="8.0.53-debian-9-r477" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
 EXPOSE 8080
