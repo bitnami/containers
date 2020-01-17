@@ -12,16 +12,12 @@ RUN install_packages ca-certificates curl cyrus-sasl-lib glibc gzip hostname key
 RUN . ./libcomponent.sh && component_unpack "memcached" "1.5.20-0" --checksum ed347aee3787ffbc1d378e7dcff93b084e989c9d859a12ee71017b146223510c
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
-RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
-    echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
-    chmod u+x /usr/local/bin/gosu && \
-    mkdir -p /opt/bitnami/licenses && \
-    curl --silent -L https://raw.githubusercontent.com/tianon/gosu/master/LICENSE > /opt/bitnami/licenses/gosu-1.11.txt
+RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.20-ol-7-r68" \
+    BITNAMI_IMAGE_VERSION="1.5.20-ol-7-r69" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
 
 EXPOSE 11211
