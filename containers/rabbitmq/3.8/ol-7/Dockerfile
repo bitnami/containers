@@ -14,16 +14,12 @@ RUN . ./libcomponent.sh && component_unpack "erlang" "22.2.0-0" --checksum 86910
 RUN . ./libcomponent.sh && component_unpack "rabbitmq" "3.8.2-0" --checksum f2ba2bc161591afbb60dfa34b406b1b418c1e770b7f24a8f7689bdc4a81b7dd5
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
-RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
-    echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
-    chmod u+x /usr/local/bin/gosu && \
-    mkdir -p /opt/bitnami/licenses && \
-    curl --silent -L https://raw.githubusercontent.com/tianon/gosu/master/LICENSE > /opt/bitnami/licenses/gosu-1.11.txt
+RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.8.2-ol-7-r45" \
+    BITNAMI_IMAGE_VERSION="3.8.2-ol-7-r46" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
