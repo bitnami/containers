@@ -14,11 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "erlang" "22.2.0-0" --checksum 1ac2d
 RUN . ./libcomponent.sh && component_unpack "rabbitmq" "3.8.2-0" --checksum 8699798255ad4cef75ac96394353ded0bf4432a4d77e6efeb254455d3968fe2d
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
-RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
-    echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
-    chmod u+x /usr/local/bin/gosu && \
-    mkdir -p /opt/bitnami/licenses && \
-    curl --silent -L https://raw.githubusercontent.com/tianon/gosu/master/LICENSE > /opt/bitnami/licenses/gosu-1.11.txt
+RUN /build/install-gosu.sh
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
@@ -26,7 +22,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.8.2-debian-9-r36" \
+    BITNAMI_IMAGE_VERSION="3.8.2-debian-9-r37" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
