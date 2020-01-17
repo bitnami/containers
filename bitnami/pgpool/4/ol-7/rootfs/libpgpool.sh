@@ -360,7 +360,7 @@ EOF
 
     case "$OS_FLAVOUR" in
         debian-*) openldap_conf=/etc/ldap/ldap.conf ;;
-        centos-*|rhel-*|ol-*) openldap_conf=/etc/openldap/ldap.conf ;;
+        centos-*|rhel-*|ol-*|photon-*) openldap_conf=/etc/openldap/ldap.conf ;;
         *) ;;
     esac
     cat >>"${openldap_conf}"<<EOF
