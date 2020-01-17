@@ -14,6 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-4" --checksum 492b05
 RUN . ./libcomponent.sh && component_unpack "harbor" "1.10.0-0" --checksum 4b47dbb966f77f5c89c8d17aa185201774ffdd453e857940baca9e6e8b151476
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
+RUN /build/install-gosu.sh
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 RUN chmod -R g+rwX /opt/bitnami/nginx/conf
@@ -22,7 +23,7 @@ COPY rootfs /
 RUN /postunpack.sh
 RUN /postunpack-harbor-portal.sh
 ENV BITNAMI_APP_NAME="harbor-portal" \
-    BITNAMI_IMAGE_VERSION="1.10.0-ol-7-r34" \
+    BITNAMI_IMAGE_VERSION="1.10.0-ol-7-r35" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/harbor/bin:$PATH"
 
