@@ -14,11 +14,12 @@ RUN . ./libcomponent.sh && component_unpack "miniconda" "4.8.1-1" --checksum b7a
 RUN . ./libcomponent.sh && component_unpack "pytorch" "1.4.0-0" --checksum 30a892ea5229bd306acfdb49ffc9be5d73aa2036c59555ebd795f0746368e766
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="pytorch" \
-    BITNAMI_IMAGE_VERSION="1.4.0-debian-9-r0" \
+    BITNAMI_IMAGE_VERSION="1.4.0-debian-9-r1" \
     LD_LIBRARY_PATH="/opt/bitnami/miniconda/lib/python3.7/site-packages/torch/lib/:/opt/bitnami/miniconda/lib/python3.7/site-packages/PIL/.libs/:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/miniconda/bin:$PATH"
