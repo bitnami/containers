@@ -12,11 +12,12 @@ RUN install_packages ca-certificates curl libc6 libgcc1 libpcre3 libssl1.1 libya
 RUN . ./libcomponent.sh && component_unpack "kong" "1.4.3-0" --checksum 99141f055fd57fd579604d381f628804b4de81315a9a329f8f2c5aee2686fe98
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kong" \
-    BITNAMI_IMAGE_VERSION="1.4.3-debian-9-r5" \
+    BITNAMI_IMAGE_VERSION="1.4.3-debian-9-r6" \
     PATH="/opt/bitnami/kong/bin:/opt/bitnami/kong/openresty/bin:/opt/bitnami/kong/openresty/luajit/bin:/opt/bitnami/kong/openresty/nginx/sbin:$PATH"
 
 EXPOSE 8000 8001 8443 8444
