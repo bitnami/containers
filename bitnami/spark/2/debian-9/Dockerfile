@@ -14,16 +14,12 @@ RUN . ./libcomponent.sh && component_unpack "java" "1.8.232-0" --checksum f4e5ff
 RUN . ./libcomponent.sh && component_unpack "spark" "2.4.4-1" --checksum c1cd12976aea9700ffb19413f478946982bcd0e350b71729c914813dd0671440
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
-RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
-    echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
-    chmod u+x /usr/local/bin/gosu && \
-    mkdir -p /opt/bitnami/licenses && \
-    curl --silent -L https://raw.githubusercontent.com/tianon/gosu/master/LICENSE > /opt/bitnami/licenses/gosu-1.11.txt
+RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="spark" \
-    BITNAMI_IMAGE_VERSION="2.4.4-debian-9-r103" \
+    BITNAMI_IMAGE_VERSION="2.4.4-debian-9-r104" \
     JAVA_HOME="/opt/bitnami/java" \
     NSS_WRAPPER_GROUP="/opt/bitnami/spark/tmp/nss_group" \
     NSS_WRAPPER_PASSWD="/opt/bitnami/spark/tmp/nss_passwd" \
