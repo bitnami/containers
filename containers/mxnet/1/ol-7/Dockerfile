@@ -14,11 +14,12 @@ RUN . ./libcomponent.sh && component_unpack "python" "3.6.10-0" --checksum 5a8e4
 RUN . ./libcomponent.sh && component_unpack "mxnet" "1.5.1-1" --checksum e79139b6ae994be285caad03462861d7a84fe24c970d7c40b08ea6643b39ab7f
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
+RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="mxnet" \
-    BITNAMI_IMAGE_VERSION="1.5.1-ol-7-r101" \
+    BITNAMI_IMAGE_VERSION="1.5.1-ol-7-r102" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:$PATH"
