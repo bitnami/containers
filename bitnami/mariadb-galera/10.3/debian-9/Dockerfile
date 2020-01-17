@@ -11,17 +11,13 @@ RUN install_packages ca-certificates curl iproute2 ldap-utils libaio1 libaudit1 
 RUN . ./libcomponent.sh && component_unpack "mariadb-galera" "10.3.21-2" --checksum 3ba1624ea54529200f447385f0e1ad5e550c4ad211d384ef4dce25c9df836c65
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
-RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
-    echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
-    chmod u+x /usr/local/bin/gosu && \
-    mkdir -p /opt/bitnami/licenses && \
-    curl --silent -L https://raw.githubusercontent.com/tianon/gosu/master/LICENSE > /opt/bitnami/licenses/gosu-1.11.txt
+RUN /build/install-gosu.sh
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb-galera" \
-    BITNAMI_IMAGE_VERSION="10.3.21-debian-9-r27" \
+    BITNAMI_IMAGE_VERSION="10.3.21-debian-9-r28" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
 EXPOSE 3306 4444 4567 4568
