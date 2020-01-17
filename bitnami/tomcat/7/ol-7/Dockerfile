@@ -13,16 +13,12 @@ RUN . ./libcomponent.sh && component_unpack "java" "11.0.5-0" --checksum e454564
 RUN . ./libcomponent.sh && component_unpack "tomcat" "7.0.99-1" --checksum f9623928db9d03ca19998426ded936fda9dd29d8a3053f4248f8cb4ea1fe0f50
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
-RUN curl --silent -L https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 > /usr/local/bin/gosu && \
-    echo 0b843df6d86e270c5b0f5cbd3c326a04e18f4b7f9b8457fa497b0454c4b138d7 /usr/local/bin/gosu | sha256sum --check && \
-    chmod u+x /usr/local/bin/gosu && \
-    mkdir -p /opt/bitnami/licenses && \
-    curl --silent -L https://raw.githubusercontent.com/tianon/gosu/master/LICENSE > /opt/bitnami/licenses/gosu-1.11.txt
+RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="7.0.99-ol-7-r30" \
+    BITNAMI_IMAGE_VERSION="7.0.99-ol-7-r31" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
 EXPOSE 8080
