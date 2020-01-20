@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de3935
 RUN bitnami-pkg unpack php-7.3.13-1 --checksum a2bb2a5ddd668c0662a12704747c5a6843f2ba05d03fb03f1e95140c33e14ffc
 RUN bitnami-pkg unpack mysql-client-10.3.21-0 --checksum 9e012f0e449a963c923c8ea7a5cc2ab2c688564ed910eaab2aef1ad70c5d8e4b
 RUN bitnami-pkg install libphp-7.3.13-2 --checksum ddba3fba1c2c84d24cbe3545222644d6c5ccc0a3e2340b03ad28c09d0f0d0c53
-RUN bitnami-pkg unpack testlink-1.9.19-3 --checksum 4ee7535d8d915844816ad3fef0a4b6912a744de4a5019c935d07d135ca4a35dc
+RUN bitnami-pkg unpack testlink-1.9.20-0 --checksum 50b4d59f13ad4767db1f83d5d92046f93b41ad315f8ed6f7fc5ae2ac9f0b190e
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="testlink" \
-    BITNAMI_IMAGE_VERSION="1.9.19-ol-7-r356" \
+    BITNAMI_IMAGE_VERSION="1.9.20-ol-7-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
