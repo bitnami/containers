@@ -17,7 +17,7 @@ RUN /build/install-gosu.sh
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.20-debian-9-r53" \
+    BITNAMI_IMAGE_VERSION="1.5.20-debian-9-r54" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
 
 EXPOSE 11211
