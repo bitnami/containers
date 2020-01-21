@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl dirmngr gnupg libblkid1 libbsd0 libc6 
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack postgresql-client-10.11.0-0 --checksum 134b5a1d358c7684f9f89e3b5ec6d1bd1e814e23e335af88930295e7dd2d2587
-RUN bitnami-pkg install java-11.0.5-0 --checksum 9fc7502ca3c073e6ae7dd6cfa0c2da6b6c26caccbe41b6d7b5a9d26050ee54ff
+RUN bitnami-pkg install java-11.0.6-0 --checksum 8f20580e7350726fff805d7469485739f7f7b0669396938c95031ec69aab6285
 RUN bitnami-pkg unpack sonarqube-7.9.2-0 --checksum 92ba66e87137ef72c50c05b77ff8cfa263ef3fc3438890d7db5781ba44d33b06
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -18,7 +18,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="7.9.2-debian-9-r32" \
+    BITNAMI_IMAGE_VERSION="7.9.2-debian-9-r33" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME="" \
