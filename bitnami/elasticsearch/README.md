@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`7-ol-7`, `7.5.1-ol-7-r33` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.5.1-ol-7-r33/7/ol-7/Dockerfile)
 * [`7-debian-9`, `7.5.1-debian-9-r25`, `7`, `7.5.1`, `7.5.1-r25`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.5.1-debian-9-r25/7/debian-9/Dockerfile)
-* [`6-ol-7`, `6.8.6-ol-7-r32` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.6-ol-7-r32/6/ol-7/Dockerfile)
+* [`6-ol-7`, `6.8.6-ol-7-r33` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.6-ol-7-r33/6/ol-7/Dockerfile)
 * [`6-debian-9`, `6.8.6-debian-9-r26`, `6`, `6.8.6`, `6.8.6-r26` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.6-debian-9-r26/6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
@@ -195,6 +195,7 @@ elasticsearch:
 Available variables:
 
  - `BITNAMI_DEBUG`: Increase verbosity on initialization logs. Default **false**
+ - `ELASTICSEARCH_EXTRA_FLAGS`: Extra command-line arguments for the `elasticsearch` daemon
  - `ELASTICSEARCH_CLUSTER_NAME`: The Elasticsearch Cluster Name. Default: **elasticsearch-cluster**
  - `ELASTICSEARCH_CLUSTER_HOSTS`: List of elasticsearch hosts to set the cluster. Available separators are ' ', ',' and ';'. No defaults.
  - `ELASTICSEARCH_CLUSTER_MASTER_HOSTS`: List of elasticsearch master-eligible hosts. Available separators are ' ', ',' and ';'. If no values are provided, it will have the same value than `ELASTICSEARCH_CLUSTER_HOSTS`.
