@@ -9,10 +9,10 @@ RUN install_packages bzip2-libs ca-certificates curl cyrus-sasl-lib expat freetd
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
-RUN bitnami-pkg unpack php-7.2.26-1 --checksum 675d2af04c6d39dd989dfa4905cecfce375709ee817ede8a85b9adb4702501ef
+RUN bitnami-pkg unpack php-7.2.26-2 --checksum 6fd6a4666cd937be57402380d21b1f1a5600d81b23f1f61b5f29c3b19a147030
 RUN bitnami-pkg unpack mysql-client-10.1.43-0 --checksum eb30f14e1bc364fea5fc47b0d17d4a1cb506b89339c4e88b0f9f0c879dd99434
 RUN bitnami-pkg install libphp-7.2.26-2 --checksum 944622a5febae818731a82cec90d998fb0f9929734d79b70eae6919fb65ec98e
-RUN bitnami-pkg unpack prestashop-1.7.6-2-0 --checksum 0c4ab9d1c871a8ab823ab4f11aad919ce38f041d71c0c7e8545ada8c5c448da5
+RUN bitnami-pkg unpack prestashop-1.7.6-3-0 --checksum 075fa0da982894cdc54d69b24b673dad2497988a0e6fda74caf6d4fad75143b7
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-2-ol-7-r55" \
+    BITNAMI_IMAGE_VERSION="1.7.6-3-ol-7-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
