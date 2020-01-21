@@ -1,4 +1,4 @@
-FROM bitnami/java:1.8.232-ol-7-r90 as development
+FROM bitnami/java:1.8.232-ol-7-r91 as development
 
 ######
 
@@ -14,7 +14,7 @@ RUN yum upgrade -y && \
 COPY --from=development /opt/bitnami/java /opt/bitnami/java
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="1.8.232-ol-7-r95-prod" \
+    BITNAMI_IMAGE_VERSION="1.8.232-ol-7-r96-prod" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
