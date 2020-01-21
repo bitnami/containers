@@ -10,8 +10,8 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libasound2-dev libc6 libfreetype6 libfreetype6-dev libgcc1 libx11-6 libxext6 libxi6 libxrender1 libxtst6 procps sudo unzip zlib1g
-RUN . ./libcomponent.sh && component_unpack "java" "11.0.5-0" --checksum 9fc7502ca3c073e6ae7dd6cfa0c2da6b6c26caccbe41b6d7b5a9d26050ee54ff
-RUN . ./libcomponent.sh && component_unpack "elasticsearch" "7.5.1-0" --checksum 9f4e071edb4df4215eb6b07e2ee5564dfde84e437d346ac5d714711a184d20f8
+RUN . ./libcomponent.sh && component_unpack "java" "11.0.6-0" --checksum 8f20580e7350726fff805d7469485739f7f7b0669396938c95031ec69aab6285
+RUN . ./libcomponent.sh && component_unpack "elasticsearch" "7.5.2-0" --checksum 53ecbbffe584b64166db1fb2a2518a1850ccea1697d8ccb5ed0129141670ee7c
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -20,7 +20,7 @@ RUN curl --silent -L https://github.com/mikefarah/yq/releases/download/2.4.0/yq_
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="7.5.1-debian-9-r26" \
+    BITNAMI_IMAGE_VERSION="7.5.2-debian-9-r0" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/elasticsearch/bin:$PATH"
