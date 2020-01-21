@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl dirmngr gnupg libbz2-1.0 libc6 libcome
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum 496e9cc3e12fd38832aae5dc1873cb4593666e6146379f55b2312908917eb666
-RUN bitnami-pkg unpack php-7.3.13-1 --checksum 6b8ab93e7b05a5675667509352383e773d7bd65c6e7b8e1f9705d743bfdc8745
+RUN bitnami-pkg unpack php-7.3.13-2 --checksum 6e3796ca080bed39c47703a9c7ad16732df9520f316cfe5b63adf1ec0e43ed75
 RUN bitnami-pkg install libphp-7.3.13-2 --checksum cdad3af7b23f54dbcf13818651979d7f23324c6092e5bde760eee1be1a740346
 RUN bitnami-pkg unpack dokuwiki-0.20180422.201901061035-2 --checksum 745b45641bb08ed01d2139a7f4d0a111fbe139040aa601518b9a177cb69f8e0a
 RUN apt-get update && apt-get upgrade && \
@@ -19,7 +19,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="dokuwiki" \
-    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-debian-9-r305" \
+    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-debian-9-r306" \
     DOKUWIKI_EMAIL="user@example.com" \
     DOKUWIKI_FULL_NAME="Full Name" \
     DOKUWIKI_PASSWORD="bitnami1" \
