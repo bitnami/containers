@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl dirmngr gnupg libbz2-1.0 libc6 libcome
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum 496e9cc3e12fd38832aae5dc1873cb4593666e6146379f55b2312908917eb666
-RUN bitnami-pkg unpack php-7.3.13-1 --checksum 6b8ab93e7b05a5675667509352383e773d7bd65c6e7b8e1f9705d743bfdc8745
+RUN bitnami-pkg unpack php-7.3.13-3 --checksum 88b3115407575a8906043ce9a54968104634b96473bb7493b9a3461b28683a6f
 RUN bitnami-pkg unpack mysql-client-10.3.21-0 --checksum 19c6b964f289772a4e5963e22929133fa65222f66752eb29af715ce3d0b7ef0e
 RUN bitnami-pkg install libphp-7.3.13-2 --checksum cdad3af7b23f54dbcf13818651979d7f23324c6092e5bde760eee1be1a740346
 RUN bitnami-pkg unpack drupal-8.8.1-1 --checksum fa359dcc7521a6708e93db60547e9f38f317ec67e8b4ca303d47da2a099dbafb
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.8.1-debian-9-r24" \
+    BITNAMI_IMAGE_VERSION="8.8.1-debian-9-r25" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
