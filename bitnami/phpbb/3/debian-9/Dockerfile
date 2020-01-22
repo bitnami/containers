@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl dirmngr gnupg libbz2-1.0 libc6 libcome
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum 496e9cc3e12fd38832aae5dc1873cb4593666e6146379f55b2312908917eb666
-RUN bitnami-pkg unpack php-7.2.26-2 --checksum 40966d77a26baaa28850f42a165e023bfa05d9c162907698b0a853d1e66a9e79
+RUN bitnami-pkg unpack php-7.2.26-3 --checksum d3a0352e8cbcda94ee7bc3825747e3bc5cd02aa83ec8e29d7946c86fdf4ca7ea
 RUN bitnami-pkg unpack mysql-client-10.3.21-0 --checksum 19c6b964f289772a4e5963e22929133fa65222f66752eb29af715ce3d0b7ef0e
 RUN bitnami-pkg install libphp-7.2.26-2 --checksum beafbcd90ea42a7aaab1847357724b583616a005230d5c40c0ec12b6c3a9d99f
 RUN bitnami-pkg unpack phpbb-3.3.0-0 --checksum 5fdb6df3754e1275323d4f23654907f1020b5fea91be86fdd3ca51f1cf0687cb
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="phpbb" \
-    BITNAMI_IMAGE_VERSION="3.3.0-debian-9-r13" \
+    BITNAMI_IMAGE_VERSION="3.3.0-debian-9-r14" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
