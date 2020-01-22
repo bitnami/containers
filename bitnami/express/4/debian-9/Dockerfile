@@ -24,7 +24,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.17.1-debian-9-r199" \
+    BITNAMI_IMAGE_VERSION="4.17.1-debian-9-r200" \
     NAMI_PREFIX="/.nami"
 
 EXPOSE 3000
