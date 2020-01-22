@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl dirmngr gnupg libbz2-1.0 libc6 libcome
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum 496e9cc3e12fd38832aae5dc1873cb4593666e6146379f55b2312908917eb666
-RUN bitnami-pkg unpack php-7.2.26-1 --checksum 5639e833c15a6347b4b3bbf1cb06e628b37e618d838bf05bb3ada246e3a5c32b
+RUN bitnami-pkg unpack php-7.2.26-3 --checksum d3a0352e8cbcda94ee7bc3825747e3bc5cd02aa83ec8e29d7946c86fdf4ca7ea
 RUN bitnami-pkg unpack mysql-client-10.3.21-0 --checksum 19c6b964f289772a4e5963e22929133fa65222f66752eb29af715ce3d0b7ef0e
 RUN bitnami-pkg install libphp-7.2.26-2 --checksum beafbcd90ea42a7aaab1847357724b583616a005230d5c40c0ec12b6c3a9d99f
 RUN bitnami-pkg unpack owncloud-10.3.2-0 --checksum 47ec0275f11877500982a9501452c929c4cb4e33b9b1e5f01f582a900f2d7436
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.3.2-debian-9-r31" \
+    BITNAMI_IMAGE_VERSION="10.3.2-debian-9-r32" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
