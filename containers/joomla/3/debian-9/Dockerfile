@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl dirmngr gnupg libbz2-1.0 libc6 libcome
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum 496e9cc3e12fd38832aae5dc1873cb4593666e6146379f55b2312908917eb666
-RUN bitnami-pkg unpack php-7.3.13-2 --checksum 6e3796ca080bed39c47703a9c7ad16732df9520f316cfe5b63adf1ec0e43ed75
+RUN bitnami-pkg unpack php-7.3.13-3 --checksum 88b3115407575a8906043ce9a54968104634b96473bb7493b9a3461b28683a6f
 RUN bitnami-pkg unpack mysql-client-10.1.43-0 --checksum 7b4dce9c8a619e8af1b67a3df57f66bfd8d336bc1a38e7076a9b15a9b983f2d1
 RUN bitnami-pkg install libphp-7.3.13-2 --checksum cdad3af7b23f54dbcf13818651979d7f23324c6092e5bde760eee1be1a740346
 RUN bitnami-pkg unpack joomla-3.9.14-0 --checksum 6f5895c6a0b2536661fe08db1feebd2f624f845c474e374e4aace6cb5b578c39
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.9.14-debian-9-r28" \
+    BITNAMI_IMAGE_VERSION="3.9.14-debian-9-r29" \
     JOOMLA_DATABASE_NAME="bitnami_joomla" \
     JOOMLA_DATABASE_PASSWORD="" \
     JOOMLA_DATABASE_USER="bn_joomla" \
