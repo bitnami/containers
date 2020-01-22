@@ -9,7 +9,7 @@ RUN install_packages bzip2-libs ca-certificates curl cyrus-sasl-lib expat freetd
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
-RUN bitnami-pkg unpack php-7.2.26-1 --checksum 675d2af04c6d39dd989dfa4905cecfce375709ee817ede8a85b9adb4702501ef
+RUN bitnami-pkg unpack php-7.2.26-3 --checksum 214574a63cb1b3f6d43950892d2bb22956b1e67c568977c01afe6e47db2e6f58
 RUN bitnami-pkg unpack mysql-client-10.3.21-0 --checksum 9e012f0e449a963c923c8ea7a5cc2ab2c688564ed910eaab2aef1ad70c5d8e4b
 RUN bitnami-pkg install libphp-7.2.26-2 --checksum 944622a5febae818731a82cec90d998fb0f9929734d79b70eae6919fb65ec98e
 RUN bitnami-pkg unpack owncloud-10.3.2-0 --checksum 033af79e178020945629b1556c1df805192f66d3e6ceccb5d067957a3333ea9b
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.3.2-ol-7-r44" \
+    BITNAMI_IMAGE_VERSION="10.3.2-ol-7-r45" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
