@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.0.1-ol-7-r4` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-adapter-clair/blob/1.0.1-ol-7-r4/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.0.1-debian-9-r3`, `1`, `1.0.1`, `1.0.1-r3`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-adapter-clair/blob/1.0.1-debian-9-r3/1/debian-9/Dockerfile)
+* [`1-debian-9`, `1.0.1-debian-9-r4`, `1`, `1.0.1`, `1.0.1-r4`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-adapter-clair/blob/1.0.1-debian-9-r4/1/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/harbor-adapter-clair GitHub repo](https://github.com/bitnami/bitnami-docker-harbor-adapter-clair).
 
