@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  jsonnet:
+    image: bitnami/jsonnet:0.14
+    volumes:
+      - jsonnet_data:/bitnami
+volumes:
+  jsonnet_data:
+    driver: local
