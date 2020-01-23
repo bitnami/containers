@@ -11,7 +11,7 @@ RUN install_packages bzip2-libs ca-certificates curl glibc gzip hostname keyutil
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg install node-8.17.0-0 --checksum c6720534f7fa5167debe21fb272168c98ef912b1b8c57eb50a21669b6ca16192
-RUN bitnami-pkg install mongodb-client-4.0.14-0 --checksum 26d1f8800df81bb045f4b1737a951edde2642176d0a34560def6c6f372a0448b
+RUN bitnami-pkg install mongodb-client-4.0.14-1 --checksum 5fe2da3f3abfba95a8529740dafee3847029618696c391599403c17ee8892b77
 RUN bitnami-pkg unpack parse-3.10.0-0 --checksum ad1521691c650449ffe73e044d24b5f5ecaf066212e7a98873ef393f8b64b90b
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -20,7 +20,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="3.10.0-ol-7-r13" \
+    BITNAMI_IMAGE_VERSION="3.10.0-ol-7-r14" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
