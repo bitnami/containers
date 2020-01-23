@@ -25,19 +25,21 @@ $ docker run --name kubectl bitnami/kubectl:latest
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`1.17-ol-7`, `1.17.2-ol-7-r2` (1.17/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.17.2-ol-7-r2/1.17/ol-7/Dockerfile)
-* [`1.17-debian-9`, `1.17.2-debian-9-r1`, `1.17`, `1.17.2`, `1.17.2-r1` (1.17/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.17.2-debian-9-r1/1.17/debian-9/Dockerfile)
 * [`1.16-ol-7`, `1.16.3-ol-7-r72` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.3-ol-7-r72/1.16/ol-7/Dockerfile)
-* [`1.16-debian-9`, `1.16.3-debian-9-r56`, `1.16`, `1.16.3`, `1.16.3-r56`, `latest` (1.16/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.3-debian-9-r56/1.16/debian-9/Dockerfile)
 * [`1.15-ol-7`, `1.15.3-ol-7-r165` (1.15/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.3-ol-7-r165/1.15/ol-7/Dockerfile)
-* [`1.15-debian-9`, `1.15.3-debian-9-r134`, `1.15`, `1.15.3`, `1.15.3-r134` (1.15/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.3-debian-9-r134/1.15/debian-9/Dockerfile)
 * [`1.14-ol-7`, `1.14.3-ol-7-r241` (1.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.3-ol-7-r241/1.14/ol-7/Dockerfile)
-* [`1.14-debian-9`, `1.14.3-debian-9-r213`, `1.14`, `1.14.3`, `1.14.3-r213` (1.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.3-debian-9-r213/1.14/debian-9/Dockerfile)
 * [`1.13-ol-7`, `1.13.4-ol-7-r332` (1.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-ol-7-r332/1.13/ol-7/Dockerfile)
-* [`1.13-debian-9`, `1.13.4-debian-9-r295`, `1.13`, `1.13.4`, `1.13.4-r295` (1.13/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-debian-9-r295/1.13/debian-9/Dockerfile)
+* [`1.13-debian-10`, `1.13.4-debian-10-r0`, `1.13`, `1.13.4`, `1.13.4-r0` (1.13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-debian-10-r0/1.13/debian-10/Dockerfile)
+* [`1.14-debian-10`, `0.0.0-debian-10-r0`, `1.14`, `0.0.0`, `0.0.0-r0` (1.14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/0.0.0-debian-10-r0/1.14/debian-10/Dockerfile)
+* [`1.15-debian-10`, `0.0.0-debian-10-r0`, `1.15`, `0.0.0`, `0.0.0-r0` (1.15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/0.0.0-debian-10-r0/1.15/debian-10/Dockerfile)
+* [`1.16-debian-10`, `0.0.0-debian-10-r0`, `1.16`, `0.0.0`, `0.0.0-r0`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/0.0.0-debian-10-r0/1.16/debian-10/Dockerfile)
+* [`1.17-debian-10`, `0.0.0-debian-10-r0`, `1.17`, `0.0.0`, `0.0.0-r0` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/0.0.0-debian-10-r0/1.17/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubectl GitHub repo](https://github.com/bitnami/bitnami-docker-kubectl).
 
@@ -58,7 +60,7 @@ $ docker pull bitnami/kubectl:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/kubectl:latest 'https://github.com/bitnami/bitnami-docker-kubectl.git#master:1.16/debian-9'
+$ docker build -t bitnami/kubectl:latest 'https://github.com/bitnami/bitnami-docker-kubectl.git#master:1.16/debian-10'
 ```
 
 # Configuration
