@@ -1,0 +1,4 @@
+version: '2'
+services:
+  kubectl:
+    image: bitnami/kubectl:1.17
