@@ -38,17 +38,19 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`10.4-ol-7`, `10.4.11-ol-7-r38` (10.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.11-ol-7-r38/10.4/ol-7/Dockerfile)
-* [`10.4-debian-9`, `10.4.11-debian-9-r28`, `10.4`, `10.4.11`, `10.4.11-r28` (10.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.11-debian-9-r28/10.4/debian-9/Dockerfile)
 * [`10.3-ol-7`, `10.3.21-ol-7-r48` (10.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.21-ol-7-r48/10.3/ol-7/Dockerfile)
-* [`10.3-debian-9`, `10.3.21-debian-9-r32`, `10.3`, `10.3.21`, `10.3.21-r32`, `latest` (10.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.21-debian-9-r32/10.3/debian-9/Dockerfile)
 * [`10.2-ol-7`, `10.2.30-ol-7-r47` (10.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.30-ol-7-r47/10.2/ol-7/Dockerfile)
-* [`10.2-debian-9`, `10.2.30-debian-9-r35`, `10.2`, `10.2.30`, `10.2.30-r35` (10.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.30-debian-9-r35/10.2/debian-9/Dockerfile)
 * [`10.1-ol-7`, `10.1.43-ol-7-r77` (10.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.43-ol-7-r77/10.1/ol-7/Dockerfile)
-* [`10.1-debian-9`, `10.1.43-debian-9-r66`, `10.1`, `10.1.43`, `10.1.43-r66` (10.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.43-debian-9-r66/10.1/debian-9/Dockerfile)
+* [`10.1-debian-10`, `10.1.43-debian-10-r0`, `10.1`, `10.1.43`, `10.1.43-r0` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.43-debian-10-r0/10.1/debian-10/Dockerfile)
+* [`10.3-debian-10`, `0.0.0-debian-10-r0`, `10.3`, `0.0.0`, `0.0.0-r0`, `latest` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/0.0.0-debian-10-r0/10.3/debian-10/Dockerfile)
+* [`10.4-debian-10`, `0.0.0-debian-10-r0`, `10.4`, `0.0.0`, `0.0.0-r0` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/0.0.0-debian-10-r0/10.4/debian-10/Dockerfile)
+* [`10.2-debian-10`, `0.0.0-debian-10-r0`, `10.2`, `0.0.0`, `0.0.0-r0` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/0.0.0-debian-10-r0/10.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb-galera GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb-galera).
 
