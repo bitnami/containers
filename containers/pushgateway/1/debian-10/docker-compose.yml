@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  pushgateway:
+    image: bitnami/pushgateway:1
