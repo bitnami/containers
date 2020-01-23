@@ -7,7 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "10,11,12,9.6"
           LATEST_STABLE: "11"
-          DISTRIBUTIONS_LIST: "debian-9,ol-7"
+          DISTRIBUTIONS_LIST: "debian-10,ol-7"
           IMAGE_NAME: postgresql
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
