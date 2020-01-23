@@ -1,0 +1,6 @@
+version: '2'
+services:
+  cassandra-exporter:
+    image: bitnami/cassandra-exporter:2
+    ports:
+      - 8080:8080
