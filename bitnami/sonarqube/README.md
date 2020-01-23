@@ -40,13 +40,15 @@ $ kubectl apply -f test.yaml
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`8-ol-7`, `8.1.0-ol-7-r34` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.1.0-ol-7-r34/8/ol-7/Dockerfile)
-* [`8-debian-9`, `8.1.0-debian-9-r23`, `8`, `8.1.0`, `8.1.0-r23` (8/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.1.0-debian-9-r23/8/debian-9/Dockerfile)
 * [`7-ol-7`, `7.9.2-ol-7-r44` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.2-ol-7-r44/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.9.2-debian-9-r34`, `7`, `7.9.2`, `7.9.2-r34`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.2-debian-9-r34/7/debian-9/Dockerfile)
+* [`7-debian-10`, `7.9.2-debian-10-r0`, `7`, `7.9.2`, `7.9.2-r0`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.2-debian-10-r0/7/debian-10/Dockerfile)
+* [`8-debian-10`, `0.0.0-debian-10-r0`, `8`, `0.0.0`, `0.0.0-r0` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/0.0.0-debian-10-r0/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
 
