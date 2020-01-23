@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.0.1-ol-7-r4` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-adapter-clair/blob/1.0.1-ol-7-r4/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.0.1-debian-9-r4`, `1`, `1.0.1`, `1.0.1-r4`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-adapter-clair/blob/1.0.1-debian-9-r4/1/debian-9/Dockerfile)
+* [`1-debian-10`, `1.0.1-debian-10-r0`, `1`, `1.0.1`, `1.0.1-r0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-adapter-clair/blob/1.0.1-debian-10-r0/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/harbor-adapter-clair GitHub repo](https://github.com/bitnami/bitnami-docker-harbor-adapter-clair).
 
@@ -67,7 +67,7 @@ $ docker pull bitnami/harbor-adapter-clair:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/harbor-adapter-clair:latest 'https://github.com/bitnami/bitnami-docker-harbor-adapter-clair.git#master:1/debian-9'
+$ docker build -t bitnami/harbor-adapter-clair:latest 'https://github.com/bitnami/bitnami-docker-harbor-adapter-clair.git#master:1/debian-10'
 ```
 
 # Persisting your application
