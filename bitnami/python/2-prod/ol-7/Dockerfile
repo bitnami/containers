@@ -1,4 +1,4 @@
-FROM bitnami/python:2.7.17-ol-7-r102 as development
+FROM bitnami/python:2.7.17-ol-7-r103 as development
 
 ######
 
@@ -14,7 +14,7 @@ RUN yum upgrade -y && \
 COPY --from=development /opt/bitnami/python /opt/bitnami/python
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="2.7.17-ol-7-r100-prod" \
+    BITNAMI_IMAGE_VERSION="2.7.17-ol-7-r101-prod" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 CMD [ "python" ]
