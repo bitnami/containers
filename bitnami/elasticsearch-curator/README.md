@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5-ol-7`, `5.8.1-ol-7-r91` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-curator/blob/5.8.1-ol-7-r91/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.8.1-debian-9-r80`, `5`, `5.8.1`, `5.8.1-r80`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-curator/blob/5.8.1-debian-9-r80/5/debian-9/Dockerfile)
+* [`5-debian-9`, `5.8.1-debian-9-r81`, `5`, `5.8.1`, `5.8.1-r81`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-curator/blob/5.8.1-debian-9-r81/5/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch-curator GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch-curator).
 
