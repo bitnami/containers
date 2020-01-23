@@ -41,15 +41,15 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`7-ol-7`, `7.5.2-ol-7-r1` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.5.2-ol-7-r1/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.5.2-debian-9-r1`, `7`, `7.5.2`, `7.5.2-r1`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.5.2-debian-9-r1/7/debian-9/Dockerfile)
-* [`6-ol-7`, `6.8.6-ol-7-r34` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.6-ol-7-r34/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.8.6-debian-9-r28`, `6`, `6.8.6`, `6.8.6-r28` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.6-debian-9-r28/6/debian-9/Dockerfile)
+* [`7-debian-10`, `7.5.2-debian-10-r0`, `7`, `7.5.2`, `7.5.2-r0`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.5.2-debian-10-r0/7/debian-10/Dockerfile)
+* [`6-ol-7`, `6.8.6-ol-7-r35` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.6-ol-7-r35/6/ol-7/Dockerfile)
+* [`6-debian-10`, `0.0.0-debian-10-r0`, `6`, `0.0.0`, `0.0.0-r0` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/0.0.0-debian-10-r0/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
 # Get this image
@@ -69,7 +69,7 @@ $ docker pull bitnami/elasticsearch:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/elasticsearch:latest 'https://github.com/bitnami/bitnami-docker-elasticsearch.git#master:7/debian-9'
+$ docker build -t bitnami/elasticsearch:latest 'https://github.com/bitnami/bitnami-docker-elasticsearch.git#master:7/debian-10'
 ```
 
 # Persisting your application
