@@ -44,17 +44,17 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`7-ol-7`, `7.5.2-ol-7-r1` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.5.2-ol-7-r1/7/ol-7/Dockerfile)
-* [`7-debian-9`, `7.5.2-debian-9-r0`, `7`, `7.5.2`, `7.5.2-r0`, `latest` (7/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.5.2-debian-9-r0/7/debian-9/Dockerfile)
-* [`6-ol-7`, `6.8.6-ol-7-r34` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.8.6-ol-7-r34/6/ol-7/Dockerfile)
-* [`6-debian-9`, `6.8.6-debian-9-r32`, `6`, `6.8.6`, `6.8.6-r32` (6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.8.6-debian-9-r32/6/debian-9/Dockerfile)
+* [`7-debian-10`, `7.5.2-debian-10-r0`, `7`, `7.5.2`, `7.5.2-r0`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.5.2-debian-10-r0/7/debian-10/Dockerfile)
+* [`6-ol-7`, `6.8.6-ol-7-r35` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.8.6-ol-7-r35/6/ol-7/Dockerfile)
 * [`6-rhel-7`, `6.7.2-rhel-7-r0` (6/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.7.2-rhel-7-r0/6/rhel-7/Dockerfile)
 * [`7-rhel-7`, `0.0.0-rhel-7-r0` (7/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/0.0.0-rhel-7-r0/7/rhel-7/Dockerfile)
+* [`6-debian-10`, `0.0.0-debian-10-r0`, `6`, `0.0.0`, `0.0.0-r0` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/0.0.0-debian-10-r0/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
 
@@ -75,7 +75,7 @@ $ docker pull bitnami/kibana:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/kibana:latest 'https://github.com/bitnami/bitnami-docker-kibana.git#master:7/debian-9'
+$ docker build -t bitnami/kibana:latest 'https://github.com/bitnami/bitnami-docker-kibana.git#master:7/debian-10'
 ```
 
 # How to use this image
