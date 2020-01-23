@@ -43,13 +43,13 @@ $ kubectl apply -f test.yaml
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`1-ol-7`, `1.3.6-ol-7-r7` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.3.6-ol-7-r7/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.3.6-debian-9-r7`, `1`, `1.3.6`, `1.3.6-r7`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.3.6-debian-9-r7/1/debian-9/Dockerfile)
+* [`1-debian-10`, `1.3.6-debian-10-r0`, `1`, `1.3.6`, `1.3.6-r0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.3.6-debian-10-r0/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluent-bit GitHub repo](https://github.com/bitnami/bitnami-docker-fluent-bit).
 
@@ -70,7 +70,7 @@ $ docker pull bitnami/fluent-bit:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/fluent-bit:latest 'https://github.com/bitnami/bitnami-docker-fluent-bit.git#master:1/debian-9'
+$ docker build -t bitnami/fluent-bit:latest 'https://github.com/bitnami/bitnami-docker-fluent-bit.git#master:1/debian-10'
 ```
 
 # Connecting to other containers
