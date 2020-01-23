@@ -1,0 +1,12 @@
+{
+  "dashboardName": "{{$global.env.PARSE_DASHBOARD_APP_NAME}}",
+  "parseAppId": "{{$global.env.PARSE_APP_ID}}",
+  "parseHost": "{{$global.env.PARSE_HOST}}",
+  "parseMasterKey": "{{$global.env.PARSE_MASTER_KEY}}",
+  "parseMountPath": "{{$global.env.PARSE_MOUNT_PATH}}",
+  "parsePort": "{{$global.env.PARSE_PORT_NUMBER}}",
+  "parseProtocol": "{{$global.env.PARSE_PROTOCOL}}",
+  "parseUseHostname": "{{$global.env.PARSE_USE_HOSTNAME}}",
+  "password": "{{$global.env.PARSE_DASHBOARD_PASSWORD}}",
+  "username": "{{$global.env.PARSE_DASHBOARD_USER}}"
+}
