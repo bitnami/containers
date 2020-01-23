@@ -43,27 +43,27 @@ $ kubectl apply -f test.yaml
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`7.4-ol-7`, `7.4.1-ol-7-r39` (7.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.1-ol-7-r39/7.4/ol-7/Dockerfile)
 * [`7.4-ol-7-prod`, `7.4.1-ol-7-r36-prod` (7.4-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.1-ol-7-r36-prod/7.4-prod/ol-7/Dockerfile)
-* [`7.4-debian-9`, `7.4.1-debian-9-r36`, `7.4`, `7.4.1`, `7.4.1-r36` (7.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.1-debian-9-r36/7.4/debian-9/Dockerfile)
-* [`7.4-debian-9-prod`, `7.4.1-debian-9-r32-prod`, `7.4-prod`, `7.4.1-prod`, `7.4.1-r32-prod` (7.4-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.1-debian-9-r32-prod/7.4-prod/debian-9/Dockerfile)
 * [`7.3-ol-7`, `7.3.13-ol-7-r40` (7.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.13-ol-7-r40/7.3/ol-7/Dockerfile)
 * [`7.3-ol-7-prod`, `7.3.13-ol-7-r30-prod` (7.3-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.13-ol-7-r30-prod/7.3-prod/ol-7/Dockerfile)
-* [`7.3-debian-9`, `7.3.13-debian-9-r35`, `7.3`, `7.3.13`, `7.3.13-r35`, `latest` (7.3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.13-debian-9-r35/7.3/debian-9/Dockerfile)
-* [`7.3-debian-9-prod`, `7.3.13-debian-9-r27-prod`, `7.3-prod`, `7.3.13-prod`, `7.3.13-r27-prod`, `latest-prod` (7.3-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.13-debian-9-r27-prod/7.3-prod/debian-9/Dockerfile)
 * [`7.2-ol-7-prod`, `7.2.26-ol-7-r38-prod` (7.2-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.26-ol-7-r38-prod/7.2-prod/ol-7/Dockerfile)
 * [`7.2-ol-7`, `7.2.26-ol-7-r38` (7.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.26-ol-7-r38/7.2/ol-7/Dockerfile)
-* [`7.2-debian-9`, `7.2.26-debian-9-r33`, `7.2`, `7.2.26`, `7.2.26-r33` (7.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.26-debian-9-r33/7.2/debian-9/Dockerfile)
-* [`7.2-debian-9-prod`, `7.2.26-debian-9-r29-prod`, `7.2-prod`, `7.2.26-prod`, `7.2.26-r29-prod` (7.2-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.26-debian-9-r29-prod/7.2-prod/debian-9/Dockerfile)
+* [`7.2-debian-10-prod`, `7.2.26-debian-10-r0-prod`, `7.2-prod`, `7.2.26-prod`, `7.2.26-r0-prod` (7.2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.26-debian-10-r0-prod/7.2-prod/debian-10/Dockerfile)
+* [`7.2-debian-10`, `7.2.26-debian-10-r0`, `7.2`, `7.2.26`, `7.2.26-r0` (7.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.26-debian-10-r0/7.2/debian-10/Dockerfile)
 * [`7.1-ol-7-prod`, `7.1.33-ol-7-r55-prod` (7.1-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.33-ol-7-r55-prod/7.1-prod/ol-7/Dockerfile)
 * [`7.1-ol-7`, `7.1.33-ol-7-r55` (7.1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.33-ol-7-r55/7.1/ol-7/Dockerfile)
-* [`7.1-debian-9`, `7.1.33-debian-9-r49`, `7.1`, `7.1.33`, `7.1.33-r49` (7.1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.33-debian-9-r49/7.1/debian-9/Dockerfile)
-* [`7.1-debian-9-prod`, `7.1.33-debian-9-r44-prod`, `7.1-prod`, `7.1.33-prod`, `7.1.33-r44-prod` (7.1-prod/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.1.33-debian-9-r44-prod/7.1-prod/debian-9/Dockerfile)
+* [`7.1-debian-10-prod`, `0.0.0-debian-10-r0-prod`, `7.1-prod`, `0.0.0-prod`, `0.0.0-r0-prod` (7.1-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/0.0.0-debian-10-r0-prod/7.1-prod/debian-10/Dockerfile)
+* [`7.4-debian-10-prod`, `0.0.0-debian-10-r0-prod`, `7.4-prod`, `0.0.0-prod`, `0.0.0-r0-prod` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/0.0.0-debian-10-r0-prod/7.4-prod/debian-10/Dockerfile)
+* [`7.3-debian-10-prod`, `0.0.0-debian-10-r0-prod`, `7.3-prod`, `0.0.0-prod`, `0.0.0-r0-prod`, `latest-prod` (7.3-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/0.0.0-debian-10-r0-prod/7.3-prod/debian-10/Dockerfile)
+* [`7.1-debian-10`, `0.0.0-debian-10-r0`, `7.1`, `0.0.0`, `0.0.0-r0` (7.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/0.0.0-debian-10-r0/7.1/debian-10/Dockerfile)
+* [`7.4-debian-10`, `0.0.0-debian-10-r0`, `7.4`, `0.0.0`, `0.0.0-r0` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/0.0.0-debian-10-r0/7.4/debian-10/Dockerfile)
+* [`7.3-debian-10`, `0.0.0-debian-10-r0`, `7.3`, `0.0.0`, `0.0.0-r0`, `latest` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/0.0.0-debian-10-r0/7.3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
 
@@ -94,7 +94,7 @@ $ docker pull bitnami/php-fpm:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/php-fpm 'https://github.com/bitnami/bitnami-docker-php-fpm.git#master:7.3/debian-9'
+$ docker build -t bitnami/php-fpm 'https://github.com/bitnami/bitnami-docker-php-fpm.git#master:7.3/debian-10'
 ```
 
 # Connecting to other containers
