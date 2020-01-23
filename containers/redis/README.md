@@ -41,15 +41,15 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`5.0-ol-7`, `5.0.7-ol-7-r66` (5.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.7-ol-7-r66/5.0/ol-7/Dockerfile)
-* [`5.0-debian-9`, `5.0.7-debian-9-r56`, `5.0`, `5.0.7`, `5.0.7-r56`, `latest` (5.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.7-debian-9-r56/5.0/debian-9/Dockerfile)
+* [`5.0-debian-10`, `5.0.7-debian-10-r0`, `5.0`, `5.0.7`, `5.0.7-r0`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.7-debian-10-r0/5.0/debian-10/Dockerfile)
 * [`4.0-ol-7`, `4.0.14-ol-7-r315` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-ol-7-r315/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.14-debian-9-r276`, `4.0`, `4.0.14`, `4.0.14-r276` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-debian-9-r276/4.0/debian-9/Dockerfile)
+* [`4.0-debian-10`, `0.0.0-debian-10-r0`, `4.0`, `0.0.0`, `0.0.0-r0` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/0.0.0-debian-10-r0/4.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
@@ -70,7 +70,7 @@ $ docker pull bitnami/redis:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/redis:latest 'https://github.com/bitnami/bitnami-docker-redis.git#master:5.0/debian-9'
+$ docker build -t bitnami/redis:latest 'https://github.com/bitnami/bitnami-docker-redis.git#master:5.0/debian-10'
 ```
 
 # Persisting your database
