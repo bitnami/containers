@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl dirmngr gnupg libbz2-1.0 libc6 libcome
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum 496e9cc3e12fd38832aae5dc1873cb4593666e6146379f55b2312908917eb666
-RUN bitnami-pkg unpack php-7.3.13-2 --checksum 6e3796ca080bed39c47703a9c7ad16732df9520f316cfe5b63adf1ec0e43ed75
+RUN bitnami-pkg unpack php-7.3.13-3 --checksum 88b3115407575a8906043ce9a54968104634b96473bb7493b9a3461b28683a6f
 RUN bitnami-pkg install wp-cli-2.4.0-0 --checksum 3bf68efbc817708e466a6ba32dd8ec46408931c38b7e568c76a7bc2c76319578
 RUN bitnami-pkg unpack mysql-client-10.3.21-0 --checksum 19c6b964f289772a4e5963e22929133fa65222f66752eb29af715ce3d0b7ef0e
 RUN bitnami-pkg install libphp-7.3.13-2 --checksum cdad3af7b23f54dbcf13818651979d7f23324c6092e5bde760eee1be1a740346
@@ -22,7 +22,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.3.2-debian-9-r30" \
+    BITNAMI_IMAGE_VERSION="5.3.2-debian-9-r31" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
