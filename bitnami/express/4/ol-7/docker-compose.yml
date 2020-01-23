@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mongodb:
-    image: 'bitnami/mongodb:4.0-ol-7'
+    image: 'bitnami/mongodb:4.2-ol-7'
 
   express:
     tty: true # Enables debugging capabilities when attached to this container.
