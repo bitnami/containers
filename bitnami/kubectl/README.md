@@ -31,6 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.17-ol-7`, `1.17.2-ol-7-r2` (1.17/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.17.2-ol-7-r2/1.17/ol-7/Dockerfile)
+* [`1.17-debian-10`, `1.17.2-debian-10-r0`, `1.17`, `1.17.2`, `1.17.2-r0` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.17.2-debian-10-r0/1.17/debian-10/Dockerfile)
 * [`1.16-ol-7`, `1.16.3-ol-7-r72` (1.16/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.3-ol-7-r72/1.16/ol-7/Dockerfile)
 * [`1.15-ol-7`, `1.15.3-ol-7-r165` (1.15/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.3-ol-7-r165/1.15/ol-7/Dockerfile)
 * [`1.15-debian-10`, `1.15.3-debian-10-r0`, `1.15`, `1.15.3`, `1.15.3-r0` (1.15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.3-debian-10-r0/1.15/debian-10/Dockerfile)
@@ -38,7 +39,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`1.13-ol-7`, `1.13.4-ol-7-r332` (1.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-ol-7-r332/1.13/ol-7/Dockerfile)
 * [`1.13-debian-10`, `1.13.4-debian-10-r0`, `1.13`, `1.13.4`, `1.13.4-r0` (1.13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-debian-10-r0/1.13/debian-10/Dockerfile)
 * [`1.16-debian-10`, `0.0.0-debian-10-r0`, `1.16`, `0.0.0`, `0.0.0-r0`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/0.0.0-debian-10-r0/1.16/debian-10/Dockerfile)
-* [`1.17-debian-10`, `0.0.0-debian-10-r0`, `1.17`, `0.0.0`, `0.0.0-r0` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/0.0.0-debian-10-r0/1.17/debian-10/Dockerfile)
 * [`1.14-debian-10`, `0.0.0-debian-10-r0`, `1.14`, `0.0.0`, `0.0.0-r0` (1.14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/0.0.0-debian-10-r0/1.14/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubectl GitHub repo](https://github.com/bitnami/bitnami-docker-kubectl).
