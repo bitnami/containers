@@ -44,13 +44,13 @@ $ kubectl apply -f test.yaml
 
 ## Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.5.11-ol-7-r554` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-ol-7-r554/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.5.11-debian-9-r511`, `1`, `1.5.11`, `1.5.11-r511`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-9-r511/1/debian-9/Dockerfile)
+* [`1-ol-7`, `1.5.11-ol-7-r555` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-ol-7-r555/1/ol-7/Dockerfile)
+* [`1-debian-10`, `0.0.0-debian-10-r0`, `1`, `0.0.0`, `0.0.0-r0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/0.0.0-debian-10-r0/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
 
