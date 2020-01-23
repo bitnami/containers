@@ -21,11 +21,13 @@ $ docker run --name jsonnet bitnami/jsonnet:latest
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`0.14-ol-7`, `0.14.0-ol-7-r118` (0.14/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jsonnet/blob/0.14.0-ol-7-r118/0.14/ol-7/Dockerfile)
-* [`0.14-debian-9`, `0.14.0-debian-9-r102`, `0.14`, `0.14.0`, `0.14.0-r102`, `latest` (0.14/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-jsonnet/blob/0.14.0-debian-9-r102/0.14/debian-9/Dockerfile)
+* [`0.14-debian-10`, `0.14.0-debian-10-r0`, `0.14`, `0.14.0`, `0.14.0-r0`, `latest` (0.14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jsonnet/blob/0.14.0-debian-10-r0/0.14/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jsonnet GitHub repo](https://github.com/bitnami/bitnami-docker-jsonnet).
 
@@ -46,7 +48,7 @@ $ docker pull bitnami/jsonnet:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/jsonnet:latest 'https://github.com/bitnami/bitnami-docker-jsonnet.git#master:0.14/debian-9'
+$ docker build -t bitnami/jsonnet:latest 'https://github.com/bitnami/bitnami-docker-jsonnet.git#master:0.14/debian-10'
 ```
 
 # Configuration
