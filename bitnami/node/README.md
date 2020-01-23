@@ -66,12 +66,12 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`6-photon-3`, `6.17.1-photon-3-r0` (6/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-photon-3-r0/6/photon-3/Dockerfile)
 * [`6-ol-7-prod`, `6.17.1-ol-7-r302-prod` (6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-ol-7-r302-prod/6-prod/ol-7/Dockerfile)
 * [`6-ol-7`, `6.17.1-ol-7-r294` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-ol-7-r294/6/ol-7/Dockerfile)
+* [`6-debian-10-prod`, `6.17.1-debian-10-r0-prod`, `6-prod`, `6.17.1-prod`, `6.17.1-r0-prod` (6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-debian-10-r0-prod/6-prod/debian-10/Dockerfile)
+* [`6-debian-10`, `6.17.1-debian-10-r0`, `6`, `6.17.1`, `6.17.1-r0` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-debian-10-r0/6/debian-10/Dockerfile)
 * [`10-debian-10-prod`, `0.0.0-debian-10-r0-prod`, `10-prod`, `0.0.0-prod`, `0.0.0-r0-prod`, `latest-prod` (10-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/0.0.0-debian-10-r0-prod/10-prod/debian-10/Dockerfile)
-* [`6-debian-10-prod`, `0.0.0-debian-10-r0-prod`, `6-prod`, `0.0.0-prod`, `0.0.0-r0-prod` (6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/0.0.0-debian-10-r0-prod/6-prod/debian-10/Dockerfile)
 * [`12-debian-10-prod`, `0.0.0-debian-10-r0-prod`, `12-prod`, `0.0.0-prod`, `0.0.0-r0-prod` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/0.0.0-debian-10-r0-prod/12-prod/debian-10/Dockerfile)
-* [`10-debian-10`, `0.0.0-debian-10-r0`, `10`, `0.0.0`, `0.0.0-r0`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/0.0.0-debian-10-r0/10/debian-10/Dockerfile)
-* [`6-debian-10`, `0.0.0-debian-10-r0`, `6`, `0.0.0`, `0.0.0-r0` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/0.0.0-debian-10-r0/6/debian-10/Dockerfile)
 * [`12-debian-10`, `0.0.0-debian-10-r0`, `12`, `0.0.0`, `0.0.0-r0` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/0.0.0-debian-10-r0/12/debian-10/Dockerfile)
+* [`10-debian-10`, `0.0.0-debian-10-r0`, `10`, `0.0.0`, `0.0.0-r0`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/0.0.0-debian-10-r0/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
