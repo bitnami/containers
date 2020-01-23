@@ -142,7 +142,7 @@ volumes:
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).  As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 The above examples define docker volumes namely `mariadb_data` and `redmine_data`. The Redmine application state will persist as long as these volumes are not removed.
 
@@ -156,7 +156,7 @@ The following `docker-compose.yml` template demonstrates the use of host directo
   mariadb:
   ...
     volumes:
-      - '/path/to/mariadb-persistence:/bitnami'
+      - '/path/to/mariadb-persistence:/bitnami/mariadb'
   ...
   redmine:
   ...
