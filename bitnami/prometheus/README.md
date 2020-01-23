@@ -58,7 +58,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.15.2-ol-7-r17` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.15.2-ol-7-r17/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.15.2-debian-9-r15`, `2`, `2.15.2`, `2.15.2-r15`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.15.2-debian-9-r15/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.15.2-debian-9-r16`, `2`, `2.15.2`, `2.15.2-r16`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.15.2-debian-9-r16/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus).
 
