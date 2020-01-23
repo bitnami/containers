@@ -12,7 +12,7 @@ RUN install_packages ca-certificates curl glibc gzip hostname libaio libaio-deve
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg install java-1.8.232-0 --checksum fbac74363c807fce14538c5f9a9232602adc7883c1c5936571c741625de2479e
-RUN bitnami-pkg unpack wildfly-18.0.1-2 --checksum 8140612d5885e56bd44a7966a8439521bb2dc436bb6282b4e5e3bcc3693c3174
+RUN bitnami-pkg unpack wildfly-18.0.1-3 --checksum ef61f80eda0235ae6a2a1ed7b91f9cef342216234a6b65ce5edf552cca6377c5
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN ln -sf /opt/bitnami/wildfly/data /app
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="18.0.1-ol-7-r74" \
+    BITNAMI_IMAGE_VERSION="18.0.1-ol-7-r75" \
     NAMI_PREFIX="/.nami" \
     WILDFLY_HOME="/home/wildfly" \
     WILDFLY_JAVA_HOME="" \
