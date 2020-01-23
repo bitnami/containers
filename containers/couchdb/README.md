@@ -52,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.3.1-ol-7-r133` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-couchdb/blob/2.3.1-ol-7-r133/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.3.1-debian-9-r104`, `2`, `2.3.1`, `2.3.1-r104`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-couchdb/blob/2.3.1-debian-9-r104/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.3.1-debian-9-r105`, `2`, `2.3.1`, `2.3.1-r105`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-couchdb/blob/2.3.1-debian-9-r105/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/couchdb GitHub repo](https://github.com/bitnami/bitnami-docker-couchdb).
 
