@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  minio-client:
+    image: 'bitnami/minio-client:2020'
