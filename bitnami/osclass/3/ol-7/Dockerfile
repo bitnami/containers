@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de3935
 RUN bitnami-pkg unpack php-7.3.13-4 --checksum 0ed73f0ca3c89c2e1ae4511279b09ecb420f0c6da1f82d92e2eb5535a6b8f36a
 RUN bitnami-pkg unpack mysql-client-10.3.21-0 --checksum 9e012f0e449a963c923c8ea7a5cc2ab2c688564ed910eaab2aef1ad70c5d8e4b
 RUN bitnami-pkg install libphp-7.3.13-3 --checksum 104c0221f7cd5e0e7e89842a01f92d8d36e20a277cb07fd3186c4fe8399144e6
-RUN bitnami-pkg unpack osclass-3.7.4-22 --checksum 8988c5c3a7b0727770b6db4bb36d6d3e87e87cc3498e9d22beec326ccbb89779
+RUN bitnami-pkg unpack osclass-3.7.4-23 --checksum 90981f8978169330f901bf2fe56e79c78c71b2c5884529057bbf23190837e72f
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="osclass" \
-    BITNAMI_IMAGE_VERSION="3.7.4-ol-7-r558" \
+    BITNAMI_IMAGE_VERSION="3.7.4-ol-7-r559" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
