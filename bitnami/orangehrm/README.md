@@ -33,13 +33,13 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-ol-7`, `4.3.4-0-ol-7-r86` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.3.4-0-ol-7-r86/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.3.4-0-debian-9-r50`, `4`, `4.3.4-0`, `4.3.4-0-r50`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.3.4-0-debian-9-r50/4/debian-9/Dockerfile)
+* [`4-ol-7`, `4.3.4-0-ol-7-r87` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.3.4-0-ol-7-r87/4/ol-7/Dockerfile)
+* [`4-debian-10`, `0.0.0-debian-10-r0`, `4`, `0.0.0`, `0.0.0-r0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/0.0.0-debian-10-r0/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/orangehrm GitHub repo](https://github.com/bitnami/bitnami-docker-orangehrm).
 
