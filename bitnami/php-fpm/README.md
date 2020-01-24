@@ -51,7 +51,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`7.4-ol-7`, `7.4.1-ol-7-r39` (7.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.1-ol-7-r39/7.4/ol-7/Dockerfile)
 * [`7.4-ol-7-prod`, `7.4.1-ol-7-r36-prod` (7.4-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.1-ol-7-r36-prod/7.4-prod/ol-7/Dockerfile)
 * [`7.3-ol-7`, `7.3.13-ol-7-r41` (7.3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.13-ol-7-r41/7.3/ol-7/Dockerfile)
-* [`7.3-ol-7-prod`, `7.3.13-ol-7-r30-prod` (7.3-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.13-ol-7-r30-prod/7.3-prod/ol-7/Dockerfile)
+* [`7.3-ol-7-prod`, `7.3.13-ol-7-r31-prod` (7.3-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.13-ol-7-r31-prod/7.3-prod/ol-7/Dockerfile)
 * [`7.2-ol-7`, `7.2.26-ol-7-r39` (7.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.26-ol-7-r39/7.2/ol-7/Dockerfile)
 * [`7.2-ol-7-prod`, `7.2.26-ol-7-r38-prod` (7.2-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.26-ol-7-r38-prod/7.2-prod/ol-7/Dockerfile)
 * [`7.2-debian-10-prod`, `7.2.26-debian-10-r0-prod`, `7.2-prod`, `7.2.26-prod`, `7.2.26-r0-prod` (7.2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.26-debian-10-r0-prod/7.2-prod/debian-10/Dockerfile)
