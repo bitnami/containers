@@ -1,0 +1,4 @@
+version: '2'
+services:
+  git:
+    image: bitnami/git:2

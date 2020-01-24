@@ -25,11 +25,13 @@ $ docker run --name git bitnami/git:latest
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`2-ol-7`, `2.25.0-ol-7-r8` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.25.0-ol-7-r8/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.25.0-debian-9-r8`, `2`, `2.25.0`, `2.25.0-r8`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.25.0-debian-9-r8/2/debian-9/Dockerfile)
+* [`2-debian-10`, `2.25.0-debian-10-r0`, `2`, `2.25.0`, `2.25.0-r0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.25.0-debian-10-r0/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/git GitHub repo](https://github.com/bitnami/bitnami-docker-git).
 
@@ -50,7 +52,7 @@ $ docker pull bitnami/git:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/git:latest 'https://github.com/bitnami/bitnami-docker-git.git#master:2/debian-9'
+$ docker build -t bitnami/git:latest 'https://github.com/bitnami/bitnami-docker-git.git#master:2/debian-10'
 ```
 
 # Configuration
