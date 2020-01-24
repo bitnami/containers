@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.11.5-ol-7-r88` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.5-ol-7-r88/3/ol-7/Dockerfile)
-* [`3-debian-10`, `0.0.0-debian-10-r0`, `3`, `0.0.0`, `0.0.0-r0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/0.0.0-debian-10-r0/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.11.5-debian-10-r0`, `3`, `3.11.5`, `3.11.5-r0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.5-debian-10-r0/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
 
