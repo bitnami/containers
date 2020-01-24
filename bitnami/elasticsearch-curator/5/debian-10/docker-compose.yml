@@ -1,0 +1,4 @@
+version: '2'
+services:
+  elasticsearch-curator:
+    image: bitnami/elasticsearch-curator:5
