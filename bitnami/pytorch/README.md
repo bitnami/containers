@@ -38,10 +38,12 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-9`, `1.4.0-debian-9-r5`, `1`, `1.4.0`, `1.4.0-r5`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.4.0-debian-9-r5/1/debian-9/Dockerfile)
+* [`1-debian-10`, `1.4.0-debian-10-r0`, `1`, `1.4.0`, `1.4.0-r0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.4.0-debian-10-r0/1/debian-10/Dockerfile)
 * [`1-ol-7`, `1.3.1-ol-7-r82` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.3.1-ol-7-r82/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pytorch GitHub repo](https://github.com/bitnami/bitnami-docker-pytorch).
@@ -63,7 +65,7 @@ $ docker pull bitnami/pytorch:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/pytorch 'https://github.com/bitnami/bitnami-docker-pytorch.git#master:1/debian-9'
+$ docker build -t bitnami/pytorch 'https://github.com/bitnami/bitnami-docker-pytorch.git#master:1/debian-10'
 ```
 
 # Entering the REPL
