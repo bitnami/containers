@@ -32,13 +32,13 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.0.3-2-ol-7-r289` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-2-ol-7-r289/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.0.3-2-debian-9-r212`, `3`, `3.0.3-2`, `3.0.3-2-r212`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-2-debian-9-r212/3/debian-9/Dockerfile)
+* [`3-ol-7`, `3.0.3-2-ol-7-r290` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-2-ol-7-r290/3/ol-7/Dockerfile)
+* [`3-debian-10`, `0.0.0-debian-10-r0`, `3`, `0.0.0`, `0.0.0-r0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/0.0.0-debian-10-r0/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/opencart GitHub repo](https://github.com/bitnami/bitnami-docker-opencart).
 
