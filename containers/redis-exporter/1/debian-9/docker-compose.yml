@@ -1,5 +1,0 @@
-version: '2'
-
-services:
-  redis-exporter:
-    image: bitnami/redis-exporter:1
