@@ -9,8 +9,8 @@ RUN install_packages bzip2-libs ca-certificates curl cyrus-sasl-lib expat freetd
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
-RUN bitnami-pkg unpack php-7.3.13-3 --checksum 58a34b695011b33ac78f86d2da6117f6110c76c26562a51b9741ca5a03b5b08d
-RUN bitnami-pkg install libphp-7.3.13-2 --checksum ddba3fba1c2c84d24cbe3545222644d6c5ccc0a3e2340b03ad28c09d0f0d0c53
+RUN bitnami-pkg unpack php-7.3.14-0 --checksum e99cb40b76f03fde9fe864a47ef2be3643dc2f9a859c764e1ba626577d13c893
+RUN bitnami-pkg install libphp-7.3.14-0 --checksum 5ec940bf1429c99d5e9204f2a9ace1ce0b136cda397ecfe50f8ffef9571242db
 RUN bitnami-pkg unpack phpmyadmin-5.0.1-0 --checksum f2c268bc409824d90f62225496febb2a850354aaaeda74daca9f07f1050b84d1
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -19,7 +19,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="5.0.1-ol-7-r8" \
+    BITNAMI_IMAGE_VERSION="5.0.1-ol-7-r9" \
     DATABASE_ENABLE_SSL="no" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
