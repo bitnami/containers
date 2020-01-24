@@ -1,0 +1,19 @@
+{
+  "databaseName": "{{$global.env.SUITECRM_DATABASE_NAME}}",
+  "databasePassword": "{{$global.env.SUITECRM_DATABASE_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
+  "databaseUser": "{{$global.env.SUITECRM_DATABASE_USER}}",
+  "email": "{{$global.env.SUITECRM_EMAIL}}",
+  "host": "{{$global.env.SUITECRM_HOST}}",
+  "httpTimeout": "{{$global.env.SUITECRM_HTTP_TIMEOUT}}",
+  "lastName": "{{$global.env.SUITECRM_LAST_NAME}}",
+  "password": "{{$global.env.SUITECRM_PASSWORD}}",
+  "smtpHost": "{{$global.env.SUITECRM_SMTP_HOST}}",
+  "smtpPassword": "{{$global.env.SUITECRM_SMTP_PASSWORD}}",
+  "smtpPort": "{{$global.env.SUITECRM_SMTP_PORT}}",
+  "smtpProtocol": "{{$global.env.SUITECRM_SMTP_PROTOCOL}}",
+  "smtpUser": "{{$global.env.SUITECRM_SMTP_USER}}",
+  "username": "{{$global.env.SUITECRM_USERNAME}}",
+  "validateUserIP": "{{$global.env.SUITECRM_VALIDATE_USER_IP}}"
+}
