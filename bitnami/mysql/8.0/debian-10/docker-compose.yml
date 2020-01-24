@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  mysql:
+    image: 'bitnami/mysql:8.0'
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'mysql_data:/bitnami/mysql/data'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+
+volumes:
+  mysql_data:
+    driver: local
