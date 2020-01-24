@@ -40,11 +40,13 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`2020-ol-7`, `2020.1.16-ol-7-r2` (2020/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2020.1.16-ol-7-r2/2020/ol-7/Dockerfile)
-* [`2020-debian-9`, `2020.1.16-debian-9-r2`, `2020`, `2020.1.16`, `2020.1.16-r2`, `latest` (2020/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2020.1.16-debian-9-r2/2020/debian-9/Dockerfile)
+* [`2020-debian-10`, `2020.1.16-debian-10-r0`, `2020`, `2020.1.16`, `2020.1.16-r0`, `latest` (2020/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2020.1.16-debian-10-r0/2020/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio GitHub repo](https://github.com/bitnami/bitnami-docker-minio).
 
@@ -65,7 +67,7 @@ $ docker pull bitnami/minio:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/minio:latest 'https://github.com/bitnami/bitnami-docker-minio.git#master:2020/debian-9'
+$ docker build -t bitnami/minio:latest 'https://github.com/bitnami/bitnami-docker-minio.git#master:2020/debian-10'
 ```
 
 # Persisting your database

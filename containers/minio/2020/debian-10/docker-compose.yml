@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  minio:
+    image: 'bitnami/minio:2020'
+    ports:
+      - '9000:9000'
+    volumes:
+      - 'minio_data:/data'
+
+volumes:
+  minio_data:
+    driver: local
