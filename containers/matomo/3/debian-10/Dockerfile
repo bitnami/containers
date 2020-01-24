@@ -17,12 +17,14 @@ RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 RUN /build/install-gosu.sh
+RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
+RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/errors_log
 RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="matomo" \
-    BITNAMI_IMAGE_VERSION="3.13.1-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="3.13.1-debian-10-r1" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
