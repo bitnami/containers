@@ -1,8 +1,0 @@
-version: '2'
-
-services:
-  nginx-ingress-controller:
-    image: bitnami/nginx-ingress-controller:0
-    ports:
-      - '80:80'
-      - '443:443'
