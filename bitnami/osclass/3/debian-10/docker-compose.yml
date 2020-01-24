@@ -1,0 +1,31 @@
+version: '2'
+services:
+  mariadb:
+    image: 'bitnami/mariadb:10.3'
+    environment:
+      - MARIADB_USER=bn_osclass
+      - MARIADB_DATABASE=bitnami_osclass
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - 'mariadb_data:/bitnami'
+  osclass:
+    image: 'bitnami/osclass:3'
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - OSCLASS_HOST=localhost
+      - OSCLASS_DATABASE_USER=bn_osclass
+      - OSCLASS_DATABASE_NAME=bitnami_osclass
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '80:80'
+      - '443:443'
+    depends_on:
+      - mariadb
+    volumes:
+      - 'osclass_data:/bitnami'
+volumes:
+  mariadb_data:
+    driver: local
+  osclass_data:
+    driver: local
