@@ -39,7 +39,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-ol-7`, `4.1.0-ol-7-r82` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.0-ol-7-r82/4/ol-7/Dockerfile)
+* [`4-ol-7`, `4.1.0-ol-7-r83` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.0-ol-7-r83/4/ol-7/Dockerfile)
 * [`4-debian-10`, `4.1.0-debian-10-r0`, `4`, `4.1.0`, `4.1.0-r0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.0-debian-10-r0/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
@@ -329,6 +329,27 @@ With Docker Compose the HA PostgreSQL cluster can be setup using the [`docker-co
 ```bash
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-pgpool/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
+```
+
+## Initializing with custom scripts
+
+**Everytime the container is started**, it will execute the files with extension `.sh` located at `/docker-entrypoint-initdb.d` after initializing Pgpool.
+
+In order to have your custom files inside the docker image you can mount them as a volume.
+
+```bash
+$ docker run --name pgpool \
+  -v /path/to/init-scripts:/docker-entrypoint-initdb.d \
+  bitnami/pgpool:latest
+```
+
+Or with docker-compose:
+
+```yaml
+pgpool:
+  image: bitnami/pgpool:latest
+  volumes:
+    - /path/to/init-scripts:/docker-entrypoint-initdb.d
 ```
 
 ## Configuration file
