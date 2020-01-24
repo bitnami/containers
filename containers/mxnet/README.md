@@ -41,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.5.1-ol-7-r107` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mxnet/blob/1.5.1-ol-7-r107/1/ol-7/Dockerfile)
-* [`1-debian-10`, `0.0.0-debian-10-r0`, `1`, `0.0.0`, `0.0.0-r0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mxnet/blob/0.0.0-debian-10-r0/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.5.1-debian-10-r0`, `1`, `1.5.1`, `1.5.1-r0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mxnet/blob/1.5.1-debian-10-r0/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mxnet GitHub repo](https://github.com/bitnami/bitnami-docker-mxnet).
 

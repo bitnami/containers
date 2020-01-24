@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  mxnet:
+    image: bitnami/mxnet:1
+    command: sleep infinity
+    volumes:
+      - mxnet_data:/bitnami
+volumes:
+  mxnet_data:
+    driver: local
