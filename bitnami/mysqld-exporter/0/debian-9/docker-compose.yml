@@ -1,8 +1,0 @@
-version: '2'
-services:
-  mysqld-exporter:
-    image: bitnami/mysqld-exporter:0
-    ports:
-      - 9104:9104
-    environment:
-      - DATA_SOURCE_NAME='dbuser:dbpassword@(dbhost:3306)/'
