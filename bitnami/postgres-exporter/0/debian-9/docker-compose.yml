@@ -1,5 +1,0 @@
-version: '2'
-
-services:
-  postgres-exporter:
-    image: bitnami/postgres-exporter:0
