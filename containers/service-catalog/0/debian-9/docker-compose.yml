@@ -1,8 +1,0 @@
-version: '2'
-
-services:
-  service-catalog:
-    image: bitnami/service-catalog:0
-    ports:
-      - '443:443'
-      - '8443:8443'
