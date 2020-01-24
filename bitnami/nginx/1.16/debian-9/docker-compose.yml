@@ -1,7 +1,0 @@
-version: '2'
-
-services:
-  nginx:
-    image: 'bitnami/nginx:1.16'
-    ports:
-      - '80:8080'
