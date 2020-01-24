@@ -33,13 +33,13 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-ol-7`, `4.1.0-ol-7-r33` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.1.0-ol-7-r33/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.1.0-debian-9-r23`, `4`, `4.1.0`, `4.1.0-r23`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.1.0-debian-9-r23/4/debian-9/Dockerfile)
+* [`4-ol-7`, `4.1.0-ol-7-r34` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.1.0-ol-7-r34/4/ol-7/Dockerfile)
+* [`4-debian-10`, `0.0.0-debian-10-r0`, `4`, `0.0.0`, `0.0.0-r0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/0.0.0-debian-10-r0/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
 
@@ -142,7 +142,7 @@ volumes:
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).  As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database). As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 The above examples define docker volumes namely `mariadb_data` and `redmine_data`. The Redmine application state will persist as long as these volumes are not removed.
 
@@ -181,7 +181,7 @@ The following `docker-compose.yml` template demonstrates the use of host directo
     -e MARIADB_USER=bn_redmine \
     -e MARIADB_DATABASE=bitnami_redmine \
     --net redmine-tier \
-    --volume /path/to/mariadb-persistence:/bitnami \
+    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
     bitnami/mariadb:latest
   ```
 
