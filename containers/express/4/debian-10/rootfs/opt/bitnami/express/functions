@@ -1,0 +1,150 @@
+#!/bin/bash
+. /opt/bitnami/base/functions
+
+INIT_SEM=/tmp/initialized.sem
+PACKAGE_FILE=/app/package.json
+
+fresh_container() {
+  [ ! -f $INIT_SEM ]
+}
+
+app_present() {
+  [ -f package.json ]
+}
+
+dependencies_up_to_date() {
+  # It it up to date if the package file is older than
+  # the last time the container was initialized
+  [ ! $PACKAGE_FILE -nt $INIT_SEM ]
+}
+
+database_tier_exists() {
+  [ -n "$(getent hosts mongodb mysql mariadb postgresql)" ]
+}
+
+__wait_for_db() {
+  local host=$1
+  local port=$2
+  local ip_address
+  ip_address=$(getent hosts "$1" | awk '{ print $1 }')
+
+  info "Connecting to at $host server at $ip_address:$port."
+
+  counter=0
+  until nc -z "$ip_address" "$port"; do
+    counter=$((counter+1))
+    if [ $counter == 10 ]; then
+      error "Couldn't connect to $host server."
+      return 1
+    fi
+    info "Trying to connect to $host server at $ip_address:$port. Attempt $counter."
+    sleep 5
+  done
+  info "Connected to $host server."
+}
+
+wait_for_db() {
+  if ! [[ -n $SKIP_DB_WAIT && $SKIP_DB_WAIT -gt 0 ]] && database_tier_exists ; then
+    if getent hosts mongodb >/dev/null; then
+      __wait_for_db mongodb 27017
+    fi
+
+    if getent hosts mariadb >/dev/null; then
+      __wait_for_db mariadb 3306
+    fi
+
+    if getent hosts mysql >/dev/null; then
+      __wait_for_db mysql 3306
+    fi
+
+    if getent hosts postgresql >/dev/null; then
+      __wait_for_db postgresql 5432
+    fi
+  fi
+}
+
+add_gitignore_sample() {
+  info "Installing git ignore rules."
+  cp /dist/.gitignore .gitignore
+}
+
+add_sample_code() {
+  if ! [[ -n $SKIP_SAMPLE_CODE && $SKIP_SAMPLE_CODE -gt 0 ]]; then
+    info "Adding dist samples."
+    cp -r /dist/samples .
+  fi
+}
+
+add_database_support() {
+  if database_tier_exists; then
+    if getent hosts mongodb >/dev/null && ! npm ls mongodb >/dev/null; then
+      info "Adding mongodb npm module."
+      npm install --save mongodb
+    fi
+
+    if getent hosts mariadb >/dev/null && ! npm ls mysql >/dev/null || getent hosts mysql >/dev/null && ! npm ls mysql >/dev/null; then
+      info "Adding mysql npm module."
+      npm install --save mysql
+    fi
+
+    if getent hosts postgresql >/dev/null && ! npm ls pg pg-hstore >/dev/null; then
+      info "Adding pg pg-hstore npm modules."
+      npm install --save pg pg-hstore
+    fi
+  fi
+}
+
+add_nodemon_support() {
+  info "Adding nodemon npm module (dev)."
+  npm install nodemon --save-dev
+  sed -i 's;"start".*;"start": "node ./bin/www", "development": "nodemon ./bin/www";' package.json
+}
+
+bootstrap_express_app() {
+  if ! app_present; then
+    info "Creating express application."
+    express . -f
+    mkdir -p tmp
+    mkdir -p logs
+    chmod og+rw -R tmp logs
+    add_gitignore_sample
+    add_database_support
+    add_nodemon_support
+    add_sample_code
+  else
+    info "Skipping creation of new application. Already exists!"
+  fi
+}
+
+add_dockerfile() {
+  if [[ ! -f Dockerfile ]]; then
+    cp -r /dist/Dockerfile.tpl Dockerfile
+    sed -i 's/{{BITNAMI_IMAGE_VERSION}}/'"$BITNAMI_IMAGE_VERSION"'/g' Dockerfile
+    [[ ! -f bower.json ]] && sed -i '/^RUN bower install/d' Dockerfile
+  fi
+
+  if [[ ! -f .dockerignore ]]; then
+    cp -r /dist/.dockerignore .
+  fi
+}
+
+install_packages() {
+  if ! dependencies_up_to_date; then
+    if ! [[ -n $SKIP_NPM_INSTALL && $SKIP_NPM_INSTALL -gt 0 ]] && [[ -f package.json ]]; then
+      info "Installing npm packages."
+      npm install
+    fi
+
+    if ! [[ -n $SKIP_BOWER_INSTALL && $SKIP_BOWER_INSTALL -gt 0 ]] && [[ -f bower.json ]]; then
+      info "Installing bower packages."
+      bower install
+    fi
+  fi
+}
+
+migrate_db() {
+  if ! [[ -n $SKIP_DB_MIGRATE && $SKIP_DB_MIGRATE -gt 0 ]] && [[ -f .sequelizerc ]]; then
+    info "Applying database migrations (sequelize db:migrate)."
+    sequelize db:migrate
+  fi
+}
