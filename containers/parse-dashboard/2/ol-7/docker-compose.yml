@@ -1,7 +1,7 @@
 version: '2'
 services:
   mongodb:
-    image: 'bitnami/mongodb:4.0-ol-7'
+    image: 'bitnami/mongodb:4.2-ol-7'
     volumes:
       - 'mongodb_data:/bitnami'
   parse:
