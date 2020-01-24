@@ -1,0 +1,20 @@
+{
+  "cryptPassphrase": "{{$global.env.REPORTSERVER_CRYPTPASSPHRASE}}",
+  "cryptSalt": "{{$global.env.REPORTSERVER_CRYPTSALT}}",
+  "databaseName": "{{$global.env.REPORTSERVER_DATABASE_NAME}}",
+  "databasePassword": "{{$global.env.REPORTSERVER_DATABASE_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
+  "databaseUser": "{{$global.env.REPORTSERVER_DATABASE_USER}}",
+  "email": "{{$global.env.REPORTSERVER_EMAIL}}",
+  "installDemoData": "{{$global.env.REPORTSERVER_INSTALLDEMODATA}}",
+  "password": "{{$global.env.REPORTSERVER_PASSWORD}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpSSLEnable": "{{$global.env.SMTP_SSL_ENABLE}}",
+  "smtpTLSEnable": "{{$global.env.SMTP_TLS_ENABLE}}",
+  "smtpTLSRequired": "{{$global.env.SMTP_TLS_REQUIRED}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "username": "{{$global.env.REPORTSERVER_USERNAME}}"
+}
