@@ -1,6 +1,0 @@
-version: '2'
-services:
-  logstash-exporter:
-    image: bitnami/logstash-exporter:0
-    ports:
-      - 9198:9198
