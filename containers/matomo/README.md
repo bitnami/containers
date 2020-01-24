@@ -39,13 +39,13 @@ $ kubectl apply -f test.yaml
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-ol-7`, `3.13.1-ol-7-r5` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.13.1-ol-7-r5/3/ol-7/Dockerfile)
-* [`3-debian-9`, `3.13.1-debian-9-r5`, `3`, `3.13.1`, `3.13.1-r5`, `latest` (3/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.13.1-debian-9-r5/3/debian-9/Dockerfile)
+* [`3-ol-7`, `3.13.1-ol-7-r6` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.13.1-ol-7-r6/3/ol-7/Dockerfile)
+* [`3-debian-10`, `0.0.0-debian-10-r0`, `3`, `0.0.0`, `0.0.0-r0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/0.0.0-debian-10-r0/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
 
@@ -65,7 +65,7 @@ docker pull bitnami/matomo:[TAG]
 If you wish, you can also build the image youself.
 
 ```bash
-docker build -t bitnami/matomo:latest 'https://github.com/bitnami/bitnami-docker-matomo.git#master:3/debian-9'
+docker build -t bitnami/matomo:latest 'https://github.com/bitnami/bitnami-docker-matomo.git#master:3/debian-10'
 ```
 
 # How to use this image
