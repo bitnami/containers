@@ -1,0 +1,6 @@
+version: '2'
+services:
+  jenkins-exporter:
+    image: bitnami/jenkins-exporter:0
+    ports:
+      - 9118:9118
