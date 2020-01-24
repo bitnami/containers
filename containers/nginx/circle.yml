@@ -7,7 +7,7 @@ jobs:
         environment:
           RELEASE_SERIES_LIST: "1.16"
           LATEST_STABLE: "1.16"
-          DISTRIBUTIONS_LIST: "debian-9,ol-7"
+          DISTRIBUTIONS_LIST: "debian-10,ol-7"
           IMAGE_NAME: nginx
           DOCKER_PROJECT: bitnami
           QUAY_PROJECT: bitnami
