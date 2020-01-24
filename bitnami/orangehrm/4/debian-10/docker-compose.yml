@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:10.2'
+    environment:
+      - MARIADB_USER=bn_orangehrm
+      - MARIADB_DATABASE=bitnami_orangehrm
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - 'mariadb_data:/bitnami'
+  orangehrm:
+    image: 'bitnami/orangehrm:4'
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - ORANGEHRM_DATABASE_USER=bn_orangehrm
+      - ORANGEHRM_DATABASE_NAME=bitnami_orangehrm
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '80:80'
+      - '443:443'
+    depends_on:
+      - mariadb
+    volumes:
+      - 'orangehrm_data:/bitnami'
+
+volumes:
+  mariadb_data:
+    driver: local
+  orangehrm_data:
+    driver: local
