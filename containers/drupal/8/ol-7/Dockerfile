@@ -9,7 +9,7 @@ RUN install_packages bzip2-libs ca-certificates curl cyrus-sasl-lib expat freetd
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
-RUN bitnami-pkg unpack php-7.3.13-3 --checksum 58a34b695011b33ac78f86d2da6117f6110c76c26562a51b9741ca5a03b5b08d
+RUN bitnami-pkg unpack php-7.3.13-4 --checksum 0ed73f0ca3c89c2e1ae4511279b09ecb420f0c6da1f82d92e2eb5535a6b8f36a
 RUN bitnami-pkg unpack mysql-client-10.3.21-0 --checksum 9e012f0e449a963c923c8ea7a5cc2ab2c688564ed910eaab2aef1ad70c5d8e4b
 RUN bitnami-pkg install libphp-7.3.13-2 --checksum ddba3fba1c2c84d24cbe3545222644d6c5ccc0a3e2340b03ad28c09d0f0d0c53
 RUN bitnami-pkg unpack drupal-8.8.1-1 --checksum 17c16ee526dfcc8b57345449b44a3900a92f6c70dff5b23b068208e23c08e214
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.8.1-ol-7-r36" \
+    BITNAMI_IMAGE_VERSION="8.8.1-ol-7-r37" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
