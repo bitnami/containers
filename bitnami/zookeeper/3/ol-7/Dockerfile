@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel libgcc procps-ng sudo tar unzip which zlib
-RUN . ./libcomponent.sh && component_unpack "java" "1.8.232-0" --checksum fbac74363c807fce14538c5f9a9232602adc7883c1c5936571c741625de2479e
+RUN . ./libcomponent.sh && component_unpack "java" "1.8.242-0" --checksum 974f750091ac1bf18cc1ce9472ef5ed7c1b328a2c17471cb9ac810fcded67151
 RUN . ./libcomponent.sh && component_unpack "zookeeper" "3.5.6-0" --checksum 4910370f8d11b38a3d826ee33d1aa03b4679bb9387a5f727f49d2db85590c8c2
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -24,7 +24,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.5.6-ol-7-r103" \
+    BITNAMI_IMAGE_VERSION="3.5.6-ol-7-r104" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH"
 
