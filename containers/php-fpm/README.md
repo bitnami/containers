@@ -48,7 +48,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7.4-ol-7`, `7.4.1-ol-7-r39` (7.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.1-ol-7-r39/7.4/ol-7/Dockerfile)
+* [`7.4-ol-7`, `7.4.1-ol-7-r40` (7.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.1-ol-7-r40/7.4/ol-7/Dockerfile)
 * [`7.4-ol-7-prod`, `7.4.1-ol-7-r36-prod` (7.4-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.1-ol-7-r36-prod/7.4-prod/ol-7/Dockerfile)
 * [`7.4-debian-10-prod`, `7.4.1-debian-10-r0-prod`, `7.4-prod`, `7.4.1-prod`, `7.4.1-r0-prod` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.1-debian-10-r0-prod/7.4-prod/debian-10/Dockerfile)
 * [`7.4-debian-10`, `7.4.1-debian-10-r0`, `7.4`, `7.4.1`, `7.4.1-r0` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.1-debian-10-r0/7.4/debian-10/Dockerfile)
