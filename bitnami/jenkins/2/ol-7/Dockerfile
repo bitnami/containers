@@ -8,7 +8,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl cyrus-sasl-lib fontconfig glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libcurl libgcc libidn libselinux libssh2 nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre procps-ng sudo tar unzip which zlib
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
-RUN bitnami-pkg install java-1.8.232-0 --checksum fbac74363c807fce14538c5f9a9232602adc7883c1c5936571c741625de2479e
+RUN bitnami-pkg install java-1.8.242-0 --checksum 974f750091ac1bf18cc1ce9472ef5ed7c1b328a2c17471cb9ac810fcded67151
 RUN bitnami-pkg install git-2.25.0-0 --checksum 2fd25c5b37cec238a759c3c3643c156d4fe5b00716e2152c7c494cf6729673c9
 RUN bitnami-pkg unpack jenkins-2.204.1-0 --checksum 4327a12d3811642cca9f578803932dc1d817f73f5554fab1fb759e8b14a851f4
 RUN yum upgrade -y && \
@@ -20,7 +20,7 @@ RUN mkdir -p /usr/share/jenkins/ref
 COPY rootfs /
 RUN ln -sf /install-plugins.sh /usr/local/bin/install-plugins.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.204.1-ol-7-r37" \
+    BITNAMI_IMAGE_VERSION="2.204.1-ol-7-r38" \
     DISABLE_JENKINS_INITIALIZATION="no" \
     JAVA_OPTS="" \
     JENKINS_HOME="/opt/bitnami/jenkins/jenkins_home" \
