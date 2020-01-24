@@ -1,7 +1,0 @@
-{
-  "disableInitialization": "{{$global.env.DISABLE_JENKINS_INITIALIZATION}}",
-  "homeDir": "{{$global.env.JENKINS_HOME}}",
-  "javaOpts": "{{$global.env.JAVA_OPTS}}",
-  "password": "{{$global.env.JENKINS_PASSWORD}}",
-  "username": "{{$global.env.JENKINS_USERNAME}}"
-}
