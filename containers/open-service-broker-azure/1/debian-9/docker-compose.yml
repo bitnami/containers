@@ -1,7 +1,0 @@
-version: '2'
-
-services:
-  open-service-broker-azure:
-    image: bitnami/open-service-broker-azure:0
-    ports:
-      - '8080:8080'
