@@ -34,13 +34,13 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`1-ol-7`, `1.7.9-ol-7-r93` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.7.9-ol-7-r93/1/ol-7/Dockerfile)
-* [`1-debian-9`, `1.7.9-debian-9-r57`, `1`, `1.7.9`, `1.7.9-r57`, `latest` (1/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.7.9-debian-9-r57/1/debian-9/Dockerfile)
+* [`1-debian-10`, `1.7.9-debian-10-r0`, `1`, `1.7.9`, `1.7.9-r0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.7.9-debian-10-r0/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb).
 
@@ -61,7 +61,7 @@ $ docker pull bitnami/influxdb:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/influxdb:latest 'https://github.com/bitnami/bitnami-docker-influxdb.git#master:1/debian-9'
+$ docker build -t bitnami/influxdb:latest 'https://github.com/bitnami/bitnami-docker-influxdb.git#master:1/debian-10'
 ```
 
 # Persisting your application
