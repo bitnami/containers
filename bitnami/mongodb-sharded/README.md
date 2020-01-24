@@ -43,17 +43,17 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`4.2-ol-7`, `4.2.2-ol-7-r47` (4.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.2-ol-7-r47/4.2/ol-7/Dockerfile)
-* [`4.2-debian-9`, `4.2.2-debian-9-r41`, `4.2`, `4.2.2`, `4.2.2-r41` (4.2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.2-debian-9-r41/4.2/debian-9/Dockerfile)
-* [`4.0-ol-7`, `4.0.14-ol-7-r37` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.14-ol-7-r37/4.0/ol-7/Dockerfile)
-* [`4.0-debian-9`, `4.0.14-debian-9-r30`, `4.0`, `4.0.14`, `4.0.14-r30`, `latest` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.14-debian-9-r30/4.0/debian-9/Dockerfile)
+* [`4.2-debian-10`, `4.2.2-debian-10-r0`, `4.2`, `4.2.2`, `4.2.2-r0` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.2-debian-10-r0/4.2/debian-10/Dockerfile)
+* [`4.0-ol-7`, `4.0.14-ol-7-r38` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.14-ol-7-r38/4.0/ol-7/Dockerfile)
 * [`3.6-ol-7`, `3.6.16-ol-7-r55` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.16-ol-7-r55/3.6/ol-7/Dockerfile)
-* [`3.6-debian-9`, `3.6.16-debian-9-r40`, `3.6`, `3.6.16`, `3.6.16-r40` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.16-debian-9-r40/3.6/debian-9/Dockerfile)
+* [`3.6-debian-10`, `0.0.0-debian-10-r0`, `3.6`, `0.0.0`, `0.0.0-r0` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/3.6/debian-10/Dockerfile)
+* [`4.0-debian-10`, `0.0.0-debian-10-r0`, `4.0`, `0.0.0`, `0.0.0-r0`, `latest` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/4.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
@@ -74,7 +74,7 @@ $ docker pull bitnami/mongodb-sharded:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/mongodb-sharded:latest 'https://github.com/bitnami/bitnami-docker-mongodb-sharded.git#master:4.0/debian-9'
+$ docker build -t bitnami/mongodb-sharded:latest 'https://github.com/bitnami/bitnami-docker-mongodb-sharded.git#master:4.0/debian-10'
 ```
 
 # Persisting your database
