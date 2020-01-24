@@ -40,13 +40,13 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`2.4-ol-7`, `2.4.41-ol-7-r175` (2.4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.41-ol-7-r175/2.4/ol-7/Dockerfile)
-* [`2.4-debian-9`, `2.4.41-debian-9-r141`, `2.4`, `2.4.41`, `2.4.41-r141`, `latest` (2.4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.41-debian-9-r141/2.4/debian-9/Dockerfile)
+* [`2.4-debian-10`, `2.4.41-debian-10-r0`, `2.4`, `2.4.41`, `2.4.41-r0`, `latest` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.41-debian-10-r0/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/apache GitHub repo](https://github.com/bitnami/bitnami-docker-apache).
 
@@ -67,7 +67,7 @@ $ docker pull bitnami/apache:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/apache:latest 'https://github.com/bitnami/bitnami-docker-apache.git#master:2.4/debian-9'
+$ docker build -t bitnami/apache:latest 'https://github.com/bitnami/bitnami-docker-apache.git#master:2.4/debian-10'
 ```
 
 # Hosting a static website
