@@ -33,13 +33,13 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`5-ol-7`, `5.0.1-ol-7-r8` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.0.1-ol-7-r8/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.0.1-debian-9-r7`, `5`, `5.0.1`, `5.0.1-r7`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.0.1-debian-9-r7/5/debian-9/Dockerfile)
+* [`5-debian-10`, `5.0.1-debian-10-r0`, `5`, `5.0.1`, `5.0.1-r0`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.0.1-debian-10-r0/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpmyadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phpmyadmin).
 
