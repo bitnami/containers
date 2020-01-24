@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl cyrus-sasl-lib glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libcurl libgcc libidn libpcap libselinux libssh2 nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre procps-ng sudo tar unzip which zlib
-RUN . ./libcomponent.sh && component_unpack "mongodb" "4.0.14-1" --checksum 6eab52cf9a3e4d5b5320c1533b4d5105c82e24ea78325f7c2723dc1d3246bca3
+RUN . ./libcomponent.sh && component_unpack "mongodb" "4.0.15-0" --checksum 89aa9e77265687f11ab57568d1cea5c31bd63bb9b10795c5ed4b75f6a83494f4
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -25,7 +25,7 @@ RUN curl --silent -L https://github.com/mikefarah/yq/releases/download/2.4.0/yq_
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb-sharded" \
-    BITNAMI_IMAGE_VERSION="4.0.14-ol-7-r38" \
+    BITNAMI_IMAGE_VERSION="4.0.15-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mongodb/bin:$PATH"
 
