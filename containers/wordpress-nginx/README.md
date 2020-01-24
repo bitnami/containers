@@ -40,13 +40,13 @@ $ kubectl apply -f test.yaml
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-ol-7`, `5.3.2-ol-7-r36` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.3.2-ol-7-r36/5/ol-7/Dockerfile)
-* [`5-debian-9`, `5.3.2-debian-9-r28`, `5`, `5.3.2`, `5.3.2-r28`, `latest` (5/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.3.2-debian-9-r28/5/debian-9/Dockerfile)
+* [`5-ol-7`, `5.3.2-ol-7-r37` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.3.2-ol-7-r37/5/ol-7/Dockerfile)
+* [`5-debian-10`, `0.0.0-debian-10-r0`, `5`, `0.0.0`, `0.0.0-r0`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/0.0.0-debian-10-r0/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
 
