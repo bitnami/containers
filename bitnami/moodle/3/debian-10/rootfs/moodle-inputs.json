@@ -1,0 +1,18 @@
+{
+  "databaseName": "{{$global.env.MOODLE_DATABASE_NAME}}",
+  "databasePassword": "{{$global.env.MOODLE_DATABASE_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
+  "databaseUser": "{{$global.env.MOODLE_DATABASE_USER}}",
+  "email": "{{$global.env.MOODLE_EMAIL}}",
+  "language": "{{$global.env.MOODLE_LANGUAGE}}",
+  "moodleSiteName": "{{$global.env.MOODLE_SITENAME}}",
+  "password": "{{$global.env.MOODLE_PASSWORD}}",
+  "skipInstall": "{{$global.env.MOODLE_SKIP_INSTALL}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpProtocol": "{{$global.env.SMTP_PROTOCOL}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "username": "{{$global.env.MOODLE_USERNAME}}"
+}
