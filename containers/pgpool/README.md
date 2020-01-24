@@ -34,13 +34,13 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`4-ol-7`, `4.1.0-ol-7-r82` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.0-ol-7-r82/4/ol-7/Dockerfile)
-* [`4-debian-9`, `4.1.0-debian-9-r67`, `4`, `4.1.0`, `4.1.0-r67`, `latest` (4/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.0-debian-9-r67/4/debian-9/Dockerfile)
+* [`4-debian-10`, `4.1.0-debian-10-r0`, `4`, `4.1.0`, `4.1.0-r0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.0-debian-10-r0/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
 
@@ -61,7 +61,7 @@ $ docker pull bitnami/pgpool:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/pgpool:latest 'https://github.com/bitnami/bitnami-docker-pgpool.git#master:4/debian-9'
+$ docker build -t bitnami/pgpool:latest 'https://github.com/bitnami/bitnami-docker-pgpool.git#master:4/debian-10'
 ```
 
 # Connecting to other containers
