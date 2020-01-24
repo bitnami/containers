@@ -36,12 +36,12 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-9`, `0.3.6-debian-9-r78`, `0`, `0.3.6`, `0.3.6-r78`, `latest` (0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.6-debian-9-r78/0/debian-9/Dockerfile)
+* [`0-debian-10`, `0.3.6-debian-10-r0`, `0`, `0.3.6`, `0.3.6-r0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.6-debian-10-r0/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/metrics-server GitHub repo](https://github.com/bitnami/bitnami-docker-metrics-server).
 

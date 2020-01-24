@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  metrics-server:
+    image: bitnami/metrics-server:0
+    ports:
+      - '8443:8443'
