@@ -16,7 +16,7 @@ RUN /build/install-gosu.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="harbor-adapter-clair" \
-    BITNAMI_IMAGE_VERSION="1.0.1-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="1.0.1-debian-10-r1" \
     PATH="/opt/bitnami/harbor-adapter-clair/bin:$PATH"
 
 EXPOSE 8080
