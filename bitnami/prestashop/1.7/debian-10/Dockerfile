@@ -9,9 +9,9 @@ RUN install_packages ca-certificates curl dirmngr gnupg libbz2-1.0 libc6 libcom-
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-0 --checksum 0364e80e08a89fda2d2d302609f813d5d497b6cb6bcf6643d2770b825abbc0fb
-RUN bitnami-pkg unpack php-7.2.26-0 --checksum 41557e836a7c0cb30d793f8a3ac658b46e5eb470b5b528c00e3ca9d5fee427c1
+RUN bitnami-pkg unpack php-7.2.27-0 --checksum 6456864bfa1f9551801e9577b275a0226c40d9ec5ee8dc7bba19212f5f73ba4b
 RUN bitnami-pkg unpack mysql-client-10.1.43-0 --checksum c305115765c244513b8aeeaa1fd7e65771ecf17ecb33386df42c0698315f9b9b
-RUN bitnami-pkg install libphp-7.2.26-0 --checksum 1e5bf6dbd3bc6e875c998b6efc84eb2cd582aa8a6146e2d6e020d485abd471ed
+RUN bitnami-pkg install libphp-7.2.27-0 --checksum 7c66d4776bf47eca1e83808a6540e48089bbda747aec9595285856991b03ff5e
 RUN bitnami-pkg unpack prestashop-1.7.6-3-0 --checksum 33320415fef901709fea22995a5e8e1b221b2d3745a893e63326b6491a332025
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-3-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="1.7.6-3-debian-10-r1" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
