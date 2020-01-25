@@ -21,3 +21,5 @@ pgpool_validate
 am_i_root && ensure_user_exists "$PGPOOL_DAEMON_USER" "$PGPOOL_DAEMON_GROUP"
 # Ensure Pgpool is initialized
 pgpool_initialize
+# Allow running custom initialization scripts
+pgpool_custom_init_scripts

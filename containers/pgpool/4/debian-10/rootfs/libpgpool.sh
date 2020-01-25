@@ -35,6 +35,7 @@ export PGPOOL_ETC_DIR="${PGPOOL_BASE_DIR}/etc"
 export PGPOOL_LOG_DIR="${PGPOOL_BASE_DIR}/logs"
 export PGPOOL_TMP_DIR="${PGPOOL_BASE_DIR}/tmp"
 export PGPOOL_BIN_DIR="${PGPOOL_BASE_DIR}/bin"
+export PGPOOL_INITSCRIPTS_DIR=/docker-entrypoint-initdb.d
 export PGPOOL_CONF_FILE="${PGPOOL_CONF_DIR}/pgpool.conf"
 export PGPOOL_PCP_CONF_FILE="${PGPOOL_ETC_DIR}/pcp.conf"
 export PGPOOL_PGHBA_FILE="${PGPOOL_CONF_DIR}/pool_hba.conf"
@@ -382,6 +383,28 @@ pgpool_generate_password_file() {
     info "Generating password file for local authentication..."
 
     pg_md5 -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_POSTGRES_USERNAME" "$PGPOOL_POSTGRES_PASSWORD"
+}
+
+########################
+# Run custom initialization scripts
+# Globals:
+#   PGPOOL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+pgpool_custom_init_scripts() {
+    if [[ -n $(find "$PGPOOL_INITSCRIPTS_DIR/" -type f -name "*.sh") ]]; then
+        info "Loading user's custom files from $PGPOOL_INITSCRIPTS_DIR ...";
+        find "$PGPOOL_INITSCRIPTS_DIR/" -type f -name "*.sh" | sort | while read -r f; do
+            if [[ -x "$f" ]]; then
+                debug "Executing $f"; "$f"
+            else
+                debug "Sourcing $f"; . "$f"
+            fi
+        done
+    fi
 }
 
 ########################
