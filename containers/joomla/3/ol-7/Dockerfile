@@ -9,9 +9,9 @@ RUN install_packages bzip2-libs ca-certificates curl cyrus-sasl-lib expat freetd
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
-RUN bitnami-pkg unpack php-7.3.13-4 --checksum 0ed73f0ca3c89c2e1ae4511279b09ecb420f0c6da1f82d92e2eb5535a6b8f36a
+RUN bitnami-pkg unpack php-7.3.14-0 --checksum e99cb40b76f03fde9fe864a47ef2be3643dc2f9a859c764e1ba626577d13c893
 RUN bitnami-pkg unpack mysql-client-10.1.43-0 --checksum eb30f14e1bc364fea5fc47b0d17d4a1cb506b89339c4e88b0f9f0c879dd99434
-RUN bitnami-pkg install libphp-7.3.13-2 --checksum ddba3fba1c2c84d24cbe3545222644d6c5ccc0a3e2340b03ad28c09d0f0d0c53
+RUN bitnami-pkg install libphp-7.3.14-0 --checksum 5ec940bf1429c99d5e9204f2a9ace1ce0b136cda397ecfe50f8ffef9571242db
 RUN bitnami-pkg unpack joomla-3.9.14-0 --checksum b7e555a5f097b9ac7af6b2269fb8c8cbc3fd345bdff9cc8fa1d33d3fe2cd2e7a
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.9.14-ol-7-r36" \
+    BITNAMI_IMAGE_VERSION="3.9.14-ol-7-r37" \
     JOOMLA_DATABASE_NAME="bitnami_joomla" \
     JOOMLA_DATABASE_PASSWORD="" \
     JOOMLA_DATABASE_USER="bn_joomla" \
