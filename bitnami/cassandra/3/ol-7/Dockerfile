@@ -11,7 +11,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs ca-certificates curl glibc gzip hostname jemalloc keyutils-libs krb5-libs libaio-devel libcom_err libgcc libselinux ncurses-libs nss-softokn-freebl openssl-libs pcre procps-ng readline sqlite sudo tar which zlib
 RUN . ./libcomponent.sh && component_unpack "python" "2.7.17-1" --checksum 764d5a1d70462980aedd371c7062c517055dabcb386805cc7c7d208219633ad7
-RUN . ./libcomponent.sh && component_unpack "java" "1.8.232-0" --checksum fbac74363c807fce14538c5f9a9232602adc7883c1c5936571c741625de2479e
+RUN . ./libcomponent.sh && component_unpack "java" "1.8.242-0" --checksum 974f750091ac1bf18cc1ce9472ef5ed7c1b328a2c17471cb9ac810fcded67151
 RUN . ./libcomponent.sh && component_unpack "cassandra" "3.11.5-1" --checksum 98b8d3d7424deed8f2b8597998b784e2f223b3262e47a857912f7f0e83279fec
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -21,7 +21,7 @@ RUN curl --silent -L https://github.com/mikefarah/yq/releases/download/2.4.0/yq_
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.5-ol-7-r88" \
+    BITNAMI_IMAGE_VERSION="3.11.5-ol-7-r89" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/cassandra/bin:$PATH"
 
