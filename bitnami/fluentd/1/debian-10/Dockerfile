@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl ghostscript imagemagick libc6 libgcc1 libgmp-dev libjemalloc-dev libncurses5-dev libncurses6 libreadline-dev libreadline7 libssl1.1 libstdc++6 libtinfo6 libxml2-dev libxslt1-dev procps sudo unzip wget zlib1g zlib1g-dev
-RUN . ./libcomponent.sh && component_unpack "ruby" "2.6.5-0" --checksum 5defe064d4b2a5646f4f9d0d7b9f560c816119ccf736cea79e99dc387a5ebbc0
+RUN . ./libcomponent.sh && component_unpack "ruby" "2.6.5-1" --checksum 99d4bc115bd1f2ce13a76e16359f03acef2ceccfc5468f1b008e9ea9d07dc7fc
 RUN . ./libcomponent.sh && component_unpack "fluentd" "1.9.0-0" --checksum 845084dab45837cd8328ae0e9e50343e5922b5ed930c4a2aac98907807d2ce7d
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -18,7 +18,7 @@ RUN /build/install-gosu.sh
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.9.0-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="1.9.0-debian-10-r1" \
     GEM_HOME="/opt/bitnami/fluentd" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/fluentd/bin:$PATH"
 
