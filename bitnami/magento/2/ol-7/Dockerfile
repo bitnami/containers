@@ -9,9 +9,9 @@ RUN install_packages bzip2-libs ca-certificates cronie curl cyrus-sasl-lib expat
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
-RUN bitnami-pkg unpack php-7.2.26-4 --checksum 91a298036a301d99f9b7434c4c2d8ace24ab3be28e8b3a178fb50438932d868c
+RUN bitnami-pkg unpack php-7.2.27-0 --checksum 1c6dd8382928048eef5898d2e94b3296b41080ce7b9fe70ad74bbd4598c5b2fc
 RUN bitnami-pkg unpack mysql-client-10.2.30-0 --checksum e05168d0d2ce16b2909860720b0dea096b4ae6b0e3afd9721f78948f0bb46593
-RUN bitnami-pkg install libphp-7.2.26-3 --checksum dbec9c013eff8f08f8fdf6e7b053fdb1894f4d994f46cc31dd882607468b1248
+RUN bitnami-pkg install libphp-7.2.27-0 --checksum ce26afb558cb054f530cb2023441a8cbb4658945e49d36cb6b82558c9f4f7c39
 RUN bitnami-pkg unpack magento-2.3.3-0 --checksum a85d1c466bf6c73bf352b0d94b8cb23709d2f7a4c0e565573226fc79006958bc
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -22,7 +22,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.3-ol-7-r110" \
+    BITNAMI_IMAGE_VERSION="2.3.3-ol-7-r111" \
     ELASTICSEARCH_HOST="" \
     ELASTICSEARCH_PORT_NUMBER="" \
     EXTERNAL_HTTPS_PORT_NUMBER="443" \
