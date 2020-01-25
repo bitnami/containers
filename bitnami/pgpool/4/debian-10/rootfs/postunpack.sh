@@ -11,7 +11,7 @@
 # Load Pgpool env. variables
 eval "$(pgpool_env)"
 
-for dir in "$PGPOOL_TMP_DIR" "$PGPOOL_LOG_DIR" "$PGPOOL_CONF_DIR" "$PGPOOL_ETC_DIR" "$PGPOOL_DATA_DIR"; do
+for dir in "$PGPOOL_INITSCRIPTS_DIR" "$PGPOOL_TMP_DIR" "$PGPOOL_LOG_DIR" "$PGPOOL_CONF_DIR" "$PGPOOL_ETC_DIR" "$PGPOOL_DATA_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done

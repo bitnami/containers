@@ -7,7 +7,7 @@ ENV OS_ARCH="amd64" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl ldap-utils libaudit1 libbsd0 libc6 libcap-ng0 libedit2 libffi6 libgcc1 libgmp10 libgnutls30 libhogweed4 libicu63 libidn2-0 libldap-2.4-2 liblzma5 libnettle6 libnss-ldapd libp11-kit0 libpam-ldap libpam0g libsasl2-2 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 nslcd procps sudo unzip zlib1g
+RUN install_packages ca-certificates curl ldap-utils libaudit1 libbsd0 libc6 libcap-ng0 libedit2 libffi6 libgcc1 libgmp10 libgnutls30 libhogweed4 libicu63 libidn2-0 libldap-2.4-2 liblzma5 libnettle6 libnss-ldapd libp11-kit0 libpam-ldapd libpam0g libsasl2-2 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 nslcd procps sudo unzip zlib1g
 RUN . ./libcomponent.sh && component_unpack "postgresql-client" "10.11.0-0" --checksum 20345cd0ee4812b655a02e3ad2312fb31726109040c475e416d0f339264bd779
 RUN . ./libcomponent.sh && component_unpack "pgpool" "4.1.0-0" --checksum ffe53431510c628905c38c96c84f9fcceb952780cd3d92f98e521ed46c1f8b06
 RUN apt-get update && apt-get upgrade && \
@@ -22,7 +22,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="pgpool" \
-    BITNAMI_IMAGE_VERSION="4.1.0-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="4.1.0-debian-10-r1" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/pgpool/bin:$PATH"
 
 EXPOSE 5432
