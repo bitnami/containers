@@ -9,9 +9,9 @@ RUN install_packages ca-certificates cron curl dirmngr gnupg libbz2-1.0 libc6 li
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-0 --checksum 0364e80e08a89fda2d2d302609f813d5d497b6cb6bcf6643d2770b825abbc0fb
-RUN bitnami-pkg unpack php-7.3.13-0 --checksum c28416fc8f3e5a444c6377ef95dd95cbaf61a0e766558782d4ef64d32add8019
+RUN bitnami-pkg unpack php-7.3.14-0 --checksum 58ea3eac602c9e840afb1cde192bda1018c62e3485c41962bc0266b079dd731f
 RUN bitnami-pkg unpack mysql-client-10.3.21-0 --checksum 0c9df289473b7db87f6c0c076d9bdedcf48795b90c6e7588090b6dbb91538514
-RUN bitnami-pkg install libphp-7.3.13-0 --checksum ef3c4615c80aaf4a31f517cc9ffb2ccd7cc5d090067f13ccfcb39503e6e17e41
+RUN bitnami-pkg install libphp-7.3.14-0 --checksum b9d1872eeaf47fe678aaefd4d5925be1bbab64d67f808c14d849039a204faad8
 RUN bitnami-pkg unpack suitecrm-7.11.10-0 --checksum ad73e00590acb5710c1b22bfa18c26eb9a66e1c58a655107a4a79be728a41b21
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -22,7 +22,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="suitecrm" \
-    BITNAMI_IMAGE_VERSION="7.11.10-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="7.11.10-debian-10-r1" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
