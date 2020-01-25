@@ -17,7 +17,7 @@ RUN /build/install-gosu.sh
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="4.0.14-ol-7-r311" \
+    BITNAMI_IMAGE_VERSION="4.0.14-ol-7-r312" \
     PATH="/opt/bitnami/redis-sentinel/bin:$PATH"
 
 EXPOSE 26379
