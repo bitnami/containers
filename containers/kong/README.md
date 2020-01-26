@@ -52,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.5.0-ol-7-r3` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong/blob/1.5.0-ol-7-r3/1/ol-7/Dockerfile)
-* [`1-debian-10`, `1.5.0-debian-10-r1`, `1`, `1.5.0`, `1.5.0-r1`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong/blob/1.5.0-debian-10-r1/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.5.0-debian-10-r2`, `1`, `1.5.0`, `1.5.0-r2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong/blob/1.5.0-debian-10-r2/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kong GitHub repo](https://github.com/bitnami/bitnami-docker-kong).
 
