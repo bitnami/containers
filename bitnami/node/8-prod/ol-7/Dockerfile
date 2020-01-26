@@ -1,4 +1,4 @@
-FROM bitnami/node:8.17.0-ol-7-r41 as development
+FROM bitnami/node:8.17.0-ol-7-r42 as development
 
 ######
 
@@ -14,7 +14,7 @@ RUN yum upgrade -y && \
 COPY --from=development /opt/bitnami/node /opt/bitnami/node
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="8.17.0-ol-7-r35-prod" \
+    BITNAMI_IMAGE_VERSION="8.17.0-ol-7-r36-prod" \
     PATH="/opt/bitnami/node/bin:$PATH"
 
 CMD [ "node" ]
