@@ -19,7 +19,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.29-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="5.7.29-debian-10-r3" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH"
 
