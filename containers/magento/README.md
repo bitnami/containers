@@ -27,7 +27,7 @@ $ docker-compose up -d
 
 # How to deploy Magento in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Magento Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/magento).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Magento Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/magento).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
