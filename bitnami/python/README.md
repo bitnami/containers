@@ -50,20 +50,20 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`3.8-ol-7-prod`, `3.8.1-ol-7-r41-prod` (3.8-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.1-ol-7-r41-prod/3.8-prod/ol-7/Dockerfile)
 * [`3.8-ol-7`, `3.8.1-ol-7-r37` (3.8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.1-ol-7-r37/3.8/ol-7/Dockerfile)
-* [`3.8-debian-10`, `3.8.1-debian-10-r3`, `3.8`, `3.8.1`, `3.8.1-r3` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.1-debian-10-r3/3.8/debian-10/Dockerfile)
-* [`3.8-debian-10-prod`, `3.8.1-debian-10-r2-prod`, `3.8-prod`, `3.8.1-prod`, `3.8.1-r2-prod` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.1-debian-10-r2-prod/3.8-prod/debian-10/Dockerfile)
+* [`3.8-debian-10-prod`, `3.8.1-debian-10-r3-prod`, `3.8-prod`, `3.8.1-prod` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.1-debian-10-r3-prod/3.8-prod/debian-10/Dockerfile)
+* [`3.8-debian-10`, `3.8.1-debian-10-r3`, `3.8`, `3.8.1` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.1-debian-10-r3/3.8/debian-10/Dockerfile)
 * [`3.7-ol-7`, `3.7.6-ol-7-r37` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.6-ol-7-r37/3.7/ol-7/Dockerfile)
 * [`3.7-ol-7-prod`, `3.7.6-ol-7-r36-prod` (3.7-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.6-ol-7-r36-prod/3.7-prod/ol-7/Dockerfile)
-* [`3.7-debian-10`, `3.7.6-debian-10-r3`, `3.7`, `3.7.6`, `3.7.6-r3`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.6-debian-10-r3/3.7/debian-10/Dockerfile)
-* [`3.7-debian-10-prod`, `3.7.6-debian-10-r2-prod`, `3.7-prod`, `3.7.6-prod`, `3.7.6-r2-prod`, `latest-prod` (3.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.6-debian-10-r2-prod/3.7-prod/debian-10/Dockerfile)
+* [`3.7-debian-10`, `3.7.6-debian-10-r3`, `3.7`, `3.7.6`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.6-debian-10-r3/3.7/debian-10/Dockerfile)
+* [`3.7-debian-10-prod`, `3.7.6-debian-10-r2-prod`, `3.7-prod`, `3.7.6-prod`, `latest-prod` (3.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.6-debian-10-r2-prod/3.7-prod/debian-10/Dockerfile)
 * [`3.6-ol-7-prod`, `3.6.10-ol-7-r40-prod` (3.6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-ol-7-r40-prod/3.6-prod/ol-7/Dockerfile)
 * [`3.6-ol-7`, `3.6.10-ol-7-r37` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-ol-7-r37/3.6/ol-7/Dockerfile)
-* [`3.6-debian-10`, `3.6.10-debian-10-r3`, `3.6`, `3.6.10`, `3.6.10-r3` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-debian-10-r3/3.6/debian-10/Dockerfile)
-* [`3.6-debian-10-prod`, `3.6.10-debian-10-r2-prod`, `3.6-prod`, `3.6.10-prod`, `3.6.10-r2-prod` (3.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-debian-10-r2-prod/3.6-prod/debian-10/Dockerfile)
+* [`3.6-debian-10`, `3.6.10-debian-10-r3`, `3.6`, `3.6.10` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-debian-10-r3/3.6/debian-10/Dockerfile)
+* [`3.6-debian-10-prod`, `3.6.10-debian-10-r2-prod`, `3.6-prod`, `3.6.10-prod` (3.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-debian-10-r2-prod/3.6-prod/debian-10/Dockerfile)
 * [`2-ol-7`, `2.7.17-ol-7-r106` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.17-ol-7-r106/2/ol-7/Dockerfile)
 * [`2-ol-7-prod`, `2.7.17-ol-7-r104-prod` (2-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.17-ol-7-r104-prod/2-prod/ol-7/Dockerfile)
-* [`2-debian-10`, `2.7.17-debian-10-r3`, `2`, `2.7.17`, `2.7.17-r3` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.17-debian-10-r3/2/debian-10/Dockerfile)
-* [`2-debian-10-prod`, `2.7.17-debian-10-r2-prod`, `2-prod`, `2.7.17-prod`, `2.7.17-r2-prod` (2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.17-debian-10-r2-prod/2-prod/debian-10/Dockerfile)
+* [`2-debian-10`, `2.7.17-debian-10-r3`, `2`, `2.7.17` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.17-debian-10-r3/2/debian-10/Dockerfile)
+* [`2-debian-10-prod`, `2.7.17-debian-10-r2-prod`, `2-prod`, `2.7.17-prod` (2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.17-debian-10-r2-prod/2-prod/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/python GitHub repo](https://github.com/bitnami/bitnami-docker-python).
 
