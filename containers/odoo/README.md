@@ -38,12 +38,12 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`13-ol-7`, `13.0.20200110-ol-7-r14` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20200110-ol-7-r14/13/ol-7/Dockerfile)
-* [`13-debian-10`, `13.0.20200110-debian-10-r2`, `13`, `13.0.20200110`, `13.0.20200110-r2`, `latest` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20200110-debian-10-r2/13/debian-10/Dockerfile)
+* [`13-ol-7`, `13.0.20200110-ol-7-r15` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20200110-ol-7-r15/13/ol-7/Dockerfile)
+* [`13-debian-10`, `13.0.20200110-debian-10-r2`, `13`, `13.0.20200110`, `latest` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20200110-debian-10-r2/13/debian-10/Dockerfile)
 * [`12-ol-7`, `12.0.20200115-ol-7-r9` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20200115-ol-7-r9/12/ol-7/Dockerfile)
-* [`12-debian-10`, `12.0.20200115-debian-10-r0`, `12`, `12.0.20200115`, `12.0.20200115-r0` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20200115-debian-10-r0/12/debian-10/Dockerfile)
+* [`12-debian-10`, `12.0.20200115-debian-10-r0`, `12`, `12.0.20200115` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20200115-debian-10-r0/12/debian-10/Dockerfile)
 * [`11-ol-7`, `11.0.20200115-ol-7-r9` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20200115-ol-7-r9/11/ol-7/Dockerfile)
-* [`11-debian-10`, `11.0.20200115-debian-10-r2`, `11`, `11.0.20200115`, `11.0.20200115-r2` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20200115-debian-10-r2/11/debian-10/Dockerfile)
+* [`11-debian-10`, `11.0.20200115-debian-10-r2`, `11`, `11.0.20200115` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20200115-debian-10-r2/11/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
 
