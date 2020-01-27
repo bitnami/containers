@@ -4,10 +4,10 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs ca-certificates curl dbus-libs elfutils-libelf elfutils-libs expat fontconfig fontconfig-devel glib2 glibc gzip hostname libaio-devel libattr libblkid libcap libffi libgcc libgcrypt libgpg-error libmount libselinux libstdc++ libuuid lz4 nspr nss nss-util pcre procps-ng sudo systemd-libs tar wget which xz-libs zlib
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-6.5.3-0-linux-x86_64-ol-7.tar.gz && \
-    echo "339f1f8562699c7fa7b8a6af4407f5249d2affa80452acacb065637f8b1d3848  /tmp/bitnami/pkg/cache/grafana-6.5.3-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/grafana-6.5.3-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/grafana-6.5.3-0-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-6.6.0-0-linux-x86_64-ol-7.tar.gz && \
+    echo "6edb6bab7354cbd1920d8b4d809a0879d714ed5115e15421aaff871eff4fa499  /tmp/bitnami/pkg/cache/grafana-6.6.0-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/grafana-6.6.0-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/grafana-6.6.0-0-linux-x86_64-ol-7.tar.gz
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN mv /opt/bitnami/grafana/conf/sample.ini /opt/bitnami/grafana/conf/grafana.ini
@@ -16,7 +16,7 @@ RUN mkdir -p /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/ && chmod g+rw
 COPY rootfs /
 RUN /grafana-plugins.sh
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="6.5.3-ol-7-r9" \
+    BITNAMI_IMAGE_VERSION="6.6.0-ol-7-r0" \
     PATH="/opt/bitnami/grafana/bin:$PATH"
 
 EXPOSE 3000
