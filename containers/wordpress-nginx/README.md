@@ -11,7 +11,7 @@ https://nginx.org/
 ## Docker Compose
 
 ```bash
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-wordpress-nginx/master/5/debian-9/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-wordpress-nginx/master/docker-compose.yml
 $ docker-compose up
 ```
 
