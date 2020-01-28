@@ -185,7 +185,8 @@ EOF
   },
   {rabbitmq_management,
     [
-      {listener, [{port, $RABBITMQ_MANAGER_PORT_NUMBER}, {ip, "$RABBITMQ_MANAGER_BIND_IP"}]}
+      {listener, [{port, $RABBITMQ_MANAGER_PORT_NUMBER}, {ip, "$RABBITMQ_MANAGER_BIND_IP"}]},
+      {strict_transport_security, "max-age=0;"}
     ]
   }
 ].
