@@ -10,7 +10,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl dirmngr ghostscript gnupg imagemagick libbz2-1.0 libc6 libgcc1 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 procps sudo unzip zlib1g
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
-RUN bitnami-pkg install node-8.17.0-0 --checksum 7044e4fc24a5aec22a3c6fd63425ce977f0561f619607609cb048e7b0e16e899
+RUN bitnami-pkg install node-12.14.1-0 --checksum b023f28cd1b376b2ff986cc55fb4476e2ec0444374decb8704f348b67d87f4ef
 RUN bitnami-pkg unpack parse-dashboard-2.0.5-0 --checksum 8c9d059c408a43bdc4b6d025aa9587b846806f9ad1e2caeba597c3fe240d1fd1
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -19,7 +19,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="2.0.5-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="2.0.5-debian-10-r4" \
     NAMI_PREFIX="/.nami" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
