@@ -32,10 +32,12 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-scratch`, `1.8.0-scratch-r0`, `1`, `1.8.0`, `1.8.0-r0`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-assetsvc/blob/1.8.0/1/scratch/Dockerfile)
+* [`1-scratch`, `1.8.1-scratch-r0`, `1`, `1.8.1`, `1.8.1-r0`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-assetsvc/blob/1.8.1/1/scratch/Dockerfile)
 
 # Configuration
 
