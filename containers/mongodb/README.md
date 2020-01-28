@@ -49,11 +49,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4.2-ol-7`, `4.2.3-ol-7-r2` (4.2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.3-ol-7-r2/4.2/ol-7/Dockerfile)
-* [`4.2-debian-10`, `4.2.3-debian-10-r2`, `4.2`, `4.2.3`, `4.2.3-r2` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.3-debian-10-r2/4.2/debian-10/Dockerfile)
+* [`4.2-debian-10`, `4.2.3-debian-10-r2`, `4.2`, `4.2.3` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.3-debian-10-r2/4.2/debian-10/Dockerfile)
 * [`4.0-ol-7`, `4.0.15-ol-7-r2` (4.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.15-ol-7-r2/4.0/ol-7/Dockerfile)
-* [`3.6-ol-7`, `3.6.17-ol-7-r2` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.17-ol-7-r2/3.6/ol-7/Dockerfile)
-* [`3.6-debian-10`, `0.0.0-debian-10-r0`, `3.6`, `0.0.0`, `0.0.0-r0` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/3.6/debian-10/Dockerfile)
-* [`4.0-debian-10`, `0.0.0-debian-10-r0`, `4.0`, `0.0.0`, `0.0.0-r0`, `latest` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/4.0/debian-10/Dockerfile)
+* [`3.6-ol-7`, `3.6.17-ol-7-r3` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.17-ol-7-r3/3.6/ol-7/Dockerfile)
+* [`3.6-debian-10`, `0.0.0-debian-10-r0`, `3.6`, `0.0.0` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/3.6/debian-10/Dockerfile)
+* [`4.0-debian-10`, `0.0.0-debian-10-r0`, `4.0`, `0.0.0`, `latest` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/4.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
@@ -436,7 +436,57 @@ volumes:
     driver: local
 ```
 
-Scale the number of secondary nodes using:
+and run docker-compose using:
+
+```bash
+$ docker-compose up --detach
+```
+
+In the case you want to scale the number of secondary nodes using the docker-compose parameter `--scale`, the MONGODB_ADVERTISED_HOSTNAME must not be set in mongodb-secondary and mongodb-arbiter defintions.
+
+```yaml
+version: '2'
+
+services:
+  mongodb-primary:
+    image: 'bitnami/mongodb:latest'
+    environment:
+      - MONGODB_ADVERTISED_HOSTNAME=mongodb-primary
+      - MONGODB_REPLICA_SET_MODE=primary
+      - MONGODB_ROOT_PASSWORD=password123
+      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+
+    volumes:
+      - 'mongodb_master_data:/bitnami'
+
+  mongodb-secondary:
+    image: 'bitnami/mongodb:latest'
+    depends_on:
+      - mongodb-primary
+    environment:
+      - MONGODB_REPLICA_SET_MODE=secondary
+      - MONGODB_PRIMARY_HOST=mongodb-primary
+      - MONGODB_PRIMARY_PORT_NUMBER=27017
+      - MONGODB_PRIMARY_ROOT_PASSWORD=password123
+      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+
+  mongodb-arbiter:
+    image: 'bitnami/mongodb:latest'
+    depends_on:
+      - mongodb-primary
+    environment:
+      - MONGODB_REPLICA_SET_MODE=arbiter
+      - MONGODB_PRIMARY_HOST=mongodb-primary
+      - MONGODB_PRIMARY_PORT_NUMBER=27017
+      - MONGODB_PRIMARY_ROOT_PASSWORD=password123
+      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+
+volumes:
+  mongodb_master_data:
+    driver: local
+```
+
+And the run docker-compose using:
 
 ```bash
 $ docker-compose up --detach --scale mongodb-primary=1 --scale mongodb-secondary=3 --scale mongodb-arbiter=1
@@ -445,7 +495,7 @@ $ docker-compose up --detach --scale mongodb-primary=1 --scale mongodb-secondary
 The above command scales up the number of secondary nodes to `3`. You can scale down in the same way.
 
 > **Note**: You should not scale up/down the number of primary nodes. Always have only one primary node running.
-
+> **Note**: In this case, the client has to be in the same docker network to be able to reach all the nodes.
 
 ### How is a replica set configured?
 
