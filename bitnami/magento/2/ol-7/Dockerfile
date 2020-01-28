@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de3935
 RUN bitnami-pkg unpack php-7.2.27-0 --checksum 1c6dd8382928048eef5898d2e94b3296b41080ce7b9fe70ad74bbd4598c5b2fc
 RUN bitnami-pkg unpack mysql-client-10.2.30-0 --checksum e05168d0d2ce16b2909860720b0dea096b4ae6b0e3afd9721f78948f0bb46593
 RUN bitnami-pkg install libphp-7.2.27-0 --checksum ce26afb558cb054f530cb2023441a8cbb4658945e49d36cb6b82558c9f4f7c39
-RUN bitnami-pkg unpack magento-2.3.3-0 --checksum a85d1c466bf6c73bf352b0d94b8cb23709d2f7a4c0e565573226fc79006958bc
+RUN bitnami-pkg unpack magento-2.3.4-0 --checksum 3570df3cf61e7bbdbd7d289172a61d06f9ee1f3bdd4beb8266f8aafcec730e00
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -22,7 +22,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.3-ol-7-r113" \
+    BITNAMI_IMAGE_VERSION="2.3.4-ol-7-r0" \
     ELASTICSEARCH_HOST="" \
     ELASTICSEARCH_PORT_NUMBER="" \
     EXTERNAL_HTTPS_PORT_NUMBER="443" \
