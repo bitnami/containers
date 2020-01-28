@@ -70,8 +70,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`6-photon-3`, `6.17.1-photon-3-r0` (6/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-photon-3-r0/6/photon-3/Dockerfile)
 * [`6-ol-7-prod`, `6.17.1-ol-7-r306-prod` (6-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-ol-7-r306-prod/6-prod/ol-7/Dockerfile)
 * [`6-ol-7`, `6.17.1-ol-7-r298` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-ol-7-r298/6/ol-7/Dockerfile)
+* [`6-debian-10`, `6.17.1-debian-10-r4`, `6`, `6.17.1` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-debian-10-r4/6/debian-10/Dockerfile)
 * [`6-debian-10-prod`, `6.17.1-debian-10-r3-prod`, `6-prod`, `6.17.1-prod` (6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-debian-10-r3-prod/6-prod/debian-10/Dockerfile)
-* [`6-debian-10`, `6.17.1-debian-10-r3`, `6`, `6.17.1` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/6.17.1-debian-10-r3/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
