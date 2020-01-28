@@ -11,7 +11,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 libgeoip1 libpcre3 libssl1.1 procps sudo unzip zlib1g
 RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-0" --checksum 546f22afa27cf4caf9eadb7a29bd052d90584f885225eb4d173762a70ac56b04
-RUN . ./libcomponent.sh && component_unpack "kubeapps" "1.8.0-0" --checksum afbf72e8a157718983c2181ee2d6875cd84e42a5f54ac7ddebee7a987118366a
+RUN . ./libcomponent.sh && component_unpack "kubeapps" "1.8.1-0" --checksum 7ddd01ea02b733c425f0d03d9b548d26f60152cf89697b45b5b330bfa6acb7f7
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -25,7 +25,7 @@ RUN rm -rf /app && \
     ln -sf /opt/bitnami/kubeapps /opt/bitnami/kubeapps-dashboard && \
     mv /opt/bitnami/kubeapps/build /app
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.8.0-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="1.8.1-debian-10-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/kubeapps/bin:$PATH"
 
