@@ -9,7 +9,7 @@ RUN install_packages bzip2-libs ca-certificates curl cyrus-sasl-lib freetds-libs
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack php-7.3.14-0 --checksum e99cb40b76f03fde9fe864a47ef2be3643dc2f9a859c764e1ba626577d13c893
-RUN bitnami-pkg install node-8.17.0-0 --checksum c6720534f7fa5167debe21fb272168c98ef912b1b8c57eb50a21669b6ca16192
+RUN bitnami-pkg install node-12.14.1-0 --checksum 9d8f7d771fadcdeb655759ded02bbff83a54fb7ef7f1d5158b2137ea064e5bda
 RUN bitnami-pkg install laravel-6.12.0-0 --checksum 2c1e7abf85e43c611ebff07649973f88aa992ef3ada6d9c2c06e974963571a64
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -19,7 +19,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="laravel" \
-    BITNAMI_IMAGE_VERSION="6.12.0-ol-7-r4" \
+    BITNAMI_IMAGE_VERSION="6.12.0-ol-7-r5" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules"
 
 EXPOSE 3000
