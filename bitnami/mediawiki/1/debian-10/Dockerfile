@@ -24,7 +24,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="mediawiki" \
-    BITNAMI_IMAGE_VERSION="1.34.0-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="1.34.0-debian-10-r3" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     MARIADB_HOST="mariadb" \
