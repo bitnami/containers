@@ -12,8 +12,8 @@ RUN install_packages ca-certificates curl dirmngr ghostscript gnupg imagemagick 
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg install node-10.18.1-0 --checksum 16a8470725407d4f9262681a284e7eb3241600d414a13458fb635ab983bd09ff
-RUN bitnami-pkg unpack mysql-client-10.3.21-0 --checksum 0c9df289473b7db87f6c0c076d9bdedcf48795b90c6e7588090b6dbb91538514
-RUN bitnami-pkg unpack ghost-3.3.0-0 --checksum ba97931f4b9f56014f59c49c8652c585a9af3dfe127b5ffe83b67575a77401ac
+RUN bitnami-pkg unpack mysql-client-10.3.22-0 --checksum 9529ac5187264223e3852602f7d9a51ed0b2547bbed99f3d05f3b7fa20adf57f
+RUN bitnami-pkg unpack ghost-3.4.0-0 --checksum 008f4dbabdabaf2e49382ac667f50ece465e7dbfc6dc1b32e614ae8ebfcaaf7d
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -22,7 +22,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="3.3.0-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="3.4.0-debian-10-r0" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
