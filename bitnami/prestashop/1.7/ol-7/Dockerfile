@@ -10,7 +10,7 @@ RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
 RUN bitnami-pkg unpack php-7.2.27-0 --checksum 1c6dd8382928048eef5898d2e94b3296b41080ce7b9fe70ad74bbd4598c5b2fc
-RUN bitnami-pkg unpack mysql-client-10.1.43-0 --checksum eb30f14e1bc364fea5fc47b0d17d4a1cb506b89339c4e88b0f9f0c879dd99434
+RUN bitnami-pkg unpack mysql-client-10.1.44-0 --checksum eaa86d4e4e44cefa41b4e12b3dca73e9d04eedf276febb6fddbb41c4a0c4283b
 RUN bitnami-pkg install libphp-7.2.27-0 --checksum ce26afb558cb054f530cb2023441a8cbb4658945e49d36cb6b82558c9f4f7c39
 RUN bitnami-pkg unpack prestashop-1.7.6-3-0 --checksum 075fa0da982894cdc54d69b24b673dad2497988a0e6fda74caf6d4fad75143b7
 RUN yum upgrade -y && \
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-3-ol-7-r6" \
+    BITNAMI_IMAGE_VERSION="1.7.6-3-ol-7-r7" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
