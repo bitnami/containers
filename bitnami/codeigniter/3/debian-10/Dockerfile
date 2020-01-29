@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl dirmngr gnupg libbz2-1.0 libc6 libcom-
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack php-7.3.14-0 --checksum 58ea3eac602c9e840afb1cde192bda1018c62e3485c41962bc0266b079dd731f
-RUN bitnami-pkg install mysql-client-10.3.21-0 --checksum 0c9df289473b7db87f6c0c076d9bdedcf48795b90c6e7588090b6dbb91538514
+RUN bitnami-pkg install mysql-client-10.3.22-0 --checksum 9529ac5187264223e3852602f7d9a51ed0b2547bbed99f3d05f3b7fa20adf57f
 RUN bitnami-pkg install codeigniter-3.1.11-0 --checksum 349fc44d9aeaece26f3ffabcb31c52d1fda8d94d0c2f09e66a99befdb90ec99b
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -18,7 +18,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="codeigniter" \
-    BITNAMI_IMAGE_VERSION="3.1.11-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="3.1.11-debian-10-r5" \
     CODEIGNITER_PROJECT_NAME="myapp" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
