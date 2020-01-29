@@ -33,7 +33,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.1.1-6020-ol-7-r0` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.1.1-6020-ol-7-r0/3/ol-7/Dockerfile)
-* [`3-debian-10`, `3.1.0-6019-debian-10-r0`, `3`, `3.1.0-6019`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.1.0-6019-debian-10-r0/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.1.1-6020-debian-10-r0`, `3`, `3.1.1-6020`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.1.1-6020-debian-10-r0/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/reportserverenterprise GitHub repo](https://github.com/bitnami/bitnami-docker-reportserverenterprise).
 
