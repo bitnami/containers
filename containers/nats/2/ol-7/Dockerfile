@@ -14,7 +14,7 @@ RUN yum upgrade -y && \
 COPY rootfs /
 RUN chown -R 1001:root /opt/bitnami/nats && chmod g+rwX /opt/bitnami/nats
 ENV BITNAMI_APP_NAME="nats" \
-    BITNAMI_IMAGE_VERSION="2.1.2-ol-7-r71" \
+    BITNAMI_IMAGE_VERSION="2.1.2-ol-7-r72" \
     PATH="/opt/bitnami/nats/bin:$PATH"
 
 EXPOSE 4222 6222 8222
