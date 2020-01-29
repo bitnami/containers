@@ -2,7 +2,6 @@ FROM bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    BITNAMI_PKG_EXTRA_DIRS="/opt/bitnami/kibana/optimize" \
     HOME="/" \
     PATH="/opt/bitnami/kibana/bin:/opt/bitnami/nami/bin:$PATH"
 
@@ -20,7 +19,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="7.5.2-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="7.5.2-debian-10-r4" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
@@ -30,4 +29,4 @@ EXPOSE 5601
 
 USER 1001
 ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "/run.sh" ]
+CMD [ "nami", "start", "--foreground", "kibana" ]
