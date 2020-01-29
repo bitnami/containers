@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libaio1 libaudit1 libc6 libcap-ng0 libgcc1 libjemalloc2 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 procps sudo unzip zlib1g
-RUN . ./libcomponent.sh && component_unpack "mariadb" "10.2.30-0" --checksum bbcfdc1d49c8cc7a1f656bdceebe4671abe9939161e05be1d3890d47ecb36b5f
+RUN . ./libcomponent.sh && component_unpack "mariadb" "10.2.31-0" --checksum 0556a9e929356dabd8a5022a150f9600fceca34049a2d7558c357960d60f629f
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -19,7 +19,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.30-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="10.2.31-debian-10-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
