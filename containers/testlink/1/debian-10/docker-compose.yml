@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:10.3'
+    environment:
+      - MARIADB_USER=bn_testlink
+      - MARIADB_DATABASE=bitnami_testlink
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - 'mariadb_data:/bitnami'
+  testlink:
+    image: 'bitnami/testlink:1'
+    environment:
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - TESTLINK_DATABASE_USER=bn_testlink
+      - TESTLINK_DATABASE_NAME=bitnami_testlink
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - 'testlink_data:/bitnami'
+    depends_on:
+      - mariadb
+
+volumes:
+  mariadb_data:
+    driver: local
+  testlink_data:
+    driver: local
