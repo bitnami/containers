@@ -1,0 +1,17 @@
+{
+  "databaseName": "{{$global.env.TESTLINK_DATABASE_NAME}}",
+  "databasePassword": "{{$global.env.TESTLINK_DATABASE_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
+  "databaseUser": "{{$global.env.TESTLINK_DATABASE_USER}}",
+  "email": "{{$global.env.TESTLINK_EMAIL}}",
+  "language": "{{$global.env.TESTLINK_LANGUAGE}}",
+  "password": "{{$global.env.TESTLINK_PASSWORD}}",
+  "smtpConnectionMode": "{{$global.env.SMTP_CONNECTION_MODE}}",
+  "smtpEnable": "{{$global.env.SMTP_ENABLE}}",
+  "smtpHost": "{{$global.env.SMTP_HOST}}",
+  "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
+  "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "username": "{{$global.env.TESTLINK_USERNAME}}"
+}
