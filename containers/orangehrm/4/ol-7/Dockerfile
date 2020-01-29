@@ -10,7 +10,7 @@ RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
 RUN bitnami-pkg unpack php-7.2.27-0 --checksum 1c6dd8382928048eef5898d2e94b3296b41080ce7b9fe70ad74bbd4598c5b2fc
-RUN bitnami-pkg unpack mysql-client-10.2.30-0 --checksum e05168d0d2ce16b2909860720b0dea096b4ae6b0e3afd9721f78948f0bb46593
+RUN bitnami-pkg unpack mysql-client-10.2.31-0 --checksum 4a6db023e4d0130efd6a31e95d335f5f4114444e5f1ae363acee6bb30c0644c1
 RUN bitnami-pkg install libphp-7.2.27-0 --checksum ce26afb558cb054f530cb2023441a8cbb4658945e49d36cb6b82558c9f4f7c39
 RUN bitnami-pkg unpack orangehrm-4.3.4-0-0 --checksum 0ec8ae50d2060d6464eb402b81ce0aae00f55e5e29354f0c81f896ea6885ad94
 RUN yum upgrade -y && \
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.3.4-0-ol-7-r90" \
+    BITNAMI_IMAGE_VERSION="4.3.4-0-ol-7-r91" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
