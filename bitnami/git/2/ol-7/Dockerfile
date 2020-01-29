@@ -16,7 +16,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="git" \
-    BITNAMI_IMAGE_VERSION="2.25.0-ol-7-r12"
+    BITNAMI_IMAGE_VERSION="2.25.0-ol-7-r13"
 
 ENTRYPOINT [ "git" ]
 CMD [ "--help" ]
