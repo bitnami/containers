@@ -44,7 +44,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.9.0-ol-7-r5` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.9.0-ol-7-r5/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.9.0-ol-7-r6` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.9.0-ol-7-r6/1/ol-7/Dockerfile)
 * [`1-debian-10`, `1.9.0-debian-10-r4`, `1`, `1.9.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.9.0-debian-10-r4/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
@@ -163,6 +163,73 @@ $ docker logs fluentd
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+
+# Understand the structure of this image
+
+The Bitnami Fluentd Open Source Docker image is built using a Dockerfile with the structure below:
+
+```Dockerfile
+FROM bitnami/minideb:buster
+...
+COPY prebuildfs /
+# Install required system packages and dependencies
+RUN install_packages xxx yyy zzz
+RUN . ./libcomponent.sh && component_unpack "ruby" "a.b.c-0"
+RUN . ./libcomponent.sh && component_unpack "fluentd" "d.e.f-0"
+...
+COPY rootfs /
+RUN /postunpack.sh
+...
+ENV BITNAMI_APP_NAME="fluentd" ...
+EXPOSE 24224 5140
+WORKDIR /opt/bitnami/fluentd
+USER 1001
+...
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD [ "/run.sh" ]
+```
+
+The Dockerfile has several sections related to:
+
+- Components installation
+- Components static configuration
+- Environment variables
+- Ports to be exposed
+- Working directory and user
+  - Note that once the user is set to 1001, unprivileged commands cannot be executed any longer.
+- Entrypoint and command
+  - Take into account that these actions are not executed until the container is started.
+
+# Customize this image
+
+The Bitnami Fluentd Open Source Docker image is designed to be extended so it can be used as the base image for your custom Fluentd containers.
+
+> Note: Read the [previous section](#understand-the-structure-of-this-image) to understand the Dockerfile structure before extending this image.
+
+## Extend this image
+
+Before extending this image, please note there are certain configuration settings you can modify using the original image:
+
+- Settings that can be adapted using environment variables. For instance, you can modify the Fluentd command-line options setting the environment variable `FLUENTD_OPT`.
+- [Replacing the default configuration file by mounting your own configuration file ](#configuration).
+
+If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
+
+```Dockerfile
+FROM bitnami/fluentd
+## Put your customizations below
+...
+```
+
+Here is an example of extending the image installing custom Fluentd plugins:
+
+```Dockerfile
+FROM bitnami/fluentd
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+## Install custom Fluentd plugins
+RUN fluent-gem install 'fluent-plugin-docker_metadata_filter'
+```
 
 # Maintenance
 
