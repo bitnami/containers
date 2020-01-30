@@ -1,0 +1,6 @@
+version: '2'
+services:
+  golang:
+    tty: true # Enables debugging capabilities when attached to this container.
+    image: bitnami/golang:1.13-ol-7
+    command: ["sleep", "infinity"] # To keep the container running
