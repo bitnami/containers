@@ -18,7 +18,7 @@ RUN /build/install-gosu.sh
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="10.11.0-ol-7-r82" \
+    BITNAMI_IMAGE_VERSION="10.11.0-ol-7-r83" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
