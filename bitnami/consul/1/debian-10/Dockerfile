@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl procps sudo unzip
-RUN . ./libcomponent.sh && component_unpack "consul" "1.6.2-0" --checksum 4263c69e0842d561a159c373c296916f62666e5ca2b2645040fa8f02ca8d6d90
+RUN . ./libcomponent.sh && component_unpack "consul" "1.6.3-0" --checksum c02b9f1130fab2c87edc2bb7ba1a4e23102f6307c23b2f9b54f5eb07458b8ce1
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -18,7 +18,7 @@ RUN curl --silent -L https://github.com/bitnami/render-template/releases/downloa
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.6.2-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="1.6.3-debian-10-r0" \
     PATH="/opt/bitnami/consul/bin:$PATH"
 
 EXPOSE 8300 8301 8500 8600
