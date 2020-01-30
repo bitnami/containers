@@ -8,10 +8,10 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl glibc gzip hostname libaio libaio-devel libgcc procps-ng sudo tar which zlib
+RUN install_packages ca-certificates curl glibc gzip hostname libaio libaio-devel procps-ng sudo tar which zlib
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
-RUN bitnami-pkg install java-1.8.242-0 --checksum 974f750091ac1bf18cc1ce9472ef5ed7c1b328a2c17471cb9ac810fcded67151
+RUN bitnami-pkg install java-11.0.6-0 --checksum 44f5ec63dbe8d2ea9aaea237cec2d8821ac3ee6fa2812c295c0fa04068d0e08e
 RUN bitnami-pkg unpack wildfly-18.0.1-3 --checksum ef61f80eda0235ae6a2a1ed7b91f9cef342216234a6b65ce5edf552cca6377c5
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="18.0.1-ol-7-r80" \
+    BITNAMI_IMAGE_VERSION="18.0.1-ol-7-r81" \
     NAMI_PREFIX="/.nami" \
     WILDFLY_HOME="/home/wildfly" \
     WILDFLY_JAVA_HOME="" \
