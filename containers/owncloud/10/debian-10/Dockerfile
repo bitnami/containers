@@ -10,7 +10,7 @@ RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-0 --checksum 0364e80e08a89fda2d2d302609f813d5d497b6cb6bcf6643d2770b825abbc0fb
 RUN bitnami-pkg unpack php-7.2.27-0 --checksum 6456864bfa1f9551801e9577b275a0226c40d9ec5ee8dc7bba19212f5f73ba4b
-RUN bitnami-pkg unpack mysql-client-10.3.21-0 --checksum 0c9df289473b7db87f6c0c076d9bdedcf48795b90c6e7588090b6dbb91538514
+RUN bitnami-pkg unpack mysql-client-10.3.22-0 --checksum 9529ac5187264223e3852602f7d9a51ed0b2547bbed99f3d05f3b7fa20adf57f
 RUN bitnami-pkg install libphp-7.2.27-0 --checksum 7c66d4776bf47eca1e83808a6540e48089bbda747aec9595285856991b03ff5e
 RUN bitnami-pkg unpack owncloud-10.3.2-0 --checksum e08f85570269aeb4936739a30aa260172018ea5a41f9045ed722ddb59d4dcb7c
 RUN apt-get update && apt-get upgrade && \
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.3.2-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="10.3.2-debian-10-r5" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
