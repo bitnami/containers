@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7-ol-7`, `7.2.0-ol-7-r239` (7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.2.0-ol-7-r239/7/ol-7/Dockerfile)
-* [`7-debian-10`, `7.2.0-debian-10-r4`, `7`, `7.2.0`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.2.0-debian-10-r4/7/debian-10/Dockerfile)
+* [`7-debian-10`, `7.2.0-debian-10-r5`, `7`, `7.2.0`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.2.0-debian-10-r5/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jasperreports GitHub repo](https://github.com/bitnami/bitnami-docker-jasperreports).
 
