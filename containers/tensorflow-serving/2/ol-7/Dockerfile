@@ -10,7 +10,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel libgcc libstdc++ procps-ng sudo tar which
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
-RUN bitnami-pkg unpack tensorflow-serving-2.0.0-0 --checksum 8e5efddeb6d3b4e15d5094c0a9014955c3e7ec17f21f861f6e2eace1b16fc922
+RUN bitnami-pkg unpack tensorflow-serving-2.1.0-0 --checksum 8b83500719420b7aa0f6935ab1efb95f4d1cd904a5dd28cbfb8823c70a69ce1b
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -18,7 +18,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="2.0.0-ol-7-r82" \
+    BITNAMI_IMAGE_VERSION="2.1.0-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     TENSORFLOW_SERVING_ENABLE_MONITORING="no" \
     TENSORFLOW_SERVING_MODEL_NAME="resnet" \
