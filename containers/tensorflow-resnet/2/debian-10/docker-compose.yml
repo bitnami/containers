@@ -1,0 +1,24 @@
+version: '2'
+services:
+  tensorflow-serving:
+    image: 'bitnami/tensorflow-serving:2'
+    environment:
+      - TENSORFLOW_SERVING_MODEL_NAME=resnet
+    ports:
+      - 8500:8500
+      - 8501:8501
+    volumes:
+      - 'tensorflow_serving_data:/bitnami'
+      - '/tmp/model-data:/bitnami/model-data'
+  tensorflow-resnet:
+    image: 'bitnami/tensorflow-resnet:2'
+    depends_on:
+      - tensorflow-serving
+    volumes:
+      - 'tensorflow_resnet_data:/bitnami'
+      - '/tmp/model-data:/bitnami/model-data'
+volumes:
+  tensorflow_serving_data:
+    driver: local
+  tensorflow_resnet_data:
+    driver: local
