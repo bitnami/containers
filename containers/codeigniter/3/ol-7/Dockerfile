@@ -9,7 +9,7 @@ RUN install_packages bzip2-libs ca-certificates curl cyrus-sasl-lib freetds-libs
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack php-7.3.14-0 --checksum e99cb40b76f03fde9fe864a47ef2be3643dc2f9a859c764e1ba626577d13c893
-RUN bitnami-pkg install mysql-client-10.3.21-0 --checksum 9e012f0e449a963c923c8ea7a5cc2ab2c688564ed910eaab2aef1ad70c5d8e4b
+RUN bitnami-pkg install mysql-client-10.3.22-0 --checksum a79d0068a2219cfa03e249f6eb38945b4f0c5a4d116771bcbe971470b0c29417
 RUN bitnami-pkg install codeigniter-3.1.11-1 --checksum 688a0ac5b62282e30398fa20f4d0b4e8c0c15575fa1b53328048a23889d9d711
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -18,7 +18,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="codeigniter" \
-    BITNAMI_IMAGE_VERSION="3.1.11-ol-7-r132" \
+    BITNAMI_IMAGE_VERSION="3.1.11-ol-7-r133" \
     CODEIGNITER_PROJECT_NAME="myapp" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
