@@ -12,7 +12,7 @@ RUN yum upgrade -y && \
     rm -r /var/cache/yum
 
 ENV BITNAMI_APP_NAME="oauth2-proxy" \
-    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r47" \
+    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r48" \
     PATH="/opt/bitnami/oauth2-proxy/bin:$PATH"
 
 EXPOSE 8080 4180
