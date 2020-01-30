@@ -45,10 +45,10 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`1.13-ol-7`, `1.13.7-ol-7-r0` (1.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.13.7-ol-7-r0/1.13/ol-7/Dockerfile)
 * [`1.13-debian-10`, `1.13.7-debian-10-r0`, `1.13`, `1.13.7`, `latest` (1.13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.13.7-debian-10-r0/1.13/debian-10/Dockerfile)
 * [`1.12-ol-7`, `1.12.16-ol-7-r0` (1.12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.12.16-ol-7-r0/1.12/ol-7/Dockerfile)
 * [`1.12-debian-10`, `1.12.16-debian-10-r0`, `1.12`, `1.12.16` (1.12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.12.16-debian-10-r0/1.12/debian-10/Dockerfile)
-* [`1.13-ol-7`, `0.0.0-ol-7-r0` (1.13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/0.0.0-ol-7-r0/1.13/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/golang GitHub repo](https://github.com/bitnami/bitnami-docker-golang).
 
