@@ -1,4 +1,4 @@
-FROM bitnami/ruby:2.7.0-ol-7-r17 as development
+FROM bitnami/ruby:2.7.0-ol-7-r18 as development
 
 ######
 
@@ -14,7 +14,7 @@ RUN yum upgrade -y && \
 COPY --from=development /opt/bitnami/ruby /opt/bitnami/ruby
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.7.0-ol-7-r16-prod" \
+    BITNAMI_IMAGE_VERSION="2.7.0-ol-7-r17-prod" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 CMD [ "irb" ]
