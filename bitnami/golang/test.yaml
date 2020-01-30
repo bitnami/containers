@@ -1,0 +1,27 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be used in production.
+##
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: test-golang
+    app.kubernetes.io/component: golang
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: test-golang
+      app.kubernetes.io/component: golang
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: test-golang
+        app.kubernetes.io/component: golang
+    spec:
+      containers:
+      - image: bitnami/golang
+        name: golang
+        #env:
+        #- name: BITNAMI_DEBUG
+        #- value: 0
