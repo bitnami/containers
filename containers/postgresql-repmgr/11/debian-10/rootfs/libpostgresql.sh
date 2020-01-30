@@ -308,7 +308,9 @@ postgresql_create_config() {
         postgresql_error "include_dir line is not present in $POSTGRESQL_CONF_FILE. This may be due to a changes in a new version of PostgreSQL. Please check"
         exit 1
     fi
-    sed -i -E "/#include_dir/i include_dir = 'conf.d'" "$POSTGRESQL_CONF_FILE"
+    local psql_conf
+    psql_conf="$(sed -E "/#include_dir/i include_dir = 'conf.d'" "$POSTGRESQL_CONF_FILE")"
+    echo "$psql_conf" > "$POSTGRESQL_CONF_FILE"
 }
 
 ########################
@@ -412,7 +414,9 @@ EOF
 #########################
 postgresql_restrict_pghba() {
     if [[ -n "$POSTGRESQL_PASSWORD" ]]; then
-        sed -i 's/trust/md5/g' "$POSTGRESQL_PGHBA_FILE"
+        local pghba_file
+        pghba_file="$(sed 's/trust/md5/g' "$POSTGRESQL_PGHBA_FILE")"
+        echo "$pghba_file" > "$POSTGRESQL_PGHBA_FILE"
     fi
 }
 
@@ -450,7 +454,9 @@ postgresql_set_property() {
     local -r property="${1:?missing property}"
     local -r value="${2:?missing value}"
     local -r conf_file="${3:-$POSTGRESQL_CONF_FILE}"
-    sed -i "s?^#*\s*${property}\s*=.*?${property} = '${value}'?g" "$conf_file"
+    local psql_conf
+    psql_conf="$(sed "s?^#*\s*${property}\s*=.*?${property} = '${value}'?g" "$conf_file")"
+    echo "$psql_conf" > "$conf_file"
 }
 
 ########################
