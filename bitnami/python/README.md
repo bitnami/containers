@@ -60,7 +60,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`3.6-ol-7`, `3.6.10-ol-7-r39` (3.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-ol-7-r39/3.6/ol-7/Dockerfile)
 * [`3.6-debian-10-prod`, `3.6.10-debian-10-r6-prod`, `3.6-prod`, `3.6.10-prod` (3.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-debian-10-r6-prod/3.6-prod/debian-10/Dockerfile)
 * [`3.6-debian-10`, `3.6.10-debian-10-r6`, `3.6`, `3.6.10` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-debian-10-r6/3.6/debian-10/Dockerfile)
-* [`2-ol-7`, `2.7.17-ol-7-r108` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.17-ol-7-r108/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.7.17-ol-7-r109` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.17-ol-7-r109/2/ol-7/Dockerfile)
 * [`2-ol-7-prod`, `2.7.17-ol-7-r106-prod` (2-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.17-ol-7-r106-prod/2-prod/ol-7/Dockerfile)
 * [`2-debian-10-prod`, `2.7.17-debian-10-r6-prod`, `2-prod`, `2.7.17-prod` (2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.17-debian-10-r6-prod/2-prod/debian-10/Dockerfile)
 * [`2-debian-10`, `2.7.17-debian-10-r6`, `2`, `2.7.17` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.17-debian-10-r6/2/debian-10/Dockerfile)
