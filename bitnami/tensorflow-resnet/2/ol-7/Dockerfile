@@ -18,7 +18,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-resnet" \
-    BITNAMI_IMAGE_VERSION="2.1.0-ol-7-r11" \
+    BITNAMI_IMAGE_VERSION="2.1.0-ol-7-r12" \
     NAMI_PREFIX="/.nami"
 
 USER 1001
