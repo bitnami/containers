@@ -150,6 +150,40 @@ pgpool_validate() {
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
+pgpool_attach_node() {
+    local -r node_id=${1:?node id is missing}
+
+    info "Attaching backend node..."
+    export PCPPASSFILE=$(mktemp /tmp/pcppass-XXXXX)
+    echo "localhost:9898:${PGPOOL_ADMIN_USERNAME}:${PGPOOL_ADMIN_PASSWORD}" > "${PCPPASSFILE}"
+    pcp_attach_node -h localhost  -U "${PGPOOL_ADMIN_USERNAME}" -p 9898 -n "${node_id}" -w
+    rm -rf "${PCPPASSFILE}"
+}
+
+########################
+# Check pgpool health and attached offline backends when they are online
+# Globals:
+#   PGPOOL_*
+# Arguments:
+#   None
+# Returns:
+#   0 when healthy
+#   1 when unhealthy
+#########################
+pgpool_healthcheck() {
+    info "Checking pgpool health..."
+    # look up backends that are marked offline
+    for node in $(PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" -h localhost -tA -c "SHOW pool_nodes;" | grep "down")
+    do
+        node_id=$(echo ${node} | cut -d'|' -f1)
+        node_host=$(echo ${node} | cut -d'|' -f2)
+        if PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" -h "${node_host}" -tA -c "SELECT 1" >/dev/null; then
+            # attach backend if it has come back online
+            pgpool_attach_node "${node_id}"
+        fi
+    done
+}
+
 ########################
 # Start nslcd in background
 # Arguments:
@@ -227,25 +261,14 @@ pgpool_create_backend_config() {
     local -r dir="${fields[4]:-$PGPOOL_DATA_DIR}"
     local -r flag="${fields[5]:-ALLOW_TO_FAILOVER}"
 
-    #check if it is possible to connect to the node
-    debug "Waiting for backend '$host' ..."
-    if ! retry_while "is_hostname_resolved $host" "$retries" "$sleep_time"; then
-        error "$host is not a resolved hostname"
-        exit 1
-    fi
-    if wait-for-port --host "$host" --timeout "$PGPOOL_TIMEOUT" "$port"; then
-        debug "Backend '$host' is ready. Adding its information to the configuration..."
-        cat >> "$PGPOOL_CONF_FILE" << EOF
+    debug "Adding '$host' information to the configuration..."
+    cat >> "$PGPOOL_CONF_FILE" << EOF
 backend_hostname$num = '$host'
 backend_port$num = $port
 backend_weight$num = $weight
 backend_data_directory$num = '$dir'
 backend_flag$num = '$flag'
 EOF
-    else
-        error "Backend $host did not respond after $PGPOOL_TIMEOUT seconds!"
-        exit 1
-    fi
 }
 
 ########################
