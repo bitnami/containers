@@ -54,6 +54,7 @@ export ZOO_AUTOPURGE_RETAIN_COUNT="${ZOO_AUTOPURGE_RETAIN_COUNT:-3}"
 export ZOO_LOG_LEVEL="${ZOO_LOG_LEVEL:-INFO}"
 export ZOO_4LW_COMMANDS_WHITELIST="${ZOO_4LW_COMMANDS_WHITELIST:-srvr, mntr}"
 export ZOO_RECONFIG_ENABLED="${ZOO_RECONFIG_ENABLED:-no}"
+export ZOO_LISTEN_ALLIPS_ENABLED="${ZOO_LISTEN_ALLIPS_ENABLED:-no}"
 
 # Java settings
 export JVMFLAGS="${JVMFLAGS:-}"
@@ -192,6 +193,7 @@ zookeeper_generate_conf() {
     zookeeper_conf_set "$ZOO_CONF_FILE" clientPort "$ZOO_PORT_NUMBER"
     zookeeper_conf_set "$ZOO_CONF_FILE" maxClientCnxns "$ZOO_MAX_CLIENT_CNXNS"
     zookeeper_conf_set "$ZOO_CONF_FILE" reconfigEnabled "$(is_boolean_yes "$ZOO_RECONFIG_ENABLED" && echo true || echo false)"
+    zookeeper_conf_set "$ZOO_CONF_FILE" quorumListenOnAllIPs "$(is_boolean_yes "$ZOO_LISTEN_ALLIPS_ENABLED" && echo true || echo false)"
     zookeeper_conf_set "$ZOO_CONF_FILE" autopurge.purgeInterval "$ZOO_AUTOPURGE_INTERVAL"
     zookeeper_conf_set "$ZOO_CONF_FILE" autopurge.snapRetainCount "$ZOO_AUTOPURGE_RETAIN_COUNT"
     zookeeper_conf_set "$ZOO_CONF_FILE" 4lw.commands.whitelist "$ZOO_4LW_COMMANDS_WHITELIST"
