@@ -21,7 +21,7 @@ RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.16.1-ol-7-r185" \
+    BITNAMI_IMAGE_VERSION="1.16.1-ol-7-r186" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/nginx/sbin:$PATH"
 
