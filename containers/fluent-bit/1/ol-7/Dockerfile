@@ -12,7 +12,7 @@ RUN yum upgrade -y && \
     rm -r /var/cache/yum
 
 ENV BITNAMI_APP_NAME="fluent-bit" \
-    BITNAMI_IMAGE_VERSION="1.3.6-ol-7-r13" \
+    BITNAMI_IMAGE_VERSION="1.3.6-ol-7-r14" \
     PATH="/opt/bitnami/fluent-bit/bin:$PATH"
 
 EXPOSE 2020
