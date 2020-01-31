@@ -15,7 +15,7 @@ RUN ln -sf /opt/bitnami/prometheus/data /prometheus
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.15.2-ol-7-r23" \
+    BITNAMI_IMAGE_VERSION="2.15.2-ol-7-r24" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
