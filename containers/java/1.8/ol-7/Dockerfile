@@ -12,7 +12,7 @@ RUN yum upgrade -y && \
     rm -r /var/cache/yum
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="1.8.242-ol-7-r5" \
+    BITNAMI_IMAGE_VERSION="1.8.242-ol-7-r6" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
