@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 services:
   pg-0:
     image: bitnami/postgresql-repmgr:11
@@ -46,6 +46,11 @@ services:
       - PGPOOL_ADMIN_USERNAME=admin
       - PGPOOL_ADMIN_PASSWORD=adminpassword
       - PGPOOL_ENABLE_LOAD_BALANCING=yes
+    healthcheck:
+      test: ["CMD", "/healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 volumes:
   pg_0_data:
     driver: local
