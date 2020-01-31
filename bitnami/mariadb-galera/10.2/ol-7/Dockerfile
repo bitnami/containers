@@ -17,7 +17,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb-galera" \
-    BITNAMI_IMAGE_VERSION="10.2.31-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="10.2.31-ol-7-r2" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
 EXPOSE 3306 4444 4567 4568
