@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade && \
 RUN ln -sf /opt/bitnami/consul-exporter/bin/consul_exporter /bin/consul_exporter
 
 ENV BITNAMI_APP_NAME="consul-exporter" \
-    BITNAMI_IMAGE_VERSION="0.6.0-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="0.6.0-debian-10-r6" \
     PATH="/opt/bitnami/consul-exporter/bin:$PATH"
 
 EXPOSE 9107
