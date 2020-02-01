@@ -18,7 +18,7 @@ RUN /build/install-gosu.sh
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.9.0-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="1.9.0-debian-10-r7" \
     GEM_HOME="/opt/bitnami/fluentd" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/fluentd/bin:$PATH"
 
