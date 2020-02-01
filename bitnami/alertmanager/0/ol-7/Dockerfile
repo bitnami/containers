@@ -15,7 +15,7 @@ RUN ln -sf /opt/bitnami/alertmanager/data /alertmanager
 
 RUN mkdir -p /opt/bitnami/alertmanager/data/ && chmod g+rwX /opt/bitnami/alertmanager/data/
 ENV BITNAMI_APP_NAME="alertmanager" \
-    BITNAMI_IMAGE_VERSION="0.20.0-ol-7-r48" \
+    BITNAMI_IMAGE_VERSION="0.20.0-ol-7-r49" \
     PATH="/opt/bitnami/alertmanager/bin:$PATH"
 
 EXPOSE 9093
