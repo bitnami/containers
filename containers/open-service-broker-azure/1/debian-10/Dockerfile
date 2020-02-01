@@ -11,7 +11,7 @@ RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="open-service-broker-azure" \
-    BITNAMI_IMAGE_VERSION="1.8.4-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="1.8.4-debian-10-r7" \
     PATH="/opt/bitnami/open-service-broker-azure/bin:$PATH"
 
 EXPOSE 8080
