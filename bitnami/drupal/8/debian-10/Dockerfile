@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack apache-2.4.41-0 --checksum 0364e80e08a89fda2d2d302609f813
 RUN bitnami-pkg unpack php-7.3.14-0 --checksum 58ea3eac602c9e840afb1cde192bda1018c62e3485c41962bc0266b079dd731f
 RUN bitnami-pkg unpack mysql-client-10.3.22-0 --checksum 9529ac5187264223e3852602f7d9a51ed0b2547bbed99f3d05f3b7fa20adf57f
 RUN bitnami-pkg install libphp-7.3.14-0 --checksum b9d1872eeaf47fe678aaefd4d5925be1bbab64d67f808c14d849039a204faad8
-RUN bitnami-pkg unpack drupal-8.8.1-0 --checksum 2ed035e86bda6388718ccd46bb6dec2c72286df8801393584a7b8efd0f8d6110
+RUN bitnami-pkg unpack drupal-8.8.2-0 --checksum 0684f8a1dd03e28b99065714b5e9f4baa76692b3b44432ad03d29c3a38b93b93
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.8.1-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="8.8.2-debian-10-r0" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
