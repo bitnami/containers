@@ -12,7 +12,7 @@ RUN yum upgrade -y && \
     rm -r /var/cache/yum
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="2.7.17-ol-7-r109" \
+    BITNAMI_IMAGE_VERSION="2.7.17-ol-7-r110" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8000
