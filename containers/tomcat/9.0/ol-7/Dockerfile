@@ -18,7 +18,7 @@ RUN /build/install-gosu.sh
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="9.0.30-ol-7-r47" \
+    BITNAMI_IMAGE_VERSION="9.0.30-ol-7-r48" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
 EXPOSE 8080
