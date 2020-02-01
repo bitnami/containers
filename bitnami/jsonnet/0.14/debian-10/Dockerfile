@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade && \
 
 RUN chmod +x /opt/bitnami/jsonnet/bin/jsonnet
 ENV BITNAMI_APP_NAME="jsonnet" \
-    BITNAMI_IMAGE_VERSION="0.14.0-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="0.14.0-debian-10-r7" \
     PATH="/opt/bitnami/jsonnet/bin:$PATH"
 
 USER 1001
