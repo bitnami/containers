@@ -20,7 +20,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch-curator" \
-    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r7" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami"
