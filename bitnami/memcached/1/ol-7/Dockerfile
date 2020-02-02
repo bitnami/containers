@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl cyrus-sasl-lib glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libevent libselinux nss-softokn-freebl pcre procps-ng sudo tar which
-RUN . ./libcomponent.sh && component_unpack "memcached" "1.5.21-0" --checksum 84cda9bd5a02af33ab9c12f7af6b0170958c44bcbd9f964169c70c62d9aaa091
+RUN . ./libcomponent.sh && component_unpack "memcached" "1.5.22-0" --checksum 6d3c8082dbe9bcf757c405bde75a5e6ee51570cc602470f66df660c4688692d4
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -17,7 +17,7 @@ RUN /build/install-gosu.sh
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.21-ol-7-r8" \
+    BITNAMI_IMAGE_VERSION="1.5.22-ol-7-r0" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
 
 EXPOSE 11211
