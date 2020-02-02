@@ -2,6 +2,6 @@ version: '2'
 
 services:
   keycloak-gatekeeper:
-    image: bitnami/keycloak-gatekeeper:2-scratch
+    image: bitnami/keycloak-gatekeeper:8-scratch
     ports:
       - '3000:3000'
