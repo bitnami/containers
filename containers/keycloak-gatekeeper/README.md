@@ -7,7 +7,7 @@
 # TL;DR;
 
 ```bash
-$ docker run --rm --name keycloak-gatekeeper bitnami/keycloak-gatekeeper:2 /keycloak-proxy --help
+$ docker run --rm --name keycloak-gatekeeper bitnami/keycloak-gatekeeper:2 /keycloak-gatekeeper --help
 ```
 
 ## Docker Compose
@@ -34,10 +34,12 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
+> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-scratch`, `2.3.0-scratch-r4`, `2`, `2.3.0`, `2.3.0-r4`, `latest` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/2.3.0/2/scratch/Dockerfile)
+* [`8-scratch`, `8.0.1-scratch-r0`, `8`, `8.0.1`, `8.0.1-r0`, `latest` (8/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/8.0.1/8/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak-gatekeeper GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper).
 
@@ -64,7 +66,7 @@ $ docker pull bitnami/keycloak-gatekeeper:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/keycloak-gatekeeper:latest 'https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper.git#master:2/scratch'
+$ docker build -t bitnami/keycloak-gatekeeper:latest 'https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper.git#master:8/scratch'
 ```
 
 # Configuration
@@ -77,7 +79,7 @@ The configuration can easily be setup by mounting your own configuration file on
 $ docker run --name keycloak-gatekeeper \
   --volume /path/to/config.yaml:/opt/bitnami/keycloak-gatekeeper/config.yaml \
   bitnami/keycloak-gatekeeper:latest \
-  /keycloak-proxy --config /opt/bitnami/keycloak-gatekeeper/config.yaml
+  /keycloak-gatekeeper --config /opt/bitnami/keycloak-gatekeeper/config.yaml
 ```
 
 After that, your configuration will be taken into account in Keycloak Gatekeeper.
@@ -87,7 +89,7 @@ You can do this using Docker Compose by modifying the [`docker-compose.yml`](htt
 ```yaml
 keycloak-gatekeeper:
   ...
-  command: /keycloak-proxy --config /opt/bitnami/keycloak-gatekeeper/config.yaml
+  command: /keycloak-gatekeeper --config /opt/bitnami/keycloak-gatekeeper/config.yaml
   volumes:
     - /path/to/config.yaml:/opt/bitnami/keycloak-gatekeeper/config.yaml:ro
   ...
@@ -98,7 +100,7 @@ keycloak-gatekeeper:
 The configuration can also be setup by providing command-line options.
 
 ```bash
-$ docker run --name keycloak-gatekeeper bitnami/keycloak-gatekeeper:latest /keycloak-proxy \
+$ docker run --name keycloak-gatekeeper bitnami/keycloak-gatekeeper:latest /keycloak-gatekeeper \
   --listen 127.0.0.1:3000 \
   --upstream-url http://127.0.0.1:80 \
   --discovery-url https://keycloak.example.com/auth/realms/<REALM_NAME> \
@@ -111,7 +113,7 @@ You can do this using Docker Compose by modifying the [`docker-compose.yml`](htt
 keycloak-gatekeeper:
   ...
   command:
-    - /keycloak-proxy
+    - /keycloak-gatekeeper
     - --listen
     - 127.0.0.1:3000
     - --upstream-url
@@ -145,7 +147,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright 2019 Bitnami
+Copyright 2020 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
