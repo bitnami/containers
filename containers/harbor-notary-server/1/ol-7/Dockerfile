@@ -18,7 +18,7 @@ RUN /build/install-gosu.sh
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-notary-server" \
-    BITNAMI_IMAGE_VERSION="1.10.0-ol-7-r47" \
+    BITNAMI_IMAGE_VERSION="1.10.0-ol-7-r48" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-notary-server/bin:$PATH" \
     SERVICE_NAME="notary_server"
