@@ -579,7 +579,7 @@ mongodb_create_keyfile() {
 mongodb_is_primary_node_initiated() {
     local node="${1:?node is required}"
     local result
-    result=$(mongodb_execute "root" "$MONGODB_ROOT_PASSWORD" "admin" "$node" "$MONGODB_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "root" "$MONGODB_ROOT_PASSWORD" "admin" "127.0.0.1" "$MONGODB_PORT_NUMBER" <<EOF
 rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
 EOF
 )
