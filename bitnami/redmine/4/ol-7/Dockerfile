@@ -20,7 +20,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r41" \
+    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r42" \
     REDMINE_DB_MYSQL="mariadb" \
     REDMINE_DB_NAME="bitnami_redmine" \
     REDMINE_DB_PASSWORD="" \
