@@ -8,9 +8,9 @@
 # Load Generic Libraries
 . /libfile.sh
 . /liblog.sh
+. /libos.sh
 . /libservice.sh
 . /libvalidations.sh
-. /libos.sh
 
 ########################
 # Loads global variables used on Tomcat configuration.
@@ -103,7 +103,7 @@ tomcat_validate() {
     check_allowed_port TOMCAT_SHUTDOWN_PORT_NUMBER
 
     check_conflicting_ports TOMCAT_HTTP_PORT_NUMBER TOMCAT_AJP_PORT_NUMBER TOMCAT_SHUTDOWN_PORT_NUMBER
-    
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -117,31 +117,9 @@ tomcat_validate() {
 #   None
 #########################
 tomcat_configure_ports() {
-    tomcat_config_replace "$TOMCAT_CONF_FILE" "port=\"8080\"" "port=\"$TOMCAT_HTTP_PORT_NUMBER\""
-    tomcat_config_replace "$TOMCAT_CONF_FILE" "port=\"8005\"" "port=\"$TOMCAT_SHUTDOWN_PORT_NUMBER\""
-    tomcat_config_replace "$TOMCAT_CONF_FILE" "port=\"8009\"" "port=\"$TOMCAT_AJP_PORT_NUMBER\""
-}
-
-########################
-# Replace a regex in a file
-# Globals:
-#   None
-# Arguments:
-#   $1 - file
-#   $2 - match regex
-#   $3 - substitute regex
-# Returns:
-#   None
-#########################
-tomcat_config_replace() {
-    local -r file="${1:?filename is required}"
-    local -r match_regex="${2:?match_regex is required}"
-    local -r substitute_regex="${3:?substitute_regex is required}"
-    local tomcat_conf
-
-    # We cannot use 'sed in-place' feature when the configuration file is mounted as a ConfigMap
-    tomcat_conf="$(sed -E "s@$match_regex@$substitute_regex@" "$file")"
-    echo "$tomcat_conf" > "$file"
+    replace_in_file "$TOMCAT_CONF_FILE" "port=\"8080\"" "port=\"$TOMCAT_HTTP_PORT_NUMBER\""
+    replace_in_file "$TOMCAT_CONF_FILE" "port=\"8005\"" "port=\"$TOMCAT_SHUTDOWN_PORT_NUMBER\""
+    replace_in_file "$TOMCAT_CONF_FILE" "port=\"8009\"" "port=\"$TOMCAT_AJP_PORT_NUMBER\""
 }
 
 ########################
@@ -181,10 +159,11 @@ EOF
 tomcat_overwrite_context() {
     local -r application=${1:?application is missing}
     local -r context=${2:?context is missing}
-
     local -r file="${TOMCAT_WEBAPPS_DIR}/${application}/META-INF/context.xml"
+    local file_content
 
-    sed -i '/<Context/,/<\/Context>/c'"$context" "$file"
+    file_content="$(sed '/<Context/,/<\/Context>/c'"$context" "$file")"
+    echo "$file_content" > "$file"
 }
 
 ########################
@@ -249,7 +228,7 @@ tomcat_create_tomcat_user() {
 
     local user_definition="<user username=\"${username}\" password=\"${password}\" roles=\"manager-gui,admin-gui\"/></tomcat-users>"
 
-    tomcat_config_replace "$TOMCAT_USERS_CONF_FILE" "</tomcat-users>" "$user_definition"
+    replace_in_file "$TOMCAT_USERS_CONF_FILE" "</tomcat-users>" "$user_definition"
 }
 
 ########################
