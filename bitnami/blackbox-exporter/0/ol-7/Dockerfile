@@ -12,7 +12,7 @@ RUN yum upgrade -y && \
     rm -r /var/cache/yum
 
 ENV BITNAMI_APP_NAME="blackbox-exporter" \
-    BITNAMI_IMAGE_VERSION="0.16.0-ol-7-r82" \
+    BITNAMI_IMAGE_VERSION="0.16.0-ol-7-r83" \
     PATH="/opt/bitnami/blackbox-exporter/bin:$PATH"
 
 EXPOSE 9115
