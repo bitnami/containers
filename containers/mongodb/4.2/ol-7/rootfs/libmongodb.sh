@@ -605,7 +605,15 @@ mongodb_is_secondary_node_pending() {
 rs.add('$node:$MONGODB_PORT_NUMBER')
 EOF
 )
-    grep -q "\"ok\" : 1\|\"code\" : 103" <<< "$result"
+    # Error code 103 is considered OK.
+    # It indicates a possiblely desynced configuration,
+    # which will become resynced when the secondary joins the replicaset.
+    if grep -q "\"code\" : 103" <<< "$result"; then
+      warn "The ReplicaSet configuration is not aligned with primary node's configuration. Starting secondary node so it syncs with ReplicaSet..."
+      return 0
+    fi
+
+    grep -q "\"ok\" : 1" <<< "$result"
 }
 
 ########################
