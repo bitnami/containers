@@ -6,8 +6,9 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
-. /liblog.sh
+. /libfile.sh
 . /libfs.sh
+. /liblog.sh
 . /libnet.sh
 . /libos.sh
 . /libservice.sh
@@ -235,7 +236,7 @@ pgpool_set_property() {
     local -r property="${1:?missing property}"
     local -r value="${2:-}"
     local -r conf_file="${3:-$PGPOOL_CONF_FILE}"
-    sed -i "s?^#*\s*${property}\s*=.*?${property} = '${value}'?g" "$conf_file"
+    replace_in_file "$conf_file" "^#*\s*${property}\s*=.*" "${property} = '${value}'" false
 }
 
 ########################
