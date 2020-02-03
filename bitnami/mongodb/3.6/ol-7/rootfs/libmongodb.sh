@@ -150,7 +150,7 @@ you need to provide the MONGODB_PRIMARY_HOST env var"
                 print_validation_error "$replicaset_error_message"
             fi
             if [[ -n "$MONGODB_ROOT_PASSWORD" ]]; then
-                error_message="MONGODB_ROOT_PASSWORD shouldn't be set on a 'non-primary' node!"
+                error_message="MONGODB_ROOT_PASSWORD shouldn't be set on a 'non-primary' node"
                 print_validation_error "$error_message"
             fi
         elif [[ "$MONGODB_REPLICA_SET_MODE" = "primary" ]]; then
@@ -159,11 +159,11 @@ you need to provide the MONGODB_PRIMARY_HOST env var"
                 print_validation_error "$replicaset_error_message"
             fi
             if [[ -n "$MONGODB_PRIMARY_ROOT_PASSWORD" ]]; then
-                error_message="MONGODB_PRIMARY_ROOT_PASSWORD shouldn't be set on a 'primary' node!"
+                error_message="MONGODB_PRIMARY_ROOT_PASSWORD shouldn't be set on a 'primary' node"
                 print_validation_error "$error_message"
             fi
-            if [[ -z "$MONGODB_ROOT_PASSWORD" ]]; then
-                error_message="MONGODB_ROOT_PASSWORD have to be set on a 'primary' node!"
+            if [[ -z "$MONGODB_ROOT_PASSWORD" ]] && ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
+                error_message="The MONGODB_ROOT_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is only recommended for development."
                 print_validation_error "$error_message"
             fi
         else
@@ -181,7 +181,7 @@ Available options are 'primary/secondary/arbiter'"
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
     elif [[ -n "$MONGODB_USERNAME" ]] && [[ -z "$MONGODB_PASSWORD" ]]; then
-        error_message="The MONGODB_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
+        error_message="The MONGODB_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is only recommended for development."
         print_validation_error "$error_message"
     fi
 
