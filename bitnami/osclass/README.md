@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.7.4-ol-7-r566` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/3.7.4-ol-7-r566/3/ol-7/Dockerfile)
-* [`3-debian-10`, `3.7.4-debian-10-r7`, `3`, `3.7.4`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/3.7.4-debian-10-r7/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.7.4-debian-10-r8`, `3`, `3.7.4`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/3.7.4-debian-10-r8/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/osclass GitHub repo](https://github.com/bitnami/bitnami-docker-osclass).
 
