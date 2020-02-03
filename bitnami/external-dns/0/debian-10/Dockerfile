@@ -11,7 +11,7 @@ RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="external-dns" \
-    BITNAMI_IMAGE_VERSION="0.5.18-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="0.5.18-debian-10-r9" \
     PATH="/opt/bitnami/external-dns/bin:$PATH"
 
 EXPOSE 7979
