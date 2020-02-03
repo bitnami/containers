@@ -13,7 +13,7 @@ counter=0;
 res=1000;
 while [[ $res != 0 && $counter -lt 30 ]];
 do
-    if PGPASSWORD=$AIRFLOW_DATABASE_PASSWORD psql -h "$AIRFLOW_DATABASE_HOST" -U "$AIRFLOW_DATABASE_USERNAME" -d "$AIRFLOW_DATABASE_NAME" -c "" > /dev/null ; then
+    if PGPASSWORD=$AIRFLOW_DATABASE_PASSWORD psql -h "$AIRFLOW_DATABASE_HOST" -U "$AIRFLOW_DATABASE_USERNAME" -d "$AIRFLOW_DATABASE_NAME" -c "" -p "$AIRFLOW_DATABASE_PORT_NUMBER" > /dev/null ; then
         echo "Database is ready";
         res=0
     else
