@@ -605,7 +605,7 @@ mongodb_is_secondary_node_pending() {
 rs.add('$node:$MONGODB_PORT_NUMBER')
 EOF
 )
-    grep -q "\"ok\" : 1" <<< "$result"
+    grep -q "\"ok\" : 1\|\"code\" : 103" <<< "$result"
 }
 
 ########################
