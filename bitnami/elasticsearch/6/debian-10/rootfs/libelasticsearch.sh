@@ -371,8 +371,8 @@ elasticsearch_set_heap_size() {
         fi
     fi
     debug "Setting '-Xmx${heap_size} -Xms${heap_size}' heap options..."
-    sed -r -i "s/-Xmx[0-9]+[mg]+/-Xmx${heap_size}/g" "${ELASTICSEARCH_CONFDIR}/jvm.options"
-    sed -r -i "s/-Xms[0-9]+[mg]+/-Xms${heap_size}/g" "${ELASTICSEARCH_CONFDIR}/jvm.options"
+    replace_in_file "${ELASTICSEARCH_CONFDIR}/jvm.options" "-Xmx[0-9]+[mg]+" "-Xmx${heap_size}"
+    replace_in_file "${ELASTICSEARCH_CONFDIR}/jvm.options" "-Xms[0-9]+[mg]+" "-Xms${heap_size}"
 }
 
 ########################
