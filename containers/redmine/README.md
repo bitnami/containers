@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4-ol-7`, `4.1.0-ol-7-r42` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.1.0-ol-7-r42/4/ol-7/Dockerfile)
-* [`4-debian-10`, `4.1.0-debian-10-r8`, `4`, `4.1.0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.1.0-debian-10-r8/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.1.0-debian-10-r9`, `4`, `4.1.0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.1.0-debian-10-r9/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
 
