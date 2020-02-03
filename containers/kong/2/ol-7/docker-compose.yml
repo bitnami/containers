@@ -1,0 +1,22 @@
+version: '2'
+services:
+  postgresql:
+    image: bitnami/postgresql:11-ol-7
+    volumes:
+      - postgresql_data:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_USERNAME=kong
+      - POSTGRESQL_PASSWORD=bitnami
+      - POSTGRESQL_DATABASE=kong
+  kong:
+    image: bitnami/kong:2-ol-7
+    ports:
+      - 8000:8000
+      - 8443:8443
+    environment:
+      - KONG_MIGRATE=yes
+      - KONG_PG_HOST=postgresql
+      - KONG_PG_PASSWORD=bitnami
+volumes:
+  postgresql_data:
+    driver: local
