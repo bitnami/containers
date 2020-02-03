@@ -44,7 +44,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.9.1-ol-7-r1` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.9.1-ol-7-r1/1/ol-7/Dockerfile)
+* [`1-ol-7`, `1.9.1-ol-7-r2` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.9.1-ol-7-r2/1/ol-7/Dockerfile)
 * [`1-debian-10`, `1.9.1-debian-10-r1`, `1`, `1.9.1`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.9.1-debian-10-r1/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
