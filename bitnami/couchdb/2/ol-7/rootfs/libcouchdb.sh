@@ -208,10 +208,12 @@ couchdb_update_vm_args_file() { # TODO Confirm that works
 couchdb_vm_args_set() {
     local -r key="${1:?key is required}"
     local -r value="${2:-}"
+    local vm_args_content
 
     if ! is_empty_value "$value"; then
         if grep -q -E "^\s*${key}\s+.*$" "${COUCHDB_CONF_DIR}/vm.args"; then
-            sed -i -E "s/^\s*${key}\s+.*$/${key} ${value}/" "${COUCHDB_CONF_DIR}/vm.args"
+            vm_args_content="$(sed -E "s/^\s*${key}\s+.*$/${key} ${value}/" "${COUCHDB_CONF_DIR}/vm.args")"
+            echo "$vm_args_content" > "${COUCHDB_CONF_DIR}/vm.args"
         else
             echo "${key} ${value}" >> "${COUCHDB_CONF_DIR}/vm.args"
         fi
