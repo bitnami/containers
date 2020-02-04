@@ -5,6 +5,7 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
+. /libfile.sh
 . /liblog.sh
 . /libos.sh
 . /libvalidations.sh
@@ -41,7 +42,7 @@ kafka_common_conf_set() {
         # Check if the value was set before
         if grep -q "^[#\\s]*$key\s*=.*" "$file"; then
             # Update the existing key
-            sed -i "s|^[#\\s]*$key\s*=.*|$key=$value|" "$file"
+            replace_in_file "$file" "^[#\\s]*${key}\s*=.*" "${key}=${value}" false
         else
             # Add a new key
             printf '\n%s=%s' "$key" "$value" >>"$file"
@@ -371,7 +372,7 @@ kafka_initialize() {
 
         # Remove security.inter.broker.protocol if KAFKA_CFG_INTER_BROKER_LISTENER_NAME is configured
         if [[ ! -z "${KAFKA_CFG_INTER_BROKER_LISTENER_NAME:-}" ]]; then
-            sed -i '/security.inter.broker.protocol/d' "$KAFKA_CONF_FILE"
+            remove_in_file "$KAFKA_CONF_FILE" "security.inter.broker.protocol" false
         fi
     fi
     rm -rf "$KAFKA_BASEDIR"/configtmp
