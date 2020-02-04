@@ -584,7 +584,13 @@ rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "members":[{"_id":0,"host":"$nod
 EOF
 )
 
-    grep -q "\"ok\" : 1\|\"code\" : 23" <<< "$result"
+    # Code 23 is considered OK
+    # It indicates that the node is already initialized
+    if grep -q "\"code\" : 23" <<< "$result"; then
+        warn "Node already initialized."
+        return 0
+    fi
+    grep -q "\"ok\" : 1" <<< "$result"
 }
 
 
@@ -609,10 +615,9 @@ EOF
     # It indicates a possiblely desynced configuration,
     # which will become resynced when the secondary joins the replicaset.
     if grep -q "\"code\" : 103" <<< "$result"; then
-      warn "The ReplicaSet configuration is not aligned with primary node's configuration. Starting secondary node so it syncs with ReplicaSet..."
-      return 0
+        warn "The ReplicaSet configuration is not aligned with primary node's configuration. Starting secondary node so it syncs with ReplicaSet..."
+        return 0
     fi
-
     grep -q "\"ok\" : 1" <<< "$result"
 }
 
