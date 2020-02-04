@@ -13,7 +13,7 @@ RUN yum upgrade -y && \
 
 RUN chmod +x /opt/bitnami/jsonnet/bin/jsonnet
 ENV BITNAMI_APP_NAME="jsonnet" \
-    BITNAMI_IMAGE_VERSION="0.14.0-ol-7-r127" \
+    BITNAMI_IMAGE_VERSION="0.14.0-ol-7-r128" \
     PATH="/opt/bitnami/jsonnet/bin:$PATH"
 
 USER 1001
