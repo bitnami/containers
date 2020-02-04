@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-ol-7`, `0.20180422.201901061035-ol-7-r382` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201901061035-ol-7-r382/0/ol-7/Dockerfile)
-* [`0-debian-10`, `0.20180422.201901061035-debian-10-r10`, `0`, `0.20180422.201901061035`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201901061035-debian-10-r10/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.20180422.201901061035-debian-10-r11`, `0`, `0.20180422.201901061035`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201901061035-debian-10-r11/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dokuwiki GitHub repo](https://github.com/bitnami/bitnami-docker-dokuwiki).
 
