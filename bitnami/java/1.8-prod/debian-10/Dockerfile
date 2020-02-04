@@ -1,4 +1,4 @@
-FROM bitnami/java:1.8.242-debian-10-r8 as development
+FROM bitnami/java:1.8.242-debian-10-r9 as development
 
 ######
 
@@ -16,7 +16,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 COPY --from=development /opt/bitnami/java /opt/bitnami/java
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="1.8.242-debian-10-r8-prod" \
+    BITNAMI_IMAGE_VERSION="1.8.242-debian-10-r9-prod" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
