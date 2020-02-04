@@ -5,6 +5,8 @@
 # shellcheck disable=SC1090
 # shellcheck disable=SC1091
 
+# Load Generic Libraries
+. /libfile.sh
 . /liblog.sh
 . /libos.sh
 . /libservice.sh
@@ -409,7 +411,7 @@ EOF
 
     # After configuration, open mysql
     if ! is_boolean_yes "$user_provided_conf";then
-       sed -i 's/bind\-address=.*/bind-address=0.0.0.0/g' "$DB_CONF_DIR/my.cnf"
+        replace_in_file "$DB_CONF_DIR/my.cnf" "bind\-address=.*" "bind-address=0.0.0.0" false
     fi
 }
 
