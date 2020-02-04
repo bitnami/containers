@@ -584,7 +584,7 @@ rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "members":[{"_id":0,"host":"$nod
 EOF
 )
 
-    grep -q "\"ok\" : 1" <<< "$result"
+    grep -q "\"ok\" : 1\|\"code\" : 23" <<< "$result"
 }
 
 
