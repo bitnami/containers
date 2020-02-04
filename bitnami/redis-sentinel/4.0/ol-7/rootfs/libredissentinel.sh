@@ -5,6 +5,7 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
+. /libfile.sh
 . /liblog.sh
 . /libnet.sh
 . /libos.sh
@@ -34,7 +35,7 @@ redis_conf_set() {
     [[ "$value" = "" ]] && value="\"$value\""
 
     if grep -q "^\s*$key .*" "$REDIS_SENTINEL_CONF_FILE"; then
-        sed -i "s|^\s*$key .*|$key $value|g" "$REDIS_SENTINEL_CONF_FILE"
+        replace_in_file "$REDIS_SENTINEL_CONF_FILE" "^\s*${key} .*" "${key} ${value}" false
     else
         printf '\n%s %s' "$key" "$value" >> "$REDIS_SENTINEL_CONF_FILE"
     fi
