@@ -150,7 +150,7 @@ you need to provide the MONGODB_PRIMARY_HOST env var"
                 print_validation_error "$replicaset_error_message"
             fi
             if [[ -n "$MONGODB_ROOT_PASSWORD" ]]; then
-                error_message="MONGODB_ROOT_PASSWORD shouldn't be set on a 'non-primary' node!"
+                error_message="MONGODB_ROOT_PASSWORD shouldn't be set on a 'non-primary' node"
                 print_validation_error "$error_message"
             fi
         elif [[ "$MONGODB_REPLICA_SET_MODE" = "primary" ]]; then
@@ -159,11 +159,11 @@ you need to provide the MONGODB_PRIMARY_HOST env var"
                 print_validation_error "$replicaset_error_message"
             fi
             if [[ -n "$MONGODB_PRIMARY_ROOT_PASSWORD" ]]; then
-                error_message="MONGODB_PRIMARY_ROOT_PASSWORD shouldn't be set on a 'primary' node!"
+                error_message="MONGODB_PRIMARY_ROOT_PASSWORD shouldn't be set on a 'primary' node"
                 print_validation_error "$error_message"
             fi
-            if [[ -z "$MONGODB_ROOT_PASSWORD" ]]; then
-                error_message="MONGODB_ROOT_PASSWORD have to be set on a 'primary' node!"
+            if [[ -z "$MONGODB_ROOT_PASSWORD" ]] && ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
+                error_message="The MONGODB_ROOT_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is only recommended for development."
                 print_validation_error "$error_message"
             fi
         else
@@ -181,7 +181,7 @@ Available options are 'primary/secondary/arbiter'"
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
     elif [[ -n "$MONGODB_USERNAME" ]] && [[ -z "$MONGODB_PASSWORD" ]]; then
-        error_message="The MONGODB_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
+        error_message="The MONGODB_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is only recommended for development."
         print_validation_error "$error_message"
     fi
 
@@ -579,11 +579,17 @@ mongodb_create_keyfile() {
 mongodb_is_primary_node_initiated() {
     local node="${1:?node is required}"
     local result
-    result=$(mongodb_execute "root" "$MONGODB_ROOT_PASSWORD" "admin" "$node" "$MONGODB_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "root" "$MONGODB_ROOT_PASSWORD" "admin" "127.0.0.1" "$MONGODB_PORT_NUMBER" <<EOF
 rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
 EOF
 )
 
+    # Code 23 is considered OK
+    # It indicates that the node is already initialized
+    if grep -q "\"code\" : 23" <<< "$result"; then
+        warn "Node already initialized."
+        return 0
+    fi
     grep -q "\"ok\" : 1" <<< "$result"
 }
 
@@ -605,6 +611,13 @@ mongodb_is_secondary_node_pending() {
 rs.add('$node:$MONGODB_PORT_NUMBER')
 EOF
 )
+    # Error code 103 is considered OK.
+    # It indicates a possiblely desynced configuration,
+    # which will become resynced when the secondary joins the replicaset.
+    if grep -q "\"code\" : 103" <<< "$result"; then
+        warn "The ReplicaSet configuration is not aligned with primary node's configuration. Starting secondary node so it syncs with ReplicaSet..."
+        return 0
+    fi
     grep -q "\"ok\" : 1" <<< "$result"
 }
 
