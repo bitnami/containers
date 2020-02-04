@@ -7,7 +7,9 @@
 
 # Load Generic Libraries
 . /libfile.sh
+. /libfs.sh
 . /liblog.sh
+. /libos.sh
 . /libservice.sh
 . /libvalidations.sh
 
@@ -415,8 +417,7 @@ EOF
 postgresql_restrict_pghba() {
     if [[ -n "$POSTGRESQL_PASSWORD" ]]; then
         local pghba_file
-        pghba_file="$(sed 's/trust/md5/g' "$POSTGRESQL_PGHBA_FILE")"
-        echo "$pghba_file" > "$POSTGRESQL_PGHBA_FILE"
+        replace_in_file "$POSTGRESQL_PGHBA_FILE" "trust" "md5" false
     fi
 }
 
@@ -455,8 +456,8 @@ postgresql_set_property() {
     local -r value="${2:?missing value}"
     local -r conf_file="${3:-$POSTGRESQL_CONF_FILE}"
     local psql_conf
-    psql_conf="$(sed "s?^#*\s*${property}\s*=.*?${property} = '${value}'?g" "$conf_file")"
-    echo "$psql_conf" > "$conf_file"
+
+    replace_in_file "$conf_file" "^#*\s*${property}\s*=.*" "${property} = '${value}'" false
 }
 
 ########################
