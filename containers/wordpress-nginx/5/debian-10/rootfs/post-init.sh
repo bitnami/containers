@@ -2,7 +2,7 @@
 
 . /opt/bitnami/base/functions
 
-if [[ -d /docker-entrypoint-init.d ]] && [[ ! -f /bitnami/"$BITNAMI_APP_NAME"/.user_scripts_initialized ]]; then
+if [[ -d /docker-entrypoint-init.d ]] && [[ ! -f "/bitnami/wordpress/.user_scripts_initialized" ]]; then
     for f in /docker-entrypoint-init.d/*; do
         failure=0
         case "$f" in
@@ -42,5 +42,5 @@ if [[ -d /docker-entrypoint-init.d ]] && [[ ! -f /bitnami/"$BITNAMI_APP_NAME"/.u
         fi
     done
     info "Custom scripts were executed"
-    touch /bitnami/"$BITNAMI_APP_NAME"/.user_scripts_initialized
+    touch "/bitnami/wordpress/.user_scripts_initialized"
 fi
