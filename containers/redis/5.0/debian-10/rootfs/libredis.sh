@@ -50,7 +50,7 @@ redis_conf_set() {
     value="${value//\?/\\?}"
     [[ "$value" = "" ]] && value="\"$value\""
 
-    sed -i "s?^#*\s*$key .*?$key $value?g" "${REDIS_BASEDIR}/etc/redis.conf"
+    replace_in_file "${REDIS_BASEDIR}/etc/redis.conf" "^#*\s*${key} .*" "${key} ${value}" false
 }
 
 ########################
@@ -65,7 +65,7 @@ redis_conf_set() {
 redis_conf_unset() {
     # TODO: improve this. Substitute action?
     local key="${1:?missing key}"
-    sed -i "s?^\s*$key .*??g" "${REDIS_BASEDIR}/etc/redis.conf"
+    remove_in_file "${REDIS_BASEDIR}/etc/redis.conf" "^\s*$key .*" false
 }
 
 ########################
