@@ -1,0 +1,19 @@
+{
+  "adminUri": "{{$global.env.MAGENTO_ADMINURI}}",
+  "databaseName": "{{$global.env.MAGENTO_DATABASE_NAME}}",
+  "databasePassword": "{{$global.env.MAGENTO_DATABASE_PASSWORD}}",
+  "databaseServerHost": "{{$global.env.MARIADB_HOST}}",
+  "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
+  "databaseUser": "{{$global.env.MAGENTO_DATABASE_USER}}",
+  "elasticsearchServerHost": "{{$global.env.ELASTICSEARCH_HOST}}",
+  "elasticsearchServerPort": "{{$global.env.ELASTICSEARCH_PORT_NUMBER}}",
+  "email": "{{$global.env.MAGENTO_EMAIL}}",
+  "externalHttpPort": "{{$global.env.EXTERNAL_HTTP_PORT_NUMBER}}",
+  "externalHttpsPort": "{{$global.env.EXTERNAL_HTTPS_PORT_NUMBER}}",
+  "firstName": "{{$global.env.MAGENTO_FIRSTNAME}}",
+  "host": "{{$global.env.MAGENTO_HOST}}",
+  "lastName": "{{$global.env.MAGENTO_LASTNAME}}",
+  "mode": "{{$global.env.MAGENTO_MODE}}",
+  "password": "{{$global.env.MAGENTO_PASSWORD}}",
+  "username": "{{$global.env.MAGENTO_USERNAME}}"
+}
