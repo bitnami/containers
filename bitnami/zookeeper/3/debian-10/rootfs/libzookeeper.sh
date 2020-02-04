@@ -5,6 +5,7 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
+. /libfile.sh
 . /libfs.sh
 . /liblog.sh
 . /libos.sh
@@ -268,7 +269,7 @@ zookeeper_conf_set() {
     local -r value="${3:?value is required}"
 
     if grep -q -E "^\s*#*\s*${key}=" "$filename"; then
-        sed -i -E "s@^\s*#*\s*${key}=.*@${key}=${value}@g" "$filename"
+        replace_in_file "$filename" "^\s*#*\s*${key}=.*" "${key}=${value}"
     else
         echo "${key}=${value}" >> "$filename"
     fi
