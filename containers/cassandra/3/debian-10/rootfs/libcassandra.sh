@@ -6,11 +6,12 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
+. /libfile.sh
+. /libfs.sh
 . /liblog.sh
+. /libnet.sh
 . /libservice.sh
 . /libvalidations.sh
-. /libnet.sh
-. /libfs.sh
 
 ########################
 # Load global variables used on Cassandra configuration.
@@ -139,10 +140,11 @@ cassandra_yaml_set() {
     local -r value="${2:?missing value}"
     local -r use_quotes="${3:-yes}"
     local -r conf_file="${4:-$CASSANDRA_CONF_FILE}"
+
     if is_boolean_yes "$use_quotes"; then
-        sed -i -r "s?^(#\s)\?(\s*)(\-\s*)\?${property}:.*?\2\3${property}: '${value}'?g" "$conf_file"
+        replace_in_file "$conf_file" "^(#\s)?(\s*)(\-\s*)?${property}:.*" "\2\3${property}: '${value}'"
     else
-        sed -i -r "s?^(#\s)\?(\s*)(\-\s*)\?${property}:.*?\2\3${property}: ${value}?g" "$conf_file"
+        replace_in_file "$conf_file" "^(#\s)?(\s*)(\-\s*)?${property}:.*" "\2\3${property}: ${value}"
     fi
 }
 
@@ -172,8 +174,7 @@ cassandra_yaml_set_as_array() {
             substitution+="\n\2  - ${value}"
         fi
     done
-
-    sed -r -i "s?^(#\s)\?(\s*)${property}:.*?${substitution}?g" "$conf_file"
+    replace_in_file "$conf_file" "^(#\s)?(\s*)${property}:.*" "${substitution}"
 }
 
 ########################
@@ -419,8 +420,8 @@ cassandra_enable_auth() {
 #########################
 cassandra_setup_logging() {
     if ! cassandra_is_file_external "logback.xml"; then
-        sed -i -r 's?system[.]log?cassandra.log?g' "${CASSANDRA_CONF_DIR}/logback.xml"
-        sed -i -r 's?(<appender-ref\s+ref="ASYNCDEBUGLOG"\s+\/>)?<!-- \1 -->?g' "${CASSANDRA_CONF_DIR}/logback.xml"
+        replace_in_file "${CASSANDRA_CONF_DIR}/logback.xml" "system[.]log" "cassandra.log"
+        replace_in_file "${CASSANDRA_CONF_DIR}/logback.xml" "(<appender-ref\s+ref=\"ASYNCDEBUGLOG\"\s+\/>)" "<!-- \1 -->"
     else
         debug "logback.xml mounted. Skipping logging configuration"
     fi
@@ -438,11 +439,12 @@ cassandra_setup_logging() {
 cassandra_setup_cluster() {
     local host="127.0.0.1"
     local rpc_address="127.0.0.1"
+    local cassandra_config
+
     if [[ "$CASSANDRA_ENABLE_REMOTE_CONNECTIONS" = "true" ]]; then
         host="$CASSANDRA_HOST"
         rpc_address="0.0.0.0"
     fi
-
     # cassandra.yaml changes
     if ! cassandra_is_file_external "cassandra.yaml"; then
         cassandra_yaml_set "num_tokens" "$CASSANDRA_NUM_TOKENS" "no"
@@ -459,14 +461,15 @@ cassandra_setup_cluster() {
         cassandra_yaml_set "truststore" "$CASSANDRA_TRUSTSTORE_LOCATION"
         cassandra_yaml_set "truststore_password" "$CASSANDRA_TRUSTSTORE_PASSWORD"
 
-        sed -i -r  "/client_encryption_options:.*/ {N; s/client_encryption_options:[^\n]*\n\s{4}enabled:.*/client_encryption_options:\n    enabled: $CASSANDRA_CLIENT_ENCRYPTION/g}" "$CASSANDRA_CONF_FILE"
+        cassandra_config="$(sed -E "/client_encryption_options:.*/ {N; s/client_encryption_options:[^\n]*\n\s{4}enabled:.*/client_encryption_options:\n    enabled: $CASSANDRA_CLIENT_ENCRYPTION/g}" "$CASSANDRA_CONF_FILE")"
+        echo "$cassandra_config" > "$CASSANDRA_CONF_FILE"
     else
         debug "cassandra.yaml mounted. Skipping cluster configuration"
     fi
 
     # cassandra-env.sh changes
     if ! cassandra_is_file_external "cassandra-env.sh"; then
-        sed -i -r "s?#\s*JVM_OPTS=\"\$JVM_OPTS -Djava[.]rmi[.]server[.]hostname=[^\"]*?JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=${host}?g" "${CASSANDRA_CONF_DIR}/cassandra-env.sh"
+        replace_in_file "${CASSANDRA_CONF_DIR}/cassandra-env.sh" "#\s*JVM_OPTS=\"\$JVM_OPTS -Djava[.]rmi[.]server[.]hostname=[^\"]*" "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=${host}"
     else
         debug "cassandra-env.sh mounted. Skipping setting server hostname"
     fi
@@ -483,7 +486,7 @@ cassandra_setup_cluster() {
 #########################
 cassandra_setup_java() {
     if ! cassandra_is_file_external "cassandra-env.sh"; then
-        sed -i -r "s#(calculate_heap_sizes\(\))#\nJAVA_HOME=$JAVA_BASE_DIR\nJAVA=$JAVA_BIN_DIR/java\n\n\1#g" "${CASSANDRA_CONF_DIR}/cassandra-env.sh"
+        replace_in_file "${CASSANDRA_CONF_DIR}/cassandra-env.sh" "(calculate_heap_sizes\(\))" "\nJAVA_HOME=$JAVA_BASE_DIR\nJAVA=$JAVA_BIN_DIR/java\n\n\1"
     else
         debug "cassandra-env.sh mounted. Skipping JAVA_HOME configuration"
     fi
@@ -566,7 +569,7 @@ cassandra_setup_ports() {
     fi
 
     if ! cassandra_is_file_external "cassandra-env.sh"; then
-        sed -i -r "s#JMX_PORT=.*#JMX_PORT=$CASSANDRA_JMX_PORT_NUMBER#g" "$CASSANDRA_CONF_DIR"/cassandra-env.sh
+        replace_in_file "${CASSANDRA_CONF_DIR}/cassandra-env.sh" "JMX_PORT=.*" "JMX_PORT=$CASSANDRA_JMX_PORT_NUMBER"
     else
         debug "cassandra-env.sh mounted. Skipping JMX port configuration"
     fi
@@ -583,8 +586,8 @@ cassandra_setup_ports() {
 #########################
 cassandra_setup_rack_dc() {
     if ! cassandra_is_file_external "cassandra-rackdc.properties"; then
-        sed -i -r "s#dc=.*#dc=${CASSANDRA_DATACENTER}#g" "${CASSANDRA_CONF_DIR}/cassandra-rackdc.properties"
-        sed -i -r "s#rack=.*#rack=${CASSANDRA_RACK}#g" "${CASSANDRA_CONF_DIR}/cassandra-rackdc.properties"
+        replace_in_file "${CASSANDRA_CONF_DIR}/cassandra-rackdc.properties" "dc=.*" "dc=${CASSANDRA_DATACENTER}"
+        replace_in_file "${CASSANDRA_CONF_DIR}/cassandra-rackdc.properties" "rack=.*" "rack=${CASSANDRA_RACK}"
     else
         debug "cassandra-rackdc.properties mounted. Skipping rack and datacenter configuration"
     fi
