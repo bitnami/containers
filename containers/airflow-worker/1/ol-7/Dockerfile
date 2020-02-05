@@ -16,6 +16,7 @@ RUN bitnami-pkg install postgresql-client-10.11.0-0 --checksum 7698c1aeb96133009
 RUN bitnami-pkg unpack airflow-worker-1.10.7-0 --checksum fa986024ced22b28f197d401b57d0f4c8198a61d824df6d2a0f8cfde48f9f4d2
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
+RUN yum reinstall -y glibc-common && localedef -c -f UTF-8 -i en_US en_US.UTF-8
 RUN /build/install-gosu.sh
 RUN /build/install-tini.sh
 
@@ -36,8 +37,10 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     AIRFLOW_WORKER_PORT_NUMBER="8793" \
     BITNAMI_APP_NAME="airflow-worker" \
-    BITNAMI_IMAGE_VERSION="1.10.7-ol-7-r40" \
+    BITNAMI_IMAGE_VERSION="1.10.7-ol-7-r41" \
     C_FORCE_ROOT="True" \
+    LANG="en_US.UTF-8" \
+    LC_ALL="en_US.UTF-8" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
     LD_PRELOAD="/usr/lib64/libnss_wrapper.so" \
     LNAME="airflow" \
