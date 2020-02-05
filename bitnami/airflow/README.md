@@ -34,7 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.10.7-ol-7-r29` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.7-ol-7-r29/1/ol-7/Dockerfile)
-* [`1-debian-10`, `1.10.7-debian-10-r3`, `1`, `1.10.7`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.7-debian-10-r3/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.10.7-debian-10-r4`, `1`, `1.10.7`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.7-debian-10-r4/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow).
 
@@ -318,6 +318,9 @@ The Airflow instance can be customized by specifying environment variables on th
 - `AIRFLOW_LOAD_EXAMPLES`: To load example tasks into the application. Default: **yes**
 - `AIRFLOW_BASE_URL`: Airflow webserver base URL. No defaults.
 - `AIRFLOW_HOSTNAME_CALLABLE`: Method to obtain the hostname. No defaults.
+- `AIRFLOW_POOL_NAME`: Pool name. No defaults.
+- `AIRFLOW_POOL_SIZE`: Pool size, required with `AIRFLOW_POOL_NAME`. No defaults.
+- `AIRFLOW_POOL_DESC`: Pool description, required with `AIRFLOW_POOL_NAME`. No defaults.
 
 ##### Use an existing database
 
