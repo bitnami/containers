@@ -3,9 +3,9 @@
 set -o errexit
 set -o pipefail
 # set -o xtrace
-# shellcheck disable=SC1091
 
 # Load libraries
+# shellcheck disable=SC1091
 . /opt/bitnami/base/functions
 
 # Constants
@@ -14,11 +14,32 @@ INIT_SEM=/tmp/initialized.sem
 # Functions
 
 ########################
-# Ensure gems are up to date
+# Replace a regex in a file
 # Arguments:
-#   None
-# Returns:
-#   Boolean
+#   $1 - filename
+#   $2 - match regex
+#   $3 - substitute regex
+#   $4 - regex modifier
+# Returns: none
+#########################
+replace_in_file() {
+    local filename="${1:?filename is required}"
+    local match_regex="${2:?match regex is required}"
+    local substitute_regex="${3:?substitute regex is required}"
+    local regex_modifier="${4:-}"
+    local result
+
+    # We should avoid using 'sed in-place' substitutions
+    # 1) They are not compatible with files mounted from ConfigMap(s)
+    # 2) We found incompatibility issues with Debian10 and "in-place" substitutions
+    result="$(sed "${regex_modifier}s@${match_regex}@${substitute_regex}@g" "$filename")"
+    echo "$result" > "$filename"
+}
+
+########################
+# Ensure gems are up to date
+# Arguments: none
+# Returns: boolean
 #########################
 gems_up_to_date() {
   bundle check 1> /dev/null
@@ -30,8 +51,7 @@ gems_up_to_date() {
 #   DATABASE_HOST
 # Arguments:
 #   None
-# Returns:
-#   None
+# Returns: none
 #########################
 wait_for_db() {
   local db_host="${DATABASE_HOST:-mariadb}"
@@ -59,15 +79,15 @@ if [[ "$1" = "bundle" ]] && [[ "$2" = "exec" ]]; then
     log "Creating new Rails project..."
     rails new . --skip-bundle --database mysql
     # Add mini_racer
-    sed -i -e "s/# gem 'mini_racer'/gem 'mini_racer'/" Gemfile
+    replace_in_file "Gemfile" "# gem 'mini_racer'" "gem 'mini_racer'"
     # TODO: substitution using 'yq' once they support anchors
     # Related issue: https://github.com/mikefarah/yq/issues/178
     # E.g: yq w -i /app/config/database.yml default.host '<%= ENV.fetch("DATABASE_HOST") { mariadb } %>'
     # E.g: yq w -i /app/config/database.yml development.database '<%= ENV.fetch("DATABASE_NAME") { mariadb } %>'
     log "Setting default host to \`${DATABASE_HOST:-mariadb}\`..."
-    sed -i -e 's/host:.*$/host: <%= ENV.fetch("DATABASE_HOST", "mariadb") %>/g' /app/config/database.yml
+    replace_in_file "/app/config/database.yml" "host:.*$" "host: <%= ENV.fetch(\"DATABASE_HOST\", \"mariadb\") %>"
     log "Setting development database to \`${DATABASE_NAME:-my_app_development}\`..."
-    sed -i -e '1,/test:/ s/database:.*$/database: <%= ENV.fetch("DATABASE_NAME", "my_app_development") %>/g' /app/config/database.yml
+    replace_in_file "/app/config/database.yml" "database:.*$" "database: <%= ENV.fetch(\"DATABASE_NAME\", \"my_app_development\") %>" "1,/test:/ "
   fi
 
   if ! gems_up_to_date; then
