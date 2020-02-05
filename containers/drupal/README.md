@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8-ol-7`, `8.8.2-ol-7-r2` (8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.8.2-ol-7-r2/8/ol-7/Dockerfile)
-* [`8-debian-10`, `8.8.2-debian-10-r3`, `8`, `8.8.2`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.8.2-debian-10-r3/8/debian-10/Dockerfile)
+* [`8-debian-10`, `8.8.2-debian-10-r4`, `8`, `8.8.2`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.8.2-debian-10-r4/8/debian-10/Dockerfile)
 * [`8-rhel-7`, `8.6.14-rhel-7-r6` (8/rhel-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.6.14-rhel-7-r6/8/rhel-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
