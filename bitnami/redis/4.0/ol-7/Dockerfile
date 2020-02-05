@@ -23,7 +23,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.14-ol-7-r325" \
+    BITNAMI_IMAGE_VERSION="4.0.14-ol-7-r326" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH"
 
