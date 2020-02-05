@@ -1,0 +1,134 @@
+version: '2'
+services:
+  # Node Exporter
+  node-exporter:
+    image: bitnami/node-exporter:0
+    command:
+      - --web.listen-address=0.0.0.0:9100
+  # Prepare Prometheus Configuration
+  prepare-prometheus:
+    image: bitnami/minideb:buster
+    command:
+      - /bin/bash
+      - -ec
+      - |
+        cat >'/conf/prometheus.yml'<<'EOF'
+        global:
+          scrape_interval: 5s
+          external_labels:
+            foo: bar
+        scrape_configs:
+          - job_name: node-exporter
+            static_configs:
+              - targets:
+                  - node-exporter:9100
+          - job_name: prometheus
+            static_configs:
+              - targets:
+                  - localhost:9090
+        EOF
+    volumes:
+      - 'prom_conf:/conf'
+  # Prometheus Server
+  prometheus:
+    image: bitnami/prometheus:2
+    volumes:
+      - 'tsdb_data:/opt/bitnami/prometheus/data'
+      - 'prom_conf:/opt/bitnami/prometheus/conf'
+    depends_on:
+      - node-exporter
+      - prepare-prometheus
+  # Thanos Sidecar
+  thanos-sidecar:
+    image: bitnami/thanos:0-scratch
+    command:
+      - sidecar
+      - --tsdb.path=/data
+      - --prometheus.url=http://prometheus:9090
+      - --grpc-address=0.0.0.0:10901
+    volumes:
+      - 'tsdb_data:/data'
+    depends_on:
+      - prometheus
+  # MinIO
+  minio:
+    image: bitnami/minio:2020
+    ports:
+      - '9000:9000'
+    volumes:
+      - 'minio_data:/data'
+    environment:
+      - MINIO_ACCESS_KEY=minio
+      - MINIO_SECRET_KEY=minio123
+      - MINIO_DEFAULT_BUCKETS=thanos
+  # Prepare Object Store configuration
+  prepare-object-store-conf:
+    image: bitnami/minideb:buster
+    command:
+      - /bin/bash
+      - -ec
+      - |
+        cat >'/conf/bucket.yml'<<'EOF'
+        type: s3
+        config:
+          bucket: thanos
+          endpoint: minio:9000
+          insecure: true
+          access_key: minio
+          secret_key: minio123
+        EOF
+    volumes:
+      - 'ojb_store_conf:/conf'
+  # Thanos Store Gateway
+  thanos-store-gateway:
+    image: bitnami/thanos:0-scratch
+    command:
+      - store
+      - --objstore.config-file=/conf/bucket.yml
+      - --data-dir=/data
+      - --grpc-address=0.0.0.0:10901
+    user: "0"
+    volumes:
+      - 'ojb_store_conf:/conf'
+      - 'store_data:/data'
+    depends_on:
+      - minio
+      - prepare-object-store-conf
+  # Thanos Compactor
+  thanos-compactor:
+    image: bitnami/thanos:0-scratch
+    command:
+      - compact
+      - --objstore.config-file=/conf/bucket.yml
+      - --data-dir=/data
+    user: "0"
+    volumes:
+      - 'ojb_store_conf:/conf'
+    depends_on:
+      - minio
+      - prepare-object-store-conf
+  # Thanos Query
+  thanos-query:
+    image: bitnami/thanos:0-scratch
+    command:
+      - query
+      - --grpc-address=0.0.0.0:10901
+      - --http-address=0.0.0.0:9090
+      - --store=thanos-sidecar:10901
+      - --store=thanos-store-gateway:10901
+    ports:
+      - '9090:9090'
+    depends_on:
+      - thanos-sidecar
+      - thanos-store-gateway
+volumes:
+  prom_conf:
+    driver: local
+  tsdb_data:
+    driver: local
+  minio_data:
+    driver: local
+  ojb_store_conf:
+    driver: local
+  store_data:
+    driver: local
