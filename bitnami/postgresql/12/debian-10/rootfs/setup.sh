@@ -9,13 +9,10 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# Load Generic Libraries
-. /libfile.sh
+# Load libraries
 . /liblog.sh
-. /libservice.sh
-. /libvalidations.sh
-. /libfs.sh
 . /libos.sh
+. /libvalidations.sh
 . /libpostgresql.sh
 
 # Load PostgreSQL environment variables
