@@ -12,7 +12,7 @@ RUN yum upgrade -y && \
     rm -r /var/cache/yum
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.7.0-ol-7-r22" \
+    BITNAMI_IMAGE_VERSION="2.7.0-ol-7-r23" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
