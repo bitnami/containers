@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`8-scratch`, `8.0.1-scratch-r0`, `8`, `8.0.1`, `8.0.1-r0`, `latest` (8/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/8.0.1/8/scratch/Dockerfile)
+* [`8-scratch`, `8.0.2-scratch-r0`, `8`, `8.0.2`, `8.0.2-r0`, `latest` (8/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/8.0.2/8/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak-gatekeeper GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper).
 
