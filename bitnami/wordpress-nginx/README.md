@@ -12,6 +12,7 @@ https://nginx.org/
 
 ```bash
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-wordpress-nginx/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-wordpress-nginx/master/wordpress-server-block.conf
 $ docker-compose up
 ```
 
@@ -46,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5-ol-7`, `5.3.2-ol-7-r46` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.3.2-ol-7-r46/5/ol-7/Dockerfile)
-* [`5-debian-10`, `5.3.2-debian-10-r9`, `5`, `5.3.2`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.3.2-debian-10-r9/5/debian-10/Dockerfile)
+* [`5-debian-10`, `5.3.2-debian-10-r10`, `5`, `5.3.2`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.3.2-debian-10-r10/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
 
@@ -64,6 +65,7 @@ The main folder of this repository contains a functional [`docker-compose.yml`](
 
 ```bash
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-wordpress-nginx/master/docker-compose.yml > docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-wordpress-nginx/master/wordpress-server-block.conf
 $ docker-compose up -d
 ```
 
