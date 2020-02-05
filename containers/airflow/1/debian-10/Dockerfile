@@ -13,7 +13,7 @@ RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg install python-3.6.10-0 --checksum 64172bd89338173a279f7a459b4fd0f1d630b18035bc73bab9dfc45ac2cfbe98
 RUN bitnami-pkg install postgresql-client-10.11.0-0 --checksum 20345cd0ee4812b655a02e3ad2312fb31726109040c475e416d0f339264bd779
-RUN bitnami-pkg unpack airflow-1.10.7-0 --checksum 465d87849004ec569164360f9446131c2391f5379a80bde945b513f4b7fd3db8
+RUN bitnami-pkg unpack airflow-1.10.7-1 --checksum a57da666bcb6c6127472f146caa316fbfbd551495ab6e8b04ff3802c5a255087
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
@@ -40,12 +40,15 @@ ENV AIRFLOW_BASE_URL="" \
     AIRFLOW_LASTNAME="Lastname" \
     AIRFLOW_LOAD_EXAMPLES="yes" \
     AIRFLOW_PASSWORD="bitnami" \
+    AIRFLOW_POOL_DESC="" \
+    AIRFLOW_POOL_NAME="" \
+    AIRFLOW_POOL_SIZE="" \
     AIRFLOW_REDIS_USE_SSL="no" \
     AIRFLOW_USERNAME="user" \
     AIRFLOW_WEBSERVER_HOST="127.0.0.1" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="airflow" \
-    BITNAMI_IMAGE_VERSION="1.10.7-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="1.10.7-debian-10-r4" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
