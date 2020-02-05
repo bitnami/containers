@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-ol-7`, `1.9.20-ol-7-r12` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.20-ol-7-r12/1/ol-7/Dockerfile)
-* [`1-debian-10`, `1.9.20-debian-10-r5`, `1`, `1.9.20`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.20-debian-10-r5/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.9.20-debian-10-r6`, `1`, `1.9.20`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.20-debian-10-r6/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/testlink GitHub repo](https://github.com/bitnami/bitnami-docker-testlink).
 
