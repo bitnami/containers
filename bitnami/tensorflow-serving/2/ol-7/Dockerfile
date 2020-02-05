@@ -18,7 +18,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="2.1.0-ol-7-r4" \
+    BITNAMI_IMAGE_VERSION="2.1.0-ol-7-r5" \
     NAMI_PREFIX="/.nami" \
     TENSORFLOW_SERVING_ENABLE_MONITORING="no" \
     TENSORFLOW_SERVING_MODEL_NAME="resnet" \
