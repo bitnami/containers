@@ -12,7 +12,7 @@ RUN yum upgrade -y && \
     rm -r /var/cache/yum
 
 ENV BITNAMI_APP_NAME="node-exporter" \
-    BITNAMI_IMAGE_VERSION="0.18.1-ol-7-r249" \
+    BITNAMI_IMAGE_VERSION="0.18.1-ol-7-r250" \
     PATH="/opt/bitnami/node-exporter/bin:$PATH"
 
 EXPOSE 9100
