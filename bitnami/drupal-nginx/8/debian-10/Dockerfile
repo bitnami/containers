@@ -22,7 +22,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="8.8.2-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="8.8.2-debian-10-r3" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
