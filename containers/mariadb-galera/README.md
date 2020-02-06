@@ -376,6 +376,8 @@ A **zero downtime** MariaDB Galera [replication](https://dev.mysql.com/doc/refma
 
  - `MARIADB_GALERA_CLUSTER_ADDRESS`: Galera cluster address to join. Defaults to `gcomm://` on a bootstrap node.
 
+ - `MARIADB_GALERA_NODE_ADDRESS`: Node address to report to the Galera cluster. Defaults to eth0 address inside container.
+
  - `MARIADB_GALERA_MARIABACKUP_USER`: [mariabackup](https://mariadb.com/kb/en/library/mariabackup-overview/) username for [State Snapshot Transfer(SST)](https://galeracluster.com/library/documentation/glossary.html#term-state-snapshot-transfer). Defaults to `mariabackup`.
 
  - `MARIADB_GALERA_MARIABACKUP_PASSWORD`: [mariabackup](https://mariadb.com/kb/en/library/mariabackup-overview/) password for SST. No defaults.
