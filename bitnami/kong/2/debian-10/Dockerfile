@@ -17,7 +17,7 @@ RUN /build/install-gosu.sh
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kong" \
-    BITNAMI_IMAGE_VERSION="2.0.1-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="2.0.1-debian-10-r1" \
     PATH="/opt/bitnami/kong/bin:/opt/bitnami/kong/openresty/bin:/opt/bitnami/kong/openresty/luajit/bin:/opt/bitnami/kong/openresty/nginx/sbin:$PATH"
 
 EXPOSE 8000 8001 8443 8444
