@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade && \
 RUN ln -sf /opt/bitnami/apache-exporter/bin/apache_exporter /bin/apache_exporter
 
 ENV BITNAMI_APP_NAME="apache-exporter" \
-    BITNAMI_IMAGE_VERSION="0.7.0-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="0.7.0-debian-10-r11" \
     PATH="/opt/bitnami/apache-exporter/bin:$PATH"
 
 EXPOSE 9117
