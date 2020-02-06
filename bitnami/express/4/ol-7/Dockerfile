@@ -11,7 +11,7 @@ RUN install_packages bzip2-libs ca-certificates curl cyrus-sasl-lib glibc gzip h
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg install sequelize-cli-5.5.1-1 --checksum 9e9f7ea62b071b8e745d4d60f79c124e656ef1b2225e790b8109cdac3e5ba106
-RUN bitnami-pkg install node-10.18.1-0 --checksum c61f5ce812c3092ed4b91d56638cae0b53445e53a044339ca248ce57d730769a
+RUN bitnami-pkg install node-10.19.0-0 --checksum eb60e2483625fedaf9146111aa5c4def8830c9f8ed13af4d2d2c253f865389d8
 RUN bitnami-pkg install git-2.25.0-0 --checksum 2fd25c5b37cec238a759c3c3643c156d4fe5b00716e2152c7c494cf6729673c9
 RUN bitnami-pkg install express-generator-4.16.1-1 --checksum 4682493da5533b962d138c0386a9dedc189e67db00a50ff4ee2f8e5af9ced7d8
 RUN bitnami-pkg install express-4.17.1-1 --checksum c088aba95fd8128f0e1fa3c8bf2d8214c1ac723ca2ef6c4f2bb49f267b4fd5b6
@@ -24,7 +24,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.17.1-ol-7-r233" \
+    BITNAMI_IMAGE_VERSION="4.17.1-ol-7-r234" \
     NAMI_PREFIX="/.nami"
 
 EXPOSE 3000
