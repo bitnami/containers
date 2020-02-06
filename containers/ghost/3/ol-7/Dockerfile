@@ -11,7 +11,7 @@ COPY prebuildfs /
 RUN install_packages bzip2-libs ca-certificates curl glibc gzip hostname keyutils-libs krb5-libs libX11-devel libaio-devel libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre procps-ng readline sqlite sudo tar which zlib
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
-RUN bitnami-pkg install node-10.18.1-0 --checksum c61f5ce812c3092ed4b91d56638cae0b53445e53a044339ca248ce57d730769a
+RUN bitnami-pkg install node-10.19.0-0 --checksum eb60e2483625fedaf9146111aa5c4def8830c9f8ed13af4d2d2c253f865389d8
 RUN bitnami-pkg unpack mysql-client-10.3.22-0 --checksum a79d0068a2219cfa03e249f6eb38945b4f0c5a4d116771bcbe971470b0c29417
 RUN bitnami-pkg unpack ghost-3.5.0-0 --checksum 9620d99c2d4a3d8624a0023612c8f582f04223b5ee16062df3f92f4c91a4ce7c
 RUN yum upgrade -y && \
@@ -22,7 +22,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="3.5.0-ol-7-r0" \
+    BITNAMI_IMAGE_VERSION="3.5.0-ol-7-r1" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
