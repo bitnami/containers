@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de3935
 RUN bitnami-pkg unpack php-7.3.14-0 --checksum e99cb40b76f03fde9fe864a47ef2be3643dc2f9a859c764e1ba626577d13c893
 RUN bitnami-pkg unpack mysql-client-10.3.22-0 --checksum a79d0068a2219cfa03e249f6eb38945b4f0c5a4d116771bcbe971470b0c29417
 RUN bitnami-pkg install libphp-7.3.14-0 --checksum 5ec940bf1429c99d5e9204f2a9ace1ce0b136cda397ecfe50f8ffef9571242db
-RUN bitnami-pkg unpack drupal-8.8.2-0 --checksum ca079a6d84bb6c67cfe8292d20e3b06fa418ff8d5f559b5a6719113645bab3ca
+RUN bitnami-pkg unpack drupal-8.8.2-1 --checksum a55fa21abb5121d424eefeeb2063b84f24eb234eb6cb4f6e6b0e5bd6d1648e08
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.8.2-ol-7-r3" \
+    BITNAMI_IMAGE_VERSION="8.8.2-ol-7-r4" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
