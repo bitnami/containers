@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`8.0-ol-7`, `8.0.19-ol-7-r18` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.19-ol-7-r18/8.0/ol-7/Dockerfile)
 * [`8.0-debian-10`, `8.0.19-debian-10-r11`, `8.0`, `8.0.19`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.19-debian-10-r11/8.0/debian-10/Dockerfile)
-* [`5.7-ol-7`, `5.7.29-ol-7-r18` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.29-ol-7-r18/5.7/ol-7/Dockerfile)
+* [`5.7-ol-7`, `5.7.29-ol-7-r19` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.29-ol-7-r19/5.7/ol-7/Dockerfile)
 * [`5.7-debian-10`, `5.7.29-debian-10-r11`, `5.7`, `5.7.29` (5.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.29-debian-10-r11/5.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
