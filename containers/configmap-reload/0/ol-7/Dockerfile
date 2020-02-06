@@ -13,7 +13,7 @@ RUN yum upgrade -y && \
 RUN ln -sf /opt/bitnami/configmap-reload/bin/configmap-reload /bin/configmap-reload
 
 ENV BITNAMI_APP_NAME="configmap-reload" \
-    BITNAMI_IMAGE_VERSION="0.3.0-ol-7-r110" \
+    BITNAMI_IMAGE_VERSION="0.3.0-ol-7-r111" \
     PATH="/opt/bitnami/configmap-reload/bin:$PATH"
 
 EXPOSE 8080
