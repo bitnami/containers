@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de3935
 RUN bitnami-pkg unpack php-7.3.14-0 --checksum e99cb40b76f03fde9fe864a47ef2be3643dc2f9a859c764e1ba626577d13c893
 RUN bitnami-pkg unpack mysql-client-10.3.22-0 --checksum a79d0068a2219cfa03e249f6eb38945b4f0c5a4d116771bcbe971470b0c29417
 RUN bitnami-pkg install libphp-7.3.14-0 --checksum 5ec940bf1429c99d5e9204f2a9ace1ce0b136cda397ecfe50f8ffef9571242db
-RUN bitnami-pkg unpack testlink-1.9.20-2 --checksum cbdb003e9f0398f98fb3119326cfc096fb7b927e3c6620bd740e80b0ebc38398
+RUN bitnami-pkg unpack testlink-1.9.20-3 --checksum f6279c2a00ce6ebd56f514b6101b0cfb7a925f56d84b3cad1fb084a79f98ea1d
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -20,10 +20,12 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
-    APACHE_HTTPS_PORT="443" \
-    APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT_NUMBER="" \
+    APACHE_HTTP_PORT_NUMBER="" \
+    APACHE_SET_HTTPS_PORT="no" \
+    APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="testlink" \
-    BITNAMI_IMAGE_VERSION="1.9.20-ol-7-r14" \
+    BITNAMI_IMAGE_VERSION="1.9.20-ol-7-r15" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
