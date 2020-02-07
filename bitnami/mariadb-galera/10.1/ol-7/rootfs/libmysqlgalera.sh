@@ -96,6 +96,7 @@ export DB_GALERA_CLUSTER_BOOTSTRAP="$(get_galera_cluster_bootstrap_value)"
 export DB_GALERA_CLUSTER_ADDRESS="$(get_galera_cluster_address_value)"
 DB_GALERA_CLUSTER_NAME="$(get_env_var_value GALERA_CLUSTER_NAME)"
 export DB_GALERA_CLUSTER_NAME="${DB_GALERA_CLUSTER_NAME:-galera}"
+export DB_GALERA_NODE_ADDRESS="$(get_env_var_value GALERA_NODE_ADDRESS)"
 export DB_GALERA_MARIABACKUP_USER="$(get_env_var_value GALERA_MARIABACKUP_USER)"
 export DB_GALERA_MARIABACKUP_USER="${DB_GALERA_MARIABACKUP_USER:-mariabackup}"
 export DB_GALERA_MARIABACKUP_PASSWORD="$(get_env_var_value GALERA_MARIABACKUP_PASSWORD)"
@@ -108,7 +109,6 @@ DB_LDAP_NSS_INITGROUPS_IGNOREUSERS="$(get_env_var_value LDAP_NSS_INITGROUPS_IGNO
 export DB_LDAP_NSS_INITGROUPS_IGNOREUSERS="${DB_LDAP_NSS_INITGROUPS_IGNOREUSERS:-root,nslcd}"
 export DB_LDAP_SCOPE="$(get_env_var_value LDAP_SCOPE)"
 export DB_LDAP_TLS_REQCERT="$(get_env_var_value LDAP_TLS_REQCERT)"
-export DB_GALERA_NODE_ADDRESS="$(get_env_var_value GALERA_NODE_ADDRESS)"
 read -r -a DB_EXTRA_FLAGS <<< "$(mysql_extra_flags)"
 export DB_EXTRA_FLAGS
 EOF
@@ -461,6 +461,23 @@ URI $DB_LDAP_URI
 EOF
 
         nslcd --debug &
+    fi
+}
+
+########################
+# Check for user override of wsrep_node_address.
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   String with node address
+#########################
+get_node_address() {
+    if [[ -n "$DB_GALERA_NODE_ADDRESS" ]]; then
+        echo "$DB_GALERA_NODE_ADDRESS"
+    else
+        hostname -i
     fi
 }
 
@@ -928,21 +945,3 @@ mysql_ensure_optional_database_exists() {
 mysql_flag_initialized() {
     touch "$DB_VOLUME_DIR"/.mysql_initialized
 }
-
-########################
-# Check for user override of wsrep_node_address.
-# Globals:
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   String with node address
-#########################
-get_node_address() {
-    if [[ -n "$DB_GALERA_NODE_ADDRESS" ]]; then
-        echo "$DB_GALERA_NODE_ADDRESS"
-    else
-        hostname -i
-    fi
-}
-
