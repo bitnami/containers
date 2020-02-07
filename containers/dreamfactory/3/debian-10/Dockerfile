@@ -21,8 +21,12 @@ RUN /build/install-gosu.sh
 RUN /build/install-tini.sh
 
 COPY rootfs /
-ENV BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="3.1.2-debian-10-r10" \
+ENV APACHE_HTTPS_PORT_NUMBER="" \
+    APACHE_HTTP_PORT_NUMBER="" \
+    APACHE_SET_HTTPS_PORT="no" \
+    APACHE_SET_HTTP_PORT="no" \
+    BITNAMI_APP_NAME="dreamfactory" \
+    BITNAMI_IMAGE_VERSION="3.1.2-debian-10-r11" \
     MARIADB_HOST="mariadb" \
     MARIADB_PASSWORD="" \
     MARIADB_PORT_NUMBER="3306" \
