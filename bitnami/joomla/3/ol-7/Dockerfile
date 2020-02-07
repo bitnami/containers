@@ -20,8 +20,12 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
+    APACHE_HTTPS_PORT_NUMBER="" \
+    APACHE_HTTP_PORT_NUMBER="" \
+    APACHE_SET_HTTPS_PORT="no" \
+    APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.9.15-ol-7-r7" \
+    BITNAMI_IMAGE_VERSION="3.9.15-ol-7-r8" \
     JOOMLA_DATABASE_NAME="bitnami_joomla" \
     JOOMLA_DATABASE_PASSWORD="" \
     JOOMLA_DATABASE_USER="bn_joomla" \
