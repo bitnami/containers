@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel procps-ng sudo tar unzip which
-RUN . ./libcomponent.sh && component_unpack "influxdb" "1.7.9-0" --checksum 7fe4650e66b71e205a4aa4c9028463d0f0399538f685352792decf2b6f93a65f
+RUN . ./libcomponent.sh && component_unpack "influxdb" "1.7.10-0" --checksum 7703487a04d7e29cc921cd26fafdca3d2f04a57503444a8adad3d61faccab71c
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -22,7 +22,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="influxdb" \
-    BITNAMI_IMAGE_VERSION="1.7.9-ol-7-r104" \
+    BITNAMI_IMAGE_VERSION="1.7.10-ol-7-r0" \
     PATH="/opt/bitnami/influxdb/bin:$PATH"
 
 VOLUME [ "/bitnami/influxdb" ]
