@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 procps sudo unzip
-RUN . ./libcomponent.sh && component_unpack "influxdb" "1.7.9-0" --checksum ad40d9790e93b4715554b91742695b8ebf8e9d46d1ea6f20f8bafe5ec7278a2c
+RUN . ./libcomponent.sh && component_unpack "influxdb" "1.7.10-0" --checksum 14419072474d43544834de91298d26dbe007ce08ce249a67b7e0c808b0f9cc70
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -22,7 +22,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="influxdb" \
-    BITNAMI_IMAGE_VERSION="1.7.9-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="1.7.10-debian-10-r0" \
     PATH="/opt/bitnami/influxdb/bin:$PATH"
 
 VOLUME [ "/bitnami/influxdb" ]
