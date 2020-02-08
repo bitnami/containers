@@ -13,7 +13,7 @@ RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg install python-3.6.10-0 --checksum 64172bd89338173a279f7a459b4fd0f1d630b18035bc73bab9dfc45ac2cfbe98
 RUN bitnami-pkg install postgresql-client-10.11.0-0 --checksum 20345cd0ee4812b655a02e3ad2312fb31726109040c475e416d0f339264bd779
-RUN bitnami-pkg unpack airflow-worker-1.10.7-0 --checksum ff03f53f05690e1a364a59e67abd39b4815ba16033c3af89e85c258cb9ac4e05
+RUN bitnami-pkg unpack airflow-worker-1.10.9-0 --checksum f33fdaf96a87b58bee38c20a4da4a6cd8c9dfb8010c64262d1a0e156919800b9
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
@@ -39,7 +39,7 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     AIRFLOW_WORKER_PORT_NUMBER="8793" \
     BITNAMI_APP_NAME="airflow-worker" \
-    BITNAMI_IMAGE_VERSION="1.10.7-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="1.10.9-debian-10-r0" \
     C_FORCE_ROOT="True" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
