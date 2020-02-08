@@ -23,8 +23,11 @@ COPY rootfs /
 RUN /postunpack.sh
 RUN /postunpack-harbor-portal.sh
 ENV BITNAMI_APP_NAME="harbor-portal" \
-    BITNAMI_IMAGE_VERSION="1.10.0-ol-7-r51" \
+    BITNAMI_IMAGE_VERSION="1.10.0-ol-7-r52" \
     NAMI_PREFIX="/.nami" \
+    NGINX_ENABLE_CUSTOM_PORTS="no" \
+    NGINX_HTTPS_PORT_NUMBER="" \
+    NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/harbor/bin:$PATH"
 
 EXPOSE 8080 8443
