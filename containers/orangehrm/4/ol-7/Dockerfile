@@ -20,8 +20,12 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
+    APACHE_HTTPS_PORT_NUMBER="" \
+    APACHE_HTTP_PORT_NUMBER="" \
+    APACHE_SET_HTTPS_PORT="no" \
+    APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.3.4-0-ol-7-r98" \
+    BITNAMI_IMAGE_VERSION="4.3.4-0-ol-7-r99" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
