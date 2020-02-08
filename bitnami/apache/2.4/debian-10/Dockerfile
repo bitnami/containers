@@ -17,8 +17,12 @@ RUN curl --silent -L https://github.com/bitnami/render-template/releases/downloa
 
 COPY rootfs /
 RUN /postunpack.sh
-ENV BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.41-debian-10-r11" \
+ENV APACHE_HTTPS_PORT_NUMBER="" \
+    APACHE_HTTP_PORT_NUMBER="" \
+    APACHE_SET_HTTPS_PORT="no" \
+    APACHE_SET_HTTP_PORT="no" \
+    BITNAMI_APP_NAME="apache" \
+    BITNAMI_IMAGE_VERSION="2.4.41-debian-10-r12" \
     PATH="/opt/bitnami/apache/bin:$PATH"
 
 EXPOSE 8080 8443
