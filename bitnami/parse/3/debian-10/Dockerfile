@@ -20,7 +20,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="3.10.0-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="3.10.0-debian-10-r15" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
