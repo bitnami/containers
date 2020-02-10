@@ -10,7 +10,7 @@ RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg install java-1.8.242-0 --checksum 3a70f3d1c3cd9bc6ec581b2a10373a2b323c0b9af40402ce8d19aeb0b3d02400
 RUN bitnami-pkg install git-2.25.0-0 --checksum 392bea1a8c3607f8ebce5403ec22819915ab8a5cc2245a5249568660b4ed07df
-RUN bitnami-pkg unpack jenkins-2.204.2-0 --checksum 64acb6156b248347d0a983fcaee15bc2d2f87ec690e1fe9459ed645b93f3206f
+RUN bitnami-pkg unpack jenkins-2.204.2-1 --checksum 5f48a06fa9bc13f036ba2aacba08882ebbaf63629b72fb779ad6383c4aad87e6
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -20,7 +20,7 @@ RUN mkdir -p /usr/share/jenkins/ref
 COPY rootfs /
 RUN ln -sf /install-plugins.sh /usr/local/bin/install-plugins.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.204.2-debian-10-r9" \
+    BITNAMI_IMAGE_VERSION="2.204.2-debian-10-r10" \
     DISABLE_JENKINS_INITIALIZATION="no" \
     JAVA_OPTS="" \
     JENKINS_HOME="/opt/bitnami/jenkins/jenkins_home" \
