@@ -143,8 +143,8 @@ pgpool_validate() {
         print_validation_error "pool_hba.conf authentication and pool password should be enabled for LDAP to work. Keep the PGPOOL_ENABLE_POOL_HBA and PGPOOL_ENABLE_POOL_PASSWD environment variables set to 'yes'."
     fi
 
-    if  is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD" && ([[ -z "$PGPOOL_POSTGRES_USERNAME" ]] || [[ -z "$PGPOOL_POSTGRES_PASSWORD" ]]); then
-      print_validation_error "The administrator's database credentials are required. Set the environment variables PGPOOL_POSTGRES_USERNAME and PGPOOL_POSTGRES_PASSWORD with the administrator's database credentials."
+    if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD" && { [[ -z "$PGPOOL_POSTGRES_USERNAME" ]] || [[ -z "$PGPOOL_POSTGRES_PASSWORD" ]]; }; then
+        print_validation_error "The administrator's database credentials are required. Set the environment variables PGPOOL_POSTGRES_USERNAME and PGPOOL_POSTGRES_PASSWORD with the administrator's database credentials."
     fi
 
     if [[ -z "$PGPOOL_BACKEND_NODES" ]]; then
