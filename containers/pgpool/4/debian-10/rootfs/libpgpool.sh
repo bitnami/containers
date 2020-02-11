@@ -42,7 +42,10 @@ export PGPOOL_PCP_CONF_FILE="${PGPOOL_ETC_DIR}/pcp.conf"
 export PGPOOL_PGHBA_FILE="${PGPOOL_CONF_DIR}/pool_hba.conf"
 export PGPOOL_PID_FILE="${PGPOOL_TMP_DIR}/pgpool.pid"
 export PGPOOL_LOG_FILE="${PGPOOL_LOG_DIR}/pgpool.log"
-export PGPOOL_PWD_FILE="pool_passwd"
+export PGPOOL_ENABLE_POOL_HBA="${PGPOOL_ENABLE_POOL_HBA:-yes}"
+export PGPOOL_ENABLE_POOL_PASSWD="${PGPOOL_ENABLE_POOL_PASSWD:-yes}"
+export PGPOOL_PASSWD_FILE="${PGPOOL_PASSWD_FILE:-pool_passwd}"
+export PGPOOL_MAX_POOL="${PGPOOL_MAX_POOL:-15}"
 export PATH="${PGPOOL_BIN_DIR}:$PATH"
 
 # Users
@@ -118,6 +121,14 @@ pgpool_validate() {
         error_code=1
     }
 
+    if ! is_yes_no_value "$PGPOOL_ENABLE_POOL_HBA"; then
+        print_validation_error "The values allowed for PGPOOL_ENABLE_POOL_HBA are: yes or no"
+    fi
+
+    if ! is_yes_no_value "$PGPOOL_ENABLE_POOL_PASSWD"; then
+        print_validation_error "The values allowed for PGPOOL_ENABLE_POOL_PASSWD are: yes or no"
+    fi
+
     if [[ -z "$PGPOOL_ADMIN_USERNAME" ]] || [[ -z "$PGPOOL_ADMIN_PASSWORD" ]]; then
         print_validation_error "The Pgpool administrator user's credentials are mandatory. Set the environment variables PGPOOL_ADMIN_USERNAME and PGPOOL_ADMIN_PASSWORD with the Pgpool administrator user's credentials."
     fi
@@ -127,9 +138,15 @@ pgpool_validate() {
     if is_boolean_yes "$PGPOOL_ENABLE_LDAP" && ( [[ -z "${PGPOOL_LDAP_URI}" ]] || [[ -z "${PGPOOL_LDAP_BASE}" ]] || [[ -z "${PGPOOL_LDAP_BIND_DN}" ]] || [[ -z "${PGPOOL_LDAP_BIND_PASSWORD}" ]] ); then
         print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables PGPOOL_LDAP_URI, PGPOOL_LDAP_BASE, PGPOOL_LDAP_BIND_DN and PGPOOL_LDAP_BIND_PASSWORD with the LDAP configuration."
     fi
-    if [[ -z "$PGPOOL_POSTGRES_USERNAME" ]] || [[ -z "$PGPOOL_POSTGRES_PASSWORD" ]]; then
-        print_validation_error "The administrator's database credentials are required. Set the environment variables PGPOOL_POSTGRES_USERNAME and PGPOOL_POSTGRES_PASSWORD with the administrator's database credentials."
+
+    if is_boolean_yes "$PGPOOL_ENABLE_LDAP" && ( ! is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA" || ! is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD" ); then
+        print_validation_error "pool_hba.conf authentication and pool password should be enabled for LDAP to work. Keep the PGPOOL_ENABLE_POOL_HBA and PGPOOL_ENABLE_POOL_PASSWD environment variables set to 'yes'."
     fi
+
+    if  is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD" && ([[ -z "$PGPOOL_POSTGRES_USERNAME" ]] || [[ -z "$PGPOOL_POSTGRES_PASSWORD" ]]); then
+      print_validation_error "The administrator's database credentials are required. Set the environment variables PGPOOL_POSTGRES_USERNAME and PGPOOL_POSTGRES_PASSWORD with the administrator's database credentials."
+    fi
+
     if [[ -z "$PGPOOL_BACKEND_NODES" ]]; then
         print_validation_error "The list of backend nodes cannot be empty. Set the environment variable PGPOOL_BACKEND_NODES with a comma separated list of backend nodes."
     else
@@ -157,7 +174,7 @@ pgpool_attach_node() {
     info "Attaching backend node..."
     export PCPPASSFILE=$(mktemp /tmp/pcppass-XXXXX)
     echo "localhost:9898:${PGPOOL_ADMIN_USERNAME}:${PGPOOL_ADMIN_PASSWORD}" > "${PCPPASSFILE}"
-    pcp_attach_node -h localhost  -U "${PGPOOL_ADMIN_USERNAME}" -p 9898 -n "${node_id}" -w
+    pcp_attach_node -h localhost -U "${PGPOOL_ADMIN_USERNAME}" -p 9898 -n "${node_id}" -w
     rm -rf "${PCPPASSFILE}"
 }
 
@@ -208,13 +225,17 @@ pgpool_start_nslcd_bg() {
 #########################
 pgpool_create_pghba() {
     local authentication="md5"
+    local postgres_auth_line=""
     info "Generating pg_hba.conf file..."
 
     is_boolean_yes "$PGPOOL_ENABLE_LDAP" && authentication="pam pamservice=pgpool.pam"
+    if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
+        postgres_auth_line="host     all             ${PGPOOL_POSTGRES_USERNAME}       all         md5"
+    fi
     cat > "$PGPOOL_PGHBA_FILE" << EOF
 local    all             all                            trust
 host     all             $PGPOOL_SR_CHECK_USER       all         trust
-host     all             $PGPOOL_POSTGRES_USERNAME       all         md5
+$postgres_auth_line
 host     all             wide               all         trust
 host     all             pop_user           all         trust
 host     all             all                all         $authentication
@@ -284,11 +305,34 @@ EOF
 pgpool_create_config() {
     local -i node_counter=0
     local load_balance_mode=""
+    local pool_hba=""
+    local pool_passwd=""
+    local allow_clear_text_frontend_auth="off"
 
     if is_boolean_yes "$PGPOOL_ENABLE_LOAD_BALANCING"; then
         load_balance_mode="on"
     else
         load_balance_mode="off"
+    fi
+
+    if is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA"; then
+        pool_hba="on"
+    else
+        pool_hba="off"
+    fi
+
+    if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
+        pool_passwd="$PGPOOL_PASSWD_FILE"
+    else
+        if ! is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA"; then
+          # allow_clear_text_frontend_auth only works when enable_pool_hba is not enabled
+          # ref: https://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#GUC-ALLOW-CLEAR-TEXT-FRONTEND-AUTH
+          allow_clear_text_frontend_auth="on"
+        fi
+
+        # Specifying '' (empty) disables the use of password file.
+        # ref: https://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#GUC-POOL-PASSWD
+        pool_passwd=""
     fi
 
     info "Generating pgpool.conf file..."
@@ -305,12 +349,13 @@ pgpool_create_config() {
     pgpool_set_property "pcp_socket_dir" "$PGPOOL_TMP_DIR"
     # Authentication settings
     # ref: http://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#RUNTIME-CONFIG-AUTHENTICATION-SETTINGS
-    pgpool_set_property "enable_pool_hba" "on"
-    pgpool_set_property "pool_passwd" "$PGPOOL_PWD_FILE"
+    pgpool_set_property "enable_pool_hba" "$pool_hba"
+    pgpool_set_property "allow_clear_text_frontend_auth" "$allow_clear_text_frontend_auth"
+    pgpool_set_property "pool_passwd" "$pool_passwd"
     pgpool_set_property "authentication_timeout" "30"
     # Connection Pooling settings
     # http://www.pgpool.net/docs/latest/en/html/runtime-config-connection-pooling.html
-    pgpool_set_property "max_pool" "15"
+    pgpool_set_property "max_pool" "$PGPOOL_MAX_POOL"
     # File Locations settings
     pgpool_set_property "pid_file_name" "$PGPOOL_PID_FILE"
     pgpool_set_property "logdir" "$PGPOOL_LOG_DIR"
@@ -404,9 +449,13 @@ EOF
 #   None
 #########################
 pgpool_generate_password_file() {
-    info "Generating password file for local authentication..."
+    if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
+        info "Generating password file for local authentication..."
 
-    pg_md5 -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_POSTGRES_USERNAME" "$PGPOOL_POSTGRES_PASSWORD"
+        pg_md5 -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_POSTGRES_USERNAME" "$PGPOOL_POSTGRES_PASSWORD"
+    else
+        info "Skip generating password file due to PGPOOL_ENABLE_POOL_PASSWD = no"
+    fi
 }
 
 ########################
