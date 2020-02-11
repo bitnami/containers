@@ -33,6 +33,7 @@ if [[ ! -z "$ETCD_ROOT_PASSWORD" ]]; then
     echo "$ETCD_ROOT_PASSWORD" | etcdctl user add root --interactive=false
     etcdctl auth enable
     kill $ETCD_PID
+    unset ETCD_ROOT_PASSWORD
 fi
 
 
