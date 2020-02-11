@@ -11,7 +11,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages alsa-lib-devel ca-certificates curl freetype-devel glibc gzip hostname libX11-devel libXext-devel libXi-devel libXrender-devel libXtst-devel libaio-devel libgcc procps-ng sudo tar which zlib
 RUN . ./libcomponent.sh && component_unpack "java" "11.0.6-0" --checksum 44f5ec63dbe8d2ea9aaea237cec2d8821ac3ee6fa2812c295c0fa04068d0e08e
-RUN . ./libcomponent.sh && component_unpack "elasticsearch" "7.5.2-2" --checksum 537b0137f35811067c85a83a65758a4d9ddaeceb0168718b50708ac7dd513981
+RUN . ./libcomponent.sh && component_unpack "elasticsearch" "7.6.0-0" --checksum afe1e20c5e86baea3566c2bace27e4df24b3960cd85eeb1bd0826b30f800b48e
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -20,7 +20,7 @@ RUN curl --silent -L https://github.com/mikefarah/yq/releases/download/2.4.0/yq_
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="7.5.2-ol-7-r17" \
+    BITNAMI_IMAGE_VERSION="7.6.0-ol-7-r0" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/elasticsearch/bin:$PATH"
