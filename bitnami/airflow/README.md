@@ -33,7 +33,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.10.9-debian-10-r4`, `1`, `1.10.9`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.9-debian-10-r4/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.10.9-debian-10-r5`, `1`, `1.10.9`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.9-debian-10-r5/1/debian-10/Dockerfile)
 * [`1-ol-7`, `1.10.7-ol-7-r36` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.7-ol-7-r36/1/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow).
