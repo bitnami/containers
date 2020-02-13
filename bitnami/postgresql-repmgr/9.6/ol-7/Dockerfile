@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl cyrus-sasl-lib glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libedit libgcc libselinux libstdc++ libuuid libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre procps-ng sqlite sudo tar which xz-libs zlib
-RUN . ./libcomponent.sh && component_unpack "postgresql-repmgr" "9.6.16-2" --checksum 6f540b497ed116d7c1587248c48feae7aff19b68383f9d4d9570d8c926520738
+RUN . ./libcomponent.sh && component_unpack "postgresql-repmgr" "9.6.17-0" --checksum d682beb4f2b7445f8a6bfe3ef16a6df21898d7d0f85da5aef50fd53e2002abac
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -18,7 +18,7 @@ RUN /build/install-gosu.sh
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql-repmgr" \
-    BITNAMI_IMAGE_VERSION="9.6.16-ol-7-r88" \
+    BITNAMI_IMAGE_VERSION="9.6.17-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
     PATH="/opt/bitnami/postgresql-repmgr/bin:/opt/bitnami/repmgr/bin:/opt/bitnami/postgresql/bin:$PATH"
