@@ -43,12 +43,12 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`12-ol-7`, `12.1.0-ol-7-r88` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.1.0-ol-7-r88/12/ol-7/Dockerfile)
-* [`12-debian-10`, `12.1.0-debian-10-r15`, `12`, `12.1.0` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.1.0-debian-10-r15/12/debian-10/Dockerfile)
-* [`11-ol-7`, `11.6.0-ol-7-r88` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.6.0-ol-7-r88/11/ol-7/Dockerfile)
+* [`12-ol-7`, `12.2.0-ol-7-r0` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.2.0-ol-7-r0/12/ol-7/Dockerfile)
+* [`12-debian-10`, `12.2.0-debian-10-r0`, `12`, `12.2.0` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.2.0-debian-10-r0/12/debian-10/Dockerfile)
+* [`11-ol-7`, `11.7.0-ol-7-r0` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.7.0-ol-7-r0/11/ol-7/Dockerfile)
 * [`11-debian-10`, `11.6.0-debian-10-r19`, `11`, `11.6.0`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.6.0-debian-10-r19/11/debian-10/Dockerfile)
-* [`10-ol-7`, `10.11.0-ol-7-r88` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.11.0-ol-7-r88/10/ol-7/Dockerfile)
-* [`10-debian-10`, `10.11.0-debian-10-r15`, `10`, `10.11.0` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.11.0-debian-10-r15/10/debian-10/Dockerfile)
+* [`10-ol-7`, `10.12.0-ol-7-r0` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.12.0-ol-7-r0/10/ol-7/Dockerfile)
+* [`10-debian-10`, `10.12.0-debian-10-r0`, `10`, `10.12.0` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.12.0-debian-10-r0/10/debian-10/Dockerfile)
 * [`9.6-ol-7`, `9.6.16-ol-7-r88` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.16-ol-7-r88/9.6/ol-7/Dockerfile)
 * [`9.6-debian-10`, `9.6.16-debian-10-r16`, `9.6`, `9.6.16` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.16-debian-10-r16/9.6/debian-10/Dockerfile)
 
