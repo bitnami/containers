@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl cyrus-sasl-lib glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libedit libgcc libicu libselinux libstdc++ libuuid libxml2 libxslt ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre procps-ng sqlite sudo tar which xz-libs zlib
-RUN . ./libcomponent.sh && component_unpack "postgresql" "12.1.0-2" --checksum 9d5b179cbe7daa2ef32d250bad200eeceda4e6c4a5662126c7f7ea706e25911b
+RUN . ./libcomponent.sh && component_unpack "postgresql" "12.2.0-0" --checksum 0321a1fd4a7c73b1b3bff24c47ae1153262d86fe526161578325d2c030f78c8f
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -18,7 +18,7 @@ RUN /build/install-gosu.sh
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="12.1.0-ol-7-r93" \
+    BITNAMI_IMAGE_VERSION="12.2.0-ol-7-r0" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
