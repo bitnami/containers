@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 procps sudo unzip
-RUN . ./libcomponent.sh && component_unpack "harbor-core" "1.10.0-0" --checksum 7683e1482b219200a7bc2612308d434c465f4344846098e0600affe9e2bd402d
+RUN . ./libcomponent.sh && component_unpack "harbor-core" "1.10.1-0" --checksum 19aeec5837bac980b49d6b69e5e131885f7e8f3f8ab9478d008851c03a5257fa
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -24,7 +24,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-core" \
-    BITNAMI_IMAGE_VERSION="1.10.0-debian-10-r16" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-core/bin:$PATH"
 
