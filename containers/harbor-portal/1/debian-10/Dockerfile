@@ -11,7 +11,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 libgeoip1 libpcre3 libssl1.1 procps sudo unzip zlib1g
 RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-0" --checksum 546f22afa27cf4caf9eadb7a29bd052d90584f885225eb4d173762a70ac56b04
-RUN . ./libcomponent.sh && component_unpack "harbor" "1.10.0-0" --checksum 88c74f799a8befb433d2e8827a2e2ac23c0281f95a04e72113ca08a9bb55f24e
+RUN . ./libcomponent.sh && component_unpack "harbor" "1.10.1-0" --checksum 00547544372073d830082773608f98fcbe9e923a22cffcc3a23588c894798178
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /postunpack.sh
 RUN /postunpack-harbor-portal.sh
 ENV BITNAMI_APP_NAME="harbor-portal" \
-    BITNAMI_IMAGE_VERSION="1.10.0-debian-10-r19" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r0" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
