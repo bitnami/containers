@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl dirmngr ghostscript gnupg imagemagick 
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg install python-3.6.10-0 --checksum 64172bd89338173a279f7a459b4fd0f1d630b18035bc73bab9dfc45ac2cfbe98
-RUN bitnami-pkg install postgresql-client-11.6.0-0 --checksum ad1b30adc533f4b19d9f4dcb45e9882a4c738d7e6c2c36016b5769745cd2f9aa
+RUN bitnami-pkg install postgresql-client-11.7.0-0 --checksum 3cd9b46ecb3a60b398e6ed75318f5572619caa143f7d921a7151df3ce7b1727a
 RUN bitnami-pkg install node-12.16.0-0 --checksum b274be80aad7d2da5984be9e0038ae3b2cd9d6830eae3f20d77c6ac8bf2275db
 RUN bitnami-pkg unpack odoo-13.0.20200210-0 --checksum 57d406b47e6a8736343db196e4dea4f79317eaf6912d9c9e4f26f0bfd571dd35
 RUN apt-get update && apt-get upgrade && \
@@ -19,7 +19,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="13.0.20200210-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="13.0.20200210-debian-10-r3" \
     LD_LIBRARY_PATH="/opt/bitnami/odoo/venv/lib/python3.6/site-packages/reportlab/.libs:$LD_LIBRARY_PATH" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
