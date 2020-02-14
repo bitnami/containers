@@ -12,7 +12,7 @@ RUN install_packages bzip2-libs ca-certificates curl cyrus-sasl-lib glibc gzip h
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg install python-3.6.10-0 --checksum 5a8e49832c587612e6b4afa4dfe4708dc2153263ec594006eb7972c3352773b3
-RUN bitnami-pkg install postgresql-client-10.11.0-0 --checksum 7698c1aeb96133009652bfe6b05713c2450effcdc53f094194d06fe15a04f580
+RUN bitnami-pkg install postgresql-client-10.12.0-0 --checksum 5b0c3cd5bda48a5b0ec196b70d18df69ee821ca235b935555d1d63288f9f8f43
 RUN bitnami-pkg unpack airflow-worker-1.10.7-0 --checksum fa986024ced22b28f197d401b57d0f4c8198a61d824df6d2a0f8cfde48f9f4d2
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -37,7 +37,7 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     AIRFLOW_WORKER_PORT_NUMBER="8793" \
     BITNAMI_APP_NAME="airflow-worker" \
-    BITNAMI_IMAGE_VERSION="1.10.7-ol-7-r47" \
+    BITNAMI_IMAGE_VERSION="1.10.7-ol-7-r48" \
     C_FORCE_ROOT="True" \
     LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
