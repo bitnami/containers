@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 procps sudo unzip
-RUN . ./libcomponent.sh && component_unpack "harbor-notary-server" "1.10.0-0" --checksum 5845fffb84efa707eda831cd00d25107a5442386cac09a7c9c6b31dff054c534
+RUN . ./libcomponent.sh && component_unpack "harbor-notary-server" "1.10.1-0" --checksum 19a520b89b925504459d53e57c4de0d86c1384ba6c668ccd5ab8261f07f39962
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -18,7 +18,7 @@ RUN /build/install-gosu.sh
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-notary-server" \
-    BITNAMI_IMAGE_VERSION="1.10.0-debian-10-r16" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-notary-server/bin:$PATH" \
     SERVICE_NAME="notary_server"
