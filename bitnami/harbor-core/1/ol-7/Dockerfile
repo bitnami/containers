@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel procps-ng sudo tar unzip which
-RUN . ./libcomponent.sh && component_unpack "harbor-core" "1.10.0-0" --checksum 50f23c531a11ad7631503e92384c814ad23e485efc42c415a7c03a50d76be4b8
+RUN . ./libcomponent.sh && component_unpack "harbor-core" "1.10.1-0" --checksum 66c04f4b3a221636b8093cb54c56317997c3844123105704fc6ae314d5186e45
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -24,7 +24,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-core" \
-    BITNAMI_IMAGE_VERSION="1.10.0-ol-7-r56" \
+    BITNAMI_IMAGE_VERSION="1.10.1-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-core/bin:$PATH"
 
