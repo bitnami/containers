@@ -8,7 +8,7 @@ ENV OS_ARCH="x86_64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages audit-libs ca-certificates curl cyrus-sasl-lib glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcap-ng libcom_err libedit libgcc libicu libselinux libstdc++ libuuid libxml2 libxslt ncurses-libs nspr nss nss-pam-ldapd nss-softokn-freebl nss-util openldap openldap-clients openssl-libs pam pcre procps-ng sudo tar unzip which xz-libs zlib
-RUN . ./libcomponent.sh && component_unpack "postgresql-client" "10.11.0-0" --checksum 7698c1aeb96133009652bfe6b05713c2450effcdc53f094194d06fe15a04f580
+RUN . ./libcomponent.sh && component_unpack "postgresql-client" "10.12.0-0" --checksum 5b0c3cd5bda48a5b0ec196b70d18df69ee821ca235b935555d1d63288f9f8f43
 RUN . ./libcomponent.sh && component_unpack "pgpool" "4.1.0-1" --checksum 6a475ce61d6b53a09fa86a43a1eb241948618c59be49e6bcefd4593b93444b2f
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -22,7 +22,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="pgpool" \
-    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r98" \
+    BITNAMI_IMAGE_VERSION="4.1.0-ol-7-r99" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/pgpool/bin:$PATH"
 
 EXPOSE 5432
