@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 procps sudo unzip
-RUN . ./libcomponent.sh && component_unpack "harbor-jobservice" "1.10.0-0" --checksum 1a05d1a9d14a4cc322adc579d0e08790518e875f9467ded8b3889bb21b795c55
+RUN . ./libcomponent.sh && component_unpack "harbor-jobservice" "1.10.1-0" --checksum f8c1fe4a7804dad49ed53867bb299346966b458ef6adf00d30b9e2b69b23dd5f
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -19,7 +19,7 @@ RUN curl --silent -L https://github.com/mikefarah/yq/releases/download/2.4.0/yq_
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-jobservice" \
-    BITNAMI_IMAGE_VERSION="1.10.0-debian-10-r16" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-jobservice/bin:$PATH"
 
