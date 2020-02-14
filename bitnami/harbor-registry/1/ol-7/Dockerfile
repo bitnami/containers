@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip hostname libaio-devel procps-ng sudo tar which
-RUN . ./libcomponent.sh && component_unpack "harbor-registry" "1.10.0-0" --checksum 549f9393beed846e40db92c1ed9e442e50a1c0806250068244b8d3406f51728b
+RUN . ./libcomponent.sh && component_unpack "harbor-registry" "1.10.1-0" --checksum e3147b38ec7e6b88f8a8bf2d8eb20546ae5dbba7cf22998e3a3462d2efe6f63b
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -19,7 +19,7 @@ RUN curl --silent -L https://github.com/mikefarah/yq/releases/download/2.4.0/yq_
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-registry" \
-    BITNAMI_IMAGE_VERSION="1.10.0-ol-7-r56" \
+    BITNAMI_IMAGE_VERSION="1.10.1-ol-7-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-registry/bin:$PATH"
 
