@@ -13,7 +13,7 @@ RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg install node-10.19.0-0 --checksum eb60e2483625fedaf9146111aa5c4def8830c9f8ed13af4d2d2c253f865389d8
 RUN bitnami-pkg unpack mysql-client-10.3.22-0 --checksum a79d0068a2219cfa03e249f6eb38945b4f0c5a4d116771bcbe971470b0c29417
-RUN bitnami-pkg unpack ghost-3.5.2-0 --checksum 720b467e1a94e84b30d0b37296ab31951d7589b3e85fae9ec8c7500055e15d34
+RUN bitnami-pkg unpack ghost-3.6.0-0 --checksum 6ced2ee5ded616657a29be9790010a3e41bd5e545d673eb5a4fe442f6d8e86a1
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -22,7 +22,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="3.5.2-ol-7-r1" \
+    BITNAMI_IMAGE_VERSION="3.6.0-ol-7-r0" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
