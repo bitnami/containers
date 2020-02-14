@@ -11,7 +11,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 libgcc1 procps sudo unzip zlib1g
 RUN . ./libcomponent.sh && component_unpack "java" "1.8.242-0" --checksum 3a70f3d1c3cd9bc6ec581b2a10373a2b323c0b9af40402ce8d19aeb0b3d02400
-RUN . ./libcomponent.sh && component_unpack "zookeeper" "3.5.6-0" --checksum 9ad61f6964af3be45cb589ff15fa33f60fdf7596927e1ac47fbdfd8e7ec86889
+RUN . ./libcomponent.sh && component_unpack "zookeeper" "3.5.7-0" --checksum e316b538c1b02b0a090fb02367b332cea548f10c56fa4540d90c88e346fe9e4e
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -24,7 +24,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.5.6-debian-10-r19" \
+    BITNAMI_IMAGE_VERSION="3.5.7-debian-10-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH"
 
