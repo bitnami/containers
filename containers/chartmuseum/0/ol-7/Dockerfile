@@ -17,7 +17,7 @@ RUN /build/install-gosu.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.11.0-ol-7-r53" \
+    BITNAMI_IMAGE_VERSION="0.11.0-ol-7-r54" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/chartmuseum/bin:$PATH"
 
