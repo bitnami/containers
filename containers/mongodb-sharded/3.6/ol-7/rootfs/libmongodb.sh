@@ -552,7 +552,7 @@ mongodb_create_keyfile() {
     local -r key="${1:?key is required}"
 
     if ! mongodb_is_file_external "keyfile"; then
-        info "Writing keyfile for replica set authentication: $key $MONGODB_KEY_FILE"
+        info "Writing keyfile for replica set authentication..."
         echo "$key" > "$MONGODB_KEY_FILE"
 
         chmod 600 "$MONGODB_KEY_FILE"
