@@ -11,7 +11,7 @@ RUN /build/bitnami-user.sh && \
 RUN bitnami-pkg install ruby-2.6.5-1 --checksum 99d4bc115bd1f2ce13a76e16359f03acef2ceccfc5468f1b008e9ea9d07dc7fc
 RUN bitnami-pkg install node-10.19.0-0 --checksum a91f35d97b8219efbe1ae9bc8eda0e0dafa84d738a8eaa0e0e15b599f4fbbff2
 RUN bitnami-pkg install mysql-client-10.3.22-0 --checksum 9529ac5187264223e3852602f7d9a51ed0b2547bbed99f3d05f3b7fa20adf57f
-RUN bitnami-pkg install git-2.25.0-0 --checksum 392bea1a8c3607f8ebce5403ec22819915ab8a5cc2245a5249568660b4ed07df
+RUN bitnami-pkg install git-2.25.1-0 --checksum ca45bb393e1d231affbc8aac5671562af94a92601cc0d7c6b3883fa7bbd20889
 RUN bitnami-pkg install rails-6.0.2-1-0 --checksum ba61d672b280ed3ca5670371453750a55bf92ddd333f243b74ef26d09c747cd2
 RUN apt-get update && apt-get upgrade && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="6.0.2-1-debian-10-r18" \
+    BITNAMI_IMAGE_VERSION="6.0.2-1-debian-10-r19" \
     BUNDLE_BUILD__SASSC="--disable-march-tune-native" \
     RAILS_ENV="development"
 
