@@ -12,7 +12,7 @@ RUN bitnami-pkg install java-1.8.242-0 --checksum 974f750091ac1bf18cc1ce9472ef5e
 RUN bitnami-pkg unpack tomcat-9.0.31-0 --checksum 4b8c2e7e9e672c9dac7197452bf721f2f6e3940bffd34748d231f602bee6b422
 RUN bitnami-pkg unpack mysql-client-10.3.22-0 --checksum a79d0068a2219cfa03e249f6eb38945b4f0c5a4d116771bcbe971470b0c29417
 RUN bitnami-pkg unpack jasperreports-7.2.0-2 --checksum 712f67da04894ed4f3dd4134b8a1baf47c9483507fbbaef6184623c8cb35aeb3
-RUN bitnami-pkg install git-2.25.0-0 --checksum 2fd25c5b37cec238a759c3c3643c156d4fe5b00716e2152c7c494cf6729673c9
+RUN bitnami-pkg install git-2.25.1-0 --checksum 037457371b4782c6e780a899463a54544590a20a12c344bf5d14cef5ef470077
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.2.0-ol-7-r253" \
+    BITNAMI_IMAGE_VERSION="7.2.0-ol-7-r254" \
     JASPERREPORTS_DATABASE_NAME="bitnami_jasperreports" \
     JASPERREPORTS_DATABASE_PASSWORD="" \
     JASPERREPORTS_DATABASE_USER="bn_jasperreports" \
