@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="18.0.1-ol-7-r95" \
+    BITNAMI_IMAGE_VERSION="18.0.1-ol-7-r96" \
     NAMI_PREFIX="/.nami" \
     WILDFLY_HOME="/home/wildfly" \
     WILDFLY_JAVA_HOME="" \
