@@ -7,12 +7,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "a52bd1848ea30e097bb7950cbe61098b2e0e60d1166863a9bd35ce019485fb4a  /tmp/bitnami/pkg/cache/metrics-server-0.3.6-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/metrics-server-0.3.6-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/metrics-server-0.3.6-0-linux-amd64-debian-10.tar.gz
-RUN apt-get update && apt-get upgrade && \
+RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 RUN chown -R 1001:root /opt/bitnami/metrics-server && chmod -R g+rwX /opt/bitnami/metrics-server
 ENV BITNAMI_APP_NAME="metrics-server" \
-    BITNAMI_IMAGE_VERSION="0.3.6-debian-10-r21" \
+    BITNAMI_IMAGE_VERSION="0.3.6-debian-10-r22" \
     PATH="/opt/bitnami/metrics-server/bin:$PATH"
 
 EXPOSE 8443
