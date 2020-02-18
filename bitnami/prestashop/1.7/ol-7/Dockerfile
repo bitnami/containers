@@ -5,12 +5,12 @@ ENV PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/op
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages bzip2-libs ca-certificates curl cyrus-sasl-lib expat freetds-libs freetype glibc gmp gnutls gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs procps-ng readline sqlite sudo tar which xz-libs zlib
+RUN install_packages audit-libs bzip2-libs ca-certificates curl cyrus-sasl-lib expat freetds-libs freetype glibc gmp gnutls gzip hostname keyutils-libs krb5-libs libaio libaio-devel libcap-ng libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pam pcre postgresql-libs procps-ng readline sqlite sudo tar which xz-libs zlib
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
 RUN bitnami-pkg unpack php-7.2.27-0 --checksum 1c6dd8382928048eef5898d2e94b3296b41080ce7b9fe70ad74bbd4598c5b2fc
-RUN bitnami-pkg unpack mysql-client-10.1.44-0 --checksum eaa86d4e4e44cefa41b4e12b3dca73e9d04eedf276febb6fddbb41c4a0c4283b
+RUN bitnami-pkg unpack mysql-client-10.1.44-1 --checksum 55aef2f8a441f0ec506daef66c1f822d8c679f4d7af10a42ebeeeaa352ec806a
 RUN bitnami-pkg install libphp-7.2.27-0 --checksum ce26afb558cb054f530cb2023441a8cbb4658945e49d36cb6b82558c9f4f7c39
 RUN bitnami-pkg unpack prestashop-1.7.6-3-0 --checksum 075fa0da982894cdc54d69b24b673dad2497988a0e6fda74caf6d4fad75143b7
 RUN yum upgrade -y && \
@@ -25,7 +25,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-3-ol-7-r22" \
+    BITNAMI_IMAGE_VERSION="1.7.6-3-ol-7-r23" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
