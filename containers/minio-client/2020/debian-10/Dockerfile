@@ -11,14 +11,14 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl procps sudo unzip
 RUN . ./libcomponent.sh && component_unpack "minio-client" "2020.2.14-0" --checksum 773b3884a2fba8352849fd48931f8c7e25eaa46efc2440fb82684a24c0ded346
-RUN apt-get update && apt-get upgrade && \
+RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="minio-client" \
-    BITNAMI_IMAGE_VERSION="2020.2.14-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="2020.2.14-debian-10-r4" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/minio-client/bin:$PATH"
 
