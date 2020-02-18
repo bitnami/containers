@@ -9,8 +9,8 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel libgcc procps-ng sudo tar unzip which zlib
-RUN . ./libcomponent.sh && component_unpack "java" "1.8.242-0" --checksum 974f750091ac1bf18cc1ce9472ef5ed7c1b328a2c17471cb9ac810fcded67151
+RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel procps-ng sudo tar unzip which zlib
+RUN . ./libcomponent.sh && component_unpack "java" "11.0.6-0" --checksum 44f5ec63dbe8d2ea9aaea237cec2d8821ac3ee6fa2812c295c0fa04068d0e08e
 RUN . ./libcomponent.sh && component_unpack "kafka" "2.4.0-0" --checksum 21b2cb36f6ee34fb350c92fb40538b1c155388fddc4d5e9746aa738494355855
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -20,7 +20,7 @@ RUN curl --silent -L https://github.com/bitnami/render-template/releases/downloa
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.4.0-ol-7-r57" \
+    BITNAMI_IMAGE_VERSION="2.4.0-ol-7-r58" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/kafka/bin:$PATH"
 
