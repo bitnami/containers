@@ -13,7 +13,7 @@ RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg install python-3.6.10-0 --checksum 5a8e49832c587612e6b4afa4dfe4708dc2153263ec594006eb7972c3352773b3
 RUN bitnami-pkg install postgresql-client-10.12.0-0 --checksum 5b0c3cd5bda48a5b0ec196b70d18df69ee821ca235b935555d1d63288f9f8f43
-RUN bitnami-pkg unpack airflow-1.10.7-1 --checksum a95c5e1ee5d46809ad1ca9181f0819e4142e0853926282286e446b19860d8412
+RUN bitnami-pkg unpack airflow-1.10.9-0 --checksum 787cd662216962920b727cd6fca032167d59a6a279c5203fc30986118877d2ea
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN yum reinstall -y glibc-common && localedef -c -f UTF-8 -i en_US en_US.UTF-8
@@ -46,7 +46,7 @@ ENV AIRFLOW_BASE_URL="" \
     AIRFLOW_WEBSERVER_HOST="127.0.0.1" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="airflow" \
-    BITNAMI_IMAGE_VERSION="1.10.7-ol-7-r40" \
+    BITNAMI_IMAGE_VERSION="1.10.9-ol-7-r0" \
     LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
