@@ -5,12 +5,12 @@ ENV PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/op
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages bzip2-libs ca-certificates curl cyrus-sasl-lib expat freetds-libs freetype glibc gmp gnutls gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs procps-ng readline sqlite sudo tar which xz-libs zlib
+RUN install_packages audit-libs bzip2-libs ca-certificates curl cyrus-sasl-lib expat freetds-libs freetype glibc gmp gnutls gzip hostname keyutils-libs krb5-libs libaio-devel libcap-ng libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libnghttp2 libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pam pcre postgresql-libs procps-ng readline sqlite sudo tar which xz-libs zlib
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
 RUN bitnami-pkg unpack php-7.2.27-0 --checksum 1c6dd8382928048eef5898d2e94b3296b41080ce7b9fe70ad74bbd4598c5b2fc
-RUN bitnami-pkg unpack mysql-client-10.3.22-0 --checksum a79d0068a2219cfa03e249f6eb38945b4f0c5a4d116771bcbe971470b0c29417
+RUN bitnami-pkg unpack mysql-client-10.3.22-1 --checksum a619b82859b607462a5a82900fea0c19665857ff26c2f4506752a82368b66f72
 RUN bitnami-pkg install libphp-7.2.27-0 --checksum ce26afb558cb054f530cb2023441a8cbb4658945e49d36cb6b82558c9f4f7c39
 RUN bitnami-pkg unpack phpbb-3.3.0-0 --checksum 49751618ad4ab1cc2575336107156bb0058a8f832a22a947906d22a142075fc6
 RUN yum upgrade -y && \
@@ -25,7 +25,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="phpbb" \
-    BITNAMI_IMAGE_VERSION="3.3.0-ol-7-r39" \
+    BITNAMI_IMAGE_VERSION="3.3.0-ol-7-r40" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
