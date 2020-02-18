@@ -48,8 +48,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-ol-7`, `4.1.0-ol-7-r64` (4/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/4.1.0-ol-7-r64/4/ol-7/Dockerfile)
-* [`4-debian-10`, `4.1.0-debian-10-r20`, `4`, `4.1.0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/4.1.0-debian-10-r20/4/debian-10/Dockerfile)
+* [`5-ol-7`, `5.0.0-ol-7-r0` (5/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/5.0.0-ol-7-r0/5/ol-7/Dockerfile)
+* [`5-debian-10`, `5.0.0-debian-10-r0`, `5`, `5.0.0`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/5.0.0-debian-10-r0/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
 
@@ -70,7 +70,7 @@ $ docker pull bitnami/oauth2-proxy:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/oauth2-proxy:latest 'https://github.com/bitnami/bitnami-docker-oauth2-proxy.git#master:4/debian-10'
+$ docker build -t bitnami/oauth2-proxy:latest 'https://github.com/bitnami/bitnami-docker-oauth2-proxy.git#master:5/debian-10'
 ```
 
 # Connecting to other containers
