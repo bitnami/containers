@@ -10,7 +10,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl glibc gzip hostname libaio-devel libgcc libstdc++ procps-ng sudo tar which
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
-RUN bitnami-pkg unpack kibana-7.6.0-0 --checksum 4a1857836f3d95aede5ff9dee02a0034686f4628c6d7201c640ae132e178585f
+RUN bitnami-pkg unpack kibana-7.6.0-1 --checksum 5b33a4473e125c22999e69329eb5a9f632e8fc41106ee7b3a163478c954e062e
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -19,7 +19,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="7.6.0-ol-7-r7" \
+    BITNAMI_IMAGE_VERSION="7.6.0-ol-7-r8" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
