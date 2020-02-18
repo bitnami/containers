@@ -10,7 +10,7 @@ RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg install ruby-2.6.5-0 --checksum 29ef6f1ed911c95ada9710d617438ec90e6e822cae31d2b82d578f9b9e7b1c30
 RUN bitnami-pkg unpack postgresql-client-11.7.0-0 --checksum 42b639dbc64ff5b40dc1dffc8ed1e9bed4320480706b2d76313ebeb3203b9f0c
-RUN bitnami-pkg install git-2.25.0-0 --checksum 2fd25c5b37cec238a759c3c3643c156d4fe5b00716e2152c7c494cf6729673c9
+RUN bitnami-pkg install git-2.25.1-0 --checksum 037457371b4782c6e780a899463a54544590a20a12c344bf5d14cef5ef470077
 RUN bitnami-pkg unpack discourse-sidekiq-2.3.10-0 --checksum 01fe3c3f00d84cac08540ca4ea518b4da31758158e2cfc6cbb4cc06e284becd8
 RUN bitnami-pkg install brotli-1.0.7-1 --checksum 92c77710e899ebedff06d583af7938a56b80df9584675109df5aee1d5899e8da
 RUN bitnami-pkg unpack discourse-2.3.10-0 --checksum 348c20af35763c53aafa32f378f5ff35af5305d306121992c7a9eb9e9a3a85af
@@ -22,7 +22,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.3.10-ol-7-r3" \
+    BITNAMI_IMAGE_VERSION="2.3.10-ol-7-r4" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="discourse" \
     DISCOURSE_HOSTNAME="127.0.0.1" \
