@@ -13,7 +13,7 @@ RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg install python-3.6.10-0 --checksum 5a8e49832c587612e6b4afa4dfe4708dc2153263ec594006eb7972c3352773b3
 RUN bitnami-pkg install postgresql-client-10.12.0-0 --checksum 5b0c3cd5bda48a5b0ec196b70d18df69ee821ca235b935555d1d63288f9f8f43
-RUN bitnami-pkg unpack airflow-scheduler-1.10.7-0 --checksum f0c041c14b6678a03f8fa5555bc2a6461835e5df0d973d9253bfbb465d7df2bf
+RUN bitnami-pkg unpack airflow-scheduler-1.10.9-0 --checksum 1d9672f4115819e8024395e2ac404877ae32e2b388eee8eed70539ac7d325306
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -36,7 +36,7 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_HOST="airflow" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="airflow-scheduler" \
-    BITNAMI_IMAGE_VERSION="1.10.7-ol-7-r46" \
+    BITNAMI_IMAGE_VERSION="1.10.9-ol-7-r0" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
     LD_PRELOAD="/usr/lib64/libnss_wrapper.so" \
     LNAME="airflow" \
