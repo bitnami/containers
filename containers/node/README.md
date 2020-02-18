@@ -42,12 +42,12 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`13-photon-3`, `13.8.0-photon-3-r0` (13/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.8.0-photon-3-r0/13/photon-3/Dockerfile)
+* [`13-photon-3`, `13.9.0-photon-3-r0` (13/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.9.0-photon-3-r0/13/photon-3/Dockerfile)
+* [`13-debian-10-prod`, `13.9.0-debian-10-r0-prod`, `13-prod`, `13.9.0-prod` (13-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.9.0-debian-10-r0-prod/13-prod/debian-10/Dockerfile)
+* [`13-debian-10`, `13.9.0-debian-10-r0`, `13`, `13.9.0` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.9.0-debian-10-r0/13/debian-10/Dockerfile)
 * [`13-ol-7-prod`, `13.8.0-ol-7-r10-prod` (13-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.8.0-ol-7-r10-prod/13-prod/ol-7/Dockerfile)
 * [`13-ol-7`, `13.8.0-ol-7-r10` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.8.0-ol-7-r10/13/ol-7/Dockerfile)
-* [`13-debian-10-prod`, `13.8.0-debian-10-r10-prod`, `13-prod`, `13.8.0-prod` (13-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.8.0-debian-10-r10-prod/13-prod/debian-10/Dockerfile)
-* [`13-debian-10`, `13.8.0-debian-10-r10`, `13`, `13.8.0` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.8.0-debian-10-r10/13/debian-10/Dockerfile)
-* [`12-photon-3`, `12.16.0-photon-3-r0` (12/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.0-photon-3-r0/12/photon-3/Dockerfile)
+* [`12-photon-3`, `12.16.1-photon-3-r0` (12/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.1-photon-3-r0/12/photon-3/Dockerfile)
 * [`12-ol-7-prod`, `12.16.0-ol-7-r6-prod` (12-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.0-ol-7-r6-prod/12-prod/ol-7/Dockerfile)
 * [`12-ol-7`, `12.16.0-ol-7-r6` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.0-ol-7-r6/12/ol-7/Dockerfile)
 * [`12-debian-10-prod`, `12.16.0-debian-10-r6-prod`, `12-prod`, `12.16.0-prod`, `latest-prod` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.0-debian-10-r6-prod/12-prod/debian-10/Dockerfile)
