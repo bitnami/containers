@@ -12,14 +12,14 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl libc6 libgcc1 libgomp1 libquadmath0 libstdc++6 libx11-6 procps sudo unzip
 RUN . ./libcomponent.sh && component_unpack "miniconda" "4.8.1-0" --checksum c853f3766783cc58a77b29177f958c73dbfa0ddd2216ac23be336598bbbe9d6b
 RUN . ./libcomponent.sh && component_unpack "pytorch" "1.4.0-0" --checksum aabdd1ce210297ca0cf3117707563c58f36502e0bc67545dda848e3ceecf68c3
-RUN apt-get update && apt-get upgrade && \
+RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /prepare.sh
 ENV BITNAMI_APP_NAME="pytorch" \
-    BITNAMI_IMAGE_VERSION="1.4.0-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="1.4.0-debian-10-r23" \
     LD_LIBRARY_PATH="/opt/bitnami/miniconda/lib/python3.7/site-packages/torch/lib/:/opt/bitnami/miniconda/lib/python3.7/site-packages/PIL/.libs/:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/miniconda/bin:$PATH"
