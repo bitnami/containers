@@ -9,14 +9,14 @@ RUN install_packages ca-certificates curl dirmngr gnupg libc6 libcom-err2 libcur
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg install git-2.25.1-0 --checksum ca45bb393e1d231affbc8aac5671562af94a92601cc0d7c6b3883fa7bbd20889
-RUN apt-get update && apt-get upgrade && \
+RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
 RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="git" \
-    BITNAMI_IMAGE_VERSION="2.25.1-debian-10-r1"
+    BITNAMI_IMAGE_VERSION="2.25.1-debian-10-r2"
 
 ENTRYPOINT [ "git" ]
 CMD [ "--help" ]
