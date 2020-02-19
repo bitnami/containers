@@ -91,6 +91,7 @@ ROOT_USER="$(get_env_var_value ROOT_USER)"
 export DB_ROOT_USER="${ROOT_USER:-root}"
 export DB_DATABASE="$(get_env_var_value DATABASE)"
 export DB_USER="$(get_env_var_value USER)"
+export DB_AUTHENTICATION_PLUGIN="$(get_env_var_value AUTHENTICATION_PLUGIN)"
 export DB_REPLICATION_USER="$(get_env_var_value REPLICATION_USER)"
 MASTER_ROOT_USER="$(get_env_var_value MASTER_ROOT_USER)"
 export DB_MASTER_ROOT_USER="${MASTER_ROOT_USER:-root}"
@@ -316,8 +317,8 @@ EOF
 #   None
 #########################
 mysql_ensure_replication_user_exists() {
-    local user="${1:?user is required}"
-    local password="${2:-}"
+    local -r user="${1:?user is required}"
+    local -r password="${2:-}"
 
     debug "Configure replication user credentials"
     if [[ "$DB_FLAVOR" = "mariadb" ]]; then
@@ -399,9 +400,9 @@ EOF
                 debug "Starting replication"
                 echo "RESET MASTER;" | debug_execute "$DB_BIN_DIR/mysql" --defaults-file="$DB_CONF_DIR/my.cnf" -N -u root
             fi
-            mysql_ensure_root_user_exists "$DB_ROOT_USER" "$DB_ROOT_PASSWORD"
+            mysql_ensure_root_user_exists "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "$DB_AUTHENTICATION_PLUGIN"
             mysql_ensure_user_not_exists "" # ensure unknown user does not exist
-            mysql_ensure_optional_database_exists "$DB_DATABASE" "$DB_USER" "$DB_PASSWORD"
+            mysql_ensure_optional_database_exists "$DB_DATABASE" "$DB_USER" "$DB_PASSWORD" "$DB_AUTHENTICATION_PLUGIN"
             [[ -n "$DB_ROOT_PASSWORD" ]] && export ROOT_AUTH_ENABLED="yes"
         fi
         [[ -n "$DB_REPLICATION_MODE" ]] && mysql_configure_replication
@@ -499,7 +500,7 @@ mysql_get_version() {
 #   environment variable name
 #########################
 get_env_var() {
-    local id="${1:?id is required}"
+    local -r id="${1:?id is required}"
     echo "${DB_FLAVOR^^}_${id}"
 }
 
@@ -551,9 +552,9 @@ get_master_env_var_value() {
 # Returns:
 #   None
 mysql_execute() {
-    local db="${1:-}"
-    local user="${2:-root}"
-    local pass="${3:-}"
+    local -r db="${1:-}"
+    local -r user="${2:-root}"
+    local -r pass="${3:-}"
 
     local args=("--defaults-file=$DB_CONF_DIR/my.cnf" "-N" "-u" "$user" "$db")
     [[ -n "$pass" ]] && args+=("-p$pass")
@@ -576,11 +577,11 @@ mysql_execute() {
 # Returns:
 #   None
 mysql_remote_execute() {
-    local db="${1:-}"
-    local hostname="${2:?hostname is required}"
-    local port="${3:?port is required}"
-    local user="${4:?user is required}"
-    local pass="${5:-}"
+    local -r db="${1:-}"
+    local -r hostname="${2:?hostname is required}"
+    local -r port="${3:?port is required}"
+    local -r user="${4:?user is required}"
+    local -r pass="${5:-}"
 
     local args=("-N" "-h" "$hostname" "-P" "$port" "-u" "$user" "--connect-timeout=5" "$db")
     [[ -n "$pass" ]] && args+=("-p$pass")
@@ -742,8 +743,8 @@ mysql_upgrade() {
 #   None
 #########################
 migrate_old_configuration() {
-    local old_custom_conf_file="$DB_VOLUME_DIR/conf/my_custom.cnf"
-    local custom_conf_file="$DB_CONF_DIR/bitnami/my_custom.cnf"
+    local -r old_custom_conf_file="$DB_VOLUME_DIR/conf/my_custom.cnf"
+    local -r custom_conf_file="$DB_CONF_DIR/bitnami/my_custom.cnf"
     debug "Persisted configuration detected. Migrating any existing 'my_custom.cnf' file to new location"
     warn "Custom configuration files are not persisted any longer"
     if [[ -f "$old_custom_conf_file" ]]; then
@@ -766,17 +767,23 @@ migrate_old_configuration() {
 # Arguments:
 #   $1 - db user
 #   $2 - password
+#   $3 - authentication plugin
 # Returns:
 #   None
 #########################
 mysql_ensure_user_exists() {
-    local user="${1:?user is required}"
-    local password="${2:-}"
+    local -r user="${1:?user is required}"
+    local -r password="${2:-}"
+    local -r auth_plugin="${3:-}"
     local hosts
+    local auth_plugin_str=""
 
+    if [[ -n "$auth_plugin" ]]; then
+        auth_plugin_str="with $auth_plugin"
+    fi
     debug "creating database user \'$user\'"
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-create $([[ "$DB_FLAVOR" = "mariadb" ]] && echo "or replace") user '$user'@'%' $([[ "$password" != "" ]] && echo "identified by '$password'");
+create $([[ "$DB_FLAVOR" = "mariadb" ]] && echo "or replace") user '$user'@'%' $([[ "$password" != "" ]] && echo "identified $auth_plugin_str by '$password'");
 EOF
     debug "Removing all other hosts for the user"
     hosts=$(mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
@@ -800,7 +807,7 @@ EOF
 #   None
 #########################
 mysql_ensure_user_not_exists() {
-    local user="${1}"
+    local -r user="${1}"
     local hosts
 
     if [[ -z "$user" ]]; then
@@ -826,12 +833,19 @@ EOF
 # Arguments:
 #   $1 - root user
 #   $2 - root password
+#   $3 - authentication plugin
 # Returns:
 #   None
 #########################
 mysql_ensure_root_user_exists() {
-    local user="${1:?user is required}"
-    local password="${2:-}"
+    local -r user="${1:?user is required}"
+    local -r password="${2:-}"
+    local -r auth_plugin="${3:-}"
+    local auth_plugin_str=""
+
+    if [[ -n "$auth_plugin" ]]; then
+        auth_plugin_str="with $auth_plugin"
+    fi
 
     debug "Configuring root user credentials"
     if [ "$DB_FLAVOR" == "mariadb" ]; then
@@ -840,7 +854,7 @@ mysql_ensure_root_user_exists() {
 -- create user 'root'@'localhost' $([ "$password" != "" ] && echo "identified by '$password'");
 -- grant all on *.* to 'root'@'localhost' with grant option;
 -- create admin user for remote access
-create user '$user'@'%' $([ "$password" != "" ] && echo "identified by '$password'");
+create user '$user'@'%' $([ "$password" != "" ] && echo "identified $auth_plugin_str by '$password'");
 grant all on *.* to '$user'@'%' with grant option;
 flush privileges;
 EOF
@@ -864,7 +878,7 @@ EOF
 #   None
 #########################
 mysql_ensure_database_exists() {
-    local database="${1:?database is required}"
+    local -r database="${1:?database is required}"
 
     debug "Creating database $database"
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
@@ -883,8 +897,8 @@ EOF
 #   None
 #########################
 mysql_ensure_user_has_database_privileges() {
-    local user="${1:?user is required}"
-    local database="${2:?db is required}"
+    local -r user="${1:?user is required}"
+    local -r database="${2:?db is required}"
 
     debug "Providing privileges to username $user on database $database"
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
@@ -901,18 +915,20 @@ EOF
 #   $1 - database name
 #   $2 - database user
 #   $3 - database password
+#   $4 - authentication plugin
 # Returns:
 #   None
 #########################
 mysql_ensure_optional_database_exists() {
-    local database="${1:-}"
-    local user="${2:-}"
-    local password="${3:-}"
+    local -r database="${1:-}"
+    local -r user="${2:-}"
+    local -r password="${3:-}"
+    local -r auth_plugin="${4:-}"
 
     if [[ "$database" != "" ]]; then
         mysql_ensure_database_exists "$database"
         if [[ "$user" != "" ]]; then
-            mysql_ensure_user_exists "$user" "$password"
+            mysql_ensure_user_exists "$user" "$password" "$auth_plugin"
             mysql_ensure_user_has_database_privileges "$user" "$database"
         fi
     fi
