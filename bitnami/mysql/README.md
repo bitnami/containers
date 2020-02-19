@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8.0-ol-7`, `8.0.19-ol-7-r29` (8.0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.19-ol-7-r29/8.0/ol-7/Dockerfile)
-* [`8.0-debian-10`, `8.0.19-debian-10-r24`, `8.0`, `8.0.19`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.19-debian-10-r24/8.0/debian-10/Dockerfile)
+* [`8.0-debian-10`, `8.0.19-debian-10-r25`, `8.0`, `8.0.19`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.19-debian-10-r25/8.0/debian-10/Dockerfile)
 * [`5.7-ol-7`, `5.7.29-ol-7-r29` (5.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.29-ol-7-r29/5.7/ol-7/Dockerfile)
 * [`5.7-debian-10`, `5.7.29-debian-10-r21`, `5.7`, `5.7.29` (5.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.29-debian-10-r21/5.7/debian-10/Dockerfile)
 
@@ -253,7 +253,7 @@ services:
 
 ## Creating a database user on first run
 
-You can create a restricted database user that only has permissions for the database created with the [`MYSQL_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `MYSQL_USER` environment variable and to set a password for the database user provide the `MYSQL_PASSWORD` variable.
+You can create a restricted database user that only has permissions for the database created with the [`MYSQL_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `MYSQL_USER` environment variable and to set a password for the database user provide the `MYSQL_PASSWORD` variable. MySQL supports different authentication mechanisms, such as `caching_sha2_password` or `mysql_native_password`. To set it, use the `MYSQL_AUTHENTICATION_PLUGIN` variable.
 
 ```bash
 $ docker run --name mysql \
@@ -261,6 +261,7 @@ $ docker run --name mysql \
   -e MYSQL_USER=my_user \
   -e MYSQL_PASSWORD=my_password \
   -e MYSQL_DATABASE=my_database \
+  -e MYSQL_AUTHENTICATION_PLUGIN=mysql_native_password \
   bitnami/mysql:latest
 ```
 
