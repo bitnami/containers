@@ -10,7 +10,7 @@ COPY prebuildfs /
 RUN install_packages bzip2-libs ca-certificates curl glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libgcc libselinux libstdc++ ncurses-libs nss-softokn-freebl openssl-libs pcre procps-ng readline sqlite sudo tar which zlib
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
-RUN bitnami-pkg install node-12.16.0-0 --checksum 75e7e97a571c4dd9198f8b6b1eb76b6f3ce0799e099dd3dbaa6da7cbb317c607
+RUN bitnami-pkg install node-12.16.1-0 --checksum 97117776296f16fb71ae4797a6b33ba98dda58dd9ab91f535fa427fac75a7e06
 RUN bitnami-pkg unpack parse-dashboard-2.0.5-1 --checksum 8014ec9ed4e580dc1adc32ba12c44349f2dc2b0205ef0f4b72c854395db355d9
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -19,7 +19,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="2.0.5-ol-7-r115" \
+    BITNAMI_IMAGE_VERSION="2.0.5-ol-7-r117" \
     NAMI_PREFIX="/.nami" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
