@@ -5,12 +5,12 @@ ENV PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/php/sbin:/opt/
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages GeoIP bzip2-libs ca-certificates curl cyrus-sasl-lib freetds-libs freetype glibc gmp gnutls gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pcre postgresql-libs procps-ng readline sudo tar which xz-libs zlib
+RUN install_packages GeoIP audit-libs bzip2-libs ca-certificates curl cyrus-sasl-lib freetds-libs freetype glibc gmp gnutls gzip hostname keyutils-libs krb5-libs libaio-devel libcap-ng libcom_err libcurl libffi libgcc libgcrypt libgpg-error libicu libidn libjpeg-turbo libmemcached libpng libselinux libssh2 libstdc++ libtasn1 libtidy libxml2 libxslt ncurses-libs nettle nspr nss nss-softokn-freebl nss-util openldap openssl-libs p11-kit pam pcre postgresql-libs procps-ng readline sudo tar which xz-libs zlib
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack php-7.3.14-0 --checksum e99cb40b76f03fde9fe864a47ef2be3643dc2f9a859c764e1ba626577d13c893
 RUN bitnami-pkg unpack nginx-1.16.1-4 --checksum 492b05515c2f72241dc9efa7d92d18ce58e54ea437d643b40ba5b2aaf5077142
-RUN bitnami-pkg unpack mysql-client-10.3.22-0 --checksum a79d0068a2219cfa03e249f6eb38945b4f0c5a4d116771bcbe971470b0c29417
+RUN bitnami-pkg unpack mysql-client-10.3.22-1 --checksum a619b82859b607462a5a82900fea0c19665857ff26c2f4506752a82368b66f72
 RUN bitnami-pkg unpack drupal-8.8.2-4 --checksum c6f20d90870341aebac20dea7e16ba8fa02af7baa6a0a009ef78b29a04116973
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -22,7 +22,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="8.8.2-ol-7-r16" \
+    BITNAMI_IMAGE_VERSION="8.8.2-ol-7-r17" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
