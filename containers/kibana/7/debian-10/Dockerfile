@@ -10,8 +10,8 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl dirmngr gnupg libc6 libgcc1 libstdc++6 procps sudo unzip
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
-RUN bitnami-pkg unpack kibana-7.6.0-2 --checksum 80e9e2b9ea8d6bf31cd5e3b03ad424ea42593e4853a80ae6dee146eb25955797
-RUN apt-get update && apt-get upgrade && \
+RUN bitnami-pkg unpack kibana-7.6.0-4 --checksum 99177f1f6244b94b4effffd402ab0b98d8efa6fa2417d047875343fe7047d0f3
+RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
 RUN mkdir -p /bitnami/kibana/ /docker-entrypoint-initdb.d/ && chmod -R g+rwX /bitnami/ /docker-entrypoint-initdb.d/
@@ -19,7 +19,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="7.6.0-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="7.6.0-debian-10-r8" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
