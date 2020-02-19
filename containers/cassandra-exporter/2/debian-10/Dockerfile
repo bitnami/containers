@@ -11,11 +11,11 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "c84f829262068a5711a3af65d018b6b5b52d06ae6fba776c1ae09658dbb62ad3  /tmp/bitnami/pkg/cache/cassandra-exporter-2.3.2-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/cassandra-exporter-2.3.2-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/cassandra-exporter-2.3.2-0-linux-amd64-debian-10.tar.gz
-RUN apt-get update && apt-get upgrade && \
+RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="cassandra-exporter" \
-    BITNAMI_IMAGE_VERSION="2.3.2-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="2.3.2-debian-10-r8" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 8080
