@@ -14,7 +14,7 @@ RUN /build/bitnami-user.sh && \
 RUN bitnami-pkg install python-3.6.10-0 --checksum 64172bd89338173a279f7a459b4fd0f1d630b18035bc73bab9dfc45ac2cfbe98
 RUN bitnami-pkg install postgresql-client-10.12.0-0 --checksum 79d8f599a6e93f5581162f18e80fe1e3b8020c6f1b56d19a94882d4484ad506f
 RUN bitnami-pkg unpack airflow-1.10.9-0 --checksum 6874ef8cdb3099d2ca246980c7c304c88857305217237f5dd6934e34d2e18bc2
-RUN apt-get update && apt-get upgrade && \
+RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 RUN /build/install-gosu.sh
@@ -48,7 +48,7 @@ ENV AIRFLOW_BASE_URL="" \
     AIRFLOW_WEBSERVER_HOST="127.0.0.1" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="airflow" \
-    BITNAMI_IMAGE_VERSION="1.10.9-debian-10-r9" \
+    BITNAMI_IMAGE_VERSION="1.10.9-debian-10-r10" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
