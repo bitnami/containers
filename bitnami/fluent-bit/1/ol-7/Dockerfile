@@ -4,15 +4,15 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages bzip2-libs ca-certificates curl cyrus-sasl-lib elfutils-libelf elfutils-libs glibc gzip hostname keyutils-libs krb5-libs libaio-devel libattr libcap libcom_err libgcc libgcrypt libgpg-error libselinux lz4 nss-softokn-freebl openssl-libs pcre procps-ng sudo systemd-libs tar wget which xz-libs zlib
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluent-bit-1.3.7-0-linux-x86_64-ol-7.tar.gz && \
-    echo "b352c14c2b2185bb7934155accf4626db58a12ae02a40b5f9135fdf679ea4d99  /tmp/bitnami/pkg/cache/fluent-bit-1.3.7-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/fluent-bit-1.3.7-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/fluent-bit-1.3.7-0-linux-x86_64-ol-7.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluent-bit-1.3.8-0-linux-x86_64-ol-7.tar.gz && \
+    echo "0c56fb6fb6e5c252becbcd0318ccc2800970520ac9da8d77a097118d34c2286e  /tmp/bitnami/pkg/cache/fluent-bit-1.3.8-0-linux-x86_64-ol-7.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/fluent-bit-1.3.8-0-linux-x86_64-ol-7.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/fluent-bit-1.3.8-0-linux-x86_64-ol-7.tar.gz
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 
 ENV BITNAMI_APP_NAME="fluent-bit" \
-    BITNAMI_IMAGE_VERSION="1.3.7-ol-7-r10" \
+    BITNAMI_IMAGE_VERSION="1.3.8-ol-7-r0" \
     PATH="/opt/bitnami/fluent-bit/bin:$PATH"
 
 EXPOSE 2020
