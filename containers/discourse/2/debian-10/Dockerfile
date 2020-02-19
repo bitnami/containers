@@ -14,7 +14,7 @@ RUN bitnami-pkg install git-2.25.1-0 --checksum ca45bb393e1d231affbc8aac5671562a
 RUN bitnami-pkg unpack discourse-sidekiq-2.3.10-0 --checksum f1795069e3a364e8a3804bb44e571a830d8c3dc08f0e10d98287b5f23010f08e
 RUN bitnami-pkg install brotli-1.0.7-0 --checksum c5e349954ddf73f15b7a4d732ce594cbfe8b1cd6126c12aed5baf6262127e2be
 RUN bitnami-pkg unpack discourse-2.3.10-0 --checksum 01a06b82dc1dc654392a40dde571c4c07ee84bf3a346b6c233f404ffdedbae35
-RUN apt-get update && apt-get upgrade && \
+RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
 RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
@@ -22,7 +22,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.3.10-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="2.3.10-debian-10-r5" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="discourse" \
     DISCOURSE_HOSTNAME="127.0.0.1" \
