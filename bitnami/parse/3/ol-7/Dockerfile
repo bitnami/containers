@@ -10,7 +10,7 @@ COPY prebuildfs /
 RUN install_packages bzip2-libs ca-certificates curl cyrus-sasl-lib glibc gzip hostname keyutils-libs krb5-libs libaio-devel libcom_err libcurl libgcc libidn libselinux libssh2 libstdc++ ncurses-libs nspr nss nss-softokn-freebl nss-util openldap openssl-libs pcre procps-ng readline sqlite sudo tar which zlib
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
-RUN bitnami-pkg install node-12.16.0-0 --checksum 75e7e97a571c4dd9198f8b6b1eb76b6f3ce0799e099dd3dbaa6da7cbb317c607
+RUN bitnami-pkg install node-12.16.1-0 --checksum 97117776296f16fb71ae4797a6b33ba98dda58dd9ab91f535fa427fac75a7e06
 RUN bitnami-pkg install mongodb-client-4.2.3-0 --checksum cdc8ed76ef2b9df4c9fac30c2b86d65b3a7c9af6e2a8a55f0c1063af3044a02a
 RUN bitnami-pkg unpack parse-3.10.0-0 --checksum ad1521691c650449ffe73e044d24b5f5ecaf066212e7a98873ef393f8b64b90b
 RUN yum upgrade -y && \
@@ -20,7 +20,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="3.10.0-ol-7-r35" \
+    BITNAMI_IMAGE_VERSION="3.10.0-ol-7-r36" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
