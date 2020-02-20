@@ -9,9 +9,9 @@ RUN install_packages audit-libs bzip2-libs ca-certificates curl cyrus-sasl-lib e
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
-RUN bitnami-pkg unpack php-7.2.27-0 --checksum 1c6dd8382928048eef5898d2e94b3296b41080ce7b9fe70ad74bbd4598c5b2fc
+RUN bitnami-pkg unpack php-7.2.28-0 --checksum d6304b18b289560a1a59976feece423f635fb39dda2dcbb10a1a209429dfb882
 RUN bitnami-pkg unpack mysql-client-10.3.22-1 --checksum a619b82859b607462a5a82900fea0c19665857ff26c2f4506752a82368b66f72
-RUN bitnami-pkg install libphp-7.2.27-0 --checksum ce26afb558cb054f530cb2023441a8cbb4658945e49d36cb6b82558c9f4f7c39
+RUN bitnami-pkg install libphp-7.2.28-0 --checksum db8087fad4d02c0fdafd8a091941c52d29c29e54de494c0632734b3f2155f2a9
 RUN bitnami-pkg unpack phpbb-3.3.0-0 --checksum 49751618ad4ab1cc2575336107156bb0058a8f832a22a947906d22a142075fc6
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -25,7 +25,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="phpbb" \
-    BITNAMI_IMAGE_VERSION="3.3.0-ol-7-r41" \
+    BITNAMI_IMAGE_VERSION="3.3.0-ol-7-r42" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
