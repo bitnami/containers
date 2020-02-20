@@ -9,9 +9,9 @@ RUN install_packages audit-libs bzip2-libs ca-certificates curl cyrus-sasl-lib e
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
-RUN bitnami-pkg unpack php-7.2.27-0 --checksum 1c6dd8382928048eef5898d2e94b3296b41080ce7b9fe70ad74bbd4598c5b2fc
+RUN bitnami-pkg unpack php-7.2.28-0 --checksum d6304b18b289560a1a59976feece423f635fb39dda2dcbb10a1a209429dfb882
 RUN bitnami-pkg unpack mysql-client-10.1.44-1 --checksum 55aef2f8a441f0ec506daef66c1f822d8c679f4d7af10a42ebeeeaa352ec806a
-RUN bitnami-pkg install libphp-7.2.27-0 --checksum ce26afb558cb054f530cb2023441a8cbb4658945e49d36cb6b82558c9f4f7c39
+RUN bitnami-pkg install libphp-7.2.28-0 --checksum db8087fad4d02c0fdafd8a091941c52d29c29e54de494c0632734b3f2155f2a9
 RUN bitnami-pkg unpack prestashop-1.7.6-3-0 --checksum 075fa0da982894cdc54d69b24b673dad2497988a0e6fda74caf6d4fad75143b7
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -25,7 +25,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-3-ol-7-r24" \
+    BITNAMI_IMAGE_VERSION="1.7.6-3-ol-7-r25" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
