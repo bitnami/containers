@@ -9,8 +9,8 @@ RUN install_packages bzip2-libs ca-certificates curl cyrus-sasl-lib expat freetd
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
-RUN bitnami-pkg unpack php-7.3.14-0 --checksum e99cb40b76f03fde9fe864a47ef2be3643dc2f9a859c764e1ba626577d13c893
-RUN bitnami-pkg install libphp-7.3.14-0 --checksum 5ec940bf1429c99d5e9204f2a9ace1ce0b136cda397ecfe50f8ffef9571242db
+RUN bitnami-pkg unpack php-7.3.15-0 --checksum 3a5c92718570bc7dbc0ebbbbd15301317f9e9e447bb7f3f058480e078a614927
+RUN bitnami-pkg install libphp-7.3.15-0 --checksum bf8abdfd433fe1123ec06c7a6b48b5ce684eb762515b79194381a5deeaf75eb4
 RUN bitnami-pkg unpack dokuwiki-0.20180422.201901061035-2 --checksum b1bed0f232678dc7da788804bbd943d0eb7110289551901dc4f7eb50b1588939
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -23,7 +23,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="dokuwiki" \
-    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-ol-7-r395" \
+    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-ol-7-r396" \
     DOKUWIKI_EMAIL="user@example.com" \
     DOKUWIKI_FULL_NAME="Full Name" \
     DOKUWIKI_PASSWORD="bitnami1" \
