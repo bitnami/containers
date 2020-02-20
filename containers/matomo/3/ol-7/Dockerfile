@@ -9,9 +9,9 @@ RUN install_packages audit-libs bzip2-libs ca-certificates cronie curl cyrus-sas
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
-RUN bitnami-pkg unpack php-7.3.14-0 --checksum e99cb40b76f03fde9fe864a47ef2be3643dc2f9a859c764e1ba626577d13c893
+RUN bitnami-pkg unpack php-7.3.15-0 --checksum 3a5c92718570bc7dbc0ebbbbd15301317f9e9e447bb7f3f058480e078a614927
 RUN bitnami-pkg unpack mysql-client-10.3.22-1 --checksum a619b82859b607462a5a82900fea0c19665857ff26c2f4506752a82368b66f72
-RUN bitnami-pkg install libphp-7.3.14-0 --checksum 5ec940bf1429c99d5e9204f2a9ace1ce0b136cda397ecfe50f8ffef9571242db
+RUN bitnami-pkg install libphp-7.3.15-0 --checksum bf8abdfd433fe1123ec06c7a6b48b5ce684eb762515b79194381a5deeaf75eb4
 RUN bitnami-pkg unpack matomo-3.13.2-0 --checksum da99c77a01906def8a9ccad09b4533e737b4e010734a805d6e9c6025dc5997ca
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -27,7 +27,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="matomo" \
-    BITNAMI_IMAGE_VERSION="3.13.2-ol-7-r9" \
+    BITNAMI_IMAGE_VERSION="3.13.2-ol-7-r10" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
