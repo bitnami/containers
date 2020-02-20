@@ -9,9 +9,9 @@ RUN install_packages ca-certificates curl dirmngr gnupg libaudit1 libbz2-1.0 lib
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-0 --checksum 0364e80e08a89fda2d2d302609f813d5d497b6cb6bcf6643d2770b825abbc0fb
-RUN bitnami-pkg unpack php-7.2.27-0 --checksum 6456864bfa1f9551801e9577b275a0226c40d9ec5ee8dc7bba19212f5f73ba4b
+RUN bitnami-pkg unpack php-7.2.28-0 --checksum f5763f288bc56f6d8fe607b17b165521f6676df876456256221336011def9a2a
 RUN bitnami-pkg unpack mysql-client-10.2.31-1 --checksum 83278bc914a13a90a3ac05f43656f69dfbfc777e5b8672487a22a1ed65e3fda0
-RUN bitnami-pkg install libphp-7.2.27-0 --checksum 7c66d4776bf47eca1e83808a6540e48089bbda747aec9595285856991b03ff5e
+RUN bitnami-pkg install libphp-7.2.28-0 --checksum b53cba65554c7b0e3815c85fbe0d6744cad20a48585ac4606857c1836aeab639
 RUN bitnami-pkg unpack orangehrm-4.3.4-0-0 --checksum dae8979235438d8cf035be3269a0c1723166da86d0128707c993db8db23fb6ee
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -25,7 +25,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.3.4-0-debian-10-r23" \
+    BITNAMI_IMAGE_VERSION="4.3.4-0-debian-10-r24" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
