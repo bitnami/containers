@@ -10,6 +10,7 @@ https://nginx.org/
 ## Docker Compose
 
 ```bash
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-drupal-nginx/master/drupal-server-block.conf > drupal-server-block.conf
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-drupal-nginx/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
