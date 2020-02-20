@@ -23,7 +23,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="couchdb" \
-    BITNAMI_IMAGE_VERSION="2.3.1-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="2.3.1-debian-10-r23" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/couchdb/bin:$PATH"
 
