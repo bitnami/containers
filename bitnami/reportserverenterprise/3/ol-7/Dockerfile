@@ -9,7 +9,7 @@ RUN install_packages audit-libs ca-certificates curl fontconfig glibc gzip hostn
 RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg install java-11.0.6-0 --checksum 44f5ec63dbe8d2ea9aaea237cec2d8821ac3ee6fa2812c295c0fa04068d0e08e
-RUN bitnami-pkg unpack tomcat-9.0.31-0 --checksum 4b8c2e7e9e672c9dac7197452bf721f2f6e3940bffd34748d231f602bee6b422
+RUN bitnami-pkg unpack tomcat-9.0.31-1 --checksum 49b5edd7a49b0a185650ab69ab568bbee47bf2259783bf49c8831d51ddd558e2
 RUN bitnami-pkg unpack mysql-client-10.3.22-1 --checksum a619b82859b607462a5a82900fea0c19665857ff26c2f4506752a82368b66f72
 RUN bitnami-pkg unpack reportserverenterprise-3.1.1-6020-0 --checksum 7b01da144c9fc6ca30e21cf24f2be8ef3b34eb2d3a1a770d72af07f056346065
 RUN yum upgrade -y && \
@@ -20,7 +20,7 @@ RUN /build/install-tini.sh
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserverenterprise" \
-    BITNAMI_IMAGE_VERSION="3.1.1-6020-ol-7-r18" \
+    BITNAMI_IMAGE_VERSION="3.1.1-6020-ol-7-r19" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
