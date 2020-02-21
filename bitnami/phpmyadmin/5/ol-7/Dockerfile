@@ -10,7 +10,7 @@ RUN /build/bitnami-user.sh && \
     /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.41-4 --checksum f776f87e3c54a2ff1e13ed75de39356df465b53ac3264a94c3d6ad9252f5b682
 RUN bitnami-pkg unpack php-7.3.15-0 --checksum 3a5c92718570bc7dbc0ebbbbd15301317f9e9e447bb7f3f058480e078a614927
-RUN bitnami-pkg install libphp-7.3.14-0 --checksum 5ec940bf1429c99d5e9204f2a9ace1ce0b136cda397ecfe50f8ffef9571242db
+RUN bitnami-pkg install libphp-7.3.15-0 --checksum bf8abdfd433fe1123ec06c7a6b48b5ce684eb762515b79194381a5deeaf75eb4
 RUN bitnami-pkg unpack phpmyadmin-5.0.1-0 --checksum f2c268bc409824d90f62225496febb2a850354aaaeda74daca9f07f1050b84d1
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
@@ -23,7 +23,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="5.0.1-ol-7-r31" \
+    BITNAMI_IMAGE_VERSION="5.0.1-ol-7-r32" \
     DATABASE_ENABLE_SSL="no" \
     DATABASE_HOST="mariadb" \
     DATABASE_PORT_NUMBER="3306" \
