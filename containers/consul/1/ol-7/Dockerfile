@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip hostname libaio-devel procps-ng sudo tar unzip which
-RUN . ./libcomponent.sh && component_unpack "consul" "1.7.0-0" --checksum cd44cf1dbe1b27de8b17bb4c0930fba3614ed3367761c1bdf2d8e5483a93190c
+RUN . ./libcomponent.sh && component_unpack "consul" "1.7.1-0" --checksum 2f388f6b95eba082bead525d2cf2dd53d9615b4577542b95e2f9e7305a4bfb76
 RUN yum upgrade -y && \
     rm -r /var/cache/yum
 RUN /build/install-gosu.sh
@@ -18,7 +18,7 @@ RUN curl --silent -L https://github.com/bitnami/render-template/releases/downloa
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.7.0-ol-7-r9" \
+    BITNAMI_IMAGE_VERSION="1.7.1-ol-7-r0" \
     PATH="/opt/bitnami/consul/bin:$PATH"
 
 EXPOSE 8300 8301 8500 8600
