@@ -87,7 +87,7 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 ```bash
 $ docker run --detach --rm --name pg-0 \
   --network my-network \
-  --env REPMGR_PARTNER_NODES=g-0,pg-1 \
+  --env REPMGR_PARTNER_NODES=pg-0,pg-1 \
   --env REPMGR_NODE_NAME=pg-0 \
   --env REPMGR_NODE_NETWORK_NAME=pg-0 \
   --env REPMGR_PRIMARY_HOST=pg-0 \
