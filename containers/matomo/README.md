@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3-ol-7`, `3.13.2-ol-7-r13` (3/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.13.2-ol-7-r13/3/ol-7/Dockerfile)
-* [`3-debian-10`, `3.13.2-debian-10-r12`, `3`, `3.13.2`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.13.2-debian-10-r12/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.13.2-debian-10-r13`, `3`, `3.13.2`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.13.2-debian-10-r13/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
 
