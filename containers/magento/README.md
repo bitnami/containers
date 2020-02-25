@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.3.4-ol-7-r20` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.3.4-ol-7-r20/2/ol-7/Dockerfile)
-* [`2-debian-10`, `2.3.4-debian-10-r13`, `2`, `2.3.4`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.3.4-debian-10-r13/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.3.4-debian-10-r14`, `2`, `2.3.4`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.3.4-debian-10-r14/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
 
@@ -245,6 +245,7 @@ Available variables:
 - `EXTERNAL_HTTP_PORT_NUMBER`: Port to access Magento from outside of the container using HTTP. Used to configure Magento's internal routes. Default: **80**
 - `EXTERNAL_HTTPS_PORT_NUMBER`: Port to access Magento from outside of the container using HTTPS. Used to configure Magento's internal routes. Default: **443**
 - `MAGENTO_MODE`: Magento mode. Valid values: **default**, **production**, **developer**. Default: **default**
+- `MAGENTO_USE_SECURE_ADMIN`: Use SSL to access the Magento Admin. Valid values: **yes**, **no**. Default: **no**
 
 #### Search configuration
 

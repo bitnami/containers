@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack apache-2.4.41-0 --checksum 0364e80e08a89fda2d2d302609f813
 RUN bitnami-pkg unpack php-7.3.15-0 --checksum 631e0e01ec4f935b714d48f61a71d29284e9c159ca928475ef51e36f6de0d909
 RUN bitnami-pkg unpack mysql-client-10.2.31-1 --checksum 83278bc914a13a90a3ac05f43656f69dfbfc777e5b8672487a22a1ed65e3fda0
 RUN bitnami-pkg install libphp-7.3.15-0 --checksum c96f4cd9a52432202120b0e80b867edab40f74d7f478d46278c49d23aecd2f59
-RUN bitnami-pkg unpack magento-2.3.4-0 --checksum 60ae0dd17387c39a063546789af51b04ea6be585b2f6c7cb576ce5f83e0d903b
+RUN bitnami-pkg unpack magento-2.3.4-1 --checksum 3160bb9222fc3ef21ed95204483ba18af6a6b8d8d989097cb9c14f38ccd06a08
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
@@ -27,7 +27,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_SET_HTTPS_PORT="no" \
     APACHE_SET_HTTP_PORT="no" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.4-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="2.3.4-debian-10-r14" \
     ELASTICSEARCH_HOST="" \
     ELASTICSEARCH_PORT_NUMBER="" \
     EXTERNAL_HTTPS_PORT_NUMBER="443" \
@@ -43,6 +43,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MAGENTO_MODE="developer" \
     MAGENTO_PASSWORD="bitnami1" \
     MAGENTO_USERNAME="user" \
+    MAGENTO_USE_SECURE_ADMIN="no" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
