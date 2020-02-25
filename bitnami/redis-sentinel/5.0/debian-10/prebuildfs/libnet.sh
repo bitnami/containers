@@ -2,6 +2,9 @@
 #
 # Library for network functions
 
+# Load Generic Libraries
+. /liblog.sh
+
 # Functions
 
 ########################
@@ -41,4 +44,60 @@ is_hostname_resolved() {
     else
         false
     fi
+}
+
+########################
+# Parse URL
+# Globals:
+#   None
+# Arguments:
+#   $1 - uri - String
+#   $2 - component to obtain. Valid options (scheme, authority, userinfo, host, port, path, query or fragment) - String
+# Returns:
+#   String
+parse_uri() {
+    local uri="${1:?uri is missing}"
+    local component="${2:?component is missing}"
+
+    # Solution based on https://tools.ietf.org/html/rfc3986#appendix-B with
+    # additional sub-expressions to split authority into userinfo, host and port
+    # Credits to Patryk Obara (see https://stackoverflow.com/a/45977232/6694969)
+    local -r URI_REGEX='^(([^:/?#]+):)?(//((([^:/?#]+)@)?([^:/?#]+)(:([0-9]+))?))?(/([^?#]*))(\?([^#]*))?(#(.*))?'
+    #                    ||            |  |||            |         | |            | |        |  |        | |
+    #                    |2 scheme     |  ||6 userinfo   7 host    | 9 port       | 11 rpath |  13 query | 15 fragment
+    #                    1 scheme:     |  |5 userinfo@             8 :...         10 path    12 ?...     14 #...
+    #                                  |  4 authority
+    #                                  3 //...
+    local index=0
+    case "$component" in
+        scheme)
+            index=2
+            ;;
+        authority)
+            index=4
+            ;;
+        userinfo)
+            index=6
+            ;;
+        host)
+            index=7
+            ;;
+        port)
+            index=9
+            ;;
+        path)
+            index=10
+            ;;
+        query)
+            index=13
+            ;;
+        fragment)
+            index=14
+            ;;
+        *)
+            stderr_print "unrecognized component $1"
+            return 1
+            ;;
+    esac
+    [[ "$uri" =~ $URI_REGEX ]] && echo "${BASH_REMATCH[${index}]}"
 }
