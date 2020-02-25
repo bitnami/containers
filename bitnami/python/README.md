@@ -48,10 +48,10 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`3.8-debian-10-prod`, `3.8.2-debian-10-r0-prod`, `3.8-prod`, `3.8.2-prod` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.2-debian-10-r0-prod/3.8-prod/debian-10/Dockerfile)
+* [`3.8-debian-10`, `3.8.2-debian-10-r0`, `3.8`, `3.8.2` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.2-debian-10-r0/3.8/debian-10/Dockerfile)
 * [`3.8-ol-7-prod`, `3.8.1-ol-7-r65-prod` (3.8-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.1-ol-7-r65-prod/3.8-prod/ol-7/Dockerfile)
 * [`3.8-ol-7`, `3.8.1-ol-7-r61` (3.8/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.1-ol-7-r61/3.8/ol-7/Dockerfile)
-* [`3.8-debian-10-prod`, `3.8.1-debian-10-r28-prod`, `3.8-prod`, `3.8.1-prod` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.1-debian-10-r28-prod/3.8-prod/debian-10/Dockerfile)
-* [`3.8-debian-10`, `3.8.1-debian-10-r28`, `3.8`, `3.8.1` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.1-debian-10-r28/3.8/debian-10/Dockerfile)
 * [`3.7-ol-7-prod`, `3.7.6-ol-7-r61-prod` (3.7-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.6-ol-7-r61-prod/3.7-prod/ol-7/Dockerfile)
 * [`3.7-ol-7`, `3.7.6-ol-7-r61` (3.7/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.6-ol-7-r61/3.7/ol-7/Dockerfile)
 * [`3.7-debian-10-prod`, `3.7.6-debian-10-r28-prod`, `3.7-prod`, `3.7.6-prod`, `latest-prod` (3.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.6-debian-10-r28-prod/3.7-prod/debian-10/Dockerfile)
