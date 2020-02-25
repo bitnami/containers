@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 procps sudo unzip
-RUN . ./libcomponent.sh && component_unpack "redis" "5.0.7-0" --checksum 5a7104e353b8ea30b4c4e4ca592338bb25711e922f754379f4ca795574a2233d
+RUN . ./libcomponent.sh && component_unpack "redis" "5.0.7-1" --checksum 3707cee91ed431b7241c5ae7c5195f8ecdac99c388814b685f07b3b83651ad9b
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -23,7 +23,7 @@ RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.7-debian-10-r31" \
+    BITNAMI_IMAGE_VERSION="5.0.7-debian-10-r32" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/redis/bin:$PATH"
 
