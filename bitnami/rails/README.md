@@ -37,13 +37,12 @@ $ kubectl apply -f test.yaml
 
 ## Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`6-ol-7`, `6.0.2-1-ol-7-r65` (6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/6.0.2-1-ol-7-r65/6/ol-7/Dockerfile)
-* [`6-debian-10`, `6.0.2-1-debian-10-r27`, `6`, `6.0.2-1`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/6.0.2-1-debian-10-r27/6/debian-10/Dockerfile)
+* [`6-debian-10`, `6.0.2-1-debian-10-r28`, `6`, `6.0.2-1`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/6.0.2-1-debian-10-r28/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rails GitHub repo](https://github.com/bitnami/bitnami-docker-rails).
 
