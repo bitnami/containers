@@ -621,6 +621,7 @@ postgresql_clean_from_restart() {
 postgresql_initialize() {
     postgresql_info "Initializing PostgreSQL database..."
     postgresql_clean_from_restart
+
     # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
     # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
     rm -f "$POSTGRESQL_PID_FILE"
@@ -648,6 +649,11 @@ postgresql_initialize() {
         ensure_dir_exists "$dir"
         am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$dir"
     done
+    ensure_dir_exists "$POSTGRESQL_DATA_DIR"
+    am_i_root && find "$POSTGRESQL_DATA_DIR" -mindepth 1 -maxdepth 1 -not -name ".snapshot" -not -name "lost+found" -exec chown -R "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" {} \;
+    chmod u+rwx "$POSTGRESQL_DATA_DIR" || postgresql_warn "Lack of permissions on data directory!"
+    chmod go-rwx "$POSTGRESQL_DATA_DIR" || postgresql_warn "Lack of permissions on data directory!"
+
     is_boolean_yes "$create_conf_file" && postgresql_create_config
     is_boolean_yes "$create_pghba_file" && postgresql_create_pghba && postgresql_allow_local_connection
 
@@ -660,8 +666,6 @@ postgresql_initialize() {
         [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]] && [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
         [[ "$POSTGRESQL_REPLICATION_MODE" = "slave" ]] && postgresql_configure_recovery
     else
-        ensure_dir_exists "$POSTGRESQL_DATA_DIR"
-        am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_DATA_DIR"
         if [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]]; then
             postgresql_master_init_db
             postgresql_start_bg
@@ -920,7 +924,6 @@ postgresql_slave_init_db() {
             exit 1
         fi
     done
-    chmod 0700 "$POSTGRESQL_DATA_DIR"
 }
 
 ########################
