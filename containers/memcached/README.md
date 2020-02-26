@@ -41,13 +41,12 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.5.22-ol-7-r19` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.22-ol-7-r19/1/ol-7/Dockerfile)
-* [`1-debian-10`, `1.5.22-debian-10-r22`, `1`, `1.5.22`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.22-debian-10-r22/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.5.22-debian-10-r23`, `1`, `1.5.22`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.5.22-debian-10-r23/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/memcached GitHub repo](https://github.com/bitnami/bitnami-docker-memcached).
 
