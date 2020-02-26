@@ -37,25 +37,19 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`13-photon-3`, `13.9.0-photon-3-r0` (13/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.9.0-photon-3-r0/13/photon-3/Dockerfile)
-* [`13-ol-7-prod`, `13.9.0-ol-7-r5-prod` (13-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.9.0-ol-7-r5-prod/13-prod/ol-7/Dockerfile)
-* [`13-ol-7`, `13.9.0-ol-7-r5` (13/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.9.0-ol-7-r5/13/ol-7/Dockerfile)
 * [`13-debian-10-prod`, `13.9.0-debian-10-r7-prod`, `13-prod`, `13.9.0-prod` (13-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.9.0-debian-10-r7-prod/13-prod/debian-10/Dockerfile)
 * [`13-debian-10`, `13.9.0-debian-10-r7`, `13`, `13.9.0` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.9.0-debian-10-r7/13/debian-10/Dockerfile)
 * [`12-photon-3`, `12.16.1-photon-3-r0` (12/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.1-photon-3-r0/12/photon-3/Dockerfile)
-* [`12-ol-7-prod`, `12.16.1-ol-7-r5-prod` (12-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.1-ol-7-r5-prod/12-prod/ol-7/Dockerfile)
-* [`12-ol-7`, `12.16.1-ol-7-r5` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.1-ol-7-r5/12/ol-7/Dockerfile)
 * [`12-debian-10-prod`, `12.16.1-debian-10-r8-prod`, `12-prod`, `12.16.1-prod`, `latest-prod` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.1-debian-10-r8-prod/12-prod/debian-10/Dockerfile)
 * [`12-debian-10`, `12.16.1-debian-10-r7`, `12`, `12.16.1`, `latest` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.1-debian-10-r7/12/debian-10/Dockerfile)
 * [`10-photon-3`, `10.19.0-photon-3-r0` (10/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.19.0-photon-3-r0/10/photon-3/Dockerfile)
-* [`10-ol-7-prod`, `10.19.0-ol-7-r15-prod` (10-prod/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.19.0-ol-7-r15-prod/10-prod/ol-7/Dockerfile)
-* [`10-ol-7`, `10.19.0-ol-7-r15` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.19.0-ol-7-r15/10/ol-7/Dockerfile)
-* [`10-debian-10-prod`, `10.19.0-debian-10-r17-prod`, `10-prod`, `10.19.0-prod` (10-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.19.0-debian-10-r17-prod/10-prod/debian-10/Dockerfile)
+* [`10-debian-10-prod`, `10.19.0-debian-10-r18-prod`, `10-prod`, `10.19.0-prod` (10-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.19.0-debian-10-r18-prod/10-prod/debian-10/Dockerfile)
 * [`10-debian-10`, `10.19.0-debian-10-r10`, `10`, `10.19.0` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.19.0-debian-10-r10/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
