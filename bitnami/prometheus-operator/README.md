@@ -39,13 +39,12 @@ $ kubectl apply -f test.yaml
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-ol-7`, `0.36.0-ol-7-r12` (0/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.36.0-ol-7-r12/0/ol-7/Dockerfile)
-* [`0-debian-10`, `0.36.0-debian-10-r13`, `0`, `0.36.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.36.0-debian-10-r13/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.36.0-debian-10-r14`, `0`, `0.36.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.36.0-debian-10-r14/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus-operator GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus-operator).
 
