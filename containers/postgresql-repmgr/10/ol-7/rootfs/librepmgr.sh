@@ -11,6 +11,7 @@
 . /liblog.sh
 . /libos.sh
 . /libvalidations.sh
+. /libnet.sh
 
 ########################
 # Overwrite info, debug, warn and error functions (liblog.sh)
@@ -80,6 +81,7 @@ export REPMGR_UPGRADE_EXTENSION="${REPMGR_UPGRADE_EXTENSION:-no}"
 # These are internal
 export REPMGR_SWITCH_ROLE="${REPMGR_SWITCH_ROLE:-no}"
 export REPMGR_CURRENT_PRIMARY_HOST=""
+export REPMGR_CURRENT_PRIMARY_PORT="${REPMGR_PRIMARY_PORT}"
 
 # Aliases to setup PostgreSQL environment variables
 export PGCONNECT_TIMEOUT="${PGCONNECT_TIMEOUT:-10}"
@@ -180,44 +182,53 @@ repmgr_validate() {
 # Arguments:
 #   Non
 # Returns:
-#   String
+#   String[] - (host port)
 #########################
 repmgr_get_upstream_node() {
     local primary_conninfo
-    local pretending_primary=""
+    local pretending_primary_host=""
+    local pretending_primary_port=""
 
     if [[ -n "$REPMGR_PARTNER_NODES" ]]; then
         repmgr_info "Querying all partner nodes for common upstream node..."
         read -r -a nodes <<< "$(tr ',;' ' ' <<< "${REPMGR_PARTNER_NODES}")"
         for node in "${nodes[@]}"; do
-            repmgr_debug "Checking node $node..."
+            # intentionally accept inncorect address (without [schema:]// )
+            [[ "$node" =~ ^(([^:/?#]+):)?// ]] || node="tcp://${node}"
+            local host=$(parse_uri "$node" 'host')
+            local port=$(parse_uri "$node" 'port')
+            port=${port:-$REPMGR_PRIMARY_PORT}
+            repmgr_debug "Checking node $host:$port..."
             local query="SELECT conninfo FROM repmgr.show_nodes WHERE (upstream_node_name IS NULL OR upstream_node_name = '') AND active=true"
-            if ! primary_conninfo="$(echo "$query" | NO_ERRORS=true postgresql_execute "$REPMGR_DATABASE" "$REPMGR_USERNAME" "$REPMGR_PASSWORD" "$node" "$REPMGR_PRIMARY_PORT" "-tA")"; then
-                repmgr_debug "Skipping: failed to get primary from the node $node!"
+            if ! primary_conninfo="$(echo "$query" | NO_ERRORS=true postgresql_execute "$REPMGR_DATABASE" "$REPMGR_USERNAME" "$REPMGR_PASSWORD" "$host" "$port" "-tA")"; then
+                repmgr_debug "Skipping: failed to get primary from the node $host:$port!"
                 continue
             elif [[ -z "$primary_conninfo" ]]; then
                 repmgr_debug "Skipping: failed to get information about primary nodes!"
                 continue
             elif [[ "$(echo "$primary_conninfo" | wc -l)" -eq 1 ]]; then
-                local -r suggested_primary="$(echo "$primary_conninfo" | awk -F 'host=' '{print $2}' | awk '{print $1}')"
-                repmgr_debug "Pretending primary role node - ${suggested_primary}"
-                if [[ -n "$pretending_primary" ]]; then
-                    if [[ "${pretending_primary}" != "${suggested_primary}" ]]; then
-                        repmgr_warn "Conflict of pretending primary role nodes (previously: $pretending_primary, now: $suggested_primary)"
-                        pretending_primary="" && break
+                local -r suggested_primary_host="$(echo "$primary_conninfo" | awk -F 'host=' '{print $2}' | awk '{print $1}')"
+                local -r suggested_primary_port="$(echo "$primary_conninfo" | awk -F 'port=' '{print $2}' | awk '{print $1}')"
+                repmgr_debug "Pretending primary role node - ${suggested_primary_host},${suggested_primary_port}"
+                if [[ -n "$pretending_primary_host" ]]; then
+                    if [[ "${pretending_primary_host},${pretending_primary_port}" != "${suggested_primary_host},${suggested_primary_port}" ]]; then
+                        repmgr_warn "Conflict of pretending primary role nodes (previously: $pretending_primary_host,$pretending_primary_port, now: $suggested_primary_host,$suggested_primary_port)"
+                        pretending_primary_host="" && pretending_primary_port="" && break
                     fi
                 else
-                    repmgr_debug "Pretending primary set to $suggested_primary!"
-                    pretending_primary="$suggested_primary"
+                    repmgr_debug "Pretending primary set to $suggested_primary_host,$suggested_primary_port!"
+                    pretending_primary_host="$suggested_primary_host"
+                    pretending_primary_port="$suggested_primary_port"
                 fi
             else
-                repmgr_warn "There were more than one primary when getting primary from node $node"
-                pretending_primary="" && break
+                repmgr_warn "There were more than one primary when getting primary from node $host:$port"
+                pretending_primary_host="" && pretending_primary_port="" && break
             fi
         done
     fi
 
-    echo "$pretending_primary"
+    echo "$pretending_primary_host"
+    echo "$pretending_primary_port"
 }
 
 ########################
@@ -227,36 +238,49 @@ repmgr_get_upstream_node() {
 # Arguments:
 #   None
 # Returns:
-#   String
+#   String[] - (host port)
 #########################
 repmgr_get_primary_node() {
     local upstream_node
-    local primary_node=""
+    local upstream_host
+    local upstream_port
+    local primary_host=""
+    local primary_port="$REPMGR_PRIMARY_PORT"
 
-    upstream_node="$(repmgr_get_upstream_node)"
-    [[ -n "$upstream_node" ]] && repmgr_info "Auto-detected primary node: '$upstream_node'"
+    readarray -t upstream_node < <(repmgr_get_upstream_node)
+    upstream_host=${upstream_node[0]}
+    upstream_port=${upstream_node[1]:-$REPMGR_PRIMARY_PORT}
+
+
+    [[ -n "$upstream_host" ]] && repmgr_info "Auto-detected primary node: '$upstream_host,$upstream_port'"
 
     if [[ -f "$REPMGR_PRIMARY_ROLE_LOCK_FILE_NAME" ]]; then
         repmgr_info "This node was acting as a primary before restart!"
 
-        if [[ -z "$upstream_node" ]] || [[ "$upstream_node" = "$REPMGR_NODE_NETWORK_NAME" ]]; then
+        if [[ -z "$upstream_host" ]] || [[ "$upstream_host,$upstream_port" = "$REPMGR_NODE_NETWORK_NAME,$REPMGR_PORT_NUMBER" ]]; then
             repmgr_info "Can not find new primary. Starting PostgreSQL normally..."
         else
-            repmgr_info "Current master is $upstream_node. Cloning/rewinding it and acting as a standby node..."
+            repmgr_info "Current master is $upstream_host,$upstream_port. Cloning/rewinding it and acting as a standby node..."
             rm -f "$REPMGR_PRIMARY_ROLE_LOCK_FILE_NAME"
             export REPMGR_SWITCH_ROLE="yes"
-            primary_node="$upstream_node"
+            primary_host="$upstream_host"
+            primary_port="$upstream_port"
         fi
     else
-        if [[ -z "$upstream_node" ]]; then
-            [[ "$REPMGR_PRIMARY_HOST" != "$REPMGR_NODE_NETWORK_NAME" ]] && primary_node="$REPMGR_PRIMARY_HOST"
+        if [[ -z "$upstream_host" ]]; then
+            if [[ "$REPMGR_PRIMARY_HOST,$REPMGR_PRIMARY_PORT" != "$REPMGR_NODE_NETWORK_NAME,$REPMGR_PORT_NUMBER" ]]; then
+              primary_host="$REPMGR_PRIMARY_HOST"
+              primary_port="$REPMGR_PRIMARY_PORT"
+            fi
         else
-            primary_node="$upstream_node"
+            primary_host="$upstream_host"
+            primary_port="$upstream_port"
         fi
     fi
 
-    [[ -n "$primary_node" ]] && repmgr_debug "Primary node: $primary_node"
-    echo "$primary_node"
+    [[ -n "$primary_host" ]] && repmgr_debug "Primary node: $primary_host,$primary_port"
+    echo "$primary_host"
+    echo "$primary_port"
 }
 
 ########################
@@ -271,16 +295,22 @@ repmgr_get_primary_node() {
 repmgr_set_role() {
     local role="standby"
     local primary_node
+    local primary_host
+    local primary_port
 
-    primary_node="$(repmgr_get_primary_node)"
-    if [[ -z "$primary_node" ]]; then
+    readarray -t primary_node < <(repmgr_get_primary_node)
+    primary_host=${primary_node[0]}
+    primary_port=${primary_node[1]:-$REPMGR_PRIMARY_PORT}
+
+    if [[ -z "$primary_host" ]]; then
         repmgr_info "There are no nodes with primary role. Assuming the primary role..."
         role="primary"
     fi
 
     cat <<EOF
 export REPMGR_ROLE="$role"
-export REPMGR_CURRENT_PRIMARY_HOST="$primary_node"
+export REPMGR_CURRENT_PRIMARY_HOST="$primary_host"
+export REPMGR_CURRENT_PRIMARY_PORT="$primary_port"
 EOF
 }
 
@@ -450,7 +480,7 @@ pg_bindir='${POSTGRESQL_BIN_DIR}'
 # FIXME: these 2 parameter should work
 node_id=$(repmgr_get_node_id)
 node_name='${REPMGR_NODE_NAME}'
-conninfo='user=${REPMGR_USERNAME} password=${REPMGR_PASSWORD} host=${REPMGR_NODE_NETWORK_NAME} dbname=${REPMGR_DATABASE} port=${REPMGR_PRIMARY_PORT} connect_timeout=${REPMGR_CONNECT_TIMEOUT}'
+conninfo='user=${REPMGR_USERNAME} password=${REPMGR_PASSWORD} host=${REPMGR_NODE_NETWORK_NAME} dbname=${REPMGR_DATABASE} port=${REPMGR_PORT_NUMBER} connect_timeout=${REPMGR_CONNECT_TIMEOUT}'
 failover='automatic'
 promote_command='PGPASSWORD=${REPMGR_PASSWORD} repmgr standby promote -f "${REPMGR_CONF_FILE}" --log-level DEBUG --verbose'
 follow_command='PGPASSWORD=${REPMGR_PASSWORD} repmgr standby follow -f "${REPMGR_CONF_FILE}" -W --log-level DEBUG --verbose'
@@ -481,11 +511,11 @@ repmgr_wait_primary_node() {
     local -i max_tries=$(( timeout / step ))
     local schemata
     repmgr_info "Waiting for primary node..."
-    repmgr_debug "Wait for schema $REPMGR_DATABASE.repmgr on $REPMGR_CURRENT_PRIMARY_HOST:$REPMGR_PRIMARY_PORT, will try $max_tries times with $step delay seconds (TIMEOUT=$timeout)"
+    repmgr_debug "Wait for schema $REPMGR_DATABASE.repmgr on $REPMGR_CURRENT_PRIMARY_HOST:$REPMGR_CURRENT_PRIMARY_PORT, will try $max_tries times with $step delay seconds (TIMEOUT=$timeout)"
     for ((i = 0 ; i <= timeout ; i+=step )); do
         local query="SELECT 1 FROM information_schema.schemata WHERE catalog_name='$REPMGR_DATABASE' AND schema_name='repmgr'"
-        if ! schemata="$(echo "$query" | NO_ERRORS=true postgresql_execute "$REPMGR_DATABASE" "$REPMGR_USERNAME" "$REPMGR_PASSWORD" "$REPMGR_CURRENT_PRIMARY_HOST" "$REPMGR_PRIMARY_PORT" "-tA")"; then
-            repmgr_debug "Host $REPMGR_CURRENT_PRIMARY_HOST:$REPMGR_PRIMARY_PORT is not accessible"
+        if ! schemata="$(echo "$query" | NO_ERRORS=true postgresql_execute "$REPMGR_DATABASE" "$REPMGR_USERNAME" "$REPMGR_PASSWORD" "$REPMGR_CURRENT_PRIMARY_HOST" "$REPMGR_CURRENT_PRIMARY_PORT" "-tA")"; then
+            repmgr_debug "Host $REPMGR_CURRENT_PRIMARY_HOST:$REPMGR_CURRENT_PRIMARY_PORT is not accessible"
         else
             if [[ $schemata -ne 1 ]]; then
                 repmgr_debug "Schema $REPMGR_DATABASE.repmgr is still not accessible"
@@ -511,7 +541,7 @@ repmgr_wait_primary_node() {
 #########################
 repmgr_clone_primary() {
     repmgr_info "Cloning data from primary node..."
-    local -r flags=("-f" "$REPMGR_CONF_FILE" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_PRIMARY_PORT" "-U" "$REPMGR_USERNAME" "-d" "$REPMGR_DATABASE" "-D" "$POSTGRESQL_DATA_DIR" "standby" "clone" "--fast-checkpoint" "--force")
+    local -r flags=("-f" "$REPMGR_CONF_FILE" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_CURRENT_PRIMARY_PORT" "-U" "$REPMGR_USERNAME" "-d" "$REPMGR_DATABASE" "-D" "$POSTGRESQL_DATA_DIR" "standby" "clone" "--fast-checkpoint" "--force")
 
     PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
 }
@@ -610,7 +640,7 @@ repmgr_upgrade_extension() {
 #   None
 #########################
 repmgr_initialize() {
-    repmgr_debug "Node ID: $(repmgr_get_node_id), Rol: $REPMGR_ROLE, Primary Node: $REPMGR_CURRENT_PRIMARY_HOST"
+    repmgr_debug "Node ID: $(repmgr_get_node_id), Rol: $REPMGR_ROLE, Primary Node: $REPMGR_CURRENT_PRIMARY_HOST:$REPMGR_CURRENT_PRIMARY_PORT"
     repmgr_info "Initializing Repmgr..."
 
     if [[ "$REPMGR_ROLE" = "standby" ]]; then
