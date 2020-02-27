@@ -38,8 +38,8 @@ apache_setup_bitnami_config() {
     apache_enable_configuration_entry "Include conf/extra/httpd-default.conf"
 
     # Bitnami customizations
-    render-template "${template_dir}/bitnami.conf.tpl" > "${APACHE_CONF_DIR}/bitnami/bitnami.conf"
-    render-template "${template_dir}/bitnami-ssl.conf.tpl" > "${APACHE_CONF_DIR}/bitnami/bitnami-ssl.conf"
+    /opt/bitnami/common/bin/render-template "${template_dir}/bitnami.conf.tpl" > "${APACHE_CONF_DIR}/bitnami/bitnami.conf"
+    /opt/bitnami/common/bin/render-template "${template_dir}/bitnami-ssl.conf.tpl" > "${APACHE_CONF_DIR}/bitnami/bitnami-ssl.conf"
     rm -rf "$template_dir"
 
     cat >>"${APACHE_CONF_FILE}" <<EOF
