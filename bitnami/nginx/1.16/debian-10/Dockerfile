@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 libgeoip1 libpcre3 libssl1.1 procps sudo unzip zlib1g
-RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-0" --checksum 546f22afa27cf4caf9eadb7a29bd052d90584f885225eb4d173762a70ac56b04
+RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-1" --checksum 53c3decfaa593626804cf0a8182a5717a1a9ab1151d5e558139d6cd26022d854
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -21,7 +21,7 @@ RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.16.1-debian-10-r31" \
+    BITNAMI_IMAGE_VERSION="1.16.1-debian-10-r32" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
