@@ -38,13 +38,12 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-ol-7`, `1.10.1-ol-7-r10` (1/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-registryctl/blob/1.10.1-ol-7-r10/1/ol-7/Dockerfile)
-* [`1-debian-10`, `1.10.1-debian-10-r12`, `1`, `1.10.1`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-registryctl/blob/1.10.1-debian-10-r12/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.10.1-debian-10-r13`, `1`, `1.10.1`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-registryctl/blob/1.10.1-debian-10-r13/1/debian-10/Dockerfile)
 
 # Configuration
 
