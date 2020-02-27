@@ -38,18 +38,14 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`12-ol-7`, `12.2.0-ol-7-r10` (12/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.2.0-ol-7-r10/12/ol-7/Dockerfile)
-* [`12-debian-10`, `12.2.0-debian-10-r13`, `12`, `12.2.0` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.2.0-debian-10-r13/12/debian-10/Dockerfile)
-* [`11-ol-7`, `11.7.0-ol-7-r10` (11/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.7.0-ol-7-r10/11/ol-7/Dockerfile)
+* [`12-debian-10`, `12.2.0-debian-10-r14`, `12`, `12.2.0` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.2.0-debian-10-r14/12/debian-10/Dockerfile)
 * [`11-debian-10`, `11.7.0-debian-10-r13`, `11`, `11.7.0`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.7.0-debian-10-r13/11/debian-10/Dockerfile)
-* [`10-ol-7`, `10.12.0-ol-7-r10` (10/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.12.0-ol-7-r10/10/ol-7/Dockerfile)
 * [`10-debian-10`, `10.12.0-debian-10-r13`, `10`, `10.12.0` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.12.0-debian-10-r13/10/debian-10/Dockerfile)
-* [`9.6-ol-7`, `9.6.17-ol-7-r10` (9.6/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.17-ol-7-r10/9.6/ol-7/Dockerfile)
 * [`9.6-debian-10`, `9.6.17-debian-10-r13`, `9.6`, `9.6.17` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.17-debian-10-r13/9.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
