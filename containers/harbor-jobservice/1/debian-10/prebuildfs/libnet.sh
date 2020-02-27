@@ -62,10 +62,10 @@ parse_uri() {
     # Solution based on https://tools.ietf.org/html/rfc3986#appendix-B with
     # additional sub-expressions to split authority into userinfo, host and port
     # Credits to Patryk Obara (see https://stackoverflow.com/a/45977232/6694969)
-    local -r URI_REGEX='^(([^:/?#]+):)?(//((([^:/?#]+)@)?([^:/?#]+)(:([0-9]+))?))?(/([^?#]*))(\?([^#]*))?(#(.*))?'
-    #                    ||            |  |||            |         | |            | |        |  |        | |
-    #                    |2 scheme     |  ||6 userinfo   7 host    | 9 port       | 11 rpath |  13 query | 15 fragment
-    #                    1 scheme:     |  |5 userinfo@             8 :...         10 path    12 ?...     14 #...
+    local -r URI_REGEX='^(([^:/?#]+):)?(//((([^@/?#]+)@)?([^:/?#]+)(:([0-9]+))?))?(/([^?#]*))?(\?([^#]*))?(#(.*))?'
+    #                    ||            |  |||            |         | |            | |         |  |        | |
+    #                    |2 scheme     |  ||6 userinfo   7 host    | 9 port       | 11 rpath  |  13 query | 15 fragment
+    #                    1 scheme:     |  |5 userinfo@             8 :...         10 path     12 ?...     14 #...
     #                                  |  4 authority
     #                                  3 //...
     local index=0
@@ -95,7 +95,7 @@ parse_uri() {
             index=14
             ;;
         *)
-            stderr_print "unrecognized component $1"
+            stderr_print "unrecognized component $component"
             return 1
             ;;
     esac
