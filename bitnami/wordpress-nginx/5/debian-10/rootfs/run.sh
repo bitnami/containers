@@ -13,7 +13,7 @@ _forwardTerm () {
 trap _forwardTerm TERM
 
 info "Starting PHP-FPM..."
-su daemon -s /bin/bash -c "/opt/bitnami/php/sbin/php-fpm -F --pid /opt/bitnami/php/tmp/php-fpm.pid --fpm-config /opt/bitnami/php/etc/php-fpm.conf --prefix /opt/bitnami/php -c /opt/bitnami/php/etc/php.ini" &
+php-fpm -F --pid /opt/bitnami/php/tmp/php-fpm.pid --fpm-config /opt/bitnami/php/etc/php-fpm.conf --prefix /opt/bitnami/php -c /opt/bitnami/php/etc/php.ini &
 
 info "Starting NGINX..."
 exec nginx -c /opt/bitnami/nginx/conf/nginx.conf -g "daemon off;"
