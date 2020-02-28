@@ -199,7 +199,8 @@ cassandra:
  - `CASSANDRA_ENABLE_RPC`: Enable the thrift RPC endpoint. Default :**true**
  - `CASSANDRA_DATACENTER`: Datacenter name for the cluster. Ignored in **SimpleSnitch** endpoint snitch. Default: **dc1**.
  - `CASSANDRA_RACK`: Rack name for the cluster. Ignored in **SimpleSnitch** endpoint snitch. Default: **rack1**.
-
+ - 'CASSANDRA_ENABLE_USER_DEFINED_FUNCTIONS':  User defined functions. Default : **false**.
+ 
 ## Configuration file
 
 The image looks for configurations in `/opt/bitnami/cassandra/conf/`. You can mount a volume at `/bitnami/cassandra/conf/` and copy/edit the configurations in the `/path/to/cassandra-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
