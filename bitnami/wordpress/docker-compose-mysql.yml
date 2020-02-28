@@ -3,20 +3,18 @@ services:
   mysql:
     image: 'bitnami/mysql:8.0'
     volumes:
-      - 'mysql_data:/bitnami'
+      - 'mysql_data:/bitnami/mysql'
     environment:
       - MYSQL_USER=bn_wordpress
       - MYSQL_DATABASE=bitnami_wordpress
-      - MYSQL_ROOT_PASSWORD=bitnami123
-      - MYSQL_PASSWORD=bitnami123
-      - MYSQL_AUTHENTICATION_PLUGIN=mysql_native_password
+      - ALLOW_EMPTY_PASSWORD=yes
   wordpress:
     image: 'bitnami/wordpress:5'
     ports:
-      - '80:80'
-      - '443:443'
+      - '80:8080'
+      - '443:8443'
     volumes:
-      - 'wordpress_data:/bitnami'
+      - 'wordpress_data:/bitnami/wordpress'
     depends_on:
       - mysql
     environment:
@@ -24,7 +22,7 @@ services:
       - MARIADB_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_USER=bn_wordpress
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
-      - WORDPRESS_DATABASE_PASSWORD=bitnami123
+      - ALLOW_EMPTY_PASSWORD=yes
 volumes:
   mysql_data:
     driver: local
