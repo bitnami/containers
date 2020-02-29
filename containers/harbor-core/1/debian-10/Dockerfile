@@ -20,7 +20,7 @@ RUN curl --silent -Lo /tmp/ini-file.zip https://github.com/bitnami/ini-file/rele
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-core" \
-    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r15" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-core/bin:$PATH"
 
