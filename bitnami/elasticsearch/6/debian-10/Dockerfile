@@ -20,7 +20,7 @@ RUN /build/install-gosu.sh
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="6.8.6-debian-10-r32" \
+    BITNAMI_IMAGE_VERSION="6.8.6-debian-10-r33" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/elasticsearch/bin:$PATH"
