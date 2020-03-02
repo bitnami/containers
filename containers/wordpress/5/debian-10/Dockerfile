@@ -15,7 +15,7 @@ RUN bitnami-pkg unpack php-7.4.3-0 --checksum d9cabc4f859bf3548e590bcfdce2dc1a75
 RUN bitnami-pkg install wp-cli-2.4.0-0 --checksum 8095bdd2f96a137cb3f54836ad9deb90510b0927472e532f41e1708345432230
 RUN bitnami-pkg unpack mysql-client-10.3.22-1 --checksum e9fa94f574c87d15f0b6aba7cff1c06f70c0e69c1c442378c9961fc148fa68ef
 RUN bitnami-pkg install libphp-7.4.3-0 --checksum e3560c2247f2e31bba720333a93d6ef3e645696086992c6e3d53ce661f86cbd4
-RUN bitnami-pkg unpack wordpress-5.3.2-2 --checksum 6fa963be3fbc01412ccd8d94b1fc44fbafba42b0bcb159acef301abb726daf2f
+RUN bitnami-pkg unpack wordpress-5.3.2-3 --checksum b6fef50031fe37686668f2c14904ff24c4e575a7b7d57750ea362a3b67933b7f
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/install-gosu.sh
@@ -27,7 +27,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.3.2-debian-10-r35" \
+    BITNAMI_IMAGE_VERSION="5.3.2-debian-10-r36" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
