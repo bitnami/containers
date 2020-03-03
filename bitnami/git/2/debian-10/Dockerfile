@@ -15,7 +15,7 @@ RUN /build/install-gosu.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="git" \
-    BITNAMI_IMAGE_VERSION="2.25.1-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="2.25.1-debian-10-r14" \
     PATH="/opt/bitnami/git/bin:$PATH"
 
 ENTRYPOINT [ "git" ]
