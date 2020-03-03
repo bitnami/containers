@@ -8,8 +8,8 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl dirmngr gnupg libc6 procps sudo unzip zlib1g
-RUN /build/bitnami-user.sh && \
-    /build/install-nami.sh
+RUN /build/bitnami-user.sh
+RUN /build/install-nami.sh
 RUN bitnami-pkg install java-11.0.6-0 --checksum f7446f8bec72b6b2606d37ba917accc243e6cd4e722700c39ef83832c46fb0c6
 RUN bitnami-pkg unpack neo4j-4.0.1-0 --checksum efb31f082fbdfeffba0ffd92cf7b89cdf1a12e8400e9bbfe695538ec95716ed4
 RUN apt-get update && apt-get upgrade -y && \
@@ -19,7 +19,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="4.0.1-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="4.0.1-debian-10-r1" \
     NAMI_PREFIX="/.nami" \
     NEO4J_BOLT_PORT_NUMBER="7687" \
     NEO4J_HOST="" \
