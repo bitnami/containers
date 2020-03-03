@@ -13,7 +13,7 @@ $ docker run -it --name python bitnami/python
 ## Docker Compose
 
 ```bash
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mariadb/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-python/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
