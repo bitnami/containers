@@ -19,7 +19,7 @@ RUN /build/install-gosu.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="harbor-clair" \
-    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r17" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r18" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/git/bin:/opt/bitnami/common/bin:/opt/bitnami/harbor-clair/bin:$PATH"
 
