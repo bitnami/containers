@@ -21,7 +21,7 @@ RUN /build/install-gosu.sh
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.2.3-debian-10-r36" \
+    BITNAMI_IMAGE_VERSION="4.2.3-debian-10-r37" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 
