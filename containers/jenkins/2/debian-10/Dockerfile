@@ -6,8 +6,8 @@ ENV PATH="/opt/bitnami/java/bin:/opt/bitnami/git/bin:/opt/bitnami/nami/bin:$PATH
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl dirmngr fontconfig fonts-dejavu-extra gnupg libc6 libcom-err2 libcurl4 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle6 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libtasn1-6 libunistring2 openssh-client procps sudo unzip zlib1g
-RUN /build/bitnami-user.sh && \
-    /build/install-nami.sh
+RUN /build/bitnami-user.sh
+RUN /build/install-nami.sh
 RUN bitnami-pkg install java-1.8.242-0 --checksum 3a70f3d1c3cd9bc6ec581b2a10373a2b323c0b9af40402ce8d19aeb0b3d02400
 RUN bitnami-pkg install git-2.25.1-1 --checksum 6bd8fb21fa2f80f633043e3228043ccf855179d39f3bae90a7028e5725989479
 RUN bitnami-pkg unpack jenkins-2.204.3-0 --checksum afec8be88636139d8adce63e677995d9c4e83fa9862de28e28b65e490184cc58
@@ -20,7 +20,7 @@ RUN mkdir -p /usr/share/jenkins/ref
 COPY rootfs /
 RUN ln -sf /install-plugins.sh /usr/local/bin/install-plugins.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.204.3-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="2.204.3-debian-10-r4" \
     DISABLE_JENKINS_INITIALIZATION="no" \
     JAVA_OPTS="" \
     JENKINS_HOME="/opt/bitnami/jenkins/jenkins_home" \
