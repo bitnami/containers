@@ -8,8 +8,8 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl dirmngr gnupg libc6 libgcc1 libstdc++6 procps sudo unzip
-RUN /build/bitnami-user.sh && \
-    /build/install-nami.sh
+RUN /build/bitnami-user.sh
+RUN /build/install-nami.sh
 RUN bitnami-pkg unpack kibana-7.6.0-4 --checksum 99177f1f6244b94b4effffd402ab0b98d8efa6fa2417d047875343fe7047d0f3
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -19,7 +19,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="7.6.0-debian-10-r23" \
+    BITNAMI_IMAGE_VERSION="7.6.0-debian-10-r24" \
     KIBANA_ELASTICSEARCH_PORT_NUMBER="9200" \
     KIBANA_ELASTICSEARCH_URL="elasticsearch" \
     KIBANA_PORT_NUMBER="5601" \
