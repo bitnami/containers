@@ -11,11 +11,12 @@ RUN install_packages ca-certificates curl libc6 libcom-err2 libcurl4 libffi6 lib
 RUN . ./libcomponent.sh && component_unpack "git" "2.25.1-1" --checksum 6bd8fb21fa2f80f633043e3228043ccf855179d39f3bae90a7028e5725989479
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN /build/bitnami-user.sh
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="git" \
-    BITNAMI_IMAGE_VERSION="2.25.1-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="2.25.1-debian-10-r15" \
     PATH="/opt/bitnami/git/bin:$PATH"
 
 ENTRYPOINT [ "git" ]
