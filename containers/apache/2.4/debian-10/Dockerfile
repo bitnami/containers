@@ -13,6 +13,7 @@ RUN . ./libcomponent.sh && component_unpack "render-template" "1.0.0-0" --checks
 RUN . ./libcomponent.sh && component_unpack "apache" "2.4.41-1" --checksum 2139963ce8e8fa949271b4ac7967b783b76a4aab87dfccb8a6f6715fc96a15d1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root apache
 RUN /build/install-gosu.sh
 
 COPY rootfs /
@@ -21,7 +22,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.41-debian-10-r37" \
+    BITNAMI_IMAGE_VERSION="2.4.41-debian-10-r38" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/apache/bin:$PATH"
 
 EXPOSE 8080 8443
