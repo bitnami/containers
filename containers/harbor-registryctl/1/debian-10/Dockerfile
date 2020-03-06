@@ -15,12 +15,13 @@ RUN . ./libcomponent.sh && component_unpack "harbor-registryctl" "1.10.1-0" --ch
 RUN . ./libcomponent.sh && component_unpack "harbor-registry" "1.10.1-0" --checksum d34eecf91c58a4b2bd120e7f59eb68002ef10661939d236b8d14bc9c38b6d84e
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root harbor-registryctl
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-registryctl" \
-    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r20" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r21" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-registryctl/bin:/opt/bitnami/harbor-registry/bin:$PATH"
 
