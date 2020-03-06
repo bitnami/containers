@@ -1,7 +1,10 @@
 FROM bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV PATH="/opt/bitnami/java/bin:/opt/bitnami/git/bin:/opt/bitnami/nami/bin:$PATH"
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    BITNAMI_PKG_EXTRA_DIRS="/opt/bitnami" \
+    HOME="/" \
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/git/bin:/opt/bitnami/nami/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -10,9 +13,10 @@ RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install java-1.8.242-0 --checksum 3a70f3d1c3cd9bc6ec581b2a10373a2b323c0b9af40402ce8d19aeb0b3d02400
 RUN bitnami-pkg install git-2.25.1-1 --checksum 6bd8fb21fa2f80f633043e3228043ccf855179d39f3bae90a7028e5725989479
-RUN bitnami-pkg unpack jenkins-2.204.4-0 --checksum 45c62dd703a2eb60b1d722a7cbc076e3b101fae4778f4b1702ae2356f57f607e
+RUN bitnami-pkg unpack jenkins-2.204.4-1 --checksum d885207261ec75fc30169b5e7ada2ae6d7866ee64c00ac994b40839d3419bfd6
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root jenkins
 RUN /build/install-gosu.sh
 RUN /build/install-tini.sh
 RUN mkdir -p /usr/share/jenkins/ref
@@ -20,14 +24,16 @@ RUN mkdir -p /usr/share/jenkins/ref
 COPY rootfs /
 RUN ln -sf /install-plugins.sh /usr/local/bin/install-plugins.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.204.4-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="2.204.4-debian-10-r3" \
     DISABLE_JENKINS_INITIALIZATION="no" \
     JAVA_OPTS="" \
     JENKINS_HOME="/opt/bitnami/jenkins/jenkins_home" \
     JENKINS_PASSWORD="bitnami" \
-    JENKINS_USERNAME="user"
+    JENKINS_USERNAME="user" \
+    NAMI_PREFIX="/.nami"
 
 EXPOSE 8080 8443 50000
 
+USER 1001
 ENTRYPOINT [ "/app-entrypoint.sh" ]
 CMD [ "/run.sh" ]
