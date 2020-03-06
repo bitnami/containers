@@ -13,12 +13,13 @@ RUN . ./libcomponent.sh && component_unpack "wait-for-port" "1.0.0-1" --checksum
 RUN . ./libcomponent.sh && component_unpack "influxdb" "1.7.10-0" --checksum 14419072474d43544834de91298d26dbe007ce08ce249a67b7e0c808b0f9cc70
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root influxdb
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="influxdb" \
-    BITNAMI_IMAGE_VERSION="1.7.10-debian-10-r25" \
+    BITNAMI_IMAGE_VERSION="1.7.10-debian-10-r26" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/influxdb/bin:$PATH"
 
 VOLUME [ "/bitnami/influxdb" ]
