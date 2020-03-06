@@ -13,13 +13,14 @@ RUN install_packages ca-certificates curl libaio1 libc6 libgcc1 libncurses6 libs
 RUN . ./libcomponent.sh && component_unpack "mysql" "8.0.19-0" --checksum 244719d8d5037bd8c919bc011f0d62b3bebf2783d2705bae56d8e312736cfebc
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root mysql
 RUN /build/install-gosu.sh
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="8.0.19-debian-10-r42" \
+    BITNAMI_IMAGE_VERSION="8.0.19-debian-10-r43" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH"
 
