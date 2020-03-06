@@ -15,12 +15,13 @@ RUN . ./libcomponent.sh && component_unpack "render-template" "1.0.0-0" --checks
 RUN . ./libcomponent.sh && component_unpack "kafka" "2.4.0-0" --checksum cb923a585b78ab43ea458e03d2b6f9289b00e97b05173255357a26dc5113a205
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root kafka
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.4.0-debian-10-r39" \
+    BITNAMI_IMAGE_VERSION="2.4.0-debian-10-r40" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/kafka/bin:$PATH"
 
