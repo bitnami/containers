@@ -15,13 +15,14 @@ RUN bitnami-pkg install java-11.0.6-0 --checksum f7446f8bec72b6b2606d37ba917accc
 RUN bitnami-pkg unpack wildfly-18.0.1-0 --checksum 380d62ce2fb7647221e80dd2277f5cb9244a3133edaa8d12b29d282259ce644e
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root wildfly
 RUN ln -sf /opt/bitnami/wildfly/data /app
 RUN /build/install-gosu.sh
 RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="18.0.1-debian-10-r41" \
+    BITNAMI_IMAGE_VERSION="18.0.1-debian-10-r42" \
     NAMI_PREFIX="/.nami" \
     WILDFLY_HOME="/home/wildfly" \
     WILDFLY_JAVA_HOME="" \
