@@ -13,6 +13,7 @@ RUN install_packages ca-certificates curl libbsd0 libc6 libedit2 libffi6 libgcc1
 RUN . ./libcomponent.sh && component_unpack "postgresql" "10.12.0-0" --checksum cf8802c931e988759e1f91708845bdb84fec111a9c564f9d158dcca51fb411aa
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root postgresql
 RUN /build/install-gosu.sh
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
@@ -22,7 +23,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="10.12.0-debian-10-r21" \
+    BITNAMI_IMAGE_VERSION="10.12.0-debian-10-r22" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
