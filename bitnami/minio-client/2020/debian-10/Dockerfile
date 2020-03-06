@@ -13,12 +13,13 @@ RUN install_packages ca-certificates curl procps sudo unzip
 RUN . ./libcomponent.sh && component_unpack "minio-client" "2020.2.25-0" --checksum 696ae306c226924593df07945eba90151a435c064b3ecbf9a30e9fb42b0be03f
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root minio-client
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="minio-client" \
-    BITNAMI_IMAGE_VERSION="2020.2.25-debian-10-r9" \
+    BITNAMI_IMAGE_VERSION="2020.2.25-debian-10-r10" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/minio-client/bin:$PATH"
 
