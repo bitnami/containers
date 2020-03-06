@@ -16,12 +16,13 @@ RUN . ./libcomponent.sh && component_unpack "render-template" "1.0.0-0" --checks
 RUN . ./libcomponent.sh && component_unpack "mongodb" "4.2.3-0" --checksum 32c11aa42e0b22b7a1f4fc071ff42ea9ba81d23da45eb7fda4040eb118c46c91
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root mongodb
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.2.3-debian-10-r39" \
+    BITNAMI_IMAGE_VERSION="4.2.3-debian-10-r40" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 
