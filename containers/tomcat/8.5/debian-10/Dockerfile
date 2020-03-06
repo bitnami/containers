@@ -13,12 +13,13 @@ RUN . ./libcomponent.sh && component_unpack "java" "11.0.6-0" --checksum f7446f8
 RUN . ./libcomponent.sh && component_unpack "tomcat" "8.5.51-1" --checksum 3dce07a7e34773d263e4bd1c5928fd2ca62502476b51009a0c9319781e9a955c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root tomcat
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="8.5.51-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="8.5.51-debian-10-r23" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
 EXPOSE 8080
