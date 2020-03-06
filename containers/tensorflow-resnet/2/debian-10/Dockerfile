@@ -13,13 +13,14 @@ RUN /build/install-nami.sh
 RUN bitnami-pkg unpack tensorflow-resnet-2.1.0-0 --checksum ada0c09b7f3e9c962b56689b5524a99d6d2a90475a0d4d48215f347e2a984807
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root tensorflow-resnet
 RUN /build/install-gosu.sh
 RUN /build/install-tini.sh
 RUN echo "deb http://http.us.debian.org/debian testing main non-free contrib" >> /etc/apt/sources.list && apt update && apt remove gcc-6 -y && install_packages gcc-7 libstdc++6
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-resnet" \
-    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r33" \
+    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r34" \
     NAMI_PREFIX="/.nami"
 
 USER 1001
