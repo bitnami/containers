@@ -14,12 +14,13 @@ RUN bitnami-pkg install java-1.8.242-0 --checksum 3a70f3d1c3cd9bc6ec581b2a10373a
 RUN bitnami-pkg unpack solr-8.4.1-0 --checksum 3fc049c6a5c429bfdca2fcb0b2c74ea7a423fafd6f403d5e309573c006e77e32
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root solr
 RUN /build/install-gosu.sh
 RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="8.4.1-debian-10-r38" \
+    BITNAMI_IMAGE_VERSION="8.4.1-debian-10-r39" \
     NAMI_PREFIX="/.nami" \
     SOLR_CORE="" \
     SOLR_CORE_CONF_DIR="_default" \
