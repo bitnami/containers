@@ -14,12 +14,13 @@ RUN bitnami-pkg install java-11.0.6-0 --checksum f7446f8bec72b6b2606d37ba917accc
 RUN bitnami-pkg unpack neo4j-4.0.1-0 --checksum efb31f082fbdfeffba0ffd92cf7b89cdf1a12e8400e9bbfe695538ec95716ed4
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root neo4j
 RUN /build/install-gosu.sh
 RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="4.0.1-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="4.0.1-debian-10-r4" \
     NAMI_PREFIX="/.nami" \
     NEO4J_BOLT_PORT_NUMBER="7687" \
     NEO4J_HOST="" \
