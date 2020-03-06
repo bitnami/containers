@@ -16,6 +16,7 @@ RUN bitnami-pkg install postgresql-client-10.12.0-0 --checksum 79d8f599a6e93f558
 RUN bitnami-pkg unpack airflow-worker-1.10.9-0 --checksum f33fdaf96a87b58bee38c20a4da4a6cd8c9dfb8010c64262d1a0e156919800b9
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root airflow-worker
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 RUN /build/install-gosu.sh
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
@@ -39,7 +40,7 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     AIRFLOW_WORKER_PORT_NUMBER="8793" \
     BITNAMI_APP_NAME="airflow-worker" \
-    BITNAMI_IMAGE_VERSION="1.10.9-debian-10-r25" \
+    BITNAMI_IMAGE_VERSION="1.10.9-debian-10-r26" \
     C_FORCE_ROOT="True" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
