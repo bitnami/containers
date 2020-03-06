@@ -14,12 +14,13 @@ RUN . ./libcomponent.sh && component_unpack "yq" "3.2.1-0" --checksum b35ff01573
 RUN . ./libcomponent.sh && component_unpack "harbor-jobservice" "1.10.1-0" --checksum f8c1fe4a7804dad49ed53867bb299346966b458ef6adf00d30b9e2b69b23dd5f
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root harbor-jobservice
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-jobservice" \
-    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r20" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r21" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-jobservice/bin:$PATH"
 
