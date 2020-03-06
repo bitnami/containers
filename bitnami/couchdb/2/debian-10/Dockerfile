@@ -13,13 +13,14 @@ RUN . ./libcomponent.sh && component_unpack "wait-for-port" "1.0.0-1" --checksum
 RUN . ./libcomponent.sh && component_unpack "couchdb" "2.3.1-0" --checksum 852f8814b1c6e65eef1e952e4deaee6151c1109b3ee93d3674e07a74c4776068
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root couchdb
 RUN /build/install-gosu.sh
 RUN curl --silent -Lo /tmp/ini-file.zip https://github.com/bitnami/ini-file/releases/download/v1.0/ini-file.zip && echo 2f12cc487b0b17cf5346326ae653951e9ff6d5eb6d3c9217c602060778996b64 /tmp/ini-file.zip | sha256sum --check && unzip -q -d /usr/local/bin -o /tmp/ini-file.zip ini-file && mkdir -p /opt/bitnami/licenses && curl --silent -L https://raw.githubusercontent.com/bitnami/ini-file/master/COPYING > /opt/bitnami/licenses/ini-file-1.0.txt
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="couchdb" \
-    BITNAMI_IMAGE_VERSION="2.3.1-debian-10-r37" \
+    BITNAMI_IMAGE_VERSION="2.3.1-debian-10-r38" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/couchdb/bin:$PATH"
 
