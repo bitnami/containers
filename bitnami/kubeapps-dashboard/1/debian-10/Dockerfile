@@ -14,6 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-1" --checksum 53c3de
 RUN . ./libcomponent.sh && component_unpack "kubeapps" "1.8.2-0" --checksum dff65b3c6f7fc46b32fabf82af8c692f6fa7952ef8e2828e778c0934d50e9aeb
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root kubeapps-dashboard
 RUN /build/install-gosu.sh
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
@@ -25,7 +26,7 @@ RUN rm -rf /app && \
     ln -sf /opt/bitnami/kubeapps /opt/bitnami/kubeapps-dashboard && \
     mv /opt/bitnami/kubeapps/build /app
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.8.2-debian-10-r15" \
+    BITNAMI_IMAGE_VERSION="1.8.2-debian-10-r16" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
