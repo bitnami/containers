@@ -2,7 +2,7 @@
 
 > Jenkins is widely recognized as the most feature-rich CI available with easy configuration, continuous delivery and continuous integration support, easily test, build and stage your app, and more. It supports multiple SCM tools including CVS, Subversion and Git. It can execute Apache Ant and Apache Maven-based projects as well as arbitrary scripts.
 
-https://jenkins.io
+[https://jenkins.io](https://jenkins.io)
 
 # TL;DR;
 
@@ -22,7 +22,6 @@ $ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-
 > This [CVE scan report](https://quay.io/repository/bitnami/jenkins?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy Jenkins in Kubernetes?
@@ -31,6 +30,10 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
+# Why use a non-root container?
+
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
@@ -38,7 +41,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.204.4-debian-10-r2`, `2`, `2.204.4`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.204.4-debian-10-r2/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.204.4-debian-10-r3`, `2`, `2.204.4`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.204.4-debian-10-r3/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
 
@@ -61,21 +64,22 @@ $ docker-compose up -d
 
 If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
-1. Create a network
+### Step 1: Create a network
 
-  ```bash
-  $ docker network create jenkins-tier
-  ```
+```bash
+$ docker network create jenkins-network
+```
 
-2. Create volumes for Jenkins persistence and launch the container
+### Step 2: Create volumes for Jenkins persistence and launch the container
 
-  ```bash
-  $ docker volume create --name jenkins_data
-  $ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
-    --net jenkins-tier \
-    --volume jenkins_data:/bitnami \
-    bitnami/jenkins:latest
-  ```
+```bash
+$ docker volume create --name jenkins_data
+$ docker run -d --name jenkins \
+  -p 80:8080 -p 443:8443 \
+  --network jenkins-network \
+  --volume jenkins_data:/bitnami/jenkins \
+  bitnami/jenkins:latest
+```
 
 Access your application at http://your-ip/
 
@@ -83,7 +87,7 @@ Access your application at http://your-ip/
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a volume at the `/bitnami` path. The above examples define a docker volume namely `jenkins_data`. The Jenkins application state will persist as long as this volume is not removed.
+For persistence you should mount a volume at the `/bitnami/jenkins` path. The above examples define a docker volume namely `jenkins_data`. The Jenkins application state will persist as long as this volume is not removed.
 
 To avoid inadvertent removal of this volume you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -91,34 +95,40 @@ To avoid inadvertent removal of this volume you can [mount host directories as d
 
 This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-jenkins/blob/master/docker-compose.yml) file present in this repository:
 
-```yaml
-jenkins:
+```diff
   ...
-  volumes:
-    - /path/to/jenkins-persistence:/bitnami
-  ...
+  services:
+    jenkins:
+    ...
+    volumes:
+-     - 'jenkins_data:/bitnami/jenkins    
++     - /path/to/jenkins-persistence:/bitnami/jenkins 
+- volumes:
+-   jenkins_data:
+-     driver: local
 ```
 
 ### Mount host directories as data volumes using the Docker command line
 
-1. Create a network (if it does not exist)
+#### Step 1: Create a network (if it does not exist)
 
-  ```bash
-  $ docker network create jenkins-tier
-  ```
+```bash
+$ docker network create jenkins-network
+```
 
-2. Create the Jenkins the container with host volumes
+#### Step 2. Create the Jenkins the container with host volumes
 
-  ```bash
-  $ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
-    --net jenkins-tier \
-    --volume /path/to/jenkins-persistence:/bitnami \
-    bitnami/jenkins:latest
-  ```
+```bash
+$ docker run -d --name jenkins \
+  -p 80:8080 -p 443:8443 \
+  --network jenkins-network \
+  --volume /path/to/jenkins-persistence:/bitnami/jenkins \
+  bitnami/jenkins:latest
+```
 
 # Customizations
 
-For customizations, please note that this image works using the user `jenkins` and `uid=1001`.
+For customizations, please note that this image is, by default, a non-root container using the user `jenkins` with `uid=1001`.
 
 ## Preinstalling plugins
 
@@ -133,7 +143,7 @@ Dependencies that are already included in the Jenkins war file will only be down
 
 You can also use a custom version specifier:
 
-* `latest` - download the latest version from the main update center.
+- `latest` - download the latest version from the main update center.
   For Jenkins LTS images
   (example: `git:latest`)
 
@@ -141,13 +151,13 @@ You can also use a custom version specifier:
 
 You can run the script manually in the Dockerfile by adding the following after the `COPY rootfs /` command:
 
-```
+```Dockerfile
 RUN /install-plugins.sh docker-slaves github-branch-source:1.8
 ```
 
 Furthermore, it is possible to pass a file that contains this set of plugins (with or without line breaks), you should locate this file in the `rootfs` directory.
 
-```
+```Dockerfile
 RUN /install-plugins.sh < /plugins.txt
 ```
 
@@ -163,18 +173,18 @@ We can create custom groovy scripts and make Jenkins run them at start up. We ca
 
 However, using this feature will disable the default configuration done by the Bitnami scripts. This is intended to customize the Jenkins configuration by code.
 
-```bash
-mkdir jenkins-init.groovy.d
-echo "println '--> hello world!'" >jenkins-init.groovy.d/AA_hello.groovy
-echo "println '--> bye world!'" >jenkins-init.groovy.d/BA_bye.groovy
+```console
+$ mkdir jenkins-init.groovy.d
+$ echo "println '--> hello world!'" >jenkins-init.groovy.d/AA_hello.groovy
+$ echo "println '--> bye world!'" >jenkins-init.groovy.d/BA_bye.groovy
 
-docker run -d --name jenkins -e "DISABLE_JENKINS_INITIALIZATION=yes" -v "$(pwd)/jenkins-init.groovy.d:/usr/share/jenkins/ref/init.groovy.d" -p 80:8080 -p 443:8443 bitnami/jenkins:latest
+$ docker run -d --name jenkins -e "DISABLE_JENKINS_INITIALIZATION=yes" -v "$(pwd)/jenkins-init.groovy.d:/usr/share/jenkins/ref/init.groovy.d" -p 80:8080 -p 443:8443 bitnami/jenkins:latest
 
-docker exec jenkins ls /opt/bitnami/jenkins/jenkins_home/init.groovy.d
+$ docker exec jenkins ls /opt/bitnami/jenkins/jenkins_home/init.groovy.d
 AA_hello.groovy
 BA_bye.groovy
 
-docker exec jenkins cat /opt/bitnami/jenkins/logs/jenkins.log | grep world
+$ docker exec jenkins cat /opt/bitnami/jenkins/logs/jenkins.log | grep world
 --> hello world!
 --> bye world!
 ```
@@ -183,20 +193,19 @@ docker exec jenkins cat /opt/bitnami/jenkins/logs/jenkins.log | grep world
 
 We can download plugins in a local folder and install them at run time.
 
-```bash
-docker run \
-  -v "$(pwd)/jenkins-plugins:/usr/share/jenkins/ref/plugins" \
+```console
+$ docker run \
+  --volume "$(pwd)/jenkins-plugins:/usr/share/jenkins/ref/plugins" \
   bitnami/jenkins:latest \
   install-plugins.sh \
     role-strategy:latest
 
-docker run -d --name jenkins \
-  -v "$(pwd)/jenkins-plugins:/usr/share/jenkins/ref/plugins" \
-  -p 80:8080 \
-  -p 443:8443 \
+$ docker run -d --name jenkins \
+  -p 80:8080 -p 443:8443 \
+  --volume "$(pwd)/jenkins-plugins:/usr/share/jenkins/ref/plugins" \
   bitnami/jenkins:latest
 
-docker exec jenkins ls /opt/bitnami/jenkins/jenkins_home/plugins/
+$ docker exec jenkins ls /opt/bitnami/jenkins/jenkins_home/plugins/
 ```
 
 #### Run custom `config.xml`
@@ -207,14 +216,14 @@ However, using this feature will disable the default configuration done by the B
 
 In the example below we are going to use a role-based authorization strategy by default.
 
-```bash
-docker run \
-  -v "$(pwd)/jenkins-plugins:/usr/share/jenkins/ref/plugins" \
+```console
+$ docker run \
+  --volume "$(pwd)/jenkins-plugins:/usr/share/jenkins/ref/plugins" \
   bitnami/jenkins:latest \
   install-plugins.sh \
     role-strategy:latest
 
-cat >config.xml <<EOF
+$ cat >config.xml <<EOF
 <?xml version='1.1' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
@@ -301,17 +310,15 @@ cat >config.xml <<EOF
 </hudson>
 EOF
 
-docker run -d --name jenkins \
-  -e "DISABLE_JENKINS_INITIALIZATION=yes" \
-  -v "$(pwd)/jenkins-plugins:/usr/share/jenkins/ref/plugins" \
-  -v "$(pwd)/config.xml:/usr/share/jenkins/ref/config.xml" \
-  -p 80:8080 \
-  -p 443:8443 \
+$ docker run -d --name jenkins \
+  -p 80:8080 -p 443:8443 \
+  --env "DISABLE_JENKINS_INITIALIZATION=yes" \
+  --volume "$(pwd)/jenkins-plugins:/usr/share/jenkins/ref/plugins" \
+  --volume "$(pwd)/config.xml:/usr/share/jenkins/ref/config.xml" \
   bitnami/jenkins:latest
 ```
 
-> NOTE: We are using a `config.xml` created by Jenkins at first run.
-You can consider using groovy scripts to perform this kind of configuration too.
+> NOTE: We are using a `config.xml` created by Jenkins at first run. You can consider using groovy scripts to perform this kind of configuration too.
 
 > NOTE: We are not creating the `admin` user with this setup. It should be done separately.
 
@@ -319,7 +326,7 @@ You can consider using groovy scripts to perform this kind of configuration too.
 
 You might need to customize the JVM running Jenkins, typically to pass system properties or to tweak heap memory settings. Use the `JAVA_OPTS` environment variable for this purpose:
 
-```bash
+```console
 $ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
   --env JAVA_OPTS=-Dhudson.footerURL=http://mycompany.com \
   bitnami/jenkins:latest
@@ -329,6 +336,7 @@ $ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
 
 By default, when running this image, Bitnami implement some logic in order to configure it for working out of the box. This initialization consists of creating the user and password, preparing data to persist, installing some plugins, configuring permissions, creating the `JENKINS_HOME`, etc.
 You can skip it in two ways:
+
 - Setting the `DISABLE_JENKINS_INITIALIZATION` environment variable to `yes`.
 - Attaching a volume with a custom `JENKINS_HOME` that contains a functional Jenkins installation.
 
@@ -336,18 +344,18 @@ You can skip it in two ways:
 
 Bitnami provides up-to-date versions of Jenkins, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Jenkins container.
 
-1. Get the updated images:
+## Step 1. Get the updated images:
 
 ```bash
 $ docker pull bitnami/jenkins:latest
 ```
 
-2. Stop your container
+## Step 2. Stop your container
 
- * For docker-compose: `$ docker-compose stop jenkins`
- * For manual execution: `$ docker stop jenkins`
+- For docker-compose: `$ docker-compose stop jenkins`
+- For manual execution: `$ docker stop jenkins`
 
-3. Take a snapshot of the application state
+## Step 3. Take a snapshot of the application state
 
 ```bash
 $ rsync -a /path/to/jenkins-persistence /path/to/jenkins-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
@@ -355,15 +363,15 @@ $ rsync -a /path/to/jenkins-persistence /path/to/jenkins-persistence.bkp.$(date 
 
 You can use this snapshot to restore the application state should the upgrade fail.
 
-4. Remove the stopped container
+## Step 4. Remove the stopped container
 
- * For docker-compose: `$ docker-compose rm -v jenkins`
- * For manual execution: `$ docker rm -v jenkins`
+- For docker-compose: `$ docker-compose rm -v jenkins`
+- For manual execution: `$ docker rm -v jenkins`
 
-5. Run the new image
+## Step 5. Run the new image
 
- * For docker-compose: `$ docker-compose up jenkins`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name jenkins bitnami/jenkins:latest`
+- For docker-compose: `$ docker-compose up jenkins`
+- For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name jenkins bitnami/jenkins:latest`
 
 # Configuration
 
@@ -392,14 +400,22 @@ jenkins:
 ### Specifying Environment variables on the Docker command line
 
 ```bash
-$ docker run -d --name jenkins -p 80:8080 -p 443:8443 \
-  --net jenkins-tier \
+$ docker run -d --name jenkins \
+  -p 80:8080 -p 443:8443 \
+  --network jenkins-network \
   --env JENKINS_PASSWORD=my_password \
-  --volume jenkins_data:/bitnami \
+  --volume jenkins_data:/bitnami/jenkins \
   bitnami/jenkins:latest
 ```
 
 # Notable Changes
+
+## 2.204.4-debian-10-r3
+
+- The Jenkins container has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Jenkins service was started as the `jenkins` user. From now on, both the container and the Jenkins service run as user `jenkins` (`uid=1001`). You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+- Consequences:
+  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating your Jenkins data ensuring the `jenkins` user has the appropiate permissions.
+  - No "privileged" actions are allowed anymore. 
 
 ## 2.121.2-ol-7-r14 / 2.121.2-debian-9-r18
 
