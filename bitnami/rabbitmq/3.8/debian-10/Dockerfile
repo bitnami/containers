@@ -14,6 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "erlang" "22.2.0-0" --checksum ea76d
 RUN . ./libcomponent.sh && component_unpack "rabbitmq" "3.8.2-0" --checksum 30b4a8a4cbffd77cebb6c89c455812530a12aaac2e1bb350fdc3756b55833161
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root rabbitmq
 RUN /build/install-gosu.sh
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
@@ -22,7 +23,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.8.2-debian-10-r39" \
+    BITNAMI_IMAGE_VERSION="3.8.2-debian-10-r40" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
