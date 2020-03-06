@@ -12,12 +12,13 @@ RUN install_packages ca-certificates curl libc6 libevent-2.1-6 libsasl2-2 libsas
 RUN . ./libcomponent.sh && component_unpack "memcached" "1.5.22-0" --checksum 8653e4837f04481a6a64a5d06f65e401de413343075c5241c32ccd3b6307ce2f
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root memcached
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.5.22-debian-10-r31" \
+    BITNAMI_IMAGE_VERSION="1.5.22-debian-10-r32" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
 
 EXPOSE 11211
