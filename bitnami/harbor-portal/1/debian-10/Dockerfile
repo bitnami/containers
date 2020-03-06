@@ -14,6 +14,7 @@ RUN . ./libcomponent.sh && component_unpack "nginx" "1.16.1-1" --checksum 53c3de
 RUN . ./libcomponent.sh && component_unpack "harbor" "1.10.1-0" --checksum 00547544372073d830082773608f98fcbe9e923a22cffcc3a23588c894798178
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root harbor-portal
 RUN /build/install-gosu.sh
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
@@ -23,7 +24,7 @@ COPY rootfs /
 RUN /postunpack.sh
 RUN /postunpack-harbor-portal.sh
 ENV BITNAMI_APP_NAME="harbor-portal" \
-    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r15" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
