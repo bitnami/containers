@@ -12,12 +12,13 @@ RUN install_packages ca-certificates curl libc6 procps sudo unzip
 RUN . ./libcomponent.sh && component_unpack "redis-sentinel" "4.0.14-0" --checksum 14e91a015c061c333bfff527dbdaba26e8d043ed6aea995d10c6b35989b4853f
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root redis-sentinel
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="4.0.14-debian-10-r37" \
+    BITNAMI_IMAGE_VERSION="4.0.14-debian-10-r38" \
     PATH="/opt/bitnami/redis-sentinel/bin:$PATH"
 
 EXPOSE 26379
