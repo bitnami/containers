@@ -13,6 +13,7 @@ RUN install_packages ca-certificates curl libbsd0 libc6 libedit2 libffi6 libgcc1
 RUN . ./libcomponent.sh && component_unpack "postgresql-repmgr" "9.6.17-0" --checksum 5ffb284861793d67a9242cd6edf0d1069fb7ad3547d848942c2d5bcfad2c7098
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root postgresql-repmgr
 RUN /build/install-gosu.sh
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
@@ -22,7 +23,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql-repmgr" \
-    BITNAMI_IMAGE_VERSION="9.6.17-debian-10-r23" \
+    BITNAMI_IMAGE_VERSION="9.6.17-debian-10-r24" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
