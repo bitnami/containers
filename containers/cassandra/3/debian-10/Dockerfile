@@ -16,12 +16,13 @@ RUN . ./libcomponent.sh && component_unpack "yq" "3.2.1-0" --checksum b35ff01573
 RUN . ./libcomponent.sh && component_unpack "cassandra" "3.11.6-0" --checksum c2377a0eb6296a652fe276b2d0ae0dfec0187694d0bbf541c16320517d77d62c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root cassandra
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.6-debian-10-r19" \
+    BITNAMI_IMAGE_VERSION="3.11.6-debian-10-r20" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/cassandra/bin:$PATH"
 
