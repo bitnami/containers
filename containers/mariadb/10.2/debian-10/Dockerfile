@@ -13,13 +13,14 @@ RUN install_packages ca-certificates curl libaio1 libaudit1 libc6 libcap-ng0 lib
 RUN . ./libcomponent.sh && component_unpack "mariadb" "10.2.31-0" --checksum 0556a9e929356dabd8a5022a150f9600fceca34049a2d7558c357960d60f629f
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root mariadb
 RUN /build/install-gosu.sh
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.2.31-debian-10-r33" \
+    BITNAMI_IMAGE_VERSION="10.2.31-debian-10-r34" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
