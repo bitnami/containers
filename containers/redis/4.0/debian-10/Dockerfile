@@ -14,12 +14,13 @@ RUN . ./libcomponent.sh && component_unpack "wait-for-port" "1.0.0-1" --checksum
 RUN . ./libcomponent.sh && component_unpack "redis" "4.0.14-1" --checksum 374e5872da1dfbbdfd34daaef823d7583084479b25d55e4b0d025446b988386b
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root redis
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.14-debian-10-r38" \
+    BITNAMI_IMAGE_VERSION="4.0.14-debian-10-r39" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/redis/bin:$PATH"
 
