@@ -14,12 +14,13 @@ RUN . ./libcomponent.sh && component_unpack "java" "1.8.242-0" --checksum 3a70f3
 RUN . ./libcomponent.sh && component_unpack "spark" "2.4.5-0" --checksum c771475b2cba1d2b4a511a121efe66bd4d3bde3183c03e22aa386b5dd053f140
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root spark
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="spark" \
-    BITNAMI_IMAGE_VERSION="2.4.5-debian-10-r25" \
+    BITNAMI_IMAGE_VERSION="2.4.5-debian-10-r26" \
     JAVA_HOME="/opt/bitnami/java" \
     NSS_WRAPPER_GROUP="/opt/bitnami/spark/tmp/nss_group" \
     NSS_WRAPPER_PASSWD="/opt/bitnami/spark/tmp/nss_passwd" \
