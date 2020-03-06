@@ -14,13 +14,14 @@ RUN bitnami-pkg install python-3.6.10-2 --checksum be882f108902cced8b37d06093ae9
 RUN bitnami-pkg install elasticsearch-curator-5.8.1-0 --checksum 5016c26931063aa77bb10543a5eadac3173e2f70b9092e0458f7176856a44178
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root elasticsearch-curator
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 RUN /build/install-gosu.sh
 RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch-curator" \
-    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r37" \
+    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r38" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami"
