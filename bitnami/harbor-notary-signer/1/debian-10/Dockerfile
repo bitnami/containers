@@ -13,12 +13,13 @@ RUN install_packages ca-certificates curl libc6 procps sudo unzip
 RUN . ./libcomponent.sh && component_unpack "harbor-notary-signer" "1.10.1-0" --checksum 48d4f0c76090f6ad9b07f3c87f0cbb32fc70126b2ffd1b4a0e68df7edeaa49d3
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root harbor-notary-signer
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-notary-signer" \
-    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r21" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r22" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-notary-signer/bin:$PATH" \
     SERVICE_NAME="notary_signer"
