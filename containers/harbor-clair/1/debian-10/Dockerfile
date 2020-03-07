@@ -15,11 +15,12 @@ RUN . ./libcomponent.sh && component_unpack "wait-for-port" "1.0.0-1" --checksum
 RUN . ./libcomponent.sh && component_unpack "harbor-clair" "1.10.1-0" --checksum 3ffa7bc7ceeef532e51032174306e9de07bf432f8106405ea0281932af125492
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root harbor-clair
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="harbor-clair" \
-    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r21" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r22" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/git/bin:/opt/bitnami/common/bin:/opt/bitnami/harbor-clair/bin:$PATH"
 
