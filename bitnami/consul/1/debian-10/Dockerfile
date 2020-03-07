@@ -13,12 +13,13 @@ RUN . ./libcomponent.sh && component_unpack "render-template" "1.0.0-0" --checks
 RUN . ./libcomponent.sh && component_unpack "consul" "1.7.1-0" --checksum cf432a3e033ee1294f1b40673b8547dfdaa44c8e1948114cf2ce8977e2faa7c9
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root consul
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.7.1-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="1.7.1-debian-10-r15" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/consul/bin:$PATH"
 
 EXPOSE 8300 8301 8500 8600
