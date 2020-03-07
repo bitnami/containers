@@ -15,12 +15,13 @@ RUN . ./libcomponent.sh && component_unpack "yq" "3.2.1-0" --checksum b35ff01573
 RUN . ./libcomponent.sh && component_unpack "elasticsearch" "7.6.1-0" --checksum a52a1a0a431f1b7cd3e86730b9c98131de1e682182c5147f2145430027ee8e49
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN useradd -r -u 1001 -g root elasticsearch
 RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="7.6.1-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="7.6.1-debian-10-r2" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/elasticsearch/bin:$PATH"
