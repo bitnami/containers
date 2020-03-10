@@ -34,12 +34,12 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9.
+> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`8-scratch`, `8.0.2-scratch-r1`, `8`, `8.0.2`, `latest` (8/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/8.0.2/8/scratch/Dockerfile)
+* [`9-scratch`, `9.0.0-scratch-r0`, `9`, `9.0.0`, `latest` (9/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/9.0.0/9/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak-gatekeeper GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper).
 
@@ -66,7 +66,7 @@ $ docker pull bitnami/keycloak-gatekeeper:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/keycloak-gatekeeper:latest 'https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper.git#master:8/scratch'
+$ docker build -t bitnami/keycloak-gatekeeper:latest 'https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper.git#master:9/scratch'
 ```
 
 # Configuration
