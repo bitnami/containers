@@ -51,7 +51,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.5.7-debian-10-r23`, `3`, `3.5.7`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.7-debian-10-r23/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.6.0-debian-10-r0`, `3`, `3.6.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.0-debian-10-r0/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
@@ -187,8 +187,10 @@ The configuration can easily be setup with the Bitnami ZooKeeper Docker image us
  - `ZOO_SERVERS`: Comma, space or colon separated list of servers. Example: zoo1:2888:3888,zoo2:2888:3888. No defaults.
  - `ZOO_CLIENT_USER`: User that will use ZooKeeper clients to auth. Default: No defaults.
  - `ZOO_CLIENT_PASSWORD`: Password that will use ZooKeeper clients to auth. No defaults.
+ - `ZOO_CLIENT_PASSWORD_FILE`: Absolute path to a file that contains the password that will be used by ZooKeeper clients to perform authentication. No defaults.
  - `ZOO_SERVER_USERS`: Comma, semicolon or whitespace separated  list of user to be created.  Example: user1,user2,admin. No defaults
- - `ZOO_SERVER_PASSWORDS`: Comma, semicolo or whitespace separated list of passwords to assign to users when created. Example: pass4user1, pass4user2, pass4admin. No defaults
+ - `ZOO_SERVER_PASSWORDS`: Comma, semicolon or whitespace separated list of passwords to assign to users when created. Example: pass4user1, pass4user2, pass4admin. No defaults
+ - `ZOO_SERVER_PASSWORDS_FILE`: Abslute path to a file that contains a comma, semicolon or whitespace separated list of passwords to assign to users when created. Example: pass4user1, pass4user2, pass4admin. No defaults
  - `ZOO_ENABLE_AUTH`: Enable ZooKeeper auth. It uses SASL/Digest-MD5. Default: **no**
  - `ZOO_RECONFIG_ENABLED`: Enable ZooKeeper Dynamic Reconfiguration. Default: **no**
  - `ZOO_LISTEN_ALLIPS_ENABLED`: Listen for connections from its peers on all available IP addresses. Default: **no**
