@@ -22,7 +22,7 @@ RUN /build/install-gosu.sh
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.6-debian-10-r24" \
+    BITNAMI_IMAGE_VERSION="3.11.6-debian-10-r25" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/cassandra/bin:$PATH"
 
