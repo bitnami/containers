@@ -9,7 +9,7 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
     . /apache-init.sh
     . /mediawiki-init.sh
     nami_initialize apache php mysql-client mediawiki
-    info "Starting mediawiki... "
+    info "Starting gosu... "
     . /post-init.sh
 fi
 
