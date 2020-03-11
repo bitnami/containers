@@ -13,7 +13,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN chmod -R g+rwX /opt/bitnami/cluster-autoscaler/
 ENV BITNAMI_APP_NAME="cluster-autoscaler" \
-    BITNAMI_IMAGE_VERSION="1.17.1-debian-10-r25" \
+    BITNAMI_IMAGE_VERSION="1.17.1-debian-10-r26" \
     PATH="/opt/bitnami/cluster-autoscaler/bin:$PATH"
 
 WORKDIR /opt/bitnami/cluster-autoscaler
