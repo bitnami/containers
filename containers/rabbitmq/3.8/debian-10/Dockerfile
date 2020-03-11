@@ -12,10 +12,10 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl libc6 libssl1.1 libtinfo6 locales procps sudo unzip zlib1g
 RUN . ./libcomponent.sh && component_unpack "erlang" "22.2.0-0" --checksum ea76d2cdfa4cfe10a69c2f528cb1880caad9fdab5be368eb31d62bcbe63c094f
 RUN . ./libcomponent.sh && component_unpack "rabbitmq" "3.8.3-0" --checksum c8cbc46aa3c61eb765f50e30ce4c0aabed6b1d753211d8fc5b3889fe4c150613
+RUN . ./libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root rabbitmq
-RUN /build/install-gosu.sh
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
@@ -23,11 +23,11 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.8.3-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="3.8.3-debian-10-r2" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:/opt/bitnami/rabbitmq/sbin:$PATH"
+    PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/bin:/opt/bitnami/rabbitmq/sbin:/opt/bitnami/gosu/bin:$PATH"
 
 EXPOSE 4369 5672 25672 15672
 
