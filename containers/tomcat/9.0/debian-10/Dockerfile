@@ -11,16 +11,16 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl libc6 libssl1.1 procps sudo unzip zlib1g
 RUN . ./libcomponent.sh && component_unpack "java" "11.0.6-0" --checksum f7446f8bec72b6b2606d37ba917accc243e6cd4e722700c39ef83832c46fb0c6
 RUN . ./libcomponent.sh && component_unpack "tomcat" "9.0.31-1" --checksum d1ec4a38619c8038427337f632ff27ef0ef247b9c3c3ff58102b69e2b044c588
+RUN . ./libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root tomcat
-RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="9.0.31-debian-10-r33" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
+    BITNAMI_IMAGE_VERSION="9.0.31-debian-10-r34" \
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/gosu/bin:$PATH"
 
 EXPOSE 8080
 
