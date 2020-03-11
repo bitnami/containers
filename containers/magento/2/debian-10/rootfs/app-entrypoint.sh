@@ -9,7 +9,7 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
     . /apache-init.sh
     . /magento-init.sh
     nami_initialize apache php mysql-client magento
-    info "Starting magento... "
+    info "Starting gosu... "
     . /post-init.sh
 fi
 

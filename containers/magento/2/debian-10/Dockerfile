@@ -1,7 +1,7 @@
 FROM bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/magento/bin:/opt/bitnami/nami/bin:$PATH"
+ENV PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/magento/bin:/opt/bitnami/gosu/bin:/opt/bitnami/nami/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -12,13 +12,13 @@ RUN bitnami-pkg unpack apache-2.4.41-1 --checksum 2139963ce8e8fa949271b4ac7967b7
 RUN bitnami-pkg unpack php-7.3.15-1 --checksum 720a3692688580331d524cc84c0595f0e50e96d342ad0c8880fabb6854b014b6
 RUN bitnami-pkg unpack mysql-client-10.2.31-1 --checksum 83278bc914a13a90a3ac05f43656f69dfbfc777e5b8672487a22a1ed65e3fda0
 RUN bitnami-pkg install libphp-7.3.15-0 --checksum c96f4cd9a52432202120b0e80b867edab40f74d7f478d46278c49d23aecd2f59
+RUN bitnami-pkg install tini-0.18.0-3 --checksum 1e9b72b6636c6a48397a18df2363b44461e87ad7f892c179a9115c7525ed9327
 RUN bitnami-pkg unpack magento-2.3.4-1 --checksum 3160bb9222fc3ef21ed95204483ba18af6a6b8d8d989097cb9c14f38ccd06a08
+RUN bitnami-pkg install gosu-1.11.0-3 --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
-RUN /build/install-gosu.sh
 RUN find /opt/bitnami/magento/htdocs -type d -print0 | xargs -0 chmod 775 && find /opt/bitnami/magento/htdocs -type f -print0 | xargs -0 chmod 664 && chown -R bitnami:daemon /opt/bitnami/magento/htdocs
-RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
@@ -26,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.4-debian-10-r29" \
+    BITNAMI_IMAGE_VERSION="2.3.4-debian-10-r30" \
     ELASTICSEARCH_HOST="" \
     ELASTICSEARCH_PORT_NUMBER="" \
     EXTERNAL_HTTPS_PORT_NUMBER="443" \
