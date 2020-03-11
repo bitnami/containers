@@ -9,7 +9,7 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
     . /apache-init.sh
     . /prestashop-init.sh
     nami_initialize apache php mysql-client prestashop
-    info "Starting prestashop... "
+    info "Starting gosu... "
     . /post-init.sh
 fi
 
