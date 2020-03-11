@@ -9,7 +9,7 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
     . /apache-init.sh
     . /osclass-init.sh
     nami_initialize apache php mysql-client osclass
-    info "Starting osclass... "
+    info "Starting gosu... "
     . /post-init.sh
 fi
 
