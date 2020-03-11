@@ -8,7 +8,7 @@ print_welcome_page
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
     . /init.sh
     nami_initialize redmine
-    info "Starting redmine... "
+    info "Starting gosu... "
 fi
 
 exec tini -- "$@"
