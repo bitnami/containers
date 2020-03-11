@@ -1,7 +1,7 @@
 FROM bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/laravel/bin:/opt/bitnami/nami/bin:$PATH"
+ENV PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/common/bin:/opt/bitnami/laravel/bin:/opt/bitnami/gosu/bin:/opt/bitnami/nami/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -10,16 +10,16 @@ RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg unpack php-7.3.15-1 --checksum 720a3692688580331d524cc84c0595f0e50e96d342ad0c8880fabb6854b014b6
 RUN bitnami-pkg install node-8.17.0-0 --checksum 7044e4fc24a5aec22a3c6fd63425ce977f0561f619607609cb048e7b0e16e899
+RUN bitnami-pkg install tini-0.18.0-3 --checksum 1e9b72b6636c6a48397a18df2363b44461e87ad7f892c179a9115c7525ed9327
 RUN bitnami-pkg install laravel-6.18.0-0 --checksum d94ed6d419448306641d72a06ad48611381e6c640310e018e6e0ad226834c186
+RUN bitnami-pkg install gosu-1.11.0-3 --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN mkdir /app && chown bitnami:bitnami /app
-RUN /build/install-gosu.sh
-RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="laravel" \
-    BITNAMI_IMAGE_VERSION="6.18.0-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="6.18.0-debian-10-r8" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules"
 
 EXPOSE 3000
