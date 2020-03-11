@@ -11,7 +11,7 @@ RUN install_packages ca-certificates curl dirmngr ghostscript gnupg imagemagick 
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install node-12.16.1-0 --checksum 36bab987be1cc792c7155e30545b004b76fc9a81796afec343a0a698935204b2
-RUN bitnami-pkg install mongodb-client-4.2.3-0 --checksum 153ec5ac970d7ef377b06ba56de206e51bb7407028b9d33b68d6860ea04b9fe7
+RUN bitnami-pkg install mongodb-client-4.2.4-0 --checksum 569ea188bce8a41ea9d5725052e74a006c648843397e1863da5b31b6422549e2
 RUN bitnami-pkg unpack parse-3.10.0-0 --checksum 04f6d66c9a452f1d9a7ac09acdc9f15fefe1f4d17fe040d4caa9204134cf90be
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -21,7 +21,7 @@ RUN /build/install-tini.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="3.10.0-debian-10-r44" \
+    BITNAMI_IMAGE_VERSION="3.10.0-debian-10-r45" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
