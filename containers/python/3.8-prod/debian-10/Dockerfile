@@ -1,4 +1,4 @@
-FROM bitnami/python:3.8.2-debian-10-r13 as development
+FROM bitnami/python:3.8.2-debian-10-r14 as development
 
 ######
 
@@ -13,10 +13,11 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
+COPY --from=development /licenses /licenses
 COPY --from=development /opt/bitnami/python /opt/bitnami/python
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="3.8.2-debian-10-r13-prod" \
+    BITNAMI_IMAGE_VERSION="3.8.2-debian-10-r14-prod" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 CMD [ "python" ]
