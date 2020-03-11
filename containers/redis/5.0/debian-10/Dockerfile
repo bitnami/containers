@@ -12,17 +12,17 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl libc6 procps sudo unzip
 RUN . ./libcomponent.sh && component_unpack "wait-for-port" "1.0.0-1" --checksum 07c4678654b01811f22b5bb65a8d6f8e253abd4524ebb3b78c7d3df042cf23bd
 RUN . ./libcomponent.sh && component_unpack "redis" "5.0.7-1" --checksum 3707cee91ed431b7241c5ae7c5195f8ecdac99c388814b685f07b3b83651ad9b
+RUN . ./libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root redis
-RUN /build/install-gosu.sh
 
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.7-debian-10-r50" \
+    BITNAMI_IMAGE_VERSION="5.0.7-debian-10-r51" \
     NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/redis/bin:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/redis/bin:/opt/bitnami/gosu/bin:$PATH"
 
 EXPOSE 6379
 
