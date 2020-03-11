@@ -7,7 +7,7 @@ print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
     nami_initialize parse-dashboard
-    info "Starting parse-dashboard... "
+    info "Starting gosu... "
 fi
 
 exec tini -- "$@"
