@@ -7,7 +7,7 @@ print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
     nami_initialize odoo
-    info "Starting odoo... "
+    info "Starting gosu... "
 fi
 
 exec tini -- "$@"
