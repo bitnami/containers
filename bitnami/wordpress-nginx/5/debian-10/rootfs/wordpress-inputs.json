@@ -7,6 +7,7 @@
   "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
   "databaseUser": "{{$global.env.WORDPRESS_DATABASE_USER}}",
   "email": "{{$global.env.WORDPRESS_EMAIL}}",
+  "extraWPConfigContent": "{{$global.env.WORDPRESS_EXTRA_WP_CONFIG_CONTENT}}",
   "firstName": "{{$global.env.WORDPRESS_FIRST_NAME}}",
   "htAccessOverrideNone": "{{$global.env.WORDPRESS_HTACCESS_OVERRIDE_NONE}}",
   "httpPort": "{{$global.env.WORDPRESS_HTTP_PORT}}",
