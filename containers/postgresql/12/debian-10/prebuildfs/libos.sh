@@ -1,6 +1,10 @@
 #!/bin/bash
+# shellcheck disable=SC1090
 #
 # Library for operating system actions
+
+# Load Generic Libraries
+. "${BITNAMI_SCRIPTS_DIR:-}"/liblog.sh
 
 # Functions
 
@@ -90,6 +94,74 @@ am_i_root() {
 get_total_memory() {
     echo $(($(grep MemTotal /proc/meminfo | awk '{print $2}') / 1024))
 }
+
+########################
+# Get machine size depending on specified memory
+# Globals:
+#   None
+# Arguments:
+#   $1 - memory size (optional)
+# Returns:
+#   Detected instance size
+#########################
+get_machine_size() {
+    local memory="${1:-}"
+    if [[ -z "$memory" ]]; then
+        debug "Memory was not specified, detecting available memory automatically"
+        memory="$(get_total_memory)"
+    fi
+    sanitized_memory=$(convert_to_mb "$memory")
+    if [[ "$sanitized_memory" -gt 26000 ]]; then
+        echo 2xlarge
+    elif [[ "$sanitized_memory" -gt 13000 ]]; then
+        echo xlarge
+    elif [[ "$sanitized_memory" -gt 6000 ]]; then
+        echo large
+    elif [[ "$sanitized_memory" -gt 3000 ]]; then
+        echo medium
+    elif [[ "$sanitized_memory" -gt 1500 ]]; then
+        echo small
+    else
+        echo micro
+    fi
+}
+
+########################
+# Get machine size depending on specified memory
+# Globals:
+#   None
+# Arguments:
+#   $1 - memory size (optional)
+# Returns:
+#   Detected instance size
+#########################
+get_supported_machine_sizes() {
+    echo micro small medium large xlarge 2xlarge
+}
+
+########################
+# Convert memory size from string to amount of megabytes (i.e. 2G -> 2048)
+# Globals:
+#   None
+# Arguments:
+#   $1 - memory size
+# Returns:
+#   Result of the conversion
+#########################
+convert_to_mb() {
+    local amount="${1:-}"
+    if [[ $amount =~ ^([0-9]+)(M|G) ]]; then
+        size="${BASH_REMATCH[1]}"
+        unit="${BASH_REMATCH[2]}"
+        if [[ "$unit" = "G" ]]; then
+           amount="$((size * 1024))"
+        else
+            amount="$size"
+        fi
+    fi
+    echo "$amount"
+}
+
 
 #########################
 # Redirects output to /dev/null if debug mode is disabled
