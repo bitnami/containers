@@ -1,0 +1,4 @@
+version: '2'
+services:
+  azure-cli:
+    image: bitnami/azure-cli:2
