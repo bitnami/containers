@@ -1,9 +1,10 @@
 #!/bin/bash
+# shellcheck disable=SC1090
 #
 # Library for managing versions strings
 
 # Load Generic Libraries
-. ./liblog.sh
+. "${BITNAMI_SCRIPTS_DIR:-}"/liblog.sh
 
 # Functions
 ########################
