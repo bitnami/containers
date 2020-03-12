@@ -22,7 +22,7 @@ RUN useradd -r -u 1001 -g root cassandra
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.6-debian-10-r26" \
+    BITNAMI_IMAGE_VERSION="3.11.6-debian-10-r27" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/gosu/bin:/opt/bitnami/cassandra/bin:$PATH"
 
