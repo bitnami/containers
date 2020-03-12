@@ -20,7 +20,13 @@ CYAN='\033[38;5;6m'
 #   None
 #########################
 stderr_print() {
-    printf "%b\\n" "${*}" >&2
+    # 'is_boolean_yes' is defined in libvalidations.sh, but depends on this file so we cannot source it
+    local -r bool="${BITNAMI_QUIET:-false}"
+    # comparison is performed without regard to the case of alphabetic characters
+    shopt -s nocasematch
+    if ! [[ "$bool" = 1 || "$bool" =~ ^(yes|true)$ ]]; then
+        printf "%b\\n" "${*}" >&2
+    fi
 }
 
 ########################
