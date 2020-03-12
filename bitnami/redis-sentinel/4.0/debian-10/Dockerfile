@@ -18,7 +18,7 @@ RUN useradd -r -u 1001 -g root redis-sentinel
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="4.0.14-debian-10-r43" \
+    BITNAMI_IMAGE_VERSION="4.0.14-debian-10-r44" \
     PATH="/opt/bitnami/redis-sentinel/bin:/opt/bitnami/gosu/bin:$PATH"
 
 EXPOSE 26379
