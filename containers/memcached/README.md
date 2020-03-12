@@ -46,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.6.0-debian-10-r4`, `1`, `1.6.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.6.0-debian-10-r4/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.6.0-debian-10-r5`, `1`, `1.6.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.6.0-debian-10-r5/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/memcached GitHub repo](https://github.com/bitnami/bitnami-docker-memcached).
 
@@ -144,7 +144,7 @@ $ docker-compose up -d
 
 ## Specify the cache size
 
-By default, the Bitnami Memcached container starts with a cache size of 64mb. You can specify other value using the `MEMCACHED_CACHE_SIZE` environment variable.
+By default, the Bitnami Memcached container will not specify any cache size and will start with Memcached defaults (64MB). You can specify a different value with the `MEMCACHED_CACHE_SIZE` environment variable (in MB).
 
 ```bash
 docker run --name memcached -e MEMCACHED_CACHE_SIZE=128 bitnami/memcached:latest
@@ -161,8 +161,43 @@ services:
   ...
 ```
 
-> The default value of the `MEMCACHED_CACHE_SIZE` is `64`.
+## Specify maximum number of concurrent connections
 
+By default, the Bitnami Memcached container will not specify any maximum number of concurrent connections and will start with Memcached defaults (1024 concurrent connections). You can specify a different value with the `MEMCACHED_MAX_CONNECTIONS` environment variable.
+
+```bash
+docker run --name memcached -e MEMCACHED_MAX_CONNECTIONS=2000 bitnami/memcached:latest
+```
+
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-memcached/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  memcached:
+  ...
+    environment:
+      - MEMCACHED_MAX_CONNECTIONS=2000
+  ...
+```
+
+## Specify number of threads to process requests
+
+By default, the Bitnami Memcached container will not specify the amount of threads for which to process requests for and will start with Memcached defaults (4 threads). You can specify a different value with the `MEMCACHED_THREADS` environment variable.
+
+```bash
+docker run --name memcached -e MEMCACHED_THREADS=4 bitnami/memcached:latest
+```
+
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-memcached/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  memcached:
+  ...
+    environment:
+      - MEMCACHED_THREADS=4
+  ...
+```
 
 ## Creating the Memcached admin user
 
