@@ -2,60 +2,16 @@
 #
 # Bitnami Memcached library
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090
 
 # Load Generic Libraries
-. /libfs.sh
-. /liblog.sh
-. /libos.sh
-. /libvalidations.sh
+. "${BITNAMI_SCRIPTS_DIR:-}"/libfs.sh
+. "${BITNAMI_SCRIPTS_DIR:-}"/liblog.sh
+. "${BITNAMI_SCRIPTS_DIR:-}"/libos.sh
+. "${BITNAMI_SCRIPTS_DIR:-}"/libservice.sh
+. "${BITNAMI_SCRIPTS_DIR:-}"/libvalidations.sh
 
 # Functions
-
-########################
-# Load global variables used on Memcached configuration
-# Globals:
-#   MEMCACHED_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-memcached_env() {
-    cat <<"EOF"
-# Format log messages
-export MODULE="memcached"
-export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
-
-# Paths
-export MEMCACHED_BASE_DIR="/opt/bitnami/memcached"
-export MEMCACHED_CONF_DIR="${MEMCACHED_BASE_DIR}/conf"
-export MEMCACHED_BIN_DIR="${MEMCACHED_BASE_DIR}/bin"
-
-# SASL
-export SASL_CONF_PATH="${MEMCACHED_CONF_DIR}/sasl2"
-export SASL_CONF_FILE="${SASL_CONF_PATH}/memcached.conf"
-export SASL_DB_FILE="${SASL_CONF_PATH}/memcachedsasldb"
-
-# Users
-export MEMCACHED_DAEMON_USER="memcached"
-export MEMCACHED_DAEMON_GROUP="memcached"
-
-# Memcached configuration
-export MEMCACHED_CACHE_SIZE="${MEMCACHED_CACHE_SIZE:-64}"
-export MEMCACHED_PORT_NUMBER="${MEMCACHED_PORT_NUMBER:-11211}"
-export MEMCACHED_USERNAME="${MEMCACHED_USERNAME:-root}"
-EOF
-    if [[ -n "${MEMCACHED_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export MEMCACHED_PASSWORD="$(< "${MEMCACHED_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export MEMCACHED_PASSWORD="${MEMCACHED_PASSWORD:-}"
-EOF
-    fi
-}
 
 ########################
 # Validate settings in MEMCACHED_* env vars
@@ -84,8 +40,18 @@ memcached_validate() {
     fi
 
     # Memcached Cache Size validation
-    if ! is_positive_int "${MEMCACHED_CACHE_SIZE}"; then
+    if [[ -n "${MEMCACHED_CACHE_SIZE}" ]] && ! is_positive_int "${MEMCACHED_CACHE_SIZE}"; then
         print_validation_error "The variable MEMCACHED_CACHE_SIZE must be positive integer"
+    fi
+
+    # Memcached Max Connections validation
+    if [[ -n "${MEMCACHED_MAX_CONNECTIONS}" ]] && ! is_positive_int "${MEMCACHED_MAX_CONNECTIONS}"; then
+        print_validation_error "The variable MEMCACHED_MAX_CONNECTIONS must be positive integer"
+    fi
+
+    # Memcached Threads validation
+    if [[ -n "${MEMCACHED_THREADS}" ]] && ! is_positive_int "${MEMCACHED_THREADS}"; then
+        print_validation_error "The variable MEMCACHED_THREADS must be positive integer"
     fi
 
     [[ "${error_code}" -eq 0 ]] || exit "${error_code}"
@@ -104,33 +70,9 @@ memcached_validate() {
 memcached_initialize() {
     info "Initializing Memcached"
 
-    # Ensure Memcached user and group exist when running as 'root'
-    if am_i_root; then
-        debug "Ensuring Memcached daemon user/group exists"
-        ensure_user_exists "${MEMCACHED_DAEMON_USER}" "${MEMCACHED_DAEMON_GROUP}"
-    fi
-
-    debug "Ensuring expected directories/files exist"
-    for dir in "${MEMCACHED_CONF_DIR}" "${SASL_CONF_PATH}"; do
-        ensure_dir_exists "${dir}"
-        am_i_root && chown -R "${MEMCACHED_DAEMON_USER}:${MEMCACHED_DAEMON_GROUP}" "${dir}"
-    done
-
-    if is_dir_empty "${SASL_CONF_PATH}"; then
-        info "No configuration files found. Rendering default configuration file"
-        if [[ -n "${MEMCACHED_PASSWORD}" ]]; then
-            memcached_enable_authentication "${MEMCACHED_USERNAME}" "${MEMCACHED_PASSWORD}"
-        fi
-    else
-        info "Deploying Memcached with persisted data"
-        if [[ ! -f "${SASL_CONF_FILE}" ]]; then
-            info "No injected configuration files found. Creating default config files"
-            if [[ -n "${MEMCACHED_PASSWORD}" ]]; then
-                memcached_enable_authentication "${MEMCACHED_USERNAME}" "${MEMCACHED_PASSWORD}"
-            fi
-        else
-            info "Configuration files found. Skipping default configuration"
-        fi
+    if [[ ! -f "${SASL_CONF_FILE}" && -n "${MEMCACHED_PASSWORD}" ]]; then
+        info "Enabling authentication"
+        memcached_enable_authentication "${MEMCACHED_USERNAME}" "${MEMCACHED_PASSWORD}"
     fi
 }
 
@@ -168,6 +110,9 @@ memcached_create_user() {
     local password="${2:?password is required}"
     debug "Creating memcached user '${user}'"
     echo "${password}" | saslpasswd2 -f "${SASL_DB_FILE}" -a "memcached" -c "${user}" -p
+    # The SASL database file is created with 0640 permissions and owned by the creation user
+    # In order to Memcached having write privileges over the file, only the group will be set
+    ! am_i_root || chgrp "${MEMCACHED_DAEMON_GROUP}" "${SASL_DB_FILE}"
 }
 
 ########################
@@ -185,7 +130,6 @@ memcached_enable_authentication() {
     local user="${1:?user is required}"
     local password="${2:?password is required}"
 
-    info "Enabling authentication"
     memcached_create_user "${user}" "${password}"
 
     debug "Generating config file '${SASL_CONF_FILE}'"
@@ -193,4 +137,53 @@ memcached_enable_authentication() {
 mech_list: plain
 sasldb_path: ${SASL_DB_FILE}
 EOF
+}
+
+########################
+# Check if Memcached is running
+# Globals:
+#   MEMCACHED_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether memcached is running
+#########################
+is_memcached_running() {
+    local pid
+    pid="$(get_pid_from_file "${MEMCACHED_PID_FILE}")"
+    if [[ -n "${pid}" ]]; then
+        is_service_running "${pid}"
+    else
+        false
+    fi
+}
+
+########################
+# Check if Memcached is not running
+# Globals:
+#   MEMCACHED_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether memcached is not running
+#########################
+is_memcached_not_running() {
+    ! is_memcached_running
+}
+
+########################
+# Stop memcached
+# Globals:
+#   MEMCACHED_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether memcached was stopped or not
+#########################
+memcached_stop() {
+    local pid
+    pid="$(get_pid_from_file "${MEMCACHED_PID_FILE}")"
+    if is_memcached_running; then
+        kill "${pid}" 2>/dev/null
+    fi
 }
