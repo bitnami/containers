@@ -26,12 +26,12 @@ RUN rm -rf /app && \
     ln -sf /opt/bitnami/kubeapps /opt/bitnami/kubeapps-dashboard && \
     mv /opt/bitnami/kubeapps/build /app
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.8.2-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="1.8.2-debian-10-r23" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
-    PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/kubeapps/bin:/opt/bitnami/gosu/bin:$PATH"
+    PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/kubeapps/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
 
