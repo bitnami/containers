@@ -3,7 +3,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
-    PATH="/opt/bitnami/node/bin:/opt/bitnami/common/bin:/opt/bitnami/parse-dashboard/bin:/opt/bitnami/gosu/bin:/opt/bitnami/nami/bin:$PATH"
+    PATH="/opt/bitnami/node/bin:/opt/bitnami/common/bin:/opt/bitnami/parse-dashboard/bin:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -20,7 +20,7 @@ RUN useradd -r -u 1001 -g root parse-dashboard
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="2.0.5-debian-10-r44" \
+    BITNAMI_IMAGE_VERSION="2.0.5-debian-10-r45" \
     NAMI_PREFIX="/.nami" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
