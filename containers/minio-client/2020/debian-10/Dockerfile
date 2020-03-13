@@ -19,7 +19,7 @@ RUN useradd -r -u 1001 -g root minio-client
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="minio-client" \
-    BITNAMI_IMAGE_VERSION="2020.3.6-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="2020.3.6-debian-10-r6" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/gosu/bin:$PATH"
 
