@@ -20,9 +20,9 @@ RUN useradd -r -u 1001 -g root harbor-jobservice
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-jobservice" \
-    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r27" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r28" \
     NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-jobservice/bin:/opt/bitnami/gosu/bin:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-jobservice/bin:/opt/bitnami/common/bin:$PATH"
 
 VOLUME [ "/etc/jobservice", "/var/log/jobs/" ]
 
