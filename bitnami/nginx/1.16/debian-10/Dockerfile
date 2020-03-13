@@ -22,12 +22,12 @@ RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.16.1-debian-10-r47" \
+    BITNAMI_IMAGE_VERSION="1.16.1-debian-10-r48" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
-    PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/gosu/bin:$PATH"
+    PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
 
