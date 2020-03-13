@@ -20,9 +20,9 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.3.22-debian-10-r45" \
+    BITNAMI_IMAGE_VERSION="10.3.22-debian-10-r46" \
     NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:/opt/bitnami/gosu/bin:$PATH"
+    PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 3306
 
