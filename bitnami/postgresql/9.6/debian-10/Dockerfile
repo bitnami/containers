@@ -23,12 +23,12 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="9.6.17-debian-10-r29" \
+    BITNAMI_IMAGE_VERSION="9.6.17-debian-10-r30" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
-    PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/gosu/bin:$PATH"
+    PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/common/bin:$PATH"
 
 VOLUME [ "/bitnami/postgresql", "/docker-entrypoint-initdb.d", "/docker-entrypoint-preinitdb.d" ]
 
