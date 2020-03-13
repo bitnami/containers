@@ -18,9 +18,9 @@ RUN useradd -r -u 1001 -g root chartmuseum
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r44" \
+    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r45" \
     NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/gosu/bin:/opt/bitnami/chartmuseum/bin:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/chartmuseum/bin:$PATH"
 
 USER 1001
 ENTRYPOINT [ "/entrypoint.sh" ]
