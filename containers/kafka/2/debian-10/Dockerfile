@@ -21,9 +21,9 @@ RUN useradd -r -u 1001 -g root kafka
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r1" \
     NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/kafka/bin:/opt/bitnami/gosu/bin:$PATH"
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/kafka/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 9092
 
