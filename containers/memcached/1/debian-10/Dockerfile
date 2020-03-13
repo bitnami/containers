@@ -18,8 +18,8 @@ RUN useradd -r -u 1001 -g root memcached
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.6.0-debian-10-r5" \
-    PATH="/opt/bitnami/memcached/bin:/opt/bitnami/gosu/bin:$PATH"
+    BITNAMI_IMAGE_VERSION="1.6.0-debian-10-r6" \
+    PATH="/opt/bitnami/memcached/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 11211
 
