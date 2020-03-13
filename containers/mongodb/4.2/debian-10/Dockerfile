@@ -22,9 +22,9 @@ RUN useradd -r -u 1001 -g root mongodb
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.2.4-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="4.2.4-debian-10-r5" \
     NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/gosu/bin:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 27017
 
