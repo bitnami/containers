@@ -1,4 +1,4 @@
-FROM bitnami/ruby:2.5.7-debian-10-r43 as development
+FROM bitnami/ruby:2.5.7-debian-10-r44 as development
 
 ######
 
@@ -17,7 +17,7 @@ COPY --from=development /licenses /licenses
 COPY --from=development /opt/bitnami/ruby /opt/bitnami/ruby
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.5.7-debian-10-r43-prod" \
+    BITNAMI_IMAGE_VERSION="2.5.7-debian-10-r44-prod" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 CMD [ "irb" ]
