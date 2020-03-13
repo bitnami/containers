@@ -3,7 +3,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/neo4j/bin:/opt/bitnami/gosu/bin:/opt/bitnami/nami/bin:$PATH"
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/neo4j/bin:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -20,7 +20,7 @@ RUN useradd -r -u 1001 -g root neo4j
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="4.0.1-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="4.0.1-debian-10-r11" \
     NAMI_PREFIX="/.nami" \
     NEO4J_BOLT_PORT_NUMBER="7687" \
     NEO4J_HOST="" \
