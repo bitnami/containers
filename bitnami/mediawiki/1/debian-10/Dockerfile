@@ -1,7 +1,7 @@
 FROM bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/gosu/bin:/opt/bitnami/nami/bin:$PATH"
+ENV PATH="/opt/bitnami/apache/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -27,7 +27,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="mediawiki" \
-    BITNAMI_IMAGE_VERSION="1.34.0-debian-10-r50" \
+    BITNAMI_IMAGE_VERSION="1.34.0-debian-10-r51" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     MARIADB_HOST="mariadb" \
