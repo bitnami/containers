@@ -1,11 +1,8 @@
 #!/bin/bash
 
 # Check whether Apache ports must be configured
-if [[ -n "${APACHE_HTTP_PORT_NUMBER:-}" ]]; then
-    export APACHE_SET_HTTP_PORT="yes"
-fi
-if [[ -n "${APACHE_HTTPS_PORT_NUMBER:-}" ]]; then
-    export APACHE_SET_HTTPS_PORT="yes"
+if [[ -n "${APACHE_HTTP_PORT_NUMBER:-}" || -n "${APACHE_HTTPS_PORT_NUMBER:-}" ]]; then
+    export APACHE_ENABLE_CUSTOM_PORTS="yes"
 fi
 
 # Copy vhosts file
