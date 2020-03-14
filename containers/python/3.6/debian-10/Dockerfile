@@ -15,7 +15,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="3.6.10-debian-10-r45" \
+    BITNAMI_IMAGE_VERSION="3.6.10-debian-10-r46" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8000
