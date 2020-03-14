@@ -21,9 +21,9 @@ RUN useradd -r -u 1001 -g root zookeeper
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.6.0-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="3.6.0-debian-10-r4" \
     NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:/opt/bitnami/common/bin:/opt/bitnami/gosu/bin:$PATH"
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 2181 2888 3888 8080
 
