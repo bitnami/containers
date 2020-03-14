@@ -9,7 +9,7 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/init.sh" ]]; then
     . /apache-init.sh
     . /opencart-init.sh
     nami_initialize apache php mysql-client opencart
-    info "Starting opencart... "
+    info "Starting gosu... "
     . /post-init.sh
 fi
 
