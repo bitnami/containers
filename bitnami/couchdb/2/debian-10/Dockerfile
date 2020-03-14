@@ -20,9 +20,9 @@ RUN useradd -r -u 1001 -g root couchdb
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="couchdb" \
-    BITNAMI_IMAGE_VERSION="2.3.1-debian-10-r45" \
+    BITNAMI_IMAGE_VERSION="2.3.1-debian-10-r46" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/gosu/bin:/opt/bitnami/couchdb/bin:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/couchdb/bin:$PATH"
 
 VOLUME [ "/bitnami/couchdb" ]
 
