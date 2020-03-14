@@ -60,11 +60,11 @@ ensure_user_exists() {
     local group="${2:-}"
 
     if ! user_exists "$user"; then
-				useradd "$user" >/dev/null 2>&1
+        useradd "$user" >/dev/null 2>&1
     fi
 
-		if [[ -n "$group" ]]; then
-    		ensure_group_exists "$group"
+    if [[ -n "$group" ]]; then
+        ensure_group_exists "$group"
         usermod -a -G "$group" "$user" >/dev/null 2>&1
     fi
 }
