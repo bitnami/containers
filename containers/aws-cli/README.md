@@ -31,7 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-photon-3`, `1.18.21-photon-3-r0` (1/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.21-photon-3-r0/1/photon-3/Dockerfile)
-* [`1-debian-10`, `1.18.21-debian-10-r1`, `1`, `1.18.21`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.21-debian-10-r1/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.18.21-debian-10-r2`, `1`, `1.18.21`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.21-debian-10-r2/1/debian-10/Dockerfile)
 * [`1-centos-7`, `1.18.21-centos-7-r0` (1/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.21-centos-7-r0/1/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aws-cli GitHub repo](https://github.com/bitnami/bitnami-docker-aws-cli).
