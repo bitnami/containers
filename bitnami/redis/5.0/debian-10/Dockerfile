@@ -20,7 +20,7 @@ RUN useradd -r -u 1001 -g root redis
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.8-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="5.0.8-debian-10-r3" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/redis/bin:/opt/bitnami/common/bin:$PATH"
 
