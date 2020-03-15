@@ -1,7 +1,7 @@
 FROM bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV PATH="/opt/bitnami/apache/bin:/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/gosu/bin:/opt/bitnami/nami/bin:$PATH"
+ENV PATH="/opt/bitnami/apache/bin:/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -22,7 +22,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="dokuwiki" \
-    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-debian-10-r37" \
+    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-debian-10-r38" \
     DOKUWIKI_EMAIL="user@example.com" \
     DOKUWIKI_FULL_NAME="Full Name" \
     DOKUWIKI_PASSWORD="bitnami1" \
