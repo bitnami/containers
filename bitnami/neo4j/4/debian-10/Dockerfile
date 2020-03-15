@@ -20,7 +20,7 @@ RUN useradd -r -u 1001 -g root neo4j
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="4.0.1-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="4.0.1-debian-10-r13" \
     NAMI_PREFIX="/.nami" \
     NEO4J_BOLT_PORT_NUMBER="7687" \
     NEO4J_HOST="" \
