@@ -31,7 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-photon-3`, `2.2.0-photon-3-r0` (2/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-azure-cli/blob/2.2.0-photon-3-r0/2/photon-3/Dockerfile)
-* [`2-debian-10`, `2.2.0-debian-10-r2`, `2`, `2.2.0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-azure-cli/blob/2.2.0-debian-10-r2/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.2.0-debian-10-r3`, `2`, `2.2.0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-azure-cli/blob/2.2.0-debian-10-r3/2/debian-10/Dockerfile)
 * [`2-centos-7`, `2.2.0-centos-7-r0` (2/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-azure-cli/blob/2.2.0-centos-7-r0/2/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/azure-cli GitHub repo](https://github.com/bitnami/bitnami-docker-azure-cli).
