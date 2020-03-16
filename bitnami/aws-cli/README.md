@@ -30,9 +30,9 @@ $ docker run --name aws-cli bitnami/aws-cli:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-photon-3`, `1.18.21-photon-3-r0` (1/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.21-photon-3-r0/1/photon-3/Dockerfile)
-* [`1-debian-10`, `1.18.21-debian-10-r2`, `1`, `1.18.21`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.21-debian-10-r2/1/debian-10/Dockerfile)
-* [`1-centos-7`, `1.18.21-centos-7-r0` (1/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.21-centos-7-r0/1/centos-7/Dockerfile)
+* [`1-photon-3`, `1.18.22-photon-3-r0` (1/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.22-photon-3-r0/1/photon-3/Dockerfile)
+* [`1-debian-10`, `1.18.22-debian-10-r0`, `1`, `1.18.22`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.22-debian-10-r0/1/debian-10/Dockerfile)
+* [`1-centos-7`, `1.18.22-centos-7-r0` (1/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.22-centos-7-r0/1/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aws-cli GitHub repo](https://github.com/bitnami/bitnami-docker-aws-cli).
 
@@ -82,7 +82,7 @@ We'd love for you to contribute to this container. You can request new features 
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-aws-cli/issues). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-aws-cli/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
