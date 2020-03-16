@@ -42,7 +42,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`6-debian-10`, `6.0.2-1-debian-10-r46`, `6`, `6.0.2-1`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/6.0.2-1-debian-10-r46/6/debian-10/Dockerfile)
+* [`6-debian-10`, `6.0.2-1-debian-10-r47`, `6`, `6.0.2-1`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/6.0.2-1-debian-10-r47/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rails GitHub repo](https://github.com/bitnami/bitnami-docker-rails).
 
@@ -204,7 +204,7 @@ We'd love for you to contribute to this container. You can request new features 
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](../../issues/new). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-rails/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version (`uname -a`)
 - Docker version (`docker version`)
