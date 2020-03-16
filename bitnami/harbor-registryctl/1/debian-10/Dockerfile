@@ -21,7 +21,7 @@ RUN useradd -r -u 1001 -g root harbor-registryctl
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-registryctl" \
-    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r30" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r31" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-registryctl/bin:/opt/bitnami/harbor-registry/bin:/opt/bitnami/common/bin:$PATH"
 
