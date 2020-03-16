@@ -48,7 +48,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7.4-debian-10`, `7.4.3-debian-10-r22`, `7.4`, `7.4.3` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.3-debian-10-r22/7.4/debian-10/Dockerfile)
+* [`7.4-debian-10`, `7.4.3-debian-10-r23`, `7.4`, `7.4.3` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.3-debian-10-r23/7.4/debian-10/Dockerfile)
 * [`7.4-debian-10-prod`, `7.4.3-debian-10-r21-prod`, `7.4-prod`, `7.4.3-prod` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.3-debian-10-r21-prod/7.4-prod/debian-10/Dockerfile)
 * [`7.3-debian-10-prod`, `7.3.15-debian-10-r22-prod`, `7.3-prod`, `7.3.15-prod`, `latest-prod` (7.3-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.15-debian-10-r22-prod/7.3-prod/debian-10/Dockerfile)
 * [`7.3-debian-10`, `7.3.15-debian-10-r22`, `7.3`, `7.3.15`, `latest` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.15-debian-10-r22/7.3/debian-10/Dockerfile)
@@ -402,7 +402,7 @@ We'd love for you to contribute to this Docker image. You can request new featur
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-php-fpm/issues). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-php-fpm/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
