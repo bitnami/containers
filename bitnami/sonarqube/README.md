@@ -54,6 +54,8 @@ Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](htt
 
 To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://www.docker.com/products/docker-compose) is recommended with a version `1.6.0` or later.
 
+Please also make sure your host machine meets the [requirements of SonarQube](https://docs.sonarqube.org/latest/requirements/requirements/) itself, taking extra care about [the platform notes section](https://docs.sonarqube.org/latest/requirements/requirements/#header-6).
+
 # How to use this image
 
 SonarQube requires access to a PostgreSQL database to store information. We'll use our very own [PostgreSQL image](https://www.github.com/bitnami/bitnami-docker-postgresql) for the database requirements.
