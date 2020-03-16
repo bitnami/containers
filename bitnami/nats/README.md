@@ -32,7 +32,7 @@ $ docker-compose up
 
 # How to deploy NATS in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami NATS Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/nats).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami NATS Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/nats).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -47,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.1.4-debian-10-r45`, `2`, `2.1.4`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/2.1.4-debian-10-r45/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.1.4-debian-10-r46`, `2`, `2.1.4`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/2.1.4-debian-10-r46/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nats GitHub repo](https://github.com/bitnami/bitnami-docker-nats).
 
@@ -199,7 +199,7 @@ We'd love for you to contribute to this container. You can request new features 
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-nats/issues). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-nats/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
