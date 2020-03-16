@@ -3,7 +3,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
-    PATH="/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/common/bin:/opt/bitnami/parse/bin:/opt/bitnami/gosu/bin:/opt/bitnami/nami/bin:$PATH"
+    PATH="/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/common/bin:/opt/bitnami/parse/bin:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -21,7 +21,7 @@ RUN useradd -r -u 1001 -g root parse
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="3.10.0-debian-10-r47" \
+    BITNAMI_IMAGE_VERSION="3.10.0-debian-10-r48" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
