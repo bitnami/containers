@@ -46,7 +46,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.18.1-debian-10-r45`, `0`, `0.18.1`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.18.1-debian-10-r45/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.18.1-debian-10-r46`, `0`, `0.18.1`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.18.1-debian-10-r46/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-node-exporter).
 
@@ -162,7 +162,7 @@ We'd love for you to contribute to this container. You can request new features 
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-node-exporter/issues). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-node-exporter/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
