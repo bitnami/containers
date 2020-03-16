@@ -110,7 +110,7 @@ Following are a few examples:
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](../../issues/new). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-codeigniter/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version (`$ uname -a`)
 - Docker version (`$ docker version`)
