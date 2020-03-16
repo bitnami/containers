@@ -31,7 +31,7 @@ $ docker-compose up -d
 
 # How to deploy Redis in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Redis Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/redis).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Redis Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/redis).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5.0-debian-10`, `5.0.8-debian-10-r3`, `5.0`, `5.0.8`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.8-debian-10-r3/5.0/debian-10/Dockerfile)
-* [`4.0-debian-10`, `4.0.14-debian-10-r48`, `4.0`, `4.0.14` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-debian-10-r48/4.0/debian-10/Dockerfile)
+* [`4.0-debian-10`, `4.0.14-debian-10-r49`, `4.0`, `4.0.14` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-debian-10-r49/4.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
@@ -245,6 +245,8 @@ services:
       - REDIS_PASSWORD=password123
   ...
 ```
+
+**NOTE**: The at sign (`@`) is not supported for `REDIS_PASSWORD`.
 
 **Warning** The Redis database is always configured with remote access enabled. It's suggested that the `REDIS_PASSWORD` env variable is always specified to set a password. In case you want to access the database without a password set the environment variable `ALLOW_EMPTY_PASSWORD=yes`. **This is recommended only for development**.
 
@@ -503,7 +505,7 @@ We'd love for you to contribute to this container. You can request new features 
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-redis/issues). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-redis/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
