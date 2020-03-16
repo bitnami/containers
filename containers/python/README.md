@@ -52,8 +52,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`3.8-debian-10`, `3.8.2-debian-10-r19`, `3.8`, `3.8.2` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.2-debian-10-r19/3.8/debian-10/Dockerfile)
 * [`3.7-debian-10-prod`, `3.7.7-debian-10-r5-prod`, `3.7-prod`, `3.7.7-prod`, `latest-prod` (3.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.7-debian-10-r5-prod/3.7-prod/debian-10/Dockerfile)
 * [`3.7-debian-10`, `3.7.7-debian-10-r5`, `3.7`, `3.7.7`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.7-debian-10-r5/3.7/debian-10/Dockerfile)
+* [`3.6-debian-10`, `3.6.10-debian-10-r48`, `3.6`, `3.6.10` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-debian-10-r48/3.6/debian-10/Dockerfile)
 * [`3.6-debian-10-prod`, `3.6.10-debian-10-r47-prod`, `3.6-prod`, `3.6.10-prod` (3.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-debian-10-r47-prod/3.6-prod/debian-10/Dockerfile)
-* [`3.6-debian-10`, `3.6.10-debian-10-r47`, `3.6`, `3.6.10` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-debian-10-r47/3.6/debian-10/Dockerfile)
 * [`2-debian-10-prod`, `2.7.17-debian-10-r47-prod`, `2-prod`, `2.7.17-prod` (2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.17-debian-10-r47-prod/2-prod/debian-10/Dockerfile)
 * [`2-debian-10`, `2.7.17-debian-10-r47`, `2`, `2.7.17` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.17-debian-10-r47/2/debian-10/Dockerfile)
 
@@ -178,7 +178,7 @@ We'd love for you to contribute to this Docker image. You can request new featur
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-python/issues). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-python/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
