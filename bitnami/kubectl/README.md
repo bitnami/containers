@@ -32,7 +32,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`1.17-debian-10`, `1.17.4-debian-10-r3`, `1.17`, `1.17.4` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.17.4-debian-10-r3/1.17/debian-10/Dockerfile)
 * [`1.16-debian-10`, `1.16.3-debian-10-r47`, `1.16`, `1.16.3`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.3-debian-10-r47/1.16/debian-10/Dockerfile)
-* [`1.15-debian-10`, `1.15.3-debian-10-r47`, `1.15`, `1.15.3` (1.15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.3-debian-10-r47/1.15/debian-10/Dockerfile)
+* [`1.15-debian-10`, `1.15.3-debian-10-r48`, `1.15`, `1.15.3` (1.15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.3-debian-10-r48/1.15/debian-10/Dockerfile)
 * [`1.14-debian-10`, `1.14.3-debian-10-r48`, `1.14`, `1.14.3` (1.14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.3-debian-10-r48/1.14/debian-10/Dockerfile)
 * [`1.13-debian-10`, `1.13.4-debian-10-r47`, `1.13`, `1.13.4` (1.13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-debian-10-r47/1.13/debian-10/Dockerfile)
 
@@ -84,7 +84,7 @@ We'd love for you to contribute to this container. You can request new features 
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-kubectl/issues). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-kubectl/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
