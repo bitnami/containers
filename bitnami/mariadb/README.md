@@ -31,7 +31,7 @@ $ docker-compose up -d
 
 # How to deploy MariaDB in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MariaDB Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/mariadb).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MariaDB Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mariadb).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10.4-debian-10`, `10.4.12-debian-10-r43`, `10.4`, `10.4.12` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.12-debian-10-r43/10.4/debian-10/Dockerfile)
 * [`10.3-debian-10`, `10.3.22-debian-10-r48`, `10.3`, `10.3.22`, `latest` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.22-debian-10-r48/10.3/debian-10/Dockerfile)
 * [`10.2-debian-10`, `10.2.31-debian-10-r43`, `10.2`, `10.2.31` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.31-debian-10-r43/10.2/debian-10/Dockerfile)
-* [`10.1-debian-10`, `10.1.44-debian-10-r43`, `10.1`, `10.1.44` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.44-debian-10-r43/10.1/debian-10/Dockerfile)
+* [`10.1-debian-10`, `10.1.44-debian-10-r44`, `10.1`, `10.1.44` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.44-debian-10-r44/10.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
 
@@ -589,7 +589,7 @@ We'd love for you to contribute to this container. You can request new features 
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-mariadb/issues). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-mariadb/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
