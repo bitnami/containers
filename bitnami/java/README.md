@@ -46,8 +46,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 - [`13`, `13.0.2-debian-10-r47-prod` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r47-prod/13/debian-10/Dockerfile), [`13-prod`, `13.0.2-debian-10-r47-prod-prod` (13/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r47-prod/13/debian-10/prod/Dockerfile)
 - [`13`, `13.0.2-debian-10-r47` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r47/13/debian-10/Dockerfile), [`13-prod`, `13.0.2-debian-10-r47-prod` (13/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r47/13/debian-10/prod/Dockerfile)
+- [`11`, `11.0.6-debian-10-r48` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.6-debian-10-r48/11/debian-10/Dockerfile), [`11-prod`, `11.0.6-debian-10-r48-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.6-debian-10-r48/11/debian-10/prod/Dockerfile)
 - [`11`, `11.0.6-debian-10-r47-prod` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.6-debian-10-r47-prod/11/debian-10/Dockerfile), [`11-prod`, `11.0.6-debian-10-r47-prod-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.6-debian-10-r47-prod/11/debian-10/prod/Dockerfile)
-- [`11`, `11.0.6-debian-10-r47` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.6-debian-10-r47/11/debian-10/Dockerfile), [`11-prod`, `11.0.6-debian-10-r47-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.6-debian-10-r47/11/debian-10/prod/Dockerfile)
 - [`10`, `10.0.2-debian-10-r0` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/10.0.2-debian-10-r0/10/debian-10/Dockerfile), [`10-prod`, `10.0.2-debian-10-r0-prod` (10/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/10.0.2-debian-10-r0/10/debian-10/prod/Dockerfile)
 - [`1.9`, `1.9.181-debian-10-r0` (1.9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.9.181-debian-10-r0/1.9/debian-10/Dockerfile), [`1.9-prod`, `1.9.181-debian-10-r0-prod` (1.9/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.9.181-debian-10-r0/1.9/debian-10/prod/Dockerfile)
 - [`1.8`, `1.8.242-debian-10-r47-prod` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.242-debian-10-r47-prod/1.8/debian-10/Dockerfile), [`1.8-prod`, `1.8.242-debian-10-r47-prod-prod` (1.8/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.242-debian-10-r47-prod/1.8/debian-10/prod/Dockerfile)
@@ -156,7 +156,7 @@ We'd love for you to contribute to this Docker image. You can request new featur
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-java/issues). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-java/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
