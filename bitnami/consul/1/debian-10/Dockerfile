@@ -11,7 +11,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl procps sudo unzip
 RUN . ./libcomponent.sh && component_unpack "render-template" "1.0.0-0" --checksum 63449e5ed4ece61d7bbeda0d173b68768d9fb444922b8ffa2e1042be20687142
 RUN . ./libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
-RUN . ./libcomponent.sh && component_unpack "consul" "1.7.1-0" --checksum cf432a3e033ee1294f1b40673b8547dfdaa44c8e1948114cf2ce8977e2faa7c9
+RUN . ./libcomponent.sh && component_unpack "consul" "1.7.2-0" --checksum fa19390973f71c8f1d7662495d706daa4791a731ce8107e205224d015107882b
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root consul
@@ -19,7 +19,7 @@ RUN useradd -r -u 1001 -g root consul
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.7.1-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="1.7.2-debian-10-r0" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/consul/bin:$PATH"
 
 EXPOSE 8300 8301 8500 8600
