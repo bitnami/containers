@@ -31,7 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-photon-3`, `0.284.0-photon-3-r0` (0/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-google-cloud-sdk/blob/0.284.0-photon-3-r0/0/photon-3/Dockerfile)
-* [`0-debian-10`, `0.284.0-debian-10-r16`, `0`, `0.284.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-google-cloud-sdk/blob/0.284.0-debian-10-r16/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.284.0-debian-10-r17`, `0`, `0.284.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-google-cloud-sdk/blob/0.284.0-debian-10-r17/0/debian-10/Dockerfile)
 * [`0-centos-7`, `0.284.0-centos-7-r0` (0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-google-cloud-sdk/blob/0.284.0-centos-7-r0/0/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/google-cloud-sdk GitHub repo](https://github.com/bitnami/bitnami-docker-google-cloud-sdk).
