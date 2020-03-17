@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.3.6-debian-10-r49`, `0`, `0.3.6`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.6-debian-10-r49/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.3.6-debian-10-r50`, `0`, `0.3.6`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.3.6-debian-10-r50/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/metrics-server GitHub repo](https://github.com/bitnami/bitnami-docker-metrics-server).
 
@@ -58,7 +58,7 @@ request](https://github.com/bitnami/bitnami-docker-metrics-server/pulls) with yo
 
 # Issues
 
-<!-- If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-metrics-server/issues). For us to provide better support, be sure to include the following information in your issue: -->
+<!-- If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-metrics-server/issues/new). For us to provide better support, be sure to include the following information in your issue: -->
 
 - Host OS and version
 - Docker version (`docker version`)
