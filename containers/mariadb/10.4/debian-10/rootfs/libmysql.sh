@@ -468,6 +468,28 @@ mysql_custom_init_scripts() {
 }
 
 ########################
+# Find the path to the libjemalloc library file
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   Path to a libjemalloc shared object file
+#########################
+find_jemalloc_lib() {
+    local -a locations=( "/usr/lib" "/usr/lib64" )
+    local pattern='libjemalloc.so.[0-9]'
+    local path
+    for dir in "${locations[@]}"; do
+        # Find the first element matching the pattern and quit
+        [[ ! -d "$dir" ]] && continue
+        path="$(find "$dir" -name "$pattern" -print -quit)"
+        [[ -n "$path" ]] && break
+    done
+    echo "${path:-}"
+}
+
+########################
 # Extract mysql version from version string
 # Globals:
 #   DB_*
