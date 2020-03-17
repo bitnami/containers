@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 libssl1.1 libtinfo6 locales procps sudo unzip zlib1g
-RUN . ./libcomponent.sh && component_unpack "erlang" "22.2.0-0" --checksum ea76d2cdfa4cfe10a69c2f528cb1880caad9fdab5be368eb31d62bcbe63c094f
+RUN . ./libcomponent.sh && component_unpack "erlang" "22.3.0-0" --checksum e9b6cba6a355dc2a6cc59829a59240d70cfb247f584a5f65f16fd6754c716166
 RUN . ./libcomponent.sh && component_unpack "rabbitmq" "3.8.3-0" --checksum c8cbc46aa3c61eb765f50e30ce4c0aabed6b1d753211d8fc5b3889fe4c150613
 RUN . ./libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
@@ -23,7 +23,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.8.3-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="3.8.3-debian-10-r7" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
