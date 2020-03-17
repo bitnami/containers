@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4.2-debian-10`, `4.2.4-debian-10-r6`, `4.2`, `4.2.4` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.4-debian-10-r6/4.2/debian-10/Dockerfile)
+* [`4.2-debian-10`, `4.2.4-debian-10-r7`, `4.2`, `4.2.4` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.4-debian-10-r7/4.2/debian-10/Dockerfile)
 * [`3.6-debian-10`, `0.0.0-debian-10-r0`, `3.6`, `0.0.0` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/3.6/debian-10/Dockerfile)
 * [`4.0-debian-10`, `0.0.0-debian-10-r0`, `4.0`, `0.0.0`, `latest` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/4.0/debian-10/Dockerfile)
 
@@ -314,7 +314,7 @@ We'd love for you to contribute to this container. You can request new features 
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-mongodb-sharded/issues). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-mongodb-sharded/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
