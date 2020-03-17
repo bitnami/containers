@@ -37,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 > NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
 
 
-* [`0-debian-10`, `0.30.0-debian-10-r21`, `0`, `0.30.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.30.0-debian-10-r21/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.30.0-debian-10-r22`, `0`, `0.30.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.30.0-debian-10-r22/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nginx-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller).
 
@@ -54,7 +54,7 @@ request](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/pull
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/issues). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
