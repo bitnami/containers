@@ -47,7 +47,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.13-debian-10`, `1.13.8-debian-10-r33`, `1.13`, `1.13.8`, `latest` (1.13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.13.8-debian-10-r33/1.13/debian-10/Dockerfile)
+* [`1.14-debian-10`, `1.14.0-debian-10-r0`, `1.14`, `1.14.0`, `latest` (1.14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.14.0-debian-10-r0/1.14/debian-10/Dockerfile)
+* [`1.13-debian-10`, `1.13.8-debian-10-r33`, `1.13`, `1.13.8` (1.13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.13.8-debian-10-r33/1.13/debian-10/Dockerfile)
 * [`1.12-debian-10`, `1.12.17-debian-10-r33`, `1.12`, `1.12.17` (1.12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.12.17-debian-10-r33/1.12/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/golang GitHub repo](https://github.com/bitnami/bitnami-docker-golang).
@@ -69,7 +70,7 @@ $ docker pull bitnami/golang:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/golang:latest 'https://github.com/bitnami/bitnami-docker-golang.git#master:1.13/debian-10'
+$ docker build -t bitnami/golang:latest 'https://github.com/bitnami/bitnami-docker-golang.git#master:1.14/debian-10'
 ```
 
 # Persisting your application
