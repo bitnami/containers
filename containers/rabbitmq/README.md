@@ -34,7 +34,7 @@ $ docker-compose up -d
 
 # How to deploy RabbitMQ in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami RabbitMQ Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/rabbitmq).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami RabbitMQ Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/rabbitmq).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -49,7 +49,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.8-debian-10`, `3.8.3-debian-10-r6`, `3.8`, `3.8.3`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.3-debian-10-r6/3.8/debian-10/Dockerfile)
+* [`3.8-debian-10`, `3.8.3-debian-10-r7`, `3.8`, `3.8.3`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.3-debian-10-r7/3.8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
@@ -463,7 +463,7 @@ We'd love for you to contribute to this container. You can request new features 
 # Issues
 
 If you encountered a problem running this container, you can file an
-[issue](https://github.com/bitnami/bitnami-docker-rabbitmq/issues). For us to provide better support,
+[issue](https://github.com/bitnami/bitnami-docker-rabbitmq/issues/new). For us to provide better support,
 be sure to include the following information in your issue:
 
 - Host OS and version
