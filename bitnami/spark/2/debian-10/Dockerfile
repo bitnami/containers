@@ -20,7 +20,7 @@ RUN useradd -r -u 1001 -g root spark
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="spark" \
-    BITNAMI_IMAGE_VERSION="2.4.5-debian-10-r33" \
+    BITNAMI_IMAGE_VERSION="2.4.5-debian-10-r34" \
     JAVA_HOME="/opt/bitnami/java" \
     NSS_WRAPPER_GROUP="/opt/bitnami/spark/tmp/nss_group" \
     NSS_WRAPPER_PASSWD="/opt/bitnami/spark/tmp/nss_passwd" \
