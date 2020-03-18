@@ -13,7 +13,7 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
     find /usr/share/jenkins/ref/ \( -type f -o -type l \) | xargs -I % -P10 bash -c '. /jenkins-support; copy_reference_file %'
 
     nami_initialize jenkins
-    info "Starting jenkins... "
+    info "Starting gosu... "
 fi
 
 exec tini -- "$@"
