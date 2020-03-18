@@ -268,18 +268,16 @@ EOF
 }
 
 ########################
-# Configure Kafka SASL_SSL listener
+# Configure Kafka SSL listener
 # Globals:
 #   KAFKA_CERTIFICATE_PASSWORD
 #   KAFKA_CONFDIR
-#   KAFKA_CONF_FILE
 # Arguments:
 #   None
 # Returns:
 #   None
 #########################
-kafka_configure_sasl_ssl_listener() {
-    info "SASL_SSL listener detected, enabling SASL_SSL settings"
+kafka_configure_ssl_listener() {
     kafka_generate_jaas_authentication_file
     # Set Kafka configuration
     kafka_server_conf_set ssl.keystore.location "$KAFKA_CONFDIR"/certs/kafka.keystore.jks
@@ -287,9 +285,6 @@ kafka_configure_sasl_ssl_listener() {
     kafka_server_conf_set ssl.key.password "$KAFKA_CERTIFICATE_PASSWORD"
     kafka_server_conf_set ssl.truststore.location "$KAFKA_CONFDIR"/certs/kafka.truststore.jks
     kafka_server_conf_set ssl.truststore.password "$KAFKA_CERTIFICATE_PASSWORD"
-    kafka_server_conf_set sasl.mechanism.inter.broker.protocol PLAIN
-    kafka_server_conf_set sasl.enabled.mechanisms PLAIN,SCRAM-SHA-256,SCRAM-SHA-512
-    kafka_server_conf_set security.inter.broker.protocol SASL_SSL
     kafka_server_conf_set ssl.client.auth required
     # Set producer/consumer configuration
     kafka_producer_consumer_conf_set ssl.keystore.location "$KAFKA_CONFDIR"/certs/kafka.keystore.jks
@@ -297,8 +292,47 @@ kafka_configure_sasl_ssl_listener() {
     kafka_producer_consumer_conf_set ssl.truststore.location "$KAFKA_CONFDIR"/certs/kafka.truststore.jks
     kafka_producer_consumer_conf_set ssl.truststore.password "$KAFKA_CERTIFICATE_PASSWORD"
     kafka_producer_consumer_conf_set ssl.key.password "$KAFKA_CERTIFICATE_PASSWORD"
+}
+
+########################
+# Configure Kafka SASL_SSL listener
+# Globals:
+#   KAFKA_CERTIFICATE_PASSWORD
+#   KAFKA_CONFDIR
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kafka_configure_sasl_ssl_listener() {
+    info "SASL_SSL listener detected, enabling SASL_SSL settings"
+    kafka_configure_ssl_listener
+    # Set Kafka configuration
+    kafka_server_conf_set security.inter.broker.protocol SASL_SSL
+    kafka_server_conf_set sasl.mechanism.inter.broker.protocol PLAIN
+    kafka_server_conf_set sasl.enabled.mechanisms PLAIN,SCRAM-SHA-256,SCRAM-SHA-512
+    # Set producer/consumer configuration
     kafka_producer_consumer_conf_set security.protocol SASL_SSL
     kafka_producer_consumer_conf_set sasl.mechanism PLAIN
+}
+
+########################
+# Configure Kafka Only SSL listener
+# Globals:
+#   KAFKA_CERTIFICATE_PASSWORD
+#   KAFKA_CONFDIR
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kafka_configure_only_ssl_listener() {
+    info "SSL listener detected, enabling SSL settings"
+    kafka_configure_ssl_listener
+    # Set Kafka configuration
+    kafka_server_conf_set security.inter.broker.protocol SSL
+    # Set producer/consumer configuration
+    kafka_producer_consumer_conf_set security.protocol SSL
 }
 
 ########################
@@ -368,6 +402,8 @@ kafka_initialize() {
         kafka_configure_from_environment_variables
         if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL_SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL_SSL ]]; then
             kafka_configure_sasl_ssl_listener
+        elif [[ "${KAFKA_CFG_LISTENERS:-}" =~ SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SSL ]]; then
+            kafka_configure_only_ssl_listener
         elif [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL_PLAINTEXT ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL_PLAINTEXT ]]; then
             kafka_configure_sasl_plaintext_listener
         fi
