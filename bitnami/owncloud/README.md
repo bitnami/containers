@@ -27,7 +27,7 @@ $ docker-compose up -d
 
 # How to deploy ownCloud in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami ownCloud Chart GitHub repository](https://github.com/bitnami/charts/tree/master/upstreamed/owncloud).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami ownCloud Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/owncloud).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`10-debian-10`, `10.4.0-debian-10-r6`, `10`, `10.4.0`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.4.0-debian-10-r6/10/debian-10/Dockerfile)
+* [`10-debian-10`, `10.4.0-debian-10-r7`, `10`, `10.4.0`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.4.0-debian-10-r7/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/owncloud GitHub repo](https://github.com/bitnami/bitnami-docker-owncloud).
 
