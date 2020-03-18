@@ -42,7 +42,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.17.1-debian-10-r44`, `4`, `4.17.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.17.1-debian-10-r44/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.17.1-debian-10-r45`, `4`, `4.17.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.17.1-debian-10-r45/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-codiad).
 
@@ -150,7 +150,7 @@ The Express Development Container generates a Dockerfile in your working directo
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](../../issues/new). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-express/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version (`uname -a`)
 - Docker version (`docker version`)
