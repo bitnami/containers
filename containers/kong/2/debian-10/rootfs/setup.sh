@@ -20,3 +20,5 @@ kong_validate
 am_i_root && chown -R "$KONG_DAEMON_USER":"$KONG_DAEMON_GROUP" "$KONG_SERVER_DIR" "$KONG_CONF_DIR"
 # Ensure Kong is initialized
 kong_initialize
+# Allow running custom initialization scripts
+kong_custom_init_scripts

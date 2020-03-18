@@ -40,6 +40,7 @@ export KONG_SERVER_DIR="${KONG_BASE_DIR}/server"
 
 export KONG_CONF_FILE="${KONG_CONF_DIR}/kong.conf"
 export KONG_DEFAULT_CONF_FILE="${KONG_CONF_DIR}/kong.conf.default"
+export KONG_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
 
 # Users
 export KONG_DAEMON_USER="${KONG_DAEMON_USER:-kong}"
@@ -247,5 +248,108 @@ kong_initialize() {
             kong migrations up
             kong migrations finish
         done
+    fi
+}
+
+########################
+# Return true if kong is running
+# Globals:
+#   KONG_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+is_kong_running() {
+    if kong health 2>&1 | grep -E "Kong is healthy"  > /dev/null; then
+        true
+    else
+        false
+    fi
+}
+
+########################
+# Return true if kong is not running
+# Globals:
+#   KONG_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+is_kong_not_running() {
+    ! is_kong_running
+}
+
+########################
+# Stop any background kong instance
+# Globals:
+#   KONG_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kong_stop() {
+   local -r retries=5
+   local -r sleep_time=5
+    kong stop
+   if ! retry_while is_kong_not_running "$retries" "$sleep_time"; then
+       error "Kong failed to shut down"
+       exit 1
+   fi
+}
+
+########################
+# Start kong in background
+# Globals:
+#   KONG_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kong_start_bg() {
+   local -r retries=5
+   local -r sleep_time=5
+   info "Starting kong in background"
+   kong start &
+   if retry_while is_kong_running "$retries" "$sleep_time"; then
+       info "Kong started successfully in background"
+   fi
+}
+
+########################
+# Run custom initialization scripts
+# Globals:
+#   KONG_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kong_custom_init_scripts() {
+    if [[ -n $(find "${KONG_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh") ]]; then
+        info "Loading user's custom files from $KONG_INITSCRIPTS_DIR ...";
+        local -r tmp_file="/tmp/filelist"
+        kong_start_bg
+        find "${KONG_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh" | sort > "$tmp_file"
+        while read -r f; do
+            case "$f" in
+                *.sh)
+                    if [[ -x "$f" ]]; then
+                        debug "Executing $f"; "$f"
+                    else
+                        debug "Sourcing $f"; . "$f"
+                    fi
+                    ;;
+                *)
+                    debug "Ignoring $f" ;;
+            esac
+        done < $tmp_file
+        kong_stop
+        rm -f "$tmp_file"
+    else
+        info "No custom scripts in $KONG_INITSCRIPTS_DIR"
     fi
 }

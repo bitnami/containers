@@ -60,6 +60,7 @@ eval "$(kong_env)"
 ensure_user_exists "$KONG_DAEMON_USER" "$KONG_DAEMON_GROUP"
 # Ensure directories used by Kong exist and have proper permissions
 ensure_dir_exists "$KONG_SERVER_DIR"
+ensure_dir_exists "$KONG_INITSCRIPTS_DIR"
 chmod -R g+rwX "$KONG_SERVER_DIR" "$KONG_CONF_DIR"
 # Copy configuration file and set default values
 cp "$KONG_DEFAULT_CONF_FILE" "$KONG_CONF_FILE"
