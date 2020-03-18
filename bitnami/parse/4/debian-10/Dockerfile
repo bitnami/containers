@@ -21,7 +21,7 @@ RUN useradd -r -u 1001 -g root parse
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="4.1.0-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="4.1.0-debian-10-r1" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
