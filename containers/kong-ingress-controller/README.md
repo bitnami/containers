@@ -31,7 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0-photon-3`, `0.7.1-photon-3-r0` (0/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/0.7.1-photon-3-r0/0/photon-3/Dockerfile)
-* [`0-debian-10`, `0.7.1-debian-10-r0`, `0`, `0.7.1`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/0.7.1-debian-10-r0/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.7.1-debian-10-r1`, `0`, `0.7.1`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/0.7.1-debian-10-r1/0/debian-10/Dockerfile)
 * [`0-centos-7`, `0.7.1-centos-7-r0` (0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/0.7.1-centos-7-r0/0/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kong-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-kong-ingress-controller).
