@@ -30,8 +30,7 @@ $ docker run --name google-cloud-sdk bitnami/google-cloud-sdk:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-photon-3`, `0.284.0-photon-3-r0` (0/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-google-cloud-sdk/blob/0.284.0-photon-3-r0/0/photon-3/Dockerfile)
-* [`0-debian-10`, `0.284.0-debian-10-r17`, `0`, `0.284.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-google-cloud-sdk/blob/0.284.0-debian-10-r17/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.284.0-debian-10-r18`, `0`, `0.284.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-google-cloud-sdk/blob/0.284.0-debian-10-r18/0/debian-10/Dockerfile)
 * [`0-centos-7`, `0.284.0-centos-7-r0` (0/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-google-cloud-sdk/blob/0.284.0-centos-7-r0/0/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/google-cloud-sdk GitHub repo](https://github.com/bitnami/bitnami-docker-google-cloud-sdk).
