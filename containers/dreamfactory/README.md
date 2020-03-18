@@ -45,7 +45,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.0.1-debian-10-r18`, `4`, `4.0.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.0.1-debian-10-r18/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.0.1-debian-10-r19`, `4`, `4.0.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.0.1-debian-10-r19/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
@@ -245,12 +245,22 @@ You can use these snapshots to restore the application state should the upgrade 
 
 The DreamFactory instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom DreamFactory:
 
-- `MARIADB_USER`: Root user for the MariaDB database. Default: **root**
-- `MARIADB_PASSWORD`: Root password for the MariaDB.
-- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
-- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
-- `MONGODB_HOST`: Hostname for Mongodb server. Default: **mongodb**
-- `MONGODB_PORT_NUMBER`: Port used by Mongodb server. Default: **27017**
+- `DREAMFACTORY_DATABASE_TYPE`: Database type where DreamFactory configuration will be stored. A DreamFactory service will be automatically created for this database. Valid values: *mariadb*, *postgresql*. Default: **mariadb**
+- `DREAMFACTORY_ENABLE_MARIADB_DATABASE`: Whether to enable a MariaDB service in DreamFactory. Default: **no**
+- `MARIADB_USER`: Root username for the MariaDB server. Default: **root**
+- `MARIADB_PASSWORD`: Root password for the MariaDB server.
+- `MARIADB_HOST`: Hostname for the MariaDB server. Default: **mariadb**
+- `MARIADB_PORT_NUMBER`: Port used by the MariaDB server. Default: **3306**
+- `DREAMFACTORY_ENABLE_POSTGRESQL_DATABASE`: Whether to enable a PostgreSQL service in DreamFactory. Default: **no**
+- `POSTGRESQL_USER`: Admin username for the PostgreSQL server. Default: **postgres**
+- `POSTGRESQL_PASSWORD`: Admin password for the PostgreSQL server.
+- `POSTGRESQL_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
+- `POSTGRESQL_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
+- `DREAMFACTORY_ENABLE_MONGODB_DATABASE`: Whether to enable a MongoDB service in DreamFactory. Default: **yes**
+- `MONGODB_HOST`: Hostname for MongoDB server. Default: **mongodb**
+- `MONGODB_PORT_NUMBER`: Port used by MongoDB server. Default: **27017**
+- `MONGODB_USER`: Username for MongoDB server.
+- `MONGODB_PORT_NUMBER`: Password for the MongoDB server user. Default: **27017**
 - `REDIS_HOST`: Hostname for Redis. Default: **redis**
 - `REDIS_PORT_NUMBER`: Port used by Redis. Default: **6379**
 - `REDIS_PASSWORD`: Password for Redis.
@@ -259,6 +269,9 @@ The DreamFactory instance can be customized by specifying environment variables 
 - `SMTP_PROTOCOL`: Secure connection protocol to use for SMTP [tls, ssl, none].
 - `SMTP_USER`: Username for the SMTP server.
 - `SMTP_PASSWORD`: SMTP account password.
+
+- PostgreSQL is now a supported database for storing DreamFactory configuration. Check the environment variable `DREAMFACTORY_DATABASE_TYPE` (default: `mariadb`). When `postgresql` is specified, a PostgreSQL database will be configured with the connection configuration in the environment variables `POSTGRESQL_HOST`, `POSTGRESQL_PORT_NUMBER`, `POSTGRESQL_USER` and `POSTGRESQL_PASSWORD`.
+- It is possible to enable/disable the additional database service that is created by default, by setting the environment variable `DREAMFACTORY_ENABLE_MARIADB_DATABASE` for MariaDB database (default: `no`), `DREAMFACTORY_ENABLE_POSTGRESQL_DATABASE` for PostgreSQL database (default: `no`) and `DREAMFACTORY_ENABLE_MONGODB_DATABASE` for MongoDB database (default: `yes`). A service will be created for the default database type specified in `DREAMFACTORY_DATABASE_TYPE` (default: `mariadb`).
 
 ### Specifying Environment variables using Docker Compose
 
@@ -376,6 +389,11 @@ volumes:
 ```
 
 # Notable Changes
+
+## 4.0.1-debian-10-r19
+
+- PostgreSQL is now a supported database for storing DreamFactory configuration. Check the environment variable `DREAMFACTORY_DATABASE_TYPE` (default: `mariadb`). When `postgresql` is specified, a PostgreSQL database will be configured with the connection configuration in the environment variables `POSTGRESQL_HOST`, `POSTGRESQL_PORT_NUMBER`, `POSTGRESQL_USER` and `POSTGRESQL_PASSWORD`.
+- It is possible to enable/disable the additional database service that is created by default, by setting the environment variable `DREAMFACTORY_ENABLE_MARIADB_DATABASE` for MariaDB database (default: `no`), `DREAMFACTORY_ENABLE_POSTGRESQL_DATABASE` for PostgreSQL database (default: `no`) and `DREAMFACTORY_ENABLE_MONGODB_DATABASE` for MongoDB database (default: `yes`). A service will be created for the default database type specified in `DREAMFACTORY_DATABASE_TYPE` (default: `mariadb`).
 
 ## 2.14.1-debian-9-r195 and 2.14.1-ol-7-r204
 
