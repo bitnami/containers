@@ -30,9 +30,8 @@ $ docker run --name aws-cli bitnami/aws-cli:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.18.23-debian-10-r0`, `1`, `1.18.23`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.23-debian-10-r0/1/debian-10/Dockerfile)
-* [`1-photon-3`, `1.18.22-photon-3-r0` (1/photon-3/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.22-photon-3-r0/1/photon-3/Dockerfile)
-* [`1-centos-7`, `1.18.22-centos-7-r0` (1/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.22-centos-7-r0/1/centos-7/Dockerfile)
+* [`1-debian-10`, `1.18.24-debian-10-r0`, `1`, `1.18.24`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.24-debian-10-r0/1/debian-10/Dockerfile)
+* [`1-centos-7`, `1.18.23-centos-7-r0` (1/centos-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.23-centos-7-r0/1/centos-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aws-cli GitHub repo](https://github.com/bitnami/bitnami-docker-aws-cli).
 
