@@ -51,7 +51,7 @@ fi
 echo "symfony successfully initialized"
 
     nami_initialize php
-    info "Starting symfony... "
+    info "Starting gosu... "
 fi
 
 exec tini -- "$@"
