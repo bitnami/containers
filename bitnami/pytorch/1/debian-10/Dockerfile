@@ -10,22 +10,22 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 libgcc1 libgomp1 libquadmath0 libstdc++6 libx11-6 procps sudo unzip
-RUN . ./libcomponent.sh && component_unpack "miniconda" "4.8.1-0" --checksum c853f3766783cc58a77b29177f958c73dbfa0ddd2216ac23be336598bbbe9d6b
-RUN . ./libcomponent.sh && component_unpack "pytorch" "1.4.0-0" --checksum aabdd1ce210297ca0cf3117707563c58f36502e0bc67545dda848e3ceecf68c3
-RUN . ./libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "miniconda" "4.8.1-0" --checksum c853f3766783cc58a77b29177f958c73dbfa0ddd2216ac23be336598bbbe9d6b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pytorch" "1.4.0-0" --checksum aabdd1ce210297ca0cf3117707563c58f36502e0bc67545dda848e3ceecf68c3
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root pytorch
 
 COPY rootfs /
-RUN /prepare.sh
+RUN /opt/bitnami/scripts/pytorch/postunpack.sh
 ENV BITNAMI_APP_NAME="pytorch" \
-    BITNAMI_IMAGE_VERSION="1.4.0-debian-10-r51" \
+    BITNAMI_IMAGE_VERSION="1.4.0-debian-10-r52" \
     LD_LIBRARY_PATH="/opt/bitnami/miniconda/lib/python3.7/site-packages/torch/lib/:/opt/bitnami/miniconda/lib/python3.7/site-packages/PIL/.libs/:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/miniconda/bin:/opt/bitnami/common/bin:$PATH"
 
 WORKDIR /app
 USER 1001
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/pytorch/entrypoint.sh" ]
 CMD [ "python" ]
