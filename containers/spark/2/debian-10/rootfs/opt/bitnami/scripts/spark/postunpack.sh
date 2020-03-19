@@ -3,8 +3,8 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libfs.sh
-. /libspark.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libspark.sh
 
 # Load Spark environment variables
 eval "$(spark_env)"
