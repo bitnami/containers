@@ -8,7 +8,7 @@ set -o pipefail
 # set -o xtrace
 
 # Load libraries
-. /liblog.sh
+. /opt/bitnami/scripts/liblog.sh
 
 readonly cmd=$(command -v harbor-adapter-clair)
 

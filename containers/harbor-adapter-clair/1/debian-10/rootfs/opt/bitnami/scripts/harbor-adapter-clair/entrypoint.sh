@@ -8,13 +8,13 @@ set -o pipefail
 #set -o xtrace 
 
 # Load libraries
-. /libbitnami.sh
+. /opt/bitnami/scripts/libbitnami.sh
 
 print_welcome_page
 
-if [[ "$*" = *"/run.sh"* ]]; then
+if [[ "$*" = *"/opt/bitnami/scripts/harbor-adapter-clair/run.sh"* ]]; then
     info "** Starting Harbor Adapter Clair setup **"
-    /setup.sh
+    /opt/bitnami/scripts/harbor-adapter-clair/setup.sh
     info "** Harbor Adapter Clair setup finished! **"
 fi
 
