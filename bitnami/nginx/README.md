@@ -46,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.16-debian-10`, `1.16.1-debian-10-r54`, `1.16`, `1.16.1`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.1-debian-10-r54/1.16/debian-10/Dockerfile)
+* [`1.16-debian-10`, `1.16.1-debian-10-r55`, `1.16`, `1.16.1`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.1-debian-10-r55/1.16/debian-10/Dockerfile)
 
 # Get this image
 
@@ -285,18 +285,18 @@ FROM bitnami/minideb-extras-base
 ...
 # Install required system packages and dependencies
 RUN install_packages xxx yyy zzz
-RUN . ./libcomponent.sh && component_unpack "nginx" "a.b.c-0"
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "a.b.c-0"
 ...
 COPY rootfs /
-RUN /postunpack.sh
+RUN /opt/bitnami/scripts/postunpack.sh
 ...
 ENV BITNAMI_APP_NAME="nginx" ...
 EXPOSE 8080 8443
 WORKDIR /app
 USER 1001
 ...
-ENTRYPOINT [ "/entrypoint.sh" ]
-CMD [ "/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/run.sh" ]
 ```
 
 The Dockerfile has several sections related to:
