@@ -51,7 +51,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.0.2-debian-10-r21`, `2`, `2.0.2`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong/blob/2.0.2-debian-10-r21/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.0.2-debian-10-r22`, `2`, `2.0.2`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong/blob/2.0.2-debian-10-r22/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kong GitHub repo](https://github.com/bitnami/bitnami-docker-kong).
 
@@ -171,14 +171,14 @@ ENV ...
 
 # Install required system packages and dependencies
 RUN install_packages xxx yyy zzz
-RUN . ./libcomponent.sh && component_unpack && component_unpack "kong" "aa.bb.cc-dd"
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack && component_unpack "kong" "aa.bb.cc-dd"
 
 COPY rootfs /
 ENV ...
 
 EXPOSE 8080 8443
-ENTRYPOINT [ "/entrypoint.sh" ]
-CMD [ "/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/run.sh" ]
 ```
 
 The Dockerfile has several sections related to:

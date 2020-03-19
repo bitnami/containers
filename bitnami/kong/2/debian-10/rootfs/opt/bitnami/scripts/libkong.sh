@@ -2,16 +2,15 @@
 #
 # Bitnami Kong library
 
-# shellcheck disable=SC1090
 # shellcheck disable=SC1091
 
 # Load generic libraries
-. /libfs.sh
-. /liblog.sh
-. /libnet.sh
-. /libos.sh
-. /libservice.sh
-. /libvalidations.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libnet.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libservice.sh
+. /opt/bitnami/scripts/libvalidations.sh
 
 ########################
 # Load global variables used for Kong configuration.

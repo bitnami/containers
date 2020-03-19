@@ -8,8 +8,8 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
 
 # Load libraries
-. /libos.sh
-. /libkong.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libkong.sh
 
 # Load Kong environment variables
 eval "$(kong_env)"
