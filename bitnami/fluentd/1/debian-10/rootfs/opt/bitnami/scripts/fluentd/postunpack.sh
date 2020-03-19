@@ -7,8 +7,8 @@ set -o nounset
 set -o pipefail
 #set -o xtrace
 
-. /libfluentd.sh
-. /libfs.sh
+. /opt/bitnami/scripts/libfluentd.sh
+. /opt/bitnami/scripts/libfs.sh
 
 # Load Fluentd environment
 eval "$(fluentd_env)"
