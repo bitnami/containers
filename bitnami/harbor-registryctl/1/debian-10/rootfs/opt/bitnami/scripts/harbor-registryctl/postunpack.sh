@@ -3,7 +3,7 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libfs.sh
+. /opt/bitnami/scripts/libfs.sh
 
 # Ensure a set of directories exist
 for dir in "/var/lib/registry" "/storage" "/etc/registry" "/etc/registryctl"; do
