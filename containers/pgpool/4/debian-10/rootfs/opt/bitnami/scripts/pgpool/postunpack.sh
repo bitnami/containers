@@ -5,8 +5,8 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libfs.sh
-. /libpgpool.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libpgpool.sh
 
 # Load Pgpool env. variables
 eval "$(pgpool_env)"
