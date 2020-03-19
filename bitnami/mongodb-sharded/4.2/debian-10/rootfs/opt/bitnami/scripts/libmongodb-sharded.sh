@@ -3,13 +3,12 @@
 #
 # Bitnami MongoDB library
 
-# shellcheck disable=SC1090
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
-. /liblog.sh
-. /libvalidations.sh
-. /libmongodb.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libmongodb.sh
 
 ########################
 # Load global variables used on MongoDB Sharded configuration.

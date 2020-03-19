@@ -5,9 +5,9 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-. /libmongodb.sh
-. /libmongodb-sharded.sh
-. /libos.sh
+. /opt/bitnami/scripts/libmongodb.sh
+. /opt/bitnami/scripts/libmongodb-sharded.sh
+. /opt/bitnami/scripts/libos.sh
 
 # Load MongoDB env. variables
 eval "$(mongodb_env)"
