@@ -7,7 +7,7 @@ set -o pipefail
 # shellcheck disable=SC1091
 
 # Load libraries
-. /liblog.sh
+. /opt/bitnami/scripts/liblog.sh
 
 FLAGS=''
 
