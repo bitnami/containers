@@ -2,17 +2,16 @@
 #
 # Bitnami PostgreSQL setup
 
+# shellcheck disable=SC1091
+
 set -o errexit
 set -o nounset
 set -o pipefail
 #set -o xtrace
 
-# shellcheck disable=SC1090
-# shellcheck disable=SC1091
-
 # Load Libraries
-. /libpostgresql.sh
-. /librepmgr.sh
+. /opt/bitnami/scripts/libpostgresql.sh
+. /opt/bitnami/scripts/librepmgr.sh
 
 # Load PostgreSQL & repmgr environment variables
 eval "$(repmgr_env)"
