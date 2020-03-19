@@ -8,18 +8,18 @@ set -o pipefail
 #set -o xtrace # Uncomment this line for debugging purpose
 
 # Load libraries
-. /libbitnami.sh
-. /liblog.sh
-. /liblogstash.sh
+. /opt/bitnami/scripts/libbitnami.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/liblogstash.sh
 
 # Load Logstash environment variables
 eval "$(logstash_env)"
 
 print_welcome_page
 
-if [[ "$*" = *"/run.sh"* ]]; then
+if [[ "$*" = *"/opt/bitnami/scripts/logstash/run.sh"* ]]; then
     info "** Starting Logstash setup **"
-    /setup.sh
+    /opt/bitnami/scripts/logstash/setup.sh
     info "** Logstash setup finished! **"
 fi
 
