@@ -1,4 +1,4 @@
-FROM bitnami/node:12.16.1-debian-10-r28 as development
+FROM bitnami/node:12.16.1-debian-10-r29 as development
 
 ######
 
@@ -17,7 +17,7 @@ COPY --from=development /licenses /licenses
 COPY --from=development /opt/bitnami/node /opt/bitnami/node
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="12.16.1-debian-10-r29-prod" \
+    BITNAMI_IMAGE_VERSION="12.16.1-debian-10-r30-prod" \
     PATH="/opt/bitnami/node/bin:$PATH"
 
 CMD [ "node" ]
