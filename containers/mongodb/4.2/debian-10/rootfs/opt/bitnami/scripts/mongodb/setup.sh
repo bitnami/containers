@@ -6,9 +6,9 @@ set -o nounset
 set -o pipefail
 
 # Load libraries
-. /libfs.sh
-. /libos.sh
-. /libmongodb.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libmongodb.sh
 
 # Load MongoDB env. variables
 eval "$(mongodb_env)"

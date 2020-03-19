@@ -2,9 +2,9 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libfs.sh
-. /liblog.sh
-. /libmongodb.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libmongodb.sh
 
 # Load MongoDB env. variables
 eval "$(mongodb_env)"
