@@ -8,8 +8,8 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
 
 # Load libraries
-. /libmariadb.sh
-. /libos.sh
+. /opt/bitnami/scripts/libmariadb.sh
+. /opt/bitnami/scripts/libos.sh
 
 # Load MariaDB environment variables
 eval "$(mysql_env)"
