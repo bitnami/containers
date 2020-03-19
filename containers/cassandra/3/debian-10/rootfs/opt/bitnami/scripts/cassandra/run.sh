@@ -1,15 +1,16 @@
 #!/bin/bash
 
+# shellcheck disable=SC1091
+
 set -o errexit
 set -o nounset
 set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
-# shellcheck disable=SC1091
 
 # Load libraries
-. /liblog.sh
-. /libcassandra.sh
-. /libos.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libcassandra.sh
+. /opt/bitnami/scripts/libos.sh
 
 # Load Cassandra environment variables
 eval "$(cassandra_env)"

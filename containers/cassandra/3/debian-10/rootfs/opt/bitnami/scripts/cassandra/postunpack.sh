@@ -3,8 +3,8 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libfs.sh
-. /libcassandra.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libcassandra.sh
 
 # Load Cassandra environment variables
 eval "$(cassandra_env)"
@@ -21,7 +21,3 @@ exec "${PYTHON_BIN_DIR}/python" "${CASSANDRA_BIN_DIR}/cqlsh.py" "\$@"
 EOF
 
 chmod +x "${CASSANDRA_BIN_DIR}/cqlsh"
-
-# For backwards compatibility with the bitnami/cassandra 
-# chart v3.x.x we create a link named like the old entrypoint
-ln -s /entrypoint.sh /app-entrypoint.sh
