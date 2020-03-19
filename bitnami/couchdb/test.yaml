@@ -24,8 +24,8 @@ spec:
       - image: bitnami/couchdb
         name: couchdb
         env:
-        - name: ALLOW_ANONYMOUS_LOGIN
-          value: "yes"
+        - name: COUCHDB_PASSWORD
+          value: "couchdb"
         ports:
         - name: couchdb
           containerPort: 5984
