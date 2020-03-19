@@ -1,13 +1,15 @@
 #!/bin/bash
 
+# shellcheck disable=SC1091
+
 set -o errexit
 set -o nounset
 set -o pipefail
 
 # Load libraries
-. /libfs.sh
-. /libos.sh
-. /libconsul.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libconsul.sh
 
 # Load Consul env. variables
 eval "$(consul_env)"

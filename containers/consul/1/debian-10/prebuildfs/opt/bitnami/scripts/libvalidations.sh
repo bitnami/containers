@@ -1,10 +1,11 @@
 #!/bin/bash
-# shellcheck disable=SC1090
 #
 # Validation functions library
 
+# shellcheck disable=SC1091
+
 # Load Generic Libraries
-. "${BITNAMI_SCRIPTS_DIR:-}"/liblog.sh
+. /opt/bitnami/scripts/liblog.sh
 
 # Functions
 
