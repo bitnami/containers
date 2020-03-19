@@ -1,4 +1,4 @@
-FROM bitnami/node:13.11.0-debian-10-r7 as development
+FROM bitnami/node:13.11.0-debian-10-r8 as development
 
 ######
 
@@ -13,11 +13,11 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
-COPY --from=development /licenses /licenses
+COPY --from=development /opt/bitnami/licenses /opt/bitnami/licenses
 COPY --from=development /opt/bitnami/node /opt/bitnami/node
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="13.11.0-debian-10-r7-prod" \
+    BITNAMI_IMAGE_VERSION="13.11.0-debian-10-r8-prod" \
     PATH="/opt/bitnami/node/bin:$PATH"
 
 CMD [ "node" ]
