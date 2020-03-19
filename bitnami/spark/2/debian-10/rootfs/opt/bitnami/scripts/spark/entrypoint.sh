@@ -1,14 +1,15 @@
 #!/bin/bash
 
+# shellcheck disable=SC1091
+
 set -o errexit
 set -o nounset
 set -o pipefail
 #set -o xtrace
-# shellcheck disable=SC1091
 
 # Load libraries
-. /libbitnami.sh
-. /libspark.sh
+. /opt/bitnami/scripts/libbitnami.sh
+. /opt/bitnami/scripts/libspark.sh
 
 # Load Spark environment variables
 eval "$(spark_env)"
@@ -21,9 +22,9 @@ if [ ! $EUID -eq 0 ] && [ -e /usr/lib/libnss_wrapper.so ]; then
     echo "LD_PRELOAD=/usr/lib/libnss_wrapper.so" >> "$SPARK_CONFDIR/spark-env.sh"
 fi
 
-if [[ "$*" = "/run.sh" ]]; then
+if [[ "$*" = "/opt/bitnami/scripts/spark/run.sh" ]]; then
     info "** Starting Spark setup **"
-    /setup.sh
+    /opt/bitnami/scripts/spark/setup.sh
     info "** Spark setup finished! **"
 fi
 
