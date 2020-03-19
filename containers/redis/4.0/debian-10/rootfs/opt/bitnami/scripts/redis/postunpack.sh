@@ -3,8 +3,8 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libredis.sh
-. /libfs.sh
+. /opt/bitnami/scripts/libredis.sh
+. /opt/bitnami/scripts/libfs.sh
 
 # Load Redis environment variables
 eval "$(redis_env)"
