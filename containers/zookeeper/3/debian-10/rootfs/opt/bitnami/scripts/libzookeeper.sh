@@ -5,11 +5,11 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
-. /libfile.sh
-. /libfs.sh
-. /liblog.sh
-. /libos.sh
-. /libvalidations.sh
+. /opt/bitnami/scripts/libfile.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libvalidations.sh
 
 # Functions
 
@@ -411,10 +411,10 @@ zookeeper_ensure_backwards_compatibility() {
 #!/bin/bash
 
 # Load Generic Libraries
-. /liblog.sh
+. /opt/bitnami/scripts/liblog.sh
 
 warn "You are probably using an old version of the bitnami/zookeeper Helm Chart. Please consider upgrading to 5.0.0 or later."
 
-exec /entrypoint.sh /run.sh
+exec /opt/bitnami/scripts/entrypoint.sh /opt/bitnami/scripts/run.sh
 EOF
 }
