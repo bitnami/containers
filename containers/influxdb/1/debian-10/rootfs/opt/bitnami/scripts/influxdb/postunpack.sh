@@ -3,8 +3,8 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libfs.sh
-. /libinfluxdb.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libinfluxdb.sh
 
 # Load InfluxDB environment variables
 eval "$(influxdb_env)"

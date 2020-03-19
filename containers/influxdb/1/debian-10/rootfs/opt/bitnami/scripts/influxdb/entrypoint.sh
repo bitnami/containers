@@ -8,18 +8,18 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
-. /liblog.sh
-. /libbitnami.sh
-. /libinfluxdb.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libbitnami.sh
+. /opt/bitnami/scripts/libinfluxdb.sh
 
 # Load InfluxDB environment variables
 eval "$(influxdb_env)"
 
 print_welcome_page
 
-if [[ "$*" = *"/run.sh"* ]]; then
+if [[ "$*" = *"/opt/bitnami/scripts/influxdb/run.sh"* ]]; then
     info "** Starting InfluxDB setup **"
-    /setup.sh
+    /opt/bitnami/scripts/influxdb/setup.sh
     info "** InfluxDB setup finished! **"
 fi
 

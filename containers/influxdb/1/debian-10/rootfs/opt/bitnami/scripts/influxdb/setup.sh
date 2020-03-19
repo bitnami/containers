@@ -8,9 +8,9 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
-. /libfs.sh
-. /libos.sh
-. /libinfluxdb.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libinfluxdb.sh
 
 # Load InfluxDB environment variables
 eval "$(influxdb_env)"
