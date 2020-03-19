@@ -20,7 +20,7 @@ RUN useradd -r -u 1001 -g root solr
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="8.5.0-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="8.5.0-debian-10-r1" \
     NAMI_PREFIX="/.nami" \
     SOLR_CORE="" \
     SOLR_CORE_CONF_DIR="_default" \
