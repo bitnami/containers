@@ -1,15 +1,15 @@
 #!/bin/bash
 
+# shellcheck disable=SC1091
+
 set -o errexit
 set -o nounset
 set -o pipefail
-
 #set -o xtrace # Uncomment this line for debugging purpose
-# shellcheck disable=SC1091
 
 # Load libraries
-. /libtomcat.sh
-. /liblog.sh
+. /opt/bitnami/scripts/libtomcat.sh
+. /opt/bitnami/scripts/liblog.sh
 
 # Load Tomcat environment variables
 eval "$(tomcat_env)"

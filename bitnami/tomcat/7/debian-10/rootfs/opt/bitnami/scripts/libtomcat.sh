@@ -2,15 +2,14 @@
 #
 # Bitnami Tomcat library
 
-# shellcheck disable=SC1090
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
-. /libfile.sh
-. /liblog.sh
-. /libos.sh
-. /libservice.sh
-. /libvalidations.sh
+. /opt/bitnami/scripts/libfile.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libservice.sh
+. /opt/bitnami/scripts/libvalidations.sh
 
 ########################
 # Loads global variables used on Tomcat configuration.
