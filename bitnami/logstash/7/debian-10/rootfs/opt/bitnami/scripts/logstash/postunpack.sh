@@ -8,8 +8,8 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
 
 # Load libraries
-. /libfs.sh
-. /liblogstash.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/liblogstash.sh
 
 # Load Logstash environment variables
 eval "$(logstash_env)"

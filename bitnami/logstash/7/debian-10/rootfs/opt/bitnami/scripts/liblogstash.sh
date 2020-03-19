@@ -2,14 +2,13 @@
 #
 # Bitnami Logstash library
 
-# shellcheck disable=SC1090
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
-. /liblog.sh
-. /libvalidations.sh
-. /libos.sh
-. /libfs.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libfs.sh
 
 ########################
 # Loads global variables used on LogstashLogstash configuration.
