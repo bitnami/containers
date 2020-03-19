@@ -8,17 +8,17 @@ set -o pipefail
 #set -o xtrace
 
 # Load libraries
-. /libfluentd.sh
-. /libbitnami.sh
+. /opt/bitnami/scripts/libfluentd.sh
+. /opt/bitnami/scripts/libbitnami.sh
 
 # Load Fluentd environment
 eval "$(fluentd_env)"
 
 print_welcome_page
 
-if [[ "$*" == *"/run.sh"* ]]; then
+if [[ "$*" == *"/opt/bitnami/scripts/fluentd/run.sh"* ]]; then
     info "** Starting Fluentd setup **"
-    /setup.sh
+    /opt/bitnami/scripts/fluentd/setup.sh
     info "** Fluentd setup finished! **"
 fi
 

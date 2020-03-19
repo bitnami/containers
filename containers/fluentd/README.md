@@ -44,7 +44,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.9.3-debian-10-r6`, `1`, `1.9.3`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.9.3-debian-10-r6/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.9.3-debian-10-r7`, `1`, `1.9.3`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.9.3-debian-10-r7/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
 
@@ -173,19 +173,19 @@ FROM bitnami/minideb:buster
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages xxx yyy zzz
-RUN . ./libcomponent.sh && component_unpack "ruby" "a.b.c-0"
-RUN . ./libcomponent.sh && component_unpack "fluentd" "d.e.f-0"
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "a.b.c-0"
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "fluentd" "d.e.f-0"
 ...
 COPY rootfs /
-RUN /postunpack.sh
+RUN /opt/bitnami/scripts/postunpack.sh
 ...
 ENV BITNAMI_APP_NAME="fluentd" ...
 EXPOSE 24224 5140
 WORKDIR /opt/bitnami/fluentd
 USER 1001
 ...
-ENTRYPOINT [ "/entrypoint.sh" ]
-CMD [ "/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/run.sh" ]
 ```
 
 The Dockerfile has several sections related to:

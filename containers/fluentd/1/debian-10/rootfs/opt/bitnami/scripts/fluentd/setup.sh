@@ -8,9 +8,9 @@ set -o pipefail
 #set -o xtrace
 
 # Load libraries
-. /libfs.sh
-. /libos.sh
-. /libfluentd.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libfluentd.sh
 
 # Load Fluentd environment
 eval "$(fluentd_env)"
