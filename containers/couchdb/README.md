@@ -7,7 +7,7 @@
 # TL;DR;
 
 ```bash
-$ docker run --name couchdb -e ALLOW_ANONYMOUS_LOGIN=yes bitnami/couchdb:latest
+$ docker run --name couchdb bitnami/couchdb:latest
 ```
 
 ## Docker Compose
@@ -51,7 +51,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.3.1-debian-10-r51`, `2`, `2.3.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-couchdb/blob/2.3.1-debian-10-r51/2/debian-10/Dockerfile)
+* [`3-debian-10`, `3.0.0-debian-10-r0`, `3`, `3.0.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-couchdb/blob/3.0.0-debian-10-r0/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/couchdb GitHub repo](https://github.com/bitnami/bitnami-docker-couchdb).
 
@@ -72,7 +72,7 @@ $ docker pull bitnami/couchdb:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/couchdb:latest 'https://github.com/bitnami/bitnami-docker-couchdb.git#master:2/debian-10'
+$ docker build -t bitnami/couchdb:latest 'https://github.com/bitnami/bitnami-docker-couchdb.git#master:3/debian-10'
 ```
 
 # Persisting your application
@@ -83,7 +83,6 @@ For persistence you should mount a directory at the `/bitnami` path. If the moun
 
 ```bash
 $ docker run \
-    -e ALLOW_ANONYMOUS_LOGIN=yes \
     -v /path/to/couchdb-persistence:/bitnami/couchdb \
     bitnami/couchdb:latest
 ```
@@ -135,9 +134,8 @@ The configuration can easily be setup in the Bitnami CouchDB Docker image by usi
  - `COUCHDB_CLUSTER_PORT_NUMBER`: Port for cluster communication. Default: **9100**
  - `COUCHDB_BIND_ADDRESS`: Address binding for the standard port. Default: **0.0.0.0**
  - `COUCHDB_CREATE_DATABASES`: If set to yes, during the first initialization of the container the system databases will be created. Default: **yes**
- - `ALLOW_ANONYMOUS_LOGIN`: If set to yes, allow to accept connections from unauthenticated users. Default: **no**
- - `COUCHDB_USER`: The username of the administrator user when authentication is enabled. No defaults
- - `COUCHDB_PASSWORD`: The password to use for login with the admin user set in the `COUCHDB_USER` environment variable. No defaults.
+ - `COUCHDB_USER`: The username of the administrator user when authentication is enabled. Default: **admin**
+ - `COUCHDB_PASSWORD`: The password to use for login with the admin user set in the `COUCHDB_USER` environment variable. Default: **couchdb**
  - `COUCHDB_PASSWORD_FILE`: Path to a file that contains the password for the custom user set in the `COUCHDB_USER` environment variable. This will override the value specified in `COUCHDB_PASSWORD`. No defaults.
  - `COUCHDB_SECRET`: The secret token for Proxy and Cookie Authentication. If it is not specified, it will be randomly generated. No defaults.
  - `COUCHDB_SECRET_FILE`: Path to a file that contains the contents of the secret parameter for CouchDB. This will override the value specified in `COUCHDB_SECRET`. No defaults.
@@ -145,7 +143,7 @@ The configuration can easily be setup in the Bitnami CouchDB Docker image by usi
 You can specify these environment variables in the docker run command:
 
 ```bash
-$ docker run --name couchdb -e ALLOW_ANONYMOUS_LOGIN=yes bitnami/couchdb:latest
+$ docker run --name couchdb -e COUCHDB_PORT_NUMBER=7777 bitnami/couchdb:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-couchdb/blob/master/docker-compose.yml) file present in this repository:
@@ -155,7 +153,7 @@ services:
   couchdb:
   ...
     environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
+      - COUCHDB_PORT_NUMBER=7777
   ...
 ```
 
@@ -170,7 +168,7 @@ To understand the precedence of the different configuration files, please check 
 Run the CouchDB image, mounting a directory from your host.
 
 ```bash
-docker run --name couchdb -v /path/to/config/dir:/opt/bitnami/couchdb/etc -e ALLOW_ANONYMOUS_LOGIN=yes bitnami/couchdb:latest
+docker run --name couchdb -v /path/to/config/dir:/opt/bitnami/couchdb/etc bitnami/couchdb:latest
 ```
 
 or using Docker Compose:
@@ -233,18 +231,18 @@ FROM bitnami/minideb-extras-base
 ...
 # Install required system packages and dependencies
 RUN install_packages xxx yyy zzz
-RUN . ./libcomponent.sh && component_unpack "couchdb" "a.b.c-0"
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "couchdb" "a.b.c-0"
 ...
 COPY rootfs /
-RUN /postunpack.sh
+RUN /opt/bitnami/scripts/postunpack.sh
 ...
 ENV BITNAMI_APP_NAME="couchdb" ...
 VOLUME [ "/bitnami/couchdb" ]
 EXPOSE 5984 4369 9100
 USER 1001
 ...
-ENTRYPOINT [ "/entrypoint.sh" ]
-CMD [ "/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/run.sh" ]
 ```
 
 The Dockerfile has several sections related to:
@@ -312,7 +310,7 @@ services:
   couchdb:
     build: .
     environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
+      - COUCHDB_PASSWORD=couchdb
     ports:
       - '1234:1234'
       - '4369:4369'
@@ -355,8 +353,14 @@ $ docker rm -v couchdb
 Re-create your container from the new image.
 
 ```bash
-$ docker run --name couchdb -e ALLOW_ANONYMOUS_LOGIN=yes bitnami/couchdb:latest
+$ docker run --name couchdb bitnami/couchdb:latest
 ```
+
+# Notable Changes
+
+## 3.0.0-0-debian-10-r0
+
+- The usage of 'ALLOW_ANONYMOUS_LOGIN' is now deprecated. Please, specify a password for the admin user (defaults to "admin") by setting the 'COUCHDB_PASSWORD' environment variable.
 
 # Contributing
 
