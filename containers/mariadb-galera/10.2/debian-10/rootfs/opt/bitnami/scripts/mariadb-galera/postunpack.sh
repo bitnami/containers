@@ -3,8 +3,8 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libfs.sh
-. /libmariadbgalera.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libmariadbgalera.sh
 
 # Load MariaDB environment variables
 eval "$(mysql_env)"
