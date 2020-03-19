@@ -45,7 +45,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2.4-debian-10`, `2.4.41-debian-10-r51`, `2.4`, `2.4.41`, `latest` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.41-debian-10-r51/2.4/debian-10/Dockerfile)
+* [`2.4-debian-10`, `2.4.41-debian-10-r52`, `2.4`, `2.4.41`, `latest` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.41-debian-10-r52/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/apache GitHub repo](https://github.com/bitnami/bitnami-docker-apache).
 
@@ -295,7 +295,7 @@ FROM bitnami/minideb-extras-base
 ...
 # Install required system packages and dependencies
 RUN install_packages xxx yyy zzz
-RUN . ./libcomponent.sh && component_unpack "apache" "aa.bb.cc-dd"
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "aa.bb.cc-dd"
 ...
 COPY rootfs /
 
@@ -305,8 +305,8 @@ EXPOSE 8080 8443
 
 WORKDIR /app
 USER 1001
-ENTRYPOINT [ "/entrypoint.sh" ]
-CMD [ "/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/run.sh" ]
 ```
 
 The Dockerfile has several sections related to:

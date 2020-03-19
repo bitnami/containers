@@ -8,18 +8,18 @@ set -o pipefail
 #set -o xtrace
 
 # Load libraries
-. /libapache.sh
-. /libbitnami.sh
-. /liblog.sh
+. /opt/bitnami/scripts/libapache.sh
+. /opt/bitnami/scripts/libbitnami.sh
+. /opt/bitnami/scripts/liblog.sh
 
 # Load Apache environment
 eval "$(apache_env)"
 
 print_welcome_page
 
-if [[ "$*" == *"/run.sh"* ]]; then
+if [[ "$*" == *"/opt/bitnami/scripts/apache/run.sh"* ]]; then
     info "** Starting Apache setup **"
-    /setup.sh
+    /opt/bitnami/scripts/apache/setup.sh
     info "** Apache setup finished! **"
 fi
 

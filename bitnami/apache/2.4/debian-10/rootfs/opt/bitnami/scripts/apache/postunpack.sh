@@ -7,9 +7,9 @@ set -o nounset
 set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
 
-. /libapache.sh
-. /libfs.sh
-. /liblog.sh
+. /opt/bitnami/scripts/libapache.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/liblog.sh
 
 ########################
 # Sets up the default Bitnami configuration

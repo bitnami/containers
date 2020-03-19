@@ -2,14 +2,13 @@
 #
 # Bitnami Apache library
 
-# shellcheck disable=SC1090
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
-. /libfs.sh
-. /liblog.sh
-. /libos.sh
-. /libvalidations.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libvalidations.sh
 
 ########################
 # Load global variables used on Apache configuration.

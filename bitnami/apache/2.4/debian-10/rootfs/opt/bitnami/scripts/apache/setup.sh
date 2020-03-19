@@ -8,7 +8,7 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
 
 # Load libraries
-. /libapache.sh
+. /opt/bitnami/scripts/libapache.sh
 
 # Load Apache environment
 eval "$(apache_env)"
