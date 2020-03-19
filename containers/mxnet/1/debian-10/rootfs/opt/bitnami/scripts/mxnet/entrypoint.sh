@@ -7,7 +7,7 @@ set -o pipefail
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libbitnami.sh
+. /opt/bitnami/scripts/libbitnami.sh
 
 print_welcome_page
 
