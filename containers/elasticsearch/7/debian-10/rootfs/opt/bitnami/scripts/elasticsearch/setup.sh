@@ -1,15 +1,16 @@
 #!/bin/bash
 
+# shellcheck disable=SC1091
+
 set -o errexit
 set -o nounset
 set -o pipefail
 #set -o xtrace
-# shellcheck disable=SC1091
 
 # Load libraries
-. /libos.sh
-. /libfs.sh
-. /libelasticsearch.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libelasticsearch.sh
 
 # Load Elasticsearch environment variables
 eval "$(elasticsearch_env)"
