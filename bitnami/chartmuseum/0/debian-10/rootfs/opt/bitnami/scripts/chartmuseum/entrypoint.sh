@@ -7,13 +7,13 @@ set -o pipefail
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libbitnami.sh
+. /opt/bitnami/scripts/libbitnami.sh
 
 print_welcome_page
 
-if [[ "$*" = *"/run.sh"* ]]; then
+if [[ "$*" = *"/opt/bitnami/scripts/chartmuseum/run.sh"* ]]; then
     info "** Starting chartmuseum setup **"
-    /setup.sh
+    /opt/bitnami/scripts/chartmuseum/setup.sh
     info "** chartmuseum setup finished! **"
 fi
 
