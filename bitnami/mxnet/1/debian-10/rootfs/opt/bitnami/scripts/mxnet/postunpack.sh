@@ -3,7 +3,7 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libfs.sh
+. /opt/bitnami/scripts/libfs.sh
 
 MXNET_BASEDIR="/opt/bitnami/python"
 MXNET_WORKSPACE="/app"
