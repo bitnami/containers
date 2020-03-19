@@ -2,15 +2,14 @@
 #
 # Bitnami MinIO library
 
-# shellcheck disable=SC1090
 # shellcheck disable=SC1091
 
 # Load Libraries
-. /libservice.sh
-. /libnet.sh
-. /libos.sh
-. /libvalidations.sh
-. /libminioclient.sh
+. /opt/bitnami/scripts/libservice.sh
+. /opt/bitnami/scripts/libnet.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libminioclient.sh
 
 # Functions
 
