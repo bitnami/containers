@@ -3,7 +3,7 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libfs.sh
+. /opt/bitnami/scripts/libfs.sh
 
 PYTORCH_BASEDIR="/opt/bitnami/miniconda"
 PYTORCH_WORKSPACE="/app"
