@@ -8,8 +8,8 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
 
 # Load libraries
-. /libredissentinel.sh
-. /libos.sh
+. /opt/bitnami/scripts/libredissentinel.sh
+. /opt/bitnami/scripts/libos.sh
 
 # Load Apache environment
 eval "$(redis_env)"

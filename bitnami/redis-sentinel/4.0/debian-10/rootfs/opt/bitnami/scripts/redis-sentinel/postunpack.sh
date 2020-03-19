@@ -7,9 +7,9 @@ set -o nounset
 set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
 
-. /libredissentinel.sh
-. /libfs.sh
-. /liblog.sh
+. /opt/bitnami/scripts/libredissentinel.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/liblog.sh
 
 # Load Redis environment
 eval "$(redis_env)"

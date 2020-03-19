@@ -5,11 +5,11 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
-. /libfile.sh
-. /liblog.sh
-. /libnet.sh
-. /libos.sh
-. /libvalidations.sh
+. /opt/bitnami/scripts/libfile.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libnet.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libvalidations.sh
 
 # Functions
 
