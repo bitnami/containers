@@ -1,15 +1,16 @@
 #!/bin/bash
 
+# shellcheck disable=SC1091
+
 set -o errexit
 set -o nounset
 set -o pipefail
 #set -o xtrace
-# shellcheck disable=SC1091
 
 # Load libraries
-. /liblog.sh
-. /libos.sh
-. /libminio.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libminio.sh
 
 # Load MinIO environment variables
 eval "$(minio_env)"

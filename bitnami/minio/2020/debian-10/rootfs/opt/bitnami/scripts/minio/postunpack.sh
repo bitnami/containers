@@ -3,8 +3,8 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libfs.sh
-. /libminio.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libminio.sh
 
 # Load MinIO environment variables
 eval "$(minio_env)"
