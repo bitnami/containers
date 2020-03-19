@@ -9,17 +9,17 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl procps sudo unzip
-RUN . ./libcomponent.sh && component_unpack "render-template" "1.0.0-0" --checksum 63449e5ed4ece61d7bbeda0d173b68768d9fb444922b8ffa2e1042be20687142
-RUN . ./libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
-RUN . ./libcomponent.sh && component_unpack "consul" "1.7.2-0" --checksum fa19390973f71c8f1d7662495d706daa4791a731ce8107e205224d015107882b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-0" --checksum 63449e5ed4ece61d7bbeda0d173b68768d9fb444922b8ffa2e1042be20687142
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "consul" "1.7.2-0" --checksum fa19390973f71c8f1d7662495d706daa4791a731ce8107e205224d015107882b
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root consul
 
 COPY rootfs /
-RUN /postunpack.sh
+RUN /opt/bitnami/scripts/consul/postunpack.sh
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.7.2-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="1.7.2-debian-10-r3" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/consul/bin:$PATH"
 
 EXPOSE 8300 8301 8500 8600
@@ -27,5 +27,5 @@ EXPOSE 8300 8301 8500 8600
 EXPOSE 8301/udp 8600/udp
 
 USER 1001
-ENTRYPOINT [ "/entrypoint.sh" ]
-CMD [ "/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/consul/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/consul/run.sh" ]

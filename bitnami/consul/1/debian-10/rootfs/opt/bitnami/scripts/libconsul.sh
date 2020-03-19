@@ -1,11 +1,12 @@
-
 #!/bin/bash
 
+# shellcheck disable=SC1091
+
 # Load libraries
-. /libos.sh
-. /libnet.sh
-. /liblog.sh
-. /libvalidations.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libnet.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libvalidations.sh
 
 # Bitnami Consul library
 
