@@ -8,17 +8,17 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
 
 # Load libraries
-. /libbitnami.sh
-. /libmariadbgalera.sh
+. /opt/bitnami/scripts/libbitnami.sh
+. /opt/bitnami/scripts/libmariadbgalera.sh
 
 # Load MariaDB environment variables
 eval "$(mysql_env)"
 
 print_welcome_page
 
-if [[ "$*" = "/run.sh" ]]; then
+if [[ "$*" = "/opt/bitnami/scripts/mariadb-galera/run.sh" ]]; then
     info "** Starting MariaDB setup **"
-    /setup.sh
+    /opt/bitnami/scripts/mariadb-galera/setup.sh
     info "** MariaDB setup finished! **"
 fi
 
