@@ -3,8 +3,8 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libfs.sh
-. /libpostgresql.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libpostgresql.sh
 
 # Load PostgreSQL environment variables
 eval "$(postgresql_env)"
