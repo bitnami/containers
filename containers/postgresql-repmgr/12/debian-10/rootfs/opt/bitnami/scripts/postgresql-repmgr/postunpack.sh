@@ -3,10 +3,10 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libfs.sh
-. /libpostgresql.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libpostgresql.sh
 
-. /librepmgr.sh
+. /opt/bitnami/scripts/librepmgr.sh
 
 # Load PostgreSQL & repmgr environment variables
 eval "$(repmgr_env)"
