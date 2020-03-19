@@ -9,7 +9,7 @@ RUN install_packages advancecomp ca-certificates curl dirmngr file ghostscript g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install ruby-2.6.5-1 --checksum 99d4bc115bd1f2ce13a76e16359f03acef2ceccfc5468f1b008e9ea9d07dc7fc
-RUN bitnami-pkg unpack postgresql-client-11.7.0-1 --checksum a66b2f507e62487119cf752743b2889e387d1ef1f6067b72bceec4e237020526
+RUN bitnami-pkg unpack postgresql-client-11.7.0-2 --checksum d6dc43bc9f9686745817c372dce19728c88fa67237baf0be3c6dc1737c653f9c
 RUN bitnami-pkg install git-2.25.2-0 --checksum 4469a734bd0562815a09fe34f011628deaccbc50ce65042af9ee389c082f349f
 RUN bitnami-pkg unpack discourse-sidekiq-2.4.1-1 --checksum 09c73ec9fe9ed3230d568acd11c164590847a06bfbc317d6841a10b1c7ccab90
 RUN bitnami-pkg install brotli-1.0.7-0 --checksum c5e349954ddf73f15b7a4d732ce594cbfe8b1cd6126c12aed5baf6262127e2be
@@ -22,7 +22,7 @@ RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r4" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="discourse" \
     DISCOURSE_HOSTNAME="127.0.0.1" \
