@@ -2,7 +2,6 @@
 #
 # Bitnami PostgreSQL setup
 
-# shellcheck disable=SC1090
 # shellcheck disable=SC1091
 
 set -o errexit
@@ -10,10 +9,10 @@ set -o nounset
 set -o pipefail
 
 # Load libraries
-. /liblog.sh
-. /libos.sh
-. /libvalidations.sh
-. /libpostgresql.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libpostgresql.sh
 
 # Load PostgreSQL environment variables
 eval "$(postgresql_env)"
