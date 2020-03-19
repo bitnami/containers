@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1091
 
 set -o errexit
 set -o nounset
@@ -8,12 +8,12 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
-. "${BITNAMI_SCRIPTS_DIR:-}"/libfs.sh
-. "${BITNAMI_SCRIPTS_DIR:-}"/libos.sh
-. "${BITNAMI_SCRIPTS_DIR:-}"/libmemcached.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libmemcached.sh
 
 # Load Memcached environment variables
-. "${BITNAMI_SCRIPTS_DIR:-}"/memcached-env.sh
+. /opt/bitnami/scripts/memcached-env.sh
 
 # Ensure Memcached environment variables are valid
 memcached_validate

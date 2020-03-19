@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1091
 
 # Load libraries
-. "${BITNAMI_SCRIPTS_DIR:-}"/libmemcached.sh
-. "${BITNAMI_SCRIPTS_DIR:-}"/libfs.sh
-. "${BITNAMI_SCRIPTS_DIR:-}"/libos.sh # used for resize
+. /opt/bitnami/scripts/libmemcached.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libos.sh # used for resize
 
 # Load Memcached environment variables
-. "${BITNAMI_SCRIPTS_DIR:-}"/memcached-env.sh
+. /opt/bitnami/scripts/memcached-env.sh
 
 info "Creating Memcached daemon user"
 ensure_user_exists "${MEMCACHED_DAEMON_USER}" "${MEMCACHED_DAEMON_GROUP}"

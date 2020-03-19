@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1091
 
 set -o errexit
 set -o nounset
@@ -8,18 +8,18 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
-. "${BITNAMI_SCRIPTS_DIR:-}"/libbitnami.sh
-. "${BITNAMI_SCRIPTS_DIR:-}"/liblog.sh
-. "${BITNAMI_SCRIPTS_DIR:-}"/libmemcached.sh
+. /opt/bitnami/scripts/libbitnami.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libmemcached.sh
 
 # Load Memcached environment variables
-. "${BITNAMI_SCRIPTS_DIR:-}"/memcached-env.sh
+. /opt/bitnami/scripts/memcached-env.sh
 
 print_welcome_page
 
-if [[ "$*" = "/run.sh" ]]; then
+if [[ "$*" = "/opt/bitnami/scripts/memcached/run.sh" || "$*" = "/run.sh" ]]; then
     info "** Starting Memcached setup **"
-    /setup.sh
+    /opt/bitnami/scripts/memcached/setup.sh
     info "** Memcached setup finished! **"
 fi
 
