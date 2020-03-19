@@ -1,23 +1,24 @@
 #!/bin/bash
 
+# shellcheck disable=SC1091
+
 set -o errexit
 set -o nounset
 set -o pipefail
 #set -o xtrace
-# shellcheck disable=SC1091
 
 # Load libraries
-. /libbitnami.sh
-. /libnginx.sh
+. /opt/bitnami/scripts/libbitnami.sh
+. /opt/bitnami/scripts/libnginx.sh
 
 # Load NGINX environment variables
 eval "$(nginx_env)"
 
 print_welcome_page
 
-if [[ "$*" = "/run.sh" ]]; then
+if [[ "$*" = "/opt/bitnami/scripts/nginx/run.sh" ]]; then
     info "** Starting NGINX setup **"
-    /setup.sh
+    /opt/bitnami/scripts/nginx/setup.sh
     info "** NGINX setup finished! **"
 fi
 
