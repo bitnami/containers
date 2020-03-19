@@ -3,8 +3,8 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libfs.sh
-. /libtomcat.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libtomcat.sh
 
 # Load Tomcat environment variables
 eval "$(tomcat_env)"
