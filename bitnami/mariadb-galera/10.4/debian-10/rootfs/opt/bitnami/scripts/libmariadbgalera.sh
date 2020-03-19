@@ -10,4 +10,4 @@ export DB_SBIN_DIR="/opt/bitnami/${DB_FLAVOR}/sbin"
 
 # Load MySQL Library
 # 'libmariadbgalera.sh' is just a wrapper of 'libmysqlgalera.sh'
-. /libmysqlgalera.sh
+. /opt/bitnami/scripts/libmysqlgalera.sh
