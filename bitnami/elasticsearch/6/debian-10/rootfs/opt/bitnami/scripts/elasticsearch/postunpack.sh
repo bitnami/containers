@@ -3,8 +3,8 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libelasticsearch.sh
-. /libfs.sh
+. /opt/bitnami/scripts/libelasticsearch.sh
+. /opt/bitnami/scripts/libfs.sh
 
 # Load Elasticsearch environment variables
 eval "$(elasticsearch_env)"
