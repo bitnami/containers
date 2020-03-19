@@ -2,17 +2,16 @@
 #
 # Bitnami Pgpool library
 
-# shellcheck disable=SC1090
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
-. /libfile.sh
-. /libfs.sh
-. /liblog.sh
-. /libnet.sh
-. /libos.sh
-. /libservice.sh
-. /libvalidations.sh
+. /opt/bitnami/scripts/libfile.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libnet.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libservice.sh
+. /opt/bitnami/scripts/libvalidations.sh
 
 ########################
 # Loads global variables used on pgpool configuration.
