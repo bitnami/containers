@@ -1,10 +1,11 @@
 #!/bin/bash
-# shellcheck disable=SC1090
 #
 # Bitnami custom library
 
+# shellcheck disable=SC1091
+
 # Load Generic Libraries
-. "${BITNAMI_SCRIPTS_DIR:-}"/liblog.sh
+. /opt/bitnami/scripts/liblog.sh
 
 # Constants
 BOLD='\033[1m'
