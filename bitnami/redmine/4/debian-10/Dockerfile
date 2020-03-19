@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl dirmngr ghostscript gnupg imagemagick 
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install ruby-2.6.5-1 --checksum 99d4bc115bd1f2ce13a76e16359f03acef2ceccfc5468f1b008e9ea9d07dc7fc
-RUN bitnami-pkg install postgresql-client-11.7.0-1 --checksum a66b2f507e62487119cf752743b2889e387d1ef1f6067b72bceec4e237020526
+RUN bitnami-pkg install postgresql-client-11.7.0-2 --checksum d6dc43bc9f9686745817c372dce19728c88fa67237baf0be3c6dc1737c653f9c
 RUN bitnami-pkg install mysql-client-10.3.22-1 --checksum e9fa94f574c87d15f0b6aba7cff1c06f70c0e69c1c442378c9961fc148fa68ef
 RUN bitnami-pkg install git-2.25.2-0 --checksum 4469a734bd0562815a09fe34f011628deaccbc50ce65042af9ee389c082f349f
 RUN bitnami-pkg install tini-0.18.0-3 --checksum 1e9b72b6636c6a48397a18df2363b44461e87ad7f892c179a9115c7525ed9327
@@ -20,7 +20,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.1.0-debian-10-r32" \
+    BITNAMI_IMAGE_VERSION="4.1.0-debian-10-r33" \
     REDMINE_DB_MYSQL="mariadb" \
     REDMINE_DB_NAME="bitnami_redmine" \
     REDMINE_DB_PASSWORD="" \
