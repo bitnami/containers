@@ -2,7 +2,6 @@
 #
 # Bitnami Cassandra setup
 
-# shellcheck disable=SC1090
 # shellcheck disable=SC1091
 
 set -o errexit
@@ -10,9 +9,9 @@ set -o nounset
 set -o pipefail
 
 # Load Generic Libraries
-. /libvalidations.sh
-. /libos.sh
-. /libcassandra.sh
+. /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libcassandra.sh
 
 # Load Cassandra environment variables
 eval "$(cassandra_env)"

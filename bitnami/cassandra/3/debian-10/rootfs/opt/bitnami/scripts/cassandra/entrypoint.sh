@@ -1,23 +1,24 @@
 #!/bin/bash
 
+# shellcheck disable=SC1091
+
 set -o errexit
 set -o nounset
 set -o pipefail
 #set -o xtrace
-# shellcheck disable=SC1091
 
 # Load libraries
-. /libbitnami.sh
-. /libcassandra.sh
+. /opt/bitnami/scripts/libbitnami.sh
+. /opt/bitnami/scripts/libcassandra.sh
 
 # Load Cassandra environment variables
 eval "$(cassandra_env)"
 
 print_welcome_page
 
-if [[ "$*" = *"/run.sh"* ]]; then
+if [[ "$*" = *"/opt/bitnami/scripts/cassandra/run.sh"* || "$*" = "/run.sh" ]]; then
     info "** Starting Cassandra setup **"
-    /setup.sh
+    /opt/bitnami/scripts/cassandra/setup.sh
     info "** Cassandra setup finished! **"
 fi
 
