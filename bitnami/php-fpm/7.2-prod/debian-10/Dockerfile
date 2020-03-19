@@ -1,4 +1,4 @@
-FROM bitnami/php-fpm:7.2.29-debian-10-r0 as development
+FROM bitnami/php-fpm:7.2.29-debian-10-r1 as development
 
 ######
 
@@ -14,11 +14,11 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 COPY --from=development /opt/bitnami/common /opt/bitnami/common
-COPY --from=development /licenses /licenses
+COPY --from=development /opt/bitnami/licenses /opt/bitnami/licenses
 COPY --from=development /opt/bitnami/php /opt/bitnami/php
 
 ENV BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="7.2.29-debian-10-r0-prod" \
+    BITNAMI_IMAGE_VERSION="7.2.29-debian-10-r1-prod" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/php/sbin:$PATH"
 
 CMD [ "php-fpm", "-F", "--pid", "/opt/bitnami/php/tmp/php-fpm.pid", "-y", "/opt/bitnami/php/etc/php-fpm.conf" ]
