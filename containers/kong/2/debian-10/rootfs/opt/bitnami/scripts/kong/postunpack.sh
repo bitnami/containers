@@ -7,9 +7,9 @@ set -o nounset
 set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
 
-. /libfs.sh
-. /libos.sh
-. /libkong.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libkong.sh
 
 # Auxiliar functions
 
@@ -35,7 +35,7 @@ kong_conf_set() {
     else
         debug "Adding new entry for property '${key}' in configuration file"
         # Add a new key
-        printf '%s = %s\n' "$key" "$value" >>"$KONG_CONF_FILE"
+        printf '/opt/bitnami/scripts/kong = %s\n' "$key" "$value" >>"$KONG_CONF_FILE"
     fi
 }
 
