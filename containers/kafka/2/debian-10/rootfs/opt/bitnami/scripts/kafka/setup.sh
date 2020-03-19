@@ -1,15 +1,16 @@
 #!/bin/bash
 
+# shellcheck disable=SC1091
+
 set -o errexit
 set -o nounset
 set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
-# shellcheck disable=SC1091
 
 # Load libraries
-. /libfs.sh
-. /libos.sh
-. /libkafka.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libkafka.sh
 
 # Load Kafka environment variables
 eval "$(kafka_env)"

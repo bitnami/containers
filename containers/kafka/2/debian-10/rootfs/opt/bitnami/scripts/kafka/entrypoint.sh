@@ -1,24 +1,25 @@
 #!/bin/bash
 
+# shellcheck disable=SC1091
+
 set -o errexit
 set -o nounset
 set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
-# shellcheck disable=SC1091
 
 # Load libraries
-. /liblog.sh
-. /libbitnami.sh
-. /libkafka.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libbitnami.sh
+. /opt/bitnami/scripts/libkafka.sh
 
 # Load Kafka environment variables
 eval "$(kafka_env)"
 
 print_welcome_page
 
-if [[ "$*" = "/run.sh" ]]; then
+if [[ "$*" = "/opt/bitnami/scripts/kafka/run.sh" || "$*" = "/run.sh" ]]; then
     info "** Starting Kafka setup **"
-    /setup.sh
+    /opt/bitnami/scripts/kafka/setup.sh
     info "** Kafka setup finished! **"
 fi
 

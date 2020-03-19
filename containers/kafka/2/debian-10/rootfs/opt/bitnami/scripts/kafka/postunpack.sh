@@ -3,8 +3,8 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libkafka.sh
-. /libfs.sh
+. /opt/bitnami/scripts/libkafka.sh
+. /opt/bitnami/scripts/libfs.sh
 
 # Load Kafka environment variables
 eval "$(kafka_env)"
