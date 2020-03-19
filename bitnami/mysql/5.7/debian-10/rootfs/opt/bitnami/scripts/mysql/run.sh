@@ -8,8 +8,8 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
 
 # Load libraries
-. /libmysql.sh
-. /libos.sh
+. /opt/bitnami/scripts/libmysql.sh
+. /opt/bitnami/scripts/libos.sh
 
 # Load MySQL environment variables
 eval "$(mysql_env)"

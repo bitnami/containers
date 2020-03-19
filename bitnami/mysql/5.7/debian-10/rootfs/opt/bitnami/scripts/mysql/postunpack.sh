@@ -3,8 +3,8 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libfs.sh
-. /libmysql.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libmysql.sh
 
 # Load MySQL environment variables
 eval "$(mysql_env)"

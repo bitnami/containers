@@ -8,9 +8,9 @@ set -o pipefail
 # set -o xtrace
 
 # Load libraries
-. /libfs.sh
-. /libos.sh
-. /libmysql.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libmysql.sh
 
 # Load MySQL environment variables
 eval "$(mysql_env)"
