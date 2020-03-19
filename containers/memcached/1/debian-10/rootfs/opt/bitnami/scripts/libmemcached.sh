@@ -2,14 +2,14 @@
 #
 # Bitnami Memcached library
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1091
 
 # Load Generic Libraries
-. "${BITNAMI_SCRIPTS_DIR:-}"/libfs.sh
-. "${BITNAMI_SCRIPTS_DIR:-}"/liblog.sh
-. "${BITNAMI_SCRIPTS_DIR:-}"/libos.sh
-. "${BITNAMI_SCRIPTS_DIR:-}"/libservice.sh
-. "${BITNAMI_SCRIPTS_DIR:-}"/libvalidations.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libservice.sh
+. /opt/bitnami/scripts/libvalidations.sh
 
 # Functions
 
