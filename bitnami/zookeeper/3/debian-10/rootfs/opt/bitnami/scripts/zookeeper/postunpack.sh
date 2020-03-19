@@ -3,8 +3,8 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libzookeeper.sh
-. /libfs.sh
+. /opt/bitnami/scripts/libzookeeper.sh
+. /opt/bitnami/scripts/libfs.sh
 
 # Load ZooKeeper environment variables
 eval "$(zookeeper_env)"

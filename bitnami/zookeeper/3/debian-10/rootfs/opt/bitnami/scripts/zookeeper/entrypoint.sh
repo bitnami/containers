@@ -8,18 +8,18 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
-. /liblog.sh
-. /libbitnami.sh
-. /libzookeeper.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libbitnami.sh
+. /opt/bitnami/scripts/libzookeeper.sh
 
 # Load ZooKeeper environment variables
 eval "$(zookeeper_env)"
 
 print_welcome_page
 
-if [[ "$*" = "/run.sh" ]]; then
+if [[ "$*" = "/opt/bitnami/scripts/zookeeper/run.sh" || "$*" = "/run.sh" ]]; then
     info "** Starting ZooKeeper setup **"
-    /setup.sh
+    /opt/bitnami/scripts/zookeeper/setup.sh
     info "** ZooKeeper setup finished! **"
 fi
 

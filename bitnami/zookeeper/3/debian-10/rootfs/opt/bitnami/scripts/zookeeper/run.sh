@@ -8,9 +8,9 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
-. /libzookeeper.sh
-. /libos.sh
-. /liblog.sh
+. /opt/bitnami/scripts/libzookeeper.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/liblog.sh
 
 # Load ZooKeeper environment variables
 eval "$(zookeeper_env)"
