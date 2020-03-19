@@ -1,14 +1,15 @@
 #!/bin/bash
 
+# shellcheck disable=SC1091
+
 set -o errexit
 set -o nounset
 set -o pipefail
 # set -o xtrace
-# shellcheck disable=SC1091
 
-. /librabbitmq.sh
-. /liblog.sh
-. /libos.sh
+. /opt/bitnami/scripts/librabbitmq.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libos.sh
 
 # Load RabbitMQ environment variables
 eval "$(rabbitmq_env)"
