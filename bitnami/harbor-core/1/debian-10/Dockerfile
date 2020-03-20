@@ -21,7 +21,7 @@ RUN useradd -r -u 1001 -g root harbor-core
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-core/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-core" \
-    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r35" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r36" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/harbor-core/bin:/opt/bitnami/common/bin:$PATH"
 
