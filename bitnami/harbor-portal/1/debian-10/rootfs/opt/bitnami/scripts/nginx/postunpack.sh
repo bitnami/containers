@@ -3,8 +3,8 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libnginx.sh
-. /libfs.sh
+. /opt/bitnami/scripts/libnginx.sh
+. /opt/bitnami/scripts/libfs.sh
 
 # Auxiliar Functions
 

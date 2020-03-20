@@ -3,9 +3,9 @@
 # shellcheck disable=SC1091
 
 # Load libraries
-. /libfile.sh
-. /libfs.sh
-. /libnginx.sh
+. /opt/bitnami/scripts/libfile.sh
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libnginx.sh
 
 export HARBOR_PORTAL_BASEDIR="/opt/bitnami/harbor"
 export HARBOR_PORTAL_NGINX_CONFDIR="${HARBOR_PORTAL_BASEDIR}/nginx-conf"
