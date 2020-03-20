@@ -20,7 +20,7 @@ RUN useradd -r -u 1001 -g root mxnet
 COPY rootfs /
 RUN /opt/bitnami/scripts/mxnet/postunpack.sh
 ENV BITNAMI_APP_NAME="mxnet" \
-    BITNAMI_IMAGE_VERSION="1.6.0-debian-10-r26" \
+    BITNAMI_IMAGE_VERSION="1.6.0-debian-10-r27" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
