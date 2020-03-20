@@ -47,6 +47,7 @@ export KONG_DAEMON_GROUP="${KONG_DAEMON_GROUP:-kong}"
 
 # Cluster settings
 export KONG_MIGRATE="${KONG_MIGRATE:-no}"
+export KONG_EXIT_AFTER_MIGRATE="${KONG_EXIT_AFTER_MIGRATE:-no}"
 
 # Port and service bind configurations for KONG_PROXY_LISTEN and KONG_ADMIN_LISTEN
 # By setting these separately, we are consistent with other Bitnami solutions
