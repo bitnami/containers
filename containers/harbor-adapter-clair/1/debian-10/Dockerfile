@@ -17,7 +17,7 @@ RUN useradd -r -u 1001 -g root harbor-adapter-clair
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="harbor-adapter-clair" \
-    BITNAMI_IMAGE_VERSION="1.0.1-debian-10-r51" \
+    BITNAMI_IMAGE_VERSION="1.0.1-debian-10-r52" \
     PATH="/opt/bitnami/harbor-adapter-clair/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080
