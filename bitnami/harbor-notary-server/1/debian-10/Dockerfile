@@ -19,7 +19,7 @@ RUN useradd -r -u 1001 -g root harbor-notary-server
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-notary-server/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-notary-server" \
-    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r35" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r36" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/harbor-notary-server/bin:/opt/bitnami/common/bin:$PATH" \
     SERVICE_NAME="notary_server"
