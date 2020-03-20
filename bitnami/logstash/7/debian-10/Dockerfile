@@ -19,7 +19,7 @@ RUN useradd -r -u 1001 -g root logstash
 COPY rootfs /
 RUN /opt/bitnami/scripts/logstash/postunpack.sh
 ENV BITNAMI_APP_NAME="logstash" \
-    BITNAMI_IMAGE_VERSION="7.6.1-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="7.6.1-debian-10-r13" \
     PATH="/opt/bitnami/logstash/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080
