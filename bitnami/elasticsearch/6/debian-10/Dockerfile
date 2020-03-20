@@ -21,7 +21,7 @@ RUN useradd -r -u 1001 -g root elasticsearch
 COPY rootfs /
 RUN /opt/bitnami/scripts/elasticsearch/postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="6.8.7-debian-10-r15" \
+    BITNAMI_IMAGE_VERSION="6.8.7-debian-10-r16" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/elasticsearch/bin:$PATH"
