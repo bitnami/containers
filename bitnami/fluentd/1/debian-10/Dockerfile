@@ -19,7 +19,7 @@ RUN useradd -r -u 1001 -g root fluentd
 COPY rootfs /
 RUN /opt/bitnami/scripts/fluentd/postunpack.sh
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.9.3-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="1.9.3-debian-10-r9" \
     GEM_HOME="/opt/bitnami/fluentd" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/common/bin:/opt/bitnami/fluentd/bin:$PATH"
 
