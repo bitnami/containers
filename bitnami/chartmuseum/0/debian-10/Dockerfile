@@ -18,7 +18,7 @@ RUN useradd -r -u 1001 -g root chartmuseum
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r53" \
+    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r54" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/chartmuseum/bin:$PATH"
 
