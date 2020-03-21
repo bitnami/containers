@@ -22,7 +22,7 @@ RUN ln -s /opt/bitnami/scripts/redis/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/redis/postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="5.0.8-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="5.0.8-debian-10-r11" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/redis/bin:/opt/bitnami/common/bin:$PATH"
 
