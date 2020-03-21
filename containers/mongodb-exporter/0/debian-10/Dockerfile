@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN ln -sf /opt/bitnami/mongodb-exporter/bin/mongodb_exporter /bin/mongodb_exporter
 
 ENV BITNAMI_APP_NAME="mongodb-exporter" \
-    BITNAMI_IMAGE_VERSION="0.10.0-debian-10-r52" \
+    BITNAMI_IMAGE_VERSION="0.10.0-debian-10-r53" \
     PATH="/opt/bitnami/mongodb-exporter/bin:$PATH"
 
 EXPOSE 9216
