@@ -20,7 +20,7 @@ RUN echo "deb http://http.us.debian.org/debian testing main non-free contrib" >>
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-resnet" \
-    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r44" \
+    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r45" \
     NAMI_PREFIX="/.nami"
 
 USER 1001
