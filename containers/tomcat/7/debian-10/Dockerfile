@@ -19,7 +19,7 @@ RUN useradd -r -u 1001 -g root tomcat
 COPY rootfs /
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="7.0.103-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="7.0.103-debian-10-r2" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080
