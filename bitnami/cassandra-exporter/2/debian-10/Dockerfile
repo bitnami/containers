@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -15,7 +15,7 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="cassandra-exporter" \
-    BITNAMI_IMAGE_VERSION="2.3.4-debian-10-r19" \
+    BITNAMI_IMAGE_VERSION="2.3.4-debian-10-r20" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 8080
