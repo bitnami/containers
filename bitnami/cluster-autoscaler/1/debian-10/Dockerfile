@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN chmod -R g+rwX /opt/bitnami/cluster-autoscaler/
 ENV BITNAMI_APP_NAME="cluster-autoscaler" \
-    BITNAMI_IMAGE_VERSION="1.18.0-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="1.18.0-debian-10-r6" \
     PATH="/opt/bitnami/cluster-autoscaler/bin:$PATH"
 
 WORKDIR /opt/bitnami/cluster-autoscaler
