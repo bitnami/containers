@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV PATH="/opt/bitnami/python/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:$PATH"
@@ -23,7 +23,7 @@ RUN curl -sLO https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="11.0.20200315-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="11.0.20200315-debian-10-r9" \
     LD_LIBRARY_PATH="/opt/bitnami/odoo/venv/lib/python3.6/site-packages/reportlab/.libs:$LD_LIBRARY_PATH" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
