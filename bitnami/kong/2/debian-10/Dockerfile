@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -18,7 +18,7 @@ RUN useradd -r -u 1001 -g root kong
 COPY rootfs /
 RUN /opt/bitnami/scripts/kong/postunpack.sh
 ENV BITNAMI_APP_NAME="kong" \
-    BITNAMI_IMAGE_VERSION="2.0.2-debian-10-r25" \
+    BITNAMI_IMAGE_VERSION="2.0.2-debian-10-r26" \
     PATH="/opt/bitnami/kong/bin:/opt/bitnami/kong/openresty/bin:/opt/bitnami/kong/openresty/luajit/bin:/opt/bitnami/kong/openresty/nginx/sbin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8000 8001 8443 8444
