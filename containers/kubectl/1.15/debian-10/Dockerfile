@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 RUN chmod +x /opt/bitnami/kubectl/bin/kubectl
 ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.15.3-debian-10-r54" \
+    BITNAMI_IMAGE_VERSION="1.15.3-debian-10-r55" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 USER 1001
