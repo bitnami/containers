@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -14,7 +14,7 @@ RUN ln -sf /opt/bitnami/prometheus/data /prometheus
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.16.0-debian-10-r38" \
+    BITNAMI_IMAGE_VERSION="2.16.0-debian-10-r39" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
