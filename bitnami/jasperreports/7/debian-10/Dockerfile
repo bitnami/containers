@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/git/bin:/opt/bitnami/nami/bin:$PATH"
@@ -14,14 +14,14 @@ RUN bitnami-pkg unpack mysql-client-10.3.22-1 --checksum e9fa94f574c87d15f0b6aba
 RUN bitnami-pkg install tini-0.18.0-3 --checksum 1e9b72b6636c6a48397a18df2363b44461e87ad7f892c179a9115c7525ed9327
 RUN bitnami-pkg unpack jasperreports-7.2.0-0 --checksum d41b9786b585c67d007e98ae263c0f6488b93e538a6086a09fb46ef38bd6c247
 RUN bitnami-pkg install gosu-1.11.0-3 --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
-RUN bitnami-pkg install git-2.25.2-0 --checksum 4469a734bd0562815a09fe34f011628deaccbc50ce65042af9ee389c082f349f
+RUN bitnami-pkg install git-2.26.0-0 --checksum a49e9389b493b336e2c012f3ccd4632a20296029b15b1dd948a879bc9ddc7b06
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.2.0-debian-10-r36" \
+    BITNAMI_IMAGE_VERSION="7.2.0-debian-10-r37" \
     JASPERREPORTS_DATABASE_NAME="bitnami_jasperreports" \
     JASPERREPORTS_DATABASE_PASSWORD="" \
     JASPERREPORTS_DATABASE_USER="bn_jasperreports" \
