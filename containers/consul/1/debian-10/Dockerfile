@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -19,7 +19,7 @@ RUN useradd -r -u 1001 -g root consul
 COPY rootfs /
 RUN /opt/bitnami/scripts/consul/postunpack.sh
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.7.2-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="1.7.2-debian-10-r7" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/consul/bin:$PATH"
 
 EXPOSE 8300 8301 8500 8600
