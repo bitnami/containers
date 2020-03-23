@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN ln -sf /opt/bitnami/consul-exporter/bin/consul_exporter /bin/consul_exporter
 
 ENV BITNAMI_APP_NAME="consul-exporter" \
-    BITNAMI_IMAGE_VERSION="0.6.0-debian-10-r54" \
+    BITNAMI_IMAGE_VERSION="0.6.0-debian-10-r55" \
     PATH="/opt/bitnami/consul-exporter/bin:$PATH"
 
 EXPOSE 9107
