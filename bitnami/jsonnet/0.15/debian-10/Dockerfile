@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 RUN chmod +x /opt/bitnami/jsonnet/bin/jsonnet
 ENV BITNAMI_APP_NAME="jsonnet" \
-    BITNAMI_IMAGE_VERSION="0.15.0-debian-10-r33" \
+    BITNAMI_IMAGE_VERSION="0.15.0-debian-10-r34" \
     PATH="/opt/bitnami/jsonnet/bin:$PATH"
 
 USER 1001
