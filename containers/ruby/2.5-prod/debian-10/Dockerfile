@@ -1,8 +1,8 @@
-FROM bitnami/ruby:2.5.7-debian-10-r54 as development
+FROM bitnami/ruby:2.5.7-debian-10-r55 as development
 
 ######
 
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -17,7 +17,7 @@ COPY --from=development /opt/bitnami/licenses /opt/bitnami/licenses
 COPY --from=development /opt/bitnami/ruby /opt/bitnami/ruby
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.5.7-debian-10-r54-prod" \
+    BITNAMI_IMAGE_VERSION="2.5.7-debian-10-r55-prod" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 CMD [ "irb" ]
