@@ -1,8 +1,8 @@
-FROM bitnami/python:3.6.10-debian-10-r55 as development
+FROM bitnami/python:3.6.10-debian-10-r56 as development
 
 ######
 
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -17,7 +17,7 @@ COPY --from=development /opt/bitnami/licenses /opt/bitnami/licenses
 COPY --from=development /opt/bitnami/python /opt/bitnami/python
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="3.6.10-debian-10-r55-prod" \
+    BITNAMI_IMAGE_VERSION="3.6.10-debian-10-r56-prod" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 CMD [ "python" ]
