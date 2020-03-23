@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV HOME="/" \
@@ -18,7 +18,7 @@ RUN useradd -r -u 1001 -g root redis-sentinel
 COPY rootfs /
 RUN /opt/bitnami/scripts/redis-sentinel/postunpack.sh
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="5.0.8-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="5.0.8-debian-10-r11" \
     PATH="/opt/bitnami/redis-sentinel/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 26379
