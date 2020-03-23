@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -18,7 +18,7 @@ RUN useradd -r -u 1001 -g root chartmuseum
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r55" \
+    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r56" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/chartmuseum/bin:$PATH"
 
