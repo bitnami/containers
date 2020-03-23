@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -21,7 +21,7 @@ RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch-curator" \
-    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r55" \
+    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r56" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami"
