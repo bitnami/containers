@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
@@ -16,14 +16,13 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
-RUN useradd -r -u 1001 -g root zookeeper
 RUN ln -s /opt/bitnami/scripts/zookeeper/entrypoint.sh /entrypoint.sh
 RUN ln -s /opt/bitnami/scripts/zookeeper/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/zookeeper/postunpack.sh
 ENV BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.6.0-debian-10-r15" \
+    BITNAMI_IMAGE_VERSION="3.6.0-debian-10-r16" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:$PATH"
 
