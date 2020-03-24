@@ -1,8 +1,8 @@
-FROM bitnami/java:11.0.6-debian-10-r54 as development
+FROM bitnami/java:11.0.6-debian-10-r55 as development
 
 ######
 
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -21,7 +21,7 @@ COPY --from=development /opt/bitnami/java /opt/bitnami/java
 COPY --from=development /opt/bitnami/licenses /opt/bitnami/licenses
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="11.0.6-debian-10-r55-prod" \
+    BITNAMI_IMAGE_VERSION="11.0.6-debian-10-r56-prod" \
     JAVA_HOME="/opt/bitnami/java" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
