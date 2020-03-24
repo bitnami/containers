@@ -15,14 +15,13 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis" "4.0.14-1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
-RUN useradd -r -u 1001 -g root redis
 RUN ln -s /opt/bitnami/scripts/redis/entrypoint.sh /entrypoint.sh
 RUN ln -s /opt/bitnami/scripts/redis/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/redis/postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="4.0.14-debian-10-r56" \
+    BITNAMI_IMAGE_VERSION="4.0.14-debian-10-r57" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/redis/bin:/opt/bitnami/common/bin:$PATH"
 
