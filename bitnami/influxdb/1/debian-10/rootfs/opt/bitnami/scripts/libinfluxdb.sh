@@ -298,7 +298,7 @@ is_influxdb_running() {
 influxdb_stop() {
     info "Stopping InfluxDB..."
     ! is_influxdb_running && return
-    pkill --full --signal TERM "influxd"
+    pkill --full --signal TERM "$INFLUXDB_BASE_DIR"
     wait-for-port --state free "$INFLUXDB_PORT_NUMBER"
 }
 
