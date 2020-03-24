@@ -15,12 +15,11 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3"
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "couchdb" "3.0.0-0" --checksum 2b620966ab896d50caebde29cf5358b670e0da81004b6f87e39f8ce5d8343cd0
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
-RUN useradd -r -u 1001 -g root couchdb
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/couchdb/postunpack.sh
 ENV BITNAMI_APP_NAME="couchdb" \
-    BITNAMI_IMAGE_VERSION="3.0.0-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="3.0.0-debian-10-r5" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/couchdb/bin:$PATH"
 
