@@ -49,7 +49,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-debian-10`, `5.3.2-debian-10-r53`, `5`, `5.3.2`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.3.2-debian-10-r53/5/debian-10/Dockerfile)
+* [`5-debian-10`, `5.3.2-debian-10-r54`, `5`, `5.3.2`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.3.2-debian-10-r54/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
 
@@ -381,7 +381,8 @@ The Bitnami WordPress with NGINX Docker image is designed to be extended so it c
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
 - Settings that can be adapted using environment variables. For instance, you can change the ports used by Nginx for HTTP and HTTPS, by setting the environment variables `NGINX_HTTP_PORT_NUMBER` and `NGINX_HTTPS_PORT_NUMBER` respectively.
-- [Replacing the 'httpd.conf' file](https://github.com/bitnami/bitnami-docker-nginx#full-configuration).
+- [Adding custom server blcoks](https://github.com/bitnami/bitnami-docker-nginx#adding-custom-server-blocks)
+- [Replacing the 'nginx.conf' file](https://github.com/bitnami/bitnami-docker-nginx#full-configuration).
 - [Using custom SSL certificates](https://github.com/bitnami/bitnami-docker-nginx#using-custom-ssl-certificates).
 
 If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
@@ -395,8 +396,8 @@ FROM bitnami/wordpress-nginx
 Here is an example of extending the image with the following modifications:
 
 - Install the `vim` editor
-- Modify the Apache configuration file
-- Modify the ports used by Apache
+- Modify the NGINX configuration file
+- Modify the ports used by NGINX
 
 ```Dockerfile
 FROM bitnami/wordpress-nginx
@@ -407,13 +408,13 @@ USER 0 # Required to perform privileged actions
 RUN install_packages vim
 USER 1001 # Revert to the original non-root user
 
-## Enable mod_ratelimit module
-RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
+## Modify 'worker_connections' on NGINX config file to '512'
+RUN sed -i -r "s#(\s+worker_connections\s+)[0-9]+;#\1512;#" /opt/bitnami/nginx/conf/nginx.conf
 
-## Modify the ports used by Apache by default
+## Modify the ports used by NGINX by default
 # It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181
-ENV APACHE_HTTPS_PORT_NUMBER=8143
+ENV NGINX_HTTP_PORT_NUMBER=8181
+ENV NGINX_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
 
@@ -469,7 +470,7 @@ volumes:
 
 - This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 - The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
-- Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
+- Enabling custom NGINX certificates by placing them at `/opt/bitnami/nginx/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
 
 # Contributing
 
