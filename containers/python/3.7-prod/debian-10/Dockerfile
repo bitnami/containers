@@ -1,8 +1,8 @@
-FROM bitnami/python:3.7.7-debian-10-r12 as development
+FROM bitnami/python:3.7.7-debian-10-r13 as development
 
 ######
 
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -17,7 +17,7 @@ COPY --from=development /opt/bitnami/licenses /opt/bitnami/licenses
 COPY --from=development /opt/bitnami/python /opt/bitnami/python
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="3.7.7-debian-10-r12-prod" \
+    BITNAMI_IMAGE_VERSION="3.7.7-debian-10-r13-prod" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 CMD [ "python" ]
