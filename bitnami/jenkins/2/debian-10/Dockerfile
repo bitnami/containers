@@ -8,7 +8,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl dirmngr fontconfig fonts-dejavu-extra gnupg libc6 libcom-err2 libcurl4 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle6 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libtasn1-6 libunistring2 openssh-client procps sudo unzip zlib1g
+RUN install_packages ca-certificates curl dirmngr fontconfig fonts-dejavu-extra gnupg libc6 libcom-err2 libcurl4 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle6 libnghttp2-14 libnss-wrapper libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libtasn1-6 libunistring2 openssh-client procps sudo unzip zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install java-1.8.242-0 --checksum 3a70f3d1c3cd9bc6ec581b2a10373a2b323c0b9af40402ce8d19aeb0b3d02400
@@ -18,19 +18,22 @@ RUN bitnami-pkg unpack jenkins-2.204.5-0 --checksum 81714d198abbd146b1ca088dc9a3
 RUN bitnami-pkg install gosu-1.11.0-3 --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
-RUN useradd -r -u 1001 -g root jenkins
 RUN mkdir -p /usr/share/jenkins/ref
 
 COPY rootfs /
 RUN ln -sf /install-plugins.sh /usr/local/bin/install-plugins.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.204.5-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="2.204.5-debian-10-r11" \
     DISABLE_JENKINS_INITIALIZATION="no" \
     JAVA_OPTS="" \
     JENKINS_HOME="/opt/bitnami/jenkins/jenkins_home" \
     JENKINS_PASSWORD="bitnami" \
     JENKINS_USERNAME="user" \
-    NAMI_PREFIX="/.nami"
+    LD_PRELOAD="/usr/lib/libnss_wrapper.so" \
+    LNAME="jenkins" \
+    NAMI_PREFIX="/.nami" \
+    NSS_WRAPPER_GROUP="/opt/bitnami/jenkins/nss_group" \
+    NSS_WRAPPER_PASSWD="/opt/bitnami/jenkins/nss_passwd"
 
 EXPOSE 8080 8443 50000
 

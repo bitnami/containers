@@ -12,6 +12,7 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
     echo "--- Copying files at $(date)" >> "$copy_log"
     find /usr/share/jenkins/ref/ \( -type f -o -type l \) | xargs -I % -P10 bash -c '. /jenkins-support; copy_reference_file %'
 
+    . /jenkins-init.sh
     nami_initialize jenkins
     info "Starting gosu... "
 fi
