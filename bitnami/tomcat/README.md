@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`9.0-debian-10`, `9.0.33-debian-10-r6`, `9.0`, `9.0.33`, `latest` (9.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.33-debian-10-r6/9.0/debian-10/Dockerfile)
+* [`9.0-debian-10`, `9.0.33-debian-10-r7`, `9.0`, `9.0.33`, `latest` (9.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.33-debian-10-r7/9.0/debian-10/Dockerfile)
 * [`8.5-debian-10`, `8.5.53-debian-10-r6`, `8.5`, `8.5.53` (8.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.53-debian-10-r6/8.5/debian-10/Dockerfile)
 * [`7-debian-10`, `7.0.103-debian-10-r3`, `7`, `7.0.103` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.103-debian-10-r3/7/debian-10/Dockerfile)
 
@@ -101,6 +101,13 @@ Additionally a helper symlink `/app` is present that points to the webapps deplo
 
 ```bash
 $ docker cp /path/to/app.war tomcat:/app
+```
+
+In case you want to create a custom image that already contains your application war file, you need to add it to the `/opt/bitnami/tomcat/webapps_default` folder. In the example below we create a forked image with an extra `.war` file.
+
+```
+FROM bitnami/tomcat:9.0
+COPY sample.war /opt/bitnami/tomcat/webapps_default
 ```
 
 **Note!**
