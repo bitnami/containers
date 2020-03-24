@@ -14,7 +14,6 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-repmg
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
-RUN useradd -r -u 1001 -g root postgresql-repmgr
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 RUN echo 'en_GB.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
@@ -23,7 +22,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /opt/bitnami/scripts/postgresql-repmgr/postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql-repmgr" \
-    BITNAMI_IMAGE_VERSION="10.12.0-debian-10-r44" \
+    BITNAMI_IMAGE_VERSION="10.12.0-debian-10-r45" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
