@@ -1,8 +1,8 @@
-FROM bitnami/node:10.19.0-debian-10-r38 as development
+FROM bitnami/node:10.19.0-debian-10-r39 as development
 
 ######
 
-FROM bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -17,7 +17,7 @@ COPY --from=development /opt/bitnami/licenses /opt/bitnami/licenses
 COPY --from=development /opt/bitnami/node /opt/bitnami/node
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="10.19.0-debian-10-r43-prod" \
+    BITNAMI_IMAGE_VERSION="10.19.0-debian-10-r44-prod" \
     PATH="/opt/bitnami/node/bin:$PATH"
 
 CMD [ "node" ]
