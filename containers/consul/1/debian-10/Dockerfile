@@ -14,12 +14,11 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3"
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "consul" "1.7.2-0" --checksum fa19390973f71c8f1d7662495d706daa4791a731ce8107e205224d015107882b
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
-RUN useradd -r -u 1001 -g root consul
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/consul/postunpack.sh
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.7.2-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="1.7.2-debian-10-r8" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/consul/bin:$PATH"
 
 EXPOSE 8300 8301 8500 8600
