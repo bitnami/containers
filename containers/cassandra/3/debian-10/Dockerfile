@@ -17,14 +17,13 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3"
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "cassandra" "3.11.6-0" --checksum c2377a0eb6296a652fe276b2d0ae0dfec0187694d0bbf541c16320517d77d62c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
-RUN useradd -r -u 1001 -g root cassandra
 RUN ln -s /opt/bitnami/scripts/cassandra/entrypoint.sh /entrypoint.sh
 RUN ln -s /opt/bitnami/scripts/cassandra/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/cassandra/postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.6-debian-10-r38" \
+    BITNAMI_IMAGE_VERSION="3.11.6-debian-10-r39" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/cassandra/bin:$PATH"
 
