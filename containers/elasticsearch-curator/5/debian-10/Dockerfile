@@ -16,12 +16,11 @@ RUN bitnami-pkg install gosu-1.11.0-3 --checksum c18bb8bcc95aa2494793ed5a506c4d0
 RUN bitnami-pkg install elasticsearch-curator-5.8.1-0 --checksum 5016c26931063aa77bb10543a5eadac3173e2f70b9092e0458f7176856a44178
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
-RUN useradd -r -u 1001 -g root elasticsearch-curator
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch-curator" \
-    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r56" \
+    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r57" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami"
