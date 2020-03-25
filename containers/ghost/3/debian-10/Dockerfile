@@ -18,12 +18,11 @@ RUN bitnami-pkg install gosu-1.11.0-3 --checksum c18bb8bcc95aa2494793ed5a506c4d0
 RUN bitnami-pkg unpack ghost-3.11.0-0 --checksum 3e66a47614408d130283ef129120c44f5c747e67a620fdba8a003e1e8e5d76d2
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
-RUN useradd -r -u 1001 -g root ghost
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="3.11.0-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="3.11.0-debian-10-r7" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
