@@ -61,16 +61,6 @@ export PGPOOL_ENABLE_LDAP="${PGPOOL_ENABLE_LDAP:-no}"
 export PGPOOL_TIMEOUT="360"
 export PGPOOL_ENABLE_LOAD_BALANCING="${PGPOOL_ENABLE_LOAD_BALANCING:-yes}"
 
-# LDAP
-export PGPOOL_LDAP_URI="${PGPOOL_LDAP_URI:-}"
-export PGPOOL_LDAP_BASE="${PGPOOL_LDAP_BASE:-}"
-export PGPOOL_LDAP_BIND_DN="${PGPOOL_LDAP_BIND_DN:-}"
-export PGPOOL_LDAP_BIND_PASSWORD="${PGPOOL_LDAP_BIND_PASSWORD:-}"
-export PGPOOL_LDAP_BASE_LOOKUP="${PGPOOL_LDAP_BASE_LOOKUP:-}"
-export PGPOOL_LDAP_NSS_INITGROUPS_IGNOREUSERS="${PGPOOL_LDAP_NSS_INITGROUPS_IGNOREUSERS:-root,nslcd}"
-export PGPOOL_LDAP_SCOPE="${PGPOOL_LDAP_SCOPE:-}"
-export PGPOOL_LDAP_TLS_REQCERT="${PGPOOL_LDAP_TLS_REQCERT:-}"
-
 EOF
     if [[ -f "${PGPOOL_ADMIN_PASSWORD_FILE:-}" ]]; then
         cat << "EOF"
@@ -134,8 +124,8 @@ pgpool_validate() {
     if [[ -z "$PGPOOL_SR_CHECK_USER" ]] || [[ -z "$PGPOOL_SR_CHECK_PASSWORD" ]]; then
         print_validation_error "The PostrgreSQL replication credentials are mandatory. Set the environment variables PGPOOL_SR_CHECK_USER and PGPOOL_SR_CHECK_PASSWORD with the PostrgreSQL replication credentials."
     fi
-    if is_boolean_yes "$PGPOOL_ENABLE_LDAP" && ( [[ -z "${PGPOOL_LDAP_URI}" ]] || [[ -z "${PGPOOL_LDAP_BASE}" ]] || [[ -z "${PGPOOL_LDAP_BIND_DN}" ]] || [[ -z "${PGPOOL_LDAP_BIND_PASSWORD}" ]] ); then
-        print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables PGPOOL_LDAP_URI, PGPOOL_LDAP_BASE, PGPOOL_LDAP_BIND_DN and PGPOOL_LDAP_BIND_PASSWORD with the LDAP configuration."
+    if is_boolean_yes "$PGPOOL_ENABLE_LDAP" && ( [[ -z "${LDAP_URI}" ]] || [[ -z "${LDAP_BASE}" ]] || [[ -z "${LDAP_BIND_DN}" ]] || [[ -z "${LDAP_BIND_PASSWORD}" ]] ); then
+        print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables LDAP_URI, LDAP_BASE, LDAP_BIND_DN and LDAP_BIND_PASSWORD with the LDAP configuration."
     fi
 
     if is_boolean_yes "$PGPOOL_ENABLE_LDAP" && ( ! is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA" || ! is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD" ); then
@@ -206,18 +196,6 @@ pgpool_healthcheck() {
 }
 
 ########################
-# Start nslcd in background
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-pgpool_start_nslcd_bg() {
-    info "Starting nslcd service in background..."
-    nslcd -d &
-}
-
-########################
 # Create basic pg_hba.conf file
 # Globals:
 #   PGPOOL_*
@@ -231,7 +209,7 @@ pgpool_create_pghba() {
     local postgres_auth_line=""
     info "Generating pg_hba.conf file..."
 
-    is_boolean_yes "$PGPOOL_ENABLE_LDAP" && authentication="pam pamservice=pgpool.pam"
+    is_boolean_yes "$PGPOOL_ENABLE_LDAP" && authentication="pam pamservice=pgpool"
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
         postgres_auth_line="host     all             ${PGPOOL_POSTGRES_USERNAME}       all         md5"
     fi
@@ -390,59 +368,6 @@ pgpool_create_config() {
 }
 
 ########################
-# Configure LDAP connections
-# Globals:
-#   PGPOOL_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-pgpool_ldap_config() {
-    local openldap_conf
-    info "Configuring LDAP connection..."
-
-    cat > "/etc/pam.d/pgpool.pam" << EOF
-auth     required  pam_ldap.so  try_first_pass debug
-account  required  pam_ldap.so  debug
-EOF
-    cat >> "/etc/nslcd.conf" << EOF
-# Configuration added for pgpool
-nss_initgroups_ignoreusers $PGPOOL_LDAP_NSS_INITGROUPS_IGNOREUSERS
-uri $PGPOOL_LDAP_URI
-base $PGPOOL_LDAP_BASE
-binddn $PGPOOL_LDAP_BIND_DN
-bindpw $PGPOOL_LDAP_BIND_PASSWORD
-EOF
-    if [[ -n "${PGPOOL_LDAP_BASE_LOOKUP}" ]]; then
-        cat >> "/etc/nslcd.conf" << EOF
-base passwd $PGPOOL_LDAP_BASE_LOOKUP
-EOF
-    fi
-    if [[ -n "${PGPOOL_LDAP_SCOPE}" ]]; then
-        cat >> "/etc/nslcd.conf" << EOF
-scope $PGPOOL_LDAP_SCOPE
-EOF
-    fi
-    if [[ -n "${PGPOOL_LDAP_TLS_REQCERT}" ]]; then
-            cat >> "/etc/nslcd.conf" << EOF
-tls_reqcert $PGPOOL_LDAP_TLS_REQCERT
-EOF
-    fi
-    chmod 600 /etc/nslcd.conf
-
-    case "$OS_FLAVOUR" in
-        debian-*) openldap_conf=/etc/ldap/ldap.conf ;;
-        centos-*|rhel-*|ol-*|photon-*) openldap_conf=/etc/openldap/ldap.conf ;;
-        *) ;;
-    esac
-    cat >>"${openldap_conf}"<<EOF
-BASE $PGPOOL_LDAP_BASE
-URI $PGPOOL_LDAP_URI
-EOF
-}
-
-########################
 # Generates a password file for local authentication
 # Globals:
 #   PGPOOL_*
@@ -528,9 +453,6 @@ pgpool_initialize() {
         info "No injected configuration files found. Creating default config files..."
         pgpool_create_pghba
         pgpool_create_config
-        if is_boolean_yes "$PGPOOL_ENABLE_LDAP"; then
-            pgpool_ldap_config
-        fi
         pgpool_generate_password_file
         pgpool_generate_admin_password_file
     fi
