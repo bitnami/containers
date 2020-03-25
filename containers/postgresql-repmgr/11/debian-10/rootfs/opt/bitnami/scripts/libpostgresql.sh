@@ -538,7 +538,7 @@ postgresql_create_admin_user() {
     local -r escaped_password="${POSTGRESQL_PASSWORD//\'/\'\'}"
     postgresql_info "Creating user ${POSTGRESQL_USERNAME}"
     echo "CREATE ROLE \"${POSTGRESQL_USERNAME}\" WITH LOGIN CREATEDB PASSWORD '${escaped_password}';" | postgresql_execute
-    postgresql_info "Grating access to \"${POSTGRESQL_USERNAME}\" to the database \"${POSTGRESQL_DATABASE}\""
+    postgresql_info "Granting access to \"${POSTGRESQL_USERNAME}\" to the database \"${POSTGRESQL_DATABASE}\""
     echo "GRANT ALL PRIVILEGES ON DATABASE \"${POSTGRESQL_DATABASE}\" TO \"${POSTGRESQL_USERNAME}\"\;" | postgresql_execute "" "postgres" "$POSTGRESQL_PASSWORD"
 }
 
