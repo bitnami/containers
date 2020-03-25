@@ -15,12 +15,11 @@ RUN bitnami-pkg unpack tensorflow-serving-2.1.0-0 --checksum b3a4277ea75e963cecd
 RUN bitnami-pkg install gosu-1.11.0-3 --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
-RUN useradd -r -u 1001 -g root tensorflow-serving
 RUN echo "deb http://http.us.debian.org/debian testing main non-free contrib" >> /etc/apt/sources.list && apt update && apt remove gcc-6 -y && install_packages gcc-7 libstdc++6
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r45" \
+    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r46" \
     NAMI_PREFIX="/.nami" \
     TENSORFLOW_SERVING_ENABLE_MONITORING="no" \
     TENSORFLOW_SERVING_MODEL_NAME="resnet" \
