@@ -1,7 +1,9 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV OS_ARCH="amd64" \
+ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
+    HOME="/" \
+    OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux"
 
@@ -18,10 +20,12 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/pgpool/postunpack.sh
 ENV BITNAMI_APP_NAME="pgpool" \
-    BITNAMI_IMAGE_VERSION="4.1.1-debian-10-r34" \
+    BITNAMI_IMAGE_VERSION="4.1.1-debian-10-r35" \
+    NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/pgpool/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 5432
 
+USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/pgpool/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/pgpool/run.sh" ]
