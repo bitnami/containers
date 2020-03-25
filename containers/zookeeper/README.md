@@ -51,7 +51,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.6.0-debian-10-r17`, `3`, `3.6.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.0-debian-10-r17/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.6.0-debian-10-r18`, `3`, `3.6.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.0-debian-10-r18/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
@@ -182,6 +182,7 @@ The configuration can easily be setup with the Bitnami ZooKeeper Docker image us
  - `ZOO_TICK_TIME`: Basic time unit in milliseconds used by ZooKeeper for heartbeats. Default: **2000**
  - `ZOO_INIT_LIMIT`: ZooKeeper uses to limit the length of time the ZooKeeper servers in quorum have to connect to a leader. Default: **10**
  - `ZOO_SYNC_LIMIT`: How far out of date a server can be from a leader. Default: **5**
+ - `ZOO_MAX_CNXNS`: Limits the total number of concurrent connections that can be made to a ZooKeeper server. Setting it to 0 entirely removes the limit. Default: **0**
  - `ZOO_MAX_CLIENT_CNXNS`: Limits the number of concurrent connections that a single client may make to a single member of the ZooKeeper ensemble. Default **60**
  - `ZOO_4LW_COMMANDS_WHITELIST`: List of whitelisted [4LW](https://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_4lw) commands. Default **srvr, mntr**
  - `ZOO_SERVERS`: Comma, space or colon separated list of servers. Example: zoo1:2888:3888,zoo2:2888:3888. No defaults.
