@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+  mariadb-galera:
+    image: 'bitnami/mariadb-galera:10.4'
+    ports:
+      - '3306:3306'
+      - '4444:4444'
+      - '4567:4567'
+      - '4568:4568'
+    volumes:
+      - 'mariadb_galera_data:/bitnami/mariadb'
+    environment:
+      - MARIADB_ROOT_PASSWORD=root-password
+      - MARIADB_GALERA_MARIABACKUP_PASSWORD=backup-password
+      - MARIADB_USER=user01
+      - MARIADB_DATABASE=my_database
+      - MARIADB_ENABLE_LDAP=yes
+      - LDAP_URI=ldap://ldap
+      - LDAP_BASE=dc=example,dc=org
+      - LDAP_BIND_DN=cn=admin,dc=example,dc=org
+      - LDAP_BIND_PASSWORD=adminpassword
+  ldap:
+    image: 'juanariza131/openldap:latest'
+    ports:
+      - '389:389'
+    environment:
+      - LDAP_ADMIN_USERNAME=admin
+      - LDAP_ADMIN_PASSWORD=adminpassword
+      - LDAP_USERS=user01
+      - LDAP_PASSWORDS=password1
+
+volumes:
+  mariadb_galera_data:
+    driver: local
