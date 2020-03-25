@@ -36,6 +36,10 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
+# Why use a non-root container?
+
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
@@ -46,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10.4-debian-10`, `10.4.12-debian-10-r52`, `10.4`, `10.4.12` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.12-debian-10-r52/10.4/debian-10/Dockerfile)
 * [`10.3-debian-10`, `10.3.22-debian-10-r53`, `10.3`, `10.3.22`, `latest` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.22-debian-10-r53/10.3/debian-10/Dockerfile)
 * [`10.2-debian-10`, `10.2.31-debian-10-r52`, `10.2`, `10.2.31` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.31-debian-10-r52/10.2/debian-10/Dockerfile)
-* [`10.1-debian-10`, `10.1.44-debian-10-r52`, `10.1`, `10.1.44` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.44-debian-10-r52/10.1/debian-10/Dockerfile)
+* [`10.1-debian-10`, `10.1.44-debian-10-r53`, `10.1`, `10.1.44` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.44-debian-10-r53/10.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb-galera GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb-galera).
 
@@ -118,7 +122,7 @@ Use the `--network app-tier` argument to the `docker run` command to attach the 
 
 ```bash
 $ docker run -d --name mariadb-galera \
-    -e ALLOW_EMPTY_PASSWORD=yes \
+    --env ALLOW_EMPTY_PASSWORD=yes \
     --network app-tier \
     bitnami/mariadb-galera:latest
 ```
@@ -184,8 +188,8 @@ Passing extra command-line flags to the mysqld service command is possible throu
 
 ```bash
 $ docker run --name mariadb \
-  -e ALLOW_EMPTY_PASSWORD=yes \
-  -e MARIADB_EXTRA_FLAGS='--max-connect-errors=1000 --max_connections=155' \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env MARIADB_EXTRA_FLAGS='--max-connect-errors=1000 --max_connections=155' \
     bitnami/mariadb-galera:latest
 ```
 
@@ -211,7 +215,7 @@ Passing the `MARIADB_ROOT_PASSWORD` environment variable when running the image 
 
 ```bash
 $ docker run --name mariadb \
-  -e MARIADB_ROOT_PASSWORD=password123 \
+  --env MARIADB_ROOT_PASSWORD=password123 \
   bitnami/mariadb-galera:latest
 ```
 
@@ -234,7 +238,7 @@ By default the MariaDB Galera image expects all the available passwords to be se
 
 ```bash
 $ docker run --name mariadb \
-  -e ALLOW_EMPTY_PASSWORD=yes \
+  --env ALLOW_EMPTY_PASSWORD=yes \
   bitnami/mariadb-galera:latest
 ```
 
@@ -256,8 +260,8 @@ By passing the `MARIADB_DATABASE` environment variable when running the image fo
 
 ```bash
 $ docker run --name mariadb \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -e MARIADB_DATABASE=my_database \
+    --env ALLOW_EMPTY_PASSWORD=yes \
+    --env MARIADB_DATABASE=my_database \
     bitnami/mariadb-galera:latest
 ```
 
@@ -279,10 +283,10 @@ You can create a restricted database user that only has permissions for the data
 
 ```bash
 $ docker run --name mariadb \
-  -e ALLOW_EMPTY_PASSWORD=yes \
-  -e MARIADB_USER=my_user \
-  -e MARIADB_PASSWORD=my_password \
-  -e MARIADB_DATABASE=my_database \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env MARIADB_USER=my_user \
+  --env MARIADB_PASSWORD=my_password \
+  --env MARIADB_DATABASE=my_database \
   bitnami/mariadb-galera:latest
 ```
 
@@ -306,31 +310,26 @@ services:
 
 LDAP configuration parameters must be specified if you wish to enable LDAP support for your MariaDB Galera cluster. The following environment variables are available to configure LDAP support:
 
- - `MARIADB_LDAP_URI`: LDAP URL beginning in the form `ldap[s]://<hostname>:<port>`. No defaults.
-
- - `MARIADB_LDAP_BASE`: LDAP base DN. No defaults.
-
- - `MARIADB_LDAP_BIND_DN`: LDAP bind DN. No defaults.
-
- - `MARIADB_LDAP_BIND_PASSWORD`: LDAP bind password. No defaults.
-
- - `MARIADB_LDAP_BASE_LOOKUP`: LDAP base lookup (Optional). No defaults.
-
- - `MARIADB_LDAP_NSS_INITGROUPS_IGNOREUSERS`: LDAP ignored users. Defaults to `root,nslcd`.
-
- - `MARIADB_LDAP_SCOPE`: LDAP search scope (Optional). No defaults.
-
- - `MARIADB_LDAP_TLS_REQCERT`: LDAP TLS check on server certificates (Optional). No defaults.
+- `MARIADB_ENABLE_LDAP`: Whether to enable LDAP authentication. Defaults to `no`.
+- `LDAP_URI`: LDAP URL beginning in the form `ldap[s]:/<hostname>:<port>`. No defaults.
+- `LDAP_BASE`: LDAP base DN. No defaults.
+- `LDAP_BIND_DN`: LDAP bind DN. No defaults.
+- `LDAP_BIND_PASSWORD`: LDAP bind password. No defaults.
+- `LDAP_BASE_LOOKUP`: LDAP base lookup (Optional). No defaults.
+- `LDAP_NSS_INITGROUPS_IGNOREUSERS`: LDAP ignored users. Defaults to `root,nslcd`.
+- `LDAP_SCOPE`: LDAP search scope (Optional). No defaults.
+- `LDAP_TLS_REQCERT`: LDAP TLS check on server certificates (Optional). No defaults.
 
 ### Step 1: Start MariaDB Galera with LDAP support
 
 ```bash
 $ docker run --name mariadb \
-  -e ALLOW_EMPTY_PASSWORD=yes \
-  -e MARIADB_LDAP_URI=ldap://ldap.example.org/ \
-  -e MARIADB_LDAP_BASE=dc=example,dc=org \
-  -e MARIADB_LDAP_BIND_DN=cn=admin,dc=example,dc=org \
-  -e MARIADB_LDAP_BIND_PASSWORD=admin \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env MARIADB_ENABLE_LDAP=yes \
+  --env LDAP_URI=ldap://ldap.example.org/ \
+  --env LDAP_BASE=dc=example,dc=org \
+  --env LDAP_BIND_DN=cn=admin,dc=example,dc=org \
+  --env LDAP_BIND_PASSWORD=admin \
   bitnami/mariadb-galera:latest
 ```
 
@@ -341,14 +340,15 @@ services:
   mariadb:
   ...
     environment:
-      - MARIADB_LDAP_URI=ldap://ldap.example.org/
-      - MARIADB_LDAP_BASE=dc=example,dc=org
-      - MARIADB_LDAP_BIND_DN=cn=admin,dc=example,dc=org
-      - MARIADB_LDAP_BIND_PASSWORD=admin
+      - MARIADB_ENABLE_LDAP=yes
+      - LDAP_URI=ldap://ldap.example.org/
+      - LDAP_BASE=dc=example,dc=org
+      - LDAP_BIND_DN=cn=admin,dc=example,dc=org
+      - LDAP_BIND_PASSWORD=admin
   ...
 ```
 
-**Note**: The LDAP connection parameters can be fine tuned by specifying the `MARIADB_LDAP_BASE_LOOKUP`, `MARIADB_LDAP_SCOPE` and `MARIADB_LDAP_TLS_REQCERT` environment variables.
+**Note**: The LDAP connection parameters can be fine tuned by specifying the `LDAP_BASE_LOOKUP`, `LDAP_SCOPE` and `LDAP_TLS_REQCERT` environment variables.
 
 ### Step 2: Configure PAM authenticated LDAP users
 
@@ -366,17 +366,12 @@ Refer to the [OpenLDAP Administrator's Guide](https://www.openldap.org/doc/admin
 
 A **zero downtime** MariaDB Galera [replication](https://dev.mysql.com/doc/refman/5.7/en/server-option-variable-reference.html) cluster can easily be setup with the Bitnami MariaDB Galera Docker image by starting additional MariaDB Galera nodes. The following environment variables are available to configure the cluster:
 
- - `MARIADB_GALERA_CLUSTER_BOOTSTRAP`: Whether node is first node of the cluster. No defaults.
-
- - `MARIADB_GALERA_CLUSTER_NAME`: Galera cluster name. Default to `galera`.
-
- - `MARIADB_GALERA_CLUSTER_ADDRESS`: Galera cluster address to join. Defaults to `gcomm://` on a bootstrap node.
-
- - `MARIADB_GALERA_NODE_ADDRESS`: Node address to report to the Galera cluster. Defaults to eth0 address inside container.
-
- - `MARIADB_GALERA_MARIABACKUP_USER`: [mariabackup](https://mariadb.com/kb/en/library/mariabackup-overview/) username for [State Snapshot Transfer(SST)](https://galeracluster.com/library/documentation/glossary.html#term-state-snapshot-transfer). Defaults to `mariabackup`.
-
- - `MARIADB_GALERA_MARIABACKUP_PASSWORD`: [mariabackup](https://mariadb.com/kb/en/library/mariabackup-overview/) password for SST. No defaults.
+- `MARIADB_GALERA_CLUSTER_BOOTSTRAP`: Whether node is first node of the cluster. No defaults.
+- `MARIADB_GALERA_CLUSTER_NAME`: Galera cluster name. Default to `galera`.
+- `MARIADB_GALERA_CLUSTER_ADDRESS`: Galera cluster address to join. Defaults to `gcomm://` on a bootstrap node.
+- `MARIADB_GALERA_NODE_ADDRESS`: Node address to report to the Galera cluster. Defaults to eth0 address inside container.
+- `MARIADB_GALERA_MARIABACKUP_USER`: [mariabackup](https://mariadb.com/kb/en/library/mariabackup-overview/) username for [State Snapshot Transfer(SST)](https://galeracluster.com/library/documentation/glossary.html#term-state-snapshot-transfer). Defaults to `mariabackup`.
+- `MARIADB_GALERA_MARIABACKUP_PASSWORD`: [mariabackup](https://mariadb.com/kb/en/library/mariabackup-overview/) password for SST. No defaults.
 
 In a MariaDB Galera cluster the first node should be a bootstrap node (started with `MARIADB_GALERA_CLUSTER_BOOTSTRAP=yes`). The other nodes in the cluster should not be started with this environment variable, instead the `MARIADB_GALERA_CLUSTER_ADDRESS` variable should be specified. All the nodes in the MariaDB Galera cluster are in read-write mode and therefore offers high availability for high traffic applications.
 
@@ -386,14 +381,14 @@ The first step is to start the MariaDB Galera bootstrap node.
 
 ```bash
 $ docker run --name mariadb-galera-0 \
-  -e MARIADB_GALERA_CLUSTER_BOOTSTRAP=yes \
-  -e MARIADB_GALERA_CLUSTER_NAME=my_galera \
-  -e MARIADB_GALERA_MARIABACKUP_USER=my_mariabackup_user \
-  -e MARIADB_GALERA_MARIABACKUP_PASSWORD=my_mariabackup_password \
-  -e MARIADB_ROOT_PASSWORD=my_root_password \
-  -e MARIADB_USER=my_user \
-  -e MARIADB_PASSWORD=my_password \
-  -e MARIADB_DATABASE=my_database \
+  --env MARIADB_GALERA_CLUSTER_BOOTSTRAP=yes \
+  --env MARIADB_GALERA_CLUSTER_NAME=my_galera \
+  --env MARIADB_GALERA_MARIABACKUP_USER=my_mariabackup_user \
+  --env MARIADB_GALERA_MARIABACKUP_PASSWORD=my_mariabackup_password \
+  --env MARIADB_ROOT_PASSWORD=my_root_password \
+  --env MARIADB_USER=my_user \
+  --env MARIADB_PASSWORD=my_password \
+  --env MARIADB_DATABASE=my_database \
   bitnami/mariadb-galera:latest
 ```
 
@@ -405,10 +400,10 @@ Next we add a new node to the cluster.
 
 ```bash
 $ docker run --name mariadb-galera-1 --link mariadb-galera-0:mariadb-galera \
-  -e MARIADB_GALERA_CLUSTER_NAME=my_galera \
-  -e MARIADB_GALERA_CLUSTER_ADDRESS=gcomm://mariadb-galera \
-  -e MARIADB_GALERA_MARIABACKUP_USER=my_mariabackup_user \
-  -e MARIADB_GALERA_MARIABACKUP_PASSWORD=my_mariabackup_password \
+  --env MARIADB_GALERA_CLUSTER_NAME=my_galera \
+  --env MARIADB_GALERA_CLUSTER_ADDRESS=gcomm://mariadb-galera \
+  --env MARIADB_GALERA_MARIABACKUP_USER=my_mariabackup_user \
+  --env MARIADB_GALERA_MARIABACKUP_PASSWORD=my_mariabackup_password \
   bitnami/mariadb-galera:latest
 ```
 
@@ -436,9 +431,9 @@ max_allowed_packet=32M
 ```bash
 $ docker run --name mariadb \
     -p 3306:3306 \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -v /path/to/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro \
-    -v /path/to/mariadb-persistence:/bitnami/mariadb \
+    --env ALLOW_EMPTY_PASSWORD=yes \
+    --volume /path/to/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro \
+    --volume /path/to/mariadb-persistence:/bitnami/mariadb \
     bitnami/mariadb-galera:latest
 ```
 
@@ -464,8 +459,8 @@ It is also possible to use your custom `my.cnf` and overwrite the main configura
 
 ```bash
 $ docker run --name mariadb \
-  -e ALLOW_EMPTY_PASSWORD=yes \
-  -v /path/to/my.cnf:/opt/bitnami/mariadb/conf/my.cnf:ro \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --volume /path/to/my.cnf:/opt/bitnami/mariadb/conf/my.cnf:ro \
   bitnami/mariadb-galera:latest
 ```
 
@@ -554,6 +549,14 @@ $ docker-compose up mariadb
 - [Create An EMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
 # Notable Changes
+
+## 10.4.12-debian-10-r53, 10.3.22-debian-10-r54, 10.2.31-debian-10-r53, and 10.1.44-debian-10-r53
+
+- The MariaDB Galera container has been migrated to a "non-root" user approach. Previously the container ran as the `root` user, and the MySQL daemon was started as the `mysql` user. From now on, both the container and the MySQL daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+- Consequences:
+  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the data site by creating a backup of the databse, and restoring it on a new MariaDB Galera container. In the link below you can find a guide that explain the whole process:
+    - [Create And Restore MySQL/MariaDB Backups](https://docs.bitnami.com/general/infrastructure/mariadb/administration/backup-restore-mysql-mariadb/)
+- Environment variables related to LDAP configuration were renamed removing the `MARIADB_` prefix. For instance, to indicate the LDAP URI to use, you must set `LDAP_URI` instead of `MARIADB_LDAP_URI`.
 
 ## 10.1.43-centos-7-r78, 10.2.30-centos-7-r40, 10.3.21-centos-7-r41, and 10.4.11-centos-7-r32
 

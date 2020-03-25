@@ -70,7 +70,7 @@ get_galera_cluster_address_value() {
 #########################
 mysql_env() {
     cat <<"EOF"
-export ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD:-no}
+# Paths
 export DB_FLAVOR="${DB_FLAVOR:-"mysql"}"
 export DB_VOLUME_DIR="/bitnami/$DB_FLAVOR"
 export DB_DATA_DIR="$DB_VOLUME_DIR/data"
@@ -81,8 +81,13 @@ export DB_TMP_DIR="$DB_BASE_DIR/tmp"
 export DB_BIN_DIR="$DB_BASE_DIR/bin"
 export DB_SBIN_DIR="${DB_SBIN_DIR:-$DB_BASE_DIR/bin}"
 export PATH="$DB_BIN_DIR:$PATH"
+
+# Users
 export DB_DAEMON_USER="mysql"
 export DB_DAEMON_GROUP="mysql"
+
+# Settings
+export ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD:-no}
 PORT_NUMBER="$(get_env_var_value PORT_NUMBER)"
 export DB_PORT_NUMBER="${PORT_NUMBER:-3306}"
 export DB_DATABASE="$(get_env_var_value DATABASE)"
@@ -99,17 +104,10 @@ export DB_GALERA_NODE_ADDRESS="$(get_env_var_value GALERA_NODE_ADDRESS)"
 export DB_GALERA_MARIABACKUP_USER="$(get_env_var_value GALERA_MARIABACKUP_USER)"
 export DB_GALERA_MARIABACKUP_USER="${DB_GALERA_MARIABACKUP_USER:-mariabackup}"
 export DB_GALERA_MARIABACKUP_PASSWORD="$(get_env_var_value GALERA_MARIABACKUP_PASSWORD)"
-export DB_LDAP_URI="$(get_env_var_value LDAP_URI)"
-export DB_LDAP_BASE="$(get_env_var_value LDAP_BASE)"
-export DB_LDAP_BIND_DN="$(get_env_var_value LDAP_BIND_DN)"
-export DB_LDAP_BIND_PASSWORD="$(get_env_var_value LDAP_BIND_PASSWORD)"
-export DB_LDAP_BASE_LOOKUP="$(get_env_var_value LDAP_BASE_LOOKUP)"
-DB_LDAP_NSS_INITGROUPS_IGNOREUSERS="$(get_env_var_value LDAP_NSS_INITGROUPS_IGNOREUSERS)"
-export DB_LDAP_NSS_INITGROUPS_IGNOREUSERS="${DB_LDAP_NSS_INITGROUPS_IGNOREUSERS:-root,nslcd}"
-export DB_LDAP_SCOPE="$(get_env_var_value LDAP_SCOPE)"
-export DB_LDAP_TLS_REQCERT="$(get_env_var_value LDAP_TLS_REQCERT)"
 read -r -a DB_EXTRA_FLAGS <<< "$(mysql_extra_flags)"
 export DB_EXTRA_FLAGS
+ENABLE_LDAP="$(get_env_var_value ENABLE_LDAP)"
+export DB_ENABLE_LDAP="${ENABLE_LDAP:-no}"
 EOF
 }
 
@@ -156,8 +154,12 @@ mysql_validate() {
             if (( ${#DB_ROOT_PASSWORD} > 32 )); then
                 print_validation_error "The password can not be longer than 32 characters. Set the environment variable $(get_env_var ROOT_PASSWORD) with a shorter value (currently ${#DB_ROOT_PASSWORD} characters)"
             fi
-            if [[ -n "$DB_USER" ]] && [[ -z "$DB_PASSWORD" ]]; then
-                empty_password_error "$(get_env_var PASSWORD)"
+            if [[ -n "$DB_USER" ]]; then
+                if is_boolean_yes "$DB_ENABLE_LDAP" && [[ -n "$DB_PASSWORD" ]]; then
+                    warn "You enabled LDAP authentication. '$DB_USER' user will be authentication using LDAP, the password set at the environment variable $(get_env_var PASSWORD) will be ignored"
+                elif ! is_boolean_yes "$DB_ENABLE_LDAP" && [[ -z "$DB_PASSWORD" ]]; then
+                    empty_password_error "$(get_env_var PASSWORD)"
+                fi
             fi
         fi
     fi
@@ -175,6 +177,10 @@ mysql_validate() {
     fi
     if [[ "${DB_PASSWORD:-}" = *\\* ]]; then
         backslash_password_error "$(get_env_var PASSWORD)"
+    fi
+
+    if is_boolean_yes "$DB_ENABLE_LDAP" && ( [[ -z "${LDAP_URI}" ]] || [[ -z "${LDAP_BASE}" ]] || [[ -z "${LDAP_BIND_DN}" ]] || [[ -z "${LDAP_BIND_PASSWORD}" ]] ); then
+        print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables LDAP_URI, LDAP_BASE, LDAP_BIND_DN and LDAP_BIND_PASSWORD with the LDAP configuration."
     fi
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
@@ -349,7 +355,18 @@ EOF
 
             mysql_ensure_root_user_exists "$DB_ROOT_USER" "$DB_ROOT_PASSWORD"
             mysql_ensure_user_not_exists "" # ensure unknown user does not exist
-            mysql_ensure_optional_database_exists "$DB_DATABASE" "$DB_USER" "$DB_PASSWORD"
+            if [[ -n "$DB_DATABASE" ]]; then
+                local -a flags=()
+                if [[ -n "$DB_USER" ]]; then
+                    flags=("-u" "$DB_USER")
+                    if is_boolean_yes "$DB_ENABLE_LDAP"; then
+                        flags=("${flags[@]}" "--use-ldap")
+                    elif [[ -n "$DB_PASSWORD" ]]; then
+                        flags=("${flags[@]}" "-p" "$DB_PASSWORD")
+                    fi
+                fi
+                mysql_ensure_optional_database_exists "$DB_DATABASE" "${flags[@]}"
+            fi
             mysql_ensure_galera_mariabackup_user_exists "$DB_GALERA_MARIABACKUP_USER" "$DB_GALERA_MARIABACKUP_PASSWORD"
             mysql_ensure_replication_user_exists "monitor" "monitor"
 
@@ -407,59 +424,6 @@ mysql_custom_init_scripts() {
             esac
         done
         touch "$DB_VOLUME_DIR"/.user_scripts_initialized
-    fi
-}
-
-########################
-# Configure LDAP connections
-# Globals:
-#   LDAP_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-ldap_config() {
-    local openldap_conf
-    if [[ -n "${DB_LDAP_URI}" && "${DB_LDAP_BASE}" && "${DB_LDAP_BIND_DN}" && "${DB_LDAP_BIND_PASSWORD}" ]]; then
-        info "Configuring LDAP connection"
-        cat >>"/etc/nslcd.conf"<<EOF
-nss_initgroups_ignoreusers $DB_LDAP_NSS_INITGROUPS_IGNOREUSERS
-uri $DB_LDAP_URI
-base $DB_LDAP_BASE
-binddn $DB_LDAP_BIND_DN
-bindpw $DB_LDAP_BIND_PASSWORD
-EOF
-
-        if [[ -n "${DB_LDAP_BASE_LOOKUP}" ]]; then
-            cat >>"/etc/nslcd.conf"<<EOF
-base passwd $DB_LDAP_BASE_LOOKUP
-EOF
-        fi
-        if [[ -n "${DB_LDAP_SCOPE}" ]]; then
-            cat >>"/etc/nslcd.conf"<<EOF
-scope $DB_LDAP_SCOPE
-EOF
-        fi
-        if [[ -n "${DB_LDAP_TLS_REQCERT}" ]]; then
-            cat >>"/etc/nslcd.conf"<<EOF
-tls_reqcert $DB_LDAP_TLS_REQCERT
-EOF
-        fi
-        chmod 600 /etc/nslcd.conf
-
-        case "$OS_FLAVOUR" in
-            debian-*) openldap_conf=/etc/ldap/ldap.conf ;;
-            centos-*|rhel-*|ol-*|photon-*) openldap_conf=/etc/openldap/ldap.conf ;;
-            *) ;;
-        esac
-
-        cat >>"${openldap_conf}"<<EOF
-BASE $DB_LDAP_BASE
-URI $DB_LDAP_URI
-EOF
-
-        nslcd --debug &
     fi
 }
 
@@ -541,7 +505,7 @@ get_master_env_var_value() {
     local envVar
 
     PREFIX=""
-    [[ "$DB_REPLICATION_MODE" = "slave" ]] && PREFIX="MASTER_"
+    [[ "${DB_REPLICATION_MODE:-}" = "slave" ]] && PREFIX="MASTER_"
     envVar="$(get_env_var "${PREFIX}${1}_FILE")"
     if [[ -f "${!envVar:-}" ]]; then
 	      echo "$(< "${!envVar}")"
@@ -777,26 +741,58 @@ migrate_old_configuration() {
 # Ensure a db user exists with the given password for the '%' host
 # Globals:
 #   DB_*
+# Flags:
+#   -p|--password - database password
+#   -u|--user - database user
+#   --auth-plugin - authentication plugin
+#   --use-ldap - authenticate user via LDAP
 # Arguments:
-#   $1 - db user
-#   $2 - password
-#   $3 - authentication plugin
+#   $1 - database user
 # Returns:
 #   None
 #########################
 mysql_ensure_user_exists() {
     local -r user="${1:?user is required}"
-    local -r password="${2:-}"
-    local -r auth_plugin="${3:-}"
+    local password=""
+    local auth_plugin=""
+    local use_ldap="no"
     local hosts
-    local auth_plugin_str=""
+    local auth_string=""
 
-    if [[ -n "$auth_plugin" ]]; then
-        auth_plugin_str="with $auth_plugin"
+    # Validate arguments
+    shift 1
+    while [ "$#" -gt 0 ]; do
+        case "$1" in
+            -p|--password)
+                shift
+                password="${1:?missing database password}"
+                ;;
+            --auth-plugin)
+                shift
+                auth_plugin="${1:?missing authentication plugin}"
+                ;;
+            --use-ldap)
+                use_ldap="yes"
+                ;;
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+    if is_boolean_yes "$use_ldap"; then
+        auth_string="identified via pam using '$DB_FLAVOR'"
+    elif [[ -n "$password" ]]; then
+        if [[ -n "$auth_plugin" ]]; then
+            auth_string="identified with $auth_plugin by '$password'"
+        else
+            auth_string="identified by '$password'"
+        fi
     fi
     debug "creating database user \'$user\'"
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-create $([[ "$DB_FLAVOR" = "mariadb" ]] && echo "or replace") user '$user'@'%' $([[ "$password" != "" ]] && echo "identified $auth_plugin_str by '$password'");
+create $([[ "$DB_FLAVOR" = "mariadb" ]] && echo "or replace") user '$user'@'%' $auth_string;
 EOF
     debug "Removing all other hosts for the user"
     hosts=$(mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
@@ -922,28 +918,62 @@ EOF
 ########################
 # Optionally create the given database, and then optionally create a user with
 # full privileges on the database.
-# Globals:
-#   DB_*
+# Flags:
+#   -p|--password - database password
+#   -u|--user - database user
+#   --auth-plugin - authentication plugin
+#   --use-ldap - authenticate user via LDAP
 # Arguments:
 #   $1 - database name
-#   $2 - database user
-#   $3 - database password
-#   $4 - authentication plugin
 # Returns:
 #   None
 #########################
 mysql_ensure_optional_database_exists() {
-    local -r database="${1:-}"
-    local -r user="${2:-}"
-    local -r password="${3:-}"
-    local -r auth_plugin="${4:-}"
+    local -r database="${1:?database is missing}"
+    local user=""
+    local password=""
+    local auth_plugin=""
+    local use_ldap="no"
 
-    if [[ "$database" != "" ]]; then
-        mysql_ensure_database_exists "$database"
-        if [[ "$user" != "" ]]; then
-            mysql_ensure_user_exists "$user" "$password" "$auth_plugin"
-            mysql_ensure_user_has_database_privileges "$user" "$database"
+    # Validate arguments
+    shift 1
+    while [ "$#" -gt 0 ]; do
+        case "$1" in
+            -p|--password)
+                shift
+                password="${1:?missing database password}"
+                ;;
+            -u|--user)
+                shift
+                user="${1:?missing database user}"
+                ;;
+            --auth-plugin)
+                shift
+                auth_plugin="${1:?missing authentication plugin}"
+                ;;
+            --use-ldap)
+                use_ldap="yes"
+                ;;
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+
+    mysql_ensure_database_exists "$database"
+
+    if [[ -n "$user" ]]; then
+        local -a flags=()
+        if is_boolean_yes "$use_ldap"; then
+            flags=("${flags[@]}" "--use-ldap")
+        elif [[ -n "$password" ]]; then
+            flags=("${flags[@]}" "-p" "$password")
+            [[ -n "$auth_plugin" ]] && flags=("${flags[@]}" "--auth-plugin" "$auth_plugin")
         fi
+        mysql_ensure_user_exists "$user" "${flags[@]}"
+        mysql_ensure_user_has_database_privileges "$user" "$database"
     fi
 }
 
