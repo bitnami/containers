@@ -3,15 +3,15 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl procps sudo unzip wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cert-manager-0.14.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "d6cb0dee71ba5e5ec57a930cde60479aec67208470093d0829eeef96c8dbe7ed  /tmp/bitnami/pkg/cache/cert-manager-0.14.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/cert-manager-0.14.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/cert-manager-0.14.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cert-manager-0.14.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "f4113f2eb0961a4016ebf18d696f4bd99182e25dca0201d7281fff631c69bbb2  /tmp/bitnami/pkg/cache/cert-manager-0.14.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/cert-manager-0.14.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/cert-manager-0.14.1-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="cert-manager" \
-    BITNAMI_IMAGE_VERSION="0.14.0-debian-10-r9" \
+    BITNAMI_IMAGE_VERSION="0.14.1-debian-10-r0" \
     PATH="/opt/bitnami/cert-manager/bin:$PATH"
 
 WORKDIR /opt/bitnami/cert-manager
