@@ -1019,9 +1019,9 @@ mysql_ensure_optional_database_exists() {
     if [[ -n "$user" ]]; then
         local -a flags=()
         if is_boolean_yes "$use_ldap"; then
-            flags=("${flags[@]}" "--use-ldap")
+            flags=("--use-ldap")
         elif [[ -n "$password" ]]; then
-            flags=("${flags[@]}" "-p" "$password")
+            flags=("-p" "$password")
             [[ -n "$auth_plugin" ]] && flags=("${flags[@]}" "--auth-plugin" "$auth_plugin")
         fi
         mysql_ensure_user_exists "$user" "${flags[@]}"
