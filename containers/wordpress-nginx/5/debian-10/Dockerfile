@@ -25,7 +25,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="5.3.2-debian-10-r57" \
+    BITNAMI_IMAGE_VERSION="5.3.2-debian-10-r58" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
