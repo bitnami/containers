@@ -1,0 +1,4 @@
+version: '2'
+services:
+  metallb-speaker:
+    image: bitnami/metallb-speaker:0
