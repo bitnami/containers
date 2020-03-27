@@ -345,7 +345,7 @@ services:
 ```
 ## Initializing with custom scripts
 
-When the container is executed for the first time, it will execute the files with extensions `.sh` and `.cql` located at `/docker-entrypoint-initdb.d`. This behavior can be skipped by setting the environment variable `CASSANDRA_IGNORE_INITDB_SCRIPTS`.
+When the container is executed for the first time, it will execute the files with extensions `.sh`, `.cql` or `.cql.gz` located at `/docker-entrypoint-initdb.d` in `sort`ed order by filename. This behavior can be skipped by setting the environment variable `CASSANDRA_IGNORE_INITDB_SCRIPTS` to a value other than `yes` or `true`.
 
 In order to have your custom files inside the docker image you can mount them as a volume.
 
