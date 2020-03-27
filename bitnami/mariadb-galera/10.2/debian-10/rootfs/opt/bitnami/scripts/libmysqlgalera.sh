@@ -356,16 +356,16 @@ EOF
             mysql_ensure_root_user_exists "$DB_ROOT_USER" "$DB_ROOT_PASSWORD"
             mysql_ensure_user_not_exists "" # ensure unknown user does not exist
             if [[ -n "$DB_DATABASE" ]]; then
-                local -a flags=()
                 if [[ -n "$DB_USER" ]]; then
-                    flags=("-u" "$DB_USER")
+                    local -a flags=("-u" "$DB_USER")
                     if is_boolean_yes "$DB_ENABLE_LDAP"; then
                         flags=("${flags[@]}" "--use-ldap")
                     elif [[ -n "$DB_PASSWORD" ]]; then
                         flags=("${flags[@]}" "-p" "$DB_PASSWORD")
                     fi
+                    mysql_ensure_optional_database_exists "$DB_DATABASE" "${flags[@]:-}"
                 fi
-                mysql_ensure_optional_database_exists "$DB_DATABASE" "${flags[@]}"
+                mysql_ensure_optional_database_exists "$DB_DATABASE"
             fi
             mysql_ensure_galera_mariabackup_user_exists "$DB_GALERA_MARIABACKUP_USER" "$DB_GALERA_MARIABACKUP_PASSWORD"
             mysql_ensure_replication_user_exists "monitor" "monitor"
@@ -965,14 +965,15 @@ mysql_ensure_optional_database_exists() {
     mysql_ensure_database_exists "$database"
 
     if [[ -n "$user" ]]; then
-        local -a flags=()
         if is_boolean_yes "$use_ldap"; then
-            flags=("--use-ldap")
+            mysql_ensure_user_exists "$user" "--use-ldap"
         elif [[ -n "$password" ]]; then
-            flags=("-p" "$password")
+            local -a flags=("-p" "$password")
             [[ -n "$auth_plugin" ]] && flags=("${flags[@]}" "--auth-plugin" "$auth_plugin")
+            mysql_ensure_user_exists "$user" "${flags[@]:-}"
+        else
+            mysql_ensure_user_exists "$user"
         fi
-        mysql_ensure_user_exists "$user" "${flags[@]}"
         mysql_ensure_user_has_database_privileges "$user" "$database"
     fi
 }
