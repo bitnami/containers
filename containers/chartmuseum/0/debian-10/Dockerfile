@@ -11,13 +11,13 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl procps sudo unzip
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "chartmuseum" "0.11.0-0" --checksum ccb9cd2b2b6f2c4465845df78cacced691e35e846a9b98671003ebc04b32990e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "chartmuseum" "0.12.0-0" --checksum 0ade8309343e000747228a538a371cbc98fe8340814c860f98deb857621edd19
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r59" \
+    BITNAMI_IMAGE_VERSION="0.12.0-debian-10-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/chartmuseum/bin:$PATH"
 
