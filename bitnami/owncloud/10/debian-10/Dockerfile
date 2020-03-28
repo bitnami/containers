@@ -17,6 +17,8 @@ RUN bitnami-pkg unpack owncloud-10.4.0-0 --checksum 08fba88336e412b8e7d64b281b53
 RUN bitnami-pkg install gosu-1.11.0-3 --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log && \
+    ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
@@ -24,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.4.0-debian-10-r15" \
+    BITNAMI_IMAGE_VERSION="10.4.0-debian-10-r16" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -44,4 +46,4 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
 EXPOSE 80 443
 
 ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "nami", "start", "--foreground", "apache" ]
+CMD [ "httpd", "-f", "/opt/bitnami/apache/conf/httpd.conf", "-DFOREGROUND" ]
