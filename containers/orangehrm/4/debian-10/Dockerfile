@@ -13,10 +13,12 @@ RUN bitnami-pkg unpack php-7.2.29-0 --checksum c63e9a9a6a7ff9f28c4c005c659ee1bf6
 RUN bitnami-pkg unpack mysql-client-10.2.31-1 --checksum 83278bc914a13a90a3ac05f43656f69dfbfc777e5b8672487a22a1ed65e3fda0
 RUN bitnami-pkg install libphp-7.2.29-0 --checksum cc3776c95b90adf6fb35159878bbc90e35a2f346d916cf178dc6b83c5b4b1b51
 RUN bitnami-pkg install tini-0.18.0-3 --checksum 1e9b72b6636c6a48397a18df2363b44461e87ad7f892c179a9115c7525ed9327
-RUN bitnami-pkg unpack orangehrm-4.3.4-0-0 --checksum dae8979235438d8cf035be3269a0c1723166da86d0128707c993db8db23fb6ee
+RUN bitnami-pkg unpack orangehrm-4.3.5-0-0 --checksum 09a808c4d2f2fb36cacaa834d23bc218ba22e1fe7b42f8dca104048306537aef
 RUN bitnami-pkg install gosu-1.11.0-3 --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log && \
+    ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
@@ -24,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.3.4-0-debian-10-r41" \
+    BITNAMI_IMAGE_VERSION="4.3.5-0-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -47,4 +49,4 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
 EXPOSE 80 443
 
 ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "nami", "start", "--foreground", "apache" ]
+CMD [ "httpd", "-f", "/opt/bitnami/apache/conf/httpd.conf", "-DFOREGROUND" ]
