@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.4.5-debian-10-r48`, `2`, `2.4.5`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/2.4.5-debian-10-r48/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.4.5-debian-10-r49`, `2`, `2.4.5`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/2.4.5-debian-10-r49/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spark GitHub repo](https://github.com/bitnami/bitnami-docker-spark).
 
@@ -293,6 +293,12 @@ or using Docker Compose:
 ```bash
 docker-compose up spark
 ```
+
+# Notable Changes
+
+## 2.4.5-debian-10-r49
+
+- This image now has an aws-cli and two jars: hadoop-aws and aws-java-sdk for provide an easier way to use AWS.
 
 # Contributing
 
