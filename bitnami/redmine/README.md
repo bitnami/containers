@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.1.0-debian-10-r53`, `4`, `4.1.0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.1.0-debian-10-r53/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.1.0-debian-10-r54`, `4`, `4.1.0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.1.0-debian-10-r54/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
 
@@ -274,9 +274,11 @@ Available variables:
 To configure Redmine to send email using SMTP you can set the following environment variables:
  - `SMTP_HOST`: SMTP host.
  - `SMTP_PORT`: SMTP port.
- - `SMTP_USER`: SMTP account user.
- - `SMTP_PASSWORD`: SMTP account password.
+ - `SMTP_USER`: SMTP account user. It can be empty.
+ - `SMTP_PASSWORD`: SMTP account password. It can be empty.
  - `SMTP_TLS`: Use TLS encription with SMTP. Default **true**
+ - `SMTP_DOMAIN` : Somain for SMTP configuration. Default **example.com**
+ - `SMTP_AUTHENTICATION` : The authentication method for SMTP. Default **login**
 
 This would be an example of SMTP configuration using a GMail account:
 

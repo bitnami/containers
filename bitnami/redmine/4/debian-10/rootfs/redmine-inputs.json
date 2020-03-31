@@ -8,6 +8,8 @@
   "email": "{{$global.env.REDMINE_EMAIL}}",
   "language": "{{$global.env.REDMINE_LANGUAGE}}",
   "password": "{{$global.env.REDMINE_PASSWORD}}",
+  "smtpAuthentication": "{{$global.env.SMTP_AUTHENTICATION}}",
+  "smtpDomain": "{{$global.env.SMTP_DOMAIN}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
   "smtpPort": "{{$global.env.SMTP_PORT}}",
