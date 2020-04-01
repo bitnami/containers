@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 libgcc1 procps sudo unzip zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "logstash" "7.6.1-0" --checksum e7f3eb4734b7ccc6ba0297a1b48bc3c321b254ce73c722d29b94a74f2a2b752b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "logstash" "7.6.2-0" --checksum dcdbdd15a9fda4c2ef971a28c96497e02bd3da6292abd014d0ace6bd48754302
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.242-0" --checksum 3a70f3d1c3cd9bc6ec581b2a10373a2b323c0b9af40402ce8d19aeb0b3d02400
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/logstash/postunpack.sh
 ENV BITNAMI_APP_NAME="logstash" \
-    BITNAMI_IMAGE_VERSION="7.6.1-debian-10-r26" \
+    BITNAMI_IMAGE_VERSION="7.6.2-debian-10-r0" \
     PATH="/opt/bitnami/logstash/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080
