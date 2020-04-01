@@ -18,7 +18,7 @@ if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY
     export KAFKA_OPTS="-Djava.security.auth.login.config=$KAFKA_HOME/conf/kafka_jaas.conf"
 fi
 
-flags=("$KAFKA_CONFDIR/server.properties")
+flags=("$KAFKA_CONF_FILE")
 [[ -z "${KAFKA_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${KAFKA_EXTRA_FLAGS[@]}")
 START_COMMAND=("$KAFKA_HOME/bin/kafka-server-start.sh" "${flags[@]}")
 

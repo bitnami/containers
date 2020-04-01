@@ -515,7 +515,7 @@ Topic:mytopic   PartitionCount:3        ReplicationFactor:3     Configs:
 ```
 
 ## Full configuration
-The image looks for configuration in the `conf/` directory of `/opt/bitnami/kafka`.
+The image looks for configuration files (server.properties, log4j.properties, etc.) in the `/bitnami/kafka/config/` directory, this directory can be changed by setting the KAFKA_MOUNTED_CONFDIR environment variable.
 
 ```
 docker run --name kafka -v /path/to/server.properties:/opt/bitnami/kafka/conf/server.properties bitnami/kafka:latest
