@@ -47,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.4.1-debian-10-r37`, `2`, `2.4.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.4.1-debian-10-r37/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.4.1-debian-10-r38`, `2`, `2.4.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.4.1-debian-10-r38/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -669,6 +669,10 @@ docker-compose up kafka
 ```
 
 # Notable Changes
+
+## 2.4.1-r38-debian-10
+
+- The configuration directory was changed to `/opt/bitnami/kafka/config`. Configuration files should be mounted to `/bitnami/kafka/config`.
 
 ## 1.1.1-debian-9-r224, 2.2.1-debian-9-r16, 1.1.1-ol-7-r306 and 2.2.1-ol-7-r14
 
