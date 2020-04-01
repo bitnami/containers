@@ -6,6 +6,7 @@
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libfile.sh
+. /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
@@ -91,12 +92,12 @@ kafka_producer_consumer_conf_set() {
 kafka_env() {
     cat <<"EOF"
 export KAFKA_BASEDIR="/opt/bitnami/kafka"
+export KAFKA_VOLUMEDIR="/bitnami/kafka"
 export KAFKA_HOME="$KAFKA_BASEDIR"
 export KAFKA_LOGDIR="$KAFKA_BASEDIR"/logs
-export KAFKA_CONFDIR="$KAFKA_BASEDIR"/conf
-export KAFKA_CONF_FILE_NAME="server.properties"
-export KAFKA_CONF_FILE="$KAFKA_CONFDIR"/$KAFKA_CONF_FILE_NAME
-export KAFKA_VOLUMEDIR="/bitnami/kafka"
+export KAFKA_CONFDIR="$KAFKA_BASEDIR"/config
+export KAFKA_CONF_FILE="$KAFKA_CONFDIR"/server.properties
+export KAFKA_MOUNTED_CONFDIR="${KAFKA_MOUNTED_CONFDIR:-${KAFKA_VOLUMEDIR}/config}"
 export KAFKA_DATADIR="$KAFKA_VOLUMEDIR"/data
 export KAFKA_DAEMON_USER="kafka"
 export KAFKA_DAEMON_GROUP="kafka"
@@ -217,8 +218,10 @@ kafka_validate() {
         warn "You set the environment variable ALLOW_PLAINTEXT_LISTENER=$ALLOW_PLAINTEXT_LISTENER. For safety reasons, do not use this flag in a production environment."
     fi
     if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL_SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL_SSL ]]; then
-        if [[ ! -f "$KAFKA_CONFDIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_CONFDIR"/certs/kafka.truststore.jks ]]; then
-            print_validation_error "In order to configure the SASL_SSL listener for Kafka you must mount your kafka.keystore.jks and kafka.truststore.jks certificates to the $KAFKA_CONFDIR/certs directory."
+        # DEPRECATED. Check for jks files in old conf directory to maintain compatibility with Helm chart.
+        if ([[ ! -f "$KAFKA_BASEDIR"/conf/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_BASEDIR"/conf/certs/kafka.truststore.jks ]]) \
+            && ([[ ! -f "$KAFKA_MOUNTED_CONFDIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_MOUNTED_CONFDIR"/certs/kafka.truststore.jks ]]); then
+            print_validation_error "In order to configure the SASL_SSL listener for Kafka you must mount your kafka.keystore.jks and kafka.truststore.jks certificates to the $KAFKA_MOUNTED_CONFDIR/certs directory."
         fi
     elif ! is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
         print_validation_error "The KAFKA_CFG_LISTENERS environment variable does not configure a secure listener. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
@@ -384,20 +387,19 @@ kafka_configure_from_environment_variables() {
 #   None
 #########################
 kafka_initialize() {
-    # Since we remove this directory afterwards, it allows us to check if Kafka had already been initialized
-    if [[ ! -d "$KAFKA_BASEDIR"/configtmp ]]; then
-        info "Kafka has already been initialized"
-        return
-    fi
-
     info "Initializing Kafka..."
-
+    # DEPRECATED. Copy files in old conf directory to maintain compatibility with Helm chart.
+    if ! is_dir_empty "$KAFKA_BASEDIR"/conf; then
+        warn "Detected files mounted to $KAFKA_BASEDIR/conf. This is deprecated and files should be mounted to $KAFKA_MOUNTED_CONFDIR."
+        cp -Lr "$KAFKA_BASEDIR"/conf/* "$KAFKA_CONFDIR"
+    fi
     # Check for mounted configuration files
-    cp -r "$KAFKA_BASEDIR"/config/. "$KAFKA_CONFDIR"
-    rm -rf "$KAFKA_BASEDIR"/config
-    if [[ ! -f "$KAFKA_CONF_FILE" ]]; then
+    if ! is_dir_empty "$KAFKA_MOUNTED_CONFDIR"; then
+        cp -Lr "$KAFKA_MOUNTED_CONFDIR"/* "$KAFKA_CONFDIR"
+    fi
+    # DEPRECATED. Check for server.properties file in old conf directory to maintain compatibility with Helm chart.
+    if [[ ! -f "$KAFKA_BASEDIR"/conf/server.properties ]] && [[ ! -f "$KAFKA_MOUNTED_CONFDIR"/server.properties ]]; then
         info "No injected configuration files found, creating default config files"
-        cp -r "$KAFKA_BASEDIR"/configtmp/. "$KAFKA_CONFDIR"
         kafka_server_conf_set log.dirs "$KAFKA_DATADIR"
         kafka_configure_from_environment_variables
         if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL_SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL_SSL ]]; then
@@ -413,8 +415,6 @@ kafka_initialize() {
             remove_in_file "$KAFKA_CONF_FILE" "security.inter.broker.protocol" false
         fi
     fi
-    rm -rf "$KAFKA_BASEDIR"/configtmp
-    ln -s "$KAFKA_CONFDIR" "$KAFKA_BASEDIR"/config
 }
 
 ########################
