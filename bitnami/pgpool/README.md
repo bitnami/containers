@@ -245,6 +245,7 @@ Pgpool:
 - `PGPOOL_ENABLE_POOL_PASSWD`: Whether to use a password file specified by `PGPOOL_PASSWD_FILE` for authentication. Defaults to `yes`.
 - `PGPOOL_PASSWD_FILE`: The password file for authentication. Defaults to `pool_passwd`.
 - `PGPOOL_MAX_POOL`: The maximum number of cached connections in each child process. Defaults to `15`.
+- `PGPOOL_NUM_INIT_CHILDREN`: The number of preforked Pgpool server processes. Default is `32`.
 - `PGPOOL_POSTGRES_USERNAME`: Postgres administrator user name, this will be use to allow postgres admin authentication through Pgpool.
 - `PGPOOL_POSTGRES_PASSWORD`: Password for the user set in `PGPOOL_POSTGRES_USERNAME` environment variable. No defaults.
 - `PGPOOL_ADMIN_USERNAME`: Username for the pgpool administrator. No defaults.
@@ -446,6 +447,7 @@ Please see the list of environment variables available in the Bitnami Pgpool con
 | PGPOOL_ENABLE_POOL_PASSWD            | `yes`                              |
 | PGPOOL_PASSWD_FILE                   | `pool_passwd`                      |
 | PGPOOL_MAX_POOL                      | `15`                               |
+| PGPOOL_NUM_INIT_CHILDREN             | `32`                               |
 
 # Logging
 
