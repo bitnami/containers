@@ -60,6 +60,7 @@ export PGPOOL_ADMIN_USERNAME="${PGPOOL_ADMIN_USERNAME:-}"
 export PGPOOL_ENABLE_LDAP="${PGPOOL_ENABLE_LDAP:-no}"
 export PGPOOL_TIMEOUT="360"
 export PGPOOL_ENABLE_LOAD_BALANCING="${PGPOOL_ENABLE_LOAD_BALANCING:-yes}"
+export PGPOOL_NUM_INIT_CHILDREN="${PGPOOL_NUM_INIT_CHILDREN:-32}"
 
 EOF
     if [[ -f "${PGPOOL_ADMIN_PASSWORD_FILE:-}" ]]; then
@@ -326,6 +327,7 @@ pgpool_create_config() {
     pgpool_set_property "listen_addresses" "*"
     pgpool_set_property "port" "$PGPOOL_PORT_NUMBER"
     pgpool_set_property "socket_dir" "$PGPOOL_TMP_DIR"
+    pgpool_set_property "num_init_children" "$PGPOOL_NUM_INIT_CHILDREN"
     # Communication Manager Connection settings
     pgpool_set_property "pcp_socket_dir" "$PGPOOL_TMP_DIR"
     # Authentication settings
