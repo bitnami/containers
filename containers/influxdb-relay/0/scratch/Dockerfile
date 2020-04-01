@@ -1,6 +1,8 @@
 FROM scratch
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+COPY prebuildfs /
+
 COPY rootfs /
 
 EXPOSE 9096 9097
