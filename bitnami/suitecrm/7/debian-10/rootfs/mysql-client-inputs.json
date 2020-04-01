@@ -7,5 +7,7 @@
   "host": "{{$global.env.MARIADB_HOST}}",
   "port": "{{$global.env.MARIADB_PORT_NUMBER}}",
   "rootPassword": "{{$global.env.MARIADB_ROOT_PASSWORD}}",
-  "rootUser": "{{$global.env.MARIADB_ROOT_USER}}"
+  "rootUser": "{{$global.env.MARIADB_ROOT_USER}}",
+  "sslCAFile": "{{$global.env.MYSQL_CLIENT_SSL_CA_FILE}}",
+  "sslEnable": "{{$global.env.MYSQL_CLIENT_ENABLE_SSL}}"
 }
