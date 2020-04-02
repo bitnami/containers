@@ -30,11 +30,9 @@ $ docker run --name kubectl bitnami/kubectl:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`1.18-debian-10`, `1.18.0-debian-10-r0`, `1.18`, `1.18.0`, `latest` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.18.0-debian-10-r0/1.18/debian-10/Dockerfile)
 * [`1.17-debian-10`, `1.17.4-debian-10-r20`, `1.17`, `1.17.4` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.17.4-debian-10-r20/1.17/debian-10/Dockerfile)
-* [`1.16-debian-10`, `1.16.3-debian-10-r64`, `1.16`, `1.16.3`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.3-debian-10-r64/1.16/debian-10/Dockerfile)
-* [`1.15-debian-10`, `1.15.3-debian-10-r65`, `1.15`, `1.15.3` (1.15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.15.3-debian-10-r65/1.15/debian-10/Dockerfile)
-* [`1.14-debian-10`, `1.14.3-debian-10-r65`, `1.14`, `1.14.3` (1.14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.14.3-debian-10-r65/1.14/debian-10/Dockerfile)
-* [`1.13-debian-10`, `1.13.4-debian-10-r64`, `1.13`, `1.13.4` (1.13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.13.4-debian-10-r64/1.13/debian-10/Dockerfile)
+* [`1.16-debian-10`, `1.16.3-debian-10-r64`, `1.16`, `1.16.3` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.3-debian-10-r64/1.16/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubectl GitHub repo](https://github.com/bitnami/bitnami-docker-kubectl).
 
@@ -55,7 +53,7 @@ $ docker pull bitnami/kubectl:[TAG]
 If you wish, you can also build the image yourself.
 
 ```bash
-$ docker build -t bitnami/kubectl:latest 'https://github.com/bitnami/bitnami-docker-kubectl.git#master:1.16/debian-10'
+$ docker build -t bitnami/kubectl:latest 'https://github.com/bitnami/bitnami-docker-kubectl.git#master:1.18/debian-10'
 ```
 
 # Configuration
