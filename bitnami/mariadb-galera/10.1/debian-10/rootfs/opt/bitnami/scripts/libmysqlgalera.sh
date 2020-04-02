@@ -108,6 +108,11 @@ read -r -a DB_EXTRA_FLAGS <<< "$(mysql_extra_flags)"
 export DB_EXTRA_FLAGS
 ENABLE_LDAP="$(get_env_var_value ENABLE_LDAP)"
 export DB_ENABLE_LDAP="${ENABLE_LDAP:-no}"
+ENABLE_SSL_RT="$(get_env_var_value ENABLE_SSL_RT)"
+export DB_ENABLE_SSL_RT="${ENABLE_SSL_RT:-no}"
+export DB_SSL_RT_CERT_FILE="$(get_env_var_value SSL_RT_CERT_FILE)"
+export DB_SSL_RT_KEY_FILE="$(get_env_var_value SSL_RT_KEY_FILE)"
+export DB_SSL_RT_CA_FILE="$(get_env_var_value SSL_RT_CA_FILE)"
 EOF
 }
 
@@ -183,6 +188,21 @@ mysql_validate() {
         print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables LDAP_URI, LDAP_BASE, LDAP_BIND_DN and LDAP_BIND_PASSWORD with the LDAP configuration."
     fi
 
+    if is_boolean_yes "$DB_ENABLE_SSL_RT"; then
+        if ( [[ -z "${DB_SSL_RT_CERT_FILE}" ]] || [[ -z "${DB_SSL_RT_KEY_FILE}" ]] || [[ -z "${DB_SSL_RT_CA_FILE}" ]]); then
+            print_validation_error "The SSL cert file, key and CA are required when SSL is enabled. Set the environment variables SSL_RT_CERT_FILE, SSL_RT_KEY_FILE and SSL_RT_CA_FILE with the path to each file."
+        fi
+        if ( [[ ! -f "${DB_SSL_RT_CERT_FILE}" ]] ); then
+            print_validation_error "The SSL_CERT file ${DB_SSL_RT_CERT_FILE} must exist."
+        fi
+        if ( [[ ! -f "${DB_SSL_RT_KEY_FILE}" ]] ); then
+            print_validation_error "The SSL_KEY file ${DB_SSL_RT_KEY_FILE} must exist."
+        fi
+        if ( [[ ! -f "${DB_SSL_RT_CA_FILE}" ]] ); then
+            print_validation_error "The SSL_CA file ${DB_SSL_RT_CA_FILE} must exist."
+        fi
+    fi
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -240,6 +260,18 @@ wsrep_cluster_address=gcomm://
 
 [mariadb]
 plugin_load_add = auth_pam
+EOF
+
+ if is_boolean_yes "$DB_ENABLE_SSL_RT"; then
+ cat >> "$DB_CONF_DIR/my.cnf" <<EOF
+ssl_cert=$DB_SSL_RT_CERT_FILE
+ssl_key=$DB_SSL_RT_KEY_FILE
+ssl_ca=$DB_SSL_RT_CA_FILE
+wsrep_provider_options="socket.ssl_cert=$DB_SSL_RT_CERT_FILE;socket.ssl_key=$DB_SSL_RT_KEY_FILE;socket.ssl_ca=$DB_SSL_RT_CA_FILE"
+EOF
+ fi
+
+ cat >> "$DB_CONF_DIR/my.cnf" <<EOF
 
 !include $DB_CONF_DIR/bitnami/my_custom.cnf
 EOF
