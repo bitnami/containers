@@ -1,8 +1,8 @@
-# What is Dotnet?
+# What is ASP.NET?
 
-> CHANGEME: Add a description
+> ASP.NET is an open-source framework for web application development created by Microsoft.	
 
-CHANGEME: Add a link, e.g. [https://github.com/username/dotnet](https://github.com/username/dotnet)
+[https://dotnet.microsoft.com/apps/aspnet](https://dotnet.microsoft.com/apps/aspnet)
 
 # TL;DR;
 
@@ -47,7 +47,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.1-debian-10`, `3.1.3-debian-10-r0`, `3.1`, `3.1.3`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet/blob/3.1.3-debian-10-r0/3.1/debian-10/Dockerfile)
+* [`3.1-debian-10`, `3.1.3-debian-10-r1`, `3.1`, `3.1.3`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet/blob/3.1.3-debian-10-r1/3.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dotnet GitHub repo](https://github.com/bitnami/bitnami-docker-dotnet).
 
@@ -118,10 +118,6 @@ $ docker run --name dotnet-node1 --network dotnet-network bitnami/dotnet:latest
 ### Step 3: Run another containers
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
-
-# Configuration
-
-CHANGEME: Add configuration section
 
 # Logging
 
