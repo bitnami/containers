@@ -12,8 +12,8 @@ set -o pipefail
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libcouchdb.sh
 
-# Load CouchDB environment variables
-eval "$(couchdb_env)"
+# Load environment
+. /opt/bitnami/scripts/couchdb-env.sh
 
 info "** Starting CouchDB **"
 if am_i_root; then

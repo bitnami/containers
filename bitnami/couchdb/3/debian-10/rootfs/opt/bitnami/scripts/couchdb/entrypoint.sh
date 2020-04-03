@@ -10,6 +10,10 @@ set -o pipefail
 # Load libraries
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libbitnami.sh
+. /opt/bitnami/scripts/libcouchdb.sh
+
+# Load environment
+. /opt/bitnami/scripts/couchdb-env.sh
 
 print_welcome_page
 
