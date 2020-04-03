@@ -13,14 +13,14 @@ RUN /build/install-nami.sh
 RUN bitnami-pkg install node-12.16.1-0 --checksum 36bab987be1cc792c7155e30545b004b76fc9a81796afec343a0a698935204b2
 RUN bitnami-pkg install mongodb-client-4.2.5-0 --checksum 2447c6555c88d431adb7c6a8e346dd453a948f291a0a0955699f05d5c811827d
 RUN bitnami-pkg install tini-0.18.0-3 --checksum 1e9b72b6636c6a48397a18df2363b44461e87ad7f892c179a9115c7525ed9327
-RUN bitnami-pkg unpack parse-4.1.0-5 --checksum 00e7245715c9742ed3adf6099ff89286d7c2874769049e2b9ecad12cef1df17c
+RUN bitnami-pkg unpack parse-4.2.0-0 --checksum e6a78246e5e89c565de0179bf9a2c98707e999107ce822f181fc110952e5a9c7
 RUN bitnami-pkg install gosu-1.11.0-3 --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="4.1.0-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="4.2.0-debian-10-r0" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
