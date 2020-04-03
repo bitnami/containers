@@ -7,62 +7,10 @@
 # Load Generic Libraries
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
 
 # Functions
-
-########################
-# Load global variables used on CouchDB configuration
-# Globals:
-#   COUCHDB_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-couchdb_env() {
-    cat <<"EOF"
-# Format log messages
-export MODULE="couchdb"
-export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
-# Paths
-export COUCHDB_BASE_DIR="/opt/bitnami/couchdb"
-export COUCHDB_VOLUME_DIR="/bitnami/couchdb"
-export COUCHDB_BIN_DIR="${COUCHDB_BASE_DIR}/bin"
-export COUCHDB_DATA_DIR="${COUCHDB_VOLUME_DIR}/data"
-export COUCHDB_CONF_DIR="${COUCHDB_BASE_DIR}/etc"
-export COUCHDB_CONF_FILE="${COUCHDB_CONF_DIR}/default.d/10-bitnami.ini"
-# Users
-export COUCHDB_DAEMON_USER="couchdb"
-export COUCHDB_DAEMON_GROUP="couchdb"
-# CouchDB settings
-export COUCHDB_NODENAME="${COUCHDB_NODENAME:-}"
-export COUCHDB_PORT_NUMBER="${COUCHDB_PORT_NUMBER:-}"
-export COUCHDB_CLUSTER_PORT_NUMBER="${COUCHDB_CLUSTER_PORT_NUMBER:-}"
-export COUCHDB_BIND_ADDRESS="${COUCHDB_BIND_ADDRESS:-}"
-export COUCHDB_CREATE_DATABASES="${COUCHDB_CREATE_DATABASES:-yes}"
-# Authentication
-export COUCHDB_USER="${COUCHDB_USER:-admin}"
-EOF
-    if [[ -f "${COUCHDB_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export COUCHDB_PASSWORD="$(< "${COUCHDB_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export COUCHDB_PASSWORD="${COUCHDB_PASSWORD:-couchdb}"
-EOF
-    fi
-    if [[ -f "${COUCHDB_SECRET_FILE:-}" ]]; then
-        cat <<"EOF"
-export COUCHDB_SECRET="$(< "${COUCHDB_SECRET_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export COUCHDB_SECRET="${COUCHDB_SECRET:-}"
-EOF
-    fi
-}
 
 ########################
 # Validate settings in COUCHDB_* env vars
@@ -283,4 +231,36 @@ couchdb_create_initial_databases() {
         debug "Creating database '${db}'"
         debug_execute "${query[@]}"
     done
+}
+
+########################
+# Check if CouchDB is running
+# Globals:
+#   COUCHDB_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether CouchDB is running
+########################
+is_couchdb_running() {
+    local pid
+    pid="$(get_pid_from_file "$COUCHDB_PID_FILE")"
+    if [[ -n "$pid" ]]; then
+        is_service_running "$pid"
+    else
+        false
+    fi
+}
+
+########################
+# Check if CouchDB is running
+# Globals:
+#   COUCHDB_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether CouchDB is not running
+########################
+is_couchdb_not_running() {
+    ! is_couchdb_running
 }
