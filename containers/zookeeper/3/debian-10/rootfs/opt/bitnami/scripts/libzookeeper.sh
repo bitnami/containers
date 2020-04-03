@@ -57,6 +57,8 @@ export ZOO_LOG_LEVEL="${ZOO_LOG_LEVEL:-INFO}"
 export ZOO_4LW_COMMANDS_WHITELIST="${ZOO_4LW_COMMANDS_WHITELIST:-srvr, mntr}"
 export ZOO_RECONFIG_ENABLED="${ZOO_RECONFIG_ENABLED:-no}"
 export ZOO_LISTEN_ALLIPS_ENABLED="${ZOO_LISTEN_ALLIPS_ENABLED:-no}"
+export ZOO_ENABLE_PROMETHEUS_METRICS="${ZOO_ENABLE_PROMETHEUS_METRICS:-no}"
+export ZOO_PROMETHEUS_METRICS_PORT_NUMBER="${ZOO_PROMETHEUS_METRICS_PORT_NUMBER:-7000}"
 
 # Java settings
 export JVMFLAGS="${JVMFLAGS:-}"
@@ -115,11 +117,30 @@ zookeeper_validate() {
     fi
 
     # ZooKeeper port validations
-    local validate_port_args=()
-    ! am_i_root && validate_port_args+=("-unprivileged")
-    if ! err=$(validate_port "${validate_port_args[@]}" "$ZOO_PORT_NUMBER"); then
-        print_validation_error "An invalid port was specified in the environment variable ZOO_PORT_NUMBER: $err"
-    fi
+    check_conflicting_ports() {
+        local -r total="$#"
+
+        for i in $(seq 1 "$((total - 1))"); do
+            for j in $(seq "$((i + 1))" "$total"); do
+                if (( "${!i}" == "${!j}" )); then
+                    print_validation_error "${!i} and ${!j} are bound to the same port"
+                fi
+            done
+        done
+    }
+
+    check_allowed_port() {
+        local validate_port_args="-unprivileged"
+
+        if ! err=$(validate_port "${validate_port_args[@]}" "${!1}"); then
+            print_validation_error "An invalid port was specified in the environment variable $1: $err"
+        fi
+    }
+
+    check_allowed_port ZOO_PORT_NUMBER
+    check_allowed_port ZOO_PROMETHEUS_METRICS_PORT_NUMBER
+
+    check_conflicting_ports ZOO_PORT_NUMBER ZOO_PROMETHEUS_METRICS_PORT_NUMBER
 
     # ZooKeeper server users validations
     read -r -a server_users_list <<< "${ZOO_SERVER_USERS//[;, ]/ }"
@@ -161,6 +182,9 @@ zookeeper_initialize() {
             zookeeper_enable_authentication "$ZOO_CONF_FILE"
             zookeeper_create_jaas_file
         fi
+        if is_boolean_yes "$ZOO_ENABLE_PROMETHEUS_METRICS"; then
+            zookeeper_enable_prometheus_metrics "$ZOO_CONF_FILE"
+        fi
     else
         info "User injected custom configuration detected!"
     fi
@@ -188,6 +212,8 @@ zookeeper_initialize() {
 #########################
 zookeeper_generate_conf() {
     cp "${ZOO_CONF_DIR}/zoo_sample.cfg" "$ZOO_CONF_FILE"
+    echo >> "$ZOO_CONF_FILE"
+
     zookeeper_conf_set "$ZOO_CONF_FILE" tickTime "$ZOO_TICK_TIME"
     zookeeper_conf_set "$ZOO_CONF_FILE" initLimit "$ZOO_INIT_LIMIT"
     zookeeper_conf_set "$ZOO_CONF_FILE" syncLimit "$ZOO_SYNC_LIMIT"
@@ -252,6 +278,24 @@ zookeeper_enable_authentication() {
     info "Enabling authentication..."
     zookeeper_conf_set "$filename" authProvider.1 org.apache.zookeeper.server.auth.SASLAuthenticationProvider
     zookeeper_conf_set "$filename" requireClientAuthScheme sasl
+}
+
+########################
+# Enable Prometheus metrics for ZooKeeper
+# Globals:
+#   ZOO_PROMETHEUS_METRICS_PORT_NUMBER
+# Arguments:
+#   $1 - filename
+# Returns:
+#   None
+#########################
+zookeeper_enable_prometheus_metrics() {
+    local -r filename="${1:?filename is required}"
+
+    info "Enabling Prometheus metrics..."
+    zookeeper_conf_set "$filename" metricsProvider.className org.apache.zookeeper.metrics.prometheus.PrometheusMetricsProvider
+    zookeeper_conf_set "$filename" metricsProvider.httpPort "$ZOO_PROMETHEUS_METRICS_PORT_NUMBER"
+    zookeeper_conf_set "$filename" metricsProvider.exportJvmInfo true
 }
 
 ########################

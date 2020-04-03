@@ -51,7 +51,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.6.0-debian-10-r30`, `3`, `3.6.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.0-debian-10-r30/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.6.0-debian-10-r31`, `3`, `3.6.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.0-debian-10-r31/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
@@ -198,6 +198,8 @@ The configuration can easily be setup with the Bitnami ZooKeeper Docker image us
  - `ZOO_AUTOPURGE_INTERVAL`: The time interval in hours for which the autopurge task is triggered. Set to a positive integer (1 and above) to enable auto purging of old snapshots and log files. Default: **0**
  - `ZOO_AUTOPURGE_RETAIN_COUNT`: When auto purging is enabled, ZooKeeper retains the most recent snapshots and the corresponding transaction logs in the dataDir and dataLogDir respectively to this number and deletes the rest. Minimum value is 3. Default: **3**
  - `ZOO_HEAP_SIZE`: Size in MB for the Java Heap options (Xmx and XMs). This env var is ignored if Xmx an Xms are configured via `JVMFLAGS`. Default: **1024**
+ - `ZOO_ENABLE_PROMETHEUS_METRICS`: Expose Prometheus metrics. Default: **no**
+ - `ZOO_PROMETHEUS_METRICS_PORT_NUMBER`: Port where a Jetty server will expose Prometheus metrics. Default: **7000**
  - `ALLOW_ANONYMOUS_LOGIN`: If set to true, Allow to accept connections from unauthenticated users. Default: **no**
  - `ZOO_LOG_LEVEL`: ZooKeeper log level. Available levels are: `ALL`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`, `OFF`, `TRACE`. Default: **INFO**
  - `JVMFLAGS`: Default JVMFLAGS for the ZooKeeper process. No defaults
