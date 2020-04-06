@@ -12,7 +12,7 @@ RUN install_packages ca-certificates curl dirmngr gnupg libaio1 libc6 procps sud
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install java-11.0.6-0 --checksum f7446f8bec72b6b2606d37ba917accc243e6cd4e722700c39ef83832c46fb0c6
-RUN bitnami-pkg unpack wildfly-19.0.0-0 --checksum bd1eeb7f88dd1a9fb97f1136bcc8a83b91c11e0057a0c2a981f1480eaf8382c0
+RUN bitnami-pkg unpack wildfly-19.0.0-1 --checksum d1c0913da500272e639fec57289d56e0d3df2ea699b6a869b69e23cd990bd5f7
 RUN bitnami-pkg install tini-0.18.0-3 --checksum 1e9b72b6636c6a48397a18df2363b44461e87ad7f892c179a9115c7525ed9327
 RUN bitnami-pkg install gosu-1.11.0-3 --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
@@ -21,7 +21,7 @@ RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="19.0.0-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="19.0.0-debian-10-r6" \
     NAMI_PREFIX="/.nami" \
     WILDFLY_HOME="/home/wildfly" \
     WILDFLY_JAVA_HOME="" \
