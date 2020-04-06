@@ -190,7 +190,7 @@ $ docker-compose up -d
 The configuration can easily be setup with the Bitnami Kafka Docker image using the following environment variables:
 
 - `ALLOW_PLAINTEXT_LISTENER`: Allow to use the PLAINTEXT listener. Default: **no**
-- `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Default: admin. Default: **admin**
+- `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Default: **user**
 - `KAFKA_INTER_BROKER_PASSWORD`: Kafka inter broker communication password. Default: **bitnami**
 - `KAFKA_BROKER_USER`: Kafka client user. Default: **user**
 - `KAFKA_BROKER_PASSWORD`: Kafka client user password. Default: **bitnami**
@@ -332,7 +332,7 @@ By default, communications that happens between brokers are authenticated.
 You can provide your own credentials using this environment variables:
 
 
-- `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Default: **admin**
+- `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Default: **user**
 - `KAFKA_INTER_BROKER_PASSWORD`: Kafka inter broker communication password. Default: **bitnami**
 
 ### Kafka client configuration
