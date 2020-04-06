@@ -60,6 +60,7 @@ export PGPOOL_ADMIN_USERNAME="${PGPOOL_ADMIN_USERNAME:-}"
 export PGPOOL_ENABLE_LDAP="${PGPOOL_ENABLE_LDAP:-no}"
 export PGPOOL_TIMEOUT="360"
 export PGPOOL_ENABLE_LOAD_BALANCING="${PGPOOL_ENABLE_LOAD_BALANCING:-yes}"
+export PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE="${PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE:-transaction}"
 export PGPOOL_NUM_INIT_CHILDREN="${PGPOOL_NUM_INIT_CHILDREN:-32}"
 
 EOF
@@ -154,7 +155,12 @@ pgpool_validate() {
     if ! is_yes_no_value "$PGPOOL_ENABLE_LOAD_BALANCING"; then
         print_validation_error "The values allowed for PGPOOL_ENABLE_LOAD_BALANCING are: yes or no"
     fi
-
+    if ! is_positive_int "$PGPOOL_NUM_INIT_CHILDREN"; then
+	print_validation_error "The values allowed for PGPOOL_NUM_INIT_CHILDREN: integer greater than 0"	
+    fi
+    if ! [[ "$PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE" =~ ^(off|transaction|trans_transaction|always)$ ]]; then
+	print_validation_error "The values allowed for PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE: off,transaction,trans_transaction,always"
+    fi
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -361,6 +367,8 @@ pgpool_create_config() {
     pgpool_set_property "failover_on_backend_error" "off"
     # Keeps searching for a primary node forever when a failover occurs
     pgpool_set_property "search_primary_node_timeout" "0"
+    pgpool_set_property "disable_load_balance_on_write" "$PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE"
+    pgpool_set_property "num_init_children" "$PGPOOL_NUM_INIT_CHILDREN"
 
     # Backend settings
     read -r -a nodes <<< "$(tr ',;' ' ' <<< "${PGPOOL_BACKEND_NODES}")"
