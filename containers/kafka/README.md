@@ -47,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.4.1-debian-10-r45`, `2`, `2.4.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.4.1-debian-10-r45/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.4.1-debian-10-r46`, `2`, `2.4.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.4.1-debian-10-r46/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -190,7 +190,7 @@ $ docker-compose up -d
 The configuration can easily be setup with the Bitnami Kafka Docker image using the following environment variables:
 
 - `ALLOW_PLAINTEXT_LISTENER`: Allow to use the PLAINTEXT listener. Default: **no**
-- `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Default: **user**
+- `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Default: admin. Default: **user**
 - `KAFKA_INTER_BROKER_PASSWORD`: Kafka inter broker communication password. Default: **bitnami**
 - `KAFKA_BROKER_USER`: Kafka client user. Default: **user**
 - `KAFKA_BROKER_PASSWORD`: Kafka client user password. Default: **bitnami**
