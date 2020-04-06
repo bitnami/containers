@@ -281,7 +281,6 @@ EOF
 #   None
 #########################
 kafka_configure_ssl_listener() {
-    kafka_generate_jaas_authentication_file
     # Set Kafka configuration
     kafka_server_conf_set ssl.keystore.location "$KAFKA_CONFDIR"/certs/kafka.keystore.jks
     kafka_server_conf_set ssl.keystore.password "$KAFKA_CERTIFICATE_PASSWORD"
@@ -310,6 +309,7 @@ kafka_configure_ssl_listener() {
 kafka_configure_sasl_ssl_listener() {
     info "SASL_SSL listener detected, enabling SASL_SSL settings"
     kafka_configure_ssl_listener
+    kafka_generate_jaas_authentication_file
     # Set Kafka configuration
     kafka_server_conf_set security.inter.broker.protocol SASL_SSL
     kafka_server_conf_set sasl.mechanism.inter.broker.protocol PLAIN
