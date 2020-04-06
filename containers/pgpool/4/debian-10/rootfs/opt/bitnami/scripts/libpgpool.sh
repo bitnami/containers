@@ -156,10 +156,10 @@ pgpool_validate() {
         print_validation_error "The values allowed for PGPOOL_ENABLE_LOAD_BALANCING are: yes or no"
     fi
     if ! is_positive_int "$PGPOOL_NUM_INIT_CHILDREN"; then
-	print_validation_error "The values allowed for PGPOOL_NUM_INIT_CHILDREN: integer greater than 0"	
+	    print_validation_error "The values allowed for PGPOOL_NUM_INIT_CHILDREN: integer greater than 0"	
     fi
     if ! [[ "$PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE" =~ ^(off|transaction|trans_transaction|always)$ ]]; then
-	print_validation_error "The values allowed for PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE: off,transaction,trans_transaction,always"
+	    print_validation_error "The values allowed for PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE: off,transaction,trans_transaction,always"
     fi
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
