@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.1.1-debian-10-r47`, `4`, `4.1.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.1-debian-10-r47/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.1.1-debian-10-r48`, `4`, `4.1.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.1-debian-10-r48/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
 
@@ -240,9 +240,9 @@ Pgpool:
 - `PGPOOL_SR_CHECK_PASSWORD_FILE`: Path to a file that contains the password to use to perform streaming checks. This will override the value specified in `PGPOOL_SR_CHECK_PASSWORD`. No defaults.
 - `PGPOOL_BACKEND_NODES`: Comma separated list of backend nodes in the cluster. No defaults.
 - `PGPOOL_ENABLE_LDAP`: Whether to enable LDAP authentication. Defaults to `no`.
-- `PGPOOL_ENABLE_LOAD_BALANCING`: Whether to enable Load-Balancing mode. Defaults to `yes`.
 - `PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE`: Specify load balance behavior after write queries appear ('off', 'transaction', 'trans_transaction', 'always'). Defaults to 'transaction'
 - `PGPOOL_NUM_INIT_CHILDREN`: The number of preforked Pgpool-II server processes.  num_init_children is also the concurrent connections limit to Pgpool-II from clients. Defaults to 32.
+- `PGPOOL_ENABLE_LOAD_BALANCING`: Whether to enable Load-Balancing mode. Defaults to `yes`.
 - `PGPOOL_ENABLE_POOL_HBA`: Whether to use the pool_hba.conf authentication. Defaults to `yes`.
 - `PGPOOL_ENABLE_POOL_PASSWD`: Whether to use a password file specified by `PGPOOL_PASSWD_FILE` for authentication. Defaults to `yes`.
 - `PGPOOL_PASSWD_FILE`: The password file for authentication. Defaults to `pool_passwd`.
@@ -430,26 +430,26 @@ Refer to the [server configuration](http://www.pgpool.net/docs/latest/en/html/ru
 
 Please see the list of environment variables available in the Bitnami Pgpool container in the next table:
 
-| Environment Variable                 | Default value                      |
-| :----------------------------------- | :--------------------------------- |
-| PGPOOL_BACKEND_NODES                 | `nil`                              |
-| PGPOOL_PORT_NUMBER                   | `5432`                             |
-| PGPOOL_SR_CHECK_USER                 | `nil`                              |
-| PGPOOL_SR_CHECK_PASSWORD             | `nil`                              |
-| PGPOOL_SR_CHECK_PASSWORD_FILE        | `nil`                              |
-| PGPOOL_POSTGRES_USERNAME             | `nil`                              |
-| PGPOOL_POSTGRES_PASSWORD             | `nil`                              |
-| PGPOOL_PASSWORD_FILE                 | `nil`                              |
-| PGPOOL_TIMEOUT                       | `360`                              |
-| PGPOOL_ENABLE_LDAP                   | `no`                               |
-| PGPOOL_ADMIN_USERNAME=admin          | `nil`                              |
-| PGPOOL_ADMIN_PASSWORD=adminpassword  | `nil`                              |
-| PGPOOL_ENABLE_LOAD_BALANCING         | `yes`                              |
-| PGPOOL_ENABLE_POOL_HBA               | `yes`                              |
-| PGPOOL_ENABLE_POOL_PASSWD            | `yes`                              |
-| PGPOOL_PASSWD_FILE                   | `pool_passwd`                      |
-| PGPOOL_MAX_POOL                      | `15`                               |
-| PGPOOL_NUM_INIT_CHILDREN             | `32`                               |
+| Environment Variable                | Default value |
+|:------------------------------------|:--------------|
+| PGPOOL_BACKEND_NODES                | `nil`         |
+| PGPOOL_PORT_NUMBER                  | `5432`        |
+| PGPOOL_SR_CHECK_USER                | `nil`         |
+| PGPOOL_SR_CHECK_PASSWORD            | `nil`         |
+| PGPOOL_SR_CHECK_PASSWORD_FILE       | `nil`         |
+| PGPOOL_POSTGRES_USERNAME            | `nil`         |
+| PGPOOL_POSTGRES_PASSWORD            | `nil`         |
+| PGPOOL_PASSWORD_FILE                | `nil`         |
+| PGPOOL_TIMEOUT                      | `360`         |
+| PGPOOL_ENABLE_LDAP                  | `no`          |
+| PGPOOL_ADMIN_USERNAME=admin         | `nil`         |
+| PGPOOL_ADMIN_PASSWORD=adminpassword | `nil`         |
+| PGPOOL_ENABLE_LOAD_BALANCING        | `yes`         |
+| PGPOOL_ENABLE_POOL_HBA              | `yes`         |
+| PGPOOL_ENABLE_POOL_PASSWD           | `yes`         |
+| PGPOOL_PASSWD_FILE                  | `pool_passwd` |
+| PGPOOL_MAX_POOL                     | `15`          |
+| PGPOOL_NUM_INIT_CHILDREN            | `32`          |
 
 # Logging
 
