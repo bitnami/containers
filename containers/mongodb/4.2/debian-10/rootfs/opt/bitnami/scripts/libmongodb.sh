@@ -714,7 +714,7 @@ mongodb_is_primary_node_up() {
     local -r host="${1:?node is required}"
     local -r port="${2:?port is required}"
     local -r user="${3:?user is required}"
-    local -r password="${4:?password is required}"
+    local -r password="${4:-}"
 
     debug "Validating $host as primary node..."
 
@@ -738,7 +738,7 @@ mongodb_is_node_available() {
     local -r host="${1:?node is required}"
     local -r port="${2:?port is required}"
     local -r user="${3:?user is required}"
-    local -r password="${4:?password is required}"
+    local -r password="${4:-}"
 
     local result
     result=$(mongodb_execute "$user" "$password" "admin" "$host" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
@@ -759,7 +759,7 @@ mongodb_wait_for_node() {
     local -r host="${1:?node is required}"
     local -r port="${2:?port is required}"
     local -r user="${3:?user is required}"
-    local -r password="${4:?password is required}"
+    local -r password="${4:-}"
     debug "Waiting for primary node..."
 
     info "Trying to connect to MongoDB server $host..."
@@ -789,7 +789,7 @@ mongodb_wait_for_primary_node() {
     local -r host="${1:?node is required}"
     local -r port="${2:?port is required}"
     local -r user="${3:?user is required}"
-    local -r password="${4:?password is required}"
+    local -r password="${4:-}"
     debug "Waiting for primary node..."
 
     mongodb_wait_for_node "$host" "$port" "$user" "$password"
