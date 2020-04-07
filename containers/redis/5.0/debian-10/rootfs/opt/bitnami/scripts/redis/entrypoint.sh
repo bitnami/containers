@@ -16,7 +16,7 @@ eval "$(redis_env)"
 
 print_welcome_page
 
-if [[ "$*" = *"/opt/bitnami/scripts/redis/run.sh"* || "$*" = "/run.sh" ]]; then
+if [[ "$*" = *"/opt/bitnami/scripts/redis/run.sh"* || "$*" = *"/run.sh"* ]]; then
     info "** Starting Redis setup **"
     /opt/bitnami/scripts/redis/setup.sh
     info "** Redis setup finished! **"
