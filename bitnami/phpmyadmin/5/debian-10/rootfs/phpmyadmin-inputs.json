@@ -10,5 +10,6 @@
   "databaseServerSslCiphers": "{{$global.env.DATABASE_SSL_CIPHERS}}",
   "databaseServerSslKey": "{{$global.env.DATABASE_SSL_KEY}}",
   "databaseServerSslVerify": "{{$global.env.DATABASE_SSL_VERIFY}}",
+  "phpMemoryLimit": "{{$global.env.PHP_MEMORY_LIMIT}}",
   "requireLocal": "{{$global.env.REQUIRE_LOCAL}}"
 }
