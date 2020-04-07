@@ -8,6 +8,7 @@
   "language": "{{$global.env.MOODLE_LANGUAGE}}",
   "moodleSiteName": "{{$global.env.MOODLE_SITENAME}}",
   "password": "{{$global.env.MOODLE_PASSWORD}}",
+  "phpMemoryLimit": "{{$global.env.PHP_MEMORY_LIMIT}}",
   "skipInstall": "{{$global.env.MOODLE_SKIP_INSTALL}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
