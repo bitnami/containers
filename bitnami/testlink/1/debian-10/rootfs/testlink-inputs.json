@@ -7,6 +7,7 @@
   "email": "{{$global.env.TESTLINK_EMAIL}}",
   "language": "{{$global.env.TESTLINK_LANGUAGE}}",
   "password": "{{$global.env.TESTLINK_PASSWORD}}",
+  "phpMemoryLimit": "{{$global.env.PHP_MEMORY_LIMIT}}",
   "smtpConnectionMode": "{{$global.env.SMTP_CONNECTION_MODE}}",
   "smtpEnable": "{{$global.env.SMTP_ENABLE}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
