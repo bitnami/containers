@@ -8,6 +8,7 @@
   "host": "{{$global.env.OPENCART_HOST}}",
   "httpTimeout": "{{$global.env.OPENCART_HTTP_TIMEOUT}}",
   "password": "{{$global.env.OPENCART_PASSWORD}}",
+  "phpMemoryLimit": "{{$global.env.PHP_MEMORY_LIMIT}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
   "smtpPort": "{{$global.env.SMTP_PORT}}",
