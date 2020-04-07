@@ -14,6 +14,7 @@
   "httpsPort": "{{$global.env.WORDPRESS_HTTPS_PORT}}",
   "lastName": "{{$global.env.WORDPRESS_LAST_NAME}}",
   "password": "{{$global.env.WORDPRESS_PASSWORD}}",
+  "phpMemoryLimit": "{{$global.env.PHP_MEMORY_LIMIT}}",
   "scheme": "{{$global.env.WORDPRESS_SCHEME}}",
   "skipInstall": "{{$global.env.WORDPRESS_SKIP_INSTALL}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
