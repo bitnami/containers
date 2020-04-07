@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.9.16-debian-10-r24`, `3`, `3.9.16`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.16-debian-10-r24/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.9.16-debian-10-r25`, `3`, `3.9.16`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.16-debian-10-r25/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
 
@@ -232,6 +232,10 @@ When you start the Joomla! image, you can adjust the configuration of the instan
 - `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
 - `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### PHP configuration
+
+- `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **256M**
 
 If you want to add a new environment variable:
 
