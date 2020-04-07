@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-debian-10`, `5.0.2-debian-10-r19`, `5`, `5.0.2`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.0.2-debian-10-r19/5/debian-10/Dockerfile)
+* [`5-debian-10`, `5.0.2-debian-10-r20`, `5`, `5.0.2`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.0.2-debian-10-r20/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpmyadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phpmyadmin).
 
@@ -103,7 +103,7 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/master/docker-compose.yml) file present in this repository: 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -199,10 +199,11 @@ The phpMyAdmin instance can be customized by specifying environment variables on
 - `DATABASE_SSL_CA_PATH`: Directory containing trusted SSL CA certificates in PEM format.
 - `DATABASE_SSL_CIPHERS`: List of allowable ciphers for connections when using SSL.
 - `DATABASE_SSL_VERIFY`: Enable SSL certificate validation. Default: **yes**
+- `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **256M**
 
 ### Specifying Environment variables using Docker Compose
 
-This requires a change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/master/docker-compose.yml) file present in this repository: 
+This requires a change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -268,7 +269,7 @@ RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt
 
 ## Modify the ports used by Apache by default
 # It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181 
+ENV APACHE_HTTP_PORT_NUMBER=8181
 ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
