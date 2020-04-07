@@ -11,6 +11,7 @@
   "mongodbPassword": "{{$global.env.MONGODB_PASSWORD}}",
   "mongodbPort": "{{$global.env.MONGODB_PORT_NUMBER}}",
   "mongodbUser": "{{$global.env.MONGODB_USER}}",
+  "phpMemoryLimit": "{{$global.env.PHP_MEMORY_LIMIT}}",
   "postgresqlHost": "{{$global.env.POSTGRESQL_HOST}}",
   "postgresqlPassword": "{{$global.env.POSTGRESQL_PASSWORD}}",
   "postgresqlPort": "{{$global.env.POSTGRESQL_PORT_NUMBER}}",
