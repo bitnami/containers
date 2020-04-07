@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1.7-debian-10`, `1.7.6-4-debian-10-r32`, `1.7`, `1.7.6-4`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.6-4-debian-10-r32/1.7/debian-10/Dockerfile)
+* [`1.7-debian-10`, `1.7.6-4-debian-10-r33`, `1.7`, `1.7.6-4`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.6-4-debian-10-r33/1.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
@@ -113,7 +113,7 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-prestashop/blob/master/docker-compose.yml) file present in this repository: 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-prestashop/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -238,6 +238,10 @@ When you start the PrestaShop image, you can adjust the configuration of the ins
 - `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
 - `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### PHP configuration
+
+- `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **128M**
 
 If you want to add a new environment variable:
 
