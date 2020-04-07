@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.9.20-debian-10-r60`, `1`, `1.9.20`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.20-debian-10-r60/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.9.20-debian-10-r61`, `1`, `1.9.20`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.20-debian-10-r61/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/testlink GitHub repo](https://github.com/bitnami/bitnami-docker-testlink).
 
@@ -113,7 +113,7 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-testlink/blob/master/docker-compose.yml) file present in this repository: 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-testlink/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -236,6 +236,10 @@ When you start the testlink image, you can adjust the configuration of the insta
 - `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
+##### PHP configuration
+
+- `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **256M**
+
 If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section in the  [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-testlink/blob/master/docker-compose.yml) file present in this repository:
@@ -350,7 +354,7 @@ RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt
 
 ## Modify the ports used by Apache by default
 # It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181 
+ENV APACHE_HTTP_PORT_NUMBER=8181
 ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
@@ -391,7 +395,7 @@ volumes:
   testlink_data:
     driver: local
 ```
-  
+
 # Notable Changes
 
 ## 1.9.19-debian-9-r98 and 1.9.19-ol-7-r111
