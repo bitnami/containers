@@ -9,5 +9,6 @@
   "httpsPort": "{{$global.env.DRUPAL_HTTPS_PORT}}",
   "installationProfile": "{{$global.env.DRUPAL_PROFILE}}",
   "password": "{{$global.env.DRUPAL_PASSWORD}}",
+  "phpMemoryLimit": "{{$global.env.PHP_MEMORY_LIMIT}}",
   "username": "{{$global.env.DRUPAL_USERNAME}}"
 }
