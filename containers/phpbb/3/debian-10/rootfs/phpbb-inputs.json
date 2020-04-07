@@ -11,6 +11,7 @@
   "host": "{{$global.env.PHPBB_HOST}}",
   "lastName": "{{$global.env.PHPBB_LAST_NAME}}",
   "password": "{{$global.env.PHPBB_PASSWORD}}",
+  "phpMemoryLimit": "{{$global.env.PHP_MEMORY_LIMIT}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
   "smtpPort": "{{$global.env.SMTP_PORT}}",
