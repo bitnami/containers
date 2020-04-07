@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 libgeoip1 libpcre3 libssl1.1 procps sudo unzip zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.16.1-2" --checksum 42084146b6cc40c79c8e92a305f28a899f1479ac633d5e7938b270d700a323dc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.16.1-3" --checksum 406d81566dfde862032474a85e6b05565db858a3e7559cf28a0b5a05b7c2cdf5
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor" "1.10.1-0" --checksum 00547544372073d830082773608f98fcbe9e923a22cffcc3a23588c894798178
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/harbor-portal/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-portal" \
-    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r58" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r59" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
