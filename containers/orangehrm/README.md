@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.3.5-0-debian-10-r10`, `4`, `4.3.5-0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.3.5-0-debian-10-r10/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.3.5-0-debian-10-r11`, `4`, `4.3.5-0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.3.5-0-debian-10-r11/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/orangehrm GitHub repo](https://github.com/bitnami/bitnami-docker-orangehrm).
 
@@ -226,6 +226,10 @@ The OrangeHRM instance can be customized by specifying environment variables on 
 - `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
 - `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### PHP configuration
+
+- `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **256M**
 
 If you want to add a new environment variable:
 
