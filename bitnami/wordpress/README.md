@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-debian-10`, `5.4.0-debian-10-r3`, `5`, `5.4.0`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.4.0-debian-10-r3/5/debian-10/Dockerfile)
+* [`5-debian-10`, `5.4.0-debian-10-r4`, `5`, `5.4.0`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.4.0-debian-10-r4/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
@@ -246,6 +246,10 @@ The WordPress instance can be customized by specifying environment variables on 
 * `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
 * `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
 * `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### PHP configuration
+
+* `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **256M**
 
 ### Specifying Environment variables using Docker Compose
 
@@ -487,7 +491,7 @@ volumes:
   - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the WP site by exporting its content, and importing it on a new WordPress container. In the links below you'll find some alternatives:
     - [Migrate WordPress using All-in-One WP Migration plugin](https://docs.bitnami.com/general/how-to/migrate-wordpress/)
     - [Migrate WordPress using VaultPress](https://vaultpress.com/)
-  - No writing permissions will be granted on `wp-config.php` by default. 
+  - No writing permissions will be granted on `wp-config.php` by default.
 
 ## 5.2.1-debian-9-r9 and 5.2.1-ol-7-r9
 
