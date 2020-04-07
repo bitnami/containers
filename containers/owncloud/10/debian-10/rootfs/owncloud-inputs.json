@@ -7,5 +7,6 @@
   "email": "{{$global.env.OWNCLOUD_EMAIL}}",
   "host": "{{$global.env.OWNCLOUD_HOST}}",
   "password": "{{$global.env.OWNCLOUD_PASSWORD}}",
+  "phpMemoryLimit": "{{$global.env.PHP_MEMORY_LIMIT}}",
   "username": "{{$global.env.OWNCLOUD_USERNAME}}"
 }
