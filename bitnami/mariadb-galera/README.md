@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10.4-debian-10`, `10.4.12-debian-10-r69`, `10.4`, `10.4.12` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.12-debian-10-r69/10.4/debian-10/Dockerfile)
 * [`10.3-debian-10`, `10.3.22-debian-10-r68`, `10.3`, `10.3.22`, `latest` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.22-debian-10-r68/10.3/debian-10/Dockerfile)
 * [`10.2-debian-10`, `10.2.31-debian-10-r67`, `10.2`, `10.2.31` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.31-debian-10-r67/10.2/debian-10/Dockerfile)
-* [`10.1-debian-10`, `10.1.44-debian-10-r67`, `10.1`, `10.1.44` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.44-debian-10-r67/10.1/debian-10/Dockerfile)
+* [`10.1-debian-10`, `10.1.44-debian-10-r68`, `10.1`, `10.1.44` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.44-debian-10-r68/10.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb-galera GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb-galera).
 
@@ -366,10 +366,10 @@ Refer to the [OpenLDAP Administrator's Guide](https://www.openldap.org/doc/admin
 
 To secure the replication traffic you must mount the certificates files and set the following environment variables:
 
-- `MARIADB_ENABLE_SSL_RT`: Whether to enable SSL for replication traffic. Defaults to `no`.
-- `MARIADB_SSL_RT_CERT_FILE`: File containing the certificate file for the SSL traffic. No defaults.
-- `MARIADB_SSL_RT_KEY_FILE`: File containing the key for certificate. No defaults.
-- `MARIADB_SSL_RT_CA_FILE`: File containing the CA of the certificate. No defaults.
+- `MARIADB_ENABLE_TLS_RT`: Whether to enable TLS for replication traffic. Defaults to `no`.
+- `MARIADB_TLS_RT_CERT_FILE`: File containing the certificate file for the TSL traffic. No defaults.
+- `MARIADB_TLS_RT_KEY_FILE`: File containing the key for certificate. No defaults.
+- `MARIADB_TLS_RT_CA_FILE`: File containing the CA of the certificate. No defaults.
 
 ### Start MariaDB Galera with secured replication traffic
 
@@ -380,9 +380,9 @@ $ docker run --name mariadb \
   -v /path/to/ca.pem:/bitnami/mariadb/certs/ca.pem:ro
   -e ALLOW_EMPTY_PASSWORD=yes \
   -e MARIADB_ENABLE_SSL_RT=yes \
-  -e MARIADB_SSL_RT_CERT=/bitnami/mariadb/certs/cert.pem \
-  -e MARIADB_SSL_RT_KEY=/bitnami/mariadb/certs/key.pem \
-  -e MARIADB_SSL_RT_CA=/bitnami/mariadb/certs/ca.pem \
+  -e MARIADB_TLS_RT_CERT=/bitnami/mariadb/certs/cert.pem \
+  -e MARIADB_TLS_RT_KEY=/bitnami/mariadb/certs/key.pem \
+  -e MARIADB_TLS_RT_CA=/bitnami/mariadb/certs/ca.pem \
   bitnami/mariadb-galera:latest
 ```
 
