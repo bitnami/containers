@@ -186,13 +186,13 @@ pgpool_attach_node() {
 #########################
 pgpool_healthcheck() {
     info "Checking pgpool health..."
-    if PGCONNECT_TIMEOUT=15 PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" -h localhost -tA -c "SHOW pool_nodes;" >/dev/null; then
+    if PGCONNECT_TIMEOUT=15 PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" -d postgres -h localhost -tA -c "SHOW pool_nodes;" >/dev/null; then
         # look up backiends that are marked offline
-        for node in $(PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" -h localhost -tA -c "SHOW pool_nodes;" | grep "down")
+        for node in $(PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" -d postgres -h localhost -tA -c "SHOW pool_nodes;" | grep "down")
         do
             node_id=$(echo ${node} | cut -d'|' -f1)
             node_host=$(echo ${node} | cut -d'|' -f2)
-            if PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" -h "${node_host}" -tA -c "SELECT 1" >/dev/null; then
+            if PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" -d postgres -h "${node_host}" -tA -c "SELECT 1" >/dev/null; then
                 # attach backend if it has come back online
                 pgpool_attach_node "${node_id}"
             fi
