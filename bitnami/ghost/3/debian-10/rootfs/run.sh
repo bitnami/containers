@@ -4,7 +4,7 @@
 
 USER=ghost
 
-START_COMMAND="ghost start && tail -f /bitnami/ghost/content/logs/*.log"
+START_COMMAND="ghost start && ghost log -f"
 export NODE_ENV=production
 
 cd /opt/bitnami/ghost || exit 1
