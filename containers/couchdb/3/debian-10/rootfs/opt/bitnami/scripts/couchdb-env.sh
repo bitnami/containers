@@ -46,6 +46,7 @@ export COUCHDB_DATA_DIR="${COUCHDB_VOLUME_DIR}/data"
 # System users (when running with a privileged user)
 export COUCHDB_DAEMON_USER="couchdb"
 export COUCHDB_DAEMON_GROUP="couchdb"
+export PATH="${COUCHDB_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 
 # CouchDB settings
 export COUCHDB_NODENAME="${COUCHDB_NODENAME:-}"
