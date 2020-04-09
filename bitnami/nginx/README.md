@@ -338,8 +338,8 @@ FROM bitnami/nginx
 Here is an example of extending the image with the following modifications:
 
 - Install the `vim` editor
-- Modify the Apache configuration file
-- Modify the ports used by Apache
+- Modify the NGINX configuration file
+- Modify the ports used by NGINX
 - Change the user that runs the container
 
 ```Dockerfile
