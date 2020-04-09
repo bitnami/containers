@@ -10,7 +10,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl dirmngr ghostscript gnupg imagemagick libbz2-1.0 libc6 libgcc1 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 procps sudo unzip zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
-RUN bitnami-pkg install node-12.16.1-0 --checksum 36bab987be1cc792c7155e30545b004b76fc9a81796afec343a0a698935204b2
+RUN bitnami-pkg install node-12.16.2-0 --checksum 714705c0b6ad2dd97a887b78c384e3b67e8e9517be3f3629dec3b537f5e8ca38
 RUN bitnami-pkg install tini-0.18.0-3 --checksum 1e9b72b6636c6a48397a18df2363b44461e87ad7f892c179a9115c7525ed9327
 RUN bitnami-pkg unpack parse-dashboard-2.0.5-4 --checksum 1d103f06768bc9b7c46aedef62691bcfb2823a280e64d57a3feea60a84422815
 RUN bitnami-pkg install gosu-1.11.0-3 --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
@@ -19,7 +19,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="2.0.5-debian-10-r74" \
+    BITNAMI_IMAGE_VERSION="2.0.5-debian-10-r75" \
     NAMI_PREFIX="/.nami" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="MyDashboard" \
