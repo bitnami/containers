@@ -21,6 +21,31 @@ dns_lookup() {
     getent ahosts "$host" | awk '/STREAM/ {print $1 }'
 }
 
+#########################
+## Wait for a hostname and return the IP
+# Arguments:
+#   $1 - hostname
+#   $2 - number of retries
+#   $3 - seconds to wait between retries
+# Returns:
+#   - IP address that corresponds to the hostname
+#########################
+wait_for_dns_lookup() {
+    local hostname="${1:?hostname is missing}"
+    local retries="${2:-5}"
+    local seconds="${3:-1}"
+    check_host() {
+      if [[ $(dns_lookup "$hostname") == "" ]]; then
+        false
+      else
+        true
+      fi
+    }
+    # Wait 10 minutes for the host to be ready
+    retry_while "check_host ${hostname}" "$retries" "$seconds"
+    dns_lookup "$hostname"
+}
+
 ########################
 # Get machine's IP
 # Arguments:
