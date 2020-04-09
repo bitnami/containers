@@ -207,6 +207,7 @@ export REDIS_MASTER_PORT_NUMBER="${REDIS_MASTER_PORT_NUMBER:-6379}"
 export REDIS_MASTER_PASSWORD="${REDIS_MASTER_PASSWORD:-}"
 export REDIS_PASSWORD="${REDIS_PASSWORD:-}"
 export REDIS_REPLICATION_MODE="${REDIS_REPLICATION_MODE:-}"
+export REDIS_PORT="${REDIS_PORT:-6379}"
 export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
 EOF
     if [[ -f "${REDIS_PASSWORD_FILE:-}" ]]; then
@@ -270,8 +271,6 @@ redis_validate() {
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
-
-
 ########################
 # Configure Redis replication
 # Globals:
@@ -329,6 +328,43 @@ redis_disable_unsafe_commands() {
 }
 
 ########################
+# Redis configure perissions
+# Globals:
+#   REDIS_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+redis_configure_permissions() {
+  debug "Ensuring expected directories/files exist..."
+  for dir in "${REDIS_BASEDIR}" "${REDIS_VOLUME}/data" "${REDIS_BASEDIR}/tmp" "${REDIS_LOGDIR}"; do
+      ensure_dir_exists "$dir"
+      if am_i_root; then
+          chown "$REDIS_DAEMON_USER:$REDIS_DAEMON_GROUP" "$dir"
+      fi
+  done
+}
+
+########################
+# Redis specific configuration to override the default one
+# Globals:
+#   REDIS_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+redis_override_conf() {
+  if [[ ! -e "$REDIS_BASEDIR/mounted-etc/redis.conf" ]]; then
+      # Configure Replication mode
+      if [[ -n "$REDIS_REPLICATION_MODE" ]]; then
+          redis_configure_replication
+      fi
+  fi
+}
+
+########################
 # Ensure Redis is initialized
 # Globals:
 #   REDIS_*
@@ -338,29 +374,39 @@ redis_disable_unsafe_commands() {
 #   None
 #########################
 redis_initialize() {
+  redis_configure_default
+  redis_override_conf
+}
+
+########################
+# Configures Redis permissions and general parameters (also used in redis-cluster container)
+# Globals:
+#   REDIS_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+redis_configure_default() {
     info "Initializing Redis..."
 
     # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
     # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
     rm -f "$REDIS_BASEDIR/tmp/redis.pid"
 
+    redis_configure_permissions
+
     # User injected custom configuration
-    if [[ -e "$REDIS_BASEDIR/etc/redis.conf" ]]; then
+    if [[ -e "$REDIS_BASEDIR/mounted-etc/redis.conf" ]]; then
         if [[ -e "$REDIS_BASEDIR/etc/redis-default.conf" ]]; then
             rm "${REDIS_BASEDIR}/etc/redis-default.conf"
         fi
+        cp "${REDIS_BASEDIR}/mounted-etc/redis.conf" "${REDIS_BASEDIR}/etc/redis.conf"
     else
-        debug "Ensuring expected directories/files exist..."
-        for dir in "${REDIS_VOLUME}/data" "${REDIS_BASEDIR}/tmp" "${REDIS_LOGDIR}"; do
-            ensure_dir_exists "$dir"
-            if am_i_root; then
-                chown "$REDIS_DAEMON_USER:$REDIS_DAEMON_GROUP" "$dir"
-            fi
-        done
-        mv "$REDIS_BASEDIR/etc/redis-default.conf" "$REDIS_BASEDIR/etc/redis.conf"
-
-        # Redis config
+        cp "${REDIS_BASEDIR}/etc/redis-default.conf" "${REDIS_BASEDIR}/etc/redis.conf"
+        # Default Redis config
         debug "Setting Redis config file..."
+        redis_conf_set port "$REDIS_PORT"
         redis_conf_set dir "${REDIS_VOLUME}/data"
         redis_conf_set logfile "" # Log to stdout
         redis_conf_set pidfile "${REDIS_BASEDIR}/tmp/redis.pid"
@@ -379,10 +425,6 @@ redis_initialize() {
         fi
         if [[ -n "$REDIS_DISABLE_COMMANDS" ]]; then
             redis_disable_unsafe_commands
-        fi
-        # Configure Replication mode
-        if [[ -n "$REDIS_REPLICATION_MODE" ]]; then
-            redis_configure_replication
         fi
     fi
 }
