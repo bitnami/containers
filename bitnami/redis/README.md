@@ -46,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5.0-debian-10`, `5.0.8-debian-10-r34`, `5.0`, `5.0.8`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.8-debian-10-r34/5.0/debian-10/Dockerfile)
+* [`5.0-debian-10`, `5.0.8-debian-10-r35`, `5.0`, `5.0.8`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.8-debian-10-r35/5.0/debian-10/Dockerfile)
 * [`4.0-debian-10`, `4.0.14-debian-10-r72`, `4.0`, `4.0.14` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-debian-10-r72/4.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
@@ -362,12 +362,12 @@ The above command scales up the number of replicas to `3`. You can scale down in
 
 ## Configuration file
 
-The image looks for configurations in `/opt/bitnami/redis/etc/redis.conf`. You can overwrite the `redis.conf` file using your own custom configuration file.
+The image looks for configurations in `/opt/bitnami/redis/mounted-etc/redis.conf`. You can overwrite the `redis.conf` file using your own custom configuration file.
 
 ```bash
 $ docker run --name redis \
     -e ALLOW_EMPTY_PASSWORD=yes \
-    -v /path/to/your_redis.conf:/opt/bitnami/redis/etc/redis.conf \
+    -v /path/to/your_redis.conf:/opt/bitnami/redis/mounted-etc/redis.conf \
     -v /path/to/redis-data-persistence:/bitnami/redis/data \
     bitnami/redis:latest
 ```
@@ -379,7 +379,7 @@ services:
   redis:
   ...
     volumes:
-      - /path/to/your_redis.conf:/opt/bitnami/redis/etc/redis.conf
+      - /path/to/your_redis.conf:/opt/bitnami/redis/mounted-etc/redis.conf
       - /path/to/redis-persistence:/bitnami/redis/data
   ...
 ```
@@ -465,6 +465,10 @@ $ docker-compose up redis
 
 # Notable Changes
 
+## 5.0.8-debian-10-r24
+
+- The recommended mount point to use a custom `redis.conf` changes from `/opt/bitnami/redis/etc/ ` to `/opt/bitnami/redis/mounted-etc/`.
+
 ## 5.0.0-r0
 
 - Starting with Redis 5.0 the command [REPLICAOF](https://redis.io/commands/replicaof) is available in favor of `SLAVEOF`. For backward compatibility with previous versions, `slave` replication mode is still supported. We encourage the use of the `REPLICAOF` command if you are using Redis 5.0.
@@ -473,7 +477,7 @@ $ docker-compose up redis
 
 - Decrease the size of the container. It is not necessary Node.js anymore. Redis configuration moved to bash scripts in the `rootfs/` folder.
 - The recommended mount point to persist data changes to `/bitnami/redis/data`.
-- The main `redis.conf` file is not persisted in a volume. The path is `/opt/bitnami/redis/etc/redis.conf`.
+- The main `redis.conf` file is not persisted in a volume. The path is `/opt/bitnami/redis/mounted-etc/redis.conf`.
 - Backwards compatibility is not guaranteed when data is persisted using docker-compose. You can use the workaround below to overcome it:
 
 ```bash
