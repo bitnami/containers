@@ -4,7 +4,7 @@
 
 This container ships the official MongoDB Community binaries from MongoDB, Inc and the source code is available at the [official MongoDB Community Server downloads page](https://www.mongodb.com/download-center/community).
 
-All MongoDB versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Iniciative (OSI). 
+All MongoDB versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Iniciative (OSI).
 
 # TL;DR;
 
@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4.2-debian-10`, `4.2.5-debian-10-r46`, `4.2`, `4.2.5` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.5-debian-10-r46/4.2/debian-10/Dockerfile)
+* [`4.2-debian-10`, `4.2.5-debian-10-r47`, `4.2`, `4.2.5` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.5-debian-10-r47/4.2/debian-10/Dockerfile)
 * [`3.6-debian-10`, `0.0.0-debian-10-r0`, `3.6`, `0.0.0` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/3.6/debian-10/Dockerfile)
 * [`4.0-debian-10`, `0.0.0-debian-10-r0`, `4.0`, `0.0.0`, `latest` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/4.0/debian-10/Dockerfile)
 
@@ -203,7 +203,7 @@ services:
 
 Configuring the system log verbosity level is possible through the following env vars:
 
-- `MONGODB_DISABLE_SYSTEM_LOG`: Whether to enable/disable system log on MongoDB. Default: `no`. Possible values: `[yes, no]`.
+- `MONGODB_DISABLE_SYSTEM_LOG`: Whether to enable/disable system log on MongoDB. Default: `false`. Possible values: `[true, false]`.
 - `MONGODB_SYSTEM_LOG_VERBOSITY`: MongoDB system log verbosity level. Default: `0`. Possible values: `[0, 1, 2, 3, 4, 5]`. For more information about the verbosity levels please refer to the [MongoDB documentation](https://docs.mongodb.com/manual/reference/configuration-options/#systemLog.verbosity)
 
 ```bash
@@ -226,7 +226,7 @@ services:
 
 Enabling/disabling IPv6 is possible through the following env var:
 
-- `MONGODB_ENABLE_IPV6`: Whether to enable/disable IPv6 on MongoDB. Default: `no`. Possible values: `[yes, no]`
+- `MONGODB_ENABLE_IPV6`: Whether to enable/disable IPv6 on MongoDB. Default: `false`. Possible values: `[true, false]`
 
 To enable IPv6 support, you can execute:
 
@@ -250,7 +250,7 @@ services:
 
 Enabling/disabling [directoryPerDB](https://docs.mongodb.com/manual/reference/configuration-options/#storage.directoryPerDB) is possible through the following env var:
 
-- `MONGODB_ENABLE_DIRECTORY_PER_DB`: Whether to enable/disable directoryPerDB on MongoDB. Default: `yes`. Possible values: `[yes, no]`
+- `MONGODB_ENABLE_DIRECTORY_PER_DB`: Whether to enable/disable directoryPerDB on MongoDB. Default: `true`. Possible values: `[true, false]`
 
 ```bash
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_DIRECTORY_PER_DB=yes bitnami/mongodb:latest

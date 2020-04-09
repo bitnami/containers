@@ -4,14 +4,14 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/libmongodb.sh
 
-# Load MongoDB env. variables
-eval "$(mongodb_env)"
+# Load environment
+. /opt/bitnami/scripts/mongodb-env.sh
 
 print_welcome_page
 

@@ -4,6 +4,8 @@
 # Bitnami MongoDB library
 
 # shellcheck disable=SC1091
+# shellcheck disable=SC2120
+# shellcheck disable=SC2119
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libfile.sh
@@ -13,102 +15,6 @@
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libnet.sh
-
-
-########################
-# Load global variables used on MongoDB configuration.
-# Globals:
-#   MONGODB_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-mongodb_env() {
-    cat <<"EOF"
-# Paths
-export MONGODB_VOLUME_DIR="/bitnami"
-export MONGODB_DATA_DIR="${MONGODB_DATA_DIR:-${MONGODB_VOLUME_DIR}/mongodb/data}"
-export MONGODB_BASE_DIR="/opt/bitnami/mongodb"
-export MONGODB_CONF_DIR="$MONGODB_BASE_DIR/conf"
-export MONGODB_MOUNTED_CONF_DIR="${MONGODB_MOUNTED_CONF_DIR:-${MONGODB_VOLUME_DIR}/conf}"
-export MONGODB_LOG_DIR="$MONGODB_BASE_DIR/logs"
-export MONGODB_TMP_DIR="$MONGODB_BASE_DIR/tmp"
-export MONGODB_BIN_DIR="$MONGODB_BASE_DIR/bin"
-export MONGODB_TEMPLATES_DIR="$MONGODB_BASE_DIR/templates"
-export MONGODB_MONGOD_TEMPLATES_FILE="$MONGODB_TEMPLATES_DIR/mongodb.conf.tpl"
-export MONGODB_CONF_FILE="$MONGODB_CONF_DIR/mongodb.conf"
-export MONGODB_KEY_FILE="$MONGODB_CONF_DIR/keyfile"
-export MONGODB_PID_FILE="$MONGODB_TMP_DIR/mongodb.pid"
-export MONGODB_LOG_FILE="$MONGODB_LOG_DIR/mongodb.log"
-export MONGODB_INITSCRIPTS_DIR=/docker-entrypoint-initdb.d
-export PATH="$MONGODB_BIN_DIR:$PATH"
-
-# Users
-export MONGODB_DAEMON_USER="mongo"
-export MONGODB_DAEMON_GROUP="mongo"
-
-# Settings
-export MONGODB_HOST="${MONGODB_HOST:-}"
-export MONGODB_MAX_TIMEOUT="${MONGODB_MAX_TIMEOUT:-35}"
-export MONGODB_PORT_NUMBER="${MONGODB_PORT_NUMBER:-27017}"
-export MONGODB_ROOT_PASSWORD="${MONGODB_ROOT_PASSWORD:-}"
-export MONGODB_USERNAME="${MONGODB_USERNAME:-}"
-export MONGODB_REPLICA_SET_MODE="${MONGODB_REPLICA_SET_MODE:-}"
-export MONGODB_REPLICA_SET_NAME="${MONGODB_REPLICA_SET_NAME:-replicaset}"
-export MONGODB_ENABLE_MAJORITY_READ="${MONGODB_ENABLE_MAJORITY_READ:-yes}"
-export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
-export MONGODB_EXTRA_FLAGS="${MONGODB_EXTRA_FLAGS:-}"
-export MONGODB_CLIENT_EXTRA_FLAGS="${MONGODB_CLIENT_EXTRA_FLAGS:-}"
-export MONGODB_ADVERTISED_HOSTNAME="${MONGODB_ADVERTISED_HOSTNAME:-}"
-export MONGODB_DATABASE="${MONGODB_DATABASE:-}"
-export MONGODB_DISABLE_SYSTEM_LOG="${MONGODB_DISABLE_SYSTEM_LOG:-no}"
-export MONGODB_ENABLE_DIRECTORY_PER_DB="${MONGODB_ENABLE_DIRECTORY_PER_DB:-no}"
-export MONGODB_ENABLE_IPV6="${MONGODB_ENABLE_IPV6:-no}"
-export MONGODB_PRIMARY_HOST="${MONGODB_PRIMARY_HOST:-}"
-export MONGODB_PRIMARY_PORT_NUMBER="${MONGODB_PRIMARY_PORT_NUMBER:-27017}"
-export MONGODB_PRIMARY_ROOT_PASSWORD="${MONGODB_PRIMARY_ROOT_PASSWORD:-}"
-export MONGODB_PRIMARY_ROOT_USER="${MONGODB_PRIMARY_ROOT_USER:-root}"
-export MONGODB_SYSTEM_LOG_VERBOSITY="${MONGODB_SYSTEM_LOG_VERBOSITY:-0}"
-EOF
-    if [[ -f "${MONGODB_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export MONGODB_PASSWORD="$(< "${MONGODB_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export MONGODB_PASSWORD="${MONGODB_PASSWORD:-}"
-EOF
-    fi
-    if [[ -f "${MONGODB_ROOT_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export MONGODB_ROOT_PASSWORD="$(< "${MONGODB_ROOT_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export MONGODB_ROOT_PASSWORD="${MONGODB_ROOT_PASSWORD:-}"
-EOF
-    fi
-    if [[ -f "${MONGODB_PRIMARY_ROOT_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export MONGODB_PRIMARY_ROOT_PASSWORD="$(< "${MONGODB_PRIMARY_ROOT_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export MONGODB_PRIMARY_ROOT_PASSWORD="${MONGODB_PRIMARY_ROOT_PASSWORD:-}"
-EOF
-    fi
-    if [[ -f "${MONGODB_REPLICA_SET_KEY_FILE:-}" ]]; then
-        cat <<"EOF"
-export MONGODB_REPLICA_SET_KEY="$(< "${MONGODB_REPLICA_SET_KEY_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export MONGODB_REPLICA_SET_KEY="${MONGODB_REPLICA_SET_KEY:-}"
-EOF
-    fi
-
-}
 
 ########################
 # Validate settings in MONGODB_* env. variables
@@ -203,21 +109,6 @@ mongodb_copy_mounted_config() {
             exit 1
         fi
     fi
-}
-
-########################
-# Create MongoDB configuration (mongodb.conf) file
-# Globals:
-#   MONGODB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-mongodb_create_mongod_config() {
-    debug "Creating main configuration file..."
-
-    render-template "$MONGODB_MONGOD_TEMPLATES_FILE" > "$MONGODB_CONF_FILE"
 }
 
 ########################
@@ -340,14 +231,15 @@ mongodb_restart() {
 # Globals:
 #   MONGODB_*
 # Arguments:
-#   None
+#   $1 - Path to MongoDB configuration file
 # Returns:
 #   None
 #########################
 mongodb_start_bg() {
     # Use '--fork' option to enable daemon mode
     # ref: https://docs.mongodb.com/manual/reference/program/mongod/#cmdoption-mongod-fork
-    local flags=("--fork" "--config=$MONGODB_CONF_FILE")
+    local -r conf_file="${1:-$MONGODB_CONF_FILE}"
+    local flags=("--fork" "--config=$conf_file")
     [[ -z "${MONGODB_EXTRA_FLAGS:-}" ]] || flags+=(${MONGODB_EXTRA_FLAGS})
 
     debug "Starting MongoDB in background..."
@@ -419,12 +311,83 @@ mongodb_stop() {
 mongodb_config_apply_regex() {
     local -r match_regex="${1:?match_regex is required}"
     local -r substitute_regex="${2:?substitute_regex is required}"
+    local -r conf_file_path="${3:-$MONGODB_CONF_FILE}"
     local mongodb_conf
 
-    mongodb_conf="$(sed -E "s@$match_regex@$substitute_regex@" "$MONGODB_CONF_FILE")"
-    echo "$mongodb_conf" > "$MONGODB_CONF_FILE"
+    mongodb_conf="$(sed -E "s@$match_regex@$substitute_regex@" "$conf_file_path")"
+    echo "$mongodb_conf" > "$conf_file_path"
 }
 
+########################
+# Change common logging settings
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mongodb_set_log_conf() {
+    local -r conf_file_path="${1:-$MONGODB_CONF_FILE}"
+    local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
+    if ! mongodb_is_file_external "$conf_file_name"; then
+        if [[ -n "$MONGODB_DISABLE_SYSTEM_LOG" ]]; then
+            mongodb_config_apply_regex "quiet:.*" "quiet: $({ is_boolean_yes "$MONGODB_DISABLE_SYSTEM_LOG" && echo 'true';} || echo 'false')" "$conf_file_path"
+        fi
+        if [[ -n "$MONGODB_SYSTEM_LOG_VERBOSITY" ]]; then
+            mongodb_config_apply_regex "verbosity:.*" "verbosity: $MONGODB_SYSTEM_LOG_VERBOSITY" "$conf_file_path"
+        fi
+    else
+        debug "$conf_file_name mounted. Skipping setting log settings"
+    fi
+}
+
+########################
+# Change common storage settings
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mongodb_set_storage_conf() {
+    local -r conf_file_path="${1:-$MONGODB_CONF_FILE}"
+    local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
+
+    if ! mongodb_is_file_external "$conf_file_name"; then
+        if [[ -n "$MONGODB_ENABLE_DIRECTORY_PER_DB" ]]; then
+            mongodb_config_apply_regex "directoryPerDB:.*" "directoryPerDB: $({ is_boolean_yes "$MONGODB_ENABLE_DIRECTORY_PER_DB" && echo 'true';} || echo 'false')" "$conf_file_path"
+        fi
+    else
+        debug "$conf_file_name mounted. Skipping setting storage settings"
+    fi
+}
+
+########################
+# Change common network settings
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mongodb_set_net_conf() {
+    local -r conf_file_path="${1:-$MONGODB_CONF_FILE}"
+    local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
+
+    if ! mongodb_is_file_external "$conf_file_name"; then
+        if [[ -n "$MONGODB_PORT_NUMBER" ]]; then
+            mongodb_config_apply_regex "port:.*" "port: $MONGODB_PORT_NUMBER" "$conf_file_path"
+        fi
+        if [[ -n "$MONGODB_ENABLE_IPV6" ]]; then
+            mongodb_config_apply_regex "directoryPerDB:.*" "directoryPerDB: $({ is_boolean_yes "$MONGODB_ENABLE_IPV6" && echo 'true';} || echo 'false')" "$conf_file_path"
+        fi
+    else
+        debug "$conf_file_name mounted. Skipping setting port and IPv6 settings"
+    fi
+}
 ########################
 # Change bind ip address to 0.0.0.0
 # Globals:
@@ -435,11 +398,14 @@ mongodb_config_apply_regex() {
 #   None
 #########################
 mongodb_set_listen_all_conf() {
-    if ! mongodb_is_file_external "mongodb.conf"; then
-        mongodb_config_apply_regex "#?bindIp:.*" "#bindIp:"
-        mongodb_config_apply_regex "#?bindIpAll:.*" "bindIpAll: true"
+    local -r conf_file_path="${1:-$MONGODB_CONF_FILE}"
+    local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
+
+    if ! mongodb_is_file_external "$conf_file_name"; then
+        mongodb_config_apply_regex "#?bindIp:.*" "#bindIp:" "$conf_file_path"
+        mongodb_config_apply_regex "#?bindIpAll:.*" "bindIpAll: true" "$conf_file_path"
     else
-        debug "mongodb.conf mounted. Skipping IP binding to all addresses"
+        debug "$conf_file_name mounted. Skipping IP binding to all addresses"
     fi
 }
 
@@ -453,20 +419,24 @@ mongodb_set_listen_all_conf() {
 #   None
 #########################
 mongodb_set_auth_conf() {
+    local -r conf_file_path="${1:-$MONGODB_CONF_FILE}"
+    local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
+
     local authorization
-    if ! mongodb_is_file_external "mongodb.conf"; then
+
+    if ! mongodb_is_file_external "$conf_file_name"; then
         if [[ -n "$MONGODB_ROOT_PASSWORD" ]] || [[ -n "$MONGODB_PASSWORD" ]]; then
             authorization="$(yq read "$MONGODB_CONF_FILE" security.authorization)"
             if [[ "$authorization" = "disabled" ]]; then
 
                 info "Enabling authentication..."
                 # TODO: replace 'sed' calls with 'yq' once 'yq write' does not remove comments
-                mongodb_config_apply_regex "#?authorization:.*" "authorization: enabled"
-                mongodb_config_apply_regex "#?enableLocalhostAuthBypass:.*" "enableLocalhostAuthBypass: false"
+                mongodb_config_apply_regex "#?authorization:.*" "authorization: enabled" "$conf_file_path"
+                mongodb_config_apply_regex "#?enableLocalhostAuthBypass:.*" "enableLocalhostAuthBypass: false" "$conf_file_path"
             fi
         fi
     else
-        debug "mongodb.conf mounted. Skipping authorization enabling"
+        debug "$conf_file_name mounted. Skipping authorization enabling"
     fi
 }
 
@@ -480,12 +450,21 @@ mongodb_set_auth_conf() {
 #   None
 #########################
 mongodb_set_replicasetmode_conf() {
-    if ! mongodb_is_file_external "mongodb.conf"; then
-        mongodb_config_apply_regex "#?replication:.*" "replication:"
-        mongodb_config_apply_regex "#?replSetName:.*" "replSetName: $MONGODB_REPLICA_SET_NAME"
-        mongodb_config_apply_regex "#?enableMajorityReadConcern:.*" "enableMajorityReadConcern: $({ is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" && echo 'true';} || echo 'false')"
+    local -r conf_file_path="${1:-$MONGODB_CONF_FILE}"
+    local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
+
+    if ! mongodb_is_file_external "$conf_file_name"; then
+        mongodb_config_apply_regex "#?replication:.*" "replication:" "$conf_file_path"
+        mongodb_config_apply_regex "#?replSetName:" "replSetName:" "$conf_file_path"
+        mongodb_config_apply_regex "#?enableMajorityReadConcern:.*" "enableMajorityReadConcern:" "$conf_file_path"
+        if [[ -n "$MONGODB_REPLICA_SET_NAME" ]]; then
+            mongodb_config_apply_regex "replSetName:.*" "replSetName: $MONGODB_REPLICA_SET_NAME" "$conf_file_path"
+        fi
+        if [[ -n "$MONGODB_ENABLE_MAJORITY_READ" ]]; then
+            mongodb_config_apply_regex "enableMajorityReadConcern:.*" "enableMajorityReadConcern: $({ is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" && echo 'true';} || echo 'false')" "$conf_file_path"
+        fi
     else
-        debug "mongodb.conf mounted. Skipping replicaset mode enabling"
+        debug "$conf_file_name mounted. Skipping replicaset mode enabling"
     fi
 }
 
@@ -531,10 +510,13 @@ EOF
 #   None
 #########################
 mongodb_set_keyfile_conf() {
-    if ! mongodb_is_file_external "mongodb.conf"; then
-        mongodb_config_apply_regex "#?keyFile:.*" "keyFile: $MONGODB_KEY_FILE"
+    local -r conf_file_path="${1:-$MONGODB_CONF_FILE}"
+    local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
+
+    if ! mongodb_is_file_external "$conf_file_name"; then
+        mongodb_config_apply_regex "#?keyFile:.*" "keyFile: $MONGODB_KEY_FILE" "$conf_file_path"
     else
-        debug "mongodb.conf mounted. Skipping keyfile location configuration"
+        debug "$conf_file_name mounted. Skipping keyfile location configuration"
     fi
 }
 
@@ -986,103 +968,6 @@ configure_permissions() {
     fi
 }
 
-########################
-# Print properties
-# Globals:
-#   MONGODB_*
-# Arguments:
-#   $1 - persited data
-# Returns:
-#   None
-#########################
-mongodb_print_properties() {
-    local -r persisted=${1:?persisted is required}
-    local contains_passwords=false
-
-    if [[ -n $MONGODB_ROOT_PASSWORD ]] || [[ -n $MONGODB_PRIMARY_ROOT_USER  ]] || [[ -n $MONGODB_PASSWORD ]]; then
-        contains_passwords=true
-    fi
-
-    info ""
-    info "########################################################################"
-    info " Installation parameters for MongoDB:"
-
-    if $persisted; then
-        info "   Persisted data and properties have been restored."
-        info "   Any input specified will not take effect."
-    else
-        if [[ "$MONGODB_REPLICA_SET_MODE" =~ ^primary$ ]]; then
-          [[ -n $MONGODB_ROOT_PASSWORD ]] && info "  Root Password: **********"
-        fi
-
-        [[ -n $MONGODB_USERNAME ]] && info "  User Name: $MONGODB_USERNAME"
-        [[ -n $MONGODB_PASSWORD ]] && info "  Password: **********"
-        [[ -n $MONGODB_DATABASE ]] && info "  Database: $MONGODB_DATABASE"
-        if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
-            info "  Replication Mode: $MONGODB_REPLICA_SET_MODE"
-            if [[ "$MONGODB_REPLICA_SET_MODE" =~ ^(secondary|arbiter)$ ]]; then
-                info "  Primary Host: $MONGODB_PRIMARY_HOST"
-                info "  Primary Port: $MONGODB_PRIMARY_PORT_NUMBER"
-                info "  Primary Root User: $MONGODB_PRIMARY_ROOT_USER"
-                info "  Primary Root Password: **********"
-            fi
-        fi
-    fi
-
-    if $contains_passwords; then
-        info "(Passwords are not shown for security reasons)"
-    else
-        info "This installation requires no credentials."
-    fi
-
-    info "########################################################################"
-    info ""
-}
-
-########################
-# Remove PIDs, log files and conf files from a previous run (case of container restart)
-# Globals:
-#   MONGODB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-mongodb_clean_from_restart() {
-    # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
-    # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
-    rm -f "$MONGODB_PID_FILE"
-    if ! is_dir_empty "$MONGODB_CONF_DIR"; then
-        # Backwards compatibility mechanism for stable/mongodb v7.x.x helm chart
-        for file in "${MONGODB_CONF_DIR}"/*; do
-            if ! test -w "${file}"; then
-                warn "File ${file} was mounted in ${MONGODB_CONF_DIR} (probably using a ConfigMap or Secret). The recommended mount point is ${MONGODB_MOUNTED_CONF_DIR}."
-            else
-                debug "Removing ${file} (from previous execution) as it will be regenerated."
-                rm -f "${file}"
-            fi
-        done
-    fi
-}
-
-########################
-# Configure the MongoDB permissions in case of root execution
-# Globals:
-#   MONGODB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-mongodb_set_permissions() {
-    debug "Setting permissions for MongoDB folders"
-    # Configuring permissions for tmp, logs and data folders
-    if am_i_root; then
-        chown -LR "$MONGODB_DAEMON_USER":"$MONGODB_DAEMON_GROUP" "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR"
-        configure_permissions "$MONGODB_DATA_DIR" "$MONGODB_DAEMON_USER" "$MONGODB_DAEMON_GROUP" "755" "644"
-    fi
-}
-
 ###############
 # Initialize MongoDB service
 # Globals:
@@ -1097,10 +982,11 @@ mongodb_initialize() {
 
     info "Initializing MongoDB..."
 
-    mongodb_clean_from_restart
+    rm -f "$MONGODB_PID_FILE"
     mongodb_copy_mounted_config
-    mongodb_ensure_mongod_config_exists
-    mongodb_set_permissions
+    mongodb_set_net_conf
+    mongodb_set_log_conf
+    mongodb_set_storage_conf
 
     if is_dir_empty "$MONGODB_DATA_DIR/db"; then
         info "Deploying MongoDB from scratch..."
@@ -1137,25 +1023,6 @@ mongodb_initialize() {
     fi
 
     mongodb_set_auth_conf
-    mongodb_print_properties $persisted
-}
-
-########################
-# Create MongoDB configuration (mongodb.conf) file
-# Globals:
-#   MONGODB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-mongodb_ensure_mongod_config_exists() {
-    if [[ -f "$MONGODB_CONF_FILE" ]]; then
-        info "Custom configuration $MONGODB_CONF_FILE detected!"
-    else
-        info "No injected configuration files found. Creating default config files..."
-        mongodb_create_mongod_config
-    fi
 }
 
 ########################
