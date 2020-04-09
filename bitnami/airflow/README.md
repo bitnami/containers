@@ -33,7 +33,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.10.9-debian-10-r60`, `1`, `1.10.9`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.9-debian-10-r60/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.10.9-debian-10-r61`, `1`, `1.10.9`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.9-debian-10-r61/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow).
 
@@ -334,6 +334,18 @@ The Airflow instance can be customized by specifying environment variables on th
 - `REDIS_PORT_NUMBER`: Port used by Redis server. Default: **6379**
 - `REDIS_USER`: User that Airflow will use to connect with Redis. No defaults.
 - `REDIS_PASSWORD`: Password that Airflow will use to connect with Redis. No defaults.
+
+##### Airflow LDAP authentication
+
+- `AIRFLOW_LDAP_ENABLE`: Enable LDAP authentication. Default: **no** 
+- `AIRFLOW_LDAP_URI`: LDAP server URI. No defaults.
+- `AIRFLOW_LDAP_SEARCH`: LDAP search base. No defaults.
+- `AIRFLOW_LDAP_BIND_USER`: LDAP user name. No defaults.
+- `AIRFLOW_LDAP_BIND_PASSWORD`: LDAP user password. No defaults.
+- `AIRFLOW_LDAP_UID_FIELD`: LDAP field used for uid. Default: **uid**.
+- `AIRFLOW_LDAP_USE_TLS`: Use LDAP SSL. Defaults: **False**.
+- `AIRFLOW_LDAP_ALLOW_SELF_SIGNED`: Allow self signed certicates in LDAP ssl. Default:s **True**.
+- `AIRFLOW_LDAP_TLS_CA_CERTIFICATE`: File that store the CA for LDAP ssl. No defaults.
 
 > In addition to the previous environment variables, all the parameters from the configuration file can be overwritten by using environment variables with this format: `AIRFLOW__{SECTION}__{KEY}`. Note the double underscores.
 
