@@ -4,12 +4,14 @@
 set -o errexit
 set -o nounset
 set -o pipefail
+# set -o xtrace # Uncomment this line for debugging purposes
 
+# Load libraries
 . /opt/bitnami/scripts/libmongodb.sh
 . /opt/bitnami/scripts/libos.sh
 
-# Load MongoDB env. variables
-eval "$(mongodb_env)"
+# Load environment
+. /opt/bitnami/scripts/mongodb-env.sh
 
 cmd=$(command -v mongod)
 
@@ -19,6 +21,8 @@ if [[ -n "${MONGODB_EXTRA_FLAGS:-}" ]]; then
     read -r -a extra_flags <<< "$MONGODB_EXTRA_FLAGS"
     flags+=("${extra_flags[@]}")
 fi
+
+flags+=("$@")
 
 info "** Starting MongoDB **"
 if am_i_root; then
