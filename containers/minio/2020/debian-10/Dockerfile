@@ -11,7 +11,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl jq procps sudo unzip
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2020.4.4-0" --checksum 5837e49ecca24459cadef468b84d948bb968ce605634524f1bed198ebb3da435
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2020.4.4-0" --checksum f59d7eab9f6d6223fe62f471f17065156b63fca768ea1fdd26d4b0958e1e03e9
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2020.4.10-0" --checksum 5542bf4c855ec771f65f57e58db6b960e11fad6758de7d630a486335b2d27d61
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -19,7 +19,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/minio/postunpack.sh
 ENV BITNAMI_APP_NAME="minio" \
-    BITNAMI_IMAGE_VERSION="2020.4.4-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="2020.4.10-debian-10-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:/opt/bitnami/common/bin:$PATH"
 
