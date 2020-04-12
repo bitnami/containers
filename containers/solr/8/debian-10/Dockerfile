@@ -19,7 +19,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="8.5.0-debian-10-r25" \
+    BITNAMI_IMAGE_VERSION="8.5.0-debian-10-r26" \
     NAMI_PREFIX="/.nami" \
     SOLR_CORE="" \
     SOLR_CORE_CONF_DIR="_default" \
