@@ -8,7 +8,7 @@ https://ghost.org/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-ghost/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -42,7 +42,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.13.1-debian-10-r5`, `3`, `3.13.1`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/3.13.1-debian-10-r5/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.13.1-debian-10-r6`, `3`, `3.13.1`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/3.13.1-debian-10-r6/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
 
@@ -52,7 +52,7 @@ Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https:/
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-ghost/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-ghost/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -63,13 +63,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```bash
+  ```console
   $ docker network create ghost-tier
   ```
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-  ```bash
+  ```console
   $ docker volume create --name mariadb_data
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -84,7 +84,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Create volumes for Ghost persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name ghost_data
   $ docker run -d --name ghost -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -133,13 +133,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```bash
+  ```console
   $ docker network create ghost-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```bash
+  ```console
   $ docker run -d --name mariadb --net ghost-tier \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_ghost \
@@ -152,7 +152,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Create the Ghost container with host volumes:
 
-  ```bash
+  ```console
   $ docker run -d --name ghost -p 80:2368 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e GHOST_DATABASE_USER=bn_ghost \
@@ -171,7 +171,7 @@ Bitnami provides up-to-date versions of MariaDB and Ghost, including security pa
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/ghost:latest
   ```
 
@@ -182,7 +182,7 @@ Bitnami provides up-to-date versions of MariaDB and Ghost, including security pa
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/ghost-persistence /path/to/ghost-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -206,7 +206,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 This example shows how to install the [Storage Adapter for S3](https://github.com/colinmeinke/ghost-storage-adapter-s3#ghost-storage-adapter-s3).
 
-```
+```Dockerfile
 FROM bitnami/ghost:latest
 
 USER root
@@ -238,7 +238,7 @@ RUN cd /bitnami/ghost \
 
 **Create a script using `jq` for adding configuration to the `config.production.json`.**
 
-```bash
+```console
 #!/bin/bash -e
 cp /bitnami/ghost/config.production.json /tmp/config.tmp.json
 
@@ -253,7 +253,7 @@ Finally, build the container and set the required environment variables to confi
 
 ## Environment variables
 
-When you start the ghost image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+When you start the ghost image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
  * For Docker Compose, add the variable name and value under the application section:
 
@@ -267,7 +267,7 @@ ghost:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```bash
+```console
  $ docker run -d -p 80:2368 --name ghost --network=ghost-tier \
     -e GHOST_PASSWORD=my_password \
     -v /your/local/path/bitnami/ghost:/bitnami \
@@ -334,7 +334,7 @@ ghost:
 
  * For manual execution:
 
-```bash
+```console
  $ docker run -d -p 80:2368 --name ghost --network=ghost-tier \
     -e GHOST_HOST=localhost \
     -e ALLOW_EMPTY_PASSWORD=yes \
