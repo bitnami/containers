@@ -7,13 +7,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name solr bitnami/solr:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-solr/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -34,7 +34,7 @@ $ docker-compose up -d
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -49,7 +49,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`8-debian-10`, `8.5.0-debian-10-r26`, `8`, `8.5.0`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.5.0-debian-10-r26/8/debian-10/Dockerfile)
+* [`8-debian-10`, `8.5.0-debian-10-r27`, `8`, `8.5.0`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.5.0-debian-10-r27/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
 
@@ -57,19 +57,19 @@ Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://
 
 The recommended way to get the Bitnami solr Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/solr).
 
-```bash
+```console
 $ docker pull bitnami/solr:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/solr/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/solr:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/solr:latest 'https://github.com/bitnami/bitnami-docker-solr.git#master:8/debian-10'
 ```
 
@@ -81,7 +81,7 @@ For persistence you should mount a volume at the `/bitnami` path. The above exam
 
 To avoid inadvertent removal of this volume you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-```bash
+```console
 $ docker run -v /path/to/solr-persistence:/bitnami bitnami/solr:latest
 ```
 
@@ -107,7 +107,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create solr-network --driver bridge
 ```
 
@@ -115,7 +115,7 @@ $ docker network create solr-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `solr-network` network.
 
-```bash
+```console
 $ docker run --name solr-node1 --network solr-network bitnami/solr:latest
 ```
 
@@ -151,7 +151,7 @@ services:
 
 Then, launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -159,7 +159,7 @@ $ docker-compose up -d
 
 ## Environment variables
 
-When you start the solr image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. The following environment values are provided to custom Solr:
+When you start the solr image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. The following environment values are provided to custom Solr:
 
 - `SOLR_PORT_NUMBER`: Port used by Solr server. Default: **8983**
 - `SOLR_SERVER_DIRECTORY`: Specify the Solr server directory. Default: **server**
@@ -180,7 +180,7 @@ solr:
 
 ### Specifying Environment Variables on the Docker command line
 
-```bash
+```console
 $ docker run -d -e SOLR_CORE=my_core --name solr bitnami/solr:latest
 ```
 
@@ -206,13 +206,13 @@ solr:
 
 The Bitnami solr Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs solr
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose logs solr
 ```
 
@@ -226,7 +226,7 @@ Bitnami provides up-to-date versions of solr, including security patches, soon a
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/solr:latest
 ```
 
@@ -237,19 +237,19 @@ or if you're using Docker Compose, update the value of the image property to
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop solr
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop solr
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/solr-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/solr-persistence /path/to/solr-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -257,13 +257,13 @@ You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v solr
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v solr
 ```
 
@@ -271,13 +271,13 @@ $ docker-compose rm -v solr
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
-```bash
+```console
 $ docker run --name solr bitnami/solr:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up solr
 ```
 # Notable Changes
