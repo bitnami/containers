@@ -5,7 +5,7 @@
 
 ### Local workspace
 
-```bash
+```console
 $ mkdir ~/myapp && cd ~/myapp
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master/docker-compose.yml
 $ docker-compose up
@@ -27,7 +27,7 @@ $ docker-compose up
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -42,7 +42,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`6-debian-10`, `6.0.2-2-debian-10-r22`, `6`, `6.0.2-2`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/6.0.2-2-debian-10-r22/6/debian-10/Dockerfile)
+* [`6-debian-10`, `6.0.2-2-debian-10-r23`, `6`, `6.0.2-2`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/6.0.2-2-debian-10-r23/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rails GitHub repo](https://github.com/bitnami/bitnami-docker-rails).
 
@@ -60,20 +60,20 @@ The quickest way to get started with the Bitnami Rails Development Container is 
 
 Begin by creating a directory for your Rails application:
 
-```bash
+```console
 mkdir ~/myapp
 cd ~/myapp
 ```
 
 Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master/docker-compose.yml) file in the application directory:
 
-```bash
+```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master/docker-compose.yml
 ```
 
 Finally launch the Rails application development environment using:
 
-```bash
+```console
 $ docker-compose up
 ```
 
@@ -97,7 +97,7 @@ Commands can be launched inside the `myapp` Rails Development Container with `do
 
 The general structure of the `exec` command is:
 
-```bash
+```console
 $ docker-compose exec <service> <command>
 ```
 
@@ -107,38 +107,38 @@ Following are a few examples of launching some commonly used Rails development c
 
 - List all available rake tasks:
 
-  ```bash
+  ```console
   $ docker-compose exec myapp bundle exec rake -T
   ```
 
 - Get information about the Rails environment:
 
-  ```bash
+  ```console
   $ docker-compose exec myapp bundle exec rake about
   ```
 
 - Launch the Rails console:
 
-  ```bash
+  ```console
   $ docker-compose exec myapp rails console
   ```
 
 - Generate a scaffold:
 
-  ```bash
+  ```console
   $ docker-compose exec myapp rails generate scaffold User name:string email:string
   ```
 
 - Run database migrations:
 
-  ```bash
+  ```console
   $ docker-compose exec myapp bundle exec rake db:migrate
   ```
 
 > **Note**
 >
 > Database migrations are automatically applied during the start up of the Rails Development Container. This means that the `myapp` service could also be restarted to apply the database migrations.
-> ```bash
+> ```console
 > $ docker-compose restart myapp
 > ```
 
@@ -191,7 +191,7 @@ To add a Rubygem to your application, update the `Gemfile` in the application di
 
 For example, to add the `httparty` Rubygem:
 
-```bash
+```console
 $ echo "gem 'httparty'" >> Gemfile
 $ docker-compose restart myapp
 ```
