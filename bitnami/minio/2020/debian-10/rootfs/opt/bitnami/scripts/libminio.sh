@@ -32,7 +32,6 @@ export MINIO_CERTSDIR="/certs"
 export MINIO_SKIP_CLIENT="${MINIO_SKIP_CLIENT:-no}"
 export MINIO_DISTRIBUTED_MODE_ENABLED="${MINIO_DISTRIBUTED_MODE_ENABLED:-no}"
 export MINIO_DEFAULT_BUCKETS="${MINIO_DEFAULT_BUCKETS:-}"
-export MINIO_REGION_NAME="${MINIO_REGION_NAME:-}"
 export MINIO_PORT_NUMBER="${MINIO_PORT_NUMBER:-9000}"
 export MINIO_DAEMON_USER="minio"
 export MINIO_DAEMON_GROUP="minio"
@@ -221,10 +220,10 @@ minio_create_default_buckets() {
         info "Creating default buckets..."
         for b in "${buckets[@]}"; do
             if ! minio_client_bucket_exists "local/${b}"; then
-                if [[ -n "$MINIO_REGION_NAME" ]]; then
-                  minio_client_execute mb "--region" "${MINIO_REGION_NAME}" "local/${b}"
+                if [[ -n "${MINIO_REGION_NAME:-}" ]]; then
+                    minio_client_execute mb "--region" "${MINIO_REGION_NAME}" "local/${b}"
                 else
-                  minio_client_execute mb "local/${b}"
+                    minio_client_execute mb "local/${b}"
                 fi
             else
                 info "Bucket local/${b} already exists, skipping creation."
