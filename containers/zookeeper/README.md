@@ -6,8 +6,8 @@
 
 # TL;DR;
 
-```bash
-docker run --name zookeeper bitnami/zookeeper:latest
+```console
+$ docker run --name zookeeper bitnami/zookeeper:latest
 ```
 
 ## Docker Compose
@@ -51,7 +51,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.6.0-debian-10-r44`, `3`, `3.6.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.0-debian-10-r44/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.6.0-debian-10-r45`, `3`, `3.6.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.0-debian-10-r45/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
@@ -59,21 +59,21 @@ Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](htt
 
 The recommended way to get the Bitnami ZooKeeper Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/zookeeper).
 
-```bash
-docker pull bitnami/zookeeper:latest
+```console
+$ docker pull bitnami/zookeeper:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the
 [list of available versions](https://hub.docker.com/r/bitnami/zookeeper/tags/)
 in the Docker Hub Registry.
 
-```bash
-docker pull bitnami/zookeeper:[TAG]
+```console
+$ docker pull bitnami/zookeeper:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 docker build -t bitnami/zookeeper:latest 'https://github.com/bitnami/bitnami-docker-zookeeper.git#master:3/debian-10'
 ```
 
@@ -87,8 +87,8 @@ If you have already started using ZooKeeper, follow the steps on
 
 The image exposes a volume at `/bitnami/zookeeper` for the ZooKeeper data. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
-docker run -v /path/to/zookeeper-persistence:/bitnami/zookeeper bitnami/zookeeper:latest
+```console
+$ docker run -v /path/to/zookeeper-persistence:/bitnami/zookeeper bitnami/zookeeper:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-zookeeper/blob/master/docker-compose.yml) file present in this repository:
@@ -116,7 +116,7 @@ In this example, we will create a ZooKeeper client instance that will connect to
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -124,7 +124,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the ZooKeeper container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name zookeeper-server \
     --network app-tier \
     bitnami/zookeeper:latest
@@ -134,7 +134,7 @@ $ docker run -d --name zookeeper-server \
 
 Finally we create a new container instance to launch the ZooKeeper client and connect to the server created in the previous step:
 
-```bash
+```console
 $ docker run -it --rm \
     --network app-tier \
     bitnami/zookeeper:latest zkCli.sh -server zookeeper-server:2181  get /
@@ -169,7 +169,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -204,8 +204,8 @@ The configuration can easily be setup with the Bitnami ZooKeeper Docker image us
  - `ZOO_LOG_LEVEL`: ZooKeeper log level. Available levels are: `ALL`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`, `OFF`, `TRACE`. Default: **INFO**
  - `JVMFLAGS`: Default JVMFLAGS for the ZooKeeper process. No defaults
 
-```bash
-docker run --name zookeeper -e ZOO_SERVER_ID=1 bitnami/zookeeper:latest
+```console
+$ docker run --name zookeeper -e ZOO_SERVER_ID=1 bitnami/zookeeper:latest
 ```
 
 or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-zookeeper/blob/master/docker-compose.yml) file present in this repository:
@@ -223,17 +223,18 @@ services:
 ## Configuration
 The image looks for configuration in the `conf/` directory of `/opt/bitnami/zookeeper`.
 
+```console
+$ docker run --name zookeeper -v /path/to/zoo.cfg:/opt/bitnami/zookeeper/conf/zoo.cfg  bitnami/zookeeper:latest
 ```
-docker run --name zookeeper -v /path/to/zoo.cfg:/opt/bitnami/zookeeper/conf/zoo.cfg  bitnami/zookeeper:latest
-```
+
 After that, your changes will be taken into account in the server's behaviour.
 
 ### Step 1: Run the ZooKeeper image
 
 Run the ZooKeeper image, mounting a directory from your host.
 
-```bash
-docker run --name zookeeper -v /path/to/zoo.cfg:/opt/bitnami/zookeeper/conf/zoo.cfg bitnami/zookeeper:latest
+```console
+$ docker run --name zookeeper -v /path/to/zoo.cfg:/opt/bitnami/zookeeper/conf/zoo.cfg bitnami/zookeeper:latest
 ```
 
 or using Docker Compose:
@@ -254,7 +255,7 @@ services:
 
 Edit the configuration on your host using your favorite editor.
 
-```bash
+```console
 vi /path/to/zoo.cfg
 ```
 
@@ -262,14 +263,14 @@ vi /path/to/zoo.cfg
 
 After changing the configuration, restart your ZooKeeper container for changes to take effect.
 
-```bash
-docker restart zookeeper
+```console
+$ docker restart zookeeper
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose restart zookeeper
+```console
+$ docker-compose restart zookeeper
 ```
 ## Security
 
@@ -280,8 +281,8 @@ be able to login.
 > Note: Authentication is enabled using the CLI tool `zkCli.sh`. Therefore, it's necessary to set
 `ZOO_CLIENT_USER` and `ZOO_CLIENT_PASSWORD` environment variables too.
 
-```bash
-docker run -it -e ZOO_ENABLE_AUTH=yes \
+```console
+$ docker run -it -e ZOO_ENABLE_AUTH=yes \
                -e ZOO_SERVER_USERS=user1,user2 \
                -e ZOO_SERVER_PASSWORDS=pass4user1,pass4user2 \
                -e ZOO_CLIENT_USER=user1 \
@@ -316,8 +317,8 @@ You have to use 0.0.0.0 as the host for the server. More concretely, if the ID o
 
 Create a Docker network to enable visibility to each other via the docker container name
 
-```bash
-docker network create app-tier --driver bridge
+```console
+$ docker network create app-tier --driver bridge
 ```
 
 
@@ -326,8 +327,8 @@ docker network create app-tier --driver bridge
 
 The first step is to create one  ZooKeeper instance.
 
-```bash
-docker run --name zookeeper1 \
+```console
+$ docker run --name zookeeper1 \
   --network app-tier \
   -e ZOO_SERVER_ID=1 \
   -e ZOO_SERVERS=0.0.0.0:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888 \
@@ -341,8 +342,8 @@ docker run --name zookeeper1 \
 
 Next we start a new ZooKeeper container.
 
-```bash
-docker run --name zookeeper2 \
+```console
+$ docker run --name zookeeper2 \
   --network app-tier \
   -e ZOO_SERVER_ID=2 \
   -e ZOO_SERVERS=zookeeper1:2888:3888,0.0.0.0:2888:3888,zookeeper3:2888:3888 \
@@ -356,8 +357,8 @@ docker run --name zookeeper2 \
 
 Next we start another new ZooKeeper container.
 
-```bash
-docker run --name zookeeper3 \
+```console
+$ docker run --name zookeeper3 \
   --network app-tier \
   -e ZOO_SERVER_ID=3 \
   -e ZOO_SERVERS=zookeeper1:2888:3888,zookeeper2:2888:3888,0.0.0.0:2888:3888 \
@@ -413,14 +414,14 @@ services:
 
 The Bitnami ZooKeeper Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
-docker logs zookeeper
+```console
+$ docker logs zookeeper
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose logs zookeeper
+```console
+$ docker-compose logs zookeeper
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -433,29 +434,29 @@ To backup your data, follow these simple steps:
 
 ### Step 1: Stop the currently running container
 
-```bash
-docker stop zookeeper
+```console
+$ docker stop zookeeper
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose stop zookeeper
+```console
+$ docker-compose stop zookeeper
 ```
 
 ### Step 2: Run the backup command
 
 We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
-```bash
-docker run --rm -v /path/to/zookeeper-backups:/backups --volumes-from zookeeper busybox \
+```console
+$ docker run --rm -v /path/to/zookeeper-backups:/backups --volumes-from zookeeper busybox \
   cp -a /bitnami/zookeeper:latest /backups/latest
 ```
 
 or using Docker Compose:
 
-```bash
-docker run --rm -v /path/to/zookeeper-backups:/backups --volumes-from `docker-compose ps -q zookeeper` busybox \
+```console
+$ docker run --rm -v /path/to/zookeeper-backups:/backups --volumes-from `docker-compose ps -q zookeeper` busybox \
   cp -a /bitnami/zookeeper:latest /backups/latest
 ```
 
@@ -463,8 +464,8 @@ docker run --rm -v /path/to/zookeeper-backups:/backups --volumes-from `docker-co
 
 Restoring a backup is as simple as mounting the backup as volumes in the container.
 
-```bash
-docker run -v /path/to/zookeeper-backups/latest:/bitnami/zookeeper bitnami/zookeeper:latest
+```console
+$ docker run -v /path/to/zookeeper-backups/latest:/bitnami/zookeeper bitnami/zookeeper:latest
 ```
 
 or using Docker Compose:
@@ -487,8 +488,8 @@ Bitnami provides up-to-date versions of ZooKeeper, including security patches, s
 
 ### Step 1: Get the updated image
 
-```bash
-docker pull bitnami/zookeeper:latest
+```console
+$ docker pull bitnami/zookeeper:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -502,29 +503,29 @@ Follow the steps on [creating a backup](#backing-up-your-container).
 
 ### Step 3: Remove the currently running container
 
-```bash
-docker rm -v zookeeper
+```console
+$ docker rm -v zookeeper
 ```
 
 or using Docker Compose:
 
 
-```bash
-docker-compose rm -v zookeeper
+```console
+$ docker-compose rm -v zookeeper
 ```
 
 ### Step 4: Run the new image
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
-```bash
-docker run --name zookeeper bitnami/zookeeper:latest
+```console
+$ docker run --name zookeeper bitnami/zookeeper:latest
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose up zookeeper
+```console
+$ docker-compose up zookeeper
 ```
 
 # Notable Changes
