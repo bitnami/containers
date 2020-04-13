@@ -8,13 +8,13 @@ All MongoDB versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or l
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name mongodb bitnami/mongodb-sharded:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mongodb-sharded/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -48,9 +48,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4.2-debian-10`, `4.2.5-debian-10-r27`, `4.2`, `4.2.5` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.5-debian-10-r27/4.2/debian-10/Dockerfile)
-* [`3.6-debian-10`, `0.0.0-debian-10-r0`, `3.6`, `0.0.0` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/3.6/debian-10/Dockerfile)
+* [`4.2-debian-10`, `4.2.5-debian-10-r28`, `4.2`, `4.2.5` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.5-debian-10-r28/4.2/debian-10/Dockerfile)
 * [`4.0-debian-10`, `0.0.0-debian-10-r0`, `4.0`, `0.0.0`, `latest` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/4.0/debian-10/Dockerfile)
+* [`3.6-debian-10`, `0.0.0-debian-10-r0`, `3.6`, `0.0.0` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/3.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
@@ -58,19 +58,19 @@ Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https
 
 The recommended way to get the Bitnami MongoDB Sharded Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mongodb-sharded).
 
-```bash
+```console
 $ docker pull bitnami/mongodb-sharded:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/mongodb-sharded/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/mongodb-sharded:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/mongodb-sharded:latest 'https://github.com/bitnami/bitnami-docker-mongodb-sharded.git#master:4.0/debian-10'
 ```
 
@@ -80,7 +80,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/bitnami/mongodb` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
+```console
 $ docker run \
     -v /path/to/mongodb-persistence:/bitnami/mongodb \
     bitnami/mongodb-sharded:latest
@@ -123,7 +123,7 @@ A [sharded cluster](https://docs.mongodb.com/manual/sharding/#sharded-cluster) c
 
 The first step is to start the MongoDB primary config server.
 
-```bash
+```console
 $ docker run --name mongodb-configsvr-primary \
   -e MONGODB_SHARDING_MODE=configsvr \
   -e MONGODB_REPLICA_SET_MODE=primary \
@@ -139,7 +139,7 @@ In the above command the container is configured as Config server using the `MON
 
 Next we start a MongoDB mongos server and connect it to the config server replica set.
 
-```bash
+```console
 $ docker run --name mongos \
   --link mongodb-configsvr-primary:cfg-primary \
   -e MONGODB_SHARDING_MODE=mongos \
@@ -156,7 +156,7 @@ In the above command the container is configured as a `mongos` using the `MONGOD
 
 Finally we start a MongoDB data shard container.
 
-```bash
+```console
 $ docker run --name mongodb-shard0-primary \
   --link mongodb-configsvr-primary:cfg-primary \
   --link mongos:mongos \
@@ -227,13 +227,13 @@ The Bitnami MongoDB Sharded image contains the [same configuration features than
 
 The Bitnami MongoDB Sharded Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs mongodb-sharded
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose logs mongodb-sharded
 ```
 
@@ -247,7 +247,7 @@ Bitnami provides up-to-date versions of MongoDB, including security patches, soo
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/mongodb-sharded:latest
 ```
 
@@ -257,19 +257,19 @@ or if you're using Docker Compose, update the value of the image property to `bi
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop mongodb-sharded
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop mongodb-sharded
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/mongodb-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/mongodb-persistence /path/to/mongodb-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -277,13 +277,13 @@ You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v mongodb-sharded
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v mongodb-sharded
 ```
 
@@ -291,13 +291,13 @@ $ docker-compose rm -v mongodb-sharded
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name mongodb bitnami/mongodb-sharded:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up mongodb-sharded
 ```
 
