@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4.2-debian-10`, `4.2.5-debian-10-r50`, `4.2`, `4.2.5` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.5-debian-10-r50/4.2/debian-10/Dockerfile)
+* [`4.2-debian-10`, `4.2.5-debian-10-r51`, `4.2`, `4.2.5` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.5-debian-10-r51/4.2/debian-10/Dockerfile)
 * [`3.6-debian-10`, `0.0.0-debian-10-r0`, `3.6`, `0.0.0` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/3.6/debian-10/Dockerfile)
 * [`4.0-debian-10`, `0.0.0-debian-10-r0`, `4.0`, `0.0.0`, `latest` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/4.0/debian-10/Dockerfile)
 
@@ -78,23 +78,25 @@ $ docker build -t bitnami/mongodb:latest 'https://github.com/bitnami/bitnami-doc
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
+For persistence you should mount a directory at the `/bitnami/mongodb` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```bash
 $ docker run \
-    -v /path/to/mongodb-persistence:/bitnami \
+    -v /path/to/mongodb-persistence:/bitnami/mongodb \
     bitnami/mongodb:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
 
-```yaml
-services:
-  mongodb:
-  ...
-    volumes:
-      - /path/to/mongodb-persistence:/bitnami
-  ...
+```diff
+ ...
+ services:
+   mongodb:
+     ...
+     volumes:
+-      - 'mongodb_data:/bitnami/mongodb'
++      - /path/to/mongodb-persistence:/bitnami/mongodb
+   ...
 ```
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
@@ -611,16 +613,15 @@ $ docker run --name mongodb -v /path/to/mongodb-configuration-persistence:/bitna
 
 or using Docker Compose:
 
-```yaml
-version: '2'
-
-services:
-  mongodb:
-    image: 'bitnami/mongodb:latest'
-    ports:
-      - "27017:27017"
-    volumes:
-      - /path/to/mongodb-configuration-persistence:/bitnami/mongodb/conf
+```diff
+ ...
+ services:
+   mongodb:
+     ...
+     volumes:
+       - 'mongodb_data:/bitnami/mongodb'
++      - /path/to/mongodb-configuration-persistence:/bitnami/mongodb/conf
+   ...
 ```
 
 ### Step 2: Edit the configuration
