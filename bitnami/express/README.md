@@ -5,7 +5,7 @@
 
 ### Local workspace
 
-```bash
+```console
 $ mkdir ~/myapp && cd ~/myapp
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-express/master/docker-compose.yml
 $ docker-compose up
@@ -27,7 +27,7 @@ $ docker-compose up
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -42,7 +42,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.17.1-debian-10-r71`, `4`, `4.17.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.17.1-debian-10-r71/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.17.1-debian-10-r72`, `4`, `4.17.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.17.1-debian-10-r72/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-codiad).
 
@@ -60,20 +60,20 @@ The quickest way to get started with the Bitnami Express Development Container i
 
 Begin by creating a directory for your Express application:
 
-```bash
+```console
 mkdir ~/myapp
 cd ~/myapp
 ```
 
 Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-express/master/docker-compose.yml) file in the application directory:
 
-```bash
+```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-express/master/docker-compose.yml
 ```
 
 Finally launch the Express application development environment using:
 
-```bash
+```console
 $ docker-compose up
 ```
 
@@ -97,7 +97,7 @@ Commands can be launched inside the `myapp` Express Development Container with `
 
 The general structure of the `exec` command is:
 
-```bash
+```console
 $ docker-compose exec <service> <command>
 ```
 
@@ -107,19 +107,19 @@ Following are a few examples of launching some commonly used Express development
 
 - Load the Node.js REPL:
 
-  ```bash
+  ```console
   $ docker-compose exec myapp node
   ```
 
 - List installed NPM modules:
 
-  ```bash
+  ```console
   $ docker-compose exec myapp npm ls
   ```
 
 - Install a NPM module:
 
-  ```bash
+  ```console
   $ docker-compose exec myapp npm install bootstrap --save
   $ docker-compose restart myapp
   ```
@@ -136,13 +136,13 @@ The Express Development Container generates a Dockerfile in your working directo
 
 1. Build your Docker image
 
-  ```bash
+  ```console
   $ docker build -t myregistry/myapp:1.0.0
   ```
 
 2. Push to an image registry
 
-  ```bash
+  ```console
   $ docker push myregistry/myapp:1.0.0
   ```
 
