@@ -9,7 +9,7 @@ http://www.parse.com/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-parse-dashboard/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.0.5-debian-10-r78`, `2`, `2.0.5`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/2.0.5-debian-10-r78/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.0.5-debian-10-r79`, `2`, `2.0.5`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/2.0.5-debian-10-r79/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse-dashboard GitHub repo](https://github.com/bitnami/bitnami-docker-parse-dashboard).
 
@@ -51,7 +51,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-parse-dashboard/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -62,13 +62,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a network for the application, Parse Server and the database:
 
-  ```bash
+  ```console
   $ docker network create parse_dashboard-tier
   ```
 
 2. Start a MongoDB database in the network generated:
 
-  ```bash
+  ```console
   $ docker run -d --name mongodb --net=parse_dashboard-tier bitnami/mongodb
   ```
 
@@ -76,13 +76,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Start a Parse Server container:
 
-  ```bash
+  ```console
   $ docker run -d -p 1337:1337 --name parse --net=parse_dashboard-tier bitnami/parse
   ```
 
 4. Run the Parse Dashboard container:
 
-  ```bash
+  ```console
   $ docker run -d -p 80:4040 --name parse-dashboard --net=parse_dashboard-tier bitnami/parse-dashboard
   ```
 
@@ -129,13 +129,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```bash
+  ```console
   $ docker network create parse_dashboard-tier
   ```
 
 2. Create a MongoDB container with host volume:
 
-  ```bash
+  ```console
   $ docker run -d --name mongodb \
     --net parse-dashboard-tier \
     --volume /path/to/mongodb-persistence:/bitnami \
@@ -146,7 +146,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Start a Parse Server container:
 
-  ```bash
+  ```console
   $ docker run -d -name parse -p 1337:1337 \
     --net parse-dashboard-tier
     --volume /path/to/parse-persistence:/bitnami \
@@ -155,7 +155,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 4. Run the Parse Dashboard container:
 
-  ```bash
+  ```console
   $ docker run -d --name parse-dashboard -p 80:4040 \
   --volume /path/to/parse_dashboard-persistence:/bitnami \
   bitnami/parse-dashboard:latest
@@ -167,7 +167,7 @@ Bitnami provides up-to-date versions of Parse Dashboard, including security patc
 
 1. Get the updated images:
 
-```bash
+```console
 $ docker pull bitnami/parse-dashboard:latest
 ```
 
@@ -178,7 +178,7 @@ $ docker pull bitnami/parse-dashboard:latest
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/parse-persistence /path/to/parse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -200,7 +200,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the parse-dashboard image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+When you start the parse-dashboard image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/master/docker-compose.yml) file present in this repository:
 
@@ -215,7 +215,7 @@ parse-dashboard:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```bash
+```console
  $ docker run -d -e PARSE_DASHBOARD_PASSWORD=my_password -p 80:4040 --name parse-dashboard -v /your/local/path/bitnami/parse_dashboard:/bitnami --network=parse_dashboard-tier bitnami/parse-dashboard
 ```
 
