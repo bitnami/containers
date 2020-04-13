@@ -7,7 +7,7 @@ The blackbox exporter allows blackbox probing of endpoints over HTTP, HTTPS, DNS
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name blackbox-exporter bitnami/blackbox-exporter:latest
 ```
 
@@ -32,7 +32,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -47,7 +47,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.16.0-debian-10-r75`, `0`, `0.16.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.16.0-debian-10-r75/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.16.0-debian-10-r76`, `0`, `0.16.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-blackbox-exporter/blob/0.16.0-debian-10-r76/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/blackbox-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-blackbox-exporter).
 
@@ -55,19 +55,19 @@ Subscribe to project updates by watching the [bitnami/blackbox-exporter GitHub r
 
 The recommended way to get the Bitnami Blackbox Exporter Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/blackbox-exporter).
 
-```bash
+```console
 $ docker pull bitnami/blackbox-exporter:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/blackbox-exporter/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/blackbox-exporter:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/blackbox-exporter:latest 'https://github.com/bitnami/bitnami-docker-blackbox-exporter.git#master:0/debian-10'
 ```
 
@@ -81,7 +81,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create blackbox-exporter-network --driver bridge
 ```
 
@@ -89,7 +89,7 @@ $ docker network create blackbox-exporter-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `blackbox-exporter-network` network.
 
-```bash
+```console
 $ docker run --name blackbox-exporter-node1 --network blackbox-exporter-network bitnami/blackbox-exporter:latest
 ```
 
@@ -145,7 +145,7 @@ scrape_configs:
 
 The Bitnami blackbox-exporter Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs blackbox-exporter
 ```
 
@@ -159,7 +159,7 @@ Bitnami provides up-to-date versions of blackbox-exporter, including security pa
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/blackbox-exporter:latest
 ```
 
@@ -167,13 +167,13 @@ $ docker pull bitnami/blackbox-exporter:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop blackbox-exporter
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/blackbox-exporter-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/blackbox-exporter-persistence /path/to/blackbox-exporter-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -181,7 +181,7 @@ You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v blackbox-exporter
 ```
 
@@ -189,7 +189,7 @@ $ docker rm -v blackbox-exporter
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
-```bash
+```console
 $ docker run --name blackbox-exporter bitnami/blackbox-exporter:latest
 ```
 
