@@ -7,7 +7,7 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name kong-ingress-controller bitnami/kong-ingress-controller:latest
 ```
 
@@ -30,7 +30,7 @@ $ docker run --name kong-ingress-controller bitnami/kong-ingress-controller:late
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.9.3-debian-10-r16`, `0`, `0.9.3`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/0.9.3-debian-10-r16/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.9.3-debian-10-r17`, `0`, `0.9.3`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/0.9.3-debian-10-r17/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kong-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-kong-ingress-controller).
 
@@ -38,19 +38,19 @@ Subscribe to project updates by watching the [bitnami/kong-ingress-controller Gi
 
 The recommended way to get the Bitnami kong-ingress-controller Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kong-ingress-controller).
 
-```bash
+```console
 $ docker pull bitnami/kong-ingress-controller:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/kong-ingress-controller/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/kong-ingress-controller:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/kong-ingress-controller:latest 'https://github.com/bitnami/bitnami-docker-kong-ingress-controller.git#master:0/debian-10'
 ```
 
@@ -60,7 +60,7 @@ $ docker build -t bitnami/kong-ingress-controller:latest 'https://github.com/bit
 
 To run commands inside this container you can use `docker run`, for example to execute `kong-ingress-controller --version` you can follow the example below:
 
-```bash
+```console
 $ docker run --rm --name kong-ingress-controller bitnami/kong-ingress-controller:latest -- --version
 ```
 
