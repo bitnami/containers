@@ -4,13 +4,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name postgresql bitnami/postgresql:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-postgresql/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`12-debian-10`, `12.2.0-debian-10-r64`, `12`, `12.2.0` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.2.0-debian-10-r64/12/debian-10/Dockerfile)
+* [`12-debian-10`, `12.2.0-debian-10-r65`, `12`, `12.2.0` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.2.0-debian-10-r65/12/debian-10/Dockerfile)
 * [`11-debian-10`, `11.7.0-debian-10-r69`, `11`, `11.7.0`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.7.0-debian-10-r69/11/debian-10/Dockerfile)
 * [`10-debian-10`, `10.12.0-debian-10-r64`, `10`, `10.12.0` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.12.0-debian-10-r64/10/debian-10/Dockerfile)
 * [`9.6-debian-10`, `9.6.17-debian-10-r64`, `9.6`, `9.6.17` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.17-debian-10-r64/9.6/debian-10/Dockerfile)
@@ -56,19 +56,19 @@ Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](ht
 
 The recommended way to get the Bitnami PostgreSQL Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/postgresql).
 
-```bash
+```console
 $ docker pull bitnami/postgresql:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/postgresql/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/postgresql:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/postgresql:latest 'https://github.com/bitnami/bitnami-docker-postgresql.git#master:11/debian-10'
 ```
 
@@ -78,7 +78,7 @@ If you remove the container all your data and configurations will be lost, and t
 
 For persistence you should mount a directory at the `/bitnami/postgresql` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
+```console
 $ docker run \
     -v /path/to/postgresql-persistence:/bitnami/postgresql \
     bitnami/postgresql:latest
@@ -109,7 +109,7 @@ In this example, we will create a PostgreSQL client instance that will connect t
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -117,7 +117,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the PostgreSQL container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name postgresql-server \
     --network app-tier \
     bitnami/postgresql:latest
@@ -127,7 +127,7 @@ $ docker run -d --name postgresql-server \
 
 Finally we create a new container instance to launch the PostgreSQL client and connect to the server created in the previous step:
 
-```bash
+```console
 $ docker run -it --rm \
     --network app-tier \
     bitnami/postgresql:latest psql -h postgresql-server -U postgres
@@ -162,7 +162,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -184,7 +184,7 @@ In order to have your custom files inside the docker image you can mount them as
 
 In the above commands you may have noticed the use of the `POSTGRESQL_PASSWORD` environment variable. Passing the `POSTGRESQL_PASSWORD` environment variable when running the image for the first time will set the password of the `postgres` user to the value of `POSTGRESQL_PASSWORD` (or the content of the file specified in `POSTGRESQL_PASSWORD_FILE`).
 
-```bash
+```console
 $ docker run --name postgresql -e POSTGRESQL_PASSWORD=password123 bitnami/postgresql:latest
 ```
 
@@ -208,7 +208,7 @@ Refer to [Creating a database user on first run](#creating-a-database-user-on-fi
 
 By passing the `POSTGRESQL_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the PostgreSQL client.
 
-```bash
+```console
 $ docker run --name postgresql -e POSTGRESQL_DATABASE=my_database bitnami/postgresql:latest
 ```
 
@@ -227,7 +227,7 @@ services:
 
 You can also create a restricted database user that only has permissions for the database created with the [`POSTGRESQL_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `POSTGRESQL_USERNAME` environment variable.
 
-```bash
+```console
 $ docker run --name postgresql -e POSTGRESQL_USERNAME=my_user -e POSTGRESQL_PASSWORD=password123 -e POSTGRESQL_DATABASE=my_database bitnami/postgresql:latest
 ```
 
@@ -264,7 +264,7 @@ In a replication cluster you can have one master and zero or more slaves. When r
 
 The first step is to start the master.
 
-```bash
+```console
 $ docker run --name postgresql-master \
   -e POSTGRESQL_REPLICATION_MODE=master \
   -e POSTGRESQL_USERNAME=my_user \
@@ -281,7 +281,7 @@ In this command we are configuring the container as the master using the `POSTGR
 
 Next we start a replication slave container.
 
-```bash
+```console
 $ docker run --name postgresql-slave \
   --link postgresql-master:master \
   -e POSTGRESQL_REPLICATION_MODE=slave \
@@ -300,7 +300,7 @@ With these two commands you now have a two node PostgreSQL master-slave streamin
 
 If the master goes down you can reconfigure a slave to act as the master and begin accepting writes by creating the trigger file `/tmp/postgresql.trigger.5432`. For example the following command reconfigures `postgresql-slave` to act as the master:
 
-```bash
+```console
 $ docker exec postgresql-slave touch /tmp/postgresql.trigger.5432
 ```
 
@@ -345,7 +345,7 @@ volumes:
 
 Scale the number of slaves using:
 
-```bash
+```console
 $ docker-compose up --detach --scale postgresql-master=1 --scale postgresql-slave=3
 ```
 
@@ -410,7 +410,7 @@ services:
 
 In the example above, commits will need to be written to both the master and one of the slaves in order to be accepted. The other slave will continue using asynchronous replication. Check it with the following SQL query:
 
-```
+```console
 postgres=# select application_name as server, state,
 postgres-#       sync_priority as priority, sync_state
 postgres-#       from pg_stat_replication;
@@ -452,7 +452,7 @@ For more information refer to [Postgresql LDAP auth configuration documentation]
 
 The image looks for `postgresql.conf` file in `/opt/bitnami/postgresql/conf/`. You can mount a volume at `/bitnami/postgresql/conf/` and copy/edit the `postgresql.conf` file in the `/path/to/postgresql-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
-```
+```console
 /path/to/postgresql-persistence/conf/
 └── postgresql.conf
 
@@ -460,7 +460,7 @@ The image looks for `postgresql.conf` file in `/opt/bitnami/postgresql/conf/`. Y
 ```
 
 As PostgreSQL image is non-root, you need to set the proper permissions to the mounted directory in your host:
-```
+```console
 sudo chown 1001:1001 /path/to/postgresql-persistence/conf/
 ```
 
@@ -468,7 +468,7 @@ sudo chown 1001:1001 /path/to/postgresql-persistence/conf/
 
 Run the PostgreSQL image, mounting a directory from your host.
 
-```bash
+```console
 $ docker run --name postgresql \
     -v /path/to/postgresql-persistence/conf/:/bitnami/postgresql/conf/ \
     bitnami/postgresql:latest
@@ -492,7 +492,7 @@ services:
 
 Edit the configuration on your host using your favorite editor.
 
-```bash
+```console
 vi /path/to/postgresql-persistence/conf/postgresql.conf
 ```
 
@@ -500,13 +500,13 @@ vi /path/to/postgresql-persistence/conf/postgresql.conf
 
 After changing the configuration, restart your PostgreSQL container for changes to take effect.
 
-```bash
+```console
 $ docker restart postgresql
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose restart postgresql
 ```
 
@@ -517,7 +517,7 @@ Refer to the [server configuration](http://www.postgresql.org/docs/9.4/static/ru
 Apart of using a custom `postgresql.conf`, you can include files ending in `.conf` from the `conf.d` directory in the volume at `/bitnami/postgresql/conf/`.
 For this purpose, the default `postgresql.conf` contains the following section:
 
-```
+```config
 #------------------------------------------------------------------------------
 # CONFIG FILE INCLUDES
 #------------------------------------------------------------------------------
@@ -530,14 +530,14 @@ include_dir = 'conf.d'  # Include files ending in '.conf' from directory 'conf.d
 
 In your host, you should create the extended configuration file under the `conf.d` directory:
 
-```bash
-mkdir -p /path/to/postgresql-persistence/conf/conf.d/
-vi /path/to/postgresql-persistence/conf/conf.d/extended.conf
+```console
+$ mkdir -p /path/to/postgresql-persistence/conf/conf.d/
+$ vi /path/to/postgresql-persistence/conf/conf.d/extended.conf
 ```
 
 If you are using your custom `postgresql.conf`, you should create (or uncomment) the above section in your config file, in this case the `/path/to/postgresql-persistence/conf/` structure should be something like
 
-```
+```console
 /path/to/postgresql-persistence/conf/
 ├── conf.d
 │   └── extended.conf
@@ -553,7 +553,7 @@ Specifying extra initdb arguments can easily be done using the following environ
  - `POSTGRESQL_INITDB_ARGS`: Specifies extra arguments for the initdb command. No defaults.
  - `POSTGRESQL_INITDB_WALDIR`: Defines a custom location for the transaction log. No defaults.
 
-```bash
+```console
 $ docker run --name postgresql \
   -e POSTGRESQL_INITDB_ARGS="--data-checksums" \
   -e POSTGRESQL_INITDB_WALDIR="/bitnami/waldir" \
@@ -599,7 +599,7 @@ The Bitnami PostgreSQL container allows two different sets of environment variab
 | POSTGRESQL_SYNCHRONOUS_COMMIT_MODE   | POSTGRES_SYNCHRONOUS_COMMIT_MODE   |
 
 > *IMPORTANT*: Changing the `POSTGRES_USER` will not change the owner of the database that will continue being the `postgres` user. In order to change the database owner, please access using `postgres` as user (`$ psql -U postgres ...`) and execute the following command:
-```
+```console
 alter database POSTGRES_DATABASE owner to POSTGRES_USER;
 ```
 
@@ -614,13 +614,13 @@ It is possible to change the user that PostgreSQL will use to execute the init s
 
 The Bitnami PostgreSQL Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs postgresql
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose logs postgresql
 ```
 
@@ -634,7 +634,7 @@ Bitnami provides up-to-date versions of PostgreSQL, including security patches, 
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/postgresql:latest
 ```
 
@@ -644,31 +644,31 @@ or if you're using Docker Compose, update the value of the image property to `bi
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop postgresql
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop postgresql
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/postgresql-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/postgresql-persistence /path/to/postgresql-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v postgresql
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v postgresql
 ```
 
@@ -676,13 +676,13 @@ $ docker-compose rm -v postgresql
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name postgresql bitnami/postgresql:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up postgresql
 ```
 
