@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run -it --name node bitnami/node
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-node/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`13-debian-10`, `13.12.0-debian-10-r17`, `13`, `13.12.0` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.12.0-debian-10-r17/13/debian-10/Dockerfile)
 * [`12-debian-10-prod`, `12.16.2-debian-10-r4-prod`, `12-prod`, `12.16.2-prod`, `latest-prod` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.2-debian-10-r4-prod/12-prod/debian-10/Dockerfile)
 * [`12-debian-10`, `12.16.2-debian-10-r4`, `12`, `12.16.2`, `latest` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.2-debian-10-r4/12/debian-10/Dockerfile)
-* [`10-debian-10-prod`, `10.20.1-debian-10-r0-prod`, `10-prod`, `10.20.1-prod` (10-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.20.1-debian-10-r0-prod/10-prod/debian-10/Dockerfile)
+* [`10-debian-10-prod`, `10.20.1-debian-10-r1-prod`, `10-prod`, `10.20.1-prod` (10-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.20.1-debian-10-r1-prod/10-prod/debian-10/Dockerfile)
 * [`10-debian-10`, `10.20.1-debian-10-r0`, `10`, `10.20.1` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.20.1-debian-10-r0/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
@@ -65,19 +65,19 @@ Learn how to use multi-stage builds to build your production application contain
 
 The recommended way to get the Bitnami Node.js Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/node).
 
-```bash
+```console
 $ docker pull bitnami/node:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/node/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/node:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/node 'https://github.com/bitnami/bitnami-docker-node.git#master:12/debian-10'
 ```
 
@@ -85,7 +85,7 @@ $ docker build -t bitnami/node 'https://github.com/bitnami/bitnami-docker-node.g
 
 By default, running this image will drop you into the Node.js REPL, where you can interactively test and try things out in Node.js.
 
-```bash
+```console
 $ docker run -it --name node bitnami/node
 ```
 
@@ -99,7 +99,7 @@ $ docker run -it --name node bitnami/node
 
 The default work directory for the Node.js image is `/app`. You can mount a folder from your host here that includes your Node.js script, and run it normally using the `node` command.
 
-```bash
+```console
 $ docker run -it --name node -v /path/to/app:/app bitnami/node \
   node script.js
 ```
@@ -108,7 +108,7 @@ $ docker run -it --name node -v /path/to/app:/app bitnami/node \
 
 If your Node.js app has a `package.json` defining your app's dependencies and start script, you can install the dependencies before running your app.
 
-```bash
+```console
 $ docker run --rm -v /path/to/app:/app bitnami/node npm install
 $ docker run -it --name node  -v /path/to/app:/app bitnami/node npm start
 ```
@@ -138,7 +138,7 @@ If you are working in a Docker environment, you can inject the token at build ti
 
 * Create a `npmrc` file within the project. It contains the instructions for the `npm` command to authenticate against npmjs.org registry. The `NPM_TOKEN` will be taken at build time. The file should look like this:
 
-```bash
+```console
 //registry.npmjs.org/:_authToken=${NPM_TOKEN}
 ```
 
@@ -162,7 +162,7 @@ CMD node app.js
 
 * Now you can build the image using the above Dockerfile and the token. Run the `docker build` command as follows:
 
-```bash
+```console
 $ docker build --build-arg NPM_TOKEN=${NPM_TOKEN} .
 ```
 
@@ -199,20 +199,20 @@ var server = app.listen(3000, '0.0.0.0', function () {
 
 To access your web server from your host machine you can ask Docker to map a random port on your host to port `3000` inside the container.
 
-```bash
+```console
 $ docker run -it --name node -v /path/to/app:/app -P bitnami/node node index.js
 ```
 
 Run `docker port` to determine the random port Docker assigned.
 
-```bash
+```console
 $ docker port node
 3000/tcp -> 0.0.0.0:32769
 ```
 
 You can also specify the port you want forwarded from your host to the container.
 
-```bash
+```console
 $ docker run -it --name node -p 8080:3000 -v /path/to/app:/app bitnami/node node index.js
 ```
 
@@ -228,7 +228,7 @@ We may want to make our Node.js web server only accessible via an nginx web serv
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -269,7 +269,7 @@ Copy the virtual host above, saving the file somewhere on your host. We will mou
 
 ### Step 3: Run the Node.js image with a specific name
 
-```bash
+```console
 $ docker run -it --name myapp --network app-tier \
   -v /path/to/app:/app \
   bitnami/node node index.js
@@ -290,7 +290,7 @@ myapp:
 
 ### Step 4: Run the nginx image
 
-```bash
+```console
 $ docker run -it \
   -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf:ro \
   --network app-tier \
@@ -317,7 +317,7 @@ Bitnami provides up-to-date versions of Node.js, including security patches, soo
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/node:latest
 ```
 
@@ -325,13 +325,13 @@ or if you're using Docker Compose, update the value of the image property to `bi
 
 ### Step 2: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v node
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v node
 ```
 
@@ -339,13 +339,13 @@ $ docker-compose rm -v node
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name node bitnami/node:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up node
 ```
 
