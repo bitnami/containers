@@ -8,13 +8,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name harbor-adapter-clair bitnami/harbor-adapter-clair:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-harbor-adapter-clair/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -47,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.0.1-debian-10-r75`, `1`, `1.0.1`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-adapter-clair/blob/1.0.1-debian-10-r75/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.0.1-debian-10-r76`, `1`, `1.0.1`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-adapter-clair/blob/1.0.1-debian-10-r76/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/harbor-adapter-clair GitHub repo](https://github.com/bitnami/bitnami-docker-harbor-adapter-clair).
 
@@ -55,19 +55,19 @@ Subscribe to project updates by watching the [bitnami/harbor-adapter-clair GitHu
 
 The recommended way to get the Bitnami Harbor-Adapter-Clair Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/harbor-adapter-clair).
 
-```bash
+```console
 $ docker pull bitnami/harbor-adapter-clair:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/harbor-adapter-clair/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/harbor-adapter-clair:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/harbor-adapter-clair:latest 'https://github.com/bitnami/bitnami-docker-harbor-adapter-clair.git#master:1/debian-10'
 ```
 
@@ -77,7 +77,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
+```console
 $ docker run \
     -v /path/to/harbor-adapter-clair-persistence:/bitnami \
     bitnami/harbor-adapter-clair:latest
@@ -103,7 +103,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create harbor-adapter-clair-network --driver bridge
 ```
 
@@ -111,7 +111,7 @@ $ docker network create harbor-adapter-clair-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `harbor-adapter-clair-network` network.
 
-```bash
+```console
 $ docker run --name harbor-adapter-clair-node1 --network harbor-adapter-clair-network bitnami/harbor-adapter-clair:latest
 ```
 
@@ -129,7 +129,7 @@ For further information about the specific component itself, please refer to the
 
 The Bitnami Harbor-Adapter-Clair Docker image sends the container logs to `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs harbor-adapter-clair
 ```
 
@@ -143,7 +143,7 @@ Bitnami provides up-to-date versions of Harbor-Adapter-Clair, including security
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/harbor-adapter-clair:latest
 ```
 
@@ -151,13 +151,13 @@ $ docker pull bitnami/harbor-adapter-clair:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop harbor-adapter-clair
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v harbor-adapter-clair
 ```
 
@@ -165,7 +165,7 @@ $ docker rm -v harbor-adapter-clair
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name harbor-adapter-clair bitnami/harbor-adapter-clair:latest
 ```
 
