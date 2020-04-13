@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run -it --name phpfpm -v /path/to/app:/app bitnami/php-fpm
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-php-fpm/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -33,7 +33,7 @@ $ docker-compose up -d
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -51,7 +51,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`7.4-debian-10-prod`, `7.4.4-debian-10-r25-prod`, `7.4-prod`, `7.4.4-prod` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.4-debian-10-r25-prod/7.4-prod/debian-10/Dockerfile)
 * [`7.4-debian-10`, `7.4.4-debian-10-r25`, `7.4`, `7.4.4` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.4-debian-10-r25/7.4/debian-10/Dockerfile)
 * [`7.3-debian-10-prod`, `7.3.16-debian-10-r26-prod`, `7.3-prod`, `7.3.16-prod`, `latest-prod` (7.3-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.16-debian-10-r26-prod/7.3-prod/debian-10/Dockerfile)
-* [`7.3-debian-10`, `7.3.16-debian-10-r25`, `7.3`, `7.3.16`, `latest` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.16-debian-10-r25/7.3/debian-10/Dockerfile)
+* [`7.3-debian-10`, `7.3.16-debian-10-r26`, `7.3`, `7.3.16`, `latest` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.16-debian-10-r26/7.3/debian-10/Dockerfile)
 * [`7.2-debian-10-prod`, `7.2.29-debian-10-r26-prod`, `7.2-prod`, `7.2.29-prod` (7.2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.29-debian-10-r26-prod/7.2-prod/debian-10/Dockerfile)
 * [`7.2-debian-10`, `7.2.29-debian-10-r25`, `7.2`, `7.2.29` (7.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.29-debian-10-r25/7.2/debian-10/Dockerfile)
 
@@ -71,19 +71,19 @@ Learn how to use multi-stage builds to build your production application contain
 
 The recommended way to get the Bitnami PHP-FPM Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/php-fpm).
 
-```bash
+```console
 $ docker pull bitnami/php-fpm:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/php-fpm/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/php-fpm:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/php-fpm 'https://github.com/bitnami/bitnami-docker-php-fpm.git#master:7.3/debian-10'
 ```
 
@@ -97,7 +97,7 @@ We will use PHP-FPM with nginx to serve our PHP app. Doing so will allow us to s
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -143,7 +143,7 @@ Copy the server block above, saving the file somewhere on your host. We will mou
 
 Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our PHP-FPM server to make it easier to connect to other containers.
 
-```bash
+```console
 $ docker run -it --name phpfpm \
   --network app-tier
   -v /path/to/app:/app \
@@ -164,7 +164,7 @@ services:
 
 ### Step 4: Run the nginx image
 
-```bash
+```console
 $ docker run -it \
   -v /path/to/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/yourapp.conf \
   --network app-tier \
@@ -196,7 +196,7 @@ Since this image bundles a PHP runtime, you may want to make use of PHP outside 
 
 PHP provides a REPL where you can interactively test and try things out in PHP.
 
-```bash
+```console
 $ docker run -it --name phpfpm bitnami/php-fpm php -a
 ```
 
@@ -208,7 +208,7 @@ $ docker run -it --name phpfpm bitnami/php-fpm php -a
 
 The default work directory for the PHP-FPM image is `/app`. You can mount a folder from your host here that includes your PHP script, and run it normally using the `php` command.
 
-```bash
+```console
 $ docker run -it --name php-fpm -v /path/to/app:/app bitnami/php-fpm \
   php script.php
 ```
@@ -223,7 +223,7 @@ You can mount a custom config file from your host to edit the default configurat
 
 Run the PHP-FPM image, mounting a file from your host.
 
-```bash
+```console
 $ docker run --name phpfpm -v /path/to/php-fpm.conf:/opt/bitnami/php/etc/php-fpm.conf bitnami/php-fpm
 ```
 
@@ -242,7 +242,7 @@ services:
 
 Edit the configuration on your host using your favorite editor.
 
-```bash
+```console
 $ vi /path/to/php-fpm.conf
 ```
 
@@ -250,13 +250,13 @@ $ vi /path/to/php-fpm.conf
 
 After changing the configuration, restart your PHP-FPM container for the changes to take effect.
 
-```bash
+```console
 $ docker restart phpfpm
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose restart phpfpm
 ```
 
@@ -272,13 +272,13 @@ In order to override the default `max_file_uploads` settings you can do the foll
 
 1. Create a file called _custom.ini_ with the following content:
 
-```
+```config
 max_file_uploads = 30M
 ```
 
 2. Run the php-fpm container mounting the custom file.
 
-```bash
+```console
 $ docker run -it -v /path/to/custom.ini:/opt/bitnami/php/etc/conf.d/custom.ini bitnami/php-fpm php -i | grep max_file_uploads
 
 ```
@@ -291,13 +291,13 @@ The Bitnami PHP-FPM Docker Image sends the container logs to the `stdout`. You c
 
 To view the logs:
 
-```bash
+```console
 $ docker logs phpfpm
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose logs phpfpm
 ```
 
@@ -311,7 +311,7 @@ Bitnami provides up-to-date versions of PHP-FPM, including security patches, soo
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/php-fpm:latest
 ```
 
@@ -322,19 +322,19 @@ or if you're using Docker Compose, update the value of the image property to
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop php-fpm
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop php-fpm
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/php-fpm-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/php-fpm-persistence /path/to/php-fpm-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -342,13 +342,13 @@ You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v phpfpm
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v phpfpm
 ```
 
@@ -356,13 +356,13 @@ $ docker-compose rm -v phpfpm
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name phpfpm bitnami/php-fpm:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up phpfpm
 ```
 
