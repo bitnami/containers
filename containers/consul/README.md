@@ -13,13 +13,13 @@ HashiCorp Consul is designed to be friendly to both the DevOps community and app
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name consul bitnami/consul:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-consul/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -53,7 +53,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.7.2-debian-10-r26`, `1`, `1.7.2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.7.2-debian-10-r26/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.7.2-debian-10-r27`, `1`, `1.7.2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.7.2-debian-10-r27/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/consul GitHub repo](https://github.com/bitnami/bitnami-docker-consul).
 
@@ -61,19 +61,19 @@ Subscribe to project updates by watching the [bitnami/consul GitHub repo](https:
 
 The recommended way to get the Bitnami HashiCorp Consul Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/consul).
 
-```bash
+```console
 $ docker pull bitnami/consul:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/consul/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/consul:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/consul:latest 'https://github.com/bitnami/bitnami-docker-consul.git#master:1/debian-10'
 ```
 
@@ -85,7 +85,7 @@ For persistence you should mount a volume at the `/bitnami` path. The above exam
 
 To avoid inadvertent removal of this volume you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-```bash
+```console
 $ docker run -v /path/to/consul-persistence:/bitnami bitnami/consul:latest
 ```
 
@@ -110,7 +110,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create consul-network --driver bridge
 ```
 
@@ -118,7 +118,7 @@ $ docker network create consul-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `consul-network` network.
 
-```bash
+```console
 $ docker run --name consul-node1 --network consul-network bitnami/consul:latest
 ```
 
@@ -153,7 +153,7 @@ services:
 
 Then, launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -289,7 +289,7 @@ volumes:
 
 ## Environment variables
 
-When you start the HashiCorp Consul image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. The following environment values are provided to custom HashiCorp Consul:
+When you start the HashiCorp Consul image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. The following environment values are provided to custom HashiCorp Consul:
 
 - `CONSUL_AGENT_MODE`: Indicates if HashiCorp Consul is running in server or client mode. Valid values: server, client. Default: **server**.
 - `CONSUL_SERF_LAN_ADDRESS`: Address used for Serf LAN communications. Default: **0.0.0.0**.
@@ -321,7 +321,7 @@ consul:
 
 ### Specifying Environment Variables on the Docker command line
 
-```bash
+```console
 $ docker run -d -e CONSUL_HTTP_PORT_NUMBER=8888 --name consul bitnami/consul:latest
 ```
 
@@ -361,7 +361,7 @@ By default, the configuration of HashiCorp Consul is written to `/opt/bitnami/co
 
 Configuration can be added by passing the configuration in JSON format via the environment variable `CONSUL_LOCAL_CONFIG`. Then consul will write a `local.json` file in the HashiCorp Consul configuration directory. HashiCorp Consul will load all files within the configuration directory in alphabetical order, so ones with starting with higher letters will prevail.
 
-```bash
+```console
 $ docker run -d -e CONSUL_LOCAL_CONFIG='{
     "datacenter":"us_west",
     "server":true,
@@ -377,13 +377,13 @@ Check the [Persisting your data](# Persisting your application) section to add c
 ## Configuring the Gossip encryption key
 Specifies the secret key to use for encryption of HashiCorp Consul network traffic. This key must be 16-bytes that are Base64-encoded. The easiest way to create an encryption key is to use `consul keygen`
 
-```bash
+```console
 $ docker run --name consul bitnami/consul:latest consul keygen
 ```
 
 This command will generate a keygen, that you can add to your Dockerfile, docker-compose or pass it via command line:
 
-```bash
+```console
 $ docker run -e CONSUL_GOSSIP_ENCRYPTION_KEY=YOUR_GENERATED_KEY --name consul bitnami/consul:latest
 ```
 
@@ -403,13 +403,13 @@ The container has a HashiCorp Consul configuration directory set up at /consul/c
 
 The Bitnami consul Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs consul
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose logs consul
 ```
 
@@ -423,7 +423,7 @@ Bitnami provides up-to-date versions of consul, including security patches, soon
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/consul:latest
 ```
 
@@ -434,19 +434,19 @@ or if you're using Docker Compose, update the value of the image property to
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop consul
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop consul
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/consul-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/consul-persistence /path/to/consul-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -454,13 +454,13 @@ You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v consul
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v consul
 ```
 
@@ -468,13 +468,13 @@ $ docker-compose rm -v consul
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
-```bash
+```console
 $ docker run --name consul bitnami/consul:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up consul
 ```
 
