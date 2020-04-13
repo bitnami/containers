@@ -7,7 +7,7 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name google-cloud-sdk bitnami/google-cloud-sdk:latest
 ```
 
@@ -30,7 +30,7 @@ $ docker run --name google-cloud-sdk bitnami/google-cloud-sdk:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.288.0-debian-10-r5`, `0`, `0.288.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-google-cloud-sdk/blob/0.288.0-debian-10-r5/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.288.0-debian-10-r6`, `0`, `0.288.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-google-cloud-sdk/blob/0.288.0-debian-10-r6/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/google-cloud-sdk GitHub repo](https://github.com/bitnami/bitnami-docker-google-cloud-sdk).
 
@@ -38,19 +38,19 @@ Subscribe to project updates by watching the [bitnami/google-cloud-sdk GitHub re
 
 The recommended way to get the Bitnami google-cloud-sdk Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/google-cloud-sdk).
 
-```bash
+```console
 $ docker pull bitnami/google-cloud-sdk:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/google-cloud-sdk/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/google-cloud-sdk:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/google-cloud-sdk:latest 'https://github.com/bitnami/bitnami-docker-google-cloud-sdk.git#master:0/debian-10'
 ```
 
@@ -60,7 +60,7 @@ $ docker build -t bitnami/google-cloud-sdk:latest 'https://github.com/bitnami/bi
 
 To run commands inside this container you can use `docker run`, for example to execute `google-cloud-sdk --version` you can follow the example below:
 
-```bash
+```console
 $ docker run --rm --name google-cloud-sdk bitnami/google-cloud-sdk:latest -- --version
 ```
 
@@ -70,7 +70,7 @@ Consult the [google-cloud-sdk Reference Documentation](https://cloud.google.com/
 
 It's possible to load your own configuration, which is useful if you want to connect to a remote cluster:
 
-```bash
+```console
 $ docker run --rm --name google-cloud-sdk -v /path/to/your/gcloud/config:/.config/gcloud/configurations/config_default bitnami/google-cloud-sdk:latest
 ```
 
