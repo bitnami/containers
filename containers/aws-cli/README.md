@@ -7,7 +7,7 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name aws-cli bitnami/aws-cli:latest
 ```
 
@@ -30,7 +30,7 @@ $ docker run --name aws-cli bitnami/aws-cli:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.18.39-debian-10-r4`, `1`, `1.18.39`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.39-debian-10-r4/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.18.39-debian-10-r5`, `1`, `1.18.39`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.18.39-debian-10-r5/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aws-cli GitHub repo](https://github.com/bitnami/bitnami-docker-aws-cli).
 
@@ -38,19 +38,19 @@ Subscribe to project updates by watching the [bitnami/aws-cli GitHub repo](https
 
 The recommended way to get the Bitnami aws-cli Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/aws-cli).
 
-```bash
+```console
 $ docker pull bitnami/aws-cli:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/aws-cli/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/aws-cli:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/aws-cli:latest 'https://github.com/bitnami/bitnami-docker-aws-cli.git#master:1/debian-10'
 ```
 
@@ -60,7 +60,7 @@ $ docker build -t bitnami/aws-cli:latest 'https://github.com/bitnami/bitnami-doc
 
 To run commands inside this container you can use `docker run`, for example to execute `aws-cli --version` you can follow the example below:
 
-```bash
+```console
 $ docker run --rm --name aws-cli bitnami/aws-cli:latest -- --version
 ```
 
@@ -70,7 +70,7 @@ Consult the [aws-cli Reference Documentation](https://docs.microsoft.com/en-us/c
 
 It's possible to load your own configuration, which is useful if you want to connect to a remote cluster:
 
-```bash
+```console
 $ docker run --rm --name aws-cli -v /path/to/your/aws/config:/.aws/config bitnami/aws-cli:latest
 ```
 
