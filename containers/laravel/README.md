@@ -5,7 +5,7 @@
 
 ### Local workspace
 
-```bash
+```console
 $ mkdir ~/myapp && cd ~/myapp
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-laravel/master/docker-compose.yml
 $ docker-compose up
@@ -27,7 +27,7 @@ $ docker-compose up
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -42,7 +42,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-debian-10`, `7.3.0-debian-10-r18`, `7`, `7.3.0`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/7.3.0-debian-10-r18/7/debian-10/Dockerfile)
+* [`7-debian-10`, `7.3.0-debian-10-r19`, `7`, `7.3.0`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/7.3.0-debian-10-r19/7/debian-10/Dockerfile)
 * [`6-debian-10`, `6.18.3-debian-10-r19`, `6`, `6.18.3` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/6.18.3-debian-10-r19/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rails GitHub repo](https://github.com/bitnami/bitnami-docker-laravel).
@@ -61,20 +61,20 @@ The quickest way to get started with the Bitnami Laravel Development Container i
 
 Begin by creating a directory for your Laravel application:
 
-```bash
+```console
 mkdir ~/myapp
 cd ~/myapp
 ```
 
 Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-laravel/master/docker-compose.yml) file in the application directory:
 
-```bash
+```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-laravel/master/docker-compose.yml
 ```
 
 Finally launch the Laravel application development environment using:
 
-```bash
+```console
 $ docker-compose up
 ```
 
@@ -102,7 +102,7 @@ Commands can be launched inside the `myapp` Laravel Development Container with `
 
 The general structure of the `exec` command is:
 
-```bash
+```console
 $ docker-compose exec <service> <command>
 ```
 
@@ -112,25 +112,25 @@ Following are a few examples of launching some commonly used Laravel development
 
 - List all `artisan` commands:
 
-  ```bash
+  ```console
   $ docker-compose exec myapp php artisan list
   ```
 
 - List all registered routes:
 
-  ```bash
+  ```console
   $ docker-compose exec myapp php artisan route:list
   ```
 
 - Create a new application controller named `UserController`:
 
-  ```bash
+  ```console
   $ docker-compose exec myapp php artisan make:controller UserController
   ```
 
 - Installing a new composer package called `phpmailer/phpmailer` with version `5.2.*`:
 
-  ```bash
+  ```console
   $ docker-compose exec myapp composer require phpmailer/phpmailer:5.2.*
   ```
 
