@@ -123,7 +123,7 @@ $ docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-ruby/blob/master/docker-compose.yml) file present in this repository: 
 
-```
+```yaml
 ruby:
   ...
   command: "sh -c 'bundle install && ruby script.rb'"
@@ -143,7 +143,7 @@ This image exposes port `3000` in the container, so you should ensure that your 
 
 Below is an example of a [Sinatra](http://www.sinatrarb.com/) app listening to remote connections on port `3000`:
 
-```erb
+```ruby
 require 'sinatra'
 
 set :bind, '0.0.0.0'
