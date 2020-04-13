@@ -18,7 +18,7 @@ support for hierarchical and horizontal federation
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name prometheus bitnami/prometheus:latest
 ```
 
@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -57,7 +57,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.17.1-debian-10-r17`, `2`, `2.17.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.17.1-debian-10-r17/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.17.1-debian-10-r18`, `2`, `2.17.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.17.1-debian-10-r18/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus).
 
@@ -65,19 +65,19 @@ Subscribe to project updates by watching the [bitnami/prometheus GitHub repo](ht
 
 The recommended way to get the Bitnami Prometheus Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/prometheus).
 
-```bash
+```console
 $ docker pull bitnami/prometheus:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/prometheus/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/prometheus:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/prometheus:latest 'https://github.com/bitnami/bitnami-docker-prometheus.git#master:2/debian-10'
 ```
 
@@ -91,7 +91,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create prometheus-network --driver bridge
 ```
 
@@ -99,7 +99,7 @@ $ docker network create prometheus-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `prometheus-network` network.
 
-```bash
+```console
 $ docker run --name prometheus-node1 --network prometheus-network bitnami/prometheus:latest
 ```
 
@@ -121,7 +121,7 @@ Prometheus can reload its configuration at runtime. If the new configuration is 
 
 The Bitnami Prometheus Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs prometheus
 ```
 
@@ -135,7 +135,7 @@ Bitnami provides up-to-date versions of prometheus, including security patches, 
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/prometheus:latest
 ```
 
@@ -143,13 +143,13 @@ $ docker pull bitnami/prometheus:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop prometheus
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/prometheus-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/prometheus-persistence /path/to/prometheus-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -157,7 +157,7 @@ You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v prometheus
 ```
 
@@ -165,7 +165,7 @@ $ docker rm -v prometheus
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
-```bash
+```console
 $ docker run --name prometheus bitnami/prometheus:latest
 ```
 
