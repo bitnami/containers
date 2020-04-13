@@ -8,7 +8,7 @@ https://odoo.com/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-odoo/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`13-debian-10`, `13.0.20200410-debian-10-r2`, `13`, `13.0.20200410`, `latest` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20200410-debian-10-r2/13/debian-10/Dockerfile)
 * [`12-debian-10`, `12.0.20200315-debian-10-r34`, `12`, `12.0.20200315` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20200315-debian-10-r34/12/debian-10/Dockerfile)
-* [`11-debian-10`, `11.0.20200315-debian-10-r30`, `11`, `11.0.20200315` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20200315-debian-10-r30/11/debian-10/Dockerfile)
+* [`11-debian-10`, `11.0.20200315-debian-10-r31`, `11`, `11.0.20200315` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20200315-debian-10-r31/11/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
 
@@ -58,7 +58,7 @@ Running Odoo with a database server is the recommended way. You can either use d
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-odoo/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-odoo/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -69,13 +69,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```bash
+  ```console
   $ docker network create odoo-tier
   ```
 
 2. Start a PostgreSQL database in the network generated:
 
-  ```bash
+  ```console
   $ docker run -d --name postgresql --net odoo-tier bitnami/postgresql:latest
   ```
 
@@ -83,7 +83,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Run the Odoo container:
 
-  ```bash
+  ```console
   $ docker run -d -p 80:8069 -p 443:8071 --name odoo --net odoo-tier bitnami/odoo:latest
   ```
 
@@ -123,13 +123,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```bash
+  ```console
   $ docker network create odoo-tier
   ```
 
 2. Create a PostgreSQL container with host volume:
 
-  ```bash
+  ```console
   $ docker run -d --name postgresql \
     --net odoo-tier \
     --volume /path/to/postgresql-persistence:/bitnami \
@@ -140,7 +140,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Create the Odoo container with hist volumes:
 
-  ```bash
+  ```console
   $ docker run -d --name odoo -p 80:8069 -p 443:8071 \
     --net odoo-tier \
     --volume /path/to/odoo-persistence:/bitnami \
@@ -153,7 +153,7 @@ Bitnami provides up-to-date versions of PostgreSQL and Odoo, including security 
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/odoo:latest
   ```
 
@@ -164,7 +164,7 @@ Bitnami provides up-to-date versions of PostgreSQL and Odoo, including security 
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/odoo-persistence /path/to/odoo-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -186,7 +186,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the Odoo image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+When you start the Odoo image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section of the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-odoo/blob/master/docker-compose.yml) file present in this repository:
 
@@ -200,7 +200,7 @@ odoo:
 
  * For manual execution add a `-e` option with each variable and value:
 
-  ```bash
+  ```console
   $ docker run -d -p 80:8069 -p 443:8071 --name odoo \
     --env ODOO_PASSWORD=my_password  \
     --net odoo-tier \
@@ -243,7 +243,7 @@ This would be an example of SMTP configuration using a GMail account:
 
  * For manual execution:
 
-  ```bash
+  ```console
   $ docker run -d -p 80:8069 -p 443:8071 --name odoo \
     --env SMTP_HOST=smtp.gmail.com \
     --env SMTP_PORT=587 \
