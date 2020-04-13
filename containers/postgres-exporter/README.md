@@ -7,7 +7,7 @@ PostgreSQL Exporter is a simple server that scrapes PostgreSQL metrics endpoint 
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name postgres-exporter bitnami/postgres-exporter:latest
 ```
 
@@ -31,7 +31,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -46,7 +46,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.8.0-debian-10-r76`, `0`, `0.8.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgres-exporter/blob/0.8.0-debian-10-r76/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.8.0-debian-10-r77`, `0`, `0.8.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgres-exporter/blob/0.8.0-debian-10-r77/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgres-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-postgres-exporter).
 
@@ -54,19 +54,19 @@ Subscribe to project updates by watching the [bitnami/postgres-exporter GitHub r
 
 The recommended way to get the Bitnami PostgreSQL Exporter Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/postgres-exporter).
 
-```bash
+```console
 $ docker pull bitnami/postgres-exporter:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/postgres-exporter/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/postgres-exporter:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/postgres-exporter:latest 'https://github.com/bitnami/bitnami-docker-postgres-exporter.git#master:0/debian-10'
 ```
 
@@ -80,7 +80,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create postgres-exporter-network --driver bridge
 ```
 
@@ -88,7 +88,7 @@ $ docker network create postgres-exporter-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `postgres-exporter-network` network.
 
-```bash
+```console
 $ docker run --name postgres-exporter-node1 --network postgres-exporter-network bitnami/postgres-exporter:latest
 ```
 
@@ -105,7 +105,7 @@ Find all the configuration flags in [the postgres_exporter official documentatio
 
 The Bitnami PostgreSQL Exporter Docker image sends the container logs to `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs postgres-exporter
 ```
 
@@ -119,7 +119,7 @@ Bitnami provides up-to-date versions of postgres-exporter, including security pa
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/postgres-exporter:latest
 ```
 
@@ -127,13 +127,13 @@ $ docker pull bitnami/postgres-exporter:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop postgres-exporter
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v postgres-exporter
 ```
 
@@ -141,7 +141,7 @@ $ docker rm -v postgres-exporter
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name postgres-exporter bitnami/postgres-exporter:latest
 ```
 
