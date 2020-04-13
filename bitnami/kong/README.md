@@ -12,7 +12,7 @@ $ docker run --name kong bitnami/kong:latest
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kong/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -32,7 +32,7 @@ $ docker-compose up -d
 
 You can find an example for testing Kong in Kubernetes with the `test.yaml` file. To launch it, run the command:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -51,7 +51,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.0.2-debian-10-r48`, `2`, `2.0.2`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong/blob/2.0.2-debian-10-r48/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.0.2-debian-10-r49`, `2`, `2.0.2`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong/blob/2.0.2-debian-10-r49/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kong GitHub repo](https://github.com/bitnami/bitnami-docker-kong).
 
@@ -59,19 +59,19 @@ Subscribe to project updates by watching the [bitnami/kong GitHub repo](https://
 
 The recommended way to get the Bitnami Kong Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kong).
 
-```bash
+```console
 $ docker pull bitnami/kong:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/kong/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/kong:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/kong:latest 'https://github.com/bitnami/bitnami-docker-kong.git#master:2/debian-10'
 ```
 
@@ -85,7 +85,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create kong-network --driver bridge
 ```
 
@@ -93,7 +93,7 @@ $ docker network create kong-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `kong-network` network.
 
-```bash
+```console
 $ docker run --name kong-node1 --network kong-network bitnami/kong:latest
 ```
 
@@ -126,7 +126,7 @@ Check the official [Kong Configuration Reference](https://docs.konghq.com/latest
 
 The image looks for Kong the configuration file in `/opt/bitnami/kong/conf/kong.conf`, which you can overwrite using your own custom configuration file.
 
-```bash
+```console
 $ docker run --name kong \
   -e KONG_DATABASE=off \
   -v /path/to/kong.conf:/opt/bitnami/kong/conf/kong.conf \
@@ -155,7 +155,7 @@ services:
 
 The Bitnami Kong Docker image sends the container logs to `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs kong
 ```
 
@@ -276,7 +276,7 @@ Bitnami provides up-to-date versions of Kong, including security patches, soon a
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/kong:latest
 ```
 
@@ -284,13 +284,13 @@ $ docker pull bitnami/kong:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop kong
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v kong
 ```
 
@@ -298,7 +298,7 @@ $ docker rm -v kong
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name kong bitnami/kong:latest
 ```
 
