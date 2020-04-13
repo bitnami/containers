@@ -4,13 +4,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name pgpool bitnami/pgpool:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-pgpool/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.1.1-debian-10-r54`, `4`, `4.1.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.1-debian-10-r54/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.1.1-debian-10-r55`, `4`, `4.1.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.1-debian-10-r55/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
 
@@ -51,19 +51,19 @@ Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https:
 
 The recommended way to get the Bitnami Pgpool-II Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/pgpool).
 
-```bash
+```console
 $ docker pull bitnami/pgpool:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/pgpool/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/pgpool:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/pgpool:latest 'https://github.com/bitnami/bitnami-docker-pgpool.git#master:4/debian-10'
 ```
 
@@ -79,7 +79,7 @@ In this example, we will create a PostgreSQL client instance that will connect t
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create my-network --driver bridge
 ```
 
@@ -87,7 +87,7 @@ $ docker network create my-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `my-network` network.
 
-```bash
+```console
 $ docker run --detach --rm --name pg-0 \
   --network my-network \
   --env REPMGR_PARTNER_NODES=pg-0,pg-1 \
@@ -118,7 +118,7 @@ $ docker run --detach --rm --name pg-1 \
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `my-network` network.
 
-```bash
+```console
 $ docker run --detach --rm --name pgpool \
   --network my-network \
   --env PGPOOL_BACKEND_NODES=0:pg-0:5432,1:pg-1:5432 \
@@ -136,7 +136,7 @@ $ docker run --detach --rm --name pgpool \
 
 Finally we create a new container instance to launch the PostgreSQL client and connect to the server created in the previous step:
 
-```bash
+```console
 $ docker run -it --rm \
   --network my-network \
   bitnami/postgresql:10 \
@@ -222,7 +222,7 @@ volumes:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -274,7 +274,7 @@ In a HA PostgreSQL cluster you can have one primary and zero or more standby nod
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create my-network --driver bridge
 ```
 
@@ -282,7 +282,7 @@ $ docker network create my-network --driver bridge
 
 The first step is to start the initial primary node:
 
-```bash
+```console
 $ docker run --detach --name pg-0 \
   --network my-network \
   --env REPMGR_PARTNER_NODES=pg-0,pg-1 \
@@ -301,7 +301,7 @@ $ docker run --detach --name pg-0 \
 
 Next we start a standby node:
 
-```bash
+```console
 $ docker run --detach --name pg-1 \
   --network my-network \
   --env REPMGR_PARTNER_NODES=pg-0,pg-1 \
@@ -319,7 +319,7 @@ $ docker run --detach --name pg-1 \
 
 ### Step 4: Create the pgpool instance
 
-```bash
+```console
 $ docker run --detach --rm --name pgpool \
   --network my-network \
   --env PGPOOL_BACKEND_NODES=0:pg-0:5432,1:pg-1:5432 \
@@ -341,7 +341,7 @@ If the master goes down, **repmgr** will ensure any of the standby nodes takes t
 
 With Docker Compose the HA PostgreSQL cluster can be setup using the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-pgpool/blob/master/docker-compose.yml) file present in this repository:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-pgpool/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -352,7 +352,7 @@ $ docker-compose up -d
 
 In order to have your custom files inside the docker image you can mount them as a volume.
 
-```bash
+```console
 $ docker run --name pgpool \
   -v /path/to/init-scripts:/docker-entrypoint-initdb.d \
   bitnami/pgpool:latest
@@ -371,7 +371,7 @@ pgpool:
 
 The image looks for a `pgpool.conf` file in `/opt/bitnami/pgpool/conf/`. You can mount a volume at `/opt/bitnami/pgpool/conf/` and copy/edit the `pgpool.conf` file in the `/path/to/pgpool-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
-```
+```console
 /path/to/pgpool-persistence/conf/
 └── pgpool.conf
 
@@ -382,7 +382,7 @@ The image looks for a `pgpool.conf` file in `/opt/bitnami/pgpool/conf/`. You can
 
 Run the Pgpool image, mounting a directory from your host.
 
-```bash
+```console
 $ docker run --name pgpool \
     -v /path/to/pgpool-persistence/conf/:/opt/bitnami/pgpool/conf/ \
     bitnami/pgpool:latest
@@ -406,7 +406,7 @@ services:
 
 Edit the configuration on your host using your favorite editor.
 
-```bash
+```console
 vi /path/to/pgpool-persistence/conf/postgresql.conf
 ```
 
@@ -414,13 +414,13 @@ vi /path/to/pgpool-persistence/conf/postgresql.conf
 
 After changing the configuration, restart your Pgpool container for changes to take effect.
 
-```bash
+```console
 $ docker restart pgpool
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose restart pgpool
 ```
 
@@ -455,7 +455,7 @@ Please see the list of environment variables available in the Bitnami Pgpool con
 
 The Bitnami Pgpool-II Docker image sends the container logs to `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs pgpool
 ```
 
@@ -469,7 +469,7 @@ Bitnami provides up-to-date versions of Pgpool-II, including security patches, s
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/pgpool:latest
 ```
 
@@ -477,13 +477,13 @@ $ docker pull bitnami/pgpool:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop pgpool
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v pgpool
 ```
 
@@ -491,7 +491,7 @@ $ docker rm -v pgpool
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name pgpool bitnami/pgpool:latest
 ```
 
