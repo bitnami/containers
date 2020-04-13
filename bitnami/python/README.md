@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run -it --name python bitnami/python
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-python/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -33,7 +33,7 @@ $ docker-compose up -d
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -48,8 +48,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`3.8-debian-10-prod`, `3.8.2-debian-10-r48-prod`, `3.8-prod`, `3.8.2-prod` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.2-debian-10-r48-prod/3.8-prod/debian-10/Dockerfile)
 * [`3.8-debian-10`, `3.8.2-debian-10-r48`, `3.8`, `3.8.2` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.2-debian-10-r48/3.8/debian-10/Dockerfile)
-* [`3.8-debian-10-prod`, `3.8.2-debian-10-r47-prod`, `3.8-prod`, `3.8.2-prod` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.2-debian-10-r47-prod/3.8-prod/debian-10/Dockerfile)
 * [`3.7-debian-10`, `3.7.7-debian-10-r35`, `3.7`, `3.7.7`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.7-debian-10-r35/3.7/debian-10/Dockerfile)
 * [`3.7-debian-10-prod`, `3.7.7-debian-10-r33-prod`, `3.7-prod`, `3.7.7-prod`, `latest-prod` (3.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.7-debian-10-r33-prod/3.7-prod/debian-10/Dockerfile)
 * [`3.6-debian-10-prod`, `3.6.10-debian-10-r76-prod`, `3.6-prod`, `3.6.10-prod` (3.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-debian-10-r76-prod/3.6-prod/debian-10/Dockerfile)
@@ -73,19 +73,19 @@ Learn how to use multi-stage builds to build your production application contain
 
 The recommended way to get the Bitnami Python Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/python).
 
-```bash
+```console
 $ docker pull bitnami/python:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/python/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/python:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/python 'https://github.com/bitnami/bitnami-docker-python.git#master:3.7/debian-10'
 ```
 
@@ -93,7 +93,7 @@ $ docker build -t bitnami/python 'https://github.com/bitnami/bitnami-docker-pyth
 
 By default, running this image will drop you into the Python REPL, where you can interactively test and try things out in Python.
 
-```bash
+```console
 $ docker run -it --name python bitnami/python
 ```
 
@@ -103,7 +103,7 @@ $ docker run -it --name python bitnami/python
 
 The default work directory for the Python image is `/app`. You can mount a folder from your host here that includes your Python script, and run it normally using the `python` command.
 
-```bash
+```console
 $ docker run -it --name python -v /path/to/app:/app bitnami/python \
   python script.py
 ```
@@ -112,14 +112,14 @@ $ docker run -it --name python -v /path/to/app:/app bitnami/python \
 
 If your Python app has a `requirements.txt` defining your app's dependencies, you can install the dependencies before running your app.
 
-```bash
+```console
 $ docker run --rm -v /path/to/app:/app bitnami/python pip install -r requirements.txt
 $ docker run -it --name python -v /path/to/app:/app bitnami/python python script.py
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 python:
   image: bitnami/python:latest
   command: "sh -c 'pip install -r requirements.txt && python script.py'"
@@ -140,7 +140,7 @@ Bitnami provides up-to-date versions of Python, including security patches, soon
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/python:latest
 ```
 
@@ -148,13 +148,13 @@ or if you're using Docker Compose, update the value of the image property to `bi
 
 ### Step 2: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v python
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v python
 ```
 
@@ -162,13 +162,13 @@ $ docker-compose rm -v python
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name python bitnami/python:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up python
 ```
 
