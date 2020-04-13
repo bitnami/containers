@@ -9,7 +9,7 @@
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kibana/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -30,7 +30,7 @@ $ docker-compose up -d
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -49,7 +49,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-debian-10`, `7.6.2-debian-10-r10`, `7`, `7.6.2`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.6.2-debian-10-r10/7/debian-10/Dockerfile)
+* [`7-debian-10`, `7.6.2-debian-10-r11`, `7`, `7.6.2`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.6.2-debian-10-r11/7/debian-10/Dockerfile)
 * [`6-debian-10`, `6.8.8-debian-10-r12`, `6`, `6.8.8` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.8.8-debian-10-r12/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
@@ -58,19 +58,19 @@ Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https:
 
 The recommended way to get the Bitnami Kibana Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kibana).
 
-```bash
+```console
 $ docker pull bitnami/kibana:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/kibana/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/kibana:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/kibana:latest 'https://github.com/bitnami/bitnami-docker-kibana.git#master:7/debian-10'
 ```
 
@@ -80,7 +80,7 @@ $ docker build -t bitnami/kibana:latest 'https://github.com/bitnami/bitnami-dock
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kibana/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kibana/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -91,19 +91,19 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```
+  ```console
   $ docker network create kibana_network
   ```
 
 2. Run the Elasticsearch container:
 
-  ```
+  ```console
   $ docker run -d -p 9200:9200 --name elasticsearch --net=kibana_network bitnami/elasticsearch
   ```
 
 3. Run the Kibana container:
 
-  ```
+  ```console
   $ docker run -d -p 5601:5601 --name kibana --net=kibana_network \
     -e KIBANA_ELASTICSEARCH_URL=elasticsearch \
     bitnami/kibana
@@ -121,7 +121,7 @@ The above examples define docker volumes namely `elasticsearch_data` and `kibana
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-```bash
+```console
 $ docker run -v /path/to/kibana-persistence:/bitnami bitnami/kibana:latest
 ```
 
@@ -147,7 +147,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -155,7 +155,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the Kibana container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name kibana-server \
     --network app-tier \
     bitnami/kibana:latest
@@ -163,7 +163,7 @@ $ docker run -d --name kibana-server \
 
 ### Step 3: Launch your application container
 
-```bash
+```console
 $ docker run -d --name myapp \
     --network app-tier \
     YOUR_APPLICATION_IMAGE
@@ -203,7 +203,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -223,7 +223,7 @@ The image looks for configurations in `/bitnami/kibana/conf/`. As mentioned in [
 
 Run the Kibana image, mounting a directory from your host.
 
-```bash
+```console
 $ docker run --name kibana -v /path/to/kibana-persistence:/bitnami bitnami/kibana:latest
 ```
 
@@ -241,7 +241,7 @@ kibana:
 
 Edit the configuration on your host using your favorite editor.
 
-```bash
+```console
 $ vi /path/to/kibana-persistence/kibana/conf/kibana.conf
 ```
 
@@ -249,13 +249,13 @@ $ vi /path/to/kibana-persistence/kibana/conf/kibana.conf
 
 After changing the configuration, restart your Kibana container for changes to take effect.
 
-```bash
+```console
 $ docker restart kibana
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose restart kibana
 ```
 
@@ -265,13 +265,13 @@ Refer to the [configuration](https://www.elastic.co/guide/en/kibana/current/sett
 
 The Bitnami Kibana Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs kibana
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose logs kibana
 ```
 
@@ -285,7 +285,7 @@ Bitnami provides up-to-date versions of Kibana, including security patches, soon
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/kibana:latest
 ```
 
@@ -296,19 +296,19 @@ or if you're using Docker Compose, update the value of the image property to
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop kibana
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop kibana
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/kibana-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/kibana-persistence /path/to/kibana-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -318,13 +318,13 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v kibana
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v kibana
 ```
 
@@ -332,13 +332,13 @@ $ docker-compose rm -v kibana
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
-```bash
+```console
 $ docker run --name kibana bitnami/kibana:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up kibana
 ```
 
