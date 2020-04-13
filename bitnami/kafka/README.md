@@ -47,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.4.1-debian-10-r54`, `2`, `2.4.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.4.1-debian-10-r54/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.4.1-debian-10-r55`, `2`, `2.4.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.4.1-debian-10-r55/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -515,11 +515,13 @@ Topic:mytopic   PartitionCount:3        ReplicationFactor:3     Configs:
 ```
 
 ## Full configuration
+
 The image looks for configuration files (server.properties, log4j.properties, etc.) in the `/bitnami/kafka/config/` directory, this directory can be changed by setting the KAFKA_MOUNTED_CONFDIR environment variable.
 
+```bash
+docker run --name kafka -v /path/to/server.properties:/bitnami/kafka/conf/server.properties bitnami/kafka:latest
 ```
-docker run --name kafka -v /path/to/server.properties:/opt/bitnami/kafka/conf/server.properties bitnami/kafka:latest
-```
+
 After that, your changes will be taken into account in the server's behaviour.
 
 ### Step 1: Run the Kafka image
@@ -528,10 +530,14 @@ Run the Kafka image, mounting a directory from your host.
 
 Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kafka/blob/master/docker-compose.yml) file present in this repository:
 
-```yaml
-kafka:
-  volumes:
-    - /path/to/server.properties:/opt/bitnami/kafka/conf/server.properties
+```diff
+...
+services:
+  kafka:
+    ...
+    volumes:
+      - 'kafka_data:/bitnami'
++     - /path/to/server.properties:/bitnami/kafka/conf/server.properties
 ```
 
 ### Step 2: Edit the configuration
