@@ -4,13 +4,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name tomcat bitnami/tomcat:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-tomcat/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`9.0-debian-10`, `9.0.34-debian-10-r3`, `9.0`, `9.0.34`, `latest` (9.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.34-debian-10-r3/9.0/debian-10/Dockerfile)
-* [`8.5-debian-10`, `8.5.54-debian-10-r3`, `8.5`, `8.5.54` (8.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.54-debian-10-r3/8.5/debian-10/Dockerfile)
+* [`8.5-debian-10`, `8.5.54-debian-10-r4`, `8.5`, `8.5.54` (8.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.54-debian-10-r4/8.5/debian-10/Dockerfile)
 * [`7-debian-10`, `7.0.103-debian-10-r24`, `7`, `7.0.103` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.103-debian-10-r24/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
@@ -54,19 +54,19 @@ Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https:
 
 The recommended way to get the Bitnami Tomcat Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/tomcat).
 
-```bash
+```console
 $ docker pull bitnami/tomcat:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/tomcat/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/tomcat:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/tomcat:latest 'https://github.com/bitnami/bitnami-docker-tomcat.git#master:9.0/debian-10'
 ```
 
@@ -76,7 +76,7 @@ If you remove the container all your data and configurations will be lost, and t
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
+```console
 $ docker run -v /path/to/tomcat-persistence:/bitnami bitnami/tomcat:latest
 ```
 
@@ -99,13 +99,13 @@ The `/bitnami/tomcat/data` directory is configured as the Tomcat webapps deploym
 
 Additionally a helper symlink `/app` is present that points to the webapps deployment directory which enables us to deploy applications on a running Tomcat instance by simply doing:
 
-```bash
+```console
 $ docker cp /path/to/app.war tomcat:/app
 ```
 
 In case you want to create a custom image that already contains your application war file, you need to add it to the `/opt/bitnami/tomcat/webapps_default` folder. In the example below we create a forked image with an extra `.war` file.
 
-```
+```Dockerfile
 FROM bitnami/tomcat:9.0
 COPY sample.war /opt/bitnami/tomcat/webapps_default
 ```
@@ -121,20 +121,20 @@ You can also deploy web applications on a running Tomcat instance using the Tomc
 
 To access your web server from your host machine you can ask Docker to map a random port on your host to port `8080` exposed in the container.
 
-```bash
+```console
 $ docker run --name tomcat -P bitnami/tomcat:latest
 ```
 
 Run `docker port` to determine the random ports Docker assigned.
 
-```bash
+```console
 $ docker port tomcat
 8080/tcp -> 0.0.0.0:32768
 ```
 
 You can also manually specify the ports you want forwarded from your host to the container.
 
-```bash
+```console
 $ docker run -p 8080:8080 bitnami/tomcat:latest
 ```
 
@@ -178,7 +178,7 @@ services:
 
 ### Specifying Environment variables on the Docker command line
 
-```bash
+```console
 $ docker run --name tomcat \
   -e TOMCAT_USERNAME=my_user \
   -e TOMCAT_PASSWORD=my_password \
@@ -189,8 +189,8 @@ $ docker run --name tomcat \
 
 During the initialization of the container, the default Tomcat configuration files are modified with the basic options defined through [environment variables](#environment-variables). If you want to add more specific configuration options, you can always mount your own configuration files under `/opt/bitnami/tomcat/conf/` to override the existing ones. Please note that those files should be writable by the system user of the container.
 
-```bash
-docker run --name tomcat -v /path/to/config/server.xml:/opt/bitnami/tomcat/conf/server.xml bitnami/tomcat:latest
+```console
+$ docker run --name tomcat -v /path/to/config/server.xml:/opt/bitnami/tomcat/conf/server.xml bitnami/tomcat:latest
 ```
 
 or using Docker Compose:
@@ -210,13 +210,13 @@ Refer to the [Tomcat configuration](https://tomcat.apache.org/tomcat-7.0-doc/con
 
 The Bitnami Tomcat Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs tomcat
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose logs tomcat
 ```
 
@@ -230,7 +230,7 @@ Bitnami provides up-to-date versions of Tomcat, including security patches, soon
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/tomcat:latest
 ```
 
@@ -241,31 +241,31 @@ or if you're using Docker Compose, update the value of the image property to
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop tomcat
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop tomcat
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/tomcat-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/tomcat-persistence /path/to/tomcat-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v tomcat
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v tomcat
 ```
 
@@ -273,13 +273,13 @@ $ docker-compose rm -v tomcat
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name tomcat bitnami/tomcat:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up tomcat
 ```
 
