@@ -7,7 +7,7 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name metallb-speaker bitnami/metallb-speaker:latest
 ```
 
@@ -30,7 +30,7 @@ $ docker run --name metallb-speaker bitnami/metallb-speaker:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.9.3-debian-10-r16`, `0`, `0.9.3`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metallb-speaker/blob/0.9.3-debian-10-r16/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.9.3-debian-10-r17`, `0`, `0.9.3`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metallb-speaker/blob/0.9.3-debian-10-r17/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/metallb-speaker GitHub repo](https://github.com/bitnami/bitnami-docker-metallb-speaker).
 
@@ -38,19 +38,19 @@ Subscribe to project updates by watching the [bitnami/metallb-speaker GitHub rep
 
 The recommended way to get the Bitnami metallb-speaker Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/metallb-speaker).
 
-```bash
+```console
 $ docker pull bitnami/metallb-speaker:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/metallb-speaker/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/metallb-speaker:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/metallb-speaker:latest 'https://github.com/bitnami/bitnami-docker-metallb-speaker.git#master:0/debian-10'
 ```
 
@@ -60,7 +60,7 @@ $ docker build -t bitnami/metallb-speaker:latest 'https://github.com/bitnami/bit
 
 To run commands inside this container you can use `docker run`, for example to execute `metallb-speaker --version` you can follow the example below:
 
-```bash
+```console
 $ docker run --rm --name metallb-speaker bitnami/metallb-speaker:latest -- --version
 ```
 
