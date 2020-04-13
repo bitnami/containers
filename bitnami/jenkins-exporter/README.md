@@ -6,7 +6,7 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name jenkins-exporter bitnami/jenkins-exporter:latest
 ```
 
@@ -25,7 +25,7 @@ $ docker run --name jenkins-exporter bitnami/jenkins-exporter:latest
 
 You can find an example for testing Jenkins Exporter in Kubernetes with the `test.yaml` file. To launch it, run the command:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.20171225.0-debian-10-r75`, `0`, `0.20171225.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins-exporter/blob/0.20171225.0-debian-10-r75/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.20171225.0-debian-10-r76`, `0`, `0.20171225.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins-exporter/blob/0.20171225.0-debian-10-r76/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins-exporter).
 
@@ -52,19 +52,19 @@ Subscribe to project updates by watching the [bitnami/jenkins-exporter GitHub re
 
 The recommended way to get the Bitnami Jenkins Exporter Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/jenkins-exporter).
 
-```bash
+```console
 $ docker pull bitnami/jenkins-exporter:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/jenkins-exporter/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/jenkins-exporter:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/jenkins-exporter:latest 'https://github.com/bitnami/bitnami-docker-jenkins-exporter.git#master:0/debian-10'
 ```
 
@@ -78,7 +78,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create jenkins-exporter-network --driver bridge
 ```
 
@@ -86,7 +86,7 @@ $ docker network create jenkins-exporter-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `jenkins-exporter-network` network.
 
-```bash
+```console
 $ docker run --name jenkins-exporter-node1 --network jenkins-exporter-network bitnami/jenkins-exporter:latest
 ```
 
@@ -102,7 +102,7 @@ Find all the configuration options in the [Jenkins Prometheus Exporter documenta
 
 The Bitnami Jenkins Exporter Docker image sends the container logs to `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs jenkins-exporter
 ```
 
@@ -116,7 +116,7 @@ Bitnami provides up-to-date versions of Jenkins Exporter, including security pat
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/jenkins-exporter:latest
 ```
 
@@ -124,13 +124,13 @@ $ docker pull bitnami/jenkins-exporter:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop jenkins-exporter
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v jenkins-exporter
 ```
 
@@ -138,7 +138,7 @@ $ docker rm -v jenkins-exporter
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name jenkins-exporter bitnami/jenkins-exporter:latest
 ```
 
