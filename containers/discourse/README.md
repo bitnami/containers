@@ -9,7 +9,7 @@ https://www.discourse.org/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-discourse/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -32,7 +32,7 @@ $ docker-compose up -d
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -47,7 +47,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.4.1-debian-10-r26`, `2`, `2.4.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.4.1-debian-10-r26/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.4.1-debian-10-r27`, `2`, `2.4.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.4.1-debian-10-r27/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
@@ -65,7 +65,7 @@ Running Discourse with a database server is the recommended way. You can either 
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-discourse/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-discourse/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -76,13 +76,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```bash
+  ```console
   $ docker network create discourse-tier
   ```
 
 2. Start a Postgresql database in the network generated:
 
-  ```bash
+  ```console
   $ docker run -d --name postgresql --net=discourse-tier bitnami/postgresql
   ```
 
@@ -90,7 +90,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Start Redis in the network generated:
 
-  ```bash
+  ```console
   $ docker run -d --name redis --net=discourse-tier \
       -e ALLOW_EMPTY_PASSWORD=yes \
       bitnami/redis
@@ -98,14 +98,14 @@ If you want to run the application manually instead of using docker-compose, the
 
 4. Run the Discourse Sidekiq container:
 
-  ```bash
+  ```console
   $ docker run -d -p 80:3000 --name sidekiq --net=discourse-tier \
       bitnami/discourse nami start --foreground discourse-sidekiq
   ```
 
 5. Run the Discourse container:
 
-  ```bash
+  ```console
   $ docker run -d -p 80:3000 --name discourse --net=discourse-tier bitnami/discourse
   ```
 
@@ -155,13 +155,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. If you haven't done this before, create a new network for the application and the database:
 
-  ```bash
+  ```console
   $ docker network create discourse-tier
   ```
 
 2. Start a Postgresql database in the previous network:
 
-  ```bash
+  ```console
   $ docker run -d --name postgresql \
   --net=discourse-tier \
   --volume /path/to/postgresql-persistence:/bitnami \
@@ -170,7 +170,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Start Redis in the previous network as well:
 
-  ```bash
+  ```console
   $ docker run -d --name redis \
   --net=discourse-tier \
    -e ALLOW_EMPTY_PASSWORD=yes \
@@ -182,7 +182,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 4. Start Sidekiq in the previous network as well:
 
-```bash
+```console
  $ docker run -d --name sidekiq \
   --net=discourse-tier \
   --volume /path/to/sidekiq-persistence:/bitnami \
@@ -191,7 +191,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 5. Run the Discourse container:
 
-  ```bash
+  ```console
   $ docker run -d --name discourse -p 80:80 \
   --net=discourse-tier \
   --volume /path/to/discourse-persistence:/bitnami \
@@ -204,7 +204,7 @@ Bitnami provides up-to-date versions of Postgresql and Discourse, including secu
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/discourse:latest
   ```
 
@@ -215,7 +215,7 @@ Bitnami provides up-to-date versions of Postgresql and Discourse, including secu
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/discourse-persistence /path/to/discourse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 $ rsync -a /path/to/sidekiq-persistence /path/to/sidekiq-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
@@ -242,7 +242,7 @@ You can mount your configuration files to the `/opt/bitnami/discourse/conf` dire
 
 ## Environment variables
 
-When you start the discourse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+When you start the discourse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
  * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-discourse/blob/master/docker-compose.yml) file present in this repository:
 
@@ -256,7 +256,7 @@ discourse:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```bash
+```console
  $ docker run -d --name discourse -p 80:80 \
  --net=discourse-tier \
  --env DISCOURSE_PASSWORD=bitnami123 \
@@ -320,10 +320,10 @@ This would be an example of SMTP configuration using a GMail account:
 
 In order to verify your configuration works properly, you can test your configuration parameters from the container itself.
 
-```
-docker run -it bitnami/discourse:latest bash
-install_packages swaks
-swaks --to your_email@domain.com --from your_email@domain.com --server your.smtp.server.com --auth LOGIN --auth-user your_email@domain.com -tls
+```console
+$ docker run -it bitnami/discourse:latest bash
+$ install_packages swaks
+$ swaks --to your_email@domain.com --from your_email@domain.com --server your.smtp.server.com --auth LOGIN --auth-user your_email@domain.com -tls
 ```
 
 See the [documentation on troubleshooting SMTP issues](https://docs.bitnami.com/general/how-to/troubleshoot-smtp-issues/) if there are problems.
