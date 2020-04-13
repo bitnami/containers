@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name apache bitnami/apache:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-apache/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -45,7 +45,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2.4-debian-10`, `2.4.43-debian-10-r13`, `2.4`, `2.4.43`, `latest` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.43-debian-10-r13/2.4/debian-10/Dockerfile)
+* [`2.4-debian-10`, `2.4.43-debian-10-r14`, `2.4`, `2.4.43`, `latest` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.43-debian-10-r14/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/apache GitHub repo](https://github.com/bitnami/bitnami-docker-apache).
 
@@ -53,19 +53,19 @@ Subscribe to project updates by watching the [bitnami/apache GitHub repo](https:
 
 The recommended way to get the Bitnami Apache Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/apache).
 
-```bash
+```console
 $ docker pull bitnami/apache:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/apache/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/apache:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/apache:latest 'https://github.com/bitnami/bitnami-docker-apache.git#master:2.4/debian-10'
 ```
 
@@ -73,7 +73,7 @@ $ docker build -t bitnami/apache:latest 'https://github.com/bitnami/bitnami-dock
 
 The `/app` path is configured as the Apache [DocumentRoot](https://httpd.apache.org/docs/2.4/urlmapping.html#documentroot). Content mounted here is served by the default catch-all virtual host.
 
-```bash
+```console
 $ docker run --name apache -v /path/to/app:/app bitnami/apache:latest
 ```
 
@@ -98,13 +98,13 @@ services:
 
 To access your web server from your host machine you can ask Docker to map a random port on your host to ports `8080` and `8443` exposed in the container.
 
-```bash
+```console
 $ docker run --name apache -P bitnami/apache:latest
 ```
 
 Run `docker port` to determine the random ports Docker assigned.
 
-```bash
+```console
 $ docker port apache
 8443/tcp -> 0.0.0.0:32768
 8080/tcp -> 0.0.0.0:32769
@@ -112,7 +112,7 @@ $ docker port apache
 
 You can also manually specify the ports you want forwarded from your host to the container.
 
-```bash
+```console
 $ docker run -p 8080:8080 -p 8443:8443 bitnami/apache:latest
 ```
 
@@ -122,7 +122,7 @@ Access your web server in the browser by navigating to [http://localhost:8080](h
 
 ## Environment variables
 
-When you start the Apache image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+When you start the Apache image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section:
 
@@ -141,7 +141,7 @@ services:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```bash
+```console
 $ docker run -d --name apache -p 80:8081 -p 443:443 \
   --network apache-tier \
   --e APACHE_HTTP_PORT_NUMBER=8081 \
@@ -175,7 +175,7 @@ For example, in order add a vhost for `www.example.com`:
 
 ### Step 2: Mount the configuration as a volume.
 
-```bash
+```console
 $ docker run --name apache \
   -v /path/to/my_vhost.conf:/vhosts/my_vhost.conf:ro \
   bitnami/apache:latest
@@ -206,7 +206,7 @@ This container comes with SSL support already pre-configured and with a dummy ce
 
 In your local computer, create a folder called `certs` and put your certificates files. Make sure you rename both files to `server.crt` and `server.key` respectively:
 
-```bash
+```console
 $ mkdir /path/to/apache-certs -p
 $ cp /path/to/certfile.crt /path/to/apache-certs/server.crt
 $ cp /path/to/keyfile.key  /path/to/apache-certs/server.key
@@ -216,7 +216,7 @@ $ cp /path/to/keyfile.key  /path/to/apache-certs/server.key
 
 Run the Apache image, mounting the certificates directory from your host.
 
-```bash
+```console
 $ docker run --name apache \
   -v /path/to/apache-certs:/certs \
   bitnami/apache:latest
@@ -241,7 +241,7 @@ services:
 
 The image looks for configurations in `/opt/bitnami/apache/conf`. You can overwrite the `httpd.conf` file using your own custom configuration file.
 
-```bash
+```console
 $ docker run --name apache \
   -v /path/to/httpd.conf:/opt/bitnami/apache/conf/httpd.conf \
   bitnami/apache:latest
@@ -274,13 +274,13 @@ Apache can be used to reverse proxy to other containers using Docker's linking s
 
 The Bitnami Apache Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs apache
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose logs apache
 ```
 
@@ -414,7 +414,7 @@ Bitnami provides up-to-date versions of Apache, including security patches, soon
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/apache:latest
 ```
 
@@ -425,19 +425,19 @@ or if you're using Docker Compose, update the value of the image property to
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop apache
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop apache
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/apache-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/apache-persistence /path/to/apache-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -445,13 +445,13 @@ You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v apache
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v apache
 ```
 
@@ -459,13 +459,13 @@ $ docker-compose rm -v apache
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name apache bitnami/apache:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up apache
 ```
 
