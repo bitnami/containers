@@ -10,13 +10,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name redis-sentinel -e REDIS_MASTER_HOST=redis bitnami/redis-sentinel:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-redis-sentinel/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -56,7 +56,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5.0-debian-10`, `5.0.8-debian-10-r31`, `5.0`, `5.0.8`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.8-debian-10-r31/5.0/debian-10/Dockerfile)
+* [`5.0-debian-10`, `5.0.8-debian-10-r32`, `5.0`, `5.0.8`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.8-debian-10-r32/5.0/debian-10/Dockerfile)
 * [`4.0-debian-10`, `4.0.14-debian-10-r75`, `4.0`, `4.0.14` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-debian-10-r75/4.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
@@ -65,19 +65,19 @@ Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo
 
 The recommended way to get the Bitnami Redis Sentinel Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/redis-sentinel).
 
-```bash
+```console
 $ docker pull bitnami/redis-sentinel:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/redis-sentinel/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/redis-sentinel:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/redis-sentinel:latest 'https://github.com/bitnami/bitnami-docker-redis-sentinel.git#master:5.0/debian-10'
 ```
 
@@ -93,7 +93,7 @@ In this example, we will create a Redis Sentinel instance that will monitor a Re
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -101,7 +101,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the Redis container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name redis-server \
     -e ALLOW_EMPTY_PASSWORD=yes \
     --network app-tier \
@@ -112,7 +112,7 @@ $ docker run -d --name redis-server \
 
 Finally we create a new container instance to launch the Redis client and connect to the server created in the previous step:
 
-```bash
+```console
 $ docker run -it --rm \
     -e REDIS_MASTER_HOST=redis \
     --network app-tier \
@@ -149,7 +149,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -177,7 +177,7 @@ The image looks for configurations in `/bitnami/redis-sentinel/conf/`. You can m
 
 Run the Redis Sentinel image, mounting a directory from your host.
 
-```bash
+```console
 $ docker run --name redis-sentinel \
     -e REDIS_MASTER_HOST=redis \
     -v /path/to/redis-sentinel/persistence:/bitnami \
@@ -199,7 +199,7 @@ services:
 
 Edit the configuration on your host using your favorite editor.
 
-```bash
+```console
 $ vi /path/to/redis-persistence/redis-sentinel/conf/redis.conf
 ```
 
@@ -207,13 +207,13 @@ $ vi /path/to/redis-persistence/redis-sentinel/conf/redis.conf
 
 After changing the configuration, restart your Redis container for changes to take effect.
 
-```bash
+```console
 $ docker restart redis
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose restart redis
 ```
 
@@ -223,13 +223,13 @@ Refer to the [Redis configuration](http://redis.io/topics/config) manual for the
 
 The Bitnami Redis Sentinel Docker Image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs redis
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose logs redis
 ```
 
@@ -243,7 +243,7 @@ Bitnami provides up-to-date versions of Redis Sentinel, including security patch
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/redis-sentinel:latest
 ```
 
@@ -254,31 +254,31 @@ or if you're using Docker Compose, update the value of the image property to
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop redis
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop redis
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/redis-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/redis-persistence /path/to/redis-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v redis
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v redis
 ```
 
@@ -286,13 +286,13 @@ $ docker-compose rm -v redis
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name redis bitnami/redis-sentinel:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up redis
 ```
 
