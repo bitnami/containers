@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run -it --name ruby bitnami/ruby:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-ruby/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -33,7 +33,7 @@ $ docker-compose up -d
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`2.7-debian-10-prod`, `2.7.1-debian-10-r13-prod`, `2.7-prod`, `2.7.1-prod`, `latest-prod` (2.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.1-debian-10-r13-prod/2.7-prod/debian-10/Dockerfile)
 * [`2.7-debian-10`, `2.7.1-debian-10-r13`, `2.7`, `2.7.1`, `latest` (2.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.1-debian-10-r13/2.7/debian-10/Dockerfile)
-* [`2.6-debian-10-prod`, `2.6.6-debian-10-r12-prod`, `2.6-prod`, `2.6.6-prod` (2.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.6-debian-10-r12-prod/2.6-prod/debian-10/Dockerfile)
+* [`2.6-debian-10-prod`, `2.6.6-debian-10-r13-prod`, `2.6-prod`, `2.6.6-prod` (2.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.6-debian-10-r13-prod/2.6-prod/debian-10/Dockerfile)
 * [`2.6-debian-10`, `2.6.6-debian-10-r12`, `2.6`, `2.6.6` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.6-debian-10-r12/2.6/debian-10/Dockerfile)
 * [`2.5-debian-10`, `2.5.8-debian-10-r14`, `2.5`, `2.5.8` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-debian-10-r14/2.5/debian-10/Dockerfile)
 * [`2.5-debian-10-prod`, `2.5.8-debian-10-r12-prod`, `2.5-prod`, `2.5.8-prod` (2.5-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-debian-10-r12-prod/2.5-prod/debian-10/Dockerfile)
@@ -73,19 +73,19 @@ Learn how to use multi-stage builds to build your production application contain
 
 The recommended way to get the Bitnami Ruby Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/ruby).
 
-```bash
+```console
 $ docker pull bitnami/ruby:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/ruby/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/ruby:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/ruby:latest 'https://github.com/bitnami/bitnami-docker-ruby.git#master:2.7/debian-10'
 ```
 
@@ -93,7 +93,7 @@ $ docker build -t bitnami/ruby:latest 'https://github.com/bitnami/bitnami-docker
 
 By default, running this image will drop you into the Ruby REPL (`irb`), where you can interactively test and try things out in Ruby.
 
-```bash
+```console
 $ docker run -it --name ruby bitnami/ruby:latest
 ```
 
@@ -107,7 +107,7 @@ $ docker run -it --name ruby bitnami/ruby:latest
 
 The default work directory for the Ruby image is `/app`. You can mount a folder from your host here that includes your Ruby script, and run it normally using the `ruby` command.
 
-```bash
+```console
 $ docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
   ruby script.rb
 ```
@@ -116,7 +116,7 @@ $ docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
 
 If your Ruby app has a `Gemfile` defining your app's dependencies and start script, you can install the dependencies before running your app.
 
-```bash
+```console
 $ docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
   sh -c "bundle install && ruby script.rb"
 ```
@@ -156,20 +156,20 @@ end
 
 To access your web server from your host machine you can ask Docker to map a random port on your host to port `3000` inside the container.
 
-```bash
+```console
 $ docker run -it --name ruby -P bitnami/ruby:latest
 ```
 
 Run `docker port` to determine the random port Docker assigned.
 
-```bash
+```console
 $ docker port ruby
 3000/tcp -> 0.0.0.0:32769
 ```
 
 You can also manually specify the port you want forwarded from your host to the container.
 
-```bash
+```console
 $ docker run -it --name ruby -p 8080:3000 bitnami/ruby:latest
 ```
 
@@ -186,7 +186,7 @@ We may want to make our Ruby web server only accessible via an nginx web server.
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -227,7 +227,7 @@ Copy the virtual host above, saving the file somewhere on your host. We will mou
 
 ### Step 3: Run the Ruby image with a specific name
 
-```bash
+```console
 $ docker run -it --name myapp \
   --network app-tier \
   -v /path/to/app:/app \
@@ -249,7 +249,7 @@ myapp:
 
 ### Step 4: Run the nginx image
 
-```bash
+```console
 $ docker run -it \
   -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf \
   --network app-tier \
@@ -276,7 +276,7 @@ Bitnami provides up-to-date versions of Ruby, including security patches, soon a
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/ruby:latest
 ```
 
@@ -284,13 +284,13 @@ or if you're using Docker Compose, update the value of the image property to `bi
 
 ### Step 2: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v ruby
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v ruby
 ```
 
@@ -298,13 +298,13 @@ $ docker-compose rm -v ruby
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name ruby bitnami/ruby:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up ruby
 ```
 
