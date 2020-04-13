@@ -7,7 +7,7 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name kubectl bitnami/kubectl:latest
 ```
 
@@ -32,7 +32,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`1.18-debian-10`, `1.18.1-debian-10-r4`, `1.18`, `1.18.1`, `latest` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.18.1-debian-10-r4/1.18/debian-10/Dockerfile)
 * [`1.17-debian-10`, `1.17.4-debian-10-r31`, `1.17`, `1.17.4` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.17.4-debian-10-r31/1.17/debian-10/Dockerfile)
-* [`1.16-debian-10`, `1.16.3-debian-10-r75`, `1.16`, `1.16.3` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.3-debian-10-r75/1.16/debian-10/Dockerfile)
+* [`1.16-debian-10`, `1.16.3-debian-10-r76`, `1.16`, `1.16.3` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.3-debian-10-r76/1.16/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubectl GitHub repo](https://github.com/bitnami/bitnami-docker-kubectl).
 
@@ -40,19 +40,19 @@ Subscribe to project updates by watching the [bitnami/kubectl GitHub repo](https
 
 The recommended way to get the Bitnami Kubectl Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kubectl).
 
-```bash
+```console
 $ docker pull bitnami/kubectl:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/kubectl/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/kubectl:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/kubectl:latest 'https://github.com/bitnami/bitnami-docker-kubectl.git#master:1.18/debian-10'
 ```
 
@@ -62,7 +62,7 @@ $ docker build -t bitnami/kubectl:latest 'https://github.com/bitnami/bitnami-doc
 
 To run commands inside this container you can use `docker run`, for example to execute `kubectl --version` you can follow the example below:
 
-```bash
+```console
 $ docker run --rm --name kubectl bitnami/kubectl:latest -- --version
 ```
 
@@ -72,7 +72,7 @@ Consult the [Kubectl Reference Documentation](https://kubernetes.io/docs/referen
 
 It's possible to load your own configuration, which is useful if you want to connect to a remote cluster:
 
-```bash
+```console
 $ docker run --rm --name kubectl -v /path/to/your/kube/config:/.kube/config bitnami/kubectl:latest
 ```
 
