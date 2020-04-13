@@ -12,7 +12,7 @@
 
 ### Local workspace
 
-```bash
+```console
 $ mkdir ~/myapp && cd ~/myapp
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-symfony/master/docker-compose.yml
 $ docker-compose up
@@ -34,7 +34,7 @@ $ docker-compose up
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -49,7 +49,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.5.11-debian-10-r70`, `1`, `1.5.11`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-10-r70/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.5.11-debian-10-r71`, `1`, `1.5.11`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-10-r71/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
 
@@ -67,14 +67,14 @@ The quickest way to get started with the Bitnami Symfony Development Container i
 
 Begin by creating a directory for your Symfony application:
 
-```bash
+```console
 $ mkdir ~/myapp
 $ cd ~/myapp
 ```
 
 Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-symfony/master/docker-compose.yml) file in the application directory:
 
-```bash
+```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-symfony/master/docker-compose.yml
 ```
 
@@ -110,7 +110,7 @@ services:
 
 Finally launch the Symfony application development environment using:
 
-```bash
+```console
 $ docker-compose up
 ```
 
@@ -128,7 +128,7 @@ Commands can be launched inside the `myapp` Symfony Development Container with `
 
 The general structure of the `exec` command is:
 
-```bash
+```console
 $ docker-compose exec <service> <command>
 ```
 where `<service>` is the name of the container service as described in the `docker-compose.yml` file and `<command>` is the command you want to launch inside the service.
@@ -137,13 +137,13 @@ Following are a few examples:
 
 - Create a new project named `foo`:
 
-  ```bash
+  ```console
   $ docker-compose run myapp nami execute symfony createProject foo
   ```
 
 - Create a new project named `bar` which uses Symfony version `2.5.0`
 
-  ```bash
+  ```console
   $ docker-compose run myapp nami execute symfony createProject "bar 2.5.0"
   ```
 
