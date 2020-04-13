@@ -9,7 +9,7 @@ https://www.matomo.org/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-matomo/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -44,7 +44,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.13.4-debian-10-r19`, `3`, `3.13.4`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.13.4-debian-10-r19/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.13.4-debian-10-r20`, `3`, `3.13.4`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.13.4-debian-10-r20/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
 
@@ -57,13 +57,13 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 The recommended way to get the Bitnami Matomo Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/matomo/).
 To use a specific version, you can pull a versioned tag. Find the [list of available versions] (https://hub.docker.com/r/bitnami/matomo/tags/) in the Docker Hub Registry.
 
-```bash
-docker pull bitnami/matomo:[TAG]
+```console
+$ docker pull bitnami/matomo:[TAG]
 ```
 
 If you wish, you can also build the image youself.
 
-```bash
+```console
 docker build -t bitnami/matomo:latest 'https://github.com/bitnami/bitnami-docker-matomo.git#master:3/debian-10'
 ```
 
@@ -75,7 +75,7 @@ Matomo requires access to a MySQL database or MariaDB database to store informat
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-matomo/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-matomo/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -86,13 +86,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```bash
+  ```console
   $ docker network create matomo_network
   ```
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-  ```bash
+  ```console
   $ docker volume create --name mariadb_data
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -105,7 +105,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Create volumes for Matomo persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name matomo_data
   $ docker run -d --name matomo -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -152,13 +152,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```bash
+  ```console
   $ docker network create matomo_network
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```bash
+  ```console
   $ docker run -d --name mariadb
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_matomo \
@@ -171,7 +171,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Create the Matomo container with host volumes:
 
-  ```bash
+  ```console
   $ docker run -d --name matomo -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MATOMO_DATABASE_USER=bn_matomo \
@@ -187,7 +187,7 @@ Bitnami provides up-to-date versions of MariaDB and Matomo, including security p
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/matomo:latest
   ```
 
@@ -198,7 +198,7 @@ Bitnami provides up-to-date versions of MariaDB and Matomo, including security p
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/matomo-persistence /path/to/matomo-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -220,7 +220,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the Matomo image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
+When you start the Matomo image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
 ##### User and Site configuration
 
@@ -270,7 +270,7 @@ application:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```bash
+```console
  $ docker run -d -e MATOMO_PASSWORD=my_password -p 80:80 --name matomo -v /your/local/path/bitnami/matomo:/bitnami --net=matomo_network bitnami/matomo
 ```
 
@@ -304,7 +304,7 @@ This would be an example of SMTP configuration using a Gmail account:
 
  * For manual execution:
 
-```bash
+```console
  $ docker run -d --name matomo -p 80:80 -p 443:443 \
    --net matomo_network \
    -e MARIADB_HOST=mariadb \
