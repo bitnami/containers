@@ -6,7 +6,7 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name nginx-exporter bitnami/nginx-exporter:latest
 ```
 
@@ -25,7 +25,7 @@ $ docker run --name nginx-exporter bitnami/nginx-exporter:latest
 
 You can find an example for testing NGINX Exporter in Kubernetes with the `test.yaml` file. To launch it, run the command:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.6.0-debian-10-r54`, `0`, `0.6.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-exporter/blob/0.6.0-debian-10-r54/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.6.0-debian-10-r55`, `0`, `0.6.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-exporter/blob/0.6.0-debian-10-r55/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nginx-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-nginx-exporter).
 
@@ -52,19 +52,19 @@ Subscribe to project updates by watching the [bitnami/nginx-exporter GitHub repo
 
 The recommended way to get the Bitnami NGINX Exporter Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/nginx-exporter).
 
-```bash
+```console
 $ docker pull bitnami/nginx-exporter:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/nginx-exporter/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/nginx-exporter:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/nginx-exporter:latest 'https://github.com/bitnami/bitnami-docker-nginx-exporter.git#master:0/debian-10'
 ```
 
@@ -78,7 +78,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create nginx-exporter-network --driver bridge
 ```
 
@@ -86,7 +86,7 @@ $ docker network create nginx-exporter-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `nginx-exporter-network` network.
 
-```bash
+```console
 $ docker run --name nginx-exporter-node1 --network nginx-exporter-network bitnami/nginx-exporter:latest
 ```
 
@@ -102,7 +102,7 @@ Find all the configuration flags in [the NGINX Prometheus Exporter official docu
 
 The Bitnami NGINX Exporter Docker image sends the container logs to `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs nginx-exporter
 ```
 
@@ -116,7 +116,7 @@ Bitnami provides up-to-date versions of NGINX Exporter, including security patch
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/nginx-exporter:latest
 ```
 
@@ -124,13 +124,13 @@ $ docker pull bitnami/nginx-exporter:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop nginx-exporter
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v nginx-exporter
 ```
 
@@ -138,7 +138,7 @@ $ docker rm -v nginx-exporter
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name nginx-exporter bitnami/nginx-exporter:latest
 ```
 
