@@ -8,7 +8,7 @@ https://airflow.apache.org/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-airflow-worker/master/docker-compose.yml
 $ docker-compose up
 ```
@@ -33,7 +33,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.10.9-debian-10-r64`, `1`, `1.10.9`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.9-debian-10-r64/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.10.10-debian-10-r0`, `1`, `1.10.10`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.10-debian-10-r0/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-worker).
 
@@ -50,7 +50,7 @@ You will need an [Airflow Webserver](https://www.github.com/bitnami/bitnami-dock
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-airflow-worker/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-airflow-worker/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -61,13 +61,13 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 1. Create a network
 
-  ```bash
+  ```console
   $ docker network create airflow-tier
   ```
 
 2. Create a volume for PostgreSQL persistence and create a PostgreSQL container
 
-  ```bash
+  ```console
   $ docker volume create --name postgresql_data
   $ docker run -d --name postgresql \
     -e POSTGRESQL_USERNAME=bn_airflow \
@@ -80,7 +80,7 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 3. Create a volume for Redis persistence and create a Redis container
 
-  ```bash
+  ```console
   $ docker volume create --name redis_data
   $ docker run -d --name redis \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -91,7 +91,7 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 4. Create volumes for Airflow persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name airflow_data
   $ docker run -d --name airflow -p 8080:8080 \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
@@ -110,7 +110,7 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 5. Create volumes for Airflow Scheduler persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name airflow_scheduler_data
   $ docker run -d --name airflow-scheduler \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
@@ -126,7 +126,7 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 6. Create volumes for Airflow Worker persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name airflow_worker_data
   $ docker run -d --name airflow-worker \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
@@ -216,13 +216,13 @@ services:
 
 1. Create a network (if it does not exist)
 
-  ```bash
+  ```console
   $ docker network create airflow-tier
   ```
 
 2. Create a volume for PostgreSQL persistence and create a PostgreSQL container
 
-  ```bash
+  ```console
   $ docker volume create --name postgresql_data
   $ docker run -d --name postgresql \
     -e POSTGRESQL_USERNAME=bn_airflow \
@@ -235,7 +235,7 @@ services:
 
 3. Create a volume for Redis persistence and create a Redis container
 
-  ```bash
+  ```console
   $ docker volume create --name redis_data
   $ docker run -d --name redis \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -246,7 +246,7 @@ services:
 
 4. Create volumes for Airflow persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name airflow_data
   $ docker run -d --name airflow -p 8080:8080 \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
@@ -265,7 +265,7 @@ services:
 
 5. Create volumes for Airflow Scheduler persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name airflow_scheduler_data
   $ docker run -d --name airflow-scheduler \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
@@ -281,7 +281,7 @@ services:
 
 6. Create volumes for Airflow Worker persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name airflow_worker_data
   $ docker run -d --name airflow-worker \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
@@ -346,7 +346,7 @@ services:
 
 ### Specifying Environment variables on the Docker command line
 
-```bash
+```console
 $ docker run -d --name airflow -p 8080:8080 \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
