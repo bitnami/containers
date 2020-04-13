@@ -52,7 +52,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.18.1-debian-10-r12`, `1`, `1.18.1`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.18.1-debian-10-r12/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.18.1-debian-10-r13`, `1`, `1.18.1`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.18.1-debian-10-r13/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cluster-autoscaler GitHub repo](https://github.com/bitnami/bitnami-docker-cluster-autoscaler).
 
@@ -60,19 +60,19 @@ Subscribe to project updates by watching the [bitnami/cluster-autoscaler GitHub 
 
 The recommended way to get the Bitnami Cluster-autoscaler Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/cluster-autoscaler).
 
-```bash
+```console
 $ docker pull bitnami/cluster-autoscaler:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/cluster-autoscaler/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/cluster-autoscaler:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/cluster-autoscaler:latest 'https://github.com/bitnami/bitnami-docker-cluster-autoscaler.git#master:1/debian-10'
 ```
 
