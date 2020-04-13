@@ -2,13 +2,13 @@
 
 > Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible.
 
-```bash
+```console
 $ docker run -it --name java bitnami/java
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-java/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -44,8 +44,8 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+- [`13`, `13.0.2-debian-10-r76` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r76/13/debian-10/Dockerfile), [`13-prod`, `13.0.2-debian-10-r76-prod` (13/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r76/13/debian-10/prod/Dockerfile)
 - [`13`, `13.0.2-debian-10-r75-prod` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r75-prod/13/debian-10/Dockerfile), [`13-prod`, `13.0.2-debian-10-r75-prod-prod` (13/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r75-prod/13/debian-10/prod/Dockerfile)
-- [`13`, `13.0.2-debian-10-r75` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r75/13/debian-10/Dockerfile), [`13-prod`, `13.0.2-debian-10-r75-prod` (13/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r75/13/debian-10/prod/Dockerfile)
 - [`11`, `11.0.6-debian-10-r76-prod` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.6-debian-10-r76-prod/11/debian-10/Dockerfile), [`11-prod`, `11.0.6-debian-10-r76-prod-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.6-debian-10-r76-prod/11/debian-10/prod/Dockerfile)
 - [`11`, `11.0.6-debian-10-r76` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.6-debian-10-r76/11/debian-10/Dockerfile), [`11-prod`, `11.0.6-debian-10-r76-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.6-debian-10-r76/11/debian-10/prod/Dockerfile)
 - [`10`, `10.0.2-debian-10-r0` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/10.0.2-debian-10-r0/10/debian-10/Dockerfile), [`10-prod`, `10.0.2-debian-10-r0-prod` (10/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/10.0.2-debian-10-r0/10/debian-10/prod/Dockerfile)
@@ -69,19 +69,19 @@ Learn how to use multi-stage builds to build your production application contain
 
 The recommended way to get the Bitnami Java Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/java).
 
-```bash
+```console
 $ docker pull bitnami/java:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/java/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/java:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/java 'https://github.com/bitnami/bitnami-docker-java.git#master:1.8/debian-10'
 ```
 
@@ -91,14 +91,14 @@ $ docker build -t bitnami/java 'https://github.com/bitnami/bitnami-docker-java.g
 
 The default work directory for the Java image is `/app`. You can mount a folder from your host here that includes your Java jar or war, and run it normally using the `java` command.
 
-```bash
+```console
 $ docker run -it --name java -v /path/to/app:/app bitnami/java:latest \
   java -jar package.jar
 ```
 
 or using Docker Compose:
 
-```
+```yaml
 java:
   image: bitnami/java:latest
   command: "java -jar package.jar"
@@ -118,7 +118,7 @@ Bitnami provides up-to-date versions of Java, including security patches, soon a
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/java:latest
 ```
 
@@ -126,13 +126,13 @@ or if you're using Docker Compose, update the value of the image property to `bi
 
 ### Step 2: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v java
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v java
 ```
 
@@ -140,13 +140,13 @@ $ docker-compose rm -v java
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name java bitnami/java:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up java
 ```
 
