@@ -9,7 +9,7 @@ https://www.sonarqube.org/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-sonarqube/master/docker-compose.yml
 $ docker-compose up
 ```
@@ -30,7 +30,7 @@ $ docker-compose up
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8-debian-10`, `8.2.0-debian-10-r26`, `8`, `8.2.0` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.2.0-debian-10-r26/8/debian-10/Dockerfile)
-* [`7-debian-10`, `7.9.3-debian-10-r14`, `7`, `7.9.3`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.3-debian-10-r14/7/debian-10/Dockerfile)
+* [`7-debian-10`, `7.9.3-debian-10-r15`, `7`, `7.9.3`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.3-debian-10-r15/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
 
@@ -66,7 +66,7 @@ SonarQube requires access to a PostgreSQL database to store information. We'll u
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-sonarqube/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-sonarqube/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -77,13 +77,13 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 1. Create a network
 
-  ```bash
+  ```console
   $ docker network create sonarqube-tier
   ```
 
 2. Create a volume for PostgreSQL persistence and create a PostgreSQL container
 
-  ```bash
+  ```console
   $ docker volume create --name postgresql_data
   $ docker run -d --name postgresql \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -97,7 +97,7 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 3. Create volumes for SonarQube persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name sonarqube_data
   $ docker run -d --name sonarqube -p 80:9000 \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -157,13 +157,13 @@ services:
 
 1. Create a network (if it does not exist)
 
-  ```bash
+  ```console
   $ docker network create sonarqube-tier
   ```
 
 2. Create a PostgreSQL container with host volume
 
-  ```bash
+  ```console
   $ docker run -d --name postgresql \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e POSTGRESQL_USERNAME=bn_sonarqube \
@@ -176,7 +176,7 @@ services:
 
 3. Create the SonarQube the container with host volumes
 
-  ```bash
+  ```console
   $ docker run -d --name sonarqube -p 80:9000 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e SONARQUBE_DATABASE_USER=bn_sonarqube \
@@ -195,7 +195,7 @@ The `bitnami/sonarqube:latest` tag always points to the most recent release. To 
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/sonarqube:latest
   ```
 
@@ -206,7 +206,7 @@ The `bitnami/sonarqube:latest` tag always points to the most recent release. To 
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/sonarqube-persistence /path/to/sonarqube-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -291,7 +291,7 @@ services:
 
 ### Specifying Environment variables on the Docker command line
 
-```bash
+```console
 $ docker run -d --name sonarqube -p 80:9000 \
   --net sonarqube-tier \
   -e ALLOW_EMPTY_PASSWORD=yes \
@@ -334,7 +334,7 @@ This would be an example of SMTP configuration using a GMail account:
 
 * For manual execution:
 
-```
+```console
 $ docker run -d --name sonarqube -p 80:9000 \
   --net sonarqube-tier \
   --env SMTP_HOST=smtp.gmail.com --env SMTP_PORT=587 \
@@ -374,7 +374,7 @@ This would be an example of using an external database for SonarQube.
 
 * For manual execution:
 
-```
+```console
 $ docker run -d --name sonarqube -p 80:9000 \
   --net sonarqube-tier \
   --env POSTGRESQL_HOST=postgresql_host \
