@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name nginx bitnami/nginx:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-nginx/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -47,13 +47,13 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.17-debian-10`, `1.17.9-debian-10-r6`, `1.17`, `1.17.9` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.17.9-debian-10-r6/1.17/debian-10/Dockerfile)
-* [`1.16-debian-10`, `1.16.1-debian-10-r84`, `1.16`, `1.16.1`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.1-debian-10-r84/1.16/debian-10/Dockerfile)
+* [`1.16-debian-10`, `1.16.1-debian-10-r85`, `1.16`, `1.16.1`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.1-debian-10-r85/1.16/debian-10/Dockerfile)
 
 # Get this image
 
 The recommended way to get the Bitnami NGINX Open Source Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/nginx).
 
-```bash
+```console
 $ docker pull bitnami/nginx:latest
 ```
 
@@ -61,13 +61,13 @@ To use a specific version, you can pull a versioned tag. You can view the
 [list of available versions](https://hub.docker.com/r/bitnami/nginx/tags/)
 in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/nginx:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/nginx:latest 'https://github.com/bitnami/bitnami-docker-nginx.git#master:1.16/debian-10'
 ```
 
@@ -75,7 +75,7 @@ $ docker build -t bitnami/nginx:latest 'https://github.com/bitnami/bitnami-docke
 
 This NGINX Open Source image exposes a volume at `/app`. Content mounted here is served by the default catch-all server block.
 
-```bash
+```console
 $ docker run -v /path/to/app:/app bitnami/nginx:latest
 ```
 
@@ -95,20 +95,20 @@ services:
 
 To access your web server from your host machine you can ask Docker to map a random port on your host to ports `8080` and `8443` exposed in the container.
 
-```bash
+```console
 $ docker run --name nginx -P bitnami/nginx:latest
 ```
 
 Run `docker port` to determine the random ports Docker assigned.
 
-```bash
+```console
 $ docker port nginx
 8080/tcp -> 0.0.0.0:32769
 ```
 
 You can also manually specify the ports you want forwarded from your host to the container.
 
-```bash
+```console
 $ docker run -p 9000:8080 bitnami/nginx:latest
 ```
 
@@ -135,7 +135,7 @@ server {
 
 # Step 2: Mount the configuration as a volume.
 
-```bash
+```console
 $ docker run --name nginx \
   -v /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro \
   bitnami/nginx:latest
@@ -160,7 +160,7 @@ services:
 
 In your local computer, create a folder called `certs` and put your certificates files. Make sure you rename both files to `server.crt` and `server.key` respectively:
 
-```bash
+```console
 $ mkdir -p /path/to/nginx-persistence/certs
 $ cp /path/to/certfile.crt /path/to/nginx-persistence/certs/server.crt
 $ cp /path/to/keyfile.key  /path/to/nginx-persistence/certs/server.key
@@ -194,7 +194,7 @@ Write your `my_server_block.conf` file with the SSL configuration and the relati
 
 Run the NGINX Open Source image, mounting the certificates directory from your host.
 
-```bash
+```console
 $ docker run --name nginx \
   -v /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro \
   -v /path/to/nginx-persistence/certs:/certs \
@@ -218,7 +218,7 @@ services:
 The image looks for configurations in `/opt/bitnami/nginx/conf/nginx.conf`. You can overwrite the `nginx.conf` file using your own custom configuration file.
 
 
-```bash
+```console
 $ docker run --name nginx \
   -v /path/to/your_nginx.conf:/opt/bitnami/nginx/conf/nginx.conf:ro \
   bitnami/nginx:latest
@@ -239,7 +239,7 @@ services:
 
 NGINX can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an NGINX frontend. To do so, [add a server block](#adding-custom-server-blocks) like the following in the `/opt/bitnami/nginx/conf/server_blocks/` folder:
 
-```
+```nginx
 server {
     listen 0.0.0.0:8080;
     server_name yourapp.com;
@@ -265,13 +265,13 @@ server {
 
 The Bitnami NGINX Open Source Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs nginx
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose logs nginx
 ```
 
@@ -404,7 +404,7 @@ Bitnami provides up-to-date versions of NGINX Open Source, including security pa
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/nginx:latest
 ```
 
@@ -415,25 +415,25 @@ or if you're using Docker Compose, update the value of the image property to
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop nginx
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop nginx
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v nginx
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v nginx
 ```
 
@@ -441,13 +441,13 @@ $ docker-compose rm -v nginx
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name nginx bitnami/nginx:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up nginx
 ```
 
