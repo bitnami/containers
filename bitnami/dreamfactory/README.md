@@ -9,7 +9,7 @@ https://www.dreamfactory.com/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-dreamfactory/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -30,7 +30,7 @@ $ docker-compose up -d
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -45,7 +45,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.0.1-debian-10-r44`, `4`, `4.0.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.0.1-debian-10-r44/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.1.1-debian-10-r0`, `4`, `4.1.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.1.1-debian-10-r0/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
@@ -62,7 +62,7 @@ DreamFactory requires access to a MySQL database or MariaDB database to store in
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-dreamfactory/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -73,13 +73,13 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 1. Create a network
 
-```bash
+```console
 $ docker network create dreamfactory-tier
 ```
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-```bash
+```console
 $ docker volume create --name mariadb_data
 $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes\
   --net dreamfactory-tier \
@@ -89,7 +89,7 @@ $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes\
 
 3. Create a volume for MongoDB persistence and create a MongoDB container
 
-```bash
+```console
 $ docker volume create --name mongodb_data
 $ docker run -d --name mongodb \
   --net dreamfactory-tier \
@@ -99,7 +99,7 @@ $ docker run -d --name mongodb \
 
 4. Create a volume for Redis persistence and create a Redis container
 
-```bash
+```console
 $ docker volume create --name redis_data
 $ docker run -d --name redis -e ALLOW_EMPTY_PASSWORD=yes \
   --net dreamfactory-tier \
@@ -109,7 +109,7 @@ $ docker run -d --name redis -e ALLOW_EMPTY_PASSWORD=yes \
 
 5. Create volumes for DreamFactory persistence and launch the container
 
-```bash
+```console
 $ docker volume create --name dreamfactory_data
 $ docker run -d --name dreamfactory -p 80:80 -p 443:443 \
   --net dreamfactory-tier \
@@ -161,13 +161,13 @@ services:
 
 1. Create a network (if it does not exist)
 
-```bash
+```console
 $ docker network create dreamfactory-tier
 ```
 
 2. Create a MariaDB container with host volume
 
-```bash
+```console
 $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
   --net dreamfactory-tier \
   --volume /path/to/mariadb-persistence:/bitnami \
@@ -176,7 +176,7 @@ $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
 
 3. Create a MongoDB container with host volume
 
-```bash
+```console
 $ docker run -d --name mongodb \
   --net dreamfactory-tier \
   --volume /path/to/mongodb-persistence:/bitnami \
@@ -186,7 +186,7 @@ $ docker run -d --name mongodb \
 
 4. Create a Redis container with host volume
 
-```bash
+```console
 $ docker run -d --name redis -e ALLOW_EMPTY_PASSWORD=yes \
   --net dreamfactory-tier \
   --volume /path/to/redis-persistence:/bitnami \
@@ -195,7 +195,7 @@ $ docker run -d --name redis -e ALLOW_EMPTY_PASSWORD=yes \
 
 5. Create the DreamFactory the container with host volumes
 
-```bash
+```console
 $ docker run -d --name dreamfactory -p 80:80 -p 443:443 \
   --net dreamfactory-tier \
   --volume /path/to/dreamfactory-persistence:/bitnami \
@@ -210,7 +210,7 @@ The `bitnami/dreamfactory:latest` tag always points to the most recent release. 
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/dreamfactory:latest
   ```
 
@@ -221,7 +221,7 @@ The `bitnami/dreamfactory:latest` tag always points to the most recent release. 
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/dreamfactory-persistence /path/to/dreamfactory-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -292,7 +292,7 @@ dreamfactory:
 
 ### Specifying environment variables on the Docker command line
 
-```bash
+```console
 $ docker run -d --name dreamfactory -p 80:80 -p 443:443 \
   --net dreamfactory-tier \
   --env SMTP_HOST=smtp.gmail.com --env SMTP_PORT=587 \
