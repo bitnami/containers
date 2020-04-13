@@ -29,7 +29,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -44,7 +44,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.2.2-debian-10-r75`, `0`, `0.2.2`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.2.2-debian-10-r75/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.2.2-debian-10-r76`, `0`, `0.2.2`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.2.2-debian-10-r76/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/user-broker GitHub repo](https://github.com/bitnami/bitnami-docker-user-broker).
 
@@ -52,19 +52,19 @@ Subscribe to project updates by watching the [bitnami/user-broker GitHub repo](h
 
 The recommended way to get the Bitnami Service-catalog Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/user-broker).
 
-```bash
+```console
 $ docker pull bitnami/user-broker:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/user-broker/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/user-broker:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/user-broker:latest 'https://github.com/bitnami/bitnami-docker-user-broker.git#master:0/debian-10'
 ```
 
