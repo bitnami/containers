@@ -8,7 +8,7 @@ https://reportserver.net/en/#secondsection
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-reportserverenterprise/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -32,7 +32,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.1.2-6022-debian-10-r10`, `3`, `3.1.2-6022`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.1.2-6022-debian-10-r10/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.1.2-6022-debian-10-r11`, `3`, `3.1.2-6022`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.1.2-6022-debian-10-r11/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/reportserverenterprise GitHub repo](https://github.com/bitnami/bitnami-docker-reportserverenterprise).
 
@@ -47,7 +47,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-reportserverenterprise/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -60,13 +60,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application:
 
-  ```bash
+  ```console
   $ docker network create reportserver-tier
   ```
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-  ```bash
+  ```console
   $ docker volume create --name mariadb_data
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -79,7 +79,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name reportserver_data
   $ docker run -d --name reportserverenterprise -p 80:8080 \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -115,13 +115,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```bash
+  ```console
   $ docker network create reportserver-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```bash
+  ```console
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_reportserver \
@@ -133,8 +133,8 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Create the Reportserver Enterprise container:
 
-  ```bash
-  $  docker run -d --name reportserverenterprise -p 80:8080 \
+  ```console
+  $  $ docker run -d --name reportserverenterprise -p 80:8080 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e REPORTSERVER_DATABASE_USER=bn_reportserver \
     -e REPORTSERVER_DATABASE_NAME=bitnami_reportserver \
@@ -148,7 +148,7 @@ Bitnami provides up-to-date versions of Reportserver Enterprise, including secur
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/reportserverenterprise:latest
   ```
 
@@ -175,7 +175,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the reportserverenterprise image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
+When you start the reportserverenterprise image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
 ##### User and Site configuration
 
@@ -215,7 +215,7 @@ If you want to add a new environment variable:
 
  * For manual execution add a `-e` option with each variable and value:
 
-  ```bash
+  ```console
   $ docker run -d -e REPORTSERVER_PASSWORD=my_password -p 80:8080 --name reportserver -v --network=reportserver-tier bitnami/reportserverenterprise
   ```
 ### Install demo data
@@ -265,7 +265,7 @@ reportserverenterprise:
 
  * For manual execution:
 
-```bash
+```console
  $ docker run -d -p 80:8080 --name reportserverenterprise --net=reportserver-tier \
     -e MARIADB_HOST=mariadb \
     -e MARIADB_PORT_NUMBER=3306 \
