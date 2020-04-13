@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name dotnet-sdk bitnami/dotnet-sdk:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-dotnet-sdk/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -32,7 +32,7 @@ $ docker-compose up -d
 
 You can find an example for testing .NET SDK in Kubernetes with the `test.yaml` file. To launch it, run the command:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -47,7 +47,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.1-debian-10`, `3.1.201-debian-10-r5`, `3.1`, `3.1.201`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/3.1.201-debian-10-r5/3.1/debian-10/Dockerfile)
+* [`3.1-debian-10`, `3.1.201-debian-10-r6`, `3.1`, `3.1.201`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/3.1.201-debian-10-r6/3.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dotnet-sdk GitHub repo](https://github.com/bitnami/bitnami-docker-dotnet-sdk).
 
@@ -55,19 +55,19 @@ Subscribe to project updates by watching the [bitnami/dotnet-sdk GitHub repo](ht
 
 The recommended way to get the Bitnami .NET SDK Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/dotnet-sdk).
 
-```bash
+```console
 $ docker pull bitnami/dotnet-sdk:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/dotnet-sdk/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/dotnet-sdk:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/dotnet-sdk:latest 'https://github.com/bitnami/bitnami-docker-dotnet-sdk.git#master:3.1/debian-10'
 ```
 
@@ -77,7 +77,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
+```console
 $ docker run \
     -v /path/to/dotnet-persistence:/bitnami \
     bitnami/dotnet-sdk:latest
@@ -103,7 +103,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create dotnet-network --driver bridge
 ```
 
@@ -111,7 +111,7 @@ $ docker network create dotnet-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `dotnet-network` network.
 
-```bash
+```console
 $ docker run --name dotnet-node1 --network dotnet-network bitnami/dotnet-sdk:latest
 ```
 
@@ -123,7 +123,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 The Bitnami .NET SDK Docker image sends the container logs to `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs dotnet-sdk
 ```
 
@@ -137,7 +137,7 @@ Bitnami provides up-to-date versions of .NET SDK, including security patches, so
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/dotnet-sdk:latest
 ```
 
@@ -145,13 +145,13 @@ $ docker pull bitnami/dotnet-sdk:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop dotnet-sdk
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v dotnet-sdk
 ```
 
@@ -159,7 +159,7 @@ $ docker rm -v dotnet-sdk
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name dotnet-sdk bitnami/dotnet-sdk:latest
 ```
 
