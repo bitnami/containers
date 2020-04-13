@@ -6,7 +6,7 @@ ChartMuseum is an open-source, easy to deploy, Helm Chart Repository server.
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name chartmuseum bitnami/chartmuseum:latest
 ```
 
@@ -25,7 +25,7 @@ $ docker run --name chartmuseum bitnami/chartmuseum:latest
 
 You can find an example for testing chartmuseum in Kubernetes with the `test.yaml` file. To launch it, run the command:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.12.0-debian-10-r17`, `0`, `0.12.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.12.0-debian-10-r17/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.12.0-debian-10-r18`, `0`, `0.12.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.12.0-debian-10-r18/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/chartmuseum GitHub repo](https://github.com/bitnami/bitnami-docker-chartmuseum).
 
@@ -52,19 +52,19 @@ Subscribe to project updates by watching the [bitnami/chartmuseum GitHub repo](h
 
 The recommended way to get the Bitnami chartmuseum Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/chartmuseum).
 
-```bash
+```console
 $ docker pull bitnami/chartmuseum:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/chartmuseum/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/chartmuseum:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/chartmuseum:latest 'https://github.com/bitnami/bitnami-docker-chartmuseum.git#master:0/debian-10'
 ```
 
@@ -78,7 +78,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/bitnami/data` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
+```console
 $ docker run \
     -v /path/to/chartmuseum-persistence:/bitnami/data \
     bitnami/chartmuseum:latest
@@ -86,7 +86,7 @@ $ docker run \
 
 You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/master/docker-compose.yml) file present in this repository:
 
-```
+```yaml
 chartmuseum:
   ...
   volumes:
@@ -110,7 +110,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create chartmuseum-network --driver bridge
 ```
 
@@ -118,7 +118,7 @@ $ docker network create chartmuseum-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `chartmuseum-network` network.
 
-```bash
+```console
 $ docker run --name chartmuseum-node1 --network chartmuseum-network bitnami/chartmuseum:latest
 ```
 
@@ -137,7 +137,7 @@ For example, the env var `STORAGE_AMAZON_BUCKET` can be used to set the command-
 
 The Bitnami chartmuseum Docker image sends the container logs to `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs chartmuseum
 ```
 
@@ -151,7 +151,7 @@ Bitnami provides up-to-date versions of chartmuseum, including security patches,
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/chartmuseum:latest
 ```
 
@@ -159,13 +159,13 @@ $ docker pull bitnami/chartmuseum:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop chartmuseum
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v chartmuseum
 ```
 
@@ -173,7 +173,7 @@ $ docker rm -v chartmuseum
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name chartmuseum bitnami/chartmuseum:latest
 ```
 
