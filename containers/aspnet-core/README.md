@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name aspnet-core bitnami/aspnet-core:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-aspnet-core/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -32,7 +32,7 @@ $ docker-compose up -d
 
 You can find an example for testing aspnet-core in Kubernetes with the `test.yaml` file. To launch it, run the command:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -47,7 +47,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.1-debian-10`, `3.1.3-debian-10-r6`, `3.1`, `3.1.3`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.3-debian-10-r6/3.1/debian-10/Dockerfile)
+* [`3.1-debian-10`, `3.1.3-debian-10-r7`, `3.1`, `3.1.3`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.3-debian-10-r7/3.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aspnet-core GitHub repo](https://github.com/bitnami/bitnami-docker-aspnet-core).
 
@@ -55,19 +55,19 @@ Subscribe to project updates by watching the [bitnami/aspnet-core GitHub repo](h
 
 The recommended way to get the Bitnami aspnet-core Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/aspnet-core).
 
-```bash
+```console
 $ docker pull bitnami/aspnet-core:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/aspnet-core/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/aspnet-core:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/aspnet-core:latest 'https://github.com/bitnami/bitnami-docker-aspnet-core.git#master:3.1/debian-10'
 ```
 
@@ -77,7 +77,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/app` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
+```console
 $ docker run \
     -v /path/to/aspnet-core-persistence:/app \
     bitnami/aspnet-core:latest
@@ -103,7 +103,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create aspnet-core-network --driver bridge
 ```
 
@@ -111,7 +111,7 @@ $ docker network create aspnet-core-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `aspnet-core-network` network.
 
-```bash
+```console
 $ docker run --name aspnet-core-node1 --network aspnet-core-network bitnami/aspnet-core:latest
 ```
 
@@ -123,7 +123,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 The Bitnami aspnet-core Docker image sends the container logs to `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs aspnet-core
 ```
 
@@ -137,7 +137,7 @@ Bitnami provides up-to-date versions of aspnet-core, including security patches,
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/aspnet-core:latest
 ```
 
@@ -145,13 +145,13 @@ $ docker pull bitnami/aspnet-core:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop aspnet-core
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v aspnet-core
 ```
 
@@ -159,7 +159,7 @@ $ docker rm -v aspnet-core
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name aspnet-core bitnami/aspnet-core:latest
 ```
 
