@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name elasticsearch-curator bitnami/elasticsearch-curator:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-elasticsearch-curator/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-debian-10`, `5.8.1-debian-10-r76`, `5`, `5.8.1`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-curator/blob/5.8.1-debian-10-r76/5/debian-10/Dockerfile)
+* [`5-debian-10`, `5.8.1-debian-10-r77`, `5`, `5.8.1`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-curator/blob/5.8.1-debian-10-r77/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch-curator GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch-curator).
 
@@ -47,19 +47,19 @@ Subscribe to project updates by watching the [bitnami/elasticsearch-curator GitH
 
 The recommended way to get the Bitnami Elasticsearch Curator Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/elasticsearch-curator).
 
-```bash
+```console
 $ docker pull bitnami/elasticsearch-curator:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/elasticsearch-curator/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/elasticsearch-curator:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/elasticsearch-curator:latest 'https://github.com/bitnami/bitnami-docker-elasticsearch-curator.git#master:5/debian-10'
 ```
 
@@ -73,7 +73,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create elasticsearch-curator-network --driver bridge
 ```
 
@@ -81,7 +81,7 @@ $ docker network create elasticsearch-curator-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `elasticsearch-curator-network` network.
 
-```bash
+```console
 $ docker run --name elasticsearch-curator-node1 --network elasticsearch-curator-network bitnami/elasticsearch-curator:latest
 ```
 
@@ -97,7 +97,7 @@ Find all of the Elasticsearch Curator configuration options in the official [Cur
 
 The Bitnami Elasticsearch Curator Docker image sends the container logs to `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs elasticsearch-curator
 ```
 
@@ -111,7 +111,7 @@ Bitnami provides up-to-date versions of Elasticsearch Curator, including securit
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/elasticsearch-curator:latest
 ```
 
@@ -119,13 +119,13 @@ $ docker pull bitnami/elasticsearch-curator:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop elasticsearch-curator
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v elasticsearch-curator
 ```
 
@@ -133,7 +133,7 @@ $ docker rm -v elasticsearch-curator
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name elasticsearch-curator bitnami/elasticsearch-curator:latest
 ```
 
