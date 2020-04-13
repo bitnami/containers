@@ -8,7 +8,7 @@ https://www.drupal.org/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-drupal/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`8-debian-10`, `8.8.5-debian-10-r10`, `8`, `8.8.5`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.8.5-debian-10-r10/8/debian-10/Dockerfile)
+* [`8-debian-10`, `8.8.5-debian-10-r11`, `8`, `8.8.5`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.8.5-debian-10-r11/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
 
@@ -56,7 +56,7 @@ Running Drupal with a database server is the recommended way. You can either use
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-drupal/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-drupal/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -67,13 +67,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```bash
+  ```console
   $ docker network create drupal-tier
   ```
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-  ```bash
+  ```console
   $ docker volume create --name mariadb_data
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -86,7 +86,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Create volumes for Drupal persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name drupal_data
   $ docker run -d --name drupal -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -130,13 +130,13 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 
 1. Create a network (if it does not exist):
 
-  ```bash
+  ```console
   $ docker network create drupal-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```bash
+  ```console
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_drupal \
@@ -150,7 +150,7 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 
 3. Create the Drupal container with host volumes:
 
-  ```bash
+  ```console
   $ docker run -d --name drupal -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e DRUPAL_DATABASE_USER=bn_drupal \
@@ -166,7 +166,7 @@ Bitnami provides up-to-date versions of MariaDB and Drupal, including security p
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/drupal:latest
   ```
 
@@ -177,7 +177,7 @@ Bitnami provides up-to-date versions of MariaDB and Drupal, including security p
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/drupal-persistence /path/to/drupal-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -199,7 +199,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the Drupal image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+When you start the Drupal image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
  * For Docker Compose, add the variable name and value under the application section:
 
@@ -213,7 +213,7 @@ drupal:
 
  * For manual execution add a `-e` option with each variable and value:
 
-  ```bash
+  ```console
   $ docker run -d --name drupal -p 80:80 -p 443:443 \
     -e DRUPAL_PASSWORD=my_password \
     --net drupal-tier \
