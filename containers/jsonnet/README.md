@@ -6,7 +6,7 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name jsonnet bitnami/jsonnet:latest
 ```
 
@@ -26,7 +26,7 @@ $ docker run --name jsonnet bitnami/jsonnet:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0.15-debian-10`, `0.15.0-debian-10-r54`, `0.15`, `0.15.0`, `latest` (0.15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jsonnet/blob/0.15.0-debian-10-r54/0.15/debian-10/Dockerfile)
+* [`0.15-debian-10`, `0.15.0-debian-10-r55`, `0.15`, `0.15.0`, `latest` (0.15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jsonnet/blob/0.15.0-debian-10-r55/0.15/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jsonnet GitHub repo](https://github.com/bitnami/bitnami-docker-jsonnet).
 
@@ -34,19 +34,19 @@ Subscribe to project updates by watching the [bitnami/jsonnet GitHub repo](https
 
 The recommended way to get the Bitnami Git Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/jsonnet).
 
-```bash
+```console
 $ docker pull bitnami/jsonnet:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/jsonnet/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/jsonnet:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/jsonnet:latest 'https://github.com/bitnami/bitnami-docker-jsonnet.git#master:0.15/debian-10'
 ```
 
@@ -56,7 +56,7 @@ $ docker build -t bitnami/jsonnet:latest 'https://github.com/bitnami/bitnami-doc
 
 To run commands inside this container you can use `docker run`, for example to evaluate jsonnet code:
 
-```bash
+```console
 $ docker run --name jsonnet bitnami/jsonnet:latest -e "{hello: 'world'}"
 ```
 
