@@ -9,7 +9,7 @@ email, domain or group.
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name oauth2-proxy bitnami/oauth2-proxy:latest
 ```
 
@@ -33,7 +33,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -48,7 +48,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-debian-10`, `5.1.0-debian-10-r15`, `5`, `5.1.0`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/5.1.0-debian-10-r15/5/debian-10/Dockerfile)
+* [`5-debian-10`, `5.1.0-debian-10-r16`, `5`, `5.1.0`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/5.1.0-debian-10-r16/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
 
@@ -56,19 +56,19 @@ Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](
 
 The recommended way to get the Bitnami oauth2-proxy Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/oauth2-proxy).
 
-```bash
+```console
 $ docker pull bitnami/oauth2-proxy:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/oauth2-proxy/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/oauth2-proxy:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/oauth2-proxy:latest 'https://github.com/bitnami/bitnami-docker-oauth2-proxy.git#master:5/debian-10'
 ```
 
@@ -82,7 +82,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create oauth2-proxy-network --driver bridge
 ```
 
@@ -90,7 +90,7 @@ $ docker network create oauth2-proxy-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `oauth2-proxy-network` network.
 
-```bash
+```console
 $ docker run --name oauth2-proxy-node1 --network oauth2-proxy-network bitnami/oauth2-proxy:latest
 ```
 
@@ -110,7 +110,7 @@ Collectors are enabled by providing a --collector.<name> flag. Collectors that a
 
 The Bitnami oauth2-proxy Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs oauth2-proxy
 ```
 
@@ -124,7 +124,7 @@ Bitnami provides up-to-date versions of oauth2-proxy, including security patches
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/oauth2-proxy:latest
 ```
 
@@ -132,13 +132,13 @@ $ docker pull bitnami/oauth2-proxy:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop oauth2-proxy
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/oauth2-proxy-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/oauth2-proxy-persistence /path/to/oauth2-proxy-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -146,7 +146,7 @@ You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v oauth2-proxy
 ```
 
@@ -154,7 +154,7 @@ $ docker rm -v oauth2-proxy
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
-```bash
+```console
 $ docker run --name oauth2-proxy bitnami/oauth2-proxy:latest
 ```
 
