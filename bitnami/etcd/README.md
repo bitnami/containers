@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run -it --name etcd bitnami/etcd
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-etcd/master/docker-compose.yml
 $ docker-compose up
 ```
@@ -41,12 +41,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.4.7-debian-10-r11`, `3`, `3.4.7`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.4.7-debian-10-r11/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.4.7-debian-10-r12`, `3`, `3.4.7`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.4.7-debian-10-r12/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/etcd GitHub repo](https://github.com/bitnami/bitnami-docker-etcd).
 
@@ -58,7 +56,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 
 The recommended way to get the Bitnami etcd Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/etcd).
 
-```bash
+```console
 $ docker pull bitnami/etcd:latest
 ```
 
@@ -66,13 +64,13 @@ To use a specific version, you can pull a versioned tag. You can view the
 [list of available versions](https://hub.docker.com/r/bitnami/etcd/tags/)
 in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/etcd:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/etcd:latest 'https://github.com/bitnami/bitnami-docker-nginx.git#master:3/debian-10'
 ```
 
@@ -88,7 +86,7 @@ In this example, we will create a etcd client instance that will connect to the 
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -96,7 +94,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the etcd container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name etcd-server \
     --network app-tier \
     --publish 2379:2379 \
@@ -110,7 +108,7 @@ $ docker run -d --name etcd-server \
 
 Finally we create a new container instance to launch the etcd client and connect to the server created in the previous step:
 
-```bash
+```console
 $ docker run -it --rm \
     --network app-tier \
     --env ALLOW_NONE_AUTHENTICATION=yes \
@@ -152,7 +150,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -160,8 +158,8 @@ $ docker-compose up -d
 
 The configuration can easily be setup by mounting your own configuration file on the directory `/opt/bitnami/etcd/conf`:
 
-```
-docker run --name etcd -v /path/to/etcd.conf.yml:/opt/bitnami/etcd/conf/etcd.conf.yml bitnami/etcd:latest
+```console
+$ docker run --name etcd -v /path/to/etcd.conf.yml:/opt/bitnami/etcd/conf/etcd.conf.yml bitnami/etcd:latest
 ```
 
 After that, your configuration will be taken into account in the server's behaviour.
