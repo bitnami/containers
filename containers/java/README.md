@@ -39,13 +39,11 @@ $ kubectl apply -f test.yaml
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+- [`13`, `13.0.2-debian-10-r77` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r77/13/debian-10/Dockerfile), [`13-prod`, `13.0.2-debian-10-r77-prod` (13/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r77/13/debian-10/prod/Dockerfile)
 - [`13`, `13.0.2-debian-10-r76-prod` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r76-prod/13/debian-10/Dockerfile), [`13-prod`, `13.0.2-debian-10-r76-prod-prod` (13/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r76-prod/13/debian-10/prod/Dockerfile)
-- [`13`, `13.0.2-debian-10-r76` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r76/13/debian-10/Dockerfile), [`13-prod`, `13.0.2-debian-10-r76-prod` (13/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/13.0.2-debian-10-r76/13/debian-10/prod/Dockerfile)
 - [`11`, `11.0.6-debian-10-r77-prod` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.6-debian-10-r77-prod/11/debian-10/Dockerfile), [`11-prod`, `11.0.6-debian-10-r77-prod-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.6-debian-10-r77-prod/11/debian-10/prod/Dockerfile)
 - [`11`, `11.0.6-debian-10-r77` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.6-debian-10-r77/11/debian-10/Dockerfile), [`11-prod`, `11.0.6-debian-10-r77-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.6-debian-10-r77/11/debian-10/prod/Dockerfile)
 - [`10`, `10.0.2-debian-10-r0` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/10.0.2-debian-10-r0/10/debian-10/Dockerfile), [`10-prod`, `10.0.2-debian-10-r0-prod` (10/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/10.0.2-debian-10-r0/10/debian-10/prod/Dockerfile)
