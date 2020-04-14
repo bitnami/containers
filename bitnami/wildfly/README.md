@@ -4,13 +4,13 @@
 
 # TLDR
 
-```bash
+```console
 $ docker run --name wildfly bitnami/wildfly:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-wildfly/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -39,12 +39,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`19-debian-10`, `19.0.0-debian-10-r12`, `19`, `19.0.0`, `latest` (19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/19.0.0-debian-10-r12/19/debian-10/Dockerfile)
+* [`19-debian-10`, `19.0.0-debian-10-r13`, `19`, `19.0.0`, `latest` (19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/19.0.0-debian-10-r13/19/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
@@ -52,19 +50,19 @@ Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https
 
 The recommended way to get the Bitnami Wildfly Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/wildfly).
 
-```bash
+```console
 $ docker pull bitnami/wildfly:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/wildfly/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/wildfly:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/wildfly:latest 'https://github.com/bitnami/bitnami-docker-wildfly.git#master:19/debian-10'
 ```
 
@@ -74,7 +72,7 @@ If you remove the container all your data and configurations will be lost, and t
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
+```console
 $ docker run -p 8080:8080 -p 9990:9990 \
     -v /path/to/wildfly-persistence:/bitnami \
     bitnami/wildfly:latest
@@ -99,7 +97,7 @@ The `/bitnami/wildfly/data` directory is configured as the Wildfly webapps deplo
 
 Additionally a helper symlink `/app` is present that points to the webapps deployment directory which enables us to deploy applications on a running Wildfly instance by simply doing:
 
-```bash
+```console
 $ docker cp /path/to/app.war wildfly:/app
 ```
 
@@ -110,13 +108,13 @@ You can also deploy web applications on a running Wildfly instance using the Wil
 
 The image exposes the application server on port `8080` and the management console on port `9990`. To access your web server from your host machine you can ask Docker to map random ports on your host to the ports `8080` and `9990` of the container.
 
-```bash
+```console
 $ docker run --name wildfly -P bitnami/wildfly:latest
 ```
 
 Run `docker port` to determine the random ports Docker assigned.
 
-```bash
+```console
 $ docker port wildfly
 8080/tcp -> 0.0.0.0:32775
 9990/tcp -> 0.0.0.0:32774
@@ -124,7 +122,7 @@ $ docker port wildfly
 
 You can also manually specify the ports you want forwarded from your host to the container.
 
-```bash
+```console
 $ docker run -p 8080:8080 -p 9990:9990 bitnami/wildfly:latest
 ```
 
@@ -140,7 +138,7 @@ The Bitnami Wildfly Docker Image ships the `jboss-cli.sh` client and can be laun
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create wildfly-tier --driver bridge
 ```
 
@@ -148,7 +146,7 @@ $ docker network create wildfly-tier --driver bridge
 
 Use the `--network wildfly-tier` argument to the `docker run` command to attach the Wildfly container to the `wildfly-tier` network.
 
-```bash
+```console
 $ docker run -d --name wildfly-server \
     --network wildfly-tier \
     bitnami/wildfly:latest
@@ -158,7 +156,7 @@ $ docker run -d --name wildfly-server \
 
 Finally we create a new container instance to launch the Wildfly client and connect to the server created in the previous step:
 
-```bash
+```console
 $ docker run -it --rm \
     --network wildfly-tier \
     bitnami/wildfly:latest \
@@ -168,7 +166,7 @@ $ docker run -it --rm \
 **Note!**
 You can also run the client in the same container as the server using the Docker [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
 
-```bash
+```console
 $ docker exec -it wildfly-server \
   jboss-cli.sh --controller=wildfly-server:9990 --connect
 ```
@@ -181,7 +179,7 @@ By default, a management user named `user` is created with the default password 
 
 Additionally you can specify a user name for the management user using the `WILDFLY_USERNAME` environment variable. When not specified, the `WILDFLY_PASSWORD` configuration is applied on the default user (`user`).
 
-```bash
+```console
 $ docker run --name wildfly \
   -e WILDFLY_USERNAME=my_user \
   -e WILDFLY_PASSWORD=my_password \
@@ -208,7 +206,7 @@ The image looks for configurations in `/bitnami/wildfly/conf/`. As mentioned in 
 
 Run the Wildfly image, mounting a directory from your host.
 
-```bash
+```console
 $ docker run --name wildfly -v /path/to/wildfly-persistence:/bitnami bitnami/wildfly:latest
 ```
 
@@ -229,7 +227,7 @@ Edit the configuration on your host using your favorite editor.
 
 eg.
 
-```bash
+```console
 $ vim /path/to/wildfly-persistence/wildfly/conf/standalone.xml
 ```
 
@@ -237,13 +235,13 @@ $ vim /path/to/wildfly-persistence/wildfly/conf/standalone.xml
 
 After changing the configuration, restart your Wildfly container for the changes to take effect.
 
-```bash
+```console
 $ docker restart wildfly
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose restart wildfly
 ```
 
@@ -253,13 +251,13 @@ Refer to the [configuration](https://docs.jboss.org/author/display/WFLY9/General
 
 The Bitnami Wildfly Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs wildfly
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose logs wildfly
 ```
 
@@ -273,7 +271,7 @@ Bitnami provides up-to-date versions of Wildfly, including security patches, soo
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/wildfly:latest
 ```
 
@@ -284,31 +282,31 @@ or if you're using Docker Compose, update the value of the image property to
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop wildfly
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop wildfly
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/wildfly-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/wildfly-persistence /path/to/wildfly-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v wildfly
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v wildfly
 ```
 
@@ -316,13 +314,13 @@ $ docker-compose rm -v wildfly
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name wildfly bitnami/wildfly:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up wildfly
 ```
 
