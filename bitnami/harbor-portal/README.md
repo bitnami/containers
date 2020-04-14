@@ -8,7 +8,7 @@
 
 # TL;DR;
 
-```bash
+```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-harbor-portal/master/docker-compose.yml
 $ docker-compose up
 ```
@@ -36,12 +36,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.10.2-debian-10-r3`, `1`, `1.10.2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-portal/blob/1.10.2-debian-10-r3/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.10.2-debian-10-r4`, `1`, `1.10.2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-portal/blob/1.10.2-debian-10-r4/1/debian-10/Dockerfile)
 
 # Configuration
 
