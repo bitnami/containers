@@ -9,7 +9,7 @@ For more details about it capabilities and general features please visit the off
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name fluent-bit bitnami/fluent-bit:latest
 ```
 
@@ -33,7 +33,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -48,7 +48,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.4.2-debian-10-r11`, `1`, `1.4.2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.4.2-debian-10-r11/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.4.2-debian-10-r12`, `1`, `1.4.2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.4.2-debian-10-r12/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluent-bit GitHub repo](https://github.com/bitnami/bitnami-docker-fluent-bit).
 
@@ -56,19 +56,19 @@ Subscribe to project updates by watching the [bitnami/fluent-bit GitHub repo](ht
 
 The recommended way to get the Bitnami Fluent Bit Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/fluent-bit).
 
-```bash
+```console
 $ docker pull bitnami/fluent-bit:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/fluent-bit/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/fluent-bit:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/fluent-bit:latest 'https://github.com/bitnami/bitnami-docker-fluent-bit.git#master:1/debian-10'
 ```
 
@@ -82,7 +82,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create fluent-bit-network --driver bridge
 ```
 
@@ -90,7 +90,7 @@ $ docker network create fluent-bit-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `fluent-bit-network` network.
 
-```bash
+```console
 $ docker run --name fluent-bit-node1 --network fluent-bit-network bitnami/fluent-bit:latest
 ```
 
@@ -127,7 +127,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -147,7 +147,7 @@ Fluent Bit supports multiple extensions via plugins.
 
 The Bitnami fluent-bit Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs fluent-bit
 ```
 
