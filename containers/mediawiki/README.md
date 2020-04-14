@@ -10,7 +10,7 @@ https://www.mediawiki.org/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mediawiki/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -34,12 +34,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.34.1-debian-10-r17`, `1`, `1.34.1`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.34.1-debian-10-r17/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.34.1-debian-10-r18`, `1`, `1.34.1`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.34.1-debian-10-r18/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mediawiki GitHub repo](https://github.com/bitnami/bitnami-docker-mediawiki).
 
@@ -57,7 +55,7 @@ Running MediaWiki with a database server is the recommended way. You can either 
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mediawiki/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mediawiki/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ``` 
@@ -68,13 +66,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```bash
+  ```console
   $ docker network create mediawiki-tier
   ```
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-  ```bash
+  ```console
   $ docker volume create --name mariadb_data
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -89,7 +87,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Create volumes for MediaWiki persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name mediawiki_data
   $ docker run -d --name mediawiki -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -135,13 +133,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```bash
+  ```console
   $ docker network create mediawiki-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```bash
+  ```console
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_mediawiki \
@@ -155,7 +153,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Run the MediaWiki container:
 
-  ```bash
+  ```console
   $ docker run -d --name mediawiki -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MEDIAWIKI_DATABASE_USER=bn_mediawiki \
@@ -171,7 +169,7 @@ Bitnami provides up-to-date versions of MariaDB and MediaWiki, including securit
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/mediawiki:latest
   ```
 
@@ -182,7 +180,7 @@ Bitnami provides up-to-date versions of MariaDB and MediaWiki, including securit
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/mediawiki-persistence /path/to/mediawiki-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -204,7 +202,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the mediawiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+When you start the mediawiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mediawiki/blob/master/docker-compose.yml) file present in this repository:
 
@@ -218,7 +216,7 @@ mediawiki:
 
  * For manual execution add a `-e` option with each variable and value:
 
-  ```bash
+  ```console
   $ docker run -d --name mediawiki -p 80:80 -p 443:443 \
     -e MEDIAWIKI_PASSWORD=my_password \
     --net mediawiki-tier \
@@ -290,7 +288,7 @@ This would be an example of SMTP configuration using a GMail account:
 ```
  * For manual execution:
 
-  ```bash
+  ```console
   $ docker run -d --name mediawiki -p 80:80 -p 443:443 \
     -e MEDIAWIKI_DATABASE_USER=bn_mediawiki \
     -e MEDIAWIKI_DATABASE_NAME=bitnami_mediawiki \
@@ -310,14 +308,14 @@ If you require better quality thumbnails for your uploaded images, you may want 
 
 1. Create the following Dockerfile
 
-```
+```Dockerfile
 FROM bitnami/mediawiki:latest
 RUN install_packages imagemagick
 ```
 
 2. Build the docker image
 
-```
+```console
 $ docker build -t bitnami/mediawiki:imagemagick .
 ```
 
@@ -331,7 +329,7 @@ You can follow these steps in order to migrate it to this container:
 
 1. Export the data from your SOURCE installation: (assuming an installation in `/opt/bitnami` directory)
 
-  ```bash
+  ```console
   $ mysqldump -u root -p bitnami_mediawiki > ~/backup-mediawiki-database.sql
   $ gzip -c ~/backup-mediawiki-database.sql > ~/backup-mediawiki-database.sql.gz
   $ cd /opt/bitnami/apps/mediawiki/htdocs/
@@ -342,7 +340,7 @@ You can follow these steps in order to migrate it to this container:
 
 2. Copy the backup files to your TARGET installation:
 
-  ```bash
+  ```console
   $ scp ~/backup-mediawiki-* YOUR_USERNAME@TARGET_HOST:~
   ```
 
@@ -350,32 +348,32 @@ You can follow these steps in order to migrate it to this container:
 
 4. Wait for the initial setup to finish. You can follow it with
 
-  ```bash
+  ```console
   $ docker-compose logs -f mediawiki
   ```
 
   and press `Ctrl-C` when you see this:
 
-  ```
+  ```console
   nami    INFO  mediawiki successfully initialized
   Starting mediawiki ...
   ```
 
 5. Stop Apache:
 
-  ```bash
+  ```console
   $ docker-compose exec mediawiki nami stop apache
   ```
 
 6. Obtain the password used by Mediawiki to access the database in order avoid reconfiguring it:
 
-  ```bash
+  ```console
   $ docker-compose exec mediawiki bash -c 'cat /opt/bitnami/mediawiki/LocalSettings.php | grep wgDBpassword'
   ```
 
 7. Restore the database backup: (replace ROOT_PASSWORD below with your MariaDB root password)
 
-  ```bash
+  ```console
   $ cd ~
   $ docker-compose exec mariadb mysql -u root -pROOT_PASSWORD
   $ MariaDB [(none)]> drop database bitnami_mediawiki;
@@ -387,7 +385,7 @@ You can follow these steps in order to migrate it to this container:
 
 8. Restore extensions/images/skins directories from backup:
 
-  ```bash
+  ```console
   $ cat ./backup-mediawiki-extensions.tar.gz | docker exec -i $(docker-compose ps -q mediawiki) bash -c 'cd /bitnami/mediawiki/ ; tar -xzvf -'
   $ cat ./backup-mediawiki-images.tar.gz | docker exec -i $(docker-compose ps -q mediawiki) bash -c 'cd /bitnami/mediawiki/ ; tar -xzvf -'
   $ cat ./backup-mediawiki-skins.tar.gz | docker exec -i $(docker-compose ps -q mediawiki) bash -c 'cd /bitnami/mediawiki/ ; tar -xzvf -'
@@ -395,13 +393,13 @@ You can follow these steps in order to migrate it to this container:
 
 9. Fix Mediawiki directory permissions:
 
-  ```bash
+  ```console
   $ docker-compose exec mediawiki chown -R daemon:daemon /bitnami/mediawiki
   ```
 
 10. Restart Apache:
 
-  ```bash
+  ```console
   $ docker-compose exec mediawiki nami start apache
   ```
 
