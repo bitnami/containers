@@ -31,7 +31,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -41,12 +41,10 @@ $ kubectl apply -f test.yaml
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.9.5-debian-10-r58`, `1`, `1.9.5`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.9.5-debian-10-r58/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.9.5-debian-10-r59`, `1`, `1.9.5`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.9.5-debian-10-r59/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kube-state-metrics GitHub repo](https://github.com/bitnami/bitnami-docker-kube-state-metrics).
 
@@ -54,19 +52,19 @@ Subscribe to project updates by watching the [bitnami/kube-state-metrics GitHub 
 
 The recommended way to get the Bitnami Kube-state-metrics Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kube-state-metrics).
 
-```bash
+```console
 $ docker pull bitnami/kube-state-metrics:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/kube-state-metrics/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/kube-state-metrics:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/kube-state-metrics:latest 'https://github.com/bitnami/bitnami-docker-kube-state-metrics.git#master:1/debian-10'
 ```
 
