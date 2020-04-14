@@ -8,7 +8,7 @@ https://owncloud.org/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-owncloud/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -33,12 +33,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`10-debian-10`, `10.4.0-debian-10-r39`, `10`, `10.4.0`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.4.0-debian-10-r39/10/debian-10/Dockerfile)
+* [`10-debian-10`, `10.4.0-debian-10-r40`, `10`, `10.4.0`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.4.0-debian-10-r40/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/owncloud GitHub repo](https://github.com/bitnami/bitnami-docker-owncloud).
 
@@ -93,13 +91,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```bash
+  ```console
   $ docker network create owncloud-tier
   ```
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-  ```bash
+  ```console
   $ docker volume create --name mariadb_data
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -114,7 +112,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Create volumes for Owncloud persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name owncloud_data
   $ docker run -d --name owncloud -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -131,7 +129,7 @@ Then you can access your application at http://your-ip/
 
 > *Note:* If you persisted your application and you already run your container, you won't be able to configure the Trusted Domains using the previous environment variable. Trusted Domains will be set using the configuration that had been previously persisted. Therefore, you will need to connect you container and execute the command below:
 
-  ````bash
+  ````console
   $ sudo -u daemon /opt/bitnami/php/bin/php /opt/bitnami/owncloud/occ config:system:set trusted_domains 2 --value=YOUR_HOSTNAME
   ````
 
@@ -182,13 +180,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```bash
+  ```console
   $ docker network create owncloud-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```bash
+  ```console
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_owncloud \
@@ -202,7 +200,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Create the ownCloud container with host volumes:
 
-  ```bash
+  ```console
   $ docker run -d --name owncloud -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e OWNCLOUD_DATABASE_USER=bn_owncloud \
@@ -218,7 +216,7 @@ Bitnami provides up-to-date versions of MariaDB and OwnCloud, including security
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/owncloud:latest
   ```
 
@@ -229,7 +227,7 @@ Bitnami provides up-to-date versions of MariaDB and OwnCloud, including security
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/owncloud-persistence /path/to/owncloud-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -251,7 +249,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the owncloud image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
+When you start the owncloud image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
 ##### User and Site configuration
 
@@ -304,7 +302,7 @@ owncloud:
 
  * For manual execution add a `-e` option with each variable and value:
 
-  ```bash
+  ```console
   $ docker run -d --name owncloud -p 80:80 -p 443:443 \
     -e OWNCLOUD_PASSWORD=my_password \
     --net owncloud-tier \
