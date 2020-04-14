@@ -7,7 +7,7 @@ Prometheus exporter for hardware and OS metrics exposed by UNIX kernels, with pl
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name node-exporter bitnami/node-exporter:latest
 ```
 
@@ -31,7 +31,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -41,12 +41,10 @@ $ kubectl apply -f test.yaml
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.18.1-debian-10-r83`, `0`, `0.18.1`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.18.1-debian-10-r83/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.18.1-debian-10-r85`, `0`, `0.18.1`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/0.18.1-debian-10-r85/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-node-exporter).
 
@@ -54,19 +52,19 @@ Subscribe to project updates by watching the [bitnami/node-exporter GitHub repo]
 
 The recommended way to get the Bitnami Node Exporter Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/node-exporter).
 
-```bash
+```console
 $ docker pull bitnami/node-exporter:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/node-exporter/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/node-exporter:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/node-exporter:latest 'https://github.com/bitnami/bitnami-docker-node-exporter.git#master:0/debian-10'
 ```
 
@@ -80,7 +78,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create node-exporter-network --driver bridge
 ```
 
@@ -88,7 +86,7 @@ $ docker network create node-exporter-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `node-exporter-network` network.
 
-```bash
+```console
 $ docker run --name node-exporter-node1 --network node-exporter-network bitnami/node-exporter:latest
 ```
 
@@ -108,7 +106,7 @@ Collectors are enabled by providing a --collector.<name> flag. Collectors that a
 
 The Bitnami Node Exporter Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs node-exporter
 ```
 
@@ -122,7 +120,7 @@ Bitnami provides up-to-date versions of node-exporter, including security patche
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/node-exporter:latest
 ```
 
@@ -130,13 +128,13 @@ $ docker pull bitnami/node-exporter:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop node-exporter
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/node-exporter-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/node-exporter-persistence /path/to/node-exporter-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -144,7 +142,7 @@ You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v node-exporter
 ```
 
@@ -152,7 +150,7 @@ $ docker rm -v node-exporter
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
-```bash
+```console
 $ docker run --name node-exporter bitnami/node-exporter:latest
 ```
 
