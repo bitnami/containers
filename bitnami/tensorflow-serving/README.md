@@ -10,13 +10,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name tensorflow-serving bitnami/tensorflow-serving:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-tensorflow-serving/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.1.0-debian-10-r66`, `2`, `2.1.0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/2.1.0-debian-10-r66/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.1.0-debian-10-r67`, `2`, `2.1.0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/2.1.0-debian-10-r67/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-serving GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-serving).
 
@@ -51,19 +51,19 @@ Subscribe to project updates by watching the [bitnami/tensorflow-serving GitHub 
 
 The recommended way to get the Bitnami TensorFlow Serving Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/tensorflow-serving).
 
-```bash
+```console
 $ docker pull bitnami/tensorflow-serving:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/tensorflow-serving/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/tensorflow-serving:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/tensorflow-serving:latest 'https://github.com/bitnami/bitnami-docker-tensorflow-serving.git#master:2/debian-10'
 ```
 
@@ -73,7 +73,7 @@ If you remove the container all your data and configurations will be lost, and t
 
 For persistence you should mount a volume at the `/bitnami` path for the TensorFlow Serving data and configurations. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
+```console
 $ docker run -v /path/to/tensorflow-serving-persistence:/bitnami bitnami/tensorflow-serving:latest
 ```
 
@@ -102,7 +102,7 @@ In this example, we will create a TensorFlow ResNet client instance that will co
 
 ### Step 1: Download the ResNet trained data
 
-```bash
+```console
 $ mkdir /tmp/model-data
 $ curl -o '/tmp/model-data/resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz' 'http://download.tensorflow.org/models/official/20181001_resnet/savedmodels/resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz'
 $ cd /tmp/model-data
@@ -111,7 +111,7 @@ $ tar xzf resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz --strip-components=2
 
 ### Step 2: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -119,7 +119,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the TensorFlow Serving container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name tensorflow-serving \
     --volume /tmp/model-data:/bitnami/model-data \
     --network app-tier \
@@ -130,7 +130,7 @@ $ docker run -d --name tensorflow-serving \
 
 Run the `tensorflow-resnet` container in background mode to export the data model that you have already downloaded.
 
-```bash
+```console
 $ docker run -d --name tensorflow-resnet \
     --volume /tmp/model-data:/bitnami/model-data \
     --network app-tier \
@@ -139,7 +139,7 @@ $ docker run -d --name tensorflow-resnet \
 
 Monitor the logs of tensorflow-serving until it shows the message `Successfully loaded servable version`. That will mean it is serving the model:
 
-```
+```console
 $ docker logs tensorflow-serving -f
 ```
 
@@ -147,7 +147,7 @@ $ docker logs tensorflow-serving -f
 
 Finally we create a new container instance to launch the TensorFlow Serving client and connect to the server created in the previous step:
 
-```bash
+```console
 $ docker run -it --rm \
     --volume /tmp/model-data:/bitnami/model-data \
     --network app-tier \
@@ -183,7 +183,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -207,7 +207,7 @@ The image looks for configurations in `/bitnami/tensorflow-serving/conf/`. As me
 
 Run the TensorFlow Serving image, mounting a directory from your host.
 
-```bash
+```console
 $ docker run --name tensorflow-serving -v /path/to/tensorflow-serving-persistence:/bitnami bitnami/tensorflow-serving:latest
 ```
 
@@ -226,7 +226,7 @@ services:
 
 Edit the configuration on your host using your favorite editor.
 
-```bash
+```console
 $ vi /path/to/tensorflow-serving-persistence/conf/tensorflow-serving.conf
 ```
 
@@ -234,13 +234,13 @@ $ vi /path/to/tensorflow-serving-persistence/conf/tensorflow-serving.conf
 
 After changing the configuration, restart your TensorFlow Serving container for changes to take effect.
 
-```bash
+```console
 $ docker restart tensorflow-serving
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose restart tensorflow-serving
 ```
 
@@ -248,13 +248,13 @@ $ docker-compose restart tensorflow-serving
 
 The Bitnami TensorFlow Serving Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs tensorflow-serving
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose logs tensorflow-serving
 ```
 
@@ -270,7 +270,7 @@ Bitnami provides up-to-date versions of TensorFlow Serving, including security p
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/tensorflow-serving:latest
 ```
 
@@ -281,19 +281,19 @@ or if you're using Docker Compose, update the value of the image property to
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop tensorflow-serving
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop tensorflow-serving
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/tensorflow-serving-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/tensorflow-serving-persistence /path/to/tensorflow-serving-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -301,13 +301,13 @@ You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v tensorflow-serving
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v tensorflow-serving
 ```
 
@@ -315,13 +315,13 @@ $ docker-compose rm -v tensorflow-serving
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
-```bash
+```console
 $ docker run --name tensorflow-serving bitnami/tensorflow-serving:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose start tensorflow-serving
 ```
 
