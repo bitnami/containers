@@ -7,13 +7,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run -it --name nats bitnami/nats
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-nats/master/docker-compose.yml
 $ docker-compose up
 ```
@@ -42,12 +42,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.1.6-debian-10-r12`, `2`, `2.1.6`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/2.1.6-debian-10-r12/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.1.6-debian-10-r14`, `2`, `2.1.6`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/2.1.6-debian-10-r14/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nats GitHub repo](https://github.com/bitnami/bitnami-docker-nats).
 
@@ -59,7 +57,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 
 The recommended way to get the Bitnami NATS Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/nats).
 
-```bash
+```console
 $ docker pull bitnami/nats:latest
 ```
 
@@ -67,13 +65,13 @@ To use a specific version, you can pull a versioned tag. You can view the
 [list of available versions](https://hub.docker.com/r/bitnami/nats/tags/)
 in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/nats:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/nats:latest 'https://github.com/bitnami/bitnami-docker-nginx.git#master:2/debian-10'
 ```
 
@@ -89,7 +87,7 @@ In this example, we will create a NATS client instance that will connect to the 
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -97,7 +95,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the NATS container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name nats-server \
     --network app-tier \
     --publish 4222:4222 \
@@ -112,7 +110,7 @@ You can create a small script which downloads, installs and uses the [NATS Golan
 
 There are some examples available to use that client. For instance, write the script below and save it as *nats-pub.sh* to use the publishing example:
 
-```bash
+```console
 #!/bin/bash
 
 go get github.com/nats-io/go-nats
@@ -122,7 +120,7 @@ go build /go/src/github.com/nats-io/go-nats/examples/nats-pub.go
 
 Then, you can use the script to create a client instance as shown below:
 
-```bash
+```console
 $ docker run -it --rm \
     --network app-tier \
     --volume /path/to/your/workspace:/go
@@ -162,7 +160,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -170,8 +168,8 @@ $ docker-compose up -d
 
 The configuration can easily be setup by mounting your own configuration file on the directory `/opt/bitnami/nats`:
 
-```
-docker run --name nats -v /path/to/nats-server.conf:/opt/bitnami/nats/nats-server.conf bitnami/nats:latest
+```console
+$ docker run --name nats -v /path/to/nats-server.conf:/opt/bitnami/nats/nats-server.conf bitnami/nats:latest
 ```
 
 After that, your configuration will be taken into account in the server's behaviour.
