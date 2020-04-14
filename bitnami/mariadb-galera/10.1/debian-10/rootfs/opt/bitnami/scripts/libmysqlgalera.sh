@@ -108,11 +108,11 @@ read -r -a DB_EXTRA_FLAGS <<< "$(mysql_extra_flags)"
 export DB_EXTRA_FLAGS
 ENABLE_LDAP="$(get_env_var_value ENABLE_LDAP)"
 export DB_ENABLE_LDAP="${ENABLE_LDAP:-no}"
-ENABLE_TLS_RT="$(get_env_var_value ENABLE_TLS_RT)"
-export DB_ENABLE_TLS_RT="${ENABLE_TLS_RT:-no}"
-export DB_TLS_RT_CERT_FILE="$(get_env_var_value TLS_RT_CERT_FILE)"
-export DB_TLS_RT_KEY_FILE="$(get_env_var_value TLS_RT_KEY_FILE)"
-export DB_TLS_RT_CA_FILE="$(get_env_var_value TLS_RT_CA_FILE)"
+ENABLE_TLS="$(get_env_var_value ENABLE_TLS)"
+export DB_ENABLE_TLS="${ENABLE_TLS:-no}"
+export DB_TLS_CERT_FILE="$(get_env_var_value TLS_CERT_FILE)"
+export DB_TLS_KEY_FILE="$(get_env_var_value TLS_KEY_FILE)"
+export DB_TLS_CA_FILE="$(get_env_var_value TLS_CA_FILE)"
 EOF
 }
 
@@ -188,18 +188,18 @@ mysql_validate() {
         print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables LDAP_URI, LDAP_BASE, LDAP_BIND_DN and LDAP_BIND_PASSWORD with the LDAP configuration."
     fi
 
-    if is_boolean_yes "$DB_ENABLE_TLS_RT"; then
-        if ( [[ -z "${DB_TLS_RT_CERT_FILE}" ]] || [[ -z "${DB_TLS_RT_KEY_FILE}" ]] || [[ -z "${DB_TLS_RT_CA_FILE}" ]]); then
-            print_validation_error "The TLS cert file, key and CA are required when TLS is enabled. Set the environment variables TLS_RT_CERT_FILE, TLS_RT_KEY_FILE and TLS_RT_CA_FILE with the path to each file."
+    if is_boolean_yes "$DB_ENABLE_TLS"; then
+        if ( [[ -z "${DB_TLS_CERT_FILE}" ]] || [[ -z "${DB_TLS_KEY_FILE}" ]] || [[ -z "${DB_TLS_CA_FILE}" ]]); then
+            print_validation_error "The TLS cert file, key and CA are required when TLS is enabled. Set the environment variables TLS_CERT_FILE, TLS_KEY_FILE and TLS_CA_FILE with the path to each file."
         fi
-        if ( [[ ! -f "${DB_TLS_RT_CERT_FILE}" ]] ); then
-            print_validation_error "The TLS_CERT file ${DB_TLS_RT_CERT_FILE} must exist."
+        if ( [[ ! -f "${DB_TLS_CERT_FILE}" ]] ); then
+            print_validation_error "The TLS_CERT file ${DB_TLS_CERT_FILE} must exist."
         fi
-        if ( [[ ! -f "${DB_TLS_RT_KEY_FILE}" ]] ); then
-            print_validation_error "The TLS_KEY file ${DB_TLS_RT_KEY_FILE} must exist."
+        if ( [[ ! -f "${DB_TLS_KEY_FILE}" ]] ); then
+            print_validation_error "The TLS_KEY file ${DB_TLS_KEY_FILE} must exist."
         fi
-        if ( [[ ! -f "${DB_TLS_RT_CA_FILE}" ]] ); then
-            print_validation_error "The TLS_CA file ${DB_TLS_RT_CA_FILE} must exist."
+        if ( [[ ! -f "${DB_TLS_CA_FILE}" ]] ); then
+            print_validation_error "The TLS_CA file ${DB_TLS_CA_FILE} must exist."
         fi
     fi
 
@@ -262,12 +262,12 @@ wsrep_cluster_address=gcomm://
 plugin_load_add = auth_pam
 EOF
 
-    if is_boolean_yes "$DB_ENABLE_TLS_RT"; then
+    if is_boolean_yes "$DB_ENABLE_TLS"; then
         cat >> "${DB_CONF_DIR}/my.cnf" <<EOF
-ssl_cert=$DB_TLS_RT_CERT_FILE
-ssl_key=$DB_TLS_RT_KEY_FILE
-ssl_ca=$DB_TLS_RT_CA_FILE
-wsrep_provider_options="socket.ssl_cert=$DB_TLS_RT_CERT_FILE;socket.ssl_key=$DB_TLS_RT_KEY_FILE;socket.ssl_ca=$DB_TLS_RT_CA_FILE"
+ssl_cert=$DB_TLS_CERT_FILE
+ssl_key=$DB_TLS_KEY_FILE
+ssl_ca=$DB_TLS_CA_FILE
+wsrep_provider_options="socket.ssl_cert=$DB_TLS_CERT_FILE;socket.ssl_key=$DB_TLS_KEY_FILE;socket.ssl_ca=$DB_TLS_CA_FILE"
 EOF
     fi
 
