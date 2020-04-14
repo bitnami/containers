@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --rm --name keycloak-gatekeeper bitnami/keycloak-gatekeeper:latest /keycloak-gatekeeper --help
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-keycloak-gatekeeper/master/docker-compose.yml
 $ docker-compose up
 ```
@@ -34,12 +34,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`9-scratch`, `9.0.2-scratch-r1`, `9`, `9.0.2`, `latest` (9/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/9.0.2/9/scratch/Dockerfile)
+* [`9-scratch`, `9.0.3-scratch-r0`, `9`, `9.0.3`, `latest` (9/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/9.0.3/9/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak-gatekeeper GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper).
 
@@ -51,7 +49,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 
 The recommended way to get the Bitnami Keycloak Gatekeeper Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/keycloak-gatekeeper).
 
-```bash
+```console
 $ docker pull bitnami/keycloak-gatekeeper:latest
 ```
 
@@ -59,13 +57,13 @@ To use a specific version, you can pull a versioned tag. You can view the
 [list of available versions](https://hub.docker.com/r/bitnami/keycloak-gatekeeper/tags/)
 in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/keycloak-gatekeeper:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/keycloak-gatekeeper:latest 'https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper.git#master:9/scratch'
 ```
 
@@ -75,7 +73,7 @@ $ docker build -t bitnami/keycloak-gatekeeper:latest 'https://github.com/bitnami
 
 The configuration can easily be setup by mounting your own configuration file on the directory `/opt/bitnami/keycloak-gatekeeper/conf` (both JSON and YAML formats are supported: `config.json` or `config.yaml`).
 
-```bash
+```console
 $ docker run --name keycloak-gatekeeper \
   --volume /path/to/config.yaml:/opt/bitnami/keycloak-gatekeeper/config.yaml \
   bitnami/keycloak-gatekeeper:latest \
@@ -99,7 +97,7 @@ keycloak-gatekeeper:
 
 The configuration can also be setup by providing command-line options.
 
-```bash
+```console
 $ docker run --name keycloak-gatekeeper bitnami/keycloak-gatekeeper:latest /keycloak-gatekeeper \
   --listen 127.0.0.1:3000 \
   --upstream-url http://127.0.0.1:80 \
