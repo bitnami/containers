@@ -37,8 +37,6 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
@@ -47,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`12-debian-10-prod`, `12.16.2-debian-10-r5-prod`, `12-prod`, `12.16.2-prod`, `latest-prod` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.2-debian-10-r5-prod/12-prod/debian-10/Dockerfile)
 * [`12-debian-10`, `12.16.2-debian-10-r5`, `12`, `12.16.2`, `latest` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.2-debian-10-r5/12/debian-10/Dockerfile)
 * [`10-debian-10-prod`, `10.20.1-debian-10-r1-prod`, `10-prod`, `10.20.1-prod` (10-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.20.1-debian-10-r1-prod/10-prod/debian-10/Dockerfile)
-* [`10-debian-10`, `10.20.1-debian-10-r0`, `10`, `10.20.1` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.20.1-debian-10-r0/10/debian-10/Dockerfile)
+* [`10-debian-10`, `10.20.1-debian-10-r1`, `10`, `10.20.1` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.20.1-debian-10-r1/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
