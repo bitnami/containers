@@ -8,7 +8,7 @@ http://community.jaspersoft.com/project/jasperreports-server
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-jasperreports/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -33,12 +33,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-debian-10`, `7.2.0-debian-10-r55`, `7`, `7.2.0`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.2.0-debian-10-r55/7/debian-10/Dockerfile)
+* [`7-debian-10`, `7.2.0-debian-10-r56`, `7`, `7.2.0`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.2.0-debian-10-r56/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jasperreports GitHub repo](https://github.com/bitnami/bitnami-docker-jasperreports).
 
@@ -53,7 +51,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-jasperreports/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-jasperreports/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -66,13 +64,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application:
 
-  ```bash
+  ```console
   $ docker network create jasperreports-tier
   ```
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-  ```bash
+  ```console
   $ docker volume create --name mariadb_data
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -85,7 +83,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Create volumes for JasperReports persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name jasperreports_data
   $ docker run -d --name jasperreports -p 80:8080 \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -139,13 +137,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```bash
+  ```console
   $ docker network create jasperreports-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```bash
+  ```console
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_jasperreports \
@@ -157,8 +155,8 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Create the JasperReports Server container with host volume:
 
-  ```bash
-  $  docker run -d --name jasperreports -p 80:8080 \
+  ```console
+  $  $ docker run -d --name jasperreports -p 80:8080 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e JASPERREPORTS_DATABASE_USER=bn_jasperreports \
     -e JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports \
@@ -173,7 +171,7 @@ Bitnami provides up-to-date versions of JasperReports Server, including security
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/jasperreports:latest
   ```
 
@@ -184,7 +182,7 @@ Bitnami provides up-to-date versions of JasperReports Server, including security
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/jasperreports-persistence /path/to/jasperreports-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -206,7 +204,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the jasperreports image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
+When you start the jasperreports image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
 ##### User and Site configuration
 
@@ -248,7 +246,7 @@ If you want to add a new environment variable:
 
  * For manual execution add a `-e` option with each variable and value:
 
-  ```bash
+  ```console
   $ docker run -d -e JASPERREPORTS_PASSWORD=my_password -p 80:8080 --name jasperreports -v /your/local/path/bitnami/jasperreports:/bitnami --network=jasperreports-tier bitnami/jasperreports
   ```
 
@@ -286,7 +284,7 @@ jasperreports:
 
  * For manual execution:
 
-```bash
+```console
  $ docker run -d -p 80:8080 --name jasperreports --net=jasperreports-tier \
     -e MARIADB_HOST=mariadb \
     -e MARIADB_PORT_NUMBER=3306 \
