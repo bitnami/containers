@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name minio-client bitnami/minio-client:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-minio-client/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -34,12 +34,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2020-debian-10`, `2020.4.4-debian-10-r9`, `2020`, `2020.4.4`, `latest` (2020/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2020.4.4-debian-10-r9/2020/debian-10/Dockerfile)
+* [`2020-debian-10`, `2020.4.4-debian-10-r10`, `2020`, `2020.4.4`, `latest` (2020/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2020.4.4-debian-10-r10/2020/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio-client GitHub repo](https://github.com/bitnami/bitnami-docker-minio-client).
 
@@ -47,19 +45,19 @@ Subscribe to project updates by watching the [bitnami/minio-client GitHub repo](
 
 The recommended way to get the Bitnami MinIO Client Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/minio-client).
 
-```bash
+```console
 $ docker pull bitnami/minio-client:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/minio-client/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/minio-client:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/minio-client:latest 'https://github.com/bitnami/bitnami-docker-minio-client.git#master:2020/debian-10'
 ```
 
@@ -75,7 +73,7 @@ In this example, we will create a MinIO Client container that will connect to a 
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -83,7 +81,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the MinIO container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name minio-server \
     --env MINIO_ACCESS_KEY="minio-access-key" \
     --env MINIO_SECRET_KEY="minio-secret-key" \
@@ -95,7 +93,7 @@ $ docker run -d --name minio-server \
 
 Finally we create a new container instance to launch the MinIO client and connect to the server created in the previous step. In this example, we create a new bucket in the MinIO storage server:
 
-```bash
+```console
 $ docker run --rm --name minio-client \
     --env MINIO_SERVER_HOST="minio" \
     --env MINIO_SERVER_ACCESS_KEY="minio-access-key" \
@@ -116,7 +114,7 @@ MinIO Client (`mc`) can be setup so it is already configured to point to a speci
 
 For instance, use the command below to create a new bucket in the MinIO Server `my.minio.domain`:
 
-```bash
+```console
 $ docker run --rm --name minio-client \
     --env MINIO_SERVER_HOST="my.minio.domain" \
     --env MINIO_SERVER_ACCESS_KEY="minio-access-key" \
