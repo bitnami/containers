@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name minio bitnami/minio:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-minio/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -40,12 +40,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2020-debian-10`, `2020.4.10-debian-10-r3`, `2020`, `2020.4.10`, `latest` (2020/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2020.4.10-debian-10-r3/2020/debian-10/Dockerfile)
+* [`2020-debian-10`, `2020.4.10-debian-10-r4`, `2020`, `2020.4.10`, `latest` (2020/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2020.4.10-debian-10-r4/2020/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio GitHub repo](https://github.com/bitnami/bitnami-docker-minio).
 
@@ -53,19 +51,19 @@ Subscribe to project updates by watching the [bitnami/minio GitHub repo](https:/
 
 The recommended way to get the Bitnami MinIO Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/minio).
 
-```bash
+```console
 $ docker pull bitnami/minio:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/minio/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/minio:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/minio:latest 'https://github.com/bitnami/bitnami-docker-minio.git#master:2020/debian-10'
 ```
 
@@ -75,7 +73,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/data` path.
 
-```bash
+```console
 $ docker run --name minio \
     --publish 9000:9000 \
     --volume /path/to/minio-persistence:/data \
@@ -107,7 +105,7 @@ In this example, we will create a [MinIO client](https://github.com/bitnami/bitn
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -115,7 +113,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the MinIO container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name minio-server \
     --env MINIO_ACCESS_KEY="minio-access-key" \
     --env MINIO_SECRET_KEY="minio-secret-key" \
@@ -127,7 +125,7 @@ $ docker run -d --name minio-server \
 
 Finally we create a new container instance to launch the MinIO client and connect to the server created in the previous step. In this example, we create a new bucket in the MinIO storage server:
 
-```bash
+```console
 $ docker run -it --rm --name minio-client \
     --env MINIO_SERVER_HOST="minio" \
     --env MINIO_SERVER_ACCESS_KEY="minio-access-key" \
@@ -174,7 +172,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -184,14 +182,14 @@ MiNIO can be configured via environment variables as detailed at [MinIO document
 
 A MinIO Client  (`mc`) is also shipped on this image that can be used to perform administrative tasks as described at the [MinIO Client documentation](https://docs.min.io/docs/minio-admin-complete-guide.html). In the example below, the client is used to obtain the server info:
 
-```bash
+```console
 $ docker run --name minio -d bitnami/minio:latest
 $ docker exec minio mc admin info local
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-minio/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 $ docker-compose exec minio mc admin info local
@@ -201,7 +199,7 @@ $ docker-compose exec minio mc admin info local
 
 You can create a series of buckets in the MinIO server during the initialization of the container by setting the environment variable `MINIO_DEFAULT_BUCKETS` as shown below:
 
-```bash
+```console
 $ docker run --name minio \
     --publish 9000:9000 \
     --env MINIO_DEFAULT_BUCKETS='my-first-bucket,my-second-bucket' \
@@ -225,7 +223,7 @@ You can secure the access to MinIO server with TLS as detailed at [MinIO documen
 
 This image expects the certificates to be mounted at the `/certs` directory. You can put your key and certificate files on a local directory and mount it in the container as shown below:
 
-```bash
+```console
 $ docker run --name minio \
     --publish 9000:9000 \
     --volume /path/to/certs:/certs \
@@ -294,13 +292,13 @@ Find more information about the Distributed Mode in the [MinIO documentation](ht
 
 The Bitnami MinIO Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs minio
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose logs minio
 ```
 
@@ -312,7 +310,7 @@ To enable HTTP log trace, you can set the environment variable `MINIO_HTTP_TRACE
 
 When setting this environment variable to `/opt/bitnami/minio/log/minio.log`, the logs will be sent to the `stdout`.
 
-```bash
+```console
 $ docker run --name minio \
     --publish 9000:9000 \
     --env MINIO_HTTP_TRACE=/opt/bitnami/minio/log/minio.log \
@@ -338,7 +336,7 @@ Bitnami provides up-to-date versions of MinIO, including security patches, soon 
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/minio:latest
 ```
 
@@ -349,31 +347,31 @@ or if you're using Docker Compose, update the value of the image property to
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop minio
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop minio
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/minio-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/minio-persistence /path/to/minio-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v minio
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v minio
 ```
 
@@ -381,13 +379,13 @@ $ docker-compose rm -v minio
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name minio bitnami/minio:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up minio
 ```
 
