@@ -8,13 +8,13 @@ All MongoDB versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or l
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name mongodb bitnami/mongodb:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mongodb/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -43,12 +43,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4.2-debian-10`, `4.2.5-debian-10-r51`, `4.2`, `4.2.5` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.5-debian-10-r51/4.2/debian-10/Dockerfile)
+* [`4.2-debian-10`, `4.2.5-debian-10-r52`, `4.2`, `4.2.5` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.5-debian-10-r52/4.2/debian-10/Dockerfile)
 * [`3.6-debian-10`, `0.0.0-debian-10-r0`, `3.6`, `0.0.0` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/3.6/debian-10/Dockerfile)
 * [`4.0-debian-10`, `0.0.0-debian-10-r0`, `4.0`, `0.0.0`, `latest` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r0/4.0/debian-10/Dockerfile)
 
@@ -58,19 +56,19 @@ Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https
 
 The recommended way to get the Bitnami MongoDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mongodb).
 
-```bash
+```console
 $ docker pull bitnami/mongodb:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/mongodb/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/mongodb:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/mongodb:latest 'https://github.com/bitnami/bitnami-docker-mongodb.git#master:4.0/debian-10'
 ```
 
@@ -80,7 +78,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/bitnami/mongodb` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
+```console
 $ docker run \
     -v /path/to/mongodb-persistence:/bitnami/mongodb \
     bitnami/mongodb:latest
@@ -113,7 +111,7 @@ In this example, we will create a MongoDB client instance that will connect to t
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -121,7 +119,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the MongoDB container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name mongodb-server \
     --network app-tier \
     bitnami/mongodb:latest
@@ -131,7 +129,7 @@ $ docker run -d --name mongodb-server \
 
 Finally we create a new container instance to launch the MongoDB client and connect to the server created in the previous step:
 
-```bash
+```console
 $ docker run -it --rm \
     --network app-tier \
     bitnami/mongodb:latest mongo --host mongodb-server
@@ -166,7 +164,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -185,7 +183,7 @@ Passing extra command-line flags to the mongod service command is possible throu
 - `MONGODB_EXTRA_FLAGS`: Flags to be appended to the `mongod` startup command. No defaults
 - `MONGODB_CLIENT_EXTRA_FLAGS`: Flags to be appended to the `mongo` command which is used to connect to the (local or remote) `mongod` daemon. No defaults
 
-```bash
+```console
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_EXTRA_FLAGS='--wiredTigerCacheSizeGB=2' bitnami/mongodb:latest
 ```
 
@@ -208,7 +206,7 @@ Configuring the system log verbosity level is possible through the following env
 - `MONGODB_DISABLE_SYSTEM_LOG`: Whether to enable/disable system log on MongoDB. Default: `false`. Possible values: `[true, false]`.
 - `MONGODB_SYSTEM_LOG_VERBOSITY`: MongoDB system log verbosity level. Default: `0`. Possible values: `[0, 1, 2, 3, 4, 5]`. For more information about the verbosity levels please refer to the [MongoDB documentation](https://docs.mongodb.com/manual/reference/configuration-options/#systemLog.verbosity)
 
-```bash
+```console
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_SYSTEM_LOG_VERBOSITY='3' bitnami/mongodb:latest
 ```
 
@@ -232,7 +230,7 @@ Enabling/disabling IPv6 is possible through the following env var:
 
 To enable IPv6 support, you can execute:
 
-```bash
+```console
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_IPV6=yes bitnami/mongodb:latest
 ```
 
@@ -254,7 +252,7 @@ Enabling/disabling [directoryPerDB](https://docs.mongodb.com/manual/reference/co
 
 - `MONGODB_ENABLE_DIRECTORY_PER_DB`: Whether to enable/disable directoryPerDB on MongoDB. Default: `true`. Possible values: `[true, false]`
 
-```bash
+```console
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_DIRECTORY_PER_DB=yes bitnami/mongodb:latest
 ```
 
@@ -274,7 +272,7 @@ services:
 
 Passing the `MONGODB_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the `root` user to the value of `MONGODB_ROOT_PASSWORD` and enabled authentication on the MongoDB server.
 
-```bash
+```console
 $ docker run --name mongodb \
   -e MONGODB_ROOT_PASSWORD=password123 bitnami/mongodb:latest
 ```
@@ -296,7 +294,7 @@ The `root` user is configured to have full administrative access to the MongoDB 
 
 You can create a user with restricted access to a database while starting the container for the first time. To do this, provide the `MONGODB_USERNAME`, `MONGODB_PASSWORD` and `MONGODB_DATABASE` environment variables.
 
-```bash
+```console
 $ docker run --name mongodb \
   -e MONGODB_USERNAME=my_user -e MONGODB_PASSWORD=password123 \
   -e MONGODB_DATABASE=my_database bitnami/mongodb:latest
@@ -340,7 +338,7 @@ In a replication cluster you can have one primary node, zero or more secondary n
 
 The first step is to start the MongoDB primary.
 
-```bash
+```console
 $ docker run --name mongodb-primary \
   -e MONGODB_REPLICA_SET_MODE=primary \
   -e MONGODB_ADVERTISED_HOSTNAME=mongodb-primary \
@@ -355,7 +353,7 @@ In the above command the container is configured as the `primary` using the `MON
 
 Next we start a MongoDB secondary container.
 
-```bash
+```console
 $ docker run --name mongodb-secondary \
   --link mongodb-primary:primary \
   -e MONGODB_REPLICA_SET_MODE=secondary \
@@ -373,7 +371,7 @@ In the above command the container is configured as a `secondary` using the `MON
 
 Finally we start a MongoDB arbiter container.
 
-```bash
+```console
 $ docker run --name mongodb-arbiter \
   --link mongodb-primary:primary \
   -e MONGODB_REPLICA_SET_MODE=arbiter \
@@ -437,7 +435,7 @@ volumes:
 
 and run docker-compose using:
 
-```bash
+```console
 $ docker-compose up --detach
 ```
 
@@ -487,7 +485,7 @@ volumes:
 
 And the run docker-compose using:
 
-```bash
+```console
 $ docker-compose up --detach --scale mongodb-primary=1 --scale mongodb-secondary=3 --scale mongodb-arbiter=1
 ```
 
@@ -534,12 +532,12 @@ Another option would be to use letsencrypt certificates; the required configurat
 ### Generating self-signed certificates
 
 - Generate a new private key which will be used to create your own Certificate Authority (CA):
-```bash
+```console
 openssl genrsa -out mongoCA.key 2048
 ```
 
 - Create the public certificate for your own CA:
-```bash
+```console
 openssl req -x509 -new \
     -subj "/C=US/ST=NY/L=New York/O=Example Corp/OU=IT Department/CN=mongoCA" \
     -key mongoCA.key -out mongoCA.crt
@@ -547,7 +545,7 @@ openssl req -x509 -new \
 
 - Create a Certificate Signing Request for a node `${NODE_NAME}`, the essential part here is that the `Common Name` corresponds to the hostname by which the nodes will be addressed.
 Example for `mongodb-primary`:
-```bash
+```console
 export NODE_NAME=mongodb-primary
 openssl req -new -nodes \
     -subj "/C=US/ST=NY/L=New York/O=Example Corp/OU=IT Department/CN=${NODE_NAME}" \
@@ -555,19 +553,19 @@ openssl req -new -nodes \
 ```
 
 - Create a certificate from the Certificate Signing Request and sign it using the private key of your previously created Certificate Authority:
-```bash
+```console
 openssl x509 \
     -req -days 365 -in ${NODE_NAME}.csr -out ${NODE_NAME}.crt \
     -CA mongoCA.crt -CAkey mongoCA.key -CAcreateserial -extensions req
 ```
 
 - Create a PEM bundle using the private key and the public certificate:
-```bash
+```console
 cat ${NODE_NAME}.key ${NODE_NAME}.crt > ${NODE_NAME}.pem
 ```
 
 NB: Afterwards you do not need the Certificate Signing Request.
-```bash
+```console
 rm ${NODE_NAME}.csr
 ```
 
@@ -588,7 +586,7 @@ Example corresponding settings for a secondary node `mongodb-secondary`:
 
 ### Connecting to the mongo daemon via SSL
 After successfully starting a cluster as specified, within the container it should be possible to connect to the mongo daemon on the primary node using:
-```bash
+```console
 /opt/bitnami/mongodb/bin/mongo -u root -p ${MONGODB_ROOT_PASSWORD} --host mongodb-primary --ssl --sslPEMKeyFile=/certificates/mongodb-primary.pem --sslCAFile=/certificates/mongoCA.crt
 ```
 
@@ -607,7 +605,7 @@ The image looks for mounted configurations files in `/bitnami/mongodb/conf/`. Yo
 
 Run the MongoDB image, mounting a directory from your host.
 
-```bash
+```console
 $ docker run --name mongodb -v /path/to/mongodb-configuration-persistence:/bitnami/mongodb/conf bitnami/mongodb:latest
 ```
 
@@ -628,7 +626,7 @@ or using Docker Compose:
 
 Edit the configuration on your host using your favorite editor.
 
-```bash
+```console
 $ vi /path/to/mongodb-configuration-persistence/mongodb.conf
 ```
 
@@ -636,13 +634,13 @@ $ vi /path/to/mongodb-configuration-persistence/mongodb.conf
 
 After changing the configuration, restart your MongoDB container for changes to take effect.
 
-```bash
+```console
 $ docker restart mongodb
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose restart mongodb
 ```
 
@@ -652,13 +650,13 @@ Refer to the [configuration file options](http://docs.mongodb.org/v2.4/reference
 
 The Bitnami MongoDB Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs mongodb
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose logs mongodb
 ```
 
@@ -672,7 +670,7 @@ Bitnami provides up-to-date versions of MongoDB, including security patches, soo
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/mongodb:latest
 ```
 
@@ -682,19 +680,19 @@ or if you're using Docker Compose, update the value of the image property to `bi
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop mongodb
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop mongodb
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/mongodb-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/mongodb-persistence /path/to/mongodb-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -702,13 +700,13 @@ You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v mongodb
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v mongodb
 ```
 
@@ -716,13 +714,13 @@ $ docker-compose rm -v mongodb
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name mongodb bitnami/mongodb:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up mongodb
 ```
 
