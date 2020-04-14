@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name thanos bitnami/thanos:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-thanos/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -35,12 +35,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-scratch`, `0.11.0-scratch-r19`, `0`, `0.11.0`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-thanos/blob/0.11.0/0/scratch/Dockerfile)
+* [`0-scratch`, `0.11.0-scratch-r20`, `0`, `0.11.0`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-thanos/blob/0.11.0/0/scratch/Dockerfile)
 
 # Connecting to other containers
 
@@ -52,13 +50,13 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create thanos-network --driver bridge
 ```
 
 ### Step 2: Create a volume for Prometheus data
 
-```bash
+```console
 $ docker volume create --name prometheus_data
 ```
 
@@ -85,7 +83,7 @@ Use the `docker run` command to launch the Prometheus containers using the argum
 - `--network <network>` argument to attach the container to the `thanos-network` network.
 - `--volume [host-src:]container-dest[:<options>]` argument to mount the configuration file for Prometheus and a data volume to avoid loss of data. As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-```bash
+```console
 $ docker run -d --name "prometheus" \
   --network "thanos-network" \
   --volume "$(pwd)/prometheus.yml:/opt/bitnami/prometheus/conf/prometheus.yml:ro" \
@@ -100,7 +98,7 @@ Use the `docker run` command to launch the Thanos sidecar container using the ar
 - `--network <network>` argument to attach the container to the `thanos-network` network.
 - `--volume [host-src:]container-dest[:<options>]` argument to mount the Prometheus data volume.
 
-```bash
+```console
 $ docker run -d --name "thanos-sidecar" \
   --network "thanos-network" \
   --volume "prometheus_data:/data" \
@@ -114,7 +112,7 @@ Use the `docker run` command to launch the Thanos Query container using the argu
 - `--network <network>` argument to attach the container to the `thanos-network` network.
 - `--expose [hostPort:containerPort]` argument to expose the port `9090`.
 
-```bash
+```console
 $ docker run -d --name "thanos-query" \
   --network "thanos-network" \
   --expose "9090:9090" \
@@ -149,7 +147,7 @@ The unique "mandatory" components are Prometheus, Thanos Sidecar and Thanos Quer
 
 To do so, run the commands below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-minio/master/docker-compose-cluster.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -171,7 +169,7 @@ For further documentation, please check [Thanos documentation](https://github.co
 
 The Bitnami Thanos Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs thanos
 ```
 
