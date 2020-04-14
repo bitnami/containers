@@ -36,7 +36,7 @@ else
     KAFKA_OWNERSHIP_USER=""
 fi
 # Ensure directories used by Kafka exist and have proper ownership and permissions
-for dir in "$KAFKA_LOGDIR" "$KAFKA_CONFDIR" "$KAFKA_MOUNTED_CONFDIR" "$KAFKA_VOLUMEDIR" "$KAFKA_DATADIR"; do
+for dir in "$KAFKA_LOG_DIR" "$KAFKA_CONF_DIR" "$KAFKA_MOUNTED_CONF_DIR" "$KAFKA_VOLUME_DIR" "$KAFKA_DATA_DIR"; do
     ensure_dir_exists "$dir" "$KAFKA_OWNERSHIP_USER"
 done
 # Ensure Kafka is initialized

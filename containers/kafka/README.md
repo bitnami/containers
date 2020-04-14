@@ -13,7 +13,7 @@ thousands of companies. Kafka requires a connection to a Zookeeper service.
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kafka/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kafka/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -42,12 +42,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.4.1-debian-10-r55`, `2`, `2.4.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.4.1-debian-10-r55/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.4.1-debian-10-r57`, `2`, `2.4.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.4.1-debian-10-r57/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -55,21 +53,21 @@ Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https:/
 
 The recommended way to get the Bitnami Kafka Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kafka).
 
-```bash
-docker pull bitnami/kafka:latest
+```console
+$ docker pull bitnami/kafka:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the
 [list of available versions](https://hub.docker.com/r/bitnami/kafka/tags/)
 in the Docker Hub Registry.
 
-```bash
-docker pull bitnami/kafka:[TAG]
+```console
+$ docker pull bitnami/kafka:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 docker build -t bitnami/kafka:latest 'https://github.com/bitnami/bitnami-docker-kafka.git#master:2/debian-10'
 ```
 
@@ -109,7 +107,7 @@ In this example, we will create a Kafka client instance that will connect to the
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -117,7 +115,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the Zookeeper container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name zookeeper-server \
     --network app-tier \
     -e ALLOW_ANONYMOUS_LOGIN=yes \
@@ -128,7 +126,7 @@ $ docker run -d --name zookeeper-server \
 
 Use the `--network app-tier` argument to the `docker run` command to attach the Kafka container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name kafka-server \
     --network app-tier \
     -e ALLOW_PLAINTEXT_LISTENER=yes \
@@ -140,7 +138,7 @@ $ docker run -d --name kafka-server \
 
 Finally we create a new container instance to launch the Kafka client and connect to the server created in the previous step:
 
-```bash
+```console
 $ docker run -it --rm \
     --network app-tier \
     -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper-server:2181 \
@@ -181,7 +179,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -201,8 +199,8 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 
 Additionally, any environment variable beginning with `KAFKA_CFG_` will be mapped to its corresponding Kafka key. For example, use `KAFKA_CFG_BACKGROUND_THREADS` in order to set `background.threads` or `KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE` in order to configure `auto.create.topics.enable`.
 
-```bash
-docker run --name kafka -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 -e ALLOW_PLAINTEXT_LISTENER=yes -e KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true bitnami/kafka:latest
+```console
+$ docker run --name kafka -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 -e ALLOW_PLAINTEXT_LISTENER=yes -e KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true bitnami/kafka:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kafka/blob/master/docker-compose.yml) file present in this repository:
@@ -242,7 +240,7 @@ And expose the extra port:
 
 These clients will use the docker hostname to connect to Kafka.
 
-```
+```console
 kafka-console-producer.sh --broker-list kafka:9092 --topic test
 kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic test --from-beginning
 ```
@@ -251,7 +249,7 @@ kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic test --from-begi
 
 These clients will use the localhost listener created in the port 29092 to connect to Kafka.
 
-```
+```console
 kafka-console-producer.sh --broker-list localhost:29092 --topic test
 kafka-console-consumer.sh --bootstrap-server localhost:29092 --topic test --from-beginning
 ```
@@ -264,14 +262,14 @@ The Bitnami Kafka docker image disables the PLAINTEXT listener for security reas
 You can enable the PLAINTEXT listener by adding the next environment variable, but remember that this
 configuration is not recommended for production.
 
-```
+```console
 ALLOW_PLAINTEXT_LISTENER=yes
 ```
 
 In order to configure SASL authentication over SSL, you should define the proper listener by
 passing the following env vars:
 
-```
+```console
 KAFKA_CFG_LISTENERS=SASL_SSL://:9092
 KAFKA_CFG_ADVERTISED_LISTENERS=SASL_SSL://:9092
 ```
@@ -389,13 +387,13 @@ to work. You can find this files in the `/opt/bitnami/kafka/conf` directory
 
 Use this to generate messages using a secure setup
 
-```bash
+```console
 export KAFKA_OPTS="-Djava.security.auth.login.config=/opt/bitnami/kafka/conf/kafka_jaas.conf"
 kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic test --producer.config /opt/bitnami/kafka/conf/producer.properties
 ```
 Use this to consume messages using a secure setup
 
-```bash
+```console
 export KAFKA_OPTS="-Djava.security.auth.login.config=/opt/bitnami/kafka/conf/kafka_jaas.conf"
 kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic test --consumer.config /opt/bitnami/kafka/conf/consumer.properties
 ```
@@ -410,16 +408,16 @@ A Kafka cluster can easily be setup with the Bitnami Kafka Docker image using th
 
 Create a Docker network to enable visibility to each other via the docker container name
 
-```bash
-docker network create app-tier --driver bridge
+```console
+$ docker network create app-tier --driver bridge
 ```
 
 ### Step 1: Create the first node for Zookeeper
 
 The first step is to create one Zookeeper instance.
 
-```bash
-docker run --name zookeeper \
+```console
+$ docker run --name zookeeper \
   --network app-tier \
   -e ALLOW_ANONYMOUS_LOGIN=yes \
   -p 2181:2181 \
@@ -430,8 +428,8 @@ docker run --name zookeeper \
 
 The first step is to create one Kafka instance.
 
-```bash
-docker run --name kafka1 \
+```console
+$ docker run --name kafka1 \
   --network app-tier \
   -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
   -e ALLOW_PLAINTEXT_LISTENER=yes \
@@ -443,8 +441,8 @@ docker run --name kafka1 \
 
 Next we start a new Kafka container.
 
-```bash
-docker run --name kafka2 \
+```console
+$ docker run --name kafka2 \
   --network app-tier \
   -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
   -e ALLOW_PLAINTEXT_LISTENER=yes \
@@ -456,8 +454,8 @@ docker run --name kafka2 \
 
 Next we start another new Kafka container.
 
-```bash
-docker run --name kafka3 \
+```console
+$ docker run --name kafka3 \
   --network app-tier \
   -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
   -e ALLOW_PLAINTEXT_LISTENER=yes \
@@ -503,7 +501,7 @@ services:
 
 Then, you can create a replicated topic with:
 
-```bash
+```console
 root@kafka1:/# /opt/bitnami/kafka/bin/kafka-topics.sh --create --zookeeper zookeeper:2181 --topic mytopic --partitions 3 --replication-factor 3
 Created topic "mytopic".
 
@@ -516,10 +514,10 @@ Topic:mytopic   PartitionCount:3        ReplicationFactor:3     Configs:
 
 ## Full configuration
 
-The image looks for configuration files (server.properties, log4j.properties, etc.) in the `/bitnami/kafka/config/` directory, this directory can be changed by setting the KAFKA_MOUNTED_CONFDIR environment variable.
+The image looks for configuration files (server.properties, log4j.properties, etc.) in the `/bitnami/kafka/config/` directory, this directory can be changed by setting the KAFKA_MOUNTED_CONF_DIR environment variable.
 
-```bash
-docker run --name kafka -v /path/to/server.properties:/bitnami/kafka/conf/server.properties bitnami/kafka:latest
+```console
+$ docker run --name kafka -v /path/to/server.properties:/bitnami/kafka/conf/server.properties bitnami/kafka:latest
 ```
 
 After that, your changes will be taken into account in the server's behaviour.
@@ -544,7 +542,7 @@ services:
 
 Edit the configuration on your host using your favorite editor.
 
-```bash
+```console
 vi /path/to/server.properties
 ```
 
@@ -552,28 +550,28 @@ vi /path/to/server.properties
 
 After changing the configuration, restart your Kafka container for changes to take effect.
 
-```bash
-docker restart kafka
+```console
+$ docker restart kafka
 ```
 
 Or using Docker Compose:
 
-```bash
-docker-compose restart kafka
+```console
+$ docker-compose restart kafka
 ```
 
 # Logging
 
 The Bitnami Kafka Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
-docker logs kafka
+```console
+$ docker logs kafka
 ```
 
 Or using Docker Compose:
 
-```bash
-docker-compose logs kafka
+```console
+$ docker-compose logs kafka
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -586,29 +584,29 @@ To backup your data, configuration and logs, follow these simple steps:
 
 ### Step 1: Stop the currently running container
 
-```bash
-docker stop kafka
+```console
+$ docker stop kafka
 ```
 
 Or using Docker Compose:
 
-```bash
-docker-compose stop kafka
+```console
+$ docker-compose stop kafka
 ```
 
 ### Step 2: Run the backup command
 
 We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
-```bash
-docker run --rm -v /path/to/kafka-backups:/backups --volumes-from kafka busybox \
+```console
+$ docker run --rm -v /path/to/kafka-backups:/backups --volumes-from kafka busybox \
   cp -a /bitnami/kafka:latest /backups/latest
 ```
 
 Or using Docker Compose:
 
-```bash
-docker run --rm -v /path/to/kafka-backups:/backups --volumes-from `docker-compose ps -q kafka` busybox \
+```console
+$ docker run --rm -v /path/to/kafka-backups:/backups --volumes-from `docker-compose ps -q kafka` busybox \
   cp -a /bitnami/kafka:latest /backups/latest
 ```
 
@@ -616,8 +614,8 @@ docker run --rm -v /path/to/kafka-backups:/backups --volumes-from `docker-compos
 
 Restoring a backup is as simple as mounting the backup as volumes in the container.
 
-```bash
-docker run -v /path/to/kafka-backups/latest:/bitnami/kafka bitnami/kafka:latest
+```console
+$ docker run -v /path/to/kafka-backups/latest:/bitnami/kafka bitnami/kafka:latest
 ```
 
 You can also modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kafka/blob/master/docker-compose.yml) file present in this repository:
@@ -634,8 +632,8 @@ Bitnami provides up-to-date versions of Kafka, including security patches, soon 
 
 ### Step 1: Get the updated image
 
-```bash
-docker pull bitnami/kafka:latest
+```console
+$ docker pull bitnami/kafka:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -649,29 +647,29 @@ Follow the steps on [creating a backup](#backing-up-your-container).
 
 ### Step 3: Remove the currently running container
 
-```bash
-docker rm -v kafka
+```console
+$ docker rm -v kafka
 ```
 
 Or using Docker Compose:
 
 
-```bash
-docker-compose rm -v kafka
+```console
+$ docker-compose rm -v kafka
 ```
 
 ### Step 4: Run the new image
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
-```bash
-docker run --name kafka bitnami/kafka:latest
+```console
+$ docker run --name kafka bitnami/kafka:latest
 ```
 
 Or using Docker Compose:
 
-```bash
-docker-compose up kafka
+```console
+$ docker-compose up kafka
 ```
 
 # Notable Changes

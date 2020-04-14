@@ -15,7 +15,7 @@ set -o pipefail
 eval "$(kafka_env)"
 
 if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL ]]; then
-    export KAFKA_OPTS="-Djava.security.auth.login.config=${KAFKA_CONFDIR}/kafka_jaas.conf"
+    export KAFKA_OPTS="-Djava.security.auth.login.config=${KAFKA_CONF_DIR}/kafka_jaas.conf"
 fi
 
 flags=("$KAFKA_CONF_FILE")
