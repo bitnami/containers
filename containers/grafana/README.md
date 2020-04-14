@@ -7,7 +7,7 @@ Grafana is an open source, feature rich metrics dashboard and graph editor for G
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name grafana bitnami/grafana:latest
 ```
 
@@ -31,7 +31,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -41,12 +41,10 @@ $ kubectl apply -f test.yaml
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`6-debian-10`, `6.7.2-debian-10-r10`, `6`, `6.7.2`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.7.2-debian-10-r10/6/debian-10/Dockerfile)
+* [`6-debian-10`, `6.7.2-debian-10-r11`, `6`, `6.7.2`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.7.2-debian-10-r11/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -54,19 +52,19 @@ Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https
 
 The recommended way to get the Bitnami Grafana Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/grafana).
 
-```bash
+```console
 $ docker pull bitnami/grafana:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/grafana/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/grafana:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/grafana:latest 'https://github.com/bitnami/bitnami-docker-grafana.git#master:6/debian-10'
 ```
 
@@ -80,7 +78,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create grafana-network --driver bridge
 ```
 
@@ -88,7 +86,7 @@ $ docker network create grafana-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `grafana-network` network.
 
-```bash
+```console
 $ docker run --name grafana-node1 --network grafana-network bitnami/grafana:latest
 ```
 
@@ -113,8 +111,8 @@ In your `custom.ini` uncomment (remove the leading ;) sign. And set `app_mode = 
 
 Override the `/opt/bitnami/grafana/conf/grafana.ini` file mounting a volume.
 
-```
-docker run --name grafana-node -v /path/to/grafana.ini:/opt/bitnami/grafana/conf/grafana.ini bitnami/grafana:latest
+```console
+$ docker run --name grafana-node -v /path/to/grafana.ini:/opt/bitnami/grafana/conf/grafana.ini bitnami/grafana:latest
 ```
 
 After that, your configuration will be taken into account in the server's behaviour.
@@ -148,7 +146,7 @@ grafana:
 
 For manual execution add a `-e` option with each variable and value:
 
-```bash
+```console
 $ docker run -d --name grafana -p 3000:3000 \
     -e GF_INSTALL_PLUGINS="grafana-kubernetes-app,worldpring=https://github.com/raintank/worldping-app/releases/download/v1.2.6/worldping-app-release-1.2.6.zip" \
     bitnami/grafana:latest
@@ -158,7 +156,7 @@ $ docker run -d --name grafana -p 3000:3000 \
 
 The Bitnami Grafana Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs grafana
 ```
 
@@ -172,7 +170,7 @@ Bitnami provides up-to-date versions of grafana, including security patches, soo
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/grafana:latest
 ```
 
@@ -180,13 +178,13 @@ $ docker pull bitnami/grafana:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop grafana
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/grafana-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/grafana-persistence /path/to/grafana-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -194,7 +192,7 @@ You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v grafana
 ```
 
@@ -202,7 +200,7 @@ $ docker rm -v grafana
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
-```bash
+```console
 $ docker run --name grafana bitnami/grafana:latest
 ```
 
