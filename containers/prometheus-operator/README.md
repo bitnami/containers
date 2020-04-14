@@ -29,7 +29,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -39,12 +39,10 @@ $ kubectl apply -f test.yaml
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.38.0-debian-10-r27`, `0`, `0.38.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.38.0-debian-10-r27/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.38.0-debian-10-r28`, `0`, `0.38.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.38.0-debian-10-r28/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus-operator GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus-operator).
 
@@ -52,19 +50,19 @@ Subscribe to project updates by watching the [bitnami/prometheus-operator GitHub
 
 The recommended way to get the Bitnami Prometheus Operator Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/prometheus-operator).
 
-```bash
+```console
 $ docker pull bitnami/prometheus-operator:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/prometheus-operator/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/prometheus-operator:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/prometheus-operator:latest 'https://github.com/bitnami/bitnami-docker-prometheus-operator.git#master:0/debian-10'
 ```
 
