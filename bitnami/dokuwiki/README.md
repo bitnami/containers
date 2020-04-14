@@ -9,7 +9,7 @@ https://www.dokuwiki.org/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-dokuwiki/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -34,12 +34,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.20180422.201901061035-debian-10-r69`, `0`, `0.20180422.201901061035`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201901061035-debian-10-r69/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.20180422.201901061035-debian-10-r70`, `0`, `0.20180422.201901061035`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.201901061035-debian-10-r70/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dokuwiki GitHub repo](https://github.com/bitnami/bitnami-docker-dokuwiki).
 
@@ -54,7 +52,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-dokuwiki/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -65,13 +63,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application :
 
-  ```bash
+  ```console
   $ docker network create dokuwiki-tier
   ```
 
 2. Run the Dokuwiki container:
 
-  ```bash
+  ```console
   $ docker run -d \
     -p 80:80 -p 443:443 --name dokuwiki --net dokuwiki-tier \
     bitnami/dokuwiki:latest
@@ -105,13 +103,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. If you haven't done this before, create a new network for the application :
 
-  ```bash
+  ```console
   $ docker network create dokuwiki-tier
   ```
 
 2. Run the Dokuwiki container:
 
-  ```bash
+  ```console
   $ docker run -d -p 80:80 -p 443:443 --name dokuwiki \
     --net dokuwiki-tier \
     --volume /path/to/dokuwiki-persistence:/bitnami \
@@ -124,7 +122,7 @@ Bitnami provides up-to-date versions of Dokuwiki, including security patches, so
 
 1. Get the updated images:
 
-```bash
+```console
 $ docker pull bitnami/dokuwiki:latest
 ```
 
@@ -135,7 +133,7 @@ $ docker pull bitnami/dokuwiki:latest
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/dokuwiki-persistence /path/to/dokuwiki-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -155,7 +153,7 @@ You can use this snapshot to restore the application state should the upgrade fa
 
 ## Environment variables
 
-When you start the DokuWiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+When you start the DokuWiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
  * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/master/docker-compose.yml) file present in this repository:
 
@@ -169,7 +167,7 @@ When you start the DokuWiki image, you can adjust the configuration of the insta
 
  * For manual execution add a `-e` option with each variable and value:
 
-  ```bash
+  ```console
   $ docker run -d -p 80:80 -p 443:443 --name dokuwiki \
     -e DOKUWIKI_PASSWORD=my_password \
     --net dokuwiki-tier \
