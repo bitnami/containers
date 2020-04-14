@@ -14,7 +14,7 @@ We also provide a Docker Image for Parse Dashboard. Parse Dashboard is a standal
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-parse/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -43,12 +43,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.2.0-debian-10-r9`, `4`, `4.2.0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/4.2.0-debian-10-r9/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.2.0-debian-10-r10`, `4`, `4.2.0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/4.2.0-debian-10-r10/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
 
@@ -66,7 +64,7 @@ Running Parse with a database server is the recommended way. You can either use 
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-parse/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -77,13 +75,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```bash
+  ```console
   $ docker network create parse_network
   ```
 
 2. Start a MongoDB database in the network generated:
 
-  ```bash
+  ```console
   $ docker run -d --name mongodb --net=parse_network bitnami/mongodb
   ```
 
@@ -91,7 +89,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Run the Parse container:
 
-  ```bash
+  ```console
   $ docker run -d -p 1337:1337 --name parse --net=parse_network bitnami/parse
   ```
 
@@ -132,13 +130,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```bash
+  ```console
   $ docker network create parse-tier
   ```
 
 2. Create a MongoDB container with host volume:
 
-  ```bash
+  ```console
   $ docker run -d --name mongodb \
     --net parse-tier \
     --volume /path/to/mongodb-persistence:/bitnami \
@@ -149,7 +147,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Run the Parse container:
 
-  ```bash
+  ```console
   $ docker run -d --name parse -p 1337:1337 \
     --net parse-tier \
     --volume /path/to/parse-persistence:/bitnami \
@@ -162,7 +160,7 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/parse:latest
   ```
 
@@ -173,7 +171,7 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/parse-persistence /path/to/parse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -195,7 +193,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the parse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+When you start the parse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse/blob/master/docker-compose.yml) file present in this repository:
 
@@ -209,7 +207,7 @@ parse:
 
  * For manual execution add a `-e` option with each variable and value:
 
-```bash
+```console
  $ docker run -d -e PARSE_HOST=my_host -p 1337:1337 --name parse -v /your/local/path/bitnami/parse:/bitnami --network=parse_network bitnami/parse
 ```
 
@@ -229,7 +227,7 @@ You can use Cloud Code to run a piece of code in your Parse Server instead of th
 
 * Create a directory on your host machine and put your Cloud functions on it. In the example below, a simple "Hello world!" function is used:
 
-```bash
+```console
 $ mkdir ~/cloud
 $ cat > ~/cloud/main.js <<'EOF'
 Parse.Cloud.define("sayHelloWorld", function(request, response) {
@@ -279,7 +277,7 @@ volumes:
 
 * Use the `docker-compose` tool to deploy Parse and Parse Dashboard:
 
-```
+```console
 $ docker-compose up -d
 ```
 
