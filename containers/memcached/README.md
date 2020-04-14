@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
-docker run --name memcached bitnami/memcached:latest
+```console
+$ docker run --name memcached bitnami/memcached:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-memcached/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -41,12 +41,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.6.3-debian-10-r22`, `1`, `1.6.3`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.6.3-debian-10-r22/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.6.5-debian-10-r0`, `1`, `1.6.5`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.6.5-debian-10-r0/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/memcached GitHub repo](https://github.com/bitnami/bitnami-docker-memcached).
 
@@ -54,19 +52,19 @@ Subscribe to project updates by watching the [bitnami/memcached GitHub repo](htt
 
 The recommended way to get the Bitnami Memcached Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com).
 
-```bash
-docker pull bitnami/memcached:latest
+```console
+$ docker pull bitnami/memcached:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/memcached/tags/) in the Docker Hub Registry.
 
-```bash
-docker pull bitnami/memcached:[TAG]
+```console
+$ docker pull bitnami/memcached:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 docker build -t bitnami/memcached:latest 'https://github.com/bitnami/bitnami-docker-memcached.git#master:1/debian-10'
 ```
 
@@ -80,7 +78,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -88,7 +86,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the Memcached container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name memcached-server \
     --network app-tier \
     bitnami/memcached:latest
@@ -96,7 +94,7 @@ $ docker run -d --name memcached-server \
 
 ### Step 3: Launch your application container
 
-```bash
+```console
 $ docker run -d --name myapp \
     --network app-tier \
     YOUR_APPLICATION_IMAGE
@@ -136,7 +134,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -146,8 +144,8 @@ $ docker-compose up -d
 
 By default, the Bitnami Memcached container will not specify any cache size and will start with Memcached defaults (64MB). You can specify a different value with the `MEMCACHED_CACHE_SIZE` environment variable (in MB).
 
-```bash
-docker run --name memcached -e MEMCACHED_CACHE_SIZE=128 bitnami/memcached:latest
+```console
+$ docker run --name memcached -e MEMCACHED_CACHE_SIZE=128 bitnami/memcached:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-memcached/blob/master/docker-compose.yml) file present in this repository:
@@ -165,8 +163,8 @@ services:
 
 By default, the Bitnami Memcached container will not specify any maximum number of concurrent connections and will start with Memcached defaults (1024 concurrent connections). You can specify a different value with the `MEMCACHED_MAX_CONNECTIONS` environment variable.
 
-```bash
-docker run --name memcached -e MEMCACHED_MAX_CONNECTIONS=2000 bitnami/memcached:latest
+```console
+$ docker run --name memcached -e MEMCACHED_MAX_CONNECTIONS=2000 bitnami/memcached:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-memcached/blob/master/docker-compose.yml) file present in this repository:
@@ -184,8 +182,8 @@ services:
 
 By default, the Bitnami Memcached container will not specify the amount of threads for which to process requests for and will start with Memcached defaults (4 threads). You can specify a different value with the `MEMCACHED_THREADS` environment variable.
 
-```bash
-docker run --name memcached -e MEMCACHED_THREADS=4 bitnami/memcached:latest
+```console
+$ docker run --name memcached -e MEMCACHED_THREADS=4 bitnami/memcached:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-memcached/blob/master/docker-compose.yml) file present in this repository:
@@ -205,8 +203,8 @@ Authentication on the Memcached server is disabled by default. To enable authent
 
 To customize the username of the Memcached admin user, which defaults to `root`, the `MEMCACHED_USERNAME` variable should be specified.
 
-```bash
-docker run --name memcached \
+```console
+$ docker run --name memcached \
   -e MEMCACHED_USERNAME=my_user \
   -e MEMCACHED_PASSWORD=my_password \
   bitnami/memcached:latest
@@ -232,7 +230,7 @@ services:
 
 Passing extra command-line flags to the Memcached service command is possible by adding them as arguments to *run.sh* script:
 
-```bash
+```console
 $ docker run --name memcached bitnami/memcached:latest /opt/bitnami/scripts/run.sh -vvv
 ```
 
@@ -268,14 +266,14 @@ The `/opt/bitnami/memcached/conf/memcachedsasldb` is the path to the sasldb file
 
 The Bitnami Memcached Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
-docker logs memcached
+```console
+$ docker logs memcached
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose logs memcached
+```console
+$ docker-compose logs memcached
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -288,8 +286,8 @@ Bitnami provides up-to-date versions of Memcached, including security patches, s
 
 ### Step 1: Get the updated image
 
-```bash
-docker pull bitnami/memcached:latest
+```console
+$ docker pull bitnami/memcached:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -297,28 +295,28 @@ or if you're using Docker Compose, update the value of the image property to
 
 ### Step 2: Remove the currently running container
 
-```bash
-docker rm -v memcached
+```console
+$ docker rm -v memcached
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose rm -v memcached
+```console
+$ docker-compose rm -v memcached
 ```
 
 ### Step 3: Run the new image
 
 Re-create your container from the new image.
 
-```bash
-docker run --name memcached bitnami/memcached:latest
+```console
+$ docker run --name memcached bitnami/memcached:latest
 ```
 
 or using Docker Compose:
 
-```bash
-docker-compose up memcached
+```console
+$ docker-compose up memcached
 ```
 
 # Notable Changes
