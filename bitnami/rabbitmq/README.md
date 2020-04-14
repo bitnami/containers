@@ -9,13 +9,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name rabbitmq bitnami/rabbitmq:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-rabbitmq/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -44,12 +44,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.8-debian-10`, `3.8.3-debian-10-r45`, `3.8`, `3.8.3`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.3-debian-10-r45/3.8/debian-10/Dockerfile)
+* [`3.8-debian-10`, `3.8.3-debian-10-r46`, `3.8`, `3.8.3`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.3-debian-10-r46/3.8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
@@ -57,19 +55,19 @@ Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](http
 
 The recommended way to get the Bitnami RabbitMQ Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/rabbitmq).
 
-```bash
+```console
 $ docker pull bitnami/rabbitmq:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/rabbitmq/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/rabbitmq:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/rabbitmq:latest 'https://github.com/bitnami/bitnami-docker-rabbitmq.git#master:3.8/debian-10'
 ```
 
@@ -79,7 +77,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
+```console
 $ docker run \
     -v /path/to/rabbitmq-persistence:/bitnami \
     bitnami/rabbitmq:latest
@@ -87,7 +85,7 @@ $ docker run \
 
 You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/master/docker-compose.yml) file present in this repository:
 
-```
+```yaml
 rabbitmq:
   ...
   volumes:
@@ -109,7 +107,7 @@ In this example, we will create a RabbitMQ client instance that will connect to 
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create app-tier --driver bridge
 ```
 
@@ -117,7 +115,7 @@ $ docker network create app-tier --driver bridge
 
 Use the `--network app-tier` argument to the `docker run` command to attach the RabbitMQ container to the `app-tier` network.
 
-```bash
+```console
 $ docker run -d --name rabbitmq-server \
     --network app-tier \
     bitnami/rabbitmq:latest
@@ -127,7 +125,7 @@ $ docker run -d --name rabbitmq-server \
 
 Finally we create a new container instance to launch the RabbitMQ client and connect to the server created in the previous step:
 
-```bash
+```console
 $ docker run -it --rm \
     --network app-tier \
     bitnami/rabbitmq:latest rabbitmqctl -n rabbit@rabbitmq-server status
@@ -162,7 +160,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -170,7 +168,7 @@ $ docker-compose up -d
 
 ## Environment variables
 
- When you start the rabbitmq image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line. If you want to add a new environment variable:
+ When you start the rabbitmq image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
 * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/master/docker-compose.yml) file present in this repository: :
 
@@ -341,13 +339,13 @@ LDAP configuration parameters must be specified if you wish to enable LDAP suppo
 
 The Bitnami RabbitMQ Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs rabbitmq
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose logs rabbitmq
 ```
 
@@ -361,7 +359,7 @@ Bitnami provides up-to-date versions of RabbitMQ, including security patches, so
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/rabbitmq:latest
 ```
 
@@ -372,31 +370,31 @@ or if you're using Docker Compose, update the value of the image property to
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop rabbitmq
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop rabbitmq
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/rabbitmq-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/rabbitmq-persistence /path/to/rabbitmq-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v rabbitmq
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v rabbitmq
 ```
 
@@ -404,13 +402,13 @@ $ docker-compose rm -v rabbitmq
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name rabbitmq bitnami/rabbitmq:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up rabbitmq
 ```
 
