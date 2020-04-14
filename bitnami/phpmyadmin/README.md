@@ -8,7 +8,7 @@ https://www.phpmyadmin.net/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-phpmyadmin/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -33,12 +33,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-debian-10`, `5.0.2-debian-10-r25`, `5`, `5.0.2`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.0.2-debian-10-r25/5/debian-10/Dockerfile)
+* [`5-debian-10`, `5.0.2-debian-10-r26`, `5`, `5.0.2`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.0.2-debian-10-r26/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpmyadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phpmyadmin).
 
@@ -54,7 +52,7 @@ phpMyAdmin requires access to a MySQL database or MariaDB database to work. We'l
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-phpmyadmin/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -65,13 +63,13 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 1. Create a network
 
-```bash
+```console
 $ docker network create phpmyadmin-tier
 ```
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-```bash
+```console
 $ docker volume create --name mariadb_data
 $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
   --net phpmyadmin-tier \
@@ -81,7 +79,7 @@ $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
 
 3. Create volumes for phpMyAdmin persistence and launch the container
 
-```bash
+```console
 $ docker volume create --name phpmyadmin_data
 $ docker run -d --name phpmyadmin -p 80:80 -p 443:443 \
   --net phpmyadmin-tier \
@@ -123,13 +121,13 @@ services:
 
 1. Create a network (if it does not exist)
 
-```bash
+```console
 $ docker network create phpmyadmin-tier
 ```
 
 2. Create a MariaDB container with host volume
 
-```bash
+```console
 $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
   --net phpmyadmin-tier \
   --volume /path/to/mariadb-persistence:/bitnami \
@@ -138,7 +136,7 @@ $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
 
 3. Create the phpMyAdmin the container with host volumes
 
-```bash
+```console
 $ docker run -d --name phpmyadmin -p 80:80 -p 443:443 \
   --net phpmyadmin-tier \
   --volume /path/to/phpmyadmin-persistence:/bitnami \
@@ -153,7 +151,7 @@ The `bitnami/phpmyadmin:latest` tag always points to the most recent release. To
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/phpmyadmin:latest
   ```
 
@@ -164,7 +162,7 @@ The `bitnami/phpmyadmin:latest` tag always points to the most recent release. To
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/phpmyadmin-persistence /path/to/phpmyadmin-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -222,7 +220,7 @@ services:
 
 ### Specifying Environment variables on the Docker command line
 
-```bash
+```console
 $ docker run -d --name phpmyadmin -p 80:80 -p 443:443 \
   --net phpmyadmin-tier \
   --env PHPMYADMIN_PASSWORD=my_password \
