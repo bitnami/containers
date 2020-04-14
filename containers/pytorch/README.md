@@ -10,13 +10,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run -it --name pytorch bitnami/pytorch
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-pytorch/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -38,12 +38,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.4.0-debian-10-r75`, `1`, `1.4.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.4.0-debian-10-r75/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.4.0-debian-10-r76`, `1`, `1.4.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.4.0-debian-10-r76/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pytorch GitHub repo](https://github.com/bitnami/bitnami-docker-pytorch).
 
@@ -51,19 +49,19 @@ Subscribe to project updates by watching the [bitnami/pytorch GitHub repo](https
 
 The recommended way to get the Bitnami Pytorch Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/pytorch).
 
-```bash
+```console
 $ docker pull bitnami/pytorch:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/pytorch/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/pytorch:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/pytorch 'https://github.com/bitnami/bitnami-docker-pytorch.git#master:1/debian-10'
 ```
 
@@ -71,7 +69,7 @@ $ docker build -t bitnami/pytorch 'https://github.com/bitnami/bitnami-docker-pyt
 
 By default, running this image will drop you into the Python REPL, where you can interactively test and try things out with PyTorch in Python.
 
-```bash
+```console
 $ docker run -it --name pytorch bitnami/pytorch
 ```
 
@@ -81,7 +79,7 @@ $ docker run -it --name pytorch bitnami/pytorch
 
 The default work directory for the PyTorch image is `/app`. You can mount a folder from your host here that includes your PyTorch script, and run it normally using the `python` command.
 
-```bash
+```console
 $ docker run -it --name pytorch -v /path/to/app:/app bitnami/pytorch \
   python script.py
 ```
@@ -90,7 +88,7 @@ $ docker run -it --name pytorch -v /path/to/app:/app bitnami/pytorch \
 
 If your PyTorch app has a `requirements.txt` defining your app's dependencies, you can install the dependencies before running your app.
 
-```bash
+```console
 $ docker run -it --name pytorch -v /path/to/app:/app bitnami/pytorch \
   sh -c "conda install -y --file requirements.txt && python script.py"
 ```
@@ -108,7 +106,7 @@ Bitnami provides up-to-date versions of PyTorch, including security patches, soo
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/pytorch:latest
 ```
 
@@ -116,13 +114,13 @@ or if you're using Docker Compose, update the value of the image property to `bi
 
 ### Step 2: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v pytorch
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v pytorch
 ```
 
@@ -130,13 +128,13 @@ $ docker-compose rm -v pytorch
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name pytorch bitnami/pytorch:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up pytorch
 ```
 
