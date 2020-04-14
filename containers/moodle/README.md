@@ -8,7 +8,7 @@ https://moodle.org/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-moodle/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -33,12 +33,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.8.2-debian-10-r31`, `3`, `3.8.2`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.8.2-debian-10-r31/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.8.2-debian-10-r32`, `3`, `3.8.2`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.8.2-debian-10-r32/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
@@ -56,7 +54,7 @@ Running Moodle with a database server is the recommended way. You can either use
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-moodle/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -67,13 +65,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```bash
+  ```console
   $ docker network create moodle-tier
   ```
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-  ```bash
+  ```console
   $ docker volume create --name mariadb_data
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -88,7 +86,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Create volumes for Moodle persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name moodle_data
   $ docker run -d --name moodle -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -135,13 +133,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. If you haven't done this before, create a new network for the application and the database:
 
-  ```bash
+  ```console
   $ docker network create moodle-tier
   ```
 
 2. Start a MariaDB database in the previous network:
 
-  ```bash
+  ```console
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_moodle \
@@ -155,7 +153,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Run the Moodle container:
 
-  ```bash
+  ```console
   $ docker run -d -p 80:80 -p 443:443 --name moodle \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MOODLE_DATABASE_USER=bn_moodle \
@@ -175,7 +173,7 @@ Bitnami provides up-to-date versions of MariaDB and Moodle, including security p
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/moodle:latest
   ```
 
@@ -186,7 +184,7 @@ Bitnami provides up-to-date versions of MariaDB and Moodle, including security p
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/moodle-persistence /path/to/moodle-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -203,13 +201,13 @@ You can use these snapshots to restore the application state should the upgrade 
 
     * Get the volume containing the persisted data
 
-    ```bash
+    ```console
     $ docker volume ls
     ```
 
     * Remove the volume
 
-    ```bash
+    ```console
     $ docker volume rm YOUR_VOLUME
     ```
 
@@ -222,7 +220,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the moodle image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
+When you start the moodle image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
 ##### User and Site configuration
 
@@ -269,7 +267,7 @@ moodle:
 
  * For manual execution add a `-e` option with each variable and value:
 
-   ```bash
+   ```console
    $ docker run -d  -p 80:80 -p 443:443 --name moodle
      -e MOODLE_PASSWORD=my_password \
      --net moodle-tier \
@@ -309,7 +307,7 @@ This would be an example of SMTP configuration using a GMail account:
 
 * For manual execution:
 
-  ```bash
+  ```console
   $ docker run -d  -p 80:80 -p 443:443 --name moodle
     -e MARIADB_HOST=mariadb \
     -e MARIADB_PORT_NUMBER=3306 \
