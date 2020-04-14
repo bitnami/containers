@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name golang bitnami/golang:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-golang/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -32,7 +32,7 @@ $ docker-compose up -d
 
 You can find an example for testing Golang in Kubernetes with the `test.yaml` file. To launch it, run the command:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.14-debian-10`, `1.14.2-debian-10-r4`, `1.14`, `1.14.2`, `latest` (1.14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.14.2-debian-10-r4/1.14/debian-10/Dockerfile)
-* [`1.13-debian-10`, `1.13.10-debian-10-r4`, `1.13`, `1.13.10` (1.13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.13.10-debian-10-r4/1.13/debian-10/Dockerfile)
+* [`1.13-debian-10`, `1.13.10-debian-10-r5`, `1.13`, `1.13.10` (1.13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.13.10-debian-10-r5/1.13/debian-10/Dockerfile)
 * [`1.12-debian-10`, `1.12.17-debian-10-r34`, `1.12`, `1.12.17` (1.12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.12.17-debian-10-r34/1.12/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/golang GitHub repo](https://github.com/bitnami/bitnami-docker-golang).
@@ -57,19 +57,19 @@ Subscribe to project updates by watching the [bitnami/golang GitHub repo](https:
 
 The recommended way to get the Bitnami Golang Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/golang).
 
-```bash
+```console
 $ docker pull bitnami/golang:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/golang/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/golang:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/golang:latest 'https://github.com/bitnami/bitnami-docker-golang.git#master:1.14/debian-10'
 ```
 
@@ -77,7 +77,7 @@ $ docker build -t bitnami/golang:latest 'https://github.com/bitnami/bitnami-dock
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
+```console
 $ docker run \
     -v /path/to/golang-persistence:/bitnami \
     bitnami/golang:latest
@@ -103,7 +103,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create golang-network --driver bridge
 ```
 
@@ -111,7 +111,7 @@ $ docker network create golang-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `golang-network` network.
 
-```bash
+```console
 $ docker run --name golang-node1 --network golang-network bitnami/golang:latest
 ```
 
@@ -127,7 +127,7 @@ CHANGEME: Add configuration section
 
 The Bitnami Golang Docker image sends the container logs to `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs golang
 ```
 
@@ -141,7 +141,7 @@ Bitnami provides up-to-date versions of Golang, including security patches, soon
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/golang:latest
 ```
 
@@ -149,13 +149,13 @@ $ docker pull bitnami/golang:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop golang
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v golang
 ```
 
@@ -163,7 +163,7 @@ $ docker rm -v golang
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name golang bitnami/golang:latest
 ```
 
