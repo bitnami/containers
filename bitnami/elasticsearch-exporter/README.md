@@ -7,7 +7,7 @@ Prometheus exporter for various metrics about ElasticSearch.
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name elasticsearch-exporter bitnami/elasticsearch-exporter:latest
 ```
 
@@ -31,7 +31,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 You can find an example for testing in the file `test.yaml`. To launch this sample file run:
 
-```bash
+```console
 $ kubectl apply -f test.yaml
 ```
 
@@ -46,26 +46,26 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.1.0-debian-10-r75`, `1`, `1.1.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.1.0-debian-10-r75/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.1.0-debian-10-r76`, `1`, `1.1.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter/blob/1.1.0-debian-10-r76/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch-exporter).
 # Get this image
 
 The recommended way to get the Bitnami Elasticsearch Exporter Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/elasticsearch-exporter).
 
-```bash
+```console
 $ docker pull bitnami/elasticsearch-exporter:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/elasticsearch-exporter/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/elasticsearch-exporter:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/elasticsearch-exporter:latest 'https://github.com/bitnami/bitnami-docker-elasticsearch-exporter.git#master:1/debian-10'
 ```
 
@@ -79,7 +79,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create elasticsearch-exporter-network --driver bridge
 ```
 
@@ -87,7 +87,7 @@ $ docker network create elasticsearch-exporter-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `elasticsearch-exporter-network` network.
 
-```bash
+```console
 $ docker run --name elasticsearch-exporter-node1 --network elasticsearch-exporter-network bitnami/elasticsearch-exporter:latest
 ```
 
@@ -100,7 +100,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 To get a list of all the configuration option running
 
-```
+```console
 elasticsearch-exporter --help
 ```
 
@@ -110,7 +110,7 @@ In `/metrics` you can find the exported metrics.
 
 The Bitnami elasticsearch-exporter Docker image sends the container logs to the `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs elasticsearch-exporter
 ```
 
@@ -124,7 +124,7 @@ Bitnami provides up-to-date versions of elasticsearch-exporter, including securi
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/elasticsearch-exporter:latest
 ```
 
@@ -132,13 +132,13 @@ $ docker pull bitnami/elasticsearch-exporter:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop elasticsearch-exporter
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/elasticsearch-exporter-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/elasticsearch-exporter-persistence /path/to/elasticsearch-exporter-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -146,7 +146,7 @@ You can use this snapshot to restore the database state should the upgrade fail.
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v elasticsearch-exporter
 ```
 
@@ -154,7 +154,7 @@ $ docker rm -v elasticsearch-exporter
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
-```bash
+```console
 $ docker run --name elasticsearch-exporter bitnami/elasticsearch-exporter:latest
 ```
 
