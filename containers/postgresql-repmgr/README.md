@@ -4,13 +4,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name postgresql-repmgr bitnami/postgresql-repmgr:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-postgresql-repmgr/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`12-debian-10`, `12.2.0-debian-10-r71`, `12`, `12.2.0` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.2.0-debian-10-r71/12/debian-10/Dockerfile)
 * [`11-debian-10`, `11.7.0-debian-10-r79`, `11`, `11.7.0`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.7.0-debian-10-r79/11/debian-10/Dockerfile)
 * [`10-debian-10`, `10.12.0-debian-10-r69`, `10`, `10.12.0` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.12.0-debian-10-r69/10/debian-10/Dockerfile)
-* [`9.6-debian-10`, `9.6.17-debian-10-r66`, `9.6`, `9.6.17` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.17-debian-10-r66/9.6/debian-10/Dockerfile)
+* [`9.6-debian-10`, `9.6.17-debian-10-r67`, `9.6`, `9.6.17` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.17-debian-10-r67/9.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
 
@@ -54,19 +54,19 @@ Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub r
 
 The recommended way to get the Bitnami PostgreSQL with Replication Manager Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/postgresql-repmgr).
 
-```bash
+```console
 $ docker pull bitnami/postgresql-repmgr:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/postgresql-repmgr/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/postgresql-repmgr:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/postgresql-repmgr:latest 'https://github.com/bitnami/bitnami-docker-postgresql-repmgr.git#master:11/debian-10'
 ```
 
@@ -76,7 +76,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/bitnami/postgresql` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
+```console
 $ docker run \
     -v /path/to/postgresql-repmgr-persistence:/bitnami/postgresql \
     bitnami/postgresql-repmgr:latest
@@ -98,7 +98,7 @@ In this example, we will create a PostgreSQL client instance that will connect t
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create my-network --driver bridge
 ```
 
@@ -106,7 +106,7 @@ $ docker network create my-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `my-network` network.
 
-```bash
+```console
 $ docker run --detach --rm --name pg-0 \
   --network my-network \
   --env REPMGR_PARTNER_NODES=pg-0 \
@@ -122,7 +122,7 @@ $ docker run --detach --rm --name pg-0 \
 
 Finally we create a new container instance to launch the PostgreSQL client and connect to the server created in the previous step:
 
-```bash
+```console
 $ docker run -it --rm \
   --network my-network \
   bitnami/postgresql:10 \
@@ -165,7 +165,7 @@ services:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -181,7 +181,7 @@ In order to have your custom files inside the docker image you can mount them as
 
 In the above commands you may have noticed the use of the `POSTGRESQL_PASSWORD` and `REPMGR_PASSWORD` environment variables. Passing the `POSTGRESQL_PASSWORD` environment variable when running the image for the first time will set the password of the `postgres` user to the value of `POSTGRESQL_PASSWORD` (or the content of the file specified in `POSTGRESQL_PASSWORD_FILE`). In the same way, passing the `REPMGR_PASSWORD` environment variable sets the password of the `repmgr` user to the value of `REPMGR_PASSWORD` (or the content of the file specified in `REPMGR_PASSWORD_FILE`).
 
-```bash
+```console
 $ docker run --name pg-0 --env REPMGR_PASSWORD=repmgrpass --env POSTGRESQL_PASSWORD=secretpass bitnami/postgresql-repmgr:latest
 ```
 
@@ -217,7 +217,7 @@ Refer to [Creating a database user on first run](#creating-a-database-user-on-fi
 
 By passing the `POSTGRESQL_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the PostgreSQL client.
 
-```bash
+```console
 $ docker run --name pg-0 --env POSTGRESQL_DATABASE=my_database bitnami/postgresql-repmgr:latest
 ```
 
@@ -225,7 +225,7 @@ $ docker run --name pg-0 --env POSTGRESQL_DATABASE=my_database bitnami/postgresq
 
 You can also create a restricted database user that only has permissions for the database created with the [`POSTGRESQL_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `POSTGRESQL_USERNAME` environment variable.
 
-```bash
+```console
 $ docker run --name pg-0 --env POSTGRESQL_USERNAME=my_user --env POSTGRESQL_PASSWORD=password123 --env POSTGRESQL_DATABASE=my_database bitnami/postgresql-repmgr:latest
 ```
 
@@ -253,7 +253,7 @@ In a HA PostgreSQL cluster you can have one primary and zero or more standby nod
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create my-network --driver bridge
 ```
 
@@ -261,7 +261,7 @@ $ docker network create my-network --driver bridge
 
 The first step is to start the initial primary node:
 
-```bash
+```console
 $ docker run --detach --name pg-0 \
   --network my-network \
   --env REPMGR_PARTNER_NODES=pg-0,pg-1 \
@@ -277,7 +277,7 @@ $ docker run --detach --name pg-0 \
 
 Next we start a standby node:
 
-```bash
+```console
 $ docker run --detach --name pg-1 \
   --network my-network \
   --env REPMGR_PARTNER_NODES=pg-0,pg-1 \
@@ -299,7 +299,7 @@ If the master goes down, **repmgr** will ensure any of the standby nodes takes t
 
 With Docker Compose the HA PostgreSQL cluster can be setup using the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/master/docker-compose.yml) file present in this repository:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-postgresql-repmgr/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -308,14 +308,14 @@ $ docker-compose up -d
 
 The image looks for the `repmgr.conf`, `postgresql.conf` and `pg_hba.conf` files in `/opt/bitnami/repmgr/conf/` and `/opt/bitnami/postgresql/conf/`. You can mount a volume at `/bitnami/repmgr/conf/` and copy/edit the configuration files in the `/path/to/custom-conf/`. The default configurations will be populated to the `conf/` directories if `/bitnami/repmgr/conf/` is empty.
 
-```
+```console
 /path/to/custom-conf/
 └── postgresql.conf
 ```
 
 As the PostgreSQL with Replication manager image is non-root, you need to set the proper permissions to the mounted directory in your host:
 
-```bash
+```console
 $ sudo chgrp -R root /path/to/custom-conf/
 $ sudo chmod -R g+rwX /path/to/custom-conf/
 ```
@@ -324,7 +324,7 @@ $ sudo chmod -R g+rwX /path/to/custom-conf/
 
 Run the PostgreSQL image, mounting a directory from your host.
 
-```bash
+```console
 $ docker run --name pg-0 \
     -v /path/to/custom-conf/:/bitnami/repmgr/conf/ \
     bitnami/postgresql-repmgr:latest
@@ -354,7 +354,7 @@ services:
 
 Edit the configuration on your host using your favorite editor.
 
-```bash
+```console
 vi /path/to/custom-conf/postgresql.conf
 ```
 
@@ -362,13 +362,13 @@ vi /path/to/custom-conf/postgresql.conf
 
 After changing the configuration, restart your PostgreSQL container for changes to take effect.
 
-```bash
+```console
 $ docker restart pg-0
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose restart pg-0
 $ docker-compose restart pg-1
 ```
@@ -380,7 +380,7 @@ Refer to the [server configuration](http://www.postgresql.org/docs/10/static/run
 Apart of using a custom `repmgr.conf`, `postgresql.conf` or `pg_hba.conf`, you can include files ending in `.conf` from the `conf.d` directory in the volume at `/bitnami/postgresql/conf/`.
 For this purpose, the default `postgresql.conf` contains the following section:
 
-```
+```config
 #------------------------------------------------------------------------------
 # CONFIG FILE INCLUDES
 #------------------------------------------------------------------------------
@@ -393,7 +393,7 @@ include_dir = 'conf.d'  # Include files ending in '.conf' from directory 'conf.d
 
 If you are using your custom `postgresql.conf`, you should create (or uncomment) the above section in your config file, in this case the structure should be something like
 
-```
+```console
 /path/to/custom-conf/
 └── postgresql.conf
 /path/to/extra-custom-conf/
@@ -402,7 +402,7 @@ If you are using your custom `postgresql.conf`, you should create (or uncomment)
 
 Remember to set the proper permissions to the mounted directory in your host:
 
-```bash
+```console
 $ sudo chgrp -R root /path/to/extra-custom-conf/
 $ sudo chmod -R g+rwX /path/to/extra-custom-conf/
 ```
@@ -411,7 +411,7 @@ $ sudo chmod -R g+rwX /path/to/extra-custom-conf/
 
 Run the PostgreSQL image, mounting a directory from your host.
 
-```bash
+```console
 $ docker run --name pg-0 \
     -v /path/to/extra-custom-conf/:/bitnami/postgresql/conf/conf.d/ \
     -v /path/to/custom-conf/:/bitnami/repmgr/conf/ \
@@ -444,7 +444,7 @@ services:
 
 Edit the configuration on your host using your favorite editor.
 
-```bash
+```console
 vi /path/to/extra-custom-conf/extended.conf
 ```
 
@@ -452,13 +452,13 @@ vi /path/to/extra-custom-conf/extended.conf
 
 After changing the configuration, restart your PostgreSQL container for changes to take effect.
 
-```bash
+```console
 $ docker restart pg-0
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose restart pg-0
 $ docker-compose restart pg-1
 ```
@@ -503,7 +503,7 @@ Please see the list of environment variables available in the Bitnami PostgreSQL
 
 The Bitnami PostgreSQL with Replication Manager Docker image sends the container logs to `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs pg-0
 ```
 
@@ -517,7 +517,7 @@ Bitnami provides up-to-date versions of PostgreSQL with Replication Manager, inc
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/postgresql-repmgr:latest
 ```
 
@@ -527,32 +527,32 @@ or if you're using Docker Compose, update the value of the image property to `bi
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop pg-0
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose stop pg-0
 $ docker-compose stop pg-1
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/postgresql-persistence` using:
 
-```bash
+```console
 $ rsync -a /path/to/postgresql-persistence /path/to/postgresql-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v pg-0
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose rm -v pg-0
 $ docker-compose rm -v pg-1
 ```
@@ -561,13 +561,13 @@ $ docker-compose rm -v pg-1
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name pg-0 bitnami/postgresql-repmgr:latest
 ```
 
 or using Docker Compose:
 
-```bash
+```console
 $ docker-compose up pg-0
 $ docker-compose up pg-1
 ```
