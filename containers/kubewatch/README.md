@@ -7,7 +7,7 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run -it --network host -v $HOME/.kubewatch.yaml:/root/.kubewatch.yaml -v $HOME/.kube/config:/opt/bitnami/kubewatch/.kube/config --name kubewatch bitnami/kubewatch:latest
 ```
 
@@ -35,12 +35,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.0.4-debian-10-r84`, `0`, `0.0.4`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-10-r84/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.0.4-debian-10-r86`, `0`, `0.0.4`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.0.4-debian-10-r86/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubewatch GitHub repo](https://github.com/bitnami/bitnami-docker-kubewatch).
 
@@ -69,7 +67,7 @@ For example, if you want to receive slack notifications for every change in ever
 
 1. Write this config file and name it *kubewatch.yaml*
 
-```
+```yaml
 handler:
   slack:
     token: YOUR_SLACK_TOKEN
@@ -90,7 +88,7 @@ resource:
 
 2. Launch the Bitnami Kubewatch container mounting the previous configuration file:
 
-```bash
+```console
 $ docker run --name kubewatch \
   --volume path/to/your/kubewatch.yaml:/opt/bitnami/kubewatch/.kubewatch.yaml \
   bitnami/kubewatch:latest
