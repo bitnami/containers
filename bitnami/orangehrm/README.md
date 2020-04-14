@@ -8,7 +8,7 @@
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-orangehrm/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -33,12 +33,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.3.5-0-debian-10-r17`, `4`, `4.3.5-0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.3.5-0-debian-10-r17/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.3.5-0-debian-10-r18`, `4`, `4.3.5-0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.3.5-0-debian-10-r18/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/orangehrm GitHub repo](https://github.com/bitnami/bitnami-docker-orangehrm).
 
@@ -56,7 +54,7 @@ Running OrangeHRM with a database server is the recommended way. You can either 
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-orangehrm/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-orangehrm/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -67,13 +65,13 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 1. Create a network
 
-  ```bash
+  ```console
   $ docker network create orangehrm-tier
   ```
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-  ```bash
+  ```console
   $ docker volume create --name mariadb_data
   $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -86,7 +84,7 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 3. Create volumes for OrangeHRM persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name orangehrm_data
   $ docker run -d --name orangehrm -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -131,13 +129,13 @@ services:
 
 1. Create a network (if it does not exist)
 
-  ```bash
+  ```console
   $ docker network create orangehrm-tier
   ```
 
 2. Create a MariaDB container with host volume
 
-  ```bash
+  ```console
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_orangehrm \
@@ -149,7 +147,7 @@ services:
 
 3. Create the OrangeHRM the container with host volumes
 
-  ```bash
+  ```console
   $ docker run -d --name orangehrm -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e ORANGEHRM_DATABASE_USER=bn_orangehrm \
@@ -167,7 +165,7 @@ The `bitnami/orangehrm:latest` tag always points to the most recent release. To 
 
 1. Get the updated images:
 
-  ```
+  ```console
   $ docker pull bitnami/orangehrm:latest
   ```
 
@@ -178,7 +176,7 @@ The `bitnami/orangehrm:latest` tag always points to the most recent release. To 
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/orangehrm-persistence /path/to/orangehrm-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -260,7 +258,7 @@ services:
 
 ### Specifying Environment variables on the Docker command line
 
-```bash
+```console
 $ docker run -d --name orangehrm -p 80:80 -p 443:443 \
   --net orangehrm-tier \
   --env ORANGEHRM_PASSWORD=my_password \
@@ -304,7 +302,7 @@ This would be an example of SMTP configuration using a GMail account:
 
 * For manual execution:
 
-```bash
+```console
  $ docker run -d --name orangehrm -p 80:80 -p 443:443 \
    --net orangehrm-tier \
    --env MARIADB_HOST=mariadb \
