@@ -8,7 +8,7 @@
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-wordpress/master/docker-compose.yml
 $ docker-compose up
 ```
@@ -36,12 +36,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-debian-10`, `5.4.0-debian-10-r11`, `5`, `5.4.0`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.4.0-debian-10-r11/5/debian-10/Dockerfile)
+* [`5-debian-10`, `5.4.0-debian-10-r12`, `5`, `5.4.0`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.4.0-debian-10-r12/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
@@ -57,7 +55,7 @@ WordPress requires access to a MySQL or MariaDB database to store information. W
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-wordpress/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -68,13 +66,13 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create wordpress-network
 ```
 
 ### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
-```bash
+```console
 $ docker volume create --name mariadb_data
 $ docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -87,7 +85,7 @@ $ docker run -d --name mariadb \
 
 ### Step 3: Create volumes for WordPress persistence and launch the container
 
-```bash
+```console
 $ docker volume create --name wordpress_data
 $ docker run -d --name wordpress \
   -p 8080:8080 -p 8443:8443 \
@@ -141,13 +139,13 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 
 #### Step 1: Create a network (if it does not exist)
 
-```bash
+```console
 $ docker network create wordpress-network
 ```
 
 #### Step 2. Create a MariaDB container with host volume
 
-```bash
+```console
 $ docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_wordpress \
@@ -159,7 +157,7 @@ $ docker run -d --name mariadb \
 
 #### Step 3. Create the WordPress the container with host volumes
 
-```bash
+```console
 $ docker run -d --name wordpress \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -178,7 +176,7 @@ The `bitnami/wordpress:latest` tag always points to the most recent release. To 
 
 ## Step 1. Get the updated images:
 
-```bash
+```console
 $ docker pull bitnami/wordpress:latest
 ```
 
@@ -189,7 +187,7 @@ $ docker pull bitnami/wordpress:latest
 
 ## Step 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/wordpress-persistence /path/to/wordpress-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -277,7 +275,7 @@ services:
 
 ### Specifying Environment variables on the Docker command line
 
-```bash
+```console
 $ docker run -d --name wordpress \
   -p 8080:8080 -p 8443:8443 \
   --network wordpress-network \
@@ -322,7 +320,7 @@ This would be an example of SMTP configuration using a GMail account:
 
 * For manual execution:
 
-```bash
+```console
 $ docker run -d --name wordpress \
   -p 8080:8080 -p 8443:8443 \
   --network wordpress-network \
@@ -365,7 +363,7 @@ This would be an example of using an external database for WordPress.
 
 * For manual execution:
 
-```bash
+```console
 $ docker run -d --name wordpress\
   -p 8080:8080 -p 8443:8443 \
   --network wordpress-network \
@@ -388,13 +386,13 @@ This would be an example of using **wp-cli** to display the help menu:
 
 * Using `docker-compose` command:
 
-```bash
+```console
 $ docker-compose exec wordpress wp help
 ```
 
 * Using `docker` command:
 
-```bash
+```console
 $ docker exec wordpress wp help
 ```
 
