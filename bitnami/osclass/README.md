@@ -8,7 +8,7 @@ https://osclass.org/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-osclass/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -33,12 +33,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.7.4-debian-10-r60`, `3`, `3.7.4`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/3.7.4-debian-10-r60/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.7.4-debian-10-r61`, `3`, `3.7.4`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/3.7.4-debian-10-r61/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/osclass GitHub repo](https://github.com/bitnami/bitnami-docker-osclass).
 
@@ -90,7 +88,7 @@ volumes:
 
 Launch the containers using:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -100,13 +98,13 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 1. Create a network
 
-  ```bash
+  ```console
   $ docker network create osclass-tier
   ```
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-  ```bash
+  ```console
   $ docker volume create --name mariadb_data
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -119,7 +117,7 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 3. Create volumes for Osclass persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name osclass_data
   $ docker run -d --name osclass -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -181,13 +179,13 @@ services:
 
 1. Create a network (if it does not exist)
 
-  ```bash
+  ```console
   $ docker network create osclass-tier
   ```
 
 2. Create a MariaDB container with host volume
 
-  ```bash
+  ```console
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_osclass \
@@ -199,7 +197,7 @@ services:
 
 3. Create the Osclass the container with host volumes
 
-  ```bash
+  ```console
   $ docker run -d --name osclass -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e OSCLASS_DATABASE_USER=bn_osclass \
@@ -215,7 +213,7 @@ Bitnami provides up-to-date versions of MariaDB and Osclass, including security 
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/osclass:latest
   ```
 
@@ -226,7 +224,7 @@ Bitnami provides up-to-date versions of MariaDB and Osclass, including security 
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/osclass-persistence /path/to/osclass-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -325,7 +323,7 @@ volumes:
 
 ### Specifying Environment variables on the Docker command line
 
-```bash
+```console
 $ docker run -d --name osclass -p 80:80 -p 443:443 \
   --net osclass-tier \
   --env OSCLASS_PASSWORD=my_password \
@@ -371,7 +369,7 @@ This would be an example of SMTP configuration using a GMail account:
 
 * For manual execution:
 
-  ```bash
+  ```console
   $ docker run -d --name osclass -p 80:80 -p 443:443 \
     --net osclass-tier \
     -e MARIADB_HOST=mariadb \
