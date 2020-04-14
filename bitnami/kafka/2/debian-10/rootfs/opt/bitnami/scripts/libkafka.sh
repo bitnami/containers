@@ -68,7 +68,7 @@ kafka_server_conf_set() {
 ########################
 # Set a configuration setting value to producer.properties and consumer.properties
 # Globals:
-#   KAFKA_CONFDIR
+#   KAFKA_CONF_DIR
 # Arguments:
 #   $1 - key
 #   $2 - values (array)
@@ -76,8 +76,8 @@ kafka_server_conf_set() {
 #   None
 #########################
 kafka_producer_consumer_conf_set() {
-    kafka_common_conf_set "$KAFKA_CONFDIR/producer.properties" "$@"
-    kafka_common_conf_set "$KAFKA_CONFDIR/consumer.properties" "$@"
+    kafka_common_conf_set "$KAFKA_CONF_DIR/producer.properties" "$@"
+    kafka_common_conf_set "$KAFKA_CONF_DIR/consumer.properties" "$@"
 }
 
 ########################
@@ -91,17 +91,18 @@ kafka_producer_consumer_conf_set() {
 #########################
 kafka_env() {
     cat <<"EOF"
-export KAFKA_BASEDIR="/opt/bitnami/kafka"
-export KAFKA_VOLUMEDIR="/bitnami/kafka"
-export KAFKA_HOME="$KAFKA_BASEDIR"
-export KAFKA_LOGDIR="$KAFKA_BASEDIR"/logs
-export KAFKA_CONFDIR="$KAFKA_BASEDIR"/config
-export KAFKA_CONF_FILE="$KAFKA_CONFDIR"/server.properties
-export KAFKA_MOUNTED_CONFDIR="${KAFKA_MOUNTED_CONFDIR:-${KAFKA_VOLUMEDIR}/config}"
-export KAFKA_DATADIR="$KAFKA_VOLUMEDIR"/data
+export KAFKA_BASE_DIR="/opt/bitnami/kafka"
+export KAFKA_VOLUME_DIR="/bitnami/kafka"
+export KAFKA_HOME="$KAFKA_BASE_DIR"
+export KAFKA_LOG_DIR="$KAFKA_BASE_DIR"/logs
+export KAFKA_CONF_DIR="$KAFKA_BASE_DIR"/config
+export KAFKA_CONF_FILE="$KAFKA_CONF_DIR"/server.properties
+export KAFKA_MOUNTED_CONF_DIR="${KAFKA_MOUNTED_CONF_DIR:-${KAFKA_VOLUME_DIR}/config}"
+export KAFKA_DATA_DIR="$KAFKA_VOLUME_DIR"/data
+export KAFKA_INITSCRIPTS_DIR=/docker-entrypoint-initdb.d
 export KAFKA_DAEMON_USER="kafka"
 export KAFKA_DAEMON_GROUP="kafka"
-export PATH="${KAFKA_BASEDIR}/bin:$PATH"
+export PATH="${KAFKA_BASE_DIR}/bin:$PATH"
 export ALLOW_PLAINTEXT_LISTENER="${ALLOW_PLAINTEXT_LISTENER:-no}"
 export KAFKA_INTER_BROKER_USER="${KAFKA_INTER_BROKER_USER:-user}"
 export KAFKA_INTER_BROKER_PASSWORD="${KAFKA_INTER_BROKER_PASSWORD:-bitnami}"
@@ -219,9 +220,9 @@ kafka_validate() {
     fi
     if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL_SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL_SSL ]]; then
         # DEPRECATED. Check for jks files in old conf directory to maintain compatibility with Helm chart.
-        if ([[ ! -f "$KAFKA_BASEDIR"/conf/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_BASEDIR"/conf/certs/kafka.truststore.jks ]]) \
-            && ([[ ! -f "$KAFKA_MOUNTED_CONFDIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_MOUNTED_CONFDIR"/certs/kafka.truststore.jks ]]); then
-            print_validation_error "In order to configure the SASL_SSL listener for Kafka you must mount your kafka.keystore.jks and kafka.truststore.jks certificates to the $KAFKA_MOUNTED_CONFDIR/certs directory."
+        if ([[ ! -f "$KAFKA_BASE_DIR"/conf/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_BASE_DIR"/conf/certs/kafka.truststore.jks ]]) \
+            && ([[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.truststore.jks ]]); then
+            print_validation_error "In order to configure the SASL_SSL listener for Kafka you must mount your kafka.keystore.jks and kafka.truststore.jks certificates to the $KAFKA_MOUNTED_CONF_DIR/certs directory."
         fi
     elif ! is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
         print_validation_error "The KAFKA_CFG_LISTENERS environment variable does not configure a secure listener. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
@@ -231,7 +232,7 @@ kafka_validate() {
 }
 
 ########################
-# Generate JAAS authentication files
+# Generate JAAS authentication file
 # Globals:
 #   KAFKA_*
 # Arguments:
@@ -240,7 +241,9 @@ kafka_validate() {
 #   None
 #########################
 kafka_generate_jaas_authentication_file() {
-    render-template >"$KAFKA_CONFDIR"/kafka_jaas.conf <<EOF
+    if [[ ! -f "${KAFKA_CONF_DIR}/kafka_jaas.conf" ]]; then
+        info "Generating JAAS authentication file"
+        render-template > "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaClient {
    org.apache.kafka.common.security.plain.PlainLoginModule required
    username="{{KAFKA_BROKER_USER}}"
@@ -257,9 +260,9 @@ KafkaServer {
    org.apache.kafka.common.security.scram.ScramLoginModule required;
 };
 EOF
-    if [[ -n "$KAFKA_ZOOKEEPER_USER" ]] && [[ -n "$KAFKA_ZOOKEEPER_PASSWORD" ]]; then
-        info "Configuring ZooKeeper client credentials"
-        render-template >>"$KAFKA_CONFDIR"/kafka_jaas.conf <<EOF
+        if [[ -n "$KAFKA_ZOOKEEPER_USER" ]] && [[ -n "$KAFKA_ZOOKEEPER_PASSWORD" ]]; then
+            info "Configuring ZooKeeper client credentials"
+            render-template >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 
 Client {
    org.apache.kafka.common.security.plain.PlainLoginModule required
@@ -267,6 +270,10 @@ Client {
    password="{{KAFKA_ZOOKEEPER_PASSWORD}}";
 };
 EOF
+        fi
+    else
+        info "Custom JAAS authentication file detected. Skipping generation."
+        warn "The following environment variables will be ignored: KAFKA_BROKER_USER, KAFKA_BROKER_PASSWORD, KAFKA_INTER_BROKER_USER, KAFKA_INTER_BROKER_PASSWORD, KAFKA_ZOOKEEPER_USER and KAFKA_ZOOKEEPER_PASSWORD"
     fi
 }
 
@@ -274,7 +281,7 @@ EOF
 # Configure Kafka SSL listener
 # Globals:
 #   KAFKA_CERTIFICATE_PASSWORD
-#   KAFKA_CONFDIR
+#   KAFKA_CONF_DIR
 # Arguments:
 #   None
 # Returns:
@@ -282,16 +289,16 @@ EOF
 #########################
 kafka_configure_ssl_listener() {
     # Set Kafka configuration
-    kafka_server_conf_set ssl.keystore.location "$KAFKA_CONFDIR"/certs/kafka.keystore.jks
+    kafka_server_conf_set ssl.keystore.location "$KAFKA_CONF_DIR"/certs/kafka.keystore.jks
     kafka_server_conf_set ssl.keystore.password "$KAFKA_CERTIFICATE_PASSWORD"
     kafka_server_conf_set ssl.key.password "$KAFKA_CERTIFICATE_PASSWORD"
-    kafka_server_conf_set ssl.truststore.location "$KAFKA_CONFDIR"/certs/kafka.truststore.jks
+    kafka_server_conf_set ssl.truststore.location "$KAFKA_CONF_DIR"/certs/kafka.truststore.jks
     kafka_server_conf_set ssl.truststore.password "$KAFKA_CERTIFICATE_PASSWORD"
     kafka_server_conf_set ssl.client.auth required
     # Set producer/consumer configuration
-    kafka_producer_consumer_conf_set ssl.keystore.location "$KAFKA_CONFDIR"/certs/kafka.keystore.jks
+    kafka_producer_consumer_conf_set ssl.keystore.location "$KAFKA_CONF_DIR"/certs/kafka.keystore.jks
     kafka_producer_consumer_conf_set ssl.keystore.password "$KAFKA_CERTIFICATE_PASSWORD"
-    kafka_producer_consumer_conf_set ssl.truststore.location "$KAFKA_CONFDIR"/certs/kafka.truststore.jks
+    kafka_producer_consumer_conf_set ssl.truststore.location "$KAFKA_CONF_DIR"/certs/kafka.truststore.jks
     kafka_producer_consumer_conf_set ssl.truststore.password "$KAFKA_CERTIFICATE_PASSWORD"
     kafka_producer_consumer_conf_set ssl.key.password "$KAFKA_CERTIFICATE_PASSWORD"
 }
@@ -300,7 +307,7 @@ kafka_configure_ssl_listener() {
 # Configure Kafka SASL_SSL listener
 # Globals:
 #   KAFKA_CERTIFICATE_PASSWORD
-#   KAFKA_CONFDIR
+#   KAFKA_CONF_DIR
 # Arguments:
 #   None
 # Returns:
@@ -323,7 +330,7 @@ kafka_configure_sasl_ssl_listener() {
 # Configure Kafka Only SSL listener
 # Globals:
 #   KAFKA_CERTIFICATE_PASSWORD
-#   KAFKA_CONFDIR
+#   KAFKA_CONF_DIR
 # Arguments:
 #   None
 # Returns:
@@ -389,18 +396,18 @@ kafka_configure_from_environment_variables() {
 kafka_initialize() {
     info "Initializing Kafka..."
     # DEPRECATED. Copy files in old conf directory to maintain compatibility with Helm chart.
-    if ! is_dir_empty "$KAFKA_BASEDIR"/conf; then
-        warn "Detected files mounted to $KAFKA_BASEDIR/conf. This is deprecated and files should be mounted to $KAFKA_MOUNTED_CONFDIR."
-        cp -Lr "$KAFKA_BASEDIR"/conf/* "$KAFKA_CONFDIR"
+    if ! is_dir_empty "$KAFKA_BASE_DIR"/conf; then
+        warn "Detected files mounted to $KAFKA_BASE_DIR/conf. This is deprecated and files should be mounted to $KAFKA_MOUNTED_CONF_DIR."
+        cp -Lr "$KAFKA_BASE_DIR"/conf/* "$KAFKA_CONF_DIR"
     fi
     # Check for mounted configuration files
-    if ! is_dir_empty "$KAFKA_MOUNTED_CONFDIR"; then
-        cp -Lr "$KAFKA_MOUNTED_CONFDIR"/* "$KAFKA_CONFDIR"
+    if ! is_dir_empty "$KAFKA_MOUNTED_CONF_DIR"; then
+        cp -Lr "$KAFKA_MOUNTED_CONF_DIR"/* "$KAFKA_CONF_DIR"
     fi
     # DEPRECATED. Check for server.properties file in old conf directory to maintain compatibility with Helm chart.
-    if [[ ! -f "$KAFKA_BASEDIR"/conf/server.properties ]] && [[ ! -f "$KAFKA_MOUNTED_CONFDIR"/server.properties ]]; then
+    if [[ ! -f "$KAFKA_BASE_DIR"/conf/server.properties ]] && [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/server.properties ]]; then
         info "No injected configuration files found, creating default config files"
-        kafka_server_conf_set log.dirs "$KAFKA_DATADIR"
+        kafka_server_conf_set log.dirs "$KAFKA_DATA_DIR"
         kafka_configure_from_environment_variables
         if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL_SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL_SSL ]]; then
             kafka_configure_sasl_ssl_listener
@@ -427,8 +434,8 @@ kafka_initialize() {
 #   None
 #########################
 kafka_custom_init_scripts() {
-    if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\)") ]] && [[ ! -f "$KAFKA_VOLUMEDIR/.user_scripts_initialized" ]] ; then
-        info "Loading user's custom files from /docker-entrypoint-initdb.d";
+    if [[ -n $(find "${KAFKA_INITSCRIPTS_DIR}/" -type f -regex ".*\.\(sh\)") ]] && [[ ! -f "${KAFKA_VOLUME_DIR}/.user_scripts_initialized" ]] ; then
+        info "Loading user's custom files from $KAFKA_INITSCRIPTS_DIR";
         for f in /docker-entrypoint-initdb.d/*; do
             debug "Executing $f"
             case "$f" in
@@ -448,6 +455,6 @@ kafka_custom_init_scripts() {
                     ;;
             esac
         done
-        touch "$KAFKA_VOLUMEDIR"/.user_scripts_initialized
+        touch "$KAFKA_VOLUME_DIR"/.user_scripts_initialized
     fi
 }
