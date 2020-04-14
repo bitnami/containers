@@ -25,12 +25,10 @@ $ docker run --name kong-ingress-controller bitnami/kong-ingress-controller:late
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.9.3-debian-10-r17`, `0`, `0.9.3`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/0.9.3-debian-10-r17/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.8.0-debian-10-r20`, `0`, `0.8.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/0.8.0-debian-10-r20/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kong-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-kong-ingress-controller).
 
