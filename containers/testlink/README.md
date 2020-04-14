@@ -8,7 +8,7 @@ http://testlink.org/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-testlink/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -33,12 +33,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.9.20-debian-10-r67`, `1`, `1.9.20`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.20-debian-10-r67/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.9.20-debian-10-r68`, `1`, `1.9.20`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.20-debian-10-r68/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/testlink GitHub repo](https://github.com/bitnami/bitnami-docker-testlink).
 
@@ -56,7 +54,7 @@ Running TestLink with a database server is the recommended way. You can either u
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-testlink/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-testlink/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -67,13 +65,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```bash
+  ```console
   $ docker network create testlink-tier
   ```
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-  ```bash
+  ```console
   $ docker volume create --name mariadb_data
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -88,7 +86,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Create volumes for Testlink persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name testlink_data
   $ docker run -d --name testlink -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -135,13 +133,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exists):
 
-  ```bash
+  ```console
   $ docker network create testlink-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```bash
+  ```console
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_testlink \
@@ -155,7 +153,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Run the TestLink container:
 
-  ```bash
+  ```console
   $ docker run -d -p 80:80 -p 443:443 --name testlink \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e TESTLINK_DATABASE_USER=bn_testlink \
@@ -171,7 +169,7 @@ Bitnami provides up-to-date versions of MariaDB and TestLink, including security
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/testlink:latest
   ```
 
@@ -182,7 +180,7 @@ Bitnami provides up-to-date versions of MariaDB and TestLink, including security
 
 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/testlink-persistence /path/to/testlink-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -207,7 +205,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Environment variables
 
-When you start the testlink image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
+When you start the testlink image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
 ##### User and Site configuration
 
@@ -255,7 +253,7 @@ testlink:
 
  * For manual execution add a `-e` option with each variable and value:
 
-  ```bash
+  ```console
   $ docker run -d -p 80:80 -p 443:443 --name testlink
     -e TESTLINK_PASSWORD=my_password \
     --net testlink-tier \
@@ -299,7 +297,7 @@ This would be an example of SMTP configuration using a GMail account:
 
  * For manual execution:
 
-  ```bash
+  ```console
   $ docker run -d -p 80:80 -p 443:443 --name testlink \
     -e MARIADB_HOST=mariadb \
     -e MARIADB_PORT_NUMBER=3306 \
