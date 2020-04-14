@@ -43,15 +43,13 @@ $ kubectl apply -f test.yaml
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
 * [`7.4-debian-10-prod`, `7.4.4-debian-10-r26-prod`, `7.4-prod`, `7.4.4-prod` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.4-debian-10-r26-prod/7.4-prod/debian-10/Dockerfile)
 * [`7.4-debian-10`, `7.4.4-debian-10-r26`, `7.4`, `7.4.4` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.4-debian-10-r26/7.4/debian-10/Dockerfile)
 * [`7.3-debian-10-prod`, `7.3.16-debian-10-r27-prod`, `7.3-prod`, `7.3.16-prod`, `latest-prod` (7.3-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.16-debian-10-r27-prod/7.3-prod/debian-10/Dockerfile)
-* [`7.3-debian-10`, `7.3.16-debian-10-r26`, `7.3`, `7.3.16`, `latest` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.16-debian-10-r26/7.3/debian-10/Dockerfile)
+* [`7.3-debian-10`, `7.3.16-debian-10-r27`, `7.3`, `7.3.16`, `latest` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.16-debian-10-r27/7.3/debian-10/Dockerfile)
 * [`7.2-debian-10-prod`, `7.2.29-debian-10-r27-prod`, `7.2-prod`, `7.2.29-prod` (7.2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.29-debian-10-r27-prod/7.2-prod/debian-10/Dockerfile)
 * [`7.2-debian-10`, `7.2.29-debian-10-r26`, `7.2`, `7.2.29` (7.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.29-debian-10-r26/7.2/debian-10/Dockerfile)
 
