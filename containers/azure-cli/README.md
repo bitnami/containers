@@ -7,7 +7,7 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name azure-cli bitnami/azure-cli:latest
 ```
 
@@ -30,7 +30,7 @@ $ docker run --name azure-cli bitnami/azure-cli:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.3.1-debian-10-r12`, `2`, `2.3.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-azure-cli/blob/2.3.1-debian-10-r12/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.3.1-debian-10-r13`, `2`, `2.3.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-azure-cli/blob/2.3.1-debian-10-r13/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/azure-cli GitHub repo](https://github.com/bitnami/bitnami-docker-azure-cli).
 
@@ -38,19 +38,19 @@ Subscribe to project updates by watching the [bitnami/azure-cli GitHub repo](htt
 
 The recommended way to get the Bitnami azure-cli Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/azure-cli).
 
-```bash
+```console
 $ docker pull bitnami/azure-cli:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/azure-cli/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/azure-cli:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/azure-cli:latest 'https://github.com/bitnami/bitnami-docker-azure-cli.git#master:2/debian-10'
 ```
 
@@ -60,7 +60,7 @@ $ docker build -t bitnami/azure-cli:latest 'https://github.com/bitnami/bitnami-d
 
 To run commands inside this container you can use `docker run`, for example to execute `azure-cli --version` you can follow the example below:
 
-```bash
+```console
 $ docker run --rm --name azure-cli bitnami/azure-cli:latest -- --version
 ```
 
@@ -70,7 +70,7 @@ Consult the [azure-cli Reference Documentation](https://docs.microsoft.com/en-us
 
 It's possible to load your own configuration, which is useful if you want to connect to a remote cluster:
 
-```bash
+```console
 $ docker run --rm --name azure-cli -v /path/to/your/az/config:/.azure/config bitnami/azure-cli:latest
 ```
 
