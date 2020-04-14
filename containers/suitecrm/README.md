@@ -8,7 +8,7 @@ https://www.suitecrm.com/
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-suitecrm/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -33,12 +33,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-debian-10`, `7.11.13-debian-10-r18`, `7`, `7.11.13`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.13-debian-10-r18/7/debian-10/Dockerfile)
+* [`7-debian-10`, `7.11.13-debian-10-r19`, `7`, `7.11.13`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.13-debian-10-r19/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
 
@@ -56,7 +54,7 @@ Running SuiteCRM with a database server is the recommended way. You can either u
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-suitecrm/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-suitecrm/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -67,13 +65,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```bash
+  ```console
   $ docker network create suitecrm-tier
   ```
 
 2. Create a volume for MariaDB persistence and create a MariaDB container
 
-  ```bash
+  ```console
   $ docker volume create --name mariadb_data
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -88,7 +86,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Create volumes for Suitecrm persistence and launch the container
 
-  ```bash
+  ```console
   $ docker volume create --name suitecrm_data
   $ docker run -d --name suitecrm -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
@@ -135,13 +133,13 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```bash
+  ```console
   $ docker network create suitecrm-tier
   ```
 
 2. Create a MariaDB container with host volume:
 
-  ```bash
+  ```console
   $ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_suitecrm \
@@ -154,7 +152,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 3. Create the SuiteCRM container with host volumes:
 
-  ```bash
+  ```console
   $ docker run -d --name suitecrm -p 80:80 -p 443:443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e SUITECRM_DATABASE_USER=bn_suitecrm \
@@ -172,7 +170,7 @@ Bitnami provides up-to-date versions of MariaDB and SuiteCRM, including security
 
     - Take a snapshot of the application state
 
-        ```bash
+        ```console
         $ rsync -a /path/to/suitecrm-persistence /path/to/suitecrm-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
         ```
 
@@ -184,7 +182,7 @@ Bitnami provides up-to-date versions of MariaDB and SuiteCRM, including security
 
 ## Environment variables
 
-When you start the SuiteCRM image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the docker run command line.
+When you start the SuiteCRM image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
 ##### User and Site configuration
 
@@ -234,7 +232,7 @@ suitecrm:
 
  * For manual execution add a `-e` option with each variable and value:
 
-  ```bash
+  ```console
   $ docker run -d -p 80:80 -p 443:443 --name suitecrm  \
     -e SUITECRM_PASSWORD=my_password \
     --net suitecrm-tier \
@@ -274,7 +272,7 @@ This would be an example of SMTP configuration using a Gmail account:
 
  * For manual execution:
 
-  ```bash
+  ```console
   $ docker run -d -p 80:80 -p 443:443 --name suitecrm  \
     -e MARIADB_HOST=mariadb \
     -e MARIADB_PORT_NUMBER=3306 \
