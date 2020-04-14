@@ -25,12 +25,10 @@ $ docker run --name metallb-speaker bitnami/metallb-speaker:latest
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.9.3-debian-10-r17`, `0`, `0.9.3`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metallb-speaker/blob/0.9.3-debian-10-r17/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.9.3-debian-10-r18`, `0`, `0.9.3`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metallb-speaker/blob/0.9.3-debian-10-r18/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/metallb-speaker GitHub repo](https://github.com/bitnami/bitnami-docker-metallb-speaker).
 
