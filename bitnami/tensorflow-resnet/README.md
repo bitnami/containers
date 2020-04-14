@@ -7,7 +7,7 @@
 
 Before running the docker image you first need to download the ResNet model training checkpoint so it will be available for the TensorFlow Serving server.
 
-```bash
+```console
 $ mkdir /tmp/model-data
 $ cd /tmp/model-data
 $ wget 'http://download.tensorflow.org/models/official/20181001_resnet/savedmodels/resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz'
@@ -16,7 +16,7 @@ $ tar xzf resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz --strip-components=2
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-tensorflow-resnet/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -39,12 +39,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.1.0-debian-10-r72`, `2`, `2.1.0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/2.1.0-debian-10-r72/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.1.0-debian-10-r73`, `2`, `2.1.0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/2.1.0-debian-10-r73/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-resnet GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-resnet).
 
@@ -62,7 +60,7 @@ Running TensorFlow ResNet client with the TensorFlow Serving server is the recom
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-tensorflow-resnet/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -73,13 +71,13 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```bash
+  ```console
   $ docker network create tensorflow-tier
   ```
 
 2. Start a Tensorflow Serving server in the network generated:
 
-  ```bash
+  ```console
   $ docker run -d -v /tmp/model-data:/bitnami/model-data -e TENSORFLOW_SERVING_MODEL_NAME=resnet -p 8500:8500 -p 8501:8501 --name tensorflow-serving --net tensorflow-tier bitnami/tensorflow-serving:latest
   ```
 
@@ -87,7 +85,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 3. Run the TensorFlow ResNet client container:
 
-  ```bash
+  ```console
   $ docker run -d -v /tmp/model-data:/bitnami/model-data --name tensorflow-resnet --net tensorflow-tier bitnami/tensorflow-resnet:latest
   ```
 
@@ -97,7 +95,7 @@ Bitnami provides up-to-date versions of Tensorflow-Serving and TensorFlow ResNet
 
 1. Get the updated images:
 
-  ```bash
+  ```console
   $ docker pull bitnami/tensorflow-resnet:latest
   ```
 
@@ -135,19 +133,19 @@ Once you have deployed both the TensorFlow Serving and TensorFlow ResNet contain
 1. Exec into the TensorFlow ResNet container.
 2. Download an image:
 
-```
+```console
 wget https://tensorflow.org/images/blogs/serving/cat.jpg
 ```
 
 3. Send the image to the TensorFlow Serving server.
 
-```
+```console
 resnet_client_cc --server_port=tensorflow-serving:8500 --image_file=8500
 ```
 
 4. The model says the image belongs to the category 286. You can check the [imagenet classes index](https://s3.amazonaws.com/deep-learning-models/image-models/imagenet_class_index.json) to see how the category 286 correspond to a cougar.
 
-```
+```console
 calling predict using file: cat.jpg  ...
 call predict ok
 outputs size is 2
