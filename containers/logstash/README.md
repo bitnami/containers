@@ -5,13 +5,13 @@ Logstash is an open source, server-side data processing pipeline that ingests da
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name logstash bitnami/logstash:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-logstash/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -39,12 +39,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7-debian-10`, `7.6.2-debian-10-r12`, `7`, `7.6.2`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.6.2-debian-10-r12/7/debian-10/Dockerfile)
+* [`7-debian-10`, `7.6.2-debian-10-r13`, `7`, `7.6.2`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.6.2-debian-10-r13/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/logstash GitHub repo](https://github.com/bitnami/bitnami-docker-logstash).
 
@@ -52,19 +50,19 @@ Subscribe to project updates by watching the [bitnami/logstash GitHub repo](http
 
 The recommended way to get the Bitnami Logstash Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/logstash).
 
-```bash
+```console
 $ docker pull bitnami/logstash:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/logstash/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/logstash:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/logstash:latest 'https://github.com/bitnami/bitnami-docker-logstash.git#master:7/debian-10'
 ```
 
@@ -74,7 +72,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
+```console
 $ docker run \
     -v /path/to/logstash-persistence:/bitnami \
     bitnami/logstash:latest
@@ -102,7 +100,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create logstash-network --driver bridge
 ```
 
@@ -110,7 +108,7 @@ $ docker network create logstash-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `logstash-network` network.
 
-```bash
+```console
 $ docker run --name logstash-node1 --network logstash-network bitnami/logstash:latest
 ```
 
@@ -122,38 +120,38 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 This container, by default, provides a very basic configuration for logstash, that listen http on port 8080 and writes to stdout.
 
-```
-docker run -d -p 8080:8080 bitnami/logstash:latest
+```console
+$ docker run -d -p 8080:8080 bitnami/logstash:latest
 ```
 
 ## Using a configuration string
 
 For simple configurations, you specify it using the LOGSTASH_CONF_STRING environment variable:
 
-```
-docker run --env LOGSTASH_CONF_STRING="input {file {path => \"/tmp/logstash_input\"}} output {file {path => \"/tmp/logstash_output\"}}" bitnami/logstash:latest
+```console
+$ docker run --env LOGSTASH_CONF_STRING="input {file {path => \"/tmp/logstash_input\"}} output {file {path => \"/tmp/logstash_output\"}}" bitnami/logstash:latest
 ```
 ## Using a configuration file
 
 You can override the default configuration for logstash by mounting your own configuration files on directory `/bitnami/logstash/config`. You will need to indicate the file holding the pipeline definition by setting the LOGSTASH_CONF_FILENAME enviroment variable.
 
-```
-docker run -d --env LOGSTASH_CONF_FILENAME=my_config.conf  -v /path/to/custom-conf-directory:/opt/bitnami/logstash/config bitnami/logstash:latest
+```console
+$ docker run -d --env LOGSTASH_CONF_FILENAME=my_config.conf  -v /path/to/custom-conf-directory:/opt/bitnami/logstash/config bitnami/logstash:latest
 ```
 
 ## Exposing logstash API
 
 You can expose the logstash API by setting the environment variable LOGSTASH_EXPOSE_API, you can also change the default port by using LOGSTASH_API_PORT_NUMBER.
 
-```
-docker run -d --env LOGSTASH_EXPOSE_API=yes --env LOGSTASH_API_PORT_NUMBER=9090 -p 9090:9090 -v /path/to/custom-conf-directory:/opt/bitnami/logstash/config bitnami/logstash:latest
+```console
+$ docker run -d --env LOGSTASH_EXPOSE_API=yes --env LOGSTASH_API_PORT_NUMBER=9090 -p 9090:9090 -v /path/to/custom-conf-directory:/opt/bitnami/logstash/config bitnami/logstash:latest
 ```
 
 # Logging
 
 The Bitnami Logstash Docker image sends the container logs to `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs logstash
 ```
 
@@ -167,7 +165,7 @@ Bitnami provides up-to-date versions of Logstash, including security patches, so
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/logstash:latest
 ```
 
@@ -175,13 +173,13 @@ $ docker pull bitnami/logstash:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop logstash
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v logstash
 ```
 
@@ -189,7 +187,7 @@ $ docker rm -v logstash
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name logstash bitnami/logstash:latest
 ```
 
