@@ -8,7 +8,7 @@
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-jenkins/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -36,12 +36,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.222.1-debian-10-r9`, `2`, `2.222.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.222.1-debian-10-r9/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.222.1-debian-10-r10`, `2`, `2.222.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.222.1-debian-10-r10/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
 
@@ -55,7 +53,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-jenkins/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-jenkins/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -66,13 +64,13 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create jenkins-network
 ```
 
 ### Step 2: Create volumes for Jenkins persistence and launch the container
 
-```bash
+```console
 $ docker volume create --name jenkins_data
 $ docker run -d --name jenkins \
   -p 80:8080 -p 443:8443 \
@@ -112,13 +110,13 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 
 #### Step 1: Create a network (if it does not exist)
 
-```bash
+```console
 $ docker network create jenkins-network
 ```
 
 #### Step 2. Create the Jenkins the container with host volumes
 
-```bash
+```console
 $ docker run -d --name jenkins \
   -p 80:8080 -p 443:8443 \
   --network jenkins-network \
@@ -346,7 +344,7 @@ Bitnami provides up-to-date versions of Jenkins, including security patches, soo
 
 ## Step 1. Get the updated images:
 
-```bash
+```console
 $ docker pull bitnami/jenkins:latest
 ```
 
@@ -357,7 +355,7 @@ $ docker pull bitnami/jenkins:latest
 
 ## Step 3. Take a snapshot of the application state
 
-```bash
+```console
 $ rsync -a /path/to/jenkins-persistence /path/to/jenkins-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
@@ -399,7 +397,7 @@ jenkins:
 
 ### Specifying Environment variables on the Docker command line
 
-```bash
+```console
 $ docker run -d --name jenkins \
   -p 80:8080 -p 443:8443 \
   --network jenkins-network \
