@@ -420,7 +420,7 @@ host     all            $REPMGR_USERNAME    0.0.0.0/0    trust
 host     $REPMGR_DATABASE         $REPMGR_USERNAME    0.0.0.0/0    trust
 host     replication      $REPMGR_USERNAME    0.0.0.0/0    trust
 host     all              all       0.0.0.0/0    trust
-host     all              all       ::1/128      trust
+host     all              all       ::/0         trust
 local    all              all                    trust
 EOF
 }
