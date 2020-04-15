@@ -568,6 +568,40 @@ get_master_env_var_value() {
 }
 
 ########################
+# Execute an arbitrary query/queries against the running MySQL/MariaDB service and print to stdout
+# Stdin:
+#   Query/queries to execute
+# Globals:
+#   BITNAMI_DEBUG
+#   DB_*
+# Arguments:
+#   $1 - Database where to run the queries
+#   $2 - User to run queries
+#   $3 - Password
+#   $4 - Extra MySQL CLI options
+# Returns:
+#   None
+mysql_execute_print_output() {
+    local -r db="${1:-}"
+    local -r user="${2:-root}"
+    local -r pass="${3:-}"
+    read -r -a opts <<<"${4:-}"
+
+    # Process mysql CLI arguments
+    local args=("--defaults-file=$DB_CONF_DIR/my.cnf" "-N" "-u" "$user" "$db" "${opts[@]}")
+    [[ -n "$pass" ]] && args+=("-p$pass")
+
+    # Obtain the command specified via stdin
+    local mysql_cmd=""
+    if read -r -t 0; then
+        mysql_cmd="$(</dev/stdin)"
+    fi
+
+    debug "Executing SQL command:\n$mysql_cmd"
+    "$DB_BIN_DIR/mysql" "${args[@]}" <<<"$mysql_cmd"
+}
+
+########################
 # Execute an arbitrary query/queries against the running MySQL/MariaDB service
 # Stdin:
 #   Query/queries to execute
@@ -578,16 +612,11 @@ get_master_env_var_value() {
 #   $1 - Database where to run the queries
 #   $2 - User to run queries
 #   $3 - Password
+#   $4 - Extra MySQL CLI options
 # Returns:
 #   None
 mysql_execute() {
-    local -r db="${1:-}"
-    local -r user="${2:-root}"
-    local -r pass="${3:-}"
-
-    local args=("--defaults-file=$DB_CONF_DIR/my.cnf" "-N" "-u" "$user" "$db")
-    [[ -n "$pass" ]] && args+=("-p$pass")
-    debug_execute "$DB_BIN_DIR/mysql" "${args[@]}"
+    debug_execute "mysql_execute_print_output" "$@"
 }
 
 ########################
@@ -847,7 +876,7 @@ mysql_ensure_user_exists() {
 create $([[ "$DB_FLAVOR" = "mariadb" ]] && echo "or replace") user '$user'@'%' $auth_string;
 EOF
     debug "Removing all other hosts for the user"
-    hosts=$(mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+    hosts=$(mysql_execute_print_output "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 select Host from user where User='$user' and Host!='%';
 EOF
 )
@@ -876,7 +905,7 @@ mysql_ensure_user_not_exists() {
     else
         debug "removing user $user"
     fi
-    hosts=$(mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+    hosts=$(mysql_execute_print_output "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 select Host from user where User='$user';
 EOF
 )
@@ -903,6 +932,7 @@ mysql_ensure_root_user_exists() {
     local -r password="${2:-}"
     local -r auth_plugin="${3:-}"
     local auth_plugin_str=""
+    local alter_view_str=""
 
     if [[ -n "$auth_plugin" ]]; then
         auth_plugin_str="with $auth_plugin"
@@ -919,6 +949,18 @@ create user '$user'@'%' $([ "$password" != "" ] && echo "identified $auth_plugin
 grant all on *.* to '$user'@'%' with grant option;
 flush privileges;
 EOF
+        # Since MariaDB >=10.4, the mysql.user table was replaced with a view: https://mariadb.com/kb/en/mysqluser-table/
+        # Views have a definer user, in this case set to 'root', which needs to exist for the view to work
+        # In MySQL, to avoid issues when renaming the root user, they use the 'mysql.sys' user as a definer: https://dev.mysql.com/doc/refman/5.7/en/sys-schema.html
+        # However, for MariaDB that is not the case, so when the 'root' user is renamed the 'mysql.user' table stops working and the view needs to be fixed
+        if [[ "$user" != "root" && ! "$(mysql_get_version)" =~ ^10.[0123]. ]]; then
+            alter_view_str="$(mysql_execute_print_output "mysql" "$user" "$password" "-s" <<EOF
+-- create per-view string for altering its definer
+select concat("alter definer='$user'@'%' VIEW ", table_name, " AS ", view_definition, ";") FROM information_schema.views WHERE table_schema='mysql';
+EOF
+)"
+            mysql_execute "mysql" "$user" "$password" <<<"$alter_view_str; flush privileges;"
+        fi
     else
         mysql_execute "mysql" "root" <<EOF
 -- create admin user
