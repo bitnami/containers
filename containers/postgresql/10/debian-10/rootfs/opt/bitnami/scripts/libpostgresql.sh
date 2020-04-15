@@ -347,9 +347,9 @@ postgresql_ldap_auth_configuration() {
 
     cat << EOF > "$POSTGRESQL_PGHBA_FILE"
 host     all             postgres        0.0.0.0/0               trust
-host     all             postgres        ::1/128                 trust
+host     all             postgres        ::/0                    trust
 host     all             all             0.0.0.0/0               ldap $ldap_configuration
-host     all             all             ::1/128                 ldap $ldap_configuration
+host     all             all             ::/0                    ldap $ldap_configuration
 EOF
 }
 
@@ -366,7 +366,7 @@ postgresql_password_auth_configuration() {
     postgresql_info "Generating local authentication configuration"
     cat << EOF > "$POSTGRESQL_PGHBA_FILE"
 host     all             all             0.0.0.0/0               trust
-host     all             all             ::1/128                 trust
+host     all             all             ::/0                    trust
 EOF
 }
 
