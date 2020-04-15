@@ -48,7 +48,7 @@ services:
       - PGPOOL_ADMIN_PASSWORD=adminpassword
       - PGPOOL_ENABLE_LOAD_BALANCING=yes
       - PGPOOL_ENABLE_LDAP=yes
-      - LDAP_URI=ldap://ldap
+      - LDAP_URI=ldap://openldap:1389
       - LDAP_BASE=dc=example,dc=org
       - LDAP_BIND_DN=cn=admin,dc=example,dc=org
       - LDAP_BIND_PASSWORD=adminpassword
@@ -57,18 +57,22 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  ldap:
-    image: 'juanariza131/openldap:latest'
+  openldap:
+    image: 'bitnami/openldap:latest'
     ports:
-      - '389:389'
+      - '1389:1389'
     environment:
       - LDAP_ADMIN_USERNAME=admin
       - LDAP_ADMIN_PASSWORD=adminpassword
       - LDAP_USERS=customuser
       - LDAP_PASSWORDS=custompassword
+    volumes:
+      - 'openldap_data:/bitnami/openldap'
 
 volumes:
   pg_0_data:
     driver: local
   pg_1_data:
+    driver: local
+  openldap_data:
     driver: local
