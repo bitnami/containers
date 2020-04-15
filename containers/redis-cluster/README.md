@@ -6,13 +6,13 @@
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name redis-cluster -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis-cluster:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-redis-cluster/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
@@ -36,12 +36,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 8 images have been deprecated in favor of Debian 9 images. Bitnami will not longer publish new Docker images based on Debian 8.
-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5.0-debian-10`, `5.0.8-debian-10-r4`, `5.0`, `5.0.8`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.8-debian-10-r4/5.0/debian-10/Dockerfile)
+* [`5.0-debian-10`, `5.0.8-debian-10-r5`, `5.0`, `5.0.8`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.8-debian-10-r5/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-cluster GitHub repo](https://github.com/bitnami/bitnami-docker-redis-cluster).
 
@@ -49,19 +47,19 @@ Subscribe to project updates by watching the [bitnami/redis-cluster GitHub repo]
 
 The recommended way to get the Bitnami Redis-Cluster Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/redis-cluster).
 
-```bash
+```console
 $ docker pull bitnami/redis-cluster:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/redis-cluster/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/redis-cluster:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/redis-cluster:latest 'https://github.com/bitnami/bitnami-docker-redis-cluster.git#master:5.0/debian-10'
 ```
 
@@ -71,7 +69,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```bash
+```console
 $ docker run \
     -e ALLOW_EMPTY_PASSWORD=yes
     -v /path/to/redis-cluster-persistence:/bitnami \
@@ -98,7 +96,7 @@ Containers attached to the same network can communicate with each other using th
 
 ### Step 1: Create a network
 
-```bash
+```console
 $ docker network create redis-cluster-network --driver bridge
 ```
 
@@ -106,7 +104,7 @@ $ docker network create redis-cluster-network --driver bridge
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `redis-cluster-network` network.
 
-```bash
+```console
 $ docker run -e ALLOW_EMPTY_PASSWORD=yes --name redis-cluster-node1 --network redis-cluster-network bitnami/redis-cluster:latest
 ```
 
@@ -120,7 +118,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 The image looks for configurations in `/opt/bitnami/redis/mounted-etc/redis.conf`. You can overwrite the `redis.conf` file using your own custom configuration file.
 
-```bash
+```console
 $ docker run --name redis \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -v /path/to/your_redis.conf:/opt/bitnami/redis/mounted-etc/redis.conf \
@@ -171,7 +169,7 @@ Where you can add all the `node:port` that you want. The `--cluster-replicas` pa
 
 The Bitnami Redis-Cluster Docker image sends the container logs to `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs redis-cluster
 ```
 
@@ -185,7 +183,7 @@ Bitnami provides up-to-date versions of Redis-Cluster, including security patche
 
 ### Step 1: Get the updated image
 
-```bash
+```console
 $ docker pull bitnami/redis-cluster:latest
 ```
 
@@ -193,13 +191,13 @@ $ docker pull bitnami/redis-cluster:latest
 
 Stop the currently running container using the command
 
-```bash
+```console
 $ docker stop redis-cluster
 ```
 
 ### Step 3: Remove the currently running container
 
-```bash
+```console
 $ docker rm -v redis-cluster
 ```
 
@@ -207,7 +205,7 @@ $ docker rm -v redis-cluster
 
 Re-create your container from the new image.
 
-```bash
+```console
 $ docker run --name redis-cluster bitnami/redis-cluster:latest
 ```
 
