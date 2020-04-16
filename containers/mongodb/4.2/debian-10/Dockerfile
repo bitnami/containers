@@ -14,14 +14,14 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "3.2.1-0" --
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-1" --checksum 07c4678654b01811f22b5bb65a8d6f8e253abd4524ebb3b78c7d3df042cf23bd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-0" --checksum 63449e5ed4ece61d7bbeda0d173b68768d9fb444922b8ffa2e1042be20687142
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb" "4.2.5-0" --checksum ed66874af70c378d0c1c8a40767a02c2b4636f6a898fe1ba38f7ddc9e2a8eb83
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb/postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.2.5-debian-10-r53" \
+    BITNAMI_IMAGE_VERSION="4.2.5-debian-10-r54" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/common/bin:$PATH"
 
