@@ -13,13 +13,13 @@ RUN install_packages ca-certificates curl libc6 libcom-err2 libcurl4 libffi6 lib
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.26.1-0" --checksum c566a9a812a041b3c8d2fb455b352c47f07e826709d7641ddf2f630e6986e9ff
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-1" --checksum 07c4678654b01811f22b5bb65a8d6f8e253abd4524ebb3b78c7d3df042cf23bd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-clair" "1.10.2-0" --checksum bff024c0c06d5cbc2b446602adc0444ac4b1548481a77133925c8e7e1830a8e3
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="harbor-clair" \
-    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r7" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/git/bin:/opt/bitnami/common/bin:/opt/bitnami/harbor-clair/bin:/opt/bitnami/common/bin:$PATH"
 
