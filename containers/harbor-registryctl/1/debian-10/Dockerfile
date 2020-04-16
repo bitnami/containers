@@ -13,14 +13,14 @@ RUN install_packages ca-certificates curl libc6 procps sudo unzip
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "3.2.1-0" --checksum b35ff01573930f11065a5aaa23e64fbb93b545c07fb6d7a1386c61e5b6146791
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registryctl" "1.10.2-0" --checksum f313077878b379cfe55b77792312b68fdcb32332261a38475abe29ba30ca9203
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registry" "1.10.2-0" --checksum 8a47b6a4960e76dd3d533dfaa5e52009fcb9b9d6b84c326a0d111094e9193558
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-registryctl/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-registryctl" \
-    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r7" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-registryctl/bin:/opt/bitnami/harbor-registry/bin:/opt/bitnami/common/bin:$PATH"
 
