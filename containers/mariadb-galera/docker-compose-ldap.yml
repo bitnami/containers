@@ -16,20 +16,24 @@ services:
       - MARIADB_USER=user01
       - MARIADB_DATABASE=my_database
       - MARIADB_ENABLE_LDAP=yes
-      - LDAP_URI=ldap://ldap
+      - LDAP_URI=ldap://openldap:1389
       - LDAP_BASE=dc=example,dc=org
       - LDAP_BIND_DN=cn=admin,dc=example,dc=org
       - LDAP_BIND_PASSWORD=adminpassword
-  ldap:
-    image: 'juanariza131/openldap:latest'
+  openldap:
+    image: 'bitnami/openldap:latest'
     ports:
-      - '389:389'
+      - '1389:1389'
     environment:
       - LDAP_ADMIN_USERNAME=admin
       - LDAP_ADMIN_PASSWORD=adminpassword
       - LDAP_USERS=user01
       - LDAP_PASSWORDS=password1
+    volumes:
+      - 'openldap_data:/bitnami/openldap'
 
 volumes:
   mariadb_galera_data:
+    driver: local
+  openldap_data:
     driver: local
