@@ -13,14 +13,14 @@ RUN install_packages ca-certificates curl libc6 procps sudo unzip
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-1" --checksum 07c4678654b01811f22b5bb65a8d6f8e253abd4524ebb3b78c7d3df042cf23bd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.0.0-1" --checksum 7ca0531af0bb0bea912e550f90d4af3b74547b89aac91f1460e8b800493eabe7
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-core" "1.10.2-0" --checksum 06add6c0d49d539191ec49a92aa806ed8b04a402363eaad321e6eead5d2ad4fb
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-core/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-core" \
-    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r7" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/harbor-core/bin:/opt/bitnami/common/bin:$PATH"
 
