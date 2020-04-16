@@ -43,7 +43,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`8-debian-10`, `8.2.0-debian-10-r29`, `8`, `8.2.0` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.2.0-debian-10-r29/8/debian-10/Dockerfile)
+* [`8-debian-10`, `8.2.0-debian-10-r30`, `8`, `8.2.0` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.2.0-debian-10-r30/8/debian-10/Dockerfile)
 * [`7-debian-10`, `7.9.3-debian-10-r17`, `7`, `7.9.3`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.3-debian-10-r17/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
