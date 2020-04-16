@@ -13,14 +13,14 @@ RUN install_packages ca-certificates curl ldap-utils libaudit1 libbsd0 libc6 lib
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-1" --checksum 07c4678654b01811f22b5bb65a8d6f8e253abd4524ebb3b78c7d3df042cf23bd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.12.0-2" --checksum d410e1b0444e7ca41bc12ef379e435ac4c44263a51eac8f3d455115b5084fd00
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pgpool" "4.1.1-1" --checksum 1a497a56b8154f1b6ec77670eacb255653a3091be62b07df502a80531c07a02d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.11.0-3" --checksum c18bb8bcc95aa2494793ed5a506c4d03acc82c8c60ad061d5702e0b4048f0cb1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/pgpool/postunpack.sh
 ENV BITNAMI_APP_NAME="pgpool" \
-    BITNAMI_IMAGE_VERSION="4.1.1-debian-10-r57" \
+    BITNAMI_IMAGE_VERSION="4.1.1-debian-10-r58" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/pgpool/bin:/opt/bitnami/common/bin:$PATH"
 
