@@ -27,7 +27,7 @@ user_exists() {
     getent passwd "$uid" >/dev/null 2>&1
 }
 
-if ! am_i_root && ! user_exists "$(id -u)" && [[ -e "/usr/lib/libnss_wrapper.so" ]]; then
+if ! am_i_root && ! user_exists "$(id -u)" && [[ -e "/opt/bitnami/common/lib/libnss_wrapper.so" ]]; then
     echo "jenkins:x:$(id -u):$(id -g):Jenkins:$JENKINS_HOME:/bin/false" > "$NSS_WRAPPER_PASSWD"
     echo "jenkins:x:$(id -g):" > "$NSS_WRAPPER_GROUP"
 else
