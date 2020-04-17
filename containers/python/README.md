@@ -29,24 +29,12 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/python?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Python in Kubernetes?
-
-You can find an example for testing in the file `test.yaml`. To launch this sample file run:
-
-```console
-$ kubectl apply -f test.yaml
-```
-
-> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
->
-> - image: 'your-registry/image-name:your-version'
-
 # Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.8-debian-10-prod`, `3.8.2-debian-10-r52-prod`, `3.8-prod`, `3.8.2-prod` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.2-debian-10-r52-prod/3.8-prod/debian-10/Dockerfile)
+* [`3.8-debian-10-prod`, `3.8.2-debian-10-r53-prod`, `3.8-prod`, `3.8.2-prod` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.2-debian-10-r53-prod/3.8-prod/debian-10/Dockerfile)
 * [`3.8-debian-10`, `3.8.2-debian-10-r52`, `3.8`, `3.8.2` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.2-debian-10-r52/3.8/debian-10/Dockerfile)
 * [`3.7-debian-10-prod`, `3.7.7-debian-10-r39-prod`, `3.7-prod`, `3.7.7-prod`, `latest-prod` (3.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.7-debian-10-r39-prod/3.7-prod/debian-10/Dockerfile)
 * [`3.7-debian-10`, `3.7.7-debian-10-r39`, `3.7`, `3.7.7`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.7-debian-10-r39/3.7/debian-10/Dockerfile)
