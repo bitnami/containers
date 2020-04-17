@@ -58,7 +58,7 @@ elasticsearch_conf_set() {
     else
         for i in "${!values[@]}"; do
             if [[ -n "${values[$i]}" ]]; then
-                elasticsearch_conf_write "$key" "${values[$i]}"
+                elasticsearch_conf_write "${key}[+]" "${values[$i]}"
             fi
         done
     fi
