@@ -27,24 +27,12 @@ $ docker run --name grafana bitnami/grafana:latest
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
 
-# How to deploy Grafana in Kubernetes?
-
-You can find an example for testing in the file `test.yaml`. To launch this sample file run:
-
-```console
-$ kubectl apply -f test.yaml
-```
-
-> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
->
-> - image: 'your-registry/image-name:your-version'
-
 # Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`6-debian-10`, `6.7.2-debian-10-r13`, `6`, `6.7.2`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.7.2-debian-10-r13/6/debian-10/Dockerfile)
+* [`6-debian-10`, `6.7.2-debian-10-r14`, `6`, `6.7.2`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.7.2-debian-10-r14/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
