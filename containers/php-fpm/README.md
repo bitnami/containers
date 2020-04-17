@@ -29,18 +29,6 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/php-fpm?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy PHP-FPM in Kubernetes?
-
-You can find an example for testing in the file `test.yaml`. To launch this sample file run:
-
-```console
-$ kubectl apply -f test.yaml
-```
-
-> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
->
-> - image: 'your-registry/image-name:your-version'
-
 # Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
@@ -48,8 +36,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`7.4-debian-10-prod`, `7.4.5-debian-10-r0-prod`, `7.4-prod`, `7.4.5-prod` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.5-debian-10-r0-prod/7.4-prod/debian-10/Dockerfile)
 * [`7.4-debian-10`, `7.4.5-debian-10-r0`, `7.4`, `7.4.5` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.5-debian-10-r0/7.4/debian-10/Dockerfile)
+* [`7.3-debian-10`, `7.3.17-debian-10-r1`, `7.3`, `7.3.17`, `latest` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.17-debian-10-r1/7.3/debian-10/Dockerfile)
 * [`7.3-debian-10-prod`, `7.3.17-debian-10-r0-prod`, `7.3-prod`, `7.3.17-prod`, `latest-prod` (7.3-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.17-debian-10-r0-prod/7.3-prod/debian-10/Dockerfile)
-* [`7.3-debian-10`, `7.3.17-debian-10-r0`, `7.3`, `7.3.17`, `latest` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.17-debian-10-r0/7.3/debian-10/Dockerfile)
 * [`7.2-debian-10-prod`, `7.2.29-debian-10-r29-prod`, `7.2-prod`, `7.2.29-prod` (7.2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.29-debian-10-r29-prod/7.2-prod/debian-10/Dockerfile)
 * [`7.2-debian-10`, `7.2.29-debian-10-r29`, `7.2`, `7.2.29` (7.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.29-debian-10-r29/7.2/debian-10/Dockerfile)
 
