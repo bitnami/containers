@@ -27,24 +27,12 @@ $ docker run --name fluentd-exporter bitnami/fluentd-exporter:latest
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
 
-# How to deploy Fluentd exporter in Kubernetes?
-
-You can find an example for testing in the file `test.yaml`. To launch this sample file run:
-
-```console
-$ kubectl apply -f test.yaml
-```
-
-> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
->
-> - image: 'your-registry/image-name:your-version'
-
 # Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.2.0-debian-10-r79`, `0`, `0.2.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-10-r79/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.2.0-debian-10-r80`, `0`, `0.2.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-10-r80/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd-exporter).
 
