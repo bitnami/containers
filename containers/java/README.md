@@ -25,18 +25,6 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/java?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Java in Kubernetes?
-
-You can find an example for testing in the file `test.yaml`. To launch this sample file run:
-
-```console
-$ kubectl apply -f test.yaml
-```
-
-> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
->
-> - image: 'your-registry/image-name:your-version'
-
 # Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
@@ -48,8 +36,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 - [`11`, `11.0.7-debian-10-r0` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.7-debian-10-r0/11/debian-10/Dockerfile), [`11-prod`, `11.0.7-debian-10-r0-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.7-debian-10-r0/11/debian-10/prod/Dockerfile)
 - [`10`, `10.0.2-debian-10-r0` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/10.0.2-debian-10-r0/10/debian-10/Dockerfile), [`10-prod`, `10.0.2-debian-10-r0-prod` (10/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/10.0.2-debian-10-r0/10/debian-10/prod/Dockerfile)
 - [`1.9`, `1.9.181-debian-10-r0` (1.9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.9.181-debian-10-r0/1.9/debian-10/Dockerfile), [`1.9-prod`, `1.9.181-debian-10-r0-prod` (1.9/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.9.181-debian-10-r0/1.9/debian-10/prod/Dockerfile)
+- [`1.8`, `1.8.242-debian-10-r80-prod` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.242-debian-10-r80-prod/1.8/debian-10/Dockerfile), [`1.8-prod`, `1.8.242-debian-10-r80-prod-prod` (1.8/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.242-debian-10-r80-prod/1.8/debian-10/prod/Dockerfile)
 - [`1.8`, `1.8.242-debian-10-r80` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.242-debian-10-r80/1.8/debian-10/Dockerfile), [`1.8-prod`, `1.8.242-debian-10-r80-prod` (1.8/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.242-debian-10-r80/1.8/debian-10/prod/Dockerfile)
-- [`1.8`, `1.8.242-debian-10-r79-prod` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.242-debian-10-r79-prod/1.8/debian-10/Dockerfile), [`1.8-prod`, `1.8.242-debian-10-r79-prod-prod` (1.8/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.242-debian-10-r79-prod/1.8/debian-10/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
 
