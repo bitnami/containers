@@ -29,18 +29,6 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/ruby?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Ruby in Kubernetes?
-
-You can find an example for testing in the file `test.yaml`. To launch this sample file run:
-
-```console
-$ kubectl apply -f test.yaml
-```
-
-> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
->
-> - image: 'your-registry/image-name:your-version'
-
 # Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
@@ -48,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`2.7-debian-10-prod`, `2.7.1-debian-10-r17-prod`, `2.7-prod`, `2.7.1-prod`, `latest-prod` (2.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.1-debian-10-r17-prod/2.7-prod/debian-10/Dockerfile)
 * [`2.7-debian-10`, `2.7.1-debian-10-r17`, `2.7`, `2.7.1`, `latest` (2.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.1-debian-10-r17/2.7/debian-10/Dockerfile)
-* [`2.6-debian-10-prod`, `2.6.6-debian-10-r16-prod`, `2.6-prod`, `2.6.6-prod` (2.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.6-debian-10-r16-prod/2.6-prod/debian-10/Dockerfile)
+* [`2.6-debian-10-prod`, `2.6.6-debian-10-r17-prod`, `2.6-prod`, `2.6.6-prod` (2.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.6-debian-10-r17-prod/2.6-prod/debian-10/Dockerfile)
 * [`2.6-debian-10`, `2.6.6-debian-10-r16`, `2.6`, `2.6.6` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.6-debian-10-r16/2.6/debian-10/Dockerfile)
 * [`2.5-debian-10`, `2.5.8-debian-10-r18`, `2.5`, `2.5.8` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-debian-10-r18/2.5/debian-10/Dockerfile)
 * [`2.5-debian-10-prod`, `2.5.8-debian-10-r16-prod`, `2.5-prod`, `2.5.8-prod` (2.5-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-debian-10-r16-prod/2.5-prod/debian-10/Dockerfile)
@@ -119,7 +107,7 @@ $ docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
   sh -c "bundle install && ruby script.rb"
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-ruby/blob/master/docker-compose.yml) file present in this repository: 
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-ruby/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 ruby:
