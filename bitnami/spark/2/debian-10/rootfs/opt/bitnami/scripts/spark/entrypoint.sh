@@ -10,7 +10,6 @@ set -o pipefail
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/libspark.sh
-. /opt/bitnami/scripts/spark/libnss_env.sh
 
 # Load Spark environment variables
 eval "$(spark_env)"
