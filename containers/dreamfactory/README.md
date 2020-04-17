@@ -26,24 +26,12 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/dreamfactory?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy DreamFactory in Kubernetes?
-
-You can find an example for testing in the file `test.yaml`. To launch this sample file run:
-
-```console
-$ kubectl apply -f test.yaml
-```
-
-> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
->
-> - image: 'your-registry/image-name:your-version'
-
 # Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.1.1-debian-10-r3`, `4`, `4.1.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.1.1-debian-10-r3/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.1.1-debian-10-r4`, `4`, `4.1.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.1.1-debian-10-r4/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
@@ -338,7 +326,7 @@ RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt
 
 ## Modify the ports used by Apache by default
 # It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181 
+ENV APACHE_HTTP_PORT_NUMBER=8181
 ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
@@ -398,8 +386,8 @@ volumes:
 
 - This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 - The Apache configuration volume (`/bitnami/apache`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the Apache configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom Apache configuration files are advised to mount a volume for the configuration at `/opt/bitnami/apache/conf`, or mount specific configuration files individually.
-- The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually. 
-- Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`. 
+- The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
+- Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
 
 # Contributing
 
