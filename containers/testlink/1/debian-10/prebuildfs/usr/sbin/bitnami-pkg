@@ -177,7 +177,7 @@ fi
 # in overlayfs when using tar. Install bsdtar in the container image
 # to workaround it. As the overhead is too big (~40 MB), it is not added by
 # default. Source: https://github.com/coreos/bugs/issues/1095
-if which bsdtar > /dev/null; then
+if which bsdtar >/dev/null 2>&1; then
   bsdtar -xf $PACKAGE.tar.gz
 else
   tar xzf $PACKAGE.tar.gz
@@ -187,8 +187,8 @@ case "$1" in
   install) info "Installing $PACKAGE" ;;
   unpack) info "Unpacking $PACKAGE" ;;
 esac
-nami $1 $PACKAGE $PACKAGE_ARGS
 
+nami $1 $PACKAGE $PACKAGE_ARGS
 rm -rf $INSTALL_ROOT
 
 if [ "$BITNAMI_PKG_EXTRA_DIRS" ]; then
