@@ -8,7 +8,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl dirmngr ghostscript gnupg imagemagick libbsd0 libbz2-1.0 libc6 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libncursesw6 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 procps sudo unzip zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
-RUN bitnami-pkg unpack php-7.3.16-1 --checksum ad9826aa595083782b953eec93ae74ac924db879c24ac9999965696ace7b3362
+RUN bitnami-pkg unpack php-7.3.17-0 --checksum 68997e90b2a554e9d25eb40b46f6cf9f81a6103d50ad02751fd1d469364f526c
 RUN bitnami-pkg install node-12.16.2-0 --checksum 714705c0b6ad2dd97a887b78c384e3b67e8e9517be3f3629dec3b537f5e8ca38
 RUN bitnami-pkg install tini-0.18.0-3 --checksum 1e9b72b6636c6a48397a18df2363b44461e87ad7f892c179a9115c7525ed9327
 RUN bitnami-pkg install laravel-7.6.0-0 --checksum 69ae7057ba5bf0ed60636c3238905cc1acc9a29cc6c41cb730cb03ed54b54201
@@ -19,7 +19,7 @@ RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="laravel" \
-    BITNAMI_IMAGE_VERSION="7.6.0-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="7.6.0-debian-10-r2" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules"
 
 EXPOSE 3000
