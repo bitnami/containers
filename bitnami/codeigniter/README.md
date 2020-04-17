@@ -31,24 +31,12 @@ The Bitnami CodeIgniter Development Container has been carefully engineered to p
 
 [Learn more about Bitnami Development Containers.](https://docs.bitnami.com/containers/how-to/use-bitnami-development-containers/)
 
-# How to deploy CodeIgniter Development in Kubernetes?
-
-You can find an example for testing in the file `test.yaml`. To launch this sample file run:
-
-```console
-$ kubectl apply -f test.yaml
-```
-
-> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
->
-> - image: 'your-registry/image-name:your-version'
-
 # Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.1.11-debian-10-r74`, `3`, `3.1.11`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.11-debian-10-r74/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.1.11-debian-10-r75`, `3`, `3.1.11`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.11-debian-10-r75/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codeigniter GitHub repo](https://github.com/bitnami/bitnami-docker-codeigniter).
 
