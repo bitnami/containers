@@ -29,24 +29,12 @@ $ docker run --name oauth2-proxy bitnami/oauth2-proxy:latest
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
 
-# How to deploy OAuth2 in Kubernetes?
-
-You can find an example for testing in the file `test.yaml`. To launch this sample file run:
-
-```console
-$ kubectl apply -f test.yaml
-```
-
-> NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
->
-> - image: 'your-registry/image-name:your-version'
-
 # Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`5-debian-10`, `5.1.0-debian-10-r19`, `5`, `5.1.0`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/5.1.0-debian-10-r19/5/debian-10/Dockerfile)
+* [`5-debian-10`, `5.1.0-debian-10-r20`, `5`, `5.1.0`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/5.1.0-debian-10-r20/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
 
