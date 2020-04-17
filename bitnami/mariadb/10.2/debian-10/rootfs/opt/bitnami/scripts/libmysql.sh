@@ -588,8 +588,9 @@ mysql_execute_print_output() {
     read -r -a opts <<<"${4:-}"
 
     # Process mysql CLI arguments
-    local args=("--defaults-file=$DB_CONF_DIR/my.cnf" "-N" "-u" "$user" "$db" "${opts[@]}")
+    local args=("--defaults-file=$DB_CONF_DIR/my.cnf" "-N" "-u" "$user" "$db")
     [[ -n "$pass" ]] && args+=("-p$pass")
+    [[ -n "${opts[*]:-}" ]] && args+=("${opts[@]:-}")
 
     # Obtain the command specified via stdin
     local mysql_cmd=""
