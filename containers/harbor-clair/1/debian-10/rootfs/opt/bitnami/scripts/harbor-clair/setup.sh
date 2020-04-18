@@ -31,10 +31,9 @@ harbor_clair_validate() {
         exit 1
     fi
 
-    string="$(grep -Po "source:.*" /etc/clair/config.yaml)"
+    string="$(grep -oE "source:.*" /etc/clair/config.yaml)"
     regex="source: .*\:\/\/(.*):(.*)@(.*):(.*)\/"
-    if [[ $string =~ $regex ]]
-    then
+    if [[ $string =~ $regex ]]; then
         postgresql_host="${BASH_REMATCH[3]}"
         postgresql_port="${BASH_REMATCH[4]}"
     else
