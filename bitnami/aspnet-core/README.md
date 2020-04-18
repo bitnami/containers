@@ -1,6 +1,6 @@
 # What is ASP.NET?
 
-> ASP.NET is an open-source framework for web application development created by Microsoft.	
+> ASP.NET is an open-source framework for web application development created by Microsoft.
 
 [https://dotnet.microsoft.com/apps/aspnet](https://dotnet.microsoft.com/apps/aspnet)
 
@@ -28,24 +28,12 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/aspnet-core?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy aspnet-core in Kubernetes?
-
-You can find an example for testing aspnet-core in Kubernetes with the `test.yaml` file. To launch it, run the command:
-
-```console
-$ kubectl apply -f test.yaml
-```
-
-> NOTE: If you are pulling from a private container registry, replace the image name with the full URL to the docker image, e.g.:
->
->     - image: 'your-registry/image-name:your-version'
-
 # Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.1-debian-10`, `3.1.3-debian-10-r11`, `3.1`, `3.1.3`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.3-debian-10-r11/3.1/debian-10/Dockerfile)
+* [`3.1-debian-10`, `3.1.3-debian-10-r12`, `3.1`, `3.1.3`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.3-debian-10-r12/3.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aspnet-core GitHub repo](https://github.com/bitnami/bitnami-docker-aspnet-core).
 
