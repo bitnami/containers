@@ -4,7 +4,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     BITNAMI_PKG_EXTRA_DIRS="/opt/bitnami" \
     HOME="/" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/git/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:$PATH"
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/git/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:/opt/bitnami/common/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -14,7 +14,7 @@ RUN /build/install-nami.sh
 RUN bitnami-pkg install java-1.8.242-0 --checksum 3a70f3d1c3cd9bc6ec581b2a10373a2b323c0b9af40402ce8d19aeb0b3d02400
 RUN bitnami-pkg install git-2.26.1-0 --checksum c566a9a812a041b3c8d2fb455b352c47f07e826709d7641ddf2f630e6986e9ff
 RUN bitnami-pkg install tini-0.18.0-3 --checksum 1e9b72b6636c6a48397a18df2363b44461e87ad7f892c179a9115c7525ed9327
-RUN bitnami-pkg unpack jenkins-2.222.1-1 --checksum 319f5f5736bfd9e4c2edba33d6fca36a264c8c471632973c31657db936cf00c4
+RUN bitnami-pkg unpack jenkins-2.222.1-3 --checksum bf337412c5ce10501bc5168dc5c5b609c58e00fde357a95532d6d19b389e9534
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -23,7 +23,7 @@ RUN mkdir -p /usr/share/jenkins/ref
 COPY rootfs /
 RUN ln -sf /install-plugins.sh /usr/local/bin/install-plugins.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.222.1-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="2.222.1-debian-10-r13" \
     DISABLE_JENKINS_INITIALIZATION="no" \
     JAVA_OPTS="" \
     JENKINS_HOME="/opt/bitnami/jenkins/jenkins_home" \
