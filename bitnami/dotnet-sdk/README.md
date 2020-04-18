@@ -28,24 +28,12 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/dotnet-sdk?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy .NET SDK in Kubernetes?
-
-You can find an example for testing .NET SDK in Kubernetes with the `test.yaml` file. To launch it, run the command:
-
-```console
-$ kubectl apply -f test.yaml
-```
-
-> NOTE: If you are pulling from a private container registry, replace the image name with the full URL to the docker image, e.g.:
->
->     - image: 'your-registry/image-name:your-version'
-
 # Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`3.1-debian-10`, `3.1.201-debian-10-r10`, `3.1`, `3.1.201`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/3.1.201-debian-10-r10/3.1/debian-10/Dockerfile)
+* [`3.1-debian-10`, `3.1.201-debian-10-r11`, `3.1`, `3.1.201`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/3.1.201-debian-10-r11/3.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dotnet-sdk GitHub repo](https://github.com/bitnami/bitnami-docker-dotnet-sdk).
 
