@@ -34,8 +34,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
+* [`2.7-debian-10`, `2.7.1-debian-10-r21`, `2.7`, `2.7.1`, `latest` (2.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.1-debian-10-r21/2.7/debian-10/Dockerfile)
 * [`2.7-debian-10-prod`, `2.7.1-debian-10-r20-prod`, `2.7-prod`, `2.7.1-prod`, `latest-prod` (2.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.1-debian-10-r20-prod/2.7-prod/debian-10/Dockerfile)
-* [`2.7-debian-10`, `2.7.1-debian-10-r20`, `2.7`, `2.7.1`, `latest` (2.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.1-debian-10-r20/2.7/debian-10/Dockerfile)
 * [`2.6-debian-10-prod`, `2.6.6-debian-10-r20-prod`, `2.6-prod`, `2.6.6-prod` (2.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.6-debian-10-r20-prod/2.6-prod/debian-10/Dockerfile)
 * [`2.6-debian-10`, `2.6.6-debian-10-r20`, `2.6`, `2.6.6` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.6-debian-10-r20/2.6/debian-10/Dockerfile)
 * [`2.5-debian-10`, `2.5.8-debian-10-r22`, `2.5`, `2.5.8` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-debian-10-r22/2.5/debian-10/Dockerfile)
