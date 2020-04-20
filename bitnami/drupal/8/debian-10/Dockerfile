@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack apache-2.4.43-1 --checksum 35ad223096be455ce5d11b6006db6d
 RUN bitnami-pkg unpack php-7.3.17-0 --checksum 68997e90b2a554e9d25eb40b46f6cf9f81a6103d50ad02751fd1d469364f526c
 RUN bitnami-pkg unpack mysql-client-10.3.22-1 --checksum e9fa94f574c87d15f0b6aba7cff1c06f70c0e69c1c442378c9961fc148fa68ef
 RUN bitnami-pkg install libphp-7.3.17-0 --checksum 6ce3a2e1ac032fa2de1205c5ad14bfa0f3288c23d0c6b960e291d2eae94d363b
-RUN bitnami-pkg install tini-0.18.0-3 --checksum 1e9b72b6636c6a48397a18df2363b44461e87ad7f892c179a9115c7525ed9327
+RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN bitnami-pkg unpack drupal-8.8.5-1 --checksum 4ba537437409c46d28696a012abbf77b3b9e81ee6a5514d062f1567514ad3917
 RUN apt-get update && apt-get upgrade -y && \
@@ -26,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.8.5-debian-10-r17" \
+    BITNAMI_IMAGE_VERSION="8.8.5-debian-10-r18" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
