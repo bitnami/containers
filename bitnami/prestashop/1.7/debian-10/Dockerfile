@@ -12,8 +12,8 @@ RUN bitnami-pkg unpack apache-2.4.43-1 --checksum 35ad223096be455ce5d11b6006db6d
 RUN bitnami-pkg unpack php-7.2.30-0 --checksum 0bbde21ee9559352fe82b8dc49efc54397cc4370decd80a7b58f72213a50c759
 RUN bitnami-pkg unpack mysql-client-10.1.44-1 --checksum 91d0138c4d5ddb577ef578b6da8c04b38c7a936cbf4602a9c33dd73aa408ef8a
 RUN bitnami-pkg install libphp-7.2.30-0 --checksum d5f208a1628abda10871e750a9a9111837e4d9a86222336123ca23bb77c12c72
-RUN bitnami-pkg install tini-0.18.0-3 --checksum 1e9b72b6636c6a48397a18df2363b44461e87ad7f892c179a9115c7525ed9327
-RUN bitnami-pkg unpack prestashop-1.7.6-4-1 --checksum 4052e91df14c63415151accb2eeeab1a0ba4b04161bfde5059c09f2bd62e6a0b
+RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
+RUN bitnami-pkg unpack prestashop-1.7.6-5-0 --checksum bf9e88eec3933ac77bf2dbb6dbdec0167d84a4f7e8c7fb6c75c92d874cb67ff9
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -26,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-4-debian-10-r45" \
+    BITNAMI_IMAGE_VERSION="1.7.6-5-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
