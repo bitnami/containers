@@ -71,6 +71,7 @@ export CASSANDRA_PASSWORD_SEEDER="${CASSANDRA_PASSWORD_SEEDER:-no}"
 export CASSANDRA_SEEDS="${CASSANDRA_SEEDS:-$CASSANDRA_HOST}"
 export CASSANDRA_PEERS="${CASSANDRA_PEERS:-$CASSANDRA_SEEDS}"
 export CASSANDRA_RACK="${CASSANDRA_RACK:-rack1}"
+export CASSANDRA_BROADCAST_ADDRESS="${CASSANDRA_BROADCAST_ADDRESS:-}"
 
 # Startup CQL and init-db settings
 export CASSANDRA_STARTUP_CQL="${CASSANDRA_STARTUP_CQL:-}"
@@ -462,6 +463,10 @@ cassandra_setup_cluster() {
         cassandra_yaml_set "keystore_password" "$CASSANDRA_KEYSTORE_PASSWORD"
         cassandra_yaml_set "truststore" "$CASSANDRA_TRUSTSTORE_LOCATION"
         cassandra_yaml_set "truststore_password" "$CASSANDRA_TRUSTSTORE_PASSWORD"
+
+        if [[ -n "$CASSANDRA_BROADCAST_ADDRESS" ]]; then
+            cassandra_yaml_set "broadcast_address" "$CASSANDRA_BROADCAST_ADDRESS"
+        fi
 
         cassandra_config="$(sed -E "/client_encryption_options:.*/ {N; s/client_encryption_options:[^\n]*\n\s{4}enabled:.*/client_encryption_options:\n    enabled: $CASSANDRA_CLIENT_ENCRYPTION/g}" "$CASSANDRA_CONF_FILE")"
         echo "$cassandra_config" > "$CASSANDRA_CONF_FILE"
