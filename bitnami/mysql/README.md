@@ -37,14 +37,14 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
 # Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8.0-debian-10`, `8.0.19-debian-10-r91`, `8.0`, `8.0.19`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.19-debian-10-r91/8.0/debian-10/Dockerfile)
+* [`8.0-debian-10`, `8.0.19-debian-10-r92`, `8.0`, `8.0.19`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.19-debian-10-r92/8.0/debian-10/Dockerfile)
 * [`5.7-debian-10`, `5.7.29-debian-10-r85`, `5.7`, `5.7.29` (5.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.29-debian-10-r85/5.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
