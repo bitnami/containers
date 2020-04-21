@@ -32,10 +32,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.0.3-2-debian-10-r65`, `3`, `3.0.3-2`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-2-debian-10-r65/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.0.3-2-debian-10-r66`, `3`, `3.0.3-2`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-2-debian-10-r66/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/opencart GitHub repo](https://github.com/bitnami/bitnami-docker-opencart).
 
