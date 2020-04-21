@@ -28,28 +28,16 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/kong?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Kong in Kubernetes?
-
-You can find an example for testing Kong in Kubernetes with the `test.yaml` file. To launch it, run the command:
-
-```console
-$ kubectl apply -f test.yaml
-```
-
-> NOTE: If you are pulling from a private container registry, replace the image name with the full URL to the docker image, e.g.:
->
->     - image: 'your-registry/image-name:your-version'
-
 # Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
 # Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.0.3-debian-10-r1`, `2`, `2.0.3`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong/blob/2.0.3-debian-10-r1/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.0.3-debian-10-r2`, `2`, `2.0.3`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong/blob/2.0.3-debian-10-r2/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kong GitHub repo](https://github.com/bitnami/bitnami-docker-kong).
 
