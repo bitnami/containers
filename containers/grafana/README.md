@@ -1,4 +1,3 @@
-
 # What is Grafana?
 
 Grafana is an open source, feature rich metrics dashboard and graph editor for Graphite, Elasticsearch, OpenTSDB, Prometheus and InfluxDB.
@@ -20,19 +19,18 @@ $ docker run --name grafana bitnami/grafana:latest
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-
 > This [CVE scan report](https://quay.io/repository/bitnami/grafana?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
 # Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6-debian-10`, `6.7.2-debian-10-r17`, `6`, `6.7.2`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.7.2-debian-10-r17/6/debian-10/Dockerfile)
+* [`6-debian-10`, `6.7.2-debian-10-r18`, `6`, `6.7.2`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.7.2-debian-10-r18/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -140,6 +138,8 @@ $ docker run -d --name grafana -p 3000:3000 \
     bitnami/grafana:latest
 ```
 
+Note: the environment variable `GF_INSTALL_PLUGINS` is set by default to `grafana-image-renderer`. To run this image on K8s distros with IPv6 disabled (check the plugin's [known issues notes](https://github.com/grafana/grafana-image-renderer/#known-issue-having-ipv6-disabled) for more information), you need to overwrite the environment variable default value to avoid installing this plugin.
+
 # Logging
 
 The Bitnami Grafana Docker image sends the container logs to the `stdout`. To view the logs:
@@ -191,6 +191,12 @@ Re-create your container from the new image, [restoring your backup](#restoring-
 ```console
 $ docker run --name grafana bitnami/grafana:latest
 ```
+
+# Notable Changes
+
+## 6.7.2-debian-10-r18
+
+- Grafana doesn't ship the [`grafana-image-renderer` plugin](https://github.com/grafana/grafana-image-renderer/) by default anymore since it's not compatible with K8s distros with IPv6 disable. Instead, the `GF_INSTALL_PLUGINS` environment variable is set by default including this plugin so it's installed during the container's initialization, users can easily avoid it by overwriting the environment variable.
 
 # Contributing
 
