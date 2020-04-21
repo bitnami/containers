@@ -13,7 +13,7 @@ RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf3
 RUN bitnami-pkg unpack php-7.3.17-0 --checksum 68997e90b2a554e9d25eb40b46f6cf9f81a6103d50ad02751fd1d469364f526c
 RUN bitnami-pkg unpack mysql-client-10.1.44-1 --checksum 91d0138c4d5ddb577ef578b6da8c04b38c7a936cbf4602a9c33dd73aa408ef8a
 RUN bitnami-pkg install libphp-7.3.17-0 --checksum 6ce3a2e1ac032fa2de1205c5ad14bfa0f3288c23d0c6b960e291d2eae94d363b
-RUN bitnami-pkg unpack joomla-3.9.16-1 --checksum c983992f0b6a2fc4e28e36238544c596bb9a9697049c7aad60ad02c3ff2a2fc4
+RUN bitnami-pkg unpack joomla-3.9.17-0 --checksum b4dfdf5840047a4f89e30e3baec4a4468dce35286ec123435d14c96182b65dba
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -26,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.9.16-debian-10-r39" \
+    BITNAMI_IMAGE_VERSION="3.9.17-debian-10-r0" \
     JOOMLA_DATABASE_NAME="bitnami_joomla" \
     JOOMLA_DATABASE_PASSWORD="" \
     JOOMLA_DATABASE_USER="bn_joomla" \
