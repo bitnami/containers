@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/influxdb/postunpack.sh
 ENV BITNAMI_APP_NAME="influxdb" \
-    BITNAMI_IMAGE_VERSION="1.8.0-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="1.8.0-debian-10-r9" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/influxdb/bin:/opt/bitnami/common/bin:$PATH"
 
 VOLUME [ "/bitnami/influxdb" ]
