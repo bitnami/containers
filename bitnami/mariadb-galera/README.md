@@ -38,16 +38,16 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
 # Supported tags and respective `Dockerfile` links
 
 > NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10.4-debian-10`, `10.4.12-debian-10-r83`, `10.4`, `10.4.12` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.12-debian-10-r83/10.4/debian-10/Dockerfile)
+* [`10.4-debian-10`, `10.4.12-debian-10-r84`, `10.4`, `10.4.12` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.12-debian-10-r84/10.4/debian-10/Dockerfile)
 * [`10.3-debian-10`, `10.3.22-debian-10-r82`, `10.3`, `10.3.22`, `latest` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.22-debian-10-r82/10.3/debian-10/Dockerfile)
 * [`10.2-debian-10`, `10.2.31-debian-10-r81`, `10.2`, `10.2.31` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.31-debian-10-r81/10.2/debian-10/Dockerfile)
 * [`10.1-debian-10`, `10.1.44-debian-10-r82`, `10.1`, `10.1.44` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.44-debian-10-r82/10.1/debian-10/Dockerfile)
