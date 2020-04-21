@@ -42,14 +42,14 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
 # Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.6.0-debian-10-r56`, `3`, `3.6.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.0-debian-10-r56/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.6.0-debian-10-r57`, `3`, `3.6.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.0-debian-10-r57/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
