@@ -13,7 +13,7 @@ set -o pipefail
 . /opt/bitnami/scripts/liblog.sh
 
 # Load Apache environment
-eval "$(apache_env)"
+. /opt/bitnami/scripts/apache-env.sh
 
 print_welcome_page
 

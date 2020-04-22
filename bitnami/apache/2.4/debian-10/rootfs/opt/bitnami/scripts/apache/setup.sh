@@ -11,7 +11,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libapache.sh
 
 # Load Apache environment
-eval "$(apache_env)"
+. /opt/bitnami/scripts/apache-env.sh
 
 # Ensure apache environment variables are valid
 apache_validate
