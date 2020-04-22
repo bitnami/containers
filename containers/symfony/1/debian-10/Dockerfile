@@ -1,7 +1,7 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/symfony/bin:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:$PATH"
+ENV PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/symfony/bin:/opt/bitnami/nami/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="symfony" \
-    BITNAMI_IMAGE_VERSION="1.5.11-debian-10-r79" \
+    BITNAMI_IMAGE_VERSION="1.5.11-debian-10-r80" \
     MARIADB_DATABASE="bitnami_myapp" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
