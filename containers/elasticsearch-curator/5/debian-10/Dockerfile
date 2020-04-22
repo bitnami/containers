@@ -3,7 +3,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/elasticsearch-curator/bin:/opt/bitnami/nami/bin:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/python/bin:/opt/bitnami/elasticsearch-curator/bin:/opt/bitnami/nami/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -20,7 +20,7 @@ RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="elasticsearch-curator" \
-    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r85" \
+    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r86" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami"
