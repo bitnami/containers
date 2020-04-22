@@ -218,7 +218,7 @@ kafka_validate() {
     if is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
         warn "You set the environment variable ALLOW_PLAINTEXT_LISTENER=$ALLOW_PLAINTEXT_LISTENER. For safety reasons, do not use this flag in a production environment."
     fi
-    if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL_SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL_SSL ]]; then
+    if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SSL ]]; then
         # DEPRECATED. Check for jks files in old conf directory to maintain compatibility with Helm chart.
         if ([[ ! -f "$KAFKA_BASE_DIR"/conf/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_BASE_DIR"/conf/certs/kafka.truststore.jks ]]) \
             && ([[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.truststore.jks ]]); then
