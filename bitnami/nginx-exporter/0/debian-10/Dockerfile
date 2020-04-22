@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN ln -sf /opt/bitnami/nginx-exporter/bin/nginx-prometheus-exporter /usr/bin/exporter
 
 ENV BITNAMI_APP_NAME="nginx-exporter" \
-    BITNAMI_IMAGE_VERSION="0.6.0-debian-10-r63" \
+    BITNAMI_IMAGE_VERSION="0.6.0-debian-10-r64" \
     PATH="/opt/bitnami/nginx-exporter/bin:$PATH"
 
 EXPOSE 9113
