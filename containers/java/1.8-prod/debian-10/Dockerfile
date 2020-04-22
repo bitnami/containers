@@ -1,4 +1,4 @@
-FROM bitnami/java:1.8.242-debian-10-r85 as development
+FROM bitnami/java:1.8.252-debian-10-r0 as development
 
 ######
 
@@ -6,7 +6,7 @@ FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libc6 libgcc1 locales procps sudo unzip zlib1g
+RUN install_packages ca-certificates curl libc6 libgcc1 locales procps sudo unzip
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
@@ -21,7 +21,7 @@ COPY --from=development /opt/bitnami/java /opt/bitnami/java
 COPY --from=development /opt/bitnami/licenses /opt/bitnami/licenses
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="1.8.242-debian-10-r85-prod" \
+    BITNAMI_IMAGE_VERSION="1.8.252-debian-10-r0-prod" \
     JAVA_HOME="/opt/bitnami/java" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
