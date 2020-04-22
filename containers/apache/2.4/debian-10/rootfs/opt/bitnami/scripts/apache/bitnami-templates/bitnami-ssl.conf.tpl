@@ -9,7 +9,7 @@ SSLProtocol all -SSLv2 -SSLv3
 SSLHonorCipherOrder on
 SSLCipherSuite "EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !EDH !RC4"
 SSLPassPhraseDialog  builtin
-SSLSessionCache "shmcb:{{APACHE_LOG_DIR}}/ssl_scache(512000)"
+SSLSessionCache "shmcb:{{APACHE_LOGS_DIR}}/ssl_scache(512000)"
 SSLSessionCacheTimeout  300
 
 <VirtualHost _default_:443>

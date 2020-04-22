@@ -9,43 +9,7 @@
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
-
-########################
-# Load global variables used on Apache configuration.
-# Globals:
-#   APACHE_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-apache_env() {
-    cat <<"EOF"
-# Bitnami debug
-export MODULE=apache
-export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
-
-# Paths
-export APACHE_BASE_DIR="/opt/bitnami/apache"
-export APACHE_BIN_DIR="${APACHE_BASE_DIR}/bin"
-export APACHE_CONF_DIR="${APACHE_BASE_DIR}/conf"
-export APACHE_HTDOCS_DIR="${APACHE_BASE_DIR}/htdocs"
-export APACHE_LOG_DIR="${APACHE_BASE_DIR}/logs"
-export APACHE_TMP_DIR="${APACHE_BASE_DIR}/tmp"
-export APACHE_VHOSTS_DIR="${APACHE_CONF_DIR}/vhosts"
-export APACHE_HTACCESS_DIR="${APACHE_VHOSTS_DIR}/htaccess"
-export APACHE_CONF_FILE="${APACHE_CONF_DIR}/httpd.conf"
-export APACHE_PID_FILE="${APACHE_TMP_DIR}/httpd.pid"
-
-# Users
-export APACHE_DAEMON_USER="daemon"
-export APACHE_DAEMON_GROUP="daemon"
-
-# Configuration
-export APACHE_HTTP_PORT_NUMBER="${APACHE_HTTP_PORT_NUMBER:-}"
-export APACHE_HTTPS_PORT_NUMBER="${APACHE_HTTPS_PORT_NUMBER:-}"
-EOF
-}
+. /opt/bitnami/scripts/libservice.sh
 
 ########################
 # Validate settings in APACHE_* env vars
@@ -158,20 +122,20 @@ apache_configure_https_port() {
 apache_initialize() {
     # Copy vhosts files
     if ! is_dir_empty "/vhosts"; then
-        info "Found mounted virtual hosts in '/vhosts'. Copying them to '/opt/bitnami/apache/conf/vhosts'"
+        info "Found mounted virtual hosts in '/vhosts'. Copying them to '${APACHE_BASE_DIR}/conf/vhosts'"
         cp -Lr "/vhosts/." "${APACHE_VHOSTS_DIR}"
     fi
 
     # Mount certificate files
-    if ! is_dir_empty "/opt/bitnami/apache/certs"; then
-        warn "The directory '/opt/bitnami/apache/certs' was externally mounted. This is a legacy configuration and will be deprecated soon. Please mount certificate files at '/certs' instead. Find an example at: https://github.com/bitnami/bitnami-docker-apache#using-custom-ssl-certificates"
-        warn "Restoring certificates at '/opt/bitnami/apache/certs' to '/opt/bitnami/apache/conf/bitnami/certs'..."
-        rm -rf "/opt/bitnami/apache/conf/bitnami/certs"
-        ln -sf "/opt/bitnami/apache/certs" "/opt/bitnami/apache/conf/bitnami/certs"
+    if ! is_dir_empty "${APACHE_BASE_DIR}/certs"; then
+        warn "The directory '${APACHE_BASE_DIR}/certs' was externally mounted. This is a legacy configuration and will be deprecated soon. Please mount certificate files at '/certs' instead. Find an example at: https://github.com/bitnami/bitnami-docker-apache#using-custom-ssl-certificates"
+        warn "Restoring certificates at '${APACHE_BASE_DIR}/certs' to '${APACHE_CONF_DIR}/bitnami/certs'..."
+        rm -rf "${APACHE_CONF_DIR}/bitnami/certs"
+        ln -sf "${APACHE_BASE_DIR}/certs" "${APACHE_CONF_DIR}/bitnami/certs"
     elif ! is_dir_empty "/certs"; then
         info "Mounting certificates files from '/certs'..."
-        rm -rf "/opt/bitnami/apache/conf/bitnami/certs"
-        ln -sf "/certs" "/opt/bitnami/apache/conf/bitnami/certs"
+        rm -rf "${APACHE_CONF_DIR}/bitnami/certs"
+        ln -sf "/certs" "${APACHE_CONF_DIR}/bitnami/certs"
     fi
 
     # Mount application files
@@ -258,4 +222,50 @@ apache_enable_configuration_entry() {
         apache_configuration="$(sed -E "$expression" "$APACHE_CONF_FILE")"
         echo "$apache_configuration" > "$APACHE_CONF_FILE"
     fi
+}
+
+########################
+# Stop Apache
+# Globals:
+#   APACHE_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+apache_stop() {
+    is_apache_not_running && return
+    stop_service_using_pid "$APACHE_PID_FILE"
+}
+
+########################
+# Check if Apache is running
+# Globals:
+#   APACHE_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether Apache is running
+########################
+is_apache_running() {
+    local pid
+    pid="$(get_pid_from_file "$APACHE_PID_FILE")"
+    if [[ -n "$pid" ]]; then
+        is_service_running "$pid"
+    else
+        false
+    fi
+}
+
+########################
+# Check if Apache is running
+# Globals:
+#   APACHE_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether Apache is not running
+########################
+is_apache_not_running() {
+    ! is_apache_running
 }
