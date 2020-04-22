@@ -3,7 +3,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
-    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/php/sbin:/opt/bitnami/wp-cli/bin:/opt/bitnami/nginx/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:$PATH"
+    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/wp-cli/bin:/opt/bitnami/nginx/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -25,7 +25,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="5.4.0-debian-10-r21" \
+    BITNAMI_IMAGE_VERSION="5.4.0-debian-10-r22" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
