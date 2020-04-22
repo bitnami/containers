@@ -1,7 +1,7 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV PATH="/opt/bitnami/apache/bin:/opt/bitnami/redis/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/common/bin:/opt/bitnami/common/bin:/opt/bitnami/dreamfactory/bin:/opt/bitnami/dreamfactory/bin:/opt/bitnami/nami/bin:$PATH"
+ENV PATH="/opt/bitnami/apache/bin:/opt/bitnami/redis/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/common/bin:/opt/bitnami/dreamfactory/bin:/opt/bitnami/nami/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -28,7 +28,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="4.1.1-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="4.1.1-debian-10-r9" \
     DREAMFACTORY_DATABASE_TYPE="mariadb" \
     DREAMFACTORY_ENABLE_MARIADB_SERVICE="no" \
     DREAMFACTORY_ENABLE_MONGODB_SERVICE="yes" \
