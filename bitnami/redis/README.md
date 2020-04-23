@@ -208,7 +208,7 @@ services:
 Passing extra command-line flags to the redis service command is possible by adding them as arguments to *run.sh* script:
 
 ```console
-$ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest /opt/bitnami/scripts/run.sh --maxmemory 100mb
+$ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest /opt/bitnami/scripts/redis/run.sh --maxmemory 100mb
 ```
 
 Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
@@ -219,7 +219,7 @@ services:
   ...
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-    command: /opt/bitnami/scripts/run.sh --maxmemory 100mb
+    command: /opt/bitnami/scripts/redis/run.sh --maxmemory 100mb
   ...
 ```
 
