@@ -9,7 +9,7 @@ RUN install_packages build-essential ca-certificates curl default-libmysqlclient
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install ruby-2.6.6-0 --checksum ecadce77e40822926c69f76cc11437954dd068793548c3f0a21007f9c4fafed3
-RUN bitnami-pkg install node-10.20.1-1 --checksum b729c3436ecd996f3282d0d85e0206e3fad8cce01b91bceef65f325eb17f0b16
+RUN bitnami-pkg install node-10.20.1-2 --checksum 81f4d00c12326a2f9a26b04cbbbe78cd1a616ebbe00b6f58019bfdbb9feb89e9
 RUN bitnami-pkg install mysql-client-10.3.22-1 --checksum e9fa94f574c87d15f0b6aba7cff1c06f70c0e69c1c442378c9961fc148fa68ef
 RUN bitnami-pkg install git-2.26.2-0 --checksum 7d970d7f29ec3ab0ef4c9c699c686ab1b4d95f8371be90cbce07c26b9f4386e7
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
@@ -21,7 +21,7 @@ RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="6.0.2-2-debian-10-r35" \
+    BITNAMI_IMAGE_VERSION="6.0.2-2-debian-10-r36" \
     BUNDLE_BUILD__SASSC="--disable-march-tune-native" \
     RAILS_ENV="development"
 
