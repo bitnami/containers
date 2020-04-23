@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack php-7.2.30-0 --checksum 0bbde21ee9559352fe82b8dc49efc5439
 RUN bitnami-pkg unpack mysql-client-10.3.22-1 --checksum e9fa94f574c87d15f0b6aba7cff1c06f70c0e69c1c442378c9961fc148fa68ef
 RUN bitnami-pkg install libphp-7.2.30-0 --checksum d5f208a1628abda10871e750a9a9111837e4d9a86222336123ca23bb77c12c72
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
-RUN bitnami-pkg unpack owncloud-10.4.0-1 --checksum 9bfc13d765e7243205d33b207b77c728d5e2d44c7c54cfa9f3a006666d2d6998
+RUN bitnami-pkg unpack owncloud-10.4.1-0 --checksum 576e7cc656d03dd198c228b0097c12275ecdf5693c44bb202856a71f98adcb7e
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -26,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.4.0-debian-10-r49" \
+    BITNAMI_IMAGE_VERSION="10.4.1-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
