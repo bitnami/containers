@@ -1,7 +1,7 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/sonarqube/bin/linux-x86-64/:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:$PATH"
+ENV PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/sonarqube/bin/linux-x86-64/:/opt/bitnami/nami/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="7.9.3-debian-10-r23" \
+    BITNAMI_IMAGE_VERSION="7.9.3-debian-10-r24" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME="" \
