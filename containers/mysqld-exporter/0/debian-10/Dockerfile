@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN ln -sf /opt/bitnami/mysqld-exporter/bin/mysqld_exporter /bin/mysqld_exporter
 
 ENV BITNAMI_APP_NAME="mysqld-exporter" \
-    BITNAMI_IMAGE_VERSION="0.12.1-debian-10-r89" \
+    BITNAMI_IMAGE_VERSION="0.12.1-debian-10-r90" \
     PATH="/opt/bitnami/mysqld-exporter/bin:$PATH"
 
 EXPOSE 9104
