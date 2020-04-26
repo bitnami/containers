@@ -11,7 +11,7 @@ RUN install_packages ca-certificates curl dirmngr gnupg libaudit1 libbsd0 libbz2
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.43-1 --checksum 35ad223096be455ce5d11b6006db6d83b5080802cead122bfa5ebebc9d29da61
-RUN bitnami-pkg unpack php-7.4.5-0 --checksum 930d4e8340e150673d56d5b10807ac34f5950cdb66375f86db2ceb9e0dce7ee5
+RUN bitnami-pkg unpack php-7.4.5-1 --checksum 4b826aa38a275f5c6c2e752e9ffa5972d61da43094fa4215170475a1690685e8
 RUN bitnami-pkg install wp-cli-2.4.0-0 --checksum 8095bdd2f96a137cb3f54836ad9deb90510b0927472e532f41e1708345432230
 RUN bitnami-pkg unpack mysql-client-10.3.22-1 --checksum e9fa94f574c87d15f0b6aba7cff1c06f70c0e69c1c442378c9961fc148fa68ef
 RUN bitnami-pkg install libphp-7.4.5-0 --checksum 170ff156b2e34e67c939c2e39ee115e16f9d355b0700b49bd7c3cac996437589
@@ -29,7 +29,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.4.0-debian-10-r26" \
+    BITNAMI_IMAGE_VERSION="5.4.0-debian-10-r27" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
