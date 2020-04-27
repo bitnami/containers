@@ -16,7 +16,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN mkdir /.azure /.azcopy && chmod g+rwX /.azure /.azcopy /bin
 
 ENV BITNAMI_APP_NAME="azure-cli" \
-    BITNAMI_IMAGE_VERSION="2.4.0-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="2.4.0-debian-10-r7" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/azure-cli/bin:/opt/bitnami/azure-cli/venv/bin:$PATH"
 
 USER 1001
