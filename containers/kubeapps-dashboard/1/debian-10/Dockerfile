@@ -11,7 +11,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libc6 libgeoip1 libpcre3 libssl1.1 procps sudo unzip zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.16.1-4" --checksum f0dd271caa36d2705405bab4f8085cf2747f46b7cf78473e980bce38cedb6498
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kubeapps" "1.9.2-0" --checksum 9198453acb8ad1b35553534c97add37b855b76591f3bcc21533892dd7b259fec
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kubeapps" "1.10.0-0" --checksum 6542fe03909ed6017317d51a1dddb7d7b5f3fc2c0de3797e68c61500bb378fbb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -25,7 +25,7 @@ RUN rm -rf /app && \
     ln -sf /opt/bitnami/kubeapps /opt/bitnami/kubeapps-dashboard && \
     mv /opt/bitnami/kubeapps/build /app
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.9.2-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="1.10.0-debian-10-r0" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
