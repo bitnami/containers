@@ -1,6 +1,6 @@
-# What is InfluxDB?
+# What is InfluxDB (TM)?
 
-> [InfluxDB](https://github.com/influxdata/influxdb) is an open source time-series database. It is designed to handle large write and read loads in real-time. It is a core component of the TICK (Telegraf, InfluxDB, Chronograf, Kapacitor) stack.
+> [InfluxDB (TM)](https://github.com/influxdata/influxdb) is an open source time-series database. It is designed to handle large write and read loads in real-time. It is a core component of the TICK (Telegraf, InfluxDB (TM), Chronograf, Kapacitor) stack.
 
 # TL;DR;
 
@@ -26,9 +26,9 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/influxdb?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy InfluxDB in Kubernetes?
+# How to deploy InfluxDB (TM) in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami InfluxDB Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/influxdb).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami InfluxDB (TM) Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/influxdb).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -37,13 +37,13 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.8.0-debian-10-r17`, `1`, `1.8.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.8.0-debian-10-r17/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.8.0-debian-10-r18`, `1`, `1.8.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.8.0-debian-10-r18/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb).
 
 # Get this image
 
-The recommended way to get the Bitnami InfluxDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/influxdb).
+The recommended way to get the Bitnami InfluxDB (TM) Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/influxdb).
 
 ```console
 $ docker pull bitnami/influxdb:latest
@@ -92,7 +92,7 @@ Containers attached to the same network can communicate with each other using th
 
 ## Using the Command Line
 
-In this example, we will create a InfluxDB client instance that will connect to the server instance that is running on the same docker network as the client.
+In this example, we will create a InfluxDB (TM) client instance that will connect to the server instance that is running on the same docker network as the client.
 
 ### Step 1: Create a network
 
@@ -100,7 +100,7 @@ In this example, we will create a InfluxDB client instance that will connect to 
 $ docker network create my-network --driver bridge
 ```
 
-### Step 2: Launch the InfluxDB container within your network
+### Step 2: Launch the InfluxDB (TM) container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `my-network` network.
 
@@ -111,9 +111,9 @@ $ docker run -d --name influxdb-server \
   bitnami/influxdb:latest
 ```
 
-### Step 3: Launch your InfluxDB client instance
+### Step 3: Launch your InfluxDB (TM) client instance
 
-Finally we create a new container instance to launch the InfluxDB client and connect to the server created in the previous step:
+Finally we create a new container instance to launch the InfluxDB (TM) client and connect to the server created in the previous step:
 
 ```console
 $ docker run -it --rm \
@@ -123,7 +123,7 @@ $ docker run -it --rm \
 
 ## Using Docker Compose
 
-When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `my-network`. In this example we assume that you want to connect to the InfluxDB server from your own custom application image which is identified in the following snippet by the service name `myapp`.
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `my-network`. In this example we assume that you want to connect to the InfluxDB (TM) server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
 ```yaml
 version: '2'
@@ -148,7 +148,7 @@ services:
 > **IMPORTANT**:
 >
 > 1. Please update the `YOUR_APPLICATION_IMAGE` placeholder in the above snippet with your application image
-> 2. In your application container, use the hostname `influxdb` to connect to the InfluxDB server
+> 2. In your application container, use the hostname `influxdb` to connect to the InfluxDB (TM) server
 
 Launch the containers using:
 
@@ -158,7 +158,7 @@ $ docker-compose up -d
 
 # Configuration
 
-InfluxDB can be configured via environment variables (prefixed with `INFLUXDB_`) or using a configuration file (`influxdb.conf`). If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB uses its internal default configuration.
+InfluxDB (TM) can be configured via environment variables (prefixed with `INFLUXDB_`) or using a configuration file (`influxdb.conf`). If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB (TM) uses its internal default configuration.
 
 > Note: The settings at the environment variables override the equivalent options in the configuration file."
 
@@ -195,7 +195,7 @@ In order to have your custom files inside the docker image you can mount them as
 
 ## Setting the admin password on first run
 
-The admin user and password can easily be setup with the Bitnami InfluxDB Docker image using the following environment variables:
+The admin user and password can easily be setup with the Bitnami InfluxDB (TM) Docker image using the following environment variables:
 
  - `INFLUXDB_ADMIN_USER`: The database admin user. Defaults to `admin`.
  - `INFLUXDB_ADMIN_USER_PASSWORD`: The database admin user password. No defaults.
@@ -221,7 +221,7 @@ services:
 
 ## Allowing empty passwords
 
-By default the InfluxDB image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `INFLUXDB_HTTP_AUTH_ENABLED=false` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `INFLUXDB_ADMIN_USER_PASSWORD` for any other scenario.
+By default the InfluxDB (TM) image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `INFLUXDB_HTTP_AUTH_ENABLED=false` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `INFLUXDB_ADMIN_USER_PASSWORD` for any other scenario.
 
 ```console
 $ docker run --name influxdb --env INFLUXDB_HTTP_AUTH_ENABLED=false bitnami/influxdb:latest
@@ -240,7 +240,7 @@ services:
 
 ## Creating a database on first run
 
-By passing the `INFLUXDB_DB` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the InfluxDB client.
+By passing the `INFLUXDB_DB` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the InfluxDB (TM) client.
 
 ```console
 $ docker run --name influxdb \
@@ -297,7 +297,7 @@ You can also create users with restricted privileges in the database in a very s
 
 # Logging
 
-The Bitnami InfluxDB Docker image sends the container logs to `stdout`. To view the logs:
+The Bitnami InfluxDB (TM) Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
 $ docker logs influxdb
@@ -309,7 +309,7 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ## Upgrade this image
 
-Bitnami provides up-to-date versions of InfluxDB, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Bitnami provides up-to-date versions of InfluxDB (TM), including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 ### Step 1: Get the updated image
 
