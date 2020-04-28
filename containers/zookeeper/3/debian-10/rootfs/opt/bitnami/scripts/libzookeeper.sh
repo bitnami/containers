@@ -60,6 +60,19 @@ export ZOO_LISTEN_ALLIPS_ENABLED="${ZOO_LISTEN_ALLIPS_ENABLED:-no}"
 export ZOO_ENABLE_PROMETHEUS_METRICS="${ZOO_ENABLE_PROMETHEUS_METRICS:-no}"
 export ZOO_PROMETHEUS_METRICS_PORT_NUMBER="${ZOO_PROMETHEUS_METRICS_PORT_NUMBER:-7000}"
 
+# Zookeeper TLS Settings
+export ZOO_TLS_CLIENT_ENABLE="${ZOO_TLS_CLIENT_ENABLE:-false}"
+export ZOO_TLS_PORT_NUMBER="${ZOO_TLS_PORT_NUMBER:-3181}"
+export ZOO_TLS_CLIENT_KEYSTORE_FILE="${ZOO_TLS_CLIENT_KEYSTORE_FILE:-}"
+export ZOO_TLS_CLIENT_KEYSTORE_PASSWORD="${ZOO_TLS_CLIENT_KEYSTORE_PASSWORD:-}"
+export ZOO_TLS_CLIENT_TRUSTSTORE_FILE="${ZOO_TLS_CLIENT_TRUSTSTORE_FILE:-}"
+export ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD="${ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD:-}"
+export ZOO_TLS_QUORUM_ENABLE="${ZOO_TLS_QUORUM_ENABLE:-false}"
+export ZOO_TLS_QUORUM_KEYSTORE_FILE="${ZOO_TLS_QUORUM_KEYSTORE_FILE:-}"
+export ZOO_TLS_QUORUM_KEYSTORE_PASSWORD="${ZOO_TLS_QUORUM_KEYSTORE_PASSWORD:-}"
+export ZOO_TLS_QUORUM_TRUSTSTORE_FILE="${ZOO_TLS_QUORUM_TRUSTSTORE_FILE:-}"
+export ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD="${ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD:-}"
+
 # Java settings
 export JVMFLAGS="${JVMFLAGS:-}"
 export ZOO_HEAP_SIZE="${ZOO_HEAP_SIZE:-1024}"
@@ -240,6 +253,23 @@ zookeeper_generate_conf() {
         done
     else
         info "No additional servers were specified. ZooKeeper will run in standalone mode..."
+    fi
+
+    # If TLS in enable
+    if [[ "${ZOO_TLS_CLIENT_ENABLE}" = true ]]; then
+        zookeeper_conf_set "$ZOO_CONF_FILE" client.secure true
+        zookeeper_conf_set "$ZOO_CONF_FILE" secureClientPort "$ZOO_TLS_PORT_NUMBER"
+        zookeeper_conf_set "$ZOO_CONF_FILE" serverCnxnFactory org.apache.zookeeper.server.NettyServerCnxnFactory
+        zookeeper_conf_set "$ZOO_CONF_FILE" ssl.keyStore.location "$ZOO_TLS_CLIENT_KEYSTORE_FILE"
+        zookeeper_conf_set "$ZOO_CONF_FILE" ssl.keyStore.password "$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD"
+        zookeeper_conf_set "$ZOO_CONF_FILE" ssl.trustStore.location "$ZOO_TLS_CLIENT_TRUSTSTORE_FILE"
+        zookeeper_conf_set "$ZOO_CONF_FILE" ssl.trustStore.password "$ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD"
+    fi
+    if [[ "${ZOO_TLS_QUORUM_ENABLE}" = true ]]; then
+        zookeeper_conf_set "$ZOO_CONF_FILE" quorum.keyStore.location "$ZOO_TLS_QUORUM_KEYSTORE_FILE"
+        zookeeper_conf_set "$ZOO_CONF_FILE" quorum.keyStore.password "$ZOO_TLS_QUORUM_KEYSTORE_PASSWORD"
+        zookeeper_conf_set "$ZOO_CONF_FILE" quorum.trustStore.location "$ZOO_TLS_QUORUM_TRUSTSTORE_FILE"
+        zookeeper_conf_set "$ZOO_CONF_FILE" quorum.trustStore.password "$ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD"
     fi
 }
 

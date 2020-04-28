@@ -201,6 +201,17 @@ The configuration can easily be setup with the Bitnami ZooKeeper Docker image us
  - `ALLOW_ANONYMOUS_LOGIN`: If set to true, Allow to accept connections from unauthenticated users. Default: **no**
  - `ZOO_LOG_LEVEL`: ZooKeeper log level. Available levels are: `ALL`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`, `OFF`, `TRACE`. Default: **INFO**
  - `JVMFLAGS`: Default JVMFLAGS for the ZooKeeper process. No defaults
+ - `ZOO_TLS_CLIENT_ENABLE`: Enable tls for client communication. Default: **false**
+ - `ZOO_TLS_PORT_NUMBER`: Zookeeper TLS port. Default: 3181
+ - `ZOO_TLS_CLIENT_KEYSTORE_FILE`: KeyStore file file: Default: No Defaults
+ - `ZOO_TLS_CLIENT_KEYSTORE_PASSWORD`: KeyStore file password. This can be an evironment variable. It will be evaled by bash. No Defaults
+ - `ZOO_TLS_CLIENT_TRUSTSTORE_FILE`: TrustStore file file: Default: No Defaults
+ - `ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD`: TrustStore file password. This can be an evironment variable. It will be evaled by bash. No Defaults
+ - `ZOO_TLS_QUORUM_ENABLE`: Enable tls for quorum communication. Default: **false**
+ - `ZOO_TLS_QUORUM_KEYSTORE_FILE`: KeyStore file file: Default: No Defaults
+ - `ZOO_TLS_QUORUM_KEYSTORE_PASSWORD`: KeyStore file password. This can be an evironment variable. It will be evaled by bash. No Defaults
+ - `ZOO_TLS_QUORUM_KEYSTORE_FILE`: TrustStore file file: Default: No Defaults
+ - `ZOO_TLS_QUORUM_KEYSTORE_PASSWORD`: TrustStore file password. This can be an evironment variable. It will be evaled by bash. No Defaults
 
 ```console
 $ docker run --name zookeeper -e ZOO_SERVER_ID=1 bitnami/zookeeper:latest
