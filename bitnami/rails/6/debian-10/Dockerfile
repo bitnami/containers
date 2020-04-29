@@ -13,7 +13,7 @@ RUN bitnami-pkg install node-10.20.1-2 --checksum 81f4d00c12326a2f9a26b04cbbbe78
 RUN bitnami-pkg install mysql-client-10.3.22-1 --checksum e9fa94f574c87d15f0b6aba7cff1c06f70c0e69c1c442378c9961fc148fa68ef
 RUN bitnami-pkg install git-2.26.2-0 --checksum 7d970d7f29ec3ab0ef4c9c699c686ab1b4d95f8371be90cbce07c26b9f4386e7
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
-RUN bitnami-pkg install rails-6.0.2-2-0 --checksum a34b9ea6f083c5a019aaf7548cc9af90b0a8dc2c3a530b7c80005a7482900ab9
+RUN bitnami-pkg install rails-6.0.2-2-0 --checksum 41ccec09430919e973a2dc1f51b2cee430b02a55986c0e564667d6277d9dfb8d
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -21,7 +21,7 @@ RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="6.0.2-2-debian-10-r45" \
+    BITNAMI_IMAGE_VERSION="6.0.2-2-debian-10-r46" \
     BUNDLE_BUILD__SASSC="--disable-march-tune-native" \
     RAILS_ENV="development"
 
