@@ -30,7 +30,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.10.2-debian-10-r15`, `1`, `1.10.2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.10.2-debian-10-r15/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.10.2-debian-10-r16`, `1`, `1.10.2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.10.2-debian-10-r16/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
 
@@ -163,15 +163,15 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "a.b.c-0"
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "fluentd" "d.e.f-0"
 ...
 COPY rootfs /
-RUN /opt/bitnami/scripts/postunpack.sh
+RUN /opt/bitnami/scripts/fluentd/postunpack.sh
 ...
 ENV BITNAMI_APP_NAME="fluentd" ...
 EXPOSE 24224 5140
 WORKDIR /opt/bitnami/fluentd
 USER 1001
 ...
-ENTRYPOINT [ "/opt/bitnami/scripts/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/fluentd/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/fluentd/run.sh" ]
 ```
 
 The Dockerfile has several sections related to:
