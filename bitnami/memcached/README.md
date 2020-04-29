@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.6.5-debian-10-r17`, `1`, `1.6.5`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.6.5-debian-10-r17/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.6.5-debian-10-r18`, `1`, `1.6.5`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.6.5-debian-10-r18/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/memcached GitHub repo](https://github.com/bitnami/bitnami-docker-memcached).
 
@@ -231,7 +231,7 @@ services:
 Passing extra command-line flags to the Memcached service command is possible by adding them as arguments to *run.sh* script:
 
 ```console
-$ docker run --name memcached bitnami/memcached:latest /opt/bitnami/scripts/run.sh -vvv
+$ docker run --name memcached bitnami/memcached:latest /opt/bitnami/scripts/memcached/run.sh -vvv
 ```
 
 Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-memcached/blob/master/docker-compose.yml) file present in this repository:
@@ -240,7 +240,7 @@ Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitn
 services:
   memcached:
   ...
-    command: /opt/bitnami/scripts/run.sh -vvv
+    command: /opt/bitnami/scripts/memcached/run.sh -vvv
   ...
 ```
 
