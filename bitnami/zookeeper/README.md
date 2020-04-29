@@ -49,7 +49,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.6.0-debian-10-r65`, `3`, `3.6.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.0-debian-10-r65/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.6.0-debian-10-r66`, `3`, `3.6.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.0-debian-10-r66/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
@@ -281,6 +281,7 @@ or using Docker Compose:
 ```console
 $ docker-compose restart zookeeper
 ```
+
 ## Security
 
 Authentication based on SASL/Digest-MD5 can be easily enabled by passing the `ZOO_ENABLE_AUTH` env var.
@@ -329,8 +330,6 @@ Create a Docker network to enable visibility to each other via the docker contai
 ```console
 $ docker network create app-tier --driver bridge
 ```
-
-
 
 ### Step 1: Create the first node
 
@@ -417,6 +416,19 @@ services:
     environment:
       - ZOO_SERVER_ID=3
       - ZOO_SERVERS=zookeeper1:2888:3888,zookeeper2:2888:3888,0.0.0.0:2888:3888
+```
+
+## Start Zookeeper with TLS
+
+```
+docker run --name zookeeper \
+  -v /path/to/domain.key:/bitnami/zookeeper/certs/domain.key:ro
+  -v /path/to/domain.crs:/bitnami/zookeeper/certs/domain.crs:ro
+  -e ALLOW_EMPTY_PASSWORD=yes \
+  -e ZOO_TLS_CLIENT_ENABLE=yes \
+  -e ZOO_TLS_CLIENT_KEYSTORE_FILE=/bitnami/zookeeper/certs/domain.key\
+  -e ZOO_TLS_CLIENT_TRUSTSTORE_FILE=/bitnami/zookeeper/certs/domain.crs\
+  bitnami/zookeeper:latest
 ```
 
 # Logging
