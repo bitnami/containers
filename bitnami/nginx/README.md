@@ -44,8 +44,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.17-debian-10`, `1.17.10-debian-10-r18`, `1.17`, `1.17.10` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.17.10-debian-10-r18/1.17/debian-10/Dockerfile)
-* [`1.16-debian-10`, `1.16.1-debian-10-r100`, `1.16`, `1.16.1`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.1-debian-10-r100/1.16/debian-10/Dockerfile)
+* [`1.17-debian-10`, `1.17.10-debian-10-r19`, `1.17`, `1.17.10` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.17.10-debian-10-r19/1.17/debian-10/Dockerfile)
+* [`1.16-debian-10`, `1.16.1-debian-10-r105`, `1.16`, `1.16.1`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.16.1-debian-10-r105/1.16/debian-10/Dockerfile)
 
 # Get this image
 
@@ -287,15 +287,15 @@ RUN install_packages xxx yyy zzz
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "a.b.c-0"
 ...
 COPY rootfs /
-RUN /opt/bitnami/scripts/postunpack.sh
+RUN /opt/bitnami/scripts/nginx/postunpack.sh
 ...
 ENV BITNAMI_APP_NAME="nginx" ...
 EXPOSE 8080 8443
 WORKDIR /app
 USER 1001
 ...
-ENTRYPOINT [ "/opt/bitnami/scripts/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/nginx/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/nginx/run.sh" ]
 ```
 
 The Dockerfile has several sections related to:
