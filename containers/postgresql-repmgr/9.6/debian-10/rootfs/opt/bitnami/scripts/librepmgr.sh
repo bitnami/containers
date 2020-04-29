@@ -189,7 +189,8 @@ repmgr_get_upstream_node() {
     local pretending_primary_port=""
     local host=""
     local port=""
-
+    local suggested_primary_host=""
+    local suggested_primary_port=""
 
     if [[ -n "$REPMGR_PARTNER_NODES" ]]; then
         repmgr_info "Querying all partner nodes for common upstream node..."
@@ -209,8 +210,8 @@ repmgr_get_upstream_node() {
                 repmgr_debug "Skipping: failed to get information about primary nodes!"
                 continue
             elif [[ "$(echo "$primary_conninfo" | wc -l)" -eq 1 ]]; then
-                local -r suggested_primary_host="$(echo "$primary_conninfo" | awk -F 'host=' '{print $2}' | awk '{print $1}')"
-                local -r suggested_primary_port="$(echo "$primary_conninfo" | awk -F 'port=' '{print $2}' | awk '{print $1}')"
+                suggested_primary_host="$(echo "$primary_conninfo" | awk -F 'host=' '{print $2}' | awk '{print $1}')"
+                suggested_primary_port="$(echo "$primary_conninfo" | awk -F 'port=' '{print $2}' | awk '{print $1}')"
                 repmgr_debug "Pretending primary role node - '${suggested_primary_host}:${suggested_primary_port}'"
                 if [[ -n "$pretending_primary_host" ]]; then
                     if [[ "${pretending_primary_host}:${pretending_primary_port}" != "${suggested_primary_host}:${suggested_primary_port}" ]]; then
