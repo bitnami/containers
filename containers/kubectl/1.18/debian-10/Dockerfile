@@ -11,7 +11,7 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.18.2-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="1.18.2-debian-10-r15" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 USER 1001
