@@ -46,7 +46,6 @@ print_image_welcome_page() {
     log "${BOLD}Welcome to the Bitnami ${BITNAMI_APP_NAME} container${RESET}"
     log "Subscribe to project updates by watching ${BOLD}${github_url}${RESET}"
     log "Submit issues and feature requests at ${BOLD}${github_url}/issues${RESET}"
-    log "Send us your feedback at ${BOLD}containers@bitnami.com${RESET}"
     log ""
 }
 
