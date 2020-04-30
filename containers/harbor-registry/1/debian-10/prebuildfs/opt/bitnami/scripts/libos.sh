@@ -192,9 +192,9 @@ debug_execute() {
 #   Boolean
 #########################
 retry_while() {
-    local -r cmd="${1:?cmd is missing}"
-    local -r retries="${2:-12}"
-    local -r sleep_time="${3:-5}"
+    local cmd="${1:?cmd is missing}"
+    local retries="${2:-12}"
+    local sleep_time="${3:-5}"
     local return_value=1
 
     read -r -a command <<< "$cmd"
