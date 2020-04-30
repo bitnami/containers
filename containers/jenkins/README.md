@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.222.3-debian-10-r4`, `2`, `2.222.3`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.222.3-debian-10-r4/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.222.3-debian-10-r5`, `2`, `2.222.3`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.222.3-debian-10-r5/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
 
@@ -407,6 +407,10 @@ $ docker run -d --name jenkins \
 ```
 
 # Notable Changes
+
+## 2.222.1-debian-10-r17 
+
+- Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
 
 ## 2.204.4-debian-10-r3
 
