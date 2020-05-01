@@ -84,6 +84,8 @@ export DB_PORT_NUMBER="${PORT_NUMBER:-3306}"
 export DB_REPLICATION_MODE="$(get_env_var_value REPLICATION_MODE)"
 read -r -a DB_EXTRA_FLAGS <<< "$(mysql_extra_flags)"
 export DB_EXTRA_FLAGS
+DB_INIT_SLEEP_TIME="$(get_env_var_value INIT_SLEEP_TIME)"
+export DB_INIT_SLEEP_TIME="${DB_INIT_SLEEP_TIME:-}"
 # Authentication
 export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
 ROOT_USER="$(get_env_var_value ROOT_USER)"
@@ -691,7 +693,18 @@ mysql_start_bg() {
 
     # we cannot use wait_for_mysql_access here as mysql_upgrade for MySQL >=8 depends on this command
     # users are not configured on slave nodes during initialization due to --skip-slave-start
-    wait_for_mysql
+    if [[ "${DB_REPLICATION_MODE:-}" != "slave" ]]; then
+        wait_for_mysql_access
+    else
+        wait_for_mysql
+    fi
+
+    # Special configuration flag for system with slow disks that could take more time
+    # in initializing
+    if [[ -n "${DB_INIT_SLEEP_TIME}" ]]; then
+        debug "Sleeping ${DB_INIT_SLEEP_TIME} seconds before continuing with initialization"
+        sleep "${DB_INIT_SLEEP_TIME}"
+    fi
 }
 
 ########################
