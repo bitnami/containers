@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5.0-debian-10`, `5.0.9-debian-10-r4`, `5.0`, `5.0.9`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.9-debian-10-r4/5.0/debian-10/Dockerfile)
-* [`4.0-debian-10`, `4.0.14-debian-10-r98`, `4.0`, `4.0.14` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-debian-10-r98/4.0/debian-10/Dockerfile)
+* [`4.0-debian-10`, `4.0.14-debian-10-r99`, `4.0`, `4.0.14` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/4.0.14-debian-10-r99/4.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
@@ -70,6 +70,8 @@ $ docker build -t bitnami/redis:latest 'https://github.com/bitnami/bitnami-docke
 ```
 
 # Persisting your database
+
+Redis provides a different range of [persistence options](https://redis.io/topics/persistence). This contanier uses *AOF persistence by default* but it is easy to overwrite that configuration in a `docker-compose.yaml` file with this entry `command: /opt/bitnami/scripts/redis/run.sh --appendonly no`.
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
