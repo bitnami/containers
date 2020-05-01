@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8.0-debian-10`, `8.0.20-debian-10-r1`, `8.0`, `8.0.20`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.20-debian-10-r1/8.0/debian-10/Dockerfile)
-* [`5.7-debian-10`, `5.7.30-debian-10-r5`, `5.7`, `5.7.30` (5.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.30-debian-10-r5/5.7/debian-10/Dockerfile)
+* [`5.7-debian-10`, `5.7.30-debian-10-r6`, `5.7`, `5.7.30` (5.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.30-debian-10-r6/5.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
 
@@ -447,6 +447,10 @@ $ docker-compose logs mysql
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+
+## Slow filesystems
+
+In some platforms, the filesystem used for persistence could be slow. That could cause the database to take extra time to be ready. If that's the case, you can configure the `MYSQL_INIT_SLEEP_TIME` environment variable to make the initialization script to wait extra time (in seconds) before proceeding with the configuration operations.
 
 # Maintenance
 
