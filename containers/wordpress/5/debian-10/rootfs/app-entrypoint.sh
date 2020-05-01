@@ -8,7 +8,7 @@ print_welcome_page
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "httpd" ]]; then
     . /apache-init.sh
     . /wordpress-init.sh
-    nami_initialize apache php mysql-client wordpress
+    nami_initialize apache mysql-client wordpress
     info "Starting gosu... "
     . /post-init.sh
 fi
