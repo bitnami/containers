@@ -693,11 +693,7 @@ mysql_start_bg() {
 
     # we cannot use wait_for_mysql_access here as mysql_upgrade for MySQL >=8 depends on this command
     # users are not configured on slave nodes during initialization due to --skip-slave-start
-    if [[ "${DB_REPLICATION_MODE:-}" != "slave" ]]; then
-        wait_for_mysql_access
-    else
-        wait_for_mysql
-    fi
+    wait_for_mysql
 
     # Special configuration flag for system with slow disks that could take more time
     # in initializing
