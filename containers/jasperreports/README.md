@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7-debian-10`, `7.2.0-debian-10-r71`, `7`, `7.2.0`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.2.0-debian-10-r71/7/debian-10/Dockerfile)
+* [`7-debian-10`, `7.2.0-debian-10-r72`, `7`, `7.2.0`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.2.0-debian-10-r72/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jasperreports GitHub repo](https://github.com/bitnami/bitnami-docker-jasperreports).
 
@@ -298,6 +298,12 @@ jasperreports:
     -v /your/local/path/bitnami/jasperreports:/bitnami \
     bitnami/jasperreports
 ```
+
+# Notable Changes
+
+## 7.2.0-debian-10-r64
+
+- Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
 
 # Contributing
 
