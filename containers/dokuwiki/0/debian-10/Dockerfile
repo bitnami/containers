@@ -13,7 +13,7 @@ RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf3
 RUN bitnami-pkg unpack php-7.3.17-1 --checksum 7dd49d5a720cb3e18373b7089dece825ad06b63acabadef9129ff22128bb26c9
 RUN bitnami-pkg install libphp-7.3.17-0 --checksum 6ce3a2e1ac032fa2de1205c5ad14bfa0f3288c23d0c6b960e291d2eae94d363b
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
-RUN bitnami-pkg unpack dokuwiki-0.20180422.201901061035-2 --checksum a956de01c2906971cab28900be0a99af39d64ac14125b39cc5454ab752a1c353
+RUN bitnami-pkg unpack dokuwiki-0.20180422.202005011246-0 --checksum 5d3c0d429d22d4d17744c1a1ad69c4a5743808de5be39cfa2a6d1e133734ae68
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log && \
@@ -24,7 +24,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="dokuwiki" \
-    BITNAMI_IMAGE_VERSION="0.20180422.201901061035-debian-10-r87" \
+    BITNAMI_IMAGE_VERSION="0.20180422.202005011246-debian-10-r0" \
     DOKUWIKI_EMAIL="user@example.com" \
     DOKUWIKI_FULL_NAME="Full Name" \
     DOKUWIKI_PASSWORD="bitnami1" \
