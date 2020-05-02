@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.3.5-0-debian-10-r36`, `4`, `4.3.5-0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.3.5-0-debian-10-r36/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.3.5-0-debian-10-r37`, `4`, `4.3.5-0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.3.5-0-debian-10-r37/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/orangehrm GitHub repo](https://github.com/bitnami/bitnami-docker-orangehrm).
 
