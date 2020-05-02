@@ -22,7 +22,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /opt/bitnami/scripts/postgresql/postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="11.7.0-debian-10-r90" \
+    BITNAMI_IMAGE_VERSION="11.7.0-debian-10-r91" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
