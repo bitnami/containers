@@ -16,7 +16,7 @@ RUN /build/bitnami-user.sh
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="git" \
-    BITNAMI_IMAGE_VERSION="2.26.2-debian-10-r11" \
+    BITNAMI_IMAGE_VERSION="2.26.2-debian-10-r12" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/git/bin:$PATH"
 
 ENTRYPOINT [ "git" ]
