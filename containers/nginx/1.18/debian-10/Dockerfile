@@ -21,7 +21,7 @@ RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.18.0-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="1.18.0-debian-10-r3" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
