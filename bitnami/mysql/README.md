@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8.0-debian-10`, `8.0.20-debian-10-r5`, `8.0`, `8.0.20`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.20-debian-10-r5/8.0/debian-10/Dockerfile)
+* [`8.0-debian-10`, `8.0.20-debian-10-r6`, `8.0`, `8.0.20`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.20-debian-10-r6/8.0/debian-10/Dockerfile)
 * [`5.7-debian-10`, `5.7.30-debian-10-r10`, `5.7`, `5.7.30` (5.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.30-debian-10-r10/5.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
@@ -223,6 +223,13 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
   ...
 ```
+
+## Setting character set and collation
+
+It is possible to configure the character set and collation used by default by the database with the following environment variables:
+
+- `MARIADB_CHARACTER_SET`: The default character set to use. Default: `utf8`
+- `MARIADB_COLLATION`: The default collation to use. Default: `utf8_general_ci`
 
 ## Creating a database on first run
 
