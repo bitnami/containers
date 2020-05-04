@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10.4-debian-10`, `10.4.12-debian-10-r100`, `10.4`, `10.4.12` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.12-debian-10-r100/10.4/debian-10/Dockerfile)
+* [`10.4-debian-10`, `10.4.12-debian-10-r101`, `10.4`, `10.4.12` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.12-debian-10-r101/10.4/debian-10/Dockerfile)
 * [`10.3-debian-10`, `10.3.22-debian-10-r105`, `10.3`, `10.3.22`, `latest` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.22-debian-10-r105/10.3/debian-10/Dockerfile)
 * [`10.2-debian-10`, `10.2.31-debian-10-r99`, `10.2`, `10.2.31` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.31-debian-10-r99/10.2/debian-10/Dockerfile)
 * [`10.1-debian-10`, `10.1.44-debian-10-r100`, `10.1`, `10.1.44` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.44-debian-10-r100/10.1/debian-10/Dockerfile)
@@ -202,6 +202,13 @@ services:
       - MARIADB_EXTRA_FLAGS=--max-connect-errors=1000 --max_connections=155
   ...
 ```
+
+## Setting character set and collation
+
+It is possible to configure the character set and collation used by default by the database with the following environment variables:
+
+- `MARIADB_CHARACTER_SET`: The default character set to use. Default: `utf8`
+- `MARIADB_COLLATION`: The default collation to use. Default: `utf8_general_ci`
 
 ## Setting the root password on first run
 
