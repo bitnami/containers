@@ -2,7 +2,7 @@
 
 . /opt/bitnami/base/functions
 
-if [[ -d /docker-entrypoint-init.d ]] && [[ ! -f "/bitnami/$BITNAMI_APP_NAME/.user_scripts_initialized" ]]; then
+if [[ -d /docker-entrypoint-init.d ]] && [[ ! -f "/bitnami/moodle/.user_scripts_initialized" ]]; then
     for f in /docker-entrypoint-init.d/*; do
         failure=0
         case "$f" in
@@ -14,9 +14,42 @@ if [[ -d /docker-entrypoint-init.d ]] && [[ ! -f "/bitnami/$BITNAMI_APP_NAME/.us
                 fi
                 ;;
 
+            *.pl)
+                info "Executing $f with Perl interpreter"
+                perl "$f" || failure=$?
+                ;;
+
             *.php)
                 info "Executing $f with PHP interpreter"
                 php "$f" || failure=$?
+                ;;
+
+            *.sql|*.sql.gz)
+                info "Executing $f"
+                if [[ -n "$POSTGRESQL_PASSWORD" ]]; then
+                    export PGPASSWORD=$POSTGRESQL_PASSWORD
+                fi
+                if [[ -n "${POSTGRESQL_USER:-}" ]]; then
+                    psql=( psql -U $POSTGRESQL_USER )
+                else
+                    psql=( psql -U $POSTGRESQL_USERNAME )
+                fi
+                if [[ "$f" == *".sql" ]]; then
+                    "${psql[@]}" -f "$f" || failure=$?
+                elif [[ "$f" == *".sql.gz" ]]; then
+                    gunzip -c "$f" | "${psql[@]}" || failure=$?
+                fi
+                echo
+                ;;
+
+            *.py)
+                info "Executing $f with Python interpreter"
+                python "$f" || failure=$?
+                ;;
+
+            *.rb)
+                info "Executing $f with Ruby interpreter"
+                ruby "$f" || failure=$?
                 ;;
 
             *.sql|*.sql.gz)
@@ -42,5 +75,5 @@ if [[ -d /docker-entrypoint-init.d ]] && [[ ! -f "/bitnami/$BITNAMI_APP_NAME/.us
         fi
     done
     info "Custom scripts were executed"
-    touch "/bitnami/$BITNAMI_APP_NAME/.user_scripts_initialized"
+    touch "/bitnami/moodle/.user_scripts_initialized"
 fi
