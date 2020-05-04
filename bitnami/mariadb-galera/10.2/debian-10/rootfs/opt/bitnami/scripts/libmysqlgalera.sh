@@ -106,6 +106,8 @@ export DB_GALERA_MARIABACKUP_USER="${DB_GALERA_MARIABACKUP_USER:-mariabackup}"
 export DB_GALERA_MARIABACKUP_PASSWORD="$(get_env_var_value GALERA_MARIABACKUP_PASSWORD)"
 read -r -a DB_EXTRA_FLAGS <<< "$(mysql_extra_flags)"
 export DB_EXTRA_FLAGS
+DB_INIT_SLEEP_TIME="$(get_env_var_value INIT_SLEEP_TIME)"
+export DB_INIT_SLEEP_TIME="${DB_INIT_SLEEP_TIME:-}"
 ENABLE_LDAP="$(get_env_var_value ENABLE_LDAP)"
 export DB_ENABLE_LDAP="${ENABLE_LDAP:-no}"
 ENABLE_TLS="$(get_env_var_value ENABLE_TLS)"
@@ -672,6 +674,13 @@ mysql_start_bg() {
     # we cannot use wait_for_mysql_access here as mysql_upgrade for MySQL >=8 depends on this command
     # users are not configured on slave nodes during initialization due to --skip-slave-start
     wait_for_mysql
+
+    # Special configuration flag for system with slow disks that could take more time
+    # in initializing
+    if [[ -n "${DB_INIT_SLEEP_TIME}" ]]; then
+        debug "Sleeping ${DB_INIT_SLEEP_TIME} seconds before continuing with initialization"
+        sleep "${DB_INIT_SLEEP_TIME}"
+    fi
 }
 
 ########################
