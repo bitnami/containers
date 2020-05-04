@@ -96,6 +96,10 @@ export DB_AUTHENTICATION_PLUGIN="$(get_env_var_value AUTHENTICATION_PLUGIN)"
 export DB_REPLICATION_USER="$(get_env_var_value REPLICATION_USER)"
 MASTER_ROOT_USER="$(get_env_var_value MASTER_ROOT_USER)"
 export DB_MASTER_ROOT_USER="${MASTER_ROOT_USER:-root}"
+CHARACTER_SET="$(get_env_var_value CHARACTER_SET)"
+export DB_CHARACTER_SET="${CHARACTER_SET:-utf8}"
+COLLATE="$(get_env_var_value COLLATE)"
+export DB_COLLATE="${COLLATE:-utf8_general_ci}"
 EOF
     DB_FLAVOR="${DB_FLAVOR:-mysql}"
     # Credentials should be allowed to be mounted as files to avoid sensitive data
@@ -255,8 +259,8 @@ pid-file=$DB_TMP_DIR/mysqld.pid
 max_allowed_packet=16M
 bind-address=127.0.0.1
 log-error=$DB_LOG_DIR/mysqld.log
-character-set-server=UTF8
-collation-server=utf8_general_ci
+character-set-server=$DB_CHARACTER_SET
+collation-server=$DB_COLLATE
 plugin_dir=$DB_BASE_DIR/plugin
 
 [client]
@@ -403,14 +407,18 @@ EOF
             fi
             mysql_ensure_root_user_exists "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "$DB_AUTHENTICATION_PLUGIN"
             mysql_ensure_user_not_exists "" # ensure unknown user does not exist
+            if [[ -n "$DB_USER" ]]; then
+                local -a args=("$DB_USER")
+                [[ -n "$DB_PASSWORD" ]] && args+=("-p" "$DB_PASSWORD")
+                [[ -n "$DB_AUTHENTICATION_PLUGIN" ]] && args+=("--auth-plugin" "$DB_AUTHENTICATION_PLUGIN")
+                mysql_ensure_optional_user_exists "${args[@]}"
+            fi
             if [[ -n "$DB_DATABASE" ]]; then
-                if [[ -n "$DB_USER" ]]; then
-                    local -a flags=("-u" "$DB_USER")
-                    [[ -n "$DB_PASSWORD" ]] && flags=("${flags[@]}" "-p" "$DB_PASSWORD")
-                    [[ -n "$DB_AUTHENTICATION_PLUGIN" ]] && flags=("${flags[@]}" "--auth-plugin" "$DB_AUTHENTICATION_PLUGIN")
-                    mysql_ensure_optional_database_exists "$DB_DATABASE" "${flags[@]:-}"
-                fi
-                mysql_ensure_optional_database_exists "$DB_DATABASE"
+                local createdb_args=("$DB_DATABASE")
+                [[ -n "$DB_USER" ]] && createdb_args+=("-u" "$DB_USER")
+                [[ -n "$DB_CHARACTER_SET" ]] && createdb_args+=("--character-set" "$DB_CHARACTER_SET")
+                [[ -n "$DB_COLLATE" ]] && createdb_args+=("--collate" "$DB_COLLATE")
+                mysql_ensure_optional_database_exists "${createdb_args[@]}"
             fi
             [[ -n "$DB_ROOT_PASSWORD" ]] && export ROOT_AUTH_ENABLED="yes"
         fi
@@ -992,10 +1000,16 @@ EOF
 #########################
 mysql_ensure_database_exists() {
     local -r database="${1:?database is required}"
+    local -r character_set="${2:-}"
+    local -r collate="${3:-}"
+    local extra_args=()
+
+    [[ -n "$character_set" ]] && extra_args=("character set = '${character_set}'")
+    [[ -n "$collate" ]] && extra_args=("collate = '${collate}'")
 
     debug "Creating database $database"
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-create database if not exists \`$database\`;
+create database if not exists \`$database\` ${extra_args[@]:-};
 EOF
 }
 
@@ -1020,21 +1034,18 @@ EOF
 }
 
 ########################
-# Optionally create the given database, and then optionally create a user with
-# full privileges on the database.
+# Optionally create the given database user
 # Flags:
 #   -p|--password - database password
-#   -u|--user - database user
 #   --auth-plugin - authentication plugin
 #   --use-ldap - authenticate user via LDAP
 # Arguments:
-#   $1 - database name
+#   $1 - user
 # Returns:
 #   None
 #########################
-mysql_ensure_optional_database_exists() {
-    local -r database="${1:?database is missing}"
-    local user=""
+mysql_ensure_optional_user_exists() {
+    local -r user="${1:?user is missing}"
     local password=""
     local auth_plugin=""
     local use_ldap="no"
@@ -1045,11 +1056,7 @@ mysql_ensure_optional_database_exists() {
         case "$1" in
             -p|--password)
                 shift
-                password="${1:?missing database password}"
-                ;;
-            -u|--user)
-                shift
-                user="${1:?missing database user}"
+                password="${1:?missing password}"
                 ;;
             --auth-plugin)
                 shift
@@ -1066,18 +1073,60 @@ mysql_ensure_optional_database_exists() {
         shift
     done
 
-    mysql_ensure_database_exists "$database"
+    if is_boolean_yes "$use_ldap"; then
+        mysql_ensure_user_exists "$user" "--use-ldap"
+    elif [[ -n "$password" ]]; then
+        local -a flags=("-p" "$password")
+        [[ -n "$auth_plugin" ]] && flags=("${flags[@]}" "--auth-plugin" "$auth_plugin")
+        mysql_ensure_user_exists "$user" "${flags[@]:-}"
+    else
+        mysql_ensure_user_exists "$user"
+    fi
+}
+
+########################
+# Optionally create the given database, and then optionally give a user
+# full privileges on the database.
+# Flags:
+#   -u|--user - database user
+# Arguments:
+#   $1 - database name
+# Returns:
+#   None
+#########################
+mysql_ensure_optional_database_exists() {
+    local -r database="${1:?database is missing}"
+    local character_set=""
+    local collate=""
+    local user=""
+
+    # Validate arguments
+    shift 1
+    while [ "$#" -gt 0 ]; do
+        case "$1" in
+            --character-set)
+                shift
+                character_set="${1:?missing character set}"
+                ;;
+            --collate)
+                shift
+                collate="${1:?missing collate}"
+                ;;
+            -u|--user)
+                shift
+                user="${1:?missing database user}"
+                ;;
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+
+    mysql_ensure_database_exists "$database" "$character_set" "$collate"
 
     if [[ -n "$user" ]]; then
-        if is_boolean_yes "$use_ldap"; then
-            mysql_ensure_user_exists "$user" "--use-ldap"
-        elif [[ -n "$password" ]]; then
-            local -a flags=("-p" "$password")
-            [[ -n "$auth_plugin" ]] && flags=("${flags[@]}" "--auth-plugin" "$auth_plugin")
-            mysql_ensure_user_exists "$user" "${flags[@]:-}"
-        else
-            mysql_ensure_user_exists "$user"
-        fi
         mysql_ensure_user_has_database_privileges "$user" "$database"
     fi
 }
