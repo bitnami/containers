@@ -2,7 +2,7 @@ version: '2'
 
 services:
   redis-primary:
-    image: 'bitnami/redis:5.0'
+    image: 'docker.io/bitnami/redis:6.0-debian-10'
     ports:
       - '6379'
     environment:
@@ -13,7 +13,7 @@ services:
       - 'redis_data:/bitnami/redis/data'
 
   redis-secondary:
-    image: 'bitnami/redis:5.0'
+    image: 'docker.io/bitnami/redis:6.0-debian-10'
     ports:
       - '6379'
     depends_on:
