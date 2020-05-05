@@ -42,7 +42,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5.0-debian-10`, `5.0.9-debian-10-r7`, `5.0`, `5.0.9`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.9-debian-10-r7/5.0/debian-10/Dockerfile)
+* [`6.0-debian-10`, `6.0.1-debian-10-r0`, `6.0`, `6.0.1`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.1-debian-10-r0/6.0/debian-10/Dockerfile)
+* [`5.0-debian-10`, `5.0.9-debian-10-r7`, `5.0`, `5.0.9` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.9-debian-10-r7/5.0/debian-10/Dockerfile)
 * [`4.0-debian-10`, `4.0.14-debian-10-r102`, `4.0`, `4.0.14` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/4.0.14-debian-10-r102/4.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
@@ -64,7 +65,7 @@ $ docker pull bitnami/redis-sentinel:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/redis-sentinel:latest 'https://github.com/bitnami/bitnami-docker-redis-sentinel.git#master:5.0/debian-10'
+$ docker build -t bitnami/redis-sentinel:latest 'https://github.com/bitnami/bitnami-docker-redis-sentinel.git#master:6.0/debian-10'
 ```
 
 # Connecting to other containers
