@@ -20,7 +20,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/pgpool/postunpack.sh
 ENV BITNAMI_APP_NAME="pgpool" \
-    BITNAMI_IMAGE_VERSION="4.1.1-debian-10-r81" \
+    BITNAMI_IMAGE_VERSION="4.1.1-debian-10-r82" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/pgpool/bin:$PATH"
 
