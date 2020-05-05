@@ -2,4 +2,4 @@ version: '2'
 
 services:
   cert-manager:
-    image: bitnami/cert-manager:0
+    image: docker.io/bitnami/cert-manager:0-debian-10
