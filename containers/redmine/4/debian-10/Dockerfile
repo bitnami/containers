@@ -20,7 +20,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.1.1-debian-10-r29" \
+    BITNAMI_IMAGE_VERSION="4.1.1-debian-10-r30" \
     REDMINE_DB_MYSQL="mariadb" \
     REDMINE_DB_NAME="bitnami_redmine" \
     REDMINE_DB_PASSWORD="" \
