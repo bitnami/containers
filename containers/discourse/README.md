@@ -33,7 +33,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.4.3-debian-10-r0`, `2`, `2.4.3`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.4.3-debian-10-r0/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.4.3-debian-10-r1`, `2`, `2.4.3`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.4.3-debian-10-r1/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
@@ -224,7 +224,13 @@ You can use these snapshots to restore the application state should the upgrade 
 
 ## Configuration files
 
-You can mount your configuration files to the `/opt/bitnami/discourse/conf` directory.
+You can mount your configuration files to the `/opt/bitnami/discourse/mounted-conf` directory. Make sure that your configuration files follow the standardized names used by Discourse. Some of the most common files include:
+
+  * discourse.conf
+  * database.yml
+  * site_settings.yml
+  
+The set of default standard configuration files may be found [here](https://github.com/discourse/discourse/tree/master/config). You may refer to the the Discourse [webpage](https://www.discourse.org/) for further details and specific configuration guides.
 
 ## Environment variables
 
