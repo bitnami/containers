@@ -2,7 +2,7 @@ version: '2'
 
 services:
   postgresql:
-    image: 'bitnami/postgresql:11'
+    image: 'docker.io/bitnami/postgresql:12-debian-10'
     ports:
       - '5432:5432'
     volumes:
