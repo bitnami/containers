@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl dirmngr ghostscript gnupg imagemagick 
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg unpack php-7.3.17-1 --checksum 7dd49d5a720cb3e18373b7089dece825ad06b63acabadef9129ff22128bb26c9
-RUN bitnami-pkg install node-12.16.3-0 --checksum 88affa3a429facdb603733ef9182b682c6be1b73707ebbabf8c73917da7e47f9
+RUN bitnami-pkg install node-12.16.3-1 --checksum e4f9a2b6448d08f50e58b1e272e47a8185c4c2eb639546a650080baa310acb12
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg install laravel-6.18.8-0 --checksum 905bef62b77cb5a163278d7d74288699af06dd6f4f19ccdd054d60b117937ef5
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
@@ -19,7 +19,7 @@ RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="laravel" \
-    BITNAMI_IMAGE_VERSION="6.18.8-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="6.18.8-debian-10-r23" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules"
 
 EXPOSE 3000
