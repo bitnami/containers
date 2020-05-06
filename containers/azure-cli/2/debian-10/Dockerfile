@@ -17,7 +17,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN mkdir /.azure /.azcopy && chmod g+rwX /.azure /.azcopy /bin
 
 ENV BITNAMI_APP_NAME="azure-cli" \
-    BITNAMI_IMAGE_VERSION="2.5.1-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="2.5.1-debian-10-r6" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
