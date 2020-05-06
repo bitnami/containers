@@ -16,7 +16,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN mkdir /.config /.gsutil && chmod g+rwX /.config /.gsutil
 
 ENV BITNAMI_APP_NAME="google-cloud-sdk" \
-    BITNAMI_IMAGE_VERSION="0.291.0-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="0.291.0-debian-10-r1" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/google-cloud-sdk/bin:$PATH"
 
 USER 1001
