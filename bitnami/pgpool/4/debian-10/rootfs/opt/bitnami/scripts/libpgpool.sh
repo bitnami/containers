@@ -98,6 +98,15 @@ EOF
 export PGPOOL_SR_CHECK_PASSWORD="${PGPOOL_SR_CHECK_PASSWORD:-}"
 EOF
     fi
+    if [[ -f "${PGPOOL_HEALTH_CHECK_PASSWORD_FILE:-}" ]]; then
+        cat << "EOF"
+export PGPOOL_HEALTH_CHECK_PASSWORD="$(< "${PGPOOL_HEALTH_CHECK_PASSWORD_FILE}")"
+EOF
+    else
+        cat << "EOF"
+export PGPOOL_HEALTH_CHECK_PASSWORD="${PGPOOL_HEALTH_CHECK_PASSWORD:-$PGPOOL_SR_CHECK_PASSWORD}"
+EOF
+    fi
 }
 
 ########################
@@ -118,14 +127,6 @@ pgpool_validate() {
         error "$1"
         error_code=1
     }
-
-    if ! is_yes_no_value "$PGPOOL_ENABLE_POOL_HBA"; then
-        print_validation_error "The values allowed for PGPOOL_ENABLE_POOL_HBA are: yes or no"
-    fi
-
-    if ! is_yes_no_value "$PGPOOL_ENABLE_POOL_PASSWD"; then
-        print_validation_error "The values allowed for PGPOOL_ENABLE_POOL_PASSWD are: yes or no"
-    fi
 
     if [[ -z "$PGPOOL_ADMIN_USERNAME" ]] || [[ -z "$PGPOOL_ADMIN_PASSWORD" ]]; then
         print_validation_error "The Pgpool administrator user's credentials are mandatory. Set the environment variables PGPOOL_ADMIN_USERNAME and PGPOOL_ADMIN_PASSWORD with the Pgpool administrator user's credentials."
@@ -162,15 +163,19 @@ pgpool_validate() {
             fi
         done
     fi
-    if ! is_yes_no_value "$PGPOOL_ENABLE_LOAD_BALANCING"; then
-        print_validation_error "The values allowed for PGPOOL_ENABLE_LOAD_BALANCING are: yes or no"
-    fi
-    if ! is_yes_no_value "$PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING"; then
-        print_validation_error "The values allowed for PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING are: yes or no"
-    fi
-    if ! is_positive_int "$PGPOOL_NUM_INIT_CHILDREN"; then
-	    print_validation_error "The values allowed for PGPOOL_NUM_INIT_CHILDREN: integer greater than 0"	
-    fi
+
+    local yes_no_values=("PGPOOL_ENABLE_POOL_HBA" "PGPOOL_ENABLE_POOL_PASSWD" "PGPOOL_ENABLE_LOAD_BALANCING" "PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING")
+    for yn in "${yes_no_values[@]}"; do
+        if ! is_yes_no_value "${!yn}"; then
+            print_validation_error "The values allowed for $yn are: yes or no"
+        fi
+    done
+    local positive_values=("PGPOOL_NUM_INIT_CHILDREN" "PGPOOL_HEALTH_CHECK_PERIOD" "PGPOOL_HEALTH_CHECK_TIMEOUT" "PGPOOL_HEALTH_CHECK_MAX_RETRIES" "PGPOOL_HEALTH_CHECK_RETRY_DELAY")
+    for p in "${positive_values[@]}"; do
+        if ! is_positive_int "${!p}"; then
+            print_validation_error "The values allowed for $p: integer greater than 0"
+        fi
+    done
     if ! [[ "$PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE" =~ ^(off|transaction|trans_transaction|always)$ ]]; then
 	    print_validation_error "The values allowed for PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE: off,transaction,trans_transaction,always"
     fi
@@ -309,25 +314,15 @@ EOF
 #########################
 pgpool_create_config() {
     local -i node_counter=0
-    local load_balance_mode=""
+    local load_balance_mode="off"
     local statement_level_load_balance="off"
-    local pool_hba=""
+    local pool_hba="off"
     local pool_passwd=""
     local allow_clear_text_frontend_auth="off"
 
-    if is_boolean_yes "$PGPOOL_ENABLE_LOAD_BALANCING"; then
-        load_balance_mode="on"
-    else
-        load_balance_mode="off"
-    fi
-
     is_boolean_yes "$PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING" && statement_level_load_balance="on"
-
-    if is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA"; then
-        pool_hba="on"
-    else
-        pool_hba="off"
-    fi
+    is_boolean_yes "$PGPOOL_ENABLE_LOAD_BALANCING" && load_balance_mode="on"
+    is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA" && pool_hba="on"
 
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
         pool_passwd="$PGPOOL_PASSWD_FILE"
