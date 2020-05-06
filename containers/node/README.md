@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`14-debian-10`, `14.2.0-debian-10-r0`, `14`, `14.2.0` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.2.0-debian-10-r0/14/debian-10/Dockerfile)
 * [`13-debian-10-prod`, `13.14.0-debian-10-r7-prod`, `13-prod`, `13.14.0-prod` (13-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.14.0-debian-10-r7-prod/13-prod/debian-10/Dockerfile)
 * [`13-debian-10`, `13.14.0-debian-10-r7`, `13`, `13.14.0` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.14.0-debian-10-r7/13/debian-10/Dockerfile)
-* [`12-debian-10-prod`, `12.16.3-debian-10-r6-prod`, `12-prod`, `12.16.3-prod`, `latest-prod` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.3-debian-10-r6-prod/12-prod/debian-10/Dockerfile)
+* [`12-debian-10-prod`, `12.16.3-debian-10-r7-prod`, `12-prod`, `12.16.3-prod`, `latest-prod` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.3-debian-10-r7-prod/12-prod/debian-10/Dockerfile)
 * [`12-debian-10`, `12.16.3-debian-10-r12`, `12`, `12.16.3`, `latest` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.16.3-debian-10-r12/12/debian-10/Dockerfile)
 * [`10-debian-10-prod`, `10.20.1-debian-10-r25-prod`, `10-prod`, `10.20.1-prod` (10-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.20.1-debian-10-r25-prod/10-prod/debian-10/Dockerfile)
 * [`10-debian-10`, `10.20.1-debian-10-r25`, `10`, `10.20.1` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.20.1-debian-10-r25/10/debian-10/Dockerfile)
