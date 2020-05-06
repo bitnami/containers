@@ -595,10 +595,14 @@ mysql_execute_print_output() {
     local -r db="${1:-}"
     local -r user="${2:-root}"
     local -r pass="${3:-}"
-    read -r -a opts <<<"${4:-}"
+    read -r -a opts <<<"${@:4}"
 
     # Process mysql CLI arguments
-    local args=("--defaults-file=$DB_CONF_DIR/my.cnf" "-N" "-u" "$user" "$db")
+    local args=()
+    if [[ -f "$DB_CONF_DIR/my.cnf" ]]; then
+        args+=("--defaults-file=$DB_CONF_DIR/my.cnf")
+    fi
+    args+=("-N" "-u" "$user" "$db")
     [[ -n "$pass" ]] && args+=("-p$pass")
     [[ -n "${opts[*]:-}" ]] && args+=("${opts[@]:-}")
 
@@ -607,7 +611,6 @@ mysql_execute_print_output() {
     if read -r -t 0; then
         mysql_cmd="$(</dev/stdin)"
     fi
-
     debug "Executing SQL command:\n$mysql_cmd"
     "$DB_BIN_DIR/mysql" "${args[@]}" <<<"$mysql_cmd"
 }
@@ -857,6 +860,9 @@ mysql_ensure_user_exists() {
     local use_ldap="no"
     local hosts
     local auth_string=""
+    local ssl_ca=""
+    # For accessing an external database
+    local db_host=""
 
     # Validate arguments
     shift 1
@@ -872,6 +878,14 @@ mysql_ensure_user_exists() {
                 ;;
             --use-ldap)
                 use_ldap="yes"
+                ;;
+            --ssl-ca)
+                shift
+                ssl_ca="${1:?missing path to ssl CA}"
+                ;;
+            --host)
+                shift
+                db_host="${1:?missing database host}"
                 ;;
             *)
                 echo "Invalid command line flag $1" >&2
@@ -890,16 +904,23 @@ mysql_ensure_user_exists() {
         fi
     fi
     debug "creating database user \'$user\'"
-    mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+    local opts=()
+    if [[ -n "$db_host" ]]; then
+        opts+=("-h${db_host}")
+    fi
+    if [[ -n "$ssl_ca" ]]; then
+        opts+=("--ssl-ca" "$ssl_ca")
+    fi
+    mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "${opts[@]}" <<EOF
 create $([[ "$DB_FLAVOR" = "mariadb" ]] && echo "or replace") user '$user'@'%' $auth_string;
 EOF
     debug "Removing all other hosts for the user"
-    hosts=$(mysql_execute_print_output "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+    hosts=$(mysql_execute_print_output "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "${opts[@]}" <<EOF
 select Host from user where User='$user' and Host!='%';
 EOF
 )
     for host in $hosts; do
-        mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+        mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "${opts[@]}" <<EOF
 drop user '$user'@'$host';
 EOF
     done
