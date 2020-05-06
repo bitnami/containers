@@ -1,4 +1,4 @@
 version: '2'
 services:
   elasticsearch-curator:
-    image: bitnami/elasticsearch-curator:5
+    image: docker.io/bitnami/elasticsearch-curator:5-debian-10
