@@ -1,0 +1,6 @@
+version: '2'
+services:
+  nginx-ldap-auth-daemon:
+    image: bitnami/nginx-ldap-auth-daemon:0-debian-10
+    ports:
+      - 8888:8888
