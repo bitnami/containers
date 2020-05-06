@@ -233,6 +233,7 @@ A HA PostgreSQL cluster with Pgpool, [Streaming replication](https://www.postgre
 Pgpool:
 
 - `PGPOOL_PASSWORD_FILE`: Path to a file that contains the password for the custom user set in the `PGPOOL_USERNAME` environment variable. This will override the value specified in `PGPOOL_PASSWORD`. No defaults.
+- `PGPOOL_SR_CHECK_PERIOD`: Specifies the time interval in seconds to check the streaming replication delay. Defaults to `30`.
 - `PGPOOL_SR_CHECK_USER`: Username to use to perform streaming checks. No defaults.
 - `PGPOOL_SR_CHECK_PASSWORD`: Password to use to perform streaming checks. No defaults.
 - `PGPOOL_SR_CHECK_PASSWORD_FILE`: Path to a file that contains the password to use to perform streaming checks. This will override the value specified in `PGPOOL_SR_CHECK_PASSWORD`. No defaults.
@@ -241,6 +242,7 @@ Pgpool:
 - `PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE`: Specify load balance behavior after write queries appear ('off', 'transaction', 'trans_transaction', 'always'). Defaults to 'transaction'
 - `PGPOOL_NUM_INIT_CHILDREN`: The number of preforked Pgpool-II server processes.  num_init_children is also the concurrent connections limit to Pgpool-II from clients. Defaults to 32.
 - `PGPOOL_ENABLE_LOAD_BALANCING`: Whether to enable Load-Balancing mode. Defaults to `yes`.
+- `PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING`:  Whether to decide the load balancing node for each read query. Defaults to `no`.
 - `PGPOOL_ENABLE_POOL_HBA`: Whether to use the pool_hba.conf authentication. Defaults to `yes`.
 - `PGPOOL_ENABLE_POOL_PASSWD`: Whether to use a password file specified by `PGPOOL_PASSWD_FILE` for authentication. Defaults to `yes`.
 - `PGPOOL_PASSWD_FILE`: The password file for authentication. Defaults to `pool_passwd`.
@@ -250,7 +252,11 @@ Pgpool:
 - `PGPOOL_POSTGRES_PASSWORD`: Password for the user set in `PGPOOL_POSTGRES_USERNAME` environment variable. No defaults.
 - `PGPOOL_ADMIN_USERNAME`: Username for the pgpool administrator. No defaults.
 - `PGPOOL_ADMIN_PASSWORD`: Password for the user set in `PGPOOL_ADMIN_USERNAME` environment variable. No defaults.
-
+- `PGPOOL_HEALTH_CHECK_USER`: Specifies the PostgreSQL user name to perform health check. Defaults to value set in `PGPOOL_SR_CHECK_USER`.
+- `PGPOOL_HEALTH_CHECK_PERIOD`: Specifies the interval between the health checks in seconds. Defaults to `30`.
+- `PGPOOL_HEALTH_CHECK_TIMEOUT`: Specifies the timeout in seconds to give up connecting to the backend PostgreSQL if the TCP connect does not succeed within this time. Defaults to `10`.
+- `PGPOOL_HEALTH_CHECK_MAX_RETRIES`: Specifies the maximum number of retries to do before giving up and initiating failover when health check fails. Defaults to `5`.
+- `PGPOOL_HEALTH_CHECK_RETRY_DELAY`: Specifies the amount of time in seconds to sleep between failed health check retries. Defaults to `5`.
 
 PostgreSQL with Replication Manager:
 
