@@ -55,13 +55,20 @@ export PGPOOL_DAEMON_GROUP="pgpool"
 export PGPOOL_PORT_NUMBER="${PGPOOL_PORT_NUMBER:-5432}"
 export PGPOOL_BACKEND_NODES="${PGPOOL_BACKEND_NODES:-}"
 export PGPOOL_SR_CHECK_USER="${PGPOOL_SR_CHECK_USER:-}"
+export PGPOOL_SR_CHECK_PERIOD="${PGPOOL_SR_CHECK_PERIOD:-30}"
 export PGPOOL_POSTGRES_USERNAME="${PGPOOL_POSTGRES_USERNAME:-postgres}"
 export PGPOOL_ADMIN_USERNAME="${PGPOOL_ADMIN_USERNAME:-}"
 export PGPOOL_ENABLE_LDAP="${PGPOOL_ENABLE_LDAP:-no}"
 export PGPOOL_TIMEOUT="360"
 export PGPOOL_ENABLE_LOAD_BALANCING="${PGPOOL_ENABLE_LOAD_BALANCING:-yes}"
+export PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING="${PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING:-no}"
 export PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE="${PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE:-transaction}"
 export PGPOOL_NUM_INIT_CHILDREN="${PGPOOL_NUM_INIT_CHILDREN:-32}"
+export PGPOOL_HEALTH_CHECK_USER="${PGPOOL_HEALTH_CHECK_USER:-$PGPOOL_SR_CHECK_USER}"
+export PGPOOL_HEALTH_CHECK_PERIOD="${PGPOOL_HEALTH_CHECK_PERIOD:-30}"
+export PGPOOL_HEALTH_CHECK_TIMEOUT="${PGPOOL_HEALTH_CHECK_TIMEOUT:-10}"
+export PGPOOL_HEALTH_CHECK_MAX_RETRIES="${PGPOOL_HEALTH_CHECK_MAX_RETRIES:-5}"
+export PGPOOL_HEALTH_CHECK_RETRY_DELAY="${PGPOOL_HEALTH_CHECK_RETRY_DELAY:-5}"
 
 EOF
     if [[ -f "${PGPOOL_ADMIN_PASSWORD_FILE:-}" ]]; then
@@ -123,8 +130,11 @@ pgpool_validate() {
     if [[ -z "$PGPOOL_ADMIN_USERNAME" ]] || [[ -z "$PGPOOL_ADMIN_PASSWORD" ]]; then
         print_validation_error "The Pgpool administrator user's credentials are mandatory. Set the environment variables PGPOOL_ADMIN_USERNAME and PGPOOL_ADMIN_PASSWORD with the Pgpool administrator user's credentials."
     fi
-    if [[ -z "$PGPOOL_SR_CHECK_USER" ]] || [[ -z "$PGPOOL_SR_CHECK_PASSWORD" ]]; then
+    if [[ "$PGPOOL_SR_CHECK_PERIOD" -gt 0 ]] && ( [[ -z "$PGPOOL_SR_CHECK_USER" ]] || [[ -z "$PGPOOL_SR_CHECK_PASSWORD" ]] ); then
         print_validation_error "The PostrgreSQL replication credentials are mandatory. Set the environment variables PGPOOL_SR_CHECK_USER and PGPOOL_SR_CHECK_PASSWORD with the PostrgreSQL replication credentials."
+    fi
+    if [[ -z "$PGPOOL_HEALTH_CHECK_USER" ]] || [[ -z "$PGPOOL_HEALTH_CHECK_PASSWORD" ]]; then
+        print_validation_error "The PostrgreSQL health check credentials are mandatory. Set the environment variables PGPOOL_HEALTH_CHECK_USER and PGPOOL_SR_HEALTH_PASSWORD with the PostrgreSQL health check credentials."
     fi
     if is_boolean_yes "$PGPOOL_ENABLE_LDAP" && ( [[ -z "${LDAP_URI}" ]] || [[ -z "${LDAP_BASE}" ]] || [[ -z "${LDAP_BIND_DN}" ]] || [[ -z "${LDAP_BIND_PASSWORD}" ]] ); then
         print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables LDAP_URI, LDAP_BASE, LDAP_BIND_DN and LDAP_BIND_PASSWORD with the LDAP configuration."
@@ -154,6 +164,9 @@ pgpool_validate() {
     fi
     if ! is_yes_no_value "$PGPOOL_ENABLE_LOAD_BALANCING"; then
         print_validation_error "The values allowed for PGPOOL_ENABLE_LOAD_BALANCING are: yes or no"
+    fi
+    if ! is_yes_no_value "$PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING"; then
+        print_validation_error "The values allowed for PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING are: yes or no"
     fi
     if ! is_positive_int "$PGPOOL_NUM_INIT_CHILDREN"; then
 	    print_validation_error "The values allowed for PGPOOL_NUM_INIT_CHILDREN: integer greater than 0"	
@@ -214,15 +227,19 @@ pgpool_healthcheck() {
 pgpool_create_pghba() {
     local authentication="md5"
     local postgres_auth_line=""
+    local sr_check_auth_line=""
     info "Generating pg_hba.conf file..."
 
     is_boolean_yes "$PGPOOL_ENABLE_LDAP" && authentication="pam pamservice=pgpool"
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
         postgres_auth_line="host     all             ${PGPOOL_POSTGRES_USERNAME}       all         md5"
     fi
+    if [[ ! -z "$PGPOOL_SR_CHECK_USER" ]]; then
+        sr_check_auth_line="host     all             ${PGPOOL_SR_CHECK_USER}       all         trust"
+    fi
     cat > "$PGPOOL_PGHBA_FILE" << EOF
 local    all             all                            trust
-host     all             $PGPOOL_SR_CHECK_USER       all         trust
+$sr_check_auth_line
 $postgres_auth_line
 host     all             wide               all         trust
 host     all             pop_user           all         trust
@@ -293,6 +310,7 @@ EOF
 pgpool_create_config() {
     local -i node_counter=0
     local load_balance_mode=""
+    local statement_level_load_balance="off"
     local pool_hba=""
     local pool_passwd=""
     local allow_clear_text_frontend_auth="off"
@@ -302,6 +320,8 @@ pgpool_create_config() {
     else
         load_balance_mode="off"
     fi
+
+    is_boolean_yes "$PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING" && statement_level_load_balance="on"
 
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA"; then
         pool_hba="on"
@@ -349,19 +369,23 @@ pgpool_create_config() {
     pgpool_set_property "pid_file_name" "$PGPOOL_PID_FILE"
     pgpool_set_property "logdir" "$PGPOOL_LOG_DIR"
     # Load Balancing settings
+    # https://www.pgpool.net/docs/latest/en/html/runtime-config-load-balancing.html
     pgpool_set_property "load_balance_mode" "$load_balance_mode"
     pgpool_set_property "black_function_list" "nextval,setval"
-    # Streaming settings
+    pgpool_set_property "statement_level_load_balance" "$statement_level_load_balance"
+    # Streaming Replication Check settings
+    # https://www.pgpool.net/docs/latest/en/html/runtime-streaming-replication-check.html
     pgpool_set_property "sr_check_user" "$PGPOOL_SR_CHECK_USER"
     pgpool_set_property "sr_check_password" "$PGPOOL_SR_CHECK_PASSWORD"
-    pgpool_set_property "sr_check_period" "30"
+    pgpool_set_property "sr_check_period" "$PGPOOL_SR_CHECK_PERIOD"
     # Healthcheck per node settings
-    pgpool_set_property "health_check_period" "30"
-    pgpool_set_property "health_check_timeout" "10"
-    pgpool_set_property "health_check_user" "$PGPOOL_SR_CHECK_USER"
-    pgpool_set_property "health_check_password" "$PGPOOL_SR_CHECK_PASSWORD"
-    pgpool_set_property "health_check_max_retries" "5"
-    pgpool_set_property "health_check_retry_delay" "5"
+    # https://www.pgpool.net/docs/latest/en/html/runtime-config-health-check.html
+    pgpool_set_property "health_check_period" "$PGPOOL_HEALTH_CHECK_PERIOD"
+    pgpool_set_property "health_check_timeout" "$PGPOOL_HEALTH_CHECK_TIMEOUT"
+    pgpool_set_property "health_check_user" "$PGPOOL_HEALTH_CHECK_USER"
+    pgpool_set_property "health_check_password" "$PGPOOL_HEALTH_CHECK_PASSWORD"
+    pgpool_set_property "health_check_max_retries" "$PGPOOL_HEALTH_CHECK_MAX_RETRIES"
+    pgpool_set_property "health_check_retry_delay" "$PGPOOL_HEALTH_CHECK_RETRY_DELAY"
     # Failover settings
     pgpool_set_property "failover_command" "echo \">>> Failover - that will initialize new primary node search!\""
     pgpool_set_property "failover_on_backend_error" "off"
