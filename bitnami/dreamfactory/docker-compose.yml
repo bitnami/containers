@@ -8,7 +8,7 @@ services:
     volumes:
       - 'mariadb_data:/bitnami'
   redis:
-    image: 'bitnami/redis:5.0'
+    image: 'bitnami/redis:6.0'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
