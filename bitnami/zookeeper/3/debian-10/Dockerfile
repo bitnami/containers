@@ -22,7 +22,7 @@ RUN ln -s /opt/bitnami/scripts/zookeeper/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/zookeeper/postunpack.sh
 ENV BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.6.1-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="3.6.1-debian-10-r6" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:/opt/bitnami/common/bin:$PATH"
 
