@@ -1,4 +1,4 @@
 version: '2'
 services:
   kong-ingress-controller:
-    image: bitnami/kong-ingress-controller:0
+    image: docker.io/bitnami/kong-ingress-controller:0-debian-10
