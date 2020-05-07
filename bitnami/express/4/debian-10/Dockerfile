@@ -24,7 +24,7 @@ RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwx /dist /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.17.1-debian-10-r94" \
+    BITNAMI_IMAGE_VERSION="4.17.1-debian-10-r95" \
     NAMI_PREFIX="/.nami"
 
 EXPOSE 3000
