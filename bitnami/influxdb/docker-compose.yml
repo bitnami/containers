@@ -1,7 +1,7 @@
 version: '2'
 services:
   influxdb:
-    image: bitnami/influxdb:1
+    image: docker.io/bitnami/influxdb:1-debian-10
     ports:
       - 8086:8086
       - 8088:8088
