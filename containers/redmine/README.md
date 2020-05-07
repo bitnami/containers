@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.1.1-debian-10-r31`, `4`, `4.1.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.1.1-debian-10-r31/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.1.1-debian-10-r33`, `4`, `4.1.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.1.1-debian-10-r33/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
 
@@ -195,6 +195,79 @@ The following `docker-compose.yml` template demonstrates the use of host directo
     bitnami/redmine:latest
   ```
 
+## Deploying to a sub-URI
+
+On certain occasions, you may need that Redmine is available under a specific sub-URI path rather than the root. A common scenario to this problem may arise if you plan to set up your Redmine container behind a reverse proxy. To deploy your Redmine container using a certain sub-URI you just need to follow these steps:
+
+1. Create a new bash script file in your host system, `subUriInit.sh`, that will replace the default `init.sh`:
+
+__subUriInit.sh__
+```
+#!/bin/bash
+
+# Set default values depending on database variation
+if [ -n "$REDMINE_DB_POSTGRES" ]; then
+    export REDMINE_DB_PORT_NUMBER=${REDMINE_DB_PORT_NUMBER:-5432}
+    export REDMINE_DB_USERNAME=${REDMINE_DB_USERNAME:-postgres}
+elif [ -n "$REDMINE_DB_MYSQL" ]; then
+    export REDMINE_DB_PORT_NUMBER=${REDMINE_DB_PORT_NUMBER:-3306}
+    export REDMINE_DB_USERNAME=${REDMINE_DB_USERNAME:-root}
+fi
+
+# REPLACE WITH YOUR OWN SUB-URI
+SUB_URI_PATH='/redmine'
+
+#Config files where to apply changes
+config1=/opt/bitnami/redmine/config.ru
+config2=/opt/bitnami/redmine/config/environment.rb
+
+if [[ ! -d /opt/bitnami/redmine/conf/ ]]; then
+    sed -i '$ d' ${config1}
+    echo 'map ActionController::Base.config.try(:relative_url_root) || "/" do' >> ${config1}
+    echo 'run Rails.application' >> ${config1}
+    echo 'end' >> ${config1}
+    echo 'Redmine::Utils::relative_url_root = "'${SUB_URI_PATH}'"' >> ${config2} 
+fi
+
+SUB_URI_PATH=$(echo ${SUB_URI_PATH} | sed -e 's|\/|\\/|g')
+sed -i -e "s/\(relative_url_root\ \=\ \"\).*\(\"\)/\1${SUB_URI_PATH}\2/" ${config2}
+```
+
+2. Make sure you replace the value of `SUB_URI_PATH` with your own sub-URI. e.g: '/redmine'. Do not forget to add the leading slash '/'.
+
+3. Give execution permissions to `subUriInit.sh`:
+
+    ```console
+    $ chmod +x subUriInit.sh
+    ```
+
+4. Replace the default `init.sh` script in favour of our new created `subUriInit.sh`. You can mount this file as a volume in order to accomplish this task.
+
+ * For docker-compose: 
+
+    ```yaml
+    services:
+      redmine:
+      ...
+        volumes:
+          - '/path/to/subUriInit.sh:/init.sh'
+      ...
+    ```
+
+ * For manual execution (see [Run the application manually](https://github.com/bitnami/bitnami-docker-redmine#run-the-application-manually)):
+  
+    ```console
+    $ docker run -d --name redmine -p 80:3000 \
+      -e REDMINE_DB_USERNAME=bn_redmine \
+      -e REDMINE_DB_NAME=bitnami_redmine \
+      --net redmine-tier \
+      --volume redmine_data:/bitnami \
+      --volume /path/to/subUriInit.sh:/init.sh \
+      bitnami/redmine:latest
+    ```
+
+    Then you can access your application at http://your-ip/SUB_URI_PATH
+    
 # Upgrade this application
 
 Bitnami provides up-to-date versions of MariaDB and Redmine, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Redmine container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
