@@ -11,7 +11,7 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="pushgateway" \
-    BITNAMI_IMAGE_VERSION="0.10.0-debian-10-r104" \
+    BITNAMI_IMAGE_VERSION="0.10.0-debian-10-r105" \
     PATH="/opt/bitnami/pushgateway/bin:$PATH"
 
 EXPOSE 9091
