@@ -7,7 +7,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl dirmngr gnupg gzip libbz2-1.0 libc6 libffi6 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libtinfo6 locales procps tar zlib1g
+RUN install_packages ca-certificates curl dirmngr gnupg gzip libbz2-1.0 libc6 libffi6 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libtinfo6 locales procps sudo tar zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install python-3.6.10-3 --checksum 9211a0faa0fd4a39ddec622d28d5390b89b3eaef162c3822a3dfb636c14bf7b7
@@ -19,7 +19,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 
 ENV BITNAMI_APP_NAME="elasticsearch-curator" \
-    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r103" \
+    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r104" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
