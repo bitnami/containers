@@ -1,7 +1,7 @@
 version: '2'
 services:
   myapp:
-    image: 'bitnami/codeigniter:3'
+    image: 'docker.io/bitnami/codeigniter:3-debian-10'
     ports:
       - '8000:8000'
     volumes:
@@ -9,6 +9,6 @@ services:
     depends_on:
       - mariadb
   mariadb:
-    image: 'bitnami/mariadb:10.3'
+    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
