@@ -2,7 +2,7 @@ version: '2'
 
 services:
   jsonnet:
-    image: bitnami/jsonnet:0.15
+    image: docker.io/bitnami/jsonnet:0.15-debian-10
     volumes:
       - jsonnet_data:/bitnami
 volumes:
