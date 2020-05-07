@@ -2,7 +2,7 @@ version: '2'
 
 services:
   consul:
-    image: bitnami/consul:1
+    image: docker.io/bitnami/consul:1-debian-10
     volumes:
       - consul_data:/bitnami/consul
     ports:
