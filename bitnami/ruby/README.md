@@ -40,10 +40,18 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`2.6-debian-10`, `2.6.6-debian-10-r37`, `2.6`, `2.6.6` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.6-debian-10-r37/2.6/debian-10/Dockerfile)
 * [`2.5-debian-10-prod`, `2.5.8-debian-10-r42-prod`, `2.5-prod`, `2.5.8-prod` (2.5-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-debian-10-r42-prod/2.5-prod/debian-10/Dockerfile)
 * [`2.5-debian-10`, `2.5.8-debian-10-r39`, `2.5`, `2.5.8` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-debian-10-r39/2.5/debian-10/Dockerfile)
-* [`2.4-debian-10-prod`, `2.4.10-debian-10-r41-prod`, `2.4-prod`, `2.4.10-prod` (2.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.10-debian-10-r41-prod/2.4-prod/debian-10/Dockerfile)
+* [`2.4-debian-10-prod`, `2.4.10-debian-10-r42-prod`, `2.4-prod`, `2.4.10-prod` (2.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.10-debian-10-r42-prod/2.4-prod/debian-10/Dockerfile)
 * [`2.4-debian-10`, `2.4.10-debian-10-r39`, `2.4`, `2.4.10` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.4.10-debian-10-r39/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://github.com/bitnami/bitnami-docker-ruby).
+
+## Deprecation Note (2020-07-01)
+
+The current format of some `prod` tags will be discontinued by 1st July, 2020:
+
+* `BRANCH-debian-10-prod` will now be tagged as `BRANCH-prod-debian-10`
+* `VERSION-debian-10-rX-prod` will now be tagged as `VERSION-prod-debian-10-rX`
+* `latest-prod` will be deprecated
 
 # What are `prod` tagged containers for?
 
