@@ -21,7 +21,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /opt/bitnami/scripts/postgresql/postunpack.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="12.2.0-debian-10-r94" \
+    BITNAMI_IMAGE_VERSION="12.2.0-debian-10-r95" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
