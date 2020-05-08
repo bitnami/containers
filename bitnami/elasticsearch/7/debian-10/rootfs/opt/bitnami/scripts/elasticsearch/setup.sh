@@ -26,6 +26,6 @@ am_i_root && ensure_user_exists "$ELASTICSEARCH_DAEMON_USER" "$ELASTICSEARCH_DAE
 # Ensure Elasticsearch is initialized
 elasticsearch_initialize
 # Install Elasticsearch plugins
-if [[ -n "$ELASTICSEARCH_PLUGINS" ]]; then
-    elasticsearch_install_plugins
-fi
+elasticsearch_install_plugins
+# Ensure custom initialization scripts are executed
+elasticsearch_custom_init_scripts

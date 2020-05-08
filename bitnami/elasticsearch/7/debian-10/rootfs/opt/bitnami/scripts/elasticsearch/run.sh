@@ -16,7 +16,7 @@ eval "$(elasticsearch_env)"
 
 # Constants
 EXEC=$(command -v elasticsearch)
-ARGS=("-p" "$ELASTICSEARCH_TMPDIR/elasticsearch.pid" "-Epath.data=$ELASTICSEARCH_DATADIR")
+ARGS=("-p" "$ELASTICSEARCH_TMP_DIR/elasticsearch.pid" "-Epath.data=$ELASTICSEARCH_DATA_DIR")
 [[ -z "${ELASTICSEARCH_EXTRA_FLAGS:-}" ]] || ARGS=("${ARGS[@]}" "${ELASTICSEARCH_EXTRA_FLAGS[@]}")
 export JAVA_HOME=/opt/bitnami/java
 
