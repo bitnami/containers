@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7-debian-10`, `7.6.2-debian-10-r40`, `7`, `7.6.2`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.6.2-debian-10-r40/7/debian-10/Dockerfile)
-* [`6-debian-10`, `6.8.8-debian-10-r42`, `6`, `6.8.8` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.8-debian-10-r42/6/debian-10/Dockerfile)
+* [`6-debian-10`, `6.8.8-debian-10-r43`, `6`, `6.8.8` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.8-debian-10-r43/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
 # Get this image
@@ -219,7 +219,7 @@ For larger cluster, you can setup 'dedicated nodes' using the following environm
  - `ELASTICSEARCH_IS_DEDICATED_NODE`: Elasticsearch node to behave as a 'dedicated node'. Default: **no**
  - `ELASTICSEARCH_NODE_TYPE`: Elasticsearch node type when behaving as a 'dedicated node'. Valid values: *master*, *data*, *coordinating* or *ingest*.
  - `ELASTICSEARCH_CLUSTER_MASTER_HOSTS`: List of elasticsearch master-eligible hosts. Available separators are ' ', ',' and ';'. If no values are provided, it will have the same value than `ELASTICSEARCH_CLUSTER_HOSTS`.
- - `ELASTICSEARCH_TOTAL_NODES`: Number of master + data nodes, it's used to calculate `gateway.expected_nodes` and `gateway.recover_after_nodes` parameters. If not set, those parameters are calculated using `ELASTICSEARCH_CLUSTER_HOSTS`. No defaults. 
+ - `ELASTICSEARCH_TOTAL_NODES`: Number of master + data nodes, it's used to calculate `gateway.expected_nodes` and `gateway.recover_after_nodes` parameters. If not set, those parameters are calculated using `ELASTICSEARCH_CLUSTER_HOSTS`. No defaults.
 
 Find more information about 'dedicated nodes' in the [official documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html).
 
@@ -302,6 +302,24 @@ elasticsearch:
     - /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data
   ...
 ```
+
+## Install plugins
+
+You can add plugins by setting the `ELASTICSEARCH_PLUGINS` environment variable. To specify multiple plugins, separate them by spaces, commas or semicolons. When the container is initialized it will install all of the specified plugins before starting Elasticsearch.
+
+```console
+$ docker run -d --name elasticsearch \
+    -e ELASTICSEARCH_PLUGINS=analysis-icu \
+    bitnami/elasticsearch:latest
+```
+
+The Bitnami Elasticsearch Docker image will also install plugin `.zip` files mounted at the `/bitnami/elasticsearch/plugins` directory inside the container, making it possible to install them from disk without requiring Internet access.
+
+## Initializing a new instance
+
+When the container is executed for the first time, it will execute the files with extension `.sh` located at `/docker-entrypoint-initdb.d`.
+
+In order to have your custom files inside the Docker image, you can mount them as a volume.
 
 # Logging
 

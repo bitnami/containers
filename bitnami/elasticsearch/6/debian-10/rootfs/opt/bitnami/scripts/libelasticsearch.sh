@@ -2,6 +2,7 @@
 #
 # Bitnami Elasticsearch library
 
+# shellcheck disable=SC1090
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
@@ -67,7 +68,7 @@ elasticsearch_conf_set() {
 ########################
 # Check if Elasticsearch is running
 # Globals:
-#   ELASTICSEARCH_TMPDIR
+#   ELASTICSEARCH_TMP_DIR
 # Arguments:
 #   None
 # Returns:
@@ -75,7 +76,7 @@ elasticsearch_conf_set() {
 #########################
 is_elasticsearch_running() {
     local pid
-    pid="$(get_pid_from_file "${ELASTICSEARCH_TMPDIR}/elasticsearch.pid")"
+    pid="$(get_pid_from_file "${ELASTICSEARCH_TMP_DIR}/elasticsearch.pid")"
 
     if [[ -z "$pid" ]]; then
         false
@@ -87,7 +88,7 @@ is_elasticsearch_running() {
 ########################
 # Stop Elasticsearch
 # Globals:
-#   ELASTICSEARCH_TMPDIR
+#   ELASTICSEARCH_TMP_DIR
 # Arguments:
 #   None
 # Returns:
@@ -96,7 +97,7 @@ is_elasticsearch_running() {
 elasticsearch_stop() {
     ! is_elasticsearch_running && return
     debug "Stopping Elasticsearch..."
-    stop_service_using_pid "$ELASTICSEARCH_TMPDIR/elasticsearch.pid"
+    stop_service_using_pid "$ELASTICSEARCH_TMP_DIR/elasticsearch.pid"
 }
 
 ########################
@@ -112,7 +113,7 @@ elasticsearch_start() {
     is_elasticsearch_running && return
 
     debug "Starting Elasticsearch..."
-    local command=("${ELASTICSEARCH_BASEDIR}/bin/elasticsearch" "-d" "-p" "${ELASTICSEARCH_TMPDIR}/elasticsearch.pid" "-Epath.data=$ELASTICSEARCH_DATADIR")
+    local command=("${ELASTICSEARCH_BASE_DIR}/bin/elasticsearch" "-d" "-p" "${ELASTICSEARCH_TMP_DIR}/elasticsearch.pid" "-Epath.data=$ELASTICSEARCH_DATA_DIR")
     am_i_root && command=("gosu" "$ELASTICSEARCH_DAEMON_USER" "${command[@]}")
     if [[ "$BITNAMI_DEBUG" = true ]]; then
         "${command[@]}" &
@@ -132,7 +133,7 @@ elasticsearch_start() {
     local log_counter=30
     while [[ -z "$log_result" ]] && [[ "$log_counter" -ne 0 ]]; do
         log_counter=$(("$log_counter" - 1))
-        log_result="$(tail -7 "${ELASTICSEARCH_LOGDIR}/elasticsearch.log" | grep -i "Node" | grep -i "started")"
+        log_result="$(tail -7 "${ELASTICSEARCH_LOG_DIR}/elasticsearch.log" | grep -i "Node" | grep -i "started")"
         sleep 2
     done
 }
@@ -148,13 +149,16 @@ elasticsearch_start() {
 #########################
 elasticsearch_env() {
     cat <<"EOF"
-export ELASTICSEARCH_BASEDIR="/opt/bitnami/elasticsearch"
-export ELASTICSEARCH_DATADIR="/bitnami/elasticsearch/data"
-export ELASTICSEARCH_CONFDIR="${ELASTICSEARCH_BASEDIR}/config"
-export ELASTICSEARCH_CONF_FILE="${ELASTICSEARCH_CONFDIR}/elasticsearch.yml"
-export ELASTICSEARCH_TMPDIR="${ELASTICSEARCH_BASEDIR}/tmp"
-export ELASTICSEARCH_LOGDIR="${ELASTICSEARCH_BASEDIR}/logs"
-export PATH="${ELASTICSEARCH_BASEDIR}/bin:$PATH"
+export ELASTICSEARCH_BASE_DIR="/opt/bitnami/elasticsearch"
+export ELASTICSEARCH_VOLUME_DIR="/bitnami/elasticsearch"
+export ELASTICSEARCH_DATA_DIR="${ELASTICSEARCH_VOLUME_DIR}/data"
+export ELASTICSEARCH_MOUNTED_PLUGINS_DIR="${ELASTICSEARCH_VOLUME_DIR}/plugins"
+export ELASTICSEARCH_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
+export ELASTICSEARCH_CONF_DIR="${ELASTICSEARCH_BASE_DIR}/config"
+export ELASTICSEARCH_CONF_FILE="${ELASTICSEARCH_CONF_DIR}/elasticsearch.yml"
+export ELASTICSEARCH_TMP_DIR="${ELASTICSEARCH_BASE_DIR}/tmp"
+export ELASTICSEARCH_LOG_DIR="${ELASTICSEARCH_BASE_DIR}/logs"
+export PATH="${ELASTICSEARCH_BASE_DIR}/bin:$PATH"
 export ELASTICSEARCH_DAEMON_USER="${ELASTICSEARCH_DAEMON_USER:-elasticsearch}"
 export ELASTICSEARCH_DAEMON_GROUP="${ELASTICSEARCH_DAEMON_GROUP:-elasticsearch}"
 export ELASTICSEARCH_BIND_ADDRESS="${ELASTICSEARCH_BIND_ADDRESS:-}"
@@ -370,8 +374,8 @@ elasticsearch_set_heap_size() {
         fi
     fi
     debug "Setting '-Xmx${heap_size} -Xms${heap_size}' heap options..."
-    replace_in_file "${ELASTICSEARCH_CONFDIR}/jvm.options" "-Xmx[0-9]+[mg]+" "-Xmx${heap_size}"
-    replace_in_file "${ELASTICSEARCH_CONFDIR}/jvm.options" "-Xms[0-9]+[mg]+" "-Xms${heap_size}"
+    replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "-Xmx[0-9]+[mg]+" "-Xmx${heap_size}"
+    replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "-Xms[0-9]+[mg]+" "-Xms${heap_size}"
 }
 
 ########################
@@ -386,18 +390,18 @@ elasticsearch_set_heap_size() {
 migrate_old_data() {
     warn "Persisted data follows old structure. Migrating to new one..."
     warn "Custom configuration files won't be persisted any longer!"
-    local old_data_dir="${ELASTICSEARCH_DATADIR}/elasticsearch"
+    local old_data_dir="${ELASTICSEARCH_DATA_DIR}/elasticsearch"
     local old_custom_conf_file="${old_data_dir}/conf/elasticsearch_custom.yml"
-    local custom_conf_file="${ELASTICSEARCH_CONFDIR}/elasticsearch_custom.yml"
+    local custom_conf_file="${ELASTICSEARCH_CONF_DIR}/elasticsearch_custom.yml"
     if [[ -f "$old_custom_conf_file" ]]; then
         debug "Adding old custom configuration to user configuration"
         echo "" >> "$custom_conf_file"
         cat "$old_custom_conf_file" >> "$custom_conf_file"
     fi
     debug "Adapting data to new file structure"
-    find "${old_data_dir}/data" -maxdepth 1 -mindepth 1 -exec mv {} "$ELASTICSEARCH_DATADIR" \;
+    find "${old_data_dir}/data" -maxdepth 1 -mindepth 1 -exec mv {} "$ELASTICSEARCH_DATA_DIR" \;
     debug "Removing data that is not persisted anymore from persisted directory"
-    rm -rf "$old_data_dir" "${ELASTICSEARCH_DATADIR}/java"
+    rm -rf "$old_data_dir" "${ELASTICSEARCH_DATA_DIR}/java"
 }
 
 ########################
@@ -414,16 +418,16 @@ elasticsearch_initialize() {
 
     # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
     # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
-    rm -f "$ELASTICSEARCH_TMPDIR/elasticsearch.pid"
+    rm -f "$ELASTICSEARCH_TMP_DIR/elasticsearch.pid"
 
     # Persisted data from old versions
-    if ! is_dir_empty "$ELASTICSEARCH_DATADIR"; then
+    if ! is_dir_empty "$ELASTICSEARCH_DATA_DIR"; then
         debug "Detected persisted data from previous deployments"
-        [[ -d "$ELASTICSEARCH_DATADIR/elasticsearch" ]] && [[ -f "$ELASTICSEARCH_DATADIR/elasticsearch/.initialized" ]] && migrate_old_data
+        [[ -d "$ELASTICSEARCH_DATA_DIR/elasticsearch" ]] && [[ -f "$ELASTICSEARCH_DATA_DIR/elasticsearch/.initialized" ]] && migrate_old_data
     fi
 
     debug "Ensuring expected directories/files exist..."
-    for dir in "$ELASTICSEARCH_TMPDIR" "$ELASTICSEARCH_DATADIR" "$ELASTICSEARCH_LOGDIR" "$ELASTICSEARCH_BASEDIR/plugins" "$ELASTICSEARCH_BASEDIR/modules" "$ELASTICSEARCH_CONFDIR"; do
+    for dir in "$ELASTICSEARCH_TMP_DIR" "$ELASTICSEARCH_DATA_DIR" "$ELASTICSEARCH_LOG_DIR" "$ELASTICSEARCH_BASE_DIR/plugins" "$ELASTICSEARCH_BASE_DIR/modules" "$ELASTICSEARCH_CONF_DIR"; do
         ensure_dir_exists "$dir"
         am_i_root && chown -R "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "$dir"
     done
@@ -434,7 +438,7 @@ elasticsearch_initialize() {
         info "Setting default configuration"
         touch "$ELASTICSEARCH_CONF_FILE"
         elasticsearch_conf_set http.port "$ELASTICSEARCH_PORT_NUMBER"
-        elasticsearch_conf_set path.data "$ELASTICSEARCH_DATADIR"
+        elasticsearch_conf_set path.data "$ELASTICSEARCH_DATA_DIR"
         elasticsearch_conf_set transport.tcp.port "$ELASTICSEARCH_NODE_PORT_NUMBER"
         elasticsearch_cluster_configuration
         elasticsearch_configure_node_type
@@ -445,7 +449,7 @@ elasticsearch_initialize() {
 ########################
 # Install Elasticsearch plugins
 # Globals:
-#   ELASTICSEARCH_PLUGINS
+#   ELASTICSEARCH_*
 # Arguments:
 #   None
 # Returns:
@@ -453,14 +457,80 @@ elasticsearch_initialize() {
 #########################
 elasticsearch_install_plugins() {
     read -r -a plugins_list <<< "$(tr ',;' ' ' <<< "$ELASTICSEARCH_PLUGINS")"
+    local mandatory_plugins=""
+
+    # Helper function for extracting the plugin name from a tarball name
+    # Examples:
+    #   get_plugin_name plugin -> plugin
+    #   get_plugin_name file://plugin.zip -> plugin
+    #   get_plugin_name http://plugin-0.1.2.zip -> plugin
+    get_plugin_name() {
+        local plugin="${1:?missing plugin}"
+        # Remove any paths, and strip both the .zip extension and the version
+        basename "$plugin" | sed -E -e 's/.zip$//' -e 's/-[0-9]+\.[0-9]+\.[0-9]$//'
+    }
+
+    # Collect plugins that should be installed offline
+    read -r -a mounted_plugins <<< "$(find "$ELASTICSEARCH_MOUNTED_PLUGINS_DIR" -type f -name "*.zip" -print0 | xargs -0)"
+    if [[ "${#mounted_plugins[@]}" -gt 0 ]]; then
+        for plugin in "${mounted_plugins[@]}"; do
+            plugins_list+=("file://${plugin}")
+        done
+    fi
+
+    # Skip if there isn't any plugin to install
+    [[ -z "${plugins_list[*]:-}" ]] && return
+
+    # Install plugins
     debug "Installing plugins: ${plugins_list[*]}"
-    elasticsearch_conf_set plugin.mandatory "$ELASTICSEARCH_PLUGINS"
     for plugin in "${plugins_list[@]}"; do
-        debug "Installing plugin: $plugin"
+        plugin_name="$(get_plugin_name "$plugin")"
+        [[ -n "$mandatory_plugins" ]] && mandatory_plugins="${mandatory_plugins},${plugin_name}" || mandatory_plugins="$plugin_name"
+
+        debug "Installing plugin: ${plugin}"
         if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
             elasticsearch-plugin install -b -v "$plugin"
         else
             elasticsearch-plugin install -b -v "$plugin" >/dev/null 2>&1
         fi
     done
+
+    # Mark plugins as mandatory
+    elasticsearch_conf_set plugin.mandatory "$mandatory_plugins"
+}
+
+########################
+# Run custom initialization scripts
+# Globals:
+#   ELASTICSEARCH_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_custom_init_scripts() {
+    read -r -a init_scripts <<< "$(find "$ELASTICSEARCH_INITSCRIPTS_DIR" -type f -name "*.sh" -print0 | xargs -0)"
+    if [[ "${#init_scripts[@]}" -gt 0 ]] && [[ ! -f "$ELASTICSEARCH_VOLUME_DIR"/.user_scripts_initialized ]]; then
+        info "Loading user's custom files from $ELASTICSEARCH_INITSCRIPTS_DIR"
+        for f in "${init_scripts[@]}"; do
+            debug "Executing $f"
+            case "$f" in
+                *.sh)
+                    if [[ -x "$f" ]]; then
+                        if ! "$f"; then
+                            error "Failed executing $f"
+                            return 1
+                        fi
+                    else
+                        warn "Sourcing $f as it is not executable by the current user, any error may cause initialization to fail"
+                        . "$f"
+                    fi
+                    ;;
+                *)
+                    warn "Skipping $f, supported formats are: .sh"
+                    ;;
+            esac
+        done
+        touch "$ELASTICSEARCH_VOLUME_DIR"/.user_scripts_initialized
+    fi
 }
