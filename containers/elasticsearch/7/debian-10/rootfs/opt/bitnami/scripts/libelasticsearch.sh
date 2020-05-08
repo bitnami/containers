@@ -159,6 +159,7 @@ export ELASTICSEARCH_DAEMON_USER="${ELASTICSEARCH_DAEMON_USER:-elasticsearch}"
 export ELASTICSEARCH_DAEMON_GROUP="${ELASTICSEARCH_DAEMON_GROUP:-elasticsearch}"
 export ELASTICSEARCH_BIND_ADDRESS="${ELASTICSEARCH_BIND_ADDRESS:-}"
 export ELASTICSEARCH_CLUSTER_HOSTS="${ELASTICSEARCH_CLUSTER_HOSTS:-}"
+export ELASTICSEARCH_TOTAL_NODES="${ELASTICSEARCH_TOTAL_NODES:-}"
 export ELASTICSEARCH_CLUSTER_MASTER_HOSTS="${ELASTICSEARCH_CLUSTER_MASTER_HOSTS:-}"
 export ELASTICSEARCH_CLUSTER_NAME="${ELASTICSEARCH_CLUSTER_NAME:-}"
 export ELASTICSEARCH_HEAP_SIZE="${ELASTICSEARCH_HEAP_SIZE:-1024m}"
@@ -242,14 +243,6 @@ elasticsearch_validate() {
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
-# Bash use floor by default. You can use it to get ceil.
-# ceil( a/b ) = floor( (a+b-1)/b )
-ceiling45() {
-    local num=$(($1*4))
-    local div=5
-    echo $(( (num + div - 1) / div ))
-}
-
 ########################
 # Configure Elasticsearch cluster settings
 # Globals:
@@ -278,8 +271,12 @@ elasticsearch_cluster_configuration() {
     if [[ -n "$ELASTICSEARCH_CLUSTER_HOSTS" ]]; then
         read -r -a host_list <<< "$(tr ',;' ' ' <<< "$ELASTICSEARCH_CLUSTER_HOSTS")"
         master_list=( "${host_list[@]}" )
+        total_nodes=${#host_list[@]}
         if [[ -n "$ELASTICSEARCH_CLUSTER_MASTER_HOSTS" ]]; then
             read -r -a master_list <<< "$(tr ',;' ' ' <<< "$ELASTICSEARCH_CLUSTER_MASTER_HOSTS")"
+        fi
+        if [[ -n "$ELASTICSEARCH_TOTAL_NODES" ]]; then
+            total_nodes=$ELASTICSEARCH_TOTAL_NODES
         fi
         ELASTICSEARCH_MAJOR_VERSION=$(elasticsearch --version | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}' | awk -F "." '{print $1}')
         if [[ "$ELASTICSEARCH_MAJOR_VERSION" -le 6 ]]; then
@@ -288,8 +285,8 @@ elasticsearch_cluster_configuration() {
             elasticsearch_conf_set discovery.seed_hosts "${host_list[@]}"
         fi
         elasticsearch_conf_set discovery.initial_state_timeout "5m"
-        elasticsearch_conf_set gateway.recover_after_nodes "$(ceiling45 "${#host_list[@]}")"
-        elasticsearch_conf_set gateway.expected_nodes "${#host_list[@]}"
+        elasticsearch_conf_set gateway.recover_after_nodes "$(((total_nodes+1+1)/2))"
+        elasticsearch_conf_set gateway.expected_nodes "$total_nodes"
         if [[ "$ELASTICSEARCH_NODE_TYPE" = "master" ]] && [[ "$ELASTICSEARCH_MAJOR_VERSION" -gt 6 ]]; then
             elasticsearch_conf_set cluster.initial_master_nodes "${master_list[@]}"
         fi
