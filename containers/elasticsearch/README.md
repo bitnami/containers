@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7-debian-10`, `7.6.2-debian-10-r39`, `7`, `7.6.2`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.6.2-debian-10-r39/7/debian-10/Dockerfile)
-* [`6-debian-10`, `6.8.8-debian-10-r41`, `6`, `6.8.8` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.8-debian-10-r41/6/debian-10/Dockerfile)
+* [`6-debian-10`, `6.8.8-debian-10-r42`, `6`, `6.8.8` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.8-debian-10-r42/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
 # Get this image
@@ -219,6 +219,7 @@ For larger cluster, you can setup 'dedicated nodes' using the following environm
  - `ELASTICSEARCH_IS_DEDICATED_NODE`: Elasticsearch node to behave as a 'dedicated node'. Default: **no**
  - `ELASTICSEARCH_NODE_TYPE`: Elasticsearch node type when behaving as a 'dedicated node'. Valid values: *master*, *data*, *coordinating* or *ingest*.
  - `ELASTICSEARCH_CLUSTER_MASTER_HOSTS`: List of elasticsearch master-eligible hosts. Available separators are ' ', ',' and ';'. If no values are provided, it will have the same value than `ELASTICSEARCH_CLUSTER_HOSTS`.
+ - `ELASTICSEARCH_TOTAL_NODES`: Number of master + data nodes, it's used to calculate `gateway.expected_nodes` and `gateway.recover_after_nodes` parameters. If not set, those parameters are calculated using `ELASTICSEARCH_CLUSTER_HOSTS`. No defaults. 
 
 Find more information about 'dedicated nodes' in the [official documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html).
 
