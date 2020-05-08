@@ -38,10 +38,18 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`7.4-debian-10-prod`, `7.4.5-debian-10-r20-prod`, `7.4-prod`, `7.4.5-prod` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.5-debian-10-r20-prod/7.4-prod/debian-10/Dockerfile)
 * [`7.3-debian-10`, `7.3.17-debian-10-r27`, `7.3`, `7.3.17`, `latest` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.17-debian-10-r27/7.3/debian-10/Dockerfile)
 * [`7.3-debian-10-prod`, `7.3.17-debian-10-r21-prod`, `7.3-prod`, `7.3.17-prod`, `latest-prod` (7.3-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.17-debian-10-r21-prod/7.3-prod/debian-10/Dockerfile)
-* [`7.2-debian-10`, `7.2.30-debian-10-r25`, `7.2`, `7.2.30` (7.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.30-debian-10-r25/7.2/debian-10/Dockerfile)
+* [`7.2-debian-10`, `7.2.30-debian-10-r26`, `7.2`, `7.2.30` (7.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.30-debian-10-r26/7.2/debian-10/Dockerfile)
 * [`7.2-debian-10-prod`, `7.2.30-debian-10-r20-prod`, `7.2-prod`, `7.2.30-prod` (7.2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.30-debian-10-r20-prod/7.2-prod/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
+
+## Deprecation Note (2020-07-01)
+
+The current format of some `prod` tags will be discontinued by 1st July, 2020:
+
+* `BRANCH-debian-10-prod` will now be tagged as `BRANCH-prod-debian-10`
+* `VERSION-debian-10-rX-prod` will now be tagged as `VERSION-prod-debian-10-rX`
+* `latest-prod` will be deprecated
 
 # What are `prod` tagged containers for?
 
