@@ -891,16 +891,16 @@ mysql_ensure_user_exists() {
     if [[ -n "$ssl_ca" ]]; then
         opts+=("--ssl-ca" "$ssl_ca")
     fi
-    mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "${opts[@]}" <<EOF
+    mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "${opts[@]:-}" <<EOF
 create $([[ "$DB_FLAVOR" = "mariadb" ]] && echo "or replace") user '$user'@'%' $auth_string;
 EOF
     debug "Removing all other hosts for the user"
-    hosts=$(mysql_execute_print_output "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "${opts[@]}" <<EOF
+    hosts=$(mysql_execute_print_output "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "${opts[@]:-}" <<EOF
 select Host from user where User='$user' and Host!='%';
 EOF
 )
     for host in $hosts; do
-        mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "${opts[@]}" <<EOF
+        mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "${opts[@]:-}" <<EOF
 drop user '$user'@'$host';
 EOF
     done
