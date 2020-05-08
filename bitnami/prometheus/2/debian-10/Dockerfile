@@ -3,10 +3,10 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl procps sudo unzip wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.18.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "2435cddfa5083816e83898925b9e4063df1107dcf2e6a6ad024197810e66e667  /tmp/bitnami/pkg/cache/prometheus-2.18.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.18.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/prometheus-2.18.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.18.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "7c5f9d8860c459b32f99446c200b9e6a3f19cd782916c539271c812c2554f4b5  /tmp/bitnami/pkg/cache/prometheus-2.18.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.18.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/prometheus-2.18.1-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN ln -sf /opt/bitnami/prometheus/conf /etc/prometheus
@@ -14,7 +14,7 @@ RUN ln -sf /opt/bitnami/prometheus/data /prometheus
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.18.0-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="2.18.1-debian-10-r0" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
