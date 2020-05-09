@@ -35,7 +35,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 # Supported tags and respective `Dockerfile` links
 
 
-* [`0-debian-10`, `0.30.0-debian-10-r87`, `0`, `0.30.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.30.0-debian-10-r87/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.30.0-debian-10-r88`, `0`, `0.30.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.30.0-debian-10-r88/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nginx-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller).
 
