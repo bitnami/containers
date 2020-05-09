@@ -16,7 +16,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.12.0-debian-10-r43" \
+    BITNAMI_IMAGE_VERSION="0.12.0-debian-10-r44" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/chartmuseum/bin:$PATH"
 
 USER 1001
