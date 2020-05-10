@@ -13,7 +13,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN ln -sf /opt/bitnami/consul-exporter/bin/consul_exporter /bin/consul_exporter
 
 ENV BITNAMI_APP_NAME="consul-exporter" \
-    BITNAMI_IMAGE_VERSION="0.6.0-debian-10-r106" \
+    BITNAMI_IMAGE_VERSION="0.6.0-debian-10-r107" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
