@@ -1,4 +1,4 @@
-FROM bitnami/java:11.0.7-debian-10-r28 as development
+FROM bitnami/java:11.0.7-debian-10-r29 as development
 
 ######
 
@@ -21,7 +21,7 @@ COPY --from=development /opt/bitnami/java /opt/bitnami/java
 COPY --from=development /opt/bitnami/licenses /opt/bitnami/licenses
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="11.0.7-debian-10-r23-prod" \
+    BITNAMI_IMAGE_VERSION="11.0.7-debian-10-r24-prod" \
     JAVA_HOME="/opt/bitnami/java" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
