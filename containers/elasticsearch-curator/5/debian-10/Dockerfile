@@ -19,7 +19,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 
 ENV BITNAMI_APP_NAME="elasticsearch-curator" \
-    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r106" \
+    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r107" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
