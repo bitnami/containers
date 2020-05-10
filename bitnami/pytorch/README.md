@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.5.0-debian-10-r16`, `1`, `1.5.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.5.0-debian-10-r16/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.5.0-debian-10-r17`, `1`, `1.5.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.5.0-debian-10-r17/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pytorch GitHub repo](https://github.com/bitnami/bitnami-docker-pytorch).
 
