@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/fluentd/postunpack.sh
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.10.3-debian-10-r9" \
+    BITNAMI_IMAGE_VERSION="1.10.3-debian-10-r10" \
     GEM_HOME="/opt/bitnami/fluentd" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/common/bin:/opt/bitnami/fluentd/bin:$PATH"
 
