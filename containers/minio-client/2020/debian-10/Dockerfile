@@ -17,7 +17,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 ENV BITNAMI_APP_NAME="minio-client" \
-    BITNAMI_IMAGE_VERSION="2020.5.6-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="2020.5.6-debian-10-r5" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/common/bin:$PATH"
 
 WORKDIR /opt/bitnami/minio-client
