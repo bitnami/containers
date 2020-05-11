@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6.0-debian-10`, `6.0.1-debian-10-r6`, `6.0`, `6.0.1`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.1-debian-10-r6/6.0/debian-10/Dockerfile)
-* [`5.0-debian-10`, `5.0.9-debian-10-r14`, `5.0`, `5.0.9` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.9-debian-10-r14/5.0/debian-10/Dockerfile)
+* [`5.0-debian-10`, `5.0.9-debian-10-r15`, `5.0`, `5.0.9` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.9-debian-10-r15/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
@@ -71,7 +71,7 @@ $ docker build -t bitnami/redis:latest 'https://github.com/bitnami/bitnami-docke
 
 # Persisting your database
 
-Redis provides a different range of [persistence options](https://redis.io/topics/persistence). This contanier uses *AOF persistence by default* but it is easy to overwrite that configuration in a `docker-compose.yaml` file with this entry `command: /opt/bitnami/scripts/redis/run.sh --appendonly no`.
+Redis provides a different range of [persistence options](https://redis.io/topics/persistence). This contanier uses *AOF persistence by default* but it is easy to overwrite that configuration in a `docker-compose.yaml` file with this entry `command: /opt/bitnami/scripts/redis/run.sh --appendonly no`. Alternatively, you may use the `REDIS_AOF_ENABLED` env variable as explained in [Disabling AOF persistence](https://github.com/bitnami/bitnami-docker-redis#disabling-aof-persistence).
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -266,6 +266,25 @@ services:
   ...
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+  ...
+```
+
+## Disabling AOF persistence
+
+Redis offers different [options](https://redis.io/topics/persistence) when it comes to persistence. By default, this image is set up to use the AOF (Append Only File) approach. Should you need to change this behaviour, setting the `REDIS_AOF_ENABLED=no` env variable will disable this feature.
+
+```console
+$ docker run --name redis -e REDIS_AOF_ENABLED=no bitnami/redis:latest
+```
+
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  redis:
+  ...
+    environment:
+      - REDIS_AOF_ENABLED=no
   ...
 ```
 
