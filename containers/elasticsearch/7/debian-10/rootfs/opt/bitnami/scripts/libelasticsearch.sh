@@ -158,6 +158,7 @@ export ELASTICSEARCH_CONF_DIR="${ELASTICSEARCH_BASE_DIR}/config"
 export ELASTICSEARCH_CONF_FILE="${ELASTICSEARCH_CONF_DIR}/elasticsearch.yml"
 export ELASTICSEARCH_TMP_DIR="${ELASTICSEARCH_BASE_DIR}/tmp"
 export ELASTICSEARCH_LOG_DIR="${ELASTICSEARCH_BASE_DIR}/logs"
+export ELASTICSEARCH_PLUGINS_DIR="${ELASTICSEARCH_BASE_DIR}/plugins"
 export PATH="${ELASTICSEARCH_BASE_DIR}/bin:$PATH"
 export ELASTICSEARCH_DAEMON_USER="${ELASTICSEARCH_DAEMON_USER:-elasticsearch}"
 export ELASTICSEARCH_DAEMON_GROUP="${ELASTICSEARCH_DAEMON_GROUP:-elasticsearch}"
@@ -486,6 +487,12 @@ elasticsearch_install_plugins() {
     for plugin in "${plugins_list[@]}"; do
         plugin_name="$(get_plugin_name "$plugin")"
         [[ -n "$mandatory_plugins" ]] && mandatory_plugins="${mandatory_plugins},${plugin_name}" || mandatory_plugins="$plugin_name"
+
+        # Check if the plugin was already installed
+        if [[ -d "${ELASTICSEARCH_PLUGINS_DIR}/${plugin_name}" ]]; then
+            debug "Plugin already installed: ${plugin}"
+            continue
+        fi
 
         debug "Installing plugin: ${plugin}"
         if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
