@@ -17,7 +17,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/openldap/postunpack.sh
 ENV BITNAMI_APP_NAME="openldap" \
-    BITNAMI_IMAGE_VERSION="2.4.50-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="2.4.50-debian-10-r7" \
     PATH="/opt/bitnami/openldap/bin:/opt/bitnami/common/bin:/opt/bitnami/openldap/sbin:$PATH"
 
 EXPOSE 1389 1636
