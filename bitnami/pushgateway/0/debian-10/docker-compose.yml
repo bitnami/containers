@@ -2,4 +2,4 @@ version: '2'
 
 services:
   pushgateway:
-    image: bitnami/pushgateway:0
+    image: docker.io/bitnami/pushgateway:0-debian-10
