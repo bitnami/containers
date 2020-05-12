@@ -2,7 +2,7 @@ version: '2'
 
 services:
   user-broker:
-    image: bitnami/user-broker:0
+    image: docker.io/bitnami/user-broker:0-debian-10
     ports:
       - '8005:8005'
       - '8080:8080'
