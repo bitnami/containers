@@ -23,6 +23,8 @@ postgresql_validate
 trap "postgresql_stop" EXIT
 # Ensure 'daemon' user exists when running as 'root'
 am_i_root && ensure_user_exists "$POSTGRESQL_DAEMON_USER" "$POSTGRESQL_DAEMON_GROUP"
+# Fix logging issue when running as root
+am_i_root && chmod o+w "$(readlink /dev/stdout)"
 # Allow running custom pre-initialization scripts
 postgresql_custom_pre_init_scripts
 # Ensure PostgreSQL is initialized
