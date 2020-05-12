@@ -268,7 +268,8 @@ minio_regenerate_keys() {
     echo "$MINIO_ACCESS_KEY" > "${MINIO_DATADIR}/.access_key"
     echo "$MINIO_SECRET_KEY" > "${MINIO_DATADIR}/.secret_key"
     chmod 600 "${MINIO_DATADIR}/.secret_key" "${MINIO_DATADIR}/.access_key"
-    exit $error_code
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 ########################
