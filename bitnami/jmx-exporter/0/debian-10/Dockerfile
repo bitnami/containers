@@ -8,15 +8,15 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "d7271eff41b312b73aea7aea3b79a6b1a69cf6613804803daff952aff7d440b4  /tmp/bitnami/pkg/cache/java-1.8.252-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/java-1.8.252-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/java-1.8.252-0-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jmx-exporter-0.12.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "5eaeb82474209f9b13b9f37b7ca1ce0c137c95c1e19a530a56eb7fcdf640e219  /tmp/bitnami/pkg/cache/jmx-exporter-0.12.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/jmx-exporter-0.12.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/jmx-exporter-0.12.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jmx-exporter-0.13.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "2fe1fdab8c35cf635e7662ee52dad5c45425103d7332e430b288a4a7fd9ce3d5  /tmp/bitnami/pkg/cache/jmx-exporter-0.13.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/jmx-exporter-0.13.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/jmx-exporter-0.13.0-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="jmx-exporter" \
-    BITNAMI_IMAGE_VERSION="0.12.0-debian-10-r109" \
+    BITNAMI_IMAGE_VERSION="0.13.0-debian-10-r0" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
