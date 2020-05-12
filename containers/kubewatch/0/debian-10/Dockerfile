@@ -13,7 +13,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN chown -R 1001:root /opt/bitnami/kubewatch/ && chmod g+rwX /opt/bitnami/kubewatch/
 ENV BITNAMI_APP_NAME="kubewatch" \
-    BITNAMI_IMAGE_VERSION="0.0.4-debian-10-r115" \
+    BITNAMI_IMAGE_VERSION="0.0.4-debian-10-r116" \
     KW_CONFIG="/opt/bitnami/kubewatch" \
     KW_FLOCK_URL="" \
     KW_HIPCHAT_ROOM="" \
