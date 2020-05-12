@@ -19,7 +19,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/pytorch/postunpack.sh
 ENV BITNAMI_APP_NAME="pytorch" \
-    BITNAMI_IMAGE_VERSION="1.5.0-debian-10-r18" \
+    BITNAMI_IMAGE_VERSION="1.5.0-debian-10-r19" \
     LD_LIBRARY_PATH="/opt/bitnami/miniconda/lib/python3.7/site-packages/torch/lib/:/opt/bitnami/miniconda/lib/python3.7/site-packages/PIL/.libs/:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/miniconda/bin:/opt/bitnami/common/bin:$PATH"
