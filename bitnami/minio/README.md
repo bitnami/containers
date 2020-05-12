@@ -4,20 +4,20 @@
 
 [min.io](https://min.io/)
 
-# TL;DR;
+## TL;DR;
 
 ```console
 $ docker run --name minio bitnami/minio:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-minio/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -28,26 +28,25 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/minio?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy MinIO in Kubernetes?
+## How to deploy MinIO in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MinIO Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/minio).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
-
 
 * [`2020-debian-10`, `2020.5.8-debian-10-r4`, `2020`, `2020.5.8`, `latest` (2020/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2020.5.8-debian-10-r4/2020/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio GitHub repo](https://github.com/bitnami/bitnami-docker-minio).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami MinIO Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/minio).
 
@@ -67,7 +66,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/minio:latest 'https://github.com/bitnami/bitnami-docker-minio.git#master:2020/debian-10'
 ```
 
-# Persisting your database
+## Persisting your database
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -93,23 +92,23 @@ services:
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a MinIO server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
 In this example, we will create a [MinIO client](https://github.com/bitnami/bitnami-docker-minio-client) container that will connect to the server container that is running on the same docker network as the client.
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create app-tier --driver bridge
 ```
 
-### Step 2: Launch the MinIO server container
+#### Step 2: Launch the MinIO server container
 
 Use the `--network app-tier` argument to the `docker run` command to attach the MinIO container to the `app-tier` network.
 
@@ -121,7 +120,7 @@ $ docker run -d --name minio-server \
     bitnami/minio:latest
 ```
 
-### Step 3: Launch your MinIO Client container
+#### Step 3: Launch your MinIO Client container
 
 Finally we create a new container instance to launch the MinIO client and connect to the server created in the previous step. In this example, we create a new bucket in the MinIO storage server:
 
@@ -135,7 +134,7 @@ $ docker run -it --rm --name minio-client \
     mb minio/my-bucket
 ```
 
-## Using Docker Compose
+### Using Docker Compose
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the MinIO server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -176,7 +175,7 @@ Launch the containers using:
 $ docker-compose up -d
 ```
 
-# Configuration
+## Configuration
 
 MiNIO can be configured via environment variables as detailed at [MinIO documentation](https://docs.min.io/docs/minio-server-configuration-guide.html).
 
@@ -195,7 +194,7 @@ $ docker-compose up -d
 $ docker-compose exec minio mc admin info local
 ```
 
-## Creating default buckets
+### Creating default buckets
 
 You can create a series of buckets in the MinIO server during the initialization of the container by setting the environment variable `MINIO_DEFAULT_BUCKETS` as shown below:
 
@@ -217,7 +216,7 @@ services:
   ...
 ```
 
-## Securing access to MinIO server with TLS
+### Securing access to MinIO server with TLS
 
 You can secure the access to MinIO server with TLS as detailed at [MinIO documentation](https://docs.min.io/docs/how-to-secure-access-to-minio-server-with-tls.html).
 
@@ -241,14 +240,14 @@ services:
   ...
 ```
 
-## Setting up MinIO in Distributed Mode
+### Setting up MinIO in Distributed Mode
 
 You can configure MinIO in Distributed Mode to setup a highly-available storage system. To do so, the environment variables below **must** be set on each node:
 
-- `MINIO_DISTRIBUTED_MODE_ENABLED`: Set it to 'yes' to enable Distributed Mode.
-- `MINIO_DISTRIBUTED_NODES`: List of MiNIO nodes hosts. Available separatos are ' ', ',' and ';'.
-- `MINIO_ACCESS_KEY`: MinIO server Access Key. Must be common on every node.
-- `MINIO_SECRET_KEY`: MinIO server Secret Key. Must be common on every node.
+* `MINIO_DISTRIBUTED_MODE_ENABLED`: Set it to 'yes' to enable Distributed Mode.
+* `MINIO_DISTRIBUTED_NODES`: List of MiNIO nodes hosts. Available separatos are ' ', ',' and ';'.
+* `MINIO_ACCESS_KEY`: MinIO server Access Key. Must be common on every node.
+* `MINIO_SECRET_KEY`: MinIO server Secret Key. Must be common on every node.
 
 You can use the Docker Compose below to create an 4-node distributed MinIO setup:
 
@@ -288,7 +287,23 @@ services:
 
 Find more information about the Distributed Mode in the [MinIO documentation](https://docs.min.io/docs/distributed-minio-quickstart-guide.html).
 
-# Logging
+### Reconfiguring Keys on container restarts
+
+MinIO configures the access & secret key during the 1st initialization based on the `MINIO_ACCESS_KEY` and `MINIO_SECRET_KEY` environment variables, respetively.
+
+When using persistence, MinIO will reuse the data configured during the 1st initialization by default, ignoring whatever values are set on these environment variables. You can force MinIO to reconfigure the keys based on the environment variables by setting the `MINIO_FORCE_NEW_KEYS` environment variable to `yes`:
+
+```console
+$ docker run --name minio \
+    --publish 9000:9000 \
+    --env MINIO_FORCE_NEW_KEYS="yes" \
+    --env MINIO_ACCESS_KEY="new-minio-access-key" \
+    --env MINIO_SECRET_KEY="new-minio-secret-key" \
+    --volume /path/to/minio-persistence:/data \
+    bitnami/minio:latest
+```
+
+## Logging
 
 The Bitnami MinIO Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -304,7 +319,7 @@ $ docker-compose logs minio
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## HTTP log trace
+### HTTP log trace
 
 To enable HTTP log trace, you can set the environment variable `MINIO_HTTP_TRACE` to redirect the logs to a specific file as detailed at [MinIO documentation](https://docs.min.io/docs/minio-server-configuration-guide.html).
 
@@ -328,13 +343,13 @@ services:
   ...
 ```
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of MinIO, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/minio:latest
@@ -343,7 +358,7 @@ $ docker pull bitnami/minio:latest
 or if you're using Docker Compose, update the value of the image property to
 `bitnami/minio:latest`.
 
-### Step 2: Stop and backup the currently running container
+#### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
@@ -363,7 +378,7 @@ Next, take a snapshot of the persistent volume `/path/to/minio-persistence` usin
 $ rsync -a /path/to/minio-persistence /path/to/minio-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v minio
@@ -375,7 +390,7 @@ or using Docker Compose:
 $ docker-compose rm -v minio
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -389,21 +404,21 @@ or using Docker Compose:
 $ docker-compose up minio
 ```
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-minio/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-minio/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-minio/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+* Host OS and version
+* Docker version (`docker version`)
+* Output of `docker info`
+* Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+* The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2020 Bitnami
 
