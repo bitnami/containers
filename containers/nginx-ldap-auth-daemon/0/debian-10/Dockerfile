@@ -17,7 +17,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="nginx-ldap-auth-daemon" \
-    BITNAMI_IMAGE_VERSION="0.20200116.0-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="0.20200116.0-debian-10-r6" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/nginx-ldap-auth-daemon/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8888
