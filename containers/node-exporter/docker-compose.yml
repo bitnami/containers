@@ -2,4 +2,4 @@ version: '2'
 
 services:
   node-exporter:
-    image: bitnami/node-exporter:0
+    image: docker.io/bitnami/node-exporter:0-debian-10
