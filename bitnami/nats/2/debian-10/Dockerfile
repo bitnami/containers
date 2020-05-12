@@ -13,7 +13,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN chown -R 1001:root /opt/bitnami/nats && chmod g+rwX /opt/bitnami/nats
 ENV BITNAMI_APP_NAME="nats" \
-    BITNAMI_IMAGE_VERSION="2.1.6-debian-10-r42" \
+    BITNAMI_IMAGE_VERSION="2.1.6-debian-10-r43" \
     PATH="/opt/bitnami/nats/bin:$PATH"
 
 EXPOSE 4222 6222 8222
