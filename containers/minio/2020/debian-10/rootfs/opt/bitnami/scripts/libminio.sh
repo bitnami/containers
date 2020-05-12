@@ -36,6 +36,7 @@ export MINIO_PORT_NUMBER="${MINIO_PORT_NUMBER:-9000}"
 export MINIO_DAEMON_USER="minio"
 export MINIO_DAEMON_GROUP="minio"
 export PATH="${MINIO_BASEDIR}/bin:$PATH"
+export MINIO_FORCE_NEW_KEYS="${MINIO_FORCE_NEW_KEYS:-no}"
 EOF
     if [[ -n "${MINIO_ACCESS_KEY_FILE:-}" ]]; then
         cat <<"EOF"
@@ -67,7 +68,6 @@ EOF
 #   Boolean
 #########################
 is_minio_running() {
-    local node
     local status
     if [[ -z "${MINIO_PID:-}" ]]; then
         false
@@ -75,7 +75,6 @@ is_minio_running() {
         if ! is_service_running "$MINIO_PID"; then
             false
         else
-            node=$(minio_node_hostname)
             status="$(minio_client_execute_timeout admin info local --json | jq -r .info.mode)"
             if [[ "$status" = "online" ]]; then
                 true
@@ -132,7 +131,7 @@ minio_stop() {
         minio_client_execute_timeout admin service stop local >/dev/null 2>&1 || true
 
         local counter=5
-        while is_minio_running ; do
+        while is_minio_running; do
             if [[ "$counter" -ne 0 ]]; then
                 break
             fi
@@ -162,6 +161,18 @@ minio_validate() {
         error "$1"
         error_code=1
     }
+    check_yes_no_value() {
+        if ! is_yes_no_value "${!1}"; then
+            print_validation_error "The allowed values for $1 are [yes, no]"
+        fi
+    }
+    check_allowed_port() {
+        local validate_port_args=()
+        ! am_i_root && validate_port_args+=("-unprivileged")
+        if ! err=$(validate_port "${validate_port_args[@]}" "${!1}"); then
+            print_validation_error "An invalid port was specified in the environment variable $1: $err"
+        fi
+    }
 
     if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
         if [[ -z "${MINIO_ACCESS_KEY:-}" ]] || [[ -z "${MINIO_ACCESS_KEY:-}" ]]; then
@@ -180,13 +191,6 @@ minio_validate() {
             warn "Distributed mode is not enabled. The nodes set at the environment variable MINIO_DISTRIBUTED_NODES will be ignored."
         fi
     fi
-
-    local validate_port_args=()
-    ! am_i_root && validate_port_args+=("-unprivileged")
-    if ! err=$(validate_port "${validate_port_args[@]}" "$MINIO_PORT_NUMBER"); then
-        print_validation_error "An invalid port was specified in the environment variable MINIO_PORT_NUMBER: $err"
-    fi
-
     if [[ -n "${MINIO_BROWSER:-}" ]]; then
         shopt -s nocasematch
         if [[ "$MINIO_BROWSER" = "off" ]]; then
@@ -201,6 +205,11 @@ minio_validate() {
             print_validation_error "The HTTP log file specified at the environment variable MINIO_HTTP_TRACE is not writtable by current user \"$(id -u)\""
         fi
     fi
+
+    check_yes_no_value MINIO_SKIP_CLIENT
+    check_yes_no_value MINIO_DISTRIBUTED_MODE_ENABLED
+    check_yes_no_value MINIO_FORCE_NEW_KEYS
+    check_allowed_port MINIO_PORT_NUMBER
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
@@ -230,6 +239,36 @@ minio_create_default_buckets() {
             fi
         done
     fi
+}
+
+########################
+# Regenerate MinIO credentials
+# Globals:
+#   MINIO_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+minio_regenerate_keys() {
+    local error_code=0
+    if is_boolean_yes "$MINIO_FORCE_NEW_KEYS" && [[ -f "${MINIO_DATADIR}/.access_key" ]] && [[ -f "${MINIO_DATADIR}/.secret_key" ]]; then
+        MINIO_ACCESS_KEY_OLD="$(cat "${MINIO_DATADIR}/.access_key")"
+        MINIO_SECRET_KEY_OLD="$(cat "${MINIO_DATADIR}/.secret_key")"
+        if [[ "$MINIO_ACCESS_KEY_OLD" != "$MINIO_ACCESS_KEY" ]] || [[ "$MINIO_SECRET_KEY_OLD" != "$MINIO_SECRET_KEY" ]]; then
+            info "Reconfiguring MinIO credentials..."
+            export MINIO_ACCESS_KEY_OLD MINIO_SECRET_KEY_OLD
+            # Restart MinIO to reconfigure credentials
+            # ref: https://docs.min.io/docs/minio-server-configuration-guide.html
+            minio_start_bg
+            info "Forcing container restart after key regeneration"
+            error_code=1
+        fi
+    fi
+    echo "$MINIO_ACCESS_KEY" > "${MINIO_DATADIR}/.access_key"
+    echo "$MINIO_SECRET_KEY" > "${MINIO_DATADIR}/.secret_key"
+    chmod 600 "${MINIO_DATADIR}/.secret_key" "${MINIO_DATADIR}/.access_key"
+    exit $error_code
 }
 
 ########################
