@@ -25,10 +25,11 @@ replace_in_file() {
     # We should avoid using 'sed in-place' substitutions
     # 1) They are not compatible with files mounted from ConfigMap(s)
     # 2) We found incompatibility issues with Debian10 and "in-place" substitutions
+    del=$'\001' # Use a non-printable character as a 'sed' delimiter to avoid issues
     if [[ $posix_regex = true ]]; then
-        result="$(sed -E "s@$match_regex@$substitute_regex@g" "$filename")"
+        result="$(sed -E "s${del}${match_regex}${del}${substitute_regex}${del}g" "$filename")"
     else
-        result="$(sed "s@$match_regex@$substitute_regex@g" "$filename")"
+        result="$(sed "s${del}${match_regex}${del}${substitute_regex}${del}g" "$filename")"
     fi
     echo "$result" > "$filename"
 }
