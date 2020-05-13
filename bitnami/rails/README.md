@@ -144,6 +144,23 @@ services:
   ...
 ```
 
+## Running without database:
+Sometimes, your application will be a service that will only communicate with 3rd party APIs or services
+or something similar where database interaction is not needed.
+
+For these cases, it is possible to re-use this container to be run as a standalone rails engine service
+in your docker-compose file by defining `SKIP_ACTIVE_RECORD` as an environment variable
+
+```yaml
+services:
+  ...
+  myapp:
+    image: bitnami/rails:latest
+    environment:
+      - SKIP_ACTIVE_RECORD=yes
+  ...
+```
+
 ## Running additional services:
 
 Sometimes, your application will require extra pieces, such as background processing tools like Resque
