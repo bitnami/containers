@@ -15,6 +15,7 @@
 # Load global variables used on Rails configuration.
 # Globals:
 #   RAILS_ENV
+#   SKIP_ACTIVE_RECORD
 #   SKIP_DB_SETUP
 #   SKIP_DB_WAIT
 #   RETRY_ATTEMPTS
@@ -31,6 +32,7 @@
 rails_env() {
     cat <<"EOF"
 RAILS_ENV="${RAILS_ENV:-development}"
+SKIP_ACTIVE_RECORD="${SKIP_ACTIVE_RECORD:-no}"
 SKIP_DB_SETUP="${SKIP_DB_SETUP:-no}"
 SKIP_DB_WAIT="${SKIP_DB_WAIT:-no}"
 RETRY_ATTEMPTS="${RETRY_ATTEMPTS:-30}"
@@ -47,6 +49,7 @@ EOF
 ########################
 # Validate settings in DATABASE_* env vars
 # Globals:
+#   SKIP_ACTIVE_RECORD
 #   SKIP_DB_SETUP
 #   SKIP_DB_WAIT
 #   RETRY_ATTEMPTS
@@ -77,6 +80,7 @@ rails_validate() {
         fi
     }
 
+    check_yes_no_value SKIP_ACTIVE_RECORD
     check_yes_no_value SKIP_DB_SETUP
     check_yes_no_value SKIP_DB_WAIT
     check_positive_value RETRY_ATTEMPTS
@@ -94,6 +98,11 @@ rails_validate() {
 #   None
 #########################
 rails_initialize() {
+    # Skip database intialization
+    if is_boolean_yes "$SKIP_ACTIVE_RECORD"; then
+      export SKIP_DB_WAIT="yes"
+      export SKIP_DB_SETUP="yes"
+    fi
     # Initialize Rails project
     if [[ -f "config.ru" ]]; then
         info "Rails project found, skipping creation"
@@ -101,14 +110,18 @@ rails_initialize() {
         bundle install
     else
         info "Creating new Rails project"
-        rails new "." --database "$DATABASE_TYPE"
-        # Set up database configuration
-        local database_path="$DATABASE_NAME"
-        [[ "$DATABASE_TYPE" = "sqlite3" ]] && database_path="db/${DATABASE_NAME}.sqlite3"
-        info "Configuring database host to ${DATABASE_HOST}"
-        replace_in_file "config/database.yml" "host:.*$" "host: ${DATABASE_HOST}"
-        info "Configuring database name to ${DATABASE_NAME}"
-        replace_in_file "config/database.yml" "database:.*$" "database: ${database_path}" "1,/test:/ "
+        if is_boolean_yes "$SKIP_ACTIVE_RECORD"; then
+            rails new "." --skip-active-record
+        else
+            rails new "." --database "$DATABASE_TYPE"
+            # Set up database configuration
+            local database_path="$DATABASE_NAME"
+            [[ "$DATABASE_TYPE" = "sqlite3" ]] && database_path="db/${DATABASE_NAME}.sqlite3"
+            info "Configuring database host to ${DATABASE_HOST}"
+            replace_in_file "config/database.yml" "host:.*$" "host: ${DATABASE_HOST}"
+            info "Configuring database name to ${DATABASE_NAME}"
+            replace_in_file "config/database.yml" "database:.*$" "database: ${database_path}" "1,/test:/ "
+        fi
     fi
 
     # Wait for database and initialize
