@@ -34,7 +34,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5-debian-10`, `5.1.1-debian-10-r6`, `5`, `5.1.1`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/5.1.1-debian-10-r6/5/debian-10/Dockerfile)
+* [`5-debian-10`, `5.1.1-debian-10-r7`, `5`, `5.1.1`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/5.1.1-debian-10-r7/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
 
@@ -72,7 +72,7 @@ Containers attached to the same network can communicate with each other using th
 $ docker network create oauth2-proxy-network --driver bridge
 ```
 
-### Step 2: Launch the oauth2_proxy container within your network
+### Step 2: Launch the Blacbox_exporter container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `oauth2-proxy-network` network.
 
@@ -80,9 +80,9 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 $ docker run --name oauth2-proxy-node1 --network oauth2-proxy-network bitnami/oauth2-proxy:latest
 ```
 
-### Step 3: Run another container
+### Step 3: Run another containers
 
-We can launch another container on the same network using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
+We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
 
 # Configuration
