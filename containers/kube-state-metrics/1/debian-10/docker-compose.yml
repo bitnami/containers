@@ -2,7 +2,7 @@ version: '2'
 
 services:
   kube-state-metrics:
-    image: bitnami/kube-state-metrics:1
+    image: docker.io/bitnami/kube-state-metrics:1-debian-10
     ports:
       - '8080:8080'
       - '8081:8081'
