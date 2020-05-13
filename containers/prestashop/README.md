@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.7-debian-10`, `1.7.6-5-debian-10-r21`, `1.7`, `1.7.6-5`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.6-5-debian-10-r21/1.7/debian-10/Dockerfile)
+* [`1.7-debian-10`, `1.7.6-5-debian-10-r22`, `1.7`, `1.7.6-5`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.6-5-debian-10-r22/1.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
