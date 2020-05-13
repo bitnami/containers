@@ -2,7 +2,7 @@ version: '2'
 
 services:
   service-catalog:
-    image: bitnami/service-catalog:0
+    image: docker.io/bitnami/service-catalog:0-debian-10
     ports:
       - '443:443'
       - '8443:8443'
