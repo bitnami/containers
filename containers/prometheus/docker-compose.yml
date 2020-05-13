@@ -2,6 +2,6 @@ version: '2'
 
 services:
   prometheus:
-    image: bitnami/prometheus:2
+    image: docker.io/bitnami/prometheus:2-debian-10
     ports:
       - '9090:9090'

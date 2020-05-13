@@ -1,8 +1,9 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl procps sudo unzip wget
+RUN install_packages ca-certificates curl gzip procps tar wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.18.1-0-linux-amd64-debian-10.tar.gz && \
     echo "7c5f9d8860c459b32f99446c200b9e6a3f19cd782916c539271c812c2554f4b5  /tmp/bitnami/pkg/cache/prometheus-2.18.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.18.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -14,7 +15,11 @@ RUN ln -sf /opt/bitnami/prometheus/data /prometheus
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.18.1-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="2.18.1-debian-10-r5" \
+    HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
