@@ -12,14 +12,14 @@ RUN install_packages ca-certificates curl gzip libasound2-dev libc6 libfreetype6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.7-1" --checksum e01669f15e2e655613c19eab1b8b533a720d6334766da34190a2a4939f5a0bc8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "3.3.0-0" --checksum 44c8d8e59396bdec54adbffd26bd98f4a0198e6fc5a280953429d14cefed0868
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "7.6.2-1" --checksum 10fdc7684ef6170568fb2befc3754ff137e8c6e77af4e8e746754b0f4480864f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "7.6.2-2" --checksum 27271588e06454d07bfd8d2b5abf8bb51837aeba78b240facd0473ba136ab737
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/elasticsearch/postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="7.6.2-debian-10-r51" \
+    BITNAMI_IMAGE_VERSION="7.6.2-debian-10-r52" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/elasticsearch/bin:$PATH"
 
