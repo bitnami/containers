@@ -2,4 +2,4 @@ version: '2'
 
 services:
   kubewatch:
-    image: bitnami/kubewatch:0
+    image: docker.io/bitnami/kubewatch:0-debian-10
