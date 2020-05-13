@@ -36,9 +36,9 @@ EOF
 minio_client_bucket_exists() {
     local -r bucket_name="${1:?bucket required}"
     if minio_client_execute ls "${bucket_name}" >/dev/null 2>&1; then
-       true
+        true
     else
-       false
+        false
     fi
 }
 
@@ -84,22 +84,20 @@ minio_client_execute_timeout() {
 #   Series of exports to be used as 'eval' arguments
 #########################
 minio_client_configure_server() {
-  if [[ -n "$MINIO_SERVER_HOST" ]] && [[ -n "$MINIO_SERVER_ACCESS_KEY" ]] && [[ -n "$MINIO_SERVER_SECRET_KEY" ]]; then
-      info "Adding Minio host to 'mc' configuration..."
-      minio_client_execute config host add minio "http://${MINIO_SERVER_HOST}:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ACCESS_KEY}" "${MINIO_SERVER_SECRET_KEY}"
-  fi
+    if [[ -n "$MINIO_SERVER_HOST" ]] && [[ -n "$MINIO_SERVER_ACCESS_KEY" ]] && [[ -n "$MINIO_SERVER_SECRET_KEY" ]]; then
+        info "Adding Minio host to 'mc' configuration..."
+        minio_client_execute config host add minio "http://${MINIO_SERVER_HOST}:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ACCESS_KEY}" "${MINIO_SERVER_SECRET_KEY}"
+    fi
 }
 
 ########################
 # Configure MinIO Client to use a local MinIO server
 # Arguments:
-#   $1 - MinIO server config_file
+#   None
 # Returns:
 #   Series of exports to be used as 'eval' arguments
 #########################
 minio_client_configure_local() {
-  local -r config_file="${1:?missing config_file}"
-
-  info "Adding local Minio host to 'mc' configuration..."
-  minio_client_execute config host add local "http://localhost:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ACCESS_KEY}" "${MINIO_SERVER_SECRET_KEY}" >/dev/null 2>&1
+    info "Adding local Minio host to 'mc' configuration..."
+    minio_client_execute config host add local "http://localhost:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ACCESS_KEY}" "${MINIO_SERVER_SECRET_KEY}" >/dev/null 2>&1
 }
