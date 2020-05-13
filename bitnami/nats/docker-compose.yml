@@ -2,7 +2,7 @@ version: '2'
 
 services:
   nats:
-    image: bitnami/nats:2
+    image: docker.io/bitnami/nats:2-debian-10
     ports:
       - '4222:4222'
       - '6222:6222'
