@@ -25,7 +25,7 @@ RUN rm -rf /app && \
     ln -sf /opt/bitnami/kubeapps /opt/bitnami/kubeapps-dashboard && \
     mv /opt/bitnami/kubeapps/build /app
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.10.0-debian-10-r15" \
+    BITNAMI_IMAGE_VERSION="1.10.0-debian-10-r16" \
     NAMI_PREFIX="/.nami" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
