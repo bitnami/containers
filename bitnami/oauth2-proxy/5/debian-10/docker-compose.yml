@@ -2,7 +2,7 @@ version: '2'
 
 services:
   oauth2-proxy:
-    image: bitnami/oauth2-proxy:5
+    image: docker.io/bitnami/oauth2-proxy:5-debian-10
     ports:
       - '8080:8080'
       - '4180:4180'
