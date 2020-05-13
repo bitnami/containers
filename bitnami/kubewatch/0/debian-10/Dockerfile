@@ -1,8 +1,9 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libc6 procps sudo unzip wget
+RUN install_packages ca-certificates curl gzip libc6 procps tar wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubewatch-0.0.4-0-linux-amd64-debian-10.tar.gz && \
     echo "ef84ab2a04ad9b2a802917b7462dbeb04bd4e627c9eb0a8b6e2e669d44d15ca9  /tmp/bitnami/pkg/cache/kubewatch-0.0.4-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/kubewatch-0.0.4-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -13,7 +14,8 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN chown -R 1001:root /opt/bitnami/kubewatch/ && chmod g+rwX /opt/bitnami/kubewatch/
 ENV BITNAMI_APP_NAME="kubewatch" \
-    BITNAMI_IMAGE_VERSION="0.0.4-debian-10-r116" \
+    BITNAMI_IMAGE_VERSION="0.0.4-debian-10-r117" \
+    HOME="/" \
     KW_CONFIG="/opt/bitnami/kubewatch" \
     KW_FLOCK_URL="" \
     KW_HIPCHAT_ROOM="" \
@@ -25,6 +27,9 @@ ENV BITNAMI_APP_NAME="kubewatch" \
     KW_SLACK_CHANNEL="" \
     KW_SLACK_TOKEN="" \
     KW_WEBHOOK_URL="" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux" \
     PATH="/opt/bitnami/kubewatch/bin:$PATH"
 
 WORKDIR /opt/bitnami/kubewatch
