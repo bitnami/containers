@@ -2,6 +2,6 @@ version: '2'
 
 services:
   fluent-bit:
-    image: bitnami/fluent-bit:1
+    image: docker.io/bitnami/fluent-bit:1-debian-10
     ports:
       - '2020:2020'
