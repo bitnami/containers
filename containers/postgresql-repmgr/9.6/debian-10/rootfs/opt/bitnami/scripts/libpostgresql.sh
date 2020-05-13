@@ -644,11 +644,10 @@ postgresql_initialize() {
     fi
 
     postgresql_debug "Ensuring expected directories/files exist..."
-    for dir in "$POSTGRESQL_TMP_DIR" "$POSTGRESQL_LOG_DIR"; do
+    for dir in "$POSTGRESQL_TMP_DIR" "$POSTGRESQL_LOG_DIR" "$POSTGRESQL_DATA_DIR"; do
         ensure_dir_exists "$dir"
         am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$dir"
     done
-    ensure_dir_exists "$POSTGRESQL_DATA_DIR"
     am_i_root && find "$POSTGRESQL_DATA_DIR" -mindepth 1 -maxdepth 1 -not -name ".snapshot" -not -name "lost+found" -exec chown -R "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" {} \;
     chmod u+rwx "$POSTGRESQL_DATA_DIR" || postgresql_warn "Lack of permissions on data directory!"
     chmod go-rwx "$POSTGRESQL_DATA_DIR" || postgresql_warn "Lack of permissions on data directory!"
@@ -814,10 +813,15 @@ postgresql_start_bg() {
     local -r pg_ctl_flags=("-w" "-D" "$POSTGRESQL_DATA_DIR" "-l" "$POSTGRESQL_LOG_FILE" "-o" "--config-file=$POSTGRESQL_CONF_FILE --external_pid_file=$POSTGRESQL_PID_FILE --hba_file=$POSTGRESQL_PGHBA_FILE")
     postgresql_info "Starting PostgreSQL in background..."
     is_postgresql_running && return
+    local pg_ctl_cmd=()
+    if am_i_root; then
+        pg_ctl_cmd+=("gosu" "$POSTGRESQL_DAEMON_USER")
+    fi
+    pg_ctl_cmd+=("$POSTGRESQL_BIN_DIR"/pg_ctl)
     if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-       "$POSTGRESQL_BIN_DIR"/pg_ctl "start" "${pg_ctl_flags[@]}"
+        "${pg_ctl_cmd[@]}" "start" "${pg_ctl_flags[@]}"
     else
-       "$POSTGRESQL_BIN_DIR"/pg_ctl "start" "${pg_ctl_flags[@]}" >/dev/null 2>&1
+        "${pg_ctl_cmd[@]}" "start" "${pg_ctl_flags[@]}" >/dev/null 2>&1
     fi
     local -r pg_isready_args=("-U" "postgres")
     local counter=$POSTGRESQL_INIT_MAX_TIMEOUT
@@ -872,17 +876,22 @@ postgresql_master_init_db() {
         am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_INITDB_WAL_DIR"
         initdb_args+=("--waldir" "$POSTGRESQL_INITDB_WAL_DIR")
     fi
+    local initdb_cmd=()
+    if am_i_root; then
+        initdb_cmd+=("gosu" "$POSTGRESQL_DAEMON_USER")
+    fi
+    initdb_cmd+=("$POSTGRESQL_BIN_DIR/initdb")
     if [[ -n "${initdb_args[*]:-}" ]]; then
         postgresql_info "Initializing PostgreSQL with ${initdb_args[*]} extra initdb arguments"
         if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-            "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" "${initdb_args[@]}"
+                "${initdb_cmd[@]}" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" "${initdb_args[@]}"
         else
-            "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" "${initdb_args[@]}" >/dev/null 2>&1
+                "${initdb_cmd[@]}" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" "${initdb_args[@]}" >/dev/null 2>&1
         fi
     elif [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-        "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres"
+        "${initdb_cmd[@]}" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres"
     else
-        "$POSTGRESQL_BIN_DIR/initdb" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" >/dev/null 2>&1
+        "${initdb_cmd[@]}" -E UTF8 -D "$POSTGRESQL_DATA_DIR" -U "postgres" >/dev/null 2>&1
     fi
 }
 
@@ -898,7 +907,11 @@ postgresql_master_init_db() {
 postgresql_slave_init_db() {
     postgresql_info "Waiting for replication master to accept connections (${POSTGRESQL_INIT_MAX_TIMEOUT} timeout)..."
     local -r check_args=("-U" "$POSTGRESQL_REPLICATION_USER" "-h" "$POSTGRESQL_MASTER_HOST" "-p" "$POSTGRESQL_MASTER_PORT_NUMBER" "-d" "postgres")
-    local -r check_cmd=("$POSTGRESQL_BIN_DIR"/pg_isready)
+    local check_cmd=()
+    if am_i_root; then
+        check_cmd=("gosu" "$POSTGRESQL_DAEMON_USER")
+    fi
+    check_cmd+=("$POSTGRESQL_BIN_DIR"/pg_isready)
     local ready_counter=$POSTGRESQL_INIT_MAX_TIMEOUT
 
     while ! PGPASSWORD=$POSTGRESQL_REPLICATION_PASSWORD "${check_cmd[@]}" "${check_args[@]}";do
@@ -912,7 +925,11 @@ postgresql_slave_init_db() {
     done
     postgresql_info "Replicating the initial database"
     local -r backup_args=("-D" "$POSTGRESQL_DATA_DIR" "-U" "$POSTGRESQL_REPLICATION_USER" "-h" "$POSTGRESQL_MASTER_HOST" "-p" "$POSTGRESQL_MASTER_PORT_NUMBER" "-X" "stream" "-w" "-v" "-P")
-    local -r backup_cmd=("$POSTGRESQL_BIN_DIR"/pg_basebackup)
+    local backup_cmd=()
+    if am_i_root; then
+        backup_cmd+=("gosu" "$POSTGRESQL_DAEMON_USER")
+    fi
+    backup_cmd+=("$POSTGRESQL_BIN_DIR"/pg_basebackup)
     local replication_counter=$POSTGRESQL_INIT_MAX_TIMEOUT
     while ! PGPASSWORD=$POSTGRESQL_REPLICATION_PASSWORD "${backup_cmd[@]}" "${backup_args[@]}";do
         postgresql_debug "Backup command failed. Sleeping and trying again"
