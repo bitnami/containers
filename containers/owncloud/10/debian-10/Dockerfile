@@ -9,9 +9,9 @@ RUN install_packages ca-certificates curl dirmngr gnupg libaudit1 libbsd0 libbz2
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.43-1 --checksum 35ad223096be455ce5d11b6006db6d83b5080802cead122bfa5ebebc9d29da61
-RUN bitnami-pkg unpack php-7.2.30-1 --checksum 859dfb574664e48bd14b6aabfdfc819652fc1d877f45981e30606299c57b160b
+RUN bitnami-pkg unpack php-7.2.31-0 --checksum 7083e00025dd268f6d09b24e82efb160e64a6de22e433c59e2ffd15413b000a7
 RUN bitnami-pkg unpack mysql-client-10.3.23-0 --checksum 7af3cead7a38670bed924fbc99e20c67f6244bb5a92642adb4ab6cd307aa9a5e
-RUN bitnami-pkg install libphp-7.2.30-0 --checksum d5f208a1628abda10871e750a9a9111837e4d9a86222336123ca23bb77c12c72
+RUN bitnami-pkg install libphp-7.2.31-0 --checksum ac6cc95babe121a3e5afdecf185abafed8d1a7c50686648d4310930850038479
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg unpack owncloud-10.4.1-0 --checksum 576e7cc656d03dd198c228b0097c12275ecdf5693c44bb202856a71f98adcb7e
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
@@ -26,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.4.1-debian-10-r16" \
+    BITNAMI_IMAGE_VERSION="10.4.1-debian-10-r17" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
