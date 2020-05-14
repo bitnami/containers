@@ -4,10 +4,6 @@
 
 # TL;DR;
 
-```console
-$ docker run --name pgpool bitnami/pgpool:latest
-```
-
 ## Docker Compose
 
 ```console
@@ -41,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.1.1-debian-10-r90`, `4`, `4.1.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.1-debian-10-r90/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.1.1-debian-10-r91`, `4`, `4.1.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.1-debian-10-r91/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
 
@@ -354,21 +350,17 @@ $ docker-compose up -d
 
 **Everytime the container is started**, it will execute the files with extension `.sh` located at `/docker-entrypoint-initdb.d` after initializing Pgpool.
 
-In order to have your custom files inside the docker image you can mount them as a volume.
+In order to have your custom files inside the docker image you can mount them as a volume. With docker-compose:
 
-```console
-$ docker run --name pgpool \
-  -v /path/to/init-scripts:/docker-entrypoint-initdb.d \
-  bitnami/pgpool:latest
-```
-
-Or with docker-compose:
-
-```yaml
-pgpool:
-  image: bitnami/pgpool:latest
-  volumes:
-    - /path/to/init-scripts:/docker-entrypoint-initdb.d
+```diff
+     image: bitnami/pgpool:4
+     ports:
+       - 5432:5432
++    volumes:
++      - /path/to/init-scripts:/docker-entrypoint-initdb.d
+     environment:
+       - PGPOOL_BACKEND_NODES=0:pg-0:5432,1:pg-1:5432
+       - PGPOOL_SR_CHECK_USER=customuser
 ```
 
 ## Configuration file
@@ -384,26 +376,17 @@ The image looks for a `pgpool.conf` file in `/opt/bitnami/pgpool/conf/`. You can
 
 ### Step 1: Run the Pgpool image
 
-Run the Pgpool image, mounting a directory from your host.
+Run the Pgpool image, mounting a directory from your host. Using Docker Compose:
 
-```console
-$ docker run --name pgpool \
-    -v /path/to/pgpool-persistence/conf/:/opt/bitnami/pgpool/conf/ \
-    bitnami/pgpool:latest
-```
-
-or using Docker Compose:
-
-```yaml
-version: '2'
-
-services:
-  pgpool:
-    image: bitnami/pgpool:latest
-    ports:
-      - '5432:5432'
-    volumes:
-      - /path/to/pgpool-persistence/conf/:/opt/bitnami/pgpool/conf/
+```diff
+     image: bitnami/pgpool:4
+     ports:
+       - 5432:5432
++    volumes:
++      - /path/to/pgpool-persistence/conf/:/opt/bitnami/pgpool/conf/
+     environment:
+       - PGPOOL_BACKEND_NODES=0:pg-0:5432,1:pg-1:5432
+       - PGPOOL_SR_CHECK_USER=customuser
 ```
 
 ### Step 2: Edit the configuration
@@ -482,13 +465,13 @@ $ docker pull bitnami/pgpool:latest
 Stop the currently running container using the command
 
 ```console
-$ docker stop pgpool
+$ docker-compose stop pgpool
 ```
 
 ### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v pgpool
+$ docker-compose rm -v pgpool
 ```
 
 ### Step 4: Run the new image
@@ -496,7 +479,7 @@ $ docker rm -v pgpool
 Re-create your container from the new image.
 
 ```console
-$ docker run --name pgpool bitnami/pgpool:latest
+$ docker-compose up pgpool
 ```
 
 # Notable Changes
