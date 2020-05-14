@@ -166,7 +166,7 @@ redis_cluster_create() {
     ips=($(dns_lookup "$node") "${ips[@]}")
   done
 
-  redis-cli --cluster create "${ips[@]/%/:${REDIS_PORT}}" --cluster-replicas "$REDIS_CLUSTER_REPLICAS" --cluster-yes || true
+  yes yes | redis-cli --cluster create "${ips[@]/%/:${REDIS_PORT}}" --cluster-replicas "$REDIS_CLUSTER_REPLICAS" --cluster-yes || true
   if redis_cluster_check "${ips[0]}"; then
     echo "Cluster correctly created"
   else
