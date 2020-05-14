@@ -2,6 +2,6 @@ version: '2'
 
 services:
   open-service-broker-azure:
-    image: bitnami/open-service-broker-azure:0
+    image: docker.io/bitnami/open-service-broker-azure:1-debian-10
     ports:
       - '8080:8080'
