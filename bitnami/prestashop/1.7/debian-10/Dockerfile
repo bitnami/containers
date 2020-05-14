@@ -9,9 +9,9 @@ RUN install_packages ca-certificates curl dirmngr gnupg libaio1 libaudit1 libbsd
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.43-1 --checksum 35ad223096be455ce5d11b6006db6d83b5080802cead122bfa5ebebc9d29da61
-RUN bitnami-pkg unpack php-7.2.30-1 --checksum 859dfb574664e48bd14b6aabfdfc819652fc1d877f45981e30606299c57b160b
+RUN bitnami-pkg unpack php-7.2.31-0 --checksum 7083e00025dd268f6d09b24e82efb160e64a6de22e433c59e2ffd15413b000a7
 RUN bitnami-pkg unpack mysql-client-10.1.45-0 --checksum ab16b1f8b0bedb562cdbc877bf365b03cf518ae24c5389427fbd85ddec378901
-RUN bitnami-pkg install libphp-7.2.30-0 --checksum d5f208a1628abda10871e750a9a9111837e4d9a86222336123ca23bb77c12c72
+RUN bitnami-pkg install libphp-7.2.31-0 --checksum ac6cc95babe121a3e5afdecf185abafed8d1a7c50686648d4310930850038479
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg unpack prestashop-1.7.6-5-0 --checksum bf9e88eec3933ac77bf2dbb6dbdec0167d84a4f7e8c7fb6c75c92d874cb67ff9
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
@@ -26,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-5-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="1.7.6-5-debian-10-r23" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
