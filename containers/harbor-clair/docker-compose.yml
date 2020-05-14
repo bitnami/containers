@@ -2,7 +2,7 @@ version: '2'
 
 services:
   harbor-clair:
-    image: bitnami/harbor-clair:1
+    image: docker.io/bitnami/harbor-clair:1-debian-10
     ports:
       - '6060:6060'
       - '6061:6061'
@@ -10,7 +10,7 @@ services:
       - harbor-clair_data:/bitnami
       - ./config/clair/config.yaml:/etc/clair/config.yaml:ro
   postgresql:
-    image: bitnami/postgresql:11
+    image: docker.io/bitnami/postgresql:11-debian-10
     container_name: postgresql
     environment:
       - POSTGRESQL_PASSWORD=bitnami
