@@ -17,7 +17,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/dotnet/postunpack.sh
 ENV BITNAMI_APP_NAME="dotnet" \
-    BITNAMI_IMAGE_VERSION="3.1.4-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="3.1.4-debian-10-r1" \
     DOTNET_CLI_HOME="/app" \
     DOTNET_ROOT="/opt/bitnami/dotnet/bin" \
     HOME="/app" \
