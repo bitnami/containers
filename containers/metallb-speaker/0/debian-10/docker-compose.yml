@@ -1,4 +1,4 @@
 version: '2'
 services:
   metallb-speaker:
-    image: bitnami/metallb-speaker:0
+    image: docker.io/bitnami/metallb-speaker:0-debian-10
