@@ -19,7 +19,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /opt/bitnami/scripts/mariadb-galera/postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb-galera" \
-    BITNAMI_IMAGE_VERSION="10.1.45-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="10.1.45-debian-10-r1" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:/opt/bitnami/common/bin:$PATH"
 
