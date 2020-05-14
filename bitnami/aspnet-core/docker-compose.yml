@@ -1,7 +1,7 @@
 version: '2'
 services:
   aspnet-core:
-    image: bitnami/aspnet-core:3.1-debian-10
+    image: docker.io/bitnami/aspnet-core:3.1-debian-10
     command: ["tail", "-f", "/dev/null"] # To keep the container running
     volumes:
       - aspnet-core_data:/app
