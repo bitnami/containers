@@ -1,13 +1,13 @@
 version: '2'
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.3'
+    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
     environment:
       - MARIADB_ROOT_PASSWORD=bitnami
     volumes:
       - 'mariadb_data:/bitnami'
   phpmyadmin:
-    image: 'bitnami/phpmyadmin:5'
+    image: 'docker.io/bitnami/phpmyadmin:5-debian-10'
     ports:
       - '80:80'
       - '443:443'
