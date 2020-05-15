@@ -30,14 +30,14 @@ $ docker-compose up
 
 # Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
 # Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9-scratch`, `9.0.3-scratch-r0`, `9`, `9.0.3`, `latest` (9/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/9.0.3/9/scratch/Dockerfile)
+* [`10-scratch`, `10.0.0-scratch-r0`, `10`, `10.0.0`, `latest` (10/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper/blob/10.0.0/10/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak-gatekeeper GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper).
 
@@ -64,7 +64,7 @@ $ docker pull bitnami/keycloak-gatekeeper:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/keycloak-gatekeeper:latest 'https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper.git#master:9/scratch'
+$ docker build -t bitnami/keycloak-gatekeeper:latest 'https://github.com/bitnami/bitnami-docker-keycloak-gatekeeper.git#master:10/scratch'
 ```
 
 # Configuration
