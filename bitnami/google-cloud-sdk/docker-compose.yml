@@ -1,4 +1,4 @@
 version: '2'
 services:
   google-cloud-sdk:
-    image: bitnami/google-cloud-sdk:0
+    image: docker.io/bitnami/google-cloud-sdk:0-debian-10
