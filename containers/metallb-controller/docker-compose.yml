@@ -1,4 +1,4 @@
 version: '2'
 services:
   metallb-controller:
-    image: bitnami/metallb-controller:0
+    image: docker.io/bitnami/metallb-controller:0-debian-10
