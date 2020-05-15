@@ -266,10 +266,12 @@ zookeeper_generate_conf() {
         zookeeper_conf_set "$ZOO_CONF_FILE" ssl.trustStore.password "$ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD"
     fi
     if [[ "${ZOO_TLS_QUORUM_ENABLE}" = true ]]; then
-        zookeeper_conf_set "$ZOO_CONF_FILE" quorum.keyStore.location "$ZOO_TLS_QUORUM_KEYSTORE_FILE"
-        zookeeper_conf_set "$ZOO_CONF_FILE" quorum.keyStore.password "$ZOO_TLS_QUORUM_KEYSTORE_PASSWORD"
-        zookeeper_conf_set "$ZOO_CONF_FILE" quorum.trustStore.location "$ZOO_TLS_QUORUM_TRUSTSTORE_FILE"
-        zookeeper_conf_set "$ZOO_CONF_FILE" quorum.trustStore.password "$ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD"
+        zookeeper_conf_set "$ZOO_CONF_FILE" sslQuorum true
+        zookeeper_conf_set "$ZOO_CONF_FILE" serverCnxnFactory org.apache.zookeeper.server.NettyServerCnxnFactory
+        zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.keyStore.location "$ZOO_TLS_QUORUM_KEYSTORE_FILE"
+        zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.keyStore.password "$ZOO_TLS_QUORUM_KEYSTORE_PASSWORD"
+        zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.trustStore.location "$ZOO_TLS_QUORUM_TRUSTSTORE_FILE"
+        zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.trustStore.password "$ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD"
     fi
 }
 
