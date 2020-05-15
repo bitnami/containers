@@ -12,10 +12,10 @@ RUN install_packages ca-certificates curl dirmngr gnupg gzip libbsd0 libbz2-1.0 
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install python-3.6.10-6 --checksum bbe779b8436ddfbb89ecd9a46a7d074cff3834b9c6494ee1518de228b09f6627
-RUN bitnami-pkg install postgresql-client-10.12.0-2 --checksum d410e1b0444e7ca41bc12ef379e435ac4c44263a51eac8f3d455115b5084fd00
+RUN bitnami-pkg install postgresql-client-10.13.0-0 --checksum 30ab4540dddd0c7a6aabb92c5fda4b6746427cd71d9b44964d0a02c7409fac2f
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
-RUN bitnami-pkg unpack airflow-scheduler-1.10.10-1 --checksum 4a1b49b89d96b82a0f196bcb7eb32835f2400a0ca9f3049170d1b4961f8cd4f3
+RUN bitnami-pkg unpack airflow-scheduler-1.10.10-2 --checksum 1b161c79cc339539548184ebc50ecd26c0459897ace0a21cf8b3b4da3b17b3c6
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
@@ -35,7 +35,7 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_HOST="airflow" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="airflow-scheduler" \
-    BITNAMI_IMAGE_VERSION="1.10.10-debian-10-r33" \
+    BITNAMI_IMAGE_VERSION="1.10.10-debian-10-r34" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy.libs/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
     LD_PRELOAD="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="airflow" \
