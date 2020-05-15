@@ -2,6 +2,6 @@ version: '2'
 
 services:
   metrics-server:
-    image: bitnami/metrics-server:0
+    image: docker.io/bitnami/metrics-server:0-debian-10
     ports:
       - '8443:8443'
