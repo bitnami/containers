@@ -8,7 +8,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl dirmngr gnupg libblkid1 libbsd0 libc6 libedit2 libffi6 libgcc1 libglib2.0-0 libgmp10 libgnutls30 libhogweed4 libicu63 libidn2-0 libldap-2.4-2 liblzma5 libmount1 libnettle6 libp11-kit0 libpcre3 libsasl2-2 libselinux1 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 procps sudo unzip zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
-RUN bitnami-pkg unpack postgresql-client-10.12.0-2 --checksum d410e1b0444e7ca41bc12ef379e435ac4c44263a51eac8f3d455115b5084fd00
+RUN bitnami-pkg unpack postgresql-client-10.13.0-0 --checksum 30ab4540dddd0c7a6aabb92c5fda4b6746427cd71d9b44964d0a02c7409fac2f
 RUN bitnami-pkg install java-11.0.7-1 --checksum e01669f15e2e655613c19eab1b8b533a720d6334766da34190a2a4939f5a0bc8
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg unpack sonarqube-7.9.3-3 --checksum 04b5bf95bc8f15e2cbec2d6f6dcb697f22b2bda07a82e96b3a9ab122e9180f5f
@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="7.9.3-debian-10-r45" \
+    BITNAMI_IMAGE_VERSION="7.9.3-debian-10-r46" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME="" \
