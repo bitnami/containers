@@ -2,11 +2,9 @@
 
 . /opt/bitnami/base/functions
 . /opt/bitnami/base/helpers
+. /opt/bitnami/express/functions
 
 print_welcome_page
-#!/bin/bash
-
-. /opt/bitnami/express/functions
 
 if [ "$1" = npm ] && [ "$2" = "start" -o "$2" = "run" ]; then
   bootstrap_express_app
@@ -35,6 +33,5 @@ if [ "$1" = npm ] && [ "$2" = "start" -o "$2" = "run" ]; then
 
   touch "$INIT_SEM"
 fi
-
 
 exec tini -- "$@"
