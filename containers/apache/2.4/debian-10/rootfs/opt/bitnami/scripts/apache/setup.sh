@@ -13,8 +13,8 @@ set -o pipefail
 # Load Apache environment
 . /opt/bitnami/scripts/apache-env.sh
 
-# Ensure apache environment variables are valid
+# Ensure Apache environment variables are valid
 apache_validate
 
-# Ensure apache is initialized
+# Ensure Apache is initialized
 apache_initialize
