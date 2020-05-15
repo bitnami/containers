@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack php-7.2.31-0 --checksum 7083e00025dd268f6d09b24e82efb160e
 RUN bitnami-pkg unpack mysql-client-10.2.32-0 --checksum ae72f4ce3376ede89b971c1ffa11717b8d770f8d26ac3d7ba04b11568ff24c37
 RUN bitnami-pkg install libphp-7.2.31-0 --checksum ac6cc95babe121a3e5afdecf185abafed8d1a7c50686648d4310930850038479
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
-RUN bitnami-pkg unpack orangehrm-4.3.5-0-1 --checksum f712f6abc06e5e5aa85a6e4dad59459533a5797430b42c80b73adf1ec51b5c98
+RUN bitnami-pkg unpack orangehrm-4.4.0-0-0 --checksum c3309c93be3656681a606b4e56f79d67267b78e37b5b28418a77fae354f9aa56
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -26,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.3.5-0-debian-10-r49" \
+    BITNAMI_IMAGE_VERSION="4.4.0-0-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
