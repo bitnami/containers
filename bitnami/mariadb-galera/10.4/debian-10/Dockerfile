@@ -9,8 +9,8 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl iproute2 ldap-utils libaio1 libaudit1 libc6 libcap-ng0 libgcc1 libjemalloc2 libncurses6 libnss-ldapd libpam-ldapd libpam0g libssl1.1 libstdc++6 libtinfo6 lsof nslcd procps rsync socat sudo unzip zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mariadb-galera" "10.4.12-1" --checksum e7ec946664c92be7dfc7d21b8363d6c9eed1f91ad3e4e75caded41d2728ec20e
+RUN install_packages ca-certificates curl iproute2 ldap-utils libaio1 libaudit1 libc6 libcap-ng0 libgcc1 libicu63 libjemalloc2 liblzma5 libncurses6 libnss-ldapd libpam-ldapd libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 lsof nslcd procps rsync socat sudo unzip zlib1g
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mariadb-galera" "10.4.13-0" --checksum 769d96a423a4f73dcd624235e2d7736d4f803c56e47f747035f60083a4dae46d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -19,7 +19,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /opt/bitnami/scripts/mariadb-galera/postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb-galera" \
-    BITNAMI_IMAGE_VERSION="10.4.12-debian-10-r107" \
+    BITNAMI_IMAGE_VERSION="10.4.13-debian-10-r0" \
     NAMI_PREFIX="/.nami" \
     PATH="/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:/opt/bitnami/common/bin:$PATH"
 
