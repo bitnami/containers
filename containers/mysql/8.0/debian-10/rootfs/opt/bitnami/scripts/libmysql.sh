@@ -397,7 +397,7 @@ mysql_initialize() {
         # commands can still be executed until we restart or run 'flush privileges'
         info "Configuring authentication"
         mysql_execute "mysql" <<EOF
-DELETE FROM mysql.user WHERE user<>'mysql.sys';
+DELETE FROM mysql.user WHERE user not in ('mysql.sys','mariadb.sys');
 EOF
         # slaves do not need to configure users
         if [[ -z "$DB_REPLICATION_MODE" ]] || [[ "$DB_REPLICATION_MODE" = "master" ]]; then
