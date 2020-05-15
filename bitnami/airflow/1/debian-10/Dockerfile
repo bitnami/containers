@@ -11,11 +11,11 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl dirmngr gnupg gzip libbsd0 libbz2-1.0 libc6 libcom-err2 libedit2 libffi6 libgcc1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmariadb3 libncursesw6 libnettle6 libp11-kit0 libreadline7 libsasl2-2 libsqlite3-0 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 locales procps sudo tar zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
-RUN bitnami-pkg install python-3.6.10-6 --checksum bbe779b8436ddfbb89ecd9a46a7d074cff3834b9c6494ee1518de228b09f6627
-RUN bitnami-pkg install postgresql-client-10.12.0-2 --checksum d410e1b0444e7ca41bc12ef379e435ac4c44263a51eac8f3d455115b5084fd00
+RUN bitnami-pkg install python-3.6.10-7 --checksum 7a2a076e163413716a8288bdb5b7a0a15d8a64ade82aab8006dd1704fd75f720
+RUN bitnami-pkg install postgresql-client-10.13.0-0 --checksum 30ab4540dddd0c7a6aabb92c5fda4b6746427cd71d9b44964d0a02c7409fac2f
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
-RUN bitnami-pkg unpack airflow-1.10.10-2 --checksum 1a87a5c89172ad7d9171ae9fb6ed16415d69cb1ea472f9f7f079c0b470cf92cb
+RUN bitnami-pkg unpack airflow-1.10.10-4 --checksum ff21cf1d6b081d9b0b3df022658370e76b9bbe42997b22a5ed3e5399992c0f75
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
@@ -57,7 +57,7 @@ ENV AIRFLOW_BASE_URL="" \
     AIRFLOW_WEBSERVER_HOST="127.0.0.1" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="airflow" \
-    BITNAMI_IMAGE_VERSION="1.10.10-debian-10-r29" \
+    BITNAMI_IMAGE_VERSION="1.10.10-debian-10-r30" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy.libs/:/opt/bitnami/airflow/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
