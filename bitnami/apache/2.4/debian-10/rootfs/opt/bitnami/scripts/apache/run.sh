@@ -14,5 +14,5 @@ set -o pipefail
 # Load Apache environment
 . /opt/bitnami/scripts/apache-env.sh
 
-info "** Starting apache **"
+info "** Starting Apache **"
 exec "${APACHE_BIN_DIR}/httpd" -f "$APACHE_CONF_FILE" -D "FOREGROUND"

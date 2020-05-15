@@ -1,6 +1,6 @@
 # Default Virtual Host configuration.
 
-# Let apache know we're behind a SSL reverse proxy
+# Let Apache know we're behind a SSL reverse proxy
 SetEnvIf X-Forwarded-Proto https HTTPS=on
 
 <VirtualHost _default_:80>
