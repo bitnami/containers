@@ -388,7 +388,7 @@ mysql_initialize() {
             mysql_start_bg
             debug "Deleting all users to avoid issues with galera configuration..."
             mysql_execute "mysql" <<EOF
-DELETE FROM mysql.user WHERE user<>'mysql.sys';
+DELETE FROM mysql.user WHERE user not in ('mysql.sys','mariadb.sys');
 EOF
 
             mysql_ensure_root_user_exists "$DB_ROOT_USER" "$DB_ROOT_PASSWORD"
