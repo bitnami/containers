@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Environment configuration for mongodb-sharded
+# Environment configuration for mongodb
 
 # The values for all environment variables will be set in the below order of precedence
 # 1. Custom environment variables defined below after Bitnami defaults
@@ -11,12 +11,12 @@
 export BITNAMI_ROOT_DIR="/opt/bitnami"
 
 # Logging configuration
-export MODULE="mongodb-sharded"
+export MODULE="mongodb"
 export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
-mongodb_sharded_env_vars=(
+mongodb_env_vars=(
     MONGODB_MOUNTED_CONF_DIR
     MONGODB_MAX_TIMEOUT
     MONGODB_PORT_NUMBER
@@ -48,14 +48,14 @@ mongodb_sharded_env_vars=(
     MONGODB_MONGOS_HOST
     MONGODB_MONGOS_PORT_NUMBER
 )
-for env_var in "${mongodb_sharded_env_vars[@]}"; do
+for env_var in "${mongodb_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
     if [[ -n "${!file_env_var:-}" ]]; then
         export "${env_var}=$(< "${!file_env_var}")"
         unset "${file_env_var}"
     fi
 done
-unset mongodb_sharded_env_vars
+unset mongodb_env_vars
 
 # Paths
 export PATH="/opt/bitnami/mongodb/bin:/opt/bitnami/common/bin:$PATH"
