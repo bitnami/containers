@@ -11,7 +11,7 @@ RUN install_packages build-essential ca-certificates curl ghostscript git gzip i
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.6.6-0" --checksum ecadce77e40822926c69f76cc11437954dd068793548c3f0a21007f9c4fafed3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "10.20.1-4" --checksum b52baa39794d0e0b8b13d72fd075d71a2ceb3445e363b1d4f3a4a78bb2c69859
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.26.2-0" --checksum 7d970d7f29ec3ab0ef4c9c699c686ab1b4d95f8371be90cbce07c26b9f4386e7
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rails" "6.0.3-0-0" --checksum de509c6190304d98912ceadd1748141cf6481ba8a58c6ec084002f7b99a26435
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rails" "6.0.3-1-0" --checksum 66832295868e222fdd4aba407a6527c18620dd1c4751436f9ef076190d9bb0ee
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -20,7 +20,7 @@ RUN /build/bitnami-user.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/rails/postunpack.sh
 ENV BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="6.0.3-0-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="6.0.3-1-debian-10-r0" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/node/bin:/opt/bitnami/git/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 3000
