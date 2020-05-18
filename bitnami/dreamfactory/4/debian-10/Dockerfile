@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl dirmngr gnupg libaudit1 libbsd0 libbz2
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.43-1 --checksum 35ad223096be455ce5d11b6006db6d83b5080802cead122bfa5ebebc9d29da61
-RUN bitnami-pkg install redis-client-6.0.1-0 --checksum 5b6a2c1a0f2df0ce57fce9ed6ce97ef3e0f7821f12886ca2381658cf5f09b614
+RUN bitnami-pkg install redis-client-6.0.3-0 --checksum f3cec346ca0da7a7cec0848a2071414d28dab355409c36cb9950890235b84571
 RUN bitnami-pkg install postgresql-client-11.8.0-0 --checksum 7fc0d326ab58431aec1435d15204fc7bdb9961873140b18eeac06d3bf32ed54c
 RUN bitnami-pkg unpack php-7.3.18-0 --checksum 279b5b626de773d0216749aa8046477015276575f1c2a369ca0b0f054e4a68b5
 RUN bitnami-pkg install mysql-client-10.3.23-0 --checksum 7af3cead7a38670bed924fbc99e20c67f6244bb5a92642adb4ab6cd307aa9a5e
@@ -17,7 +17,7 @@ RUN bitnami-pkg install mongodb-client-4.2.6-0 --checksum 5951959925c5080aff4bc9
 RUN bitnami-pkg install libphp-7.3.18-0 --checksum f78406a580c26dff8870708eeef383d9ad048a2b43a74160318e37115af4cf74
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
-RUN bitnami-pkg unpack dreamfactory-4.2.1-1 --checksum 06239cd9762b59c9b36e3457f2cdc75f28d34aad955f9683529752f5f87cf12a
+RUN bitnami-pkg unpack dreamfactory-4.2.2-0 --checksum 6c4aee2a6c01e4f7412c440aaba6c536540e12532372404299ff95a0f1c39f92
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log && \
@@ -28,7 +28,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="4.2.1-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="4.2.2-debian-10-r0" \
     DREAMFACTORY_DATABASE_TYPE="mariadb" \
     DREAMFACTORY_ENABLE_MARIADB_SERVICE="no" \
     DREAMFACTORY_ENABLE_MONGODB_SERVICE="yes" \
