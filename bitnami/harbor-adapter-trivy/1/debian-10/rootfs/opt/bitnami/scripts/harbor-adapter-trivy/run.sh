@@ -10,7 +10,7 @@ set -o pipefail
 # Load libraries
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
-. /opt/bitnami/scripts/harboradaptertrivy-env.sh
+. /opt/bitnami/scripts/harbor-adapter-trivy-env.sh
 
 cmd=$(command -v scanner-trivy)
 

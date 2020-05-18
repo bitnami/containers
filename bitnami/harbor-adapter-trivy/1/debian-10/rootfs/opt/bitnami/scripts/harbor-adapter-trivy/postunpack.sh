@@ -9,7 +9,7 @@ set -o pipefail
 
 # Load libraries
 . /opt/bitnami/scripts/libfs.sh
-. /opt/bitnami/scripts/harboradaptertrivy-env.sh
+. /opt/bitnami/scripts/harbor-adapter-trivy-env.sh
 
 # Create directories
 for dir in "${SCANNER_TRIVY_CACHE_DIR}" "${SCANNER_TRIVY_REPORTS_DIR}"; do
