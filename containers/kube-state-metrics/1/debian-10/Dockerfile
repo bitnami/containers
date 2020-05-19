@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="kube-state-metrics" \
-    BITNAMI_IMAGE_VERSION="1.9.6-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="1.9.6-debian-10-r2" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
