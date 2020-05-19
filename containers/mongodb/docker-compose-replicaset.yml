@@ -2,17 +2,17 @@ version: '2'
 
 services:
   mongodb-primary:
-    image: 'bitnami/mongodb:4.0'
+    image: 'docker.io/bitnami/mongodb:4.2-debian-10'
     environment:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-primary
       - MONGODB_REPLICA_SET_MODE=primary
       - MONGODB_ROOT_PASSWORD=password123
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
     volumes:
-      - 'mongodb_master_data:/bitnami'
+      - 'mongodb_master_data:/bitnami/mongodb'
 
   mongodb-secondary:
-    image: 'bitnami/mongodb:4.0'
+    image: 'docker.io/bitnami/mongodb:4.2-debian-10'
     depends_on:
       - mongodb-primary
     environment:
@@ -23,7 +23,7 @@ services:
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
 
   mongodb-arbiter:
-    image: 'bitnami/mongodb:4.0'
+    image: 'docker.io/bitnami/mongodb:4.2-debian-10'
     depends_on:
       - mongodb-primary
     environment:
