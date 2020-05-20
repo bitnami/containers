@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mysql:
-    image: 'bitnami/mysql:8.0'
+    image: 'docker.io/bitnami/mysql:8.0-debian-10'
     ports:
       - '3306:3306'
     volumes:
