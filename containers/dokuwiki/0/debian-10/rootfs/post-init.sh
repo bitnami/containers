@@ -1,33 +1,15 @@
 #!/bin/bash
 
+# set -o xtrace # Uncomment this line for debugging purposes
+
 . /opt/bitnami/base/functions
 
-if [[ -d /docker-entrypoint-init.d ]] && [[ ! -f "/bitnami/$BITNAMI_APP_NAME/.user_scripts_initialized" ]]; then
+if [[ -d /docker-entrypoint-init.d ]] && [[ ! -f "/bitnami/dokuwiki/.user_scripts_initialized" ]]; then
     for f in /docker-entrypoint-init.d/*; do
-        failure=0
-        case "$f" in
-            *.sh)
-                if [[ -x "$f" ]]; then
-                    info "Executing $f"; "$f" || failure=$?
-                else
-                    info "Sourcing $f"; . "$f"
-                fi
-                ;;
-
-            *.php)
-                info "Executing $f with PHP interpreter"
-                php "$f" || failure=$?
-                ;;
-
-            *)
-                info "Ignoring $f"
-                ;;
-        esac
-        if [[ "$failure" -ne 0 ]]; then
-            error "Failed to execute $f"
-            exit "$failure"
-        fi
+        for p in /post-init.d/*.sh; do
+            "$p" "$f"
+        done
     done
     info "Custom scripts were executed"
-    touch "/bitnami/$BITNAMI_APP_NAME/.user_scripts_initialized"
+    touch "/bitnami/dokuwiki/.user_scripts_initialized"
 fi
