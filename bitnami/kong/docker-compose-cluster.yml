@@ -1,7 +1,7 @@
 version: '2'
 services:
   cassandra:
-    image: bitnami/cassandra:3
+    image: docker.io/bitnami/cassandra:3-debian-10
     volumes:
       - cassandra_data:/bitnami
     environment:
@@ -15,7 +15,7 @@ services:
       - MAX_HEAP_SIZE=2G
       - HEAP_NEWSIZE=200M
   cassandra2:
-    image: bitnami/cassandra:3
+    image: docker.io/bitnami/cassandra:3-debian-10
     volumes:
       - cassandra2_data:/bitnami
     environment:
@@ -28,7 +28,7 @@ services:
       - MAX_HEAP_SIZE=2G
       - HEAP_NEWSIZE=200M
   kong:
-    image: bitnami/kong:1
+    image: docker.io/bitnami/kong:2-debian-10
     ports:
       - 18000:8000
       - 18443:8443
@@ -41,7 +41,7 @@ services:
       # If in doubt, set to the amount of CPU cores divided by the number of Kong/Cassandra nodes in the machine
       - KONG_NGINX_WORKER_PROCESSES=2
   kong2:
-    image: bitnami/kong:1
+    image: docker.io/bitnami/kong:2-debian-10
     ports:
       - 28000:8000
       - 28443:8443
