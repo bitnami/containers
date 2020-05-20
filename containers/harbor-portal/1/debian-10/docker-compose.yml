@@ -2,12 +2,12 @@ version: '2'
 
 services:
   registry:
-    image: bitnami/harbor-registry:1
+    image: docker.io/bitnami/harbor-registry:1-debian-10
     volumes:
       - registry_data:/storage
       - ./config/registry/:/etc/registry/:ro
   registryctl:
-    image: bitnami/harbor-registryctl:1
+    image: docker.io/bitnami/harbor-registryctl:1-debian-10
     environment:
       - CORE_SECRET=CHANGEME
       - JOBSERVICE_SECRET=CHANGEME
@@ -16,7 +16,7 @@ services:
       - ./config/registry/:/etc/registry/:ro
       - ./config/registryctl/config.yml:/etc/registryctl/config.yml:ro
   postgresql:
-    image: bitnami/postgresql:11
+    image: docker.io/bitnami/postgresql:11-debian-10
     container_name: harbor-db
     environment:
       - POSTGRESQL_PASSWORD=bitnami
@@ -24,7 +24,7 @@ services:
     volumes:
       - postgresql_data:/bitnami/postgresql
   core:
-    image: bitnami/harbor-core:1
+    image: docker.io/bitnami/harbor-core:1-debian-10
     container_name: harbor-core
     depends_on:
       - registry
@@ -65,12 +65,12 @@ services:
       - ./config/core/app.conf:/etc/core/app.conf:ro
       - ./config/core/private_key.pem:/etc/core/private_key.pem:ro
   portal:
-    image: bitnami/harbor-portal:1
+    image: docker.io/bitnami/harbor-portal:1-debian-10
     container_name: harbor-portal
     depends_on:
       - core
   jobservice:
-    image: bitnami/harbor-jobservice:1
+    image: docker.io/bitnami/harbor-jobservice:1-debian-10
     container_name: harbor-jobservice
     depends_on:
       - redis
@@ -83,11 +83,11 @@ services:
       - jobservice_data:/var/log/jobs
       - ./config/jobservice/config.yml:/etc/jobservice/config.yml:ro
   redis:
-    image: bitnami/redis:5.0
+    image: docker.io/bitnami/redis:5.0-debian-10
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
   harbor-nginx:
-    image: bitnami/nginx:1.16
+    image: docker.io/bitnami/nginx:1.16-debian-10
     container_name: nginx
     volumes:
       - ./config/proxy/nginx.conf:/opt/bitnami/nginx/conf/nginx.conf:ro
@@ -100,7 +100,7 @@ services:
       - portal
   chartmuseum:
     container_name: chartmuseum
-    image: bitnami/chartmuseum:0
+    image: docker.io/bitnami/chartmuseum:0-debian-10
     environment:
       - CACHE=redis
       - CACHE_REDIS_ADDR=redis:6379
