@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5-debian-10`, `5.4.1-debian-10-r16`, `5`, `5.4.1`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.4.1-debian-10-r16/5/debian-10/Dockerfile)
+* [`5-debian-10`, `5.4.1-debian-10-r17`, `5`, `5.4.1`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.4.1-debian-10-r17/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
 
@@ -225,6 +225,7 @@ The WordPress instance can be customized by specifying environment variables on 
 * `WORDPRESS_LAST_NAME`: WordPress user last name. Default: **LastName**
 * `WORDPRESS_BLOG_NAME`: WordPress blog name. Default: **User's blog**
 * `WORDPRESS_SCHEME`: Scheme to generate application URLs. Default: **http**
+* `WORDPRESS_RESET_DATA_PERMISSIONS`: Force reseting ownership/permissions on persisted data when restarting WordPress, otherwise it assumes the ownership/permissions are correct. Ignored when running WP as non-root. Default: **no**
 
 ##### Use an existing database
 
