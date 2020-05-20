@@ -22,11 +22,13 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/harbor-portal/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-portal" \
-    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r42" \
+    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r43" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/common/bin:$PATH"
+
+EXPOSE 8080 8443
 
 WORKDIR /opt/bitnami/harbor
 USER 1001
