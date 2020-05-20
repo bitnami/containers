@@ -16,6 +16,7 @@
   "lastName": "{{$global.env.WORDPRESS_LAST_NAME}}",
   "password": "{{$global.env.WORDPRESS_PASSWORD}}",
   "phpMemoryLimit": "{{$global.env.PHP_MEMORY_LIMIT}}",
+  "resetDataPermissions": "{{$global.env.WORDPRESS_RESET_DATA_PERMISSIONS}}",
   "scheme": "{{$global.env.WORDPRESS_SCHEME}}",
   "skipInstall": "{{$global.env.WORDPRESS_SKIP_INSTALL}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
