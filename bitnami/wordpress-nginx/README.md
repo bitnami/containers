@@ -96,7 +96,7 @@ $ docker run -d --name wordpress \
   -e WORDPRESS_DATABASE_NAME=bitnami_wordpress \
   --network wordpress-network \
   --volume wordpress_data:/bitnami/wordpress \
-  --volume ./wordpress-vhosts.conf:/bitnami/nginx/conf/server_blocks/wordpress-vhosts.conf \
+  --volume ./wordpress-server-block.conf:/opt/bitnami/nginx/conf/server_blocks/wordpress-server-block.conf \
   bitnami/wordpress-nginx:latest
 ```
 
@@ -130,7 +130,7 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
      volumes:
 -      - 'wordpress_data:/bitnami/wordpress
 +      - /path/to/wordpress-persistence:/bitnami/wordpress
-       - ./wordpress-vhosts.conf:/bitnami/nginx/conf/server_blocks/wordpress-vhosts.conf
+       - ./wordpress-server-block.conf:/opt/bitnami/nginx/conf/server_blocks/wordpress-server-block.conf
    ...
 -volumes:
 -  mariadb_data:
@@ -169,7 +169,7 @@ $ docker run -d --name wordpress \
   --env WORDPRESS_DATABASE_NAME=bitnami_wordpress \
   --network wordpress-network \
   --volume /path/to/wordpress-persistence:/bitnami/wordpress \
-  --volume ./wordpress-vhosts.conf:/bitnami/nginx/conf/server_blocks/wordpress-vhosts.conf \
+  --volume ./wordpress-server-block.conf:/opt/bitnami/nginx/conf/server_blocks/wordpress-server-block.conf \
   bitnami/wordpress-nginx:latest
 ```
 
@@ -291,7 +291,7 @@ $ docker run -d --name wordpress \
   --env ALLOW_EMPTY_PASSWORD=yes --env WORDPRESS_DATABASE_USER=bn_wordpress \
   --env WORDPRESS_DATABASE_NAME=bitnami_wordpress \
   --volume wordpress_data:/bitnami/wordpress-nginx \
-  --volume ./wordpress-vhosts.conf:/bitnami/nginx/conf/server_blocks/wordpress-vhosts.conf \
+  --volume ./wordpress-server-block.conf:/opt/bitnami/nginx/conf/server_blocks/wordpress-server-block.conf \
   bitnami/wordpress-nginx:latest
 ```
 
@@ -334,7 +334,7 @@ $ docker run -d --name wordpress \
   --env WORDPRESS_DATABASE_USER=wordpress_user \
   --env WORDPRESS_DATABASE_PASSWORD=wordpress_password \
   --volume wordpress_data:/bitnami/wordpress \
-  --volume ./wordpress-vhosts.conf:/bitnami/nginx/conf/server_blocks/wordpress-vhosts.conf \
+  --volume ./wordpress-server-block.conf:/opt/bitnami/nginx/conf/server_blocks/wordpress-server-block.conf \
   bitnami/wordpress-nginx:latest
 ```
 
