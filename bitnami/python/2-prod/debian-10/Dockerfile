@@ -1,4 +1,4 @@
-FROM bitnami/python:2.7.18-debian-10-r32 as development
+FROM bitnami/python:2.7.18-debian-10-r34 as development
 
 ######
 
@@ -17,7 +17,7 @@ COPY --from=development /opt/bitnami/licenses /opt/bitnami/licenses
 COPY --from=development /opt/bitnami/python /opt/bitnami/python
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="2.7.18-debian-10-r28-prod" \
+    BITNAMI_IMAGE_VERSION="2.7.18-debian-10-r29-prod" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 CMD [ "python" ]
