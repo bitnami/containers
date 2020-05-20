@@ -24,3 +24,5 @@ for dir in "$ELASTICSEARCH_TMP_DIR" "$ELASTICSEARCH_DATA_DIR" "$ELASTICSEARCH_LO
     # Issue reported at: https://github.com/bitnami/bitnami-docker-elasticsearch/issues/50
     chown -R 1001:0 "$dir"
 done
+
+elasticsearch_install_plugins
