@@ -7,7 +7,7 @@ print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "httpd" ]]; then
     . /apache-init.sh
-    nami_initialize apache php dokuwiki
+    nami_initialize php apache dokuwiki
     info "Starting dokuwiki... "
     . /post-init.sh
 fi
