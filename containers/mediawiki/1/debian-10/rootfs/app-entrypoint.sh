@@ -6,9 +6,9 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "httpd" ]]; then
-    . /apache-init.sh
     . /mediawiki-init.sh
-    nami_initialize apache php mysql-client mediawiki
+    . /apache-init.sh
+    nami_initialize php apache mysql-client mediawiki
     info "Starting gosu... "
     . /post-init.sh
 fi
