@@ -11,7 +11,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl dirmngr gnupg gzip libbsd0 libbz2-1.0 libc6 libcom-err2 libedit2 libffi6 libgcc1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmariadb3 libncursesw6 libnettle6 libp11-kit0 libreadline7 libsasl2-2 libsqlite3-0 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 locales procps sudo tar zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
-RUN bitnami-pkg install python-3.6.10-8 --checksum 0fb19d8a63143dfbf0ec0086d3927b313278bab39d8b80cfbef7841fbd03566d
+RUN bitnami-pkg install python-3.6.10-10 --checksum e8a8da2e9d17d2198a16c390161e338a585ec182c083a4cbab205ae872e221de
 RUN bitnami-pkg install postgresql-client-10.13.0-0 --checksum 30ab4540dddd0c7a6aabb92c5fda4b6746427cd71d9b44964d0a02c7409fac2f
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
@@ -39,7 +39,7 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     AIRFLOW_WORKER_PORT_NUMBER="8793" \
     BITNAMI_APP_NAME="airflow-worker" \
-    BITNAMI_IMAGE_VERSION="1.10.10-debian-10-r43" \
+    BITNAMI_IMAGE_VERSION="1.10.10-debian-10-r44" \
     C_FORCE_ROOT="True" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
