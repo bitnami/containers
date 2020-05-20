@@ -4,7 +4,10 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 ENV HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
-    OS_NAME="linux"
+    OS_NAME="linux" \
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/elasticsearch/bin:$PATH"
+
+ARG ELASTICSEARCH_PLUGINS=""
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -19,9 +22,8 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/elasticsearch/postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="6.8.9-debian-10-r5" \
-    LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/elasticsearch/bin:$PATH"
+    BITNAMI_IMAGE_VERSION="6.8.9-debian-10-r6" \
+    LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH"
 
 EXPOSE 9200 9300
 

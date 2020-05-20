@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7-debian-10`, `7.7.0-debian-10-r5`, `7`, `7.7.0`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.7.0-debian-10-r5/7/debian-10/Dockerfile)
-* [`6-debian-10`, `6.8.9-debian-10-r5`, `6`, `6.8.9` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.9-debian-10-r5/6/debian-10/Dockerfile)
+* [`6-debian-10`, `6.8.9-debian-10-r6`, `6`, `6.8.9` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.9-debian-10-r6/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
 ## Get this image
@@ -317,6 +317,18 @@ $ docker run -d --name elasticsearch \
 ```
 
 The Bitnami Elasticsearch Docker image will also install plugin `.zip` files mounted at the `/bitnami/elasticsearch/plugins` directory inside the container, making it possible to install them from disk without requiring Internet access.
+
+#### Adding plugins at build time (persisting plugins)
+
+The Bitnami Elasticsearch image provides a way to create your custom image installing plugins on build time. This is the prefered way to persist plugins when using ElasticSearch, as they will not be installed every time the container is started but just once at build time.
+
+To create your own image providing plugins execute the flowing command:
+
+```
+docker build --build-arg ELASTICSEARCH_PLUGINS=<plugin1,plugin2,...> https://github.com/bitnami/bitnami-docker-elasticsearch.git#:7/debian-10 -t my-elasticsearch
+```
+
+The command above will build the image providing this GitHub repository as build context, and will pass the list of plugins to install to the build logic.
 
 ### Initializing a new instance
 
