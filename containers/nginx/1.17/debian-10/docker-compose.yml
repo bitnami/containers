@@ -2,6 +2,6 @@ version: '2'
 
 services:
   nginx:
-    image: 'bitnami/nginx:1.17'
+    image: 'docker.io/bitnami/nginx:1.17-debian-10'
     ports:
       - '80:8080'

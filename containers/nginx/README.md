@@ -44,8 +44,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.18-debian-10`, `1.18.0-debian-10-r19`, `1.18`, `1.18.0` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.18.0-debian-10-r19/1.18/debian-10/Dockerfile)
-* [`1.17-debian-10`, `1.17.10-debian-10-r41`, `1.17`, `1.17.10`, `latest` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.17.10-debian-10-r41/1.17/debian-10/Dockerfile)
+* [`1.18-debian-10`, `1.18.0-debian-10-r19`, `1.18`, `1.18.0`, `latest` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.18.0-debian-10-r19/1.18/debian-10/Dockerfile)
+* [`1.17-debian-10`, `1.17.10-debian-10-r42`, `1.17`, `1.17.10` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.17.10-debian-10-r42/1.17/debian-10/Dockerfile)
 
 # Get this image
 
@@ -66,7 +66,7 @@ $ docker pull bitnami/nginx:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/nginx:latest 'https://github.com/bitnami/bitnami-docker-nginx.git#master:1.17/debian-10'
+$ docker build -t bitnami/nginx:latest 'https://github.com/bitnami/bitnami-docker-nginx.git#master:1.18/debian-10'
 ```
 
 # Hosting a static website
