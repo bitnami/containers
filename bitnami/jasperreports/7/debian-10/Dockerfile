@@ -21,7 +21,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.2.0-debian-10-r90" \
+    BITNAMI_IMAGE_VERSION="7.2.0-debian-10-r91" \
     JASPERREPORTS_DATABASE_NAME="bitnami_jasperreports" \
     JASPERREPORTS_DATABASE_PASSWORD="" \
     JASPERREPORTS_DATABASE_USER="bn_jasperreports" \
@@ -48,7 +48,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     SMTP_PROTOCOL="" \
     SMTP_USER=""
 
-EXPOSE 8080 8443
+EXPOSE 8080 8080 8443
 
 ENTRYPOINT [ "/app-entrypoint.sh" ]
 CMD [ "nami", "start", "--foreground", "tomcat" ]
