@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mariadb-galera:
-    image: 'bitnami/mariadb-galera:10.4'
+    image: 'docker.io/bitnami/mariadb-galera:10.3-debian-10'
     ports:
       - '3306:3306'
       - '4444:4444'
@@ -21,7 +21,7 @@ services:
       - LDAP_BIND_DN=cn=admin,dc=example,dc=org
       - LDAP_BIND_PASSWORD=adminpassword
   openldap:
-    image: 'bitnami/openldap:latest'
+    image: 'docker.io/bitnami/openldap:latest'
     ports:
       - '1389:1389'
     environment:
