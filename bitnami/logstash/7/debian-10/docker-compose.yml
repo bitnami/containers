@@ -1,7 +1,7 @@
 version: '2'
 services:
   logstash:
-    image: bitnami/logstash:7
+    image: docker.io/bitnami/logstash:7-debian-10
     ports:
       - 8080:8080
     volumes:
