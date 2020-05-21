@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.1'
+    image: 'docker.io/bitnami/mariadb:10.1-debian-10'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=my_user
@@ -11,7 +11,7 @@ services:
 
   myapp:
     tty: true
-    image: bitnami/laravel:6
+    image: docker.io/bitnami/laravel:6-debian-10
     environment:
       - DB_HOST=mariadb
       - DB_USERNAME=my_user
