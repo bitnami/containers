@@ -2,7 +2,7 @@ version: '2'
 
 services:
   rabbitmq:
-    image: 'bitnami/rabbitmq:3.8'
+    image: 'docker.io/bitnami/rabbitmq:3.8-debian-10'
     ports:
       - '4369:4369'
       - '5672:5672'
