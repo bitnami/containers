@@ -6,9 +6,9 @@
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "httpd" ]]; then
-    . /apache-init.sh
     . /opencart-init.sh
-    nami_initialize apache php mysql-client opencart
+    . /apache-init.sh
+    nami_initialize php apache mysql-client opencart
     info "Starting gosu... "
     . /post-init.sh
 fi
