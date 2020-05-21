@@ -7,7 +7,7 @@ ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl dirmngr gnupg libc6 libgcc1 lsof procps sudo unzip
+RUN install_packages ca-certificates curl dirmngr gnupg gzip libc6 libgcc1 lsof procps sudo tar
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install java-1.8.252-0 --checksum d7271eff41b312b73aea7aea3b79a6b1a69cf6613804803daff952aff7d440b4
@@ -19,8 +19,11 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="8.5.1-debian-10-r31" \
+    BITNAMI_IMAGE_VERSION="8.5.1-debian-10-r32" \
     NAMI_PREFIX="/.nami" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux" \
     SOLR_CORE="" \
     SOLR_CORE_CONF_DIR="_default" \
     SOLR_HEAP="512m" \

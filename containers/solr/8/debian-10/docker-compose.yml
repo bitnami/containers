@@ -1,7 +1,7 @@
 version: '2'
 services:
   solr:
-    image: 'bitnami/solr:8'
+    image: 'docker.io/bitnami/solr:8-debian-10'
     ports:
       - '8983:8983'
     volumes:
