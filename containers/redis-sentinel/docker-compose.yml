@@ -2,11 +2,11 @@ version: '2'
 
 services:
   redis-sentinel:
-    image: bitnami/redis-sentinel:6.0
+    image: docker.io/bitnami/redis-sentinel:6.0-debian-10
     volumes:
       - redis-sentinel_data:/bitnami
   redis:
-    image: bitnami/redis:4.0
+    image: docker.io/bitnami/redis:6.0-debian-10
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
