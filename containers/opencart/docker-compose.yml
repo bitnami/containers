@@ -1,7 +1,7 @@
 version: '2'
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.3'
+    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
     environment:
       - MARIADB_USER=bn_opencart
       - MARIADB_DATABASE=bitnami_opencart
@@ -9,7 +9,7 @@ services:
     volumes:
       - 'mariadb_data:/bitnami'
   opencart:
-    image: 'bitnami/opencart:3'
+    image: 'docker.io/bitnami/opencart:3-debian-10'
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
