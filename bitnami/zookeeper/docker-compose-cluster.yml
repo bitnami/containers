@@ -2,7 +2,7 @@ version: '2'
 
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:3'
+    image: 'docker.io/bitnami/zookeeper:3-debian-10'
     ports:
       - '2181'
     volumes:
@@ -12,7 +12,7 @@ services:
       - ALLOW_ANONYMOUS_LOGIN=yes
       - ZOO_SERVERS=zookeeper:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
   zookeeper2:
-    image: 'bitnami/zookeeper:3'
+    image: 'docker.io/bitnami/zookeeper:3-debian-10'
     ports:
       - '2181'
     volumes:
@@ -22,7 +22,7 @@ services:
       - ALLOW_ANONYMOUS_LOGIN=yes
       - ZOO_SERVERS=zookeeper:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
   zookeeper3:
-    image: 'bitnami/zookeeper:3'
+    image: 'docker.io/bitnami/zookeeper:3-debian-10'
     ports:
       - '2181'
     volumes:
