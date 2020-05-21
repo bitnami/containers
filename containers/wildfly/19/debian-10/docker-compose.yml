@@ -2,7 +2,7 @@ version: '2'
 
 services:
   wildfly:
-    image: 'bitnami/wildfly:19'
+    image: 'docker.io/bitnami/wildfly:19-debian-10'
     ports:
       - '8080:8080'
       - '9990:9990'
