@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.8.3-debian-10-r8`, `3`, `3.8.3`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.8.3-debian-10-r8/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.8.3-debian-10-r9`, `3`, `3.8.3`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.8.3-debian-10-r9/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
@@ -111,7 +111,7 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount persistent folders in the host using docker-compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository: 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -287,7 +287,7 @@ To configure Moodle to send email using SMTP you can set the following environme
 
 This would be an example of SMTP configuration using a GMail account:
 
- * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository: 
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
 
   ```yaml
   moodle:
@@ -321,6 +321,17 @@ This would be an example of SMTP configuration using a GMail account:
     --volume /path/to/moodle-persistence:/bitnami \
     bitnami/moodle:latest
   ```
+
+## Installing additional language packs
+
+By default, this container packs a generic English version of Moodle. Nevertheless, more Langage Packs can be added to the default configuration using the in-platform Administration [interface](https://docs.moodle.org/38/en/Language_packs#Language_pack_installation_and_uninstallation). In order to fully support a new Language Pack it is also a requirement to update the system's locales files. We highly recommend [extending](https://github.com/bitnami/bitnami-docker-moodle#extend-this-image) the default image and adding as many locales as needed:
+
+  ```Dockerfile
+  FROM bitnami/moodle
+  RUN echo "es_ES.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
+  ```
+
+Bear in mind that in the example above `es_ES.UTF-8 UTF-8` is the locale needed for the desired Language Pack to install. You may change this value to the locale corresponding to your pack.
 
 # Customize this image
 
@@ -361,7 +372,7 @@ RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt
 
 ## Modify the ports used by Apache by default
 # It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181 
+ENV APACHE_HTTP_PORT_NUMBER=8181
 ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
@@ -400,7 +411,7 @@ volumes:
   moodle_data:
     driver: local
 ```
-  
+
 # Notable Changes
 
 ## 3.7.1-debian-9-r38 and 3.7.1-ol-7-r40
