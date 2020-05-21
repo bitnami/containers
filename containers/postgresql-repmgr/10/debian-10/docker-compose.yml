@@ -1,7 +1,7 @@
 version: '2'
 services:
   pg-0:
-    image: bitnami/postgresql-repmgr:10
+    image: docker.io/bitnami/postgresql-repmgr:10-debian-10
     ports:
       - 5432
     volumes:
@@ -19,7 +19,7 @@ services:
       - REPMGR_NODE_NETWORK_NAME=pg-0
       - REPMGR_PORT_NUMBER=5432
   pg-1:
-    image: bitnami/postgresql-repmgr:10
+    image: docker.io/bitnami/postgresql-repmgr:10-debian-10
     ports:
       - 5432
     volumes:
