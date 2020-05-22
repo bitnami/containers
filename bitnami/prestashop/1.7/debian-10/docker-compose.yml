@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.1'
+    image: 'docker.io/bitnami/mariadb:10.1-debian-10'
     environment:
       - MARIADB_USER=bn_prestashop
       - MARIADB_DATABASE=bitnami_prestashop
@@ -10,7 +10,7 @@ services:
     volumes:
       - 'mariadb_data:/bitnami'
   prestashop:
-    image: 'bitnami/prestashop:1.7'
+    image: 'docker.io/bitnami/prestashop:1.7-debian-10'
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
