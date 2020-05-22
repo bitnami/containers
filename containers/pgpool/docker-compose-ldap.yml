@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   pg-0:
-    image: bitnami/postgresql-repmgr:11
+    image: docker.io/bitnami/postgresql-repmgr:11-debian-10
     ports:
       - 5432
     volumes:
@@ -18,7 +18,7 @@ services:
       - REPMGR_NODE_NETWORK_NAME=pg-0
       - REPMGR_PGHBA_TRUST_ALL=yes
   pg-1:
-    image: bitnami/postgresql-repmgr:11
+    image: docker.io/bitnami/postgresql-repmgr:11-debian-10
     ports:
       - 5432
     volumes:
@@ -35,7 +35,7 @@ services:
       - REPMGR_NODE_NETWORK_NAME=pg-1
       - REPMGR_PGHBA_TRUST_ALL=yes
   pgpool:
-    image: bitnami/pgpool:4
+    image: docker.io/bitnami/pgpool:4-debian-10
     ports:
       - 5432:5432
     environment:
@@ -58,7 +58,7 @@ services:
       timeout: 5s
       retries: 5
   openldap:
-    image: 'bitnami/openldap:latest'
+    image: 'docker.io/bitnami/openldap:latest'
     ports:
       - '1389:1389'
     environment:
