@@ -9,6 +9,34 @@
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libversion.sh
+. /opt/bitnami/scripts/libfile.sh
+
+########################
+# Check if exists a previous boot
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   Yes or no
+#########################
+get_previous_boot() {
+    [[ -e "${DB_PREVIOUS_BOOT_FILE}" ]] && echo "yes" || echo "no"
+}
+
+########################
+# Create a flag file to indicate previous boot
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+set_previous_boot() {
+    info "Setting previous boot"
+    touch "${DB_PREVIOUS_BOOT_FILE}"
+}
 
 ########################
 # Configure database extra start flags
@@ -26,8 +54,20 @@ mysql_extra_flags() {
     echo "${dbExtraFlags[@]}"
 }
 
+########################
+# Return if this node will bootstrap
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   Yes or no
+#########################
 get_galera_cluster_bootstrap_value() {
     local clusterBootstrap
+    local local_ip
+    local host_ip
+
     clusterBootstrap="$(get_env_var_value GALERA_CLUSTER_BOOTSTRAP)"
     if ! is_boolean_yes "${clusterBootstrap}"; then
         local clusterAddress
@@ -35,20 +75,47 @@ get_galera_cluster_bootstrap_value() {
         if [[ -z "$clusterAddress" ]]; then
             clusterBootstrap="yes"
         elif [[ -n "$clusterAddress" ]]; then
-            local host=${clusterAddress#*://}
-            local host=${host%:*}
-            if ! resolveip -s "$host" >/dev/null 2>&1; then
-                clusterBootstrap="yes"
+            clusterBootstrap="yes"
+            local_ip=$(resolveip -s "$HOSTNAME")
+            read -r -a hosts <<< "$(tr ',' ' ' <<< "${clusterAddress#*://}")"
+            if [[ "${#hosts[@]}" -eq "1" ]]; then
+                read -r -a cluster_ips <<< "$(resolveip "${hosts[0]}" 2>/dev/null | sed 's/IP address of .* is//' | tr '\n' ' ')"
+                if [[ "${#cluster_ips[@]}" -gt "1" ]] || ( [[ "${#cluster_ips[@]}" -eq "1" ]] && [[ "${cluster_ips[0]}" != "$local_ip" ]] ) ; then
+                    clusterBootstrap="no"
+                else
+                    clusterBootstrap="yes"
+                fi
+            else
+                for host in "${hosts[@]}"; do
+                    host_ip=$(resolveip -s "${host%:*}")
+                    if [[ -n "$host_ip" ]] && [[ "$host_ip" != "$local_ip" ]]; then
+                        clusterBootstrap="no"
+                    fi
+                done
             fi
+        fi
+    else
+        if is_boolean_yes "$(get_previous_boot)"; then
+            clusterBootstrap="no"
         fi
     fi
     echo "${clusterBootstrap}"
 }
 
+
+########################
+# Get the cluster address value
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
 get_galera_cluster_address_value() {
     local clusterBootstrap
     local clusterAddress
-    clusterBootstrap="$(get_galera_cluster_bootstrap_value)"
+    clusterBootstrap="$DB_GALERA_CLUSTER_BOOTSTRAP"
     if is_boolean_yes "${clusterBootstrap}"; then
         clusterAddress="gcomm://"
     else
@@ -81,6 +148,9 @@ export DB_TMP_DIR="$DB_BASE_DIR/tmp"
 export DB_BIN_DIR="$DB_BASE_DIR/bin"
 export DB_SBIN_DIR="${DB_SBIN_DIR:-$DB_BASE_DIR/bin}"
 export PATH="$DB_BIN_DIR:$PATH"
+export DB_GRASTATE_FILE="$DB_DATA_DIR/grastate.dat"
+export DB_PREVIOUS_DIR="$DB_VOLUME_DIR/previous"
+export DB_PREVIOUS_BOOT_FILE="$DB_PREVIOUS_DIR/previous_boot"
 
 # Users
 export DB_DAEMON_USER="mysql"
@@ -101,6 +171,8 @@ export DB_CHARACTER_SET="${CHARACTER_SET:-utf8}"
 COLLATE="$(get_env_var_value COLLATE)"
 export DB_COLLATE="${COLLATE:-utf8_general_ci}"
 export DB_GALERA_CLUSTER_BOOTSTRAP="$(get_galera_cluster_bootstrap_value)"
+DB_GALERA_FORCE_SAFETOBOOTSTRAP="$(get_env_var_value GALERA_FORCE_SAFETOBOOTSTRAP)"
+export DB_GALERA_FORCE_SAFETOBOOTSTRAP="${DB_GALERA_FORCE_SAFETOBOOTSTRAP:-no}"
 export DB_GALERA_CLUSTER_ADDRESS="$(get_galera_cluster_address_value)"
 DB_GALERA_CLUSTER_NAME="$(get_env_var_value GALERA_CLUSTER_NAME)"
 export DB_GALERA_CLUSTER_NAME="${DB_GALERA_CLUSTER_NAME:-galera}"
@@ -173,6 +245,10 @@ mysql_validate() {
                 fi
             fi
         fi
+    fi
+
+    if ! is_yes_no_value "$DB_GALERA_FORCE_SAFETOBOOTSTRAP"; then
+        print_validation_error "The allowed values for MARDIA_GALERA_FORCE_SAFETOBOOTSTRAP are yes or no."
     fi
 
     if [[ -z "$DB_GALERA_CLUSTER_NAME" ]]; then
@@ -345,6 +421,33 @@ EOF
 }
 
 ########################
+# Force safe_to_bootstrap in grastate file
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+set_safe_to_bootstrap() {
+    info "Forcing safe_to_bootstrap."
+    replace_in_file "$DB_GRASTATE_FILE" "safe_to_bootstrap: 0" "safe_to_bootstrap: 1"
+}
+
+########################
+# Check if it is safe to bootstrap from this node
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+is_safe_to_bootstrap() {
+    is_boolean_yes "$(grep safe_to_bootstrap "$DB_GRASTATE_FILE" | cut -d' ' -f 2)"
+}
+
+########################
 # Ensure MySQL/MariaDB is initialized
 # Globals:
 #   DB_*
@@ -355,7 +458,6 @@ EOF
 #########################
 mysql_initialize() {
     info "Initializing $DB_FLAVOR database..."
-
     # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
     # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
     rm -f "$DB_TMP_DIR/mysqld.pid"
@@ -378,11 +480,23 @@ mysql_initialize() {
 
     if [[ -e "$DB_DATA_DIR/mysql" ]]; then
         info "Persisted data detected. Restoring..."
+
+        if is_boolean_yes "$DB_GALERA_CLUSTER_BOOTSTRAP"; then
+            if is_boolean_yes "$DB_GALERA_FORCE_SAFETOBOOTSTRAP"; then
+                set_safe_to_bootstrap
+            fi
+            if ! is_safe_to_bootstrap; then
+                error "It is not safe to bootstrap form this node (safe_to_bootstrap=0 in grastate.dat). If you want to force bootstrap, set the environment variable MARIADB_GALERA_FORCE_SAFETOBOOTSTRAP=yes"
+                exit 1
+            fi
+        fi
+
         return
     else
         # initialization should not be performed on non-primary nodes of a galera cluster
         if is_boolean_yes "$DB_GALERA_CLUSTER_BOOTSTRAP"; then
             debug "Cleaning data directory to ensure successfully initialization..."
+
             rm -rf "${DB_DATA_DIR:?}"/*
             mysql_install_db
             mysql_start_bg
