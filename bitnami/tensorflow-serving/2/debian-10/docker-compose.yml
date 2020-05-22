@@ -2,7 +2,7 @@ version: '2'
 
 services:
   tensorflow-serving:
-    image: 'bitnami/tensorflow-serving:2'
+    image: 'docker.io/bitnami/tensorflow-serving:2-debian-10'
     ports:
       - '8500:8500'
       - '8501:8501'
