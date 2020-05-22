@@ -31,3 +31,5 @@ mysql_initialize
 is_boolean_yes "$DB_ENABLE_LDAP" && ldap_initialize
 
 mysql_custom_init_scripts
+
+set_previous_boot
