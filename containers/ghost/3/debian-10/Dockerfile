@@ -4,7 +4,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 ENV BITNAMI_PKG_CHMOD="-R g+rwX,o+rw" \
     BITNAMI_PKG_EXTRA_DIRS="/.ghost /opt/bitnami/content" \
     HOME="/" \
-    PATH="/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/ghost/bin:/opt/bitnami/nami/bin:$PATH"
+    PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/ghost/bin:/opt/bitnami/nami/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -22,7 +22,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="3.16.1-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="3.16.1-debian-10-r2" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
@@ -54,7 +54,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     SMTP_SERVICE="" \
     SMTP_USER=""
 
-EXPOSE 2368
+EXPOSE 2368 3000
 
 WORKDIR /opt/bitnami/ghost
 USER 1001
