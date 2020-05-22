@@ -1,11 +1,11 @@
 version: '2'
 services:
   mongodb:
-    image: 'bitnami/mongodb:4.2'
+    image: 'docker.io/bitnami/mongodb:4.2-debian-10'
     volumes:
       - 'mongodb_data:/bitnami'
   parse:
-    image: 'bitnami/parse:3'
+    image: 'docker.io/bitnami/parse:3-debian-10'
     ports:
       - '1337:1337'
     volumes:
@@ -13,7 +13,7 @@ services:
     depends_on:
       - mongodb
   parse-dashboard:
-    image: 'bitnami/parse-dashboard:2'
+    image: 'docker.io/bitnami/parse-dashboard:2-debian-10'
     ports:
       - '80:4040'
     volumes:
