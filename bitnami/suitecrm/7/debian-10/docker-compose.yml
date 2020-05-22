@@ -1,7 +1,7 @@
 version: '2'
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.3'
+    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
     environment:
       - MARIADB_USER=bn_suitecrm
       - MARIADB_DATABASE=bitnami_suitecrm
@@ -9,7 +9,7 @@ services:
     volumes:
       - 'mariadb_data:/bitnami'
   suitecrm:
-    image: 'bitnami/suitecrm:7'
+    image: 'docker.io/bitnami/suitecrm:7-debian-10'
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
