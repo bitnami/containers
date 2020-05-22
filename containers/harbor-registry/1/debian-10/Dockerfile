@@ -17,7 +17,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-registry/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-registry" \
-    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r45" \
+    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r46" \
     PATH="/opt/bitnami/harbor-registry/bin:/opt/bitnami/common/bin:$PATH"
 
 VOLUME [ "/etc/registry", "/storage", "/var/lib/registry" ]
