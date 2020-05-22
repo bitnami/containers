@@ -22,6 +22,7 @@ flags=("--defaults-file=${DB_CONF_DIR}/my.cnf" "--basedir=$DB_BASE_DIR" "--datad
 
 is_boolean_yes "$DB_ENABLE_LDAP" && ldap_start_nslcd_bg
 info "** Starting MariaDB **"
+
 if am_i_root; then
     exec gosu "$DB_DAEMON_USER" "${DB_SBIN_DIR}/mysqld" "${flags[@]}"
 else
