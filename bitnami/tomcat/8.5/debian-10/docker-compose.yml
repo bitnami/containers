@@ -2,7 +2,7 @@ version: '2'
 
 services:
   tomcat:
-    image: 'bitnami/tomcat:8.5'
+    image: 'docker.io/bitnami/tomcat:8.5-debian-10'
     ports:
       - '8080:8080'
     volumes:
