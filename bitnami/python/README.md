@@ -34,14 +34,14 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.8-prod-debian-10`, `3.8-debian-10-prod`, `3.8.3-prod-debian-10-r9`, `3.8.3-debian-10-r9-prod`, `3.8-prod`, `3.8.3-prod` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.3-prod-debian-10-r9/3.8-prod/debian-10/Dockerfile)
+* [`3.8-debian-10-prod`, `3.8.3-debian-10-r10-prod`, `3.8-prod`, `3.8.3-prod` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.3-debian-10-r10-prod/3.8-prod/debian-10/Dockerfile)
 * [`3.8-debian-10`, `3.8.3-debian-10-r10`, `3.8`, `3.8.3` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.3-debian-10-r10/3.8/debian-10/Dockerfile)
-* [`3.7-prod-debian-10`, `3.7-debian-10-prod`, `3.7.7-prod-debian-10-r77`, `3.7.7-debian-10-r77-prod`, `3.7-prod`, `3.7.7-prod`, `latest-prod` (3.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.7-prod-debian-10-r77/3.7-prod/debian-10/Dockerfile)
 * [`3.7-debian-10`, `3.7.7-debian-10-r82`, `3.7`, `3.7.7`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.7-debian-10-r82/3.7/debian-10/Dockerfile)
-* [`3.6-prod-debian-10`, `3.6-debian-10-prod`, `3.6.10-prod-debian-10-r117`, `3.6.10-debian-10-r117-prod`, `3.6-prod`, `3.6.10-prod` (3.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-prod-debian-10-r117/3.6-prod/debian-10/Dockerfile)
+* [`3.7-debian-10-prod`, `3.7.7-debian-10-r77-prod`, `3.7-prod`, `3.7.7-prod`, `latest-prod` (3.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.7-debian-10-r77-prod/3.7-prod/debian-10/Dockerfile)
 * [`3.6-debian-10`, `3.6.10-debian-10-r125`, `3.6`, `3.6.10` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-debian-10-r125/3.6/debian-10/Dockerfile)
-* [`2-prod-debian-10`, `2-debian-10-prod`, `2.7.18-prod-debian-10-r31`, `2.7.18-debian-10-r31-prod`, `2-prod`, `2.7.18-prod` (2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-prod-debian-10-r31/2-prod/debian-10/Dockerfile)
+* [`3.6-debian-10-prod`, `3.6.10-debian-10-r117-prod`, `3.6-prod`, `3.6.10-prod` (3.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.10-debian-10-r117-prod/3.6-prod/debian-10/Dockerfile)
 * [`2-debian-10`, `2.7.18-debian-10-r36`, `2`, `2.7.18` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-debian-10-r36/2/debian-10/Dockerfile)
+* [`2-debian-10-prod`, `2.7.18-debian-10-r31-prod`, `2-prod`, `2.7.18-prod` (2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-debian-10-r31-prod/2-prod/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/python GitHub repo](https://github.com/bitnami/bitnami-docker-python).
 
