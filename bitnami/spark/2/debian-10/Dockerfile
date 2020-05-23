@@ -4,11 +4,12 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 ENV HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
-    OS_NAME="linux"
+    OS_NAME="linux" \
+    PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/spark/bin:/opt/bitnami/spark/sbin:/opt/bitnami/common/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libbz2-1.0 libc6 libffi6 libgcc1 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 procps sudo unzip zlib1g
+RUN install_packages ca-certificates curl gzip libbz2-1.0 libc6 libffi6 libgcc1 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.6.10-10" --checksum e8a8da2e9d17d2198a16c390161e338a585ec182c083a4cbab205ae872e221de
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.252-0" --checksum d7271eff41b312b73aea7aea3b79a6b1a69cf6613804803daff952aff7d440b4
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "spark" "2.4.5-6" --checksum 790662c6b844aa951869e55d8d53a54f09e44b01b2000408a81c1ee39fdf9c48
@@ -19,13 +20,12 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/spark/postunpack.sh
 ENV BITNAMI_APP_NAME="spark" \
-    BITNAMI_IMAGE_VERSION="2.4.5-debian-10-r117" \
+    BITNAMI_IMAGE_VERSION="2.4.5-debian-10-r118" \
     JAVA_HOME="/opt/bitnami/java" \
-    LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/spark/venv/lib/python3.6/site-packages/numpy.libs/:/opt/bitnami/spark/venv/lib/python3.6/site-packages/numpy/.libs/:$LD_LIBRARY_PATH" \
+    LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/spark/venv/lib/python3.6/site-packages/numpy.libs/:$LD_LIBRARY_PATH" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
     NSS_WRAPPER_GROUP="/opt/bitnami/spark/tmp/nss_group" \
     NSS_WRAPPER_PASSWD="/opt/bitnami/spark/tmp/nss_passwd" \
-    PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/spark/bin:/opt/bitnami/spark/sbin:/opt/bitnami/common/bin:$PATH" \
     SPARK_HOME="/opt/bitnami/spark"
 
 WORKDIR /opt/bitnami/spark
