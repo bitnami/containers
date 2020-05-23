@@ -19,7 +19,7 @@ RUN echo "deb http://http.us.debian.org/debian testing main non-free contrib" >>
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r110" \
+    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r111" \
     NAMI_PREFIX="/.nami" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
