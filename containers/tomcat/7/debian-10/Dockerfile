@@ -19,9 +19,9 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="7.0.104-debian-10-r3"
+    BITNAMI_IMAGE_VERSION="7.0.104-debian-10-r4"
 
-EXPOSE 8080
+EXPOSE 8080 8443
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/tomcat/entrypoint.sh" ]
