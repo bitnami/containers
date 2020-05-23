@@ -19,16 +19,16 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
     install_packages google-chrome-unstable
 
 ENV BITNAMI_APP_NAME="grafana-image-renderer" \
-    BITNAMI_IMAGE_VERSION="1.0.12-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="1.0.12-debian-10-r2" \
     HOME="/" \
     HTTP_HOST="0.0.0.0" \
     HTTP_PORT="8080" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux" \
-    PATH="/opt/bitnami/node/bin:$PATH"
+    PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
-EXPOSE 8080
+EXPOSE 8080 3000
 
 WORKDIR /opt/bitnami/grafana-image-renderer
 USER 1001
