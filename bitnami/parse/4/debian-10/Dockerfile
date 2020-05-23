@@ -3,7 +3,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
-    PATH="/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/common/bin:/opt/bitnami/parse/bin:/opt/bitnami/nami/bin:$PATH"
+    PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/common/bin:/opt/bitnami/parse/bin:/opt/bitnami/nami/bin:$PATH"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -20,7 +20,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="4.2.0-debian-10-r49" \
+    BITNAMI_IMAGE_VERSION="4.2.0-debian-10-r50" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
@@ -36,7 +36,7 @@ ENV BITNAMI_APP_NAME="parse" \
     PARSE_MOUNT_PATH="/parse" \
     PARSE_PORT_NUMBER="1337"
 
-EXPOSE 1337
+EXPOSE 1337 3000
 
 USER 1001
 ENTRYPOINT [ "/app-entrypoint.sh" ]
