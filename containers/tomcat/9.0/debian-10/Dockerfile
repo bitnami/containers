@@ -19,7 +19,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="9.0.35-debian-10-r3"
+    BITNAMI_IMAGE_VERSION="9.0.35-debian-10-r4"
 
 EXPOSE 8080 8443
 
