@@ -19,10 +19,10 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-core/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-core" \
-    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r48" \
+    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r49" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-core/bin:$PATH"
 
-VOLUME [ "/etc/core", "/data" ]
+VOLUME [ "/data", "/etc/core" ]
 
 EXPOSE 8080
 
