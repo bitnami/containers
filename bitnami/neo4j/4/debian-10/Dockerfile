@@ -19,7 +19,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="4.0.4-debian-10-r18" \
+    BITNAMI_IMAGE_VERSION="4.0.4-debian-10-r19" \
     NAMI_PREFIX="/.nami" \
     NEO4J_BOLT_PORT_NUMBER="7687" \
     NEO4J_HOST="" \
@@ -30,7 +30,7 @@ ENV BITNAMI_APP_NAME="neo4j" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux"
 
-EXPOSE 7474 7473 8756
+EXPOSE 7473 7474 8756
 
 USER 1001
 ENTRYPOINT [ "/app-entrypoint.sh" ]
