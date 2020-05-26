@@ -19,10 +19,10 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-registryctl/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-registryctl" \
-    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r48" \
+    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r49" \
     PATH="/opt/bitnami/harbor-registry/bin:/opt/bitnami/common/bin:/opt/bitnami/harbor-registryctl/bin:$PATH"
 
-VOLUME [ "/etc/registry", "/storage", "/var/lib/registry", "/etc/registryctl" ]
+VOLUME [ "/etc/registry", "/etc/registryctl", "/storage", "/var/lib/registry" ]
 
 EXPOSE 8080 8443
 
