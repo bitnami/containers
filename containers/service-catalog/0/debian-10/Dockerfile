@@ -12,14 +12,14 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BITNAMI_APP_NAME="service-catalog" \
-    BITNAMI_IMAGE_VERSION="0.2.3-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="0.2.3-debian-10-r6" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux" \
     PATH="/opt/bitnami/service-catalog/bin:$PATH"
 
-EXPOSE 8443 443
+EXPOSE 443 8443
 
 WORKDIR /opt/bitnami/service-catalog
 USER 1001
