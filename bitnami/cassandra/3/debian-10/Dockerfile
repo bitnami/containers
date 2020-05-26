@@ -22,10 +22,10 @@ RUN ln -s /opt/bitnami/scripts/cassandra/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/cassandra/postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.6-debian-10-r103" \
+    BITNAMI_IMAGE_VERSION="3.11.6-debian-10-r104" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/cassandra/bin:$PATH"
 
-EXPOSE 9042 7000
+EXPOSE 7000 9042
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/cassandra/entrypoint.sh" ]
