@@ -149,7 +149,7 @@ export DB_BIN_DIR="$DB_BASE_DIR/bin"
 export DB_SBIN_DIR="${DB_SBIN_DIR:-$DB_BASE_DIR/bin}"
 export PATH="$DB_BIN_DIR:$PATH"
 export DB_GRASTATE_FILE="$DB_DATA_DIR/grastate.dat"
-export DB_PREVIOUS_DIR="$DB_VOLUME_DIR/previous"
+export DB_PREVIOUS_DIR="$DB_BASE_DIR/previous"
 export DB_PREVIOUS_BOOT_FILE="$DB_PREVIOUS_DIR/previous_boot"
 
 # Users
