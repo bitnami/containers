@@ -282,8 +282,7 @@ services:
 
 ### Configuration file
 
-In order to use a custom configuration file instead of the default one provided out of the box, you can create a file named `elasticsearch.yml` and mount it at `/opt/bitnami/elasticsearch/config/elasticsearch.yml` to overwrite the default configuration.
-Please, note that the whole configuration file will be replaced by the provided one, ensure that the syntax and fields are properly set.
+In order to use a custom configuration file instead of the default one provided out of the box, you can create a file named `elasticsearch.yml` and mount it at `/opt/bitnami/elasticsearch/config/elasticsearch.yml` to overwrite the default configuration:
 
 ```console
 $ docker run -d --name elasticsearch \
@@ -303,6 +302,10 @@ elasticsearch:
     - /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data
   ...
 ```
+
+Please, note that the whole configuration file will be replaced by the provided, default one; ensure that the syntax and fields you provide are properly set and exhaustive.
+
+If you would rather extend than replace the default configuration with your settings, mount your custom configuration file at `/opt/bitnami/elasticsearch/config/my_elasticsearch.yml`.
 
 ### Plugins
 

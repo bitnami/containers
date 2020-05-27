@@ -318,6 +318,22 @@ elasticsearch_cluster_configuration() {
 }
 
 ########################
+# Extend Elasticsearch cluster settings with custom, user-provided config
+# Globals:
+#  ELASTICSEARCH_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_custom_configuration() {
+    local custom_conf_file="${ELASTICSEARCH_CONF_DIR}/my_elasticsearch.yml"
+    [[ ! -f "$custom_conf_file" ]] && return
+    info "Adding custom configuration"
+    yq m -ix "$ELASTICSEARCH_CONF_FILE" "$custom_conf_file"
+}
+
+########################
 # Configure Elasticsearch node type
 # Globals:
 #  ELASTICSEARCH_*
@@ -457,6 +473,7 @@ elasticsearch_initialize() {
         elasticsearch_conf_set transport.tcp.port "$ELASTICSEARCH_NODE_PORT_NUMBER"
         elasticsearch_cluster_configuration
         elasticsearch_configure_node_type
+        elasticsearch_custom_configuration
     fi
     elasticsearch_set_heap_size
 }
