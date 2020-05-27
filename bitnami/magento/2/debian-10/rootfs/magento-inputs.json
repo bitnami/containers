@@ -16,6 +16,7 @@
   "mode": "{{$global.env.MAGENTO_MODE}}",
   "password": "{{$global.env.MAGENTO_PASSWORD}}",
   "phpMemoryLimit": "{{$global.env.PHP_MEMORY_LIMIT}}",
+  "skipReindex": "{{$global.env.MAGENTO_SKIP_REINDEX}}",
   "useSecureAdmin": "{{$global.env.MAGENTO_USE_SECURE_ADMIN}}",
   "username": "{{$global.env.MAGENTO_USERNAME}}"
 }
