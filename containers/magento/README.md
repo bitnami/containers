@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.3.5-debian-10-r31`, `2`, `2.3.5`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.3.5-debian-10-r31/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.3.5-debian-10-r32`, `2`, `2.3.5`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.3.5-debian-10-r32/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
 
@@ -243,6 +243,7 @@ Available variables:
 - `EXTERNAL_HTTPS_PORT_NUMBER`: Port to access Magento from outside of the container using HTTPS. Used to configure Magento's internal routes. Default: **443**
 - `MAGENTO_MODE`: Magento mode. Valid values: **default**, **production**, **developer**. Default: **default**
 - `MAGENTO_USE_SECURE_ADMIN`: Use SSL to access the Magento Admin. Valid values: **yes**, **no**. Default: **no**
+- `MAGENTO_SKIP_REINDEX`: Skip Magento Indexer reindex during the first initialization of the container. Valid values: **yes**, **no**. Default: **no**
 
 #### Search configuration
 
