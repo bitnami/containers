@@ -317,7 +317,6 @@ elasticsearch_cluster_configuration() {
     fi
 }
 
-
 ########################
 # Extend Elasticsearch cluster settings with custom, user-provided config
 # Globals:
