@@ -19,13 +19,13 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/couchdb/postunpack.sh
 ENV BITNAMI_APP_NAME="couchdb" \
-    BITNAMI_IMAGE_VERSION="3.1.0-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="3.1.0-debian-10-r8" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/couchdb/bin:$PATH"
 
 VOLUME [ "/bitnami/couchdb" ]
 
-EXPOSE 5984 4369 9100
+EXPOSE 4369 5984 9100
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/couchdb/entrypoint.sh" ]
