@@ -10,7 +10,7 @@ RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install python-3.6.10-10 --checksum e8a8da2e9d17d2198a16c390161e338a585ec182c083a4cbab205ae872e221de
 RUN bitnami-pkg install postgresql-client-11.8.0-0 --checksum 7fc0d326ab58431aec1435d15204fc7bdb9961873140b18eeac06d3bf32ed54c
-RUN bitnami-pkg install node-12.16.3-3 --checksum 5e0ba24a98ca8b75c9a5400d0d03b48862a30511b6c54e71ec92eee32fb33f29
+RUN bitnami-pkg install node-12.17.0-0 --checksum 2db24cad52fc5513a7b636c52db756bc5044d68489e850197fc7bf5a63864213
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg unpack odoo-13.0.20200510-0 --checksum a128836dff7464887c1d33f8df546a1dbc5f8c2ae7448bc24f977ec62078c693
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
@@ -23,7 +23,7 @@ RUN curl -sLO https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="13.0.20200510-debian-10-r15" \
+    BITNAMI_IMAGE_VERSION="13.0.20200510-debian-10-r16" \
     LD_LIBRARY_PATH="/opt/bitnami/odoo/venv/lib/python3.6/site-packages/reportlab/.libs:$LD_LIBRARY_PATH" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
@@ -40,7 +40,7 @@ ENV BITNAMI_APP_NAME="odoo" \
     SMTP_PROTOCOL="" \
     SMTP_USER=""
 
-EXPOSE 8069 8071 3000
+EXPOSE 3000 8069 8071
 
 ENTRYPOINT [ "/app-entrypoint.sh" ]
 CMD [ "nami", "start", "--foreground", "odoo" ]
