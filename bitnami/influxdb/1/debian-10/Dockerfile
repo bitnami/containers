@@ -18,12 +18,12 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/influxdb/postunpack.sh
 ENV BITNAMI_APP_NAME="influxdb" \
-    BITNAMI_IMAGE_VERSION="1.8.0-debian-10-r42" \
+    BITNAMI_IMAGE_VERSION="1.8.0-debian-10-r43" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/influxdb/bin:$PATH"
 
 VOLUME [ "/bitnami/influxdb" ]
 
-EXPOSE 8088 8086
+EXPOSE 8086 8088
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/influxdb/entrypoint.sh" ]
