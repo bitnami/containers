@@ -4,10 +4,10 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 libgcc1 libsqlite3-dev libssl-dev locales procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-1.8.252-1-linux-amd64-debian-10.tar.gz && \
-    echo "3544f73e9c57b186aca569baf5020a2fab480409445298f10b9054a379e15e1f  /tmp/bitnami/pkg/cache/java-1.8.252-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/java-1.8.252-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/java-1.8.252-1-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-1.8.252-3-linux-amd64-debian-10.tar.gz && \
+    echo "8631fe0cc0887a566e878939cf8cd58650be5d5de23f3c6f94fffb258aadeb3a  /tmp/bitnami/pkg/cache/java-1.8.252-3-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/java-1.8.252-3-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/java-1.8.252-3-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
@@ -19,7 +19,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="1.8.252-debian-10-r36" \
+    BITNAMI_IMAGE_VERSION="1.8.252-debian-10-r37" \
     JAVA_HOME="/opt/bitnami/java" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
