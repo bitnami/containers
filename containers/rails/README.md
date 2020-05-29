@@ -28,7 +28,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6-debian-10`, `6.0.3-1-debian-10-r9`, `6`, `6.0.3-1`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/6.0.3-1-debian-10-r9/6/debian-10/Dockerfile)
+* [`6-debian-10`, `6.0.3-1-debian-10-r10`, `6`, `6.0.3-1`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/6.0.3-1-debian-10-r10/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rails GitHub repo](https://github.com/bitnami/bitnami-docker-rails).
 
@@ -141,24 +141,6 @@ services:
     environment:
       - DATABASE_HOST=my-mariadb
       - DATABASE_NAME=development-db
-  ...
-```
-
-## Running without database:
-
-Sometimes, your application will be a service that will only communicate with 3rd party APIs or services
-or something similar where database interaction is not needed.
-
-For these cases, it is possible to re-use this container to be run as a standalone rails engine service
-in your docker-compose file by defining `SKIP_ACTIVE_RECORD` as an environment variable
-
-```yaml
-services:
-  ...
-  myapp:
-    image: bitnami/rails:latest
-    environment:
-      - SKIP_ACTIVE_RECORD=yes
   ...
 ```
 
