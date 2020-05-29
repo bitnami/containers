@@ -727,7 +727,11 @@ mongodb_is_node_available() {
 db.getUsers()
 EOF
 )
-    grep -q "\"user\" :" <<< "$result"
+    if ! grep -q "\"user\" :" <<< "$result"; then
+        # If no password was provided on first run
+        # it may be the case that DB is up but has no users
+        [[ -z $password ]] && grep -q "\[\ \]" <<< "$result"
+    fi
 }
 
 ########################
