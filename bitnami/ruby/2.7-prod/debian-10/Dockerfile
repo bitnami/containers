@@ -1,23 +1,27 @@
-FROM bitnami/ruby:2.7.1-debian-10-r58 as development
-
-######
-
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl ghostscript imagemagick libc6 libgmp-dev libncurses6 libreadline7 libssl1.1 libtinfo6 libxml2-dev libxslt1-dev procps sudo unzip zlib1g zlib1g-dev
+RUN install_packages ca-certificates curl ghostscript gzip imagemagick libc6 libgmp-dev libncurses6 libreadline7 libssl1.1 libtinfo6 libxml2-dev libxslt1-dev procps tar wget zlib1g zlib1g-dev
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/ruby-2.7.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "f975719d54eb720f30ceb3c691d62694bd106ab637d76ca2d2e6d250dec6f9f2  /tmp/bitnami/pkg/cache/ruby-2.7.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/ruby-2.7.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/ruby-2.7.1-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
-COPY --from=development /opt/bitnami/licenses /opt/bitnami/licenses
-COPY --from=development /opt/bitnami/ruby /opt/bitnami/ruby
-
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.7.1-debian-10-r62-prod" \
+    BITNAMI_IMAGE_VERSION="2.7.1-prod-debian-10-r63" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
+EXPOSE 3000
+
+WORKDIR /app
 CMD [ "irb" ]
