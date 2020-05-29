@@ -2,12 +2,12 @@ version: '2'
 services:
   # Node Exporter
   node-exporter:
-    image: bitnami/node-exporter:0
+    image: docker.io/bitnami/node-exporter:0
     command:
       - --web.listen-address=0.0.0.0:9100
   # Prepare Prometheus Configuration
   prepare-prometheus:
-    image: bitnami/minideb:buster
+    image: docker.io/bitnami/minideb:buster
     command:
       - /bin/bash
       - -ec
@@ -31,7 +31,7 @@ services:
       - 'prom_conf:/conf'
   # Prometheus Server
   prometheus:
-    image: bitnami/prometheus:2
+    image: docker.io/bitnami/prometheus:2
     volumes:
       - 'tsdb_data:/opt/bitnami/prometheus/data'
       - 'prom_conf:/opt/bitnami/prometheus/conf'
@@ -40,7 +40,7 @@ services:
       - prepare-prometheus
   # Thanos Sidecar
   thanos-sidecar:
-    image: bitnami/thanos:0-scratch
+    image: docker.io/bitnami/thanos:0-scratch
     command:
       - sidecar
       - --tsdb.path=/data
@@ -52,7 +52,7 @@ services:
       - prometheus
   # MinIO
   minio:
-    image: bitnami/minio:2020
+    image: docker.io/bitnami/minio:2020
     ports:
       - '9000:9000'
     volumes:
@@ -63,7 +63,7 @@ services:
       - MINIO_DEFAULT_BUCKETS=thanos
   # Prepare Object Store configuration
   prepare-object-store-conf:
-    image: bitnami/minideb:buster
+    image: docker.io/bitnami/minideb:buster
     command:
       - /bin/bash
       - -ec
@@ -81,7 +81,7 @@ services:
       - 'ojb_store_conf:/conf'
   # Thanos Store Gateway
   thanos-store-gateway:
-    image: bitnami/thanos:0-scratch
+    image: docker.io/bitnami/thanos:0-scratch
     command:
       - store
       - --objstore.config-file=/conf/bucket.yml
@@ -96,7 +96,7 @@ services:
       - prepare-object-store-conf
   # Thanos Compactor
   thanos-compactor:
-    image: bitnami/thanos:0-scratch
+    image: docker.io/bitnami/thanos:0-scratch
     command:
       - compact
       - --objstore.config-file=/conf/bucket.yml
@@ -109,7 +109,7 @@ services:
       - prepare-object-store-conf
   # Thanos Query
   thanos-query:
-    image: bitnami/thanos:0-scratch
+    image: docker.io/bitnami/thanos:0-scratch
     command:
       - query
       - --grpc-address=0.0.0.0:10901
