@@ -9,7 +9,7 @@ RUN install_packages ca-certificates cron curl dirmngr gnupg libaudit1 libbsd0 l
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg unpack apache-2.4.43-1 --checksum 35ad223096be455ce5d11b6006db6d83b5080802cead122bfa5ebebc9d29da61
-RUN bitnami-pkg unpack php-7.3.18-0 --checksum 279b5b626de773d0216749aa8046477015276575f1c2a369ca0b0f054e4a68b5
+RUN bitnami-pkg unpack php-7.3.18-1 --checksum 39eb8cc79fcf7d3491b63a5107e52a0d0043e630ce72a47ff88a0508db1cfa1b
 RUN bitnami-pkg unpack mysql-client-10.2.32-0 --checksum ae72f4ce3376ede89b971c1ffa11717b8d770f8d26ac3d7ba04b11568ff24c37
 RUN bitnami-pkg install libphp-7.3.18-0 --checksum f78406a580c26dff8870708eeef383d9ad048a2b43a74160318e37115af4cf74
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
@@ -28,7 +28,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.5-debian-10-r34" \
+    BITNAMI_IMAGE_VERSION="2.3.5-debian-10-r35" \
     ELASTICSEARCH_HOST="" \
     ELASTICSEARCH_PORT_NUMBER="" \
     EXTERNAL_HTTPS_PORT_NUMBER="443" \
