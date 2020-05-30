@@ -1,11 +1,11 @@
 version: '2'
 services:
   elasticsearch:
-    image: 'bitnami/elasticsearch:7'
+    image: 'docker.io/bitnami/elasticsearch:7-debian-10'
     volumes:
       - 'elasticsearch_data:/bitnami'
   kibana:
-    image: 'bitnami/kibana:7'
+    image: 'docker.io/bitnami/kibana:7-debian-10'
     ports:
       - '5601:5601'
     volumes:
