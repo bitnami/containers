@@ -5,7 +5,7 @@ ENV PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin:/
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl dirmngr fontconfig fonts-dejavu-extra gnupg libaudit1 libc6 libcap-ng0 libgcc1 libicu63 libjemalloc2 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps sudo unzip zlib1g
+RUN install_packages ca-certificates curl dirmngr fontconfig fonts-dejavu-extra gnupg gzip libaudit1 libc6 libcap-ng0 libgcc1 libicu63 libjemalloc2 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps sudo tar zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install java-11.0.7-1 --checksum e01669f15e2e655613c19eab1b8b533a720d6334766da34190a2a4939f5a0bc8
@@ -20,7 +20,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserver" \
-    BITNAMI_IMAGE_VERSION="3.1.2-6022-debian-10-r61" \
+    BITNAMI_IMAGE_VERSION="3.1.2-6022-debian-10-r62" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -31,6 +31,9 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
     MYSQL_CLIENT_ENABLE_SSL="no" \
     MYSQL_CLIENT_SSL_CA_FILE="" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux" \
     REPORTSERVER_CRYPTPASSPHRASE="" \
     REPORTSERVER_CRYPTSALT="" \
     REPORTSERVER_DATABASE_NAME="bitnami_reportserver" \
