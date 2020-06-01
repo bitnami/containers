@@ -106,10 +106,9 @@ export PATH="${KAFKA_BASE_DIR}/bin:$PATH"
 export ALLOW_PLAINTEXT_LISTENER="${ALLOW_PLAINTEXT_LISTENER:-no}"
 export KAFKA_INTER_BROKER_USER="${KAFKA_INTER_BROKER_USER:-user}"
 export KAFKA_INTER_BROKER_PASSWORD="${KAFKA_INTER_BROKER_PASSWORD:-bitnami}"
-export KAFKA_BROKER_USER="${KAFKA_BROKER_USER:-user}"
-export KAFKA_BROKER_PASSWORD="${KAFKA_BROKER_PASSWORD:-bitnami}"
+export KAFKA_CLIENT_USER="${KAFKA_CLIENT_USER:-user}"
+export KAFKA_CLIENT_PASSWORD="${KAFKA_CLIENT_PASSWORD:-bitnami}"
 export KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS:-"-Xmx1024m -Xms1024m"}"
-export KAFKA_PORT_NUMBER="${KAFKA_PORT_NUMBER:-9092}"
 export KAFKA_ZOOKEEPER_PASSWORD="${KAFKA_ZOOKEEPER_PASSWORD:-}"
 export KAFKA_ZOOKEEPER_USER="${KAFKA_ZOOKEEPER_USER:-}"
 export KAFKA_CFG_ADVERTISED_LISTENERS="${KAFKA_CFG_ADVERTISED_LISTENERS:-"PLAINTEXT://:9092"}"
@@ -181,9 +180,10 @@ kafka_create_alias_environment_variables() {
     kafka_declare_alias_env "KAFKA_CFG_LOG_DIRS" "KAFKA_LOGS_DIRS"
     kafka_declare_alias_env "KAFKA_CFG_LOG_SEGMENT_BYTES" "KAFKA_SEGMENT_BYTES"
     kafka_declare_alias_env "KAFKA_CFG_MESSAGE_MAX_BYTES" "KAFKA_MAX_MESSAGE_BYTES"
-    kafka_declare_alias_env "KAFKA_CFG_PORT" "KAFKA_PORT_NUMBER"
     kafka_declare_alias_env "KAFKA_CFG_ZOOKEEPER_CONNECTION_TIMEOUT_MS" "KAFKA_ZOOKEEPER_CONNECT_TIMEOUT_MS"
     kafka_declare_alias_env "KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE" "KAFKA_AUTO_CREATE_TOPICS_ENABLE"
+    kafka_declare_alias_env "KAFKA_CLIENT_USER" "KAFKA_BROKER_USER"
+    kafka_declare_alias_env "KAFKA_CLIENT_PASSWORD" "KAFKA_BROKER_PASSWORD"
     for s in "${suffixes[@]}"; do
         kafka_declare_alias_env "KAFKA_CFG_${s}" "KAFKA_${s}"
     done
@@ -201,20 +201,45 @@ kafka_create_alias_environment_variables() {
 kafka_validate() {
     debug "Validating settings in KAFKA_* env vars..."
     local error_code=0
+    local internal_port
+    local client_port
 
     # Auxiliary functions
     print_validation_error() {
         error "$1"
         error_code=1
     }
-
-    local validate_port_args=()
-    ! am_i_root && validate_port_args+=("-unprivileged")
-    for var in "KAFKA_PORT_NUMBER"; do
-        if ! err=$(validate_port "${validate_port_args[@]}" "${!var}"); then
-            print_validation_error "An invalid port was specified in the environment variable $var: $err"
+    check_allowed_listener_port() {
+        local -r total="$#"
+        for i in $(seq 1 "$((total - 1))"); do
+            for j in $(seq "$((i + 1))" "$total"); do
+                if (( "${!i}" == "${!j}" )); then
+                    print_validation_error "There are listeners bound to the same port"
+                fi
+            done
+        done
+    }
+    check_conflicting_listener_ports() {
+        local validate_port_args=()
+        ! am_i_root && validate_port_args+=("-unprivileged")
+        if ! err=$(validate_port "${validate_port_args[@]}" "$1"); then
+            print_validation_error "An invalid port was specified in the environment variable KAFKA_CFG_LISTENERS: $err"
         fi
-    done
+    }
+
+    if [[ "${KAFKA_CFG_LISTENERS:-}" =~ INTERNAL:\/\/:([0-9]*) ]]; then
+        internal_port="${BASH_REMATCH[1]}"
+        check_allowed_listener_port "$internal_port"
+    fi
+    if [[ "${KAFKA_CFG_LISTENERS:-}" =~ CLIENT:\/\/:([0-9]*) ]]; then
+        client_port="${BASH_REMATCH[1]}"
+        check_allowed_listener_port "$client_port"
+    fi
+    [[ -n "${internal_port:-}" && -n "${client_port:-}" ]] && check_conflicting_listener_ports "$internal_port" "$client_port"
+    if [[ -n "${KAFKA_PORT_NUMBER:-}" ]] || [[ -n "${KAFKA_CFG_PORT:-}" ]]; then
+        warn "The environment variables KAFKA_PORT_NUMBER and KAFKA_CFG_PORT are deprecated, you can specify the port number to use for each listener using the KAFKA_CFG_LISTENERS environment variable instead."
+    fi
+
     if is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
         warn "You set the environment variable ALLOW_PLAINTEXT_LISTENER=$ALLOW_PLAINTEXT_LISTENER. For safety reasons, do not use this flag in a production environment."
     fi
@@ -222,13 +247,17 @@ kafka_validate() {
         # DEPRECATED. Check for jks files in old conf directory to maintain compatibility with Helm chart.
         if ([[ ! -f "$KAFKA_BASE_DIR"/conf/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_BASE_DIR"/conf/certs/kafka.truststore.jks ]]) \
             && ([[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.truststore.jks ]]); then
-            print_validation_error "In order to configure the SASL_SSL listener for Kafka you must mount your kafka.keystore.jks and kafka.truststore.jks certificates to the $KAFKA_MOUNTED_CONF_DIR/certs directory."
+            print_validation_error "In order to configure the TLS encryption for Kafka you must mount your kafka.keystore.jks and kafka.truststore.jks certificates to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
+        fi
+    elif [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL ]]; then
+        if [[ -z "$KAFKA_CLIENT_PASSWORD" ]] && [[ -z "$KAFKA_INTER_BROKER_PASSWORD" ]]; then
+            print_validation_error "In order to configure SASL authentication for Kafka, you must provide the SASL credentials. Set the environment variables KAFKA_CLIENT_USER and KAFKA_CLIENT_PASSWORD, to configure the credentials for SASL authentication with clients, or set the environment variables KAFKA_INTER_BROKER_USER and KAFKA_INTER_BROKER_PASSWORD, to configure the credentials for SASL authentication between brokers."
         fi
     elif ! is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
         print_validation_error "The KAFKA_CFG_LISTENERS environment variable does not configure a secure listener. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
     fi
 
-    [[ "$error_code" -eq 0 ]] || exit "$error_code"
+    [[ "$error_code" -eq 0 ]] || return "$error_code"
 }
 
 ########################
@@ -236,49 +265,76 @@ kafka_validate() {
 # Globals:
 #   KAFKA_*
 # Arguments:
-#   None
+#   $1 - Authentication protocol to use for the internal listener
+#   $1 - Authentication protocol to use for the client listener
 # Returns:
 #   None
 #########################
 kafka_generate_jaas_authentication_file() {
+    local -r internal_protocol="${1:?missing internal_protocol}"
+    local -r client_protocol="${2:?missing client_protocol}"
+
     if [[ ! -f "${KAFKA_CONF_DIR}/kafka_jaas.conf" ]]; then
         info "Generating JAAS authentication file"
-        render-template > "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+        if [[ "$client_protocol" =~ "SASL" ]]; then
+            cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaClient {
    org.apache.kafka.common.security.plain.PlainLoginModule required
-   username="{{KAFKA_BROKER_USER}}"
-   password="{{KAFKA_BROKER_PASSWORD}}";
-};
-
+   username="${KAFKA_CLIENT_USER:-}"
+   password="${KAFKA_CLIENT_PASSWORD:-}";
+   };
+EOF
+        fi
+        if [[ "$client_protocol" =~ "SASL" ]] && [[ "$internal_protocol" =~ "SASL" ]]; then
+            cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaServer {
    org.apache.kafka.common.security.plain.PlainLoginModule required
-   username="{{KAFKA_INTER_BROKER_USER}}"
-   password="{{KAFKA_INTER_BROKER_PASSWORD}}"
-   user_{{KAFKA_INTER_BROKER_USER}}="{{KAFKA_INTER_BROKER_PASSWORD}}"
-   user_{{KAFKA_BROKER_USER}}="{{KAFKA_BROKER_PASSWORD}}";
+   username="${KAFKA_INTER_BROKER_USER:-}"
+   password="${KAFKA_INTER_BROKER_PASSWORD:-}"
+   user_${KAFKA_INTER_BROKER_USER:-}="${KAFKA_INTER_BROKER_PASSWORD:-}"
+   user_${KAFKA_CLIENT_USER:-}="${KAFKA_CLIENT_PASSWORD:-}";
 
    org.apache.kafka.common.security.scram.ScramLoginModule required;
-};
+   };
 EOF
-        if [[ -n "$KAFKA_ZOOKEEPER_USER" ]] && [[ -n "$KAFKA_ZOOKEEPER_PASSWORD" ]]; then
-            info "Configuring ZooKeeper client credentials"
-            render-template >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+        elif [[ "$client_protocol" =~ "SASL" ]]; then
+            cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+KafkaServer {
+   org.apache.kafka.common.security.plain.PlainLoginModule required
+   user_${KAFKA_CLIENT_USER:-}="${KAFKA_CLIENT_PASSWORD:-}";
 
+   org.apache.kafka.common.security.scram.ScramLoginModule required;
+   };
+EOF
+        elif [[ "$internal_protocol" =~ "SASL" ]]; then
+            cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+KafkaServer {
+   org.apache.kafka.common.security.plain.PlainLoginModule required
+   username="${KAFKA_INTER_BROKER_USER:-}"
+   password="${KAFKA_INTER_BROKER_PASSWORD:-}"
+   user_${KAFKA_INTER_BROKER_USER:-}="${KAFKA_INTER_BROKER_PASSWORD:-}";
+
+   org.apache.kafka.common.security.scram.ScramLoginModule required;
+   };
+EOF
+        fi
+        if [[ -n "$KAFKA_ZOOKEEPER_USER" ]] && [[ -n "$KAFKA_ZOOKEEPER_PASSWORD" ]]; then
+            cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 Client {
    org.apache.kafka.common.security.plain.PlainLoginModule required
-   username="{{KAFKA_ZOOKEEPER_USER}}"
-   password="{{KAFKA_ZOOKEEPER_PASSWORD}}";
-};
+   username="${KAFKA_ZOOKEEPER_USER:-}"
+   password="${KAFKA_ZOOKEEPER_PASSWORD:-}";
+   };
 EOF
         fi
     else
         info "Custom JAAS authentication file detected. Skipping generation."
-        warn "The following environment variables will be ignored: KAFKA_BROKER_USER, KAFKA_BROKER_PASSWORD, KAFKA_INTER_BROKER_USER, KAFKA_INTER_BROKER_PASSWORD, KAFKA_ZOOKEEPER_USER and KAFKA_ZOOKEEPER_PASSWORD"
+        warn "The following environment variables will be ignored: KAFKA_CLIENT_USER, KAFKA_CLIENT_PASSWORD, KAFKA_INTER_BROKER_USER, KAFKA_INTER_BROKER_PASSWORD, KAFKA_ZOOKEEPER_USER and KAFKA_ZOOKEEPER_PASSWORD"
     fi
 }
 
 ########################
-# Configure Kafka SSL listener
+# Configure Kafka SSL settings
 # Globals:
 #   KAFKA_CERTIFICATE_PASSWORD
 #   KAFKA_CONF_DIR
@@ -287,14 +343,13 @@ EOF
 # Returns:
 #   None
 #########################
-kafka_configure_ssl_listener() {
+kafka_configure_ssl() {
     # Set Kafka configuration
     kafka_server_conf_set ssl.keystore.location "$KAFKA_CONF_DIR"/certs/kafka.keystore.jks
     kafka_server_conf_set ssl.keystore.password "$KAFKA_CERTIFICATE_PASSWORD"
     kafka_server_conf_set ssl.key.password "$KAFKA_CERTIFICATE_PASSWORD"
     kafka_server_conf_set ssl.truststore.location "$KAFKA_CONF_DIR"/certs/kafka.truststore.jks
     kafka_server_conf_set ssl.truststore.password "$KAFKA_CERTIFICATE_PASSWORD"
-    kafka_server_conf_set ssl.client.auth required
     # Set producer/consumer configuration
     kafka_producer_consumer_conf_set ssl.keystore.location "$KAFKA_CONF_DIR"/certs/kafka.keystore.jks
     kafka_producer_consumer_conf_set ssl.keystore.password "$KAFKA_CERTIFICATE_PASSWORD"
@@ -304,66 +359,77 @@ kafka_configure_ssl_listener() {
 }
 
 ########################
-# Configure Kafka SASL_SSL listener
+# Configure Kafka for inter-broker communications
 # Globals:
-#   KAFKA_CERTIFICATE_PASSWORD
-#   KAFKA_CONF_DIR
-# Arguments:
 #   None
+# Arguments:
+#   $1 - Authentication protocol to use for the internal listener
 # Returns:
 #   None
 #########################
-kafka_configure_sasl_ssl_listener() {
-    info "SASL_SSL listener detected, enabling SASL_SSL settings"
-    kafka_configure_ssl_listener
-    kafka_generate_jaas_authentication_file
-    # Set Kafka configuration
-    kafka_server_conf_set security.inter.broker.protocol SASL_SSL
-    kafka_server_conf_set sasl.mechanism.inter.broker.protocol PLAIN
-    kafka_server_conf_set sasl.enabled.mechanisms PLAIN,SCRAM-SHA-256,SCRAM-SHA-512
-    # Set producer/consumer configuration
-    kafka_producer_consumer_conf_set security.protocol SASL_SSL
-    kafka_producer_consumer_conf_set sasl.mechanism PLAIN
+kafka_configure_internal_communications() {
+    local -r protocol="${1:?missing environment variable protocol}"
+    local -r allowed_protocols=("PLAINTEXT" "SASL_PLAINTEXT" "SASL_SSL" "SSL")
+    info "Configuring Kafka for inter-broker communications with ${protocol} authentication."
+
+    if [[ " ${allowed_protocols[*]} " =~ " ${protocol} " ]]; then
+        kafka_server_conf_set security.inter.broker.protocol "$protocol"
+        if [[ "$protocol" = "PLAINTEXT" ]]; then
+            warn "Inter-broker communications are configured as PLAINTEXT. This is not safe for production environments."
+        fi
+        if [[ "$protocol" = "SASL_PLAINTEXT" ]] || [[ "$protocol" = "SASL_SSL" ]]; then
+            # The below lines would need to be updated to support other SASL implementations (i.e. GSSAPI)
+            # IMPORTANT: Do not confuse SASL/PLAIN with PLAINTEXT
+            # For more information, see: https://docs.confluent.io/current/kafka/authentication_sasl/authentication_sasl_plain.html#sasl-plain-overview)
+            kafka_server_conf_set sasl.mechanism.inter.broker.protocol PLAIN
+        fi
+        if [[ "$protocol" = "SASL_SSL" ]] || [[ "$protocol" = "SSL" ]]; then
+            kafka_configure_ssl
+            # We need to enable 2 way authentication on SASL_SSL so brokers authenticate each other.
+            # It won't affect client communications unless the SSL protocol is for them.
+            kafka_server_conf_set ssl.client.auth required
+        fi
+    else
+        error "Authentication protocol ${protocol} is not supported!"
+        exit 1
+    fi
 }
 
 ########################
-# Configure Kafka Only SSL listener
+# Configure Kafka for client communications
 # Globals:
-#   KAFKA_CERTIFICATE_PASSWORD
-#   KAFKA_CONF_DIR
-# Arguments:
 #   None
+# Arguments:
+#   $1 - Authentication protocol to use for the client listener
 # Returns:
 #   None
 #########################
-kafka_configure_only_ssl_listener() {
-    info "SSL listener detected, enabling SSL settings"
-    kafka_configure_ssl_listener
-    # Set Kafka configuration
-    kafka_server_conf_set security.inter.broker.protocol SSL
-    # Set producer/consumer configuration
-    kafka_producer_consumer_conf_set security.protocol SSL
-}
+kafka_configure_client_communications() {
+    local -r protocol="${1:?missing environment variable protocol}"
+    local -r allowed_protocols=("PLAINTEXT" "SASL_PLAINTEXT" "SASL_SSL" "SSL")
+    info "Configuring Kafka for client communications with ${protocol} authentication."
 
-########################
-# Configure Kafka SASL_PLAINTEXT listener
-# Globals:
-#   KAFKA_CONF_FILE
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-kafka_configure_sasl_plaintext_listener() {
-    info "SASL_PLAINTEXT listener detected, enabling SASL_PLAINTEXT settings"
-    kafka_generate_jaas_authentication_file
-    # Set Kafka configuration
-    kafka_server_conf_set sasl.mechanism.inter.broker.protocol PLAIN
-    kafka_server_conf_set sasl.enabled.mechanisms PLAIN,SCRAM-SHA-256,SCRAM-SHA-512
-    kafka_server_conf_set security.inter.broker.protocol SASL_PLAINTEXT
-    # Set producer/consumer configuration
-    kafka_producer_consumer_conf_set security.protocol SASL_PLAINTEXT
-    kafka_producer_consumer_conf_set sasl.mechanism PLAIN
+    if [[ " ${allowed_protocols[*]} " =~ " ${protocol} " ]]; then
+        kafka_server_conf_set security.inter.broker.protocol "$protocol"
+        if [[ "$protocol" = "PLAINTEXT" ]]; then
+            warn "Client communications are configured using PLAINTEXT listeners. For safety reasons, do not use this in a production environment."
+        fi
+        if [[ "$protocol" = "SASL_PLAINTEXT" ]] || [[ "$protocol" = "SASL_SSL" ]]; then
+            # The below lines would need to be updated to support other SASL implementations (i.e. GSSAPI)
+            # IMPORTANT: Do not confuse SASL/PLAIN with PLAINTEXT
+            # For more information, see: https://docs.confluent.io/current/kafka/authentication_sasl/authentication_sasl_plain.html#sasl-plain-overview)
+            kafka_server_conf_set sasl.mechanism.inter.broker.protocol PLAIN
+        fi
+        if [[ "$protocol" = "SASL_SSL" ]] || [[ "$protocol" = "SSL" ]]; then
+            kafka_configure_ssl
+        fi
+        if [[ "$protocol" = "SSL" ]]; then
+            kafka_server_conf_set ssl.client.auth required
+        fi
+    else
+        error "Authentication protocol ${protocol} is not supported!"
+        exit 1
+    fi
 }
 
 ########################
@@ -409,16 +475,28 @@ kafka_initialize() {
         info "No injected configuration files found, creating default config files"
         kafka_server_conf_set log.dirs "$KAFKA_DATA_DIR"
         kafka_configure_from_environment_variables
-        if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL_SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL_SSL ]]; then
-            kafka_configure_sasl_ssl_listener
-        elif [[ "${KAFKA_CFG_LISTENERS:-}" =~ SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SSL ]]; then
-            kafka_configure_only_ssl_listener
-        elif [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL_PLAINTEXT ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL_PLAINTEXT ]]; then
-            kafka_configure_sasl_plaintext_listener
+        # When setting up a Kafka cluster with N brokers, we have several listeners:
+        # - INTERNAL: used for inter-broker communications
+        # - CLIENT: used for communications with consumers/producers within the same network
+        # - (optional) EXTERNAL: used for communications with consumers/producers on different networks
+        local internal_protocol
+        local client_protocol
+        if [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" = *"INTERNAL"* ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" = *"CLIENT"* ]]; then
+            if [[ ${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-} =~ INTERNAL:([a-zA-Z_]*) ]]; then
+                internal_protocol="${BASH_REMATCH[1]}"
+                kafka_configure_internal_communications "$internal_protocol"
+            fi
+            if [[ ${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-} =~ CLIENT:([a-zA-Z_]*) ]]; then
+                client_protocol="${BASH_REMATCH[1]}"
+                kafka_configure_client_communications "$client_protocol"
+            fi
         fi
-
+        if [[ "${internal_protocol:-}" =~ "SASL" ]] || [[ "${client_protocol:-}" =~ "SASL" ]] || [[ -n "$KAFKA_ZOOKEEPER_USER" && -n "$KAFKA_ZOOKEEPER_PASSWORD" ]]; then
+            kafka_server_conf_set sasl.enabled.mechanisms PLAIN,SCRAM-SHA-256,SCRAM-SHA-512
+            kafka_generate_jaas_authentication_file "$internal_protocol" "$client_protocol"
+        fi
         # Remove security.inter.broker.protocol if KAFKA_CFG_INTER_BROKER_LISTENER_NAME is configured
-        if [[ ! -z "${KAFKA_CFG_INTER_BROKER_LISTENER_NAME:-}" ]]; then
+        if [[ -n "${KAFKA_CFG_INTER_BROKER_LISTENER_NAME:-}" ]]; then
             remove_in_file "$KAFKA_CONF_FILE" "security.inter.broker.protocol" false
         fi
     fi
