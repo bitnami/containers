@@ -60,6 +60,25 @@ is_dir_empty() {
 }
 
 ########################
+# Checks whether a file can be written to or not
+# arguments:
+#   $1 - file
+# returns:
+#   boolean
+#########################
+is_file_writable() {
+    local file="${1:?missing file}"
+    local dir
+    dir="$(dirname "$file")"
+
+    if [[ ( -f "$file" && -w "$file" ) || ( ! -f "$file" && -d "$dir" && -w "$dir" ) ]]; then
+        true
+    else
+        false
+    fi
+}
+
+########################
 # Configure permisions and ownership recursively
 # Globals:
 #   None
