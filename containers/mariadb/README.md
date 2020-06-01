@@ -44,10 +44,10 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10.4-debian-10`, `10.4.13-debian-10-r16`, `10.4`, `10.4.13` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.13-debian-10-r16/10.4/debian-10/Dockerfile)
-* [`10.3-debian-10`, `10.3.23-debian-10-r18`, `10.3`, `10.3.23`, `latest` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.23-debian-10-r18/10.3/debian-10/Dockerfile)
-* [`10.2-debian-10`, `10.2.32-debian-10-r18`, `10.2`, `10.2.32` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.32-debian-10-r18/10.2/debian-10/Dockerfile)
-* [`10.1-debian-10`, `10.1.45-debian-10-r19`, `10.1`, `10.1.45` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.45-debian-10-r19/10.1/debian-10/Dockerfile)
+* [`10.4-debian-10`, `10.4.13-debian-10-r17`, `10.4`, `10.4.13` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.13-debian-10-r17/10.4/debian-10/Dockerfile)
+* [`10.3-debian-10`, `10.3.23-debian-10-r19`, `10.3`, `10.3.23`, `latest` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.23-debian-10-r19/10.3/debian-10/Dockerfile)
+* [`10.2-debian-10`, `10.2.32-debian-10-r20`, `10.2`, `10.2.32` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.32-debian-10-r20/10.2/debian-10/Dockerfile)
+* [`10.1-debian-10`, `10.1.45-debian-10-r20`, `10.1`, `10.1.45` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.45-debian-10-r20/10.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
 
@@ -282,7 +282,7 @@ services:
 
 ## Creating a database user on first run
 
-You can create a restricted database user that only has permissions for the database created with the [`MARIADB_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `MARIADB_USER` environment variable and to set a password for the database user provide the `MARIADB_PASSWORD` variable (alternatively, you can set the `MARIADB_PASSWORD_FILE` with the path to a file that contains the user password). MariaDB supports different authentication mechanisms, such as `pam` or `mysql_native_password`. To set it, use the `MYSQL_AUTHENTICATION_PLUGIN` variable.
+You can create a restricted database user that only has permissions for the database created with the [`MARIADB_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `MARIADB_USER` environment variable and to set a password for the database user provide the `MARIADB_PASSWORD` variable (alternatively, you can set the `MARIADB_PASSWORD_FILE` with the path to a file that contains the user password). MariaDB supports different authentication mechanisms, such as `pam` or `mysql_native_password`. To set it, use the `MARIADB_AUTHENTICATION_PLUGIN` variable.
 
 ```console
 $ docker run --name mariadb \
@@ -449,7 +449,7 @@ services:
 
 After that, your changes will be taken into account in the server's behaviour.
 
-Refer to the [MySQL server option and variable reference guide](https://dev.mysql.com/doc/refman/5.7/en/server-option-variable-reference.html) for the complete list of configuration options.
+Refer to the [MariaDB server option and variable reference guide](https://dev.mysql.com/doc/refman/5.7/en/server-option-variable-reference.html) for the complete list of configuration options.
 
 ### Overwrite the main Configuration file
 
@@ -457,6 +457,72 @@ It is also possible to use your custom `my.cnf` and overwrite the main configura
 
 ```console
 $ docker run --name mariadb  -e ALLOW_EMPTY_PASSWORD=yes -v /path/to/my.cnf:/opt/bitnami/mariadb/conf/my.cnf:ro bitnami/mariadb:latest
+```
+
+# Customize this image
+
+The Bitnami MariaDB Docker image is designed to be extended so it can be used as the base image for your custom configuration.
+
+## Extend this image
+
+Before extending this image, please note there are certain configuration settings you can modify using the original image:
+
+- Settings that can be adapted using environment variables. For instance, you can change the ports used by MariaDB, by setting the environment variables `MARIADB_PORT_NUMBER` or the character set using `MARIADB_CHARACTER_SET` respectively.
+
+If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
+
+```Dockerfile
+FROM bitnami/mariadb
+## Put your customizations below
+...
+```
+
+Here is an example of extending the image with the following modifications:
+
+- Install the `vim` editor
+- Modify the MariaDB configuration file
+- Modify the ports used by MariaDB
+- Change the user that runs the container
+
+```Dockerfile
+FROM bitnami/mariadb
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+## Install 'vim'
+USER 0 # Required to perform privileged actions
+RUN install_packages vim
+USER 1001 # Revert to the original non-root user
+
+## modify configuration file.
+RUN ini-file set --section "mysqld" --key "collation-server" --value "utf8_general_ci" "/opt/bitnami/mariadb/conf/my.cnf"
+
+## Modify the ports used by MariaDB by default
+# It is also possible to change these environment variables at runtime
+ENV MARIADB_PORT_NUMBER=3307
+EXPOSE 3307
+
+## Modify the default container user
+USER 1002
+```
+
+Based on the extended image, you can use a Docker Compose file like the one below to add other features:
+
+- Add a custom configuration
+
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    build: .
+    ports:
+      - '3306:3307'
+    volumes:
+      - /path/to/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro
+      - data:/bitnami/mariadb/data
+volumes:
+  data:
+    driver: local
 ```
 
 # Logging
@@ -547,6 +613,9 @@ $ docker-compose up mariadb
 
 # Notable Changes
 
+## 10.4.13-debian-10-r12, 10.3.23-debian-10-r14, 10.2.32-debian-10-r14 and 10.1.45-debian-10-r15
+
+- This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 
 ## 10.1.36-r14 and 10.2.27-r36
 
