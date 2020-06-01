@@ -16,7 +16,7 @@ RUN mv /opt/bitnami/grafana/conf/sample.ini /opt/bitnami/grafana/conf/grafana.in
 COPY rootfs /
 RUN /grafana-plugins.sh
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="6.7.3-debian-10-r36" \
+    BITNAMI_IMAGE_VERSION="6.7.3-debian-10-r37" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
