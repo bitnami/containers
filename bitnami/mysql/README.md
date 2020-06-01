@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8.0-debian-10`, `8.0.20-debian-10-r32`, `8.0`, `8.0.20`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.20-debian-10-r32/8.0/debian-10/Dockerfile)
+* [`8.0-debian-10`, `8.0.20-debian-10-r33`, `8.0`, `8.0.20`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.20-debian-10-r33/8.0/debian-10/Dockerfile)
 * [`5.7-debian-10`, `5.7.30-debian-10-r37`, `5.7`, `5.7.30` (5.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.30-debian-10-r37/5.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
@@ -439,6 +439,72 @@ It is also possible to use your custom `my.cnf` and overwrite the main configura
 $ docker run --name mysql -v /path/to/my.cnf:/opt/bitnami/mysql/conf/my.cnf:ro bitnami/mysql:latest
 ```
 
+# Customize this image
+
+The Bitnami MySQL Docker image is designed to be extended so it can be used as the base image for your custom configuration.
+
+## Extend this image
+
+Before extending this image, please note there are certain configuration settings you can modify using the original image:
+
+- Settings that can be adapted using environment variables. For instance, you can change the ports used by MySQL, by setting the environment variables `MYSQL_PORT_NUMBER` or the character set using `MYSQL_CHARACTER_SET` respectively.
+
+If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
+
+```Dockerfile
+FROM bitnami/mysql
+## Put your customizations below
+...
+```
+
+Here is an example of extending the image with the following modifications:
+
+- Install the `vim` editor
+- Modify the MySQL configuration file
+- Modify the ports used by MySQL
+- Change the user that runs the container
+
+```Dockerfile
+FROM bitnami/mysql
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+## Install 'vim'
+USER 0 # Required to perform privileged actions
+RUN install_packages vim
+USER 1001 # Revert to the original non-root user
+
+## modify configuration file.
+RUN ini-file set --section "mysqld" --key "collation-server" --value "utf8_general_ci" "/opt/bitnami/mysql/conf/my.cnf"
+
+## Modify the ports used by MySQL by default
+# It is also possible to change these environment variables at runtime
+ENV MYSQL_PORT_NUMBER=3307
+EXPOSE 3307
+
+## Modify the default container user
+USER 1002
+```
+
+Based on the extended image, you can use a Docker Compose file like the one below to add other features:
+
+- Add a custom configuration
+
+```yaml
+version: '2'
+
+services:
+  mysql:
+    build: .
+    ports:
+      - '3306:3307'
+    volumes:
+      - /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro
+      - data:/bitnami/mysql/data
+volumes:
+  data:
+    driver: local
+```
+
 # Logging
 
 The Bitnami MySQL Docker image sends the container logs to the `stdout`. To view the logs:
@@ -521,6 +587,10 @@ $ docker-compose up mysql
 ```
 
 # Notable Changes
+
+## 5.7.30-debian-10-r32 and 8.0.20-debian-10-r29
+
+- This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 
 ## 5.7.23-r52 and 8.0.12-r34
 
