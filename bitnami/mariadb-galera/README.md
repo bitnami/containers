@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10.4-debian-10`, `10.4.13-debian-10-r11`, `10.4`, `10.4.13` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.13-debian-10-r11/10.4/debian-10/Dockerfile)
 * [`10.3-debian-10`, `10.3.23-debian-10-r19`, `10.3`, `10.3.23`, `latest` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.23-debian-10-r19/10.3/debian-10/Dockerfile)
 * [`10.2-debian-10`, `10.2.32-debian-10-r18`, `10.2`, `10.2.32` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.32-debian-10-r18/10.2/debian-10/Dockerfile)
-* [`10.1-debian-10`, `10.1.45-debian-10-r19`, `10.1`, `10.1.45` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.45-debian-10-r19/10.1/debian-10/Dockerfile)
+* [`10.1-debian-10`, `10.1.45-debian-10-r20`, `10.1`, `10.1.45` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.45-debian-10-r20/10.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb-galera GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb-galera).
 
@@ -510,6 +510,72 @@ $ docker run --name mariadb \
   bitnami/mariadb-galera:latest
 ```
 
+# Customize this image
+
+The Bitnami MariaDB Galera Docker image is designed to be extended so it can be used as the base image for your custom configuration.
+
+## Extend this image
+
+Before extending this image, please note there are certain configuration settings you can modify using the original image:
+
+- Settings that can be adapted using environment variables. For instance, you can change the ports used by MariaDB, by setting the environment variables `MARIADB_PORT_NUMBER` or the character set using `MARIADB_CHARACTER_SET` respectively.
+
+If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
+
+```Dockerfile
+FROM bitnami/mariadb-galera
+## Put your customizations below
+...
+```
+
+Here is an example of extending the image with the following modifications:
+
+- Install the `vim` editor
+- Modify the MariaDB configuration file
+- Modify the ports used by MariaDB
+- Change the user that runs the container
+
+```Dockerfile
+FROM bitnami/mariadb-galera
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+## Install 'vim'
+USER 0 # Required to perform privileged actions
+RUN install_packages vim
+USER 1001 # Revert to the original non-root user
+
+## modify configuration file.
+RUN ini-file set --section "mysqld" --key "collation-server" --value "utf8_general_ci" "/opt/bitnami/mariadb-galera/conf/my.cnf"
+
+## Modify the ports used by MariaDB by default
+# It is also possible to change these environment variables at runtime
+ENV MARIADB_PORT_NUMBER=3307
+EXPOSE 3307
+
+## Modify the default container user
+USER 1002
+```
+
+Based on the extended image, you can use a Docker Compose file like the one below to add other features:
+
+- Add a custom configuration
+
+```yaml
+version: '2'
+
+services:
+  mariadb:
+    build: .
+    ports:
+      - '3306:3307'
+    volumes:
+      - /path/to/my_custom.cnf:/opt/bitnami/mariadb-galera/conf/my_custom.cnf:ro
+      - data:/bitnami/mariadb-galera/data
+volumes:
+  data:
+    driver: local
+```
+
 # Logging
 
 The Bitnami MariaDB Galera Docker image sends the container logs to `stdout`. To view the logs:
@@ -595,6 +661,10 @@ $ docker-compose up mariadb
 - [Create An EMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
 # Notable Changes
+
+## 10.4.13-debian-10-r12, 10.3.23-debian-10-r14, 10.2.32-debian-10-r14 and 10.1.45-debian-10-r15
+
+- This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 
 ## 10.4.12-debian-10-r53, 10.3.22-debian-10-r54, 10.2.31-debian-10-r53, and 10.1.44-debian-10-r53
 
