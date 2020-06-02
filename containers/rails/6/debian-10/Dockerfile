@@ -11,7 +11,7 @@ RUN install_packages build-essential ca-certificates curl default-libmysqlclient
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.6.6-0" --checksum ecadce77e40822926c69f76cc11437954dd068793548c3f0a21007f9c4fafed3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "10.20.1-5" --checksum 0729ab9dcf6c86f78b18c5e562e3e504fda5dc25e9fdcd8d192106e805142f7a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.23-0" --checksum 7af3cead7a38670bed924fbc99e20c67f6244bb5a92642adb4ab6cd307aa9a5e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.26.2-0" --checksum 7d970d7f29ec3ab0ef4c9c699c686ab1b4d95f8371be90cbce07c26b9f4386e7
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.27.0-0" --checksum f0f67107dfcff03691f1267a7b7812921082bb88c5bc66e2948152fa3b330491
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rails" "6.0.3-1-0" --checksum 66832295868e222fdd4aba407a6527c18620dd1c4751436f9ef076190d9bb0ee
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/rails/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="6.0.3-1-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="6.0.3-1-debian-10-r14" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
