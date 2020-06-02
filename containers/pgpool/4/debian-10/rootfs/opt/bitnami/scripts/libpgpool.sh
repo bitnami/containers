@@ -43,6 +43,7 @@ export PGPOOL_PID_FILE="${PGPOOL_TMP_DIR}/pgpool.pid"
 export PGPOOL_LOG_FILE="${PGPOOL_LOG_DIR}/pgpool.log"
 export PGPOOL_ENABLE_POOL_HBA="${PGPOOL_ENABLE_POOL_HBA:-yes}"
 export PGPOOL_ENABLE_POOL_PASSWD="${PGPOOL_ENABLE_POOL_PASSWD:-yes}"
+export PGPOOL_USER_CONF_FILE="${PGPOOL_USER_CONF_FILE:-}"
 export PGPOOL_PASSWD_FILE="${PGPOOL_PASSWD_FILE:-pool_passwd}"
 export PGPOOL_MAX_POOL="${PGPOOL_MAX_POOL:-15}"
 export PATH="${PGPOOL_BIN_DIR}:$PATH"
@@ -162,6 +163,10 @@ pgpool_validate() {
                 print_validation_error "Error checking entry '$node', the field 'host' must be set!"
             fi
         done
+    fi
+
+    if [[ -n "$PGPOOL_USER_CONF_FILE" && ! -f "$PGPOOL_USER_CONF_FILE" ]]; then
+        print_validation_error "The provided PGPOOL_USER_CONF_FILE must be a file."
     fi
 
     local yes_no_values=("PGPOOL_ENABLE_POOL_HBA" "PGPOOL_ENABLE_POOL_PASSWD" "PGPOOL_ENABLE_LOAD_BALANCING" "PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING")
@@ -394,6 +399,11 @@ pgpool_create_config() {
     for node in "${nodes[@]}"; do
         pgpool_create_backend_config "$node"
     done
+
+    if [[ -f "$PGPOOL_USER_CONF_FILE" ]]; then
+        info "Custom configuration '$PGPOOL_USER_CONF_FILE' detected!. Adding it to the configuration file."
+        cat "$PGPOOL_USER_CONF_FILE" >> "$PGPOOL_CONF_FILE"
+    fi
 }
 
 ########################
@@ -476,13 +486,8 @@ pgpool_initialize() {
     am_i_root && configure_permissions_ownership "$PGPOOL_TMP_DIR $PGPOOL_LOG_DIR" -u "$PGPOOL_DAEMON_USER" -g "$PGPOOL_DAEMON_GROUP"
     am_i_root && configure_permissions_ownership "$PGPOOL_DATA_DIR" -u "$PGPOOL_DAEMON_USER" -g "$PGPOOL_DAEMON_GROUP" -d "755" -f "644"
 
-    if [[ -f "$PGPOOL_CONF_FILE" ]]; then
-        info "Custom configuration $PGPOOL_CONF_FILE detected!"
-    else
-        info "No injected configuration files found. Creating default config files..."
-        pgpool_create_pghba
-        pgpool_create_config
-        pgpool_generate_password_file
-        pgpool_generate_admin_password_file
-    fi
+    pgpool_create_pghba
+    pgpool_create_config
+    pgpool_generate_password_file
+    pgpool_generate_admin_password_file
 }
