@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl dirmngr fontconfig ghostscript gnupg g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install python-3.6.10-10 --checksum e8a8da2e9d17d2198a16c390161e338a585ec182c083a4cbab205ae872e221de
-RUN bitnami-pkg install postgresql-client-11.8.0-0 --checksum 7fc0d326ab58431aec1435d15204fc7bdb9961873140b18eeac06d3bf32ed54c
+RUN bitnami-pkg install postgresql-client-11.8.0-1 --checksum 732f07d8a39665702c3b69883e5c6e7c601a033dbac4a896843d8cf63026bc7f
 RUN bitnami-pkg install node-12.17.0-0 --checksum 2db24cad52fc5513a7b636c52db756bc5044d68489e850197fc7bf5a63864213
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg unpack odoo-13.0.20200510-0 --checksum a128836dff7464887c1d33f8df546a1dbc5f8c2ae7448bc24f977ec62078c693
@@ -23,7 +23,7 @@ RUN curl -sLO https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="13.0.20200510-debian-10-r20" \
+    BITNAMI_IMAGE_VERSION="13.0.20200510-debian-10-r22" \
     LD_LIBRARY_PATH="/opt/bitnami/odoo/venv/lib/python3.6/site-packages/reportlab/.libs:$LD_LIBRARY_PATH" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
