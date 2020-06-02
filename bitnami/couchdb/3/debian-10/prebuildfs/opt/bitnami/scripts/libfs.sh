@@ -44,10 +44,10 @@ ensure_dir_exists() {
 
 ########################
 # Checks whether a directory is empty or not
-# Arguments:
+# arguments:
 #   $1 - directory
-# Returns:
-#   Boolean
+# returns:
+#   boolean
 #########################
 is_dir_empty() {
     local dir="${1:?missing directory}"
