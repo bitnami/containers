@@ -8,10 +8,10 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl dirmngr gnupg gzip libaio1 libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 procps sudo tar zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
-RUN bitnami-pkg unpack php-7.2.31-1 --checksum 682c3eaee7752f036be24bd97b2eb4ec533f197cae79b2d4ba4a8292674b814a
-RUN bitnami-pkg unpack apache-2.4.43-1 --checksum 35ad223096be455ce5d11b6006db6d83b5080802cead122bfa5ebebc9d29da61
+RUN bitnami-pkg unpack php-7.2.31-2 --checksum 91b8948dd78349368a49c0ec5a97bade487c83aaa2c787f9326c895dd641232d
+RUN bitnami-pkg unpack apache-2.4.43-2 --checksum b804b933f196c46721c9e6c477733a2c90d35b93b97b39b22778ee5882b0c325
 RUN bitnami-pkg unpack mysql-client-10.1.45-0 --checksum ab16b1f8b0bedb562cdbc877bf365b03cf518ae24c5389427fbd85ddec378901
-RUN bitnami-pkg install libphp-7.2.31-0 --checksum ac6cc95babe121a3e5afdecf185abafed8d1a7c50686648d4310930850038479
+RUN bitnami-pkg install libphp-7.2.31-1 --checksum eeaeea9350f233bcfe5718337f5bbcb99049f2b665cfa98f171a1407c4d58a3f
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg unpack prestashop-1.7.6-5-0 --checksum bf9e88eec3933ac77bf2dbb6dbdec0167d84a4f7e8c7fb6c75c92d874cb67ff9
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
@@ -26,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-5-debian-10-r39" \
+    BITNAMI_IMAGE_VERSION="1.7.6-5-debian-10-r40" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
