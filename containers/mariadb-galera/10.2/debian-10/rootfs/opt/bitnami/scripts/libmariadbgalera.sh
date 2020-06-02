@@ -239,6 +239,9 @@ mysql_validate() {
         fi
     fi
 
+    collation_env_var="$(get_env_var COLLATION)"
+    is_empty_value "${!collation_env_var:-}" || warn "The usage of '$(get_env_var COLLATION)' is deprecated and will soon be removed. Use '$(get_env_var COLLATE)' instead."
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
