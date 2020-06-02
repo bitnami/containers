@@ -9,9 +9,10 @@
 # 4. Environment variables set externally (i.e. current Bash context/Dockerfile/userdata)
 
 export BITNAMI_ROOT_DIR="/opt/bitnami"
+export BITNAMI_VOLUME_DIR="/bitnami"
 
 # Logging configuration
-export MODULE="harbor-adapter-trivy"
+export MODULE="${MODULE:-harbor-adapter-trivy}"
 export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
@@ -20,6 +21,7 @@ harbor_adapter_trivy_env_vars=(
     SCANNER_TRIVY_VOLUME_DIR
     SCANNER_TRIVY_CACHE_DIR
     SCANNER_TRIVY_REPORTS_DIR
+
 )
 for env_var in "${harbor_adapter_trivy_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
