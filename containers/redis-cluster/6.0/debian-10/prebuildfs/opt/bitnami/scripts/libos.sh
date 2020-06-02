@@ -204,3 +204,60 @@ retry_while() {
     done
     return $return_value
 }
+
+########################
+# Generate a random string
+# Arguments:
+#   -t|--type - String type (ascii, alphanumeric, numeric), defaults to ascii
+#   -c|--count - Number of characters, defaults to 32
+# Arguments:
+#   None
+# Returns:
+#   None
+# Returns:
+#   String
+#########################
+generate_random_string() {
+    local type="ascii"
+    local count="32"
+    local filter
+    local result
+    # Validate arguments
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            -t|--type)
+                shift
+                type="$1"
+                ;;
+            -c|--count)
+                shift
+                count="$1"
+                ;;
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+    # Validate type
+    case "$type" in
+        ascii)
+            filter="[:print:]"
+            ;;
+        alphanumeric)
+            filter="a-zA-Z0-9"
+            ;;
+        numeric)
+            filter="0-9"
+            ;;
+        *)
+        echo "Invalid type ${type}" >&2
+        return 1
+    esac
+    # Obtain count + 10 lines from /dev/urandom to ensure that the resulting string has the expected size
+    # Note there is a very small chance of strings starting with EOL character
+    # Therefore, the higher amount of lines read, this will happen less frequently
+    result="$(head -n "$((count + 10))" /dev/urandom | tr -dc "$filter" | head -c "$count")"
+    echo "$result"
+}
