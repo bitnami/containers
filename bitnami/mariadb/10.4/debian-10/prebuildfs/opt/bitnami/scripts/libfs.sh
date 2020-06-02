@@ -44,15 +44,34 @@ ensure_dir_exists() {
 
 ########################
 # Checks whether a directory is empty or not
-# Arguments:
+# arguments:
 #   $1 - directory
-# Returns:
-#   Boolean
+# returns:
+#   boolean
 #########################
 is_dir_empty() {
     local dir="${1:?missing directory}"
 
     if [[ ! -e "$dir" ]] || [[ -z "$(ls -A "$dir")" ]]; then
+        true
+    else
+        false
+    fi
+}
+
+########################
+# Checks whether a file can be written to or not
+# arguments:
+#   $1 - file
+# returns:
+#   boolean
+#########################
+is_file_writable() {
+    local file="${1:?missing file}"
+    local dir
+    dir="$(dirname "$file")"
+
+    if [[ ( -f "$file" && -w "$file" ) || ( ! -f "$file" && -d "$dir" && -w "$dir" ) ]]; then
         true
     else
         false
