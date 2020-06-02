@@ -1,4 +1,6 @@
-# What is Kafka?
+# Bitnami Docker Image for Kafka
+
+## What is Kafka?
 
 Apache Kafka is a distributed streaming platform used for building real-time data pipelines and
 streaming apps. It is horizontally scalable, fault-tolerant, wicked fast, and runs in production in
@@ -41,8 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
-
-* [`2-debian-10`, `2.5.0-debian-10-r50`, `2`, `2.5.0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.5.0-debian-10-r50/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.5.0-debian-10-r54`, `2`, `2.5.0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.5.0-debian-10-r54/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
