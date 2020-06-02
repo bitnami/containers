@@ -16,5 +16,11 @@ set -o pipefail
 # Ensure Apache environment variables are valid
 apache_validate
 
+# Ensure Apache daemon user exists when running as 'root'
+am_i_root && ensure_user_exists "$APACHE_DAEMON_USER" "$APACHE_DAEMON_GROUP"
+
 # Ensure Apache is initialized
 apache_initialize
+
+# Fix logging issue when running as root
+! am_i_root || chmod o+w "$(readlink /dev/stdout)" "$(readlink /dev/stderr)"
