@@ -12,7 +12,7 @@ RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install node-10.20.1-5 --checksum 0729ab9dcf6c86f78b18c5e562e3e504fda5dc25e9fdcd8d192106e805142f7a
 RUN bitnami-pkg install sequelize-cli-5.5.1-0 --checksum 7e572fea880336f69bf7b0b34cd718ee81e7114fe61313acaba12b7a5564cddc
-RUN bitnami-pkg install git-2.26.2-0 --checksum 7d970d7f29ec3ab0ef4c9c699c686ab1b4d95f8371be90cbce07c26b9f4386e7
+RUN bitnami-pkg install git-2.27.0-0 --checksum f0f67107dfcff03691f1267a7b7812921082bb88c5bc66e2948152fa3b330491
 RUN bitnami-pkg install express-generator-4.16.1-0 --checksum 09dc5947a709a9bbeb257b17cd13bdb2ca87b08fa17baab4583bdc026badef35
 RUN bitnami-pkg install bower-1.8.8-0 --checksum 587140d73a26e13c179f65e09b4cd706db000ff9beb68a57f2158aefa86ce4fa
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
@@ -24,7 +24,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwx /dist /app /.npm /.config /.cache /.local
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.17.1-debian-10-r119" \
+    BITNAMI_IMAGE_VERSION="4.17.1-debian-10-r121" \
     NAMI_PREFIX="/.nami" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
