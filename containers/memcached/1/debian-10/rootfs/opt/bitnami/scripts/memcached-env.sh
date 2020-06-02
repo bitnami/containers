@@ -9,9 +9,10 @@
 # 4. Environment variables set externally (i.e. current Bash context/Dockerfile/userdata)
 
 export BITNAMI_ROOT_DIR="/opt/bitnami"
+export BITNAMI_VOLUME_DIR="/bitnami"
 
 # Logging configuration
-export MODULE="memcached"
+export MODULE="${MODULE:-memcached}"
 export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
@@ -24,6 +25,7 @@ memcached_env_vars=(
     MEMCACHED_CACHE_SIZE
     MEMCACHED_MAX_CONNECTIONS
     MEMCACHED_THREADS
+
 )
 for env_var in "${memcached_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"

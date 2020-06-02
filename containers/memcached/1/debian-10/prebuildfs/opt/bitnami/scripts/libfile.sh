@@ -59,3 +59,22 @@ remove_in_file() {
     fi
     echo "$result" > "$filename"
 }
+
+########################
+# Appends text after the last line matching a pattern
+# Arguments:
+#   $1 - file
+#   $2 - match regex
+#   $3 - contents to add
+# Returns:
+#   None
+#########################
+append_file_after_last_match() {
+    local file="${1:?missing file}"
+    local match_regex="${2:?missing pattern}"
+    local value="${3:?missing value}"
+
+    # We read the file in reverse, replace the first match (0,/pattern/s) and then reverse the results again
+    result="$(tac "$file" | sed -E "0,/($match_regex)/s||${value}\n\1|" | tac)"
+    echo "$result" > "$file"
+}
