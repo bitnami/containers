@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10.4-debian-10`, `10.4.13-debian-10-r19`, `10.4`, `10.4.13` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.13-debian-10-r19/10.4/debian-10/Dockerfile)
 * [`10.3-debian-10`, `10.3.23-debian-10-r21`, `10.3`, `10.3.23`, `latest` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.23-debian-10-r21/10.3/debian-10/Dockerfile)
 * [`10.2-debian-10`, `10.2.32-debian-10-r21`, `10.2`, `10.2.32` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.32-debian-10-r21/10.2/debian-10/Dockerfile)
-* [`10.1-debian-10`, `10.1.45-debian-10-r22`, `10.1`, `10.1.45` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.45-debian-10-r22/10.1/debian-10/Dockerfile)
+* [`10.1-debian-10`, `10.1.45-debian-10-r23`, `10.1`, `10.1.45` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.45-debian-10-r23/10.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
 
@@ -208,7 +208,7 @@ services:
 It is possible to configure the character set and collation used by default by the database with the following environment variables:
 
 - `MARIADB_CHARACTER_SET`: The default character set to use. Default: `utf8`
-- `MARIADB_COLLATION`: The default collation to use. Default: `utf8_general_ci`
+- `MARIADB_COLLATE`: The default collation to use. Default: `utf8_general_ci`
 
 ## Setting the root password on first run
 
