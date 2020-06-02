@@ -1,0 +1,18 @@
+version: '2'
+services:
+  postgresql:
+    image: 'docker.io/bitnami/postgresql:11-debian-10'
+    environment:
+      - POSTGRESQL_PASSWORD=bitnami
+    volumes:
+      - 'postgresql_data:/bitnami'
+  phppgadmin:
+    image: 'docker.io/bitnami/phppgadmin:7-debian-10'
+    ports:
+      - '80:8080'
+      - '443:8443'
+    depends_on:
+      - postgresql
+volumes:
+  postgresql_data:
+    driver: local
