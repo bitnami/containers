@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5-debian-10`, `5.0.2-debian-10-r72`, `5`, `5.0.2`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.0.2-debian-10-r72/5/debian-10/Dockerfile)
+* [`5-debian-10`, `5.0.2-debian-10-r73`, `5`, `5.0.2`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.0.2-debian-10-r73/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpmyadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phpmyadmin).
 
@@ -73,17 +73,15 @@ $ docker network create phpmyadmin-tier
 $ docker volume create --name mariadb_data
 $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
   --net phpmyadmin-tier \
-  --volume mariadb_data:/bitnami \
+  --volume mariadb_data:/bitnami/mariadb \
   bitnami/mariadb:latest
 ```
 
-3. Create volumes for phpMyAdmin persistence and launch the container
+3. Launch the phpMyAdmin container
 
 ```console
-$ docker volume create --name phpmyadmin_data
-$ docker run -d --name phpmyadmin -p 80:80 -p 443:443 \
+$ docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
   --net phpmyadmin-tier \
-  --volume phpmyadmin_data:/bitnami \
   bitnami/phpmyadmin:latest
 ```
 
@@ -95,7 +93,7 @@ If you remove the container all your data and configurations will be lost, and t
 
 For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
 
-The above examples define docker volumes namely `mariadb_data` and `phpmyadmin_data`. The phpMyAdmin application state will persist as long as these volumes are not removed.
+The above examples define a Docker volume named `mariadb_data`. The application state will persist as long as this volume is not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -108,12 +106,7 @@ services:
   mariadb:
   ...
     volumes:
-      - /path/to/mariadb-persistence:/bitnami
-  ...
-  phpmyadmin:
-  ...
-    volumes:
-      - /path/to/phpmyadmin-persistence:/bitnami
+      - /path/to/mariadb-persistence:/bitnami/mariadb
   ...
 ```
 
@@ -130,16 +123,15 @@ $ docker network create phpmyadmin-tier
 ```console
 $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
   --net phpmyadmin-tier \
-  --volume /path/to/mariadb-persistence:/bitnami \
+  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
   bitnami/mariadb:latest
 ```
 
-3. Create the phpMyAdmin the container with host volumes
+3. Launch the phpMyAdmin container
 
 ```console
-$ docker run -d --name phpmyadmin -p 80:80 -p 443:443 \
+$ docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
   --net phpmyadmin-tier \
-  --volume /path/to/phpmyadmin-persistence:/bitnami \
   bitnami/phpmyadmin:latest
 ```
 
@@ -160,25 +152,15 @@ The `bitnami/phpmyadmin:latest` tag always points to the most recent release. To
  * For docker-compose: `$ docker-compose stop phpmyadmin`
  * For manual execution: `$ docker stop phpmyadmin`
 
-3. Take a snapshot of the application state
-
-```console
-$ rsync -a /path/to/phpmyadmin-persistence /path/to/phpmyadmin-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-Additionally, [snapshot the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
-
-You can use these snapshots to restore the application state should the upgrade fail.
-
-4. Remove the currently running container
+3. Remove the currently running container
 
  * For docker-compose: `$ docker-compose rm -v phpmyadmin`
  * For manual execution: `$ docker rm -v phpmyadmin`
 
-5. Run the new image
+4. Run the new image
 
  * For docker-compose: `$ docker-compose up phpmyadmin`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name phpmyadmin bitnami/phpmyadmin:latest`
+ * For manual execution: `docker run --name phpmyadmin bitnami/phpmyadmin:latest`
 
 # Configuration
 
@@ -187,7 +169,8 @@ You can use these snapshots to restore the application state should the upgrade 
 The phpMyAdmin instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom phpMyAdmin:
 
 - `PHPMYADMIN_ALLOW_ARBITRARY_SERVER`: Allows you to enter database server hostname on login form. Default: **false**
-- `PHPMYADMIN_ALLOW_NO_PASSWORD`: Whether to allow logins without a password. Default: **true**
+- `PHPMYADMIN_ALLOW_REMOTE_CONNECTIONS`: Whether to allow access from any source. When disabled, only connections from 127.0.0.1 will be allowed. Default: **yes**
+- `DATABASE_ALLOW_NO_PASSWORD`: Whether to allow logins without a password. Default: **yes**
 - `DATABASE_HOST`: Database server host. Default: **mariadb**
 - `DATABASE_PORT_NUMBER`: Database server port. Default: **3306**
 - `DATABASE_ENABLE_SSL`: Whether to enable SSL for the connection between phpMyAdmin and the MySQL server to secure the connection. Default: **no**
@@ -197,6 +180,8 @@ The phpMyAdmin instance can be customized by specifying environment variables on
 - `DATABASE_SSL_CA_PATH`: Directory containing trusted SSL CA certificates in PEM format.
 - `DATABASE_SSL_CIPHERS`: List of allowable ciphers for connections when using SSL.
 - `DATABASE_SSL_VERIFY`: Enable SSL certificate validation. Default: **yes**
+- `PHP_UPLOAD_MAX_FILESIZE`: Max PHP upload file size. Default: **80M**
+- `PHP_POST_MAX_SIZE`: Max PHP POST size. Default: **80M**
 - `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **256M**
 
 ### Specifying Environment variables using Docker Compose
@@ -213,18 +198,17 @@ services:
   phpmyadmin:
   ...
     environment:
-      - PHPMYADMIN_ALLOW_NO_PASSWORD=false
-      - PHPMYADMIN_ALLOW_ARBITRARY_SERVER=true
+      - DATABASE_ALLOW_NO_PASSWORD=false
+      - PHPMYADMIN_ALLOW_ARBITRARY_SERVER=yes
   ...
 ```
 
 ### Specifying Environment variables on the Docker command line
 
 ```console
-$ docker run -d --name phpmyadmin -p 80:80 -p 443:443 \
+$ docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
   --net phpmyadmin-tier \
   --env PHPMYADMIN_PASSWORD=my_password \
-  --volume phpmyadmin_data:/bitnami \
   bitnami/phpmyadmin:latest
 ```
 
@@ -254,13 +238,16 @@ Here is an example of extending the image with the following modifications:
 - Install the `vim` editor
 - Modify the Apache configuration file
 - Modify the ports used by Apache
+- Modify the default container user
 
 ```Dockerfile
 FROM bitnami/phpmyadmin
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ## Install 'vim'
+USER 0 # Required to perform privileged actions
 RUN install_packages vim
+USER 1001 # Revert to the original non-root user
 
 ## Enable mod_ratelimit module
 RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
@@ -270,6 +257,9 @@ RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt
 ENV APACHE_HTTP_PORT_NUMBER=8181
 ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
+
+## Modify the default container user
+USER 1002
 ```
 
 Based on the extended image, you can use a Docker Compose file like the one below to add other features:
@@ -282,7 +272,7 @@ services:
     environment:
       - MARIADB_ROOT_PASSWORD=bitnami
     volumes:
-      - 'mariadb_data:/bitnami'
+      - 'mariadb_data:/bitnami/mariadb'
   phpmyadmin:
     build: .
     ports:
@@ -291,7 +281,7 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - 'phpmyadmin_data:/bitnami'
+      - 'phpmyadmin_data:/bitnami/mariadb'
 volumes:
   mariadb_data:
     driver: local
@@ -300,6 +290,12 @@ volumes:
 ```
 
 # Notable Changes
+
+## 5.0.2-debian-10-r62
+
+- Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder.
+- The `PHPMYADMIN_ALLOW_NO_PASSWORD` environment variable has been deprecated in favor of `DATABASE_ALLOW_NO_PASSWORD`.
+- New environment variables have been added to support configuring extra PHP options: `PHP_UPLOAD_MAX_FILESIZE` for `upload_max_filesize`, and `PHP_POST_MAX_SIZE` for `post_max_size`.
 
 ## 4.8.5-debian-9-r96 and 4.8.5-ol-7-r111
 
