@@ -9,9 +9,10 @@
 # 4. Environment variables set externally (i.e. current Bash context/Dockerfile/userdata)
 
 export BITNAMI_ROOT_DIR="/opt/bitnami"
+export BITNAMI_VOLUME_DIR="/bitnami"
 
 # Logging configuration
-export MODULE="mongodb"
+export MODULE="${MODULE:-mongodb}"
 export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
@@ -47,6 +48,7 @@ mongodb_env_vars=(
     MONGODB_CFG_PRIMARY_PORT_NUMBER
     MONGODB_MONGOS_HOST
     MONGODB_MONGOS_PORT_NUMBER
+
 )
 for env_var in "${mongodb_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
