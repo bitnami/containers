@@ -5,6 +5,7 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
+. /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
@@ -16,7 +17,7 @@
 ########################
 # Check if NGINX is running
 # Globals:
-#   NGINX_TMPDIR
+#   NGINX_TMP_DIR
 # Arguments:
 #   None
 # Returns:
@@ -24,19 +25,31 @@
 #########################
 is_nginx_running() {
     local pid
-    pid=$(get_pid_from_file "${NGINX_TMPDIR}/nginx.pid")
-
-    if [[ -z "$pid" ]]; then
-        false
-    else
+    pid="$(get_pid_from_file "$NGINX_PID_FILE")"
+    if [[ -n "$pid" ]]; then
         is_service_running "$pid"
+    else
+        false
     fi
+}
+
+########################
+# Check if NGINX is not running
+# Globals:
+#   NGINX_TMP_DIR
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_nginx_not_running() {
+    ! is_nginx_running
 }
 
 ########################
 # Stop NGINX
 # Globals:
-#   NGINX_TMPDIR
+#   NGINX_TMP_DIR
 # Arguments:
 #   None
 # Returns:
@@ -44,70 +57,29 @@ is_nginx_running() {
 #########################
 nginx_stop() {
     ! is_nginx_running && return
-    debug "Stopping NGINX..."
-    stop_service_using_pid "${NGINX_TMPDIR}/nginx.pid"
+    debug "Stopping NGINX"
+    stop_service_using_pid "$NGINX_PID_FILE"
 }
 
 ########################
-# Load global variables used on NGINX configuration
+# Configure NGINX server block port
 # Globals:
-#   NGINX_*
+#   NGINX_CONF_DIR
 # Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-nginx_env() {
-    cat <<"EOF"
-export NGINX_BASEDIR="/opt/bitnami/nginx"
-export NGINX_VOLUME="/bitnami/nginx"
-export NGINX_TMPDIR="${NGINX_BASEDIR}/tmp"
-export NGINX_CONFDIR="${NGINX_BASEDIR}/conf"
-export NGINX_LOGDIR="${NGINX_BASEDIR}/logs"
-export NGINX_DAEMON_USER="${NGINX_DAEMON_USER:-daemon}"
-export NGINX_DAEMON_GROUP="${NGINX_DAEMON_GROUP:-daemon}"
-export PATH="${NGINX_BASEDIR}/sbin:$PATH"
-export NGINX_ENABLE_CUSTOM_PORTS="${NGINX_ENABLE_CUSTOM_PORTS:-no}"
-export NGINX_HTTPS_PORT_NUMBER="${NGINX_HTTPS_PORT_NUMBER:-}"
-export NGINX_HTTP_PORT_NUMBER="${NGINX_HTTP_PORT_NUMBER:-}"
-EOF
-}
-
-########################
-# Check if NGINX configuration file is writable by current user
-# Globals:
-#   NGINX_CONFDIR
-# Arguments:
-#   None
-# Returns:
-#   Boolean
-#########################
-is_nginx_config_writable() {
-    if [[ -w "${NGINX_CONFDIR}/nginx.conf" ]]; then
-    true
-    else
-        warn "'nginx.conf' is not writable by current user. Skipping modifications..."
-        false
-    fi
-}
-
-########################
-# Configure default HTTP port
-# Globals:
-#   NGINX_CONFDIR
-# Arguments:
-#    $1 - (optional) HTTP Port
+#    $1 - Port number
+#    $2 - (optional) Path to server block file
 # Returns:
 #   None
 #########################
-nginx_config_http_port() {
-    local http_port=${1:-8080}
-    if is_nginx_config_writable; then
+nginx_configure_port() {
+    local port=${1:?missing port}
+    local file=${2:-"$NGINX_CONF_FILE"}
+    if is_file_writable "$file"; then
         local nginx_configuration
-        debug "Configuring default HTTP port..."
+        debug "Setting port number to ${port} in '${file}'"
         # TODO: find an appropriate NGINX parser to avoid 'sed calls'
-        nginx_configuration="$(sed -E "s/(listen\s+)[0-9]{1,5};/\1${http_port};/g" "${NGINX_CONFDIR}/nginx.conf")"
-        echo "$nginx_configuration" > "${NGINX_CONFDIR}/nginx.conf"
+        nginx_configuration="$(sed -E "s/(listen\s+)[0-9]{1,5};/\1${port};/g" "$file")"
+        echo "$nginx_configuration" > "$file"
     fi
 }
 
@@ -121,15 +93,20 @@ nginx_config_http_port() {
 #   None
 #########################
 nginx_validate() {
-    info "Validating settings in NGINX_* env vars..."
+    info "Validating settings in NGINX_* env vars"
 
-    local validate_port_args=()
-    ! am_i_root && validate_port_args+=("-unprivileged")
     if [[ -n "${NGINX_HTTP_PORT_NUMBER:-}" ]]; then
-        if ! err=$(validate_port "${validate_port_args[@]}" "${NGINX_HTTP_PORT_NUMBER:-}"); then
+        local -a validate_port_args=()
+        ! am_i_root && validate_port_args+=("-unprivileged")
+        validate_port_args+=("${NGINX_HTTP_PORT_NUMBER}")
+        if ! err=$(validate_port "${validate_port_args[@]}"); then
             error "An invalid port was specified in the environment variable NGINX_HTTP_PORT_NUMBER: $err"
             exit 1
         fi
+    fi
+
+    if ! is_file_writable "$NGINX_CONF_FILE"; then
+        warn "The NGINX configuration file '${NGINX_CONF_FILE}' is not writable by current user. Configurations based on environment variables will not be applied."
     fi
 }
 
@@ -143,39 +120,251 @@ nginx_validate() {
 #   None
 #########################
 nginx_initialize() {
-    info "Initializing NGINX..."
+    info "Initializing NGINX"
 
     # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
     # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
-    rm -f "${NGINX_TMPDIR}/nginx.pid"
+    rm -f "${NGINX_TMP_DIR}/nginx.pid"
 
     # Persisted configuration files from old versions
-    if [[ -f "$NGINX_VOLUME/conf/nginx.conf" ]]; then
-        error "A 'nginx.conf' file was found inside '${NGINX_VOLUME}/conf'. This configuration is not supported anymore. Please mount the configuration file at '${NGINX_CONFDIR}/nginx.conf' instead."
+    if [[ -f "$NGINX_VOLUME_DIR/conf/nginx.conf" ]]; then
+        error "A 'nginx.conf' file was found inside '${NGINX_VOLUME_DIR}/conf'. This configuration is not supported anymore. Please mount the configuration file at '${NGINX_CONF_FILE}' instead."
         exit 1
     fi
-    if ! is_dir_empty "$NGINX_VOLUME/conf/vhosts"; then
-        error "Custom server blocks files were found inside '$NGINX_VOLUME/conf/vhosts'. This configuration is not supported anymore. Please mount your custom server blocks config files at '${NGINX_CONFDIR}/server_blocks' instead."
+    if ! is_dir_empty "$NGINX_VOLUME_DIR/conf/vhosts"; then
+        error "Custom server blocks files were found inside '$NGINX_VOLUME_DIR/conf/vhosts'. This configuration is not supported anymore. Please mount your custom server blocks config files at '${NGINX_SERVER_BLOCKS_DIR}' instead."
         exit 1
     fi
 
-    debug "Updating 'nginx.conf' based on user configuration..."
+    debug "Updating NGINX configuration based on environment variables"
     local nginx_user_configuration
     if am_i_root; then
-        debug "Ensuring NGINX daemon user/group exists..."
+        debug "Ensuring NGINX daemon user/group exists"
         ensure_user_exists "$NGINX_DAEMON_USER" "$NGINX_DAEMON_GROUP"
         if [[ -n "${NGINX_DAEMON_USER:-}" ]]; then
-            chown -R "${NGINX_DAEMON_USER:-}" "$NGINX_TMPDIR"
+            chown -R "${NGINX_DAEMON_USER:-}" "$NGINX_TMP_DIR"
         fi
-        nginx_user_configuration="$(sed -E "s/^(user\s+).*/\1 ${NGINX_DAEMON_USER:-} ${NGINX_DAEMON_GROUP:-};/g" "${NGINX_CONFDIR}/nginx.conf")"
-        is_nginx_config_writable && echo "$nginx_user_configuration" > "${NGINX_CONFDIR}/nginx.conf"
+        nginx_user_configuration="$(sed -E "s/^(user\s+).*/\1 ${NGINX_DAEMON_USER:-} ${NGINX_DAEMON_GROUP:-};/g" "$NGINX_CONF_FILE")"
+        is_file_writable "$NGINX_CONF_FILE" && echo "$nginx_user_configuration" > "$NGINX_CONF_FILE"
     else
         # The "user" directive makes sense only if the master process runs with super-user privileges
         # TODO: find an appropriate NGINX parser to avoid 'sed calls'
-        nginx_user_configuration="$(sed -E "s/(^user)/# \1/g" "${NGINX_CONFDIR}/nginx.conf")"
-        is_nginx_config_writable && echo "$nginx_user_configuration" > "${NGINX_CONFDIR}/nginx.conf"
+        nginx_user_configuration="$(sed -E "s/(^user)/# \1/g" "$NGINX_CONF_FILE")"
+        is_file_writable "$NGINX_CONF_FILE" && echo "$nginx_user_configuration" > "$NGINX_CONF_FILE"
     fi
     if [[ -n "${NGINX_HTTP_PORT_NUMBER:-}" ]]; then
-        nginx_config_http_port "${NGINX_HTTP_PORT_NUMBER}"
+        nginx_configure_port "$NGINX_HTTP_PORT_NUMBER"
+    fi
+}
+
+########################
+# Ensure an NGINX application configuration exists (in server block format)
+# Globals:
+#   NGINX_*
+# Arguments:
+#   $1 - App name
+# Flags:
+#   --hosts - Hosts to enable
+#   --type - Application type, which has an effect on what configuration template will be used, allowed values: php, (empty)
+#   --allow-remote-connections - Whether to allow remote connections or to require local connections
+#   --disabled - Whether to render the file with a .disabled prefix
+#   --enable-https - Enable app configuration on HTTPS port
+#   --http-port - HTTP port number
+#   --https-port - HTTPS port number
+#   --additional-configuration - Additional server block configuration (no default)
+#   --document-root - Path to document root directory
+# Returns:
+#   true if the configuration was enabled, false otherwise
+########################
+ensure_nginx_app_configuration_exists() {
+    export app="${1:?missing app}"
+    # Default options
+    local type=""
+    local -a hosts=()
+    local allow_remote_connections="yes"
+    local disabled="no"
+    local enable_https="yes"
+    local http_port="${NGINX_HTTP_PORT_NUMBER:-"$NGINX_DEFAULT_HTTP_PORT_NUMBER"}"
+    local https_port="${NGINX_HTTPS_PORT_NUMBER:-"$NGINX_DEFAULT_HTTPS_PORT_NUMBER"}"
+    local var_name
+    # Template variables defaults
+    export additional_configuration=""
+    export document_root="${BITNAMI_ROOT_DIR}/${app}"
+    # Validate arguments
+    shift
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            --hosts)
+                shift
+                read -r -a hosts <<< "$1"
+                ;;
+            --type \
+            | --allow-remote-connections \
+            | --disabled \
+            | --enable-https \
+            | --http-port \
+            | --https-port \
+            | --additional-configuration \
+            | --document-root \
+            | --extra-directory-configuration \
+            )
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+                shift
+                export "${var_name}"="$1"
+                ;;
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+    # Construct host string in the format of "host1:port1[ host2:port2[ ...]]"
+    export http_listen_configuration=""
+    export https_listen_configuration=""
+    if [[ "${#hosts[@]}" -gt 0 ]]; then
+        for host in "${hosts[@]}"; do
+            http_listen=$'\n'"listen ${host}:${http_port};"
+            https_listen=$'\n'"listen ${host}:${https_port} ssl;"
+            [[ -z "${http_listen_configuration:-}" ]] && http_listen_configuration="$http_listen" || http_listen_configuration="${http_listen_configuration}${http_listen}"
+            [[ -z "${https_listen_configuration:-}" ]] && https_listen_configuration="$https_listen" || https_listen_configuration="${https_listen_configuration}${https_listen}"
+        done
+    else
+        http_listen_configuration=$'\n'"listen ${http_port};"
+        https_listen_configuration=$'\n'"listen ${https_port} ssl;"
+    fi
+    # ACL configuration
+    export acl_configuration=""
+    if ! is_boolean_yes "$allow_remote_connections"; then
+        acl_configuration=$'\n'"allow 127.0.0.1;"$'\n'"deny all;"
+    fi
+    # Indent configurations
+    acl_configuration="$(indent "$acl_configuration" 4)"
+    additional_configuration="$(indent "$additional_configuration" 4)"
+    http_listen_configuration="$(indent "$http_listen_configuration" 4)"
+    https_listen_configuration="$(indent "$https_listen_configuration" 4)"
+    # Render templates
+    # We remove lines that are empty or contain only newspaces with 'sed', so the resulting file looks better
+    local template_name="app"
+    [[ -n "$type" && "$type" != "php" ]] && template_name="app-${type}"
+    local template_dir="${BITNAMI_ROOT_DIR}/scripts/nginx/bitnami-templates"
+    local server_block_suffix=""
+    is_boolean_yes "$disabled" && server_block_suffix=".disabled"
+    local http_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-server-block.conf${server_block_suffix}"
+    local https_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-https-server-block.conf${server_block_suffix}"
+    if is_file_writable "$http_server_block"; then
+        # Create file with root group write privileges, so it can be modified in non-root containers
+        [[ ! -f "$http_server_block" ]] && touch "$http_server_block" && chmod g+rw "$http_server_block"
+        render-template "${template_dir}/${template_name}-http-server-block.conf.tpl" | sed '/^\s*$/d' > "$http_server_block"
+    elif [[ ! -f "$http_server_block" ]]; then
+        error "Could not create server block for ${app} at '${http_server_block}'. Check permissions and ownership for parent directories."
+        return 1
+    else
+        warn "The ${app} server block file '${http_server_block}' is not writable. Configurations based on environment variables will not be applied for this file."
+    fi
+    if is_boolean_yes "$enable_https"; then
+        if is_file_writable "$https_server_block"; then
+            # Create file with root group write privileges, so it can be modified in non-root containers
+            [[ ! -f "$https_server_block" ]] && touch "$https_server_block" && chmod g+rw "$https_server_block"
+            render-template "${template_dir}/${template_name}-https-server-block.conf.tpl" | sed '/^\s*$/d' > "$https_server_block"
+        elif [[ ! -f "$https_server_block" ]]; then
+            error "Could not create server block for ${app} at '${https_server_block}'. Check permissions and ownership for parent directories."
+            return 1
+        else
+            warn "The ${app} server block file '${https_server_block}' is not writable. Configurations based on environment variables will not be applied for this file."
+        fi
+    fi
+}
+
+########################
+# Ensure an NGINX application configuration does not exist anymore (in server block format)
+# Globals:
+#   *
+# Arguments:
+#   $1 - App name
+# Returns:
+#   true if the configuration was disabled, false otherwise
+########################
+ensure_nginx_app_configuration_not_exists() {
+    local app="${1:?missing app}"
+    local http_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-server-block.conf"
+    local https_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-https-server-block.conf"
+    # Note that 'rm -f' will not fail if the files don't exist
+    # However if we lack permissions to remove the file, it will result in a non-zero exit code, as expected by this function
+    rm -f "$http_server_block" "$https_server_block"
+}
+
+########################
+# Ensure NGINX loads the configuration for an application in a URL prefix
+# Globals:
+#   NGINX_*
+# Arguments:
+#   $1 - App name
+# Flags:
+#   --type - Application type, which has an effect on what configuration template will be used, allowed values: php, (empty)
+#   --allow-remote-connections - Whether to allow remote connections or to require local connections
+#   --prefix - URL prefix from where it will be accessible (i.e. /myapp)
+#   --additional-configuration - Additional server block configuration (no default)
+#   --document-root - Path to document root directory
+#   --extra-directory-configuration - Extra configuration for the document root directory
+# Returns:
+#   true if the configuration was enabled, false otherwise
+########################
+ensure_nginx_prefix_configuration_exists() {
+    local app="${1:?missing app}"
+    # Default options
+    local type=""
+    local allow_remote_connections="yes"
+    local var_name
+    # Template variables defaults
+    export additional_configuration=""
+    export document_root="${BITNAMI_ROOT_DIR}/${app}"
+    export extra_directory_configuration=""
+    export prefix="/${app}"
+    # Validate arguments
+    shift
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            --type \
+            | --allow-remote-connections \
+            | --additional-configuration \
+            | --document-root \
+            | --extra-directory-configuration \
+            | --prefix \
+            )
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+                shift
+                declare "${var_name}"="$1"
+                ;;
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+    # ACL configuration
+    export acl_configuration=""
+    if ! is_boolean_yes "$allow_remote_connections"; then
+        acl_configuration=$'\n'"allow 127.0.0.1;"$'\n'"deny all;"
+    fi
+    # Indent configurations
+    acl_configuration="$(indent "$acl_configuration" 4)"
+    additional_configuration="$(indent "$additional_configuration" 4)"
+    # Render templates
+    # We remove lines that are empty or contain only newspaces with 'sed', so the resulting file looks better
+    local template_name="app"
+    [[ -n "$type" ]] && template_name="app-${type}"
+    local template_dir="${BITNAMI_ROOT_DIR}/scripts/nginx/bitnami-templates"
+    local prefix_file="${NGINX_CONF_DIR}/bitnami/${app}.conf"
+    if is_file_writable "$prefix_file"; then
+        # Create file with root group write privileges, so it can be modified in non-root containers
+        [[ ! -f "$prefix_file" ]] && touch "$prefix_file" && chmod g+rw "$prefix_file"
+        render-template "${template_dir}/${template_name}-prefix.conf.tpl" | sed '/^\s*$/d' > "$prefix_file"
+    elif [[ ! -f "$prefix_file" ]]; then
+        error "Could not create web server configuration file for ${app} at '${prefix_file}'. Check permissions and ownership for parent directories."
+        return 1
+    else
+        warn "The ${app} web server configuration file '${prefix_file}' is not writable. Configurations based on environment variables will not be applied for this file."
     fi
 }
