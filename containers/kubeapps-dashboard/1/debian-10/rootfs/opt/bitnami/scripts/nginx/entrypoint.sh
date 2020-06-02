@@ -5,14 +5,14 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-#set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purpose
 
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/libnginx.sh
 
 # Load NGINX environment variables
-eval "$(nginx_env)"
+. /opt/bitnami/scripts/nginx-env.sh
 
 print_welcome_page
 
