@@ -9,14 +9,10 @@ services:
   phpmyadmin:
     image: 'docker.io/bitnami/phpmyadmin:5-debian-10'
     ports:
-      - '80:80'
-      - '443:443'
+      - '80:8080'
+      - '443:8443'
     depends_on:
       - mariadb
-    volumes:
-      - 'phpmyadmin_data:/bitnami'
 volumes:
   mariadb_data:
-    driver: local
-  phpmyadmin_data:
     driver: local
