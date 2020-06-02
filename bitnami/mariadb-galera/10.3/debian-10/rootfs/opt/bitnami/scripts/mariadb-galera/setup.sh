@@ -5,7 +5,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-# set -o xtrace # Uncomment this line for debugging purpose
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/libfs.sh
@@ -14,20 +14,31 @@ set -o pipefail
 . /opt/bitnami/scripts/libldapclient.sh
 
 # Load MariaDB environment variables
-eval "$(mysql_env)"
+. /opt/bitnami/scripts/mariadb-env.sh
+
 # Load LDAP environment variables
 eval "$(ldap_env)"
 
+# Ensure mysql unix socket file does not exist
+rm -rf "${DB_SOCKET_FILE}.lock"
 # Ensure MariaDB environment variables settings are valid
 mysql_validate
 # Ensure MariaDB is stopped when this script ends.
 trap "mysql_stop" EXIT
-# Ensure both 'daemon' & 'nslcd' users exists when running as 'root'
-am_i_root && ensure_user_exists "$DB_DAEMON_USER" "$DB_DAEMON_GROUP"
-am_i_root && ensure_user_exists "$LDAP_NSLCD_USER" "$LDAP_NSLCD_GROUP"
+if am_i_root; then
+    # Ensure 'daemon' user exists when running as 'root'
+    ensure_user_exists "$DB_DAEMON_USER" "$DB_DAEMON_GROUP"
+    # Ensure 'nslcd' user exists when running as 'root'
+    ensure_user_exists "$LDAP_NSLCD_USER" "$LDAP_NSLCD_GROUP"
+    # Fix logging issue when running as root
+    chmod o+w "$(readlink /dev/stdout)"
+fi
 # Ensure MariaDB is initialized
 mysql_initialize
 # Ensure LDAP is initialized
 is_boolean_yes "$DB_ENABLE_LDAP" && ldap_initialize
-
+# Allow running custom initialization scripts
 mysql_custom_init_scripts
+# Stop MariaDB before flagging it as fully initialized.
+# Relying only on the trap defined above could produce a race condition.
+mysql_stop
