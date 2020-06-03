@@ -1,7 +1,7 @@
 version: '2'
 services:
   redis-node-0:
-    image: bitnami/redis-cluster:5.0
+    image: docker.io/bitnami/redis-cluster:5.0-debian-10
     volumes:
       - redis-cluster_data-0:/bitnami/redis/data
     environment:
@@ -9,7 +9,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-node-1:
-    image: bitnami/redis-cluster:5.0
+    image: docker.io/bitnami/redis-cluster:5.0-debian-10
     volumes:
       - redis-cluster_data-1:/bitnami/redis/data
     environment:
@@ -17,7 +17,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-node-2:
-    image: bitnami/redis-cluster:5.0
+    image: docker.io/bitnami/redis-cluster:5.0-debian-10
     volumes:
       - redis-cluster_data-2:/bitnami/redis/data
     environment:
@@ -25,7 +25,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-node-3:
-    image: bitnami/redis-cluster:5.0
+    image: docker.io/bitnami/redis-cluster:5.0-debian-10
     volumes:
       - redis-cluster_data-3:/bitnami/redis/data
     environment:
@@ -33,7 +33,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-node-4:
-    image: bitnami/redis-cluster:5.0
+    image: docker.io/bitnami/redis-cluster:5.0-debian-10
     volumes:
       - redis-cluster_data-4:/bitnami/redis/data
     environment:
@@ -41,7 +41,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-node-5:
-    image: bitnami/redis-cluster:5.0
+    image: docker.io/bitnami/redis-cluster:5.0-debian-10
     volumes:
       - redis-cluster_data-5:/bitnami/redis/data
     environment:
@@ -49,7 +49,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-cluster-init:
-    image: bitnami/redis-cluster:5.0
+    image: docker.io/bitnami/redis-cluster:5.0-debian-10
     depends_on:
       - redis-node-0
       - redis-node-1
