@@ -44,8 +44,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`14-debian-10`, `14.4.0-debian-10-r0`, `14`, `14.4.0` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.4.0-debian-10-r0/14/debian-10/Dockerfile)
 * [`13-prod-debian-10`, `13-debian-10-prod`, `13.14.0-prod-debian-10-r34`, `13.14.0-debian-10-r34-prod`, `13-prod`, `13.14.0-prod` (13-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.14.0-prod-debian-10-r34/13-prod/debian-10/Dockerfile)
 * [`13-debian-10`, `13.14.0-debian-10-r35`, `13`, `13.14.0` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/13.14.0-debian-10-r35/13/debian-10/Dockerfile)
-* [`12-prod-debian-10`, `12-debian-10-prod`, `12.17.0-prod-debian-10-r6`, `12.17.0-debian-10-r6-prod`, `12-prod`, `12.17.0-prod`, `latest-prod` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.17.0-prod-debian-10-r6/12-prod/debian-10/Dockerfile)
-* [`12-debian-10`, `12.17.0-debian-10-r7`, `12`, `12.17.0`, `latest` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.17.0-debian-10-r7/12/debian-10/Dockerfile)
+* [`12-prod-debian-10`, `12-debian-10-prod`, `12.18.0-prod-debian-10-r0`, `12.18.0-debian-10-r0-prod`, `12-prod`, `12.18.0-prod`, `latest-prod` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.18.0-prod-debian-10-r0/12-prod/debian-10/Dockerfile)
+* [`12-debian-10`, `12.18.0-debian-10-r-1`, `12`, `12.18.0`, `latest` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.18.0-debian-10-r-1/12/debian-10/Dockerfile)
 * [`10-prod-debian-10`, `10-debian-10-prod`, `10.21.0-prod-debian-10-r0`, `10.21.0-debian-10-r0-prod`, `10-prod`, `10.21.0-prod` (10-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.21.0-prod-debian-10-r0/10-prod/debian-10/Dockerfile)
 * [`10-debian-10`, `10.21.0-debian-10-r0`, `10`, `10.21.0` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.21.0-debian-10-r0/10/debian-10/Dockerfile)
 
