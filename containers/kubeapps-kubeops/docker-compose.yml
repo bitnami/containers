@@ -1,4 +1,4 @@
 version: '2'
 services:
   kubeapps-kubeops:
-    image: bitnami/kubeapps-kubeops:1-scratch
+    image: docker.io/bitnami/kubeapps-kubeops:1-scratch
