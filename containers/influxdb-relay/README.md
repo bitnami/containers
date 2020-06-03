@@ -1,16 +1,16 @@
-# What is InfluxDB Relay?
+# What is InfluxDB Relay (TM)?
 
-> [InfluxDB Relay](https://github.com/influxdata/influxdb-relay) adds a basic high availability layer to InfluxDB by loadbalancing UDP/TCP traffic to each InfluxDB server.
+> [InfluxDB Relay (TM)](https://github.com/influxdata/influxdb-relay) adds a basic high availability layer to InfluxDB (TM) by loadbalancing UDP/TCP traffic to each InfluxDB (TM) server.
 
 # TL;DR;
 
-```bash
+```console
 $ docker run --name influxdb-relay bitnami/influxdb-relay:latest
 ```
 
 ## Docker Compose
 
-```bash
+```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-influxdb-relay/master/docker-compose.yml
 $ docker-compose up
 ```
@@ -26,44 +26,42 @@ $ docker-compose up
 
 > This [CVE scan report](https://quay.io/repository/bitnami/influxdb-relay?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy InfluxDB in Kubernetes?
+# How to deploy InfluxDB (TM) in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami InfluxDB Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/influxdb).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami InfluxDB (TM) Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/influxdb).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
 # Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
 # Supported tags and respective `Dockerfile` links
 
-> NOTE: Debian 9 and Oracle Linux 7 images have been deprecated in favor of Debian 10 images. Bitnami will not longer publish new Docker images based on Debian 9 or Oracle Linux 7.
-
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0-scratch`, `0.20161114.0-scratch-r6`, `0`, `0.20161114.0`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb-relay/blob/0.20161114.0/0/scratch/Dockerfile)
+* [`0-scratch`, `0.20161114.0-scratch-r12`, `0`, `0.20161114.0`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb-relay/blob/0.20161114.0-scratch-r12/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb-relay GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb-relay).
 
 # Get this image
 
-The recommended way to get the Bitnami InfluxDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/influxdb-relay).
+The recommended way to get the Bitnami InfluxDB (TM) Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/influxdb-relay).
 
-```bash
+```console
 $ docker pull bitnami/influxdb-relay:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/influxdb-relay/tags/) in the Docker Hub Registry.
 
-```bash
+```console
 $ docker pull bitnami/influxdb-relay:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
-```bash
+```console
 $ docker build -t bitnami/influxdb-relay:latest 'https://github.com/bitnami/bitnami-docker-influxdb-relay.git#master:0/scratch'
 ```
 
@@ -71,14 +69,14 @@ $ docker build -t bitnami/influxdb-relay:latest 'https://github.com/bitnami/bitn
 
 The configuration can easily be setup by mounting your own configuration file (TOML format): `relay.toml`.
 
-```bash
+```console
 $ docker run --name influxdb-relay \
   --volume /path/to/relay.toml:/relay.toml \
   bitnami/influxdb-relay:latest \
   /influxdb-relay --config /relay.toml
 ```
 
-After that, your configuration will be taken into account in InfluxDB Relay.
+After that, your configuration will be taken into account in InfluxDB Relay (TM).
 
 You can do this using Docker Compose by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-influxdb-relay/blob/master/docker-compose.yml) file present in this repository:
 
@@ -93,13 +91,13 @@ influxdb-relay:
 
 ## Further documentation
 
-For further documentation, please check [InfluxDB Relay documentation](https://github.com/influxdata/influxdb-relay#configuration)
+For further documentation, please check [InfluxDB Relay (TM) documentation](https://github.com/influxdata/influxdb-relay#configuration)
 
 # Logging
 
-The Bitnami InfluxDB Docker image sends the container logs to `stdout`. To view the logs:
+The Bitnami InfluxDB (TM) Docker image sends the container logs to `stdout`. To view the logs:
 
-```bash
+```console
 $ docker logs influxdb-relay
 ```
 
