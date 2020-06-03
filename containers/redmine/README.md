@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.1.1-debian-10-r53`, `4`, `4.1.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.1.1-debian-10-r53/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.1.1-debian-10-r54`, `4`, `4.1.1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.1.1-debian-10-r54/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
 
@@ -226,7 +226,7 @@ if [[ ! -d /opt/bitnami/redmine/conf/ ]]; then
     echo 'map ActionController::Base.config.try(:relative_url_root) || "/" do' >> ${config1}
     echo 'run Rails.application' >> ${config1}
     echo 'end' >> ${config1}
-    echo 'Redmine::Utils::relative_url_root = "'${SUB_URI_PATH}'"' >> ${config2} 
+    echo 'Redmine::Utils::relative_url_root = "'${SUB_URI_PATH}'"' >> ${config2}
 fi
 
 SUB_URI_PATH=$(echo ${SUB_URI_PATH} | sed -e 's|/|\/|g')
@@ -243,7 +243,7 @@ sed -i -e "s/\(relative_url_root\ \=\ \"\).*\(\"\)/\1${SUB_URI_PATH}\2/" ${confi
 
 4. Replace the default `init.sh` script in favour of our new created `subUriInit.sh`. You can mount this file as a volume in order to accomplish this task.
 
- * For docker-compose: 
+ * For docker-compose:
 
     ```yaml
     services:
@@ -255,7 +255,7 @@ sed -i -e "s/\(relative_url_root\ \=\ \"\).*\(\"\)/\1${SUB_URI_PATH}\2/" ${confi
     ```
 
  * For manual execution (see [Run the application manually](https://github.com/bitnami/bitnami-docker-redmine#run-the-application-manually)):
-  
+
     ```console
     $ docker run -d --name redmine -p 80:3000 \
       -e REDMINE_DB_USERNAME=bn_redmine \
@@ -267,7 +267,7 @@ sed -i -e "s/\(relative_url_root\ \=\ \"\).*\(\"\)/\1${SUB_URI_PATH}\2/" ${confi
     ```
 
     Then you can access your application at http://your-ip/SUB_URI_PATH
-    
+
 # Upgrade this application
 
 Bitnami provides up-to-date versions of MariaDB and Redmine, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Redmine container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
@@ -309,7 +309,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 When you start the redmine image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redmine/blob/master/docker-compose.yml) file present in this repository: 
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redmine/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 redmine:
@@ -353,7 +353,7 @@ To configure Redmine to send email using SMTP you can set the following environm
 
 This would be an example of SMTP configuration using a GMail account:
 
- * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redmine/blob/master/docker-compose.yml) file present in this repository: 
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redmine/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
   redmine:
