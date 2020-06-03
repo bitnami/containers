@@ -229,7 +229,7 @@ if [[ ! -d /opt/bitnami/redmine/conf/ ]]; then
     echo 'Redmine::Utils::relative_url_root = "'${SUB_URI_PATH}'"' >> ${config2} 
 fi
 
-SUB_URI_PATH=$(echo ${SUB_URI_PATH} | sed -e 's|\/|\\/|g')
+SUB_URI_PATH=$(echo ${SUB_URI_PATH} | sed -e 's|/|\/|g')
 sed -i -e "s/\(relative_url_root\ \=\ \"\).*\(\"\)/\1${SUB_URI_PATH}\2/" ${config2}
 ```
 
