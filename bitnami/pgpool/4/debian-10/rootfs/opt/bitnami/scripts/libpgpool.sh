@@ -165,8 +165,8 @@ pgpool_validate() {
         done
     fi
 
-    if [[ -n "$PGPOOL_USER_CONF_FILE" && ! -f "$PGPOOL_USER_CONF_FILE" ]]; then
-        print_validation_error "The provided PGPOOL_USER_CONF_FILE must be a file."
+    if [[ -n "$PGPOOL_USER_CONF_FILE" && ! -e "$PGPOOL_USER_CONF_FILE" ]]; then
+        print_validation_error "The provided PGPOOL_USER_CONF_FILE: ${PGPOOL_USER_CONF_FILE} must exist."
     fi
 
     local yes_no_values=("PGPOOL_ENABLE_POOL_HBA" "PGPOOL_ENABLE_POOL_PASSWD" "PGPOOL_ENABLE_LOAD_BALANCING" "PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING")

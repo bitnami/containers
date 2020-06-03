@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.1.2-debian-10-r15`, `4`, `4.1.2`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.2-debian-10-r15/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.1.2-debian-10-r16`, `4`, `4.1.2`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.2-debian-10-r16/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
 
@@ -253,6 +253,7 @@ Pgpool:
 - `PGPOOL_HEALTH_CHECK_TIMEOUT`: Specifies the timeout in seconds to give up connecting to the backend PostgreSQL if the TCP connect does not succeed within this time. Defaults to `10`.
 - `PGPOOL_HEALTH_CHECK_MAX_RETRIES`: Specifies the maximum number of retries to do before giving up and initiating failover when health check fails. Defaults to `5`.
 - `PGPOOL_HEALTH_CHECK_RETRY_DELAY`: Specifies the amount of time in seconds to sleep between failed health check retries. Defaults to `5`.
+- `PGPOOL_USER_CONF_FILE`: Configuration file to be added to the generated config file. This allow to override configuration set by the initializacion process. No defaults.
 
 PostgreSQL with Replication Manager:
 
@@ -365,41 +366,34 @@ In order to have your custom files inside the docker image you can mount them as
 
 ## Configuration file
 
-The image looks for a `pgpool.conf` file in `/opt/bitnami/pgpool/conf/`. You can mount a volume at `/opt/bitnami/pgpool/conf/` and copy/edit the `pgpool.conf` file in the `/path/to/pgpool-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
+You can override the default configuration by providing a configuration file. Set `PGPOOL_USER_CONF_FILE` with the path of the file, and this will be added to the default configuration.
+
+## Step 1: Generate the configuration file.
 
 ```console
-/path/to/pgpool-persistence/conf/
-└── pgpool.conf
-
-0 directories, 1 file
+$ cat myconf.conf
+max_pool='300'
 ```
 
-### Step 1: Run the Pgpool image
+### Step 2: Run the Pgpool image
 
-Run the Pgpool image, mounting a directory from your host. Using Docker Compose:
+Run the Pgpool image, mounting a directory from your host and setting `PGPOOL_USER_CONF_FILE`. Using Docker Compose:
 
 ```diff
      image: bitnami/pgpool:4
      ports:
        - 5432:5432
 +    volumes:
-+      - /path/to/pgpool-persistence/conf/:/opt/bitnami/pgpool/conf/
++      - /path/to/myconf.conf:/config/myconf.conf
      environment:
++      - PGPOOL_USER_CONF_FILE=/config/myconf.conf
        - PGPOOL_BACKEND_NODES=0:pg-0:5432,1:pg-1:5432
        - PGPOOL_SR_CHECK_USER=customuser
 ```
 
-### Step 2: Edit the configuration
+### Step 3: Start Pgpool
 
-Edit the configuration on your host using your favorite editor.
-
-```console
-vi /path/to/pgpool-persistence/conf/postgresql.conf
-```
-
-### Step 3: Restart Pgpool
-
-After changing the configuration, restart your Pgpool container for changes to take effect.
+Start your Pgpool container for changes to take effect.
 
 ```console
 $ docker restart pgpool
