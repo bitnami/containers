@@ -271,12 +271,12 @@ kafka_validate() {
 #   None
 #########################
 kafka_generate_jaas_authentication_file() {
-    local -r internal_protocol="${1:?missing internal_protocol}"
-    local -r client_protocol="${2:?missing client_protocol}"
+    local -r internal_protocol="${1:-}"
+    local -r client_protocol="${2:-}"
 
     if [[ ! -f "${KAFKA_CONF_DIR}/kafka_jaas.conf" ]]; then
         info "Generating JAAS authentication file"
-        if [[ "$client_protocol" =~ SASL ]]; then
+        if [[ "${client_protocol:-}" =~ SASL ]]; then
             cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaClient {
    org.apache.kafka.common.security.plain.PlainLoginModule required
@@ -285,7 +285,7 @@ KafkaClient {
    };
 EOF
         fi
-        if [[ "$client_protocol" =~ SASL ]] && [[ "$internal_protocol" =~ SASL ]]; then
+        if [[ "${client_protocol:-}" =~ SASL ]] && [[ "${internal_protocol:-}" =~ SASL ]]; then
             cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaServer {
    org.apache.kafka.common.security.plain.PlainLoginModule required
@@ -297,7 +297,7 @@ KafkaServer {
    org.apache.kafka.common.security.scram.ScramLoginModule required;
    };
 EOF
-        elif [[ "$client_protocol" =~ SASL ]]; then
+        elif [[ "${client_protocol:-}" =~ SASL ]]; then
             cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaServer {
    org.apache.kafka.common.security.plain.PlainLoginModule required
@@ -306,7 +306,7 @@ KafkaServer {
    org.apache.kafka.common.security.scram.ScramLoginModule required;
    };
 EOF
-        elif [[ "$internal_protocol" =~ SASL ]]; then
+        elif [[ "${internal_protocol:-}" =~ SASL ]]; then
             cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaServer {
    org.apache.kafka.common.security.plain.PlainLoginModule required
@@ -493,7 +493,7 @@ kafka_initialize() {
         fi
         if [[ "${internal_protocol:-}" =~ SASL ]] || [[ "${client_protocol:-}" =~ SASL ]] || [[ -n "$KAFKA_ZOOKEEPER_USER" && -n "$KAFKA_ZOOKEEPER_PASSWORD" ]]; then
             kafka_server_conf_set sasl.enabled.mechanisms PLAIN,SCRAM-SHA-256,SCRAM-SHA-512
-            kafka_generate_jaas_authentication_file "$internal_protocol" "$client_protocol"
+            kafka_generate_jaas_authentication_file "${internal_protocol:-}" "${client_protocol:-}"
         fi
         # Remove security.inter.broker.protocol if KAFKA_CFG_INTER_BROKER_LISTENER_NAME is configured
         if [[ -n "${KAFKA_CFG_INTER_BROKER_LISTENER_NAME:-}" ]]; then
