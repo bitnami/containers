@@ -36,7 +36,7 @@ services:
     depends_on:
       - discourse
     volumes:
-      - 'sidekiq_data:/bitnami'
+      - 'discourse_data:/bitnami'
     command: 'nami start --foreground discourse-sidekiq'
     environment:
       - DISCOURSE_POSTGRESQL_NAME=bitnami_application
@@ -51,6 +51,4 @@ volumes:
   redis_data:
     driver: local
   discourse_data:
-    driver: local
-  sidekiq_data:
     driver: local
