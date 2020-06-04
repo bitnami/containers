@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl dirmngr gnupg gzip libaudit1 libbsd0 l
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg unpack php-7.3.18-3 --checksum 3c4b811b8711b18be4b422d9102dce24146f94bbb76b2af13741fdd364ff5ded
-RUN bitnami-pkg unpack apache-2.4.43-3 --checksum 034a9cbce222218927b29626b5bb058eb95eb729a4ba52c6175858c6572b394c
+RUN bitnami-pkg unpack apache-2.4.43-4 --checksum e6929d8619f48976f9206bec14cb9634ebe8590225818eea12c27840617f53aa
 RUN bitnami-pkg unpack mysql-client-10.3.23-0 --checksum 7af3cead7a38670bed924fbc99e20c67f6244bb5a92642adb4ab6cd307aa9a5e
 RUN bitnami-pkg install libphp-7.3.18-1 --checksum 694e048842da8cf5af181dd5021a2481ff30957a28ad71c4b772f333fc128579
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
@@ -26,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="opencart" \
-    BITNAMI_IMAGE_VERSION="3.0.3-3-debian-10-r32" \
+    BITNAMI_IMAGE_VERSION="3.0.3-3-debian-10-r33" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
