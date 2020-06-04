@@ -37,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.8.0-debian-10-r50`, `1`, `1.8.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.8.0-debian-10-r50/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.8.0-debian-10-r51`, `1`, `1.8.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.8.0-debian-10-r51/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb).
 
@@ -294,6 +294,38 @@ You can also create users with restricted privileges in the database in a very s
 - `INFLUXDB_READ_USER_PASSWORD`: Specify the password of the `INFLUXDB_READ_USER` user.
 - `INFLUXDB_WRITE_USER`: Specify the user with "write" privileges in the database.
 - `INFLUXDB_WRITE_USER_PASSWORD`: Specify the password of the `INFLUXDB_WRITE_USER` user.
+
+## Customize the HTTP port readiness
+
+You can modify the timeout for the HTTP port readiness probe where the container waits until the HTTP port is actually ready to receive queries before finish the setup. Use `INFLUXDB_HTTP_READINESS_TIMEOUT` to do this.
+
+```console
+$ docker run --name influxdb \
+  -e INFLUXDB_ADMIN_USER_PASSWORD=password123 \
+  -e INFLUXDB_USER=my_user \
+  -e INFLUXDB_USER_PASSWORD=my_password \
+  -e INFLUXDB_DB=my_database \
+  -e INFLUXDB_HTTP_READINESS_TIMEOUT=30 \
+  bitnami/influxdb:latest
+```
+
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-influxdb/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  influxdb:
+  ...
+    environment:
+      - INFLUXDB_ADMIN_USER_PASSWORD=password123
+      - INFLUXDB_USER=my_user
+      - INFLUXDB_USER_PASSWORD=my_password
+      - INFLUXDB_DB=my_database
+      - INFLUXDB_HTTP_READINESS_TIMEOUT=30
+  ...
+```
+
+- `INFLUXDB_HTTP_READINESS_TIMEOUT`: Spacify the time to wait until the HTTP endpoint is ready in seconds. Default: 60
+
 
 # Logging
 
