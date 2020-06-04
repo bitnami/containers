@@ -25,7 +25,8 @@ component_unpack() {
     local version="${2:?version is required}"
     local base_name="${name}-${version}-${OS_NAME}-${OS_ARCH}-${OS_FLAVOUR}"
     local package_sha256=""
-
+    local directory="/opt/bitnami"
+    
     # Validate arguments
     shift 2
     while [ "$#" -gt 0 ]; do
@@ -59,6 +60,10 @@ component_unpack() {
         echo "Verifying package integrity"
         echo "$package_sha256  ${base_name}.tar.gz" | sha256sum --check -
     fi
-    tar --directory /opt/bitnami --extract --gunzip --file "${base_name}.tar.gz" --no-same-owner --strip-components=2 "${base_name}/files/"
+    tar --directory "${directory}" --extract --gunzip --file "${base_name}.tar.gz" --no-same-owner --strip-components=2 "${base_name}/files/"
     rm "${base_name}.tar.gz"
+
+    # Include metadata about the package
+    touch "${directory}/.bitnami_packages"
+    echo "$base_name" >> "${directory}/.bitnami_packages"
 }
