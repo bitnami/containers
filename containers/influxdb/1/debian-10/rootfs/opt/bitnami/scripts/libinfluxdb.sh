@@ -42,6 +42,7 @@ export INFLUXDB_DAEMON_GROUP="influxdb"
 export INFLUXDB_REPORTING_DISABLED="${INFLUXDB_REPORTING_DISABLED:-true}"
 export INFLUXDB_HTTP_PORT_NUMBER="${INFLUXDB_HTTP_PORT_NUMBER:-8086}"
 export INFLUXDB_HTTP_BIND_ADDRESS="${INFLUXDB_HTTP_BIND_ADDRESS:-0.0.0.0:${INFLUXDB_HTTP_PORT_NUMBER}}"
+export INFLUXDB_HTTP_READINESS_TIMEOUT="${INFLUXDB_HTTP_READINESS_TIMEOUT:-60}"
 export INFLUXDB_PORT_NUMBER="${INFLUXDB_PORT_NUMBER:-8088}"
 export INFLUXDB_BIND_ADDRESS="${INFLUXDB_BIND_ADDRESS:-0.0.0.0:${INFLUXDB_PORT_NUMBER}}"
 # Authentication
@@ -266,7 +267,25 @@ influxdb_start_bg_noauth() {
     local start_command=("${INFLUXDB_BIN_DIR}/influxd" "-config" "$INFLUXDB_CONF_FILE")
     am_i_root && start_command=("gosu" "$INFLUXDB_DAEMON_USER" "${start_command[@]}")
     INFLUXDB_HTTP_HTTPS_ENABLED=false INFLUXDB_HTTP_BIND_ADDRESS="127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}" debug_execute "${start_command[@]}" &
+
     wait-for-port "$INFLUXDB_PORT_NUMBER"
+    wait-for-port "$INFLUXDB_HTTP_PORT_NUMBER"
+
+    wait-for-influxdb
+}
+
+########################
+# Waits for InfluxDB to be ready
+# Times out after 60 seconds
+# Globals:
+#   INFLUXDB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+########################
+wait-for-influxdb() {
+    curl -sSL -I "127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}/ping?wait_for_leader=${INFLUXDB_HTTP_READINESS_TIMEOUT}s" > /dev/null 2>&1
 }
 
 ########################
