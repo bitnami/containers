@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2.4-debian-10`, `2.4.43-debian-10-r69`, `2.4`, `2.4.43`, `latest` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.43-debian-10-r69/2.4/debian-10/Dockerfile)
+* [`2.4-debian-10`, `2.4.43-debian-10-r70`, `2.4`, `2.4.43`, `latest` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.43-debian-10-r70/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/apache GitHub repo](https://github.com/bitnami/bitnami-docker-apache).
 
@@ -473,6 +473,21 @@ $ docker-compose up apache
 ](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
 
 # Notable Changes
+
+## 2.4.43-debian-10-r66
+
+- Included [Apache PageSpeed Module (`mod_pagespeed`)](https://developers.google.com/speed/pagespeed/module). It is disabled by default. To enable it, uncomment the following lines in `httpd.conf`:
+
+```
+#Include conf/pagespeed.conf
+#Include conf/pagespeed_libraries.conf
+```
+
+- Included [ModSecurity](https://github.com/SpiderLabs/ModSecurity) and [ModSecurity v3 Apache Connector (`mod_security3`)](https://github.com/SpiderLabs/ModSecurity-apache). It is disabled by default. To enable it, mount and enable your custom ModSecurity rules for the virtual hosts, and uncomment the following line in `httpd.conf`:
+
+```
+#LoadModule security3_module modules/mod_security3.so
+```
 
 ## 2.4.41-debian-9-r40 and 2.4.41-ol-7-r42
 
