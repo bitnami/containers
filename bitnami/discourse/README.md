@@ -33,7 +33,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.4.4-debian-10-r7`, `2`, `2.4.4`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.4.4-debian-10-r7/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.4.4-debian-10-r8`, `2`, `2.4.4`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.4.4-debian-10-r8/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
@@ -229,7 +229,7 @@ You can mount your configuration files to the `/opt/bitnami/discourse/mounted-co
   * discourse.conf
   * database.yml
   * site_settings.yml
-  
+
 The set of default standard configuration files may be found [here](https://github.com/discourse/discourse/tree/master/config). You may refer to the the Discourse [webpage](https://www.discourse.org/) for further details and specific configuration guides.
 
 ## Environment variables
@@ -321,6 +321,10 @@ $ swaks --to your_email@domain.com --from your_email@domain.com --server your.sm
 See the [documentation on troubleshooting SMTP issues](https://docs.bitnami.com/general/how-to/troubleshoot-smtp-issues/) if there are problems.
 
 # Notable Changes
+
+## 2.4.4-debian-10-r8 release
+
+- Discourse and Sidekiq now make use of the same volume to persist data. This solves issues related to being unable to locate some files generated on-demand by the Sidekiq job scheduler. Related issues: [#142](https://github.com/bitnami/bitnami-docker-discourse/issues/142)
 
 ## 2.3.2-debian-9-r48 and 2.3.2-ol-7-r47
 
