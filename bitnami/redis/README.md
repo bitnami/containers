@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.0-debian-10`, `6.0.4-debian-10-r5`, `6.0`, `6.0.4`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.4-debian-10-r5/6.0/debian-10/Dockerfile)
+* [`6.0-debian-10`, `6.0.4-debian-10-r6`, `6.0`, `6.0.4`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.4-debian-10-r6/6.0/debian-10/Dockerfile)
 * [`5.0-debian-10`, `5.0.9-debian-10-r39`, `5.0`, `5.0.9` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.9-debian-10-r39/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
@@ -378,6 +378,55 @@ $ docker-compose up --detach --scale redis-master=1 --scale redis-secondary=3
 The above command scales up the number of replicas to `3`. You can scale down in the same way.
 
 > **Note**: You should not scale up/down the number of master nodes. Always have only one master node running.
+
+## Securing Redis traffic
+
+Starting with version 6, Redis adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the following enviroment variables to configure the application:
+
+ - `REDIS_TLS_ENABLED`: Whether to enable TLS for traffic or not. Defaults to `no`.
+ - `REDIS_TLS_PORT`: Port used for TLS secure traffic. Defaults to `6379`.
+ - `REDIS_TLS_CERT_FILE`: File containing the certificate file for the TSL traffic. No defaults.
+ - `REDIS_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
+ - `REDIS_TLS_CA_FILE`: File containing the CA of the certificate. No defaults.
+ - `REDIS_TLS_DH_PARAMS_FILE`: File containing DH params (in order to support DH based ciphers). No defaults.
+ - `REDIS_TLS_AUTH_CLIENTS`: Whether to require clients to authenticate or not. Defaults to `yes`.
+
+When enabling TLS, conventional standard traffic is disabled by default. However this new feature is not mutually exclusive, which means it is possible to listen to both TLS and non-TLS connection simultaneously. To enable non-TLS traffic, set `REDIS_TLS_PORT` to another port different than `0`.
+
+1. Using `docker run`
+
+    ```console
+    $ docker run --name redis \
+        -v /path/to/certs:/opt/bitnami/redis/certs \
+        -v /path/to/redis-data-persistence:/bitnami/redis/data \
+        -e ALLOW_EMPTY_PASSWORD=yes \
+        -e REDIS_TLS_ENABLED=yes \
+        -e REDIS_TLS_CERT_FILE=/opt/bitnami/redis/certs/redis.crt \
+        -e REDIS_TLS_KEY_FILE=/opt/bitnami/redis/certs/redis.key \
+        -e REDIS_TLS_CA_FILE=/opt/bitnami/redis/certs/redisCA.crt \
+        bitnami/redis:latest
+    ```
+
+2. Modifying the `docker-compose.yml` file present in this repository:
+
+    ```yaml
+    services:
+      redis:
+      ...
+        environment:
+          ...
+          - REDIS_TLS_ENABLED=yes
+          - REDIS_TLS_CERT_FILE=/opt/bitnami/redis/certs/redis.crt
+          - REDIS_TLS_KEY_FILE=/opt/bitnami/redis/certs/redis.key
+          - REDIS_TLS_CA_FILE=/opt/bitnami/redis/certs/redisCA.crt
+        ...
+        volumes:
+          - /path/to/certs:/opt/bitnami/redis/certs
+          - /path/to/redis-persistence:/bitnami/redis/data
+      ...
+    ```
+
+Alternatively, you may also provide with this configuration in your [custom](https://github.com/bitnami/bitnami-docker-redis#configuration-file) configuration file.
 
 ## Configuration file
 
