@@ -8,8 +8,6 @@
   "host": "{{$global.env.OSCLASS_HOST}}",
   "password": "{{$global.env.OSCLASS_PASSWORD}}",
   "phpMemoryLimit": "{{$global.env.PHP_MEMORY_LIMIT}}",
-  "pingEngines": "{{$global.env.OSCLASS_PING_ENGINES}}",
-  "saveStats": "{{$global.env.OSCLASS_SAVE_STATS}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
   "smtpPort": "{{$global.env.SMTP_PORT}}",
