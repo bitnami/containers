@@ -372,7 +372,7 @@ kafka_configure_internal_communications() {
     local -r allowed_protocols=("PLAINTEXT" "SASL_PLAINTEXT" "SASL_SSL" "SSL")
     info "Configuring Kafka for inter-broker communications with ${protocol} authentication."
 
-    if [[ " ${allowed_protocols[@]} " =~ $protocol ]]; then
+    if [[ "${allowed_protocols[*]}" =~ $protocol ]]; then
         kafka_server_conf_set security.inter.broker.protocol "$protocol"
         if [[ "$protocol" = "PLAINTEXT" ]]; then
             warn "Inter-broker communications are configured as PLAINTEXT. This is not safe for production environments."
@@ -409,7 +409,7 @@ kafka_configure_client_communications() {
     local -r allowed_protocols=("PLAINTEXT" "SASL_PLAINTEXT" "SASL_SSL" "SSL")
     info "Configuring Kafka for client communications with ${protocol} authentication."
 
-    if [[ " ${allowed_protocols[@]} " =~ ${protocol} ]]; then
+    if [[ "${allowed_protocols[*]}" =~ ${protocol} ]]; then
         kafka_server_conf_set security.inter.broker.protocol "$protocol"
         if [[ "$protocol" = "PLAINTEXT" ]]; then
             warn "Client communications are configured using PLAINTEXT listeners. For safety reasons, do not use this in a production environment."
