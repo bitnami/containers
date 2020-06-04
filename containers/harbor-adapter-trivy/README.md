@@ -45,7 +45,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.10.2-debian-10-r20`, `1`, `1.10.2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-adapter-trivy/blob/1.10.2-debian-10-r20/1/debian-10/Dockerfile)
+* [`2-debian-10`, `2.0.0-debian-10-r0`, `2`, `2.0.0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-adapter-trivy/blob/2.0.0-debian-10-r0/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/harbor-adapter-trivy GitHub repo](https://github.com/bitnami/bitnami-docker-harbor-adapter-trivy).
 
@@ -66,7 +66,7 @@ $ docker pull bitnami/harbor-adapter-trivy:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/harbor-adapter-trivy:latest 'https://github.com/bitnami/bitnami-docker-harbor-adapter-trivy.git#master:1/debian-10'
+$ docker build -t bitnami/harbor-adapter-trivy:latest 'https://github.com/bitnami/bitnami-docker-harbor-adapter-trivy.git#master:2/debian-10'
 ```
 
 # Persisting your application
