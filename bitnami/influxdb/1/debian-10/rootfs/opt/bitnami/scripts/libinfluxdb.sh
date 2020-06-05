@@ -322,6 +322,19 @@ influxdb_stop() {
 }
 
 ########################
+# Waits for InfluxDB to be ready
+# Globals:
+#   INFLUXDB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+########################
+wait-for-influxdb() {
+    curl -SL -I 127.0.0.1:$INFLUXDB_HTTP_PORT_NUMBER/ping?wait_for_leader=$INFLUXDB_HTTP_READINESS_TIMEOUT\s > /dev/null 2>&1
+}
+
+########################
 # Execute an arbitrary query using InfluxDB CLI
 # Globals:
 #   INFLUXDB_*
