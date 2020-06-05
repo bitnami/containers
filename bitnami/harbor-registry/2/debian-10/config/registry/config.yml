@@ -15,7 +15,7 @@ storage:
     enabled: true
 redis:
   addr: redis:6379
-  password: 
+  password:
   db: 1
 http:
   addr: :5000
@@ -23,11 +23,9 @@ http:
   debug:
     addr: localhost:5001
 auth:
-  token:
-    issuer: harbor-token-issuer
-    realm: http://reg.mydomain.com/service/token
-    rootcertbundle: /etc/registry/root.crt
-    service: harbor-registry
+  htpasswd:
+    realm: harbor-registry-basic-realm
+    path: /etc/registry/passwd
 notifications:
   endpoints:
   - name: harbor
