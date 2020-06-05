@@ -65,6 +65,10 @@ export REDIS_SENTINEL_TMP_DIR="${REDIS_SENTINEL_BASE_DIR}/tmp"
 export REDIS_SENTINEL_CONF_FILE="${REDIS_SENTINEL_CONF_DIR}/sentinel.conf"
 export REDIS_SENTINEL_LOG_FILE="${REDIS_SENTINEL_LOG_DIR}/redis-sentinel.log"
 export REDIS_SENTINEL_PID_FILE="${REDIS_SENTINEL_TMP_DIR}/redis-sentinel.pid"
+export REDIS_SENTINEL_TLS_CERT_FILE="${REDIS_SENTINEL_TLS_CERT_FILE:-}"
+export REDIS_SENTINEL_TLS_KEY_FILE="${REDIS_SENTINEL_TLS_KEY_FILE:-}"
+export REDIS_SENTINEL_TLS_CA_FILE="${REDIS_SENTINEL_TLS_CA_FILE:-}"
+export REDIS_SENTINEL_TLS_DH_PARAMS_FILE="${REDIS_SENTINEL_TLS_DH_PARAMS_FILE:-}"
 
 # Users
 export REDIS_SENTINEL_DAEMON_USER="redis"
@@ -80,6 +84,9 @@ export REDIS_SENTINEL_QUORUM="${REDIS_SENTINEL_QUORUM:-2}"
 export REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS="${REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS:-60000}"
 export REDIS_SENTINEL_FAILOVER_TIMEOUT="${REDIS_SENTINEL_FAILOVER_TIMEOUT:-180000}"
 export REDIS_SENTINEL_PASSWORD="${REDIS_SENTINEL_PASSWORD:-}"
+export REDIS_SENTINEL_TLS_AUTH_CLIENTS="${REDIS_SENTINEL_TLS_AUTH_CLIENTS:-yes}"
+export REDIS_SENTINEL_TLS_ENABLED="${REDIS_SENTINEL_TLS_ENABLED:-no}"
+export REDIS_SENTINEL_TLS_PORT_NUMBER="${REDIS_SENTINEL_TLS_PORT_NUMBER:-26379}"
 EOF
     if [[ -f "${REDIS_MASTER_PASSWORD_FILE:-}" ]]; then
         cat <<"EOF"
@@ -135,6 +142,31 @@ redis_validate() {
     check_allowed_port REDIS_SENTINEL_PORT_NUMBER
     check_resolved_hostname "$REDIS_MASTER_HOST"
 
+    if is_boolean_yes "$REDIS_SENTINEL_TLS_ENABLED"; then
+        if [[ "$REDIS_SENTINEL_PORT_NUMBER" == "$REDIS_SENTINEL_TLS_PORT_NUMBER" ]] && [[ "$REDIS_SENTINEL_PORT_NUMBER" != "26379" ]]; then
+            # If both ports are assigned the same numbers and they are different to the default settings
+            print_validation_error "Enviroment variables REDIS_SENTINEL_PORT_NUMBER and REDIS_SENTINEL_TLS_PORT_NUMBER point to the same port number (${REDIS_SENTINEL_PORT_NUMBER}). Change one of them or disable non-TLS traffic by setting REDIS_SENTINEL_PORT_NUMBER=0"
+        fi
+        if [[ -z "$REDIS_SENTINEL_TLS_CERT_FILE" ]]; then
+            print_validation_error "You must provide a X.509 certificate in order to use TLS"
+        elif [[ ! -f "$REDIS_SENTINEL_TLS_CERT_FILE" ]]; then
+            print_validation_error "The X.509 certificate file in the specified path ${REDIS_SENTINEL_TLS_CERT_FILE} does not exist"
+        fi
+        if [[ -z "$REDIS_SENTINEL_TLS_KEY_FILE" ]]; then
+            print_validation_error "You must provide a private key in order to use TLS"
+        elif [[ ! -f "$REDIS_SENTINEL_TLS_KEY_FILE" ]]; then
+            print_validation_error "The private key file in the specified path ${REDIS_SENTINEL_TLS_KEY_FILE} does not exist"
+        fi
+        if [[ -z "$REDIS_SENTINEL_TLS_CA_FILE" ]]; then
+            print_validation_error "You must provide a CA X.509 certificate in order to use TLS"
+        elif [[ ! -f "$REDIS_SENTINEL_TLS_CA_FILE" ]]; then
+            print_validation_error "The CA X.509 certificate file in the specified path ${REDIS_SENTINEL_TLS_CA_FILE} does not exist"
+        fi
+        if [[ -n "$REDIS_SENTINEL_TLS_DH_PARAMS_FILE" ]] && [[ ! -f "$REDIS_SENTINEL_TLS_DH_PARAMS_FILE" ]]; then
+            print_validation_error "The DH param file in the specified path ${REDIS_SENTINEL_TLS_DH_PARAMS_FILE} does not exist"
+        fi
+    fi
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -174,6 +206,25 @@ redis_initialize() {
         redis_conf_set "sentinel failover-timeout" "${REDIS_MASTER_SET} ${REDIS_SENTINEL_FAILOVER_TIMEOUT}"
         redis_conf_set "sentinel parallel-syncs" "${REDIS_MASTER_SET} 1"
         [[ -z "$REDIS_MASTER_PASSWORD" ]] || redis_conf_set "sentinel auth-pass" "${REDIS_MASTER_SET} ${REDIS_MASTER_PASSWORD}"
+
+        # TLS configuration
+        if is_boolean_yes "$REDIS_SENTINEL_TLS_ENABLED"; then
+            if [[ "$REDIS_SENTINEL_PORT_NUMBER" ==  "26379" ]] && [[ "$REDIS_SENTINEL_TLS_PORT_NUMBER" ==  "26379" ]]; then
+                # If both ports are set to default values, enable TLS traffic only
+                redis_conf_set port 0
+                redis_conf_set tls-port "$REDIS_SENTINEL_TLS_PORT_NUMBER"
+            else
+                # Different ports were specified
+                redis_conf_set port "$REDIS_SENTINEL_PORT_NUMBER"
+                redis_conf_set tls-port "$REDIS_SENTINEL_TLS_PORT_NUMBER"
+            fi
+            redis_conf_set tls-cert-file "$REDIS_SENTINEL_TLS_CERT_FILE"
+            redis_conf_set tls-key-file "$REDIS_SENTINEL_TLS_KEY_FILE"
+            redis_conf_set tls-ca-cert-file "$REDIS_SENTINEL_TLS_CA_FILE"
+            [[ -n "$REDIS_SENTINEL_TLS_DH_PARAMS_FILE" ]] && redis_conf_set tls-dh-params-file "$REDIS_SENTINEL_TLS_DH_PARAMS_FILE"
+            redis_conf_set tls-auth-clients "$REDIS_SENTINEL_TLS_AUTH_CLIENTS"
+            redis_conf_set tls-replication yes
+        fi
 
         cp -f "$REDIS_SENTINEL_CONF_FILE" "${REDIS_SENTINEL_VOLUME_DIR}/conf/sentinel.conf"
     else
