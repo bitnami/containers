@@ -24,5 +24,5 @@ flags=("--host" "${NGINXLDAP_HOSTNAME}" "-p" "${NGINXLDAP_PORT_NUMBER}" "--url" 
 
 info "** Starting NGINX LDAP Auth daemong **"
 # shellcheck source=/dev/null
-. "${NGINXLDAP_PYTHON_BIN_DIR}"/activate
+VIRTUAL_ENV_DISABLE_PROMPT=true . "${NGINXLDAP_PYTHON_BIN_DIR}"/activate
 exec python "${NGINXLDAP_SCRIPT_FILE}" "${flags[@]}"
