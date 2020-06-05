@@ -4,13 +4,13 @@ Grafana is an open source, feature rich metrics dashboard and graph editor for G
 
 [https://grafana.com](https://grafana.com)
 
-## TL;DR;
+# TL;DR;
 
 ```console
 $ docker run --name grafana bitnami/grafana:latest
 ```
 
-## Why use Bitnami Images?
+# Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -21,26 +21,20 @@ $ docker run --name grafana bitnami/grafana:latest
 
 > This [CVE scan report](https://quay.io/repository/bitnami/grafana?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-## How to deploy Grafana in Kubernetes?
-
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Grafana Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/grafana).
-
-Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
-
-## Why use a non-root container?
+# Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-## Supported tags and respective `Dockerfile` links
+# Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6-debian-10`, `6.7.4-debian-10-r0`, `6`, `6.7.4`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.7.4-debian-10-r0/6/debian-10/Dockerfile)
+* [`6-debian-10`, `6.7.4-debian-10-r1`, `6`, `6.7.4`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/6.7.4-debian-10-r1/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
-## Get this image
+# Get this image
 
 The recommended way to get the Bitnami Grafana Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/grafana).
 
@@ -57,24 +51,24 @@ $ docker pull bitnami/grafana:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/grafana:latest 'https://github.com/bitnami/bitnami-docker-grafana.git#master:6/debian-10'
+$ docker build -t bitnami/grafana:latest 'https://github.com/bitnami/bitnami-docker-grafana.git#master:7/debian-10'
 ```
 
-## Connecting to other containers
+# Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-### Using the Command Line
+## Using the Command Line
 
-#### Step 1: Create a network
+### Step 1: Create a network
 
 ```console
 $ docker network create grafana-network --driver bridge
 ```
 
-#### Step 2: Launch the grafana container within your network
+### Step 2: Launch the grafana container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `grafana-network` network.
 
@@ -82,13 +76,13 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 $ docker run --name grafana-node1 --network grafana-network bitnami/grafana:latest
 ```
 
-#### Step 3: Run another containers
+### Step 3: Run another containers
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
-## Configuration
+# Configuration
 
-### Dev config
+## Dev config
 
 Create a `custom.ini` in the conf (`/opt/bitnami/grafana/conf`) directory to override default configuration options. You only need to add the options you want to override. Config files are applied in the order of:
 
@@ -99,7 +93,7 @@ custom.ini
 
 In your `custom.ini` uncomment (remove the leading ;) sign. And set `app_mode = development`.
 
-### Production config
+## Production config
 
 Override the `/opt/bitnami/grafana/conf/grafana.ini` file mounting a volume.
 
@@ -119,7 +113,7 @@ grafana:
   ...
 ```
 
-### Install plugins at initialization
+## Install plugins at initialization
 
 When you start the Grafana image, you can specify a comma, semi-colon or space separated list of plugins to install by setting the env. variable `GF_INSTALL_PLUGINS`. The entries in `GF_INSTALL_PLUGINS` have two different formats:
 
@@ -144,7 +138,7 @@ $ docker run -d --name grafana -p 3000:3000 \
     bitnami/grafana:latest
 ```
 
-### Grafana Image Renderer plugin
+## Grafana Image Renderer plugin
 
 You can install the [Grafana Image Renderer plugin](https://github.com/grafana/grafana-image-renderer) to handle rendering panels and dashboards as PNG images. To install the plugin, follow the instructions described in the [previous section](#install-plugins-at-initialization).
 
@@ -172,7 +166,7 @@ services:
       ENABLE_METRICS: 'true'
 ```
 
-## Logging
+# Logging
 
 The Bitnami Grafana Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -182,19 +176,19 @@ $ docker logs grafana
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## Maintenance
+# Maintenance
 
-### Upgrade this image
+## Upgrade this image
 
 Bitnami provides up-to-date versions of grafana, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-#### Step 1: Get the updated image
+### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/grafana:latest
 ```
 
-#### Step 2: Stop and backup the currently running container
+### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
@@ -210,13 +204,13 @@ $ rsync -a /path/to/grafana-persistence /path/to/grafana-persistence.bkp.$(date 
 
 You can use this snapshot to restore the database state should the upgrade fail.
 
-#### Step 3: Remove the currently running container
+### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v grafana
 ```
 
-#### Step 4: Run the new image
+### Step 4: Run the new image
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
@@ -224,21 +218,21 @@ Re-create your container from the new image, [restoring your backup](#restoring-
 $ docker run --name grafana bitnami/grafana:latest
 ```
 
-## Notable Changes
+# Notable Changes
 
-### 6.7.3-debian-10-r28
+## 6.7.3-debian-10-r28
 
 - The `GF_INSTALL_PLUGINS` environment variable is not set by default anymore. This means it doesn't try to install the [`grafana-image-renderer` plugin](https://github.com/grafana/grafana-image-renderer) anymore unless you specify it. As an alternative to install this plugin, you can use the [Grafana Image Renderer container](https://github.com/bitnami/bitnami-docker-grafana-image-renderer).
 
-### 6.7.2-debian-10-r18
+## 6.7.2-debian-10-r18
 
 - Grafana doesn't ship the [`grafana-image-renderer` plugin](https://github.com/grafana/grafana-image-renderer/) by default anymore since it's not compatible with K8s distros with IPv6 disable. Instead, the `GF_INSTALL_PLUGINS` environment variable is set by default including this plugin so it's installed during the container's initialization, users can easily avoid it by overwriting the environment variable.
 
-## Contributing
+# Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-grafana/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-grafana/pulls) with your contribution.
 
-## Issues
+# Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-grafana/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -248,8 +242,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-## License
-
+# License
 Copyright (c) 2020 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
