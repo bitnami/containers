@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6.0-debian-10`, `6.0.4-debian-10-r6`, `6.0`, `6.0.4`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.4-debian-10-r6/6.0/debian-10/Dockerfile)
-* [`5.0-debian-10`, `5.0.9-debian-10-r37`, `5.0`, `5.0.9` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.9-debian-10-r37/5.0/debian-10/Dockerfile)
+* [`5.0-debian-10`, `5.0.9-debian-10-r38`, `5.0`, `5.0.9` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.9-debian-10-r38/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
 
@@ -207,6 +207,53 @@ The Redis Sentinel instance can be customized by specifying environment variable
 - `REDIS_SENTINEL_PASSWORD`: Password to authenticate with this sentinel and to authenticate to other sentinels. No defaults. Needs to be identical on all sentinels. As an alternative, you can mount a file with the password and set the `REDIS_SENTINEL_PASSWORD_FILE` variable.
 - `REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS`: Number of milliseconds before master is declared down. Default: **60000**.
 - `REDIS_SENTINEL_FAILOVER_TIMEOUT`: Specifies the failover timeout in milliseconds. Default: **180000**.
+- `REDIS_SENTINEL_TLS_ENABLED`: Whether to enable TLS for traffic or not. Default: **no**.
+- `REDIS_SENTINEL_TLS_PORT_NUMBER`: Port used for TLS secure traffic. Default: **26379**.
+- `REDIS_SENTINEL_TLS_CERT_FILE`: File containing the certificate file for the TSL traffic. No defaults.
+- `REDIS_SENTINEL_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
+- `REDIS_SENTINEL_TLS_CA_FILE`: File containing the CA of the certificate. No defaults.
+- `REDIS_SENTINEL_TLS_DH_PARAMS_FILE`: File containing DH params (in order to support DH based ciphers). No defaults.
+- `REDIS_SENTINEL_TLS_AUTH_CLIENTS`: Whether to require clients to authenticate or not. Default: **yes**.
+
+## Securing Redis Sentinel traffic
+
+Starting with version 6, Redis adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the aforementioned `REDIS_SENTINEL_TLS_*` enviroment variables to configure the application.
+
+When enabling TLS, conventional standard traffic is disabled by default. However this new feature is not mutually exclusive, which means it is possible to listen to both TLS and non-TLS connection simultaneously. To enable non-TLS traffic, set `REDIS_SENTINEL_PORT_NUMBER` to another port different than `0`.
+
+1. Using `docker run`
+
+    ```console
+    $ docker run --name redis-sentinel \
+        -v /path/to/certs:/opt/bitnami/redis/certs \
+        -v /path/to/redis-sentinel/persistence:/bitnami \
+        -e REDIS_MASTER_HOST=redis \
+        -e REDIS_SENTINEL_TLS_ENABLED=yes \
+        -e REDIS_SENTINEL_TLS_CERT_FILE=/opt/bitnami/redis/certs/redis.crt \
+        -e REDIS_SENTINEL_TLS_KEY_FILE=/opt/bitnami/redis/certs/redis.key \
+        -e REDIS_SENTINEL_TLS_CA_FILE=/opt/bitnami/redis/certs/redisCA.crt \
+        bitnami/redis-cluster:latest
+        bitnami/redis-sentinel:latest
+    ```
+
+2. Modifying the `docker-compose.yml` file present in this repository:
+
+    ```yaml
+      redis-sentinel:
+      ...
+        environment:
+          ...
+          - REDIS_SENTINEL_TLS_ENABLED=yes
+          - REDIS_SENTINEL_TLS_CERT_FILE=/opt/bitnami/redis/certs/redis.crt
+          - REDIS_SENTINEL_TLS_KEY_FILE=/opt/bitnami/redis/certs/redis.key
+          - REDIS_SENTINEL_TLS_CA_FILE=/opt/bitnami/redis/certs/redisCA.crt
+        ...
+        volumes:
+          - /path/to/certs:/opt/bitnami/redis/certs
+        ...
+      ...
+    ```
+Alternatively, you may also provide with this configuration in your [custom](https://github.com/bitnami/bitnami-docker-redis-sentinel#configuration-file) configuration file.
 
 ## Configuration file
 
