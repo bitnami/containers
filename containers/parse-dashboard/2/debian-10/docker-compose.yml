@@ -5,7 +5,7 @@ services:
     volumes:
       - 'mongodb_data:/bitnami'
   parse:
-    image: 'docker.io/bitnami/parse:3-debian-10'
+    image: 'docker.io/bitnami/parse:4-debian-10'
     ports:
       - '1337:1337'
     volumes:
