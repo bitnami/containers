@@ -2,7 +2,7 @@ version: '2'
 
 services:
   openldap:
-    image: bitnami/openldap:2
+    image: docker.io/bitnami/openldap:2-debian-10
     ports:
       - '1389:1389'
       - '1636:1636'
