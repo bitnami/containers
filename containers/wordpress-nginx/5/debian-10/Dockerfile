@@ -14,7 +14,7 @@ RUN bitnami-pkg unpack php-7.4.6-3 --checksum d2e3573a5b14cd5859ffb897f5925f89d7
 RUN bitnami-pkg install wp-cli-2.4.0-0 --checksum 8095bdd2f96a137cb3f54836ad9deb90510b0927472e532f41e1708345432230
 RUN bitnami-pkg unpack nginx-1.18.0-0 --checksum 18a6e86bde281f76dc9ebf2099902844a041fca5b0703b4d4b6367a233537de8
 RUN bitnami-pkg unpack mysql-client-10.3.23-0 --checksum 7af3cead7a38670bed924fbc99e20c67f6244bb5a92642adb4ab6cd307aa9a5e
-RUN bitnami-pkg unpack wordpress-5.4.1-11 --checksum 93070eea5db711c67bb9e1b6351ee83370528ab9ccdd1c3eb729c301153bb30a
+RUN bitnami-pkg unpack wordpress-5.4.1-12 --checksum f3a506d1f18be0d1e70543a5bb243b849944c9601cdf14447e968bf5b3df3564
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
@@ -25,7 +25,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="5.4.1-debian-10-r35" \
+    BITNAMI_IMAGE_VERSION="5.4.1-debian-10-r36" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
