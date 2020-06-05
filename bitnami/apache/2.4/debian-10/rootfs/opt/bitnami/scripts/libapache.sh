@@ -447,7 +447,7 @@ Require local
 ErrorDocument 403 "For security reasons, this URL is only accessible using localhost (127.0.0.1) as the hostname."
 # AuthType Basic
 # AuthName ${app}
-# AuthUserFile "${APACHE_CONF_DIR}/users"
+# AuthUserFile "${APACHE_BASE_DIR}/users"
 # Require valid-user
 EOF
 )"
