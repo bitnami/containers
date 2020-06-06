@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5-debian-10`, `5.0.2-debian-10-r75`, `5`, `5.0.2`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.0.2-debian-10-r75/5/debian-10/Dockerfile)
+* [`5-debian-10`, `5.0.2-debian-10-r76`, `5`, `5.0.2`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.0.2-debian-10-r76/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpmyadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phpmyadmin).
 
@@ -291,7 +291,7 @@ volumes:
 
 # Notable Changes
 
-## 5.0.2-debian-10-r62
+## 5.0.2-debian-10-r73
 
 - Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder.
 - The `PHPMYADMIN_ALLOW_NO_PASSWORD` environment variable has been deprecated in favor of `DATABASE_ALLOW_NO_PASSWORD`.
