@@ -51,6 +51,13 @@ export REDIS_CLUSTER_ANNOUNCE_IP="${REDIS_CLUSTER_ANNOUNCE_IP:-}"
 export REDIS_DNS_RETRIES="${REDIS_DNS_RETRIES:-120}"
 export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
 export REDIS_AOF_ENABLED="${REDIS_AOF_ENABLED:-yes}"
+export REDIS_TLS_ENABLED="${REDIS_TLS_ENABLED:-no}"
+export REDIS_TLS_PORT="${REDIS_TLS_PORT:-6379}"
+export REDIS_TLS_CERT_FILE="${REDIS_TLS_CERT_FILE:-}"
+export REDIS_TLS_KEY_FILE="${REDIS_TLS_KEY_FILE:-}"
+export REDIS_TLS_CA_FILE="${REDIS_TLS_CA_FILE:-}"
+export REDIS_TLS_DH_PARAMS_FILE="${REDIS_TLS_DH_PARAMS_FILE:-}"
+export REDIS_TLS_AUTH_CLIENTS="${REDIS_TLS_AUTH_CLIENTS:-yes}"
 EOF
     if [[ -f "${REDIS_PASSWORD_FILE:-}" ]]; then
         cat <<"EOF"
@@ -130,6 +137,11 @@ redis_cluster_override_conf() {
     if ! (is_boolean_yes "$REDIS_CLUSTER_DYNAMIC_IPS" || is_boolean_yes "$REDIS_CLUSTER_CREATOR"); then
         redis_conf_set cluster-announce-ip "$REDIS_CLUSTER_ANNOUNCE_IP"
     fi
+    if is_boolean_yes "$REDIS_TLS_ENABLED"; then
+      redis_conf_set tls-cluster yes
+      redis_conf_set tls-replication yes
+    fi
+
 }
 
 ########################
@@ -158,15 +170,28 @@ redis_cluster_initialize() {
 redis_cluster_create() {
   local nodes=("$@")
   local ips=()
+  local wait_command
+  local create_command
+
   for node in "${nodes[@]}"; do
-    while [[ $(redis-cli -h "$node" -p "$REDIS_PORT" ping) != 'PONG' ]]; do
+    if is_boolean_yes "$REDIS_TLS_ENABLED"; then
+      wait_command="redis-cli -h ${node} -p ${REDIS_TLS_PORT} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE} ping"
+    else
+      wait_command="redis-cli -h ${node} -p ${REDIS_PORT} ping"
+    fi
+    while [[ $($wait_command) != 'PONG' ]]; do
       echo "Node $node not ready, waiting for all the nodes to be ready..."
       sleep 1
     done
     ips=($(dns_lookup "$node") "${ips[@]}")
   done
 
-  yes yes | redis-cli --cluster create "${ips[@]/%/:${REDIS_PORT}}" --cluster-replicas "$REDIS_CLUSTER_REPLICAS" --cluster-yes || true
+  if is_boolean_yes "$REDIS_TLS_ENABLED"; then
+    create_command="redis-cli --cluster create ${ips[*]/%/:${REDIS_TLS_PORT}} --cluster-replicas ${REDIS_CLUSTER_REPLICAS} --cluster-yes --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE}"
+  else
+    create_command="redis-cli --cluster create ${ips[*]/%/:${REDIS_PORT}} --cluster-replicas ${REDIS_CLUSTER_REPLICAS} --cluster-yes"
+  fi
+  yes yes | $create_command || true
   if redis_cluster_check "${ips[0]}"; then
     echo "Cluster correctly created"
   else
@@ -180,7 +205,11 @@ redis_cluster_create() {
 ##  - $1: node where to check the cluster state
 #########################
 redis_cluster_check() {
-  local -r check=$(redis-cli --cluster check "$1":"$REDIS_PORT")
+  if is_boolean_yes "$REDIS_TLS_ENABLED"; then
+    local -r check=$(redis-cli --tls --cert "${REDIS_TLS_CERT_FILE}" --key "${REDIS_TLS_KEY_FILE}" --cacert "${REDIS_TLS_CA_FILE}" --cluster check "$1":"$REDIS_TLS_PORT")
+  else
+    local -r check=$(redis-cli --cluster check "$1":"$REDIS_PORT")
+  fi
   if [[ $check =~ "All 16384 slots covered" ]]; then
     true
   else

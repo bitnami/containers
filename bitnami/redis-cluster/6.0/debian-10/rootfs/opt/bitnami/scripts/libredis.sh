@@ -130,7 +130,7 @@ redis_stop() {
 
     ! is_redis_running && return
     pass="$(redis_conf_get "requirepass")"
-    port="$(redis_conf_get "port")"
+    is_boolean_yes "$REDIS_TLS_ENABLED" && port="$(redis_conf_get "tls-port")" || port="$(redis_conf_get "port")"
 
     [[ -n "$pass" ]] && args+=("-a" "\"$pass\"")
     [[ "$port" != "0" ]] && args+=("-p" "$port")
@@ -210,6 +210,13 @@ export REDIS_REPLICATION_MODE="${REDIS_REPLICATION_MODE:-}"
 export REDIS_PORT="${REDIS_PORT:-6379}"
 export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
 export REDIS_AOF_ENABLED="${REDIS_AOF_ENABLED:-yes}"
+export REDIS_TLS_ENABLED="${REDIS_TLS_ENABLED:-no}"
+export REDIS_TLS_PORT="${REDIS_TLS_PORT:-6379}"
+export REDIS_TLS_CERT_FILE="${REDIS_TLS_CERT_FILE:-}"
+export REDIS_TLS_KEY_FILE="${REDIS_TLS_KEY_FILE:-}"
+export REDIS_TLS_CA_FILE="${REDIS_TLS_CA_FILE:-}"
+export REDIS_TLS_DH_PARAMS_FILE="${REDIS_TLS_DH_PARAMS_FILE:-}"
+export REDIS_TLS_AUTH_CLIENTS="${REDIS_TLS_AUTH_CLIENTS:-yes}"
 EOF
     if [[ -f "${REDIS_PASSWORD_FILE:-}" ]]; then
         cat <<"EOF"
@@ -268,6 +275,30 @@ redis_validate() {
             print_validation_error "Invalid replication mode. Available options are 'master/replica'"
         fi
     fi
+    if is_boolean_yes "$REDIS_TLS_ENABLED"; then
+        if [[ "$REDIS_PORT" == "$REDIS_TLS_PORT" ]] && [[ "$REDIS_PORT" != "6379" ]]; then
+            # If both ports are assigned the same numbers and they are different to the default settings
+            print_validation_error "Enviroment variables REDIS_PORT and REDIS_TLS_PORT point to the same port number (${REDIS_PORT}). Change one of them or disable non-TLS traffic by setting REDIS_PORT=0"
+        fi
+        if [[ -z "$REDIS_TLS_CERT_FILE" ]]; then
+            print_validation_error "You must provide a X.509 certificate in order to use TLS"
+        elif [[ ! -f "$REDIS_TLS_CERT_FILE" ]]; then
+            print_validation_error "The X.509 certificate file in the specified path ${REDIS_TLS_CERT_FILE} does not exist"
+        fi
+        if [[ -z "$REDIS_TLS_KEY_FILE" ]]; then
+            print_validation_error "You must provide a private key in order to use TLS"
+        elif [[ ! -f "$REDIS_TLS_KEY_FILE" ]]; then
+            print_validation_error "The private key file in the specified path ${REDIS_TLS_KEY_FILE} does not exist"
+        fi
+        if [[ -z "$REDIS_TLS_CA_FILE" ]]; then
+            print_validation_error "You must provide a CA X.509 certificate in order to use TLS"
+        elif [[ ! -f "$REDIS_TLS_CA_FILE" ]]; then
+            print_validation_error "The CA X.509 certificate file in the specified path ${REDIS_TLS_CA_FILE} does not exist"
+        fi
+        if [[ -n "$REDIS_TLS_DH_PARAMS_FILE" ]] && [[ ! -f "$REDIS_TLS_DH_PARAMS_FILE" ]]; then
+            print_validation_error "The DH param file in the specified path ${REDIS_TLS_DH_PARAMS_FILE} does not exist"
+        fi
+    fi
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
@@ -292,7 +323,13 @@ redis_configure_replication() {
         fi
     elif [[ "$REDIS_REPLICATION_MODE" =~ ^(slave|replica)$ ]]; then
         if [[ -n "$REDIS_SENTINEL_HOST" ]]; then
-            REDIS_SENTINEL_INFO=($(redis-cli -h "$REDIS_SENTINEL_HOST" -p "$REDIS_SENTINEL_PORT_NUMBER" sentinel get-master-addr-by-name "$REDIS_SENTINEL_MASTER_NAME"))
+            local sentinel_info_command
+            if is_boolean_yes "$REDIS_TLS_ENABLED"; then
+                sentinel_info_command="redis-cli -h ${REDIS_SENTINEL_HOST} -p ${REDIS_SENTINEL_PORT_NUMBER} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE} sentinel get-master-addr-by-name ${REDIS_SENTINEL_MASTER_NAME}"
+            else
+                sentinel_info_command="redis-cli -h ${REDIS_SENTINEL_HOST} -p ${REDIS_SENTINEL_PORT_NUMBER} sentinel get-master-addr-by-name ${REDIS_SENTINEL_MASTER_NAME}"
+            fi
+            REDIS_SENTINEL_INFO=($($sentinel_info_command))
             REDIS_MASTER_HOST=${REDIS_SENTINEL_INFO[0]}
             REDIS_MASTER_PORT_NUMBER=${REDIS_SENTINEL_INFO[1]}
         fi
@@ -302,6 +339,10 @@ redis_configure_replication() {
         local parameter="replicaof"
         [[ $(redis_major_version) -lt 5 ]] && parameter="slaveof"
         redis_conf_set "$parameter" "$REDIS_MASTER_HOST $REDIS_MASTER_PORT_NUMBER"
+        # Configure replicas to use TLS for outgoing connections to the master
+        if is_boolean_yes "$REDIS_TLS_ENABLED"; then
+            redis_conf_set tls-replication yes
+        fi
     fi
 }
 
@@ -419,6 +460,23 @@ redis_configure_default() {
         # Disable RDB persistence, AOF persistence already enabled.
         # Ref: https://redis.io/topics/persistence#interactions-between-aof-and-rdb-persistence
         redis_conf_set save ""
+        # TLS configuration
+        if is_boolean_yes "$REDIS_TLS_ENABLED"; then
+            if [[ "$REDIS_PORT" ==  "6379" ]] && [[ "$REDIS_TLS_PORT" ==  "6379" ]]; then
+                # If both ports are set to default values, enable TLS traffic only
+                redis_conf_set port 0
+                redis_conf_set tls-port "$REDIS_TLS_PORT"
+            else
+                # Different ports were specified
+                redis_conf_set port "$REDIS_PORT"
+                redis_conf_set tls-port "$REDIS_TLS_PORT"
+            fi
+            redis_conf_set tls-cert-file "$REDIS_TLS_CERT_FILE"
+            redis_conf_set tls-key-file "$REDIS_TLS_KEY_FILE"
+            redis_conf_set tls-ca-cert-file "$REDIS_TLS_CA_FILE"
+            [[ -n "$REDIS_TLS_DH_PARAMS_FILE" ]] && redis_conf_set tls-dh-params-file "$REDIS_TLS_DH_PARAMS_FILE"
+            redis_conf_set tls-auth-clients "$REDIS_TLS_AUTH_CLIENTS"
+        fi
         if [[ -n "$REDIS_PASSWORD" ]]; then
             redis_conf_set requirepass "$REDIS_PASSWORD"
         else
