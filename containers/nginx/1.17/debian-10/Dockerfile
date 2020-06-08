@@ -10,7 +10,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 libgeoip1 libpcre3 libssl1.1 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-0" --checksum 63449e5ed4ece61d7bbeda0d173b68768d9fb444922b8ffa2e1042be20687142
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.17.10-0" --checksum a40de912e99beeaf5a2b9c1c33c064fec4483cf6b0a5e67867c8be33acaeb670
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.17.10-1" --checksum b2c4ac50fe5e8cfc73b8953ebd0638d4bbe3375aa6ff9eda4a56fccc570786ef
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -20,7 +20,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.17.10-debian-10-r63" \
+    BITNAMI_IMAGE_VERSION="1.17.10-debian-10-r64" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
