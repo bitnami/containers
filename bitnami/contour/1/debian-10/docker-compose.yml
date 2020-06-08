@@ -1,7 +1,8 @@
 version: '2'
+
 services:
   contour:
-    image: bitnami/contour:1
+    image: docker.io/bitnami/contour:1-debian-10
     volumes:
       - contour_data:/bitnami/contour
 volumes:
