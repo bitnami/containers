@@ -8,6 +8,7 @@
   "databaseUser": "{{$global.env.REPORTSERVER_DATABASE_USER}}",
   "email": "{{$global.env.REPORTSERVER_EMAIL}}",
   "installDemoData": "{{$global.env.REPORTSERVER_INSTALLDEMODATA}}",
+  "javaOpts": "{{$global.env.REPORTSERVER_JAVA_OPTS}}",
   "password": "{{$global.env.REPORTSERVER_PASSWORD}}",
   "smtpHost": "{{$global.env.SMTP_HOST}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
