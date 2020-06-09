@@ -1,36 +1,34 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    HOME="/" \
-    OS_ARCH="amd64" \
+ENV OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libc6 libgeoip1 libpcre3 libssl1.1 procps sudo unzip zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.16.1-4" --checksum f0dd271caa36d2705405bab4f8085cf2747f46b7cf78473e980bce38cedb6498
+RUN install_packages ca-certificates curl gzip libc6 libgeoip1 libpcre3 libssl1.1 procps tar zlib1g
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.18.0-1" --checksum 4ba415b4511382484b860de346f9109d6d734c0331754e9d8486d65e2e25aaab
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-0" --checksum 63449e5ed4ece61d7bbeda0d173b68768d9fb444922b8ffa2e1042be20687142
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kubeapps" "1.10.1-0" --checksum dd4d7377581cba63de30f61609843ca0d4f39b1531fc641b8019dd2f140d025e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
-RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN rm -rf /app && \
     ln -sf /opt/bitnami/kubeapps /opt/bitnami/kubeapps-dashboard && \
     mv /opt/bitnami/kubeapps/build /app
+RUN chmod -R g+rwX /opt/bitnami/nginx/conf
+RUN /opt/bitnami/scripts/nginx/postunpack.sh
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r2" \
-    NAMI_PREFIX="/.nami" \
+    BITNAMI_IMAGE_VERSION="1.10.1-debian-10-r3" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
-    PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/kubeapps/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
 
