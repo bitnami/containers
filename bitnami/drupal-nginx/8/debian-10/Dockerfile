@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl dirmngr gnupg gzip libaudit1 libbsd0 l
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg unpack php-7.3.18-3 --checksum 3c4b811b8711b18be4b422d9102dce24146f94bbb76b2af13741fdd364ff5ded
-RUN bitnami-pkg unpack nginx-1.18.0-0 --checksum 18a6e86bde281f76dc9ebf2099902844a041fca5b0703b4d4b6367a233537de8
+RUN bitnami-pkg unpack nginx-1.18.0-1 --checksum 4ba415b4511382484b860de346f9109d6d734c0331754e9d8486d65e2e25aaab
 RUN bitnami-pkg unpack mysql-client-10.3.23-0 --checksum 7af3cead7a38670bed924fbc99e20c67f6244bb5a92642adb4ab6cd307aa9a5e
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
@@ -22,7 +22,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="8.9.0-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="8.9.0-debian-10-r5" \
     DRUPAL_DATABASE_NAME="bitnami_drupal" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="bn_drupal" \
