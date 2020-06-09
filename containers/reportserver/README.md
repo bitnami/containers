@@ -201,6 +201,10 @@ When you start the reportserver-community image, you can adjust the configuratio
 - `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
+##### Modify JAVA_OPTS for the application
+
+- `REPORTSERVER_JAVA_OPTS`: Java additional options. Default: `-Djava.awt.headless=true -Xmx4g -XX:+UseConcMarkSweepGC -XX:MaxPermSize=512M -Dfile.encoding=UTF8`
+
 If you want to add a new environment variable:
 
  * For Docker Compose, add the variable name and value under the application section:
