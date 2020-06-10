@@ -25,7 +25,7 @@ consul_declare_alias_env() {
     local -r original="${2:?missing original environment variable}"
     if printenv "${original}" > /dev/null; then
         cat <<EOF
-export "$alias"="${!original:-}"
+export "${alias}"="\${${original}:-}"
 EOF
     fi
 }
