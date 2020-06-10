@@ -29,6 +29,7 @@ export SPARK_WORKDIR="${SPARK_BASEDIR}/work"
 export SPARK_CONF_FILE="${SPARK_CONFDIR}/spark-defaults.conf"
 export SPARK_LOGDIR="${SPARK_BASEDIR}/logs"
 export SPARK_TMPDIR="${SPARK_BASEDIR}/tmp"
+export SPARK_JARSDIR="${SPARK_BASEDIR}/jars"
 
 # Spark basic cluster
 export SPARK_MODE="${SPARK_MODE:-master}"
