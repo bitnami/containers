@@ -10,6 +10,7 @@
 
 ```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-harbor-portal/master/docker-compose.yml
+$ curl -L https://github.com/bitnami/bitnami-docker-harbor-portal/archive/master.tar.gz | tar xz --strip=1 --wildcards '*-master/config'
 $ docker-compose up
 ```
 
@@ -39,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.10.2-debian-10-r55`, `1`, `1.10.2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-portal/blob/1.10.2-debian-10-r55/1/debian-10/Dockerfile)
+* [`2-debian-10`, `2.0.0-debian-10-r0`, `2`, `2.0.0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-portal/blob/2.0.0-debian-10-r0/2/debian-10/Dockerfile)
 
 # Configuration
 
