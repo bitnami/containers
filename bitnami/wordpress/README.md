@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5-debian-10`, `5.4.1-debian-10-r40`, `5`, `5.4.1`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.4.1-debian-10-r40/5/debian-10/Dockerfile)
+* [`5-debian-10`, `5.4.1-debian-10-r41`, `5`, `5.4.1`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.4.1-debian-10-r41/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
@@ -135,6 +135,8 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 -    driver: local
 ```
 
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+
 ### Mount host directories as data volumes using the Docker command line
 
 #### Step 1: Create a network (if it does not exist)
@@ -155,6 +157,8 @@ $ docker run -d --name mariadb \
   bitnami/mariadb:latest
 ```
 
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+
 #### Step 3. Create the WordPress the container with host volumes
 
 ```console
@@ -167,6 +171,8 @@ $ docker run -d --name wordpress \
   --volume /path/to/wordpress-persistence:/bitnami/wordpress \
   bitnami/wordpress:latest
 ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Upgrading WordPress
 
