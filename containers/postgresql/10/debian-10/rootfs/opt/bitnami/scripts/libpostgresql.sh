@@ -67,7 +67,7 @@ postgresql_env() {
 
       if printenv "${original}" > /dev/null; then
           cat << EOF
-export $alias="${!original}"
+export "${alias}"="\${${original}:-}"
 EOF
       fi
     }
