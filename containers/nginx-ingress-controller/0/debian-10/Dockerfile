@@ -32,14 +32,14 @@ RUN mkdir -p /opt/bitnami/nginx/logs && \
     ln -sf /opt/bitnami/nginx/logs /var/log/nginx && \
     ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
+RUN chown -LR www-data:root /etc/nginx /etc/ingress-controller
 RUN chgrp -R root /var/log/nginx && \
     chmod g+rwX -R /var/log/nginx && \
     chgrp -R root /opt/bitnami/nginx/conf && \
     chmod g+rwX -R /opt/bitnami/nginx/conf && \
-    chmod -R g+rwX /opt/bitnami/nginx-ingress-controller /etc/nginx /etc/ingress-controller && \
-    chown -LR www-data:root /etc/nginx /etc/ingress-controller
+    chmod -R g+rwX /opt/bitnami/nginx-ingress-controller /etc/nginx /etc/ingress-controller
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.32.0-debian-10-r26" \
+    BITNAMI_IMAGE_VERSION="0.32.0-debian-10-r27" \
     HOME="/" \
     LUA_CPATH="/opt/bitnami/nginx/conf/lua/?.so;/opt/bitnami/lua/lib/lua/5.1/?.so;./?.so;/opt/bitnami/lua/lib/lua/?.so;;" \
     LUA_PATH="/opt/bitnami/lua/share/lua/5.1/?/init.lua;/opt/bitnami/lua/lib/lua/?.lua;/opt/bitnami/lua/lib/lua/5.1/?.lua;/opt/bitnami/nginx/conf/lua/?.lua;;" \
