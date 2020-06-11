@@ -9,10 +9,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libedit2 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.18-3" --checksum 3c4b811b8711b18be4b422d9102dce24146f94bbb76b2af13741fdd364ff5ded
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.19-0" --checksum 8799bc6c2565c4e9010756915de8f250a1f989df33794395f6ea1abc85bbf4b1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.43-4" --checksum e6929d8619f48976f9206bec14cb9634ebe8590225818eea12c27840617f53aa
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.8.0-1" --checksum 732f07d8a39665702c3b69883e5c6e7c601a033dbac4a896843d8cf63026bc7f
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.18-1" --checksum 694e048842da8cf5af181dd5021a2481ff30957a28ad71c4b772f333fc128579
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.19-0" --checksum 9d3e785b7544f374e4943f94795625e9048a89fab109ada62552c5784c68bbbe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-0" --checksum 63449e5ed4ece61d7bbeda0d173b68768d9fb444922b8ffa2e1042be20687142
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "phppgadmin" "7.12.1-0" --checksum ad2940061325ede66471cf3f352557eb6a6f5d986eb5f8aebca6ff1d90ddeb6c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
@@ -29,7 +29,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="phppgadmin" \
-    BITNAMI_IMAGE_VERSION="7.12.1-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="7.12.1-debian-10-r8" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/common/bin:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
