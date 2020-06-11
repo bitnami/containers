@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack apache-2.4.43-4 --checksum e6929d8619f48976f9206bec14cb96
 RUN bitnami-pkg unpack mysql-client-10.3.23-0 --checksum 7af3cead7a38670bed924fbc99e20c67f6244bb5a92642adb4ab6cd307aa9a5e
 RUN bitnami-pkg install libphp-7.3.18-1 --checksum 694e048842da8cf5af181dd5021a2481ff30957a28ad71c4b772f333fc128579
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
-RUN bitnami-pkg unpack suitecrm-7.11.13-1 --checksum 6d8e1c0ceb17e8b8dd923a36a584192bdcc4212a5e2cfa08f6fd520978f22752
+RUN bitnami-pkg unpack suitecrm-7.11.14-0 --checksum d5904dd2fc4d903586b1e45ca25d23ba23aecf2416603cd3a6b54eae4e34208a
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -27,7 +27,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="suitecrm" \
-    BITNAMI_IMAGE_VERSION="7.11.13-debian-10-r73" \
+    BITNAMI_IMAGE_VERSION="7.11.14-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
