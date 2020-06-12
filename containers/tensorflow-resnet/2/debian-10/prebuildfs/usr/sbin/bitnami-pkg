@@ -209,3 +209,7 @@ if [ "$BITNAMI_PKG_CHMOD" ]; then
   info "Fixing permissions: chmod $BITNAMI_PKG_CHMOD $DIRS"
   chmod $BITNAMI_PKG_CHMOD $DIRS
 fi
+
+# Include metadata about the package
+touch "${BITNAMI_PREFIX}/.bitnami_packages"
+echo "${PACKAGE}" >> "${BITNAMI_PREFIX}/.bitnami_packages"
