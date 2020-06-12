@@ -54,7 +54,17 @@ wait_for_dns_lookup() {
 #   Machine IP
 #########################
 get_machine_ip() {
-    dns_lookup "$(hostname)"
+    local -a ip_addresses
+    local hostname
+    hostname="$(hostname)"
+    read -r -a ip_addresses <<< "$(dns_lookup "$hostname" | xargs echo)"
+    if [[ "${#ip_addresses[@]}" -gt 1 ]]; then
+        warn "Found more than one IP address associated to hostname ${hostname}: ${ip_addresses[*]}, will use ${ip_addresses[0]}"
+    elif [[ "${#ip_addresses[@]}" -lt 1 ]]; then
+        error "Could not find any IP address associated to hostname ${hostname}"
+        exit 1
+    fi
+    echo "${ip_addresses[0]}"
 }
 
 ########################
