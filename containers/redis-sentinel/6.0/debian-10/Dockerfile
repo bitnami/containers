@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/redis-sentinel/postunpack.sh
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="6.0.5-debian-10-r3"
+    BITNAMI_IMAGE_VERSION="6.0.5-debian-10-r4"
 
 EXPOSE 26379
 
