@@ -2,4 +2,4 @@ version: '2'
 
 services:
   postgres-exporter:
-    image: bitnami/postgres-exporter:0
+    image: docker.io/bitnami/postgres-exporter:0-debian-10
