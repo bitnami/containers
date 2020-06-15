@@ -2,4 +2,4 @@ version: '2'
 
 services:
   acmesolver:
-    image: bitnami/acmesolver:0
+    image: docker.io/bitnami/acmesolver:0-debian-10
