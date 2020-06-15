@@ -1,4 +1,4 @@
 version: '2'
 services:
   aws-cli:
-    image: bitnami/aws-cli:1
+    image: docker.io/bitnami/aws-cli:1-debian-10
