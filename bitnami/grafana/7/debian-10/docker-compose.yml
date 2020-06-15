@@ -2,7 +2,7 @@ version: '2'
 
 services:
   grafana:
-    image: bitnami/grafana:7
+    image: docker.io/bitnami/grafana:7-debian-10
     ports:
       - '3000:3000'
     environment:
