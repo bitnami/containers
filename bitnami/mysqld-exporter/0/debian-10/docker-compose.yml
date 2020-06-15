@@ -1,7 +1,7 @@
 version: '2'
 services:
   mysqld-exporter:
-    image: bitnami/mysqld-exporter:0
+    image: docker.io/bitnami/mysqld-exporter:0-debian-10
     ports:
       - 9104:9104
     environment:
