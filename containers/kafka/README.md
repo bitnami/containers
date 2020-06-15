@@ -222,6 +222,7 @@ To do so, add the following environment variables to your docker-compose:
 +     - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
 +     - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
 +     - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://localhost:9093
++     - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
 ```
 
 And expose the extra port:
