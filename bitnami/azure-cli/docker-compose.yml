@@ -1,4 +1,4 @@
 version: '2'
 services:
   azure-cli:
-    image: bitnami/azure-cli:2
+    image: docker.io/bitnami/azure-cli:2-debian-10
