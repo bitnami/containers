@@ -13,7 +13,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip hostname libasound2-dev libc6 libfreetype6 libfreetype6-dev libgcc1 libx11-6 libxext6 libxi6 libxrender1 libxtst6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.7-1" --checksum e01669f15e2e655613c19eab1b8b533a720d6334766da34190a2a4939f5a0bc8
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "3.3.0-0" --checksum 44c8d8e59396bdec54adbffd26bd98f4a0198e6fc5a280953429d14cefed0868
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "3.3.2-0" --checksum 50cac57ffd984455e7321d1f13380f94b6bda2a16b7e2547ba33aad347d5e9eb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "7.7.1-0" --checksum 097bb2d4859af45be22bf41ccf5dac95e0b3f36e02bc1b0a33f4dfe06b47e762
 RUN apt-get update && apt-get upgrade -y && \
@@ -22,7 +22,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/elasticsearch/postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="7.7.1-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="7.7.1-debian-10-r8" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH"
 
 EXPOSE 9200 9300
