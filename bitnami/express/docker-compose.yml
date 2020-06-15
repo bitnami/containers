@@ -2,11 +2,11 @@ version: '2'
 
 services:
   mongodb:
-    image: 'bitnami/mongodb:4.2'
+    image: 'docker.io/bitnami/mongodb:4.2-debian-10'
 
   express:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: 'bitnami/express:4'
+    image: 'docker.io/bitnami/express:4-debian-10'
     command: npm start
     environment:
       - PORT=3000
