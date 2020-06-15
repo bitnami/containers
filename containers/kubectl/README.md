@@ -29,7 +29,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.18-debian-10`, `1.18.3-debian-10-r24`, `1.18`, `1.18.3`, `latest` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.18.3-debian-10-r24/1.18/debian-10/Dockerfile)
-* [`1.17-debian-10`, `1.17.4-debian-10-r91`, `1.17`, `1.17.4` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.17.4-debian-10-r91/1.17/debian-10/Dockerfile)
+* [`1.17-debian-10`, `1.17.4-debian-10-r92`, `1.17`, `1.17.4` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.17.4-debian-10-r92/1.17/debian-10/Dockerfile)
 * [`1.16-debian-10`, `1.16.3-debian-10-r135`, `1.16`, `1.16.3` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.3-debian-10-r135/1.16/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubectl GitHub repo](https://github.com/bitnami/bitnami-docker-kubectl).
@@ -61,7 +61,7 @@ $ docker build -t bitnami/kubectl:latest 'https://github.com/bitnami/bitnami-doc
 To run commands inside this container you can use `docker run`, for example to execute `kubectl version` you can follow the example below:
 
 ```console
-$ docker run --rm --name kubectl bitnami/kubectl:latest -- version
+$ docker run --rm --name kubectl bitnami/kubectl:latest version
 ```
 
 Consult the [Kubectl Reference Documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands) to find the completed list of commands available.
