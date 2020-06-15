@@ -58,10 +58,10 @@ $ docker build -t bitnami/kubectl:latest 'https://github.com/bitnami/bitnami-doc
 
 ## Running commands
 
-To run commands inside this container you can use `docker run`, for example to execute `kubectl --version` you can follow the example below:
+To run commands inside this container you can use `docker run`, for example to execute `kubectl version` you can follow the example below:
 
 ```console
-$ docker run --rm --name kubectl bitnami/kubectl:latest -- --version
+$ docker run --rm --name kubectl bitnami/kubectl:latest -- version
 ```
 
 Consult the [Kubectl Reference Documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands) to find the completed list of commands available.
