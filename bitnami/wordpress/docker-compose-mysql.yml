@@ -1,7 +1,7 @@
 version: '2'
 services:
   mysql:
-    image: 'bitnami/mysql:8.0'
+    image: 'docker.io/bitnami/mysql:8.0-debian-10'
     volumes:
       - 'mysql_data:/bitnami/mysql'
     environment:
@@ -9,7 +9,7 @@ services:
       - MYSQL_DATABASE=bitnami_wordpress
       - ALLOW_EMPTY_PASSWORD=yes
   wordpress:
-    image: 'bitnami/wordpress:5'
+    image: 'docker.io/bitnami/wordpress:5-debian-10'
     ports:
       - '80:8080'
       - '443:8443'
