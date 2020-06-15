@@ -31,6 +31,7 @@ if [[ ! -z "$ETCD_ROOT_PASSWORD" ]]; then
     ETCD_PID=$!
     sleep 3
     echo "$ETCD_ROOT_PASSWORD" | etcdctl user add root --interactive=false
+    etcdctl user grant-role root root
     etcdctl auth enable
     kill $ETCD_PID
     unset ETCD_ROOT_PASSWORD

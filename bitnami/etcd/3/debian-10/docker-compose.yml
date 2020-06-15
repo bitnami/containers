@@ -2,7 +2,7 @@ version: '2'
 
 services:
   etcd:
-    image: bitnami/etcd:3
+    image: docker.io/bitnami/etcd:3-debian-10
     environment:
       - ALLOW_NONE_AUTHENTICATION=yes
     volumes:
