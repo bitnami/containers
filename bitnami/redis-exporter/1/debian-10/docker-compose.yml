@@ -2,4 +2,4 @@ version: '2'
 
 services:
   redis-exporter:
-    image: bitnami/redis-exporter:1
+    image: docker.io/bitnami/redis-exporter:1-debian-10
