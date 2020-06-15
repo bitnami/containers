@@ -1,7 +1,7 @@
 version: '2'
 services:
   chartmuseum:
-    image: bitnami/chartmuseum:0
+    image: docker.io/bitnami/chartmuseum:0-debian-10
     ports:
       - '8080:8080'
     volumes:
