@@ -1,6 +1,6 @@
 version: '2'
 services:
   mongodb-exporter:
-    image: bitnami/mongodb-exporter:0
+    image: docker.io/bitnami/mongodb-exporter:0-debian-10
     ports:
       - 9216:9216
