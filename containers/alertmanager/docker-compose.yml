@@ -2,6 +2,6 @@ version: '2'
 
 services:
   alertmanager:
-    image: bitnami/alertmanager:0
+    image: docker.io/bitnami/alertmanager:0-debian-10
     ports:
       - '9093:9093'
