@@ -2,4 +2,4 @@ version: '2'
 
 services:
   blackbox-exporter:
-    image: bitnami/blackbox-exporter:0
+    image: docker.io/bitnami/blackbox-exporter:0-debian-10
