@@ -260,10 +260,10 @@ zookeeper_generate_conf() {
         zookeeper_conf_set "$ZOO_CONF_FILE" client.secure true
         zookeeper_conf_set "$ZOO_CONF_FILE" secureClientPort "$ZOO_TLS_PORT_NUMBER"
         zookeeper_conf_set "$ZOO_CONF_FILE" serverCnxnFactory org.apache.zookeeper.server.NettyServerCnxnFactory
+        [[ -n "$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.keyStore.password "$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD"
         zookeeper_conf_set "$ZOO_CONF_FILE" ssl.keyStore.location "$ZOO_TLS_CLIENT_KEYSTORE_FILE"
-        zookeeper_conf_set "$ZOO_CONF_FILE" ssl.keyStore.password "$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD"
+        [[ -n "$ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.trustStore.password "$ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD"
         zookeeper_conf_set "$ZOO_CONF_FILE" ssl.trustStore.location "$ZOO_TLS_CLIENT_TRUSTSTORE_FILE"
-        zookeeper_conf_set "$ZOO_CONF_FILE" ssl.trustStore.password "$ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD"
     fi
     if [[ "${ZOO_TLS_QUORUM_ENABLE}" = true ]]; then
         zookeeper_conf_set "$ZOO_CONF_FILE" sslQuorum true
