@@ -1,4 +1,4 @@
 version: '2'
 services:
   git:
-    image: bitnami/git:2
+    image: docker.io/bitnami/git:2-debian-10
