@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6.0-debian-10`, `6.0.5-debian-10-r6`, `6.0`, `6.0.5`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.0.5-debian-10-r6/6.0/debian-10/Dockerfile)
-* [`5.0-debian-10`, `5.0.9-debian-10-r52`, `5.0`, `5.0.9` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.9-debian-10-r52/5.0/debian-10/Dockerfile)
+* [`5.0-debian-10`, `5.0.9-debian-10-r53`, `5.0`, `5.0.9` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.9-debian-10-r53/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-cluster GitHub repo](https://github.com/bitnami/bitnami-docker-redis-cluster).
 
@@ -157,6 +157,13 @@ The following env vars are supported for this container:
 | `REDIS_NODES`             | String delimited by spaces containing the hostnames of all of the nodes that will be part of the cluster                                    |
 | `REDIS_ANNOUNCE_IP` | IP that the node should announce, used for non dynamic ip environents |
 | `REDIS_CLUSTER_DYNAMIC_IPS` | Set to `no` if your Redis cluster will be created with statical IPs. Default: `yes` |
+| `REDIS_TLS_ENABLED` | Whether to enable TLS for traffic or not. Defaults to `no`. |
+| `REDIS_TLS_PORT` | Port used for TLS secure traffic. Defaults to `6379`. |
+| `REDIS_TLS_CERT_FILE` | File containing the certificate file for the TSL traffic. No defaults. |
+| `REDIS_TLS_KEY_FILE` | File containing the key for certificate. No defaults. |
+| `REDIS_TLS_CA_FILE` | File containing the CA of the certificate. No defaults. |
+| `REDIS_TLS_DH_PARAMS_FILE` | File containing DH params (in order to support DH based ciphers). No defaults. |
+| `REDIS_TLS_AUTH_CLIENTS` | Whether to require clients to authenticate or not. Defaults to `yes`. |
 
 Once all the Redis nodes are running you need to execute command like the following to initiate the cluster:
 
@@ -165,6 +172,45 @@ redis-cli --cluster create node1:port node2:port --cluster-replicas 1 --cluster-
 ```
 
 Where you can add all the `node:port` that you want. The `--cluster-replicas` parameters indicates how many slaves you want to have for every master.
+
+## Securing Redis Cluster traffic
+
+Starting with version 6, Redis adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the aforementioned `REDIS_TLS_*` enviroment variables to configure the application.
+
+When enabling TLS, conventional standard traffic is disabled by default. However this new feature is not mutually exclusive, which means it is possible to listen to both TLS and non-TLS connection simultaneously. To enable non-TLS traffic, set `REDIS_TLS_PORT` to another port different than `0`.
+
+1. Using `docker run`
+
+    ```console
+    $ docker run --name redis-cluster \
+        -v /path/to/certs:/opt/bitnami/redis/certs \
+        -v /path/to/redis-cluster-persistence:/bitnami \
+        -e ALLOW_EMPTY_PASSWORD=yes \
+        -e REDIS_TLS_ENABLED=yes \
+        -e REDIS_TLS_CERT_FILE=/opt/bitnami/redis/certs/redis.crt \
+        -e REDIS_TLS_KEY_FILE=/opt/bitnami/redis/certs/redis.key \
+        -e REDIS_TLS_CA_FILE=/opt/bitnami/redis/certs/redisCA.crt \
+        bitnami/redis-cluster:latest
+    ```
+
+2. Modifying the `docker-compose.yml` file present in this repository:
+
+    ```yaml
+      redis-cluster:
+      ...
+        environment:
+          ...
+          - REDIS_TLS_ENABLED=yes
+          - REDIS_TLS_CERT_FILE=/opt/bitnami/redis/certs/redis.crt
+          - REDIS_TLS_KEY_FILE=/opt/bitnami/redis/certs/redis.key
+          - REDIS_TLS_CA_FILE=/opt/bitnami/redis/certs/redisCA.crt
+        ...
+        volumes:
+          - /path/to/certs:/opt/bitnami/redis/certs
+        ...
+      ...
+    ```
+Alternatively, you may also provide with this configuration in your [custom](https://github.com/bitnami/bitnami-docker-redis-cluster#configuration-file) configuration file.
 
 # Logging
 
