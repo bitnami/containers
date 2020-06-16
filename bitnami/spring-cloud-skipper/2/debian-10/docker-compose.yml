@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  spring-cloud-skipper:
+    image: 'docker.io/bitnami/spring-cloud-skipper:2-debian-10'
+    environment:
+      - SERVER_PORT=7577
+      - SPRING_CLOUD_SKIPPER_DATABASE_URL=jdbc:mariadb://mariadb:3306/skipper?useMysqlMetadata=true
+      - SPRING_CLOUD_SKIPPER_DATABASE_USERNAME=bn_skipper
+      - SPRING_CLOUD_SKIPPER_DATABASE_PASSWORD=bn_skipper
+    ports:
+      - '7577:7577'
+    depends_on:
+      - mariadb
+  mariadb:
+    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    environment:
+      - MARIADB_ROOT_PASSWORD=root_password
+      - MARIADB_USER=bn_skipper
+      - MARIADB_PASSWORD=bn_skipper
+      - MARIADB_DATABASE=skipper
+    volumes:
+      - 'mariadb_data:/bitnami'
+volumes:
+  mariadb_data:
+    driver: local
+  zookeeper_data:
+    driver: local
