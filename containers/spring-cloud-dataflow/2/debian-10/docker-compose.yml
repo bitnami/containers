@@ -1,0 +1,81 @@
+version: '2'
+
+services:
+  spring-cloud-dataflow:
+    image: 'docker.io/bitnami/spring-cloud-dataflow:2-debian-10'
+    restart: always
+    environment:
+      - SERVER_PORT=9393
+      - SPRING_CLOUD_DATAFLOW_DATABASE_URL=jdbc:mariadb://mariadb-dataflow:3306/dataflow?useMysqlMetadata=true
+      - SPRING_CLOUD_DATAFLOW_DATABASE_USERNAME=bn_dataflow
+      - SPRING_CLOUD_DATAFLOW_DATABASE_PASSWORD=bn_dataflow
+      # enable advances features
+      - SPRING_CLOUD_DATAFLOW_FEATURES_STREAMS_ENABLED=true
+      - SPRING_CLOUD_DATAFLOW_FEATURES_TASKS_ENABLED=true
+      # configure dataflow stream
+      - SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI=http://spring-cloud-skipper:7577/api
+      - SPRING_CLOUD_DATAFLOW_STREAM_RABBITMQ_HOST=rabbitmq
+      - SPRING_CLOUD_DATAFLOW_STREAM_RABBITMQ_PORT=5672
+      - SPRING_CLOUD_DATAFLOW_STREAM_RABBITMQ_USERNAME=user
+      - SPRING_CLOUD_DATAFLOW_STREAM_RABBITMQ_PASSWORD=bitnami
+    ports:
+      - '9393:9393'
+      - '9000-9099:9000-9099'
+    depends_on:
+      - mariadb-dataflow
+      - spring-cloud-skipper
+
+  spring-cloud-skipper:
+    image: 'docker.io/bitnami/spring-cloud-skipper:2-debian-10'
+    restart: always
+    environment:
+      - SERVER_PORT=7577
+      - SPRING_CLOUD_SKIPPER_DATABASE_URL=jdbc:mariadb://mariadb-skipper:3306/skipper?useMysqlMetadata=true
+      - SPRING_CLOUD_SKIPPER_DATABASE_USERNAME=bn_skipper
+      - SPRING_CLOUD_SKIPPER_DATABASE_PASSWORD=bn_skipper
+    ports:
+      - '9100-9199:9100-9199'
+    depends_on:
+      - mariadb-skipper
+      - rabbitmq
+
+  mariadb-dataflow:
+    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    environment:
+      - MARIADB_ROOT_PASSWORD=root_password
+      - MARIADB_USER=bn_dataflow
+      - MARIADB_PASSWORD=bn_dataflow
+      - MARIADB_DATABASE=dataflow
+    volumes:
+      - 'mariadb_dataflow_data:/bitnami'
+
+  mariadb-skipper:
+    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    environment:
+      - MARIADB_ROOT_PASSWORD=root_password
+      - MARIADB_USER=bn_skipper
+      - MARIADB_PASSWORD=bn_skipper
+      - MARIADB_DATABASE=skipper
+    volumes:
+      - 'mariadb_skipper_data:/bitnami'
+
+  mariadb-test:
+    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    environment:
+      - MARIADB_ROOT_PASSWORD=root_password
+      - MARIADB_USER=bn_test
+      - MARIADB_PASSWORD=bn_test
+      - MARIADB_DATABASE=test
+
+  rabbitmq:
+    image: 'docker.io/bitnami/rabbitmq:3.8-debian-10'
+    volumes:
+      - 'rabbitmq_data:/bitnami'
+
+volumes:
+  mariadb_dataflow_data:
+    driver: local
+  mariadb_skipper_data:
+    driver: local
+  rabbitmq_data:
+    driver: local
