@@ -29,12 +29,13 @@ rabbitmq_env() {
 export RABBITMQ_VOLUME_DIR="/bitnami/rabbitmq"
 export RABBITMQ_BASE_DIR="/opt/bitnami/rabbitmq"
 export RABBITMQ_BIN_DIR="${RABBITMQ_BASE_DIR}/sbin"
-export RABBITMQ_CONF_DIR="${RABBITMQ_BASE_DIR}/etc/rabbitmq"
 export RABBITMQ_DATA_DIR="${RABBITMQ_VOLUME_DIR}/mnesia"
+export RABBITMQ_CONF_DIR="${RABBITMQ_BASE_DIR}/etc/rabbitmq"
 export RABBITMQ_HOME_DIR="${RABBITMQ_BASE_DIR}/.rabbitmq"
 export RABBITMQ_LIB_DIR="${RABBITMQ_BASE_DIR}/var/lib/rabbitmq"
 export RABBITMQ_LOG_DIR="${RABBITMQ_BASE_DIR}/var/log/rabbitmq"
 export RABBITMQ_PLUGINS_DIR="${RABBITMQ_BASE_DIR}/plugins"
+export RABBITMQ_MOUNTED_CONF_DIR="${RABBITMQ_MOUNTED_CONF_DIR:-${RABBITMQ_VOLUME_DIR}/conf}"
 export PATH="${RABBITMQ_BIN_DIR}:${PATH}"
 
 # OS
@@ -47,7 +48,7 @@ export RABBITMQ_MNESIA_BASE="${RABBITMQ_DATA_DIR}"
 # Settings
 export RABBITMQ_CLUSTER_NODE_NAME="${RABBITMQ_CLUSTER_NODE_NAME:-}"
 export RABBITMQ_CLUSTER_PARTITION_HANDLING="${RABBITMQ_CLUSTER_PARTITION_HANDLING:-ignore}"
-export RABBITMQ_DISK_FREE_LIMIT="${RABBITMQ_DISK_FREE_LIMIT:-{mem_relative, 1.0\}}"
+export RABBITMQ_DISK_FREE_LIMIT="${RABBITMQ_DISK_FREE_LIMIT:-1.0}"
 export RABBITMQ_ERL_COOKIE="${RABBITMQ_ERL_COOKIE:-}"
 export RABBITMQ_HASHED_PASSWORD="${RABBITMQ_HASHED_PASSWORD:-}"
 export RABBITMQ_MANAGER_BIND_IP="${RABBITMQ_MANAGER_BIND_IP:-0.0.0.0}"
@@ -58,8 +59,11 @@ export RABBITMQ_NODE_TYPE="${RABBITMQ_NODE_TYPE:-stats}"
 export RABBITMQ_PASSWORD="${RABBITMQ_PASSWORD:-bitnami}"
 export RABBITMQ_USERNAME="${RABBITMQ_USERNAME:-user}"
 export RABBITMQ_VHOST="${RABBITMQ_VHOST:-/}"
+# Force boot cluster
+export RABBITMQ_FORCE_BOOT="${RABBITMQ_FORCE_BOOT:-no}"
 # Print all log messages to standard output
 export RABBITMQ_LOGS="${RABBITMQ_LOGS:--}"
+# LDAP
 export RABBITMQ_ENABLE_LDAP="${RABBITMQ_ENABLE_LDAP:-no}"
 export RABBITMQ_LDAP_TLS="${RABBITMQ_LDAP_TLS:-no}"
 export RABBITMQ_LDAP_SERVER="${RABBITMQ_LDAP_SERVER:-}"
@@ -128,7 +132,7 @@ rabbitmq_validate() {
         print_validation_error "${RABBITMQ_NODE_TYPE} is not a valid type. You can use 'stats', 'queue-disc' or 'queue-ram'."
     fi
 
-    [[ "$error_code" -eq 0 ]] || exit "$error_code"
+    [[ "$error_code" -eq 0 ]] || return "$error_code"
 }
 
 ########################
@@ -142,53 +146,52 @@ rabbitmq_validate() {
 #########################
 rabbitmq_create_config_file() {
     debug "Creating configuration file..."
-    local auth_backend=""
-    local separator=""
 
-    is_boolean_yes "$RABBITMQ_ENABLE_LDAP" && auth_backend="{auth_backends, [rabbit_auth_backend_ldap]},"
-    is_boolean_yes "$RABBITMQ_LDAP_TLS" && separator=","
+    cat > "${RABBITMQ_CONF_DIR}/rabbitmq.conf" <<EOF
+## Networking
+listeners.tcp.default = $RABBITMQ_NODE_PORT_NUMBER
 
-    cat > "${RABBITMQ_CONF_DIR}/rabbitmq.config" <<EOF
-[
-  {rabbit,
-    [
-      $auth_backend
-      {tcp_listeners, [$RABBITMQ_NODE_PORT_NUMBER]},
-      {disk_free_limit, $RABBITMQ_DISK_FREE_LIMIT},
-      {cluster_partition_handling, $RABBITMQ_CLUSTER_PARTITION_HANDLING},
-      {default_vhost, <<"$RABBITMQ_VHOST">>},
-      {default_user, <<"$RABBITMQ_USERNAME">>},
-      {default_permissions, [<<".*">>, <<".*">>, <<".*">>]}
+## On first start RabbitMQ will create a vhost and a user. These
+## config items control what gets created
+default_vhost = $RABBITMQ_VHOST
+default_user = $RABBITMQ_USERNAME
+default_permissions.configure = .*
+default_permissions.read = .*
+default_permissions.write = .*
+
+## Clustering
+cluster_partition_handling = $RABBITMQ_CLUSTER_PARTITION_HANDLING
+
+## Set a limit relative to total available RAM
+disk_free_limit.relative = $RABBITMQ_DISK_FREE_LIMIT
+
 EOF
 
     if is_boolean_yes "$RABBITMQ_ENABLE_LDAP"; then
-        cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.config" <<EOF
-    ]
-  },
-  {rabbitmq_auth_backend_ldap,
-    [
-     {servers,               ["$RABBITMQ_LDAP_SERVER"]},
-     {user_dn_pattern,       "$RABBITMQ_LDAP_USER_DN_PATTERN"},
-     {port,                  $RABBITMQ_LDAP_SERVER_PORT}$separator
+        cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.conf" <<EOF
+## Select an authentication/authorisation backend to use
+auth_backends.1 = rabbit_auth_backend_ldap
+auth_backends.2 = internal
+
+## Connecting to the LDAP server(s)
+auth_ldap.servers.1 = $RABBITMQ_LDAP_SERVER
+auth_ldap.port = $RABBITMQ_LDAP_SERVER_PORT
+auth_ldap.user_dn_pattern = $RABBITMQ_LDAP_USER_DN_PATTERN
+
 EOF
 
         if is_boolean_yes "$RABBITMQ_LDAP_TLS"; then
-            cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.config" <<EOF
-     {use_ssl,               true}
+            cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.conf" <<EOF
+auth_ldap.use_ssl = true
+
 EOF
         fi
     fi
 
-    cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.config" <<EOF
-    ]
-  },
-  {rabbitmq_management,
-    [
-      {listener, [{port, $RABBITMQ_MANAGER_PORT_NUMBER}, {ip, "$RABBITMQ_MANAGER_BIND_IP"}]},
-      {strict_transport_security, "max-age=0;"}
-    ]
-  }
-].
+    cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.conf" <<EOF
+## Management
+management.tcp.port = $RABBITMQ_MANAGER_PORT_NUMBER
+management.tcp.ip = $RABBITMQ_MANAGER_BIND_IP
 EOF
 }
 
@@ -211,6 +214,32 @@ EOF
 }
 
 ########################
+# Creates RabbitMQ environment file
+# Globals:
+#   RABBITMQ_CONF_DIR
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+rabbitmq_create_enabled_plugins_file() {
+    debug "Creating enabled_plugins file..."
+    local plugins="rabbitmq_management_agent"
+
+    if [[ -n "${RABBITMQ_PLUGINS:-}" ]]; then
+        plugins="$RABBITMQ_PLUGINS"
+    else
+        if [[ "$RABBITMQ_NODE_TYPE" = "stats" ]]; then
+            plugins="rabbitmq_management"
+        fi
+        is_boolean_yes "$RABBITMQ_ENABLE_LDAP" && plugins="${plugins}, rabbitmq_auth_backend_ldap"
+    fi
+    cat > "${RABBITMQ_CONF_DIR}/enabled_plugins" <<EOF
+[${plugins}].
+EOF
+}
+
+########################
 # Creates RabbitMQ Erlang cookie
 # Globals:
 #   RABBITMQ_ERL_COOKIE
@@ -229,25 +258,6 @@ rabbitmq_create_erlang_cookie() {
     fi
 
     echo "$RABBITMQ_ERL_COOKIE" > "${RABBITMQ_HOME_DIR}/.erlang.cookie"
-}
-
-########################
-# Enables a RabbitMQ plugin
-# Globals:
-#   RABBITMQ_BIN_DIR
-#   BITNAMI_DEBUG
-# Arguments:
-#   $1 - Plugin to enable
-# Returns:
-#   None
-#########################
-rabbitmq_enable_plugin() {
-    local plugin="${1:?plugin is required}"
-    debug "Enabling plugin '${plugin}'..."
-
-    if ! debug_execute "${RABBITMQ_BIN_DIR}/rabbitmq-plugins" "enable" "--offline" "$plugin"; then
-        warn "Couldn't enable plugin '${plugin}'."
-    fi
 }
 
 ########################
@@ -300,23 +310,15 @@ node_is_running() {
 rabbitmq_start_bg() {
     is_rabbitmq_running && return
     info "Starting RabbitMQ in background..."
-    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-        "${RABBITMQ_BIN_DIR}/rabbitmq-server" &
-    else
-        "${RABBITMQ_BIN_DIR}/rabbitmq-server" >/dev/null 2>&1 &
-    fi
+    local start_command=("$RABBITMQ_BIN_DIR/rabbitmq-server")
+    am_i_root && start_command=("gosu" "$RABBITMQ_DAEMON_USER" "${start_command[@]}")
+    debug_execute "${start_command[@]}" &
     export RABBITMQ_PID="$!"
 
-    local counter=0
-    while ! "${RABBITMQ_BIN_DIR}/rabbitmqctl" wait --pid "$RABBITMQ_PID" --timeout 5; do
-        debug "Waiting for RabbitMQ to start..."
-        counter=$((counter + 1))
-
-        if [[ $counter -eq 10 ]]; then
-            error "Couldn't start RabbitMQ in background."
-            exit 1
-        fi
-    done
+    if ! retry_while "debug_execute ${RABBITMQ_BIN_DIR}/rabbitmqctl wait --pid $RABBITMQ_PID --timeout 5" 10 10; then
+        error "Couldn't start RabbitMQ in background."
+        return 1
+    fi
 }
 
 ########################
@@ -334,13 +336,9 @@ rabbitmq_stop() {
     info "Stopping RabbitMQ..."
 
     debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" stop
-
-    local counter=10
-    while [[ "$counter" -ne 0 ]] && is_rabbitmq_running; do
-        debug "Waiting for RabbitMQ to stop..."
-        sleep 1
-        counter=$((counter - 1))
-    done
+    retry_while "is_rabbitmq_running" 10 1
+    # We give two extra seconds for halting Erlang VM
+    sleep 2
 }
 
 ########################
@@ -361,32 +359,7 @@ rabbitmq_change_password() {
 
     if ! debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" change_password "$user" "$password"; then
         error "Couldn't change password for user '${user}'."
-        exit 1
-    fi
-}
-
-########################
-# Migrate old custom configuration files
-# Globals:
-#   RABBITMQ_CONF_DIR
-#   RABBITMQ_VOLUME_DIR
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-migrate_old_configuration() {
-    debug "Persisted configuration detected. Migrating any existing configuration files..."
-    warn "Configuration files won't be persisted anymore!"
-
-    cp -Lr "${RABBITMQ_VOLUME_DIR}/conf/." "$RABBITMQ_CONF_DIR"
-    cp -Lr "${RABBITMQ_VOLUME_DIR}/var/lib/rabbitmq/mnesia" "$RABBITMQ_VOLUME_DIR"
-
-    if am_i_root; then
-        [[ -e "${RABBITMQ_VOLUME_DIR}/.initialized" ]] && rm "${RABBITMQ_VOLUME_DIR}/.initialized"
-        rm -rf "${RABBITMQ_VOLUME_DIR}/conf" "${RABBITMQ_VOLUME_DIR:?}/var" "${RABBITMQ_VOLUME_DIR}/.rabbitmq"
-    else
-        warn "Old configuration migrated, please manually remove the 'conf', 'var' and '.rabbitmq' directories from the volume."
+        return 1
     fi
 }
 
@@ -411,20 +384,15 @@ rabbitmq_join_cluster() {
     debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" stop_app
 
     local counter=0
-    while ! debug_execute "${RABBITMQ_BIN_DIR}/rabbitmq-plugins" --node "$clusternode" is_enabled rabbitmq_management; do
-        debug "Waiting for ${clusternode} to be ready..."
-        counter=$((counter + 1))
-        sleep 1
-        if [[ $counter -eq 120 ]]; then
-            error "Node ${clusternode} is not running."
-            exit 1
-        fi
-    done
+    if ! retry_while "debug_execute ${RABBITMQ_BIN_DIR}/rabbitmq-plugins --node $clusternode is_enabled rabbitmq_management" 120 1; then
+        error "Node ${clusternode} is not running."
+        return 1
+    fi
 
     info "Clustering with ${clusternode}"
     if ! debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" join_cluster "${join_cluster_args[@]}"; then
         error "Couldn't cluster with node '${clusternode}'."
-        exit 1
+        return 1
     fi
 
     debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" start_app
@@ -441,44 +409,42 @@ rabbitmq_join_cluster() {
 #########################
 rabbitmq_initialize() {
     info "Initializing RabbitMQ..."
-    local skip_setup=false
 
-    ! is_dir_empty "$RABBITMQ_DATA_DIR" && skip_setup=true
-
-    # Persisted configuration files from old versions
-    ! is_dir_empty "$RABBITMQ_VOLUME_DIR" && [[ -d "${RABBITMQ_VOLUME_DIR}/conf" ]] && migrate_old_configuration && skip_setup=true
-
-    [[ ! -f "${RABBITMQ_CONF_DIR}/rabbitmq.config" ]] && rabbitmq_create_config_file
+    # Check for mounted configuration files
+    if ! is_dir_empty "$RABBITMQ_MOUNTED_CONF_DIR"; then
+        cp -Lr "$RABBITMQ_MOUNTED_CONF_DIR"/* "$RABBITMQ_CONF_DIR"
+    fi
+    [[ ! -f "${RABBITMQ_CONF_DIR}/rabbitmq.conf" ]] && rabbitmq_create_config_file
     [[ ! -f "${RABBITMQ_CONF_DIR}/rabbit-env.conf" ]] && rabbitmq_create_environment_file
+    [[ ! -f "${RABBITMQ_CONF_DIR}/enabled_plugins" ]] && rabbitmq_create_enabled_plugins_file
 
+    [[ ! -f "${RABBITMQ_LIB_DIR}/.start" ]] && touch "${RABBITMQ_LIB_DIR}/.start"
     [[ ! -f "${RABBITMQ_HOME_DIR}/.erlang.cookie" ]] && rabbitmq_create_erlang_cookie
     chmod 400 "${RABBITMQ_HOME_DIR}/.erlang.cookie"
     ln -sf "${RABBITMQ_HOME_DIR}/.erlang.cookie" "${RABBITMQ_LIB_DIR}/.erlang.cookie"
+
+    # Resources limits: maximum number of open file descriptors
+    [[ -n "${RABBITMQ_ULIMIT_NOFILES:-}" ]] && ulimit -n "${RABBITMQ_ULIMIT_NOFILES}"
 
     debug "Ensuring expected directories/files exist..."
     for dir in "$RABBITMQ_DATA_DIR" "$RABBITMQ_LIB_DIR" "$RABBITMQ_HOME_DIR"; do
         ensure_dir_exists "$dir"
         am_i_root && chown -R "$RABBITMQ_DAEMON_USER:$RABBITMQ_DAEMON_GROUP" "$dir"
     done
-    if "$skip_setup"; then
+
+    if ! find "$RABBITMQ_DATA_DIR" -mindepth 1 -maxdepth 1 -not -name ".snapshot" -not -name "lost+found" -exec false {} +; then
         info "Persisted data detected. Restoring..."
+        if is_boolean_yes "$RABBITMQ_FORCE_BOOT" && ! is_dir_empty "${RABBITMQ_DATA_DIR}/${RABBITMQ_NODE_NAME}"; then
+            # ref: https://www.rabbitmq.com/rabbitmqctl.8.html#force_boot
+            warm "Forcing node to start..."
+            debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" force_boot
+        fi
     else
         ! is_rabbitmq_running && rabbitmq_start_bg
 
         rabbitmq_change_password "$RABBITMQ_USERNAME" "$RABBITMQ_PASSWORD"
-
         if [[ "$RABBITMQ_NODE_TYPE" != "stats" ]] && [[ -n "$RABBITMQ_CLUSTER_NODE_NAME" ]]; then
             rabbitmq_join_cluster "$RABBITMQ_CLUSTER_NODE_NAME" "$RABBITMQ_NODE_TYPE"
         fi
-    fi
-
-    if [[ "$RABBITMQ_NODE_TYPE" = "stats" ]]; then
-        rabbitmq_enable_plugin "rabbitmq_management"
-    else
-        rabbitmq_enable_plugin "rabbitmq_management_agent"
-    fi
-
-    if is_boolean_yes "$RABBITMQ_ENABLE_LDAP"; then
-        rabbitmq_enable_plugin "rabbitmq_auth_backend_ldap"
     fi
 }
