@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  spring-cloud-dataflow-shell:
+    image: docker.io/bitnami/spring-cloud-dataflow-shell:2-debian-10
