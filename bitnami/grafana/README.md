@@ -36,7 +36,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7-debian-10`, `7.0.3-debian-10-r7`, `7`, `7.0.3`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/7.0.3-debian-10-r7/7/debian-10/Dockerfile)
+* [`7-debian-10`, `7.0.3-debian-10-r8`, `7`, `7.0.3`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/7.0.3-debian-10-r8/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -90,14 +90,14 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 ### Dev config
 
-Create a `custom.ini` in the conf (`/opt/bitnami/grafana/conf`) directory to override default configuration options. You only need to add the options you want to override. Config files are applied in the order of:
+Update the `grafana.ini` configuration file in the `/opt/bitnami/grafana/conf` directory to override default configuration options. You only need to add the options you want to override. Config files are applied in the order of:
 
 ```
 grafana.ini
-custom.ini
+default.ini
 ```
 
-In your `custom.ini` uncomment (remove the leading ;) sign. And set `app_mode = development`.
+To enable development mode, edit the `grafana.ini` file and set `app_mode = development`.
 
 ### Production config
 
