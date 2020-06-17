@@ -16,7 +16,7 @@ eval "$(rabbitmq_env)"
 
 info "** Starting RabbitMQ **"
 if am_i_root; then
-    exec gosu "$RABBITMQ_DAEMON_USER" exec "${RABBITMQ_BIN_DIR}/rabbitmq-server"
+    exec gosu "$RABBITMQ_DAEMON_USER" "${RABBITMQ_BIN_DIR}/rabbitmq-server"
 else
     exec "${RABBITMQ_BIN_DIR}/rabbitmq-server"
 fi

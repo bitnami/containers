@@ -48,7 +48,8 @@ Non-root container images add an extra layer of security and are generally recom
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
-* [`3.8-debian-10`, `3.8.5-debian-10-r2`, `3.8`, `3.8.5`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.5-debian-10-r2/3.8/debian-10/Dockerfile)
+
+* [`3.8-debian-10`, `3.8.5-debian-10-r3`, `3.8`, `3.8.5`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.5-debian-10-r3/3.8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
@@ -417,7 +418,7 @@ $ docker-compose up rabbitmq
 
 ## Notable changes
 
-### 3.8.5-debian-10-r3
+### 3.8.3-debian-10-r109
 
 * The default configuration file is created following the "sysctl" or "ini-like" format instead of using Erlang terms. Check [Official documentation](https://www.rabbitmq.com/configure.html#config-file-formats) for more information about supported formats.
 * Migrating data/configuration from unsupported locations is not performed anymore.

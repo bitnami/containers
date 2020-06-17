@@ -24,4 +24,4 @@ if [[ -f "${RABBITMQ_LIB_DIR}/.start" ]]; then
     exit ${RESULT}
 fi
 
-/opt/bitnami/scripts/rabbitmq/apicheck.sh $1 $2
+/opt/bitnami/scripts/rabbitmq/apicheck.sh "$1" "$2"
