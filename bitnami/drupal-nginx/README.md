@@ -35,6 +35,14 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 # Supported tags and respective `Dockerfile` links
 
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
+
+
+* [`9-debian-10`, `9.0.1-debian-10-r1`, `9`, `9.0.1`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/9.0.1-debian-10-r1/9/debian-10/Dockerfile)
+* [`8-debian-10`, `8.9.1-debian-10-r0`, `8`, `8.9.1` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/8.9.1-debian-10-r0/8/debian-10/Dockerfile)
+
+Subscribe to project updates by watching the [bitnami/drupal-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-drupal-nginx).
+
 # Prerequisites
 
 To run this application you need Docker Engine 1.10.0. Docker Compose is recommended with a version 1.6.0 or later.
