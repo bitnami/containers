@@ -674,10 +674,16 @@ mysql_install_db() {
 #########################
 mysql_upgrade() {
     local -a args=("--defaults-file=${DB_CONF_FILE}" "-u" "$DB_ROOT_USER" "--force")
-    local major_version
+    local major_version minor_version patch_version
     major_version="$(get_sematic_version "$(mysql_get_version)" 1)"
+    minor_version="$(get_sematic_version "$(mysql_get_version)" 2)"
+    patch_version="$(get_sematic_version "$(mysql_get_version)" 3)"
     info "Running mysql_upgrade"
-    if [[ "$DB_FLAVOR" = "mysql" ]] && [[ "$major_version" -ge "8" ]]; then
+    if [[ "$DB_FLAVOR" = "mysql" ]] && [[
+        "$major_version" -gt "8"
+        || ( "$major_version" -eq "8" && "$minor_version" -gt "0" )
+        || ( "$major_version" -eq "8" && "$minor_version" -eq "0" && "$patch_version" -ge "16" )
+    ]]; then
         mysql_stop
         mysql_start_bg "--upgrade=FORCE"
     else
