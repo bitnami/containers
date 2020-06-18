@@ -11,17 +11,11 @@ set -o pipefail
 
 # Load libraries
 . /opt/bitnami/scripts/libfs.sh
-. /opt/bitnami/scripts/libspringclouddataflow.sh
 
 # Load Spring Cloud Data Flow environment variables
 . /opt/bitnami/scripts/spring-cloud-dataflow-env.sh
 
-# Configure Spring Cloud Data Flow options based on build-time defaults
-info "Configuring default Spring Cloud Data Flow options"
-ensure_dir_exists "$SPRING_CLOUD_DATAFLOW_CONF_DIR"
-dataflow_create_default_config
-
-for dir in "${SPRING_CLOUD_DATAFLOW_VOLUME_DIR}" "${SPRING_CLOUD_DATAFLOW_CONF_DIR}" "${SPRING_CLOUD_DATAFLOW_LOGS_DIR}" "${SPRING_CLOUD_DATAFLOW_TMP_DIR}"; do
+for dir in "${SPRING_CLOUD_DATAFLOW_VOLUME_DIR}" "${SPRING_CLOUD_DATAFLOW_CONF_DIR}" "${SPRING_CLOUD_DATAFLOW_M2_DIR}"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
