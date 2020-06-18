@@ -6,21 +6,24 @@ services:
     restart: always
     environment:
       - SERVER_PORT=9393
-      - SPRING_CLOUD_DATAFLOW_DATABASE_URL=jdbc:mariadb://mariadb-dataflow:3306/dataflow?useMysqlMetadata=true
-      - SPRING_CLOUD_DATAFLOW_DATABASE_USERNAME=bn_dataflow
-      - SPRING_CLOUD_DATAFLOW_DATABASE_PASSWORD=bn_dataflow
-      # enable advances features
+      # configuring database
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb-dataflow:3306/dataflow?useMysqlMetadata=true
+      - SPRING_DATASOURCE_USERNAME=bn_dataflow
+      - SPRING_DATASOURCE_PASSWORD=bn_dataflow
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.mariadb.jdbc.Driver
+      # we use mariadb 10.2+ so we need to set hibernate dialect.
+      - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDB102Dialect
+      # enable advance features
       - SPRING_CLOUD_DATAFLOW_FEATURES_STREAMS_ENABLED=true
       - SPRING_CLOUD_DATAFLOW_FEATURES_TASKS_ENABLED=true
       # configure dataflow stream
       - SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI=http://spring-cloud-skipper:7577/api
-      - SPRING_CLOUD_DATAFLOW_STREAM_RABBITMQ_HOST=rabbitmq
-      - SPRING_CLOUD_DATAFLOW_STREAM_RABBITMQ_PORT=5672
-      - SPRING_CLOUD_DATAFLOW_STREAM_RABBITMQ_USERNAME=user
-      - SPRING_CLOUD_DATAFLOW_STREAM_RABBITMQ_PASSWORD=bitnami
+      - spring.cloud.dataflow.applicationProperties.stream.spring.rabbitmq.host=rabbitmq
+      - spring.cloud.dataflow.applicationProperties.stream.spring.rabbitmq.port=5672
+      - spring.cloud.dataflow.applicationProperties.stream.spring.rabbitmq.username=user
+      - spring.cloud.dataflow.applicationProperties.stream.spring.rabbitmq.password=bitnami
     ports:
       - '9393:9393'
-      - '9000-9099:9000-9099'
     depends_on:
       - mariadb-dataflow
       - spring-cloud-skipper
@@ -30,11 +33,15 @@ services:
     restart: always
     environment:
       - SERVER_PORT=7577
-      - SPRING_CLOUD_SKIPPER_DATABASE_URL=jdbc:mariadb://mariadb-skipper:3306/skipper?useMysqlMetadata=true
-      - SPRING_CLOUD_SKIPPER_DATABASE_USERNAME=bn_skipper
-      - SPRING_CLOUD_SKIPPER_DATABASE_PASSWORD=bn_skipper
+      - SPRING_CLOUD_SKIPPER_SERVER_PLATFORM_LOCAL_ACCOUNTS_DEFAULT_PORTRANGE_LOW=20000
+      - SPRING_CLOUD_SKIPPER_SERVER_PLATFORM_LOCAL_ACCOUNTS_DEFAULT_PORTRANGE_HIGH=20100
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb-skipper:3306/skipper?useMysqlMetadata=true
+      - SPRING_DATASOURCE_USERNAME=bn_skipper
+      - SPRING_DATASOURCE_PASSWORD=bn_skipper
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.mariadb.jdbc.Driver
+      - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDB102Dialect
     ports:
-      - '9100-9199:9100-9199'
+      - "20000-20100:20000-20100"
     depends_on:
       - mariadb-skipper
       - rabbitmq

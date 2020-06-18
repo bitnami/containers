@@ -11,7 +11,6 @@ set -o pipefail
 
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
-. /opt/bitnami/scripts/libspringclouddataflow.sh
 
 # Load Spring Cloud Data Flow environment variables
 . /opt/bitnami/scripts/spring-cloud-dataflow-env.sh

@@ -26,7 +26,7 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/spring-cloud-dataflow?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Thanos in Kubernetes?
+# How to deploy Data Flow in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Spring Cloud Data Flow Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/spring-cloud-dataflow).
 
@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.5.1-debian-10-r1`, `2`, `2.5.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow/blob/2.5.1-debian-10-r1/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.5.1-debian-10-r2`, `2`, `2.5.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow/blob/2.5.1-debian-10-r2/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spring-cloud-dataflow GitHub repo](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow).
 
@@ -71,11 +71,16 @@ You can use some environment variable in order to configure the deployment of sp
 
 A relational database is used to store stream and task definitions as well as the state of executed tasks. Spring Cloud Data Flow provides schemas for H2, MySQL, Oracle, PostgreSQL, Db2, and SQL Server. Use the following environment to configure the connection.
 
-- SPRING_CLOUD_DATAFLOW_DATABASE_URL=jdbc:mariadb://mariadb-dataflow:3306/dataflow?useMysqlMetadata=true
-- SPRING_CLOUD_DATAFLOW_DATABASE_USERNAME=bn_dataflow
-- SPRING_CLOUD_DATAFLOW_DATABASE_PASSWORD=bn_dataflow
+- SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb-dataflow:3306/dataflow?useMysqlMetadata=true
+- SPRING_DATASOURCE_USERNAME=bn_dataflow
+- SPRING_DATASOURCE_PASSWORD=bn_dataflow
+- SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.mariadb.jdbc.Driver
 
-## Configuring advances features
+If you are using MariaDB 10.2 or greater, you must also set the following environment variable:
+
+- spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDB102Dialect
+
+## Configuring additional features
 
 Spring Cloud Data Flow Server offers specific set of features that can be enabled/disabled when launching.
 
@@ -90,15 +95,17 @@ In order to deploy streams using data flow you will require [Spring Cloud Skippe
 
 ### Using RabbitMQ
 
-- SPRING_CLOUD_DATAFLOW_STREAM_RABBITMQ_HOST=rabbitmq
-- SPRING_CLOUD_DATAFLOW_STREAM_RABBITMQ_PORT=5672
-- SPRING_CLOUD_DATAFLOW_STREAM_RABBITMQ_USERNAME=user
-- SPRING_CLOUD_DATAFLOW_STREAM_RABBITMQ_PASSWORD=bitnami
+- spring.cloud.dataflow.applicationProperties.stream.spring.rabbitmq.host=rabbitmq
+- spring.cloud.dataflow.applicationProperties.stream.spring.rabbitmq.port=5672
+- spring.cloud.dataflow.applicationProperties.stream.spring.rabbitmq.username=user
+- spring.cloud.dataflow.applicationProperties.stream.spring.rabbitmq.password=bitnami
 
 ### Using Kafka
 
-- SPRING_CLOUD_DATAFLOW_STREAM_KAFKA_URI=PLAINTEXT://kafka-broker:9092
-- SPRING_CLOUD_DATAFLOW_STREAM_ZOOKEEPER_URI=zookeeper:2181
+- spring.cloud.dataflow.applicationProperties.stream.spring.cloud.stream.kafka.binder.brokers=PLAINTEXT://kafka-broker:9092
+- spring.cloud.dataflow.applicationProperties.stream.spring.cloud.stream.kafka.streams.binder.brokers=PLAINTEXT://kafka-broker:9092
+- spring.cloud.dataflow.applicationProperties.stream.spring.cloud.stream.kafka.binder.zkNodes=zookeeper:2181
+- spring.cloud.dataflow.applicationProperties.stream.spring.cloud.stream.kafka.streams.binder.zkNodes=zookeeper:2181
 
 Consult the [spring-cloud-dataflow Reference Documentation](https://docs.spring.io/spring-cloud-dataflow/docs/current/reference/htmlsingle/#configuration-local) to find the completed list of documentation.
 
