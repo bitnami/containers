@@ -13,8 +13,7 @@ set -o pipefail
 . /opt/bitnami/scripts/librepmgr.sh
 
 # Load PostgreSQL & repmgr environment variables
-eval "$(repmgr_env)"
-eval "$(postgresql_env)"
+. /opt/bitnami/scripts/postgresql-env.sh
 
 readonly repmgr_flags=("--pid-file=$REPMGR_PID_FILE" "-f" "$REPMGR_CONF_FILE" "--daemonize=false")
 readonly repmgr_cmd=$(command -v repmgrd)
