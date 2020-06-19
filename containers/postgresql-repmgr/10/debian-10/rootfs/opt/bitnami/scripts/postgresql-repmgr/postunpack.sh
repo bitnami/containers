@@ -9,13 +9,13 @@
 . /opt/bitnami/scripts/librepmgr.sh
 
 # Load PostgreSQL & repmgr environment variables
-eval "$(repmgr_env)"
-eval "$(postgresql_env)"
+. /opt/bitnami/scripts/postgresql-env.sh
 
 for dir in "$POSTGRESQL_INITSCRIPTS_DIR" "$POSTGRESQL_TMP_DIR" "$POSTGRESQL_LOG_DIR" "$POSTGRESQL_CONF_DIR" "${POSTGRESQL_CONF_DIR}/conf.d" "${POSTGRESQL_MOUNTED_CONF_DIR}" "${POSTGRESQL_MOUNTED_CONF_DIR}/conf.d" "$POSTGRESQL_VOLUME_DIR" "$REPMGR_CONF_DIR" "$REPMGR_TMP_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
+
 
 # Copying events handlers
 mv /events "$REPMGR_EVENTS_DIR"
