@@ -26,7 +26,7 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/spring-cloud-skipper?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Thanos in Kubernetes?
+# How to deploy Skipper in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Spring Cloud Data Flow Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/spring-cloud-dataflow).
 
@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.4.1-debian-10-r2`, `2`, `2.4.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper/blob/2.4.1-debian-10-r2/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.4.1-debian-10-r3`, `2`, `2.4.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper/blob/2.4.1-debian-10-r3/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spring-cloud-skipper GitHub repo](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper).
 
@@ -71,9 +71,14 @@ You can use some environment variable in order to configure the deployment of sp
 
 A relational database is used to store stream and task definitions as well as the state of executed tasks. Spring Cloud Skipper provides schemas for H2, MySQL, Oracle, PostgreSQL, Db2, and SQL Server. Use the following environment to configure the connection.
 
-- SPRING_CLOUD_SKIPPER_DATABASE_URL=jdbc:mariadb://mariadb-dataflow:3306/dataflow?useMysqlMetadata=true
-- SPRING_CLOUD_SKIPPER_DATABASE_USERNAME=bn_dataflow
-- SPRING_CLOUD_SKIPPER_DATABASE_PASSWORD=bn_dataflow
+- SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb-skipper:3306/skipper?useMysqlMetadata=true
+- SPRING_DATASOURCE_USERNAME=bn_skipper
+- SPRING_DATASOURCE_PASSWORD=bn_skipper
+- SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.mariadb.jdbc.Driver
+
+If you are using MariaDB 10.2 or greater, you must also set the following environment variable:
+
+- spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDB102Dialect
 
 Consult the [spring-cloud-skipper Reference Documentation](https://docs.spring.io/spring-cloud-skipper/docs/current/reference/htmlsingle/#_local_platform_configuration) to find the completed list of documentation.
 

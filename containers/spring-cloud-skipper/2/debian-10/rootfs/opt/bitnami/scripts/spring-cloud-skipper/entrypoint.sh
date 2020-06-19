@@ -11,7 +11,6 @@ set -o pipefail
 
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
-. /opt/bitnami/scripts/libspringcloudskipper.sh
 
 # Load Spring Cloud Skipper environment variables
 . /opt/bitnami/scripts/spring-cloud-skipper-env.sh
