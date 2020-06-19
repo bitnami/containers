@@ -436,7 +436,7 @@ rabbitmq_initialize() {
         info "Persisted data detected. Restoring..."
         if is_boolean_yes "$RABBITMQ_FORCE_BOOT" && ! is_dir_empty "${RABBITMQ_DATA_DIR}/${RABBITMQ_NODE_NAME}"; then
             # ref: https://www.rabbitmq.com/rabbitmqctl.8.html#force_boot
-            warm "Forcing node to start..."
+            warn "Forcing node to start..."
             debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" force_boot
         fi
     else
