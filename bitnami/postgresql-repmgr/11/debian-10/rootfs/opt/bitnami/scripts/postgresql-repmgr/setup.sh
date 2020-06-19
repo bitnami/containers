@@ -14,8 +14,7 @@ set -o pipefail
 . /opt/bitnami/scripts/librepmgr.sh
 
 # Load PostgreSQL & repmgr environment variables
-eval "$(repmgr_env)"
-eval "$(postgresql_env)"
+. /opt/bitnami/scripts/postgresql-env.sh
 
 # Ensure PostgreSQL & repmgr environment variables settings are valid
 repmgr_validate
