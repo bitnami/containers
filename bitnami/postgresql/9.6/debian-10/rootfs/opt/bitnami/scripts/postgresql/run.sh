@@ -12,9 +12,10 @@ set -o pipefail
 . /opt/bitnami/scripts/libos.sh
 
 # Load PostgreSQL environment variables
-eval "$(postgresql_env)"
-readonly flags=("-D" "$POSTGRESQL_DATA_DIR" "--config-file=$POSTGRESQL_CONF_FILE" "--external_pid_file=$POSTGRESQL_PID_FILE" "--hba_file=$POSTGRESQL_PGHBA_FILE")
-readonly cmd=$(command -v postgres)
+. /opt/bitnami/scripts/postgresql-env.sh
+
+flags=("-D" "$POSTGRESQL_DATA_DIR" "--config-file=$POSTGRESQL_CONF_FILE" "--external_pid_file=$POSTGRESQL_PID_FILE" "--hba_file=$POSTGRESQL_PGHBA_FILE")
+cmd=$(command -v postgres)
 
 info "** Starting PostgreSQL **"
 if am_i_root; then

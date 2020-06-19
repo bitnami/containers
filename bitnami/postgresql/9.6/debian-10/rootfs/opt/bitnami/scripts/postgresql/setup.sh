@@ -15,7 +15,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libpostgresql.sh
 
 # Load PostgreSQL environment variables
-eval "$(postgresql_env)"
+. /opt/bitnami/scripts/postgresql-env.sh
 
 # Ensure PostgreSQL environment variables settings are valid
 postgresql_validate
@@ -33,7 +33,7 @@ postgresql_initialize
 postgresql_custom_init_scripts
 
 # Allow remote connections once the initialization is finished
-if ! postgresql_is_file_external "postgresql.conf"; then
+if ! postgresql_is_file_external "postgresql.conf" && is_boolean_yes "$POSTGRESQL_ALLOW_REMOTE_CONNECTIONS"; then
     info "Enabling remote connections"
     postgresql_enable_remote_connections
     postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
