@@ -244,8 +244,7 @@ kafka_validate() {
         warn "You set the environment variable ALLOW_PLAINTEXT_LISTENER=$ALLOW_PLAINTEXT_LISTENER. For safety reasons, do not use this flag in a production environment."
     fi
     if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SSL ]]; then
-        # DEPRECATED. Check for jks files in old conf directory to maintain compatibility with Helm chart.
-        if ([[ ! -f "$KAFKA_BASE_DIR"/conf/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_BASE_DIR"/conf/certs/kafka.truststore.jks ]]) \
+        if ([[ ! -f "$KAFKA_CONF_DIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_CONF_DIR"/certs/kafka.truststore.jks ]]) \
             && ([[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.truststore.jks ]]); then
             print_validation_error "In order to configure the TLS encryption for Kafka you must mount your kafka.keystore.jks and kafka.truststore.jks certificates to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
