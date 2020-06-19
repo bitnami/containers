@@ -432,7 +432,7 @@ rabbitmq_initialize() {
         am_i_root && chown -R "$RABBITMQ_DAEMON_USER:$RABBITMQ_DAEMON_GROUP" "$dir"
     done
 
-    if ! find "$RABBITMQ_DATA_DIR" -mindepth 1 -maxdepth 1 -not -name ".snapshot" -not -name "lost+found" -exec false {} +; then
+    if ! is_mounted_dir_empty "$RABBITMQ_DATA_DIR"; then
         info "Persisted data detected. Restoring..."
         if is_boolean_yes "$RABBITMQ_FORCE_BOOT" && ! is_dir_empty "${RABBITMQ_DATA_DIR}/${RABBITMQ_NODE_NAME}"; then
             # ref: https://www.rabbitmq.com/rabbitmqctl.8.html#force_boot
