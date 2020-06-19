@@ -5,9 +5,13 @@ services:
     image: 'docker.io/bitnami/spring-cloud-skipper:2-debian-10'
     environment:
       - SERVER_PORT=7577
-      - SPRING_CLOUD_SKIPPER_DATABASE_URL=jdbc:mariadb://mariadb:3306/skipper?useMysqlMetadata=true
-      - SPRING_CLOUD_SKIPPER_DATABASE_USERNAME=bn_skipper
-      - SPRING_CLOUD_SKIPPER_DATABASE_PASSWORD=bn_skipper
+      - SPRING_CLOUD_SKIPPER_SERVER_PLATFORM_LOCAL_ACCOUNTS_DEFAULT_PORTRANGE_LOW=20000
+      - SPRING_CLOUD_SKIPPER_SERVER_PLATFORM_LOCAL_ACCOUNTS_DEFAULT_PORTRANGE_HIGH=20100
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb:3306/skipper?useMysqlMetadata=true
+      - SPRING_DATASOURCE_USERNAME=bn_skipper
+      - SPRING_DATASOURCE_PASSWORD=bn_skipper
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.mariadb.jdbc.Driver
+      - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDB102Dialect
     ports:
       - '7577:7577'
     depends_on:

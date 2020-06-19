@@ -12,14 +12,33 @@ set -o pipefail
 # Load Generic Libraries
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libos.sh
-. /opt/bitnami/scripts/libspringcloudskipper.sh
 
 # Load Spring Cloud Skipper environment variables
 . /opt/bitnami/scripts/spring-cloud-skipper-env.sh
 
-# Ensure Spring Cloud Skipper environment variables settings are valid
-skipper_validate
 # Ensure 'daemon' user exists when running as 'root'
 am_i_root && ensure_user_exists "$SPRING_CLOUD_DATAFLOW_DAEMON_USER" "$SPRING_CLOUD_DATAFLOW_DAEMON_GROUP"
-# Ensure Spring Cloud Skipper is initialized
-skipper_initialize
+
+# Validations
+# Ensure Spring Cloud Skipper environment variables settings are valid
+info "Validating settings in SPRING_CLOUD_SKIPPER_* env vars"
+error_code=0
+
+print_validation_error() {
+    error "$1"
+    error_code=1
+}
+
+if [[ "$SPRING_CLOUD_KUBERNETES_SECRETS_ENABLE_API" = "true" ]]; then
+    if is_empty_value "$SPRING_CLOUD_KUBERNETES_SECRETS_PATHS"; then
+        print_validation_error "You set the environment variable SPRING_CLOUD_KUBERNETES_SECRETS_ENABLE_API=true. A Kubernetes secrect is expected to be mounted in SPRING_CLOUD_KUBERNETES_SECRETS_PATHS."
+    else
+        warn "Using Kubernetes Secrets."
+    fi
+
+    is_empty_value "$SPRING_CLOUD_KUBERNETES_CONFIG_NAME" && print_validation_error "If SPRING_CLOUD_KUBERNETES_SECRETS_ENABLE_API=true. You must set a ConfigMap name in SPRING_CLOUD_KUBERNETES_CONFIG_NAME."
+fi
+
+! is_empty_value "$SERVER_PORT" && ! validate_port -unprivileged "$SERVER_PORT" && print_validation_error "SERVER_PORT with value = ${SERVER_PORT} is not a valid port."
+
+exit "$error_code"
