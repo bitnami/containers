@@ -12,8 +12,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libpostgresql.sh
 
 # Load PostgreSQL environment variables
-eval "$(postgresql_env)"
-export MODULE=postgresql
+. /opt/bitnami/scripts/postgresql-env.sh
 
 print_welcome_page
 
