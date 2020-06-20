@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="harbor-clair" \
-    BITNAMI_IMAGE_VERSION="2.0.0-debian-10-r15" \
+    BITNAMI_IMAGE_VERSION="2.0.0-debian-10-r16" \
     PATH="/opt/bitnami/git/bin:/opt/bitnami/common/bin:/opt/bitnami/harbor-clair/bin:$PATH"
 
 EXPOSE 6060 6061
