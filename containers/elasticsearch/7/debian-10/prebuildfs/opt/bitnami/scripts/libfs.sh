@@ -60,6 +60,23 @@ is_dir_empty() {
 }
 
 ########################
+# Checks whether a mounted directory is empty or not
+# arguments:
+#   $1 - directory
+# returns:
+#   boolean
+#########################
+is_mounted_dir_empty() {
+    local dir="${1:?missing directory}"
+
+    if is_dir_empty "$dir" || find "$dir" -mindepth 1 -maxdepth 1 -not -name ".snapshot" -not -name "lost+found" -exec false {} +; then
+        true
+    else
+        false
+    fi
+}
+
+########################
 # Checks whether a file can be written to or not
 # arguments:
 #   $1 - file
