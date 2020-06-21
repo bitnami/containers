@@ -21,7 +21,7 @@ RUN echo 'en_GB.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 
 ENV BITNAMI_APP_NAME="elasticsearch-curator" \
-    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r145" \
+    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r146" \
     BITNAMI_PKG_CHMOD="-R g+rwX" \
     HOME="/" \
     LANG="en_US.UTF-8" \
