@@ -1,7 +1,7 @@
 version: '2'
 services:
   mariadb:
-    image: 'docker.io/bitnami/mariadb:10.1-debian-10'
+    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
     environment:
       - MARIADB_USER=bn_moodle
       - MARIADB_DATABASE=bitnami_moodle
