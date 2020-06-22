@@ -25,7 +25,10 @@ set -o pipefail
 [[ ! -f "$PHPPGADMIN_CONF_FILE" ]] && cp "${PHPPGADMIN_BASE_DIR}/conf/config.inc.php-dist" "$PHPPGADMIN_CONF_FILE"
 
 # Ensure the phpPgAdmin base directory exists and has proper permissions
-configure_permissions_ownership "$PHPPGADMIN_BASE_DIR" -d "775" -f "664"
+for dir in "$PHPPGADMIN_BASE_DIR" "$PHPPGADMIN_VOLUME_DIR"; do
+    ensure_dir_exists "$dir"
+    configure_permissions_ownership "$dir" -d "775" -f "664"
+done
 
 # Disable extra login security by default, as it denies logins to the 'postgres' user
 phppgadmin_conf_set "\$conf['extra_login_security']" "$(php_convert_to_boolean "$PHPPGADMIN_DEFAULT_ENABLE_EXTRA_LOGIN_SECURITY")" yes
