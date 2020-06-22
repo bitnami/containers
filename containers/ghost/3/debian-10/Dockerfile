@@ -15,14 +15,14 @@ RUN bitnami-pkg install node-10.21.0-0 --checksum cfaf83891202b5ae631a741a653168
 RUN bitnami-pkg unpack mysql-client-10.3.23-0 --checksum 7af3cead7a38670bed924fbc99e20c67f6244bb5a92642adb4ab6cd307aa9a5e
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
-RUN bitnami-pkg unpack ghost-3.20.3-0 --checksum 914e50a3058c29ba086f8394d6cdb919021a5cc9cfc1b8b5668395e798ffc70f
+RUN bitnami-pkg unpack ghost-3.21.0-0 --checksum a705f39a58a498cf9aa3a5630ed5fd25229a4aa585e309512e5525ef2b650183
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="3.20.3-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="3.21.0-debian-10-r0" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
