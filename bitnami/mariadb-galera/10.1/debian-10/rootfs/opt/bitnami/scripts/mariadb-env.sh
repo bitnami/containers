@@ -82,13 +82,15 @@ export PATH="${DB_SBIN_DIR}:${DB_BIN_DIR}:/opt/bitnami/common/bin:${PATH}"
 # System users (when running with a privileged user)
 export DB_DAEMON_USER="mysql"
 export DB_DAEMON_GROUP="mysql"
-export MARIADB_DEFAULT_PORT_NUMBER="3306"
+
+# Default configuration (build-time)
+export MARIADB_DEFAULT_PORT_NUMBER="3306" # only used at build time
 export DB_DEFAULT_PORT_NUMBER="$MARIADB_DEFAULT_PORT_NUMBER"
-export MARIADB_DEFAULT_CHARACTER_SET="utf8"
+export MARIADB_DEFAULT_CHARACTER_SET="utf8" # only used at build time
 export DB_DEFAULT_CHARACTER_SET="$MARIADB_DEFAULT_CHARACTER_SET"
-export MARIADB_DEFAULT_COLLATE="utf8_general_ci"
+export MARIADB_DEFAULT_COLLATE="utf8_general_ci" # only used at build time
 export DB_DEFAULT_COLLATE="$MARIADB_DEFAULT_COLLATE"
-export MARIADB_DEFAULT_BIND_ADDRESS="0.0.0.0"
+export MARIADB_DEFAULT_BIND_ADDRESS="0.0.0.0" # only used at build time
 export DB_DEFAULT_BIND_ADDRESS="$MARIADB_DEFAULT_BIND_ADDRESS"
 
 # MariaDB Galera authentication.
