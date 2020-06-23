@@ -69,13 +69,15 @@ export PATH="${DB_SBIN_DIR}:${DB_BIN_DIR}:/opt/bitnami/common/bin:${PATH}"
 # System users (when running with a privileged user)
 export DB_DAEMON_USER="mysql"
 export DB_DAEMON_GROUP="mysql"
-export MYSQL_DEFAULT_PORT_NUMBER="3306"
+
+# Default configuration (build-time)
+export MYSQL_DEFAULT_PORT_NUMBER="3306" # only used at build time
 export DB_DEFAULT_PORT_NUMBER="$MYSQL_DEFAULT_PORT_NUMBER"
-export MYSQL_DEFAULT_CHARACTER_SET="utf8"
+export MYSQL_DEFAULT_CHARACTER_SET="utf8" # only used at build time
 export DB_DEFAULT_CHARACTER_SET="$MYSQL_DEFAULT_CHARACTER_SET"
-export MYSQL_DEFAULT_COLLATE="utf8_general_ci"
+export MYSQL_DEFAULT_COLLATE="utf8_general_ci" # only used at build time
 export DB_DEFAULT_COLLATE="$MYSQL_DEFAULT_COLLATE"
-export MYSQL_DEFAULT_BIND_ADDRESS="0.0.0.0"
+export MYSQL_DEFAULT_BIND_ADDRESS="0.0.0.0" # only used at build time
 export DB_DEFAULT_BIND_ADDRESS="$MYSQL_DEFAULT_BIND_ADDRESS"
 
 # MySQL authentication.
