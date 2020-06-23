@@ -25,8 +25,10 @@ set -o pipefail
 [[ ! -f "$PHPMYADMIN_CONF_FILE" ]] && cp "${PHPMYADMIN_BASE_DIR}/config.sample.inc.php" "$PHPMYADMIN_CONF_FILE"
 
 # Ensure the phpMyAdmin 'tmp' directory exists and has proper permissions
-ensure_dir_exists "$PHPMYADMIN_TMP_DIR"
-configure_permissions_ownership "$PHPMYADMIN_BASE_DIR" -d "775" -f "664"
+for dir in "$PHPMYADMIN_BASE_DIR" "$PHPMYADMIN_TMP_DIR" "$PHPMYADMIN_VOLUME_DIR"; do
+    ensure_dir_exists "$dir"
+    configure_permissions_ownership "$dir" -d "775" -f "664"
+done
 
 # Configure phpMyAdmin based on build-time defaults
 info "Configuring default phpMyAdmin options"
