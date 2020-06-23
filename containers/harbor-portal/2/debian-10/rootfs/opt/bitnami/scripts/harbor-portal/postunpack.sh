@@ -24,4 +24,7 @@ replace_in_file "$HARBOR_PORTAL_NGINX_CONF_FILE" "/usr/share/nginx/html" "${HARB
 replace_in_file "$HARBOR_PORTAL_NGINX_CONF_FILE" "/etc/nginx/mime.types" "${NGINX_CONF_DIR}/mime.types" false
 
 cp -a "${HARBOR_PORTAL_NGINX_CONF_DIR}/." "$NGINX_CONF_DIR"
+# Remove the folder, otherwise it will get exposed when accessing via browser
+rm -rf "${HARBOR_PORTAL_NGINX_CONF_DIR}"
+
 chmod -R g+rwX "$NGINX_CONF_DIR"
