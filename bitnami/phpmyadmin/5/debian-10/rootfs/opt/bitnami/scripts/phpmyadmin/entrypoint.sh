@@ -24,6 +24,7 @@ if [[ "$1" = "/opt/bitnami/scripts/$(web_server_type)/run.sh" || "$1" = "/opt/bi
     /opt/bitnami/scripts/"$(web_server_type)"/setup.sh
     /opt/bitnami/scripts/php/setup.sh
     /opt/bitnami/scripts/phpmyadmin/setup.sh
+    /post-init.sh
     info "** phpMyAdmin setup finished! **"
 fi
 
