@@ -53,7 +53,7 @@ export PHP_FPM_CONF_FILE="${PHP_CONF_DIR}/php-fpm.conf"
 export PHP_FPM_PID_FILE="${PHP_TMP_DIR}/php-fpm.pid"
 export PHP_FPM_DEFAULT_LISTEN_ADDRESS="${PHP_TMP_DIR}/www.sock" # only used at build time
 export PHP_FPM_LISTEN_ADDRESS="${PHP_FPM_LISTEN_ADDRESS:-}"
-export PATH="${PHP_FPM_SBIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
+export PATH="${PHP_FPM_SBIN_DIR}:${PHP_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 
 # PHP configuration
 export PHP_UPLOAD_MAX_FILESIZE="${PHP_UPLOAD_MAX_FILESIZE:-}"
