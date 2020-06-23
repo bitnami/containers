@@ -19,7 +19,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/spring-cloud-dataflow/postunpack.sh
 ENV BITNAMI_APP_NAME="spring-cloud-dataflow" \
-    BITNAMI_IMAGE_VERSION="2.5.1-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="2.5.1-debian-10-r7" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
 USER 1001
