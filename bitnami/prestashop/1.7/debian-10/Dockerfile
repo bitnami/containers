@@ -8,7 +8,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl gzip libaio1 libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 procps sudo tar zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
-RUN bitnami-pkg unpack php-7.2.31-3 --checksum f19bb5f9f3d042dc2499655ec2234dd5415e5b394b7bfd4fff4c6994a4642dbf
+RUN bitnami-pkg unpack php-7.2.31-4 --checksum 46205f26857613c2a7e669b79d29ea84f2c02c75c1f00e8b298afc61cb64bea5
 RUN bitnami-pkg unpack apache-2.4.43-4 --checksum e6929d8619f48976f9206bec14cb9634ebe8590225818eea12c27840617f53aa
 RUN bitnami-pkg unpack mysql-client-10.1.45-0 --checksum ab16b1f8b0bedb562cdbc877bf365b03cf518ae24c5389427fbd85ddec378901
 RUN bitnami-pkg install libphp-7.2.31-1 --checksum eeaeea9350f233bcfe5718337f5bbcb99049f2b665cfa98f171a1407c4d58a3f
@@ -26,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-5-debian-10-r58" \
+    BITNAMI_IMAGE_VERSION="1.7.6-5-debian-10-r59" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
