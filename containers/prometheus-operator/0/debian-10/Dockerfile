@@ -14,7 +14,7 @@ RUN ln -sf /opt/bitnami/prometheus-operator/bin/prometheus-config-reloader /bin/
 RUN ln -sf /opt/bitnami/prometheus-operator/bin/operator /bin/operator
 
 ENV BITNAMI_APP_NAME="prometheus-operator" \
-    BITNAMI_IMAGE_VERSION="0.40.0-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="0.40.0-debian-10-r6" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
