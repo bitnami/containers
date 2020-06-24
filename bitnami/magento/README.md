@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.3.5-debian-10-r56`, `2`, `2.3.5`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.3.5-debian-10-r56/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.3.5-debian-10-r58`, `2`, `2.3.5`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.3.5-debian-10-r58/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
 
@@ -170,6 +170,10 @@ In this case you need to specify the directories to mount on the run command. Th
 # Upgrade this application
 
 Bitnami provides up-to-date versions of MariaDB and Magento, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Magento container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
+
+To upgrade the Magento application, follow the [official update guide](https://devdocs.magento.com/guides/v2.4/install-gde/install/cli/dev_update-magento.html).
+
+To upgrade the components included in the Magento container image (such as Apache or PHP), follow these steps:
 
 1. Get the updated images:
 
@@ -371,6 +375,10 @@ volumes:
 ```
 
 # Notable Changes
+
+## 2.3.5-debian-10-r57
+
+- To avoid issues running custom plugins and themes, the container image has been modified to persist the entire Magento `htdocs` directory.  As a consecuence of this change, it is not possible to update the application by changing the image tag anymore, instead, it is needed to [follow the official update guide](https://devdocs.magento.com/guides/v2.3/comp-mgr/cli/cli-upgrade.html).
 
 ## 2.3.1-debian-9-r44 and 2.3.1-ol-7-r53
 
