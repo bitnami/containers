@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack apache-2.4.43-4 --checksum e6929d8619f48976f9206bec14cb96
 RUN bitnami-pkg unpack mysql-client-10.2.32-0 --checksum ae72f4ce3376ede89b971c1ffa11717b8d770f8d26ac3d7ba04b11568ff24c37
 RUN bitnami-pkg install libphp-7.3.19-0 --checksum 9d3e785b7544f374e4943f94795625e9048a89fab109ada62552c5784c68bbbe
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
-RUN bitnami-pkg unpack magento-2.3.5-2 --checksum 6b7758fa66512d700e6b075c7e573972bf90e94ff1f7d9ba36f5349bb68c7681
+RUN bitnami-pkg unpack magento-2.3.5-3 --checksum 65477160e77785ca4e4628b6fb0fdee5449278c7307621ac4ce35ab76b9779bc
 RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -28,7 +28,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.3.5-debian-10-r56" \
+    BITNAMI_IMAGE_VERSION="2.3.5-debian-10-r58" \
     ELASTICSEARCH_HOST="" \
     ELASTICSEARCH_PORT_NUMBER="" \
     EXTERNAL_HTTPS_PORT_NUMBER="443" \
