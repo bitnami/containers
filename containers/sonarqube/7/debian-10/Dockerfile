@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="7.9.3-debian-10-r82" \
+    BITNAMI_IMAGE_VERSION="7.9.3-debian-10-r83" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux" \
