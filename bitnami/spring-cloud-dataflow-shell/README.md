@@ -28,7 +28,7 @@ $ docker run --name spring-cloud-dataflow-shell bitnami/spring-cloud-dataflow-sh
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.5.1-debian-10-r7`, `2`, `2.5.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-shell/blob/2.5.1-debian-10-r7/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.5.1-debian-10-r8`, `2`, `2.5.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-shell/blob/2.5.1-debian-10-r8/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spring-cloud-dataflow-shell GitHub repo](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-shell).
 
