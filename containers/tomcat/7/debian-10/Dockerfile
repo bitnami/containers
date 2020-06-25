@@ -9,17 +9,17 @@ ENV HOME="/" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip libc6 libssl1.1 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.7-1" --checksum e01669f15e2e655613c19eab1b8b533a720d6334766da34190a2a4939f5a0bc8
+RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 procps tar zlib1g
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.7-2" --checksum a79c3f491f7d2f730fbcad82b1c61f496e44b07a7bd87a13478b14ae90ef3e22
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "7.0.104-3" --checksum 0c35dcf42f88638e97621a5b1666eb65eda6e7f0863b3cec1f67096f465e1001
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="7.0.104-debian-10-r37"
+    BITNAMI_IMAGE_VERSION="7.0.104-debian-10-r38"
 
 EXPOSE 8080 8443
 
