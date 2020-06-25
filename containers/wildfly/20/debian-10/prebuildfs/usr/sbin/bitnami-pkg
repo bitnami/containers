@@ -1,0 +1,215 @@
+#!/bin/bash -e
+. /opt/bitnami/base/functions
+
+print_usage() {
+  log "Usage: bitnami-pkg <COMMAND> <PACKAGE>-<VERSION> [OPTIONS] -- [ARGS]"
+  log ""
+  log "Download and install Bitnami packages"
+  log ""
+  log "Commands:"
+  log "  install                    Download and install a package."
+  log "  unpack                     Download and unpack a package."
+  log ""
+  log "Options:"
+  log "  -b, --bucket               Package release bucket (default: stacksmith)."
+  log "  -c, --checksum             SHA256 verification checksum."
+  log "  -h, --help                 Show this help message and exit."
+  log ""
+  log "If the package is already available in the /tmp/bitnami/pkg/cache/"
+  log "directory, the download will be skipped. If there is a corresponding"
+  log "file of the same name post-fixed with .sha256 in the directory,"
+  log "that sha will be used instead of the --checksum option."
+  log ""
+  log "Examples:"
+  log "  - Unpack package"
+  log "    \$ bitnami-pkg unpack nginx-1.9.10-0"
+  log ""
+  log "  - Verify and Install package"
+  log "    \$ bitnami-pkg install nginx-1.9.10-0 --checksum 15565d06b18c2e3710fc08e579ddb3d0e39aa663264a0f7404f0743cb4cdb58d"
+  log ""
+  log "  - Install package with arguments"
+  log "    \$ bitnami-pkg install mariadb-10.1.11-0 -- --password bitnami"
+  log ""
+  log "  - Install package from testing"
+  log "    \$ bitnami-pkg install mariadb-10.1.11-0 --bucket testing"
+  log ""
+}
+
+identify_distro() {
+  distro="${IMAGE_OS:-unknown}"
+  if [ "${distro}" == "unknown" -a -f /etc/os-release ]; then
+    distro="$(grep "^ID=" /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2)-$(grep "^VERSION_ID=" /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2 | cut -d'.' -f1)"
+  fi
+  echo "$distro"
+}
+
+identify_arch() {
+  local arch=$(uname -m)
+
+  case "${arch}" in
+  ppc64le)
+    ;; # no-op
+  x86_64)
+    case $(identify_distro) in
+    debian-*)
+      arch=amd64
+      ;;
+    ol-*)
+      arch=x86_64
+      ;;
+    centos-*)
+      arch=x86_64
+      ;;
+    rhel-*)
+      arch=x86_64
+      ;;
+    photon-*)
+      arch=x86_64
+      ;;
+    esac
+    ;;
+  *)
+    arch="unknown"
+    ;;
+  esac
+  echo $arch
+}
+
+# break up command line for easy parsing and check legal options
+ARGS=$(getopt -o b:c:h -l "bucket:,checksum:,help" -n "bitnami-pkg" -- "$@")
+if [ $? -ne 0 ];
+then
+  exit 1
+fi
+
+eval set -- "$ARGS";
+while true; do
+  case "$1" in
+    -b|--bucket)
+      shift
+      if [ -n "$1" ]; then
+        RELEASE_BUCKET=$1
+        shift
+      fi
+      ;;
+    -c|--checksum)
+      shift
+      if [ -n "$1" ]; then
+        PACKAGE_SHA256=$1
+        shift
+      fi
+      ;;
+    -h|--help)
+      print_usage
+      exit 0
+      ;;
+    --)
+      shift
+      break
+      ;;
+  esac
+done
+
+# weed out unrecognized commands
+case "$1" in
+  install|unpack) ;;
+  *)
+    error "Unrecognized command: $1"
+    print_usage
+    exit 1
+    ;;
+esac
+
+# install/unpack command need to be supplied a package name
+if [ $# -lt 2 ]; then
+  print_usage
+  exit 1
+fi
+
+INSTALL_ROOT=/tmp/bitnami/pkg/install
+CACHE_ROOT=/tmp/bitnami/pkg/cache
+
+PACKAGE="$2-linux-$(identify_arch)-$(identify_distro)"
+PACKAGE_ARGS=${@:3}
+PACKAGE_NAME=$(echo $PACKAGE | sed 's/-[0-9].*//')
+RELEASE_BUCKET=${RELEASE_BUCKET:-stacksmith}
+
+mkdir -p $INSTALL_ROOT
+cd $INSTALL_ROOT
+
+info "Downloading $PACKAGE package"
+if [ -f $CACHE_ROOT/$PACKAGE.tar.gz ]; then
+  info "$CACHE_ROOT/$PACKAGE.tar.gz already exists, skipping download."
+  cp $CACHE_ROOT/$PACKAGE.tar.gz .
+  if [ -f $CACHE_ROOT/$PACKAGE.tar.gz.sha256 ]; then
+    info "Using the local sha256 from $CACHE_ROOT/$PACKAGE.tar.gz.sha256"
+    PACKAGE_SHA256=$(cat $CACHE_ROOT/$PACKAGE.tar.gz.sha256)
+  fi
+else
+  # display cURL progress bar when a tty is attached
+  if tty -s; then
+    CURL_ARGS="-#"
+  else
+    CURL_ARGS="-sS"
+  fi
+  if ! curl $CURL_ARGS -LOf "https://downloads.bitnami.com/files/$RELEASE_BUCKET/$PACKAGE.tar.gz"; then
+    warn "Package name '$PACKAGE' does not exist, will try '${PACKAGE%-$(identify_distro)}'..."
+    if curl $CURL_ARGS -LOf "https://downloads.bitnami.com/files/$RELEASE_BUCKET/${PACKAGE%-$(identify_distro)}.tar.gz"; then
+      PACKAGE="${PACKAGE%-$(identify_distro)}"
+    else
+      error "Could not find the requested package..."
+      exit 1
+    fi
+  fi
+fi
+
+if ! tar tzf $PACKAGE.tar.gz >/dev/null 2>&1; then
+  error "Invalid or corrupt '$PACKAGE' package."
+  exit 1
+fi
+
+if [ "$PACKAGE_SHA256" ]; then
+  info "Verifying package integrity"
+  echo "$PACKAGE_SHA256  $PACKAGE.tar.gz" | sha256sum -c -
+fi
+
+# If the tarball has too many files, it can trigger a bug
+# in overlayfs when using tar. Install bsdtar in the container image
+# to workaround it. As the overhead is too big (~40 MB), it is not added by
+# default. Source: https://github.com/coreos/bugs/issues/1095
+if which bsdtar >/dev/null 2>&1; then
+  bsdtar -xf $PACKAGE.tar.gz
+else
+  tar xzf $PACKAGE.tar.gz
+fi
+
+case "$1" in
+  install) info "Installing $PACKAGE" ;;
+  unpack) info "Unpacking $PACKAGE" ;;
+esac
+
+nami $1 $PACKAGE $PACKAGE_ARGS
+rm -rf $INSTALL_ROOT
+
+if [ "$BITNAMI_PKG_EXTRA_DIRS" ]; then
+  info "Creating extra directories"
+  for i in  ${BITNAMI_PKG_EXTRA_DIRS}; do
+    mkdir -p $i
+  done
+fi
+
+if [ "$BITNAMI_PKG_CHMOD" ]; then
+  DIRS="/.nami /bitnami $BITNAMI_PKG_EXTRA_DIRS"
+  if ! [[ $PACKAGE_NAME =~ .*-client ]]; then
+    mkdir -p /bitnami/$PACKAGE_NAME
+  fi
+  # We need to be in $HOME in order to nami inspect works
+  cd $HOME
+  DIRS+=" $(nami inspect $PACKAGE_NAME | grep -e '"installdir"' | cut -f4 -d\")"
+  info "Fixing permissions: chmod $BITNAMI_PKG_CHMOD $DIRS"
+  chmod $BITNAMI_PKG_CHMOD $DIRS
+fi
+
+# Include metadata about the package
+touch "${BITNAMI_PREFIX}/.bitnami_packages"
+echo "${PACKAGE}" >> "${BITNAMI_PREFIX}/.bitnami_packages"
