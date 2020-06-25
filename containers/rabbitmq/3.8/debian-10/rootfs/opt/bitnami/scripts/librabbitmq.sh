@@ -225,11 +225,11 @@ EOF
 rabbitmq_download_community_plugins() {
     debug "Downloading custom plugins..."
     read -r -a plugins <<< "$(tr ',;' ' ' <<< "$RABBITMQ_COMMUNITY_PLUGINS")"
-    cd "$RABBITMQ_PLUGINS_DIR"
+    cd "$RABBITMQ_PLUGINS_DIR" || return
     for plugin in "${plugins[@]}"; do
         curl --remote-name --silent "$plugin"
     done
-    cd -
+    cd - || return
 }
 
 ########################
