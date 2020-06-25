@@ -14,7 +14,7 @@ RUN /build/install-nami.sh
 RUN bitnami-pkg install python-3.6.10-13 --checksum 06e7d2fd58444182b4008745ee50ff404f7dd715d681604ade35f07aef9048fc
 RUN bitnami-pkg install postgresql-client-10.13.0-1 --checksum ac5c3f62281e4a336b7fed8839dcf35b892f26e52a981463909bb2c6ebc5775b
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
-RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
+RUN bitnami-pkg install gosu-1.12.0-1 --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN bitnami-pkg unpack airflow-worker-1.10.10-3 --checksum eab5fea9db6ac4582e5bd241088602d3d0cee46e5281baee216f5ea3b9a1a6fc
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -39,7 +39,7 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     AIRFLOW_WORKER_PORT_NUMBER="8793" \
     BITNAMI_APP_NAME="airflow-worker" \
-    BITNAMI_IMAGE_VERSION="1.10.10-debian-10-r72" \
+    BITNAMI_IMAGE_VERSION="1.10.10-debian-10-r73" \
     C_FORCE_ROOT="True" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
