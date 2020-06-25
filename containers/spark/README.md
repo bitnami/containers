@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.4.6-debian-10-r14`, `2`, `2.4.6`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/2.4.6-debian-10-r14/2/debian-10/Dockerfile)
+* [`3-debian-10`, `3.0.0-debian-10-r0`, `3`, `3.0.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/3.0.0-debian-10-r0/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spark GitHub repo](https://github.com/bitnami/bitnami-docker-spark).
 
@@ -64,7 +64,7 @@ $ docker pull bitnami/spark:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-docker build -t bitnami/spark:latest 'https://github.com/bitnami/bitnami-docker-spark.git#master:2/debian-10'
+docker build -t bitnami/spark:latest 'https://github.com/bitnami/bitnami-docker-spark.git#master:3/debian-10'
 ```
 
 # Configuration
