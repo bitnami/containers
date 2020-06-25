@@ -206,6 +206,7 @@ Available variables:
 * `RABBITMQ_LDAP_SERVER_PORT`: Port of the LDAP server. Defaults: **389**
 * `RABBITMQ_LDAP_USER_DN_PATTERN`: DN used to bind to LDAP in the form `cn=$${username},dc=example,dc=org`. No defaults.
 * `RABBITMQ_PLUGINS`: Comma, semi-colon or space separated list of plugins to enable during the initialization. No defaults.
+* `RABBITMQ_COMMUNITY_PLUGINS`: Comma, semi-colon or space separated list of URLs where to download custom plugins during the initialization. No defaults.
 
 ### Setting up a cluster
 

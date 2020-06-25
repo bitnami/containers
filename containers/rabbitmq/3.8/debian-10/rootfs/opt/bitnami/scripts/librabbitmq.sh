@@ -214,9 +214,28 @@ EOF
 }
 
 ########################
-# Creates RabbitMQ environment file
+# Download RabbitMQ custom plugins
 # Globals:
-#   RABBITMQ_CONF_DIR
+#   RABBITMQ_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+rabbitmq_download_community_plugins() {
+    debug "Downloading custom plugins..."
+    read -r -a plugins <<< "$(tr ',;' ' ' <<< "$RABBITMQ_COMMUNITY_PLUGINS")"
+    cd "$RABBITMQ_PLUGINS_DIR"
+    for plugin in "${plugins[@]}"; do
+        curl --remote-name --silent "$plugin"
+    done
+    cd -
+}
+
+########################
+# Creates RabbitMQ plugins file
+# Globals:
+#   RABBITMQ_*
 # Arguments:
 #   None
 # Returns:
@@ -417,6 +436,7 @@ rabbitmq_initialize() {
     [[ ! -f "${RABBITMQ_CONF_DIR}/rabbitmq.conf" ]] && rabbitmq_create_config_file
     [[ ! -f "${RABBITMQ_CONF_DIR}/rabbit-env.conf" ]] && rabbitmq_create_environment_file
     [[ ! -f "${RABBITMQ_CONF_DIR}/enabled_plugins" ]] && rabbitmq_create_enabled_plugins_file
+    [[ -n "${RABBITMQ_COMMUNITY_PLUGINS:-}" ]] && rabbitmq_download_community_plugins
 
     [[ ! -f "${RABBITMQ_LIB_DIR}/.start" ]] && touch "${RABBITMQ_LIB_DIR}/.start"
     [[ ! -f "${RABBITMQ_HOME_DIR}/.erlang.cookie" ]] && rabbitmq_create_erlang_cookie
