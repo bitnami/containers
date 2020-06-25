@@ -102,12 +102,28 @@ get_total_memory() {
 # Globals:
 #   None
 # Arguments:
-#   $1 - memory size (optional)
+#   None
+# Flags:
+#   --memory - memory size (optional)
 # Returns:
 #   Detected instance size
 #########################
 get_machine_size() {
-    local memory="${1:-}"
+    local memory=""
+    # Validate arguments
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            --memory)
+                shift
+                memory="${1:?missing memory}"
+                ;;
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
     if [[ -z "$memory" ]]; then
         debug "Memory was not specified, detecting available memory automatically"
         memory="$(get_total_memory)"
@@ -152,10 +168,10 @@ get_supported_machine_sizes() {
 #########################
 convert_to_mb() {
     local amount="${1:-}"
-    if [[ $amount =~ ^([0-9]+)(M|G) ]]; then
+    if [[ $amount =~ ^([0-9]+)(m|M|g|G) ]]; then
         size="${BASH_REMATCH[1]}"
         unit="${BASH_REMATCH[2]}"
-        if [[ "$unit" = "G" ]]; then
+        if [[ "$unit" = "g" || "$unit" = "G" ]]; then
            amount="$((size * 1024))"
         else
             amount="$size"
