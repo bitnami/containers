@@ -13,13 +13,13 @@ RUN /build/install-nami.sh
 RUN bitnami-pkg install node-12.18.1-0 --checksum f0ea0986d229d2b31f7f39e13955ee9a92c10ad1620dede0c1a4e55f3fa55493
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg unpack parse-dashboard-2.1.0-0 --checksum 2c7fe862852988402b2e7dbeee939e20350863f95e021275de0603f60409dd9b
-RUN bitnami-pkg install gosu-1.12.0-0 --checksum 582d501eeb6b338a24f417fededbf14295903d6be55c52d66c52e616c81bcd8c
+RUN bitnami-pkg install gosu-1.12.0-1 --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r70" \
+    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r71" \
     NAMI_PREFIX="/.nami" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
