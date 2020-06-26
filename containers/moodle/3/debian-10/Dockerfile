@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack apache-2.4.43-5 --checksum e9faded57e3703fe9fcea650eb302e
 RUN bitnami-pkg unpack mysql-client-10.3.23-1 --checksum efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1
 RUN bitnami-pkg install libphp-7.3.19-0 --checksum 9d3e785b7544f374e4943f94795625e9048a89fab109ada62552c5784c68bbbe
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
-RUN bitnami-pkg unpack moodle-3.9.0-0 --checksum 99c7aac02637641a64293884abb9ca81faabe03cc19978cae179bf054e9b11c5
+RUN bitnami-pkg unpack moodle-3.9.0-1 --checksum 0273af69ceb72dccf4f764ec32e1d41f40f8ddbd3c1a389dae91efe1736db0b0
 RUN bitnami-pkg install gosu-1.12.0-1 --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -31,7 +31,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.9.0-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="3.9.0-debian-10-r4" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     MARIADB_HOST="mariadb" \
