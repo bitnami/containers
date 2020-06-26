@@ -15,7 +15,7 @@ RUN ln -sf /opt/bitnami/alertmanager/data /alertmanager
 
 RUN mkdir -p /opt/bitnami/alertmanager/data/ && chmod g+rwX /opt/bitnami/alertmanager/data/
 ENV BITNAMI_APP_NAME="alertmanager" \
-    BITNAMI_IMAGE_VERSION="0.21.0-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="0.21.0-debian-10-r9" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
