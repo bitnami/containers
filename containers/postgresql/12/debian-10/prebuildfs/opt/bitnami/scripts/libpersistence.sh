@@ -7,6 +7,7 @@
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libversion.sh
 
@@ -34,14 +35,29 @@ persist_app() {
         warn "No files are configured to be persisted"
         return
     fi
-    local file_to_persist_origin file_to_persist_destination file_to_persist_destination_folder
+    pushd "$install_dir" >/dev/null
+    local file_to_persist_relative file_to_persist_destination file_to_persist_destination_folder
+    local -r tmp_file="/tmp/perms.acl"
     for file_to_persist in "${files_to_persist[@]}"; do
-        file_to_persist_origin="${install_dir}/${file_to_persist}"
-        file_to_persist_destination="${persist_dir}/${file_to_persist}"
+        file_to_persist_relative="$(relativize "$file_to_persist" "$install_dir")"
+        file_to_persist_destination="${persist_dir}/${file_to_persist_relative}"
         file_to_persist_destination_folder="$(dirname "$file_to_persist_destination")"
-        mkdir -p "$file_to_persist_destination_folder"
-        cp -Lr "$file_to_persist_origin" "$file_to_persist_destination_folder"
+        # Get original permissions (except for the root directory, to avoid issues with volumes)
+        find "$file_to_persist_relative" | grep -E -v '^\.$' | xargs getfacl -R > "$tmp_file"
+        # Copy directories to the volume
+        ensure_dir_exists "$file_to_persist_destination_folder"
+        cp -Lr --preserve=links "$file_to_persist_relative" "$file_to_persist_destination_folder"
+        # Restore permissions
+        pushd "$persist_dir" >/dev/null
+        if am_i_root; then
+            setfacl --restore="$tmp_file"
+        else
+            # When running as non-root, don't change ownership
+            setfacl --restore=<(grep -E -v '^# (owner|group):' "$tmp_file")
+        fi
+        popd >/dev/null
     done
+    popd >/dev/null
     # Install the persisted files into the installation directory, via symlinks
     restore_persisted_app "$@"
 }
@@ -69,11 +85,12 @@ restore_persisted_app() {
         warn "No persisted files are configured to be restored"
         return
     fi
-    local file_to_restore_origin file_to_restore_destination
+    local file_to_restore_relative file_to_restore_origin file_to_restore_destination
     for file_to_restore in "${files_to_restore[@]}"; do
-        # We use realpath to ensure that the case of '.' is covered and the directory is removed
-        file_to_restore_origin="$(realpath "${install_dir}/${file_to_restore}")"
-        file_to_restore_destination="$(realpath "${persist_dir}/${file_to_restore}")"
+        file_to_restore_relative="$(relativize "$file_to_restore" "$install_dir")"
+        # We use 'realpath --no-symlinks' to ensure that the case of '.' is covered and the directory is removed
+        file_to_restore_origin="$(realpath --no-symlinks "${install_dir}/${file_to_restore_relative}")"
+        file_to_restore_destination="$(realpath --no-symlinks "${persist_dir}/${file_to_restore_relative}")"
         rm -rf "$file_to_restore_origin"
         ln -sfn "$file_to_restore_destination" "$file_to_restore_origin"
     done
