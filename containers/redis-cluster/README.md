@@ -39,7 +39,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.0-debian-10`, `6.0.5-debian-10-r19`, `6.0`, `6.0.5`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.0.5-debian-10-r19/6.0/debian-10/Dockerfile)
+* [`6.0-debian-10`, `6.0.5-debian-10-r21`, `6.0`, `6.0.5`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.0.5-debian-10-r21/6.0/debian-10/Dockerfile)
 * [`5.0-debian-10`, `5.0.9-debian-10-r62`, `5.0`, `5.0.9` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.9-debian-10-r62/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-cluster GitHub repo](https://github.com/bitnami/bitnami-docker-redis-cluster).
