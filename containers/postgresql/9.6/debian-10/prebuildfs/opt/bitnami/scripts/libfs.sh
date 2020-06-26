@@ -96,6 +96,22 @@ is_file_writable() {
 }
 
 ########################
+# Relativize a path
+# arguments:
+#   $1 - path
+#   $2 - base
+# returns:
+#   None
+#########################
+relativize() {
+    local -r path="${1:?missing path}"
+    local -r base="${2:?missing base}"
+    pushd / >/dev/null
+    realpath -q --no-symlinks --relative-base="$base" "$path" | sed -e 's|^/$|.|' -e 's|^/||'
+    popd >/dev/null
+}
+
+########################
 # Configure permisions and ownership recursively
 # Globals:
 #   None
