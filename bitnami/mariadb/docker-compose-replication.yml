@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mariadb-master:
-    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    image: 'docker.io/bitnami/mariadb:10.5-debian-10'
     ports:
       - '3306'
     volumes:
@@ -16,7 +16,7 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_ROOT_PASSWORD=my_root_password
   mariadb-slave:
-    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    image: 'docker.io/bitnami/mariadb:10.5-debian-10'
     ports:
       - '3306'
     depends_on:
