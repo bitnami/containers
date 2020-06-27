@@ -17,7 +17,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /postunpack.sh
 ENV BITNAMI_APP_NAME="redis-cluster" \
-    BITNAMI_IMAGE_VERSION="5.0.9-debian-10-r62" \
+    BITNAMI_IMAGE_VERSION="5.0.9-debian-10-r64" \
     PATH="/opt/bitnami/redis/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 6379
