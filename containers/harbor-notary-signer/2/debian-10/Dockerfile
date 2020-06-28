@@ -17,7 +17,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-notary-signer/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-notary-signer" \
-    BITNAMI_IMAGE_VERSION="2.0.0-debian-10-r21" \
+    BITNAMI_IMAGE_VERSION="2.0.0-debian-10-r22" \
     PATH="/opt/bitnami/harbor-notary-signer/bin:/opt/bitnami/common/bin:$PATH" \
     SERVICE_NAME="notary_signer"
 
