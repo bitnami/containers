@@ -49,6 +49,9 @@ export SPRING_CLOUD_DATAFLOW_M2_DIR="/.m2"
 export SPRING_CLOUD_DATAFLOW_DAEMON_USER="dataflow"
 export SPRING_CLOUD_DATAFLOW_DAEMON_GROUP="dataflow"
 
+# Java settings
+export JAVA_OPTS="${JAVA_OPTS:-}"
+
 # Dataflow settings
 export SERVER_PORT="${SERVER_PORT:-}"
 export SPRING_CLOUD_CONFIG_ENABLED="${SPRING_CLOUD_CONFIG_ENABLED:-false}"
