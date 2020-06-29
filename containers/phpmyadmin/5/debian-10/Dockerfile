@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libbz2-1.0 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.19-2" --checksum 25bba77655b298c62ab474954837acbc167a4bcc8555c39b419644c999207c5f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.43-5" --checksum e9faded57e3703fe9fcea650eb302e673d969a399fe9dfafa67e173465637665
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.23-1" --checksum efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.19-0" --checksum 9d3e785b7544f374e4943f94795625e9048a89fab109ada62552c5784c68bbbe
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.19-2" --checksum c5dddf3ea541f5c0d6f65fa7d743de710de5ec53cdf8458a25c74e70f0c8397d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-1" --checksum a94f94357aa06f3718db1550fa5f5188cd61383d66bf754eef49c58a18bf02cc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "phpmyadmin" "5.0.2-3" --checksum b890352acc4429be19d4d319a2ea46b523a718fb325cb0a66604e0294ab7e99c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
@@ -29,7 +29,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="5.0.2-debian-10-r97" \
+    BITNAMI_IMAGE_VERSION="5.0.2-debian-10-r98" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
