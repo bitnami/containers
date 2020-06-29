@@ -82,6 +82,8 @@ If you are using MariaDB 10.2 or greater, you must also set the following enviro
 
 Consult the [spring-cloud-skipper Reference Documentation](https://docs.spring.io/spring-cloud-skipper/docs/current/reference/htmlsingle/#_local_platform_configuration) to find the completed list of documentation.
 
+In the same way, you might need to customize the JVM. Use the `JAVA_OPTS` environment variable for this purpose.
+
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper/pulls) with your contribution.
