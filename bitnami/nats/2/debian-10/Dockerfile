@@ -14,7 +14,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN chown -R 1001:root /opt/bitnami/nats && chmod g+rwX /opt/bitnami/nats
 ENV BITNAMI_APP_NAME="nats" \
-    BITNAMI_IMAGE_VERSION="2.1.7-debian-10-r42" \
+    BITNAMI_IMAGE_VERSION="2.1.7-debian-10-r43" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
