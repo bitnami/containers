@@ -15,7 +15,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="13.14.0-prod-debian-10-r59" \
+    BITNAMI_IMAGE_VERSION="13.14.0-prod-debian-10-r60" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux" \
