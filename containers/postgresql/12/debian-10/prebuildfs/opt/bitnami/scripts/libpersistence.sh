@@ -39,6 +39,10 @@ persist_app() {
     local file_to_persist_relative file_to_persist_destination file_to_persist_destination_folder
     local -r tmp_file="/tmp/perms.acl"
     for file_to_persist in "${files_to_persist[@]}"; do
+        if [[ ! -f "$file_to_persist" && ! -d "$file_to_persist" ]]; then
+            error "Cannot persist '${file_to_persist}' because it does not exist"
+            return 1
+        fi
         file_to_persist_relative="$(relativize "$file_to_persist" "$install_dir")"
         file_to_persist_destination="${persist_dir}/${file_to_persist_relative}"
         file_to_persist_destination_folder="$(dirname "$file_to_persist_destination")"
