@@ -48,7 +48,8 @@ export RABBITMQ_MNESIA_BASE="${RABBITMQ_DATA_DIR}"
 # Settings
 export RABBITMQ_CLUSTER_NODE_NAME="${RABBITMQ_CLUSTER_NODE_NAME:-}"
 export RABBITMQ_CLUSTER_PARTITION_HANDLING="${RABBITMQ_CLUSTER_PARTITION_HANDLING:-ignore}"
-export RABBITMQ_DISK_FREE_LIMIT="${RABBITMQ_DISK_FREE_LIMIT:-1.0}"
+export RABBITMQ_DISK_FREE_RELATIVE_LIMIT="${RABBITMQ_DISK_FREE_RELATIVE_LIMIT:-1.0}"
+export RABBITMQ_DISK_FREE_ABSOLUTE_LIMIT="${RABBITMQ_DISK_FREE_ABSOLUTE_LIMIT:-}"
 export RABBITMQ_ERL_COOKIE="${RABBITMQ_ERL_COOKIE:-}"
 export RABBITMQ_HASHED_PASSWORD="${RABBITMQ_HASHED_PASSWORD:-}"
 export RABBITMQ_MANAGER_BIND_IP="${RABBITMQ_MANAGER_BIND_IP:-0.0.0.0}"
@@ -161,11 +162,19 @@ default_permissions.write = .*
 
 ## Clustering
 cluster_partition_handling = $RABBITMQ_CLUSTER_PARTITION_HANDLING
-
-## Set a limit relative to total available RAM
-disk_free_limit.relative = $RABBITMQ_DISK_FREE_LIMIT
-
 EOF
+
+    if [[ -n "$RABBITMQ_DISK_FREE_ABSOLUTE_LIMIT" ]]; then
+        cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.conf" <<EOF
+## Set an absolute disk free space limit
+disk_free_limit.absolute = $RABBITMQ_DISK_FREE_ABSOLUTE_LIMIT
+EOF
+    else
+        cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.conf" <<EOF
+## Set a limit relative to total available RAM
+disk_free_limit.relative = $RABBITMQ_DISK_FREE_RELATIVE_LIMIT
+EOF
+    fi
 
     if is_boolean_yes "$RABBITMQ_ENABLE_LDAP"; then
         cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.conf" <<EOF

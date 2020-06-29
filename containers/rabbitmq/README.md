@@ -198,7 +198,8 @@ Available variables:
 * `RABBITMQ_CLUSTER_NODE_NAME`: Node name to cluster with. E.g.: **clusternode@hostname**
 * `RABBITMQ_CLUSTER_PARTITION_HANDLING`: Cluster partition recovery mechanism. Default: **ignore**
 * `RABBITMQ_MANAGER_PORT_NUMBER`: Manager port. Default: **15672**
-* `RABBITMQ_DISK_FREE_LIMIT`: Disk free space limit of the partition on which RabbitMQ is storing data. Default: **{mem_relative, 1.0}**
+* `RABBITMQ_DISK_FREE_RELATIVE_LIMIT`: Disk relative free space limit of the partition on which RabbitMQ is storing data. Default: **1.0**
+* `RABBITMQ_DISK_FREE_ABSOLUTE_LIMIT`: Disk absolute free space limit of the partition on which RabbitMQ is storing data (takes precedence over the relative limit). No defaults.
 * `RABBITMQ_ULIMIT_NOFILES`: Resources limits: maximum number of open file descriptors. Default: **65536**
 * `RABBITMQ_ENABLE_LDAP`: Enable the LDAP configuration. Defaults: **no**
 * `RABBITMQ_LDAP_TLS`: Enable secure LDAP configuration. Defaults: **no**
