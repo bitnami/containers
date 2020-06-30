@@ -136,7 +136,6 @@ ejbca_configure_wildfly() {
     ejbca_wildfly_command ':reload'
     wait_for_wildfly
 
-
     info "Configure redirection"
     ejbca_wildfly_command '/subsystem=undertow/server=default-server/host=default-host/location="\/":remove()'
     ejbca_wildfly_command '/subsystem=undertow/configuration=handler/file=welcome-content:remove()'
@@ -482,6 +481,7 @@ ejbca_persist_keystores() {
     mv "$EJBCA_TEMP_KEYSTORE_FILE"  "$EJBCA_KEYSTORE_FILE"
     echo "$EJBCA_KEYSTORE_PASSWORD" > "$EJBCA_KEYSTORE_PASSWORD_FILE"
     echo "$EJBCA_TRUSTSTORE_PASSWORD" > "$EJBCA_TRUSTSTORE_PASSWORD_FILE"
+    echo "$EJBCA_WILDFLY_ADMIN_PASSWORD" > "$EJBCA_WILDFLY_ADMIN_PASSWORD_FILE"
 
     # Provide keystores to wildfly
     ln -s  "$EJBCA_TRUSTSTORE_FILE" "$EJBCA_WILDFLY_TRUSTSTORE_FILE"
@@ -498,7 +498,7 @@ ejbca_persist_keystores() {
 #   None
 #########################
 ejbca_is_persisted() {
-    [[ -f "$EJBCA_TRUSTSTORE_FILE" ]] && [[ -f "$EJBCA_KEYSTORE_FILE" ]] && [[ -f "$EJBCA_TRUSTSTORE_PASSWORD_FILE" ]] && [[ -f "$EJBCA_KEYSTORE_PASSWORD_FILE" ]]
+    [[ -f "$EJBCA_TRUSTSTORE_FILE" ]] && [[ -f "$EJBCA_KEYSTORE_FILE" ]] && [[ -f "$EJBCA_TRUSTSTORE_PASSWORD_FILE" ]] && [[ -f "$EJBCA_KEYSTORE_PASSWORD_FILE" ]] && [[ -f "$EJBCA_WILDFLY_ADMIN_PASSWORD_FILE" ]]
 }
 
 ########################
@@ -511,16 +511,16 @@ ejbca_is_persisted() {
 #   None
 #########################
 ejbca_load_persisted() {
-    read -r EJBCA_KEYSTORE_PASSWORD < "$EJBCA_KEYSTORE_PASSWORD_FILE" 
-    read -r EJBCA_TRUSTSTORE_PASSWORD < "$EJBCA_TRUSTSTORE_PASSWORD_FILE"
+    info "Loading persisted keystore passwords"
 
-    info "Using persisted server TLS keystore"
-    ejbca_keytool_command -importkeystore -noprompt \
-        -srckeystore "$EJBCA_KEYSTORE_FILE" \
-        -srcstorepass "$EJBCA_KEYSTORE_PASSWORD" \
-        -destkeystore "$EJBCA_TEMP_KEYSTORE_FILE" \
-        -deststorepass "$EJBCA_KEYSTORE_PASSWORD" \
-        -deststoretype jks
+    read -r EJBCA_KEYSTORE_PASSWORD < "$EJBCA_KEYSTORE_PASSWORD_FILE"
+    read -r EJBCA_TRUSTSTORE_PASSWORD < "$EJBCA_TRUSTSTORE_PASSWORD_FILE"
+    read -r EJBCA_WILDFLY_ADMIN_PASSWORD < "$EJBCA_WILDFLY_ADMIN_PASSWORD_FILE"
+
+    # Provide keystores to wildfly
+    info "Placing widlfly keystores"
+    ln -s  "$EJBCA_TRUSTSTORE_FILE" "$EJBCA_WILDFLY_TRUSTSTORE_FILE"
+    ln -s  "$EJBCA_KEYSTORE_FILE" "$EJBCA_WILDFLY_KEYSTORE_FILE"
 }
 
 ########################
@@ -555,39 +555,42 @@ ejbca_initialize() {
             -deststoretype jks
     fi
 
-    # Generate random passwords
-    EJBCA_TRUSTSTORE_PASSWORD="${EJBCA_TRUSTSTORE_PASSWORD:-$(generate_random_string -t alphanumeric)}"
-    export EJBCA_TRUSTSTORE_PASSWORD
-    EJBCA_KEYSTORE_PASSWORD="${EJBCA_TRUSTSTORE_PASSWORD:-$(generate_random_string -t alphanumeric)}"
-    export EJBCA_KEYSTORE_PASSWORD
-    EJBCA_WILDFLY_ADMIN_PASSWORD="${EJBCA_TRUSTSTORE_PASSWORD:-$(generate_random_string -t alphanumeric)}"
-    export EJBCA_WILDFLY_ADMIN_PASSWORD
-    EJBCA_BASE_DN="${EJBCA_BASE_DN:-O=Example CA,C=SE,UID=c-$(generate_random_string -t alphanumeric)}"
-    export EJBCA_BASE_DN
-
     if ! ejbca_is_persisted; then
-        info "Deploying EJBCA from scratch..."
+        info "Deploying EJBCA from scratch"
+
+        # Generate random passwords
+        EJBCA_TRUSTSTORE_PASSWORD="${EJBCA_TRUSTSTORE_PASSWORD:-$(generate_random_string -t alphanumeric)}"
+        export EJBCA_TRUSTSTORE_PASSWORD
+        EJBCA_KEYSTORE_PASSWORD="${EJBCA_KEYSTORE_PASSWORD:-$(generate_random_string -t alphanumeric)}"
+        export EJBCA_KEYSTORE_PASSWORD
+        EJBCA_WILDFLY_ADMIN_PASSWORD="${EJBCA_WILDFLY_ADMIN_PASSWORD:-$(generate_random_string -t alphanumeric)}"
+        export EJBCA_WILDFLY_ADMIN_PASSWORD
+        EJBCA_BASE_DN="${EJBCA_BASE_DN:-O=Example CA,C=SE,UID=c-$(generate_random_string -t alphanumeric)}"
+        export EJBCA_BASE_DN
 
         ejbca_create_database
-
-        ejbca_create_management_user
-        ejbca_start_wildfly_bg
-        wait_for_wildfly
-        ejbca_configure_wildfly
-
-        info "Deploying EJBCA application"
-        ejbca_wildfly_deploy "$EJBCA_EAR_FILE"
-
-        ejbca_generate_ca
-        ejbca_create_truststore
-        ejbca_persist_keystores
-
-        ejbca_configure_wildfly_https
-
-        ejbca_stop_wildfly
     else
         info "Persisted data detected"
 
         ejbca_load_persisted
     fi
+
+    ejbca_create_management_user
+    ejbca_start_wildfly_bg
+    wait_for_wildfly
+    ejbca_configure_wildfly
+
+    info "Deploying EJBCA application"
+    ejbca_wildfly_deploy "$EJBCA_EAR_FILE"
+
+    if ! ejbca_is_persisted; then
+        ejbca_generate_ca
+        ejbca_create_truststore
+        ejbca_persist_keystores
+    fi
+
+    ejbca_configure_wildfly_https
+
+    ejbca_stop_wildfly
+
 }
