@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`2.6-prod-debian-10`, `2.6-debian-10-prod`, `2.6.6-prod-debian-10-r96`, `2.6.6-debian-10-r96-prod`, `2.6-prod`, `2.6.6-prod`, `latest-prod` (2.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.6-prod-debian-10-r96/2.6-prod/debian-10/Dockerfile)
 * [`2.6-debian-10`, `2.6.6-debian-10-r89`, `2.6`, `2.6.6`, `latest` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.6-debian-10-r89/2.6/debian-10/Dockerfile)
 * [`2.5-prod-debian-10`, `2.5-debian-10-prod`, `2.5.8-prod-debian-10-r94`, `2.5.8-debian-10-r94-prod`, `2.5-prod`, `2.5.8-prod` (2.5-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-prod-debian-10-r94/2.5-prod/debian-10/Dockerfile)
-* [`2.5-debian-10`, `2.5.8-debian-10-r91`, `2.5`, `2.5.8` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-debian-10-r91/2.5/debian-10/Dockerfile)
+* [`2.5-debian-10`, `2.5.8-debian-10-r92`, `2.5`, `2.5.8` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-debian-10-r92/2.5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://github.com/bitnami/bitnami-docker-ruby).
 
