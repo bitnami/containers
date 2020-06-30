@@ -16,6 +16,7 @@
   "smtpProtocol": "{{$global.env.SMTP_PROTOCOL}}",
   "smtpUser": "{{$global.env.SMTP_USER}}",
   "sonarqubeCEJavaAdditionalOpts": "{{$global.env.SONARQUBE_CE_JAVA_ADD_OPTS}}",
+  "sonarqubeProperties": "{{$global.env.SONARQUBE_PROPERTIES}}",
   "sonarqubeSearchJavaAdditionalOpts": "{{$global.env.SONARQUBE_ELASTICSEARCH_JAVA_ADD_OPTS}}",
   "sonarqubeWebContext": "{{$global.env.SONARQUBE_WEB_CONTEXT}}",
   "sonarqubeWebJavaAdditionalOpts": "{{$global.env.SONARQUBE_WEB_JAVA_ADD_OPTS}}",
