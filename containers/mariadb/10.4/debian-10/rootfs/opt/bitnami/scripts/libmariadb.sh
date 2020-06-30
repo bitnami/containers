@@ -1135,7 +1135,7 @@ mysql_conf_set() {
     read -r -a sections <<<"${3:-mysqld}"
     local -r file="${4:-"$DB_CONF_FILE"}"
     info "Setting ${key} option"
-    debug "Setting ${key} to '${value}' in ${DB_FLAVOR} configuration"
+    debug "Setting ${key} to '${value}' in ${DB_FLAVOR} configuration file ${file}"
     # Check if the configuration exists in the file
     for section in "${sections[@]}"; do
         ini-file set --section "$section" --key "$key" --value "$value" "$file"
