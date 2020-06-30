@@ -17,7 +17,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN touch /opt/bitnami/spring-cloud-dataflow-shell/spring-cloud-dataflow-shell.log && chmod -R g+rwX /opt/bitnami/spring-cloud-dataflow-shell
 
 ENV BITNAMI_APP_NAME="spring-cloud-dataflow-shell" \
-    BITNAMI_IMAGE_VERSION="2.5.2-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="2.5.2-debian-10-r5" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
