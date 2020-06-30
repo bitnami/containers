@@ -31,7 +31,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8-debian-10`, `8.3.1-debian-10-r30`, `8`, `8.3.1` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.3.1-debian-10-r30/8/debian-10/Dockerfile)
+* [`8-debian-10`, `8.3.1-debian-10-r31`, `8`, `8.3.1` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.3.1-debian-10-r31/8/debian-10/Dockerfile)
 * [`7-debian-10`, `7.9.3-debian-10-r88`, `7`, `7.9.3`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.3-debian-10-r88/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
@@ -227,6 +227,7 @@ The SonarQube instance can be customized by specifying environment variables on 
 - `SONARQUBE_CE_JAVA_ADD_OPTS`: Additional Java options for Compute Engine. No defaults.
 - `SONARQUBE_ELASTICSEARCH_JAVA_ADD_OPTS`: Additional Java options for Elasticsearch. No defaults.
 - `SONARQUBE_WEB_JAVA_ADD_OPTS`: Additional Java options for Web. No defaults.
+- `SONARQUBE_PROPERTIES`: Comma separated list of properties to be set in the sonar.properties file, i.e `my.sonar.property1=property_value,my.sonar.property2=property_value`. No defaults.
 - `SONARQUBE_START_TIMEOUT`: Timeout for the application to start in seconds. Default: **300**.
 
 ##### Use an existing database
