@@ -31,7 +31,7 @@ mongodb_validate() {
     local error_message=""
     local -r replicaset_error_message="In order to configure MongoDB replica set authentication you \
 need to provide the MONGODB_REPLICA_SET_KEY on every node, specify MONGODB_ROOT_PASSWORD \
-in the primary node and MONGODB_PRIMARY_ROOT_PASSWORD in the rest of nodes"
+in the primary node and MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD in the rest of nodes"
     local error_code=0
 
     # Auxiliary functions
@@ -45,13 +45,13 @@ in the primary node and MONGODB_PRIMARY_ROOT_PASSWORD in the rest of nodes"
             warn "In order to use hostnames instead of IPs your should set MONGODB_ADVERTISED_HOSTNAME"
         fi
         if [[ "$MONGODB_REPLICA_SET_MODE" =~ ^(secondary|arbiter) ]]; then
-            if [[ -z "$MONGODB_PRIMARY_HOST" ]]; then
-                error_message="In order to configure MongoDB as secondary or arbiter node \
-you need to provide the MONGODB_PRIMARY_HOST env var"
+            if [[ -z "$MONGODB_INITIAL_PRIMARY_HOST" ]]; then
+                error_message="In order to configure MongoDB as a secondary or arbiter node \
+you need to provide the MONGODB_INITIAL_PRIMARY_HOST env var"
                 print_validation_error "$error_message"
             fi
-            if { [[ -n "$MONGODB_PRIMARY_ROOT_PASSWORD" ]] && [[ -z "$MONGODB_REPLICA_SET_KEY" ]]; } || \
-               { [[ -z "$MONGODB_PRIMARY_ROOT_PASSWORD" ]] && [[ -n "$MONGODB_REPLICA_SET_KEY" ]]; }; then
+            if { [[ -n "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" ]] && [[ -z "$MONGODB_REPLICA_SET_KEY" ]]; } || \
+               { [[ -z "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" ]] && [[ -n "$MONGODB_REPLICA_SET_KEY" ]]; }; then
                 print_validation_error "$replicaset_error_message"
             fi
             if [[ -n "$MONGODB_ROOT_PASSWORD" ]]; then
@@ -63,12 +63,14 @@ you need to provide the MONGODB_PRIMARY_HOST env var"
                { [[ -z "$MONGODB_ROOT_PASSWORD" ]] && [[ -n "$MONGODB_REPLICA_SET_KEY" ]] ;}; then
                 print_validation_error "$replicaset_error_message"
             fi
-            if [[ -n "$MONGODB_PRIMARY_ROOT_PASSWORD" ]]; then
-                error_message="MONGODB_PRIMARY_ROOT_PASSWORD shouldn't be set on a 'primary' node"
+            if [[ -n "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" ]]; then
+                error_message="MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD shouldn't be set on a 'primary' node"
                 print_validation_error "$error_message"
             fi
             if [[ -z "$MONGODB_ROOT_PASSWORD" ]] && ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
-                error_message="The MONGODB_ROOT_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is only recommended for development."
+                error_message="The MONGODB_ROOT_PASSWORD environment variable is empty or not set. \
+Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. \
+This is only recommended for development."
                 print_validation_error "$error_message"
             fi
         else
@@ -588,7 +590,7 @@ mongodb_is_secondary_node_pending() {
     local node="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 rs.add('$node:$MONGODB_PORT_NUMBER')
 EOF
 )
@@ -615,7 +617,7 @@ mongodb_is_arbiter_node_pending() {
     local node="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 rs.addArb('$node:$MONGODB_PORT_NUMBER')
 EOF
 )
@@ -657,7 +659,7 @@ mongodb_configure_primary() {
 mongodb_is_node_confirmed() {
     local -r node="${1:?node is required}"
 
-    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 rs.status().members
 EOF
 )
@@ -723,7 +725,7 @@ mongodb_is_node_available() {
     local -r password="${4:-}"
 
     local result
-    result=$(mongodb_execute "$user" "$password" "admin" "$host" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "$user" "$password" "admin" "$host" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 db.getUsers()
 EOF
 )
@@ -801,7 +803,7 @@ mongodb_wait_for_primary_node() {
 mongodb_configure_secondary() {
     local -r node="${1:?node is required}"
 
-    mongodb_wait_for_primary_node "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD"
+    mongodb_wait_for_primary_node "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
 
     if mongodb_node_currently_in_cluster "$node"; then
         info "Node currently in the cluster"
@@ -827,7 +829,7 @@ mongodb_configure_secondary() {
 #########################
 mongodb_configure_arbiter() {
     local -r node="${1:?node is required}"
-    mongodb_wait_for_primary_node "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD"
+    mongodb_wait_for_primary_node "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
 
     if mongodb_node_currently_in_cluster "$node"; then
         info "Node currently in the cluster"
@@ -853,7 +855,7 @@ mongodb_configure_arbiter() {
 mongodb_is_not_in_sync(){
     local result
 
-    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 db.printSlaveReplicationInfo()
 EOF
 )
@@ -894,7 +896,7 @@ mongodb_node_currently_in_cluster() {
     local -r node="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_PRIMARY_HOST" "$MONGODB_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 rs.status()
 EOF
 )
@@ -1086,9 +1088,9 @@ mongodb_custom_init_scripts() {
         if [[ -n "$MONGODB_ROOT_PASSWORD" ]];then
             mongo_user=root
             mongo_pass="$MONGODB_ROOT_PASSWORD"
-        elif [[ -n "$MONGODB_PRIMARY_ROOT_PASSWORD" ]]; then
+        elif [[ -n "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" ]];then
             mongo_user=root
-            mongo_pass="$MONGODB_PRIMARY_ROOT_PASSWORD"
+            mongo_pass="$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
         else
             mongo_user="$MONGODB_USERNAME"
             mongo_pass="$MONGODB_PASSWORD"

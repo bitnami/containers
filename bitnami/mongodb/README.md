@@ -46,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4.2-debian-10`, `4.2.8-debian-10-r18`, `4.2`, `4.2.8`, `latest` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.8-debian-10-r18/4.2/debian-10/Dockerfile)
+* [`4.2-debian-10`, `4.2.8-debian-10-r19`, `4.2`, `4.2.8`, `latest` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.8-debian-10-r19/4.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
@@ -321,12 +321,12 @@ A [replication](https://docs.mongodb.com/manual/replication/) cluster can easily
  - `MONGODB_REPLICA_SET_MODE`: The replication mode. Possible values `primary`/`secondary`/`arbiter`. No defaults.
  - `MONGODB_REPLICA_SET_NAME`: MongoDB replica set name. Default: **replicaset**
  - `MONGODB_PORT_NUMBER`: The port each MongoDB will use. Default: **27017**
- - `MONGODB_PRIMARY_HOST`: MongoDB primary host. No defaults.
- - `MONGODB_PRIMARY_PORT_NUMBER`: MongoDB primary node port, as seen by other nodes. Default: **27017**
+ - `MONGODB_INITIAL_PRIMARY_HOST`: MongoDB initial primary host, once the replicaset is created any node can be eventually promoted to be the primary. No defaults.
+ - `MONGODB_INITIAL_PRIMARY_PORT_NUMBER`: MongoDB initial primary node port, as seen by other nodes. Default: **27017**
  - `MONGODB_ADVERTISED_HOSTNAME`: MongoDB advertised hostname. No defaults. It is recommended to pass this environment variable if you experience issues with ephemeral IPs. Setting this env var makes the nodes of the replica set to be configured with a hostname instead of the machine IP.
  - `MONGODB_REPLICA_SET_KEY`: MongoDB replica set key. Length should be greater than 5 characters and should not contain any special characters. Required for all nodes. No default.
  - `MONGODB_ROOT_PASSWORD`: MongoDB root password. No defaults. Only for primary node.
- - `MONGODB_PRIMARY_ROOT_PASSWORD`: MongoDB primary root password. No defaults. Only for secondaries and arbiter nodes.
+ - `MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD`: MongoDB initial primary root password. No defaults. Only for secondaries and arbiter nodes.
 
 In a replication cluster you can have one primary node, zero or more secondary nodes and zero or one arbiter node.
 
@@ -356,14 +356,14 @@ $ docker run --name mongodb-secondary \
   --link mongodb-primary:primary \
   -e MONGODB_REPLICA_SET_MODE=secondary \
   -e MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary \
-  -e MONGODB_PRIMARY_HOST=primary \
-  -e MONGODB_PRIMARY_PORT_NUMBER=27017 \
-  -e MONGODB_PRIMARY_ROOT_PASSWORD=password123 \
+  -e MONGODB_INITIAL_PRIMARY_HOST=primary \
+  -e MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017 \
+  -e MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123 \
   -e MONGODB_REPLICA_SET_KEY=replicasetkey123 \
   bitnami/mongodb:latest
 ```
 
-In the above command the container is configured as a `secondary` using the `MONGODB_REPLICA_SET_MODE` parameter. The `MONGODB_PRIMARY_HOST` and `MONGODB_PRIMARY_PORT_NUMBER` parameters are used connect and with the MongoDB primary.
+In the above command the container is configured as a `secondary` using the `MONGODB_REPLICA_SET_MODE` parameter. The `MONGODB_INITIAL_PRIMARY_HOST` and `MONGODB_INITIAL_PRIMARY_PORT_NUMBER` parameters are used connect and with the MongoDB primary.
 
 ### Step 3: Create a replication arbiter node
 
@@ -374,14 +374,14 @@ $ docker run --name mongodb-arbiter \
   --link mongodb-primary:primary \
   -e MONGODB_REPLICA_SET_MODE=arbiter \
   -e MONGODB_ADVERTISED_HOSTNAME=mongodb-arbiter \
-  -e MONGODB_PRIMARY_HOST=primary \
-  -e MONGODB_PRIMARY_PORT_NUMBER=27017 \
-  -e MONGODB_PRIMARY_ROOT_PASSWORD=password123 \
+  -e MONGODB_INITIAL_PRIMARY_HOST=primary \
+  -e MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017 \
+  -e MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123 \
   -e MONGODB_REPLICA_SET_KEY=replicasetkey123 \
   bitnami/mongodb:latest
 ```
 
-In the above command the container is configured as a `arbiter` using the `MONGODB_REPLICA_SET_MODE` parameter. The `MONGODB_PRIMARY_HOST` and `MONGODB_PRIMARY_PORT_NUMBER` parameters are used connect and with the MongoDB primary.
+In the above command the container is configured as a `arbiter` using the `MONGODB_REPLICA_SET_MODE` parameter. The `MONGODB_INITIAL_PRIMARY_HOST` and `MONGODB_INITIAL_PRIMARY_PORT_NUMBER` parameters are used connect and with the MongoDB primary.
 
 You now have a three node MongoDB replication cluster up and running which can be scaled by adding/removing secondaries.
 
@@ -409,9 +409,9 @@ services:
     environment:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary
       - MONGODB_REPLICA_SET_MODE=secondary
-      - MONGODB_PRIMARY_HOST=mongodb-primary
-      - MONGODB_PRIMARY_PORT_NUMBER=27017
-      - MONGODB_PRIMARY_ROOT_PASSWORD=password123
+      - MONGODB_INITIAL_PRIMARY_HOST=mongodb-primary
+      - MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017
+      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
 
   mongodb-arbiter:
@@ -421,9 +421,9 @@ services:
     environment:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-arbiter
       - MONGODB_REPLICA_SET_MODE=arbiter
-      - MONGODB_PRIMARY_HOST=mongodb-primary
-      - MONGODB_PRIMARY_PORT_NUMBER=27017
-      - MONGODB_PRIMARY_ROOT_PASSWORD=password123
+      - MONGODB_INITIAL_PRIMARY_HOST=mongodb-primary
+      - MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017
+      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
 
 volumes:
@@ -460,9 +460,9 @@ services:
       - mongodb-primary
     environment:
       - MONGODB_REPLICA_SET_MODE=secondary
-      - MONGODB_PRIMARY_HOST=mongodb-primary
-      - MONGODB_PRIMARY_PORT_NUMBER=27017
-      - MONGODB_PRIMARY_ROOT_PASSWORD=password123
+      - MONGODB_INITIAL_PRIMARY_HOST=mongodb-primary
+      - MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017
+      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
 
   mongodb-arbiter:
@@ -471,9 +471,9 @@ services:
       - mongodb-primary
     environment:
       - MONGODB_REPLICA_SET_MODE=arbiter
-      - MONGODB_PRIMARY_HOST=mongodb-primary
-      - MONGODB_PRIMARY_PORT_NUMBER=27017
-      - MONGODB_PRIMARY_ROOT_PASSWORD=password123
+      - MONGODB_INITIAL_PRIMARY_HOST=mongodb-primary
+      - MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017
+      - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
 
 volumes:
