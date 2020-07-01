@@ -139,6 +139,7 @@ web_server_reload() {
 #   --document-root - Path to document root directory
 # Apache-specific flags:
 #   --apache-additional-configuration - Additional vhost configuration (no default)
+#   --apache-before-vhost-configuration - Configuration to add before the <VirtualHost> directive (no default)
 #   --apache-allow-override - Whether to allow .htaccess files (only allowed when --move-htaccess is set to 'no')
 #   --apache-extra-directory-configuration - Extra configuration for the document root directory
 #   --apache-move-htaccess - Move .htaccess files to a common place so they can be loaded during Apache startup
@@ -170,6 +171,7 @@ ensure_web_server_app_configuration_exists() {
 
             # Specific Apache flags
             --apache-additional-configuration \
+            | --apache-before-vhost-configuration \
             | --apache-allow-override \
             | --apache-extra-directory-configuration \
             | --apache-move-htaccess \
