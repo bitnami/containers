@@ -1,65 +1,65 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:$PATH"
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 locales procps sudo tar zlib1g
-RUN /build/bitnami-user.sh
-RUN /build/install-nami.sh
-RUN bitnami-pkg unpack php-7.3.19-2 --checksum 25bba77655b298c62ab474954837acbc167a4bcc8555c39b419644c999207c5f
-RUN bitnami-pkg unpack apache-2.4.43-5 --checksum e9faded57e3703fe9fcea650eb302e673d969a399fe9dfafa67e173465637665
-RUN bitnami-pkg unpack mysql-client-10.3.23-1 --checksum efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1
-RUN bitnami-pkg install libphp-7.3.19-2 --checksum c5dddf3ea541f5c0d6f65fa7d743de710de5ec53cdf8458a25c74e70f0c8397d
-RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
-RUN bitnami-pkg unpack mediawiki-1.34.2-0 --checksum a477584077abe7556398cc6beee678d24459e555f9c40bf620db9be7d026d001
-RUN bitnami-pkg install gosu-1.12.0-1 --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
+RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 locales procps tar zlib1g
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.19-2" --checksum 25bba77655b298c62ab474954837acbc167a4bcc8555c39b419644c999207c5f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.43-5" --checksum e9faded57e3703fe9fcea650eb302e673d969a399fe9dfafa67e173465637665
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.23-1" --checksum efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.19-2" --checksum c5dddf3ea541f5c0d6f65fa7d743de710de5ec53cdf8458a25c74e70f0c8397d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-1" --checksum a94f94357aa06f3718db1550fa5f5188cd61383d66bf754eef49c58a18bf02cc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mediawiki" "1.34.2-0" --checksum a477584077abe7556398cc6beee678d24459e555f9c40bf620db9be7d026d001
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
-RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log && \
-    ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
 
 COPY rootfs /
+RUN /opt/bitnami/scripts/apache/postunpack.sh
+RUN /opt/bitnami/scripts/php/postunpack.sh
+RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
+RUN /opt/bitnami/scripts/mediawiki/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_ENABLE_CUSTOM_PORTS="no" \
-    APACHE_HTTPS_PORT_NUMBER="443" \
-    APACHE_HTTP_PORT_NUMBER="80" \
+    APACHE_HTTPS_PORT_NUMBER="" \
+    APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="mediawiki" \
-    BITNAMI_IMAGE_VERSION="1.34.2-debian-10-r4" \
-    LANG="en_US.UTF-8" \
-    LANGUAGE="en_US:en" \
+    BITNAMI_IMAGE_VERSION="1.34.2-debian-10-r5" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
     MARIADB_ROOT_USER="root" \
-    MEDIAWIKI_DATABASE_NAME="bitnami_mediawiki" \
+    MEDIAWIKI_DATABASE_NAME="" \
     MEDIAWIKI_DATABASE_PASSWORD="" \
-    MEDIAWIKI_DATABASE_USER="bn_mediawiki" \
+    MEDIAWIKI_DATABASE_USER="" \
     MEDIAWIKI_EMAIL="user@example.com" \
     MEDIAWIKI_HOST="" \
     MEDIAWIKI_PASSWORD="bitnami123" \
     MEDIAWIKI_USERNAME="user" \
-    MEDIAWIKI_WIKI_NAME="Bitnami MediaWiki" \
+    MEDIAWIKI_WIKI_NAME="" \
     MYSQL_CLIENT_CREATE_DATABASE_NAME="" \
     MYSQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
     MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES="ALL" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
     MYSQL_CLIENT_ENABLE_SSL="no" \
     MYSQL_CLIENT_SSL_CA_FILE="" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-10" \
-    OS_NAME="linux" \
-    PHP_MEMORY_LIMIT="256M" \
+    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH" \
+    PHP_MEMORY_LIMIT="" \
     SMTP_HOST="" \
     SMTP_HOST_ID="" \
     SMTP_PASSWORD="" \
     SMTP_PORT=""
 
-EXPOSE 80 443
+EXPOSE 8080 8443
 
-ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "httpd", "-f", "/opt/bitnami/apache/conf/httpd.conf", "-DFOREGROUND" ]
+USER 1001
+ENTRYPOINT [ "/opt/bitnami/scripts/mediawiki/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/apache/run.sh" ]
