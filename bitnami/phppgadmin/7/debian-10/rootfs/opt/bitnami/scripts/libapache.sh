@@ -364,6 +364,7 @@ EOF
 #   --https-port - HTTPS port number
 #   --move-htaccess - Move .htaccess files to a common place so they can be loaded during Apache startup
 #   --additional-configuration - Additional vhost configuration (no default)
+#   --before-vhost-configuration - Configuration to add before the <VirtualHost> directive (no default)
 #   --allow-override - Whether to allow .htaccess files (only allowed when --move-htaccess is set to 'no')
 #   --document-root - Path to document root directory
 #   --extra-directory-configuration - Extra configuration for the document root directory
@@ -384,6 +385,7 @@ ensure_apache_app_configuration_exists() {
     local var_name
     # Template variables defaults
     export additional_configuration=""
+    export before_vhost_configuration=""
     export allow_override="All"
     export document_root="${BITNAMI_ROOT_DIR}/${app}"
     export extra_directory_configuration=""
@@ -403,6 +405,7 @@ ensure_apache_app_configuration_exists() {
             | --https-port \
             | --move-htaccess \
             | --additional-configuration \
+            | --before-vhost-configuration \
             | --allow-override \
             | --document-root \
             | --extra-directory-configuration \
