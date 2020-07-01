@@ -31,7 +31,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8-debian-10`, `8.3.1-debian-10-r31`, `8`, `8.3.1` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.3.1-debian-10-r31/8/debian-10/Dockerfile)
+* [`8-debian-10`, `8.3.1-debian-10-r32`, `8`, `8.3.1` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.3.1-debian-10-r32/8/debian-10/Dockerfile)
 * [`7-debian-10`, `7.9.3-debian-10-r89`, `7`, `7.9.3`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.3-debian-10-r89/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
@@ -123,7 +123,7 @@ services:
       - POSTGRESQL_DATABASE=bitnami_sonarqube
       - POSTGRESQL_PASSWORD=bitnami1234
     volumes:
-      - /path/to/postgresql-persistence:/bitnami
+      - /path/to/postgresql-persistence:/bitnami/postgresql
   sonarqube:
     image: bitnami/sonarqube:latest
     depends_on:
@@ -156,7 +156,7 @@ services:
     -e POSTGRESQL_DATABASE=bitnami_sonarqube \
     -e POSTGRESQL_PASSWORD=bitnami1234 \
     --net sonarqube-tier \
-    --volume /path/to/postgresql-persistence:/bitnami \
+    --volume /path/to/postgresql-persistence:/bitnami/postgresql \
     bitnami/postgresql:latest
   ```
 
@@ -328,7 +328,7 @@ $ docker run -d --name sonarqube -p 80:9000 \
   --env SMTP_USER=your_email@gmail.com --env SMTP_PASSWORD=your_password \
   --env ALLOW_EMPTY_PASSWORD=yes --env SONARQUBE_DATABASE_USER=bn_sonarqube \
   --env SONARQUBE_DATABASE_NAME=bitnami_sonarqube \
-  --volume sonarqube_data:/bitnami/sonarqube \
+  --volume sonarqube_data:/bitnami \
   bitnami/sonarqube:latest
 ```
 
