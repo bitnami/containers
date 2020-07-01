@@ -236,7 +236,7 @@ rabbitmq_download_community_plugins() {
     read -r -a plugins <<< "$(tr ',;' ' ' <<< "$RABBITMQ_COMMUNITY_PLUGINS")"
     cd "$RABBITMQ_PLUGINS_DIR" || return
     for plugin in "${plugins[@]}"; do
-        curl --remote-name --silent "$plugin"
+        curl --remote-name --location --silent "$plugin"
     done
     cd - || return
 }
