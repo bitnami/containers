@@ -1,3 +1,4 @@
+{{before_vhost_configuration}}
 <VirtualHost {{http_listen_addresses}}>
   ServerAlias *
   DocumentRoot {{document_root}}
