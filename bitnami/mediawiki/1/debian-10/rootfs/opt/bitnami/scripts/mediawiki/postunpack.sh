@@ -13,15 +13,15 @@ set -o pipefail
 # Load PHP environment for 'php_conf_set' (after 'mediawiki-env.sh' so that MODULE is not set to a wrong value)
 . /opt/bitnami/scripts/php-env.sh
 
+# Load web server environment and functions (after MediaWiki environment file so MODULE is not set to a wrong value)
+. /opt/bitnami/scripts/libwebserver.sh
+
 # Load libraries
 . /opt/bitnami/scripts/libmediawiki.sh
 . /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libphp.sh
-. /opt/bitnami/scripts/libwebserver.sh
-
-# Load web server environment and functions (after MediaWiki environment file so MODULE is not set to a wrong value)
 
 # Ensure the MediaWiki base directory exists and has proper permissions
 info "Configuring file permissions for MediaWiki"
