@@ -27,7 +27,7 @@ services:
         aliases:
           - notarysigner
   harbor-notary-server:
-    image: docker.io/bitnami/harbor-notary-server:1-debian-10
+    image: docker.io/bitnami/harbor-notary-server:2-debian-10
     container_name: notary-server
     ports:
       - '4443:4443'
