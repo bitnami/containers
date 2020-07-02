@@ -484,8 +484,8 @@ ejbca_persist_keystores() {
     echo "$EJBCA_WILDFLY_ADMIN_PASSWORD" > "$EJBCA_WILDFLY_ADMIN_PASSWORD_FILE"
 
     # Provide keystores to wildfly
-    ln -s  "$EJBCA_TRUSTSTORE_FILE" "$EJBCA_WILDFLY_TRUSTSTORE_FILE"
-    ln -s  "$EJBCA_KEYSTORE_FILE" "$EJBCA_WILDFLY_KEYSTORE_FILE"
+    [[ ! -e  "$EJBCA_WILDFLY_TRUSTSTORE_FILE" ]] && ln -s  "$EJBCA_TRUSTSTORE_FILE" "$EJBCA_WILDFLY_TRUSTSTORE_FILE"
+    [[ ! -e "$EJBCA_WILDFLY_KEYSTORE_FILE" ]] && ln -s  "$EJBCA_KEYSTORE_FILE" "$EJBCA_WILDFLY_KEYSTORE_FILE"
 }
 
 ########################
@@ -519,8 +519,8 @@ ejbca_load_persisted() {
 
     # Provide keystores to wildfly
     info "Placing widlfly keystores"
-    ln -s  "$EJBCA_TRUSTSTORE_FILE" "$EJBCA_WILDFLY_TRUSTSTORE_FILE"
-    ln -s  "$EJBCA_KEYSTORE_FILE" "$EJBCA_WILDFLY_KEYSTORE_FILE"
+    [[ ! -e  "$EJBCA_WILDFLY_TRUSTSTORE_FILE" ]] && ln -s  "$EJBCA_TRUSTSTORE_FILE" "$EJBCA_WILDFLY_TRUSTSTORE_FILE"
+    [[ ! -e "$EJBCA_WILDFLY_KEYSTORE_FILE" ]] && ln -s  "$EJBCA_KEYSTORE_FILE" "$EJBCA_WILDFLY_KEYSTORE_FILE"
 }
 
 ########################
@@ -544,17 +544,6 @@ ejbca_initialize() {
     if [[ -f "$EJBCA_TEMP_KEYSTORE_FILE"   ]]; then rm -f "$EJBCA_TEMP_KEYSTORE_FILE"   ; fi
     if [[ -f "$EJBCA_TEMP_TRUSTSTORE_FILE" ]]; then rm -f "$EJBCA_TEMP_TRUSTSTORE_FILE" ; fi
 
-    # Check if external keystore
-    if [[ -f "$EJBCA_SERVER_CERT_FILE" && -n "$EJBCA_SERVER_CERT_PASSWORD" ]]; then
-        info "Using provided server TLS keystore"
-        ejbca_keytool_command -importkeystore -noprompt \
-            -srckeystore "$EJBCA_SERVER_CERT_FILE" \
-            -srcstorepass "$EJBCA_SERVER_CERT_PASSWORD" \
-            -destkeystore "$EJBCA_TEMP_KEYSTORE_FILE" \
-            -deststorepass "$EJBCA_KEYSTORE_PASSWORD" \
-            -deststoretype jks
-    fi
-
     if ! ejbca_is_persisted; then
         info "Deploying EJBCA from scratch"
 
@@ -567,6 +556,17 @@ ejbca_initialize() {
         export EJBCA_WILDFLY_ADMIN_PASSWORD
         EJBCA_BASE_DN="${EJBCA_BASE_DN:-O=Example CA,C=SE,UID=c-$(generate_random_string -t alphanumeric)}"
         export EJBCA_BASE_DN
+
+        # Check if external keystore
+        if [[ -f "$EJBCA_SERVER_CERT_FILE" && -n "$EJBCA_SERVER_CERT_PASSWORD" ]]; then
+            info "Using provided server TLS keystore"
+            ejbca_keytool_command -importkeystore -noprompt \
+                -srckeystore "$EJBCA_SERVER_CERT_FILE" \
+                -srcstorepass "$EJBCA_SERVER_CERT_PASSWORD" \
+                -destkeystore "$EJBCA_TEMP_KEYSTORE_FILE" \
+                -deststorepass "$EJBCA_KEYSTORE_PASSWORD" \
+                -deststoretype jks
+        fi
 
         ejbca_create_database
     else
