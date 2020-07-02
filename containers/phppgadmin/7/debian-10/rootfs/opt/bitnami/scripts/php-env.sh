@@ -55,6 +55,10 @@ export PHP_FPM_DEFAULT_LISTEN_ADDRESS="${PHP_TMP_DIR}/www.sock" # only used at b
 export PHP_FPM_LISTEN_ADDRESS="${PHP_FPM_LISTEN_ADDRESS:-}"
 export PATH="${PHP_FPM_SBIN_DIR}:${PHP_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 
+# System users (when running with a privileged user)
+export PHP_FPM_DAEMON_USER="daemon"
+export PHP_FPM_DAEMON_GROUP="daemon"
+
 # PHP configuration
 export PHP_UPLOAD_MAX_FILESIZE="${PHP_UPLOAD_MAX_FILESIZE:-}"
 export PHP_POST_MAX_SIZE="${PHP_POST_MAX_SIZE:-}"
