@@ -10,7 +10,7 @@ services:
       - postgresql_data:/bitnami/postgresql
       - ./docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
   harbor-notary-signer:
-    image: docker.io/bitnami/harbor-notary-signer:1-debian-10
+    image: docker.io/bitnami/harbor-notary-signer:2-debian-10
     container_name: notary-signer
     ports:
       - '7899:7899'
