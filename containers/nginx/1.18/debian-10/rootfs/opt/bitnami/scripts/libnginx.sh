@@ -236,7 +236,11 @@ ensure_nginx_app_configuration_exists() {
     # ACL configuration
     export acl_configuration=""
     if ! is_boolean_yes "$allow_remote_connections"; then
-        acl_configuration=$'\n'"allow 127.0.0.1;"$'\n'"deny all;"
+        acl_configuration="
+allow 127.0.0.1;
+deny all;
+# Avoid absolute redirects when connecting through a SSH tunnel
+absolute_redirect off;"
     fi
     # Indent configurations
     acl_configuration="$(indent "$acl_configuration" 4)"
