@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10.4-debian-10`, `10.4.13-debian-10-r27`, `10.4`, `10.4.13` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.13-debian-10-r27/10.4/debian-10/Dockerfile)
-* [`10.3-debian-10`, `10.3.23-debian-10-r52`, `10.3`, `10.3.23`, `latest` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.23-debian-10-r52/10.3/debian-10/Dockerfile)
+* [`10.3-debian-10`, `10.3.23-debian-10-r53`, `10.3`, `10.3.23`, `latest` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.23-debian-10-r53/10.3/debian-10/Dockerfile)
 * [`10.2-debian-10`, `10.2.32-debian-10-r51`, `10.2`, `10.2.32` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.32-debian-10-r51/10.2/debian-10/Dockerfile)
 * [`10.1-debian-10`, `10.1.45-debian-10-r53`, `10.1`, `10.1.45` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.45-debian-10-r53/10.1/debian-10/Dockerfile)
 
@@ -422,8 +422,7 @@ In a MariaDB Galera cluster the first node should be a bootstrap node (started w
 The first step is to start the MariaDB Galera bootstrap node.
 
 ```console
-$ docker run --name mariadb-galera-0 \
-  -e MARIADB_GALERA_CLUSTER_BOOTSTRAP=yes \
+$ docker run -d --name mariadb-galera-0 \
   -e MARIADB_GALERA_CLUSTER_NAME=my_galera \
   -e MARIADB_GALERA_MARIABACKUP_USER=my_mariabackup_user \
   -e MARIADB_GALERA_MARIABACKUP_PASSWORD=my_mariabackup_password \
@@ -441,11 +440,12 @@ In the above command the container is configured as the bootstrap node by specif
 Next we add a new node to the cluster.
 
 ```console
-$ docker run --name mariadb-galera-1 --link mariadb-galera-0:mariadb-galera \
+$ docker run -d --name mariadb-galera-1 --link mariadb-galera-0:mariadb-galera \
   -e MARIADB_GALERA_CLUSTER_NAME=my_galera \
-  -e MARIADB_GALERA_CLUSTER_ADDRESS=gcomm://mariadb-galera \
+  -e MARIADB_GALERA_CLUSTER_ADDRESS=gcomm://mariadb-galera:4567,0.0.0.0:4567 \
   -e MARIADB_GALERA_MARIABACKUP_USER=my_mariabackup_user \
   -e MARIADB_GALERA_MARIABACKUP_PASSWORD=my_mariabackup_password \
+  -e MARIADB_ROOT_PASSWORD=my_root_password \
   bitnami/mariadb-galera:latest
 ```
 
