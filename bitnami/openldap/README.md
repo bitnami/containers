@@ -102,7 +102,7 @@ $ docker run --detach --rm --name mariadb-galera \
     --env MARIADB_DATABASE=customdatabase \
     --env MARIADB_ENABLE_LDAP=yes \
     --env LDAP_URI=ldap://openldap:1389 \
-    --env LDAP_BASE=dc=example,dc=org \
+    --env LDAP_ROOT=dc=example,dc=org \
     --env LDAP_BIND_DN=cn=admin,dc=example,dc=org \
     --env LDAP_BIND_PASSWORD=adminpassword \
     bitnami/mariadb-galera:latest
