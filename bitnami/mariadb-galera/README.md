@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`10.4-debian-10`, `10.4.13-debian-10-r28`, `10.4`, `10.4.13` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.13-debian-10-r28/10.4/debian-10/Dockerfile)
 * [`10.3-debian-10`, `10.3.23-debian-10-r56`, `10.3`, `10.3.23` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.23-debian-10-r56/10.3/debian-10/Dockerfile)
-* [`10.2-debian-10`, `10.2.32-debian-10-r54`, `10.2`, `10.2.32` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.32-debian-10-r54/10.2/debian-10/Dockerfile)
+* [`10.2-debian-10`, `10.2.32-debian-10-r55`, `10.2`, `10.2.32` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.32-debian-10-r55/10.2/debian-10/Dockerfile)
 * [`10.1-debian-10`, `10.1.45-debian-10-r57`, `10.1`, `10.1.45` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.1.45-debian-10-r57/10.1/debian-10/Dockerfile)
 * [`10.5-debian-10`, `0.0.0-debian-10-r-1`, `10.5`, `0.0.0`, `latest` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/0.0.0-debian-10-r-1/10.5/debian-10/Dockerfile)
 
