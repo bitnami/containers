@@ -748,23 +748,20 @@ mysql_execute() {
 #   BITNAMI_DEBUG
 #   DB_*
 # Arguments:
-#   $1 - Database where to run the queries
-#   $2 - Remote MySQL/MariaDB service hostname
-#   $3 - Remote MySQL/MariaDB service port
+#   $1 - Remote MySQL/MariaDB service hostname
+#   $2 - Remote MySQL/MariaDB service port
+#   $3 - Database where to run the queries
 #   $4 - User to run queries
 #   $5 - Password
+#   $6 - Extra MySQL CLI options
 # Returns:
 #   None
 mysql_remote_execute() {
-    local -r db="${1:-}"
-    local -r hostname="${2:?hostname is required}"
-    local -r port="${3:?port is required}"
-    local -r user="${4:?user is required}"
-    local -r pass="${5:-}"
-
-    local -a args=("-N" "-h" "$hostname" "-P" "$port" "-u" "$user" "--connect-timeout=5" "$db")
-    [[ -n "$pass" ]] && args+=("-p$pass")
-    debug_execute "$DB_BIN_DIR/mysql" "${args[@]}"
+    local -r hostname="${1:?hostname is required}"
+    local -r port="${2:?port is required}"
+    local -a args=("-h" "$hostname" "-P" "$port" "--connect-timeout=5")
+    shift 2
+    debug_execute "mysql_execute_print_output" "$@" "${args[@]}"
 }
 
 ########################
@@ -928,10 +925,16 @@ mysql_install_db() {
 #########################
 mysql_upgrade() {
     local -a args=("--defaults-file=${DB_CONF_FILE}" "-u" "$DB_ROOT_USER" "--force")
-    local major_version
+    local major_version minor_version patch_version
     major_version="$(get_sematic_version "$(mysql_get_version)" 1)"
+    minor_version="$(get_sematic_version "$(mysql_get_version)" 2)"
+    patch_version="$(get_sematic_version "$(mysql_get_version)" 3)"
     info "Running mysql_upgrade"
-    if [[ "$DB_FLAVOR" = "mysql" ]] && [[ "$major_version" -ge "8" ]]; then
+    if [[ "$DB_FLAVOR" = "mysql" ]] && [[
+        "$major_version" -gt "8"
+        || ( "$major_version" -eq "8" && "$minor_version" -gt "0" )
+        || ( "$major_version" -eq "8" && "$minor_version" -eq "0" && "$patch_version" -ge "16" )
+    ]]; then
         mysql_stop
         mysql_start_bg "--upgrade=FORCE"
     else
@@ -977,6 +980,8 @@ migrate_old_configuration() {
 #   -u|--user - database user
 #   --auth-plugin - authentication plugin
 #   --use-ldap - authenticate user via LDAP
+#   --host - database host
+#   --port - database host
 # Arguments:
 #   $1 - database user
 # Returns:
@@ -992,6 +997,7 @@ mysql_ensure_user_exists() {
     local ssl_ca=""
     # For accessing an external database
     local db_host=""
+    local db_port=""
 
     # Validate arguments
     shift 1
@@ -1016,6 +1022,10 @@ mysql_ensure_user_exists() {
                 shift
                 db_host="${1:?missing database host}"
                 ;;
+            --port)
+                shift
+                db_port="${1:?missing database port}"
+                ;;
             *)
                 echo "Invalid command line flag $1" >&2
                 return 1
@@ -1034,12 +1044,9 @@ mysql_ensure_user_exists() {
     fi
     debug "creating database user \'$user\'"
     local -a opts=()
-    if [[ -n "$db_host" ]]; then
-        opts+=("-h${db_host}")
-    fi
-    if [[ -n "$ssl_ca" ]]; then
-        opts+=("--ssl-ca" "$ssl_ca")
-    fi
+    [[ -n "$db_host" ]] && opts+=("-h" "${db_host}")
+    [[ -n "$db_port" ]] && opts+=("-P" "${db_port}")
+    [[ -n "$ssl_ca" ]] && opts+=("--ssl-ca" "$ssl_ca")
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "${opts[@]:-}" <<EOF
 create $([[ "$DB_FLAVOR" = "mariadb" ]] && echo "or replace") user '$user'@'%' $auth_string;
 EOF
@@ -1145,20 +1152,59 @@ EOF
 #   DB_*
 # Arguments:
 #   $1 - database name
+# Flags:
+#   --character-set - character set
+#   --collation - collation
+#   --host - database host
+#   --port - database port
 # Returns:
 #   None
 #########################
 mysql_ensure_database_exists() {
     local -r database="${1:?database is required}"
-    local -r character_set="${2:-}"
-    local -r collate="${3:-}"
-    local -a extra_args=()
+    local character_set=""
+    local collate=""
+    # For accessing an external database
+    local db_host=""
+    local db_port=""
 
+    # Validate arguments
+    shift 1
+    while [ "$#" -gt 0 ]; do
+        case "$1" in
+            --character-set)
+                shift
+                character_set="${1:?missing character set}"
+                ;;
+            --collate)
+                shift
+                collate="${1:?missing collate}"
+                ;;
+            --host)
+                shift
+                db_host="${1:?missing database host}"
+                ;;
+            --port)
+                shift
+                db_port="${1:?missing database port}"
+                ;;
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+
+    local -a extra_args=()
     [[ -n "$character_set" ]] && extra_args=("character set = '${character_set}'")
     [[ -n "$collate" ]] && extra_args=("collate = '${collate}'")
 
+    local -a mysql_execute_cmd=("mysql_execute")
+    [[ -n "$db_host" && -n "$db_port" ]] && mysql_execute_cmd=("mysql_remote_execute" "$db_host" "$db_port")
+
     debug "Creating database $database"
-    mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+    "${mysql_execute_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 create database if not exists \`$database\` ${extra_args[@]:-};
 EOF
 }
@@ -1170,15 +1216,22 @@ EOF
 # Arguments:
 #   $1 - database name
 #   $2 - database user
+#   $3 - database host (optional)
+#   $4 - database port (optional)
 # Returns:
 #   None
 #########################
 mysql_ensure_user_has_database_privileges() {
     local -r user="${1:?user is required}"
     local -r database="${2:?db is required}"
+    local -r db_host="${3:-}"
+    local -r db_port="${4:-}"
+
+    local -a mysql_execute_cmd=("mysql_execute")
+    [[ -n "$db_host" && -n "$db_port" ]] && mysql_execute_cmd=("mysql_remote_execute" "$db_host" "$db_port")
 
     debug "Providing privileges to username $user on database $database"
-    mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+    "${mysql_execute_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 grant all on \`$database\`.* to '$user'@'%';
 EOF
 }
@@ -1189,6 +1242,8 @@ EOF
 #   -p|--password - database password
 #   --auth-plugin - authentication plugin
 #   --use-ldap - authenticate user via LDAP
+#   --host - database host
+#   --port - database port
 # Arguments:
 #   $1 - user
 # Returns:
@@ -1199,6 +1254,9 @@ mysql_ensure_optional_user_exists() {
     local password=""
     local auth_plugin=""
     local use_ldap="no"
+    # For accessing an external database
+    local db_host=""
+    local db_port=""
 
     # Validate arguments
     shift 1
@@ -1215,6 +1273,14 @@ mysql_ensure_optional_user_exists() {
             --use-ldap)
                 use_ldap="yes"
                 ;;
+            --host)
+                shift
+                db_host="${1:?missing database host}"
+                ;;
+            --port)
+                shift
+                db_port="${1:?missing database port}"
+                ;;
             *)
                 echo "Invalid command line flag $1" >&2
                 return 1
@@ -1223,15 +1289,16 @@ mysql_ensure_optional_user_exists() {
         shift
     done
 
+    local -a flags=("$user")
+    [[ -n "$db_host" ]] && flags+=("--host" "${db_host}")
+    [[ -n "$db_port" ]] && flags+=("--port" "${db_port}")
     if is_boolean_yes "$use_ldap"; then
-        mysql_ensure_user_exists "$user" "--use-ldap"
+        flags+=("--use-ldap")
     elif [[ -n "$password" ]]; then
-        local -a flags=("-p" "$password")
+        flags+=("-p" "$password")
         [[ -n "$auth_plugin" ]] && flags=("${flags[@]}" "--auth-plugin" "$auth_plugin")
-        mysql_ensure_user_exists "$user" "${flags[@]:-}"
-    else
-        mysql_ensure_user_exists "$user"
     fi
+    mysql_ensure_user_exists "${flags[@]}"
 }
 
 ########################
@@ -1239,6 +1306,10 @@ mysql_ensure_optional_user_exists() {
 # full privileges on the database.
 # Flags:
 #   -u|--user - database user
+#   --character-set - character set
+#   --collation - collation
+#   --host - database host
+#   --port - database port
 # Arguments:
 #   $1 - database name
 # Returns:
@@ -1249,6 +1320,9 @@ mysql_ensure_optional_database_exists() {
     local character_set=""
     local collate=""
     local user=""
+    # For accessing an external database
+    local db_host=""
+    local db_port=""
 
     # Validate arguments
     shift 1
@@ -1266,6 +1340,14 @@ mysql_ensure_optional_database_exists() {
                 shift
                 user="${1:?missing database user}"
                 ;;
+            --host)
+                shift
+                db_host="${1:?missing database host}"
+                ;;
+            --port)
+                shift
+                db_port="${1:?missing database port}"
+                ;;
             *)
                 echo "Invalid command line flag $1" >&2
                 return 1
@@ -1274,10 +1356,18 @@ mysql_ensure_optional_database_exists() {
         shift
     done
 
-    mysql_ensure_database_exists "$database" "$character_set" "$collate"
+    local -a flags=("$database")
+    [[ -n "$character_set" ]] && flags+=("--character-set" "$character_set")
+    [[ -n "$collate" ]] && flags+=("--collate" "$collate")
+    [[ -n "$db_host" ]] && flags+=("--host" "$db_host")
+    [[ -n "$db_port" ]] && flags+=("--port" "$db_port")
+    mysql_ensure_database_exists "${flags[@]}"
 
     if [[ -n "$user" ]]; then
-        mysql_ensure_user_has_database_privileges "$user" "$database"
+        local -a grant_flags=("$user" "$database")
+        [[ -n "$db_host" ]] && grant_flags+=("$db_host")
+        [[ -n "$db_port" ]] && grant_flags+=("$db_port")
+        mysql_ensure_user_has_database_privileges "${grant_flags[@]}"
     fi
 }
 
@@ -1299,7 +1389,7 @@ mysql_conf_set() {
     read -r -a sections <<<"${3:-mysqld}"
     local -r file="${4:-"$DB_CONF_FILE"}"
     info "Setting ${key} option"
-    debug "Setting ${key} to '${value}' in ${DB_FLAVOR} configuration"
+    debug "Setting ${key} to '${value}' in ${DB_FLAVOR} configuration file ${file}"
     # Check if the configuration exists in the file
     for section in "${sections[@]}"; do
         ini-file set --section "$section" --key "$key" --value "$value" "$file"
