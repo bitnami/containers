@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`12-debian-10`, `12.3.0-debian-10-r52`, `12`, `12.3.0` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.3.0-debian-10-r52/12/debian-10/Dockerfile)
-* [`11-debian-10`, `11.8.0-debian-10-r56`, `11`, `11.8.0`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.8.0-debian-10-r56/11/debian-10/Dockerfile)
+* [`11-debian-10`, `11.8.0-debian-10-r57`, `11`, `11.8.0`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.8.0-debian-10-r57/11/debian-10/Dockerfile)
 * [`10-debian-10`, `10.13.0-debian-10-r52`, `10`, `10.13.0` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.13.0-debian-10-r52/10/debian-10/Dockerfile)
 * [`9.6-debian-10`, `9.6.18-debian-10-r55`, `9.6`, `9.6.18` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.18-debian-10-r55/9.6/debian-10/Dockerfile)
 
@@ -445,6 +445,51 @@ The LDAP related parameters are:
 * `POSTGRESQL_LDAP_URL`: URL to connect to, in the format: `ldap[s]://host[:port]/basedn[?[attribute][?[scope][?[filter]]]]` .
 
 For more information refer to [Postgresql LDAP auth configuration documentation](https://www.postgresql.org/docs/12/auth-ldap.html).
+
+## Securing PostgreSQL traffic
+
+PostgreSQL supports the encryption of connections using the SSL/TLS protocol. Should you desire to enable this optional feature, you may use the following enviroment variables to configure the application:
+
+ - `POSTGRESQL_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
+ - `POSTGRESQL_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
+ - `POSTGRESQL_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
+ - `POSTGRESQL_TLS_CA_FILE`: File containing the CA of the certificate. If provided, PostgreSQL will authenticate TLS/SSL clients by requesting them a certificate (see [ref](https://www.postgresql.org/docs/9.6/auth-methods.html)). No defaults.
+ - `POSTGRESQL_TLS_CRL_FILE`: File containing a Certificate Revocation List. No defaults.
+ - `POSTGRESQL_TLS_PREFER_SERVER_CIPHERS`: Whether to use the server's TLS cipher preferences rather than the client's. Defaults to `yes`.
+
+When enabling TLS, PostgreSQL will support both standard and encrypted traffic by default, but prefer the latter. Below there are some examples on how to quickly set up TLS traffic:
+
+1. Using `docker run`
+
+    ```console
+    $ docker run \
+        -v /path/to/certs:/opt/bitnami/postgresql/certs \
+        -e ALLOW_EMPTY_PASSWORD=yes \
+        -e POSTGRESQL_ENABLE_TLS=yes \
+        -e POSTGRESQL_TLS_CERT_FILE=/opt/bitnami/postgresql/certs/postgres.crt \
+        -e POSTGRESQL_TLS_KEY_FILE=/opt/bitnami/postgresql/certs/postgres.key \
+        bitnami/postgresql:latest
+    ```
+
+2. Modifying the `docker-compose.yml` file present in this repository:
+
+    ```yaml
+    services:
+      postgresql:
+      ...
+        environment:
+          ...
+          - POSTGRESQL_ENABLE_TLS=yes
+          - POSTGRESQL_TLS_CERT_FILE=/opt/bitnami/postgresql/certs/postgres.crt
+          - POSTGRESQL_TLS_KEY_FILE=/opt/bitnami/postgresql/certs/postgres.key
+        ...
+        volumes:
+          ...
+          - /path/to/certs:/opt/bitnami/postgresql/certs
+      ...
+    ```
+
+Alternatively, you may also provide this configuration in your [custom](https://github.com/bitnami/bitnami-docker-postgresql#configuration-file) configuration file.
 
 ## Configuration file
 
