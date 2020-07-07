@@ -20,8 +20,8 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache/postunpack.sh
+RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/phpmyadmin/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
@@ -29,7 +29,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="5.0.2-debian-10-r104" \
+    BITNAMI_IMAGE_VERSION="5.0.2-debian-10-r105" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
