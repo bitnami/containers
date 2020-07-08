@@ -93,6 +93,12 @@ mediawiki_initialize() {
     local -r app_name="mediawiki"
     local db_host db_port db_name db_user db_pass
     if ! is_app_initialized "$app_name"; then
+        # Ensure the MediaWiki base directory exists and has proper permissions
+        info "Configuring file permissions for MediaWiki"
+        ensure_dir_exists "$MEDIAWIKI_VOLUME_DIR"
+        # Use daemon:root ownership for compatibility when running as a non-root user
+        am_i_root && configure_permissions_ownership "$MEDIAWIKI_VOLUME_DIR" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
+
         db_host="$MEDIAWIKI_DATABASE_HOST"
         db_port="$MEDIAWIKI_DATABASE_PORT_NUMBER"
         db_name="$MEDIAWIKI_DATABASE_NAME"
