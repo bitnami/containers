@@ -277,6 +277,48 @@ ensure_web_server_prefix_configuration_exists() {
 }
 
 ########################
+# Ensure a web server application configuration is updated with the runtime configuration (i.e. ports)
+# It serves as a wrapper for the specific web server function
+# Globals:
+#   *
+# Arguments:
+#   $1 - App name
+# Flags:
+#   --hosts - Hosts to enable
+#   --enable-https - Update HTTPS app configuration
+#   --http-port - HTTP port number
+#   --https-port - HTTPS port number
+# Returns:
+#   true if the configuration was updated, false otherwise
+########################
+web_server_update_app_configuration() {
+    local app="${1:?missing app}"
+    local -a args=()
+    # Validate arguments
+    shift
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            # Common flags
+            --hosts \
+            | --enable-https \
+            | --http-port \
+            | --https-port \
+            )
+                args+=("$1" "$2")
+                shift
+                ;;
+
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+    "$(web_server_type)_update_app_configuration" "$app" "${args[@]}"
+}
+
+########################
 # Enable loading page, which shows users that the initialization process is not yet completed
 # Globals:
 #   *
