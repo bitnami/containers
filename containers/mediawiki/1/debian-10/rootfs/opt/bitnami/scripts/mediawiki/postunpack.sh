@@ -25,9 +25,11 @@ set -o pipefail
 
 # Ensure the MediaWiki base directory exists and has proper permissions
 info "Configuring file permissions for MediaWiki"
-for dir in "$MEDIAWIKI_BASE_DIR" "$MEDIAWIKI_VOLUME_DIR"; do
+ensure_user_exists "$WEB_SERVER_DAEMON_USER" "$WEB_SERVER_DAEMON_GROUP"
+for dir in "$MEDIAWIKI_BASE_DIR" "$MEDIAWIKI_VOLUME_DIR" "${MEDIAWIKI_BASE_DIR}/images" "${MEDIAWIKI_BASE_DIR}/cache"; do
     ensure_dir_exists "$dir"
-    configure_permissions_ownership "$dir" -d "775" -f "664"
+    # Use daemon:root ownership for compatibility when running as a non-root user
+    configure_permissions_ownership "$dir" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
 done
 
 # Configure required PHP options for application to work properly, based on build-time defaults
