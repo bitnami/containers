@@ -219,7 +219,7 @@ ensure_nginx_app_configuration_exists() {
         esac
         shift
     done
-    # Construct host string in the format of "host1:port1[ host2:port2[ ...]]"
+    # Construct host string in the format of "listen host1:port1", "listen host2:port2", ...
     export http_listen_configuration=""
     export https_listen_configuration=""
     if [[ "${#hosts[@]}" -gt 0 ]]; then
@@ -370,5 +370,85 @@ ensure_nginx_prefix_configuration_exists() {
         return 1
     else
         warn "The ${app} web server configuration file '${prefix_file}' is not writable. Configurations based on environment variables will not be applied for this file."
+    fi
+}
+
+########################
+# Ensure NGINX application configuration is updated with the runtime configuration (i.e. ports)
+# Globals:
+#   *
+# Arguments:
+#   $1 - App name
+# Flags:
+#   --hosts - Hosts to enable
+#   --enable-https - Update HTTPS app configuration
+#   --http-port - HTTP port number
+#   --https-port - HTTPS port number
+# Returns:
+#   true if the configuration was updated, false otherwise
+########################
+nginx_update_app_configuration() {
+    local -r app="${1:?missing app}"
+    # Default options
+    local -a hosts=()
+    local enable_https="yes"
+    local http_port="${NGINX_HTTP_PORT_NUMBER:-"$NGINX_DEFAULT_HTTP_PORT_NUMBER"}"
+    local https_port="${NGINX_HTTPS_PORT_NUMBER:-"$NGINX_DEFAULT_HTTPS_PORT_NUMBER"}"
+    # Validate arguments
+    shift
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            --hosts)
+                shift
+                read -r -a hosts <<< "$1"
+                ;;
+
+            # Common flags
+            --enable-https \
+            | --http-port \
+            | --https-port \
+            )
+                args+=("$1" "$2")
+                shift
+                ;;
+
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+    # Construct host string in the format of "listen host1:port1", "listen host2:port2", ...
+    export http_listen_configuration=""
+    export https_listen_configuration=""
+    if [[ "${#hosts[@]}" -gt 0 ]]; then
+        for host in "${hosts[@]}"; do
+            http_listen="listen ${host}:${http_port};"
+            https_listen="listen ${host}:${https_port} ssl;"
+            [[ -z "${http_listen_configuration:-}" ]] && http_listen_configuration="$http_listen" || http_listen_configuration="${http_listen_configuration}"$'\\\n'"${http_listen}"
+            [[ -z "${https_listen_configuration:-}" ]] && https_listen_configuration="$https_listen" || https_listen_configuration="${https_listen_configuration}"$'\\\n'"${https_listen}"
+        done
+    else
+        http_listen_configuration="listen ${http_port};"
+        https_listen_configuration="listen ${https_port} ssl;"
+    fi
+    # Indent configurations
+    http_listen_configuration="$(indent "$http_listen_configuration" 4)"
+    https_listen_configuration="$(indent "$https_listen_configuration" 4)"
+    # Update configuration
+    local -r http_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-server-block.conf"
+    local -r https_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-https-server-block.conf"
+    if is_file_writable "$http_server_block"; then
+        replace_in_file "$http_server_block" "^\s*listen\s.*;" "$http_listen_configuration"
+    else
+        warn "The ${app} server block file '${http_server_block}' is not writable. Configurations based on environment variables will not be applied for this file."
+    fi
+    if is_boolean_yes "$enable_https"; then
+        if is_file_writable "$https_server_block"; then
+            replace_in_file "$https_server_block" "^\s*listen\s.*\sssl;" "$https_listen_configuration"
+        else
+            warn "The ${app} server block file '${https_server_block}' is not writable. Configurations based on environment variables will not be applied for this file."
+        fi
     fi
 }
