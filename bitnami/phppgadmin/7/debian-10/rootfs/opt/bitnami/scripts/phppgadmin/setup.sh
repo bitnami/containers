@@ -20,9 +20,6 @@ set -o pipefail
 # Ensure phpPgAdmin environment variables are valid
 phppgadmin_validate
 
-# Ensure the web server daemon user exists
-am_i_root && ensure_user_exists "$WEB_SERVER_DAEMON_USER" "$WEB_SERVER_DAEMON_GROUP"
-
 # Ensure phpPgAdmin is initialized
 phppgadmin_initialize
 

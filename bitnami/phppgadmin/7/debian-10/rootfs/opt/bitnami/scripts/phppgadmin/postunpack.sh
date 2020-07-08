@@ -25,9 +25,10 @@ set -o pipefail
 [[ ! -f "$PHPPGADMIN_CONF_FILE" ]] && cp "${PHPPGADMIN_BASE_DIR}/conf/config.inc.php-dist" "$PHPPGADMIN_CONF_FILE"
 
 # Ensure the phpPgAdmin base directory exists and has proper permissions
+ensure_user_exists "$WEB_SERVER_DAEMON_USER" "$WEB_SERVER_DAEMON_GROUP"
 for dir in "$PHPPGADMIN_BASE_DIR" "$PHPPGADMIN_VOLUME_DIR"; do
     ensure_dir_exists "$dir"
-    configure_permissions_ownership "$dir" -d "775" -f "664"
+    configure_permissions_ownership "$dir" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
 done
 
 # Disable extra login security by default, as it denies logins to the 'postgres' user
