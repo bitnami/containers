@@ -49,7 +49,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.8-debian-10`, `3.8.5-debian-10-r31`, `3.8`, `3.8.5`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.5-debian-10-r31/3.8/debian-10/Dockerfile)
+* [`3.8-debian-10`, `3.8.5-debian-10-r32`, `3.8`, `3.8.5`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.5-debian-10-r32/3.8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
@@ -203,8 +203,8 @@ Available variables:
 * `RABBITMQ_ULIMIT_NOFILES`: Resources limits: maximum number of open file descriptors. Default: **65536**
 * `RABBITMQ_ENABLE_LDAP`: Enable the LDAP configuration. Defaults: **no**
 * `RABBITMQ_LDAP_TLS`: Enable secure LDAP configuration. Defaults: **no**
-* `RABBITMQ_LDAP_SERVER`: Hostname of the LDAP server. No defaults.
-* `RABBITMQ_LDAP_SERVER_PORT`: Port of the LDAP server. Defaults: **389**
+* `RABBITMQ_LDAP_SERVERS`: Comma, semi-colon or space separated list of LDAP server hostnames. No defaults.
+* `RABBITMQ_LDAP_SERVERS_PORT`: LDAP servers port. Defaults: **389**
 * `RABBITMQ_LDAP_USER_DN_PATTERN`: DN used to bind to LDAP in the form `cn=$${username},dc=example,dc=org`. No defaults.
 * `RABBITMQ_PLUGINS`: Comma, semi-colon or space separated list of plugins to enable during the initialization. No defaults.
 * `RABBITMQ_COMMUNITY_PLUGINS`: Comma, semi-colon or space separated list of URLs where to download custom plugins during the initialization. No defaults.
@@ -329,17 +329,64 @@ volumes:
 
 A custom configuration file can be mounted to the `/opt/bitnami/rabbitmq/etc/rabbitmq` directory. If no file is mounted, the container will generate one.
 
-### Enabling LDAP support
+## Enabling LDAP support
 
-LDAP configuration parameters must be specified if you wish to enable LDAP support. The following environment variables are available to configure LDAP support:
+LDAP configuration parameters must be specified if you wish to enable LDAP support for RabbitMQ. The following environment variables are available to configure LDAP support:
 
 * `RABBITMQ_ENABLE_LDAP`: Enable the LDAP configuration. Defaults to `no`.
 * `RABBITMQ_LDAP_TLS`: Enable secure LDAP configuration. Defaults to `no`.
-* `RABBITMQ_LDAP_SERVER`: Hostname of the LDAP server. No defaults.
-* `RABBITMQ_LDAP_SERVER_PORT`: Port of the LDAP server. Defaults to `389`.
+* `RABBITMQ_LDAP_SERVERS`: Comma, semi-colon or space separated list of LDAP server hostnames. No defaults.
+* `RABBITMQ_LDAP_SERVERS_PORT`: LDAP servers port. Defaults: **389**
 * `RABBITMQ_LDAP_USER_DN_PATTERN`: DN used to bind to LDAP in the form `cn=$${username},dc=example,dc=org`.No defaults.
 
 > Note: To escape `$` in `RABBITMQ_LDAP_USER_DN_PATTERN` you need to use `$$`.
+
+Follow these instructions to use the [Bitnami Docker OpenLDAP](https://github.com/bitnami/bitnami-docker-openldap) image to create an OpenLDAP server and use it to authenticate users on RabbitMQ:
+
+### Step 1: Create a network
+
+```console
+$ docker network create app-tier --driver bridge
+```
+
+### Step 2: Start an OpenLDAP server
+
+```console
+$ docker run --name openldap \
+  --env LDAP_ADMIN_USERNAME=admin \
+  --env LDAP_ADMIN_PASSWORD=adminpassword \
+  --env LDAP_USERS=user01,user02 \
+  --env LDAP_PASSWORDS=password1,password2 \
+  --network app-tier \
+  bitnami/openldap:latest
+```
+
+### Step 3: Create an advanced.config file
+
+To configure authorization, you need to create an advanced.config file, following the [clasic config format](https://www.rabbitmq.com/configure.html#erlang-term-config-file), and add your authorization rules. For instance, use the file below to grant all users the ability to use the management plugin, but make none of them administrators:
+
+```
+[{rabbitmq_auth_backend_ldap,[
+    {tag_queries, [{administrator, {constant, false}},
+                   {management,    {constant, true}}]}
+]}].
+```
+
+More information at [https://www.rabbitmq.com/ldap.html#authorisation](https://www.rabbitmq.com/ldap.html#authorisation).
+
+### Step 4: Start RabbitMQ with LDAP support
+
+```console
+$ docker run --name rabbitmq \
+  --env RABBITMQ_ENABLE_LDAP=yes \
+  --env RABBITMQ_LDAP_TLS=no \
+  --env RABBITMQ_LDAP_SERVERS=openldap \
+  --env RABBITMQ_LDAP_SERVERS_PORT=1389 \
+  --env RABBITMQ_LDAP_USER_DN_PATTERN=cn=$${username},ou=users,dc=example,dc=org \
+  --network app-tier \
+  -v /path/to/your/advanced.config:/bitnami/rabbitmq/conf/advanced.config:ro \
+  bitnami/rabbitmq:latest
+```
 
 ## Logging
 

@@ -67,8 +67,8 @@ export RABBITMQ_LOGS="${RABBITMQ_LOGS:--}"
 # LDAP
 export RABBITMQ_ENABLE_LDAP="${RABBITMQ_ENABLE_LDAP:-no}"
 export RABBITMQ_LDAP_TLS="${RABBITMQ_LDAP_TLS:-no}"
-export RABBITMQ_LDAP_SERVER="${RABBITMQ_LDAP_SERVER:-}"
-export RABBITMQ_LDAP_SERVER_PORT="${RABBITMQ_LDAP_SERVER_PORT:-389}"
+export RABBITMQ_LDAP_SERVERS="${RABBITMQ_LDAP_SERVERS:-}"
+export RABBITMQ_LDAP_SERVERS_PORT="${RABBITMQ_LDAP_SERVERS_PORT:-389}"
 export RABBITMQ_LDAP_USER_DN_PATTERN="${RABBITMQ_LDAP_USER_DN_PATTERN:-}"
 EOF
 }
@@ -104,8 +104,8 @@ rabbitmq_validate() {
         print_validation_error "An invalid value was specified in the environment variable RABBITMQ_ENABLE_LDAP. Valid values are: yes or no"
     fi
 
-    if is_boolean_yes "$RABBITMQ_ENABLE_LDAP" && ( [[ -z "${RABBITMQ_LDAP_SERVER}" ]] || [[ -z "${RABBITMQ_LDAP_USER_DN_PATTERN}" ]] ); then
-        print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables RABBITMQ_LDAP_SERVER and RABBITMQ_LDAP_USER_DN_PATTERN."
+    if is_boolean_yes "$RABBITMQ_ENABLE_LDAP" && ( [[ -z "${RABBITMQ_LDAP_SERVERS}" ]] || [[ -z "${RABBITMQ_LDAP_USER_DN_PATTERN}" ]] ); then
+        print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables RABBITMQ_LDAP_SERVERS and RABBITMQ_LDAP_USER_DN_PATTERN."
         if !  is_yes_no_value "$RABBITMQ_LDAP_TLS"; then
             print_validation_error "An invalid value was specified in the environment variable RABBITMQ_LDAP_TLS. Valid values are: yes or no"
         fi
@@ -183,8 +183,17 @@ auth_backends.1 = rabbit_auth_backend_ldap
 auth_backends.2 = internal
 
 ## Connecting to the LDAP server(s)
-auth_ldap.servers.1 = $RABBITMQ_LDAP_SERVER
-auth_ldap.port = $RABBITMQ_LDAP_SERVER_PORT
+EOF
+        read -r -a ldap_servers <<< "$(tr ',;' ' ' <<< "$RABBITMQ_LDAP_SERVERS")"
+        local index=1
+        for server in "${ldap_servers[@]}"; do
+            cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.conf" <<EOF
+auth_ldap.servers.${index} = $server
+EOF
+            index=$((index + 1 ))
+        done
+        cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.conf" <<EOF
+auth_ldap.port = $RABBITMQ_LDAP_SERVERS_PORT
 auth_ldap.user_dn_pattern = $RABBITMQ_LDAP_USER_DN_PATTERN
 
 EOF
