@@ -1,0 +1,37 @@
+version: '2'
+
+services:
+  rabbitmq:
+    image: docker.io/bitnami/rabbitmq:3.8-debian-10
+    ports:
+      - '4369:4369'
+      - '5672:5672'
+      - '25672:25672'
+      - '15672:15672'
+    volumes:
+      - 'rabbitmq_data:/bitnami/rabbitmq'
+      - ./config/advanced.config:/bitnami/rabbitmq/conf/advanced.config:ro
+    environment:
+      - BITNAMI_DEBUG=true
+      - RABBITMQ_ENABLE_LDAP=yes
+      - RABBITMQ_LDAP_TLS=no
+      - RABBITMQ_LDAP_SERVERS=openldap
+      - RABBITMQ_LDAP_SERVERS_PORT=1389
+      - RABBITMQ_LDAP_USER_DN_PATTERN=cn=$${username},ou=users,dc=example,dc=org
+  openldap:
+    image: 'docker.io/bitnami/openldap:latest'
+    ports:
+      - '1389:1389'
+    environment:
+      - LDAP_ADMIN_USERNAME=admin
+      - LDAP_ADMIN_PASSWORD=adminpassword
+      - LDAP_USERS=user01
+      - LDAP_PASSWORDS=password1
+    volumes:
+      - 'openldap_data:/bitnami/openldap'
+
+volumes:
+  rabbitmq_data:
+    driver: local
+  openldap_data:
+    driver: local
