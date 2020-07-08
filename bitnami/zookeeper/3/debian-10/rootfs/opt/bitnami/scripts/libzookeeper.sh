@@ -31,6 +31,7 @@ export BITNAMI_DEBUG=${BITNAMI_DEBUG:-false}
 # Paths
 export ZOO_BASE_DIR="/opt/bitnami/zookeeper"
 export ZOO_DATA_DIR="/bitnami/zookeeper/data"
+export ZOO_DATA_LOG_DIR="${ZOO_DATA_LOG_DIR:-}"
 export ZOO_CONF_DIR="${ZOO_BASE_DIR}/conf"
 export ZOO_CONF_FILE="${ZOO_CONF_DIR}/zoo.cfg"
 export ZOO_LOG_DIR="${ZOO_BASE_DIR}/logs"
@@ -232,6 +233,7 @@ zookeeper_generate_conf() {
     zookeeper_conf_set "$ZOO_CONF_FILE" initLimit "$ZOO_INIT_LIMIT"
     zookeeper_conf_set "$ZOO_CONF_FILE" syncLimit "$ZOO_SYNC_LIMIT"
     zookeeper_conf_set "$ZOO_CONF_FILE" dataDir "$ZOO_DATA_DIR"
+    [[ -n "$ZOO_DATA_LOG_DIR" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" dataLogDir "$ZOO_DATA_LOG_DIR"
     zookeeper_conf_set "$ZOO_CONF_FILE" clientPort "$ZOO_PORT_NUMBER"
     zookeeper_conf_set "$ZOO_CONF_FILE" maxCnxns "$ZOO_MAX_CNXNS"
     zookeeper_conf_set "$ZOO_CONF_FILE" maxClientCnxns "$ZOO_MAX_CLIENT_CNXNS"
