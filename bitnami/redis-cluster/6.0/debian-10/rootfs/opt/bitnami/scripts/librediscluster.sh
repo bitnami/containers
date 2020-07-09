@@ -183,7 +183,7 @@ redis_cluster_create() {
       echo "Node $node not ready, waiting for all the nodes to be ready..."
       sleep 1
     done
-    ips=($(dns_lookup "$node") "${ips[@]}")
+    ips+=($(dns_lookup "$node"))
   done
 
   if is_boolean_yes "$REDIS_TLS_ENABLED"; then
