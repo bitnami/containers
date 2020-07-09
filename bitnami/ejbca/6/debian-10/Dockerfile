@@ -21,7 +21,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/ejbca/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ejbca" \
-    BITNAMI_IMAGE_VERSION="6.15.2-6-debian-10-r11" \
+    BITNAMI_IMAGE_VERSION="6.15.2-6-debian-10-r12" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
