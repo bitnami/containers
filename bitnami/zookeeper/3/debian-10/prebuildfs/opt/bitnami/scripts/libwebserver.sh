@@ -150,7 +150,7 @@ web_server_reload() {
 ########################
 ensure_web_server_app_configuration_exists() {
     local app="${1:?missing app}"
-    local -a args=()
+    local -a args=("$app")
     # Validate arguments
     shift
     while [[ "$#" -gt 0 ]]; do
@@ -165,7 +165,7 @@ ensure_web_server_app_configuration_exists() {
             | --https-port \
             | --document-root \
             )
-                args+=("$1" "$2")
+                args+=("$1" "${2:?missing value}")
                 shift
                 ;;
 
@@ -176,13 +176,13 @@ ensure_web_server_app_configuration_exists() {
             | --apache-extra-directory-configuration \
             | --apache-move-htaccess \
             )
-                [[ "$(web_server_type)" == "apache" ]] && args+=("${1//apache-/}" "$2")
+                [[ "$(web_server_type)" == "apache" ]] && args+=("${1//apache-/}" "${2:?missing value}")
                 shift
                 ;;
 
             # Specific NGINX flags
             --nginx-additional-configuration)
-                [[ "$(web_server_type)" == "nginx" ]] && args+=("${1//nginx-/}" "$2")
+                [[ "$(web_server_type)" == "nginx" ]] && args+=("${1//nginx-/}" "${2:?missing value}")
                 shift
                 ;;
 
@@ -193,7 +193,7 @@ ensure_web_server_app_configuration_exists() {
         esac
         shift
     done
-    "ensure_$(web_server_type)_app_configuration_exists" "$app" "${args[@]}"
+    "ensure_$(web_server_type)_app_configuration_exists" "${args[@]}"
 }
 
 ########################
@@ -235,7 +235,7 @@ ensure_web_server_app_configuration_not_exists() {
 ########################
 ensure_web_server_prefix_configuration_exists() {
     local app="${1:?missing app}"
-    local -a args=()
+    local -a args=("$app")
     # Validate arguments
     shift
     while [[ "$#" -gt 0 ]]; do
@@ -246,7 +246,7 @@ ensure_web_server_prefix_configuration_exists() {
             | --prefix \
             | --type \
             )
-                args+=("$1" "$2")
+                args+=("$1" "${2:?missing value}")
                 shift
                 ;;
 
@@ -273,7 +273,7 @@ ensure_web_server_prefix_configuration_exists() {
         esac
         shift
     done
-    "ensure_$(web_server_type)_prefix_configuration_exists" "$app" "${args[@]}"
+    "ensure_$(web_server_type)_prefix_configuration_exists" "${args[@]}"
 }
 
 ########################
@@ -293,7 +293,7 @@ ensure_web_server_prefix_configuration_exists() {
 ########################
 web_server_update_app_configuration() {
     local app="${1:?missing app}"
-    local -a args=()
+    local -a args=("$app")
     # Validate arguments
     shift
     while [[ "$#" -gt 0 ]]; do
@@ -304,7 +304,7 @@ web_server_update_app_configuration() {
             | --http-port \
             | --https-port \
             )
-                args+=("$1" "$2")
+                args+=("$1" "${2:?missing value}")
                 shift
                 ;;
 
@@ -315,7 +315,7 @@ web_server_update_app_configuration() {
         esac
         shift
     done
-    "$(web_server_type)_update_app_configuration" "$app" "${args[@]}"
+    "$(web_server_type)_update_app_configuration" "${args[@]}"
 }
 
 ########################
