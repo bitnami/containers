@@ -1,19 +1,19 @@
-# What is Moodle?
+# Bitnami Docker Image for Moodle
+
+## What is Moodle?
 
 >Moodle is a very popular open source learning management solution (LMS) for the delivery of elearning courses and programs. It’s used not only by universities, but also by hundreds of corporations around the world who provide eLearning education for their employees. Moodle features a simple interface, drag-and-drop features, role-based permissions, deep reporting, many language translations, a well-documented API and more. With some of the biggest universities and organizations already using it, Moodle is ready to meet the needs of just about any size organization.
 
 https://moodle.org/
 
-# TL;DR;
-
-## Docker Compose
+## TL;DR;
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-moodle/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -21,7 +21,6 @@ $ docker-compose up -d
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
-
 
 > This [CVE scan report](https://quay.io/repository/bitnami/moodle?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
@@ -31,24 +30,42 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Supported tags and respective `Dockerfile` links
+## Why use a non-root container?
+
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
+
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.9.0-debian-10-r16`, `3`, `3.9.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.9.0-debian-10-r16/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.9.0-debian-10-r17`, `3`, `3.9.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.9.0-debian-10-r17/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
-# Prerequisites
+## Get this image
 
-To run this application you need Docker Engine 1.10.0. Docker Compose is recomended with a version 1.6.0 or later.
+The recommended way to get the Bitnami Moodle Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/moodle).
 
-# How to use this image
+```console
+$ docker pull bitnami/moodle:latest
+```
 
-## Run Moodle with a Database Container
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/moodle/tags/) in the Docker Hub Registry.
 
-Running Moodle with a database server is the recommended way. You can either use docker-compose or run the containers manually.
+```console
+$ docker pull bitnami/moodle:[TAG]
+```
+
+If you wish, you can also build the image yourself.
+
+```console
+$ docker build -t bitnami/moodle:latest 'https://github.com/bitnami/bitnami-docker-moodle.git#master:3/debian-10'
+```
+
+## How to use this image
+
+Moodle requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
 
 ### Run the application using Docker Compose
 
@@ -59,203 +76,127 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-moodle/mast
 $ docker-compose up -d
 ```
 
-### Run the application manually
+### Using the Docker Command Line
 
-If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
+If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
-1. Create a new network for the application and the database:
+#### Step 1: Create a network
 
-  ```console
-  $ docker network create moodle-tier
-  ```
+```console
+$ docker network create moodle-network
+```
 
-2. Create a volume for MariaDB persistence and create a MariaDB container
+#### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
-  ```console
-  $ docker volume create --name mariadb_data
-  $ docker run -d --name mariadb \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -e MARIADB_USER=bn_moodle \
-    -e MARIADB_DATABASE=bitnami_moodle \
-    --net moodle-tier \
-    --volume mariadb_data:/bitnami \
-    bitnami/mariadb:latest
-  ```
+```console
+$ docker volume create --name mariadb_data
+$ docker run -d --name mariadb \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env MARIADB_USER=bn_moodle \
+  --env MARIADB_PASSWORD=bitnami \
+  --env MARIADB_DATABASE=bitnami_moodle \
+  --network moodle-network \
+  --volume mariadb_data:/bitnami/mariadb \
+  bitnami/mariadb:latest
+```
 
-  *Note:* You need to give the container a name in order to Moodle to resolve the host
+#### Step 3: Create volumes for Moodle persistence and launch the container
 
-3. Create volumes for Moodle persistence and launch the container
+```console
+$ docker volume create --name moodle_data
+$ docker run -d --name moodle \
+  -p 8080:8080 -p 8443:8443 \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env MOODLE_DATABASE_USER=bn_moodle \
+  --env MOODLE_DATABASE_PASSWORD=bitnami \
+  --env MOODLE_DATABASE_NAME=bitnami_moodle \
+  --network moodle-network \
+  --volume moodle_data:/bitnami/moodle \
+  bitnami/moodle:latest
+```
 
-  ```console
-  $ docker volume create --name moodle_data
-  $ docker run -d --name moodle -p 80:80 -p 443:443 \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -e MOODLE_DATABASE_USER=bn_moodle \
-    -e MOODLE_DATABASE_NAME=bitnami_moodle \
-    --net moodle-tier \
-    --volume moodle_data:/bitnami \
-    bitnami/moodle:latest
-  ```
-
-Then you can access your application at http://your-ip/
+Access your application at *http://your-ip/*
 
 ## Persisting your application
 
-If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
+For persistence you should mount a directory at the `/bitnami/moodle` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should mount a volume for persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
 
-The above examples define docker volumes namely `mariadb_data` and `moodle_data`. The Moodle application state will persist as long as these volumes are not removed.
+The above examples define the Docker volumes named mariadb_data and moodle_data. The Moodle application state will persist as long as volumes are not removed.
 
-To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
+To avoid inadvertent removal of volumes, you can mount host directories as data volumes. Alternatively you can make use of volume plugins to host the volume data.
 
-### Mount persistent folders in the host using docker-compose
+### Mount host directories as data volumes with Docker Compose
 
 This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
 
-```yaml
-services:
-  mariadb:
-  ...
-    volumes:
-      - '/path/to/mariadb-persistence:/bitnami'
-  ...
-  moodle:
-  ...
-    depends_on:
-      - mariadb
-  ...
+```diff
+   mariadb:
+     ...
+     volumes:
+-      - 'mariadb_data:/bitnami/mariadb'
++      - /path/to/mariadb-persistence:/bitnami/mariadb
+   ...
+   moodle:
+     ...
+     volumes:
+-      - 'moodle_data:/bitnami/moodle'
++      - /path/to/moodle-persistence:/bitnami/moodle
+   ...
+-volumes:
+-  mariadb_data:
+-    driver: local
+-  moodle_data:
+-    driver: local
 ```
 
-### Mount persistent folders manually
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
+### Mount host directories as data volumes using the Docker command line
 
-1. If you haven't done this before, create a new network for the application and the database:
-
-  ```console
-  $ docker network create moodle-tier
-  ```
-
-2. Start a MariaDB database in the previous network:
-
-  ```console
-  $ docker run -d --name mariadb \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -e MARIADB_USER=bn_moodle \
-    -e MARIADB_DATABASE=bitnami_moodle \
-    -v /path/to/mariadb-persistence:/bitnami \
-    --net moodle-tier \
-    bitnami/mariadb:latest
-  ```
-
-  *Note:* You need to give the container a name in order to Moodle to resolve the host
-
-3. Run the Moodle container:
-
-  ```console
-  $ docker run -d -p 80:80 -p 443:443 --name moodle \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -e MOODLE_DATABASE_USER=bn_moodle \
-    -e MOODLE_DATABASE_NAME=bitnami_moodle \
-    --net moodle-tier \
-    --volume /path/to/moodle-persistence:/bitnami \
-    bitnami/moodle:latest
-  ```
-
-# Upgrade this application
-
-> **NOTE:** Since Moodle 3.4.0-r1, the application upgrades should be done manually inside the docker container following the [official documentation](https://docs.moodle.org/34/en/Upgrading).
-
-> As an alternative, you can try upgrading using an updated docker image but any data from the Moodle container will be lost and you will have to reinstall all the plugins and themes you manually added.
-
-Bitnami provides up-to-date versions of MariaDB and Moodle, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Moodle container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
-
-1. Get the updated images:
-
-  ```console
-  $ docker pull bitnami/moodle:latest
-  ```
-
-2. Stop your container
-
- * For docker-compose: `$ docker-compose stop moodle`
- * For manual execution: `$ docker stop moodle`
-
-3. Take a snapshot of the application state
+#### Step 1: Create a network (if it does not exist)
 
 ```console
-$ rsync -a /path/to/moodle-persistence /path/to/moodle-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+$ docker network create moodle-network
 ```
 
-Additionally, [snapshot the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
+#### Step 2. Create a MariaDB container with host volume
 
-You can use these snapshots to restore the application state should the upgrade fail.
+```console
+$ docker volume create --name mariadb_data
+$ docker run -d --name mariadb \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env MARIADB_USER=bn_moodle \
+  --env MARIADB_PASSWORD=bitnami \
+  --env MARIADB_DATABASE=bitnami_moodle \
+  --network moodle-network \
+  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+  bitnami/mariadb:latest
+```
 
-4. Remove the currently running container
+#### Step 3. Create the Moodle the container with host volumes
 
- * For docker-compose: `$ docker-compose rm -v moodle`
- * For manual execution: `$ docker rm -v moodle`
+```console
+$ docker volume create --name moodle_data
+$ docker run -d --name moodle \
+  -p 8080:8080 -p 8443:8443 \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env MOODLE_DATABASE_USER=bn_moodle \
+  --env MOODLE_DATABASE_PASSWORD=bitnami \
+  --env MOODLE_DATABASE_NAME=bitnami_moodle \
+  --network moodle-network \
+  --volume /path/to/moodle-persistence:/bitnami/moodle \
+  bitnami/moodle:latest
+```
 
-5. Remove the persisted data. This is needed from 3.4.0-r1 since the whole installation is persisted and otherwise the new docker image will use an old application code.
-
-    * Get the volume containing the persisted data
-
-    ```console
-    $ docker volume ls
-    ```
-
-    * Remove the volume
-
-    ```console
-    $ docker volume rm YOUR_VOLUME
-    ```
-
-6. Run the new image
-
- * For docker-compose: `$ docker-compose up moodle`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name moodle bitnami/moodle:latest`
-
-# Configuration
+## Configuration
 
 ## Environment variables
 
-When you start the moodle image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
+When you start the Moodle image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-##### User and Site configuration
-
- - `MOODLE_USERNAME`: Moodle application username. Default: **user**
- - `MOODLE_PASSWORD`: Moodle application password. Default: **bitnami**
- - `MOODLE_EMAIL`: Moodle application email. Default: **user@example.com**
-
-##### Use an existing database
-
-- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
-- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
-- `MOODLE_DATABASE_NAME`: Database name that Moodle will use to connect with the database. Default: **bitnami_moodle**
-- `MOODLE_DATABASE_USER`: Database user that Moodle will use to connect with the database. Default: **bn_moodle**
-- `MOODLE_DATABASE_PASSWORD`: Database password that Moodle will use to connect with the database. No defaults.
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-- `MOODLE_SKIP_INSTALL`: Do not run the Moodle installation wizard. This is necessary in case you use a database that already has Moodle data. Default: **no**
-
-##### Create a database for Moodle using mysql-client
-
-- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
-- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
-- `MARIADB_ROOT_USER`: Database admin user. Default: **root**
-- `MARIADB_ROOT_PASSWORD`: Database password for the `MARIADB_ROOT_USER` user. No defaults.
-- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
-- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
-- `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-##### PHP configuration
-
-- `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **256M**
-
-If you want to add a new environment variable:
-
- * For docker-compose add the variable name and value under the application section, modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 moodle:
@@ -265,79 +206,224 @@ moodle:
   ...
 ```
 
- * For manual execution add a `-e` option with each variable and value:
-
-   ```console
-   $ docker run -d  -p 80:80 -p 443:443 --name moodle
-     -e MOODLE_PASSWORD=my_password \
-     --net moodle-tier \
-     --volume /path/to/moodle-persistence:/bitnami \
-     bitnami/moodle:latest
-   ```
-
-### SMTP Configuration
-
-To configure Moodle to send email using SMTP you can set the following environment variables:
-
- - `SMTP_HOST`: SMTP host.
- - `SMTP_PORT`: SMTP port.
- - `SMTP_USER`: SMTP account user.
- - `SMTP_PASSWORD`: SMTP account password.
- - `SMTP_PROTOCOL`: SMTP protocol.
-
-This would be an example of SMTP configuration using a GMail account:
-
- * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
-
-  ```yaml
-  moodle:
-  ...
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - MOODLE_DATABASE_USER=bn_moodle
-      - MOODLE_DATABASE_NAME=bitnami_moodle
-      - SMTP_HOST=smtp.gmail.com
-      - SMTP_PORT=587
-      - SMTP_USER=your_email@gmail.com
-      - SMTP_PASSWORD=your_password
-      - SMTP_PROTOCOL=tls
-  ...
-  ```
-
-* For manual execution:
+ * For manual execution add a `--env` option with each variable and value:
 
   ```console
-  $ docker run -d  -p 80:80 -p 443:443 --name moodle
-    -e MARIADB_HOST=mariadb \
-    -e MARIADB_PORT_NUMBER=3306 \
-    -e MOODLE_DATABASE_USER=bn_moodle \
-    -e MOODLE_DATABASE_NAME=bitnami_moodle \
-    -e SMTP_HOST=smtp.gmail.com \
-    -e SMTP_PORT=587 \
-    -e SMTP_USER=your_email@gmail.com \
-    -e SMTP_PASSWORD=your_password \
-    --net moodle-tier \
+  $ docker run -d --name moodle -p 80:8080 -p 443:8443 \
+    --env MOODLE_PASSWORD=my_password \
+    --network moodle-tier \
     --volume /path/to/moodle-persistence:/bitnami \
     bitnami/moodle:latest
   ```
 
-## Installing additional language packs
+Available environment variables:
+
+##### User and Site configuration
+
+- `MOODLE_USERNAME`: Moodle application username. Default: **user**
+- `MOODLE_PASSWORD`: Moodle application password. Default: **bitnami**
+- `MOODLE_EMAIL`: Moodle application email. Default: **user@example.com**
+- `MOODLE_SITE_NAME`: Moodle site name. Default: **New Site**
+- `MOODLE_SKIP_BOOTSTRAP`: Do not initialize the Moodle database for a new deployment. This is necessary in case you use a database that already has Moodle data. Default: **no**
+
+##### Use an existing database
+
+- `MOODLE_DATABASE_TYPE`: Database type. Valid values: *mariadb*, *mysqli*. Default: **mariadb**
+- `MOODLE_DATABASE_HOST`: Hostname for database server. Default: **mariadb**
+- `MOODLE_DATABASE_PORT_NUMBER`: Port used by database server. Default: **3306**
+- `MOODLE_DATABASE_NAME`: Database name that Moodle will use to connect with the database. Default: **bitnami_moodle**
+- `MOODLE_DATABASE_USER`: Database user that Moodle will use to connect with the database. Default: **bn_moodle**
+- `MOODLE_DATABASE_PASSWORD`: Database password that Moodle will use to connect with the database. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### Create a database for Moodle using mysql-client
+
+- `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
+- `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET`: Character set to use for the new database. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_COLLATE`: Database collation to use for the new database. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### SMTP Configuration
+
+To configure Moodle to send email using SMTP you can set the following environment variables:
+
+- `MOODLE_SMTP_HOST`: SMTP host.
+- `MOODLE_SMTP_PORT`: SMTP port.
+- `MOODLE_SMTP_USER`: SMTP account user.
+- `MOODLE_SMTP_PASSWORD`: SMTP account password.
+- `MOODLE_SMTP_PROTOCOL`: SMTP protocol.
+
+##### PHP configuration
+
+- `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **256M**
+
+##### Example
+
+This would be an example of SMTP configuration using a Gmail account:
+
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+  moodle:
+    ...
+    environment:
+      - MOODLE_DATABASE_USER=bn_moodle
+      - MOODLE_DATABASE_NAME=bitnami_moodle
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MOODLE_SMTP_HOST=smtp.gmail.com
+      - MOODLE_SMTP_PORT=587
+      - MOODLE_SMTP_USER=your_email@gmail.com
+      - MOODLE_SMTP_PASSWORD=your_password
+      - MOODLE_SMTP_PROTOCOL=tls
+  ...
+```
+ * For manual execution:
+
+  ```console
+  $ docker run -d --name moodle -p 80:8080 -p 443:8443 \
+    --env MOODLE_DATABASE_USER=bn_moodle \
+    --env MOODLE_DATABASE_NAME=bitnami_moodle \
+    --env MOODLE_SMTP_HOST=smtp.gmail.com \
+    --env MOODLE_SMTP_PORT=587 \
+    --env MOODLE_SMTP_USER=your_email@gmail.com \
+    --env MOODLE_SMTP_PASSWORD=your_password \
+    --env MOODLE_SMTP_PROTOCOL=tls \
+    --network moodle-tier \
+    --volume /path/to/moodle-persistence:/bitnami \
+    bitnami/moodle:latest
+  ```
+
+### Installing additional language packs
 
 By default, this container packs a generic English version of Moodle. Nevertheless, more Langage Packs can be added to the default configuration using the in-platform Administration [interface](https://docs.moodle.org/38/en/Language_packs#Language_pack_installation_and_uninstallation). In order to fully support a new Language Pack it is also a requirement to update the system's locales files. We highly recommend [extending](https://github.com/bitnami/bitnami-docker-moodle#extend-this-image) the default image and adding as many locales as needed:
++Stop the currently running container using the command
 
-  ```Dockerfile
-  FROM bitnami/moodle
-  RUN echo "es_ES.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
-  ```
+```Dockerfile
+FROM bitnami/moodle
+RUN echo "es_ES.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
+```
 
 Bear in mind that in the example above `es_ES.UTF-8 UTF-8` is the locale needed for the desired Language Pack to install. You may change this value to the locale corresponding to your pack.
 
-# Customize this image
+## Logging
+
+The Bitnami Moodle Docker image sends the container logs to `stdout`. To view the logs:
+
+```console
+$ docker logs moodle
+```
+
+Or using Docker Compose:
+
+```console
+$ docker-compose logs moodle
+```
+
+You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+
+## Maintenance
+
+### Backing up your container
+
+To backup your data, configuration and logs, follow these simple steps:
+
+#### Step 1: Stop the currently running container
+
+```console
+$ docker stop moodle
+```
+
+Or using Docker Compose:
+
+```console
+$ docker-compose stop moodle
+```
+
+#### Step 2: Run the backup command
+
+We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
+
+```console
+$ docker run --rm -v /path/to/moodle-backups:/backups --volumes-from moodle busybox \
+  cp -a /bitnami/moodle /backups/latest
+```
+
+### Restoring a backup
+
+Restoring a backup is as simple as mounting the backup as volumes in the containers.
+
+For the Moodle container:
+
+```diff
+ $ docker run -d --name mariadb \
+   ...
+-  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
++  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
+   bitnami/mariadb:latest
+```
+
+For the MariaDB database container:
+
+```diff
+ $ docker run -d --name moodle \
+   ...
+-  --volume /path/to/moodle-persistence:/bitnami/moodle \
++  --volume /path/to/moodle-backups/latest:/bitnami/moodle \
+   bitnami/moodle:latest
+```
+
+### Upgrade this image
+
+> **NOTE:** Since Moodle 3.4.0-r1, the application upgrades should be done manually inside the docker container following the [official documentation](https://docs.moodle.org/37/en/Upgrading).
+> As an alternative, you can try upgrading using an updated Docker image. However, any data from the Moodle container will be lost and you will have to reinstall all the plugins and themes you manually added.
+
+Bitnami provides up-to-date versions of MariaDB and Moodle, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Moodle container. For the MariaDB upgrade see: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
+
+#### Step 1: Get the updated image
+
+```console
+$ docker pull bitnami/moodle:latest
+```
+
+#### Step 2: Stop the running container
+
+Stop the currently running container using the command
+
+```console
+$ docker-compose stop moodle
+```
+
+#### Step 3: Take a snapshot of the application state
+
+Follow the steps in [Backing up your container](#backing-up-your-container) to take a snapshot of the current application state.
+
+#### Step 4: Remove the currently running container
+
+Remove the currently running container by executing the following command:
+
+```console
+docker-compose rm -v moodle
+```
+
+#### Step 5: Run the new image
+
+Update the image tag in `docker-compose.yml` and re-create your container with the new image:
+
+```console
+$ docker-compose up -d
+```
+
+## Customize this image
 
 The Bitnami Moodle Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
-## Extend this image
+### Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -365,7 +451,9 @@ FROM bitnami/moodle
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ## Install 'vim'
+USER 0 # Required to perform privileged actions
 RUN install_packages vim
+USER 1001 # Revert to the original non-root user
 
 ## Enable mod_ratelimit module
 RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
@@ -377,42 +465,29 @@ ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
 
-Based on the extended image, you can use a Docker Compose file like the one below to add other features:
+Based on the extended image, you can update the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository to add other features:
 
-```yaml
-version: '2'
-services:
-  mariadb:
-    image: 'bitnami/mariadb:10.1'
-    environment:
-      - MARIADB_USER=bn_moodle
-      - MARIADB_DATABASE=bitnami_moodle
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - 'mariadb_data:/bitnami'
-  moodle:
-    build: .
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - MOODLE_DATABASE_USER=bn_moodle
-      - MOODLE_DATABASE_NAME=bitnami_moodle
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '80:8181'
-      - '443:8143'
-    volumes:
-      - 'moodle_data:/bitnami'
-    depends_on:
-      - mariadb
-volumes:
-  mariadb_data:
-    driver: local
-  moodle_data:
-    driver: local
+```diff
+   moodle:
+-    image: bitnami/moodle:latest
++    build: .
+     ports:
+-      - '80:8080'
+-      - '443:8443'
++      - '80:8181'
++      - '443:8143'
+     environment:
+       ...
++      - PHP_MEMORY_LIMIT=512m
+     ...
 ```
 
 # Notable Changes
+
+## 3.9.0-debian-10-r15
+
+- The size of the container image has been decreased.
+- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 
 ## 3.7.1-debian-9-r38 and 3.7.1-ol-7-r40
 
@@ -425,29 +500,29 @@ volumes:
 - The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
 - Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-moodle/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-moodle/pulls) with your contribution.
 
-# Issues
+## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-moodle/issues/new). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-moodle/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`$ docker version`)
-- Output of `$ docker info`
-- Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Docker version (`docker version`)
+- Output of `docker info`
+- Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
-Copyright 2016-2020 Bitnami
+Copyright (c) 2020 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-  <http://www.apache.org/licenses/LICENSE-2.0>
+    http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
