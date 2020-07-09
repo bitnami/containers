@@ -20,13 +20,6 @@ set -o pipefail
 # Ensure phpMyAdmin environment variables are valid
 phpmyadmin_validate
 
-# Ensure proper ownership for the phpMyAdmin 'tmp' directory
-if am_i_root; then
-    ensure_user_exists "$WEB_SERVER_DAEMON_USER" "$WEB_SERVER_DAEMON_GROUP"
-    info "Ensuring phpMyAdmin directories have proper permissions"
-    configure_permissions_ownership "$PHPMYADMIN_TMP_DIR" -u "$WEB_SERVER_DAEMON_USER" -g "$WEB_SERVER_DAEMON_GROUP"
-fi
-
 # Ensure phpMyAdmin is initialized
 phpmyadmin_initialize
 
