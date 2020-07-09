@@ -613,3 +613,75 @@ EOF
         warn "The ${app} web server configuration file '${prefix_file}' is not writable. Configurations based on environment variables will not be applied for this file."
     fi
 }
+
+########################
+# Ensure Apache application configuration is updated with the runtime configuration (i.e. ports)
+# Globals:
+#   *
+# Arguments:
+#   $1 - App name
+# Flags:
+#   --hosts - Hosts to enable
+#   --enable-https - Update HTTPS app configuration
+#   --http-port - HTTP port number
+#   --https-port - HTTPS port number
+# Returns:
+#   true if the configuration was updated, false otherwise
+########################
+apache_update_app_configuration() {
+    local -r app="${1:?missing app}"
+    # Default options
+    local -a hosts=("127.0.0.1" "_default_")
+    local enable_https="yes"
+    local http_port="${APACHE_HTTP_PORT_NUMBER:-"$APACHE_DEFAULT_HTTP_PORT_NUMBER"}"
+    local https_port="${APACHE_HTTPS_PORT_NUMBER:-"$APACHE_DEFAULT_HTTPS_PORT_NUMBER"}"
+    # Validate arguments
+    shift
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            --hosts)
+                shift
+                read -r -a hosts <<< "$1"
+                ;;
+
+            # Common flags
+            --enable-https \
+            | --http-port \
+            | --https-port \
+            )
+                args+=("$1" "$2")
+                shift
+                ;;
+
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+    # Construct host string in the format of "host1:port1[ host2:port2[ ...]]"
+    export http_listen_addresses=""
+    export https_listen_addresses=""
+    for host in "${hosts[@]}"; do
+        http_listen="${host}:${http_port}"
+        https_listen="${host}:${https_port}"
+        [[ -z "${http_listen_addresses:-}" ]] && http_listen_addresses="$http_listen" || http_listen_addresses="${http_listen_addresses} ${http_listen}"
+        [[ -z "${https_listen_addresses:-}" ]] && https_listen_addresses="$https_listen" || https_listen_addresses="${https_listen_addresses} ${https_listen}"
+    done
+    # Update configuration
+    local -r http_vhost="${APACHE_VHOSTS_DIR}/${app}-vhost.conf"
+    local -r https_vhost="${APACHE_VHOSTS_DIR}/${app}-https-vhost.conf"
+    if is_file_writable "$http_vhost"; then
+        replace_in_file "$http_vhost" "^<VirtualHost\s.*>$" "<VirtualHost ${http_listen_addresses}>"
+    else
+        warn "The ${app} virtual host file '${http_vhost}' is not writable. Configurations based on environment variables will not be applied for this file."
+    fi
+    if is_boolean_yes "$enable_https"; then
+        if is_file_writable "$https_vhost"; then
+            replace_in_file "$https_vhost" "^<VirtualHost\s.*>$" "<VirtualHost ${https_listen_addresses}>"
+        else
+            warn "The ${app} virtual host file '${https_vhost}' is not writable. Configurations based on environment variables will not be applied for this file."
+        fi
+    fi
+}
