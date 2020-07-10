@@ -46,8 +46,9 @@ persist_app() {
         file_to_persist_relative="$(relativize "$file_to_persist" "$install_dir")"
         file_to_persist_destination="${persist_dir}/${file_to_persist_relative}"
         file_to_persist_destination_folder="$(dirname "$file_to_persist_destination")"
-        # Get original permissions (except for the root directory, to avoid issues with volumes)
-        find "$file_to_persist_relative" | grep -E -v '^\.$' | xargs getfacl -R > "$tmp_file"
+        # Get original permissions for existing files, which will be applied later
+        # Exclude the root directory with 'sed', to avoid issues when copying the entirety of it to a volume
+        getfacl -R "$file_to_persist_relative" | sed -E '/# file: (\..+|[^.])/,$!d' > "$tmp_file"
         # Copy directories to the volume
         ensure_dir_exists "$file_to_persist_destination_folder"
         cp -Lr --preserve=links "$file_to_persist_relative" "$file_to_persist_destination_folder"
@@ -62,6 +63,7 @@ persist_app() {
         popd >/dev/null
     done
     popd >/dev/null
+    rm -f "$tmp_file"
     # Install the persisted files into the installation directory, via symlinks
     restore_persisted_app "$@"
 }
