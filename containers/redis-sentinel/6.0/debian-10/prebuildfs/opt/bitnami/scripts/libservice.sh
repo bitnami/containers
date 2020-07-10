@@ -69,6 +69,64 @@ stop_service_using_pid() {
 }
 
 ########################
+# Start cron daemon
+# Arguments:
+#   None
+# Returns:
+#   true if started correctly, false otherwise
+#########################
+cron_start() {
+    if [[ -x "/usr/sbin/cron" ]]; then
+        /usr/sbin/cron
+    elif [[ -x "/usr/sbin/crond" ]]; then
+        /usr/sbin/crond
+    else
+        false
+    fi
+}
+
+########################
+# Generate a cron configuration file for a given service
+# Arguments:
+#   $1 - Service name
+#   $2 - Command
+# Flags:
+#   --run-as - User to run as (default: root)
+#   --schedule - Cron schedule configuration (default: * * * * *)
+# Returns:
+#   None
+#########################
+generate_cron_conf() {
+    local service_name="${1:?service name is missing}"
+    local cmd="${2:?command is missing}"
+    local run_as="root"
+    local schedule="* * * * *"
+
+    # Parse optional CLI flags
+    shift 2
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            --run-as)
+                shift
+                run_as="$1"
+                ;;
+            --schedule)
+                shift
+                schedule="$1"
+                ;;
+            *)
+                echo "Invalid command line flag ${1}" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+
+    mkdir -p /etc/cron.d
+    echo "${schedule} ${run_as} ${cmd}" > /etc/cron.d/"$service_name"
+}
+
+########################
 # Generate a monit configuration file for a given service
 # Arguments:
 #   $1 - Service name
