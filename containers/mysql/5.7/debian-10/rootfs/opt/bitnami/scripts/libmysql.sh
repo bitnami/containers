@@ -448,6 +448,7 @@ mysql_execute_print_output() {
     local -r db="${1:-}"
     local -r user="${2:-root}"
     local -r pass="${3:-}"
+    local mysql_cmd opts
     read -r -a opts <<<"${@:4}"
 
     # Process mysql CLI arguments
@@ -460,10 +461,7 @@ mysql_execute_print_output() {
     [[ -n "${opts[*]:-}" ]] && args+=("${opts[@]:-}")
 
     # Obtain the command specified via stdin
-    local mysql_cmd=""
-    if read -r -t 0; then
-        mysql_cmd="$(</dev/stdin)"
-    fi
+    mysql_cmd="$(</dev/stdin)"
     debug "Executing SQL command:\n$mysql_cmd"
     "$DB_BIN_DIR/mysql" "${args[@]}" <<<"$mysql_cmd"
 }
@@ -793,12 +791,14 @@ mysql_ensure_user_exists() {
     [[ -n "$db_host" ]] && opts+=("-h" "${db_host}")
     [[ -n "$db_port" ]] && opts+=("-P" "${db_port}")
     [[ -n "$ssl_ca" ]] && opts+=("--ssl-ca" "$ssl_ca")
+    local mysql_create_user_cmd
+    [[ "$DB_FLAVOR" = "mariadb" ]] && mysql_create_user_cmd="create or replace user" || mysql_create_user_cmd="create user if not exists"
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "${opts[@]:-}" <<EOF
-create $([[ "$DB_FLAVOR" = "mariadb" ]] && echo "or replace") user '$user'@'%' $auth_string;
+${mysql_create_user_cmd} '${user}'@'%' ${auth_string};
 EOF
     debug "Removing all other hosts for the user"
     hosts=$(mysql_execute_print_output "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "${opts[@]:-}" <<EOF
-select Host from user where User='$user' and Host!='%';
+select Host from user where User='${user}' and Host!='%';
 EOF
 )
     for host in $hosts; do
