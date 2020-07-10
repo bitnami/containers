@@ -1,194 +1,250 @@
+# Bitnami Docker Image for DokuWiki
 
-# What is DokuWiki?
+## What is DokuWiki?
 
 > DokuWiki is a simple to use and highly versatile Open Source wiki software that doesn't require a database. It is loved by users for its clean and readable syntax. The ease of maintenance, backup and integration makes it an administrator's favorite
 
-https://www.dokuwiki.org/
+[https://www.dokuwiki.org/](https://www.dokuwiki.org/)
 
-# TL;DR;
-
-## Docker Compose
+## TL;DR;
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-dokuwiki/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
-
 
 > This [CVE scan report](https://quay.io/repository/bitnami/dokuwiki?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy DokuWiki in Kubernetes?
+## Why use a non-root container?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami DokuWiki Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/dokuwiki).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
-
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.20180422.202005011246-debian-10-r67`, `0`, `0.20180422.202005011246`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.202005011246-debian-10-r67/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.20180422.202005011246-debian-10-r68`, `0`, `0.20180422.202005011246`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/0.20180422.202005011246-debian-10-r68/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dokuwiki GitHub repo](https://github.com/bitnami/bitnami-docker-dokuwiki).
 
+## Get this image
 
-# Prerequisites
-
-To run this application you need Docker Engine 1.10.0. Docker Compose is recomended with a version 1.6.0 or later.
-
-# How to use this image
-
-### Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/master/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-dokuwiki/master/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
-```
-
-### Run the application manually
-
-If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
-
-1. Create a new network for the application :
-
-  ```console
-  $ docker network create dokuwiki-tier
-  ```
-
-2. Run the Dokuwiki container:
-
-  ```console
-  $ docker run -d \
-    -p 80:80 -p 443:443 --name dokuwiki --net dokuwiki-tier \
-    bitnami/dokuwiki:latest
-  ```
-
-Then you can access your application at http://your-ip/
-
-## Persisting your application
-
-If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
-
-For persistence you should mount a volume at the `/bitnami` path. The above examples define a docker volume namely `dokuwiki_data`. The DokuWiki application state will persist as long as this volume is not removed.
-
-To avoid inadvertent removal of this volume you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
-
-### Mount persistent folders in the host using docker-compose
-
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/master/docker-compose.yml) file present in this repository:
-
-```yaml
-dokuwiki:
-  ...
-  volumes:
-    - '/path/to/dokuwiki-persistence:/bitnami'
-  ...
-```
-
-### Mount persistent folders manually
-
-In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
-
-1. If you haven't done this before, create a new network for the application :
-
-  ```console
-  $ docker network create dokuwiki-tier
-  ```
-
-2. Run the Dokuwiki container:
-
-  ```console
-  $ docker run -d -p 80:80 -p 443:443 --name dokuwiki \
-    --net dokuwiki-tier \
-    --volume /path/to/dokuwiki-persistence:/bitnami \
-    bitnami/dokuwiki:latest
-  ```
-
-# Upgrade this application
-
-Bitnami provides up-to-date versions of Dokuwiki, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Dokuwiki container.
-
-1. Get the updated images:
+The recommended way to get the Bitnami DokuWiki Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/dokuwiki).
 
 ```console
 $ docker pull bitnami/dokuwiki:latest
 ```
 
-2. Stop your container
-
- * For docker-compose: `$ docker-compose stop dokuwiki`
- * For manual execution: `$ docker stop dokuwiki`
-
-3. Take a snapshot of the application state
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/dokuwiki/tags/) in the Docker Hub Registry.
 
 ```console
-$ rsync -a /path/to/dokuwiki-persistence /path/to/dokuwiki-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+$ docker pull bitnami/dokuwiki:[TAG]
 ```
 
-You can use this snapshot to restore the application state should the upgrade fail.
+If you wish, you can also build the image yourself.
 
-4. Remove the stopped container
+```console
+$ docker build -t bitnami/dokuwiki:latest 'https://github.com/bitnami/bitnami-docker-dokuwiki.git#master:0/debian-10'
+```
 
- * For docker-compose: `$ docker-compose rm -v dokuwiki`
- * For manual execution: `$ docker rm -v dokuwiki`
+## Persisting your application
 
-5. Run the new image
+If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
- * For docker-compose: `$ docker-compose up dokuwiki`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name dokuwiki bitnami/dokuwiki:latest`
+For persistence you should mount a directory at the `/bitnami/dokuwiki` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should mount a volume for persistence of the  data](https://github.com/bitnami/bitnami-docker-#persisting-your-database).
 
-# Configuration
+The above examples define the Docker volumes named dokuwiki_data. The DokuWiki application state will persist as long as volumes are not removed.
+
+To avoid inadvertent removal of volumes, you can mount host directories as data volumes. Alternatively you can make use of volume plugins to host the volume data.
+
+### Mount host directories as data volumes with Docker Compose
+
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/master/docker-compose.yml) file present in this repository:
+
+```diff
+   dokuwiki:
+     ...
+     volumes:
+-      - 'dokuwiki_data:/bitnami/dokuwiki'
++      - /path/to/dokuwiki-persistence:/bitnami/dokuwiki
+   ...
+-volumes:
+-  dokuwiki_data:
+-    driver: local
+```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+
+### Mount host directories as data volumes using the Docker command line
+
+#### Step 1: Create a network (if it does not exist)
+
+```console
+$ docker network create dokuwiki-network
+```
+
+#### Step 2. Create the DokuWiki the container with host volumes
+
+```console
+$ docker volume create --name dokuwiki_data
+$ docker run -d --name dokuwiki \
+  -p 8080:8080 -p 8443:8443 \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --network dokuwiki-network \
+  --volume /path/to/dokuwiki-persistence:/bitnami/dokuwiki \
+  bitnami/dokuwiki:latest
+```
+
+## Configuration
 
 ## Environment variables
 
 When you start the DokuWiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
- * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/master/docker-compose.yml) file present in this repository:
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/master/docker-compose.yml) file present in this repository:
 
-  ```yaml
-  dokuwiki:
-    ...
-    environment:
-      - DOKUWIKI_PASSWORD=my_password
-    ...
-  ```
+```yaml
+dokuwiki:
+  ...
+  environment:
+    - DOKUWIKI_PASSWORD=my_password
+  ...
+```
 
- * For manual execution add a `-e` option with each variable and value:
+ * For manual execution add a `--env` option with each variable and value:
 
   ```console
-  $ docker run -d -p 80:80 -p 443:443 --name dokuwiki \
-    -e DOKUWIKI_PASSWORD=my_password \
-    --net dokuwiki-tier \
-    --volume /path/to/dokuwiki-persistence:/bitnami/dokuwiki \
+  $ docker run -d --name dokuwiki -p 80:8080 -p 443:8443 \
+    --env DOKUWIKI_PASSWORD=my_password \
+    --network dokuwiki-tier \
+    --volume /path/to/dokuwiki-persistence:/bitnami \
     bitnami/dokuwiki:latest
   ```
 
-Available variables:
+Available environment variables:
+
+##### User and Site configuration
 
  - `DOKUWIKI_USERNAME`: Dokuwiki application SuperUser name. Default: **superuser**
  - `DOKUWIKI_FULL_NAME`: Dokuwiki SuperUser Full Name. Default: **Full Name**
  - `DOKUWIKI_PASSWORD`: Dokuwiki application password. Default: **bitnami1**
  - `DOKUWIKI_EMAIL`: Dokuwiki application email. Default: **user@example.com**
  - `DOKUWIKI_WIKI_NAME`: Dokuwiki wiki name. Default: **Bitnami DokuWiki**
- - `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **256M**
 
-# Customize this image
+##### PHP configuration
 
-The Bitnami Dokuwiki Docker image is designed to be extended so it can be used as the base image for your custom web applications.
+- `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **256M**
 
-## Extend this image
+## Logging
+
+The Bitnami DokuWiki Docker image sends the container logs to `stdout`. To view the logs:
+
+```console
+$ docker logs dokuwiki
+```
+
+Or using Docker Compose:
+
+```console
+$ docker-compose logs dokuwiki
+```
+
+You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+
+## Maintenance
+
+### Backing up your container
+
+To backup your data, configuration and logs, follow these simple steps:
+
+#### Step 1: Stop the currently running container
+
+```console
+$ docker stop dokuwiki
+```
+
+Or using Docker Compose:
+
+```console
+$ docker-compose stop dokuwiki
+```
+
+#### Step 2: Run the backup command
+
+We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
+
+```console
+$ docker run --rm -v /path/to/dokuwiki-backups:/backups --volumes-from dokuwiki busybox \
+  cp -a /bitnami/dokuwiki /backups/latest
+```
+
+### Restoring a backup
+
+Restoring a backup is as simple as mounting the backup as volumes in the containers.
+
+For the DokuWiki container:
+
+```diff
+ $ docker run -d --name  \
+   ...
+-  --volume /path/to/-persistence:/bitnami/ \
++  --volume /path/to/-backups/latest:/bitnami/ \
+   bitnami/:latest
+```
+
+### Upgrade this image
+
+Bitnami provides up-to-date versions of DokuWiki, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the DokuWiki container.
+
+#### Step 1: Get the updated image
+
+```console
+$ docker pull bitnami/dokuwiki:latest
+```
+
+#### Step 2: Stop the running container
+
+Stop the currently running container using the command
+
+```console
+$ docker-compose stop dokuwiki
+```
+
+#### Step 3: Take a snapshot of the application state
+
+Follow the steps in [Backing up your container](#backing-up-your-container) to take a snapshot of the current application state.
+
+#### Step 4: Remove the currently running container
+
+Remove the currently running container by executing the following command:
+
+```console
+docker-compose rm -v dokuwiki
+```
+
+#### Step 5: Run the new image
+
+Update the image tag in `docker-compose.yml` and re-create your container with the new image:
+
+```console
+$ docker-compose up -d
+```
+
+## Customize this image
+
+The Bitnami DokuWiki Docker image is designed to be extended so it can be used as the base image for your custom web applications.
+
+### Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -216,79 +272,85 @@ FROM bitnami/dokuwiki
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ## Install 'vim'
+USER 0 # Required to perform privileged actions
 RUN install_packages vim
+USER 1001 # Revert to the original non-root user
 
 ## Enable mod_ratelimit module
 RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
 
 ## Modify the ports used by Apache by default
 # It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181 
+ENV APACHE_HTTP_PORT_NUMBER=8181
 ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
 
-Based on the extended image, you can use a Docker Compose file like the one below to add other features:
+Based on the extended image, you can update the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/master/docker-compose.yml) file present in this repository to add other features:
 
-```yaml
-version: '2'
-services:
-  dokuwiki:
-    build: .
-    ports:
-      - '80:8181'
-      - '443:8143'
-    volumes:
-      - 'dokuwiki_data:/bitnami'
-volumes:
-  dokuwiki_data:
-    driver: local
+```diff
+   dokuwiki:
+-    image: bitnami/dokuwiki:latest
++    build: .
+     ports:
+-      - '80:8080'
+-      - '443:8443'
++      - '80:8181'
++      - '443:8143'
+     environment:
++      - PHP_MEMORY_LIMIT=512m
+     ...
 ```
- 
-# Notable Changes
 
-## 0.20180422.201901061035-debian-9-r114 and 0.20180422.201901061035-ol-7-r128
+## Notable Changes
+
+### 0.20180422.202005011246-debian-10-r68
+
+- The size of the container image has been decreased.
+- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+
+### 0.20180422.201901061035-debian-9-r114 and 0.20180422.201901061035-ol-7-r128
 
 - This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 - The Apache configuration volume (`/bitnami/apache`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the Apache configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom Apache configuration files are advised to mount a volume for the configuration at `/opt/bitnami/apache/conf`, or mount specific configuration files individually.
 - The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually. 
 - Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`. 
 
-## 0.20170219.201708232029-r3
+### 0.20170219.201708232029-r3
 
 - Custom smileys, available in `lib/images/smileys/local`, are now persisted.
 - Address issue [#40](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/40).
 - In order to upgrade your image from previous versions, see the workaround provided on issue [#42](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/42).
 
-## 0.20180422.201805030840-r5
+### 0.20180422.201805030840-r5
 
 - Custom InterWiki shortcut icons, available in `lib/images/interwiki/`, are now persisted.
 - Address issue [#40](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/40).
 - In order to upgrade your image from previous versions, see the workaround provided on issue [#42](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/42).
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-dokuwiki/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-dokuwiki/pulls) with your contribution.
 
-# Issues
+## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/new). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-dokuwiki/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`$ docker version`)
-- Output of `$ docker info`
-- Version of this container (`$ echo $BITNAMI_APP_VERSION` inside the container)
+- Docker version (`docker version`)
+- Output of `docker info`
+- Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
-Copyright 2016-2020 Bitnami
+Copyright (c) 2020 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-  <http://www.apache.org/licenses/LICENSE-2.0>
+    http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

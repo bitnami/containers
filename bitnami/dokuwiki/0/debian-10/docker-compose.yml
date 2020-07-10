@@ -3,10 +3,10 @@ services:
   dokuwiki:
     image: 'docker.io/bitnami/dokuwiki:0-debian-10'
     ports:
-      - '80:80'
-      - '443:443'
+      - '80:8080'
+      - '443:8443'
     volumes:
-      - 'dokuwiki_data:/bitnami'
+      - 'dokuwiki_data:/bitnami/dokuwiki'
 volumes:
   dokuwiki_data:
     driver: local
