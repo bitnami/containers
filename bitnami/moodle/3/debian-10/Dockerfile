@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.43-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.23-1" --checksum efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.19-2" --checksum c5dddf3ea541f5c0d6f65fa7d743de710de5ec53cdf8458a25c74e70f0c8397d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-1" --checksum a94f94357aa06f3718db1550fa5f5188cd61383d66bf754eef49c58a18bf02cc
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "moodle" "3.9.0-1" --checksum 0273af69ceb72dccf4f764ec32e1d41f40f8ddbd3c1a389dae91efe1736db0b0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "moodle" "3.9.1-0" --checksum 01c38d2e17ee8daccb57e68fa371479b8aba56b7912d6f6a6bfc537ddd2bda10
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -26,8 +26,8 @@ RUN echo 'en_AU.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
+RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/moodle/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
@@ -35,22 +35,22 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.9.0-debian-10-r17" \
+    BITNAMI_IMAGE_VERSION="3.9.1-debian-10-r0" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
     MARIADB_ROOT_USER="root" \
-    MOODLE_DATABASE_NAME="bitnami_moodle" \
+    MOODLE_DATABASE_NAME="" \
     MOODLE_DATABASE_PASSWORD="" \
-    MOODLE_DATABASE_USER="bn_moodle" \
-    MOODLE_EMAIL="user@example.com" \
-    MOODLE_LANGUAGE="en" \
-    MOODLE_PASSWORD="bitnami" \
-    MOODLE_SITENAME="New Site" \
+    MOODLE_DATABASE_USER="" \
+    MOODLE_EMAIL="" \
+    MOODLE_LANGUAGE="" \
+    MOODLE_PASSWORD="" \
+    MOODLE_SITENAME="" \
     MOODLE_SKIP_INSTALL="no" \
-    MOODLE_USERNAME="user" \
+    MOODLE_USERNAME="" \
     MYSQL_CLIENT_CREATE_DATABASE_NAME="" \
     MYSQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
     MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES="ALL" \
@@ -58,7 +58,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_ENABLE_SSL="no" \
     MYSQL_CLIENT_SSL_CA_FILE="" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH" \
-    PHP_MEMORY_LIMIT="256M" \
+    PHP_MEMORY_LIMIT="" \
     SMTP_HOST="" \
     SMTP_PASSWORD="" \
     SMTP_PORT="" \
