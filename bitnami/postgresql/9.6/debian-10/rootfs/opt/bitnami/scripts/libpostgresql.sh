@@ -315,6 +315,7 @@ postgresql_add_replication_to_pghba() {
     fi
     cat << EOF >> "$POSTGRESQL_PGHBA_FILE"
 host      replication     all             0.0.0.0/0               ${replication_auth}
+host      replication     all             ::/0                    ${replication_auth}
 EOF
 }
 
