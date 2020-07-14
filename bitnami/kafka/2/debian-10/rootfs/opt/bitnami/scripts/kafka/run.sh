@@ -19,7 +19,7 @@ if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY
 fi
 
 if [[ "${KAFKA_ZOOKEEPER_PROTOCOL:-}" =~ SSL ]]; then
-    ZOOKEEPER_SSL_CONFIG=$(zookeeper_get_ssl_config)
+    ZOOKEEPER_SSL_CONFIG=$(zookeeper_get_tls_config)
     export KAFKA_OPTS="$KAFKA_OPTS $ZOOKEEPER_SSL_CONFIG"
 fi
 

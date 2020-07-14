@@ -15,13 +15,14 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kafka" "2.5.0-0"
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/scripts/kafka/entrypoint.sh /entrypoint.sh
 RUN ln -s /opt/bitnami/scripts/kafka/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/kafka/postunpack.sh
 ENV BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.5.0-debian-10-r93" \
+    BITNAMI_IMAGE_VERSION="2.5.0-debian-10-r94" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/kafka/bin:$PATH"
 
 EXPOSE 9092
