@@ -14,10 +14,11 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx-ldap-auth-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="nginx-ldap-auth-daemon" \
-    BITNAMI_IMAGE_VERSION="0.20200116.0-debian-10-r64" \
+    BITNAMI_IMAGE_VERSION="0.20200116.0-debian-10-r65" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/nginx-ldap-auth-daemon/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8888
