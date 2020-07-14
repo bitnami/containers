@@ -14,6 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1"
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.43-5" --checksum e9faded57e3703fe9fcea650eb302e673d969a399fe9dfafa67e173465637665
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/apache/postunpack.sh
@@ -21,7 +22,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.43-debian-10-r102" \
+    BITNAMI_IMAGE_VERSION="2.4.43-debian-10-r103" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/apache/bin:$PATH"
 
 EXPOSE 8080 8443
