@@ -111,6 +111,12 @@ export KAFKA_CLIENT_PASSWORD="${KAFKA_CLIENT_PASSWORD:-bitnami}"
 export KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS:-"-Xmx1024m -Xms1024m"}"
 export KAFKA_ZOOKEEPER_PASSWORD="${KAFKA_ZOOKEEPER_PASSWORD:-}"
 export KAFKA_ZOOKEEPER_USER="${KAFKA_ZOOKEEPER_USER:-}"
+export KAFKA_ZOOKEEPER_PROTOCOL="${KAFKA_ZOOKEEPER_PROTOCOL:-"SASL"}"
+export KAFKA_ZOOKEEPER_TLS_CLIENT_KEYSTORE_FILE="${KAFKA_ZOOKEEPER_TLS_CLIENT_KEYSTORE_FILE:-}"
+export KAFKA_ZOOKEEPER_TLS_CLIENT_KEYSTORE_PASSWORD="${KAFKA_ZOOKEEPER_TLS_CLIENT_KEYSTORE_PASSWORD:-}"
+export KAFKA_ZOOKEEPER_TLS_CLIENT_TRUSTSTORE_FILE="${KAFKA_ZOOKEEPER_TLS_CLIENT_TRUSTSTORE_FILE:-}"
+export KAFKA_ZOOKEEPER_TLS_CLIENT_TRUSTSTORE_PASSWORD="${KAFKA_ZOOKEEPER_TLS_CLIENT_TRUSTSTORE_PASSWORD:-}"
+export KAFKA_ZOOKEEPER_TLS_CLIENT_VERIFY_HOSTNAME="${KAFKA_ZOOKEEPER_TLS_CLIENT_VERIFY_HOSTNAME:-true}"
 export KAFKA_CFG_ADVERTISED_LISTENERS="${KAFKA_CFG_ADVERTISED_LISTENERS:-"PLAINTEXT://:9092"}"
 export KAFKA_CFG_LISTENERS="${KAFKA_CFG_LISTENERS:-"PLAINTEXT://:9092"}"
 export KAFKA_CFG_ZOOKEEPER_CONNECT="${KAFKA_CFG_ZOOKEEPER_CONNECT:-"localhost:2181"}"
@@ -265,7 +271,7 @@ kafka_validate() {
 #   KAFKA_*
 # Arguments:
 #   $1 - Authentication protocol to use for the internal listener
-#   $1 - Authentication protocol to use for the client listener
+#   $2 - Authentication protocol to use for the client listener
 # Returns:
 #   None
 #########################
@@ -292,7 +298,6 @@ KafkaServer {
    password="${KAFKA_INTER_BROKER_PASSWORD:-}"
    user_${KAFKA_INTER_BROKER_USER:-}="${KAFKA_INTER_BROKER_PASSWORD:-}"
    user_${KAFKA_CLIENT_USER:-}="${KAFKA_CLIENT_PASSWORD:-}";
-
    org.apache.kafka.common.security.scram.ScramLoginModule required;
    };
 EOF
@@ -301,7 +306,6 @@ EOF
 KafkaServer {
    org.apache.kafka.common.security.plain.PlainLoginModule required
    user_${KAFKA_CLIENT_USER:-}="${KAFKA_CLIENT_PASSWORD:-}";
-
    org.apache.kafka.common.security.scram.ScramLoginModule required;
    };
 EOF
@@ -312,12 +316,11 @@ KafkaServer {
    username="${KAFKA_INTER_BROKER_USER:-}"
    password="${KAFKA_INTER_BROKER_PASSWORD:-}"
    user_${KAFKA_INTER_BROKER_USER:-}="${KAFKA_INTER_BROKER_PASSWORD:-}";
-
    org.apache.kafka.common.security.scram.ScramLoginModule required;
    };
 EOF
         fi
-        if [[ -n "$KAFKA_ZOOKEEPER_USER" ]] && [[ -n "$KAFKA_ZOOKEEPER_PASSWORD" ]]; then
+        if [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SASL ]] && [[ -n "$KAFKA_ZOOKEEPER_USER" ]] && [[ -n "$KAFKA_ZOOKEEPER_PASSWORD" ]]; then
             cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 Client {
    org.apache.kafka.common.security.plain.PlainLoginModule required
@@ -432,6 +435,28 @@ kafka_configure_client_communications() {
 }
 
 ########################
+# Get Zookeeper SSL settings
+# Globals:
+#   ZOO_TLS_CLIENT_*
+# Arguments:
+#   None
+# Returns:
+#   String
+#########################
+zookeeper_get_ssl_config() {
+    # Note that ZooKeeper does not support a key password different from the keystore password, 
+    # so be sure to set the key password in the keystore to be identical to the keystore password; 
+    # otherwise the connection attempt to Zookeeper will fail.
+    echo "-Dzookeeper.clientCnxnSocket=org.apache.zookeeper.ClientCnxnSocketNetty \
+          -Dzookeeper.client.secure=true \
+          -Dzookeeper.ssl.keyStore.location=$KAFKA_ZOOKEEPER_TLS_CLIENT_KEYSTORE_FILE \
+          -Dzookeeper.ssl.keyStore.password=$KAFKA_ZOOKEEPER_TLS_CLIENT_KEYSTORE_PASSWORD \
+          -Dzookeeper.ssl.trustStore.location=$KAFKA_ZOOKEEPER_TLS_CLIENT_TRUSTSTORE_FILE \
+          -Dzookeeper.ssl.trustStore.password=$KAFKA_ZOOKEEPER_TLS_CLIENT_TRUSTSTORE_PASSWORD \
+          -Dzookeeper.ssl.hostnameVerification=$KAFKA_ZOOKEEPER_TLS_CLIENT_VERIFY_HOSTNAME"
+}
+
+########################
 # Configure Kafka configuration files from environment variables
 # Globals:
 #   KAFKA_*
@@ -490,7 +515,7 @@ kafka_initialize() {
                 kafka_configure_client_communications "$client_protocol"
             fi
         fi
-        if [[ "${internal_protocol:-}" =~ SASL ]] || [[ "${client_protocol:-}" =~ SASL ]] || [[ -n "$KAFKA_ZOOKEEPER_USER" && -n "$KAFKA_ZOOKEEPER_PASSWORD" ]]; then
+        if [[ "${internal_protocol:-}" =~ SASL ]] || [[ "${client_protocol:-}" =~ SASL ]] || [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SASL ]]; then
             kafka_server_conf_set sasl.enabled.mechanisms PLAIN,SCRAM-SHA-256,SCRAM-SHA-512
             kafka_generate_jaas_authentication_file "${internal_protocol:-}" "${client_protocol:-}"
         fi
