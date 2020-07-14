@@ -240,13 +240,23 @@ ldap_add_schemas() {
 #########################
 ldap_create_tree() {
     info "Creating LDAP default tree"
+    local dc=""
+    local o="example"
+    read -r -a root <<< "$(tr ',;' ' ' <<< "${LDAP_ROOT}")"
+    for attr in "${root[@]}"; do
+        if [[ $attr == dc=* ]] && [[ -z "$dc" ]]; then
+            dc="${attr:3}"
+        elif [[ $attr == o=* ]] && [[ $o == "example" ]]; then
+            o="${attr:2}"
+        fi
+    done
     cat > "${LDAP_SHARE_DIR}/tree.ldif" << EOF
 # Root creation
 dn: $LDAP_ROOT
 objectClass: dcObject
 objectClass: organization
-dc: example
-o: example
+dc: $dc
+o: $o
 
 dn: ${LDAP_USER_DC/#/ou=},${LDAP_ROOT}
 objectClass: organizationalUnit
