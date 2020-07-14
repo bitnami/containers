@@ -10,9 +10,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/oauth2-proxy-6.0.0-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="oauth2-proxy" \
-    BITNAMI_IMAGE_VERSION="6.0.0-debian-10-r9" \
+    BITNAMI_IMAGE_VERSION="6.0.0-debian-10-r10" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
