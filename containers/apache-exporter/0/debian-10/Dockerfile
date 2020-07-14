@@ -11,9 +11,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN ln -sf /opt/bitnami/apache-exporter/bin/apache_exporter /bin/apache_exporter
+RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="apache-exporter" \
-    BITNAMI_IMAGE_VERSION="0.8.0-debian-10-r99" \
+    BITNAMI_IMAGE_VERSION="0.8.0-debian-10-r100" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
