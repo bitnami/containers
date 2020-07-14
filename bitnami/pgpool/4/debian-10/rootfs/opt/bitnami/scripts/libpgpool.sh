@@ -70,7 +70,8 @@ export PGPOOL_HEALTH_CHECK_PERIOD="${PGPOOL_HEALTH_CHECK_PERIOD:-30}"
 export PGPOOL_HEALTH_CHECK_TIMEOUT="${PGPOOL_HEALTH_CHECK_TIMEOUT:-10}"
 export PGPOOL_HEALTH_CHECK_MAX_RETRIES="${PGPOOL_HEALTH_CHECK_MAX_RETRIES:-5}"
 export PGPOOL_HEALTH_CHECK_RETRY_DELAY="${PGPOOL_HEALTH_CHECK_RETRY_DELAY:-5}"
-
+export PGPOOL_POSTGRES_CUSTOM_USERS="${PGPOOL_POSTGRES_CUSTOM_USERS:-}"
+export PGPOOL_POSTGRES_CUSTOM_PASSWORDS="${PGPOOL_POSTGRES_CUSTOM_PASSWORDS:-}"
 EOF
     if [[ -f "${PGPOOL_ADMIN_PASSWORD_FILE:-}" ]]; then
         cat << "EOF"
@@ -184,6 +185,14 @@ pgpool_validate() {
     if ! [[ "$PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE" =~ ^(off|transaction|trans_transaction|always)$ ]]; then
 	    print_validation_error "The values allowed for PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE: off,transaction,trans_transaction,always"
     fi
+
+    # Custom users validations
+    read -r -a custom_users_list <<< "$(tr ',;' ' ' <<< "${PGPOOL_POSTGRES_CUSTOM_USERS}")"
+    read -r -a custom_passwords_list <<< "$(tr ',;' ' ' <<< "${PGPOOL_POSTGRES_CUSTOM_PASSWORDS}")"
+    if [[ ${#custom_users_list[@]} -ne ${#custom_passwords_list[@]} ]]; then
+        print_validation_error "PGPOOL_POSTGRES_CUSTOM_USERS and PGPOOL_POSTGRES_CUSTOM_PASSWORDS lists should have the same length"
+    fi
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -420,6 +429,17 @@ pgpool_generate_password_file() {
         info "Generating password file for local authentication..."
 
         pg_md5 -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_POSTGRES_USERNAME" "$PGPOOL_POSTGRES_PASSWORD"
+
+        if [[ -n "${PGPOOL_POSTGRES_CUSTOM_USERS}" ]]; then
+            read -r -a custom_users_list <<< "$(tr ',;' ' ' <<< "${PGPOOL_POSTGRES_CUSTOM_USERS}")"
+            read -r -a custom_passwords_list <<< "$(tr ',;' ' ' <<< "${PGPOOL_POSTGRES_CUSTOM_PASSWORDS}")"
+
+            index=0
+            for user in "${custom_users_list[@]}"; do
+                pg_md5 -m --config-file="$PGPOOL_CONF_FILE" -u "$user" "${custom_passwords_list[$index]}"
+                ((index+=1))
+            done
+        fi
     else
         info "Skip generating password file due to PGPOOL_ENABLE_POOL_PASSWD = no"
     fi
