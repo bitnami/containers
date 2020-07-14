@@ -4,16 +4,16 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/configmap-reload-0.3.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "545bc2559b08e28c4741ea8ea5fb8445d8be58a28f395beb00f6800706a54965  /tmp/bitnami/pkg/cache/configmap-reload-0.3.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/configmap-reload-0.3.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/configmap-reload-0.3.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/configmap-reload-0.4.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "2918cf651d3daddd9a112480ae769fa4ba9d8facbde51f0e559a7595f8b51514  /tmp/bitnami/pkg/cache/configmap-reload-0.4.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/configmap-reload-0.4.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/configmap-reload-0.4.0-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN ln -sf /opt/bitnami/configmap-reload/bin/configmap-reload /bin/configmap-reload
 
 ENV BITNAMI_APP_NAME="configmap-reload" \
-    BITNAMI_IMAGE_VERSION="0.3.0-debian-10-r166" \
+    BITNAMI_IMAGE_VERSION="0.4.0-debian-10-r1" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
