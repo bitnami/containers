@@ -5,6 +5,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
+
 . /opt/bitnami/scripts/libconsul.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/liblog.sh

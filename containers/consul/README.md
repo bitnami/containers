@@ -51,7 +51,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.8.0-debian-10-r21`, `1`, `1.8.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.8.0-debian-10-r21/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.8.0-debian-10-r22`, `1`, `1.8.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.8.0-debian-10-r22/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/consul GitHub repo](https://github.com/bitnami/bitnami-docker-consul).
 
@@ -307,7 +307,7 @@ When you start the HashiCorp Consul image, you can adjust the configuration of t
 - `CONSUL_DOMAIN`: HashiCorp Consul domain name. Default: **consul**.
 - `CONSUL_DATACENTER"`: The datacenter in which the agent is running. Default: **dc1**.
 - `CONSUL_RETRY_JOIN_ADDRESS`: "Address of another agent to join upon starting up. Default: **127.0.0.1**
-- `CONSUL_BIND_INTERFACE`: "The interface that will be bound to for internal cluster communications. Default: **eth0**
+- `CONSUL_BIND_INTERFACE`: "The interface that will be bound to for internal cluster communications.
 
 ### Specifying Environment Variables using Docker Compose
 
@@ -485,7 +485,7 @@ Decrease the size of the container. The configuration logic is now based on Bash
 Also, some env var changes have been performed maintaining backward compatibility through aliases:
 
 | New value                   | Old value            |
-| --------------------------- | -------------------- |
+|-----------------------------|----------------------|
 | `CONSUL_ENABLE_UI`          | `CONSUL_UI`          |
 | `CONSUL_AGENT_MODE`         | `CONSUL_SERVER_MODE` |
 | `CONSUL_RETRY_JOIN_ADDRESS` | `CONSUL_RETRY_JOIN`  |
