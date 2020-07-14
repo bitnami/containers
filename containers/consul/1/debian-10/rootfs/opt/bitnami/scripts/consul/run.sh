@@ -5,7 +5,6 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-
 . /opt/bitnami/scripts/libconsul.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/liblog.sh
@@ -18,6 +17,10 @@ flags=("agent" "-config-dir" "${CONSUL_CONF_DIR}" "-log-file" "${CONSUL_LOG_FILE
 
 if [[ "${CONSUL_AGENT_MODE}" = "server" ]]; then
     flags+=("-server")
+fi
+
+if [[ -n "${CONSUL_BIND_ADDR}" ]]; then
+    flags+=("-bind" "${CONSUL_BIND_ADDR}")
 fi
 
 info "** Starting Consul **"
