@@ -18,11 +18,12 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1"
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "6.8.10-0" --checksum d2b43555e358fe2daa533d73707b9da012b0a6b2e71f4aec059e347d3ad06993
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/elasticsearch/postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="6.8.10-debian-10-r33" \
+    BITNAMI_IMAGE_VERSION="6.8.10-debian-10-r34" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH"
 
 EXPOSE 9200 9300
