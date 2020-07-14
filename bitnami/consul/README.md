@@ -307,6 +307,7 @@ When you start the HashiCorp Consul image, you can adjust the configuration of t
 - `CONSUL_DOMAIN`: HashiCorp Consul domain name. Default: **consul**.
 - `CONSUL_DATACENTER"`: The datacenter in which the agent is running. Default: **dc1**.
 - `CONSUL_RETRY_JOIN_ADDRESS`: "Address of another agent to join upon starting up. Default: **127.0.0.1**
+- `CONSUL_BIND_INTERFACE`: "The interface that will be bound to for internal cluster communications. Default: **eth0**
 
 ### Specifying Environment Variables using Docker Compose
 
