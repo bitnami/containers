@@ -14,8 +14,13 @@ set -o pipefail
 # Load Kafka environment variables
 eval "$(kafka_env)"
 
-if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL ]]; then
+if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL ]] || [[ "${KAFKA_ZOOKEEPER_PROTOCOL:-}" =~ SASL ]]; then
     export KAFKA_OPTS="-Djava.security.auth.login.config=${KAFKA_CONF_DIR}/kafka_jaas.conf"
+fi
+
+if [[ "${KAFKA_ZOOKEEPER_PROTOCOL:-}" =~ SSL ]]; then
+    ZOOKEEPER_SSL_CONFIG=$(zookeeper_get_ssl_config)
+    export KAFKA_OPTS="$KAFKA_OPTS $ZOOKEEPER_SSL_CONFIG"
 fi
 
 flags=("$KAFKA_CONF_FILE")
