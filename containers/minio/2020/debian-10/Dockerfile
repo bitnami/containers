@@ -10,15 +10,16 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2020.7.11-0" --checksum b95668b94099b6cc0767882db3f5f0d5e5a6ebbed5c4ffb4ebb59e43a3a564c2
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2020.7.12-0" --checksum 61b1ae71178850f20faedbc55251c9b9c4a467caf33535f3d30c71976a4d4f9c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2020.7.13-0" --checksum 464af7e30c6240b0a2ba6ea28b41d40f37b976203afbb3508bef137f0c10eb15
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/minio/postunpack.sh
 ENV BITNAMI_APP_NAME="minio" \
-    BITNAMI_IMAGE_VERSION="2020.7.12-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="2020.7.13-debian-10-r0" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:/opt/bitnami/common/bin:$PATH"
 
 VOLUME [ "/certs", "/data" ]
