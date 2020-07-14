@@ -29,6 +29,7 @@ for dir in "$PHP_CONF_DIR" "$PHP_TMP_DIR" "$PHP_FPM_LOGS_DIR"; do
 done
 
 info "Disabling PHP-FPM daemon user/group configuration"
-echo "" > "${PHP_CONF_DIR}/common.conf"
+mv "${PHP_CONF_DIR}/common.conf" "${PHP_CONF_DIR}/common.conf.disabled"
+touch "${PHP_CONF_DIR}/common.conf"
 
 ln -sf "/dev/stdout" "${PHP_FPM_LOG_FILE}"
