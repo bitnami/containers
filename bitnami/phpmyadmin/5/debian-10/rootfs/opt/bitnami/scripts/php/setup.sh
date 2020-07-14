@@ -20,6 +20,10 @@ if am_i_root; then
     ensure_user_exists "$PHP_FPM_DAEMON_USER" "$PHP_FPM_DAEMON_GROUP"
     ensure_dir_exists "$PHP_TMP_DIR"
     chown -R "${PHP_FPM_DAEMON_USER}:${PHP_FPM_DAEMON_GROUP}" "$PHP_TMP_DIR"
+    # Enable daemon configuration
+    if [[ ! -f "${PHP_CONF_DIR}/common.conf" ]]; then
+        cp "${PHP_CONF_DIR}/common.conf.disabled" "${PHP_CONF_DIR}/common.conf"
+    fi
 fi
 
 php_initialize
