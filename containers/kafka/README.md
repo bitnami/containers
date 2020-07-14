@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
-* [`2-debian-10`, `2.5.0-debian-10-r93`, `2`, `2.5.0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.5.0-debian-10-r93/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.5.0-debian-10-r94`, `2`, `2.5.0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.5.0-debian-10-r94/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -183,21 +183,19 @@ $ docker-compose up -d
 
 The configuration can easily be setup with the Bitnami Kafka Docker image using the following environment variables:
 
-* `ALLOW_PLAINTEXT_LISTENER`: Allow to use the PLAINTEXT listener. Default: **no**
-* `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Default: admin. Default: **user**
-* `KAFKA_INTER_BROKER_PASSWORD`: Kafka inter broker communication password. Default: **bitnami**
-* `KAFKA_CLIENT_USER`: Kafka client user. Default: **user**
-* `KAFKA_CLIENT_PASSWORD`: Kafka client user password. Default: **bitnami**
+* `ALLOW_PLAINTEXT_LISTENER`: Allow to use the PLAINTEXT listener. Default: **no**.
+* `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Default: admin. Default: **user**.
+* `KAFKA_INTER_BROKER_PASSWORD`: Kafka inter broker communication password. Default: **bitnami**.
+* `KAFKA_CLIENT_USER`: Kafka client user. Default: **user**.
+* `KAFKA_CLIENT_PASSWORD`: Kafka client user password. Default: **bitnami**.
 * `KAFKA_CERTIFICATE_PASSWORD`: Password for certificates. No defaults.
-* `KAFKA_HEAP_OPTS`: Kafka's Java Heap size. Default: **-Xmx1024m -Xms1024m**
-* `KAFKA_ZOOKEEPER_PROTOCOL`: Kafka Zookeeper connection configuation. Available options are **SASL**, **SSL**, **SASL_SSL**, **PLAINTEXT**. Defaults: **SASL**
-* `KAFKA_ZOOKEEPER_USER`: Kafka Zookeeper user. No defaults.
-* `KAFKA_ZOOKEEPER_PASSWORD`: Kafka Zookeeper user password. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_CLIENT_KEYSTORE_FILE`: Kafka Zookeeper KeyStore file path: Default: No Defaults. 
-* `KAFKA_ZOOKEEPER_TLS_CLIENT_KEYSTORE_PASSWORD`: Kafka Zookeeper KeyStore file password and key password. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_CLIENT_TRUSTSTORE_FILE`: Kafka Zookeeper TrustStore file path. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_CLIENT_TRUSTSTORE_PASSWORD`: Kafka Zookeeper TrustStore file password. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_CLIENT_VERIFY_HOSTNAME`: Kafka Zookeeper if hostname verification. Defaults: **true**
+* `KAFKA_HEAP_OPTS`: Kafka's Java Heap size. Default: **-Xmx1024m -Xms1024m**.
+* `KAFKA_ZOOKEEPER_PROTOCOL`: Authentication protocol for Zookeeper connections. Allowed protocols: **PLAINTEXT**, **SASL**, **SSL**, and **SASL_SSL**. Defaults: **PLAINTEXT**.
+* `KAFKA_ZOOKEEPER_USER`: Kafka Zookeeper user for SASL authentication. No defaults.
+* `KAFKA_ZOOKEEPER_PASSWORD`: Kafka Zookeeper user password for SASL authentication. No defaults.
+* `KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD`: Kafka Zookeeper keystore file password and key password. No defaults.
+* `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD`: Kafka Zookeeper truststore file password. No defaults.
+* `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`: Verify Zookeeper hostname on TLS certificates. Defaults: **true**.
 
 Additionally, any environment variable beginning with `KAFKA_CFG_` will be mapped to its corresponding Kafka key. For example, use `KAFKA_CFG_BACKGROUND_THREADS` in order to set `background.threads` or `KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE` in order to configure `auto.create.topics.enable`.
 
@@ -373,32 +371,31 @@ There are different options of configuration to connect a Zookeeper server.
 
 In order to connect a Zookeeper server without authentication, you should provide the environment variables below:
 
-* `KAFKA_ZOOKEEPER_PROTOCOL`: **PLAINTEXT**
+* `KAFKA_ZOOKEEPER_PROTOCOL`: **PLAINTEXT**.
 
 In order to authenticate Kafka against a Zookeeper server with `SASL`, you should provide the environment variables below:
 
-* `KAFKA_ZOOKEEPER_PROTOCOL`: **SASL**
-* `KAFKA_ZOOKEEPER_USER`: Kafka Zookeeper user. No defaults.
-* `KAFKA_ZOOKEEPER_PASSWORD`: Kafka Zookeeper user password. No defaults.
+* `KAFKA_ZOOKEEPER_PROTOCOL`: **SASL**.
+* `KAFKA_ZOOKEEPER_USER`: Kafka Zookeeper user for SASL authentication. No defaults.
+* `KAFKA_ZOOKEEPER_PASSWORD`: Kafka Zookeeper user password for SASL authentication. No defaults.
 
 In order to authenticate Kafka against a Zookeeper server with `SSL`, you should provide the environment variables below:
-* `KAFKA_ZOOKEEPER_PROTOCOL`: **SSL**
-* `KAFKA_ZOOKEEPER_TLS_CLIENT_KEYSTORE_FILE`: Kafka Zookeeper KeyStore file path: Default: No Defaults. 
-* `KAFKA_ZOOKEEPER_TLS_CLIENT_KEYSTORE_PASSWORD`: Kafka Zookeeper KeyStore file password and key password. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_CLIENT_TRUSTSTORE_FILE`: Kafka Zookeeper TrustStore file path. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_CLIENT_TRUSTSTORE_PASSWORD`: Kafka Zookeeper TrustStore file password. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_CLIENT_VERIFY_HOSTNAME`: Kafka Zookeeper if hostname verification. Defaults: **true**
+
+* `KAFKA_ZOOKEEPER_PROTOCOL`: **SSL**.
+* `KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD`: Kafka Zookeeper keystore file password and key password. No defaults.
+* `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD`: Kafka Zookeeper truststore file password. No defaults.
+* `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`: Verify Zookeeper hostname on TLS certificates. Defaults: **true**.
 
 In order to authenticate Kafka against a Zookeeper server with `SASL_SSL`, you should provide the environment variables below:
-* `KAFKA_ZOOKEEPER_PROTOCOL`: **SASL_SSL**
-* `KAFKA_ZOOKEEPER_USER`: Kafka Zookeeper user. No defaults.
-* `KAFKA_ZOOKEEPER_PASSWORD`: Kafka Zookeeper user password. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_CLIENT_KEYSTORE_FILE`: Kafka Zookeeper KeyStore file path: Default: No Defaults. 
-* `KAFKA_ZOOKEEPER_TLS_CLIENT_KEYSTORE_PASSWORD`: Kafka Zookeeper KeyStore file password and key password. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_CLIENT_TRUSTSTORE_FILE`: Kafka Zookeeper TrustStore file path. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_CLIENT_TRUSTSTORE_PASSWORD`: Kafka Zookeeper TrustStore file password. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_CLIENT_VERIFY_HOSTNAME`: Kafka Zookeeper if hostname verification. Defaults: **true**
 
+* `KAFKA_ZOOKEEPER_PROTOCOL`: **SASL_SSL**.
+* `KAFKA_ZOOKEEPER_USER`: Kafka Zookeeper user for SASL authentication. No defaults.
+* `KAFKA_ZOOKEEPER_PASSWORD`: Kafka Zookeeper user password for SASL authentication. No defaults.
+* `KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD`: Kafka Zookeeper keystore file password and key password. No defaults.
+* `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD`: Kafka Zookeeper truststore file password. No defaults.
+* `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`: Verify Zookeeper hostname on TLS certificates. Defaults: **true**.
+
+> Note: You **must** also use your own certificates for SSL. You can mount your Java Key Stores files (`zookeeper.keystore.jks` and `zookeeper.truststore.jks`) into `/opt/bitnami/kafka/conf/certs`.
 
 ### Setting up a Kafka Cluster
 
