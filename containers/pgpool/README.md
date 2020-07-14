@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.1.2-debian-10-r52`, `4`, `4.1.2`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.2-debian-10-r52/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.1.2-debian-10-r53`, `4`, `4.1.2`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.2-debian-10-r53/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
 
@@ -254,6 +254,8 @@ Pgpool:
 - `PGPOOL_HEALTH_CHECK_MAX_RETRIES`: Specifies the maximum number of retries to do before giving up and initiating failover when health check fails. Defaults to `5`.
 - `PGPOOL_HEALTH_CHECK_RETRY_DELAY`: Specifies the amount of time in seconds to sleep between failed health check retries. Defaults to `5`.
 - `PGPOOL_USER_CONF_FILE`: Configuration file to be added to the generated config file. This allow to override configuration set by the initializacion process. No defaults.
+- `PGPOOL_POSTGRES_CUSTOM_USERS`: List of comma or semicolon separeted list of postgres usernames. This will create entries in `pgpool_passwd`. No defaults.
+- `PGPOOL_POSTGRES_CUSTOM_PASSWORDS`: List of comma or semicolon separated list for postgresql user passwords. These are the corresponding passwords for the users in `PGPOOL_POSTGRES_CUSTOM_USERS`. No defaults.
 
 PostgreSQL with Replication Manager:
 
@@ -407,6 +409,43 @@ $ docker-compose restart pgpool
 
 Refer to the [server configuration](http://www.pgpool.net/docs/latest/en/html/runtime-config.html) manual for the complete list of configuration options.
 
+## Re-attaching nodes
+
+Pgpool does not reattach nodes automatically, to reattach a node you have to get the `id` of the node and then run the attach command manually.
+
+### Step 1: Get the node id
+
+To get the node `id` first connect to the pgpool container and open a psql session:
+
+```console
+$ docker exec -it pgpool bash
+
+$ PGPASSWORD=$PGPOOL_POSTGRES_PASSWORD psql -U $PGPOOL_POSTGRES_USERNAME -h localhost
+```
+
+and run: `show pool_nodes;`
+
+```console
+postgres=# show pool_nodes;
+ node_id | hostname | port | status | lb_weight |  role   | select_cnt | load_balance_node | replication_delay | replication_state | replication_sync_state | last_status_change  
+---------+----------+------+--------+-----------+---------+------------+-------------------+-------------------+-------------------+------------------------+---------------------
+ 0       | pg-0     | 5432 | down     | 0.500000  | standby | 0          | true              | 0                 |                   |                        | 2020-07-09 15:50:41
+ 1       | pg-1     | 5432 | up       | 0.500000  | primary | 0          | false             | 0                 |                   |                        | 2020-07-09 15:48:31
+(2 rows)
+```
+
+In this example pg-0 is the node we want to reattach, we will use node `0`.
+
+### Step 2: reattach the node.
+
+Now exit psql console and run the following command, `0` is the node id we got in the previous step.
+
+```console
+$ pcp_attach_node -h localhost -U $PGPOOL_ADMIN_USERNAME 0
+```
+
+This command will prompt for a password, this password is the one set in the environment variable: `PGPOOL_ADMIN_PASSWORD`
+
 ## Environment variables
 
 Please see the list of environment variables available in the Bitnami Pgpool container in the next table:
@@ -431,6 +470,8 @@ Please see the list of environment variables available in the Bitnami Pgpool con
 | PGPOOL_PASSWD_FILE                  | `pool_passwd` |
 | PGPOOL_MAX_POOL                     | `15`          |
 | PGPOOL_NUM_INIT_CHILDREN            | `32`          |
+| PGPOOL_POSTGRES_CUSTOM_USERS        | nil           |
+| PGPOOL_POSTGRES_CUSTOM_PASSWORDS    | nil           |
 
 # Logging
 
