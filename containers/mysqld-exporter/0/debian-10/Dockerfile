@@ -10,10 +10,11 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/mysqld-exporter-0.12.1-1-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/mysqld-exporter/bin/mysqld_exporter /bin/mysqld_exporter
 
 ENV BITNAMI_APP_NAME="mysqld-exporter" \
-    BITNAMI_IMAGE_VERSION="0.12.1-debian-10-r161" \
+    BITNAMI_IMAGE_VERSION="0.12.1-debian-10-r162" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
