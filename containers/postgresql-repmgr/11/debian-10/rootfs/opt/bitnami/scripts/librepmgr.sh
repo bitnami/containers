@@ -311,6 +311,8 @@ repmgr_inject_postgresql_configuration() {
     postgresql_set_property "logging_collector" "on"
     postgresql_set_property "log_directory" "$POSTGRESQL_LOG_DIR"
     postgresql_set_property "log_filename" "postgresql.log"
+    is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && postgresql_configure_tls
+    is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && [[ -n $POSTGRESQL_TLS_CA_FILE ]] && postgresql_tls_auth_configuration
     cp "$POSTGRESQL_CONF_FILE" "${POSTGRESQL_MOUNTED_CONF_DIR}/postgresql.conf"
 }
 
@@ -326,11 +328,17 @@ repmgr_inject_postgresql_configuration() {
 #########################
 repmgr_inject_pghba_configuration() {
     debug "Injecting a new pg_hba.conf file..."
+    local tls_auth="#"
+    if is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && [[ -n $POSTGRESQL_TLS_CA_FILE ]]; then
+        tls_auth=""
+    fi
 
     cat > "${POSTGRESQL_MOUNTED_CONF_DIR}/pg_hba.conf" << EOF
 host     all            $REPMGR_USERNAME    0.0.0.0/0    trust
 host     $REPMGR_DATABASE         $REPMGR_USERNAME    0.0.0.0/0    trust
 host     replication      $REPMGR_USERNAME    0.0.0.0/0    trust
+${tls_auth}hostssl     all             all             0.0.0.0/0               cert
+${tls_auth}hostssl     all             all             ::/0                    cert
 host     all              all       0.0.0.0/0    trust
 host     all              all       ::/0         trust
 local    all              all                    trust
@@ -569,6 +577,10 @@ repmgr_initialize() {
     postgresql_enable_remote_connections
     # Configure port and restrict access to PostgreSQL (MD5)
     postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
+
+    postgresql_configure_replication_parameters
+    postgresql_configure_fsync
+
     is_boolean_yes "$REPMGR_PGHBA_TRUST_ALL" || postgresql_restrict_pghba
     if [[ "$REPMGR_ROLE" = "primary" ]]; then
         if is_boolean_yes "$POSTGRESQL_FIRST_BOOT"; then
@@ -590,7 +602,7 @@ repmgr_initialize() {
         fi
     else
         local -r psql_major_version="$(postgresql_get_major_version)"
-        (( psql_major_version >= 12 )) && postgresql_configure_recovery
+        postgresql_configure_recovery
         postgresql_start_bg
         repmgr_unregister_standby
         repmgr_register_standby

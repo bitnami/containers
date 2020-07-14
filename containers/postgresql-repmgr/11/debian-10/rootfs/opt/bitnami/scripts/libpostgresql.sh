@@ -116,6 +116,33 @@ postgresql_validate() {
         empty_password_error "You can not set POSTGRESQL_LDAP_URL and POSTGRESQL_LDAP_SERVER at the same time. Check your LDAP configuration."
     fi
 
+    if ! is_yes_no_value "$POSTGRESQL_ENABLE_TLS"; then
+        print_validation_error "The values allowed for POSTGRESQL_ENABLE_TLS are: yes or no"
+    elif is_boolean_yes "$POSTGRESQL_ENABLE_TLS"; then
+        # TLS Checks
+        if [[ -z "$POSTGRESQL_TLS_CERT_FILE" ]]; then
+            print_validation_error "You must provide a X.509 certificate in order to use TLS"
+        elif [[ ! -f "$POSTGRESQL_TLS_CERT_FILE" ]]; then
+            print_validation_error "The X.509 certificate file in the specified path ${POSTGRESQL_TLS_CERT_FILE} does not exist"
+        fi
+        if [[ -z "$POSTGRESQL_TLS_KEY_FILE" ]]; then
+            print_validation_error "You must provide a private key in order to use TLS"
+        elif [[ ! -f "$POSTGRESQL_TLS_KEY_FILE" ]]; then
+            print_validation_error "The private key file in the specified path ${POSTGRESQL_TLS_KEY_FILE} does not exist"
+        fi
+        if [[ -z "$POSTGRESQL_TLS_CA_FILE" ]]; then
+            warn "A CA X.509 certificate was not provided. Client verification will not be performed in TLS connections"
+        elif [[ ! -f "$POSTGRESQL_TLS_CA_FILE" ]]; then
+            print_validation_error "The CA X.509 certificate file in the specified path ${POSTGRESQL_TLS_CA_FILE} does not exist"
+        fi
+        if [[ -n "$POSTGRESQL_TLS_CRL_FILE" ]] && [[ ! -f "$POSTGRESQL_TLS_CRL_FILE" ]]; then
+            print_validation_error "The CRL file in the specified path ${POSTGRESQL_TLS_CRL_FILE} does not exist"
+        fi
+        if ! is_yes_no_value "$POSTGRESQL_TLS_PREFER_SERVER_CIPHERS"; then
+            print_validation_error "The values allowed for POSTGRESQL_TLS_PREFER_SERVER_CIPHERS are: yes or no"
+        fi
+    fi
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -199,6 +226,28 @@ EOF
 }
 
 ########################
+# Enforce Certificate client authentication
+# for TLS connections in pg_hba
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+postgresql_tls_auth_configuration() {
+    info "Enabling TLS Client authentication"
+    local previous_content
+    previous_content=$(cat "$POSTGRESQL_PGHBA_FILE")
+
+    cat << EOF > "$POSTGRESQL_PGHBA_FILE"
+hostssl     all             all             0.0.0.0/0               cert
+hostssl     all             all             ::/0                    cert
+$previous_content
+EOF
+}
+
+########################
 # Create basic pg_hba.conf file
 # Globals:
 #   POSTGRESQL_*
@@ -266,6 +315,7 @@ postgresql_add_replication_to_pghba() {
     fi
     cat << EOF >> "$POSTGRESQL_PGHBA_FILE"
 host      replication     all             0.0.0.0/0               ${replication_auth}
+host      replication     all             ::/0                    ${replication_auth}
 EOF
 }
 
@@ -324,6 +374,27 @@ postgresql_configure_replication_parameters() {
         postgresql_set_property "synchronous_commit" "$POSTGRESQL_SYNCHRONOUS_COMMIT_MODE"
         postgresql_set_property "synchronous_standby_names" "${POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS} (\"${POSTGRESQL_CLUSTER_APP_NAME}\")"
     fi
+}
+
+########################
+# Change postgresql.conf by setting TLS properies
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+postgresql_configure_tls() {
+    info "Configuring TLS"
+    chmod 600 "$POSTGRESQL_TLS_KEY_FILE" || warn "Could not set compulsory permissions (600) on file ${POSTGRESQL_TLS_KEY_FILE}"
+    postgresql_set_property "ssl" "on"
+    # Server ciphers are prefered by default
+    ! is_boolean_yes "$POSTGRESQL_TLS_PREFER_SERVER_CIPHERS" && postgresql_set_property "ssl_prefer_server_ciphers" "off"
+    [[ -n $POSTGRESQL_TLS_CA_FILE ]] && postgresql_set_property "ssl_ca_file" "$POSTGRESQL_TLS_CA_FILE"
+    [[ -n $POSTGRESQL_TLS_CRL_FILE ]] && postgresql_set_property "ssl_crl_file" "$POSTGRESQL_TLS_CRL_FILE"
+    postgresql_set_property "ssl_cert_file" "$POSTGRESQL_TLS_CERT_FILE"
+    postgresql_set_property "ssl_key_file" "$POSTGRESQL_TLS_KEY_FILE"
 }
 
 ########################
@@ -490,6 +561,7 @@ postgresql_initialize() {
         is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
         is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
         is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
+        is_boolean_yes "$create_conf_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && postgresql_configure_tls
         [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]] && [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
         [[ "$POSTGRESQL_REPLICATION_MODE" = "slave" ]] && postgresql_configure_recovery
     else
@@ -509,14 +581,18 @@ postgresql_initialize() {
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && postgresql_create_replication_user
             is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
             is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
+            is_boolean_yes "$create_conf_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && postgresql_configure_tls
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
         else
             postgresql_slave_init_db
             is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
             is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
             is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
+            is_boolean_yes "$create_conf_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && postgresql_configure_tls
             postgresql_configure_recovery
         fi
+        # TLS Modifications on pghba need to be performed after properly configuring postgresql.conf file
+        (is_boolean_yes "$create_pghba_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && [[ -n $POSTGRESQL_TLS_CA_FILE ]] && postgresql_tls_auth_configuration) || true
     fi
 
     # Delete conf files generated on first run
