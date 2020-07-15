@@ -38,7 +38,15 @@ mysql_client_validate() {
         print_validation_error "The password cannot contain backslashes ('\'). Set the environment variable $1 with no backslashes (more info at https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html)"
     }
 
+    check_yes_no_value() {
+        if ! is_yes_no_value "${!1}" && ! is_true_false_value "${!1}"; then
+            print_validation_error "The allowed values for ${1} are: yes no"
+        fi
+    }
+
     # Only validate environment variables if any action needs to be performed
+    check_yes_no_value "DB_TLS_ENABLED"
+
     if [[ -n "$DB_CREATE_DATABASE_USER" || -n "$DB_CREATE_DATABASE_NAME" ]]; then
         if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
             empty_password_enabled_warn
@@ -70,6 +78,10 @@ mysql_client_validate() {
 #   None
 #########################
 mysql_client_initialize() {
+    # Wrap binary to force the usage of TLS
+    if is_boolean_yes "$DB_TLS_ENABLED"; then
+        mysql_client_wrap_binary_for_tls
+    fi
     # Wait for the database to be accessible if any action needs to be performed
     if [[ -n "$DB_CREATE_DATABASE_USER" || -n "$DB_CREATE_DATABASE_NAME" ]]; then
         info "Trying to connect to the database server"
@@ -98,6 +110,27 @@ mysql_client_initialize() {
         [[ -n "$DB_CREATE_DATABASE_COLLATE" ]] && createdb_args+=("--collate" "$DB_CREATE_DATABASE_COLLATE")
         mysql_ensure_optional_database_exists "${createdb_args[@]}"
     fi
+}
+
+########################
+# Wrap binary to force the usage of TLS
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mysql_client_wrap_binary_for_tls() {
+    local -r wrapper_file="${DB_BIN_DIR}/mysql"
+    local -r wrapped_binary_file="${DB_BASE_DIR}/.bin/mysql"
+
+    mv "$wrapper_file" "$wrapped_binary_file"
+    cat >"$wrapper_file" <<EOF
+#!/bin/sh
+exec "${wrapped_binary_file}" "\$@" --ssl=1
+EOF
+    chmod +x "$wrapper_file"
 }
 
 ########################
