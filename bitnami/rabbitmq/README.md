@@ -49,7 +49,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.8-debian-10`, `3.8.5-debian-10-r36`, `3.8`, `3.8.5`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.5-debian-10-r36/3.8/debian-10/Dockerfile)
+* [`3.8-debian-10`, `3.8.5-debian-10-r37`, `3.8`, `3.8.5`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.5-debian-10-r37/3.8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
@@ -167,23 +167,6 @@ $ docker-compose up -d
 ```
 
 ## Configuration
-The image looks for user-defined configurations in /bitnami/conf/my_custom.conf. Create a file named my_custom.conf and mount it at /bitnami/conf/my_custom.conf.
-
-For example, in order to override the `listeners.tcp.default` directive:
-
-#### Step 1: Write your my_custom.conf file with the following content.
-```ini
-listeners.tcp.default=1337
-```
-
-#### Step 2: Added the following volume to your configuration.
-```
--v /path/to/my_custom.conf:/bitnami/conf/my_custom.conf:ro \
-```
-
-After that, your changes will be taken into account in the server's behaviour.
-
-Refer to the RabbitMQ server option and variable reference guide for the complete list of configuration options.
 
 ### Environment variables
 
@@ -344,7 +327,25 @@ volumes:
 
 ### Configuration file
 
-A custom configuration file can be mounted to the `/opt/bitnami/rabbitmq/etc/rabbitmq` directory. If no file is mounted, the container will generate one.
+A custom `rabbitmq.conf` configuration file can be mounted to the `/bitnami/rabbitmq/conf/rabbitmq` directory. If no file is mounted, the container will generate a default one based on the environment variables. You can also moun on this directory your own `advanced.config` (using classic Erlang terms) and `rabbitmq-env.conf` configuration files.
+
+As an alternative, you can also mount a `custom.conf` configuration file and mount it to the `/bitnami/rabbitmq/conf/rabbitmq` directory. In this case, the default configuation file will be generated and, later on, the settings available in the `custom.conf` configuration file will be merged with the default ones. For example, in order to override the `listeners.tcp.default` directive:
+
+#### Step 1: Write your custom.conf configuation file with the following content.
+
+```ini
+listeners.tcp.default=1337
+```
+
+#### Step 2: Run RabbitMQ mounting your custom.conf configuation file
+
+```
+$ docker run -d --name rabbitmq-server \
+   -v /path/to/custom.conf:/bitnami/rabbitmq/conf/my_custom.conf:ro \
+    bitnami/rabbitmq:latest
+```
+
+After that, your changes will be taken into account in the server's behaviour.
 
 ## Enabling LDAP support
 
