@@ -10,12 +10,10 @@ set -o pipefail
 # Load DokuWiki environment
 . /opt/bitnami/scripts/dokuwiki-env.sh
 
-# Load web server environment and functions (after DokuWiki environment file so MODULE is not set to a wrong value)
-. /opt/bitnami/scripts/libwebserver.sh
-
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libwebserver.sh
 
 print_welcome_page
 
