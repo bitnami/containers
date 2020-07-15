@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090,SC1091
 
 set -o errexit
 set -o nounset
@@ -10,11 +10,12 @@ set -o pipefail
 # Load DokuWiki environment
 . /opt/bitnami/scripts/dokuwiki-env.sh
 
-# Load environment for web server configuration (after DokuWiki environment file so MODULE is not set to a wrong value)
-. /opt/bitnami/scripts/libwebserver.sh
-
 # Load libraries
 . /opt/bitnami/scripts/libdokuwiki.sh
+. /opt/bitnami/scripts/libwebserver.sh
+
+# Load web server environment and functions (after DokuWiki environment file so MODULE is not set to a wrong value)
+. "/opt/bitnami/scripts/$(web_server_type)-env.sh"
 
 # Ensure DokuWiki environment variables are valid
 dokuwiki_validate

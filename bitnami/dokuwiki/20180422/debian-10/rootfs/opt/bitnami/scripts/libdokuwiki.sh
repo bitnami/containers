@@ -4,18 +4,12 @@
 
 # shellcheck disable=SC1091
 
-# Load DokuWiki environment
-. /opt/bitnami/scripts/dokuwiki-env.sh
-
-# Load web server environment and functions
-. /opt/bitnami/scripts/libwebserver.sh
-
 # Load generic libraries
-. /opt/bitnami/scripts/libphp.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libpersistence.sh
+. /opt/bitnami/scripts/libwebserver.sh
 
 ########################
 # Validate settings in DOKUWIKI_* env vars
@@ -108,10 +102,8 @@ dokuwiki_pass_wizard() {
                "--data-urlencode" "d[password]=${DOKUWIKI_PASSWORD}"
                "--data-urlencode" "d[confirm]=${DOKUWIKI_PASSWORD}"
     )
-    curl "${curl_opts[@]}" "${curl_data_opts[@]}" "${wizard_url}"
-    # Check it has been configured
-    curl_output=$(curl "${wizard_url}")
-    if [[ "$curl_output" != *"already exists"* ]]; then
+    curl_output="$(curl "${curl_opts[@]}" "${curl_data_opts[@]}" "${wizard_url}" 2>&1)"
+    if [[ "$curl_output" != *"The configuration was finished successfully."* ]]; then
         error "An error occurred while installing DokuWiki"
         return 1
     fi
