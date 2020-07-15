@@ -13,10 +13,11 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1"
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "chartmuseum" "0.12.0-0" --checksum 0ade8309343e000747228a538a371cbc98fe8340814c860f98deb857621edd19
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.12.0-debian-10-r102" \
+    BITNAMI_IMAGE_VERSION="0.12.0-debian-10-r103" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/chartmuseum/bin:$PATH"
 
 USER 1001
