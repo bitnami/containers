@@ -15,8 +15,6 @@ set -o pipefail
 # Load phpMyAdmin environment
 . /opt/bitnami/scripts/phpmyadmin-env.sh
 
-web_server_validate
-
 print_welcome_page
 
 if [[ "$1" = "/opt/bitnami/scripts/$(web_server_type)/run.sh" || "$1" = "/opt/bitnami/scripts/nginx-php-fpm/run.sh" ]]; then
