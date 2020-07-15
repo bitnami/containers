@@ -213,6 +213,39 @@ kafka:
   ...
 ```
 
+### Kafka development setup example
+
+To use Kafka in a development setup, create the following `docker-compose.yml` file:
+
+```yaml
+version: "3"
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: 'bitnami/kafka:latest'
+    ports:
+      - '9092:9092'
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    depends_on:
+      - zookeeper
+```
+
+To deploy it, run the following command in the directory where the `docker-compose.yml` file is located:
+
+```
+docker-compose up -d
+```
+
 ### Accessing Kafka with internal and external clients
 
 In order to use internal and external clients to access Kafka brokers you need to configure one listener for each kind of clients.
