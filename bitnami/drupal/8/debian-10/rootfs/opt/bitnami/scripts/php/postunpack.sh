@@ -22,6 +22,9 @@ php_conf_set "opcache.file_cache" "$PHP_DEFAULT_OPCACHE_FILE_CACHE"
 # PHP-FPM configuration
 php_conf_set "listen" "$PHP_FPM_DEFAULT_LISTEN_ADDRESS" "${PHP_CONF_DIR}/php-fpm.d/www.conf"
 
+# TMP dir configuration
+php_conf_set upload_tmp_dir "$PHP_TMP_DIR"
+
 # Ensure directories used by PHP-FPM exist and have proper ownership and permissions
 for dir in "$PHP_CONF_DIR" "$PHP_TMP_DIR" "$PHP_FPM_LOGS_DIR"; do
     ensure_dir_exists "$dir"
