@@ -304,10 +304,17 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 ## Notable Changes
 
+### 20180422.4.0-debian-10-r0
+
+- Changed versionioning to be shorter and more similar to the official version name.
+
 ### 0.20180422.202005011246-debian-10-r68
 
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+- The DokuWiki container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Apache daemon was started as the `daemon` user. From now on, both the container and the Apache daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
+  - The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
+  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the DokuWiki site by exporting its content, and importing it on a new DokuWiki container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
 
 ### 0.20180422.201901061035-debian-9-r114 and 0.20180422.201901061035-ol-7-r128
 
