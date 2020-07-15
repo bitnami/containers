@@ -33,7 +33,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1-debian-10`, `1.2.0-debian-10-r124`, `1`, `1.2.0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/1.2.0-debian-10-r124/1/debian-10/Dockerfile)
-* [`0-debian-10`, `0.10.0-debian-10-r166`, `0`, `0.10.0` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.10.0-debian-10-r166/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.10.0-debian-10-r167`, `0`, `0.10.0` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.10.0-debian-10-r167/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pushgateway GitHub repo](https://github.com/bitnami/bitnami-docker-pushgateway).
 
