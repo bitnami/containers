@@ -38,7 +38,6 @@ export RABBITMQ_LIB_DIR="${RABBITMQ_BASE_DIR}/var/lib/rabbitmq"
 export RABBITMQ_LOG_DIR="${RABBITMQ_BASE_DIR}/var/log/rabbitmq"
 export RABBITMQ_PLUGINS_DIR="${RABBITMQ_BASE_DIR}/plugins"
 export RABBITMQ_MOUNTED_CONF_DIR="${RABBITMQ_MOUNTED_CONF_DIR:-${RABBITMQ_VOLUME_DIR}/conf}"
-export RABBITMQ_CUSTOM_CONF_DIR="/bitnami/conf"
 export PATH="${RABBITMQ_BIN_DIR}:${PATH}"
 
 # OS
@@ -150,11 +149,13 @@ rabbitmq_validate() {
 #########################
 rabbitmq_create_config_file() {
     debug "Creating configuration file..."
-    cat > "${RABBITMQ_CONF_FILE}" <<EOF
+
+    cat > "$RABBITMQ_CONF_FILE" <<EOF
 ## Networking
 listeners.tcp.default = $RABBITMQ_NODE_PORT_NUMBER
 
-## On first start RabbitMQ will create a vhost and a user. These config items control what gets created
+## On first start RabbitMQ will create a vhost and a user. These
+## config items control what gets created
 default_vhost = $RABBITMQ_VHOST
 default_user = $RABBITMQ_USERNAME
 default_permissions.configure = .*
@@ -166,19 +167,19 @@ cluster_partition_handling = $RABBITMQ_CLUSTER_PARTITION_HANDLING
 EOF
 
     if [[ -n "$RABBITMQ_DISK_FREE_ABSOLUTE_LIMIT" ]]; then
-        cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.conf" <<EOF
+        cat >> "$RABBITMQ_CONF_FILE" <<EOF
 ## Set an absolute disk free space limit
 disk_free_limit.absolute = $RABBITMQ_DISK_FREE_ABSOLUTE_LIMIT
 EOF
     else
-        cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.conf" <<EOF
+        cat >> "$RABBITMQ_CONF_FILE" <<EOF
 ## Set a limit relative to total available RAM
 disk_free_limit.relative = $RABBITMQ_DISK_FREE_RELATIVE_LIMIT
 EOF
     fi
 
     if is_boolean_yes "$RABBITMQ_ENABLE_LDAP"; then
-        cat >> "${RABBITMQ_CONF_FILE}" <<EOF
+        cat >> "$RABBITMQ_CONF_FILE" <<EOF
 ## Select an authentication/authorisation backend to use
 auth_backends.1 = rabbit_auth_backend_ldap
 auth_backends.2 = internal
@@ -188,30 +189,66 @@ EOF
         read -r -a ldap_servers <<< "$(tr ',;' ' ' <<< "$RABBITMQ_LDAP_SERVERS")"
         local index=1
         for server in "${ldap_servers[@]}"; do
-            cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.conf" <<EOF
+            cat >> "$RABBITMQ_CONF_FILE" <<EOF
 auth_ldap.servers.${index} = $server
 EOF
             index=$((index + 1 ))
         done
-        cat >> "${RABBITMQ_CONF_DIR}/rabbitmq.conf" <<EOF
+        cat >> "$RABBITMQ_CONF_FILE" <<EOF
 auth_ldap.port = $RABBITMQ_LDAP_SERVERS_PORT
 auth_ldap.user_dn_pattern = $RABBITMQ_LDAP_USER_DN_PATTERN
 
 EOF
 
         if is_boolean_yes "$RABBITMQ_LDAP_TLS"; then
-            cat >> "${RABBITMQ_CONF_FILE}" <<EOF
+            cat >> "$RABBITMQ_CONF_FILE" <<EOF
 auth_ldap.use_ssl = true
 
 EOF
         fi
     fi
 
-    cat >> "${RABBITMQ_CONF_FILE}" <<EOF
+    cat >> "$RABBITMQ_CONF_FILE" <<EOF
 ## Management
 management.tcp.port = $RABBITMQ_MANAGER_PORT_NUMBER
 management.tcp.ip = $RABBITMQ_MANAGER_BIND_IP
 EOF
+}
+
+########################
+# Add or modify an entry in the RabbitMQ configuration file
+# Globals:
+#   RABBITMQ_CONF_FILE
+# Arguments:
+#   $1 - key
+#   $2 - values (array)
+# Returns:
+#   None
+#########################
+rabbitmq_conf_set() {
+    local -r key="${1:?missing key}"
+    shift
+    local -r -a values=("$@")
+
+    if [[ "${#values[@]}" -eq 0 ]]; then
+        stderr_print "missing value"
+        return 1
+    elif [[ "${#values[@]}" -ne 1 ]]; then
+        for i in "${!values[@]}"; do
+            rabbitmq_conf_set "${key[$i]}" "${values[$i]}"
+        done
+    else
+        value="${values[0]}"
+        debug "Setting ${key} to '${value}' in $RABBITMQ_CONF_FILE ..."
+        # Check if the value was set before
+        if grep -q "^[# ]*$key\s*=.*" "$RABBITMQ_CONF_FILE"; then
+            # Update the existing key
+            replace_in_file "$RABBITMQ_CONF_FILE" "^[# ]*${key}\s*=.*" "${key} = ${value}" false
+        else
+            # Add a new key
+            printf '\n%s = %s' "$key" "$value" >> "$RABBITMQ_CONF_FILE"
+        fi
+    fi
 }
 
 ########################
@@ -225,7 +262,7 @@ EOF
 #########################
 rabbitmq_create_environment_file() {
     debug "Creating environment file..."
-    cat > "${RABBITMQ_CONF_ENV_FILE}" <<EOF
+    cat > "$RABBITMQ_CONF_ENV_FILE" <<EOF
 HOME=$RABBITMQ_HOME_DIR
 NODE_PORT=$RABBITMQ_NODE_PORT_NUMBER
 NODENAME=$RABBITMQ_NODE_NAME
@@ -437,33 +474,6 @@ rabbitmq_join_cluster() {
 }
 
 ########################
-# Add or modify an entry in the RabbitMQ configuration file ("$RABBITMQ_CONF_FILE")
-# Globals:
-#   RABBITMQ_*
-# Arguments:
-#   $1 - RABBITMQ variable name
-#   $2 - Value to assign to the RABBITMQ variable
-#   $3 - Configuration file (default: "$RABBITMQ_CONF_FILE")
-# Returns:
-#   None
-#########################
-rabbitmq_conf_set() {
-    local -r key="${1:?key missing}"
-    local -r value="${2:?value missing}"
-    local -r file="${3:-"$RABBITMQ_CONF_FILE"}"
-    info "Setting ${key} option"
-    debug "Setting ${key} to '${value}' in ${file} configuration"
-
-    if grep -qE "${key}" "${file}"; then
-      # Key already exists, overide old value
-      replace_in_file "${file}" "^${key}\s*=\s*.*" "${key} = ${value}"
-    else
-      # Key does not exists. append to end of file.
-      echo "${key} = ${value}" >> "${file}"
-    fi
-}
-
-########################
 # Ensure RabbitMQ is initialized
 # Globals:
 #   RABBITMQ_*
@@ -479,19 +489,18 @@ rabbitmq_initialize() {
     if ! is_dir_empty "$RABBITMQ_MOUNTED_CONF_DIR"; then
         cp -Lr "$RABBITMQ_MOUNTED_CONF_DIR"/* "$RABBITMQ_CONF_DIR"
     fi
-
-    [[ ! -f "${RABBITMQ_CONF_FILE}" ]] && rabbitmq_create_config_file
-    [[ ! -f "${RABBITMQ_CONF_DIR}/rabbit-env.conf" ]] && rabbitmq_create_environment_file
+    [[ ! -f "$RABBITMQ_CONF_FILE" ]] && rabbitmq_create_config_file
+    [[ ! -f "$RABBITMQ_CONF_ENV_FILE" ]] && rabbitmq_create_environment_file
     [[ ! -f "${RABBITMQ_CONF_DIR}/enabled_plugins" ]] && rabbitmq_create_enabled_plugins_file
     [[ -n "${RABBITMQ_COMMUNITY_PLUGINS:-}" ]] && rabbitmq_download_community_plugins
-
     # User injected custom configuration
-    if [[ -f "$RABBITMQ_CUSTOM_CONF_DIR/my_custom.conf" ]]; then
-        debug "Injecting custom configuration from my_custom.conf"
-        grep -E "^\w.*\s?=\s?.*" "${RABBITMQ_CUSTOM_CONF_DIR}/my_custom.conf" | while IFS='=' read -r custom_key custom_value || [[ -n $custom_key ]];
-        do
-            rabbitmq_conf_set "$custom_key" "$custom_value" "${RABBITMQ_CONF_FILE}"
-        done
+    if [[ -f "${RABBITMQ_CONF_DIR}/custom.conf" ]]; then
+        debug "Injecting custom configuration from custom.conf"
+        while IFS='=' read -r custom_key custom_value || [[ -n $custom_key ]]; do
+            rabbitmq_conf_set "$custom_key" "$custom_value"
+        done < <(grep -E "^\w.*\s?=\s?.*" "${RABBITMQ_CONF_DIR}/custom.conf")
+        # Remove custom configurafion file once the changes are applied
+        rm "${RABBITMQ_CONF_DIR}/custom.conf"
     fi
 
     [[ ! -f "${RABBITMQ_LIB_DIR}/.start" ]] && touch "${RABBITMQ_LIB_DIR}/.start"
