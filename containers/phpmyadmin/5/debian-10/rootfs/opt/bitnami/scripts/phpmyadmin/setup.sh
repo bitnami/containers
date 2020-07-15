@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090,SC1091
 
 set -o errexit
 set -o nounset
@@ -10,12 +10,13 @@ set -o pipefail
 # Load phpMyAdmin environment
 . /opt/bitnami/scripts/phpmyadmin-env.sh
 
-# Load web server environment and functions (after phpMyAdmin environment file so MODULE is not set to a wrong value)
-. /opt/bitnami/scripts/libwebserver.sh
-
 # Load libraries
 . /opt/bitnami/scripts/libphpmyadmin.sh
 . /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libwebserver.sh
+
+# Load web server environment and functions (after phpMyAdmin environment file so MODULE is not set to a wrong value)
+. "/opt/bitnami/scripts/$(web_server_type)-env.sh"
 
 # Ensure phpMyAdmin environment variables are valid
 phpmyadmin_validate
