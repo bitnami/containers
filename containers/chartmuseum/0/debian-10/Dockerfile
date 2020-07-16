@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.12.0-debian-10-r103" \
+    BITNAMI_IMAGE_VERSION="0.12.0-debian-10-r104" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/chartmuseum/bin:$PATH"
 
 USER 1001
