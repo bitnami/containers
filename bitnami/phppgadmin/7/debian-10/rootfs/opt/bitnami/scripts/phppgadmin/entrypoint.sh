@@ -7,13 +7,13 @@ set -o nounset
 set -o pipefail
 #set -o xtrace
 
+# Load phpPgAdmin environment
+. /opt/bitnami/scripts/phppgadmin-env.sh
+
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libwebserver.sh
-
-# Load phpPgAdmin environment
-. /opt/bitnami/scripts/phppgadmin-env.sh
 
 print_welcome_page
 
