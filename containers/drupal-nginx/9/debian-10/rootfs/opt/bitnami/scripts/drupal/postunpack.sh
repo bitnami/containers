@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# shellcheck disable=SC1090
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090,SC1091
 
 set -o errexit
 set -o nounset
@@ -20,15 +19,16 @@ set -o pipefail
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libphp.sh
+. /opt/bitnami/scripts/libwebserver.sh
 
 # Load web server environment and functions (after Drupal environment file so MODULE is not set to a wrong value)
 . "/opt/bitnami/scripts/$(web_server_type)-env.sh"
-. /opt/bitnami/scripts/libwebserver.sh
 
 # Enable Drupal configuration file
 [[ ! -f "$DRUPAL_CONF_FILE" ]] && cp "${DRUPAL_BASE_DIR}/sites/default/default.settings.php" "$DRUPAL_CONF_FILE"
 
-[[ "$(web_server_type)" == "apache" ]] && drupal_fix_htaccess_warning_protection
+# Create .htaccess file to avoid warning in Drupal administration panel
+drupal_fix_htaccess_warning_protection
 
 # Ensure the Drupal base directory exists and has proper permissions
 info "Configuring file permissions for Drupal"
@@ -115,7 +115,5 @@ location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
   log_not_found off;
 }'
 
-# Fix warning for Drupal and htaccess by writing the file again
-if [[ "$(web_server_type)" == "apache" ]]; then
-    drupal_fix_htaccess_warning_protection
-fi
+# Re-create .htaccess file after being moved into 'apache/conf/vhosts/htaccess' directory, to avoid Drupal warning
+drupal_fix_htaccess_warning_protection
