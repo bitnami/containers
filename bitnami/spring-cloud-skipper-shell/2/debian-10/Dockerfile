@@ -22,7 +22,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN touch /opt/bitnami/spring-cloud-skipper-shell/spring-cloud-skipper-shell.log && chmod -R g+rwX /opt/bitnami/spring-cloud-skipper-shell
 
 ENV BITNAMI_APP_NAME="spring-cloud-skipper-shell" \
-    BITNAMI_IMAGE_VERSION="2.4.3-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="2.4.3-debian-10-r2" \
     HOME="/" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
