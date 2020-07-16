@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`9-debian-10`, `9.0.2-debian-10-r3`, `9`, `9.0.2`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/9.0.2-debian-10-r3/9/debian-10/Dockerfile)
-* [`8-debian-10`, `8.9.2-debian-10-r4`, `8`, `8.9.2` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.9.2-debian-10-r4/8/debian-10/Dockerfile)
+* [`8-debian-10`, `8.9.2-debian-10-r5`, `8`, `8.9.2` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.9.2-debian-10-r5/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
 
@@ -427,6 +427,9 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+- The Drupal container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Apache daemon was started as the `daemon` user. From now on, both the container and the Apache daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
+  - The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
+  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the Drupal site by exporting its content, and importing it on a new Drupal container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
 
 ## 8.7.2-debian-9-r8 and 8.7.2-ol-7-r8
 
