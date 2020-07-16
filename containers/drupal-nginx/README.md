@@ -41,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`9-debian-10`, `9.0.2-debian-10-r4`, `9`, `9.0.2`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/9.0.2-debian-10-r4/9/debian-10/Dockerfile)
-* [`8-debian-10`, `8.9.2-debian-10-r4`, `8`, `8.9.2` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/8.9.2-debian-10-r4/8/debian-10/Dockerfile)
+* [`8-debian-10`, `8.9.2-debian-10-r5`, `8`, `8.9.2` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/8.9.2-debian-10-r5/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-drupal-nginx).
 
@@ -366,10 +366,10 @@ The Bitnami Drupal with NGINX Docker image is designed to be extended so it can 
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
-- Settings that can be adapted using environment variables. For instance, you can change the ports used by Apache for HTTP and HTTPS, by setting the environment variables `APACHE_HTTP_PORT_NUMBER` and `APACHE_HTTPS_PORT_NUMBER` respectively.
-- [Adding custom virtual hosts](https://github.com/bitnami/bitnami-docker-apache#adding-custom-virtual-hosts).
-- [Replacing the 'httpd.conf' file](https://github.com/bitnami/bitnami-docker-apache#full-configuration).
-- [Using custom SSL certificates](https://github.com/bitnami/bitnami-docker-apache#using-custom-ssl-certificates).
+- Settings that can be adapted using environment variables. For instance, you can change the ports used by NGINX for HTTP and HTTPS, by setting the environment variables `NGINX_HTTP_PORT_NUMBER` and `NGINX_HTTPS_PORT_NUMBER` respectively.
+- [Adding custom server blocks](https://github.com/bitnami/bitnami-docker-nginx#adding-custom-server-blocks).
+- [Replacing the 'nginx.conf' file](https://github.com/bitnami/bitnami-docker-nginx#full-configuration).
+- [Using custom SSL certificates](https://github.com/bitnami/bitnami-docker-nginx#using-custom-ssl-certificates).
 
 If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
 
@@ -382,8 +382,8 @@ FROM bitnami/drupal-nginx
 Here is an example of extending the image with the following modifications:
 
 - Install the `vim` editor
-- Modify the Apache configuration file
-- Modify the ports used by Apache
+- Modify the NGINX configuration file
+- Modify the ports used by NGINX
 
 ```Dockerfile
 FROM bitnami/drupal-nginx
@@ -392,13 +392,13 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 ## Install 'vim'
 RUN install_packages vim
 
-## Enable mod_ratelimit module
-RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
+## Update ssl_session_timeout
+RUN sed -i -r -E 's/ssl_session_timeout\s+5m;/ssl_session_timeout  5m;/' /opt/bitnami/nginx/conf/nginx.conf
 
-## Modify the ports used by Apache by default
+## Modify the ports used by NGINX by default
 # It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181
-ENV APACHE_HTTPS_PORT_NUMBER=8143
+ENV NGINX_HTTP_PORT_NUMBER=8181
+ENV NGINX_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
 
@@ -424,12 +424,15 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+- The Drupal container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the NGINX daemon was started as the `daemon` user. From now on, both the container and the NGINX daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
+  - The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
+  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the Drupal site by exporting its content, and importing it on a new Drupal container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
 
 ## 8.7.2-debian-9-r9 and 8.7.2-ol-7-r8
 
 - This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 - The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
-- Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
+- Enabling custom NGINX certificates by placing them at `/opt/bitnami/nginx/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
 
 # Contributing
 
