@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.9.20-debian-10-r0`, `3`, `3.9.20`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.20-debian-10-r0/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.9.20-debian-10-r1`, `3`, `3.9.20`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.20-debian-10-r1/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
 
@@ -484,11 +484,13 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 # Notable Changes
 
-## 3.9.19-debian-10-r34
+## 3.9.20-debian-10-r0
 
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
-- The image was migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Apache daemon was started as the `daemon` user. From now on, both the container and the Apache daemon run as user `1001`. As a consequence, The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`. Note that backwards compatibility is not guaranteed.
+- The Joomla! container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Apache daemon was started as the `daemon` user. From now on, both the container and the Apache daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
+  - The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
+  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the Joomla! site by exporting its content, and importing it on a new Joomla! container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
 
 ## 3.9.6-debian-9-r12 and 3.9.6-ol-7-r14
 

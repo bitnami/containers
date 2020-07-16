@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090,SC1091
 
 set -o errexit
 set -o nounset
@@ -13,15 +13,16 @@ set -o pipefail
 # Load PHP environment for 'php_conf_set' (after 'joomla-env.sh' so that MODULE is not set to a wrong value)
 . /opt/bitnami/scripts/php-env.sh
 
-# Load web server environment and functions (after Joomla! environment file so MODULE is not set to a wrong value)
-. /opt/bitnami/scripts/libwebserver.sh
-
 # Load libraries
 . /opt/bitnami/scripts/libjoomla.sh
 . /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libphp.sh
+. /opt/bitnami/scripts/libwebserver.sh
+
+# Load web server environment and functions (after Joomla! environment file so MODULE is not set to a wrong value)
+. "/opt/bitnami/scripts/$(web_server_type)-env.sh"
 
 # Enable Joomla! configuration file
 [[ ! -f "$JOOMLA_CONF_FILE" ]] && cp "${JOOMLA_BASE_DIR}/installation/configuration.php-dist" "$JOOMLA_CONF_FILE"
