@@ -277,3 +277,15 @@ generate_random_string() {
     result="$(head -n "$((count + 10))" /dev/urandom | tr -dc "$filter" | head -c "$count")"
     echo "$result"
 }
+
+########################
+# Create md5 hash from a string
+# Arguments:
+#   $1 - string
+# Returns:
+#   md5 hash - string
+#########################
+generate_md5_hash() {
+  local -r str="${1:?missing input string}"
+  echo -n "$str" | md5sum | awk '{print $1}'
+}
