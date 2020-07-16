@@ -4,30 +4,13 @@
 
 # shellcheck disable=SC1091
 
-# Load Moodle environment
-. /opt/bitnami/scripts/moodle-env.sh
-
-# Load MySQL Client environment for 'mysql_remote_execute' (after 'moodle-env.sh' so that MODULE is not set to a wrong value)
-if [[ -f /opt/bitnami/scripts/mysql-client-env.sh ]]; then
-    . /opt/bitnami/scripts/mysql-client-env.sh
-elif [[ -f /opt/bitnami/scripts/mysql-env.sh ]]; then
-    . /opt/bitnami/scripts/mysql-env.sh
-elif [[ -f /opt/bitnami/scripts/mariadb-env.sh ]]; then
-    . /opt/bitnami/scripts/mariadb-env.sh
-fi
-
-# Load PHP environment for cron configuration (after 'moodle-env.sh' so that MODULE is not set to a wrong value)
-. /opt/bitnami/scripts/php-env.sh
-
-# Load web server environment and functions (after Moodle environment file so MODULE is not set to a wrong value)
-. /opt/bitnami/scripts/libwebserver.sh
-
 # Load generic libraries
 . /opt/bitnami/scripts/libphp.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libpersistence.sh
+. /opt/bitnami/scripts/libwebserver.sh
 
 # Load database library
 if [[ -f /opt/bitnami/scripts/libmysqlclient.sh ]]; then
