@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090,SC1091
 
 set -o errexit
 set -o nounset
@@ -10,11 +10,21 @@ set -o pipefail
 # Load Drupal environment
 . /opt/bitnami/scripts/drupal-env.sh
 
-# Load environment for web server configuration (after Drupal environment file so MODULE is not set to a wrong value)
-. /opt/bitnami/scripts/libwebserver.sh
+# Load MySQL Client environment for 'mysql_remote_execute' (after 'moodle-env.sh' so that MODULE is not set to a wrong value)
+if [[ -f /opt/bitnami/scripts/mysql-client-env.sh ]]; then
+    . /opt/bitnami/scripts/mysql-client-env.sh
+elif [[ -f /opt/bitnami/scripts/mysql-env.sh ]]; then
+    . /opt/bitnami/scripts/mysql-env.sh
+elif [[ -f /opt/bitnami/scripts/mariadb-env.sh ]]; then
+    . /opt/bitnami/scripts/mariadb-env.sh
+fi
 
 # Load libraries
 . /opt/bitnami/scripts/libdrupal.sh
+. /opt/bitnami/scripts/libwebserver.sh
+
+# Load web server environment and functions (after Drupal environment file so MODULE is not set to a wrong value)
+. "/opt/bitnami/scripts/$(web_server_type)-env.sh"
 
 # Ensure Drupal environment variables are valid
 drupal_validate
