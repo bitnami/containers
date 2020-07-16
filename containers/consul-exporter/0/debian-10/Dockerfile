@@ -14,7 +14,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/consul-exporter/bin/consul_exporter /bin/consul_exporter
 
 ENV BITNAMI_APP_NAME="consul-exporter" \
-    BITNAMI_IMAGE_VERSION="0.7.0-debian-10-r28" \
+    BITNAMI_IMAGE_VERSION="0.7.0-debian-10-r29" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
