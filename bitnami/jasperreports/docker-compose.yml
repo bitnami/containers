@@ -18,7 +18,6 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '80:8080'
-      - '443:8443'
     volumes:
       - 'jasperreports_data:/bitnami'
     depends_on:
