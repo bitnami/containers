@@ -10,7 +10,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl gzip libc6 libgcc1 lsof procps sudo tar
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
-RUN bitnami-pkg install java-1.8.252-4 --checksum 8e9a23094ea1ce6360b905552e55dacb1e27de4b99df7bc01ea83ea4c3fafa49
+RUN bitnami-pkg install java-1.8.262-0 --checksum 7ccaf9b2abc4069482fea3d612e53c3b2a369e44c69e246aa8e8d7bddb496372
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg unpack solr-8.5.2-0 --checksum dbaf21cdc010171f6c2420bbd0097e9c2e206f0ca0a8894ac2efd22d77edaba8
 RUN bitnami-pkg install gosu-1.12.0-1 --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
@@ -19,7 +19,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="8.5.2-debian-10-r44" \
+    BITNAMI_IMAGE_VERSION="8.5.2-debian-10-r45" \
     NAMI_PREFIX="/.nami" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
