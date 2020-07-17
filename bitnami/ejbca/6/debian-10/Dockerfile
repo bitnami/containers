@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libaudit1 libc6 libcap-ng0 libgcc1 libicu63 libjemalloc2 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.252-4" --checksum 8e9a23094ea1ce6360b905552e55dacb1e27de4b99df7bc01ea83ea4c3fafa49
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.262-0" --checksum 7ccaf9b2abc4069482fea3d612e53c3b2a369e44c69e246aa8e8d7bddb496372
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wildfly" "14.0.1-3" --checksum 729600e457302e10cf1207744f27172e90273096231c7d62a933c3c07f09010b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.23-1" --checksum efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/ejbca/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ejbca" \
-    BITNAMI_IMAGE_VERSION="6.15.2-6-debian-10-r15" \
+    BITNAMI_IMAGE_VERSION="6.15.2-6-debian-10-r16" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
