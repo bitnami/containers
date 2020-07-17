@@ -8,10 +8,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "86a6e1604f6bb124bfc763d348d377670755343fd4f1cd347fe45de59c3967e0  /tmp/bitnami/pkg/cache/node-12.18.2-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/node-12.18.2-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/node-12.18.2-1-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-11.0.7-2-linux-amd64-debian-10.tar.gz && \
-    echo "a79c3f491f7d2f730fbcad82b1c61f496e44b07a7bd87a13478b14ae90ef3e22  /tmp/bitnami/pkg/cache/java-11.0.7-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/java-11.0.7-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/java-11.0.7-2-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-11.0.8-0-linux-amd64-debian-10.tar.gz && \
+    echo "268e7ba913422e7acd282b94615b127eeb56e3c4bb7e3c9c6d952c391e6ead4d  /tmp/bitnami/pkg/cache/java-11.0.8-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/java-11.0.8-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/java-11.0.8-0-linux-amd64-debian-10.tar.gz
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jruby-9.2.12-0-0-linux-amd64-debian-10.tar.gz && \
     echo "29c658a98ad26730f059a9f66d0061ef4a76f9f88c28bfbe40ac37928094cf68  /tmp/bitnami/pkg/cache/jruby-9.2.12-0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/jruby-9.2.12-0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -23,7 +23,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="jruby" \
-    BITNAMI_IMAGE_VERSION="9.2.12-0-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="9.2.12-0-debian-10-r2" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux" \
