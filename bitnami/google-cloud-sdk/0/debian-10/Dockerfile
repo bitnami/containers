@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.config /.gsutil && chmod g+rwX /.config /.gsutil
 
 ENV BITNAMI_APP_NAME="google-cloud-sdk" \
-    BITNAMI_IMAGE_VERSION="0.301.0-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="0.301.0-debian-10-r2" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
