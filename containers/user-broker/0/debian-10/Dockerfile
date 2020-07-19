@@ -13,7 +13,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="user-broker" \
-    BITNAMI_IMAGE_VERSION="0.3.0-debian-10-r50" \
+    BITNAMI_IMAGE_VERSION="0.3.0-debian-10-r51" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
