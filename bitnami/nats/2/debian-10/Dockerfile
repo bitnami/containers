@@ -15,7 +15,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN chown -R 1001:root /opt/bitnami/nats && chmod g+rwX /opt/bitnami/nats
 ENV BITNAMI_APP_NAME="nats" \
-    BITNAMI_IMAGE_VERSION="2.1.7-debian-10-r60" \
+    BITNAMI_IMAGE_VERSION="2.1.7-debian-10-r61" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
