@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.azure /.azcopy && chmod g+rwX /.azure /.azcopy /bin
 
 ENV BITNAMI_APP_NAME="azure-cli" \
-    BITNAMI_IMAGE_VERSION="2.9.1-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="2.9.1-debian-10-r3" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
