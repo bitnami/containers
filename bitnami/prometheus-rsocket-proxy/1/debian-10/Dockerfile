@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN touch /opt/bitnami/prometheus-rsocket-proxy/prometheus-rsocket-proxy.log && chmod -R g+rwX /opt/bitnami/prometheus-rsocket-proxy
 
 ENV BITNAMI_APP_NAME="prometheus-rsocket-proxy" \
-    BITNAMI_IMAGE_VERSION="1.0.0-debian-10-r24" \
+    BITNAMI_IMAGE_VERSION="1.0.0-debian-10-r25" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
