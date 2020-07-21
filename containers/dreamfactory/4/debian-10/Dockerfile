@@ -10,14 +10,14 @@ RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg unpack php-7.3.20-1 --checksum 5fea2ffac007503364e906f5ad5444336aaaf4b360045f75f58ec220610bc8b1
 RUN bitnami-pkg unpack apache-2.4.43-5 --checksum e9faded57e3703fe9fcea650eb302e673d969a399fe9dfafa67e173465637665
-RUN bitnami-pkg install redis-client-6.0.5-0 --checksum 55deb6b6eed6d980f9f5e403f0d38b52c619afa65aafefdb26e98e4fba6836b1
+RUN bitnami-pkg install redis-client-6.0.6-0 --checksum ca1821754847cd7c88d21ebb21dd37182ee27016ceae2883f0a0ba2ea6bd7620
 RUN bitnami-pkg install postgresql-client-11.8.0-3 --checksum 884f83caf091522e2ea8d03d69e5dcec5d7a309a6e3f9f434d9ee5acc14f4ce0
 RUN bitnami-pkg install mysql-client-10.3.23-1 --checksum efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1
 RUN bitnami-pkg install mongodb-client-4.2.8-0 --checksum ffc5223c428214307734782b8c9c10811d6d04f42ea9d3b46f02ceb6920f8baa
 RUN bitnami-pkg install libphp-7.3.20-0 --checksum 15fa4a11f2e11377ba0d6476ce22021349f62ef2fdfbe2af4f86dca10baaa997
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg install gosu-1.12.0-1 --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
-RUN bitnami-pkg unpack dreamfactory-4.3.1-0 --checksum 3c95e8c9e65e2c5c980197b4a15839f1f00734cf3c1c35d52fb35868cddfa257
+RUN bitnami-pkg unpack dreamfactory-4.3.1-1 --checksum 60d73d6e2e3e02a9f24e10bd6da539176d599e2cd65a5009e2d2a1174e5a6da4
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log && \
@@ -28,7 +28,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="4.3.1-debian-10-r16" \
+    BITNAMI_IMAGE_VERSION="4.3.1-debian-10-r17" \
     DREAMFACTORY_DATABASE_TYPE="mariadb" \
     DREAMFACTORY_ENABLE_MARIADB_SERVICE="no" \
     DREAMFACTORY_ENABLE_MONGODB_SERVICE="yes" \
