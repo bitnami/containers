@@ -13,7 +13,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="metallb-speaker" \
-    BITNAMI_IMAGE_VERSION="0.9.3-debian-10-r115" \
+    BITNAMI_IMAGE_VERSION="0.9.3-debian-10-r116" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
