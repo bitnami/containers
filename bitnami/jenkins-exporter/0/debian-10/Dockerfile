@@ -17,7 +17,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="jenkins-exporter" \
-    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-10-r169" \
+    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-10-r170" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
