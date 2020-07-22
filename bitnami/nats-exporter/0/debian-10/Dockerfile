@@ -13,7 +13,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="nats-exporter" \
-    BITNAMI_IMAGE_VERSION="0.6.2-debian-10-r75" \
+    BITNAMI_IMAGE_VERSION="0.6.2-debian-10-r77" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
