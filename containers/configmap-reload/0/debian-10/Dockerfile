@@ -14,7 +14,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/configmap-reload/bin/configmap-reload /bin/configmap-reload
 
 ENV BITNAMI_APP_NAME="configmap-reload" \
-    BITNAMI_IMAGE_VERSION="0.4.0-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="0.4.0-debian-10-r9" \
     HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
