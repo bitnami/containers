@@ -1,19 +1,19 @@
-FROM docker.io/bitnami/minideb:buster-snapshot-20200720T204543Z
+FROM docker.io/bitnami/minideb:buster-snapshot-20200721T204601Z
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl ghostscript git gzip imagemagick libbz2-1.0 libc6 libffi6 libgcc1 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libsqlite3-dev libssl-dev libssl1.1 libstdc++6 libtinfo6 pkg-config procps tar unzip wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-10.21.0-2-linux-amd64-debian-10.tar.gz && \
-    echo "c133461dc03e736627de20be1ebd7ed02bd977cafffe91d66a7955854e581346  /tmp/bitnami/pkg/cache/node-10.21.0-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/node-10.21.0-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/node-10.21.0-2-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-10.22.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "b09753b515b6d56ad90a37320837df3fb341badfcf9a94c2ab2b11625d6d3e81  /tmp/bitnami/pkg/cache/node-10.22.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/node-10.22.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/node-10.22.0-0-linux-amd64-debian-10.tar.gz
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="node-snapshot" \
-    BITNAMI_IMAGE_VERSION="10.21.0-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="10.22.0-debian-10-r0" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux" \
