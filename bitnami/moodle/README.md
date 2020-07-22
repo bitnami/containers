@@ -358,7 +358,7 @@ $ docker run --rm -v /path/to/moodle-backups:/backups --volumes-from moodle busy
 
 Restoring a backup is as simple as mounting the backup as volumes in the containers.
 
-For the Moodle container:
+For the MariaDB database container:
 
 ```diff
  $ docker run -d --name mariadb \
@@ -368,7 +368,7 @@ For the Moodle container:
    bitnami/mariadb:latest
 ```
 
-For the MariaDB database container:
+For the Moodle container:
 
 ```diff
  $ docker run -d --name moodle \
