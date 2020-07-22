@@ -4,12 +4,6 @@
 
 # shellcheck disable=SC1091
 
-# Load Drupal environment
-. /opt/bitnami/scripts/drupal-env.sh
-
-# Load MySQL Client environment for 'mysql_execute' (after 'drupal-env.sh' so that MODULE is not set to a wrong value)
-. /opt/bitnami/scripts/mysql-client-env.sh
-
 # Load Generic Libraries
 . /opt/bitnami/scripts/libphp.sh
 . /opt/bitnami/scripts/libfs.sh
@@ -17,9 +11,17 @@
 . /opt/bitnami/scripts/libnet.sh
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libversion.sh
-. /opt/bitnami/scripts/libwebserver.sh
-. /opt/bitnami/scripts/libmysqlclient.sh
 . /opt/bitnami/scripts/libpersistence.sh
+. /opt/bitnami/scripts/libwebserver.sh
+
+# Load database library
+if [[ -f /opt/bitnami/scripts/libmysqlclient.sh ]]; then
+    . /opt/bitnami/scripts/libmysqlclient.sh
+elif [[ -f /opt/bitnami/scripts/libmysql.sh ]]; then
+    . /opt/bitnami/scripts/libmysql.sh
+elif [[ -f /opt/bitnami/scripts/libmariadb.sh ]]; then
+    . /opt/bitnami/scripts/libmariadb.sh
+fi
 
 ########################
 # Validate settings in DRUPAL_* env vars
