@@ -97,6 +97,15 @@ If you want to run the application manually instead of using docker-compose, the
 
 Then you can access your application at <http://your-ip/>
 
+### Troubleshooting discourse
+
+If you need to run discourse administrative commands like [Create admin account from console](https://meta.discourse.org/t/create-admin-account-from-console/17274), you can do so by executing a shell inside the container and running with the proper environment variables.
+
+```
+cd /opt/bitnami/discourse
+RAILS_ENV=production bundle exec rake admin:create
+```
+
 ## Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
