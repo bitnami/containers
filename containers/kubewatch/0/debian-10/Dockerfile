@@ -1,6 +1,11 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
@@ -15,8 +20,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN chown -R 1001:root /opt/bitnami/kubewatch/ && chmod g+rwX /opt/bitnami/kubewatch/
 ENV BITNAMI_APP_NAME="kubewatch" \
-    BITNAMI_IMAGE_VERSION="0.1.0-debian-10-r16" \
-    HOME="/" \
+    BITNAMI_IMAGE_VERSION="0.1.0-debian-10-r17" \
     KW_CONFIG="/opt/bitnami/kubewatch" \
     KW_FLOCK_URL="" \
     KW_HIPCHAT_ROOM="" \
@@ -28,9 +32,6 @@ ENV BITNAMI_APP_NAME="kubewatch" \
     KW_SLACK_CHANNEL="" \
     KW_SLACK_TOKEN="" \
     KW_WEBHOOK_URL="" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-10" \
-    OS_NAME="linux" \
     PATH="/opt/bitnami/kubewatch/bin:$PATH"
 
 WORKDIR /opt/bitnami/kubewatch
