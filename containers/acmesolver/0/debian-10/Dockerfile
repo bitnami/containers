@@ -1,6 +1,11 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
@@ -13,11 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="acmesolver" \
-    BITNAMI_IMAGE_VERSION="0.15.2-debian-10-r17" \
-    HOME="/" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-10" \
-    OS_NAME="linux" \
+    BITNAMI_IMAGE_VERSION="0.15.2-debian-10-r18" \
     PATH="/opt/bitnami/acmesolver/bin:$PATH"
 
 WORKDIR /opt/bitnami/acmesolver
