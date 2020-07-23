@@ -1,5 +1,9 @@
-FROM docker.io/bitnami/minideb:buster-snapshot-20200720T204543Z
+FROM docker.io/bitnami/minideb:buster-snapshot-20200722T205315Z
 LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
@@ -13,10 +17,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="python-snapshot" \
-    BITNAMI_IMAGE_VERSION="3.8.5-debian-10-r0" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-10" \
-    OS_NAME="linux" \
+    BITNAMI_IMAGE_VERSION="3.8.5-debian-10-r1" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8000
