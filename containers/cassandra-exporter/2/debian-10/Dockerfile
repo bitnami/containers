@@ -1,6 +1,11 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget zlib1g
@@ -17,11 +22,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="cassandra-exporter" \
-    BITNAMI_IMAGE_VERSION="2.3.4-debian-10-r138" \
-    HOME="/" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-10" \
-    OS_NAME="linux" \
+    BITNAMI_IMAGE_VERSION="2.3.4-debian-10-r139" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 8080
