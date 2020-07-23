@@ -189,6 +189,15 @@ case "$1" in
 esac
 
 nami $1 $PACKAGE $PACKAGE_ARGS
+
+if [[ $PACKAGE =~ git-.* ]]; then
+  # Due to a nami unpack issue, git binaries are copied instead of using hard symlinks.
+  # This workaround overwrites these binaries with the original ones, preserving links
+  # and saving ~500 MB
+  info "Patching ${PACKAGE}"
+  cp -a --force "${INSTALL_ROOT}/${PACKAGE}/files/git/." "/opt/bitnami/git"
+fi
+
 rm -rf $INSTALL_ROOT
 
 if [ "$BITNAMI_PKG_EXTRA_DIRS" ]; then
