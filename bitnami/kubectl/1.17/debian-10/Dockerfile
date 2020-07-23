@@ -1,6 +1,11 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
@@ -13,11 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.17.4-debian-10-r125" \
-    HOME="/" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-10" \
-    OS_NAME="linux" \
+    BITNAMI_IMAGE_VERSION="1.17.4-debian-10-r126" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 USER 1001
