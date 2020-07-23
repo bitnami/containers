@@ -16,7 +16,6 @@ authentication_enabled_warn() {
     echo "You set the environment variable ALLOW_NONE_AUTHENTICATION=${ALLOW_NONE_AUTHENTICATION}. For safety reasons, do not use this flag in a production environment."
 }
 
-
 # Validate authentication
 if [[ "$ALLOW_NONE_AUTHENTICATION" =~ ^(yes|Yes|YES)$ ]]; then
     authentication_enabled_warn
@@ -37,5 +36,11 @@ if [[ ! -z "$ETCD_ROOT_PASSWORD" ]]; then
     unset ETCD_ROOT_PASSWORD
 fi
 
+if [[ $(stat -c "%a" "$ETCD_DATA_DIR") != *700 ]]; then
+    echo "==> Setting data directory permissions to 700 in a recursive way (required in etcd >=3.4.10)"
+    chmod -R 700 "$ETCD_DATA_DIR"
+else
+    echo "==> The data directory is already configured with the proper permissions"
+fi
 
 exec "$@"

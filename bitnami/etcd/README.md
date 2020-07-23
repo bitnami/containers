@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.4.9-debian-10-r54`, `3`, `3.4.9`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.4.9-debian-10-r54/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.4.10-debian-10-r0`, `3`, `3.4.10`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.4.10-debian-10-r0/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/etcd GitHub repo](https://github.com/bitnami/bitnami-docker-etcd).
 
@@ -183,6 +183,12 @@ For example if you want to modify the flag `--my-flag`, you will need to set the
 The previous rule applies to all [etcd flags](https://coreos.com/etcd/docs/latest/op-guide/configuration.html).
 
 > Note: by default the environment variable `ETCDCTL_API` is set to `3`. Modify this environment variable to use a different API version.
+
+# Notable Changes
+
+## 3.4.10-debian-10-r0
+
+* Arbitrary user ID(s) when running the container with a non-privileged user are not supported (only `1001` UID is allowed).
 
 # Further documentation
 
