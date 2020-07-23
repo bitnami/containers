@@ -301,8 +301,70 @@ This would be an example of SMTP configuration using a Gmail account:
 
 ### Installing additional language packs
 
-By default, this container packs a generic English version of Moodle. Nevertheless, more Langage Packs can be added to the default configuration using the in-platform Administration [interface](https://docs.moodle.org/38/en/Language_packs#Language_pack_installation_and_uninstallation). In order to fully support a new Language Pack it is also a requirement to update the system's locales files. We highly recommend [extending](https://github.com/bitnami/bitnami-docker-moodle#extend-this-image) the default image and adding as many locales as needed:
-+Stop the currently running container using the command
+By default, this container packs a generic English version of Moodle. Nevertheless, more Langage Packs can be added to the default configuration using the in-platform Administration [interface](https://docs.moodle.org/38/en/Language_packs#Language_pack_installation_and_uninstallation). In order to fully support a new Language Pack it is also a requirement to update the system's locales files. To do that, you have several options:
+
+
+#### Build the default image with the `EXTRA_LOCALES` build-time variable
+
+You can add extra locales using the `EXTRA_LOCALES` build-time variable when building the Docker image. The values must be separated by commas or semicolons (and optional spaces), and refer to entries in the `/usr/share/i18n/SUPPORTED` file inside the container.
+
+For example, the following value would add French, German, Italian and Spanish, you would specify the following value in `EXTRA_LOCALES`:
+
+    fr_FR.UTF-8 UTF-8, de_DE.UTF-8 UTF-8, it_IT.UTF-8 UTF-8, es_ES.UTF-8 UTF-8
+
+> NOTE: The locales `en_AU.UTF-8 UTF-8` and `en_US.UTF-8 UTF-8` will always be packaged, defaulting to `en_US.UTF-8 UTF-8`.
+
+To use `EXTRA_LOCALES`, you have two options:
+
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
+
+  ```yaml
+  moodle:
+  ...
+    # image: 'bitnami/moodle:3' # remove this line !
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - EXTRA_LOCALES="fr_FR.UTF-8 UTF-8, de_DE.UTF-8 UTF-8, it_IT.UTF-8 UTF-8, es_ES.UTF-8 UTF-8"
+  ...
+  ```
+
+* For manual execution, clone the repository and run the following command inside the `3/debian-10` directory:
+
+  ```console
+  $ docker build -t bitnami/moodle:latest --build-arg EXTRA_LOCALES="fr_FR.UTF-8 UTF-8, de_DE.UTF-8 UTF-8, it_IT.UTF-8 UTF-8, es_ES.UTF-8 UTF-8" .
+  ```
+
+#### Enable all supported locales using the `WITH_ALL_LOCALES` build-time variable
+
+You can generate all supported locales by setting the build environment variable `WITH_ALL_LOCALES=yes`. Note that the generation of all the locales takes some time.
+
+To use `WITH_ALL_LOCALES`, you have two options:
+
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
+
+  ```yaml
+  moodle:
+  ...
+    # image: 'bitnami/moodle:3' # remove this line !
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - WITH_ALL_LOCALES=yes
+  ...
+  ```
+
+* For manual execution, clone the repository and run the following command inside the `3/debian-10` directory:
+
+  ```console
+  $ docker build -t bitnami/moodle:latest --build-arg WITH_ALL_LOCALES=yes .
+  ```
+
+#### Extending the default image
+
+Finally, you can [extend](https://github.com/bitnami/bitnami-docker-moodle#extend-this-image) the default image and adding as many locales as needed:
 
 ```Dockerfile
 FROM bitnami/moodle
