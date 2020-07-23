@@ -1,6 +1,10 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 locales procps tar wget zlib1g
@@ -20,13 +24,10 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="11.0.8-prod-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="11.0.8-prod-debian-10-r6" \
     JAVA_HOME="/opt/bitnami/java" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-10" \
-    OS_NAME="linux" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 CMD [ "bash" ]
