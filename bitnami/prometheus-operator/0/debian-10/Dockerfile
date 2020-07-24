@@ -1,6 +1,11 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
@@ -15,11 +20,7 @@ RUN ln -sf /opt/bitnami/prometheus-operator/bin/prometheus-config-reloader /bin/
 RUN ln -sf /opt/bitnami/prometheus-operator/bin/operator /bin/operator
 
 ENV BITNAMI_APP_NAME="prometheus-operator" \
-    BITNAMI_IMAGE_VERSION="0.40.0-debian-10-r29" \
-    HOME="/" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-10" \
-    OS_NAME="linux" \
+    BITNAMI_IMAGE_VERSION="0.40.0-debian-10-r30" \
     PATH="/opt/bitnami/prometheus-operator/bin:$PATH"
 
 EXPOSE 8080
