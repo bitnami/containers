@@ -1,6 +1,11 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
@@ -16,11 +21,7 @@ RUN ln -sf /opt/bitnami/prometheus/data /prometheus
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.20.0-debian-10-r0" \
-    HOME="/" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-10" \
-    OS_NAME="linux" \
+    BITNAMI_IMAGE_VERSION="2.20.0-debian-10-r1" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
