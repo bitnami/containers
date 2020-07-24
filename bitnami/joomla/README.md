@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.9.20-debian-10-r8`, `3`, `3.9.20`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.20-debian-10-r8/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.9.20-debian-10-r9`, `3`, `3.9.20`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.20-debian-10-r9/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
 
@@ -358,7 +358,7 @@ $ docker run --rm -v /path/to/joomla-backups:/backups --volumes-from joomla busy
 
 Restoring a backup is as simple as mounting the backup as volumes in the containers.
 
-For the Joomla! container:
+For the MariaDB database container:
 
 ```diff
  $ docker run -d --name mariadb \
@@ -368,7 +368,7 @@ For the Joomla! container:
    bitnami/mariadb:latest
 ```
 
-For the MariaDB database container:
+For the Joomla! container:
 
 ```diff
  $ docker run -d --name joomla \
