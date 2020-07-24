@@ -7,7 +7,7 @@ services:
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
   redis:
-    image: 'docker.io/bitnami/redis:5.0-debian-10'
+    image: 'docker.io/bitnami/redis:6.0-debian-10'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
