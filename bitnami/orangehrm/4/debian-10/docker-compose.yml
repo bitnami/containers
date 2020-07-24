@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mariadb:
-    image: 'docker.io/bitnami/mariadb:10.2-debian-10'
+    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
     environment:
       - MARIADB_USER=bn_orangehrm
       - MARIADB_DATABASE=bitnami_orangehrm
