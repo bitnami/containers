@@ -24,6 +24,7 @@ RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 
 COPY rootfs /
+RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_DATABASE_NAME="bitnami_airflow" \
     AIRFLOW_DATABASE_PASSWORD="bitnami1" \
@@ -39,7 +40,7 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     AIRFLOW_WORKER_PORT_NUMBER="8793" \
     BITNAMI_APP_NAME="airflow-worker" \
-    BITNAMI_IMAGE_VERSION="1.10.11-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="1.10.11-debian-10-r11" \
     C_FORCE_ROOT="True" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
