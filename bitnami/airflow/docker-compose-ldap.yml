@@ -11,7 +11,7 @@ services:
       - POSTGRESQL_PASSWORD=bitnami1
       - ALLOW_EMPTY_PASSWORD=yes
   redis:
-    image: docker.io/bitnami/redis:5.0-debian-10
+    image: docker.io/bitnami/redis:6.0-debian-10
     volumes:
       - 'redis_data:/bitnami'
     environment:
