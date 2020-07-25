@@ -1,6 +1,11 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
@@ -14,11 +19,7 @@ RUN ln -sf /opt/bitnami/apache-exporter/bin/apache_exporter /bin/apache_exporter
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="apache-exporter" \
-    BITNAMI_IMAGE_VERSION="0.8.0-debian-10-r108" \
-    HOME="/" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-10" \
-    OS_NAME="linux" \
+    BITNAMI_IMAGE_VERSION="0.8.0-debian-10-r109" \
     PATH="/opt/bitnami/apache-exporter/bin:$PATH"
 
 EXPOSE 9117
