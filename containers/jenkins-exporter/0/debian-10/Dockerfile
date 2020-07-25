@@ -1,6 +1,11 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libbz2-1.0 libc6 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libtinfo6 procps tar wget zlib1g
@@ -17,11 +22,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="jenkins-exporter" \
-    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-10-r172" \
-    HOME="/" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-10" \
-    OS_NAME="linux" \
+    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-10-r173" \
     PATH="/opt/bitnami/jenkins-exporter/venv/bin:$PATH"
 
 EXPOSE 9118
