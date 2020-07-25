@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.34.2-debian-10-r21`, `1`, `1.34.2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.34.2-debian-10-r21/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.34.2-debian-10-r22`, `1`, `1.34.2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.34.2-debian-10-r22/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mediawiki GitHub repo](https://github.com/bitnami/bitnami-docker-mediawiki).
 
@@ -446,7 +446,7 @@ $ docker run --rm -v /path/to/mediawiki-backups:/backups --volumes-from mediawik
 
 Restoring a backup is as simple as mounting the backup as volumes in the containers.
 
-For the MediaWiki container:
+For the MariaDB database container:
 
 ```diff
  $ docker run -d --name mariadb \
@@ -456,7 +456,7 @@ For the MediaWiki container:
    bitnami/mariadb:latest
 ```
 
-For the MariaDB database container:
+For the MediaWiki container:
 
 ```diff
  $ docker run -d --name mediawiki \
