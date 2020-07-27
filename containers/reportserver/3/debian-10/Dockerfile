@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl fontconfig fonts-dejavu-extra gzip lib
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install java-11.0.8-0 --checksum 268e7ba913422e7acd282b94615b127eeb56e3c4bb7e3c9c6d952c391e6ead4d
-RUN bitnami-pkg unpack tomcat-9.0.37-0 --checksum 057b2bf9fdcf0945b2b68794a259750b062214630d28435dbf3d9f5438a79a5a
+RUN bitnami-pkg unpack tomcat-9.0.37-1 --checksum 9565158d21d149f48a659ac984b0849f95bcaf0c52ca2df91cff7794b2350b28
 RUN bitnami-pkg unpack mysql-client-10.3.23-1 --checksum efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg unpack reportserver-3.2.0-6027-0 --checksum fe0461009788fade0dece66054fce1120d48ca24fc4801d375ccfff98f8b6126
@@ -20,7 +20,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserver" \
-    BITNAMI_IMAGE_VERSION="3.2.0-6027-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="3.2.0-6027-debian-10-r7" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
