@@ -1,0 +1,29 @@
+FROM docker.io/bitnami/minideb:stretch
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-9" \
+    OS_NAME="linux"
+
+COPY prebuildfs /
+# Install required system packages and dependencies
+RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libpcap0.8 libssl1.1 tar
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "3.3.2-0" --checksum 8128229634bff932a6772c00b14388a25c67381c3376253f41c2206755de63e1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-1" --checksum 04cca3ba5204635108908eb8032b7b2f1882aba2f1636cc45fe3c70dfa0b498a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-0" --checksum 7defe2e6b6eabb3dd3a193e7d4e932f768b0188b6fb4ecd862bf10632e747f25
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb" "3.6.19-0" --checksum 25426b7b7a388665f36577c64538611255b2d537a67d63d81c7251813179d214
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum b14e3fcbfe88c7a7421cb2adbf523c5a68ed0624651f9809190991906b531003
+RUN chmod g+rwX /opt/bitnami
+
+COPY rootfs /
+RUN /opt/bitnami/scripts/mongodb/postunpack.sh
+ENV BITNAMI_APP_NAME="mongodb" \
+    BITNAMI_IMAGE_VERSION="3.6.19-debian-9-r0" \
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
+
+EXPOSE 27017
+
+USER 1001
+ENTRYPOINT [ "/opt/bitnami/scripts/mongodb/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/mongodb/run.sh" ]
