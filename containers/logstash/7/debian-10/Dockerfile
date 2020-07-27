@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/logstash/postunpack.sh
 ENV BITNAMI_APP_NAME="logstash" \
-    BITNAMI_IMAGE_VERSION="7.8.0-debian-10-r34" \
+    BITNAMI_IMAGE_VERSION="7.8.0-debian-10-r35" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/logstash/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080
