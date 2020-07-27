@@ -2,8 +2,10 @@
 #
 # Library for file system actions
 
+# shellcheck disable=SC1091
+
 # Load Generic Libraries
-. /liblog.sh
+. /opt/bitnami/scripts/liblog.sh
 
 # Functions
 
@@ -42,10 +44,10 @@ ensure_dir_exists() {
 
 ########################
 # Checks whether a directory is empty or not
-# Arguments:
+# arguments:
 #   $1 - directory
-# Returns:
-#   Boolean
+# returns:
+#   boolean
 #########################
 is_dir_empty() {
     local dir="${1:?missing directory}"
@@ -55,6 +57,58 @@ is_dir_empty() {
     else
         false
     fi
+}
+
+########################
+# Checks whether a mounted directory is empty or not
+# arguments:
+#   $1 - directory
+# returns:
+#   boolean
+#########################
+is_mounted_dir_empty() {
+    local dir="${1:?missing directory}"
+
+    if is_dir_empty "$dir" || find "$dir" -mindepth 1 -maxdepth 1 -not -name ".snapshot" -not -name "lost+found" -exec false {} +; then
+        true
+    else
+        false
+    fi
+}
+
+########################
+# Checks whether a file can be written to or not
+# arguments:
+#   $1 - file
+# returns:
+#   boolean
+#########################
+is_file_writable() {
+    local file="${1:?missing file}"
+    local dir
+    dir="$(dirname "$file")"
+
+    if [[ ( -f "$file" && -w "$file" ) || ( ! -f "$file" && -d "$dir" && -w "$dir" ) ]]; then
+        true
+    else
+        false
+    fi
+}
+
+########################
+# Relativize a path
+# arguments:
+#   $1 - path
+#   $2 - base
+# returns:
+#   None
+#########################
+relativize() {
+    local -r path="${1:?missing path}"
+    local -r base="${2:?missing base}"
+    pushd "$base" >/dev/null
+    realpath -q --no-symlinks --relative-base="$base" "$path" | sed -e 's|^/$|.|' -e 's|^/||'
+    popd >/dev/null
 }
 
 ########################

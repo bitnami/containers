@@ -4,22 +4,23 @@
 set -o errexit
 set -o nounset
 set -o pipefail
+# set -o xtrace # Uncomment this line for debugging purposes
 
-. /libmongodb.sh
-. /libmongodb-sharded.sh
-. /libos.sh
+. /opt/bitnami/scripts/libmongodb.sh
+. /opt/bitnami/scripts/libmongodb-sharded.sh
+. /opt/bitnami/scripts/libos.sh
 
 # Load MongoDB env. variables
-eval "$(mongodb_env)"
-eval "$(mongodb_sharded_env)"
+. /opt/bitnami/scripts/mongodb-env.sh
 
 if [[ "$MONGODB_SHARDING_MODE" = "mongos" ]]; then
     cmd=$(command -v mongos)
+    flags=("--config=$MONGODB_MONGOS_CONF_FILE")
 else
     cmd=$(command -v mongod)
+    flags=("--config=$MONGODB_CONF_FILE")
 fi
 
-flags=("--config=$MONGODB_CONF_FILE")
 
 if [[ -n "${MONGODB_EXTRA_FLAGS:-}" ]]; then
     read -r -a extra_flags <<< "$MONGODB_EXTRA_FLAGS"

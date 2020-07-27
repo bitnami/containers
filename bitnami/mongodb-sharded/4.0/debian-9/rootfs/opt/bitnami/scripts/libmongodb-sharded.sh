@@ -3,37 +3,14 @@
 #
 # Bitnami MongoDB library
 
-# shellcheck disable=SC1090
 # shellcheck disable=SC1091
+# shellcheck disable=SC2120
+# shellcheck disable=SC2119
 
 # Load Generic Libraries
-. /liblog.sh
-. /libvalidations.sh
-. /libmongodb.sh
-
-########################
-# Load global variables used on MongoDB Sharded configuration.
-# Globals:
-#   MONGODB_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-mongodb_sharded_env() {
-    cat <<"EOF"
-# Paths
-export MONGODB_MONGOS_TEMPLATES_FILE="$MONGODB_TEMPLATES_DIR/mongos.conf.tpl"
-
-# Settings
-export MONGODB_SHARDING_MODE="${MONGODB_SHARDING_MODE:-}"
-export MONGODB_CFG_REPLICA_SET_NAME="${MONGODB_CFG_REPLICA_SET_NAME:-}"
-export MONGODB_CFG_PRIMARY_HOST="${MONGODB_CFG_PRIMARY_HOST:-}"
-export MONGODB_MONGOS_HOST="${MONGODB_MONGOS_HOST:-}"
-export MONGODB_MONGOS_PORT_NUMBER="${MONGODB_MONGOS_PORT_NUMBER:-27017}"
-export MONGODB_CFG_PRIMARY_PORT_NUMBER="${MONGODB_CFG_PRIMARY_PORT_NUMBER:-27017}"
-EOF
-}
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libmongodb.sh
 
 ########################
 # Get current status of the shard in the cluster
@@ -54,6 +31,8 @@ EOF
 )
    grep -q "id.*$replicaset" <<< "$result"
 }
+
+
 ###############
 # Initialize MongoDB (mongod) service with sharded configuration
 # Globals:
@@ -67,12 +46,12 @@ mongodb_sharded_mongod_initialize() {
     local persisted=false
 
     info "Initializing MongoDB Sharded..."
-
-    mongodb_clean_from_restart
+    rm -f "$MONGODB_PID_FILE"
 
     mongodb_copy_mounted_config
-    mongodb_ensure_mongod_config_exists
-    mongodb_set_permissions
+    mongodb_set_net_conf
+    mongodb_set_log_conf
+    mongodb_set_storage_conf
     mongodb_sharded_set_sharding_conf
 
     if is_dir_empty "$MONGODB_DATA_DIR/db"; then
@@ -110,24 +89,7 @@ mongodb_sharded_mongod_initialize() {
           info "Shard already in cluster"
         fi
     fi
-
-    mongodb_sharded_print_properties $persisted
-}
-
-########################
-# Print properties
-# Globals:
-#   MONGODB_*
-# Arguments:
-#   $1 - true if persited data
-# Returns:
-#   None
-#########################
-mongodb_sharded_print_properties() {
-    local -r persisted=${1:?persisted is required}
-    mongodb_print_properties "$persisted"
-    info "  Shard Mode: ${MONGODB_SHARDING_MODE}"
-    info "########################################################################"
+    mongodb_set_listen_all_conf
 }
 
 ########################
@@ -203,11 +165,14 @@ mongodb_sharded_validate() {
 #   None
 #########################
 mongodb_sharded_set_sharding_conf() {
-    if ! mongodb_is_file_external "mongodb.conf"; then
-        mongodb_config_apply_regex "#?sharding:.*" "sharding:"
-        mongodb_config_apply_regex "#?clusterRole:.*" "clusterRole: $MONGODB_SHARDING_MODE"
+    local -r conf_file_path="${1:-$MONGODB_CONF_FILE}"
+    local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
+
+    if ! mongodb_is_file_external "$conf_file_name"; then
+        mongodb_config_apply_regex "#?sharding:.*" "sharding:" "$conf_file_path"
+        mongodb_config_apply_regex "#?clusterRole:.*" "clusterRole: $MONGODB_SHARDING_MODE" "$conf_file_path"
     else
-        debug "mongodb.conf mounted. Skipping sharding mode enabling"
+        debug "$conf_file_name mounted. Skipping sharding mode enabling"
     fi
 }
 
@@ -336,38 +301,30 @@ mongodb_sharded_configure_configsvr_primary() {
     fi
 }
 
-mongodb_sharded_mongos_initialize() {
-    info "Initializing Mongos..."
-
-    mongodb_clean_from_restart
-    mongodb_set_permissions
-    mongodb_sharded_ensure_mongos_config_exists
-    mongodb_create_keyfile "$MONGODB_REPLICA_SET_KEY"
-    mongodb_set_keyfile_conf
-
-    mongodb_wait_for_primary_node "$MONGODB_CFG_PRIMARY_HOST" "$MONGODB_CFG_PRIMARY_PORT_NUMBER" "root" "$MONGODB_ROOT_PASSWORD"
-}
-
-########################
-# Create Mongos configuration (mongodb.conf) file
-# Globals:
-#   MONGODB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-mongodb_sharded_ensure_mongos_config_exists() {
-    if [[ -f "$MONGODB_CONF_FILE" ]]; then
-        info "Custom configuration $MONGODB_CONF_FILE detected!"
-    else
-        info "No injected configuration files found. Creating default config files..."
-        mongodb_sharded_create_mongos_config
+mongodb_sharded_mongos_conf_compatibility() {
+    if mongodb_is_file_external "mongodb.conf" && ! mongodb_is_file_external "mongos.conf"; then
+        warn "Mounted mongos configuration file as mongodb.conf. Copying it to mongos.conf"
+        cp "$MONGODB_CONF_FILE" "$MONGODB_MONGOS_CONF_FILE"
     fi
 }
 
+mongodb_sharded_mongos_initialize() {
+    info "Initializing Mongos..."
+
+    rm -f "$MONGODB_PID_FILE"
+    mongodb_copy_mounted_config
+    mongodb_sharded_mongos_conf_compatibility
+    mongodb_create_keyfile "$MONGODB_REPLICA_SET_KEY"
+    mongodb_set_keyfile_conf "$MONGODB_MONGOS_CONF_FILE"
+    mongodb_set_net_conf "$MONGODB_MONGOS_CONF_FILE"
+    mongodb_set_log_conf "$MONGODB_MONGOS_CONF_FILE"
+    mongodb_sharded_set_cfg_server_host_conf "$MONGODB_MONGOS_CONF_FILE"
+    mongodb_wait_for_primary_node "$MONGODB_CFG_PRIMARY_HOST" "$MONGODB_CFG_PRIMARY_PORT_NUMBER" "root" "$MONGODB_ROOT_PASSWORD"
+    mongodb_set_listen_all_conf "$MONGODB_MONGOS_CONF_FILE"
+}
+
 ########################
-# Create Mongos configuration file
+# Set config server in a mongos instance
 # Globals:
 #   MONGODB_*
 # Arguments:
@@ -375,8 +332,13 @@ mongodb_sharded_ensure_mongos_config_exists() {
 # Returns:
 #   None
 #########################
-mongodb_sharded_create_mongos_config() {
-    debug "Creating main configuration file..."
+mongodb_sharded_set_cfg_server_host_conf() {
+    local -r conf_file_path="${1:-$MONGODB_MONGOS_CONF_FILE}"
+    local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
 
-    render-template "$MONGODB_MONGOS_TEMPLATES_FILE" > "$MONGODB_CONF_FILE"
+    if ! mongodb_is_file_external "$conf_file_name"; then
+        mongodb_config_apply_regex "configDB:.*" "configDB: $MONGODB_CFG_REPLICA_SET_NAME/$MONGODB_CFG_PRIMARY_HOST:$MONGODB_PORT_NUMBER" "$conf_file_path"
+    else
+        debug "$conf_file_name mounted. Skipping setting config server host"
+    fi
 }
