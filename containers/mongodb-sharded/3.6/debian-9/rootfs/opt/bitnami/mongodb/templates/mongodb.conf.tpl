@@ -7,31 +7,31 @@ storage:
   dbPath: {{MONGODB_DATA_DIR}}/db
   journal:
     enabled: true
-  directoryPerDB: {{MONGODB_ENABLE_DIRECTORY_PER_DB}}
+  directoryPerDB: {{MONGODB_DEFAULT_ENABLE_DIRECTORY_PER_DB}}
 
 # where to write logging data.
 systemLog:
   destination: file
-  quiet: {{MONGODB_DISABLE_SYSTEM_LOG}}
+  quiet: {{MONGODB_DEFAULT_DISABLE_SYSTEM_LOG}}
   logAppend: true
   logRotate: reopen
   path: {{MONGODB_LOG_DIR}}/mongodb.log
-  verbosity: {{MONGODB_SYSTEM_LOG_VERBOSITY}}
+  verbosity: {{MONGODB_DEFAULT_SYSTEM_LOG_VERBOSITY}}
 
 # network interfaces
 net:
-  port: {{MONGODB_PORT_NUMBER}}
+  port: {{MONGODB_DEFAULT_PORT_NUMBER}}
   unixDomainSocket:
     enabled: true
     pathPrefix: {{MONGODB_TMP_DIR}}
-  ipv6: {{MONGODB_ENABLE_IPV6}}
+  ipv6: {{MONGODB_DEFAULT_ENABLE_IPV6}}
   bindIpAll: false
   bindIp: 127.0.0.1
 
 # replica set options
 #replication:
-  #replSetName: {{MONGODB_REPLICA_SET_NAME}}
-  #enableMajorityReadConcern: true
+  #replSetName: {{MONGODB_DEFAULT_REPLICA_SET_NAME}}
+  #enableMajorityReadConcern: {{MONGODB_DEFAULT_ENABLE_MAJORITY_READ}}
 
 # sharding options
 #sharding:

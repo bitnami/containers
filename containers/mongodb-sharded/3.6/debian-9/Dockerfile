@@ -1,36 +1,32 @@
-FROM bitnami/minideb:stretch
+FROM docker.io/bitnami/minideb:stretch
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV BITNAMI_PKG_CHMOD="-R g+rwX" \
-    HOME="/" \
+ENV HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-9" \
     OS_NAME="linux"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libc6 libgcc1 libpcap0.8 libssl1.1 procps sudo unzip
-RUN . ./libcomponent.sh && component_unpack "mongodb" "3.6.16-0" --checksum 448cdf9784970777723b50ad5a662788792efdfbc1bd83a4579ba24b83a3871c
-RUN apt-get update && apt-get upgrade && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
-RUN /build/install-gosu.sh
-RUN curl --silent -L https://github.com/bitnami/render-template/releases/download/v1.0/render-template.zip > /tmp/render-template.zip && echo "60334a29f9692659f9d3a5d9659f2a97de1f5e7a0fc2e84c1868fdba7f160a9d /tmp/render-template.zip" | sha256sum --check && unzip -q -d /usr/local/bin -o /tmp/render-template.zip render-template && mkdir -p /opt/bitnami/licenses && curl --silent -L https://raw.githubusercontent.com/bitnami/render-template/master/COPYING > /opt/bitnami/licenses/render-template-1.0.txt
-RUN curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/v1.0/wait-for-port.zip > /tmp/wait-for-port.zip && \
-    echo "8d26181f4629211b70db4f96236616056b1ed8e5920d8023f7c883071e76c1ed /tmp/wait-for-port.zip" | sha256sum --check && \
-    unzip -q -d /usr/local/bin -o /tmp/wait-for-port.zip wait-for-port && \
-    mkdir -p /opt/bitnami/licenses && \
-    curl --silent -L https://raw.githubusercontent.com/bitnami/wait-for-port/master/COPYING > /opt/bitnami/licenses/wait-for-port-1.0.txt
-RUN curl --silent -L https://github.com/mikefarah/yq/releases/download/2.4.0/yq_linux_amd64 > /usr/local/bin/yq && echo 99a01ae32f0704773c72103adb7050ef5c5cad14b517a8612543821ef32d6cc9 /usr/local/bin/yq | sha256sum --check && chmod +x /usr/local/bin/yq && mkdir -p /opt/bitnami/licenses && curl --silent -L https://raw.githubusercontent.com/mikefarah/yq/master/LICENSE > /opt/bitnami/licenses/yq-2.4.0.txt
+RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libpcap0.8 libssl1.1 tar
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "3.3.2-0" --checksum 8128229634bff932a6772c00b14388a25c67381c3376253f41c2206755de63e1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-1" --checksum 04cca3ba5204635108908eb8032b7b2f1882aba2f1636cc45fe3c70dfa0b498a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-0" --checksum 7defe2e6b6eabb3dd3a193e7d4e932f768b0188b6fb4ecd862bf10632e747f25
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb" "3.6.19-0" --checksum 25426b7b7a388665f36577c64538611255b2d537a67d63d81c7251813179d214
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum b14e3fcbfe88c7a7421cb2adbf523c5a68ed0624651f9809190991906b531003
+RUN chmod g+rwX /opt/bitnami
+RUN ln -s /opt/bitnami/scripts/mongodb-sharded/entrypoint.sh /entrypoint.sh
+RUN ln -s /opt/bitnami/scripts/liblog.sh /liblog.sh
+RUN ln -s /opt/bitnami/scripts/mongodb-sharded/run.sh /run.sh
 
 COPY rootfs /
-RUN /postunpack.sh
+RUN /opt/bitnami/scripts/mongodb-sharded/postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb-sharded" \
-    BITNAMI_IMAGE_VERSION="3.6.16-debian-9-r40" \
-    NAMI_PREFIX="/.nami" \
-    PATH="/opt/bitnami/mongodb/bin:$PATH"
+    BITNAMI_IMAGE_VERSION="3.6.19-debian-9-r0" \
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 
 EXPOSE 27017
 
 USER 1001
-ENTRYPOINT [ "/entrypoint.sh" ]
-CMD [ "/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/mongodb-sharded/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/mongodb-sharded/run.sh" ]
