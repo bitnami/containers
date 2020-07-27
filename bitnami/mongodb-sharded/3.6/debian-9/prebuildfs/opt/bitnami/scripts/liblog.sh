@@ -20,7 +20,13 @@ CYAN='\033[38;5;6m'
 #   None
 #########################
 stderr_print() {
-    printf "%b\\n" "${*}" >&2
+    # 'is_boolean_yes' is defined in libvalidations.sh, but depends on this file so we cannot source it
+    local bool="${BITNAMI_QUIET:-false}"
+    # comparison is performed without regard to the case of alphabetic characters
+    shopt -s nocasematch
+    if ! [[ "$bool" = 1 || "$bool" =~ ^(yes|true)$ ]]; then
+        printf "%b\\n" "${*}" >&2
+    fi
 }
 
 ########################
@@ -74,10 +80,31 @@ error() {
 #########################
 debug() {
     # 'is_boolean_yes' is defined in libvalidations.sh, but depends on this file so we cannot source it
-    local -r bool="${BITNAMI_DEBUG:-false}"
+    local bool="${BITNAMI_DEBUG:-false}"
     # comparison is performed without regard to the case of alphabetic characters
     shopt -s nocasematch
     if [[ "$bool" = 1 || "$bool" =~ ^(yes|true)$ ]]; then
         log "${MAGENTA}DEBUG${RESET} ==> ${*}"
     fi
+}
+
+########################
+# Indent a string
+# Arguments:
+#   $1 - string
+#   $2 - number of indentation characters (default: 4)
+#   $3 - indentation character (default: " ")
+# Returns:
+#   None
+#########################
+indent() {
+    local string="${1:-}"
+    local num="${2:?missing num}"
+    local char="${3:-" "}"
+    # Build the indentation unit string
+    local indent_unit=""
+    for ((i = 0; i < num; i++)); do
+        indent_unit="${indent_unit}${char}"
+    done
+    echo "$string" | sed "s/^/${indent_unit}/"
 }
