@@ -94,6 +94,16 @@ export CASSANDRA_PEER_CQL_SLEEP_TIME="${CASSANDRA_PEER_CQL_SLEEP_TIME:-10}"
 export CASSANDRA_USER="${CASSANDRA_USER:-cassandra}"
 export CASSANDRA_KEYSTORE_LOCATION="${CASSANDRA_KEYSTORE_LOCATION:-${CASSANDRA_VOLUME_DIR}/secrets/keystore}"
 export CASSANDRA_TRUSTSTORE_LOCATION="${CASSANDRA_TRUSTSTORE_LOCATION:-${CASSANDRA_VOLUME_DIR}/secrets/truststore}"
+export CASSANDRA_TMP_P12_FILE="${CASSANDRA_TMP_DIR}/keystore.p12"
+export CASSANDRA_SSL_CERT_FILE="${CASSANDRA_VOLUME_DIR}/client.cer.pem"
+export CASSANDRA_SSL_VALIDATE="${CASSANDRA_SSL_VALIDATE:-false}"
+
+# SSL
+# These variables are used by cqlsh
+# SSL_CERTFILE stores the CA public key, it used to validate the server
+export SSL_CERTFILE="${CASSANDRA_SSL_CERT_FILE}"
+# SSL_VALIDATE is used to indicate if the client should check the hostname in the certificate
+export SSL_VALIDATE="${CASSANDRA_SSL_VALIDATE}"
 EOF
     if [[ -n "${CASSANDRA_PASSWORD_FILE:-}" ]] && [[ -f "$CASSANDRA_PASSWORD_FILE" ]]; then
         cat <<"EOF"
@@ -268,7 +278,7 @@ cassandra_validate() {
 
     check_default_password CASSANDRA_PASSWORD
 
-    if [[ "$CASSANDRA_CLIENT_ENCRYPTION" = "true" || "$CASSANDRA_INTERNODE_ENCRYPTION" = "true" ]]; then
+    if is_boolean_yes "$CASSANDRA_CLIENT_ENCRYPTION" || is_boolean_yes "$CASSANDRA_INTERNODE_ENCRYPTION"; then
         check_empty_value CASSANDRA_KEYSTORE_PASSWORD
         check_empty_value CASSANDRA_TRUSTSTORE_PASSWORD
         check_default_password CASSANDRA_KEYSTORE_PASSWORD
@@ -303,6 +313,8 @@ cassandra_validate() {
     for seed in ${CASSANDRA_SEEDS//,/ }; do
         check_resolved_hostname "$seed"
     done
+
+    check_true_false_value CASSANDRA_SSL_VALIDATE
 
     if (( ${#CASSANDRA_PASSWORD} > 512 )); then
         print_validation_error "The password cannot be longer than 512 characters. Set the environment variable CASSANDRA_PASSWORD with a shorter value"
@@ -618,6 +630,30 @@ cassandra_clean_from_restart() {
 }
 
 ########################
+# Generate the client configurartion if ssl is configured in the server
+# Globals:
+#   CASSANDRA_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+cassandra_setup_client_ssl() {
+    info "Configuring client for SSL"
+
+    # The key is store in a jks keystore and needs to be converted to pks12 to be extracted
+    keytool -importkeystore -srckeystore "${CASSANDRA_KEYSTORE_LOCATION}" \
+            -destkeystore "${CASSANDRA_TMP_P12_FILE}" \
+            -deststoretype PKCS12 \
+            -srcstorepass "${CASSANDRA_KEYSTORE_PASSWORD}" \
+            -deststorepass "${CASSANDRA_KEYSTORE_PASSWORD}"
+
+    openssl pkcs12 -in "${CASSANDRA_TMP_P12_FILE}" -nokeys \
+            -out "${CASSANDRA_SSL_CERT_FILE}" -passin pass:"${CASSANDRA_KEYSTORE_PASSWORD}"
+    rm "${CASSANDRA_TMP_P12_FILE}"
+}
+
+########################
 # Ensure Cassandra is initialized
 # Globals:
 #   CASSANDRA_*
@@ -639,6 +675,7 @@ cassandra_initialize() {
     cassandra_setup_rack_dc
     cassandra_setup_data_dirs
     cassandra_setup_cluster
+    is_boolean_yes "$CASSANDRA_CLIENT_ENCRYPTION" && cassandra_setup_client_ssl
 
     debug "Ensuring expected directories/files exist..."
     for dir in "$CASSANDRA_DATA_DIR" "$CASSANDRA_TMP_DIR" "$CASSANDRA_LOG_DIR"; do
@@ -754,6 +791,7 @@ cassandra_execute() {
     local -r cmd=("${CASSANDRA_BIN_DIR}/cqlsh")
     local args=( "-u" "$user" "-p" "$pass")
 
+    is_boolean_yes "$CASSANDRA_CLIENT_ENCRYPTION" && args+=("--ssl")
     [[ -n "$keyspace" ]] && args+=("-k" "$keyspace")
     [[ -n "$extra_args" ]] && args+=($extra_args)
     args+=("$host")
