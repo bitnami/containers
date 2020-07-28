@@ -9,10 +9,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cluster-autoscaler-1.18.1-0-linux-amd64-debian-10.tar.gz && \
-    echo "a699096b859c8577da62a08fb623b179ceac040bfc9b64a2808563d74671576b  /tmp/bitnami/pkg/cache/cluster-autoscaler-1.18.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.18.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.18.1-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cluster-autoscaler-1.18.2-0-linux-amd64-debian-10.tar.gz && \
+    echo "ac0a48c41b2662fd8b7e02dba8940c50442e8959663e8c1c717c41b8fd61b412  /tmp/bitnami/pkg/cache/cluster-autoscaler-1.18.2-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.18.2-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.18.2-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -20,7 +20,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN chmod -R g+rwX /opt/bitnami/cluster-autoscaler/
 ENV BITNAMI_APP_NAME="cluster-autoscaler" \
-    BITNAMI_IMAGE_VERSION="1.18.1-debian-10-r113" \
+    BITNAMI_IMAGE_VERSION="1.18.2-debian-10-r0" \
     PATH="/opt/bitnami/cluster-autoscaler/bin:$PATH"
 
 WORKDIR /opt/bitnami/cluster-autoscaler
