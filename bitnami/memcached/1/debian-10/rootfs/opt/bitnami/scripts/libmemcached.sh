@@ -77,25 +77,6 @@ memcached_initialize() {
 }
 
 ########################
-# Configure memcached debug flags
-# Globals:
-#   BITNAMI_DEBUG
-# Arguments:
-#   None
-# Returns:
-#   Array with verbosity flags to use
-#########################
-memcached_debug_flags() {
-    local debugFlags
-    if is_boolean_yes "${BITNAMI_DEBUG}"; then
-        debugFlags=("-vv")
-    else
-        debugFlags=("-v")
-    fi
-    echo "${debugFlags[@]}"
-}
-
-########################
 # Create SASL user
 # Globals:
 #   SASL_DB_FILE
