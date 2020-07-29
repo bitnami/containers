@@ -1,4 +1,4 @@
-location {{prefix}} {
+location {{location}} {
     alias "{{document_root}}";
 
     {{acl_configuration}}

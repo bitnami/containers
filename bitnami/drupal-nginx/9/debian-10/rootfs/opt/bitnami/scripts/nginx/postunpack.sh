@@ -32,6 +32,9 @@ nginx_patch_httpoxy_vulnerability() {
 # Load NGINX environment variables
 . /opt/bitnami/scripts/nginx-env.sh
 
+# Remove unnecessary directories that come with the tarball
+rm -rf "${BITNAMI_ROOT_DIR}/certs" "${BITNAMI_ROOT_DIR}/server_blocks"
+
 # Ensure non-root user has write permissions on a set of directories
 for dir in "$NGINX_VOLUME_DIR" "$NGINX_CONF_DIR" "$NGINX_SERVER_BLOCKS_DIR" "${NGINX_CONF_DIR}/bitnami" "$NGINX_LOGS_DIR" "$NGINX_TMP_DIR"; do
     ensure_dir_exists "$dir"
