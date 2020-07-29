@@ -2,19 +2,35 @@
 #
 # Bitnami web server handler library
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090,SC1091
 
 # Load generic libraries
 . /opt/bitnami/scripts/liblog.sh
 
-# Load web server libraries
-[[ -f "/opt/bitnami/scripts/libapache.sh" ]] && . /opt/bitnami/scripts/libapache.sh
-[[ -f "/opt/bitnami/scripts/libnginx.sh" ]] && . /opt/bitnami/scripts/libnginx.sh
+########################
+# Execute a command (or list of commands) with the web server environment and library loaded
+# Globals:
+#   *
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+web_server_execute() {
+    local -r web_server="${1:?missing web server}"
+    shift
+    # Run program in sub-shell to avoid web server environment getting loaded when not necessary
+    (
+        . "/opt/bitnami/scripts/lib${web_server}.sh"
+        . "/opt/bitnami/scripts/${web_server}-env.sh"
+        "$@"
+    )
+}
 
 ########################
 # Prints the list of enabled web servers
 # Globals:
-#   WEB_SERVER_TYPE
+#   None
 # Arguments:
 #   None
 # Returns:
@@ -32,7 +48,7 @@ web_server_list() {
 ########################
 # Prints the currently-enabled web server type (only one, in order of preference)
 # Globals:
-#   WEB_SERVER_TYPE
+#   None
 # Arguments:
 #   None
 # Returns:
@@ -47,7 +63,7 @@ web_server_type() {
 ########################
 # Validate that a supported web server is configured
 # Globals:
-#   WEB_SERVER_*
+#   None
 # Arguments:
 #   None
 # Returns:
@@ -65,7 +81,7 @@ web_server_validate() {
 
     if [[ -z "$(web_server_type)" || ! " ${supported_web_servers[*]} " == *" $(web_server_type) "* ]]; then
         print_validation_error "Could not detect any supported web servers. It must be one of: ${supported_web_servers[*]}"
-    elif ! type -t "is_$(web_server_type)_running" >/dev/null; then
+    elif ! web_server_execute "$(web_server_type)" type -t "is_$(web_server_type)_running" >/dev/null; then
         print_validation_error "Could not load the $(web_server_type) web server library from /opt/bitnami/scripts. Check that it exists and is readable."
     fi
 
@@ -170,53 +186,56 @@ web_server_reload() {
 ########################
 ensure_web_server_app_configuration_exists() {
     local app="${1:?missing app}"
-    local -a web_servers args
+    shift
+    local -a apache_args nginx_args web_servers args_var
+    apache_args=("$app")
+    nginx_args=("$app")
+    # Validate arguments
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            # Common flags
+            --hosts \
+            | --type \
+            | --allow-remote-connections \
+            | --disabled \
+            | --enable-https \
+            | --http-port \
+            | --https-port \
+            | --document-root \
+            )
+                apache_args+=("$1" "${2:?missing value}")
+                nginx_args+=("$1" "${2:?missing value}")
+                shift
+                ;;
+
+            # Specific Apache flags
+            --apache-additional-configuration \
+            | --apache-before-vhost-configuration \
+            | --apache-allow-override \
+            | --apache-extra-directory-configuration \
+            | --apache-move-htaccess \
+            )
+                apache_args+=("${1//apache-/}" "${2:?missing value}")
+                shift
+                ;;
+
+            # Specific NGINX flags
+            --nginx-additional-configuration)
+                nginx_args+=("${1//nginx-/}" "${2:?missing value}")
+                shift
+                ;;
+
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
     read -r -a web_servers <<< "$(web_server_list)"
     for web_server in "${web_servers[@]}"; do
-        args=("$app")
-        # Validate arguments
-        shift
-        while [[ "$#" -gt 0 ]]; do
-            case "$1" in
-                # Common flags
-                --hosts \
-                | --type \
-                | --allow-remote-connections \
-                | --disabled \
-                | --enable-https \
-                | --http-port \
-                | --https-port \
-                | --document-root \
-                )
-                    args+=("$1" "${2:?missing value}")
-                    shift
-                    ;;
-
-                # Specific Apache flags
-                --apache-additional-configuration \
-                | --apache-before-vhost-configuration \
-                | --apache-allow-override \
-                | --apache-extra-directory-configuration \
-                | --apache-move-htaccess \
-                )
-                    [[ "$web_server" == "apache" ]] && args+=("${1//apache-/}" "${2:?missing value}")
-                    shift
-                    ;;
-
-                # Specific NGINX flags
-                --nginx-additional-configuration)
-                    [[ "$web_server" == "nginx" ]] && args+=("${1//nginx-/}" "${2:?missing value}")
-                    shift
-                    ;;
-
-                *)
-                    echo "Invalid command line flag $1" >&2
-                    return 1
-                    ;;
-            esac
-            shift
-        done
-        "ensure_${web_server}_app_configuration_exists" "${args[@]}"
+        args_var="${web_server}_args[@]"
+        web_server_execute "$web_server" "ensure_${web_server}_app_configuration_exists" "${!args_var}"
     done
 }
 
@@ -235,7 +254,7 @@ ensure_web_server_app_configuration_not_exists() {
     local -a web_servers
     read -r -a web_servers <<< "$(web_server_list)"
     for web_server in "${web_servers[@]}"; do
-        "ensure_${web_server}_app_configuration_not_exists" "$app"
+        web_server_execute "$web_server" "ensure_${web_server}_app_configuration_not_exists" "$app"
     done
 }
 
@@ -263,48 +282,51 @@ ensure_web_server_app_configuration_not_exists() {
 ########################
 ensure_web_server_prefix_configuration_exists() {
     local app="${1:?missing app}"
-    local -a web_servers args
+    shift
+    local -a apache_args nginx_args web_servers args_var
+    apache_args=("$app")
+    nginx_args=("$app")
+    # Validate arguments
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            # Common flags
+            --allow-remote-connections \
+            | --document-root \
+            | --prefix \
+            | --type \
+            )
+                apache_args+=("$1" "${2:?missing value}")
+                nginx_args+=("$1" "${2:?missing value}")
+                shift
+                ;;
+
+            # Specific Apache flags
+            --apache-additional-configuration \
+            | --apache-allow-override \
+            | --apache-extra-directory-configuration \
+            | --apache-move-htaccess \
+            )
+                apache_args+=("${1//apache-/}" "$2")
+                shift
+                ;;
+
+            # Specific NGINX flags
+            --nginx-additional-configuration)
+                nginx_args+=("${1//nginx-/}" "$2")
+                shift
+                ;;
+
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
     read -r -a web_servers <<< "$(web_server_list)"
     for web_server in "${web_servers[@]}"; do
-        args=("$app")
-        # Validate arguments
-        shift
-        while [[ "$#" -gt 0 ]]; do
-            case "$1" in
-                # Common flags
-                --allow-remote-connections \
-                | --document-root \
-                | --prefix \
-                | --type \
-                )
-                    args+=("$1" "${2:?missing value}")
-                    shift
-                    ;;
-
-                # Specific Apache flags
-                --apache-additional-configuration \
-                | --apache-allow-override \
-                | --apache-extra-directory-configuration \
-                | --apache-move-htaccess \
-                )
-                    [[ "$web_server" == "apache" ]] && args+=("${1//apache-/}" "$2")
-                    shift
-                    ;;
-
-                # Specific NGINX flags
-                --nginx-additional-configuration)
-                    [[ "$web_server" == "nginx" ]] && args+=("${1//nginx-/}" "$2")
-                    shift
-                    ;;
-
-                *)
-                    echo "Invalid command line flag $1" >&2
-                    return 1
-                    ;;
-            esac
-            shift
-        done
-        "ensure_${web_server}_prefix_configuration_exists" "${args[@]}"
+        args_var="${web_server}_args[@]"
+        web_server_execute "$web_server" "ensure_${web_server}_prefix_configuration_exists" "${!args_var}"
     done
 }
 
@@ -325,32 +347,32 @@ ensure_web_server_prefix_configuration_exists() {
 ########################
 web_server_update_app_configuration() {
     local app="${1:?missing app}"
-    local -a web_servers args
+    shift
+    local -a args web_servers
+    args=("$app")
+    # Validate arguments
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            # Common flags
+            --hosts \
+            | --enable-https \
+            | --http-port \
+            | --https-port \
+            )
+                args+=("$1" "${2:?missing value}")
+                shift
+                ;;
+
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
     read -r -a web_servers <<< "$(web_server_list)"
     for web_server in "${web_servers[@]}"; do
-        args=("$app")
-        # Validate arguments
-        shift
-        while [[ "$#" -gt 0 ]]; do
-            case "$1" in
-                # Common flags
-                --hosts \
-                | --enable-https \
-                | --http-port \
-                | --https-port \
-                )
-                    args+=("$1" "${2:?missing value}")
-                    shift
-                    ;;
-
-                *)
-                    echo "Invalid command line flag $1" >&2
-                    return 1
-                    ;;
-            esac
-            shift
-        done
-        "${web_server}_update_app_configuration" "${args[@]}"
+        web_server_execute "$web_server" "${web_server}_update_app_configuration" "${args[@]}"
     done
 }
 
