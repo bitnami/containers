@@ -1,0 +1,1 @@
+{"metallb-controller": {"arch": "amd64", "digest": "d1630eab4159467b8bb334b34cb8d1512d469f26f4a5b6f0e047e8b86edfe33c", "distro": "debian-10", "type": "NAMI", "version": "0.9.3-0"}}
