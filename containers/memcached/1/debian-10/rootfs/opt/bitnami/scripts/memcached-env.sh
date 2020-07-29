@@ -18,9 +18,11 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 memcached_env_vars=(
+    MEMCACHED_LISTEN_ADDRESS
     MEMCACHED_PORT_NUMBER
     MEMCACHED_USERNAME
     MEMCACHED_PASSWORD
+    MEMCACHED_EXTRA_FLAGS
     MEMCACHED_MAX_TIMEOUT
     MEMCACHED_CACHE_SIZE
     MEMCACHED_MAX_CONNECTIONS
@@ -40,6 +42,7 @@ unset memcached_env_vars
 export MEMCACHED_BASE_DIR="${BITNAMI_ROOT_DIR}/memcached"
 export MEMCACHED_CONF_DIR="${MEMCACHED_BASE_DIR}/conf"
 export MEMCACHED_BIN_DIR="${MEMCACHED_BASE_DIR}/bin"
+export PATH="${MEMCACHED_BIN_DIR}:${PATH}"
 
 # SASL
 export SASL_CONF_PATH="${MEMCACHED_CONF_DIR}/sasl2"
@@ -51,9 +54,11 @@ export MEMCACHED_DAEMON_USER="memcached"
 export MEMCACHED_DAEMON_GROUP="memcached"
 
 # Memcached configuration
+export MEMCACHED_LISTEN_ADDRESS="${MEMCACHED_LISTEN_ADDRESS:-}"
 export MEMCACHED_PORT_NUMBER="${MEMCACHED_PORT_NUMBER:-11211}"
 export MEMCACHED_USERNAME="${MEMCACHED_USERNAME:-root}"
 export MEMCACHED_PASSWORD="${MEMCACHED_PASSWORD:-}"
+export MEMCACHED_EXTRA_FLAGS="${MEMCACHED_EXTRA_FLAGS:-}"
 
 # Memcached optimizations
 export MEMCACHED_MAX_TIMEOUT="${MEMCACHED_MAX_TIMEOUT:-5}"

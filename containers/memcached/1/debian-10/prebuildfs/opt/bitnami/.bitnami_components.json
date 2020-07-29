@@ -1,0 +1,1 @@
+{"gosu": {"arch": "amd64", "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c", "distro": "debian-10", "type": "NAMI", "version": "1.12.0-1"}, "memcached": {"arch": "amd64", "digest": "15b1c136500b48450c07053972745188e9bfda7c8177d51e905d2a17a107e624", "distro": "debian-10", "type": "NAMI", "version": "1.6.6-0"}}

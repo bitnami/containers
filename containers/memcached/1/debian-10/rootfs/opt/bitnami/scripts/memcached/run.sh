@@ -15,30 +15,23 @@ set -o pipefail
 # Load Memcached environment variables
 . /opt/bitnami/scripts/memcached-env.sh
 
-# Constants
-EXEC=$(command -v memcached)
-
 # Configure arguments with extra flags
-args=("-u" "${MEMCACHED_DAEMON_USER}" "-p" "${MEMCACHED_PORT_NUMBER}" "$(memcached_debug_flags)")
+args=("-u" "$MEMCACHED_DAEMON_USER" "-p" "$MEMCACHED_PORT_NUMBER" "-v")
+[[ -n "$MEMCACHED_LISTEN_ADDRESS" ]] && args+=("-l" "$MEMCACHED_LISTEN_ADDRESS")
 # SASL
-if [[ -f "${SASL_DB_FILE}" ]]; then
-    args+=("-S")
-fi
+[[ -f "$SASL_DB_FILE" ]] && args+=("-S")
 # Memory configuration
-if [[ -n "${MEMCACHED_CACHE_SIZE}" ]]; then
-    args+=("-m" "${MEMCACHED_CACHE_SIZE}")
-fi
-if [[ -n "$MEMCACHED_MAX_CONNECTIONS" ]]; then
-    args+=("-c" "${MEMCACHED_MAX_CONNECTIONS}")
-fi
-if [[ -n "${MEMCACHED_THREADS}" ]]; then
-    args+=("-t" "${MEMCACHED_THREADS}")
-fi
+[[ -n "$MEMCACHED_CACHE_SIZE" ]] && args+=("-m" "$MEMCACHED_CACHE_SIZE")
+[[ -n "$MEMCACHED_MAX_CONNECTIONS" ]] && args+=("-c" "$MEMCACHED_MAX_CONNECTIONS")
+[[ -n "$MEMCACHED_THREADS" ]] && args+=("-t" "$MEMCACHED_THREADS")
+# Extra flags
+read -r -a extra_flags <<< "$MEMCACHED_EXTRA_FLAGS"
+[[ "${#extra_flags[@]}" -gt 0 ]] && args+=("${extra_flags[@]}")
 args+=("$@")
 
 info "** Starting Memcached **"
 if am_i_root; then
-    exec gosu "${MEMCACHED_DAEMON_USER}" "${EXEC}" "${args[@]}"
+    exec gosu "$MEMCACHED_DAEMON_USER" memcached "${args[@]}"
 else
-    exec "${EXEC}" "${args[@]}"
+    exec memcached "${args[@]}"
 fi
