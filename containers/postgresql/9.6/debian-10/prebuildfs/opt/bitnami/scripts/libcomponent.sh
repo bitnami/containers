@@ -62,8 +62,4 @@ component_unpack() {
     fi
     tar --directory "${directory}" --extract --gunzip --file "${base_name}.tar.gz" --no-same-owner --strip-components=2 "${base_name}/files/"
     rm "${base_name}.tar.gz"
-
-    # Include metadata about the package
-    touch "${directory}/.bitnami_packages"
-    echo "$base_name" >> "${directory}/.bitnami_packages"
 }
