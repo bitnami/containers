@@ -6,7 +6,7 @@
 
 [https://github.com/goharbor/harbor](https://github.com/goharbor/harbor)
 
-# TL;DR;
+# TL;DR
 
 ```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-harbor-portal/master/docker-compose.yml
@@ -21,7 +21,7 @@ $ docker-compose up
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on minideb a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* All our images are based on minideb a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.0.1-debian-10-r24`, `2`, `2.0.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-registryctl/blob/2.0.1-debian-10-r24/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.0.1-debian-10-r25`, `2`, `2.0.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-registryctl/blob/2.0.1-debian-10-r25/2/debian-10/Dockerfile)
 
 # Configuration
 
