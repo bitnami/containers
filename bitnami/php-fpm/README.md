@@ -4,7 +4,7 @@
 
 [php-fpm.org](http://php-fpm.org/)
 
-# TL;DR;
+# TL;DR
 
 ```console
 $ docker run -it --name phpfpm -v /path/to/app:/app bitnami/php-fpm
@@ -22,8 +22,8 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -37,7 +37,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`7.4-prod-debian-10`, `7.4-debian-10-prod`, `7.4.8-prod-debian-10-r15`, `7.4.8-debian-10-r15-prod`, `7.4-prod`, `7.4.8-prod`, `latest-prod` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.8-prod-debian-10-r15/7.4-prod/debian-10/Dockerfile)
 * [`7.4-debian-10`, `7.4.8-debian-10-r14`, `7.4`, `7.4.8`, `latest` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.8-debian-10-r14/7.4/debian-10/Dockerfile)
 * [`7.3-prod-debian-10`, `7.3-debian-10-prod`, `7.3.20-prod-debian-10-r14`, `7.3.20-debian-10-r14-prod`, `7.3-prod`, `7.3.20-prod` (7.3-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.20-prod-debian-10-r14/7.3-prod/debian-10/Dockerfile)
-* [`7.3-debian-10`, `7.3.20-debian-10-r14`, `7.3`, `7.3.20` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.20-debian-10-r14/7.3/debian-10/Dockerfile)
+* [`7.3-debian-10`, `7.3.20-debian-10-r15`, `7.3`, `7.3.20` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.20-debian-10-r15/7.3/debian-10/Dockerfile)
 * [`7.2-prod-debian-10`, `7.2-debian-10-prod`, `7.2.32-prod-debian-10-r14`, `7.2.32-debian-10-r14-prod`, `7.2-prod`, `7.2.32-prod` (7.2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.32-prod-debian-10-r14/7.2-prod/debian-10/Dockerfile)
 * [`7.2-debian-10`, `7.2.32-debian-10-r14`, `7.2`, `7.2.32` (7.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.32-debian-10-r14/7.2/debian-10/Dockerfile)
 
