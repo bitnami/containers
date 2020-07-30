@@ -10,7 +10,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-1" --checksum 07c4678654b01811f22b5bb65a8d6f8e253abd4524ebb3b78c7d3df042cf23bd
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis" "6.0.6-0" --checksum a08fc174e214ea60ffb0b3743050982c71ad3329d02c61bc0ac9e5abe6b293f8
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis" "6.0.6-1" --checksum e61dbf7e4bd5ebfb7ee330df0fca4bd27bc645f57bf8d34ac81572136aa4e294
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -21,7 +21,7 @@ RUN ln -s /opt/bitnami/scripts/redis/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/redis/postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="6.0.6-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="6.0.6-debian-10-r6" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/redis/bin:$PATH"
 
 EXPOSE 6379
