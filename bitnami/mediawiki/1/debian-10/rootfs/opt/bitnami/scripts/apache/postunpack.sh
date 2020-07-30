@@ -73,8 +73,8 @@ EOF
     # Patch the HTTPoxy vulnerability - see: https://docs.bitnami.com/general/security/security-2016-07-18/
     apache_patch_httpoxy_vulnerability
 
-    # Remove unneeded directories that come with the tarball
-    rm -rf "/opt/bitnami/certs" "/opt/bitnami/conf"
+    # Remove unnecessary directories that come with the tarball
+    rm -rf "${BITNAMI_ROOT_DIR}/certs" "${BITNAMI_ROOT_DIR}/conf"
 }
 
 ########################
