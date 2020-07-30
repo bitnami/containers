@@ -230,21 +230,23 @@ ensure_nginx_app_configuration_exists() {
             [[ -z "${https_listen_configuration:-}" ]] && https_listen_configuration="$https_listen" || https_listen_configuration="${https_listen_configuration}${https_listen}"
         done
     else
-        http_listen_configuration=$'\n'"listen ${http_port};"
-        https_listen_configuration=$'\n'"listen ${https_port} ssl;"
+        http_listen_configuration=$'\n'"listen ${http_port} default_server;"
+        https_listen_configuration=$'\n'"listen ${https_port} ssl default_server;"
     fi
     # ACL configuration
     export acl_configuration=""
     if ! is_boolean_yes "$allow_remote_connections"; then
         acl_configuration="
-allow 127.0.0.1;
-deny all;
+default_type text/html;
+if (\$remote_addr != 127.0.0.1) {
+    return 403 'For security reasons, this URL is only accessible using localhost (127.0.0.1) as the hostname.';
+}
 # Avoid absolute redirects when connecting through a SSH tunnel
 absolute_redirect off;"
     fi
     # Indent configurations
     acl_configuration="$(indent "$acl_configuration" 4)"
-    additional_configuration="$(indent "$additional_configuration" 4)"
+    additional_configuration=$'\n'"$(indent "$additional_configuration" 4)"
     http_listen_configuration="$(indent "$http_listen_configuration" 4)"
     https_listen_configuration="$(indent "$https_listen_configuration" 4)"
     # Render templates
@@ -320,11 +322,11 @@ ensure_nginx_prefix_configuration_exists() {
     local type=""
     local allow_remote_connections="yes"
     local var_name
+    local prefix="/${app}"
     # Template variables defaults
     export additional_configuration=""
     export document_root="${BITNAMI_ROOT_DIR}/${app}"
     export extra_directory_configuration=""
-    export prefix="/${app}"
     # Validate arguments
     shift
     while [[ "$#" -gt 0 ]]; do
@@ -350,11 +352,19 @@ ensure_nginx_prefix_configuration_exists() {
     # ACL configuration
     export acl_configuration=""
     if ! is_boolean_yes "$allow_remote_connections"; then
-        acl_configuration=$'\n'"allow 127.0.0.1;"$'\n'"deny all;"
+        acl_configuration="
+default_type text/html;
+if (\$remote_addr != 127.0.0.1) {
+    return 403 'For security reasons, this URL is only accessible using localhost (127.0.0.1) as the hostname.';
+}
+# Avoid absolute redirects when connecting through a SSH tunnel
+absolute_redirect off;"
     fi
+    # Prefix configuration
+    export location="$prefix"
     # Indent configurations
     acl_configuration="$(indent "$acl_configuration" 4)"
-    additional_configuration="$(indent "$additional_configuration" 4)"
+    additional_configuration=$'\n'"$(indent "$additional_configuration" 4)"
     # Render templates
     # We remove lines that are empty or contain only newspaces with 'sed', so the resulting file looks better
     local template_name="app"
@@ -430,8 +440,8 @@ nginx_update_app_configuration() {
             [[ -z "${https_listen_configuration:-}" ]] && https_listen_configuration="$https_listen" || https_listen_configuration="${https_listen_configuration}"$'\\\n'"${https_listen}"
         done
     else
-        http_listen_configuration="listen ${http_port};"
-        https_listen_configuration="listen ${https_port} ssl;"
+        http_listen_configuration="listen ${http_port} default_server;"
+        https_listen_configuration="listen ${https_port} ssl default_server;"
     fi
     # Indent configurations
     http_listen_configuration="$(indent "$http_listen_configuration" 4)"
