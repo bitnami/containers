@@ -1,1 +1,1 @@
-{"node": {"arch": "amd64", "digest": "58f3253bc8a47c9e5306e80a47bafd1ff690cc01ff716b1c9bafa38e669e8a07", "distro": "debian-10", "type": "NAMI", "version": "14.6.0-0"}}
+{"node": {"arch": "amd64", "digest": "a49d02e0d48f71ce629871de4f3fa46c41d40f2d2f6c0d535722239ded4fdc75", "distro": "debian-10", "type": "NAMI", "version": "14.7.0-0"}}
