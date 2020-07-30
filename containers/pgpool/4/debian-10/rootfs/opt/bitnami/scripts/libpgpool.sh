@@ -341,15 +341,15 @@ pgpool_create_config() {
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
         pool_passwd="$PGPOOL_PASSWD_FILE"
     else
-        if ! is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA"; then
-          # allow_clear_text_frontend_auth only works when enable_pool_hba is not enabled
-          # ref: https://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#GUC-ALLOW-CLEAR-TEXT-FRONTEND-AUTH
-          allow_clear_text_frontend_auth="on"
-        fi
-
         # Specifying '' (empty) disables the use of password file.
         # ref: https://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#GUC-POOL-PASSWD
         pool_passwd=""
+    fi
+
+    if ! is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA"; then
+      # allow_clear_text_frontend_auth only works when enable_pool_hba is not enabled
+      # ref: https://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#GUC-ALLOW-CLEAR-TEXT-FRONTEND-AUTH
+      allow_clear_text_frontend_auth="on"
     fi
 
     info "Generating pgpool.conf file..."
