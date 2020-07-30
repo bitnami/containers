@@ -2,7 +2,7 @@
 
 > [PostgreSQL](http://www.postgresql.org) is an object-relational database management system (ORDBMS) with an emphasis on extensibility and on standards-compliance [[source]](https://en.wikipedia.org/wiki/PostgreSQL).
 
-# TL;DR;
+# TL;DR
 
 ```console
 $ docker run --name postgresql bitnami/postgresql:latest
@@ -20,8 +20,8 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`12-debian-10`, `12.3.0-debian-10-r72`, `12`, `12.3.0` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.3.0-debian-10-r72/12/debian-10/Dockerfile)
+* [`12-debian-10`, `12.3.0-debian-10-r73`, `12`, `12.3.0` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.3.0-debian-10-r73/12/debian-10/Dockerfile)
 * [`11-debian-10`, `11.8.0-debian-10-r72`, `11`, `11.8.0`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.8.0-debian-10-r72/11/debian-10/Dockerfile)
 * [`10-debian-10`, `10.13.0-debian-10-r69`, `10`, `10.13.0` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.13.0-debian-10-r69/10/debian-10/Dockerfile)
 * [`9.6-debian-10`, `9.6.18-debian-10-r71`, `9.6`, `9.6.18` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.18-debian-10-r71/9.6/debian-10/Dockerfile)
