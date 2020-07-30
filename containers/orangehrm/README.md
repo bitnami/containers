@@ -4,7 +4,7 @@
 
 <https://www.orangehrm.com/>
 
-# TL;DR;
+# TL;DR
 
 ## Docker Compose
 
@@ -18,8 +18,8 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4-debian-10`, `4.4.0-0-debian-10-r69`, `4`, `4.4.0-0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.4.0-0-debian-10-r69/4/debian-10/Dockerfile)
+* [`4-debian-10`, `4.4.0-0-debian-10-r70`, `4`, `4.4.0-0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.4.0-0-debian-10-r70/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/orangehrm GitHub repo](https://github.com/bitnami/bitnami-docker-orangehrm).
 
@@ -109,7 +109,7 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-orangehrm/blob/master/docker-compose.yml) file present in this repository: 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-orangehrm/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -233,7 +233,7 @@ If you want to add a new environment variable:
 
 ### Specifying Environment variables using Docker Compose
 
-This requires a change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-orangehrm/blob/master/docker-compose.yml) file present in this repository: 
+This requires a change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-orangehrm/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -282,8 +282,8 @@ To configure OrangeHRM to send email using SMTP you can set the following enviro
 
 This would be an example of SMTP configuration using a GMail account:
 
- * This requires a change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-orangehrm/blob/master/docker-compose.yml) file present in this repository: 
- 
+ * This requires a change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-orangehrm/blob/master/docker-compose.yml) file present in this repository:
+
 ```yaml
   orangehrm:
   ...
@@ -356,7 +356,7 @@ RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt
 
 ## Modify the ports used by Apache by default
 # It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181 
+ENV APACHE_HTTP_PORT_NUMBER=8181
 ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
