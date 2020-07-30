@@ -115,5 +115,13 @@ location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
   log_not_found off;
 }'
 
+# Fix common issues running Drupal on top of the NGINX web server, if enabled
+# See: https://pantheon.io/blog/update-your-nginx-config-drupal-8
+nginx_php_fpm_conf_file="${BITNAMI_ROOT_DIR}/nginx/conf/bitnami/php-fpm.conf"
+if [[ -f "$nginx_php_fpm_conf_file" ]]; then
+    replace_in_file "$nginx_php_fpm_conf_file" '^(\s*)(fastcgi_index\s+index\.php;)$' '\1\2\n\1fastcgi_split_path_info ^(.+?\.php)(|/.*)$;'
+    replace_in_file "$nginx_php_fpm_conf_file" '(\s\\.php\$)(\s)' '\1|^/update.php\2'
+fi
+
 # Re-create .htaccess file after being moved into 'apache/conf/vhosts/htaccess' directory, to avoid Drupal warning
 drupal_fix_htaccess_warning_protection

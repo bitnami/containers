@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.20-0" --checksum 15fa4a11f2e11377ba0d6476ce22021349f62ef2fdfbe2af4f86dca10baaa997
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-1" --checksum a94f94357aa06f3718db1550fa5f5188cd61383d66bf754eef49c58a18bf02cc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "9.0.2-1" --checksum 7a998c3443183985b5aeb61e79d3da0185c138dbcf6cd2ccf9bdb5c320ceaa44
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "9.0.2-2" --checksum 33bb912d598748d33a2063a52330b178bcc520a522fbd5fb7cd6890ab3d0e48c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -31,7 +31,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="9.0.2-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="9.0.2-debian-10-r8" \
     DRUPAL_DATABASE_NAME="" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="" \
