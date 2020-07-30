@@ -18,8 +18,8 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -35,7 +35,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 - [`11-prod`, `11.0.8-prod-debian-10-r11` (11-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.8-prod-debian-10-r11/11-prod/debian-10/Dockerfile), [`11-prod-prod`, `11.0.8-prod-debian-10-r11-prod` (11-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.8-prod-debian-10-r11/11-prod/debian-10/prod/Dockerfile)
 - [`11`, `11.0.8-debian-10-r12` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.8-debian-10-r12/11/debian-10/Dockerfile), [`11-prod`, `11.0.8-debian-10-r12-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.8-debian-10-r12/11/debian-10/prod/Dockerfile)
 - [`1.8-prod`, `1.8.262-prod-debian-10-r11` (1.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.262-prod-debian-10-r11/1.8-prod/debian-10/Dockerfile), [`1.8-prod-prod`, `1.8.262-prod-debian-10-r11-prod` (1.8-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.262-prod-debian-10-r11/1.8-prod/debian-10/prod/Dockerfile)
-- [`1.8`, `1.8.262-debian-10-r11` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.262-debian-10-r11/1.8/debian-10/Dockerfile), [`1.8-prod`, `1.8.262-debian-10-r11-prod` (1.8/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.262-debian-10-r11/1.8/debian-10/prod/Dockerfile)
+- [`1.8`, `1.8.262-debian-10-r12` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.262-debian-10-r12/1.8/debian-10/Dockerfile), [`1.8-prod`, `1.8.262-debian-10-r12-prod` (1.8/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.262-debian-10-r12/1.8/debian-10/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
 
