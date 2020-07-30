@@ -9,6 +9,7 @@
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libnet.sh
 . /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
 
 # Functions
@@ -24,7 +25,6 @@
 #   None
 #########################
 redis_conf_set() {
-    # TODO: improve this. Substitute action?
     local key="${1:?missing key}"
     local value="${2:-}"
 
@@ -38,65 +38,6 @@ redis_conf_set() {
         replace_in_file "$REDIS_SENTINEL_CONF_FILE" "^\s*${key} .*" "${key} ${value}" false
     else
         printf '\n%s %s' "$key" "$value" >> "$REDIS_SENTINEL_CONF_FILE"
-    fi
-}
-
-########################
-# Load global variables used on Redis configuration.
-# Globals:
-#   REDIS_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-redis_env() {
-    cat <<"EOF"
-# Bitnami debug
-export MODULE=redis-sentinel
-export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
-
-# Paths
-export REDIS_SENTINEL_BASE_DIR="/opt/bitnami/redis-sentinel"
-export REDIS_SENTINEL_VOLUME_DIR="/bitnami/redis-sentinel"
-export REDIS_SENTINEL_CONF_DIR="${REDIS_SENTINEL_BASE_DIR}/etc"
-export REDIS_SENTINEL_LOG_DIR="${REDIS_SENTINEL_BASE_DIR}/logs"
-export REDIS_SENTINEL_TMP_DIR="${REDIS_SENTINEL_BASE_DIR}/tmp"
-export REDIS_SENTINEL_CONF_FILE="${REDIS_SENTINEL_CONF_DIR}/sentinel.conf"
-export REDIS_SENTINEL_LOG_FILE="${REDIS_SENTINEL_LOG_DIR}/redis-sentinel.log"
-export REDIS_SENTINEL_PID_FILE="${REDIS_SENTINEL_TMP_DIR}/redis-sentinel.pid"
-export REDIS_SENTINEL_TLS_CERT_FILE="${REDIS_SENTINEL_TLS_CERT_FILE:-}"
-export REDIS_SENTINEL_TLS_KEY_FILE="${REDIS_SENTINEL_TLS_KEY_FILE:-}"
-export REDIS_SENTINEL_TLS_CA_FILE="${REDIS_SENTINEL_TLS_CA_FILE:-}"
-export REDIS_SENTINEL_TLS_DH_PARAMS_FILE="${REDIS_SENTINEL_TLS_DH_PARAMS_FILE:-}"
-
-# Users
-export REDIS_SENTINEL_DAEMON_USER="redis"
-export REDIS_SENTINEL_DAEMON_GROUP="redis"
-
-# Configuration
-export REDIS_MASTER_HOST="${REDIS_MASTER_HOST:-redis}"
-export REDIS_MASTER_PASSWORD="${REDIS_MASTER_PASSWORD:-}"
-export REDIS_MASTER_PORT_NUMBER="${REDIS_MASTER_PORT_NUMBER:-6379}"
-export REDIS_MASTER_SET="${REDIS_MASTER_SET:-mymaster}"
-export REDIS_SENTINEL_PORT_NUMBER="${REDIS_SENTINEL_PORT_NUMBER:-26379}"
-export REDIS_SENTINEL_QUORUM="${REDIS_SENTINEL_QUORUM:-2}"
-export REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS="${REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS:-60000}"
-export REDIS_SENTINEL_FAILOVER_TIMEOUT="${REDIS_SENTINEL_FAILOVER_TIMEOUT:-180000}"
-export REDIS_SENTINEL_PASSWORD="${REDIS_SENTINEL_PASSWORD:-}"
-export REDIS_SENTINEL_TLS_AUTH_CLIENTS="${REDIS_SENTINEL_TLS_AUTH_CLIENTS:-yes}"
-export REDIS_SENTINEL_TLS_ENABLED="${REDIS_SENTINEL_TLS_ENABLED:-no}"
-export REDIS_SENTINEL_TLS_PORT_NUMBER="${REDIS_SENTINEL_TLS_PORT_NUMBER:-26379}"
-EOF
-    if [[ -f "${REDIS_MASTER_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export REDIS_MASTER_PASSWORD="$(< "${REDIS_MASTER_PASSWORD_FILE}")"
-EOF
-    fi
-    if [[ -f "${REDIS_SENTINEL_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export REDIS_SENTINEL_PASSWORD="$(< "${REDIS_SENTINEL_PASSWORD_FILE}")"
-EOF
     fi
 }
 
@@ -171,6 +112,39 @@ redis_validate() {
 }
 
 ########################
+# Check if redis is running
+# Globals:
+#   REDIS_BASE_DIR
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_redis_sentinel_running() {
+    local pid
+    pid="$(get_pid_from_file "$REDIS_SENTINEL_PID_FILE")"
+
+    if [[ -z "$pid" ]]; then
+        false
+    else
+        is_service_running "$pid"
+    fi
+}
+
+########################
+# Check if redis is not running
+# Globals:
+#   REDIS_BASE_DIR
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_redis_sentinel_not_running() {
+    ! is_redis_sentinel_running
+}
+
+########################
 # Ensure Redis is initialized
 # Globals:
 #   REDIS_*
@@ -185,19 +159,13 @@ redis_initialize() {
     # Give the daemon user appropriate permissions
     if am_i_root; then
         for dir in "$REDIS_SENTINEL_CONF_DIR" "$REDIS_SENTINEL_LOG_DIR" "$REDIS_SENTINEL_TMP_DIR" "$REDIS_SENTINEL_VOLUME_DIR"; do
-            chown "${REDIS_SENTINEL_DAEMON_USER}:${REDIS_SENTINEL_DAEMON_GROUP}" "$dir"
+            chown -R "${REDIS_SENTINEL_DAEMON_USER}:${REDIS_SENTINEL_DAEMON_GROUP}" "$dir"
         done
     fi
 
     if [[ ! -f "${REDIS_SENTINEL_VOLUME_DIR}/conf/sentinel.conf" ]]; then
         info "Configuring Redis Sentinel..."
 
-        # Service
-        redis_conf_set "port" "$REDIS_SENTINEL_PORT_NUMBER"
-        redis_conf_set "bind" "0.0.0.0"
-        redis_conf_set "daemonize" "yes"
-        redis_conf_set "pidfile" "$REDIS_SENTINEL_PID_FILE"
-        redis_conf_set "logfile" "$REDIS_SENTINEL_LOG_FILE"
         [[ -z "$REDIS_SENTINEL_PASSWORD" ]] || redis_conf_set "requirepass" "$REDIS_SENTINEL_PASSWORD"
 
         # Master set
@@ -226,7 +194,7 @@ redis_initialize() {
             redis_conf_set tls-replication yes
         fi
 
-        cp -f "$REDIS_SENTINEL_CONF_FILE" "${REDIS_SENTINEL_VOLUME_DIR}/conf/sentinel.conf"
+        cp -pf "$REDIS_SENTINEL_CONF_FILE" "${REDIS_SENTINEL_VOLUME_DIR}/conf/sentinel.conf"
     else
         info "Persisted files detected, restoring..."
     fi
