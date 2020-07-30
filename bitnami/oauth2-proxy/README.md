@@ -7,7 +7,7 @@ email, domain or group.
 
 [https://github.com/pusher/oauth2_proxy](https://github.com/pusher/oauth2_proxy)
 
-# TL;DR;
+# TL;DR
 
 ```console
 $ docker run --name oauth2-proxy bitnami/oauth2-proxy:latest
@@ -18,8 +18,8 @@ $ docker run --name oauth2-proxy bitnami/oauth2-proxy:latest
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -35,7 +35,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6-debian-10`, `6.0.0-debian-10-r24`, `6`, `6.0.0`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/6.0.0-debian-10-r24/6/debian-10/Dockerfile)
-* [`5-debian-10`, `5.1.1-debian-10-r59`, `5`, `5.1.1` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/5.1.1-debian-10-r59/5/debian-10/Dockerfile)
+* [`5-debian-10`, `5.1.1-debian-10-r60`, `5`, `5.1.1` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/5.1.1-debian-10-r60/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
 
