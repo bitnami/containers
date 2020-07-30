@@ -5,20 +5,20 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-#set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purpose
+
+# Load Redis environment variables
+. /opt/bitnami/scripts/redis-cluster-env.sh
 
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/librediscluster.sh
 
-# Load Redis environment variables
-eval "$(redis_cluster_env)"
-
 print_welcome_page
 
 if [[ "$*" = *"/run.sh"* ]]; then
     info "** Starting Redis setup **"
-    /setup.sh
+    /opt/bitnami/scripts/redis-cluster/setup.sh
     info "** Redis setup finished! **"
 fi
 
