@@ -17,22 +17,24 @@
 ########################
 # Retrieve a configuration setting value
 # Globals:
-#   REDIS_BASEDIR
+#   REDIS_BASE_DIR
 # Arguments:
 #   $1 - key
 # Returns:
 #   None
 #########################
 redis_conf_get() {
-    local key="${1:?missing key}"
+    local -r key="${1:?missing key}"
 
-    grep -E "^\s*$key " "${REDIS_BASEDIR}/etc/redis.conf" | awk '{print $2}'
+    if grep -q -E "^\s*$key " "${REDIS_BASE_DIR}/etc/redis.conf"; then
+        grep -E "^\s*$key " "${REDIS_BASE_DIR}/etc/redis.conf" | awk '{print $2}'
+    fi
 }
 
 ########################
 # Set a configuration setting value
 # Globals:
-#   REDIS_BASEDIR
+#   REDIS_BASE_DIR
 # Arguments:
 #   $1 - key
 #   $2 - value
@@ -40,8 +42,7 @@ redis_conf_get() {
 #   None
 #########################
 redis_conf_set() {
-    # TODO: improve this. Substitute action?
-    local key="${1:?missing key}"
+    local -r key="${1:?missing key}"
     local value="${2:-}"
 
     # Sanitize inputs
@@ -50,41 +51,40 @@ redis_conf_set() {
     value="${value//\?/\\?}"
     [[ "$value" = "" ]] && value="\"$value\""
 
-    replace_in_file "${REDIS_BASEDIR}/etc/redis.conf" "^#*\s*${key} .*" "${key} ${value}" false
+    replace_in_file "${REDIS_BASE_DIR}/etc/redis.conf" "^#*\s*${key} .*" "${key} ${value}" false
 }
 
 ########################
 # Unset a configuration setting value
 # Globals:
-#   REDIS_BASEDIR
+#   REDIS_BASE_DIR
 # Arguments:
 #   $1 - key
 # Returns:
 #   None
 #########################
 redis_conf_unset() {
-    # TODO: improve this. Substitute action?
-    local key="${1:?missing key}"
-    remove_in_file "${REDIS_BASEDIR}/etc/redis.conf" "^\s*$key .*" false
+    local -r key="${1:?missing key}"
+    remove_in_file "${REDIS_BASE_DIR}/etc/redis.conf" "^\s*$key .*" false
 }
 
 ########################
 # Get Redis version
 # Globals:
-#   REDIS_BASEDIR
+#   REDIS_BASE_DIR
 # Arguments:
 #   None
 # Returns:
 #   Redis versoon
 #########################
 redis_version() {
-    "${REDIS_BASEDIR}/bin/redis-cli" --version | grep -E -o "[0-9]+.[0-9]+.[0-9]+"
+    "${REDIS_BASE_DIR}/bin/redis-cli" --version | grep -E -o "[0-9]+.[0-9]+.[0-9]+"
 }
 
 ########################
 # Get Redis major version
 # Globals:
-#   REDIS_BASEDIR
+#   REDIS_BASE_DIR
 # Arguments:
 #   None
 # Returns:
@@ -97,7 +97,7 @@ redis_major_version() {
 ########################
 # Check if redis is running
 # Globals:
-#   REDIS_BASEDIR
+#   REDIS_BASE_DIR
 # Arguments:
 #   None
 # Returns:
@@ -105,13 +105,26 @@ redis_major_version() {
 #########################
 is_redis_running() {
     local pid
-    pid="$(get_pid_from_file "$REDIS_BASEDIR/tmp/redis.pid")"
+    pid="$(get_pid_from_file "$REDIS_BASE_DIR/tmp/redis.pid")"
 
     if [[ -z "$pid" ]]; then
         false
     else
         is_service_running "$pid"
     fi
+}
+
+########################
+# Check if redis is not running
+# Globals:
+#   REDIS_BASE_DIR
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_redis_not_running() {
+    ! is_redis_running
 }
 
 ########################
@@ -132,101 +145,14 @@ redis_stop() {
     pass="$(redis_conf_get "requirepass")"
     is_boolean_yes "$REDIS_TLS_ENABLED" && port="$(redis_conf_get "tls-port")" || port="$(redis_conf_get "port")"
 
-    [[ -n "$pass" ]] && args+=("-a" "\"$pass\"")
+    [[ -n "$pass" ]] && args+=("-a" "$pass")
     [[ "$port" != "0" ]] && args+=("-p" "$port")
 
-    debug "Stopping Redis..."
+    debug "Stopping Redis"
     if am_i_root; then
-        gosu "$REDIS_DAEMON_USER" "${REDIS_BASEDIR}/bin/redis-cli" "${args[@]}" shutdown
+        gosu "$REDIS_DAEMON_USER" "${REDIS_BASE_DIR}/bin/redis-cli" "${args[@]}" shutdown
     else
-        "${REDIS_BASEDIR}/bin/redis-cli" "${args[@]}" shutdown
-    fi
-    local counter=5
-    while is_redis_running ; do
-        if [[ "$counter" -ne 0 ]]; then
-            break
-        fi
-        sleep 1;
-        counter=$((counter - 1))
-    done
-}
-
-########################
-# Start redis and wait until it's ready
-# Globals:
-#   REDIS_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-redis_start() {
-    is_redis_running && return
-    debug "Starting Redis..."
-    if am_i_root; then
-        gosu "$REDIS_DAEMON_USER" "${REDIS_BASEDIR}/bin/redis-server" "${REDIS_BASEDIR}/etc/redis.conf"
-    else
-        "${REDIS_BASEDIR}/bin/redis-server" "${REDIS_BASEDIR}/etc/redis.conf"
-    fi
-    local counter=3
-    while ! is_redis_running ; do
-        if [[ "$counter" -ne 0 ]]; then
-            break
-        fi
-        sleep 1;
-        counter=$((counter - 1))
-    done
-}
-
-########################
-# Load global variables used on Redis configuration.
-# Globals:
-#   REDIS_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-redis_env() {
-    cat <<"EOF"
-export REDIS_BASEDIR="/opt/bitnami/redis"
-export REDIS_EXTRAS_DIR="/opt/bitnami/extra/redis"
-export REDIS_VOLUME="/bitnami/redis"
-export REDIS_TEMPLATES_DIR="${REDIS_EXTRAS_DIR}/templates"
-export REDIS_TMPDIR="${REDIS_BASEDIR}/tmp"
-export REDIS_LOGDIR="${REDIS_BASEDIR}/logs"
-export PATH="${REDIS_BASEDIR}/bin:$PATH"
-export REDIS_DAEMON_USER="redis"
-export REDIS_DAEMON_GROUP="redis"
-export REDIS_SENTINEL_HOST="${REDIS_SENTINEL_HOST:-}"
-export REDIS_SENTINEL_MASTER_NAME="${REDIS_SENTINEL_MASTER_NAME:-}"
-export REDIS_SENTINEL_PORT_NUMBER="${REDIS_SENTINEL_PORT_NUMBER:-26379}"
-export REDIS_DISABLE_COMMANDS="${REDIS_DISABLE_COMMANDS:-}"
-export REDIS_MASTER_HOST="${REDIS_MASTER_HOST:-}"
-export REDIS_MASTER_PORT_NUMBER="${REDIS_MASTER_PORT_NUMBER:-6379}"
-export REDIS_MASTER_PASSWORD="${REDIS_MASTER_PASSWORD:-}"
-export REDIS_PASSWORD="${REDIS_PASSWORD:-}"
-export REDIS_REPLICATION_MODE="${REDIS_REPLICATION_MODE:-}"
-export REDIS_PORT="${REDIS_PORT:-6379}"
-export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
-export REDIS_AOF_ENABLED="${REDIS_AOF_ENABLED:-yes}"
-export REDIS_TLS_ENABLED="${REDIS_TLS_ENABLED:-no}"
-export REDIS_TLS_PORT="${REDIS_TLS_PORT:-6379}"
-export REDIS_TLS_CERT_FILE="${REDIS_TLS_CERT_FILE:-}"
-export REDIS_TLS_KEY_FILE="${REDIS_TLS_KEY_FILE:-}"
-export REDIS_TLS_CA_FILE="${REDIS_TLS_CA_FILE:-}"
-export REDIS_TLS_DH_PARAMS_FILE="${REDIS_TLS_DH_PARAMS_FILE:-}"
-export REDIS_TLS_AUTH_CLIENTS="${REDIS_TLS_AUTH_CLIENTS:-yes}"
-EOF
-    if [[ -f "${REDIS_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export REDIS_PASSWORD="$(< "${REDIS_PASSWORD_FILE}")"
-EOF
-    fi
-    if [[ -f "${REDIS_MASTER_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export REDIS_MASTER_PASSWORD="$(< "${REDIS_MASTER_PASSWORD_FILE}")"
-EOF
+        "${REDIS_BASE_DIR}/bin/redis-cli" "${args[@]}" shutdown
     fi
 }
 
@@ -276,9 +202,9 @@ redis_validate() {
         fi
     fi
     if is_boolean_yes "$REDIS_TLS_ENABLED"; then
-        if [[ "$REDIS_PORT" == "$REDIS_TLS_PORT" ]] && [[ "$REDIS_PORT" != "6379" ]]; then
+        if [[ "$REDIS_PORT_NUMBER" == "$REDIS_TLS_PORT" ]] && [[ "$REDIS_PORT_NUMBER" != "6379" ]]; then
             # If both ports are assigned the same numbers and they are different to the default settings
-            print_validation_error "Enviroment variables REDIS_PORT and REDIS_TLS_PORT point to the same port number (${REDIS_PORT}). Change one of them or disable non-TLS traffic by setting REDIS_PORT=0"
+            print_validation_error "Enviroment variables REDIS_PORT_NUMBER and REDIS_TLS_PORT point to the same port number (${REDIS_PORT_NUMBER}). Change one of them or disable non-TLS traffic by setting REDIS_PORT_NUMBER=0"
         fi
         if [[ -z "$REDIS_TLS_CERT_FILE" ]]; then
             print_validation_error "You must provide a X.509 certificate in order to use TLS"
@@ -306,14 +232,14 @@ redis_validate() {
 ########################
 # Configure Redis replication
 # Globals:
-#   REDIS_BASEDIR
+#   REDIS_BASE_DIR
 # Arguments:
 #   $1 - Replication mode
 # Returns:
 #   None
 #########################
 redis_configure_replication() {
-    info "Configuring replication mode..."
+    info "Configuring replication mode"
 
     redis_conf_set replica-announce-ip "$(get_machine_ip)"
     redis_conf_set replica-announce-port "$REDIS_MASTER_PORT_NUMBER"
@@ -349,7 +275,7 @@ redis_configure_replication() {
 ########################
 # Disable Redis command(s)
 # Globals:
-#   REDIS_BASEDIR
+#   REDIS_BASE_DIR
 # Arguments:
 #   $1 - Array of commands to disable
 # Returns:
@@ -361,11 +287,11 @@ redis_disable_unsafe_commands() {
     read -r -a disabledCommands <<< "$(tr ',' ' ' <<< "$REDIS_DISABLE_COMMANDS")"
     debug "Disabling commands: ${disabledCommands[*]}"
     for cmd in "${disabledCommands[@]}"; do
-        if grep -E -q "^\s*rename-command\s+$cmd\s+\"\"\s*$" "${REDIS_BASEDIR}/etc/redis.conf"; then
+        if grep -E -q "^\s*rename-command\s+$cmd\s+\"\"\s*$" "$REDIS_CONF_FILE"; then
             debug "$cmd was already disabled"
             continue
         fi
-        echo "rename-command $cmd \"\"" >> "$REDIS_BASEDIR/etc/redis.conf"
+        echo "rename-command $cmd \"\"" >> "$REDIS_CONF_FILE"
     done
 }
 
@@ -379,8 +305,8 @@ redis_disable_unsafe_commands() {
 #   None
 #########################
 redis_configure_permissions() {
-  debug "Ensuring expected directories/files exist..."
-  for dir in "${REDIS_BASEDIR}" "${REDIS_VOLUME}/data" "${REDIS_BASEDIR}/tmp" "${REDIS_LOGDIR}"; do
+  debug "Ensuring expected directories/files exist"
+  for dir in "${REDIS_BASE_DIR}" "${REDIS_DATA_DIR}" "${REDIS_BASE_DIR}/tmp" "${REDIS_LOG_DIR}"; do
       ensure_dir_exists "$dir"
       if am_i_root; then
           chown "$REDIS_DAEMON_USER:$REDIS_DAEMON_GROUP" "$dir"
@@ -398,7 +324,7 @@ redis_configure_permissions() {
 #   None
 #########################
 redis_override_conf() {
-  if [[ ! -e "$REDIS_BASEDIR/mounted-etc/redis.conf" ]]; then
+  if [[ ! -e "${REDIS_MOUNTED_CONF_DIR}/redis.conf" ]]; then
       # Configure Replication mode
       if [[ -n "$REDIS_REPLICATION_MODE" ]]; then
           redis_configure_replication
@@ -430,45 +356,35 @@ redis_initialize() {
 #   None
 #########################
 redis_configure_default() {
-    info "Initializing Redis..."
+    info "Initializing Redis"
 
     # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
     # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
-    rm -f "$REDIS_BASEDIR/tmp/redis.pid"
+    rm -f "$REDIS_BASE_DIR/tmp/redis.pid"
 
     redis_configure_permissions
 
     # User injected custom configuration
-    if [[ -e "$REDIS_BASEDIR/mounted-etc/redis.conf" ]]; then
-        if [[ -e "$REDIS_BASEDIR/etc/redis-default.conf" ]]; then
-            rm "${REDIS_BASEDIR}/etc/redis-default.conf"
+    if [[ -e "${REDIS_MOUNTED_CONF_DIR}/redis.conf" ]]; then
+        if [[ -e "$REDIS_BASE_DIR/etc/redis-default.conf" ]]; then
+            rm "${REDIS_BASE_DIR}/etc/redis-default.conf"
         fi
-        cp "${REDIS_BASEDIR}/mounted-etc/redis.conf" "${REDIS_BASEDIR}/etc/redis.conf"
+        cp "${REDIS_MOUNTED_CONF_DIR}/redis.conf" "${REDIS_BASE_DIR}/etc/redis.conf"
     else
-        cp "${REDIS_BASEDIR}/etc/redis-default.conf" "${REDIS_BASEDIR}/etc/redis.conf"
-        # Default Redis config
-        debug "Setting Redis config file..."
-        redis_conf_set port "$REDIS_PORT"
-        redis_conf_set dir "${REDIS_VOLUME}/data"
-        redis_conf_set logfile "" # Log to stdout
-        redis_conf_set pidfile "${REDIS_BASEDIR}/tmp/redis.pid"
-        redis_conf_set daemonize yes
-        redis_conf_set bind 0.0.0.0 # Allow remote connections
+        info "Setting Redis config file"
+        is_boolean_yes "$REDIS_ALLOW_REMOTE_CONNECTIONS" && redis_conf_set bind 0.0.0.0 # Allow remote connections
         # Enable AOF https://redis.io/topics/persistence#append-only-file
         # Leave default fsync (every second)
         redis_conf_set appendonly "${REDIS_AOF_ENABLED}"
-        # Disable RDB persistence, AOF persistence already enabled.
-        # Ref: https://redis.io/topics/persistence#interactions-between-aof-and-rdb-persistence
-        redis_conf_set save ""
         # TLS configuration
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
-            if [[ "$REDIS_PORT" ==  "6379" ]] && [[ "$REDIS_TLS_PORT" ==  "6379" ]]; then
+            if [[ "$REDIS_PORT_NUMBER" ==  "6379" ]] && [[ "$REDIS_TLS_PORT" ==  "6379" ]]; then
                 # If both ports are set to default values, enable TLS traffic only
                 redis_conf_set port 0
                 redis_conf_set tls-port "$REDIS_TLS_PORT"
             else
                 # Different ports were specified
-                redis_conf_set port "$REDIS_PORT"
+                redis_conf_set port "$REDIS_PORT_NUMBER"
                 redis_conf_set tls-port "$REDIS_TLS_PORT"
             fi
             redis_conf_set tls-cert-file "$REDIS_TLS_CERT_FILE"
