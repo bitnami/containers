@@ -5,15 +5,15 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-#set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purpose
+
+# Load Redis Sentinel environment variables
+. /opt/bitnami/scripts/redis-sentinel-env.sh
 
 # Load libraries
 . /opt/bitnami/scripts/libredissentinel.sh
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/liblog.sh
-
-# Load Redis environment
-eval "$(redis_env)"
 
 print_welcome_page
 
