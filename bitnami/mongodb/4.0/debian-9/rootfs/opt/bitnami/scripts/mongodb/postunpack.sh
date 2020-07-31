@@ -21,8 +21,10 @@ chmod -R g+rwX "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR" "$MONGODB_CONF_DIR" "$MONGO
 
 render-template "$MONGODB_MONGOD_TEMPLATES_FILE" > "$MONGODB_CONF_FILE"
 
-# Create .dbshell file to avoid error message
-touch /.dbshell && chmod g+rw /.dbshell
+# Create .dbshell & .mongorc.js file to avoid error message
+for f in "${HOME}/.dbshell" "${HOME}/.dbshell"; do
+    touch "$f" && chmod g+rw "$f"
+done
 chmod g+w "$MONGODB_CONF_FILE"
 # Redirect all logging to stdout
 ln -sf /dev/stdout "$MONGODB_LOG_FILE"
