@@ -4,7 +4,7 @@
 
 http://www.opencart.com/
 
-# TL;DR;
+# TL;DR
 
 ## Docker Compose
 
@@ -18,8 +18,8 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 > This [CVE scan report](https://quay.io/repository/bitnami/opencart?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
@@ -35,7 +35,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.0.3-6-debian-10-r6`, `3`, `3.0.3-6`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-6-debian-10-r6/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.0.3-6-debian-10-r7`, `3`, `3.0.3-6`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-6-debian-10-r7/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/opencart GitHub repo](https://github.com/bitnami/bitnami-docker-opencart).
 
@@ -110,7 +110,7 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ### Mount persistent folders in the host using docker-compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-opencart/blob/master/docker-compose.yml) file present in this repository: 
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-opencart/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -341,7 +341,7 @@ RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt
 
 ## Modify the ports used by Apache by default
 # It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181 
+ENV APACHE_HTTP_PORT_NUMBER=8181
 ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
@@ -381,7 +381,7 @@ volumes:
   opencart_data:
     driver: local
 ```
-   
+
 # Notable Changes
 
 ## 3.0.3-2-debian-9-r33 and 3.0.3-2-ol-7-r42
