@@ -68,6 +68,8 @@ export MONGODB_CONF_FILE="$MONGODB_CONF_DIR/mongodb.conf"
 export MONGODB_KEY_FILE="$MONGODB_CONF_DIR/keyfile"
 export MONGODB_PID_FILE="$MONGODB_TMP_DIR/mongodb.pid"
 export MONGODB_LOG_FILE="$MONGODB_LOG_DIR/mongodb.log"
+export MONGODB_RC_FILE="$HOME/.mongorc.js"
+export MONGODB_DB_SHELL_FILE="$HOME/.dbshell"
 export MONGODB_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
 
 # System users (when running with a privileged user)
