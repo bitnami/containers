@@ -1,10 +1,10 @@
 # What is ReportServer Community ?
 
-> ReportServer is an open source business intelligence (OSBI) platform with powerful reporting and analysis tools. It provides a unified interface to reporting engines from different providers, making it easy for managers to collate, analyze and take action on data from multiple business touchpoints. With support for Jasper, Birt, Mondrian and Excel as well as a powerful ad-hoc reporting component ReportServer is the ideal tool for business decision makers, analysts and consultants. 
+> ReportServer is an open source business intelligence (OSBI) platform with powerful reporting and analysis tools. It provides a unified interface to reporting engines from different providers, making it easy for managers to collate, analyze and take action on data from multiple business touchpoints. With support for Jasper, Birt, Mondrian and Excel as well as a powerful ad-hoc reporting component ReportServer is the ideal tool for business decision makers, analysts and consultants.
 
 https://reportserver.net/en/#secondsection
 
-# TL;DR;
+# TL;DR
 
 ## Docker Compose
 
@@ -18,8 +18,8 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -30,7 +30,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.2.0-6027-debian-10-r9`, `3`, `3.2.0-6027`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserver-community/blob/3.2.0-6027-debian-10-r9/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.2.0-6027-debian-10-r10`, `3`, `3.2.0-6027`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserver-community/blob/3.2.0-6027-debian-10-r10/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/reportserver-community GitHub repo](https://github.com/bitnami/bitnami-docker-reportserver-community).
 
