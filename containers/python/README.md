@@ -4,7 +4,7 @@
 
 [python.org](https://www.python.org/)
 
-# TL;DR;
+# TL;DR
 
 ```console
 $ docker run -it --name python bitnami/python
@@ -22,8 +22,8 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -35,7 +35,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3.8-prod-debian-10`, `3.8-debian-10-prod`, `3.8.5-prod-debian-10-r6`, `3.8.5-debian-10-r6-prod`, `3.8-prod`, `3.8.5-prod` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.5-prod-debian-10-r6/3.8-prod/debian-10/Dockerfile)
-* [`3.8-debian-10`, `3.8.5-debian-10-r6`, `3.8`, `3.8.5` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.5-debian-10-r6/3.8/debian-10/Dockerfile)
+* [`3.8-debian-10`, `3.8.5-debian-10-r7`, `3.8`, `3.8.5` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.5-debian-10-r7/3.8/debian-10/Dockerfile)
 * [`3.7-prod-debian-10`, `3.7-debian-10-prod`, `3.7.8-prod-debian-10-r26`, `3.7.8-debian-10-r26-prod`, `3.7-prod`, `3.7.8-prod`, `latest-prod` (3.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.8-prod-debian-10-r26/3.7-prod/debian-10/Dockerfile)
 * [`3.7-debian-10`, `3.7.8-debian-10-r26`, `3.7`, `3.7.8`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.8-debian-10-r26/3.7/debian-10/Dockerfile)
 * [`3.6-prod-debian-10`, `3.6-debian-10-prod`, `3.6.11-prod-debian-10-r28`, `3.6.11-debian-10-r28-prod`, `3.6-prod`, `3.6.11-prod` (3.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.11-prod-debian-10-r28/3.6-prod/debian-10/Dockerfile)
