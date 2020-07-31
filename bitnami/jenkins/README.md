@@ -4,7 +4,7 @@
 
 [https://jenkins.io](https://jenkins.io)
 
-# TL;DR;
+# TL;DR
 
 ## Docker Compose
 
@@ -18,8 +18,8 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 > This [CVE scan report](https://quay.io/repository/bitnami/jenkins?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.235.3-debian-10-r1`, `2`, `2.235.3`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.235.3-debian-10-r1/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.235.3-debian-10-r2`, `2`, `2.235.3`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.235.3-debian-10-r2/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
 
@@ -99,8 +99,8 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
     jenkins:
     ...
     volumes:
--     - 'jenkins_data:/bitnami/jenkins    
-+     - /path/to/jenkins-persistence:/bitnami/jenkins 
+-     - 'jenkins_data:/bitnami/jenkins
++     - /path/to/jenkins-persistence:/bitnami/jenkins
 - volumes:
 -   jenkins_data:
 -     driver: local
@@ -408,7 +408,7 @@ $ docker run -d --name jenkins \
 
 # Notable Changes
 
-## 2.222.1-debian-10-r17 
+## 2.222.1-debian-10-r17
 
 - Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
 
@@ -417,7 +417,7 @@ $ docker run -d --name jenkins \
 - The Jenkins container has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Jenkins service was started as the `jenkins` user. From now on, both the container and the Jenkins service run as user `jenkins` (`uid=1001`). You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 - Consequences:
   - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating your Jenkins data ensuring the `jenkins` user has the appropiate permissions.
-  - No "privileged" actions are allowed anymore. 
+  - No "privileged" actions are allowed anymore.
 
 ## 2.121.2-ol-7-r14 / 2.121.2-debian-9-r18
 
