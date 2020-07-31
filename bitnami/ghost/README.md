@@ -4,7 +4,7 @@
 
 https://ghost.org/
 
-# TL;DR;
+# TL;DR
 
 ## Docker Compose
 
@@ -18,8 +18,8 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -40,7 +40,7 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3-debian-10`, `3.25.0-debian-10-r7`, `3`, `3.25.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/3.25.0-debian-10-r7/3/debian-10/Dockerfile)
+* [`3-debian-10`, `3.27.0-debian-10-r0`, `3`, `3.27.0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/3.27.0-debian-10-r0/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
 
@@ -200,7 +200,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 # Configuration
 
-## Setting a custom storage adapters 
+## Setting a custom storage adapters
 
 This example shows how to install the [Storage Adapter for S3](https://github.com/colinmeinke/ghost-storage-adapter-s3#ghost-storage-adapter-s3).
 
@@ -215,19 +215,19 @@ RUN mkdir -p /.npm && chmod -R g+rwX,o+rw /.npm
 COPY post_ghost_config.sh /
 RUN chmod +x /post_ghost_config.sh \
     && cp /app-entrypoint.sh /tmp/app-entrypoint.sh \
-    && sed '/info "Starting ghost... "/ a . /post_ghost_config.sh' /tmp/app-entrypoint.sh > /app-entrypoint.sh 
+    && sed '/info "Starting ghost... "/ a . /post_ghost_config.sh' /tmp/app-entrypoint.sh > /app-entrypoint.sh
 
 ENV AWS_ACCESS_KEY_ID="AWS_ACCESS_KEY_ID" \
     AWS_ACCESS_SECRET_KEY="AWS_ACCESS_SECRET_KEY" \
     AWS_REGION="AWS_REGION" \
-    AWS_BUCKET="AWS_BUCKET" 
+    AWS_BUCKET="AWS_BUCKET"
 
 USER 1001
 
 RUN cd /bitnami/ghost \
-    && npm i --silent ghost-storage-adapter-s3 \ 
+    && npm i --silent ghost-storage-adapter-s3 \
     && mkdir -p /bitnami/ghost/content/adapters/storage/s3 \
-    && cp -r ./node_modules/ghost-storage-adapter-s3/* /bitnami/ghost/content/adapters/storage/s3/ 
+    && cp -r ./node_modules/ghost-storage-adapter-s3/* /bitnami/ghost/content/adapters/storage/s3/
 ```
 
 1. Add `jq` tool, prepare npm and install an adapter.
