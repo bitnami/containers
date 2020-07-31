@@ -4,7 +4,7 @@
 
 [https://mariadb.com/](https://mariadb.com/)
 
-# TL;DR;
+# TL;DR
 
 ```console
 $ docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes bitnami/mariadb:latest
@@ -22,8 +22,8 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10.5-debian-10`, `10.5.4-debian-10-r29`, `10.5`, `10.5.4`, `latest` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.4-debian-10-r29/10.5/debian-10/Dockerfile)
-* [`10.4-debian-10`, `10.4.13-debian-10-r71`, `10.4`, `10.4.13` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.13-debian-10-r71/10.4/debian-10/Dockerfile)
+* [`10.4-debian-10`, `10.4.13-debian-10-r72`, `10.4`, `10.4.13` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.13-debian-10-r72/10.4/debian-10/Dockerfile)
 * [`10.3-debian-10`, `10.3.23-debian-10-r69`, `10.3`, `10.3.23` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.23-debian-10-r69/10.3/debian-10/Dockerfile)
 * [`10.2-debian-10`, `10.2.32-debian-10-r74`, `10.2`, `10.2.32` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.32-debian-10-r74/10.2/debian-10/Dockerfile)
 * [`10.1-debian-10`, `10.1.45-debian-10-r74`, `10.1`, `10.1.45` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.45-debian-10-r74/10.1/debian-10/Dockerfile)
