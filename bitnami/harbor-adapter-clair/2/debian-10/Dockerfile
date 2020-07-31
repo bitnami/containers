@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="harbor-adapter-clair" \
-    BITNAMI_IMAGE_VERSION="2.0.1-debian-10-r24" \
+    BITNAMI_IMAGE_VERSION="2.0.1-debian-10-r25" \
     PATH="/opt/bitnami/harbor-adapter-clair/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080
