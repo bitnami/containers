@@ -314,6 +314,8 @@ drupal_flush_cache() {
     if [[ "$major_version" -gt 7 ]]; then
         drush_execute "cache:rebuild"
     else
+        # This is occasionally needed by modules that make system-wide changes to access levels.
+        drush_execute php-eval 'node_access_rebuild();'
         drush_execute "cache:clear" "all"
     fi
 }
