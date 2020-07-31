@@ -4,7 +4,7 @@
 
 [ruby-lang.org](https://www.ruby-lang.org/en/)
 
-# TL;DR;
+# TL;DR
 
 ```console
 $ docker run -it --name ruby bitnami/ruby:latest
@@ -22,8 +22,8 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`2.6-prod-debian-10`, `2.6-debian-10-prod`, `2.6.6-prod-debian-10-r119`, `2.6.6-debian-10-r119-prod`, `2.6-prod`, `2.6.6-prod`, `latest-prod` (2.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.6-prod-debian-10-r119/2.6-prod/debian-10/Dockerfile)
 * [`2.6-debian-10`, `2.6.6-debian-10-r114`, `2.6`, `2.6.6`, `latest` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.6-debian-10-r114/2.6/debian-10/Dockerfile)
 * [`2.5-prod-debian-10`, `2.5-debian-10-prod`, `2.5.8-prod-debian-10-r122`, `2.5.8-debian-10-r122-prod`, `2.5-prod`, `2.5.8-prod` (2.5-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-prod-debian-10-r122/2.5-prod/debian-10/Dockerfile)
-* [`2.5-debian-10`, `2.5.8-debian-10-r116`, `2.5`, `2.5.8` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-debian-10-r116/2.5/debian-10/Dockerfile)
+* [`2.5-debian-10`, `2.5.8-debian-10-r117`, `2.5`, `2.5.8` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-debian-10-r117/2.5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://github.com/bitnami/bitnami-docker-ruby).
 
