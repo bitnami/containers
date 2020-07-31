@@ -22,6 +22,7 @@ php_env_vars=(
     PHP_UPLOAD_MAX_FILESIZE
     PHP_POST_MAX_SIZE
     PHP_MEMORY_LIMIT
+    PHP_MAX_EXECUTION_TIME
 
 )
 for env_var in "${php_env_vars[@]}"; do
@@ -63,5 +64,6 @@ export PHP_FPM_DAEMON_GROUP="daemon"
 export PHP_UPLOAD_MAX_FILESIZE="${PHP_UPLOAD_MAX_FILESIZE:-}"
 export PHP_POST_MAX_SIZE="${PHP_POST_MAX_SIZE:-}"
 export PHP_MEMORY_LIMIT="${PHP_MEMORY_LIMIT:-}"
+export PHP_MAX_EXECUTION_TIME="${PHP_MAX_EXECUTION_TIME:-}"
 
 # Custom environment variables may be defined below
