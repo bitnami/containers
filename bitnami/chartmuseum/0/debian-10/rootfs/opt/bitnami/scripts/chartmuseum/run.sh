@@ -1,26 +1,30 @@
 #!/bin/bash
+#
+# Bitnami Chartmuseum run
+
+# shellcheck disable=SC1091
 
 set -o errexit
 set -o nounset
 set -o pipefail
 #set -o xtrace # Uncomment this line for debugging purpose
-# shellcheck disable=SC1091
 
 # Load libraries
+. /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
 
 FLAGS=''
+STORAGE="${STORAGE:-local}"
 
-if [[ -d "/bitnami/certs" ]]; then
+if ! is_dir_empty "/bitnami/certs"; then
     FLAGS='--tls-cert /bitnami/certs/server.crt --tls-key /bitnami/certs/server.key'
 fi
 
-if [[ -z ${STORAGE:-} ]]; then
-   info "Using local storage into /bitnami/data directory"
-   STORAGE='local'
-   STORAGE_LOCAL_ROOTDIR='/bitnami/data'
-   FLAGS="$FLAGS --storage $STORAGE --storage-local-rootdir $STORAGE_LOCAL_ROOTDIR"
- fi
+if [[ "$STORAGE" = "local" ]]; then
+    info "Using local storage into /bitnami/data directory"
+    STORAGE_LOCAL_ROOTDIR='/bitnami/data'
+    FLAGS="$FLAGS --storage $STORAGE --storage-local-rootdir $STORAGE_LOCAL_ROOTDIR"
+fi
 
- info "** Starting chartmuseum **"
- exec /opt/bitnami/chartmuseum/bin/chartmuseum $FLAGS
+info "** Starting chartmuseum **"
+exec /opt/bitnami/chartmuseum/bin/chartmuseum $FLAGS
