@@ -40,7 +40,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9-debian-10`, `9.0.2-debian-10-r17`, `9`, `9.0.2`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/9.0.2-debian-10-r17/9/debian-10/Dockerfile)
+* [`9-debian-10`, `9.0.2-debian-10-r18`, `9`, `9.0.2`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/9.0.2-debian-10-r18/9/debian-10/Dockerfile)
 * [`8-debian-10`, `8.9.2-debian-10-r17`, `8`, `8.9.2` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/8.9.2-debian-10-r17/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-drupal-nginx).
@@ -300,7 +300,7 @@ $ docker run --rm -v /path/to/drupal-backups:/backups --volumes-from drupal busy
 
 Restoring a backup is as simple as mounting the backup as volumes in the containers.
 
-For the Drupal container:
+For the MariaDB database container:
 
 ```diff
  $ docker run -d --name mariadb \
@@ -310,7 +310,7 @@ For the Drupal container:
    bitnami/mariadb:latest
 ```
 
-For the MariaDB database container:
+For the Drupal container:
 
 ```diff
  $ docker run -d --name drupal \
