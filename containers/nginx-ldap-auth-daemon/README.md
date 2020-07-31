@@ -2,7 +2,7 @@
 
 > [Nginx LDAP Auth Daemon](https://github.com/username/nginx-ldap-auth-daemon) is a reference implementation of a method for authenticating users who request protected resources from servers proxied by NGINX.
 
-# TL;DR;
+# TL;DR
 
 ```bash
 $ docker run --name nginx-ldap-auth-daemon bitnami/nginx-ldap-auth-daemon:latest
@@ -20,8 +20,8 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DTC)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
 # Why use a non-root container?
@@ -33,7 +33,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0-debian-10`, `0.20200116.0-debian-10-r79`, `0`, `0.20200116.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ldap-auth-daemon/blob/0.20200116.0-debian-10-r79/0/debian-10/Dockerfile)
+* [`0-debian-10`, `0.20200116.0-debian-10-r80`, `0`, `0.20200116.0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ldap-auth-daemon/blob/0.20200116.0-debian-10-r80/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nginx-ldap-auth-daemon GitHub repo](https://github.com/bitnami/bitnami-docker-nginx-ldap-auth-daemon).
 
@@ -278,4 +278,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
