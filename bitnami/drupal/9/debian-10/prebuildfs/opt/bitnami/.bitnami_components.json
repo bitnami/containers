@@ -1,1 +1,51 @@
-{"apache": {"arch": "amd64", "digest": "e9faded57e3703fe9fcea650eb302e673d969a399fe9dfafa67e173465637665", "distro": "debian-10", "type": "NAMI", "version": "2.4.43-5"}, "drupal": {"arch": "amd64", "digest": "33bb912d598748d33a2063a52330b178bcc520a522fbd5fb7cd6890ab3d0e48c", "distro": "debian-10", "type": "NAMI", "version": "9.0.2-2"}, "gosu": {"arch": "amd64", "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c", "distro": "debian-10", "type": "NAMI", "version": "1.12.0-1"}, "libphp": {"arch": "amd64", "digest": "15fa4a11f2e11377ba0d6476ce22021349f62ef2fdfbe2af4f86dca10baaa997", "distro": "debian-10", "type": "NAMI", "version": "7.3.20-0"}, "mysql-client": {"arch": "amd64", "digest": "efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1", "distro": "debian-10", "type": "NAMI", "version": "10.3.23-1"}, "php": {"arch": "amd64", "digest": "5fea2ffac007503364e906f5ad5444336aaaf4b360045f75f58ec220610bc8b1", "distro": "debian-10", "type": "NAMI", "version": "7.3.20-1"}, "render-template": {"arch": "amd64", "digest": "a94f94357aa06f3718db1550fa5f5188cd61383d66bf754eef49c58a18bf02cc", "distro": "debian-10", "type": "NAMI", "version": "1.0.0-1"}}
+{
+    "apache": {
+        "arch": "amd64",
+        "digest": "e9faded57e3703fe9fcea650eb302e673d969a399fe9dfafa67e173465637665",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "2.4.43-5"
+    },
+    "drupal": {
+        "arch": "amd64",
+        "digest": "33bb912d598748d33a2063a52330b178bcc520a522fbd5fb7cd6890ab3d0e48c",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "9.0.2-2"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.12.0-1"
+    },
+    "libphp": {
+        "arch": "amd64",
+        "digest": "15fa4a11f2e11377ba0d6476ce22021349f62ef2fdfbe2af4f86dca10baaa997",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "7.3.20-0"
+    },
+    "mysql-client": {
+        "arch": "amd64",
+        "digest": "efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "10.3.23-1"
+    },
+    "php": {
+        "arch": "amd64",
+        "digest": "5fea2ffac007503364e906f5ad5444336aaaf4b360045f75f58ec220610bc8b1",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "7.3.20-1"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "digest": "a94f94357aa06f3718db1550fa5f5188cd61383d66bf754eef49c58a18bf02cc",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.0.0-1"
+    }
+}
