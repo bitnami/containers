@@ -1,1 +1,16 @@
-{"grafana-image-renderer": {"arch": "amd64", "digest": "96a7f630fed6e3099f3a3551bf3b525c81f640c3079a4c786c063f098bd61f34", "distro": "debian-10", "type": "NAMI", "version": "2.0.0-0"}, "node": {"arch": "amd64", "digest": "971b57b7cc15a47d50c5e4871b808ed55580feb1248828c3b4cdac5a1ad59fdd", "distro": "debian-10", "type": "NAMI", "version": "12.18.3-0"}}
+{
+    "grafana-image-renderer": {
+        "arch": "amd64",
+        "digest": "96a7f630fed6e3099f3a3551bf3b525c81f640c3079a4c786c063f098bd61f34",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "2.0.0-0"
+    },
+    "node": {
+        "arch": "amd64",
+        "digest": "971b57b7cc15a47d50c5e4871b808ed55580feb1248828c3b4cdac5a1ad59fdd",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "12.18.3-0"
+    }
+}
