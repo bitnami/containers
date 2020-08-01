@@ -1,1 +1,23 @@
-{"gosu": {"arch": "amd64", "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c", "distro": "debian-10", "type": "NAMI", "version": "1.12.0-1"}, "ini-file": {"arch": "amd64", "digest": "6126368b4f1d4c6a9682c12280f2bef3c98962d079b26206e19f406cfa631055", "distro": "debian-10", "type": "NAMI", "version": "1.3.0-1"}, "mariadb": {"arch": "amd64", "digest": "e694c6786c53882dec98e8d43d6d3857b55331dc4928360be5f53f8be46a1641", "distro": "debian-10", "type": "NAMI", "version": "10.2.32-1"}}
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.12.0-1"
+    },
+    "ini-file": {
+        "arch": "amd64",
+        "digest": "6126368b4f1d4c6a9682c12280f2bef3c98962d079b26206e19f406cfa631055",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.3.0-1"
+    },
+    "mariadb": {
+        "arch": "amd64",
+        "digest": "e694c6786c53882dec98e8d43d6d3857b55331dc4928360be5f53f8be46a1641",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "10.2.32-1"
+    }
+}
