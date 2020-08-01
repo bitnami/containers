@@ -1,1 +1,1 @@
-{"python": {"arch": "amd64", "digest": "043cdc9a6c4dcea2903e426872fd81bc3af7b5a2718a45ca98e50d1ae4850ea8", "distro": "debian-10", "type": "NAMI", "version": "3.8.5-1"}}
+{"python": {"arch": "amd64", "digest": "3ae6dc3d95ab5444da10ad7805877885b866fdd41a5095b47a8ca50aeb0156c0", "distro": "debian-10", "type": "NAMI", "version": "3.8.5-2"}}
