@@ -1,1 +1,9 @@
-{"jsonnet": {"arch": "amd64", "digest": "741c366d9ad4908ec580c7379e3ae3edaef5b4190b85367fbffaab031bbe5122", "distro": "debian-10", "type": "NAMI", "version": "0.16.0-0"}}
+{
+    "jsonnet": {
+        "arch": "amd64",
+        "digest": "741c366d9ad4908ec580c7379e3ae3edaef5b4190b85367fbffaab031bbe5122",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "0.16.0-0"
+    }
+}
