@@ -1,1 +1,16 @@
-{"gosu": {"arch": "amd64", "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c", "distro": "debian-10", "type": "NAMI", "version": "1.12.0-1"}, "redis-sentinel": {"arch": "amd64", "digest": "a525d2ead90e457eb396bede61f8392bb767b74a7b6a6837394fd8aee1f3639a", "distro": "debian-10", "type": "NAMI", "version": "6.0.6-0"}}
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.12.0-1"
+    },
+    "redis-sentinel": {
+        "arch": "amd64",
+        "digest": "a525d2ead90e457eb396bede61f8392bb767b74a7b6a6837394fd8aee1f3639a",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "6.0.6-0"
+    }
+}
