@@ -1,1 +1,51 @@
-{"apache": {"arch": "amd64", "digest": "e9faded57e3703fe9fcea650eb302e673d969a399fe9dfafa67e173465637665", "distro": "debian-10", "type": "NAMI", "version": "2.4.43-5"}, "gosu": {"arch": "amd64", "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c", "distro": "debian-10", "type": "NAMI", "version": "1.12.0-1"}, "libphp": {"arch": "amd64", "digest": "15fa4a11f2e11377ba0d6476ce22021349f62ef2fdfbe2af4f86dca10baaa997", "distro": "debian-10", "type": "NAMI", "version": "7.3.20-0"}, "mysql-client": {"arch": "amd64", "digest": "efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1", "distro": "debian-10", "type": "NAMI", "version": "10.3.23-1"}, "opencart": {"arch": "amd64", "digest": "5b79aaedcb8a33fad6f686c6cf4573fd013f66a7ea4aef3c27c4af76d44231ef", "distro": "debian-10", "type": "NAMI", "version": "3.0.3-6-0"}, "php": {"arch": "amd64", "digest": "5fea2ffac007503364e906f5ad5444336aaaf4b360045f75f58ec220610bc8b1", "distro": "debian-10", "type": "NAMI", "version": "7.3.20-1"}, "tini": {"arch": "amd64", "digest": "9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c", "distro": "debian-10", "type": "NAMI", "version": "0.19.0-0"}}
+{
+    "apache": {
+        "arch": "amd64",
+        "digest": "e9faded57e3703fe9fcea650eb302e673d969a399fe9dfafa67e173465637665",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "2.4.43-5"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.12.0-1"
+    },
+    "libphp": {
+        "arch": "amd64",
+        "digest": "15fa4a11f2e11377ba0d6476ce22021349f62ef2fdfbe2af4f86dca10baaa997",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "7.3.20-0"
+    },
+    "mysql-client": {
+        "arch": "amd64",
+        "digest": "efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "10.3.23-1"
+    },
+    "opencart": {
+        "arch": "amd64",
+        "digest": "5b79aaedcb8a33fad6f686c6cf4573fd013f66a7ea4aef3c27c4af76d44231ef",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "3.0.3-6-0"
+    },
+    "php": {
+        "arch": "amd64",
+        "digest": "5fea2ffac007503364e906f5ad5444336aaaf4b360045f75f58ec220610bc8b1",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "7.3.20-1"
+    },
+    "tini": {
+        "arch": "amd64",
+        "digest": "9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "0.19.0-0"
+    }
+}
