@@ -1,1 +1,9 @@
-{"node-exporter": {"arch": "amd64", "digest": "fa52d3dc76c70beef0cfe1d1a96e08a2305512ecb6deecbe0686d4e57e2a55ec", "distro": "debian-10", "type": "NAMI", "version": "1.0.1-0"}}
+{
+    "node-exporter": {
+        "arch": "amd64",
+        "digest": "fa52d3dc76c70beef0cfe1d1a96e08a2305512ecb6deecbe0686d4e57e2a55ec",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.0.1-0"
+    }
+}
