@@ -1,1 +1,9 @@
-{"oauth2-proxy": {"arch": "amd64", "digest": "60a0c083581710fcc932d4c9ebbe1cb6f496e9388d3b5423e60d7808886e8dd5", "distro": "debian-10", "type": "NAMI", "version": "5.1.1-1"}}
+{
+    "oauth2-proxy": {
+        "arch": "amd64",
+        "digest": "60a0c083581710fcc932d4c9ebbe1cb6f496e9388d3b5423e60d7808886e8dd5",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "5.1.1-1"
+    }
+}
