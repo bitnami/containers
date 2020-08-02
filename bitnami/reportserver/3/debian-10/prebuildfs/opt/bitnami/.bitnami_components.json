@@ -1,1 +1,44 @@
-{"gosu": {"arch": "amd64", "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c", "distro": "debian-10", "type": "NAMI", "version": "1.12.0-1"}, "java": {"arch": "amd64", "digest": "268e7ba913422e7acd282b94615b127eeb56e3c4bb7e3c9c6d952c391e6ead4d", "distro": "debian-10", "type": "NAMI", "version": "11.0.8-0"}, "mysql-client": {"arch": "amd64", "digest": "efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1", "distro": "debian-10", "type": "NAMI", "version": "10.3.23-1"}, "reportserver": {"arch": "amd64", "digest": "fe0461009788fade0dece66054fce1120d48ca24fc4801d375ccfff98f8b6126", "distro": "debian-10", "type": "NAMI", "version": "3.2.0-6027-0"}, "tini": {"arch": "amd64", "digest": "9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c", "distro": "debian-10", "type": "NAMI", "version": "0.19.0-0"}, "tomcat": {"arch": "amd64", "digest": "9565158d21d149f48a659ac984b0849f95bcaf0c52ca2df91cff7794b2350b28", "distro": "debian-10", "type": "NAMI", "version": "9.0.37-1"}}
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.12.0-1"
+    },
+    "java": {
+        "arch": "amd64",
+        "digest": "268e7ba913422e7acd282b94615b127eeb56e3c4bb7e3c9c6d952c391e6ead4d",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "11.0.8-0"
+    },
+    "mysql-client": {
+        "arch": "amd64",
+        "digest": "efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "10.3.23-1"
+    },
+    "reportserver": {
+        "arch": "amd64",
+        "digest": "fe0461009788fade0dece66054fce1120d48ca24fc4801d375ccfff98f8b6126",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "3.2.0-6027-0"
+    },
+    "tini": {
+        "arch": "amd64",
+        "digest": "9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "0.19.0-0"
+    },
+    "tomcat": {
+        "arch": "amd64",
+        "digest": "9565158d21d149f48a659ac984b0849f95bcaf0c52ca2df91cff7794b2350b28",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "9.0.37-1"
+    }
+}
