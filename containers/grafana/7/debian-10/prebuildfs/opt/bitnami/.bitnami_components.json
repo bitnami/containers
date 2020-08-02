@@ -1,1 +1,9 @@
-{"grafana": {"arch": "amd64", "digest": "a80cd44210d6a3c3c32828616740c58936c14e3154c6028686b7c2f010143bb2", "distro": "debian-10", "type": "NAMI", "version": "7.1.1-0"}}
+{
+    "grafana": {
+        "arch": "amd64",
+        "digest": "a80cd44210d6a3c3c32828616740c58936c14e3154c6028686b7c2f010143bb2",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "7.1.1-0"
+    }
+}
