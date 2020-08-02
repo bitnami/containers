@@ -1,1 +1,9 @@
-{"logstash-exporter": {"arch": "amd64", "digest": "2f831bc9df4df8c16a25c26995ea21ba0f309bd44b4dd204e6c392643bbe146e", "distro": "debian-10", "type": "NAMI", "version": "0.1.2-0"}}
+{
+    "logstash-exporter": {
+        "arch": "amd64",
+        "digest": "2f831bc9df4df8c16a25c26995ea21ba0f309bd44b4dd204e6c392643bbe146e",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "0.1.2-0"
+    }
+}
