@@ -1,0 +1,30 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.12.0-1"
+    },
+    "java": {
+        "arch": "amd64",
+        "digest": "7ccaf9b2abc4069482fea3d612e53c3b2a369e44c69e246aa8e8d7bddb496372",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.8.262-0"
+    },
+    "spring-cloud-skipper": {
+        "arch": "amd64",
+        "digest": "afa299170c27c0740050c3c892917b80884f0e01820ee98702e15165f7286890",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "2.4.3-0"
+    },
+    "yq": {
+        "arch": "amd64",
+        "digest": "50cac57ffd984455e7321d1f13380f94b6bda2a16b7e2547ba33aad347d5e9eb",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "3.3.2-0"
+    }
+}
