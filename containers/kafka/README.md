@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
-* [`2-debian-10`, `2.5.0-debian-10-r110`, `2`, `2.5.0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.5.0-debian-10-r110/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.5.0-debian-10-r111`, `2`, `2.5.0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.5.0-debian-10-r111/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -392,15 +392,15 @@ If you use other tools to use your Kafka cluster, you'll need to provide the req
 
 When configuring your broker to use `SASL` or `SASL_SSL` for inter-broker communications, you can provide the SASL credentials using these environment variables:
 
-* `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Default: **user**
-* `KAFKA_INTER_BROKER_PASSWORD`: Kafka inter broker communication password. Default: **bitnami**
+* `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Deprecated in favor of `KAFKA_CLIENT_USERS`.
+* `KAFKA_INTER_BROKER_PASSWORD`: Kafka inter broker communication password. Deprecated in favor of `KAFKA_CLIENT_PASSWORDS`.
 
 #### Kafka client configuration
 
 When configuring Kafka with `SASL` or `SASL_SSL` for communications with clients, you can provide your the SASL credentials using this environment variables:
 
-* `KAFKA_CLIENT_USER`: Kafka client user. Deprecated in favor of `KAFKA_CLIENT_USERS`.
-* `KAFKA_CLIENT_PASSWORD`: Kafka client user password. Deprecated in favor of `KAFKA_CLIENT_PASSWORDS`.
+* `KAFKA_CLIENT_USER`: Kafka client user. Default: **user**
+* `KAFKA_CLIENT_PASSWORD`: Kafka client user password. Default: **bitnami**
 
 #### Kafka ZooKeeper client configuration
 There are different options of configuration to connect a Zookeeper server.
@@ -706,6 +706,10 @@ $ docker-compose up kafka
 ```
 
 ## Notable Changes
+
+### 2.5.0-debian-10-r109
+
+* The `KAFKA_CLIENT_USER` AND `KAFKA-CLIENT-PASSWORD` have been deprecated in favor of `KAFKA_CLIENT_USERS` and `KAFKA_CLIENT_PASSWORDS`.
 
 ### 2.5.0-debian-10-r51
 
