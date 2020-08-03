@@ -106,8 +106,8 @@ export PATH="${KAFKA_BASE_DIR}/bin:$PATH"
 export ALLOW_PLAINTEXT_LISTENER="${ALLOW_PLAINTEXT_LISTENER:-no}"
 export KAFKA_INTER_BROKER_USER="${KAFKA_INTER_BROKER_USER:-user}"
 export KAFKA_INTER_BROKER_PASSWORD="${KAFKA_INTER_BROKER_PASSWORD:-bitnami}"
-export KAFKA_CLIENT_USER="${KAFKA_CLIENT_USER:-user}"
-export KAFKA_CLIENT_PASSWORD="${KAFKA_CLIENT_PASSWORD:-bitnami}"
+export KAFKA_CLIENT_USER="${KAFKA_CLIENT_USER:-}"
+export KAFKA_CLIENT_PASSWORD="${KAFKA_CLIENT_PASSWORD:-}"
 export KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS:-"-Xmx1024m -Xms1024m"}"
 export KAFKA_ZOOKEEPER_PROTOCOL="${KAFKA_ZOOKEEPER_PROTOCOL:-"PLAINTEXT"}"
 export KAFKA_ZOOKEEPER_PASSWORD="${KAFKA_ZOOKEEPER_PASSWORD:-}"
@@ -119,6 +119,15 @@ export KAFKA_CFG_ADVERTISED_LISTENERS="${KAFKA_CFG_ADVERTISED_LISTENERS:-"PLAINT
 export KAFKA_CFG_LISTENERS="${KAFKA_CFG_LISTENERS:-"PLAINTEXT://:9092"}"
 export KAFKA_CFG_ZOOKEEPER_CONNECT="${KAFKA_CFG_ZOOKEEPER_CONNECT:-"localhost:2181"}"
 export KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE="${KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE:-"true"}"
+export KAFKA_CFG_SASL_ENABLED_MECHANISMS="${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-PLAIN,SCRAM-SHA-256,SCRAM-SHA-512}"
+export KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL="${KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL:-}"
+EOF
+    # Make compatible KAFKA_CLIENT_USERS/PASSWORDS with the old KAFKA_CLIENT_USER/PASSWORD
+    [[ -n "${KAFKA_CLIENT_USER:-}" ]] && KAFKA_CLIENT_USERS="${KAFKA_CLIENT_USER:-},${KAFKA_CLIENT_USERS:-}"
+    [[ -n "${KAFKA_CLIENT_PASSWORD:-}" ]] && KAFKA_CLIENT_PASSWORDS="${KAFKA_CLIENT_PASSWORD:-},${KAFKA_CLIENT_PASSWORDS:-}"
+    cat <<"EOF"
+export KAFKA_CLIENT_USERS="${KAFKA_CLIENT_USERS:-user}"
+export KAFKA_CLIENT_PASSWORDS="${KAFKA_CLIENT_PASSWORDS:-bitnami}"
 EOF
 }
 
@@ -244,6 +253,12 @@ kafka_validate() {
         warn "The environment variables KAFKA_PORT_NUMBER and KAFKA_CFG_PORT are deprecated, you can specify the port number to use for each listener using the KAFKA_CFG_LISTENERS environment variable instead."
     fi
 
+    read -r -a users <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_USERS}")"
+    read -r -a passwords <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_PASSWORDS}")"
+    if [[ "${#users[@]}" -ne "${#passwords[@]}" ]]; then
+        print_validation_error "Specify the same number of passwords on KAFKA_CLIENT_PASSWORDS as the number of users on KAFKA_CLIENT_USERS!"
+    fi
+
     if is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
         warn "You set the environment variable ALLOW_PLAINTEXT_LISTENER=$ALLOW_PLAINTEXT_LISTENER. For safety reasons, do not use this flag in a production environment."
     fi
@@ -253,8 +268,8 @@ kafka_validate() {
             print_validation_error "In order to configure the TLS encryption for Kafka you must mount your kafka.keystore.jks and kafka.truststore.jks certificates to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
     elif [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL ]]; then
-        if [[ -z "$KAFKA_CLIENT_PASSWORD" ]] && [[ -z "$KAFKA_INTER_BROKER_PASSWORD" ]]; then
-            print_validation_error "In order to configure SASL authentication for Kafka, you must provide the SASL credentials. Set the environment variables KAFKA_CLIENT_USER and KAFKA_CLIENT_PASSWORD, to configure the credentials for SASL authentication with clients, or set the environment variables KAFKA_INTER_BROKER_USER and KAFKA_INTER_BROKER_PASSWORD, to configure the credentials for SASL authentication between brokers."
+        if [[ -z "$KAFKA_CLIENT_PASSWORD" && -z "$KAFKA_CLIENT_PASSWORDS" ]] && [[ -z "$KAFKA_INTER_BROKER_PASSWORD" ]]; then
+            print_validation_error "In order to configure SASL authentication for Kafka, you must provide the SASL credentials. Set the environment variables KAFKA_CLIENT_USERS and KAFKA_CLIENT_PASSWORDS, to configure the credentials for SASL authentication with clients, or set the environment variables KAFKA_INTER_BROKER_USER and KAFKA_INTER_BROKER_PASSWORD, to configure the credentials for SASL authentication between brokers."
         fi
     elif ! is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
         print_validation_error "The KAFKA_CFG_LISTENERS environment variable does not configure a secure listener. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
@@ -290,12 +305,16 @@ kafka_generate_jaas_authentication_file() {
 
     if [[ ! -f "${KAFKA_CONF_DIR}/kafka_jaas.conf" ]]; then
         info "Generating JAAS authentication file"
-        if [[ "${client_protocol:-}" =~ SASL ]]; then
+
+        read -r -a users <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_USERS:-}")"
+        read -r -a passwords <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_PASSWORDS:-}")"
+
+        if [[ "${client_protocol:-}" =~ SASL ]] && [[ "${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-}" =~ PLAIN ]]; then
             cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaClient {
    org.apache.kafka.common.security.plain.PlainLoginModule required
-   username="${KAFKA_CLIENT_USER:-}"
-   password="${KAFKA_CLIENT_PASSWORD:-}";
+   username="${users[0]:-}"
+   password="${passwords[0]:-}";
    };
 EOF
         fi
@@ -306,7 +325,21 @@ KafkaServer {
    username="${KAFKA_INTER_BROKER_USER:-}"
    password="${KAFKA_INTER_BROKER_PASSWORD:-}"
    user_${KAFKA_INTER_BROKER_USER:-}="${KAFKA_INTER_BROKER_PASSWORD:-}"
-   user_${KAFKA_CLIENT_USER:-}="${KAFKA_CLIENT_PASSWORD:-}";
+EOF
+        if [[ "${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-}" =~ PLAIN ]]; then
+            for (( i=0; i<${#users[@]}; i++ )); do
+                if [[ "$i" -eq "(( ${#users[@]} - 1 ))" ]]; then
+                    cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+   user_${users[i]:-}="${passwords[i]:-}";
+EOF
+                else
+                    cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+   user_${users[i]:-}="${passwords[i]:-}"
+EOF
+                fi
+            done
+        fi
+        cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    org.apache.kafka.common.security.scram.ScramLoginModule required;
    };
 EOF
@@ -314,7 +347,21 @@ EOF
             cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaServer {
    org.apache.kafka.common.security.plain.PlainLoginModule required
-   user_${KAFKA_CLIENT_USER:-}="${KAFKA_CLIENT_PASSWORD:-}";
+EOF
+        if [[ "${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-}" =~ PLAIN ]]; then
+            for (( i=0; i<${#users[@]}; i++ )); do
+                if [[ "$i" -eq "(( ${#users[@]} - 1 ))" ]]; then
+                    cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+   user_${users[i]:-}="${passwords[i]:-}";
+EOF
+                else
+                    cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+   user_${users[i]:-}="${passwords[i]:-}"
+EOF
+                fi
+            done
+        fi
+        cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    org.apache.kafka.common.security.scram.ScramLoginModule required;
    };
 EOF
@@ -340,8 +387,29 @@ EOF
         fi
     else
         info "Custom JAAS authentication file detected. Skipping generation."
-        warn "The following environment variables will be ignored: KAFKA_CLIENT_USER, KAFKA_CLIENT_PASSWORD, KAFKA_INTER_BROKER_USER, KAFKA_INTER_BROKER_PASSWORD, KAFKA_ZOOKEEPER_USER and KAFKA_ZOOKEEPER_PASSWORD"
+        warn "The following environment variables will be ignored: KAFKA_CLIENT_USERS, KAFKA_CLIENT_PASSWORDS, KAFKA_INTER_BROKER_USER, KAFKA_INTER_BROKER_PASSWORD, KAFKA_ZOOKEEPER_USER and KAFKA_ZOOKEEPER_PASSWORD"
     fi
+}
+
+########################
+# Create users in zookeper when using SASL_SCRAM
+# Globals:
+#   KAFKA_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kafka_create_sasl_scram_zookeeper_users() {
+    export KAFKA_OPTS="-Djava.security.auth.login.config=${KAFKA_CONF_DIR}/kafka_jaas.conf"
+    info "Creating users in Zookeeper"
+    read -r -a users <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_USERS}")"
+    read -r -a passwords <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_PASSWORDS}")"
+    for (( i=0; i<${#users[@]}; i++ )); do
+        echo "Creating user ${users[i]} in zookeeper"
+        # Ref: https://docs.confluent.io/current/kafka/authentication_sasl/authentication_sasl_scram.html#sasl-scram-overview
+        kafka-configs.sh --zookeeper "$KAFKA_CFG_ZOOKEEPER_CONNECT" --alter --add-config "SCRAM-SHA-256=[iterations=8192,password=${passwords[i]}],SCRAM-SHA-512=[password=${passwords[i]}]" --entity-type users --entity-name "${users[i]}"
+    done
 }
 
 ########################
@@ -389,10 +457,14 @@ kafka_configure_internal_communications() {
             warn "Inter-broker communications are configured as PLAINTEXT. This is not safe for production environments."
         fi
         if [[ "$protocol" = "SASL_PLAINTEXT" ]] || [[ "$protocol" = "SASL_SSL" ]]; then
-            # The below lines would need to be updated to support other SASL implementations (i.e. GSSAPI)
             # IMPORTANT: Do not confuse SASL/PLAIN with PLAINTEXT
             # For more information, see: https://docs.confluent.io/current/kafka/authentication_sasl/authentication_sasl_plain.html#sasl-plain-overview)
-            kafka_server_conf_set sasl.mechanism.inter.broker.protocol PLAIN
+            if [[ -n "$KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL" ]]; then
+                kafka_server_conf_set sasl.mechanism.inter.broker.protocol "$KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL"
+            else
+                error "When using SASL for inter broker comunication the mechanism should be provided at KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL"
+                exit 1
+              fi
         fi
         if [[ "$protocol" = "SASL_SSL" ]] || [[ "$protocol" = "SSL" ]]; then
             kafka_configure_ssl
@@ -429,7 +501,7 @@ kafka_configure_client_communications() {
             # The below lines would need to be updated to support other SASL implementations (i.e. GSSAPI)
             # IMPORTANT: Do not confuse SASL/PLAIN with PLAINTEXT
             # For more information, see: https://docs.confluent.io/current/kafka/authentication_sasl/authentication_sasl_plain.html#sasl-plain-overview)
-            kafka_server_conf_set sasl.mechanism.inter.broker.protocol PLAIN
+            kafka_server_conf_set sasl.mechanism.inter.broker.protocol "$KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL"
         fi
         if [[ "$protocol" = "SASL_SSL" ]] || [[ "$protocol" = "SSL" ]]; then
             kafka_configure_ssl
@@ -524,9 +596,15 @@ kafka_initialize() {
                 kafka_configure_client_communications "$client_protocol"
             fi
         fi
-        if [[ "${internal_protocol:-}" =~ SASL ]] || [[ "${client_protocol:-}" =~ SASL ]] || [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SASL ]]; then
-            kafka_server_conf_set sasl.enabled.mechanisms PLAIN,SCRAM-SHA-256,SCRAM-SHA-512
-            kafka_generate_jaas_authentication_file "${internal_protocol:-}" "${client_protocol:-}"
+
+        if [[ "${internal_protocol:-}" =~ "SASL" || "${client_protocol:-}" =~ "SASL" ]]  || [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SASL ]]; then
+            if [[ -n "$KAFKA_CFG_SASL_ENABLED_MECHANISMS" ]]; then
+                kafka_server_conf_set sasl.enabled.mechanisms "$KAFKA_CFG_SASL_ENABLED_MECHANISMS"
+                kafka_generate_jaas_authentication_file "${internal_protocol:-}" "${client_protocol:-}"
+                [[ "$KAFKA_CFG_SASL_ENABLED_MECHANISMS" =~ "SCRAM" ]] && kafka_create_sasl_scram_zookeeper_users
+            else
+                print_validation_error "Specified SASL protocol but no SASL mechanisms provided in KAFKA_CFG_SASL_ENABLED_MECHANISMS"
+            fi
         fi
         # Remove security.inter.broker.protocol if KAFKA_CFG_INTER_BROKER_LISTENER_NAME is configured
         if [[ -n "${KAFKA_CFG_INTER_BROKER_LISTENER_NAME:-}" ]]; then
