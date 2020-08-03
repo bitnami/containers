@@ -186,8 +186,8 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 * `ALLOW_PLAINTEXT_LISTENER`: Allow to use the PLAINTEXT listener. Default: **no**.
 * `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Default: admin. Default: **user**.
 * `KAFKA_INTER_BROKER_PASSWORD`: Kafka inter broker communication password. Default: **bitnami**.
-* `KAFKA_CLIENT_USER`: Kafka client user. Default: **user**.
-* `KAFKA_CLIENT_PASSWORD`: Kafka client user password. Default: **bitnami**.
+* `KAFKA_CLIENT_USER`: Kafka client user. Deprecated in favor of `KAFKA_CLIENT_USERS`.
+* `KAFKA_CLIENT_PASSWORD`: Kafka client user password. Deprecated in favor of `KAFKA_CLIENT_PASSWORDS`.
 * `KAFKA_CERTIFICATE_PASSWORD`: Password for certificates. No defaults.
 * `KAFKA_HEAP_OPTS`: Kafka's Java Heap size. Default: **-Xmx1024m -Xms1024m**.
 * `KAFKA_ZOOKEEPER_PROTOCOL`: Authentication protocol for Zookeeper connections. Allowed protocols: **PLAINTEXT**, **SASL**, **SSL**, and **SASL_SSL**. Defaults: **PLAINTEXT**.
@@ -196,6 +196,9 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 * `KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD`: Kafka Zookeeper keystore file password and key password. No defaults.
 * `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD`: Kafka Zookeeper truststore file password. No defaults.
 * `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`: Verify Zookeeper hostname on TLS certificates. Defaults: **true**.
+* `KAFKA_CFG_SASL_ENABLED_MECHANISMS`: Allowed mechanism when using SASL either for clients, inter broker, or zookeeper comunications. Allowed values: `PLAIN`, `SCRAM-SHA-256`, `SCRAM-SHA-512` or a comma separated combination of those values. Default: **PLAIN,SCRAM-SHA-256,SCRAM-SHA-512**
+* `KAFKA_CLIENT_USERS`: Additional users to `KAFKA_CLIENT_USER` that will be created into Zookeeper when using SASL_SCRAM for client communications. Separated by commas. Default: **user**
+* `KAFKA_CLIENT_PASSWORDS`: Passwords for the users specified at`KAFKA_CLIENT_USERS`. Separated by commas. Default: **bitnami**
 
 Additionally, any environment variable beginning with `KAFKA_CFG_` will be mapped to its corresponding Kafka key. For example, use `KAFKA_CFG_BACKGROUND_THREADS` in order to set `background.threads` or `KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE` in order to configure `auto.create.topics.enable`.
 
@@ -396,8 +399,8 @@ When configuring your broker to use `SASL` or `SASL_SSL` for inter-broker commun
 
 When configuring Kafka with `SASL` or `SASL_SSL` for communications with clients, you can provide your the SASL credentials using this environment variables:
 
-* `KAFKA_CLIENT_USER`: Kafka client user. Default: **user**
-* `KAFKA_CLIENT_PASSWORD`: Kafka client user password. Default: **bitnami**
+* `KAFKA_CLIENT_USER`: Kafka client user. Deprecated in favor of `KAFKA_CLIENT_USERS`.
+* `KAFKA_CLIENT_PASSWORD`: Kafka client user password. Deprecated in favor of `KAFKA_CLIENT_PASSWORDS`.
 
 #### Kafka ZooKeeper client configuration
 There are different options of configuration to connect a Zookeeper server.
