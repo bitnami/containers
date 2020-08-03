@@ -260,7 +260,7 @@ zookeeper_generate_conf() {
     fi
 
     # If TLS in enable
-    if [[ "${ZOO_TLS_CLIENT_ENABLE}" = true ]]; then
+    if is_boolean_yes "$ZOO_TLS_CLIENT_ENABLE"; then
         zookeeper_conf_set "$ZOO_CONF_FILE" client.secure true
         zookeeper_conf_set "$ZOO_CONF_FILE" secureClientPort "$ZOO_TLS_PORT_NUMBER"
         zookeeper_conf_set "$ZOO_CONF_FILE" serverCnxnFactory org.apache.zookeeper.server.NettyServerCnxnFactory
@@ -269,13 +269,13 @@ zookeeper_generate_conf() {
         [[ -n "$ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.trustStore.password "$ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD"
         zookeeper_conf_set "$ZOO_CONF_FILE" ssl.trustStore.location "$ZOO_TLS_CLIENT_TRUSTSTORE_FILE"
     fi
-    if [[ "${ZOO_TLS_QUORUM_ENABLE}" = true ]]; then
+    if is_boolean_yes "$ZOO_TLS_QUORUM_ENABLE"; then
         zookeeper_conf_set "$ZOO_CONF_FILE" sslQuorum true
         zookeeper_conf_set "$ZOO_CONF_FILE" serverCnxnFactory org.apache.zookeeper.server.NettyServerCnxnFactory
         zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.keyStore.location "$ZOO_TLS_QUORUM_KEYSTORE_FILE"
-        zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.keyStore.password "$ZOO_TLS_QUORUM_KEYSTORE_PASSWORD"
+        [[ -n "$ZOO_TLS_QUORUM_KEYSTORE_PASSWORD" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.keyStore.password "$ZOO_TLS_QUORUM_KEYSTORE_PASSWORD"
         zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.trustStore.location "$ZOO_TLS_QUORUM_TRUSTSTORE_FILE"
-        zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.trustStore.password "$ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD"
+        [[ -n "$ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.trustStore.password "$ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD"
     fi
 }
 
@@ -448,13 +448,13 @@ zookeeper_export_jvmflags() {
 #   None
 #########################
 zookeeper_start_bg() {
-    local start_command="${ZOO_BIN_DIR}/zkServer.sh start"
+    local cmd="${ZOO_BIN_DIR}/zkServer.sh"
+    local args=("start")
     info "Starting ZooKeeper in background..."
-    am_i_root && start_command="gosu ${ZOO_DAEMON_USER} ${start_command}"
-    if [[ "$BITNAMI_DEBUG" = true ]]; then
-        $start_command
+    if am_i_root; then
+        debug_execute "gosu" "$ZOO_DAEMON_USER" "$cmd" "${args[@]}"
     else
-        $start_command >/dev/null 2>&1
+        debug_execute "$cmd" "${args[@]}"
     fi
     wait-for-port --timeout 60 "$ZOO_PORT_NUMBER"
 }
@@ -470,11 +470,7 @@ zookeeper_start_bg() {
 #########################
 zookeeper_stop() {
     info "Stopping ZooKeeper..."
-    if [[ "$BITNAMI_DEBUG" = true ]]; then
-        "${ZOO_BIN_DIR}/zkServer.sh" stop
-    else
-        "${ZOO_BIN_DIR}/zkServer.sh" stop >/dev/null 2>&1
-    fi
+    debug_execute "${ZOO_BIN_DIR}/zkServer.sh" stop
 }
 
 ########################
