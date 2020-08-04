@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 
 services:
   mariadb-master:
@@ -15,6 +15,12 @@ services:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_ROOT_PASSWORD=my_root_password
+    healthcheck:
+      test: ['CMD', '/opt/bitnami/scripts/mariadb/healthcheck.sh']
+      interval: 15s
+      timeout: 5s
+      retries: 6
+
   mariadb-slave:
     image: 'docker.io/bitnami/mariadb:10.5-debian-10'
     ports:
@@ -31,6 +37,11 @@ services:
       - MARIADB_MASTER_ROOT_PASSWORD=my_root_password
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
+    healthcheck:
+      test: ['CMD', '/opt/bitnami/scripts/mariadb/healthcheck.sh']
+      interval: 15s
+      timeout: 5s
+      retries: 6
 
 volumes:
   mariadb_master_data:
