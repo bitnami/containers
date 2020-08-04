@@ -34,10 +34,10 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7.4-prod-debian-10`, `7.4-debian-10-prod`, `7.4.8-prod-debian-10-r18`, `7.4.8-debian-10-r18-prod`, `7.4-prod`, `7.4.8-prod`, `latest-prod` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.8-prod-debian-10-r18/7.4-prod/debian-10/Dockerfile)
+* [`7.4-prod-debian-10`, `7.4-debian-10-prod`, `7.4.8-prod-debian-10-r19`, `7.4.8-debian-10-r19-prod`, `7.4-prod`, `7.4.8-prod`, `latest-prod` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.8-prod-debian-10-r19/7.4-prod/debian-10/Dockerfile)
 * [`7.4-debian-10`, `7.4.8-debian-10-r17`, `7.4`, `7.4.8`, `latest` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.8-debian-10-r17/7.4/debian-10/Dockerfile)
 * [`7.3-prod-debian-10`, `7.3-debian-10-prod`, `7.3.20-prod-debian-10-r16`, `7.3.20-debian-10-r16-prod`, `7.3-prod`, `7.3.20-prod` (7.3-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.20-prod-debian-10-r16/7.3-prod/debian-10/Dockerfile)
-* [`7.3-debian-10`, `7.3.20-debian-10-r17`, `7.3`, `7.3.20` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.20-debian-10-r17/7.3/debian-10/Dockerfile)
+* [`7.3-debian-10`, `7.3.20-debian-10-r18`, `7.3`, `7.3.20` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.20-debian-10-r18/7.3/debian-10/Dockerfile)
 * [`7.2-prod-debian-10`, `7.2-debian-10-prod`, `7.2.32-prod-debian-10-r17`, `7.2.32-debian-10-r17-prod`, `7.2-prod`, `7.2.32-prod` (7.2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.32-prod-debian-10-r17/7.2-prod/debian-10/Dockerfile)
 * [`7.2-debian-10`, `7.2.32-debian-10-r17`, `7.2`, `7.2.32` (7.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.32-debian-10-r17/7.2/debian-10/Dockerfile)
 
