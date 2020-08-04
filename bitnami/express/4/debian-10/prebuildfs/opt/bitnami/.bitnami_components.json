@@ -1,1 +1,58 @@
-{"bower": {"arch": "amd64", "digest": "587140d73a26e13c179f65e09b4cd706db000ff9beb68a57f2158aefa86ce4fa", "distro": "debian-10", "type": "NAMI", "version": "1.8.8-0"}, "express": {"arch": "amd64", "digest": "e90ac676893a1c1edaf31f5bac8b9f951ea00405a6c54613b8e3882ccbad6c3c", "distro": "debian-10", "type": "NAMI", "version": "4.17.1-0"}, "express-generator": {"arch": "amd64", "digest": "09dc5947a709a9bbeb257b17cd13bdb2ca87b08fa17baab4583bdc026badef35", "distro": "debian-10", "type": "NAMI", "version": "4.16.1-0"}, "git": {"arch": "amd64", "digest": "bda714065995df169ab17f11b3a638a106aec83b00bcbfb325b36b51f29d1704", "distro": "debian-10", "type": "NAMI", "version": "2.28.0-0"}, "gosu": {"arch": "amd64", "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c", "distro": "debian-10", "type": "NAMI", "version": "1.12.0-1"}, "node": {"arch": "amd64", "digest": "b09753b515b6d56ad90a37320837df3fb341badfcf9a94c2ab2b11625d6d3e81", "distro": "debian-10", "type": "NAMI", "version": "10.22.0-0"}, "sequelize-cli": {"arch": "amd64", "digest": "7e572fea880336f69bf7b0b34cd718ee81e7114fe61313acaba12b7a5564cddc", "distro": "debian-10", "type": "NAMI", "version": "5.5.1-0"}, "tini": {"arch": "amd64", "digest": "9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c", "distro": "debian-10", "type": "NAMI", "version": "0.19.0-0"}}
+{
+    "bower": {
+        "arch": "amd64",
+        "digest": "587140d73a26e13c179f65e09b4cd706db000ff9beb68a57f2158aefa86ce4fa",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.8.8-0"
+    },
+    "express": {
+        "arch": "amd64",
+        "digest": "e90ac676893a1c1edaf31f5bac8b9f951ea00405a6c54613b8e3882ccbad6c3c",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "4.17.1-0"
+    },
+    "express-generator": {
+        "arch": "amd64",
+        "digest": "09dc5947a709a9bbeb257b17cd13bdb2ca87b08fa17baab4583bdc026badef35",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "4.16.1-0"
+    },
+    "git": {
+        "arch": "amd64",
+        "digest": "bda714065995df169ab17f11b3a638a106aec83b00bcbfb325b36b51f29d1704",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "2.28.0-0"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.12.0-1"
+    },
+    "node": {
+        "arch": "amd64",
+        "digest": "b09753b515b6d56ad90a37320837df3fb341badfcf9a94c2ab2b11625d6d3e81",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "10.22.0-0"
+    },
+    "sequelize-cli": {
+        "arch": "amd64",
+        "digest": "7e572fea880336f69bf7b0b34cd718ee81e7114fe61313acaba12b7a5564cddc",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "5.5.1-0"
+    },
+    "tini": {
+        "arch": "amd64",
+        "digest": "9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "0.19.0-0"
+    }
+}
