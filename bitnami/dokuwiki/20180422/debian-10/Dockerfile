@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.20-1" --checksum 5fea2ffac007503364e906f5ad5444336aaaf4b360045f75f58ec220610bc8b1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.20-2" --checksum 7e09cd7b8ecf030ce4ff61302728a2985ca6aff8971465b77c074cdc9ca9e173
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.43-5" --checksum e9faded57e3703fe9fcea650eb302e673d969a399fe9dfafa67e173465637665
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.20-0" --checksum 15fa4a11f2e11377ba0d6476ce22021349f62ef2fdfbe2af4f86dca10baaa997
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-1" --checksum a94f94357aa06f3718db1550fa5f5188cd61383d66bf754eef49c58a18bf02cc
@@ -28,7 +28,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="dokuwiki" \
-    BITNAMI_IMAGE_VERSION="20180422.4.0-debian-10-r15" \
+    BITNAMI_IMAGE_VERSION="20180422.4.0-debian-10-r16" \
     DOKUWIKI_EMAIL="user@example.com" \
     DOKUWIKI_FULL_NAME="Full Name" \
     DOKUWIKI_PASSWORD="bitnami1" \
