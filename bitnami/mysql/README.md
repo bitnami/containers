@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8.0-debian-10`, `8.0.21-debian-10-r15`, `8.0`, `8.0.21`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.21-debian-10-r15/8.0/debian-10/Dockerfile)
-* [`5.7-debian-10`, `5.7.31-debian-10-r15`, `5.7`, `5.7.31` (5.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.31-debian-10-r15/5.7/debian-10/Dockerfile)
+* [`5.7-debian-10`, `5.7.31-debian-10-r16`, `5.7`, `5.7.31` (5.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.31-debian-10-r16/5.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
 
@@ -284,18 +284,6 @@ services:
 
 **Note!** The `root` user will be created with remote access and without a password if `ALLOW_EMPTY_PASSWORD` is enabled. Please provide the `MYSQL_ROOT_PASSWORD` env variable instead if you want to set a password for the `root` user.
 
-## Ensuring the database is ready before connecting
-
-You should define a [health check](https://docs.docker.com/compose/compose-file/#healthcheck) via docker-compose.yml to ensure that MySQL has been fully initialized and is ready to accept connections before using the container. For example, if you have created a database and user as instructed above:
-
-```yaml
-services:
-  mysql:
-  ...
-    healthcheck:
-      test: bash -c "[ -f /bitnami/mysql/.mysql_initialized ]" && mysql -uMYSQL_USER -pMYSQL_PASSWORD MYSQL_DATABASE --silent --execute "SHOW TABLES;"
-  ...
-```
 ## Setting up a replication cluster
 
 A **zero downtime** MySQL master-slave [replication](https://dev.mysql.com/doc/refman/5.7/en/server-option-variable-reference.html) cluster can easily be setup with the Bitnami MySQL Docker image using the following environment variables:
