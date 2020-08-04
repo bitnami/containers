@@ -964,3 +964,24 @@ find_jemalloc_lib() {
     done
     echo "${path:-}"
 }
+
+########################
+# Execute a reliable health check against the current mysql instance
+# Globals:
+#   DB_ROOT_PASSWORD, DB_MASTER_ROOT_PASSWORD
+# Arguments:
+#   None
+# Returns:
+#   mysqladmin output
+#########################
+mysql_healthcheck() {
+    local args=("-uroot" "-h0.0.0.0")
+    local root_password
+
+    root_password="$(get_master_env_var_value ROOT_PASSWORD)"
+    if [[ -n "$root_password" ]]; then
+        args+=("-p${root_password}")
+    fi
+
+    mysqladmin "${args[@]}" ping && mysqladmin "${args[@]}" status
+}
