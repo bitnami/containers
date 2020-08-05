@@ -33,7 +33,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`20180422-debian-10`, `20180422.4.0-debian-10-r16`, `20180422`, `20180422.4.0`, `latest` (20180422/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/20180422.4.0-debian-10-r16/20180422/debian-10/Dockerfile)
+* [`20200729-debian-10`, `20200729.0.0-debian-10-r0`, `20200729`, `20200729.0.0`, `latest` (20200729/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/20200729.0.0-debian-10-r0/20200729/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dokuwiki GitHub repo](https://github.com/bitnami/bitnami-docker-dokuwiki).
 
@@ -54,7 +54,7 @@ $ docker pull bitnami/dokuwiki:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/dokuwiki:latest 'https://github.com/bitnami/bitnami-docker-dokuwiki.git#master:20180422/debian-10'
+$ docker build -t bitnami/dokuwiki:latest 'https://github.com/bitnami/bitnami-docker-dokuwiki.git#master:20200729/debian-10'
 ```
 
 ## Persisting your application
