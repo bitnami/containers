@@ -16,7 +16,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/mysql/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/mysql/run.sh" ]]; then
     info "** Starting MySQL setup **"
     /opt/bitnami/scripts/mysql/setup.sh
     info "** MySQL setup finished! **"
