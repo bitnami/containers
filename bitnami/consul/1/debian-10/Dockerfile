@@ -8,7 +8,7 @@ ENV HOME="/" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl gzip procps tar
+RUN install_packages acl ca-certificates curl gzip procps tar iproute2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-1" --checksum a94f94357aa06f3718db1550fa5f5188cd61383d66bf754eef49c58a18bf02cc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "consul" "1.8.1-0" --checksum 51b126db19e325d4e2db6aa2ac5624622733d00ff22235f1bb1dae79e279c729
