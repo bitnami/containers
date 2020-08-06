@@ -25,10 +25,10 @@
 mysql_extra_flags() {
     local randNumber
     local -a dbExtraFlags=()
-    randNumber=$(head /dev/urandom | tr -dc 0-9 | head -c 3 ; echo '')
     read -r -a userExtraFlags <<< "$DB_EXTRA_FLAGS"
 
     if [[ -n "$DB_REPLICATION_MODE" ]]; then
+        randNumber="$(head /dev/urandom | tr -dc 0-9 | head -c 3 ; echo '')"
         dbExtraFlags+=("--server-id=$randNumber" "--binlog-format=ROW" "--log-bin=mysql-bin" "--sync-binlog=1")
         if [[ "$DB_REPLICATION_MODE" = "slave" ]]; then
             dbExtraFlags+=("--relay-log=mysql-relay-bin" "--log-slave-updates=1" "--read-only=1")
@@ -1202,4 +1202,25 @@ find_jemalloc_lib() {
         [[ -n "$path" ]] && break
     done
     echo "${path:-}"
+}
+
+########################
+# Execute a reliable health check against the current mysql instance
+# Globals:
+#   DB_ROOT_PASSWORD, DB_MASTER_ROOT_PASSWORD
+# Arguments:
+#   None
+# Returns:
+#   mysqladmin output
+#########################
+mysql_healthcheck() {
+    local args=("-uroot" "-h0.0.0.0")
+    local root_password
+
+    root_password="$(get_master_env_var_value ROOT_PASSWORD)"
+    if [[ -n "$root_password" ]]; then
+        args+=("-p${root_password}")
+    fi
+
+    mysqladmin "${args[@]}" ping && mysqladmin "${args[@]}" status
 }
