@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 
 services:
   mariadb-galera:
@@ -13,6 +13,11 @@ services:
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
+    healthcheck:
+      test: ['CMD', '/opt/bitnami/scripts/mariadb-galera/healthcheck.sh']
+      interval: 15s
+      timeout: 5s
+      retries: 6
 
 volumes:
   mariadb_galera_data:
