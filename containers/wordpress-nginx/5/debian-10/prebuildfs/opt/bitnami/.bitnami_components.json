@@ -15,10 +15,10 @@
     },
     "nginx": {
         "arch": "amd64",
-        "digest": "869382c601b230b458216860bb0ef6ec791f578ff0b0f53b2ab6269341b844a9",
+        "digest": "d4eb4cd1dfdd97d01c5fdaa72032da4795f0b7977198a86d4c2a77999c797a94",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.18.0-2"
+        "version": "1.18.0-3"
     },
     "php": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "wordpress": {
         "arch": "amd64",
-        "digest": "718b2296e0e20d1f6601f0a2a20ec3db918ac9c694e9185878f247d212fa806e",
+        "digest": "e7c9801774474a828919eb66926395d71dd2843cdfc19d8b9485c36828f0fd82",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.4.2-13"
+        "version": "5.4.2-14"
     },
     "wp-cli": {
         "arch": "amd64",
