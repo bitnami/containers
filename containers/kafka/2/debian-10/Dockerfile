@@ -11,7 +11,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.8-0" --checksum 268e7ba913422e7acd282b94615b127eeb56e3c4bb7e3c9c6d952c391e6ead4d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-1" --checksum a94f94357aa06f3718db1550fa5f5188cd61383d66bf754eef49c58a18bf02cc
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kafka" "2.5.0-0" --checksum 03e14813c4fb133701626bd00c91ec8cae3c4e7ce0f3007c0ca981ce83d65dcf
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kafka" "2.6.0-0" --checksum 9aa9c4f33b7d9660e00b600f64e1150da33de1623feeaa60a731fabdb6adb1eb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -22,7 +22,7 @@ RUN ln -s /opt/bitnami/scripts/kafka/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/kafka/postunpack.sh
 ENV BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="2.5.0-debian-10-r112" \
+    BITNAMI_IMAGE_VERSION="2.6.0-debian-10-r0" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/kafka/bin:$PATH"
 
 EXPOSE 9092
