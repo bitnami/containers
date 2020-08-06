@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.18.0-2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.23-1" --checksum efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-1" --checksum a94f94357aa06f3718db1550fa5f5188cd61383d66bf754eef49c58a18bf02cc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "9.0.2-3" --checksum 0415b4dc052733a13894929ca3b3de035351d8c1ecd1b1aa42557632b393e656
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "9.0.3-0" --checksum 1603aae8e93e3d4d0f0dbe58294f0197af93c8e097ea51223190ba0a42af1fe3
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -27,7 +27,7 @@ RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="9.0.2-debian-10-r21" \
+    BITNAMI_IMAGE_VERSION="9.0.3-debian-10-r0" \
     DRUPAL_DATABASE_NAME="" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="" \
