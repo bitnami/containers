@@ -16,7 +16,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/mariadb/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/mariadb/run.sh" ]]; then
     info "** Starting MariaDB setup **"
     /opt/bitnami/scripts/mariadb/setup.sh
     info "** MariaDB setup finished! **"
