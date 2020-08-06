@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 
 services:
   mariadb-galera:
@@ -20,6 +20,12 @@ services:
       - LDAP_BASE=dc=example,dc=org
       - LDAP_BIND_DN=cn=admin,dc=example,dc=org
       - LDAP_BIND_PASSWORD=adminpassword
+    healthcheck:
+      test: ['CMD', '/opt/bitnami/scripts/mariadb-galera/healthcheck.sh']
+      interval: 15s
+      timeout: 5s
+      retries: 6
+
   openldap:
     image: 'docker.io/bitnami/openldap:latest'
     ports:
