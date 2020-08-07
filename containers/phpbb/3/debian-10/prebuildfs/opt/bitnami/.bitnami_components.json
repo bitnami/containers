@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "e9faded57e3703fe9fcea650eb302e673d969a399fe9dfafa67e173465637665",
+        "digest": "93181ed22488a04139fe2ab6d9ca1a81b142392e8c86675b1653a1f28c068fa9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.43-5"
+        "version": "2.4.46-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -15,10 +15,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "8f0fb79a4d1e72cad512b303395aa0c882eed66616553d76ba27c17749d225c0",
+        "digest": "09a0ed4c6a4e968696c6a37343808bdfd52c7c1dfd5d986d9a248205c0e71eb8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.2.32-0"
+        "version": "7.2.33-2"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -29,17 +29,17 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "3c41342c35718d3eb57920fd2f304ef815b70fd2f002c64186570f5a36659140",
+        "digest": "ddcd2ac2ca329fc41a98e41bdbb6e4b682fcdfa6fa5fc6f6dee91b3ef5e14025",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.2.32-2"
+        "version": "7.2.33-1"
     },
     "phpbb": {
         "arch": "amd64",
-        "digest": "b8bd4b4c2c3f5d95a703766ab32bf93b8638ee58e2d6f54f52bdcb20d94d727f",
+        "digest": "c872991ab6a8ecb114166cef23f8f07e0bfb0f64a9b293c7df2323f57d92f4ad",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.3.0-2"
+        "version": "3.3.1-0"
     },
     "tini": {
         "arch": "amd64",
