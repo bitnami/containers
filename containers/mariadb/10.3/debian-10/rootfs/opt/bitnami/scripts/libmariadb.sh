@@ -25,10 +25,10 @@
 mysql_extra_flags() {
     local randNumber
     local -a dbExtraFlags=()
-    randNumber=$(head /dev/urandom | tr -dc 0-9 | head -c 3 ; echo '')
     read -r -a userExtraFlags <<< "$DB_EXTRA_FLAGS"
 
     if [[ -n "$DB_REPLICATION_MODE" ]]; then
+        randNumber="$(head /dev/urandom | tr -dc 0-9 | head -c 3 ; echo '')"
         dbExtraFlags+=("--server-id=$randNumber" "--binlog-format=ROW" "--log-bin=mysql-bin" "--sync-binlog=1")
         if [[ "$DB_REPLICATION_MODE" = "slave" ]]; then
             dbExtraFlags+=("--relay-log=mysql-relay-bin" "--log-slave-updates=1" "--read-only=1")
