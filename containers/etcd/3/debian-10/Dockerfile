@@ -21,7 +21,7 @@ COPY rootfs /
 RUN mkdir -m 700 -p /bitnami/etcd/data/ && chown -R 1001 /bitnami/etcd/data/
 RUN chmod g+rwX /opt/bitnami/etcd
 ENV BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.4.10-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="3.4.10-debian-10-r11" \
     ETCDCTL_API="3" \
     ETCD_ADVERTISE_CLIENT_URLS="http://127.0.0.1:2379" \
     ETCD_DATA_DIR="/bitnami/etcd/data/" \
