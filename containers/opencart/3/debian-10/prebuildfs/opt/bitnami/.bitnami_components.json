@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "e9faded57e3703fe9fcea650eb302e673d969a399fe9dfafa67e173465637665",
+        "digest": "93181ed22488a04139fe2ab6d9ca1a81b142392e8c86675b1653a1f28c068fa9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.43-5"
+        "version": "2.4.46-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -15,10 +15,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "5e40a5626ba1ba9f66e40c33e90f74e78aa81b88cff19235d057ed08bb3eb36b",
+        "digest": "98c4ffbfbdff56d49b9bf09b47fe5049d03a667462fd5a2b45ac658f24e40770",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.21-1"
+        "version": "7.3.21-2"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "a0875545344e06d5192dbc5104daafe28e3017d1f066b93c881ef261130f9912",
+        "digest": "5f57dba3daa746eb45ac3ccb619380d111d0351baef47b726717634d6340f7e2",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.21-1"
+        "version": "7.3.21-2"
     },
     "tini": {
         "arch": "amd64",
