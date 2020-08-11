@@ -51,6 +51,9 @@ kong_conf_set() {
 kong_configure_non_empty_values() {
     # Uncomment all non-empty keys in the main Kong configuration file
     sed -ri 's/^#+([a-z_ ]+)=(\s*[^# ]+)/\1=\2 /' "$KONG_CONF_FILE"
+
+    # Comment read-only postgres connection parameters again, as default values fail to work properly
+    sed -ri 's/(^pg_ro_.+)=(\s*[^# ]+)/#\1=\2 /' "$KONG_CONF_FILE"
 }
 
 # Load Kong environment variables
