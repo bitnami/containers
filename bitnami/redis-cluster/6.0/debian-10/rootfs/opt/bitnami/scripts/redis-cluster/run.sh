@@ -27,6 +27,8 @@ if ! is_boolean_yes "$REDIS_CLUSTER_CREATOR"; then
         ARGS+=("--protected-mode" "no")
     fi
 
+    ARGS+=("$@")
+
     if am_i_root; then
         exec gosu "$REDIS_DAEMON_USER" redis-server "${ARGS[@]}"
     else
