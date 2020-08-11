@@ -8,11 +8,13 @@
 
 # TL;DR
 
+This container is part of the [Harbor solution](https://github.com/bitnami/charts/tree/master/bitnami/harbor) that is primarily intended to be deployed in Kubernetes. You can deploy Harbor solution and then enable this specific container with the command below:
+
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-harbor-notary-server/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-harbor-portal/master/docker-compose.yml
+$ curl -L https://github.com/bitnami/bitnami-docker-harbor-portal/archive/master.tar.gz | tar xz --strip=1 --wildcards '*-master/config'
 $ docker-compose up
 ```
-
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -38,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.0.2-debian-10-r1`, `2`, `2.0.2`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-notary-server/blob/2.0.2-debian-10-r1/2/debian-10/Dockerfile)
+* [`2-debian-10`, `2.0.2-debian-10-r2`, `2`, `2.0.2`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-notary-server/blob/2.0.2-debian-10-r2/2/debian-10/Dockerfile)
 
 # Configuration
 
