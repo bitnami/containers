@@ -12,17 +12,17 @@ RUN install_packages ca-certificates curl ghostscript gzip imagemagick libaudit1
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install node-10.22.0-0 --checksum b09753b515b6d56ad90a37320837df3fb341badfcf9a94c2ab2b11625d6d3e81
-RUN bitnami-pkg unpack mysql-client-10.3.23-1 --checksum efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1
+RUN bitnami-pkg unpack mysql-client-10.3.24-0 --checksum 94a7e3c58310f59af5c1e14544de0a42bd1ecf394a159db94aacf8ccf6058436
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg install gosu-1.12.0-1 --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
-RUN bitnami-pkg unpack ghost-3.28.0-0 --checksum f6038c9e162b9e0a7ddb84d85912337196136aeff40b5ae1a321991a30e056ed
+RUN bitnami-pkg unpack ghost-3.29.0-0 --checksum 8685f94feba80d3ca7f48cda245090fcc8aa344ec67083dd1305fc6a42beca21
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="3.28.0-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="3.29.0-debian-10-r0" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
