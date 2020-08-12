@@ -18,7 +18,7 @@ set -o pipefail
 error_code=0
 
 if is_apache_running; then
-    apache_stop
+    BITNAMI_QUIET=1 apache_stop
     if ! retry_while "is_apache_not_running"; then
         error "apache could not be stopped"
         error_code=1
