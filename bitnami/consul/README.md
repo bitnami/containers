@@ -51,7 +51,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.8.2-debian-10-r0`, `1`, `1.8.2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.8.2-debian-10-r0/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.8.2-debian-10-r1`, `1`, `1.8.2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-consul/blob/1.8.2-debian-10-r1/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/consul GitHub repo](https://github.com/bitnami/bitnami-docker-consul).
 
@@ -191,7 +191,7 @@ services:
 
 #### Step 2: Add extra nodes to your configuration
 
-Update the definitions for nodes you want your HashiCorp Consul node cluster with.
+Update the definitions for nodes you want your HashiCorp Consul node cluster with. If it is a remote WAN node, use `CONSUL_RETRY_JOIN_WAN_ADDRESS`.
 
 ```yaml
 consul-node2:
@@ -307,6 +307,7 @@ When you start the HashiCorp Consul image, you can adjust the configuration of t
 - `CONSUL_DOMAIN`: HashiCorp Consul domain name. Default: **consul**.
 - `CONSUL_DATACENTER"`: The datacenter in which the agent is running. Default: **dc1**.
 - `CONSUL_RETRY_JOIN_ADDRESS`: "Address of another agent to join upon starting up. Default: **127.0.0.1**
+- `CONSUL_RETRY_JOIN_WAN_ADDRESS`: "Address of another WAN agent to join upon starting up. Default: **127.0.0.1**
 - `CONSUL_BIND_INTERFACE`: "The interface that will be bound to for internal cluster communications.
 
 ### Specifying Environment Variables using Docker Compose

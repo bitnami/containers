@@ -13,6 +13,7 @@
         "http": "{{CONSUL_CLIENT_LAN_ADDRESS}}"
     },
     "retry_join": ["{{CONSUL_RETRY_JOIN_ADDRESS}}"],
+    "retry_join_wan": ["{{CONSUL_RETRY_JOIN_WAN_ADDRESS}}"],
     "ports": {
         "http": {{CONSUL_HTTP_PORT_NUMBER}},
         "dns": {{CONSUL_DNS_PORT_NUMBER}},
