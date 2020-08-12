@@ -18,15 +18,15 @@ set -o pipefail
 error_code=0
 
 if is_nginx_running; then
-    nginx_stop
+    BITNAMI_QUIET=1 nginx_stop
     if ! retry_while "is_nginx_not_running"; then
-        error "${MODULE} could not be stopped"
+        error "nginx could not be stopped"
         error_code=1
     else
-        info "${MODULE} stopped"
+        info "nginx stopped"
     fi
 else
-    info "${MODULE} is not running"
+    info "nginx is not running"
 fi
 
 exit "${error_code}"
