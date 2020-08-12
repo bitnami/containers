@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# shellcheck disable=SC1091
+
 . /opt/bitnami/base/functions
 . /opt/bitnami/base/helpers
 
@@ -7,6 +9,13 @@ USER=airflow
 DAEMON=airflow
 EXEC=$(which $DAEMON)
 START_COMMAND="${EXEC} worker ${AIRFLOW_QUEUE:+-q $AIRFLOW_QUEUE} | tee /opt/bitnami/airflow/logs/airflow-worker.log"
+
+# Install custom python package if requirements.txt is present
+if [[ -f "/bitnami/python/requirements.txt" ]]; then
+    source /opt/bitnami/airflow/venv/bin/activate
+    pip install -r /bitnami/python/requirements.txt
+    deactivate
+fi
 
 echo "Waiting for db..."
 counter=0;
