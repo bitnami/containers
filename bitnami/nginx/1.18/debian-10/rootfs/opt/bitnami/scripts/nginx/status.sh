@@ -15,7 +15,7 @@ set -o pipefail
 . /opt/bitnami/scripts/nginx-env.sh
 
 if is_nginx_running; then
-    info "${MODULE} is already running"
+    info "nginx is already running"
 else
-    info "${MODULE} is not running"
+    info "nginx is not running"
 fi
