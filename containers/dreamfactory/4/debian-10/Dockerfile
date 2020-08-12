@@ -12,7 +12,7 @@ RUN bitnami-pkg unpack php-7.3.21-2 --checksum 5f57dba3daa746eb45ac3ccb619380d11
 RUN bitnami-pkg unpack apache-2.4.46-0 --checksum 93181ed22488a04139fe2ab6d9ca1a81b142392e8c86675b1653a1f28c068fa9
 RUN bitnami-pkg install redis-client-6.0.6-0 --checksum ca1821754847cd7c88d21ebb21dd37182ee27016ceae2883f0a0ba2ea6bd7620
 RUN bitnami-pkg install postgresql-client-11.8.0-3 --checksum 884f83caf091522e2ea8d03d69e5dcec5d7a309a6e3f9f434d9ee5acc14f4ce0
-RUN bitnami-pkg install mysql-client-10.3.23-1 --checksum efab843077267af6a8cde53440a1fef0acf8cb67ab1dcd0b6da2e9cbe050c7e1
+RUN bitnami-pkg install mysql-client-10.3.24-0 --checksum 94a7e3c58310f59af5c1e14544de0a42bd1ecf394a159db94aacf8ccf6058436
 RUN bitnami-pkg install mongodb-client-4.2.8-0 --checksum ffc5223c428214307734782b8c9c10811d6d04f42ea9d3b46f02ceb6920f8baa
 RUN bitnami-pkg install libphp-7.3.21-2 --checksum 98c4ffbfbdff56d49b9bf09b47fe5049d03a667462fd5a2b45ac658f24e40770
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
@@ -28,7 +28,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="4.3.1-debian-10-r28" \
+    BITNAMI_IMAGE_VERSION="4.3.1-debian-10-r29" \
     DREAMFACTORY_DATABASE_TYPE="mariadb" \
     DREAMFACTORY_ENABLE_MARIADB_SERVICE="no" \
     DREAMFACTORY_ENABLE_MONGODB_SERVICE="yes" \
