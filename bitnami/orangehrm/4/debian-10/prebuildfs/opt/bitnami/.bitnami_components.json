@@ -22,10 +22,10 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "ae72f4ce3376ede89b971c1ffa11717b8d770f8d26ac3d7ba04b11568ff24c37",
+        "digest": "afd9779f174073bd1622816ec55e560abddf7effb5452d9f8168963b0fe9c39f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.2.32-0"
+        "version": "10.2.33-0"
     },
     "orangehrm": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "ddcd2ac2ca329fc41a98e41bdbb6e4b682fcdfa6fa5fc6f6dee91b3ef5e14025",
+        "digest": "404546fe3bb206de0409cf636ac406bf35c51d5d0762e099ae4dcceee81a428f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.2.33-1"
+        "version": "7.2.33-2"
     },
     "tini": {
         "arch": "amd64",

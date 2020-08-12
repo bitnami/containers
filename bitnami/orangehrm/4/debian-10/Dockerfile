@@ -8,9 +8,9 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl gzip libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 procps sudo tar zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
-RUN bitnami-pkg unpack php-7.2.33-1 --checksum ddcd2ac2ca329fc41a98e41bdbb6e4b682fcdfa6fa5fc6f6dee91b3ef5e14025
+RUN bitnami-pkg unpack php-7.2.33-2 --checksum 404546fe3bb206de0409cf636ac406bf35c51d5d0762e099ae4dcceee81a428f
 RUN bitnami-pkg unpack apache-2.4.46-0 --checksum 93181ed22488a04139fe2ab6d9ca1a81b142392e8c86675b1653a1f28c068fa9
-RUN bitnami-pkg unpack mysql-client-10.2.32-0 --checksum ae72f4ce3376ede89b971c1ffa11717b8d770f8d26ac3d7ba04b11568ff24c37
+RUN bitnami-pkg unpack mysql-client-10.2.33-0 --checksum afd9779f174073bd1622816ec55e560abddf7effb5452d9f8168963b0fe9c39f
 RUN bitnami-pkg install libphp-7.2.33-2 --checksum 09a0ed4c6a4e968696c6a37343808bdfd52c7c1dfd5d986d9a248205c0e71eb8
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg unpack orangehrm-4.4.0-0-0 --checksum c3309c93be3656681a606b4e56f79d67267b78e37b5b28418a77fae354f9aa56
@@ -26,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.4.0-0-debian-10-r73" \
+    BITNAMI_IMAGE_VERSION="4.4.0-0-debian-10-r74" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
