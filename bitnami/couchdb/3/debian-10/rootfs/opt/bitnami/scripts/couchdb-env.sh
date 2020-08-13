@@ -26,7 +26,6 @@ couchdb_env_vars=(
     COUCHDB_USER
     COUCHDB_PASSWORD
     COUCHDB_SECRET
-
 )
 for env_var in "${couchdb_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
