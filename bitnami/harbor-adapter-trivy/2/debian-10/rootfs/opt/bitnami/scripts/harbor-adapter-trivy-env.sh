@@ -21,7 +21,6 @@ harbor_adapter_trivy_env_vars=(
     SCANNER_TRIVY_VOLUME_DIR
     SCANNER_TRIVY_CACHE_DIR
     SCANNER_TRIVY_REPORTS_DIR
-
 )
 for env_var in "${harbor_adapter_trivy_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
