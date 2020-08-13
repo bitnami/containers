@@ -24,7 +24,6 @@ spring_cloud_skipper_env_vars=(
     SPRING_CLOUD_KUBERNETES_CONFIG_NAME
     SPRING_CLOUD_KUBERNETES_SECRETS_PATHS
     JAVA_OPTS
-
 )
 for env_var in "${spring_cloud_skipper_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
