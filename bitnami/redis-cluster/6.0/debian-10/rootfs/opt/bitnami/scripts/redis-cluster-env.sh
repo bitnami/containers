@@ -43,7 +43,7 @@ redis_cluster_env_vars=(
     REDIS_CLUSTER_ANNOUNCE_IP
     REDIS_DNS_RETRIES
     REDIS_NODES
-
+    REDIS_TLS_PORT
 )
 for env_var in "${redis_cluster_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -88,8 +88,7 @@ export REDIS_MASTER_PASSWORD="${REDIS_MASTER_PASSWORD:-}"
 
 # TLS settings
 export REDIS_TLS_ENABLED="${REDIS_TLS_ENABLED:-no}"
-
-export REDIS_TLS_PORT_NUMBER="${REDIS_TLS_PORT_NUMBER:-"${REDIS_TLS_PORT:-}"}"
+REDIS_TLS_PORT_NUMBER="${REDIS_TLS_PORT_NUMBER:-"${REDIS_TLS_PORT:-}"}"
 export REDIS_TLS_PORT_NUMBER="${REDIS_TLS_PORT_NUMBER:-6379}"
 export REDIS_TLS_CERT_FILE="${REDIS_TLS_CERT_FILE:-}"
 export REDIS_TLS_KEY_FILE="${REDIS_TLS_KEY_FILE:-}"
