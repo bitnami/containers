@@ -39,7 +39,6 @@ mariadb_env_vars=(
     MARIADB_COLLATE
     MARIADB_BIND_ADDRESS
     MARIADB_SQL_MODE
-
 )
 for env_var in "${mariadb_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
