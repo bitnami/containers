@@ -25,7 +25,6 @@ dokuwiki_env_vars=(
     DOKUWIKI_EMAIL
     DOKUWIKI_PASSWORD
     DOKUWIKI_WIKI_NAME
-
 )
 for env_var in "${dokuwiki_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
