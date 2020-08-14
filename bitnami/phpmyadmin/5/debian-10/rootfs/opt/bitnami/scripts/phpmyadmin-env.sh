@@ -30,7 +30,6 @@ phpmyadmin_env_vars=(
     DATABASE_SSL_CA_PATH
     DATABASE_SSL_CIPHERS
     DATABASE_SSL_VERIFY
-
 )
 for env_var in "${phpmyadmin_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
