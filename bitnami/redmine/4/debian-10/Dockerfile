@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl ghostscript gzip imagemagick libaudit1
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install ruby-2.6.6-1 --checksum bffb82ccf296b8fcd3a28255ac372a6234efbcd57a2a2f9b9fa924724038abdb
-RUN bitnami-pkg install postgresql-client-11.8.0-3 --checksum 884f83caf091522e2ea8d03d69e5dcec5d7a309a6e3f9f434d9ee5acc14f4ce0
+RUN bitnami-pkg install postgresql-client-11.9.0-0 --checksum 900d01408360012083f63ede35bd477338ec3f18d3e0554635e51f7dccc0fb2d
 RUN bitnami-pkg install mysql-client-10.3.24-0 --checksum 94a7e3c58310f59af5c1e14544de0a42bd1ecf394a159db94aacf8ccf6058436
 RUN bitnami-pkg install git-2.28.0-0 --checksum bda714065995df169ab17f11b3a638a106aec83b00bcbfb325b36b51f29d1704
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
@@ -20,7 +20,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.1.1-debian-10-r108" \
+    BITNAMI_IMAGE_VERSION="4.1.1-debian-10-r109" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux" \
