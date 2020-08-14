@@ -41,7 +41,6 @@ redis_sentinel_env_vars=(
     REDIS_MASTER_HOST
     REDIS_MASTER_PORT_NUMBER
     REDIS_MASTER_SET
-
 )
 for env_var in "${redis_sentinel_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
