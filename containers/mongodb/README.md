@@ -47,9 +47,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4.2-debian-10`, `4.2.8-debian-10-r49`, `4.2`, `4.2.8` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.8-debian-10-r49/4.2/debian-10/Dockerfile)
-* [`4.0-debian-9`, `4.0.19-debian-9-r8`, `4.0`, `4.0.19` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.19-debian-9-r8/4.0/debian-9/Dockerfile)
+* [`4.0-debian-9`, `4.0.19-debian-9-r9`, `4.0`, `4.0.19` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.19-debian-9-r9/4.0/debian-9/Dockerfile)
 * [`3.6-debian-9`, `3.6.19-debian-9-r8`, `3.6`, `3.6.19` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.19-debian-9-r8/3.6/debian-9/Dockerfile)
-* [`4.4-debian-10`, `0.0.0-debian-10-r-1`, `4.4`, `0.0.0`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/0.0.0-debian-10-r-1/4.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
@@ -70,7 +69,7 @@ $ docker pull bitnami/mongodb:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/mongodb:latest 'https://github.com/bitnami/bitnami-docker-mongodb.git#master:4.4/debian-10'
+
 ```
 
 # Persisting your database
