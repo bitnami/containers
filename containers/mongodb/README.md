@@ -576,18 +576,18 @@ After having generated the certificates and making them available to the contain
 
 Example settings for the primary node `mongodb-primary`:
 - `MONGODB_ADVERTISED_HOSTNAME=mongodb-primary`
-- `MONGODB_EXTRA_FLAGS=--tlsMode=requireTLS --tlsPEMKeyFile=/certificates/mongodb-primary.pem --tlsClusterFile=/certificates/mongodb-primary.pem --tlsCAFile=/certificates/mongoCA.crt`
-- `MONGODB_CLIENT_EXTRA_FLAGS=--tls --tlsPEMKeyFile=/certificates/mongodb-primary.pem --tlsCAFile=/certificates/mongoCA.crt`
+- `MONGODB_EXTRA_FLAGS=--tlsMode=requireTLS --tlsCertificateKeyFile=/certificates/mongodb-primary.pem --tlsClusterFile=/certificates/mongodb-primary.pem --tlsCAFile=/certificates/mongoCA.crt`
+- `MONGODB_CLIENT_EXTRA_FLAGS=--tls --tlsCertificateKeyFile=/certificates/mongodb-primary.pem --tlsCAFile=/certificates/mongoCA.crt`
 
 Example corresponding settings for a secondary node `mongodb-secondary`:
 - `MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary`
-- `MONGODB_EXTRA_FLAGS=--tlsMode=requireTLS --tlsPEMKeyFile=/certificates/mongodb-secondary.pem --tlsClusterFile=/certificates/mongodb-secondary.pem --tlsCAFile=/certificates/mongoCA.crt`
-- `MONGODB_CLIENT_EXTRA_FLAGS=--tls --tlsPEMKeyFile=/certificates/mongodb-secondary.pem --tlsCAFile=/certificates/mongoCA.crt`
+- `MONGODB_EXTRA_FLAGS=--tlsMode=requireTLS --tlsCertificateKeyFile=/certificates/mongodb-secondary.pem --tlsClusterFile=/certificates/mongodb-secondary.pem --tlsCAFile=/certificates/mongoCA.crt`
+- `MONGODB_CLIENT_EXTRA_FLAGS=--tls --tlsCertificateKeyFile=/certificates/mongodb-secondary.pem --tlsCAFile=/certificates/mongoCA.crt`
 
 ### Connecting to the mongo daemon via SSL
 After successfully starting a cluster as specified, within the container it should be possible to connect to the mongo daemon on the primary node using:
 ```console
-/opt/bitnami/mongodb/bin/mongo -u root -p ${MONGODB_ROOT_PASSWORD} --host mongodb-primary --tls --tlsPEMKeyFile=/certificates/mongodb-primary.pem --tlsCAFile=/certificates/mongoCA.crt
+/opt/bitnami/mongodb/bin/mongo -u root -p ${MONGODB_ROOT_PASSWORD} --host mongodb-primary --tls --tlsCertificateKeyFile=/certificates/mongodb-primary.pem --tlsCAFile=/certificates/mongoCA.crt
 ```
 
 **NB**: We only support `--clusterAuthMode=keyFile` in this configuration.
