@@ -28,7 +28,6 @@ spring_cloud_dataflow_env_vars=(
     SPRING_CLOUD_DATAFLOW_FEATURES_SCHEDULES_ENABLED
     SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI
     JAVA_OPTS
-
 )
 for env_var in "${spring_cloud_dataflow_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
