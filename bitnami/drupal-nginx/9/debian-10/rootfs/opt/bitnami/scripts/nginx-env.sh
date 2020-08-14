@@ -20,7 +20,6 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 nginx_env_vars=(
     NGINX_HTTP_PORT_NUMBER
     NGINX_HTTPS_PORT_NUMBER
-
 )
 for env_var in "${nginx_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
