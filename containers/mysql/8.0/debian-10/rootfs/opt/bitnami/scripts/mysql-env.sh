@@ -40,7 +40,6 @@ mysql_env_vars=(
     MYSQL_BIND_ADDRESS
     MYSQL_SQL_MODE
     MYSQL_IS_DEDICATED_SERVER
-
 )
 for env_var in "${mysql_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
