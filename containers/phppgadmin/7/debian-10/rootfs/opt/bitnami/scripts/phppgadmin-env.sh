@@ -23,7 +23,6 @@ phppgadmin_env_vars=(
     DATABASE_HOST
     DATABASE_PORT_NUMBER
     DATABASE_SSL_MODE
-
 )
 for env_var in "${phppgadmin_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
