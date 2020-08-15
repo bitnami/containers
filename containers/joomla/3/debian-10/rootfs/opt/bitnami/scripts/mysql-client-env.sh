@@ -30,7 +30,6 @@ mysql_env_vars=(
     MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET
     MYSQL_CLIENT_CREATE_DATABASE_COLLATE
     MYSQL_CLIENT_TLS_ENABLED
-
 )
 for env_var in "${mysql_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
