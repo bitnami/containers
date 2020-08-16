@@ -31,7 +31,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1-debian-10`, `1.10.11-debian-10-r11`, `1`, `1.10.11`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.11-debian-10-r11/1/debian-10/Dockerfile)
+* [`1-debian-10`, `1.10.11-debian-10-r12`, `1`, `1.10.11`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.11-debian-10-r12/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow).
 
@@ -295,6 +295,10 @@ services:
 ## Load DAG files
 
 Custom DAG files can be mounted to `/opt/bitnami/airflow/dags`.
+
+## Installing additional python modules
+
+This container supports the installation of additional python modules at start-up time. In order to do that, you can mount a `requirements.txt` file with your specific needs under the path `/bitnami/python/requirements.txt`.
 
 ## Environment variables
 
