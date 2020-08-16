@@ -53,7 +53,6 @@ mariadb_env_vars=(
     MARIADB_TLS_CERT_FILE
     MARIADB_TLS_KEY_FILE
     MARIADB_TLS_CA_FILE
-
 )
 for env_var in "${mariadb_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
