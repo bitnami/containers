@@ -319,54 +319,63 @@ KafkaClient {
 EOF
         fi
         if [[ "${client_protocol:-}" =~ SASL ]] && [[ "${internal_protocol:-}" =~ SASL ]]; then
-            cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+            if [[ "${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-}" =~ PLAIN ]] && [[ "${KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL:-}" =~ PLAIN ]]; then
+                cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaServer {
    org.apache.kafka.common.security.plain.PlainLoginModule required
    username="${KAFKA_INTER_BROKER_USER:-}"
    password="${KAFKA_INTER_BROKER_PASSWORD:-}"
    user_${KAFKA_INTER_BROKER_USER:-}="${KAFKA_INTER_BROKER_PASSWORD:-}"
 EOF
-        if [[ "${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-}" =~ PLAIN ]]; then
-            for (( i=0; i<${#users[@]}; i++ )); do
-                if [[ "$i" -eq "(( ${#users[@]} - 1 ))" ]]; then
-                    cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+                for (( i=0; i<${#users[@]}; i++ )); do
+                    if [[ "$i" -eq "(( ${#users[@]} - 1 ))" ]]; then
+                        cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    user_${users[i]:-}="${passwords[i]:-}";
 EOF
-                else
-                    cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+                    else
+                        cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    user_${users[i]:-}="${passwords[i]:-}"
 EOF
-                fi
-            done
-        fi
-        cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+                    fi
+                done
+                cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    org.apache.kafka.common.security.scram.ScramLoginModule required;
    };
 EOF
+            else
+                cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+KafkaServer {
+   org.apache.kafka.common.security.scram.ScramLoginModule required
+   username="${KAFKA_INTER_BROKER_USER:-}"
+   password="${KAFKA_INTER_BROKER_PASSWORD:-}";
+   };
+EOF
+            fi
         elif [[ "${client_protocol:-}" =~ SASL ]]; then
             cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaServer {
    org.apache.kafka.common.security.plain.PlainLoginModule required
 EOF
-        if [[ "${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-}" =~ PLAIN ]]; then
-            for (( i=0; i<${#users[@]}; i++ )); do
-                if [[ "$i" -eq "(( ${#users[@]} - 1 ))" ]]; then
-                    cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+            if [[ "${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-}" =~ PLAIN ]]; then
+                for (( i=0; i<${#users[@]}; i++ )); do
+                    if [[ "$i" -eq "(( ${#users[@]} - 1 ))" ]]; then
+                        cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    user_${users[i]:-}="${passwords[i]:-}";
 EOF
                 else
                     cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    user_${users[i]:-}="${passwords[i]:-}"
 EOF
-                fi
-            done
-        fi
-        cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+                    fi
+                done
+            fi
+            cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    org.apache.kafka.common.security.scram.ScramLoginModule required;
    };
 EOF
         elif [[ "${internal_protocol:-}" =~ SASL ]]; then
-            cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+            if [[ "${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-}" =~ PLAIN ]] && [[ "${KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL:-}" =~ PLAIN ]]; then
+                cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaServer {
    org.apache.kafka.common.security.plain.PlainLoginModule required
    username="${KAFKA_INTER_BROKER_USER:-}"
@@ -375,6 +384,15 @@ KafkaServer {
    org.apache.kafka.common.security.scram.ScramLoginModule required;
    };
 EOF
+            else
+                cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+KafkaServer {
+   org.apache.kafka.common.security.scram.ScramLoginModule required
+   username="${KAFKA_INTER_BROKER_USER:-}"
+   password="${KAFKA_INTER_BROKER_PASSWORD:-}";
+   };
+EOF
+            fi
         fi
         if [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SASL ]] && [[ -n "$KAFKA_ZOOKEEPER_USER" ]] && [[ -n "$KAFKA_ZOOKEEPER_PASSWORD" ]]; then
             cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
@@ -405,10 +423,14 @@ kafka_create_sasl_scram_zookeeper_users() {
     info "Creating users in Zookeeper"
     read -r -a users <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_USERS}")"
     read -r -a passwords <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_PASSWORDS}")"
+    if [[ "${KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL:-}" =~ SCRAM-SHA ]]; then
+        users+=("${KAFKA_INTER_BROKER_USER}")
+        passwords+=("${KAFKA_INTER_BROKER_PASSWORD}")
+    fi
     for (( i=0; i<${#users[@]}; i++ )); do
-        echo "Creating user ${users[i]} in zookeeper"
+        debug "Creating user ${users[i]} in zookeeper"
         # Ref: https://docs.confluent.io/current/kafka/authentication_sasl/authentication_sasl_scram.html#sasl-scram-overview
-        kafka-configs.sh --zookeeper "$KAFKA_CFG_ZOOKEEPER_CONNECT" --alter --add-config "SCRAM-SHA-256=[iterations=8192,password=${passwords[i]}],SCRAM-SHA-512=[password=${passwords[i]}]" --entity-type users --entity-name "${users[i]}"
+        debug_execute kafka-configs.sh --zookeeper "$KAFKA_CFG_ZOOKEEPER_CONNECT" --alter --add-config "SCRAM-SHA-256=[iterations=8192,password=${passwords[i]}],SCRAM-SHA-512=[password=${passwords[i]}]" --entity-type users --entity-name "${users[i]}"
     done
 }
 
