@@ -49,7 +49,7 @@ services:
       - PGPOOL_ADMIN_PASSWORD=adminpassword
       - PGPOOL_ENABLE_LOAD_BALANCING=yes
     healthcheck:
-      test: ["CMD", "/healthcheck.sh"]
+      test: ["CMD", "/opt/bitnami/scripts/pgpool/healthcheck.sh"]
       interval: 10s
       timeout: 5s
       retries: 5

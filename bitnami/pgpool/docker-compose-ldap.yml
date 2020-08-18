@@ -53,7 +53,7 @@ services:
       - LDAP_BIND_DN=cn=admin,dc=example,dc=org
       - LDAP_BIND_PASSWORD=adminpassword
     healthcheck:
-      test: ["CMD", "/healthcheck.sh"]
+      test: ["CMD", "/opt/bitnami/scripts/pgpool/healthcheck.sh"]
       interval: 10s
       timeout: 5s
       retries: 5
