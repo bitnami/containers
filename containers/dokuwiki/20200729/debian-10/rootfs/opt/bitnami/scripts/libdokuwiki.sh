@@ -59,6 +59,7 @@ dokuwiki_initialize() {
             web_server_start
             dokuwiki_pass_wizard
             web_server_stop
+            dokuwiki_enable_friendly_urls
         fi
 
         info "Persisting DokuWiki installation"
@@ -107,4 +108,18 @@ dokuwiki_pass_wizard() {
         error "An error occurred while installing DokuWiki"
         return 1
     fi
+}
+
+########################
+# Enable DokuWiki friendly URLs
+# Globals:
+#   DOKUWIKI_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+dokuwiki_enable_friendly_urls() {
+    # Based on: https://www.dokuwiki.org/rewrite
+    echo "\$conf['userewrite'] = 1; // URL rewriting is handled by the webserver" >>"${DOKUWIKI_BASE_DIR}/conf/local.php"
 }

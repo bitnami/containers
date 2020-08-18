@@ -40,4 +40,17 @@ php_conf_set memory_limit "$PHP_DEFAULT_MEMORY_LIMIT"
 # Enable default web server configuration for DokuWiki
 info "Creating default web server configuration for DokuWiki"
 web_server_validate
-ensure_web_server_app_configuration_exists "dokuwiki" --type php
+ensure_web_server_app_configuration_exists "dokuwiki" --type php --apache-extra-directory-configuration '
+# Enable DokuWiki friendly URLs - Based on https://www.dokuwiki.org/rewrite
+RewriteEngine on
+RewriteRule ^_media/(.*)              lib/exe/fetch.php?media=$1  [QSA,L]
+RewriteRule ^_detail/(.*)             lib/exe/detail.php?media=$1  [QSA,L]
+RewriteRule ^_export/([^/]+)/(.*)     doku.php?do=export_$1&id=$2  [QSA,L]
+RewriteRule ^$                        doku.php  [L]
+RewriteCond %{REQUEST_FILENAME}       !-f
+RewriteCond %{REQUEST_FILENAME}       !-d
+# Fix: DokuWiki rewrite rule affects Apache server-status page and makes it return a DokuWiki 404 page instead
+RewriteCond %{REQUEST_URI}            !^/server-status$
+RewriteRule (.*)                      doku.php?id=$1  [QSA,L]
+RewriteRule ^index.php$               doku.php
+'
