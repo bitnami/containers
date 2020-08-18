@@ -551,7 +551,7 @@ Topic:mytopic   PartitionCount:3        ReplicationFactor:3     Configs:
 The image looks for configuration files (server.properties, log4j.properties, etc.) in the `/bitnami/kafka/config/` directory, this directory can be changed by setting the KAFKA_MOUNTED_CONF_DIR environment variable.
 
 ```console
-$ docker run --name kafka -v /path/to/server.properties:/bitnami/kafka/conf/server.properties bitnami/kafka:latest
+$ docker run --name kafka -v /path/to/server.properties:/bitnami/kafka/config/server.properties bitnami/kafka:latest
 ```
 
 After that, your changes will be taken into account in the server's behaviour.
@@ -569,7 +569,7 @@ services:
     ...
     volumes:
       - 'kafka_data:/bitnami'
-+     - /path/to/server.properties:/bitnami/kafka/conf/server.properties
++     - /path/to/server.properties:/bitnami/kafka/config/server.properties
 ```
 
 #### Step 2: Edit the configuration
