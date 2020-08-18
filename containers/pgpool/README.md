@@ -194,7 +194,7 @@ services:
       - PGPOOL_ADMIN_USERNAME=admin
       - PGPOOL_ADMIN_PASSWORD=adminpassword
     healthcheck:
-      test: ["CMD", "/healthcheck.sh"]
+      test: ["CMD", "/opt/bitnami/scripts/pgpool/healthcheck.sh"]
       interval: 10s
       timeout: 5s
       retries: 5
