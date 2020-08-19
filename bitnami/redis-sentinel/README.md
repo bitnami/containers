@@ -202,6 +202,7 @@ The Redis Sentinel instance can be customized by specifying environment variable
 - `REDIS_MASTER_PORT_NUMBER`: Port of the Redis master to monitor. Default: **6379**.
 - `REDIS_MASTER_SET`: Name of the set of Redis instances to monitor. Default: **mymaster**.
 - `REDIS_MASTER_PASSWORD`: Password to authenticate with the master. No defaults. As an alternative, you can mount a file with the password and set the `REDIS_MASTER_PASSWORD_FILE` variable.
+- `REDIS_MASTER_USER`: Username to authenticate with when ACL is enabled for the master. This is available only for redis 6 or higher. If not specified, the sentinel will try to authenticate with just the password (Using `sentinel auth-pass <master-name> <password>`)
 - `REDIS_SENTINEL_PORT_NUMBER`: Redis Sentinel port. Default: **26379**.
 - `REDIS_SENTINEL_QUORUM`: Number of Sentinels that need to agree about the fact the master is not reachable. Default: **2**.
 - `REDIS_SENTINEL_PASSWORD`: Password to authenticate with this sentinel and to authenticate to other sentinels. No defaults. Needs to be identical on all sentinels. As an alternative, you can mount a file with the password and set the `REDIS_SENTINEL_PASSWORD_FILE` variable.

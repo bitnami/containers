@@ -174,6 +174,7 @@ redis_initialize() {
         redis_conf_set "sentinel failover-timeout" "${REDIS_MASTER_SET} ${REDIS_SENTINEL_FAILOVER_TIMEOUT}"
         redis_conf_set "sentinel parallel-syncs" "${REDIS_MASTER_SET} 1"
         [[ -z "$REDIS_MASTER_PASSWORD" ]] || redis_conf_set "sentinel auth-pass" "${REDIS_MASTER_SET} ${REDIS_MASTER_PASSWORD}"
+        [[ -z "$REDIS_MASTER_USER" ]] || redis_conf_set "sentinel auth-user" "${REDIS_MASTER_SET} ${REDIS_MASTER_USER}"
 
         # TLS configuration
         if is_boolean_yes "$REDIS_SENTINEL_TLS_ENABLED"; then
