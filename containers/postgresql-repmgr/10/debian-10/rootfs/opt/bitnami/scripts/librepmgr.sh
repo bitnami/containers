@@ -602,6 +602,12 @@ repmgr_initialize() {
         fi
     else
         local -r psql_major_version="$(postgresql_get_major_version)"
+
+        POSTGRESQL_MASTER_PORT_NUMBER="$REPMGR_CURRENT_PRIMARY_PORT"
+        export POSTGRESQL_MASTER_PORT_NUMBER
+        POSTGRESQL_MASTER_HOST="$REPMGR_CURRENT_PRIMARY_HOST"
+        export POSTGRESQL_MASTER_HOST
+
         postgresql_configure_recovery
         postgresql_start_bg
         repmgr_unregister_standby
