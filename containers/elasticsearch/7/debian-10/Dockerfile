@@ -5,7 +5,8 @@ ENV HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/elasticsearch/bin:$PATH"
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/elasticsearch/bin:$PATH" \
+    JAVA_HOME="/opt/bitnami/java"
 
 ARG ELASTICSEARCH_PLUGINS=""
 
