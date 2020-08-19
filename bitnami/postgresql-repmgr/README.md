@@ -41,10 +41,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`12-debian-10`, `12.4.0-debian-10-r1`, `12`, `12.4.0` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.4.0-debian-10-r1/12/debian-10/Dockerfile)
-* [`11-debian-10`, `11.9.0-debian-10-r1`, `11`, `11.9.0`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.9.0-debian-10-r1/11/debian-10/Dockerfile)
-* [`10-debian-10`, `10.14.0-debian-10-r1`, `10`, `10.14.0` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.14.0-debian-10-r1/10/debian-10/Dockerfile)
-* [`9.6-debian-10`, `9.6.19-debian-10-r1`, `9.6`, `9.6.19` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.19-debian-10-r1/9.6/debian-10/Dockerfile)
+* [`12`, `12-debian-10`, `12.4.0`, `12.4.0-debian-10-r1` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.4.0-debian-10-r1/12/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.9.0`, `11.9.0-debian-10-r1`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.9.0-debian-10-r1/11/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.14.0`, `10.14.0-debian-10-r2` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.14.0-debian-10-r2/10/debian-10/Dockerfile)
+* [`9.6`, `9.6-debian-10`, `9.6.19`, `9.6.19-debian-10-r1` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.19-debian-10-r1/9.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
 
