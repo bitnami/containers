@@ -34,24 +34,24 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.8-prod-debian-10`, `3.8-debian-10-prod`, `3.8.5-prod-debian-10-r15`, `3.8.5-debian-10-r15-prod`, `3.8-prod`, `3.8.5-prod` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.5-prod-debian-10-r15/3.8-prod/debian-10/Dockerfile)
-* [`3.8-debian-10`, `3.8.5-debian-10-r17`, `3.8`, `3.8.5` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.5-debian-10-r17/3.8/debian-10/Dockerfile)
-* [`3.7-prod-debian-10`, `3.7-debian-10-prod`, `3.7.8-prod-debian-10-r35`, `3.7.8-debian-10-r35-prod`, `3.7-prod`, `3.7.8-prod`, `latest-prod` (3.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.8-prod-debian-10-r35/3.7-prod/debian-10/Dockerfile)
-* [`3.7-debian-10`, `3.7.8-debian-10-r34`, `3.7`, `3.7.8`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.8-debian-10-r34/3.7/debian-10/Dockerfile)
-* [`3.6-prod-debian-10`, `3.6-debian-10-prod`, `3.6.11-prod-debian-10-r36`, `3.6.11-debian-10-r36-prod`, `3.6-prod`, `3.6.11-prod` (3.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.11-prod-debian-10-r36/3.6-prod/debian-10/Dockerfile)
-* [`3.6-debian-10`, `3.6.11-debian-10-r36`, `3.6`, `3.6.11` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.11-debian-10-r36/3.6/debian-10/Dockerfile)
-* [`2-prod-debian-10`, `2-debian-10-prod`, `2.7.18-prod-debian-10-r102`, `2.7.18-debian-10-r102-prod`, `2-prod`, `2.7.18-prod` (2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-prod-debian-10-r102/2-prod/debian-10/Dockerfile)
-* [`2-debian-10`, `2.7.18-debian-10-r104`, `2`, `2.7.18` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-debian-10-r104/2/debian-10/Dockerfile)
+* [`3.8-prod`, `3.8-prod-debian-10`, `3.8.5-prod`, `3.8.5-prod-debian-10-r15` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.5-prod-debian-10-r15/3.8-prod/debian-10/Dockerfile)
+* [`3.8`, `3.8-debian-10`, `3.8.5`, `3.8.5-debian-10-r17` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.5-debian-10-r17/3.8/debian-10/Dockerfile)
+* [`3.7-prod`, `3.7-prod-debian-10`, `3.7.8-prod`, `3.7.8-prod-debian-10-r35` (3.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.8-prod-debian-10-r35/3.7-prod/debian-10/Dockerfile)
+* [`3.7`, `3.7-debian-10`, `3.7.8`, `3.7.8-debian-10-r34`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.8-debian-10-r34/3.7/debian-10/Dockerfile)
+* [`3.6-prod`, `3.6-prod-debian-10`, `3.6.11-prod`, `3.6.11-prod-debian-10-r36` (3.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.11-prod-debian-10-r36/3.6-prod/debian-10/Dockerfile)
+* [`3.6`, `3.6-debian-10`, `3.6.11`, `3.6.11-debian-10-r36` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.11-debian-10-r36/3.6/debian-10/Dockerfile)
+* [`2-prod`, `2-prod-debian-10`, `2.7.18-prod`, `2.7.18-prod-debian-10-r103` (2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-prod-debian-10-r103/2-prod/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.7.18`, `2.7.18-debian-10-r104` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-debian-10-r104/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/python GitHub repo](https://github.com/bitnami/bitnami-docker-python).
 
-## Deprecation Note (2020-07-01)
+## Deprecation Note (2020-08-18)
 
-The current format of some `prod` tags will be discontinued by 1st July, 2020:
+The formatting convention for `prod` tags has been changed:
 
-* `BRANCH-debian-10-prod` will now be tagged as `BRANCH-prod-debian-10`
-* `VERSION-debian-10-rX-prod` will now be tagged as `VERSION-prod-debian-10-rX`
-* `latest-prod` will be deprecated
+* `BRANCH-debian-10-prod` is now tagged as `BRANCH-prod-debian-10`
+* `VERSION-debian-10-rX-prod` is now tagged as `VERSION-prod-debian-10-rX`
+* `latest-prod` is now deprecated
 
 # What are `prod` tagged containers for?
 
