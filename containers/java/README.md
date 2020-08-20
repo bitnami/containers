@@ -31,7 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 - [`14-prod`, `14.0.2-prod-debian-10-r20` (14-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/14.0.2-prod-debian-10-r20/14-prod/debian-10/Dockerfile), [`14-prod-prod`, `14.0.2-prod-debian-10-r20-prod` (14-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/14.0.2-prod-debian-10-r20/14-prod/debian-10/prod/Dockerfile)
-- [`14`, `14.0.2-debian-10-r19` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/14.0.2-debian-10-r19/14/debian-10/Dockerfile), [`14-prod`, `14.0.2-debian-10-r19-prod` (14/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/14.0.2-debian-10-r19/14/debian-10/prod/Dockerfile)
+- [`14`, `14.0.2-debian-10-r20` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/14.0.2-debian-10-r20/14/debian-10/Dockerfile), [`14-prod`, `14.0.2-debian-10-r20-prod` (14/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/14.0.2-debian-10-r20/14/debian-10/prod/Dockerfile)
 - [`11-prod`, `11.0.8-prod-debian-10-r18` (11-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.8-prod-debian-10-r18/11-prod/debian-10/Dockerfile), [`11-prod-prod`, `11.0.8-prod-debian-10-r18-prod` (11-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.8-prod-debian-10-r18/11-prod/debian-10/prod/Dockerfile)
 - [`11`, `11.0.8-debian-10-r19` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.8-debian-10-r19/11/debian-10/Dockerfile), [`11-prod`, `11.0.8-debian-10-r19-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.8-debian-10-r19/11/debian-10/prod/Dockerfile)
 - [`1.8-prod`, `1.8.265-prod-debian-10-r4` (1.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.265-prod-debian-10-r4/1.8-prod/debian-10/Dockerfile), [`1.8-prod-prod`, `1.8.265-prod-debian-10-r4-prod` (1.8-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.265-prod-debian-10-r4/1.8-prod/debian-10/prod/Dockerfile)
@@ -39,13 +39,13 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
 
-## Deprecation Note (2020-07-01)
+## Deprecation Note (2020-08-18)
 
-The current format of some `prod` tags will be discontinued by 1st July, 2020:
+The formatting convention for `prod` tags has been changed:
 
-* `BRANCH-debian-10-prod` will now be tagged as `BRANCH-prod-debian-10`
-* `VERSION-debian-10-rX-prod` will now be tagged as `VERSION-prod-debian-10-rX`
-* `latest-prod` will be deprecated
+* `BRANCH-debian-10-prod` is now tagged as `BRANCH-prod-debian-10`
+* `VERSION-debian-10-rX-prod` is now tagged as `VERSION-prod-debian-10-rX`
+* `latest-prod` is now deprecated
 
 # What are `prod` tagged containers for?
 
