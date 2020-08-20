@@ -309,10 +309,19 @@ kafka_generate_jaas_authentication_file() {
         read -r -a users <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_USERS:-}")"
         read -r -a passwords <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_PASSWORDS:-}")"
 
-        if [[ "${client_protocol:-}" =~ SASL ]] && [[ "${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-}" =~ PLAIN ]]; then
-            cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+        if [[ "${client_protocol:-}" =~ SASL ]]; then
+            if [[ "${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-}" =~ PLAIN ]]; then
+                cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaClient {
    org.apache.kafka.common.security.plain.PlainLoginModule required
+EOF
+            else
+                cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+KafkaClient {
+   org.apache.kafka.common.security.plain.ScramLoginModule required
+EOF
+            fi
+            cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    username="${users[0]:-}"
    password="${passwords[0]:-}";
    };
