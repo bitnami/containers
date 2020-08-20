@@ -10,7 +10,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.8-1" --checksum 811b17aa00d6687a6c6e555a4131e585a1a2d24b7fdaa2e5d67f4baea2165aa0
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "logstash" "7.8.1-0" --checksum 5cfbe31b80aa827cd252709b930d5ea99feefda5cf79cded12f260677956e50f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "logstash" "7.9.0-0" --checksum e1651f77e6fdb61fc195c99dca3565f9a1beea376f532ca1f95582cf1f79dd9b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/logstash/postunpack.sh
 ENV BITNAMI_APP_NAME="logstash" \
-    BITNAMI_IMAGE_VERSION="7.8.1-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="7.9.0-debian-10-r0" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/logstash/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080
