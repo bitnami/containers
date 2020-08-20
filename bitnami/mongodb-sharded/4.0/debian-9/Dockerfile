@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl gzip libc6 libcomerr2 libcurl3 lib
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "3.3.2-0" --checksum 8128229634bff932a6772c00b14388a25c67381c3376253f41c2206755de63e1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-1" --checksum 04cca3ba5204635108908eb8032b7b2f1882aba2f1636cc45fe3c70dfa0b498a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-0" --checksum 7defe2e6b6eabb3dd3a193e7d4e932f768b0188b6fb4ecd862bf10632e747f25
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb" "4.0.19-0" --checksum 1d18d1bbb5b2e5acc317dfc4b1962c18b4826b5373f3f32c75ee23ef570d485d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb" "4.0.20-0" --checksum 2c611d6c9dd2d1f7fd3d943914e5b3f088fdeebb0aa8bd606c28f3452bc554c2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-0" --checksum b14e3fcbfe88c7a7421cb2adbf523c5a68ed0624651f9809190991906b531003
 RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/scripts/mongodb-sharded/entrypoint.sh /entrypoint.sh
@@ -22,7 +22,7 @@ RUN ln -s /opt/bitnami/scripts/mongodb-sharded/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb-sharded/postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb-sharded" \
-    BITNAMI_IMAGE_VERSION="4.0.19-debian-9-r12" \
+    BITNAMI_IMAGE_VERSION="4.0.20-debian-9-r0" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 
 EXPOSE 27017
