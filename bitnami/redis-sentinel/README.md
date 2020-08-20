@@ -42,8 +42,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.0-debian-10`, `6.0.6-debian-10-r16`, `6.0`, `6.0.6`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.6-debian-10-r16/6.0/debian-10/Dockerfile)
-* [`5.0-debian-10`, `5.0.9-debian-10-r94`, `5.0`, `5.0.9` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.9-debian-10-r94/5.0/debian-10/Dockerfile)
+* [`6.0`, `6.0-debian-10`, `6.0.6`, `6.0.6-debian-10-r16`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.6-debian-10-r16/6.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.9`, `5.0.9-debian-10-r95` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.9-debian-10-r95/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
 
@@ -202,7 +202,7 @@ The Redis Sentinel instance can be customized by specifying environment variable
 - `REDIS_MASTER_PORT_NUMBER`: Port of the Redis master to monitor. Default: **6379**.
 - `REDIS_MASTER_SET`: Name of the set of Redis instances to monitor. Default: **mymaster**.
 - `REDIS_MASTER_PASSWORD`: Password to authenticate with the master. No defaults. As an alternative, you can mount a file with the password and set the `REDIS_MASTER_PASSWORD_FILE` variable.
-- `REDIS_MASTER_USER`: Username to authenticate with when ACL is enabled for the master. This is available only for redis 6 or higher. If not specified, the sentinel will try to authenticate with just the password (Using `sentinel auth-pass <master-name> <password>`)
+- `REDIS_MASTER_USER`: Username to authenticate with when ACL is enabled for the master. No defaults. This is available only for redis 6 or higher. If not specified, Redis Sentinel will try to authenticate with just the password (using `sentinel auth-pass <master-name> <password>`).
 - `REDIS_SENTINEL_PORT_NUMBER`: Redis Sentinel port. Default: **26379**.
 - `REDIS_SENTINEL_QUORUM`: Number of Sentinels that need to agree about the fact the master is not reachable. Default: **2**.
 - `REDIS_SENTINEL_PASSWORD`: Password to authenticate with this sentinel and to authenticate to other sentinels. No defaults. Needs to be identical on all sentinels. As an alternative, you can mount a file with the password and set the `REDIS_SENTINEL_PASSWORD_FILE` variable.
