@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2-debian-10`, `2.20.1-debian-10-r4`, `2`, `2.20.1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.20.1-debian-10-r4/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.20.1`, `2.20.1-debian-10-r5`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.20.1-debian-10-r5/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus).
 
@@ -66,6 +66,20 @@ If you wish, you can also build the image yourself.
 ```console
 $ docker build -t bitnami/prometheus:latest 'https://github.com/bitnami/bitnami-docker-prometheus.git#master:2/debian-10'
 ```
+
+# Persisting your database
+
+If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will add persistance even after the container is removed.
+
+For persistence, mount a directory at the `/opt/bitnami/prometheus/data` path. If the mounted directory is empty, it will be initialized on the first run.
+
+```console
+$ docker run --name prometheus \
+    -v /path/to/prometheus-persistence:/opt/bitnami/prometheus/data \
+    bitnami/prometheus:latest
+```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 # Connecting to other containers
 
@@ -95,13 +109,27 @@ We can launch other containers using the same flag (`--network NETWORK`) in the 
 
 # Configuration
 
-Prometheus is configured via command-line flags and a configuration file. While the command-line flags configure immutable system parameters (such as storage locations, amount of data to keep on disk and in memory, etc.), the configuration file defines everything related to scraping jobs and their instances, as well as which rule files to load.
-
-To view all available command-line flags, run `docker run bitnami/prometheus:latest -h`.
+Prometheus is configured via command-line flags and a configuration file. While the command-line flags configure immutable system parameters (such as storage locations, amount of data to keep on disk and in memory, listening address, etc.), the configuration file defines everything related to scraping jobs and their instances, as well as which rule files to load.
 
 Prometheus can reload its configuration at runtime. If the new configuration is not well-formed, the changes will not be applied. A configuration reload is triggered by sending a SIGHUP to the Prometheus process or sending a HTTP POST request to the /-/reload endpoint (when the --web.enable-lifecycle flag is enabled). This will also reload any configured rule files.
 
 [Further information](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)
+
+## Command-Line Flags
+
+You can add new flags to the ones already in use by default, which are passed to Prometheus through the `CMD` instruction in the Dockerfile.
+
+To view all available command-line flags, run `docker run bitnami/prometheus:latest -h`.
+
+## Configuration file
+
+You can overwrite the default configuration file with your custom `prometheus.yml`. Create a custom conf file and mount it at `/opt/bitnami/prometheus/conf/prometheus.yml` like so:
+
+```console
+$ docker run --name prometheus \
+    -v path/to/prometheus.yml:/opt/bitnami/prometheus/conf/prometheus.yml \
+    bitnami/prometheus:latest
+```
 
 # Logging
 
@@ -149,7 +177,7 @@ $ docker rm -v prometheus
 
 ### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image, if necessary.
 
 ```console
 $ docker run --name prometheus bitnami/prometheus:latest
