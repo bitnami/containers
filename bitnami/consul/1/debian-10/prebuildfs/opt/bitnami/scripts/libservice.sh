@@ -6,6 +6,7 @@
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/liblog.sh
 
 # Functions
 
@@ -175,23 +176,42 @@ EOF
 ########################
 # Generate a logrotate configuration file
 # Arguments:
-#   $1 - Log path
-#   $2 - Period
-#   $3 - Number of rotations to store
-#   $4 - Extra options (Optional)
+#   $1 - Service name
+#   $2 - Log files pattern
+# Flags:
+#   --period - Period
+#   --rotations - Number of rotations to store
+#   --extra - Extra options (Optional)
 # Returns:
 #   None
 #########################
 generate_logrotate_conf() {
     local service_name="${1:?service name is missing}"
     local log_path="${2:?log path is missing}"
-    local period="${3:-weekly}"
-    local rotations="${4:-150}"
-    local extra_options="${5:-}"
+    local period="weekly"
+    local rotations="150"
+    local extra=""
     local logrotate_conf_dir="/etc/logrotate.d"
+    local var_name
+    # Parse optional CLI flags
+    shift 2
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            --period|--rotations|--extra)
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+                shift
+                declare "$var_name"="${1:?"$var_name" is missing}"
+                ;;
+            *)
+                echo "Invalid command line flag ${1}" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
 
     mkdir -p "$logrotate_conf_dir"
-    cat >"${logrotate_conf_dir}/${service_name}" <<EOF
+    cat <<EOF | sed '/^\s*$/d' >"${logrotate_conf_dir}/${service_name}"
 ${log_path} {
   ${period}
   rotate ${rotations}
@@ -199,7 +219,7 @@ ${log_path} {
   compress
   copytruncate
   missingok
-  ${extra_options}
+$(indent "$extra" 2)
 }
 EOF
 }
