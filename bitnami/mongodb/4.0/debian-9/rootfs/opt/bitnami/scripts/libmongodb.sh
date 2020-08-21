@@ -1084,14 +1084,14 @@ mongodb_custom_init_scripts() {
             debug "Skipping loading custom scripts on non-primary nodes..."
         elif [[ -n $(find "$MONGODB_INITSCRIPTS_DIR/" -type f -regex ".*\.\(sh\|js\|js.gz\)") ]]; then
             if [[ -f "$MONGODB_VOLUME_DIR/mongodb/.user_scripts_initialized" ]]; then
-                debug "Skippig loading custom scripts on container restarts..."
+                debug "Skipping loading custom scripts on container restarts..."
             else
                 run_custom_init_scripts="yes"
             fi
         fi
     elif [[ -n $(find "$MONGODB_INITSCRIPTS_DIR/" -type f -regex ".*\.\(sh\|js\|js.gz\)") ]]; then
         if [[ -f "$MONGODB_VOLUME_DIR/mongodb/.user_scripts_initialized" ]]; then
-            debug "Skippig loading custom scripts on container restarts..."
+            debug "Skipping loading custom scripts on container restarts..."
         else
             run_custom_init_scripts="yes"
         fi
