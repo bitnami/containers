@@ -253,6 +253,23 @@ opencart:
      --volume /path/to/opencart-persistence:/bitnami \
      bitnami/opencart:latest
    ```
+   
+##### Ports configuration
+
+If you want to use custom HTTP and HTTPS ports, `80` and `443` by default, you can use the `APACHE_HTTP_PORT_NUMBER` and `APACHE_HTTPS_PORT_NUMBER` environment variables. That will modify the necessary Opencart and Apache configuration files. You will also need to map ports using the same port both in the container and host.
+
+```yaml
+opencart:
+  ...
+  environment:
+    - APACHE_HTTP_PORT_NUMBER=8080
+    - APACHE_HTTPS_PORT_NUMBER=8443
+  ...
+  ports:
+    - '8080:8080'
+    - '8443:8443'
+  ...
+```
 
 ## SMTP Configuration
 
