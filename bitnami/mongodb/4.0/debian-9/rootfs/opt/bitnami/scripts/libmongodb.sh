@@ -1078,8 +1078,25 @@ mongodb_is_file_external() {
 #   None
 #########################
 mongodb_custom_init_scripts() {
-    info "Loading custom scripts..."
-    if [[ -n $(find "$MONGODB_INITSCRIPTS_DIR/" -type f -regex ".*\.\(sh\|js\|js.gz\)") ]] && [[ ! -f "$MONGODB_VOLUME_DIR/.user_scripts_initialized" ]] ; then
+    local run_custom_init_scripts="no"
+    if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
+        if [[ "$MONGODB_REPLICA_SET_MODE" != "primary" ]]; then
+            debug "Skipping loading custom scripts on non-primary nodes..."
+        elif [[ -n $(find "$MONGODB_INITSCRIPTS_DIR/" -type f -regex ".*\.\(sh\|js\|js.gz\)") ]]; then
+            if [[ -f "$MONGODB_VOLUME_DIR/mongodb/.user_scripts_initialized" ]]; then
+                debug "Skippig loading custom scripts on container restarts..."
+            else
+                run_custom_init_scripts="yes"
+            fi
+        fi
+    elif [[ -n $(find "$MONGODB_INITSCRIPTS_DIR/" -type f -regex ".*\.\(sh\|js\|js.gz\)") ]]; then
+        if [[ -f "$MONGODB_VOLUME_DIR/mongodb/.user_scripts_initialized" ]]; then
+            debug "Skippig loading custom scripts on container restarts..."
+        else
+            run_custom_init_scripts="yes"
+        fi
+    fi
+    if is_boolean_yes "$run_custom_init_scripts"; then
         info "Loading user's custom files from $MONGODB_INITSCRIPTS_DIR ...";
         mongodb_start_bg
         local -r tmp_file=/tmp/filelist
@@ -1110,6 +1127,6 @@ mongodb_custom_init_scripts() {
                 *)        debug "Ignoring $f" ;;
             esac
         done < $tmp_file
-        touch "$MONGODB_VOLUME_DIR"/.user_scripts_initialized
+        touch "$MONGODB_VOLUME_DIR"/mongodb/.user_scripts_initialized
     fi
 }
