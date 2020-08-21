@@ -15,14 +15,14 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.21-2" --checksum 98c4ffbfbdff56d49b9bf09b47fe5049d03a667462fd5a2b45ac658f24e40770
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-1" --checksum a94f94357aa06f3718db1550fa5f5188cd61383d66bf754eef49c58a18bf02cc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "8.9.3-0" --checksum 6d7083fe30f2c53ae4677d7a6105a169fa9b1eb49246fc2e323308c16d0383f6
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "8.9.3-1" --checksum a4243a1994ce7a26668cc15f52ea4bcf09a0526182ce5bed05d58fb548f8f3ff
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache/postunpack.sh
+RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
@@ -31,7 +31,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.9.3-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="8.9.3-debian-10-r5" \
     DRUPAL_DATABASE_NAME="" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="" \
