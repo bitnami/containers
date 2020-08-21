@@ -35,7 +35,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.0.3-6`, `3.0.3-6-debian-10-r16`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-6-debian-10-r16/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.0.3-6`, `3.0.3-6-debian-10-r17`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-6-debian-10-r17/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/opencart GitHub repo](https://github.com/bitnami/bitnami-docker-opencart).
 
@@ -253,7 +253,7 @@ opencart:
      --volume /path/to/opencart-persistence:/bitnami \
      bitnami/opencart:latest
    ```
-   
+
 ##### Ports configuration
 
 If you want to use custom HTTP and HTTPS ports, `80` and `443` by default, you can use the `APACHE_HTTP_PORT_NUMBER` and `APACHE_HTTPS_PORT_NUMBER` environment variables. That will modify the necessary Opencart and Apache configuration files. You will also need to map ports using the same port both in the container and host.
