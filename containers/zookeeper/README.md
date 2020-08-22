@@ -183,7 +183,7 @@ The configuration can easily be setup with the Bitnami ZooKeeper Docker image us
  - `ZOO_MAX_CNXNS`: Limits the total number of concurrent connections that can be made to a ZooKeeper server. Setting it to 0 entirely removes the limit. Default: **0**
  - `ZOO_MAX_CLIENT_CNXNS`: Limits the number of concurrent connections that a single client may make to a single member of the ZooKeeper ensemble. Default **60**
  - `ZOO_4LW_COMMANDS_WHITELIST`: List of whitelisted [4LW](https://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_4lw) commands. Default **srvr, mntr**
- - `ZOO_SERVERS`: Comma, space or colon separated list of servers. Example: zoo1:2888:3888,zoo2:2888:3888. No defaults.
+ - `ZOO_SERVERS`: Comma, space or semi-colon separated list of servers. Example: zoo1:2888:3888,zoo2:2888:3888 or if specifying server IDs zoo1:2888:3888::1,zoo2:2888:3888::2. No defaults.
  - `ZOO_CLIENT_USER`: User that will use ZooKeeper clients to auth. Default: No defaults.
  - `ZOO_CLIENT_PASSWORD`: Password that will use ZooKeeper clients to auth. No defaults.
  - `ZOO_CLIENT_PASSWORD_FILE`: Absolute path to a file that contains the password that will be used by ZooKeeper clients to perform authentication. No defaults.
@@ -320,11 +320,17 @@ services:
 
 A ZooKeeper (https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html) cluster can easily be setup with the Bitnami ZooKeeper Docker image using the following environment variables:
 
- - `ZOO_SERVERS`: Comma or colon separated list of servers. Example: zoo1:2888:3888,zoo2:2888:3888. No defaults.
+ - `ZOO_SERVERS`: Comma, space or semi-colon separated list of servers.This can be done with or without specifying the ID of the server in the ensemble. Example:
+    - without Server ID - zoo1:2888:3888,zoo2:2888:3888
+    - with Server ID - zoo1:2888:3888::1,zoo2:2888:3888::2
+  
+  No defaults.
 
 For reliable ZooKeeper service, you should deploy ZooKeeper in a cluster known as an ensemble. As long as a majority of the ensemble are up, the service will be available. Because ZooKeeper requires a majority, it is best to use an odd number of machines. For example, with four machines ZooKeeper can only handle the failure of a single machine; if two machines fail, the remaining two machines do not constitute a majority. However, with five machines ZooKeeper can handle the failure of two machines.
 
-You have to use 0.0.0.0 as the host for the server. More concretely, if the ID of the zookeeper1 container starting is 1, then the ZOO_SERVERS environment variable has to be 0.0.0.0:2888:3888,zookeeper2:2888:3888.zookeeper3:2888:3888. See below:
+You have to use 0.0.0.0 as the host for the server. More concretely, if the ID of the zookeeper1 container starting is 1, then the ZOO_SERVERS environment variable has to be 0.0.0.0:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888 or if the ID of zookeeper servers are non-sequential then they need to be specified 0.0.0.0:2888:3888::2,zookeeper2:2888:3888::4.zookeeper3:2888:3888::6
+
+See below:
 
 Create a Docker network to enable visibility to each other via the docker container name
 
