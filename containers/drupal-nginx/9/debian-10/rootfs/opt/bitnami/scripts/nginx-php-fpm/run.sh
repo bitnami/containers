@@ -12,7 +12,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libnginx.sh
 
 # Catch SIGTERM signal and stop all child processes
-_forwardTerm () {
+_forwardTerm() {
     echo "Caught signal SIGTERM, passing it to child processes..."
     pgrep -P $$ | xargs kill -TERM 2>/dev/null
     wait
