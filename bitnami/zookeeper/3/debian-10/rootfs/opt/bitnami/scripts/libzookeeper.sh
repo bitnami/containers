@@ -166,8 +166,8 @@ zookeeper_validate() {
 
     # ZooKeeper server list validations
     if [[ -n $ZOO_SERVERS ]]; then
-        server_id_with_jumps=no
-        [[ "$ZOO_SERVERS" == *"::"* ]] && server_id_with_jumps=yes
+        server_id_with_jumps="no"
+        [[ "$ZOO_SERVERS" == *"::"* ]] && server_id_with_jumps="yes"
         read -r -a zookeeper_servers_list <<< "${ZOO_SERVERS//[;, ]/ }"
         for server in "${zookeeper_servers_list[@]}"; do
             if  is_boolean_yes "$server_id_with_jumps"; then
@@ -255,21 +255,21 @@ zookeeper_generate_conf() {
     zookeeper_conf_set "${ZOO_CONF_DIR}/log4j.properties" zookeeper.console.threshold "$ZOO_LOG_LEVEL"
 
     # Add zookeeper servers to configuration
-    server_id_with_jumps=no
-    [[ "$ZOO_SERVERS" == *"::"* ]] && server_id_with_jumps=yes
+    server_id_with_jumps="no"
+    [[ "$ZOO_SERVERS" == *"::"* ]] && server_id_with_jumps="yes"
     read -r -a zookeeper_servers_list <<< "${ZOO_SERVERS//[;, ]/ }"
     if [[ ${#zookeeper_servers_list[@]} -gt 1 ]]; then
         if is_boolean_yes "$server_id_with_jumps"; then
             for server in "${zookeeper_servers_list[@]}"; do
                 read -r -a srv <<< "${server//::/ }"
-                info "Adding server: ${srv[0]} with id: ${srv[1]} "
-                zookeeper_conf_set "$ZOO_CONF_FILE" server.${srv[1]} "${srv[0]};${ZOO_PORT_NUMBER}"
+                info "Adding server: ${srv[0]} with id: ${srv[1]}"
+                zookeeper_conf_set "$ZOO_CONF_FILE" "server.${srv[1]}" "${srv[0]};${ZOO_PORT_NUMBER}"
             done
         else
             local i=1
             for server in "${zookeeper_servers_list[@]}"; do
                 info "Adding server: ${server}"
-                zookeeper_conf_set "$ZOO_CONF_FILE" server.$i "${server};${ZOO_PORT_NUMBER}"
+                zookeeper_conf_set "$ZOO_CONF_FILE" "server.$i" "${server};${ZOO_PORT_NUMBER}"
                 (( i++ ))
             done
         fi

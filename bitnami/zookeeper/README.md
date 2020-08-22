@@ -49,7 +49,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.6.1`, `3.6.1-debian-10-r95`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.1-debian-10-r95/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.6.1`, `3.6.1-debian-10-r96`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.1-debian-10-r96/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
@@ -320,11 +320,9 @@ services:
 
 A ZooKeeper (https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html) cluster can easily be setup with the Bitnami ZooKeeper Docker image using the following environment variables:
 
- - `ZOO_SERVERS`: Comma, space or semi-colon separated list of servers.This can be done with or without specifying the ID of the server in the ensemble. Example:
-    - without Server ID - zoo1:2888:3888,zoo2:2888:3888
-    - with Server ID - zoo1:2888:3888::1,zoo2:2888:3888::2
-  
-  No defaults.
+ - `ZOO_SERVERS`: Comma, space or semi-colon separated list of servers.This can be done with or without specifying the ID of the server in the ensemble. No defaults. Examples:
+  - without Server ID - zoo1:2888:3888,zoo2:2888:3888
+  - with Server ID - zoo1:2888:3888::1,zoo2:2888:3888::2
 
 For reliable ZooKeeper service, you should deploy ZooKeeper in a cluster known as an ensemble. As long as a majority of the ensemble are up, the service will be available. Because ZooKeeper requires a majority, it is best to use an odd number of machines. For example, with four machines ZooKeeper can only handle the failure of a single machine; if two machines fail, the remaining two machines do not constitute a majority. However, with five machines ZooKeeper can handle the failure of two machines.
 
