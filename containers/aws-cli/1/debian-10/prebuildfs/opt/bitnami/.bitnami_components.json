@@ -8,7 +8,7 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "f9b86ac46143d0184cae7fc237a8b2d2f4afffe496ed7861890c4b9210aed0c2",
+        "digest": "95da4100fddf037ef7ad92efeafa8ba027fe683a1025800db638750a460c9930",
         "distro": "debian-10",
         "type": "NAMI",
         "version": "3.7.9-0"
