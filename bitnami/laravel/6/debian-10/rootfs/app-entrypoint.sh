@@ -68,7 +68,6 @@ wait_for_db() {
 #########################
 setup_db() {
   log "Configuring the database"
-  replace_in_file "/app/config/database.php" "utf8mb4" "utf8"
   php artisan migrate --force
 }
 
