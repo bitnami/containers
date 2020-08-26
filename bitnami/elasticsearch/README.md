@@ -202,6 +202,7 @@ Available variables:
 * `ELASTICSEARCH_PORT_NUMBER`: Elasticsearch port. Default: **9200**
 * `ELASTICSEARCH_NODE_PORT_NUMBER`: Elasticsearch Node to Node port. Default: **9300**
 * `ELASTICSEARCH_PLUGINS`: Comma, semi-colon or space separated list of plugins to install at initialization. No defaults.
+* `ELASTICSEARCH_KEYS`: Comma, semi-colon or space separated list of key-value pairs (key=value) to store. No defaults.
 * `ELASTICSEARCH_HEAP_SIZE`: Memory used for the Xmx and Xms java heap values. Default: **1024m**
 * `ELASTICSEARCH_FS_SNAPSHOT_REPO_PATH`: Elasticsearch file system snapshot repository path. No defaults.
 
