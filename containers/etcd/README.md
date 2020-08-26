@@ -71,7 +71,7 @@ $ docker pull bitnami/etcd:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/etcd:latest 'https://github.com/bitnami/bitnami-docker-nginx.git#master:3/debian-10'
+$ docker build -t bitnami/etcd:latest 'https://github.com/bitnami/bitnami-docker-etcd.git#master:3/debian-10'
 ```
 
 # Connecting to other containers
