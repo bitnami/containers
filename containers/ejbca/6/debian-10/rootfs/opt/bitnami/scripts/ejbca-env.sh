@@ -31,7 +31,6 @@ ejbca_env_vars=(
     EJBCA_DATABASE_PASSWORD
     EJBCA_CA_NAME
     JAVA_OPTS
-
 )
 for env_var in "${ejbca_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -81,6 +80,7 @@ export EJBCA_WILDFLY_DEPLOY_DIR="${EJBCA_WILDFLY_BASE_DIR}/standalone/deployment
 export EJBCA_WILDFLY_ADMIN_USER="admin"
 export EJBCA_WILDFLY_TRUSTSTORE_FILE="${EJBCA_WILDFLY_BASE_DIR}/standalone/configuration/truststore.jks"
 export EJBCA_WILDFLY_KEYSTORE_FILE="${EJBCA_WILDFLY_BASE_DIR}/standalone/configuration/keystore.jks"
+export EJBCA_WILDFLY_STANDALONE_CONF_FILE="${EJBCA_WILDFLY_BIN_DIR}/standalone.conf"
 
 # Users
 export EJBCA_DAEMON_USER="wildfly"
