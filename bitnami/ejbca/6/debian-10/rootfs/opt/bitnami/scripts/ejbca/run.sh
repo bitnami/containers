@@ -10,6 +10,7 @@ set -o pipefail
 # Load libraries
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libejbca.sh
+. /opt/bitnami/scripts/libos.sh
 
 # Load ejbca environment variables
 . /opt/bitnami/scripts/ejbca-env.sh

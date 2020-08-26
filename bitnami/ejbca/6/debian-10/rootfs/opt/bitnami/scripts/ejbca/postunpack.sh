@@ -23,3 +23,4 @@ done
 
 chmod -R g+rwX "$EJBCA_BASE_DIR"
 chmod -R g+rwX "$EJBCA_WILDFLY_BASE_DIR"/standalone "$EJBCA_WILDFLY_BASE_DIR"/domain
+chmod g+rw "$EJBCA_WILDFLY_STANDALONE_CONF_FILE"

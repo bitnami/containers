@@ -110,7 +110,7 @@ wildfly_not_ready() {
 #########################
 ejbca_configure_wildfly() {
     info "Creating data source"
-    ejbca_wildfly_command "data-source add --name=ejbcads --driver-name=\"mariadb-java-client-2.6.1.jar\" --connection-url=\"jdbc:mysql://${EJBCA_DATABASE_HOST}:${EJBCA_DATABASE_PORT}/${EJBCA_DATABASE_NAME}\" --jndi-name=\"java:/EjbcaDS\" --use-ccm=true --driver-class=\"org.mariadb.jdbc.Driver\" --user-name=\"${EJBCA_DATABASE_USERNAME}\" --password=\"${EJBCA_DATABASE_PASSWORD}\" --validate-on-match=true --background-validation=false --prepared-statements-cache-size=50 --share-prepared-statements=true --min-pool-size=5 --max-pool-size=150 --pool-prefill=true --transaction-isolation=TRANSACTION_READ_COMMITTED --check-valid-connection-sql=\"select 1;\""
+    ejbca_wildfly_command "data-source add --name=ejbcads --driver-name=\"mariadb-java-client-2.6.2.jar\" --connection-url=\"jdbc:mysql://${EJBCA_DATABASE_HOST}:${EJBCA_DATABASE_PORT}/${EJBCA_DATABASE_NAME}\" --jndi-name=\"java:/EjbcaDS\" --use-ccm=true --driver-class=\"org.mariadb.jdbc.Driver\" --user-name=\"${EJBCA_DATABASE_USERNAME}\" --password=\"${EJBCA_DATABASE_PASSWORD}\" --validate-on-match=true --background-validation=false --prepared-statements-cache-size=50 --share-prepared-statements=true --min-pool-size=5 --max-pool-size=150 --pool-prefill=true --transaction-isolation=TRANSACTION_READ_COMMITTED --check-valid-connection-sql=\"select 1;\""
     ejbca_wildfly_command ":reload"
     wait_for_wildfly
 
@@ -524,6 +524,21 @@ ejbca_load_persisted() {
 }
 
 ########################
+# Sets java_opts
+# Globals:
+#   EJBCA_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+ejba_set_java_opts() {
+    cat >> "$EJBCA_WILDFLY_STANDALONE_CONF_FILE" <<EOF
+JAVA_OPTS="$JAVA_OPTS -Dhttpserver.external.privhttps=$EJBCA_HTTPS_PORT_NUMBER"
+EOF
+}
+
+########################
 # Ensure EJBCA is initialized
 # Globals:
 #   EJBCA_*
@@ -574,6 +589,8 @@ ejbca_initialize() {
 
         ejbca_load_persisted
     fi
+
+    ejba_set_java_opts
 
     ejbca_create_management_user
     ejbca_start_wildfly_bg
