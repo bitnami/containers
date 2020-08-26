@@ -41,7 +41,7 @@ unset memcached_env_vars
 export MEMCACHED_BASE_DIR="${BITNAMI_ROOT_DIR}/memcached"
 export MEMCACHED_CONF_DIR="${MEMCACHED_BASE_DIR}/conf"
 export MEMCACHED_BIN_DIR="${MEMCACHED_BASE_DIR}/bin"
-export PATH="${MEMCACHED_BIN_DIR}:${PATH}"
+export PATH="${MEMCACHED_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 
 # SASL
 export SASL_CONF_PATH="${MEMCACHED_CONF_DIR}/sasl2"
