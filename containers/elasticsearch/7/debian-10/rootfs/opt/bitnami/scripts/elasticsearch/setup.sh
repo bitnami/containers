@@ -29,3 +29,5 @@ elasticsearch_initialize
 elasticsearch_install_plugins
 # Ensure custom initialization scripts are executed
 elasticsearch_custom_init_scripts
+# Ensure all the required keys are added after plugins are installed
+elasticsearch_set_keys
