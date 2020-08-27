@@ -26,18 +26,18 @@ services:
       default:
         aliases:
           - notarysigner
-  # harbor-notary-server:
-  #   image: docker.io/bitnami/harbor-notary-server:2-debian-10
-  #   container_name: notary-server
-  #   ports:
-  #     - '4443:4443'
-  #   environment:
-  #     - MIGRATIONS_PATH=migrations/server/postgresql
-  #     - DB_URL=postgres://server:password@postgresql:5432/notaryserver?sslmode=disable
-  #   volumes:
-  #     - ./config/notary/:/etc/notary/:ro
-  #   depends_on:
-  #     - postgresql
+  harbor-notary-server:
+    image: docker.io/bitnami/harbor-notary-server:2-debian-10
+    container_name: notary-server
+    ports:
+      - '4443:4443'
+    environment:
+      - MIGRATIONS_PATH=migrations/server/postgresql
+      - DB_URL=postgres://server:password@postgresql:5432/notaryserver?sslmode=disable
+    volumes:
+      - ./config/notary/:/etc/notary/:ro
+    depends_on:
+      - postgresql
 volumes:
   postgresql_data:
     driver: local
