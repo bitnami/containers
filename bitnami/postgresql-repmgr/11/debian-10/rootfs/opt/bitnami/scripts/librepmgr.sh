@@ -301,7 +301,7 @@ repmgr_inject_postgresql_configuration() {
     postgresql_create_config
     # ref: https://repmgr.org/docs/4.3/quickstart-postgresql-configuration.html
     postgresql_set_property "shared_preload_libraries" "repmgr"
-    postgresql_set_property "max_wal_senders" "10"
+    postgresql_set_property "max_wal_senders" "16"
     postgresql_set_property "max_replication_slots" "10"
     postgresql_set_property "wal_level" "hot_standby"
     postgresql_set_property "archive_mode" "on"
