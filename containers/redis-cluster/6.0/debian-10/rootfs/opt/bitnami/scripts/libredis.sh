@@ -376,6 +376,7 @@ redis_configure_default() {
         # Enable AOF https://redis.io/topics/persistence#append-only-file
         # Leave default fsync (every second)
         redis_conf_set appendonly "${REDIS_AOF_ENABLED}"
+        redis_conf_set port "$REDIS_PORT_NUMBER"
         # TLS configuration
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
             if [[ "$REDIS_PORT_NUMBER" ==  "6379" ]] && [[ "$REDIS_TLS_PORT" ==  "6379" ]]; then
@@ -384,7 +385,6 @@ redis_configure_default() {
                 redis_conf_set tls-port "$REDIS_TLS_PORT"
             else
                 # Different ports were specified
-                redis_conf_set port "$REDIS_PORT_NUMBER"
                 redis_conf_set tls-port "$REDIS_TLS_PORT"
             fi
             redis_conf_set tls-cert-file "$REDIS_TLS_CERT_FILE"
