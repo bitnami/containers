@@ -549,14 +549,16 @@ elasticsearch_install_plugins() {
 #########################
 elasticsearch_set_keys() {
     read -r -a keys_list <<< "$(tr ',;' ' ' <<< "$ELASTICSEARCH_KEYS")"
-    for key_value in "${keys_list[@]}"; do
-        read -r -a key_value <<< "$(tr '=' ' ' <<< "$key_value")"
-        local key="${key_value[0]}"
-        local value="${key_value[1]}"
+    if [[ "${#keys_list[@]}" -gt 0 ]]; then
+        for key_value in "${keys_list[@]}"; do
+            read -r -a key_value <<< "$(tr '=' ' ' <<< "$key_value")"
+            local key="${key_value[0]}"
+            local value="${key_value[1]}"
 
-        debug "Storing key: ${key}"
-        elasticsearch-keystore add --stdin --force "$key" <<< "$value"
-    done
+            debug "Storing key: ${key}"
+            elasticsearch-keystore add --stdin --force "$key" <<< "$value"
+        done
+    fi
 }
 
 ########################
