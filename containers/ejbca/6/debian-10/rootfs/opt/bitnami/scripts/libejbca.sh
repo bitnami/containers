@@ -534,7 +534,7 @@ ejbca_load_persisted() {
 #########################
 ejba_set_java_opts() {
     cat >> "$EJBCA_WILDFLY_STANDALONE_CONF_FILE" <<EOF
-JAVA_OPTS="$JAVA_OPTS -Dhttpserver.external.privhttps=$EJBCA_HTTPS_PORT_NUMBER"
+JAVA_OPTS="$JAVA_OPTS -Dhttpserver.external.privhttps=$EJBCA_HTTPS_ADVERTISED_PORT_NUMBER"
 EOF
 }
 
