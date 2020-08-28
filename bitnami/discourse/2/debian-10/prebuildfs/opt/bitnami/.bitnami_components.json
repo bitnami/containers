@@ -1,10 +1,10 @@
 {
     "brotli": {
         "arch": "amd64",
-        "digest": "87252d9600bf150289ebcb848b4ae3844939b5e74e7067db52dec13a775072d5",
+        "digest": "710dd6f5c97af313d0e867e793bedc013aebe173f9c28d0fabc09a16d3100ab6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.8-0"
+        "version": "1.0.9-0"
     },
     "discourse": {
         "arch": "amd64",
