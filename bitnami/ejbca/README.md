@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`6`, `6-debian-10`, `6.15.2-6`, `6.15.2-6-debian-10-r31`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ejbca/blob/6.15.2-6-debian-10-r31/6/debian-10/Dockerfile)
+* [`6`, `6-debian-10`, `6.15.2-6`, `6.15.2-6-debian-10-r32`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ejbca/blob/6.15.2-6-debian-10-r32/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ejbca GitHub repo](https://github.com/bitnami/bitnami-docker-ejbca).
 
@@ -146,6 +146,7 @@ The EJBCA instance can be customized by specifying environment variables on the 
 
 - `EJBCA_HTTP_PORT_NUMBER`: HTTP port number. Defaults to `8080`.
 - `EJBCA_HTTPS_PORT_NUMBER`: HTTPS port number. Default to `8443`.
+- `EJBCA_HTTPS_ADVERTISED_PORT_NUMBER`: Port number used in the rendered URLs for the admistrator login. Default to `8443`.
 - `EJBCA_ADMIN_USERNAME`: EJBCA administrator username. Defaults to `superadmin`.
 - `EJBCA_ADMIN_PASSWORD`: EJBCA administrator password. Defaults to `Bitnami1234`.
 - `EJBCA_DATABASE_HOST`: Database hostname. No defaults.
