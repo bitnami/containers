@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="fluentd-exporter" \
-    BITNAMI_IMAGE_VERSION="0.2.0-debian-10-r197" \
+    BITNAMI_IMAGE_VERSION="0.2.0-debian-10-r198" \
     PATH="/opt/bitnami/fluentd-exporter/bin:$PATH"
 
 EXPOSE 9309
