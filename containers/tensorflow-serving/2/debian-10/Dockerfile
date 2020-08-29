@@ -11,14 +11,14 @@ RUN install_packages ca-certificates curl gcc-7 gzip libc6 libgcc1 libstdc++6 pr
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
-RUN bitnami-pkg unpack tensorflow-serving-2.2.0-0 --checksum f5e2ca1d941836c9d9f1f3f0a5630fdefb13dcfe5fe027f73dee973c016ed153
+RUN bitnami-pkg unpack tensorflow-serving-2.3.0-0 --checksum e58b95c49b0db2e87b8c3ed089366c5b8fcd4bd25fc61ee0a02e272bd97211f7
 RUN bitnami-pkg install gosu-1.12.0-1 --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="2.2.0-debian-10-r55" \
+    BITNAMI_IMAGE_VERSION="2.3.0-debian-10-r0" \
     NAMI_PREFIX="/.nami" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
