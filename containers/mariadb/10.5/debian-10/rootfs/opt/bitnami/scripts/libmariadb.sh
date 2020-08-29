@@ -349,7 +349,7 @@ mysql_custom_init_scripts() {
                     ;;
                 *.sql)
                     [[ "$DB_REPLICATION_MODE" = "slave" ]] && warn "Custom SQL initdb is not supported on slave nodes, ignoring $f" && continue
-                    wait_for_mysql_access
+                    wait_for_mysql_access "$DB_ROOT_USER"
                     if ! mysql_execute "$DB_DATABASE" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" < "$f"; then
                         error "Failed executing $f"
                         return 1
@@ -357,7 +357,7 @@ mysql_custom_init_scripts() {
                     ;;
                 *.sql.gz)
                     [[ "$DB_REPLICATION_MODE" = "slave" ]] && warn "Custom SQL initdb is not supported on slave nodes, ignoring $f" && continue
-                    wait_for_mysql_access
+                    wait_for_mysql_access "$DB_ROOT_USER"
                     if ! gunzip -c "$f" | mysql_execute "$DB_DATABASE" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD"; then
                         error "Failed executing $f"
                         return 1
@@ -614,7 +614,8 @@ wait_for_mysql() {
 #########################
 wait_for_mysql_access() {
     # wait until the server is up and answering queries.
-    local -a args=("mysql" "root")
+    local -r user="${1:-root}"
+    local -a args=("mysql" "$user")
     is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("$(get_master_env_var_value ROOT_PASSWORD)")
     local -r retries=300
     local -r sleep_time=2
