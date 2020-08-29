@@ -375,7 +375,8 @@ wait_for_mysql() {
 #########################
 wait_for_mysql_access() {
     # wait until the server is up and answering queries.
-    local -a args=("mysql" "root")
+    local -r user="${1:-root}"
+    local -a args=("mysql" "$user")
     is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("$(get_master_env_var_value ROOT_PASSWORD)")
     local -r retries=300
     local -r sleep_time=2
