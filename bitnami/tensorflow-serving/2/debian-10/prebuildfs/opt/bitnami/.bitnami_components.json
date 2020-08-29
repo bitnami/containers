@@ -8,10 +8,10 @@
     },
     "tensorflow-serving": {
         "arch": "amd64",
-        "digest": "f5e2ca1d941836c9d9f1f3f0a5630fdefb13dcfe5fe027f73dee973c016ed153",
+        "digest": "e58b95c49b0db2e87b8c3ed089366c5b8fcd4bd25fc61ee0a02e272bd97211f7",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.2.0-0"
+        "version": "2.3.0-0"
     },
     "tini": {
         "arch": "amd64",
