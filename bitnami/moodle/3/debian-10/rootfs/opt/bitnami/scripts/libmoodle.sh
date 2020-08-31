@@ -167,7 +167,7 @@ EOF
         # This fixes an issue when restoring Moodle, due to cookies/sessions from a previous run being considered closed.
         # Therefore, users are unable to connect to Moodle with their cookies since the server considers them invalid.
         # The problem disappears when removing the old (invalid) session files.
-        rm -rf "${MOODLE_DATA_DIR}/sessions/"*
+        find "${MOODLE_DATA_DIR}/sessions/" -name "sess_*" -delete
     fi
 
     # Ensure Moodle cron jobs are created when running setup with a root user
