@@ -9,14 +9,14 @@ RUN install_packages ca-certificates curl gzip libaio1 libc6 libcom-err2 libcurl
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
-RUN bitnami-pkg install percona-xtrabackup-8.0.13-0 --checksum 6edc8a7bfde0778324a1d18ac664627b83bb9cff8ad28f7a058a876a7b0cddc0
+RUN bitnami-pkg install percona-xtrabackup-8.0.14-0 --checksum 70232f7d11ebf2cb1e4c0f7d74af245f67b22f3d08549d8768fb165158152bb9
 RUN bitnami-pkg install gosu-1.12.0-1 --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="percona-xtrabackup" \
-    BITNAMI_IMAGE_VERSION="8.0.13-debian-10-r17" \
+    BITNAMI_IMAGE_VERSION="8.0.14-debian-10-r0" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux"
