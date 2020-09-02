@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.0.0`, `3.0.0-debian-10-r43`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/3.0.0-debian-10-r43/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.0.0`, `3.0.0-debian-10-r45`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/3.0.0-debian-10-r45/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spark GitHub repo](https://github.com/bitnami/bitnami-docker-spark).
 
@@ -186,6 +186,30 @@ FROM bitnami/spark
 RUN curl https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.704/aws-java-sdk-bundle-1.11.704.jar --output /opt/bitnami/spark/jars/aws-java-sdk-bundle-1.11.704.jar
 ```
 
+### Using a different version of Hadoop jars
+
+In a similar way that in the previous section, you may want to use a different version of Hadoop jars.
+
+Go to https://spark.apache.org/downloads.html and copy the download url bundling the Hadoop version you want and matching the Spark version of the container. Extend the Bitnami container image as below:
+
+```Dockerfile
+FROM bitnami/spark:3.0.0
+
+USER root
+RUN rm -r /opt/bitnami/spark/jars && \
+    curl --location http://mirror.cc.columbia.edu/pub/software/apache/spark/spark-3.0.0/spark-3.0.0-bin-hadoop2.7.tgz | \
+    tar --extract --gzip --strip=1 --directory /opt/bitnami/spark/ spark-3.0.0-bin-hadoop2.7/jars/
+USER 1001
+```
+
+You can check the Hadoop version by running the following commands in the new container image:
+
+```console
+$ pyspark
+>>> sc._gateway.jvm.org.apache.hadoop.util.VersionInfo.getVersion()
+'2.7.4'
+```
+
 # Logging
 
 The Bitnami Spark Docker image sends the container logs to the `stdout`. To view the logs:
@@ -303,6 +327,10 @@ $ docker-compose up spark
 ```
 
 # Notable Changes
+
+## 3.0.0-debian-10-r44
+
+- The container image was updated to use Hadoop `3.2.x`. If you want to use a different version, please read [Using a different version of Hadoop jars](#using-a-different-version-of-Hadoop-jars).
 
 ## 2.4.5-debian-10-r49
 
