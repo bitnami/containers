@@ -285,10 +285,13 @@ EOF
     mongodb_set_replicasetmode_conf
     mongodb_start_bg
     if ! retry_while "mongodb_sharded_is_configsvr_initiated" "$MONGODB_MAX_TIMEOUT"; then
-        error "Unable to initialize primary config server"
+        error "Unable to initialize primary config server: cannot initiate"
         exit 1
     fi
-    mongodb_restart
+    if ! retry_while "mongodb_is_primary_node_up 127.0.0.1 $MONGODB_PORT_NUMBER admin" "$MONGODB_MAX_TIMEOUT"; then
+        error "Unable to initialize primary config server: cannot become primary"
+        exit 1
+    fi
 }
 
 ########################
@@ -304,7 +307,7 @@ mongodb_sharded_is_configsvr_reconfigured() {
     local -r node="${1:?node is required}"
     local result
     result=$(mongodb_execute "root" "$MONGODB_ROOT_PASSWORD" "admin" "$node" "$MONGODB_PORT_NUMBER" <<EOF
-rs.reconfig({"_id":"$MONGODB_REPLICA_SET_NAME", "configsvr": true, "members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
+rs.reconfig({"_id":"$MONGODB_REPLICA_SET_NAME", "protocolVersion":1, "configsvr": true, "members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
 EOF
 )
     grep -q "\"ok\" : 1" <<< "$result"
