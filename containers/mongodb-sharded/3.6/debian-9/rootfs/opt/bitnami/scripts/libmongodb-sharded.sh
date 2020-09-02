@@ -60,12 +60,14 @@ mongodb_sharded_mongod_initialize() {
         ensure_dir_exists "$MONGODB_DATA_DIR/db"
         am_i_root && chown -R "$MONGODB_DAEMON_USER" "$MONGODB_DATA_DIR/db"
 
+        if [[ "$MONGODB_SHARDING_MODE" = "configsvr" ]] && [[ "$MONGODB_REPLICA_SET_MODE" = "primary" ]]; then
+            mongodb_sharded_initiate_configsvr_primary
+        fi
         mongodb_start_bg
         mongodb_create_users
         mongodb_create_keyfile "$MONGODB_REPLICA_SET_KEY"
         mongodb_set_keyfile_conf
         mongodb_set_auth_conf
-        mongodb_set_replicasetmode_conf
         mongodb_set_listen_all_conf
         mongodb_sharded_configure_replica_set
         mongodb_stop
@@ -262,7 +264,38 @@ mongodb_sharded_configure_replica_set() {
 }
 
 ########################
-# Get if primary node is initialized
+# First initialization for the configsvr node
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mongodb_sharded_initiate_configsvr_primary() {
+    mongodb_sharded_is_configsvr_initiated() {
+        local result
+        result=$(mongodb_execute "" "" "" "127.0.0.1" <<EOF
+rs.initiate()
+EOF
+        )
+        grep -q "\"ok\" : 1" <<< "$result"
+    }
+
+    mongodb_set_replicasetmode_conf
+    mongodb_start_bg
+    if ! retry_while "mongodb_sharded_is_configsvr_initiated" "$MONGODB_MAX_TIMEOUT"; then
+        error "Unable to initialize primary config server: cannot initiate"
+        exit 1
+    fi
+    if ! retry_while "mongodb_is_primary_node_up 127.0.0.1 $MONGODB_PORT_NUMBER admin" "$MONGODB_MAX_TIMEOUT"; then
+        error "Unable to initialize primary config server: cannot become primary"
+        exit 1
+    fi
+}
+
+########################
+# Get if primary node is reconfigured
 # Globals:
 #   MONGODB_*
 # Arguments:
@@ -270,11 +303,11 @@ mongodb_sharded_configure_replica_set() {
 # Returns:
 #   None
 #########################
-mongodb_sharded_is_configsvr_initiated() {
+mongodb_sharded_is_configsvr_reconfigured() {
     local -r node="${1:?node is required}"
     local result
     result=$(mongodb_execute "root" "$MONGODB_ROOT_PASSWORD" "admin" "$node" "$MONGODB_PORT_NUMBER" <<EOF
-rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "configsvr": true, "members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
+rs.reconfig({"_id":"$MONGODB_REPLICA_SET_NAME", "protocolVersion":1, "configsvr": true, "members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
 EOF
 )
     grep -q "\"ok\" : 1" <<< "$result"
@@ -295,7 +328,7 @@ mongodb_sharded_configure_configsvr_primary() {
     info "Configuring MongoDB primary node...: $node"
     wait-for-port --timeout 360 "$MONGODB_PORT_NUMBER"
 
-    if ! retry_while "mongodb_sharded_is_configsvr_initiated $node" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "mongodb_sharded_is_configsvr_reconfigured $node" "$MONGODB_MAX_TIMEOUT"; then
         error "Unable to initialize primary config server"
         exit 1
     fi
