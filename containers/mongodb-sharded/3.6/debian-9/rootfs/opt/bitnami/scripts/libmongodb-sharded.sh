@@ -276,7 +276,7 @@ mongodb_sharded_initiate_configsvr_primary() {
     mongodb_sharded_is_configsvr_initiated() {
         local result
         result=$(mongodb_execute "" "" "" "127.0.0.1" <<EOF
-rs.initiate()
+rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "protocolVersion":1, "members":[{"_id":0,"host":"127.0.0.1:$MONGODB_PORT_NUMBER","priority":5}]})
 EOF
         )
         grep -q "\"ok\" : 1" <<< "$result"
