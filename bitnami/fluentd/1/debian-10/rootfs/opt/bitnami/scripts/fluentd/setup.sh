@@ -16,7 +16,7 @@ set -o pipefail
 eval "$(fluentd_env)"
 
 if am_i_root && [[ "$FLUENTD_DAEMON_USER" != "root" ]]; then
-    info "Ensuring $FLUENTD_DAEMON_USER:$FLUENTD_DAEMON_GROUP has ownership of required directories..."
+    debug "Ensuring $FLUENTD_DAEMON_USER:$FLUENTD_DAEMON_GROUP has ownership of required directories..."
     # Ensure fluentd user and group exist when running as 'root'
     ensure_user_exists "$FLUENTD_DAEMON_USER" "$FLUENTD_DAEMON_GROUP"
 
