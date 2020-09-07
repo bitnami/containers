@@ -29,7 +29,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7`, `7-debian-10`, `7.25.0`, `7.25.0-debian-10-r15`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/7.25.0-debian-10-r15/7/debian-10/Dockerfile)
-* [`6`, `6-debian-10`, `6.18.35`, `6.18.35-debian-10-r14` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/6.18.35-debian-10-r14/6/debian-10/Dockerfile)
+* [`6`, `6-debian-10`, `6.18.35`, `6.18.35-debian-10-r15` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/6.18.35-debian-10-r15/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rails GitHub repo](https://github.com/bitnami/bitnami-docker-laravel).
 
