@@ -2,7 +2,7 @@ version: '2'
 services:
   # Node Exporter
   node-exporter:
-    image: docker.io/bitnami/node-exporter:0
+    image: docker.io/bitnami/node-exporter:1
     command:
       - --web.listen-address=0.0.0.0:9100
   # Prepare Prometheus Configuration
