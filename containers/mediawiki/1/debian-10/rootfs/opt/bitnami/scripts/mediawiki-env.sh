@@ -36,7 +36,14 @@ mediawiki_env_vars=(
     MEDIAWIKI_DATABASE_NAME
     MEDIAWIKI_DATABASE_USER
     MEDIAWIKI_DATABASE_PASSWORD
-
+    SMTP_HOST
+    SMTP_HOST_ID
+    SMTP_PORT
+    MEDIAWIKI_SMTP_PORT
+    SMTP_USER
+    SMTP_PASSWORD
+    MARIADB_HOST
+    MARIADB_PORT_NUMBER
 )
 for env_var in "${mediawiki_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -67,30 +74,23 @@ export MEDIAWIKI_PASSWORD="${MEDIAWIKI_PASSWORD:-bitnami123}" # only used during
 export MEDIAWIKI_EMAIL="${MEDIAWIKI_EMAIL:-user@example.com}" # only used during the first initialization
 
 # MediaWiki SMTP credentials
- # only used during the first initialization
-export MEDIAWIKI_SMTP_HOST="${MEDIAWIKI_SMTP_HOST:-"${SMTP_HOST:-}"}"
-export MEDIAWIKI_SMTP_HOST="${MEDIAWIKI_SMTP_HOST:-}"
- # only used during the first initialization
-export MEDIAWIKI_SMTP_HOST_ID="${MEDIAWIKI_SMTP_HOST_ID:-"${SMTP_HOST_ID:-}"}"
-export MEDIAWIKI_SMTP_HOST_ID="${MEDIAWIKI_SMTP_HOST_ID:-$MEDIAWIKI_SMTP_HOST}"
- # only used during the first initialization
-export MEDIAWIKI_SMTP_PORT_NUMBER="${MEDIAWIKI_SMTP_PORT_NUMBER:-"${SMTP_PORT:-}"}"
-export MEDIAWIKI_SMTP_PORT_NUMBER="${MEDIAWIKI_SMTP_PORT_NUMBER:-"${MEDIAWIKI_SMTP_PORT:-}"}"
-export MEDIAWIKI_SMTP_PORT_NUMBER="${MEDIAWIKI_SMTP_PORT_NUMBER:-}"
- # only used during the first initialization
-export MEDIAWIKI_SMTP_USER="${MEDIAWIKI_SMTP_USER:-"${SMTP_USER:-}"}"
-export MEDIAWIKI_SMTP_USER="${MEDIAWIKI_SMTP_USER:-}"
- # only used during the first initialization
-export MEDIAWIKI_SMTP_PASSWORD="${MEDIAWIKI_SMTP_PASSWORD:-"${SMTP_PASSWORD:-}"}"
-export MEDIAWIKI_SMTP_PASSWORD="${MEDIAWIKI_SMTP_PASSWORD:-}"
+MEDIAWIKI_SMTP_HOST="${MEDIAWIKI_SMTP_HOST:-"${SMTP_HOST:-}"}"
+export MEDIAWIKI_SMTP_HOST="${MEDIAWIKI_SMTP_HOST:-}" # only used during the first initialization
+MEDIAWIKI_SMTP_HOST_ID="${MEDIAWIKI_SMTP_HOST_ID:-"${SMTP_HOST_ID:-}"}"
+export MEDIAWIKI_SMTP_HOST_ID="${MEDIAWIKI_SMTP_HOST_ID:-$MEDIAWIKI_SMTP_HOST}" # only used during the first initialization
+MEDIAWIKI_SMTP_PORT_NUMBER="${MEDIAWIKI_SMTP_PORT_NUMBER:-"${SMTP_PORT:-}"}"
+MEDIAWIKI_SMTP_PORT_NUMBER="${MEDIAWIKI_SMTP_PORT_NUMBER:-"${MEDIAWIKI_SMTP_PORT:-}"}"
+export MEDIAWIKI_SMTP_PORT_NUMBER="${MEDIAWIKI_SMTP_PORT_NUMBER:-}" # only used during the first initialization
+MEDIAWIKI_SMTP_USER="${MEDIAWIKI_SMTP_USER:-"${SMTP_USER:-}"}"
+export MEDIAWIKI_SMTP_USER="${MEDIAWIKI_SMTP_USER:-}" # only used during the first initialization
+MEDIAWIKI_SMTP_PASSWORD="${MEDIAWIKI_SMTP_PASSWORD:-"${SMTP_PASSWORD:-}"}"
+export MEDIAWIKI_SMTP_PASSWORD="${MEDIAWIKI_SMTP_PASSWORD:-}" # only used during the first initialization
 
 # Database configuration
- # only used during the first initialization
-export MEDIAWIKI_DATABASE_HOST="${MEDIAWIKI_DATABASE_HOST:-"${MARIADB_HOST:-}"}"
-export MEDIAWIKI_DATABASE_HOST="${MEDIAWIKI_DATABASE_HOST:-mariadb}"
- # only used during the first initialization
-export MEDIAWIKI_DATABASE_PORT_NUMBER="${MEDIAWIKI_DATABASE_PORT_NUMBER:-"${MARIADB_PORT_NUMBER:-}"}"
-export MEDIAWIKI_DATABASE_PORT_NUMBER="${MEDIAWIKI_DATABASE_PORT_NUMBER:-3306}"
+MEDIAWIKI_DATABASE_HOST="${MEDIAWIKI_DATABASE_HOST:-"${MARIADB_HOST:-}"}"
+export MEDIAWIKI_DATABASE_HOST="${MEDIAWIKI_DATABASE_HOST:-mariadb}" # only used during the first initialization
+MEDIAWIKI_DATABASE_PORT_NUMBER="${MEDIAWIKI_DATABASE_PORT_NUMBER:-"${MARIADB_PORT_NUMBER:-}"}"
+export MEDIAWIKI_DATABASE_PORT_NUMBER="${MEDIAWIKI_DATABASE_PORT_NUMBER:-3306}" # only used during the first initialization
 export MEDIAWIKI_DATABASE_NAME="${MEDIAWIKI_DATABASE_NAME:-bitnami_mediawiki}" # only used during the first initialization
 export MEDIAWIKI_DATABASE_USER="${MEDIAWIKI_DATABASE_USER:-bn_mediawiki}" # only used during the first initialization
 export MEDIAWIKI_DATABASE_PASSWORD="${MEDIAWIKI_DATABASE_PASSWORD:-}" # only used during the first initialization
