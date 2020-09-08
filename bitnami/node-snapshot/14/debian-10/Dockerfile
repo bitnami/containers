@@ -8,16 +8,16 @@ ENV OS_ARCH="amd64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl ghostscript git gzip imagemagick libbz2-1.0 libc6 libffi6 libgcc1 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libsqlite3-dev libssl-dev libssl1.1 libstdc++6 libtinfo6 pkg-config procps tar unzip wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-14.9.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "d77d8385885cf177735e0f89871793a1ad3835f70af3cb9384c0fb71f89e6bc8  /tmp/bitnami/pkg/cache/node-14.9.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/node-14.9.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/node-14.9.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-14.10.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "a50c09691248d9abda62db8848de59bb89b962f7c5da0e26e70ff688765a4056  /tmp/bitnami/pkg/cache/node-14.10.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/node-14.10.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/node-14.10.0-0-linux-amd64-debian-10.tar.gz
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="node-snapshot" \
-    BITNAMI_IMAGE_VERSION="14.9.0-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="14.10.0-debian-10-r0" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 3000
