@@ -76,17 +76,17 @@ export JOOMLA_SITE_NAME="${JOOMLA_SITE_NAME:-$JOOMLA_DEFAULT_SITE_NAME}" # only 
 export JOOMLA_SECRET="${JOOMLA_SECRET:-}" # only used during the first initialization
 
 # Joomla! SMTP credentials
- # only used during the first initializationJOOMLA_SMTP_HOST="${JOOMLA_SMTP_HOST:-"${SMTP_HOST:-}"}"
-export JOOMLA_SMTP_HOST="${JOOMLA_SMTP_HOST:-}"
- # only used during the first initializationJOOMLA_SMTP_PORT_NUMBER="${JOOMLA_SMTP_PORT_NUMBER:-"${SMTP_PORT:-}"}"
+JOOMLA_SMTP_HOST="${JOOMLA_SMTP_HOST:-"${SMTP_HOST:-}"}"
+export JOOMLA_SMTP_HOST="${JOOMLA_SMTP_HOST:-}" # only used during the first initialization
+JOOMLA_SMTP_PORT_NUMBER="${JOOMLA_SMTP_PORT_NUMBER:-"${SMTP_PORT:-}"}"
 JOOMLA_SMTP_PORT_NUMBER="${JOOMLA_SMTP_PORT_NUMBER:-"${JOOMLA_SMTP_PORT:-}"}"
-export JOOMLA_SMTP_PORT_NUMBER="${JOOMLA_SMTP_PORT_NUMBER:-}"
- # only used during the first initializationJOOMLA_SMTP_USER="${JOOMLA_SMTP_USER:-"${SMTP_USER:-}"}"
-export JOOMLA_SMTP_USER="${JOOMLA_SMTP_USER:-}"
- # only used during the first initializationJOOMLA_SMTP_PASSWORD="${JOOMLA_SMTP_PASSWORD:-"${SMTP_PASSWORD:-}"}"
-export JOOMLA_SMTP_PASSWORD="${JOOMLA_SMTP_PASSWORD:-}"
- # only used during the first initializationJOOMLA_SMTP_PROTOCOL="${JOOMLA_SMTP_PROTOCOL:-"${SMTP_PROTOCOL:-}"}"
-export JOOMLA_SMTP_PROTOCOL="${JOOMLA_SMTP_PROTOCOL:-}"
+export JOOMLA_SMTP_PORT_NUMBER="${JOOMLA_SMTP_PORT_NUMBER:-}" # only used during the first initialization
+JOOMLA_SMTP_USER="${JOOMLA_SMTP_USER:-"${SMTP_USER:-}"}"
+export JOOMLA_SMTP_USER="${JOOMLA_SMTP_USER:-}" # only used during the first initialization
+JOOMLA_SMTP_PASSWORD="${JOOMLA_SMTP_PASSWORD:-"${SMTP_PASSWORD:-}"}"
+export JOOMLA_SMTP_PASSWORD="${JOOMLA_SMTP_PASSWORD:-}" # only used during the first initialization
+JOOMLA_SMTP_PROTOCOL="${JOOMLA_SMTP_PROTOCOL:-"${SMTP_PROTOCOL:-}"}"
+export JOOMLA_SMTP_PROTOCOL="${JOOMLA_SMTP_PROTOCOL:-}" # only used during the first initialization
 
 # Database configuration
 export JOOMLA_DEFAULT_DATABASE_HOST="mariadb" # only used at build time
