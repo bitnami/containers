@@ -15,10 +15,10 @@
     },
     "jasperreports": {
         "arch": "amd64",
-        "digest": "39ad907a4a6e87a0142a9a957f3dea58afaf72e3f366c3ef89ac83f1de55da56",
+        "digest": "e56ea753a534dbca4857f8e1991fc04905a6f507188acd6feca15dff6bdf9381",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.5.0-0"
+        "version": "7.8.0-1"
     },
     "java": {
         "arch": "amd64",
@@ -43,9 +43,9 @@
     },
     "tomcat": {
         "arch": "amd64",
-        "digest": "91e816aac9ad4bbace9fae1b6f472fcdaf9e0b1fad9be3a21cf8173b50cedc8b",
+        "digest": "29e97e6648a06581c6542a48849eca1047be7bda705b2fd760e596572722a56a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "9.0.37-2"
+        "version": "9.0.37-4"
     }
 }
