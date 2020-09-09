@@ -11,12 +11,13 @@ set -o pipefail
 . /opt/bitnami/scripts/moodle-env.sh
 
 # Load libraries
+. /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libwebserver.sh
 
 # Catch SIGTERM signal and stop all child processes
-_forwardTerm () {
+_forwardTerm() {
     warn "Caught signal SIGTERM, passing it to child processes..."
     pgrep -P $$ | xargs kill -TERM 2>/dev/null
     wait

@@ -23,7 +23,6 @@ php_env_vars=(
     PHP_POST_MAX_SIZE
     PHP_MEMORY_LIMIT
     PHP_MAX_EXECUTION_TIME
-
 )
 for env_var in "${php_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"

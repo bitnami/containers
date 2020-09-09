@@ -36,7 +36,15 @@ moodle_env_vars=(
     MOODLE_DATABASE_NAME
     MOODLE_DATABASE_USER
     MOODLE_DATABASE_PASSWORD
-
+    MOODLE_SKIP_INSTALL
+    SMTP_HOST
+    SMTP_PORT
+    MOODLE_SMTP_PORT
+    SMTP_USER
+    SMTP_PASSWORD
+    SMTP_PROTOCOL
+    MARIADB_HOST
+    MARIADB_PORT_NUMBER
 )
 for env_var in "${moodle_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -57,9 +65,8 @@ export MOODLE_DATA_DIR="${BITNAMI_VOLUME_DIR}/moodledata"
 export MOODLE_DATA_TO_PERSIST="${MOODLE_DATA_TO_PERSIST:-$MOODLE_BASE_DIR}"
 
 # Moodle configuration
- # only used during the first initialization
-export MOODLE_SKIP_BOOTSTRAP="${MOODLE_SKIP_BOOTSTRAP:-"${MOODLE_SKIP_INSTALL:-}"}"
-export MOODLE_SKIP_BOOTSTRAP="${MOODLE_SKIP_BOOTSTRAP:-}"
+MOODLE_SKIP_BOOTSTRAP="${MOODLE_SKIP_BOOTSTRAP:-"${MOODLE_SKIP_INSTALL:-}"}"
+export MOODLE_SKIP_BOOTSTRAP="${MOODLE_SKIP_BOOTSTRAP:-}" # only used during the first initialization
 export MOODLE_INSTALL_EXTRA_ARGS="${MOODLE_INSTALL_EXTRA_ARGS:-}" # only used during the first initialization
 export MOODLE_SITE_NAME="${MOODLE_SITE_NAME:-New Site}" # only used during the first initialization
 
@@ -69,31 +76,24 @@ export MOODLE_PASSWORD="${MOODLE_PASSWORD:-bitnami}" # only used during the firs
 export MOODLE_EMAIL="${MOODLE_EMAIL:-user@example.com}" # only used during the first initialization
 
 # Moodle SMTP credentials
- # only used during the first initialization
-export MOODLE_SMTP_HOST="${MOODLE_SMTP_HOST:-"${SMTP_HOST:-}"}"
-export MOODLE_SMTP_HOST="${MOODLE_SMTP_HOST:-}"
- # only used during the first initialization
-export MOODLE_SMTP_PORT_NUMBER="${MOODLE_SMTP_PORT_NUMBER:-"${SMTP_PORT:-}"}"
-export MOODLE_SMTP_PORT_NUMBER="${MOODLE_SMTP_PORT_NUMBER:-"${MOODLE_SMTP_PORT:-}"}"
-export MOODLE_SMTP_PORT_NUMBER="${MOODLE_SMTP_PORT_NUMBER:-}"
- # only used during the first initialization
-export MOODLE_SMTP_USER="${MOODLE_SMTP_USER:-"${SMTP_USER:-}"}"
-export MOODLE_SMTP_USER="${MOODLE_SMTP_USER:-}"
- # only used during the first initialization
-export MOODLE_SMTP_PASSWORD="${MOODLE_SMTP_PASSWORD:-"${SMTP_PASSWORD:-}"}"
-export MOODLE_SMTP_PASSWORD="${MOODLE_SMTP_PASSWORD:-}"
- # only used during the first initialization
-export MOODLE_SMTP_PROTOCOL="${MOODLE_SMTP_PROTOCOL:-"${SMTP_PROTOCOL:-}"}"
-export MOODLE_SMTP_PROTOCOL="${MOODLE_SMTP_PROTOCOL:-}"
+MOODLE_SMTP_HOST="${MOODLE_SMTP_HOST:-"${SMTP_HOST:-}"}"
+export MOODLE_SMTP_HOST="${MOODLE_SMTP_HOST:-}" # only used during the first initialization
+MOODLE_SMTP_PORT_NUMBER="${MOODLE_SMTP_PORT_NUMBER:-"${SMTP_PORT:-}"}"
+MOODLE_SMTP_PORT_NUMBER="${MOODLE_SMTP_PORT_NUMBER:-"${MOODLE_SMTP_PORT:-}"}"
+export MOODLE_SMTP_PORT_NUMBER="${MOODLE_SMTP_PORT_NUMBER:-}" # only used during the first initialization
+MOODLE_SMTP_USER="${MOODLE_SMTP_USER:-"${SMTP_USER:-}"}"
+export MOODLE_SMTP_USER="${MOODLE_SMTP_USER:-}" # only used during the first initialization
+MOODLE_SMTP_PASSWORD="${MOODLE_SMTP_PASSWORD:-"${SMTP_PASSWORD:-}"}"
+export MOODLE_SMTP_PASSWORD="${MOODLE_SMTP_PASSWORD:-}" # only used during the first initialization
+MOODLE_SMTP_PROTOCOL="${MOODLE_SMTP_PROTOCOL:-"${SMTP_PROTOCOL:-}"}"
+export MOODLE_SMTP_PROTOCOL="${MOODLE_SMTP_PROTOCOL:-}" # only used during the first initialization
 
 # Database configuration
 export MOODLE_DATABASE_TYPE="${MOODLE_DATABASE_TYPE:-mariadb}" # only used during the first initialization
- # only used during the first initialization
-export MOODLE_DATABASE_HOST="${MOODLE_DATABASE_HOST:-"${MARIADB_HOST:-}"}"
-export MOODLE_DATABASE_HOST="${MOODLE_DATABASE_HOST:-mariadb}"
- # only used during the first initialization
-export MOODLE_DATABASE_PORT_NUMBER="${MOODLE_DATABASE_PORT_NUMBER:-"${MARIADB_PORT_NUMBER:-}"}"
-export MOODLE_DATABASE_PORT_NUMBER="${MOODLE_DATABASE_PORT_NUMBER:-3306}"
+MOODLE_DATABASE_HOST="${MOODLE_DATABASE_HOST:-"${MARIADB_HOST:-}"}"
+export MOODLE_DATABASE_HOST="${MOODLE_DATABASE_HOST:-mariadb}" # only used during the first initialization
+MOODLE_DATABASE_PORT_NUMBER="${MOODLE_DATABASE_PORT_NUMBER:-"${MARIADB_PORT_NUMBER:-}"}"
+export MOODLE_DATABASE_PORT_NUMBER="${MOODLE_DATABASE_PORT_NUMBER:-3306}" # only used during the first initialization
 export MOODLE_DATABASE_NAME="${MOODLE_DATABASE_NAME:-bitnami_moodle}" # only used during the first initialization
 export MOODLE_DATABASE_USER="${MOODLE_DATABASE_USER:-bn_moodle}" # only used during the first initialization
 export MOODLE_DATABASE_PASSWORD="${MOODLE_DATABASE_PASSWORD:-}" # only used during the first initialization
