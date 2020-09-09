@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6.0`, `6.0-debian-10`, `6.0.7`, `6.0.7-debian-10-r4`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.0.7-debian-10-r4/6.0/debian-10/Dockerfile)
-* [`5.0`, `5.0-debian-10`, `5.0.9`, `5.0.9-debian-10-r122` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.9-debian-10-r122/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.9`, `5.0.9-debian-10-r123` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.9-debian-10-r123/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-cluster GitHub repo](https://github.com/bitnami/bitnami-docker-redis-cluster).
 
@@ -144,26 +144,26 @@ Refer to the [Redis configuration](http://redis.io/topics/config) manual for the
 
 
 The following env vars are supported for this container:
-| Name                      | Description                                                                                                                                 |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `REDIS_DISABLE_COMMANDS`  | Disables the specified Redis commands                                                                                                       |
-| `REDIS_PORT`              | Set the Redis port. Default=: `6379`                                                                                                        |
-| `REDIS_PASSWORD`          | Set the Redis password. Default: `bitnami`                                                                                                  |
-| `ALLOW_EMPTY_PASSWORD`    | Enables access without password                                                                                                             |
-| `REDIS_DNS_RETRIES`       | Number of retries to get the IPs of the provided `REDIS_NODES`. It will wait 5 seconds between retries
-| `REDISCLI_AUTH`           | Provide the same value as the configured `REDIS_PASSWORD` for the redis-cli tool to authenticate                                            |
-| `REDIS_CLUSTER_CREATOR`   | Set to `yes` if the container will be the one on charge of initialize the cluster. This node will not be part of the cluster, it will complete the execution after the initialization. |
-| `REDIS_CLUSTER_REPLICAS`  | Number of replicas for every master that the cluster will have.                                                                                |
-| `REDIS_NODES`             | String delimited by spaces containing the hostnames of all of the nodes that will be part of the cluster                                    |
-| `REDIS_ANNOUNCE_IP` | IP that the node should announce, used for non dynamic ip environents |
-| `REDIS_CLUSTER_DYNAMIC_IPS` | Set to `no` if your Redis cluster will be created with statical IPs. Default: `yes` |
-| `REDIS_TLS_ENABLED` | Whether to enable TLS for traffic or not. Defaults to `no`. |
-| `REDIS_TLS_PORT` | Port used for TLS secure traffic. Defaults to `6379`. |
-| `REDIS_TLS_CERT_FILE` | File containing the certificate file for the TSL traffic. No defaults. |
-| `REDIS_TLS_KEY_FILE` | File containing the key for certificate. No defaults. |
-| `REDIS_TLS_CA_FILE` | File containing the CA of the certificate. No defaults. |
-| `REDIS_TLS_DH_PARAMS_FILE` | File containing DH params (in order to support DH based ciphers). No defaults. |
-| `REDIS_TLS_AUTH_CLIENTS` | Whether to require clients to authenticate or not. Defaults to `yes`. |
+| Name                        | Description                                                                                                                                                                            |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `REDIS_DISABLE_COMMANDS`    | Disables the specified Redis commands                                                                                                                                                  |
+| `REDIS_PORT`                | Set the Redis port. Default=: `6379`                                                                                                                                                   |
+| `REDIS_PASSWORD`            | Set the Redis password. Default: `bitnami`                                                                                                                                             |
+| `ALLOW_EMPTY_PASSWORD`      | Enables access without password                                                                                                                                                        |
+| `REDIS_DNS_RETRIES`         | Number of retries to get the IPs of the provided `REDIS_NODES`. It will wait 5 seconds between retries                                                                                 |
+| `REDISCLI_AUTH`             | Provide the same value as the configured `REDIS_PASSWORD` for the redis-cli tool to authenticate                                                                                       |
+| `REDIS_CLUSTER_CREATOR`     | Set to `yes` if the container will be the one on charge of initialize the cluster. This node will not be part of the cluster, it will complete the execution after the initialization. |
+| `REDIS_CLUSTER_REPLICAS`    | Number of replicas for every master that the cluster will have.                                                                                                                        |
+| `REDIS_NODES`               | String delimited by spaces containing the hostnames of all of the nodes that will be part of the cluster                                                                               |
+| `REDIS_ANNOUNCE_IP`         | IP that the node should announce, used for non dynamic ip environents                                                                                                                  |
+| `REDIS_CLUSTER_DYNAMIC_IPS` | Set to `no` if your Redis cluster will be created with statical IPs. Default: `yes`                                                                                                    |
+| `REDIS_TLS_ENABLED`         | Whether to enable TLS for traffic or not. Defaults to `no`.                                                                                                                            |
+| `REDIS_TLS_PORT`            | Port used for TLS secure traffic. Defaults to `6379`.                                                                                                                                  |
+| `REDIS_TLS_CERT_FILE`       | File containing the certificate file for the TSL traffic. No defaults.                                                                                                                 |
+| `REDIS_TLS_KEY_FILE`        | File containing the key for certificate. No defaults.                                                                                                                                  |
+| `REDIS_TLS_CA_FILE`         | File containing the CA of the certificate. No defaults.                                                                                                                                |
+| `REDIS_TLS_DH_PARAMS_FILE`  | File containing DH params (in order to support DH based ciphers). No defaults.                                                                                                         |
+| `REDIS_TLS_AUTH_CLIENTS`    | Whether to require clients to authenticate or not. Defaults to `yes`.                                                                                                                  |
 
 Once all the Redis nodes are running you need to execute command like the following to initiate the cluster:
 
@@ -171,7 +171,7 @@ Once all the Redis nodes are running you need to execute command like the follow
 redis-cli --cluster create node1:port node2:port --cluster-replicas 1 --cluster-yes
 ```
 
-Where you can add all the `node:port` that you want. The `--cluster-replicas` parameters indicates how many slaves you want to have for every master.
+Where you can add all the `node:port` that you want. The `--cluster-replicas` parameters indicates how many replicas you want to have for every master.
 
 ## Securing Redis Cluster traffic
 
