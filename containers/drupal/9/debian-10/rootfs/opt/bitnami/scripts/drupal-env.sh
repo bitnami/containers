@@ -26,6 +26,11 @@ drupal_env_vars=(
     DRUPAL_USERNAME
     DRUPAL_PASSWORD
     DRUPAL_EMAIL
+    DRUPAL_SMTP_HOST
+    DRUPAL_SMTP_PORT_NUMBER
+    DRUPAL_SMTP_USER
+    DRUPAL_SMTP_PASSWORD
+    DRUPAL_SMTP_PROTOCOL
     DRUPAL_DATABASE_HOST
     DRUPAL_DATABASE_PORT_NUMBER
     DRUPAL_DATABASE_NAME
@@ -33,6 +38,12 @@ drupal_env_vars=(
     DRUPAL_DATABASE_PASSWORD
     DRUPAL_DATABASE_TLS_CA_FILE
     DRUPAL_DATABASE_MIN_VERSION
+    SMTP_HOST
+    SMTP_PORT
+    DRUPAL_SMTP_PORT
+    SMTP_USER
+    SMTP_PASSWORD
+    SMTP_PROTOCOL
     MARIADB_HOST
     MARIADB_PORT_NUMBER
 )
@@ -56,26 +67,39 @@ export DRUPAL_MOUNTED_CONF_FILE="${DRUPAL_VOLUME_DIR}/settings.php"
 export DRUPAL_DATA_TO_PERSIST="${DRUPAL_DATA_TO_PERSIST:-sites/ themes/ modules/ profiles/}"
 
 # Drupal configuration
-export DRUPAL_PROFILE="${DRUPAL_PROFILE:-standard}"
-export DRUPAL_SITE_NAME="${DRUPAL_SITE_NAME:-My blog}"
-export DRUPAL_SKIP_BOOTSTRAP="${DRUPAL_SKIP_BOOTSTRAP:-}"
-export DRUPAL_ENABLE_MODULES="${DRUPAL_ENABLE_MODULES:-}"
+export DRUPAL_PROFILE="${DRUPAL_PROFILE:-standard}" # only used during the first initialization
+export DRUPAL_SITE_NAME="${DRUPAL_SITE_NAME:-My blog}" # only used during the first initialization
+export DRUPAL_SKIP_BOOTSTRAP="${DRUPAL_SKIP_BOOTSTRAP:-}" # only used during the first initialization
+export DRUPAL_ENABLE_MODULES="${DRUPAL_ENABLE_MODULES:-}" # only used during the first initialization
 
 # Drupal credentials
-export DRUPAL_USERNAME="${DRUPAL_USERNAME:-user}"
-export DRUPAL_PASSWORD="${DRUPAL_PASSWORD:-bitnami}"
-export DRUPAL_EMAIL="${DRUPAL_EMAIL:-user@example.com}"
+export DRUPAL_USERNAME="${DRUPAL_USERNAME:-user}" # only used during the first initialization
+export DRUPAL_PASSWORD="${DRUPAL_PASSWORD:-bitnami}" # only used during the first initialization
+export DRUPAL_EMAIL="${DRUPAL_EMAIL:-user@example.com}" # only used during the first initialization
+
+# Drupal SMTP credentials
+DRUPAL_SMTP_HOST="${DRUPAL_SMTP_HOST:-"${SMTP_HOST:-}"}"
+export DRUPAL_SMTP_HOST="${DRUPAL_SMTP_HOST:-}" # only used during the first initialization
+DRUPAL_SMTP_PORT_NUMBER="${DRUPAL_SMTP_PORT_NUMBER:-"${SMTP_PORT:-}"}"
+DRUPAL_SMTP_PORT_NUMBER="${DRUPAL_SMTP_PORT_NUMBER:-"${DRUPAL_SMTP_PORT:-}"}"
+export DRUPAL_SMTP_PORT_NUMBER="${DRUPAL_SMTP_PORT_NUMBER:-25}" # only used during the first initialization
+DRUPAL_SMTP_USER="${DRUPAL_SMTP_USER:-"${SMTP_USER:-}"}"
+export DRUPAL_SMTP_USER="${DRUPAL_SMTP_USER:-}" # only used during the first initialization
+DRUPAL_SMTP_PASSWORD="${DRUPAL_SMTP_PASSWORD:-"${SMTP_PASSWORD:-}"}"
+export DRUPAL_SMTP_PASSWORD="${DRUPAL_SMTP_PASSWORD:-}" # only used during the first initialization
+DRUPAL_SMTP_PROTOCOL="${DRUPAL_SMTP_PROTOCOL:-"${SMTP_PROTOCOL:-}"}"
+export DRUPAL_SMTP_PROTOCOL="${DRUPAL_SMTP_PROTOCOL:-standard}" # only used during the first initialization
 
 # Database configuration
 export DRUPAL_DEFAULT_DATABASE_HOST="mariadb" # only used at build time
 DRUPAL_DATABASE_HOST="${DRUPAL_DATABASE_HOST:-"${MARIADB_HOST:-}"}"
-export DRUPAL_DATABASE_HOST="${DRUPAL_DATABASE_HOST:-$DRUPAL_DEFAULT_DATABASE_HOST}"
+export DRUPAL_DATABASE_HOST="${DRUPAL_DATABASE_HOST:-$DRUPAL_DEFAULT_DATABASE_HOST}" # only used during the first initialization
 DRUPAL_DATABASE_PORT_NUMBER="${DRUPAL_DATABASE_PORT_NUMBER:-"${MARIADB_PORT_NUMBER:-}"}"
-export DRUPAL_DATABASE_PORT_NUMBER="${DRUPAL_DATABASE_PORT_NUMBER:-3306}"
-export DRUPAL_DATABASE_NAME="${DRUPAL_DATABASE_NAME:-bitnami_drupal}"
-export DRUPAL_DATABASE_USER="${DRUPAL_DATABASE_USER:-bn_drupal}"
-export DRUPAL_DATABASE_PASSWORD="${DRUPAL_DATABASE_PASSWORD:-}"
-export DRUPAL_DATABASE_TLS_CA_FILE="${DRUPAL_DATABASE_TLS_CA_FILE:-}"
+export DRUPAL_DATABASE_PORT_NUMBER="${DRUPAL_DATABASE_PORT_NUMBER:-3306}" # only used during the first initialization
+export DRUPAL_DATABASE_NAME="${DRUPAL_DATABASE_NAME:-bitnami_drupal}" # only used during the first initialization
+export DRUPAL_DATABASE_USER="${DRUPAL_DATABASE_USER:-bn_drupal}" # only used during the first initialization
+export DRUPAL_DATABASE_PASSWORD="${DRUPAL_DATABASE_PASSWORD:-}" # only used during the first initialization
+export DRUPAL_DATABASE_TLS_CA_FILE="${DRUPAL_DATABASE_TLS_CA_FILE:-}" # only used during the first initialization
 export DRUPAL_DATABASE_MIN_VERSION="${DRUPAL_DATABASE_MIN_VERSION:-}"
 
 # PHP configuration
