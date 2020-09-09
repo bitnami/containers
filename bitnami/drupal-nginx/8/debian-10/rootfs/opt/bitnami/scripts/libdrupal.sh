@@ -41,6 +41,13 @@ drupal_validate() {
         error "$1"
         error_code=1
     }
+
+    check_multi_value() {
+        if [[ " ${2} " != *" ${!1} "* ]]; then
+            print_validation_error "The allowed values for ${1} are: ${2}"
+        fi
+    }
+
     check_yes_no_value() {
         if ! is_yes_no_value "${!1}" && ! is_true_false_value "${!1}"; then
             print_validation_error "The allowed values for ${1} are: yes no"
@@ -75,6 +82,15 @@ drupal_validate() {
         for empty_env_var in "DRUPAL_DATABASE_PASSWORD" "DRUPAL_PASSWORD"; do
             is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
         done
+    fi
+
+    # Validate SMTP credentials
+    if ! is_empty_value "$DRUPAL_SMTP_HOST"; then
+        for empty_env_var in "DRUPAL_SMTP_USER" "DRUPAL_SMTP_PASSWORD" "DRUPAL_SMTP_PORT_NUMBER" "DRUPAL_SMTP_PROTOCOL"; do
+            is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
+        done
+        ! is_empty_value "$DRUPAL_DATABASE_PORT_NUMBER" && validate_port "$DRUPAL_SMTP_PORT_NUMBER"
+        ! is_empty_value "$DRUPAL_SMTP_PROTOCOL" && check_multi_value "DRUPAL_SMTP_PROTOCOL" "standard tls ssl"
     fi
 
     # Check that the web server is properly set up
@@ -125,6 +141,10 @@ drupal_initialize() {
             if ! is_empty_value "$DRUPAL_ENABLE_MODULES"; then
                 info "Enabling Drupal modules"
                 drupal_enable_modules
+            fi
+            if ! is_empty_value "$DRUPAL_SMTP_HOST"; then
+                info "Configuring SMTP"
+                drupal_configure_smtp
             fi
             info "Flushing Drupal cache"
             drupal_flush_cache
@@ -259,7 +279,7 @@ drupal_site_install() {
 # Globals:
 #   *
 # Arguments:
-#   None
+#   $@ - Arguments to pass to the Drush tool
 # Returns:
 #   None
 #########################
@@ -268,6 +288,30 @@ drush_execute() {
         debug_execute gosu "$WEB_SERVER_DAEMON_USER" drush "--root=${DRUPAL_BASE_DIR}" "$@"
     else
         debug_execute drush "--root=${DRUPAL_BASE_DIR}" "$@"
+    fi
+}
+
+########################
+# Execute Drush Tool to set a config option
+# Globals:
+#   *
+# Arguments:
+#   $1 - config group
+#   $2 - config key
+#   $3 - config value
+# Returns:
+#   None
+#########################
+drush_config_set() {
+    local -r group="${1:?missing config group}"
+    local -r key="${2:?missing config key}"
+    local -r value="${3:?missing config value}"
+
+    local -r major_version="$(get_sematic_version "$(drupal_get_version)" 1)"
+    if [[ "$major_version" -gt 7 ]]; then
+        drush_execute "config-set" "--yes" "$group" "$key" "$value"
+    else
+        drush_execute "variable-set" "$key" "$value"
     fi
 }
 
@@ -301,6 +345,36 @@ drupal_enable_modules() {
 }
 
 ########################
+# Drupal configure SMTP
+# Globals:
+#   *
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+drupal_configure_smtp() {
+    local -r major_version="$(get_sematic_version "$(drupal_get_version)" 1)"
+
+    drush_execute "pm:enable" "--yes" "smtp"
+
+    if [[ "$major_version" -gt 7 ]]; then
+        drush_config_set "system.mail" "interface.default" "SMTPMailSystem"
+    else
+        drush_execute "php:eval" 'variable_set("mail_system", array("default-system" => "SmtpMailSystem"))'
+    fi
+
+    drush_config_set "smtp.settings" "smtp_on" "1"
+    drush_config_set "smtp.settings" "smtp_host" "$DRUPAL_SMTP_HOST"
+    drush_config_set "smtp.settings" "smtp_port" "$DRUPAL_SMTP_PORT_NUMBER"
+    drush_config_set "smtp.settings" "smtp_protocol" "$DRUPAL_SMTP_PROTOCOL"
+    drush_config_set "smtp.settings" "smtp_username" "$DRUPAL_SMTP_USER"
+    drush_config_set "smtp.settings" "smtp_password" "$DRUPAL_SMTP_PASSWORD"
+    drush_config_set "smtp.settings" "smtp_from" "$DRUPAL_EMAIL"
+    drush_config_set "smtp.settings" "smtp_fromname" "$DRUPAL_SITE_NAME"
+}
+
+########################
 # Drupal flush cache
 # Globals:
 #   *
@@ -315,7 +389,7 @@ drupal_flush_cache() {
         drush_execute "cache:rebuild"
     else
         # This is occasionally needed by modules that make system-wide changes to access levels.
-        drush_execute php-eval 'node_access_rebuild();'
+        drush_execute "php:eval" 'node_access_rebuild();'
         drush_execute "cache:clear" "all"
     fi
 }
