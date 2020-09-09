@@ -153,7 +153,7 @@ The following env vars are supported for this container:
 | `REDIS_DNS_RETRIES`       | Number of retries to get the IPs of the provided `REDIS_NODES`. It will wait 5 seconds between retries
 | `REDISCLI_AUTH`           | Provide the same value as the configured `REDIS_PASSWORD` for the redis-cli tool to authenticate                                            |
 | `REDIS_CLUSTER_CREATOR`   | Set to `yes` if the container will be the one on charge of initialize the cluster. This node will not be part of the cluster, it will complete the execution after the initialization. |
-| `REDIS_CLUSTER_REPLICAS`  | Number of slaves for every aster that the cluster will have.                                                                                |
+| `REDIS_CLUSTER_REPLICAS`  | Number of replicas for every master that the cluster will have.                                                                                |
 | `REDIS_NODES`             | String delimited by spaces containing the hostnames of all of the nodes that will be part of the cluster                                    |
 | `REDIS_ANNOUNCE_IP` | IP that the node should announce, used for non dynamic ip environents |
 | `REDIS_CLUSTER_DYNAMIC_IPS` | Set to `no` if your Redis cluster will be created with statical IPs. Default: `yes` |
