@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`9`, `9-debian-10`, `9.0.5`, `9.0.5-debian-10-r2`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/9.0.5-debian-10-r2/9/debian-10/Dockerfile)
-* [`8`, `8-debian-10`, `8.9.5`, `8.9.5-debian-10-r5` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.9.5-debian-10-r5/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.9.5`, `8.9.5-debian-10-r6` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.9.5-debian-10-r6/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
 
@@ -250,9 +250,55 @@ Available environment variables:
 - `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
+##### SMTP Configuration
+
+To configure Drupal to send email using SMTP you can set the following environment variables:
+
+- `DRUPAL_SMTP_HOST`: SMTP host.
+- `DRUPAL_SMTP_PORT`: SMTP port.
+- `DRUPAL_SMTP_USER`: SMTP account user.
+- `DRUPAL_SMTP_PASSWORD`: SMTP account password.
+- `DRUPAL_SMTP_PROTOCOL`: SMTP protocol. (standard, tls, ssl).
+
 ##### PHP configuration
 
 - `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **256M**
+
+##### Example
+
+This would be an example of SMTP configuration using a Gmail account:
+
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-drupal/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+  drupal:
+    ...
+    environment:
+      - DRUPAL_DATABASE_USER=bn_drupal
+      - DRUPAL_DATABASE_NAME=bitnami_drupal
+      - ALLOW_EMPTY_PASSWORD=yes
+      - DRUPAL_SMTP_HOST=smtp.gmail.com
+      - DRUPAL_SMTP_PORT=587
+      - DRUPAL_SMTP_USER=your_email@gmail.com
+      - DRUPAL_SMTP_PASSWORD=your_password
+      - DRUPAL_SMTP_PROTOCOL=tls
+  ...
+```
+ * For manual execution:
+
+  ```console
+  $ docker run -d --name drupal -p 80:8080 -p 443:8443 \
+    --env DRUPAL_DATABASE_USER=bn_drupal \
+    --env DRUPAL_DATABASE_NAME=bitnami_drupal \
+    --env DRUPAL_SMTP_HOST=smtp.gmail.com \
+    --env DRUPAL_SMTP_PORT=587 \
+    --env DRUPAL_SMTP_USER=your_email@gmail.com \
+    --env DRUPAL_SMTP_PASSWORD=your_password \
+    --env DRUPAL_SMTP_PROTOCOL=tls \
+    --network drupal-tier \
+    --volume /path/to/drupal-persistence:/bitnami \
+    bitnami/drupal:latest
+  ```
 
 ## Logging
 
