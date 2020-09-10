@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.0`, `6.0-debian-10`, `6.0.7`, `6.0.7-debian-10-r9`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.7-debian-10-r9/6.0/debian-10/Dockerfile)
+* [`6.0`, `6.0-debian-10`, `6.0.7`, `6.0.7-debian-10-r10`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.7-debian-10-r10/6.0/debian-10/Dockerfile)
 * [`5.0`, `5.0-debian-10`, `5.0.9`, `5.0.9-debian-10-r115` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.9-debian-10-r115/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
@@ -215,6 +215,8 @@ The Redis Sentinel instance can be customized by specifying environment variable
 - `REDIS_SENTINEL_TLS_CA_FILE`: File containing the CA of the certificate. No defaults.
 - `REDIS_SENTINEL_TLS_DH_PARAMS_FILE`: File containing DH params (in order to support DH based ciphers). No defaults.
 - `REDIS_SENTINEL_TLS_AUTH_CLIENTS`: Whether to require clients to authenticate or not. Default: **yes**.
+- `REDIS_SENTINEL_ANNOUNCE_IP`: Use the specified IP address in the HELLO messages used to gossip its presence. Default: **auto-detected local address**.
+- `REDIS_SENTINEL_ANNOUNCE_PORT`: Use the specified port in the HELLO messages used to gossip its presence. Default: **port specified in `REDIS_SENTINEL_PORT_NUMBER`**.
 
 ## Securing Redis Sentinel traffic
 
