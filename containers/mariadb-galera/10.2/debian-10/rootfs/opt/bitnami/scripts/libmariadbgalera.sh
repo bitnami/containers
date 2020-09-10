@@ -523,7 +523,7 @@ EOF
                 mysql_ensure_optional_database_exists "${createdb_args[@]}"
             fi
             mysql_ensure_galera_mariabackup_user_exists "$DB_GALERA_MARIABACKUP_USER" "$DB_GALERA_MARIABACKUP_PASSWORD"
-            mysql_ensure_replication_user_exists "monitor" "monitor"
+            mysql_ensure_replication_user_exists "$MARIADB_REPLICATION_USER" "$MARIADB_REPLICATION_PASSWORD"
 
             [[ -n "$(get_master_env_var_value ROOT_PASSWORD)" ]] && export ROOT_AUTH_ENABLED="yes"
             if [[ "$DB_FLAVOR" = "mysql" ]]; then
