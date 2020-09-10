@@ -72,40 +72,49 @@ export PGPOOL_HEALTH_CHECK_MAX_RETRIES="${PGPOOL_HEALTH_CHECK_MAX_RETRIES:-5}"
 export PGPOOL_HEALTH_CHECK_RETRY_DELAY="${PGPOOL_HEALTH_CHECK_RETRY_DELAY:-5}"
 export PGPOOL_POSTGRES_CUSTOM_USERS="${PGPOOL_POSTGRES_CUSTOM_USERS:-}"
 export PGPOOL_POSTGRES_CUSTOM_PASSWORDS="${PGPOOL_POSTGRES_CUSTOM_PASSWORDS:-}"
+
+# SSL
+
+export PGPOOL_ENABLE_TLS="${PGPOOL_ENABLE_TLS:-no}"
+export PGPOOL_TLS_CERT_FILE="${PGPOOL_TLS_CERT_FILE:-}"
+export PGPOOL_TLS_KEY_FILE="${PGPOOL_TLS_KEY_FILE:-}"
+export PGPOOL_TLS_CA_FILE="${PGPOOL_TLS_CA_FILE:-}"
+export PGPOOL_TLS_PREFER_SERVER_CIPHERS="${PGPOOL_TLS_PREFER_SERVER_CIPHERS:-yes}"
+
 EOF
     if [[ -f "${PGPOOL_ADMIN_PASSWORD_FILE:-}" ]]; then
-        cat << "EOF"
+        cat <<"EOF"
 export PGPOOL_ADMIN_PASSWORD="$(< "${PGPOOL_ADMIN_PASSWORD_FILE}")"
 EOF
     else
-        cat << "EOF"
+        cat <<"EOF"
 export PGPOOL_ADMIN_PASSWORD="${PGPOOL_ADMIN_PASSWORD:-}"
 EOF
     fi
     if [[ -f "${PGPOOL_POSTGRES_PASSWORD_FILE:-}" ]]; then
-        cat << "EOF"
+        cat <<"EOF"
 export PGPOOL_POSTGRES_PASSWORD="$(< "${PGPOOL_POSTGRES_PASSWORD_FILE}")"
 EOF
     else
-        cat << "EOF"
+        cat <<"EOF"
 export PGPOOL_POSTGRES_PASSWORD="${PGPOOL_POSTGRES_PASSWORD:-}"
 EOF
     fi
     if [[ -f "${PGPOOL_SR_CHECK_PASSWORD_FILE:-}" ]]; then
-        cat << "EOF"
+        cat <<"EOF"
 export PGPOOL_SR_CHECK_PASSWORD="$(< "${PGPOOL_SR_CHECK_PASSWORD_FILE}")"
 EOF
     else
-        cat << "EOF"
+        cat <<"EOF"
 export PGPOOL_SR_CHECK_PASSWORD="${PGPOOL_SR_CHECK_PASSWORD:-}"
 EOF
     fi
     if [[ -f "${PGPOOL_HEALTH_CHECK_PASSWORD_FILE:-}" ]]; then
-        cat << "EOF"
+        cat <<"EOF"
 export PGPOOL_HEALTH_CHECK_PASSWORD="$(< "${PGPOOL_HEALTH_CHECK_PASSWORD_FILE}")"
 EOF
     else
-        cat << "EOF"
+        cat <<"EOF"
 export PGPOOL_HEALTH_CHECK_PASSWORD="${PGPOOL_HEALTH_CHECK_PASSWORD:-$PGPOOL_SR_CHECK_PASSWORD}"
 EOF
     fi
@@ -133,17 +142,17 @@ pgpool_validate() {
     if [[ -z "$PGPOOL_ADMIN_USERNAME" ]] || [[ -z "$PGPOOL_ADMIN_PASSWORD" ]]; then
         print_validation_error "The Pgpool administrator user's credentials are mandatory. Set the environment variables PGPOOL_ADMIN_USERNAME and PGPOOL_ADMIN_PASSWORD with the Pgpool administrator user's credentials."
     fi
-    if [[ "$PGPOOL_SR_CHECK_PERIOD" -gt 0 ]] && ( [[ -z "$PGPOOL_SR_CHECK_USER" ]] || [[ -z "$PGPOOL_SR_CHECK_PASSWORD" ]] ); then
+    if [[ "$PGPOOL_SR_CHECK_PERIOD" -gt 0 ]] && ([[ -z "$PGPOOL_SR_CHECK_USER" ]] || [[ -z "$PGPOOL_SR_CHECK_PASSWORD" ]]); then
         print_validation_error "The PostrgreSQL replication credentials are mandatory. Set the environment variables PGPOOL_SR_CHECK_USER and PGPOOL_SR_CHECK_PASSWORD with the PostrgreSQL replication credentials."
     fi
     if [[ -z "$PGPOOL_HEALTH_CHECK_USER" ]] || [[ -z "$PGPOOL_HEALTH_CHECK_PASSWORD" ]]; then
         print_validation_error "The PostrgreSQL health check credentials are mandatory. Set the environment variables PGPOOL_HEALTH_CHECK_USER and PGPOOL_SR_HEALTH_PASSWORD with the PostrgreSQL health check credentials."
     fi
-    if is_boolean_yes "$PGPOOL_ENABLE_LDAP" && ( [[ -z "${LDAP_URI}" ]] || [[ -z "${LDAP_BASE}" ]] || [[ -z "${LDAP_BIND_DN}" ]] || [[ -z "${LDAP_BIND_PASSWORD}" ]] ); then
+    if is_boolean_yes "$PGPOOL_ENABLE_LDAP" && ([[ -z "${LDAP_URI}" ]] || [[ -z "${LDAP_BASE}" ]] || [[ -z "${LDAP_BIND_DN}" ]] || [[ -z "${LDAP_BIND_PASSWORD}" ]]); then
         print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables LDAP_URI, LDAP_BASE, LDAP_BIND_DN and LDAP_BIND_PASSWORD with the LDAP configuration."
     fi
 
-    if is_boolean_yes "$PGPOOL_ENABLE_LDAP" && ( ! is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA" || ! is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD" ); then
+    if is_boolean_yes "$PGPOOL_ENABLE_LDAP" && (! is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA" || ! is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"); then
         print_validation_error "pool_hba.conf authentication and pool password should be enabled for LDAP to work. Keep the PGPOOL_ENABLE_POOL_HBA and PGPOOL_ENABLE_POOL_PASSWD environment variables set to 'yes'."
     fi
 
@@ -154,9 +163,9 @@ pgpool_validate() {
     if [[ -z "$PGPOOL_BACKEND_NODES" ]]; then
         print_validation_error "The list of backend nodes cannot be empty. Set the environment variable PGPOOL_BACKEND_NODES with a comma separated list of backend nodes."
     else
-        read -r -a nodes <<< "$(tr ',;' ' ' <<< "${PGPOOL_BACKEND_NODES}")"
+        read -r -a nodes <<<"$(tr ',;' ' ' <<<"${PGPOOL_BACKEND_NODES}")"
         for node in "${nodes[@]}"; do
-            read -r -a fields <<< "$(tr ':' ' ' <<< "${node}")"
+            read -r -a fields <<<"$(tr ':' ' ' <<<"${node}")"
             if [[ -z "${fields[0]:-}" ]]; then
                 print_validation_error "Error checking entry '$node', the field 'backend number' must be set!"
             fi
@@ -183,12 +192,36 @@ pgpool_validate() {
         fi
     done
     if ! [[ "$PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE" =~ ^(off|transaction|trans_transaction|always)$ ]]; then
-	    print_validation_error "The values allowed for PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE: off,transaction,trans_transaction,always"
+        print_validation_error "The values allowed for PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE: off,transaction,trans_transaction,always"
+    fi
+
+    if ! is_yes_no_value "$PGPOOL_ENABLE_TLS"; then
+        print_validation_error "The values allowed for PGPOOL_ENABLE_TLS are: yes or no"
+    elif is_boolean_yes "$PGPOOL_ENABLE_TLS"; then
+        # TLS Checks
+        if [[ -z "$PGPOOL_TLS_CERT_FILE" ]]; then
+            print_validation_error "You must provide a X.509 certificate in order to use TLS"
+        elif [[ ! -f "$PGPOOL_TLS_CERT_FILE" ]]; then
+            print_validation_error "The X.509 certificate file in the specified path ${PGPOOL_TLS_CERT_FILE} does not exist"
+        fi
+        if [[ -z "$PGPOOL_TLS_KEY_FILE" ]]; then
+            print_validation_error "You must provide a private key in order to use TLS"
+        elif [[ ! -f "$PGPOOL_TLS_KEY_FILE" ]]; then
+            print_validation_error "The private key file in the specified path ${PGPOOL_TLS_KEY_FILE} does not exist"
+        fi
+        if [[ -z "$PGPOOL_TLS_CA_FILE" ]]; then
+            warn "A CA X.509 certificate was not provided. Client verification will not be performed in TLS connections"
+        elif [[ ! -f "$PGPOOL_TLS_CA_FILE" ]]; then
+            print_validation_error "The CA X.509 certificate file in the specified path ${PGPOOL_TLS_CA_FILE} does not exist"
+        fi
+        if ! is_yes_no_value "$PGPOOL_TLS_PREFER_SERVER_CIPHERS"; then
+            print_validation_error "The values allowed for PGPOOL_TLS_PREFER_SERVER_CIPHERS are: yes or no"
+        fi
     fi
 
     # Custom users validations
-    read -r -a custom_users_list <<< "$(tr ',;' ' ' <<< "${PGPOOL_POSTGRES_CUSTOM_USERS}")"
-    read -r -a custom_passwords_list <<< "$(tr ',;' ' ' <<< "${PGPOOL_POSTGRES_CUSTOM_PASSWORDS}")"
+    read -r -a custom_users_list <<<"$(tr ',;' ' ' <<<"${PGPOOL_POSTGRES_CUSTOM_USERS}")"
+    read -r -a custom_passwords_list <<<"$(tr ',;' ' ' <<<"${PGPOOL_POSTGRES_CUSTOM_PASSWORDS}")"
     if [[ ${#custom_users_list[@]} -ne ${#custom_passwords_list[@]} ]]; then
         print_validation_error "PGPOOL_POSTGRES_CUSTOM_USERS and PGPOOL_POSTGRES_CUSTOM_PASSWORDS lists should have the same length"
     fi
@@ -201,7 +234,7 @@ pgpool_attach_node() {
 
     info "Attaching backend node..."
     export PCPPASSFILE=$(mktemp /tmp/pcppass-XXXXX)
-    echo "localhost:9898:${PGPOOL_ADMIN_USERNAME}:${PGPOOL_ADMIN_PASSWORD}" > "${PCPPASSFILE}"
+    echo "localhost:9898:${PGPOOL_ADMIN_USERNAME}:${PGPOOL_ADMIN_PASSWORD}" >"${PCPPASSFILE}"
     pcp_attach_node -h localhost -U "${PGPOOL_ADMIN_USERNAME}" -p 9898 -n "${node_id}" -w
     rm -rf "${PCPPASSFILE}"
 }
@@ -218,10 +251,9 @@ pgpool_attach_node() {
 #########################
 pgpool_healthcheck() {
     info "Checking pgpool health..."
-    if PGCONNECT_TIMEOUT=15 PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" -d postgres -h localhost -tA -c "SHOW pool_nodes;" >/dev/null; then
+    if PGCONNECT_TIMEOUT=15 PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" -d postgres -h "${PGPOOL_TMP_DIR}" -tA -c "SHOW pool_nodes;" >/dev/null; then
         # look up backiends that are marked offline
-        for node in $(PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" -d postgres -h localhost -tA -c "SHOW pool_nodes;" | grep "down")
-        do
+        for node in $(PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" -d postgres -h "${PGPOOL_TMP_DIR}" -tA -c "SHOW pool_nodes;" | grep "down"); do
             node_id=$(echo ${node} | cut -d'|' -f1)
             node_host=$(echo ${node} | cut -d'|' -f2)
             if PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" -d postgres -h "${node_host}" -tA -c "SELECT 1" >/dev/null; then
@@ -256,8 +288,19 @@ pgpool_create_pghba() {
     if [[ ! -z "$PGPOOL_SR_CHECK_USER" ]]; then
         sr_check_auth_line="host     all             ${PGPOOL_SR_CHECK_USER}       all         trust"
     fi
-    cat > "$PGPOOL_PGHBA_FILE" << EOF
+
+    cat >>"$PGPOOL_PGHBA_FILE" <<EOF
 local    all             all                            trust
+EOF
+
+    if ! is_empty_value "$PGPOOL_TLS_CA_FILE"; then
+        cat >>"$PGPOOL_PGHBA_FILE" <<EOF
+hostssl     all             all             0.0.0.0/0               cert
+hostssl     all             all             ::/0                    cert
+EOF
+    fi
+
+    cat >>"$PGPOOL_PGHBA_FILE" <<EOF
 $sr_check_auth_line
 $postgres_auth_line
 host     all             wide               all         trust
@@ -299,7 +342,7 @@ pgpool_create_backend_config() {
     local -r sleep_time=3
 
     # default values
-    read -r -a fields <<< "$(tr ':' ' ' <<< "${node}")"
+    read -r -a fields <<<"$(tr ':' ' ' <<<"${node}")"
     local -r num="${fields[0]:?field num is needed}"
     local -r host="${fields[1]:?field host is needed}"
     local -r port="${fields[2]:-5432}"
@@ -308,7 +351,7 @@ pgpool_create_backend_config() {
     local -r flag="${fields[5]:-ALLOW_TO_FAILOVER}"
 
     debug "Adding '$host' information to the configuration..."
-    cat >> "$PGPOOL_CONF_FILE" << EOF
+    cat >>"$PGPOOL_CONF_FILE" <<EOF
 backend_hostname$num = '$host'
 backend_port$num = $port
 backend_weight$num = $weight
@@ -402,16 +445,27 @@ pgpool_create_config() {
     pgpool_set_property "search_primary_node_timeout" "0"
     pgpool_set_property "disable_load_balance_on_write" "$PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE"
     pgpool_set_property "num_init_children" "$PGPOOL_NUM_INIT_CHILDREN"
+    # SSL settings
+    # https://www.pgpool.net/docs/latest/en/html/runtime-ssl.html
+    if is_boolean_yes "$PGPOOL_ENABLE_TLS"; then
+        chmod 600 "$PGPOOL_TLS_KEY_FILE" || warn "Could not set compulsory permissions (600) on file ${PGPOOL_TLS_KEY_FILE}"
+        pgpool_set_property "ssl" "on"
+        # Server ciphers are prefered by default
+        ! is_boolean_yes "$PGPOOL_TLS_PREFER_SERVER_CIPHERS" && pgpool_set_property "ssl_prefer_server_ciphers" "off"
+        [[ -n $PGPOOL_TLS_CA_FILE ]] && pgpool_set_property "ssl_ca_cert" "$PGPOOL_TLS_CA_FILE"
+        pgpool_set_property "ssl_cert" "$PGPOOL_TLS_CERT_FILE"
+        pgpool_set_property "ssl_key" "$PGPOOL_TLS_KEY_FILE"
+    fi
 
     # Backend settings
-    read -r -a nodes <<< "$(tr ',;' ' ' <<< "${PGPOOL_BACKEND_NODES}")"
+    read -r -a nodes <<<"$(tr ',;' ' ' <<<"${PGPOOL_BACKEND_NODES}")"
     for node in "${nodes[@]}"; do
         pgpool_create_backend_config "$node"
     done
 
     if [[ -f "$PGPOOL_USER_CONF_FILE" ]]; then
         info "Custom configuration '$PGPOOL_USER_CONF_FILE' detected!. Adding it to the configuration file."
-        cat "$PGPOOL_USER_CONF_FILE" >> "$PGPOOL_CONF_FILE"
+        cat "$PGPOOL_USER_CONF_FILE" >>"$PGPOOL_CONF_FILE"
     fi
 }
 
@@ -431,13 +485,13 @@ pgpool_generate_password_file() {
         pg_md5 -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_POSTGRES_USERNAME" "$PGPOOL_POSTGRES_PASSWORD"
 
         if [[ -n "${PGPOOL_POSTGRES_CUSTOM_USERS}" ]]; then
-            read -r -a custom_users_list <<< "$(tr ',;' ' ' <<< "${PGPOOL_POSTGRES_CUSTOM_USERS}")"
-            read -r -a custom_passwords_list <<< "$(tr ',;' ' ' <<< "${PGPOOL_POSTGRES_CUSTOM_PASSWORDS}")"
+            read -r -a custom_users_list <<<"$(tr ',;' ' ' <<<"${PGPOOL_POSTGRES_CUSTOM_USERS}")"
+            read -r -a custom_passwords_list <<<"$(tr ',;' ' ' <<<"${PGPOOL_POSTGRES_CUSTOM_PASSWORDS}")"
 
             index=0
             for user in "${custom_users_list[@]}"; do
                 pg_md5 -m --config-file="$PGPOOL_CONF_FILE" -u "$user" "${custom_passwords_list[$index]}"
-                ((index+=1))
+                ((index += 1))
             done
         fi
     else
@@ -456,12 +510,14 @@ pgpool_generate_password_file() {
 #########################
 pgpool_custom_init_scripts() {
     if [[ -n $(find "$PGPOOL_INITSCRIPTS_DIR/" -type f -name "*.sh") ]]; then
-        info "Loading user's custom files from $PGPOOL_INITSCRIPTS_DIR ...";
+        info "Loading user's custom files from $PGPOOL_INITSCRIPTS_DIR ..."
         find "$PGPOOL_INITSCRIPTS_DIR/" -type f -name "*.sh" | sort | while read -r f; do
             if [[ -x "$f" ]]; then
-                debug "Executing $f"; "$f"
+                debug "Executing $f"
+                "$f"
             else
-                debug "Sourcing $f"; . "$f"
+                debug "Sourcing $f"
+                . "$f"
             fi
         done
     fi
@@ -481,7 +537,7 @@ pgpool_generate_admin_password_file() {
     local passwd
 
     passwd=$(pg_md5 "$PGPOOL_ADMIN_PASSWORD")
-    cat >>"$PGPOOL_PCP_CONF_FILE"<<EOF
+    cat >>"$PGPOOL_PCP_CONF_FILE" <<EOF
 $PGPOOL_ADMIN_USERNAME:$passwd
 EOF
 }
