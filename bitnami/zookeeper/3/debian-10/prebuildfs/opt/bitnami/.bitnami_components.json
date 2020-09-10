@@ -22,9 +22,9 @@
     },
     "zookeeper": {
         "arch": "amd64",
-        "digest": "d3730578e996ecea6fd3168142978aa9d93cb40326ffff0bc757e8cfe447e5b0",
+        "digest": "f51a23f8647e7541c0b0665feb09868e2f05ec9b64f2b25354944fc8894116d1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.6.1-0"
+        "version": "3.6.2-0"
     }
 }
