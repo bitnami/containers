@@ -710,11 +710,12 @@ postgresql_execute() {
 # Globals:
 #   POSTGRESQL_*
 # Arguments:
-#   None
+#   $1 - Enable logs for PostgreSQL. Default: false
 # Returns:
 #   None
 #########################
 postgresql_start_bg() {
+    local -r pg_logs=${1:-false}
     local -r pg_ctl_flags=("-w" "-D" "$POSTGRESQL_DATA_DIR" "-l" "$POSTGRESQL_LOG_FILE" "-o" "--config-file=$POSTGRESQL_CONF_FILE --external_pid_file=$POSTGRESQL_PID_FILE --hba_file=$POSTGRESQL_PGHBA_FILE")
     info "Starting PostgreSQL in background..."
     is_postgresql_running && return
@@ -723,7 +724,7 @@ postgresql_start_bg() {
         pg_ctl_cmd+=("gosu" "$POSTGRESQL_DAEMON_USER")
     fi
     pg_ctl_cmd+=("$POSTGRESQL_BIN_DIR"/pg_ctl)
-    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+    if [[ "${BITNAMI_DEBUG:-false}" = true ]] || [[ $pg_logs = true ]]; then
         "${pg_ctl_cmd[@]}" "start" "${pg_ctl_flags[@]}"
     else
         "${pg_ctl_cmd[@]}" "start" "${pg_ctl_flags[@]}" >/dev/null 2>&1
