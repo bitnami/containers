@@ -47,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10.5`, `10.5-debian-10`, `10.5.5`, `10.5.5-debian-10-r19`, `latest` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.5.5-debian-10-r19/10.5/debian-10/Dockerfile)
+* [`10.5`, `10.5-debian-10`, `10.5.5`, `10.5.5-debian-10-r20`, `latest` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.5.5-debian-10-r20/10.5/debian-10/Dockerfile)
 * [`10.4`, `10.4-debian-10`, `10.4.14`, `10.4.14-debian-10-r23` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.14-debian-10-r23/10.4/debian-10/Dockerfile)
 * [`10.3`, `10.3-debian-10`, `10.3.24`, `10.3.24-debian-10-r22` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.24-debian-10-r22/10.3/debian-10/Dockerfile)
 * [`10.2`, `10.2-debian-10`, `10.2.33`, `10.2.33-debian-10-r22` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.33-debian-10-r22/10.2/debian-10/Dockerfile)
@@ -415,6 +415,8 @@ A **zero downtime** MariaDB Galera [replication](https://dev.mysql.com/doc/refma
 - `MARIADB_GALERA_NODE_ADDRESS`: Node address to report to the Galera cluster. Defaults to eth0 address inside container.
 - `MARIADB_GALERA_MARIABACKUP_USER`: [mariabackup](https://mariadb.com/kb/en/library/mariabackup-overview/) username for [State Snapshot Transfer(SST)](https://galeracluster.com/library/documentation/glossary.html#term-state-snapshot-transfer). Defaults to `mariabackup`.
 - `MARIADB_GALERA_MARIABACKUP_PASSWORD`: [mariabackup](https://mariadb.com/kb/en/library/mariabackup-overview/) password for SST. No defaults.
+- `MARIADB_REPLICATION_USER`: mariadb replication username. Defaults to `monitor`.
+- `MARIADB_REPLICATION_PASSWORD`: mariadb replication user password. Defaults to `monitor`.
 
 In a MariaDB Galera cluster the first node should be a bootstrap node (started with `MARIADB_GALERA_CLUSTER_BOOTSTRAP=yes`). The other nodes in the cluster should not be started with this environment variable, instead the `MARIADB_GALERA_CLUSTER_ADDRESS` variable should be specified. All the nodes in the MariaDB Galera cluster are in read-write mode and therefore offers high availability for high traffic applications.
 
@@ -431,6 +433,8 @@ $ docker run -d --name mariadb-galera-0 \
   -e MARIADB_USER=my_user \
   -e MARIADB_PASSWORD=my_password \
   -e MARIADB_DATABASE=my_database \
+  -e MARIADB_REPLICATION_USER=my_replication_user \
+  -e MARIADB_REPLICATION_PASSWORD=my_replication_password \
   bitnami/mariadb-galera:latest
 ```
 
@@ -447,6 +451,8 @@ $ docker run -d --name mariadb-galera-1 --link mariadb-galera-0:mariadb-galera \
   -e MARIADB_GALERA_MARIABACKUP_USER=my_mariabackup_user \
   -e MARIADB_GALERA_MARIABACKUP_PASSWORD=my_mariabackup_password \
   -e MARIADB_ROOT_PASSWORD=my_root_password \
+  -e MARIADB_REPLICATION_USER=my_replication_user \
+  -e MARIADB_REPLICATION_PASSWORD=my_replication_password \
   bitnami/mariadb-galera:latest
 ```
 
