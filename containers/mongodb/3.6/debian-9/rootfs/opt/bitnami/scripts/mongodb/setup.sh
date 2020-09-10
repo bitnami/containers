@@ -25,6 +25,8 @@ trap "mongodb_stop" EXIT
 
 # Ensure 'daemon' user exists when running as 'root'
 am_i_root && ensure_user_exists "$MONGODB_DAEMON_USER" "$MONGODB_DAEMON_GROUP"
+# Fix logging issue when running as root
+am_i_root && chmod o+w "$(readlink /dev/stdout)"
 
 # Ensure directories used by MongoDB exist and have proper ownership and permissions
 for dir in "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR" "$MONGODB_DATA_DIR"; do
