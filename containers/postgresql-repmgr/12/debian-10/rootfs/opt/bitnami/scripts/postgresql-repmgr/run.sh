@@ -18,7 +18,7 @@ set -o pipefail
 readonly repmgr_flags=("--pid-file=$REPMGR_PID_FILE" "-f" "$REPMGR_CONF_FILE" "--daemonize=false")
 readonly repmgr_cmd=$(command -v repmgrd)
 
-postgresql_start_bg
+postgresql_start_bg true
 info "** Starting repmgrd **"
 # TODO: properly test running the container as root
 if am_i_root; then
