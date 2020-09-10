@@ -8,10 +8,10 @@
     },
     "redis": {
         "arch": "amd64",
-        "digest": "ccc9b0d8d6b4d0cfba5176c7af7e6e47d50f484d0a8ba5d9be86939c372077c1",
+        "digest": "85db7371497a3fcb849f2c1d1b44b09b04130805a739e5fac8a59363991c9ce4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "6.0.7-0"
+        "version": "6.0.8-0"
     },
     "wait-for-port": {
         "arch": "amd64",
