@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.1.3`, `4.1.3-debian-10-r20`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.3-debian-10-r20/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.1.3`, `4.1.3-debian-10-r21`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.3-debian-10-r21/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
 
@@ -364,6 +364,50 @@ In order to have your custom files inside the docker image you can mount them as
        - PGPOOL_BACKEND_NODES=0:pg-0:5432,1:pg-1:5432
        - PGPOOL_SR_CHECK_USER=customuser
 ```
+
+## Securing Pgpool traffic
+
+Pgpool supports the encryption of connections using the SSL/TLS protocol. Should you desire to enable this optional feature, you may use the following enviroment variables to configure the application:
+
+ - `PGPOOL_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
+ - `PGPOOL_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
+ - `PGPOOL_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
+ - `PGPOOL_TLS_CA_FILE`: File containing the CA of the certificate. If provided, Pgpool will authenticate TLS/SSL clients by requesting them a certificate (see [ref](https://www.pgpool.net/docs/latest/en/html/runtime-ssl.html)). No defaults.
+ - `PGPOOL_TLS_PREFER_SERVER_CIPHERS`: Whether to use the server's TLS cipher preferences rather than the client's. Defaults to `yes`.
+
+When enabling TLS, Pgpool will support both standard and encrypted traffic by default, but prefer the latter. Below there are some examples on how to quickly set up TLS traffic:
+
+1. Using `docker run`
+
+    ```console
+    $ docker run \
+        -v /path/to/certs:/opt/bitnami/pgpool/certs \
+        -e ALLOW_EMPTY_PASSWORD=yes \
+        -e PGPOOL_ENABLE_TLS=yes \
+        -e PGPOOL_TLS_CERT_FILE=/opt/bitnami/pgpool/certs/postgres.crt \
+        -e PGPOOL_TLS_KEY_FILE=/opt/bitnami/pgpool/certs/postgres.key \
+        bitnami/pgpool:latest
+    ```
+
+2. Modifying the `docker-compose.yml` file present in this repository:
+
+    ```yaml
+    services:
+      pgpool:
+      ...
+        environment:
+          ...
+          - PGPOOL_ENABLE_TLS=yes
+          - PGPOOL_TLS_CERT_FILE=/opt/bitnami/pgpool/certs/postgres.crt
+          - PGPOOL_TLS_KEY_FILE=/opt/bitnami/pgpool/certs/postgres.key
+        ...
+        volumes:
+          ...
+          - /path/to/certs:/opt/bitnami/pgpool/certs
+      ...
+    ```
+
+Alternatively, you may also provide this configuration in your [custom](https://github.com/bitnami/bitnami-docker-pgpool#configuration-file) configuration file.
 
 ## Configuration file
 
