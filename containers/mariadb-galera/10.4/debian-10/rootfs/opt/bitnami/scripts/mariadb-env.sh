@@ -53,6 +53,8 @@ mariadb_env_vars=(
     MARIADB_TLS_CERT_FILE
     MARIADB_TLS_KEY_FILE
     MARIADB_TLS_CA_FILE
+    MARIADB_REPLICATION_USER
+    MARIADB_REPLICATION_PASSWORD
 )
 for env_var in "${mariadb_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -196,5 +198,9 @@ export MARIADB_TLS_KEY_FILE="${MARIADB_TLS_KEY_FILE:-}"
 export DB_TLS_KEY_FILE="$MARIADB_TLS_KEY_FILE"
 export MARIADB_TLS_CA_FILE="${MARIADB_TLS_CA_FILE:-}"
 export DB_TLS_CA_FILE="$MARIADB_TLS_CA_FILE"
+export MARIADB_REPLICATION_USER="${MARIADB_REPLICATION_USER:-monitor}"
+export DB_REPLICATION_USER="$MARIADB_REPLICATION_USER" # only used during the first initialization
+export MARIADB_REPLICATION_PASSWORD="${MARIADB_REPLICATION_PASSWORD:-monitor}"
+export DB_REPLICATION_PASSWORD="$MARIADB_REPLICATION_PASSWORD" # only used during the first initialization
 
 # Custom environment variables may be defined below
