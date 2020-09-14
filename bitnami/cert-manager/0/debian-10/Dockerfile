@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="cert-manager" \
-    BITNAMI_IMAGE_VERSION="0.16.1-debian-10-r31" \
+    BITNAMI_IMAGE_VERSION="0.16.1-debian-10-r32" \
     PATH="/opt/bitnami/cert-manager/bin:$PATH"
 
 WORKDIR /opt/bitnami/cert-manager
