@@ -22,7 +22,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="kong-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.9.1-debian-10-r80" \
+    BITNAMI_IMAGE_VERSION="0.9.1-debian-10-r81" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/kong-ingress-controller/bin:$PATH"
 
 USER 1001
