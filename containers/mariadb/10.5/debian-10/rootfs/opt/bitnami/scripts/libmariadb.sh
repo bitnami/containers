@@ -331,7 +331,7 @@ EOF
 #   None
 #########################
 mysql_custom_init_scripts() {
-    if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && [[ ! -f "$DB_VOLUME_DIR/.user_scripts_initialized" ]] ; then
+    if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && [[ ! -f "$DB_DATA_DIR/.user_scripts_initialized" ]] ; then
         info "Loading user's custom files from /docker-entrypoint-initdb.d";
         for f in /docker-entrypoint-initdb.d/*; do
             debug "Executing $f"
@@ -368,7 +368,7 @@ mysql_custom_init_scripts() {
                     ;;
             esac
         done
-        touch "$DB_VOLUME_DIR"/.user_scripts_initialized
+        touch "$DB_DATA_DIR"/.user_scripts_initialized
     fi
 }
 
