@@ -246,7 +246,7 @@ cassandra_validate() {
         local -r total="$#"
         for i in $(seq 1 "$((total - 1))"); do
             for j in $(seq "$((i + 1))" "$total"); do
-                if (( "${!i}" == "${!j}" )); then
+                if (("${!i}" == "${!j}")); then
                     print_validation_error "${!i} and ${!j} are bound to the same port"
                 fi
             done
@@ -302,7 +302,7 @@ cassandra_validate() {
     fi
 
     check_default_password CASSANDRA_PASSWORD
-    
+
     if is_boolean_yes "$CASSANDRA_CLIENT_ENCRYPTION" || is_boolean_yes "$CASSANDRA_INTERNODE_ENCRYPTION"; then
         check_empty_value CASSANDRA_KEYSTORE_PASSWORD
         check_empty_value CASSANDRA_TRUSTSTORE_PASSWORD
@@ -341,7 +341,7 @@ cassandra_validate() {
 
     check_true_false_value CASSANDRA_SSL_VALIDATE
 
-    if (( ${#CASSANDRA_PASSWORD} > 512 )); then
+    if ((${#CASSANDRA_PASSWORD} > 512)); then
         print_validation_error "The password cannot be longer than 512 characters. Set the environment variable CASSANDRA_PASSWORD with a shorter value"
     fi
 
@@ -392,7 +392,7 @@ cassandra_copy_mounted_config() {
 #########################
 cassandra_copy_default_config() {
     local -r tmp_file_list=/tmp/conf_file_list
-    find "$CASSANDRA_DEFAULT_CONF_DIR" -type f > $tmp_file_list
+    find "$CASSANDRA_DEFAULT_CONF_DIR" -type f >$tmp_file_list
     while read -r f; do
         filename="${f#${CASSANDRA_DEFAULT_CONF_DIR}/}" # Get path with subfolder
         dest="$(echo $f | sed "s?$CASSANDRA_DEFAULT_CONF_DIR?$CASSANDRA_CONF_DIR?g")"
@@ -404,7 +404,7 @@ cassandra_copy_default_config() {
             mkdir -p "$(dirname $dest)"
             cp "$f" "$dest"
         fi
-    done < $tmp_file_list
+    done <$tmp_file_list
     rm "$tmp_file_list"
 }
 
@@ -511,7 +511,7 @@ cassandra_setup_cluster() {
         fi
 
         cassandra_config="$(sed -E "/client_encryption_options:.*/ {N; s/client_encryption_options:[^\n]*\n\s{4}enabled:.*/client_encryption_options:\n    enabled: $CASSANDRA_CLIENT_ENCRYPTION/g}" "$CASSANDRA_CONF_FILE")"
-        echo "$cassandra_config" > "$CASSANDRA_CONF_FILE"
+        echo "$cassandra_config" >"$CASSANDRA_CONF_FILE"
     else
         debug "cassandra.yaml mounted. Skipping cluster configuration"
     fi
@@ -673,13 +673,13 @@ cassandra_setup_client_ssl() {
 
     # The key is store in a jks keystore and needs to be converted to pks12 to be extracted
     keytool -importkeystore -srckeystore "${CASSANDRA_KEYSTORE_LOCATION}" \
-            -destkeystore "${CASSANDRA_TMP_P12_FILE}" \
-            -deststoretype PKCS12 \
-            -srcstorepass "${CASSANDRA_KEYSTORE_PASSWORD}" \
-            -deststorepass "${CASSANDRA_KEYSTORE_PASSWORD}"
+        -destkeystore "${CASSANDRA_TMP_P12_FILE}" \
+        -deststoretype PKCS12 \
+        -srcstorepass "${CASSANDRA_KEYSTORE_PASSWORD}" \
+        -deststorepass "${CASSANDRA_KEYSTORE_PASSWORD}"
 
     openssl pkcs12 -in "${CASSANDRA_TMP_P12_FILE}" -nokeys \
-            -out "${CASSANDRA_SSL_CERT_FILE}" -passin pass:"${CASSANDRA_KEYSTORE_PASSWORD}"
+        -out "${CASSANDRA_SSL_CERT_FILE}" -passin pass:"${CASSANDRA_KEYSTORE_PASSWORD}"
     rm "${CASSANDRA_TMP_P12_FILE}"
 }
 
@@ -769,28 +769,36 @@ cassandra_execute_startup_cql() {
 #   None
 #########################
 cassandra_custom_init_scripts() {
-    if [[ -n $(find "$CASSANDRA_INITSCRIPTS_DIR/" -type f -regex ".*\.\(sh\|cql\|cql.gz\)") ]] && [[ ! -f "$CASSANDRA_VOLUME_DIR/.user_scripts_initialized" ]] ; then
+    if [[ -n $(find "$CASSANDRA_INITSCRIPTS_DIR/" -type f -regex ".*\.\(sh\|cql\|cql.gz\)") ]] && [[ ! -f "$CASSANDRA_VOLUME_DIR/.user_scripts_initialized" ]]; then
         info "Loading user's custom files from $CASSANDRA_INITSCRIPTS_DIR ..."
         local -r tmp_file="/tmp/filelist"
         if ! is_cassandra_running; then
             cassandra_start_bg "$CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE"
             wait_for_cql_access
         fi
-        find "${CASSANDRA_INITSCRIPTS_DIR}/" -type f -regex ".*\.\(sh\|cql\|cql.gz\)" | sort > "$tmp_file"
+        find "${CASSANDRA_INITSCRIPTS_DIR}/" -type f -regex ".*\.\(sh\|cql\|cql.gz\)" | sort >"$tmp_file"
         while read -r f; do
             case "$f" in
-                *.sh)
-                    if [[ -x "$f" ]]; then
-                        debug "Executing $f"; "$f"
-                    else
-                        debug "Sourcing $f"; . "$f"
-                    fi
-                    ;;
-                *.cql)    debug "Executing $f"; cassandra_execute "$CASSANDRA_USER" "$CASSANDRA_PASSWORD" < "$f";;
-                *.cql.gz) debug "Executing $f"; gunzip -c "$f" | cassandra_execute "$CASSANDRA_USER" "$CASSANDRA_PASSWORD";;
-                *)        debug "Ignoring $f" ;;
+            *.sh)
+                if [[ -x "${CASSANDRA_INITSCRIPTS_DIR}/$f" ]]; then
+                    debug "Executing ${CASSANDRA_INITSCRIPTS_DIR}/$f"
+                    "${CASSANDRA_INITSCRIPTS_DIR}/$f"
+                else
+                    debug "Sourcing ${CASSANDRA_INITSCRIPTS_DIR}/$f"
+                    . "${CASSANDRA_INITSCRIPTS_DIR}/$f"
+                fi
+                ;;
+            *.cql)
+                debug "Executing ${CASSANDRA_INITSCRIPTS_DIR}/$f"
+                cassandra_execute "$CASSANDRA_USER" "$CASSANDRA_PASSWORD" <"${CASSANDRA_INITSCRIPTS_DIR}/$f"
+                ;;
+            *.cql.gz)
+                debug "Executing ${CASSANDRA_INITSCRIPTS_DIR}/$f"
+                gunzip -c "${CASSANDRA_INITSCRIPTS_DIR}/$f" | cassandra_execute "$CASSANDRA_USER" "$CASSANDRA_PASSWORD"
+                ;;
+            *) debug "Ignoring ${CASSANDRA_INITSCRIPTS_DIR}/$f" ;;
             esac
-        done < $tmp_file
+        done <$tmp_file
         rm -f "$tmp_file"
         touch "$CASSANDRA_VOLUME_DIR"/.user_scripts_initialized
     fi
@@ -819,7 +827,7 @@ cassandra_execute() {
     local -r host="${4:-localhost}"
     local -r extra_args="${5:-}"
     local -r cmd=("${CASSANDRA_BIN_DIR}/cqlsh")
-    local args=( "-u" "$user" "-p" "$pass")
+    local args=("-u" "$user" "-p" "$pass")
 
     is_boolean_yes "$CASSANDRA_CLIENT_ENCRYPTION" && args+=("--ssl")
     [[ -n "$keyspace" ]] && args+=("-k" "$keyspace")
@@ -869,7 +877,7 @@ cassandra_execute_with_retries() {
     for i in $(seq 1 $retries); do
         if (echo "$command" | cassandra_execute "$user" "$pass" "$keyspace" "$host" "$extra_args"); then
             success=yes
-            break;
+            break
         fi
         sleep "$sleep_time"
     done
@@ -907,7 +915,7 @@ wait_for_nodetool_up() {
         if [[ "$BITNAMI_DEBUG" = "true" ]]; then
             output="/dev/stdout"
         fi
-        "${check_cmd[@]}" "${check_args[@]}" | grep -E "${check_regex}" > "${output}"
+        "${check_cmd[@]}" "${check_args[@]}" | grep -E "${check_regex}" >"${output}"
     }
 
     if retry_while check_function_nodetool "$retries" "$sleep_time"; then
@@ -951,7 +959,7 @@ wait_for_cql_log_entry() {
         if [[ "$BITNAMI_DEBUG" = "true" ]]; then
             output="/dev/stdout"
         fi
-        "${check_cmd[@]}" "${check_args[@]}" | grep -E "${check_regex}" > "${output}"
+        "${check_cmd[@]}" "${check_args[@]}" | grep -E "${check_regex}" >"${output}"
     }
 
     if retry_while check_function_log_entry "$retries" "$sleep_time"; then
@@ -987,7 +995,7 @@ wait_for_cql_access() {
     local -r sleep_time="${5:-$CASSANDRA_CQL_SLEEP_TIME}"
 
     info "Trying to access CQL server @ $host"
-    if (echo "DESCRIBE KEYSPACES" | cassandra_execute_with_retries "$max_retries" "$sleep_time" "$user" "$password" "" "$host" ); then
+    if (echo "DESCRIBE KEYSPACES" | cassandra_execute_with_retries "$max_retries" "$sleep_time" "$user" "$password" "" "$host"); then
         info "Accessed CQL server successfully"
     else
         error "Could not access CQL server"
@@ -1016,13 +1024,13 @@ cassandra_start_bg() {
     local -r args=("-p" "$CASSANDRA_PID_FILE" "-R" "-f")
 
     if am_i_root; then
-        gosu "$CASSANDRA_DAEMON_USER" "${cmd[@]}" "${args[@]}" > "$logger" 2>&1 &
+        gosu "$CASSANDRA_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$logger" 2>&1 &
     else
-        "${cmd[@]}" "${args[@]}" > "$logger" 2>&1 &
+        "${cmd[@]}" "${args[@]}" >"$logger" 2>&1 &
     fi
 
     # Even though we set the pid, cassandra is not creating the proper file, so we create it manually
-    echo $! > "$CASSANDRA_PID_FILE"
+    echo $! >"$CASSANDRA_PID_FILE"
 
     info "Checking that it started up correctly"
 
