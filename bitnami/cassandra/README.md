@@ -42,7 +42,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.11.8`, `3.11.8-debian-10-r10`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.8-debian-10-r10/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.11.8`, `3.11.8-debian-10-r11`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.8-debian-10-r11/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
 
@@ -186,9 +186,6 @@ cassandra:
  - `CASSANDRA_TRANSPORT_PORT_NUMBER`: Inter-node cluster communication port. Default: **7000**
  - `CASSANDRA_JMX_PORT_NUMBER`: JMX connections port. Default: **7199**
  - `CASSANDRA_CQL_PORT_NUMBER`: Client port. Default: **9042**.
- - `CASSANDRA_ALLOW_EMPTY_PASSWORD`: Allow login without password (not recommended for production use). Default: **false**
- - `CASSANDRA_AUTHORIZER`: Cassandra authorizer. Default: **PasswordAuthorizer**
- - `CASSANDRA_AUTHENTICATOR`: Cassandra authenticator. Default: **PasswordAuthenticator**
  - `CASSANDRA_USER`: Cassandra user name. Defaults: **cassandra**
  - `CASSANDRA_PASSWORD_SEEDER`: Password seeder will change the Cassandra default credentials at initialization. In clusters, only one node should be marked as password seeder. Default: **no**
  - `CASSANDRA_PASSWORD`: Cassandra user password. Default: **cassandra**
@@ -268,25 +265,6 @@ cassandra:
   environment:
     - CASSANDRA_PASSWORD_SEEDER=yes
     - CASSANDRA_PASSWORD=password123
-```
-
-## Allowing empty passwords
-
-By default the Cassandra image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD=yes` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `CASSANDRA_PASSWORD` for any other scenario.
-
-```console
-$ docker run --name cassandra -e ALLOW_EMPTY_PASSWORD=yes bitnami/cassandra:latest
-```
-
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-cassandra/blob/master/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  cassandra:
-  ...
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-  ...
 ```
 
 ## Setting up a cluster
