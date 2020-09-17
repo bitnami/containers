@@ -8,7 +8,7 @@
 # TL;DR
 
 ```console
-$ docker run --name wavefront-collector bitnami/wavefront-collector:latest
+$ docker run --name wavefront-kubernetes-collector bitnami/wavefront-kubernetes-collector:latest
 ```
 
 # Why use Bitnami Images?
@@ -21,35 +21,35 @@ $ docker run --name wavefront-collector bitnami/wavefront-collector:latest
 * Bitnami container images are released daily with the latest distribution packages available.
 
 
-> This [CVE scan report](https://quay.io/repository/bitnami/wavefront-collector?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
+> This [CVE scan report](https://quay.io/repository/bitnami/wavefront-kubernetes-collector?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.2.3`, `1.2.3-debian-10-r13`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-collector/blob/1.2.3-debian-10-r13/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.2.3`, `1.2.3-debian-10-r14`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector/blob/1.2.3-debian-10-r14/1/debian-10/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/wavefront-collector GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-collector).
+Subscribe to project updates by watching the [bitnami/wavefront-kubernetes-collector GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector).
 
 # Get this image
 
-The recommended way to get the Bitnami wavefront-collector Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/wavefront-collector).
+The recommended way to get the Bitnami wavefront-kubernetes-collector Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/wavefront-kubernetes-collector).
 
 ```console
-$ docker pull bitnami/wavefront-collector:latest
+$ docker pull bitnami/wavefront-kubernetes-collector:latest
 ```
 
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/wavefront-collector/tags/) in the Docker Hub Registry.
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/wavefront-kubernetes-collector/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/wavefront-collector:[TAG]
+$ docker pull bitnami/wavefront-kubernetes-collector:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/wavefront-collector:latest 'https://github.com/bitnami/bitnami-docker-wavefront-collector.git#master:1/debian-10'
+$ docker build -t bitnami/wavefront-kubernetes-collector:latest 'https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector.git#master:1/debian-10'
 ```
 
 # Configuration
@@ -59,17 +59,17 @@ $ docker build -t bitnami/wavefront-collector:latest 'https://github.com/bitnami
 To run commands inside this container you can use `docker run`, for example to execute `wavefront-collector --version` you can follow the example below:
 
 ```console
-$ docker run --rm --name wavefront-collector bitnami/wavefront-collector:latest -- wavefront-collector --version
+$ docker run --rm --name wavefront-kubernetes-collector bitnami/wavefront-kubernetes-collector:latest -- wavefront-collector --version
 ```
 
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-wavefront-collector/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-wavefront-collector/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector/pulls) with your contribution.
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-wavefront-collector/issues/new). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
