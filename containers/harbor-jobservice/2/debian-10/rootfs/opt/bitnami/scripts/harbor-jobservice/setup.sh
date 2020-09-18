@@ -11,6 +11,7 @@ set -o pipefail
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libharbor.sh
 
 # Auxiliar Functions
 
@@ -100,3 +101,4 @@ harbor_jobservice_validate() {
 
 # Ensure Harbor Job Service settings are valid
 harbor_jobservice_validate
+install_custom_certs
