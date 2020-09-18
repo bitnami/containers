@@ -11,8 +11,12 @@ set -o pipefail
 
 # Load libraries
 . /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libharbor.sh
 
-for dir in "/bitnami/data" "/bitnami/certs"; do
+read -r -a directories <<< "$(get_system_cert_paths)"
+directories+=("/bitnami/data")
+
+for dir in "${directories[@]}"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done

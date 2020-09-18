@@ -30,7 +30,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.12.0`, `0.12.0-debian-10-r152`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.12.0-debian-10-r152/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.12.0`, `0.12.0-debian-10-r153`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-chartmuseum/blob/0.12.0-debian-10-r153/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/chartmuseum GitHub repo](https://github.com/bitnami/bitnami-docker-chartmuseum).
 
@@ -84,7 +84,12 @@ chartmuseum:
 
 # Using TLS certificates
 
-To configure ChartMuseum to use TLS certificates you can mount a directory into `/bitnami/certs` containing the files `server.crt` and `server.key`.
+To configure ChartMuseum to enable TLS for communications, you can should mount your certificates under the path `/etc/harbor/ssl/chartmuseum`. Additionally, set the following environment variables to match your configuration:
+
+* `TLS_KEY`: File containing the key for the certificate. No defaults.
+* `TLS_CERT`: File containing the certificate file for the TLS traffic. No defaults.
+
+Should you want to add any custom CA certificate to trust, simply mount the files under the path `/harbor_cust_cert`.
 
 # Connecting to other containers
 

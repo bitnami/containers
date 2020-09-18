@@ -12,17 +12,39 @@ set -o pipefail
 # Load libraries
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libharbor.sh
 
 chart_museum_validate() {
     info "Validating ChartMuseum parameters"
+
+    local error_code=0
+
+    # Auxiliary functions
+    print_validation_error() {
+        error "$1"
+        error_code=1
+    }
 
     if [[ -z ${STORAGE:-} ]]; then
         warn "No storage type provided, a local storage will be used"
     fi
 
-    if is_dir_empty "/bitnami/certs"; then
+    if [[ ! -z "${TLS_CERT:-}" ]] && [[ ! -z "${TLS_KEY:-}" ]]; then
+        if [[ ! -f "$TLS_CERT" ]]; then
+            print_validation_error "The TLS certificate file in the specified path ${TLS_CERT} does not exist" || exit 1
+        fi
+
+        if [[ ! -f "$TLS_KEY" ]]; then
+            print_validation_error "The TLS private key file in the specified path ${TLS_KEY} does not exist" || exit 1
+        fi
+    elif [[ ! -z "${TLS_CERT:-}" ]] || [[ ! -z "${TLS_KEY:-}" ]]; then
+        print_validation_error "Both TLS_CERT and TLS_KEY env variables must be set to enable TLS" || exit 1
+    else
         warn "No certificates provided, an insecure connection will be used"
     fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 chart_museum_validate
+install_custom_certs
