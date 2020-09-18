@@ -16,8 +16,9 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
+RUN /opt/bitnami/scripts/harbor-adapter-clair/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-adapter-clair" \
-    BITNAMI_IMAGE_VERSION="2.0.2-debian-10-r34" \
+    BITNAMI_IMAGE_VERSION="2.0.2-debian-10-r35" \
     PATH="/opt/bitnami/harbor-adapter-clair/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080
