@@ -36,7 +36,7 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "5d4fee20d335c51e26ff073241cd025b267b68b8f0a9923a6c32fb311d681f4e",
+        "digest": "886970333530d42bbe47868c6c27579066651644be862ba94b7d15503a922077",
         "distro": "debian-10",
         "type": "NAMI",
         "version": "7.2.33-6"
