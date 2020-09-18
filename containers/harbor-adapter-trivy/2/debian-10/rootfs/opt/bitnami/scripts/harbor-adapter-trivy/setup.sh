@@ -11,6 +11,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/harbor-adapter-trivy-env.sh
+. /opt/bitnami/scripts/libharbor.sh
 
 # Create directories
 for dir in "${SCANNER_TRIVY_CACHE_DIR}" "${SCANNER_TRIVY_REPORTS_DIR}"; do
@@ -19,3 +20,5 @@ for dir in "${SCANNER_TRIVY_CACHE_DIR}" "${SCANNER_TRIVY_REPORTS_DIR}"; do
         chown -R "${SCANNER_TRIVY_DAEMON_USER}:${SCANNER_TRIVY_DAEMON_GROUP}" "$dir"
     fi
 done
+
+install_custom_certs

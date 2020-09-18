@@ -10,10 +10,13 @@ set -o pipefail
 # Load libraries
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/harbor-adapter-trivy-env.sh
+. /opt/bitnami/scripts/libharbor.sh
+
+read -r -a directories <<< "$(get_system_cert_paths)"
+directories+=("${SCANNER_TRIVY_CACHE_DIR}" "${SCANNER_TRIVY_REPORTS_DIR}")
 
 # Create directories
-for dir in "${SCANNER_TRIVY_CACHE_DIR}" "${SCANNER_TRIVY_REPORTS_DIR}"; do
+for dir in "${directories[@]}"; do
     ensure_dir_exists "${dir}"
     chmod -R g+rwX "${dir}"
 done
-
