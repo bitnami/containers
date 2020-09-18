@@ -178,6 +178,9 @@ redis_initialize() {
         [[ -z "$REDIS_SENTINEL_ANNOUNCE_IP" ]] || redis_conf_set "sentinel announce-ip" "${REDIS_SENTINEL_ANNOUNCE_IP}"
         [[ -z "$REDIS_SENTINEL_ANNOUNCE_PORT" ]] || redis_conf_set "sentinel announce-port" "${REDIS_SENTINEL_ANNOUNCE_PORT}"
 
+        # Sentinel Configuration (maybe overwritten by more specific init blocks like TLS configuration)
+        redis_conf_set port "$REDIS_SENTINEL_PORT_NUMBER"
+
         # TLS configuration
         if is_boolean_yes "$REDIS_SENTINEL_TLS_ENABLED"; then
             if [[ "$REDIS_SENTINEL_PORT_NUMBER" ==  "26379" ]] && [[ "$REDIS_SENTINEL_TLS_PORT_NUMBER" ==  "26379" ]]; then
