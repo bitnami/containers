@@ -4,6 +4,7 @@
 
 # Load libraries
 . /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libharbor.sh
 
 # Ensure a set of directories exist
 for dir in "/var/lib/registry" "/storage" "/etc/registry" "/etc/registryctl"; do
@@ -11,4 +12,9 @@ for dir in "/var/lib/registry" "/storage" "/etc/registry" "/etc/registryctl"; do
 done
 
 # Ensure the non-root user has writing permission at a set of directories
-chmod -R g+rwX "/var/lib/registry" "/storage"
+read -r -a directories <<< "$(get_system_cert_paths)"
+directories+=("/var/lib/registry" "/storage")
+
+for dir in "${directories[@]}"; do
+    chmod -R g+rwX "$dir"
+done
