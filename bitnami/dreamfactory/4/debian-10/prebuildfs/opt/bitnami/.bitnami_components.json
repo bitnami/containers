@@ -22,17 +22,17 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "98c4ffbfbdff56d49b9bf09b47fe5049d03a667462fd5a2b45ac658f24e40770",
+        "digest": "ac87df7d3775f41c83866359667413c5762bc73e87fae0ceb3e8805de5b7450a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.21-2"
+        "version": "7.3.22-0"
     },
     "mongodb-client": {
         "arch": "amd64",
-        "digest": "c5b3ba34897811ab7915cbf48c737d69065bb0f352922c2f3026d796577bdf57",
+        "digest": "9b553a0df5312db187152b0394d729a81e016e255be82eb565393c1705e63e3e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.4.0-0"
+        "version": "4.4.1-0"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -43,10 +43,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "5f57dba3daa746eb45ac3ccb619380d111d0351baef47b726717634d6340f7e2",
+        "digest": "bc63d171aa1b50e074dd2bcd42a227c3db1bf177f10dee537de2c39976689f7b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.21-2"
+        "version": "7.3.22-3"
     },
     "postgresql-client": {
         "arch": "amd64",
@@ -57,10 +57,10 @@
     },
     "redis-client": {
         "arch": "amd64",
-        "digest": "176bd64c9da1bb87ff3763edbee858b68164851d126a25f792aa2c0447f5be90",
+        "digest": "6c5b29d01a98337277c2d74a7bf73996a00feea8bcbcd2fdbaa961aef47de9ce",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "6.0.7-0"
+        "version": "6.0.8-0"
     },
     "tini": {
         "arch": "amd64",
