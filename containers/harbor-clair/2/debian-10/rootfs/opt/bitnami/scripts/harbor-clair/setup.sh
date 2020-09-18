@@ -10,6 +10,7 @@ set -o pipefail
 # Load libraries
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libharbor.sh
 
 # Default PostgreSQL host and port values
 postgresql_host="postgresql"
@@ -55,4 +56,5 @@ wait_for_postgresql() {
 
 # Ensure Harbor Clair settings are valid
 harbor_clair_validate
+install_custom_certs
 wait_for_postgresql
