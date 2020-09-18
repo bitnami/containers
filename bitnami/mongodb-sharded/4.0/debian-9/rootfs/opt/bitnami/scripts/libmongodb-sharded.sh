@@ -25,7 +25,7 @@ mongodb_sharded_shard_currently_in_cluster() {
     local -r replicaset="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute "$MONGODB_PRIMARY_ROOT_USER" "$MONGODB_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_MONGOS_HOST" "$MONGODB_MONGOS_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_MONGOS_HOST" "$MONGODB_MONGOS_PORT_NUMBER" <<EOF
 db.adminCommand({ listShards: 1 })
 EOF
 )
