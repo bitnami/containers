@@ -10,6 +10,7 @@ set -o pipefail
 # Load libraries
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libharbor.sh
 
 # Auxiliar Functions
 
@@ -31,3 +32,4 @@ harbor_registry_validate() {
 
 # Ensure Harbor Registry settings are valid
 harbor_registry_validate
+install_custom_certs
