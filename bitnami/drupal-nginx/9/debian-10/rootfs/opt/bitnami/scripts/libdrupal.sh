@@ -89,7 +89,7 @@ drupal_validate() {
         for empty_env_var in "DRUPAL_SMTP_USER" "DRUPAL_SMTP_PASSWORD" "DRUPAL_SMTP_PORT_NUMBER" "DRUPAL_SMTP_PROTOCOL"; do
             is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
-        ! is_empty_value "$DRUPAL_DATABASE_PORT_NUMBER" && validate_port "$DRUPAL_SMTP_PORT_NUMBER"
+        ! is_empty_value "$DRUPAL_SMTP_PORT_NUMBER" && validate_port "$DRUPAL_SMTP_PORT_NUMBER"
         ! is_empty_value "$DRUPAL_SMTP_PROTOCOL" && check_multi_value "DRUPAL_SMTP_PROTOCOL" "standard tls ssl"
     fi
 
