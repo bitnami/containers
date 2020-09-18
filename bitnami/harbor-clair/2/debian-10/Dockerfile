@@ -11,7 +11,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip libc6 libcom-err2 libcurl4 libffi6 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle6 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libtasn1-6 libunistring2 procps rpm tar xz-utils zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.28.0-0" --checksum bda714065995df169ab17f11b3a638a106aec83b00bcbfb325b36b51f29d1704
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-1" --checksum 07c4678654b01811f22b5bb65a8d6f8e253abd4524ebb3b78c7d3df042cf23bd
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-clair" "2.0.2-0" --checksum 212fe5589d08ff9ff36ce2d15aaabacf308afa04045bf8a0c322378513ee87f9
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-clair" "2.1.0-0" --checksum 998700f6f198ebb585fa385cec6250fa43b07317d3b5426ad4be49408a9fd1e9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -20,7 +20,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-clair/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-clair" \
-    BITNAMI_IMAGE_VERSION="2.0.2-debian-10-r35" \
+    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r0" \
     PATH="/opt/bitnami/git/bin:/opt/bitnami/common/bin:/opt/bitnami/harbor-clair/bin:$PATH"
 
 EXPOSE 6060 6061
