@@ -11,6 +11,7 @@ set -o pipefail
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libharbor.sh
 
 # Auxiliar Functions
 
@@ -97,3 +98,4 @@ harbor_core_validate() {
 
 # Ensure Harbor Core settings are valid
 harbor_core_validate
+install_custom_certs
