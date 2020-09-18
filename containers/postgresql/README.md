@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`12`, `12-debian-10`, `12.4.0`, `12.4.0-debian-10-r31` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.4.0-debian-10-r31/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.9.0`, `11.9.0-debian-10-r25`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.9.0-debian-10-r25/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.14.0`, `10.14.0-debian-10-r32` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.14.0-debian-10-r32/10/debian-10/Dockerfile)
-* [`9.6`, `9.6-debian-10`, `9.6.19`, `9.6.19-debian-10-r33` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.19-debian-10-r33/9.6/debian-10/Dockerfile)
+* [`9.6`, `9.6-debian-10`, `9.6.19`, `9.6.19-debian-10-r34` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.19-debian-10-r34/9.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
 
@@ -245,6 +245,40 @@ services:
 **Note!**
 When `POSTGRESQL_USERNAME` is specified, the `postgres` user is not assigned a password and as a result you cannot login remotely to the PostgreSQL server as the `postgres` user. If you still want to have access with the user `postgres`, please set the `POSTGRESQL_POSTGRES_PASSWORD` environment variable (or the content of the file specified in `POSTGRESQL_POSTGRES_PASSWORD_FILE`).
 
+## Auditing
+
+The Bitnami PostgreSQL Image comes with the pgAudit module enabled by default. Thanks to this, audit information can be enabled in the container with these enviroment variables:
+
+- `POSTGRESQL_PGAUDIT_LOG`: Comma-separated list with different operations to audit. Find in the [official pgAudit documentation](https://github.com/pgaudit/pgaudit#configuration) the list of possible values. No defaults.
+- `POSTGRESQL_PGAUDIT_LOG_CATALOG`: Session logging enabled in the case where all relations in a statement are in pg_catalog. No defaults.
+- `POSTGRESQL_LOG_CONNECTIONS`: Add log entry for logins. No defaults.
+- `POSTGRESQL_LOG_DISCONNECTIONS`: Add log entry for logouts. No defaults.
+- `POSTGRESQL_LOG_HOSTNAME`: Log the client hostname. No defaults.
+- `POSTGRESQL_LOG_LINE_PREFIX`: Define the format of the log entry lines. Find in the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-logging.html) the string parameters. No defaults.
+- `POSTGRESQL_LOG_TIMEZONE`: Set the timezone for the log entry timestamp. No defaults.
+
+## Session settings
+
+The Bitnami PostgreSQL Image allows configuring several parameters for the connection and session management:
+
+- `POSTGRESQL_USERNAME_CONNECTION_LIMIT`: If a user different from `postgres` is created, set the connection limit. No defaults.
+- `POSTGRESQL_POSTGRES_CONNECTION_LIMIT`: Set the connection limit for the `postgres` user. No defaults.
+- `POSTGRESQL_STATEMENT_TIMEOUT`: Set the statement timeout. No defaults.
+- `POSTGRESQL_TCP_KEEPALIVES_INTERVAL`: TCP keepalive interval. No defaults.
+- `POSTGRESQL_TCP_KEEPALIVES_IDLE`: TCP keepalive idle time. No defaults.
+- `POSTGRESQL_TCP_KEEPALIVES_COUNT`: TCP keepalive count. No defaults.
+
+## Modify pg_hba.conf
+
+By default, the Bitnami PostgreSQL Image generates `local` and `md5` entries in the pg_hba.conf file. In order to adapt to any other requirements or standards, it is possible to change the pg_hba.conf file by:
+
+- Mounting your own pg_hba.conf file in `/bitnami/postgresql/conf`
+- Using the `POSTGRESQL_PGHBA_REMOVE_FILTERS` with a comma-separated list of patterns. All lines that match any of the patterns will be removed. For example, if we want to remove all `local` and `md5` authentication (in favour of hostssl only connections, for example), set `POSTGRESQL_PGHBA_REMOVE_FILTERS=local, md5`.
+
+## Preloading shared libraries
+
+It is possible to modify the list of libraries that PostgreSQL will preload at boot time by setting the `POSTGRESQL_SHARED_PRELOAD_LIBRARIES`. The default value is `POSTGRESQL_SHARED_PRELOAD_LIBRARIES=pgaudit`. If, for example, you want to add the `pg_stat_statements` library to the preload, set `POSTGRESQL_SHARED_PRELOAD_LIBRARIES=pgaudit, pg_stat_statements`.
+
 ## Setting up a streaming replication
 
 A [Streaming replication](http://www.postgresql.org/docs/9.4/static/warm-standby.html#STREAMING-REPLICATION) cluster can easily be setup with the Bitnami PostgreSQL Docker Image using the following environment variables:
@@ -412,10 +446,10 @@ In the example above, commits will need to be written to both the master and one
 postgres=# select application_name as server, state,
 postgres-#       sync_priority as priority, sync_state
 postgres-#       from pg_stat_replication;
-   server    |   state   | priority | sync_state
--------------|-----------|----------|------------
- walreceiver | streaming |        0 | sync
- walreceiver | streaming |        0 | async
+| server      | state     | priority | sync_state |
+|-------------|-----------|----------|------------|
+| walreceiver | streaming | 0        | sync       |
+| walreceiver | streaming | 0        | async      |
 ```
 
 > **Note:** For more advanced setups, you can define different replication groups with the `application_name` parameter, by setting the `POSTGRESQL_CLUSTER_APP_NAME` environment variable.
@@ -620,7 +654,7 @@ services:
 The Bitnami PostgreSQL container allows two different sets of environment variables. Please see the list of environment variable aliases in the next table:
 
 | Environment Variable                 | Alias                              |
-| :----------------------------------- | :--------------------------------- |
+|:-------------------------------------|:-----------------------------------|
 | POSTGRESQL_USERNAME                  | POSTGRES_USER                      |
 | POSTGRESQL_DATABASE                  | POSTGRES_DB                        |
 | POSTGRESQL_PASSWORD                  | POSTGRES_PASSWORD                  |
@@ -648,8 +682,8 @@ alter database POSTGRES_DATABASE owner to POSTGRES_USER;
 
 It is possible to change the user that PostgreSQL will use to execute the init scripts. To do so, use the following environment variables:
 
-| Environment variable           | Description                                                       |
-|--------------------------------|-------------------------------------------------------------------|
+| Environment variable            | Description                                                       |
+|---------------------------------|-------------------------------------------------------------------|
 | POSTGRESQL_INITSCRIPTS_USERNAME | User that will be used to execute the init scripts                |
 | POSTGRESQL_INITSCRIPTS_PASSWORD | Password for the user specified in POSTGRESQL_INITSCRIPT_USERNAME |
 

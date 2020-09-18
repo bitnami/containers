@@ -38,3 +38,9 @@ if ! postgresql_is_file_external "postgresql.conf" && is_boolean_yes "$POSTGRESQ
     postgresql_enable_remote_connections
     postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
 fi
+
+# Remove any pg_hba.conf lines that match the given filters
+if ! postgresql_is_file_external "pg_hba.conf" && [[ -n "$POSTGRESQL_PGHBA_REMOVE_FILTERS" ]]; then
+    info "Removing lines that match these filters: ${POSTGRESQL_PGHBA_REMOVE_FILTERS}"
+    postgresql_remove_pghba_lines
+fi
