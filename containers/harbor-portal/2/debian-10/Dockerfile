@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/harbor-portal/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-portal" \
-    BITNAMI_IMAGE_VERSION="2.0.2-debian-10-r29" \
+    BITNAMI_IMAGE_VERSION="2.0.2-debian-10-r30" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
@@ -33,5 +33,5 @@ EXPOSE 8080 8443
 
 WORKDIR /opt/bitnami/harbor
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/scripts/nginx/entrypoint.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/harbor-portal/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/nginx/run.sh" ]

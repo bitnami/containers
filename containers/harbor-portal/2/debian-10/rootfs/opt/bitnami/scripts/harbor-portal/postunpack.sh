@@ -6,6 +6,7 @@
 . /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libnginx.sh
+. /opt/bitnami/scripts/libharbor.sh
 
 export HARBOR_PORTAL_BASE_DIR="/opt/bitnami/harbor"
 export HARBOR_PORTAL_NGINX_CONF_DIR="${HARBOR_PORTAL_BASE_DIR}/nginx-conf"
@@ -27,4 +28,10 @@ cp -a "${HARBOR_PORTAL_NGINX_CONF_DIR}/." "$NGINX_CONF_DIR"
 # Remove the folder, otherwise it will get exposed when accessing via browser
 rm -rf "${HARBOR_PORTAL_NGINX_CONF_DIR}"
 
-chmod -R g+rwX "$NGINX_CONF_DIR"
+# Ensure the non-root user has writing permission at a set of directories
+read -r -a directories <<< "$(get_system_cert_paths)"
+directories+=("$NGINX_CONF_DIR")
+
+for dir in "${directories[@]}"; do
+    chmod -R g+rwX "$dir"
+done
