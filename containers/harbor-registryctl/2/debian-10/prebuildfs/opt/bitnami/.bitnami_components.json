@@ -8,23 +8,23 @@
     },
     "harbor-registry": {
         "arch": "amd64",
-        "digest": "b19b6e54d96af645fb651da8fb1aff083573644b04642d5fd9d290de4fe60146",
+        "digest": "86da66f5f9b37acde67239387c9b9f6b1a56b534786c954c9558193591ed97fb",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.0.2-0"
+        "version": "2.1.0-0"
     },
     "harbor-registryctl": {
         "arch": "amd64",
-        "digest": "b8fb2de4a06a2832f23da0c94a13b6cdbf23ea7e4a1a94e36052487102438355",
+        "digest": "5b119043d402bfe1804a511a3a27afe1cae16fc50cbe73f8182db8d7625fcf36",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.0.2-0"
+        "version": "2.1.0-0"
     },
     "yq": {
         "arch": "amd64",
-        "digest": "597db7c66f80e99afd6f11f24d0c3040be84de8a9839632839d57bde78bd66c7",
+        "digest": "e9a8d1a2856d5eeb78363470053ac4c6adbb12788c6521f0bdc3e88d84e21729",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.3.4-0"
+        "version": "3.4.0-0"
     }
 }
