@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="logstash-exporter" \
-    BITNAMI_IMAGE_VERSION="0.1.2-debian-10-r219" \
+    BITNAMI_IMAGE_VERSION="0.1.2-debian-10-r220" \
     PATH="/opt/bitnami/logstash-exporter/bin:$PATH"
 
 EXPOSE 9198
