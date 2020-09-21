@@ -971,7 +971,7 @@ postgresql_configure_connections() {
 #########################
 postgresql_remove_pghba_lines() {
     for filter in ${POSTGRESQL_PGHBA_REMOVE_FILTERS//,/ }; do
-        result="$(sed "/${filter}/d" "$POSTGRESQL_PGHBA_FILE")"
+        result="$(sed -E "/${filter}/d" "$POSTGRESQL_PGHBA_FILE")"
         echo "$result" >"$POSTGRESQL_PGHBA_FILE"
     done
 }
