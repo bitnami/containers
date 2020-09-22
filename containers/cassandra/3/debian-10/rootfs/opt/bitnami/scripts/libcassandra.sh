@@ -780,23 +780,23 @@ cassandra_custom_init_scripts() {
         while read -r f; do
             case "$f" in
             *.sh)
-                if [[ -x "${CASSANDRA_INITSCRIPTS_DIR}/$f" ]]; then
-                    debug "Executing ${CASSANDRA_INITSCRIPTS_DIR}/$f"
-                    "${CASSANDRA_INITSCRIPTS_DIR}/$f"
+                if [[ -x "$f" ]]; then
+                    debug "Executing $f"
+                    "$f"
                 else
-                    debug "Sourcing ${CASSANDRA_INITSCRIPTS_DIR}/$f"
-                    . "${CASSANDRA_INITSCRIPTS_DIR}/$f"
+                    debug "Sourcing $f"
+                    . "$f"
                 fi
                 ;;
             *.cql)
-                debug "Executing ${CASSANDRA_INITSCRIPTS_DIR}/$f"
-                cassandra_execute "$CASSANDRA_USER" "$CASSANDRA_PASSWORD" <"${CASSANDRA_INITSCRIPTS_DIR}/$f"
+                debug "Executing $f"
+                cassandra_execute "$CASSANDRA_USER" "$CASSANDRA_PASSWORD" < "$f"
                 ;;
             *.cql.gz)
-                debug "Executing ${CASSANDRA_INITSCRIPTS_DIR}/$f"
-                gunzip -c "${CASSANDRA_INITSCRIPTS_DIR}/$f" | cassandra_execute "$CASSANDRA_USER" "$CASSANDRA_PASSWORD"
+                debug "Executing $f"
+                gunzip -c "$f" | cassandra_execute "$CASSANDRA_USER" "$CASSANDRA_PASSWORD"
                 ;;
-            *) debug "Ignoring ${CASSANDRA_INITSCRIPTS_DIR}/$f" ;;
+            *) debug "Ignoring $f" ;;
             esac
         done <$tmp_file
         rm -f "$tmp_file"
