@@ -13,6 +13,8 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-moodle/mast
 $ docker-compose up -d
 ```
 
+You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
