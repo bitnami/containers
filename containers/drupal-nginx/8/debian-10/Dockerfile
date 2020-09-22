@@ -27,7 +27,7 @@ RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="8.9.6-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="8.9.6-debian-10-r6" \
     DRUPAL_DATABASE_NAME="" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="" \
