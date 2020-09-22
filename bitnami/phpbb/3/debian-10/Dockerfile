@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack apache-2.4.46-0 --checksum 93181ed22488a04139fe2ab6d9ca1a
 RUN bitnami-pkg unpack mysql-client-10.3.24-0 --checksum 94a7e3c58310f59af5c1e14544de0a42bd1ecf394a159db94aacf8ccf6058436
 RUN bitnami-pkg install libphp-7.3.22-0 --checksum ac87df7d3775f41c83866359667413c5762bc73e87fae0ceb3e8805de5b7450a
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
-RUN bitnami-pkg unpack phpbb-3.3.1-0 --checksum c872991ab6a8ecb114166cef23f8f07e0bfb0f64a9b293c7df2323f57d92f4ad
+RUN bitnami-pkg unpack phpbb-3.3.1-1 --checksum 633fdc433266748a9287dbe2616c3919b21e461c4006195ea0bc259ae6e2676a
 RUN bitnami-pkg install gosu-1.12.0-1 --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -26,7 +26,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="phpbb" \
-    BITNAMI_IMAGE_VERSION="3.3.1-debian-10-r30" \
+    BITNAMI_IMAGE_VERSION="3.3.1-debian-10-r31" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
