@@ -31,7 +31,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.3.1`, `4.3.1-debian-10-r50`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.3.1-debian-10-r50/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.3.1`, `4.3.1-debian-10-r51`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.3.1-debian-10-r51/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
