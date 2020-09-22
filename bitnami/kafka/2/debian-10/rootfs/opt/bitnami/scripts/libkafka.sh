@@ -91,11 +91,11 @@ kafka_producer_consumer_conf_set() {
 #########################
 kafka_env() {
     cat <<"EOF"
-export KAFKA_BASE_DIR="/opt/bitnami/kafka"
-export KAFKA_VOLUME_DIR="/bitnami/kafka"
+export KAFKA_BASE_DIR="${KAFKA_BASE_DIR:-/opt/bitnami/kafka}"
+export KAFKA_VOLUME_DIR="${KAFKA_VOLUME_DIR:-/bitnami/kafka}"
 export KAFKA_HOME="$KAFKA_BASE_DIR"
 export KAFKA_LOG_DIR="$KAFKA_BASE_DIR"/logs
-export KAFKA_CONF_DIR="$KAFKA_BASE_DIR"/config
+export KAFKA_CONF_DIR="${KAFKA_CONF_DIR:-"$KAFKA_BASE_DIR"/config}"
 export KAFKA_CONF_FILE="$KAFKA_CONF_DIR"/server.properties
 export KAFKA_MOUNTED_CONF_DIR="${KAFKA_MOUNTED_CONF_DIR:-${KAFKA_VOLUME_DIR}/config}"
 export KAFKA_DATA_DIR="$KAFKA_VOLUME_DIR"/data
