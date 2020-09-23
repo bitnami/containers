@@ -233,6 +233,7 @@ Pgpool:
 - `PGPOOL_SR_CHECK_USER`: Username to use to perform streaming checks. No defaults.
 - `PGPOOL_SR_CHECK_PASSWORD`: Password to use to perform streaming checks. No defaults.
 - `PGPOOL_SR_CHECK_PASSWORD_FILE`: Path to a file that contains the password to use to perform streaming checks. This will override the value specified in `PGPOOL_SR_CHECK_PASSWORD`. No defaults.
+- `PGPOOL_SR_CHECK_DATABASE`: Database to use to perform streaming checks. Defaults to `postgres`.
 - `PGPOOL_BACKEND_NODES`: Comma separated list of backend nodes in the cluster. No defaults.
 - `PGPOOL_ENABLE_LDAP`: Whether to enable LDAP authentication. Defaults to `no`.
 - `PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE`: Specify load balance behavior after write queries appear ('off', 'transaction', 'trans_transaction', 'always'). Defaults to 'transaction'
