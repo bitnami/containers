@@ -57,6 +57,7 @@ export PGPOOL_PORT_NUMBER="${PGPOOL_PORT_NUMBER:-5432}"
 export PGPOOL_BACKEND_NODES="${PGPOOL_BACKEND_NODES:-}"
 export PGPOOL_SR_CHECK_USER="${PGPOOL_SR_CHECK_USER:-}"
 export PGPOOL_SR_CHECK_PERIOD="${PGPOOL_SR_CHECK_PERIOD:-30}"
+export PGPOOL_SR_CHECK_DATABASE="${PGPOOL_SR_CHECK_DATABASE:-postgres}"
 export PGPOOL_POSTGRES_USERNAME="${PGPOOL_POSTGRES_USERNAME:-postgres}"
 export PGPOOL_ADMIN_USERNAME="${PGPOOL_ADMIN_USERNAME:-}"
 export PGPOOL_ENABLE_LDAP="${PGPOOL_ENABLE_LDAP:-no}"
@@ -433,6 +434,7 @@ pgpool_create_config() {
     pgpool_set_property "sr_check_user" "$PGPOOL_SR_CHECK_USER"
     pgpool_set_property "sr_check_password" "$PGPOOL_SR_CHECK_PASSWORD"
     pgpool_set_property "sr_check_period" "$PGPOOL_SR_CHECK_PERIOD"
+    pgpool_set_property "sr_check_database" "$PGPOOL_SR_CHECK_DATABASE"
     # Healthcheck per node settings
     # https://www.pgpool.net/docs/latest/en/html/runtime-config-health-check.html
     pgpool_set_property "health_check_period" "$PGPOOL_HEALTH_CHECK_PERIOD"
