@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl dirmngr gnupg gzip libargon2-1 lib
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.22-4" --checksum 0117b9ea5dbd910acaf1e630c6f7517f9b5cedee2dbdd980a12687d2b003927e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-0" --checksum 93181ed22488a04139fe2ab6d9ca1a81b142392e8c86675b1653a1f28c068fa9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.24-0" --checksum 94a7e3c58310f59af5c1e14544de0a42bd1ecf394a159db94aacf8ccf6058436
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.22-0" --checksum ac87df7d3775f41c83866359667413c5762bc73e87fae0ceb3e8805de5b7450a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.22-1" --checksum 18f03a612aa975b8d25822ff342173651ce4db64f34698d55c801292385182d2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-1" --checksum a94f94357aa06f3718db1550fa5f5188cd61383d66bf754eef49c58a18bf02cc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "8.9.6-0" --checksum e8e7913a3d52f1cc83e8c7251b138345a1bd72dd0025870b2d752fb1a8efc441
@@ -21,8 +21,8 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache/postunpack.sh
+RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
@@ -31,7 +31,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.9.6-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="8.9.6-debian-10-r9" \
     DRUPAL_DATABASE_NAME="" \
     DRUPAL_DATABASE_PASSWORD="" \
     DRUPAL_DATABASE_USER="" \
