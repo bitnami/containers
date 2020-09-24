@@ -10,7 +10,7 @@
 $ docker run -it --name node bitnami/node-snapshot
 ```
 
-> **_NOTE:_**  This Python "snapshot" container is based on [Debian Snapshot archive](https://snapshot.debian.org/). This archive provides a valuable resource for tracking down when regressions were introduced, or for providing a specific environment that a particular application may require to run. Using a specific snapshot repository allows you to build the container from source at any time and continue using the same system package versions.
+> **_NOTE:_**  This Node.js "snapshot" container is based on [Debian Snapshot archive](https://snapshot.debian.org/). This archive provides a valuable resource for tracking down when regressions were introduced, or for providing a specific environment that a particular application may require to run. Using a specific snapshot repository allows you to build the container from source at any time and continue using the same system package versions.
 > Bitnami also provides containers based on the upstream Debian repository that allows you to rebuild the container and get the latests packages available, see "bitnami-docker-node" repository.
 
 ## Docker Compose
@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`14-prod`, `14-prod-debian-10`, `14.12.0-prod`, `14.12.0-prod-debian-10-r3` (14-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/14.12.0-prod-debian-10-r3/14-prod/debian-10/Dockerfile)
 * [`14`, `14-debian-10`, `14.12.0`, `14.12.0-debian-10-r3` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/14.12.0-debian-10-r3/14/debian-10/Dockerfile)
-* [`13-prod`, `13-prod-debian-10`, `13.14.0-prod`, `13.14.0-prod-debian-10-r42` (13-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/13.14.0-prod-debian-10-r42/13-prod/debian-10/Dockerfile)
+* [`13-prod`, `13-prod-debian-10`, `13.14.0-prod`, `13.14.0-prod-debian-10-r43` (13-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/13.14.0-prod-debian-10-r43/13-prod/debian-10/Dockerfile)
 * [`13`, `13-debian-10`, `13.14.0`, `13.14.0-debian-10-r42` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/13.14.0-debian-10-r42/13/debian-10/Dockerfile)
 * [`12-prod`, `12-prod-debian-10`, `12.18.4-prod`, `12.18.4-prod-debian-10-r11` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.18.4-prod-debian-10-r11/12-prod/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.18.4`, `12.18.4-debian-10-r11`, `latest` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.18.4-debian-10-r11/12/debian-10/Dockerfile)
