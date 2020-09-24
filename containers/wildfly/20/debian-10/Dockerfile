@@ -12,7 +12,7 @@ RUN install_packages ca-certificates curl gzip libaio1 libc6 procps sudo tar zli
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install java-11.0.8-1 --checksum 811b17aa00d6687a6c6e555a4131e585a1a2d24b7fdaa2e5d67f4baea2165aa0
-RUN bitnami-pkg unpack wildfly-20.0.1-3 --checksum f1a947c31eca0db0fa793cf7a7bc0ac2a376887b13c0fa8ff352cc0673773ccb
+RUN bitnami-pkg unpack wildfly-20.0.1-4 --checksum 6231fc89704e5a70eff9eb509a3c61a3932073ee11ec3c48e5fe7095f8010ac6
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
 RUN bitnami-pkg install gosu-1.12.0-1 --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
@@ -21,7 +21,7 @@ RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="20.0.1-debian-10-r59" \
+    BITNAMI_IMAGE_VERSION="20.0.1-debian-10-r60" \
     NAMI_PREFIX="/.nami" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
