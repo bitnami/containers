@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl gzip libargon2-1 libaudit1 libbsd0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.22-4" --checksum 0117b9ea5dbd910acaf1e630c6f7517f9b5cedee2dbdd980a12687d2b003927e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-0" --checksum 93181ed22488a04139fe2ab6d9ca1a81b142392e8c86675b1653a1f28c068fa9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.9.0-0" --checksum 900d01408360012083f63ede35bd477338ec3f18d3e0554635e51f7dccc0fb2d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.22-0" --checksum ac87df7d3775f41c83866359667413c5762bc73e87fae0ceb3e8805de5b7450a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.22-1" --checksum 18f03a612aa975b8d25822ff342173651ce4db64f34698d55c801292385182d2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-1" --checksum a94f94357aa06f3718db1550fa5f5188cd61383d66bf754eef49c58a18bf02cc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "phppgadmin" "7.12.1-1" --checksum 5e8f2f7b704e33aa15e322c73f81c5b809495de3228123671e749a800e117297
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
@@ -21,8 +21,8 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache/postunpack.sh
+RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/php-postgresql/postunpack.sh
 RUN /opt/bitnami/scripts/phppgadmin/postunpack.sh
@@ -30,7 +30,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="phppgadmin" \
-    BITNAMI_IMAGE_VERSION="7.12.1-debian-10-r98" \
+    BITNAMI_IMAGE_VERSION="7.12.1-debian-10-r99" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/common/bin:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
