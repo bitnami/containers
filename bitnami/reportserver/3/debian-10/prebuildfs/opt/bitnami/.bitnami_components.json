@@ -22,10 +22,10 @@
     },
     "reportserver": {
         "arch": "amd64",
-        "digest": "fe0461009788fade0dece66054fce1120d48ca24fc4801d375ccfff98f8b6126",
+        "digest": "0bcc132b72b73a16514d2127478d3f6a3f730a36ca021a4ae88e6eefcfbd2447",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.2.0-6027-0"
+        "version": "3.3.0-6030-0"
     },
     "tini": {
         "arch": "amd64",
