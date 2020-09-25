@@ -41,35 +41,20 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.9.2-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="3.9.2-debian-10-r15" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
     MARIADB_ROOT_USER="root" \
-    MOODLE_DATABASE_NAME="" \
-    MOODLE_DATABASE_PASSWORD="" \
-    MOODLE_DATABASE_USER="" \
-    MOODLE_EMAIL="" \
-    MOODLE_LANGUAGE="" \
-    MOODLE_PASSWORD="" \
-    MOODLE_SITENAME="" \
-    MOODLE_SKIP_INSTALL="no" \
-    MOODLE_USERNAME="" \
     MYSQL_CLIENT_CREATE_DATABASE_NAME="" \
     MYSQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
     MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES="ALL" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
     MYSQL_CLIENT_ENABLE_SSL="no" \
     MYSQL_CLIENT_SSL_CA_FILE="" \
-    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH" \
-    PHP_MEMORY_LIMIT="" \
-    SMTP_HOST="" \
-    SMTP_PASSWORD="" \
-    SMTP_PORT="" \
-    SMTP_PROTOCOL="" \
-    SMTP_USER=""
+    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
 
