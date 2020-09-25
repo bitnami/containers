@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.0`, `2.4.0-debian-10-r34`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.0-debian-10-r34/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.0`, `2.4.0-debian-10-r35`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.0-debian-10-r35/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
 
@@ -283,7 +283,7 @@ Below you can see the available environment variables for each option:
 
 ##### PHP configuration
 
-- `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **768M**
+- `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **768M**
 
 # Customize this image
 
