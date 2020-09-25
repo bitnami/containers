@@ -34,8 +34,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7.4-prod`, `7.4-prod-debian-10`, `7.4.10-prod`, `7.4.10-prod-debian-10-r27` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.10-prod-debian-10-r27/7.4-prod/debian-10/Dockerfile)
-* [`7.4`, `7.4-debian-10`, `7.4.10`, `7.4.10-debian-10-r27`, `latest` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.10-debian-10-r27/7.4/debian-10/Dockerfile)
+* [`7.4-prod`, `7.4-prod-debian-10`, `7.4.10-prod`, `7.4.10-prod-debian-10-r28` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.10-prod-debian-10-r28/7.4-prod/debian-10/Dockerfile)
+* [`7.4`, `7.4-debian-10`, `7.4.10`, `7.4.10-debian-10-r26`, `latest` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.10-debian-10-r26/7.4/debian-10/Dockerfile)
 * [`7.3-prod`, `7.3-prod-debian-10`, `7.3.22-prod`, `7.3.22-prod-debian-10-r27` (7.3-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.22-prod-debian-10-r27/7.3-prod/debian-10/Dockerfile)
 * [`7.3`, `7.3-debian-10`, `7.3.22`, `7.3.22-debian-10-r28` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.22-debian-10-r28/7.3/debian-10/Dockerfile)
 * [`7.2-prod`, `7.2-prod-debian-10`, `7.2.33-prod`, `7.2.33-prod-debian-10-r42` (7.2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.2.33-prod-debian-10-r42/7.2-prod/debian-10/Dockerfile)
