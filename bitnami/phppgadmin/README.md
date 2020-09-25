@@ -29,7 +29,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.12.1`, `7.12.1-debian-10-r100`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/7.12.1-debian-10-r100/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.12.1`, `7.12.1-debian-10-r101`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/7.12.1-debian-10-r101/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phppgadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phppgadmin).
 
@@ -165,9 +165,15 @@ The phpPgAdmin instance can be customized by specifying environment variables on
 - `DATABASE_HOST`: Database server host. Default: **postgresql**.
 - `DATABASE_PORT_NUMBER`: Database server port. Default: **5432**
 - `DATABASE_SSL_MODE`: Database SSL mode. Supported options are: disable, allow, prefer, require. No default.
-- `PHP_UPLOAD_MAX_FILESIZE`: Max PHP upload file size. Default: **80M**
-- `PHP_POST_MAX_SIZE`: Max PHP POST size. Default: **80M**
-- `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **256M**
+
+### PHP configuration
+
+- `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
+- `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
+- `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
+- `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
+- `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. Default: **80M**
+- `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP upload. Default: **80M**
 
 ### Specifying Environment variables using Docker Compose
 
