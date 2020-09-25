@@ -25,11 +25,11 @@ php_conf_set() {
     local -r key="${1:?key missing}"
     local -r value="${2:?value missing}"
     local -r file="${3:-"$PHP_CONF_FILE"}"
-    local pattern="^[;\s]*${key}\s*=.*$"
+    local pattern="^[; ]*${key}\s*=.*$"
     if [[ "$key" = "extension" || "$key" = "zend_extension" ]]; then
         # The "extension" property works a bit different for PHP, as there is one per module to be included, meaning it is additive unlike other configurations
         # Because of that, we first check if the extension was defined in the file to replace the proper entry
-        pattern="^[;\s]*${key}\s*=\s*[\"]?${value}(\.so)?[\"]?\s*$"
+        pattern="^[; ]*${key}\s*=\s*[\"]?${value}(\.so)?[\"]?\s*$"
     fi
     local -r entry="${key} = ${value}"
     if is_file_writable "$file"; then
@@ -56,10 +56,12 @@ php_conf_set() {
 php_initialize() {
     # Configure PHP options based on the runtime environment
     info "Configuring PHP options"
-    ! is_empty_value "$PHP_UPLOAD_MAX_FILESIZE" && info "Setting PHP upload_max_filesize option" && php_conf_set upload_max_filesize "$PHP_UPLOAD_MAX_FILESIZE"
-    ! is_empty_value "$PHP_POST_MAX_SIZE" && info "Setting PHP post_max_size option" && php_conf_set post_max_size "$PHP_POST_MAX_SIZE"
-    ! is_empty_value "$PHP_MEMORY_LIMIT" && info "Setting PHP memory_limit option" && php_conf_set memory_limit "$PHP_MEMORY_LIMIT"
     ! is_empty_value "$PHP_MAX_EXECUTION_TIME" && info "Setting PHP max_execution_time option" && php_conf_set max_execution_time "$PHP_MAX_EXECUTION_TIME"
+    ! is_empty_value "$PHP_MAX_INPUT_TIME" && info "Setting PHP max_input_time option" && php_conf_set max_input_time "$PHP_MAX_INPUT_TIME"
+    ! is_empty_value "$PHP_MAX_INPUT_VARS" && info "Setting PHP max_input_vars option" && php_conf_set max_input_time "$PHP_MAX_INPUT_VARS"
+    ! is_empty_value "$PHP_MEMORY_LIMIT" && info "Setting PHP memory_limit option" && php_conf_set memory_limit "$PHP_MEMORY_LIMIT"
+    ! is_empty_value "$PHP_POST_MAX_SIZE" && info "Setting PHP post_max_size option" && php_conf_set post_max_size "$PHP_POST_MAX_SIZE"
+    ! is_empty_value "$PHP_UPLOAD_MAX_FILESIZE" && info "Setting PHP upload_max_filesize option" && php_conf_set upload_max_filesize "$PHP_UPLOAD_MAX_FILESIZE"
 
     # PHP-FPM configuration
     ! is_empty_value "$PHP_FPM_LISTEN_ADDRESS" && info "Setting PHP-FPM listen option" && php_conf_set "listen" "$PHP_FPM_LISTEN_ADDRESS" "${PHP_CONF_DIR}/php-fpm.d/www.conf"
