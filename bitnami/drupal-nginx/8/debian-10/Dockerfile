@@ -27,16 +27,7 @@ RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="8.9.6-debian-10-r11" \
-    DRUPAL_DATABASE_NAME="" \
-    DRUPAL_DATABASE_PASSWORD="" \
-    DRUPAL_DATABASE_USER="" \
-    DRUPAL_EMAIL="" \
-    DRUPAL_HTTPS_PORT="" \
-    DRUPAL_HTTP_PORT="" \
-    DRUPAL_PASSWORD="" \
-    DRUPAL_PROFILE="" \
-    DRUPAL_USERNAME="" \
+    BITNAMI_IMAGE_VERSION="8.9.6-debian-10-r12" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -50,8 +41,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     NGINX_ENABLE_CUSTOM_PORTS="no" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
-    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/nginx/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/drupal/vendor/bin:$PATH" \
-    PHP_MEMORY_LIMIT=""
+    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/nginx/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
 
 EXPOSE 8080 8443
 
