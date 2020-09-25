@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.24-0" --checksum 94a7e3c58310f59af5c1e14544de0a42bd1ecf394a159db94aacf8ccf6058436
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.22-1" --checksum 18f03a612aa975b8d25822ff342173651ce4db64f34698d55c801292385182d2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-1" --checksum a94f94357aa06f3718db1550fa5f5188cd61383d66bf754eef49c58a18bf02cc
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mediawiki" "1.34.4-0" --checksum eb0d97aae18f75c36b35063ab9b9436747e5b5b36f3ec7bc6601bfc413518679
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mediawiki" "1.35.0-0" --checksum ff8adb765427d266952138dce07e08af829b23829d2a4e98a736d3675bd9bb5a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -35,7 +35,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="mediawiki" \
-    BITNAMI_IMAGE_VERSION="1.34.4-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="1.35.0-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
