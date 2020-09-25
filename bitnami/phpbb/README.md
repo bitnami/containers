@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.3.1`, `3.3.1-debian-10-r36`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.3.1-debian-10-r36/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.3.1`, `3.3.1-debian-10-r37`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.3.1-debian-10-r37/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpbb GitHub repo](https://github.com/bitnami/bitnami-docker-phpbb).
 
@@ -269,7 +269,7 @@ To configure phpBB to send email using SMTP you can set the following environmen
 
 ##### PHP configuration
 
-- `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **256M**
+- `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 
 This would be an example of SMTP configuration using a GMail account:
 
