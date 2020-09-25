@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10`, `10-debian-10`, `10.5.0`, `10.5.0-debian-10-r32`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.5.0-debian-10-r32/10/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.5.0`, `10.5.0-debian-10-r33`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.5.0-debian-10-r33/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/owncloud GitHub repo](https://github.com/bitnami/bitnami-docker-owncloud).
 
@@ -282,7 +282,7 @@ When you start the owncloud image, you can adjust the configuration of the insta
 
 ##### PHP configuration
 
-- `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **512M**
+- `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **512M**
 
 If you want to add a new environment variable:
 
