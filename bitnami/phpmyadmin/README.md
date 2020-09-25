@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5`, `5-debian-10`, `5.0.2`, `5.0.2-debian-10-r165`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.0.2-debian-10-r165/5/debian-10/Dockerfile)
+* [`5`, `5-debian-10`, `5.0.2`, `5.0.2-debian-10-r166`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.0.2-debian-10-r166/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpmyadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phpmyadmin).
 
@@ -180,9 +180,15 @@ The phpMyAdmin instance can be customized by specifying environment variables on
 - `DATABASE_SSL_CA_PATH`: Directory containing trusted SSL CA certificates in PEM format.
 - `DATABASE_SSL_CIPHERS`: List of allowable ciphers for connections when using SSL.
 - `DATABASE_SSL_VERIFY`: Enable SSL certificate validation. Default: **yes**
-- `PHP_UPLOAD_MAX_FILESIZE`: Max PHP upload file size. Default: **80M**
-- `PHP_POST_MAX_SIZE`: Max PHP POST size. Default: **80M**
-- `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **256M**
+
+### PHP configuration
+
+- `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
+- `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
+- `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
+- `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
+- `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. Default: **80M**
+- `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP upload. Default: **80M**
 
 ### Specifying Environment variables using Docker Compose
 
