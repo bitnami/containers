@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.11.15`, `7.11.15-debian-10-r80`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.15-debian-10-r80/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.11.15`, `7.11.15-debian-10-r81`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.15-debian-10-r81/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
 
@@ -216,7 +216,7 @@ When you start the SuiteCRM image, you can adjust the configuration of the insta
 
 ##### PHP configuration
 
-- `PHP_MEMORY_LIMIT`: Memory limit for PHP. Default: **256M**
+- `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 
 If you want to add a new environment variable:
 
