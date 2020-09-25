@@ -21,8 +21,8 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache/postunpack.sh
+RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/joomla/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
@@ -31,15 +31,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.9.21-debian-10-r29" \
-    JOOMLA_DATABASE_NAME="" \
-    JOOMLA_DATABASE_PASSWORD="" \
-    JOOMLA_DATABASE_USER="" \
-    JOOMLA_EMAIL="" \
-    JOOMLA_FIRST_NAME="" \
-    JOOMLA_LAST_NAME="" \
-    JOOMLA_PASSWORD="bitnami" \
-    JOOMLA_USERNAME="user" \
+    BITNAMI_IMAGE_VERSION="3.9.21-debian-10-r30" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -50,13 +42,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
     MYSQL_CLIENT_ENABLE_SSL="no" \
     MYSQL_CLIENT_SSL_CA_FILE="" \
-    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH" \
-    PHP_MEMORY_LIMIT="" \
-    SMTP_HOST="" \
-    SMTP_PASSWORD="" \
-    SMTP_PORT="" \
-    SMTP_PROTOCOL="" \
-    SMTP_USER=""
+    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
 
