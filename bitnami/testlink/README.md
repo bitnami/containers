@@ -13,6 +13,8 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-testlink/ma
 $ docker-compose up -d
 ```
 
+You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -36,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.9.20`, `1.9.20-debian-10-r205`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.20-debian-10-r205/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.9.20`, `1.9.20-debian-10-r206`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.20-debian-10-r206/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/testlink GitHub repo](https://github.com/bitnami/bitnami-docker-testlink).
 
