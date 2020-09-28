@@ -13,6 +13,8 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-phppgadmin/
 $ docker-compose up -d
 ```
 
+You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -29,7 +31,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.12.1`, `7.12.1-debian-10-r106`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/7.12.1-debian-10-r106/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.12.1`, `7.12.1-debian-10-r107`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/7.12.1-debian-10-r107/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phppgadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phppgadmin).
 
