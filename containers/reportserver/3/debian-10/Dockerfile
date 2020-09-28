@@ -12,7 +12,7 @@ RUN bitnami-pkg install java-11.0.8-1 --checksum 811b17aa00d6687a6c6e555a4131e58
 RUN bitnami-pkg unpack tomcat-9.0.38-1 --checksum 157ce1045cd452e3ddc6f4cd0630cf67cd960a811006311363bf0d7b4aa919fd
 RUN bitnami-pkg unpack mysql-client-10.3.24-0 --checksum 94a7e3c58310f59af5c1e14544de0a42bd1ecf394a159db94aacf8ccf6058436
 RUN bitnami-pkg install tini-0.19.0-0 --checksum 9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c
-RUN bitnami-pkg unpack reportserver-3.3.0-6030-0 --checksum 0bcc132b72b73a16514d2127478d3f6a3f730a36ca021a4ae88e6eefcfbd2447
+RUN bitnami-pkg unpack reportserver-3.3.0-6030-1 --checksum ef37369b479cf71fd1470419fce41729d44e5bc70d03bfb24a55aa7031d5a0f4
 RUN bitnami-pkg install gosu-1.12.0-1 --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -20,7 +20,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserver" \
-    BITNAMI_IMAGE_VERSION="3.3.0-6030-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="3.3.0-6030-debian-10-r8" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
