@@ -9,6 +9,8 @@ Fluentd is an open source data collector, which lets you unify the data collecti
 $ docker run --name fluentd bitnami/fluentd:latest
 ```
 
+You can find the available configuration options in the [Environment Variables](#environment-variables) section.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -30,7 +32,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.11.2`, `1.11.2-debian-10-r40`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.11.2-debian-10-r40/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.11.2`, `1.11.2-debian-10-r41`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.11.2-debian-10-r41/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
 
