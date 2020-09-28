@@ -15,6 +15,8 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-postgresql-
 $ docker-compose up -d
 ```
 
+You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -44,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`12`, `12-debian-10`, `12.4.0`, `12.4.0-debian-10-r48` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.4.0-debian-10-r48/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.9.0`, `11.9.0-debian-10-r44`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.9.0-debian-10-r44/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.14.0`, `10.14.0-debian-10-r49` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.14.0-debian-10-r49/10/debian-10/Dockerfile)
-* [`9.6`, `9.6-debian-10`, `9.6.19`, `9.6.19-debian-10-r48` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.19-debian-10-r48/9.6/debian-10/Dockerfile)
+* [`9.6`, `9.6-debian-10`, `9.6.19`, `9.6.19-debian-10-r49` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.19-debian-10-r49/9.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
 
