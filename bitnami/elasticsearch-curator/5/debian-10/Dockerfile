@@ -14,10 +14,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "dd79db1e55dcb1c32e444576dec92f8888305fe46b7366d43373ab750244c8fd  /tmp/bitnami/pkg/cache/python-3.6.12-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-3.6.12-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-3.6.12-1-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/elasticsearch-curator-5.8.1-0-linux-amd64-debian-10.tar.gz && \
-    echo "5016c26931063aa77bb10543a5eadac3173e2f70b9092e0458f7176856a44178  /tmp/bitnami/pkg/cache/elasticsearch-curator-5.8.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/elasticsearch-curator-5.8.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/elasticsearch-curator-5.8.1-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/elasticsearch-curator-5.8.1-1-linux-amd64-debian-10.tar.gz && \
+    echo "9a9d7e076ba7231ba259d8eb96bcf059299c7a0431906cc1e330745333df23d2  /tmp/bitnami/pkg/cache/elasticsearch-curator-5.8.1-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/elasticsearch-curator-5.8.1-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/elasticsearch-curator-5.8.1-1-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
@@ -29,7 +29,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="elasticsearch-curator" \
-    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r237" \
+    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r238" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NAMI_PREFIX="/.nami" \
