@@ -1,10 +1,10 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c",
+        "digest": "4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.12.0-1"
+        "version": "1.12.0-2"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "wordpress": {
         "arch": "amd64",
-        "digest": "c8acadceabd0db453dc1bc873c33d52627efaafc3b5c7490b586a3321fec2474",
+        "digest": "2380a225edc71f82bc359a428ba51ff204a56d9824c2a0f040599f29c05c0f81",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.5.1-5"
+        "version": "5.5.1-6"
     },
     "wp-cli": {
         "arch": "amd64",
