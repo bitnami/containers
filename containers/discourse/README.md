@@ -16,6 +16,8 @@ $ docker-compose up -d
 
 **Note:** The `DISCOURSE_HOSTNAME` environment variable is set to `www.example.com` by default. Please, provide a valid domain name before deploying the solution, or add this domain to your local `hosts` file pointing to `127.0.0.1`.
 
+You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -33,7 +35,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.5.2`, `2.5.2-debian-10-r6`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.5.2-debian-10-r6/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.5.2`, `2.5.2-debian-10-r7`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.5.2-debian-10-r7/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
