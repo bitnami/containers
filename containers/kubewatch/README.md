@@ -11,6 +11,8 @@
 $ docker run -it --network host -v $HOME/.kubewatch.yaml:/root/.kubewatch.yaml -v $HOME/.kube/config:/opt/bitnami/kubewatch/.kube/config --name kubewatch bitnami/kubewatch:latest
 ```
 
+You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -38,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.1.0`, `0.1.0-debian-10-r73`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.1.0-debian-10-r73/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.1.0`, `0.1.0-debian-10-r74`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.1.0-debian-10-r74/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubewatch GitHub repo](https://github.com/bitnami/bitnami-docker-kubewatch).
 
