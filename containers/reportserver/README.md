@@ -13,6 +13,8 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-reportserve
 $ docker-compose up -d
 ```
 
+You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -30,7 +32,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.3.0-6030`, `3.3.0-6030-debian-10-r8`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserver-community/blob/3.3.0-6030-debian-10-r8/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.3.0-6030`, `3.3.0-6030-debian-10-r9`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserver-community/blob/3.3.0-6030-debian-10-r9/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/reportserver-community GitHub repo](https://github.com/bitnami/bitnami-docker-reportserver-community).
 
