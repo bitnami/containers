@@ -8,10 +8,10 @@
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c",
+        "digest": "4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.12.0-1"
+        "version": "1.12.0-2"
     },
     "ini-file": {
         "arch": "amd64",
@@ -22,9 +22,9 @@
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "07c4678654b01811f22b5bb65a8d6f8e253abd4524ebb3b78c7d3df042cf23bd",
+        "digest": "9a0463a51618b7081bf68163d01ca4a3a930a2590aeaba7a500dec1c8ea9e2fe",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.0-1"
+        "version": "1.0.0-2"
     }
 }
