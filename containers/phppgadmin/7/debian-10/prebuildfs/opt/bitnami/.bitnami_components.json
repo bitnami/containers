@@ -1,17 +1,17 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "93181ed22488a04139fe2ab6d9ca1a81b142392e8c86675b1653a1f28c068fa9",
+        "digest": "e36283a8a06d40ee4f97ce31469eb411763344e42840dc4fde83c7f1e10ee6b0",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.46-0"
+        "version": "2.4.46-1"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c",
+        "digest": "4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.12.0-1"
+        "version": "1.12.0-2"
     },
     "libphp": {
         "arch": "amd64",
