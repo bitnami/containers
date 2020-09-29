@@ -13,6 +13,8 @@ $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-wordpress/ma
 $ docker-compose up
 ```
 
+You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -39,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5`, `5-debian-10`, `5.5.1`, `5.5.1-debian-10-r30`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.5.1-debian-10-r30/5/debian-10/Dockerfile)
+* [`5`, `5-debian-10`, `5.5.1`, `5.5.1-debian-10-r31`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.5.1-debian-10-r31/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
