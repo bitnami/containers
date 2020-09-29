@@ -13,6 +13,8 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-odoo/master
 $ docker-compose up -d
 ```
 
+You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -36,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`13`, `13-debian-10`, `13.0.20200910`, `13.0.20200910-debian-10-r22`, `latest` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20200910-debian-10-r22/13/debian-10/Dockerfile)
+* [`13`, `13-debian-10`, `13.0.20200910`, `13.0.20200910-debian-10-r23`, `latest` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20200910-debian-10-r23/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.0.20200915`, `12.0.20200915-debian-10-r21` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20200915-debian-10-r21/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.0.20200915`, `11.0.20200915-debian-10-r19` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/11.0.20200915-debian-10-r19/11/debian-10/Dockerfile)
 
