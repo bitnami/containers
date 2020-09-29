@@ -21,6 +21,8 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-redis-senti
 $ docker-compose up -d
 ```
 
+You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -42,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.0`, `6.0-debian-10`, `6.0.8`, `6.0.8-debian-10-r25`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.8-debian-10-r25/6.0/debian-10/Dockerfile)
+* [`6.0`, `6.0-debian-10`, `6.0.8`, `6.0.8-debian-10-r26`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.8-debian-10-r26/6.0/debian-10/Dockerfile)
 * [`5.0`, `5.0-debian-10`, `5.0.9`, `5.0.9-debian-10-r140` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.9-debian-10-r140/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
