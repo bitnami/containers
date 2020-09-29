@@ -16,5 +16,5 @@ set -o pipefail
 info "Updating wgServer option"
 mediawiki_conf_set "\$wgServer" "//${1:?missing host}"
 
-info "Purging cache"
-debug_execute php "${MEDIAWIKI_BASE_DIR}/maintenance/purgeList.php" --purge --all
+# Reload PHP-FPM configuration to ensure that the home page redirects to the new domain
+/opt/bitnami/scripts/php/reload.sh
