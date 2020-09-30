@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.9.21`, `3.9.21-debian-10-r37`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.21-debian-10-r37/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.9.21`, `3.9.21-debian-10-r38`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.21-debian-10-r38/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
 
@@ -226,6 +226,8 @@ Available environment variables:
 - `JOOMLA_PASSWORD`: Joomla! application password. Default: **bitnami**
 - `JOOMLA_EMAIL`: Joomla! application email. Default: **user@example.com**
 - `JOOMLA_SITE_NAME`: Joomla! site name. Default: **New Site**
+- `JOOMLA_SECRET`: Secret value for data encryption (auto-generated if not provided). No defaults.
+- `JOOMLA_LOAD_SAMPLE_DATA`: Load Joomla sample data. Default: **yes**
 - `JOOMLA_SKIP_BOOTSTRAP`: Do not initialize the Joomla! database for a new deployment. This is necessary in case you use a database that already has Joomla! data. Default: **no**
 
 ##### Use an existing database
