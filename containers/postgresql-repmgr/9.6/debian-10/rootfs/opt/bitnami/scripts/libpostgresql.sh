@@ -358,6 +358,20 @@ postgresql_create_replication_user() {
 }
 
 ########################
+# Return PostgreSQL major version
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   String
+#########################
+postgresql_get_major_version() {
+    psql --version | grep -oE "[0-9]+\.[0-9]+" | grep -oE "^[0-9]+"
+}
+
+
+########################
 # Change postgresql.conf by setting replication parameters
 # Globals:
 #   POSTGRESQL_*
@@ -367,11 +381,16 @@ postgresql_create_replication_user() {
 #   None
 #########################
 postgresql_configure_replication_parameters() {
+    local -r psql_major_version="$(postgresql_get_major_version)"
     info "Configuring replication parameters"
     postgresql_set_property "wal_level" "hot_standby"
     postgresql_set_property "max_wal_size" "400MB"
     postgresql_set_property "max_wal_senders" "16"
-    postgresql_set_property "wal_keep_segments" "12"
+    if ((psql_major_version >= 13)); then
+        postgresql_set_property "wal_keep_size" "12"
+    else
+        postgresql_set_property "wal_keep_segments" "12"
+    fi
     postgresql_set_property "hot_standby" "on"
     if ((POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS > 0)); then
         postgresql_set_property "synchronous_commit" "$POSTGRESQL_SYNCHRONOUS_COMMIT_MODE"
@@ -885,18 +904,6 @@ postgresql_slave_init_db() {
     done
 }
 
-########################
-# Return PostgreSQL major version
-# Globals:
-#   POSTGRESQL_*
-# Arguments:
-#   None
-# Returns:
-#   String
-#########################
-postgresql_get_major_version() {
-    psql --version | grep -oE "[0-9]+\.[0-9]+" | grep -oE "^[0-9]+"
-}
 
 ########################
 # Create recovery.conf in slave node
