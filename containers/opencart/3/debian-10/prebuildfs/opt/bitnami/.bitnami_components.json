@@ -1,17 +1,17 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "93181ed22488a04139fe2ab6d9ca1a81b142392e8c86675b1653a1f28c068fa9",
+        "digest": "8d591562d804902c986f59f18bbea5e47289f4cbfb364c13862d4b9df557e0f4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.46-0"
+        "version": "2.4.46-2"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c",
+        "digest": "4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.12.0-1"
+        "version": "1.12.0-2"
     },
     "libphp": {
         "arch": "amd64",
@@ -36,16 +36,16 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "de5bc4302202e8df8252055e3df193af62f55fb4407cbd89275e3c88552be969",
+        "digest": "c769be6970488d160be6212be140e18c94618ee083000bc13919e9fa20deed68",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.22-5"
+        "version": "7.3.22-6"
     },
     "tini": {
         "arch": "amd64",
-        "digest": "9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c",
+        "digest": "9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.19.0-0"
+        "version": "0.19.0-1"
     }
 }
