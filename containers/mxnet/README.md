@@ -1,7 +1,7 @@
-# What is MXNet?
+# What is Apache MXNet (Incubating)?
 
 >A flexible and efficient library for deep learning.
-Based on the the Gluon API specification, the new Gluon library in Apache MXNet provides a clear, concise, and simple API for deep learning. It makes it easy to prototype, build, and train deep learning models without sacrificing training speed. Install the latest version of MXNet to get access to Gluon.
+Based on the the Gluon API specification, the new Gluon library in Apache MXNet (Incubating) provides a clear, concise, and simple API for deep learning. It makes it easy to prototype, build, and train deep learning models without sacrificing training speed. Install the latest version of Apache MXNet (Incubating) to get access to Gluon.
 
 [mxnet.incubator.apache.org](https://mxnet.incubator.apache.org/versions/master/)
 
@@ -38,13 +38,13 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.7.0`, `1.7.0-debian-10-r26`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mxnet/blob/1.7.0-debian-10-r26/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.7.0`, `1.7.0-debian-10-r27`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mxnet/blob/1.7.0-debian-10-r27/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mxnet GitHub repo](https://github.com/bitnami/bitnami-docker-mxnet).
 
 # Get this image
 
-The recommended way to get the Bitnami MXNet Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mxnet).
+The recommended way to get the Bitnami Apache MXNet (Incubating) Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mxnet).
 
 ```console
 $ docker pull bitnami/mxnet:latest
@@ -72,7 +72,7 @@ $ docker run -it --name mxnet bitnami/mxnet
 
 # Configuration
 
-## Running your MXNet app
+## Running your Apache MXNet (Incubating) app
 
 The default work directory for the mxnet image is `/app`. You can mount a folder from your host here that includes your mxnet script, and run it normally using the `python` command.
 
@@ -81,7 +81,7 @@ $ docker run -it --name mxnet -v /path/to/app:/app bitnami/mxnet \
   python script.py
 ```
 
-## Running a MXNet app with package dependencies
+## Running an Apache MXNet (Incubating) app with package dependencies
 
 If your mxnet app has a `requirements.txt` defining your app's dependencies, you can install the dependencies before running your app.
 
@@ -94,7 +94,7 @@ $ docker run -it --name mxnet -v /path/to/app:/app bitnami/mxnet \
 
 ## Upgrade this image
 
-Bitnami provides up-to-date versions of MXNet, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Bitnami provides up-to-date versions of Apache MXNet (Incubating), including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 ### Step 1: Get the updated image
 
