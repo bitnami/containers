@@ -15,10 +15,10 @@
     },
     "tini": {
         "arch": "amd64",
-        "digest": "9a8ae20be31a518f042fcec359f2cf35bfdb4e2a56f2fa8ff9ef2ecaf45da80c",
+        "digest": "9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.19.0-0"
+        "version": "0.19.0-1"
     },
     "wildfly": {
         "arch": "amd64",
