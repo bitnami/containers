@@ -8,10 +8,10 @@
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c",
+        "digest": "4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.12.0-1"
+        "version": "1.12.0-2"
     },
     "java": {
         "arch": "amd64",
@@ -29,9 +29,9 @@
     },
     "yq": {
         "arch": "amd64",
-        "digest": "e9a8d1a2856d5eeb78363470053ac4c6adbb12788c6521f0bdc3e88d84e21729",
+        "digest": "a8889ed389089d58955bd5b30d562d612ea540d5bbe5338bc4e68a9e1665c38f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.4.0-0"
+        "version": "3.4.0-1"
     }
 }
