@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl gzip libc6 libcom-err2 libcurl4 li
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "3.4.0-1" --checksum a8889ed389089d58955bd5b30d562d612ea540d5bbe5338bc4e68a9e1665c38f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-3" --checksum 7521d9a4f9e4e182bf32977e234026caa7b03759799868335bccb1edd8f8fd12
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-2" --checksum f1bee333423f6627d795ea9e0b6a89c18d2e5c2e2d015bb4620f040f1d520cf6
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb" "4.2.9-0" --checksum 1738c8f7462dbf875f50b5a739042b3ae669c1dfe26b0d059e70995f9fb9270c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb" "4.2.10-0" --checksum d1e4c831c9b1c8cccedb51c1d4e8184c01895af337cfdb45b65460839f65128b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -21,7 +21,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb/postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.2.9-debian-10-r48" \
+    BITNAMI_IMAGE_VERSION="4.2.10-debian-10-r0" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 
 EXPOSE 27017
