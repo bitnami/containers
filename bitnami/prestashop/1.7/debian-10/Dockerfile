@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.2.34-0" --checksum 8ebf19d1e14e07fb330b4e955ebcc15bfd513d3f7bd336f6a8ecf319b152f717
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.2.34-1" --checksum f13ef818d9c78ff4f6b022fc26ec95d7f29c75a8b0488083fb0267d291e57a05
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-2" --checksum 8d591562d804902c986f59f18bbea5e47289f4cbfb364c13862d4b9df557e0f4
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.1.46-0" --checksum 25b7700a3dcf0084eec119800d212141efb223a76f4c1fc126c90c876ab965cb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.2.34-0" --checksum 93bdc05dcbd4069b200999613931c206d480ab234c35fb6052be23f3801d3b05
@@ -31,7 +31,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-8-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="1.7.6-8-debian-10-r8" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
