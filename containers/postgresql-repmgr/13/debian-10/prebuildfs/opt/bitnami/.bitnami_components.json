@@ -1,0 +1,16 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.12.0-2"
+    },
+    "postgresql-repmgr": {
+        "arch": "amd64",
+        "digest": "97b6f75c2e3c6165a9ea883a13fb0202e84e3c5392422550f5c46c8e4292c983",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "13.0.0-0"
+    }
+}
