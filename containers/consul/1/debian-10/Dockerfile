@@ -9,8 +9,8 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip iproute2 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-1" --checksum a94f94357aa06f3718db1550fa5f5188cd61383d66bf754eef49c58a18bf02cc
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-1" --checksum 51cfb1b7fd7b05b8abd1df0278c698103a9b1a4964bdacd87ca1d5c01631d59c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-2" --checksum f1bee333423f6627d795ea9e0b6a89c18d2e5c2e2d015bb4620f040f1d520cf6
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "consul" "1.8.4-0" --checksum 93bb315e327934467820b959a02ae13340421f695860f685ee10b25c155abef1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/consul/postunpack.sh
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.8.4-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="1.8.4-debian-10-r15" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/consul/bin:$PATH"
 
 EXPOSE 8300 8301 8500 8600
