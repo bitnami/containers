@@ -12,7 +12,7 @@ set -o pipefail
 . /opt/bitnami/scripts/harbor-adapter-trivy-env.sh
 . /opt/bitnami/scripts/libharbor.sh
 
-read -r -a directories <<< "$(get_system_cert_paths)"
+read -r -a directories <<<"$(get_system_cert_paths)"
 directories+=("${SCANNER_TRIVY_CACHE_DIR}" "${SCANNER_TRIVY_REPORTS_DIR}")
 
 # Create directories
@@ -20,3 +20,9 @@ for dir in "${directories[@]}"; do
     ensure_dir_exists "${dir}"
     chmod -R g+rwX "${dir}"
 done
+
+# Fix for CentOS Internal TLS
+if [[ -f /etc/pki/tls/certs/ca-bundle.crt ]]; then
+    chmod g+w /etc/pki/tls/certs/ca-bundle.crt
+    chmod g+w /etc/pki/tls/certs/ca-bundle.trust.crt
+fi
