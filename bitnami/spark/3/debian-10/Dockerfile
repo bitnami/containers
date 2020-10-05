@@ -10,7 +10,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libffi6 libgcc1 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.6.12-2" --checksum 2b74dd8f5d4a7f2afa5acc4790e5157c975022f4856d00eb4a9e6cc31e294148
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.6.12-3" --checksum 2756b7233479d81cbbba23b4c890c50ff3025bbd99d80c197acb426f1db2dbff
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.265-0" --checksum 6c85e8df954fca444f2471195524db015ec24a67e42f43579401f2adb5189cb8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "spark" "3.0.1-0" --checksum f36becf493046cbf9104c8c394d9348dd13a2e72212423d685120de338ede4f8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
@@ -21,7 +21,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/spark/postunpack.sh
 ENV BITNAMI_APP_NAME="spark" \
-    BITNAMI_IMAGE_VERSION="3.0.1-debian-10-r30" \
+    BITNAMI_IMAGE_VERSION="3.0.1-debian-10-r31" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/spark/venv/lib/python3.6/site-packages/numpy.libs/:$LD_LIBRARY_PATH" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
