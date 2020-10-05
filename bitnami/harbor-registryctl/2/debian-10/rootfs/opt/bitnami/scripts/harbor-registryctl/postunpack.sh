@@ -12,9 +12,15 @@ for dir in "/var/lib/registry" "/storage" "/etc/registry" "/etc/registryctl"; do
 done
 
 # Ensure the non-root user has writing permission at a set of directories
-read -r -a directories <<< "$(get_system_cert_paths)"
+read -r -a directories <<<"$(get_system_cert_paths)"
 directories+=("/var/lib/registry" "/storage")
 
 for dir in "${directories[@]}"; do
     chmod -R g+rwX "$dir"
 done
+
+# Fix for CentOS Internal TLS
+if [[ -f /etc/pki/tls/certs/ca-bundle.crt ]]; then
+    chmod g+w /etc/pki/tls/certs/ca-bundle.crt
+    chmod g+w /etc/pki/tls/certs/ca-bundle.trust.crt
+fi
