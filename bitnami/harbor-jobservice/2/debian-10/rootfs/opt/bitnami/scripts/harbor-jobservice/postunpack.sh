@@ -6,7 +6,7 @@
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libharbor.sh
 
-read -r -a directories <<< "$(get_system_cert_paths)"
+read -r -a directories <<<"$(get_system_cert_paths)"
 directories+=("/var/log/jobs")
 
 # Ensure a set of directories exist
@@ -17,3 +17,9 @@ for dir in "${directories[@]}"; do
 done
 
 ensure_dir_exists "/etc/jobservice"
+
+# Fix for CentOS Internal TLS
+if [[ -f /etc/pki/tls/certs/ca-bundle.crt ]]; then
+    chmod g+w /etc/pki/tls/certs/ca-bundle.crt
+    chmod g+w /etc/pki/tls/certs/ca-bundle.trust.crt
+fi
