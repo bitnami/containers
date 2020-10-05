@@ -16,9 +16,15 @@ export HARBOR_PORTAL_NGINX_CONF_FILE="${HARBOR_PORTAL_NGINX_CONF_DIR}/nginx.conf
 . /opt/bitnami/scripts/nginx-env.sh
 
 # Ensure NGINX temp folders exists
-for dir in  "${NGINX_BASE_DIR}/client_body_temp" "${NGINX_BASE_DIR}/proxy_temp" "${NGINX_BASE_DIR}/fastcgi_temp" "${NGINX_BASE_DIR}/scgi_temp" "${NGINX_BASE_DIR}/uwsgi_temp"; do
+for dir in "${NGINX_BASE_DIR}/client_body_temp" "${NGINX_BASE_DIR}/proxy_temp" "${NGINX_BASE_DIR}/fastcgi_temp" "${NGINX_BASE_DIR}/scgi_temp" "${NGINX_BASE_DIR}/uwsgi_temp"; do
     ensure_dir_exists "$dir"
 done
+
+# Fix for CentOS Internal TLS
+if [[ -f /etc/pki/tls/certs/ca-bundle.crt ]]; then
+    chmod g+w /etc/pki/tls/certs/ca-bundle.crt
+    chmod g+w /etc/pki/tls/certs/ca-bundle.trust.crt
+fi
 
 # Loading bitnami paths
 replace_in_file "$HARBOR_PORTAL_NGINX_CONF_FILE" "/usr/share/nginx/html" "${HARBOR_PORTAL_BASE_DIR}" false
@@ -29,7 +35,7 @@ cp -a "${HARBOR_PORTAL_NGINX_CONF_DIR}/." "$NGINX_CONF_DIR"
 rm -rf "${HARBOR_PORTAL_NGINX_CONF_DIR}"
 
 # Ensure the non-root user has writing permission at a set of directories
-read -r -a directories <<< "$(get_system_cert_paths)"
+read -r -a directories <<<"$(get_system_cert_paths)"
 directories+=("$NGINX_CONF_DIR")
 
 for dir in "${directories[@]}"; do
