@@ -16,5 +16,8 @@ chmod -R g+rwX "/etc/notary"
 # Fix for CentOS Internal TLS
 if [[ -f /etc/pki/tls/certs/ca-bundle.crt ]]; then
     chmod g+w /etc/pki/tls/certs/ca-bundle.crt
+fi
+
+if [[ -f /etc/pki/tls/certs/ca-bundle.trust.crt ]]; then
     chmod g+w /etc/pki/tls/certs/ca-bundle.trust.crt
 fi
