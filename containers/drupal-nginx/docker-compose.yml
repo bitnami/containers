@@ -1,7 +1,7 @@
 version: '2'
 services:
   mariadb:
-    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    image: 'docker.io/bitnami/mariadb:10.5-debian-10'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_drupal
