@@ -12,7 +12,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.6.6-1" 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "10.22.1-1" --checksum a58c2b4fbe194df384d9611eeda01c1a49efe7b2dab6bf8412d759e6523e32c0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.24-0" --checksum 94a7e3c58310f59af5c1e14544de0a42bd1ecf394a159db94aacf8ccf6058436
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.28.0-0" --checksum bda714065995df169ab17f11b3a638a106aec83b00bcbfb325b36b51f29d1704
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rails" "6.0.3-3-0" --checksum 2d93b2cd20e55550dcba01cf32ec974efb64a7d6d49d12297f9a8ced30cd4f57
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rails" "6.0.3-4-0" --checksum fb598415ed18c445807aa9c6d84271ea648c6aee4b4d3d229ea28a6c85867f26
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/rails/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="6.0.3-3-debian-10-r34" \
+    BITNAMI_IMAGE_VERSION="6.0.3-4-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
