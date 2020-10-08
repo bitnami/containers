@@ -1,21 +1,21 @@
-version: '2'
+version: "2"
 services:
   mariadb:
-    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    image: "docker.io/bitnami/mariadb:10.5-debian-10"
     volumes:
-      - 'mariadb_data:/bitnami/mariadb'
+      - "mariadb_data:/bitnami/mariadb"
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_ejbca
       - MARIADB_DATABASE=bitnami_ejbca
       - MARIADB_PASSWORD=Bitnami1234
   ejbca:
-    image: 'docker.io/bitnami/ejbca:6-debian-10'
+    image: "docker.io/bitnami/ejbca:6-debian-10"
     ports:
       - 8080:8080
       - 8443:8443
     volumes:
-      - 'ejbca_data:/bitnami/ejbca'
+      - "ejbca_data:/bitnami/ejbca"
     environment:
       - EJBCA_DATABASE_HOST=mariadb
       - EJBCA_DATABASE_NAME=bitnami_ejbca
