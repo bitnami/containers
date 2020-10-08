@@ -273,43 +273,7 @@ prestashop_wait_for_db_connection() {
 }
 
 ########################
-# Pass PrestaShop wizard
-# Globals:
-#   *
-# Arguments:
-#   None
-# Returns:
-#   true if the wizard succeeded, false otherwise
-#########################
-prestashop_pass_wizard() {
-    local -r port="${WEB_SERVER_HTTP_PORT_NUMBER:-"$WEB_SERVER_DEFAULT_HTTP_PORT_NUMBER"}"
-    local wizard_url cookie_file curl_output
-    local -a curl_opts curl_data_opts
-    wizard_url="http://127.0.0.1:${port}/install/"
-    cookie_file="/tmp/cookie$(generate_random_string -t alphanumeric -c 8)"
-    curl_opts=("--location" "--silent" "--cookie" "$cookie_file" "--cookie-jar" "$cookie_file")
-    # Ensure the web server is started
-    web_server_start
-    # Step 0: Get cookies
-    curl "${curl_opts[@]}" "$wizard_url" >/dev/null 2>&1
-    # Step 1: User creation
-    curl_data_opts=(
-        "--data-urlencode" "lang=en_US"
-        "--data-urlencode" "username=${PRESTASHOP_USERNAME}"
-        "--data-urlencode" "password=${PRESTASHOP_PASSWORD}"
-        "--data-urlencode" "email=${PRESTASHOP_EMAIL}"
-    )
-    curl_output="$(curl "${curl_opts[@]}" "${curl_data_opts[@]}" "${wizard_url}?page=install" 2>/dev/null)"
-    if [[ "$curl_output" != *"Success"* ]]; then
-        error "An error occurred while installing PrestaShop"
-        return 1
-    fi
-    # Stop the web server afterwards
-    web_server_stop
-}
-
-########################
-# Pass PrestaShop wizard
+# Print PrestaShop database connection args for use with mysql_execute
 # Globals:
 #   *
 # Arguments:
