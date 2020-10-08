@@ -22,10 +22,10 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "afd9779f174073bd1622816ec55e560abddf7effb5452d9f8168963b0fe9c39f",
+        "digest": "f2d5aa7f15f9b7db734fcca281a638bb8ce68fd6b31cc3f8fc39ec292ab16a7f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.2.33-0"
+        "version": "10.2.34-0"
     },
     "orangehrm": {
         "arch": "amd64",
