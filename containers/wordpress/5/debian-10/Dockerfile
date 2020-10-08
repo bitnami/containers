@@ -13,9 +13,9 @@ RUN /build/install-nami.sh
 RUN bitnami-pkg install php-7.4.11-2 --checksum aabc290a13f5bee0a31bd9edf504fc025d51a7b95abeff9edcef3cf4d90e3393
 RUN bitnami-pkg unpack apache-2.4.46-2 --checksum 8d591562d804902c986f59f18bbea5e47289f4cbfb364c13862d4b9df557e0f4
 RUN bitnami-pkg install wp-cli-2.4.0-0 --checksum 8095bdd2f96a137cb3f54836ad9deb90510b0927472e532f41e1708345432230
-RUN bitnami-pkg unpack mysql-client-10.3.24-0 --checksum 94a7e3c58310f59af5c1e14544de0a42bd1ecf394a159db94aacf8ccf6058436
+RUN bitnami-pkg unpack mysql-client-10.3.25-0 --checksum 12528e33966094535a302d557eca3eb1ae7d5c7b8fff4b9e70d96cafedbb5341
 RUN bitnami-pkg install libphp-7.4.11-1 --checksum 2a552ec9133bfeea17ee4fa40976499165cc3c6c89e00d483063df083abe4b13
-RUN bitnami-pkg unpack wordpress-5.5.1-8 --checksum fedf8d2a6aa8975cd1b27980522c843b097b93cbd97aa98986da256092a90ff4
+RUN bitnami-pkg unpack wordpress-5.5.1-9 --checksum 2c87c7330aa05aa080e635ccc5b651e7d516db3c2a49c9df08c0fe2540a57820
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN apt-get update && apt-get upgrade -y && \
@@ -29,7 +29,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="8443" \
     APACHE_HTTP_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.5.1-debian-10-r41" \
+    BITNAMI_IMAGE_VERSION="5.5.1-debian-10-r42" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
