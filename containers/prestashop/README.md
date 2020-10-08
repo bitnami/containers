@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.7`, `1.7-debian-10`, `1.7.6-8`, `1.7.6-8-debian-10-r13`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.6-8-debian-10-r13/1.7/debian-10/Dockerfile)
+* [`1.7`, `1.7-debian-10`, `1.7.6-8`, `1.7.6-8-debian-10-r14`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.6-8-debian-10-r14/1.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
@@ -234,7 +234,7 @@ Available environment variables:
 - `PRESTASHOP_COOKIE_CHECK_IP`: Whether to check the cookie's IP address or not. Default: **yes**. See the [Troubleshooting](#troubleshooting) section for more information.
 - `PRESTASHOP_COUNTRY`: Default country of the store. Default: **us**.
 - `PRESTASHOP_LANGUAGE`: Default language of the store (iso code). Default: **en**.
-- `PRESTASHOP_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **off**.
+- `PRESTASHOP_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**.
 - `PRESTASHOP_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
 
 ##### Use an existing database
@@ -492,7 +492,7 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
   - The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
   - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the PrestaShop site by exporting its content, and importing it on a new PrestaShop container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
 
-To upgrade a previous Bitnami PrestaShop container image, which did not support non-root, the easiest way is to start the new image as a *root* user and updating the port numbers. Modify your `docker-compose.yml` file as follows:
+To upgrade a deployment with the previous Bitnami PrestaShop container image, which did not support non-root, the easiest way is to start the new image as a *root* user and updating the port numbers. Modify your `docker-compose.yml` file as follows:
 
 ```diff
        - ALLOW_EMPTY_PASSWORD=yes

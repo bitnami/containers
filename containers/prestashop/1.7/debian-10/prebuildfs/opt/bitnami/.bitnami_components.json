@@ -22,10 +22,10 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "25b7700a3dcf0084eec119800d212141efb223a76f4c1fc126c90c876ab965cb",
+        "digest": "9e0b4a3a133d7b33332169d750596750ea980fe52a1eb3aeb485728921c2ab20",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.1.46-0"
+        "version": "10.1.47-0"
     },
     "php": {
         "arch": "amd64",
