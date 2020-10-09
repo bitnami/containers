@@ -41,13 +41,13 @@ services:
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.mariadb.jdbc.Driver
       - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDB102Dialect
     ports:
-      - "20000-20100:20000-20100"
+      - '20000-20100:20000-20100'
     depends_on:
       - mariadb-skipper
       - rabbitmq
 
   mariadb-dataflow:
-    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    image: 'docker.io/bitnami/mariadb:10.5-debian-10'
     environment:
       - MARIADB_ROOT_PASSWORD=root_password
       - MARIADB_USER=bn_dataflow
@@ -57,7 +57,7 @@ services:
       - 'mariadb_dataflow_data:/bitnami'
 
   mariadb-skipper:
-    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    image: 'docker.io/bitnami/mariadb:10.5-debian-10'
     environment:
       - MARIADB_ROOT_PASSWORD=root_password
       - MARIADB_USER=bn_skipper
@@ -67,7 +67,7 @@ services:
       - 'mariadb_skipper_data:/bitnami'
 
   mariadb-test:
-    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    image: 'docker.io/bitnami/mariadb:10.5-debian-10'
     environment:
       - MARIADB_ROOT_PASSWORD=root_password
       - MARIADB_USER=bn_test
