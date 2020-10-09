@@ -119,6 +119,40 @@ php_execute() {
 }
 
 ########################
+# Execute/run PHP code and print to stdout
+# Globals:
+#   None
+# Stdin:
+#   Code to execute
+# Arguments:
+#   $1..$n - Input arguments to script
+# Returns:
+#   None
+#########################
+php_execute_print_output() {
+    local php_cmd
+    # Obtain the command specified via stdin
+    php_cmd="$(</dev/stdin)"
+    debug "Executing PHP code:\n${php_cmd}"
+    php -- "$@" <<< "<?php ${php_cmd}"
+}
+
+########################
+# Execute/run PHP code
+# Globals:
+#   None
+# Stdin:
+#   Code to execute
+# Arguments:
+#   $1..$n - Input arguments to script
+# Returns:
+#   None
+#########################
+php_execute() {
+    debug_execute php_execute_print_output "$@"
+}
+
+########################
 # Stop PHP-FPM
 # Globals:
 #   PHP_FPM_PID_FILE
