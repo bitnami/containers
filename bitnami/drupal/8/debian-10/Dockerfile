@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.23-1" --checksum 702aba4888ba35977bd0d0704f4e62cb7eeaa47336fe8d8658f0a958d865d41b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-2" --checksum f1bee333423f6627d795ea9e0b6a89c18d2e5c2e2d015bb4620f040f1d520cf6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "8.9.7-0" --checksum 3023933ea35f6b7ca8a8c1915a3dff823e94ad663b27fab862fe9db123a57d64
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "8.9.7-1" --checksum 9ad0a2039cf4b05c8f3fcc505ae610990200e4868df4a4074a959114546c9c15
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -31,7 +31,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.9.7-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="8.9.7-debian-10-r2" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
