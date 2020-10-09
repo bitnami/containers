@@ -5,6 +5,7 @@
   "databaseServerPort": "{{$global.env.MARIADB_PORT_NUMBER}}",
   "databaseUser": "{{$global.env.MATOMO_DATABASE_USER}}",
   "email": "{{$global.env.MATOMO_EMAIL}}",
+  "enableDatabaseSsl": "{{$global.env.MATOMO_ENABLE_DATABASE_SSL}}",
   "enableProxyUriHeader": "{{$global.env.MATOMO_ENABLE_PROXY_URI_HEADER}}",
   "host": "{{$global.env.MATOMO_HOST}}",
   "password": "{{$global.env.MATOMO_PASSWORD}}",
