@@ -36,10 +36,10 @@
     },
     "phpmyadmin": {
         "arch": "amd64",
-        "digest": "b890352acc4429be19d4d319a2ea46b523a718fb325cb0a66604e0294ab7e99c",
+        "digest": "221772dff600635c74e2c82e837a0e299d0da1a1bd4b5cbbe8e24c7aafe92982",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.0.2-3"
+        "version": "5.0.3-0"
     },
     "render-template": {
         "arch": "amd64",
