@@ -35,7 +35,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3.8-prod`, `3.8-prod-debian-10`, `3.8.6-prod`, `3.8.6-prod-debian-10-r22` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.6-prod-debian-10-r22/3.8-prod/debian-10/Dockerfile)
-* [`3.8`, `3.8-debian-10`, `3.8.6`, `3.8.6-debian-10-r22` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.6-debian-10-r22/3.8/debian-10/Dockerfile)
+* [`3.8`, `3.8-debian-10`, `3.8.6`, `3.8.6-debian-10-r23` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.6-debian-10-r23/3.8/debian-10/Dockerfile)
 * [`3.7-prod`, `3.7-prod-debian-10`, `3.7.9-prod`, `3.7.9-prod-debian-10-r56` (3.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.9-prod-debian-10-r56/3.7-prod/debian-10/Dockerfile)
 * [`3.7`, `3.7-debian-10`, `3.7.9`, `3.7.9-debian-10-r55`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.9-debian-10-r55/3.7/debian-10/Dockerfile)
 * [`3.6-prod`, `3.6-prod-debian-10`, `3.6.12-prod`, `3.6.12-prod-debian-10-r61` (3.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.12-prod-debian-10-r61/3.6-prod/debian-10/Dockerfile)
