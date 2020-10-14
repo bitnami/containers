@@ -627,6 +627,7 @@ postgresql_initialize() {
     is_boolean_yes "$create_conf_file" && [[ -n "$POSTGRESQL_SHARED_PRELOAD_LIBRARIES" ]] && postgresql_set_property "shared_preload_libraries" "$POSTGRESQL_SHARED_PRELOAD_LIBRARIES"
     is_boolean_yes "$create_conf_file" && postgresql_configure_logging
     is_boolean_yes "$create_conf_file" && postgresql_configure_connections
+    is_boolean_yes "$create_conf_file" && postgresql_configure_timezone
 
     # Delete conf files generated on first run
     rm -f "$POSTGRESQL_DATA_DIR"/postgresql.conf "$POSTGRESQL_DATA_DIR"/pg_hba.conf
@@ -707,8 +708,10 @@ postgresql_custom_init_scripts() {
 #   None
 #########################
 postgresql_stop() {
-    info "Stopping PostgreSQL..."
-    stop_service_using_pid "$POSTGRESQL_PID_FILE"
+    if [[ -f "$POSTGRESQL_PID_FILE" ]]; then
+        info "Stopping PostgreSQL..."
+        PGDATA="$POSTGRESQL_DATA_DIR" pg_ctl stop -w
+    fi
 }
 
 ########################
@@ -965,6 +968,19 @@ postgresql_configure_connections() {
     [[ -n "$POSTGRESQL_TCP_KEEPALIVES_INTERVAL" ]] && postgresql_set_property "tcp_keepalives_interval" "$POSTGRESQL_TCP_KEEPALIVES_INTERVAL"
     [[ -n "$POSTGRESQL_TCP_KEEPALIVES_COUNT" ]] && postgresql_set_property "tcp_keepalives_count" "$POSTGRESQL_TCP_KEEPALIVES_COUNT"
     ([[ -n "$POSTGRESQL_STATEMENT_TIMEOUT" ]] && postgresql_set_property "statement_timeout" "$POSTGRESQL_STATEMENT_TIMEOUT") || true
+}
+
+########################
+# Configure timezone
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+postgresql_configure_timezone() {
+    ([[ -n "$POSTGRESQL_TIMEZONE" ]] && postgresql_set_property "timezone" "$POSTGRESQL_TIMEZONE") || true
 }
 
 ########################
