@@ -259,6 +259,7 @@ The Bitnami PostgreSQL Image comes with the pgAudit module enabled by default. T
 - `POSTGRESQL_LOG_HOSTNAME`: Log the client hostname. No defaults.
 - `POSTGRESQL_LOG_LINE_PREFIX`: Define the format of the log entry lines. Find in the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-logging.html) the string parameters. No defaults.
 - `POSTGRESQL_LOG_TIMEZONE`: Set the timezone for the log entry timestamp. No defaults.
+- `POSTGRESQL_TIMEZONE`: Set the timezone for PostgreSQL. No defaults.
 
 ## Session settings
 
