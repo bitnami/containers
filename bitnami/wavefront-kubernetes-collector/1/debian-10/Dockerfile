@@ -9,17 +9,17 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/wavefront-collector-1.2.4-0-linux-amd64-debian-10.tar.gz && \
-    echo "95a721288e7b64664accfcaef1e8072253f0381f9950e257da846b8ad783f0ca  /tmp/bitnami/pkg/cache/wavefront-collector-1.2.4-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/wavefront-collector-1.2.4-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/wavefront-collector-1.2.4-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/wavefront-1.2.4-0-linux-amd64-debian-10.tar.gz && \
+    echo "f4e858c76b015a9d2f74a070a253e5f5392453ddf2a4773897fe42bcac8e2d14  /tmp/bitnami/pkg/cache/wavefront-1.2.4-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/wavefront-1.2.4-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/wavefront-1.2.4-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="wavefront-kubernetes-collector" \
-    BITNAMI_IMAGE_VERSION="1.2.4-debian-10-r27" \
-    PATH="/opt/bitnami/wavefront-collector/bin:$PATH"
+    BITNAMI_IMAGE_VERSION="1.2.4-debian-10-r28" \
+    PATH="/opt/bitnami/wavefront/bin:$PATH"
 
 USER 1001
 ENTRYPOINT [ "wavefront-collector" ]
