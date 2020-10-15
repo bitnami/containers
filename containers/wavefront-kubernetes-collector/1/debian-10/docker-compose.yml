@@ -1,4 +1,4 @@
 version: '2'
 services:
-  wavefront-collector:
+  wavefront:
     image: docker.io/bitnami/wavefront-kubernetes-collector:1-debian-10
