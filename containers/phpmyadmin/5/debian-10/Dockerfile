@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.25-0" --checksum 12528e33966094535a302d557eca3eb1ae7d5c7b8fff4b9e70d96cafedbb5341
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.11-1" --checksum 2a552ec9133bfeea17ee4fa40976499165cc3c6c89e00d483063df083abe4b13
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-2" --checksum f1bee333423f6627d795ea9e0b6a89c18d2e5c2e2d015bb4620f040f1d520cf6
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "phpmyadmin" "5.0.3-0" --checksum 221772dff600635c74e2c82e837a0e299d0da1a1bd4b5cbbe8e24c7aafe92982
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "phpmyadmin" "5.0.4-0" --checksum 1a51ae5858453cebb158ef89f6c08fa156fe81da8e2ad3dab6ce88bb0fbb5cf2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -30,7 +30,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="5.0.3-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="5.0.4-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
