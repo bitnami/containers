@@ -14,6 +14,7 @@
   "smtpHost": "{{$global.env.SMTP_HOST}}",
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
   "smtpPort": "{{$global.env.SMTP_PORT}}",
+  "smtpSecureConnection": "{{$global.env.SMTP_SECURE_CONNECTION}}",
   "smtpService": "{{$global.env.SMTP_SERVICE}}",
   "smtpUser": "{{$global.env.SMTP_USER}}",
   "username": "{{$global.env.GHOST_USERNAME}}"
