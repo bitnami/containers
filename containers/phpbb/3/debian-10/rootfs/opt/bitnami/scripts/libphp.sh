@@ -58,7 +58,7 @@ php_initialize() {
     info "Configuring PHP options"
     ! is_empty_value "$PHP_MAX_EXECUTION_TIME" && info "Setting PHP max_execution_time option" && php_conf_set max_execution_time "$PHP_MAX_EXECUTION_TIME"
     ! is_empty_value "$PHP_MAX_INPUT_TIME" && info "Setting PHP max_input_time option" && php_conf_set max_input_time "$PHP_MAX_INPUT_TIME"
-    ! is_empty_value "$PHP_MAX_INPUT_VARS" && info "Setting PHP max_input_vars option" && php_conf_set max_input_time "$PHP_MAX_INPUT_VARS"
+    ! is_empty_value "$PHP_MAX_INPUT_VARS" && info "Setting PHP max_input_vars option" && php_conf_set max_input_vars "$PHP_MAX_INPUT_VARS"
     ! is_empty_value "$PHP_MEMORY_LIMIT" && info "Setting PHP memory_limit option" && php_conf_set memory_limit "$PHP_MEMORY_LIMIT"
     ! is_empty_value "$PHP_POST_MAX_SIZE" && info "Setting PHP post_max_size option" && php_conf_set post_max_size "$PHP_POST_MAX_SIZE"
     ! is_empty_value "$PHP_UPLOAD_MAX_FILESIZE" && info "Setting PHP upload_max_filesize option" && php_conf_set upload_max_filesize "$PHP_UPLOAD_MAX_FILESIZE"
@@ -82,6 +82,40 @@ php_initialize() {
 php_convert_to_boolean() {
     local -r value="${1:?missing value}"
     is_boolean_yes "$value" && echo "true" || echo "false"
+}
+
+########################
+# Execute/run PHP code and print to stdout
+# Globals:
+#   None
+# Stdin:
+#   Code to execute
+# Arguments:
+#   $1..$n - Input arguments to script
+# Returns:
+#   None
+#########################
+php_execute_print_output() {
+    local php_cmd
+    # Obtain the command specified via stdin
+    php_cmd="$(</dev/stdin)"
+    debug "Executing PHP code:\n${php_cmd}"
+    php -- "$@" <<< "<?php ${php_cmd}"
+}
+
+########################
+# Execute/run PHP code
+# Globals:
+#   None
+# Stdin:
+#   Code to execute
+# Arguments:
+#   $1..$n - Input arguments to script
+# Returns:
+#   None
+#########################
+php_execute() {
+    debug_execute php_execute_print_output "$@"
 }
 
 ########################
