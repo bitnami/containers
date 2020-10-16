@@ -10,7 +10,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis-sentinel" "5.0.9-0" --checksum a6b09c01fd99de5a78c61955377e46ab86a392c045a5f4e728efa24820c6f38f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis-sentinel" "5.0.9-1" --checksum f12a372a7eefadd4462dfe92d62584f1a9e016bedc936a68d65de62be1526d3f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/redis-sentinel/postunpack.sh
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="5.0.9-debian-10-r154"
+    BITNAMI_IMAGE_VERSION="5.0.9-debian-10-r155"
 
 EXPOSE 26379
 
