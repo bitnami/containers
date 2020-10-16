@@ -328,21 +328,33 @@ phpbb_pass_wizard() {
     info "Running installation wizard"
     # Step 0: Get cookies
     curl "${curl_opts[@]}" "$wizard_url" >/dev/null 2>&1
-    # Step 1: Installation
-    echo "<?php // $(jq -c . "$PHPBB_INSTALL_JSON_FILE" | sed 's%/%\\/%g')" >"$PHPBB_INSTALL_PHP_FILE"
+    # Step 1.0: Prepare installation
     curl_data_opts=(
         "--data-urlencode" "default_lang=${PHPBB_FORUM_LANGUAGE}"
         "--data-urlencode" "board_name=${PHPBB_FORUM_NAME}"
         "--data-urlencode" "board_description=${PHPBB_FORUM_DESCRIPTION}"
         "--data-urlencode" "submit_board=Submit"
     )
-    curl_output="$(curl -X POST "${curl_opts[@]}" "${curl_data_opts[@]}" "${wizard_url}" 2>/dev/null)"
+    wizard_url_post(){
+        echo "<?php // $(jq -c . "$PHPBB_INSTALL_JSON_FILE" | sed 's%/%\\/%g')" >"$PHPBB_INSTALL_PHP_FILE"
+        curl_output="$(curl -X POST "${curl_opts[@]}" "${curl_data_opts[@]}" "${wizard_url}")"
+        debug "${curl_output}"
+    }
+    # Step 1.2: Execute installation
+    wizard_url_post
+
     # Heart beat to keep alive the installation process
     phpbb_heartbeat() {
         if [[ "$curl_output" = *"finished successfully"* ]]; then
             return
+        elif [[ "$curl_output" = *"errors"* ]]; then
+            # If any error appears it will be retried
+            wizard_url_post
+        else
+            curl_output="$(curl -X GET "${curl_opts[@]}" "${curl_data_opts[@]}" "${wizard_url}")"
+            debug "${curl_output}"
         fi
-        curl_output="$(curl -X GET "${curl_opts[@]}" "${curl_data_opts[@]}" "${wizard_url}" 2>/dev/null)"
+
         false
     }
 
