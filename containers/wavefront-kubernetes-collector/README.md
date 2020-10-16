@@ -1,9 +1,9 @@
 
-# What is Wavefront Collector?
+# What is Wavefront Kubernetes Collector?
 
-> The Wavefront Collector for Kubernetes is an agent that runs as a DaemonSet on each node within a Kubernetes cluster. It collects metrics and events about the cluster and sends them to the Wavefront SaaS service.
+> The Wavefront Kubernetes Collector for Kubernetes is an agent that runs as a DaemonSet on each node within a Kubernetes cluster. It collects metrics and events about the cluster and sends them to the Wavefront SaaS service.
 
-[Overview of Wavefront Collector](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes)
+[Overview of Wavefront Kubernetes Collector](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes)
 
 # TL;DR
 
@@ -28,7 +28,7 @@ $ docker run --name wavefront-kubernetes-collector bitnami/wavefront-kubernetes-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.2.4`, `1.2.4-debian-10-r29`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector/blob/1.2.4-debian-10-r29/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.2.4`, `1.2.4-debian-10-r30`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector/blob/1.2.4-debian-10-r30/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wavefront-kubernetes-collector GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector).
 
