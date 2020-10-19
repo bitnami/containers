@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6.0`, `6.0-debian-10`, `6.0.8`, `6.0.8-debian-10-r38`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.8-debian-10-r38/6.0/debian-10/Dockerfile)
-* [`5.0`, `5.0-debian-10`, `5.0.9`, `5.0.9-debian-10-r147` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.9-debian-10-r147/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.9`, `5.0.9-debian-10-r148` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.9-debian-10-r148/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
@@ -293,6 +293,8 @@ services:
 A [replication](http://redis.io/topics/replication) cluster can easily be setup with the Bitnami Redis Docker Image using the following environment variables:
 
  - `REDIS_REPLICATION_MODE`: The replication mode. Possible values `master`/`slave`. No defaults.
+ - `REDIS_REPLICA_IP`: The replication announce ip. Defaults to `$(get_machine_ip)` which return the ip of the container.
+ - `REDIS_REPLICA_PORT`: The replication announce port. Defaults to `REDIS_MASTER_PORT_NUMBER`.
  - `REDIS_MASTER_HOST`: Hostname/IP of replication master (replica node parameter). No defaults.
  - `REDIS_MASTER_PORT_NUMBER`: Server port of the replication master (replica node parameter). Defaults to `6379`.
  - `REDIS_MASTER_PASSWORD`: Password to authenticate with the master (replica node parameter). No defaults. As an alternative, you can mount a file with the password and set the `REDIS_MASTER_PASSWORD_FILE` variable.
