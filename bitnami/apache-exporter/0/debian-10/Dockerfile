@@ -9,17 +9,17 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/apache-exporter-0.8.0-2-linux-amd64-debian-10.tar.gz && \
-    echo "ba0c2096c10a750f734bca0e6841ae2cf9908b1fb70d309b79f47651082e99c3  /tmp/bitnami/pkg/cache/apache-exporter-0.8.0-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/apache-exporter-0.8.0-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/apache-exporter-0.8.0-2-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/apache-exporter-0.8.0-3-linux-amd64-debian-10.tar.gz && \
+    echo "60d24a7d6a8a0213958772757ef49274ae21460e4feb610e6ab421b1adbf88c5  /tmp/bitnami/pkg/cache/apache-exporter-0.8.0-3-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/apache-exporter-0.8.0-3-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/apache-exporter-0.8.0-3-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN ln -sf /opt/bitnami/apache-exporter/bin/apache_exporter /bin/apache_exporter
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="apache-exporter" \
-    BITNAMI_IMAGE_VERSION="0.8.0-debian-10-r184" \
+    BITNAMI_IMAGE_VERSION="0.8.0-debian-10-r185" \
     PATH="/opt/bitnami/apache-exporter/bin:$PATH"
 
 EXPOSE 9117
