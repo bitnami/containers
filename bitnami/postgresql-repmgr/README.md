@@ -152,7 +152,7 @@ services:
       - REPMGR_PRIMARY_HOST=pg-0
       - REPMGR_NODE_NETWORK_NAME=pg-0
       - REPMGR_NODE_NAME=pg-0
-      - EPMGR_PARTNER_NODES=pg-0
+      - REPMGR_PARTNER_NODES=pg-0
   myapp:
     image: 'YOUR_APPLICATION_IMAGE'
     networks:
