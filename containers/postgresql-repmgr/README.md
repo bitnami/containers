@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`13`, `13-debian-10`, `13.0.0`, `13.0.0-debian-10-r12` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/13.0.0-debian-10-r12/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.4.0`, `12.4.0-debian-10-r65` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.4.0-debian-10-r65/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.9.0`, `11.9.0-debian-10-r62`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.9.0-debian-10-r62/11/debian-10/Dockerfile)
-* [`10`, `10-debian-10`, `10.14.0`, `10.14.0-debian-10-r66` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.14.0-debian-10-r66/10/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.14.0`, `10.14.0-debian-10-r67` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.14.0-debian-10-r67/10/debian-10/Dockerfile)
 * [`9.6`, `9.6-debian-10`, `9.6.19`, `9.6.19-debian-10-r65` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.19-debian-10-r65/9.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
@@ -512,43 +512,43 @@ $ docker-compose restart pg-1
 
 Please see the list of environment variables available in the Bitnami PostgreSQL with Replication Manager container in the next table:
 
-| Environment Variable                 | Default value                      |
-| :----------------------------------- | :--------------------------------- |
-| REPMGR_NODE_ID                       | `nil`                              |
-| REPMGR_NODE_NAME                     | `nil`                              |
-| REPMGR_NODE_NETWORK_NAME             | `nil`                              |
-| REPMGR_NODE_PRIORITY                 | `100`                              |
-| REPMGR_PARTNER_NODES                 | `nil`                              |
-| REPMGR_PRIMARY_HOST                  | `nil`                              |
-| REPMGR_PRIMARY_PORT                  | `5432`                             |
-| REPMGR_NODE_ID                       | `nil`                              |
-| REPMGR_PORT_NUMBER                   | `5432`                             |
-| REPMGR_LOG_LEVEL                     | `NOTICE`                           |
-| REPMGR_START_OPTIONS                 | `nil`                              |
-| REPMGR_CONNECT_TIMEOUT               | `5`                                |
-| REPMGR_RECONNECT_ATTEMPTS            | `3`                                |
-| REPMGR_RECONNECT_INTERVAL            | `5`                                |
-| REPMGR_USE_REPLICATION_SLOTS         | `1`                                |
-| REPMGR_MASTER_RESPONSE_TIMEOUT       | `20`                               |
-| REPMGR_DEGRADED_MONITORING_TIMEOUT   | `5`                                |
-| REPMGR_USERNAME                      | `repmgr`                           |
-| REPMGR_DATABASE                      | `repmgr`                           |
-| REPMGR_PASSWORD                      | `nil`                              |
-| REPMGR_PASSWORD_FILE                 | `nil`                              |
-| POSTGRESQL_USERNAME                  | `postgres`                         |
-| POSTGRESQL_DATABASE                  | `nil`                              |
-| POSTGRESQL_PASSWORD                  | `nil`                              |
-| POSTGRESQL_PASSWORD_FILE             | `nil`                              |
-| POSTGRESQL_POSTGRES_PASSWORD         | `nil`                              |
-| POSTGRESQL_POSTGRES_PASSWORD_FILE    | `nil`                              |
-| POSTGRESQL_PORT_NUMBER               | `5432`                             |
-| POSTGRESQL_INITDB_ARGS               | `nil`                              |
-| POSTGRESQL_ENABLE_TLS                | `no`                               |
-| POSTGRESQL_TLS_CERT_FILE             | `nil`                              |
-| POSTGRESQL_TLS_KEY_FILE              | `nil`                              |
-| POSTGRESQL_TLS_CA_FILE               | `nil`                              |
-| POSTGRESQL_TLS_CRL_FILE              | `nil`                              |
-| POSTGRESQL_TLS_PREFER_SERVER_CIPHERS | `yes`                              |
+| Environment Variable                 | Default value |
+|:-------------------------------------|:--------------|
+| REPMGR_NODE_ID                       | `nil`         |
+| REPMGR_NODE_NAME                     | `nil`         |
+| REPMGR_NODE_NETWORK_NAME             | `nil`         |
+| REPMGR_NODE_PRIORITY                 | `100`         |
+| REPMGR_PARTNER_NODES                 | `nil`         |
+| REPMGR_PRIMARY_HOST                  | `nil`         |
+| REPMGR_PRIMARY_PORT                  | `5432`        |
+| REPMGR_NODE_ID                       | `nil`         |
+| REPMGR_PORT_NUMBER                   | `5432`        |
+| REPMGR_LOG_LEVEL                     | `NOTICE`      |
+| REPMGR_START_OPTIONS                 | `nil`         |
+| REPMGR_CONNECT_TIMEOUT               | `5`           |
+| REPMGR_RECONNECT_ATTEMPTS            | `3`           |
+| REPMGR_RECONNECT_INTERVAL            | `5`           |
+| REPMGR_USE_REPLICATION_SLOTS         | `1`           |
+| REPMGR_MASTER_RESPONSE_TIMEOUT       | `20`          |
+| REPMGR_DEGRADED_MONITORING_TIMEOUT   | `5`           |
+| REPMGR_USERNAME                      | `repmgr`      |
+| REPMGR_DATABASE                      | `repmgr`      |
+| REPMGR_PASSWORD                      | `nil`         |
+| REPMGR_PASSWORD_FILE                 | `nil`         |
+| POSTGRESQL_USERNAME                  | `postgres`    |
+| POSTGRESQL_DATABASE                  | `nil`         |
+| POSTGRESQL_PASSWORD                  | `nil`         |
+| POSTGRESQL_PASSWORD_FILE             | `nil`         |
+| POSTGRESQL_POSTGRES_PASSWORD         | `nil`         |
+| POSTGRESQL_POSTGRES_PASSWORD_FILE    | `nil`         |
+| POSTGRESQL_PORT_NUMBER               | `5432`        |
+| POSTGRESQL_INITDB_ARGS               | `nil`         |
+| POSTGRESQL_ENABLE_TLS                | `no`          |
+| POSTGRESQL_TLS_CERT_FILE             | `nil`         |
+| POSTGRESQL_TLS_KEY_FILE              | `nil`         |
+| POSTGRESQL_TLS_CA_FILE               | `nil`         |
+| POSTGRESQL_TLS_CRL_FILE              | `nil`         |
+| POSTGRESQL_TLS_PREFER_SERVER_CIPHERS | `yes`         |
 
 # Logging
 
