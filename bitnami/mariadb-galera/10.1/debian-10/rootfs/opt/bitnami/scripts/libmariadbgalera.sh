@@ -564,17 +564,23 @@ mysql_custom_init_scripts() {
                 *.sql)
                     # sql initialization should not be executed on non-primary nodes of a galera cluster
                     if is_boolean_yes "$(get_galera_cluster_bootstrap_value)"; then
+                        wait_for_mysql_access "$DB_ROOT_USER"
                         debug "Executing $f"; mysql_execute "$DB_DATABASE" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" < "$f"
+                    else
+                        warn "Custom SQL initdb is not supported on non-primary nodes, ignoring $f"
                     fi
                     ;;
                 *.sql.gz)
                     # sql initialization should not be executed on non-primary nodes of a galera cluster
                     if is_boolean_yes "$(get_galera_cluster_bootstrap_value)"; then
+                        wait_for_mysql_access "$DB_ROOT_USER"
                         debug "Executing $f"; gunzip -c "$f" | mysql_execute "$DB_DATABASE" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD"
+                    else
+                        warn "Custom SQL initdb is not supported on non-primary nodes, ignoring $f"
                     fi
                     ;;
                 *)
-                    debug "Ignoring $f"
+                    warn "Skipping $f, supported formats are: .sh, .sql, and .sql.gz"
                     ;;
             esac
         done
