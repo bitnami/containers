@@ -300,14 +300,25 @@ repmgr_inject_postgresql_configuration() {
     debug "Injecting a new postgresql.conf file..."
     postgresql_create_config
     # ref: https://repmgr.org/docs/4.3/quickstart-postgresql-configuration.html
-    postgresql_set_property "shared_preload_libraries" "repmgr"
+    if [[ -n "$POSTGRESQL_SHARED_PRELOAD_LIBRARIES" ]]; then
+        if [[ "$POSTGRESQL_SHARED_PRELOAD_LIBRARIES" =~ ^(repmgr|REPMGR)$ ]]; then
+            postgresql_set_property "shared_preload_libraries" "$POSTGRESQL_SHARED_PRELOAD_LIBRARIES"
+        else
+            postgresql_set_property "shared_preload_libraries" "repmgr, ${POSTGRESQL_SHARED_PRELOAD_LIBRARIES}"
+        fi
+    else
+        postgresql_set_property "shared_preload_libraries" "repmgr"
+    fi
     postgresql_set_property "max_wal_senders" "16"
     postgresql_set_property "max_replication_slots" "10"
     postgresql_set_property "wal_level" "hot_standby"
     postgresql_set_property "archive_mode" "on"
     postgresql_set_property "hot_standby" "on"
     postgresql_set_property "archive_command" "/bin/true"
+    postgresql_configure_connections
+    postgresql_configure_timezone
     # Redirect logs to POSTGRESQL_LOG_FILE
+    postgresql_configure_logging
     postgresql_set_property "logging_collector" "on"
     postgresql_set_property "log_directory" "$POSTGRESQL_LOG_DIR"
     postgresql_set_property "log_filename" "postgresql.log"
