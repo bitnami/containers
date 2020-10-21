@@ -19,6 +19,7 @@ export MINIO_CLIENT_BASEDIR="/opt/bitnami/minio-client"
 export MINIO_CLIENT_CONFIGDIR="/.mc"
 export MINIO_SERVER_HOST="${MINIO_SERVER_HOST:-}"
 export MINIO_SERVER_PORT_NUMBER="${MINIO_SERVER_PORT_NUMBER:-9000}"
+export MINIO_SERVER_SCHEME="${MINIO_SERVER_SCHEME:-http}"
 export MINIO_SERVER_ACCESS_KEY="${MINIO_SERVER_ACCESS_KEY:-}"
 export MINIO_SERVER_SECRET_KEY="${MINIO_SERVER_SECRET_KEY:-}"
 export PATH="${MINIO_CLIENT_BASEDIR}/bin:$PATH"
@@ -86,7 +87,7 @@ minio_client_execute_timeout() {
 minio_client_configure_server() {
     if [[ -n "$MINIO_SERVER_HOST" ]] && [[ -n "$MINIO_SERVER_ACCESS_KEY" ]] && [[ -n "$MINIO_SERVER_SECRET_KEY" ]]; then
         info "Adding Minio host to 'mc' configuration..."
-        minio_client_execute config host add minio "http://${MINIO_SERVER_HOST}:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ACCESS_KEY}" "${MINIO_SERVER_SECRET_KEY}"
+        minio_client_execute config host add minio "${MINIO_SERVER_SCHEME}://${MINIO_SERVER_HOST}:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ACCESS_KEY}" "${MINIO_SERVER_SECRET_KEY}"
     fi
 }
 
