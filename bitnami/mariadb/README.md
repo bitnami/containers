@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10.4`, `10.4-debian-10`, `10.4.15`, `10.4.15-debian-10-r5` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.15-debian-10-r5/10.4/debian-10/Dockerfile)
 * [`10.3`, `10.3-debian-10`, `10.3.25`, `10.3.25-debian-10-r5` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.25-debian-10-r5/10.3/debian-10/Dockerfile)
 * [`10.2`, `10.2-debian-10`, `10.2.34`, `10.2.34-debian-10-r5` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.34-debian-10-r5/10.2/debian-10/Dockerfile)
-* [`10.1`, `10.1-debian-10`, `10.1.47`, `10.1.47-debian-10-r5` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.47-debian-10-r5/10.1/debian-10/Dockerfile)
+* [`10.1`, `10.1-debian-10`, `10.1.47`, `10.1.47-debian-10-r6` (10.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.1.47-debian-10-r6/10.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
 
@@ -181,6 +181,8 @@ $ docker-compose up -d
 When the container is executed for the first time, it will execute the files with extensions `.sh`, `.sql` and `.sql.gz` located at `/docker-entrypoint-initdb.d`.
 
 In order to have your custom files inside the docker image you can mount them as a volume.
+
+Take into account those scripts are treated differently depending on the extension. While the `.sh` scripts are executed in all the nodes; the `.sql` and `.sql.gz` scripts are only executed in the master nodes. The reason behind this differentiation is that the `.sh` scripts allow adding conditions to determine what is the node running the script, while these conditions can't be set using `.sql` nor `sql.gz` files. This way it is possible to cover different use cases depending on their needs.
 
 ## Passing extra command-line flags to mysqld startup
 
