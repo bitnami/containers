@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.1.4`, `4.1.4-debian-10-r39`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.4-debian-10-r39/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.1.4`, `4.1.4-debian-10-r40`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.4-debian-10-r40/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
 
@@ -228,7 +228,7 @@ $ docker-compose up -d
 
 A HA PostgreSQL cluster with Pgpool, [Streaming replication](https://www.postgresql.org/docs/10/warm-standby.html#STREAMING-REPLICATION) and [repmgr](https://repmgr.org) can easily be setup with the Bitnami PostgreSQL with Replication Manager and Pgpool Docker Images using the following environment variables:
 
-Pgpool:
+Pgpool configuration:
 
 - `PGPOOL_PASSWORD_FILE`: Path to a file that contains the password for the custom user set in the `PGPOOL_USERNAME` environment variable. This will override the value specified in `PGPOOL_PASSWORD`. No defaults.
 - `PGPOOL_SR_CHECK_PERIOD`: Specifies the time interval in seconds to check the streaming replication delay. Defaults to `30`.
@@ -239,13 +239,22 @@ Pgpool:
 - `PGPOOL_BACKEND_NODES`: Comma separated list of backend nodes in the cluster. No defaults.
 - `PGPOOL_ENABLE_LDAP`: Whether to enable LDAP authentication. Defaults to `no`.
 - `PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE`: Specify load balance behavior after write queries appear ('off', 'transaction', 'trans_transaction', 'always'). Defaults to 'transaction'
-- `PGPOOL_NUM_INIT_CHILDREN`: The number of preforked Pgpool-II server processes.  num_init_children is also the concurrent connections limit to Pgpool-II from clients. Defaults to 32.
 - `PGPOOL_ENABLE_LOAD_BALANCING`: Whether to enable Load-Balancing mode. Defaults to `yes`.
 - `PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING`:  Whether to decide the load balancing node for each read query. Defaults to `no`.
 - `PGPOOL_ENABLE_POOL_HBA`: Whether to use the pool_hba.conf authentication. Defaults to `yes`.
 - `PGPOOL_ENABLE_POOL_PASSWD`: Whether to use a password file specified by `PGPOOL_PASSWD_FILE` for authentication. Defaults to `yes`.
 - `PGPOOL_PASSWD_FILE`: The password file for authentication. Defaults to `pool_passwd`.
+- `PGPOOL_NUM_INIT_CHILDREN`: The number of preforked Pgpool-II server processes. It is also the concurrent connections limit to Pgpool-II from clients. Defaults to `32`.
 - `PGPOOL_MAX_POOL`: The maximum number of cached connections in each child process. Defaults to `15`.
+- `PGPOOL_CHILD_MAX_CONNECTIONS`: The maximum number of client connections in each child process. Defaults to `0` which turns off the feature.
+- `PGPOOL_CHILD_LIFE_TIME`: The time in seconds to terminate a Pgpool-II child process if it remains idle. Defaults to `300`.
+- `PGPOOL_CLIENT_IDLE_LIMIT`: The time in seconds to disconnect a client if it remains idle since the last query. Defaults to `0` which turns off the feature.
+- `PGPOOL_CONNECTION_LIFE_TIME`: The time in seconds to terminate the cached connections to the PostgreSQL backend. Defaults to `0` which turns off the feature.
+- `PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT`: Log every SQL statement for each DB node separately. Defaults to `no`.
+- `PGPOOL_ENABLE_LOG_CONNECTIONS`: Log all client connections. Defaults to `no`.
+- `PGPOOL_ENABLE_LOG_HOSTNAME`: Log the client hostname instead of IP address. Defaults to `no`.
+- `PGPOOL_LOG_LINE_PREFIX`: Define the format of the log entry lines. Find in the [official Pgpool documentation](https://www.pgpool.net/docs/latest/en/html/runtime-config-logging.html) the string parameters. No defaults.
+- `PGPOOL_CLIENT_MIN_MESSAGES`: Set the minimum message levels are sent to the client. Find in the [official Pgpool documentation](https://www.pgpool.net/docs/latest/en/html/runtime-config-logging.html) the supported values. Defaults to `notice`.
 - `PGPOOL_POSTGRES_USERNAME`: Postgres administrator user name, this will be use to allow postgres admin authentication through Pgpool.
 - `PGPOOL_POSTGRES_PASSWORD`: Password for the user set in `PGPOOL_POSTGRES_USERNAME` environment variable. No defaults.
 - `PGPOOL_ADMIN_USERNAME`: Username for the pgpool administrator. No defaults.
