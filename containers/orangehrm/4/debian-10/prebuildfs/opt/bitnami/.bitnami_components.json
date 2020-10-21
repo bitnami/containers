@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "8d591562d804902c986f59f18bbea5e47289f4cbfb364c13862d4b9df557e0f4",
+        "digest": "07991412bb24fc8493228f4bd67b28a77e011242971dcdd687a5d2113ac89bc9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.46-2"
+        "version": "2.4.46-3"
     },
     "gosu": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "facf27d2847e8614d604a27e29461f25521eb8bcff9237fba8c208afb29ea409",
+        "digest": "1faed59380811d5b57af231f124eabd04810ba5bdafda4a264664633208d18a0",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.2.34-3"
+        "version": "7.2.34-4"
     },
     "tini": {
         "arch": "amd64",
