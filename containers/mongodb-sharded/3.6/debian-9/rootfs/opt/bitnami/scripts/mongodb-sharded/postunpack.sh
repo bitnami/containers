@@ -24,7 +24,9 @@ render-template "$MONGODB_MONGOD_TEMPLATES_FILE" > "$MONGODB_CONF_FILE"
 render-template "$MONGODB_MONGOS_TEMPLATES_FILE" > "$MONGODB_MONGOS_CONF_FILE"
 
 # Create .dbshell file to avoid error message
-touch /.dbshell && chmod g+rw /.dbshell
+touch "$MONGODB_DB_SHELL_FILE" && chmod g+rw "$MONGODB_DB_SHELL_FILE"
+# Create .mongorc.js file to avoid error message
+touch "$MONGODB_RC_FILE" && chmod g+rw "$MONGODB_RC_FILE"
 chmod g+w "$MONGODB_CONF_FILE"
 chmod g+w "$MONGODB_MONGOS_CONF_FILE"
 # Redirect all logging to stdout
