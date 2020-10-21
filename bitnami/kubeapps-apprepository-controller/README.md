@@ -35,7 +35,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2`, `2-scratch`, `2.0.0`, `2.0.0-scratch-r2` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-apprepository-controller/blob/2.0.0-scratch-r2/2/scratch/Dockerfile)
-* [`1`, `1-scratch`, `1.11.3`, `1.11.3-scratch-r2`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-apprepository-controller/blob/1.11.3-scratch-r2/1/scratch/Dockerfile)
+* [`1`, `1-scratch`, `1.11.3`, `1.11.3-scratch-r3`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-apprepository-controller/blob/1.11.3-scratch-r3/1/scratch/Dockerfile)
 
 # Configuration
 
