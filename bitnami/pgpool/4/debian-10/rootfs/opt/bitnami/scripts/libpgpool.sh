@@ -45,7 +45,6 @@ export PGPOOL_ENABLE_POOL_HBA="${PGPOOL_ENABLE_POOL_HBA:-yes}"
 export PGPOOL_ENABLE_POOL_PASSWD="${PGPOOL_ENABLE_POOL_PASSWD:-yes}"
 export PGPOOL_USER_CONF_FILE="${PGPOOL_USER_CONF_FILE:-}"
 export PGPOOL_PASSWD_FILE="${PGPOOL_PASSWD_FILE:-pool_passwd}"
-export PGPOOL_MAX_POOL="${PGPOOL_MAX_POOL:-15}"
 export PATH="${PGPOOL_BIN_DIR}:$PATH"
 
 # Users
@@ -62,10 +61,13 @@ export PGPOOL_POSTGRES_USERNAME="${PGPOOL_POSTGRES_USERNAME:-postgres}"
 export PGPOOL_ADMIN_USERNAME="${PGPOOL_ADMIN_USERNAME:-}"
 export PGPOOL_ENABLE_LDAP="${PGPOOL_ENABLE_LDAP:-no}"
 export PGPOOL_TIMEOUT="360"
+export PGPOOL_ENABLE_LOG_CONNECTIONS="${PGPOOL_ENABLE_LOG_CONNECTIONS:-no}"
+export PGPOOL_ENABLE_LOG_HOSTNAME="${PGPOOL_ENABLE_LOG_HOSTNAME:-no}"
+export PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT="${PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT:-no}"
 export PGPOOL_ENABLE_LOAD_BALANCING="${PGPOOL_ENABLE_LOAD_BALANCING:-yes}"
 export PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING="${PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING:-no}"
 export PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE="${PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE:-transaction}"
-export PGPOOL_NUM_INIT_CHILDREN="${PGPOOL_NUM_INIT_CHILDREN:-32}"
+export PGPOOL_MAX_POOL="${PGPOOL_MAX_POOL:-15}"
 export PGPOOL_HEALTH_CHECK_USER="${PGPOOL_HEALTH_CHECK_USER:-$PGPOOL_SR_CHECK_USER}"
 export PGPOOL_HEALTH_CHECK_PERIOD="${PGPOOL_HEALTH_CHECK_PERIOD:-30}"
 export PGPOOL_HEALTH_CHECK_TIMEOUT="${PGPOOL_HEALTH_CHECK_TIMEOUT:-10}"
@@ -180,16 +182,18 @@ pgpool_validate() {
         print_validation_error "The provided PGPOOL_USER_CONF_FILE: ${PGPOOL_USER_CONF_FILE} must exist."
     fi
 
-    local yes_no_values=("PGPOOL_ENABLE_POOL_HBA" "PGPOOL_ENABLE_POOL_PASSWD" "PGPOOL_ENABLE_LOAD_BALANCING" "PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING")
+    local yes_no_values=("PGPOOL_ENABLE_POOL_HBA" "PGPOOL_ENABLE_POOL_PASSWD" "PGPOOL_ENABLE_LOAD_BALANCING" "PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING" "PGPOOL_ENABLE_LOG_CONNECTIONS" "PGPOOL_ENABLE_LOG_HOSTNAME" "PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT")
     for yn in "${yes_no_values[@]}"; do
         if ! is_yes_no_value "${!yn}"; then
             print_validation_error "The values allowed for $yn are: yes or no"
         fi
     done
-    local positive_values=("PGPOOL_NUM_INIT_CHILDREN" "PGPOOL_HEALTH_CHECK_PERIOD" "PGPOOL_HEALTH_CHECK_TIMEOUT" "PGPOOL_HEALTH_CHECK_MAX_RETRIES" "PGPOOL_HEALTH_CHECK_RETRY_DELAY")
+    local positive_values=("PGPOOL_NUM_INIT_CHILDREN" "PGPOOL_MAX_POOL" "PGPOOL_CHILD_MAX_CONNECTIONS" "PGPOOL_CHILD_LIFE_TIME" "PGPOOL_CONNECTION_LIFE_TIME" "PGPOOL_CLIENT_IDLE_LIMIT" "PGPOOL_HEALTH_CHECK_PERIOD" "PGPOOL_HEALTH_CHECK_TIMEOUT" "PGPOOL_HEALTH_CHECK_MAX_RETRIES" "PGPOOL_HEALTH_CHECK_RETRY_DELAY")
     for p in "${positive_values[@]}"; do
-        if ! is_positive_int "${!p}"; then
-            print_validation_error "The values allowed for $p: integer greater than 0"
+        if [[ -n "${!p:-}" ]]; then
+            if ! is_positive_int "${!p}"; then
+                print_validation_error "The values allowed for $p: integer greater than 0"
+            fi
         fi
     done
     if ! [[ "$PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE" =~ ^(off|transaction|trans_transaction|always)$ ]]; then
@@ -375,15 +379,7 @@ EOF
 #########################
 pgpool_create_config() {
     local -i node_counter=0
-    local load_balance_mode="off"
-    local statement_level_load_balance="off"
-    local pool_hba="off"
     local pool_passwd=""
-    local allow_clear_text_frontend_auth="off"
-
-    is_boolean_yes "$PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING" && statement_level_load_balance="on"
-    is_boolean_yes "$PGPOOL_ENABLE_LOAD_BALANCING" && load_balance_mode="on"
-    is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA" && pool_hba="on"
 
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
         pool_passwd="$PGPOOL_PASSWD_FILE"
@@ -391,12 +387,6 @@ pgpool_create_config() {
         # Specifying '' (empty) disables the use of password file.
         # ref: https://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#GUC-POOL-PASSWD
         pool_passwd=""
-    fi
-
-    if ! is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA"; then
-        # allow_clear_text_frontend_auth only works when enable_pool_hba is not enabled
-        # ref: https://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#GUC-ALLOW-CLEAR-TEXT-FRONTEND-AUTH
-        allow_clear_text_frontend_auth="on"
     fi
 
     info "Generating pgpool.conf file..."
@@ -409,26 +399,38 @@ pgpool_create_config() {
     pgpool_set_property "listen_addresses" "*"
     pgpool_set_property "port" "$PGPOOL_PORT_NUMBER"
     pgpool_set_property "socket_dir" "$PGPOOL_TMP_DIR"
-    pgpool_set_property "num_init_children" "$PGPOOL_NUM_INIT_CHILDREN"
-    # Communication Manager Connection settings
     pgpool_set_property "pcp_socket_dir" "$PGPOOL_TMP_DIR"
-    # Authentication settings
-    # ref: http://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#RUNTIME-CONFIG-AUTHENTICATION-SETTINGS
-    pgpool_set_property "enable_pool_hba" "$pool_hba"
-    pgpool_set_property "allow_clear_text_frontend_auth" "$allow_clear_text_frontend_auth"
-    pgpool_set_property "pool_passwd" "$pool_passwd"
-    pgpool_set_property "authentication_timeout" "30"
     # Connection Pooling settings
     # http://www.pgpool.net/docs/latest/en/html/runtime-config-connection-pooling.html
+    [[ -n "${PGPOOL_NUM_INIT_CHILDREN:-}" ]] && pgpool_set_property "num_init_children" "$PGPOOL_NUM_INIT_CHILDREN"
     pgpool_set_property "max_pool" "$PGPOOL_MAX_POOL"
+    [[ -n "${PGPOOL_CHILD_MAX_CONNECTIONS:-}" ]] && pgpool_set_property "child_max_connections" "$PGPOOL_CHILD_MAX_CONNECTIONS"
+    [[ -n "${PGPOOL_CHILD_LIFE_TIME:-}" ]] && pgpool_set_property "child_life_time" "$PGPOOL_CHILD_LIFE_TIME"
+    [[ -n "${PGPOOL_CONNECTION_LIFE_TIME:-}" ]] && pgpool_set_property "connection_life_time" "$PGPOOL_CONNECTION_LIFE_TIME"
+    [[ -n "${PGPOOL_CLIENT_IDLE_LIMIT-}" ]] && pgpool_set_property "client_idle_limit" "$PGPOOL_CLIENT_IDLE_LIMIT"
+    # Logging settings
+    # https://www.pgpool.net/docs/latest/en/html/runtime-config-logging.html
+    pgpool_set_property "log_connections" "$(is_boolean_yes "$PGPOOL_ENABLE_LOG_CONNECTIONS" && echo "on" || echo "off")"
+    pgpool_set_property "log_hostname" "$(is_boolean_yes "$PGPOOL_ENABLE_LOG_HOSTNAME" && echo "on" || echo "off")"
+    pgpool_set_property "log_per_node_statement" "$(is_boolean_yes "$PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT" && echo "on" || echo "off")"
+    [[ -n "${PGPOOL_LOG_LINE_PREFIX:-}" ]] && pgpool_set_property "log_line_prefix" "$PGPOOL_LOG_LINE_PREFIX"
+    [[ -n "${PGPOOL_CLIENT_MIN_MESSAGES:-}" ]] && pgpool_set_property "client_min_messages" "$PGPOOL_CLIENT_MIN_MESSAGES"
+    # Authentication settings
+    # ref: http://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#RUNTIME-CONFIG-AUTHENTICATION-SETTINGS
+    pgpool_set_property "enable_pool_hba" "$(is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA" && echo "on" || echo "off")"
+    # allow_clear_text_frontend_auth only works when enable_pool_hba is not enabled
+    # ref: https://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#GUC-ALLOW-CLEAR-TEXT-FRONTEND-AUTH
+    pgpool_set_property "allow_clear_text_frontend_auth" "$(is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA" && echo "off" || echo "on")"
+    pgpool_set_property "pool_passwd" "$pool_passwd"
+    pgpool_set_property "authentication_timeout" "30"
     # File Locations settings
     pgpool_set_property "pid_file_name" "$PGPOOL_PID_FILE"
     pgpool_set_property "logdir" "$PGPOOL_LOG_DIR"
     # Load Balancing settings
     # https://www.pgpool.net/docs/latest/en/html/runtime-config-load-balancing.html
-    pgpool_set_property "load_balance_mode" "$load_balance_mode"
+    pgpool_set_property "load_balance_mode" "$(is_boolean_yes "$PGPOOL_ENABLE_LOAD_BALANCING" && echo "on" || echo "off")"
     pgpool_set_property "black_function_list" "nextval,setval"
-    pgpool_set_property "statement_level_load_balance" "$statement_level_load_balance"
+    pgpool_set_property "statement_level_load_balance" "$(is_boolean_yes "$PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING" && echo "on" || echo "off")"
     # Streaming Replication Check settings
     # https://www.pgpool.net/docs/latest/en/html/runtime-streaming-replication-check.html
     pgpool_set_property "sr_check_user" "$PGPOOL_SR_CHECK_USER"
@@ -449,7 +451,6 @@ pgpool_create_config() {
     # Keeps searching for a primary node forever when a failover occurs
     pgpool_set_property "search_primary_node_timeout" "0"
     pgpool_set_property "disable_load_balance_on_write" "$PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE"
-    pgpool_set_property "num_init_children" "$PGPOOL_NUM_INIT_CHILDREN"
     # SSL settings
     # https://www.pgpool.net/docs/latest/en/html/runtime-ssl.html
     if is_boolean_yes "$PGPOOL_ENABLE_TLS"; then
