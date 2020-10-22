@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2020`, `2020-debian-10`, `2020.10.3`, `2020.10.3-debian-10-r10`, `latest` (2020/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2020.10.3-debian-10-r10/2020/debian-10/Dockerfile)
+* [`2020`, `2020-debian-10`, `2020.10.3`, `2020.10.3-debian-10-r11`, `latest` (2020/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2020.10.3-debian-10-r11/2020/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio-client GitHub repo](https://github.com/bitnami/bitnami-docker-minio-client).
 
@@ -109,6 +109,7 @@ MinIO Client (`mc`) can be setup so it is already configured to point to a speci
 
 - `MINIO_SERVER_HOST`: MinIO server host.
 - `MINIO_SERVER_PORT_NUMBER`: MinIO server port. Default: `9000`.
+- `MINIO_SERVER_SCHEME`: MinIO server scheme. Default: `http`.
 - `MINIO_SERVER_ACCESS_KEY`: MinIO server Access Key. Must be common on every node.
 - `MINIO_SERVER_SECRET_KEY`: MinIO server Secret Key. Must be common on every node.
 
