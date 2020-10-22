@@ -19,12 +19,12 @@ for dir in "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR" "$MONGODB_CONF_DIR" "$MONGODB_D
 done
 chmod -R g+rwX "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR" "$MONGODB_CONF_DIR" "$MONGODB_DATA_DIR" "$MONGODB_VOLUME_DIR" "$MONGODB_INITSCRIPTS_DIR"
 
-render-template "$MONGODB_MONGOD_TEMPLATES_FILE" > "$MONGODB_CONF_FILE"
+render-template "$MONGODB_MONGOD_TEMPLATES_FILE" >"$MONGODB_CONF_FILE"
 
-# Create .dbshell & .mongorc.js file to avoid error message
-for f in "${HOME}/.dbshell" "${HOME}/.dbshell"; do
-    touch "$f" && chmod g+rw "$f"
-done
+# Create .dbshell file to avoid error message
+touch "$MONGODB_DB_SHELL_FILE" && chmod g+rw "$MONGODB_DB_SHELL_FILE"
+# Create .mongorc.js file to avoid error message
+touch "$MONGODB_RC_FILE" && chmod g+rw "$MONGODB_RC_FILE"
 chmod g+w "$MONGODB_CONF_FILE"
 # Redirect all logging to stdout
 ln -sf /dev/stdout "$MONGODB_LOG_FILE"
