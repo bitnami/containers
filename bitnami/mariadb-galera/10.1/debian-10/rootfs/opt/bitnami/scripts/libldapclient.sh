@@ -54,7 +54,7 @@ EOF
 ldap_openldap_config_path() {
     local openldap_config
     case "$OS_FLAVOUR" in
-        debian-*) openldap_config=/etc/ldap/ldap.conf ;;
+        debian-*|ubuntu-*) openldap_config=/etc/ldap/ldap.conf ;;
         centos-*|rhel-*|ol-*|photon-*) openldap_config=/etc/openldap/ldap.conf ;;
         *) error "Unsupported OS flavor ${OS_FLAVOUR}" && exit 1 ;;
     esac
