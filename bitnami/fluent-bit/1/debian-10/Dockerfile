@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 libgcc1 libgcrypt20 libgpg-error0 liblz4-1 liblzma5 libsasl2-2 libssl1.1 libsystemd0 procps tar wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluent-bit-1.6.1-0-linux-amd64-debian-10.tar.gz && \
-    echo "a73c922833fdb002e13b9e899297e0891a182e4b575b0e102d1bf632d9a12f2c  /tmp/bitnami/pkg/cache/fluent-bit-1.6.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/fluent-bit-1.6.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/fluent-bit-1.6.1-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/fluent-bit-1.6.2-0-linux-amd64-debian-10.tar.gz && \
+    echo "eb2576ebf3294a16470f3ec4bd6f7e6587e7cdd382d8b4a560f5c25e8a1457c1  /tmp/bitnami/pkg/cache/fluent-bit-1.6.2-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/fluent-bit-1.6.2-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/fluent-bit-1.6.2-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="fluent-bit" \
-    BITNAMI_IMAGE_VERSION="1.6.1-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="1.6.2-debian-10-r0" \
     PATH="/opt/bitnami/fluent-bit/bin:$PATH"
 
 EXPOSE 2020
