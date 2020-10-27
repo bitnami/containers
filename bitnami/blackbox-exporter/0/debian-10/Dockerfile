@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="blackbox-exporter" \
-    BITNAMI_IMAGE_VERSION="0.18.0-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="0.18.0-debian-10-r15" \
     PATH="/opt/bitnami/blackbox-exporter/bin:$PATH"
 
 EXPOSE 9115
