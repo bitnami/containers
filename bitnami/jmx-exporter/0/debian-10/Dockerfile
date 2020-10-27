@@ -22,7 +22,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="jmx-exporter" \
-    BITNAMI_IMAGE_VERSION="0.14.0-debian-10-r50" \
+    BITNAMI_IMAGE_VERSION="0.14.0-debian-10-r51" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 5556
