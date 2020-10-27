@@ -26,7 +26,7 @@ $ docker run --name keycloak bitnami/keycloak:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`11`, `11-debian-10`, `11.0.2`, `11.0.2-debian-10-r3` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/11.0.2-debian-10-r3/11/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.0.2`, `11.0.2-debian-10-r4` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/11.0.2-debian-10-r4/11/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
@@ -99,18 +99,20 @@ keycloak:
 
 ## TLS Encryption
 
-The Bitnami Keycloak Docker image allows configuring TLS encryption between nodes and between server-client. This is done by mounting in `/bitnami/keycloak/secrets`  two files:
+The Bitnami Keycloak Docker image allows configuring TLS encryption between nodes and between server-client. This is done by mounting in `/opt/bitnami/keycloak/certs` two files:
 
  - `keystore`: File with the server keystore
  - `truststore`: File with the server truststore
 
+> Note: find more information about how to create these files at the [Keycloak documentation](https://github.com/keycloak/keycloak-documentation/blob/master/openshift/topics/advanced_concepts.adoc#creating-https-and-jgroups-keystores-and-truststore-for-the-project_name-server).
+
 Apart from that, the following environment variables must be set:
 
  - `KEYCLOAK_ENABLE_TLS`: Enable TLS encryption using the keystore. Default: **false**.
- - `KEYCLOAK_KEYSTORE_FILE`: Path to the keystore file. No defaults.
- - `KEYCLOAK_TRUSTSTORE_FILE`: Path to the truststore file. No defaults.
- - `KEYCLOAK_KEYSTORE_PASSWORD`: Password for accessing the keystore. No defaults.
- - `KEYCLOAK_TRUSTSTORE_PASSWORD`: Password for accessing the truststore. No defaults.
+ - `KEYCLOAK_TLS_KEYSTORE_FILE`: Path to the keystore file (e.g. `/opt/bitnami/keycloak/certs/keystore.jks`). No defaults.
+ - `KEYCLOAK_TLS_TRUSTSTORE_FILE`: Path to the truststore file (e.g. `/opt/bitnami/keycloak/certs/truststore.jks`). No defaults.
+ - `KEYCLOAK_TLS_KEYSTORE_PASSWORD`: Password for accessing the keystore. No defaults.
+ - `KEYCLOAK_TLS_TRUSTSTORE_PASSWORD`: Password for accessing the truststore. No defaults.
 
 ## Cluster configuration
 
