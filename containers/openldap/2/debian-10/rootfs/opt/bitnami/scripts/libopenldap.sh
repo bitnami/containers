@@ -50,7 +50,6 @@ export LDAP_USERS="${LDAP_USERS:-user01,user02}"
 export LDAP_PASSWORDS="${LDAP_PASSWORDS:-bitnami1,bitnami2}"
 export LDAP_USER_DC="${LDAP_USER_DC:-users}"
 export LDAP_GROUP="${LDAP_GROUP:-readers}"
-export LDAP_LOAD_CUSTOM_LDIF="${LDAP_LOAD_CUSTOM_LDIF:-no}"
 export LDAP_CUSTOM_LDIF_DIR="${LDAP_CUSTOM_LDIF_DIR:-/ldifs}"
 EOF
 }
@@ -308,6 +307,7 @@ EOF
 #########################
 ldap_add_custom_ldifs() {
     info "Loading custom LDIF files..."
+    warn "Ignoring LDAP_USERS, LDAP_PASSWORDS, LDAP_USER_DC and LDAP_GROUP environment variables..."
     debug_execute find "$LDAP_CUSTOM_LDIF_DIR" -maxdepth 1 -type f -iname '*.ldif' -exec ldapadd -f {} -H 'ldapi:///' -D "$LDAP_ADMIN_DN" -w "$LDAP_ADMIN_PASSWORD" \;
 }
 
@@ -355,7 +355,7 @@ ldap_initialize() {
         else
             # Initialize OpenLDAP with schemas/tree structure
             ldap_add_schemas
-            if is_boolean_yes "$LDAP_LOAD_CUSTOM_LDIF"; then
+            if [[ -n "$LDAP_CUSTOM_LDIF_DIR" ]]; then
                 ldap_add_custom_ldifs
             else
                 ldap_create_tree
