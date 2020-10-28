@@ -29,6 +29,16 @@ keycloak_validate() {
         error_code=1
     }
 
+    check_allowed_port() {
+        local port_var="${1:?missing port variable}"
+        local -a validate_port_args=()
+        ! am_i_root && validate_port_args+=("-unprivileged")
+        validate_port_args+=("${!port_var}")
+        if ! err=$(validate_port "${validate_port_args[@]}"); then
+            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
+        fi
+    }
+
     if is_boolean_yes "$KEYCLOAK_ENABLE_TLS"; then
         if is_empty_value "$KEYCLOAK_TLS_TRUSTSTORE_FILE"; then
             print_validation_error "Path to the TLS truststore file not defined. Please set the KEYCLOAK_TLS_TRUSTSTORE_FILE variable to the mounted truststore"
@@ -46,11 +56,11 @@ keycloak_validate() {
         print_validation_error "jgroups discovery protocol configured but transport stack not set. Please set the KEYCLOAK_JGROUPS_TRANSPORT_STACK variable with the proper stack"
     fi
 
-    local validate_port_args=()
-    ! am_i_root && validate_port_args+=("-unprivileged")
-    if ! err=$(validate_port "${validate_port_args[@]}" "$KEYCLOAK_PORT"); then
-        print_validation_error "An invalid port was specified in the environment variable KEYCLOAK_PORT: $err"
+    if [[ "$KEYCLOAK_HTTP_PORT" -eq "$KEYCLOAK_HTTPS_PORT" ]]; then
+        print_validation_error "KEYCLOAK_HTTP_PORT and KEYCLOAK_HTTPS_PORT are bound to the same port!"
     fi
+    check_allowed_port KEYCLOAK_HTTP_PORT
+    check_allowed_port KEYCLOAK_HTTPS_PORT
 
     for var in KEYCLOAK_CREATE_ADMIN_USER KEYCLOAK_ENABLE_TLS KEYCLOAK_ENABLE_STATISTICS; do
         if ! is_true_false_value "${!var}"; then
@@ -332,20 +342,27 @@ keycloak_initialize() {
         info "Found PostgreSQL server listening at $KEYCLOAK_DATABASE_HOST:$KEYCLOAK_DATABASE_PORT"
     fi
 
-    cp "${KEYCLOAK_CONF_DIR}/${KEYCLOAK_DEFAULT_CONF_FILE}" "${KEYCLOAK_CONF_DIR}/${KEYCLOAK_CONF_FILE}"
-
-    # Configure settings using jboss-cli.sh
-    keycloak_configure_database
-    if is_boolean_yes "$KEYCLOAK_CREATE_ADMIN_USER"; then
-        add-user-keycloak.sh -u "$KEYCLOAK_ADMIN_USER" -p "$KEYCLOAK_ADMIN_PASSWORD"
+    if ! is_dir_empty "$KEYCLOAK_MOUNTED_CONF_DIR"; then
+        cp -Lr "$KEYCLOAK_MOUNTED_CONF_DIR"/* "$KEYCLOAK_CONF_DIR"
     fi
-    ! is_empty_value "$KEYCLOAK_JGROUPS_DISCOVERY_PROTOCOL" && keycloak_configure_jgroups
-    keycloak_configure_cache
-    keycloak_configure_auth_cache
-    is_boolean_yes "$KEYCLOAK_ENABLE_STATISTICS" && keycloak_configure_statistics
-    is_boolean_yes "$KEYCLOAK_ENABLE_TLS" && keycloak_configure_tls
-    keycloak_configure_loglevel
-    keycloak_configure_proxy
+    if [[ -f "${KEYCLOAK_CONF_DIR}/${KEYCLOAK_CONF_FILE}" ]]; then
+        debug "Injected configuration file found. Skipping default configuration"
+    else
+        cp "${KEYCLOAK_CONF_DIR}/${KEYCLOAK_DEFAULT_CONF_FILE}" "${KEYCLOAK_CONF_DIR}/${KEYCLOAK_CONF_FILE}"
+
+        # Configure settings using jboss-cli.sh
+        keycloak_configure_database
+        if is_boolean_yes "$KEYCLOAK_CREATE_ADMIN_USER"; then
+            add-user-keycloak.sh -u "$KEYCLOAK_ADMIN_USER" -p "$KEYCLOAK_ADMIN_PASSWORD"
+        fi
+        ! is_empty_value "$KEYCLOAK_JGROUPS_DISCOVERY_PROTOCOL" && keycloak_configure_jgroups
+        keycloak_configure_cache
+        keycloak_configure_auth_cache
+        is_boolean_yes "$KEYCLOAK_ENABLE_STATISTICS" && keycloak_configure_statistics
+        is_boolean_yes "$KEYCLOAK_ENABLE_TLS" && keycloak_configure_tls
+        keycloak_configure_loglevel
+        keycloak_configure_proxy
+    fi
 
     debug "Ensuring expected directories/files exist..."
     for dir in "$KEYCLOAK_LOG_DIR" "$KEYCLOAK_TMP_DIR" "$KEYCLOAK_DATA_DIR" "$KEYCLOAK_CONF_DIR" "$KEYCLOAK_DEPLOYMENTS_DIR" "$KEYCLOAK_DOMAIN_TMP_DIR"; do

@@ -26,7 +26,7 @@ $ docker run --name keycloak bitnami/keycloak:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`11`, `11-debian-10`, `11.0.2`, `11.0.2-debian-10-r4` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/11.0.2-debian-10-r4/11/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.0.2`, `11.0.2-debian-10-r5` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/11.0.2-debian-10-r5/11/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
@@ -74,7 +74,8 @@ The Bitnami Keycloak container requires a PostgreSQL database to work. This is c
 
 The listening port and listening address can be configured with the following environment variables:
 
-- `KEYCLOAK_PORT`: Keycloak HTTP port. Default: **8080**.
+- `KEYCLOAK_HTTP_PORT`: Keycloak HTTP port. Default: **8080**.
+- `KEYCLOAK_HTTPS_PORT`: Keycloak HTTPS port. Default: **8443**.
 - `KEYCLOAK_BIND_ADDRESS`: Keycloak bind address. Default: **0.0.0.0**.
 
 ## Initializing a new instance
@@ -88,6 +89,7 @@ $ docker run --name keycloak \
   -v /path/to/init-scripts:/docker-entrypoint-initdb.d \
   bitnami/keycloak:latest
 ```
+
 Or with docker-compose
 
 ```yaml
@@ -215,7 +217,28 @@ volumes:
 
 ## Enabling statistics
 
-The Bitnami Keycloak container can activate different set of statistics (database, jgroups and http) by setting the environment variable `KEYCLOAK_ENABLE_STATISTICS=yes`.
+The Bitnami Keycloak container can activate different set of statistics (database, jgroups and http) by setting the environment variable `KEYCLOAK_ENABLE_STATISTICS=true`.
+
+### Full configuration
+
+The image looks for configuration files (e.g. `standalone-ha.xml`) in the `/bitnami/keycloak/configuration/` directory, this directory can be changed by setting the KEYCLOAK_MOUNTED_CONF_DIR environment variable.
+
+```console
+$ docker run --name keycloak \
+    -v /path/to/standalone-ha.xml:/bitnami/keycloak/configuration/standalone-ha.xml \
+    bitnami/keycloak:latest
+```
+
+Or with docker-compose
+
+```yaml
+keycloak:
+  image: bitnami/keycloak:latest
+  volumes:
+    - /path/to/standalone-ha.xml:/bitnami/keycloak/configuration/standalone-ha.xml:ro
+```
+
+After that, your changes will be taken into account in the server's behaviour.
 
 # Contributing
 
