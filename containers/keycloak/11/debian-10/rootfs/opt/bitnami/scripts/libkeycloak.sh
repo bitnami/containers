@@ -88,7 +88,7 @@ keycloak_validate() {
 #########################
 keycloak_configure_database() {
     info "Configuring database settings"
-    jboss-cli.sh <<EOF
+    debug_execute jboss-cli.sh <<EOF
 embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=echo
 batch
 /subsystem=datasources/data-source=KeycloakDS: remove()
@@ -105,7 +105,7 @@ stop-embedded-server
 EOF
 
     if ! is_empty_value "$KEYCLOAK_DATABASE_PASSWORD"; then
-        jboss-cli.sh <<EOF
+        debug_execute jboss-cli.sh <<EOF
 embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=echo
 batch
 /subsystem=datasources/data-source=KeycloakDS: write-attribute(name=password, value=${KEYCLOAK_DATABASE_PASSWORD})
@@ -127,7 +127,7 @@ EOF
 keycloak_configure_jgroups() {
     info "Configuring jgroups settings"
     if [[ "$KEYCLOAK_JGROUPS_DISCOVERY_PROTOCOL" == "JDBC_PING" ]]; then
-        jboss-cli.sh <<EOF
+        debug_execute jboss-cli.sh <<EOF
 embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=echo
 batch
 /subsystem=jgroups/stack=udp/protocol=PING:remove()
@@ -139,7 +139,7 @@ run-batch
 stop-embedded-server
 EOF
     else
-        jboss-cli.sh <<EOF
+        debug_execute jboss-cli.sh <<EOF
 embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=echo
 batch
 /subsystem=jgroups/stack=udp/protocol=PING:remove()
@@ -164,7 +164,7 @@ EOF
 #########################
 keycloak_configure_cache() {
     info "Configuring cache count"
-    jboss-cli.sh <<EOF
+    debug_execute jboss-cli.sh <<EOF
 embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=echo
 batch
 /subsystem=infinispan/cache-container=keycloak/distributed-cache=sessions: write-attribute(name=owners, value=${KEYCLOAK_CACHE_OWNERS_COUNT})
@@ -189,7 +189,7 @@ EOF
 #########################
 keycloak_configure_auth_cache() {
     info "Configuring authentication cache count"
-    jboss-cli.sh <<EOF
+    debug_execute jboss-cli.sh <<EOF
 embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=echo
 batch
 /subsystem=infinispan/cache-container=keycloak/distributed-cache=authenticationSessions: write-attribute(name=owners, value=${KEYCLOAK_AUTH_CACHE_OWNERS_COUNT})
@@ -209,7 +209,7 @@ EOF
 #########################
 keycloak_configure_statistics() {
     info "Enabling statistics"
-    jboss-cli.sh <<EOF
+    debug_execute jboss-cli.sh <<EOF
 embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=echo
 batch
 /subsystem=datasources/data-source=KeycloakDS:write-attribute(name=statistics-enabled, value=true)
@@ -231,7 +231,7 @@ EOF
 #########################
 keycloak_configure_tls() {
     info "Configuring TLS by setting keystore and truststore"
-    jboss-cli.sh <<EOF
+    debug_execute jboss-cli.sh <<EOF
 embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=discard
 batch
 /subsystem=elytron/key-store=kcKeyStore:add(path=${KEYCLOAK_TLS_KEYSTORE_FILE},type=JKS,credential-reference={clear-text=${KEYCLOAK_TLS_KEYSTORE_PASSWORD}})
@@ -260,7 +260,7 @@ EOF
 #########################
 keycloak_configure_loglevel() {
     info "Configuring log level"
-    jboss-cli.sh <<EOF
+    debug_execute jboss-cli.sh <<EOF
 embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=discard
 batch
 /subsystem=logging/logger=org.keycloak:add
@@ -311,7 +311,7 @@ keycloak_clean_from_restart() {
 #########################
 keycloak_configure_proxy() {
     info "Configuring proxy address forwarding"
-    jboss-cli.sh <<EOF
+    debug_execute jboss-cli.sh <<EOF
 embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=discard
 batch
 /subsystem=undertow/server=default-server/http-listener=default: write-attribute(name=proxy-address-forwarding, value=${KEYCLOAK_PROXY_ADDRESS_FORWARDING})
@@ -353,11 +353,12 @@ keycloak_initialize() {
         # Configure settings using jboss-cli.sh
         keycloak_configure_database
         if is_boolean_yes "$KEYCLOAK_CREATE_ADMIN_USER"; then
-            add-user-keycloak.sh -u "$KEYCLOAK_ADMIN_USER" -p "$KEYCLOAK_ADMIN_PASSWORD"
+            debug_execute add-user-keycloak.sh -u "$KEYCLOAK_ADMIN_USER" -p "$KEYCLOAK_ADMIN_PASSWORD"
         fi
         ! is_empty_value "$KEYCLOAK_JGROUPS_DISCOVERY_PROTOCOL" && keycloak_configure_jgroups
         keycloak_configure_cache
         keycloak_configure_auth_cache
+        debug_execute add-user.sh -u "$KEYCLOAK_MANAGEMENT_USER" -p "$KEYCLOAK_MANAGEMENT_PASSWORD"
         is_boolean_yes "$KEYCLOAK_ENABLE_STATISTICS" && keycloak_configure_statistics
         is_boolean_yes "$KEYCLOAK_ENABLE_TLS" && keycloak_configure_tls
         keycloak_configure_loglevel
