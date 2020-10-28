@@ -26,7 +26,7 @@ $ docker run --name keycloak bitnami/keycloak:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`11`, `11-debian-10`, `11.0.2`, `11.0.2-debian-10-r5` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/11.0.2-debian-10-r5/11/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.0.2`, `11.0.2-debian-10-r6` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/11.0.2-debian-10-r6/11/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
@@ -58,7 +58,9 @@ The Bitnami Keycloak container can create a default admin user by setting the fo
 
 - `KEYCLOAK_CREATE_ADMIN_USER`: Create administrator user on boot. Default: **true**.
 - `KEYCLOAK_ADMIN_USER`: Administrator default user. Default: **user**.
-- `KEYCLOAK_ADMIN_PASSWORD`: Create administrator user on boot. Default: **bitnami**.
+- `KEYCLOAK_ADMIN_PASSWORD`: Administrator default password. Default: **bitnami**.
+- `KEYCLOAK_MANAGEMENT_USER`: WildFly default management user. Default: **manager**.
+- `KEYCLOAK_MANAGEMENT_PASSWORD`: WildFly default management password. Default: **bitnami1**.
 
 ## Connecting to a PostgreSQL database
 
