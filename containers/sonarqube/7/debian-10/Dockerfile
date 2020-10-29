@@ -9,16 +9,16 @@ RUN install_packages ca-certificates curl gzip libblkid1 libbsd0 libc6 libedit2 
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg unpack postgresql-client-10.14.0-1 --checksum 5b97c5b4ced0fedc335bfb6868219cab808b81226a7d446389d5e3d7f46abd6f
-RUN bitnami-pkg install java-11.0.8-2 --checksum 6d6d2dbaad09308264cf1c629094262373f98dc2e6f26367f56b102ca5ba3713
+RUN bitnami-pkg install java-11.0.9-0 --checksum cc0a6b2752289a46277ffbbf0912062535805a66b3b33befec942fafd9d17c7c
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
-RUN bitnami-pkg unpack sonarqube-7.9.4-1 --checksum d103c738261f3ef13fb22b847658247d0bc23065318c9f640c1dbfbdcf4f1b17
+RUN bitnami-pkg unpack sonarqube-7.9.4-2 --checksum 1a99711b067094f37d83ae7f6ed52dd2fc03c61650e3ffdc93bbb028fed09086
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="7.9.4-debian-10-r67" \
+    BITNAMI_IMAGE_VERSION="7.9.4-debian-10-r68" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux" \
