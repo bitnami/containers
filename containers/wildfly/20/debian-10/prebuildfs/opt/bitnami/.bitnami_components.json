@@ -8,10 +8,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "6d6d2dbaad09308264cf1c629094262373f98dc2e6f26367f56b102ca5ba3713",
+        "digest": "cc0a6b2752289a46277ffbbf0912062535805a66b3b33befec942fafd9d17c7c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.0.8-2"
+        "version": "11.0.9-0"
     },
     "tini": {
         "arch": "amd64",
