@@ -15,12 +15,4 @@ set -o pipefail
 
 DOMAIN="${1:?missing host}"
 
-# Set URL store configuration file
-opencart_conf_set HTTP_SERVER "http://${DOMAIN}/"
-opencart_conf_set HTTPS_SERVER "https://${DOMAIN}/"
-
-# Set URL in admin configuration file
-opencart_conf_set HTTP_SERVER "http://${DOMAIN}/admin/" "$OPENCART_ADMIN_CONF_FILE"
-opencart_conf_set HTTP_CATALOG "http://${DOMAIN}/" "$OPENCART_ADMIN_CONF_FILE"
-opencart_conf_set HTTPS_SERVER "https://${DOMAIN}/admin/" "$OPENCART_ADMIN_CONF_FILE"
-opencart_conf_set HTTPS_CATALOG "https://${DOMAIN}/" "$OPENCART_ADMIN_CONF_FILE"
+opencart_update_hostname "$DOMAIN"

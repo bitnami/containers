@@ -224,12 +224,14 @@ Available environment variables:
 
 ##### User and Site configuration
 
-- `APACHE_HTTP_PORT_NUMBER`: Port used by Apache for HTTP. Default: **8080**
-- `APACHE_HTTPS_PORT_NUMBER`: Port used by Apache for HTTPS. Default: **8443**
+- `APACHE_HTTP_PORT_NUMBER`: Port to bind by Apache for HTTP. Default: **8080**
+- `APACHE_HTTPS_PORT_NUMBER`: Port to bind by Apache for HTTPS. Default: **8443**
 - `OPENCART_USERNAME`: OpenCart application username. Default: **user**
 - `OPENCART_PASSWORD`: OpenCart application password. Default: **bitnami**
 - `OPENCART_EMAIL`: OpenCart application email. Default: **user@example.com**
 - `OPENCART_HOST`: OpenCart server hostname/address.
+- `OPENCART_EXTERNAL_HTTP_PORT`: Port to used by OpenCart to generate URLs and links when accessing using HTTP. Default **80**.
+- `OPENCART_EXTERNAL_HTTPS_PORT`: Port to used by OpenCart to generate URLs and links when accessing using HTTPS. Default **443**.
 - `OPENCART_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**.
 - `OPENCART_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
 
