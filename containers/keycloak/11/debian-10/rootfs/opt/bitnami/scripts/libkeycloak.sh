@@ -143,9 +143,9 @@ EOF
 embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=echo
 batch
 /subsystem=jgroups/stack=udp/protocol=PING:remove()
-/subsystem=jgroups/stack=udp/protocol=${KEYCLOAK_JGROUPS_DISCOVERY_PROTOCOL}:add(add-index=0, data-source=KeycloakDS, properties={${KEYCLOAK_JGROUPS_DISCOVERY_PROPERTIES}})
+/subsystem=jgroups/stack=udp/protocol=${KEYCLOAK_JGROUPS_DISCOVERY_PROTOCOL}:add(add-index=0, properties={${KEYCLOAK_JGROUPS_DISCOVERY_PROPERTIES}})
 /subsystem=jgroups/stack=tcp/protocol=MPING:remove()
-/subsystem=jgroups/stack=tcp/protocol=${KEYCLOAK_JGROUPS_DISCOVERY_PROTOCOL}:add(add-index=0, data-source=KeycloakDS, properties={${KEYCLOAK_JGROUPS_DISCOVERY_PROPERTIES}})
+/subsystem=jgroups/stack=tcp/protocol=${KEYCLOAK_JGROUPS_DISCOVERY_PROTOCOL}:add(add-index=0, properties={${KEYCLOAK_JGROUPS_DISCOVERY_PROPERTIES}})
 /subsystem=jgroups/channel=ee:write-attribute(name="stack", value=${KEYCLOAK_JGROUPS_TRANSPORT_STACK})
 run-batch
 stop-embedded-server
