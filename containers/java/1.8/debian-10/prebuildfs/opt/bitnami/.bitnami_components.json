@@ -1,9 +1,9 @@
 {
     "java": {
         "arch": "amd64",
-        "digest": "6c85e8df954fca444f2471195524db015ec24a67e42f43579401f2adb5189cb8",
+        "digest": "dcc7827b788cffa756972493c0275ec48a0d9b07ea0dd7c320d1d4ba30a8803c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.265-0"
+        "version": "1.8.272-0"
     }
 }
