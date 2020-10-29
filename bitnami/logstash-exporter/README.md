@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.1.2`, `0.1.2-debian-10-r256`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash-exporter/blob/0.1.2-debian-10-r256/0/debian-10/Dockerfile)
+* [`7.3`, `7.3-debian-10`, `7.3.0`, `7.3.0-debian-10-r0`, `latest` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash-exporter/blob/7.3.0-debian-10-r0/7.3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/logstash-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-logstash-exporter).
 
@@ -58,7 +58,7 @@ $ docker pull bitnami/logstash-exporter:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/logstash-exporter:latest 'https://github.com/bitnami/bitnami-docker-logstash-exporter.git#master:0/debian-10'
+$ docker build -t bitnami/logstash-exporter:latest 'https://github.com/bitnami/bitnami-docker-logstash-exporter.git#master:7.3/debian-10'
 ```
 
 # Connecting to other containers
