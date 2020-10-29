@@ -363,8 +363,8 @@ opencart_protect_storage_dir() {
 #########################
 opencart_update_hostname() {
     local -r hostname="${1:?missing hostname}"
-    local http_port
-    local https_port
+    local http_port_suffix
+    local https_port_suffix
     http_port_suffix="$([[ "$OPENCART_EXTERNAL_HTTP_PORT" = "80" ]] && echo "" || echo ":$OPENCART_EXTERNAL_HTTP_PORT")"
     https_port_suffix="$([[ "$OPENCART_EXTERNAL_HTTPS_PORT" = "443" ]] && echo "" || echo ":$OPENCART_EXTERNAL_HTTPS_PORT")"
 
