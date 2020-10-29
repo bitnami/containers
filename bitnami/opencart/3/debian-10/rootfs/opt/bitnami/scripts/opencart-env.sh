@@ -20,6 +20,8 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 opencart_env_vars=(
     OPENCART_DATA_TO_PERSIST
     OPENCART_HOST
+    OPENCART_EXTERNAL_HTTP_PORT
+    OPENCART_EXTERNAL_HTTPS_PORT
     OPENCART_ENABLE_HTTPS
     OPENCART_SKIP_BOOTSTRAP
     OPENCART_USERNAME
@@ -63,6 +65,8 @@ export OPENCART_DATA_TO_PERSIST="${OPENCART_DATA_TO_PERSIST:-config.php admin/co
 
 # OpenCart configuration
 export OPENCART_HOST="${OPENCART_HOST:-}" # only used during the first initialization
+export OPENCART_EXTERNAL_HTTP_PORT="${OPENCART_EXTERNAL_HTTP_PORT:-80}" # only used during the first initialization
+export OPENCART_EXTERNAL_HTTPS_PORT="${OPENCART_EXTERNAL_HTTPS_PORT:-443}" # only used during the first initialization
 export OPENCART_ENABLE_HTTPS="${OPENCART_ENABLE_HTTPS:-no}" # only used during the first initialization
 export OPENCART_SKIP_BOOTSTRAP="${OPENCART_SKIP_BOOTSTRAP:-}" # only used during the first initialization
 
