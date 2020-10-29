@@ -531,6 +531,22 @@ repmgr_unregister_standby() {
 }
 
 ########################
+# Standby follow.
+# Globals:
+#   REPMGR_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+repmgr_standby_follow() {
+    info "Running standby follow..."
+    local -r flags=("standby" "follow" "-f" "$REPMGR_CONF_FILE" "-W" "--log-level" "DEBUG" "--verbose")
+
+    PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
+}
+
+########################
 # Resgister a node as standby
 # Globals:
 #   REPMGR_*
@@ -626,5 +642,6 @@ repmgr_initialize() {
         postgresql_start_bg
         repmgr_unregister_standby
         repmgr_register_standby
+        repmgr_standby_follow
     fi
 }
