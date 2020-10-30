@@ -50,6 +50,7 @@ export LDAP_USERS="${LDAP_USERS:-user01,user02}"
 export LDAP_PASSWORDS="${LDAP_PASSWORDS:-bitnami1,bitnami2}"
 export LDAP_USER_DC="${LDAP_USER_DC:-users}"
 export LDAP_GROUP="${LDAP_GROUP:-readers}"
+export LDAP_CUSTOM_LDIF_DIR="${LDAP_CUSTOM_LDIF_DIR:-/ldifs}"
 EOF
 }
 
@@ -296,6 +297,21 @@ EOF
 }
 
 ########################
+# Add custom LDIF files
+# Globals:
+#   LDAP_*
+# Arguments:
+#   None
+# Returns
+#   None
+#########################
+ldap_add_custom_ldifs() {
+    info "Loading custom LDIF files..."
+    warn "Ignoring LDAP_USERS, LDAP_PASSWORDS, LDAP_USER_DC and LDAP_GROUP environment variables..."
+    debug_execute find "$LDAP_CUSTOM_LDIF_DIR" -maxdepth 1 -type f -iname '*.ldif' -exec ldapadd -f {} -H 'ldapi:///' -D "$LDAP_ADMIN_DN" -w "$LDAP_ADMIN_PASSWORD" \;
+}
+
+########################
 # OpenLDAP configure perissions
 # Globals:
 #   LDAP_*
@@ -306,7 +322,7 @@ EOF
 #########################
 ldap_configure_permissions() {
   debug "Ensuring expected directories/files exist..."
-  for dir in "$LDAP_SHARE_DIR" "$LDAP_DATA_DIR" "$LDAP_ONLINE_CONF_DIR"; do
+  for dir in "$LDAP_SHARE_DIR" "$LDAP_DATA_DIR" "$LDAP_ONLINE_CONF_DIR" "$LDAP_CUSTOM_LDIF_DIR"; do
       ensure_dir_exists "$dir"
       if am_i_root; then
           chown -R "$LDAP_DAEMON_USER:$LDAP_DAEMON_GROUP" "$dir"
@@ -339,7 +355,11 @@ ldap_initialize() {
         else
             # Initialize OpenLDAP with schemas/tree structure
             ldap_add_schemas
-            ldap_create_tree
+            if [[ -n "$LDAP_CUSTOM_LDIF_DIR" ]]; then
+                ldap_add_custom_ldifs
+            else
+                ldap_create_tree
+            fi
         fi
         ldap_stop
     fi
