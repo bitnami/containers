@@ -300,6 +300,7 @@ keycloak_clean_from_restart() {
         rm "${KEYCLOAK_CONF_DIR}/keycloak-add-user.json"
     fi
 }
+
 ########################
 # Configure proxy settings using JBoss CLI
 # Globals:
@@ -316,6 +317,26 @@ embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=discard
 batch
 /subsystem=undertow/server=default-server/http-listener=default: write-attribute(name=proxy-address-forwarding, value=${KEYCLOAK_PROXY_ADDRESS_FORWARDING})
 /subsystem=undertow/server=default-server/https-listener=https: write-attribute(name=proxy-address-forwarding, value=${KEYCLOAK_PROXY_ADDRESS_FORWARDING})
+run-batch
+stop-embedded-server
+EOF
+}
+
+########################
+# Configure node identifier
+# Globals:
+#   KEYCLOAK_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+keycloak_configure_node_identifier() {
+    info "Configuring node identifier"
+    debug_execute jboss-cli.sh <<EOF
+embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=echo
+batch
+/subsystem=transactions:write-attribute(name=node-identifier, value=\${jboss.node.name})
 run-batch
 stop-embedded-server
 EOF
@@ -363,6 +384,7 @@ keycloak_initialize() {
         is_boolean_yes "$KEYCLOAK_ENABLE_TLS" && keycloak_configure_tls
         keycloak_configure_loglevel
         keycloak_configure_proxy
+        keycloak_configure_node_identifier
     fi
 
     debug "Ensuring expected directories/files exist..."
