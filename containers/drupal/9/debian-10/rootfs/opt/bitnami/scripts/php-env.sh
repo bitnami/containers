@@ -25,6 +25,7 @@ php_env_vars=(
     PHP_MEMORY_LIMIT
     PHP_POST_MAX_SIZE
     PHP_UPLOAD_MAX_FILESIZE
+    PHP_EXPOSE_PHP
 )
 for env_var in "${php_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -68,5 +69,6 @@ export PHP_MAX_INPUT_VARS="${PHP_MAX_INPUT_VARS:-}"
 export PHP_MEMORY_LIMIT="${PHP_MEMORY_LIMIT:-}"
 export PHP_POST_MAX_SIZE="${PHP_POST_MAX_SIZE:-}"
 export PHP_UPLOAD_MAX_FILESIZE="${PHP_UPLOAD_MAX_FILESIZE:-}"
+export PHP_EXPOSE_PHP="${PHP_EXPOSE_PHP:-yes}"
 
 # Custom environment variables may be defined below
