@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`9`, `9-debian-10`, `9.0.7`, `9.0.7-debian-10-r22`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/9.0.7-debian-10-r22/9/debian-10/Dockerfile)
-* [`8`, `8-debian-10`, `8.9.7`, `8.9.7-debian-10-r21` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.9.7-debian-10-r21/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.9.7`, `8.9.7-debian-10-r22` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.9.7-debian-10-r22/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
 
@@ -270,6 +270,7 @@ To configure Drupal to send email using SMTP you can set the following environme
 - `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 - `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 - `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
+- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. Default: **yes**
 
 ##### Example
 
