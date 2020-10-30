@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl gzip libargon2-1 libaudit1 libbsd0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.24-0" --checksum 8de91863c394b1f1ff42a60f0004db891e18b17f9decd2ae8e6c654394b1b74b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-3" --checksum 07991412bb24fc8493228f4bd67b28a77e011242971dcdd687a5d2113ac89bc9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.25-0" --checksum 12528e33966094535a302d557eca3eb1ae7d5c7b8fff4b9e70d96cafedbb5341
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.23-1" --checksum 702aba4888ba35977bd0d0704f4e62cb7eeaa47336fe8d8658f0a958d865d41b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.24-0" --checksum 56a9ba9702d7fb2ee7dedf181ee00eb6756130a234710fc04653650837f3a3ca
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "testlink" "1.9.20-5" --checksum be9e4bf92350efb70026353ac6bf1650e7d472c89ad69ae791723795358d37f0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-2" --checksum f1bee333423f6627d795ea9e0b6a89c18d2e5c2e2d015bb4620f040f1d520cf6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
@@ -31,7 +31,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="testlink" \
-    BITNAMI_IMAGE_VERSION="1.9.20-debian-10-r236" \
+    BITNAMI_IMAGE_VERSION="1.9.20-debian-10-r237" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
