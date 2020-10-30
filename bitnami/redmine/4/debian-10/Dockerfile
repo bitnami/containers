@@ -11,7 +11,7 @@ RUN /build/install-nami.sh
 RUN bitnami-pkg install ruby-2.6.6-1 --checksum bffb82ccf296b8fcd3a28255ac372a6234efbcd57a2a2f9b9fa924724038abdb
 RUN bitnami-pkg install postgresql-client-11.9.0-1 --checksum 51286d2867e8ee2c29451b98e7cd0940139ba139c2c42f11b069b8bc1452af7a
 RUN bitnami-pkg install mysql-client-10.3.25-0 --checksum 12528e33966094535a302d557eca3eb1ae7d5c7b8fff4b9e70d96cafedbb5341
-RUN bitnami-pkg install git-2.29.1-0 --checksum 1a3fc723240825f88b103c31a7c3ca004b31c4f822dbd052cdd0be114e91e5a1
+RUN bitnami-pkg install git-2.29.2-0 --checksum aebe650c294f00bacd383f90db2bbf5033dc32acc500d39fa66367f0118b7c9d
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg unpack redmine-4.1.1-1 --checksum 41e87e218928a7d30d1e00793887a18d3661d779de540b923633255ac05dae6c
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
@@ -20,7 +20,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.1.1-debian-10-r168" \
+    BITNAMI_IMAGE_VERSION="4.1.1-debian-10-r169" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux" \
