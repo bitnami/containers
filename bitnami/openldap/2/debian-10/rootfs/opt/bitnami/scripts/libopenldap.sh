@@ -33,6 +33,7 @@ export LDAP_VOLUME_DIR="/bitnami/openldap"
 export LDAP_DATA_DIR="${LDAP_VOLUME_DIR}/data"
 export LDAP_ONLINE_CONF_DIR="${LDAP_VOLUME_DIR}/slapd.d"
 export LDAP_PID_FILE="${LDAP_BASE_DIR}/var/run/slapd.pid"
+export LDAP_CUSTOM_LDIF_DIR="${LDAP_CUSTOM_LDIF_DIR:-/ldifs}"
 export PATH="${LDAP_BIN_DIR}:${LDAP_SBIN_DIR}:$PATH"
 # Users
 export LDAP_DAEMON_USER="slapd"
@@ -50,7 +51,6 @@ export LDAP_USERS="${LDAP_USERS:-user01,user02}"
 export LDAP_PASSWORDS="${LDAP_PASSWORDS:-bitnami1,bitnami2}"
 export LDAP_USER_DC="${LDAP_USER_DC:-users}"
 export LDAP_GROUP="${LDAP_GROUP:-readers}"
-export LDAP_CUSTOM_LDIF_DIR="${LDAP_CUSTOM_LDIF_DIR:-/ldifs}"
 EOF
 }
 
@@ -312,7 +312,7 @@ ldap_add_custom_ldifs() {
 }
 
 ########################
-# OpenLDAP configure perissions
+# OpenLDAP configure permissions
 # Globals:
 #   LDAP_*
 # Arguments:
@@ -322,7 +322,7 @@ ldap_add_custom_ldifs() {
 #########################
 ldap_configure_permissions() {
   debug "Ensuring expected directories/files exist..."
-  for dir in "$LDAP_SHARE_DIR" "$LDAP_DATA_DIR" "$LDAP_ONLINE_CONF_DIR" "$LDAP_CUSTOM_LDIF_DIR"; do
+  for dir in "$LDAP_SHARE_DIR" "$LDAP_DATA_DIR" "$LDAP_ONLINE_CONF_DIR"; do
       ensure_dir_exists "$dir"
       if am_i_root; then
           chown -R "$LDAP_DAEMON_USER:$LDAP_DAEMON_GROUP" "$dir"
@@ -355,7 +355,7 @@ ldap_initialize() {
         else
             # Initialize OpenLDAP with schemas/tree structure
             ldap_add_schemas
-            if [[ -n "$LDAP_CUSTOM_LDIF_DIR" ]]; then
+            if ! is_dir_empty "$LDAP_CUSTOM_LDIF_DIR"; then
                 ldap_add_custom_ldifs
             else
                 ldap_create_tree
