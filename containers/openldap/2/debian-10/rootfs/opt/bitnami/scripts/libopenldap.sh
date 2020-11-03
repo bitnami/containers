@@ -290,9 +290,15 @@ EOF
 dn: ${LDAP_GROUP/#/cn=},${LDAP_USER_DC/#/ou=},${LDAP_ROOT}
 cn: $LDAP_GROUP
 objectClass: groupOfNames
-member: ${users[@]/#/cn=},${LDAP_USER_DC/#/ou=},${LDAP_ROOT}
-
+# User group membership
 EOF
+
+    for user in "${users[@]}"; do
+        cat >> "${LDAP_SHARE_DIR}/tree.ldif" << EOF
+member: ${user/#/cn=},${LDAP_USER_DC/#/ou=},${LDAP_ROOT}
+EOF
+    done
+
     debug_execute ldapadd -f "${LDAP_SHARE_DIR}/tree.ldif" -H "ldapi:///" -D "$LDAP_ADMIN_DN" -w "$LDAP_ADMIN_PASSWORD"
 }
 
