@@ -20,7 +20,6 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 dokuwiki_env_vars=(
     DOKUWIKI_DATA_TO_PERSIST
     DOKUWIKI_USERNAME
-    DOKUWIKI_USERNAME
     DOKUWIKI_FULL_NAME
     DOKUWIKI_EMAIL
     DOKUWIKI_PASSWORD
@@ -43,7 +42,6 @@ export DOKUWIKI_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/dokuwiki"
 export DOKUWIKI_DATA_TO_PERSIST="${DOKUWIKI_DATA_TO_PERSIST:-data conf lib/plugins lib/tpl lib/images/smileys/local lib/images/interwiki}"
 
 # DokuWiki configuration
-export DOKUWIKI_USERNAME="${DOKUWIKI_USERNAME:-user}"
 export DOKUWIKI_USERNAME="${DOKUWIKI_USERNAME:-superuser}"
 export DOKUWIKI_FULL_NAME="${DOKUWIKI_FULL_NAME:-Full Name}"
 export DOKUWIKI_EMAIL="${DOKUWIKI_EMAIL:-user@example.com}"
