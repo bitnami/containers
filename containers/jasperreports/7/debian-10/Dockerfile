@@ -10,7 +10,7 @@ RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install java-1.8.272-0 --checksum dcc7827b788cffa756972493c0275ec48a0d9b07ea0dd7c320d1d4ba30a8803c
 RUN bitnami-pkg unpack tomcat-9.0.39-2 --checksum 35c0ff3265062a445ccca5cecafdf19248bfffed4402bbe764d54b3f2f92bbf8
-RUN bitnami-pkg unpack mysql-client-10.3.25-0 --checksum 12528e33966094535a302d557eca3eb1ae7d5c7b8fff4b9e70d96cafedbb5341
+RUN bitnami-pkg unpack mysql-client-10.3.26-0 --checksum 7bf8a38656fba22e7e35cbba165ca4b57037acdb7387013ab835cf61ed9eb32b
 RUN bitnami-pkg install git-2.29.2-0 --checksum aebe650c294f00bacd383f90db2bbf5033dc32acc500d39fa66367f0118b7c9d
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg unpack jasperreports-7.8.0-4 --checksum c17c0aba6c9be740a9a3e438ffc64e321be86d7a4d0af4b6c43d2be42ce4ad21
@@ -21,7 +21,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.8.0-debian-10-r58" \
+    BITNAMI_IMAGE_VERSION="7.8.0-debian-10-r59" \
     JASPERREPORTS_DATABASE_NAME="bitnami_jasperreports" \
     JASPERREPORTS_DATABASE_PASSWORD="" \
     JASPERREPORTS_DATABASE_USER="bn_jasperreports" \
