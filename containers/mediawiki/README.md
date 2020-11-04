@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.35.0`, `1.35.0-debian-10-r40`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.35.0-debian-10-r40/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.35.0`, `1.35.0-debian-10-r41`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.35.0-debian-10-r41/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mediawiki GitHub repo](https://github.com/bitnami/bitnami-docker-mediawiki).
 
@@ -543,10 +543,12 @@ Here is an example of extending the image with the following modifications:
 FROM bitnami/mediawiki
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+## Change user to perform privileged actions
+USER 0
 ## Install 'vim'
-USER 0 # Required to perform privileged actions
 RUN install_packages vim
-USER 1001 # Revert to the original non-root user
+## Revert to the original non-root user
+USER 1001
 
 ## Enable mod_ratelimit module
 RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
