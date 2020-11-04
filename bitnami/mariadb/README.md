@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10.5`, `10.5-debian-10`, `10.5.7`, `10.5.7-debian-10-r0`, `latest` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.7-debian-10-r0/10.5/debian-10/Dockerfile)
-* [`10.4`, `10.4-debian-10`, `10.4.15`, `10.4.15-debian-10-r18` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.15-debian-10-r18/10.4/debian-10/Dockerfile)
+* [`10.4`, `10.4-debian-10`, `10.4.15`, `10.4.15-debian-10-r19` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.15-debian-10-r19/10.4/debian-10/Dockerfile)
 * [`10.3`, `10.3-debian-10`, `10.3.26`, `10.3.26-debian-10-r0` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.26-debian-10-r0/10.3/debian-10/Dockerfile)
 * [`10.2`, `10.2-debian-10`, `10.2.35`, `10.2.35-debian-10-r0` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.35-debian-10-r0/10.2/debian-10/Dockerfile)
 
@@ -490,10 +490,12 @@ Here is an example of extending the image with the following modifications:
 FROM bitnami/mariadb
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+## Change user to perform privileged actions
+USER 0
 ## Install 'vim'
-USER 0 # Required to perform privileged actions
 RUN install_packages vim
-USER 1001 # Revert to the original non-root user
+## Revert to the original non-root user
+USER 1001
 
 ## modify configuration file.
 RUN ini-file set --section "mysqld" --key "collation-server" --value "utf8_general_ci" "/opt/bitnami/mariadb/conf/my.cnf"
