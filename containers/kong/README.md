@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.2.0`, `2.2.0-debian-10-r10`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong/blob/2.2.0-debian-10-r10/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.2.0`, `2.2.0-debian-10-r11`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong/blob/2.2.0-debian-10-r11/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kong GitHub repo](https://github.com/bitnami/bitnami-docker-kong).
 
@@ -212,10 +212,12 @@ Here is an example of extending the image with the following modifications:
 FROM bitnami/kong
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+## Change user to perform privileged actions
+USER 0
 ## Install 'vim'
-USER 0 # Required to perform privileged actions
 RUN install_packages vim
-USER 1001 # Revert to the original non-root user
+## Revert to the original non-root user
+USER 1001
 
 ## Disable anonymous reports
 # Keep in mind it is possible to do this by setting the KONG_ANONYMOUS_REPORTS=off environment variable
