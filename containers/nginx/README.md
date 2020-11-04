@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.19`, `1.19-debian-10`, `1.19.4`, `1.19.4-debian-10-r6`, `latest` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.19.4-debian-10-r6/1.19/debian-10/Dockerfile)
+* [`1.19`, `1.19-debian-10`, `1.19.4`, `1.19.4-debian-10-r7`, `latest` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.19.4-debian-10-r7/1.19/debian-10/Dockerfile)
 * [`1.18`, `1.18-debian-10`, `1.18.0`, `1.18.0-debian-10-r170` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.18.0-debian-10-r170/1.18/debian-10/Dockerfile)
 
 # Get this image
@@ -344,10 +344,12 @@ Here is an example of extending the image with the following modifications:
 FROM bitnami/nginx
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+## Change user to perform privileged actions
+USER 0
 ## Install 'vim'
-USER 0 # Required to perform privileged actions
 RUN install_packages vim
-USER 1001 # Revert to the original non-root user
+## Revert to the original non-root user
+USER 1001
 
 ## Modify 'worker_connections' on NGINX config file to '512'
 RUN sed -i -r "s#(\s+worker_connections\s+)[0-9]+;#\1512;#" /opt/bitnami/nginx/conf/nginx.conf
