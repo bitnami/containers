@@ -15,10 +15,10 @@
     },
     "solr": {
         "arch": "amd64",
-        "digest": "710d82c781545ea808aa749a23cada13123b2016832e917a9c142f69c6c3597c",
+        "digest": "05666104565dd07b523fac79f88373aa292d35e109b474a2aad7ca1f5891d6d5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.6.3-0"
+        "version": "8.7.0-0"
     },
     "tini": {
         "arch": "amd64",
