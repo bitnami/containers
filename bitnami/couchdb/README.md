@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.1.1`, `3.1.1-debian-10-r43`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-couchdb/blob/3.1.1-debian-10-r43/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.1.1`, `3.1.1-debian-10-r44`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-couchdb/blob/3.1.1-debian-10-r44/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/couchdb GitHub repo](https://github.com/bitnami/bitnami-docker-couchdb).
 
@@ -273,10 +273,12 @@ Here is an example of extending the image with the following modifications:
 FROM bitnami/couchdb
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+## Change user to perform privileged actions
+USER 0
 ## Install 'vim'
-USER 0 # Required to perform privileged actions
 RUN install_packages vim
-USER 1001 # Revert to the original non-root user
+## Revert to the original non-root user
+USER 1001
 
 ## Modify the ports used by NGINX by default
 ENV COUCHDB_PORT_NUMBER=1234 # It is also possible to change this environment variable at runtime
