@@ -708,9 +708,14 @@ postgresql_custom_init_scripts() {
 #   None
 #########################
 postgresql_stop() {
+    local -r -a cmd=("pg_ctl" "stop" "-w" "-D" "$POSTGRESQL_DATA_DIR")
     if [[ -f "$POSTGRESQL_PID_FILE" ]]; then
         info "Stopping PostgreSQL..."
-        PGDATA="$POSTGRESQL_DATA_DIR" pg_ctl stop -w
+        if am_i_root; then
+          gosu "$POSTGRESQL_DAEMON_USER" "${cmd[@]}"
+        else
+          "${cmd[@]}"
+        fi
     fi
 }
 
