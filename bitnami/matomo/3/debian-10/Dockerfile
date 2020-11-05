@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack apache-2.4.46-3 --checksum 07991412bb24fc8493228f4bd67b28
 RUN bitnami-pkg unpack mysql-client-10.3.26-0 --checksum 7bf8a38656fba22e7e35cbba165ca4b57037acdb7387013ab835cf61ed9eb32b
 RUN bitnami-pkg install libphp-7.3.24-0 --checksum 56a9ba9702d7fb2ee7dedf181ee00eb6756130a234710fc04653650837f3a3ca
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
-RUN bitnami-pkg unpack matomo-3.14.1-1 --checksum 056e62acc88b69ddec9fc0de8e7371f35ffd796a97e05c76d03bf87dc4fb8067
+RUN bitnami-pkg unpack matomo-3.14.1-3 --checksum 3af463352e56c44683b2ded12c51a95ebe807a7ea4b2560c6e9b5d4fb9a50e15
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -27,20 +27,25 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="matomo" \
-    BITNAMI_IMAGE_VERSION="3.14.1-debian-10-r60" \
+    BITNAMI_IMAGE_VERSION="3.14.1-debian-10-r61" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
     MARIADB_ROOT_USER="root" \
     MATOMO_DATABASE_NAME="bitnami_matomo" \
     MATOMO_DATABASE_PASSWORD="" \
+    MATOMO_DATABASE_SSL_CA_FILE="" \
+    MATOMO_DATABASE_SSL_CERT_FILE="" \
+    MATOMO_DATABASE_SSL_KEY_FILE="" \
     MATOMO_DATABASE_USER="bn_matomo" \
     MATOMO_EMAIL="user@example.com" \
     MATOMO_ENABLE_DATABASE_SSL="no" \
     MATOMO_ENABLE_PROXY_URI_HEADER="no" \
     MATOMO_HOST="127.0.0.1" \
     MATOMO_PASSWORD="bitnami" \
+    MATOMO_SKIP_BOOTSTRAP="no" \
     MATOMO_USERNAME="User" \
+    MATOMO_VERIFY_DATABASE_SSL="yes" \
     MATOMO_WEBSITE_HOST="https://example.org" \
     MATOMO_WEBSITE_NAME="example" \
     MYSQL_CLIENT_CREATE_DATABASE_NAME="" \
