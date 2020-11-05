@@ -43,14 +43,14 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`15-prod`, `15-prod-debian-10`, `15.0.1-prod`, `15.0.1-prod-debian-10-r9` (15-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/15.0.1-prod-debian-10-r9/15-prod/debian-10/Dockerfile)
-* [`15`, `15-debian-10`, `15.0.1`, `15.0.1-debian-10-r9` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/15.0.1-debian-10-r9/15/debian-10/Dockerfile)
+* [`15-prod`, `15-prod-debian-10`, `15.1.0-prod`, `15.1.0-prod-debian-10-r-1` (15-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/15.1.0-prod-debian-10-r-1/15-prod/debian-10/Dockerfile)
+* [`15`, `15-debian-10`, `15.1.0`, `15.1.0-debian-10-r-1` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/15.1.0-debian-10-r-1/15/debian-10/Dockerfile)
 * [`14-prod`, `14-prod-debian-10`, `14.15.0-prod`, `14.15.0-prod-debian-10-r8` (14-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/14.15.0-prod-debian-10-r8/14-prod/debian-10/Dockerfile)
 * [`14`, `14-debian-10`, `14.15.0`, `14.15.0-debian-10-r9` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/14.15.0-debian-10-r9/14/debian-10/Dockerfile)
 * [`13-prod`, `13-prod-debian-10`, `13.14.0-prod`, `13.14.0-prod-debian-10-r91` (13-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/13.14.0-prod-debian-10-r91/13-prod/debian-10/Dockerfile)
 * [`13`, `13-debian-10`, `13.14.0`, `13.14.0-debian-10-r92` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/13.14.0-debian-10-r92/13/debian-10/Dockerfile)
 * [`12-prod`, `12-prod-debian-10`, `12.19.0-prod`, `12.19.0-prod-debian-10-r34` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.19.0-prod-debian-10-r34/12-prod/debian-10/Dockerfile)
-* [`12`, `12-debian-10`, `12.19.0`, `12.19.0-debian-10-r31`, `latest` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.19.0-debian-10-r31/12/debian-10/Dockerfile)
+* [`12`, `12-debian-10`, `12.19.0`, `12.19.0-debian-10-r32`, `latest` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.19.0-debian-10-r32/12/debian-10/Dockerfile)
 * [`10-prod`, `10-prod-debian-10`, `10.23.0-prod`, `10.23.0-prod-debian-10-r9` (10-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/10.23.0-prod-debian-10-r9/10-prod/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.23.0`, `10.23.0-debian-10-r9` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/10.23.0-debian-10-r9/10/debian-10/Dockerfile)
 
