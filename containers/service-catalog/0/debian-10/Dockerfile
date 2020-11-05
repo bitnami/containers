@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/service-catalog-0.3.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "bd6b5a64ffe84e6c0b45952b67fad01fed415d8ea9debc947516bff511e961c7  /tmp/bitnami/pkg/cache/service-catalog-0.3.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/service-catalog-0.3.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/service-catalog-0.3.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/service-catalog-0.3.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "c11c07284ec60765ebffea1506ddc425281223744371f0101237bc9a515c1737  /tmp/bitnami/pkg/cache/service-catalog-0.3.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/service-catalog-0.3.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/service-catalog-0.3.1-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="service-catalog" \
-    BITNAMI_IMAGE_VERSION="0.3.0-debian-10-r131" \
+    BITNAMI_IMAGE_VERSION="0.3.1-debian-10-r0" \
     PATH="/opt/bitnami/service-catalog/bin:$PATH"
 
 EXPOSE 443 8443
