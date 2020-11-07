@@ -29,10 +29,10 @@
     },
     "phppgadmin": {
         "arch": "amd64",
-        "digest": "5e8f2f7b704e33aa15e322c73f81c5b809495de3228123671e749a800e117297",
+        "digest": "f5ee43a60de97d9841a9b1cc425a7c4071c4c275e57c4523334320c11ec04b75",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.12.1-1"
+        "version": "7.13.0-0"
     },
     "postgresql-client": {
         "arch": "amd64",
