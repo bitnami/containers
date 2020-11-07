@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="kiam" \
-    BITNAMI_IMAGE_VERSION="3.6.0-debian-10-r23" \
+    BITNAMI_IMAGE_VERSION="3.6.0-debian-10-r24" \
     PATH="/opt/bitnami/kiam/bin:$PATH"
 
 USER 1001
