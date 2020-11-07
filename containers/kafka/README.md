@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
-* [`2`, `2-debian-10`, `2.6.0`, `2.6.0-debian-10-r72`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.6.0-debian-10-r72/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.6.0`, `2.6.0-debian-10-r73`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.6.0-debian-10-r73/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -320,7 +320,7 @@ KAFKA_CLIENT_USER=user
 KAFKA_CLIENT_PASSWORD=password
 ```
 
-You **must** also use your own certificates for SSL. You can drop your Java Key Stores files into `/opt/bitnami/kafka/conf/certs`. If the JKS is password protected (recommended), you will need to provide it to get access to the keystores:
+You **must** also use your own certificates for SSL. You can drop your Java Key Stores files into `/opt/bitnami/kafka/config/certs`. If the JKS is password protected (recommended), you will need to provide it to get access to the keystores:
 
 `KAFKA_CERTIFICATE_PASSWORD=myCertificatePassword`
 
@@ -364,8 +364,8 @@ services:
       - KAFKA_CLIENT_PASSWORD=password
       - KAFKA_CERTIFICATE_PASSWORD=certificatePassword123
     volumes:
-      - './kafka.keystore.jks:/opt/bitnami/kafka/conf/certs/kafka.keystore.jks:ro'
-      - './kafka.truststore.jks:/opt/bitnami/kafka/conf/certs/kafka.truststore.jks:ro'
+      - './kafka.keystore.jks:/opt/bitnami/kafka/config/certs/kafka.keystore.jks:ro'
+      - './kafka.truststore.jks:/opt/bitnami/kafka/config/certs/kafka.truststore.jks:ro'
 ```
 
 In order to get the required credentials to consume and produce messages you need to provide the credentials in the client. If your Kafka client allows it, use the credentials you've provided.
