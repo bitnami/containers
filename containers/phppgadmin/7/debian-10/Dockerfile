@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.9.0-1" --checksum 51286d2867e8ee2c29451b98e7cd0940139ba139c2c42f11b069b8bc1452af7a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.24-0" --checksum 56a9ba9702d7fb2ee7dedf181ee00eb6756130a234710fc04653650837f3a3ca
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-2" --checksum f1bee333423f6627d795ea9e0b6a89c18d2e5c2e2d015bb4620f040f1d520cf6
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "phppgadmin" "7.12.1-1" --checksum 5e8f2f7b704e33aa15e322c73f81c5b809495de3228123671e749a800e117297
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "phppgadmin" "7.13.0-0" --checksum f5ee43a60de97d9841a9b1cc425a7c4071c4c275e57c4523334320c11ec04b75
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -30,7 +30,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="phppgadmin" \
-    BITNAMI_IMAGE_VERSION="7.12.1-debian-10-r145" \
+    BITNAMI_IMAGE_VERSION="7.13.0-debian-10-r0" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/common/bin:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
