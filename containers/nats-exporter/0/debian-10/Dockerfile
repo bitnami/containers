@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="nats-exporter" \
-    BITNAMI_IMAGE_VERSION="0.6.2-debian-10-r169" \
+    BITNAMI_IMAGE_VERSION="0.6.2-debian-10-r170" \
     PATH="/opt/bitnami/nats-exporter/bin:$PATH"
 
 EXPOSE 7777
