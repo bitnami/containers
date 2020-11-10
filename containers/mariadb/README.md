@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10.5`, `10.5-debian-10`, `10.5.7`, `10.5.7-debian-10-r6`, `latest` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.7-debian-10-r6/10.5/debian-10/Dockerfile)
+* [`10.5`, `10.5-debian-10`, `10.5.7`, `10.5.7-debian-10-r7`, `latest` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.7-debian-10-r7/10.5/debian-10/Dockerfile)
 * [`10.4`, `10.4-debian-10`, `10.4.16`, `10.4.16-debian-10-r6` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.16-debian-10-r6/10.4/debian-10/Dockerfile)
 * [`10.3`, `10.3-debian-10`, `10.3.26`, `10.3.26-debian-10-r6` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.26-debian-10-r6/10.3/debian-10/Dockerfile)
 * [`10.2`, `10.2-debian-10`, `10.2.35`, `10.2.35-debian-10-r6` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.35-debian-10-r6/10.2/debian-10/Dockerfile)
