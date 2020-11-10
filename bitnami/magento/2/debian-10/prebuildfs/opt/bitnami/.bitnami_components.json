@@ -22,10 +22,10 @@
     },
     "magento": {
         "arch": "amd64",
-        "digest": "07a0b200fc4909b5f51335cb85c4cb0325e44ad6818d7397d8b27de33ae392a0",
+        "digest": "4ec3b50594392f0c151dd256a37b62a308b07629cff7e1b6854882cd870d4a3e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.1-1"
+        "version": "2.4.1-2"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "8de91863c394b1f1ff42a60f0004db891e18b17f9decd2ae8e6c654394b1b74b",
+        "digest": "5f0bc0fd50d56931ac4564ee942abc147debbb59fac530342e1764d523152fba",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.24-0"
+        "version": "7.3.24-1"
     },
     "tini": {
         "arch": "amd64",
