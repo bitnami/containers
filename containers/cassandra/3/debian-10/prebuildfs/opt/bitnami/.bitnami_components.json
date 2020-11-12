@@ -1,10 +1,10 @@
 {
     "cassandra": {
         "arch": "amd64",
-        "digest": "d9b4a03f2459b5320f4e11781a2603aa2ee08067cea1b17dcd1e06c7dfb81b14",
+        "digest": "e4c0c4b33f7186fe948941a0459ce3a7e281181778c17fe3238a722ae821dd46",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.11.8-1"
+        "version": "3.11.9-0"
     },
     "gosu": {
         "arch": "amd64",
