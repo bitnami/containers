@@ -8,10 +8,10 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "7bf8a38656fba22e7e35cbba165ca4b57037acdb7387013ab835cf61ed9eb32b",
+        "digest": "f96905e763a6334b75a7cdb07f8d89658cde02be41cb09d91d0682fc649fdcff",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.26-0"
+        "version": "10.3.27-0"
     },
     "nginx": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "wordpress": {
         "arch": "amd64",
-        "digest": "3c967213790c14f9ecc14d7b7013a215b010480ce6b5508191a9291a78854fe9",
+        "digest": "ed7d14f75579066f25583ddc9d3291fef4372c3bea4d1d6b542471b9722f93fe",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.5.3-1"
+        "version": "5.5.3-2"
     },
     "wp-cli": {
         "arch": "amd64",
