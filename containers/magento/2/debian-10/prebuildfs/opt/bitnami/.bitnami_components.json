@@ -29,10 +29,10 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "29bb3dc1daaa805905a7f450f00a446ec3ebf3090dff74045b4e47fcfe917942",
+        "digest": "dc105b313dff78fca99abe1d8dec079b6e0a3e7e3bca0da1ab0ff08da8ec330c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.2.35-0"
+        "version": "10.2.36-0"
     },
     "php": {
         "arch": "amd64",
