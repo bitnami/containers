@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`13`, `13-debian-10`, `13.0.0`, `13.0.0-debian-10-r37` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.0.0-debian-10-r37/13/debian-10/Dockerfile)
+* [`13`, `13-debian-10`, `13.0.0`, `13.0.0-debian-10-r38` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.0.0-debian-10-r38/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.4.0`, `12.4.0-debian-10-r89` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.4.0-debian-10-r89/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.9.0`, `11.9.0-debian-10-r75`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.9.0-debian-10-r75/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.14.0`, `10.14.0-debian-10-r89` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.14.0-debian-10-r89/10/debian-10/Dockerfile)
@@ -652,6 +652,13 @@ services:
   ...
 ```
 
+## Stopping settings
+
+You can control the parameters used to stop postgresql in the initialization process by using:
+
+ - `POSTGRESQL_PGCTLTIMEOUT` that will set the timeout for the `pg_ctl` command.
+ - `POSTGRESQL_SHUTDOWN_MODE` that will indicate the [shutdown mode](https://www.postgresql.org/docs/11/app-pg-ctl.html) used.
+
 ## Environment variables aliases
 
 The Bitnami PostgreSQL container allows two different sets of environment variables. Please see the list of environment variable aliases in the next table:
@@ -677,6 +684,7 @@ The Bitnami PostgreSQL container allows two different sets of environment variab
 | POSTGRESQL_MASTER_PORT_NUMBER        | POSTGRES_MASTER_PORT_NUMBER        |
 | POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS  | POSTGRES_NUM_SYNCHRONOUS_REPLICAS  |
 | POSTGRESQL_SYNCHRONOUS_COMMIT_MODE   | POSTGRES_SYNCHRONOUS_COMMIT_MODE   |
+| POSTGRESQL_SHUTDOWN_MODE             | POSTGRES_SHUTDOWN_MODE             |
 
 > *IMPORTANT*: Changing the `POSTGRES_USER` will not change the owner of the database that will continue being the `postgres` user. In order to change the database owner, please access using `postgres` as user (`$ psql -U postgres ...`) and execute the following command:
 ```console
