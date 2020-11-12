@@ -8,10 +8,10 @@
     },
     "percona-xtrabackup": {
         "arch": "amd64",
-        "digest": "91768decb2045f98492f1899d94e25d4cf7976a11bd1db23e498b5c1360a5a02",
+        "digest": "0446cb2c1a8a30d96b67340077e1f3f2e3e5504d4ccfcfa91c7b9603ca60edd4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.20-0"
+        "version": "2.4.21-0"
     },
     "tini": {
         "arch": "amd64",
