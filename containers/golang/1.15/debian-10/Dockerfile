@@ -8,16 +8,16 @@ ENV OS_ARCH="amd64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git gzip libc6 pkg-config procps tar unzip wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/golang-1.15.4-0-linux-amd64-debian-10.tar.gz && \
-    echo "420e71c2eb31a04976f795cd97815044e97f73c29fef4f6879a96e20fbc006ea  /tmp/bitnami/pkg/cache/golang-1.15.4-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/golang-1.15.4-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/golang-1.15.4-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/golang-1.15.5-0-linux-amd64-debian-10.tar.gz && \
+    echo "6112cfe4cc9e0c3bc9ce8425e472d9cc36ae8d670df67ff89452e7534680fe06  /tmp/bitnami/pkg/cache/golang-1.15.5-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/golang-1.15.5-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/golang-1.15.5-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN mkdir -p "/go/src" "/go/bin" && chmod -R 777 "/go"
 
 ENV BITNAMI_APP_NAME="golang" \
-    BITNAMI_IMAGE_VERSION="1.15.4-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="1.15.5-debian-10-r0" \
     GOPATH="/go" \
     PATH="/go/bin:/opt/bitnami/go/bin:$PATH"
 
