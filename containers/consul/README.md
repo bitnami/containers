@@ -301,7 +301,7 @@ When you start the HashiCorp Consul image, you can adjust the configuration of t
 - `CONSUL_RAFT_MULTIPLIER`: An integer multiplier used by HashiCorp Consul servers to scale key Raft timing parameters. Default: **1**.
 - `CONSUL_LOCAL_CONFIG`: Custom user configuration that will be added as a file in the config dir.
 - `CONSUL_GOSSIP_ENCRYPTION`: Enable Gossip encryption. Default: **no**.
-- `CONSUL_GOSSIP_ENCRYPTION_KEY`: Gossip private simmetric key.
+- `CONSUL_GOSSIP_ENCRYPTION_KEY`: Gossip private simmetric key. This is expected to be a `base64` encoded string
 - `CONSUL_GOSSIP_ENCRYPTION_KEY_FILE`: File containing the gossip private simmetric key. If both `CONSUL_GOSSIP_ENCRYPTION_KEY` and `CONSUL_GOSSIP_ENCRYPTION_KEY_FILE` are provided, consul will use the `CONSUL_GOSSIP_ENCRYPTION_KEY_FILE`.
 - `CONSUL_DISABLE_KEYRING_FILE`: If set, the keyring will not be persisted to a file. Valid vaules: true, false. Default: **false**.
 - `CONSUL_ENABLE_UI`: Enable web user interface. Valid values: true, false. Default: **true**.
@@ -377,7 +377,7 @@ $ docker run -d -e CONSUL_LOCAL_CONFIG='{
 Check the [Persisting your data](# Persisting your application) section to add custom volumes to the HashiCorp Consul container
 
 ## Configuring the Gossip encryption key
-Specifies the secret key to use for encryption of HashiCorp Consul network traffic. This key must be 16-bytes that are Base64-encoded. The easiest way to create an encryption key is to use `consul keygen`
+Specifies the secret key to use for encryption of HashiCorp Consul network traffic. This key must be 32-bytes that are Base64-encoded. The easiest way to create an encryption key is to use `consul keygen`
 
 ```console
 $ docker run --name consul bitnami/consul:latest consul keygen
