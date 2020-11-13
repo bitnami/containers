@@ -392,11 +392,25 @@ postgresql_configure_replication_parameters() {
         postgresql_set_property "wal_keep_segments" "12"
     fi
     postgresql_set_property "hot_standby" "on"
+}
+
+
+########################
+# Change postgresql.conf by setting parameters for synchronous replication
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+postgresql_configure_synchronous_replication() {
     if ((POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS > 0)); then
         postgresql_set_property "synchronous_commit" "$POSTGRESQL_SYNCHRONOUS_COMMIT_MODE"
         postgresql_set_property "synchronous_standby_names" "${POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS} (\"${POSTGRESQL_CLUSTER_APP_NAME}\")"
     fi
 }
+
 
 ########################
 # Change postgresql.conf by setting TLS properies
@@ -592,6 +606,7 @@ postgresql_initialize() {
         is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
         is_boolean_yes "$create_conf_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && postgresql_configure_tls
         [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]] && [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
+        [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]] && is_boolean_yes "$create_pghba_file" && postgresql_configure_synchronous_replication
         [[ "$POSTGRESQL_REPLICATION_MODE" = "slave" ]] && postgresql_configure_recovery
     else
         if [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]]; then
@@ -609,6 +624,7 @@ postgresql_initialize() {
             is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && postgresql_create_replication_user
             is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
+            is_boolean_yes "$create_pghba_file" && postgresql_configure_synchronous_replication
             is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
             is_boolean_yes "$create_conf_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && postgresql_configure_tls
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
