@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.2.34-6" 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-3" --checksum 07991412bb24fc8493228f4bd67b28a77e011242971dcdd687a5d2113ac89bc9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.2.36-0" --checksum dc105b313dff78fca99abe1d8dec079b6e0a3e7e3bca0da1ab0ff08da8ec330c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.2.34-1" --checksum 38466eb6522a8dd07cf2abbbab6a13db6ce60dd96a556635900e60338999fe9b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-2" --checksum f1bee333423f6627d795ea9e0b6a89c18d2e5c2e2d015bb4620f040f1d520cf6
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "prestashop" "1.7.6-8-0" --checksum 80ff5b5aed870512e844d15320fe95d8cd835c2e4f0ea9a32743d32358971542
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN apt-get update && apt-get upgrade -y && \
@@ -31,7 +31,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.6-8-debian-10-r47" \
+    BITNAMI_IMAGE_VERSION="1.7.6-8-debian-10-r48" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
