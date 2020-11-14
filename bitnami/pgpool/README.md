@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.1.4`, `4.1.4-debian-10-r48`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.4-debian-10-r48/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.1.4`, `4.1.4-debian-10-r49`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.1.4-debian-10-r49/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
 
@@ -351,7 +351,7 @@ With these three commands you now have a two node PostgreSQL primary-standby str
 
 If the master goes down, **repmgr** will ensure any of the standby nodes takes the primary role, guaranteeing high availability.
 
-> **Note**: The configuration of the other nodes in the cluster needs to be updated so that they are aware of them. This would require you to restart the old nodes adapting the `REPMGR_PARTNER_NODES` environment variable. You also need to restart the Pgpool instance adapting the `PGPOOL_BACKEND_NODES` environment variable.
+> **Note**: The configuration of the other nodes in the cluster needs to be updated so that they are aware of them. This would require you to restart the old nodes adapting the `REPMGR_PARTNER_NODES` environment variable. You also need to restart the Pgpoll instance adapting the `PGPOOL_BACKEND_NODES` environment variable.
 
 With Docker Compose the HA PostgreSQL cluster can be setup using the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-pgpool/blob/master/docker-compose.yml) file present in this repository:
 
