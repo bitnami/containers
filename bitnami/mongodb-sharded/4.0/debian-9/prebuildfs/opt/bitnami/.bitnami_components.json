@@ -15,10 +15,10 @@
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "7defe2e6b6eabb3dd3a193e7d4e932f768b0188b6fb4ecd862bf10632e747f25",
+        "digest": "5ab8cb7ec2412c49d506087b360876bae0be39a357427fae8816536b0fd6241d",
         "distro": "debian-9",
         "type": "NAMI",
-        "version": "1.0.0-0"
+        "version": "1.0.0-1"
     },
     "wait-for-port": {
         "arch": "amd64",
