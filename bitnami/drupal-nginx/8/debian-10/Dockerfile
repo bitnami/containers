@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl dirmngr gnupg gzip libargon2-1 lib
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.24-1" --checksum 5f0bc0fd50d56931ac4564ee942abc147debbb59fac530342e1764d523152fba
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.18.0-5" --checksum 853ef167b701384933b7781f74c7cbb2490352dc8c3fc085eccb064763a8fd01
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.27-0" --checksum f96905e763a6334b75a7cdb07f8d89658cde02be41cb09d91d0682fc649fdcff
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-2" --checksum f1bee333423f6627d795ea9e0b6a89c18d2e5c2e2d015bb4620f040f1d520cf6
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "8.9.8-1" --checksum eca9ec188e2ee861fa8f5e655dd5ac6cd1a994ac1096ad023d412237cc064062
 RUN apt-get update && apt-get upgrade -y && \
@@ -27,7 +27,7 @@ RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="8.9.8-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="8.9.8-debian-10-r9" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
