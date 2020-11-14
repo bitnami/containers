@@ -8,9 +8,9 @@
     },
     "postgresql": {
         "arch": "amd64",
-        "digest": "f2b5e738e2ed3c3b10391f93668a930300997524d385b8bc01869e6d40cd94a7",
+        "digest": "2ba1c37eec46719157da2d9dd8077729c81d1af2c464056744a866c65c50927e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "13.1.0-0"
+        "version": "13.1.0-1"
     }
 }
