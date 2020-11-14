@@ -34,7 +34,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.9-prod`, `3.9-prod-debian-10`, `3.9.0-prod`, `3.9.0-prod-debian-10-r24` (3.9-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.9.0-prod-debian-10-r24/3.9-prod/debian-10/Dockerfile)
+* [`3.9-prod`, `3.9-prod-debian-10`, `3.9.0-prod`, `3.9.0-prod-debian-10-r25` (3.9-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.9.0-prod-debian-10-r25/3.9-prod/debian-10/Dockerfile)
 * [`3.9`, `3.9-debian-10`, `3.9.0`, `3.9.0-debian-10-r24` (3.9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.9.0-debian-10-r24/3.9/debian-10/Dockerfile)
 * [`3.8-prod`, `3.8-prod-debian-10`, `3.8.6-prod`, `3.8.6-prod-debian-10-r55` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.6-prod-debian-10-r55/3.8-prod/debian-10/Dockerfile)
 * [`3.8`, `3.8-debian-10`, `3.8.6`, `3.8.6-debian-10-r55` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.6-debian-10-r55/3.8/debian-10/Dockerfile)
