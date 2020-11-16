@@ -53,7 +53,7 @@ export RABBITMQ_CLUSTER_PARTITION_HANDLING="${RABBITMQ_CLUSTER_PARTITION_HANDLIN
 export RABBITMQ_DISK_FREE_RELATIVE_LIMIT="${RABBITMQ_DISK_FREE_RELATIVE_LIMIT:-1.0}"
 export RABBITMQ_DISK_FREE_ABSOLUTE_LIMIT="${RABBITMQ_DISK_FREE_ABSOLUTE_LIMIT:-}"
 export RABBITMQ_ERL_COOKIE="${RABBITMQ_ERL_COOKIE:-}"
-export RABBITMQ_HASHED_PASSWORD="${RABBITMQ_HASHED_PASSWORD:-}"
+export RABBITMQ_LOAD_DEFINITIONS=${RABBITMQ_LOAD_DEFINITIONS:-no}
 export RABBITMQ_MANAGER_BIND_IP="${RABBITMQ_MANAGER_BIND_IP:-0.0.0.0}"
 export RABBITMQ_MANAGER_PORT_NUMBER="${RABBITMQ_MANAGER_PORT_NUMBER:-15672}"
 export RABBITMQ_NODE_NAME="${RABBITMQ_NODE_NAME:-rabbit@localhost}"
@@ -94,14 +94,14 @@ rabbitmq_validate() {
         error_code=1
     }
 
-    if [[ -z "$RABBITMQ_PASSWORD" && -z "$RABBITMQ_HASHED_PASSWORD" ]]; then
+    if ! is_yes_no_value "$RABBITMQ_LOAD_DEFINITIONS"; then
+        print_validation_error "An invalid value was specified in the environment variable RABBITMQ_LOAD_DEFINITIONS. Valid values are: yes or no"
+    fi
+
+    if ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS" && [[ -z "$RABBITMQ_PASSWORD" ]]; then
         print_validation_error "You must indicate a password or a hashed password."
     fi
-
-    if [[ -n "$RABBITMQ_PASSWORD" && -n "$RABBITMQ_HASHED_PASSWORD" ]]; then
-        warn "You initialized RabbitMQ indicating both a password and a hashed password. Please note only the hashed password will be considered."
-    fi
-
+    
     if ! is_yes_no_value "$RABBITMQ_ENABLE_LDAP"; then
         print_validation_error "An invalid value was specified in the environment variable RABBITMQ_ENABLE_LDAP. Valid values are: yes or no"
     fi
@@ -527,7 +527,9 @@ rabbitmq_initialize() {
     else
         ! is_rabbitmq_running && rabbitmq_start_bg
 
-        rabbitmq_change_password "$RABBITMQ_USERNAME" "$RABBITMQ_PASSWORD"
+        if ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
+            rabbitmq_change_password "$RABBITMQ_USERNAME" "$RABBITMQ_PASSWORD"
+        fi
         if [[ "$RABBITMQ_NODE_TYPE" != "stats" ]] && [[ -n "$RABBITMQ_CLUSTER_NODE_NAME" ]]; then
             rabbitmq_join_cluster "$RABBITMQ_CLUSTER_NODE_NAME" "$RABBITMQ_NODE_TYPE"
         fi
