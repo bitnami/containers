@@ -179,7 +179,7 @@ $ docker run -d --name mariadb \
   bitnami/mariadb:latest
 ```
 
-#### Step 3. Create the Moodle<sup>TM</sup> the container with host volumes
+#### Step 3. Create the Moodle<sup>TM</sup> container with host volumes
 
 ```console
 $ docker volume create --name moodle_data
@@ -336,7 +336,7 @@ To use `EXTRA_LOCALES`, you have two options:
       context: .
       dockerfile: Dockerfile
       args:
-        - EXTRA_LOCALES="fr_FR.UTF-8 UTF-8, de_DE.UTF-8 UTF-8, it_IT.UTF-8 UTF-8, es_ES.UTF-8 UTF-8"
+        - EXTRA_LOCALES=fr_FR.UTF-8 UTF-8, de_DE.UTF-8 UTF-8, it_IT.UTF-8 UTF-8, es_ES.UTF-8 UTF-8
   ...
   ```
 
