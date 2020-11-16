@@ -190,7 +190,6 @@ Available variables:
 
 * `RABBITMQ_USERNAME`: RabbitMQ application username. Default: **user**
 * `RABBITMQ_PASSWORD`: RabbitMQ application password. Default: **bitnami**
-* `RABBITMQ_HASHED_PASSWORD`: RabbitMQ application hashed password.
 * `RABBITMQ_VHOST`: RabbitMQ application vhost. Default: **/**
 * `RABBITMQ_ERL_COOKIE`: Erlang cookie to determine whether different nodes are allowed to communicate with each other.
 * `RABBITMQ_NODE_TYPE`: Node Type. Valid values: *stats*, *queue-ram* or *queue-disc*. Default: **stats**
@@ -210,6 +209,7 @@ Available variables:
 * `RABBITMQ_LDAP_USER_DN_PATTERN`: DN used to bind to LDAP in the form `cn=$${username},dc=example,dc=org`. No defaults.
 * `RABBITMQ_PLUGINS`: Comma, semi-colon or space separated list of plugins to enable during the initialization. No defaults.
 * `RABBITMQ_COMMUNITY_PLUGINS`: Comma, semi-colon or space separated list of URLs where to download custom plugins during the initialization. No defaults.
+* `RABBITMQ_LOAD_DEFINITIONS`: Enable compability with loading external definitions. Currently means that password for `RABBITMQ_USERNAME` is not changed to `RABBITMQ_PASSWORD`. Default: **no**.
 
 ### Setting up a cluster
 
@@ -486,6 +486,14 @@ $ docker-compose up rabbitmq
 ```
 
 ## Notable changes
+
+### 3.8.9-debian-10-r34
+
+* The environment variable `RABBITMQ_HASHED_PASSWORD` has not been used for some time. It is now
+  removed from documentation anv validation.
+* New boolean environment variable `RABBITMQ_LOAD_DEFINITIONS` to get behavior compatible with using
+  the `load_definitions` configuration. Initially this means that the password of
+  `RABBITMQ_USERNAME` is not changed using `rabbitmqctl change_password`.
 
 ### 3.8.3-debian-10-r109
 
