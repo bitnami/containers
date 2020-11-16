@@ -51,7 +51,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.8`, `3.8-debian-10`, `3.8.9`, `3.8.9-debian-10-r41`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.9-debian-10-r41/3.8/debian-10/Dockerfile)
+* [`3.8`, `3.8-debian-10`, `3.8.9`, `3.8.9-debian-10-r42`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.9-debian-10-r42/3.8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
@@ -487,7 +487,7 @@ $ docker-compose up rabbitmq
 
 ## Notable changes
 
-### 3.8.9-debian-10-r34
+### 3.8.9-debian-10-r42
 
 * The environment variable `RABBITMQ_HASHED_PASSWORD` has not been used for some time. It is now
   removed from documentation anv validation.

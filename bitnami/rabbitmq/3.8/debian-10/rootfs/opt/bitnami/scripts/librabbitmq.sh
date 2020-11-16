@@ -99,9 +99,9 @@ rabbitmq_validate() {
     fi
 
     if ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS" && [[ -z "$RABBITMQ_PASSWORD" ]]; then
-        print_validation_error "You must indicate a password or a hashed password."
+        print_validation_error "You must indicate a password"
     fi
-    
+
     if ! is_yes_no_value "$RABBITMQ_ENABLE_LDAP"; then
         print_validation_error "An invalid value was specified in the environment variable RABBITMQ_ENABLE_LDAP. Valid values are: yes or no"
     fi
@@ -530,6 +530,7 @@ rabbitmq_initialize() {
         if ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
             rabbitmq_change_password "$RABBITMQ_USERNAME" "$RABBITMQ_PASSWORD"
         fi
+
         if [[ "$RABBITMQ_NODE_TYPE" != "stats" ]] && [[ -n "$RABBITMQ_CLUSTER_NODE_NAME" ]]; then
             rabbitmq_join_cluster "$RABBITMQ_CLUSTER_NODE_NAME" "$RABBITMQ_NODE_TYPE"
         fi
