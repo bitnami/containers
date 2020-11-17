@@ -8,24 +8,24 @@
     },
     "laravel": {
         "arch": "amd64",
-        "digest": "a9176d2dba00befc4ed5a6b90fc3a91a4cf99103f7e2fc73bf2ec76a61327f4b",
+        "digest": "f9cb470db5bec77584b2d82fcec430186f6742c238f176f38fd743fc5abb82db",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.4.1-0"
+        "version": "8.4.2-0"
     },
     "node": {
         "arch": "amd64",
-        "digest": "e4337681badb137e807b330a56f3c8a73cf779149a072a4166126e5be9686993",
+        "digest": "382923a94803f340c4672ba1b9dd04c82718917e9cd131ef61219fbe541efc3f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "12.19.0-0"
+        "version": "12.19.1-0"
     },
     "php": {
         "arch": "amd64",
-        "digest": "5f0bc0fd50d56931ac4564ee942abc147debbb59fac530342e1764d523152fba",
+        "digest": "6824a58add74d014474e221f1bbc7a781fda6ec3e05f2a26c703a7ce983924aa",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.24-1"
+        "version": "7.3.24-2"
     },
     "tini": {
         "arch": "amd64",
