@@ -8,17 +8,17 @@
     },
     "mongodb-client": {
         "arch": "amd64",
-        "digest": "9b553a0df5312db187152b0394d729a81e016e255be82eb565393c1705e63e3e",
+        "digest": "145f4cccf974e123a3ffc7b6da856f06fabce35cd0448865a0da7ad154737202",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.4.1-0"
+        "version": "4.4.2-0"
     },
     "node": {
         "arch": "amd64",
-        "digest": "e4337681badb137e807b330a56f3c8a73cf779149a072a4166126e5be9686993",
+        "digest": "382923a94803f340c4672ba1b9dd04c82718917e9cd131ef61219fbe541efc3f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "12.19.0-0"
+        "version": "12.19.1-0"
     },
     "parse": {
         "arch": "amd64",
