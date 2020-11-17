@@ -1,7 +1,7 @@
 version: '2'
 services:
   postgresql:
-    image: docker.io/bitnami/postgresql:10-debian-10
+    image: bitnami/postgresql:10
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
     environment:
@@ -10,7 +10,7 @@ services:
       - POSTGRESQL_PASSWORD=bitnami1
       - ALLOW_EMPTY_PASSWORD=yes
   redis:
-    image: docker.io/bitnami/redis:6.0-debian-10
+    image: bitnami/redis:6.0
     volumes:
       - 'redis_data:/bitnami'
     environment:
@@ -25,7 +25,7 @@ services:
     volumes:
       - airflow_worker_data:/bitnami
   airflow-scheduler:
-    image: docker.io/bitnami/airflow-scheduler:1-debian-10
+    image: bitnami/airflow-scheduler:1
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
@@ -34,7 +34,7 @@ services:
     volumes:
       - airflow_scheduler_data:/bitnami
   airflow:
-    image: docker.io/bitnami/airflow:1-debian-10
+    image: bitnami/airflow:1
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
