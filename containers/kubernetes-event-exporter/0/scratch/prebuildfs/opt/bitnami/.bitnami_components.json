@@ -1,7 +1,0 @@
-{
-    "kubernetes-event-exporter": {
-        "digest": "eb5a1237ef12ad63b74fd3390f862d8008d2ae386f29c99c2de85b9fca609c76",
-        "type": "BLACKSMITH",
-        "version": "0.9.0"
-    }
-}
