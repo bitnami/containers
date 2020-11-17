@@ -8,9 +8,9 @@
     },
     "minio-client": {
         "arch": "amd64",
-        "digest": "71d762522434a93941857bf113e5386e6795c566bf4b7d111e723e23040b0c95",
+        "digest": "fdce37fc5795f9e9b71a0e8660e4184aedeae33c479493580e5f0e5e9861e2f1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2020.10.3-0"
+        "version": "2020.11.17-0"
     }
 }
