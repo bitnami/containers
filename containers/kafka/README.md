@@ -513,7 +513,7 @@ services:
     image: 'bitnami/zookeeper:latest'
     ports:
      - '2181:2181'
-    environment
+    environment:
      - ALLOW_ANONYMOUS_LOGIN=yes
   kafka1:
     image: 'bitnami/kafka:latest'
