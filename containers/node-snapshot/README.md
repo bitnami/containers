@@ -47,12 +47,10 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`15`, `15-debian-10`, `15.2.1`, `15.2.1-debian-10-r1` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/15.2.1-debian-10-r1/15/debian-10/Dockerfile)
 * [`14-prod`, `14-prod-debian-10`, `14.15.1-prod`, `14.15.1-prod-debian-10-r1` (14-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/14.15.1-prod-debian-10-r1/14-prod/debian-10/Dockerfile)
 * [`14`, `14-debian-10`, `14.15.1`, `14.15.1-debian-10-r1` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/14.15.1-debian-10-r1/14/debian-10/Dockerfile)
-* [`13-prod`, `13-prod-debian-10`, `13.14.0-prod`, `13.14.0-prod-debian-10-r105` (13-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/13.14.0-prod-debian-10-r105/13-prod/debian-10/Dockerfile)
-* [`13`, `13-debian-10`, `13.14.0`, `13.14.0-debian-10-r105` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/13.14.0-debian-10-r105/13/debian-10/Dockerfile)
 * [`12-prod`, `12-prod-debian-10`, `12.19.1-prod`, `12.19.1-prod-debian-10-r1` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.19.1-prod-debian-10-r1/12-prod/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.19.1`, `12.19.1-debian-10-r1`, `latest` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.19.1-debian-10-r1/12/debian-10/Dockerfile)
 * [`10-prod`, `10-prod-debian-10`, `10.23.0-prod`, `10.23.0-prod-debian-10-r23` (10-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/10.23.0-prod-debian-10-r23/10-prod/debian-10/Dockerfile)
-* [`10`, `10-debian-10`, `10.23.0`, `10.23.0-debian-10-r21` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/10.23.0-debian-10-r21/10/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.23.0`, `10.23.0-debian-10-r22` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/10.23.0-debian-10-r22/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node-snapshot GitHub repo](https://github.com/bitnami/bitnami-docker-node-snapshot).
 
