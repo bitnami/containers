@@ -36,7 +36,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.3.3`, `7.3.3-debian-10-r0`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/7.3.3-debian-10-r0/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.3.3`, `7.3.3-debian-10-r1`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/7.3.3-debian-10-r1/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -121,9 +121,10 @@ grafana:
 
 ### Install plugins at initialization
 
-When you start the Grafana image, you can specify a comma, semi-colon or space separated list of plugins to install by setting the env. variable `GF_INSTALL_PLUGINS`. The entries in `GF_INSTALL_PLUGINS` have two different formats:
+When you start the Grafana image, you can specify a comma, semi-colon or space separated list of plugins to install by setting the env. variable `GF_INSTALL_PLUGINS`. The entries in `GF_INSTALL_PLUGINS` have three different formats:
 
- * `plugin_id`: This will download the plugin with name `plugin_id` from [the official Grafana plugins page](https://grafana.com/grafana/plugins).
+ * `plugin_id`: This will download the latest plugin version with name `plugin_id` from [the official Grafana plugins page](https://grafana.com/grafana/plugins).
+ * `plugin_id:plugin_version`: This will download the plugin with name `plugin_id` and version `plugin_version` from [the official Grafana plugins page](https://grafana.com/grafana/plugins).
  * `plugin_id=url`: This will download the plugin with name `plugin_id` using the zip file specified in `url`. In case you want to skip TLS verification, set the variable `GF_INSTALL_PLUGINS_SKIP_TLS` to `yes`.
 
 For Docker Compose, add the variable name and value under the application section:
@@ -132,7 +133,7 @@ For Docker Compose, add the variable name and value under the application sectio
 grafana:
   ...
   environment:
-    - GF_INSTALL_PLUGINS=grafana-kubernetes-app,worldpring=https://github.com/raintank/worldping-app/releases/download/v1.2.6/worldping-app-release-1.2.6.zip
+    - GF_INSTALL_PLUGINS=grafana-clock-panel:1.1.0,grafana-kubernetes-app,worldpring=https://github.com/raintank/worldping-app/releases/download/v1.2.6/worldping-app-release-1.2.6.zip
   ...
 ```
 
@@ -140,7 +141,7 @@ For manual execution add a `-e` option with each variable and value:
 
 ```console
 $ docker run -d --name grafana -p 3000:3000 \
-    -e GF_INSTALL_PLUGINS="grafana-kubernetes-app,worldpring=https://github.com/raintank/worldping-app/releases/download/v1.2.6/worldping-app-release-1.2.6.zip" \
+    -e GF_INSTALL_PLUGINS="grafana-clock-panel:1.1.0,grafana-kubernetes-app,worldpring=https://github.com/raintank/worldping-app/releases/download/v1.2.6/worldping-app-release-1.2.6.zip" \
     bitnami/grafana:latest
 ```
 
