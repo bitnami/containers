@@ -636,9 +636,9 @@ postgresql_initialize() {
             is_boolean_yes "$create_conf_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && postgresql_configure_tls
             postgresql_configure_recovery
         fi
-        # TLS Modifications on pghba need to be performed after properly configuring postgresql.conf file
-        is_boolean_yes "$create_pghba_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && [[ -n $POSTGRESQL_TLS_CA_FILE ]] && postgresql_tls_auth_configuration
     fi
+     # TLS Modifications on pghba need to be performed after properly configuring postgresql.conf file
+    is_boolean_yes "$create_pghba_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && [[ -n $POSTGRESQL_TLS_CA_FILE ]] && postgresql_tls_auth_configuration
 
     is_boolean_yes "$create_conf_file" && [[ -n "$POSTGRESQL_SHARED_PRELOAD_LIBRARIES" ]] && postgresql_set_property "shared_preload_libraries" "$POSTGRESQL_SHARED_PRELOAD_LIBRARIES"
     is_boolean_yes "$create_conf_file" && postgresql_configure_logging
