@@ -7,6 +7,7 @@
 # Load Generic Libraries
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libnet.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
 
@@ -49,7 +50,9 @@ keycloak_validate() {
     fi
 
     if ! validate_ipv4 "${KEYCLOAK_BIND_ADDRESS}"; then
-        print_validation_error "The value for KEYCLOAK_BIND_ADDRESS should be an IPv4 address or it must be a resolvable hostname"
+        if ! is_hostname_resolved "${KEYCLOAK_BIND_ADDRESS}"; then
+            print_validation_error print_validation_error "The value for KEYCLOAK_BIND_ADDRESS ($KEYCLOAK_BIND_ADDRESS) should be an IPv4 address or it must be a resolvable hostname"
+        fi
     fi
 
     if ! is_empty_value "$KEYCLOAK_JGROUPS_DISCOVERY_PROTOCOL" && is_empty_value "$KEYCLOAK_JGROUPS_TRANSPORT_STACK"; then
@@ -171,8 +174,8 @@ batch
 /subsystem=infinispan/cache-container=keycloak/distributed-cache=offlineSessions: write-attribute(name=owners, value=${KEYCLOAK_CACHE_OWNERS_COUNT})
 /subsystem=infinispan/cache-container=keycloak/distributed-cache=loginFailures: write-attribute(name=owners, value=${KEYCLOAK_CACHE_OWNERS_COUNT})
 /subsystem=infinispan/cache-container=keycloak/distributed-cache=clientSessions: write-attribute(name=owners, value=${KEYCLOAK_CACHE_OWNERS_COUNT})
-/subsystem=infinispan/cache-container=keycloak/distributed-cache=offlineClientSessions: write-attribute(name=owners, value=${KEYCLOAK_CACHE_OWNERS_COUNT})
 /subsystem=infinispan/cache-container=keycloak/distributed-cache=actionTokens: write-attribute(name=owners, value=${KEYCLOAK_CACHE_OWNERS_COUNT})
+/subsystem=infinispan/cache-container=keycloak/distributed-cache=offlineClientSessions: write-attribute(name=owners, value=${KEYCLOAK_CACHE_OWNERS_COUNT})
 run-batch
 stop-embedded-server
 EOF
