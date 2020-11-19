@@ -1,0 +1,6 @@
+version: '2'
+services:
+  grafana-operator:
+    image: docker.io/bitnami/grafana-operator:3-debian-10
+    ports:
+      - 8080:8080
