@@ -387,7 +387,7 @@ postgresql_configure_replication_parameters() {
     postgresql_set_property "max_wal_size" "400MB"
     postgresql_set_property "max_wal_senders" "16"
     if ((psql_major_version >= 13)); then
-        postgresql_set_property "wal_keep_size" "12"
+        postgresql_set_property "wal_keep_size" "128MB"
     else
         postgresql_set_property "wal_keep_segments" "12"
     fi
