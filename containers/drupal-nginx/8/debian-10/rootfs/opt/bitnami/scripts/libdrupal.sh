@@ -257,13 +257,22 @@ drupal_wait_for_db_connection() {
 drupal_site_install() {
     is_empty_value "$DRUPAL_DATABASE_TLS_CA_FILE" || drupal_set_database_ssl_settings
 
-    drush_execute "-y" "site:install" "$DRUPAL_PROFILE" \
-        "--db-url=mysql://${DRUPAL_DATABASE_USER}:${DRUPAL_DATABASE_PASSWORD}@${DRUPAL_DATABASE_HOST}:${DRUPAL_DATABASE_PORT_NUMBER}/${DRUPAL_DATABASE_NAME}" \
-        "--account-name=${DRUPAL_USERNAME}" \
-        "--account-mail=${DRUPAL_EMAIL}" \
-        "--account-pass=${DRUPAL_PASSWORD}" \
-        "--site-name=${DRUPAL_SITE_NAME}" \
-        "--site-mail=${DRUPAL_EMAIL}"
+    (
+        # Unfortunately there is no way to disable mail sending via sendmail when installing Drupal
+        # The "hack" consists of overriding the sendmail path to an executable that does nothing (i.e. "/bin/true")
+        # This is also what Drush is doing in their CI
+        PHP_OPTIONS="-d sendmail_path=$(which true)"
+        export PHP_OPTIONS
+
+        drush_execute "site:install" \
+            "--db-url=mysql://${DRUPAL_DATABASE_USER}:${DRUPAL_DATABASE_PASSWORD}@${DRUPAL_DATABASE_HOST}:${DRUPAL_DATABASE_PORT_NUMBER}/${DRUPAL_DATABASE_NAME}" \
+            "--account-name=${DRUPAL_USERNAME}" \
+            "--account-mail=${DRUPAL_EMAIL}" \
+            "--account-pass=${DRUPAL_PASSWORD}" \
+            "--site-name=${DRUPAL_SITE_NAME}" \
+            "--site-mail=${DRUPAL_EMAIL}" \
+            "-y" "$DRUPAL_PROFILE"
+    )
 
     # When Drupal settings are patched to allow SSL database connections, the database settings block is duplicated
     # after the installation with Drush
