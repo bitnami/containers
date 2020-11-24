@@ -370,11 +370,20 @@ opencart_update_hostname() {
 
     # Set URL store configuration file
     opencart_conf_set HTTP_SERVER "http://${hostname}${http_port_suffix}/"
-    opencart_conf_set HTTPS_SERVER "https://${hostname}${https_port_suffix}/"
-
+    if is_boolean_yes "$OPENCART_ENABLE_HTTPS"; then
+        opencart_conf_set HTTPS_SERVER "https://${hostname}${https_port_suffix}/"
+    else
+        opencart_conf_set HTTPS_SERVER "http://${hostname}${http_port_suffix}/"
+    fi
     # Set URL in admin configuration file
     opencart_conf_set HTTP_SERVER "http://${hostname}${http_port_suffix}/admin/" "$OPENCART_ADMIN_CONF_FILE"
-    opencart_conf_set HTTP_CATALOG "http://${hostname}${https_port_suffix}/" "$OPENCART_ADMIN_CONF_FILE"
-    opencart_conf_set HTTPS_SERVER "https://${hostname}${http_port_suffix}/admin/" "$OPENCART_ADMIN_CONF_FILE"
-    opencart_conf_set HTTPS_CATALOG "https://${hostname}${https_port_suffix}/" "$OPENCART_ADMIN_CONF_FILE"
+    opencart_conf_set HTTP_CATALOG "http://${hostname}${http_port_suffix}/" "$OPENCART_ADMIN_CONF_FILE"
+    if is_boolean_yes "$OPENCART_ENABLE_HTTPS"; then
+        opencart_conf_set HTTPS_SERVER "https://${hostname}${https_port_suffix}/admin/" "$OPENCART_ADMIN_CONF_FILE"
+        opencart_conf_set HTTPS_CATALOG "https://${hostname}${https_port_suffix}/" "$OPENCART_ADMIN_CONF_FILE"
+    else
+        opencart_conf_set HTTPS_SERVER "http://${hostname}${http_port_suffix}/admin/" "$OPENCART_ADMIN_CONF_FILE"
+        opencart_conf_set HTTPS_CATALOG "http://${hostname}${http_port_suffix}/" "$OPENCART_ADMIN_CONF_FILE"
+    fi
 }
+
