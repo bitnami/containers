@@ -386,4 +386,3 @@ opencart_update_hostname() {
         opencart_conf_set HTTPS_CATALOG "http://${hostname}${http_port_suffix}/" "$OPENCART_ADMIN_CONF_FILE"
     fi
 }
-
