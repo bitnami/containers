@@ -15,10 +15,10 @@
     },
     "keycloak": {
         "arch": "amd64",
-        "digest": "d94c5f394448d2ea3cf127f8f2dd7df14090e4ea5b7a0f4324e9b6ddcf5e59f9",
+        "digest": "bd279822dba2dc8ddf8c53c002ac9e4ebb0e38d213a7d6a4eb0230839fd5719c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.0.3-0"
+        "version": "11.0.3-1"
     },
     "wait-for-port": {
         "arch": "amd64",
@@ -26,12 +26,5 @@
         "distro": "debian-10",
         "type": "NAMI",
         "version": "1.0.0-3"
-    },
-    "wildfly": {
-        "arch": "amd64",
-        "digest": "6231fc89704e5a70eff9eb509a3c61a3932073ee11ec3c48e5fe7095f8010ac6",
-        "distro": "debian-10",
-        "type": "NAMI",
-        "version": "20.0.1-4"
     }
 }
