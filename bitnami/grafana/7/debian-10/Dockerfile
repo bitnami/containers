@@ -9,10 +9,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 libfontconfig procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-7.3.3-0-linux-amd64-debian-10.tar.gz && \
-    echo "b8677483cf81cb5e61483a43d5d739e62796b198d3727e5fa2fefc0a7748c3bf  /tmp/bitnami/pkg/cache/grafana-7.3.3-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/grafana-7.3.3-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/grafana-7.3.3-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-7.3.4-0-linux-amd64-debian-10.tar.gz && \
+    echo "9956168bf615699912ab9f43d81cff9ed487580f90243bce084b24cc07420a09  /tmp/bitnami/pkg/cache/grafana-7.3.4-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/grafana-7.3.4-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/grafana-7.3.4-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -22,7 +22,7 @@ RUN mv /opt/bitnami/grafana/conf/sample.ini /opt/bitnami/grafana/conf/grafana.in
 COPY rootfs /
 RUN /grafana-plugins.sh
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="7.3.3-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="7.3.4-debian-10-r1" \
     PATH="/opt/bitnami/grafana/bin:$PATH"
 
 EXPOSE 3000
