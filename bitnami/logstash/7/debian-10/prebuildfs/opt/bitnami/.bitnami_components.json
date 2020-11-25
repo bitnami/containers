@@ -15,9 +15,9 @@
     },
     "logstash": {
         "arch": "amd64",
-        "digest": "e67f4f4aa0d5e395085815a6f5f6e967ce89f9fc63c10701bae3743445684c1c",
+        "digest": "f9066f861fbf6a371216ab79b38495b4eda9e98ab0e0029c7c6373410e5ad709",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.10.0-1"
+        "version": "7.10.0-2"
     }
 }

@@ -19,8 +19,10 @@ info "** Starting Logstash **"
 if [[ -n "$LOGSTASH_CONF_STRING" ]]; then
     info "Starting logstash using config string"
     args=( "-e"  "$LOGSTASH_CONF_STRING" )
+elif is_boolean_yes "$LOGSTASH_ENABLE_MULTIPLE_PIPELINES"; then
+    info "Starting logstash using pipelines file (pipelines.yml)"
 else
-    info "Starting logstash using config file"
+    info "Starting logstash using config file ($LOGSTASH_CONF_FILENAME)"
     args=( "-f" "$LOGSTASH_CONF_FILE" )
 fi
 

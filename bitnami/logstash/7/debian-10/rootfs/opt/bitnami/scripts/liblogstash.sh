@@ -33,6 +33,7 @@ export LOGSTASH_BIN_DIR="${LOGSTASH_BASE_DIR}/bin"
 export LOGSTASH_LOG_DIR="${LOGSTASH_BASE_DIR}/logs"
 export LOGSTASH_CONF_FILENAME="${LOGSTASH_CONF_FILENAME:-default_config.conf}"
 export LOGSTASH_CONF_FILE="${LOGSTASH_CONF_DIR}/${LOGSTASH_CONF_FILENAME}"
+export LOGSTASH_PIPELINES_FILE="${LOGSTASH_CONF_DIR}/pipelines.yml"
 export LOGSTASH_LOG_FILE="${LOGSTASH_LOG_DIR}/logstash-plain.log"
 export LOGSTASH_MOUNTED_CONF_DIR="${LOGSTASH_VOLUME_DIR}/config"
 
@@ -44,11 +45,14 @@ export LOGSTASH_DAEMON_GROUP="logstash"
 export LOGSTASH_API_PORT_NUMBER="${LOGSTASH_API_PORT_NUMBER:-9600}"
 export LOGSTASH_CONF_STRING="${LOGSTASH_CONF_STRING:-}"
 export LOGSTASH_EXPOSE_API="${LOGSTASH_EXPOSE_API:-no}"
+
+## Configuration
+export LOGSTASH_ENABLE_MULTIPLE_PIPELINES="${LOGSTASH_ENABLE_MULTIPLE_PIPELINES:-false}"
 EOF
 }
 
 ########################
-# Ensure Logstash is initialized
+# Create dummy config file
 # Globals:
 #   LOGSTASH_*
 # Arguments:
@@ -66,6 +70,23 @@ input {
 output {
   stdout {}
 }
+EOF
+}
+
+########################
+# Create dummy pipeline file
+# Globals:
+#   LOGSTASH_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+logstash_create_dummy_pipeline_file() {
+    info "Creating dummy pipeline file"
+    cat > "$LOGSTASH_PIPELINES_FILE" <<EOF
+- pipeline.id: my-pipeline_1
+  path.config: "$LOGSTASH_CONF_FILE"
 EOF
 }
 
@@ -132,11 +153,18 @@ logstash_initialize() {
     if [[ -z "$LOGSTASH_CONF_STRING" ]]; then
         logstash_copy_mounted_config
 
-        if [[ -e "$LOGSTASH_CONF_FILE" ]]; then
-            info "Config file detected."
+        if [[ -e "$LOGSTASH_MOUNTED_CONF_DIR/$LOGSTASH_CONF_FILENAME" ]]; then
+            info "User's config file detected."
         else
-            info "Deploying Logstash with dummy config file..."
             logstash_create_dummy_config_file
+        fi
+
+        if is_boolean_yes "$LOGSTASH_ENABLE_MULTIPLE_PIPELINES"; then
+            if [[ -e "$LOGSTASH_MOUNTED_CONF_DIR/pipelines.yml" ]]; then
+                info "User's pipelines file detected."
+            else
+                logstash_create_dummy_pipeline_file
+            fi
         fi
     fi
 }
