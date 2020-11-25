@@ -22,23 +22,23 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "7fd7b745562af8259a10e8160fb01e54acb6c92f945b05f1c97018ea61eed173",
+        "digest": "fbbe37430857b70de890ed63538d82de62732ab992eff00c6e5415735a900555",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.23.0-0"
+        "version": "10.23.0-1"
     },
     "rails": {
         "arch": "amd64",
-        "digest": "fb598415ed18c445807aa9c6d84271ea648c6aee4b4d3d229ea28a6c85867f26",
+        "digest": "1e775167da49f542188fbeb5481db875b3801fc83bcfe0e819a2285227d7a6e6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "6.0.3-4-0"
+        "version": "6.0.3-4-1"
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "bffb82ccf296b8fcd3a28255ac372a6234efbcd57a2a2f9b9fa924724038abdb",
+        "digest": "4a1c68af2b652fd873124ebb00ec79574007105730059539b1d3223bbea2af34",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.6.6-1"
+        "version": "2.6.6-2"
     }
 }
