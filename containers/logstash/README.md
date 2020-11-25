@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.10.0`, `7.10.0-debian-10-r6`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.10.0-debian-10-r6/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.10.0`, `7.10.0-debian-10-r7`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.10.0-debian-10-r7/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/logstash GitHub repo](https://github.com/bitnami/bitnami-docker-logstash).
 
@@ -126,25 +126,36 @@ $ docker run -d -p 8080:8080 bitnami/logstash:latest
 
 ## Using a configuration string
 
-For simple configurations, you specify it using the LOGSTASH_CONF_STRING environment variable:
+For simple configurations, you specify it using the `LOGSTASH_CONF_STRING` environment variable:
 
 ```console
 $ docker run --env LOGSTASH_CONF_STRING="input {file {path => \"/tmp/logstash_input\"}} output {file {path => \"/tmp/logstash_output\"}}" bitnami/logstash:latest
 ```
+
 ## Using a configuration file
 
-You can override the default configuration for logstash by mounting your own configuration files on directory `/bitnami/logstash/config`. You will need to indicate the file holding the pipeline definition by setting the LOGSTASH_CONF_FILENAME enviroment variable.
+You can override the default configuration for logstash by mounting your own configuration files on directory `/bitnami/logstash/config`. You will need to indicate the file holding the pipeline definition by setting the `LOGSTASH_CONF_FILENAME` enviroment variable.
 
 ```console
-$ docker run -d --env LOGSTASH_CONF_FILENAME=my_config.conf  -v /path/to/custom-conf-directory:/opt/bitnami/logstash/config bitnami/logstash:latest
+$ docker run -d --env LOGSTASH_CONF_FILENAME=my_config.conf -v /path/to/custom-conf-directory:/bitnami/logstash/config bitnami/logstash:latest
+```
+
+## Using multiple pipelines
+
+You can use [multiple pipelines](https://www.elastic.co/guide/en/logstash/master/multiple-pipelines.html) by setting the `LOGSTASH_ENABLE_MULTIPLE_PIPELINES` environment variable to `true`.
+
+In that case, you should place your `pipelines.yml` file in the mounted volume (together with the rest of the desired configuration files). If the `LOGSTASH_ENABLE_MULTIPLE_PIPELINES` environment variable is set to `true` but there is not any `pipelines.yml` file in the mounted volume, a dummy file is created using `LOGSTASH_CONF_FILENAME` as a single pipeline.
+
+```console
+$ docker run -d --env LOGSTASH_ENABLE_MULTIPLE_PIPELINES=true -v /path/to/custom-conf-directory:/bitnami/logstash/config bitnami/logstash:latest
 ```
 
 ## Exposing logstash API
 
-You can expose the logstash API by setting the environment variable LOGSTASH_EXPOSE_API, you can also change the default port by using LOGSTASH_API_PORT_NUMBER.
+You can expose the logstash API by setting the environment variable `LOGSTASH_EXPOSE_API`, you can also change the default port by using `LOGSTASH_API_PORT_NUMBER`.
 
 ```console
-$ docker run -d --env LOGSTASH_EXPOSE_API=yes --env LOGSTASH_API_PORT_NUMBER=9090 -p 9090:9090 -v /path/to/custom-conf-directory:/opt/bitnami/logstash/config bitnami/logstash:latest
+$ docker run -d --env LOGSTASH_EXPOSE_API=yes --env LOGSTASH_API_PORT_NUMBER=9090 -p 9090:9090 bitnami/logstash:latest
 ```
 
 # Logging
