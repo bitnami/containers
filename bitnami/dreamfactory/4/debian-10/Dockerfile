@@ -8,13 +8,13 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl gzip libargon2-1 libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libedit2 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libuv1 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 procps sudo tar zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
-RUN bitnami-pkg unpack php-7.3.24-2 --checksum 6824a58add74d014474e221f1bbc7a781fda6ec3e05f2a26c703a7ce983924aa
+RUN bitnami-pkg unpack php-7.3.25-0 --checksum d69427a40038eaa10458df68a687452cafd5558de987b54ab08439b28cebf893
 RUN bitnami-pkg unpack apache-2.4.46-3 --checksum 07991412bb24fc8493228f4bd67b28a77e011242971dcdd687a5d2113ac89bc9
 RUN bitnami-pkg install redis-client-6.0.9-0 --checksum 2a506be874ecbc2d4f667e9b714d44441eb476b7b6574b17d220c0421d20b73b
 RUN bitnami-pkg install postgresql-client-11.10.0-0 --checksum ad9f4e750583d0f7b02afc119c3b505fc780c0c13407983a96f2923dc7e33c3e
 RUN bitnami-pkg install mysql-client-10.3.27-0 --checksum f96905e763a6334b75a7cdb07f8d89658cde02be41cb09d91d0682fc649fdcff
 RUN bitnami-pkg install mongodb-client-4.4.2-0 --checksum 145f4cccf974e123a3ffc7b6da856f06fabce35cd0448865a0da7ad154737202
-RUN bitnami-pkg install libphp-7.3.24-0 --checksum 56a9ba9702d7fb2ee7dedf181ee00eb6756130a234710fc04653650837f3a3ca
+RUN bitnami-pkg install libphp-7.3.25-0 --checksum 2a37cccc40fca206beb2a7850815f5bba49ba7b80ebd2e571b75bf825a6ad608
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN bitnami-pkg unpack dreamfactory-4.3.2-0 --checksum ca3e815f6a1c530bf20a93ec58f7f703219345c38c7f4b698552956f55919277
@@ -28,7 +28,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="4.3.2-debian-10-r53" \
+    BITNAMI_IMAGE_VERSION="4.3.2-debian-10-r54" \
     DREAMFACTORY_DATABASE_TYPE="mariadb" \
     DREAMFACTORY_ENABLE_MARIADB_SERVICE="no" \
     DREAMFACTORY_ENABLE_MONGODB_SERVICE="yes" \
