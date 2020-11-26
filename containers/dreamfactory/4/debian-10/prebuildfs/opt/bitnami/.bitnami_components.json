@@ -22,10 +22,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "56a9ba9702d7fb2ee7dedf181ee00eb6756130a234710fc04653650837f3a3ca",
+        "digest": "2a37cccc40fca206beb2a7850815f5bba49ba7b80ebd2e571b75bf825a6ad608",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.24-0"
+        "version": "7.3.25-0"
     },
     "mongodb-client": {
         "arch": "amd64",
@@ -43,10 +43,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "6824a58add74d014474e221f1bbc7a781fda6ec3e05f2a26c703a7ce983924aa",
+        "digest": "d69427a40038eaa10458df68a687452cafd5558de987b54ab08439b28cebf893",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.24-2"
+        "version": "7.3.25-0"
     },
     "postgresql-client": {
         "arch": "amd64",
