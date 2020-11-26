@@ -9,10 +9,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libbz2-1.0 libc6 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libtinfo6 procps tar wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/python-2.7.18-7-linux-amd64-debian-10.tar.gz && \
-    echo "ad766cf1199acb998e32bb90ea502f16fe985b5cee6ed6ba71b88820c906be2e  /tmp/bitnami/pkg/cache/python-2.7.18-7-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/python-2.7.18-7-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/python-2.7.18-7-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/python-2.7.18-8-linux-amd64-debian-10.tar.gz && \
+    echo "c692b9d815b3fc2e6fa06cb3aa20ccc96c7bb183e26166a58cc0abf8d8b6740c  /tmp/bitnami/pkg/cache/python-2.7.18-8-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/python-2.7.18-8-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/python-2.7.18-8-linux-amd64-debian-10.tar.gz
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jenkins-exporter-0.20171225.0-2-linux-amd64-debian-10.tar.gz && \
     echo "9ff47f0a26c8e3c7846b2ab7e83596758eb7ff92d0824a161a1193ec1d4f47e0  /tmp/bitnami/pkg/cache/jenkins-exporter-0.20171225.0-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/jenkins-exporter-0.20171225.0-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -22,7 +22,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="jenkins-exporter" \
-    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-10-r285" \
+    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-10-r286" \
     PATH="/opt/bitnami/jenkins-exporter/venv/bin:$PATH"
 
 EXPOSE 9118
