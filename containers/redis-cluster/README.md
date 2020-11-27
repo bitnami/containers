@@ -144,6 +144,7 @@ Refer to the [Redis configuration](http://redis.io/topics/config) manual for the
 
 
 The following env vars are supported for this container:
+
 | Name                        | Description                                                                                                                                                                            |
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `REDIS_DISABLE_COMMANDS`    | Disables the specified Redis commands                                                                                                                                                  |
@@ -164,6 +165,7 @@ The following env vars are supported for this container:
 | `REDIS_TLS_CA_FILE`         | File containing the CA of the certificate. No defaults.                                                                                                                                |
 | `REDIS_TLS_DH_PARAMS_FILE`  | File containing DH params (in order to support DH based ciphers). No defaults.                                                                                                         |
 | `REDIS_TLS_AUTH_CLIENTS`    | Whether to require clients to authenticate or not. Defaults to `yes`.                                                                                                                  |
+| `REDIS_CLUSTER_CREATOR_WAIT_TIME_AFTER_NODE_READY` | Number of seconds to wait before initializing the cluster. Set this to a higher value if you sometimes have issues with initial cluster creation. Defaults to `0`. |
 
 Once all the Redis nodes are running you need to execute command like the following to initiate the cluster:
 
