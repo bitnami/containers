@@ -27,12 +27,16 @@ You can find the default credentials and available configuration options in the 
 
 > This [CVE scan report](https://quay.io/repository/bitnami/matomo?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
+# Why use a non-root container?
+
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
+
 # Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.14.1`, `3.14.1-debian-10-r81`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.14.1-debian-10-r81/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.14.1`, `3.14.1-debian-10-r82`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/3.14.1-debian-10-r82/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
 
@@ -95,7 +99,7 @@ If you want to run the application manually instead of using docker-compose, the
 
   ```console
   $ docker volume create --name matomo_data
-  $ docker run -d --name matomo -p 80:80 -p 443:443 \
+  $ docker run -d --name matomo -p 80:8080 -p 443:8443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MATOMO_DATABASE_USER=bn_matomo \
     -e MATOMO_DATABASE_NAME=bitnami_matomo \
@@ -134,6 +138,8 @@ services:
   ...
 ```
 
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+
 ### Mount host directories as data volumes using the Docker command line
 
 In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
@@ -168,6 +174,56 @@ In this case you need to specify the directories to mount on the run command. Th
     --volume /path/to/matomo-persistence:/bitnami \
     bitnami/matomo:latest
   ```
+
+## Backing up your container
+
+To backup your data, configuration and logs, follow these simple steps:
+
+### Step 1: Stop the currently running container
+
+```console
+$ docker stop matomo
+```
+
+Or using Docker Compose:
+
+```console
+$ docker-compose stop matomo
+```
+
+### Step 2: Run the backup command
+
+We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
+
+```console
+$ docker run --rm -v /path/to/matomo-backups:/backups --volumes-from matomo busybox \
+  cp -a /bitnami/matomo /backups/latest
+```
+
+## Restoring a backup
+
+Restoring a backup is as simple as mounting the backup as volumes in the containers.
+
+For the MariaDB database container:
+
+```diff
+ $ docker run -d --name mariadb \
+   ...
+-  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
++  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
+   bitnami/mariadb:latest
+```
+
+For the Matomo container:
+
+```diff
+ $ docker run -d --name matomo \
+   ...
+-  --volume /path/to/matomo-persistence:/bitnami/matomo \
++  --volume /path/to/matomo-backups/latest:/bitnami/matomo \
+   bitnami/matomo:latest
+```
+
 
 # Upgrading Matomo
 
@@ -210,8 +266,10 @@ You can use these snapshots to restore the application state should the upgrade 
 
 When you start the Matomo image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
-##### User and Site configuration
+### User and Site configuration
 
+ - `APACHE_HTTP_PORT_NUMBER`: Port used by Apache for HTTP. Default: **8080**
+ - `APACHE_HTTPS_PORT_NUMBER`: Port used by Apache for HTTPS. Default: **8443**
  - `MATOMO_USERNAME`: Matomo application username. Default: **User**
  - `MATOMO_HOST`: Matomo application host. Default: **127.0.0.1**
  - `MATOMO_PASSWORD`: Matomo application password. Default: **bitnami**
@@ -226,16 +284,16 @@ When you start the Matomo image, you can adjust the configuration of the instanc
  - `MATOMO_DATABASE_SSL_KEY_FILE`: Path to the database client certificate key. No defaults.
  - `MATOMO_VERIFY_DATABASE_SSL`: Whether to verify the database SSL certificate when SSL is enabled. Default: **yes**
 
-##### Use an existing database
+### Use an existing database
 
-- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
-- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `MATOMO_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MATOMO_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 - `MATOMO_DATABASE_NAME`: Database name that Matomo will use to connect with the database. Default: **bitnami_matomo**
 - `MATOMO_DATABASE_USER`: Database user that Matomo will use to connect with the database. Default: **bn_matomo**
 - `MATOMO_DATABASE_PASSWORD`: Database password that Matomo will use to connect with the database. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### Create a database for Matomo using mysql-client
+### Create a database for Matomo using mysql-client
 
 - `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
 - `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
@@ -246,9 +304,60 @@ When you start the Matomo image, you can adjust the configuration of the instanc
 - `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### PHP configuration
+##### SMTP Configuration
+
+To configure Matomo to send email using SMTP you can set the following environment variables:
+
+- `MATOMO_SMTP_HOST`: SMTP host.
+- `MATOMO_SMTP_PORT`: SMTP port.
+- `MATOMO_SMTP_USER`: SMTP account user.
+- `MATOMO_SMTP_PASSWORD`: SMTP account password.
+- `MATOMO_SMTP_PROTOCOL`: SMTP protocol.
+
+##### Example
+
+This would be an example of SMTP configuration using a Gmail account:
+
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-matomo/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+  matomo:
+    ...
+    environment:
+      - MATOMO_DATABASE_USER=bn_matomo
+      - MATOMO_DATABASE_NAME=bitnami_matomo
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MATOMO_SMTP_HOST=smtp.gmail.com
+      - MATOMO_SMTP_PORT=587
+      - MATOMO_SMTP_USER=your_email@gmail.com
+      - MATOMO_SMTP_PASSWORD=your_password
+  ...
+```
+ * For manual execution:
+
+```console
+  $ docker run -d --name matomo -p 80:8080 -p 443:8443 \
+    --env MATOMO_DATABASE_USER=bn_matomo \
+    --env MATOMO_DATABASE_NAME=bitnami_matomo \
+    --env MATOMO_SMTP_HOST=smtp.gmail.com \
+    --env MATOMO_SMTP_PORT=587 \
+    --env MATOMO_SMTP_USER=your_email@gmail.com \
+    --env MATOMO_SMTP_PASSWORD=your_password \
+    --network matomo-tier \
+    --volume /path/to/matomo-persistence:/bitnami \
+    bitnami/matomo:latest
+```
+
+### PHP configuration
 
 - `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **128M**
+- `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
+- `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
+- `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
+- `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
+- `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
+- `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
+- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. Default: **yes**
 
 If you want to add a new environment variable:
 
@@ -346,11 +455,17 @@ Here is an example of extending the image with the following modifications:
 FROM bitnami/matomo
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+## Change user to perform privileged actions
+USER 0
+
 ## Install 'vim'
 RUN install_packages vim
 
 ## Enable mod_ratelimit module
 RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
+
+## Revert to the original non-root user
+USER 1001
 
 ## Modify the ports used by Apache by default
 # It is also possible to change these environment variables at runtime
@@ -395,6 +510,27 @@ volumes:
 ```
 
 # Notable Changes
+
+## 3.14.1-debian-10-r79
+
+- The size of the container image has been decreased.
+- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+- The Matomo container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Apache daemon was started as the `daemon` user. From now on, both the container and the Apache daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
+  - The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
+  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the Matomo site by exporting its content, and importing it on a new Matomo container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
+
+To upgrade a previous Bitnami Matomo container image, which did not support non-root, the easiest way is to start the new image as a root user and updating the port numbers. Modify your docker-compose.yml file as follows:
+
+```diff
+       - ALLOW_EMPTY_PASSWORD=yes
++    user: root
+     ports:
+-      - '80:80'
+-      - '443:443'
++      - '80:8080'
++      - '443:8443'
+     volumes:
+```
 
 ## 3.9.1-debian-9-r51 and 3.9.1-ol-7-r62
 
