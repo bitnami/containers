@@ -22,10 +22,10 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "fbbe37430857b70de890ed63538d82de62732ab992eff00c6e5415735a900555",
+        "digest": "1ed8b14879cb2cd99ee53a9bfe53dc1dbfe3c9fccab2c3aa7a37ddbef248ff74",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.23.0-1"
+        "version": "14.15.1-1"
     },
     "rails": {
         "arch": "amd64",
