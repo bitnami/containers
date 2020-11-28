@@ -370,7 +370,6 @@ postgresql_get_major_version() {
     psql --version | grep -oE "[0-9]+\.[0-9]+" | grep -oE "^[0-9]+"
 }
 
-
 ########################
 # Change postgresql.conf by setting replication parameters
 # Globals:
@@ -394,7 +393,6 @@ postgresql_configure_replication_parameters() {
     postgresql_set_property "hot_standby" "on"
 }
 
-
 ########################
 # Change postgresql.conf by setting parameters for synchronous replication
 # Globals:
@@ -410,7 +408,6 @@ postgresql_configure_synchronous_replication() {
         postgresql_set_property "synchronous_standby_names" "${POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS} (\"${POSTGRESQL_CLUSTER_APP_NAME}\")"
     fi
 }
-
 
 ########################
 # Change postgresql.conf by setting TLS properies
@@ -637,7 +634,7 @@ postgresql_initialize() {
             postgresql_configure_recovery
         fi
     fi
-     # TLS Modifications on pghba need to be performed after properly configuring postgresql.conf file
+    # TLS Modifications on pghba need to be performed after properly configuring postgresql.conf file
     is_boolean_yes "$create_pghba_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && [[ -n $POSTGRESQL_TLS_CA_FILE ]] && postgresql_tls_auth_configuration
 
     is_boolean_yes "$create_conf_file" && [[ -n "$POSTGRESQL_SHARED_PRELOAD_LIBRARIES" ]] && postgresql_set_property "shared_preload_libraries" "$POSTGRESQL_SHARED_PRELOAD_LIBRARIES"
@@ -728,9 +725,9 @@ postgresql_stop() {
     if [[ -f "$POSTGRESQL_PID_FILE" ]]; then
         info "Stopping PostgreSQL..."
         if am_i_root; then
-          gosu "$POSTGRESQL_DAEMON_USER" "${cmd[@]}"
+            gosu "$POSTGRESQL_DAEMON_USER" "${cmd[@]}"
         else
-          "${cmd[@]}"
+            "${cmd[@]}"
         fi
     fi
 }
@@ -796,7 +793,10 @@ postgresql_start_bg() {
     else
         "${pg_ctl_cmd[@]}" "start" "${pg_ctl_flags[@]}" >/dev/null 2>&1
     fi
-    local -r pg_isready_args=("-U" "postgres")
+    local pg_isready_args=("-U" "postgres")
+    if [[ "$POSTGRESQL_PORT_NUMBER" != "5432" ]]; then
+        pg_isready_args+=("-p" "$POSTGRESQL_PORT_NUMBER")
+    fi
     local counter=$POSTGRESQL_INIT_MAX_TIMEOUT
     while ! "$POSTGRESQL_BIN_DIR"/pg_isready "${pg_isready_args[@]}" >/dev/null 2>&1; do
         sleep 1
@@ -927,7 +927,6 @@ postgresql_slave_init_db() {
         fi
     done
 }
-
 
 ########################
 # Create recovery.conf in slave node
