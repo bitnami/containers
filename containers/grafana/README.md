@@ -7,10 +7,8 @@ Grafana is an open source, feature rich metrics dashboard and graph editor for G
 ## TL;DR
 
 ```console
-$ docker run -p 3000:3000 --name grafana bitnami/grafana:latest
+$ docker run --name grafana bitnami/grafana:latest
 ```
-
-Head to http://localhost:3000/ and log in with the default username **admin** and the password **admin**. You will be asked to set a new password, afterwards.
 
 ## Why use Bitnami Images?
 
@@ -38,7 +36,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.3.4`, `7.3.4-debian-10-r3`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/7.3.4-debian-10-r3/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.3.4`, `7.3.4-debian-10-r4`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/7.3.4-debian-10-r4/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -81,7 +79,7 @@ $ docker network create grafana-network --driver bridge
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `grafana-network` network.
 
 ```console
-$ docker run -p 3000:3000 --name grafana-node1 --network grafana-network bitnami/grafana:latest
+$ docker run --name grafana-node1 --network grafana-network bitnami/grafana:latest
 ```
 
 #### Step 3: Run another containers
@@ -224,7 +222,7 @@ $ docker rm -v grafana
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
 ```console
-$ docker run -p 3000:3000 --name grafana bitnami/grafana:latest
+$ docker run --name grafana bitnami/grafana:latest
 ```
 
 ## Notable Changes
