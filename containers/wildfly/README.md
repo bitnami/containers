@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`21`, `21-debian-10`, `21.0.1`, `21.0.1-debian-10-r10` (21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/21.0.1-debian-10-r10/21/debian-10/Dockerfile)
-* [`20`, `20-debian-10`, `20.0.1`, `20.0.1-debian-10-r118`, `latest` (20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/20.0.1-debian-10-r118/20/debian-10/Dockerfile)
+* [`20`, `20-debian-10`, `20.0.1`, `20.0.1-debian-10-r119`, `latest` (20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/20.0.1-debian-10-r119/20/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
