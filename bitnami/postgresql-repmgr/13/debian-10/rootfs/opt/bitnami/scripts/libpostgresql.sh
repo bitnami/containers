@@ -278,7 +278,7 @@ postgresql_create_pghba() {
 postgresql_allow_local_connection() {
     cat <<EOF >>"$POSTGRESQL_PGHBA_FILE"
 local    all             all                                     trust
-host     all             all        127.0.0.1/0                  trust
+host     all             all        127.0.0.1/32                 trust
 host     all             all        ::1/128                      trust
 EOF
 }
