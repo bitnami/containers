@@ -24,6 +24,7 @@ moodle_env_vars=(
     MOODLE_SITE_NAME
     MOODLE_USERNAME
     MOODLE_PASSWORD
+    MOODLE_DATABASE_MIN_VERSION
     MOODLE_EMAIL
     MOODLE_SMTP_HOST
     MOODLE_SMTP_PORT_NUMBER
@@ -73,6 +74,7 @@ export MOODLE_SITE_NAME="${MOODLE_SITE_NAME:-New Site}" # only used during the f
 # Moodle credentials
 export MOODLE_USERNAME="${MOODLE_USERNAME:-user}" # only used during the first initialization
 export MOODLE_PASSWORD="${MOODLE_PASSWORD:-bitnami}" # only used during the first initialization
+export MOODLE_DATABASE_MIN_VERSION="${MOODLE_DATABASE_MIN_VERSION:-}" # only used during the first initialization
 export MOODLE_EMAIL="${MOODLE_EMAIL:-user@example.com}" # only used during the first initialization
 
 # Moodle SMTP credentials

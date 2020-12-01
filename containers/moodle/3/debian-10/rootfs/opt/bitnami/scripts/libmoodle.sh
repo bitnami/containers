@@ -76,6 +76,23 @@ moodle_validate() {
 }
 
 ########################
+# Bypass Azure for ManagedDB database version check
+# We detected some issues in the way that Azure Database for MariaDB
+# shows the version. This hack will bypass the Moodle installation check
+# Globals:
+#   MOODLE_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+moodle_fix_manageddb_check() {
+    info "Changing minimum required MariaDB version to $MOODLE_DATABASE_MIN_VERSION"
+    replace_in_file "$MOODLE_BASE_DIR/admin/environment.xml" "name=\"mariadb\" version=\"[^\"]+\"" "name=\"mariadb\" version=\"$MOODLE_DATABASE_MIN_VERSION\""
+    replace_in_file "$MOODLE_BASE_DIR/admin/environment.xml" "name=\"mysql\" version=\"[^\"]+\"" "name=\"mysql\" version=\"$MOODLE_DATABASE_MIN_VERSION\""
+}
+
+########################
 # Ensure Moodle is initialized
 # Globals:
 #   MOODLE_*
@@ -109,7 +126,7 @@ moodle_initialize() {
         # Create Moodle install argument list, allowing to pass custom options via 'MOODLE_INSTALL_EXTRA_ARGS'
         local -a moodle_install_args=("--dbtype=${db_type}" "--dbhost=${db_host}" "--dbport=${db_port}" "--dbname=${db_name}" "--dbuser=${db_user}" "--dbpass=${db_pass}")
         local -a extra_args
-        read -r -a extra_args <<< "$MOODLE_INSTALL_EXTRA_ARGS"
+        read -r -a extra_args <<<"$MOODLE_INSTALL_EXTRA_ARGS"
         [[ "${#extra_args[@]}" -gt 0 ]] && moodle_install_args+=("${extra_args[@]}")
 
         # Setup Moodle
@@ -199,7 +216,7 @@ moodle_conf_get() {
     debug "Getting ${key} from Moodle configuration"
     # Sanitize key (sed does not support fixed string substitutions)
     local sanitized_pattern
-    sanitized_pattern="^\s*(//\s*)?$(sed 's/[]\[^$.*/]/\\&/g' <<< "$key")\s*=>?([^;,]+)[;,]"
+    sanitized_pattern="^\s*(//\s*)?$(sed 's/[]\[^$.*/]/\\&/g' <<<"$key")\s*=>?([^;,]+)[;,]"
     debug "$sanitized_pattern"
     grep -E "$sanitized_pattern" "$MOODLE_CONF_FILE" | sed -E "s|${sanitized_pattern}|\2|" | tr -d "\"' "
 }
@@ -260,6 +277,8 @@ moodle_install() {
         "--agree-license"
         "$@"
     )
+    # HACK: Change database version check for Azure Database for MariaDB
+    ! is_empty_value "$MOODLE_DATABASE_MIN_VERSION" && moodle_fix_manageddb_check
     pushd "$MOODLE_BASE_DIR" >/dev/null
     # Run as web server user to avoid having to change permissions/ownership afterwards
     if am_i_root; then
