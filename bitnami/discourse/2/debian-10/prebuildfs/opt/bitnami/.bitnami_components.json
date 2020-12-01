@@ -15,10 +15,10 @@
     },
     "discourse-sidekiq": {
         "arch": "amd64",
-        "digest": "c8aa450f536121581d4fcbce0747b6e9862aa213371045b747ad10b1a6e7cdde",
+        "digest": "6fcce674bccb7d88e094ec98f0426bac8cfcec71daa11a4feb255f64db93750e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.5.5-0"
+        "version": "2.6.0-0"
     },
     "git": {
         "arch": "amd64",
