@@ -29,10 +29,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "590680e075e56bfc9a503f6e020dc54d30623a50e52795ccf36724a8360541b1",
+        "digest": "052b9544a5dc57e67dbd8297fc9cb591898da1bbf7ca13207542f5345f6d52be",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.13-0"
+        "version": "7.4.13-1"
     },
     "phpmyadmin": {
         "arch": "amd64",
