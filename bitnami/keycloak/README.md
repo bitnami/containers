@@ -34,7 +34,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`11`, `11-debian-10`, `11.0.3`, `11.0.3-debian-10-r25`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/11.0.3-debian-10-r25/11/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.0.3`, `11.0.3-debian-10-r26`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/11.0.3-debian-10-r26/11/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
@@ -75,7 +75,7 @@ The Bitnami Keycloak container can create a default admin user by setting the fo
 The Bitnami Keycloak container requires a PostgreSQL database to work. This is configured with the following environment variables:
 
 - `KEYCLOAK_DATABASE_HOST`: PostgreSQL host. Default: **postgresql**.
-- `KEYCLOAK_DATABASE_HOST`: PostgreSQL port. Default: **5432**.
+- `KEYCLOAK_DATABASE_PORT`: PostgreSQL port. Default: **5432**.
 - `KEYCLOAK_DATABASE_NAME`: PostgreSQL database name. Default : **bitnami_keycloak**.
 - `KEYCLOAK_DATABASE_USER`: PostgreSQL database user. Default : **bn_keycloak**.
 - `KEYCLOAK_DATABASE_PASSWORD`: PostgreSQL database password. No defaults.
