@@ -8,10 +8,10 @@
     },
     "discourse": {
         "arch": "amd64",
-        "digest": "d263f25f15c84e0109466c98e95bf6c5f3258625d771e1d29c45a42189e0a3ce",
+        "digest": "7e64c1d9b50e82f5a579388c4e5b6cb9e1223d9363ab1d050ebd160eb411b445",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.5.5-0"
+        "version": "2.6.0-0"
     },
     "discourse-sidekiq": {
         "arch": "amd64",
