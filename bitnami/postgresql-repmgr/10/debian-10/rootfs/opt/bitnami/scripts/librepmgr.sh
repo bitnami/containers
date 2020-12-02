@@ -643,6 +643,8 @@ repmgr_initialize() {
         postgresql_start_bg
         repmgr_unregister_standby
         repmgr_register_standby
-        repmgr_standby_follow
+        if [[ "$psql_major_version" -lt "12" ]]; then
+           repmgr_standby_follow
+        fi
     fi
 }
