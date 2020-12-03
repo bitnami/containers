@@ -1,30 +1,28 @@
 version: '2'
-
 services:
   mariadb:
     image: 'docker.io/bitnami/mariadb:10.3-debian-10'
     environment:
+      - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_orangehrm
       - MARIADB_DATABASE=bitnami_orangehrm
-      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'mariadb_data:/bitnami'
+      - 'mariadb_data:/bitnami/mariadb'
   orangehrm:
     image: 'docker.io/bitnami/orangehrm:4-debian-10'
+    ports:
+      - '80:8080'
+      - '443:8443'
     environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
+      - ORANGEHRM_DATABASE_HOST=mariadb
+      - ORANGEHRM_DATABASE_PORT_NUMBER=3306
       - ORANGEHRM_DATABASE_USER=bn_orangehrm
       - ORANGEHRM_DATABASE_NAME=bitnami_orangehrm
       - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '80:80'
-      - '443:443'
+    volumes:
+      - 'orangehrm_data:/bitnami/orangehrm'
     depends_on:
       - mariadb
-    volumes:
-      - 'orangehrm_data:/bitnami'
-
 volumes:
   mariadb_data:
     driver: local

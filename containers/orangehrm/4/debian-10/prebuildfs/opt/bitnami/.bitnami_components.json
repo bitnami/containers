@@ -15,17 +15,17 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "38466eb6522a8dd07cf2abbbab6a13db6ce60dd96a556635900e60338999fe9b",
+        "digest": "2a37cccc40fca206beb2a7850815f5bba49ba7b80ebd2e571b75bf825a6ad608",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.2.34-1"
+        "version": "7.3.25-0"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "dc105b313dff78fca99abe1d8dec079b6e0a3e7e3bca0da1ab0ff08da8ec330c",
+        "digest": "f96905e763a6334b75a7cdb07f8d89658cde02be41cb09d91d0682fc649fdcff",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.2.36-0"
+        "version": "10.3.27-0"
     },
     "orangehrm": {
         "arch": "amd64",
@@ -36,16 +36,16 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "31a29a03d7c54c67278e06318e3c81fdfab338fdec7e60640397b344cd43bb2a",
+        "digest": "f197077c17bfd3aa8ffb20205cfb01118e97266f8d41a58db7ca0f4bf31966d8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.2.34-9"
+        "version": "7.3.25-1"
     },
-    "tini": {
+    "render-template": {
         "arch": "amd64",
-        "digest": "9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d",
+        "digest": "8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.19.0-1"
+        "version": "1.0.0-3"
     }
 }
