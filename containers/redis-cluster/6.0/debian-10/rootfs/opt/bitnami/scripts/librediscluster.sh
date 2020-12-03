@@ -69,6 +69,10 @@ redis_cluster_validate() {
         [[ -z "$REDIS_CLUSTER_REPLICAS" ]] && print_validation_error "To create the cluster you need to provide the number of replicas"
     fi
 
+    if (( REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP < 0 )); then
+        print_validation_error "REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP must be greater or equal to zero"
+    fi
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -131,7 +135,13 @@ redis_cluster_create() {
           echo "Node $node not ready, waiting for all the nodes to be ready..."
           sleep 1
       done
-      ips+=($(dns_lookup "$node"))
+  done
+
+  echo "Waiting ${REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP}s before querying node ip addresses"
+  sleep "${REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP}"
+
+  for node in "${nodes[@]}"; do
+    ips+=("$(wait_for_dns_lookup "${node}" "${REDIS_CLUSTER_DNS_LOOKUP_RETRIES}" "${REDIS_CLUSTER_DNS_LOOKUP_SLEEP}")")
   done
 
   if is_boolean_yes "$REDIS_TLS_ENABLED"; then
