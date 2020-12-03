@@ -34,7 +34,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`11`, `11-debian-10`, `11.0.3`, `11.0.3-debian-10-r26`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/11.0.3-debian-10-r26/11/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.0.3`, `11.0.3-debian-10-r27`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/11.0.3-debian-10-r27/11/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
@@ -87,6 +87,16 @@ The listening port and listening address can be configured with the following en
 - `KEYCLOAK_HTTP_PORT`: Keycloak HTTP port. Default: **8080**.
 - `KEYCLOAK_HTTPS_PORT`: Keycloak HTTPS port. Default: **8443**.
 - `KEYCLOAK_BIND_ADDRESS`: Keycloak bind address. Default: **0.0.0.0**.
+
+## Extra arguments to Keycloak startup
+
+In case you want to add extra flags to the Keycloak `standalone.sh` command, use the `KEYCLOAK_EXTRA_ARGS` variable. Example:
+
+```console
+$ docker run --name keycloak \
+  -e KEYCLOAK_EXTRA_ARGS="-Dkeycloak.profile.feature.scripts=enabled" \
+  bitnami/keycloak:latest
+```
 
 ## Initializing a new instance
 
