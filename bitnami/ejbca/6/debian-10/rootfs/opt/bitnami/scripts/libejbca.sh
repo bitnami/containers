@@ -79,7 +79,7 @@ ejbca_wildfly_command() {
 #   None
 #########################
 wait_for_wildfly() {
-  retry_while wildfly_not_ready
+    retry_while wildfly_not_ready
 }
 
 ########################
@@ -98,7 +98,6 @@ wildfly_not_ready() {
     [[ "$status" =~ "running" ]] && return 0 || return 1
 }
 
-
 ########################
 # Configure Wildfly
 # Globals:
@@ -110,7 +109,8 @@ wildfly_not_ready() {
 #########################
 ejbca_configure_wildfly() {
     info "Creating data source"
-    ejbca_wildfly_command "data-source add --name=ejbcads --driver-name=\"mariadb-java-client-2.7.0.jar\" --connection-url=\"jdbc:mysql://${EJBCA_DATABASE_HOST}:${EJBCA_DATABASE_PORT}/${EJBCA_DATABASE_NAME}\" --jndi-name=\"java:/EjbcaDS\" --use-ccm=true --driver-class=\"org.mariadb.jdbc.Driver\" --user-name=\"${EJBCA_DATABASE_USERNAME}\" --password=\"${EJBCA_DATABASE_PASSWORD}\" --validate-on-match=true --background-validation=false --prepared-statements-cache-size=50 --share-prepared-statements=true --min-pool-size=5 --max-pool-size=150 --pool-prefill=true --transaction-isolation=TRANSACTION_READ_COMMITTED --check-valid-connection-sql=\"select 1;\""
+    local -r pluginJar="$(basename "$EJBCA_WILDFLY_DEPLOY_DIR"/mariadb*)"
+    ejbca_wildfly_command "data-source add --name=ejbcads --driver-name=\"${pluginJar}\" --connection-url=\"jdbc:mysql://${EJBCA_DATABASE_HOST}:${EJBCA_DATABASE_PORT}/${EJBCA_DATABASE_NAME}\" --jndi-name=\"java:/EjbcaDS\" --use-ccm=true --driver-class=\"org.mariadb.jdbc.Driver\" --user-name=\"${EJBCA_DATABASE_USERNAME}\" --password=\"${EJBCA_DATABASE_PASSWORD}\" --validate-on-match=true --background-validation=false --prepared-statements-cache-size=50 --share-prepared-statements=true --min-pool-size=5 --max-pool-size=150 --pool-prefill=true --transaction-isolation=TRANSACTION_READ_COMMITTED --check-valid-connection-sql=\"select 1;\""
     ejbca_wildfly_command ":reload"
     wait_for_wildfly
 
@@ -237,7 +237,6 @@ ejbca_stop_wildfly() {
     ejbca_wildfly_command ":shutdown"
 }
 
-
 #######################
 # Create wildfly management user
 # Globals:
@@ -252,7 +251,6 @@ ejbca_create_management_user() {
 
     "$EJBCA_WILDFLY_BIN_DIR"/add-user.sh -u "$EJBCA_WILDFLY_ADMIN_USER" -p "$EJBCA_WILDFLY_ADMIN_PASSWORD" -s
 }
-
 
 #######################
 # Deploy package in wildfly
@@ -285,7 +283,7 @@ ejbca_wildfly_deploy() {
 #   None
 #########################
 database_not_ready() {
-    echo "select 1" | debug_execute mysql -u"$EJBCA_DATABASE_USERNAME" -p"$EJBCA_DATABASE_PASSWORD" -h"$EJBCA_DATABASE_HOST" -P"$EJBCA_DATABASE_PORT" "$EJBCA_DATABASE_NAME" 
+    echo "select 1" | debug_execute mysql -u"$EJBCA_DATABASE_USERNAME" -p"$EJBCA_DATABASE_PASSWORD" -h"$EJBCA_DATABASE_HOST" -P"$EJBCA_DATABASE_PORT" "$EJBCA_DATABASE_NAME"
 }
 
 ########################
@@ -304,8 +302,8 @@ ejbca_create_database() {
     retry_while database_not_ready
 
     # Create database structure
-    mysql -u"$EJBCA_DATABASE_USERNAME" -p"$EJBCA_DATABASE_PASSWORD" -h"$EJBCA_DATABASE_HOST" -P"$EJBCA_DATABASE_PORT" "$EJBCA_DATABASE_NAME" < "$EJBCA_DB_SCRIPT_TABLES"
-    mysql -u"$EJBCA_DATABASE_USERNAME" -p"$EJBCA_DATABASE_PASSWORD" -h"$EJBCA_DATABASE_HOST" -P"$EJBCA_DATABASE_PORT" "$EJBCA_DATABASE_NAME" < "$EJBCA_DB_SCRIPT_INDEXES"
+    mysql -u"$EJBCA_DATABASE_USERNAME" -p"$EJBCA_DATABASE_PASSWORD" -h"$EJBCA_DATABASE_HOST" -P"$EJBCA_DATABASE_PORT" "$EJBCA_DATABASE_NAME" <"$EJBCA_DB_SCRIPT_TABLES"
+    mysql -u"$EJBCA_DATABASE_USERNAME" -p"$EJBCA_DATABASE_PASSWORD" -h"$EJBCA_DATABASE_HOST" -P"$EJBCA_DATABASE_PORT" "$EJBCA_DATABASE_NAME" <"$EJBCA_DB_SCRIPT_INDEXES"
 }
 
 ########################
@@ -326,7 +324,7 @@ ejbca_generate_ca() {
 
     info "Generating CA"
     ejbca_ca="$(ejbca_command ca listcas 2>&1)"
-    if ! grep -q 'CA Name: ' <<< "$ejbca_ca"; then
+    if ! grep -q 'CA Name: ' <<<"$ejbca_ca"; then
         info "Init CA"
         ejbca_command ca init \
             --dn "CN=$EJBCA_CA_NAME,$EJBCA_BASE_DN" \
@@ -351,10 +349,10 @@ ejbca_generate_ca() {
     fi
 
     ejbca_ca="$(ejbca_command ca listcas 2>&1)"
-    if  grep -q "CA Name: $EJBCA_CA_NAME" <<< "$ejbca_ca"; then
-        existing_management_ca="$(grep "CA Name: $EJBCA_CA_NAME" <<< "$ejbca_ca" | sed 's/.*CA Name: //g')"
+    if grep -q "CA Name: $EJBCA_CA_NAME" <<<"$ejbca_ca"; then
+        existing_management_ca="$(grep "CA Name: $EJBCA_CA_NAME" <<<"$ejbca_ca" | sed 's/.*CA Name: //g')"
 
-        if [[  "$existing_management_ca" == "$EJBCA_CA_NAME" ]]; then
+        if [[ "$existing_management_ca" == "$EJBCA_CA_NAME" ]]; then
 
             end_entity_name="$instance_hostname"
             if [ "$instance_hostname" == "ejbca" ]; then
@@ -443,15 +441,15 @@ ejbca_create_truststore() {
 
     info "Load the CAs in the trustkeystore"
     ejbca_ca="$(ejbca_command ca listcas 2>&1)"
-    if grep -q 'CA Name: ' <<< "$ejbca_ca"; then
-        ca_list=($(grep 'CA Name: ' <<< "$ejbca_ca" | sed 's/.*CA Name: //g'))
+    if grep -q 'CA Name: ' <<<"$ejbca_ca"; then
+        ca_list=($(grep 'CA Name: ' <<<"$ejbca_ca" | sed 's/.*CA Name: //g'))
         for line in "${ca_list[@]}"; do
             ejbca_command ca getcacert \
                 --caname "$line" \
                 -f "$EJBCA_TEMP_CERT" \
                 -der
 
-            if [ -f "$EJBCA_TEMP_CERT" ] ; then
+            if [ -f "$EJBCA_TEMP_CERT" ]; then
                 ejbca_keytool_command -alias "$line" \
                     -import -trustcacerts \
                     -file "$EJBCA_TEMP_CERT" \
@@ -478,14 +476,14 @@ ejbca_persist_keystores() {
 
     # Persist keystores and passwords
     mv "$EJBCA_TEMP_TRUSTSTORE_FILE" "$EJBCA_TRUSTSTORE_FILE"
-    mv "$EJBCA_TEMP_KEYSTORE_FILE"  "$EJBCA_KEYSTORE_FILE"
-    echo "$EJBCA_KEYSTORE_PASSWORD" > "$EJBCA_KEYSTORE_PASSWORD_FILE"
-    echo "$EJBCA_TRUSTSTORE_PASSWORD" > "$EJBCA_TRUSTSTORE_PASSWORD_FILE"
-    echo "$EJBCA_WILDFLY_ADMIN_PASSWORD" > "$EJBCA_WILDFLY_ADMIN_PASSWORD_FILE"
+    mv "$EJBCA_TEMP_KEYSTORE_FILE" "$EJBCA_KEYSTORE_FILE"
+    echo "$EJBCA_KEYSTORE_PASSWORD" >"$EJBCA_KEYSTORE_PASSWORD_FILE"
+    echo "$EJBCA_TRUSTSTORE_PASSWORD" >"$EJBCA_TRUSTSTORE_PASSWORD_FILE"
+    echo "$EJBCA_WILDFLY_ADMIN_PASSWORD" >"$EJBCA_WILDFLY_ADMIN_PASSWORD_FILE"
 
     # Provide keystores to wildfly
-    [[ ! -e  "$EJBCA_WILDFLY_TRUSTSTORE_FILE" ]] && ln -s  "$EJBCA_TRUSTSTORE_FILE" "$EJBCA_WILDFLY_TRUSTSTORE_FILE"
-    [[ ! -e "$EJBCA_WILDFLY_KEYSTORE_FILE" ]] && ln -s  "$EJBCA_KEYSTORE_FILE" "$EJBCA_WILDFLY_KEYSTORE_FILE"
+    [[ ! -e "$EJBCA_WILDFLY_TRUSTSTORE_FILE" ]] && ln -s "$EJBCA_TRUSTSTORE_FILE" "$EJBCA_WILDFLY_TRUSTSTORE_FILE"
+    [[ ! -e "$EJBCA_WILDFLY_KEYSTORE_FILE" ]] && ln -s "$EJBCA_KEYSTORE_FILE" "$EJBCA_WILDFLY_KEYSTORE_FILE"
 }
 
 ########################
@@ -513,14 +511,14 @@ ejbca_is_persisted() {
 ejbca_load_persisted() {
     info "Loading persisted keystore passwords"
 
-    read -r EJBCA_KEYSTORE_PASSWORD < "$EJBCA_KEYSTORE_PASSWORD_FILE"
-    read -r EJBCA_TRUSTSTORE_PASSWORD < "$EJBCA_TRUSTSTORE_PASSWORD_FILE"
-    read -r EJBCA_WILDFLY_ADMIN_PASSWORD < "$EJBCA_WILDFLY_ADMIN_PASSWORD_FILE"
+    read -r EJBCA_KEYSTORE_PASSWORD <"$EJBCA_KEYSTORE_PASSWORD_FILE"
+    read -r EJBCA_TRUSTSTORE_PASSWORD <"$EJBCA_TRUSTSTORE_PASSWORD_FILE"
+    read -r EJBCA_WILDFLY_ADMIN_PASSWORD <"$EJBCA_WILDFLY_ADMIN_PASSWORD_FILE"
 
     # Provide keystores to wildfly
     info "Placing widlfly keystores"
-    [[ ! -e  "$EJBCA_WILDFLY_TRUSTSTORE_FILE" ]] && ln -s  "$EJBCA_TRUSTSTORE_FILE" "$EJBCA_WILDFLY_TRUSTSTORE_FILE"
-    [[ ! -e "$EJBCA_WILDFLY_KEYSTORE_FILE" ]] && ln -s  "$EJBCA_KEYSTORE_FILE" "$EJBCA_WILDFLY_KEYSTORE_FILE"
+    [[ ! -e "$EJBCA_WILDFLY_TRUSTSTORE_FILE" ]] && ln -s "$EJBCA_TRUSTSTORE_FILE" "$EJBCA_WILDFLY_TRUSTSTORE_FILE"
+    [[ ! -e "$EJBCA_WILDFLY_KEYSTORE_FILE" ]] && ln -s "$EJBCA_KEYSTORE_FILE" "$EJBCA_WILDFLY_KEYSTORE_FILE"
 }
 
 ########################
@@ -533,7 +531,7 @@ ejbca_load_persisted() {
 #   None
 #########################
 ejba_set_java_opts() {
-    cat >> "$EJBCA_WILDFLY_STANDALONE_CONF_FILE" <<EOF
+    cat >>"$EJBCA_WILDFLY_STANDALONE_CONF_FILE" <<EOF
 JAVA_OPTS="$JAVA_OPTS -Dhttpserver.external.privhttps=$EJBCA_HTTPS_ADVERTISED_PORT_NUMBER"
 EOF
 }
@@ -556,8 +554,8 @@ ejbca_initialize() {
 
     ensure_dir_exists "$EJBCA_DATA_DIR"
 
-    if [[ -f "$EJBCA_TEMP_KEYSTORE_FILE"   ]]; then rm -f "$EJBCA_TEMP_KEYSTORE_FILE"   ; fi
-    if [[ -f "$EJBCA_TEMP_TRUSTSTORE_FILE" ]]; then rm -f "$EJBCA_TEMP_TRUSTSTORE_FILE" ; fi
+    if [[ -f "$EJBCA_TEMP_KEYSTORE_FILE" ]]; then rm -f "$EJBCA_TEMP_KEYSTORE_FILE"; fi
+    if [[ -f "$EJBCA_TEMP_TRUSTSTORE_FILE" ]]; then rm -f "$EJBCA_TEMP_TRUSTSTORE_FILE"; fi
 
     if ! ejbca_is_persisted; then
         info "Deploying EJBCA from scratch"
