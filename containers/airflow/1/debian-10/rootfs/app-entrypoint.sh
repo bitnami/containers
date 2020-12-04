@@ -11,6 +11,14 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
     echo "airflow:x:$(id -g):" > "$NSS_WRAPPER_GROUP"
 
     export LD_PRELOAD="$LIBNSS_WRAPPER_PATH"
+
+fi
+
+    # Install custom python package if requirements.txt is present
+if [[ -f "/bitnami/python/requirements.txt" ]]; then
+    source /opt/bitnami/airflow/venv/bin/activate
+    pip install -r /bitnami/python/requirements.txt
+    deactivate
 fi
 
     nami_initialize airflow
