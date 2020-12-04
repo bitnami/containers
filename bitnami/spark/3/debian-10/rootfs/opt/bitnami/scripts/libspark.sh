@@ -8,6 +8,7 @@
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libfile.sh
 
 # Functions
 
@@ -52,6 +53,9 @@ export SPARK_SSL_TRUSTSTORE_PASSWORD="${SPARK_SSL_TRUSTSTORE_PASSWORD:-}"
 export SPARK_SSL_NEED_CLIENT_AUTH="${SPARK_SSL_NEED_CLIENT_AUTH:-yes}"
 export SPARK_SSL_PROTOCOL="${SPARK_SSL_PROTOCOL:-TLSv1.2}"
 
+# Monitoring
+export SPARK_METRICS_ENABLED="${SPARK_METRICS_ENABLED:-false}"
+
 # System Users
 export SPARK_DAEMON_USER="spark"
 export SPARK_DAEMON_GROUP="spark"
@@ -83,6 +87,11 @@ spark_validate() {
         *)
             print_validation_error "Invalid mode $SPARK_MODE. Supported types are 'master/worker'"
     esac
+
+    # Validate metrics enabled
+    if ! is_true_false_value "$SPARK_METRICS_ENABLED"; then
+        print_validation_error "Valid values for SPARK_METRICS_ENABLED are: true or false"
+    fi
 
     # Validate worker node inputs
     if [[ "$SPARK_MODE" == "worker" ]]; then
@@ -185,6 +194,27 @@ spark_enable_local_storage_encryption() {
     spark_conf_set spark.io.encryption.keySizeBits "128"
 }
 
+
+########################
+# Enable metrics 
+# Globals:
+#   SPARK_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+spark_enable_metrics() {
+    info "Enabling metrics..."
+
+    mv "${SPARK_CONFDIR}/metrics.properties.template" "${SPARK_CONFDIR}/metrics.properties"
+
+    spark_metrics_conf_set "\*.sink.prometheusServlet.class" "org.apache.spark.metrics.sink.PrometheusServlet"
+    spark_metrics_conf_set "\*.sink.prometheusServlet.path" "/metrics"
+    spark_metrics_conf_set "master.sink.prometheusServlet.path" "/metrics"
+    spark_metrics_conf_set "applications.sink.prometheusServlet.path" "/metrics"
+}
+
 ########################
 # Configure Spark SSL (https://spark.apache.org/docs/latest/security.html#ssl-configuration)
 # Globals:
@@ -211,6 +241,30 @@ spark_enable_ssl() {
     spark_conf_set spark.ssl.trustStorePassword "${SPARK_SSL_TRUSTSTORE_PASSWORD}"
     spark_conf_set spark.ssl.trustStoreType "JKS"
 }
+
+########################
+# Set a metrics configuration setting value
+# Globals:
+#   SPARK_CONFDIR
+# Arguments:
+#   $1 - key
+#   $2 - value
+# Returns:
+#   None
+#########################
+spark_metrics_conf_set() {
+    local -r key="${1:?missing key}"
+    local value="${2:-}"
+
+    # Sanitize inputs
+    value="${value//\\/\\\\}"
+    value="${value//&/\\&}"
+    value="${value//\?/\\?}"
+    [[ "$value" = "" ]] && value="\"$value\""
+
+    replace_in_file "${SPARK_CONFDIR}/metrics.properties" "^#*\s*${key}.*" "${key}=${value}" false
+}
+
 ########################
 # Set a configuration setting value
 # Globals:
@@ -268,6 +322,11 @@ spark_initialize() {
         # Enable SSL configuration
         if is_boolean_yes "$SPARK_SSL_ENABLED"; then
             spark_enable_ssl
+        fi
+
+        # Enable metrics
+        if is_boolean_yes "$SPARK_METRICS_ENABLED"; then
+           spark_enable_metrics
         fi
     else
         info "Detected mounted configuration file..."
