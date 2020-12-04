@@ -10,13 +10,6 @@ DAEMON=airflow
 EXEC=$(which $DAEMON)
 START_COMMAND="${EXEC} webserver | tee /opt/bitnami/airflow/logs/airflow-webserver.log"
 
-# Install custom python package if requirements.txt is present
-if [[ -f "/bitnami/python/requirements.txt" ]]; then
-    source /opt/bitnami/airflow/venv/bin/activate
-    pip install -r /bitnami/python/requirements.txt
-    deactivate
-fi
-
 echo "Waiting for db..."
 counter=0;
 res=1000;
