@@ -166,6 +166,26 @@ tomcat_overwrite_context() {
 }
 
 ########################
+# In version 7.0.107, 8.0.60, 9.0.40 Tomcat added to its examples application a new <filter-name>HTTP header security filter</filter-name>
+# but it is missed to add support for async dispatchers, as we are testing this async examples we needed to fix.
+#
+# Globals:
+#   TOMCAT_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+tomcat_fix_example_filter_registering() {
+    local file_content
+    local -r file="${TOMCAT_WEBAPPS_DIR}/examples/WEB-INF/web.xml"
+
+    file_content="$(sed '/<filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter<\/filter-class>/a'"<async-supported>true</async-supported>" "$file")"
+
+    echo "$file_content" > "$file"
+}
+
+########################
 # Render tag from a value and attributes
 # Globals:
 #   None
@@ -254,6 +274,9 @@ tomcat_initialize() {
     else
         info "Persisted webapps detected."
     fi
+
+    # TODO(T38395): remove this line and the function once Tomcat fixed the issue.
+    tomcat_fix_example_filter_registering
 
     tomcat_configure_ports
     tomcat_setup_environment
