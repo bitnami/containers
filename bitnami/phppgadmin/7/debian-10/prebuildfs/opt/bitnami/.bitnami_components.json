@@ -22,10 +22,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "f197077c17bfd3aa8ffb20205cfb01118e97266f8d41a58db7ca0f4bf31966d8",
+        "digest": "3da11e4b172bcb955da1fcb75830fdc068994bcf32c547d82920bed8798c61ba",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.25-1"
+        "version": "7.3.25-3"
     },
     "phppgadmin": {
         "arch": "amd64",
