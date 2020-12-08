@@ -1,7 +1,7 @@
 {
     "thanos": {
-        "digest": "51a809bb6141257e1688723501fa14e8a7e195afd4dac4f5c4c2191a04d675db",
+        "digest": "f55d06fb037884c8034dc6afe9d9151ae6dc323dce4a5cab1a42a661a88458a4",
         "type": "BLACKSMITH",
-        "version": "0.17.1"
+        "version": "0.17.2"
     }
 }
