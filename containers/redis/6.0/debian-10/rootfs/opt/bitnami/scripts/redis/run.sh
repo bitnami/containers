@@ -21,7 +21,7 @@ REDIS_EXTRA_FLAGS=${REDIS_EXTRA_FLAGS:-}
 args=("$REDIS_BASE_DIR/etc/redis.conf" "--daemonize" "no")
 # Add flags specified via the 'REDIS_EXTRA_FLAGS' environment variable
 read -r -a extra_flags <<< "$REDIS_EXTRA_FLAGS"
-[[ "${#extra_flags[@]}" -gt 0 ]] && flags+=("${extra_flags[@]}")
+[[ "${#extra_flags[@]}" -gt 0 ]] && args+=("${extra_flags[@]}")
 # Add flags passed to this script
 args+=("$@")
 
