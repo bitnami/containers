@@ -26,9 +26,4 @@ SSLSessionCacheTimeout  300
 
   # Error Documents
   ErrorDocument 503 /503.html
-
-  <Location /server-status>
-    Require local
-    SetHandler server-status
-  </Location>
 </VirtualHost>
