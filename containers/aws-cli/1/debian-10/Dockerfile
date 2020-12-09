@@ -13,16 +13,16 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "d80680e7f6676954faece5ab89e601c037d82940b2900d08f6d8ce65816a5871  /tmp/bitnami/pkg/cache/python-3.7.9-11-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-3.7.9-11-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-3.7.9-11-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/aws-cli-1.18.192-0-linux-amd64-debian-10.tar.gz && \
-    echo "6a9113b4edd02740c20d93301eb53c169994793c185020446329514cd044aaf5  /tmp/bitnami/pkg/cache/aws-cli-1.18.192-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/aws-cli-1.18.192-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/aws-cli-1.18.192-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/aws-cli-1.18.193-0-linux-amd64-debian-10.tar.gz && \
+    echo "7bbe038e8e2c047a6d78805826f8121b23bfff23e0a4cbb7e83b7a7e0d687386  /tmp/bitnami/pkg/cache/aws-cli-1.18.193-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/aws-cli-1.18.193-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/aws-cli-1.18.193-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="aws-cli" \
-    BITNAMI_IMAGE_VERSION="1.18.192-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="1.18.193-debian-10-r0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/aws-cli/bin:/opt/bitnami/aws-cli/venv/bin:$PATH"
 
 USER 1001
