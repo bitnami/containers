@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="fluent-bit" \
-    BITNAMI_IMAGE_VERSION="1.6.8-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="1.6.8-debian-10-r5" \
     PATH="/opt/bitnami/fluent-bit/bin:$PATH"
 
 EXPOSE 2020
