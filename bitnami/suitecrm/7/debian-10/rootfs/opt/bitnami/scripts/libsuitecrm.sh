@@ -261,6 +261,7 @@ suitecrm_pass_smtp_wizard() {
     local -a curl_opts curl_data_opts
     local url_protocol=http
     is_boolean_yes "$SUITECRM_ENABLE_HTTPS" && url_protocol=https
+    local site_url="${url_protocol}://127.0.0.1:${port}/index.php"
     cookie_file="/tmp/cookie$(generate_random_string -t alphanumeric -c 8)"
     curl_opts=(
         "--location"
@@ -271,7 +272,7 @@ suitecrm_pass_smtp_wizard() {
         "--referer" "http://localhost"
     )
     # Step 1: Login to SuiteCRM and check that SMTP is not configured yet
-    wizard_url="${url_protocol}://${SUITECRM_HOST}:${port}/index.php?action=Login&module=Users"
+    wizard_url="${site_url}?action=Login&module=Users"
     curl_data_opts=(
         "--data-urlencode" "username_password=${SUITECRM_PASSWORD}"
         "--data-urlencode" "user_name=${SUITECRM_USERNAME}"
@@ -286,7 +287,7 @@ suitecrm_pass_smtp_wizard() {
     fi
 
     # Step 2: Configure SMTP and check the message to warn about SMTP has gone
-    wizard_url="${url_protocol}://${SUITECRM_HOST}:${port}/index.php?module=EmailMan&action=config"
+    wizard_url="${site_url}?module=EmailMan&action=config"
 
     # Check if SMTP should go over SSL
     local smtp_protocol=""
@@ -329,19 +330,26 @@ suitecrm_pass_wizard() {
     local wizard_url curl_output
     local -a curl_opts curl_data_opts
     local url_protocol=http
+    info "Running setup wizard"
     is_boolean_yes "$SUITECRM_ENABLE_HTTPS" && url_protocol=https
-    wizard_url="${url_protocol}://${SUITECRM_HOST}:${port}/install.php?goto=SilentInstall&cli=true"
+    wizard_url="${url_protocol}://127.0.0.1:${port}/install.php?goto=SilentInstall&cli=true"
     curl_opts=("--location" "--silent")
     curl_data_opts=(
         "--data-urlencode" "current_step=8"
         "--data-urlencode" "goto=Next"
     )
-    curl "${curl_opts[@]}" "${wizard_url}" > /dev/null
-    if grep -q "Save user settings"  "${SUITECRM_BASE_DIR}/install.log"; then
-        info "Setup wizard finished successfully"
-    else
-        error "An error occurred while installing SuiteCRM"
+    local wizard_exit_code=0
+    wizard_error() {
+        error "An error occurred while installing SuiteCRM: ${*}"
+        wizard_exit_code=1
+    }
+    if ! debug_execute curl "${curl_opts[@]}" "${wizard_url}"; then
+        wizard_error "The wizard could not be accessed"
     fi
+    if ! grep -q "Save user settings" "${SUITECRM_BASE_DIR}/install.log"; then
+        wizard_error "Installation failed"
+    fi
+    return "$wizard_exit_code"
 }
 
 ########################
