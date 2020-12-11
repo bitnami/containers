@@ -11,7 +11,7 @@ RUN /build/install-nami.sh
 RUN bitnami-pkg unpack php-7.3.25-3 --checksum 3da11e4b172bcb955da1fcb75830fdc068994bcf32c547d82920bed8798c61ba
 RUN bitnami-pkg unpack apache-2.4.46-3 --checksum 07991412bb24fc8493228f4bd67b28a77e011242971dcdd687a5d2113ac89bc9
 RUN bitnami-pkg unpack mysql-client-10.2.36-0 --checksum dc105b313dff78fca99abe1d8dec079b6e0a3e7e3bca0da1ab0ff08da8ec330c
-RUN bitnami-pkg install libphp-7.3.25-0 --checksum 2a37cccc40fca206beb2a7850815f5bba49ba7b80ebd2e571b75bf825a6ad608
+RUN bitnami-pkg install libphp-7.3.25-1 --checksum 830db27d5ba104e6927e9f32626be713d562ffd10ffc4791b54bae36ad6a0947
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg unpack magento-2.4.1-2 --checksum 4ec3b50594392f0c151dd256a37b62a308b07629cff7e1b6854882cd870d4a3e
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
@@ -28,7 +28,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r41" \
+    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r42" \
     ELASTICSEARCH_HOST="" \
     ELASTICSEARCH_PORT_NUMBER="" \
     EXTERNAL_HTTPS_PORT_NUMBER="443" \
