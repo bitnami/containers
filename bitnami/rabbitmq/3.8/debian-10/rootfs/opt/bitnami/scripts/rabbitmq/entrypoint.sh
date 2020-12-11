@@ -5,7 +5,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-# set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
@@ -13,7 +13,7 @@ set -o pipefail
 . /opt/bitnami/scripts/liblog.sh
 
 # Load RabbitMQ environment variables
-eval "$(rabbitmq_env)"
+. /opt/bitnami/scripts/rabbitmq-env.sh
 
 print_welcome_page
 

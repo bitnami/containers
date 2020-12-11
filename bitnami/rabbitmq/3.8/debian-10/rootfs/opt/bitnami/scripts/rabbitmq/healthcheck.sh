@@ -5,13 +5,13 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-# set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/librabbitmq.sh
 
 # Load RabbitMQ environment variables
-eval "$(rabbitmq_env)"
+. /opt/bitnami/scripts/rabbitmq-env.sh
 
 if [[ -f "${RABBITMQ_LIB_DIR}/.start" ]]; then
     rabbitmqctl node_health_check
