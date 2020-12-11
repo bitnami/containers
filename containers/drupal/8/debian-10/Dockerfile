@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl dirmngr gnupg gzip libargon2-1 lib
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.25-3" --checksum 3da11e4b172bcb955da1fcb75830fdc068994bcf32c547d82920bed8798c61ba
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-3" --checksum 07991412bb24fc8493228f4bd67b28a77e011242971dcdd687a5d2113ac89bc9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.27-0" --checksum f96905e763a6334b75a7cdb07f8d89658cde02be41cb09d91d0682fc649fdcff
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.25-0" --checksum 2a37cccc40fca206beb2a7850815f5bba49ba7b80ebd2e571b75bf825a6ad608
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.25-1" --checksum 830db27d5ba104e6927e9f32626be713d562ffd10ffc4791b54bae36ad6a0947
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "8.9.11-0" --checksum 80ed32ea362ae4ec92eee98dcd4c31ca93edf5ab143af0bf435fee7fc291679e
@@ -31,7 +31,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.9.11-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="8.9.11-debian-10-r4" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
