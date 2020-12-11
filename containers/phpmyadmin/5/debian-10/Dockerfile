@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libbz2-1.0 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.13-3" --checksum afb06e12396c6901d65ab826cafca0ae532b1d8a5e8293071edda395ba409ae6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-3" --checksum 07991412bb24fc8493228f4bd67b28a77e011242971dcdd687a5d2113ac89bc9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.27-0" --checksum f96905e763a6334b75a7cdb07f8d89658cde02be41cb09d91d0682fc649fdcff
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.13-0" --checksum 124351cdab7a6a2911b63f8044fb3d0bfc9a310ac9a6b141297e238d2e0b6823
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.13-1" --checksum 90851eaf7bea77d3499ec654e51a6714c09eb3097909338f42ceb878b8fa1ae9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "phpmyadmin" "5.0.4-1" --checksum fead1af4b55d7ba70196fe2d2f78b331401deda39b6562f5c6075198e7f4f2d0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
@@ -21,8 +21,8 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
+RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/phpmyadmin/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
@@ -30,7 +30,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="5.0.4-debian-10-r52" \
+    BITNAMI_IMAGE_VERSION="5.0.4-debian-10-r53" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
