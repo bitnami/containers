@@ -22,10 +22,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "2a37cccc40fca206beb2a7850815f5bba49ba7b80ebd2e571b75bf825a6ad608",
+        "digest": "830db27d5ba104e6927e9f32626be713d562ffd10ffc4791b54bae36ad6a0947",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.25-0"
+        "version": "7.3.25-1"
     },
     "mysql-client": {
         "arch": "amd64",
