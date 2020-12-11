@@ -5,14 +5,14 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-# set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/librabbitmq.sh
 
 # Load RabbitMQ environment variables
-eval "$(rabbitmq_env)"
+. /opt/bitnami/scripts/rabbitmq-env.sh
 
 # Ensure RabbitMQ environment variables settings are valid
 rabbitmq_validate
