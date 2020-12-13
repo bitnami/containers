@@ -21,7 +21,7 @@ RUN ln -sf /opt/bitnami/wildfly/data /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="21.0.1-debian-10-r20" \
+    BITNAMI_IMAGE_VERSION="21.0.1-debian-10-r21" \
     NAMI_PREFIX="/.nami" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
