@@ -171,7 +171,7 @@ zookeeper_validate() {
         read -r -a zookeeper_servers_list <<< "${ZOO_SERVERS//[;, ]/ }"
         for server in "${zookeeper_servers_list[@]}"; do
             if  is_boolean_yes "$server_id_with_jumps"; then
-                if ! echo "$server" | grep -q -E "^[^:]+:[^:]+:[^:]+::[1-9]+$"; then
+                if ! echo "$server" | grep -q -E "^[^:]+:[^:]+:[^:]+::[1-9][0-9]*$"; then
                     print_validation_error "Zookeeper server ${server} should follow the next syntax: host:port:port::id. Example: zookeeper:2888:3888::1"
                 fi
             else
