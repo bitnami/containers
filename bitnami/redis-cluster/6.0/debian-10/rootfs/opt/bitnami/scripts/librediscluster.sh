@@ -69,7 +69,7 @@ redis_cluster_validate() {
         [[ -z "$REDIS_CLUSTER_REPLICAS" ]] && print_validation_error "To create the cluster you need to provide the number of replicas"
     fi
 
-    if (( REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP < 0 )); then
+    if ((REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP < 0)); then
         print_validation_error "REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP must be greater or equal to zero"
     fi
 
@@ -120,41 +120,41 @@ redis_cluster_initialize() {
 #   None
 #########################
 redis_cluster_create() {
-  local nodes=("$@")
-  local ips=()
-  local wait_command
-  local create_command
+    local nodes=("$@")
+    local ips=()
+    local wait_command
+    local create_command
 
-  for node in "${nodes[@]}"; do
-      if is_boolean_yes "$REDIS_TLS_ENABLED"; then
-          wait_command="redis-cli -h ${node} -p ${REDIS_TLS_PORT} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE} ping"
-      else
-          wait_command="redis-cli -h ${node} -p ${REDIS_PORT_NUMBER} ping"
-      fi
-      while [[ $($wait_command) != 'PONG' ]]; do
-          echo "Node $node not ready, waiting for all the nodes to be ready..."
-          sleep 1
-      done
-  done
+    for node in "${nodes[@]}"; do
+        if is_boolean_yes "$REDIS_TLS_ENABLED"; then
+            wait_command="redis-cli -h ${node} -p ${REDIS_TLS_PORT} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE} ping"
+        else
+            wait_command="redis-cli -h ${node} -p ${REDIS_PORT_NUMBER} ping"
+        fi
+        while [[ $($wait_command) != 'PONG' ]]; do
+            echo "Node $node not ready, waiting for all the nodes to be ready..."
+            sleep 1
+        done
+    done
 
-  echo "Waiting ${REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP}s before querying node ip addresses"
-  sleep "${REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP}"
+    echo "Waiting ${REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP}s before querying node ip addresses"
+    sleep "${REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP}"
 
-  for node in "${nodes[@]}"; do
-    ips+=("$(wait_for_dns_lookup "${node}" "${REDIS_CLUSTER_DNS_LOOKUP_RETRIES}" "${REDIS_CLUSTER_DNS_LOOKUP_SLEEP}")")
-  done
+    for node in "${nodes[@]}"; do
+        ips+=("$(wait_for_dns_lookup "${node}" "${REDIS_CLUSTER_DNS_LOOKUP_RETRIES}" "${REDIS_CLUSTER_DNS_LOOKUP_SLEEP}")")
+    done
 
-  if is_boolean_yes "$REDIS_TLS_ENABLED"; then
-      create_command="redis-cli --cluster create ${ips[*]/%/:${REDIS_TLS_PORT}} --cluster-replicas ${REDIS_CLUSTER_REPLICAS} --cluster-yes --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE}"
-  else
-      create_command="redis-cli --cluster create ${ips[*]/%/:${REDIS_PORT_NUMBER}} --cluster-replicas ${REDIS_CLUSTER_REPLICAS} --cluster-yes"
-  fi
-  yes yes | $create_command || true
-  if redis_cluster_check "${ips[0]}"; then
-      echo "Cluster correctly created"
-  else
-      echo "The cluster was already created, the nodes should have recovered it"
-  fi
+    if is_boolean_yes "$REDIS_TLS_ENABLED"; then
+        create_command="redis-cli --cluster create ${ips[*]/%/:${REDIS_TLS_PORT}} --cluster-replicas ${REDIS_CLUSTER_REPLICAS} --cluster-yes --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE}"
+    else
+        create_command="redis-cli --cluster create ${ips[*]/%/:${REDIS_PORT_NUMBER}} --cluster-replicas ${REDIS_CLUSTER_REPLICAS} --cluster-yes"
+    fi
+    yes yes | $create_command || true
+    if redis_cluster_check "${ips[0]}"; then
+        echo "Cluster correctly created"
+    else
+        echo "The cluster was already created, the nodes should have recovered it"
+    fi
 }
 
 #########################
@@ -185,18 +185,18 @@ redis_cluster_check() {
 #   None
 #########################
 redis_cluster_update_ips() {
-    IFS=' ' read -ra nodes <<< "$REDIS_NODES"
+    IFS=' ' read -ra nodes <<<"$REDIS_NODES"
 
     declare -A host_2_ip_array # Array to map hosts and IPs
     # Update the IPs when a number of nodes > quorum change their IPs
-    if [[ ! -f  "${REDIS_DATA_DIR}/nodes.sh" ]]; then
+    if [[ ! -f "${REDIS_DATA_DIR}/nodes.sh" ]]; then
         # It is the first initialization so store the nodes
         for node in "${nodes[@]}"; do
             ip=$(wait_for_dns_lookup "$node" "$REDIS_DNS_RETRIES" 5)
             host_2_ip_array["$node"]="$ip"
         done
         echo "Storing map with hostnames and IPs"
-        declare -p host_2_ip_array > "${REDIS_DATA_DIR}/nodes.sh"
+        declare -p host_2_ip_array >"${REDIS_DATA_DIR}/nodes.sh"
     else
         # The cluster was already started
         . "${REDIS_DATA_DIR}/nodes.sh"
@@ -207,10 +207,10 @@ redis_cluster_update_ips() {
             if [[ ${host_2_ip_array[$node]+true} ]]; then
                 echo "Changing old IP ${host_2_ip_array[$node]} by the new one ${newIP}"
                 nodesFile=$(sed "s/${host_2_ip_array[$node]}/$newIP/g" "${REDIS_DATA_DIR}/nodes.conf")
-                echo "$nodesFile" > "${REDIS_DATA_DIR}/nodes.conf"
+                echo "$nodesFile" >"${REDIS_DATA_DIR}/nodes.conf"
             fi
             host_2_ip_array["$node"]="$newIP"
         done
-        declare -p host_2_ip_array > "${REDIS_DATA_DIR}/nodes.sh"
+        declare -p host_2_ip_array >"${REDIS_DATA_DIR}/nodes.sh"
     fi
 }
