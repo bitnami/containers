@@ -8,10 +8,10 @@
     },
     "harbor-jobservice": {
         "arch": "amd64",
-        "digest": "f58e99e1a764f4ae1958be73185a6c97318d7bf36b91048f9094da21d36003fc",
+        "digest": "3e838cd6022b251e66d3023d885e167ebb5a33fdd417cd248f4237b0dc6a3dc7",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.1.1-0"
+        "version": "2.1.2-0"
     },
     "yq": {
         "arch": "amd64",
