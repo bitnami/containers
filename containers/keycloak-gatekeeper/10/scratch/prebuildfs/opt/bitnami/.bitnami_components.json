@@ -1,6 +1,6 @@
 {
     "keycloak-gatekeeper": {
-        "digest": "aab6488ec08494a5792ceb26a586594cc8b0684b78fc03940706d939b96dd994",
+        "digest": "78e26f09561a2c3763d18d0ef7330de4858a5f797717cb7502c8103306c76245",
         "type": "BLACKSMITH",
         "version": "10.0.0"
     }
