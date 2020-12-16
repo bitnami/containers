@@ -11,18 +11,18 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl ghostscript gzip imagemagick libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libffi6 libgcc1 libicu63 libjemalloc2 liblzma5 libncurses6 libncursesw6 libpam0g libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 libx11-6 libxau6 libxcb1 libxdmcp6 libxml2 procps sudo tar zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
-RUN bitnami-pkg install node-14.15.1-1 --checksum 1ed8b14879cb2cd99ee53a9bfe53dc1dbfe3c9fccab2c3aa7a37ddbef248ff74
+RUN bitnami-pkg install node-14.15.2-0 --checksum 6e43f6b995352f4bc842cad7f2650570b632d52eff6cadc837a38d4f33810386
 RUN bitnami-pkg unpack mysql-client-10.3.27-0 --checksum f96905e763a6334b75a7cdb07f8d89658cde02be41cb09d91d0682fc649fdcff
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN bitnami-pkg unpack ghost-3.40.1-0 --checksum f0f4d2c984d74af9df19bd2e7e20709e36ae977aa106a0e3ace0cca1e5a31e8a
+RUN bitnami-pkg unpack ghost-3.40.2-0 --checksum 780197f3062828ad6f4f037f1c15efd3d4d8814f9b69da20b18bb896c4c67ed0
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="3.40.1-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="3.40.2-debian-10-r0" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
