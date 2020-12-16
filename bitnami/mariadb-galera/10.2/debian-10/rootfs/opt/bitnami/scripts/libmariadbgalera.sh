@@ -369,11 +369,11 @@ mysql_ensure_galera_mariabackup_user_exists() {
     debug "Configure mariabackup user credentials"
     if [[ "$DB_FLAVOR" = "mariadb" ]]; then
         mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-create or replace user '$user'@'localhost' $([ "$password" != "" ] && echo "identified by '$password'");
+create or replace user '$user'@'localhost' $([ "$password" != "" ] && echo "identified by \"$password\"");
 EOF
     else
         mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-create user '$user'@'localhost' $([ "$password" != "" ] && echo "identified with 'mysql_native_password' by '$password'");
+create user '$user'@'localhost' $([ "$password" != "" ] && echo "identified with 'mysql_native_password' by \"$password\"");
 EOF
     fi
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
@@ -400,14 +400,14 @@ mysql_ensure_replication_user_exists() {
 
     if [[ "$DB_FLAVOR" = "mariadb" ]]; then
         mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-grant REPLICATION CLIENT ON *.* to '$user'@'%' identified by '$password';
-grant PROCESS ON *.* to '$user'@'localhost' identified by '$password';
+grant REPLICATION CLIENT ON *.* to '$user'@'%' identified by "$password";
+grant PROCESS ON *.* to '$user'@'localhost' identified by "$password";
 flush privileges;
 EOF
     else
         mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-grant REPLICATION CLIENT ON *.* to '$user'@'%' identified with 'mysql_native_password' by '$password';
-grant PROCESS ON *.* to '$user'@'localhost' identified with 'mysql_native_password' by '$password';
+grant REPLICATION CLIENT ON *.* to '$user'@'%' identified with 'mysql_native_password' by "$password";
+grant PROCESS ON *.* to '$user'@'localhost' identified with 'mysql_native_password' by "$password";
 flush privileges;
 EOF
     fi
@@ -1051,9 +1051,9 @@ mysql_ensure_user_exists() {
         auth_string="identified via pam using '$DB_FLAVOR'"
     elif [[ -n "$password" ]]; then
         if [[ -n "$auth_plugin" ]]; then
-            auth_string="identified with $auth_plugin by '$password'"
+            auth_string="identified with $auth_plugin by \"$password\""
         else
-            auth_string="identified by '$password'"
+            auth_string="identified by \"$password\""
         fi
     fi
     debug "creating database user \'$user\'"
@@ -1133,10 +1133,10 @@ mysql_ensure_root_user_exists() {
     if [ "$DB_FLAVOR" == "mariadb" ]; then
         mysql_execute "mysql" "root" <<EOF
 -- create root@localhost user for local admin access
--- create user 'root'@'localhost' $([ "$password" != "" ] && echo "identified by '$password'");
+-- create user 'root'@'localhost' $([ "$password" != "" ] && echo "identified by \"$password\"");
 -- grant all on *.* to 'root'@'localhost' with grant option;
 -- create admin user for remote access
-create user '$user'@'%' $([ "$password" != "" ] && echo "identified $auth_plugin_str by '$password'");
+create user '$user'@'%' $([ "$password" != "" ] && echo "identified $auth_plugin_str by \"$password\"");
 grant all on *.* to '$user'@'%' with grant option;
 flush privileges;
 EOF
@@ -1155,7 +1155,7 @@ EOF
     else
         mysql_execute "mysql" "root" <<EOF
 -- create admin user
-create user '$user'@'%' $([ "$password" != "" ] && echo "identified by '$password'");
+create user '$user'@'%' $([ "$password" != "" ] && echo "identified by \"$password\"");
 grant all on *.* to '$user'@'%' with grant option;
 flush privileges;
 EOF
