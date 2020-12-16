@@ -552,9 +552,9 @@ mysql_ensure_user_exists() {
         auth_string="identified via pam using '$DB_FLAVOR'"
     elif [[ -n "$password" ]]; then
         if [[ -n "$auth_plugin" ]]; then
-            auth_string="identified with $auth_plugin by '$password'"
+            auth_string="identified with $auth_plugin by \"$password\""
         else
-            auth_string="identified by '$password'"
+            auth_string="identified by \"$password\""
         fi
     fi
     debug "creating database user \'$user\'"
@@ -634,10 +634,10 @@ mysql_ensure_root_user_exists() {
     if [ "$DB_FLAVOR" == "mariadb" ]; then
         mysql_execute "mysql" "root" <<EOF
 -- create root@localhost user for local admin access
--- create user 'root'@'localhost' $([ "$password" != "" ] && echo "identified by '$password'");
+-- create user 'root'@'localhost' $([ "$password" != "" ] && echo "identified by \"$password\"");
 -- grant all on *.* to 'root'@'localhost' with grant option;
 -- create admin user for remote access
-create user '$user'@'%' $([ "$password" != "" ] && echo "identified $auth_plugin_str by '$password'");
+create user '$user'@'%' $([ "$password" != "" ] && echo "identified $auth_plugin_str by \"$password\"");
 grant all on *.* to '$user'@'%' with grant option;
 flush privileges;
 EOF
@@ -656,7 +656,7 @@ EOF
     else
         mysql_execute "mysql" "root" <<EOF
 -- create admin user
-create user '$user'@'%' $([ "$password" != "" ] && echo "identified by '$password'");
+create user '$user'@'%' $([ "$password" != "" ] && echo "identified by \"$password\"");
 grant all on *.* to '$user'@'%' with grant option;
 flush privileges;
 EOF
