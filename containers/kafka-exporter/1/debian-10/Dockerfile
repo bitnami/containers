@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kafka-exporter-1.2.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "97a3a566cef11c784f3a92b38e4178c8399fb2a8af67b3008abe01733b8d4db6  /tmp/bitnami/pkg/cache/kafka-exporter-1.2.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kafka-exporter-1.2.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kafka-exporter-1.2.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kafka-exporter-1.2.0-1-linux-amd64-debian-10.tar.gz && \
+    echo "048e74044016862f77ad274ac53d7a8e418ffb5f6243af0778d0818d2054eeff  /tmp/bitnami/pkg/cache/kafka-exporter-1.2.0-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kafka-exporter-1.2.0-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kafka-exporter-1.2.0-1-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="kafka-exporter" \
-    BITNAMI_IMAGE_VERSION="1.2.0-debian-10-r309" \
+    BITNAMI_IMAGE_VERSION="1.2.0-debian-10-r310" \
     PATH="/opt/bitnami/kafka-exporter/bin:$PATH"
 
 EXPOSE 9308
