@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libc6 libcom-err2 libgcc1 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libncurses6 libsasl2-2 libssl1.1 libstdc++6 libtinfo6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.3.0-1" --checksum 6126368b4f1d4c6a9682c12280f2bef3c98962d079b26206e19f406cfa631055
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.3.0-2" --checksum d89528e5d733f34ae030984584659ff10a36370d40332bd8d41c047764d39cda
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql" "8.0.22-0" --checksum aee907501cd2d95f6e6c0d34fffd7c82620e640d72873575829177879e6fc1bf
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN apt-get update && apt-get upgrade -y && \
@@ -20,7 +20,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh
 ENV BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="8.0.22-debian-10-r46" \
+    BITNAMI_IMAGE_VERSION="8.0.22-debian-10-r47" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH"
 
 EXPOSE 3306
