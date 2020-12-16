@@ -909,7 +909,7 @@ wait_for_nodetool_up() {
     check_function_nodetool() {
         local -r check_cmd=("${CASSANDRA_BIN_DIR}/nodetool")
         local -r check_args=("status" "--port" "$CASSANDRA_JMX_PORT_NUMBER")
-        local -r machine_ip="$(dns_lookup "$CASSANDRA_HOST")"
+        local -r machine_ip="$(dns_lookup "$CASSANDRA_HOST" "v4")"
         local -r check_regex="UN\s*(${CASSANDRA_HOST}|${machine_ip}|127.0.0.1)"
         local output="/dev/null"
         if [[ "$BITNAMI_DEBUG" = "true" ]]; then
