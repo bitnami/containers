@@ -1,10 +1,10 @@
 {
     "git": {
         "arch": "amd64",
-        "digest": "aebe650c294f00bacd383f90db2bbf5033dc32acc500d39fa66367f0118b7c9d",
+        "digest": "562c90f50c96c25edcaf718f585290f1a2fd9a45c7aa89ca05d6338583d3465e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.29.2-0"
+        "version": "2.29.2-1"
     },
     "gosu": {
         "arch": "amd64",
@@ -43,9 +43,9 @@
     },
     "tomcat": {
         "arch": "amd64",
-        "digest": "35c0ff3265062a445ccca5cecafdf19248bfffed4402bbe764d54b3f2f92bbf8",
+        "digest": "61d43f231f44af95b2202dd6e97dc8876f3b84fe6157d1e30cd18076ffd896ef",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "9.0.39-2"
+        "version": "9.0.41-0"
     }
 }
