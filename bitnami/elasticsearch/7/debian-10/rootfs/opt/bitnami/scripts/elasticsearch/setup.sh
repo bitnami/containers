@@ -12,8 +12,8 @@ set -o pipefail
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libelasticsearch.sh
 
-# Load Elasticsearch environment variables
-eval "$(elasticsearch_env)"
+# Load environment
+. /opt/bitnami/scripts/elasticsearch-env.sh
 
 # Ensure kernel settings are valid
 elasticsearch_validate_kernel
