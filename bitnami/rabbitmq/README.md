@@ -51,7 +51,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.8`, `3.8-debian-10`, `3.8.9`, `3.8.9-debian-10-r63`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.9-debian-10-r63/3.8/debian-10/Dockerfile)
+* [`3.8`, `3.8-debian-10`, `3.8.9`, `3.8.9-debian-10-r64`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.9-debian-10-r64/3.8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
@@ -188,28 +188,56 @@ rabbitmq:
 
 Available variables:
 
+#### Node and cluster configuration
+
+* `RABBITMQ_VHOST`: RabbitMQ application vhost. Default: **/**
 * `RABBITMQ_USERNAME`: RabbitMQ application username. Default: **user**
 * `RABBITMQ_PASSWORD`: RabbitMQ application password. Default: **bitnami**
-* `RABBITMQ_VHOST`: RabbitMQ application vhost. Default: **/**
+* `RABBITMQ_SECURE_PASSWORD`: Whether to set the RabbitMQ password securely. This is incompatible with loading external RabbitMQ definitions. Default: **no**
+* `RABBITMQ_LOAD_DEFINITIONS`: Whether to load external RabbitMQ definitions. This is incompatible with setting the RabbitMQ password securely. Default: **no**.
 * `RABBITMQ_ERL_COOKIE`: Erlang cookie to determine whether different nodes are allowed to communicate with each other.
 * `RABBITMQ_NODE_TYPE`: Node Type. Valid values: *stats*, *queue-ram* or *queue-disc*. Default: **stats**
 * `RABBITMQ_NODE_NAME`: Node name and host. E.g.: *node@hostname* or *node* (localhost won't work in cluster topology). Default **rabbit@localhost**. If using this variable, ensure that you specify a valid host name as the container wil fail to start otherwise.
 * `RABBITMQ_FORCE_BOOT`: Force a node to start even if it was not the last to shut down. Default: **no**
-* `RABBITMQ_NODE_PORT_NUMBER`: Node port. Default: **5672**
 * `RABBITMQ_CLUSTER_NODE_NAME`: Node name to cluster with. E.g.: **clusternode@hostname**
 * `RABBITMQ_CLUSTER_PARTITION_HANDLING`: Cluster partition recovery mechanism. Default: **ignore**
-* `RABBITMQ_MANAGER_PORT_NUMBER`: Manager port. Default: **15672**
-* `RABBITMQ_DISK_FREE_RELATIVE_LIMIT`: Disk relative free space limit of the partition on which RabbitMQ is storing data. Default: **1.0**
-* `RABBITMQ_DISK_FREE_ABSOLUTE_LIMIT`: Disk absolute free space limit of the partition on which RabbitMQ is storing data (takes precedence over the relative limit). No defaults.
-* `RABBITMQ_ULIMIT_NOFILES`: Resources limits: maximum number of open file descriptors. Default: **65536**
+* `RABBITMQ_NODE_PORT_NUMBER`: Node port. Default: **5672**
+* `RABBITMQ_NODE_SSL_PORT_NUMBER`: RabbitMQ node port number for SSL connections. Default: **5671**
+* `RABBITMQ_SSL_CACERTFILE`: Path to the RabbitMQ server SSL CA certificate file. No defaults.
+* `RABBITMQ_SSL_CERTFILE`: Path to the RabbitMQ server SSL certificate file. No defaults.
+* `RABBITMQ_SSL_KEYFILE`: Path to the RabbitMQ server SSL certificate key file. No defaults.
+* `RABBITMQ_SSL_DEPTH`: Maximum number of non-self-issued intermediate certificates that may follow the peer certificate in a valid certification path. No defaults.
+* `RABBITMQ_SSL_FAIL_IF_NO_PEER_CERT`: Whether to reject TLS connections if client fails to provide a certificate. Default: **verify_none**
+* `RABBITMQ_SSL_VERIFY`: Whether to enable peer SSL certificate verification. Default: **no**
+* `RABBITMQ_PLUGINS`: Comma, semi-colon or space separated list of plugins to enable during the initialization. No defaults.
+* `RABBITMQ_COMMUNITY_PLUGINS`: Comma, semi-colon or space separated list of URLs where to download custom plugins during the initialization. No defaults.
+
+#### Management server configuration
+
+* `RABBITMQ_MANAGEMENT_BIND_IP`: RabbitMQ management server bind IP address. Default: **0.0.0.0**
+* `RABBITMQ_MANAGEMENT_PORT_NUMBER`: RabbitMQ management server port number. Default: **15672**
+* `RABBITMQ_MANAGEMENT_SSL_PORT_NUMBER`: RabbitMQ management server port number for SSL/TLS connections. No defaults.
+* `RABBITMQ_MANAGEMENT_SSL_CACERTFILE`: Path to the RabbitMQ management server SSL CA certificate file. No defaults.
+* `RABBITMQ_MANAGEMENT_SSL_CERTFILE`: Path to the RabbitMQ management server SSL certificate file. No defaults.
+* `RABBITMQ_MANAGEMENT_SSL_KEYFILE`: Path to the RabbitMQ management server SSL certificate key file. No defaults.
+* `RABBITMQ_MANAGEMENT_SSL_DEPTH`: Maximum number of non-self-issued intermediate certificates that may follow the peer certificate in a valid certification path, for the RabbitMQ management server. No defaults.
+* `RABBITMQ_MANAGEMENT_SSL_FAIL_IF_NO_PEER_CERT`: Whether to reject TLS connections if client fails to provide a certificate for the RabbitMQ management server. Default: **yes**
+* `RABBITMQ_MANAGEMENT_SSL_VERIFY`: Whether to enable peer SSL certificate verification for the RabbitMQ management server. Default: **verify_peer**
+
+#### LDAP configuration
+
 * `RABBITMQ_ENABLE_LDAP`: Enable the LDAP configuration. Defaults: **no**
 * `RABBITMQ_LDAP_TLS`: Enable secure LDAP configuration. Defaults: **no**
 * `RABBITMQ_LDAP_SERVERS`: Comma, semi-colon or space separated list of LDAP server hostnames. No defaults.
 * `RABBITMQ_LDAP_SERVERS_PORT`: LDAP servers port. Defaults: **389**
 * `RABBITMQ_LDAP_USER_DN_PATTERN`: DN used to bind to LDAP in the form `cn=$${username},dc=example,dc=org`. No defaults.
-* `RABBITMQ_PLUGINS`: Comma, semi-colon or space separated list of plugins to enable during the initialization. No defaults.
-* `RABBITMQ_COMMUNITY_PLUGINS`: Comma, semi-colon or space separated list of URLs where to download custom plugins during the initialization. No defaults.
-* `RABBITMQ_LOAD_DEFINITIONS`: Enable compability with loading external definitions. Currently means that password for `RABBITMQ_USERNAME` is not changed to `RABBITMQ_PASSWORD`. Default: **no**.
+
+#### Memory and disk configuration
+
+* `RABBITMQ_VM_MEMORY_HIGH_WATERMARK`: High memory watermark for RabbitMQ to block publishers and prevent new messages from being enqueued. Can be specified as an absolute or relative value (as percentage or value between 0 and 1). No defaults.
+* `RABBITMQ_DISK_FREE_RELATIVE_LIMIT`: Disk relative free space limit of the partition on which RabbitMQ is storing data. Default: **1.0**
+* `RABBITMQ_DISK_FREE_ABSOLUTE_LIMIT`: Disk absolute free space limit of the partition on which RabbitMQ is storing data (takes precedence over the relative limit). No defaults.
+* `RABBITMQ_ULIMIT_NOFILES`: Resources limits: maximum number of open file descriptors. Default: **65536**
 
 ### Setting up a cluster
 

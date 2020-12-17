@@ -21,4 +21,3 @@ if am_i_root; then
 else
     exec "${RABBITMQ_BIN_DIR}/rabbitmq-server"
 fi
-
