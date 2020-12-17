@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5`, `5-debian-10`, `5.6.0`, `5.6.0-debian-10-r5`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.6.0-debian-10-r5/5/debian-10/Dockerfile)
+* [`5`, `5-debian-10`, `5.6.0`, `5.6.0-debian-10-r6`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.6.0-debian-10-r6/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
@@ -258,6 +258,7 @@ The WordPress instance can be customized by specifying environment variables on 
 ##### PHP configuration
 
 * `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
+* `PHP_OPCACHE_ENABLED`: Enable opcache for PHP scripts. Default: **yes**
 
 ### Specifying Environment variables using Docker Compose
 
