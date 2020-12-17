@@ -32,37 +32,59 @@ rabbitmq_validate() {
         error "$1"
         error_code=1
     }
+    check_yes_no_value() {
+        if ! is_yes_no_value "${!1}" && ! is_true_false_value "${!1}"; then
+            print_validation_error "An invalid value was specified in the environment variable ${1}. Valid values are: yes or no"
+        fi
+    }
+    check_multi_value() {
+        if [[ " ${2} " != *" ${!1} "* ]]; then
+            print_validation_error "The allowed values for ${1} are: ${2}"
+        fi
+    }
+    check_conflicting_ports() {
+        local -r total="$#"
+        for i in $(seq 1 "$((total - 1))"); do
+            for j in $(seq "$((i + 1))" "$total"); do
+                if (("${!i}" == "${!j}")); then
+                    print_validation_error "${!i} and ${!j} are bound to the same port"
+                fi
+            done
+        done
+    }
+    check_allowed_port() {
+        local port_var="${1:?missing port variable}"
+        local -a validate_port_args=()
+        ! am_i_root && validate_port_args+=("-unprivileged")
+        validate_port_args+=("${!port_var}")
+        if ! err="$(validate_port "${validate_port_args[@]}")"; then
+            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
+        fi
+    }
 
-    if ! is_yes_no_value "$RABBITMQ_LOAD_DEFINITIONS"; then
-        print_validation_error "An invalid value was specified in the environment variable RABBITMQ_LOAD_DEFINITIONS. Valid values are: yes or no"
-    fi
+    check_yes_no_value "RABBITMQ_LOAD_DEFINITIONS"
+    check_yes_no_value "RABBITMQ_SECURE_PASSWORD"
+    check_yes_no_value "RABBITMQ_ENABLE_LDAP"
+    check_yes_no_value "RABBITMQ_LDAP_TLS"
+    check_conflicting_ports "RABBITMQ_MANAGEMENT_PORT_NUMBER" "RABBITMQ_NODE_PORT_NUMBER" "RABBITMQ_MANAGEMENT_SSL_PORT_NUMBER" "RABBITMQ_NODE_SSL_PORT_NUMBER"
+    check_multi_value "RABBITMQ_SSL_VERIFY" "verify_none verify_peer"
+    check_multi_value "RABBITMQ_MANAGEMENT_SSL_VERIFY" "verify_none verify_peer"
 
-    if ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS" && [[ -z "$RABBITMQ_PASSWORD" ]]; then
+    if is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
+        is_boolean_yes "$RABBITMQ_SECURE_PASSWORD" && "The RABBITMQ_LOAD_DEFINITIONS and RABBITMQ_SECURE_PASSWORD environment variables cannot be enabled at once."
+    elif [[ -z "$RABBITMQ_PASSWORD" ]]; then
         print_validation_error "You must indicate a password"
-    fi
-
-    if ! is_yes_no_value "$RABBITMQ_ENABLE_LDAP"; then
-        print_validation_error "An invalid value was specified in the environment variable RABBITMQ_ENABLE_LDAP. Valid values are: yes or no"
     fi
 
     if is_boolean_yes "$RABBITMQ_ENABLE_LDAP" && ( [[ -z "${RABBITMQ_LDAP_SERVERS}" ]] || [[ -z "${RABBITMQ_LDAP_USER_DN_PATTERN}" ]] ); then
         print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables RABBITMQ_LDAP_SERVERS and RABBITMQ_LDAP_USER_DN_PATTERN."
-        if !  is_yes_no_value "$RABBITMQ_LDAP_TLS"; then
-            print_validation_error "An invalid value was specified in the environment variable RABBITMQ_LDAP_TLS. Valid values are: yes or no"
-        fi
     fi
 
     if [[ "$RABBITMQ_NODE_TYPE" = "stats" ]]; then
-        if ! validate_ipv4 "$RABBITMQ_MANAGER_BIND_IP"; then
-            print_validation_error "An invalid IP was specified in the environment variable RABBITMQ_MANAGER_BIND_IP."
+        if ! validate_ipv4 "$RABBITMQ_MANAGEMENT_BIND_IP"; then
+            print_validation_error "An invalid IP was specified in the environment variable RABBITMQ_MANAGEMENT_BIND_IP."
         fi
-
-        local validate_port_args=()
-        ! am_i_root && validate_port_args+=("-unprivileged")
-        if ! err=$(validate_port "${validate_port_args[@]}" "$RABBITMQ_MANAGER_PORT_NUMBER"); then
-            print_validation_error "An invalid port was specified in the environment variable RABBITMQ_MANAGER_PORT_NUMBER: ${err}."
-        fi
-
+        check_allowed_port "RABBITMQ_MANAGEMENT_PORT_NUMBER"
         if [[ -n "$RABBITMQ_CLUSTER_NODE_NAME" ]]; then
             warn "This node will not be clustered. Use type queue-* instead."
         fi
@@ -74,13 +96,213 @@ rabbitmq_validate() {
         print_validation_error "${RABBITMQ_NODE_TYPE} is not a valid type. You can use 'stats', 'queue-disc' or 'queue-ram'."
     fi
 
+    # Validate high memory watermark
+    # It can be specified as an absolute value, or as a relative (either in percentage or value between 0 and 1)
+    if ! is_empty_value "$RABBITMQ_VM_MEMORY_HIGH_WATERMARK" && ! rabbitmq_is_absolute_value "$RABBITMQ_VM_MEMORY_HIGH_WATERMARK" && ! rabbitmq_is_relative_value "$RABBITMQ_VM_MEMORY_HIGH_WATERMARK"; then
+        print_validation_error "RABBITMQ_VM_MEMORY_HIGH_WATERMARK must be specified as an absolute or relative value. Example of absolute values: 1GiB, 1G, 100M, 1048576. Example of relative values: 50%, 0.5."
+    fi
+
     [[ "$error_code" -eq 0 ]] || return "$error_code"
+}
+
+########################
+# Checks whether an input value refers to an absolute memory value
+# Globals:
+#   None
+# Arguments:
+#   $1 - value
+# Returns:
+#   boolean
+#########################
+rabbitmq_is_absolute_value() {
+    local value="${1:?missing value}"
+    [[ "$1" =~ ^[1-9][0-9]*([MG](i?B)?)?$ ]]
+}
+
+########################
+# Checks whether an input value refers to an absolute memory value
+# Globals:
+#   None
+# Arguments:
+#   $1 - value
+# Returns:
+#   boolean
+#########################
+rabbitmq_is_relative_value() {
+    local value="${1:?missing value}"
+    [[ "$1" =~ ^[0-9]+(\.[0-9]+)?%$ || "$1" =~ ^0\.[0-9][0-9]*$ ]]
+}
+
+########################
+# Checks whether SSL configurations should be enabled
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   boolean
+#########################
+rabbitmq_is_ssl_enabled() {
+    local -r env_prefix="${1:-ssl}"
+    local env_var
+    for ssl_key in cacertfile certfile keyfile; do
+        env_var="RABBITMQ_${env_prefix^^}_${ssl_key^^}"
+        ! is_empty_value "${!env_var:-}" && return "$?"
+    done
+    false
+}
+
+########################
+# Prints RabbitMQ SSL configuration entries
+# Globals:
+#   RABBITMQ_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+rabbitmq_print_ssl_configuration() {
+    local -r env_prefix="${1:-ssl}"
+    local -r conf_prefix="${2:-ssl_options}"
+
+    # Assume SSL is disabled when no environment variables matching 'RABBITMQ_SSL_*' have been specified
+    rabbitmq_is_ssl_enabled "$env_prefix" || return
+
+    local -r -a ssl_keys=(
+        cacertfile
+        certfile
+        keyfile
+        depth
+        fail_if_no_peer_cert
+        verify
+    )
+    local env_var env_var_value
+    for ssl_key in "${ssl_keys[@]}"; do
+        env_var="RABBITMQ_${env_prefix^^}_${ssl_key^^}"
+        env_var_value="${!env_var:-}"
+        # Skip if the environment variable is empty/not defined
+        is_empty_value "$env_var_value" && continue
+        echo -n "${conf_prefix}.${ssl_key} = "
+        # Process boolean value for 'fail_if_no_peer_cert'
+        if [[ "$ssl_key" = "fail_if_no_peer_cert" ]]; then
+            is_boolean_yes "$env_var_value" && echo "true" || echo "false"
+        else
+            echo "$env_var_value"
+        fi
+    done
+    echo
+}
+
+########################
+# Prints RabbitMQ networking-specific configuration entries
+# Globals:
+#   RABBITMQ_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+rabbitmq_print_networking_configuration() {
+    echo "## Networking"
+    if rabbitmq_is_ssl_enabled; then
+        echo "listeners.ssl.default = ${RABBITMQ_NODE_SSL_PORT_NUMBER}"
+        rabbitmq_print_ssl_configuration
+    else
+        echo "listeners.tcp.default = ${RABBITMQ_NODE_PORT_NUMBER}"
+        echo
+    fi
+}
+
+
+########################
+# Prints RabbitMQ management configuration entries
+# Globals:
+#   RABBITMQ_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+rabbitmq_print_management_configuration() {
+    echo "## Management"
+    if rabbitmq_is_ssl_enabled "management_ssl"; then
+        echo "management.ssl.port = ${RABBITMQ_MANAGEMENT_BIND_IP}"
+        echo "management.ssl.ip = ${RABBITMQ_MANAGEMENT_SSL_PORT_NUMBER}"
+        rabbitmq_print_ssl_configuration "management_ssl" "management.ssl"
+    else
+        # Assume SSL is disabled when no environment variables matching 'RABBITMQ_SSL_*' have been specified
+        echo "management.tcp.ip = ${RABBITMQ_MANAGEMENT_BIND_IP}"
+        echo "management.tcp.port = ${RABBITMQ_MANAGEMENT_PORT_NUMBER}"
+        echo
+    fi
+}
+
+########################
+# Prints RabbitMQ LDAP-specific configuration entries
+# Globals:
+#   RABBITMQ_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+rabbitmq_print_ldap_configuration() {
+    if is_boolean_yes "$RABBITMQ_ENABLE_LDAP"; then
+        cat <<EOF
+## LDAP
+# Select an authentication/authorisation backend to use
+auth_backends.1 = rabbit_auth_backend_ldap
+auth_backends.2 = internal
+# Connection to LDAP server(s)
+auth_ldap.port = $RABBITMQ_LDAP_SERVERS_PORT
+auth_ldap.user_dn_pattern = $RABBITMQ_LDAP_USER_DN_PATTERN
+EOF
+        read -r -a ldap_servers <<< "$(tr ',;' ' ' <<< "$RABBITMQ_LDAP_SERVERS")"
+        local index=1
+        for server in "${ldap_servers[@]}"; do
+            echo "auth_ldap.servers.${index} = ${server}"
+            (( index++ ))
+        done
+        if is_boolean_yes "$RABBITMQ_LDAP_TLS"; then
+            echo "auth_ldap.use_ssl = true"
+        fi
+        # Add newline to separate sections in the config file
+        echo
+    fi
+}
+
+rabbitmq_print_resource_limits_configuration() {
+    echo "## Resource limits"
+    # Memory threshold configuration
+    local memory_size="$RABBITMQ_VM_MEMORY_HIGH_WATERMARK"
+    if ! is_empty_value "$memory_size"; then
+        if rabbitmq_is_absolute_value "$memory_size"; then
+            echo "# Set an absolute memory threshold"
+            echo "vm_memory_high_watermark.absolute = ${memory_size}"
+        elif rabbitmq_is_relative_value "$memory_size"; then
+            echo "# Set a relative memory threshold"
+            if [[ "$memory_size" =~ %$ ]]; then
+                # Convert percentage to a relative value (< 1)
+                memory_size="$(awk '{ print $1 / 100 }' <<< "${memory_size//%/}")"
+            fi
+            # Only keep first three decimals
+            printf "vm_memory_high_watermark.relative = %.03f\n" "$memory_size"
+        fi
+    fi
+    # Disk limit configuration
+    if [[ -n "$RABBITMQ_DISK_FREE_ABSOLUTE_LIMIT" ]]; then
+        echo "# Set an absolute free disk space limit"
+        echo "disk_free_limit.absolute = ${RABBITMQ_DISK_FREE_ABSOLUTE_LIMIT}"
+    else
+        echo "# Set a free disk space limit relative to total available RAM"
+        echo "disk_free_limit.relative = ${RABBITMQ_DISK_FREE_RELATIVE_LIMIT}"
+    fi
 }
 
 ########################
 # Creates RabbitMQ configuration file
 # Globals:
-#   RABBITMQ_CONF_FILE
+#   RABBITMQ_*
 # Arguments:
 #   None
 # Returns:
@@ -88,70 +310,30 @@ rabbitmq_validate() {
 #########################
 rabbitmq_create_config_file() {
     debug "Creating configuration file..."
+    (
+        cat <<EOF
+## Clustering
+cluster_partition_handling = ${RABBITMQ_CLUSTER_PARTITION_HANDLING}
 
-    cat > "$RABBITMQ_CONF_FILE" <<EOF
-## Networking
-listeners.tcp.default = $RABBITMQ_NODE_PORT_NUMBER
-
-## On first start RabbitMQ will create a vhost and a user. These
-## config items control what gets created
-default_vhost = $RABBITMQ_VHOST
-default_user = $RABBITMQ_USERNAME
+## Defaults
+# During the first start, RabbitMQ will create a vhost and a user
+# These config items control what gets created
 default_permissions.configure = .*
 default_permissions.read = .*
 default_permissions.write = .*
-
-## Clustering
-cluster_partition_handling = $RABBITMQ_CLUSTER_PARTITION_HANDLING
+default_vhost = ${RABBITMQ_VHOST}
+default_user = ${RABBITMQ_USERNAME}
 EOF
+        # In most cases (i.e. container images), it is not a concern to specify the default password this way
+        # In fact, changing it via 'rabbitmqctl' can be incompatible with some use cases like loading external definitions
+        ! is_boolean_yes "$RABBITMQ_SECURE_PASSWORD" && cat <<< "default_pass = ${RABBITMQ_PASSWORD}"
+        echo
 
-    if [[ -n "$RABBITMQ_DISK_FREE_ABSOLUTE_LIMIT" ]]; then
-        cat >> "$RABBITMQ_CONF_FILE" <<EOF
-## Set an absolute disk free space limit
-disk_free_limit.absolute = $RABBITMQ_DISK_FREE_ABSOLUTE_LIMIT
-EOF
-    else
-        cat >> "$RABBITMQ_CONF_FILE" <<EOF
-## Set a limit relative to total available RAM
-disk_free_limit.relative = $RABBITMQ_DISK_FREE_RELATIVE_LIMIT
-EOF
-    fi
-
-    if is_boolean_yes "$RABBITMQ_ENABLE_LDAP"; then
-        cat >> "$RABBITMQ_CONF_FILE" <<EOF
-## Select an authentication/authorisation backend to use
-auth_backends.1 = rabbit_auth_backend_ldap
-auth_backends.2 = internal
-
-## Connecting to the LDAP server(s)
-EOF
-        read -r -a ldap_servers <<< "$(tr ',;' ' ' <<< "$RABBITMQ_LDAP_SERVERS")"
-        local index=1
-        for server in "${ldap_servers[@]}"; do
-            cat >> "$RABBITMQ_CONF_FILE" <<EOF
-auth_ldap.servers.${index} = $server
-EOF
-            index=$((index + 1 ))
-        done
-        cat >> "$RABBITMQ_CONF_FILE" <<EOF
-auth_ldap.port = $RABBITMQ_LDAP_SERVERS_PORT
-auth_ldap.user_dn_pattern = $RABBITMQ_LDAP_USER_DN_PATTERN
-
-EOF
-
-        if is_boolean_yes "$RABBITMQ_LDAP_TLS"; then
-            cat >> "$RABBITMQ_CONF_FILE" <<EOF
-auth_ldap.use_ssl = true
-
-EOF
-        fi
-    fi
-
-    cat >> "$RABBITMQ_CONF_FILE" <<EOF
-## Management
-management.tcp.port = $RABBITMQ_MANAGER_PORT_NUMBER
-management.tcp.ip = $RABBITMQ_MANAGER_BIND_IP
-EOF
+        rabbitmq_print_networking_configuration
+        rabbitmq_print_management_configuration
+        rabbitmq_print_ldap_configuration
+        rabbitmq_print_resource_limits_configuration
+    ) >> "$RABBITMQ_CONF_FILE"
 }
 
 ########################
@@ -191,6 +373,47 @@ rabbitmq_conf_set() {
 }
 
 ########################
+# Prints the Erlang root directory
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   Erlang root directory
+#########################
+rabbitmq_erlang_dir() {
+    dirname "$(dirname "$(which erl)")"
+}
+
+########################
+# Prints the Erlang SSL directory
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   Erlang SSL directory
+#########################
+rabbitmq_erlang_ssl_dir() {
+    echo "$(find "$(rabbitmq_erlang_dir)" -name 'ssl-[0-9]*')/ebin"
+}
+
+########################
+# Create combined SSL certificate and key file
+# Ref: https://www.rabbitmq.com/clustering-ssl.html#combined-key-file
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+rabbitmq_create_combined_ssl_file() {
+    local -r combined_ssl_file="/etc/rabbitmq_combined_keys.pem"
+    printf "%s\n%s" <(cat "$RABBITMQ_SSL_CERTFILE") <(cat "$RABBITMQ_SSL_KEYFILE") > "$combined_ssl_file"
+}
+
+########################
 # Creates RabbitMQ environment file
 # Globals:
 #   RABBITMQ_CONF_ENV_FILE
@@ -201,11 +424,25 @@ rabbitmq_conf_set() {
 #########################
 rabbitmq_create_environment_file() {
     debug "Creating environment file..."
-    cat > "$RABBITMQ_CONF_ENV_FILE" <<EOF
+    {
+        cat <<EOF
 HOME=$RABBITMQ_HOME_DIR
 NODE_PORT=$RABBITMQ_NODE_PORT_NUMBER
 NODENAME=$RABBITMQ_NODE_NAME
 EOF
+        local combined_ssl_file="/etc/rabbitmq_combined_keys.pem"
+        if [[ -f "$combined_ssl_file" ]]; then
+            cat <<EOF
+# SSL configuration
+ERL_SSL_PATH=$(rabbitmq_erlang_ssl_dir)
+SERVER_ADDITIONAL_ERL_ARGS="-pa \$ERL_SSL_PATH
+  -proto_dist inet_tls \
+  -ssl_dist_opt server_certfile ${combined_ssl_file} \
+  -ssl_dist_opt server_secure_renegotiate true client_secure_renegotiate true"
+RABBITMQ_CTL_ERL_ARGS="\$SERVER_ADDITIONAL_ERL_ARGS"
+EOF
+        fi
+    } > "$RABBITMQ_CONF_ENV_FILE"
 }
 
 ########################
@@ -429,9 +666,11 @@ rabbitmq_initialize() {
         cp -Lr "$RABBITMQ_MOUNTED_CONF_DIR"/* "$RABBITMQ_CONF_DIR"
     fi
     [[ ! -f "$RABBITMQ_CONF_FILE" ]] && rabbitmq_create_config_file
+    rabbitmq_is_ssl_enabled && rabbitmq_create_combined_ssl_file
     [[ ! -f "$RABBITMQ_CONF_ENV_FILE" ]] && rabbitmq_create_environment_file
     [[ ! -f "${RABBITMQ_CONF_DIR}/enabled_plugins" ]] && rabbitmq_create_enabled_plugins_file
     [[ -n "${RABBITMQ_COMMUNITY_PLUGINS:-}" ]] && rabbitmq_download_community_plugins
+
     # User injected custom configuration
     if [[ -f "${RABBITMQ_CONF_DIR}/custom.conf" ]]; then
         debug "Injecting custom configuration from custom.conf"
@@ -466,7 +705,7 @@ rabbitmq_initialize() {
     else
         ! is_rabbitmq_running && rabbitmq_start_bg
 
-        if ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
+        if is_boolean_yes "$RABBITMQ_SECURE_PASSWORD" && ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
             rabbitmq_change_password "$RABBITMQ_USERNAME" "$RABBITMQ_PASSWORD"
         fi
 

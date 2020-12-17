@@ -26,11 +26,11 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/rabbitmq/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.8.9-debian-10-r63" \
+    BITNAMI_IMAGE_VERSION="3.8.9-debian-10-r64" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"
 
-EXPOSE 4369 5672 15672 25672
+EXPOSE 4369 5671 5672 15671 15672 25672
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/rabbitmq/entrypoint.sh" ]
