@@ -22,10 +22,10 @@
     },
     "symfony": {
         "arch": "amd64",
-        "digest": "7dc199651a4630b08a75e8b9dc7a8d2e97c170ccf6f8ed0352b6ea32c0faac41",
+        "digest": "17f02d90d36ed33873fc4115fe242821b73f53762fc0913946af19fe7d2192a0",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.5.11-1"
+        "version": "1.5.11-2"
     },
     "tini": {
         "arch": "amd64",
