@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbsd0 libbz2-1.0 libc6 libedit2 libffi6 libgcc1 libgmp10 libgnutls30 libhogweed4 libicu63 libidn2-0 libldap-2.4-2 liblz4-1 liblzma5 libnettle6 libp11-kit0 libsasl2-2 libsqlite3-0 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 libzstd1 locales procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql" "11.10.0-4" --checksum 7ed1a12f351e912a6dac004208794917637c9b1a2104a691e965f95468b32128
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql" "11.10.0-5" --checksum af5c99c4f4f679d3624af2452d8fe85dd9827b26d1f6bb3c7f3a16d3996215c5
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -24,7 +24,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/postgresql/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="11.10.0-debian-10-r34" \
+    BITNAMI_IMAGE_VERSION="11.10.0-debian-10-r35" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib/:/opt/bitnami/common/lib/:$LD_LIBRARY_PATH" \
