@@ -15,9 +15,9 @@
     },
     "mariadb-galera": {
         "arch": "amd64",
-        "digest": "155ed796354e7358094b1ddbbc5a58f3535bb5ff2b0e3c1a61c90a8a7d3fb1a9",
+        "digest": "a32b92baefc4ad959fbd3dbaa7bf84f4d83725e3cc97b0253b853eff763f46b7",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.4.17-0"
+        "version": "10.4.17-1"
     }
 }
