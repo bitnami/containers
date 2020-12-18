@@ -11,14 +11,16 @@ set -o pipefail
 . /opt/bitnami/scripts/libelasticsearch.sh
 . /opt/bitnami/scripts/libos.sh
 
-# Load Elasticsearch environment variables
-eval "$(elasticsearch_env)"
+# Load environment
+. /opt/bitnami/scripts/elasticsearch-env.sh
 
 # Constants
 EXEC=$(command -v elasticsearch)
 ARGS=("-p" "$ELASTICSEARCH_TMP_DIR/elasticsearch.pid" "-Epath.data=$ELASTICSEARCH_DATA_DIR")
 [[ -z "${ELASTICSEARCH_EXTRA_FLAGS:-}" ]] || ARGS=("${ARGS[@]}" "${ELASTICSEARCH_EXTRA_FLAGS[@]}")
 export JAVA_HOME=/opt/bitnami/java
+
+ARGS+=("$@")
 
 info "** Starting Elasticsearch **"
 if am_i_root; then
