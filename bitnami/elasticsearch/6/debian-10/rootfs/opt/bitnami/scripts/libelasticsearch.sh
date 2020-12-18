@@ -32,7 +32,7 @@ elasticsearch_conf_write() {
     if [[ -s "$ELASTICSEARCH_CONF_FILE" ]]; then
         yq w -i "$ELASTICSEARCH_CONF_FILE" "$key" "$value"
     else
-        yq n "$key" "$value" > "$ELASTICSEARCH_CONF_FILE"
+        yq n "$key" "$value" >"$ELASTICSEARCH_CONF_FILE"
     fi
 }
 
@@ -86,6 +86,19 @@ is_elasticsearch_running() {
 }
 
 ########################
+# Check if Elasticsearch is not running
+# Globals:
+#   ELASTICSEARCH_TMP_DIR
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_elasticsearch_not_running() {
+    ! is_elasticsearch_running
+    return "$?"
+}
+########################
 # Stop Elasticsearch
 # Globals:
 #   ELASTICSEARCH_TMP_DIR
@@ -122,11 +135,11 @@ elasticsearch_start() {
     fi
 
     local counter=50
-    while ! is_elasticsearch_running ; do
+    while ! is_elasticsearch_running; do
         if [[ "$counter" -ne 0 ]]; then
             break
         fi
-        sleep 2;
+        sleep 2
         counter=$((counter - 1))
     done
     local log_result=""
@@ -136,56 +149,6 @@ elasticsearch_start() {
         log_result="$(tail -7 "${ELASTICSEARCH_LOG_DIR}/elasticsearch.log" | grep -i "Node" | grep -i "started")"
         sleep 2
     done
-}
-
-########################
-# Load global variables used on Elasticsearch configuration
-# Globals:
-#  ELASTICSEARCH_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-elasticsearch_env() {
-    cat <<"EOF"
-# Paths
-export ELASTICSEARCH_BASE_DIR="/opt/bitnami/elasticsearch"
-export ELASTICSEARCH_VOLUME_DIR="/bitnami/elasticsearch"
-export ELASTICSEARCH_DATA_DIR="${ELASTICSEARCH_VOLUME_DIR}/data"
-export ELASTICSEARCH_MOUNTED_PLUGINS_DIR="${ELASTICSEARCH_VOLUME_DIR}/plugins"
-export ELASTICSEARCH_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
-export ELASTICSEARCH_CONF_DIR="${ELASTICSEARCH_BASE_DIR}/config"
-export ELASTICSEARCH_CONF_FILE="${ELASTICSEARCH_CONF_DIR}/elasticsearch.yml"
-export ELASTICSEARCH_TMP_DIR="${ELASTICSEARCH_BASE_DIR}/tmp"
-export ELASTICSEARCH_LOG_DIR="${ELASTICSEARCH_BASE_DIR}/logs"
-export ELASTICSEARCH_PLUGINS_DIR="${ELASTICSEARCH_BASE_DIR}/plugins"
-export PATH="${ELASTICSEARCH_BASE_DIR}/bin:$PATH"
-
-# Users
-export ELASTICSEARCH_DAEMON_USER="${ELASTICSEARCH_DAEMON_USER:-elasticsearch}"
-export ELASTICSEARCH_DAEMON_GROUP="${ELASTICSEARCH_DAEMON_GROUP:-elasticsearch}"
-
-# Settings
-export ELASTICSEARCH_BIND_ADDRESS="${ELASTICSEARCH_BIND_ADDRESS:-}"
-export ELASTICSEARCH_CLUSTER_HOSTS="${ELASTICSEARCH_CLUSTER_HOSTS:-}"
-export ELASTICSEARCH_TOTAL_NODES="${ELASTICSEARCH_TOTAL_NODES:-}"
-export ELASTICSEARCH_CLUSTER_MASTER_HOSTS="${ELASTICSEARCH_CLUSTER_MASTER_HOSTS:-}"
-export ELASTICSEARCH_CLUSTER_NAME="${ELASTICSEARCH_CLUSTER_NAME:-}"
-export ELASTICSEARCH_HEAP_SIZE="${ELASTICSEARCH_HEAP_SIZE:-1024m}"
-export ELASTICSEARCH_IS_DEDICATED_NODE="${ELASTICSEARCH_IS_DEDICATED_NODE:-no}"
-export ELASTICSEARCH_MINIMUM_MASTER_NODES="${ELASTICSEARCH_MINIMUM_MASTER_NODES:-}"
-export ELASTICSEARCH_NODE_NAME="${ELASTICSEARCH_NODE_NAME:-}"
-export ELASTICSEARCH_NODE_PORT_NUMBER="${ELASTICSEARCH_NODE_PORT_NUMBER:-9300}"
-export ELASTICSEARCH_NODE_TYPE="${ELASTICSEARCH_NODE_TYPE:-master}"
-export ELASTICSEARCH_PLUGINS="${ELASTICSEARCH_PLUGINS:-}"
-export ELASTICSEARCH_KEYS="${ELASTICSEARCH_KEYS:-}"
-export ELASTICSEARCH_PORT_NUMBER="${ELASTICSEARCH_PORT_NUMBER:-9200}"
-export ELASTICSEARCH_FS_SNAPSHOT_REPO_PATH="${ELASTICSEARCH_FS_SNAPSHOT_REPO_PATH:-}"
-
-## JVM
-export JAVA_HOME="${JAVA_HOME:-/opt/bitnami/java}"
-EOF
 }
 
 ########################
@@ -233,18 +196,17 @@ elasticsearch_validate() {
 
     validate_node_type() {
         case "$ELASTICSEARCH_NODE_TYPE" in
-            coordinating|data|ingest|master)
-                ;;
-            *)
-                print_validation_error "Invalid node type $ELASTICSEARCH_NODE_TYPE. Supported types are 'coordinating/data/ingest/master'"
+        coordinating | data | ingest | master) ;;
+
+        *)
+            print_validation_error "Invalid node type $ELASTICSEARCH_NODE_TYPE. Supported types are 'coordinating/data/ingest/master'"
+            ;;
         esac
     }
 
     debug "Validating settings in ELASTICSEARCH_* env vars..."
-    local validate_port_args=()
-    ! am_i_root && validate_port_args+=("-unprivileged")
     for var in "ELASTICSEARCH_PORT_NUMBER" "ELASTICSEARCH_NODE_PORT_NUMBER"; do
-        if ! err=$(validate_port "${validate_port_args[@]}" "${!var}"); then
+        if ! err=$(validate_port "${!var}"); then
             print_validation_error "An invalid port was specified in the environment variable $var: $err"
         fi
     done
@@ -269,7 +231,7 @@ elasticsearch_cluster_configuration() {
     # Auxiliary functions
     bind_address() {
         if [[ -n "$ELASTICSEARCH_BIND_ADDRESS" ]]; then
-            echo "[$ELASTICSEARCH_BIND_ADDRESS, _local_]"
+            echo "$ELASTICSEARCH_BIND_ADDRESS"
         else
             echo "0.0.0.0"
         fi
@@ -283,11 +245,11 @@ elasticsearch_cluster_configuration() {
     elasticsearch_conf_set node.name "${ELASTICSEARCH_NODE_NAME:-$(hostname)}"
 
     if [[ -n "$ELASTICSEARCH_CLUSTER_HOSTS" ]]; then
-        read -r -a host_list <<< "$(tr ',;' ' ' <<< "$ELASTICSEARCH_CLUSTER_HOSTS")"
-        master_list=( "${host_list[@]}" )
+        read -r -a host_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_CLUSTER_HOSTS")"
+        master_list=("${host_list[@]}")
         total_nodes=${#host_list[@]}
         if [[ -n "$ELASTICSEARCH_CLUSTER_MASTER_HOSTS" ]]; then
-            read -r -a master_list <<< "$(tr ',;' ' ' <<< "$ELASTICSEARCH_CLUSTER_MASTER_HOSTS")"
+            read -r -a master_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_CLUSTER_MASTER_HOSTS")"
         fi
         if [[ -n "$ELASTICSEARCH_TOTAL_NODES" ]]; then
             total_nodes=$ELASTICSEARCH_TOTAL_NODES
@@ -299,7 +261,7 @@ elasticsearch_cluster_configuration() {
             elasticsearch_conf_set discovery.seed_hosts "${host_list[@]}"
         fi
         elasticsearch_conf_set discovery.initial_state_timeout "5m"
-        elasticsearch_conf_set gateway.recover_after_nodes "$(((total_nodes+1+1)/2))"
+        elasticsearch_conf_set gateway.recover_after_nodes "$(((total_nodes + 1 + 1) / 2))"
         elasticsearch_conf_set gateway.expected_nodes "$total_nodes"
         if [[ "$ELASTICSEARCH_NODE_TYPE" = "master" ]] && [[ "$ELASTICSEARCH_MAJOR_VERSION" -gt 6 ]]; then
             elasticsearch_conf_set cluster.initial_master_nodes "${master_list[@]}"
@@ -309,7 +271,7 @@ elasticsearch_cluster_configuration() {
             elasticsearch_conf_set discovery.zen.minimum_master_nodes "$ELASTICSEARCH_MINIMUM_MASTER_NODES"
         elif [[ "${#host_list[@]}" -gt 2 ]]; then
             local min_masters=""
-            min_masters=$(((${#host_list[@]} / 2) +1))
+            min_masters=$(((${#host_list[@]} / 2) + 1))
             debug "Calculating minimum master nodes for quorum: $min_masters..."
             elasticsearch_conf_set discovery.zen.minimum_master_nodes "$min_masters"
         fi
@@ -349,21 +311,21 @@ elasticsearch_configure_node_type() {
     local is_ingest="false"
     if is_boolean_yes "$ELASTICSEARCH_IS_DEDICATED_NODE"; then
         case "$ELASTICSEARCH_NODE_TYPE" in
-            coordinating)
+        coordinating) ;;
+
+        data)
+            is_data="true"
             ;;
-            data)
-                is_data="true"
-                ;;
-            ingest)
-                is_ingest="true"
-                ;;
-            master)
-                is_master="true"
-                ;;
-            *)
-                error "Invalid node type '$ELASTICSEARCH_NODE_TYPE'"
-                exit 1
-                ;;
+        ingest)
+            is_ingest="true"
+            ;;
+        master)
+            is_master="true"
+            ;;
+        *)
+            error "Invalid node type '$ELASTICSEARCH_NODE_TYPE'"
+            exit 1
+            ;;
         esac
     else
         is_master="true"
@@ -400,7 +362,17 @@ elasticsearch_set_heap_size() {
         local machine_mem=""
         machine_mem="$(get_total_memory)"
         if [[ "$machine_mem" -lt 65536 ]]; then
-            heap_size="$(("$machine_mem" / 2))m"
+            local max_allowed_memory
+            local calculated_heap_size
+            calculated_heap_size="$(("$machine_mem" / 2))"
+            max_allowed_memory="$(("$ELASTICSEARCH_MAX_ALLOWED_MEMORY_PERCENTAGE" * "$machine_mem"))"
+            max_allowed_memory="$(("$max_allowed_memory" / 100))"
+            if [[ "$calculated_heap_size" -gt "$max_allowed_memory" ]]; then
+                info "Calculated Java heap size of ${calculated_heap_size} will be limited to ${max_allowed_memory}"
+                calculated_heap_size="$max_allowed_memory"
+            fi
+            heap_size="${calculated_heap_size}m"
+
         else
             heap_size=32768m
         fi
@@ -427,8 +399,8 @@ migrate_old_data() {
     local custom_conf_file="${ELASTICSEARCH_CONF_DIR}/elasticsearch_custom.yml"
     if [[ -f "$old_custom_conf_file" ]]; then
         debug "Adding old custom configuration to user configuration"
-        echo "" >> "$custom_conf_file"
-        cat "$old_custom_conf_file" >> "$custom_conf_file"
+        echo "" >>"$custom_conf_file"
+        cat "$old_custom_conf_file" >>"$custom_conf_file"
     fi
     debug "Adapting data to new file structure"
     find "${old_data_dir}/data" -maxdepth 1 -mindepth 1 -exec mv {} "$ELASTICSEARCH_DATA_DIR" \;
@@ -472,6 +444,16 @@ elasticsearch_initialize() {
         elasticsearch_conf_set http.port "$ELASTICSEARCH_PORT_NUMBER"
         elasticsearch_conf_set path.data "$ELASTICSEARCH_DATA_DIR"
         elasticsearch_conf_set transport.tcp.port "$ELASTICSEARCH_NODE_PORT_NUMBER"
+        is_boolean_yes "$ELASTICSEARCH_ACTION_DESTRUCTIVE_REQUIRES_NAME" && elasticsearch_conf_set action.destructive_requires_name "true"
+        is_boolean_yes "$ELASTICSEARCH_LOCK_ALL_MEMORY" && elasticsearch_conf_set bootstrap.memory_lock "true"
+        if is_boolean_yes "$ELASTICSEARCH_DISABLE_JVM_HEAP_DUMP"; then
+            info "Disabling JVM heap dumps..."
+            replace_in_file "${ELASTICSEARCH_CONF_DIR}"/jvm.options "-XX:[+]HeapDumpOnOutOfMemoryError" "# -XX:+HeapDumpOnOutOfMemoryError"
+        fi
+        if is_boolean_yes "$ELASTICSEARCH_DISABLE_GC_LOGS"; then
+            info "Disabling JVM GC logs..."
+            replace_in_file "${ELASTICSEARCH_CONF_DIR}"/jvm.options "8:-Xloggc:logs[/]gc.log" "# 8:-Xloggc:logs/gc.log"
+        fi
         elasticsearch_cluster_configuration
         elasticsearch_configure_node_type
         elasticsearch_custom_configuration
@@ -489,7 +471,7 @@ elasticsearch_initialize() {
 #   None
 #########################
 elasticsearch_install_plugins() {
-    read -r -a plugins_list <<< "$(tr ',;' ' ' <<< "$ELASTICSEARCH_PLUGINS")"
+    read -r -a plugins_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_PLUGINS")"
     local mandatory_plugins=""
 
     # Helper function for extracting the plugin name from a tarball name
@@ -504,7 +486,7 @@ elasticsearch_install_plugins() {
     }
 
     # Collect plugins that should be installed offline
-    read -r -a mounted_plugins <<< "$(find "$ELASTICSEARCH_MOUNTED_PLUGINS_DIR" -type f -name "*.zip" -print0 | xargs -0)"
+    read -r -a mounted_plugins <<<"$(find "$ELASTICSEARCH_MOUNTED_PLUGINS_DIR" -type f -name "*.zip" -print0 | xargs -0)"
     if [[ "${#mounted_plugins[@]}" -gt 0 ]]; then
         for plugin in "${mounted_plugins[@]}"; do
             plugins_list+=("file://${plugin}")
@@ -548,15 +530,15 @@ elasticsearch_install_plugins() {
 #   None
 #########################
 elasticsearch_set_keys() {
-    read -r -a keys_list <<< "$(tr ',;' ' ' <<< "$ELASTICSEARCH_KEYS")"
+    read -r -a keys_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_KEYS")"
     if [[ "${#keys_list[@]}" -gt 0 ]]; then
         for key_value in "${keys_list[@]}"; do
-            read -r -a key_value <<< "$(tr '=' ' ' <<< "$key_value")"
+            read -r -a key_value <<<"$(tr '=' ' ' <<<"$key_value")"
             local key="${key_value[0]}"
             local value="${key_value[1]}"
 
             debug "Storing key: ${key}"
-            elasticsearch-keystore add --stdin --force "$key" <<< "$value"
+            elasticsearch-keystore add --stdin --force "$key" <<<"$value"
         done
     fi
 }
@@ -571,26 +553,26 @@ elasticsearch_set_keys() {
 #   None
 #########################
 elasticsearch_custom_init_scripts() {
-    read -r -a init_scripts <<< "$(find "$ELASTICSEARCH_INITSCRIPTS_DIR" -type f -name "*.sh" -print0 | xargs -0)"
+    read -r -a init_scripts <<<"$(find "$ELASTICSEARCH_INITSCRIPTS_DIR" -type f -name "*.sh" -print0 | xargs -0)"
     if [[ "${#init_scripts[@]}" -gt 0 ]] && [[ ! -f "$ELASTICSEARCH_VOLUME_DIR"/.user_scripts_initialized ]]; then
         info "Loading user's custom files from $ELASTICSEARCH_INITSCRIPTS_DIR"
         for f in "${init_scripts[@]}"; do
             debug "Executing $f"
             case "$f" in
-                *.sh)
-                    if [[ -x "$f" ]]; then
-                        if ! "$f"; then
-                            error "Failed executing $f"
-                            return 1
-                        fi
-                    else
-                        warn "Sourcing $f as it is not executable by the current user, any error may cause initialization to fail"
-                        . "$f"
+            *.sh)
+                if [[ -x "$f" ]]; then
+                    if ! "$f"; then
+                        error "Failed executing $f"
+                        return 1
                     fi
-                    ;;
-                *)
-                    warn "Skipping $f, supported formats are: .sh"
-                    ;;
+                else
+                    warn "Sourcing $f as it is not executable by the current user, any error may cause initialization to fail"
+                    . "$f"
+                fi
+                ;;
+            *)
+                warn "Skipping $f, supported formats are: .sh"
+                ;;
             esac
         done
         touch "$ELASTICSEARCH_VOLUME_DIR"/.user_scripts_initialized

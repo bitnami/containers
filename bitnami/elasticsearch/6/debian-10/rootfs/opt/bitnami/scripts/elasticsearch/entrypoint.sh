@@ -11,8 +11,8 @@ set -o pipefail
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/libelasticsearch.sh
 
-# Load Elasticsearch environment variables
-eval "$(elasticsearch_env)"
+# Load environment
+. /opt/bitnami/scripts/elasticsearch-env.sh
 
 print_welcome_page
 
