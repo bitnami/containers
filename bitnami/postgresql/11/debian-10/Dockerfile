@@ -24,9 +24,10 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/postgresql/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="11.10.0-debian-10-r32" \
+    BITNAMI_IMAGE_VERSION="11.10.0-debian-10-r33" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
+    LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib/:/opt/bitnami/common/lib/:$LD_LIBRARY_PATH" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/common/bin:$PATH"
 
