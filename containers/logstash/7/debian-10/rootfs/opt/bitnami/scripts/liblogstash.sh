@@ -5,6 +5,7 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
+. /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libos.sh
@@ -48,6 +49,8 @@ export LOGSTASH_EXPOSE_API="${LOGSTASH_EXPOSE_API:-no}"
 
 ## Configuration
 export LOGSTASH_ENABLE_MULTIPLE_PIPELINES="${LOGSTASH_ENABLE_MULTIPLE_PIPELINES:-false}"
+export LOGSTASH_HEAP_SIZE="${LOGSTASH_HEAP_SIZE:-1g}"
+export LOGSTASH_MAX_ALLOWED_MEMORY_PERCENTAGE="${LOGSTASH_MAX_ALLOWED_MEMORY_PERCENTAGE:-100}"
 EOF
 }
 
@@ -137,6 +140,45 @@ logstash_copy_mounted_config() {
 }
 
 ########################
+# Configure Logstash Heap Size
+# Globals:
+#  LOGSTASH_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+logstash_set_heap_size() {
+    local heap_size
+    if [[ -n "$LOGSTASH_HEAP_SIZE" ]]; then
+        debug "Using specified values for Xmx and Xms heap options..."
+        heap_size="$LOGSTASH_HEAP_SIZE"
+    else
+        debug "Calculating appropiate Xmx and Xms values..."
+        local machine_mem=""
+        machine_mem="$(get_total_memory)"
+        if [[ "$machine_mem" -lt 65536 ]]; then
+            local max_allowed_memory
+            local calculated_heap_size
+            calculated_heap_size="$(("$machine_mem" / 2))"
+            max_allowed_memory="$(("$LOGSTASH_MAX_ALLOWED_MEMORY_PERCENTAGE" * "$machine_mem"))"
+            max_allowed_memory="$(("$max_allowed_memory" / 100))"
+            if [[ "$calculated_heap_size" -gt "$max_allowed_memory" ]]; then
+                info "Calculated Java heap size of ${calculated_heap_size} will be limited to ${max_allowed_memory}"
+                calculated_heap_size="$max_allowed_memory"
+            fi
+            heap_size="${calculated_heap_size}m"
+
+        else
+            heap_size=32768m
+        fi
+    fi
+    debug "Setting '-Xmx${heap_size} -Xms${heap_size}' heap options..."
+    replace_in_file "${LOGSTASH_CONF_DIR}/jvm.options" "-Xmx[0-9]+[mg]+" "-Xmx${heap_size}"
+    replace_in_file "${LOGSTASH_CONF_DIR}/jvm.options" "-Xms[0-9]+[mg]+" "-Xms${heap_size}"
+}
+
+########################
 # Ensure Logstash is initialized
 # Globals:
 #   LOGSTASH_*
@@ -167,4 +209,5 @@ logstash_initialize() {
             fi
         fi
     fi
+    logstash_set_heap_size
 }
