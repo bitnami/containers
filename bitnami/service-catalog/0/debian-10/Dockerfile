@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="service-catalog" \
-    BITNAMI_IMAGE_VERSION="0.3.1-debian-10-r41" \
+    BITNAMI_IMAGE_VERSION="0.3.1-debian-10-r42" \
     PATH="/opt/bitnami/service-catalog/bin:$PATH"
 
 EXPOSE 443 8443
