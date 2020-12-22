@@ -9,6 +9,7 @@
 . /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libwebserver.sh
 
 ########################
 # Add or modify an entry in the main PHP configuration file (php.ini)
@@ -179,6 +180,29 @@ php_fpm_stop() {
 #########################
 php_fpm_reload() {
     php_fpm_stop "USR2"
+}
+
+########################
+# Check if PHP-FPM is enabled for the current Bitnami installation
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   true if PHP-FPM is enabled, false otherwise
+########################
+is_php_fpm_enabled() {
+    if [[ "$(web_server_type)" = "apache" ]]; then
+        # If mod_php is enabled, then PHP-FPM is cannot be
+        if apachectl -M | grep -q -E "php[0-9]?_module"; then
+            false
+        else
+            true
+        fi
+    else
+        # Assume PHP-FPM is enabled with any other configuration (i.e. NGINX)
+        true
+    fi
 }
 
 ########################
