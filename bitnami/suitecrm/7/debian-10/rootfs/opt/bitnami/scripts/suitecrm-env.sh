@@ -25,6 +25,8 @@ suitecrm_env_vars=(
     SUITECRM_EMAIL
     SUITECRM_HOST
     SUITECRM_ENABLE_HTTPS
+    SUITECRM_EXTERNAL_HTTP_PORT_NUMBER
+    SUITECRM_EXTERNAL_HTTPS_PORT_NUMBER
     SUITECRM_VALIDATE_USER_IP
     SUITECRM_SMTP_HOST
     SUITECRM_SMTP_PORT_NUMBER
@@ -73,6 +75,8 @@ export SUITECRM_PASSWORD="${SUITECRM_PASSWORD:-bitnami}" # only used during the 
 export SUITECRM_EMAIL="${SUITECRM_EMAIL:-user@example.com}" # only used during the first initialization
 export SUITECRM_HOST="${SUITECRM_HOST:-localhost}" # only used during the first initialization
 export SUITECRM_ENABLE_HTTPS="${SUITECRM_ENABLE_HTTPS:-no}" # only used during the first initialization
+export SUITECRM_EXTERNAL_HTTP_PORT_NUMBER="${SUITECRM_EXTERNAL_HTTP_PORT_NUMBER:-80}" # only used during the first initialization
+export SUITECRM_EXTERNAL_HTTPS_PORT_NUMBER="${SUITECRM_EXTERNAL_HTTPS_PORT_NUMBER:-443}" # only used during the first initialization
 export SUITECRM_VALIDATE_USER_IP="${SUITECRM_VALIDATE_USER_IP:-true}"
 
 # SuiteCRM SMTP credentials
