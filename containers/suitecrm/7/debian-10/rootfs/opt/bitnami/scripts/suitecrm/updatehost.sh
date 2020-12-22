@@ -18,6 +18,3 @@ host="${1:?missing host}"
 
 suitecrm_conf_set "site_url" "http://${host}"
 suitecrm_conf_set "host_name" "$host"
-
-# Reload Apache
-./opt/bitnami/scripts/apache/reload.sh
