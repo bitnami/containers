@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.0.3-6`, `3.0.3-6-debian-10-r129`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-6-debian-10-r129/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.0.3-6`, `3.0.3-6-debian-10-r130`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-6-debian-10-r130/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/opencart GitHub repo](https://github.com/bitnami/bitnami-docker-opencart).
 
@@ -230,9 +230,9 @@ Available environment variables:
 - `OPENCART_PASSWORD`: OpenCart application password. Default: **bitnami**
 - `OPENCART_EMAIL`: OpenCart application email. Default: **user@example.com**
 - `OPENCART_HOST`: OpenCart server hostname/address.
-- `OPENCART_EXTERNAL_HTTP_PORT`: Port to used by OpenCart to generate URLs and links when accessing using HTTP. Default **80**.
-- `OPENCART_EXTERNAL_HTTPS_PORT`: Port to used by OpenCart to generate URLs and links when accessing using HTTPS. Default **443**.
 - `OPENCART_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**.
+- `OPENCART_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by OpenCart to generate URLs and links when accessing using HTTP. Default **80**.
+- `OPENCART_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by OpenCart to generate URLs and links when accessing using HTTPS. Default **443**.
 - `OPENCART_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
 
 ##### Use an existing database
