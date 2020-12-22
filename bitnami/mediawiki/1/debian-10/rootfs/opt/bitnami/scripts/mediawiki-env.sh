@@ -23,6 +23,9 @@ mediawiki_env_vars=(
     MEDIAWIKI_WIKI_NAME
     MEDIAWIKI_WIKI_PREFIX
     MEDIAWIKI_HOST
+    MEDIAWIKI_ENABLE_HTTPS
+    MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER
+    MEDIAWIKI_EXTERNAL_HTTPS_PORT_NUMBER
     MEDIAWIKI_USERNAME
     MEDIAWIKI_PASSWORD
     MEDIAWIKI_EMAIL
@@ -67,6 +70,9 @@ export MEDIAWIKI_SKIP_BOOTSTRAP="${MEDIAWIKI_SKIP_BOOTSTRAP:-}" # only used duri
 export MEDIAWIKI_WIKI_NAME="${MEDIAWIKI_WIKI_NAME:-Bitnami MediaWiki}" # only used during the first initialization
 export MEDIAWIKI_WIKI_PREFIX="${MEDIAWIKI_WIKI_PREFIX:-/wiki}" # only used during the first initialization
 export MEDIAWIKI_HOST="${MEDIAWIKI_HOST:-localhost}" # only used during the first initialization
+export MEDIAWIKI_ENABLE_HTTPS="${MEDIAWIKI_ENABLE_HTTPS:-no}" # only used during the first initialization
+export MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER="${MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER:-80}" # only used during the first initialization
+export MEDIAWIKI_EXTERNAL_HTTPS_PORT_NUMBER="${MEDIAWIKI_EXTERNAL_HTTPS_PORT_NUMBER:-443}" # only used during the first initialization
 
 # MediaWiki credentials
 export MEDIAWIKI_USERNAME="${MEDIAWIKI_USERNAME:-user}" # only used during the first initialization

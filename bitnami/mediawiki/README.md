@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.35.0`, `1.35.0-debian-10-r82`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.35.0-debian-10-r82/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.35.0`, `1.35.0-debian-10-r83`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.35.0-debian-10-r83/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mediawiki GitHub repo](https://github.com/bitnami/bitnami-docker-mediawiki).
 
@@ -227,6 +227,9 @@ Available variables:
 - `MEDIAWIKI_EMAIL`: Mediawiki application email. Default: **user@example.com**
 - `MEDIAWIKI_WIKI_NAME`: Mediawiki wiki name. Default: **Bitnami MediaWiki**
 - `MEDIAWIKI_HOST`: Mediawiki application host. No defaults.
+- `MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by MediaWiki to generate URLs and links when accessing using HTTP. Default **80**.
+- `MEDIAWIKI_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by MediaWiki to generate URLs and links when accessing using HTTPS. Default **443**.
+- `MEDIAWIKI_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**.
 
 ##### Use an existing database
 
