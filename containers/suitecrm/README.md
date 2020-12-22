@@ -42,7 +42,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.11.18`, `7.11.18-debian-10-r42`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.18-debian-10-r42/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.11.18`, `7.11.18-debian-10-r43`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.18-debian-10-r43/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
 
@@ -235,7 +235,9 @@ Available environment variables:
 - `SUITECRM_EMAIL`: SuiteCRM application email. Default: **user@example.com**
 - `SUITECRM_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
 - `SUITECRM_HOST`: Host where SuiteCRM will be running. Default:**localhost**.
-- `SUITECRM_ENABLE_HTTPS`: Enable HTTPS for SuiteCRM. Default: **no**.
+- `SUITECRM_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**.
+- `SUITECRM_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by SuiteCRM to generate URLs and links when accessing using HTTP. Default **80**.
+- `SUITECRM_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by SuiteCRM to generate URLs and links when accessing using HTTPS. Default **443**.
 
 ##### Use an existing database
 

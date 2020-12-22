@@ -14,7 +14,13 @@ set -o pipefail
 . /opt/bitnami/scripts/libsuitecrm.sh
 . /opt/bitnami/scripts/libfile.sh
 
-host="${1:?missing host}"
-
-suitecrm_conf_set "site_url" "http://${host}"
-suitecrm_conf_set "host_name" "$host"
+SUITECRM_SERVER_HOST="${1:?missing host}"
+if is_boolean_yes "$SUITECRM_ENABLE_HTTPS"; then
+    SUITECRM_SERVER_URL="https://${SUITECRM_SERVER_HOST}"
+    [[ "$SUITECRM_EXTERNAL_HTTPS_PORT_NUMBER" != "443" ]] && SUITECRM_SERVER_URL+=":${SUITECRM_EXTERNAL_HTTPS_PORT_NUMBER}"
+else
+    SUITECRM_SERVER_URL="http://${SUITECRM_SERVER_HOST}"
+    [[ "$SUITECRM_EXTERNAL_HTTP_PORT_NUMBER" != "80" ]] && SUITECRM_SERVER_URL+=":${SUITECRM_EXTERNAL_HTTP_PORT_NUMBER}"
+fi
+suitecrm_conf_set "site_url" "$SUITECRM_SERVER_URL"
+suitecrm_conf_set "host_name" "$SUITECRM_SERVER_HOST"
