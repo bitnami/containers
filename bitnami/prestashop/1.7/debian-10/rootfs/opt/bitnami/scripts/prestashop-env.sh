@@ -20,11 +20,13 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 prestashop_env_vars=(
     PRESTASHOP_DATA_TO_PERSIST
     PRESTASHOP_HOST
+    PRESTASHOP_ENABLE_HTTPS
+    PRESTASHOP_EXTERNAL_HTTP_PORT_NUMBER
+    PRESTASHOP_EXTERNAL_HTTPS_PORT_NUMBER
     PRESTASHOP_COOKIE_CHECK_IP
     PRESTASHOP_COUNTRY
     PRESTASHOP_LANGUAGE
     PRESTASHOP_TIMEZONE
-    PRESTASHOP_ENABLE_HTTPS
     PRESTASHOP_SKIP_BOOTSTRAP
     PRESTASHOP_FIRST_NAME
     PRESTASHOP_LAST_NAME
@@ -68,11 +70,13 @@ export PRESTASHOP_DATA_TO_PERSIST="${PRESTASHOP_DATA_TO_PERSIST:-$PRESTASHOP_BAS
 
 # PrestaShop configuration
 export PRESTASHOP_HOST="${PRESTASHOP_HOST:-}" # only used during the first initialization
+export PRESTASHOP_ENABLE_HTTPS="${PRESTASHOP_ENABLE_HTTPS:-no}" # only used during the first initialization
+export PRESTASHOP_EXTERNAL_HTTP_PORT_NUMBER="${PRESTASHOP_EXTERNAL_HTTP_PORT_NUMBER:-80}" # only used during the first initialization
+export PRESTASHOP_EXTERNAL_HTTPS_PORT_NUMBER="${PRESTASHOP_EXTERNAL_HTTPS_PORT_NUMBER:-443}" # only used during the first initialization
 export PRESTASHOP_COOKIE_CHECK_IP="${PRESTASHOP_COOKIE_CHECK_IP:-yes}" # only used during the first initialization
 export PRESTASHOP_COUNTRY="${PRESTASHOP_COUNTRY:-us}" # only used during the first initialization
 export PRESTASHOP_LANGUAGE="${PRESTASHOP_LANGUAGE:-en}" # only used during the first initialization
 export PRESTASHOP_TIMEZONE="${PRESTASHOP_TIMEZONE:-America/Los_Angeles}" # only used during the first initialization
-export PRESTASHOP_ENABLE_HTTPS="${PRESTASHOP_ENABLE_HTTPS:-no}" # only used during the first initialization
 export PRESTASHOP_SKIP_BOOTSTRAP="${PRESTASHOP_SKIP_BOOTSTRAP:-}" # only used during the first initialization
 
 # PrestaShop credentials
