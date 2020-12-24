@@ -77,9 +77,13 @@ testlink_validate() {
 
     # Validate SMTP credentials
     if ! is_empty_value "$TESTLINK_SMTP_HOST"; then
-        for empty_env_var in "TESTLINK_SMTP_USER" "TESTLINK_SMTP_PASSWORD" "TESTLINK_SMTP_PORT_NUMBER"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
+        #Warn if not present
+        for empty_env_var in "TESTLINK_SMTP_USER" "TESTLINK_SMTP_PASSWORD"; do
+            is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
+
+        is_empty_value "TESTLINK_SMTP_PORT_NUMBER" && print_validation_error "The TESTLINK_SMTP_PORT_NUMBER environment variable is empty or not set."
+        
         ! is_empty_value "$TESTLINK_SMTP_PORT_NUMBER" && validate_port "$TESTLINK_SMTP_PORT_NUMBER"
         ! is_empty_value "$TESTLINK_SMTP_PROTOCOL" && check_multi_value "TESTLINK_SMTP_PROTOCOL" "ssl tls"
     fi
@@ -124,8 +128,8 @@ testlink_initialize() {
             testlink_custom_conf_set "\$g_smtp_host" "$TESTLINK_SMTP_HOST"
             testlink_custom_conf_set "\$g_smtp_port" "$TESTLINK_SMTP_PORT_NUMBER"
             ! is_empty_value "$TESTLINK_SMTP_PROTOCOL" && testlink_custom_conf_set "\$g_smtp_connection_mode" "$TESTLINK_SMTP_PROTOCOL"
-            testlink_custom_conf_set "\$g_smtp_username" "$TESTLINK_SMTP_USER"
-            testlink_custom_conf_set "\$g_smtp_password" "$TESTLINK_SMTP_PASSWORD"
+            ! is_empty_value "$TESTLINK_SMTP_USER" && testlink_custom_conf_set "\$g_smtp_username" "$TESTLINK_SMTP_USER"
+            ! is_empty_value "$TESTLINK_SMTP_PASSWORD" && testlink_custom_conf_set "\$g_smtp_password" "$TESTLINK_SMTP_PASSWORD"
         fi
         # Configure database credentials based on user inputs
         testlink_database_conf_set "DB_HOST" "${TESTLINK_DATABASE_HOST}:${TESTLINK_DATABASE_PORT_NUMBER}"
