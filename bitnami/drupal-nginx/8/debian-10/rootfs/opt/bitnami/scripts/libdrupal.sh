@@ -119,9 +119,6 @@ drupal_initialize() {
         fi
     fi
 
-    # Force a change in the database minimum version requirement
-    is_empty_value "$DRUPAL_DATABASE_MIN_VERSION" || drupal_force_database_min_version
-
     # Check if Drupal has already been initialized and persisted in a previous run
     local -r app_name="drupal"
     if ! is_app_initialized "$app_name"; then
@@ -459,21 +456,6 @@ drupal_remove_duplicated_database_settings() {
     local -r last_line_block='\);'
 
     remove_in_file "$DRUPAL_CONF_FILE" "${first_line_block}/,/${last_line_block}"
-}
-
-########################
-# Drupal force database minimum version requirement.
-# Required for some third-party databases that report wrong versions
-# Globals:
-#   *
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-drupal_force_database_min_version() {
-    local -r install_task_file="${DRUPAL_BASE_DIR}/core/lib/Drupal/Core/Database/Driver/mysql/Install/Tasks.php"
-    replace_in_file "$install_task_file" 'const MYSQL_MINIMUM_VERSION.*' "const MYSQL_MINIMUM_VERSION = '${DRUPAL_DATABASE_MIN_VERSION}';"
 }
 
 ########################
