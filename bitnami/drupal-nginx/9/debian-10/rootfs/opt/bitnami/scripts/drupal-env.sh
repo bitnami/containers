@@ -37,7 +37,6 @@ drupal_env_vars=(
     DRUPAL_DATABASE_USER
     DRUPAL_DATABASE_PASSWORD
     DRUPAL_DATABASE_TLS_CA_FILE
-    DRUPAL_DATABASE_MIN_VERSION
     SMTP_HOST
     SMTP_PORT
     DRUPAL_SMTP_PORT
@@ -100,7 +99,6 @@ export DRUPAL_DATABASE_NAME="${DRUPAL_DATABASE_NAME:-bitnami_drupal}" # only use
 export DRUPAL_DATABASE_USER="${DRUPAL_DATABASE_USER:-bn_drupal}" # only used during the first initialization
 export DRUPAL_DATABASE_PASSWORD="${DRUPAL_DATABASE_PASSWORD:-}" # only used during the first initialization
 export DRUPAL_DATABASE_TLS_CA_FILE="${DRUPAL_DATABASE_TLS_CA_FILE:-}" # only used during the first initialization
-export DRUPAL_DATABASE_MIN_VERSION="${DRUPAL_DATABASE_MIN_VERSION:-}"
 
 # PHP configuration
 export PHP_DEFAULT_MEMORY_LIMIT="256M" # only used at build time
