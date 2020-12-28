@@ -90,7 +90,13 @@ prestashop_initialize() {
         info "Ensuring PrestaShop directories exist"
         ensure_dir_exists "$PRESTASHOP_VOLUME_DIR"
         # Use daemon:root ownership for compatibility when running as a non-root user
-        am_i_root && configure_permissions_ownership "$PRESTASHOP_VOLUME_DIR" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
+        if am_i_root; then
+            configure_permissions_ownership "$PRESTASHOP_VOLUME_DIR" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
+            # PrestaShop CLI explicitly checks for the "var" and "modules" directories to belong to the web server user
+            for dir in "${PRESTASHOP_BASE_DIR}/var" "${PRESTASHOP_BASE_DIR}/modules"; do
+                configure_permissions_ownership "$dir" -u "$WEB_SERVER_DAEMON_USER"
+            done
+        fi
         info "Trying to connect to the database server"
         local db_host db_port db_name db_user db_pass
         db_host="$PRESTASHOP_DATABASE_HOST"
